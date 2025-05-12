@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'sum', 'var', v1
+    BeginWhileLoopHeader
+        v3 <- LoadInteger '1'
+    BeginWhileLoopBody v3
+        BeginForLoopInitializer
+            v4 <- LoadInteger '0'
+        BeginForLoopCondition -> v5
+            v6 <- LoadInteger '200'
+            v7 <- Compare v5, '<', v6
+        BeginForLoopAfterthought v7 -> v8
+            Update v8, '-', v8
+        BeginForLoopBody -> v9
+            v10 <- LoadInteger '1'
+            v11 <- BinaryOperation v2, '+', v10
+            Reassign v2, v11
+            v12 <- LoadInteger '2'
+            v13 <- Compare v2, '==', v12
+            BeginIf v13
+                Return
+            EndIf
+        EndForLoop
+    EndWhileLoop
+    Return v2
+EndPlainFunction
+v14 <- CallFunction v0, []
+
+
+function f() {
+    var sum = 0;
+    while (1) {
+        for (let i5 = 0;
+            i5 < 200;
+            (() => {
+                i5 -= i5;
+            })()) {
+            if ((sum = sum + 1) == 2) {
+                return;
+            }
+        }
+    }
+    return sum;
+}
+f();
+
+FuzzIL program written to corpus/regress-645851.fzil

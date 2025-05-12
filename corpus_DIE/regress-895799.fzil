@@ -1,0 +1,72 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- BeginClassDefinition v0
+    BeginClassConstructor -> v2
+        BeginTry
+            CallSuperConstructor []
+        BeginCatch -> v3
+        EndTryCatch
+        v4 <- LoadInteger '1'
+        Return v4
+    EndClassConstructor
+EndClassDefinition
+v5 <- BeginClassDefinition v1
+    BeginClassConstructor -> v6
+        CallSuperConstructor []
+        v7 <- CreateNamedVariable 'Error', 'none'
+        v8 <- Construct v7, []
+        ThrowException v8
+        v9 <- BeginArrowFunction -> 
+            Return v6
+        EndArrowFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `get`, v9
+        v10 <- EndObjectLiteral
+        Return v10
+    EndClassConstructor
+EndClassDefinition
+BeginTry
+    v11 <- CreateArray []
+    v12 <- CreateNamedVariable 'D', 'none'
+    v13 <- CreateNamedVariable 'Reflect', 'none'
+    v14 <- CallMethod v13, 'construct', [v5, v11, v12]
+BeginCatch -> v15
+EndTryCatch
+BeginTry
+    v16 <- CreateArray []
+    v17 <- CreateNamedVariable 'D', 'none'
+    v18 <- CreateNamedVariable 'Reflect', 'none'
+    v19 <- CallMethod v18, 'construct', [v5, v16, v17]
+BeginCatch -> v20
+EndTryCatch
+
+
+class C1 extends Object {
+    constructor() {
+        try {
+            super();
+        } catch(e3) {
+        }
+        return 1;
+    }
+}
+class C5 extends C1 {
+    constructor() {
+        super();
+        const v8 = new Error();
+        throw v8;
+        const v9 = () => {
+            return this;
+        };
+        return { get: v9 };
+    }
+}
+try {
+    Reflect.construct(C5, [], D);
+} catch(e15) {
+}
+try {
+    Reflect.construct(C5, [], D);
+} catch(e20) {
+}
+
+FuzzIL program written to corpus/regress-895799.fzil

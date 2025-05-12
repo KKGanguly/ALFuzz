@@ -1,0 +1,67 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadThis
+    SetProperty v2, 'x', v1
+EndPlainFunction
+v3 <- CreateArray []
+v4 <- CreateNamedVariable 'a', 'var', v3
+BeginForLoopInitializer
+    v5 <- LoadInteger '0'
+BeginForLoopCondition -> v6
+    v7 <- LoadInteger '100'
+    v8 <- Compare v6, '<', v7
+BeginForLoopAfterthought v8 -> v9
+    v10 <- UnaryOperation v9, '++'
+BeginForLoopBody -> v11
+    v12 <- Construct v0, []
+EndForLoop
+v13 <- BeginPlainFunction -> 
+    v14 <- Construct v0, []
+    v15 <- CreateNamedVariable 'o', 'var', v14
+    v16 <- LoadFloat '1.5'
+    SetProperty v15, 'y', v16
+    Return v15
+EndPlainFunction
+v17 <- BeginPlainFunction -> v18
+    v19 <- LoadFloat '1.1'
+    SetProperty v18, 'u', v19
+    v20 <- LoadFloat '1.2'
+    SetProperty v18, 'v', v20
+    v21 <- LoadFloat '1.3'
+    SetProperty v18, 'z', v21
+    v22 <- GetProperty v18, 'y'
+    Return v22
+EndPlainFunction
+v23 <- CallFunction v13, []
+v24 <- CallFunction v17, [v23]
+v25 <- CallFunction v13, []
+v26 <- CallFunction v17, [v25]
+v27 <- LoadFloat '1.5'
+v28 <- CallFunction v13, []
+v29 <- CallFunction v17, [v28]
+
+
+function f() {
+    this.x = 1;
+}
+var a = [];
+for (let i6 = 0; i6 < 100; i6++) {
+    new f();
+}
+function h() {
+    const v14 = new f();
+    var o = v14;
+    o.y = 1.5;
+    return o;
+}
+function g(a18) {
+    a18.u = 1.1;
+    a18.v = 1.2;
+    a18.z = 1.3;
+    return a18.y;
+}
+g(h());
+g(h());
+g(h());
+
+FuzzIL program written to corpus/regress-715651.fzil

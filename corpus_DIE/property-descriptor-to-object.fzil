@@ -1,0 +1,23 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'o', 'var', v1
+v3 <- LoadInteger '0'
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- GetProperty v4, 'prototype'
+SetProperty v5, 'value', v3
+v6 <- LoadString 'prop'
+v7 <- CallMethod v4, 'getOwnPropertyDescriptor', [v2, v6]
+v8 <- CreateNamedVariable 'd', 'var', v7
+v9 <- LoadInteger '1'
+v10 <- GetProperty v8, 'value'
+
+
+var o = { prop: 1 };
+const t1 = Object.prototype;
+t1.value = 0;
+var d = Object.getOwnPropertyDescriptor(o, "prop");
+d.value;
+
+FuzzIL program written to corpus/property-descriptor-to-object.fzil

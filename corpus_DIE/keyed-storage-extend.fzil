@@ -1,0 +1,94 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> v2
+    v3 <- LoadInteger '1'
+    SetProperty v2, 'a', v3
+    v4 <- LoadInteger '2'
+    SetProperty v2, 'b', v4
+    v5 <- LoadInteger '3'
+    SetProperty v2, 'c', v5
+    v6 <- LoadInteger '4'
+    SetProperty v2, 'd', v6
+    v7 <- LoadInteger '5'
+    SetProperty v2, 'e', v7
+    v8 <- LoadInteger '6'
+    SetProperty v2, 'f', v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    v11 <- LoadString 'a'
+    v12 <- LoadString 'b'
+    v13 <- LoadString 'c'
+    v14 <- LoadString 'd'
+    v15 <- LoadString 'e'
+    v16 <- LoadString 'f'
+    v17 <- CreateArray [v11, v12, v13, v14, v15, v16]
+    v18 <- CreateNamedVariable 'names', 'var', v17
+    v19 <- LoadInteger '0'
+    v20 <- CreateNamedVariable 'i', 'var', v19
+    v21 <- UnaryOperation v20, '++'
+    v22 <- GetComputedProperty v18, v21
+    SetComputedProperty v10, v22, v20
+    v23 <- UnaryOperation v20, '++'
+    v24 <- GetComputedProperty v18, v23
+    SetComputedProperty v10, v24, v20
+    v25 <- UnaryOperation v20, '++'
+    v26 <- GetComputedProperty v18, v25
+    SetComputedProperty v10, v26, v20
+    v27 <- UnaryOperation v20, '++'
+    v28 <- GetComputedProperty v18, v27
+    SetComputedProperty v10, v28, v20
+    v29 <- UnaryOperation v20, '++'
+    v30 <- GetComputedProperty v18, v29
+    SetComputedProperty v10, v30, v20
+    v31 <- UnaryOperation v20, '++'
+    v32 <- GetComputedProperty v18, v31
+    SetComputedProperty v10, v32, v20
+EndPlainFunction
+v33 <- Construct v0, []
+v34 <- CallFunction v1, [v33]
+v35 <- Construct v0, []
+v36 <- CallFunction v1, [v35]
+v37 <- Construct v0, []
+v38 <- CallFunction v1, [v37]
+v39 <- Construct v0, []
+v40 <- CallFunction v9, [v39]
+v41 <- Construct v0, []
+v42 <- CallFunction v9, [v41]
+v43 <- Construct v0, []
+v44 <- CallFunction v9, [v43]
+
+
+function F() {
+}
+function GrowNamed(a2) {
+    a2.a = 1;
+    a2.b = 2;
+    a2.c = 3;
+    a2.d = 4;
+    a2.e = 5;
+    a2.f = 6;
+}
+function GrowKeyed(a10) {
+    var names = ["a","b","c","d","e","f"];
+    var i = 0;
+    a10[names[i++]] = i;
+    a10[names[i++]] = i;
+    a10[names[i++]] = i;
+    a10[names[i++]] = i;
+    a10[names[i++]] = i;
+    a10[names[i++]] = i;
+}
+const v33 = new F();
+GrowNamed(v33);
+const v35 = new F();
+GrowNamed(v35);
+const v37 = new F();
+GrowNamed(v37);
+const v39 = new F();
+GrowKeyed(v39);
+const v41 = new F();
+GrowKeyed(v41);
+const v43 = new F();
+GrowKeyed(v43);
+
+FuzzIL program written to corpus/keyed-storage-extend.fzil

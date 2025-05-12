@@ -1,0 +1,69 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        v4 <- BeginArrowFunction -> v5
+            v6 <- GetProperty v3, 'x'
+            v7 <- Compare v5, '===', v6
+            Return v7
+        EndArrowFunction
+        v8 <- CallMethod v2, 'some', [v4]
+        Return v8
+    EndPlainFunction
+    v9 <- LoadInteger '1'
+    v10 <- LoadInteger '2'
+    v11 <- LoadInteger '3'
+    v12 <- CreateArray [v9, v10, v11]
+    v13 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v13
+    v14 <- EndObjectLiteral
+    v15 <- CallFunction v1, [v12, v14]
+    v16 <- LoadInteger '0'
+    v17 <- LoadInteger '1'
+    v18 <- LoadInteger '2'
+    v19 <- CreateArray [v16, v17, v18]
+    v20 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v20
+    v21 <- EndObjectLiteral
+    v22 <- CallFunction v1, [v19, v21]
+    v23 <- LoadInteger '1'
+    v24 <- LoadInteger '2'
+    v25 <- LoadInteger '3'
+    v26 <- CreateArray [v23, v24, v25]
+    v27 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v27
+    v28 <- EndObjectLiteral
+    v29 <- CallFunction v1, [v26, v28]
+    v30 <- LoadInteger '0'
+    v31 <- LoadInteger '1'
+    v32 <- LoadInteger '2'
+    v33 <- CreateArray [v30, v31, v32]
+    v34 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v34
+    v35 <- EndObjectLiteral
+    v36 <- CallFunction v1, [v33, v35]
+EndPlainFunction
+v37 <- CallFunction v0, []
+
+
+function f0() {
+    function foo(a2, a3) {
+        const v4 = (a5) => {
+            return a5 === a3.x;
+        };
+        return a2.some(v4);
+    }
+    const v12 = [1,2,3];
+    foo(v12, { x: 3 });
+    const v19 = [0,1,2];
+    foo(v19, { x: 3 });
+    const v26 = [1,2,3];
+    foo(v26, { x: 3 });
+    const v33 = [0,1,2];
+    foo(v33, { x: 3 });
+}
+f0();
+
+FuzzIL program written to corpus/array-some.fzil

@@ -1,0 +1,173 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'symbol'
+    v2 <- CreateNamedVariable 'Symbol', 'none'
+    v3 <- CallFunction v2, [v1]
+    v4 <- CreateNamedVariable 'symbol', 'const', v3
+    v5 <- LoadInteger '0'
+    v6 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v4, v5
+        ObjectLiteralAddProperty `a`, v6
+    v7 <- EndObjectLiteral
+    v8 <- LoadInteger '1'
+    v9 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v4, v8
+        ObjectLiteralAddProperty `b`, v9
+    v10 <- EndObjectLiteral
+    v11 <- LoadInteger '2'
+    v12 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v4, v11
+        ObjectLiteralAddProperty `c`, v12
+    v13 <- EndObjectLiteral
+    v14 <- LoadInteger '3'
+    v15 <- LoadInteger '4'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v4, v14
+        ObjectLiteralAddProperty `d`, v15
+    v16 <- EndObjectLiteral
+    v17 <- CreateArray [v7, v10, v13, v16]
+    v18 <- CreateNamedVariable 'OBJS', 'const', v17
+    v19 <- BeginPlainFunction -> v20
+        v21 <- GetComputedProperty v20, v4
+        Return v21
+    EndPlainFunction
+    BeginForLoopInitializer
+        v22 <- LoadInteger '0'
+    BeginForLoopCondition -> v23
+        v24 <- GetProperty v18, 'length'
+        v25 <- Compare v23, '<', v24
+    BeginForLoopAfterthought v25 -> v26
+        v27 <- UnaryOperation '++', v26
+    BeginForLoopBody -> v28
+        v29 <- GetComputedProperty v18, v28
+        v30 <- CallFunction v19, [v29]
+        v31 <- GetComputedProperty v18, v28
+        v32 <- CallFunction v19, [v31]
+    EndForLoop
+    BeginForLoopInitializer
+        v33 <- LoadInteger '0'
+    BeginForLoopCondition -> v34
+        v35 <- GetProperty v18, 'length'
+        v36 <- Compare v34, '<', v35
+    BeginForLoopAfterthought v36 -> v37
+        v38 <- UnaryOperation '++', v37
+    BeginForLoopBody -> v39
+        v40 <- GetComputedProperty v18, v39
+        v41 <- CallFunction v19, [v40]
+        v42 <- GetComputedProperty v18, v39
+        v43 <- CallFunction v19, [v42]
+    EndForLoop
+EndPlainFunction
+v44 <- CallFunction v0, []
+v45 <- BeginPlainFunction -> 
+    v46 <- LoadString 'symbol'
+    v47 <- CreateNamedVariable 'Symbol', 'none'
+    v48 <- CallFunction v47, [v46]
+    v49 <- CreateNamedVariable 'symbol', 'const', v48
+    v50 <- LoadInteger '0'
+    v51 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v49, v50
+        ObjectLiteralAddProperty `a`, v51
+    v52 <- EndObjectLiteral
+    v53 <- LoadInteger '1'
+    v54 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v49, v53
+        ObjectLiteralAddProperty `b`, v54
+    v55 <- EndObjectLiteral
+    v56 <- LoadInteger '2'
+    v57 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v49, v56
+        ObjectLiteralAddProperty `c`, v57
+    v58 <- EndObjectLiteral
+    v59 <- LoadInteger '3'
+    v60 <- LoadInteger '4'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v49, v59
+        ObjectLiteralAddProperty `d`, v60
+    v61 <- EndObjectLiteral
+    v62 <- CreateArray [v52, v55, v58, v61]
+    v63 <- CreateNamedVariable 'OBJS', 'const', v62
+    v64 <- BeginPlainFunction -> v65
+        SetComputedProperty v65, v49, v65
+    EndPlainFunction
+    BeginForLoopInitializer
+        v66 <- LoadInteger '0'
+    BeginForLoopCondition -> v67
+        v68 <- GetProperty v63, 'length'
+        v69 <- Compare v67, '<', v68
+    BeginForLoopAfterthought v69 -> v70
+        v71 <- UnaryOperation '++', v70
+    BeginForLoopBody -> v72
+        v73 <- GetComputedProperty v63, v72
+        v74 <- CallFunction v64, [v73]
+        v75 <- GetComputedProperty v63, v72
+        v76 <- CallFunction v64, [v75]
+    EndForLoop
+    BeginForLoopInitializer
+        v77 <- LoadInteger '0'
+    BeginForLoopCondition -> v78
+        v79 <- GetProperty v63, 'length'
+        v80 <- Compare v78, '<', v79
+    BeginForLoopAfterthought v80 -> v81
+        v82 <- UnaryOperation '++', v81
+    BeginForLoopBody -> v83
+        v84 <- GetComputedProperty v63, v83
+        v85 <- CallFunction v64, [v84]
+        v86 <- GetComputedProperty v63, v83
+        v87 <- CallFunction v64, [v86]
+    EndForLoop
+    BeginForOfLoop v63 -> v88
+        v89 <- GetComputedProperty v88, v49
+    EndForOfLoop
+EndPlainFunction
+v90 <- CallFunction v45, []
+
+
+function f0() {
+    const symbol = Symbol("symbol");
+    const v7 = { [symbol]: 0, a: 1 };
+    const v10 = { [symbol]: 1, b: 2 };
+    const v13 = { [symbol]: 2, c: 3 };
+    const OBJS = [v7,v10,v13,{ [symbol]: 3, d: 4 }];
+    function foo(a20) {
+        return a20[symbol];
+    }
+    for (let i23 = 0; i23 < OBJS.length; ++i23) {
+        foo(OBJS[i23]);
+        foo(OBJS[i23]);
+    }
+    for (let i34 = 0; i34 < OBJS.length; ++i34) {
+        foo(OBJS[i34]);
+        foo(OBJS[i34]);
+    }
+}
+f0();
+function f45() {
+    const symbol = Symbol("symbol");
+    const v52 = { [symbol]: 0, a: 1 };
+    const v55 = { [symbol]: 1, b: 2 };
+    const v58 = { [symbol]: 2, c: 3 };
+    const OBJS = [v52,v55,v58,{ [symbol]: 3, d: 4 }];
+    function foo(a65) {
+        a65[symbol] = a65;
+    }
+    for (let i67 = 0; i67 < OBJS.length; ++i67) {
+        foo(OBJS[i67]);
+        foo(OBJS[i67]);
+    }
+    for (let i78 = 0; i78 < OBJS.length; ++i78) {
+        foo(OBJS[i78]);
+        foo(OBJS[i78]);
+    }
+    for (const v88 of OBJS) {
+        v88[symbol];
+    }
+}
+f45();
+
+FuzzIL program written to corpus/polymorphic-symbols.fzil

@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'opt', 'let', v1
+    v3 <- CreateNamedVariable 'Uint8Array', 'none'
+    v4 <- LoadInteger '65536'
+    v5 <- Construct v3, [v4]
+    v6 <- CreateArrayWithSpread [...v5]
+    v7 <- CreateArrayWithSpread [...v6]
+    v8 <- CreateArrayWithSpread [...v7]
+    v9 <- CreateArrayWithSpread [...v8]
+    v10 <- CreateNamedVariable 'arr', 'let', v9
+    BeginWhileLoopHeader
+        v11 <- UnaryOperation v10, '--'
+    BeginWhileLoopBody v11
+        v12 <- TypeOf v2
+        v13 <- LoadString 'undefined'
+        v14 <- Compare v12, '===', v13
+        v15 <- LoadRegExp 'a' ''
+        v16 <- TernaryOperation v14, v15, v10
+        Reassign v2, v16
+    EndWhileLoop
+EndPlainFunction
+v17 <- CallFunction v0, []
+v18 <- CallFunction v0, []
+
+
+function opt() {
+    let opt;
+    const v5 = new Uint8Array(65536);
+    let arr = [...[...[...[...v5]]]];
+    while (arr--) {
+        opt = typeof opt === "undefined" ? /a/ : arr;
+    }
+}
+opt();
+opt();
+
+FuzzIL program written to corpus/regress-808472.fzil

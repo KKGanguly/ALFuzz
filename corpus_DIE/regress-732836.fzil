@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateNamedVariable 'args', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '125000'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- LoadFloat '1.1'
+        v11 <- CallMethod v2, 'push', [v10]
+    EndForLoop
+    v12 <- CreateNamedVariable 'Array', 'none'
+    v13 <- CallMethod v12, 'apply', [v12, v2]
+    Return v13
+EndPlainFunction
+v14 <- CallFunction v0, []
+v15 <- CreateNamedVariable 'array', 'var', v14
+
+
+function boom() {
+    var args = [];
+    for (let i4 = 0; i4 < 125000; i4++) {
+        args.push(1.1);
+    }
+    return Array.apply(Array, args);
+}
+var array = boom();
+
+FuzzIL program written to corpus/regress-732836.fzil

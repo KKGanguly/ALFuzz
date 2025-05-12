@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- LoadInteger '0'
+    v3 <- BinaryOperation v1, '|', v2
+    v4 <- CreateNamedVariable 'values', 'none'
+    v5 <- GetElement v4, '0'
+    v6 <- BinaryOperation v3, '&&', v5
+    v7 <- LoadBoolean 'false'
+    v8 <- BinaryOperation v6, '||', v7
+    Return v8
+EndPlainFunction
+BeginTry
+    v9 <- CallFunction v0, []
+BeginCatch -> v10
+EndTryCatch
+
+
+function foo() {
+    return (([] | 0) && values[0]) || false;
+}
+try {
+    foo();
+} catch(e10) {
+}
+
+FuzzIL program written to corpus/regress-crbug-614292.fzil

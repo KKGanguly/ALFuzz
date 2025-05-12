@@ -1,0 +1,701 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'NONE', 'var', v0
+v2 <- LoadInteger '1'
+v3 <- CreateNamedVariable 'READ_ONLY', 'var', v2
+v4 <- LoadInteger '2'
+v5 <- CreateNamedVariable 'DONT_ENUM', 'var', v4
+v6 <- LoadInteger '4'
+v7 <- CreateNamedVariable 'DONT_DELETE', 'var', v6
+v8 <- BeginPlainFunction -> v9, v10, v11
+    v12 <- CallMethod v9, 'hasOwnProperty', [v10]
+    v13 <- CreateNamedVariable 'Object', 'none'
+    v14 <- CallMethod v13, 'getOwnPropertyDescriptor', [v9, v10]
+    v15 <- CreateNamedVariable 'desc', 'var', v14
+    v16 <- GetProperty v15, 'writable'
+    v17 <- BinaryOperation v11, '&', v3
+    v18 <- UnaryOperation '!', v17
+    v19 <- GetProperty v15, 'enumerable'
+    v20 <- BinaryOperation v11, '&', v5
+    v21 <- UnaryOperation '!', v20
+    v22 <- GetProperty v15, 'configurable'
+    v23 <- BinaryOperation v11, '&', v7
+    v24 <- UnaryOperation '!', v23
+EndPlainFunction
+v25 <- BeginPlainFunction -> 
+    v26 <- CreateNamedVariable 'Array', 'none'
+    v27 <- GetProperty v26, 'prototype'
+    v28 <- LoadString 'entries'
+    v29 <- GetProperty v26, 'prototype'
+    v30 <- LoadString 'keys'
+    v31 <- GetProperty v26, 'prototype'
+    v32 <- CreateNamedVariable 'Symbol', 'none'
+    v33 <- GetProperty v32, 'iterator'
+    v34 <- LoadString 'entries'
+    v35 <- GetProperty v26, 'prototype'
+    v36 <- GetProperty v35, 'entries'
+    v37 <- GetProperty v36, 'name'
+    v38 <- LoadString 'keys'
+    v39 <- GetProperty v26, 'prototype'
+    v40 <- GetProperty v39, 'keys'
+    v41 <- GetProperty v40, 'name'
+    v42 <- LoadString 'values'
+    v43 <- GetProperty v26, 'prototype'
+    v44 <- GetProperty v32, 'iterator'
+    v45 <- GetComputedProperty v43, v44
+    v46 <- GetProperty v45, 'name'
+EndPlainFunction
+v47 <- CallFunction v25, []
+v48 <- BeginPlainFunction -> v49, v50, v51
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v49
+        ObjectLiteralAddProperty `done`, v50
+    v52 <- EndObjectLiteral
+EndPlainFunction
+v53 <- BeginPlainFunction -> 
+    v54 <- LoadString 'a'
+    v55 <- LoadString 'b'
+    v56 <- LoadString 'c'
+    v57 <- CreateArray [v54, v55, v56]
+    v58 <- CreateNamedVariable 'array', 'var', v57
+    v59 <- CreateNamedVariable 'Symbol', 'none'
+    v60 <- GetProperty v59, 'iterator'
+    v61 <- CallComputedMethod v58, v60, []
+    v62 <- CreateNamedVariable 'iterator', 'var', v61
+    v63 <- LoadString 'a'
+    v64 <- LoadBoolean 'false'
+    v65 <- CallMethod v62, 'next', []
+    v66 <- LoadString 'b'
+    v67 <- LoadBoolean 'false'
+    v68 <- CallMethod v62, 'next', []
+    v69 <- LoadString 'c'
+    v70 <- LoadBoolean 'false'
+    v71 <- CallMethod v62, 'next', []
+    v72 <- LoadInteger '0'
+    v73 <- Void_ v72
+    v74 <- LoadBoolean 'true'
+    v75 <- CallMethod v62, 'next', []
+    v76 <- LoadString 'd'
+    v77 <- CallMethod v58, 'push', [v76]
+    v78 <- LoadInteger '0'
+    v79 <- Void_ v78
+    v80 <- LoadBoolean 'true'
+    v81 <- CallMethod v62, 'next', []
+EndPlainFunction
+v82 <- CallFunction v53, []
+v83 <- BeginPlainFunction -> 
+    v84 <- LoadString 'a'
+    v85 <- LoadString 'b'
+    v86 <- LoadString 'c'
+    v87 <- CreateArray [v84, v85, v86]
+    v88 <- CreateNamedVariable 'array', 'var', v87
+    v89 <- CreateNamedVariable 'Symbol', 'none'
+    v90 <- GetProperty v89, 'iterator'
+    v91 <- CallComputedMethod v88, v90, []
+    v92 <- CreateNamedVariable 'iterator', 'var', v91
+    v93 <- LoadString 'a'
+    v94 <- LoadBoolean 'false'
+    v95 <- CallMethod v92, 'next', []
+    v96 <- LoadString 'b'
+    v97 <- LoadBoolean 'false'
+    v98 <- CallMethod v92, 'next', []
+    v99 <- LoadString 'c'
+    v100 <- LoadBoolean 'false'
+    v101 <- CallMethod v92, 'next', []
+    v102 <- LoadString 'd'
+    v103 <- CallMethod v88, 'push', [v102]
+    v104 <- LoadString 'd'
+    v105 <- LoadBoolean 'false'
+    v106 <- CallMethod v92, 'next', []
+    v107 <- LoadInteger '0'
+    v108 <- Void_ v107
+    v109 <- LoadBoolean 'true'
+    v110 <- CallMethod v92, 'next', []
+EndPlainFunction
+v111 <- CallFunction v83, []
+v112 <- BeginPlainFunction -> 
+    v113 <- LoadString 'a'
+    v114 <- LoadString 'b'
+    v115 <- LoadString 'c'
+    v116 <- CreateArray [v113, v114, v115]
+    v117 <- CreateNamedVariable 'array', 'var', v116
+    v118 <- CallMethod v117, 'keys', []
+    v119 <- CreateNamedVariable 'iterator', 'var', v118
+    v120 <- LoadInteger '0'
+    v121 <- LoadBoolean 'false'
+    v122 <- CallMethod v119, 'next', []
+    v123 <- LoadInteger '1'
+    v124 <- LoadBoolean 'false'
+    v125 <- CallMethod v119, 'next', []
+    v126 <- LoadInteger '2'
+    v127 <- LoadBoolean 'false'
+    v128 <- CallMethod v119, 'next', []
+    v129 <- LoadInteger '0'
+    v130 <- Void_ v129
+    v131 <- LoadBoolean 'true'
+    v132 <- CallMethod v119, 'next', []
+    v133 <- LoadString 'd'
+    v134 <- CallMethod v117, 'push', [v133]
+    v135 <- LoadInteger '0'
+    v136 <- Void_ v135
+    v137 <- LoadBoolean 'true'
+    v138 <- CallMethod v119, 'next', []
+EndPlainFunction
+v139 <- CallFunction v112, []
+v140 <- BeginPlainFunction -> 
+    v141 <- LoadString 'a'
+    v142 <- LoadString 'b'
+    v143 <- LoadString 'c'
+    v144 <- CreateArray [v141, v142, v143]
+    v145 <- CreateNamedVariable 'array', 'var', v144
+    v146 <- CallMethod v145, 'keys', []
+    v147 <- CreateNamedVariable 'iterator', 'var', v146
+    v148 <- LoadInteger '0'
+    v149 <- LoadBoolean 'false'
+    v150 <- CallMethod v147, 'next', []
+    v151 <- LoadInteger '1'
+    v152 <- LoadBoolean 'false'
+    v153 <- CallMethod v147, 'next', []
+    v154 <- LoadInteger '2'
+    v155 <- LoadBoolean 'false'
+    v156 <- CallMethod v147, 'next', []
+    v157 <- LoadString 'd'
+    v158 <- CallMethod v145, 'push', [v157]
+    v159 <- LoadInteger '3'
+    v160 <- LoadBoolean 'false'
+    v161 <- CallMethod v147, 'next', []
+    v162 <- LoadInteger '0'
+    v163 <- Void_ v162
+    v164 <- LoadBoolean 'true'
+    v165 <- CallMethod v147, 'next', []
+EndPlainFunction
+v166 <- CallFunction v140, []
+v167 <- BeginPlainFunction -> 
+    v168 <- LoadString 'a'
+    v169 <- LoadString 'b'
+    v170 <- LoadString 'c'
+    v171 <- CreateArray [v168, v169, v170]
+    v172 <- CreateNamedVariable 'array', 'var', v171
+    v173 <- CallMethod v172, 'entries', []
+    v174 <- CreateNamedVariable 'iterator', 'var', v173
+    v175 <- LoadInteger '0'
+    v176 <- LoadString 'a'
+    v177 <- CreateArray [v175, v176]
+    v178 <- LoadBoolean 'false'
+    v179 <- CallMethod v174, 'next', []
+    v180 <- LoadInteger '1'
+    v181 <- LoadString 'b'
+    v182 <- CreateArray [v180, v181]
+    v183 <- LoadBoolean 'false'
+    v184 <- CallMethod v174, 'next', []
+    v185 <- LoadInteger '2'
+    v186 <- LoadString 'c'
+    v187 <- CreateArray [v185, v186]
+    v188 <- LoadBoolean 'false'
+    v189 <- CallMethod v174, 'next', []
+    v190 <- LoadInteger '0'
+    v191 <- Void_ v190
+    v192 <- LoadBoolean 'true'
+    v193 <- CallMethod v174, 'next', []
+    v194 <- LoadString 'd'
+    v195 <- CallMethod v172, 'push', [v194]
+    v196 <- LoadInteger '0'
+    v197 <- Void_ v196
+    v198 <- LoadBoolean 'true'
+    v199 <- CallMethod v174, 'next', []
+EndPlainFunction
+v200 <- CallFunction v167, []
+v201 <- BeginPlainFunction -> 
+    v202 <- LoadString 'a'
+    v203 <- LoadString 'b'
+    v204 <- LoadString 'c'
+    v205 <- CreateArray [v202, v203, v204]
+    v206 <- CreateNamedVariable 'array', 'var', v205
+    v207 <- CallMethod v206, 'entries', []
+    v208 <- CreateNamedVariable 'iterator', 'var', v207
+    v209 <- LoadInteger '0'
+    v210 <- LoadString 'a'
+    v211 <- CreateArray [v209, v210]
+    v212 <- LoadBoolean 'false'
+    v213 <- CallMethod v208, 'next', []
+    v214 <- LoadInteger '1'
+    v215 <- LoadString 'b'
+    v216 <- CreateArray [v214, v215]
+    v217 <- LoadBoolean 'false'
+    v218 <- CallMethod v208, 'next', []
+    v219 <- LoadInteger '2'
+    v220 <- LoadString 'c'
+    v221 <- CreateArray [v219, v220]
+    v222 <- LoadBoolean 'false'
+    v223 <- CallMethod v208, 'next', []
+    v224 <- LoadString 'd'
+    v225 <- CallMethod v206, 'push', [v224]
+    v226 <- LoadInteger '3'
+    v227 <- LoadString 'd'
+    v228 <- CreateArray [v226, v227]
+    v229 <- LoadBoolean 'false'
+    v230 <- CallMethod v208, 'next', []
+    v231 <- LoadInteger '0'
+    v232 <- Void_ v231
+    v233 <- LoadBoolean 'true'
+    v234 <- CallMethod v208, 'next', []
+EndPlainFunction
+v235 <- CallFunction v201, []
+v236 <- BeginPlainFunction -> 
+    v237 <- CreateArray []
+    v238 <- CreateNamedVariable 'array', 'var', v237
+    v239 <- CallMethod v238, 'keys', []
+    v240 <- CreateNamedVariable 'iterator', 'var', v239
+    v241 <- GetProperty v240, '__proto__'
+    v242 <- CreateNamedVariable 'ArrayIteratorPrototype', 'var', v241
+    v243 <- CreateNamedVariable 'Symbol', 'none'
+    v244 <- GetProperty v243, 'iterator'
+    v245 <- CallComputedMethod v238, v244, []
+    v246 <- GetProperty v245, '__proto__'
+    v247 <- CallMethod v238, 'keys', []
+    v248 <- GetProperty v247, '__proto__'
+    v249 <- CallMethod v238, 'entries', []
+    v250 <- GetProperty v249, '__proto__'
+    v251 <- CreateNamedVariable 'Object', 'none'
+    v252 <- GetProperty v251, 'prototype'
+    v253 <- GetProperty v242, '__proto__'
+    v254 <- LoadString 'constructor'
+    v255 <- CallMethod v242, 'hasOwnProperty', [v254]
+    v256 <- LoadString 'next'
+    v257 <- CreateArray [v256]
+    v258 <- CallMethod v251, 'getOwnPropertyNames', [v242]
+    v259 <- LoadString 'next'
+    v260 <- GetProperty v243, 'iterator'
+    v261 <- CallMethod v242, 'hasOwnProperty', [v260]
+    v262 <- LoadString '[object Array Iterator]'
+    v263 <- GetProperty v251, 'prototype'
+    v264 <- GetProperty v263, 'toString'
+    v265 <- CallMethod v264, 'call', [v240]
+    v266 <- LoadString 'Array Iterator'
+    v267 <- GetProperty v243, 'toStringTag'
+    v268 <- GetComputedProperty v242, v267
+    v269 <- GetProperty v243, 'toStringTag'
+    v270 <- CallMethod v251, 'getOwnPropertyDescriptor', [v242, v269]
+    v271 <- CreateNamedVariable 'desc', 'var', v270
+    v272 <- GetProperty v271, 'configurable'
+    v273 <- GetProperty v271, 'writable'
+    v274 <- LoadString 'Array Iterator'
+    v275 <- GetProperty v271, 'value'
+EndPlainFunction
+v276 <- CallFunction v236, []
+v277 <- BeginPlainFunction -> 
+    v278 <- CreateArray []
+    v279 <- CreateNamedVariable 'buffer', 'var', v278
+    v280 <- LoadInteger '0'
+    v281 <- LoadString 'a'
+    v282 <- LoadBoolean 'true'
+    v283 <- LoadBoolean 'false'
+    v284 <- LoadNull
+    v285 <- LoadUndefined
+    v286 <- LoadUndefined
+    v287 <- CreateNamedVariable 'NaN', 'none'
+    v288 <- CreateArray [v280, v281, v282, v283, v284, v285, v286, v287]
+    v289 <- CreateNamedVariable 'array', 'var', v288
+    v290 <- LoadInteger '0'
+    v291 <- CreateNamedVariable 'i', 'var', v290
+    v292 <- CreateNamedVariable 'Symbol', 'none'
+    v293 <- GetProperty v292, 'iterator'
+    v294 <- CallComputedMethod v289, v293, []
+    BeginForOfLoop v294 -> v295
+        v296 <- UnaryOperation v291, '++'
+        SetComputedProperty v279, v296, v295
+    EndForOfLoop
+    v297 <- LoadInteger '8'
+    v298 <- GetProperty v279, 'length'
+    BeginForLoopInitializer
+        v299 <- LoadInteger '0'
+    BeginForLoopCondition -> v300
+        v301 <- GetProperty v279, 'length'
+        v302 <- Compare v300, '<', v301
+    BeginForLoopAfterthought v302 -> v303
+        v304 <- UnaryOperation v303, '++'
+    BeginForLoopBody -> v305
+        v306 <- GetComputedProperty v289, v305
+        v307 <- GetComputedProperty v279, v305
+    EndForLoop
+EndPlainFunction
+v308 <- CallFunction v277, []
+v309 <- BeginPlainFunction -> 
+    v310 <- CreateArray []
+    v311 <- CreateNamedVariable 'buffer', 'var', v310
+    v312 <- LoadInteger '0'
+    v313 <- LoadString 'a'
+    v314 <- LoadBoolean 'true'
+    v315 <- LoadBoolean 'false'
+    v316 <- LoadNull
+    v317 <- LoadUndefined
+    v318 <- LoadUndefined
+    v319 <- CreateNamedVariable 'NaN', 'none'
+    v320 <- CreateArray [v312, v313, v314, v315, v316, v317, v318, v319]
+    v321 <- CreateNamedVariable 'array', 'var', v320
+    v322 <- LoadInteger '0'
+    v323 <- CreateNamedVariable 'i', 'var', v322
+    v324 <- CallMethod v321, 'keys', []
+    BeginForOfLoop v324 -> v325
+        v326 <- UnaryOperation v323, '++'
+        SetComputedProperty v311, v326, v325
+    EndForOfLoop
+    v327 <- LoadInteger '8'
+    v328 <- GetProperty v311, 'length'
+    BeginForLoopInitializer
+        v329 <- LoadInteger '0'
+    BeginForLoopCondition -> v330
+        v331 <- GetProperty v311, 'length'
+        v332 <- Compare v330, '<', v331
+    BeginForLoopAfterthought v332 -> v333
+        v334 <- UnaryOperation v333, '++'
+    BeginForLoopBody -> v335
+        v336 <- GetComputedProperty v311, v335
+    EndForLoop
+EndPlainFunction
+v337 <- CallFunction v309, []
+v338 <- BeginPlainFunction -> 
+    v339 <- CreateArray []
+    v340 <- CreateNamedVariable 'buffer', 'var', v339
+    v341 <- LoadInteger '0'
+    v342 <- LoadString 'a'
+    v343 <- LoadBoolean 'true'
+    v344 <- LoadBoolean 'false'
+    v345 <- LoadNull
+    v346 <- LoadUndefined
+    v347 <- LoadUndefined
+    v348 <- CreateNamedVariable 'NaN', 'none'
+    v349 <- CreateArray [v341, v342, v343, v344, v345, v346, v347, v348]
+    v350 <- CreateNamedVariable 'array', 'var', v349
+    v351 <- LoadInteger '0'
+    v352 <- CreateNamedVariable 'i', 'var', v351
+    v353 <- CallMethod v350, 'entries', []
+    BeginForOfLoop v353 -> v354
+        v355 <- UnaryOperation v352, '++'
+        SetComputedProperty v340, v355, v354
+    EndForOfLoop
+    v356 <- LoadInteger '8'
+    v357 <- GetProperty v340, 'length'
+    BeginForLoopInitializer
+        v358 <- LoadInteger '0'
+    BeginForLoopCondition -> v359
+        v360 <- GetProperty v340, 'length'
+        v361 <- Compare v359, '<', v360
+    BeginForLoopAfterthought v361 -> v362
+        v363 <- UnaryOperation v362, '++'
+    BeginForLoopBody -> v364
+        v365 <- GetComputedProperty v350, v364
+        v366 <- GetComputedProperty v340, v364
+        v367 <- GetElement v366, '1'
+    EndForLoop
+    BeginForLoopInitializer
+        v368 <- LoadInteger '0'
+    BeginForLoopCondition -> v369
+        v370 <- GetProperty v340, 'length'
+        v371 <- Compare v369, '<', v370
+    BeginForLoopAfterthought v371 -> v372
+        v373 <- UnaryOperation v372, '++'
+    BeginForLoopBody -> v374
+        v375 <- GetComputedProperty v340, v374
+        v376 <- GetElement v375, '0'
+    EndForLoop
+EndPlainFunction
+v377 <- CallFunction v338, []
+v378 <- BeginPlainFunction -> 
+    v379 <- CreateArray []
+    v380 <- CreateNamedVariable 'buffer', 'var', v379
+    v381 <- LoadInteger '0'
+    v382 <- LoadString 'a'
+    v383 <- LoadBoolean 'true'
+    v384 <- LoadBoolean 'false'
+    v385 <- LoadNull
+    v386 <- LoadUndefined
+    v387 <- LoadUndefined
+    v388 <- CreateNamedVariable 'NaN', 'none'
+    v389 <- CreateArray [v381, v382, v383, v384, v385, v386, v387, v388]
+    v390 <- CreateNamedVariable 'array', 'var', v389
+    v391 <- LoadInteger '0'
+    v392 <- CreateNamedVariable 'i', 'var', v391
+    BeginForOfLoop v390 -> v393
+        v394 <- UnaryOperation v392, '++'
+        SetComputedProperty v380, v394, v393
+    EndForOfLoop
+    v395 <- LoadInteger '8'
+    v396 <- GetProperty v380, 'length'
+    BeginForLoopInitializer
+        v397 <- LoadInteger '0'
+    BeginForLoopCondition -> v398
+        v399 <- GetProperty v380, 'length'
+        v400 <- Compare v398, '<', v399
+    BeginForLoopAfterthought v400 -> v401
+        v402 <- UnaryOperation v401, '++'
+    BeginForLoopBody -> v403
+        v404 <- GetComputedProperty v390, v403
+        v405 <- GetComputedProperty v380, v403
+    EndForLoop
+EndPlainFunction
+v406 <- CallFunction v277, []
+v407 <- BeginPlainFunction -> 
+    v408 <- LoadInteger '0'
+    v409 <- CreateArray [v408]
+    v410 <- CreateNamedVariable 'array', 'var', v409
+    v411 <- CreateNamedVariable 'Symbol', 'none'
+    v412 <- GetProperty v411, 'iterator'
+    v413 <- CallComputedMethod v410, v412, []
+    v414 <- CreateNamedVariable 'iterator', 'var', v413
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v414
+    v415 <- EndObjectLiteral
+    v416 <- CreateNamedVariable 'object', 'var', v415
+    v417 <- BeginPlainFunction -> 
+        v418 <- CallMethod v416, 'next', []
+    EndPlainFunction
+    v419 <- CallFunction v417, []
+    v420 <- CreateNamedVariable 'TypeError', 'none'
+EndPlainFunction
+v421 <- CallFunction v407, []
+v422 <- BeginPlainFunction -> 
+    v423 <- CreateArray []
+    v424 <- CreateNamedVariable 'array', 'var', v423
+    v425 <- LoadString 'c'
+    SetElement v424, '1024', v425
+    v426 <- CreateNamedVariable 'Symbol', 'none'
+    v427 <- GetProperty v426, 'iterator'
+    v428 <- CallComputedMethod v424, v427, []
+    v429 <- CreateNamedVariable 'iterator', 'var', v428
+    BeginForLoopInitializer
+        v430 <- LoadInteger '0'
+    BeginForLoopCondition -> v431
+        v432 <- LoadInteger '1024'
+        v433 <- Compare v431, '<', v432
+    BeginForLoopAfterthought v433 -> v434
+        v435 <- UnaryOperation '++', v434
+    BeginForLoopBody -> v436
+        v437 <- LoadInteger '0'
+        v438 <- Void_ v437
+        v439 <- LoadBoolean 'false'
+        v440 <- CallMethod v429, 'next', []
+    EndForLoop
+    v441 <- LoadString 'c'
+    v442 <- LoadBoolean 'false'
+    v443 <- CallMethod v429, 'next', []
+    v444 <- LoadInteger '0'
+    v445 <- Void_ v444
+    v446 <- LoadBoolean 'true'
+    v447 <- CallMethod v429, 'next', []
+EndPlainFunction
+v448 <- CallFunction v422, []
+
+
+var NONE = 0;
+var READ_ONLY = 1;
+var DONT_ENUM = 2;
+var DONT_DELETE = 4;
+function assertHasOwnProperty(a9, a10, a11) {
+    a9.hasOwnProperty(a10);
+    var desc = Object.getOwnPropertyDescriptor(a9, a10);
+    desc.writable;
+    !(a11 & READ_ONLY);
+    desc.enumerable;
+    !(a11 & DONT_ENUM);
+    desc.configurable;
+    !(a11 & DONT_DELETE);
+}
+function TestArrayPrototype() {
+    Array.prototype;
+    Array.prototype;
+    Array.prototype;
+    Symbol.iterator;
+    Array.prototype.entries.name;
+    Array.prototype.keys.name;
+    Array.prototype[Symbol.iterator].name;
+}
+TestArrayPrototype();
+function assertIteratorResult(a49, a50, a51) {
+    const v52 = { value: a49, done: a50 };
+}
+function TestValues() {
+    var array = ["a","b","c"];
+    var iterator = array[Symbol.iterator]();
+    iterator.next();
+    iterator.next();
+    iterator.next();
+    void 0;
+    iterator.next();
+    array.push("d");
+    void 0;
+    iterator.next();
+}
+TestValues();
+function TestValuesMutate() {
+    var array = ["a","b","c"];
+    var iterator = array[Symbol.iterator]();
+    iterator.next();
+    iterator.next();
+    iterator.next();
+    array.push("d");
+    iterator.next();
+    void 0;
+    iterator.next();
+}
+TestValuesMutate();
+function TestKeys() {
+    var array = ["a","b","c"];
+    var iterator = array.keys();
+    iterator.next();
+    iterator.next();
+    iterator.next();
+    void 0;
+    iterator.next();
+    array.push("d");
+    void 0;
+    iterator.next();
+}
+TestKeys();
+function TestKeysMutate() {
+    var array = ["a","b","c"];
+    var iterator = array.keys();
+    iterator.next();
+    iterator.next();
+    iterator.next();
+    array.push("d");
+    iterator.next();
+    void 0;
+    iterator.next();
+}
+TestKeysMutate();
+function TestEntries() {
+    var array = ["a","b","c"];
+    var iterator = array.entries();
+    [0,"a"];
+    iterator.next();
+    [1,"b"];
+    iterator.next();
+    [2,"c"];
+    iterator.next();
+    void 0;
+    iterator.next();
+    array.push("d");
+    void 0;
+    iterator.next();
+}
+TestEntries();
+function TestEntriesMutate() {
+    var array = ["a","b","c"];
+    var iterator = array.entries();
+    [0,"a"];
+    iterator.next();
+    [1,"b"];
+    iterator.next();
+    [2,"c"];
+    iterator.next();
+    array.push("d");
+    [3,"d"];
+    iterator.next();
+    void 0;
+    iterator.next();
+}
+TestEntriesMutate();
+function TestArrayIteratorPrototype() {
+    var array = [];
+    var iterator = array.keys();
+    var ArrayIteratorPrototype = iterator.__proto__;
+    array[Symbol.iterator]().__proto__;
+    array.keys().__proto__;
+    array.entries().__proto__;
+    Object.prototype;
+    ArrayIteratorPrototype.__proto__;
+    ArrayIteratorPrototype.hasOwnProperty("constructor");
+    ["next"];
+    Object.getOwnPropertyNames(ArrayIteratorPrototype);
+    ArrayIteratorPrototype.hasOwnProperty(Symbol.iterator);
+    Object.prototype.toString.call(iterator);
+    ArrayIteratorPrototype[Symbol.toStringTag];
+    var desc = Object.getOwnPropertyDescriptor(ArrayIteratorPrototype, Symbol.toStringTag);
+    desc.configurable;
+    desc.writable;
+    desc.value;
+}
+TestArrayIteratorPrototype();
+function TestForArrayValues() {
+    var buffer = [];
+    var array = [0,"a",true,false,null,,,NaN];
+    var i = 0;
+    for (const v295 of array[Symbol.iterator]()) {
+        buffer[i++] = v295;
+    }
+    buffer.length;
+    for (let i300 = 0; i300 < buffer.length; i300++) {
+        array[i300];
+        buffer[i300];
+    }
+}
+TestForArrayValues();
+function TestForArrayKeys() {
+    var buffer = [];
+    var array = [0,"a",true,false,null,,,NaN];
+    var i = 0;
+    for (const v325 of array.keys()) {
+        buffer[i++] = v325;
+    }
+    buffer.length;
+    for (let i330 = 0; i330 < buffer.length; i330++) {
+        buffer[i330];
+    }
+}
+TestForArrayKeys();
+function TestForArrayEntries() {
+    var buffer = [];
+    var array = [0,"a",true,false,null,,,NaN];
+    var i = 0;
+    for (const v354 of array.entries()) {
+        buffer[i++] = v354;
+    }
+    buffer.length;
+    for (let i359 = 0; i359 < buffer.length; i359++) {
+        array[i359];
+        buffer[i359][1];
+    }
+    for (let i369 = 0; i369 < buffer.length; i369++) {
+        buffer[i369][0];
+    }
+}
+TestForArrayEntries();
+function TestForArray() {
+    var buffer = [];
+    var array = [0,"a",true,false,null,,,NaN];
+    var i = 0;
+    for (const v393 of array) {
+        buffer[i++] = v393;
+    }
+    buffer.length;
+    for (let i398 = 0; i398 < buffer.length; i398++) {
+        array[i398];
+        buffer[i398];
+    }
+}
+TestForArrayValues();
+function TestNonOwnSlots() {
+    var array = [0];
+    var iterator = array[Symbol.iterator]();
+    var object = { __proto__: iterator };
+    function f417() {
+        object.next();
+    }
+    f417();
+}
+TestNonOwnSlots();
+function TestForDictionaryArray() {
+    var array = [];
+    array[1024] = "c";
+    var iterator = array[Symbol.iterator]();
+    for (let i431 = 0; i431 < 1024; ++i431) {
+        void 0;
+        iterator.next();
+    }
+    iterator.next();
+    void 0;
+    iterator.next();
+}
+TestForDictionaryArray();
+
+FuzzIL program written to corpus/array-iterator.fzil

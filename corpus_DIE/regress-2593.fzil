@@ -1,0 +1,95 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'p1', 'none'
+Reassign v1, v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'p2', 'none'
+Reassign v3, v2
+v4 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'p3', 'none'
+Reassign v6, v5
+v7 <- CreateNamedVariable 'p3', 'none'
+v8 <- CreateNamedVariable 'p2', 'none'
+SetProperty v8, '__proto__', v7
+v9 <- CreateNamedVariable 'p1', 'none'
+SetProperty v9, '__proto__', v8
+v10 <- LoadInteger '1'
+SetProperty v9, 'z', v10
+v11 <- DeleteProperty v9, 'z'
+BeginForLoopInitializer
+    v12 <- LoadInteger '0'
+BeginForLoopCondition -> v13
+    v14 <- LoadInteger '10'
+    v15 <- Compare v13, '<', v14
+BeginForLoopAfterthought v15 -> v16
+    v17 <- UnaryOperation v16, '++'
+BeginForLoopBody -> v18
+    v19 <- CreateNamedVariable 'gc', 'none'
+    v20 <- CallFunction v19, []
+EndForLoop
+v21 <- BeginPlainFunction -> 
+    v22 <- GetProperty v8, 'x'
+EndPlainFunction
+v23 <- BeginPlainFunction -> 
+    v24 <- GetProperty v9, 'x'
+    Return v24
+EndPlainFunction
+BeginForLoopInitializer
+    v25 <- LoadInteger '0'
+BeginForLoopCondition -> v26
+    v27 <- LoadInteger '10'
+    v28 <- Compare v26, '<', v27
+BeginForLoopAfterthought v28 -> v29
+    v30 <- UnaryOperation v29, '++'
+BeginForLoopBody -> v31
+    v32 <- CallFunction v21, []
+EndForLoop
+BeginForLoopInitializer
+    v33 <- LoadInteger '0'
+BeginForLoopCondition -> v34
+    v35 <- LoadInteger '10'
+    v36 <- Compare v34, '<', v35
+BeginForLoopAfterthought v36 -> v37
+    v38 <- UnaryOperation v37, '++'
+BeginForLoopBody -> v39
+    v40 <- CallFunction v23, []
+EndForLoop
+v41 <- LoadInteger '1'
+v42 <- CallFunction v23, []
+v43 <- LoadInteger '2'
+SetProperty v8, 'x', v43
+v44 <- LoadInteger '2'
+v45 <- CallFunction v23, []
+
+
+p1 = {};
+p2 = {};
+p3 = { x: 1 };
+p2.__proto__ = p3;
+p1.__proto__ = p2;
+p1.z = 1;
+delete p1.z;
+for (let i13 = 0; i13 < 10; i13++) {
+    gc();
+}
+function f2() {
+    p2.x;
+}
+function f1() {
+    return p1.x;
+}
+for (let i26 = 0; i26 < 10; i26++) {
+    f2();
+}
+for (let i34 = 0; i34 < 10; i34++) {
+    f1();
+}
+f1();
+p2.x = 2;
+f1();
+
+FuzzIL program written to corpus/regress-2593.fzil

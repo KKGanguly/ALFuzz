@@ -1,0 +1,59 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '100'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- BeginPlainFunction -> v6
+        v7 <- LoadInteger '0'
+        v8 <- Compare v6, '==', v7
+        BeginIf v8
+            v9 <- LoadInteger '10'
+            Return v9
+        EndIf
+        v10 <- LoadInteger '1'
+        v11 <- LoadInteger '1'
+        v12 <- BinaryOperation v6, '-', v11
+        v13 <- CallFunction v4, [v12]
+        v14 <- BinaryOperation v10, '+', v13
+        Return v14
+    EndPlainFunction
+    Return v5
+EndPlainFunction
+v15 <- CallFunction v3, [v0]
+v16 <- CreateNamedVariable 'f1', 'var', v15
+v17 <- CallFunction v3, [v16]
+v18 <- CreateNamedVariable 'f2', 'var', v17
+v19 <- LoadInteger '11'
+v20 <- LoadInteger '1'
+v21 <- CallFunction v18, [v20]
+v22 <- LoadInteger '10'
+v23 <- LoadInteger '0'
+v24 <- CallFunction v16, [v23]
+v25 <- LoadInteger '102'
+v26 <- LoadInteger '2'
+v27 <- CallFunction v18, [v26]
+v28 <- LoadInteger '102'
+v29 <- LoadInteger '2'
+v30 <- CallFunction v18, [v29]
+
+
+function worker1(a1) {
+    return 100;
+}
+function factory(a4) {
+    function f5(a6) {
+        if (a6 == 0) {
+            return 10;
+        }
+        return 1 + a4(a6 - 1);
+    }
+    return f5;
+}
+var f1 = factory(worker1);
+var f2 = factory(f1);
+f2(1);
+f1(0);
+f2(2);
+f2(2);
+
+FuzzIL program written to corpus/regress-crbug-147475.fzil

@@ -1,0 +1,27 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '3'
+v3 <- CreateArray [v0, v1, v2]
+BeginForInLoop v3 -> v4
+    v5 <- BeginPlainFunction -> 
+    EndPlainFunction
+EndForInLoop
+BeginForLoopInitializer
+    v6 <- LoadInteger '0'
+BeginForLoopCondition -> v7
+    v8 <- LoadInteger '1000000'
+    v9 <- Compare v7, '<', v8
+BeginForLoopAfterthought v9 -> v10
+    v11 <- UnaryOperation v10, '++'
+BeginForLoopBody -> v12
+EndForLoop
+
+
+for (const v4 in [1,2,3]) {
+    function f() {
+    }
+}
+for (let i7 = 0; i7 < 1000000; i7++) {
+}
+
+FuzzIL program written to corpus/regress-4255-3.fzil

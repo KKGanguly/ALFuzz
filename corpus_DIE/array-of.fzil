@@ -1,0 +1,541 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- CallMethod v2, 'getPrototypeOf', [v1]
+    v4 <- CreateNamedVariable 'Array', 'none'
+    v5 <- GetProperty v4, 'prototype'
+    v6 <- CallMethod v4, 'isArray', [v1]
+    v7 <- LoadBoolean 'true'
+    v8 <- LoadInteger '9'
+    SetElement v1, '9', v8
+    v9 <- GetProperty v1, 'length'
+    v10 <- LoadInteger '10'
+EndPlainFunction
+v11 <- CreateNamedVariable 'Array', 'none'
+v12 <- CallMethod v11, 'of', []
+v13 <- CallFunction v0, [v12]
+v14 <- LoadInteger '0'
+v15 <- CallMethod v11, 'of', [v14]
+v16 <- CallFunction v0, [v15]
+v17 <- LoadInteger '0'
+v18 <- LoadInteger '1'
+v19 <- LoadInteger '2'
+v20 <- CallMethod v11, 'of', [v17, v18, v19]
+v21 <- CallFunction v0, [v20]
+v22 <- GetProperty v11, 'of'
+v23 <- CreateNamedVariable 'f', 'var', v22
+v24 <- CallFunction v23, []
+v25 <- CallFunction v0, [v24]
+v26 <- CallMethod v11, 'of', []
+v27 <- CreateNamedVariable 'a', 'var', v26
+v28 <- GetProperty v27, 'length'
+v29 <- LoadInteger '0'
+v30 <- LoadUndefined
+v31 <- LoadNull
+v32 <- LoadFloat '3.14'
+v33 <- CreateArray []
+v34 <- CallMethod v11, 'of', [v30, v31, v32, v33]
+Reassign v27, v34
+v35 <- LoadUndefined
+v36 <- LoadNull
+v37 <- LoadFloat '3.14'
+v38 <- CreateArray []
+v39 <- CreateArray [v35, v36, v37, v38]
+v40 <- CreateArray []
+Reassign v27, v40
+BeginForLoopInitializer
+    v41 <- LoadInteger '0'
+BeginForLoopCondition -> v42
+    v43 <- LoadInteger '1000'
+    v44 <- Compare v42, '<', v43
+BeginForLoopAfterthought v44 -> v45
+    v46 <- UnaryOperation v45, '++'
+BeginForLoopBody -> v47
+    SetComputedProperty v27, v47, v47
+EndForLoop
+v48 <- LoadNull
+v49 <- GetProperty v11, 'of'
+v50 <- CallMethod v49, 'apply', [v48, v27]
+v51 <- LoadUndefined
+v52 <- CallMethod v11, 'of', [v51]
+v53 <- LoadUndefined
+v54 <- CreateArray [v53]
+v55 <- LoadUndefined
+v56 <- LoadUndefined
+v57 <- CallMethod v11, 'of', [v55, v56]
+v58 <- LoadUndefined
+v59 <- LoadUndefined
+v60 <- CreateArray [v58, v59]
+v61 <- LoadNull
+v62 <- LoadUndefined
+v63 <- LoadUndefined
+v64 <- CreateArray [v62, v62, v63]
+v65 <- GetProperty v11, 'of'
+v66 <- CallMethod v65, 'apply', [v61, v64]
+v67 <- LoadUndefined
+v68 <- LoadUndefined
+v69 <- LoadUndefined
+v70 <- CreateArray [v67, v68, v69]
+v71 <- LoadNull
+v72 <- LoadInteger '4'
+v73 <- CallFunction v11, [v72]
+v74 <- GetProperty v11, 'of'
+v75 <- CallMethod v74, 'apply', [v71, v73]
+v76 <- LoadUndefined
+v77 <- LoadUndefined
+v78 <- LoadUndefined
+v79 <- LoadUndefined
+v80 <- CreateArray [v76, v77, v78, v79]
+v81 <- LoadInteger '0'
+v82 <- CreateNamedVariable 'hits', 'var', v81
+v83 <- BeginPlainFunction -> 
+    v84 <- UnaryOperation v82, '++'
+EndPlainFunction
+v85 <- GetProperty v11, 'of'
+SetProperty v83, 'of', v85
+v86 <- LoadInteger '0'
+Reassign v82, v86
+v87 <- LoadString 'zero'
+v88 <- LoadString 'one'
+v89 <- CallMethod v83, 'of', [v87, v88]
+v90 <- CreateNamedVariable 'actual', 'var', v89
+v91 <- LoadInteger '1'
+v92 <- LoadInteger '0'
+Reassign v82, v92
+v93 <- Construct v83, []
+v94 <- CreateNamedVariable 'expected', 'var', v93
+v95 <- LoadString 'zero'
+SetElement v94, '0', v95
+v96 <- LoadString 'one'
+SetElement v94, '1', v96
+v97 <- LoadInteger '2'
+SetProperty v94, 'length', v97
+v98 <- CreateNamedVariable 'areSame', 'none'
+v99 <- CallFunction v98, [v90, v94]
+v100 <- LoadBoolean 'true'
+v101 <- LoadInteger '0'
+Reassign v82, v101
+v102 <- LoadString 'zero'
+v103 <- LoadString 'one'
+v104 <- GetProperty v11, 'of'
+v105 <- CallMethod v104, 'call', [v83, v102, v103]
+Reassign v90, v105
+v106 <- LoadInteger '1'
+v107 <- CallFunction v98, [v90, v94]
+v108 <- LoadBoolean 'true'
+v109 <- BeginPlainFunction -> v110, v111
+    v112 <- GetProperty v110, 'length'
+    v113 <- GetProperty v111, 'length'
+    v114 <- Compare v112, '==', v113
+    v115 <- CreateNamedVariable 'result', 'var', v114
+    BeginForLoopInitializer
+        v116 <- LoadInteger '0'
+    BeginForLoopCondition -> v117
+        v118 <- GetProperty v110, 'length'
+        v119 <- Compare v117, '<', v118
+    BeginForLoopAfterthought v119 -> v120
+        v121 <- UnaryOperation v120, '++'
+    BeginForLoopBody -> v122
+        v123 <- GetComputedProperty v110, v122
+        v124 <- GetComputedProperty v111, v122
+        v125 <- Compare v123, '==', v124
+        v126 <- BinaryOperation v115, '&&', v125
+        Reassign v115, v126
+    EndForLoop
+    Return v115
+EndPlainFunction
+v127 <- LoadString 'pass'
+v128 <- CreateNamedVariable 'status', 'var', v127
+v129 <- GetProperty v11, 'prototype'
+v130 <- LoadString '0'
+v131 <- BeginPlainFunction -> v132
+    v133 <- LoadString 'FAIL 1'
+    Reassign v128, v133
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v131
+v134 <- EndObjectLiteral
+v135 <- CreateNamedVariable 'Object', 'none'
+v136 <- CallMethod v135, 'defineProperty', [v129, v130, v134]
+v137 <- LoadInteger '1'
+v138 <- CallMethod v11, 'of', [v137]
+v139 <- GetElement v138, '0'
+v140 <- LoadInteger '1'
+v141 <- LoadString 'pass'
+v142 <- GetProperty v83, 'prototype'
+v143 <- LoadString '0'
+v144 <- BeginPlainFunction -> v145
+    v146 <- LoadString 'FAIL 2'
+    Reassign v128, v146
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v144
+v147 <- EndObjectLiteral
+v148 <- CallMethod v135, 'defineProperty', [v142, v143, v147]
+v149 <- LoadInteger '1'
+v150 <- CallMethod v83, 'of', [v149]
+v151 <- GetElement v150, '0'
+v152 <- LoadInteger '1'
+v153 <- LoadString 'pass'
+v154 <- LoadInteger '0'
+v155 <- CreateNamedVariable 'hits', 'var', v154
+v156 <- BeginPlainFunction -> v157
+    v158 <- LoadArguments
+    v159 <- GetProperty v158, 'length'
+    v160 <- LoadInteger '1'
+    v161 <- LoadInteger '5'
+    v162 <- UnaryOperation v155, '++'
+EndPlainFunction
+v163 <- GetProperty v11, 'of'
+SetProperty v156, 'of', v163
+v164 <- LoadString 'sheep'
+v165 <- LoadString 'cattle'
+v166 <- LoadString 'elephants'
+v167 <- LoadString 'whales'
+v168 <- LoadString 'seals'
+v169 <- CallMethod v156, 'of', [v164, v165, v166, v167, v168]
+v170 <- LoadInteger '1'
+v171 <- LoadInteger '0'
+v172 <- CreateNamedVariable 'hits', 'var', v171
+v173 <- LoadNull
+v174 <- CreateNamedVariable 'lastObj', 'var', v173
+v175 <- LoadUndefined
+v176 <- CreateNamedVariable 'lastVal', 'var', v175
+v177 <- BeginPlainFunction -> v178
+    v179 <- UnaryOperation v172, '++'
+    v180 <- LoadThis
+    Reassign v174, v180
+    Reassign v176, v178
+EndPlainFunction
+v181 <- BeginPlainFunction -> 
+    v182 <- LoadThis
+    v183 <- LoadString 'length'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `set`, v177
+    v184 <- EndObjectLiteral
+    v185 <- CallMethod v135, 'defineProperty', [v182, v183, v184]
+EndPlainFunction
+v186 <- GetProperty v11, 'of'
+SetProperty v181, 'of', v186
+v187 <- LoadString 'wolves'
+v188 <- LoadString 'cards'
+v189 <- LoadString 'cigarettes'
+v190 <- LoadString 'lies'
+v191 <- CallMethod v181, 'of', [v187, v188, v189, v190]
+v192 <- CreateNamedVariable 'pack', 'var', v191
+v193 <- LoadInteger '4'
+v194 <- BeginPlainFunction -> 
+EndPlainFunction
+v195 <- GetProperty v194, 'prototype'
+v196 <- LoadString 'length'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v177
+v197 <- EndObjectLiteral
+v198 <- CallMethod v135, 'defineProperty', [v195, v196, v197]
+v199 <- GetProperty v11, 'of'
+SetProperty v194, 'of', v199
+v200 <- LoadString 'quail'
+v201 <- CallMethod v194, 'of', [v200]
+v202 <- CreateNamedVariable 'bevy', 'var', v201
+v203 <- LoadInteger '1'
+v204 <- BeginPlainFunction -> 
+EndPlainFunction
+v205 <- GetProperty v11, 'of'
+SetProperty v204, 'of', v205
+v206 <- GetProperty v204, 'prototype'
+v207 <- LoadString 'length'
+v208 <- BeginPlainFunction -> 
+    v209 <- LoadInteger '0'
+    Return v209
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v208
+v210 <- EndObjectLiteral
+v211 <- CallMethod v135, 'defineProperty', [v206, v207, v210]
+v212 <- Construct v204, []
+v213 <- CreateNamedVariable 'nothing', 'var', v212
+v214 <- LoadInteger '2'
+SetProperty v213, 'length', v214
+v215 <- BeginPlainFunction -> 
+    v216 <- CallMethod v204, 'of', []
+EndPlainFunction
+v217 <- CallFunction v215, []
+v218 <- CreateNamedVariable 'TypeError', 'none'
+v219 <- LoadString 'of'
+v220 <- CallMethod v135, 'getOwnPropertyDescriptor', [v11, v219]
+v221 <- CreateNamedVariable 'desc', 'var', v220
+v222 <- GetProperty v221, 'configurable'
+v223 <- LoadBoolean 'true'
+v224 <- GetProperty v221, 'enumerable'
+v225 <- LoadBoolean 'false'
+v226 <- GetProperty v221, 'writable'
+v227 <- LoadBoolean 'true'
+v228 <- GetProperty v11, 'of'
+v229 <- GetProperty v228, 'length'
+v230 <- LoadInteger '0'
+v231 <- BeginPlainFunction -> 
+    v232 <- GetProperty v11, 'of'
+    v233 <- Construct v232, []
+EndPlainFunction
+v234 <- CallFunction v231, []
+v235 <- BeginPlainFunction -> v236
+    v237 <- GetProperty v11, 'of'
+    v238 <- CallMethod v237, 'call', [v236, v236]
+    v239 <- CallMethod v11, 'isArray', [v238]
+    v240 <- LoadBoolean 'true'
+EndPlainFunction
+v241 <- LoadUndefined
+v242 <- LoadNull
+v243 <- LoadBoolean 'false'
+v244 <- LoadString 'cow'
+v245 <- CreateNamedVariable 'NaN', 'none'
+v246 <- LoadInteger '67'
+v247 <- CreateNamedVariable 'Infinity', 'none'
+v248 <- UnaryOperation '-', v247
+v249 <- CreateNamedVariable 'Math', 'none'
+v250 <- GetProperty v249, 'cos'
+v251 <- GetProperty v249, 'cos'
+v252 <- CallMethod v251, 'bind', [v249]
+v253 <- CreateArray [v241, v242, v243, v244, v245, v246, v247, v248, v250, v252]
+v254 <- CallMethod v253, 'forEach', [v235]
+v255 <- BeginPlainFunction -> 
+    v256 <- LoadNull
+    v257 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v258 <- CallMethod v257, 'bind', [v256]
+    v259 <- CreateNamedVariable 'boundFn', 'var', v258
+    v260 <- LoadInteger '1'
+    v261 <- LoadInteger '2'
+    v262 <- LoadInteger '3'
+    v263 <- GetProperty v11, 'of'
+    v264 <- CallMethod v263, 'call', [v259, v260, v261, v262]
+    v265 <- CreateNamedVariable 'instance', 'var', v264
+    v266 <- GetProperty v265, 'length'
+    v267 <- LoadInteger '3'
+    v268 <- TestInstanceOf v265, v259
+    v269 <- LoadBoolean 'true'
+    v270 <- CallMethod v11, 'isArray', [v265]
+    v271 <- LoadBoolean 'false'
+EndPlainFunction
+v272 <- CallFunction v255, []
+v273 <- BeginPlainFunction -> 
+    v274 <- LoadInteger '0'
+    v275 <- CreateNamedVariable 'setterCalled', 'var', v274
+    v276 <- BeginPlainFunction -> 
+        v277 <- LoadThis
+        v278 <- LoadString '0'
+        v279 <- BeginPlainFunction -> 
+            v280 <- LoadInteger '2'
+            Return v280
+        EndPlainFunction
+        v281 <- BeginPlainFunction -> 
+            v282 <- UnaryOperation v275, '++'
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `get`, v279
+            ObjectLiteralAddProperty `set`, v281
+        v283 <- EndObjectLiteral
+        v284 <- CallMethod v135, 'defineProperty', [v277, v278, v283]
+    EndPlainFunction
+    v285 <- BeginPlainFunction -> 
+        v286 <- LoadInteger '1'
+        v287 <- GetProperty v11, 'of'
+        v288 <- CallMethod v287, 'call', [v276, v286]
+    EndPlainFunction
+    v289 <- CallFunction v285, []
+    v290 <- LoadInteger '0'
+    v291 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v292 <- LoadInteger '2'
+    v293 <- GetProperty v11, 'of'
+    v294 <- CallMethod v293, 'call', [v291, v292]
+    v295 <- CreateNamedVariable 'x', 'var', v294
+    v296 <- LoadString 'length'
+    v297 <- CallMethod v135, 'getOwnPropertyDescriptor', [v295, v296]
+    v298 <- CreateNamedVariable 'xlength', 'var', v297
+    v299 <- LoadInteger '1'
+    v300 <- GetProperty v298, 'value'
+    v301 <- LoadBoolean 'true'
+    v302 <- GetProperty v298, 'writable'
+    v303 <- LoadBoolean 'true'
+    v304 <- GetProperty v298, 'enumerable'
+    v305 <- LoadBoolean 'true'
+    v306 <- GetProperty v298, 'configurable'
+    v307 <- LoadInteger '0'
+    v308 <- CallMethod v135, 'getOwnPropertyDescriptor', [v295, v307]
+    v309 <- CreateNamedVariable 'x0', 'var', v308
+    v310 <- LoadInteger '2'
+    v311 <- GetProperty v309, 'value'
+    v312 <- LoadBoolean 'true'
+    v313 <- GetProperty v298, 'writable'
+    v314 <- LoadBoolean 'true'
+    v315 <- GetProperty v298, 'enumerable'
+    v316 <- LoadBoolean 'true'
+    v317 <- GetProperty v298, 'configurable'
+EndPlainFunction
+v318 <- CallFunction v273, []
+
+
+function check(a1) {
+    Object.getPrototypeOf(a1);
+    Array.prototype;
+    Array.isArray(a1);
+    a1[9] = 9;
+    a1.length;
+}
+check(Array.of());
+check(Array.of(0));
+check(Array.of(0, 1, 2));
+var f = Array.of;
+check(f());
+var a = Array.of();
+a.length;
+a = Array.of(undefined, null, 3.14, []);
+[,null,3.14,[]];
+a = [];
+for (let i42 = 0; i42 < 1000; i42++) {
+    a[i42] = i42;
+}
+Array.of.apply(null, a);
+Array.of(undefined);
+[,];
+Array.of(undefined, undefined);
+[,,];
+const v64 = [,,,];
+Array.of.apply(null, v64);
+[,,,];
+const v73 = Array(4);
+Array.of.apply(null, v73);
+[,,,,];
+var hits = 0;
+function Bag() {
+    hits++;
+}
+Bag.of = Array.of;
+hits = 0;
+var actual = Bag.of("zero", "one");
+hits = 0;
+const v93 = new Bag();
+var expected = v93;
+expected[0] = "zero";
+expected[1] = "one";
+expected.length = 2;
+areSame(actual, expected);
+hits = 0;
+areSame(actual = Array.of.call(Bag, "zero", "one"), expected);
+function areSame(a110, a111) {
+    var result = a110.length == a111.length;
+    for (let i117 = 0; i117 < a110.length; i117++) {
+        result = result && (a110[i117] == a111[i117]);
+    }
+    return result;
+}
+var status = "pass";
+const v129 = Array.prototype;
+function f131(a132) {
+    status = "FAIL 1";
+}
+Object.defineProperty(v129, "0", { set: f131 });
+Array.of(1)[0];
+const v142 = Bag.prototype;
+function f144(a145) {
+    status = "FAIL 2";
+}
+Object.defineProperty(v142, "0", { set: f144 });
+Bag.of(1)[0];
+var hits = 0;
+function Herd(a157) {
+    arguments.length;
+    hits++;
+}
+Herd.of = Array.of;
+Herd.of("sheep", "cattle", "elephants", "whales", "seals");
+var hits = 0;
+var lastObj = null;
+var lastVal;
+function setter(a178) {
+    hits++;
+    lastObj = this;
+    lastVal = a178;
+}
+function Pack() {
+    Object.defineProperty(this, "length", { set: setter });
+}
+Pack.of = Array.of;
+var pack = Pack.of("wolves", "cards", "cigarettes", "lies");
+function Bevy() {
+}
+const v195 = Bevy.prototype;
+Object.defineProperty(v195, "length", { set: setter });
+Bevy.of = Array.of;
+var bevy = Bevy.of("quail");
+function Empty() {
+}
+Empty.of = Array.of;
+const v206 = Empty.prototype;
+function f208() {
+    return 0;
+}
+Object.defineProperty(v206, "length", { get: f208 });
+const v212 = new Empty();
+var nothing = v212;
+nothing.length = 2;
+function f215() {
+    Empty.of();
+}
+f215();
+var desc = Object.getOwnPropertyDescriptor(Array, "of");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+Array.of.length;
+function f231() {
+    const t114 = Array.of;
+    new t114();
+}
+f231();
+function f235(a236) {
+    Array.isArray(Array.of.call(a236, a236));
+}
+([,null,false,"cow",NaN,67,Infinity,-Infinity,Math.cos,Math.cos.bind(Math)]).forEach(f235);
+function testBoundConstructor() {
+    function f257() {
+    }
+    var boundFn = f257.bind(null);
+    var instance = Array.of.call(boundFn, 1, 2, 3);
+    instance.length;
+    instance instanceof boundFn;
+    Array.isArray(instance);
+}
+testBoundConstructor();
+function testDefinesOwnProperty() {
+    var setterCalled = 0;
+    function exotic() {
+        function f279() {
+            return 2;
+        }
+        function f281() {
+            setterCalled++;
+        }
+        Object.defineProperty(this, "0", { get: f279, set: f281 });
+    }
+    function f285() {
+        Array.of.call(exotic, 1);
+    }
+    f285();
+    function ordinary() {
+    }
+    var x = Array.of.call(ordinary, 2);
+    var xlength = Object.getOwnPropertyDescriptor(x, "length");
+    xlength.value;
+    xlength.writable;
+    xlength.enumerable;
+    xlength.configurable;
+    var x0 = Object.getOwnPropertyDescriptor(x, 0);
+    x0.value;
+    xlength.writable;
+    xlength.enumerable;
+    xlength.configurable;
+}
+testDefinesOwnProperty();
+
+FuzzIL program written to corpus/array-of.fzil

@@ -1,0 +1,141 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'ordering', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateArray []
+    Reassign v1, v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5, v6
+    v7 <- GetProperty v5, 'length'
+    v8 <- GetProperty v6, 'length'
+    BeginForLoopInitializer
+        v9 <- LoadInteger '0'
+    BeginForLoopCondition -> v10
+        v11 <- GetProperty v5, 'length'
+        v12 <- Compare v10, '<', v11
+    BeginForLoopAfterthought v12 -> v13
+        v14 <- UnaryOperation v13, '++'
+    BeginForLoopBody -> v15
+        v16 <- GetComputedProperty v5, v15
+        v17 <- GetComputedProperty v6, v15
+    EndForLoop
+EndPlainFunction
+v18 <- BeginPlainFunction -> v19
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21, v22
+    v23 <- LoadUndefined
+    v24 <- CreateNamedVariable 'r', 'var', v23
+    v25 <- LoadInteger '1'
+    v26 <- CreateNamedVariable 't', 'var', v25
+    v27 <- CreateNamedVariable 'Promise', 'none'
+    v28 <- BeginPlainFunction -> v29
+        Reassign v24, v29
+        BeginIf v22
+            v30 <- CallFunction v22, []
+        EndIf
+    EndPlainFunction
+    v31 <- Construct v27, [v28]
+    v32 <- CreateNamedVariable 'promise', 'var', v31
+    v33 <- BeginPlainFunction -> v34
+        v35 <- LoadString 'p'
+        v36 <- BinaryOperation v35, '+', v21
+        v37 <- CallMethod v1, 'push', [v36]
+        Return v34
+    EndPlainFunction
+    v38 <- CallMethod v32, 'then', [v33]
+    v39 <- CreateNamedVariable 'next', 'var', v38
+    v40 <- BeginPlainFunction -> v41
+        v42 <- BeginPlainFunction -> v43
+            v44 <- LoadString 'p'
+            v45 <- BinaryOperation v44, '+', v21
+            v46 <- LoadString ':'
+            v47 <- BinaryOperation v45, '+', v46
+            v48 <- UnaryOperation v26, '++'
+            v49 <- BinaryOperation v47, '+', v48
+            v50 <- CallMethod v1, 'push', [v49]
+            v51 <- CallFunction v41, [v43]
+            v52 <- TernaryOperation v41, v51, v43
+            Return v52
+        EndPlainFunction
+        v53 <- CallMethod v39, 'then', [v42]
+        Reassign v39, v53
+        v54 <- LoadThis
+        Return v54
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `resolve`, v24
+        ObjectLiteralAddProperty `then`, v40
+    v55 <- EndObjectLiteral
+    Return v55
+EndPlainFunction
+v56 <- BeginPlainFunction -> 
+    v57 <- CallFunction v2, []
+    v58 <- LoadInteger '1'
+    v59 <- CallFunction v20, [v58]
+    v60 <- CallMethod v59, 'then', []
+    v61 <- CreateNamedVariable 'p1', 'var', v60
+    v62 <- LoadInteger '2'
+    v63 <- CallFunction v20, [v62]
+    v64 <- CallMethod v63, 'then', []
+    v65 <- CreateNamedVariable 'p2', 'var', v64
+    v66 <- CallMethod v61, 'resolve', []
+    v67 <- CallMethod v65, 'resolve', []
+    v68 <- LoadString 'p1'
+    v69 <- LoadString 'p2'
+    v70 <- LoadString 'p1:1'
+    v71 <- LoadString 'p2:1'
+    v72 <- CreateArray [v68, v69, v70, v71]
+EndPlainFunction
+v73 <- CallFunction v56, []
+
+
+var ordering = [];
+function reset() {
+    ordering = [];
+}
+function assertArrayValues(a5, a6) {
+    a5.length;
+    a6.length;
+    for (let i10 = 0; i10 < a5.length; i10++) {
+        a5[i10];
+        a6[i10];
+    }
+}
+function assertOrdering(a19) {
+}
+function newPromise(a21, a22) {
+    var r;
+    var t = 1;
+    function f28(a29) {
+        r = a29;
+        if (a22) {
+            a22();
+        }
+    }
+    const v31 = new Promise(f28);
+    var promise = v31;
+    function f33(a34) {
+        ordering.push("p" + a21);
+        return a34;
+    }
+    var next = promise.then(f33);
+    function f40(a41) {
+        function f42(a43) {
+            ordering.push((("p" + a21) + ":") + t++);
+            return a41 ? a41(a43) : a43;
+        }
+        next = next.then(f42);
+        return this;
+    }
+    return { resolve: r, then: f40 };
+}
+function PromiseThens() {
+    reset();
+    var p1 = newPromise(1).then();
+    var p2 = newPromise(2).then();
+    p1.resolve();
+    p2.resolve();
+    ["p1","p2","p1:1","p2:1"];
+}
+PromiseThens();
+
+FuzzIL program written to corpus/microtask-delivery.fzil

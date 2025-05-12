@@ -1,0 +1,26 @@
+v0 <- BeginGeneratorFunction -> v1
+    v2 <- LoadString 'x'
+    v3 <- TestIn v2, v1
+    v4 <- Yield v3
+EndGeneratorFunction
+v5 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v5
+v6 <- EndObjectLiteral
+v7 <- CallFunction v0, [v6]
+v8 <- CallMethod v7, 'next', []
+v9 <- GetProperty v8, 'value'
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CallFunction v0, [v10]
+v12 <- CallMethod v11, 'next', []
+v13 <- GetProperty v12, 'value'
+
+
+function* g(a1) {
+    yield "x" in a1;
+}
+g({ x: 1 }).next().value;
+g({}).next().value;
+
+FuzzIL program written to corpus/regress-4945.fzil

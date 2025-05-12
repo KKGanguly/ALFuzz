@@ -1,0 +1,37 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1779'
+    v3 <- BinaryOperation v1, '/', v2
+    v4 <- CreateNamedVariable 'Math', 'none'
+    v5 <- GetProperty v4, 'PI'
+    v6 <- BinaryOperation v3, '*', v5
+    v7 <- CallMethod v4, 'sin', [v6]
+    v8 <- LoadInteger '0'
+    v9 <- LoadInteger '0'
+    v10 <- CallMethod v4, 'sin', [v9]
+EndPlainFunction
+BeginForLoopInitializer
+    v11 <- LoadInteger '0'
+    v12 <- CreateNamedVariable 'i', 'none'
+    Reassign v12, v11
+BeginForLoopCondition
+    v13 <- CreateNamedVariable 'i', 'none'
+    v14 <- LoadInteger '10000'
+    v15 <- Compare v13, '<', v14
+BeginForLoopAfterthought v15
+    v16 <- CreateNamedVariable 'i', 'none'
+    v17 <- UnaryOperation '++', v16
+BeginForLoopBody
+    v18 <- CreateNamedVariable 'i', 'none'
+    v19 <- CallFunction v0, [v18]
+EndForLoop
+
+
+function test(a1) {
+    Math.sin((a1 / 1779) * Math.PI);
+    Math.sin(0);
+}
+for (i = 0; i < 10000; ++i) {
+    test(i);
+}
+
+FuzzIL program written to corpus/regress-2234.fzil

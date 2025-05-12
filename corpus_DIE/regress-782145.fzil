@@ -1,0 +1,68 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'RegExp', 'none'
+    v2 <- LoadString '.'
+    v3 <- Construct v1, [v2]
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadInteger '42'
+    SetProperty v5, 'exec', v6
+EndPlainFunction
+v7 <- CallFunction v0, []
+v8 <- CreateNamedVariable 're', 'let', v7
+v9 <- BeginArrowFunction -> 
+    v10 <- CallFunction v4, [v8]
+    Return v10
+EndArrowFunction
+v11 <- CreateNamedVariable 'Symbol', 'none'
+v12 <- GetProperty v11, 'toPrimitive'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v12, v9
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'evil_nonstring', 'const', v13
+v15 <- LoadString ''
+v16 <- CreateNamedVariable 'empty_string', 'const', v15
+v17 <- CreateNamedVariable 'String', 'none'
+v18 <- GetProperty v17, 'prototype'
+v19 <- GetProperty v18, 'replace'
+v20 <- CallMethod v19, 'call', [v14, v8, v16]
+v21 <- CallFunction v0, []
+Reassign v8, v21
+v22 <- GetProperty v17, 'prototype'
+v23 <- GetProperty v22, 'match'
+v24 <- CallMethod v23, 'call', [v14, v8, v16]
+v25 <- CallFunction v0, []
+Reassign v8, v25
+v26 <- GetProperty v17, 'prototype'
+v27 <- GetProperty v26, 'search'
+v28 <- CallMethod v27, 'call', [v14, v8, v16]
+v29 <- CallFunction v0, []
+Reassign v8, v29
+v30 <- GetProperty v17, 'prototype'
+v31 <- GetProperty v30, 'split'
+v32 <- CallMethod v31, 'call', [v14, v8, v16]
+
+
+function newFastRegExp() {
+    const v3 = new RegExp(".");
+    return v3;
+}
+function toSlowRegExp(a5) {
+    a5.exec = 42;
+}
+let re = newFastRegExp();
+const v9 = () => {
+    return toSlowRegExp(re);
+};
+const v12 = Symbol.toPrimitive;
+const evil_nonstring = { [v12]: v9 };
+const empty_string = "";
+String.prototype.replace.call(evil_nonstring, re, empty_string);
+re = newFastRegExp();
+String.prototype.match.call(evil_nonstring, re, empty_string);
+re = newFastRegExp();
+String.prototype.search.call(evil_nonstring, re, empty_string);
+re = newFastRegExp();
+String.prototype.split.call(evil_nonstring, re, empty_string);
+
+FuzzIL program written to corpus/regress-782145.fzil

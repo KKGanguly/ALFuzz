@@ -1,0 +1,31 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- Construct v0, []
+    v3 <- CreateNamedVariable 'o', 'var', v2
+    v4 <- LoadFloat '0.5'
+    SetProperty v3, 'x', v4
+    v5 <- GetProperty v3, 'x'
+    v6 <- LoadFloat '0.25'
+    v7 <- BinaryOperation v5, '+', v6
+    Return v7
+EndPlainFunction
+v8 <- CallFunction v1, []
+v9 <- CallFunction v1, []
+v10 <- LoadFloat '0.75'
+v11 <- CallFunction v1, []
+
+
+function C() {
+}
+function f() {
+    const v2 = new C();
+    var o = v2;
+    o.x = 0.5;
+    return o.x + 0.25;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/materialize-mutable-heap-number.fzil

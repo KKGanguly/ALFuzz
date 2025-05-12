@@ -1,0 +1,58 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadInteger '0'
+        Return v2
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `bar`, v1
+    v3 <- EndObjectLiteral
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- CallFunction v0, []
+    v6 <- CreateNamedVariable 'obj', 'var', v5
+    v7 <- LoadArguments
+    v8 <- GetProperty v7, 'length'
+    v9 <- CreateNamedVariable 'length', 'var', v8
+    v10 <- LoadInteger '0'
+    v11 <- Compare v9, '==', v10
+    BeginIf v11
+        v12 <- CallMethod v6, 'bar', []
+    BeginElse
+        v13 <- LoadArguments
+        v14 <- GetProperty v6, 'bar'
+        v15 <- CallMethod v14, 'apply', [v6, v13]
+    EndIf
+EndPlainFunction
+v16 <- CallFunction v4, []
+v17 <- CallFunction v4, []
+v18 <- CallFunction v4, []
+v19 <- CallFunction v4, []
+v20 <- LoadInteger '10'
+v21 <- CallFunction v4, [v20]
+v22 <- CallFunction v4, []
+
+
+function getobj() {
+    function f1() {
+        return 0;
+    }
+    return { bar: f1 };
+}
+function foo() {
+    var obj = getobj();
+    var length = arguments.length;
+    if (length == 0) {
+        obj.bar();
+    } else {
+        obj.bar.apply(obj, arguments);
+    }
+}
+foo();
+foo();
+foo();
+foo();
+foo(10);
+foo();
+
+FuzzIL program written to corpus/regress-3709.fzil

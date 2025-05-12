@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'v', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+        v4 <- CreateNamedVariable 'i', 'none'
+        Reassign v4, v3
+    BeginForLoopCondition
+        v5 <- CreateNamedVariable 'i', 'none'
+        v6 <- LoadInteger '1'
+        v7 <- Compare v5, '<', v6
+    BeginForLoopAfterthought v7
+        v8 <- CreateNamedVariable 'i', 'none'
+        v9 <- UnaryOperation v8, '++'
+    BeginForLoopBody
+        v10 <- LoadThis
+        v11 <- LoadArguments
+        v12 <- CallMethod v2, 'apply', [v10, v11]
+    EndForLoop
+EndPlainFunction
+v13 <- BeginPlainFunction -> 
+EndPlainFunction
+v14 <- CallFunction v0, [v13]
+v15 <- CallFunction v0, [v13]
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadString '----'
+    v18 <- CallFunction v0, [v17]
+EndPlainFunction
+v19 <- CallFunction v16, []
+v20 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function f(a1) {
+    var v = a1;
+    for (i = 0; i < 1; i++) {
+        v.apply(this, arguments);
+    }
+}
+function g() {
+}
+f(g);
+f(g);
+function f16() {
+    f("----");
+}
+f16();
+
+FuzzIL program written to corpus/regress-386034.fzil

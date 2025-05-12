@@ -1,0 +1,49 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- CreateNamedVariable 'x', 'let', v2
+    BeginBlockStatement
+        v4 <- LoadInteger '2'
+        v5 <- CreateNamedVariable 'x', 'let', v4
+        BeginBlockStatement
+            v6 <- LoadInteger '3'
+            v7 <- CreateNamedVariable 'x', 'let', v6
+            v8 <- LoadInteger '3'
+        EndBlockStatement
+        v9 <- LoadInteger '1'
+        v10 <- BinaryOperation v1, '+', v9
+        v11 <- LoadInteger '2'
+    EndBlockStatement
+    v12 <- LoadInteger '1'
+EndPlainFunction
+BeginForLoopInitializer
+    v13 <- LoadInteger '0'
+BeginForLoopCondition -> v14
+    v15 <- LoadInteger '10'
+    v16 <- Compare v14, '<', v15
+BeginForLoopAfterthought v16 -> v17
+    v18 <- UnaryOperation '++', v17
+BeginForLoopBody -> v19
+    v20 <- LoadInteger '12'
+    v21 <- CallFunction v0, [v20]
+EndForLoop
+BeginObjectLiteral
+v22 <- EndObjectLiteral
+v23 <- CallFunction v0, [v22]
+
+
+function f24(a1) {
+    let x = 1;
+    {
+        let x = 2;
+        {
+            let x = 3;
+        }
+        a1 + 1;
+    }
+}
+for (let i14 = 0; i14 < 10; ++i14) {
+    f24(12);
+}
+f24({});
+
+FuzzIL program written to corpus/regress-3741.fzil

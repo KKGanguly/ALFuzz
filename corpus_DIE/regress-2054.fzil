@@ -1,0 +1,27 @@
+v0 <- LoadInteger '100000'
+v1 <- CreateNamedVariable 'N', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- Compare v3, '<', v1
+BeginForLoopAfterthought v4 -> v5
+    v6 <- UnaryOperation v5, '++'
+BeginForLoopBody -> v7
+    v8 <- Compare v7, '>', v1
+    BeginIf v8
+        v9 <- CreateNamedVariable 'Error', 'none'
+        v10 <- Construct v9, []
+        ThrowException v10
+    EndIf
+EndForLoop
+
+
+var N = 100000;
+for (let i3 = 0; i3 < N; i3++) {
+    if (i3 > N) {
+        const v10 = new Error();
+        throw v10;
+    }
+}
+
+FuzzIL program written to corpus/regress-2054.fzil

@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    Return v1
+EndPlainFunction
+v2 <- CreateNamedVariable 'Ctor', 'var', v0
+v3 <- LoadString 'one'
+v4 <- LoadString 'two'
+v5 <- LoadString 'three'
+v6 <- CreateArray [v3, v4, v5]
+v7 <- CreateNamedVariable 'a', 'var', v6
+BeginObjectLiteral
+v8 <- EndObjectLiteral
+SetProperty v7, 'constructor', v8
+v9 <- GetProperty v7, 'constructor'
+v10 <- CreateNamedVariable 'Symbol', 'none'
+v11 <- GetProperty v10, 'species'
+SetComputedProperty v9, v11, v2
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadBoolean 'true'
+    Return v13
+EndPlainFunction
+v14 <- CallMethod v7, 'filter', [v12]
+
+
+function f0() {
+    return [];
+}
+var Ctor = f0;
+var a = ["one","two","three"];
+a.constructor = {};
+const t6 = a.constructor;
+t6[Symbol.species] = Ctor;
+function f12() {
+    return true;
+}
+a.filter(f12);
+
+FuzzIL program written to corpus/regress-crbug-920184.fzil

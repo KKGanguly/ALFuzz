@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '23'
+    v3 <- BinaryOperation v1, '+', v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- CallFunction v0, [v5]
+    v7 <- LoadInteger '42'
+    v8 <- BinaryOperation v6, '+', v7
+    Return v8
+EndPlainFunction
+v9 <- LoadInteger '23'
+v10 <- LoadInteger '0'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadInteger '24'
+v13 <- LoadInteger '1'
+v14 <- CallFunction v0, [v13]
+v15 <- LoadInteger '67'
+v16 <- LoadInteger '2'
+v17 <- CallFunction v4, [v16]
+v18 <- LoadInteger '68'
+v19 <- LoadInteger '3'
+v20 <- CallFunction v4, [v19]
+v21 <- LoadInteger '65'
+v22 <- LoadInteger '0'
+v23 <- CallFunction v4, [v22]
+v24 <- LoadInteger '23'
+v25 <- LoadInteger '0'
+v26 <- CallFunction v0, [v25]
+
+
+function f(a1) {
+    return a1 + 23;
+}
+function g(a5) {
+    return f(a5) + 42;
+}
+f(0);
+f(1);
+g(2);
+g(3);
+g(0);
+f(0);
+
+FuzzIL program written to corpus/regress-crbug-635923.fzil

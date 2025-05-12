@@ -1,0 +1,42 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'consCalled', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadBoolean 'true'
+    Reassign v1, v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadBoolean 'true'
+    Reassign v1, v5
+EndPlainFunction
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'x1', 'var', v6
+v8 <- LoadInteger '3'
+v9 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v8
+    ObjectLiteralAddProperty `b`, v9
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'x2', 'var', v10
+v12 <- CreateArray []
+v13 <- CreateNamedVariable 'x3', 'var', v12
+v14 <- LoadInteger '1'
+v15 <- LoadInteger '2'
+v16 <- LoadInteger '3'
+v17 <- CreateArray [v14, v15, v16]
+v18 <- CreateNamedVariable 'x4', 'var', v17
+
+
+var consCalled = false;
+function Object() {
+    consCalled = true;
+}
+function Array() {
+    consCalled = true;
+}
+var x1 = {};
+var x2 = { a: 3, b: 4 };
+var x3 = [];
+var x4 = [1,2,3];
+
+FuzzIL program written to corpus/obj-construct.fzil

@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'Error'
+    ThrowException v1
+    v2 <- LoadInteger '1'
+    v3 <- LoadInteger '5'
+    v4 <- Compare v2, '>', v3
+    Return v4
+EndPlainFunction
+BeginTry
+    v5 <- CallFunction v0, []
+BeginCatch -> v6
+EndTryCatch
+BeginTry
+    v7 <- CallFunction v0, []
+BeginCatch -> v8
+EndTryCatch
+BeginTry
+    v9 <- CallFunction v0, []
+BeginCatch -> v10
+EndTryCatch
+
+
+function foo() {
+    throw "Error";
+    return 1 > 5;
+}
+try {
+    foo();
+} catch(e6) {
+}
+try {
+    foo();
+} catch(e8) {
+}
+try {
+    foo();
+} catch(e10) {
+}
+
+FuzzIL program written to corpus/feedback-after-throw.fzil

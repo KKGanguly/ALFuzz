@@ -1,0 +1,66 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CallFunction v1, [v2]
+    v4 <- CreateNamedVariable 'Number', 'none'
+    v5 <- GetProperty v4, 'MIN_VALUE'
+    v6 <- CallFunction v1, [v5]
+    v7 <- GetProperty v4, 'MAX_VALUE'
+    v8 <- CallFunction v1, [v7]
+    v9 <- GetProperty v4, 'MIN_SAFE_INTEGER'
+    v10 <- LoadInteger '13'
+    v11 <- BinaryOperation v9, '-', v10
+    v12 <- CallFunction v1, [v11]
+    v13 <- GetProperty v4, 'MAX_SAFE_INTEGER'
+    v14 <- LoadInteger '23'
+    v15 <- BinaryOperation v13, '+', v14
+    v16 <- CallFunction v1, [v15]
+    v17 <- GetProperty v4, 'NaN'
+    v18 <- CallFunction v1, [v17]
+    v19 <- GetProperty v4, 'POSITIVE_INFINITY'
+    v20 <- CallFunction v1, [v19]
+    v21 <- GetProperty v4, 'NEGATIVE_INFINITY'
+    v22 <- CallFunction v1, [v21]
+    v23 <- GetProperty v4, 'EPSILON'
+    v24 <- CallFunction v1, [v23]
+    v25 <- LoadInteger '1'
+    v26 <- LoadInteger '0'
+    v27 <- BinaryOperation v25, '/', v26
+    v28 <- CallFunction v1, [v27]
+    v29 <- LoadInteger '1'
+    v30 <- UnaryOperation '-', v29
+    v31 <- LoadInteger '0'
+    v32 <- BinaryOperation v30, '/', v31
+    v33 <- CallFunction v1, [v32]
+EndPlainFunction
+v34 <- BeginPlainFunction -> v35
+    v36 <- UnaryOperation '+', v35
+    v37 <- CreateNamedVariable 'Number', 'none'
+    v38 <- CallMethod v37, 'isNaN', [v36]
+    Return v38
+EndPlainFunction
+v39 <- CallFunction v0, [v34]
+v40 <- CallFunction v0, [v34]
+v41 <- CallFunction v0, [v34]
+
+
+function test(a1) {
+    a1(0);
+    a1(Number.MIN_VALUE);
+    a1(Number.MAX_VALUE);
+    a1(Number.MIN_SAFE_INTEGER - 13);
+    a1(Number.MAX_SAFE_INTEGER + 23);
+    a1(Number.NaN);
+    a1(Number.POSITIVE_INFINITY);
+    a1(Number.NEGATIVE_INFINITY);
+    a1(Number.EPSILON);
+    a1(1 / 0);
+    a1(-1 / 0);
+}
+function f(a35) {
+    return Number.isNaN(+a35);
+}
+test(f);
+test(f);
+test(f);
+
+FuzzIL program written to corpus/number-isnan.fzil

@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadArguments
+    v3 <- CallFunction v1, []
+    v4 <- CallFunction v1, []
+    v5 <- BinaryOperation v3, '+', v4
+    Return v5
+EndPlainFunction
+v6 <- LoadString 'hesthest'
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadString 'hest'
+    Return v8
+EndPlainFunction
+v9 <- CallFunction v0, [v7]
+
+
+function f(a1) {
+    return a1() + a1();
+}
+function f7() {
+    return "hest";
+}
+f(f7);
+
+FuzzIL program written to corpus/regress-1060.fzil

@@ -1,0 +1,81 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'zero', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- BeginPlainFunction -> 
+        v4 <- LoadInteger '0'
+        v5 <- BinaryOperation v4, '/', v1
+        Return v5
+    EndPlainFunction
+    v6 <- CallFunction v3, []
+    v7 <- CreateNamedVariable 'isNaN', 'none'
+    v8 <- CallFunction v7, [v6]
+    v9 <- CallFunction v3, []
+    v10 <- CallFunction v7, [v9]
+    v11 <- CallFunction v3, []
+    v12 <- CallFunction v7, [v11]
+EndPlainFunction
+v13 <- CallFunction v2, []
+v14 <- BeginPlainFunction -> 
+    v15 <- BeginPlainFunction -> 
+        v16 <- LoadInteger '0'
+        v17 <- UnaryOperation '-', v16
+        v18 <- BinaryOperation v17, '/', v1
+        Return v18
+    EndPlainFunction
+    v19 <- CallFunction v15, []
+    v20 <- CreateNamedVariable 'isNaN', 'none'
+    v21 <- CallFunction v20, [v19]
+    v22 <- CallFunction v15, []
+    v23 <- CallFunction v20, [v22]
+    v24 <- CallFunction v15, []
+    v25 <- CallFunction v20, [v24]
+EndPlainFunction
+v26 <- CallFunction v14, []
+v27 <- BeginPlainFunction -> 
+    v28 <- BeginPlainFunction -> 
+        v29 <- CreateNamedVariable 'NaN', 'none'
+        v30 <- LoadInteger '0'
+        v31 <- BinaryOperation v29, '/', v30
+        Return v31
+    EndPlainFunction
+    v32 <- CallFunction v28, []
+    v33 <- CreateNamedVariable 'isNaN', 'none'
+    v34 <- CallFunction v33, [v32]
+    v35 <- CallFunction v28, []
+    v36 <- CallFunction v33, [v35]
+    v37 <- CallFunction v28, []
+    v38 <- CallFunction v33, [v37]
+EndPlainFunction
+v39 <- CallFunction v27, []
+
+
+var zero = 0;
+function ConstantFoldZeroDivZero() {
+    function f() {
+        return 0 / zero;
+    }
+    isNaN(f());
+    isNaN(f());
+    isNaN(f());
+}
+ConstantFoldZeroDivZero();
+function ConstantFoldMinusZeroDivZero() {
+    function f() {
+        return -0 / zero;
+    }
+    isNaN(f());
+    isNaN(f());
+    isNaN(f());
+}
+ConstantFoldMinusZeroDivZero();
+function ConstantFoldNaNDivZero() {
+    function f() {
+        return NaN / 0;
+    }
+    isNaN(f());
+    isNaN(f());
+    isNaN(f());
+}
+ConstantFoldNaNDivZero();
+
+FuzzIL program written to corpus/regress-crbug-662367.fzil

@@ -1,0 +1,634 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'test_id', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- CreateNamedVariable 'Function', 'none'
+    v6 <- LoadString 'input'
+    v7 <- LoadString '"'
+    v8 <- UnaryOperation v1, '++'
+    v9 <- BinaryOperation v7, '+', v8
+    v10 <- LoadString '";return Math.round(input)'
+    v11 <- BinaryOperation v9, '+', v10
+    v12 <- Construct v5, [v6, v11]
+    v13 <- CreateNamedVariable 'doRound', 'var', v12
+    v14 <- CallFunction v13, [v4]
+    v15 <- CallFunction v13, [v4]
+    v16 <- CallFunction v13, [v4]
+    v17 <- CallFunction v13, [v4]
+    v18 <- LoadString 'input'
+    v19 <- LoadString '"'
+    v20 <- UnaryOperation v1, '++'
+    v21 <- BinaryOperation v19, '+', v20
+    v22 <- LoadString '";return Math.round(input) + -0.0'
+    v23 <- BinaryOperation v21, '+', v22
+    v24 <- Construct v5, [v18, v23]
+    v25 <- CreateNamedVariable 'doRoundToDouble', 'var', v24
+    v26 <- CallFunction v25, [v4]
+    v27 <- CallFunction v25, [v4]
+    v28 <- CallFunction v25, [v4]
+    v29 <- CallFunction v25, [v4]
+EndPlainFunction
+v30 <- LoadInteger '0'
+v31 <- LoadInteger '0'
+v32 <- CallFunction v2, [v30, v31]
+v33 <- LoadInteger '0'
+v34 <- UnaryOperation '-', v33
+v35 <- LoadInteger '0'
+v36 <- UnaryOperation '-', v35
+v37 <- CallFunction v2, [v34, v36]
+v38 <- CreateNamedVariable 'Infinity', 'none'
+v39 <- CallFunction v2, [v38, v38]
+v40 <- UnaryOperation '-', v38
+v41 <- UnaryOperation '-', v38
+v42 <- CallFunction v2, [v40, v41]
+v43 <- CreateNamedVariable 'NaN', 'none'
+v44 <- CallFunction v2, [v43, v43]
+v45 <- BeginPlainFunction -> v46, v47
+    v48 <- CreateNamedVariable 'Math', 'none'
+    v49 <- CallMethod v48, 'round', [v47]
+    v50 <- CreateNamedVariable 'ret', 'var', v49
+    BeginWhileLoopHeader
+        v51 <- UnaryOperation '--', v46
+        v52 <- LoadInteger '0'
+        v53 <- Compare v51, '>', v52
+    BeginWhileLoopBody v53
+        v54 <- CallMethod v48, 'round', [v47]
+        Update v50, '+', v54
+    EndWhileLoop
+    Return v50
+EndPlainFunction
+v55 <- LoadInteger '0'
+v56 <- UnaryOperation '-', v55
+v57 <- LoadInteger '1'
+v58 <- LoadInteger '0'
+v59 <- UnaryOperation '-', v58
+v60 <- CallFunction v45, [v57, v59]
+v61 <- LoadInteger '0'
+v62 <- UnaryOperation '-', v61
+v63 <- LoadInteger '100000'
+v64 <- LoadInteger '0'
+v65 <- UnaryOperation '-', v64
+v66 <- CallFunction v45, [v63, v65]
+v67 <- LoadInteger '1'
+v68 <- LoadFloat '0.5'
+v69 <- CallFunction v2, [v67, v68]
+v70 <- LoadInteger '1'
+v71 <- LoadFloat '0.7'
+v72 <- CallFunction v2, [v70, v71]
+v73 <- LoadInteger '1'
+v74 <- LoadInteger '1'
+v75 <- CallFunction v2, [v73, v74]
+v76 <- LoadInteger '1'
+v77 <- LoadFloat '1.1'
+v78 <- CallFunction v2, [v76, v77]
+v79 <- LoadInteger '1'
+v80 <- LoadFloat '1.49999'
+v81 <- CallFunction v2, [v79, v80]
+v82 <- LoadInteger '0'
+v83 <- UnaryOperation '-', v82
+v84 <- LoadFloat '0.5'
+v85 <- UnaryOperation '-', v84
+v86 <- CallFunction v2, [v83, v85]
+v87 <- LoadInteger '1'
+v88 <- UnaryOperation '-', v87
+v89 <- LoadFloat '0.5000000000000001'
+v90 <- UnaryOperation '-', v89
+v91 <- CallFunction v2, [v88, v90]
+v92 <- LoadInteger '1'
+v93 <- UnaryOperation '-', v92
+v94 <- LoadFloat '0.7'
+v95 <- UnaryOperation '-', v94
+v96 <- CallFunction v2, [v93, v95]
+v97 <- LoadInteger '1'
+v98 <- UnaryOperation '-', v97
+v99 <- LoadInteger '1'
+v100 <- UnaryOperation '-', v99
+v101 <- CallFunction v2, [v98, v100]
+v102 <- LoadInteger '1'
+v103 <- UnaryOperation '-', v102
+v104 <- LoadFloat '1.1'
+v105 <- UnaryOperation '-', v104
+v106 <- CallFunction v2, [v103, v105]
+v107 <- LoadInteger '1'
+v108 <- UnaryOperation '-', v107
+v109 <- LoadFloat '1.49999'
+v110 <- UnaryOperation '-', v109
+v111 <- CallFunction v2, [v108, v110]
+v112 <- LoadInteger '1'
+v113 <- UnaryOperation '-', v112
+v114 <- LoadFloat '1.5'
+v115 <- UnaryOperation '-', v114
+v116 <- CallFunction v2, [v113, v115]
+v117 <- LoadInteger '9007199254740990'
+v118 <- LoadInteger '9007199254740990'
+v119 <- CallFunction v2, [v117, v118]
+v120 <- LoadInteger '9007199254740991'
+v121 <- LoadInteger '9007199254740991'
+v122 <- CallFunction v2, [v120, v121]
+v123 <- LoadInteger '9007199254740990'
+v124 <- UnaryOperation '-', v123
+v125 <- LoadInteger '9007199254740990'
+v126 <- UnaryOperation '-', v125
+v127 <- CallFunction v2, [v124, v126]
+v128 <- LoadInteger '9007199254740991'
+v129 <- UnaryOperation '-', v128
+v130 <- LoadInteger '9007199254740991'
+v131 <- UnaryOperation '-', v130
+v132 <- CallFunction v2, [v129, v131]
+v133 <- CreateNamedVariable 'Number', 'none'
+v134 <- GetProperty v133, 'MAX_VALUE'
+v135 <- GetProperty v133, 'MAX_VALUE'
+v136 <- CallFunction v2, [v134, v135]
+v137 <- GetProperty v133, 'MAX_VALUE'
+v138 <- UnaryOperation '-', v137
+v139 <- GetProperty v133, 'MAX_VALUE'
+v140 <- UnaryOperation '-', v139
+v141 <- CallFunction v2, [v138, v140]
+v142 <- GetProperty v133, 'MAX_SAFE_INTEGER'
+v143 <- GetProperty v133, 'MAX_SAFE_INTEGER'
+v144 <- CallFunction v2, [v142, v143]
+v145 <- GetProperty v133, 'MAX_SAFE_INTEGER'
+v146 <- LoadInteger '1'
+v147 <- BinaryOperation v145, '+', v146
+v148 <- GetProperty v133, 'MAX_SAFE_INTEGER'
+v149 <- LoadInteger '1'
+v150 <- BinaryOperation v148, '+', v149
+v151 <- CallFunction v2, [v147, v150]
+v152 <- GetProperty v133, 'MAX_SAFE_INTEGER'
+v153 <- LoadInteger '2'
+v154 <- BinaryOperation v152, '+', v153
+v155 <- GetProperty v133, 'MAX_SAFE_INTEGER'
+v156 <- LoadInteger '2'
+v157 <- BinaryOperation v155, '+', v156
+v158 <- CallFunction v2, [v154, v157]
+v159 <- GetProperty v133, 'MAX_SAFE_INTEGER'
+v160 <- LoadInteger '3'
+v161 <- BinaryOperation v159, '+', v160
+v162 <- GetProperty v133, 'MAX_SAFE_INTEGER'
+v163 <- LoadInteger '3'
+v164 <- BinaryOperation v162, '+', v163
+v165 <- CallFunction v2, [v161, v164]
+v166 <- GetProperty v133, 'MAX_SAFE_INTEGER'
+v167 <- LoadInteger '4'
+v168 <- BinaryOperation v166, '+', v167
+v169 <- GetProperty v133, 'MAX_SAFE_INTEGER'
+v170 <- LoadInteger '4'
+v171 <- BinaryOperation v169, '+', v170
+v172 <- CallFunction v2, [v168, v171]
+v173 <- GetProperty v133, 'MIN_SAFE_INTEGER'
+v174 <- GetProperty v133, 'MIN_SAFE_INTEGER'
+v175 <- CallFunction v2, [v173, v174]
+v176 <- GetProperty v133, 'MIN_SAFE_INTEGER'
+v177 <- LoadInteger '1'
+v178 <- BinaryOperation v176, '-', v177
+v179 <- GetProperty v133, 'MIN_SAFE_INTEGER'
+v180 <- LoadInteger '1'
+v181 <- BinaryOperation v179, '-', v180
+v182 <- CallFunction v2, [v178, v181]
+v183 <- GetProperty v133, 'MIN_SAFE_INTEGER'
+v184 <- LoadInteger '2'
+v185 <- BinaryOperation v183, '-', v184
+v186 <- GetProperty v133, 'MIN_SAFE_INTEGER'
+v187 <- LoadInteger '2'
+v188 <- BinaryOperation v186, '-', v187
+v189 <- CallFunction v2, [v185, v188]
+v190 <- GetProperty v133, 'MIN_SAFE_INTEGER'
+v191 <- LoadInteger '3'
+v192 <- BinaryOperation v190, '-', v191
+v193 <- GetProperty v133, 'MIN_SAFE_INTEGER'
+v194 <- LoadInteger '3'
+v195 <- BinaryOperation v193, '-', v194
+v196 <- CallFunction v2, [v192, v195]
+v197 <- LoadInteger '536870911'
+v198 <- LoadFloat '536870910.5'
+v199 <- CallFunction v2, [v197, v198]
+v200 <- LoadInteger '536870911'
+v201 <- LoadInteger '536870911'
+v202 <- CallFunction v2, [v200, v201]
+v203 <- LoadInteger '536870911'
+v204 <- LoadFloat '536870911.4'
+v205 <- CallFunction v2, [v203, v204]
+v206 <- LoadInteger '536870912'
+v207 <- LoadFloat '536870911.5'
+v208 <- CallFunction v2, [v206, v207]
+v209 <- LoadInteger '536870912'
+v210 <- LoadInteger '536870912'
+v211 <- CallFunction v2, [v209, v210]
+v212 <- LoadInteger '536870912'
+v213 <- LoadFloat '536870912.4'
+v214 <- CallFunction v2, [v212, v213]
+v215 <- LoadInteger '536870913'
+v216 <- LoadFloat '536870912.5'
+v217 <- CallFunction v2, [v215, v216]
+v218 <- LoadInteger '536870913'
+v219 <- LoadInteger '536870913'
+v220 <- CallFunction v2, [v218, v219]
+v221 <- LoadInteger '536870913'
+v222 <- LoadFloat '536870913.4'
+v223 <- CallFunction v2, [v221, v222]
+v224 <- LoadInteger '1073741823'
+v225 <- LoadFloat '1073741822.5'
+v226 <- CallFunction v2, [v224, v225]
+v227 <- LoadInteger '1073741823'
+v228 <- LoadInteger '1073741823'
+v229 <- CallFunction v2, [v227, v228]
+v230 <- LoadInteger '1073741823'
+v231 <- LoadFloat '1073741823.4'
+v232 <- CallFunction v2, [v230, v231]
+v233 <- LoadInteger '1073741824'
+v234 <- LoadFloat '1073741823.5'
+v235 <- CallFunction v2, [v233, v234]
+v236 <- LoadInteger '1073741824'
+v237 <- LoadInteger '1073741824'
+v238 <- CallFunction v2, [v236, v237]
+v239 <- LoadInteger '1073741824'
+v240 <- LoadFloat '1073741824.4'
+v241 <- CallFunction v2, [v239, v240]
+v242 <- LoadInteger '1073741825'
+v243 <- LoadFloat '1073741824.5'
+v244 <- CallFunction v2, [v242, v243]
+v245 <- LoadInteger '2147483647'
+v246 <- LoadFloat '2147483646.5'
+v247 <- CallFunction v2, [v245, v246]
+v248 <- LoadInteger '2147483647'
+v249 <- LoadInteger '2147483647'
+v250 <- CallFunction v2, [v248, v249]
+v251 <- LoadInteger '2147483647'
+v252 <- LoadFloat '2147483647.4'
+v253 <- CallFunction v2, [v251, v252]
+v254 <- LoadInteger '2147483648'
+v255 <- LoadFloat '2147483647.5'
+v256 <- CallFunction v2, [v254, v255]
+v257 <- LoadInteger '2147483648'
+v258 <- LoadInteger '2147483648'
+v259 <- CallFunction v2, [v257, v258]
+v260 <- LoadInteger '2147483648'
+v261 <- LoadFloat '2147483648.4'
+v262 <- CallFunction v2, [v260, v261]
+v263 <- LoadInteger '2147483649'
+v264 <- LoadFloat '2147483648.5'
+v265 <- CallFunction v2, [v263, v264]
+v266 <- LoadInteger '0'
+v267 <- LoadFloat '0.4'
+v268 <- CallFunction v2, [v266, v267]
+v269 <- LoadInteger '0'
+v270 <- UnaryOperation '-', v269
+v271 <- LoadFloat '0.4'
+v272 <- UnaryOperation '-', v271
+v273 <- CallFunction v2, [v270, v272]
+v274 <- LoadInteger '0'
+v275 <- UnaryOperation '-', v274
+v276 <- LoadFloat '0.5'
+v277 <- UnaryOperation '-', v276
+v278 <- CallFunction v2, [v275, v277]
+v279 <- LoadInteger '1'
+v280 <- LoadFloat '0.6'
+v281 <- CallFunction v2, [v279, v280]
+v282 <- LoadInteger '1'
+v283 <- UnaryOperation '-', v282
+v284 <- LoadFloat '0.6'
+v285 <- UnaryOperation '-', v284
+v286 <- CallFunction v2, [v283, v285]
+v287 <- LoadInteger '2'
+v288 <- LoadFloat '1.5'
+v289 <- CallFunction v2, [v287, v288]
+v290 <- LoadInteger '2'
+v291 <- LoadFloat '1.6'
+v292 <- CallFunction v2, [v290, v291]
+v293 <- LoadInteger '2'
+v294 <- UnaryOperation '-', v293
+v295 <- LoadFloat '1.6'
+v296 <- UnaryOperation '-', v295
+v297 <- CallFunction v2, [v294, v296]
+v298 <- LoadInteger '8640000000000000'
+v299 <- LoadInteger '8640000000000000'
+v300 <- CallFunction v2, [v298, v299]
+v301 <- LoadInteger '8640000000000001'
+v302 <- LoadInteger '8640000000000001'
+v303 <- CallFunction v2, [v301, v302]
+v304 <- LoadInteger '8640000000000002'
+v305 <- LoadInteger '8640000000000002'
+v306 <- CallFunction v2, [v304, v305]
+v307 <- LoadInteger '9007199254740990'
+v308 <- LoadInteger '9007199254740990'
+v309 <- CallFunction v2, [v307, v308]
+v310 <- LoadInteger '9007199254740991'
+v311 <- LoadInteger '9007199254740991'
+v312 <- CallFunction v2, [v310, v311]
+v313 <- LoadFloat '1.7976931348623157e+308'
+v314 <- LoadFloat '1.7976931348623157e+308'
+v315 <- CallFunction v2, [v313, v314]
+v316 <- LoadInteger '8640000000000000'
+v317 <- UnaryOperation '-', v316
+v318 <- LoadInteger '8640000000000000'
+v319 <- UnaryOperation '-', v318
+v320 <- CallFunction v2, [v317, v319]
+v321 <- LoadInteger '8640000000000001'
+v322 <- UnaryOperation '-', v321
+v323 <- LoadInteger '8640000000000001'
+v324 <- UnaryOperation '-', v323
+v325 <- CallFunction v2, [v322, v324]
+v326 <- LoadInteger '8640000000000002'
+v327 <- UnaryOperation '-', v326
+v328 <- LoadInteger '8640000000000002'
+v329 <- UnaryOperation '-', v328
+v330 <- CallFunction v2, [v327, v329]
+v331 <- LoadInteger '9007199254740990'
+v332 <- UnaryOperation '-', v331
+v333 <- LoadInteger '9007199254740990'
+v334 <- UnaryOperation '-', v333
+v335 <- CallFunction v2, [v332, v334]
+v336 <- LoadInteger '9007199254740991'
+v337 <- UnaryOperation '-', v336
+v338 <- LoadInteger '9007199254740991'
+v339 <- UnaryOperation '-', v338
+v340 <- CallFunction v2, [v337, v339]
+v341 <- LoadFloat '1.7976931348623157e+308'
+v342 <- UnaryOperation '-', v341
+v343 <- LoadFloat '1.7976931348623157e+308'
+v344 <- UnaryOperation '-', v343
+v345 <- CallFunction v2, [v342, v344]
+v346 <- CallFunction v2, [v38, v38]
+v347 <- UnaryOperation '-', v38
+v348 <- UnaryOperation '-', v38
+v349 <- CallFunction v2, [v347, v348]
+v350 <- LoadInteger '2'
+v351 <- LoadInteger '1022'
+v352 <- UnaryOperation '-', v351
+v353 <- LoadInteger '52'
+v354 <- BinaryOperation v352, '-', v353
+v355 <- CreateNamedVariable 'Math', 'none'
+v356 <- CallMethod v355, 'pow', [v350, v354]
+v357 <- CreateNamedVariable 'ulp', 'var', v356
+v358 <- LoadInteger '2'
+v359 <- LoadInteger '52'
+v360 <- CallMethod v355, 'pow', [v358, v359]
+v361 <- LoadInteger '1'
+v362 <- BinaryOperation v360, '-', v361
+v363 <- BinaryOperation v362, '*', v357
+v364 <- CreateNamedVariable 'max_denormal', 'var', v363
+v365 <- LoadInteger '2'
+v366 <- LoadInteger '1022'
+v367 <- UnaryOperation '-', v366
+v368 <- CallMethod v355, 'pow', [v365, v367]
+v369 <- CreateNamedVariable 'min_normal', 'var', v368
+v370 <- LoadInteger '2'
+v371 <- LoadInteger '52'
+v372 <- CallMethod v355, 'pow', [v370, v371]
+v373 <- LoadFloat '0.5'
+v374 <- BinaryOperation v372, '-', v373
+v375 <- CreateNamedVariable 'max_fraction', 'var', v374
+v376 <- LoadInteger '2'
+v377 <- LoadInteger '52'
+v378 <- CallMethod v355, 'pow', [v376, v377]
+v379 <- CreateNamedVariable 'min_nonfraction', 'var', v378
+v380 <- GetProperty v133, 'MAX_VALUE'
+v381 <- CreateNamedVariable 'max_non_infinite', 'var', v380
+v382 <- LoadInteger '2'
+v383 <- LoadInteger '30'
+v384 <- CallMethod v355, 'pow', [v382, v383]
+v385 <- LoadInteger '1'
+v386 <- BinaryOperation v384, '-', v385
+v387 <- CreateNamedVariable 'max_smi31', 'var', v386
+v388 <- LoadInteger '2'
+v389 <- LoadInteger '30'
+v390 <- CallMethod v355, 'pow', [v388, v389]
+v391 <- UnaryOperation '-', v390
+v392 <- CreateNamedVariable 'min_smi31', 'var', v391
+v393 <- LoadInteger '2'
+v394 <- LoadInteger '31'
+v395 <- CallMethod v355, 'pow', [v393, v394]
+v396 <- LoadInteger '1'
+v397 <- BinaryOperation v395, '-', v396
+v398 <- CreateNamedVariable 'max_smi32', 'var', v397
+v399 <- LoadInteger '2'
+v400 <- LoadInteger '31'
+v401 <- CallMethod v355, 'pow', [v399, v400]
+v402 <- UnaryOperation '-', v401
+v403 <- CreateNamedVariable 'min_smi32', 'var', v402
+v404 <- LoadInteger '0'
+v405 <- CallFunction v2, [v404, v357]
+v406 <- LoadInteger '0'
+v407 <- CallFunction v2, [v406, v364]
+v408 <- LoadInteger '0'
+v409 <- CallFunction v2, [v408, v369]
+v410 <- LoadInteger '0'
+v411 <- LoadFloat '0.49999999999999994'
+v412 <- CallFunction v2, [v410, v411]
+v413 <- LoadInteger '1'
+v414 <- LoadFloat '0.5'
+v415 <- CallFunction v2, [v413, v414]
+v416 <- LoadInteger '2'
+v417 <- LoadInteger '52'
+v418 <- CallMethod v355, 'pow', [v416, v417]
+v419 <- CallFunction v2, [v418, v375]
+v420 <- CallFunction v2, [v379, v379]
+v421 <- CallFunction v2, [v381, v381]
+v422 <- LoadFloat '0.5'
+v423 <- BinaryOperation v387, '-', v422
+v424 <- CallFunction v2, [v387, v423]
+v425 <- LoadInteger '1'
+v426 <- BinaryOperation v387, '+', v425
+v427 <- LoadFloat '0.5'
+v428 <- BinaryOperation v387, '+', v427
+v429 <- CallFunction v2, [v426, v428]
+v430 <- LoadFloat '0.5'
+v431 <- BinaryOperation v398, '-', v430
+v432 <- CallFunction v2, [v398, v431]
+v433 <- LoadInteger '1'
+v434 <- BinaryOperation v398, '+', v433
+v435 <- LoadFloat '0.5'
+v436 <- BinaryOperation v398, '+', v435
+v437 <- CallFunction v2, [v434, v436]
+v438 <- LoadInteger '0'
+v439 <- UnaryOperation '-', v438
+v440 <- UnaryOperation '-', v357
+v441 <- CallFunction v2, [v439, v440]
+v442 <- LoadInteger '0'
+v443 <- UnaryOperation '-', v442
+v444 <- UnaryOperation '-', v364
+v445 <- CallFunction v2, [v443, v444]
+v446 <- LoadInteger '0'
+v447 <- UnaryOperation '-', v446
+v448 <- UnaryOperation '-', v369
+v449 <- CallFunction v2, [v447, v448]
+v450 <- LoadInteger '0'
+v451 <- UnaryOperation '-', v450
+v452 <- LoadFloat '0.49999999999999994'
+v453 <- UnaryOperation '-', v452
+v454 <- CallFunction v2, [v451, v453]
+v455 <- LoadInteger '0'
+v456 <- UnaryOperation '-', v455
+v457 <- LoadFloat '0.5'
+v458 <- UnaryOperation '-', v457
+v459 <- CallFunction v2, [v456, v458]
+v460 <- LoadInteger '2'
+v461 <- LoadInteger '52'
+v462 <- CallMethod v355, 'pow', [v460, v461]
+v463 <- UnaryOperation '-', v462
+v464 <- LoadInteger '1'
+v465 <- BinaryOperation v463, '+', v464
+v466 <- UnaryOperation '-', v375
+v467 <- CallFunction v2, [v465, v466]
+v468 <- UnaryOperation '-', v379
+v469 <- UnaryOperation '-', v379
+v470 <- CallFunction v2, [v468, v469]
+v471 <- UnaryOperation '-', v381
+v472 <- UnaryOperation '-', v381
+v473 <- CallFunction v2, [v471, v472]
+v474 <- LoadFloat '0.5'
+v475 <- BinaryOperation v392, '-', v474
+v476 <- CallFunction v2, [v392, v475]
+v477 <- LoadInteger '1'
+v478 <- BinaryOperation v392, '+', v477
+v479 <- LoadFloat '0.5'
+v480 <- BinaryOperation v392, '+', v479
+v481 <- CallFunction v2, [v478, v480]
+v482 <- LoadFloat '0.5'
+v483 <- BinaryOperation v403, '-', v482
+v484 <- CallFunction v2, [v403, v483]
+v485 <- LoadInteger '1'
+v486 <- BinaryOperation v403, '+', v485
+v487 <- LoadFloat '0.5'
+v488 <- BinaryOperation v403, '+', v487
+v489 <- CallFunction v2, [v486, v488]
+
+
+var test_id = 0;
+function testRound(a3, a4) {
+    const v12 = new Function("input", (""" + test_id++) + "";return Math.round(input)");
+    var doRound = v12;
+    doRound(a4);
+    doRound(a4);
+    doRound(a4);
+    doRound(a4);
+    const v24 = new Function("input", (""" + test_id++) + "";return Math.round(input) + -0.0");
+    var doRoundToDouble = v24;
+    doRoundToDouble(a4);
+    doRoundToDouble(a4);
+    doRoundToDouble(a4);
+    doRoundToDouble(a4);
+}
+testRound(0, 0);
+testRound(-0, -0);
+testRound(Infinity, Infinity);
+testRound(-Infinity, -Infinity);
+testRound(NaN, NaN);
+function roundsum(a46, a47) {
+    var ret = Math.round(a47);
+    while (--a46 > 0) {
+        ret += Math.round(a47);
+    }
+    return ret;
+}
+-0;
+roundsum(1, -0);
+-0;
+roundsum(100000, -0);
+testRound(1, 0.5);
+testRound(1, 0.7);
+testRound(1, 1);
+testRound(1, 1.1);
+testRound(1, 1.49999);
+testRound(-0, -0.5);
+testRound(-1, -0.5000000000000001);
+testRound(-1, -0.7);
+testRound(-1, -1);
+testRound(-1, -1.1);
+testRound(-1, -1.49999);
+testRound(-1, -1.5);
+testRound(9007199254740990, 9007199254740990);
+testRound(9007199254740991, 9007199254740991);
+testRound(-9007199254740990, -9007199254740990);
+testRound(-9007199254740991, -9007199254740991);
+testRound(Number.MAX_VALUE, Number.MAX_VALUE);
+testRound(-Number.MAX_VALUE, -Number.MAX_VALUE);
+testRound(Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+testRound(Number.MAX_SAFE_INTEGER + 1, Number.MAX_SAFE_INTEGER + 1);
+testRound(Number.MAX_SAFE_INTEGER + 2, Number.MAX_SAFE_INTEGER + 2);
+testRound(Number.MAX_SAFE_INTEGER + 3, Number.MAX_SAFE_INTEGER + 3);
+testRound(Number.MAX_SAFE_INTEGER + 4, Number.MAX_SAFE_INTEGER + 4);
+testRound(Number.MIN_SAFE_INTEGER, Number.MIN_SAFE_INTEGER);
+testRound(Number.MIN_SAFE_INTEGER - 1, Number.MIN_SAFE_INTEGER - 1);
+testRound(Number.MIN_SAFE_INTEGER - 2, Number.MIN_SAFE_INTEGER - 2);
+testRound(Number.MIN_SAFE_INTEGER - 3, Number.MIN_SAFE_INTEGER - 3);
+testRound(536870911, 536870910.5);
+testRound(536870911, 536870911);
+testRound(536870911, 536870911.4);
+testRound(536870912, 536870911.5);
+testRound(536870912, 536870912);
+testRound(536870912, 536870912.4);
+testRound(536870913, 536870912.5);
+testRound(536870913, 536870913);
+testRound(536870913, 536870913.4);
+testRound(1073741823, 1073741822.5);
+testRound(1073741823, 1073741823);
+testRound(1073741823, 1073741823.4);
+testRound(1073741824, 1073741823.5);
+testRound(1073741824, 1073741824);
+testRound(1073741824, 1073741824.4);
+testRound(1073741825, 1073741824.5);
+testRound(2147483647, 2147483646.5);
+testRound(2147483647, 2147483647);
+testRound(2147483647, 2147483647.4);
+testRound(2147483648, 2147483647.5);
+testRound(2147483648, 2147483648);
+testRound(2147483648, 2147483648.4);
+testRound(2147483649, 2147483648.5);
+testRound(0, 0.4);
+testRound(-0, -0.4);
+testRound(-0, -0.5);
+testRound(1, 0.6);
+testRound(-1, -0.6);
+testRound(2, 1.5);
+testRound(2, 1.6);
+testRound(-2, -1.6);
+testRound(8640000000000000, 8640000000000000);
+testRound(8640000000000001, 8640000000000001);
+testRound(8640000000000002, 8640000000000002);
+testRound(9007199254740990, 9007199254740990);
+testRound(9007199254740991, 9007199254740991);
+testRound(1.7976931348623157e+308, 1.7976931348623157e+308);
+testRound(-8640000000000000, -8640000000000000);
+testRound(-8640000000000001, -8640000000000001);
+testRound(-8640000000000002, -8640000000000002);
+testRound(-9007199254740990, -9007199254740990);
+testRound(-9007199254740991, -9007199254740991);
+testRound(-1.7976931348623157e+308, -1.7976931348623157e+308);
+testRound(Infinity, Infinity);
+testRound(-Infinity, -Infinity);
+var ulp = Math.pow(2, -1022 - 52);
+var max_denormal = (Math.pow(2, 52) - 1) * ulp;
+var min_normal = Math.pow(2, -1022);
+var max_fraction = Math.pow(2, 52) - 0.5;
+var min_nonfraction = Math.pow(2, 52);
+var max_non_infinite = Number.MAX_VALUE;
+var max_smi31 = Math.pow(2, 30) - 1;
+var min_smi31 = -Math.pow(2, 30);
+var max_smi32 = Math.pow(2, 31) - 1;
+var min_smi32 = -Math.pow(2, 31);
+testRound(0, ulp);
+testRound(0, max_denormal);
+testRound(0, min_normal);
+testRound(0, 0.49999999999999994);
+testRound(1, 0.5);
+testRound(Math.pow(2, 52), max_fraction);
+testRound(min_nonfraction, min_nonfraction);
+testRound(max_non_infinite, max_non_infinite);
+testRound(max_smi31, max_smi31 - 0.5);
+testRound(max_smi31 + 1, max_smi31 + 0.5);
+testRound(max_smi32, max_smi32 - 0.5);
+testRound(max_smi32 + 1, max_smi32 + 0.5);
+testRound(-0, -ulp);
+testRound(-0, -max_denormal);
+testRound(-0, -min_normal);
+testRound(-0, -0.49999999999999994);
+testRound(-0, -0.5);
+testRound(-Math.pow(2, 52) + 1, -max_fraction);
+testRound(-min_nonfraction, -min_nonfraction);
+testRound(-max_non_infinite, -max_non_infinite);
+testRound(min_smi31, min_smi31 - 0.5);
+testRound(min_smi31 + 1, min_smi31 + 0.5);
+testRound(min_smi32, min_smi32 - 0.5);
+testRound(min_smi32 + 1, min_smi32 + 0.5);
+
+FuzzIL program written to corpus/math-round.fzil

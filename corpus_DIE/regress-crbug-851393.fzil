@@ -1,0 +1,25 @@
+v0 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v1 <- EndObjectLiteral
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- Construct v0, [v1, v2]
+v4 <- CreateNamedVariable 'proxy', 'var', v3
+v5 <- LoadString 'boom'
+v6 <- LoadString 'ah'
+v7 <- LoadString 'ouch'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `b`, v5
+    ObjectLiteralAddElement `48`, v6
+    ObjectLiteralAddProperty `o`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'assign', [v4, v8]
+
+
+const v1 = {};
+const v3 = new Proxy(v1, {});
+var proxy = v3;
+Object.assign(proxy, { b: "boom", 48: "ah", o: "ouch" });
+
+FuzzIL program written to corpus/regress-crbug-851393.fzil

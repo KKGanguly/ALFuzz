@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v1
+        ObjectLiteralAddProperty `x`, v2
+    v3 <- EndObjectLiteral
+    v4 <- CreateNamedVariable 'o', 'none'
+    Reassign v4, v3
+EndPlainFunction
+v5 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v5
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'o', 'var', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- CallFunction v0, []
+    v10 <- GetProperty v7, 'x'
+    Return v10
+EndPlainFunction
+v11 <- CallFunction v8, []
+
+
+function change_o() {
+    o = { y: 0, x: 1 };
+}
+var o = { x: 1 };
+function f() {
+    change_o();
+    return o.x;
+}
+f();
+
+FuzzIL program written to corpus/deopt-soft-simple.fzil

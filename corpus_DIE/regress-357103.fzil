@@ -1,0 +1,24 @@
+v0 <- LoadString 'Huckleberry Finn'
+v1 <- LoadString 'Tom Sawyer'
+v2 <- BinaryOperation v0, '+', v1
+v3 <- CreateNamedVariable 'key', 'var', v2
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'o', 'var', v4
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadString 'Adventures'
+    SetComputedProperty v5, v3, v7
+EndPlainFunction
+v8 <- CallFunction v6, []
+v9 <- CallFunction v6, []
+
+
+var key = "Huckleberry Finn" + "Tom Sawyer";
+var o = {};
+function f() {
+    o[key] = "Adventures";
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-357103.fzil

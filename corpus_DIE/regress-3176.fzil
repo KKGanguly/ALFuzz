@@ -1,0 +1,59 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'sum', 'var', v2
+    BeginForLoopInitializer
+        v4 <- LoadInteger '0'
+    BeginForLoopCondition -> v5
+        v6 <- LoadInteger '10'
+        v7 <- Compare v5, '<', v6
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation v8, '++'
+    BeginForLoopBody -> v10
+        v11 <- GetComputedProperty v1, v10
+        Update v3, '+', v11
+        v12 <- LoadInteger '6'
+        v13 <- Compare v10, '>', v12
+        BeginIf v13
+            v14 <- LoadInteger '4'
+            v15 <- BinaryOperation v10, '-', v14
+            v16 <- GetComputedProperty v1, v15
+            Update v3, '-', v16
+            v17 <- LoadInteger '5'
+            v18 <- BinaryOperation v10, '-', v17
+            v19 <- GetComputedProperty v1, v18
+            Update v3, '-', v19
+        EndIf
+    EndForLoop
+    Return v3
+EndPlainFunction
+v20 <- CreateNamedVariable 'Int32Array', 'none'
+v21 <- LoadInteger '10'
+v22 <- Construct v20, [v21]
+v23 <- CreateNamedVariable 'a', 'var', v22
+v24 <- CallFunction v0, [v23]
+v25 <- CallFunction v0, [v23]
+v26 <- CallFunction v0, [v23]
+v27 <- CallFunction v0, [v23]
+v28 <- CallFunction v0, []
+
+
+function foo(a1) {
+    var sum = 0;
+    for (let i5 = 0; i5 < 10; i5++) {
+        sum += a1[i5];
+        if (i5 > 6) {
+            sum -= a1[i5 - 4];
+            sum -= a1[i5 - 5];
+        }
+    }
+    return sum;
+}
+const v22 = new Int32Array(10);
+var a = v22;
+foo(a);
+foo(a);
+foo(a);
+foo(a);
+foo();
+
+FuzzIL program written to corpus/regress-3176.fzil

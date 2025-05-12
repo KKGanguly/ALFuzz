@@ -1,0 +1,23 @@
+v0 <- LoadThis
+v1 <- LoadString 'Date'
+v2 <- GetComputedProperty v0, v1
+v3 <- LoadInteger '1111'
+v4 <- Construct v2, [v3]
+v5 <- CreateNamedVariable 'date0', 'var', v4
+v6 <- LoadInteger '1111'
+v7 <- CallMethod v5, 'getTime', []
+v8 <- LoadInteger '42'
+v9 <- CreateNamedVariable 'RegExp', 'none'
+Reassign v9, v8
+v10 <- LoadRegExp 'test' ''
+v11 <- CreateNamedVariable 're', 'var', v10
+
+
+const t0 = this["Date"];
+const v4 = new t0(1111);
+var date0 = v4;
+date0.getTime();
+RegExp = 42;
+var re = /test/;
+
+FuzzIL program written to corpus/lazy-load.fzil

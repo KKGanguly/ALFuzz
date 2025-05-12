@@ -1,0 +1,60 @@
+v0 <- LoadInteger '11'
+v1 <- CreateNamedVariable 'kXXX', 'var', v0
+v2 <- LoadString ''
+v3 <- CreateNamedVariable 'a', 'var', v2
+BeginWhileLoopHeader
+    v4 <- GetProperty v3, 'length'
+    v5 <- LoadInteger '2'
+    v6 <- LoadInteger '11'
+    v7 <- BinaryOperation v5, '<<', v6
+    v8 <- Compare v4, '<', v7
+BeginWhileLoopBody v8
+    v9 <- LoadString 'x'
+    Update v3, '+', v9
+EndWhileLoop
+v10 <- LoadRegExp '^(.*)' ''
+v11 <- LoadString '$1$1$1'
+v12 <- CallMethod v3, 'replace', [v10, v11]
+BeginForLoopInitializer
+    v13 <- LoadInteger '0'
+BeginForLoopCondition -> v14
+    v15 <- LoadInteger '10'
+    v16 <- Compare v14, '<', v15
+BeginForLoopAfterthought v16 -> v17
+    v18 <- UnaryOperation v17, '++'
+BeginForLoopBody -> v19
+    v20 <- LoadString ''
+    v21 <- CreateNamedVariable 'b', 'var', v20
+    BeginForLoopInitializer
+        v22 <- LoadInteger '0'
+    BeginForLoopCondition -> v23
+        v24 <- LoadInteger '10'
+        v25 <- Compare v23, '<', v24
+    BeginForLoopAfterthought v25 -> v26
+        v27 <- UnaryOperation v26, '++'
+    BeginForLoopBody -> v28
+        v29 <- LoadString '$1'
+        Update v21, '+', v29
+        v30 <- LoadRegExp '^(.*)' ''
+        v31 <- CallMethod v3, 'replace', [v30, v21]
+    EndForLoop
+    Update v3, '+', v3
+EndForLoop
+
+
+var kXXX = 11;
+var a = "";
+while (a.length < (2 << 11)) {
+    a += "x";
+}
+a.replace(/^(.*)/, "$1$1$1");
+for (let i14 = 0; i14 < 10; i14++) {
+    var b = "";
+    for (let i23 = 0; i23 < 10; i23++) {
+        b += "$1";
+        a.replace(/^(.*)/, b);
+    }
+    a += a;
+}
+
+FuzzIL program written to corpus/regress-490.fzil

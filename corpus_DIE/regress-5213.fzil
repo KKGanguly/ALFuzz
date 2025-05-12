@@ -1,0 +1,17 @@
+v0 <- LoadInteger '0'
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '2147483648'
+v3 <- UnaryOperation '-', v2
+v4 <- CreateNamedVariable 'Math', 'none'
+v5 <- CallMethod v4, 'pow', [v1, v3]
+v6 <- LoadInteger '0'
+v7 <- LoadInteger '2'
+v8 <- LoadFloat '9.223372036854776e+18'
+v9 <- UnaryOperation '-', v8
+v10 <- CallMethod v4, 'pow', [v7, v9]
+
+
+Math.pow(2, -2147483648);
+Math.pow(2, -9.223372036854776e+18);
+
+FuzzIL program written to corpus/regress-5213.fzil

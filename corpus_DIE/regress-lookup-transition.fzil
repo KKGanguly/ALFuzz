@@ -1,0 +1,36 @@
+v0 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v1 <- EndObjectLiteral
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'gc', 'none'
+    v4 <- CallFunction v3, []
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v2
+v5 <- EndObjectLiteral
+v6 <- Construct v0, [v1, v5]
+v7 <- CreateNamedVariable 'proxy', 'var', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '23'
+    v10 <- LoadThis
+    SetProperty v10, 'x', v9
+EndPlainFunction
+SetProperty v8, 'prototype', v7
+v11 <- Construct v8, []
+v12 <- Construct v8, []
+
+
+const v1 = {};
+function f2() {
+    gc();
+}
+const v6 = new Proxy(v1, { getOwnPropertyDescriptor: f2 });
+var proxy = v6;
+function f() {
+    this.x = 23;
+}
+f.prototype = proxy;
+new f();
+new f();
+
+FuzzIL program written to corpus/regress-lookup-transition.fzil

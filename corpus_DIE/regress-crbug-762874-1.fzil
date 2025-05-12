@@ -1,0 +1,28 @@
+v0 <- LoadInteger '4294967295'
+v1 <- CreateNamedVariable 'maxLength', 'const', v0
+v2 <- LoadString 'A'
+v3 <- CallMethod v2, 'repeat', [v1]
+v4 <- CreateNamedVariable 's', 'const', v3
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadString ''
+    v8 <- CallMethod v6, 'indexOf', [v7, v1]
+    v9 <- CreateNamedVariable 'x', 'let', v8
+    v10 <- Compare v9, '===', v1
+    Return v10
+EndPlainFunction
+v11 <- CallFunction v5, [v4]
+v12 <- CallFunction v5, [v4]
+v13 <- CallFunction v5, [v4]
+
+
+const maxLength = 4294967295;
+const s = ("A").repeat(maxLength);
+function foo(a6) {
+    let x = a6.indexOf("", maxLength);
+    return x === maxLength;
+}
+foo(s);
+foo(s);
+foo(s);
+
+FuzzIL program written to corpus/regress-crbug-762874-1.fzil

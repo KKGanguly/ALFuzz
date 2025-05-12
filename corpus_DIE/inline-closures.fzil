@@ -1,0 +1,79 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginPlainFunction -> v3
+        v4 <- LoadString 'g'
+        v5 <- Compare v1, '==', v4
+        BeginIf v5
+            v6 <- LoadThis
+            v7 <- CallMethod v6, 'g', [v3]
+            Return v7
+        EndIf
+        v8 <- LoadString 'h'
+        v9 <- Compare v1, '==', v8
+        BeginIf v9
+            v10 <- LoadThis
+            v11 <- CallMethod v10, 'h', [v3]
+            Return v11
+        EndIf
+        v12 <- GetProperty v3, 'value'
+        Return v12
+    EndPlainFunction
+    Return v2
+EndPlainFunction
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'object', 'var', v13
+v15 <- LoadString 'g'
+v16 <- CallFunction v0, [v15]
+SetProperty v14, 'f', v16
+v17 <- LoadString 'h'
+v18 <- CallFunction v0, [v17]
+SetProperty v14, 'g', v18
+v19 <- LoadString 'x'
+v20 <- CallFunction v0, [v19]
+SetProperty v14, 'h', v20
+v21 <- LoadInteger '1'
+v22 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v22
+v23 <- EndObjectLiteral
+v24 <- CallMethod v14, 'f', [v23]
+v25 <- LoadInteger '2'
+v26 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v26
+v27 <- EndObjectLiteral
+v28 <- CallMethod v14, 'f', [v27]
+v29 <- LoadInteger '3'
+v30 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v30
+v31 <- EndObjectLiteral
+v32 <- CallMethod v14, 'f', [v31]
+v33 <- LoadUndefined
+BeginObjectLiteral
+v34 <- EndObjectLiteral
+v35 <- CallMethod v14, 'f', [v34]
+
+
+function mkClosure(a1) {
+    function f2(a3) {
+        if (a1 == "g") {
+            return this.g(a3);
+        }
+        if (a1 == "h") {
+            return this.h(a3);
+        }
+        return a3.value;
+    }
+    return f2;
+}
+var object = {};
+object.f = mkClosure("g");
+object.g = mkClosure("h");
+object.h = mkClosure("x");
+object.f({ value: 1 });
+object.f({ value: 2 });
+object.f({ value: 3 });
+object.f({});
+
+FuzzIL program written to corpus/inline-closures.fzil

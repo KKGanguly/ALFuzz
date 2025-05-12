@@ -1,0 +1,122 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadInteger '1'
+        v4 <- BinaryOperation v2, '+', v2
+        v5 <- BinaryOperation v3, '/', v4
+        Return v5
+    EndPlainFunction
+    v6 <- BeginPlainFunction -> v7
+        v8 <- LoadInteger '0'
+        v9 <- CreateNamedVariable 'x', 'var', v8
+        v10 <- LoadUndefined
+        v11 <- CreateNamedVariable 'y', 'var', v10
+        BeginForLoopInitializer
+        BeginForLoopCondition
+            v12 <- LoadInteger '0'
+            v13 <- Compare v7, '>', v12
+        BeginForLoopAfterthought v13
+            v14 <- UnaryOperation '--', v7
+        BeginForLoopBody
+            v15 <- CallFunction v1, [v9]
+            Reassign v11, v15
+            v16 <- LoadInteger '0'
+            v17 <- UnaryOperation '-', v16
+            Reassign v9, v17
+        EndForLoop
+        Return v11
+    EndPlainFunction
+    v18 <- LoadInteger '1'
+    v19 <- CallFunction v6, [v18]
+    v20 <- CreateNamedVariable 'Infinity', 'none'
+    v21 <- LoadInteger '1'
+    v22 <- CallFunction v6, [v21]
+    v23 <- LoadInteger '1'
+    v24 <- CallFunction v6, [v23]
+    v25 <- UnaryOperation '-', v20
+    v26 <- LoadInteger '2'
+    v27 <- CallFunction v6, [v26]
+EndPlainFunction
+v28 <- CallFunction v0, []
+v29 <- BeginPlainFunction -> 
+    v30 <- BeginPlainFunction -> v31
+        v32 <- BinaryOperation v31, '+', v31
+        Return v32
+    EndPlainFunction
+    v33 <- BeginPlainFunction -> v34, v35
+        v36 <- BinaryOperation v34, '+', v35
+        Return v36
+    EndPlainFunction
+    v37 <- LoadInteger '1'
+    v38 <- LoadFloat '0.5'
+    v39 <- CallFunction v33, [v37, v38]
+    v40 <- LoadFloat '0.5'
+    v41 <- LoadInteger '1'
+    v42 <- CallFunction v33, [v40, v41]
+    v43 <- CreateNamedVariable 'NaN', 'none'
+    v44 <- CreateNamedVariable 'Infinity', 'none'
+    v45 <- CallFunction v33, [v43, v44]
+    v46 <- BeginPlainFunction -> v47
+        v48 <- LoadInteger '1'
+        v49 <- TernaryOperation v47, v43, v48
+        v50 <- CreateNamedVariable 'x', 'var', v49
+        v51 <- CallFunction v30, [v50]
+        v52 <- LoadInteger '0'
+        v53 <- CallFunction v33, [v51, v52]
+        Return v53
+    EndPlainFunction
+    v54 <- LoadBoolean 'false'
+    v55 <- CallFunction v46, [v54]
+    v56 <- LoadInteger '2'
+    v57 <- LoadBoolean 'false'
+    v58 <- CallFunction v46, [v57]
+    v59 <- LoadInteger '2'
+    v60 <- LoadBoolean 'false'
+    v61 <- CallFunction v46, [v60]
+    v62 <- LoadBoolean 'true'
+    v63 <- CallFunction v46, [v62]
+EndPlainFunction
+v64 <- CallFunction v29, []
+
+
+function f0() {
+    function f(a2) {
+        return 1 / (a2 + a2);
+    }
+    function forgetAboutMinus0(a7) {
+        var x = 0;
+        var y;
+        for (; a7 > 0; --a7) {
+            y = f(x);
+            x = -0;
+        }
+        return y;
+    }
+    forgetAboutMinus0(1);
+    forgetAboutMinus0(1);
+    forgetAboutMinus0(1);
+    -Infinity;
+    forgetAboutMinus0(2);
+}
+f0();
+function f29() {
+    function f(a31) {
+        return a31 + a31;
+    }
+    function NumberAdd(a34, a35) {
+        return a34 + a35;
+    }
+    NumberAdd(1, 0.5);
+    NumberAdd(0.5, 1);
+    NumberAdd(NaN, Infinity);
+    function forgetAboutNaN(a47) {
+        var x = a47 ? NaN : 1;
+        return NumberAdd(f(x), 0);
+    }
+    forgetAboutNaN(false);
+    forgetAboutNaN(false);
+    forgetAboutNaN(false);
+    forgetAboutNaN(true);
+}
+f29();
+
+FuzzIL program written to corpus/type-speculative-safe-integer-add.fzil

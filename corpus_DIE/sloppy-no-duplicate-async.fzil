@@ -1,0 +1,67 @@
+BeginBlockStatement
+    v0 <- BeginAsyncFunction -> 
+    EndAsyncFunction
+    v1 <- LoadString 'function'
+    v2 <- TypeOf v0
+EndBlockStatement
+v3 <- LoadString 'undefined'
+v4 <- CreateNamedVariable 'foo', 'none'
+v5 <- TypeOf v4
+v6 <- BeginPlainFunction -> 
+    BeginBlockStatement
+        v7 <- BeginAsyncFunction -> 
+        EndAsyncFunction
+    EndBlockStatement
+    v8 <- LoadString 'undefined'
+    v9 <- CreateNamedVariable 'bar', 'none'
+    v10 <- TypeOf v9
+EndPlainFunction
+v11 <- CallFunction v6, []
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadUndefined
+    v14 <- CreateNamedVariable 'y', 'var', v13
+    v15 <- BeginAsyncFunction -> 
+        v16 <- LoadInteger '1'
+        Reassign v14, v16
+    EndAsyncFunction
+    BeginBlockStatement
+        v17 <- BeginAsyncFunction -> 
+            v18 <- LoadInteger '2'
+            Reassign v14, v18
+        EndAsyncFunction
+    EndBlockStatement
+    v19 <- CallFunction v15, []
+    v20 <- LoadInteger '1'
+EndPlainFunction
+v21 <- CallFunction v12, []
+
+
+{
+    async function foo() {
+    }
+    typeof foo;
+}
+typeof foo;
+function f6() {
+    {
+        async function bar() {
+        }
+    }
+    typeof bar;
+}
+f6();
+function f12() {
+    var y;
+    async function x() {
+        y = 1;
+    }
+    {
+        async function x() {
+            y = 2;
+        }
+    }
+    x();
+}
+f12();
+
+FuzzIL program written to corpus/sloppy-no-duplicate-async.fzil

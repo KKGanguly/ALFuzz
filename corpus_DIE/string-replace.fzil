@@ -1,0 +1,78 @@
+v0 <- BeginArrowFunction -> v1, v2
+    v3 <- BinaryOperation v1, '+', v2
+    Return v3
+EndArrowFunction
+v4 <- CreateNamedVariable 'Symbol', 'none'
+v5 <- GetProperty v4, 'replace'
+v6 <- BeginArrowFunction -> 
+    v7 <- LoadString 'c'
+    Return v7
+EndArrowFunction
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v5, v0
+    ObjectLiteralAddProperty `toString`, v6
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'pattern', 'var', v8
+v10 <- BeginArrowFunction -> 
+    v11 <- LoadNull
+    v12 <- LoadString 'x'
+    v13 <- CreateNamedVariable 'String', 'none'
+    v14 <- GetProperty v13, 'prototype'
+    v15 <- GetProperty v14, 'replace'
+    v16 <- CallMethod v15, 'call', [v11, v9, v12]
+    Return v16
+EndArrowFunction
+v17 <- CallFunction v10, []
+v18 <- CreateNamedVariable 'TypeError', 'none'
+v19 <- LoadString 'abcdex'
+v20 <- LoadString 'x'
+v21 <- LoadString 'abcde'
+v22 <- CallMethod v21, 'replace', [v9, v20]
+v23 <- LoadString 'dumdidum'
+v24 <- GetProperty v4, 'replace'
+SetComputedProperty v9, v24, v23
+v25 <- BeginArrowFunction -> 
+    v26 <- LoadString 'x'
+    v27 <- LoadString 'abcde'
+    v28 <- CallMethod v27, 'replace', [v9, v26]
+    Return v28
+EndArrowFunction
+v29 <- CallFunction v25, []
+v30 <- LoadNull
+v31 <- GetProperty v4, 'replace'
+SetComputedProperty v9, v31, v30
+v32 <- LoadString 'abXde'
+v33 <- LoadString 'X'
+v34 <- LoadString 'abcde'
+v35 <- CallMethod v34, 'replace', [v9, v33]
+v36 <- LoadString '[Symbol.replace]'
+v37 <- CreateNamedVariable 'RegExp', 'none'
+v38 <- GetProperty v37, 'prototype'
+v39 <- GetProperty v4, 'replace'
+v40 <- GetComputedProperty v38, v39
+v41 <- GetProperty v40, 'name'
+
+
+const v0 = (a1, a2) => {
+    return a1 + a2;
+};
+const v5 = Symbol.replace;
+const v6 = () => {
+    return "c";
+};
+var pattern = { [v5]: v0, toString: v6 };
+const v10 = () => {
+    return String.prototype.replace.call(null, pattern, "x");
+};
+v10();
+("abcde").replace(pattern, "x");
+pattern[Symbol.replace] = "dumdidum";
+const v25 = () => {
+    return ("abcde").replace(pattern, "x");
+};
+v25();
+pattern[Symbol.replace] = null;
+("abcde").replace(pattern, "X");
+RegExp.prototype[Symbol.replace].name;
+
+FuzzIL program written to corpus/string-replace.fzil

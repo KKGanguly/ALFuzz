@@ -1,0 +1,60 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    SetComputedProperty v1, v2, v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v5 <- EndObjectLiteral
+    v6 <- CreateNamedVariable 'obj', 'none'
+    Reassign v6, v5
+    v7 <- LoadInteger '1'
+    v8 <- CreateNamedVariable 'obj', 'none'
+    SetProperty v8, 'smi', v7
+    v9 <- LoadFloat '1.5'
+    SetProperty v8, 'dbl', v9
+    v10 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v10
+    v11 <- EndObjectLiteral
+    SetProperty v8, 'obj', v11
+    v12 <- LoadString 'smi'
+    v13 <- LoadInteger '100'
+    v14 <- CallFunction v0, [v8, v12, v13]
+    v15 <- LoadString 'dbl'
+    v16 <- LoadInteger '100'
+    v17 <- CallFunction v0, [v8, v15, v16]
+    v18 <- LoadString 'obj'
+    v19 <- LoadInteger '100'
+    v20 <- CallFunction v0, [v8, v18, v19]
+    v21 <- LoadInteger '5'
+    v22 <- LoadInteger '1'
+    v23 <- LoadInteger '1'
+    v24 <- CreateArray [v21, v22, v23]
+    v25 <- CreateNamedVariable 'smi_array', 'var', v24
+    v26 <- LoadInteger '1'
+    v27 <- LoadInteger '6'
+    v28 <- CallFunction v0, [v25, v26, v27]
+    v29 <- LoadInteger '2'
+    v30 <- LoadFloat '1.2'
+    v31 <- CallFunction v0, [v25, v29, v30]
+EndPlainFunction
+v32 <- CallFunction v4, []
+
+
+function keyed_store(a1, a2, a3) {
+    a1[a2] = a3;
+}
+function foo() {
+    obj = {};
+    obj.smi = 1;
+    obj.dbl = 1.5;
+    obj.obj = { a: 1 };
+    keyed_store(obj, "smi", 100);
+    keyed_store(obj, "dbl", 100);
+    keyed_store(obj, "obj", 100);
+    var smi_array = [5,1,1];
+    keyed_store(smi_array, 1, 6);
+    keyed_store(smi_array, 2, 1.2);
+}
+foo();
+
+FuzzIL program written to corpus/regress-612386-smi-to-double-transition.fzil

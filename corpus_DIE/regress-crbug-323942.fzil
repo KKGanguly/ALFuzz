@@ -1,0 +1,73 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '42'
+    Return v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v0
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'holder', 'var', v2
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'receiver', 'var', v4
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+SetProperty v5, '__proto__', v6
+v7 <- GetProperty v5, '__proto__'
+SetProperty v7, '__proto__', v3
+v8 <- BeginPlainFunction -> v9
+    v10 <- LoadThis
+    v11 <- LoadArguments
+    v12 <- GetProperty v9, 'f'
+    v13 <- CallMethod v12, 'apply', [v10, v11]
+    Return v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> v15
+    v16 <- CallFunction v8, [v15]
+    Return v16
+EndPlainFunction
+v17 <- LoadInteger '42'
+v18 <- CallFunction v14, [v5]
+v19 <- LoadInteger '42'
+v20 <- CallFunction v14, [v5]
+BeginObjectLiteral
+v21 <- EndObjectLiteral
+v22 <- GetProperty v5, '__proto__'
+SetProperty v22, '__proto__', v21
+v23 <- BeginPlainFunction -> 
+    v24 <- CallFunction v14, [v5]
+EndPlainFunction
+v25 <- CallFunction v23, []
+v26 <- GetProperty v5, '__proto__'
+SetProperty v26, '__proto__', v3
+v27 <- LoadInteger '42'
+v28 <- CallFunction v14, [v5]
+
+
+function f0() {
+    return 42;
+}
+var holder = { f: f0 };
+var receiver = {};
+receiver.__proto__ = {};
+const t6 = receiver.__proto__;
+t6.__proto__ = holder;
+function h(a9) {
+    return a9.f.apply(this, arguments);
+}
+function g(a15) {
+    return h(a15);
+}
+g(receiver);
+g(receiver);
+const v21 = {};
+const t17 = receiver.__proto__;
+t17.__proto__ = v21;
+function f23() {
+    g(receiver);
+}
+f23();
+const t22 = receiver.__proto__;
+t22.__proto__ = holder;
+g(receiver);
+
+FuzzIL program written to corpus/regress-crbug-323942.fzil

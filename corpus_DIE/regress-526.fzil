@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v0
+    BeginObjectLiteralGetter `bar` -> v1
+        v2 <- LoadInteger '42'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v2
+        v3 <- EndObjectLiteral
+        Return v3
+    EndObjectLiteralGetter
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'o', 'var', v4
+v6 <- LoadInteger '42'
+v7 <- GetProperty v5, 'bar'
+v8 <- GetProperty v7, 'x'
+
+
+function f0() {
+}
+const v4 = {
+    foo: f0,
+    get bar() {
+        return { x: 42 };
+    },
+};
+var o = v4;
+o.bar.x;
+
+FuzzIL program written to corpus/regress-526.fzil

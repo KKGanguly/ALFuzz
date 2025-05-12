@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '3'
+    v2 <- CreateNamedVariable 'i', 'var', v1
+    v3 <- LoadInteger '0'
+    v4 <- CreateNamedVariable 'j', 'var', v3
+    BeginWhileLoopHeader
+        v5 <- UnaryOperation '--', v2
+        v6 <- LoadInteger '0'
+        v7 <- Compare v5, '>=', v6
+    BeginWhileLoopBody v7
+        v8 <- LoadInteger '1'
+        v9 <- BinaryOperation v2, '&', v8
+        v10 <- CreateNamedVariable 'x', 'var', v9
+        v11 <- LoadInteger '0'
+        v12 <- Compare v10, '>', v11
+        BeginIf v12
+            Continue
+        EndIf
+        v13 <- UnaryOperation v4, '++'
+    EndWhileLoop
+    Return v4
+EndPlainFunction
+v14 <- LoadInteger '2'
+v15 <- CallFunction v0, []
+
+
+function h() {
+    var i = 3;
+    var j = 0;
+    while (--i >= 0) {
+        var x = i & 1;
+        if (x > 0) {
+            continue;
+        }
+        j++;
+    }
+    return j;
+}
+h();
+
+FuzzIL program written to corpus/regress-loop-deopt.fzil

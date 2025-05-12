@@ -1,0 +1,76 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadThis
+    SetProperty v2, 'a', v1
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- BeginPlainFunction -> v5, v6
+        v7 <- LoadInteger '3'
+        SetProperty v5, 'c', v7
+        v8 <- LoadInteger '0'
+        v9 <- CreateNamedVariable 'x', 'var', v8
+        BeginForLoopInitializer
+            v10 <- LoadInteger '0'
+        BeginForLoopCondition -> v11
+            v12 <- LoadInteger '10'
+            v13 <- Compare v11, '<', v12
+        BeginForLoopAfterthought v13 -> v14
+            v15 <- UnaryOperation v14, '++'
+        BeginForLoopBody -> v16
+            v17 <- LoadInteger '1'
+            v18 <- BinaryOperation v16, '+', v17
+            Reassign v9, v18
+        EndForLoop
+        Return v9
+    EndPlainFunction
+    Return v4
+EndPlainFunction
+v19 <- CallFunction v3, []
+v20 <- CreateNamedVariable 'f1', 'var', v19
+v21 <- Construct v0, []
+v22 <- LoadBoolean 'false'
+v23 <- CallFunction v20, [v21, v22]
+v24 <- Construct v0, []
+v25 <- LoadBoolean 'false'
+v26 <- CallFunction v20, [v24, v25]
+v27 <- Construct v0, []
+v28 <- CreateNamedVariable 'o', 'var', v27
+v29 <- LoadBoolean 'true'
+v30 <- CallFunction v20, [v28, v29]
+v31 <- LoadFloat '2.2'
+SetProperty v28, 'c', v31
+v32 <- CallFunction v3, []
+v33 <- CreateNamedVariable 'f2', 'var', v32
+v34 <- Construct v0, []
+v35 <- LoadBoolean 'true'
+v36 <- CallFunction v33, [v34, v35]
+
+
+function Ctor() {
+    this.a = 1;
+}
+function get_closure() {
+    function add_field(a5, a6) {
+        a5.c = 3;
+        var x = 0;
+        for (let i11 = 0; i11 < 10; i11++) {
+            x = i11 + 1;
+        }
+        return x;
+    }
+    return add_field;
+}
+var f1 = get_closure();
+const v21 = new Ctor();
+f1(v21, false);
+const v24 = new Ctor();
+f1(v24, false);
+const v27 = new Ctor();
+var o = v27;
+f1(o, true);
+o.c = 2.2;
+var f2 = get_closure();
+const v34 = new Ctor();
+f2(v34, true);
+
+FuzzIL program written to corpus/regress-sync-optimized-lists.fzil

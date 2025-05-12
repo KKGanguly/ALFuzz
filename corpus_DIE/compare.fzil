@@ -1,0 +1,295 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- Compare v1, '<', v2
+    BeginIf v3
+        Return v2
+    EndIf
+    Return v1
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5, v6
+    v7 <- Compare v5, '<=', v6
+    BeginIf v7
+        Return v6
+    EndIf
+    Return v5
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9, v10
+    v11 <- Compare v9, '>=', v10
+    BeginIf v11
+        Return v9
+    EndIf
+    Return v10
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13, v14
+    v15 <- Compare v13, '>', v14
+    BeginIf v15
+        Return v13
+    EndIf
+    Return v14
+EndPlainFunction
+v16 <- BeginPlainFunction -> v17, v18, v19
+    v20 <- CallFunction v0, [v18, v19]
+    v21 <- LoadString 'MaxLT - primitive'
+    v22 <- CallFunction v4, [v18, v19]
+    v23 <- LoadString 'MaxLE - primitive'
+    v24 <- CallFunction v8, [v18, v19]
+    v25 <- LoadString 'MaxGE - primitive'
+    v26 <- CallFunction v12, [v18, v19]
+    v27 <- LoadString 'MaxGT - primitive'
+EndPlainFunction
+v28 <- LoadInteger '1'
+v29 <- LoadInteger '0'
+v30 <- LoadInteger '1'
+v31 <- CallFunction v16, [v28, v29, v30]
+v32 <- LoadInteger '1'
+v33 <- LoadInteger '1'
+v34 <- LoadInteger '0'
+v35 <- CallFunction v16, [v32, v33, v34]
+v36 <- LoadInteger '4'
+v37 <- LoadInteger '3'
+v38 <- LoadInteger '4'
+v39 <- CallFunction v16, [v36, v37, v38]
+v40 <- LoadInteger '4'
+v41 <- LoadInteger '4'
+v42 <- LoadInteger '3'
+v43 <- CallFunction v16, [v40, v41, v42]
+v44 <- LoadInteger '0'
+v45 <- LoadInteger '1'
+v46 <- UnaryOperation '-', v45
+v47 <- LoadInteger '0'
+v48 <- CallFunction v16, [v44, v46, v47]
+v49 <- LoadInteger '0'
+v50 <- LoadInteger '0'
+v51 <- LoadInteger '1'
+v52 <- UnaryOperation '-', v51
+v53 <- CallFunction v16, [v49, v50, v52]
+v54 <- LoadInteger '2'
+v55 <- UnaryOperation '-', v54
+v56 <- LoadInteger '2'
+v57 <- UnaryOperation '-', v56
+v58 <- LoadInteger '3'
+v59 <- UnaryOperation '-', v58
+v60 <- CallFunction v16, [v55, v57, v59]
+v61 <- LoadInteger '2'
+v62 <- UnaryOperation '-', v61
+v63 <- LoadInteger '3'
+v64 <- UnaryOperation '-', v63
+v65 <- LoadInteger '2'
+v66 <- UnaryOperation '-', v65
+v67 <- CallFunction v16, [v62, v64, v66]
+v68 <- LoadInteger '1'
+v69 <- LoadFloat '0.1'
+v70 <- LoadInteger '1'
+v71 <- CallFunction v16, [v68, v69, v70]
+v72 <- LoadInteger '1'
+v73 <- LoadInteger '1'
+v74 <- LoadFloat '0.1'
+v75 <- CallFunction v16, [v72, v73, v74]
+v76 <- LoadInteger '4'
+v77 <- LoadFloat '3.1'
+v78 <- LoadInteger '4'
+v79 <- CallFunction v16, [v76, v77, v78]
+v80 <- LoadInteger '4'
+v81 <- LoadInteger '4'
+v82 <- LoadFloat '3.1'
+v83 <- CallFunction v16, [v80, v81, v82]
+v84 <- LoadInteger '0'
+v85 <- LoadFloat '1.1'
+v86 <- UnaryOperation '-', v85
+v87 <- LoadInteger '0'
+v88 <- CallFunction v16, [v84, v86, v87]
+v89 <- LoadInteger '0'
+v90 <- LoadInteger '0'
+v91 <- LoadFloat '1.1'
+v92 <- UnaryOperation '-', v91
+v93 <- CallFunction v16, [v89, v90, v92]
+v94 <- LoadInteger '2'
+v95 <- UnaryOperation '-', v94
+v96 <- LoadInteger '2'
+v97 <- UnaryOperation '-', v96
+v98 <- LoadFloat '3.1'
+v99 <- UnaryOperation '-', v98
+v100 <- CallFunction v16, [v95, v97, v99]
+v101 <- LoadInteger '2'
+v102 <- UnaryOperation '-', v101
+v103 <- LoadFloat '3.1'
+v104 <- UnaryOperation '-', v103
+v105 <- LoadInteger '2'
+v106 <- UnaryOperation '-', v105
+v107 <- CallFunction v16, [v102, v104, v106]
+v108 <- BeginPlainFunction -> v109, v110
+    v111 <- LoadString ''
+    v112 <- CreateNamedVariable 'result', 'var', v111
+    v113 <- BeginPlainFunction -> 
+        v114 <- LoadString 'x'
+        Update v112, '+', v114
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v113
+    v115 <- EndObjectLiteral
+    v116 <- CreateNamedVariable 'x', 'var', v115
+    v117 <- BeginPlainFunction -> 
+        v118 <- LoadString 'y'
+        Update v112, '+', v118
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v117
+    v119 <- EndObjectLiteral
+    v120 <- CreateNamedVariable 'y', 'var', v119
+    v121 <- CallFunction v110, [v116, v120]
+EndPlainFunction
+v122 <- LoadString 'xy'
+v123 <- CallFunction v108, [v122, v0]
+v124 <- LoadString 'xy'
+v125 <- CallFunction v108, [v124, v4]
+v126 <- LoadString 'xy'
+v127 <- CallFunction v108, [v126, v8]
+v128 <- LoadString 'xy'
+v129 <- CallFunction v108, [v128, v12]
+v130 <- BeginPlainFunction -> v131
+    v132 <- Compare v131, '==', v131
+    BeginIf v132
+        v133 <- LoadInteger '42'
+        Return v133
+    EndIf
+EndPlainFunction
+v134 <- LoadInteger '42'
+v135 <- LoadInteger '0'
+v136 <- CallFunction v130, [v135]
+v137 <- BeginPlainFunction -> v138
+    v139 <- CreateNamedVariable 'y', 'var', v138
+    v140 <- Compare v138, '==', v139
+    BeginIf v140
+        v141 <- LoadInteger '42'
+        Return v141
+    EndIf
+EndPlainFunction
+v142 <- LoadInteger '42'
+v143 <- LoadInteger '0'
+v144 <- CallFunction v137, [v143]
+v145 <- BeginPlainFunction -> v146
+    v147 <- LoadNull
+    v148 <- Compare v146, '==', v147
+    Return v148
+EndPlainFunction
+v149 <- LoadBoolean 'false'
+v150 <- LoadInteger '42'
+v151 <- CallFunction v145, [v150]
+v152 <- BeginPlainFunction -> v153
+    v154 <- LoadNull
+    v155 <- Compare v153, '==', v154
+    BeginIf v155
+        v156 <- LoadInteger '42'
+        Return v156
+    EndIf
+    v157 <- LoadInteger '0'
+    Return v157
+EndPlainFunction
+v158 <- LoadInteger '42'
+v159 <- LoadNull
+v160 <- CallFunction v152, [v159]
+v161 <- LoadInteger '0'
+v162 <- CreateNamedVariable 'g1', 'var', v161
+v163 <- BeginPlainFunction -> 
+    v164 <- LoadInteger '42'
+    Reassign v162, v164
+    v165 <- LoadNull
+    v166 <- Compare v164, '==', v165
+EndPlainFunction
+v167 <- CallFunction v163, []
+v168 <- LoadInteger '42'
+
+
+function MaxLT(a1, a2) {
+    if (a1 < a2) {
+        return a2;
+    }
+    return a1;
+}
+function MaxLE(a5, a6) {
+    if (a5 <= a6) {
+        return a6;
+    }
+    return a5;
+}
+function MaxGE(a9, a10) {
+    if (a9 >= a10) {
+        return a9;
+    }
+    return a10;
+}
+function MaxGT(a13, a14) {
+    if (a13 > a14) {
+        return a13;
+    }
+    return a14;
+}
+function TestPrimitive(a17, a18, a19) {
+    MaxLT(a18, a19);
+    MaxLE(a18, a19);
+    MaxGE(a18, a19);
+    MaxGT(a18, a19);
+}
+TestPrimitive(1, 0, 1);
+TestPrimitive(1, 1, 0);
+TestPrimitive(4, 3, 4);
+TestPrimitive(4, 4, 3);
+TestPrimitive(0, -1, 0);
+TestPrimitive(0, 0, -1);
+TestPrimitive(-2, -2, -3);
+TestPrimitive(-2, -3, -2);
+TestPrimitive(1, 0.1, 1);
+TestPrimitive(1, 1, 0.1);
+TestPrimitive(4, 3.1, 4);
+TestPrimitive(4, 4, 3.1);
+TestPrimitive(0, -1.1, 0);
+TestPrimitive(0, 0, -1.1);
+TestPrimitive(-2, -2, -3.1);
+TestPrimitive(-2, -3.1, -2);
+function TestNonPrimitive(a109, a110) {
+    var result = "";
+    function f113() {
+        result += "x";
+    }
+    var x = { valueOf: f113 };
+    function f117() {
+        result += "y";
+    }
+    var y = { valueOf: f117 };
+    a110(x, y);
+}
+TestNonPrimitive("xy", MaxLT);
+TestNonPrimitive("xy", MaxLE);
+TestNonPrimitive("xy", MaxGE);
+TestNonPrimitive("xy", MaxGT);
+function CmpX(a131) {
+    if (a131 == a131) {
+        return 42;
+    }
+}
+CmpX(0);
+function CmpXY(a138) {
+    var y = a138;
+    if (a138 == y) {
+        return 42;
+    }
+}
+CmpXY(0);
+function CmpNullValue(a146) {
+    return a146 == null;
+}
+CmpNullValue(42);
+function CmpNullTest(a153) {
+    if (a153 == null) {
+        return 42;
+    }
+    return 0;
+}
+CmpNullTest(null);
+var g1 = 0;
+function CmpNullEffect() {
+    g1 = 42;
+    42 == null;
+}
+CmpNullEffect();
+
+FuzzIL program written to corpus/compare.fzil

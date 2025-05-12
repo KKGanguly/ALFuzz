@@ -1,0 +1,61 @@
+v0 <- LoadString 'call an IIFE'
+v1 <- CreateTemplateString ['\n(function f() {})();\n'], []
+v2 <- LoadUndefined
+v3 <- CreateNamedVariable 'TestCoverage', 'none'
+v4 <- CallFunction v3, [v0, v1, v2]
+v5 <- LoadString 'call locally allocated function'
+v6 <- CreateTemplateString ['\nfor (var i = 0; i < 10; i++) {\n  let f = () => 1;\n  i += f();\n}\n'], []
+v7 <- LoadUndefined
+v8 <- CallFunction v3, [v5, v6, v7]
+v9 <- LoadString 'call an IIFE'
+v10 <- CreateTemplateString ['\n(function f() {})();\n'], []
+v11 <- LoadInteger '0'
+v12 <- LoadInteger '20'
+v13 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v11
+    ObjectLiteralAddProperty `end`, v12
+    ObjectLiteralAddProperty `count`, v13
+v14 <- EndObjectLiteral
+v15 <- LoadInteger '1'
+v16 <- LoadInteger '16'
+v17 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v15
+    ObjectLiteralAddProperty `end`, v16
+    ObjectLiteralAddProperty `count`, v17
+v18 <- EndObjectLiteral
+v19 <- CreateArray [v14, v18]
+v20 <- CallFunction v3, [v9, v10, v19]
+v21 <- LoadString 'call locally allocated function'
+v22 <- CreateTemplateString ['\nfor (var i = 0; i < 10; i++) {\n  let f = () => 1;\n  i += f();\n}\n'], []
+v23 <- LoadInteger '0'
+v24 <- LoadInteger '63'
+v25 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v23
+    ObjectLiteralAddProperty `end`, v24
+    ObjectLiteralAddProperty `count`, v25
+v26 <- EndObjectLiteral
+v27 <- LoadInteger '41'
+v28 <- LoadInteger '48'
+v29 <- LoadInteger '5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v27
+    ObjectLiteralAddProperty `end`, v28
+    ObjectLiteralAddProperty `count`, v29
+v30 <- EndObjectLiteral
+v31 <- CreateArray [v26, v30]
+v32 <- CallFunction v3, [v21, v22, v31]
+
+
+TestCoverage("call an IIFE", `\n(function f() {})();\n`, undefined);
+TestCoverage("call locally allocated function", `\nfor (var i = 0; i < 10; i++) {\n  let f = () => 1;\n  i += f();\n}\n`, undefined);
+const v10 = `\n(function f() {})();\n`;
+const v14 = { start: 0, end: 20, count: 1 };
+TestCoverage("call an IIFE", v10, [v14,{ start: 1, end: 16, count: 1 }]);
+const v22 = `\nfor (var i = 0; i < 10; i++) {\n  let f = () => 1;\n  i += f();\n}\n`;
+const v26 = { start: 0, end: 63, count: 1 };
+TestCoverage("call locally allocated function", v22, [v26,{ start: 41, end: 48, count: 5 }]);
+
+FuzzIL program written to corpus/code-coverage-precise.fzil

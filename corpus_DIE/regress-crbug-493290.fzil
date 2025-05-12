@@ -1,0 +1,19 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'boom'
+    ThrowException v1
+    BeginTry
+    BeginCatch -> v2
+    EndTryCatch
+EndPlainFunction
+v3 <- CallFunction v0, []
+
+
+function f() {
+    throw "boom";
+    try {
+    } catch(e2) {
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-crbug-493290.fzil

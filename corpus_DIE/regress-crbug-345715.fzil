@@ -1,0 +1,71 @@
+v0 <- LoadFloat '1.5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'a', 'none'
+Reassign v2, v1
+v3 <- LoadInteger '0'
+v4 <- CreateNamedVariable 'a', 'none'
+SetProperty v4, 'y', v3
+v5 <- GetProperty v4, 'y'
+v6 <- CreateNamedVariable 'b', 'none'
+Reassign v6, v5
+BeginObjectLiteral
+v7 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'c', 'none'
+Reassign v9, v8
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadInteger '1'
+    Return v11
+EndPlainFunction
+v12 <- BeginPlainFunction -> 
+    v13 <- CreateNamedVariable 'b', 'none'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v13
+    v14 <- EndObjectLiteral
+    v15 <- CreateNamedVariable 'e', 'var', v14
+    v16 <- CallFunction v10, []
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v16
+    v17 <- EndObjectLiteral
+    v18 <- CreateNamedVariable 'd', 'var', v17
+    v19 <- CallFunction v10, []
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v19
+    v20 <- EndObjectLiteral
+    v21 <- CreateNamedVariable 'd', 'var', v20
+    v22 <- CreateArray [v15, v21]
+    Return v22
+EndPlainFunction
+v23 <- CallFunction v12, []
+v24 <- CallFunction v12, []
+v25 <- LoadInteger '1'
+v26 <- CallFunction v12, []
+v27 <- GetElement v26, '1'
+v28 <- GetProperty v27, 'x'
+
+
+a = { y: 1.5 };
+a.y = 0;
+b = a.y;
+const v7 = {};
+c = { y: v7 };
+function f() {
+    return 1;
+}
+function g() {
+    var e = { y: b };
+    const v16 = f();
+    var d = { x: v16 };
+    const v19 = f();
+    var d = { x: v19 };
+    return [e,d];
+}
+g();
+g();
+g()[1].x;
+
+FuzzIL program written to corpus/regress-crbug-345715.fzil

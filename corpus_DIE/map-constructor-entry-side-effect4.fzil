@@ -1,0 +1,127 @@
+v0 <- BeginPlainFunction -> v1
+    BeginObjectLiteral
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable 'k1', 'const', v2
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'k2', 'const', v4
+    BeginObjectLiteral
+    v6 <- EndObjectLiteral
+    v7 <- CreateNamedVariable 'k3', 'const', v6
+    v8 <- LoadInteger '0'
+    v9 <- CreateNamedVariable 'firstEntryCallCount', 'let', v8
+    v10 <- LoadInteger '0'
+    v11 <- CreateNamedVariable 'lastEntryCallCount', 'let', v10
+    v12 <- LoadUndefined
+    v13 <- LoadInteger '1'
+    v14 <- CreateArray [v12, v13]
+    v15 <- LoadString '0'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `get` -> v16
+            v17 <- LoadInteger '2'
+            v18 <- LoadInteger '32'
+            v19 <- BinaryOperation v17, '**', v18
+            v20 <- LoadInteger '2'
+            v21 <- BinaryOperation v19, '-', v20
+            v22 <- CreateNamedVariable 'input', 'none'
+            SetProperty v22, 'length', v21
+            v23 <- UnaryOperation v9, '++'
+            Return v3
+        EndObjectLiteralMethod
+    v24 <- EndObjectLiteral
+    v25 <- CreateNamedVariable 'Object', 'none'
+    v26 <- CallMethod v25, 'defineProperty', [v14, v15, v24]
+    v27 <- LoadInteger '2'
+    v28 <- CreateArray [v5, v27]
+    v29 <- CreateArray [v7]
+    v30 <- LoadString '1'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `get` -> v31
+            v32 <- LoadInteger '1'
+            v33 <- CreateNamedVariable 'input', 'none'
+            SetProperty v33, 'length', v32
+            v34 <- UnaryOperation v11, '++'
+            v35 <- LoadInteger '3'
+            Return v35
+        EndObjectLiteralMethod
+    v36 <- EndObjectLiteral
+    v37 <- CallMethod v25, 'defineProperty', [v29, v30, v36]
+    v38 <- CreateArray [v26, v28, v37]
+    v39 <- CreateNamedVariable 'input', 'const', v38
+    v40 <- Construct v1, [v39]
+    v41 <- CreateNamedVariable 'col', 'const', v40
+    v42 <- LoadInteger '1'
+    v43 <- LoadInteger '1'
+    v44 <- LoadString 'size'
+    v45 <- TestIn v44, v41
+    BeginIf v45
+        v46 <- LoadInteger '3'
+        v47 <- GetProperty v41, 'size'
+    EndIf
+    v48 <- LoadInteger '1'
+    v49 <- CallMethod v41, 'get', [v3]
+    v50 <- LoadInteger '2'
+    v51 <- CallMethod v41, 'get', [v5]
+    v52 <- LoadInteger '3'
+    v53 <- CallMethod v41, 'get', [v7]
+EndPlainFunction
+v54 <- CreateNamedVariable 'Map', 'none'
+v55 <- CallFunction v0, [v54]
+v56 <- CallFunction v0, [v54]
+v57 <- CallFunction v0, [v54]
+v58 <- CallFunction v0, [v54]
+v59 <- CallFunction v0, []
+v60 <- CreateNamedVariable 'WeakMap', 'none'
+v61 <- CallFunction v0, [v60]
+v62 <- CallFunction v0, [v60]
+v63 <- CallFunction v0, [v60]
+v64 <- CallFunction v0, [v60]
+v65 <- CallFunction v0, []
+
+
+function TestMapConstructorEntrySideEffect(a1) {
+    const k1 = {};
+    const k2 = {};
+    const k3 = {};
+    let firstEntryCallCount = 0;
+    let lastEntryCallCount = 0;
+    const v14 = [,1];
+    const v24 = {
+        get() {
+            input.length = (2 ** 32) - 2;
+            firstEntryCallCount++;
+            return k1;
+        },
+    };
+    const v26 = Object.defineProperty(v14, "0", v24);
+    const v28 = [k2,2];
+    const v29 = [k3];
+    const v36 = {
+        get() {
+            input.length = 1;
+            lastEntryCallCount++;
+            return 3;
+        },
+    };
+    const input = [v26,v28,Object.defineProperty(v29, "1", v36)];
+    const v40 = new a1(input);
+    const col = v40;
+    if ("size" in col) {
+        col.size;
+    }
+    col.get(k1);
+    col.get(k2);
+    col.get(k3);
+}
+TestMapConstructorEntrySideEffect(Map);
+TestMapConstructorEntrySideEffect(Map);
+TestMapConstructorEntrySideEffect(Map);
+TestMapConstructorEntrySideEffect(Map);
+TestMapConstructorEntrySideEffect();
+TestMapConstructorEntrySideEffect(WeakMap);
+TestMapConstructorEntrySideEffect(WeakMap);
+TestMapConstructorEntrySideEffect(WeakMap);
+TestMapConstructorEntrySideEffect(WeakMap);
+TestMapConstructorEntrySideEffect();
+
+FuzzIL program written to corpus/map-constructor-entry-side-effect4.fzil

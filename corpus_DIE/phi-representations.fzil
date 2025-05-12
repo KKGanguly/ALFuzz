@@ -1,0 +1,73 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'r', 'var', v1
+    v3 <- LoadInteger '1'
+    v4 <- CreateNamedVariable 'f', 'var', v3
+    BeginWhileLoopHeader
+        v5 <- UnaryOperation v4, '--'
+    BeginWhileLoopBody v5
+        v6 <- TypeOf v2
+        v7 <- LoadString 'undefined'
+        v8 <- Compare v6, '===', v7
+        v9 <- LoadFloat '0.1'
+        v10 <- TernaryOperation v8, v9, v2
+        Reassign v2, v10
+    EndWhileLoop
+    v11 <- BinaryOperation v2, '-', v2
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '0'
+v13 <- CallFunction v0, []
+v14 <- LoadInteger '0'
+v15 <- CallFunction v0, []
+v16 <- LoadInteger '0'
+v17 <- CallFunction v0, []
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadUndefined
+    v20 <- CreateNamedVariable 'r', 'var', v19
+    v21 <- LoadInteger '1'
+    v22 <- CreateNamedVariable 'f', 'var', v21
+    BeginWhileLoopHeader
+        v23 <- UnaryOperation v22, '--'
+    BeginWhileLoopBody v23
+        v24 <- LoadUndefined
+        v25 <- Compare v20, '===', v24
+        v26 <- LoadFloat '0.1'
+        v27 <- TernaryOperation v25, v26, v20
+        Reassign v20, v27
+    EndWhileLoop
+    v28 <- BinaryOperation v20, '-', v20
+    Return v28
+EndPlainFunction
+v29 <- LoadInteger '0'
+v30 <- CallFunction v18, []
+v31 <- LoadInteger '0'
+v32 <- CallFunction v18, []
+v33 <- LoadInteger '0'
+v34 <- CallFunction v18, []
+
+
+function ar() {
+    var r;
+    var f = 1;
+    while (f--) {
+        r = typeof r === "undefined" ? 0.1 : r;
+    }
+    return r - r;
+}
+ar();
+ar();
+ar();
+function ar2() {
+    var r;
+    var f = 1;
+    while (f--) {
+        r = r === undefined ? 0.1 : r;
+    }
+    return r - r;
+}
+ar2();
+ar2();
+ar2();
+
+FuzzIL program written to corpus/phi-representations.fzil

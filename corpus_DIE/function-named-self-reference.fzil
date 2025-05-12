@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> v1
+    BeginIf v1
+        Return v1
+    EndIf
+    v2 <- BeginPlainFunction -> v3
+        v4 <- LoadInteger '1'
+        v5 <- BinaryOperation v3, '+', v4
+        v6 <- LoadInteger '1'
+        v7 <- BinaryOperation v5, '<<', v6
+        v8 <- CreateNamedVariable 'fn', 'none'
+        v9 <- CallFunction v8, [v7]
+        v10 <- CreateNamedVariable 'res', 'var', v9
+        Return v10
+    EndPlainFunction
+    v11 <- LoadInteger '0'
+    v12 <- CallFunction v2, [v11]
+    Return v12
+EndPlainFunction
+v13 <- CreateNamedVariable 'fn', 'var', v0
+v14 <- CallFunction v13, []
+v15 <- CreateNamedVariable 'res', 'var', v14
+v16 <- LoadInteger '2'
+
+
+function fn(a1) {
+    if (a1) {
+        return a1;
+    }
+    function run(a3) {
+        var res = fn((a3 + 1) << 1);
+        return res;
+    }
+    return run(0);
+}
+var fn = fn;
+var res = fn();
+
+FuzzIL program written to corpus/function-named-self-reference.fzil

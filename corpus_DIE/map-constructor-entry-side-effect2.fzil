@@ -1,0 +1,117 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'prototype'
+    v3 <- GetProperty v2, 'set'
+    v4 <- CreateNamedVariable 'originalPrototypeSet', 'const', v3
+    BeginObjectLiteral
+    v5 <- EndObjectLiteral
+    v6 <- CreateNamedVariable 'k1', 'const', v5
+    BeginObjectLiteral
+    v7 <- EndObjectLiteral
+    v8 <- CreateNamedVariable 'k2', 'const', v7
+    v9 <- LoadInteger '0'
+    v10 <- CreateNamedVariable 'callCount', 'let', v9
+    v11 <- LoadUndefined
+    v12 <- LoadInteger '1'
+    v13 <- CreateArray [v11, v12]
+    v14 <- LoadString '0'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `get` -> v15
+            v16 <- BeginArrowFunction -> 
+                v17 <- UnaryOperation v10, '++'
+            EndArrowFunction
+            v18 <- GetProperty v1, 'prototype'
+            SetProperty v18, 'set', v16
+            Return v6
+        EndObjectLiteralMethod
+    v19 <- EndObjectLiteral
+    v20 <- CreateNamedVariable 'Object', 'none'
+    v21 <- CallMethod v20, 'defineProperty', [v13, v14, v19]
+    v22 <- LoadInteger '2'
+    v23 <- CreateArray [v8, v22]
+    v24 <- CreateArray [v21, v23]
+    v25 <- CreateNamedVariable 'input', 'const', v24
+    v26 <- Construct v1, [v25]
+    v27 <- CreateNamedVariable 'col', 'const', v26
+    v28 <- LoadInteger '0'
+    v29 <- LoadString 'size'
+    v30 <- TestIn v29, v27
+    BeginIf v30
+        v31 <- LoadInteger '2'
+        v32 <- GetProperty v27, 'size'
+    EndIf
+    v33 <- CallMethod v27, 'has', [v6]
+    v34 <- CallMethod v27, 'has', [v8]
+    v35 <- Construct v1, [v25]
+    v36 <- CreateNamedVariable 'col2', 'const', v35
+    v37 <- LoadInteger '2'
+    v38 <- LoadString 'size'
+    v39 <- TestIn v38, v27
+    BeginIf v39
+        v40 <- LoadInteger '0'
+        v41 <- GetProperty v36, 'size'
+    EndIf
+    v42 <- CallMethod v36, 'has', [v6]
+    v43 <- CallMethod v36, 'has', [v8]
+    v44 <- GetProperty v1, 'prototype'
+    SetProperty v44, 'set', v4
+EndPlainFunction
+v45 <- CreateNamedVariable 'Map', 'none'
+v46 <- CallFunction v0, [v45]
+v47 <- CallFunction v0, [v45]
+v48 <- CallFunction v0, [v45]
+v49 <- CallFunction v0, [v45]
+v50 <- CallFunction v0, []
+v51 <- CreateNamedVariable 'WeakMap', 'none'
+v52 <- CallFunction v0, [v51]
+v53 <- CallFunction v0, [v51]
+v54 <- CallFunction v0, [v51]
+v55 <- CallFunction v0, [v51]
+v56 <- CallFunction v0, []
+
+
+function TestMapConstructorEntrySideEffect(a1) {
+    const originalPrototypeSet = a1.prototype.set;
+    const k1 = {};
+    const k2 = {};
+    let callCount = 0;
+    const v13 = [,1];
+    const v19 = {
+        get() {
+            const v16 = () => {
+                callCount++;
+            };
+            const t3 = a1.prototype;
+            t3.set = v16;
+            return k1;
+        },
+    };
+    const input = [Object.defineProperty(v13, "0", v19),[k2,2]];
+    const v26 = new a1(input);
+    const col = v26;
+    if ("size" in col) {
+        col.size;
+    }
+    col.has(k1);
+    col.has(k2);
+    const v35 = new a1(input);
+    const col2 = v35;
+    if ("size" in col) {
+        col2.size;
+    }
+    col2.has(k1);
+    col2.has(k2);
+    const t29 = a1.prototype;
+    t29.set = originalPrototypeSet;
+}
+TestMapConstructorEntrySideEffect(Map);
+TestMapConstructorEntrySideEffect(Map);
+TestMapConstructorEntrySideEffect(Map);
+TestMapConstructorEntrySideEffect(Map);
+TestMapConstructorEntrySideEffect();
+TestMapConstructorEntrySideEffect(WeakMap);
+TestMapConstructorEntrySideEffect(WeakMap);
+TestMapConstructorEntrySideEffect(WeakMap);
+TestMapConstructorEntrySideEffect(WeakMap);
+TestMapConstructorEntrySideEffect();
+
+FuzzIL program written to corpus/map-constructor-entry-side-effect2.fzil

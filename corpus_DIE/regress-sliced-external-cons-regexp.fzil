@@ -1,0 +1,57 @@
+v0 <- LoadRegExp '(B)' ''
+v1 <- CreateNamedVariable 're', 'var', v0
+v2 <- LoadString '0123456789'
+v3 <- LoadString 'ABCDEFGHIJ'
+v4 <- BinaryOperation v2, '+', v3
+v5 <- CreateNamedVariable 'cons1', 'var', v4
+v6 <- LoadString '0123456789ሴ'
+v7 <- LoadString 'ABCDEFGHIJ'
+v8 <- BinaryOperation v6, '+', v7
+v9 <- CreateNamedVariable 'cons2', 'var', v8
+v10 <- CreateNamedVariable 'gc', 'none'
+v11 <- CallFunction v10, []
+v12 <- CallFunction v10, []
+v13 <- LoadInteger '1'
+v14 <- LoadInteger '1'
+v15 <- UnaryOperation '-', v14
+v16 <- CallMethod v5, 'slice', [v13, v15]
+v17 <- CreateNamedVariable 'slice1', 'var', v16
+v18 <- LoadInteger '1'
+v19 <- LoadInteger '1'
+v20 <- UnaryOperation '-', v19
+v21 <- CallMethod v9, 'slice', [v18, v20]
+v22 <- CreateNamedVariable 'slice2', 'var', v21
+BeginForLoopInitializer
+    v23 <- LoadInteger '0'
+BeginForLoopCondition -> v24
+    v25 <- LoadInteger '10'
+    v26 <- Compare v24, '<', v25
+BeginForLoopAfterthought v26 -> v27
+    v28 <- UnaryOperation v27, '++'
+BeginForLoopBody -> v29
+    v30 <- LoadString 'B'
+    v31 <- LoadString 'B'
+    v32 <- CreateArray [v30, v31]
+    v33 <- CallMethod v1, 'exec', [v17]
+    v34 <- LoadString 'B'
+    v35 <- LoadString 'B'
+    v36 <- CreateArray [v34, v35]
+    v37 <- CallMethod v1, 'exec', [v22]
+EndForLoop
+
+
+var re = /(B)/;
+var cons1 = "0123456789" + "ABCDEFGHIJ";
+var cons2 = "0123456789ሴ" + "ABCDEFGHIJ";
+gc();
+gc();
+var slice1 = cons1.slice(1, -1);
+var slice2 = cons2.slice(1, -1);
+for (let i24 = 0; i24 < 10; i24++) {
+    ["B","B"];
+    re.exec(slice1);
+    ["B","B"];
+    re.exec(slice2);
+}
+
+FuzzIL program written to corpus/regress-sliced-external-cons-regexp.fzil

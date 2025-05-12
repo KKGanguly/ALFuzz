@@ -1,0 +1,47 @@
+v0 <- LoadInteger '320255973501901'
+v1 <- LoadInteger '562949953421312'
+v2 <- BinaryOperation v0, '/', v1
+v3 <- CreateNamedVariable 'x', 'var', v2
+v4 <- LoadInteger '302663787453389'
+v5 <- LoadInteger '562949953421312'
+v6 <- BinaryOperation v4, '/', v5
+v7 <- CreateNamedVariable 'y', 'var', v6
+v8 <- CreateNamedVariable 'Math', 'none'
+v9 <- CallMethod v8, 'sin', [v3]
+v10 <- CallMethod v8, 'sin', [v7]
+v11 <- Compare v9, '!=', v10
+v12 <- CallMethod v8, 'cos', [v3]
+v13 <- CallMethod v8, 'cos', [v7]
+v14 <- Compare v12, '!=', v13
+v15 <- CallMethod v8, 'tan', [v3]
+v16 <- CallMethod v8, 'tan', [v7]
+v17 <- Compare v15, '!=', v16
+v18 <- CallMethod v8, 'log', [v3]
+v19 <- CallMethod v8, 'log', [v7]
+v20 <- Compare v18, '!=', v19
+v21 <- CallMethod v8, 'asin', [v3]
+v22 <- CallMethod v8, 'asin', [v7]
+v23 <- Compare v21, '!=', v22
+v24 <- CallMethod v8, 'acos', [v3]
+v25 <- CallMethod v8, 'acos', [v7]
+v26 <- Compare v24, '!=', v25
+v27 <- CallMethod v8, 'atan', [v3]
+v28 <- CallMethod v8, 'atan', [v7]
+v29 <- Compare v27, '!=', v28
+v30 <- CallMethod v8, 'exp', [v3]
+v31 <- CallMethod v8, 'exp', [v7]
+v32 <- Compare v30, '!=', v31
+
+
+var x = 320255973501901 / 562949953421312;
+var y = 302663787453389 / 562949953421312;
+Math.sin(x) != Math.sin(y);
+Math.cos(x) != Math.cos(y);
+Math.tan(x) != Math.tan(y);
+Math.log(x) != Math.log(y);
+Math.asin(x) != Math.asin(y);
+Math.acos(x) != Math.acos(y);
+Math.atan(x) != Math.atan(y);
+Math.exp(x) != Math.exp(y);
+
+FuzzIL program written to corpus/transcendentals.fzil

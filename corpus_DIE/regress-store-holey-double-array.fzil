@@ -1,0 +1,97 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3, v4
+        v5 <- GetComputedProperty v2, v4
+        SetComputedProperty v3, v4, v5
+    EndPlainFunction
+    v6 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v7 <- LoadInteger '16'
+    v8 <- Construct v6, [v7]
+    v9 <- CreateNamedVariable 'b', 'var', v8
+    v10 <- CreateNamedVariable 'Int32Array', 'none'
+    v11 <- Construct v10, [v9]
+    v12 <- CreateNamedVariable 'i32', 'var', v11
+    v13 <- LoadInteger '4294443007'
+    SetElement v12, '0', v13
+    v14 <- LoadInteger '4294443007'
+    SetElement v12, '1', v14
+    v15 <- LoadInteger '4294443007'
+    SetElement v12, '3', v15
+    v16 <- LoadInteger '4294443007'
+    SetElement v12, '4', v16
+    v17 <- CreateNamedVariable 'Float64Array', 'none'
+    v18 <- Construct v17, [v9]
+    v19 <- CreateNamedVariable 'f64', 'var', v18
+    v20 <- LoadUndefined
+    v21 <- LoadFloat '0.1'
+    v22 <- CreateArray [v20, v21]
+    v23 <- CreateNamedVariable 'a', 'var', v22
+    v24 <- LoadInteger '1'
+    v25 <- CallFunction v1, [v19, v23, v24]
+    v26 <- LoadInteger '1'
+    v27 <- CallFunction v1, [v19, v23, v26]
+    v28 <- LoadInteger '0'
+    v29 <- CallFunction v1, [v19, v23, v28]
+    v30 <- GetElement v23, '0'
+    v31 <- CreateNamedVariable 'Number', 'none'
+    v32 <- CallMethod v31, 'isNaN', [v30]
+EndPlainFunction
+v33 <- CallFunction v0, []
+v34 <- BeginPlainFunction -> 
+    v35 <- BeginPlainFunction -> v36, v37
+        v38 <- GetComputedProperty v36, v37
+        v39 <- CreateNamedVariable 'x', 'var', v38
+        v40 <- UnaryOperation '+', v39
+        SetComputedProperty v36, v37, v40
+    EndPlainFunction
+    v41 <- LoadUndefined
+    v42 <- LoadFloat '0.1'
+    v43 <- CreateArray [v41, v42]
+    v44 <- CreateNamedVariable 'a', 'var', v43
+    v45 <- LoadInteger '1'
+    v46 <- CallFunction v35, [v44, v45]
+    v47 <- LoadInteger '1'
+    v48 <- CallFunction v35, [v44, v47]
+    v49 <- LoadInteger '0'
+    v50 <- CallFunction v35, [v44, v49]
+    v51 <- GetElement v44, '0'
+    v52 <- CreateNamedVariable 'Number', 'none'
+    v53 <- CallMethod v52, 'isNaN', [v51]
+EndPlainFunction
+v54 <- CallFunction v34, []
+
+
+function StoreHoleBitPattern() {
+    function g(a2, a3, a4) {
+        a3[a4] = a2[a4];
+    }
+    const v8 = new ArrayBuffer(16);
+    var b = v8;
+    const v11 = new Int32Array(b);
+    var i32 = v11;
+    i32[0] = 4294443007;
+    i32[1] = 4294443007;
+    i32[3] = 4294443007;
+    i32[4] = 4294443007;
+    const v18 = new Float64Array(b);
+    var f64 = v18;
+    var a = [,0.1];
+    g(f64, a, 1);
+    g(f64, a, 1);
+    g(f64, a, 0);
+    Number.isNaN(a[0]);
+}
+StoreHoleBitPattern();
+function ConvertHoleToNumberAndStore() {
+    function g(a36, a37) {
+        var x = a36[a37];
+        a36[a37] = +x;
+    }
+    var a = [,0.1];
+    g(a, 1);
+    g(a, 1);
+    g(a, 0);
+    Number.isNaN(a[0]);
+}
+ConvertHoleToNumberAndStore();
+
+FuzzIL program written to corpus/regress-store-holey-double-array.fzil

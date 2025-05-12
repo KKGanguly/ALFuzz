@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Error', 'none'
+    v2 <- Construct v1, []
+    v3 <- GetProperty v2, 'stack'
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- CallFunction v0, []
+    Return v6
+EndPlainFunction
+v7 <- CallFunction v4, []
+v8 <- CallFunction v4, []
+v9 <- CallFunction v4, []
+v10 <- CreateNamedVariable 'print', 'none'
+v11 <- CallFunction v10, [v9]
+v12 <- CallFunction v4, []
+v13 <- LoadRegExp 'g \(.*?\.js:15:10\)' ''
+v14 <- CallMethod v13, 'test', [v12]
+
+
+function f() {
+    const v2 = new Error();
+    return v2.stack;
+}
+function g(a5) {
+    return f();
+}
+g();
+g();
+print(g());
+const v12 = g();
+/g \(.*?\.js:15:10\)/.test(v12);
+
+FuzzIL program written to corpus/optimized-stack-trace.fzil

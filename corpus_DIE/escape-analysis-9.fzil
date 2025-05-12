@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadArguments
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    Directive 'use strict'
+    v4 <- LoadInteger '1'
+    v5 <- LoadInteger '2'
+    v6 <- CallFunction v0, [v4, v5]
+    v7 <- CreateNamedVariable 'o', 'var', v6
+    BeginIf v3
+        v8 <- LoadInteger '5'
+        SetElement v7, '0', v8
+    BeginElse
+        v9 <- LoadInteger '7'
+        SetElement v7, '0', v9
+    EndIf
+    v10 <- GetElement v7, '0'
+    Return v10
+EndPlainFunction
+v11 <- LoadInteger '7'
+v12 <- CallFunction v2, []
+v13 <- LoadInteger '7'
+v14 <- CallFunction v2, []
+v15 <- LoadInteger '5'
+v16 <- LoadBoolean 'true'
+v17 <- CallFunction v2, [v16]
+v18 <- LoadInteger '7'
+v19 <- LoadBoolean 'false'
+v20 <- CallFunction v2, [v19]
+v21 <- LoadInteger '7'
+v22 <- CallFunction v2, []
+
+
+function f() {
+    return arguments;
+}
+function g(a3) {
+    'use strict';
+    var o = f(1, 2);
+    if (a3) {
+        o[0] = 5;
+    } else {
+        o[0] = 7;
+    }
+    return o[0];
+}
+g();
+g();
+g(true);
+g(false);
+g();
+
+FuzzIL program written to corpus/escape-analysis-9.fzil

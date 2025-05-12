@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginTry
+        v3 <- LoadInteger '1'
+        v4 <- BinaryOperation v2, '+', v3
+        v5 <- CallFunction v0, [v1, v4]
+    BeginCatch -> v6
+    EndTryCatch
+    v7 <- LoadFloat '43.35'
+    v8 <- LoadFloat '5.3'
+    v9 <- BinaryOperation v2, '*', v8
+    v10 <- BinaryOperation v7, '+', v9
+    SetComputedProperty v1, v2, v10
+EndPlainFunction
+v11 <- CreateNamedVariable 'Array', 'none'
+v12 <- GetProperty v11, 'prototype'
+v13 <- LoadInteger '0'
+v14 <- CallFunction v0, [v12, v13]
+
+
+function f(a1, a2) {
+    try {
+        f(a1, a2 + 1);
+    } catch(e6) {
+    }
+    a1[a2] = 43.35 + (a2 * 5.3);
+}
+f(Array.prototype, 0);
+
+FuzzIL program written to corpus/regress-crbug-783132.fzil

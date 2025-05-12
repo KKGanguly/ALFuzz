@@ -1,0 +1,36 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- LoadInteger '1'
+    v4 <- CreateNamedVariable 'Math', 'none'
+    v5 <- CallMethod v4, 'min', [v3, v1]
+    v6 <- BinaryOperation v2, '/', v5
+    Return v6
+EndPlainFunction
+BeginForLoopInitializer
+    v7 <- LoadInteger '0'
+BeginForLoopCondition -> v8
+    v9 <- LoadInteger '5'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10 -> v11
+    v12 <- UnaryOperation '++', v11
+BeginForLoopBody -> v13
+    v14 <- LoadInteger '1'
+    v15 <- CallFunction v0, [v14]
+EndForLoop
+v16 <- CreateNamedVariable 'Infinity', 'none'
+v17 <- UnaryOperation '-', v16
+v18 <- LoadInteger '0'
+v19 <- UnaryOperation '-', v18
+v20 <- CallFunction v0, [v19]
+
+
+function f(a1) {
+    return 1 / Math.min(1, a1);
+}
+for (let i8 = 0; i8 < 5; ++i8) {
+    f(1);
+}
+-Infinity;
+f(-0);
+
+FuzzIL program written to corpus/regress-1085.fzil

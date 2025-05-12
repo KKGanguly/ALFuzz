@@ -1,0 +1,67 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- GetProperty v2, 'f'
+        Return v3
+    EndPlainFunction
+    Return v1
+EndPlainFunction
+v4 <- CallFunction v0, []
+v5 <- CreateNamedVariable 'g1', 'let', v4
+v6 <- CallFunction v0, []
+v7 <- CreateNamedVariable 'g2', 'let', v6
+v8 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v8
+v9 <- EndObjectLiteral
+v10 <- CallFunction v5, [v9]
+v11 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v11
+v12 <- EndObjectLiteral
+v13 <- CallFunction v5, [v12]
+v14 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v14
+v15 <- EndObjectLiteral
+v16 <- CallFunction v7, [v15]
+v17 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v17
+v18 <- EndObjectLiteral
+v19 <- CallFunction v7, [v18]
+v20 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v20
+v21 <- EndObjectLiteral
+v22 <- CallFunction v5, [v21]
+v23 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v23
+v24 <- EndObjectLiteral
+v25 <- CallFunction v7, [v24]
+BeginObjectLiteral
+v26 <- EndObjectLiteral
+v27 <- CallFunction v5, [v26]
+BeginObjectLiteral
+v28 <- EndObjectLiteral
+v29 <- CallFunction v7, [v28]
+
+
+function foo() {
+    function g(a2) {
+        return a2.f;
+    }
+    return g;
+}
+let g1 = foo();
+let g2 = foo();
+g1({ f: 1 });
+g1({ f: 2 });
+g2({ f: 2 });
+g2({ f: 2 });
+g1({ f: 1 });
+g2({ f: 2 });
+g1({});
+g2({});
+
+FuzzIL program written to corpus/regress-unlink-closures-on-deopt.fzil

@@ -1,0 +1,398 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `target`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'target', 'var', v1
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+SetProperty v2, '__proto__', v3
+v4 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `handler`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'handler', 'var', v5
+v7 <- CreateNamedVariable 'Proxy', 'none'
+v8 <- Construct v7, [v2, v6]
+v9 <- CreateNamedVariable 'proxy', 'var', v8
+v10 <- CreateNamedVariable 'Object', 'none'
+v11 <- CallMethod v10, 'getPrototypeOf', [v9]
+v12 <- GetProperty v2, '__proto__'
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadUndefined
+    v15 <- CallMethod v10, 'setPrototypeOf', [v9, v14]
+EndPlainFunction
+v16 <- CallFunction v13, []
+v17 <- CreateNamedVariable 'TypeError', 'none'
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadInteger '1'
+    v20 <- CallMethod v10, 'setPrototypeOf', [v9, v19]
+EndPlainFunction
+v21 <- CallFunction v18, []
+v22 <- LoadInteger '1'
+v23 <- CreateArray [v22]
+v24 <- CreateNamedVariable 'prototype', 'var', v23
+v25 <- CallMethod v10, 'setPrototypeOf', [v9, v24]
+v26 <- CallMethod v10, 'getPrototypeOf', [v9]
+v27 <- CallMethod v10, 'getPrototypeOf', [v2]
+v28 <- CallMethod v7, 'revocable', [v2, v6]
+v29 <- CreateNamedVariable 'pair', 'var', v28
+v30 <- GetProperty v29, 'proxy'
+v31 <- GetProperty v29, 'proxy'
+v32 <- CallMethod v10, 'setPrototypeOf', [v31, v24]
+v33 <- GetProperty v29, 'proxy'
+v34 <- CallMethod v10, 'getPrototypeOf', [v33]
+v35 <- CallMethod v29, 'revoke', []
+v36 <- LoadString 'Object.setPrototypeOf(pair.proxy, prototype)'
+v37 <- BeginPlainFunction -> v38, v39
+    v40 <- LoadBoolean 'false'
+    Return v40
+EndPlainFunction
+SetProperty v6, 'setPrototypeOf', v37
+v41 <- BeginPlainFunction -> 
+    v42 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v42
+    v43 <- EndObjectLiteral
+    v44 <- CallMethod v10, 'setPrototypeOf', [v9, v43]
+EndPlainFunction
+v45 <- CallFunction v41, []
+v46 <- BeginPlainFunction -> v47, v48
+    v49 <- LoadUndefined
+    Return v49
+EndPlainFunction
+SetProperty v6, 'setPrototypeOf', v46
+v50 <- BeginPlainFunction -> 
+    v51 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v51
+    v52 <- EndObjectLiteral
+    v53 <- CallMethod v10, 'setPrototypeOf', [v9, v52]
+EndPlainFunction
+v54 <- CallFunction v50, []
+v55 <- BeginPlainFunction -> v56
+EndPlainFunction
+SetProperty v6, 'setPrototypeOf', v55
+v57 <- BeginPlainFunction -> 
+    v58 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v58
+    v59 <- EndObjectLiteral
+    v60 <- CallMethod v10, 'setPrototypeOf', [v9, v59]
+EndPlainFunction
+v61 <- CallFunction v57, []
+v62 <- BeginPlainFunction -> v63, v64
+    v65 <- CreateNamedVariable 'Error', 'none'
+    v66 <- CallFunction v65, []
+    ThrowException v66
+EndPlainFunction
+SetProperty v6, 'setPrototypeOf', v62
+v67 <- BeginPlainFunction -> 
+    v68 <- LoadInteger '4'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v68
+    v69 <- EndObjectLiteral
+    v70 <- CallMethod v10, 'setPrototypeOf', [v9, v69]
+EndPlainFunction
+v71 <- CallFunction v67, []
+v72 <- CreateNamedVariable 'Error', 'none'
+v73 <- LoadUndefined
+v74 <- CreateNamedVariable 'seen_prototype', 'var', v73
+v75 <- LoadUndefined
+v76 <- CreateNamedVariable 'seen_target', 'var', v75
+v77 <- BeginPlainFunction -> v78, v79
+    Reassign v76, v78
+    Reassign v74, v79
+    v80 <- LoadBoolean 'true'
+    Return v80
+EndPlainFunction
+SetProperty v6, 'setPrototypeOf', v77
+v81 <- LoadInteger '5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v81
+v82 <- EndObjectLiteral
+v83 <- CallMethod v10, 'setPrototypeOf', [v9, v82]
+v84 <- LoadInteger '5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v84
+v85 <- EndObjectLiteral
+v86 <- BeginPlainFunction -> 
+    v87 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `target`, v87
+    v88 <- EndObjectLiteral
+    v89 <- CreateNamedVariable 'target', 'var', v88
+    BeginObjectLiteral
+    v90 <- EndObjectLiteral
+    SetProperty v89, '__proto__', v90
+    BeginObjectLiteral
+    v91 <- EndObjectLiteral
+    v92 <- CreateNamedVariable 'handler', 'var', v91
+    BeginObjectLiteral
+    v93 <- EndObjectLiteral
+    v94 <- CreateNamedVariable 'handler2', 'var', v93
+    v95 <- Construct v7, [v89, v94]
+    v96 <- CreateNamedVariable 'target2', 'var', v95
+    v97 <- Construct v7, [v96, v92]
+    v98 <- CreateNamedVariable 'proxy2', 'var', v97
+    v99 <- CallMethod v10, 'getPrototypeOf', [v98]
+    v100 <- GetProperty v89, '__proto__'
+    v101 <- LoadInteger '2'
+    v102 <- LoadInteger '3'
+    v103 <- CreateArray [v101, v102]
+    v104 <- CreateNamedVariable 'prototype', 'var', v103
+    v105 <- CallMethod v10, 'setPrototypeOf', [v98, v104]
+    v106 <- CallMethod v10, 'getPrototypeOf', [v98]
+    v107 <- CallMethod v10, 'getPrototypeOf', [v89]
+EndPlainFunction
+v108 <- CallFunction v86, []
+v109 <- BeginPlainFunction -> 
+    v110 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `target`, v110
+    v111 <- EndObjectLiteral
+    v112 <- CreateNamedVariable 'target', 'var', v111
+    BeginObjectLiteral
+    v113 <- EndObjectLiteral
+    SetProperty v112, '__proto__', v113
+    BeginObjectLiteral
+    v114 <- EndObjectLiteral
+    v115 <- CreateNamedVariable 'handler', 'var', v114
+    BeginObjectLiteral
+    v116 <- EndObjectLiteral
+    v117 <- CreateNamedVariable 'handler2', 'var', v116
+    v118 <- Construct v7, [v112, v115]
+    v119 <- CreateNamedVariable 'target2', 'var', v118
+    v120 <- Construct v7, [v119, v117]
+    v121 <- CreateNamedVariable 'proxy2', 'var', v120
+    v122 <- LoadInteger '1'
+    v123 <- CreateArray [v122]
+    v124 <- CreateNamedVariable 'prototype', 'var', v123
+    v125 <- CreateNamedVariable 'Reflect', 'none'
+    v126 <- CallMethod v125, 'setPrototypeOf', [v121, v124]
+    v127 <- CallMethod v125, 'getPrototypeOf', [v112]
+    v128 <- BeginPlainFunction -> v129, v130
+        v131 <- CallMethod v125, 'setPrototypeOf', [v129, v130]
+        v132 <- LoadBoolean 'true'
+        Return v132
+    EndPlainFunction
+    SetProperty v117, 'setPrototypeOf', v128
+    v133 <- LoadInteger '2'
+    v134 <- CreateArray [v133]
+    Reassign v124, v134
+    v135 <- CallMethod v125, 'setPrototypeOf', [v121, v124]
+    v136 <- CallMethod v125, 'getPrototypeOf', [v112]
+    v137 <- LoadBoolean 'false'
+    v138 <- CreateNamedVariable 'gotPrototype', 'var', v137
+    v139 <- BeginPlainFunction -> 
+        v140 <- LoadBoolean 'true'
+        Reassign v138, v140
+        v141 <- CallFunction v17, []
+        ThrowException v141
+    EndPlainFunction
+    SetProperty v115, 'getPrototypeOf', v139
+    v142 <- LoadInteger '3'
+    v143 <- CreateArray [v142]
+    Reassign v124, v143
+    v144 <- CallMethod v125, 'setPrototypeOf', [v121, v124]
+    v145 <- CallMethod v125, 'getPrototypeOf', [v112]
+    v146 <- CallMethod v125, 'preventExtensions', [v112]
+    v147 <- BeginArrowFunction -> 
+        v148 <- LoadInteger '4'
+        v149 <- CreateArray [v148]
+        v150 <- CallMethod v125, 'setPrototypeOf', [v121, v149]
+    EndArrowFunction
+    v151 <- CallFunction v147, []
+    v152 <- LoadInteger '3'
+    v153 <- CreateArray [v152]
+    v154 <- CallMethod v125, 'getPrototypeOf', [v112]
+    v155 <- DeleteProperty v115, 'getPrototypeOf'
+    v156 <- CallMethod v125, 'setPrototypeOf', [v121, v124]
+    v157 <- LoadInteger '5'
+    v158 <- CreateArray [v157]
+    Reassign v124, v158
+    v159 <- BeginArrowFunction -> 
+        v160 <- CallMethod v125, 'setPrototypeOf', [v121, v124]
+    EndArrowFunction
+    v161 <- CallFunction v159, []
+EndPlainFunction
+v162 <- CallFunction v109, []
+v163 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v164 <- EndObjectLiteral
+    v165 <- CreateNamedVariable 'handler', 'var', v164
+    v166 <- BeginArrowFunction -> 
+        v167 <- LoadBoolean 'false'
+        Return v167
+    EndArrowFunction
+    SetProperty v165, 'setPrototypeOf', v166
+    BeginObjectLiteral
+    v168 <- EndObjectLiteral
+    v169 <- BeginArrowFunction -> 
+        v170 <- BeginPlainFunction -> 
+        EndPlainFunction
+        v171 <- CallFunction v170, []
+        Return v171
+    EndArrowFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `isExtensible`, v169
+    v172 <- EndObjectLiteral
+    v173 <- Construct v7, [v168, v172]
+    v174 <- CreateNamedVariable 'target', 'var', v173
+    v175 <- Construct v7, [v174, v165]
+    v176 <- CreateNamedVariable 'object', 'var', v175
+    BeginObjectLiteral
+    v177 <- EndObjectLiteral
+    v178 <- CreateNamedVariable 'Reflect', 'none'
+    v179 <- CallMethod v178, 'setPrototypeOf', [v176, v177]
+EndPlainFunction
+v180 <- CallFunction v163, []
+
+
+var target = { target: 1 };
+target.__proto__ = {};
+var handler = { handler: 1 };
+const v8 = new Proxy(target, handler);
+var proxy = v8;
+Object.getPrototypeOf(proxy);
+target.__proto__;
+function f13() {
+    Object.setPrototypeOf(proxy, undefined);
+}
+f13();
+function f18() {
+    Object.setPrototypeOf(proxy, 1);
+}
+f18();
+var prototype = [1];
+Object.setPrototypeOf(proxy, prototype);
+Object.getPrototypeOf(proxy);
+Object.getPrototypeOf(target);
+var pair = Proxy.revocable(target, handler);
+pair.proxy;
+Object.setPrototypeOf(pair.proxy, prototype);
+Object.getPrototypeOf(pair.proxy);
+pair.revoke();
+function f37(a38, a39) {
+    return false;
+}
+handler.setPrototypeOf = f37;
+function f41() {
+    Object.setPrototypeOf(proxy, { a: 1 });
+}
+f41();
+function f46(a47, a48) {
+    return undefined;
+}
+handler.setPrototypeOf = f46;
+function f50() {
+    Object.setPrototypeOf(proxy, { a: 2 });
+}
+f50();
+function f55(a56) {
+}
+handler.setPrototypeOf = f55;
+function f57() {
+    Object.setPrototypeOf(proxy, { a: 3 });
+}
+f57();
+function f62(a63, a64) {
+    throw Error();
+}
+handler.setPrototypeOf = f62;
+function f67() {
+    Object.setPrototypeOf(proxy, { a: 4 });
+}
+f67();
+var seen_prototype;
+var seen_target;
+function f77(a78, a79) {
+    seen_target = a78;
+    seen_prototype = a79;
+    return true;
+}
+handler.setPrototypeOf = f77;
+Object.setPrototypeOf(proxy, { a: 5 });
+const v85 = { a: 5 };
+function setPrototypeProxyTarget() {
+    var target = { target: 1 };
+    target.__proto__ = {};
+    var handler = {};
+    var handler2 = {};
+    const v95 = new Proxy(target, handler2);
+    var target2 = v95;
+    const v97 = new Proxy(target2, handler);
+    var proxy2 = v97;
+    Object.getPrototypeOf(proxy2);
+    target.__proto__;
+    var prototype = [2,3];
+    Object.setPrototypeOf(proxy2, prototype);
+    Object.getPrototypeOf(proxy2);
+    Object.getPrototypeOf(target);
+}
+setPrototypeProxyTarget();
+function testProxyTrapInconsistent() {
+    var target = { target: 1 };
+    target.__proto__ = {};
+    var handler = {};
+    var handler2 = {};
+    const v118 = new Proxy(target, handler);
+    var target2 = v118;
+    const v120 = new Proxy(target2, handler2);
+    var proxy2 = v120;
+    var prototype = [1];
+    Reflect.setPrototypeOf(proxy2, prototype);
+    Reflect.getPrototypeOf(target);
+    function f128(a129, a130) {
+        Reflect.setPrototypeOf(a129, a130);
+        return true;
+    }
+    handler2.setPrototypeOf = f128;
+    prototype = [2];
+    Reflect.setPrototypeOf(proxy2, prototype);
+    Reflect.getPrototypeOf(target);
+    var gotPrototype = false;
+    function f139() {
+        gotPrototype = true;
+        throw TypeError();
+    }
+    handler.getPrototypeOf = f139;
+    prototype = [3];
+    Reflect.setPrototypeOf(proxy2, prototype);
+    Reflect.getPrototypeOf(target);
+    Reflect.preventExtensions(target);
+    const v147 = () => {
+        Reflect.setPrototypeOf(proxy2, [4]);
+    };
+    v147();
+    [3];
+    Reflect.getPrototypeOf(target);
+    delete handler.getPrototypeOf;
+    Reflect.setPrototypeOf(proxy2, prototype);
+    prototype = [5];
+    const v159 = () => {
+        Reflect.setPrototypeOf(proxy2, prototype);
+    };
+    v159();
+}
+testProxyTrapInconsistent();
+function testProxyTrapReturnsFalse() {
+    var handler = {};
+    const v166 = () => {
+        return false;
+    };
+    handler.setPrototypeOf = v166;
+    const v168 = {};
+    const v169 = () => {
+        function f170() {
+        }
+        return f170();
+    };
+    const v173 = new Proxy(v168, { isExtensible: v169 });
+    var target = v173;
+    const v175 = new Proxy(target, handler);
+    var object = v175;
+    Reflect.setPrototypeOf(object, {});
+}
+testProxyTrapReturnsFalse();
+
+FuzzIL program written to corpus/proxies-set-prototype-of.fzil

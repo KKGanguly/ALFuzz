@@ -1,0 +1,74 @@
+v0 <- LoadUndefined
+v1 <- LoadUndefined
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+    ObjectLiteralAddProperty `y`, v1
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'd', 'var', v2
+v4 <- BeginPlainFunction -> v5, v6
+    v7 <- GetProperty v6, 'x'
+    v8 <- GetProperty v5, 'x'
+    v9 <- BinaryOperation v7, '-', v8
+    v10 <- GetProperty v6, 'y'
+    v11 <- GetProperty v5, 'y'
+    v12 <- BinaryOperation v10, '-', v11
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v9
+        ObjectLiteralAddProperty `y`, v12
+    v13 <- EndObjectLiteral
+    v14 <- CreateNamedVariable 'c', 'var', v13
+    v15 <- GetProperty v14, 'x'
+    v16 <- GetProperty v14, 'y'
+    v17 <- BinaryOperation v15, '*', v16
+    Return v17
+EndPlainFunction
+v18 <- LoadFloat '0.5'
+v19 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v18
+    ObjectLiteralAddProperty `y`, v19
+v20 <- EndObjectLiteral
+v21 <- CreateNamedVariable 'a', 'var', v20
+v22 <- LoadInteger '1'
+v23 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v22
+    ObjectLiteralAddProperty `y`, v23
+v24 <- EndObjectLiteral
+v25 <- CreateNamedVariable 'b', 'var', v24
+BeginForLoopInitializer
+    v26 <- LoadInteger '0'
+BeginForLoopCondition -> v27
+    v28 <- LoadInteger '3'
+    v29 <- Compare v27, '<', v28
+BeginForLoopAfterthought v29 -> v30
+    v31 <- UnaryOperation v30, '++'
+BeginForLoopBody -> v32
+    v33 <- CallFunction v4, [v21, v25]
+EndForLoop
+v34 <- CallFunction v4, [v21, v25]
+v35 <- LoadInteger '0'
+v36 <- LoadFloat '0.5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v35
+    ObjectLiteralAddProperty `y`, v36
+v37 <- EndObjectLiteral
+v38 <- CallFunction v4, [v37, v25]
+
+
+var d = { x: undefined, y: undefined };
+function Crash(a5, a6) {
+    const v9 = a6.x - a5.x;
+    const v12 = a6.y - a5.y;
+    var c = { x: v9, y: v12 };
+    return c.x * c.y;
+}
+var a = { x: 0.5, y: 0 };
+var b = { x: 1, y: 0 };
+for (let i27 = 0; i27 < 3; i27++) {
+    Crash(a, b);
+}
+Crash(a, b);
+Crash({ x: 0, y: 0.5 }, b);
+
+FuzzIL program written to corpus/regress-416730.fzil

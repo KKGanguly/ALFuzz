@@ -1,0 +1,31 @@
+v0 <- BeginPlainFunction -> v1
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v1
+    v2 <- EndObjectLiteral
+    Return v2
+EndPlainFunction
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'p', 'var', v3
+v5 <- CallFunction v0, [v4]
+v6 <- CreateNamedVariable 'o', 'var', v5
+v7 <- LoadFloat '0.6'
+SetProperty v4, 'x', v7
+v8 <- LoadString 'x'
+v9 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v9
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'Object', 'none'
+v12 <- CallMethod v11, 'defineProperty', [v4, v8, v10]
+
+
+function c(a1) {
+    return { __proto__: a1 };
+}
+var p = {};
+var o = c(p);
+p.x = 0.6;
+Object.defineProperty(p, "x", { writable: false });
+
+FuzzIL program written to corpus/regress-crbug-436820.fzil

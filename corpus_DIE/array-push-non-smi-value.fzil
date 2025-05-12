@@ -1,0 +1,23 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '1073741824'
+    v4 <- CallMethod v1, 'push', [v3]
+    v5 <- LoadInteger '60'
+    v6 <- Compare v4, '>', v5
+    Return v6
+EndPlainFunction
+v7 <- CallFunction v2, []
+v8 <- CallFunction v2, []
+v9 <- CallFunction v2, []
+
+
+var a = [];
+function func() {
+    return a.push(1073741824) > 60;
+}
+func();
+func();
+func();
+
+FuzzIL program written to corpus/array-push-non-smi-value.fzil

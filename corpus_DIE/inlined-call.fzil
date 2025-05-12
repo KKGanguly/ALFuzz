@@ -1,0 +1,357 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadThis
+    v4 <- CreateNamedVariable 'funRecv', 'none'
+    Reassign v4, v3
+    v5 <- CreateNamedVariable 'called', 'none'
+    v6 <- UnaryOperation v5, '++'
+    v7 <- LoadInteger '0'
+    v8 <- LoadArguments
+    v9 <- GetProperty v8, 'length'
+EndPlainFunction
+v10 <- CreateNamedVariable 'Array', 'none'
+v11 <- GetProperty v10, 'prototype'
+SetProperty v11, 'fun', v2
+v12 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v13 <- LoadThis
+    v14 <- CreateNamedVariable 'funStrictRecv', 'none'
+    Reassign v14, v13
+    v15 <- CreateNamedVariable 'called', 'none'
+    v16 <- UnaryOperation v15, '++'
+    v17 <- LoadInteger '0'
+    v18 <- LoadArguments
+    v19 <- GetProperty v18, 'length'
+EndPlainFunction
+v20 <- GetProperty v10, 'prototype'
+SetProperty v20, 'funStrict', v12
+v21 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v22 <- LoadInteger '5'
+    v23 <- LoadArguments
+    v24 <- GetProperty v23, 'length'
+    v25 <- LoadInteger '0'
+    v26 <- LoadThis
+    v27 <- LoadInteger '5'
+    v28 <- LoadArguments
+    v29 <- GetElement v28, '4'
+    v30 <- CreateNamedVariable 'called', 'none'
+    v31 <- UnaryOperation v30, '++'
+EndPlainFunction
+v32 <- GetProperty v10, 'prototype'
+SetProperty v32, 'manyArgs', v21
+v33 <- BeginPlainFunction -> 
+    v34 <- LoadThis
+    v35 <- LoadInteger '5'
+    v36 <- LoadArguments
+    v37 <- GetProperty v36, 'length'
+    v38 <- LoadInteger '5'
+    v39 <- LoadArguments
+    v40 <- GetElement v39, '4'
+    v41 <- CreateNamedVariable 'called', 'none'
+    v42 <- UnaryOperation v41, '++'
+EndPlainFunction
+v43 <- GetProperty v10, 'prototype'
+SetProperty v43, 'manyArgsSloppy', v33
+v44 <- CreateArray []
+v45 <- CreateNamedVariable 'array', 'var', v44
+BeginForLoopInitializer
+    v46 <- LoadInteger '0'
+BeginForLoopCondition -> v47
+    v48 <- LoadInteger '100'
+    v49 <- Compare v47, '<', v48
+BeginForLoopAfterthought v49 -> v50
+    v51 <- UnaryOperation '++', v50
+BeginForLoopBody -> v52
+    SetComputedProperty v45, v52, v52
+EndForLoop
+v53 <- CallMethod v45, 'slice', []
+v54 <- CreateNamedVariable 'copy', 'var', v53
+v55 <- BeginPlainFunction -> v56
+    v57 <- CreateArray []
+    v58 <- GetProperty v57, 'unshift'
+    v59 <- CallMethod v58, 'call', [v45, v56]
+EndPlainFunction
+v60 <- LoadInteger '50'
+v61 <- CallFunction v55, [v60]
+v62 <- LoadInteger '60'
+v63 <- CallFunction v55, [v62]
+v64 <- LoadInteger '80'
+v65 <- CallFunction v55, [v64]
+v66 <- LoadInteger '50'
+v67 <- CallFunction v55, [v66]
+v68 <- LoadInteger '60'
+v69 <- CallFunction v55, [v68]
+v70 <- LoadInteger '50'
+v71 <- CallMethod v54, 'unshift', [v70]
+v72 <- LoadInteger '60'
+v73 <- CallMethod v54, 'unshift', [v72]
+v74 <- LoadInteger '80'
+v75 <- CallMethod v54, 'unshift', [v74]
+v76 <- LoadInteger '50'
+v77 <- CallMethod v54, 'unshift', [v76]
+v78 <- LoadInteger '60'
+v79 <- CallMethod v54, 'unshift', [v78]
+v80 <- CallFunction v55, []
+v81 <- LoadInteger '0'
+v82 <- CreateNamedVariable 'called', 'var', v81
+v83 <- LoadUndefined
+v84 <- CreateNamedVariable 'funRecv', 'var', v83
+v85 <- BeginPlainFunction -> 
+    v86 <- CreateArray []
+    v87 <- GetProperty v86, 'fun'
+    v88 <- CallMethod v87, 'call', []
+EndPlainFunction
+v89 <- CallFunction v85, []
+v90 <- CallFunction v85, []
+v91 <- LoadThis
+v92 <- CallFunction v85, []
+v93 <- LoadThis
+v94 <- LoadInteger '3'
+v95 <- CallFunction v85, []
+v96 <- LoadUndefined
+v97 <- CreateNamedVariable 'funStrictRecv', 'var', v96
+v98 <- LoadInteger '0'
+Reassign v82, v98
+v99 <- BeginPlainFunction -> 
+    v100 <- CreateArray []
+    v101 <- GetProperty v100, 'funStrict'
+    v102 <- CallMethod v101, 'call', []
+EndPlainFunction
+v103 <- CallFunction v99, []
+v104 <- CallFunction v99, []
+v105 <- LoadUndefined
+v106 <- CallFunction v99, []
+v107 <- LoadUndefined
+v108 <- LoadInteger '3'
+v109 <- CallFunction v99, []
+v110 <- LoadInteger '0'
+Reassign v82, v110
+v111 <- BeginPlainFunction -> 
+    v112 <- LoadInteger '0'
+    v113 <- LoadInteger '1'
+    v114 <- LoadInteger '2'
+    v115 <- LoadInteger '3'
+    v116 <- LoadInteger '4'
+    v117 <- LoadInteger '5'
+    v118 <- CreateArray []
+    v119 <- GetProperty v118, 'manyArgs'
+    v120 <- CallMethod v119, 'call', [v112, v113, v114, v115, v116, v117]
+EndPlainFunction
+v121 <- CallFunction v111, []
+v122 <- CallFunction v111, []
+v123 <- CallFunction v111, []
+v124 <- CallFunction v111, []
+v125 <- LoadInteger '3'
+v126 <- LoadInteger '0'
+Reassign v82, v126
+v127 <- BeginPlainFunction -> 
+    v128 <- LoadNull
+    v129 <- LoadInteger '1'
+    v130 <- LoadInteger '2'
+    v131 <- LoadInteger '3'
+    v132 <- LoadInteger '4'
+    v133 <- LoadInteger '5'
+    v134 <- CreateArray []
+    v135 <- GetProperty v134, 'manyArgsSloppy'
+    v136 <- CallMethod v135, 'call', [v128, v129, v130, v131, v132, v133]
+EndPlainFunction
+v137 <- CallFunction v127, []
+v138 <- CallFunction v127, []
+v139 <- CallFunction v127, []
+v140 <- CallFunction v127, []
+v141 <- LoadInteger '3'
+v142 <- LoadString 'hello'
+v143 <- CreateNamedVariable 'str', 'var', v142
+v144 <- LoadInteger '3'
+v145 <- CallMethod v143, 'charCodeAt', [v144]
+v146 <- CreateNamedVariable 'code', 'var', v145
+v147 <- LoadInteger '0'
+Reassign v82, v147
+v148 <- BeginPlainFunction -> 
+    v149 <- UnaryOperation v82, '++'
+    v150 <- LoadInteger '3'
+    v151 <- LoadString ''
+    v152 <- GetProperty v151, 'charCodeAt'
+    v153 <- CallMethod v152, 'call', [v143, v150]
+    Return v153
+EndPlainFunction
+v154 <- CallFunction v148, []
+v155 <- CallFunction v148, []
+v156 <- CallFunction v148, []
+v157 <- CallFunction v148, []
+v158 <- LoadInteger '3'
+v159 <- LoadInteger '1'
+v160 <- LoadInteger '2'
+v161 <- LoadInteger '3'
+v162 <- LoadInteger '4'
+v163 <- LoadInteger '5'
+v164 <- LoadInteger '6'
+v165 <- LoadInteger '7'
+v166 <- LoadInteger '8'
+v167 <- LoadInteger '9'
+v168 <- CreateArray [v159, v160, v161, v162, v163, v164, v165, v166, v167]
+v169 <- LoadThis
+SetProperty v169, 'array', v168
+v170 <- LoadThis
+v171 <- GetProperty v170, 'array'
+v172 <- CallMethod v171, 'slice', []
+v173 <- CreateNamedVariable 'copy', 'var', v172
+v174 <- LoadInteger '0'
+Reassign v82, v174
+v175 <- BeginPlainFunction -> 
+    v176 <- UnaryOperation v82, '++'
+    v177 <- LoadArguments
+    v178 <- CreateArray []
+    v179 <- GetProperty v178, 'push'
+    v180 <- CallMethod v179, 'apply', [v45, v177]
+    Return v180
+EndPlainFunction
+v181 <- BeginPlainFunction -> v182
+    v183 <- CallFunction v175, [v182]
+    Return v183
+EndPlainFunction
+v184 <- LoadInteger '1'
+v185 <- CallFunction v175, [v184]
+v186 <- LoadInteger '2'
+v187 <- CallFunction v175, [v186]
+v188 <- LoadInteger '3'
+v189 <- CallFunction v175, [v188]
+v190 <- CallFunction v175, []
+v191 <- LoadInteger '1'
+v192 <- CallFunction v181, [v191]
+v193 <- LoadInteger '2'
+v194 <- CallFunction v181, [v193]
+v195 <- LoadInteger '3'
+v196 <- CallFunction v181, [v195]
+v197 <- LoadInteger '1'
+v198 <- LoadInteger '2'
+v199 <- LoadInteger '3'
+v200 <- LoadInteger '1'
+v201 <- LoadInteger '2'
+v202 <- LoadInteger '3'
+v203 <- CallMethod v173, 'push', [v197, v198, v199, v200, v201, v202]
+v204 <- CallFunction v181, []
+v205 <- LoadThis
+v206 <- GetProperty v205, 'array'
+v207 <- LoadInteger '6'
+
+
+var global = this;
+function f2() {
+    funRecv = this;
+    called++;
+    arguments.length;
+}
+const t6 = Array.prototype;
+t6.fun = f2;
+function f12() {
+    'use strict';
+    funStrictRecv = this;
+    called++;
+    arguments.length;
+}
+const t14 = Array.prototype;
+t14.funStrict = f12;
+function f21() {
+    'use strict';
+    arguments.length;
+    arguments[4];
+    called++;
+}
+const t22 = Array.prototype;
+t22.manyArgs = f21;
+function f33() {
+    arguments.length;
+    arguments[4];
+    called++;
+}
+const t29 = Array.prototype;
+t29.manyArgsSloppy = f33;
+var array = [];
+for (let i47 = 0; i47 < 100; ++i47) {
+    array[i47] = i47;
+}
+var copy = array.slice();
+function unshiftsArray(a56) {
+    ([]).unshift.call(array, a56);
+}
+unshiftsArray(50);
+unshiftsArray(60);
+unshiftsArray(80);
+unshiftsArray(50);
+unshiftsArray(60);
+copy.unshift(50);
+copy.unshift(60);
+copy.unshift(80);
+copy.unshift(50);
+copy.unshift(60);
+unshiftsArray();
+var called = 0;
+var funRecv;
+function callNoArgs() {
+    ([]).fun.call();
+}
+callNoArgs();
+callNoArgs();
+callNoArgs();
+callNoArgs();
+var funStrictRecv;
+called = 0;
+function callStrictNoArgs() {
+    ([]).funStrict.call();
+}
+callStrictNoArgs();
+callStrictNoArgs();
+callStrictNoArgs();
+callStrictNoArgs();
+called = 0;
+function callManyArgs() {
+    ([]).manyArgs.call(0, 1, 2, 3, 4, 5);
+}
+callManyArgs();
+callManyArgs();
+callManyArgs();
+callManyArgs();
+called = 0;
+function callManyArgsSloppy() {
+    ([]).manyArgsSloppy.call(null, 1, 2, 3, 4, 5);
+}
+callManyArgsSloppy();
+callManyArgsSloppy();
+callManyArgsSloppy();
+callManyArgsSloppy();
+var str = "hello";
+var code = str.charCodeAt(3);
+called = 0;
+function callBuiltinIndirectly() {
+    called++;
+    return ("").charCodeAt.call(str, 3);
+}
+callBuiltinIndirectly();
+callBuiltinIndirectly();
+callBuiltinIndirectly();
+callBuiltinIndirectly();
+this.array = [1,2,3,4,5,6,7,8,9];
+var copy = this.array.slice();
+called = 0;
+function callInlineableBuiltinIndirectlyWhileInlined() {
+    called++;
+    return ([]).push.apply(array, arguments);
+}
+function callInlined(a182) {
+    return callInlineableBuiltinIndirectlyWhileInlined(a182);
+}
+callInlineableBuiltinIndirectlyWhileInlined(1);
+callInlineableBuiltinIndirectlyWhileInlined(2);
+callInlineableBuiltinIndirectlyWhileInlined(3);
+callInlineableBuiltinIndirectlyWhileInlined();
+callInlined(1);
+callInlined(2);
+callInlined(3);
+copy.push(1, 2, 3, 1, 2, 3);
+callInlined();
+this.array;
+
+FuzzIL program written to corpus/inlined-call.fzil

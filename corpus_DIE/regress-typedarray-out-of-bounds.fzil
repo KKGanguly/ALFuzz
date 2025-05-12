@@ -1,0 +1,36 @@
+v0 <- CreateNamedVariable 'Int32Array', 'none'
+v1 <- LoadInteger '10'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadInteger '15'
+    v7 <- LoadString '-1'
+    SetComputedProperty v5, v7, v6
+EndPlainFunction
+BeginForLoopInitializer
+    v8 <- LoadInteger '0'
+BeginForLoopCondition -> v9
+    v10 <- LoadInteger '3'
+    v11 <- Compare v9, '<', v10
+BeginForLoopAfterthought v11 -> v12
+    v13 <- UnaryOperation v12, '++'
+BeginForLoopBody -> v14
+    v15 <- CallFunction v4, [v3]
+EndForLoop
+v16 <- LoadUndefined
+v17 <- LoadInteger '1'
+v18 <- UnaryOperation '-', v17
+v19 <- GetComputedProperty v3, v18
+
+
+const v2 = new Int32Array(10);
+var a = v2;
+function f(a5) {
+    a5["-1"] = 15;
+}
+for (let i9 = 0; i9 < 3; i9++) {
+    f(a);
+}
+a[-1];
+
+FuzzIL program written to corpus/regress-typedarray-out-of-bounds.fzil

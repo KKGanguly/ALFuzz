@@ -1,0 +1,61 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'invalid'
+    Return v1
+EndPlainFunction
+v2 <- CreateNamedVariable 'Number', 'none'
+v3 <- GetProperty v2, 'prototype'
+SetProperty v3, 'toLocaleString', v0
+v4 <- LoadString 'invalid'
+v5 <- LoadInteger '1'
+v6 <- CreateArray [v5]
+v7 <- CallMethod v6, 'toLocaleString', []
+v8 <- LoadString 'invalid'
+v9 <- GetProperty v2, 'prototype'
+SetProperty v9, 'toLocaleString', v8
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadInteger '1'
+    v12 <- CreateArray [v11]
+    v13 <- CallMethod v12, 'toLocaleString', []
+EndPlainFunction
+v14 <- CallFunction v10, []
+v15 <- GetProperty v2, 'prototype'
+v16 <- DeleteProperty v15, 'toLocaleString'
+v17 <- BeginPlainFunction -> 
+    v18 <- LoadString 'invalid'
+    Return v18
+EndPlainFunction
+v19 <- GetProperty v2, 'prototype'
+SetProperty v19, 'toString', v17
+v20 <- LoadInteger '1'
+v21 <- CreateArray [v20]
+v22 <- CallMethod v21, 'toLocaleString', []
+v23 <- LoadString 'invalid'
+v24 <- LoadInteger '1'
+v25 <- CreateArray [v24]
+v26 <- CallMethod v25, 'toString', []
+v27 <- LoadString '1'
+
+
+function f0() {
+    return "invalid";
+}
+const t3 = Number.prototype;
+t3.toLocaleString = f0;
+([1]).toLocaleString();
+const t5 = Number.prototype;
+t5.toLocaleString = "invalid";
+function f10() {
+    ([1]).toLocaleString();
+}
+f10();
+const t11 = Number.prototype;
+delete t11.toLocaleString;
+function f17() {
+    return "invalid";
+}
+const t17 = Number.prototype;
+t17.toString = f17;
+([1]).toLocaleString();
+([1]).toString();
+
+FuzzIL program written to corpus/regress-877615.fzil

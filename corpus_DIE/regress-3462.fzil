@@ -1,0 +1,121 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v2 <- CreateNamedVariable 'f', 'var', v1
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v2
+    v3 <- EndObjectLiteral
+    v4 <- CreateNamedVariable 'o', 'var', v3
+    v5 <- LoadInteger '42'
+    SetProperty v4, 'prototype', v5
+    v6 <- LoadInteger '42'
+    v7 <- GetProperty v4, 'prototype'
+    v8 <- LoadString 'prototype'
+    v9 <- CallMethod v4, 'hasOwnProperty', [v8]
+EndPlainFunction
+v10 <- CallFunction v0, []
+v11 <- BeginPlainFunction -> 
+    v12 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v13 <- CreateNamedVariable 'f', 'var', v12
+    v14 <- GetProperty v13, 'prototype'
+    v15 <- CreateNamedVariable 'fp', 'var', v14
+    v16 <- CreateNamedVariable 'Number', 'none'
+    v17 <- GetProperty v16, 'prototype'
+    SetProperty v17, '__proto__', v13
+    v18 <- LoadInteger '42'
+    v19 <- CreateNamedVariable 'n', 'var', v18
+    BeginObjectLiteral
+    v20 <- EndObjectLiteral
+    v21 <- CreateNamedVariable 'o', 'var', v20
+    SetProperty v19, 'prototype', v21
+    v22 <- GetProperty v19, 'prototype'
+    v23 <- GetProperty v13, 'prototype'
+    v24 <- LoadString 'prototype'
+    v25 <- GetProperty v16, 'prototype'
+    v26 <- CallMethod v25, 'hasOwnProperty', [v24]
+EndPlainFunction
+v27 <- CallFunction v11, []
+v28 <- BeginPlainFunction -> 
+    v29 <- LoadInteger '1'
+    v30 <- CreateArray [v29]
+    v31 <- CreateNamedVariable 'a', 'var', v30
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v31
+    v32 <- EndObjectLiteral
+    v33 <- CreateNamedVariable 'o', 'var', v32
+    v34 <- LoadInteger '2'
+    SetProperty v33, 'length', v34
+    v35 <- LoadInteger '2'
+    v36 <- GetProperty v33, 'length'
+    v37 <- LoadInteger '1'
+    v38 <- GetProperty v31, 'length'
+    v39 <- LoadString 'length'
+    v40 <- CallMethod v33, 'hasOwnProperty', [v39]
+EndPlainFunction
+v41 <- CallFunction v28, []
+v42 <- BeginPlainFunction -> 
+    v43 <- LoadInteger '1'
+    v44 <- CreateArray [v43]
+    v45 <- CreateNamedVariable 'Number', 'none'
+    v46 <- GetProperty v45, 'prototype'
+    SetProperty v46, '__proto__', v44
+    v47 <- LoadInteger '42'
+    v48 <- CreateNamedVariable 'n', 'var', v47
+    v49 <- LoadInteger '2'
+    SetProperty v48, 'length', v49
+    v50 <- LoadInteger '1'
+    v51 <- GetProperty v48, 'length'
+    v52 <- LoadString 'length'
+    v53 <- GetProperty v45, 'prototype'
+    v54 <- CallMethod v53, 'hasOwnProperty', [v52]
+EndPlainFunction
+v55 <- CallFunction v42, []
+
+
+function TestFunctionPrototypeSetter() {
+    function f1() {
+    }
+    var f = f1;
+    var o = { __proto__: f };
+    o.prototype = 42;
+    o.prototype;
+    o.hasOwnProperty("prototype");
+}
+TestFunctionPrototypeSetter();
+function TestFunctionPrototypeSetterOnValue() {
+    function f12() {
+    }
+    var f = f12;
+    var fp = f.prototype;
+    const t15 = Number.prototype;
+    t15.__proto__ = f;
+    var n = 42;
+    var o = {};
+    n.prototype = o;
+    n.prototype;
+    f.prototype;
+    Number.prototype.hasOwnProperty("prototype");
+}
+TestFunctionPrototypeSetterOnValue();
+function TestArrayLengthSetter() {
+    var a = [1];
+    var o = { __proto__: a };
+    o.length = 2;
+    o.length;
+    a.length;
+    o.hasOwnProperty("length");
+}
+TestArrayLengthSetter();
+function TestArrayLengthSetterOnValue() {
+    const v44 = [1];
+    const t36 = Number.prototype;
+    t36.__proto__ = v44;
+    var n = 42;
+    n.length = 2;
+    n.length;
+    Number.prototype.hasOwnProperty("length");
+}
+TestArrayLengthSetterOnValue();
+
+FuzzIL program written to corpus/regress-3462.fzil

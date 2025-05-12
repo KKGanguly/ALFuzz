@@ -1,0 +1,193 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- LoadInteger '0'
+    v5 <- CreateNamedVariable 'x', 'var', v4
+    v6 <- LoadInteger '0'
+    v7 <- CreateNamedVariable 'y', 'var', v6
+    v8 <- LoadInteger '0'
+    v9 <- CreateNamedVariable 'z', 'var', v8
+    BeginWhileLoopHeader
+        v10 <- LoadInteger '0'
+        v11 <- Compare v1, '>', v10
+    BeginWhileLoopBody v11
+        v12 <- LoadInteger '19'
+        Update v5, '+', v12
+        v13 <- UnaryOperation v1, '--'
+    EndWhileLoop
+    BeginWhileLoopHeader
+        v14 <- LoadInteger '0'
+        v15 <- Compare v2, '>', v14
+    BeginWhileLoopBody v15
+        v16 <- LoadInteger '23'
+        Update v7, '+', v16
+        v17 <- UnaryOperation v2, '--'
+    EndWhileLoop
+    BeginWhileLoopHeader
+        v18 <- LoadInteger '0'
+        v19 <- Compare v3, '>', v18
+    BeginWhileLoopBody v19
+        v20 <- LoadInteger '29'
+        Update v9, '+', v20
+        v21 <- UnaryOperation v3, '--'
+    EndWhileLoop
+    v22 <- BinaryOperation v5, '+', v7
+    v23 <- BinaryOperation v22, '+', v9
+    Return v23
+EndPlainFunction
+v24 <- BeginPlainFunction -> v25, v26, v27
+    v28 <- LoadInteger '0'
+    v29 <- CreateNamedVariable 'x', 'var', v28
+    v30 <- LoadInteger '0'
+    v31 <- CreateNamedVariable 'y', 'var', v30
+    v32 <- LoadInteger '0'
+    v33 <- CreateNamedVariable 'z', 'var', v32
+    BeginWhileLoopHeader
+        v34 <- LoadInteger '0'
+        v35 <- Compare v25, '>', v34
+    BeginWhileLoopBody v35
+        v36 <- LoadInteger '19'
+        Update v29, '+', v36
+        v37 <- UnaryOperation v25, '--'
+    EndWhileLoop
+    BeginWhileLoopHeader
+        v38 <- LoadInteger '0'
+        v39 <- Compare v26, '>', v38
+    BeginWhileLoopBody v39
+        v40 <- LoadInteger '23'
+        Update v31, '+', v40
+        v41 <- UnaryOperation v26, '--'
+    EndWhileLoop
+    BeginWhileLoopHeader
+        v42 <- LoadInteger '0'
+        v43 <- Compare v27, '>', v42
+    BeginWhileLoopBody v43
+        v44 <- LoadInteger '29'
+        Update v33, '+', v44
+        v45 <- UnaryOperation v27, '--'
+    EndWhileLoop
+    v46 <- BinaryOperation v29, '+', v31
+    v47 <- BinaryOperation v46, '+', v33
+    Return v47
+EndPlainFunction
+v48 <- BeginPlainFunction -> v49, v50, v51
+    v52 <- LoadInteger '0'
+    v53 <- CreateNamedVariable 'x', 'var', v52
+    v54 <- LoadInteger '0'
+    v55 <- CreateNamedVariable 'y', 'var', v54
+    v56 <- LoadInteger '0'
+    v57 <- CreateNamedVariable 'z', 'var', v56
+    BeginWhileLoopHeader
+        v58 <- LoadInteger '0'
+        v59 <- Compare v49, '>', v58
+    BeginWhileLoopBody v59
+        v60 <- LoadInteger '19'
+        Update v53, '+', v60
+        v61 <- UnaryOperation v49, '--'
+    EndWhileLoop
+    BeginWhileLoopHeader
+        v62 <- LoadInteger '0'
+        v63 <- Compare v50, '>', v62
+    BeginWhileLoopBody v63
+        v64 <- LoadInteger '23'
+        Update v55, '+', v64
+        v65 <- UnaryOperation v50, '--'
+    EndWhileLoop
+    BeginWhileLoopHeader
+        v66 <- LoadInteger '0'
+        v67 <- Compare v51, '>', v66
+    BeginWhileLoopBody v67
+        v68 <- LoadInteger '29'
+        Update v57, '+', v68
+        v69 <- UnaryOperation v51, '--'
+    EndWhileLoop
+    v70 <- BinaryOperation v53, '+', v55
+    v71 <- BinaryOperation v70, '+', v57
+    Return v71
+EndPlainFunction
+v72 <- BeginPlainFunction -> v73, v74, v75, v76
+    v77 <- LoadInteger '19'
+    v78 <- BinaryOperation v74, '*', v77
+    v79 <- LoadInteger '23'
+    v80 <- BinaryOperation v75, '*', v79
+    v81 <- BinaryOperation v78, '+', v80
+    v82 <- LoadInteger '29'
+    v83 <- BinaryOperation v76, '*', v82
+    v84 <- BinaryOperation v81, '+', v83
+    v85 <- CallFunction v73, [v74, v75, v76]
+EndPlainFunction
+v86 <- LoadInteger '50000'
+v87 <- LoadInteger '5'
+v88 <- LoadInteger '6'
+v89 <- CallFunction v72, [v0, v86, v87, v88]
+v90 <- LoadInteger '4'
+v91 <- LoadInteger '50000'
+v92 <- LoadInteger '6'
+v93 <- CallFunction v72, [v24, v90, v91, v92]
+v94 <- LoadInteger '11'
+v95 <- LoadInteger '12'
+v96 <- LoadInteger '50000'
+v97 <- CallFunction v72, [v48, v94, v95, v96]
+
+
+function f1(a1, a2, a3) {
+    var x = 0;
+    var y = 0;
+    var z = 0;
+    while (a1 > 0) {
+        x += 19;
+        a1--;
+    }
+    while (a2 > 0) {
+        y += 23;
+        a2--;
+    }
+    while (a3 > 0) {
+        z += 29;
+        a3--;
+    }
+    return (x + y) + z;
+}
+function f2(a25, a26, a27) {
+    var x = 0;
+    var y = 0;
+    var z = 0;
+    while (a25 > 0) {
+        x += 19;
+        a25--;
+    }
+    while (a26 > 0) {
+        y += 23;
+        a26--;
+    }
+    while (a27 > 0) {
+        z += 29;
+        a27--;
+    }
+    return (x + y) + z;
+}
+function f3(a49, a50, a51) {
+    var x = 0;
+    var y = 0;
+    var z = 0;
+    while (a49 > 0) {
+        x += 19;
+        a49--;
+    }
+    while (a50 > 0) {
+        y += 23;
+        a50--;
+    }
+    while (a51 > 0) {
+        z += 29;
+        a51--;
+    }
+    return (x + y) + z;
+}
+function check(a73, a74, a75, a76) {
+    ((a74 * 19) + (a75 * 23)) + (a76 * 29);
+    a73(a74, a75, a76);
+}
+check(f1, 50000, 5, 6);
+check(f2, 4, 50000, 6);
+check(f3, 11, 12, 50000);
+
+FuzzIL program written to corpus/osr-multiple.fzil

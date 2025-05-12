@@ -1,0 +1,52 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'baz', 'none'
+    v3 <- CallFunction v2, []
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '13'
+    v6 <- LoadInteger '14'
+    v7 <- LoadInteger '15'
+    v8 <- CallFunction v0, [v5, v6, v7]
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- GetProperty v0, 'arguments'
+    v11 <- GetProperty v10, 'length'
+    v12 <- LoadInteger '3'
+    v13 <- Compare v11, '==', v12
+    v14 <- GetProperty v0, 'arguments'
+    v15 <- GetElement v14, '0'
+    v16 <- LoadInteger '13'
+    v17 <- Compare v15, '==', v16
+    v18 <- BinaryOperation v13, '&&', v17
+    v19 <- GetProperty v0, 'arguments'
+    v20 <- GetElement v19, '1'
+    v21 <- LoadInteger '14'
+    v22 <- Compare v20, '==', v21
+    v23 <- BinaryOperation v18, '&&', v22
+    v24 <- GetProperty v0, 'arguments'
+    v25 <- GetElement v24, '2'
+    v26 <- LoadInteger '15'
+    v27 <- Compare v25, '==', v26
+    v28 <- BinaryOperation v23, '&&', v27
+    Return v28
+EndPlainFunction
+v29 <- LoadBoolean 'true'
+v30 <- LoadInteger '12'
+v31 <- LoadInteger '14'
+v32 <- CallFunction v4, [v30, v31]
+
+
+function foo(a1) {
+    return baz();
+}
+function bar() {
+    return foo(13, 14, 15);
+}
+function baz() {
+    return (((foo.arguments.length == 3) && (foo.arguments[0] == 13)) && (foo.arguments[1] == 14)) && (foo.arguments[2] == 15);
+}
+bar(12, 14);
+
+FuzzIL program written to corpus/inline-surplus-arguments-deopt.fzil

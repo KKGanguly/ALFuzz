@@ -1,0 +1,14 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'Object', 'none'
+v2 <- CallMethod v1, 'seal', [v0]
+v3 <- LoadThis
+v4 <- CallMethod v1, 'isSealed', [v3]
+v5 <- LoadThis
+v6 <- CallMethod v1, 'isFrozen', [v5]
+
+
+Object.seal(this);
+Object.isSealed(this);
+Object.isFrozen(this);
+
+FuzzIL program written to corpus/object-seal-global.fzil

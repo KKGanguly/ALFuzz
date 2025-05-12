@@ -1,0 +1,22 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '0'
+    BeginForLoopCondition -> v2
+        v3 <- LoadBoolean 'true'
+    BeginForLoopAfterthought v3 -> v4
+        v5 <- UnaryOperation v4, '++'
+    BeginForLoopBody -> v6
+    EndForLoop
+EndPlainFunction
+v7 <- CallFunction v0, []
+v8 <- CreateNamedVariable 'TypeError', 'none'
+v9 <- LoadString ''use strict'; for (const i = 0; ; i++) {}'
+
+
+function f0() {
+    for (let i2 = 0;; i2++) {
+    }
+}
+f0();
+
+FuzzIL program written to corpus/regress-3938.fzil

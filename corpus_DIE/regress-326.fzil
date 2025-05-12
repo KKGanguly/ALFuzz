@@ -1,0 +1,58 @@
+v0 <- LoadInteger '4'
+v1 <- LoadInteger '42'
+v2 <- LoadInteger '37'
+v3 <- LoadUndefined
+v4 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v0
+    ObjectLiteralAddElement `0`, v1
+    ObjectLiteralAddElement `2`, v2
+    ObjectLiteralAddElement `3`, v3
+    ObjectLiteralAddElement `4`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'nonArray', 'var', v5
+v7 <- CreateNamedVariable 'Array', 'none'
+v8 <- GetProperty v7, 'prototype'
+v9 <- GetProperty v8, 'sort'
+v10 <- CallMethod v9, 'call', [v6]
+v11 <- LoadInteger '4'
+v12 <- GetProperty v6, 'length'
+v13 <- LoadString 'preserve length'
+v14 <- LoadInteger '37'
+v15 <- GetElement v6, '0'
+v16 <- LoadString 'sort smallest first'
+v17 <- LoadInteger '42'
+v18 <- GetElement v6, '1'
+v19 <- LoadString 'sort largest last'
+v20 <- LoadInteger '2'
+v21 <- TestIn v20, v6
+v22 <- LoadString 'don't delete undefined'
+v23 <- LoadUndefined
+v24 <- GetElement v6, '2'
+v25 <- LoadString 'sort undefined after largest'
+v26 <- LoadInteger '3'
+v27 <- TestIn v26, v6
+v28 <- LoadString 'don't create non-existing'
+v29 <- LoadInteger '0'
+v30 <- GetElement v6, '4'
+v31 <- LoadString 'don't affect after length.'
+
+
+const v5 = {
+    length: 4,
+    0: 42,
+    2: 37,
+    3: undefined,
+    4: 0,
+};
+var nonArray = v5;
+Array.prototype.sort.call(nonArray);
+nonArray.length;
+nonArray[0];
+nonArray[1];
+2 in nonArray;
+nonArray[2];
+3 in nonArray;
+nonArray[4];
+
+FuzzIL program written to corpus/regress-326.fzil

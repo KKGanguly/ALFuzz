@@ -1,0 +1,100 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    v3 <- LoadInteger '0'
+    v4 <- CreateNamedVariable 'tmp', 'var', v3
+    v5 <- LoadInteger '1578221999'
+    Reassign v4, v5
+    v6 <- LoadInteger '572285336'
+    Reassign v4, v6
+    v7 <- BinaryOperation v4, '+', v4
+    Reassign v2, v7
+    v8 <- LoadInteger '2150507335'
+    v9 <- LoadString '++'
+    v10 <- LoadInteger '1578221999'
+    v11 <- LoadInteger '572285336'
+    v12 <- BinaryOperation v10, '+', v11
+    Reassign v2, v12
+    v13 <- LoadInteger '2150507335'
+    v14 <- LoadInteger '1500000000'
+    v15 <- UnaryOperation '-', v14
+    Reassign v4, v15
+    v16 <- LoadInteger '2000000000'
+    v17 <- UnaryOperation '-', v16
+    Reassign v4, v17
+    v18 <- BinaryOperation v4, '+', v4
+    Reassign v2, v18
+    v19 <- LoadInteger '3500000000'
+    v20 <- UnaryOperation '-', v19
+    v21 <- LoadString '+-'
+    v22 <- LoadInteger '1500000000'
+    v23 <- UnaryOperation '-', v22
+    v24 <- LoadInteger '2000000000'
+    v25 <- UnaryOperation '-', v24
+    v26 <- BinaryOperation v23, '+', v25
+    Reassign v2, v26
+    v27 <- LoadInteger '3500000000'
+    v28 <- UnaryOperation '-', v27
+    v29 <- LoadInteger '1578221999'
+    Reassign v4, v29
+    v30 <- LoadInteger '572285336'
+    v31 <- UnaryOperation '-', v30
+    Reassign v4, v31
+    v32 <- BinaryOperation v4, '-', v4
+    Reassign v2, v32
+    v33 <- LoadInteger '2150507335'
+    v34 <- LoadString '--'
+    v35 <- LoadInteger '1578221999'
+    v36 <- LoadInteger '572285336'
+    v37 <- UnaryOperation '-', v36
+    v38 <- BinaryOperation v35, '-', v37
+    Reassign v2, v38
+    v39 <- LoadInteger '2150507335'
+    v40 <- LoadInteger '1500000000'
+    v41 <- UnaryOperation '-', v40
+    Reassign v4, v41
+    v42 <- LoadInteger '2000000000'
+    Reassign v4, v42
+    v43 <- BinaryOperation v4, '-', v4
+    Reassign v2, v43
+    v44 <- LoadInteger '3500000000'
+    v45 <- UnaryOperation '-', v44
+    v46 <- LoadString '-+'
+    v47 <- LoadInteger '1500000000'
+    v48 <- UnaryOperation '-', v47
+    v49 <- LoadInteger '2000000000'
+    v50 <- BinaryOperation v48, '-', v49
+    Reassign v2, v50
+    v51 <- LoadInteger '3500000000'
+    v52 <- UnaryOperation '-', v51
+EndPlainFunction
+v53 <- CallFunction v0, []
+
+
+function num_ops() {
+    var x;
+    var tmp = 0;
+    tmp = 1578221999;
+    tmp = 572285336;
+    x = tmp + tmp;
+    x = 1578221999 + 572285336;
+    tmp = -1500000000;
+    tmp = -2000000000;
+    x = tmp + tmp;
+    -3500000000;
+    x = -1500000000 + -2000000000;
+    -3500000000;
+    tmp = 1578221999;
+    tmp = -572285336;
+    x = tmp - tmp;
+    x = 1578221999 - -572285336;
+    tmp = -1500000000;
+    tmp = 2000000000;
+    x = tmp - tmp;
+    -3500000000;
+    x = -1500000000 - 2000000000;
+    -3500000000;
+}
+num_ops();
+
+FuzzIL program written to corpus/regress-580.fzil

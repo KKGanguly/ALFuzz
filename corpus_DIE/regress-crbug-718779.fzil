@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '2147483648'
+    v2 <- CreateNamedVariable '__v_1', 'none'
+    SetProperty v2, 'p2', v1
+    v3 <- LoadInteger '3'
+    SetProperty v2, 'p3', v3
+    v4 <- LoadInteger '4'
+    SetProperty v2, 'p4', v4
+    v5 <- LoadInteger '2147483648'
+    SetProperty v2, 'p5', v5
+    v6 <- LoadInteger '6'
+    SetProperty v2, 'p6', v6
+EndPlainFunction
+v7 <- BeginPlainFunction -> 
+    v8 <- CreateNamedVariable '__v_1', 'none'
+    v9 <- DeleteProperty v8, 'p6'
+    v10 <- DeleteProperty v8, 'p5'
+EndPlainFunction
+BeginObjectLiteral
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable '__v_1', 'var', v11
+v13 <- CallFunction v0, [v12]
+v14 <- CallFunction v7, [v12]
+v15 <- CallFunction v0, [v12]
+
+
+function __f_1() {
+    __v_1.p2 = 2147483648;
+    __v_1.p3 = 3;
+    __v_1.p4 = 4;
+    __v_1.p5 = 2147483648;
+    __v_1.p6 = 6;
+}
+function __f_2() {
+    delete __v_1.p6;
+    delete __v_1.p5;
+}
+var __v_1 = {};
+__f_1(__v_1);
+__f_2(__v_1);
+__f_1(__v_1);
+
+FuzzIL program written to corpus/regress-crbug-718779.fzil

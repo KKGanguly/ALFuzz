@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- BinaryOperation v1, '|', v2
+    v4 <- LoadInteger '0'
+    v5 <- BinaryOperation v1, '|', v4
+    v6 <- BinaryOperation v3, '*', v5
+    v7 <- LoadInteger '0'
+    v8 <- BinaryOperation v6, '|', v7
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    BeginTry
+    BeginCatch -> v11
+    EndTryCatch
+    v12 <- LoadInteger '0'
+    v13 <- BinaryOperation v10, '|', v12
+    v14 <- LoadInteger '0'
+    v15 <- BinaryOperation v10, '|', v14
+    v16 <- BinaryOperation v13, '*', v15
+    v17 <- LoadInteger '0'
+    v18 <- BinaryOperation v16, '|', v17
+    Return v18
+EndPlainFunction
+v19 <- LoadInteger '1'
+v20 <- LoadInteger '1'
+v21 <- CallFunction v0, [v19, v20]
+v22 <- LoadInteger '2'
+v23 <- LoadInteger '2'
+v24 <- CallFunction v0, [v22, v23]
+v25 <- LoadInteger '1593835535'
+v26 <- CreateNamedVariable 'big_int', 'var', v25
+v27 <- CallFunction v9, [v26]
+v28 <- CreateNamedVariable 'expected', 'var', v27
+v29 <- CallFunction v0, [v26]
+v30 <- CreateNamedVariable 'actual', 'var', v29
+
+
+function boom(a1) {
+    return ((a1 | 0) * (a1 | 0)) | 0;
+}
+function boom_unoptimized(a10) {
+    try {
+    } catch(e11) {
+    }
+    return ((a10 | 0) * (a10 | 0)) | 0;
+}
+boom(1, 1);
+boom(2, 2);
+var big_int = 1593835535;
+var expected = boom_unoptimized(big_int);
+var actual = boom(big_int);
+
+FuzzIL program written to corpus/regress-mul-canoverflow.fzil

@@ -1,0 +1,194 @@
+v0 <- LoadInteger '4294967295'
+v1 <- LoadString 'a'
+v2 <- CallMethod v1, 'repeat', [v0]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- BeginPlainFunction -> v6, v7
+        BeginTry
+            v8 <- LoadString '0123456789012'
+            v9 <- BinaryOperation v6, '+', v8
+            Return v9
+        BeginCatch -> v10
+            Return v10
+        EndTryCatch
+    EndPlainFunction
+    v11 <- LoadString 'a'
+    v12 <- CallFunction v5, [v11]
+    v13 <- LoadString 'a'
+    v14 <- CallFunction v5, [v13]
+    v15 <- LoadString 'a'
+    v16 <- CallFunction v5, [v15]
+    v17 <- CallFunction v5, [v3]
+    v18 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v19 <- CallFunction v4, []
+v20 <- BeginPlainFunction -> 
+    v21 <- BeginPlainFunction -> v22, v23
+        BeginTry
+            v24 <- LoadString '0123456789012'
+            v25 <- BinaryOperation v24, '+', v22
+            Return v25
+        BeginCatch -> v26
+            Return v26
+        EndTryCatch
+    EndPlainFunction
+    v27 <- LoadString 'a'
+    v28 <- CallFunction v21, [v27]
+    v29 <- LoadString 'a'
+    v30 <- CallFunction v21, [v29]
+    v31 <- LoadString 'a'
+    v32 <- CallFunction v21, [v31]
+    v33 <- CallFunction v21, [v3]
+    v34 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v35 <- CallFunction v20, []
+v36 <- BeginPlainFunction -> 
+    v37 <- BeginPlainFunction -> v38, v39
+        BeginTry
+            v40 <- LoadString '0123456789012'
+            v41 <- CallMethod v40, 'concat', [v38]
+            Return v41
+        BeginCatch -> v42
+            Return v42
+        EndTryCatch
+    EndPlainFunction
+    v43 <- LoadString 'a'
+    v44 <- CallFunction v37, [v43]
+    v45 <- LoadString 'a'
+    v46 <- CallFunction v37, [v45]
+    v47 <- LoadString 'a'
+    v48 <- CallFunction v37, [v47]
+    v49 <- CallFunction v37, [v3]
+    v50 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v51 <- CallFunction v36, []
+v52 <- BeginPlainFunction -> 
+    v53 <- CreateNamedVariable 'Error', 'none'
+    v54 <- LoadString 'toString has thrown'
+    v55 <- Construct v53, [v54]
+    ThrowException v55
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v52
+v56 <- EndObjectLiteral
+v57 <- CreateNamedVariable 'obj', 'var', v56
+v58 <- BeginPlainFunction -> 
+    v59 <- BeginPlainFunction -> v60, v61
+        BeginTry
+            v62 <- LoadString '0123456789012'
+            v63 <- BinaryOperation v62, '+', v57
+            Return v63
+        BeginCatch -> v64
+            Return v64
+        EndTryCatch
+    EndPlainFunction
+    v65 <- LoadString 'a'
+    v66 <- CallFunction v59, [v65]
+    v67 <- LoadString 'a'
+    v68 <- CallFunction v59, [v67]
+    v69 <- LoadString 'a'
+    v70 <- CallFunction v59, [v69]
+    v71 <- CallFunction v59, [v3]
+    v72 <- CreateNamedVariable 'Error', 'none'
+EndPlainFunction
+v73 <- CallFunction v58, []
+v74 <- BeginPlainFunction -> 
+    v75 <- BeginPlainFunction -> v76, v77
+        BeginTry
+            v78 <- LoadInteger '123'
+            v79 <- BinaryOperation v76, '+', v78
+            Return v79
+        BeginCatch -> v80
+            Return v80
+        EndTryCatch
+    EndPlainFunction
+    v81 <- LoadString 'a'
+    v82 <- CallFunction v75, [v81]
+    v83 <- LoadString 'a'
+    v84 <- CallFunction v75, [v83]
+    v85 <- LoadString 'a'
+    v86 <- CallFunction v75, [v85]
+    v87 <- CallFunction v75, [v3]
+    v88 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v89 <- CallFunction v74, []
+
+
+var a = ("a").repeat(4294967295);
+function f4() {
+    function foo(a6, a7) {
+        try {
+            return a6 + "0123456789012";
+        } catch(e10) {
+            return e10;
+        }
+    }
+    foo("a");
+    foo("a");
+    foo("a");
+    foo(a);
+}
+f4();
+function f20() {
+    function foo(a22, a23) {
+        try {
+            return "0123456789012" + a22;
+        } catch(e26) {
+            return e26;
+        }
+    }
+    foo("a");
+    foo("a");
+    foo("a");
+    foo(a);
+}
+f20();
+function f36() {
+    function foo(a38, a39) {
+        try {
+            return ("0123456789012").concat(a38);
+        } catch(e42) {
+            return e42;
+        }
+    }
+    foo("a");
+    foo("a");
+    foo("a");
+    foo(a);
+}
+f36();
+function f52() {
+    const v55 = new Error("toString has thrown");
+    throw v55;
+}
+var obj = { toString: f52 };
+function f58() {
+    function foo(a60, a61) {
+        try {
+            return "0123456789012" + obj;
+        } catch(e64) {
+            return e64;
+        }
+    }
+    foo("a");
+    foo("a");
+    foo("a");
+    foo(a);
+}
+f58();
+function f74() {
+    function foo(a76, a77) {
+        try {
+            return a76 + 123;
+        } catch(e80) {
+            return e80;
+        }
+    }
+    foo("a");
+    foo("a");
+    foo("a");
+    foo(a);
+}
+f74();
+
+FuzzIL program written to corpus/string-add-try-catch.fzil

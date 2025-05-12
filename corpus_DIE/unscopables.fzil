@@ -1,0 +1,1746 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- CallMethod v2, 'getPrototypeOf', [v1]
+v4 <- CreateNamedVariable 'globalProto', 'var', v3
+v5 <- LoadInteger '21'
+v6 <- CreateNamedVariable 'objectCount', 'var', v5
+v7 <- BeginPlainFunction -> v8
+    v9 <- BeginPlainFunction -> v10, v11
+        v12 <- CreateNamedVariable 'Symbol', 'none'
+        v13 <- GetProperty v12, 'unscopables'
+        v14 <- DeleteComputedProperty v10, v13
+        v15 <- DeleteProperty v10, 'x'
+        v16 <- DeleteProperty v10, 'x_'
+        v17 <- DeleteProperty v10, 'y'
+        v18 <- DeleteProperty v10, 'z'
+        v19 <- CallMethod v2, 'setPrototypeOf', [v10, v11]
+    EndPlainFunction
+    v20 <- BeginPlainFunction -> v21
+        BeginObjectLiteral
+        v22 <- EndObjectLiteral
+        v23 <- CreateArray []
+        v24 <- BeginPlainFunction -> 
+        EndPlainFunction
+        v25 <- BeginPlainFunction -> 
+            v26 <- LoadArguments
+            Return v26
+        EndPlainFunction
+        v27 <- CallFunction v25, []
+        v28 <- BeginPlainFunction -> 
+            Directive 'use strict'
+            v29 <- LoadArguments
+            Return v29
+        EndPlainFunction
+        v30 <- CallFunction v28, []
+        v31 <- LoadInteger '1'
+        v32 <- CallFunction v2, [v31]
+        v33 <- LoadBoolean 'true'
+        v34 <- CallFunction v2, [v33]
+        v35 <- LoadString 'bla'
+        v36 <- CallFunction v2, [v35]
+        v37 <- CreateNamedVariable 'Date', 'none'
+        v38 <- Construct v37, []
+        v39 <- CreateNamedVariable 'RegExp', 'none'
+        v40 <- Construct v39, []
+        v41 <- CreateNamedVariable 'Set', 'none'
+        v42 <- Construct v41, []
+        v43 <- CreateNamedVariable 'Map', 'none'
+        v44 <- Construct v43, []
+        v45 <- CreateNamedVariable 'WeakMap', 'none'
+        v46 <- Construct v45, []
+        v47 <- CreateNamedVariable 'WeakSet', 'none'
+        v48 <- Construct v47, []
+        v49 <- CreateNamedVariable 'ArrayBuffer', 'none'
+        v50 <- LoadInteger '10'
+        v51 <- Construct v49, [v50]
+        v52 <- CreateNamedVariable 'Int32Array', 'none'
+        v53 <- LoadInteger '5'
+        v54 <- Construct v52, [v53]
+        v55 <- CreateNamedVariable 'Function', 'none'
+        v56 <- CreateArray [v22, v23, v24, v27, v30, v32, v34, v36, v38, v40, v42, v44, v46, v48, v51, v54, v2, v55, v37, v39, v1]
+        v57 <- CreateNamedVariable 'objects', 'var', v56
+        v58 <- GetProperty v57, 'length'
+        v59 <- GetComputedProperty v57, v21
+        Return v59
+    EndPlainFunction
+    v60 <- CreateNamedVariable 'Array', 'none'
+    v61 <- GetProperty v60, 'prototype'
+    v62 <- CreateNamedVariable 'Symbol', 'none'
+    v63 <- GetProperty v62, 'unscopables'
+    v64 <- DeleteComputedProperty v61, v63
+    v65 <- GetProperty v8, 'length'
+    v66 <- LoadInteger '1'
+    v67 <- Compare v65, '===', v66
+    BeginIf v67
+        BeginForLoopInitializer
+            v68 <- LoadInteger '0'
+        BeginForLoopCondition -> v69
+            v70 <- Compare v69, '<', v6
+        BeginForLoopAfterthought v70 -> v71
+            v72 <- UnaryOperation v71, '++'
+        BeginForLoopBody -> v73
+            v74 <- CallFunction v20, [v73]
+            v75 <- CreateNamedVariable 'object', 'var', v74
+            v76 <- CallMethod v2, 'getPrototypeOf', [v75]
+            v77 <- CreateNamedVariable 'oldObjectProto', 'var', v76
+            v78 <- CallFunction v8, [v75]
+            v79 <- CallFunction v9, [v75, v77]
+        EndForLoop
+    BeginElse
+        BeginForLoopInitializer
+            v80 <- LoadInteger '0'
+        BeginForLoopCondition -> v81
+            v82 <- Compare v81, '<', v6
+        BeginForLoopAfterthought v82 -> v83
+            v84 <- UnaryOperation v83, '++'
+        BeginForLoopBody -> v85
+            BeginForLoopInitializer
+                v86 <- LoadInteger '0'
+            BeginForLoopCondition -> v87
+                v88 <- Compare v87, '<', v6
+            BeginForLoopAfterthought v88 -> v89
+                v90 <- UnaryOperation v89, '++'
+            BeginForLoopBody -> v91
+                v92 <- CallFunction v20, [v85]
+                v93 <- CreateNamedVariable 'object', 'var', v92
+                v94 <- CallFunction v20, [v91]
+                v95 <- CreateNamedVariable 'proto', 'var', v94
+                v96 <- Compare v93, '===', v95
+                BeginIf v96
+                    Continue
+                EndIf
+                v97 <- CallMethod v2, 'getPrototypeOf', [v93]
+                v98 <- CreateNamedVariable 'oldObjectProto', 'var', v97
+                v99 <- CallMethod v2, 'getPrototypeOf', [v95]
+                v100 <- CreateNamedVariable 'oldProtoProto', 'var', v99
+                v101 <- CallFunction v8, [v93, v95]
+                v102 <- CallFunction v9, [v93, v98]
+                v103 <- CallFunction v9, [v95, v100]
+            EndForLoop
+        EndForLoop
+    EndIf
+EndPlainFunction
+v104 <- BeginPlainFunction -> 
+    v105 <- CreateNamedVariable 'Array', 'none'
+    v106 <- GetProperty v105, 'prototype'
+    v107 <- CreateNamedVariable 'Symbol', 'none'
+    v108 <- GetProperty v107, 'unscopables'
+    v109 <- CallMethod v2, 'getOwnPropertyDescriptor', [v106, v108]
+    v110 <- CreateNamedVariable 'descr', 'var', v109
+    v111 <- GetProperty v110, 'enumerable'
+    v112 <- GetProperty v110, 'writable'
+    v113 <- GetProperty v110, 'configurable'
+    v114 <- LoadNull
+    v115 <- GetProperty v110, 'value'
+    v116 <- CallMethod v2, 'getPrototypeOf', [v115]
+    v117 <- LoadString 'local copyWithin'
+    v118 <- CreateNamedVariable 'copyWithin', 'var', v117
+    v119 <- LoadString 'local entries'
+    v120 <- CreateNamedVariable 'entries', 'var', v119
+    v121 <- LoadString 'local fill'
+    v122 <- CreateNamedVariable 'fill', 'var', v121
+    v123 <- LoadString 'local find'
+    v124 <- CreateNamedVariable 'find', 'var', v123
+    v125 <- LoadString 'local findIndex'
+    v126 <- CreateNamedVariable 'findIndex', 'var', v125
+    v127 <- LoadString 'local flat'
+    v128 <- CreateNamedVariable 'flat', 'var', v127
+    v129 <- LoadString 'local flatMap'
+    v130 <- CreateNamedVariable 'flatMap', 'var', v129
+    v131 <- LoadString 'local keys'
+    v132 <- CreateNamedVariable 'keys', 'var', v131
+    v133 <- LoadString 'local includes'
+    v134 <- CreateNamedVariable 'includes', 'var', v133
+    v135 <- LoadString 'local values'
+    v136 <- CreateNamedVariable 'values', 'var', v135
+    v137 <- CreateArray []
+    v138 <- CreateNamedVariable 'array', 'var', v137
+    v139 <- LoadInteger '42'
+    SetProperty v138, 'toString', v139
+    BeginWith v138
+        v140 <- LoadString 'local copyWithin'
+        v141 <- LoadString 'local entries'
+        v142 <- LoadString 'local fill'
+        v143 <- LoadString 'local find'
+        v144 <- LoadString 'local findIndex'
+        v145 <- LoadString 'local flat'
+        v146 <- LoadString 'local flatMap'
+        v147 <- LoadString 'local includes'
+        v148 <- LoadString 'local keys'
+        v149 <- LoadString 'local values'
+        v150 <- LoadInteger '42'
+        v151 <- CreateNamedVariable 'toString', 'none'
+    EndWith
+EndPlainFunction
+v152 <- CallFunction v104, []
+v153 <- BeginPlainFunction -> v154
+    v155 <- LoadInteger '1'
+    v156 <- CreateNamedVariable 'x', 'var', v155
+    v157 <- LoadInteger '2'
+    v158 <- CreateNamedVariable 'y', 'var', v157
+    v159 <- LoadInteger '3'
+    v160 <- CreateNamedVariable 'z', 'var', v159
+    v161 <- LoadInteger '4'
+    SetProperty v154, 'x', v161
+    v162 <- LoadInteger '5'
+    SetProperty v154, 'y', v162
+    BeginWith v154
+        v163 <- LoadInteger '4'
+        v164 <- LoadInteger '5'
+        v165 <- LoadInteger '3'
+    EndWith
+    v166 <- LoadBoolean 'true'
+    v167 <- LoadInteger '1'
+    v168 <- LoadString 'x'
+    BeginObjectLiteral
+    v169 <- EndObjectLiteral
+    v170 <- CreateNamedVariable 'Symbol', 'none'
+    v171 <- CallFunction v170, []
+    v172 <- CreateArray [v166, v167, v168, v169, v171]
+    v173 <- CreateNamedVariable 'truthyValues', 'var', v172
+    BeginForOfLoop v173 -> v174
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v174
+        v175 <- EndObjectLiteral
+        v176 <- GetProperty v170, 'unscopables'
+        SetComputedProperty v154, v176, v175
+        BeginWith v154
+            v177 <- LoadInteger '1'
+            v178 <- LoadInteger '5'
+            v179 <- LoadInteger '3'
+        EndWith
+    EndForOfLoop
+    v180 <- LoadBoolean 'false'
+    v181 <- LoadInteger '0'
+    v182 <- LoadInteger '0'
+    v183 <- UnaryOperation '-', v182
+    v184 <- CreateNamedVariable 'NaN', 'none'
+    v185 <- LoadString ''
+    v186 <- LoadNull
+    v187 <- LoadUndefined
+    v188 <- CreateArray [v180, v181, v183, v184, v185, v186, v187]
+    v189 <- CreateNamedVariable 'falsyValues', 'var', v188
+    BeginForOfLoop v189 -> v190
+        v191 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v190
+            ObjectLiteralAddProperty `y`, v191
+        v192 <- EndObjectLiteral
+        v193 <- GetProperty v170, 'unscopables'
+        SetComputedProperty v154, v193, v192
+        BeginWith v154
+            v194 <- LoadInteger '4'
+            v195 <- LoadInteger '2'
+            v196 <- LoadInteger '3'
+        EndWith
+    EndForOfLoop
+    BeginForOfLoop v189 -> v197
+        BeginForOfLoop v189 -> v198
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `x`, v197
+                ObjectLiteralAddProperty `y`, v198
+            v199 <- EndObjectLiteral
+            v200 <- GetProperty v170, 'unscopables'
+            SetComputedProperty v154, v200, v199
+            BeginWith v154
+                v201 <- LoadInteger '4'
+                v202 <- LoadInteger '5'
+                v203 <- LoadInteger '3'
+            EndWith
+        EndForOfLoop
+    EndForOfLoop
+EndPlainFunction
+v204 <- CallFunction v7, [v153]
+v205 <- BeginPlainFunction -> v206
+    v207 <- LoadInteger '1'
+    v208 <- CreateNamedVariable 'x', 'var', v207
+    v209 <- LoadInteger '2'
+    SetProperty v206, 'x', v209
+    BeginWith v206
+        v210 <- LoadInteger '2'
+    EndWith
+    v211 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v211
+    v212 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v212
+    v213 <- EndObjectLiteral
+    v214 <- CreateNamedVariable 'Symbol', 'none'
+    v215 <- GetProperty v214, 'unscopables'
+    SetComputedProperty v206, v215, v213
+    BeginWith v206
+        v216 <- LoadInteger '1'
+    EndWith
+    v217 <- LoadUndefined
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v217
+    v218 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v218
+    v219 <- EndObjectLiteral
+    v220 <- GetProperty v214, 'unscopables'
+    SetComputedProperty v206, v220, v219
+    BeginWith v206
+        v221 <- LoadInteger '2'
+    EndWith
+EndPlainFunction
+v222 <- CallFunction v7, [v205]
+v223 <- BeginPlainFunction -> v224
+    v225 <- LoadInteger '1'
+    v226 <- CreateNamedVariable 'x', 'var', v225
+    v227 <- LoadInteger '2'
+    SetProperty v224, 'x', v227
+    BeginWith v224
+        v228 <- LoadInteger '2'
+    EndWith
+    v229 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v229
+    v230 <- EndObjectLiteral
+    v231 <- CreateNamedVariable 'Symbol', 'none'
+    v232 <- GetProperty v231, 'unscopables'
+    SetComputedProperty v224, v232, v230
+    BeginWith v224
+        v233 <- LoadInteger '1'
+        v234 <- LoadInteger '3'
+        Reassign v226, v234
+        v235 <- LoadInteger '3'
+    EndWith
+    v236 <- LoadInteger '3'
+    v237 <- LoadInteger '2'
+    v238 <- GetProperty v224, 'x'
+EndPlainFunction
+v239 <- CallFunction v7, [v223]
+v240 <- BeginPlainFunction -> v241, v242
+    v243 <- LoadInteger '1'
+    v244 <- CreateNamedVariable 'x', 'var', v243
+    v245 <- LoadInteger '2'
+    v246 <- CreateNamedVariable 'y', 'var', v245
+    v247 <- LoadInteger '3'
+    v248 <- CreateNamedVariable 'z', 'var', v247
+    v249 <- LoadInteger '4'
+    SetProperty v242, 'x', v249
+    v250 <- CallMethod v2, 'setPrototypeOf', [v241, v242]
+    v251 <- LoadInteger '5'
+    SetProperty v241, 'y', v251
+    BeginWith v241
+        v252 <- LoadInteger '4'
+        v253 <- LoadInteger '5'
+        v254 <- LoadInteger '3'
+    EndWith
+    v255 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v255
+    v256 <- EndObjectLiteral
+    v257 <- CreateNamedVariable 'Symbol', 'none'
+    v258 <- GetProperty v257, 'unscopables'
+    SetComputedProperty v242, v258, v256
+    BeginWith v241
+        v259 <- LoadInteger '1'
+        v260 <- LoadInteger '5'
+        v261 <- LoadInteger '3'
+    EndWith
+    v262 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v262
+    v263 <- EndObjectLiteral
+    v264 <- GetProperty v257, 'unscopables'
+    SetComputedProperty v241, v264, v263
+    BeginWith v241
+        v265 <- LoadInteger '4'
+        v266 <- LoadInteger '2'
+        v267 <- LoadInteger '3'
+    EndWith
+    v268 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v268
+    v269 <- EndObjectLiteral
+    v270 <- GetProperty v257, 'unscopables'
+    SetComputedProperty v242, v270, v269
+    v271 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v271
+    v272 <- EndObjectLiteral
+    v273 <- GetProperty v257, 'unscopables'
+    SetComputedProperty v241, v273, v272
+    BeginWith v241
+        v274 <- LoadInteger '1'
+        v275 <- LoadInteger '5'
+        v276 <- LoadInteger '3'
+    EndWith
+    v277 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v277
+    v278 <- EndObjectLiteral
+    v279 <- GetProperty v257, 'unscopables'
+    SetComputedProperty v242, v279, v278
+    v280 <- LoadBoolean 'true'
+    v281 <- LoadUndefined
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v280
+        ObjectLiteralAddProperty `y`, v281
+    v282 <- EndObjectLiteral
+    v283 <- GetProperty v257, 'unscopables'
+    SetComputedProperty v241, v283, v282
+    BeginWith v241
+        v284 <- LoadInteger '1'
+        v285 <- LoadInteger '5'
+        v286 <- LoadInteger '3'
+    EndWith
+EndPlainFunction
+v287 <- CallFunction v7, [v240]
+v288 <- BeginPlainFunction -> v289, v290
+    v291 <- LoadInteger '1'
+    v292 <- CreateNamedVariable 'x', 'var', v291
+    v293 <- LoadInteger '2'
+    SetProperty v289, 'x', v293
+    BeginWith v289
+        v294 <- LoadInteger '2'
+    EndWith
+    v295 <- CallMethod v2, 'setPrototypeOf', [v289, v290]
+    v296 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v296
+    v297 <- EndObjectLiteral
+    v298 <- CreateNamedVariable 'Symbol', 'none'
+    v299 <- GetProperty v298, 'unscopables'
+    SetComputedProperty v290, v299, v297
+    BeginWith v289
+        v300 <- LoadInteger '1'
+        v301 <- LoadInteger '3'
+        Reassign v292, v301
+        v302 <- LoadInteger '3'
+    EndWith
+    v303 <- LoadInteger '3'
+    v304 <- LoadInteger '2'
+    v305 <- GetProperty v289, 'x'
+EndPlainFunction
+v306 <- CallFunction v7, [v288]
+v307 <- BeginPlainFunction -> v308
+    v309 <- LoadInteger '1'
+    v310 <- CreateNamedVariable 'x', 'var', v309
+    v311 <- LoadInteger '2'
+    v312 <- CreateNamedVariable 'y', 'var', v311
+    v313 <- LoadInteger '3'
+    SetProperty v308, 'x', v313
+    v314 <- LoadInteger '4'
+    SetProperty v308, 'y', v314
+    v315 <- LoadString 'xy'
+    v316 <- CreateNamedVariable 'Symbol', 'none'
+    v317 <- GetProperty v316, 'unscopables'
+    SetComputedProperty v308, v317, v315
+    BeginWith v308
+        v318 <- LoadInteger '3'
+        v319 <- LoadInteger '4'
+    EndWith
+    v320 <- LoadNull
+    v321 <- GetProperty v316, 'unscopables'
+    SetComputedProperty v308, v321, v320
+    BeginWith v308
+        v322 <- LoadInteger '3'
+        v323 <- LoadInteger '4'
+    EndWith
+EndPlainFunction
+v324 <- CallFunction v7, [v307]
+v325 <- BeginPlainFunction -> v326
+    v327 <- LoadInteger '1'
+    v328 <- CreateNamedVariable 'x', 'var', v327
+    v329 <- LoadInteger '2'
+    v330 <- CreateNamedVariable 'y', 'var', v329
+    v331 <- LoadInteger '3'
+    SetProperty v326, 'x', v331
+    v332 <- LoadInteger '4'
+    SetProperty v326, 'y', v332
+    BeginWith v326
+        v333 <- LoadInteger '3'
+        v334 <- LoadInteger '4'
+        v335 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v335
+        v336 <- EndObjectLiteral
+        v337 <- CreateNamedVariable 'Symbol', 'none'
+        v338 <- GetProperty v337, 'unscopables'
+        SetComputedProperty v326, v338, v336
+        v339 <- LoadInteger '1'
+        v340 <- LoadInteger '4'
+    EndWith
+EndPlainFunction
+v341 <- CallFunction v7, [v325]
+v342 <- BeginPlainFunction -> v343
+    v344 <- LoadInteger '1'
+    v345 <- CreateNamedVariable 'x', 'var', v344
+    v346 <- LoadInteger '2'
+    SetProperty v343, 'x', v346
+    BeginWith v343
+        BeginForLoopInitializer
+            v347 <- LoadInteger '0'
+        BeginForLoopCondition -> v348
+            v349 <- LoadInteger '1000'
+            v350 <- Compare v348, '<', v349
+        BeginForLoopAfterthought v350 -> v351
+            v352 <- UnaryOperation v351, '++'
+        BeginForLoopBody -> v353
+            v354 <- LoadInteger '500'
+            v355 <- Compare v353, '===', v354
+            BeginIf v355
+                v356 <- LoadBoolean 'true'
+                BeginObjectLiteral
+                    ObjectLiteralAddProperty `x`, v356
+                v357 <- EndObjectLiteral
+                v358 <- CreateNamedVariable 'Symbol', 'none'
+                v359 <- GetProperty v358, 'unscopables'
+                SetComputedProperty v343, v359, v357
+            EndIf
+            v360 <- LoadInteger '500'
+            v361 <- Compare v353, '<', v360
+            v362 <- LoadInteger '2'
+            v363 <- LoadInteger '1'
+            v364 <- TernaryOperation v361, v362, v363
+        EndForLoop
+    EndWith
+EndPlainFunction
+BeginObjectLiteral
+v365 <- EndObjectLiteral
+v366 <- CallFunction v342, [v365]
+v367 <- BeginPlainFunction -> v368
+    v369 <- LoadInteger '1'
+    v370 <- CreateNamedVariable 'x', 'var', v369
+    v371 <- LoadInteger '2'
+    SetProperty v368, 'x', v371
+    v372 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v372
+    v373 <- EndObjectLiteral
+    v374 <- CreateNamedVariable 'Symbol', 'none'
+    v375 <- GetProperty v374, 'unscopables'
+    SetComputedProperty v368, v375, v373
+    BeginWith v368
+        BeginForLoopInitializer
+            v376 <- LoadInteger '0'
+        BeginForLoopCondition -> v377
+            v378 <- LoadInteger '1000'
+            v379 <- Compare v377, '<', v378
+        BeginForLoopAfterthought v379 -> v380
+            v381 <- UnaryOperation v380, '++'
+        BeginForLoopBody -> v382
+            v383 <- LoadInteger '500'
+            v384 <- Compare v382, '===', v383
+            BeginIf v384
+                v385 <- GetProperty v374, 'unscopables'
+                v386 <- DeleteComputedProperty v368, v385
+            EndIf
+            v387 <- LoadInteger '500'
+            v388 <- Compare v382, '<', v387
+            v389 <- LoadInteger '1'
+            v390 <- LoadInteger '2'
+            v391 <- TernaryOperation v388, v389, v390
+        EndForLoop
+    EndWith
+EndPlainFunction
+BeginObjectLiteral
+v392 <- EndObjectLiteral
+v393 <- CallFunction v367, [v392]
+v394 <- BeginPlainFunction -> v395
+    v396 <- LoadInteger '1'
+    v397 <- CreateNamedVariable 'x', 'var', v396
+    v398 <- LoadInteger '2'
+    SetProperty v395, 'x', v398
+    BeginObjectLiteral
+    v399 <- EndObjectLiteral
+    v400 <- CreateNamedVariable 'Symbol', 'none'
+    v401 <- GetProperty v400, 'unscopables'
+    SetComputedProperty v395, v401, v399
+    BeginWith v395
+        BeginForLoopInitializer
+            v402 <- LoadInteger '0'
+        BeginForLoopCondition -> v403
+            v404 <- LoadInteger '1000'
+            v405 <- Compare v403, '<', v404
+        BeginForLoopAfterthought v405 -> v406
+            v407 <- UnaryOperation v406, '++'
+        BeginForLoopBody -> v408
+            v409 <- LoadInteger '500'
+            v410 <- Compare v408, '===', v409
+            BeginIf v410
+                v411 <- LoadBoolean 'true'
+                v412 <- GetProperty v400, 'unscopables'
+                v413 <- GetComputedProperty v395, v412
+                SetProperty v413, 'x', v411
+            EndIf
+            v414 <- LoadInteger '500'
+            v415 <- Compare v408, '<', v414
+            v416 <- LoadInteger '2'
+            v417 <- LoadInteger '1'
+            v418 <- TernaryOperation v415, v416, v417
+        EndForLoop
+    EndWith
+EndPlainFunction
+BeginObjectLiteral
+v419 <- EndObjectLiteral
+v420 <- CallFunction v394, [v419]
+v421 <- BeginPlainFunction -> v422
+    v423 <- LoadInteger '1'
+    v424 <- CreateNamedVariable 'x', 'var', v423
+    v425 <- LoadInteger '2'
+    SetProperty v422, 'x', v425
+    v426 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v426
+    v427 <- EndObjectLiteral
+    v428 <- CreateNamedVariable 'Symbol', 'none'
+    v429 <- GetProperty v428, 'unscopables'
+    SetComputedProperty v422, v429, v427
+    BeginWith v422
+        BeginForLoopInitializer
+            v430 <- LoadInteger '0'
+        BeginForLoopCondition -> v431
+            v432 <- LoadInteger '1000'
+            v433 <- Compare v431, '<', v432
+        BeginForLoopAfterthought v433 -> v434
+            v435 <- UnaryOperation v434, '++'
+        BeginForLoopBody -> v436
+            v437 <- LoadInteger '500'
+            v438 <- Compare v436, '===', v437
+            BeginIf v438
+                v439 <- GetProperty v428, 'unscopables'
+                v440 <- GetComputedProperty v422, v439
+                v441 <- DeleteProperty v440, 'x'
+            EndIf
+            v442 <- LoadInteger '500'
+            v443 <- Compare v436, '<', v442
+            v444 <- LoadInteger '1'
+            v445 <- LoadInteger '2'
+            v446 <- TernaryOperation v443, v444, v445
+        EndForLoop
+    EndWith
+EndPlainFunction
+BeginObjectLiteral
+v447 <- EndObjectLiteral
+v448 <- CallFunction v421, [v447]
+v449 <- BeginPlainFunction -> v450
+    v451 <- LoadInteger '1'
+    v452 <- CreateNamedVariable 'x', 'var', v451
+    v453 <- LoadInteger '2'
+    SetProperty v450, 'x', v453
+    v454 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v454
+    v455 <- EndObjectLiteral
+    v456 <- CreateNamedVariable 'Symbol', 'none'
+    v457 <- GetProperty v456, 'unscopables'
+    SetComputedProperty v450, v457, v455
+    BeginWith v450
+        BeginForLoopInitializer
+            v458 <- LoadInteger '0'
+        BeginForLoopCondition -> v459
+            v460 <- LoadInteger '1000'
+            v461 <- Compare v459, '<', v460
+        BeginForLoopAfterthought v461 -> v462
+            v463 <- UnaryOperation v462, '++'
+        BeginForLoopBody -> v464
+            v465 <- LoadInteger '500'
+            v466 <- Compare v464, '===', v465
+            BeginIf v466
+                v467 <- LoadUndefined
+                v468 <- GetProperty v456, 'unscopables'
+                v469 <- GetComputedProperty v450, v468
+                SetProperty v469, 'x', v467
+            EndIf
+            v470 <- LoadInteger '500'
+            v471 <- Compare v464, '<', v470
+            v472 <- LoadInteger '1'
+            v473 <- LoadInteger '2'
+            v474 <- TernaryOperation v471, v472, v473
+        EndForLoop
+    EndWith
+EndPlainFunction
+BeginObjectLiteral
+v475 <- EndObjectLiteral
+v476 <- CallFunction v449, [v475]
+v477 <- BeginPlainFunction -> v478, v479
+    v480 <- LoadString 'local'
+    v481 <- CreateNamedVariable 'x', 'var', v480
+    v482 <- LoadString 'x'
+    v483 <- BeginPlainFunction -> 
+        v484 <- LoadThis
+        v485 <- LoadThis
+        v486 <- GetProperty v485, 'x_'
+        Return v486
+    EndPlainFunction
+    v487 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v483
+        ObjectLiteralAddProperty `configurable`, v487
+    v488 <- EndObjectLiteral
+    v489 <- CallMethod v2, 'defineProperty', [v479, v482, v488]
+    v490 <- LoadString 'proto'
+    SetProperty v479, 'x_', v490
+    v491 <- CallMethod v2, 'setPrototypeOf', [v478, v479]
+    v492 <- LoadString 'object'
+    SetProperty v479, 'x_', v492
+    BeginWith v478
+        v493 <- LoadString 'object'
+    EndWith
+EndPlainFunction
+v494 <- CallFunction v7, [v477]
+v495 <- BeginPlainFunction -> v496
+    v497 <- Compare v496, '===', v1
+    BeginIf v497
+        Return
+    EndIf
+    v498 <- LoadString 'local'
+    v499 <- CreateNamedVariable 'x', 'var', v498
+    v500 <- LoadString 'object'
+    SetProperty v496, 'x', v500
+    v501 <- LoadInteger '0'
+    v502 <- CreateNamedVariable 'callCount', 'var', v501
+    v503 <- CreateNamedVariable 'Symbol', 'none'
+    v504 <- GetProperty v503, 'unscopables'
+    v505 <- BeginPlainFunction -> 
+        v506 <- UnaryOperation v502, '++'
+        BeginObjectLiteral
+        v507 <- EndObjectLiteral
+        Return v507
+    EndPlainFunction
+    v508 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v505
+        ObjectLiteralAddProperty `configurable`, v508
+    v509 <- EndObjectLiteral
+    v510 <- CallMethod v2, 'defineProperty', [v496, v504, v509]
+    BeginWith v496
+        v511 <- LoadString 'object'
+    EndWith
+    v512 <- LoadInteger '1'
+    v513 <- LoadInteger '0'
+    Reassign v502, v513
+    v514 <- GetProperty v503, 'unscopables'
+    v515 <- BeginPlainFunction -> 
+        v516 <- UnaryOperation v502, '++'
+        v517 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v517
+        v518 <- EndObjectLiteral
+        Return v518
+    EndPlainFunction
+    v519 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v515
+        ObjectLiteralAddProperty `configurable`, v519
+    v520 <- EndObjectLiteral
+    v521 <- CallMethod v2, 'defineProperty', [v496, v514, v520]
+    BeginWith v496
+        v522 <- LoadString 'local'
+    EndWith
+    v523 <- LoadInteger '1'
+    v524 <- LoadInteger '0'
+    Reassign v502, v524
+    v525 <- GetProperty v503, 'unscopables'
+    v526 <- BeginPlainFunction -> 
+        v527 <- UnaryOperation v502, '++'
+        v528 <- LoadInteger '1'
+        v529 <- Compare v502, '==', v528
+        BeginObjectLiteral
+        v530 <- EndObjectLiteral
+        v531 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v531
+        v532 <- EndObjectLiteral
+        v533 <- TernaryOperation v529, v530, v532
+        Return v533
+    EndPlainFunction
+    v534 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v526
+        ObjectLiteralAddProperty `configurable`, v534
+    v535 <- EndObjectLiteral
+    v536 <- CallMethod v2, 'defineProperty', [v496, v525, v535]
+    BeginWith v496
+        v537 <- LoadInteger '1'
+        Reassign v499, v537
+    EndWith
+    v538 <- LoadInteger '1'
+    v539 <- LoadInteger '1'
+    v540 <- GetProperty v496, 'x'
+    v541 <- LoadString 'local'
+    BeginWith v496
+        v542 <- LoadInteger '2'
+        Reassign v499, v542
+    EndWith
+    v543 <- LoadInteger '2'
+    v544 <- LoadInteger '1'
+    v545 <- GetProperty v496, 'x'
+    v546 <- LoadInteger '2'
+EndPlainFunction
+v547 <- CallFunction v7, [v495]
+v548 <- LoadThis
+v549 <- CreateNamedVariable 'global', 'var', v548
+v550 <- BeginPlainFunction -> 
+    v551 <- LoadString 'local'
+    v552 <- CreateNamedVariable 'x', 'var', v551
+    v553 <- CallMethod v2, 'getPrototypeOf', [v549]
+    v554 <- CreateNamedVariable 'globalProto', 'var', v553
+    BeginObjectLiteral
+    v555 <- EndObjectLiteral
+    v556 <- CreateArray []
+    v557 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v558 <- CreateArray [v555, v556, v557, v549]
+    v559 <- CreateNamedVariable 'protos', 'var', v558
+    BeginObjectLiteral
+    v560 <- EndObjectLiteral
+    v561 <- CreateArray []
+    v562 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v563 <- CreateArray [v560, v561, v562]
+    v564 <- CreateNamedVariable 'objects', 'var', v563
+    v565 <- BeginPlainFunction -> v566
+        v567 <- BeginPlainFunction -> v568
+            v569 <- LoadString 'x'
+            v570 <- BeginPlainFunction -> 
+                v571 <- LoadThis
+                v572 <- LoadString 'proto'
+                Return v572
+            EndPlainFunction
+            v573 <- LoadBoolean 'true'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `get`, v570
+                ObjectLiteralAddProperty `configurable`, v573
+            v574 <- EndObjectLiteral
+            v575 <- CallMethod v2, 'defineProperty', [v566, v569, v574]
+            SetProperty v568, '__proto__', v566
+            v576 <- LoadString 'x'
+            v577 <- BeginPlainFunction -> 
+                v578 <- LoadThis
+                v579 <- LoadString 'object'
+                Return v579
+            EndPlainFunction
+            v580 <- LoadBoolean 'true'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `get`, v577
+                ObjectLiteralAddProperty `configurable`, v580
+            v581 <- EndObjectLiteral
+            v582 <- CallMethod v2, 'defineProperty', [v568, v576, v581]
+            BeginWith v568
+                v583 <- LoadString 'object'
+            EndWith
+            v584 <- LoadBoolean 'true'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `x`, v584
+            v585 <- EndObjectLiteral
+            v586 <- CreateNamedVariable 'Symbol', 'none'
+            v587 <- GetProperty v586, 'unscopables'
+            SetComputedProperty v568, v587, v585
+            BeginWith v568
+                v588 <- LoadString 'local'
+            EndWith
+            v589 <- GetProperty v586, 'unscopables'
+            v590 <- DeleteComputedProperty v566, v589
+            v591 <- GetProperty v586, 'unscopables'
+            v592 <- DeleteComputedProperty v568, v591
+        EndPlainFunction
+        v593 <- CallMethod v564, 'forEach', [v567]
+    EndPlainFunction
+    v594 <- CallMethod v559, 'forEach', [v565]
+    v595 <- DeleteProperty v549, 'x'
+    v596 <- CallMethod v2, 'setPrototypeOf', [v549, v554]
+EndPlainFunction
+v597 <- CallFunction v550, []
+v598 <- BeginPlainFunction -> v599, v600
+    v601 <- LoadString 'local'
+    v602 <- CreateNamedVariable 'x', 'var', v601
+    v603 <- LoadString 'x'
+    v604 <- BeginPlainFunction -> v605
+    EndPlainFunction
+    v606 <- BeginPlainFunction -> 
+        v607 <- LoadString 'proto'
+        Return v607
+    EndPlainFunction
+    v608 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `set`, v604
+        ObjectLiteralAddProperty `get`, v606
+        ObjectLiteralAddProperty `configurable`, v608
+    v609 <- EndObjectLiteral
+    v610 <- CallMethod v2, 'defineProperty', [v600, v603, v609]
+    v611 <- CallMethod v2, 'setPrototypeOf', [v599, v600]
+    v612 <- LoadString 'x'
+    v613 <- BeginPlainFunction -> 
+        v614 <- LoadThis
+        v615 <- GetProperty v614, 'x_'
+        Return v615
+    EndPlainFunction
+    v616 <- BeginPlainFunction -> v617
+        v618 <- LoadThis
+        SetProperty v618, 'x_', v617
+    EndPlainFunction
+    v619 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v613
+        ObjectLiteralAddProperty `set`, v616
+        ObjectLiteralAddProperty `configurable`, v619
+    v620 <- EndObjectLiteral
+    v621 <- CallMethod v2, 'defineProperty', [v599, v612, v620]
+    v622 <- LoadInteger '1'
+    SetProperty v599, 'x_', v622
+    BeginWith v599
+        v623 <- LoadInteger '2'
+        Reassign v602, v623
+        v624 <- LoadInteger '2'
+    EndWith
+    v625 <- LoadInteger '2'
+    v626 <- GetProperty v599, 'x'
+    v627 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v627
+    v628 <- EndObjectLiteral
+    v629 <- CreateNamedVariable 'Symbol', 'none'
+    v630 <- GetProperty v629, 'unscopables'
+    SetComputedProperty v599, v630, v628
+    BeginWith v599
+        v631 <- LoadInteger '3'
+        Reassign v602, v631
+        v632 <- LoadInteger '3'
+    EndWith
+    v633 <- LoadInteger '2'
+    v634 <- GetProperty v599, 'x'
+EndPlainFunction
+v635 <- CallFunction v7, [v598]
+v636 <- BeginPlainFunction -> v637, v638
+    v639 <- LoadInteger '1'
+    v640 <- CreateNamedVariable 'x', 'var', v639
+    v641 <- LoadInteger '2'
+    SetProperty v637, 'x', v641
+    BeginWith v637
+        v642 <- LoadInteger '2'
+        v643 <- CreateNamedVariable 'Symbol', 'none'
+        v644 <- GetProperty v643, 'unscopables'
+        SetComputedProperty v637, v644, v638
+        v645 <- LoadInteger '2'
+    EndWith
+EndPlainFunction
+v646 <- CallFunction v7, [v636]
+v647 <- BeginPlainFunction -> v648
+    v649 <- LoadInteger '1'
+    v650 <- CreateNamedVariable 'x', 'var', v649
+    v651 <- LoadInteger '2'
+    SetProperty v648, 'x', v651
+    v652 <- LoadInteger '0'
+    v653 <- CreateNamedVariable 'calls', 'var', v652
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `x` -> v654
+            v655 <- UnaryOperation v653, '++'
+            v656 <- LoadInteger '1'
+            v657 <- Compare v653, '===', v656
+            v658 <- LoadBoolean 'true'
+            v659 <- LoadUndefined
+            v660 <- TernaryOperation v657, v658, v659
+            Return v660
+        EndObjectLiteralGetter
+    v661 <- EndObjectLiteral
+    v662 <- CreateNamedVariable 'unscopables', 'var', v661
+    BeginWith v648
+        v663 <- LoadInteger '2'
+        v664 <- CreateNamedVariable 'Symbol', 'none'
+        v665 <- GetProperty v664, 'unscopables'
+        SetComputedProperty v648, v665, v662
+        v666 <- LoadInteger '1'
+        v667 <- LoadInteger '2'
+    EndWith
+    v668 <- LoadInteger '2'
+EndPlainFunction
+v669 <- CallFunction v7, [v647]
+v670 <- BeginPlainFunction -> v671, v672
+    v673 <- LoadInteger '2'
+    v674 <- CreateNamedVariable 'length', 'var', v673
+    BeginWith v671
+        v675 <- LoadInteger '1'
+        v676 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `length`, v676
+        v677 <- EndObjectLiteral
+        v678 <- CreateNamedVariable 'Symbol', 'none'
+        v679 <- GetProperty v678, 'unscopables'
+        SetComputedProperty v671, v679, v677
+        v680 <- LoadInteger '2'
+        v681 <- GetProperty v678, 'unscopables'
+        v682 <- DeleteComputedProperty v671, v681
+        v683 <- LoadInteger '1'
+    EndWith
+EndPlainFunction
+v684 <- LoadInteger '1'
+v685 <- CreateArray [v684]
+v686 <- CreateNamedVariable 'Array', 'none'
+v687 <- GetProperty v686, 'prototype'
+v688 <- CallFunction v670, [v685, v687]
+v689 <- BeginPlainFunction -> v690
+EndPlainFunction
+v691 <- CreateNamedVariable 'Function', 'none'
+v692 <- GetProperty v691, 'prototype'
+v693 <- CallFunction v670, [v689, v692]
+v694 <- CreateNamedVariable 'String', 'none'
+v695 <- LoadString 'x'
+v696 <- Construct v694, [v695]
+v697 <- GetProperty v694, 'prototype'
+v698 <- CallFunction v670, [v696, v697]
+v699 <- BeginPlainFunction -> v700
+    v701 <- LoadString 'local'
+    v702 <- CreateNamedVariable 'name', 'var', v701
+    BeginWith v700
+        v703 <- LoadString 'f'
+        v704 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `name`, v704
+        v705 <- EndObjectLiteral
+        v706 <- CreateNamedVariable 'Symbol', 'none'
+        v707 <- GetProperty v706, 'unscopables'
+        SetComputedProperty v700, v707, v705
+        v708 <- LoadString 'local'
+        v709 <- GetProperty v706, 'unscopables'
+        v710 <- DeleteComputedProperty v700, v709
+        v711 <- LoadString 'f'
+    EndWith
+EndPlainFunction
+v712 <- BeginPlainFunction -> 
+EndPlainFunction
+v713 <- CallFunction v699, [v712]
+v714 <- BeginPlainFunction -> 
+    v715 <- LoadString 'local'
+    v716 <- CreateNamedVariable 'prototype', 'var', v715
+    v717 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v718 <- CreateNamedVariable 'f', 'var', v717
+    v719 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v720 <- CreateNamedVariable 'g', 'var', v719
+    v721 <- CallMethod v2, 'setPrototypeOf', [v718, v720]
+    v722 <- GetProperty v718, 'prototype'
+    v723 <- CreateNamedVariable 'fp', 'var', v722
+    v724 <- GetProperty v720, 'prototype'
+    v725 <- CreateNamedVariable 'gp', 'var', v724
+    BeginWith v718
+        v726 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `prototype`, v726
+        v727 <- EndObjectLiteral
+        v728 <- CreateNamedVariable 'Symbol', 'none'
+        v729 <- GetProperty v728, 'unscopables'
+        SetComputedProperty v718, v729, v727
+        v730 <- LoadString 'local'
+        v731 <- GetProperty v728, 'unscopables'
+        v732 <- DeleteComputedProperty v718, v731
+    EndWith
+EndPlainFunction
+v733 <- BeginPlainFunction -> 
+EndPlainFunction
+v734 <- CallFunction v714, [v733]
+v735 <- BeginPlainFunction -> 
+    v736 <- BeginPlainFunction -> 
+        v737 <- LoadString 'local'
+        v738 <- CreateNamedVariable 'arguments', 'var', v737
+        v739 <- CreateNamedVariable 'func', 'none'
+        v740 <- GetProperty v739, 'arguments'
+        v741 <- CreateNamedVariable 'args', 'var', v740
+        BeginWith v739
+            v742 <- LoadBoolean 'true'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `arguments`, v742
+            v743 <- EndObjectLiteral
+            v744 <- CreateNamedVariable 'Symbol', 'none'
+            v745 <- GetProperty v744, 'unscopables'
+            SetComputedProperty v739, v745, v743
+            v746 <- LoadString 'local'
+            v747 <- GetProperty v744, 'unscopables'
+            v748 <- DeleteComputedProperty v739, v747
+        EndWith
+    EndPlainFunction
+    v749 <- CreateNamedVariable 'func', 'var', v736
+    v750 <- LoadInteger '1'
+    v751 <- CallFunction v749, [v750]
+EndPlainFunction
+v752 <- CallFunction v735, []
+v753 <- BeginPlainFunction -> 
+    v754 <- BeginPlainFunction -> 
+        v755 <- LoadString 'local'
+        v756 <- CreateNamedVariable 'length', 'var', v755
+        v757 <- LoadArguments
+        BeginWith v757
+            v758 <- LoadInteger '1'
+            v759 <- LoadBoolean 'true'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `length`, v759
+            v760 <- EndObjectLiteral
+            v761 <- LoadArguments
+            v762 <- CreateNamedVariable 'Symbol', 'none'
+            v763 <- GetProperty v762, 'unscopables'
+            SetComputedProperty v761, v763, v760
+            v764 <- LoadString 'local'
+        EndWith
+    EndPlainFunction
+    v765 <- CreateNamedVariable 'func', 'var', v754
+    v766 <- LoadInteger '1'
+    v767 <- CallFunction v765, [v766]
+EndPlainFunction
+v768 <- CallFunction v753, []
+v769 <- BeginPlainFunction -> 
+    v770 <- BeginPlainFunction -> 
+        v771 <- LoadString 'local'
+        v772 <- CreateNamedVariable 'caller', 'var', v771
+        v773 <- CreateNamedVariable 'func', 'none'
+        BeginWith v773
+            v774 <- CallFunction v769, []
+            v775 <- LoadBoolean 'true'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `caller`, v775
+            v776 <- EndObjectLiteral
+            v777 <- CreateNamedVariable 'Symbol', 'none'
+            v778 <- GetProperty v777, 'unscopables'
+            SetComputedProperty v773, v778, v776
+            v779 <- LoadString 'local'
+            v780 <- GetProperty v777, 'unscopables'
+            v781 <- DeleteComputedProperty v773, v780
+            v782 <- CallFunction v769, []
+        EndWith
+    EndPlainFunction
+    v783 <- CreateNamedVariable 'func', 'var', v770
+    v784 <- LoadInteger '1'
+    v785 <- CallFunction v783, [v784]
+EndPlainFunction
+v786 <- CallFunction v769, []
+v787 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `x` -> v788
+        EndObjectLiteralGetter
+    v789 <- EndObjectLiteral
+    v790 <- CreateNamedVariable 'object', 'var', v789
+    v791 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v792 <- CreateNamedVariable 'Symbol', 'none'
+    v793 <- GetProperty v792, 'unscopables'
+    v794 <- BeginPlainFunction -> 
+        v795 <- Construct v791, []
+        ThrowException v795
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v794
+    v796 <- EndObjectLiteral
+    v797 <- CallMethod v2, 'defineProperty', [v790, v793, v796]
+    v798 <- BeginPlainFunction -> 
+        BeginWith v790
+            v799 <- CreateNamedVariable 'x', 'none'
+        EndWith
+    EndPlainFunction
+    v800 <- CallFunction v798, []
+    v801 <- CallFunction v791, []
+EndPlainFunction
+v802 <- CallFunction v787, []
+v803 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `x` -> v804
+        EndObjectLiteralGetter
+    v805 <- EndObjectLiteral
+    v806 <- CreateNamedVariable 'object', 'var', v805
+    v807 <- BeginPlainFunction -> 
+    EndPlainFunction
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `x` -> v808
+            v809 <- Construct v807, []
+            ThrowException v809
+        EndObjectLiteralGetter
+    v810 <- EndObjectLiteral
+    v811 <- CreateNamedVariable 'Symbol', 'none'
+    v812 <- GetProperty v811, 'unscopables'
+    SetComputedProperty v806, v812, v810
+    v813 <- BeginPlainFunction -> 
+        BeginWith v806
+            v814 <- CreateNamedVariable 'x', 'none'
+        EndWith
+    EndPlainFunction
+    v815 <- CallFunction v813, []
+    v816 <- CallFunction v807, []
+EndPlainFunction
+v817 <- CallFunction v787, []
+
+
+var global = this;
+var globalProto = Object.getPrototypeOf(global);
+var objectCount = 21;
+function runTest(a8) {
+    function restore(a10, a11) {
+        delete a10[Symbol.unscopables];
+        delete a10.x;
+        delete a10.x_;
+        delete a10.y;
+        delete a10.z;
+        Object.setPrototypeOf(a10, a11);
+    }
+    function getObject(a21) {
+        const v22 = {};
+        const v23 = [];
+        function f24() {
+        }
+        function f25() {
+            return arguments;
+        }
+        const v27 = f25();
+        function f28() {
+            'use strict';
+            return arguments;
+        }
+        const v30 = f28();
+        const v32 = Object(1);
+        const v34 = Object(true);
+        const v36 = Object("bla");
+        const v38 = new Date();
+        const v40 = new RegExp();
+        const v42 = new Set();
+        const v44 = new Map();
+        const v46 = new WeakMap();
+        const v48 = new WeakSet();
+        const v51 = new ArrayBuffer(10);
+        const v54 = new Int32Array(5);
+        var objects = [v22,v23,f24,v27,v30,v32,v34,v36,v38,v40,v42,v44,v46,v48,v51,v54,Object,Function,Date,RegExp,global];
+        objects.length;
+        return objects[a21];
+    }
+    const t41 = Array.prototype;
+    delete t41[Symbol.unscopables];
+    if (a8.length === 1) {
+        for (let i69 = 0; i69 < objectCount; i69++) {
+            var object = getObject(i69);
+            var oldObjectProto = Object.getPrototypeOf(object);
+            a8(object);
+            restore(object, oldObjectProto);
+        }
+    } else {
+        for (let i81 = 0; i81 < objectCount; i81++) {
+            for (let i87 = 0; i87 < objectCount; i87++) {
+                var object = getObject(i81);
+                var proto = getObject(i87);
+                if (object === proto) {
+                    continue;
+                }
+                var oldObjectProto = Object.getPrototypeOf(object);
+                var oldProtoProto = Object.getPrototypeOf(proto);
+                a8(object, proto);
+                restore(object, oldObjectProto);
+                restore(proto, oldProtoProto);
+            }
+        }
+    }
+}
+function TestArrayPrototypeUnscopables() {
+    var descr = Object.getOwnPropertyDescriptor(Array.prototype, Symbol.unscopables);
+    descr.enumerable;
+    descr.writable;
+    descr.configurable;
+    Object.getPrototypeOf(descr.value);
+    var copyWithin = "local copyWithin";
+    var entries = "local entries";
+    var fill = "local fill";
+    var find = "local find";
+    var findIndex = "local findIndex";
+    var flat = "local flat";
+    var flatMap = "local flatMap";
+    var keys = "local keys";
+    var includes = "local includes";
+    var values = "local values";
+    var array = [];
+    array.toString = 42;
+    with (array) {
+    }
+}
+TestArrayPrototypeUnscopables();
+function TestBasics(a154) {
+    var x = 1;
+    var y = 2;
+    var z = 3;
+    a154.x = 4;
+    a154.y = 5;
+    with (a154) {
+    }
+    var truthyValues = [true,1,"x",{},Symbol()];
+    for (const v174 of truthyValues) {
+        const v175 = { x: v174 };
+        a154[Symbol.unscopables] = v175;
+        with (a154) {
+        }
+    }
+    var falsyValues = [false,0,-0,NaN,"",null,,];
+    for (const v190 of falsyValues) {
+        const v192 = { x: v190, y: true };
+        a154[Symbol.unscopables] = v192;
+        with (a154) {
+        }
+    }
+    for (const v197 of falsyValues) {
+        for (const v198 of falsyValues) {
+            const v199 = { x: v197, y: v198 };
+            a154[Symbol.unscopables] = v199;
+            with (a154) {
+            }
+        }
+    }
+}
+runTest(TestBasics);
+function TestUnscopableChain(a206) {
+    var x = 1;
+    a206.x = 2;
+    with (a206) {
+    }
+    const v212 = { x: true };
+    const v213 = { __proto__: v212 };
+    a206[Symbol.unscopables] = v213;
+    with (a206) {
+    }
+    const v218 = { x: undefined };
+    const v219 = { __proto__: v218 };
+    a206[Symbol.unscopables] = v219;
+    with (a206) {
+    }
+}
+runTest(TestUnscopableChain);
+function TestBasicsSet(a224) {
+    var x = 1;
+    a224.x = 2;
+    with (a224) {
+    }
+    const v230 = { x: true };
+    a224[Symbol.unscopables] = v230;
+    with (a224) {
+        x = 3;
+    }
+    a224.x;
+}
+runTest(TestBasicsSet);
+function TestOnProto(a241, a242) {
+    var x = 1;
+    var y = 2;
+    var z = 3;
+    a242.x = 4;
+    Object.setPrototypeOf(a241, a242);
+    a241.y = 5;
+    with (a241) {
+    }
+    const v256 = { x: true };
+    a242[Symbol.unscopables] = v256;
+    with (a241) {
+    }
+    const v263 = { y: true };
+    a241[Symbol.unscopables] = v263;
+    with (a241) {
+    }
+    const v269 = { y: true };
+    a242[Symbol.unscopables] = v269;
+    const v272 = { x: true };
+    a241[Symbol.unscopables] = v272;
+    with (a241) {
+    }
+    const v278 = { y: true };
+    a242[Symbol.unscopables] = v278;
+    const v282 = { x: true, y: undefined };
+    a241[Symbol.unscopables] = v282;
+    with (a241) {
+    }
+}
+runTest(TestOnProto);
+function TestSetBlockedOnProto(a289, a290) {
+    var x = 1;
+    a289.x = 2;
+    with (a289) {
+    }
+    Object.setPrototypeOf(a289, a290);
+    const v297 = { x: true };
+    a290[Symbol.unscopables] = v297;
+    with (a289) {
+        x = 3;
+    }
+    a289.x;
+}
+runTest(TestSetBlockedOnProto);
+function TestNonObject(a308) {
+    var x = 1;
+    var y = 2;
+    a308.x = 3;
+    a308.y = 4;
+    a308[Symbol.unscopables] = "xy";
+    with (a308) {
+    }
+    a308[Symbol.unscopables] = null;
+    with (a308) {
+    }
+}
+runTest(TestNonObject);
+function TestChangeDuringWith(a326) {
+    var x = 1;
+    var y = 2;
+    a326.x = 3;
+    a326.y = 4;
+    with (a326) {
+        const v336 = { x: true };
+        a326[Symbol.unscopables] = v336;
+    }
+}
+runTest(TestChangeDuringWith);
+function TestChangeDuringWithWithPossibleOptimization(a343) {
+    var x = 1;
+    a343.x = 2;
+    with (a343) {
+        for (let i348 = 0; i348 < 1000; i348++) {
+            if (i348 === 500) {
+                const v357 = { x: true };
+                a343[Symbol.unscopables] = v357;
+            }
+            i348 < 500 ? 2 : 1;
+        }
+    }
+}
+TestChangeDuringWithWithPossibleOptimization({});
+function TestChangeDuringWithWithPossibleOptimization2(a368) {
+    var x = 1;
+    a368.x = 2;
+    const v373 = { x: true };
+    a368[Symbol.unscopables] = v373;
+    with (a368) {
+        for (let i377 = 0; i377 < 1000; i377++) {
+            if (i377 === 500) {
+                delete a368[Symbol.unscopables];
+            }
+            i377 < 500 ? 1 : 2;
+        }
+    }
+}
+TestChangeDuringWithWithPossibleOptimization2({});
+function TestChangeDuringWithWithPossibleOptimization3(a395) {
+    var x = 1;
+    a395.x = 2;
+    const v399 = {};
+    a395[Symbol.unscopables] = v399;
+    with (a395) {
+        for (let i403 = 0; i403 < 1000; i403++) {
+            if (i403 === 500) {
+                const t257 = a395[Symbol.unscopables];
+                t257.x = true;
+            }
+            i403 < 500 ? 2 : 1;
+        }
+    }
+}
+TestChangeDuringWithWithPossibleOptimization3({});
+function TestChangeDuringWithWithPossibleOptimization4(a422) {
+    var x = 1;
+    a422.x = 2;
+    const v427 = { x: true };
+    a422[Symbol.unscopables] = v427;
+    with (a422) {
+        for (let i431 = 0; i431 < 1000; i431++) {
+            if (i431 === 500) {
+                const t273 = a422[Symbol.unscopables];
+                delete t273.x;
+            }
+            i431 < 500 ? 1 : 2;
+        }
+    }
+}
+TestChangeDuringWithWithPossibleOptimization4({});
+function TestChangeDuringWithWithPossibleOptimization4(a450) {
+    var x = 1;
+    a450.x = 2;
+    const v455 = { x: true };
+    a450[Symbol.unscopables] = v455;
+    with (a450) {
+        for (let i459 = 0; i459 < 1000; i459++) {
+            if (i459 === 500) {
+                const t289 = a450[Symbol.unscopables];
+                t289.x = undefined;
+            }
+            i459 < 500 ? 1 : 2;
+        }
+    }
+}
+TestChangeDuringWithWithPossibleOptimization4({});
+function TestAccessorReceiver(a478, a479) {
+    var x = "local";
+    function f483() {
+        return this.x_;
+    }
+    Object.defineProperty(a479, "x", { get: f483, configurable: true });
+    a479.x_ = "proto";
+    Object.setPrototypeOf(a478, a479);
+    a479.x_ = "object";
+    with (a478) {
+    }
+}
+runTest(TestAccessorReceiver);
+function TestUnscopablesGetter(a496) {
+    if (a496 === global) {
+        return;
+    }
+    var x = "local";
+    a496.x = "object";
+    var callCount = 0;
+    const v504 = Symbol.unscopables;
+    function f505() {
+        callCount++;
+        return {};
+    }
+    Object.defineProperty(a496, v504, { get: f505, configurable: true });
+    with (a496) {
+    }
+    callCount = 0;
+    const v514 = Symbol.unscopables;
+    function f515() {
+        callCount++;
+        return { x: true };
+    }
+    Object.defineProperty(a496, v514, { get: f515, configurable: true });
+    with (a496) {
+    }
+    callCount = 0;
+    const v525 = Symbol.unscopables;
+    function f526() {
+        callCount++;
+        const v529 = callCount == 1;
+        const v530 = {};
+        return v529 ? v530 : { x: true };
+    }
+    Object.defineProperty(a496, v525, { get: f526, configurable: true });
+    with (a496) {
+        x = 1;
+    }
+    a496.x;
+    with (a496) {
+        x = 2;
+    }
+    a496.x;
+}
+runTest(TestUnscopablesGetter);
+var global = this;
+function TestUnscopablesGetter2() {
+    var x = "local";
+    var globalProto = Object.getPrototypeOf(global);
+    const v555 = {};
+    const v556 = [];
+    function f557() {
+    }
+    var protos = [v555,v556,f557,global];
+    const v560 = {};
+    const v561 = [];
+    function f562() {
+    }
+    var objects = [v560,v561,f562];
+    function f565(a566) {
+        function f567(a568) {
+            function f570() {
+                return "proto";
+            }
+            Object.defineProperty(a566, "x", { get: f570, configurable: true });
+            a568.__proto__ = a566;
+            function f577() {
+                return "object";
+            }
+            Object.defineProperty(a568, "x", { get: f577, configurable: true });
+            with (a568) {
+            }
+            const v585 = { x: true };
+            a568[Symbol.unscopables] = v585;
+            with (a568) {
+            }
+            delete a566[Symbol.unscopables];
+            delete a568[Symbol.unscopables];
+        }
+        objects.forEach(f567);
+    }
+    protos.forEach(f565);
+    delete global.x;
+    Object.setPrototypeOf(global, globalProto);
+}
+TestUnscopablesGetter2();
+function TestSetterOnBlacklisted(a599, a600) {
+    var x = "local";
+    function f604(a605) {
+    }
+    function f606() {
+        return "proto";
+    }
+    Object.defineProperty(a600, "x", { set: f604, get: f606, configurable: true });
+    Object.setPrototypeOf(a599, a600);
+    function f613() {
+        return this.x_;
+    }
+    function f616(a617) {
+        this.x_ = a617;
+    }
+    Object.defineProperty(a599, "x", { get: f613, set: f616, configurable: true });
+    a599.x_ = 1;
+    with (a599) {
+        x = 2;
+    }
+    a599.x;
+    const v628 = { x: true };
+    a599[Symbol.unscopables] = v628;
+    with (a599) {
+        x = 3;
+    }
+    a599.x;
+}
+runTest(TestSetterOnBlacklisted);
+function TestObjectsAsUnscopables(a637, a638) {
+    var x = 1;
+    a637.x = 2;
+    with (a637) {
+        a637[Symbol.unscopables] = a638;
+    }
+}
+runTest(TestObjectsAsUnscopables);
+function TestAccessorOnUnscopables(a648) {
+    var x = 1;
+    a648.x = 2;
+    var calls = 0;
+    const v661 = {
+        get x() {
+            calls++;
+            return calls === 1 ? true : undefined;
+        },
+    };
+    var unscopables = v661;
+    with (a648) {
+        a648[Symbol.unscopables] = unscopables;
+    }
+}
+runTest(TestAccessorOnUnscopables);
+function TestLengthUnscopables(a671, a672) {
+    var length = 2;
+    with (a671) {
+        const v677 = { length: true };
+        a671[Symbol.unscopables] = v677;
+        delete a671[Symbol.unscopables];
+    }
+}
+TestLengthUnscopables([1], Array.prototype);
+function f689(a690) {
+}
+TestLengthUnscopables(f689, Function.prototype);
+const v696 = new String("x");
+TestLengthUnscopables(v696, String.prototype);
+function TestFunctionNameUnscopables(a700) {
+    var name = "local";
+    with (a700) {
+        const v705 = { name: true };
+        a700[Symbol.unscopables] = v705;
+        delete a700[Symbol.unscopables];
+    }
+}
+function f() {
+}
+TestFunctionNameUnscopables(f);
+function TestFunctionPrototypeUnscopables() {
+    var prototype = "local";
+    function f717() {
+    }
+    var f = f717;
+    function f719() {
+    }
+    var g = f719;
+    Object.setPrototypeOf(f, g);
+    var fp = f.prototype;
+    var gp = g.prototype;
+    with (f) {
+        const v727 = { prototype: true };
+        f[Symbol.unscopables] = v727;
+        delete f[Symbol.unscopables];
+    }
+}
+function f733() {
+}
+TestFunctionPrototypeUnscopables(f733);
+function TestFunctionArgumentsUnscopables() {
+    function f736() {
+        var arguments = "local";
+        var args = func.arguments;
+        with (func) {
+            const v743 = { arguments: true };
+            func[Symbol.unscopables] = v743;
+            delete func[Symbol.unscopables];
+        }
+    }
+    var func = f736;
+    func(1);
+}
+TestFunctionArgumentsUnscopables();
+function TestArgumentsLengthUnscopables() {
+    function f754() {
+        var length = "local";
+        with (arguments) {
+            const v760 = { length: true };
+            arguments[Symbol.unscopables] = v760;
+        }
+    }
+    var func = f754;
+    func(1);
+}
+TestArgumentsLengthUnscopables();
+function TestFunctionCallerUnscopables() {
+    function f770() {
+        var caller = "local";
+        with (func) {
+            TestFunctionCallerUnscopables();
+            const v776 = { caller: true };
+            func[Symbol.unscopables] = v776;
+            delete func[Symbol.unscopables];
+            TestFunctionCallerUnscopables();
+        }
+    }
+    var func = f770;
+    func(1);
+}
+TestFunctionCallerUnscopables();
+function TestGetUnscopablesGetterThrows() {
+    const v789 = {
+        get x() {
+        },
+    };
+    var object = v789;
+    function CustomError() {
+    }
+    const v793 = Symbol.unscopables;
+    function f794() {
+        const v795 = new CustomError();
+        throw v795;
+    }
+    Object.defineProperty(object, v793, { get: f794 });
+    function f798() {
+        with (object) {
+        }
+    }
+    f798();
+    CustomError();
+}
+TestGetUnscopablesGetterThrows();
+function TestGetUnscopablesGetterThrows2() {
+    const v805 = {
+        get x() {
+        },
+    };
+    var object = v805;
+    function CustomError() {
+    }
+    const v810 = {
+        get x() {
+            const v809 = new CustomError();
+            throw v809;
+        },
+    };
+    object[Symbol.unscopables] = v810;
+    function f813() {
+        with (object) {
+        }
+    }
+    f813();
+    CustomError();
+}
+TestGetUnscopablesGetterThrows();
+
+FuzzIL program written to corpus/unscopables.fzil

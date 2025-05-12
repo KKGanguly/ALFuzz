@@ -1,0 +1,23 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '10000'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- LoadInteger '0'
+    v10 <- LoadInteger '100'
+    v11 <- BinaryOperation v8, '*', v10
+    SetComputedProperty v1, v11, v9
+EndForLoop
+
+
+var a = [];
+for (let i3 = 0; i3 < 10000; i3++) {
+    a[i3 * 100] = 0;
+}
+
+FuzzIL program written to corpus/regress-set-flags-stress-compact.fzil

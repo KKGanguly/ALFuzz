@@ -1,0 +1,30 @@
+v0 <- LoadRegExp 'r' ''
+v1 <- CreateNamedVariable 'r', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- BeginPlainFunction -> 
+    EndPlainFunction
+    SetComputedProperty v1, v1, v3
+EndPlainFunction
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+BeginForLoopCondition -> v5
+    v6 <- LoadInteger '300'
+    v7 <- Compare v5, '<', v6
+BeginForLoopAfterthought v7 -> v8
+    v9 <- UnaryOperation v8, '++'
+BeginForLoopBody -> v10
+    v11 <- CallFunction v2, []
+EndForLoop
+
+
+var r = /r/;
+function f() {
+    function f3() {
+    }
+    r[r] = f3;
+}
+for (let i5 = 0; i5 < 300; i5++) {
+    f();
+}
+
+FuzzIL program written to corpus/regress-crbug-217858.fzil

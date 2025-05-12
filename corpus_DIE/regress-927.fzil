@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1756315459'
+    v2 <- UnaryOperation '-', v1
+    v3 <- CreateNamedVariable 'a2', 'var', v2
+    v4 <- BinaryOperation v3, '&', v3
+    v5 <- LoadInteger '1'
+    v6 <- BinaryOperation v4, '^', v5
+    v7 <- BinaryOperation v6, '*', v3
+    v8 <- LoadInteger '10'
+    v9 <- UnaryOperation '-', v8
+    v10 <- BinaryOperation v7, '<<', v9
+    Return v10
+EndPlainFunction
+v11 <- CallFunction v0, []
+v12 <- LoadInteger '2147483648'
+v13 <- UnaryOperation '-', v12
+
+
+function a1() {
+    var a2 = -1756315459;
+    return (((a2 & a2) ^ 1) * a2) << -10;
+}
+a1();
+-2147483648;
+
+FuzzIL program written to corpus/regress-927.fzil

@@ -1,0 +1,76 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    Return v3
+EndPlainFunction
+v4 <- CreateNamedVariable 'Float32Array', 'none'
+v5 <- LoadInteger '2'
+v6 <- Construct v4, [v5]
+v7 <- CreateNamedVariable 'a', 'var', v6
+v8 <- LoadFloat '2.5'
+SetElement v7, '0', v8
+v9 <- LoadFloat '3.5'
+SetElement v7, '1', v9
+BeginForLoopInitializer
+    v10 <- LoadInteger '0'
+BeginForLoopCondition -> v11
+    v12 <- LoadInteger '5'
+    v13 <- Compare v11, '<', v12
+BeginForLoopAfterthought v13 -> v14
+    v15 <- UnaryOperation v14, '++'
+BeginForLoopBody -> v16
+    v17 <- LoadInteger '0'
+    v18 <- CallFunction v0, [v7, v17]
+EndForLoop
+v19 <- LoadFloat '2.5'
+v20 <- LoadInteger '0'
+v21 <- CallFunction v0, [v7, v20]
+v22 <- LoadFloat '3.5'
+v23 <- LoadInteger '1'
+v24 <- CallFunction v0, [v7, v23]
+v25 <- BeginPlainFunction -> v26, v27, v28
+    SetComputedProperty v26, v27, v28
+EndPlainFunction
+BeginForLoopInitializer
+    v29 <- LoadInteger '0'
+BeginForLoopCondition -> v30
+    v31 <- LoadInteger '5'
+    v32 <- Compare v30, '<', v31
+BeginForLoopAfterthought v32 -> v33
+    v34 <- UnaryOperation v33, '++'
+BeginForLoopBody -> v35
+    v36 <- LoadInteger '0'
+    v37 <- LoadFloat '4.5'
+    v38 <- CallFunction v25, [v7, v36, v37]
+EndForLoop
+v39 <- LoadInteger '0'
+v40 <- LoadFloat '4.5'
+v41 <- CallFunction v25, [v7, v39, v40]
+v42 <- LoadFloat '4.5'
+v43 <- GetElement v7, '0'
+v44 <- LoadFloat '3.5'
+v45 <- GetElement v7, '1'
+
+
+function get(a1, a2) {
+    return a1[a2];
+}
+const v6 = new Float32Array(2);
+var a = v6;
+a[0] = 2.5;
+a[1] = 3.5;
+for (let i11 = 0; i11 < 5; i11++) {
+    get(a, 0);
+}
+get(a, 0);
+get(a, 1);
+function set(a26, a27, a28) {
+    a26[a27] = a28;
+}
+for (let i30 = 0; i30 < 5; i30++) {
+    set(a, 0, 4.5);
+}
+set(a, 0, 4.5);
+a[0];
+a[1];
+
+FuzzIL program written to corpus/regress-1323.fzil

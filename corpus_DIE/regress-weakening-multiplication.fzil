@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '1'
+    BeginForLoopCondition -> v2
+        v3 <- LoadInteger '1'
+        v4 <- Compare v2, '<', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- LoadInteger '8'
+        v7 <- UnaryOperation '-', v6
+        Update v5, '*', v7
+    BeginForLoopBody -> v8
+    EndForLoop
+    BeginForLoopInitializer
+        v9 <- LoadInteger '1'
+    BeginForLoopCondition -> v10
+        v11 <- LoadInteger '1'
+        v12 <- Compare v10, '<', v11
+    BeginForLoopAfterthought v12 -> v13
+        v14 <- LoadInteger '2'
+        v15 <- CreateNamedVariable 'j', 'none'
+        Update v15, '+', v14
+    BeginForLoopBody -> v16
+        v17 <- CreateNamedVariable 'j', 'none'
+        v18 <- LoadInteger '1'
+        v19 <- UnaryOperation '-', v18
+        v20 <- BinaryOperation v17, '*', v19
+    EndForLoop
+EndPlainFunction
+v21 <- CallFunction v0, []
+
+
+function f() {
+    for (let i2 = 1; i2 < 1; i2 *= -8) {
+    }
+    for (let i10 = 1; i10 < 1; j += 2) {
+        j * -1;
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-weakening-multiplication.fzil

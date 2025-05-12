@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '1'
+v5 <- LoadInteger '2'
+v6 <- LoadInteger '3'
+v7 <- CreateArray [v4, v5, v6]
+v8 <- LoadString 'length'
+v9 <- CallFunction v0, [v7, v8]
+v10 <- LoadInteger '1'
+v11 <- LoadInteger '2'
+v12 <- LoadInteger '3'
+v13 <- CreateArray [v10, v11, v12]
+v14 <- LoadString 'length'
+v15 <- CallFunction v0, [v13, v14]
+v16 <- LoadInteger '1'
+v17 <- LoadInteger '2'
+v18 <- LoadInteger '3'
+v19 <- CreateArray [v16, v17, v18]
+v20 <- LoadInteger '2'
+v21 <- CallFunction v0, [v19, v20]
+
+
+function f(a1, a2) {
+    return a1[a2];
+}
+f([1,2,3], "length");
+f([1,2,3], "length");
+f([1,2,3], 2);
+
+FuzzIL program written to corpus/regress-crbug-172345.fzil

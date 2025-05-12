@@ -1,0 +1,60 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'y', 'var', v1
+    v3 <- BeginPlainFunction -> v4
+        v5 <- CreateNamedVariable 'Float64Array', 'none'
+        v6 <- LoadInteger '32'
+        v7 <- Construct v5, [v6]
+        v8 <- CreateNamedVariable 'a', 'var', v7
+        v9 <- LoadInteger '42'
+        SetElement v8, '0', v9
+        v10 <- LoadFloat '0.1'
+        v11 <- BinaryOperation v4, '+', v10
+        Reassign v2, v11
+        v12 <- GetElement v8, '0'
+        Return v12
+    EndPlainFunction
+    Return v3
+EndPlainFunction
+v13 <- CallFunction v0, []
+v14 <- CreateNamedVariable 'foo', 'var', v13
+v15 <- LoadInteger '1'
+v16 <- CallFunction v14, [v15]
+v17 <- LoadInteger '1'
+v18 <- CallFunction v14, [v17]
+v19 <- LoadInteger '1'
+v20 <- CallFunction v14, [v19]
+BeginForLoopInitializer
+    v21 <- LoadInteger '0'
+BeginForLoopCondition -> v22
+    v23 <- LoadInteger '20'
+    v24 <- Compare v22, '<', v23
+BeginForLoopAfterthought v24 -> v25
+    v26 <- UnaryOperation '++', v25
+BeginForLoopBody -> v27
+    v28 <- LoadInteger '42'
+    v29 <- LoadInteger '2'
+    v30 <- CallFunction v14, [v29]
+EndForLoop
+
+
+function f0() {
+    var y = 0;
+    function foo(a4) {
+        const v7 = new Float64Array(32);
+        var a = v7;
+        a[0] = 42;
+        y = a4 + 0.1;
+        return a[0];
+    }
+    return foo;
+}
+var foo = f0();
+foo(1);
+foo(1);
+foo(1);
+for (let i22 = 0; i22 < 20; ++i22) {
+    foo(2);
+}
+
+FuzzIL program written to corpus/typed-array-lifetime.fzil

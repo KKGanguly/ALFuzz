@@ -1,0 +1,48 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CreateNamedVariable '__defineSetter__', 'none'
+SetProperty v1, '__proto__', v0
+v2 <- LoadString 'prototype'
+v3 <- GetComputedProperty v1, v2
+v4 <- BeginPlainFunction -> 
+EndPlainFunction
+v5 <- CreateNamedVariable 'eval', 'none'
+SetProperty v5, '__proto__', v4
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+v7 <- LoadString 'prototype'
+SetComputedProperty v5, v7, v6
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '42'
+    Return v9
+EndPlainFunction
+v10 <- LoadInteger '43'
+SetProperty v8, 'prototype', v10
+v11 <- CreateNamedVariable '__defineGetter__', 'none'
+SetProperty v11, '__proto__', v8
+v12 <- GetProperty v11, 'prototype'
+v13 <- LoadInteger '43'
+v14 <- LoadString 'foo'
+SetProperty v11, 'prototype', v14
+v15 <- GetProperty v11, 'prototype'
+v16 <- LoadString 'foo'
+
+
+function f0() {
+}
+__defineSetter__.__proto__ = f0;
+__defineSetter__["prototype"];
+function f4() {
+}
+eval.__proto__ = f4;
+eval["prototype"] = {};
+function f() {
+    return 42;
+}
+f.prototype = 43;
+__defineGetter__.__proto__ = f;
+__defineGetter__.prototype;
+__defineGetter__.prototype = "foo";
+__defineGetter__.prototype;
+
+FuzzIL program written to corpus/regress-1151.fzil

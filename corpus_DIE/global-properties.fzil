@@ -1,0 +1,132 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    SetComputedProperty v1, v3, v4
+    v5 <- CallMethod v1, 'hasOwnProperty', [v3]
+    v6 <- LoadInteger '1'
+    v7 <- UnaryOperation '-', v6
+    v8 <- CreateNamedVariable 'Object', 'none'
+    v9 <- CallMethod v8, 'keys', [v1]
+    v10 <- CallMethod v9, 'indexOf', [v3]
+    v11 <- Compare v7, '<', v10
+    v12 <- LoadInteger '1'
+    v13 <- UnaryOperation '-', v12
+    v14 <- CallMethod v8, 'getOwnPropertyNames', [v1]
+    v15 <- CallMethod v14, 'indexOf', [v3]
+    v16 <- Compare v13, '<', v15
+    v17 <- LoadInteger '1'
+    v18 <- UnaryOperation '-', v17
+    v19 <- CallMethod v8, 'getOwnPropertySymbols', [v1]
+    v20 <- CallMethod v19, 'indexOf', [v3]
+    v21 <- Compare v18, '==', v20
+EndPlainFunction
+v22 <- LoadString 'property0'
+v23 <- LoadString 'value'
+v24 <- CallFunction v2, [v22, v23]
+v25 <- LoadString '0property'
+v26 <- LoadString 'value'
+v27 <- CallFunction v2, [v25, v26]
+v28 <- LoadString '42'
+v29 <- LoadString 'value'
+v30 <- CallFunction v2, [v28, v29]
+v31 <- BeginPlainFunction -> v32, v33
+    v34 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v34
+        ObjectLiteralAddProperty `value`, v33
+    v35 <- EndObjectLiteral
+    v36 <- CreateNamedVariable 'Object', 'none'
+    v37 <- CallMethod v36, 'defineProperty', [v1, v32, v35]
+    v38 <- CallMethod v1, 'hasOwnProperty', [v32]
+    v39 <- LoadInteger '1'
+    v40 <- UnaryOperation '-', v39
+    v41 <- CallMethod v36, 'keys', [v1]
+    v42 <- CallMethod v41, 'indexOf', [v32]
+    v43 <- Compare v40, '==', v42
+    v44 <- LoadInteger '1'
+    v45 <- UnaryOperation '-', v44
+    v46 <- CallMethod v36, 'getOwnPropertyNames', [v1]
+    v47 <- CallMethod v46, 'indexOf', [v32]
+    v48 <- Compare v45, '<', v47
+    v49 <- LoadInteger '1'
+    v50 <- UnaryOperation '-', v49
+    v51 <- CallMethod v36, 'getOwnPropertySymbols', [v1]
+    v52 <- CallMethod v51, 'indexOf', [v32]
+    v53 <- Compare v50, '==', v52
+EndPlainFunction
+v54 <- LoadString 'property1'
+v55 <- LoadString 'value'
+v56 <- CallFunction v31, [v54, v55]
+v57 <- LoadString '1property'
+v58 <- LoadString 'value'
+v59 <- CallFunction v31, [v57, v58]
+v60 <- LoadString '43'
+v61 <- LoadString 'value'
+v62 <- CallFunction v31, [v60, v61]
+v63 <- BeginPlainFunction -> v64, v65
+    v66 <- CreateNamedVariable 'Symbol', 'none'
+    v67 <- CallFunction v66, [v64]
+    Reassign v64, v67
+    SetComputedProperty v1, v64, v65
+    v68 <- CallMethod v1, 'hasOwnProperty', [v64]
+    v69 <- LoadInteger '1'
+    v70 <- UnaryOperation '-', v69
+    v71 <- CreateNamedVariable 'Object', 'none'
+    v72 <- CallMethod v71, 'keys', [v1]
+    v73 <- CallMethod v72, 'indexOf', [v64]
+    v74 <- Compare v70, '==', v73
+    v75 <- LoadInteger '1'
+    v76 <- UnaryOperation '-', v75
+    v77 <- CallMethod v71, 'getOwnPropertyNames', [v1]
+    v78 <- CallMethod v77, 'indexOf', [v64]
+    v79 <- Compare v76, '==', v78
+    v80 <- LoadInteger '1'
+    v81 <- UnaryOperation '-', v80
+    v82 <- CallMethod v71, 'getOwnPropertySymbols', [v1]
+    v83 <- CallMethod v82, 'indexOf', [v64]
+    v84 <- Compare v81, '<', v83
+EndPlainFunction
+v85 <- LoadString 'property2'
+v86 <- LoadString 'value'
+v87 <- CallFunction v63, [v85, v86]
+v88 <- LoadString '2property'
+v89 <- LoadString 'value'
+v90 <- CallFunction v63, [v88, v89]
+v91 <- LoadString '43'
+v92 <- LoadString 'value'
+v93 <- CallFunction v63, [v91, v92]
+
+
+var global = this;
+function testNamedProperty(a3, a4) {
+    global[a3] = a4;
+    global.hasOwnProperty(a3);
+    -1 < Object.keys(global).indexOf(a3);
+    -1 < Object.getOwnPropertyNames(global).indexOf(a3);
+    -1 == Object.getOwnPropertySymbols(global).indexOf(a3);
+}
+testNamedProperty("property0", "value");
+testNamedProperty("0property", "value");
+testNamedProperty("42", "value");
+function testNamedNonEnumerableProperty(a32, a33) {
+    Object.defineProperty(global, a32, { enumerable: false, value: a33 });
+    global.hasOwnProperty(a32);
+    -1 == Object.keys(global).indexOf(a32);
+    -1 < Object.getOwnPropertyNames(global).indexOf(a32);
+    -1 == Object.getOwnPropertySymbols(global).indexOf(a32);
+}
+testNamedNonEnumerableProperty("property1", "value");
+testNamedNonEnumerableProperty("1property", "value");
+testNamedNonEnumerableProperty("43", "value");
+function testSymbolProperty(a64, a65) {
+    global[a64 = Symbol(a64)] = a65;
+    global.hasOwnProperty(a64);
+    -1 == Object.keys(global).indexOf(a64);
+    -1 == Object.getOwnPropertyNames(global).indexOf(a64);
+    -1 < Object.getOwnPropertySymbols(global).indexOf(a64);
+}
+testSymbolProperty("property2", "value");
+testSymbolProperty("2property", "value");
+testSymbolProperty("43", "value");
+
+FuzzIL program written to corpus/global-properties.fzil

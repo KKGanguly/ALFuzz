@@ -1,0 +1,161 @@
+v0 <- BeginPlainFunction -> 
+    BeginWhileLoopHeader
+        v1 <- LoadInteger '1'
+    BeginWhileLoopBody v1
+    EndWhileLoop
+EndPlainFunction
+v2 <- CreateNamedVariable 'f1', 'var', v0
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadString 'hey'
+    v5 <- CreateNamedVariable 's', 'var', v4
+    v6 <- BeginPlainFunction -> 
+        v7 <- LoadBoolean 'true'
+        Return v7
+    EndPlainFunction
+    Reassign v2, v6
+    v8 <- CallFunction v2, []
+    BeginIf v8
+        Return v5
+    EndIf
+EndPlainFunction
+v9 <- LoadString 'hey'
+v10 <- CallFunction v3, []
+v11 <- BeginPlainFunction -> 
+    BeginDoWhileLoopBody
+    BeginDoWhileLoopHeader
+        v12 <- LoadInteger '1'
+    EndDoWhileLoop v12
+EndPlainFunction
+v13 <- CreateNamedVariable 'f2', 'var', v11
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadString 'hey'
+    v16 <- CreateNamedVariable 's', 'var', v15
+    v17 <- BeginPlainFunction -> 
+        v18 <- LoadBoolean 'true'
+        Return v18
+    EndPlainFunction
+    Reassign v13, v17
+    v19 <- CallFunction v13, []
+    BeginIf v19
+        Return v16
+    EndIf
+EndPlainFunction
+v20 <- LoadString 'hey'
+v21 <- CallFunction v14, []
+v22 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v23 <- LoadBoolean 'true'
+    BeginForLoopAfterthought v23
+    BeginForLoopBody
+    EndForLoop
+EndPlainFunction
+v24 <- CreateNamedVariable 'f3', 'var', v22
+v25 <- BeginPlainFunction -> 
+    v26 <- LoadString 'hey'
+    v27 <- CreateNamedVariable 's', 'var', v26
+    v28 <- BeginPlainFunction -> 
+        v29 <- LoadBoolean 'true'
+        Return v29
+    EndPlainFunction
+    Reassign v24, v28
+    v30 <- CallFunction v24, []
+    BeginIf v30
+        Return v27
+    EndIf
+EndPlainFunction
+v31 <- LoadString 'hey'
+v32 <- CallFunction v25, []
+v33 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v34 <- LoadBoolean 'true'
+    BeginForLoopAfterthought v34
+    BeginForLoopBody
+    EndForLoop
+EndPlainFunction
+v35 <- CreateNamedVariable 'f4', 'var', v33
+v36 <- BeginPlainFunction -> 
+    v37 <- LoadString 'hey'
+    v38 <- CreateNamedVariable 's', 'var', v37
+    v39 <- BeginPlainFunction -> 
+        v40 <- LoadBoolean 'true'
+        Return v40
+    EndPlainFunction
+    Reassign v35, v39
+    BeginWhileLoopHeader
+        v41 <- CallFunction v35, []
+    BeginWhileLoopBody v41
+        Return v38
+    EndWhileLoop
+EndPlainFunction
+v42 <- LoadString 'hey'
+v43 <- CallFunction v36, []
+
+
+function f0() {
+    while (1) {
+    }
+}
+var f1 = f0;
+function g1() {
+    var s = "hey";
+    function f6() {
+        return true;
+    }
+    f1 = f6;
+    if (f1()) {
+        return s;
+    }
+}
+g1();
+function f11() {
+    do {
+    } while (1)
+}
+var f2 = f11;
+function g2() {
+    var s = "hey";
+    function f17() {
+        return true;
+    }
+    f2 = f17;
+    if (f2()) {
+        return s;
+    }
+}
+g2();
+function f22() {
+    for (;;) {
+    }
+}
+var f3 = f22;
+function g3() {
+    var s = "hey";
+    function f28() {
+        return true;
+    }
+    f3 = f28;
+    if (f3()) {
+        return s;
+    }
+}
+g3();
+function f33() {
+    for (;;) {
+    }
+}
+var f4 = f33;
+function g4() {
+    var s = "hey";
+    function f39() {
+        return true;
+    }
+    f4 = f39;
+    while (f4()) {
+        return s;
+    }
+}
+g4();
+
+FuzzIL program written to corpus/regress-599710.fzil

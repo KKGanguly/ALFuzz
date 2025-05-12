@@ -1,0 +1,52 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> v2
+    v3 <- Construct v0, []
+    v4 <- CreateNamedVariable 'o', 'var', v3
+    BeginIf v2
+        v5 <- LoadFloat '1.1'
+        SetProperty v4, 't', v5
+    EndIf
+    v6 <- GetProperty v4, 't'
+    Return v6
+EndPlainFunction
+BeginForLoopInitializer
+    v7 <- LoadInteger '0'
+BeginForLoopCondition -> v8
+    v9 <- LoadInteger '1000'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10 -> v11
+    v12 <- UnaryOperation v11, '++'
+BeginForLoopBody -> v13
+    v14 <- Construct v0, []
+EndForLoop
+v15 <- LoadBoolean 'true'
+v16 <- CallFunction v1, [v15]
+v17 <- LoadBoolean 'true'
+v18 <- CallFunction v1, [v17]
+v19 <- LoadBoolean 'false'
+v20 <- CallFunction v1, [v19]
+v21 <- LoadFloat '1.1'
+v22 <- LoadBoolean 'true'
+v23 <- CallFunction v1, [v22]
+
+
+function C() {
+}
+function f(a2) {
+    const v3 = new C();
+    var o = v3;
+    if (a2) {
+        o.t = 1.1;
+    }
+    return o.t;
+}
+for (let i8 = 0; i8 < 1000; i8++) {
+    new C();
+}
+f(true);
+f(true);
+f(false);
+f(true);
+
+FuzzIL program written to corpus/regress-776309.fzil

@@ -1,0 +1,76 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'x', 'let', v0
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- BeginArrowFunction -> 
+EndArrowFunction
+v4 <- CallMethod v1, 'map', [v3]
+v5 <- GetProperty v4, 'constructor'
+v6 <- BeginArrowFunction -> 
+EndArrowFunction
+v7 <- CallMethod v1, 'filter', [v6]
+v8 <- GetProperty v7, 'constructor'
+v9 <- CallMethod v1, 'slice', []
+v10 <- GetProperty v9, 'constructor'
+v11 <- CallMethod v1, 'splice', []
+v12 <- GetProperty v11, 'constructor'
+v13 <- LoadInteger '1'
+v14 <- CreateArray [v13]
+v15 <- CallMethod v1, 'concat', [v14]
+v16 <- GetProperty v15, 'constructor'
+v17 <- LoadInteger '1'
+v18 <- LoadInteger '1'
+v19 <- CreateArray [v18]
+v20 <- CallMethod v1, 'concat', [v19]
+v21 <- GetElement v20, '0'
+v22 <- BeginClassDefinition v2
+EndClassDefinition
+SetProperty v1, 'constructor', v22
+v23 <- BeginArrowFunction -> 
+EndArrowFunction
+v24 <- CallMethod v1, 'map', [v23]
+v25 <- GetProperty v24, 'constructor'
+v26 <- BeginArrowFunction -> 
+EndArrowFunction
+v27 <- CallMethod v1, 'filter', [v26]
+v28 <- GetProperty v27, 'constructor'
+v29 <- CallMethod v1, 'slice', []
+v30 <- GetProperty v29, 'constructor'
+v31 <- CallMethod v1, 'splice', []
+v32 <- GetProperty v31, 'constructor'
+v33 <- LoadInteger '1'
+v34 <- CreateArray [v33]
+v35 <- CallMethod v1, 'concat', [v34]
+v36 <- GetProperty v35, 'constructor'
+v37 <- LoadInteger '1'
+v38 <- LoadInteger '1'
+v39 <- CreateArray [v38]
+v40 <- CallMethod v1, 'concat', [v39]
+v41 <- GetElement v40, '0'
+
+
+let x = [];
+const v3 = () => {
+};
+x.map(v3).constructor;
+const v6 = () => {
+};
+x.filter(v6).constructor;
+x.slice().constructor;
+x.splice().constructor;
+x.concat([1]).constructor;
+x.concat([1])[0];
+class C22 extends Array {
+}
+x.constructor = C22;
+const v23 = () => {
+};
+x.map(v23).constructor;
+const v26 = () => {
+};
+x.filter(v26).constructor;
+x.slice().constructor;
+x.splice().constructor;
+x.concat([1]).constructor;
+x.concat([1])[0];
+
+FuzzIL program written to corpus/array-species-constructor.fzil

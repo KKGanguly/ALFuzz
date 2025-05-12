@@ -1,0 +1,58 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `get` -> v1, v2, v3
+            v4 <- CreateNamedVariable 'Symbol', 'none'
+            v5 <- GetProperty v4, 'isConcatSpreadable'
+            v6 <- Compare v3, '===', v5
+            BeginIf v6
+                v7 <- CreateNamedVariable 'p', 'none'
+                v8 <- CallMethod v7, 'revoke', []
+            EndIf
+            v9 <- CreateNamedVariable 'target', 'none'
+            v10 <- GetComputedProperty v9, v3
+            Return v10
+        EndObjectLiteralMethod
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'handler', 'var', v11
+    v13 <- CreateArray []
+    v14 <- CreateNamedVariable 'Proxy', 'none'
+    v15 <- CallMethod v14, 'revocable', [v13, v12]
+    v16 <- CreateNamedVariable 'p', 'var', v15
+    v17 <- GetProperty v16, 'proxy'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v17
+    v18 <- EndObjectLiteral
+    v19 <- CreateNamedVariable 'target', 'var', v18
+    v20 <- BeginPlainFunction -> 
+        v21 <- CreateArray []
+        v22 <- CallMethod v21, 'concat', [v19]
+    EndPlainFunction
+    v23 <- CallFunction v20, []
+    v24 <- CreateNamedVariable 'TypeError', 'none'
+EndPlainFunction
+v25 <- CallFunction v0, []
+
+
+function testConcatRevokedProxyToArrayInPrototype() {
+    'use strict';
+    const v11 = {
+        get(a2, a3) {
+            if (a3 === Symbol.isConcatSpreadable) {
+                p.revoke();
+            }
+            return target[a3];
+        },
+    };
+    var handler = v11;
+    var p = Proxy.revocable([], handler);
+    const v17 = p.proxy;
+    var target = { __proto__: v17 };
+    function f20() {
+        ([]).concat(target);
+    }
+    f20();
+}
+testConcatRevokedProxyToArrayInPrototype();
+
+FuzzIL program written to corpus/array-concat-revoked-proxy-1.fzil

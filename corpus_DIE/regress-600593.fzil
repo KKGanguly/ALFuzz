@@ -1,0 +1,57 @@
+v0 <- BeginPlainFunction -> v1
+    BeginIf v1
+        v2 <- CreateNamedVariable 'Error', 'none'
+        v3 <- Construct v2, []
+        ThrowException v3
+    EndIf
+    v4 <- CreateNamedVariable 'Error', 'none'
+    v5 <- Construct v4, []
+    ThrowException v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadArguments
+    v8 <- GetProperty v7, 'length'
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadBoolean 'true'
+    v11 <- CallFunction v0, [v10]
+EndPlainFunction
+v12 <- CallFunction v9, []
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadBoolean 'false'
+    v15 <- CallFunction v0, [v14]
+EndPlainFunction
+v16 <- CallFunction v13, []
+v17 <- BeginPlainFunction -> 
+    v18 <- LoadBoolean 'true'
+    v19 <- CallFunction v0, [v18]
+EndPlainFunction
+v20 <- CallFunction v17, []
+
+
+function f(a1) {
+    if (a1) {
+        const v3 = new Error();
+        throw v3;
+    }
+    const v5 = new Error();
+    throw v5;
+}
+function Error() {
+    return arguments.length;
+}
+function f9() {
+    f(true);
+}
+f9();
+function f13() {
+    f(false);
+}
+f13();
+function f17() {
+    f(true);
+}
+f17();
+
+FuzzIL program written to corpus/regress-600593.fzil

@@ -1,0 +1,235 @@
+v0 <- CreateNamedVariable 'NaN', 'none'
+v1 <- CreateNamedVariable 'Math', 'none'
+v2 <- CallMethod v1, 'log1p', [v0]
+v3 <- CreateNamedVariable 'isNaN', 'none'
+v4 <- CallFunction v3, [v2]
+v5 <- BeginPlainFunction -> 
+EndPlainFunction
+v6 <- CallMethod v1, 'log1p', [v5]
+v7 <- CallFunction v3, [v6]
+v8 <- BeginPlainFunction -> 
+    Return v0
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v8
+v9 <- EndObjectLiteral
+v10 <- CallMethod v1, 'log1p', [v9]
+v11 <- CallFunction v3, [v10]
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadString 'abc'
+    Return v13
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v12
+v14 <- EndObjectLiteral
+v15 <- CallMethod v1, 'log1p', [v14]
+v16 <- CallFunction v3, [v15]
+v17 <- CreateNamedVariable 'Infinity', 'none'
+v18 <- LoadInteger '1'
+v19 <- LoadInteger '0'
+v20 <- CallMethod v1, 'log1p', [v19]
+v21 <- BinaryOperation v18, '/', v20
+v22 <- UnaryOperation '-', v17
+v23 <- LoadInteger '1'
+v24 <- LoadInteger '0'
+v25 <- UnaryOperation '-', v24
+v26 <- CallMethod v1, 'log1p', [v25]
+v27 <- BinaryOperation v23, '/', v26
+v28 <- CallMethod v1, 'log1p', [v17]
+v29 <- UnaryOperation '-', v17
+v30 <- LoadInteger '1'
+v31 <- UnaryOperation '-', v30
+v32 <- CallMethod v1, 'log1p', [v31]
+v33 <- LoadInteger '2'
+v34 <- UnaryOperation '-', v33
+v35 <- CallMethod v1, 'log1p', [v34]
+v36 <- CallFunction v3, [v35]
+v37 <- UnaryOperation '-', v17
+v38 <- CallMethod v1, 'log1p', [v37]
+v39 <- CallFunction v3, [v38]
+BeginForLoopInitializer
+    v40 <- LoadFloat '1e+300'
+BeginForLoopCondition -> v41
+    v42 <- LoadInteger '10000000000000000'
+    v43 <- Compare v41, '>', v42
+BeginForLoopAfterthought v43 -> v44
+    v45 <- LoadFloat '0.8'
+    Update v44, '*', v45
+BeginForLoopBody -> v46
+    v47 <- LoadInteger '1'
+    v48 <- BinaryOperation v46, '+', v47
+    v49 <- CallMethod v1, 'log', [v48]
+    v50 <- CreateNamedVariable 'expected', 'var', v49
+    v51 <- CallMethod v1, 'log1p', [v46]
+    v52 <- LoadFloat '1e-16'
+    v53 <- BinaryOperation v50, '*', v52
+EndForLoop
+v54 <- BeginPlainFunction -> v55
+    v56 <- CreateArray []
+    v57 <- CreateNamedVariable 'terms', 'var', v56
+    v58 <- CreateNamedVariable 'prod', 'var', v55
+    BeginForLoopInitializer
+        v59 <- LoadInteger '1'
+    BeginForLoopCondition -> v60
+        v61 <- LoadInteger '20'
+        v62 <- Compare v60, '<=', v61
+    BeginForLoopAfterthought v62 -> v63
+        v64 <- UnaryOperation v63, '++'
+    BeginForLoopBody -> v65
+        v66 <- BinaryOperation v58, '/', v65
+        v67 <- CallMethod v57, 'push', [v66]
+        v68 <- UnaryOperation '-', v55
+        Update v58, '*', v68
+    EndForLoop
+    v69 <- LoadInteger '0'
+    v70 <- CreateNamedVariable 'sum', 'var', v69
+    BeginWhileLoopHeader
+        v71 <- GetProperty v57, 'length'
+        v72 <- LoadInteger '0'
+        v73 <- Compare v71, '>', v72
+    BeginWhileLoopBody v73
+        v74 <- CallMethod v57, 'pop', []
+        Update v70, '+', v74
+    EndWhileLoop
+    Return v70
+EndPlainFunction
+BeginForLoopInitializer
+    v75 <- LoadFloat '0.1'
+BeginForLoopCondition -> v76
+    v77 <- LoadFloat '1e-300'
+    v78 <- Compare v76, '>', v77
+BeginForLoopAfterthought v78 -> v79
+    v80 <- LoadFloat '0.8'
+    Update v79, '*', v80
+BeginForLoopBody -> v81
+    v82 <- CallFunction v54, [v81]
+    v83 <- CreateNamedVariable 'expected', 'var', v82
+    v84 <- CallMethod v1, 'log1p', [v81]
+    v85 <- LoadFloat '1e-16'
+    v86 <- BinaryOperation v83, '*', v85
+EndForLoop
+v87 <- LoadFloat '0.006975613736425242'
+v88 <- LoadInteger '8070450532247929'
+v89 <- LoadInteger '2'
+v90 <- LoadInteger '60'
+v91 <- CallMethod v1, 'pow', [v89, v90]
+v92 <- BinaryOperation v88, '/', v91
+v93 <- CallMethod v1, 'log1p', [v92]
+v94 <- LoadFloat '709.782712893384'
+v95 <- LoadFloat '1.7976931348623157e+308'
+v96 <- CallMethod v1, 'log1p', [v95]
+v97 <- LoadInteger '2'
+v98 <- LoadInteger '55'
+v99 <- UnaryOperation '-', v98
+v100 <- CallMethod v1, 'pow', [v97, v99]
+v101 <- LoadInteger '2'
+v102 <- LoadInteger '55'
+v103 <- UnaryOperation '-', v102
+v104 <- CallMethod v1, 'pow', [v101, v103]
+v105 <- CallMethod v1, 'log1p', [v104]
+v106 <- LoadFloat '9.313225741817976e-10'
+v107 <- LoadInteger '2'
+v108 <- LoadInteger '30'
+v109 <- UnaryOperation '-', v108
+v110 <- CallMethod v1, 'pow', [v107, v109]
+v111 <- CallMethod v1, 'log1p', [v110]
+v112 <- LoadFloat '0.2876820724517809'
+v113 <- UnaryOperation '-', v112
+v114 <- LoadFloat '0.25'
+v115 <- UnaryOperation '-', v114
+v116 <- CallMethod v1, 'log1p', [v115]
+v117 <- LoadFloat '0.22314355131420976'
+v118 <- LoadFloat '0.25'
+v119 <- CallMethod v1, 'log1p', [v118]
+v120 <- LoadFloat '2.3978952727983707'
+v121 <- LoadInteger '10'
+v122 <- CallMethod v1, 'log1p', [v121]
+v123 <- LoadFloat '36.841361487904734'
+v124 <- LoadInteger '10000000000000000'
+v125 <- CallMethod v1, 'log1p', [v124]
+v126 <- LoadFloat '37.08337388996168'
+v127 <- LoadInteger '12738099905822720'
+v128 <- CallMethod v1, 'log1p', [v127]
+v129 <- LoadFloat '37.08336444902049'
+v130 <- LoadInteger '12737979646738432'
+v131 <- CallMethod v1, 'log1p', [v130]
+v132 <- LoadFloat '1.3862943611198906'
+v133 <- LoadInteger '3'
+v134 <- CallMethod v1, 'log1p', [v133]
+v135 <- LoadFloat '1.3862945995384413'
+v136 <- LoadInteger '3'
+v137 <- LoadInteger '2'
+v138 <- LoadInteger '20'
+v139 <- UnaryOperation '-', v138
+v140 <- CallMethod v1, 'pow', [v137, v139]
+v141 <- BinaryOperation v136, '+', v140
+v142 <- CallMethod v1, 'log1p', [v141]
+v143 <- LoadFloat '0.5596157879354227'
+v144 <- LoadFloat '0.75'
+v145 <- CallMethod v1, 'log1p', [v144]
+v146 <- LoadFloat '0.8109302162163288'
+v147 <- LoadFloat '1.25'
+v148 <- CallMethod v1, 'log1p', [v147]
+
+
+isNaN(Math.log1p(NaN));
+function f5() {
+}
+isNaN(Math.log1p(f5));
+function f8() {
+    return NaN;
+}
+isNaN(Math.log1p({ toString: f8 }));
+function f12() {
+    return "abc";
+}
+isNaN(Math.log1p({ valueOf: f12 }));
+1 / Math.log1p(0);
+-Infinity;
+1 / Math.log1p(-0);
+Math.log1p(Infinity);
+-Infinity;
+Math.log1p(-1);
+isNaN(Math.log1p(-2));
+isNaN(Math.log1p(-Infinity));
+for (let i41 = 1e+300; i41 > 10000000000000000; i41 *= 0.8) {
+    var expected = Math.log(i41 + 1);
+    Math.log1p(i41);
+    expected * 1e-16;
+}
+function log1p(a55) {
+    var terms = [];
+    var prod = a55;
+    for (let i60 = 1; i60 <= 20; i60++) {
+        terms.push(prod / i60);
+        prod *= -a55;
+    }
+    var sum = 0;
+    while (terms.length > 0) {
+        sum += terms.pop();
+    }
+    return sum;
+}
+for (let i76 = 0.1; i76 > 1e-300; i76 *= 0.8) {
+    var expected = log1p(i76);
+    Math.log1p(i76);
+    expected * 1e-16;
+}
+Math.log1p(8070450532247929 / Math.pow(2, 60));
+Math.log1p(1.7976931348623157e+308);
+Math.pow(2, -55);
+Math.log1p(Math.pow(2, -55));
+Math.log1p(Math.pow(2, -30));
+-0.2876820724517809;
+Math.log1p(-0.25);
+Math.log1p(0.25);
+Math.log1p(10);
+Math.log1p(10000000000000000);
+Math.log1p(12738099905822720);
+Math.log1p(12737979646738432);
+Math.log1p(3);
+Math.log1p(3 + Math.pow(2, -20));
+Math.log1p(0.75);
+Math.log1p(1.25);
+
+FuzzIL program written to corpus/math-log1p.fzil

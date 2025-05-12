@@ -1,0 +1,51 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable '__v_3', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'Array', 'none'
+    v4 <- LoadInteger '3'
+    v5 <- Construct v3, [v4]
+    v6 <- CreateNamedVariable '__v_1', 'var', v5
+    v7 <- LoadInteger '10'
+    SetElement v6, '0', v7
+    v8 <- LoadFloat '15.5'
+    SetElement v6, '1', v8
+    v9 <- CallFunction v2, []
+    Reassign v1, v9
+    v10 <- LoadInteger '20'
+    SetElement v6, '2', v10
+    Return v6
+EndPlainFunction
+BeginTry
+    BeginForLoopInitializer
+        v11 <- LoadInteger '0'
+    BeginForLoopCondition -> v12
+        v13 <- LoadInteger '3'
+        v14 <- Compare v12, '<', v13
+    BeginForLoopAfterthought v14 -> v15
+        v16 <- UnaryOperation '++', v15
+    BeginForLoopBody -> v17
+        v18 <- CallFunction v2, []
+        Reassign v1, v18
+    EndForLoop
+BeginCatch -> v19
+EndTryCatch
+
+
+var __v_3;
+function __f_2() {
+    const v5 = new Array(3);
+    var __v_1 = v5;
+    __v_1[0] = 10;
+    __v_1[1] = 15.5;
+    __v_3 = __f_2();
+    __v_1[2] = 20;
+    return __v_1;
+}
+try {
+    for (let i12 = 0; i12 < 3; ++i12) {
+        __v_3 = __f_2();
+    }
+} catch(e19) {
+}
+
+FuzzIL program written to corpus/regress-411210.fzil

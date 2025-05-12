@@ -1,0 +1,105 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '3'
+    Return v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v0
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'z', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '2'
+    v6 <- UnaryOperation '-', v5
+    v7 <- CreateNamedVariable 'y', 'var', v6
+    v8 <- LoadInteger '1'
+    v9 <- BinaryOperation v8, '&', v3
+    v10 <- UnaryOperation v7, '++'
+    v11 <- BinaryOperation v9, '-', v10
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '3'
+v13 <- CallFunction v4, []
+v14 <- LoadInteger '3'
+v15 <- CallFunction v4, []
+v16 <- LoadInteger '3'
+v17 <- CallFunction v4, []
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadInteger '2'
+    v20 <- CreateNamedVariable 'y', 'var', v19
+    v21 <- LoadInteger '1'
+    v22 <- BinaryOperation v21, '&', v3
+    v23 <- UnaryOperation v20, '++'
+    v24 <- BinaryOperation v22, '|', v23
+    Return v24
+EndPlainFunction
+v25 <- LoadInteger '3'
+v26 <- CallFunction v18, []
+v27 <- LoadInteger '3'
+v28 <- CallFunction v18, []
+v29 <- LoadInteger '3'
+v30 <- CallFunction v18, []
+v31 <- BeginPlainFunction -> 
+    v32 <- LoadInteger '3'
+    v33 <- CreateNamedVariable 'y', 'var', v32
+    v34 <- LoadInteger '3'
+    v35 <- BinaryOperation v34, '&', v3
+    v36 <- UnaryOperation v33, '++'
+    v37 <- BinaryOperation v35, '&', v36
+    Return v37
+EndPlainFunction
+v38 <- LoadInteger '3'
+v39 <- CallFunction v31, []
+v40 <- LoadInteger '3'
+v41 <- CallFunction v31, []
+v42 <- LoadInteger '3'
+v43 <- CallFunction v31, []
+v44 <- BeginPlainFunction -> 
+    v45 <- LoadInteger '2'
+    v46 <- CreateNamedVariable 'y', 'var', v45
+    v47 <- LoadInteger '1'
+    v48 <- BinaryOperation v47, '&', v3
+    v49 <- UnaryOperation v46, '++'
+    v50 <- BinaryOperation v48, '^', v49
+    Return v50
+EndPlainFunction
+v51 <- LoadInteger '3'
+v52 <- CallFunction v44, []
+v53 <- LoadInteger '3'
+v54 <- CallFunction v44, []
+v55 <- LoadInteger '3'
+v56 <- CallFunction v44, []
+
+
+function f0() {
+    return 3;
+}
+var z = { valueOf: f0 };
+function f() {
+    var y = -2;
+    return (1 & z) - y++;
+}
+f();
+f();
+f();
+function g() {
+    var y = 2;
+    return (1 & z) | y++;
+}
+g();
+g();
+g();
+function h() {
+    var y = 3;
+    return (3 & z) & y++;
+}
+h();
+h();
+h();
+function i() {
+    var y = 2;
+    return (1 & z) ^ y++;
+}
+i();
+i();
+i();
+
+FuzzIL program written to corpus/regress-crbug-478612.fzil

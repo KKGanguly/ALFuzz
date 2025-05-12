@@ -1,0 +1,38 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'testCache', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadString 'foo'
+    SetComputedProperty v1, v3, v4
+    Return v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'doLookup', 'var', v2
+v6 <- LoadInteger '0'
+v7 <- CallFunction v5, [v6]
+v8 <- CreateNamedVariable 'r2', 'var', v7
+v9 <- LoadInteger '0'
+v10 <- CreateArray [v9]
+v11 <- CallFunction v5, [v10]
+v12 <- CreateNamedVariable 'r1', 'var', v11
+v13 <- Compare v12, '===', v1
+v14 <- LoadString 'foo'
+v15 <- LoadString 'f'
+v16 <- GetElement v12, '0'
+v17 <- LoadString 'foo'
+v18 <- LoadString 'f'
+v19 <- GetElement v8, '0'
+
+
+var testCache = {};
+function f2(a3) {
+    testCache[a3] = "foo";
+    return "foo";
+}
+var doLookup = f2;
+var r2 = doLookup(0);
+var r1 = doLookup([0]);
+r1 === testCache;
+r1[0];
+r2[0];
+
+FuzzIL program written to corpus/regress-116.fzil

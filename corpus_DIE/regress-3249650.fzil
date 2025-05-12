@@ -1,0 +1,131 @@
+v0 <- BeginPlainFunction -> v1
+    BeginTry
+    BeginCatch -> v2
+    EndTryCatch
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    BeginTry
+    BeginCatch -> v5
+    EndTryCatch
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    BeginTry
+    BeginCatch -> v8
+    EndTryCatch
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    BeginTry
+    BeginCatch -> v11
+    EndTryCatch
+EndPlainFunction
+v12 <- LoadString ''
+v13 <- LoadBoolean 'false'
+BeginObjectLiteral
+v14 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v12
+    ObjectLiteralAddProperty `b`, v13
+    ObjectLiteralAddProperty `c`, v14
+v15 <- EndObjectLiteral
+v16 <- CreateNamedVariable 'object', 'var', v15
+v17 <- BeginPlainFunction -> v18
+    v19 <- LoadThis
+    Return v19
+EndPlainFunction
+SetProperty v16, 'f', v17
+v20 <- BeginPlainFunction -> v21
+    v22 <- CallFunction v0, [v21]
+    v23 <- CallFunction v3, [v21]
+    v24 <- CallFunction v6, [v21]
+    v25 <- CallFunction v9, [v21]
+    v26 <- GetProperty v21, 'a'
+    v27 <- GetProperty v26, 'b'
+    v28 <- LoadString ''
+    v29 <- Compare v27, '==', v28
+    v30 <- LoadBoolean 'true'
+    v31 <- LoadString 'A'
+    v32 <- CallMethod v16, 'f', [v31]
+    SetProperty v32, 'b', v30
+    v33 <- LoadString ''
+    v34 <- LoadString 'B'
+    v35 <- CallMethod v16, 'f', [v34]
+    SetProperty v35, 'a', v33
+    v36 <- LoadString 'A'
+    v37 <- LoadString 'C'
+    v38 <- CallMethod v16, 'f', [v37]
+    v39 <- GetProperty v38, 'c'
+    SetProperty v39, 'display', v36
+    v40 <- LoadString 'A'
+    v41 <- LoadString 'D'
+    v42 <- CallMethod v16, 'f', [v41]
+    v43 <- GetProperty v42, 'c'
+    SetProperty v43, 'display', v40
+EndPlainFunction
+v44 <- LoadString ''
+BeginObjectLiteral
+    ObjectLiteralAddProperty `b`, v44
+v45 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v45
+v46 <- EndObjectLiteral
+v47 <- CreateNamedVariable 'x', 'var', v46
+BeginForLoopInitializer
+    v48 <- LoadInteger '0'
+BeginForLoopCondition -> v49
+    v50 <- LoadInteger '20000'
+    v51 <- Compare v49, '<', v50
+BeginForLoopAfterthought v51 -> v52
+    v53 <- UnaryOperation v52, '++'
+BeginForLoopBody -> v54
+    v55 <- CallFunction v20, [v47]
+EndForLoop
+
+
+function f0(a1) {
+    try {
+    } catch(e2) {
+    }
+}
+function f1(a4) {
+    try {
+    } catch(e5) {
+    }
+}
+function f2(a7) {
+    try {
+    } catch(e8) {
+    }
+}
+function f3(a10) {
+    try {
+    } catch(e11) {
+    }
+}
+const v14 = {};
+var object = { a: "", b: false, c: v14 };
+function f17(a18) {
+    return this;
+}
+object.f = f17;
+function test(a21) {
+    f0(a21);
+    f1(a21);
+    f2(a21);
+    f3(a21);
+    a21.a.b == "";
+    const t27 = object.f("A");
+    t27.b = true;
+    const t34 = object.f("B");
+    t34.a = "";
+    const t36 = object.f("C").c;
+    t36.display = "A";
+    const t38 = object.f("D").c;
+    t38.display = "A";
+}
+const v45 = { b: "" };
+var x = { a: v45 };
+for (let i49 = 0; i49 < 20000; i49++) {
+    test(x);
+}
+
+FuzzIL program written to corpus/regress-3249650.fzil

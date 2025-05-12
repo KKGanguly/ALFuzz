@@ -1,0 +1,59 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- BeginArrowFunction -> v3
+        v4 <- LoadInteger '88'
+        Return v4
+    EndArrowFunction
+    v5 <- LoadInteger '42'
+    v6 <- CreateArray [v5]
+    v7 <- CallMethod v6, 'map', [v2]
+    Return v7
+EndPlainFunction
+v8 <- LoadUndefined
+v9 <- CreateNamedVariable 'y', 'let', v8
+v10 <- CallFunction v1, []
+Reassign v9, v10
+v11 <- TestInstanceOf v9, v0
+v12 <- CreateNamedVariable 'Array', 'none'
+v13 <- CallFunction v1, []
+Reassign v9, v13
+v14 <- TestInstanceOf v9, v0
+v15 <- CallFunction v1, []
+Reassign v9, v15
+v16 <- TestInstanceOf v9, v0
+v17 <- CreateNamedVariable 'Symbol', 'none'
+v18 <- GetProperty v17, 'species'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v0
+v19 <- EndObjectLiteral
+v20 <- CreateNamedVariable 'Reflect', 'none'
+v21 <- CallMethod v20, 'defineProperty', [v12, v18, v19]
+v22 <- CallFunction v1, []
+Reassign v9, v22
+v23 <- CallFunction v0, []
+v24 <- TestInstanceOf v9, v12
+
+
+function Foo() {
+}
+function f() {
+    const v2 = (a3) => {
+        return 88;
+    };
+    return ([42]).map(v2);
+}
+let y;
+y = f();
+y instanceof Foo;
+y = f();
+y instanceof Foo;
+y = f();
+y instanceof Foo;
+const v18 = Symbol.species;
+Reflect.defineProperty(Array, v18, { value: Foo });
+y = f();
+Foo();
+y instanceof Array;
+
+FuzzIL program written to corpus/array-species.fzil

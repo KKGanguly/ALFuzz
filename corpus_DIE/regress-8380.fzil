@@ -1,0 +1,76 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '0'
+    BeginForLoopCondition -> v2
+        v3 <- LoadInteger '2'
+        v4 <- Compare v2, '<', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- UnaryOperation v5, '++'
+    BeginForLoopBody -> v7
+        v8 <- LoadInteger '1'
+        v9 <- LoadInteger '1'
+        v10 <- CreateArray [v8, v9]
+        v11 <- CreateNamedVariable '', 'let', v10
+        v12 <- CreateNamedVariable 'r', 'none'
+        v13 <- LoadInteger '1'
+        v14 <- BinaryOperation v12, '-', v13
+        Reassign v12, v14
+        v15 <- LoadInteger '1'
+        v16 <- CreateNamedVariable 'q', 'none'
+        Update v16, '+', v15
+        v17 <- CreateNamedVariable 'q', 'none'
+        Reassign v17, v12
+    EndForLoop
+EndPlainFunction
+v18 <- CallFunction v0, []
+v19 <- CallFunction v0, []
+v20 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v21 <- LoadInteger '0'
+    BeginForLoopCondition -> v22
+        v23 <- LoadInteger '2'
+        v24 <- Compare v22, '<', v23
+    BeginForLoopAfterthought v24 -> v25
+        v26 <- UnaryOperation v25, '++'
+    BeginForLoopBody -> v27
+        v28 <- LoadInteger '1'
+        v29 <- LoadInteger '1'
+        v30 <- CreateArray [v28, v29]
+        v31 <- CreateNamedVariable '', 'let', v30
+        v32 <- LoadInteger '1'
+        v33 <- CreateNamedVariable 'r', 'none'
+        v34 <- BinaryOperation v32, '-', v33
+        Reassign v33, v34
+        v35 <- LoadInteger '1'
+        v36 <- CreateNamedVariable 'q', 'none'
+        Update v36, '+', v35
+        v37 <- CreateNamedVariable 'q', 'none'
+        Reassign v37, v33
+    EndForLoop
+EndPlainFunction
+v38 <- CallFunction v20, []
+v39 <- CallFunction v20, []
+
+
+function reduceLHS() {
+    for (let i2 = 0; i2 < 2; i2++) {
+        let  = [1,1];
+        r = r - 1;
+        q += 1;
+        q = r;
+    }
+}
+reduceLHS();
+reduceLHS();
+function reduceRHS() {
+    for (let i22 = 0; i22 < 2; i22++) {
+        let  = [1,1];
+        r = 1 - r;
+        q += 1;
+        q = r;
+    }
+}
+reduceRHS();
+reduceRHS();
+
+FuzzIL program written to corpus/regress-8380.fzil

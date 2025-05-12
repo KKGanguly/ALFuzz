@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadNull
+    v3 <- CreateNamedVariable 'a', 'var', v2
+    v4 <- LoadArguments
+    Reassign v3, v4
+    v5 <- CallFunction v0, [v4]
+EndPlainFunction
+v6 <- CallFunction v1, []
+v7 <- CallFunction v1, []
+
+
+function h() {
+}
+function f() {
+    var a = null;
+    a = arguments;
+    h(arguments);
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-1351.fzil

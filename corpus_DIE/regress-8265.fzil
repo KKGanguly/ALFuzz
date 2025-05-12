@@ -1,0 +1,40 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '54'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation '++', v4
+BeginForLoopBody -> v6
+    v7 <- CreateNamedVariable 'Math', 'none'
+    v8 <- CallMethod v7, 'random', []
+EndForLoop
+v9 <- LoadInteger '0'
+v10 <- CreateNamedVariable 'sum', 'let', v9
+BeginForLoopInitializer
+    v11 <- LoadInteger '0'
+BeginForLoopCondition -> v12
+    v13 <- LoadInteger '10'
+    v14 <- Compare v12, '<', v13
+BeginForLoopAfterthought v14 -> v15
+    v16 <- UnaryOperation '++', v15
+BeginForLoopBody -> v17
+    v18 <- CreateNamedVariable 'Math', 'none'
+    v19 <- CallMethod v18, 'random', []
+    v20 <- LoadInteger '50'
+    v21 <- BinaryOperation v19, '*', v20
+    v22 <- CallMethod v18, 'floor', [v21]
+    Update v10, '+', v22
+EndForLoop
+v23 <- LoadInteger '0'
+
+
+for (let i1 = 0; i1 < 54; ++i1) {
+    Math.random();
+}
+let sum = 0;
+for (let i12 = 0; i12 < 10; ++i12) {
+    sum += Math.floor(Math.random() * 50);
+}
+
+FuzzIL program written to corpus/regress-8265.fzil

@@ -1,0 +1,74 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        v1 <- LoadInteger '0'
+        ThrowException v1
+    BeginCatch -> v2
+        BeginTry
+            v3 <- LoadString 'hest'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `a`, v3
+            v4 <- EndObjectLiteral
+            v5 <- CreateNamedVariable 'x', 'var', v4
+            v6 <- BeginPlainFunction -> v7
+                v8 <- GetProperty v5, 'a'
+                Return v8
+            EndPlainFunction
+            SetProperty v5, 'm', v6
+        BeginCatch -> v9
+        EndTryCatch
+    EndTryCatch
+    v10 <- CreateNamedVariable 'x', 'none'
+    Return v10
+EndPlainFunction
+v11 <- CallFunction v0, []
+v12 <- CreateNamedVariable 'o', 'var', v11
+v13 <- LoadString 'hest'
+v14 <- CallMethod v12, 'm', []
+v15 <- LoadString 'hest'
+v16 <- CallMethod v12, 'm', []
+v17 <- LoadString 'hest'
+v18 <- CallMethod v12, 'm', []
+v19 <- LoadString 'hest'
+v20 <- CallMethod v12, 'm', []
+v21 <- LoadString 'horse'
+v22 <- CreateNamedVariable 'global', 'var', v21
+BeginObjectLiteral
+    BeginObjectLiteralGetter `global` -> v23
+        Return v22
+    EndObjectLiteralGetter
+v24 <- EndObjectLiteral
+v25 <- CreateNamedVariable 'p', 'var', v24
+v26 <- LoadString 'horse'
+v27 <- GetProperty v25, 'global'
+
+
+function f() {
+    try {
+        throw 0;
+    } catch(e2) {
+        try {
+            var x = { a: "hest" };
+            function f6(a7) {
+                return x.a;
+            }
+            x.m = f6;
+        } catch(e9) {
+        }
+    }
+    return x;
+}
+var o = f();
+o.m();
+o.m();
+o.m();
+o.m();
+var global = "horse";
+const v24 = {
+    get global() {
+        return global;
+    },
+};
+var p = v24;
+p.global;
+
+FuzzIL program written to corpus/regress-1583.fzil

@@ -1,0 +1,118 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString ''
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'a', 'var', v2
+    v4 <- LoadString ''
+    v5 <- GetElement v3, '0'
+    Return v3
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- CreateArray []
+    v8 <- CreateNamedVariable 'a', 'var', v7
+    v9 <- LoadString ''
+    SetElement v8, '0', v9
+    Return v8
+EndPlainFunction
+v10 <- BeginPlainFunction -> 
+    v11 <- CreateNamedVariable 'Array', 'none'
+    v12 <- Construct v11, []
+    v13 <- CreateNamedVariable 'a', 'var', v12
+    v14 <- LoadString ''
+    SetElement v13, '0', v14
+    v15 <- LoadString ''
+    SetElement v13, '100000', v15
+    Return v13
+EndPlainFunction
+v16 <- BeginPlainFunction -> v17, v18
+    v19 <- LoadString 'bazinga!'
+    SetComputedProperty v17, v18, v19
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21, v22
+    v23 <- BeginPlainFunction -> v24
+        v25 <- CallFunction v24, []
+        v26 <- LoadInteger '0'
+        v27 <- CallFunction v22, [v25, v26]
+    EndPlainFunction
+    v28 <- CallMethod v21, 'forEach', [v23]
+    v29 <- BeginPlainFunction -> v30
+        v31 <- CallFunction v30, []
+        v32 <- LoadInteger '0'
+        v33 <- CallFunction v22, [v31, v32]
+    EndPlainFunction
+    v34 <- CallMethod v21, 'forEach', [v29]
+    v35 <- BeginPlainFunction -> v36
+        v37 <- CallFunction v36, []
+        v38 <- LoadInteger '0'
+        v39 <- CallFunction v22, [v37, v38]
+    EndPlainFunction
+    v40 <- CallMethod v21, 'forEach', [v35]
+EndPlainFunction
+BeginForLoopInitializer
+    v41 <- LoadInteger '0'
+BeginForLoopCondition -> v42
+    v43 <- LoadInteger '5'
+    v44 <- Compare v42, '<', v43
+BeginForLoopAfterthought v44 -> v45
+    v46 <- UnaryOperation v45, '++'
+BeginForLoopBody -> v47
+    v48 <- CallFunction v6, []
+    v49 <- LoadInteger '0'
+    v50 <- CallFunction v16, [v48, v49]
+EndForLoop
+v51 <- CallFunction v0, []
+v52 <- LoadInteger '0'
+v53 <- CallFunction v16, [v51, v52]
+v54 <- CallFunction v0, []
+v55 <- CreateNamedVariable 'failure', 'var', v54
+v56 <- CreateNamedVariable 'gc', 'none'
+v57 <- CallFunction v56, []
+v58 <- CreateArray [v6, v10]
+v59 <- CallFunction v20, [v58, v16]
+v60 <- CreateArray [v6, v10, v0]
+v61 <- CallFunction v20, [v60, v16]
+
+
+function mkCOWArray() {
+    var a = [""];
+    a[0];
+    return a;
+}
+function mkArray() {
+    var a = [];
+    a[0] = "";
+    return a;
+}
+function mkNumberDictionary() {
+    const v12 = new Array();
+    var a = v12;
+    a[0] = "";
+    a[100000] = "";
+    return a;
+}
+function write(a17, a18) {
+    a17[a18] = "bazinga!";
+}
+function test(a21, a22) {
+    function f23(a24) {
+        a22(a24(), 0);
+    }
+    a21.forEach(f23);
+    function f29(a30) {
+        a22(a30(), 0);
+    }
+    a21.forEach(f29);
+    function f35(a36) {
+        a22(a36(), 0);
+    }
+    a21.forEach(f35);
+}
+for (let i42 = 0; i42 < 5; i42++) {
+    write(mkArray(), 0);
+}
+write(mkCOWArray(), 0);
+var failure = mkCOWArray();
+gc();
+test([mkArray,mkNumberDictionary], write);
+test([mkArray,mkNumberDictionary,mkCOWArray], write);
+
+FuzzIL program written to corpus/regress-1560.fzil

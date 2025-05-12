@@ -1,0 +1,44 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadThis
+    Return v3
+EndPlainFunction
+v4 <- CallFunction v2, []
+v5 <- CreateNamedVariable 'global2', 'var', v4
+v6 <- LoadString 'direct call to local function returns global'
+v7 <- CreateNamedVariable 'Object', 'none'
+v8 <- GetProperty v7, 'prototype'
+v9 <- GetProperty v8, 'toString'
+v10 <- CreateNamedVariable 'builtin2', 'var', v9
+v11 <- LoadString '[object builtins]'
+v12 <- CallFunction v10, []
+v13 <- Compare v11, '!=', v12
+v14 <- LoadString 'Direct call to toString'
+v15 <- LoadString '[object builtins]'
+v16 <- CallMethod v10, 'call', []
+v17 <- Compare v15, '!=', v16
+v18 <- LoadString 'call() to toString'
+v19 <- LoadString '[object builtins]'
+v20 <- CallMethod v10, 'apply', []
+v21 <- Compare v19, '!=', v20
+v22 <- LoadString 'call() to toString'
+v23 <- LoadString '[object builtins]'
+v24 <- GetProperty v10, 'call'
+v25 <- CallMethod v24, 'call', [v10]
+v26 <- Compare v23, '!=', v25
+v27 <- LoadString 'call.call() to toString'
+
+
+var global = this;
+function f2() {
+    return this;
+}
+var global2 = f2();
+var builtin2 = Object.prototype.toString;
+"[object builtins]" != builtin2();
+"[object builtins]" != builtin2.call();
+"[object builtins]" != builtin2.apply();
+"[object builtins]" != builtin2.call.call(builtin2);
+
+FuzzIL program written to corpus/regress-485.fzil

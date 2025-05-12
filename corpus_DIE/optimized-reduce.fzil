@@ -1,0 +1,130 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadInteger '1'
+        v4 <- LoadInteger '2'
+        v5 <- LoadUndefined
+        v6 <- LoadInteger '3'
+        v7 <- CreateArray [v3, v4, v5, v6]
+        v8 <- CreateNamedVariable 'a', 'var', v7
+        BeginIf v2
+            v9 <- LoadUndefined
+            v10 <- CreateArray [v9, v9, v9]
+            Reassign v8, v10
+        EndIf
+        v11 <- BeginArrowFunction -> v12, v13, v14, v15
+            v16 <- BinaryOperation v12, '+', v13
+            Return v16
+        EndArrowFunction
+        v17 <- CallMethod v8, 'reduce', [v11]
+        Return v17
+    EndPlainFunction
+    v18 <- CreateNamedVariable 'nothingThere', 'var', v1
+    v19 <- CallFunction v18, []
+    v20 <- CallFunction v18, []
+    v21 <- BeginArrowFunction -> 
+        v22 <- LoadBoolean 'true'
+        v23 <- CallFunction v18, [v22]
+        Return v23
+    EndArrowFunction
+    v24 <- CallFunction v21, []
+EndPlainFunction
+v25 <- CallFunction v0, []
+v26 <- BeginPlainFunction -> 
+    v27 <- LoadRegExp 'Array\.reduce' ''
+    v28 <- CreateNamedVariable 're', 'var', v27
+    v29 <- BeginPlainFunction -> 
+        v30 <- LoadUndefined
+        v31 <- CreateArray [v30, v30, v30]
+        v32 <- CreateNamedVariable 'b', 'var', v31
+        v33 <- LoadInteger '0'
+        v34 <- CreateNamedVariable 'result', 'var', v33
+        v35 <- BeginPlainFunction -> v36, v37, v38, v39
+            v40 <- BinaryOperation v36, '+', v37
+            Return v40
+        EndPlainFunction
+        v41 <- CreateNamedVariable 'callback', 'var', v35
+        v42 <- CallMethod v32, 'reduce', [v41]
+    EndPlainFunction
+    v43 <- CreateNamedVariable 'alwaysThrows', 'var', v29
+    BeginTry
+        v44 <- CallFunction v43, []
+    BeginCatch -> v45
+        v46 <- GetProperty v45, 'stack'
+        v47 <- CallMethod v28, 'exec', [v46]
+        v48 <- LoadNull
+        v49 <- Compare v47, '!==', v48
+    EndTryCatch
+    BeginTry
+        v50 <- CallFunction v43, []
+    BeginCatch -> v51
+    EndTryCatch
+    BeginTry
+        v52 <- CallFunction v43, []
+    BeginCatch -> v53
+    EndTryCatch
+    BeginTry
+        v54 <- CallFunction v43, []
+    BeginCatch -> v55
+        v56 <- GetProperty v55, 'stack'
+        v57 <- CallMethod v28, 'exec', [v56]
+        v58 <- LoadNull
+        v59 <- Compare v57, '!==', v58
+    EndTryCatch
+EndPlainFunction
+v60 <- CallFunction v26, []
+
+
+function f0() {
+    function f1(a2) {
+        var a = [1,2,,3];
+        if (a2) {
+            a = [,,,];
+        }
+        const v11 = (a12, a13, a14, a15) => {
+            return a12 + a13;
+        };
+        return a.reduce(v11);
+    }
+    var nothingThere = f1;
+    nothingThere();
+    nothingThere();
+    const v21 = () => {
+        return nothingThere(true);
+    };
+    v21();
+}
+f0();
+function f26() {
+    var re = /Array\.reduce/;
+    function f29() {
+        var b = [,,,];
+        var result = 0;
+        function f35(a36, a37, a38, a39) {
+            return a36 + a37;
+        }
+        var callback = f35;
+        b.reduce(callback);
+    }
+    var alwaysThrows = f29;
+    try {
+        alwaysThrows();
+    } catch(e45) {
+        re.exec(e45.stack) !== null;
+    }
+    try {
+        alwaysThrows();
+    } catch(e51) {
+    }
+    try {
+        alwaysThrows();
+    } catch(e53) {
+    }
+    try {
+        alwaysThrows();
+    } catch(e55) {
+        re.exec(e55.stack) !== null;
+    }
+}
+f26();
+
+FuzzIL program written to corpus/optimized-reduce.fzil

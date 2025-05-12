@@ -1,0 +1,272 @@
+v0 <- LoadInteger '10'
+v1 <- LoadInteger '11'
+v2 <- LoadString 'test'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+    ObjectLiteralAddProperty `y`, v1
+    ObjectLiteralAddProperty `z`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'obj1', 'var', v3
+v5 <- LoadInteger '10'
+v6 <- LoadInteger '11'
+v7 <- LoadString 'test'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v5
+    ObjectLiteralAddProperty `y`, v6
+    ObjectLiteralAddProperty `z`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'obj2', 'var', v8
+v10 <- CreateNamedVariable 'Object', 'none'
+v11 <- GetProperty v10, 'is'
+v12 <- CreateNamedVariable 'sameValue', 'var', v11
+v13 <- BeginArrowFunction -> v14, v15
+    v16 <- CreateNamedVariable 'Set', 'none'
+    v17 <- CreateArray [v14]
+    v18 <- Construct v16, [v17]
+    v19 <- CallMethod v18, 'has', [v15]
+    Return v19
+EndArrowFunction
+v20 <- CreateNamedVariable 'sameValueZero', 'var', v13
+v21 <- BeginPlainFunction -> v22, v23
+    v24 <- CallFunction v12, [v22, v23]
+    v25 <- CreateNamedVariable 'result', 'var', v24
+    v26 <- CallFunction v20, [v22, v23]
+    v27 <- Compare v25, '===', v26
+    Return v25
+EndPlainFunction
+v28 <- BeginPlainFunction -> v29, v30
+    v31 <- CallFunction v20, [v29, v30]
+    v32 <- CreateNamedVariable 'result', 'var', v31
+    v33 <- CallFunction v12, [v29, v30]
+    v34 <- UnaryOperation '!', v33
+    v35 <- BinaryOperation v32, '&&', v34
+    Return v32
+EndPlainFunction
+v36 <- LoadInteger '0'
+v37 <- LoadInteger '0'
+v38 <- CallFunction v21, [v36, v37]
+v39 <- LoadInteger '0'
+v40 <- UnaryOperation '+', v39
+v41 <- LoadInteger '0'
+v42 <- UnaryOperation '+', v41
+v43 <- CallFunction v21, [v40, v42]
+v44 <- LoadInteger '0'
+v45 <- UnaryOperation '-', v44
+v46 <- LoadInteger '0'
+v47 <- UnaryOperation '-', v46
+v48 <- CallFunction v21, [v45, v47]
+v49 <- LoadInteger '1'
+v50 <- LoadInteger '1'
+v51 <- CallFunction v21, [v49, v50]
+v52 <- LoadInteger '2'
+v53 <- LoadInteger '2'
+v54 <- CallFunction v21, [v52, v53]
+v55 <- LoadInteger '1'
+v56 <- UnaryOperation '-', v55
+v57 <- LoadInteger '1'
+v58 <- UnaryOperation '-', v57
+v59 <- CallFunction v21, [v56, v58]
+v60 <- LoadFloat '0.5'
+v61 <- LoadFloat '0.5'
+v62 <- CallFunction v21, [v60, v61]
+v63 <- LoadBoolean 'true'
+v64 <- LoadBoolean 'true'
+v65 <- CallFunction v21, [v63, v64]
+v66 <- LoadBoolean 'false'
+v67 <- LoadBoolean 'false'
+v68 <- CallFunction v21, [v66, v67]
+v69 <- CreateNamedVariable 'NaN', 'none'
+v70 <- CallFunction v21, [v69, v69]
+v71 <- LoadNull
+v72 <- LoadNull
+v73 <- CallFunction v21, [v71, v72]
+v74 <- LoadString 'foo'
+v75 <- LoadString 'foo'
+v76 <- CallFunction v21, [v74, v75]
+v77 <- CallFunction v21, [v4, v4]
+v78 <- CallFunction v21, []
+v79 <- LoadUndefined
+v80 <- LoadUndefined
+v81 <- CallFunction v21, [v79, v80]
+v82 <- LoadInteger '0'
+v83 <- LoadInteger '1'
+v84 <- CallFunction v21, [v82, v83]
+v85 <- LoadString 'foo'
+v86 <- LoadString 'bar'
+v87 <- CallFunction v21, [v85, v86]
+v88 <- CallFunction v21, [v4, v9]
+v89 <- LoadBoolean 'true'
+v90 <- LoadBoolean 'false'
+v91 <- CallFunction v21, [v89, v90]
+v92 <- LoadBoolean 'true'
+v93 <- CallFunction v21, [v4, v92]
+v94 <- LoadString 'foo'
+v95 <- CallFunction v21, [v4, v94]
+v96 <- LoadInteger '1'
+v97 <- CallFunction v21, [v4, v96]
+v98 <- LoadUndefined
+v99 <- CallFunction v21, [v4, v98]
+v100 <- CallFunction v21, [v4, v69]
+v101 <- LoadUndefined
+v102 <- LoadBoolean 'true'
+v103 <- CallFunction v21, [v101, v102]
+v104 <- LoadUndefined
+v105 <- LoadString 'foo'
+v106 <- CallFunction v21, [v104, v105]
+v107 <- LoadUndefined
+v108 <- LoadInteger '1'
+v109 <- CallFunction v21, [v107, v108]
+v110 <- LoadUndefined
+v111 <- CallFunction v21, [v110, v4]
+v112 <- LoadUndefined
+v113 <- CallFunction v21, [v112, v69]
+v114 <- LoadBoolean 'true'
+v115 <- CallFunction v21, [v69, v114]
+v116 <- LoadString 'foo'
+v117 <- CallFunction v21, [v69, v116]
+v118 <- LoadInteger '1'
+v119 <- CallFunction v21, [v69, v118]
+v120 <- CallFunction v21, [v69, v4]
+v121 <- LoadUndefined
+v122 <- CallFunction v21, [v69, v121]
+v123 <- LoadString 'foo'
+v124 <- LoadBoolean 'true'
+v125 <- CallFunction v21, [v123, v124]
+v126 <- LoadString 'foo'
+v127 <- LoadInteger '1'
+v128 <- CallFunction v21, [v126, v127]
+v129 <- LoadString 'foo'
+v130 <- CallFunction v21, [v129, v4]
+v131 <- LoadString 'foo'
+v132 <- LoadUndefined
+v133 <- CallFunction v21, [v131, v132]
+v134 <- LoadString 'foo'
+v135 <- CallFunction v21, [v134, v69]
+v136 <- LoadBoolean 'true'
+v137 <- LoadInteger '1'
+v138 <- CallFunction v21, [v136, v137]
+v139 <- LoadBoolean 'true'
+v140 <- CallFunction v21, [v139, v4]
+v141 <- LoadBoolean 'true'
+v142 <- LoadUndefined
+v143 <- CallFunction v21, [v141, v142]
+v144 <- LoadBoolean 'true'
+v145 <- CallFunction v21, [v144, v69]
+v146 <- LoadBoolean 'true'
+v147 <- LoadString 'foo'
+v148 <- CallFunction v21, [v146, v147]
+v149 <- LoadInteger '1'
+v150 <- LoadBoolean 'true'
+v151 <- CallFunction v21, [v149, v150]
+v152 <- LoadInteger '1'
+v153 <- CallFunction v21, [v152, v4]
+v154 <- LoadInteger '1'
+v155 <- LoadUndefined
+v156 <- CallFunction v21, [v154, v155]
+v157 <- LoadInteger '1'
+v158 <- CallFunction v21, [v157, v69]
+v159 <- LoadInteger '1'
+v160 <- LoadString 'foo'
+v161 <- CallFunction v21, [v159, v160]
+v162 <- LoadString '1'
+v163 <- LoadInteger '1'
+v164 <- CallFunction v21, [v162, v163]
+v165 <- LoadString 'true'
+v166 <- LoadBoolean 'true'
+v167 <- CallFunction v21, [v165, v166]
+v168 <- LoadString 'false'
+v169 <- LoadBoolean 'false'
+v170 <- CallFunction v21, [v168, v169]
+v171 <- LoadString 'undefined'
+v172 <- LoadUndefined
+v173 <- CallFunction v21, [v171, v172]
+v174 <- LoadString 'NaN'
+v175 <- CallFunction v21, [v174, v69]
+v176 <- LoadInteger '0'
+v177 <- UnaryOperation '+', v176
+v178 <- LoadInteger '0'
+v179 <- UnaryOperation '-', v178
+v180 <- CallFunction v28, [v177, v179]
+v181 <- LoadInteger '0'
+v182 <- UnaryOperation '-', v181
+v183 <- LoadInteger '0'
+v184 <- UnaryOperation '+', v183
+v185 <- CallFunction v28, [v182, v184]
+
+
+var obj1 = { x: 10, y: 11, z: "test" };
+var obj2 = { x: 10, y: 11, z: "test" };
+var sameValue = Object.is;
+const v13 = (a14, a15) => {
+    const v18 = new Set([a14]);
+    return v18.has(a15);
+};
+var sameValueZero = v13;
+function sameValueBoth(a22, a23) {
+    var result = sameValue(a22, a23);
+    result === sameValueZero(a22, a23);
+    return result;
+}
+function sameValueZeroOnly(a29, a30) {
+    var result = sameValueZero(a29, a30);
+    result && !sameValue(a29, a30);
+    return result;
+}
+sameValueBoth(0, 0);
+sameValueBoth(+0, +0);
+sameValueBoth(-0, -0);
+sameValueBoth(1, 1);
+sameValueBoth(2, 2);
+sameValueBoth(-1, -1);
+sameValueBoth(0.5, 0.5);
+sameValueBoth(true, true);
+sameValueBoth(false, false);
+sameValueBoth(NaN, NaN);
+sameValueBoth(null, null);
+sameValueBoth("foo", "foo");
+sameValueBoth(obj1, obj1);
+sameValueBoth();
+sameValueBoth(undefined, undefined);
+sameValueBoth(0, 1);
+sameValueBoth("foo", "bar");
+sameValueBoth(obj1, obj2);
+sameValueBoth(true, false);
+sameValueBoth(obj1, true);
+sameValueBoth(obj1, "foo");
+sameValueBoth(obj1, 1);
+sameValueBoth(obj1, undefined);
+sameValueBoth(obj1, NaN);
+sameValueBoth(undefined, true);
+sameValueBoth(undefined, "foo");
+sameValueBoth(undefined, 1);
+sameValueBoth(undefined, obj1);
+sameValueBoth(undefined, NaN);
+sameValueBoth(NaN, true);
+sameValueBoth(NaN, "foo");
+sameValueBoth(NaN, 1);
+sameValueBoth(NaN, obj1);
+sameValueBoth(NaN, undefined);
+sameValueBoth("foo", true);
+sameValueBoth("foo", 1);
+sameValueBoth("foo", obj1);
+sameValueBoth("foo", undefined);
+sameValueBoth("foo", NaN);
+sameValueBoth(true, 1);
+sameValueBoth(true, obj1);
+sameValueBoth(true, undefined);
+sameValueBoth(true, NaN);
+sameValueBoth(true, "foo");
+sameValueBoth(1, true);
+sameValueBoth(1, obj1);
+sameValueBoth(1, undefined);
+sameValueBoth(1, NaN);
+sameValueBoth(1, "foo");
+sameValueBoth("1", 1);
+sameValueBoth("true", true);
+sameValueBoth("false", false);
+sameValueBoth("undefined", undefined);
+sameValueBoth("NaN", NaN);
+sameValueZeroOnly(+0, -0);
+sameValueZeroOnly(-0, +0);
+
+FuzzIL program written to corpus/samevalue.fzil

@@ -1,0 +1,37 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'arr', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '100000'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- CreateArray []
+    SetComputedProperty v1, v8, v9
+EndForLoop
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadInteger '0'
+    SetProperty v1, 'length', v11
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v10
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'fromIndex', 'var', v12
+BeginObjectLiteral
+v14 <- EndObjectLiteral
+v15 <- CallMethod v1, 'indexOf', [v14, v13]
+
+
+var arr = [];
+for (let i3 = 0; i3 < 100000; i3++) {
+    arr[i3] = [];
+}
+function f10() {
+    arr.length = 0;
+}
+var fromIndex = { valueOf: f10 };
+arr.indexOf({}, fromIndex);
+
+FuzzIL program written to corpus/regress-crbug-702058-3.fzil

@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- UnaryOperation '-', v2
+    v4 <- LoadInteger '0'
+    v5 <- TernaryOperation v1, v3, v4
+    v6 <- LoadInteger '0'
+    v7 <- BinaryOperation v5, '-', v6
+    v8 <- LoadInteger '0'
+    v9 <- UnaryOperation '-', v8
+    v10 <- CreateNamedVariable 'Object', 'none'
+    v11 <- CallMethod v10, 'is', [v7, v9]
+    Return v11
+EndPlainFunction
+v12 <- LoadBoolean 'false'
+v13 <- CallFunction v0, [v12]
+v14 <- LoadBoolean 'true'
+v15 <- CallFunction v0, [v14]
+
+
+function foo(a1) {
+    return Object.is((a1 ? -0 : 0) - 0, -0);
+}
+foo(false);
+foo(true);
+
+FuzzIL program written to corpus/regress-crbug-913296.fzil

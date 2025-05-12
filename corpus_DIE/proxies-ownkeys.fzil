@@ -1,0 +1,224 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `target_one`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'target', 'var', v1
+v3 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `target_proto_two`, v3
+v4 <- EndObjectLiteral
+SetProperty v2, '__proto__', v4
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadString 'foo'
+    v8 <- LoadString 'bar'
+    v9 <- CreateArray [v7, v8]
+    Return v9
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ownKeys`, v5
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'handler', 'var', v10
+v12 <- CreateNamedVariable 'Proxy', 'none'
+v13 <- Construct v12, [v2, v11]
+v14 <- CreateNamedVariable 'proxy', 'var', v13
+v15 <- LoadString 'foo'
+v16 <- LoadString 'bar'
+v17 <- CreateArray [v15, v16]
+v18 <- CreateNamedVariable 'Reflect', 'none'
+v19 <- CallMethod v18, 'ownKeys', [v14]
+v20 <- LoadUndefined
+SetProperty v11, 'ownKeys', v20
+v21 <- LoadString 'target_one'
+v22 <- CreateArray [v21]
+v23 <- CallMethod v18, 'ownKeys', [v14]
+v24 <- BeginPlainFunction -> v25
+    v26 <- LoadInteger '1'
+    ThrowException v26
+EndPlainFunction
+SetProperty v11, 'ownKeys', v24
+v27 <- LoadString 'Reflect.ownKeys(proxy)'
+v28 <- LoadInteger '1'
+v29 <- CreateNamedVariable 'keys', 'var', v28
+v30 <- BeginPlainFunction -> v31
+    Return v29
+EndPlainFunction
+SetProperty v11, 'ownKeys', v30
+v32 <- LoadString 'Reflect.ownKeys(proxy)'
+v33 <- CreateNamedVariable 'TypeError', 'none'
+v34 <- LoadString 'string'
+Reassign v29, v34
+v35 <- LoadString 'Reflect.ownKeys(proxy)'
+v36 <- LoadString 'foo'
+v37 <- CreateNamedVariable 'Symbol', 'none'
+v38 <- CallFunction v37, [v36]
+Reassign v29, v38
+v39 <- LoadString 'Reflect.ownKeys(proxy)'
+v40 <- LoadNull
+Reassign v29, v40
+v41 <- LoadString 'Reflect.ownKeys(proxy)'
+v42 <- LoadString 'a'
+v43 <- LoadString 'b'
+v44 <- LoadString 'c'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v42
+    ObjectLiteralAddElement `1`, v43
+    ObjectLiteralAddElement `2`, v44
+v45 <- EndObjectLiteral
+Reassign v29, v45
+v46 <- LoadInteger '0'
+SetProperty v29, 'length', v46
+v47 <- CreateArray []
+v48 <- CallMethod v18, 'ownKeys', [v14]
+v49 <- LoadInteger '1'
+SetProperty v29, 'length', v49
+v50 <- LoadString 'a'
+v51 <- CreateArray [v50]
+v52 <- CallMethod v18, 'ownKeys', [v14]
+v53 <- LoadInteger '3'
+SetProperty v29, 'length', v53
+v54 <- LoadString 'a'
+v55 <- LoadString 'b'
+v56 <- LoadString 'c'
+v57 <- CreateArray [v54, v55, v56]
+v58 <- CallMethod v18, 'ownKeys', [v14]
+v59 <- LoadInteger '2'
+v60 <- LoadInteger '33'
+v61 <- CreateNamedVariable 'Math', 'none'
+v62 <- CallMethod v61, 'pow', [v59, v60]
+SetProperty v29, 'length', v62
+v63 <- LoadString 'Reflect.ownKeys(proxy)'
+v64 <- CreateNamedVariable 'RangeError', 'none'
+v65 <- LoadString 'a'
+v66 <- LoadString 'a'
+v67 <- LoadString 'a'
+v68 <- CreateArray [v65, v66, v67]
+Reassign v29, v68
+v69 <- CallMethod v18, 'ownKeys', [v14]
+v70 <- LoadInteger '1'
+v71 <- CreateArray [v70]
+Reassign v29, v71
+v72 <- LoadString 'Reflect.ownKeys(proxy)'
+BeginObjectLiteral
+v73 <- EndObjectLiteral
+v74 <- CreateArray [v73]
+Reassign v29, v74
+v75 <- LoadString 'Reflect.ownKeys(proxy)'
+v76 <- BeginPlainFunction -> 
+    v77 <- LoadString 'foo'
+    Return v77
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v76
+v78 <- EndObjectLiteral
+v79 <- CreateArray [v78]
+Reassign v29, v79
+v80 <- LoadString 'Reflect.ownKeys(proxy)'
+v81 <- LoadNull
+v82 <- CreateArray [v81]
+Reassign v29, v82
+v83 <- LoadString 'Reflect.ownKeys(proxy)'
+v84 <- LoadString 'nonconf'
+v85 <- LoadInteger '1'
+v86 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v85
+    ObjectLiteralAddProperty `configurable`, v86
+v87 <- EndObjectLiteral
+v88 <- CreateNamedVariable 'Object', 'none'
+v89 <- CallMethod v88, 'defineProperty', [v2, v84, v87]
+v90 <- LoadString 'foo'
+v91 <- CreateArray [v90]
+Reassign v29, v91
+v92 <- LoadString 'Reflect.ownKeys(proxy)'
+v93 <- LoadString 'nonconf'
+v94 <- CreateArray [v93]
+Reassign v29, v94
+v95 <- CallMethod v18, 'ownKeys', [v14]
+v96 <- LoadString 'nonconf'
+v97 <- LoadString 'nonconf'
+v98 <- LoadString 'nonconf'
+v99 <- CreateArray [v96, v97, v98]
+Reassign v29, v99
+v100 <- CallMethod v18, 'ownKeys', [v14]
+v101 <- CallMethod v88, 'preventExtensions', [v2]
+v102 <- LoadString 'Reflect.ownKeys(proxy)'
+v103 <- LoadString 'nonconf'
+v104 <- LoadString 'target_one'
+v105 <- CreateArray [v103, v104]
+Reassign v29, v105
+v106 <- CallMethod v18, 'ownKeys', [v14]
+v107 <- LoadString 'nonconf'
+v108 <- LoadString 'target_one'
+v109 <- LoadString 'fantasy'
+v110 <- CreateArray [v107, v108, v109]
+Reassign v29, v110
+v111 <- LoadString 'Reflect.ownKeys(proxy)'
+v112 <- LoadString 'nonconf'
+v113 <- LoadString 'target_one'
+v114 <- LoadString 'nonconf'
+v115 <- LoadString 'nonconf'
+v116 <- LoadString 'target_one'
+v117 <- CreateArray [v112, v113, v114, v115, v116]
+Reassign v29, v117
+v118 <- CallMethod v18, 'ownKeys', [v14]
+
+
+var target = { target_one: 1 };
+target.__proto__ = { target_proto_two: 2 };
+function f5(a6) {
+    return ["foo","bar"];
+}
+var handler = { ownKeys: f5 };
+const v13 = new Proxy(target, handler);
+var proxy = v13;
+["foo","bar"];
+Reflect.ownKeys(proxy);
+handler.ownKeys = undefined;
+["target_one"];
+Reflect.ownKeys(proxy);
+function f24(a25) {
+    throw 1;
+}
+handler.ownKeys = f24;
+var keys = 1;
+function f30(a31) {
+    return keys;
+}
+handler.ownKeys = f30;
+keys = "string";
+keys = Symbol("foo");
+keys = null;
+keys = { 0: "a", 1: "b", 2: "c" };
+keys.length = 0;
+[];
+Reflect.ownKeys(proxy);
+keys.length = 1;
+["a"];
+Reflect.ownKeys(proxy);
+keys.length = 3;
+["a","b","c"];
+Reflect.ownKeys(proxy);
+keys.length = Math.pow(2, 33);
+keys = ["a","a","a"];
+Reflect.ownKeys(proxy);
+keys = [1];
+keys = [{}];
+function f76() {
+    return "foo";
+}
+keys = [{ toString: f76 }];
+keys = [null];
+Object.defineProperty(target, "nonconf", { value: 1, configurable: false });
+keys = ["foo"];
+keys = ["nonconf"];
+Reflect.ownKeys(proxy);
+keys = ["nonconf","nonconf","nonconf"];
+Reflect.ownKeys(proxy);
+Object.preventExtensions(target);
+keys = ["nonconf","target_one"];
+Reflect.ownKeys(proxy);
+keys = ["nonconf","target_one","fantasy"];
+keys = ["nonconf","target_one","nonconf","nonconf","target_one"];
+Reflect.ownKeys(proxy);
+
+FuzzIL program written to corpus/proxies-ownkeys.fzil

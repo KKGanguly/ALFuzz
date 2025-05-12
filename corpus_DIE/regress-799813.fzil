@@ -1,0 +1,178 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '0'
+    v4 <- CreateNamedVariable 'exec_call_count', 'let', v3
+    v5 <- LoadInteger '0'
+    v6 <- CreateNamedVariable 'last_index_setter_call_count', 'let', v5
+    v7 <- LoadUndefined
+    v8 <- CreateNamedVariable 'final_last_index_value', 'let', v7
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `global` -> v9
+            v10 <- LoadBoolean 'true'
+            Return v10
+        EndObjectLiteralGetter
+        BeginObjectLiteralGetter `unicode` -> v11
+            v12 <- LoadBoolean 'true'
+            Return v12
+        EndObjectLiteralGetter
+        BeginObjectLiteralGetter `lastIndex` -> v13
+            Return v1
+        EndObjectLiteralGetter
+        BeginObjectLiteralSetter `lastIndex` -> v14, v15
+            v16 <- UnaryOperation v6, '++'
+            Reassign v8, v15
+        EndObjectLiteralSetter
+        BeginObjectLiteralMethod `exec` -> v17
+            v18 <- UnaryOperation v4, '++'
+            v19 <- LoadInteger '0'
+            v20 <- Compare v18, '==', v19
+            v21 <- LoadString ''
+            v22 <- CreateArray [v21]
+            v23 <- LoadNull
+            v24 <- TernaryOperation v20, v22, v23
+            Return v24
+        EndObjectLiteralMethod
+    v25 <- EndObjectLiteral
+    v26 <- CreateNamedVariable 'customRegexp', 'var', v25
+    v27 <- CreateNamedVariable 'RegExp', 'none'
+    v28 <- GetProperty v27, 'prototype'
+    v29 <- CreateNamedVariable 'Symbol', 'none'
+    v30 <- GetProperty v29, 'replace'
+    v31 <- GetComputedProperty v28, v30
+    v32 <- CallMethod v31, 'call', [v26]
+    v33 <- LoadInteger '2'
+    v34 <- LoadInteger '2'
+EndPlainFunction
+v35 <- LoadInteger '1'
+v36 <- UnaryOperation '-', v35
+v37 <- LoadInteger '1'
+v38 <- CallFunction v0, [v36, v37]
+v39 <- LoadInteger '0'
+v40 <- LoadInteger '1'
+v41 <- CallFunction v0, [v39, v40]
+v42 <- LoadInteger '2'
+v43 <- LoadInteger '31'
+v44 <- BinaryOperation v42, '**', v43
+v45 <- LoadInteger '2'
+v46 <- BinaryOperation v44, '-', v45
+v47 <- LoadInteger '2'
+v48 <- LoadInteger '31'
+v49 <- BinaryOperation v47, '**', v48
+v50 <- LoadInteger '1'
+v51 <- BinaryOperation v49, '-', v50
+v52 <- CallFunction v0, [v46, v51]
+v53 <- LoadInteger '2'
+v54 <- LoadInteger '31'
+v55 <- BinaryOperation v53, '**', v54
+v56 <- LoadInteger '1'
+v57 <- BinaryOperation v55, '-', v56
+v58 <- LoadInteger '2'
+v59 <- LoadInteger '31'
+v60 <- BinaryOperation v58, '**', v59
+v61 <- LoadInteger '0'
+v62 <- BinaryOperation v60, '-', v61
+v63 <- CallFunction v0, [v57, v62]
+v64 <- LoadInteger '2'
+v65 <- LoadInteger '32'
+v66 <- BinaryOperation v64, '**', v65
+v67 <- LoadInteger '3'
+v68 <- BinaryOperation v66, '-', v67
+v69 <- LoadInteger '2'
+v70 <- LoadInteger '32'
+v71 <- BinaryOperation v69, '**', v70
+v72 <- LoadInteger '2'
+v73 <- BinaryOperation v71, '-', v72
+v74 <- CallFunction v0, [v68, v73]
+v75 <- LoadInteger '2'
+v76 <- LoadInteger '32'
+v77 <- BinaryOperation v75, '**', v76
+v78 <- LoadInteger '2'
+v79 <- BinaryOperation v77, '-', v78
+v80 <- LoadInteger '2'
+v81 <- LoadInteger '32'
+v82 <- BinaryOperation v80, '**', v81
+v83 <- LoadInteger '1'
+v84 <- BinaryOperation v82, '-', v83
+v85 <- CallFunction v0, [v79, v84]
+v86 <- LoadInteger '2'
+v87 <- LoadInteger '32'
+v88 <- BinaryOperation v86, '**', v87
+v89 <- LoadInteger '1'
+v90 <- BinaryOperation v88, '-', v89
+v91 <- LoadInteger '2'
+v92 <- LoadInteger '32'
+v93 <- BinaryOperation v91, '**', v92
+v94 <- LoadInteger '0'
+v95 <- BinaryOperation v93, '-', v94
+v96 <- CallFunction v0, [v90, v95]
+v97 <- LoadInteger '2'
+v98 <- LoadInteger '53'
+v99 <- BinaryOperation v97, '**', v98
+v100 <- LoadInteger '2'
+v101 <- BinaryOperation v99, '-', v100
+v102 <- LoadInteger '2'
+v103 <- LoadInteger '53'
+v104 <- BinaryOperation v102, '**', v103
+v105 <- LoadInteger '1'
+v106 <- BinaryOperation v104, '-', v105
+v107 <- CallFunction v0, [v101, v106]
+v108 <- LoadInteger '2'
+v109 <- LoadInteger '53'
+v110 <- BinaryOperation v108, '**', v109
+v111 <- LoadInteger '1'
+v112 <- BinaryOperation v110, '-', v111
+v113 <- LoadInteger '2'
+v114 <- LoadInteger '53'
+v115 <- BinaryOperation v113, '**', v114
+v116 <- LoadInteger '0'
+v117 <- BinaryOperation v115, '-', v116
+v118 <- CallFunction v0, [v112, v117]
+v119 <- LoadInteger '2'
+v120 <- LoadInteger '53'
+v121 <- BinaryOperation v119, '**', v120
+v122 <- LoadInteger '0'
+v123 <- BinaryOperation v121, '-', v122
+v124 <- LoadInteger '2'
+v125 <- LoadInteger '53'
+v126 <- BinaryOperation v124, '**', v125
+v127 <- LoadInteger '0'
+v128 <- BinaryOperation v126, '-', v127
+v129 <- CallFunction v0, [v123, v128]
+
+
+function testAdvanceLastIndex(a1, a2) {
+    let exec_call_count = 0;
+    let last_index_setter_call_count = 0;
+    let final_last_index_value;
+    const v25 = {
+        get global() {
+            return true;
+        },
+        get unicode() {
+            return true;
+        },
+        get lastIndex() {
+            return a1;
+        },
+        set lastIndex(a15) {
+            last_index_setter_call_count++;
+            final_last_index_value = a15;
+        },
+        exec() {
+            return exec_call_count++ == 0 ? [""] : null;
+        },
+    };
+    var customRegexp = v25;
+    RegExp.prototype[Symbol.replace].call(customRegexp);
+}
+testAdvanceLastIndex(-1, 1);
+testAdvanceLastIndex(0, 1);
+testAdvanceLastIndex((2 ** 31) - 2, (2 ** 31) - 1);
+testAdvanceLastIndex((2 ** 31) - 1, (2 ** 31) - 0);
+testAdvanceLastIndex((2 ** 32) - 3, (2 ** 32) - 2);
+testAdvanceLastIndex((2 ** 32) - 2, (2 ** 32) - 1);
+testAdvanceLastIndex((2 ** 32) - 1, (2 ** 32) - 0);
+testAdvanceLastIndex((2 ** 53) - 2, (2 ** 53) - 1);
+testAdvanceLastIndex((2 ** 53) - 1, (2 ** 53) - 0);
+testAdvanceLastIndex((2 ** 53) - 0, (2 ** 53) - 0);
+
+FuzzIL program written to corpus/regress-799813.fzil

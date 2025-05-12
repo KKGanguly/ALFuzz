@@ -1,0 +1,178 @@
+v0 <- BeginPlainFunction -> v1
+EndPlainFunction
+v2 <- LoadUndefined
+v3 <- CreateNamedVariable 'A', 'var', v2
+v4 <- LoadUndefined
+v5 <- CreateNamedVariable 'B', 'var', v4
+v6 <- LoadUndefined
+v7 <- CreateNamedVariable 'C', 'var', v6
+BeginObjectLiteral
+v8 <- EndObjectLiteral
+Reassign v3, v8
+v9 <- LoadString 'foo'
+v10 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v10
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable 'Object', 'none'
+v13 <- CallMethod v12, 'defineProperty', [v3, v9, v11]
+v14 <- CallMethod v12, 'create', [v3]
+Reassign v5, v14
+v15 <- LoadString 'foo'
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadInteger '111'
+    Return v17
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v16
+v18 <- EndObjectLiteral
+v19 <- CallMethod v12, 'defineProperty', [v5, v15, v18]
+v20 <- CallMethod v12, 'create', [v5]
+Reassign v7, v20
+v21 <- BeginPlainFunction -> v22
+    v23 <- CallMethod v22, 'foo', []
+    Return v23
+EndPlainFunction
+v24 <- LoadInteger '111'
+v25 <- CallFunction v21, [v7]
+v26 <- LoadInteger '111'
+v27 <- CallFunction v21, [v7]
+v28 <- CallFunction v0, [v5]
+v29 <- LoadInteger '111'
+v30 <- CallFunction v21, [v7]
+BeginObjectLiteral
+v31 <- EndObjectLiteral
+Reassign v3, v31
+v32 <- LoadString 'baz'
+v33 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v33
+v34 <- EndObjectLiteral
+v35 <- CallMethod v12, 'defineProperty', [v3, v32, v34]
+v36 <- CallMethod v12, 'create', [v3]
+Reassign v5, v36
+v37 <- LoadString 'baz'
+v38 <- BeginPlainFunction -> 
+    v39 <- LoadInteger '111'
+    Return v39
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v38
+v40 <- EndObjectLiteral
+v41 <- CallMethod v12, 'defineProperty', [v5, v37, v40]
+v42 <- CallMethod v12, 'create', [v5]
+Reassign v7, v42
+v43 <- BeginPlainFunction -> v44
+    v45 <- GetProperty v44, 'baz'
+    Return v45
+EndPlainFunction
+v46 <- LoadInteger '111'
+v47 <- CallFunction v43, [v7]
+v48 <- LoadInteger '111'
+v49 <- CallFunction v43, [v7]
+v50 <- CallFunction v0, [v5]
+v51 <- LoadInteger '111'
+v52 <- CallFunction v43, [v7]
+BeginObjectLiteral
+v53 <- EndObjectLiteral
+Reassign v3, v53
+v54 <- LoadString 'huh'
+v55 <- BeginPlainFunction -> v56
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v55
+v57 <- EndObjectLiteral
+v58 <- CallMethod v12, 'defineProperty', [v3, v54, v57]
+v59 <- CallMethod v12, 'create', [v3]
+Reassign v5, v59
+v60 <- LoadUndefined
+v61 <- CreateNamedVariable 'setterValue', 'var', v60
+v62 <- LoadString 'huh'
+v63 <- BeginPlainFunction -> v64
+    Reassign v61, v64
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v63
+v65 <- EndObjectLiteral
+v66 <- CallMethod v12, 'defineProperty', [v5, v62, v65]
+v67 <- CallMethod v12, 'create', [v5]
+Reassign v7, v67
+v68 <- BeginPlainFunction -> v69
+    v70 <- LoadInteger '222'
+    Reassign v61, v70
+    v71 <- LoadInteger '111'
+    SetProperty v69, 'huh', v71
+    Return v61
+EndPlainFunction
+v72 <- LoadInteger '111'
+v73 <- CallFunction v68, [v7]
+v74 <- LoadInteger '111'
+v75 <- CallFunction v68, [v7]
+v76 <- CallFunction v0, [v5]
+v77 <- LoadInteger '111'
+v78 <- CallFunction v68, [v7]
+
+
+function ToDictionaryMode(a1) {
+}
+var A;
+var B;
+var C;
+A = {};
+function f10() {
+}
+Object.defineProperty(A, "foo", { value: f10 });
+B = Object.create(A);
+function f16() {
+    return 111;
+}
+Object.defineProperty(B, "foo", { value: f16 });
+C = Object.create(B);
+function bar(a22) {
+    return a22.foo();
+}
+bar(C);
+bar(C);
+ToDictionaryMode(B);
+bar(C);
+A = {};
+function f33() {
+}
+Object.defineProperty(A, "baz", { get: f33 });
+B = Object.create(A);
+function f38() {
+    return 111;
+}
+Object.defineProperty(B, "baz", { get: f38 });
+C = Object.create(B);
+function boo(a44) {
+    return a44.baz;
+}
+boo(C);
+boo(C);
+ToDictionaryMode(B);
+boo(C);
+A = {};
+function f55(a56) {
+}
+Object.defineProperty(A, "huh", { set: f55 });
+B = Object.create(A);
+var setterValue;
+function f63(a64) {
+    setterValue = a64;
+}
+Object.defineProperty(B, "huh", { set: f63 });
+C = Object.create(B);
+function fuu(a69) {
+    setterValue = 222;
+    a69.huh = 111;
+    return setterValue;
+}
+fuu(C);
+fuu(C);
+ToDictionaryMode(B);
+fuu(C);
+
+FuzzIL program written to corpus/regress-crbug-125148.fzil

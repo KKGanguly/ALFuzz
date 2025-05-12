@@ -1,0 +1,60 @@
+v0 <- LoadString 'optimized and inlined functions'
+v1 <- CreateTemplateString ['\nfunction g() { if (true) nop(); }         // 0000\nfunction f() { g(); g(); }                // 0050\nf(); f(); f(); f(); f(); f();             // 0150\n'], []
+v2 <- LoadInteger '0'
+v3 <- LoadInteger '199'
+v4 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v2
+    ObjectLiteralAddProperty `end`, v3
+    ObjectLiteralAddProperty `count`, v4
+v5 <- EndObjectLiteral
+v6 <- LoadInteger '0'
+v7 <- LoadInteger '33'
+v8 <- LoadInteger '16'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v6
+    ObjectLiteralAddProperty `end`, v7
+    ObjectLiteralAddProperty `count`, v8
+v9 <- EndObjectLiteral
+v10 <- LoadInteger '50'
+v11 <- LoadInteger '76'
+v12 <- LoadInteger '8'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v10
+    ObjectLiteralAddProperty `end`, v11
+    ObjectLiteralAddProperty `count`, v12
+v13 <- EndObjectLiteral
+v14 <- CreateArray [v5, v9, v13]
+v15 <- CreateNamedVariable 'TestCoverage', 'none'
+v16 <- CallFunction v15, [v0, v1, v14]
+v17 <- LoadString 'Partial coverage collection'
+v18 <- CreateTemplateString ['\n!function() {                             // 0000\n  function f(x) {                         // 0050\n    if (x) { nop(); } else { nop(); }     // 0100\n  }                                       // 0150\n  f(true); f(true);                       // 0200\n  f(false);                               // 0350\n}();                                      // 0400\n'], []
+v19 <- LoadInteger '52'
+v20 <- LoadInteger '153'
+v21 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v19
+    ObjectLiteralAddProperty `end`, v20
+    ObjectLiteralAddProperty `count`, v21
+v22 <- EndObjectLiteral
+v23 <- LoadInteger '111'
+v24 <- LoadInteger '121'
+v25 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v23
+    ObjectLiteralAddProperty `end`, v24
+    ObjectLiteralAddProperty `count`, v25
+v26 <- EndObjectLiteral
+v27 <- CreateArray [v22, v26]
+v28 <- CallFunction v15, [v17, v18, v27]
+
+
+const v1 = `\nfunction g() { if (true) nop(); }         // 0000\nfunction f() { g(); g(); }                // 0050\nf(); f(); f(); f(); f(); f();             // 0150\n`;
+const v5 = { start: 0, end: 199, count: 1 };
+const v9 = { start: 0, end: 33, count: 16 };
+TestCoverage("optimized and inlined functions", v1, [v5,v9,{ start: 50, end: 76, count: 8 }]);
+const v18 = `\n!function() {                             // 0000\n  function f(x) {                         // 0050\n    if (x) { nop(); } else { nop(); }     // 0100\n  }                                       // 0150\n  f(true); f(true);                       // 0200\n  f(false);                               // 0350\n}();                                      // 0400\n`;
+const v22 = { start: 52, end: 153, count: 1 };
+TestCoverage("Partial coverage collection", v18, [v22,{ start: 111, end: 121, count: 0 }]);
+
+FuzzIL program written to corpus/code-coverage-block-noopt.fzil

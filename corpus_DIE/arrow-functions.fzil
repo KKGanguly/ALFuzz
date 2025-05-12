@@ -1,0 +1,379 @@
+v0 <- BeginArrowFunction -> 
+EndArrowFunction
+v1 <- TypeOf v0
+v2 <- CreateNamedVariable 'Function', 'none'
+v3 <- GetProperty v2, 'prototype'
+v4 <- BeginArrowFunction -> 
+EndArrowFunction
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- CallMethod v5, 'getPrototypeOf', [v4]
+v7 <- BeginPlainFunction -> 
+    v8 <- BeginArrowFunction -> 
+    EndArrowFunction
+    v9 <- Construct v8, []
+EndPlainFunction
+v10 <- CallFunction v7, []
+v11 <- CreateNamedVariable 'TypeError', 'none'
+v12 <- LoadString 'prototype'
+v13 <- BeginArrowFunction -> 
+EndArrowFunction
+v14 <- TestIn v12, v13
+v15 <- LoadInteger '1'
+v16 <- BeginArrowFunction -> 
+    v17 <- LoadInteger '1'
+    Return v17
+EndArrowFunction
+v18 <- CallFunction v16, []
+v19 <- LoadInteger '2'
+v20 <- LoadInteger '1'
+v21 <- BeginArrowFunction -> v22
+    v23 <- LoadInteger '1'
+    v24 <- BinaryOperation v22, '+', v23
+    Return v24
+EndArrowFunction
+v25 <- CallFunction v21, [v20]
+v26 <- LoadInteger '3'
+v27 <- BeginArrowFunction -> 
+    v28 <- LoadInteger '3'
+    Return v28
+EndArrowFunction
+v29 <- CallFunction v27, []
+v30 <- LoadInteger '4'
+v31 <- LoadInteger '1'
+v32 <- BeginArrowFunction -> v33
+    v34 <- LoadInteger '3'
+    v35 <- BinaryOperation v33, '+', v34
+    Return v35
+EndArrowFunction
+v36 <- CallFunction v32, [v31]
+v37 <- LoadInteger '5'
+v38 <- LoadInteger '1'
+v39 <- LoadInteger '4'
+v40 <- BeginArrowFunction -> v41, v42
+    v43 <- BinaryOperation v41, '+', v42
+    Return v43
+EndArrowFunction
+v44 <- CallFunction v40, [v38, v39]
+v45 <- LoadInteger '6'
+v46 <- LoadInteger '1'
+v47 <- LoadInteger '5'
+v48 <- BeginArrowFunction -> v49, v50
+    v51 <- BinaryOperation v49, '+', v50
+    Return v51
+EndArrowFunction
+v52 <- CallFunction v48, [v46, v47]
+v53 <- BeginArrowFunction -> 
+EndArrowFunction
+v54 <- CreateNamedVariable 'empty', 'var', v53
+v55 <- LoadUndefined
+v56 <- CallFunction v54, []
+v57 <- BeginArrowFunction -> v58
+    Return v58
+EndArrowFunction
+v59 <- CreateNamedVariable 'identity', 'var', v57
+v60 <- CallFunction v59, [v54]
+v61 <- BeginArrowFunction -> v62
+    v63 <- BinaryOperation v62, '*', v62
+    Return v63
+EndArrowFunction
+v64 <- CreateNamedVariable 'square', 'var', v61
+v65 <- LoadInteger '9'
+v66 <- LoadInteger '3'
+v67 <- CallFunction v64, [v66]
+v68 <- BeginArrowFunction -> v69
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `key`, v69
+    v70 <- EndObjectLiteral
+    Return v70
+EndArrowFunction
+v71 <- CreateNamedVariable 'key_maker', 'var', v68
+v72 <- CallFunction v71, [v54]
+v73 <- GetProperty v72, 'key'
+v74 <- LoadInteger '0'
+v75 <- LoadInteger '2'
+v76 <- LoadInteger '4'
+v77 <- LoadInteger '6'
+v78 <- LoadInteger '8'
+v79 <- CreateArray [v74, v75, v76, v77, v78]
+v80 <- CreateNamedVariable 'evens', 'var', v79
+v81 <- LoadInteger '1'
+v82 <- LoadInteger '3'
+v83 <- LoadInteger '5'
+v84 <- LoadInteger '7'
+v85 <- LoadInteger '9'
+v86 <- CreateArray [v81, v82, v83, v84, v85]
+v87 <- BeginArrowFunction -> v88
+    v89 <- LoadInteger '1'
+    v90 <- BinaryOperation v88, '+', v89
+    Return v90
+EndArrowFunction
+v91 <- CallMethod v80, 'map', [v87]
+v92 <- CreateArray []
+v93 <- CreateNamedVariable 'fives', 'var', v92
+v94 <- BeginArrowFunction -> v95
+    v96 <- LoadInteger '5'
+    v97 <- BinaryOperation v95, '%', v96
+    v98 <- LoadInteger '0'
+    v99 <- Compare v97, '===', v98
+    BeginIf v99
+        v100 <- CallMethod v93, 'push', [v95]
+    EndIf
+EndArrowFunction
+v101 <- LoadInteger '1'
+v102 <- LoadInteger '2'
+v103 <- LoadInteger '3'
+v104 <- LoadInteger '4'
+v105 <- LoadInteger '5'
+v106 <- LoadInteger '6'
+v107 <- LoadInteger '7'
+v108 <- LoadInteger '8'
+v109 <- LoadInteger '9'
+v110 <- LoadInteger '10'
+v111 <- CreateArray [v101, v102, v103, v104, v105, v106, v107, v108, v109, v110]
+v112 <- CallMethod v111, 'forEach', [v94]
+v113 <- LoadInteger '5'
+v114 <- LoadInteger '10'
+v115 <- CreateArray [v113, v114]
+v116 <- BeginPlainFunction -> 
+    v117 <- BeginArrowFunction -> 
+        Directive 'use strict'
+    EndArrowFunction
+    v118 <- CreateNamedVariable 'arrowFn', 'var', v117
+    v119 <- LoadString 'arguments'
+    v120 <- CallMethod v118, 'hasOwnProperty', [v119]
+    v121 <- BeginPlainFunction -> 
+        v122 <- GetProperty v118, 'arguments'
+        Return v122
+    EndPlainFunction
+    v123 <- CallFunction v121, []
+    v124 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v125 <- EndObjectLiteral
+        SetProperty v118, 'arguments', v125
+    EndPlainFunction
+    v126 <- CallFunction v124, []
+    v127 <- LoadString 'caller'
+    v128 <- CallMethod v118, 'hasOwnProperty', [v127]
+    v129 <- BeginPlainFunction -> 
+        v130 <- GetProperty v118, 'caller'
+        Return v130
+    EndPlainFunction
+    v131 <- CallFunction v129, []
+    v132 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v133 <- EndObjectLiteral
+        SetProperty v118, 'caller', v133
+    EndPlainFunction
+    v134 <- CallFunction v132, []
+EndPlainFunction
+v135 <- CallFunction v116, []
+v136 <- BeginPlainFunction -> 
+    v137 <- BeginArrowFunction -> 
+    EndArrowFunction
+    v138 <- CreateNamedVariable 'arrowFn', 'var', v137
+    v139 <- LoadString 'arguments'
+    v140 <- CallMethod v138, 'hasOwnProperty', [v139]
+    v141 <- BeginPlainFunction -> 
+        v142 <- GetProperty v138, 'arguments'
+        Return v142
+    EndPlainFunction
+    v143 <- CallFunction v141, []
+    v144 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v145 <- EndObjectLiteral
+        SetProperty v138, 'arguments', v145
+    EndPlainFunction
+    v146 <- CallFunction v144, []
+    v147 <- LoadString 'caller'
+    v148 <- CallMethod v138, 'hasOwnProperty', [v147]
+    v149 <- BeginPlainFunction -> 
+        v150 <- GetProperty v138, 'caller'
+        Return v150
+    EndPlainFunction
+    v151 <- CallFunction v149, []
+    v152 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v153 <- EndObjectLiteral
+        SetProperty v138, 'caller', v153
+    EndPlainFunction
+    v154 <- CallFunction v152, []
+EndPlainFunction
+v155 <- CallFunction v136, []
+v156 <- BeginPlainFunction -> 
+    v157 <- BeginArrowFunction -> 
+        v158 <- LoadRegExp 'foo' ''
+        Return v158
+    EndArrowFunction
+    v159 <- CreateNamedVariable 'arrow1', 'var', v157
+    v160 <- BeginArrowFunction -> 
+        v161 <- LoadRegExp 'foo' ''
+        Return v161
+    EndArrowFunction
+    v162 <- CreateNamedVariable 'arrow2', 'var', v160
+    v163 <- BeginArrowFunction -> 
+        v164 <- LoadRegExp 'foo' 'i'
+        Return v164
+    EndArrowFunction
+    v165 <- CreateNamedVariable 'arrow3', 'var', v163
+    v166 <- BeginArrowFunction -> 
+        v167 <- LoadRegExp 'foo' 'i'
+        Return v167
+    EndArrowFunction
+    v168 <- CreateNamedVariable 'arrow4', 'var', v166
+    v169 <- CallMethod v159, 'toString', []
+    v170 <- LoadString '() => /foo/'
+    v171 <- CallMethod v162, 'toString', []
+    v172 <- LoadString '() => /foo/'
+    v173 <- CallMethod v165, 'toString', []
+    v174 <- LoadString '() => /foo/i'
+    v175 <- CallMethod v168, 'toString', []
+    v176 <- LoadString '() => /foo/i'
+EndPlainFunction
+
+
+const v0 = () => {
+};
+typeof v0;
+Function.prototype;
+const v4 = () => {
+};
+Object.getPrototypeOf(v4);
+function f7() {
+    const v8 = () => {
+    };
+    new v8();
+}
+f7();
+const v13 = () => {
+};
+"prototype" in v13;
+const v16 = () => {
+    return 1;
+};
+v16();
+const v21 = (a22) => {
+    return a22 + 1;
+};
+v21(1);
+const v27 = () => {
+    return 3;
+};
+v27();
+const v32 = (a33) => {
+    return a33 + 3;
+};
+v32(1);
+const v40 = (a41, a42) => {
+    return a41 + a42;
+};
+v40(1, 4);
+const v48 = (a49, a50) => {
+    return a49 + a50;
+};
+v48(1, 5);
+const v53 = () => {
+};
+var empty = v53;
+empty();
+const v57 = (a58) => {
+    return a58;
+};
+var identity = v57;
+identity(empty);
+const v61 = (a62) => {
+    return a62 * a62;
+};
+var square = v61;
+square(3);
+const v68 = (a69) => {
+    return { key: a69 };
+};
+var key_maker = v68;
+key_maker(empty).key;
+var evens = [0,2,4,6,8];
+[1,3,5,7,9];
+const v87 = (a88) => {
+    return a88 + 1;
+};
+evens.map(v87);
+var fives = [];
+const v94 = (a95) => {
+    if ((a95 % 5) === 0) {
+        fives.push(a95);
+    }
+};
+([1,2,3,4,5,6,7,8,9,10]).forEach(v94);
+[5,10];
+function testRestrictedFunctionPropertiesStrict() {
+    const v117 = () => {
+        'use strict';
+    };
+    var arrowFn = v117;
+    arrowFn.hasOwnProperty("arguments");
+    function f121() {
+        return arrowFn.arguments;
+    }
+    f121();
+    function f124() {
+        arrowFn.arguments = {};
+    }
+    f124();
+    arrowFn.hasOwnProperty("caller");
+    function f129() {
+        return arrowFn.caller;
+    }
+    f129();
+    function f132() {
+        arrowFn.caller = {};
+    }
+    f132();
+}
+testRestrictedFunctionPropertiesStrict();
+function testRestrictedFunctionPropertiesSloppy() {
+    const v137 = () => {
+    };
+    var arrowFn = v137;
+    arrowFn.hasOwnProperty("arguments");
+    function f141() {
+        return arrowFn.arguments;
+    }
+    f141();
+    function f144() {
+        arrowFn.arguments = {};
+    }
+    f144();
+    arrowFn.hasOwnProperty("caller");
+    function f149() {
+        return arrowFn.caller;
+    }
+    f149();
+    function f152() {
+        arrowFn.caller = {};
+    }
+    f152();
+}
+testRestrictedFunctionPropertiesSloppy();
+function testConciseBodyReturnsRegexp() {
+    const v157 = () => {
+        return /foo/;
+    };
+    var arrow1 = v157;
+    const v160 = () => {
+        return /foo/;
+    };
+    var arrow2 = v160;
+    const v163 = () => {
+        return /foo/i;
+    };
+    var arrow3 = v163;
+    const v166 = () => {
+        return /foo/i;
+    };
+    var arrow4 = v166;
+    arrow1.toString();
+    arrow2.toString();
+    arrow3.toString();
+    arrow4.toString();
+}
+
+FuzzIL program written to corpus/arrow-functions.fzil

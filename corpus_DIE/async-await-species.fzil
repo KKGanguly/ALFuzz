@@ -1,0 +1,286 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- LoadUndefined
+    v5 <- CreateNamedVariable 'actual', 'var', v4
+    v6 <- LoadBoolean 'false'
+    v7 <- CreateNamedVariable 'hadValue', 'var', v6
+    v8 <- LoadBoolean 'false'
+    v9 <- CreateNamedVariable 'hadError', 'var', v8
+    v10 <- CallFunction v2, []
+    v11 <- CreateNamedVariable 'promise', 'var', v10
+    v12 <- TypeOf v11
+    v13 <- LoadString 'object'
+    v14 <- Compare v12, '!==', v13
+    v15 <- GetProperty v11, 'then'
+    v16 <- TypeOf v15
+    v17 <- LoadString 'function'
+    v18 <- Compare v16, '!==', v17
+    v19 <- BinaryOperation v14, '||', v18
+    BeginIf v19
+        v20 <- CreateNamedVariable 'MjsUnitAssertionError', 'none'
+        v21 <- LoadString 'Expected '
+        v22 <- CallMethod v2, 'toString', []
+        v23 <- BinaryOperation v21, '+', v22
+        v24 <- LoadString ' to return a Promise, but it returned '
+        v25 <- BinaryOperation v23, '+', v24
+        v26 <- CreateNamedVariable 'PrettyPrint', 'none'
+        v27 <- CallFunction v26, [v11]
+        v28 <- BinaryOperation v25, '+', v27
+        v29 <- Construct v20, [v28]
+        ThrowException v29
+    EndIf
+    v30 <- BeginPlainFunction -> v31
+        v32 <- LoadBoolean 'true'
+        Reassign v7, v32
+        Reassign v5, v31
+    EndPlainFunction
+    v33 <- BeginPlainFunction -> v34
+        v35 <- LoadBoolean 'true'
+        Reassign v9, v35
+        Reassign v5, v34
+    EndPlainFunction
+    v36 <- CallMethod v11, 'then', [v30, v33]
+    v37 <- BinaryOperation v7, '||', v9
+    BeginIf v9
+        ThrowException v5
+    EndIf
+    v38 <- LoadString 'Expected ''
+    v39 <- CallMethod v2, 'toString', []
+    v40 <- BinaryOperation v38, '+', v39
+    v41 <- LoadString '' to produce a value'
+    v42 <- BinaryOperation v40, '+', v41
+EndPlainFunction
+v43 <- BeginPlainFunction -> v44
+    v45 <- LoadString 'name'
+    v46 <- LoadBoolean 'false'
+    v47 <- LoadBoolean 'true'
+    v48 <- LoadString '@'
+    v49 <- GetProperty v44, 'name'
+    v50 <- BinaryOperation v48, '+', v49
+    v51 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v46
+        ObjectLiteralAddProperty `configurable`, v47
+        ObjectLiteralAddProperty `value`, v50
+        ObjectLiteralAddProperty `writable`, v51
+    v52 <- EndObjectLiteral
+    v53 <- CreateNamedVariable 'Object', 'none'
+    v54 <- CallMethod v53, 'defineProperty', [v44, v45, v52]
+    Return v54
+EndPlainFunction
+v55 <- BeginPlainFunction -> v56
+    v57 <- BeginArrowFunction -> v58
+        v59 <- LoadRegExp '^\s*at (@?(?:new )?[a-zA-Z0-9_\.\[\]]+)(.*)' ''
+        v60 <- LoadString '$1'
+        v61 <- CallMethod v58, 'replace', [v59, v60]
+        Return v61
+    EndArrowFunction
+    v62 <- BeginPlainFunction -> v63
+        v64 <- LoadRegExp '^\s*at @?[a-zA-Z0-9_]' ''
+        v65 <- CallMethod v64, 'test', [v63]
+        Return v65
+    EndPlainFunction
+    v66 <- LoadString '\n'
+    v67 <- GetProperty v56, 'stack'
+    v68 <- CallMethod v67, 'split', [v66]
+    v69 <- CallMethod v68, 'filter', [v62]
+    v70 <- CallMethod v69, 'map', [v57]
+    v71 <- CreateNamedVariable 'stack', 'var', v70
+    v72 <- GetElement v71, '2'
+    v73 <- LoadString 'assertEqualsAsync'
+    v74 <- Compare v72, '===', v73
+    BeginIf v74
+        v75 <- CreateArray []
+        Return v75
+    EndIf
+    v76 <- CallMethod v71, 'reverse', []
+    Return v76
+EndPlainFunction
+v77 <- CreateArray []
+v78 <- CreateNamedVariable 'log', 'var', v77
+v79 <- CreateNamedVariable 'Promise', 'none'
+v80 <- BeginClassDefinition v79
+    BeginClassConstructor -> v81, v82
+        v83 <- CreateNamedVariable 'Error', 'none'
+        v84 <- LoadString 'Getting Callstack'
+        v85 <- Construct v83, [v84]
+        v86 <- CallFunction v55, [v85]
+        v87 <- CreateNamedVariable 'stack', 'var', v86
+        v88 <- GetProperty v87, 'length'
+        BeginIf v88
+            v89 <- LoadInteger '1'
+            v90 <- UnaryOperation '-', v89
+            v91 <- CreateNamedVariable 'first', 'var', v90
+            BeginForLoopInitializer
+                v92 <- LoadInteger '0'
+            BeginForLoopCondition -> v93
+                v94 <- GetProperty v87, 'length'
+                v95 <- Compare v93, '<', v94
+            BeginForLoopAfterthought v95 -> v96
+                v97 <- UnaryOperation '++', v96
+            BeginForLoopBody -> v98
+                v99 <- GetComputedProperty v87, v98
+                v100 <- GetElement v99, '0'
+                v101 <- LoadString '@'
+                v102 <- Compare v100, '===', v101
+                BeginIf v102
+                    Reassign v91, v98
+                    Break
+                EndIf
+            EndForLoop
+            BeginWhileLoopHeader
+                v103 <- LoadInteger '0'
+                v104 <- Compare v91, '>', v103
+            BeginWhileLoopBody v104
+                v105 <- CallMethod v87, 'shift', []
+                v106 <- UnaryOperation '--', v91
+            EndWhileLoop
+            v107 <- GetProperty v87, 'length'
+            BeginIf v107
+                v108 <- LoadString '@@Species: ['
+                v109 <- LoadString ' > '
+                v110 <- CallMethod v87, 'join', [v109]
+                v111 <- BinaryOperation v108, '+', v110
+                v112 <- LoadString ']'
+                v113 <- BinaryOperation v111, '+', v112
+                v114 <- CallMethod v78, 'push', [v113]
+            EndIf
+        EndIf
+        v115 <- Construct v79, [v82]
+        Return v115
+    EndClassConstructor
+EndClassDefinition
+v116 <- CreateNamedVariable 'Symbol', 'none'
+v117 <- GetProperty v116, 'species'
+v118 <- LoadBoolean 'true'
+v119 <- LoadBoolean 'false'
+v120 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v80
+    ObjectLiteralAddProperty `configurable`, v118
+    ObjectLiteralAddProperty `enumerable`, v119
+    ObjectLiteralAddProperty `writable`, v120
+v121 <- EndObjectLiteral
+v122 <- CreateNamedVariable 'Object', 'none'
+v123 <- CallMethod v122, 'defineProperty', [v79, v117, v121]
+v124 <- BeginAsyncFunction -> 
+    v125 <- LoadString 'foo'
+    v126 <- Await v125
+    Return v126
+EndAsyncFunction
+v127 <- LoadString 'foo'
+v128 <- BeginPlainFunction -> 
+    v129 <- CallFunction v124, []
+    Return v129
+EndPlainFunction
+v130 <- LoadString 'should not call Promise[@@Species]'
+v131 <- CallFunction v43, [v128, v130]
+v132 <- CreateArray []
+v133 <- LoadInteger '0'
+SetProperty v78, 'length', v133
+v134 <- LoadString 'foo'
+v135 <- BeginPlainFunction -> 
+    v136 <- BeginArrowFunction -> v137
+        v138 <- LoadString 'Then: '
+        v139 <- BinaryOperation v138, '+', v137
+        v140 <- CallMethod v78, 'push', [v139]
+        Return v137
+    EndArrowFunction
+    v141 <- CallFunction v124, []
+    v142 <- CallMethod v141, 'then', [v136]
+    Return v142
+EndPlainFunction
+v143 <- CallFunction v43, [v135]
+v144 <- LoadString 'should call Promise[@@Species] after non-internal Then'
+v145 <- LoadString '@@Species: [@testThenOnReturnedPromise > Promise.then > new FakePromise]'
+v146 <- LoadString 'Then: foo'
+v147 <- CreateArray [v145, v146]
+
+
+function assertEqualsAsync(a1, a2, a3) {
+    var actual;
+    var hadValue = false;
+    var hadError = false;
+    var promise = a2();
+    if ((typeof promise !== "object") || (typeof promise.then !== "function")) {
+        const v29 = new MjsUnitAssertionError((("Expected " + a2.toString()) + " to return a Promise, but it returned ") + PrettyPrint(promise));
+        throw v29;
+    }
+    function f30(a31) {
+        hadValue = true;
+        actual = a31;
+    }
+    function f33(a34) {
+        hadError = true;
+        actual = a34;
+    }
+    promise.then(f30, f33);
+    hadValue || hadError;
+    if (hadError) {
+        throw actual;
+    }
+    ("Expected '" + a2.toString()) + "' to produce a value";
+}
+function test(a44) {
+    const v50 = "@" + a44.name;
+    return Object.defineProperty(a44, "name", { enumerable: false, configurable: true, value: v50, writable: false });
+}
+function getStack(a56) {
+    const v57 = (a58) => {
+        return a58.replace(/^\s*at (@?(?:new )?[a-zA-Z0-9_\.\[\]]+)(.*)/, "$1");
+    };
+    function f62(a63) {
+        return /^\s*at @?[a-zA-Z0-9_]/.test(a63);
+    }
+    var stack = a56.stack.split("\n").filter(f62).map(v57);
+    if (stack[2] === "assertEqualsAsync") {
+        return [];
+    }
+    return stack.reverse();
+}
+var log = [];
+class C80 extends Promise {
+    constructor(a82) {
+        const v85 = new Error("Getting Callstack");
+        var stack = getStack(v85);
+        if (stack.length) {
+            var first = -1;
+            for (let i93 = 0; i93 < stack.length; ++i93) {
+                if (stack[i93][0] === "@") {
+                    first = i93;
+                    break;
+                }
+            }
+            while (first > 0) {
+                stack.shift();
+                --first;
+            }
+            if (stack.length) {
+                log.push(("@@Species: [" + stack.join(" > ")) + "]");
+            }
+        }
+        const v115 = new Promise(a82);
+        return v115;
+    }
+}
+const v117 = Symbol.species;
+Object.defineProperty(Promise, v117, { value: C80, configurable: true, enumerable: false, writable: false });
+async function asyncFn() {
+    return await "foo";
+}
+function testInternalOnly() {
+    return asyncFn();
+}
+test(testInternalOnly, "should not call Promise[@@Species]");
+[];
+log.length = 0;
+function testThenOnReturnedPromise() {
+    const v136 = (a137) => {
+        log.push("Then: " + a137);
+        return a137;
+    };
+    return asyncFn().then(v136);
+}
+test(testThenOnReturnedPromise);
+["@@Species: [@testThenOnReturnedPromise > Promise.then > new FakePromise]","Then: foo"];
+
+FuzzIL program written to corpus/async-await-species.fzil

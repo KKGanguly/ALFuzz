@@ -1,0 +1,49 @@
+v0 <- LoadRegExp 'a' 'g'
+v1 <- LoadString ''
+v2 <- LoadString 'a'
+v3 <- CallMethod v2, 'replace', [v0, v1]
+v4 <- LoadInteger '0'
+v5 <- CreateNamedVariable 'count', 'var', v4
+v6 <- BeginPlainFunction -> 
+    BeginTry
+        v7 <- CallFunction v6, []
+    BeginCatch -> v8
+        v9 <- LoadInteger '50'
+        v10 <- Compare v5, '<', v9
+        BeginIf v10
+            v11 <- UnaryOperation v5, '++'
+            v12 <- LoadRegExp '(b)' 'g'
+            v13 <- CreateArray []
+            v14 <- Construct v13, []
+            v15 <- LoadString 'b'
+            v16 <- CallMethod v15, 'replace', [v12, v14]
+        EndIf
+    EndTryCatch
+EndPlainFunction
+BeginTry
+    v17 <- CallFunction v6, []
+BeginCatch -> v18
+EndTryCatch
+
+
+("a").replace(/a/g, "");
+var count = 0;
+function test() {
+    try {
+        test();
+    } catch(e8) {
+        if (count < 50) {
+            count++;
+            const v12 = /(b)/g;
+            const t7 = [];
+            const v14 = new t7();
+            ("b").replace(v12, v14);
+        }
+    }
+}
+try {
+    test();
+} catch(e18) {
+}
+
+FuzzIL program written to corpus/regress-crbug-450960.fzil

@@ -1,0 +1,21 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'g', 'none'
+    v2 <- CallFunction v1, []
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+EndPlainFunction
+v4 <- CallFunction v0, []
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+
+
+function f() {
+    g();
+}
+function g() {
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/deopt-simple-lazy.fzil

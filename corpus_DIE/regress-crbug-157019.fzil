@@ -1,0 +1,84 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadInteger '1'
+        v3 <- LoadThis
+        SetProperty v3, 'a', v2
+        v4 <- LoadInteger '2'
+        v5 <- LoadThis
+        SetProperty v5, 'b', v4
+    EndPlainFunction
+    Return v1
+EndPlainFunction
+v6 <- CallFunction v0, []
+v7 <- CreateNamedVariable 'c1', 'var', v6
+v8 <- Construct v7, []
+v9 <- CreateNamedVariable 'o1', 'var', v8
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+SetProperty v7, 'prototype', v10
+BeginForLoopInitializer
+    v11 <- LoadInteger '0'
+BeginForLoopCondition -> v12
+    v13 <- LoadInteger '10'
+    v14 <- Compare v12, '<', v13
+BeginForLoopAfterthought v14 -> v15
+    v16 <- UnaryOperation v15, '++'
+BeginForLoopBody -> v17
+    v18 <- Construct v7, []
+    v19 <- CreateNamedVariable 'o', 'var', v18
+    BeginForLoopInitializer
+        v20 <- LoadInteger '0'
+    BeginForLoopCondition -> v21
+        v22 <- LoadInteger '8'
+        v23 <- Compare v21, '<', v22
+    BeginForLoopAfterthought v23 -> v24
+        v25 <- UnaryOperation v24, '++'
+    BeginForLoopBody -> v26
+        v27 <- LoadInteger '0'
+        v28 <- LoadString 'x'
+        v29 <- BinaryOperation v28, '+', v26
+        SetComputedProperty v19, v29, v27
+    EndForLoop
+EndForLoop
+v30 <- CallFunction v0, []
+v31 <- CreateNamedVariable 'c2', 'var', v30
+v32 <- Construct v31, []
+v33 <- CreateNamedVariable 'o2', 'var', v32
+BeginForLoopInitializer
+    v34 <- LoadInteger '0'
+BeginForLoopCondition -> v35
+    v36 <- LoadInteger '50000'
+    v37 <- Compare v35, '<', v36
+BeginForLoopAfterthought v37 -> v38
+    v39 <- UnaryOperation v38, '++'
+BeginForLoopBody -> v40
+    v41 <- Construct v31, []
+EndForLoop
+
+
+function makeConstructor() {
+    function f1() {
+        this.a = 1;
+        this.b = 2;
+    }
+    return f1;
+}
+var c1 = makeConstructor();
+const v8 = new c1();
+var o1 = v8;
+c1.prototype = {};
+for (let i12 = 0; i12 < 10; i12++) {
+    const v18 = new c1();
+    var o = v18;
+    for (let i21 = 0; i21 < 8; i21++) {
+        o["x" + i21] = 0;
+    }
+}
+var c2 = makeConstructor();
+const v32 = new c2();
+var o2 = v32;
+for (let i35 = 0; i35 < 50000; i35++) {
+    new c2();
+}
+
+FuzzIL program written to corpus/regress-crbug-157019.fzil

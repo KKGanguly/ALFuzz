@@ -1,0 +1,141 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'smi_arr', 'var', v2
+    v4 <- LoadInteger '42'
+    SetProperty v3, 'load', v4
+    v5 <- LoadFloat '0.5'
+    v6 <- CreateArray [v5]
+    v7 <- CreateNamedVariable 'double_arr', 'var', v6
+    v8 <- LoadInteger '42'
+    SetProperty v7, 'load', v8
+    BeginObjectLiteral
+    v9 <- EndObjectLiteral
+    v10 <- CreateArray [v9]
+    v11 <- CreateNamedVariable 'obj_arr', 'var', v10
+    v12 <- LoadInteger '42'
+    SetProperty v11, 'load', v12
+    v13 <- CreateArray [v3, v7, v11]
+    v14 <- CreateNamedVariable 'arrs', 'var', v13
+    v15 <- LoadUndefined
+    v16 <- CreateNamedVariable 'tmp', 'var', v15
+    v17 <- BeginPlainFunction -> v18
+        BeginForLoopInitializer
+            v19 <- LoadInteger '0'
+        BeginForLoopCondition -> v20
+            v21 <- GetProperty v18, 'length'
+            v22 <- Compare v20, '<', v21
+        BeginForLoopAfterthought v22 -> v23
+            v24 <- UnaryOperation v23, '++'
+        BeginForLoopBody -> v25
+            v26 <- GetComputedProperty v18, v25
+            v27 <- CreateNamedVariable 'arr', 'var', v26
+            v28 <- GetElement v27, '0'
+            Reassign v16, v28
+        EndForLoop
+    EndPlainFunction
+    BeginObjectLiteral
+    v29 <- EndObjectLiteral
+    v30 <- CreateNamedVariable 'obj', 'var', v29
+    SetProperty v30, 'load_boom', v3
+    v31 <- CallFunction v17, [v14]
+    v32 <- CallFunction v17, [v14]
+    v33 <- CallFunction v17, [v14]
+    v34 <- CreateNamedVariable 'gc', 'none'
+    v35 <- CallFunction v34, []
+EndPlainFunction
+v36 <- CallFunction v0, []
+v37 <- BeginPlainFunction -> 
+    v38 <- LoadInteger '0'
+    v39 <- CreateArray [v38]
+    v40 <- CreateNamedVariable 'smi_arr', 'var', v39
+    v41 <- LoadInteger '42'
+    SetProperty v40, 'store', v41
+    v42 <- LoadFloat '0.5'
+    v43 <- CreateArray [v42]
+    v44 <- CreateNamedVariable 'double_arr', 'var', v43
+    v45 <- LoadInteger '42'
+    SetProperty v44, 'store', v45
+    BeginObjectLiteral
+    v46 <- EndObjectLiteral
+    v47 <- CreateArray [v46]
+    v48 <- CreateNamedVariable 'obj_arr', 'var', v47
+    v49 <- LoadInteger '42'
+    SetProperty v48, 'store', v49
+    v50 <- CreateArray [v40, v44, v48]
+    v51 <- CreateNamedVariable 'arrs', 'var', v50
+    v52 <- BeginPlainFunction -> v53
+        BeginForLoopInitializer
+            v54 <- LoadInteger '0'
+        BeginForLoopCondition -> v55
+            v56 <- GetProperty v53, 'length'
+            v57 <- Compare v55, '<', v56
+        BeginForLoopAfterthought v57 -> v58
+            v59 <- UnaryOperation v58, '++'
+        BeginForLoopBody -> v60
+            v61 <- GetComputedProperty v53, v60
+            v62 <- CreateNamedVariable 'arr', 'var', v61
+            v63 <- LoadInteger '0'
+            SetElement v62, '0', v63
+        EndForLoop
+    EndPlainFunction
+    BeginObjectLiteral
+    v64 <- EndObjectLiteral
+    v65 <- CreateNamedVariable 'obj', 'var', v64
+    SetProperty v65, 'store_boom', v40
+    v66 <- CallFunction v52, [v51]
+    v67 <- CallFunction v52, [v51]
+    v68 <- CallFunction v52, [v51]
+    v69 <- CreateNamedVariable 'gc', 'none'
+    v70 <- CallFunction v69, []
+EndPlainFunction
+v71 <- CallFunction v37, []
+
+
+function test_keyed_load() {
+    var smi_arr = [0];
+    smi_arr.load = 42;
+    var double_arr = [0.5];
+    double_arr.load = 42;
+    var obj_arr = [{}];
+    obj_arr.load = 42;
+    var arrs = [smi_arr,double_arr,obj_arr];
+    var tmp;
+    function do_keyed_load(a18) {
+        for (let i20 = 0; i20 < a18.length; i20++) {
+            var arr = a18[i20];
+            tmp = arr[0];
+        }
+    }
+    var obj = {};
+    obj.load_boom = smi_arr;
+    do_keyed_load(arrs);
+    do_keyed_load(arrs);
+    do_keyed_load(arrs);
+    gc();
+}
+test_keyed_load();
+function test_keyed_store() {
+    var smi_arr = [0];
+    smi_arr.store = 42;
+    var double_arr = [0.5];
+    double_arr.store = 42;
+    var obj_arr = [{}];
+    obj_arr.store = 42;
+    var arrs = [smi_arr,double_arr,obj_arr];
+    function do_keyed_store(a53) {
+        for (let i55 = 0; i55 < a53.length; i55++) {
+            var arr = a53[i55];
+            arr[0] = 0;
+        }
+    }
+    var obj = {};
+    obj.store_boom = smi_arr;
+    do_keyed_store(arrs);
+    do_keyed_store(arrs);
+    do_keyed_store(arrs);
+    gc();
+}
+test_keyed_store();
+
+FuzzIL program written to corpus/regress-crbug-700733.fzil

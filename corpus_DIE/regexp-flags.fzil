@@ -1,0 +1,390 @@
+v0 <- LoadRegExp 'abc' 'gi'
+v1 <- CreateNamedVariable 'r1', 'var', v0
+v2 <- LoadString 'abc'
+v3 <- GetProperty v1, 'source'
+v4 <- GetProperty v1, 'global'
+v5 <- GetProperty v1, 'ignoreCase'
+v6 <- GetProperty v1, 'multiline'
+v7 <- GetProperty v1, 'sticky'
+v8 <- GetProperty v1, 'unicode'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v1
+v9 <- EndObjectLiteral
+v10 <- CreateNamedVariable 'r2', 'var', v9
+v11 <- BeginPlainFunction -> 
+    v12 <- GetProperty v10, 'source'
+EndPlainFunction
+v13 <- CallFunction v11, []
+v14 <- CreateNamedVariable 'TypeError', 'none'
+v15 <- BeginPlainFunction -> 
+    v16 <- GetProperty v10, 'global'
+EndPlainFunction
+v17 <- CallFunction v15, []
+v18 <- BeginPlainFunction -> 
+    v19 <- GetProperty v10, 'ignoreCase'
+EndPlainFunction
+v20 <- CallFunction v18, []
+v21 <- BeginPlainFunction -> 
+    v22 <- GetProperty v10, 'multiline'
+EndPlainFunction
+v23 <- CallFunction v21, []
+v24 <- BeginPlainFunction -> 
+    v25 <- GetProperty v10, 'sticky'
+EndPlainFunction
+v26 <- CallFunction v24, []
+v27 <- BeginPlainFunction -> 
+    v28 <- GetProperty v10, 'unicode'
+EndPlainFunction
+v29 <- CallFunction v27, []
+v30 <- LoadRegExp 'I' ''
+v31 <- CreateNamedVariable 'r3', 'var', v30
+v32 <- LoadString 'iIiIi'
+v33 <- CreateNamedVariable 'string', 'var', v32
+v34 <- LoadString 'iXiIi'
+v35 <- CreateNamedVariable 'expected', 'var', v34
+v36 <- GetProperty v31, 'global'
+v37 <- GetProperty v31, 'ignoreCase'
+v38 <- LoadString ''
+v39 <- GetProperty v31, 'flags'
+v40 <- LoadString 'X'
+v41 <- CallMethod v33, 'replace', [v31, v40]
+v42 <- LoadInteger '0'
+v43 <- CreateNamedVariable 'get_count', 'var', v42
+v44 <- LoadString 'global'
+v45 <- BeginPlainFunction -> 
+    v46 <- UnaryOperation v43, '++'
+    v47 <- LoadBoolean 'true'
+    Return v47
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v45
+v48 <- EndObjectLiteral
+v49 <- CreateNamedVariable 'Object', 'none'
+v50 <- CallMethod v49, 'defineProperty', [v31, v44, v48]
+v51 <- LoadString 'ignoreCase'
+v52 <- BeginPlainFunction -> 
+    v53 <- UnaryOperation v43, '++'
+    v54 <- LoadBoolean 'true'
+    Return v54
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v52
+v55 <- EndObjectLiteral
+v56 <- CallMethod v49, 'defineProperty', [v31, v51, v55]
+v57 <- GetProperty v31, 'global'
+v58 <- LoadInteger '1'
+v59 <- GetProperty v31, 'ignoreCase'
+v60 <- LoadInteger '2'
+v61 <- LoadString 'gi'
+v62 <- GetProperty v31, 'flags'
+v63 <- LoadInteger '4'
+v64 <- BeginPlainFunction -> v65
+    v66 <- LoadString 'source'
+    v67 <- Compare v65, '===', v66
+    v68 <- LoadString '(?:)'
+    v69 <- LoadUndefined
+    v70 <- TernaryOperation v67, v68, v69
+    v71 <- CreateNamedVariable 'RegExp', 'none'
+    v72 <- GetProperty v71, 'prototype'
+    v73 <- GetComputedProperty v72, v65
+    v74 <- LoadString 'get '
+    v75 <- BinaryOperation v74, '+', v65
+    v76 <- GetProperty v71, 'prototype'
+    v77 <- CallMethod v49, 'getOwnPropertyDescriptor', [v76, v65]
+    v78 <- GetProperty v77, 'get'
+    v79 <- GetProperty v78, 'name'
+EndPlainFunction
+v80 <- LoadString 'global'
+v81 <- CallFunction v64, [v80]
+v82 <- LoadString 'ignoreCase'
+v83 <- CallFunction v64, [v82]
+v84 <- LoadString 'multiline'
+v85 <- CallFunction v64, [v84]
+v86 <- LoadString 'source'
+v87 <- CallFunction v64, [v86]
+v88 <- LoadString 'sticky'
+v89 <- CallFunction v64, [v88]
+v90 <- LoadString 'unicode'
+v91 <- CallFunction v64, [v90]
+v92 <- LoadString 'setter should be undefined'
+v93 <- CreateNamedVariable 'RegExp', 'none'
+v94 <- GetProperty v93, 'prototype'
+SetProperty v94, 'flags', v92
+v95 <- LoadString ''
+v96 <- LoadString ''
+v97 <- CallFunction v93, [v96]
+v98 <- GetProperty v97, 'flags'
+v99 <- LoadString ''
+v100 <- LoadRegExp '.' ''
+v101 <- GetProperty v100, 'flags'
+v102 <- LoadString 'gimuy'
+v103 <- LoadString ''
+v104 <- LoadString 'yugmi'
+v105 <- CallFunction v93, [v103, v104]
+v106 <- GetProperty v105, 'flags'
+v107 <- LoadString 'gimuy'
+v108 <- LoadRegExp 'foo' 'ygmui'
+v109 <- GetProperty v108, 'flags'
+v110 <- GetProperty v93, 'prototype'
+v111 <- LoadString 'flags'
+v112 <- CallMethod v49, 'getOwnPropertyDescriptor', [v110, v111]
+v113 <- CreateNamedVariable 'descriptor', 'var', v112
+v114 <- GetProperty v113, 'configurable'
+v115 <- GetProperty v113, 'enumerable'
+v116 <- GetProperty v113, 'get'
+v117 <- CreateNamedVariable 'Function', 'none'
+v118 <- LoadUndefined
+v119 <- GetProperty v113, 'set'
+v120 <- BeginPlainFunction -> v121
+    v122 <- GetProperty v113, 'get'
+    v123 <- CallMethod v122, 'call', [v121]
+    Return v123
+EndPlainFunction
+v124 <- LoadString ''
+BeginObjectLiteral
+v125 <- EndObjectLiteral
+v126 <- CallFunction v120, [v125]
+v127 <- LoadString 'i'
+v128 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ignoreCase`, v128
+v129 <- EndObjectLiteral
+v130 <- CallFunction v120, [v129]
+v131 <- LoadString 'uy'
+v132 <- LoadInteger '0'
+v133 <- LoadInteger '1'
+v134 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `global`, v132
+    ObjectLiteralAddProperty `sticky`, v133
+    ObjectLiteralAddProperty `unicode`, v134
+v135 <- EndObjectLiteral
+v136 <- CallFunction v120, [v135]
+v137 <- LoadString 'm'
+v138 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `multiline`, v138
+v139 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v139
+v140 <- EndObjectLiteral
+v141 <- CallFunction v120, [v140]
+v142 <- BeginPlainFunction -> 
+    v143 <- CallFunction v120, []
+EndPlainFunction
+v144 <- CallFunction v142, []
+v145 <- BeginPlainFunction -> 
+    v146 <- LoadUndefined
+    v147 <- CallFunction v120, [v146]
+EndPlainFunction
+v148 <- CallFunction v145, []
+v149 <- BeginPlainFunction -> 
+    v150 <- LoadNull
+    v151 <- CallFunction v120, [v150]
+EndPlainFunction
+v152 <- CallFunction v149, []
+v153 <- BeginPlainFunction -> 
+    v154 <- LoadBoolean 'true'
+    v155 <- CallFunction v120, [v154]
+EndPlainFunction
+v156 <- CallFunction v153, []
+v157 <- BeginPlainFunction -> 
+    v158 <- LoadBoolean 'false'
+    v159 <- CallFunction v120, [v158]
+EndPlainFunction
+v160 <- CallFunction v157, []
+v161 <- BeginPlainFunction -> 
+    v162 <- LoadString ''
+    v163 <- CallFunction v120, [v162]
+EndPlainFunction
+v164 <- CallFunction v161, []
+v165 <- BeginPlainFunction -> 
+    v166 <- LoadInteger '42'
+    v167 <- CallFunction v120, [v166]
+EndPlainFunction
+v168 <- CallFunction v165, []
+v169 <- LoadInteger '0'
+v170 <- CreateNamedVariable 'counter', 'var', v169
+BeginObjectLiteral
+v171 <- EndObjectLiteral
+v172 <- CreateNamedVariable 'map', 'var', v171
+BeginObjectLiteral
+    BeginObjectLiteralGetter `global` -> v173
+        v174 <- UnaryOperation v170, '++'
+        SetProperty v172, 'g', v174
+    EndObjectLiteralGetter
+    BeginObjectLiteralGetter `ignoreCase` -> v175
+        v176 <- UnaryOperation v170, '++'
+        SetProperty v172, 'i', v176
+    EndObjectLiteralGetter
+    BeginObjectLiteralGetter `multiline` -> v177
+        v178 <- UnaryOperation v170, '++'
+        SetProperty v172, 'm', v178
+    EndObjectLiteralGetter
+    BeginObjectLiteralGetter `unicode` -> v179
+        v180 <- UnaryOperation v170, '++'
+        SetProperty v172, 'u', v180
+    EndObjectLiteralGetter
+    BeginObjectLiteralGetter `sticky` -> v181
+        v182 <- UnaryOperation v170, '++'
+        SetProperty v172, 'y', v182
+    EndObjectLiteralGetter
+v183 <- EndObjectLiteral
+v184 <- CreateNamedVariable 'object', 'var', v183
+v185 <- CallFunction v120, [v184]
+v186 <- LoadInteger '0'
+v187 <- LoadInteger '1'
+v188 <- LoadInteger '2'
+v189 <- LoadInteger '3'
+v190 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `g`, v186
+    ObjectLiteralAddProperty `i`, v187
+    ObjectLiteralAddProperty `m`, v188
+    ObjectLiteralAddProperty `u`, v189
+    ObjectLiteralAddProperty `y`, v190
+v191 <- EndObjectLiteral
+
+
+var r1 = /abc/gi;
+r1.source;
+r1.global;
+r1.ignoreCase;
+r1.multiline;
+r1.sticky;
+r1.unicode;
+var r2 = { __proto__: r1 };
+function f11() {
+    r2.source;
+}
+f11();
+function f15() {
+    r2.global;
+}
+f15();
+function f18() {
+    r2.ignoreCase;
+}
+f18();
+function f21() {
+    r2.multiline;
+}
+f21();
+function f24() {
+    r2.sticky;
+}
+f24();
+function f27() {
+    r2.unicode;
+}
+f27();
+var r3 = /I/;
+var string = "iIiIi";
+var expected = "iXiIi";
+r3.global;
+r3.ignoreCase;
+r3.flags;
+string.replace(r3, "X");
+var get_count = 0;
+function f45() {
+    get_count++;
+    return true;
+}
+Object.defineProperty(r3, "global", { get: f45 });
+function f52() {
+    get_count++;
+    return true;
+}
+Object.defineProperty(r3, "ignoreCase", { get: f52 });
+r3.global;
+r3.ignoreCase;
+r3.flags;
+function testName(a65) {
+    a65 === "source" ? "(?:)" : undefined;
+    RegExp.prototype[a65];
+    "get " + a65;
+    Object.getOwnPropertyDescriptor(RegExp.prototype, a65).get.name;
+}
+testName("global");
+testName("ignoreCase");
+testName("multiline");
+testName("source");
+testName("sticky");
+testName("unicode");
+const t59 = RegExp.prototype;
+t59.flags = "setter should be undefined";
+RegExp("").flags;
+/./.flags;
+RegExp("", "yugmi").flags;
+/foo/ygmui.flags;
+var descriptor = Object.getOwnPropertyDescriptor(RegExp.prototype, "flags");
+descriptor.configurable;
+descriptor.enumerable;
+descriptor.get;
+descriptor.set;
+function testGenericFlags(a121) {
+    return descriptor.get.call(a121);
+}
+testGenericFlags({});
+testGenericFlags({ ignoreCase: true });
+testGenericFlags({ global: 0, sticky: 1, unicode: 1 });
+const v139 = { multiline: true };
+testGenericFlags({ __proto__: v139 });
+function f142() {
+    testGenericFlags();
+}
+f142();
+function f145() {
+    testGenericFlags(undefined);
+}
+f145();
+function f149() {
+    testGenericFlags(null);
+}
+f149();
+function f153() {
+    testGenericFlags(true);
+}
+f153();
+function f157() {
+    testGenericFlags(false);
+}
+f157();
+function f161() {
+    testGenericFlags("");
+}
+f161();
+function f165() {
+    testGenericFlags(42);
+}
+f165();
+var counter = 0;
+var map = {};
+const v183 = {
+    get global() {
+        map.g = counter++;
+    },
+    get ignoreCase() {
+        map.i = counter++;
+    },
+    get multiline() {
+        map.m = counter++;
+    },
+    get unicode() {
+        map.u = counter++;
+    },
+    get sticky() {
+        map.y = counter++;
+    },
+};
+var object = v183;
+testGenericFlags(object);
+const v191 = {
+    g: 0,
+    i: 1,
+    m: 2,
+    u: 3,
+    y: 4,
+};
+
+FuzzIL program written to corpus/regexp-flags.fzil

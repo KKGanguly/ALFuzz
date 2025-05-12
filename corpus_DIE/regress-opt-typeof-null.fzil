@@ -1,0 +1,16 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadNull
+    v2 <- TypeOf v1
+    v3 <- LoadString 'object'
+    v4 <- Compare v2, '===', v3
+    Return v4
+EndPlainFunction
+v5 <- CallFunction v0, []
+
+
+function f() {
+    return typeof null === "object";
+}
+f();
+
+FuzzIL program written to corpus/regress-opt-typeof-null.fzil

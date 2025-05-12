@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'x'
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v3
+v4 <- EndObjectLiteral
+v5 <- CallFunction v0, [v4]
+v6 <- LoadInteger '2'
+v7 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v7
+v8 <- EndObjectLiteral
+v9 <- CallFunction v0, [v8]
+v10 <- LoadInteger '2'
+v11 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v11
+v12 <- EndObjectLiteral
+v13 <- CallFunction v0, [v12]
+v14 <- LoadInteger '2'
+v15 <- LoadInteger '1'
+v16 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v15
+    ObjectLiteralAddProperty `x`, v16
+v17 <- EndObjectLiteral
+v18 <- CallFunction v0, [v17]
+v19 <- LoadInteger '3'
+
+
+function f(a1) {
+    return a1.x;
+}
+f({ x: 2 });
+f({ x: 2 });
+f({ x: 2 });
+f({ y: 1, x: 3 });
+
+FuzzIL program written to corpus/deopt-simple-eager.fzil

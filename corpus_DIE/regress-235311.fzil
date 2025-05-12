@@ -1,0 +1,30 @@
+v0 <- LoadString ''
+v1 <- CreateNamedVariable 'new_space_string', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '12800'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation '++', v6
+BeginForLoopBody -> v8
+    v9 <- CreateNamedVariable 'Math', 'none'
+    v10 <- CallMethod v9, 'random', []
+    v11 <- LoadInteger '26'
+    v12 <- BinaryOperation v10, '*', v11
+    v13 <- LoadInteger '4294967295'
+    v14 <- BinaryOperation v12, '+', v13
+    v15 <- LoadInteger '0'
+    v16 <- BinaryOperation v14, '|', v15
+    v17 <- CreateNamedVariable 'String', 'none'
+    v18 <- CallMethod v17, 'fromCharCode', [v16]
+    Update v1, '+', v18
+EndForLoop
+
+
+var new_space_string = "";
+for (let i3 = 0; i3 < 12800; ++i3) {
+    new_space_string += String.fromCharCode(((Math.random() * 26) + 4294967295) | 0);
+}
+
+FuzzIL program written to corpus/regress-235311.fzil

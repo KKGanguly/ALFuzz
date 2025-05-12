@@ -1,0 +1,160 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'gc', 'none'
+    v2 <- CallFunction v1, []
+    v3 <- LoadInteger '87'
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '42'
+v5 <- CreateNamedVariable 'x', 'var', v4
+v6 <- LoadInteger '99'
+v7 <- CreateNamedVariable 'y', 'var', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- CallFunction v0, []
+    v10 <- BinaryOperation v5, '|', v9
+    v11 <- CallFunction v0, []
+    v12 <- BinaryOperation v11, '|', v5
+    v13 <- BinaryOperation v5, '|', v12
+    v14 <- BinaryOperation v7, '|', v13
+    v15 <- BinaryOperation v10, '|', v14
+    Return v15
+EndPlainFunction
+v16 <- CallFunction v0, []
+v17 <- LoadInteger '42'
+v18 <- LoadInteger '87'
+v19 <- BinaryOperation v17, '|', v18
+v20 <- LoadInteger '99'
+v21 <- BinaryOperation v19, '|', v20
+v22 <- CallFunction v8, []
+v23 <- BeginPlainFunction -> 
+    v24 <- LoadInteger '42'
+    Return v24
+EndPlainFunction
+v25 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v23
+    ObjectLiteralAddProperty `x`, v25
+v26 <- EndObjectLiteral
+v27 <- CreateNamedVariable 'object', 'var', v26
+v28 <- DeleteProperty v27, 'x'
+v29 <- BeginPlainFunction -> v30
+    v31 <- CallMethod v30, 'f', []
+    Return v31
+EndPlainFunction
+BeginForLoopInitializer
+    v32 <- LoadInteger '0'
+BeginForLoopCondition -> v33
+    v34 <- LoadInteger '5'
+    v35 <- Compare v33, '<', v34
+BeginForLoopAfterthought v35 -> v36
+    v37 <- UnaryOperation v36, '++'
+BeginForLoopBody -> v38
+    v39 <- CallFunction v29, [v27]
+EndForLoop
+v40 <- CallFunction v29, [v27]
+v41 <- BeginPlainFunction -> 
+    v42 <- LoadInteger '42'
+    Return v42
+EndPlainFunction
+v43 <- BeginPlainFunction -> v44
+    Return v44
+EndPlainFunction
+v45 <- BeginPlainFunction -> v46, v47
+    v48 <- BinaryOperation v46, '*', v47
+    Return v48
+EndPlainFunction
+v49 <- BeginPlainFunction -> v50, v51, v52
+    v53 <- BinaryOperation v50, '+', v51
+    v54 <- BinaryOperation v53, '-', v52
+    Return v54
+EndPlainFunction
+v55 <- BeginPlainFunction -> v56, v57, v58, v59
+    v60 <- BinaryOperation v56, '*', v57
+    v61 <- BinaryOperation v60, '+', v58
+    v62 <- BinaryOperation v61, '-', v59
+    Return v62
+EndPlainFunction
+v63 <- BeginPlainFunction -> 
+    v64 <- CallFunction v41, []
+    v65 <- CallFunction v43, [v64]
+    v66 <- CallFunction v41, []
+    v67 <- CallFunction v45, [v65, v66]
+    v68 <- CallFunction v41, []
+    v69 <- CallFunction v43, [v68]
+    v70 <- CallFunction v41, []
+    v71 <- CallFunction v49, [v67, v69, v70]
+    v72 <- CallFunction v41, []
+    v73 <- CallFunction v43, [v72]
+    v74 <- CallFunction v41, []
+    v75 <- CallFunction v45, [v73, v74]
+    v76 <- CallFunction v41, []
+    v77 <- CallFunction v43, [v76]
+    v78 <- CallFunction v41, []
+    v79 <- CallFunction v55, [v71, v75, v77, v78]
+    v80 <- CallFunction v41, []
+    v81 <- CallFunction v41, []
+    v82 <- CallFunction v43, [v81]
+    v83 <- CallFunction v41, []
+    v84 <- CallFunction v43, [v83]
+    v85 <- CallFunction v41, []
+    v86 <- CallFunction v45, [v84, v85]
+    v87 <- CallFunction v41, []
+    v88 <- CallFunction v43, [v87]
+    v89 <- CallFunction v41, []
+    v90 <- CallFunction v45, [v88, v89]
+    v91 <- CallFunction v41, []
+    v92 <- CallFunction v43, [v91]
+    v93 <- CallFunction v41, []
+    v94 <- CallFunction v49, [v90, v92, v93]
+    v95 <- CallFunction v55, [v80, v82, v86, v94]
+    v96 <- BinaryOperation v79, '+', v95
+    Return v96
+EndPlainFunction
+v97 <- LoadInteger '3113460'
+v98 <- CallFunction v63, []
+
+
+function f() {
+    gc();
+    return 87;
+}
+var x = 42;
+var y = 99;
+function g() {
+    return (x | f()) | (y | (x | (f() | x)));
+}
+f();
+(42 | 87) | 99;
+g();
+function f23() {
+    return 42;
+}
+var object = { f: f23, x: 42 };
+delete object.x;
+function call_f(a30) {
+    return a30.f();
+}
+for (let i33 = 0; i33 < 5; i33++) {
+    call_f(object);
+}
+call_f(object);
+function f0() {
+    return 42;
+}
+function f1(a44) {
+    return a44;
+}
+function f2(a46, a47) {
+    return a46 * a47;
+}
+function f3(a50, a51, a52) {
+    return (a50 + a51) - a52;
+}
+function f4(a56, a57, a58, a59) {
+    return ((a56 * a57) + a58) - a59;
+}
+function nested() {
+    return f4(f3(f2(f1(f0()), f0()), f1(f0()), f0()), f2(f1(f0()), f0()), f1(f0()), f0()) + f4(f0(), f1(f0()), f2(f1(f0()), f0()), f3(f2(f1(f0()), f0()), f1(f0()), f0()));
+}
+nested();
+
+FuzzIL program written to corpus/optimized-function-calls.fzil

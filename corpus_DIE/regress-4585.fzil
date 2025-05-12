@@ -1,0 +1,29 @@
+v0 <- CreateTemplateString ['for(const { method() {} } = this) {}'], []
+v1 <- CreateNamedVariable 'SyntaxError', 'none'
+v2 <- CreateTemplateString ['var { method() {} } = this;'], []
+v3 <- CreateTemplateString ['for(const { *method() {} } = this) {}'], []
+v4 <- CreateTemplateString ['var { *method() {} } = this;'], []
+v5 <- CreateTemplateString ['for(var { get foo() {} } = this) {}'], []
+v6 <- CreateTemplateString ['for(var { set foo() {} } = this) {}'], []
+v7 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v7
+v8 <- EndObjectLiteral
+BeginForInLoop v8 -> v9
+    Break
+EndForInLoop
+v10 <- CreateNamedVariable 'name', 'none'
+v11 <- LoadString 'test'
+
+
+`for(const { method() {} } = this) {}`;
+`var { method() {} } = this;`;
+`for(const { *method() {} } = this) {}`;
+`var { *method() {} } = this;`;
+`for(var { get foo() {} } = this) {}`;
+`for(var { set foo() {} } = this) {}`;
+for (const v9 in { a: 1 }) {
+    break;
+}
+
+FuzzIL program written to corpus/regress-4585.fzil

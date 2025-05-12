@@ -1,0 +1,22 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'foo'
+    Return v1
+EndPlainFunction
+v2 <- LoadString 'nonobject'
+v3 <- LoadRegExp 'abc' ''
+v4 <- CreateArray [v0, v2, v3]
+v5 <- CreateNamedVariable 'callbacks', 'var', v4
+v6 <- LoadString 'foo'
+v7 <- LoadString '0'
+v8 <- CallComputedMethod v5, v7, []
+v9 <- LoadString 'callbacks['1']()'
+v10 <- LoadString 'callbacks['2']('abcdefg')'
+
+
+function f0() {
+    return "foo";
+}
+var callbacks = [f0,"nonobject",/abc/];
+callbacks["0"]();
+
+FuzzIL program written to corpus/number-string-index-call.fzil

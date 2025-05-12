@@ -1,0 +1,146 @@
+v0 <- CreateNamedVariable 'Float64Array', 'none'
+v1 <- CreateNamedVariable 'Float32Array', 'none'
+v2 <- CreateNamedVariable 'Uint32Array', 'none'
+v3 <- CreateNamedVariable 'Int32Array', 'none'
+v4 <- CreateNamedVariable 'Uint16Array', 'none'
+v5 <- CreateNamedVariable 'Int16Array', 'none'
+v6 <- CreateNamedVariable 'Uint8Array', 'none'
+v7 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v8 <- CreateNamedVariable 'Int8Array', 'none'
+v9 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8]
+v10 <- CreateNamedVariable 'TypedArrayConstructors', 'let', v9
+BeginForOfLoop v10 -> v11
+    v12 <- BeginPlainFunction -> v13
+        v14 <- LoadBoolean 'false'
+        v15 <- CreateNamedVariable 'didRun', 'var', v14
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `valueOf` -> v16
+                v17 <- LoadBoolean 'true'
+                Reassign v15, v17
+                v18 <- LoadInteger '42'
+                Return v18
+            EndObjectLiteralMethod
+        v19 <- EndObjectLiteral
+        SetElement v13, '0', v19
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `didRun`, v15
+            ObjectLiteralAddProperty `array`, v13
+        v20 <- EndObjectLiteral
+        Return v20
+    EndPlainFunction
+    v21 <- CreateNamedVariable 'keyedSta', 'let', v12
+    BeginForLoopInitializer
+        v22 <- LoadInteger '0'
+    BeginForLoopCondition -> v23
+        v24 <- LoadInteger '3'
+        v25 <- Compare v23, '<', v24
+    BeginForLoopAfterthought v25 -> v26
+        v27 <- UnaryOperation '++', v26
+    BeginForLoopBody -> v28
+        v29 <- LoadInteger '1'
+        v30 <- Construct v11, [v29]
+        v31 <- CallFunction v21, [v30]
+        v32 <- CreateNamedVariable '', 'var', v31
+        v33 <- CreateNamedVariable 'didRun', 'none'
+        v34 <- CreateNamedVariable 'array', 'none'
+        v35 <- GetElement v34, '0'
+        v36 <- LoadInteger '42'
+        v37 <- Construct v11, []
+        v38 <- CallFunction v21, [v37]
+        v39 <- CreateNamedVariable '', 'var', v38
+    EndForLoop
+EndForOfLoop
+BeginDoWhileLoopBody
+    v40 <- BeginPlainFunction -> v41
+        v42 <- LoadBoolean 'false'
+        v43 <- CreateNamedVariable 'didRun', 'var', v42
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `valueOf` -> v44
+                v45 <- LoadBoolean 'true'
+                Reassign v43, v45
+                v46 <- LoadInteger '42'
+                Return v46
+            EndObjectLiteralMethod
+        v47 <- EndObjectLiteral
+        SetElement v41, '0', v47
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `didRun`, v43
+            ObjectLiteralAddProperty `array`, v41
+        v48 <- EndObjectLiteral
+        Return v48
+    EndPlainFunction
+    v49 <- CreateNamedVariable 'keyedSta', 'let', v40
+    BeginForLoopInitializer
+        v50 <- LoadInteger '0'
+    BeginForLoopCondition -> v51
+        v52 <- LoadInteger '3'
+        v53 <- Compare v51, '<', v52
+    BeginForLoopAfterthought v53 -> v54
+        v55 <- UnaryOperation '++', v54
+    BeginForLoopBody -> v56
+        BeginForOfLoop v10 -> v57
+            v58 <- LoadInteger '1'
+            v59 <- Construct v57, [v58]
+            v60 <- CallFunction v49, [v59]
+            v61 <- CreateNamedVariable '', 'var', v60
+            v62 <- CreateNamedVariable 'didRun', 'none'
+            v63 <- CreateNamedVariable 'array', 'none'
+            v64 <- GetElement v63, '0'
+            v65 <- LoadInteger '42'
+            v66 <- Construct v57, []
+            v67 <- CallFunction v49, [v66]
+            v68 <- CreateNamedVariable '', 'var', v67
+        EndForOfLoop
+    EndForLoop
+BeginDoWhileLoopHeader
+    v69 <- LoadBoolean 'false'
+EndDoWhileLoop v69
+
+
+let TypedArrayConstructors = [Float64Array,Float32Array,Uint32Array,Int32Array,Uint16Array,Int16Array,Uint8Array,Uint8ClampedArray,Int8Array];
+for (const v11 of TypedArrayConstructors) {
+    function f12(a13) {
+        var didRun = false;
+        const v19 = {
+            valueOf() {
+                didRun = true;
+                return 42;
+            },
+        };
+        a13[0] = v19;
+        return { didRun: didRun, array: a13 };
+    }
+    let keyedSta = f12;
+    for (let i23 = 0; i23 < 3; ++i23) {
+        const v30 = new v11(1);
+        var  = keyedSta(v30);
+        array[0];
+        const v37 = new v11();
+        var  = keyedSta(v37);
+    }
+}
+do {
+    function f40(a41) {
+        var didRun = false;
+        const v47 = {
+            valueOf() {
+                didRun = true;
+                return 42;
+            },
+        };
+        a41[0] = v47;
+        return { didRun: didRun, array: a41 };
+    }
+    let keyedSta = f40;
+    for (let i51 = 0; i51 < 3; ++i51) {
+        for (const v57 of TypedArrayConstructors) {
+            const v59 = new v57(1);
+            var  = keyedSta(v59);
+            array[0];
+            const v66 = new v57();
+            var  = keyedSta(v66);
+        }
+    }
+} while (false)
+
+FuzzIL program written to corpus/typedarray-keyedstore-tonumber.fzil

@@ -1,0 +1,29 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'arr', 'var', v0
+v2 <- CreateNamedVariable 'String', 'none'
+v3 <- LoadString 'x'
+v4 <- Construct v2, [v3]
+v5 <- CreateNamedVariable 'str', 'var', v4
+v6 <- BeginPlainFunction -> v7, v8
+    v9 <- LoadInteger '1'
+    SetComputedProperty v7, v8, v9
+EndPlainFunction
+v10 <- LoadInteger '0'
+v11 <- CallFunction v6, [v1, v10]
+v12 <- LoadInteger '0'
+v13 <- CallFunction v6, [v5, v12]
+v14 <- LoadInteger '0'
+v15 <- CallFunction v6, [v5, v14]
+
+
+var arr = [];
+const v4 = new String("x");
+var str = v4;
+function f(a7, a8) {
+    a7[a8] = 1;
+}
+f(arr, 0);
+f(str, 0);
+f(str, 0);
+
+FuzzIL program written to corpus/regress-3255.fzil

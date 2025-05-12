@@ -1,0 +1,35 @@
+v0 <- LoadInteger '32'
+v1 <- LoadString 'a'
+v2 <- CallMethod v1, 'repeat', [v0]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- LoadInteger '4294967295'
+v5 <- LoadInteger '32'
+v6 <- BinaryOperation v4, '/', v5
+v7 <- LoadInteger '1'
+v8 <- BinaryOperation v6, '+', v7
+v9 <- LoadString 'b'
+v10 <- CallMethod v9, 'repeat', [v8]
+v11 <- CreateNamedVariable 'b', 'var', v10
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadRegExp 'a' 'g'
+    v14 <- BeginPlainFunction -> 
+        Return v11
+    EndPlainFunction
+    v15 <- CallMethod v3, 'replace', [v13, v14]
+EndPlainFunction
+v16 <- CallFunction v12, []
+v17 <- CreateNamedVariable 'RangeError', 'none'
+
+
+var a = ("a").repeat(32);
+var b = ("b").repeat((4294967295 / 32) + 1);
+function replace() {
+    const v13 = /a/g;
+    function f14() {
+        return b;
+    }
+    a.replace(v13, f14);
+}
+replace();
+
+FuzzIL program written to corpus/string-oom-replace-regexp-global-with-function.fzil

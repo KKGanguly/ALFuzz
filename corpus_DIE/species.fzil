@@ -1,0 +1,87 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- GetProperty v0, '__proto__'
+v2 <- CreateNamedVariable 'TypedArray', 'let', v1
+v3 <- CreateNamedVariable 'RegExp', 'none'
+v4 <- CreateNamedVariable 'Array', 'none'
+v5 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v6 <- CreateNamedVariable 'Map', 'none'
+v7 <- CreateNamedVariable 'Set', 'none'
+v8 <- CreateNamedVariable 'Promise', 'none'
+v9 <- CreateArray [v3, v4, v2, v5, v6, v7, v8]
+v10 <- CreateNamedVariable 'classesWithSpecies', 'let', v9
+v11 <- CreateNamedVariable 'Object', 'none'
+v12 <- CreateNamedVariable 'Function', 'none'
+v13 <- CreateNamedVariable 'String', 'none'
+v14 <- CreateNamedVariable 'Number', 'none'
+v15 <- CreateNamedVariable 'Symbol', 'none'
+v16 <- CreateNamedVariable 'WeakMap', 'none'
+v17 <- CreateNamedVariable 'WeakSet', 'none'
+v18 <- CreateArray [v11, v12, v13, v14, v15, v16, v17]
+v19 <- CreateNamedVariable 'classesWithoutSpecies', 'let', v18
+BeginForOfLoop v10 -> v20
+    v21 <- GetProperty v15, 'species'
+    v22 <- GetComputedProperty v20, v21
+    v23 <- BeginPlainFunction -> 
+        v24 <- LoadUndefined
+        v25 <- GetProperty v15, 'species'
+        SetComputedProperty v20, v25, v24
+    EndPlainFunction
+    v26 <- CallFunction v23, []
+    v27 <- CreateNamedVariable 'TypeError', 'none'
+    v28 <- GetProperty v15, 'species'
+    v29 <- CallMethod v11, 'getOwnPropertyDescriptor', [v20, v28]
+    v30 <- CreateNamedVariable 'descriptor', 'let', v29
+    v31 <- GetProperty v30, 'configurable'
+    v32 <- GetProperty v30, 'enumerable'
+    v33 <- LoadUndefined
+    v34 <- GetProperty v30, 'writable'
+    v35 <- LoadUndefined
+    v36 <- GetProperty v30, 'set'
+    v37 <- LoadString 'function'
+    v38 <- GetProperty v30, 'get'
+    v39 <- TypeOf v38
+EndForOfLoop
+v40 <- GetProperty v10, 'length'
+v41 <- BeginArrowFunction -> v42
+    v43 <- GetProperty v15, 'species'
+    v44 <- CallMethod v11, 'getOwnPropertyDescriptor', [v42, v43]
+    v45 <- GetProperty v44, 'get'
+    Return v45
+EndArrowFunction
+v46 <- CallMethod v10, 'map', [v41]
+v47 <- Construct v7, [v46]
+v48 <- GetProperty v47, 'size'
+BeginForOfLoop v19 -> v49
+    v50 <- LoadUndefined
+    v51 <- GetProperty v15, 'species'
+    v52 <- GetComputedProperty v49, v51
+EndForOfLoop
+
+
+let TypedArray = Uint8Array.__proto__;
+let classesWithSpecies = [RegExp,Array,TypedArray,ArrayBuffer,Map,Set,Promise];
+let classesWithoutSpecies = [Object,Function,String,Number,Symbol,WeakMap,WeakSet];
+for (const v20 of classesWithSpecies) {
+    v20[Symbol.species];
+    function f23() {
+        v20[Symbol.species] = undefined;
+    }
+    f23();
+    let descriptor = Object.getOwnPropertyDescriptor(v20, Symbol.species);
+    descriptor.configurable;
+    descriptor.enumerable;
+    descriptor.writable;
+    descriptor.set;
+    typeof descriptor.get;
+}
+classesWithSpecies.length;
+const v41 = (a42) => {
+    return Object.getOwnPropertyDescriptor(a42, Symbol.species).get;
+};
+const v47 = new Set(classesWithSpecies.map(v41));
+v47.size;
+for (const v49 of classesWithoutSpecies) {
+    v49[Symbol.species];
+}
+
+FuzzIL program written to corpus/species.fzil

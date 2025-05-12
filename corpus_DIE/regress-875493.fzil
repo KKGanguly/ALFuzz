@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadRegExp '.' 'y'
+    v2 <- CreateNamedVariable 're', 'const', v1
+    v3 <- LoadInteger '3'
+    SetProperty v2, 'lastIndex', v3
+    v4 <- LoadString 'fg'
+    v5 <- CreateNamedVariable 'str', 'const', v4
+    v6 <- LoadString '$'
+    v7 <- CreateNamedVariable 'Symbol', 'none'
+    v8 <- GetProperty v7, 'replace'
+    v9 <- CallComputedMethod v2, v8, [v5, v6]
+    Return v9
+EndPlainFunction
+v10 <- CallFunction v0, []
+v11 <- CreateNamedVariable 'fast', 'const', v10
+v12 <- CallFunction v0, []
+v13 <- CreateNamedVariable 'slow', 'const', v12
+
+
+function test() {
+    const re = /./y;
+    re.lastIndex = 3;
+    const str = "fg";
+    return re[Symbol.replace](str, "$");
+}
+const fast = test();
+const slow = test();
+
+FuzzIL program written to corpus/regress-875493.fzil

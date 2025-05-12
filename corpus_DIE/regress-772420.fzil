@@ -1,0 +1,42 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadUndefined
+    v3 <- CreateNamedVariable 'value', 'var', v2
+    v4 <- LoadInteger '1'
+    v5 <- LoadInteger '2'
+    BeginSwitch v1
+        BeginSwitchCase v4
+            v6 <- LoadInteger '1'
+            v7 <- CreateNamedVariable 'let_var', 'let', v6
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v5
+            v8 <- CreateNamedVariable 'let_var', 'none'
+            Reassign v3, v8
+        EndSwitchCase fallsThrough
+    EndSwitch
+    v9 <- LoadUndefined
+    v10 <- BinaryOperation v3, '*', v9
+    Return v10
+EndPlainFunction
+v11 <- LoadInteger '3'
+v12 <- CallFunction v0, [v11]
+v13 <- LoadInteger '3'
+v14 <- CallFunction v0, [v13]
+v15 <- LoadInteger '3'
+v16 <- CallFunction v0, [v15]
+
+
+function foo(a1) {
+    var value;
+    switch (a1) {
+        case 1:
+            let let_var = 1;
+        case 2:
+            value = let_var;
+    }
+    return value * undefined;
+}
+foo(3);
+foo(3);
+foo(3);
+
+FuzzIL program written to corpus/regress-772420.fzil

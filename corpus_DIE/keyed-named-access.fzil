@@ -1,0 +1,167 @@
+v0 <- LoadString 'x'
+v1 <- CreateNamedVariable 'k', 'var', v0
+v2 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'o1', 'var', v3
+v5 <- LoadInteger '11'
+v6 <- LoadInteger '20'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v5
+    ObjectLiteralAddProperty `y`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'o2', 'var', v7
+v9 <- LoadInteger '12'
+v10 <- LoadInteger '20'
+v11 <- LoadInteger '100'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v9
+    ObjectLiteralAddProperty `y`, v10
+    ObjectLiteralAddProperty `z`, v11
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'o3', 'var', v12
+v14 <- BeginPlainFunction -> v15
+    v16 <- LoadInteger '0'
+    v17 <- CreateNamedVariable 'result', 'var', v16
+    BeginForLoopInitializer
+        v18 <- LoadInteger '0'
+    BeginForLoopCondition -> v19
+        v20 <- LoadInteger '100'
+        v21 <- Compare v19, '<', v20
+    BeginForLoopAfterthought v21 -> v22
+        v23 <- UnaryOperation v22, '++'
+    BeginForLoopBody -> v24
+        v25 <- GetComputedProperty v15, v1
+        Update v17, '+', v25
+    EndForLoop
+    Return v17
+EndPlainFunction
+v26 <- CallFunction v14, [v4]
+v27 <- CallFunction v14, [v4]
+v28 <- CallFunction v14, [v4]
+v29 <- LoadInteger '1000'
+v30 <- CallFunction v14, [v4]
+v31 <- CallFunction v14, [v8]
+v32 <- CallFunction v14, [v8]
+v33 <- CallFunction v14, [v8]
+v34 <- LoadInteger '1100'
+v35 <- CallFunction v14, [v8]
+v36 <- CallFunction v14, [v13]
+v37 <- CallFunction v14, [v13]
+v38 <- CallFunction v14, [v13]
+v39 <- LoadInteger '1200'
+v40 <- CallFunction v14, [v13]
+v41 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v42 <- EndObjectLiteral
+    v43 <- CreateNamedVariable 'global', 'var', v42
+    v44 <- LoadString 'A'
+    v45 <- BeginPlainFunction -> 
+        v46 <- LoadString 'x'
+        Return v46
+    EndPlainFunction
+    v47 <- CallMethod v43, '__defineGetter__', [v44, v45]
+    v48 <- BeginPlainFunction -> 
+        v49 <- LoadString 'A'
+        Return v49
+    EndPlainFunction
+    v50 <- BeginPlainFunction -> v51, v52, v53
+        BeginTry
+            v54 <- CallMethod v52, 'toString', []
+            v55 <- BinaryOperation v51, '+', v54
+            v56 <- BinaryOperation v55, '+', v53
+            Return v56
+        BeginCatch -> v57
+        EndTryCatch
+    EndPlainFunction
+    v58 <- BeginPlainFunction -> v59
+        v60 <- LoadInteger '1'
+        v61 <- CallFunction v48, []
+        v62 <- GetComputedProperty v59, v61
+        v63 <- UnaryOperation v62, '--'
+        v64 <- LoadInteger '10'
+        v65 <- CallFunction v50, [v60, v63, v64]
+        Return v65
+    EndPlainFunction
+    v66 <- CallFunction v58, [v43]
+    v67 <- CallFunction v58, [v43]
+    v68 <- CallFunction v58, [v43]
+    v69 <- CreateNamedVariable 'print', 'none'
+    v70 <- CallFunction v69, [v68]
+EndPlainFunction
+v71 <- CallFunction v41, []
+v72 <- BeginPlainFunction -> 
+    v73 <- BeginPlainFunction -> 
+        v74 <- LoadThis
+        v75 <- LoadInteger '0'
+        v76 <- LoadString ''
+        v77 <- GetComputedProperty v74, v76
+        v78 <- UnaryOperation v77, '--'
+    EndPlainFunction
+    v79 <- CallFunction v73, []
+    v80 <- CallFunction v73, []
+    v81 <- CallFunction v73, []
+EndPlainFunction
+v82 <- CallFunction v72, []
+
+
+var k = "x";
+var o1 = { x: 10 };
+var o2 = { x: 11, y: 20 };
+var o3 = { x: 12, y: 20, z: 100 };
+function f(a15) {
+    var result = 0;
+    for (let i19 = 0; i19 < 100; i19++) {
+        result += a15[k];
+    }
+    return result;
+}
+f(o1);
+f(o1);
+f(o1);
+f(o1);
+f(o2);
+f(o2);
+f(o2);
+f(o2);
+f(o3);
+f(o3);
+f(o3);
+f(o3);
+function CountOperationDeoptimizationGetter() {
+    var global = {};
+    function f45() {
+        return "x";
+    }
+    global.__defineGetter__("A", f45);
+    function h() {
+        return "A";
+    }
+    function g(a51, a52, a53) {
+        try {
+            return (a51 + a52.toString()) + a53;
+        } catch(e57) {
+        }
+    }
+    function test(a59) {
+        let v62 = a59[h()];
+        return g(1, v62--, 10);
+    }
+    test(global);
+    test(global);
+    print(test(global));
+}
+CountOperationDeoptimizationGetter();
+function CountOperationDeoptimizationPoint() {
+    function test() {
+        let v77 = this[""];
+        v77--;
+    }
+    test();
+    test();
+    test();
+}
+CountOperationDeoptimizationPoint();
+
+FuzzIL program written to corpus/keyed-named-access.fzil

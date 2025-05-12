@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    v4 <- LoadFloat '0.5'
+    v5 <- BinaryOperation v3, '+', v4
+    Return v5
+EndPlainFunction
+v6 <- LoadFloat '1.5'
+v7 <- LoadFloat '1.5'
+v8 <- LoadFloat '1.5'
+v9 <- CreateArray [v6, v7, v8]
+v10 <- CreateNamedVariable 'Array', 'none'
+SetProperty v10, 'prototype', v9
+v11 <- LoadInteger '0'
+v12 <- LoadUndefined
+v13 <- CreateArray [v11, v12]
+v14 <- CreateNamedVariable 'arr', 'var', v13
+v15 <- LoadFloat '0.5'
+v16 <- LoadInteger '0'
+v17 <- CallFunction v0, [v14, v16]
+v18 <- LoadFloat '0.5'
+v19 <- LoadInteger '0'
+v20 <- CallFunction v0, [v14, v19]
+v21 <- LoadFloat '0.5'
+v22 <- LoadInteger '0'
+v23 <- CallFunction v0, [v14, v22]
+v24 <- CreateNamedVariable 'NaN', 'none'
+v25 <- LoadInteger '1'
+v26 <- CallFunction v0, [v14, v25]
+
+
+function f(a1, a2) {
+    return a1[a2] + 0.5;
+}
+Array.prototype = [1.5,1.5,1.5];
+var arr = [0,,];
+f(arr, 0);
+f(arr, 0);
+f(arr, 0);
+f(arr, 1);
+
+FuzzIL program written to corpus/elide-double-hole-check-3.fzil

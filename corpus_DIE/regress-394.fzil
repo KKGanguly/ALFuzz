@@ -1,0 +1,55 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateNamedVariable 'x', 'none'
+    Reassign v2, v1
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- CreateNamedVariable 'x', 'none'
+    Return v4
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+v7 <- LoadString 'x'
+v8 <- BeginPlainFunction -> 
+EndPlainFunction
+v9 <- LoadThis
+v10 <- CallMethod v9, '__defineSetter__', [v7, v8]
+v11 <- LoadString 'x'
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '2'
+    Return v13
+EndPlainFunction
+v14 <- LoadThis
+v15 <- CallMethod v14, '__defineGetter__', [v11, v12]
+v16 <- CallFunction v0, []
+v17 <- LoadInteger '2'
+v18 <- CreateNamedVariable 'x', 'none'
+v19 <- LoadInteger '2'
+v20 <- CallFunction v3, []
+v21 <- LoadInteger '2'
+v22 <- CallFunction v3, []
+v23 <- LoadInteger '2'
+v24 <- CallFunction v3, []
+
+
+function setx() {
+    x = 1;
+}
+function getx() {
+    return x;
+}
+setx();
+setx();
+function f8() {
+}
+this.__defineSetter__("x", f8);
+function f12() {
+    return 2;
+}
+this.__defineGetter__("x", f12);
+setx();
+getx();
+getx();
+getx();
+
+FuzzIL program written to corpus/regress-394.fzil

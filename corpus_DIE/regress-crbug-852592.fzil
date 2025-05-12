@@ -1,0 +1,55 @@
+v0 <- LoadInteger '1024'
+v1 <- CreateNamedVariable 'kArraySize', 'const', v0
+v2 <- CreateArray []
+v3 <- CreateNamedVariable 'array', 'let', v2
+BeginForLoopInitializer
+    v4 <- LoadInteger '1'
+BeginForLoopCondition -> v5
+    v6 <- Compare v5, '<', v1
+BeginForLoopAfterthought v6 -> v7
+    v8 <- UnaryOperation '++', v7
+BeginForLoopBody -> v9
+    v10 <- LoadFloat '0.1'
+    v11 <- BinaryOperation v9, '+', v10
+    SetComputedProperty v3, v9, v11
+EndForLoop
+v12 <- GetProperty v3, 'length'
+v13 <- LoadBoolean 'false'
+v14 <- CreateNamedVariable 'executed', 'let', v13
+v15 <- BeginArrowFunction -> v16
+    v17 <- UnaryOperation '!', v14
+    BeginIf v17
+        v18 <- LoadBoolean 'true'
+        Reassign v14, v18
+        v19 <- LoadInteger '1'
+        SetProperty v3, 'length', v19
+        v20 <- LoadInteger '0'
+        SetProperty v3, 'length', v20
+        SetProperty v3, 'length', v1
+    EndIf
+EndArrowFunction
+v21 <- CreateNamedVariable 'compareFn', 'none'
+Reassign v21, v15
+v22 <- CreateNamedVariable 'compareFn', 'none'
+v23 <- CallMethod v3, 'sort', [v22]
+
+
+const kArraySize = 1024;
+let array = [];
+for (let i5 = 1; i5 < kArraySize; ++i5) {
+    array[i5] = i5 + 0.1;
+}
+array.length;
+let executed = false;
+const v15 = (a16) => {
+    if (!executed) {
+        executed = true;
+        array.length = 1;
+        array.length = 0;
+        array.length = kArraySize;
+    }
+};
+compareFn = v15;
+array.sort(compareFn);
+
+FuzzIL program written to corpus/regress-crbug-852592.fzil

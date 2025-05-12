@@ -1,0 +1,50 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadThis
+    SetProperty v2, 'id', v1
+EndPlainFunction
+v3 <- LoadInteger '1'
+v4 <- Construct v0, [v3]
+v5 <- CreateNamedVariable 'a1', 'var', v4
+v6 <- LoadInteger '2'
+v7 <- Construct v0, [v6]
+v8 <- CreateNamedVariable 'a2', 'var', v7
+v9 <- LoadUndefined
+v10 <- CreateNamedVariable 'g', 'var', v9
+v11 <- BeginPlainFunction -> v12, v13
+    v14 <- GetProperty v12, 'o'
+    Reassign v10, v14
+    SetProperty v12, 'o', v13
+    v15 <- GetProperty v12, 'o'
+    Return v15
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `o`, v5
+v16 <- EndObjectLiteral
+v17 <- CreateNamedVariable 'obj', 'var', v16
+v18 <- CallFunction v11, [v17, v5]
+v19 <- CallFunction v11, [v17, v5]
+v20 <- GetProperty v8, 'id'
+v21 <- CallFunction v11, [v17, v8]
+v22 <- GetProperty v21, 'id'
+
+
+function A(a1) {
+    this.id = a1;
+}
+const v4 = new A(1);
+var a1 = v4;
+const v7 = new A(2);
+var a2 = v7;
+var g;
+function f(a12, a13) {
+    g = a12.o;
+    a12.o = a13;
+    return a12.o;
+}
+var obj = { o: a1 };
+f(obj, a1);
+f(obj, a1);
+a2.id;
+f(obj, a2).id;
+
+FuzzIL program written to corpus/regress-gvn-ftt.fzil

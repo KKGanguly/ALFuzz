@@ -1,0 +1,60 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable '__v_7', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- LoadInteger '0'
+    v6 <- LoadInteger '3'
+    v7 <- BinaryOperation v3, '+', v6
+    SetComputedProperty v1, v7, v5
+    v8 <- LoadInteger '0'
+    v9 <- LoadInteger '4'
+    v10 <- BinaryOperation v3, '+', v9
+    SetComputedProperty v1, v10, v8
+    BeginIf v4
+        v11 <- LoadInteger '0'
+        v12 <- LoadInteger '0'
+        v13 <- BinaryOperation v3, '+', v12
+        SetComputedProperty v1, v13, v11
+        v14 <- LoadInteger '0'
+        v15 <- LoadInteger '5'
+        v16 <- BinaryOperation v3, '+', v15
+        SetComputedProperty v1, v16, v14
+    BeginElse
+        v17 <- LoadInteger '0'
+        v18 <- LoadInteger '0'
+        v19 <- BinaryOperation v3, '+', v18
+        SetComputedProperty v1, v19, v17
+        v20 <- LoadInteger '0'
+        v21 <- LoadInteger '18'
+        v22 <- BinaryOperation v3, '+', v21
+        SetComputedProperty v1, v22, v20
+    EndIf
+EndPlainFunction
+v23 <- LoadInteger '1'
+v24 <- LoadBoolean 'true'
+v25 <- CallFunction v2, [v23, v24]
+v26 <- LoadInteger '1'
+v27 <- LoadBoolean 'false'
+v28 <- CallFunction v2, [v26, v27]
+v29 <- LoadInteger '5'
+v30 <- LoadBoolean 'false'
+v31 <- CallFunction v2, [v29, v30]
+
+
+var __v_7 = {};
+function __f_8(a3, a4) {
+    __v_7[a3 + 3] = 0;
+    __v_7[a3 + 4] = 0;
+    if (a4) {
+        __v_7[a3 + 0] = 0;
+        __v_7[a3 + 5] = 0;
+    } else {
+        __v_7[a3 + 0] = 0;
+        __v_7[a3 + 18] = 0;
+    }
+}
+__f_8(1, true);
+__f_8(1, false);
+__f_8(5, false);
+
+FuzzIL program written to corpus/regress-350863.fzil

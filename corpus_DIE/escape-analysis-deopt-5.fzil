@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- LoadInteger '2'
+    v3 <- Construct v1, [v2]
+    v4 <- CreateNamedVariable 'x', 'var', v3
+    v5 <- LoadFloat '23.1234'
+    SetElement v4, '0', v5
+    v6 <- LoadFloat '25.1234'
+    SetElement v4, '1', v6
+    v7 <- GetElement v4, '0'
+    Return v7
+EndPlainFunction
+v8 <- CallFunction v0, []
+v9 <- LoadFloat '23.1234'
+v10 <- CallFunction v0, []
+v11 <- LoadFloat '23.1234'
+v12 <- CallFunction v0, []
+v13 <- LoadFloat '23.1234'
+
+
+function f() {
+    const v3 = new Array(2);
+    var x = v3;
+    x[0] = 23.1234;
+    x[1] = 25.1234;
+    return x[0];
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/escape-analysis-deopt-5.fzil

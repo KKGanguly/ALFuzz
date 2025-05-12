@@ -1,0 +1,15 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'Object', 'none'
+    v4 <- CallMethod v3, 'fromEntries', [v2]
+EndPlainFunction
+v5 <- CallFunction v0, []
+
+
+function test() {
+    Object.fromEntries([[]]);
+}
+test();
+
+FuzzIL program written to corpus/regress-912504.fzil

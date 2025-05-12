@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CallMethod v1, 'push', [v2]
+EndPlainFunction
+v4 <- LoadInteger '8'
+v5 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v4
+    ObjectLiteralAddProperty `length`, v5
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'object', 'var', v6
+v8 <- LoadInteger '5'
+SetElement v7, '18', v8
+v9 <- CreateNamedVariable 'Array', 'none'
+v10 <- GetProperty v9, 'prototype'
+SetProperty v7, '__proto__', v10
+v11 <- LoadInteger '1'
+v12 <- CallFunction v0, [v7, v11]
+v13 <- LoadInteger '1'
+v14 <- CallFunction v0, [v7, v13]
+v15 <- LoadInteger '5'
+v16 <- GetProperty v7, 'length'
+v17 <- LoadInteger '1'
+v18 <- CallFunction v0, [v7, v17]
+v19 <- LoadInteger '1'
+v20 <- CallFunction v0, [v7, v19]
+v21 <- LoadInteger '8'
+v22 <- GetProperty v7, 'x'
+v23 <- LoadInteger '7'
+v24 <- GetProperty v7, 'length'
+
+
+function push_wrapper(a1, a2) {
+    a1.push(a2);
+}
+var object = { x: 8, length: 3 };
+object[18] = 5;
+object.__proto__ = Array.prototype;
+push_wrapper(object, 1);
+push_wrapper(object, 1);
+object.length;
+push_wrapper(object, 1);
+push_wrapper(object, 1);
+object.x;
+object.length;
+
+FuzzIL program written to corpus/array-push6.fzil

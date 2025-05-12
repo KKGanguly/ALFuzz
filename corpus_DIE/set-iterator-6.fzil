@@ -1,0 +1,69 @@
+v0 <- CreateNamedVariable 'Set', 'none'
+v1 <- LoadInteger '1'
+v2 <- LoadInteger '2'
+v3 <- LoadInteger '3'
+v4 <- CreateArray [v1, v2, v3]
+v5 <- Construct v0, [v4]
+v6 <- CreateNamedVariable 'set', 'var', v5
+v7 <- CallMethod v6, 'values', []
+v8 <- CreateNamedVariable 'iterator', 'var', v7
+v9 <- BeginArrowFunction -> 
+    v10 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `done`, v10
+    v11 <- EndObjectLiteral
+    Return v11
+EndArrowFunction
+SetProperty v8, 'next', v9
+v12 <- LoadInteger '1'
+v13 <- LoadInteger '2'
+v14 <- LoadInteger '3'
+v15 <- CreateArray [v12, v13, v14]
+v16 <- CreateArrayWithSpread [...v6]
+v17 <- LoadInteger '1'
+v18 <- LoadInteger '1'
+v19 <- CreateArray [v17, v18]
+v20 <- LoadInteger '2'
+v21 <- LoadInteger '2'
+v22 <- CreateArray [v20, v21]
+v23 <- LoadInteger '3'
+v24 <- LoadInteger '3'
+v25 <- CreateArray [v23, v24]
+v26 <- CreateArray [v19, v22, v25]
+v27 <- CallMethod v6, 'entries', []
+v28 <- CreateArrayWithSpread [...v27]
+v29 <- LoadInteger '1'
+v30 <- LoadInteger '2'
+v31 <- LoadInteger '3'
+v32 <- CreateArray [v29, v30, v31]
+v33 <- CallMethod v6, 'keys', []
+v34 <- CreateArrayWithSpread [...v33]
+v35 <- LoadInteger '1'
+v36 <- LoadInteger '2'
+v37 <- LoadInteger '3'
+v38 <- CreateArray [v35, v36, v37]
+v39 <- CallMethod v6, 'values', []
+v40 <- CreateArrayWithSpread [...v39]
+v41 <- CreateArray []
+v42 <- CreateArrayWithSpread [...v8]
+
+
+const v5 = new Set([1,2,3]);
+var set = v5;
+var iterator = set.values();
+const v9 = () => {
+    return { done: true };
+};
+iterator.next = v9;
+[1,2,3];
+[...set];
+[[1,1],[2,2],[3,3]];
+[...set.entries()];
+[1,2,3];
+[...set.keys()];
+[1,2,3];
+[...set.values()];
+[];
+[...iterator];
+
+FuzzIL program written to corpus/set-iterator-6.fzil

@@ -1,0 +1,37 @@
+v0 <- LoadInteger '10000'
+v1 <- CreateNamedVariable 'expectedItemsCount', 'var', v0
+v2 <- LoadInteger '5'
+v3 <- CreateNamedVariable 'itemSize', 'var', v2
+v4 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v5 <- BinaryOperation v1, '*', v3
+v6 <- LoadInteger '8'
+v7 <- BinaryOperation v5, '*', v6
+v8 <- Construct v4, [v7]
+v9 <- CreateNamedVariable 'heap', 'var', v8
+v10 <- CreateArray []
+v11 <- CreateNamedVariable 'storage', 'var', v10
+BeginForLoopInitializer
+    v12 <- LoadInteger '0'
+BeginForLoopCondition -> v13
+    v14 <- Compare v13, '<', v1
+BeginForLoopAfterthought v14 -> v15
+    v16 <- UnaryOperation v15, '++'
+BeginForLoopBody -> v17
+    v18 <- CreateNamedVariable 'Float64Array', 'none'
+    v19 <- LoadInteger '0'
+    v20 <- Construct v18, [v9, v19, v3]
+    v21 <- CallMethod v11, 'push', [v20]
+EndForLoop
+
+
+var expectedItemsCount = 10000;
+var itemSize = 5;
+const v8 = new ArrayBuffer((expectedItemsCount * itemSize) * 8);
+var heap = v8;
+var storage = [];
+for (let i13 = 0; i13 < expectedItemsCount; i13++) {
+    const v20 = new Float64Array(heap, 0, itemSize);
+    storage.push(v20);
+}
+
+FuzzIL program written to corpus/regress-2646.fzil

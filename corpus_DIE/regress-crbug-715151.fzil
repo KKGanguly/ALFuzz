@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'a', 'var', v2
+    v4 <- CreateNamedVariable 'Object', 'none'
+    v5 <- CallMethod v4, 'preventExtensions', [v3]
+    v6 <- CallMethod v3, 'pop', []
+    Return v6
+EndPlainFunction
+v7 <- CallFunction v0, []
+v8 <- CallFunction v0, []
+v9 <- CallFunction v0, []
+
+
+function foo() {
+    var a = [0];
+    Object.preventExtensions(a);
+    return a.pop();
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-715151.fzil

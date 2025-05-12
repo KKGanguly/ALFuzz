@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- GetProperty v1, 'length'
+    SetComputedProperty v1, v3, v2
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5, v6, v7
+    SetComputedProperty v5, v6, v7
+EndPlainFunction
+v8 <- CreateArray []
+v9 <- CallFunction v0, [v8]
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'o', 'none'
+Reassign v11, v10
+v12 <- CreateNamedVariable 'o', 'none'
+v13 <- CallFunction v4, [v12]
+BeginObjectLiteral
+v14 <- EndObjectLiteral
+Reassign v12, v14
+v15 <- CallFunction v0, [v12]
+
+
+function f(a1) {
+    a1[a1.length] = 1;
+}
+function g(a5, a6, a7) {
+    a5[a6] = a7;
+}
+f([]);
+o = {};
+g(o);
+f(o = {});
+
+FuzzIL program written to corpus/regress-358088.fzil

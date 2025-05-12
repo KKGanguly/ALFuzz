@@ -1,0 +1,76 @@
+v0 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v1 <- LoadInteger '8'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'ab', 'var', v2
+v4 <- CreateNamedVariable 'Int32Array', 'none'
+v5 <- Construct v4, [v3]
+v6 <- CreateNamedVariable 'i_view', 'var', v5
+v7 <- LoadInteger '0'
+SetElement v6, '0', v7
+v8 <- LoadInteger '0'
+SetElement v6, '1', v8
+v9 <- CreateNamedVariable 'Float64Array', 'none'
+v10 <- Construct v9, [v3]
+v11 <- CreateNamedVariable 'doubles', 'var', v10
+v12 <- GetElement v11, '0'
+v13 <- CreateNamedVariable 'isNaN', 'none'
+v14 <- CallFunction v13, [v12]
+v15 <- LoadFloat '2.5'
+v16 <- LoadFloat '2.5'
+v17 <- CreateArray [v15, v16]
+v18 <- CreateNamedVariable 'prototype', 'var', v17
+v19 <- LoadFloat '3.5'
+v20 <- LoadFloat '3.5'
+v21 <- CreateArray [v19, v20]
+v22 <- CreateNamedVariable 'array', 'var', v21
+SetProperty v22, '__proto__', v18
+v23 <- BeginPlainFunction -> v24
+    v25 <- GetElement v11, '0'
+    SetComputedProperty v22, v24, v25
+    v26 <- GetComputedProperty v22, v24
+    Return v26
+EndPlainFunction
+v27 <- LoadInteger '0'
+v28 <- CallFunction v23, [v27]
+v29 <- CallFunction v13, [v28]
+v30 <- LoadInteger '0'
+v31 <- CallFunction v23, [v30]
+v32 <- CallFunction v13, [v31]
+v33 <- LoadInteger '0'
+v34 <- CallFunction v23, [v33]
+v35 <- CallFunction v13, [v34]
+v36 <- LoadInteger '0'
+v37 <- CallFunction v23, [v36]
+v38 <- CallFunction v13, [v37]
+v39 <- LoadInteger '0'
+v40 <- CallFunction v23, [v39]
+v41 <- CallFunction v13, [v40]
+v42 <- LoadInteger '0'
+v43 <- CallFunction v23, [v42]
+v44 <- CallFunction v13, [v43]
+
+
+const v2 = new ArrayBuffer(8);
+var ab = v2;
+const v5 = new Int32Array(ab);
+var i_view = v5;
+i_view[0] = 0;
+i_view[1] = 0;
+const v10 = new Float64Array(ab);
+var doubles = v10;
+isNaN(doubles[0]);
+var prototype = [2.5,2.5];
+var array = [3.5,3.5];
+array.__proto__ = prototype;
+function boom(a24) {
+    array[a24] = doubles[0];
+    return array[a24];
+}
+isNaN(boom(0));
+isNaN(boom(0));
+isNaN(boom(0));
+isNaN(boom(0));
+isNaN(boom(0));
+isNaN(boom(0));
+
+FuzzIL program written to corpus/regress-2596.fzil

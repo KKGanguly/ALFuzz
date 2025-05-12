@@ -1,0 +1,50 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- GetProperty v0, 'prototype'
+SetProperty v2, 'f', v1
+v3 <- BeginPlainFunction -> 
+EndPlainFunction
+v4 <- Construct v0, []
+v5 <- CreateNamedVariable 'o', 'var', v4
+v6 <- BeginPlainFunction -> 
+    BeginTry
+        v7 <- CallMethod v5, 'f', []
+        Return v7
+    BeginFinally
+    EndTryCatch
+EndPlainFunction
+v8 <- BeginPlainFunction -> 
+    v9 <- CallFunction v6, []
+EndPlainFunction
+v10 <- CallFunction v8, []
+v11 <- Construct v3, []
+Reassign v5, v11
+v12 <- LoadString 'h()'
+
+
+function A() {
+}
+function f1() {
+}
+const t4 = A.prototype;
+t4.f = f1;
+function B() {
+}
+const v4 = new A();
+var o = v4;
+function g() {
+    try {
+        return o.f();
+    } finally {
+    }
+}
+function h() {
+    g();
+}
+h();
+const v11 = new B();
+o = v11;
+
+FuzzIL program written to corpus/regress-1118.fzil

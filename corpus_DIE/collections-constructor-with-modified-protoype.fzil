@@ -1,0 +1,154 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'prototype'
+    v3 <- GetProperty v2, 'add'
+    v4 <- CreateNamedVariable 'originalPrototypeAdd', 'const', v3
+    BeginObjectLiteral
+    v5 <- EndObjectLiteral
+    v6 <- CreateNamedVariable 'k1', 'const', v5
+    BeginObjectLiteral
+    v7 <- EndObjectLiteral
+    v8 <- CreateNamedVariable 'k2', 'const', v7
+    v9 <- CreateArray [v6, v8]
+    v10 <- CreateNamedVariable 'entries', 'const', v9
+    v11 <- LoadInteger '0'
+    v12 <- CreateNamedVariable 'addCount', 'let', v11
+    v13 <- BeginPlainFunction -> v14
+        v15 <- UnaryOperation v12, '++'
+        v16 <- LoadThis
+        v17 <- CallMethod v4, 'call', [v16, v14]
+        v18 <- LoadInteger '1'
+        SetProperty v10, 'length', v18
+    EndPlainFunction
+    v19 <- GetProperty v1, 'prototype'
+    SetProperty v19, 'add', v13
+    v20 <- Construct v1, [v10]
+    v21 <- CreateNamedVariable 'set', 'const', v20
+    v22 <- LoadInteger '1'
+    v23 <- CallMethod v21, 'has', [v6]
+    v24 <- CallMethod v21, 'has', [v8]
+    v25 <- GetProperty v1, 'prototype'
+    SetProperty v25, 'add', v4
+EndPlainFunction
+v26 <- CreateNamedVariable 'Set', 'none'
+v27 <- CallFunction v0, [v26]
+v28 <- CallFunction v0, [v26]
+v29 <- CallFunction v0, [v26]
+v30 <- CallFunction v0, [v26]
+v31 <- CallFunction v0, []
+v32 <- CreateNamedVariable 'WeakSet', 'none'
+v33 <- CallFunction v0, [v32]
+v34 <- CallFunction v0, [v32]
+v35 <- CallFunction v0, [v32]
+v36 <- CallFunction v0, [v32]
+v37 <- CallFunction v0, []
+v38 <- BeginPlainFunction -> v39
+    v40 <- GetProperty v39, 'prototype'
+    v41 <- GetProperty v40, 'set'
+    v42 <- CreateNamedVariable 'originalPrototypeSet', 'const', v41
+    BeginObjectLiteral
+    v43 <- EndObjectLiteral
+    v44 <- CreateNamedVariable 'k1', 'const', v43
+    BeginObjectLiteral
+    v45 <- EndObjectLiteral
+    v46 <- CreateNamedVariable 'k2', 'const', v45
+    v47 <- LoadInteger '1'
+    v48 <- CreateArray [v44, v47]
+    v49 <- LoadInteger '2'
+    v50 <- CreateArray [v46, v49]
+    v51 <- CreateArray [v48, v50]
+    v52 <- CreateNamedVariable 'entries', 'const', v51
+    v53 <- LoadInteger '0'
+    v54 <- CreateNamedVariable 'setCount', 'let', v53
+    v55 <- BeginPlainFunction -> v56, v57
+        v58 <- UnaryOperation v54, '++'
+        v59 <- LoadThis
+        v60 <- CallMethod v42, 'call', [v59, v56, v57]
+        v61 <- LoadInteger '1'
+        SetProperty v52, 'length', v61
+    EndPlainFunction
+    v62 <- GetProperty v39, 'prototype'
+    SetProperty v62, 'set', v55
+    v63 <- Construct v39, [v52]
+    v64 <- CreateNamedVariable 'map', 'const', v63
+    v65 <- LoadInteger '1'
+    v66 <- CallMethod v64, 'has', [v44]
+    v67 <- CallMethod v64, 'has', [v46]
+    v68 <- GetProperty v39, 'prototype'
+    SetProperty v68, 'set', v42
+EndPlainFunction
+v69 <- CreateNamedVariable 'Map', 'none'
+v70 <- CallFunction v38, [v69]
+v71 <- CallFunction v38, [v69]
+v72 <- CallFunction v38, [v69]
+v73 <- CallFunction v38, [v69]
+v74 <- CallFunction v38, []
+v75 <- CreateNamedVariable 'WeakMap', 'none'
+v76 <- CallFunction v38, [v75]
+v77 <- CallFunction v38, [v75]
+v78 <- CallFunction v38, [v75]
+v79 <- CallFunction v38, [v75]
+v80 <- CallFunction v38, []
+
+
+function TestSetPrototypeModified(a1) {
+    const originalPrototypeAdd = a1.prototype.add;
+    const k1 = {};
+    const k2 = {};
+    const entries = [k1,k2];
+    let addCount = 0;
+    function f13(a14) {
+        addCount++;
+        originalPrototypeAdd.call(this, a14);
+        entries.length = 1;
+    }
+    const t11 = a1.prototype;
+    t11.add = f13;
+    const v20 = new a1(entries);
+    const set = v20;
+    set.has(k1);
+    set.has(k2);
+    const t15 = a1.prototype;
+    t15.add = originalPrototypeAdd;
+}
+TestSetPrototypeModified(Set);
+TestSetPrototypeModified(Set);
+TestSetPrototypeModified(Set);
+TestSetPrototypeModified(Set);
+TestSetPrototypeModified();
+TestSetPrototypeModified(WeakSet);
+TestSetPrototypeModified(WeakSet);
+TestSetPrototypeModified(WeakSet);
+TestSetPrototypeModified(WeakSet);
+TestSetPrototypeModified();
+function TestMapPrototypeModified(a39) {
+    const originalPrototypeSet = a39.prototype.set;
+    const k1 = {};
+    const k2 = {};
+    const entries = [[k1,1],[k2,2]];
+    let setCount = 0;
+    function f55(a56, a57) {
+        setCount++;
+        originalPrototypeSet.call(this, a56, a57);
+        entries.length = 1;
+    }
+    const t41 = a39.prototype;
+    t41.set = f55;
+    const v63 = new a39(entries);
+    const map = v63;
+    map.has(k1);
+    map.has(k2);
+    const t45 = a39.prototype;
+    t45.set = originalPrototypeSet;
+}
+TestMapPrototypeModified(Map);
+TestMapPrototypeModified(Map);
+TestMapPrototypeModified(Map);
+TestMapPrototypeModified(Map);
+TestMapPrototypeModified();
+TestMapPrototypeModified(WeakMap);
+TestMapPrototypeModified(WeakMap);
+TestMapPrototypeModified(WeakMap);
+TestMapPrototypeModified(WeakMap);
+TestMapPrototypeModified();
+
+FuzzIL program written to corpus/collections-constructor-with-modified-protoype.fzil

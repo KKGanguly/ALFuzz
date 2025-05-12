@@ -1,0 +1,24 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'threw', 'var', v0
+BeginTry
+    v2 <- CreateNamedVariable 'Function', 'none'
+    v3 <- GetProperty v2, '__proto__'
+    v4 <- Construct v3, []
+    v5 <- CreateNamedVariable 'obj', 'var', v4
+BeginCatch -> v6
+    v7 <- CreateNamedVariable 'TypeError', 'none'
+    v8 <- LoadBoolean 'true'
+    Reassign v1, v8
+EndTryCatch
+
+
+var threw = false;
+try {
+    const t2 = Function.__proto__;
+    const v4 = new t2();
+    var obj = v4;
+} catch(e6) {
+    threw = true;
+}
+
+FuzzIL program written to corpus/unusual-constructor.fzil

@@ -1,0 +1,119 @@
+v0 <- LoadInteger '0'
+v1 <- LoadString '%00'
+v2 <- CreateArray [v0, v1]
+v3 <- LoadInteger '1'
+v4 <- LoadString '%01'
+v5 <- CreateArray [v3, v4]
+v6 <- LoadInteger '127'
+v7 <- LoadString '%7F'
+v8 <- CreateArray [v6, v7]
+v9 <- LoadInteger '128'
+v10 <- LoadString '%C2%80'
+v11 <- CreateArray [v9, v10]
+v12 <- LoadInteger '129'
+v13 <- LoadString '%C2%81'
+v14 <- CreateArray [v12, v13]
+v15 <- LoadInteger '2047'
+v16 <- LoadString '%DF%BF'
+v17 <- CreateArray [v15, v16]
+v18 <- LoadInteger '2048'
+v19 <- LoadString '%E0%A0%80'
+v20 <- CreateArray [v18, v19]
+v21 <- LoadInteger '2049'
+v22 <- LoadString '%E0%A0%81'
+v23 <- CreateArray [v21, v22]
+v24 <- LoadInteger '55295'
+v25 <- LoadString '%ED%9F%BF'
+v26 <- CreateArray [v24, v25]
+v27 <- LoadInteger '65535'
+v28 <- LoadString '%EF%BF%BF'
+v29 <- CreateArray [v27, v28]
+v30 <- CreateArray [v2, v5, v8, v11, v14, v17, v20, v23, v26, v29]
+v31 <- CreateNamedVariable 'kLegalPairs', 'var', v30
+v32 <- LoadString '%80'
+v33 <- LoadString '%BF'
+v34 <- LoadString '%80%BF'
+v35 <- LoadString '%80%BF%80'
+v36 <- LoadString '%C0%22'
+v37 <- LoadString '%DF'
+v38 <- LoadString '%EF%BF'
+v39 <- LoadString '%F7BFBF'
+v40 <- LoadString '%FE'
+v41 <- LoadString '%FF'
+v42 <- LoadString '%FE%FE%FF%FF'
+v43 <- LoadString '%C0%AF'
+v44 <- LoadString '%E0%9F%BF'
+v45 <- LoadString '%F0%8F%BF%BF'
+v46 <- LoadString '%C0%80'
+v47 <- LoadString '%E0%80%80'
+v48 <- CreateArray [v32, v33, v34, v35, v36, v37, v38, v39, v40, v41, v42, v43, v44, v45, v46, v47]
+v49 <- CreateNamedVariable 'kIllegalEncoded', 'var', v48
+v50 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v51 <- LoadInteger '0'
+    BeginForLoopCondition -> v52
+        v53 <- GetProperty v31, 'length'
+        v54 <- Compare v52, '<', v53
+    BeginForLoopAfterthought v54 -> v55
+        v56 <- UnaryOperation v55, '++'
+    BeginForLoopBody -> v57
+        v58 <- GetComputedProperty v31, v57
+        v59 <- GetElement v58, '0'
+        v60 <- CreateNamedVariable 'String', 'none'
+        v61 <- CallMethod v60, 'fromCharCode', [v59]
+        v62 <- CreateNamedVariable 'decoded', 'var', v61
+        v63 <- GetComputedProperty v31, v57
+        v64 <- GetElement v63, '1'
+        v65 <- CreateNamedVariable 'encoded', 'var', v64
+        v66 <- CreateNamedVariable 'decodeURI', 'none'
+        v67 <- CallFunction v66, [v65]
+        v68 <- CreateNamedVariable 'encodeURI', 'none'
+        v69 <- CallFunction v68, [v62]
+    EndForLoop
+    BeginForLoopInitializer
+        v70 <- LoadInteger '0'
+    BeginForLoopCondition -> v71
+        v72 <- GetProperty v49, 'length'
+        v73 <- Compare v71, '<', v72
+    BeginForLoopAfterthought v73 -> v74
+        v75 <- UnaryOperation v74, '++'
+    BeginForLoopBody -> v76
+        v77 <- GetComputedProperty v49, v76
+        v78 <- CreateNamedVariable 'value', 'var', v77
+        v79 <- LoadBoolean 'false'
+        v80 <- CreateNamedVariable 'exception', 'var', v79
+        BeginTry
+            v81 <- CreateNamedVariable 'decodeURI', 'none'
+            v82 <- CallFunction v81, [v78]
+        BeginCatch -> v83
+            v84 <- LoadBoolean 'true'
+            Reassign v80, v84
+            v85 <- CreateNamedVariable 'URIError', 'none'
+        EndTryCatch
+    EndForLoop
+EndPlainFunction
+v86 <- CallFunction v50, []
+
+
+var kLegalPairs = [[0,"%00"],[1,"%01"],[127,"%7F"],[128,"%C2%80"],[129,"%C2%81"],[2047,"%DF%BF"],[2048,"%E0%A0%80"],[2049,"%E0%A0%81"],[55295,"%ED%9F%BF"],[65535,"%EF%BF%BF"]];
+var kIllegalEncoded = ["%80","%BF","%80%BF","%80%BF%80","%C0%22","%DF","%EF%BF","%F7BFBF","%FE","%FF","%FE%FE%FF%FF","%C0%AF","%E0%9F%BF","%F0%8F%BF%BF","%C0%80","%E0%80%80"];
+function run() {
+    for (let i52 = 0; i52 < kLegalPairs.length; i52++) {
+        var decoded = String.fromCharCode(kLegalPairs[i52][0]);
+        var encoded = kLegalPairs[i52][1];
+        decodeURI(encoded);
+        encodeURI(decoded);
+    }
+    for (let i71 = 0; i71 < kIllegalEncoded.length; i71++) {
+        var value = kIllegalEncoded[i71];
+        var exception = false;
+        try {
+            decodeURI(value);
+        } catch(e83) {
+            exception = true;
+        }
+    }
+}
+run();
+
+FuzzIL program written to corpus/regress-244.fzil

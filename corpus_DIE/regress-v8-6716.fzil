@@ -1,0 +1,17 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '16'
+v3 <- BinaryOperation v1, '**', v2
+v4 <- CreateNamedVariable 'Array', 'none'
+v5 <- CallFunction v4, [v3]
+v6 <- CreateNamedVariable 'a', 'var', v5
+v7 <- CallMethodWithSpread v0, 'bind', [...v6]
+
+
+function f() {
+}
+var a = Array(2 ** 16);
+f.bind(...a);
+
+FuzzIL program written to corpus/regress-v8-6716.fzil

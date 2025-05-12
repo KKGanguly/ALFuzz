@@ -1,0 +1,70 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `eval` -> v1
+            v2 <- LoadInteger '1'
+            Return v2
+        EndObjectLiteralMethod
+        BeginObjectLiteralMethod `arguments` -> v3
+            v4 <- LoadInteger '2'
+            Return v4
+        EndObjectLiteralMethod
+    v5 <- EndObjectLiteral
+    v6 <- CreateNamedVariable 'o', 'var', v5
+    v7 <- LoadInteger '1'
+    v8 <- CallMethod v6, 'eval', []
+    v9 <- LoadInteger '2'
+    v10 <- CallMethod v6, 'arguments', []
+EndPlainFunction
+v11 <- CallFunction v0, []
+v12 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `eval` -> v13
+            v14 <- LoadInteger '1'
+            Return v14
+        EndObjectLiteralMethod
+        BeginObjectLiteralMethod `arguments` -> v15
+            v16 <- LoadInteger '2'
+            Return v16
+        EndObjectLiteralMethod
+    v17 <- EndObjectLiteral
+    v18 <- CreateNamedVariable 'o', 'var', v17
+    v19 <- LoadInteger '1'
+    v20 <- CallMethod v18, 'eval', []
+    v21 <- LoadInteger '2'
+    v22 <- CallMethod v18, 'arguments', []
+EndPlainFunction
+v23 <- CallFunction v12, []
+
+
+function TestSloppyMode() {
+    const v5 = {
+        eval() {
+            return 1;
+        },
+        arguments() {
+            return 2;
+        },
+    };
+    var o = v5;
+    o.eval();
+    o.arguments();
+}
+TestSloppyMode();
+function TestStrictMode() {
+    'use strict';
+    const v17 = {
+        eval() {
+            return 1;
+        },
+        arguments() {
+            return 2;
+        },
+    };
+    var o = v17;
+    o.eval();
+    o.arguments();
+}
+TestStrictMode();
+
+FuzzIL program written to corpus/method-name-eval-arguments.fzil

@@ -1,0 +1,69 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- CreateNamedVariable 'Int8Array', 'none'
+v2 <- CreateNamedVariable 'Uint16Array', 'none'
+v3 <- CreateNamedVariable 'Int16Array', 'none'
+v4 <- CreateNamedVariable 'Uint32Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v7 <- CreateNamedVariable 'Float32Array', 'none'
+v8 <- CreateNamedVariable 'Float64Array', 'none'
+v9 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8]
+v10 <- CreateNamedVariable 'typedArrayConstructors', 'var', v9
+BeginForOfLoop v10 -> v11
+    v12 <- LoadInteger '1'
+    v13 <- LoadInteger '2'
+    v14 <- LoadInteger '3'
+    v15 <- CreateArray [v12, v13, v14]
+    v16 <- Construct v11, [v15]
+    v17 <- CreateNamedVariable 'ta', 'let', v16
+    v18 <- CreateNamedVariable 'Symbol', 'none'
+    v19 <- GetProperty v18, 'iterator'
+    v20 <- CallComputedMethod v17, v19, []
+    v21 <- CreateNamedVariable 'it', 'let', v20
+    v22 <- GetProperty v21, '__proto__'
+    v23 <- LoadString 'next'
+    v24 <- GetComputedProperty v22, v23
+    v25 <- CreateNamedVariable 'original_next', 'let', v24
+    v26 <- GetProperty v21, '__proto__'
+    v27 <- LoadString 'next'
+    v28 <- BeginPlainFunction -> 
+        v29 <- LoadUndefined
+        v30 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `value`, v29
+            ObjectLiteralAddProperty `done`, v30
+        v31 <- EndObjectLiteral
+        Return v31
+    EndPlainFunction
+    v32 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v28
+        ObjectLiteralAddProperty `configurable`, v32
+    v33 <- EndObjectLiteral
+    v34 <- CreateNamedVariable 'Object', 'none'
+    v35 <- CallMethod v34, 'defineProperty', [v26, v27, v33]
+    v36 <- LoadInteger '0'
+    v37 <- CallMethod v11, 'from', [v17]
+    v38 <- GetProperty v37, 'length'
+    v39 <- GetProperty v21, '__proto__'
+    v40 <- LoadString 'next'
+    v41 <- CallMethod v34, 'defineProperty', [v39, v40, v25]
+EndForOfLoop
+
+
+var typedArrayConstructors = [Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,Uint8ClampedArray,Float32Array,Float64Array];
+for (const v11 of typedArrayConstructors) {
+    const v16 = new v11([1,2,3]);
+    let ta = v16;
+    let it = ta[Symbol.iterator]();
+    let original_next = it.__proto__["next"];
+    const v26 = it.__proto__;
+    function f28() {
+        return { value: undefined, done: true };
+    }
+    Object.defineProperty(v26, "next", { value: f28, configurable: true });
+    v11.from(ta).length;
+    Object.defineProperty(it.__proto__, "next", original_next);
+}
+
+FuzzIL program written to corpus/typedarray-from-next-overridden.fzil

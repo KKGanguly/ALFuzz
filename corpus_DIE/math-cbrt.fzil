@@ -1,0 +1,124 @@
+v0 <- CreateNamedVariable 'NaN', 'none'
+v1 <- CreateNamedVariable 'Math', 'none'
+v2 <- CallMethod v1, 'cbrt', [v0]
+v3 <- CreateNamedVariable 'isNaN', 'none'
+v4 <- CallFunction v3, [v2]
+v5 <- BeginPlainFunction -> 
+EndPlainFunction
+v6 <- CallMethod v1, 'cbrt', [v5]
+v7 <- CallFunction v3, [v6]
+v8 <- BeginPlainFunction -> 
+    Return v0
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v8
+v9 <- EndObjectLiteral
+v10 <- CallMethod v1, 'cbrt', [v9]
+v11 <- CallFunction v3, [v10]
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadString 'abc'
+    Return v13
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v12
+v14 <- EndObjectLiteral
+v15 <- CallMethod v1, 'cbrt', [v14]
+v16 <- CallFunction v3, [v15]
+v17 <- LoadString 'Infinity'
+v18 <- LoadInteger '1'
+v19 <- LoadInteger '0'
+v20 <- CallMethod v1, 'cbrt', [v19]
+v21 <- BinaryOperation v18, '/', v20
+v22 <- CreateNamedVariable 'String', 'none'
+v23 <- CallFunction v22, [v21]
+v24 <- LoadString '-Infinity'
+v25 <- LoadInteger '1'
+v26 <- LoadInteger '0'
+v27 <- UnaryOperation '-', v26
+v28 <- CallMethod v1, 'cbrt', [v27]
+v29 <- BinaryOperation v25, '/', v28
+v30 <- CallFunction v22, [v29]
+v31 <- LoadString 'Infinity'
+v32 <- CreateNamedVariable 'Infinity', 'none'
+v33 <- CallMethod v1, 'cbrt', [v32]
+v34 <- CallFunction v22, [v33]
+v35 <- LoadString '-Infinity'
+v36 <- UnaryOperation '-', v32
+v37 <- CallMethod v1, 'cbrt', [v36]
+v38 <- CallFunction v22, [v37]
+BeginForLoopInitializer
+    v39 <- LoadFloat '1e-100'
+BeginForLoopCondition -> v40
+    v41 <- LoadFloat '1e+100'
+    v42 <- Compare v40, '<', v41
+BeginForLoopAfterthought v42 -> v43
+    v44 <- GetProperty v1, 'PI'
+    Update v43, '*', v44
+BeginForLoopBody -> v45
+    v46 <- BinaryOperation v45, '*', v45
+    v47 <- BinaryOperation v46, '*', v45
+    v48 <- CallMethod v1, 'cbrt', [v47]
+    v49 <- LoadFloat '1e-15'
+    v50 <- BinaryOperation v45, '*', v49
+EndForLoop
+BeginForLoopInitializer
+    v51 <- LoadFloat '1e-100'
+    v52 <- UnaryOperation '-', v51
+BeginForLoopCondition -> v53
+    v54 <- LoadFloat '1e+100'
+    v55 <- UnaryOperation '-', v54
+    v56 <- Compare v53, '>', v55
+BeginForLoopAfterthought v56 -> v57
+    v58 <- GetProperty v1, 'E'
+    Update v57, '*', v58
+BeginForLoopBody -> v59
+    v60 <- BinaryOperation v59, '*', v59
+    v61 <- BinaryOperation v60, '*', v59
+    v62 <- CallMethod v1, 'cbrt', [v61]
+    v63 <- UnaryOperation '-', v59
+    v64 <- LoadFloat '1e-15'
+    v65 <- BinaryOperation v63, '*', v64
+EndForLoop
+BeginForLoopInitializer
+    v66 <- LoadInteger '2'
+BeginForLoopCondition -> v67
+    v68 <- LoadInteger '10000'
+    v69 <- Compare v67, '<', v68
+BeginForLoopAfterthought v69 -> v70
+    v71 <- UnaryOperation v70, '++'
+BeginForLoopBody -> v72
+    v73 <- BinaryOperation v72, '*', v72
+    v74 <- BinaryOperation v73, '*', v72
+    v75 <- CallMethod v1, 'cbrt', [v74]
+EndForLoop
+
+
+isNaN(Math.cbrt(NaN));
+function f5() {
+}
+isNaN(Math.cbrt(f5));
+function f8() {
+    return NaN;
+}
+isNaN(Math.cbrt({ toString: f8 }));
+function f12() {
+    return "abc";
+}
+isNaN(Math.cbrt({ valueOf: f12 }));
+String(1 / Math.cbrt(0));
+String(1 / Math.cbrt(-0));
+String(Math.cbrt(Infinity));
+String(Math.cbrt(-Infinity));
+for (let i40 = 1e-100; i40 < 1e+100; i40 *= Math.PI) {
+    Math.cbrt((i40 * i40) * i40);
+    i40 * 1e-15;
+}
+for (let i53 = -1e-100; i53 > -1e+100; i53 *= Math.E) {
+    Math.cbrt((i53 * i53) * i53);
+    -i53 * 1e-15;
+}
+for (let i67 = 2; i67 < 10000; i67++) {
+    Math.cbrt((i67 * i67) * i67);
+}
+
+FuzzIL program written to corpus/math-cbrt.fzil

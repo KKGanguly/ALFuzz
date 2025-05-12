@@ -1,0 +1,56 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'y', 'var', v2
+    BeginForLoopInitializer
+        v4 <- LoadInteger '0'
+    BeginForLoopCondition -> v5
+        v6 <- LoadInteger '10'
+        v7 <- Compare v5, '<', v6
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation v8, '++'
+    BeginForLoopBody -> v10
+        v11 <- LoadInteger '5'
+        v12 <- Compare v10, '>', v11
+        BeginIf v12
+            v13 <- BinaryOperation v3, '+', v1
+            Reassign v3, v13
+            Break
+        EndIf
+    EndForLoop
+    v14 <- CreateNamedVariable 'x', 'none'
+    v15 <- BinaryOperation v3, '+', v14
+    Return v15
+EndPlainFunction
+BeginForLoopInitializer
+    v16 <- LoadInteger '0'
+BeginForLoopCondition -> v17
+    v18 <- LoadInteger '100000'
+    v19 <- Compare v17, '<', v18
+BeginForLoopAfterthought v19 -> v20
+    v21 <- UnaryOperation v20, '++'
+BeginForLoopBody -> v22
+    v23 <- LoadInteger '42'
+    v24 <- CallFunction v0, [v23]
+EndForLoop
+v25 <- LoadString 'foo'
+v26 <- CallFunction v0, [v25]
+v27 <- CreateNamedVariable 'result', 'var', v26
+v28 <- LoadString '0foo6'
+
+
+function f(a1) {
+    var y = 0;
+    for (let i5 = 0; i5 < 10; i5++) {
+        if (i5 > 5) {
+            y = y + a1;
+            break;
+        }
+    }
+    return y + x;
+}
+for (let i17 = 0; i17 < 100000; i17++) {
+    f(42);
+}
+var result = f("foo");
+
+FuzzIL program written to corpus/regress-4.fzil

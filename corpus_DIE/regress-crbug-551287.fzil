@@ -1,0 +1,36 @@
+v0 <- BeginPlainFunction -> 
+    BeginDoWhileLoopBody
+    BeginDoWhileLoopHeader
+        v1 <- LoadBoolean 'true'
+    EndDoWhileLoop v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadInteger '1'
+    v5 <- CallFunction v0, []
+    BeginSwitch v3
+        BeginSwitchCase v4
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v5
+            Return
+        EndSwitchCase fallsThrough
+    EndSwitch
+EndPlainFunction
+v6 <- LoadInteger '1'
+v7 <- CallFunction v2, [v6]
+
+
+function f() {
+    do {
+    } while (true)
+}
+function boom(a3) {
+    const v5 = f();
+    switch (a3) {
+        case 1:
+        case v5:
+            return;
+    }
+}
+boom(1);
+
+FuzzIL program written to corpus/regress-crbug-551287.fzil

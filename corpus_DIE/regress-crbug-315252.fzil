@@ -1,0 +1,73 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- LoadThis
+    SetProperty v4, 'a', v1
+    v5 <- LoadThis
+    SetProperty v5, 'b', v2
+    v6 <- LoadThis
+    SetProperty v6, 'c', v3
+EndPlainFunction
+v7 <- LoadInteger '1'
+v8 <- LoadInteger '2'
+v9 <- LoadFloat '3.5'
+v10 <- Construct v0, [v7, v8, v9]
+v11 <- CreateNamedVariable 'o3', 'var', v10
+v12 <- LoadInteger '1'
+v13 <- LoadFloat '2.5'
+v14 <- LoadInteger '3'
+v15 <- Construct v0, [v12, v13, v14]
+v16 <- CreateNamedVariable 'o4', 'var', v15
+v17 <- LoadFloat '1.5'
+v18 <- LoadInteger '2'
+v19 <- LoadInteger '3'
+v20 <- Construct v0, [v17, v18, v19]
+v21 <- CreateNamedVariable 'o1', 'var', v20
+v22 <- LoadFloat '1.5'
+v23 <- LoadInteger '2'
+v24 <- LoadInteger '3'
+v25 <- Construct v0, [v22, v23, v24]
+v26 <- CreateNamedVariable 'o2', 'var', v25
+v27 <- BeginPlainFunction -> v28
+    v29 <- GetProperty v28, 'a'
+    Return v29
+EndPlainFunction
+v30 <- CallFunction v27, [v16]
+v31 <- CallFunction v27, [v21]
+v32 <- CallFunction v27, [v26]
+v33 <- BeginPlainFunction -> v34
+    v35 <- LoadInteger '1'
+    SetProperty v34, 'd', v35
+EndPlainFunction
+v36 <- CallFunction v33, [v16]
+v37 <- CallFunction v33, [v21]
+v38 <- CallFunction v33, [v26]
+v39 <- CallFunction v33, [v11]
+
+
+function f(a1, a2, a3) {
+    this.a = a1;
+    this.b = a2;
+    this.c = a3;
+}
+const v10 = new f(1, 2, 3.5);
+var o3 = v10;
+const v15 = new f(1, 2.5, 3);
+var o4 = v15;
+const v20 = new f(1.5, 2, 3);
+var o1 = v20;
+const v25 = new f(1.5, 2, 3);
+var o2 = v25;
+function migrate(a28) {
+    return a28.a;
+}
+migrate(o4);
+migrate(o1);
+migrate(o2);
+function store_transition(a34) {
+    a34.d = 1;
+}
+store_transition(o4);
+store_transition(o1);
+store_transition(o2);
+store_transition(o3);
+
+FuzzIL program written to corpus/regress-crbug-315252.fzil

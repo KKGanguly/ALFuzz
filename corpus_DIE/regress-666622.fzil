@@ -1,0 +1,68 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- Construct v1, []
+    v3 <- CreateNamedVariable 'array', 'var', v2
+    v4 <- CallMethod v3, 'entries', []
+    v5 <- CreateNamedVariable 'it', 'var', v4
+    v6 <- CallMethod v5, 'next', []
+EndPlainFunction
+v7 <- BeginPlainFunction -> 
+    v8 <- CreateNamedVariable 'Uint8Array', 'none'
+    v9 <- Construct v8, []
+    v10 <- CreateNamedVariable 'array', 'var', v9
+    v11 <- CallMethod v10, 'entries', []
+    v12 <- CreateNamedVariable 'it', 'var', v11
+    v13 <- CallMethod v12, 'next', []
+EndPlainFunction
+v14 <- BeginPlainFunction -> 
+    v15 <- CallFunction v0, []
+    BeginTry
+    BeginCatch -> v16
+    EndTryCatch
+EndPlainFunction
+v17 <- CallFunction v14, []
+v18 <- CallFunction v14, []
+v19 <- CallFunction v14, []
+v20 <- BeginPlainFunction -> 
+    v21 <- CallFunction v7, []
+    BeginTry
+    BeginCatch -> v22
+    EndTryCatch
+EndPlainFunction
+v23 <- CallFunction v20, []
+v24 <- CallFunction v20, []
+v25 <- CallFunction v20, []
+
+
+function iterateArray() {
+    const v2 = new Array();
+    var array = v2;
+    var it = array.entries();
+    it.next();
+}
+function iterateTypedArray() {
+    const v9 = new Uint8Array();
+    var array = v9;
+    var it = array.entries();
+    it.next();
+}
+function testArray() {
+    iterateArray();
+    try {
+    } catch(e16) {
+    }
+}
+testArray();
+testArray();
+testArray();
+function testTypedArray() {
+    iterateTypedArray();
+    try {
+    } catch(e22) {
+    }
+}
+testTypedArray();
+testTypedArray();
+testTypedArray();
+
+FuzzIL program written to corpus/regress-666622.fzil

@@ -1,0 +1,294 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- LoadInteger '42'
+SetProperty v1, 'x', v2
+v3 <- LoadString '0'
+v4 <- BeginPlainFunction -> 
+    v5 <- GetProperty v1, 'x'
+    Return v5
+EndPlainFunction
+v6 <- CallMethod v1, '__defineGetter__', [v3, v4]
+v7 <- GetProperty v1, 'x'
+v8 <- GetElement v1, '0'
+v9 <- GetProperty v1, 'x'
+v10 <- LoadString '0'
+v11 <- CallMethod v1, '__lookupGetter__', [v10]
+v12 <- CallFunction v11, []
+v13 <- LoadString '0'
+v14 <- BeginPlainFunction -> v15
+    SetProperty v1, 'x', v15
+EndPlainFunction
+v16 <- CallMethod v1, '__defineSetter__', [v13, v14]
+v17 <- GetProperty v1, 'x'
+v18 <- GetElement v1, '0'
+v19 <- GetProperty v1, 'x'
+v20 <- LoadString '0'
+v21 <- CallMethod v1, '__lookupGetter__', [v20]
+v22 <- CallFunction v21, []
+v23 <- LoadInteger '21'
+SetElement v1, '0', v23
+v24 <- LoadInteger '21'
+v25 <- GetProperty v1, 'x'
+v26 <- LoadInteger '7'
+v27 <- LoadInteger '0'
+v28 <- CallMethod v1, '__lookupSetter__', [v27]
+v29 <- CallFunction v28, [v26]
+v30 <- LoadInteger '7'
+v31 <- GetProperty v1, 'x'
+v32 <- BeginPlainFunction -> v33, v34
+    v35 <- LoadThis
+    SetProperty v35, 'x', v33
+    v36 <- LoadThis
+    SetProperty v36, 'y', v34
+EndPlainFunction
+v37 <- LoadString '0'
+v38 <- BeginPlainFunction -> 
+    v39 <- LoadThis
+    v40 <- GetProperty v39, 'x'
+    Return v40
+EndPlainFunction
+v41 <- GetProperty v32, 'prototype'
+v42 <- CallMethod v41, '__defineGetter__', [v37, v38]
+v43 <- LoadString '1'
+v44 <- BeginPlainFunction -> 
+    v45 <- LoadThis
+    v46 <- GetProperty v45, 'y'
+    Return v46
+EndPlainFunction
+v47 <- GetProperty v32, 'prototype'
+v48 <- CallMethod v47, '__defineGetter__', [v43, v44]
+v49 <- LoadString '0'
+v50 <- BeginPlainFunction -> v51
+    v52 <- LoadThis
+    SetProperty v52, 'x', v51
+EndPlainFunction
+v53 <- GetProperty v32, 'prototype'
+v54 <- CallMethod v53, '__defineSetter__', [v49, v50]
+v55 <- LoadString '1'
+v56 <- BeginPlainFunction -> v57
+    v58 <- LoadThis
+    SetProperty v58, 'y', v57
+EndPlainFunction
+v59 <- GetProperty v32, 'prototype'
+v60 <- CallMethod v59, '__defineSetter__', [v55, v56]
+v61 <- LoadInteger '2'
+v62 <- LoadInteger '3'
+v63 <- Construct v32, [v61, v62]
+v64 <- CreateNamedVariable 'p', 'var', v63
+v65 <- LoadInteger '2'
+v66 <- GetElement v64, '0'
+v67 <- LoadInteger '3'
+v68 <- GetElement v64, '1'
+v69 <- LoadInteger '7'
+SetProperty v64, 'x', v69
+v70 <- LoadInteger '8'
+SetElement v64, '1', v70
+v71 <- LoadInteger '7'
+v72 <- GetElement v64, '0'
+v73 <- LoadInteger '7'
+v74 <- GetProperty v64, 'x'
+v75 <- LoadInteger '8'
+v76 <- GetElement v64, '1'
+v77 <- LoadInteger '8'
+v78 <- GetProperty v64, 'y'
+BeginObjectLiteral
+v79 <- EndObjectLiteral
+v80 <- CreateNamedVariable 'expected', 'var', v79
+BeginObjectLiteral
+v81 <- EndObjectLiteral
+v82 <- CreateNamedVariable 'actual', 'var', v81
+BeginForLoopInitializer
+    v83 <- LoadInteger '0'
+BeginForLoopCondition -> v84
+    v85 <- LoadInteger '10'
+    v86 <- Compare v84, '<', v85
+BeginForLoopAfterthought v86 -> v87
+    v88 <- UnaryOperation v87, '++'
+BeginForLoopBody -> v89
+    SetComputedProperty v82, v89, v89
+    SetComputedProperty v80, v89, v89
+EndForLoop
+v90 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v91 <- LoadInteger '0'
+    BeginForLoopCondition -> v92
+        v93 <- LoadInteger '10'
+        v94 <- Compare v92, '<', v93
+    BeginForLoopAfterthought v94 -> v95
+        v96 <- UnaryOperation v95, '++'
+    BeginForLoopBody -> v97
+        v98 <- GetComputedProperty v80, v97
+        v99 <- GetComputedProperty v82, v97
+    EndForLoop
+EndPlainFunction
+v100 <- LoadInteger '1'
+v101 <- UnaryOperation '-', v100
+SetElement v82, '1000000', v101
+v102 <- CallFunction v90, []
+v103 <- CallFunction v90, []
+v104 <- LoadString '0'
+v105 <- BeginPlainFunction -> 
+    v106 <- GetElement v80, '0'
+    Return v106
+EndPlainFunction
+v107 <- CallMethod v82, '__defineGetter__', [v104, v105]
+v108 <- LoadInteger '42'
+SetElement v80, '0', v108
+v109 <- CallFunction v90, []
+v110 <- LoadInteger '111'
+SetElement v80, '0', v110
+v111 <- CallFunction v90, []
+BeginObjectLiteral
+v112 <- EndObjectLiteral
+v113 <- CreateNamedVariable 'q', 'var', v112
+v114 <- LoadString '0'
+v115 <- BeginPlainFunction -> 
+    v116 <- LoadInteger '42'
+    Return v116
+EndPlainFunction
+v117 <- CallMethod v113, '__defineGetter__', [v114, v115]
+v118 <- LoadString 'q[0] = 7'
+BeginObjectLiteral
+v119 <- EndObjectLiteral
+v120 <- CreateNamedVariable 'q1', 'var', v119
+v121 <- LoadString '0'
+v122 <- BeginPlainFunction -> 
+    v123 <- LoadInteger '17'
+    SetProperty v120, 'b', v123
+EndPlainFunction
+v124 <- CallMethod v120, '__defineSetter__', [v121, v122]
+v125 <- GetElement v120, '0'
+v126 <- LoadUndefined
+v127 <- LoadInteger '3'
+SetElement v120, '0', v127
+v128 <- GetElement v120, '0'
+v129 <- LoadUndefined
+v130 <- GetProperty v120, 'b'
+v131 <- LoadInteger '17'
+v132 <- BeginPlainFunction -> 
+EndPlainFunction
+v133 <- CreateNamedVariable 'a', 'none'
+Reassign v133, v132
+v134 <- LoadString '0'
+v135 <- BeginPlainFunction -> 
+EndPlainFunction
+v136 <- LoadThis
+v137 <- CallMethod v136, '__defineSetter__', [v134, v135]
+v138 <- LoadString ''
+v139 <- CreateNamedVariable 'a', 'none'
+Update v139, '|', v138
+BeginIf v138
+EndIf
+v140 <- LoadString 'this[a].__parent__'
+v141 <- CreateNamedVariable 'a', 'none'
+v142 <- LoadInteger '0'
+v143 <- LoadThis
+v144 <- GetComputedProperty v143, v141
+v145 <- LoadUndefined
+
+
+var o = {};
+o.x = 42;
+function f4() {
+    return o.x;
+}
+o.__defineGetter__("0", f4);
+o.x;
+o[0];
+o.x;
+const t5 = o.__lookupGetter__("0");
+t5();
+function f14(a15) {
+    o.x = a15;
+}
+o.__defineSetter__("0", f14);
+o.x;
+o[0];
+o.x;
+const t14 = o.__lookupGetter__("0");
+t14();
+o[0] = 21;
+o.x;
+const t21 = o.__lookupSetter__(0);
+t21(7);
+o.x;
+function Pair(a33, a34) {
+    this.x = a33;
+    this.y = a34;
+}
+function f38() {
+    return this.x;
+}
+Pair.prototype.__defineGetter__("0", f38);
+function f44() {
+    return this.y;
+}
+Pair.prototype.__defineGetter__("1", f44);
+function f50(a51) {
+    this.x = a51;
+}
+Pair.prototype.__defineSetter__("0", f50);
+function f56(a57) {
+    this.y = a57;
+}
+Pair.prototype.__defineSetter__("1", f56);
+const v63 = new Pair(2, 3);
+var p = v63;
+p[0];
+p[1];
+p.x = 7;
+p[1] = 8;
+p[0];
+p.x;
+p[1];
+p.y;
+var expected = {};
+var actual = {};
+for (let i84 = 0; i84 < 10; i84++) {
+    actual[i84] = i84;
+    expected[i84] = i84;
+}
+function testArray() {
+    for (let i92 = 0; i92 < 10; i92++) {
+        expected[i92];
+        actual[i92];
+    }
+}
+actual[1000000] = -1;
+testArray();
+testArray();
+function f105() {
+    return expected[0];
+}
+actual.__defineGetter__("0", f105);
+expected[0] = 42;
+testArray();
+expected[0] = 111;
+testArray();
+var q = {};
+function f115() {
+    return 42;
+}
+q.__defineGetter__("0", f115);
+var q1 = {};
+function f122() {
+    q1.b = 17;
+}
+q1.__defineSetter__("0", f122);
+q1[0];
+q1[0] = 3;
+q1[0];
+q1.b;
+function f132() {
+}
+a = f132;
+function f135() {
+}
+this.__defineSetter__("0", f135);
+a |= "";
+if ("") {
+}
+this[a];
+
+FuzzIL program written to corpus/indexed-accessors.fzil

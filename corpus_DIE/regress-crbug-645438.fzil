@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '2147483648'
+    v4 <- LoadInteger '0'
+    v5 <- BinaryOperation v3, '|', v4
+    v6 <- BinaryOperation v2, '-', v5
+    v7 <- LoadInteger '0'
+    v8 <- BinaryOperation v6, '|', v7
+    Reassign v2, v8
+    v9 <- BinaryOperation v1, '/', v2
+    v10 <- LoadInteger '0'
+    v11 <- BinaryOperation v9, '|', v10
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '2147483648'
+v13 <- UnaryOperation '-', v12
+v14 <- CreateNamedVariable 'x', 'var', v13
+v15 <- LoadInteger '2147483647'
+v16 <- CreateNamedVariable 'y', 'var', v15
+v17 <- CallFunction v0, [v14, v16]
+v18 <- CallFunction v0, [v14, v16]
+v19 <- CallFunction v0, [v14, v16]
+
+
+function n(a1, a2) {
+    return (a1 / (a2 = (a2 - (2147483648 | 0)) | 0)) | 0;
+}
+var x = -2147483648;
+var y = 2147483647;
+n(x, y);
+n(x, y);
+n(x, y);
+
+FuzzIL program written to corpus/regress-crbug-645438.fzil

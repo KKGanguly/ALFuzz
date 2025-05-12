@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+    BeginCatch -> v1
+    EndTryCatch
+    BeginForLoopInitializer
+        v2 <- LoadInteger '0'
+    BeginForLoopCondition -> v3
+        v4 <- LoadInteger '10'
+        v5 <- Compare v3, '<', v4
+    BeginForLoopAfterthought v5 -> v6
+        v7 <- UnaryOperation v6, '++'
+    BeginForLoopBody -> v8
+        v9 <- CreateNamedVariable 'gc', 'none'
+        v10 <- CallFunction v9, []
+    EndForLoop
+EndPlainFunction
+v11 <- BeginPlainFunction -> v12
+    v13 <- CreateNamedVariable 'inner', 'none'
+    v14 <- CallFunction v13, [v12]
+EndPlainFunction
+v15 <- BeginPlainFunction -> v16
+    BeginIf v16
+        v17 <- CallFunction v0, []
+    EndIf
+EndPlainFunction
+v18 <- LoadBoolean 'false'
+v19 <- CallFunction v11, [v18]
+v20 <- LoadBoolean 'false'
+v21 <- CallFunction v11, [v20]
+v22 <- LoadBoolean 'true'
+v23 <- CallFunction v11, [v22]
+
+
+function deopt() {
+    try {
+    } catch(e1) {
+    }
+    for (let i3 = 0; i3 < 10; i3++) {
+        gc();
+    }
+}
+function outer(a12) {
+    inner(a12);
+}
+function inner(a16) {
+    if (a16) {
+        deopt();
+    }
+}
+outer(false);
+outer(false);
+outer(true);
+
+FuzzIL program written to corpus/regress-97116.fzil

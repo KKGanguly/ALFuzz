@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadBoolean 'false'
+    v2 <- CreateNamedVariable '__v_6', 'var', v1
+    v3 <- BeginPlainFunction -> v4, v5
+        v6 <- LoadInteger '1'
+        v7 <- Compare v5, '===', v6
+        BeginIf v7
+            v8 <- CreateNamedVariable 'gc', 'none'
+            v9 <- CallFunction v8, []
+            v10 <- LoadInteger '0'
+            v11 <- Compare v4, '===', v10
+            Reassign v2, v11
+        EndIf
+    EndPlainFunction
+    v12 <- LoadFloat '0.1'
+    v13 <- LoadInteger '1'
+    v14 <- CallFunction v3, [v12, v13]
+EndPlainFunction
+v15 <- CallFunction v0, []
+
+
+function f0() {
+    var __v_6 = false;
+    function f(a4, a5) {
+        if (a5 === 1) {
+            gc();
+            __v_6 = a4 === 0;
+        }
+    }
+    f(0.1, 1);
+}
+f0();
+
+FuzzIL program written to corpus/regress-469089.fzil

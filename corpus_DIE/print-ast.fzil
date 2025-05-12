@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '2'
+    v3 <- CreateNamedVariable 'b', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- BinaryOperation v1, '+', v3
+        Return v5
+    EndPlainFunction
+    Return v4
+EndPlainFunction
+v6 <- CallFunction v0, []
+v7 <- CallFunction v6, []
+
+
+function foo(a1) {
+    var b = 2;
+    function bar() {
+        return a1 + b;
+    }
+    return bar;
+}
+const t7 = foo();
+t7();
+
+FuzzIL program written to corpus/print-ast.fzil

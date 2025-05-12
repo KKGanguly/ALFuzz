@@ -1,0 +1,58 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'sentinel', 'var', v0
+v2 <- CreateNamedVariable 'Promise', 'none'
+v3 <- CreateNamedVariable 'Symbol', 'none'
+v4 <- GetProperty v3, 'species'
+v5 <- BeginPlainFunction -> v6
+    v7 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v8 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v9 <- CallFunction v6, [v7, v8]
+    Return v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v5
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'Object', 'none'
+v12 <- CallMethod v11, 'defineProperty', [v2, v4, v10]
+v13 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v14 <- Construct v13, []
+v15 <- CreateNamedVariable 'WebAssembly', 'none'
+v16 <- CallMethod v15, 'instantiate', [v14]
+v17 <- CreateNamedVariable 'promise', 'var', v16
+v18 <- BeginArrowFunction -> v19
+    v20 <- CreateNamedVariable 'print', 'none'
+    v21 <- CallFunction v20, [v19]
+EndArrowFunction
+v22 <- BeginArrowFunction -> v23
+    v24 <- CreateNamedVariable 'print', 'none'
+    v25 <- CallFunction v24, [v23]
+EndArrowFunction
+v26 <- CallMethod v17, 'then', [v18, v22]
+v27 <- CreateNamedVariable 'monkey', 'var', v26
+
+
+var sentinel = {};
+const v4 = Symbol.species;
+function f5(a6) {
+    function f7() {
+    }
+    function f8() {
+    }
+    a6(f7, f8);
+    return sentinel;
+}
+Object.defineProperty(Promise, v4, { value: f5 });
+const v14 = new ArrayBuffer();
+var promise = WebAssembly.instantiate(v14);
+const v18 = (a19) => {
+    print(a19);
+};
+const v22 = (a23) => {
+    print(a23);
+};
+var monkey = promise.then(v18, v22);
+
+FuzzIL program written to corpus/regress-799952.fzil

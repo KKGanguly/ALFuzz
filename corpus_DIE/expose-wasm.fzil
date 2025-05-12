@@ -1,0 +1,14 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- CreateNamedVariable 'WebAssembly', 'none'
+    v2 <- GetProperty v1, 'compile'
+    v3 <- CreateNamedVariable 'x', 'let', v2
+EndArrowFunction
+v4 <- CallFunction v0, []
+
+
+const v0 = () => {
+    let x = WebAssembly.compile;
+};
+v0();
+
+FuzzIL program written to corpus/expose-wasm.fzil

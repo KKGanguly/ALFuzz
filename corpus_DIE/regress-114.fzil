@@ -1,0 +1,43 @@
+v0 <- LoadString 'friedrichstraße 14'
+v1 <- CallMethod v0, 'toUpperCase', []
+v2 <- LoadString 'XXSSSSSSXX'
+v3 <- LoadString 'xxßßßxx'
+v4 <- CallMethod v3, 'toUpperCase', []
+v5 <- LoadString '(SS)'
+v6 <- LoadString '(ß)'
+v7 <- CallMethod v6, 'toUpperCase', []
+v8 <- LoadString 'SS'
+v9 <- LoadString 'ß'
+v10 <- CallMethod v9, 'toUpperCase', []
+v11 <- LoadString 'i̇'
+v12 <- LoadString 'İ'
+v13 <- CallMethod v12, 'toLowerCase', []
+v14 <- LoadString '(i̇)'
+v15 <- LoadString '(İ)'
+v16 <- CallMethod v15, 'toLowerCase', []
+v17 <- LoadString 'xxi̇xx'
+v18 <- LoadString 'XXİXX'
+v19 <- CallMethod v18, 'toLowerCase', []
+v20 <- LoadString 'Ϋ́'
+v21 <- LoadString 'ΰ'
+v22 <- CallMethod v21, 'toUpperCase', []
+v23 <- LoadString '(Ϋ́)'
+v24 <- LoadString '(ΰ)'
+v25 <- CallMethod v24, 'toUpperCase', []
+v26 <- LoadString 'XXΫ́XX'
+v27 <- LoadString 'xxΰxx'
+v28 <- CallMethod v27, 'toUpperCase', []
+
+
+("friedrichstraße 14").toUpperCase();
+("xxßßßxx").toUpperCase();
+("(ß)").toUpperCase();
+("ß").toUpperCase();
+("İ").toLowerCase();
+("(İ)").toLowerCase();
+("XXİXX").toLowerCase();
+("ΰ").toUpperCase();
+("(ΰ)").toUpperCase();
+("xxΰxx").toUpperCase();
+
+FuzzIL program written to corpus/regress-114.fzil

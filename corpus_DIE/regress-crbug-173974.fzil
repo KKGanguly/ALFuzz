@@ -1,0 +1,19 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString ''
+    v2 <- CreateNamedVariable 'count', 'var', v1
+    v3 <- GetElement v2, '0'
+    v4 <- UnaryOperation v3, '--'
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+
+
+function f() {
+    var count = "";
+    let v3 = count[0];
+    v3--;
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-173974.fzil

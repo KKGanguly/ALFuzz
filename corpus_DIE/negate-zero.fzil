@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- Compare v1, '==', v2
+    v4 <- LoadInteger '1'
+    v5 <- BinaryOperation v4, '/', v1
+    v6 <- CreateNamedVariable 'y', 'var', v5
+    v7 <- CreateNamedVariable 'isFinite', 'none'
+    v8 <- CallFunction v7, [v6]
+    v9 <- LoadInteger '0'
+    v10 <- Compare v6, '<', v9
+    Return v10
+EndPlainFunction
+v11 <- LoadInteger '0'
+v12 <- CreateNamedVariable 'pz', 'var', v11
+v13 <- LoadInteger '0'
+v14 <- UnaryOperation '-', v13
+v15 <- CreateNamedVariable 'nz', 'var', v14
+v16 <- CallFunction v0, [v15]
+v17 <- LoadString '-0'
+v18 <- UnaryOperation '-', v15
+v19 <- CallFunction v0, [v18]
+v20 <- LoadString '-(-0)'
+v21 <- CallFunction v0, [v12]
+v22 <- LoadString '0'
+v23 <- UnaryOperation '-', v12
+v24 <- CallFunction v0, [v23]
+v25 <- LoadString '-(0)'
+
+
+function IsNegativeZero(a1) {
+    a1 == 0;
+    var y = 1 / a1;
+    isFinite(y);
+    return y < 0;
+}
+var pz = 0;
+var nz = -0;
+IsNegativeZero(nz);
+IsNegativeZero(-nz);
+IsNegativeZero(pz);
+IsNegativeZero(-pz);
+
+FuzzIL program written to corpus/negate-zero.fzil

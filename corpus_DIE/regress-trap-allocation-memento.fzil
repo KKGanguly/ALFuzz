@@ -1,0 +1,88 @@
+v0 <- LoadString 'fast smi only elements'
+v1 <- LoadString 'fast elements'
+v2 <- LoadString 'fast double elements'
+v3 <- LoadString 'dictionary elements'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `fast_smi_only`, v0
+    ObjectLiteralAddProperty `fast`, v1
+    ObjectLiteralAddProperty `fast_double`, v2
+    ObjectLiteralAddProperty `dictionary`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'elements_kind', 'var', v4
+v6 <- BeginPlainFunction -> v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9, v10, v11
+    v12 <- CallFunction v6, [v10]
+EndPlainFunction
+v13 <- BeginPlainFunction -> 
+    v14 <- BeginPlainFunction -> 
+        v15 <- CreateNamedVariable 'Array', 'none'
+        v16 <- Construct v15, []
+        Return v16
+    EndPlainFunction
+    v17 <- BeginPlainFunction -> 
+        v18 <- CreateNamedVariable 'Array', 'none'
+        v19 <- Construct v18, []
+        Return v19
+    EndPlainFunction
+    v20 <- BeginPlainFunction -> 
+        v21 <- CreateNamedVariable 'Array', 'none'
+        v22 <- Construct v21, []
+        Return v22
+    EndPlainFunction
+    v23 <- BeginPlainFunction -> v24, v25
+        SetElement v24, '0', v25
+    EndPlainFunction
+    v26 <- BeginPlainFunction -> v27
+        v28 <- CallFunction v27, []
+        v29 <- CreateNamedVariable 'one', 'var', v28
+        v30 <- GetProperty v5, 'fast_smi_only'
+        v31 <- LoadFloat '1.5'
+        v32 <- CallFunction v23, [v29, v31]
+        v33 <- CallFunction v27, []
+        v34 <- CreateNamedVariable 'two', 'var', v33
+        v35 <- GetProperty v5, 'fast_double'
+    EndPlainFunction
+    v36 <- CallFunction v26, [v14]
+    v37 <- CallFunction v26, [v17]
+    v38 <- CallFunction v26, [v20]
+EndPlainFunction
+v39 <- CallFunction v13, []
+
+
+var elements_kind = { fast_smi_only: "fast smi only elements", fast: "fast elements", fast_double: "fast double elements", dictionary: "dictionary elements" };
+function getKind(a7) {
+}
+function assertKind(a9, a10, a11) {
+    getKind(a10);
+}
+function f13() {
+    function make1() {
+        const v16 = new Array();
+        return v16;
+    }
+    function make2() {
+        const v19 = new Array();
+        return v19;
+    }
+    function make3() {
+        const v22 = new Array();
+        return v22;
+    }
+    function foo(a24, a25) {
+        a24[0] = a25;
+    }
+    function run_test(a27) {
+        var one = a27();
+        elements_kind.fast_smi_only;
+        foo(one, 1.5);
+        var two = a27();
+        elements_kind.fast_double;
+    }
+    run_test(make1);
+    run_test(make2);
+    run_test(make3);
+}
+f13();
+
+FuzzIL program written to corpus/regress-trap-allocation-memento.fzil

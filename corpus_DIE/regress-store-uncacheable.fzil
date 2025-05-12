@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    v2 <- CreateNamedVariable 'o', 'var', v1
+    v3 <- LoadInteger '123'
+    v4 <- LoadString '<abc>'
+    SetComputedProperty v2, v4, v3
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+v7 <- CallFunction v0, []
+v8 <- CallFunction v0, []
+v9 <- CallFunction v0, []
+
+
+function f() {
+    var o = {};
+    o["<abc>"] = 123;
+}
+f();
+f();
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-store-uncacheable.fzil

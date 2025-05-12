@@ -1,0 +1,25 @@
+BeginBlockStatement
+    v0 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v1 <- CreateNamedVariable 'x', 'let', v0
+    BeginForLoopInitializer
+        v2 <- LoadInteger '0'
+    BeginForLoopCondition -> v3
+        v4 <- LoadInteger '1000000'
+        v5 <- Compare v3, '<', v4
+    BeginForLoopAfterthought v5 -> v6
+        v7 <- UnaryOperation v6, '++'
+    BeginForLoopBody -> v8
+    EndForLoop
+EndBlockStatement
+
+
+{
+    function f0() {
+    }
+    let x = f0;
+    for (let i3 = 0; i3 < 1000000; i3++) {
+    }
+}
+
+FuzzIL program written to corpus/regress-4255-1.fzil

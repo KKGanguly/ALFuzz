@@ -1,0 +1,20 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'success', 'let', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- GetProperty v2, 'caller'
+    v4 <- LoadNull
+    v5 <- Compare v3, '===', v4
+    Reassign v1, v5
+EndPlainFunction
+v6 <- CreateNamedVariable 'Promise', 'none'
+v7 <- CallMethod v6, 'resolve', []
+v8 <- CallMethod v7, 'then', [v2]
+
+
+let success = false;
+function f() {
+    success = f.caller === null;
+}
+Promise.resolve().then(f);
+
+FuzzIL program written to corpus/regress-682349.fzil

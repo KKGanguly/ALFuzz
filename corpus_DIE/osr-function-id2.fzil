@@ -1,0 +1,70 @@
+v0 <- BeginPlainFunction -> v1
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '0'
+    v4 <- CreateNamedVariable 'sum', 'var', v3
+    v5 <- CreateNamedVariable 'foo', 'none'
+    v6 <- CallFunction v0, [v5]
+    v7 <- CreateNamedVariable 'r', 'var', v6
+    BeginForLoopInitializer
+        v8 <- LoadInteger '0'
+    BeginForLoopCondition -> v9
+        v10 <- LoadInteger '100000'
+        v11 <- Compare v9, '<', v10
+    BeginForLoopAfterthought v11 -> v12
+        v13 <- UnaryOperation v12, '++'
+    BeginForLoopBody -> v14
+        Update v4, '+', v14
+    EndForLoop
+    v15 <- Compare v5, '==', v7
+    Return v15
+EndPlainFunction
+v16 <- CallFunction v2, []
+v17 <- CreateNamedVariable 'x', 'var', v16
+v18 <- LoadBoolean 'true'
+v19 <- BeginPlainFunction -> 
+    v20 <- LoadInteger '0'
+    v21 <- CreateNamedVariable 'sum', 'var', v20
+    BeginForLoopInitializer
+        v22 <- LoadInteger '0'
+    BeginForLoopCondition -> v23
+        v24 <- LoadInteger '90000'
+        v25 <- Compare v23, '<', v24
+    BeginForLoopAfterthought v25 -> v26
+        v27 <- UnaryOperation v26, '++'
+    BeginForLoopBody -> v28
+        Update v21, '+', v28
+    EndForLoop
+    v29 <- CreateNamedVariable 'bar', 'none'
+    Return v29
+EndPlainFunction
+v30 <- CallFunction v19, []
+v31 <- CreateNamedVariable 'x', 'var', v30
+v32 <- LoadString 'function'
+v33 <- TypeOf v31
+
+
+function id(a1) {
+    return a1;
+}
+function foo() {
+    var sum = 0;
+    var r = id(foo);
+    for (let i9 = 0; i9 < 100000; i9++) {
+        sum += i9;
+    }
+    return foo == r;
+}
+var x = foo();
+function bar() {
+    var sum = 0;
+    for (let i23 = 0; i23 < 90000; i23++) {
+        sum += i23;
+    }
+    return bar;
+}
+var x = bar();
+typeof x;
+
+FuzzIL program written to corpus/osr-function-id2.fzil

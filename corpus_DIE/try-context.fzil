@@ -1,0 +1,248 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'global', 'var', v1
+    v3 <- BeginPlainFunction -> v4
+        v5 <- LoadInteger '23'
+        v6 <- BinaryOperation v4, '+', v5
+        v7 <- CreateNamedVariable 'x', 'var', v6
+        BeginTry
+            v8 <- LoadInteger '42'
+            v9 <- BinaryOperation v4, '+', v8
+            v10 <- CreateNamedVariable 'y', 'let', v9
+            v11 <- BeginPlainFunction -> 
+                v12 <- BinaryOperation v7, '+', v10
+                Return v12
+            EndPlainFunction
+            v13 <- LoadString 'boom!'
+            ThrowException v13
+        BeginCatch -> v14
+            Reassign v2, v7
+        EndTryCatch
+        Return v7
+    EndPlainFunction
+    v15 <- LoadInteger '23'
+    v16 <- LoadInteger '0'
+    v17 <- CallFunction v3, [v16]
+    v18 <- LoadInteger '24'
+    v19 <- LoadInteger '1'
+    v20 <- CallFunction v3, [v19]
+    v21 <- LoadInteger '25'
+    v22 <- LoadInteger '2'
+    v23 <- CallFunction v3, [v22]
+    v24 <- LoadInteger '25'
+EndPlainFunction
+v25 <- CallFunction v0, []
+v26 <- BeginPlainFunction -> 
+    v27 <- LoadInteger '0'
+    v28 <- CreateNamedVariable 'global', 'var', v27
+    v29 <- BeginPlainFunction -> v30
+        v31 <- LoadInteger '23'
+        v32 <- BinaryOperation v30, '+', v31
+        v33 <- CreateNamedVariable 'x', 'var', v32
+        BeginTry
+            v34 <- LoadInteger '42'
+            v35 <- BinaryOperation v30, '+', v34
+            v36 <- CreateNamedVariable 'y', 'let', v35
+            v37 <- BeginPlainFunction -> 
+                v38 <- BinaryOperation v33, '+', v36
+                Return v38
+            EndPlainFunction
+            v39 <- LoadString 'boom!'
+            ThrowException v39
+        BeginFinally
+            Reassign v28, v33
+        EndTryCatch
+        Return v33
+    EndPlainFunction
+    v40 <- BeginPlainFunction -> 
+        v41 <- LoadInteger '0'
+        v42 <- CallFunction v29, [v41]
+    EndPlainFunction
+    v43 <- CallFunction v40, []
+    v44 <- BeginPlainFunction -> 
+        v45 <- LoadInteger '1'
+        v46 <- CallFunction v29, [v45]
+    EndPlainFunction
+    v47 <- CallFunction v44, []
+    v48 <- BeginPlainFunction -> 
+        v49 <- LoadInteger '2'
+        v50 <- CallFunction v29, [v49]
+    EndPlainFunction
+    v51 <- CallFunction v48, []
+    v52 <- LoadInteger '25'
+EndPlainFunction
+v53 <- CallFunction v26, []
+v54 <- BeginPlainFunction -> 
+    v55 <- LoadInteger '0'
+    v56 <- CreateNamedVariable 'global', 'var', v55
+    v57 <- BeginPlainFunction -> v58
+        v59 <- LoadInteger '23'
+        v60 <- BinaryOperation v58, '+', v59
+        v61 <- CreateNamedVariable 'x', 'var', v60
+        BeginTry
+            BeginTry
+                v62 <- LoadString 'boom!'
+                ThrowException v62
+            BeginCatch -> v63
+                v64 <- BeginPlainFunction -> 
+                    v65 <- CreateNamedVariable 'y', 'none'
+                    v66 <- BinaryOperation v61, '+', v65
+                    Return v66
+                EndPlainFunction
+                v67 <- LoadString 'boom!'
+                ThrowException v67
+            EndTryCatch
+        BeginCatch -> v68
+            Reassign v56, v61
+        EndTryCatch
+        Return v61
+    EndPlainFunction
+    v69 <- LoadInteger '23'
+    v70 <- LoadInteger '0'
+    v71 <- CallFunction v57, [v70]
+    v72 <- LoadInteger '24'
+    v73 <- LoadInteger '1'
+    v74 <- CallFunction v57, [v73]
+    v75 <- LoadInteger '25'
+    v76 <- LoadInteger '2'
+    v77 <- CallFunction v57, [v76]
+    v78 <- LoadInteger '25'
+EndPlainFunction
+v79 <- CallFunction v54, []
+v80 <- BeginPlainFunction -> 
+    v81 <- LoadInteger '0'
+    v82 <- CreateNamedVariable 'global', 'var', v81
+    v83 <- BeginPlainFunction -> v84
+        v85 <- LoadInteger '23'
+        v86 <- BinaryOperation v84, '+', v85
+        v87 <- CreateNamedVariable 'x', 'var', v86
+        BeginTry
+            v88 <- LoadInteger '42'
+            v89 <- BinaryOperation v84, '+', v88
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `y`, v89
+            v90 <- EndObjectLiteral
+            BeginWith v90
+                v91 <- BeginPlainFunction -> 
+                    v92 <- CreateNamedVariable 'y', 'none'
+                    v93 <- BinaryOperation v87, '+', v92
+                    Return v93
+                EndPlainFunction
+                v94 <- LoadString 'boom!'
+                ThrowException v94
+            EndWith
+        BeginCatch -> v95
+            Reassign v82, v87
+        EndTryCatch
+        Return v87
+    EndPlainFunction
+    v96 <- LoadInteger '23'
+    v97 <- LoadInteger '0'
+    v98 <- CallFunction v83, [v97]
+    v99 <- LoadInteger '24'
+    v100 <- LoadInteger '1'
+    v101 <- CallFunction v83, [v100]
+    v102 <- LoadInteger '25'
+    v103 <- LoadInteger '2'
+    v104 <- CallFunction v83, [v103]
+    v105 <- LoadInteger '25'
+EndPlainFunction
+v106 <- CallFunction v80, []
+
+
+function TryBlockCatch() {
+    var global = 0;
+    function f(a4) {
+        var x = a4 + 23;
+        try {
+            let y = a4 + 42;
+            function capture() {
+                return x + y;
+            }
+            throw "boom!";
+        } catch(e14) {
+            global = x;
+        }
+        return x;
+    }
+    f(0);
+    f(1);
+    f(2);
+}
+TryBlockCatch();
+function TryBlockFinally() {
+    var global = 0;
+    function f(a30) {
+        var x = a30 + 23;
+        try {
+            let y = a30 + 42;
+            function capture() {
+                return x + y;
+            }
+            throw "boom!";
+        } finally {
+            global = x;
+        }
+        return x;
+    }
+    function f40() {
+        f(0);
+    }
+    f40();
+    function f44() {
+        f(1);
+    }
+    f44();
+    function f48() {
+        f(2);
+    }
+    f48();
+}
+TryBlockFinally();
+function TryCatchCatch() {
+    var global = 0;
+    function f(a58) {
+        var x = a58 + 23;
+        try {
+            try {
+                throw "boom!";
+            } catch(e63) {
+                function capture() {
+                    return x + y;
+                }
+                throw "boom!";
+            }
+        } catch(e68) {
+            global = x;
+        }
+        return x;
+    }
+    f(0);
+    f(1);
+    f(2);
+}
+TryCatchCatch();
+function TryWithCatch() {
+    var global = 0;
+    function f(a84) {
+        var x = a84 + 23;
+        try {
+            const v89 = a84 + 42;
+            with ({ y: v89 }) {
+                function capture() {
+                    return x + y;
+                }
+                throw "boom!";
+            }
+        } catch(e95) {
+            global = x;
+        }
+        return x;
+    }
+    f(0);
+    f(1);
+    f(2);
+}
+TryWithCatch();
+
+FuzzIL program written to corpus/try-context.fzil

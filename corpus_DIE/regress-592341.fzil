@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> v1
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v4 <- CallFunction v3, []
+EndPlainFunction
+v5 <- CallFunction v2, []
+v6 <- BeginPlainFunction -> 
+    v7 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v8 <- CallFunction v7, []
+EndPlainFunction
+v9 <- CallFunction v6, []
+v10 <- BeginPlainFunction -> 
+    v11 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v12 <- CallFunction v11, []
+EndPlainFunction
+v13 <- CallFunction v10, []
+
+
+function id(a1) {
+    return a1;
+}
+function LiteralCompareNullDeopt() {
+    function f() {
+    }
+    f();
+}
+LiteralCompareNullDeopt();
+function LiteralCompareUndefinedDeopt() {
+    function f() {
+    }
+    f();
+}
+LiteralCompareUndefinedDeopt();
+function LiteralCompareTypeofDeopt() {
+    function f() {
+    }
+    f();
+}
+LiteralCompareTypeofDeopt();
+
+FuzzIL program written to corpus/regress-592341.fzil

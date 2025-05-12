@@ -1,0 +1,9 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- CreateTemplateString ['Crashes if OOB read with --print-ast ', ''], [v1]
+
+
+var x;
+`Crashes if OOB read with --print-ast ${x}`;
+
+FuzzIL program written to corpus/regress-crbug-820596.fzil

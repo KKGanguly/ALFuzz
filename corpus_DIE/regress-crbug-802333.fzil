@@ -1,0 +1,42 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginClassDefinition
+        BeginClassInstanceMethod 'method1' -> v2
+        EndClassInstanceMethod
+    EndClassDefinition
+EndPlainFunction
+v3 <- LoadThis
+v4 <- LoadInteger '0'
+v5 <- BeginArrowFunction -> v6
+    Return v6
+EndArrowFunction
+v7 <- CallMethod v5, 'bind', [v3, v4]
+v8 <- CreateNamedVariable 'bound', 'let', v7
+v9 <- BeginPlainFunction -> 
+    v10 <- GetProperty v0, 'prototype'
+    v11 <- CallFunction v8, []
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '0'
+v13 <- CallFunction v9, []
+v14 <- LoadInteger '0'
+v15 <- CallFunction v9, []
+
+
+function deferred_func() {
+    class C1 {
+        method1() {
+        }
+    }
+}
+const v5 = (a6) => {
+    return a6;
+};
+let bound = v5.bind(this, 0);
+function opt() {
+    deferred_func.prototype;
+    return bound();
+}
+opt();
+opt();
+
+FuzzIL program written to corpus/regress-crbug-802333.fzil

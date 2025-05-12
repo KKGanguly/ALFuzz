@@ -1,0 +1,33 @@
+v0 <- LoadInteger '1073741824'
+v1 <- CreateNamedVariable 'large_int', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- LoadInteger '0'
+    Update v3, '+', v5
+    v6 <- LoadInteger '3'
+    v7 <- Compare v6, '!=', v3
+    BeginIf v7
+        v8 <- LoadInteger '0'
+        Update v3, '+', v8
+    EndIf
+EndPlainFunction
+v9 <- LoadInteger '1'
+v10 <- LoadInteger '1'
+v11 <- CallFunction v2, [v9, v10]
+v12 <- LoadInteger '3'
+v13 <- LoadInteger '3'
+v14 <- CallFunction v2, [v12, v13]
+v15 <- CallFunction v2, [v1, v1]
+
+
+var large_int = 1073741824;
+function foo(a3, a4) {
+    a3 += 0;
+    if (3 != a3) {
+        a3 += 0;
+    }
+}
+foo(1, 1);
+foo(3, 3);
+foo(large_int, large_int);
+
+FuzzIL program written to corpus/regress-2537.fzil

@@ -1,0 +1,146 @@
+v0 <- BeginPlainFunction -> 
+    Return
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadInteger '3'
+    v3 <- CreateNamedVariable 'x1', 'var', v2
+    v4 <- LoadInteger '3'
+    v5 <- CreateNamedVariable 'x2', 'var', v4
+    v6 <- LoadInteger '3'
+    v7 <- CreateNamedVariable 'x3', 'var', v6
+    v8 <- LoadInteger '3'
+    v9 <- CreateNamedVariable 'x4', 'var', v8
+    v10 <- LoadInteger '3'
+    v11 <- CreateNamedVariable 'x5', 'var', v10
+    v12 <- LoadInteger '3'
+    v13 <- CreateNamedVariable 'x6', 'var', v12
+    v14 <- LoadInteger '3'
+    v15 <- CreateNamedVariable 'x7', 'var', v14
+    v16 <- LoadInteger '3'
+    v17 <- CreateNamedVariable 'x8', 'var', v16
+    v18 <- LoadInteger '3'
+    v19 <- CreateNamedVariable 'x9', 'var', v18
+    v20 <- LoadInteger '3'
+    v21 <- CreateNamedVariable 'x10', 'var', v20
+    v22 <- LoadInteger '3'
+    v23 <- CreateNamedVariable 'x11', 'var', v22
+    v24 <- LoadInteger '3'
+    v25 <- CreateNamedVariable 'x12', 'var', v24
+    v26 <- LoadInteger '3'
+    v27 <- CreateNamedVariable 'x13', 'var', v26
+    v28 <- CallFunction v0, []
+    v29 <- LoadInteger '257'
+    Reassign v3, v29
+    v30 <- LoadInteger '258'
+    Reassign v5, v30
+    v31 <- LoadInteger '259'
+    Reassign v7, v31
+    v32 <- LoadInteger '260'
+    Reassign v9, v32
+    v33 <- LoadInteger '261'
+    Reassign v11, v33
+    v34 <- LoadInteger '262'
+    Reassign v13, v34
+    v35 <- LoadInteger '263'
+    Reassign v15, v35
+    v36 <- LoadInteger '264'
+    Reassign v17, v36
+    v37 <- LoadInteger '265'
+    Reassign v19, v37
+    v38 <- LoadInteger '266'
+    Reassign v21, v38
+    v39 <- LoadInteger '267'
+    Reassign v23, v39
+    v40 <- LoadInteger '268'
+    Reassign v25, v40
+    v41 <- LoadInteger '269'
+    Reassign v27, v41
+    BeginForLoopInitializer
+        v42 <- LoadInteger '3'
+        Reassign v15, v42
+    BeginForLoopCondition
+        v43 <- LoadInteger '10'
+        v44 <- Compare v15, '<', v43
+    BeginForLoopAfterthought v44
+        v45 <- UnaryOperation '++', v15
+    BeginForLoopBody
+        v46 <- CallFunction v0, []
+    EndForLoop
+EndPlainFunction
+v47 <- CallFunction v1, []
+v48 <- BeginPlainFunction -> 
+    v49 <- LoadInteger '3'
+    v50 <- CreateNamedVariable 'x', 'var', v49
+    v51 <- LoadUndefined
+    v52 <- CreateNamedVariable 'j', 'var', v51
+    BeginForLoopInitializer
+        v53 <- LoadInteger '7'
+        Reassign v52, v53
+    BeginForLoopCondition
+        v54 <- LoadInteger '11'
+        v55 <- Compare v52, '<', v54
+    BeginForLoopAfterthought v55
+        v56 <- UnaryOperation '++', v52
+    BeginForLoopBody
+        Reassign v50, v52
+    EndForLoop
+    v57 <- LoadInteger '10'
+    v58 <- LoadInteger '11'
+EndPlainFunction
+v59 <- CallFunction v48, []
+
+
+function foo() {
+    return;
+}
+function bar() {
+    var x1 = 3;
+    var x2 = 3;
+    var x3 = 3;
+    var x4 = 3;
+    var x5 = 3;
+    var x6 = 3;
+    var x7 = 3;
+    var x8 = 3;
+    var x9 = 3;
+    var x10 = 3;
+    var x11 = 3;
+    var x12 = 3;
+    var x13 = 3;
+    foo();
+    x1 = 257;
+    x2 = 258;
+    x3 = 259;
+    x4 = 260;
+    x5 = 261;
+    x6 = 262;
+    x7 = 263;
+    x8 = 264;
+    x9 = 265;
+    x10 = 266;
+    x11 = 267;
+    x12 = 268;
+    x13 = 269;
+    for ((() => {
+            x7 = 3;
+        })();
+        x7 < 10;
+        ++x7) {
+        foo();
+    }
+}
+bar();
+function aliasing() {
+    var x = 3;
+    var j;
+    for ((() => {
+            j = 7;
+        })();
+        j < 11;
+        ++j) {
+        x = j;
+    }
+}
+aliasing();
+
+FuzzIL program written to corpus/regress-r4998.fzil

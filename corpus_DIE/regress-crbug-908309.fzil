@@ -1,0 +1,65 @@
+v0 <- CreateNamedVariable 'Promise', 'none'
+v1 <- CallMethod v0, 'resolve', []
+v2 <- LoadString 'then'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `value` -> v3
+        v4 <- LoadInteger '0'
+        Return v4
+    EndObjectLiteralMethod
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v1, v2, v5]
+v8 <- CreateNamedVariable 'p', 'const', v7
+v9 <- BeginPlainFunction -> 
+    v10 <- BeginPlainFunction -> 
+        v11 <- CallMethod v8, 'catch', []
+        v12 <- CallMethod v11, 'catch', []
+        Return v12
+    EndPlainFunction
+    v13 <- CallFunction v10, []
+    v14 <- CreateNamedVariable 'TypeError', 'none'
+    v15 <- CallFunction v10, []
+    v16 <- CallFunction v10, []
+EndPlainFunction
+v17 <- CallFunction v9, []
+v18 <- BeginPlainFunction -> 
+    v19 <- BeginPlainFunction -> 
+        v20 <- CallMethod v8, 'finally', []
+        v21 <- CallMethod v20, 'finally', []
+        Return v21
+    EndPlainFunction
+    v22 <- CallFunction v19, []
+    v23 <- CreateNamedVariable 'TypeError', 'none'
+    v24 <- CallFunction v19, []
+    v25 <- CallFunction v19, []
+EndPlainFunction
+v26 <- CallFunction v18, []
+
+
+const v1 = Promise.resolve();
+const v5 = {
+    value() {
+        return 0;
+    },
+};
+const p = Object.defineProperty(v1, "then", v5);
+function f9() {
+    function foo() {
+        return p.catch().catch();
+    }
+    foo();
+    foo();
+    foo();
+}
+f9();
+function f18() {
+    function foo() {
+        return p.finally().finally();
+    }
+    foo();
+    foo();
+    foo();
+}
+f18();
+
+FuzzIL program written to corpus/regress-crbug-908309.fzil

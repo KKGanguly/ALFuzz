@@ -1,0 +1,23 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- GetProperty v0, 'x'
+    Return v1
+EndPlainFunction
+v2 <- LoadNull
+SetProperty v0, '__proto__', v2
+v3 <- LoadString ''
+SetProperty v0, 'prototype', v3
+v4 <- CallFunction v0, []
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+
+
+function f() {
+    return f.x;
+}
+f.__proto__ = null;
+f.prototype = "";
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-filter-contexts.fzil

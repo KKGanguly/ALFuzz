@@ -1,0 +1,45 @@
+v0 <- CreateNamedVariable 'test_count_operation', 'none'
+v1 <- CallFunction v0, []
+v2 <- CreateNamedVariable 'test_compound_assignment', 'none'
+v3 <- CallFunction v2, []
+v4 <- BeginPlainFunction -> 
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadString 'x'
+    v7 <- LoadThis
+    v8 <- CallMethod v7, '__defineSetter__', [v6, v4]
+    v9 <- LoadString 'x'
+    v10 <- LoadThis
+    v11 <- CallMethod v10, '__defineGetter__', [v9, v4]
+    v12 <- CreateNamedVariable 'x', 'none'
+    v13 <- UnaryOperation v12, '++'
+    Reassign v12, v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadString 'y'
+    v16 <- LoadThis
+    v17 <- CallMethod v16, '__defineSetter__', [v15, v4]
+    v18 <- LoadString 'y'
+    v19 <- LoadThis
+    v20 <- CallMethod v19, '__defineGetter__', [v18, v4]
+    v21 <- CreateNamedVariable 'y', 'none'
+    Update v21, '+', v21
+EndPlainFunction
+
+
+test_count_operation();
+test_compound_assignment();
+function f() {
+}
+function test_count_operation() {
+    this.__defineSetter__("x", f);
+    this.__defineGetter__("x", f);
+    x = x++;
+}
+function test_compound_assignment() {
+    this.__defineSetter__("y", f);
+    this.__defineGetter__("y", f);
+    y += y;
+}
+
+FuzzIL program written to corpus/global-accessors.fzil

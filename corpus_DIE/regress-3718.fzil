@@ -1,0 +1,83 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginPlainFunction -> v3, v4
+        Return v4
+    EndPlainFunction
+    v5 <- CreateNamedVariable 'Error', 'none'
+    SetProperty v5, 'prepareStackTrace', v2
+    v6 <- BeginPlainFunction -> 
+        v7 <- Construct v5, []
+        v8 <- GetProperty v7, 'stack'
+        Return v8
+    EndPlainFunction
+    v9 <- CallMethod v6, 'call', [v1]
+    v10 <- CreateNamedVariable 'stack', 'var', v9
+    v11 <- LoadUndefined
+    SetProperty v5, 'prepareStackTrace', v11
+    v12 <- GetElement v10, '0'
+    v13 <- CallMethod v12, 'getTypeName', []
+    Return v13
+EndPlainFunction
+v14 <- LoadUndefined
+v15 <- CallFunction v0, [v14]
+v16 <- LoadNull
+v17 <- CallFunction v0, [v16]
+v18 <- LoadString 'Number'
+v19 <- LoadInteger '1'
+v20 <- CallFunction v0, [v19]
+v21 <- LoadString 'String'
+v22 <- LoadString ''
+v23 <- CallFunction v0, [v22]
+v24 <- LoadString 'Boolean'
+v25 <- LoadBoolean 'false'
+v26 <- CallFunction v0, [v25]
+v27 <- LoadString 'Object'
+BeginObjectLiteral
+v28 <- EndObjectLiteral
+v29 <- CallFunction v0, [v28]
+v30 <- LoadString 'Array'
+v31 <- CreateArray []
+v32 <- CallFunction v0, [v31]
+v33 <- LoadString 'Proxy'
+v34 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v35 <- EndObjectLiteral
+BeginObjectLiteral
+v36 <- EndObjectLiteral
+v37 <- Construct v34, [v35, v36]
+v38 <- CallFunction v0, [v37]
+v39 <- LoadString 'Custom'
+v40 <- BeginPlainFunction -> 
+EndPlainFunction
+v41 <- Construct v40, []
+v42 <- CallFunction v0, [v41]
+
+
+function getTypeName(a1) {
+    function f2(a3, a4) {
+        return a4;
+    }
+    Error.prepareStackTrace = f2;
+    function f6() {
+        const v7 = new Error();
+        return v7.stack;
+    }
+    var stack = f6.call(a1);
+    Error.prepareStackTrace = undefined;
+    return stack[0].getTypeName();
+}
+getTypeName(undefined);
+getTypeName(null);
+getTypeName(1);
+getTypeName("");
+getTypeName(false);
+getTypeName({});
+getTypeName([]);
+const v35 = {};
+const v37 = new Proxy(v35, {});
+getTypeName(v37);
+function Custom() {
+}
+const v41 = new Custom();
+getTypeName(v41);
+
+FuzzIL program written to corpus/regress-3718.fzil

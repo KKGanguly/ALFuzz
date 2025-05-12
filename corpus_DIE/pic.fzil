@@ -1,0 +1,147 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'x'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- CallMethod v4, 'f', []
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- LoadInteger '42'
+    SetProperty v7, 'x', v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10, v11
+    SetProperty v10, 'x', v11
+    Return v11
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13
+    v14 <- CallFunction v6, [v13]
+    v15 <- LoadInteger '42'
+    v16 <- CallFunction v0, [v13]
+    v17 <- LoadInteger '87'
+    v18 <- LoadInteger '87'
+    v19 <- CallFunction v9, [v13, v18]
+    v20 <- LoadInteger '87'
+    v21 <- CallFunction v0, [v13]
+    v22 <- CallFunction v9, [v13, v13]
+    v23 <- Compare v22, '===', v13
+    v24 <- CallFunction v0, [v13]
+    v25 <- Compare v13, '===', v24
+    v26 <- LoadString 'o === GetX(o)'
+    v27 <- LoadString 'hest'
+    v28 <- LoadString 'hest'
+    v29 <- CallFunction v9, [v13, v28]
+    v30 <- LoadString 'hest'
+    v31 <- CallFunction v0, [v13]
+    v32 <- CallFunction v9, [v13, v12]
+    v33 <- Compare v32, '===', v12
+    v34 <- CallFunction v0, [v13]
+    v35 <- Compare v12, '===', v34
+    v36 <- LoadString 'Test === GetX(o)'
+    v37 <- LoadInteger '99'
+    v38 <- CallFunction v3, [v13]
+EndPlainFunction
+v39 <- LoadInteger '0'
+v40 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v39
+    ObjectLiteralAddProperty `y`, v40
+v41 <- EndObjectLiteral
+v42 <- CreateNamedVariable 'o1', 'var', v41
+v43 <- LoadInteger '1'
+v44 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v43
+    ObjectLiteralAddProperty `x`, v44
+v45 <- EndObjectLiteral
+v46 <- CreateNamedVariable 'o2', 'var', v45
+v47 <- LoadInteger '1'
+v48 <- LoadInteger '2'
+v49 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v47
+    ObjectLiteralAddProperty `z`, v48
+    ObjectLiteralAddProperty `x`, v49
+v50 <- EndObjectLiteral
+v51 <- CreateNamedVariable 'o3', 'var', v50
+v52 <- BeginPlainFunction -> 
+    v53 <- LoadInteger '99'
+    Return v53
+EndPlainFunction
+SetProperty v51, 'f', v52
+SetProperty v46, 'f', v52
+SetProperty v42, 'f', v52
+BeginForLoopInitializer
+    v54 <- LoadInteger '0'
+BeginForLoopCondition -> v55
+    v56 <- LoadInteger '5'
+    v57 <- Compare v55, '<', v56
+BeginForLoopAfterthought v57 -> v58
+    v59 <- UnaryOperation v58, '++'
+BeginForLoopBody -> v60
+    v61 <- CallFunction v12, [v42]
+    v62 <- CallFunction v12, [v46]
+    v63 <- CallFunction v12, [v51]
+EndForLoop
+v64 <- CallFunction v12, [v42]
+v65 <- CallFunction v12, [v46]
+v66 <- CallFunction v12, [v51]
+v67 <- LoadInteger '0'
+v68 <- CallFunction v0, [v67]
+v69 <- LoadInteger '0'
+v70 <- CallFunction v6, [v69]
+v71 <- LoadInteger '0'
+v72 <- LoadInteger '0'
+v73 <- CallFunction v9, [v71, v72]
+v74 <- LoadString 'CallF(0)'
+v75 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function GetX(a1) {
+    return a1.x;
+}
+function CallF(a4) {
+    return a4.f();
+}
+function SetX(a7) {
+    a7.x = 42;
+}
+function SetXY(a10, a11) {
+    a10.x = a11;
+    return a11;
+}
+function Test(a13) {
+    SetX(a13);
+    GetX(a13);
+    SetXY(a13, 87);
+    GetX(a13);
+    SetXY(a13, a13) === a13;
+    a13 === GetX(a13);
+    SetXY(a13, "hest");
+    GetX(a13);
+    SetXY(a13, Test) === Test;
+    Test === GetX(a13);
+    CallF(a13);
+}
+var o1 = { x: 0, y: 1 };
+var o2 = { y: 1, x: 0 };
+var o3 = { y: 1, z: 2, x: 0 };
+function f52() {
+    return 99;
+}
+o3.f = f52;
+o2.f = f52;
+o1.f = f52;
+for (let i55 = 0; i55 < 5; i55++) {
+    Test(o1);
+    Test(o2);
+    Test(o3);
+}
+Test(o1);
+Test(o2);
+Test(o3);
+GetX(0);
+SetX(0);
+SetXY(0, 0);
+
+FuzzIL program written to corpus/pic.fzil

@@ -1,0 +1,20 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '7'
+    BeginWith v1
+        v2 <- CreateNamedVariable 'valueOf', 'none'
+        v3 <- TypeOf v2
+        v4 <- LoadString 'function'
+        v5 <- Compare v3, '==', v4
+    EndWith
+EndPlainFunction
+v6 <- CallFunction v0, []
+
+
+function f0() {
+    with (7) {
+        typeof valueOf == "function";
+    }
+}
+f0();
+
+FuzzIL program written to corpus/with-value.fzil

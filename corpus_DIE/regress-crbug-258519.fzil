@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadNull
+    v3 <- Compare v2, '!=', v1
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `compare_null`, v0
+    ObjectLiteralAddProperty `kaboom`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'a', 'var', v5
+v7 <- BeginPlainFunction -> v8
+    v9 <- CreateNamedVariable 'b', 'var', v6
+    v10 <- CallMethod v9, 'compare_null', [v8]
+    v11 <- CallMethod v9, 'kaboom', []
+    v12 <- BinaryOperation v10, '&&', v11
+    v13 <- LoadString 'ok'
+    Return v13
+EndPlainFunction
+v14 <- LoadString 'ok'
+v15 <- LoadNull
+v16 <- CallFunction v7, [v15]
+v17 <- LoadString 'ok'
+v18 <- LoadNull
+v19 <- CallFunction v7, [v18]
+v20 <- LoadString 'ok'
+v21 <- LoadInteger '1'
+v22 <- CallFunction v7, [v21]
+
+
+function f0(a1) {
+    return null != a1;
+}
+function f4() {
+}
+var a = { compare_null: f0, kaboom: f4 };
+function crash(a8) {
+    var b = a;
+    b.compare_null(a8) && b.kaboom();
+    return "ok";
+}
+crash(null);
+crash(null);
+crash(1);
+
+FuzzIL program written to corpus/regress-crbug-258519.fzil

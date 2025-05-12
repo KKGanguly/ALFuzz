@@ -1,0 +1,76 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'b', 'var', v2
+v4 <- LoadString '1'
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadString 'foo'
+    Return v6
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'defineProperty', [v1, v4, v7]
+v10 <- LoadString '1'
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadString 'bar'
+    Return v12
+EndPlainFunction
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadInteger '42'
+    v15 <- LoadThis
+    SetProperty v15, 'x', v14
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v11
+    ObjectLiteralAddProperty `set`, v13
+v16 <- EndObjectLiteral
+v17 <- CallMethod v8, 'defineProperty', [v3, v10, v16]
+v18 <- GetElement v1, '1'
+v19 <- LoadString 'foo'
+v20 <- GetElement v3, '1'
+v21 <- LoadString 'bar'
+v22 <- LoadString 'foobar'
+SetElement v3, '1', v22
+v23 <- GetElement v3, '1'
+v24 <- LoadString 'bar'
+v25 <- GetProperty v3, 'x'
+v26 <- LoadInteger '42'
+v27 <- LoadString '1'
+v28 <- CallMethod v8, 'getOwnPropertyDescriptor', [v3, v27]
+v29 <- CreateNamedVariable 'desc', 'var', v28
+v30 <- LoadString 'writable'
+v31 <- GetComputedProperty v29, v30
+v32 <- LoadUndefined
+v33 <- LoadString 'enumerable'
+v34 <- GetComputedProperty v29, v33
+v35 <- LoadString 'configurable'
+v36 <- GetComputedProperty v29, v35
+
+
+var a = [];
+var b = {};
+function f5() {
+    return "foo";
+}
+Object.defineProperty(a, "1", { get: f5 });
+function f11() {
+    return "bar";
+}
+function f13() {
+    this.x = 42;
+}
+Object.defineProperty(b, "1", { get: f11, set: f13 });
+a[1];
+b[1];
+b[1] = "foobar";
+b[1];
+b.x;
+var desc = Object.getOwnPropertyDescriptor(b, "1");
+desc["writable"];
+desc["enumerable"];
+desc["configurable"];
+
+FuzzIL program written to corpus/regress-900.fzil

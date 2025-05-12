@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'field'
+    v3 <- GetProperty v2, 'b'
+    v4 <- GetProperty v3, 'x'
+    Return v4
+EndPlainFunction
+BeginTry
+    v5 <- CallFunction v0, []
+    v6 <- CreateNamedVariable '__v_1', 'none'
+    Reassign v6, v5
+BeginCatch -> v7
+EndTryCatch
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadRegExp '.' ''
+    v10 <- CallMethod v9, 'test', []
+    v11 <- CallFunction v8, [v10]
+EndPlainFunction
+BeginTry
+    v12 <- CallFunction v8, []
+BeginCatch -> v13
+EndTryCatch
+
+
+function __f_2(a1) {
+    return a1.field.b.x;
+}
+try {
+    __v_1 = __f_2();
+} catch(e7) {
+}
+function __f_3() {
+    __f_3(/./.test());
+}
+try {
+    __f_3();
+} catch(e13) {
+}
+
+FuzzIL program written to corpus/regress-487981.fzil

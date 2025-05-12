@@ -1,0 +1,99 @@
+v0 <- BeginPlainFunction -> v1, v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4, v5
+    v6 <- Construct v0, []
+    v7 <- CreateNamedVariable 'o', 'var', v6
+    SetProperty v7, 'x', v4
+    SetProperty v7, 'y', v4
+    BeginForLoopInitializer
+        v8 <- LoadInteger '0'
+    BeginForLoopCondition -> v9
+        v10 <- Compare v9, '<', v5
+    BeginForLoopAfterthought v10 -> v11
+        v12 <- UnaryOperation v11, '++'
+    BeginForLoopBody -> v13
+        v14 <- GetProperty v7, 'x'
+        UpdateProperty v7, '+', v14
+    EndForLoop
+    v15 <- GetProperty v7, 'y'
+    Return v15
+EndPlainFunction
+v16 <- LoadInteger '22'
+v17 <- LoadInteger '11'
+v18 <- LoadInteger '1'
+v19 <- CallFunction v3, [v17, v18]
+v20 <- LoadInteger '24'
+v21 <- LoadInteger '12'
+v22 <- LoadInteger '1'
+v23 <- CallFunction v3, [v21, v22]
+v24 <- LoadInteger '1300013'
+v25 <- LoadInteger '13'
+v26 <- LoadInteger '100000'
+v27 <- CallFunction v3, [v25, v26]
+v28 <- BeginPlainFunction -> v29, v30
+    v31 <- Construct v0, []
+    v32 <- CreateNamedVariable 'o', 'var', v31
+    SetProperty v32, 'x', v29
+    SetProperty v32, 'y', v29
+    BeginForLoopInitializer
+        v33 <- LoadInteger '0'
+    BeginForLoopCondition -> v34
+        v35 <- Compare v34, '<', v30
+    BeginForLoopAfterthought v35 -> v36
+        v37 <- UnaryOperation v36, '++'
+    BeginForLoopBody -> v38
+        v39 <- GetProperty v32, 'x'
+        UpdateProperty v32, '+', v39
+    EndForLoop
+    v40 <- GetProperty v32, 'y'
+    Return v40
+EndPlainFunction
+v41 <- LoadInteger '22'
+v42 <- LoadInteger '11'
+v43 <- LoadInteger '1'
+v44 <- CallFunction v28, [v42, v43]
+v45 <- LoadInteger '24'
+v46 <- LoadInteger '12'
+v47 <- LoadInteger '1'
+v48 <- CallFunction v28, [v46, v47]
+v49 <- LoadInteger '32'
+v50 <- LoadInteger '16'
+v51 <- LoadInteger '1'
+v52 <- CallFunction v28, [v50, v51]
+v53 <- LoadInteger '1300013'
+v54 <- LoadInteger '13'
+v55 <- LoadInteger '100000'
+v56 <- CallFunction v28, [v54, v55]
+
+
+function It(a1, a2) {
+}
+function foo_osr(a4, a5) {
+    const v6 = new It();
+    var o = v6;
+    o.x = a4;
+    o.y = a4;
+    for (let i9 = 0; i9 < a5; i9++) {
+        o.y += o.x;
+    }
+    return o.y;
+}
+foo_osr(11, 1);
+foo_osr(12, 1);
+foo_osr(13, 100000);
+function foo_hot(a29, a30) {
+    const v31 = new It();
+    var o = v31;
+    o.x = a29;
+    o.y = a29;
+    for (let i34 = 0; i34 < a30; i34++) {
+        o.y += o.x;
+    }
+    return o.y;
+}
+foo_hot(11, 1);
+foo_hot(12, 1);
+foo_hot(16, 1);
+foo_hot(13, 100000);
+
+FuzzIL program written to corpus/load-elimination-osr.fzil

@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        v4 <- GetComputedProperty v2, v3
+        Return v4
+    EndPlainFunction
+    BeginObjectLiteral
+    v5 <- EndObjectLiteral
+    v6 <- LoadInteger '0'
+    v7 <- CallFunction v1, [v5, v6]
+    BeginObjectLiteral
+    v8 <- EndObjectLiteral
+    v9 <- LoadInteger '0'
+    v10 <- CallFunction v1, [v8, v9]
+    BeginObjectLiteral
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'o', 'var', v11
+    v13 <- LoadString 'dictionary'
+    SetElement v12, '1000000', v13
+    v14 <- LoadInteger '21'
+    v15 <- UnaryOperation '-', v14
+    v16 <- CreateNamedVariable 'c', 'var', v15
+    v17 <- LoadString 'foo'
+    SetComputedProperty v12, v16, v17
+    v18 <- LoadString 'foo'
+    v19 <- CallFunction v1, [v12, v16]
+EndPlainFunction
+v20 <- CallFunction v0, []
+
+
+function NegativeIndexAndDictionaryElements() {
+    function f(a2, a3) {
+        return a2[a3];
+    }
+    f({}, 0);
+    f({}, 0);
+    var o = {};
+    o[1000000] = "dictionary";
+    var c = -21;
+    o[c] = "foo";
+    f(o, c);
+}
+NegativeIndexAndDictionaryElements();
+
+FuzzIL program written to corpus/keyed-load-generic.fzil

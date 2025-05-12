@@ -1,0 +1,70 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CreateArray []
+    v4 <- CreateNamedVariable 'a', 'var', v3
+    SetProperty v4, 'length', v1
+    v5 <- LoadString 'number'
+    v6 <- GetProperty v4, 'length'
+    v7 <- TypeOf v6
+    v8 <- GetProperty v4, 'length'
+EndPlainFunction
+v9 <- LoadInteger '2147483648'
+v10 <- LoadInteger '2147483648'
+v11 <- CallFunction v0, [v9, v10]
+v12 <- LoadString '2147483648'
+v13 <- LoadInteger '2147483648'
+v14 <- CallFunction v0, [v12, v13]
+v15 <- LoadNull
+v16 <- LoadInteger '0'
+v17 <- CallFunction v0, [v15, v16]
+v18 <- LoadBoolean 'false'
+v19 <- LoadInteger '0'
+v20 <- CallFunction v0, [v18, v19]
+v21 <- LoadBoolean 'true'
+v22 <- LoadInteger '1'
+v23 <- CallFunction v0, [v21, v22]
+v24 <- BeginPlainFunction -> 
+    v25 <- LoadInteger '42'
+    Return v25
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v24
+v26 <- EndObjectLiteral
+v27 <- LoadInteger '42'
+v28 <- CallFunction v0, [v26, v27]
+v29 <- BeginPlainFunction -> 
+    v30 <- LoadString '42'
+    Return v30
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v29
+v31 <- EndObjectLiteral
+v32 <- LoadInteger '42'
+v33 <- CallFunction v0, [v31, v32]
+v34 <- LoadString 'var y = []; y.length = 'abc';'
+v35 <- LoadString 'var y = []; y.length = undefined;'
+v36 <- LoadString 'var y = []; y.length = {};'
+v37 <- LoadString 'var y = []; y.length = -1;'
+v38 <- LoadString 'var y = []; y.length = {valueOf:function() { throw new Error(); }};'
+
+
+function CheckSetArrayLength(a1, a2) {
+    var a = [];
+    a.length = a1;
+    typeof a.length;
+    a.length;
+}
+CheckSetArrayLength(2147483648, 2147483648);
+CheckSetArrayLength("2147483648", 2147483648);
+CheckSetArrayLength(null, 0);
+CheckSetArrayLength(false, 0);
+CheckSetArrayLength(true, 1);
+function f24() {
+    return 42;
+}
+CheckSetArrayLength({ valueOf: f24 }, 42);
+function f29() {
+    return "42";
+}
+CheckSetArrayLength({ toString: f29 }, 42);
+
+FuzzIL program written to corpus/array-length-number-conversion.fzil

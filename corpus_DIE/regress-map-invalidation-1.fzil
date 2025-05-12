@@ -1,0 +1,53 @@
+v0 <- LoadInteger '2'
+v1 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+    ObjectLiteralAddProperty `y`, v1
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'c', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '2'
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v7 <- LoadInteger '0'
+    BeginForLoopCondition -> v8
+        v9 <- LoadInteger '100000'
+        v10 <- Compare v8, '<', v9
+    BeginForLoopAfterthought v10 -> v11
+        v12 <- UnaryOperation v11, '++'
+    BeginForLoopBody -> v13
+        v14 <- GetProperty v3, 'x'
+        v15 <- CallFunction v4, []
+        v16 <- BinaryOperation v14, '+', v15
+        v17 <- CreateNamedVariable 'n', 'var', v16
+        v18 <- LoadInteger '4'
+    EndForLoop
+    v19 <- LoadFloat '2.5'
+    v20 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v19
+        ObjectLiteralAddProperty `y`, v20
+    v21 <- EndObjectLiteral
+    v22 <- CreateArray [v21]
+    v23 <- CreateNamedVariable 'o2', 'var', v22
+    Return v23
+EndPlainFunction
+v24 <- CallFunction v6, []
+
+
+var c = { x: 2, y: 1 };
+function h() {
+    return 2;
+}
+function f() {
+    for (let i8 = 0; i8 < 100000; i8++) {
+        var n = c.x + h();
+    }
+    var o2 = [{ x: 2.5, y: 1 }];
+    return o2;
+}
+f();
+
+FuzzIL program written to corpus/regress-map-invalidation-1.fzil

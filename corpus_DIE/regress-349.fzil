@@ -1,0 +1,11 @@
+v0 <- LoadString 'bbaabbbbbbbbabbaaaabbaaabbbaaaabbaaabbabaaabb'
+v1 <- CreateNamedVariable 'str', 'var', v0
+v2 <- LoadRegExp 'aabab' 'g'
+v3 <- LoadString 'foo'
+v4 <- CallMethod v1, 'replace', [v2, v3]
+
+
+var str = "bbaabbbbbbbbabbaaaabbaaabbbaaaabbaaabbabaaabb";
+str.replace(/aabab/g, "foo");
+
+FuzzIL program written to corpus/regress-349.fzil

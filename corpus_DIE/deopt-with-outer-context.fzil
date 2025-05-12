@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginPlainFunction -> 
+        v3 <- LoadInteger '10'
+        v4 <- CreateNamedVariable 'x', 'var', v3
+        v5 <- BeginPlainFunction -> 
+            v6 <- LoadInteger '20'
+            Reassign v4, v6
+        EndPlainFunction
+        v7 <- CallFunction v5, []
+        Return v1
+    EndPlainFunction
+    v8 <- CallFunction v2, []
+    Return v8
+EndPlainFunction
+v9 <- LoadInteger '30'
+v10 <- LoadInteger '30'
+v11 <- CallFunction v0, [v10]
+
+
+function outer(a1) {
+    function inner() {
+        var x = 10;
+        function f5() {
+            x = 20;
+        }
+        f5();
+        return a1;
+    }
+    return inner();
+}
+outer(30);
+
+FuzzIL program written to corpus/deopt-with-outer-context.fzil

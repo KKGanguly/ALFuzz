@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallMethod v1, 'shift', []
+    v3 <- CreateNamedVariable 'x', 'var', v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '1'
+    v6 <- LoadInteger '2'
+    v7 <- LoadUndefined
+    v8 <- LoadInteger '3'
+    v9 <- CreateArray [v5, v6, v7, v8]
+    v10 <- CreateNamedVariable 'a', 'var', v9
+    v11 <- LoadInteger '2'
+    SetElement v10, '0', v11
+    Return v10
+EndPlainFunction
+v12 <- CallFunction v4, []
+v13 <- CallFunction v0, [v12]
+v14 <- CallFunction v4, []
+v15 <- CallFunction v0, [v14]
+v16 <- CallFunction v4, []
+v17 <- CallFunction v0, [v16]
+v18 <- CallFunction v0, []
+
+
+function doShift(a1) {
+    var x = a1.shift();
+    return x;
+}
+function makeArray() {
+    var a = [1,2,,3];
+    a[0] = 2;
+    return a;
+}
+doShift(makeArray());
+doShift(makeArray());
+doShift(makeArray());
+doShift();
+
+FuzzIL program written to corpus/array-shift4.fzil

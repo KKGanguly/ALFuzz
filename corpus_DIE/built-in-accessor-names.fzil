@@ -1,0 +1,89 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- CreateNamedVariable 'Object', 'none'
+    v5 <- CallMethod v4, 'getOwnPropertyDescriptor', [v2, v3]
+    v6 <- CreateNamedVariable 'descr', 'var', v5
+    v7 <- GetProperty v6, 'get'
+    v8 <- GetProperty v7, 'name'
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10, v11, v12
+    v13 <- CreateNamedVariable 'Object', 'none'
+    v14 <- CallMethod v13, 'getOwnPropertyDescriptor', [v11, v12]
+    v15 <- CreateNamedVariable 'descr', 'var', v14
+    v16 <- GetProperty v15, 'set'
+    v17 <- GetProperty v16, 'name'
+EndPlainFunction
+v18 <- LoadString 'get byteLength'
+v19 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v20 <- GetProperty v19, 'prototype'
+v21 <- LoadString 'byteLength'
+v22 <- LoadString 'get size'
+v23 <- CreateNamedVariable 'Set', 'none'
+v24 <- GetProperty v23, 'prototype'
+v25 <- LoadString 'size'
+v26 <- LoadString 'get size'
+v27 <- CreateNamedVariable 'Map', 'none'
+v28 <- GetProperty v27, 'prototype'
+v29 <- LoadString 'size'
+v30 <- CreateNamedVariable 'Uint8Array', 'none'
+v31 <- GetProperty v30, '__proto__'
+v32 <- CreateNamedVariable 'TypedArray', 'let', v31
+v33 <- LoadString 'get buffer'
+v34 <- GetProperty v32, 'prototype'
+v35 <- LoadString 'buffer'
+v36 <- LoadString 'get byteOffset'
+v37 <- GetProperty v32, 'prototype'
+v38 <- LoadString 'byteOffset'
+v39 <- LoadString 'get byteLength'
+v40 <- GetProperty v32, 'prototype'
+v41 <- LoadString 'byteLength'
+v42 <- LoadString 'get length'
+v43 <- GetProperty v32, 'prototype'
+v44 <- LoadString 'length'
+v45 <- LoadString 'get [Symbol.toStringTag]'
+v46 <- GetProperty v32, 'prototype'
+v47 <- CreateNamedVariable 'Symbol', 'none'
+v48 <- GetProperty v47, 'toStringTag'
+v49 <- LoadString 'get buffer'
+v50 <- CreateNamedVariable 'DataView', 'none'
+v51 <- GetProperty v50, 'prototype'
+v52 <- LoadString 'buffer'
+v53 <- LoadString 'get byteOffset'
+v54 <- GetProperty v50, 'prototype'
+v55 <- LoadString 'byteOffset'
+v56 <- LoadString 'get byteLength'
+v57 <- GetProperty v50, 'prototype'
+v58 <- LoadString 'byteLength'
+v59 <- LoadString 'get __proto__'
+v60 <- CreateNamedVariable 'Object', 'none'
+v61 <- GetProperty v60, 'prototype'
+v62 <- LoadString '__proto__'
+v63 <- LoadString 'set __proto__'
+v64 <- GetProperty v60, 'prototype'
+v65 <- LoadString '__proto__'
+
+
+function assertGetterName(a1, a2, a3) {
+    var descr = Object.getOwnPropertyDescriptor(a2, a3);
+    descr.get.name;
+}
+function assertSetterName(a10, a11, a12) {
+    var descr = Object.getOwnPropertyDescriptor(a11, a12);
+    descr.set.name;
+}
+ArrayBuffer.prototype;
+Set.prototype;
+Map.prototype;
+let TypedArray = Uint8Array.__proto__;
+TypedArray.prototype;
+TypedArray.prototype;
+TypedArray.prototype;
+TypedArray.prototype;
+TypedArray.prototype;
+Symbol.toStringTag;
+DataView.prototype;
+DataView.prototype;
+DataView.prototype;
+Object.prototype;
+Object.prototype;
+
+FuzzIL program written to corpus/built-in-accessor-names.fzil

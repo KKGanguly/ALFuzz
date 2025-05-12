@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- Construct v1, [v2, v3]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v4
+v5 <- EndObjectLiteral
+v6 <- CallFunction v0, [v5]
+v7 <- BeginPlainFunction -> v8
+    v9 <- GetProperty v8, 'a'
+    v10 <- GetProperty v9, 'b'
+    v11 <- LoadString ''
+    v12 <- Compare v10, '==', v11
+EndPlainFunction
+v13 <- LoadString ''
+BeginObjectLiteral
+    ObjectLiteralAddProperty `b`, v13
+v14 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v14
+v15 <- EndObjectLiteral
+v16 <- CreateNamedVariable 'x', 'var', v15
+v17 <- CallFunction v7, [v16]
+v18 <- CallFunction v7, [v16]
+v19 <- CallFunction v7, [v16]
+
+
+function bar() {
+}
+const v2 = {};
+const v4 = new Proxy(v2, {});
+bar({ a: v4 });
+function foo(a8) {
+    a8.a.b == "";
+}
+const v14 = { b: "" };
+var x = { a: v14 };
+foo(x);
+foo(x);
+foo(x);
+
+FuzzIL program written to corpus/regress-crbug-448730.fzil

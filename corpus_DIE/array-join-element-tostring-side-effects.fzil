@@ -1,0 +1,349 @@
+v0 <- LoadInteger '8192'
+v1 <- CreateNamedVariable 'MIN_DICTIONARY_INDEX', 'const', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- BeginPlainFunction -> 
+        v4 <- BeginPlainFunction -> 
+        EndPlainFunction
+        v5 <- LoadInteger '0'
+        v6 <- CreateNamedVariable 'callCount', 'let', v5
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `toString` -> v7
+                v8 <- UnaryOperation v6, '++'
+                v9 <- Construct v4, []
+                ThrowException v9
+            EndObjectLiteralMethod
+        v10 <- EndObjectLiteral
+        v11 <- CreateNamedVariable 'toStringThrows', 'const', v10
+        v12 <- CreateArray [v11]
+        v13 <- CreateNamedVariable 'a', 'const', v12
+        v14 <- BeginArrowFunction -> 
+            v15 <- CallMethod v13, 'join', []
+            Return v15
+        EndArrowFunction
+        v16 <- CallFunction v14, []
+        v17 <- CallFunction v4, []
+        v18 <- LoadInteger '1'
+        v19 <- LoadInteger '1'
+        SetElement v13, '0', v19
+        v20 <- LoadInteger '2'
+        SetElement v13, '1', v20
+        v21 <- LoadString '1,2'
+        v22 <- CallMethod v13, 'join', []
+    EndPlainFunction
+    v23 <- CallFunction v3, []
+    v24 <- BeginPlainFunction -> 
+        v25 <- LoadInteger '0'
+        v26 <- CreateNamedVariable 'callCount', 'let', v25
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `toString` -> v27
+                v28 <- UnaryOperation v26, '++'
+                v29 <- LoadInteger '2'
+                v30 <- CreateNamedVariable 'a', 'none'
+                v31 <- CallMethod v30, 'push', [v29]
+                v32 <- LoadString '1'
+                Return v32
+            EndObjectLiteralMethod
+        v33 <- EndObjectLiteral
+        v34 <- CreateArray [v33]
+        v35 <- CreateNamedVariable 'a', 'const', v34
+        v36 <- LoadString '1'
+        v37 <- CallMethod v35, 'join', []
+        v38 <- LoadInteger '1'
+        v39 <- LoadString '1,2'
+        v40 <- CallMethod v35, 'join', []
+    EndPlainFunction
+    v41 <- CallFunction v24, []
+    v42 <- BeginPlainFunction -> 
+        v43 <- LoadInteger '0'
+        v44 <- CreateNamedVariable 'callCount', 'let', v43
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `toString` -> v45
+                v46 <- UnaryOperation v44, '++'
+                v47 <- CreateNamedVariable 'a', 'none'
+                v48 <- CallMethod v47, 'pop', []
+                v49 <- LoadString '1'
+                Return v49
+            EndObjectLiteralMethod
+        v50 <- EndObjectLiteral
+        v51 <- LoadString '2'
+        v52 <- CreateArray [v50, v51]
+        v53 <- CreateNamedVariable 'a', 'const', v52
+        v54 <- LoadString '1,'
+        v55 <- CallMethod v53, 'join', []
+        v56 <- LoadInteger '1'
+        v57 <- LoadString '1'
+        v58 <- CallMethod v53, 'join', []
+    EndPlainFunction
+    v59 <- CallFunction v42, []
+    v60 <- BeginPlainFunction -> 
+        v61 <- LoadInteger '0'
+        v62 <- CreateNamedVariable 'callCount', 'let', v61
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `toString` -> v63
+                v64 <- UnaryOperation v62, '++'
+                v65 <- LoadInteger '4'
+                v66 <- CreateNamedVariable 'a', 'none'
+                SetProperty v66, 'length', v65
+                v67 <- LoadInteger '777'
+                SetElement v66, '1', v67
+                v68 <- LoadFloat '7.7'
+                SetElement v66, '2', v68
+                v69 <- LoadString '1'
+                Return v69
+            EndObjectLiteralMethod
+        v70 <- EndObjectLiteral
+        v71 <- LoadInteger '2'
+        v72 <- LoadInteger '3'
+        v73 <- CreateArray [v70, v71, v72]
+        v74 <- CreateNamedVariable 'a', 'const', v73
+        v75 <- LoadString '1,777,7.7'
+        v76 <- CallMethod v74, 'join', []
+        v77 <- LoadInteger '1'
+        v78 <- LoadString '1,777,7.7,'
+        v79 <- CallMethod v74, 'join', []
+    EndPlainFunction
+    v80 <- CallFunction v60, []
+    v81 <- BeginPlainFunction -> 
+        v82 <- LoadInteger '0'
+        v83 <- CreateNamedVariable 'callCount', 'let', v82
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `toString` -> v84
+                v85 <- UnaryOperation v83, '++'
+                v86 <- CreateNamedVariable 'a', 'none'
+                v87 <- LoadInteger '1'
+                v88 <- DeleteElement v86, '1'
+                v89 <- LoadFloat '7.7'
+                SetElement v86, '2', v89
+                v90 <- LoadString '1'
+                Return v90
+            EndObjectLiteralMethod
+        v91 <- EndObjectLiteral
+        v92 <- LoadInteger '2'
+        v93 <- LoadInteger '3'
+        v94 <- CreateArray [v91, v92, v93]
+        v95 <- CreateNamedVariable 'a', 'const', v94
+        v96 <- LoadString '1,,7.7'
+        v97 <- CallMethod v95, 'join', []
+        v98 <- LoadInteger '1'
+        v99 <- LoadString '1,,7.7'
+        v100 <- CallMethod v95, 'join', []
+    EndPlainFunction
+    v101 <- CallFunction v81, []
+    v102 <- BeginPlainFunction -> 
+        v103 <- LoadInteger '0'
+        v104 <- CreateNamedVariable 'callCount', 'let', v103
+        v105 <- CreateArray []
+        v106 <- CreateNamedVariable 'a', 'const', v105
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `toString` -> v107
+                v108 <- UnaryOperation v104, '++'
+                v109 <- LoadString '2'
+                SetComputedProperty v106, v1, v109
+                v110 <- LoadString '1'
+                Return v110
+            EndObjectLiteralMethod
+        v111 <- EndObjectLiteral
+        v112 <- LoadInteger '1'
+        v113 <- BinaryOperation v1, '-', v112
+        SetComputedProperty v106, v113, v111
+        v114 <- LoadString 'NOPE'
+        SetComputedProperty v106, v1, v114
+        v115 <- LoadString '12'
+        v116 <- LoadString ''
+        v117 <- CallMethod v106, 'join', [v116]
+        v118 <- LoadInteger '1'
+        v119 <- LoadString '12'
+        v120 <- LoadString ''
+        v121 <- CallMethod v106, 'join', [v120]
+    EndPlainFunction
+    v122 <- CallFunction v102, []
+    v123 <- BeginPlainFunction -> 
+        v124 <- LoadInteger '0'
+        v125 <- CreateNamedVariable 'callCount', 'let', v124
+        v126 <- CreateArray []
+        v127 <- CreateNamedVariable 'a', 'const', v126
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `toString` -> v128
+                v129 <- UnaryOperation v125, '++'
+                SetProperty v127, 'length', v1
+                v130 <- LoadString '1'
+                Return v130
+            EndObjectLiteralMethod
+        v131 <- EndObjectLiteral
+        v132 <- LoadInteger '1'
+        v133 <- BinaryOperation v1, '-', v132
+        SetComputedProperty v127, v133, v131
+        v134 <- LoadString '2'
+        SetComputedProperty v127, v1, v134
+        v135 <- LoadString '1'
+        v136 <- LoadString ''
+        v137 <- CallMethod v127, 'join', [v136]
+        v138 <- LoadInteger '1'
+        v139 <- LoadString '1'
+        v140 <- LoadString ''
+        v141 <- CallMethod v127, 'join', [v140]
+    EndPlainFunction
+    v142 <- CallFunction v123, []
+EndPlainFunction
+v143 <- BeginPlainFunction -> 
+    v144 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v144
+        BeginObjectLiteralMethod `toString` -> v145
+            v146 <- CreateNamedVariable 'Array', 'none'
+            v147 <- GetProperty v146, 'prototype'
+            v148 <- GetProperty v147, 'join'
+            v149 <- CallMethod v148, 'call', [v145]
+            Return v149
+        EndObjectLiteralMethod
+    v150 <- EndObjectLiteral
+    v151 <- CreateNamedVariable 'a', 'const', v150
+    v152 <- LoadString '1'
+    SetElement v151, '0', v152
+    SetElement v151, '1', v151
+    v153 <- LoadString '3'
+    SetElement v151, '2', v153
+    v154 <- LoadString '1,,3'
+    v155 <- CreateNamedVariable 'Array', 'none'
+    v156 <- GetProperty v155, 'prototype'
+    v157 <- GetProperty v156, 'join'
+    v158 <- CallMethod v157, 'call', [v151]
+EndPlainFunction
+v159 <- CallFunction v2, []
+v160 <- CallFunction v2, []
+
+
+const MIN_DICTIONARY_INDEX = 8192;
+function ArrayTests() {
+    function ToStringThrows() {
+        function TestError() {
+        }
+        let callCount = 0;
+        const v10 = {
+            toString() {
+                callCount++;
+                const v9 = new TestError();
+                throw v9;
+            },
+        };
+        const toStringThrows = v10;
+        const a = [toStringThrows];
+        const v14 = () => {
+            return a.join();
+        };
+        v14();
+        TestError();
+        a[0] = 1;
+        a[1] = 2;
+        a.join();
+    }
+    ToStringThrows();
+    function ArrayLengthIncreased() {
+        let callCount = 0;
+        const v33 = {
+            toString() {
+                callCount++;
+                a.push(2);
+                return "1";
+            },
+        };
+        const a = [v33];
+        a.join();
+        a.join();
+    }
+    ArrayLengthIncreased();
+    function ArrayLengthDecreased() {
+        let callCount = 0;
+        const v50 = {
+            toString() {
+                callCount++;
+                a.pop();
+                return "1";
+            },
+        };
+        const a = [v50,"2"];
+        a.join();
+        a.join();
+    }
+    ArrayLengthDecreased();
+    function ElementsKindChangedToHoley() {
+        let callCount = 0;
+        const v70 = {
+            toString() {
+                callCount++;
+                a.length = 4;
+                a[1] = 777;
+                a[2] = 7.7;
+                return "1";
+            },
+        };
+        const a = [v70,2,3];
+        a.join();
+        a.join();
+    }
+    ElementsKindChangedToHoley();
+    function ElementsKindChangedToHoleyThroughDeletion() {
+        let callCount = 0;
+        const v91 = {
+            toString() {
+                callCount++;
+                delete a[1];
+                a[2] = 7.7;
+                return "1";
+            },
+        };
+        const a = [v91,2,3];
+        a.join();
+        a.join();
+    }
+    ElementsKindChangedToHoleyThroughDeletion();
+    function NumberDictionaryChanged() {
+        let callCount = 0;
+        const a = [];
+        const v111 = {
+            toString() {
+                callCount++;
+                a[MIN_DICTIONARY_INDEX] = "2";
+                return "1";
+            },
+        };
+        a[MIN_DICTIONARY_INDEX - 1] = v111;
+        a[MIN_DICTIONARY_INDEX] = "NOPE";
+        a.join("");
+        a.join("");
+    }
+    NumberDictionaryChanged();
+    function NumberDictionaryLengthChange() {
+        let callCount = 0;
+        const a = [];
+        const v131 = {
+            toString() {
+                callCount++;
+                a.length = MIN_DICTIONARY_INDEX;
+                return "1";
+            },
+        };
+        a[MIN_DICTIONARY_INDEX - 1] = v131;
+        a[MIN_DICTIONARY_INDEX] = "2";
+        a.join("");
+        a.join("");
+    }
+    NumberDictionaryLengthChange();
+}
+function NonArrayCycleDetection() {
+    const v150 = {
+        length: 3,
+        toString() {
+            return Array.prototype.join.call(this);
+        },
+    };
+    const a = v150;
+    a[0] = "1";
+    a[1] = a;
+    a[2] = "3";
+    Array.prototype.join.call(a);
+}
+ArrayTests();
+ArrayTests();
+
+FuzzIL program written to corpus/array-join-element-tostring-side-effects.fzil

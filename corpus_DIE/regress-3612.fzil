@@ -1,0 +1,51 @@
+v0 <- LoadInteger '1'
+v1 <- CreateArray [v0]
+v2 <- CreateNamedVariable 'a', 'var', v1
+v3 <- LoadInteger '2'
+v4 <- CreateNamedVariable 'getterValue', 'var', v3
+v5 <- LoadInteger '65535'
+v6 <- CreateNamedVariable 'endIndex', 'var', v5
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadInteger '3'
+    v9 <- LoadThis
+    SetElement v9, '1', v8
+    Return v4
+EndPlainFunction
+v10 <- BeginPlainFunction -> v11
+    Reassign v4, v11
+EndPlainFunction
+v12 <- LoadBoolean 'true'
+v13 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v7
+    ObjectLiteralAddProperty `set`, v10
+    ObjectLiteralAddProperty `configurable`, v12
+    ObjectLiteralAddProperty `enumerable`, v13
+v14 <- EndObjectLiteral
+v15 <- CreateNamedVariable 'Object', 'none'
+v16 <- CallMethod v15, 'defineProperty', [v2, v6, v14]
+v17 <- CallMethod v2, 'reverse', []
+v18 <- LoadInteger '1'
+v19 <- CallMethod v2, 'hasOwnProperty', [v18]
+v20 <- LoadInteger '3'
+v21 <- LoadInteger '1'
+v22 <- BinaryOperation v6, '-', v21
+v23 <- GetComputedProperty v2, v22
+
+
+var a = [1];
+var getterValue = 2;
+var endIndex = 65535;
+function f7() {
+    this[1] = 3;
+    return getterValue;
+}
+function f10(a11) {
+    getterValue = a11;
+}
+Object.defineProperty(a, endIndex, { get: f7, set: f10, configurable: true, enumerable: true });
+a.reverse();
+a.hasOwnProperty(1);
+a[endIndex - 1];
+
+FuzzIL program written to corpus/regress-3612.fzil

@@ -1,0 +1,37 @@
+v0 <- CreateNamedVariable 'Promise', 'none'
+v1 <- CallMethod v0, 'resolve', []
+v2 <- CreateNamedVariable 'p', 'let', v1
+v3 <- LoadString 'then'
+v4 <- BeginArrowFunction -> 
+    v5 <- CreateNamedVariable 'Proxy', 'none'
+    v6 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v7 <- Construct v5, [v6, v2]
+    Return v7
+EndArrowFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v4
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'defineProperty', [v2, v3, v8]
+v11 <- BeginArrowFunction -> v12
+    v13 <- CallFunction v12, [v2]
+    Return v13
+EndArrowFunction
+v14 <- Construct v0, [v11]
+
+
+let p = Promise.resolve();
+const v4 = () => {
+    function f6() {
+    }
+    const v7 = new Proxy(f6, p);
+    return v7;
+};
+Object.defineProperty(p, "then", { get: v4 });
+const v11 = (a12) => {
+    return a12(p);
+};
+new Promise(v11);
+
+FuzzIL program written to corpus/regress-649078.fzil

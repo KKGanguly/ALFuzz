@@ -1,0 +1,27 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadString 'abcdefghijklmnopqrst'
+    v4 <- CreateNamedVariable 'local', 'var', v3
+    v5 <- LoadString 'abcdefghijkl'
+    v6 <- LoadInteger '0'
+    v7 <- BinaryOperation v6, '+', v1
+    v8 <- BinaryOperation v5, '+', v7
+    Update v4, '+', v8
+    v9 <- LoadString 'abcdefghijkl'
+    Update v1, '+', v9
+EndPlainFunction
+v10 <- CallFunction v2, []
+v11 <- CallFunction v2, []
+
+
+var global;
+function f() {
+    var local = "abcdefghijklmnopqrst";
+    local += "abcdefghijkl" + (0 + global);
+    global += "abcdefghijkl";
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-772720.fzil

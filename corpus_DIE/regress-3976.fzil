@@ -1,0 +1,160 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'table', 'none'
+Reassign v1, v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '32'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- LoadInteger '1040'
+    v10 <- BinaryOperation v8, '+', v9
+    v11 <- CreateNamedVariable 'String', 'none'
+    v12 <- CallMethod v11, 'fromCharCode', [v10]
+    v13 <- CreateNamedVariable 'table', 'none'
+    SetComputedProperty v13, v8, v12
+EndForLoop
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadInteger '10'
+    v16 <- CreateNamedVariable 'seed', 'var', v15
+    v17 <- BeginPlainFunction -> 
+        v18 <- LoadInteger '1009'
+        v19 <- BinaryOperation v16, '*', v18
+        v20 <- LoadInteger '8831'
+        v21 <- BinaryOperation v19, '%', v20
+        Reassign v16, v21
+        Return v16
+    EndPlainFunction
+    Return v17
+EndPlainFunction
+v22 <- CallFunction v14, []
+v23 <- CreateNamedVariable 'random', 'var', v22
+v24 <- BeginPlainFunction -> v25
+    v26 <- LoadString ''
+    v27 <- CreateNamedVariable 's', 'var', v26
+    BeginForLoopInitializer
+        v28 <- LoadInteger '0'
+    BeginForLoopCondition -> v29
+        v30 <- Compare v29, '<', v25
+    BeginForLoopAfterthought v30 -> v31
+        v32 <- UnaryOperation v31, '++'
+    BeginForLoopBody -> v33
+        v34 <- CreateNamedVariable 'table', 'none'
+        v35 <- CallFunction v23, []
+        v36 <- LoadInteger '32'
+        v37 <- BinaryOperation v35, '%', v36
+        v38 <- GetComputedProperty v34, v37
+        Update v27, '+', v38
+    EndForLoop
+    v39 <- LoadString '"'
+    v40 <- BinaryOperation v39, '+', v27
+    v41 <- LoadString '"'
+    v42 <- BinaryOperation v40, '+', v41
+    Return v42
+EndPlainFunction
+v43 <- BeginPlainFunction -> 
+    v44 <- LoadString '[{'
+    v45 <- LoadString '"field1" : '
+    v46 <- BinaryOperation v44, '+', v45
+    v47 <- CallFunction v23, []
+    v48 <- BinaryOperation v46, '+', v47
+    v49 <- LoadString ', "field2" : '
+    v50 <- BinaryOperation v48, '+', v49
+    v51 <- CallFunction v23, []
+    v52 <- BinaryOperation v50, '+', v51
+    v53 <- LoadString '}]'
+    v54 <- BinaryOperation v52, '+', v53
+    Return v54
+EndPlainFunction
+v55 <- BeginPlainFunction -> v56
+    v57 <- LoadString '{'
+    v58 <- CreateNamedVariable 's', 'var', v57
+    BeginForLoopInitializer
+        v59 <- LoadInteger '0'
+    BeginForLoopCondition -> v60
+        v61 <- Compare v60, '<', v56
+    BeginForLoopAfterthought v61 -> v62
+        v63 <- UnaryOperation v62, '++'
+    BeginForLoopBody -> v64
+        v65 <- LoadInteger '0'
+        v66 <- Compare v64, '>', v65
+        BeginIf v66
+            v67 <- LoadString ', '
+            Update v58, '+', v67
+        EndIf
+        v68 <- CallFunction v23, []
+        v69 <- LoadInteger '10'
+        v70 <- BinaryOperation v68, '%', v69
+        v71 <- LoadInteger '7'
+        v72 <- BinaryOperation v70, '+', v71
+        v73 <- CallFunction v24, [v72]
+        Update v58, '+', v73
+        v74 <- LoadString ':'
+        Update v58, '+', v74
+        v75 <- CallFunction v43, []
+        Update v58, '+', v75
+    EndForLoop
+    v76 <- LoadString '}'
+    Update v58, '+', v76
+    Return v58
+EndPlainFunction
+v77 <- LoadString 'generating'
+v78 <- CreateNamedVariable 'print', 'none'
+v79 <- CallFunction v78, [v77]
+v80 <- LoadInteger '50000'
+v81 <- CallFunction v55, [v80]
+v82 <- CreateNamedVariable 'str', 'var', v81
+v83 <- LoadString 'parsing '
+v84 <- GetProperty v82, 'length'
+v85 <- BinaryOperation v83, '+', v84
+v86 <- CallFunction v78, [v85]
+v87 <- CreateNamedVariable 'JSON', 'none'
+v88 <- CallMethod v87, 'parse', [v82]
+v89 <- LoadString 'done'
+v90 <- CallFunction v78, [v89]
+
+
+table = [];
+for (let i3 = 0; i3 < 32; i3++) {
+    table[i3] = String.fromCharCode(i3 + 1040);
+}
+function f14() {
+    var seed = 10;
+    function f17() {
+        return seed = (seed * 1009) % 8831;
+    }
+    return f17;
+}
+var random = f14();
+function key(a25) {
+    var s = "";
+    for (let i29 = 0; i29 < a25; i29++) {
+        s += table[random() % 32];
+    }
+    return (""" + s) + """;
+}
+function value() {
+    return (((("[{" + ""field1" : ") + random()) + ", "field2" : ") + random()) + "}]";
+}
+function generate(a56) {
+    var s = "{";
+    for (let i60 = 0; i60 < a56; i60++) {
+        if (i60 > 0) {
+            s += ", ";
+        }
+        s += key((random() % 10) + 7);
+        s += ":";
+        s += value();
+    }
+    s += "}";
+    return s;
+}
+print("generating");
+var str = generate(50000);
+print("parsing " + str.length);
+JSON.parse(str);
+print("done");
+
+FuzzIL program written to corpus/regress-3976.fzil

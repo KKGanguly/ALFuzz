@@ -1,0 +1,29 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'error', 'var', v0
+BeginTry
+    v2 <- CreateNamedVariable 'reference_error', 'none'
+    v3 <- CallFunction v2, []
+BeginCatch -> v4
+    Reassign v1, v4
+EndTryCatch
+v5 <- GetProperty v1, 'toString'
+v6 <- CreateNamedVariable 'toString', 'none'
+Reassign v6, v5
+v7 <- CreateArray []
+SetProperty v1, '__proto__', v7
+v8 <- LoadString 'Error: reference_error is not defined'
+v9 <- CreateNamedVariable 'toString', 'none'
+v10 <- CallMethod v9, 'call', [v1]
+
+
+var error;
+try {
+    reference_error();
+} catch(e4) {
+    error = e4;
+}
+toString = error.toString;
+error.__proto__ = [];
+toString.call(error);
+
+FuzzIL program written to corpus/regress-crbug-523308.fzil

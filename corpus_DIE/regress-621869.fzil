@@ -1,0 +1,44 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'o0', 'var', v0
+v2 <- CreateArray []
+v3 <- CreateNamedVariable 'o1', 'var', v2
+v4 <- LoadInteger '0'
+v5 <- CreateNamedVariable 'cnt', 'var', v4
+v6 <- LoadBoolean 'true'
+v7 <- CreateNamedVariable 'only_scavenge', 'var', v6
+v8 <- LoadInteger '0'
+v9 <- BeginPlainFunction -> 
+    v10 <- UnaryOperation v5, '++'
+    v11 <- LoadInteger '2'
+    v12 <- Compare v10, '>', v11
+    BeginIf v12
+        Return
+    EndIf
+    v13 <- CallMethod v1, 'shift', []
+    v14 <- CreateNamedVariable 'gc', 'none'
+    v15 <- CallFunction v14, [v7]
+    v16 <- LoadInteger '64'
+    v17 <- CallMethod v1, 'push', [v16]
+    v18 <- CallMethod v1, 'concat', [v3]
+EndPlainFunction
+v19 <- CallMethod v3, '__defineGetter__', [v8, v9]
+v20 <- GetElement v3, '0'
+
+
+var o0 = [];
+var o1 = [];
+var cnt = 0;
+var only_scavenge = true;
+function f9() {
+    if (cnt++ > 2) {
+        return;
+    }
+    o0.shift();
+    gc(only_scavenge);
+    o0.push(64);
+    o0.concat(o1);
+}
+o1.__defineGetter__(0, f9);
+o1[0];
+
+FuzzIL program written to corpus/regress-621869.fzil

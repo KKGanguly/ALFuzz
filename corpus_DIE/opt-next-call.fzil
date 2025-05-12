@@ -1,0 +1,31 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'fooed'
+    Return v1
+EndPlainFunction
+v2 <- LoadString 'fooed'
+v3 <- CallFunction v0, []
+v4 <- CallFunction v0, []
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadString 'bared'
+    Return v6
+EndPlainFunction
+v7 <- LoadString 'bared'
+v8 <- CallFunction v5, []
+v9 <- LoadString 'bared'
+v10 <- CallFunction v5, []
+v11 <- CallFunction v5, []
+
+
+function foo() {
+    return "fooed";
+}
+foo();
+foo();
+function bar() {
+    return "bared";
+}
+bar();
+bar();
+bar();
+
+FuzzIL program written to corpus/opt-next-call.fzil

@@ -1,0 +1,144 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'log', 'var', v0
+BeginObjectLiteral
+    BeginObjectLiteralGetter `source` -> v2
+        v3 <- LoadString 'p'
+        v4 <- CallMethod v1, 'push', [v3]
+        v5 <- BeginPlainFunction -> 
+            v6 <- LoadString 'ps'
+            v7 <- CallMethod v1, 'push', [v6]
+            v8 <- LoadString 'pattern'
+            Return v8
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `toString`, v5
+        v9 <- EndObjectLiteral
+        Return v9
+    EndObjectLiteralGetter
+    BeginObjectLiteralGetter `flags` -> v10
+        v11 <- LoadString 'f'
+        v12 <- CallMethod v1, 'push', [v11]
+        v13 <- BeginPlainFunction -> 
+            v14 <- LoadString 'fs'
+            v15 <- CallMethod v1, 'push', [v14]
+            v16 <- LoadString 'flags'
+            Return v16
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `toString`, v13
+        v17 <- EndObjectLiteral
+        Return v17
+    EndObjectLiteralGetter
+v18 <- EndObjectLiteral
+v19 <- CreateNamedVariable 'fake', 'var', v18
+v20 <- BeginPlainFunction -> v21
+    BeginTry
+        v22 <- CreateNamedVariable 'RegExp', 'none'
+        v23 <- GetProperty v22, 'prototype'
+        v24 <- GetProperty v23, 'toString'
+        v25 <- CallMethod v24, 'call', [v21]
+    BeginCatch -> v26
+        v27 <- GetProperty v26, 'message'
+        v28 <- LoadRegExp 'incompatible receiver' ''
+        v29 <- CallMethod v28, 'test', [v27]
+        Return
+    EndTryCatch
+EndPlainFunction
+v30 <- LoadInteger '1'
+v31 <- CallFunction v20, [v30]
+v32 <- LoadNull
+v33 <- CallFunction v20, [v32]
+v34 <- LoadString 'a'
+v35 <- CreateNamedVariable 'Number', 'none'
+v36 <- GetProperty v35, 'prototype'
+SetProperty v36, 'source', v34
+v37 <- LoadString 'b'
+v38 <- GetProperty v35, 'prototype'
+SetProperty v38, 'flags', v37
+v39 <- LoadInteger '1'
+v40 <- CallFunction v20, [v39]
+v41 <- LoadString '/pattern/flags'
+v42 <- CreateNamedVariable 'RegExp', 'none'
+v43 <- GetProperty v42, 'prototype'
+v44 <- GetProperty v43, 'toString'
+v45 <- CallMethod v44, 'call', [v19]
+v46 <- LoadString 'p'
+v47 <- LoadString 'ps'
+v48 <- LoadString 'f'
+v49 <- LoadString 'fs'
+v50 <- CreateArray [v46, v47, v48, v49]
+v51 <- LoadRegExp 'foo' ''
+v52 <- CreateNamedVariable 'weird', 'let', v51
+v53 <- LoadString 'flags'
+v54 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v54
+v55 <- EndObjectLiteral
+v56 <- CreateNamedVariable 'Object', 'none'
+v57 <- CallMethod v56, 'defineProperty', [v52, v53, v55]
+v58 <- LoadString 'source'
+v59 <- LoadString 'baz'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v59
+v60 <- EndObjectLiteral
+v61 <- CallMethod v56, 'defineProperty', [v52, v58, v60]
+v62 <- LoadString '/baz/bar'
+v63 <- CallMethod v52, 'toString', []
+v64 <- LoadString '/(?:)/'
+v65 <- GetProperty v42, 'prototype'
+v66 <- CallMethod v65, 'toString', []
+v67 <- LoadString '(?:)'
+v68 <- GetProperty v42, 'prototype'
+v69 <- GetProperty v68, 'source'
+v70 <- LoadString ''
+v71 <- GetProperty v42, 'prototype'
+v72 <- GetProperty v71, 'flags'
+
+
+var log = [];
+const v18 = {
+    get source() {
+        log.push("p");
+        function f5() {
+            log.push("ps");
+            return "pattern";
+        }
+        return { toString: f5 };
+    },
+    get flags() {
+        log.push("f");
+        function f13() {
+            log.push("fs");
+            return "flags";
+        }
+        return { toString: f13 };
+    },
+};
+var fake = v18;
+function testThrows(a21) {
+    try {
+        RegExp.prototype.toString.call(a21);
+    } catch(e26) {
+        const v27 = e26.message;
+        /incompatible receiver/.test(v27);
+        return;
+    }
+}
+testThrows(1);
+testThrows(null);
+const t29 = Number.prototype;
+t29.source = "a";
+const t33 = Number.prototype;
+t33.flags = "b";
+testThrows(1);
+RegExp.prototype.toString.call(fake);
+["p","ps","f","fs"];
+let weird = /foo/;
+Object.defineProperty(weird, "flags", { value: "bar" });
+Object.defineProperty(weird, "source", { value: "baz" });
+weird.toString();
+RegExp.prototype.toString();
+RegExp.prototype.source;
+RegExp.prototype.flags;
+
+FuzzIL program written to corpus/regexp-tostring.fzil

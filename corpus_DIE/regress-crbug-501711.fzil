@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        v1 <- CallFunction v0, []
+    BeginCatch -> v2
+        BeginTry
+        BeginCatch -> v3
+            v4 <- CreateNamedVariable 'quit', 'none'
+            v5 <- CallFunction v4, []
+        EndTryCatch
+    EndTryCatch
+EndPlainFunction
+v6 <- CallFunction v0, []
+
+
+function f() {
+    try {
+        f();
+    } catch(e2) {
+        try {
+        } catch(e3) {
+            quit();
+        }
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-crbug-501711.fzil

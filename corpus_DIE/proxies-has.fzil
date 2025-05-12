@@ -1,0 +1,300 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `target_one`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'target', 'var', v1
+v3 <- LoadInteger '42'
+SetElement v2, '0', v3
+v4 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `target_two`, v4
+v5 <- EndObjectLiteral
+SetProperty v2, '__proto__', v5
+v6 <- BeginPlainFunction -> v7, v8
+    v9 <- LoadString 'present'
+    v10 <- Compare v8, '==', v9
+    v11 <- LoadString '0'
+    v12 <- Compare v8, '==', v11
+    v13 <- BinaryOperation v10, '||', v12
+    Return v13
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v6
+v14 <- EndObjectLiteral
+v15 <- CreateNamedVariable 'handler', 'var', v14
+v16 <- CreateNamedVariable 'Proxy', 'none'
+v17 <- Construct v16, [v2, v15]
+v18 <- CreateNamedVariable 'proxy', 'var', v17
+v19 <- LoadString 'present'
+v20 <- TestIn v19, v18
+v21 <- LoadString 'nonpresent'
+v22 <- TestIn v21, v18
+v23 <- LoadInteger '0'
+v24 <- TestIn v23, v18
+v25 <- LoadInteger '1'
+v26 <- TestIn v25, v18
+v27 <- LoadString '0'
+v28 <- TestIn v27, v18
+v29 <- LoadString '1'
+v30 <- TestIn v29, v18
+v31 <- CreateNamedVariable 'Symbol', 'none'
+v32 <- GetProperty v31, 'toPrimitive'
+BeginObjectLiteral
+    BeginObjectLiteralComputedMethod v32 -> v33, v34
+        v35 <- LoadInteger '0'
+        Return v35
+    EndObjectLiteralComputedMethod
+v36 <- EndObjectLiteral
+v37 <- CreateNamedVariable 'symbol0', 'var', v36
+v38 <- GetProperty v31, 'toPrimitive'
+BeginObjectLiteral
+    BeginObjectLiteralComputedMethod v38 -> v39, v40
+        v41 <- LoadInteger '1'
+        Return v41
+    EndObjectLiteralComputedMethod
+v42 <- EndObjectLiteral
+v43 <- CreateNamedVariable 'symbol1', 'var', v42
+v44 <- TestIn v37, v18
+v45 <- TestIn v43, v18
+v46 <- LoadUndefined
+SetProperty v15, 'has', v46
+v47 <- LoadString 'target_one'
+v48 <- TestIn v47, v18
+v49 <- LoadString 'target_two'
+v50 <- TestIn v49, v18
+v51 <- LoadString 'in_your_dreams'
+v52 <- TestIn v51, v18
+v53 <- LoadInteger '1'
+v54 <- CreateNamedVariable 'result', 'var', v53
+v55 <- BeginPlainFunction -> v56, v57
+    Return v54
+EndPlainFunction
+SetProperty v15, 'has', v55
+v58 <- LoadString 'foo'
+v59 <- TestIn v58, v18
+BeginObjectLiteral
+v60 <- EndObjectLiteral
+Reassign v54, v60
+v61 <- LoadString 'foo'
+v62 <- TestIn v61, v18
+v63 <- LoadUndefined
+Reassign v54, v63
+v64 <- LoadString 'foo'
+v65 <- TestIn v64, v18
+v66 <- LoadString 'string'
+Reassign v54, v66
+v67 <- LoadString 'foo'
+v68 <- TestIn v67, v18
+v69 <- LoadString 'nonconf'
+v70 <- LoadInteger '1'
+v71 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v70
+    ObjectLiteralAddProperty `configurable`, v71
+v72 <- EndObjectLiteral
+v73 <- CreateNamedVariable 'Object', 'none'
+v74 <- CallMethod v73, 'defineProperty', [v2, v69, v72]
+v75 <- LoadBoolean 'false'
+Reassign v54, v75
+v76 <- LoadString ''nonconf' in proxy'
+v77 <- CreateNamedVariable 'TypeError', 'none'
+v78 <- CallMethod v73, 'preventExtensions', [v2]
+v79 <- LoadString ''nonconf' in proxy'
+v80 <- LoadString ''target_one' in proxy'
+v81 <- LoadString 'target_two'
+v82 <- TestIn v81, v18
+v83 <- LoadString 'in_your_dreams'
+v84 <- TestIn v83, v18
+v85 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v86 <- EndObjectLiteral
+    BeginObjectLiteral
+    v87 <- EndObjectLiteral
+    v88 <- Construct v16, [v86, v87]
+    v89 <- CreateNamedVariable 'proxy', 'var', v88
+    v90 <- CallMethod v73, 'create', [v89]
+    v91 <- CreateNamedVariable 'object', 'var', v90
+    v92 <- LoadInteger '0'
+    v93 <- CallMethod v91, 'hasOwnProperty', [v92]
+EndPlainFunction
+v94 <- CallFunction v85, []
+v95 <- BeginPlainFunction -> 
+    v96 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `attr`, v96
+    v97 <- EndObjectLiteral
+    v98 <- CreateNamedVariable 'target2', 'var', v97
+    v99 <- BeginPlainFunction -> v100, v101
+        v102 <- LoadBoolean 'false'
+        Return v102
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `has`, v99
+    v103 <- EndObjectLiteral
+    v104 <- Construct v16, [v98, v103]
+    v105 <- CreateNamedVariable 'p', 'var', v104
+    v106 <- LoadString 'attr'
+    v107 <- TestIn v106, v105
+EndPlainFunction
+v108 <- CallFunction v95, []
+v109 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v110 <- EndObjectLiteral
+    v111 <- CreateNamedVariable 'target', 'var', v110
+    v112 <- LoadString 'prop'
+    v113 <- BeginPlainFunction -> 
+        v114 <- LoadThis
+        v115 <- LoadInteger '42'
+        Return v115
+    EndPlainFunction
+    v116 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v113
+        ObjectLiteralAddProperty `configurable`, v116
+    v117 <- EndObjectLiteral
+    v118 <- CallMethod v73, 'defineProperty', [v111, v112, v117]
+    v119 <- BeginPlainFunction -> v120, v121
+        v122 <- LoadBoolean 'false'
+        Return v122
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `has`, v119
+    v123 <- EndObjectLiteral
+    v124 <- Construct v16, [v111, v123]
+    v125 <- CreateNamedVariable 'proxy', 'var', v124
+    v126 <- LoadString 'prop'
+    v127 <- TestIn v126, v125
+EndPlainFunction
+v128 <- CallFunction v109, []
+v129 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v130 <- EndObjectLiteral
+    v131 <- CreateNamedVariable 'target', 'var', v130
+    v132 <- LoadString 'prop'
+    v133 <- LoadInteger '42'
+    v134 <- LoadBoolean 'false'
+    v135 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v133
+        ObjectLiteralAddProperty `configurable`, v134
+        ObjectLiteralAddProperty `writable`, v135
+    v136 <- EndObjectLiteral
+    v137 <- CallMethod v73, 'defineProperty', [v131, v132, v136]
+    v138 <- BeginPlainFunction -> v139, v140
+        v141 <- LoadBoolean 'false'
+        Return v141
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `has`, v138
+    v142 <- EndObjectLiteral
+    v143 <- Construct v16, [v131, v142]
+    v144 <- CreateNamedVariable 'proxy', 'var', v143
+    v145 <- BeginPlainFunction -> 
+        v146 <- LoadString 'prop'
+        v147 <- TestIn v146, v144
+    EndPlainFunction
+    v148 <- CallFunction v145, []
+EndPlainFunction
+v149 <- CallFunction v129, []
+
+
+var target = { target_one: 1 };
+target[0] = 42;
+target.__proto__ = { target_two: 2 };
+function f6(a7, a8) {
+    return (a8 == "present") || (a8 == "0");
+}
+var handler = { has: f6 };
+const v17 = new Proxy(target, handler);
+var proxy = v17;
+"present" in proxy;
+"nonpresent" in proxy;
+0 in proxy;
+1 in proxy;
+"0" in proxy;
+"1" in proxy;
+const v32 = Symbol.toPrimitive;
+const v36 = {
+    [v32](a34) {
+        return 0;
+    },
+};
+var symbol0 = v36;
+const v38 = Symbol.toPrimitive;
+const v42 = {
+    [v38](a40) {
+        return 1;
+    },
+};
+var symbol1 = v42;
+symbol0 in proxy;
+symbol1 in proxy;
+handler.has = undefined;
+"target_one" in proxy;
+"target_two" in proxy;
+"in_your_dreams" in proxy;
+var result = 1;
+function f55(a56, a57) {
+    return result;
+}
+handler.has = f55;
+"foo" in proxy;
+result = {};
+"foo" in proxy;
+result = undefined;
+"foo" in proxy;
+result = "string";
+"foo" in proxy;
+Object.defineProperty(target, "nonconf", { value: 1, configurable: false });
+result = false;
+Object.preventExtensions(target);
+"target_two" in proxy;
+"in_your_dreams" in proxy;
+function TestHasPropertyFastPath() {
+    const v86 = {};
+    const v88 = new Proxy(v86, {});
+    var proxy = v88;
+    var object = Object.create(proxy);
+    object.hasOwnProperty(0);
+}
+TestHasPropertyFastPath();
+function FalseTargetPropExists() {
+    var target2 = { attr: 1 };
+    function f99(a100, a101) {
+        return false;
+    }
+    const v104 = new Proxy(target2, { has: f99 });
+    var p = v104;
+    "attr" in p;
+}
+FalseTargetPropExists();
+function TargetHasAccessorProperty() {
+    var target = {};
+    function f113() {
+        return 42;
+    }
+    Object.defineProperty(target, "prop", { get: f113, configurable: true });
+    function f119(a120, a121) {
+        return false;
+    }
+    const v124 = new Proxy(target, { has: f119 });
+    var proxy = v124;
+    "prop" in proxy;
+}
+TargetHasAccessorProperty();
+function TargetHasNonConfigurableProperty() {
+    var target = {};
+    Object.defineProperty(target, "prop", { value: 42, configurable: false, writable: true });
+    function f138(a139, a140) {
+        return false;
+    }
+    const v143 = new Proxy(target, { has: f138 });
+    var proxy = v143;
+    function f145() {
+        "prop" in proxy;
+    }
+    f145();
+}
+TargetHasNonConfigurableProperty();
+
+FuzzIL program written to corpus/proxies-has.fzil

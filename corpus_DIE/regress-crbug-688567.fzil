@@ -1,0 +1,108 @@
+BeginBlockStatement
+    v0 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v1 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v2 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v3 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v4 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v5 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v6 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v7 <- BeginPlainFunction -> 
+    EndPlainFunction
+EndBlockStatement
+v8 <- LoadThis
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'getOwnPropertyNames', [v8]
+v11 <- CreateNamedVariable 'names', 'var', v10
+v12 <- BeginArrowFunction -> v13
+    v14 <- LoadString 'abcdefgh'
+    v15 <- CreateNamedVariable 'Array', 'none'
+    v16 <- GetProperty v15, 'prototype'
+    v17 <- GetProperty v16, 'includes'
+    v18 <- CallMethod v17, 'call', [v14, v13]
+    Return v18
+EndArrowFunction
+v19 <- CallMethod v11, 'filter', [v12]
+Reassign v11, v19
+v20 <- LoadString 'a,b,c,d,e,f,g,h'
+v21 <- CallMethod v11, 'join', []
+BeginBlockStatement
+    BeginBlockStatement
+        v22 <- LoadUndefined
+        v23 <- CreateNamedVariable 'j', 'let', v22
+        BeginBlockStatement
+            v24 <- BeginPlainFunction -> 
+            EndPlainFunction
+        EndBlockStatement
+    EndBlockStatement
+    v25 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v26 <- BeginPlainFunction -> 
+    EndPlainFunction
+EndBlockStatement
+v27 <- LoadThis
+v28 <- CallMethod v9, 'getOwnPropertyNames', [v27]
+v29 <- CreateNamedVariable 'names', 'var', v28
+v30 <- BeginArrowFunction -> v31
+    v32 <- LoadString 'ij'
+    v33 <- CreateNamedVariable 'Array', 'none'
+    v34 <- GetProperty v33, 'prototype'
+    v35 <- GetProperty v34, 'includes'
+    v36 <- CallMethod v35, 'call', [v32, v31]
+    Return v36
+EndArrowFunction
+v37 <- CallMethod v29, 'filter', [v30]
+Reassign v29, v37
+v38 <- LoadString 'i,j'
+v39 <- CallMethod v29, 'join', []
+
+
+{
+    function a() {
+    }
+    function b() {
+    }
+    function c() {
+    }
+    function d() {
+    }
+    function e() {
+    }
+    function f() {
+    }
+    function g() {
+    }
+    function h() {
+    }
+}
+var names = Object.getOwnPropertyNames(this);
+const v12 = (a13) => {
+    return Array.prototype.includes.call("abcdefgh", a13);
+};
+(names = names.filter(v12)).join();
+{
+    {
+        let j;
+        {
+            function j() {
+            }
+        }
+    }
+    function i() {
+    }
+    function j() {
+    }
+}
+var names = Object.getOwnPropertyNames(this);
+const v30 = (a31) => {
+    return Array.prototype.includes.call("ij", a31);
+};
+(names = names.filter(v30)).join();
+
+FuzzIL program written to corpus/regress-crbug-688567.fzil

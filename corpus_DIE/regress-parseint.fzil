@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '0'
+    v4 <- Compare v2, '==', v3
+    v5 <- LoadInteger '0'
+    v6 <- BinaryOperation v2, '>>', v5
+    v7 <- TernaryOperation v4, v2, v6
+    Reassign v2, v7
+    v8 <- LoadInteger '2'
+    v9 <- Compare v2, '!=', v8
+    BeginIf v9
+        v10 <- CreateNamedVariable 'NaN', 'none'
+        Return v10
+    EndIf
+EndPlainFunction
+v11 <- LoadInteger '2'
+v12 <- LoadInteger '4294967294'
+v13 <- UnaryOperation '-', v12
+v14 <- LoadInteger '0'
+v15 <- BinaryOperation v13, '>>', v14
+v16 <- LoadInteger '3'
+v17 <- LoadString '11'
+v18 <- LoadInteger '4294967294'
+v19 <- UnaryOperation '-', v18
+v20 <- CallFunction v0, [v17, v19]
+v21 <- CreateNamedVariable 'NaN', 'none'
+v22 <- LoadString '11'
+v23 <- LoadInteger '2147483650'
+v24 <- UnaryOperation '-', v23
+v25 <- CallFunction v0, [v22, v24]
+v26 <- LoadInteger '3'
+v27 <- LoadString '11'
+v28 <- LoadInteger '4294967294'
+v29 <- UnaryOperation '-', v28
+v30 <- CallFunction v0, [v27, v29]
+
+
+function f(a1, a2) {
+    if ((a2 = a2 == 0 ? a2 : a2 >> 0) != 2) {
+        return NaN;
+    }
+}
+-4294967294 >> 0;
+f("11", -4294967294);
+f("11", -2147483650);
+f("11", -4294967294);
+
+FuzzIL program written to corpus/regress-parseint.fzil

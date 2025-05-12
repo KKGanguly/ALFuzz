@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1
+    BeginForLoopInitializer
+        v2 <- LoadInteger '0'
+    BeginForLoopCondition -> v3
+        v4 <- LoadInteger '100000'
+        v5 <- Compare v3, '<', v4
+    BeginForLoopAfterthought v5 -> v6
+        v7 <- UnaryOperation '++', v6
+    BeginForLoopBody -> v8
+        v9 <- LoadInteger '1'
+        v10 <- UnaryOperation '-', v9
+        v11 <- LoadInteger '0'
+        v12 <- CreateNamedVariable 'Math', 'none'
+        v13 <- CallMethod v12, 'min', [v10, v11]
+        Reassign v1, v13
+    EndForLoop
+EndPlainFunction
+v14 <- LoadInteger '0'
+v15 <- CallFunction v0, [v14]
+
+
+function foo(a1) {
+    for (let i3 = 0; i3 < 100000; ++i3) {
+        a1 = Math.min(-1, 0);
+    }
+}
+foo(0);
+
+FuzzIL program written to corpus/regress-crbug-495493.fzil

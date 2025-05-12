@@ -1,0 +1,41 @@
+v0 <- LoadFloat '1.1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'a', 'var', v1
+v3 <- LoadInteger '0'
+SetProperty v2, 'x', v3
+v4 <- GetProperty v2, 'x'
+v5 <- CreateNamedVariable 'G', 'var', v4
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'o', 'var', v7
+v9 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v5
+    v10 <- EndObjectLiteral
+    Return v10
+EndPlainFunction
+v11 <- CallFunction v9, []
+v12 <- CallFunction v9, []
+v13 <- LoadInteger '0'
+v14 <- CallFunction v9, []
+v15 <- GetProperty v14, 'x'
+
+
+var a = { x: 1.1 };
+a.x = 0;
+var G = a.x;
+const v6 = {};
+var o = { x: v6 };
+function func() {
+    return { x: G };
+}
+func();
+func();
+func().x;
+
+FuzzIL program written to corpus/regress-333594.fzil

@@ -1,0 +1,35 @@
+v0 <- LoadInteger '1'
+v1 <- CreateArray [v0]
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- CallMethod v2, 'freeze', [v1]
+v4 <- CreateNamedVariable 'a', 'var', v3
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '2'
+    v7 <- CallMethod v4, 'push', [v6]
+EndPlainFunction
+v8 <- CallFunction v5, []
+v9 <- CreateNamedVariable 'TypeError', 'none'
+v10 <- LoadInteger '1'
+v11 <- GetProperty v4, 'length'
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '2'
+    v14 <- CallMethod v4, 'push', [v13]
+EndPlainFunction
+v15 <- CallFunction v12, []
+v16 <- LoadInteger '1'
+v17 <- GetProperty v4, 'length'
+
+
+var a = Object.freeze([1]);
+function f5() {
+    a.push(2);
+}
+f5();
+a.length;
+function f12() {
+    a.push(2);
+}
+f12();
+a.length;
+
+FuzzIL program written to corpus/regress-2711.fzil

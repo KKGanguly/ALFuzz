@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadUndefined
+    v3 <- CallMethod v2, 'boom', []
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- Construct v0, []
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- CallFunction v4, []
+EndPlainFunction
+v8 <- LoadString 'g()'
+v9 <- CreateNamedVariable 'TypeError', 'none'
+v10 <- LoadString 'g()'
+v11 <- LoadString 'g()'
+
+
+function c(a1) {
+    undefined.boom();
+}
+function f() {
+    const v5 = new c();
+    return v5;
+}
+function g() {
+    f();
+}
+
+FuzzIL program written to corpus/regress-3029.fzil

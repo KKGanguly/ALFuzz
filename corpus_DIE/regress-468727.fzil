@@ -1,0 +1,36 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '126'
+    v2 <- UnaryOperation '-', v1
+    v3 <- CreateNamedVariable '__v_3', 'none'
+    v4 <- BinaryOperation v2, '-', v3
+    v5 <- CreateNamedVariable '__v_7', 'var', v4
+    v6 <- CreateNamedVariable '__v_15', 'none'
+    v7 <- CreateNamedVariable '__v_14', 'none'
+    v8 <- BinaryOperation v6, '&', v7
+    v9 <- LoadInteger '4'
+    v10 <- Compare v8, '!=', v9
+    v11 <- LoadInteger '16'
+    v12 <- BinaryOperation v10, '|', v11
+    v13 <- CreateNamedVariable '__v_17', 'var', v12
+    BeginIf v13
+        v14 <- LoadInteger '1'
+        v15 <- BinaryOperation v14, '<<', v5
+        v16 <- CreateNamedVariable '__v_11', 'var', v15
+    EndIf
+    v17 <- CreateNamedVariable '__v_12', 'none'
+    Update v17, '>>', v3
+EndPlainFunction
+v18 <- CallFunction v0, []
+
+
+function f() {
+    var __v_7 = -126 - __v_3;
+    var __v_17 = ((__v_15 & __v_14) != 4) | 16;
+    if (__v_17) {
+        var __v_11 = 1 << __v_7;
+    }
+    __v_12 >>= __v_3;
+}
+f();
+
+FuzzIL program written to corpus/regress-468727.fzil

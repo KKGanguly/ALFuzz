@@ -1,0 +1,71 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- GetProperty v1, 'prototype'
+    v3 <- GetProperty v2, '__proto__'
+    v4 <- CreateNamedVariable 'backup', 'const', v3
+    v5 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v6 <- EndObjectLiteral
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `set` -> v7
+            v8 <- LoadInteger '666'
+            ThrowException v8
+        EndObjectLiteralMethod
+    v9 <- EndObjectLiteral
+    v10 <- Construct v5, [v6, v9]
+    v11 <- GetProperty v1, 'prototype'
+    SetProperty v11, '__proto__', v10
+    v12 <- BeginPlainFunction -> 
+        v13 <- LoadString 'a'
+        v14 <- LoadString 'b'
+        v15 <- LoadString 'c'
+        v16 <- LoadString 'd'
+        v17 <- CreateArray [v14, v15, v16]
+        v18 <- LoadString 'e'
+        v19 <- CreateArrayWithSpread [v13, ...v17, v18]
+        Return v19
+    EndPlainFunction
+    v20 <- LoadString 'a'
+    v21 <- LoadString 'b'
+    v22 <- LoadString 'c'
+    v23 <- LoadString 'd'
+    v24 <- LoadString 'e'
+    v25 <- CreateArray [v20, v21, v22, v23, v24]
+    v26 <- CallFunction v12, []
+    v27 <- LoadString 'a'
+    v28 <- LoadString 'b'
+    v29 <- LoadString 'c'
+    v30 <- LoadString 'd'
+    v31 <- LoadString 'e'
+    v32 <- CreateArray [v27, v28, v29, v30, v31]
+    v33 <- CallFunction v12, []
+    v34 <- GetProperty v1, 'prototype'
+    v35 <- CreateNamedVariable 'Object', 'none'
+    v36 <- CallMethod v35, 'setPrototypeOf', [v34, v4]
+EndPlainFunction
+v37 <- CallFunction v0, []
+
+
+function TestPrototypeProxy() {
+    const backup = Array.prototype.__proto__;
+    const v6 = {};
+    const v9 = {
+        set() {
+            throw 666;
+        },
+    };
+    const v10 = new Proxy(v6, v9);
+    const t9 = Array.prototype;
+    t9.__proto__ = v10;
+    function f() {
+        return ["a",...["b","c","d"],"e"];
+    }
+    ["a","b","c","d","e"];
+    f();
+    ["a","b","c","d","e"];
+    f();
+    Object.setPrototypeOf(Array.prototype, backup);
+}
+TestPrototypeProxy();
+
+FuzzIL program written to corpus/spread-array-prototype-proxy.fzil

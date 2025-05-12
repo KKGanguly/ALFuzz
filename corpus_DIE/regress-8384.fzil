@@ -1,0 +1,236 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- UnaryOperation '!', v1
+    BeginIf v2
+        v3 <- LoadString 'Assert'
+        ThrowException v3
+    EndIf
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadNull
+    v6 <- LoadThis
+    SetProperty v6, 'padding1', v5
+    v7 <- LoadNull
+    v8 <- LoadThis
+    SetProperty v8, 'padding2', v7
+    v9 <- LoadNull
+    v10 <- LoadThis
+    SetProperty v10, 'padding3', v9
+    v11 <- LoadNull
+    v12 <- LoadThis
+    SetProperty v12, 'padding4', v11
+    v13 <- LoadNull
+    v14 <- LoadThis
+    SetProperty v14, 'padding5', v13
+    v15 <- LoadNull
+    v16 <- LoadThis
+    SetProperty v16, 'padding6', v15
+    v17 <- LoadNull
+    v18 <- LoadThis
+    SetProperty v18, 'padding7', v17
+    v19 <- LoadNull
+    v20 <- LoadThis
+    SetProperty v20, 'padding8', v19
+    v21 <- LoadNull
+    v22 <- LoadThis
+    SetProperty v22, 'padding9', v21
+    v23 <- LoadNull
+    v24 <- LoadThis
+    SetProperty v24, 'padding10', v23
+    v25 <- LoadNull
+    v26 <- LoadThis
+    SetProperty v26, 'padding11', v25
+    v27 <- LoadNull
+    v28 <- LoadThis
+    SetProperty v28, 'padding12', v27
+    v29 <- LoadNull
+    v30 <- LoadThis
+    SetProperty v30, 'padding13', v29
+    v31 <- LoadNull
+    v32 <- LoadThis
+    SetProperty v32, 'padding14', v31
+    v33 <- LoadNull
+    v34 <- LoadThis
+    SetProperty v34, 'padding15', v33
+    v35 <- LoadNull
+    v36 <- LoadThis
+    SetProperty v36, 'padding16', v35
+    v37 <- LoadNull
+    v38 <- LoadThis
+    SetProperty v38, 'padding17', v37
+    v39 <- LoadNull
+    v40 <- LoadThis
+    SetProperty v40, 'padding18', v39
+    v41 <- LoadNull
+    v42 <- LoadThis
+    SetProperty v42, 'padding19', v41
+    v43 <- LoadNull
+    v44 <- LoadThis
+    SetProperty v44, 'padding20', v43
+    v45 <- LoadNull
+    v46 <- LoadThis
+    SetProperty v46, 'padding21', v45
+    v47 <- LoadNull
+    v48 <- LoadThis
+    SetProperty v48, 'padding22', v47
+    v49 <- LoadNull
+    v50 <- LoadThis
+    SetProperty v50, 'padding23', v49
+    v51 <- LoadNull
+    v52 <- LoadThis
+    SetProperty v52, 'padding24', v51
+    v53 <- LoadNull
+    v54 <- LoadThis
+    SetProperty v54, 'padding25', v53
+    v55 <- LoadNull
+    v56 <- LoadThis
+    SetProperty v56, 'padding26', v55
+    v57 <- LoadNull
+    v58 <- LoadThis
+    SetProperty v58, 'padding27', v57
+    v59 <- LoadNull
+    v60 <- LoadThis
+    SetProperty v60, 'padding28', v59
+    v61 <- LoadNull
+    v62 <- LoadThis
+    SetProperty v62, 'padding29', v61
+    v63 <- LoadNull
+    v64 <- LoadThis
+    SetProperty v64, 'array', v63
+    v65 <- LoadInteger '0'
+    v66 <- LoadThis
+    SetProperty v66, 'accumulator', v65
+EndPlainFunction
+v67 <- BeginPlainFunction -> v68
+    v69 <- GetProperty v68, 'accumulator'
+    v70 <- LoadInteger '0'
+    v71 <- BinaryOperation v69, '|', v70
+    v72 <- CreateNamedVariable 'c', 'var', v71
+    v73 <- GetProperty v68, 'array'
+    v74 <- GetProperty v68, 'accumulator'
+    v75 <- LoadInteger '1'
+    v76 <- BinaryOperation v74, '+', v75
+    v77 <- LoadInteger '0'
+    v78 <- BinaryOperation v76, '|', v77
+    v79 <- GetComputedProperty v73, v78
+    v80 <- LoadInteger '0'
+    v81 <- BinaryOperation v79, '|', v80
+    SetProperty v68, 'accumulator', v81
+    v82 <- LoadInteger '1'
+    v83 <- UnaryOperation '-', v82
+    v84 <- GetProperty v68, 'array'
+    v85 <- LoadInteger '1'
+    v86 <- BinaryOperation v72, '+', v85
+    v87 <- LoadInteger '0'
+    v88 <- BinaryOperation v86, '|', v87
+    SetComputedProperty v84, v88, v83
+    v89 <- GetProperty v68, 'accumulator'
+    v90 <- CreateNamedVariable 'head', 'var', v89
+    v91 <- BinaryOperation v90, '+', v72
+    v92 <- LoadInteger '1'
+    v93 <- BinaryOperation v91, '&', v92
+    BeginWhileLoopHeader
+        v94 <- LoadInteger '0'
+        v95 <- Compare v90, '>=', v94
+    BeginWhileLoopBody v95
+        v96 <- GetProperty v68, 'array'
+        v97 <- LoadInteger '1'
+        v98 <- BinaryOperation v90, '+', v97
+        v99 <- LoadInteger '0'
+        v100 <- BinaryOperation v98, '|', v99
+        v101 <- GetComputedProperty v96, v100
+        Reassign v90, v101
+    EndWhileLoop
+    Return
+EndPlainFunction
+v102 <- Construct v4, []
+v103 <- CreateNamedVariable 'tmp', 'const', v102
+v104 <- CreateNamedVariable 'Int32Array', 'none'
+v105 <- LoadInteger '5'
+v106 <- Construct v104, [v105]
+SetProperty v103, 'array', v106
+BeginForLoopInitializer
+    v107 <- LoadInteger '1'
+BeginForLoopCondition -> v108
+    v109 <- LoadInteger '5'
+    v110 <- Compare v108, '<', v109
+BeginForLoopAfterthought v110 -> v111
+    v112 <- UnaryOperation v111, '++'
+BeginForLoopBody -> v113
+    v114 <- LoadInteger '0'
+    v115 <- BinaryOperation v113, '|', v114
+    v116 <- GetProperty v103, 'array'
+    SetComputedProperty v116, v113, v115
+EndForLoop
+v117 <- LoadInteger '0'
+SetProperty v103, 'accumulator', v117
+v118 <- CallFunction v67, [v103]
+v119 <- CallFunction v67, [v103]
+v120 <- CallFunction v67, [v103]
+
+
+function assert(a1) {
+    if (!a1) {
+        throw "Assert";
+    }
+}
+function Constructor() {
+    this.padding1 = null;
+    this.padding2 = null;
+    this.padding3 = null;
+    this.padding4 = null;
+    this.padding5 = null;
+    this.padding6 = null;
+    this.padding7 = null;
+    this.padding8 = null;
+    this.padding9 = null;
+    this.padding10 = null;
+    this.padding11 = null;
+    this.padding12 = null;
+    this.padding13 = null;
+    this.padding14 = null;
+    this.padding15 = null;
+    this.padding16 = null;
+    this.padding17 = null;
+    this.padding18 = null;
+    this.padding19 = null;
+    this.padding20 = null;
+    this.padding21 = null;
+    this.padding22 = null;
+    this.padding23 = null;
+    this.padding24 = null;
+    this.padding25 = null;
+    this.padding26 = null;
+    this.padding27 = null;
+    this.padding28 = null;
+    this.padding29 = null;
+    this.array = null;
+    this.accumulator = 0;
+}
+function f(a68) {
+    var c = a68.accumulator | 0;
+    a68.accumulator = a68.array[(a68.accumulator + 1) | 0] | 0;
+    const v83 = -1;
+    const t42 = a68.array;
+    t42[(c + 1) | 0] = v83;
+    var head = a68.accumulator;
+    (head + c) & 1;
+    while (head >= 0) {
+        head = a68.array[(head + 1) | 0];
+    }
+    return;
+}
+const v102 = new Constructor();
+const tmp = v102;
+const v106 = new Int32Array(5);
+tmp.array = v106;
+for (let i108 = 1; i108 < 5; i108++) {
+    const v115 = i108 | 0;
+    const t57 = tmp.array;
+    t57[i108] = v115;
+}
+tmp.accumulator = 0;
+f(tmp);
+f(tmp);
+f(tmp);
+
+FuzzIL program written to corpus/regress-8384.fzil

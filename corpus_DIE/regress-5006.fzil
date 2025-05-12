@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- BinaryOperation v1, '|', v2
+    v4 <- LoadInteger '2'
+    v5 <- CreateNamedVariable 'Math', 'none'
+    v6 <- CallMethod v5, 'imul', [v3, v4]
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '1'
+v8 <- CallFunction v0, [v7]
+v9 <- CreateNamedVariable 'print', 'none'
+v10 <- CallFunction v9, [v8]
+v11 <- LoadInteger '1'
+v12 <- CallFunction v0, [v11]
+v13 <- CallFunction v9, [v12]
+v14 <- LoadInteger '1'
+v15 <- CallFunction v0, [v14]
+v16 <- CallFunction v9, [v15]
+
+
+function foo(a1) {
+    return Math.imul(a1 | 0, 2);
+}
+print(foo(1));
+print(foo(1));
+print(foo(1));
+
+FuzzIL program written to corpus/regress-5006.fzil

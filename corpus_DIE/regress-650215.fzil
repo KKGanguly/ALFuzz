@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '10'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- LoadInteger '2'
+        v11 <- BinaryOperation v10, '%', v2
+        v12 <- LoadInteger '0'
+        v13 <- BinaryOperation v11, '|', v12
+        Reassign v2, v13
+    EndForLoop
+    Return v2
+EndPlainFunction
+v14 <- LoadInteger '0'
+v15 <- CallFunction v0, []
+
+
+function f() {
+    var x = 0;
+    for (let i4 = 0; i4 < 10; i4++) {
+        x = (2 % x) | 0;
+    }
+    return x;
+}
+f();
+
+FuzzIL program written to corpus/regress-650215.fzil

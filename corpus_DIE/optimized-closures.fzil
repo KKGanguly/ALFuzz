@@ -1,0 +1,78 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '100'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '0'
+    v6 <- CreateNamedVariable 'x', 'var', v5
+    BeginForLoopInitializer
+        v7 <- LoadInteger '0'
+    BeginForLoopCondition -> v8
+        v9 <- LoadInteger '100'
+        v10 <- Compare v8, '<', v9
+    BeginForLoopAfterthought v10 -> v11
+        v12 <- UnaryOperation v11, '++'
+    BeginForLoopBody -> v13
+        v14 <- BeginPlainFunction -> v15
+            v16 <- BeginPlainFunction -> 
+                v17 <- CreateNamedVariable 'goo', 'none'
+                v18 <- GetProperty v17, 'arguments'
+                v19 <- GetElement v18, '0'
+                v20 <- LoadInteger '23'
+                v21 <- Compare v19, '==', v20
+                BeginIf v21
+                    v22 <- LoadInteger '42'
+                    v23 <- UnaryOperation '-', v22
+                    Return v23
+                EndIf
+                v24 <- LoadInteger '42'
+                Return v24
+            EndPlainFunction
+            v25 <- BinaryOperation v6, '+', v15
+            v26 <- CallFunction v16, [v15]
+            v27 <- BinaryOperation v25, '+', v26
+            Return v27
+        EndPlainFunction
+        v28 <- CreateNamedVariable 'g', 'var', v14
+        v29 <- LoadInteger '0'
+        v30 <- CallFunction v28, [v29]
+        v31 <- CallFunction v28, [v13]
+        SetComputedProperty v3, v13, v31
+    EndForLoop
+EndPlainFunction
+v32 <- CallFunction v4, []
+v33 <- LoadInteger '42'
+v34 <- GetElement v3, '0'
+v35 <- LoadInteger '49'
+v36 <- GetElement v3, '7'
+v37 <- LoadInteger '19'
+v38 <- UnaryOperation '-', v37
+v39 <- GetElement v3, '23'
+
+
+const v2 = new Array(100);
+var a = v2;
+function f() {
+    var x = 0;
+    for (let i8 = 0; i8 < 100; i8++) {
+        function goo(a15) {
+            function h() {
+                if (goo.arguments[0] == 23) {
+                    return -42;
+                }
+                return 42;
+            }
+            return (x + a15) + h(a15);
+        }
+        var g = goo;
+        g(0);
+        a[i8] = g(i8);
+    }
+}
+f();
+a[0];
+a[7];
+-19;
+a[23];
+
+FuzzIL program written to corpus/optimized-closures.fzil

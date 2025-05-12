@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadInteger '1'
+        v3 <- LoadInteger '2'
+        v4 <- LoadInteger '3'
+        v5 <- CreateArray [v2, v3, v4]
+        v6 <- CreateNamedVariable 'b', 'var', v5
+        v7 <- BeginPlainFunction -> v8, v9, v10
+        EndPlainFunction
+        v11 <- CreateNamedVariable 'callback', 'var', v7
+        BeginTry
+            v12 <- LoadInteger '0'
+            ThrowException v12
+        BeginCatch -> v13
+            v14 <- CallMethod v6, 'forEach', [v11]
+            Return v14
+        EndTryCatch
+    EndPlainFunction
+    v15 <- CreateNamedVariable 'f', 'var', v1
+    v16 <- CallFunction v15, []
+    v17 <- CallFunction v15, []
+    v18 <- CallFunction v15, []
+EndPlainFunction
+v19 <- CallFunction v0, []
+
+
+function TestDematerializedContextInBuiltin() {
+    function f1() {
+        var b = [1,2,3];
+        function f7(a8, a9, a10) {
+        }
+        var callback = f7;
+        try {
+            throw 0;
+        } catch(e13) {
+            return b.forEach(callback);
+        }
+    }
+    var f = f1;
+    f();
+    f();
+    f();
+}
+TestDematerializedContextInBuiltin();
+
+FuzzIL program written to corpus/regress-6907.fzil

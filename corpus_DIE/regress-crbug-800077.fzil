@@ -1,0 +1,14 @@
+v0 <- CreateNamedVariable 'Float64Array', 'none'
+v1 <- LoadInteger '1'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'sample', 'var', v2
+v4 <- LoadUndefined
+v5 <- CreateNamedVariable 'Reflect', 'none'
+v6 <- CallMethod v5, 'has', [v3, v4]
+
+
+const v2 = new Float64Array(1);
+var sample = v2;
+Reflect.has(sample, undefined);
+
+FuzzIL program written to corpus/regress-crbug-800077.fzil

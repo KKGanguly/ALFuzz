@@ -1,0 +1,94 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- BinaryOperation v1, '|', v2
+    Reassign v1, v3
+    v4 <- LoadInteger '0'
+    v5 <- Compare v1, '==', v4
+    BeginIf v5
+        Return
+    EndIf
+    Return v1
+EndPlainFunction
+v6 <- LoadInteger '2147483647'
+v7 <- CallFunction v0, [v6]
+v8 <- LoadInteger '2147483647'
+v9 <- CallFunction v0, [v8]
+v10 <- LoadInteger '2147483647'
+v11 <- LoadInteger '2147483647'
+v12 <- CallFunction v0, [v11]
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadInteger '0'
+    v15 <- CreateNamedVariable 'x', 'var', v14
+    BeginForLoopInitializer
+        v16 <- LoadInteger '1'
+        v17 <- UnaryOperation '-', v16
+    BeginForLoopCondition -> v18
+        v19 <- LoadInteger '0'
+        v20 <- Compare v18, '<', v19
+    BeginForLoopAfterthought v20 -> v21
+        v22 <- UnaryOperation '++', v21
+    BeginForLoopBody -> v23
+        v24 <- LoadInteger '2'
+        v25 <- BinaryOperation v23, '%', v24
+        Reassign v15, v25
+    EndForLoop
+    Return v15
+EndPlainFunction
+v26 <- CallFunction v13, []
+v27 <- LoadInteger '1'
+v28 <- UnaryOperation '-', v27
+v29 <- CallFunction v13, []
+v30 <- BeginPlainFunction -> 
+    v31 <- LoadInteger '0'
+    v32 <- CreateNamedVariable 'x', 'var', v31
+    BeginForLoopInitializer
+        v33 <- LoadInteger '1'
+        v34 <- UnaryOperation '-', v33
+    BeginForLoopCondition -> v35
+        v36 <- LoadInteger '0'
+        v37 <- Compare v35, '<=', v36
+    BeginForLoopAfterthought v37 -> v38
+        v39 <- UnaryOperation '++', v38
+    BeginForLoopBody -> v40
+        v41 <- LoadInteger '2'
+        v42 <- BinaryOperation v41, '%', v40
+        v43 <- LoadInteger '0'
+        v44 <- BinaryOperation v42, '|', v43
+        Reassign v32, v44
+    EndForLoop
+    Return v32
+EndPlainFunction
+v45 <- CallFunction v30, []
+v46 <- CallFunction v30, []
+
+
+function SmiTaggingCanOverflow(a1) {
+    if ((a1 = a1 | 0) == 0) {
+        return;
+    }
+    return a1;
+}
+SmiTaggingCanOverflow(2147483647);
+SmiTaggingCanOverflow(2147483647);
+SmiTaggingCanOverflow(2147483647);
+function ModILeftCanBeNegative() {
+    var x = 0;
+    for (let i18 = -1; i18 < 0; ++i18) {
+        x = i18 % 2;
+    }
+    return x;
+}
+ModILeftCanBeNegative();
+-1;
+ModILeftCanBeNegative();
+function ModIRightCanBeZero() {
+    var x = 0;
+    for (let i35 = -1; i35 <= 0; ++i35) {
+        x = (2 % i35) | 0;
+    }
+    return x;
+}
+ModIRightCanBeZero();
+ModIRightCanBeZero();
+
+FuzzIL program written to corpus/regress-3204.fzil

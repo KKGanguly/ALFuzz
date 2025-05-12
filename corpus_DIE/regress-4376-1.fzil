@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- Construct v0, []
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v2
+v3 <- EndObjectLiteral
+SetProperty v1, 'prototype', v3
+v4 <- Construct v1, []
+v5 <- CreateNamedVariable 'x', 'var', v4
+v6 <- BeginPlainFunction -> v7
+    v8 <- TestInstanceOf v7, v0
+    Return v8
+EndPlainFunction
+v9 <- CallFunction v6, [v5]
+v10 <- LoadNull
+v11 <- GetProperty v1, 'prototype'
+SetProperty v11, '__proto__', v10
+v12 <- CallFunction v6, [v5]
+
+
+function Bar() {
+}
+function Baz() {
+}
+const v2 = new Bar();
+Baz.prototype = { __proto__: v2 };
+const v4 = new Baz();
+var x = v4;
+function foo(a7) {
+    return a7 instanceof Bar;
+}
+foo(x);
+const t11 = Baz.prototype;
+t11.__proto__ = null;
+foo(x);
+
+FuzzIL program written to corpus/regress-4376-1.fzil

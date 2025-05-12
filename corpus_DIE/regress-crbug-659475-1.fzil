@@ -1,0 +1,43 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'n', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'Set', 'none'
+    v4 <- Construct v3, []
+    Reassign v1, v4
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '2187875060'
+    SetProperty v1, 'xyz', v6
+EndPlainFunction
+v7 <- CallFunction v2, []
+v8 <- CallFunction v2, []
+v9 <- CallFunction v2, []
+v10 <- CallFunction v5, []
+v11 <- CallFunction v5, []
+v12 <- CallFunction v5, []
+v13 <- CallFunction v2, []
+v14 <- CallFunction v5, []
+v15 <- LoadString 'AAAAAAAA'
+v16 <- CreateNamedVariable 'parseInt', 'none'
+v17 <- CallFunction v16, [v15]
+
+
+var n;
+function Ctor() {
+    const v4 = new Set();
+    n = v4;
+}
+function Check() {
+    n.xyz = 2187875060;
+}
+Ctor();
+Ctor();
+Ctor();
+Check();
+Check();
+Check();
+Ctor();
+Check();
+parseInt("AAAAAAAA");
+
+FuzzIL program written to corpus/regress-crbug-659475-1.fzil

@@ -1,0 +1,22 @@
+v0 <- LoadString 'ott'
+v1 <- CreateNamedVariable 'Symbol', 'none'
+v2 <- GetProperty v1, 'iterator'
+v3 <- CallComputedMethod v0, v2, []
+v4 <- CreateNamedVariable 'iterator', 'var', v3
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- GetProperty v4, '__proto__'
+SetProperty v6, 'fonts', v5
+v7 <- LoadInteger '0'
+v8 <- GetProperty v4, '__proto__'
+SetElement v8, '0', v7
+
+
+var iterator = ("ott")[Symbol.iterator]();
+const v5 = {};
+const t2 = iterator.__proto__;
+t2.fonts = v5;
+const t4 = iterator.__proto__;
+t4[0] = 0;
+
+FuzzIL program written to corpus/string-iterator5.fzil

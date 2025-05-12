@@ -1,0 +1,88 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+    BeginCatch -> v1
+    EndTryCatch
+EndPlainFunction
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+    v3 <- LoadThis
+    SetProperty v3, 'x', v2
+BeginForLoopCondition
+    v4 <- LoadThis
+    v5 <- GetProperty v4, 'x'
+    v6 <- LoadInteger '1'
+    v7 <- Compare v5, '<', v6
+BeginForLoopAfterthought v7
+    v8 <- LoadThis
+    v9 <- GetProperty v8, 'x'
+    v10 <- UnaryOperation '++', v9
+BeginForLoopBody
+    BeginForLoopInitializer
+        v11 <- LoadInteger '0'
+        v12 <- LoadThis
+        SetProperty v12, 'y', v11
+    BeginForLoopCondition
+        v13 <- LoadThis
+        v14 <- GetProperty v13, 'y'
+        v15 <- LoadInteger '1'
+        v16 <- Compare v14, '<', v15
+    BeginForLoopAfterthought v16
+        v17 <- LoadThis
+        v18 <- GetProperty v17, 'y'
+        v19 <- UnaryOperation '++', v18
+    BeginForLoopBody
+        BeginForLoopInitializer
+            v20 <- LoadInteger '0'
+            v21 <- LoadThis
+            SetProperty v21, 'll', v20
+        BeginForLoopCondition
+            v22 <- LoadThis
+            v23 <- GetProperty v22, 'll'
+            v24 <- LoadInteger '70670'
+            v25 <- Compare v23, '<', v24
+        BeginForLoopAfterthought v25
+            v26 <- LoadThis
+            v27 <- GetProperty v26, 'll'
+            v28 <- UnaryOperation '++', v27
+        BeginForLoopBody
+            v29 <- CallFunction v0, []
+        EndForLoop
+    EndForLoop
+EndForLoop
+
+
+function f() {
+    try {
+    } catch(e1) {
+    }
+}
+for ((() => {
+        this.x = 0;
+    })();
+    this.x < 1;
+    (() => {
+        let v9 = this.x;
+        ++v9;
+    })()) {
+    for ((() => {
+            this.y = 0;
+        })();
+        this.y < 1;
+        (() => {
+            let v18 = this.y;
+            ++v18;
+        })()) {
+        for ((() => {
+                this.ll = 0;
+            })();
+            this.ll < 70670;
+            (() => {
+                let v27 = this.ll;
+                ++v27;
+            })()) {
+            f();
+        }
+    }
+}
+
+FuzzIL program written to corpus/regress-context-osr.fzil

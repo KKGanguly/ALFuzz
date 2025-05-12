@@ -1,0 +1,36 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'x', 'var', v2
+v4 <- LoadString 'foo'
+v5 <- LoadUndefined
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'Object', 'none'
+v8 <- CallMethod v7, 'defineProperty', [v1, v4, v6]
+v9 <- LoadString 'foo'
+v10 <- LoadUndefined
+v11 <- LoadUndefined
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v10
+    ObjectLiteralAddProperty `set`, v11
+v12 <- EndObjectLiteral
+v13 <- CallMethod v7, 'defineProperty', [v3, v9, v12]
+v14 <- LoadString 'foo'
+v15 <- CallMethod v7, 'getOwnPropertyDescriptor', [v1, v14]
+v16 <- CreateNamedVariable 'pd', 'var', v15
+v17 <- LoadUndefined
+v18 <- GetProperty v16, 'set'
+
+
+var o = {};
+var x = {};
+Object.defineProperty(o, "foo", { get: undefined });
+Object.defineProperty(x, "foo", { get: undefined, set: undefined });
+var pd = Object.getOwnPropertyDescriptor(o, "foo");
+pd.set;
+
+FuzzIL program written to corpus/regress-133211.fzil

@@ -1,0 +1,118 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateNamedVariable 'e', 'var', v1
+    v3 <- LoadInteger '2'
+    v4 <- CreateNamedVariable 'a', 'var', v3
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `eval` -> v5
+            Return v2
+        EndObjectLiteralGetter
+        BeginObjectLiteralSetter `eval` -> v6, v7
+            Reassign v2, v7
+        EndObjectLiteralSetter
+        BeginObjectLiteralGetter `arguments` -> v8
+            Return v4
+        EndObjectLiteralGetter
+        BeginObjectLiteralSetter `arguments` -> v9, v10
+            Reassign v4, v10
+        EndObjectLiteralSetter
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'o', 'var', v11
+    v13 <- LoadInteger '1'
+    v14 <- GetProperty v12, 'eval'
+    v15 <- LoadInteger '3'
+    SetProperty v12, 'eval', v15
+    v16 <- LoadInteger '3'
+    v17 <- LoadInteger '2'
+    v18 <- GetProperty v12, 'arguments'
+    v19 <- LoadInteger '4'
+    SetProperty v12, 'arguments', v19
+    v20 <- LoadInteger '4'
+EndPlainFunction
+v21 <- CallFunction v0, []
+v22 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v23 <- LoadInteger '1'
+    v24 <- CreateNamedVariable 'e', 'var', v23
+    v25 <- LoadInteger '2'
+    v26 <- CreateNamedVariable 'a', 'var', v25
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `eval` -> v27
+            Return v24
+        EndObjectLiteralGetter
+        BeginObjectLiteralSetter `eval` -> v28, v29
+            Reassign v24, v29
+        EndObjectLiteralSetter
+        BeginObjectLiteralGetter `arguments` -> v30
+            Return v26
+        EndObjectLiteralGetter
+        BeginObjectLiteralSetter `arguments` -> v31, v32
+            Reassign v26, v32
+        EndObjectLiteralSetter
+    v33 <- EndObjectLiteral
+    v34 <- CreateNamedVariable 'o', 'var', v33
+    v35 <- LoadInteger '1'
+    v36 <- GetProperty v34, 'eval'
+    v37 <- LoadInteger '3'
+    SetProperty v34, 'eval', v37
+    v38 <- LoadInteger '3'
+    v39 <- LoadInteger '2'
+    v40 <- GetProperty v34, 'arguments'
+    v41 <- LoadInteger '4'
+    SetProperty v34, 'arguments', v41
+    v42 <- LoadInteger '4'
+EndPlainFunction
+v43 <- CallFunction v22, []
+
+
+function TestSloppyMode() {
+    var e = 1;
+    var a = 2;
+    const v11 = {
+        get eval() {
+            return e;
+        },
+        set eval(a7) {
+            e = a7;
+        },
+        get arguments() {
+            return a;
+        },
+        set arguments(a10) {
+            a = a10;
+        },
+    };
+    var o = v11;
+    o.eval;
+    o.eval = 3;
+    o.arguments;
+    o.arguments = 4;
+}
+TestSloppyMode();
+function TestStrictMode() {
+    'use strict';
+    var e = 1;
+    var a = 2;
+    const v33 = {
+        get eval() {
+            return e;
+        },
+        set eval(a29) {
+            e = a29;
+        },
+        get arguments() {
+            return a;
+        },
+        set arguments(a32) {
+            a = a32;
+        },
+    };
+    var o = v33;
+    o.eval;
+    o.eval = 3;
+    o.arguments;
+    o.arguments = 4;
+}
+TestStrictMode();
+
+FuzzIL program written to corpus/property-name-eval-arguments.fzil

@@ -1,0 +1,25 @@
+v0 <- LoadFloat '1.5'
+v1 <- LoadFloat '2.5'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'arr', 'let', v2
+v4 <- LoadInteger '0'
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '0'
+    SetProperty v3, 'length', v6
+    v7 <- LoadInteger '2'
+    Return v7
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v5
+v8 <- EndObjectLiteral
+v9 <- CallMethod v3, 'slice', [v4, v8]
+
+
+let arr = [1.5,2.5];
+function f5() {
+    arr.length = 0;
+    return 2;
+}
+arr.slice(0, { valueOf: f5 });
+
+FuzzIL program written to corpus/regress-crbug-871886.fzil

@@ -1,0 +1,15 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'getOwnPropertyDescriptors'
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+v3 <- CreateNamedVariable 'Promise', 'none'
+v4 <- CallMethod v3, 'resolve', [v2]
+v5 <- CallMethod v4, 'then', [v1]
+
+
+const v1 = Object.getOwnPropertyDescriptors;
+function f2() {
+}
+Promise.resolve(f2).then(v1);
+
+FuzzIL program written to corpus/regress-794744.fzil

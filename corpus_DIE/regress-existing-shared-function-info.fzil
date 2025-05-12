@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- BeginPlainFunction -> 
+        EndPlainFunction
+        Return v2
+    EndPlainFunction
+    Return v1
+EndPlainFunction
+v3 <- CallFunction v0, []
+v4 <- CallFunction v3, []
+v5 <- CreateNamedVariable 'h', 'var', v4
+v6 <- LoadInteger '10'
+v7 <- CreateNamedVariable 'Array', 'none'
+v8 <- CallFunction v7, [v6]
+BeginForOfLoop v8 -> v9
+    v10 <- CreateNamedVariable 'gc', 'none'
+    v11 <- CallFunction v10, []
+EndForOfLoop
+v12 <- CallFunction v0, []
+v13 <- CallFunction v12, []
+
+
+function f() {
+    function g() {
+        function h() {
+        }
+        return h;
+    }
+    return g;
+}
+const t8 = f();
+var h = t8();
+for (const v9 of Array(10)) {
+    gc();
+}
+const t13 = f();
+t13();
+
+FuzzIL program written to corpus/regress-existing-shared-function-info.fzil

@@ -1,0 +1,36 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- UnaryOperation '+', v1
+    Reassign v1, v3
+    BeginIf v2
+        v4 <- LoadUndefined
+        Reassign v1, v4
+    EndIf
+    v5 <- CreateNamedVariable 'print', 'none'
+    v6 <- CallFunction v5, [v1]
+    v7 <- UnaryOperation '+', v1
+    Return v7
+EndPlainFunction
+v8 <- LoadInteger '0'
+v9 <- CallFunction v0, [v8]
+v10 <- LoadInteger '0'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadInteger '0'
+v13 <- LoadBoolean 'true'
+v14 <- CallFunction v0, [v12, v13]
+v15 <- CreateNamedVariable 'Number', 'none'
+v16 <- CallMethod v15, 'isNaN', [v14]
+
+
+function g(a1, a2) {
+    a1 = +a1;
+    if (a2) {
+        a1 = undefined;
+    }
+    print(a1);
+    return +a1;
+}
+g(0);
+g(0);
+Number.isNaN(g(0, true));
+
+FuzzIL program written to corpus/regress-truncate-number-or-undefined-to-float64.fzil

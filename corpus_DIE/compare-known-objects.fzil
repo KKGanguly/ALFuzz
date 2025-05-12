@@ -1,0 +1,113 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- Compare v1, '==', v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5, v6
+    v7 <- Compare v5, '===', v6
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9, v10
+    v11 <- Compare v9, '<=', v10
+    Return v11
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13, v14
+    v15 <- Compare v13, '<', v14
+    Return v15
+EndPlainFunction
+v16 <- BeginPlainFunction -> v17, v18
+    v19 <- Compare v17, '>=', v18
+    Return v19
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21, v22
+    v23 <- Compare v21, '>', v22
+    Return v23
+EndPlainFunction
+v24 <- BeginPlainFunction -> v25, v26
+    v27 <- CallFunction v0, [v25, v25]
+    v28 <- CallFunction v0, [v26, v26]
+    v29 <- CallFunction v0, [v25, v26]
+    v30 <- CallFunction v4, [v25, v25]
+    v31 <- CallFunction v4, [v26, v26]
+    v32 <- CallFunction v4, [v25, v26]
+    v33 <- CallFunction v8, [v25, v25]
+    v34 <- CallFunction v8, [v25, v26]
+    v35 <- CallFunction v8, [v26, v25]
+    v36 <- CallFunction v12, [v25, v25]
+    v37 <- CallFunction v12, [v25, v26]
+    v38 <- CallFunction v12, [v26, v25]
+    v39 <- CallFunction v16, [v25, v25]
+    v40 <- CallFunction v16, [v25, v26]
+    v41 <- CallFunction v16, [v26, v25]
+    v42 <- CallFunction v20, [v25, v25]
+    v43 <- CallFunction v20, [v25, v26]
+    v44 <- CallFunction v20, [v26, v25]
+EndPlainFunction
+v45 <- BeginPlainFunction -> 
+EndPlainFunction
+v46 <- BeginPlainFunction -> 
+EndPlainFunction
+v47 <- GetProperty v45, 'prototype'
+SetProperty v47, 't', v46
+v48 <- Construct v45, []
+v49 <- CreateNamedVariable 'obj1', 'var', v48
+v50 <- Construct v45, []
+v51 <- CreateNamedVariable 'obj2', 'var', v50
+v52 <- CallFunction v24, [v49, v51]
+v53 <- LoadInteger '1'
+SetProperty v49, 'x', v53
+v54 <- CallFunction v24, [v49, v51]
+
+
+function eq(a1, a2) {
+    return a1 == a2;
+}
+function eq_strict(a5, a6) {
+    return a5 === a6;
+}
+function le(a9, a10) {
+    return a9 <= a10;
+}
+function lt(a13, a14) {
+    return a13 < a14;
+}
+function ge(a17, a18) {
+    return a17 >= a18;
+}
+function gt(a21, a22) {
+    return a21 > a22;
+}
+function test(a25, a26) {
+    eq(a25, a25);
+    eq(a26, a26);
+    eq(a25, a26);
+    eq_strict(a25, a25);
+    eq_strict(a26, a26);
+    eq_strict(a25, a26);
+    le(a25, a25);
+    le(a25, a26);
+    le(a26, a25);
+    lt(a25, a25);
+    lt(a25, a26);
+    lt(a26, a25);
+    ge(a25, a25);
+    ge(a25, a26);
+    ge(a26, a25);
+    gt(a25, a25);
+    gt(a25, a26);
+    gt(a26, a25);
+}
+function O() {
+}
+function f46() {
+}
+const t42 = O.prototype;
+t42.t = f46;
+const v48 = new O();
+var obj1 = v48;
+const v50 = new O();
+var obj2 = v50;
+test(obj1, obj2);
+obj1.x = 1;
+test(obj1, obj2);
+
+FuzzIL program written to corpus/compare-known-objects.fzil

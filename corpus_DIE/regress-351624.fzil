@@ -1,0 +1,50 @@
+v0 <- LoadInteger '10000000000'
+v1 <- CreateNamedVariable 'big', 'var', v0
+v2 <- CreateNamedVariable 'Float64Array', 'none'
+v3 <- LoadInteger '1'
+v4 <- Construct v2, [v3]
+v5 <- CreateNamedVariable 'backup', 'var', v4
+v6 <- BeginPlainFunction -> v7
+    v8 <- BinaryOperation v7, '*', v1
+    v9 <- CreateNamedVariable 'prod', 'var', v8
+    SetElement v5, '0', v9
+    v10 <- CreateNamedVariable 'Math', 'none'
+    v11 <- CallMethod v10, 'round', [v9]
+    v12 <- CreateNamedVariable 'rounded', 'var', v11
+    v13 <- GetElement v5, '0'
+    Return v12
+EndPlainFunction
+v14 <- LoadInteger '5'
+v15 <- CreateNamedVariable 'count', 'var', v14
+BeginForLoopInitializer
+    v16 <- LoadInteger '0'
+BeginForLoopCondition -> v17
+    v18 <- Compare v17, '<', v15
+BeginForLoopAfterthought v18 -> v19
+    v20 <- UnaryOperation v19, '++'
+BeginForLoopBody -> v21
+    v22 <- LoadInteger '1'
+    v23 <- UnaryOperation '-', v22
+    v24 <- CallFunction v6, [v23]
+    v25 <- CreateNamedVariable 'result', 'var', v24
+    v26 <- UnaryOperation '-', v1
+EndForLoop
+
+
+var big = 10000000000;
+const v4 = new Float64Array(1);
+var backup = v4;
+function mult0(a7) {
+    var prod = a7 * big;
+    backup[0] = prod;
+    var rounded = Math.round(prod);
+    backup[0];
+    return rounded;
+}
+var count = 5;
+for (let i17 = 0; i17 < count; i17++) {
+    var result = mult0(-1);
+    -big;
+}
+
+FuzzIL program written to corpus/regress-351624.fzil

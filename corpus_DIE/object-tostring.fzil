@@ -1,0 +1,804 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- CreateArray [v2]
+v4 <- CreateNamedVariable 'Function', 'none'
+v5 <- CreateArray [v4]
+v6 <- CreateNamedVariable 'Array', 'none'
+v7 <- CreateArray [v6]
+v8 <- CreateNamedVariable 'String', 'none'
+v9 <- CreateArray [v8]
+v10 <- CreateNamedVariable 'Boolean', 'none'
+v11 <- CreateArray [v10]
+v12 <- CreateNamedVariable 'Number', 'none'
+v13 <- CreateArray [v12]
+v14 <- CreateNamedVariable 'Date', 'none'
+v15 <- CreateArray [v14]
+v16 <- CreateNamedVariable 'RegExp', 'none'
+v17 <- CreateArray [v16]
+v18 <- CreateNamedVariable 'Error', 'none'
+v19 <- CreateNamedVariable 'TypeError', 'none'
+v20 <- CreateNamedVariable 'RangeError', 'none'
+v21 <- CreateNamedVariable 'SyntaxError', 'none'
+v22 <- CreateNamedVariable 'ReferenceError', 'none'
+v23 <- CreateNamedVariable 'EvalError', 'none'
+v24 <- CreateNamedVariable 'URIError', 'none'
+v25 <- CreateArray [v18, v19, v20, v21, v22, v23, v24]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `Object`, v3
+    ObjectLiteralAddProperty `Function`, v5
+    ObjectLiteralAddProperty `Array`, v7
+    ObjectLiteralAddProperty `String`, v9
+    ObjectLiteralAddProperty `Boolean`, v11
+    ObjectLiteralAddProperty `Number`, v13
+    ObjectLiteralAddProperty `Date`, v15
+    ObjectLiteralAddProperty `RegExp`, v17
+    ObjectLiteralAddProperty `Error`, v25
+v26 <- EndObjectLiteral
+v27 <- CreateNamedVariable 'funs', 'var', v26
+BeginForInLoop v27 -> v28
+    v29 <- GetComputedProperty v27, v28
+    BeginForInLoop v29 -> v30
+        v31 <- LoadString '[object '
+        v32 <- BinaryOperation v31, '+', v28
+        v33 <- LoadString ']'
+        v34 <- BinaryOperation v32, '+', v33
+        v35 <- GetComputedProperty v27, v28
+        v36 <- GetComputedProperty v35, v30
+        v37 <- Construct v36, []
+        v38 <- GetProperty v2, 'prototype'
+        v39 <- GetProperty v38, 'toString'
+        v40 <- CallMethod v39, 'call', [v37]
+        v41 <- GetComputedProperty v27, v28
+        v42 <- GetComputedProperty v41, v30
+        v43 <- LoadString '[object Function]'
+        v44 <- GetComputedProperty v27, v28
+        v45 <- GetComputedProperty v44, v30
+        v46 <- GetProperty v2, 'prototype'
+        v47 <- GetProperty v46, 'toString'
+        v48 <- CallMethod v47, 'call', [v45]
+        v49 <- GetComputedProperty v27, v28
+        v50 <- GetComputedProperty v49, v30
+    EndForInLoop
+EndForInLoop
+v51 <- BeginPlainFunction -> v52
+    BeginObjectLiteral
+    v53 <- EndObjectLiteral
+    v54 <- CreateNamedVariable 'obj', 'var', v53
+    v55 <- CreateNamedVariable 'Symbol', 'none'
+    v56 <- GetProperty v55, 'toStringTag'
+    SetComputedProperty v54, v56, v52
+    v57 <- LoadString '[object '
+    v58 <- BinaryOperation v57, '+', v52
+    v59 <- LoadString ']'
+    v60 <- BinaryOperation v58, '+', v59
+    v61 <- GetProperty v2, 'prototype'
+    v62 <- GetProperty v61, 'toString'
+    v63 <- CallMethod v62, 'call', [v54]
+    BeginObjectLiteral
+    v64 <- EndObjectLiteral
+    Reassign v54, v64
+    v65 <- GetProperty v55, 'toStringTag'
+    v66 <- BeginPlainFunction -> 
+        ThrowException v52
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v66
+    v67 <- EndObjectLiteral
+    v68 <- CallMethod v2, 'defineProperty', [v54, v65, v67]
+    v69 <- BeginPlainFunction -> 
+        v70 <- GetProperty v2, 'prototype'
+        v71 <- GetProperty v70, 'toString'
+        v72 <- CallMethod v71, 'call', [v54]
+    EndPlainFunction
+    v73 <- CallFunction v69, []
+    BeginObjectLiteral
+    v74 <- EndObjectLiteral
+    Reassign v54, v74
+    v75 <- GetProperty v55, 'toStringTag'
+    v76 <- BeginPlainFunction -> 
+        Return v52
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v76
+    v77 <- EndObjectLiteral
+    v78 <- CallMethod v2, 'defineProperty', [v54, v75, v77]
+    v79 <- LoadString '[object '
+    v80 <- BinaryOperation v79, '+', v52
+    v81 <- LoadString ']'
+    v82 <- BinaryOperation v80, '+', v81
+    v83 <- GetProperty v2, 'prototype'
+    v84 <- GetProperty v83, 'toString'
+    v85 <- CallMethod v84, 'call', [v54]
+    BeginObjectLiteral
+    v86 <- EndObjectLiteral
+    Reassign v54, v86
+    v87 <- LoadString 'X'
+    v88 <- BinaryOperation v87, '+', v52
+    v89 <- GetProperty v55, 'toStringTag'
+    SetComputedProperty v54, v89, v88
+    v90 <- LoadString '[object X'
+    v91 <- BinaryOperation v90, '+', v52
+    v92 <- LoadString ']'
+    v93 <- BinaryOperation v91, '+', v92
+    v94 <- GetProperty v2, 'prototype'
+    v95 <- GetProperty v94, 'toString'
+    v96 <- CallMethod v95, 'call', [v54]
+    BeginObjectLiteral
+    v97 <- EndObjectLiteral
+    Reassign v54, v97
+    v98 <- GetProperty v55, 'toStringTag'
+    v99 <- BeginPlainFunction -> 
+        v100 <- LoadString 'X'
+        v101 <- BinaryOperation v100, '+', v52
+        Return v101
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v99
+    v102 <- EndObjectLiteral
+    v103 <- CallMethod v2, 'defineProperty', [v54, v98, v102]
+    v104 <- LoadString '[object X'
+    v105 <- BinaryOperation v104, '+', v52
+    v106 <- LoadString ']'
+    v107 <- BinaryOperation v105, '+', v106
+    v108 <- GetProperty v2, 'prototype'
+    v109 <- GetProperty v108, 'toString'
+    v110 <- CallMethod v109, 'call', [v54]
+    v111 <- LoadString 'Arguments'
+    v112 <- Compare v52, '===', v111
+    v113 <- BeginPlainFunction -> 
+        v114 <- LoadArguments
+        Return v114
+    EndPlainFunction
+    v115 <- CallFunction v113, []
+    v116 <- GetComputedProperty v1, v52
+    v117 <- Construct v116, []
+    v118 <- TernaryOperation v112, v115, v117
+    v119 <- CreateNamedVariable 'obj', 'var', v118
+    v120 <- LoadUndefined
+    v121 <- GetProperty v55, 'toStringTag'
+    SetComputedProperty v119, v121, v120
+    v122 <- LoadString '[object '
+    v123 <- BinaryOperation v122, '+', v52
+    v124 <- LoadString ']'
+    v125 <- BinaryOperation v123, '+', v124
+    v126 <- GetProperty v2, 'prototype'
+    v127 <- GetProperty v126, 'toString'
+    v128 <- CallMethod v127, 'call', [v119]
+    v129 <- LoadString 'Arguments'
+    v130 <- Compare v52, '===', v129
+    v131 <- BeginPlainFunction -> 
+        v132 <- LoadArguments
+        Return v132
+    EndPlainFunction
+    v133 <- CallFunction v131, []
+    v134 <- GetComputedProperty v1, v52
+    v135 <- Construct v134, []
+    v136 <- TernaryOperation v130, v133, v135
+    v137 <- CreateNamedVariable 'obj', 'var', v136
+    v138 <- GetProperty v55, 'toStringTag'
+    v139 <- BeginPlainFunction -> 
+        v140 <- LoadUndefined
+        Return v140
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v139
+    v141 <- EndObjectLiteral
+    v142 <- CallMethod v2, 'defineProperty', [v137, v138, v141]
+    v143 <- LoadString '[object '
+    v144 <- BinaryOperation v143, '+', v52
+    v145 <- LoadString ']'
+    v146 <- BinaryOperation v144, '+', v145
+    v147 <- GetProperty v2, 'prototype'
+    v148 <- GetProperty v147, 'toString'
+    v149 <- CallMethod v148, 'call', [v137]
+EndPlainFunction
+v150 <- LoadString 'Arguments'
+v151 <- LoadString 'Array'
+v152 <- LoadString 'Boolean'
+v153 <- LoadString 'Date'
+v154 <- LoadString 'Error'
+v155 <- LoadString 'Function'
+v156 <- LoadString 'Number'
+v157 <- LoadString 'RegExp'
+v158 <- LoadString 'String'
+v159 <- CreateArray [v150, v151, v152, v153, v154, v155, v156, v157, v158]
+v160 <- CallMethod v159, 'forEach', [v51]
+v161 <- BeginPlainFunction -> v162
+    BeginObjectLiteral
+    v163 <- EndObjectLiteral
+    v164 <- CreateNamedVariable 'obj', 'var', v163
+    v165 <- CreateNamedVariable 'Symbol', 'none'
+    v166 <- GetProperty v165, 'toStringTag'
+    SetComputedProperty v164, v166, v162
+    v167 <- LoadString '[object Object]'
+    v168 <- GetProperty v2, 'prototype'
+    v169 <- GetProperty v168, 'toString'
+    v170 <- CallMethod v169, 'call', [v164]
+    BeginObjectLiteral
+    v171 <- EndObjectLiteral
+    Reassign v164, v171
+    v172 <- GetProperty v165, 'toStringTag'
+    v173 <- BeginPlainFunction -> 
+        Return v162
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v173
+    v174 <- EndObjectLiteral
+    v175 <- CallMethod v2, 'defineProperty', [v164, v172, v174]
+    v176 <- LoadString '[object Object]'
+    v177 <- GetProperty v2, 'prototype'
+    v178 <- GetProperty v177, 'toString'
+    v179 <- CallMethod v178, 'call', [v164]
+EndPlainFunction
+v180 <- LoadNull
+v181 <- BeginPlainFunction -> 
+EndPlainFunction
+v182 <- CreateArray []
+BeginObjectLiteral
+v183 <- EndObjectLiteral
+v184 <- LoadRegExp 'regexp' ''
+v185 <- LoadInteger '42'
+v186 <- LoadString 'sym'
+v187 <- CreateNamedVariable 'Symbol', 'none'
+v188 <- CallFunction v187, [v186]
+v189 <- Construct v14, []
+v190 <- BeginPlainFunction -> 
+    v191 <- LoadArguments
+    Return v191
+EndPlainFunction
+v192 <- CallFunction v190, []
+v193 <- LoadBoolean 'true'
+v194 <- LoadString 'oops'
+v195 <- Construct v18, [v194]
+v196 <- LoadString 'str'
+v197 <- Construct v8, [v196]
+v198 <- CreateArray [v180, v181, v182, v183, v184, v185, v188, v189, v192, v193, v195, v197]
+v199 <- CallMethod v198, 'forEach', [v161]
+v200 <- BeginPlainFunction -> 
+    v201 <- GetProperty v2, 'prototype'
+    v202 <- LoadString 'toString'
+    v203 <- CallMethod v2, 'getOwnPropertyDescriptor', [v201, v202]
+    v204 <- CreateNamedVariable 'desc', 'var', v203
+    v205 <- GetProperty v204, 'writable'
+    v206 <- GetProperty v204, 'enumerable'
+    v207 <- GetProperty v204, 'configurable'
+EndPlainFunction
+v208 <- CallFunction v200, []
+v209 <- BeginPlainFunction -> v210
+    v211 <- GetProperty v187, 'toStringTag'
+    v212 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v212
+    v213 <- EndObjectLiteral
+    v214 <- CallMethod v2, 'defineProperty', [v210, v211, v213]
+    v215 <- LoadString '[object Object]'
+    BeginObjectLiteral
+    v216 <- EndObjectLiteral
+    v217 <- GetProperty v216, 'toString'
+    v218 <- CallMethod v217, 'call', [v210]
+EndPlainFunction
+BeginObjectLiteral
+v219 <- EndObjectLiteral
+v220 <- CallFunction v209, [v219]
+v221 <- BeginPlainFunction -> v222, v223
+    v224 <- LoadString '[object '
+    v225 <- BinaryOperation v224, '+', v222
+    v226 <- LoadString ']'
+    v227 <- BinaryOperation v225, '+', v226
+    v228 <- GetProperty v2, 'prototype'
+    v229 <- GetProperty v228, 'toString'
+    v230 <- CallMethod v229, 'call', [v223]
+EndPlainFunction
+v231 <- LoadString 'Object'
+v232 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v233 <- EndObjectLiteral
+BeginObjectLiteral
+v234 <- EndObjectLiteral
+v235 <- Construct v232, [v233, v234]
+v236 <- LoadString 'Array'
+v237 <- CreateArray []
+BeginObjectLiteral
+v238 <- EndObjectLiteral
+v239 <- Construct v232, [v237, v238]
+v240 <- LoadString 'Function'
+v241 <- BeginArrowFunction -> 
+    v242 <- LoadInteger '42'
+    Return v242
+EndArrowFunction
+BeginObjectLiteral
+v243 <- EndObjectLiteral
+v244 <- Construct v232, [v241, v243]
+v245 <- LoadString 'Foo'
+v246 <- BeginArrowFunction -> 
+    v247 <- LoadInteger '42'
+    Return v247
+EndArrowFunction
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v248
+        v249 <- LoadString 'Foo'
+        Return v249
+    EndObjectLiteralMethod
+v250 <- EndObjectLiteral
+v251 <- Construct v232, [v246, v250]
+v252 <- LoadString 'Function'
+v253 <- BeginArrowFunction -> 
+    v254 <- LoadInteger '42'
+    Return v254
+EndArrowFunction
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v255
+        v256 <- LoadInteger '666'
+        Return v256
+    EndObjectLiteralMethod
+v257 <- EndObjectLiteral
+v258 <- Construct v232, [v253, v257]
+v259 <- CreateArray []
+BeginObjectLiteral
+v260 <- EndObjectLiteral
+v261 <- CallMethod v232, 'revocable', [v259, v260]
+v262 <- CreateNamedVariable 'revocable', 'var', v261
+v263 <- CallMethod v262, 'revoke', []
+v264 <- BeginArrowFunction -> 
+    v265 <- GetProperty v262, 'proxy'
+    v266 <- GetProperty v2, 'prototype'
+    v267 <- GetProperty v266, 'toString'
+    v268 <- CallMethod v267, 'call', [v265]
+    Return v268
+EndArrowFunction
+v269 <- CallFunction v264, []
+BeginObjectLiteral
+v270 <- EndObjectLiteral
+v271 <- CreateNamedVariable 'handler', 'var', v270
+v272 <- CreateArray []
+v273 <- CallMethod v232, 'revocable', [v272, v271]
+Reassign v262, v273
+v274 <- BeginArrowFunction -> 
+    v275 <- CallMethod v262, 'revoke', []
+    Return v275
+EndArrowFunction
+SetProperty v271, 'get', v274
+v276 <- LoadString '[object Array]'
+v277 <- GetProperty v262, 'proxy'
+v278 <- GetProperty v2, 'prototype'
+v279 <- GetProperty v278, 'toString'
+v280 <- CallMethod v279, 'call', [v277]
+v281 <- BeginArrowFunction -> 
+    v282 <- GetProperty v262, 'proxy'
+    v283 <- GetProperty v2, 'prototype'
+    v284 <- GetProperty v283, 'toString'
+    v285 <- CallMethod v284, 'call', [v282]
+    Return v285
+EndArrowFunction
+v286 <- CallFunction v281, []
+v287 <- CreateArray []
+v288 <- CallMethod v232, 'revocable', [v287, v271]
+Reassign v262, v288
+v289 <- BeginArrowFunction -> 
+    v290 <- CallMethod v262, 'revoke', []
+    v291 <- LoadString 'value'
+    Return v291
+EndArrowFunction
+SetProperty v271, 'get', v289
+v292 <- LoadString '[object value]'
+v293 <- GetProperty v262, 'proxy'
+v294 <- GetProperty v2, 'prototype'
+v295 <- GetProperty v294, 'toString'
+v296 <- CallMethod v295, 'call', [v293]
+v297 <- BeginArrowFunction -> 
+    v298 <- GetProperty v262, 'proxy'
+    v299 <- GetProperty v2, 'prototype'
+    v300 <- GetProperty v299, 'toString'
+    v301 <- CallMethod v300, 'call', [v298]
+    Return v301
+EndArrowFunction
+v302 <- CallFunction v297, []
+v303 <- BeginPlainFunction -> 
+EndPlainFunction
+v304 <- CallMethod v232, 'revocable', [v303, v271]
+Reassign v262, v304
+v305 <- BeginArrowFunction -> 
+    v306 <- CallMethod v262, 'revoke', []
+    Return v306
+EndArrowFunction
+SetProperty v271, 'get', v305
+v307 <- LoadString '[object Function]'
+v308 <- GetProperty v262, 'proxy'
+v309 <- GetProperty v2, 'prototype'
+v310 <- GetProperty v309, 'toString'
+v311 <- CallMethod v310, 'call', [v308]
+v312 <- BeginArrowFunction -> 
+    v313 <- GetProperty v262, 'proxy'
+    v314 <- GetProperty v2, 'prototype'
+    v315 <- GetProperty v314, 'toString'
+    v316 <- CallMethod v315, 'call', [v313]
+    Return v316
+EndArrowFunction
+v317 <- CallFunction v312, []
+v318 <- BeginGeneratorFunction -> 
+    v319 <- LoadInteger '1'
+    v320 <- Yield v319
+EndGeneratorFunction
+v321 <- LoadString 'GeneratorFunction'
+v322 <- CreateNamedVariable 'gen', 'none'
+v323 <- GetProperty v187, 'toStringTag'
+v324 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v324
+v325 <- EndObjectLiteral
+v326 <- CallMethod v2, 'defineProperty', [v322, v323, v325]
+v327 <- LoadString 'different string'
+v328 <- GetProperty v187, 'toStringTag'
+SetComputedProperty v322, v328, v327
+v329 <- LoadString 'different string'
+v330 <- LoadInteger '1'
+v331 <- GetProperty v187, 'toStringTag'
+SetComputedProperty v322, v331, v330
+v332 <- LoadString 'Function'
+v333 <- BeginPlainFunction -> v334, v335
+    v336 <- GetProperty v187, 'toStringTag'
+    v337 <- LoadBoolean 'true'
+    v338 <- LoadString 'different string'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `configurable`, v337
+        ObjectLiteralAddProperty `value`, v338
+    v339 <- EndObjectLiteral
+    v340 <- CallMethod v2, 'defineProperty', [v335, v336, v339]
+    v341 <- LoadString 'different string'
+    v342 <- CallFunction v209, [v335]
+EndPlainFunction
+v343 <- LoadString 'global'
+v344 <- CallFunction v333, [v343, v1]
+v345 <- LoadString 'Generator'
+v346 <- CallFunction v322, []
+v347 <- CallFunction v333, [v345, v346]
+v348 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v349 <- Construct v348, []
+v350 <- CreateNamedVariable 'arrayBuffer', 'var', v349
+v351 <- LoadString 'ArrayBuffer'
+v352 <- CallFunction v333, [v351, v350]
+v353 <- LoadString 'DataView'
+v354 <- CreateNamedVariable 'DataView', 'none'
+v355 <- Construct v354, [v350]
+v356 <- CallFunction v333, [v353, v355]
+v357 <- LoadString 'Int8Array'
+v358 <- CreateNamedVariable 'Int8Array', 'none'
+v359 <- Construct v358, []
+v360 <- CallFunction v333, [v357, v359]
+v361 <- LoadString 'Uint8Array'
+v362 <- CreateNamedVariable 'Uint8Array', 'none'
+v363 <- Construct v362, []
+v364 <- CallFunction v333, [v361, v363]
+v365 <- LoadString 'Uint8ClampedArray'
+v366 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v367 <- Construct v366, []
+v368 <- CallFunction v333, [v365, v367]
+v369 <- LoadString 'Int16Array'
+v370 <- CreateNamedVariable 'Int16Array', 'none'
+v371 <- Construct v370, []
+v372 <- CallFunction v333, [v369, v371]
+v373 <- LoadString 'Uint16Array'
+v374 <- CreateNamedVariable 'Uint16Array', 'none'
+v375 <- Construct v374, []
+v376 <- CallFunction v333, [v373, v375]
+v377 <- LoadString 'Int32Array'
+v378 <- CreateNamedVariable 'Int32Array', 'none'
+v379 <- Construct v378, []
+v380 <- CallFunction v333, [v377, v379]
+v381 <- LoadString 'Uint32Array'
+v382 <- CreateNamedVariable 'Uint32Array', 'none'
+v383 <- Construct v382, []
+v384 <- CallFunction v333, [v381, v383]
+v385 <- LoadString 'Float32Array'
+v386 <- CreateNamedVariable 'Float32Array', 'none'
+v387 <- Construct v386, []
+v388 <- CallFunction v333, [v385, v387]
+v389 <- LoadString 'Float64Array'
+v390 <- CreateNamedVariable 'Float64Array', 'none'
+v391 <- Construct v390, []
+v392 <- CallFunction v333, [v389, v391]
+v393 <- CreateNamedVariable 'Set', 'none'
+v394 <- Construct v393, []
+v395 <- CreateNamedVariable 'set', 'var', v394
+v396 <- CreateNamedVariable 'Map', 'none'
+v397 <- Construct v396, []
+v398 <- CreateNamedVariable 'map', 'var', v397
+v399 <- LoadString 'Set'
+v400 <- CallFunction v333, [v399, v395]
+v401 <- LoadString 'Map'
+v402 <- CallFunction v333, [v401, v398]
+v403 <- LoadString 'Set Iterator'
+v404 <- GetProperty v187, 'iterator'
+v405 <- CallComputedMethod v395, v404, []
+v406 <- CallFunction v333, [v403, v405]
+v407 <- LoadString 'Map Iterator'
+v408 <- GetProperty v187, 'iterator'
+v409 <- CallComputedMethod v398, v408, []
+v410 <- CallFunction v333, [v407, v409]
+v411 <- LoadString 'WeakSet'
+v412 <- CreateNamedVariable 'WeakSet', 'none'
+v413 <- Construct v412, []
+v414 <- CallFunction v333, [v411, v413]
+v415 <- LoadString 'WeakMap'
+v416 <- CreateNamedVariable 'WeakMap', 'none'
+v417 <- Construct v416, []
+v418 <- CallFunction v333, [v415, v417]
+v419 <- LoadString 'Promise'
+v420 <- CreateNamedVariable 'Promise', 'none'
+v421 <- BeginPlainFunction -> 
+EndPlainFunction
+v422 <- Construct v420, [v421]
+v423 <- CallFunction v333, [v419, v422]
+
+
+var global = this;
+const v3 = [Object];
+const v5 = [Function];
+const v7 = [Array];
+const v9 = [String];
+const v11 = [Boolean];
+const v13 = [Number];
+const v15 = [Date];
+const v17 = [RegExp];
+const v25 = [Error,TypeError,RangeError,SyntaxError,ReferenceError,EvalError,URIError];
+const v26 = {
+    Object: v3,
+    Function: v5,
+    Array: v7,
+    String: v9,
+    Boolean: v11,
+    Number: v13,
+    Date: v15,
+    RegExp: v17,
+    Error: v25,
+};
+var funs = v26;
+for (const v28 in funs) {
+    for (const v30 in funs[v28]) {
+        ("[object " + v28) + "]";
+        const t24 = funs[v28][v30];
+        const v37 = new t24();
+        Object.prototype.toString.call(v37);
+        funs[v28][v30];
+        const v45 = funs[v28][v30];
+        Object.prototype.toString.call(v45);
+        funs[v28][v30];
+    }
+}
+function testToStringTag(a52) {
+    var obj = {};
+    obj[Symbol.toStringTag] = a52;
+    ("[object " + a52) + "]";
+    Object.prototype.toString.call(obj);
+    obj = {};
+    const v65 = Symbol.toStringTag;
+    function f66() {
+        throw a52;
+    }
+    Object.defineProperty(obj, v65, { get: f66 });
+    function f69() {
+        Object.prototype.toString.call(obj);
+    }
+    f69();
+    obj = {};
+    const v75 = Symbol.toStringTag;
+    function f76() {
+        return a52;
+    }
+    Object.defineProperty(obj, v75, { get: f76 });
+    ("[object " + a52) + "]";
+    Object.prototype.toString.call(obj);
+    obj = {};
+    const v88 = "X" + a52;
+    obj[Symbol.toStringTag] = v88;
+    ("[object X" + a52) + "]";
+    Object.prototype.toString.call(obj);
+    obj = {};
+    const v98 = Symbol.toStringTag;
+    function f99() {
+        return "X" + a52;
+    }
+    Object.defineProperty(obj, v98, { get: f99 });
+    ("[object X" + a52) + "]";
+    Object.prototype.toString.call(obj);
+    const v112 = a52 === "Arguments";
+    function f113() {
+        return arguments;
+    }
+    const v115 = f113();
+    const t74 = global[a52];
+    const v117 = new t74();
+    var obj = v112 ? v115 : v117;
+    obj[Symbol.toStringTag] = undefined;
+    ("[object " + a52) + "]";
+    Object.prototype.toString.call(obj);
+    const v130 = a52 === "Arguments";
+    function f131() {
+        return arguments;
+    }
+    const v133 = f131();
+    const t85 = global[a52];
+    const v135 = new t85();
+    var obj = v130 ? v133 : v135;
+    const v138 = Symbol.toStringTag;
+    function f139() {
+        return undefined;
+    }
+    Object.defineProperty(obj, v138, { get: f139 });
+    ("[object " + a52) + "]";
+    Object.prototype.toString.call(obj);
+}
+(["Arguments","Array","Boolean","Date","Error","Function","Number","RegExp","String"]).forEach(testToStringTag);
+function testToStringTagNonString(a162) {
+    var obj = {};
+    obj[Symbol.toStringTag] = a162;
+    Object.prototype.toString.call(obj);
+    obj = {};
+    const v172 = Symbol.toStringTag;
+    function f173() {
+        return a162;
+    }
+    Object.defineProperty(obj, v172, { get: f173 });
+    Object.prototype.toString.call(obj);
+}
+function f181() {
+}
+const v182 = [];
+const v183 = {};
+const v184 = /regexp/;
+const v188 = Symbol("sym");
+const v189 = new Date();
+function f190() {
+    return arguments;
+}
+const v192 = f190();
+const v195 = new Error("oops");
+const v197 = new String("str");
+([null,f181,v182,v183,v184,42,v188,v189,v192,true,v195,v197]).forEach(testToStringTagNonString);
+function testObjectToStringPropertyDesc() {
+    var desc = Object.getOwnPropertyDescriptor(Object.prototype, "toString");
+    desc.writable;
+    desc.enumerable;
+    desc.configurable;
+}
+testObjectToStringPropertyDesc();
+function testObjectToStringOnNonStringValue(a210) {
+    const v211 = Symbol.toStringTag;
+    Object.defineProperty(a210, v211, { value: 1 });
+    ({}).toString.call(a210);
+}
+testObjectToStringOnNonStringValue({});
+function assertTag(a222, a223) {
+    ("[object " + a222) + "]";
+    Object.prototype.toString.call(a223);
+}
+const v233 = {};
+new Proxy(v233, {});
+const v237 = [];
+new Proxy(v237, {});
+const v241 = () => {
+    return 42;
+};
+new Proxy(v241, {});
+const v246 = () => {
+    return 42;
+};
+const v250 = {
+    get() {
+        return "Foo";
+    },
+};
+new Proxy(v246, v250);
+const v253 = () => {
+    return 42;
+};
+const v257 = {
+    get() {
+        return 666;
+    },
+};
+new Proxy(v253, v257);
+const v259 = [];
+var revocable = Proxy.revocable(v259, {});
+revocable.revoke();
+const v264 = () => {
+    const v265 = revocable.proxy;
+    return Object.prototype.toString.call(v265);
+};
+v264();
+var handler = {};
+revocable = Proxy.revocable([], handler);
+const v274 = () => {
+    return revocable.revoke();
+};
+handler.get = v274;
+const v277 = revocable.proxy;
+Object.prototype.toString.call(v277);
+const v281 = () => {
+    const v282 = revocable.proxy;
+    return Object.prototype.toString.call(v282);
+};
+v281();
+revocable = Proxy.revocable([], handler);
+const v289 = () => {
+    revocable.revoke();
+    return "value";
+};
+handler.get = v289;
+const v293 = revocable.proxy;
+Object.prototype.toString.call(v293);
+const v297 = () => {
+    const v298 = revocable.proxy;
+    return Object.prototype.toString.call(v298);
+};
+v297();
+function f303() {
+}
+revocable = Proxy.revocable(f303, handler);
+const v305 = () => {
+    return revocable.revoke();
+};
+handler.get = v305;
+const v308 = revocable.proxy;
+Object.prototype.toString.call(v308);
+const v312 = () => {
+    const v313 = revocable.proxy;
+    return Object.prototype.toString.call(v313);
+};
+v312();
+function* gen1() {
+    yield 1;
+}
+const v323 = Symbol.toStringTag;
+Object.defineProperty(gen, v323, { writable: true });
+gen[Symbol.toStringTag] = "different string";
+gen[Symbol.toStringTag] = 1;
+function overwriteToStringTagWithNonStringValue(a334, a335) {
+    const v336 = Symbol.toStringTag;
+    Object.defineProperty(a335, v336, { configurable: true, value: "different string" });
+    testObjectToStringOnNonStringValue(a335);
+}
+overwriteToStringTagWithNonStringValue("global", global);
+overwriteToStringTagWithNonStringValue("Generator", gen());
+const v349 = new ArrayBuffer();
+var arrayBuffer = v349;
+overwriteToStringTagWithNonStringValue("ArrayBuffer", arrayBuffer);
+const v355 = new DataView(arrayBuffer);
+overwriteToStringTagWithNonStringValue("DataView", v355);
+const v359 = new Int8Array();
+overwriteToStringTagWithNonStringValue("Int8Array", v359);
+const v363 = new Uint8Array();
+overwriteToStringTagWithNonStringValue("Uint8Array", v363);
+const v367 = new Uint8ClampedArray();
+overwriteToStringTagWithNonStringValue("Uint8ClampedArray", v367);
+const v371 = new Int16Array();
+overwriteToStringTagWithNonStringValue("Int16Array", v371);
+const v375 = new Uint16Array();
+overwriteToStringTagWithNonStringValue("Uint16Array", v375);
+const v379 = new Int32Array();
+overwriteToStringTagWithNonStringValue("Int32Array", v379);
+const v383 = new Uint32Array();
+overwriteToStringTagWithNonStringValue("Uint32Array", v383);
+const v387 = new Float32Array();
+overwriteToStringTagWithNonStringValue("Float32Array", v387);
+const v391 = new Float64Array();
+overwriteToStringTagWithNonStringValue("Float64Array", v391);
+const v394 = new Set();
+var set = v394;
+const v397 = new Map();
+var map = v397;
+overwriteToStringTagWithNonStringValue("Set", set);
+overwriteToStringTagWithNonStringValue("Map", map);
+overwriteToStringTagWithNonStringValue("Set Iterator", set[Symbol.iterator]());
+overwriteToStringTagWithNonStringValue("Map Iterator", map[Symbol.iterator]());
+const v413 = new WeakSet();
+overwriteToStringTagWithNonStringValue("WeakSet", v413);
+const v417 = new WeakMap();
+overwriteToStringTagWithNonStringValue("WeakMap", v417);
+function f421() {
+}
+const v422 = new Promise(f421);
+overwriteToStringTagWithNonStringValue("Promise", v422);
+
+FuzzIL program written to corpus/object-tostring.fzil

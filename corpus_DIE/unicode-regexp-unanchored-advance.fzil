@@ -1,0 +1,18 @@
+v0 <- LoadInteger '10000000'
+v1 <- LoadString 'a'
+v2 <- CallMethod v1, 'repeat', [v0]
+v3 <- LoadString 'ሴ'
+v4 <- BinaryOperation v2, '+', v3
+v5 <- CreateNamedVariable 's', 'var', v4
+v6 <- LoadString 'ሴ'
+v7 <- LoadString 'ሴ'
+v8 <- CreateArray [v6, v7]
+v9 <- LoadRegExp '(\u1234)' 'u'
+v10 <- CallMethod v9, 'exec', [v5]
+
+
+var s = ("a").repeat(10000000) + "ሴ";
+["ሴ","ሴ"];
+/(\u1234)/u.exec(s);
+
+FuzzIL program written to corpus/unicode-regexp-unanchored-advance.fzil

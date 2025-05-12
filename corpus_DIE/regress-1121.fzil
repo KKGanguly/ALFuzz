@@ -1,0 +1,21 @@
+v0 <- LoadNull
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetProperty v2, '__proto__', v0
+v3 <- LoadInteger '1'
+v4 <- LoadInteger '2'
+v5 <- LoadInteger '3'
+v6 <- CreateArray [v3, v4, v5]
+v7 <- LoadInteger '1'
+v8 <- LoadInteger '2'
+v9 <- LoadInteger '3'
+v10 <- CreateArray [v7, v8, v9]
+v11 <- CallMethod v10, 'slice', []
+
+
+const t0 = Array.prototype;
+t0.__proto__ = null;
+[1,2,3];
+([1,2,3]).slice();
+
+FuzzIL program written to corpus/regress-1121.fzil

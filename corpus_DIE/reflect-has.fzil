@@ -1,0 +1,206 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- BeginPlainFunction -> 
+        v2 <- CreateNamedVariable 'Reflect', 'none'
+        v3 <- CallMethod v2, 'has', []
+        Return v3
+    EndPlainFunction
+    v4 <- CallFunction v1, []
+    v5 <- CallFunction v1, []
+    v6 <- CallFunction v1, []
+EndPlainFunction
+v7 <- CallFunction v0, []
+v8 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v9 <- BeginPlainFunction -> v10
+        v11 <- CreateNamedVariable 'Reflect', 'none'
+        v12 <- CallMethod v11, 'has', [v10]
+        Return v12
+    EndPlainFunction
+    BeginObjectLiteral
+    v13 <- EndObjectLiteral
+    v14 <- CallFunction v9, [v13]
+    BeginObjectLiteral
+    v15 <- EndObjectLiteral
+    v16 <- CallFunction v9, [v15]
+    BeginObjectLiteral
+    v17 <- EndObjectLiteral
+    v18 <- CallFunction v9, [v17]
+EndPlainFunction
+v19 <- CallFunction v8, []
+v20 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v21 <- BeginPlainFunction -> v22
+        v23 <- CreateNamedVariable 'Reflect', 'none'
+        v24 <- CallMethod v23, 'has', [v22]
+        Return v24
+    EndPlainFunction
+    v25 <- LoadUndefined
+    v26 <- LoadInteger '1'
+    v27 <- CallMethod v21, 'bind', [v25, v26]
+    v28 <- CallFunction v27, []
+    v29 <- LoadUndefined
+    v30 <- LoadUndefined
+    v31 <- CallMethod v21, 'bind', [v29, v30]
+    v32 <- CallFunction v31, []
+    v33 <- LoadUndefined
+    v34 <- LoadString 'o'
+    v35 <- CallMethod v21, 'bind', [v33, v34]
+    v36 <- CallFunction v35, []
+EndPlainFunction
+v37 <- CallFunction v20, []
+v38 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v39 <- BeginPlainFunction -> 
+        BeginTry
+            v40 <- CreateNamedVariable 'Reflect', 'none'
+            v41 <- CallMethod v40, 'has', []
+            Return v41
+        BeginCatch -> v42
+            v43 <- LoadInteger '1'
+            Return v43
+        EndTryCatch
+    EndPlainFunction
+    v44 <- LoadInteger '1'
+    v45 <- CallFunction v39, []
+    v46 <- LoadInteger '1'
+    v47 <- CallFunction v39, []
+    v48 <- LoadInteger '1'
+    v49 <- CallFunction v39, []
+EndPlainFunction
+v50 <- CallFunction v38, []
+v51 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    BeginObjectLiteral
+    v52 <- EndObjectLiteral
+    v53 <- CreateNamedVariable 'o', 'const', v52
+    v54 <- BeginPlainFunction -> v55
+        BeginTry
+            v56 <- CreateNamedVariable 'Reflect', 'none'
+            v57 <- CallMethod v56, 'has', [v53, v55]
+            Return v57
+        BeginCatch -> v58
+            v59 <- LoadInteger '1'
+            Return v59
+        EndTryCatch
+    EndPlainFunction
+    v60 <- LoadInteger '1'
+    v61 <- CreateNamedVariable 'Symbol', 'none'
+    v62 <- GetProperty v61, 'toPrimitive'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v62 -> v63
+            v64 <- CreateNamedVariable 'Error', 'none'
+            v65 <- Construct v64, []
+            ThrowException v65
+        EndObjectLiteralComputedMethod
+    v66 <- EndObjectLiteral
+    v67 <- CallFunction v54, [v66]
+    v68 <- LoadInteger '1'
+    v69 <- GetProperty v61, 'toPrimitive'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v69 -> v70
+            v71 <- CreateNamedVariable 'Error', 'none'
+            v72 <- Construct v71, []
+            ThrowException v72
+        EndObjectLiteralComputedMethod
+    v73 <- EndObjectLiteral
+    v74 <- CallFunction v54, [v73]
+    v75 <- LoadInteger '1'
+    v76 <- GetProperty v61, 'toPrimitive'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v76 -> v77
+            v78 <- CreateNamedVariable 'Error', 'none'
+            v79 <- Construct v78, []
+            ThrowException v79
+        EndObjectLiteralComputedMethod
+    v80 <- EndObjectLiteral
+    v81 <- CallFunction v54, [v80]
+EndPlainFunction
+v82 <- CallFunction v51, []
+
+
+function f0() {
+    'use strict';
+    function foo() {
+        return Reflect.has();
+    }
+    foo();
+    foo();
+    foo();
+}
+f0();
+function f8() {
+    'use strict';
+    function foo(a10) {
+        return Reflect.has(a10);
+    }
+    foo({});
+    foo({});
+    foo({});
+}
+f8();
+function f20() {
+    'use strict';
+    function foo(a22) {
+        return Reflect.has(a22);
+    }
+    const t25 = foo.bind(undefined, 1);
+    t25();
+    const t26 = foo.bind(undefined, undefined);
+    t26();
+    const t28 = foo.bind(undefined, "o");
+    t28();
+}
+f20();
+function f38() {
+    'use strict';
+    function foo() {
+        try {
+            return Reflect.has();
+        } catch(e42) {
+            return 1;
+        }
+    }
+    foo();
+    foo();
+    foo();
+}
+f38();
+function f51() {
+    'use strict';
+    const o = {};
+    function foo(a55) {
+        try {
+            return Reflect.has(o, a55);
+        } catch(e58) {
+            return 1;
+        }
+    }
+    const v62 = Symbol.toPrimitive;
+    const v66 = {
+        [v62]() {
+            const v65 = new Error();
+            throw v65;
+        },
+    };
+    foo(v66);
+    const v69 = Symbol.toPrimitive;
+    const v73 = {
+        [v69]() {
+            const v72 = new Error();
+            throw v72;
+        },
+    };
+    foo(v73);
+    const v76 = Symbol.toPrimitive;
+    const v80 = {
+        [v76]() {
+            const v79 = new Error();
+            throw v79;
+        },
+    };
+    foo(v80);
+}
+f51();
+
+FuzzIL program written to corpus/reflect-has.fzil

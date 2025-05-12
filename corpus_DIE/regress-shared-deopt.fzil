@@ -1,0 +1,99 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'soft', 'var', v0
+v2 <- LoadBoolean 'true'
+Reassign v1, v2
+v3 <- LoadBoolean 'false'
+Reassign v1, v3
+v4 <- LoadBoolean 'true'
+Reassign v1, v4
+v5 <- LoadBoolean 'false'
+Reassign v1, v5
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '4'
+    v8 <- CreateNamedVariable 'makeF', 'none'
+    v9 <- CallFunction v8, [v7]
+    v10 <- CreateNamedVariable 'f4', 'var', v9
+    v11 <- LoadInteger '5'
+    v12 <- CallFunction v8, [v11]
+    v13 <- CreateNamedVariable 'f5', 'var', v12
+    v14 <- BeginPlainFunction -> v15
+        v16 <- BeginPlainFunction -> v17
+            v18 <- LoadInteger '0'
+            v19 <- Compare v17, '==', v18
+            BeginIf v19
+                Return v15
+            EndIf
+            v20 <- LoadInteger '4'
+            v21 <- Compare v15, '==', v20
+            BeginIf v21
+                BeginIf v1
+                    v22 <- LoadString 'wahoo'
+                    v23 <- BinaryOperation v22, '+', v15
+                    v24 <- CreateNamedVariable 'print', 'none'
+                    v25 <- CallFunction v24, [v23]
+                EndIf
+            EndIf
+            v26 <- LoadInteger '1'
+            v27 <- BinaryOperation v17, '-', v26
+            v28 <- CallFunction v10, [v27]
+            Return v28
+        EndPlainFunction
+        Return v16
+    EndPlainFunction
+    v29 <- LoadInteger '9'
+    v30 <- CallFunction v10, [v29]
+    v31 <- LoadInteger '11'
+    v32 <- CallFunction v10, [v31]
+    v33 <- LoadInteger '12'
+    v34 <- CallFunction v10, [v33]
+    v35 <- LoadInteger '9'
+    v36 <- CallFunction v13, [v35]
+    v37 <- LoadInteger '11'
+    v38 <- CallFunction v13, [v37]
+    v39 <- LoadInteger '12'
+    v40 <- CallFunction v13, [v39]
+    v41 <- LoadBoolean 'true'
+    Reassign v1, v41
+    v42 <- LoadInteger '1'
+    v43 <- CallFunction v10, [v42]
+    v44 <- LoadInteger '9'
+    v45 <- CallFunction v13, [v44]
+EndPlainFunction
+v46 <- CallFunction v6, []
+
+
+var soft = false;
+soft = true;
+soft = false;
+soft = true;
+soft = false;
+function test() {
+    var f4 = makeF(4);
+    var f5 = makeF(5);
+    function makeF(a15) {
+        function f(a17) {
+            if (a17 == 0) {
+                return a15;
+            }
+            if (a15 == 4) {
+                if (soft) {
+                    print("wahoo" + a15);
+                }
+            }
+            return f4(a17 - 1);
+        }
+        return f;
+    }
+    f4(9);
+    f4(11);
+    f4(12);
+    f5(9);
+    f5(11);
+    f5(12);
+    soft = true;
+    f4(1);
+    f5(9);
+}
+test();
+
+FuzzIL program written to corpus/regress-shared-deopt.fzil

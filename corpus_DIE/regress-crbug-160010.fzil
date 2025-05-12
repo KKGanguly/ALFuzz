@@ -1,0 +1,26 @@
+v0 <- LoadString 'a'
+v1 <- CreateNamedVariable 'str', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '28'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    Update v1, '+', v1
+    v9 <- CreateNamedVariable 'f2', 'none'
+    v10 <- CallFunction v9, [v1]
+EndForLoop
+v11 <- CreateNamedVariable 'JSON', 'none'
+v12 <- CallMethod v11, 'stringify', [v1]
+
+
+var str = "a";
+for (let i3 = 0; i3 < 28; i3++) {
+    str += str;
+    f2(str);
+}
+JSON.stringify(str);
+
+FuzzIL program written to corpus/regress-crbug-160010.fzil

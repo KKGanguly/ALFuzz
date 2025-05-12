@@ -1,0 +1,73 @@
+v0 <- LoadString 'getPrototypeOf'
+v1 <- LoadString 'setPrototypeOf'
+v2 <- LoadString 'isExtensible'
+v3 <- LoadString 'preventExtensions'
+v4 <- LoadString 'getOwnPropertyDescriptor'
+v5 <- LoadString 'has'
+v6 <- LoadString 'get'
+v7 <- LoadString 'set'
+v8 <- LoadString 'deleteProperty'
+v9 <- LoadString 'defineProperty'
+v10 <- LoadString 'ownKeys'
+v11 <- LoadString 'apply'
+v12 <- LoadString 'construct'
+v13 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12]
+v14 <- CreateNamedVariable 'traps', 'none'
+Reassign v14, v13
+BeginObjectLiteral
+v15 <- EndObjectLiteral
+BeginObjectLiteral
+v16 <- EndObjectLiteral
+v17 <- CreateNamedVariable 'Proxy', 'none'
+v18 <- CallMethod v17, 'revocable', [v15, v16]
+v19 <- CreateNamedVariable '', 'var', v18
+v20 <- LoadInteger '0'
+v21 <- CreateNamedVariable 'revoke', 'none'
+v22 <- GetProperty v21, 'length'
+v23 <- LoadUndefined
+v24 <- CallFunction v21, []
+v25 <- CreateNamedVariable 'traps', 'none'
+BeginForOfLoop v25 -> v26
+    v27 <- BeginArrowFunction -> 
+        v28 <- CreateNamedVariable 'proxy', 'none'
+        v29 <- CreateNamedVariable 'Reflect', 'none'
+        v30 <- CallComputedMethod v29, v26, [v28]
+        Return v30
+    EndArrowFunction
+    v31 <- CallFunction v27, []
+    v32 <- CreateNamedVariable 'TypeError', 'none'
+EndForOfLoop
+v33 <- LoadUndefined
+v34 <- CallFunction v21, []
+BeginForOfLoop v25 -> v35
+    v36 <- BeginArrowFunction -> 
+        v37 <- CreateNamedVariable 'proxy', 'none'
+        v38 <- CreateNamedVariable 'Reflect', 'none'
+        v39 <- CallComputedMethod v38, v35, [v37]
+        Return v39
+    EndArrowFunction
+    v40 <- CallFunction v36, []
+    v41 <- CreateNamedVariable 'TypeError', 'none'
+EndForOfLoop
+
+
+traps = ["getPrototypeOf","setPrototypeOf","isExtensible","preventExtensions","getOwnPropertyDescriptor","has","get","set","deleteProperty","defineProperty","ownKeys","apply","construct"];
+const v15 = {};
+var  = Proxy.revocable(v15, {});
+revoke.length;
+revoke();
+for (const v26 of traps) {
+    const v27 = () => {
+        return Reflect[v26](proxy);
+    };
+    v27();
+}
+revoke();
+for (const v35 of traps) {
+    const v36 = () => {
+        return Reflect[v35](proxy);
+    };
+    v36();
+}
+
+FuzzIL program written to corpus/proxies-revocable.fzil

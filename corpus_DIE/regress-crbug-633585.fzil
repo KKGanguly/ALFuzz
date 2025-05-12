@@ -1,0 +1,52 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadThis
+    v2 <- GetProperty v1, 'x'
+    v3 <- GetProperty v2, 'x'
+    v4 <- LoadThis
+    SetProperty v4, 'x', v3
+EndPlainFunction
+v5 <- CreateNamedVariable 'gc', 'none'
+v6 <- CallFunction v5, []
+v7 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v7
+v8 <- EndObjectLiteral
+v9 <- GetProperty v0, 'prototype'
+SetProperty v9, 'x', v8
+v10 <- Construct v0, []
+v11 <- Construct v0, []
+v12 <- BeginPlainFunction -> 
+    v13 <- BeginPlainFunction -> 
+    EndPlainFunction
+    BeginObjectLiteral
+        BeginObjectLiteralSetter `x` -> v14, v15
+        EndObjectLiteralSetter
+    v16 <- EndObjectLiteral
+    SetProperty v13, 'prototype', v16
+    v17 <- Construct v0, []
+EndPlainFunction
+v18 <- CallFunction v12, []
+
+
+function f() {
+    this.x = this.x.x;
+}
+gc();
+const v8 = { x: 1 };
+const t5 = f.prototype;
+t5.x = v8;
+new f();
+new f();
+function g() {
+    function h() {
+    }
+    const v16 = {
+        set x(a15) {
+        },
+    };
+    h.prototype = v16;
+    new f();
+}
+g();
+
+FuzzIL program written to corpus/regress-crbug-633585.fzil

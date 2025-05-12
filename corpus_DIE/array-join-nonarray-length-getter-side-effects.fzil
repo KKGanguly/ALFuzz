@@ -1,0 +1,78 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'callCount', 'let', v2
+    v4 <- LoadInteger '1'
+    v5 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddElement `0`, v4
+        ObjectLiteralAddElement `1`, v5
+        BeginObjectLiteralGetter `length` -> v6
+            v7 <- UnaryOperation v3, '++'
+            v8 <- Construct v1, []
+            ThrowException v8
+        EndObjectLiteralGetter
+    v9 <- EndObjectLiteral
+    v10 <- CreateNamedVariable 'a', 'const', v9
+    v11 <- BeginArrowFunction -> 
+        v12 <- CreateNamedVariable 'Array', 'none'
+        v13 <- GetProperty v12, 'prototype'
+        v14 <- GetProperty v13, 'join'
+        v15 <- CallMethod v14, 'call', [v10]
+        Return v15
+    EndArrowFunction
+    v16 <- CallFunction v11, []
+    v17 <- CallFunction v1, []
+    v18 <- LoadInteger '1'
+    v19 <- LoadString 'length'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `get` -> v20
+            v21 <- UnaryOperation v3, '++'
+            v22 <- LoadInteger '2'
+            Return v22
+        EndObjectLiteralMethod
+    v23 <- EndObjectLiteral
+    v24 <- CreateNamedVariable 'Object', 'none'
+    v25 <- CallMethod v24, 'defineProperty', [v10, v19, v23]
+    v26 <- LoadString '1,2'
+    v27 <- CreateNamedVariable 'Array', 'none'
+    v28 <- GetProperty v27, 'prototype'
+    v29 <- GetProperty v28, 'join'
+    v30 <- CallMethod v29, 'call', [v10]
+    v31 <- LoadInteger '2'
+EndPlainFunction
+v32 <- CallFunction v0, []
+
+
+function Throws() {
+    function TestError() {
+    }
+    let callCount = 0;
+    const v9 = {
+        0: 1,
+        1: 2,
+        get length() {
+            callCount++;
+            const v8 = new TestError();
+            throw v8;
+        },
+    };
+    const a = v9;
+    const v11 = () => {
+        return Array.prototype.join.call(a);
+    };
+    v11();
+    TestError();
+    const v23 = {
+        get() {
+            callCount++;
+            return 2;
+        },
+    };
+    Object.defineProperty(a, "length", v23);
+    Array.prototype.join.call(a);
+}
+Throws();
+
+FuzzIL program written to corpus/array-join-nonarray-length-getter-side-effects.fzil

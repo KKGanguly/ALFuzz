@@ -1,0 +1,73 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- UnaryOperation '!', v1
+    BeginIf v3
+        v4 <- LoadString ' FAILED!'
+        v5 <- CreateNamedVariable 'print', 'none'
+        v6 <- CallFunction v5, [v4]
+    EndIf
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8, v9
+    v10 <- LoadString 'then'
+    v11 <- Compare v9, '===', v10
+    BeginIf v11
+        v12 <- BeginArrowFunction -> v13
+            v14 <- CreateNamedVariable 'Promise', 'none'
+            v15 <- GetProperty v14, 'prototype'
+            v16 <- GetProperty v15, 'then'
+            v17 <- CallMethod v16, 'call', [v8, v13]
+            Return v17
+        EndArrowFunction
+        Return v12
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v7
+v18 <- EndObjectLiteral
+v19 <- CreateNamedVariable 'handler', 'var', v18
+v20 <- CreateNamedVariable 'Promise', 'none'
+v21 <- BeginArrowFunction -> v22
+    v23 <- LoadInteger '42'
+    v24 <- CallFunction v22, [v23]
+    Return v24
+EndArrowFunction
+v25 <- Construct v20, [v21]
+v26 <- CreateNamedVariable 'target', 'var', v25
+v27 <- CreateNamedVariable 'Proxy', 'none'
+v28 <- Construct v27, [v26, v19]
+v29 <- CreateNamedVariable 'p', 'var', v28
+v30 <- BeginArrowFunction -> v31
+    v32 <- LoadInteger '42'
+    v33 <- Compare v31, '===', v32
+    Return v33
+EndArrowFunction
+v34 <- CallMethod v20, 'resolve', [v29]
+v35 <- CallMethod v34, 'then', [v30]
+
+
+function assertAsync(a1, a2) {
+    if (!a1) {
+        print(" FAILED!");
+    }
+}
+function f7(a8, a9) {
+    if (a9 === "then") {
+        const v12 = (a13) => {
+            return Promise.prototype.then.call(a8, a13);
+        };
+        return v12;
+    }
+}
+var handler = { get: f7 };
+const v21 = (a22) => {
+    return a22(42);
+};
+const v25 = new Promise(v21);
+var target = v25;
+const v28 = new Proxy(target, handler);
+var p = v28;
+const v30 = (a31) => {
+    return a31 === 42;
+};
+Promise.resolve(p).then(v30);
+
+FuzzIL program written to corpus/promise-thenable-proxy.fzil

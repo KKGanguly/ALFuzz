@@ -1,0 +1,44 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Intl'
+BeginIf v1
+    v2 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v3 <- EndObjectLiteral
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- Construct v2, [v3, v4]
+    v6 <- CreateNamedVariable 'Intl', 'none'
+    v7 <- GetProperty v6, 'NumberFormat'
+    v8 <- CallMethod v7, 'call', [v5]
+    v9 <- GetProperty v6, 'NumberFormat'
+    v10 <- BeginArrowFunction -> 
+        BeginObjectLiteral
+        v11 <- EndObjectLiteral
+        BeginObjectLiteral
+        v12 <- EndObjectLiteral
+        v13 <- Construct v2, [v11, v12]
+        v14 <- GetProperty v6, 'DateTimeFormat'
+        v15 <- GetProperty v14, 'prototype'
+        v16 <- GetProperty v15, 'formatToParts'
+        v17 <- CallMethod v16, 'call', [v13]
+        Return v17
+    EndArrowFunction
+    v18 <- CallFunction v10, []
+    v19 <- CreateNamedVariable 'TypeError', 'none'
+EndIf
+
+
+if (this.Intl) {
+    const v3 = {};
+    const v5 = new Proxy(v3, {});
+    Intl.NumberFormat.call(v5);
+    Intl.NumberFormat;
+    const v10 = () => {
+        const v11 = {};
+        const v13 = new Proxy(v11, {});
+        return Intl.DateTimeFormat.prototype.formatToParts.call(v13);
+    };
+    v10();
+}
+
+FuzzIL program written to corpus/regress-4962.fzil

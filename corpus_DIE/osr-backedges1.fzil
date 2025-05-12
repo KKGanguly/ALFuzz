@@ -1,0 +1,130 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- BinaryOperation v1, '|', v2
+    v4 <- CreateNamedVariable 'i', 'var', v3
+    BeginWhileLoopHeader
+        v5 <- LoadBoolean 'true'
+    BeginWhileLoopBody v5
+        v6 <- LoadInteger '0'
+        v7 <- Compare v4, '==', v6
+        BeginIf v7
+            v8 <- LoadInteger '1'
+            Reassign v4, v8
+            Continue
+        EndIf
+        v9 <- LoadInteger '1'
+        v10 <- Compare v4, '==', v9
+        BeginIf v10
+            v11 <- LoadInteger '2'
+            Reassign v4, v11
+            Continue
+        EndIf
+        v12 <- LoadInteger '2'
+        v13 <- Compare v4, '==', v12
+        BeginIf v13
+            v14 <- LoadInteger '3'
+            Reassign v4, v14
+            Continue
+        EndIf
+        v15 <- LoadInteger '3'
+        v16 <- Compare v4, '==', v15
+        BeginIf v16
+            v17 <- LoadInteger '4'
+            Reassign v4, v17
+            Continue
+        EndIf
+        v18 <- LoadInteger '4'
+        v19 <- Compare v4, '==', v18
+        BeginIf v19
+            v20 <- LoadInteger '5'
+            Reassign v4, v20
+            Continue
+        EndIf
+        v21 <- LoadInteger '5'
+        v22 <- Compare v4, '==', v21
+        BeginIf v22
+            v23 <- LoadInteger '6'
+            Reassign v4, v23
+            Continue
+        EndIf
+        v24 <- LoadInteger '6'
+        v25 <- Compare v4, '==', v24
+        BeginIf v25
+            v26 <- LoadInteger '7'
+            Reassign v4, v26
+            Continue
+        EndIf
+        v27 <- LoadInteger '7'
+        v28 <- Compare v4, '==', v27
+        BeginIf v28
+            v29 <- LoadInteger '8'
+            Reassign v4, v29
+            Continue
+        EndIf
+        Break
+    EndWhileLoop
+    Return v4
+EndPlainFunction
+v30 <- BeginPlainFunction -> v31, v32, v33
+    v34 <- LoadInteger '0'
+    v35 <- CallFunction v31, [v34]
+    v36 <- LoadInteger '0'
+    v37 <- CallFunction v31, [v36]
+    v38 <- LoadInteger '9'
+    v39 <- CallFunction v31, [v38]
+    v40 <- LoadInteger '9'
+    v41 <- CallFunction v31, [v40]
+EndPlainFunction
+v42 <- LoadInteger '10'
+v43 <- LoadInteger '10'
+v44 <- CallFunction v30, [v0, v42, v43]
+
+
+function foo(a1) {
+    var i = a1 | 0;
+    while (true) {
+        if (i == 0) {
+            i = 1;
+            continue;
+        }
+        if (i == 1) {
+            i = 2;
+            continue;
+        }
+        if (i == 2) {
+            i = 3;
+            continue;
+        }
+        if (i == 3) {
+            i = 4;
+            continue;
+        }
+        if (i == 4) {
+            i = 5;
+            continue;
+        }
+        if (i == 5) {
+            i = 6;
+            continue;
+        }
+        if (i == 6) {
+            i = 7;
+            continue;
+        }
+        if (i == 7) {
+            i = 8;
+            continue;
+        }
+        break;
+    }
+    return i;
+}
+function test(a31, a32, a33) {
+    a31(0);
+    a31(0);
+    a31(9);
+    a31(9);
+}
+test(foo, 10, 10);
+
+FuzzIL program written to corpus/osr-backedges1.fzil

@@ -1,0 +1,75 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadThis
+    v2 <- GetProperty v1, 'Worker'
+    BeginIf v2
+        v3 <- BeginPlainFunction -> 
+            v4 <- CreateNamedVariable 'a', 'none'
+            v5 <- LoadThis
+            SetProperty v5, 's', v4
+        EndPlainFunction
+        v6 <- BeginPlainFunction -> 
+            v7 <- LoadThis
+            SetProperty v7, 'l', v3
+        EndPlainFunction
+        v8 <- LoadString 'source'
+        v9 <- CreateNamedVariable 'Object', 'none'
+        BeginWith v9
+            v10 <- BeginPlainFunction -> v11
+                v12 <- LoadInteger '2147483648'
+                v13 <- UnaryOperation '-', v12
+                v14 <- CreateNamedVariable 'Worker', 'none'
+                v15 <- CallMethod v14, '__f_0', [v13, v11]
+                Return v15
+            EndPlainFunction
+            ThrowException v10
+        EndWith
+        v16 <- CreateNamedVariable 'Worker', 'none'
+        v17 <- LoadString ''
+        v18 <- LoadString 'string'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `type`, v18
+        v19 <- EndObjectLiteral
+        v20 <- Construct v16, [v17, v19]
+        v21 <- CreateNamedVariable '__v_9', 'var', v20
+        v22 <- CreateNamedVariable 'Math', 'none'
+        v23 <- GetProperty v22, 's'
+        v24 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `s`, v23
+            ObjectLiteralAddProperty `__f_1`, v24
+        v25 <- EndObjectLiteral
+        Reassign v6, v25
+    EndIf
+EndPlainFunction
+BeginTry
+    v26 <- CallFunction v0, []
+BeginCatch -> v27
+EndTryCatch
+
+
+function foo() {
+    if (this.Worker) {
+        function __f_0() {
+            this.s = a;
+        }
+        function __f_1() {
+            this.l = __f_0;
+        }
+        with (Object) {
+            function __f_0(a11) {
+                return Worker.__f_0(-2147483648, a11);
+            }
+            throw __f_0;
+        }
+        const v20 = new Worker("", { type: "string" });
+        var __v_9 = v20;
+        const v23 = Math.s;
+        __f_1 = { s: v23, __f_1: true };
+    }
+}
+try {
+    foo();
+} catch(e27) {
+}
+
+FuzzIL program written to corpus/regress-616064.fzil

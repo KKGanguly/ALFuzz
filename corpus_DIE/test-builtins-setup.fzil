@@ -1,0 +1,964 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'prototype'
+    v3 <- CreateNamedVariable 'Object', 'none'
+    v4 <- CallMethod v3, 'getOwnPropertyDescriptor', [v1, v2]
+    v5 <- CreateNamedVariable 'desc', 'var', v4
+    v6 <- LoadUndefined
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadString 'prototype'
+    v10 <- CreateNamedVariable 'Object', 'none'
+    v11 <- CallMethod v10, 'getOwnPropertyDescriptor', [v8, v9]
+    v12 <- CreateNamedVariable 'desc', 'var', v11
+    v13 <- LoadUndefined
+    v14 <- Compare v12, '!=', v13
+    v15 <- GetProperty v12, 'enumerable'
+    v16 <- GetProperty v12, 'configurable'
+    v17 <- GetProperty v12, 'writable'
+EndPlainFunction
+v18 <- BeginPlainFunction -> v19, v20, v21, v22
+    v23 <- CreateNamedVariable 'Object', 'none'
+    v24 <- CallMethod v23, 'getOwnPropertyDescriptor', [v19, v20]
+    v25 <- CreateNamedVariable 'desc', 'var', v24
+    v26 <- LoadUndefined
+    v27 <- Compare v25, '!=', v26
+    v28 <- GetProperty v25, 'value'
+    v29 <- GetProperty v28, 'name'
+    v30 <- GetProperty v25, 'value'
+    v31 <- GetProperty v30, 'length'
+    v32 <- LoadString 'Bad length of "'
+    v33 <- BinaryOperation v32, '+', v21
+    v34 <- LoadString '"'
+    v35 <- BinaryOperation v33, '+', v34
+    v36 <- GetProperty v25, 'enumerable'
+    v37 <- GetProperty v25, 'configurable'
+    v38 <- GetProperty v25, 'writable'
+    v39 <- BeginArrowFunction -> 
+        v40 <- GetProperty v25, 'value'
+        v41 <- Construct v40, []
+        Return v41
+    EndArrowFunction
+    v42 <- CallFunction v39, []
+    v43 <- BeginArrowFunction -> 
+        v44 <- GetProperty v25, 'value'
+        v45 <- GetProperty v44, 'arguments'
+        Return v45
+    EndArrowFunction
+    v46 <- CallFunction v43, []
+    v47 <- BeginArrowFunction -> 
+        v48 <- GetProperty v25, 'value'
+        v49 <- GetProperty v48, 'caller'
+        Return v49
+    EndArrowFunction
+    v50 <- CallFunction v47, []
+EndPlainFunction
+v51 <- BeginPlainFunction -> v52, v53, v54
+    v55 <- CallFunction v18, [v52, v53, v53, v54]
+EndPlainFunction
+v56 <- BeginPlainFunction -> v57, v58
+    v59 <- CreateNamedVariable 'Object', 'none'
+    v60 <- CallMethod v59, 'getOwnPropertyDescriptor', [v57, v58]
+    v61 <- CreateNamedVariable 'desc', 'var', v60
+    v62 <- LoadUndefined
+    v63 <- Compare v61, '!=', v62
+    v64 <- LoadString 'get '
+    v65 <- CreateNamedVariable 'expected_name', 'var', v64
+    v66 <- TypeOf v58
+    v67 <- LoadString 'symbol'
+    v68 <- Compare v66, '==', v67
+    BeginIf v68
+        v69 <- LoadString 'Symbol\((.*)\)'
+        v70 <- CallMethod v58, 'toString', []
+        v71 <- CallMethod v70, 'match', [v69]
+        v72 <- GetElement v71, '1'
+        Reassign v58, v72
+        v73 <- LoadString '['
+        v74 <- BinaryOperation v73, '+', v58
+        v75 <- LoadString ']'
+        v76 <- BinaryOperation v74, '+', v75
+        Update v65, '+', v76
+    BeginElse
+        Update v65, '+', v58
+    EndIf
+    v77 <- GetProperty v61, 'get'
+    v78 <- GetProperty v77, 'name'
+    v79 <- LoadInteger '0'
+    v80 <- GetProperty v61, 'get'
+    v81 <- GetProperty v80, 'length'
+    v82 <- GetProperty v61, 'enumerable'
+    v83 <- GetProperty v61, 'configurable'
+    v84 <- BeginArrowFunction -> 
+        v85 <- GetProperty v61, 'get'
+        v86 <- GetProperty v85, 'arguments'
+        Return v86
+    EndArrowFunction
+    v87 <- CallFunction v84, []
+    v88 <- BeginArrowFunction -> 
+        v89 <- GetProperty v61, 'get'
+        v90 <- GetProperty v89, 'caller'
+        Return v90
+    EndArrowFunction
+    v91 <- CallFunction v88, []
+EndPlainFunction
+v92 <- BeginPlainFunction -> 
+    v93 <- CreateNamedVariable 'Object', 'none'
+    v94 <- CallFunction v7, [v93]
+    v95 <- CreateNamedVariable 'Function', 'none'
+    v96 <- CallFunction v7, [v95]
+    v97 <- CreateNamedVariable 'Number', 'none'
+    v98 <- CallFunction v7, [v97]
+    v99 <- CreateNamedVariable 'Boolean', 'none'
+    v100 <- CallFunction v7, [v99]
+    v101 <- CreateNamedVariable 'Symbol', 'none'
+    v102 <- CallFunction v7, [v101]
+    v103 <- CreateNamedVariable 'Date', 'none'
+    v104 <- CallFunction v7, [v103]
+    v105 <- CreateNamedVariable 'RegExp', 'none'
+    v106 <- CallFunction v7, [v105]
+    v107 <- CreateNamedVariable 'DataView', 'none'
+    v108 <- CallFunction v7, [v107]
+    v109 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v110 <- CallFunction v7, [v109]
+    v111 <- BeginAsyncFunction -> 
+    EndAsyncFunction
+    v112 <- GetProperty v111, 'constructor'
+    v113 <- CreateNamedVariable 'AsyncFunction', 'var', v112
+    v114 <- CallFunction v7, [v113]
+    v115 <- BeginGeneratorFunction -> 
+    EndGeneratorFunction
+    v116 <- GetProperty v115, 'constructor'
+    v117 <- CreateNamedVariable 'GeneratorFunction', 'var', v116
+    v118 <- CallFunction v7, [v117]
+    v119 <- CreateNamedVariable 'Error', 'none'
+    v120 <- CallFunction v7, [v119]
+    v121 <- CreateNamedVariable 'SyntaxError', 'none'
+    v122 <- CallFunction v7, [v121]
+    v123 <- CreateNamedVariable 'RangeError', 'none'
+    v124 <- CallFunction v7, [v123]
+    v125 <- CreateNamedVariable 'TypeError', 'none'
+    v126 <- CallFunction v7, [v125]
+    v127 <- CreateNamedVariable 'ReferenceError', 'none'
+    v128 <- CallFunction v7, [v127]
+    v129 <- CreateNamedVariable 'EvalError', 'none'
+    v130 <- CallFunction v7, [v129]
+    v131 <- CreateNamedVariable 'URIError', 'none'
+    v132 <- CallFunction v7, [v131]
+    v133 <- CallFunction v7, [v119]
+EndPlainFunction
+v134 <- CallFunction v92, []
+v135 <- BeginPlainFunction -> 
+    v136 <- CreateNamedVariable 'Intl', 'none'
+    v137 <- TypeOf v136
+    v138 <- LoadString 'undefined'
+    v139 <- Compare v137, '==', v138
+    BeginIf v139
+        Return
+    EndIf
+    v140 <- LoadString 'getCanonicalLocales'
+    v141 <- LoadInteger '1'
+    v142 <- CallFunction v51, [v136, v140, v141]
+    v143 <- GetProperty v136, 'Collator'
+    v144 <- CallFunction v7, [v143]
+    v145 <- GetProperty v136, 'Collator'
+    v146 <- LoadString 'supportedLocalesOf'
+    v147 <- LoadInteger '1'
+    v148 <- CallFunction v51, [v145, v146, v147]
+    v149 <- GetProperty v136, 'Collator'
+    v150 <- GetProperty v149, 'prototype'
+    v151 <- LoadString 'compare'
+    v152 <- CallFunction v56, [v150, v151]
+    v153 <- GetProperty v136, 'Collator'
+    v154 <- GetProperty v153, 'prototype'
+    v155 <- LoadString 'resolvedOptions'
+    v156 <- LoadInteger '0'
+    v157 <- CallFunction v51, [v154, v155, v156]
+    v158 <- GetProperty v136, 'NumberFormat'
+    v159 <- CallFunction v7, [v158]
+    v160 <- GetProperty v136, 'NumberFormat'
+    v161 <- LoadString 'supportedLocalesOf'
+    v162 <- LoadInteger '1'
+    v163 <- CallFunction v51, [v160, v161, v162]
+    v164 <- GetProperty v136, 'NumberFormat'
+    v165 <- GetProperty v164, 'prototype'
+    v166 <- LoadString 'format'
+    v167 <- CallFunction v56, [v165, v166]
+    v168 <- GetProperty v136, 'NumberFormat'
+    v169 <- GetProperty v168, 'prototype'
+    v170 <- LoadString 'resolvedOptions'
+    v171 <- LoadInteger '0'
+    v172 <- CallFunction v51, [v169, v170, v171]
+    v173 <- GetProperty v136, 'DateTimeFormat'
+    v174 <- CallFunction v7, [v173]
+    v175 <- GetProperty v136, 'DateTimeFormat'
+    v176 <- LoadString 'supportedLocalesOf'
+    v177 <- LoadInteger '1'
+    v178 <- CallFunction v51, [v175, v176, v177]
+    v179 <- GetProperty v136, 'DateTimeFormat'
+    v180 <- GetProperty v179, 'prototype'
+    v181 <- LoadString 'format'
+    v182 <- CallFunction v56, [v180, v181]
+    v183 <- GetProperty v136, 'DateTimeFormat'
+    v184 <- GetProperty v183, 'prototype'
+    v185 <- LoadString 'resolvedOptions'
+    v186 <- LoadInteger '0'
+    v187 <- CallFunction v51, [v184, v185, v186]
+    v188 <- GetProperty v136, 'DateTimeFormat'
+    v189 <- GetProperty v188, 'prototype'
+    v190 <- LoadString 'formatToParts'
+    v191 <- LoadInteger '1'
+    v192 <- CallFunction v51, [v189, v190, v191]
+    v193 <- GetProperty v136, 'v8BreakIterator'
+    v194 <- CallFunction v7, [v193]
+    v195 <- GetProperty v136, 'v8BreakIterator'
+    v196 <- LoadString 'supportedLocalesOf'
+    v197 <- LoadInteger '1'
+    v198 <- CallFunction v51, [v195, v196, v197]
+    v199 <- GetProperty v136, 'v8BreakIterator'
+    v200 <- GetProperty v199, 'prototype'
+    v201 <- LoadString 'resolvedOptions'
+    v202 <- LoadInteger '0'
+    v203 <- CallFunction v51, [v200, v201, v202]
+    v204 <- GetProperty v136, 'v8BreakIterator'
+    v205 <- GetProperty v204, 'prototype'
+    v206 <- LoadString 'adoptText'
+    v207 <- CallFunction v56, [v205, v206]
+    v208 <- GetProperty v136, 'v8BreakIterator'
+    v209 <- GetProperty v208, 'prototype'
+    v210 <- LoadString 'first'
+    v211 <- CallFunction v56, [v209, v210]
+    v212 <- GetProperty v136, 'v8BreakIterator'
+    v213 <- GetProperty v212, 'prototype'
+    v214 <- LoadString 'next'
+    v215 <- CallFunction v56, [v213, v214]
+    v216 <- GetProperty v136, 'v8BreakIterator'
+    v217 <- GetProperty v216, 'prototype'
+    v218 <- LoadString 'current'
+    v219 <- CallFunction v56, [v217, v218]
+    v220 <- GetProperty v136, 'v8BreakIterator'
+    v221 <- GetProperty v220, 'prototype'
+    v222 <- LoadString 'breakType'
+    v223 <- CallFunction v56, [v221, v222]
+    v224 <- CreateNamedVariable 'String', 'none'
+    v225 <- GetProperty v224, 'prototype'
+    v226 <- LoadString 'localeCompare'
+    v227 <- LoadInteger '1'
+    v228 <- CallFunction v51, [v225, v226, v227]
+    v229 <- GetProperty v224, 'prototype'
+    v230 <- LoadString 'toLocaleLowerCase'
+    v231 <- LoadInteger '0'
+    v232 <- CallFunction v51, [v229, v230, v231]
+    v233 <- GetProperty v224, 'prototype'
+    v234 <- LoadString 'toLocaleUpperCase'
+    v235 <- LoadInteger '0'
+    v236 <- CallFunction v51, [v233, v234, v235]
+    v237 <- CreateNamedVariable 'Number', 'none'
+    v238 <- GetProperty v237, 'prototype'
+    v239 <- LoadString 'toLocaleString'
+    v240 <- LoadInteger '0'
+    v241 <- CallFunction v51, [v238, v239, v240]
+    v242 <- CreateNamedVariable 'Date', 'none'
+    v243 <- GetProperty v242, 'prototype'
+    v244 <- LoadString 'toLocaleString'
+    v245 <- LoadInteger '0'
+    v246 <- CallFunction v51, [v243, v244, v245]
+    v247 <- GetProperty v242, 'prototype'
+    v248 <- LoadString 'toLocaleDateString'
+    v249 <- LoadInteger '0'
+    v250 <- CallFunction v51, [v247, v248, v249]
+    v251 <- GetProperty v242, 'prototype'
+    v252 <- LoadString 'toLocaleTimeString'
+    v253 <- LoadInteger '0'
+    v254 <- CallFunction v51, [v251, v252, v253]
+EndPlainFunction
+v255 <- CallFunction v135, []
+v256 <- BeginPlainFunction -> 
+    v257 <- CreateNamedVariable 'Set', 'none'
+    v258 <- CallFunction v7, [v257]
+    v259 <- GetProperty v257, 'prototype'
+    v260 <- LoadString 'add'
+    v261 <- LoadInteger '1'
+    v262 <- CallFunction v51, [v259, v260, v261]
+    v263 <- GetProperty v257, 'prototype'
+    v264 <- LoadString 'delete'
+    v265 <- LoadInteger '1'
+    v266 <- CallFunction v51, [v263, v264, v265]
+    v267 <- GetProperty v257, 'prototype'
+    v268 <- LoadString 'entries'
+    v269 <- LoadInteger '0'
+    v270 <- CallFunction v51, [v267, v268, v269]
+    v271 <- GetProperty v257, 'prototype'
+    v272 <- GetProperty v271, 'keys'
+    v273 <- GetProperty v257, 'prototype'
+    v274 <- GetProperty v273, 'values'
+    v275 <- Compare v272, '===', v274
+    v276 <- GetProperty v257, 'prototype'
+    v277 <- CreateNamedVariable 'Symbol', 'none'
+    v278 <- GetProperty v277, 'iterator'
+    v279 <- GetComputedProperty v276, v278
+    v280 <- GetProperty v257, 'prototype'
+    v281 <- GetProperty v280, 'values'
+    v282 <- Compare v279, '===', v281
+    v283 <- GetProperty v257, 'prototype'
+    v284 <- LoadString 'values'
+    v285 <- LoadInteger '0'
+    v286 <- CallFunction v51, [v283, v284, v285]
+    v287 <- Construct v257, []
+    v288 <- GetProperty v277, 'iterator'
+    v289 <- CallComputedMethod v287, v288, []
+    v290 <- GetProperty v289, '__proto__'
+    v291 <- CreateNamedVariable 'SetIteratorPrototype', 'var', v290
+    v292 <- LoadString 'next'
+    v293 <- LoadInteger '0'
+    v294 <- CallFunction v51, [v291, v292, v293]
+    v295 <- LoadString 'Set Iterator'
+    v296 <- GetProperty v277, 'toStringTag'
+    v297 <- GetComputedProperty v291, v296
+    v298 <- LoadUndefined
+    v299 <- LoadString 'constructor'
+    v300 <- CreateNamedVariable 'Object', 'none'
+    v301 <- CallMethod v300, 'getOwnPropertyDescriptor', [v291, v299]
+    v302 <- CreateNamedVariable 'Map', 'none'
+    v303 <- CallFunction v7, [v302]
+    v304 <- GetProperty v302, 'prototype'
+    v305 <- LoadString 'set'
+    v306 <- LoadInteger '2'
+    v307 <- CallFunction v51, [v304, v305, v306]
+    v308 <- GetProperty v302, 'prototype'
+    v309 <- LoadString 'delete'
+    v310 <- LoadInteger '1'
+    v311 <- CallFunction v51, [v308, v309, v310]
+    v312 <- GetProperty v302, 'prototype'
+    v313 <- LoadString 'entries'
+    v314 <- LoadInteger '0'
+    v315 <- CallFunction v51, [v312, v313, v314]
+    v316 <- GetProperty v302, 'prototype'
+    v317 <- LoadString 'keys'
+    v318 <- LoadInteger '0'
+    v319 <- CallFunction v51, [v316, v317, v318]
+    v320 <- GetProperty v302, 'prototype'
+    v321 <- LoadString 'values'
+    v322 <- LoadInteger '0'
+    v323 <- CallFunction v51, [v320, v321, v322]
+    v324 <- GetProperty v302, 'prototype'
+    v325 <- GetProperty v277, 'iterator'
+    v326 <- GetComputedProperty v324, v325
+    v327 <- GetProperty v302, 'prototype'
+    v328 <- GetProperty v327, 'entries'
+    v329 <- Compare v326, '===', v328
+    v330 <- Construct v302, []
+    v331 <- GetProperty v277, 'iterator'
+    v332 <- CallComputedMethod v330, v331, []
+    v333 <- GetProperty v332, '__proto__'
+    v334 <- CreateNamedVariable 'MapIteratorPrototype', 'var', v333
+    v335 <- LoadString 'next'
+    v336 <- LoadInteger '0'
+    v337 <- CallFunction v51, [v334, v335, v336]
+    v338 <- LoadString 'Map Iterator'
+    v339 <- GetProperty v277, 'toStringTag'
+    v340 <- GetComputedProperty v334, v339
+    v341 <- LoadUndefined
+    v342 <- LoadString 'constructor'
+    v343 <- CallMethod v300, 'getOwnPropertyDescriptor', [v334, v342]
+    v344 <- CreateNamedVariable 'WeakSet', 'none'
+    v345 <- CallFunction v7, [v344]
+    v346 <- LoadInteger '0'
+    v347 <- GetProperty v344, 'length'
+    v348 <- GetProperty v344, 'prototype'
+    v349 <- LoadString 'add'
+    v350 <- LoadInteger '1'
+    v351 <- CallFunction v51, [v348, v349, v350]
+    v352 <- GetProperty v344, 'prototype'
+    v353 <- LoadString 'delete'
+    v354 <- LoadInteger '1'
+    v355 <- CallFunction v51, [v352, v353, v354]
+    v356 <- GetProperty v344, 'prototype'
+    v357 <- LoadString 'has'
+    v358 <- LoadInteger '1'
+    v359 <- CallFunction v51, [v356, v357, v358]
+    v360 <- CreateNamedVariable 'WeakMap', 'none'
+    v361 <- CallFunction v7, [v360]
+    v362 <- LoadInteger '0'
+    v363 <- GetProperty v360, 'length'
+    v364 <- GetProperty v360, 'prototype'
+    v365 <- LoadString 'delete'
+    v366 <- LoadInteger '1'
+    v367 <- CallFunction v51, [v364, v365, v366]
+    v368 <- GetProperty v360, 'prototype'
+    v369 <- LoadString 'get'
+    v370 <- LoadInteger '1'
+    v371 <- CallFunction v51, [v368, v369, v370]
+    v372 <- GetProperty v360, 'prototype'
+    v373 <- LoadString 'has'
+    v374 <- LoadInteger '1'
+    v375 <- CallFunction v51, [v372, v373, v374]
+    v376 <- GetProperty v360, 'prototype'
+    v377 <- LoadString 'set'
+    v378 <- LoadInteger '2'
+    v379 <- CallFunction v51, [v376, v377, v378]
+EndPlainFunction
+v380 <- CallFunction v256, []
+v381 <- BeginPlainFunction -> 
+    v382 <- CreateNamedVariable 'Uint8Array', 'none'
+    v383 <- GetProperty v382, '__proto__'
+    v384 <- CreateNamedVariable 'TypedArray', 'var', v383
+    v385 <- CreateNamedVariable 'Int8Array', 'none'
+    v386 <- CallFunction v7, [v385]
+    v387 <- CallFunction v7, [v382]
+    v388 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+    v389 <- CallFunction v7, [v388]
+    v390 <- CreateNamedVariable 'Int16Array', 'none'
+    v391 <- CallFunction v7, [v390]
+    v392 <- CreateNamedVariable 'Uint16Array', 'none'
+    v393 <- CallFunction v7, [v392]
+    v394 <- CreateNamedVariable 'Int32Array', 'none'
+    v395 <- CallFunction v7, [v394]
+    v396 <- CreateNamedVariable 'Uint32Array', 'none'
+    v397 <- CallFunction v7, [v396]
+    v398 <- CreateNamedVariable 'Float32Array', 'none'
+    v399 <- CallFunction v7, [v398]
+    v400 <- CreateNamedVariable 'Float64Array', 'none'
+    v401 <- CallFunction v7, [v400]
+    v402 <- CallFunction v7, [v384]
+    v403 <- LoadString 'of'
+    v404 <- LoadInteger '0'
+    v405 <- CallFunction v51, [v384, v403, v404]
+    v406 <- LoadString 'from'
+    v407 <- LoadInteger '1'
+    v408 <- CallFunction v51, [v384, v406, v407]
+    v409 <- GetProperty v384, 'prototype'
+    v410 <- LoadString 'subarray'
+    v411 <- LoadInteger '2'
+    v412 <- CallFunction v51, [v409, v410, v411]
+    v413 <- GetProperty v384, 'prototype'
+    v414 <- LoadString 'set'
+    v415 <- LoadInteger '1'
+    v416 <- CallFunction v51, [v413, v414, v415]
+    v417 <- GetProperty v384, 'prototype'
+    v418 <- CreateNamedVariable 'Symbol', 'none'
+    v419 <- GetProperty v418, 'toStringTag'
+    v420 <- CallFunction v56, [v417, v419]
+    v421 <- GetProperty v384, 'prototype'
+    v422 <- LoadString 'filter'
+    v423 <- LoadInteger '1'
+    v424 <- CallFunction v51, [v421, v422, v423]
+    v425 <- GetProperty v384, 'prototype'
+    v426 <- LoadString 'find'
+    v427 <- LoadInteger '1'
+    v428 <- CallFunction v51, [v425, v426, v427]
+    v429 <- GetProperty v384, 'prototype'
+    v430 <- LoadString 'findIndex'
+    v431 <- LoadInteger '1'
+    v432 <- CallFunction v51, [v429, v430, v431]
+    v433 <- GetProperty v384, 'prototype'
+    v434 <- LoadString 'sort'
+    v435 <- LoadInteger '1'
+    v436 <- CallFunction v51, [v433, v434, v435]
+    v437 <- GetProperty v384, 'prototype'
+    v438 <- LoadString 'toLocaleString'
+    v439 <- LoadInteger '0'
+    v440 <- CallFunction v51, [v437, v438, v439]
+    v441 <- GetProperty v384, 'prototype'
+    v442 <- LoadString 'join'
+    v443 <- LoadInteger '1'
+    v444 <- CallFunction v51, [v441, v442, v443]
+EndPlainFunction
+v445 <- CallFunction v381, []
+v446 <- BeginPlainFunction -> 
+    v447 <- CreateNamedVariable 'Array', 'none'
+    v448 <- CallFunction v7, [v447]
+    v449 <- LoadString 'of'
+    v450 <- LoadInteger '0'
+    v451 <- CallFunction v51, [v447, v449, v450]
+    v452 <- LoadString 'from'
+    v453 <- LoadInteger '1'
+    v454 <- CallFunction v51, [v447, v452, v453]
+    v455 <- GetProperty v447, 'prototype'
+    v456 <- LoadString 'concat'
+    v457 <- LoadInteger '1'
+    v458 <- CallFunction v51, [v455, v456, v457]
+    v459 <- GetProperty v447, 'prototype'
+    v460 <- LoadString 'copyWithin'
+    v461 <- LoadInteger '2'
+    v462 <- CallFunction v51, [v459, v460, v461]
+    v463 <- GetProperty v447, 'prototype'
+    v464 <- LoadString 'every'
+    v465 <- LoadInteger '1'
+    v466 <- CallFunction v51, [v463, v464, v465]
+    v467 <- GetProperty v447, 'prototype'
+    v468 <- LoadString 'fill'
+    v469 <- LoadInteger '1'
+    v470 <- CallFunction v51, [v467, v468, v469]
+    v471 <- GetProperty v447, 'prototype'
+    v472 <- LoadString 'filter'
+    v473 <- LoadInteger '1'
+    v474 <- CallFunction v51, [v471, v472, v473]
+    v475 <- GetProperty v447, 'prototype'
+    v476 <- LoadString 'find'
+    v477 <- LoadInteger '1'
+    v478 <- CallFunction v51, [v475, v476, v477]
+    v479 <- GetProperty v447, 'prototype'
+    v480 <- LoadString 'findIndex'
+    v481 <- LoadInteger '1'
+    v482 <- CallFunction v51, [v479, v480, v481]
+    v483 <- GetProperty v447, 'prototype'
+    v484 <- LoadString 'includes'
+    v485 <- LoadInteger '1'
+    v486 <- CallFunction v51, [v483, v484, v485]
+    v487 <- GetProperty v447, 'prototype'
+    v488 <- LoadString 'indexOf'
+    v489 <- LoadInteger '1'
+    v490 <- CallFunction v51, [v487, v488, v489]
+    v491 <- GetProperty v447, 'prototype'
+    v492 <- LoadString 'join'
+    v493 <- LoadInteger '1'
+    v494 <- CallFunction v51, [v491, v492, v493]
+    v495 <- GetProperty v447, 'prototype'
+    v496 <- LoadString 'lastIndexOf'
+    v497 <- LoadInteger '1'
+    v498 <- CallFunction v51, [v495, v496, v497]
+    v499 <- GetProperty v447, 'prototype'
+    v500 <- LoadString 'map'
+    v501 <- LoadInteger '1'
+    v502 <- CallFunction v51, [v499, v500, v501]
+    v503 <- GetProperty v447, 'prototype'
+    v504 <- LoadString 'pop'
+    v505 <- LoadInteger '0'
+    v506 <- CallFunction v51, [v503, v504, v505]
+    v507 <- GetProperty v447, 'prototype'
+    v508 <- LoadString 'push'
+    v509 <- LoadInteger '1'
+    v510 <- CallFunction v51, [v507, v508, v509]
+    v511 <- GetProperty v447, 'prototype'
+    v512 <- LoadString 'reduce'
+    v513 <- LoadInteger '1'
+    v514 <- CallFunction v51, [v511, v512, v513]
+    v515 <- GetProperty v447, 'prototype'
+    v516 <- LoadString 'reduceRight'
+    v517 <- LoadInteger '1'
+    v518 <- CallFunction v51, [v515, v516, v517]
+    v519 <- GetProperty v447, 'prototype'
+    v520 <- LoadString 'reverse'
+    v521 <- LoadInteger '0'
+    v522 <- CallFunction v51, [v519, v520, v521]
+    v523 <- GetProperty v447, 'prototype'
+    v524 <- LoadString 'shift'
+    v525 <- LoadInteger '0'
+    v526 <- CallFunction v51, [v523, v524, v525]
+    v527 <- GetProperty v447, 'prototype'
+    v528 <- LoadString 'slice'
+    v529 <- LoadInteger '2'
+    v530 <- CallFunction v51, [v527, v528, v529]
+    v531 <- GetProperty v447, 'prototype'
+    v532 <- LoadString 'some'
+    v533 <- LoadInteger '1'
+    v534 <- CallFunction v51, [v531, v532, v533]
+    v535 <- GetProperty v447, 'prototype'
+    v536 <- LoadString 'sort'
+    v537 <- LoadInteger '1'
+    v538 <- CallFunction v51, [v535, v536, v537]
+    v539 <- GetProperty v447, 'prototype'
+    v540 <- LoadString 'splice'
+    v541 <- LoadInteger '2'
+    v542 <- CallFunction v51, [v539, v540, v541]
+    v543 <- GetProperty v447, 'prototype'
+    v544 <- LoadString 'toLocaleString'
+    v545 <- LoadInteger '0'
+    v546 <- CallFunction v51, [v543, v544, v545]
+    v547 <- GetProperty v447, 'prototype'
+    v548 <- LoadString 'toString'
+    v549 <- LoadInteger '0'
+    v550 <- CallFunction v51, [v547, v548, v549]
+    v551 <- GetProperty v447, 'prototype'
+    v552 <- LoadString 'unshift'
+    v553 <- LoadInteger '1'
+    v554 <- CallFunction v51, [v551, v552, v553]
+    v555 <- GetProperty v447, 'prototype'
+    v556 <- LoadString 'entries'
+    v557 <- LoadInteger '0'
+    v558 <- CallFunction v51, [v555, v556, v557]
+    v559 <- GetProperty v447, 'prototype'
+    v560 <- LoadString 'forEach'
+    v561 <- LoadInteger '1'
+    v562 <- CallFunction v51, [v559, v560, v561]
+    v563 <- GetProperty v447, 'prototype'
+    v564 <- LoadString 'keys'
+    v565 <- LoadInteger '0'
+    v566 <- CallFunction v51, [v563, v564, v565]
+    v567 <- GetProperty v447, 'prototype'
+    v568 <- CreateNamedVariable 'Symbol', 'none'
+    v569 <- GetProperty v568, 'iterator'
+    v570 <- LoadString 'values'
+    v571 <- LoadInteger '0'
+    v572 <- CallFunction v18, [v567, v569, v570, v571]
+EndPlainFunction
+v573 <- CallFunction v446, []
+v574 <- BeginPlainFunction -> 
+    v575 <- CreateNamedVariable 'Promise', 'none'
+    v576 <- CallFunction v7, [v575]
+    v577 <- LoadString 'all'
+    v578 <- LoadInteger '1'
+    v579 <- CallFunction v51, [v575, v577, v578]
+    v580 <- LoadString 'race'
+    v581 <- LoadInteger '1'
+    v582 <- CallFunction v51, [v575, v580, v581]
+    v583 <- LoadString 'reject'
+    v584 <- LoadInteger '1'
+    v585 <- CallFunction v51, [v575, v583, v584]
+    v586 <- LoadString 'resolve'
+    v587 <- LoadInteger '1'
+    v588 <- CallFunction v51, [v575, v586, v587]
+EndPlainFunction
+v589 <- CallFunction v574, []
+v590 <- BeginPlainFunction -> 
+    v591 <- CreateNamedVariable 'Proxy', 'none'
+    v592 <- CallFunction v0, [v591]
+    v593 <- LoadString 'revocable'
+    v594 <- LoadInteger '2'
+    v595 <- CallFunction v51, [v591, v593, v594]
+EndPlainFunction
+v596 <- CallFunction v590, []
+v597 <- BeginPlainFunction -> 
+    v598 <- CreateNamedVariable 'String', 'none'
+    v599 <- CallFunction v7, [v598]
+    v600 <- LoadString 'raw'
+    v601 <- LoadInteger '1'
+    v602 <- CallFunction v51, [v598, v600, v601]
+    v603 <- GetProperty v598, 'prototype'
+    v604 <- LoadString 'codePointAt'
+    v605 <- LoadInteger '1'
+    v606 <- CallFunction v51, [v603, v604, v605]
+    v607 <- GetProperty v598, 'prototype'
+    v608 <- LoadString 'match'
+    v609 <- LoadInteger '1'
+    v610 <- CallFunction v51, [v607, v608, v609]
+    v611 <- GetProperty v598, 'prototype'
+    v612 <- LoadString 'padEnd'
+    v613 <- LoadInteger '1'
+    v614 <- CallFunction v51, [v611, v612, v613]
+    v615 <- GetProperty v598, 'prototype'
+    v616 <- LoadString 'padStart'
+    v617 <- LoadInteger '1'
+    v618 <- CallFunction v51, [v615, v616, v617]
+    v619 <- GetProperty v598, 'prototype'
+    v620 <- LoadString 'repeat'
+    v621 <- LoadInteger '1'
+    v622 <- CallFunction v51, [v619, v620, v621]
+    v623 <- GetProperty v598, 'prototype'
+    v624 <- LoadString 'search'
+    v625 <- LoadInteger '1'
+    v626 <- CallFunction v51, [v623, v624, v625]
+    v627 <- GetProperty v598, 'prototype'
+    v628 <- LoadString 'link'
+    v629 <- LoadInteger '1'
+    v630 <- CallFunction v51, [v627, v628, v629]
+    v631 <- GetProperty v598, 'prototype'
+    v632 <- LoadString 'anchor'
+    v633 <- LoadInteger '1'
+    v634 <- CallFunction v51, [v631, v632, v633]
+    v635 <- GetProperty v598, 'prototype'
+    v636 <- LoadString 'fontcolor'
+    v637 <- LoadInteger '1'
+    v638 <- CallFunction v51, [v635, v636, v637]
+    v639 <- GetProperty v598, 'prototype'
+    v640 <- LoadString 'fontsize'
+    v641 <- LoadInteger '1'
+    v642 <- CallFunction v51, [v639, v640, v641]
+    v643 <- GetProperty v598, 'prototype'
+    v644 <- LoadString 'big'
+    v645 <- LoadInteger '0'
+    v646 <- CallFunction v51, [v643, v644, v645]
+    v647 <- GetProperty v598, 'prototype'
+    v648 <- LoadString 'blink'
+    v649 <- LoadInteger '0'
+    v650 <- CallFunction v51, [v647, v648, v649]
+    v651 <- GetProperty v598, 'prototype'
+    v652 <- LoadString 'bold'
+    v653 <- LoadInteger '0'
+    v654 <- CallFunction v51, [v651, v652, v653]
+    v655 <- GetProperty v598, 'prototype'
+    v656 <- LoadString 'fixed'
+    v657 <- LoadInteger '0'
+    v658 <- CallFunction v51, [v655, v656, v657]
+    v659 <- GetProperty v598, 'prototype'
+    v660 <- LoadString 'italics'
+    v661 <- LoadInteger '0'
+    v662 <- CallFunction v51, [v659, v660, v661]
+    v663 <- GetProperty v598, 'prototype'
+    v664 <- LoadString 'small'
+    v665 <- LoadInteger '0'
+    v666 <- CallFunction v51, [v663, v664, v665]
+    v667 <- GetProperty v598, 'prototype'
+    v668 <- LoadString 'strike'
+    v669 <- LoadInteger '0'
+    v670 <- CallFunction v51, [v667, v668, v669]
+    v671 <- GetProperty v598, 'prototype'
+    v672 <- LoadString 'sub'
+    v673 <- LoadInteger '0'
+    v674 <- CallFunction v51, [v671, v672, v673]
+    v675 <- GetProperty v598, 'prototype'
+    v676 <- LoadString 'sup'
+    v677 <- LoadInteger '0'
+    v678 <- CallFunction v51, [v675, v676, v677]
+EndPlainFunction
+v679 <- CallFunction v597, []
+
+
+function CheckNoPrototype(a1) {
+    var desc = Object.getOwnPropertyDescriptor(a1, "prototype");
+}
+function CheckReadonlyPrototype(a8) {
+    var desc = Object.getOwnPropertyDescriptor(a8, "prototype");
+    desc != undefined;
+    desc.enumerable;
+    desc.configurable;
+    desc.writable;
+}
+function CheckMethodEx(a19, a20, a21, a22) {
+    var desc = Object.getOwnPropertyDescriptor(a19, a20);
+    desc != undefined;
+    desc.value.name;
+    desc.value.length;
+    ("Bad length of "" + a21) + """;
+    desc.enumerable;
+    desc.configurable;
+    desc.writable;
+    const v39 = () => {
+        const t20 = desc.value;
+        const v41 = new t20();
+        return v41;
+    };
+    v39();
+    const v43 = () => {
+        return desc.value.arguments;
+    };
+    v43();
+    const v47 = () => {
+        return desc.value.caller;
+    };
+    v47();
+}
+function CheckMethod(a52, a53, a54) {
+    CheckMethodEx(a52, a53, a53, a54);
+}
+function CheckGetter(a57, a58) {
+    var desc = Object.getOwnPropertyDescriptor(a57, a58);
+    desc != undefined;
+    var expected_name = "get ";
+    if (typeof a58 == "symbol") {
+        expected_name += ("[" + (a58 = a58.toString().match("Symbol\((.*)\)")[1])) + "]";
+    } else {
+        expected_name += a58;
+    }
+    desc.get.name;
+    desc.get.length;
+    desc.enumerable;
+    desc.configurable;
+    const v84 = () => {
+        return desc.get.arguments;
+    };
+    v84();
+    const v88 = () => {
+        return desc.get.caller;
+    };
+    v88();
+}
+function TestIntrinsicConstructors() {
+    CheckReadonlyPrototype(Object);
+    CheckReadonlyPrototype(Function);
+    CheckReadonlyPrototype(Number);
+    CheckReadonlyPrototype(Boolean);
+    CheckReadonlyPrototype(Symbol);
+    CheckReadonlyPrototype(Date);
+    CheckReadonlyPrototype(RegExp);
+    CheckReadonlyPrototype(DataView);
+    CheckReadonlyPrototype(ArrayBuffer);
+    async function f111() {
+    }
+    var AsyncFunction = f111.constructor;
+    CheckReadonlyPrototype(AsyncFunction);
+    function* f115() {
+    }
+    var GeneratorFunction = f115.constructor;
+    CheckReadonlyPrototype(GeneratorFunction);
+    CheckReadonlyPrototype(Error);
+    CheckReadonlyPrototype(SyntaxError);
+    CheckReadonlyPrototype(RangeError);
+    CheckReadonlyPrototype(TypeError);
+    CheckReadonlyPrototype(ReferenceError);
+    CheckReadonlyPrototype(EvalError);
+    CheckReadonlyPrototype(URIError);
+    CheckReadonlyPrototype(Error);
+}
+TestIntrinsicConstructors();
+function TestIntl() {
+    if (typeof Intl == "undefined") {
+        return;
+    }
+    CheckMethod(Intl, "getCanonicalLocales", 1);
+    CheckReadonlyPrototype(Intl.Collator);
+    CheckMethod(Intl.Collator, "supportedLocalesOf", 1);
+    CheckGetter(Intl.Collator.prototype, "compare");
+    CheckMethod(Intl.Collator.prototype, "resolvedOptions", 0);
+    CheckReadonlyPrototype(Intl.NumberFormat);
+    CheckMethod(Intl.NumberFormat, "supportedLocalesOf", 1);
+    CheckGetter(Intl.NumberFormat.prototype, "format");
+    CheckMethod(Intl.NumberFormat.prototype, "resolvedOptions", 0);
+    CheckReadonlyPrototype(Intl.DateTimeFormat);
+    CheckMethod(Intl.DateTimeFormat, "supportedLocalesOf", 1);
+    CheckGetter(Intl.DateTimeFormat.prototype, "format");
+    CheckMethod(Intl.DateTimeFormat.prototype, "resolvedOptions", 0);
+    CheckMethod(Intl.DateTimeFormat.prototype, "formatToParts", 1);
+    CheckReadonlyPrototype(Intl.v8BreakIterator);
+    CheckMethod(Intl.v8BreakIterator, "supportedLocalesOf", 1);
+    CheckMethod(Intl.v8BreakIterator.prototype, "resolvedOptions", 0);
+    CheckGetter(Intl.v8BreakIterator.prototype, "adoptText");
+    CheckGetter(Intl.v8BreakIterator.prototype, "first");
+    CheckGetter(Intl.v8BreakIterator.prototype, "next");
+    CheckGetter(Intl.v8BreakIterator.prototype, "current");
+    CheckGetter(Intl.v8BreakIterator.prototype, "breakType");
+    CheckMethod(String.prototype, "localeCompare", 1);
+    CheckMethod(String.prototype, "toLocaleLowerCase", 0);
+    CheckMethod(String.prototype, "toLocaleUpperCase", 0);
+    CheckMethod(Number.prototype, "toLocaleString", 0);
+    CheckMethod(Date.prototype, "toLocaleString", 0);
+    CheckMethod(Date.prototype, "toLocaleDateString", 0);
+    CheckMethod(Date.prototype, "toLocaleTimeString", 0);
+}
+TestIntl();
+function TestCollection() {
+    CheckReadonlyPrototype(Set);
+    CheckMethod(Set.prototype, "add", 1);
+    CheckMethod(Set.prototype, "delete", 1);
+    CheckMethod(Set.prototype, "entries", 0);
+    Set.prototype.keys === Set.prototype.values;
+    Set.prototype[Symbol.iterator] === Set.prototype.values;
+    CheckMethod(Set.prototype, "values", 0);
+    const v287 = new Set();
+    var SetIteratorPrototype = v287[Symbol.iterator]().__proto__;
+    CheckMethod(SetIteratorPrototype, "next", 0);
+    SetIteratorPrototype[Symbol.toStringTag];
+    Object.getOwnPropertyDescriptor(SetIteratorPrototype, "constructor");
+    CheckReadonlyPrototype(Map);
+    CheckMethod(Map.prototype, "set", 2);
+    CheckMethod(Map.prototype, "delete", 1);
+    CheckMethod(Map.prototype, "entries", 0);
+    CheckMethod(Map.prototype, "keys", 0);
+    CheckMethod(Map.prototype, "values", 0);
+    Map.prototype[Symbol.iterator] === Map.prototype.entries;
+    const v330 = new Map();
+    var MapIteratorPrototype = v330[Symbol.iterator]().__proto__;
+    CheckMethod(MapIteratorPrototype, "next", 0);
+    MapIteratorPrototype[Symbol.toStringTag];
+    Object.getOwnPropertyDescriptor(MapIteratorPrototype, "constructor");
+    CheckReadonlyPrototype(WeakSet);
+    WeakSet.length;
+    CheckMethod(WeakSet.prototype, "add", 1);
+    CheckMethod(WeakSet.prototype, "delete", 1);
+    CheckMethod(WeakSet.prototype, "has", 1);
+    CheckReadonlyPrototype(WeakMap);
+    WeakMap.length;
+    CheckMethod(WeakMap.prototype, "delete", 1);
+    CheckMethod(WeakMap.prototype, "get", 1);
+    CheckMethod(WeakMap.prototype, "has", 1);
+    CheckMethod(WeakMap.prototype, "set", 2);
+}
+TestCollection();
+function TestTypedArrays() {
+    var TypedArray = Uint8Array.__proto__;
+    CheckReadonlyPrototype(Int8Array);
+    CheckReadonlyPrototype(Uint8Array);
+    CheckReadonlyPrototype(Uint8ClampedArray);
+    CheckReadonlyPrototype(Int16Array);
+    CheckReadonlyPrototype(Uint16Array);
+    CheckReadonlyPrototype(Int32Array);
+    CheckReadonlyPrototype(Uint32Array);
+    CheckReadonlyPrototype(Float32Array);
+    CheckReadonlyPrototype(Float64Array);
+    CheckReadonlyPrototype(TypedArray);
+    CheckMethod(TypedArray, "of", 0);
+    CheckMethod(TypedArray, "from", 1);
+    CheckMethod(TypedArray.prototype, "subarray", 2);
+    CheckMethod(TypedArray.prototype, "set", 1);
+    CheckGetter(TypedArray.prototype, Symbol.toStringTag);
+    CheckMethod(TypedArray.prototype, "filter", 1);
+    CheckMethod(TypedArray.prototype, "find", 1);
+    CheckMethod(TypedArray.prototype, "findIndex", 1);
+    CheckMethod(TypedArray.prototype, "sort", 1);
+    CheckMethod(TypedArray.prototype, "toLocaleString", 0);
+    CheckMethod(TypedArray.prototype, "join", 1);
+}
+TestTypedArrays();
+function TestArray() {
+    CheckReadonlyPrototype(Array);
+    CheckMethod(Array, "of", 0);
+    CheckMethod(Array, "from", 1);
+    CheckMethod(Array.prototype, "concat", 1);
+    CheckMethod(Array.prototype, "copyWithin", 2);
+    CheckMethod(Array.prototype, "every", 1);
+    CheckMethod(Array.prototype, "fill", 1);
+    CheckMethod(Array.prototype, "filter", 1);
+    CheckMethod(Array.prototype, "find", 1);
+    CheckMethod(Array.prototype, "findIndex", 1);
+    CheckMethod(Array.prototype, "includes", 1);
+    CheckMethod(Array.prototype, "indexOf", 1);
+    CheckMethod(Array.prototype, "join", 1);
+    CheckMethod(Array.prototype, "lastIndexOf", 1);
+    CheckMethod(Array.prototype, "map", 1);
+    CheckMethod(Array.prototype, "pop", 0);
+    CheckMethod(Array.prototype, "push", 1);
+    CheckMethod(Array.prototype, "reduce", 1);
+    CheckMethod(Array.prototype, "reduceRight", 1);
+    CheckMethod(Array.prototype, "reverse", 0);
+    CheckMethod(Array.prototype, "shift", 0);
+    CheckMethod(Array.prototype, "slice", 2);
+    CheckMethod(Array.prototype, "some", 1);
+    CheckMethod(Array.prototype, "sort", 1);
+    CheckMethod(Array.prototype, "splice", 2);
+    CheckMethod(Array.prototype, "toLocaleString", 0);
+    CheckMethod(Array.prototype, "toString", 0);
+    CheckMethod(Array.prototype, "unshift", 1);
+    CheckMethod(Array.prototype, "entries", 0);
+    CheckMethod(Array.prototype, "forEach", 1);
+    CheckMethod(Array.prototype, "keys", 0);
+    CheckMethodEx(Array.prototype, Symbol.iterator, "values", 0);
+}
+TestArray();
+function TestPromise() {
+    CheckReadonlyPrototype(Promise);
+    CheckMethod(Promise, "all", 1);
+    CheckMethod(Promise, "race", 1);
+    CheckMethod(Promise, "reject", 1);
+    CheckMethod(Promise, "resolve", 1);
+}
+TestPromise();
+function TestProxy() {
+    CheckNoPrototype(Proxy);
+    CheckMethod(Proxy, "revocable", 2);
+}
+TestProxy();
+function TestString() {
+    CheckReadonlyPrototype(String);
+    CheckMethod(String, "raw", 1);
+    CheckMethod(String.prototype, "codePointAt", 1);
+    CheckMethod(String.prototype, "match", 1);
+    CheckMethod(String.prototype, "padEnd", 1);
+    CheckMethod(String.prototype, "padStart", 1);
+    CheckMethod(String.prototype, "repeat", 1);
+    CheckMethod(String.prototype, "search", 1);
+    CheckMethod(String.prototype, "link", 1);
+    CheckMethod(String.prototype, "anchor", 1);
+    CheckMethod(String.prototype, "fontcolor", 1);
+    CheckMethod(String.prototype, "fontsize", 1);
+    CheckMethod(String.prototype, "big", 0);
+    CheckMethod(String.prototype, "blink", 0);
+    CheckMethod(String.prototype, "bold", 0);
+    CheckMethod(String.prototype, "fixed", 0);
+    CheckMethod(String.prototype, "italics", 0);
+    CheckMethod(String.prototype, "small", 0);
+    CheckMethod(String.prototype, "strike", 0);
+    CheckMethod(String.prototype, "sub", 0);
+    CheckMethod(String.prototype, "sup", 0);
+}
+TestString();
+
+FuzzIL program written to corpus/test-builtins-setup.fzil

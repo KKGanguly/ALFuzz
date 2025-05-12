@@ -1,0 +1,90 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- GetProperty v1, 'valueOf'
+v3 <- CreateNamedVariable 'valueOf', 'let', v2
+v4 <- LoadString 'object'
+v5 <- LoadBoolean 'true'
+v6 <- CallMethod v3, 'call', [v5]
+v7 <- TypeOf v6
+v8 <- LoadString 'object'
+v9 <- LoadBoolean 'false'
+v10 <- CallMethod v3, 'call', [v9]
+v11 <- TypeOf v10
+v12 <- LoadString 'object'
+v13 <- LoadFloat '1.23'
+v14 <- CallMethod v3, 'call', [v13]
+v15 <- TypeOf v14
+v16 <- LoadString 'object'
+v17 <- LoadInteger '0'
+v18 <- CallMethod v3, 'call', [v17]
+v19 <- TypeOf v18
+v20 <- LoadString 'object'
+v21 <- LoadString 'a'
+v22 <- CallMethod v3, 'call', [v21]
+v23 <- TypeOf v22
+v24 <- LoadString 'object'
+v25 <- CreateNamedVariable 'Symbol', 'none'
+v26 <- GetProperty v25, 'isConcatSpreadable'
+v27 <- CallMethod v3, 'call', [v26]
+v28 <- TypeOf v27
+v29 <- BeginArrowFunction -> 
+    v30 <- LoadUndefined
+    v31 <- CallMethod v3, 'call', [v30]
+    Return v31
+EndArrowFunction
+v32 <- CallFunction v29, []
+v33 <- CreateNamedVariable 'TypeError', 'none'
+v34 <- BeginArrowFunction -> 
+    v35 <- LoadNull
+    v36 <- CallMethod v3, 'call', [v35]
+    Return v36
+EndArrowFunction
+v37 <- CallFunction v34, []
+v38 <- BeginPlainFunction -> 
+EndPlainFunction
+v39 <- Construct v0, []
+v40 <- CreateNamedVariable 'o', 'var', v39
+v41 <- BeginPlainFunction -> 
+    v42 <- Construct v38, []
+    ThrowException v42
+EndPlainFunction
+SetProperty v40, 'valueOf', v41
+v43 <- BeginPlainFunction -> 
+    v44 <- LoadInteger '1'
+    v45 <- BinaryOperation v40, '+', v44
+EndPlainFunction
+v46 <- CallFunction v43, []
+v47 <- CallFunction v38, []
+
+
+let valueOf = Object.prototype.valueOf;
+typeof valueOf.call(true);
+typeof valueOf.call(false);
+typeof valueOf.call(1.23);
+typeof valueOf.call(0);
+typeof valueOf.call("a");
+typeof valueOf.call(Symbol.isConcatSpreadable);
+const v29 = () => {
+    return valueOf.call(undefined);
+};
+v29();
+const v34 = () => {
+    return valueOf.call(null);
+};
+v34();
+function MyException() {
+}
+const v39 = new Object();
+var o = v39;
+function f41() {
+    const v42 = new MyException();
+    throw v42;
+}
+o.valueOf = f41;
+function f43() {
+    o + 1;
+}
+f43();
+MyException();
+
+FuzzIL program written to corpus/value-of.fzil

@@ -1,0 +1,25 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Worker'
+BeginIf v1
+    v2 <- CreateTemplateString ['var __v_9 = new Worker('postMessage(42)', {type: 'string'});\n     onmessage = function(parentMsg) {\n       __v_9.postMessage(parentMsg);\n     };'], []
+    v3 <- CreateNamedVariable '__v_8', 'var', v2
+    v4 <- CreateNamedVariable 'Worker', 'none'
+    v5 <- LoadString 'string'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `type`, v5
+    v6 <- EndObjectLiteral
+    v7 <- Construct v4, [v3, v6]
+    v8 <- CreateNamedVariable '__v_9', 'var', v7
+    v9 <- LoadInteger '9'
+    v10 <- CallMethod v8, 'postMessage', [v9]
+EndIf
+
+
+if (this.Worker) {
+    var __v_8 = `var __v_9 = new Worker('postMessage(42)', {type: 'string'});\n     onmessage = function(parentMsg) {\n       __v_9.postMessage(parentMsg);\n     };`;
+    const v7 = new Worker(__v_8, { type: "string" });
+    var __v_9 = v7;
+    __v_9.postMessage(9);
+}
+
+FuzzIL program written to corpus/regress-crbug-511880.fzil

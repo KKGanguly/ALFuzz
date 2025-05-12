@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'o', 'var', v1
+v3 <- LoadInteger '42'
+SetProperty v2, 'x', v3
+v4 <- LoadNull
+Reassign v2, v4
+v5 <- CreateNamedVariable 'gc', 'none'
+v6 <- CallFunction v5, []
+v7 <- Construct v0, []
+Reassign v2, v7
+BeginForInLoop v2 -> v8
+    v9 <- LoadBoolean 'false'
+EndForInLoop
+
+
+function C() {
+}
+const v1 = new C();
+var o = v1;
+o.x = 42;
+o = null;
+gc();
+const v7 = new C();
+o = v7;
+for (const v8 in o) {
+}
+
+FuzzIL program written to corpus/regress-1493017.fzil

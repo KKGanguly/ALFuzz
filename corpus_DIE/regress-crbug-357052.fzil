@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString ''
+    v2 <- CreateNamedVariable 'str', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '30'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- LoadString 'abcdefgh12345678'
+        v11 <- BinaryOperation v10, '+', v2
+        Update v2, '+', v11
+    EndForLoop
+    Return v2
+EndPlainFunction
+v12 <- CallFunction v0, []
+
+
+function f() {
+    var str = "";
+    for (let i4 = 0; i4 < 30; i4++) {
+        str += "abcdefgh12345678" + str;
+    }
+    return str;
+}
+f();
+
+FuzzIL program written to corpus/regress-crbug-357052.fzil

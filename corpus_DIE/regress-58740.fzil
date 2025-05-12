@@ -1,0 +1,21 @@
+v0 <- LoadRegExp '.+' 'g'
+v1 <- CreateNamedVariable 're', 'var', v0
+v2 <- LoadString ''
+v3 <- CallMethod v1, 'exec', [v2]
+v4 <- LoadString 'anystring'
+v5 <- CallMethod v1, 'exec', [v4]
+v6 <- LoadRegExp '.+' 'g'
+Reassign v1, v6
+v7 <- LoadString ''
+v8 <- CallMethod v1, 'exec', [v7]
+v9 <- LoadInteger '0'
+v10 <- GetProperty v1, 'lastIndex'
+
+
+var re = /.+/g;
+re.exec("");
+re.exec("anystring");
+(re = /.+/g).exec("");
+re.lastIndex;
+
+FuzzIL program written to corpus/regress-58740.fzil

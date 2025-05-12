@@ -1,0 +1,122 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    v2 <- CreateNamedVariable 'v_0', 'var', v1
+    v3 <- BeginPlainFunction -> v4, v5
+        v6 <- LoadInteger '0'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `value`, v6
+        v7 <- EndObjectLiteral
+        v8 <- CreateNamedVariable 'v_2', 'var', v7
+        v9 <- LoadInteger '1073741823'
+        v10 <- CallFunction v5, [v4, v9, v2, v8]
+        v11 <- CreateNamedVariable 'v_4', 'none'
+        Reassign v11, v10
+        v12 <- LoadInteger '1'
+        v13 <- GetProperty v8, 'value'
+    EndPlainFunction
+    v14 <- BeginPlainFunction -> v15, v16, v17, v18
+        v19 <- Construct v15, [v16, v17, v18]
+        v20 <- UnaryOperation '!', v19
+        BeginIf v20
+        EndIf
+    EndPlainFunction
+    v21 <- BeginPlainFunction -> v22
+        v23 <- CallFunction v3, [v22, v14]
+        v24 <- CallFunction v3, [v22, v14]
+        v25 <- CallFunction v3, [v22, v14]
+    EndPlainFunction
+    v26 <- BeginPlainFunction -> v27, v28, v29
+        v30 <- GetProperty v29, 'value'
+        v31 <- UnaryOperation v30, '++'
+    EndPlainFunction
+    v32 <- CallFunction v21, [v26]
+EndPlainFunction
+v33 <- CallFunction v0, []
+v34 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v35 <- EndObjectLiteral
+    v36 <- CreateNamedVariable 'v_0', 'var', v35
+    v37 <- BeginPlainFunction -> v38, v39
+        v40 <- LoadFloat '1.5'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `value`, v40
+        v41 <- EndObjectLiteral
+        v42 <- CreateNamedVariable 'v_2', 'var', v41
+        v43 <- LoadInteger '1073741823'
+        v44 <- CallFunction v39, [v38, v43, v36, v42]
+        v45 <- CreateNamedVariable 'v_4', 'none'
+        Reassign v45, v44
+        v46 <- LoadFloat '2.5'
+        v47 <- GetProperty v42, 'value'
+    EndPlainFunction
+    v48 <- BeginPlainFunction -> v49, v50, v51, v52
+        v53 <- Construct v49, [v50, v51, v52]
+        v54 <- UnaryOperation '!', v53
+        BeginIf v54
+        EndIf
+    EndPlainFunction
+    v55 <- BeginPlainFunction -> v56
+        v57 <- CallFunction v37, [v56, v48]
+        v58 <- CallFunction v37, [v56, v48]
+        v59 <- CallFunction v37, [v56, v48]
+    EndPlainFunction
+    v60 <- BeginPlainFunction -> v61, v62, v63
+        v64 <- GetProperty v63, 'value'
+        v65 <- UnaryOperation v64, '++'
+    EndPlainFunction
+    v66 <- CallFunction v55, [v60]
+EndPlainFunction
+v67 <- CallFunction v34, []
+
+
+function TestSmi() {
+    var v_0 = {};
+    function f_0(a4, a5) {
+        var v_2 = { value: 0 };
+        v_4 = a5(a4, 1073741823, v_0, v_2);
+        v_2.value;
+    }
+    function f_1(a15, a16, a17, a18) {
+        const v19 = new a15(a16, a17, a18);
+        if (!v19) {
+        }
+    }
+    function f_10(a22) {
+        f_0(a22, f_1);
+        f_0(a22, f_1);
+        f_0(a22, f_1);
+    }
+    function f_12(a27, a28, a29) {
+        let v30 = a29.value;
+        v30++;
+    }
+    f_10(f_12);
+}
+TestSmi();
+function TestHeapNumber() {
+    var v_0 = {};
+    function f_0(a38, a39) {
+        var v_2 = { value: 1.5 };
+        v_4 = a39(a38, 1073741823, v_0, v_2);
+        v_2.value;
+    }
+    function f_1(a49, a50, a51, a52) {
+        const v53 = new a49(a50, a51, a52);
+        if (!v53) {
+        }
+    }
+    function f_10(a56) {
+        f_0(a56, f_1);
+        f_0(a56, f_1);
+        f_0(a56, f_1);
+    }
+    function f_12(a61, a62, a63) {
+        let v64 = a63.value;
+        v64++;
+    }
+    f_10(f_12);
+}
+TestHeapNumber();
+
+FuzzIL program written to corpus/regress-crbug-734162.fzil

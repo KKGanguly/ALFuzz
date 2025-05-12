@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginIf v2
+        v3 <- UnaryOperation '+', v1
+        v4 <- CreateNamedVariable 'Math', 'none'
+        v5 <- CallMethod v4, 'trunc', [v3]
+        Return v5
+    BeginElse
+        v6 <- CreateNamedVariable 'Number', 'none'
+        v7 <- CallFunction v6, [v1]
+        v8 <- CreateNamedVariable 'Math', 'none'
+        v9 <- CallMethod v8, 'trunc', [v7]
+        Return v9
+    EndIf
+EndPlainFunction
+v10 <- LoadString '1'
+v11 <- LoadBoolean 'true'
+v12 <- CallFunction v0, [v10, v11]
+v13 <- LoadString '2'
+v14 <- LoadBoolean 'true'
+v15 <- CallFunction v0, [v13, v14]
+v16 <- LoadString '2'
+v17 <- LoadBoolean 'false'
+v18 <- CallFunction v0, [v16, v17]
+v19 <- LoadInteger '0'
+v20 <- CallFunction v0, [v19]
+
+
+function f(a1, a2) {
+    if (a2) {
+        return Math.trunc(+a1);
+    } else {
+        return Math.trunc(Number(a1));
+    }
+}
+f("1", true);
+f("2", true);
+f("2", false);
+f(0);
+
+FuzzIL program written to corpus/regress-tonumbercode.fzil

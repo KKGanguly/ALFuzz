@@ -1,0 +1,156 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Intl'
+BeginIf v1
+    v2 <- LoadUndefined
+    v3 <- CreateNamedVariable 'pr', 'var', v2
+    v4 <- LoadUndefined
+    v5 <- CreateNamedVariable 'suffixes', 'var', v4
+    v6 <- BeginPlainFunction -> v7
+        v8 <- LoadString ''
+        v9 <- BinaryOperation v8, '+', v7
+        v10 <- CallMethod v3, 'select', [v7]
+        v11 <- GetComputedProperty v5, v10
+        v12 <- BinaryOperation v9, '+', v11
+        Return v12
+    EndPlainFunction
+    v13 <- CreateNamedVariable 'Intl', 'none'
+    v14 <- GetProperty v13, 'PluralRules'
+    v15 <- LoadString 'en-US'
+    v16 <- Construct v14, [v15]
+    Reassign v3, v16
+    v17 <- LoadString ' day'
+    v18 <- LoadString ' days'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `one`, v17
+        ObjectLiteralAddProperty `other`, v18
+    v19 <- EndObjectLiteral
+    Reassign v5, v19
+    v20 <- LoadString '0 days'
+    v21 <- LoadInteger '0'
+    v22 <- CallFunction v6, [v21]
+    v23 <- LoadString '0.5 days'
+    v24 <- LoadFloat '0.5'
+    v25 <- CallFunction v6, [v24]
+    v26 <- LoadString '1 day'
+    v27 <- LoadInteger '1'
+    v28 <- CallFunction v6, [v27]
+    v29 <- LoadString '1.5 days'
+    v30 <- LoadFloat '1.5'
+    v31 <- CallFunction v6, [v30]
+    v32 <- LoadString '2 days'
+    v33 <- LoadInteger '2'
+    v34 <- CallFunction v6, [v33]
+    v35 <- GetProperty v13, 'PluralRules'
+    v36 <- LoadString 'en-US'
+    v37 <- LoadString 'ordinal'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `type`, v37
+    v38 <- EndObjectLiteral
+    v39 <- Construct v35, [v36, v38]
+    Reassign v3, v39
+    v40 <- LoadString 'st'
+    v41 <- LoadString 'nd'
+    v42 <- LoadString 'rd'
+    v43 <- LoadString 'th'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `one`, v40
+        ObjectLiteralAddProperty `two`, v41
+        ObjectLiteralAddProperty `few`, v42
+        ObjectLiteralAddProperty `other`, v43
+    v44 <- EndObjectLiteral
+    Reassign v5, v44
+    v45 <- LoadString '0th'
+    v46 <- LoadInteger '0'
+    v47 <- CallFunction v6, [v46]
+    v48 <- LoadString '1st'
+    v49 <- LoadInteger '1'
+    v50 <- CallFunction v6, [v49]
+    v51 <- LoadString '2nd'
+    v52 <- LoadInteger '2'
+    v53 <- CallFunction v6, [v52]
+    v54 <- LoadString '3rd'
+    v55 <- LoadInteger '3'
+    v56 <- CallFunction v6, [v55]
+    v57 <- LoadString '4th'
+    v58 <- LoadInteger '4'
+    v59 <- CallFunction v6, [v58]
+    v60 <- LoadString '11th'
+    v61 <- LoadInteger '11'
+    v62 <- CallFunction v6, [v61]
+    v63 <- LoadString '21st'
+    v64 <- LoadInteger '21'
+    v65 <- CallFunction v6, [v64]
+    v66 <- LoadString '103rd'
+    v67 <- LoadInteger '103'
+    v68 <- CallFunction v6, [v67]
+    v69 <- GetProperty v13, 'PluralRules'
+    v70 <- LoadString 'ar'
+    v71 <- Construct v69, [v70]
+    Reassign v3, v71
+    v72 <- LoadNull
+    Reassign v5, v72
+    v73 <- LoadString 'zero'
+    v74 <- LoadInteger '0'
+    v75 <- CallMethod v3, 'select', [v74]
+    v76 <- LoadString 'one'
+    v77 <- LoadInteger '1'
+    v78 <- CallMethod v3, 'select', [v77]
+    v79 <- LoadString 'two'
+    v80 <- LoadInteger '2'
+    v81 <- CallMethod v3, 'select', [v80]
+    v82 <- LoadString 'few'
+    v83 <- LoadInteger '3'
+    v84 <- CallMethod v3, 'select', [v83]
+    v85 <- LoadString 'many'
+    v86 <- LoadInteger '11'
+    v87 <- CallMethod v3, 'select', [v86]
+    v88 <- LoadString 'other'
+    v89 <- LoadInteger '100'
+    v90 <- CallMethod v3, 'select', [v89]
+    v91 <- LoadString 'other'
+    v92 <- LoadFloat '1.5'
+    v93 <- CallMethod v3, 'select', [v92]
+EndIf
+
+
+if (this.Intl) {
+    var pr;
+    var suffixes;
+    function format(a7) {
+        return ("" + a7) + suffixes[pr.select(a7)];
+    }
+    const t6 = Intl.PluralRules;
+    const v16 = new t6("en-US");
+    pr = v16;
+    suffixes = { one: " day", other: " days" };
+    format(0);
+    format(0.5);
+    format(1);
+    format(1.5);
+    format(2);
+    const v35 = Intl.PluralRules;
+    const v39 = new v35("en-US", { type: "ordinal" });
+    pr = v39;
+    suffixes = { one: "st", two: "nd", few: "rd", other: "th" };
+    format(0);
+    format(1);
+    format(2);
+    format(3);
+    format(4);
+    format(11);
+    format(21);
+    format(103);
+    const t19 = Intl.PluralRules;
+    const v71 = new t19("ar");
+    pr = v71;
+    suffixes = null;
+    pr.select(0);
+    pr.select(1);
+    pr.select(2);
+    pr.select(3);
+    pr.select(11);
+    pr.select(100);
+    pr.select(1.5);
+}
+
+FuzzIL program written to corpus/intl-pluralrules-select.fzil

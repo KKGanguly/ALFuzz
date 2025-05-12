@@ -1,0 +1,193 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v2
+v3 <- EndObjectLiteral
+v4 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateArray [v3, v5]
+v7 <- CreateNamedVariable 'fish', 'var', v6
+BeginForLoopInitializer
+    v8 <- LoadInteger '0'
+BeginForLoopCondition -> v9
+    v10 <- GetProperty v7, 'length'
+    v11 <- Compare v9, '<', v10
+BeginForLoopAfterthought v11 -> v12
+    v13 <- UnaryOperation v12, '++'
+BeginForLoopBody -> v14
+    v15 <- LoadInteger '1'
+    v16 <- GetComputedProperty v7, v14
+    v17 <- GetProperty v16, 'name'
+    SetComputedProperty v1, v17, v15
+EndForLoop
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadInteger '0'
+    v20 <- CreateNamedVariable 'sum', 'var', v19
+    BeginForLoopInitializer
+        v21 <- LoadInteger '0'
+    BeginForLoopCondition -> v22
+        v23 <- GetProperty v7, 'length'
+        v24 <- Compare v22, '<', v23
+    BeginForLoopAfterthought v24 -> v25
+        v26 <- UnaryOperation v25, '++'
+    BeginForLoopBody -> v27
+        v28 <- GetComputedProperty v7, v27
+        v29 <- GetProperty v28, 'name'
+        v30 <- CreateNamedVariable 'name', 'var', v29
+        v31 <- GetComputedProperty v1, v30
+        Update v20, '+', v31
+    EndForLoop
+    Return v20
+EndPlainFunction
+v32 <- CallFunction v18, []
+v33 <- CallFunction v18, []
+v34 <- CallFunction v18, []
+v35 <- CallFunction v18, []
+v36 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v37 <- LoadInteger '0'
+    BeginForLoopCondition -> v38
+        v39 <- GetProperty v7, 'length'
+        v40 <- Compare v38, '<', v39
+    BeginForLoopAfterthought v40 -> v41
+        v42 <- UnaryOperation v41, '++'
+    BeginForLoopBody -> v43
+        v44 <- GetComputedProperty v7, v43
+        v45 <- GetProperty v44, 'name'
+        v46 <- CreateNamedVariable 'name', 'var', v45
+        v47 <- LoadInteger '1'
+        SetComputedProperty v1, v46, v47
+    EndForLoop
+EndPlainFunction
+v48 <- CallFunction v36, []
+v49 <- CallFunction v36, []
+v50 <- CallFunction v36, []
+v51 <- CallFunction v36, []
+v52 <- BeginPlainFunction -> v53, v54
+    v55 <- LoadInteger '0'
+    SetComputedProperty v53, v54, v55
+EndPlainFunction
+v56 <- CreateNamedVariable 'Array', 'none'
+v57 <- LoadInteger '3'
+v58 <- Construct v56, [v57]
+v59 <- CreateNamedVariable 'o1', 'var', v58
+v60 <- LoadInteger '3'
+v61 <- Construct v56, [v60]
+v62 <- CreateNamedVariable 'o2', 'var', v61
+v63 <- LoadString 'o2'
+SetProperty v62, 'o2', v63
+v64 <- LoadInteger '3'
+v65 <- Construct v56, [v64]
+v66 <- CreateNamedVariable 'o3', 'var', v65
+v67 <- LoadString 'o3'
+SetProperty v66, 'o3', v67
+v68 <- LoadInteger '3'
+v69 <- Construct v56, [v68]
+v70 <- CreateNamedVariable 'o4', 'var', v69
+v71 <- LoadString 'o4'
+SetProperty v70, 'o4', v71
+v72 <- LoadInteger '3'
+v73 <- Construct v56, [v72]
+v74 <- CreateNamedVariable 'o5', 'var', v73
+v75 <- LoadString 'o5'
+SetProperty v74, 'o5', v75
+v76 <- LoadInteger '0'
+v77 <- CallFunction v52, [v59, v76]
+v78 <- LoadInteger '0'
+v79 <- CallFunction v52, [v59, v78]
+v80 <- LoadInteger '0'
+v81 <- CallFunction v52, [v62, v80]
+v82 <- LoadInteger '0'
+v83 <- CallFunction v52, [v66, v82]
+v84 <- LoadInteger '0'
+v85 <- CallFunction v52, [v70, v84]
+v86 <- LoadInteger '0'
+v87 <- CallFunction v52, [v74, v86]
+v88 <- BeginPlainFunction -> v89
+    v90 <- CallFunction v52, [v74, v89]
+EndPlainFunction
+v91 <- LoadInteger '0'
+v92 <- CallFunction v88, [v91]
+v93 <- LoadInteger '0'
+v94 <- CallFunction v88, [v93]
+v95 <- LoadInteger '0'
+v96 <- CallFunction v88, [v95]
+v97 <- CallFunction v88, []
+v98 <- LoadString 'deopt'
+v99 <- CallFunction v88, [v98]
+v100 <- CreateNamedVariable 'isTurboFanned', 'none'
+v101 <- CallFunction v100, [v88]
+v102 <- UnaryOperation '!', v101
+BeginIf v102
+    v103 <- CallFunction v88, []
+EndIf
+
+
+var global = {};
+const v3 = { name: "foo" };
+var fish = [v3,{ name: "bar" }];
+for (let i9 = 0; i9 < fish.length; i9++) {
+    global[fish[i9].name] = 1;
+}
+function load() {
+    var sum = 0;
+    for (let i22 = 0; i22 < fish.length; i22++) {
+        var name = fish[i22].name;
+        sum += global[name];
+    }
+    return sum;
+}
+load();
+load();
+load();
+load();
+function store() {
+    for (let i38 = 0; i38 < fish.length; i38++) {
+        var name = fish[i38].name;
+        global[name] = 1;
+    }
+}
+store();
+store();
+store();
+store();
+function store_element(a53, a54) {
+    a53[a54] = 0;
+}
+const v58 = new Array(3);
+var o1 = v58;
+const v61 = new Array(3);
+var o2 = v61;
+o2.o2 = "o2";
+const v65 = new Array(3);
+var o3 = v65;
+o3.o3 = "o3";
+const v69 = new Array(3);
+var o4 = v69;
+o4.o4 = "o4";
+const v73 = new Array(3);
+var o5 = v73;
+o5.o5 = "o5";
+store_element(o1, 0);
+store_element(o1, 0);
+store_element(o2, 0);
+store_element(o3, 0);
+store_element(o4, 0);
+store_element(o5, 0);
+function inferrable_store(a89) {
+    store_element(o5, a89);
+}
+inferrable_store(0);
+inferrable_store(0);
+inferrable_store(0);
+inferrable_store();
+inferrable_store("deopt");
+if (!isTurboFanned(inferrable_store)) {
+    inferrable_store();
+}
+
+FuzzIL program written to corpus/regress-crbug-594183.fzil

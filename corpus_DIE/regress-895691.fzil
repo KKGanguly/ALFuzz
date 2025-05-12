@@ -1,0 +1,37 @@
+v0 <- LoadInteger '2'
+v1 <- LoadInteger '32'
+v2 <- BinaryOperation v0, '**', v1
+v3 <- CreateNamedVariable 'n', 'const', v2
+v4 <- CreateNamedVariable 'Float32Array', 'none'
+v5 <- Construct v4, []
+v6 <- CreateNamedVariable 'x', 'const', v5
+v7 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v8 <- LoadInteger '96'
+    BeginForLoopCondition -> v9
+        v10 <- LoadInteger '100'
+        v11 <- Compare v9, '<', v10
+    BeginForLoopAfterthought v11 -> v12
+        v13 <- LoadInteger '4'
+        Update v12, '+', v13
+    BeginForLoopBody -> v14
+        v15 <- BinaryOperation v14, '+', v3
+        SetComputedProperty v6, v14, v15
+    EndForLoop
+EndPlainFunction
+v16 <- CallFunction v7, []
+v17 <- CallFunction v7, []
+
+
+const n = 2 ** 32;
+const v5 = new Float32Array();
+const x = v5;
+function f() {
+    for (let i9 = 96; i9 < 100; i9 += 4) {
+        x[i9] = i9 + n;
+    }
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-895691.fzil

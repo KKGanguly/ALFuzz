@@ -1,0 +1,78 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '12'
+EndPlainFunction
+v3 <- LoadInteger '0'
+v4 <- CreateNamedVariable 'X', 'var', v3
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '0'
+    v7 <- CreateNamedVariable 'cnt', 'var', v6
+    v8 <- LoadInteger '1'
+    v9 <- UnaryOperation '-', v8
+    v10 <- CreateNamedVariable 'l', 'var', v9
+    v11 <- LoadInteger '0'
+    v12 <- CreateNamedVariable 'x', 'var', v11
+    BeginWhileLoopHeader
+        v13 <- LoadInteger '1'
+    BeginWhileLoopBody v13
+        v14 <- LoadInteger '1'
+        v15 <- UnaryOperation '-', v14
+        v16 <- LoadInteger '0'
+        v17 <- LoadInteger '1'
+        BeginSwitch v10
+            BeginSwitchCase v15
+                v18 <- LoadInteger '12'
+                v19 <- BinaryOperation v12, '+', v18
+                v20 <- CreateNamedVariable 'y', 'var', v19
+                v21 <- LoadInteger '0'
+                Reassign v10, v21
+                Break
+            EndSwitchCase fallsThrough
+            BeginSwitchCase v16
+                v22 <- UnaryOperation v7, '++'
+                v23 <- LoadInteger '5'
+                v24 <- Compare v22, '==', v23
+                BeginIf v24
+                    v25 <- LoadInteger '1'
+                    Reassign v10, v25
+                EndIf
+                Break
+            EndSwitchCase fallsThrough
+            BeginSwitchCase v17
+                v26 <- CreateNamedVariable 'y', 'none'
+                v27 <- CallFunction v0, [v26]
+                Return
+            EndSwitchCase fallsThrough
+        EndSwitch
+    EndWhileLoop
+EndPlainFunction
+v28 <- CallFunction v5, []
+
+
+function g(a1) {
+}
+var X = 0;
+function foo() {
+    var cnt = 0;
+    var l = -1;
+    var x = 0;
+    while (1) {
+        const v15 = -1;
+        switch (l) {
+            case v15:
+                var y = x + 12;
+                l = 0;
+                break;
+            case 0:
+                if (cnt++ == 5) {
+                    l = 1;
+                }
+                break;
+            case 1:
+                g(y);
+                return;
+        }
+    }
+}
+foo();
+
+FuzzIL program written to corpus/regress-1257.fzil

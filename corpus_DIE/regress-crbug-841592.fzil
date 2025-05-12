@@ -1,0 +1,21 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'none'
+Reassign v1, v0
+v2 <- LoadInteger '268435455'
+v3 <- CreateNamedVariable 'a', 'none'
+SetProperty v3, 'length', v2
+v4 <- LoadInteger '0'
+SetProperty v3, 'length', v4
+v5 <- LoadInteger '268435455'
+SetProperty v3, 'length', v5
+v6 <- LoadInteger '1'
+SetProperty v3, 'length', v6
+
+
+a = [];
+a.length = 268435455;
+a.length = 0;
+a.length = 268435455;
+a.length = 1;
+
+FuzzIL program written to corpus/regress-crbug-841592.fzil

@@ -1,0 +1,87 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'foo'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- GetElement v4, '0'
+    Return v5
+EndPlainFunction
+v6 <- LoadInteger '1'
+v7 <- CreateArray [v6]
+v8 <- CreateNamedVariable 'first_smi_array', 'var', v7
+v9 <- LoadInteger '2'
+v10 <- CreateArray [v9]
+v11 <- CreateNamedVariable 'second_smi_array', 'var', v10
+v12 <- LoadString 'first'
+v13 <- CreateArray [v12]
+v14 <- CreateNamedVariable 'first_object_array', 'var', v13
+v15 <- LoadString 'string'
+v16 <- CreateArray [v15]
+v17 <- CreateNamedVariable 'second_object_array', 'var', v16
+v18 <- LoadInteger '0'
+SetProperty v8, 'foo', v18
+v19 <- LoadInteger '0'
+SetProperty v11, 'foo', v19
+v20 <- LoadInteger '0'
+SetProperty v14, 'foo', v20
+v21 <- LoadInteger '0'
+SetProperty v17, 'foo', v21
+BeginForLoopInitializer
+    v22 <- LoadInteger '0'
+BeginForLoopCondition -> v23
+    v24 <- LoadInteger '3'
+    v25 <- Compare v23, '<', v24
+BeginForLoopAfterthought v25 -> v26
+    v27 <- UnaryOperation v26, '++'
+BeginForLoopBody -> v28
+    v29 <- CallFunction v0, [v17]
+EndForLoop
+v30 <- LoadFloat '0.5'
+SetProperty v8, 'foo', v30
+v31 <- GetProperty v11, 'foo'
+v32 <- CreateNamedVariable 'print', 'none'
+v33 <- CallFunction v32, [v31]
+v34 <- LoadFloat '0.5'
+SetProperty v14, 'foo', v34
+v35 <- CallFunction v0, [v17]
+BeginForLoopInitializer
+    v36 <- LoadInteger '0'
+BeginForLoopCondition -> v37
+    v38 <- LoadInteger '3'
+    v39 <- Compare v37, '<', v38
+BeginForLoopAfterthought v39 -> v40
+    v41 <- UnaryOperation v40, '++'
+BeginForLoopBody -> v42
+    v43 <- CallFunction v3, [v11]
+EndForLoop
+v44 <- LoadString 'string'
+v45 <- CallFunction v3, [v17]
+
+
+function Migrator(a1) {
+    return a1.foo;
+}
+function Loader(a4) {
+    return a4[0];
+}
+var first_smi_array = [1];
+var second_smi_array = [2];
+var first_object_array = ["first"];
+var second_object_array = ["string"];
+first_smi_array.foo = 0;
+second_smi_array.foo = 0;
+first_object_array.foo = 0;
+second_object_array.foo = 0;
+for (let i23 = 0; i23 < 3; i23++) {
+    Migrator(second_object_array);
+}
+first_smi_array.foo = 0.5;
+print(second_smi_array.foo);
+first_object_array.foo = 0.5;
+Migrator(second_object_array);
+for (let i37 = 0; i37 < 3; i37++) {
+    Loader(second_smi_array);
+}
+Loader(second_object_array);
+
+FuzzIL program written to corpus/regress-4173.fzil

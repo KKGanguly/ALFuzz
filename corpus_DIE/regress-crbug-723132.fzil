@@ -1,0 +1,37 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginGeneratorFunction -> 
+        v2 <- BeginArrowFunction -> 
+            v3 <- CreateNamedVariable 'expectedReceiver', 'none'
+            v4 <- LoadThis
+            v5 <- LoadInteger '42'
+            v6 <- LoadArguments
+            v7 <- GetElement v6, '0'
+        EndArrowFunction
+        v8 <- CreateNamedVariable 'arrow', 'let', v2
+        v9 <- CallFunction v8, []
+    EndGeneratorFunction
+    v10 <- LoadThis
+    v11 <- LoadInteger '42'
+    v12 <- CallMethod v1, 'call', [v10, v11]
+    v13 <- CallMethod v12, 'next', []
+EndPlainFunction
+BeginObjectLiteral
+v14 <- EndObjectLiteral
+v15 <- CreateNamedVariable 'expectedReceiver', 'let', v14
+v16 <- CallMethod v0, 'call', [v15]
+
+
+function outer() {
+    function* generator() {
+        const v2 = () => {
+            arguments[0];
+        };
+        let arrow = v2;
+        arrow();
+    }
+    generator.call(this, 42).next();
+}
+let expectedReceiver = {};
+outer.call(expectedReceiver);
+
+FuzzIL program written to corpus/regress-crbug-723132.fzil

@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadThis
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- CallMethod v2, 'getOwnPropertyNames', [v1]
+BeginForOfLoop v3 -> v4
+    BeginTry
+        v5 <- LoadThis
+        v6 <- GetComputedProperty v5, v4
+        v7 <- CreateNamedVariable 'newTarget', 'let', v6
+        v8 <- CreateNamedVariable 'arg', 'let', v0
+        v9 <- CreateNamedVariable 'Reflect', 'none'
+        v10 <- CallMethod v9, 'construct', [v0, v8, v7]
+    BeginCatch -> v11
+    EndTryCatch
+EndForOfLoop
+
+
+function target() {
+}
+for (const v4 of Object.getOwnPropertyNames(this)) {
+    try {
+        let newTarget = this[v4];
+        let arg = target;
+        Reflect.construct(target, arg, newTarget);
+    } catch(e11) {
+    }
+}
+
+FuzzIL program written to corpus/regress-crbug-90771.fzil

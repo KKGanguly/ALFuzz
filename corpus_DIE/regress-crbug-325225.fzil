@@ -1,0 +1,51 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- LoadInteger '0'
+    v4 <- CallComputedMethod v1, v3, [v2]
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- CreateArray [v0]
+    v7 <- CallFunction v0, [v6]
+EndPlainFunction
+v8 <- CallFunction v5, []
+v9 <- CreateNamedVariable 'TypeError', 'none'
+v10 <- BeginPlainFunction -> v11
+    v12 <- LoadBoolean 'true'
+    v13 <- LoadInteger '0'
+    v14 <- CallComputedMethod v11, v13, [v12]
+EndPlainFunction
+v15 <- BeginPlainFunction -> 
+    v16 <- BeginPlainFunction -> v17
+        v18 <- LoadString 'undefined'
+        v19 <- LoadInteger '42'
+        v20 <- LoadInteger '0'
+        v21 <- CallFunction v10, [v19, v20]
+        v22 <- TypeOf v21
+        v23 <- CallFunction v10, [v18, v22]
+        Return v23
+    EndPlainFunction
+    v24 <- CreateArray [v16]
+    v25 <- CallFunction v10, [v24]
+EndPlainFunction
+v26 <- CallFunction v15, []
+
+
+function f1(a1) {
+    a1[0](0);
+}
+function do1() {
+    f1([f1]);
+}
+do1();
+function f2(a11) {
+    a11[0](true);
+}
+function do2() {
+    function f16(a17) {
+        return f2("undefined", typeof f2(42, 0));
+    }
+    f2([f16]);
+}
+do2();
+
+FuzzIL program written to corpus/regress-crbug-325225.fzil

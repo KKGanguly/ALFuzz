@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadArguments
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4, v5
+    v6 <- LoadInteger '13'
+    v7 <- CallFunction v0, [v4, v5, v6]
+    v8 <- CreateNamedVariable 'args', 'var', v7
+    v9 <- GetProperty v8, 'length'
+    v10 <- LoadInteger '3'
+    v11 <- Compare v9, '==', v10
+    v12 <- GetElement v8, '0'
+    v13 <- LoadInteger '11'
+    v14 <- Compare v12, '==', v13
+    v15 <- BinaryOperation v11, '&&', v14
+    v16 <- GetElement v8, '1'
+    v17 <- LoadInteger '12'
+    v18 <- Compare v16, '==', v17
+    v19 <- BinaryOperation v15, '&&', v18
+    v20 <- GetElement v8, '2'
+    v21 <- LoadInteger '13'
+    v22 <- Compare v20, '==', v21
+    v23 <- BinaryOperation v19, '&&', v22
+    Return v23
+EndPlainFunction
+v24 <- LoadBoolean 'true'
+v25 <- LoadInteger '11'
+v26 <- LoadInteger '12'
+v27 <- CallFunction v3, [v25, v26]
+
+
+function foo(a1) {
+    return arguments;
+}
+function bar(a4, a5) {
+    var args = foo(a4, a5, 13);
+    return (((args.length == 3) && (args[0] == 11)) && (args[1] == 12)) && (args[2] == 13);
+}
+bar(11, 12);
+
+FuzzIL program written to corpus/inline-surplus-arguments-object.fzil

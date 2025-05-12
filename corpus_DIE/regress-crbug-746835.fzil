@@ -1,0 +1,325 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    Return v1
+    v2 <- CreateArray []
+    v3 <- CreateNamedVariable 'properties', 'let', v2
+    v4 <- CreateNamedVariable 'Object', 'none'
+    v5 <- CallMethod v4, 'getOwnPropertyNames', []
+    BeginForOfLoop v5 -> v6
+    EndForOfLoop
+    Return v3
+EndPlainFunction
+v7 <- BeginPlainFunction -> 
+    v8 <- CallFunction v0, []
+    v9 <- CreateNamedVariable 'properties', 'let', v8
+    v10 <- GetProperty v9, 'length'
+    v11 <- UnaryOperation '!', v10
+    BeginIf v11
+        v12 <- LoadUndefined
+        Return v12
+    EndIf
+    v13 <- CreateNamedVariable 'seed', 'none'
+    v14 <- GetProperty v9, 'length'
+    v15 <- BinaryOperation v13, '%', v14
+    v16 <- GetComputedProperty v9, v15
+    Return v16
+EndPlainFunction
+v17 <- LoadInteger '0'
+v18 <- CreateNamedVariable 'kWasmH0', 'var', v17
+v19 <- LoadInteger '97'
+v20 <- CreateNamedVariable 'kWasmH1', 'var', v19
+v21 <- LoadInteger '115'
+v22 <- CreateNamedVariable 'kWasmH2', 'var', v21
+v23 <- LoadInteger '109'
+v24 <- CreateNamedVariable 'kWasmH3', 'var', v23
+v25 <- LoadInteger '1'
+v26 <- CreateNamedVariable 'kWasmV0', 'var', v25
+v27 <- LoadInteger '0'
+v28 <- CreateNamedVariable 'kWasmV1', 'var', v27
+v29 <- LoadInteger '0'
+v30 <- CreateNamedVariable 'kWasmV2', 'var', v29
+v31 <- LoadInteger '0'
+v32 <- CreateNamedVariable 'kWasmV3', 'var', v31
+v33 <- CreateNamedVariable 'Array', 'none'
+v34 <- BeginClassDefinition v33
+    BeginClassInstanceMethod 'emit_header' -> v35
+        v36 <- CallMethod v35, 'push', [v18, v20, v22, v24, v26, v28, v30, v32]
+    EndClassInstanceMethod
+EndClassDefinition
+v37 <- BeginClassDefinition
+    BeginClassConstructor -> v38
+        v39 <- CreateArray []
+        SetProperty v38, 'exports', v39
+    EndClassConstructor
+    BeginClassInstanceMethod 'addImportedMemory' -> v40
+    EndClassInstanceMethod
+    BeginClassInstanceMethod 'setFunctionTableLength' -> v41
+    EndClassInstanceMethod
+    BeginClassInstanceMethod 'toArray' -> v42
+        v43 <- Construct v34, []
+        v44 <- CreateNamedVariable 'binary', 'let', v43
+        v45 <- CreateNamedVariable 'wasm', 'let', v42
+        v46 <- CallMethod v44, 'emit_header', []
+        v47 <- LoadString 'emitting imports @ '
+        v48 <- GetProperty v44, 'length'
+        v49 <- BinaryOperation v47, '+', v48
+        v50 <- BeginArrowFunction -> v51
+        EndArrowFunction
+        v52 <- GetProperty v45, 'memory'
+        v53 <- LoadUndefined
+        v54 <- Compare v52, '!==', v53
+        v55 <- GetProperty v45, 'memory'
+        v56 <- GetProperty v55, 'exp'
+        v57 <- BinaryOperation v54, '&&', v56
+        v58 <- CreateNamedVariable 'mem_export', 'var', v57
+        v59 <- GetProperty v45, 'exports'
+        v60 <- GetProperty v59, 'length'
+        v61 <- LoadInteger '1'
+        v62 <- LoadInteger '0'
+        v63 <- TernaryOperation v58, v61, v62
+        v64 <- BinaryOperation v60, '+', v63
+        v65 <- CreateNamedVariable 'exports_count', 'var', v64
+        Return v44
+    EndClassInstanceMethod
+    BeginClassInstanceMethod 'toBuffer' -> v66
+        v67 <- CallMethod v66, 'toArray', []
+        v68 <- CreateNamedVariable 'bytes', 'let', v67
+        v69 <- CreateNamedVariable 'ArrayBuffer', 'none'
+        v70 <- GetProperty v68, 'length'
+        v71 <- Construct v69, [v70]
+        v72 <- CreateNamedVariable 'buffer', 'let', v71
+        v73 <- CreateNamedVariable 'Uint8Array', 'none'
+        v74 <- Construct v73, [v72]
+        v75 <- CreateNamedVariable 'view', 'let', v74
+        BeginForLoopInitializer
+            v76 <- LoadInteger '0'
+        BeginForLoopCondition -> v77
+            v78 <- GetProperty v68, 'length'
+            v79 <- Compare v77, '<', v78
+        BeginForLoopAfterthought v79 -> v80
+            v81 <- UnaryOperation v80, '++'
+        BeginForLoopBody -> v82
+            v83 <- GetComputedProperty v68, v82
+            v84 <- CreateNamedVariable 'val', 'let', v83
+            v85 <- LoadInteger '0'
+            v86 <- BinaryOperation v84, '|', v85
+            SetComputedProperty v75, v82, v86
+        EndForLoop
+        Return v72
+    EndClassInstanceMethod
+    BeginClassInstanceMethod 'instantiate' -> v87, v88
+        v89 <- CreateNamedVariable 'WebAssembly', 'none'
+        v90 <- GetProperty v89, 'Module'
+        v91 <- CallMethod v87, 'toBuffer', []
+        v92 <- Construct v90, [v91]
+        v93 <- CreateNamedVariable 'module', 'let', v92
+        v94 <- GetProperty v89, 'Instance'
+        v95 <- Construct v94, [v93]
+        v96 <- CreateNamedVariable 'instance', 'let', v95
+    EndClassInstanceMethod
+EndClassDefinition
+v97 <- LoadInteger '0'
+v98 <- CreateNamedVariable 'v_40', 'var', v97
+v99 <- CreateNamedVariable 'NaN', 'none'
+v100 <- CreateNamedVariable 'v_43', 'var', v99
+BeginTry
+    v101 <- Construct v37, []
+    v102 <- CreateNamedVariable 'v_23', 'none'
+    Reassign v102, v101
+BeginCatch -> v103
+    v104 <- LoadString 'Caught: '
+    v105 <- BinaryOperation v104, '+', v103
+    v106 <- CreateNamedVariable 'print', 'none'
+    v107 <- CallFunction v106, [v105]
+EndTryCatch
+BeginTry
+    v108 <- LoadInteger '255'
+    v109 <- CreateArray [v108]
+    v110 <- CreateNamedVariable 'v_31', 'none'
+    Reassign v110, v109
+    v111 <- CreateNamedVariable 'v_31', 'none'
+    v112 <- CreateArray [v111]
+    v113 <- CreateNamedVariable 'v_29', 'none'
+    Reassign v113, v112
+BeginCatch -> v114
+    v115 <- LoadString 'Caught: '
+    v116 <- BinaryOperation v115, '+', v114
+    v117 <- CreateNamedVariable 'print', 'none'
+    v118 <- CallFunction v117, [v116]
+EndTryCatch
+BeginTry
+    v119 <- LoadString 'main'
+    v120 <- CreateArray [v119]
+    v121 <- CreateNamedVariable 'v_25', 'none'
+    Reassign v121, v120
+    v122 <- CreateNamedVariable 'gc', 'none'
+    v123 <- CallFunction v122, []
+BeginCatch -> v124
+    v125 <- LoadString 'Caught: '
+    v126 <- BinaryOperation v125, '+', v124
+    v127 <- CreateNamedVariable 'print', 'none'
+    v128 <- CallFunction v127, [v126]
+EndTryCatch
+v129 <- LoadInteger '2'
+v130 <- CreateArray [v129]
+v131 <- CreateArray [v130]
+BeginForOfLoop v131 -> v132
+    BeginTry
+        v133 <- CreateNamedVariable 'gc', 'none'
+        v134 <- CallFunction v133, []
+    BeginCatch -> v135
+        v136 <- LoadString 'Caught: '
+        v137 <- BinaryOperation v136, '+', v135
+        v138 <- CreateNamedVariable 'print', 'none'
+        v139 <- CallFunction v138, [v137]
+    EndTryCatch
+EndForOfLoop
+BeginTry
+    v140 <- CreateNamedVariable 'v_23', 'none'
+    v141 <- CallMethod v140, 'instantiate', []
+    v142 <- CreateNamedVariable 'module', 'none'
+    Reassign v142, v141
+BeginCatch -> v143
+    v144 <- LoadString 'Caught: '
+    v145 <- BinaryOperation v144, '+', v143
+    v146 <- CreateNamedVariable 'print', 'none'
+    v147 <- CallFunction v146, [v145]
+EndTryCatch
+BeginTry
+    v148 <- CreateArray []
+    v149 <- CreateNamedVariable 'v_41', 'none'
+    Reassign v149, v148
+BeginCatch -> v150
+EndTryCatch
+BeginForLoopInitializer
+    v151 <- LoadInteger '0'
+BeginForLoopCondition -> v152
+    v153 <- LoadInteger '100000'
+    v154 <- Compare v152, '<', v153
+BeginForLoopAfterthought v154 -> v155
+    v156 <- UnaryOperation v155, '++'
+BeginForLoopBody -> v157
+    BeginTry
+        v158 <- CreateArray []
+        v159 <- CreateNamedVariable 'v_41', 'none'
+        SetComputedProperty v159, v157, v158
+    BeginCatch -> v160
+        v161 <- LoadString 'Caught: '
+        v162 <- BinaryOperation v161, '+', v160
+    EndTryCatch
+EndForLoop
+
+
+function __getProperties() {
+    return [];
+    let properties = [];
+    for (const v6 of Object.getOwnPropertyNames()) {
+    }
+    return properties;
+}
+function __getRandomProperty() {
+    let properties = __getProperties();
+    if (!properties.length) {
+        return undefined;
+    }
+    return properties[seed % properties.length];
+}
+var kWasmH0 = 0;
+var kWasmH1 = 97;
+var kWasmH2 = 115;
+var kWasmH3 = 109;
+var kWasmV0 = 1;
+var kWasmV1 = 0;
+var kWasmV2 = 0;
+var kWasmV3 = 0;
+class C34 extends Array {
+    emit_header() {
+        this.push(kWasmH0, kWasmH1, kWasmH2, kWasmH3, kWasmV0, kWasmV1, kWasmV2, kWasmV3);
+    }
+}
+class C37 {
+    constructor() {
+        this.exports = [];
+    }
+    addImportedMemory() {
+    }
+    setFunctionTableLength() {
+    }
+    toArray() {
+        const v43 = new C34();
+        let binary = v43;
+        let wasm = this;
+        binary.emit_header();
+        "emitting imports @ " + binary.length;
+        const v50 = (a51) => {
+        };
+        var mem_export = (wasm.memory !== undefined) && wasm.memory.exp;
+        var exports_count = wasm.exports.length + (mem_export ? 1 : 0);
+        return binary;
+    }
+    toBuffer() {
+        let bytes = this.toArray();
+        const v71 = new ArrayBuffer(bytes.length);
+        let buffer = v71;
+        const v74 = new Uint8Array(buffer);
+        let view = v74;
+        for (let i77 = 0; i77 < bytes.length; i77++) {
+            let val = bytes[i77];
+            view[i77] = val | 0;
+        }
+        return buffer;
+    }
+    instantiate(a88) {
+        const t60 = WebAssembly.Module;
+        const v92 = new t60(this.toBuffer());
+        let module = v92;
+        const t63 = WebAssembly.Instance;
+        const v95 = new t63(module);
+        let instance = v95;
+    }
+}
+var v_40 = 0;
+var v_43 = NaN;
+try {
+    const v101 = new C37();
+    v_23 = v101;
+} catch(e103) {
+    print("Caught: " + e103);
+}
+try {
+    v_31 = [255];
+    v_29 = [v_31];
+} catch(e114) {
+    print("Caught: " + e114);
+}
+try {
+    v_25 = ["main"];
+    gc();
+} catch(e124) {
+    print("Caught: " + e124);
+}
+for (const v132 of [[2]]) {
+    try {
+        gc();
+    } catch(e135) {
+        print("Caught: " + e135);
+    }
+}
+try {
+    module = v_23.instantiate();
+} catch(e143) {
+    print("Caught: " + e143);
+}
+try {
+    v_41 = [];
+} catch(e150) {
+}
+for (let i152 = 0; i152 < 100000; i152++) {
+    try {
+        v_41[i152] = [];
+    } catch(e160) {
+        "Caught: " + e160;
+    }
+}
+
+FuzzIL program written to corpus/regress-crbug-746835.fzil

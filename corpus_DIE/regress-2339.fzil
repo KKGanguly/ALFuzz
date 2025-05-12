@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadUndefined
+    v3 <- CreateNamedVariable 'simple_two_args', 'none'
+    v4 <- CallFunction v3, [v1, v2]
+    Return v4
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6, v7
+    v8 <- LoadInteger '5'
+    v9 <- BinaryOperation v7, '||', v8
+    v10 <- CreateNamedVariable 'always_five', 'var', v9
+    v11 <- BinaryOperation v6, '*', v10
+    v12 <- LoadFloat '0.5'
+    v13 <- BinaryOperation v11, '*', v12
+    Return v13
+EndPlainFunction
+v14 <- CallFunction v0, []
+v15 <- CallFunction v0, []
+v16 <- CallFunction v0, []
+v17 <- CallFunction v0, []
+v18 <- CreateNamedVariable 'gc', 'none'
+v19 <- CallFunction v18, []
+
+
+function simple() {
+    return simple_two_args(0, undefined);
+}
+function simple_two_args(a6, a7) {
+    var always_five = a7 || 5;
+    return (a6 * always_five) * 0.5;
+}
+simple();
+simple();
+simple();
+simple();
+gc();
+
+FuzzIL program written to corpus/regress-2339.fzil

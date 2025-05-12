@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '42'
+    v3 <- CreateArray [v2]
+    v4 <- CreateNamedVariable 'array', 'let', v3
+    v5 <- CreateNamedVariable 'Symbol', 'none'
+    v6 <- GetProperty v5, 'iterator'
+    v7 <- CallComputedMethod v4, v6, []
+    v8 <- CreateNamedVariable 'it', 'let', v7
+    BeginIf v1
+        v9 <- CallMethod v8, 'next', []
+        v10 <- GetProperty v9, 'value'
+        Return v10
+    EndIf
+EndPlainFunction
+v11 <- LoadBoolean 'false'
+v12 <- CallFunction v0, [v11]
+v13 <- LoadBoolean 'false'
+v14 <- CallFunction v0, [v13]
+v15 <- LoadBoolean 'true'
+v16 <- CallFunction v0, [v15]
+v17 <- LoadInteger '42'
+
+
+function f(a1) {
+    let array = [42];
+    let it = array[Symbol.iterator]();
+    if (a1) {
+        return it.next().value;
+    }
+}
+f(false);
+f(false);
+f(true);
+
+FuzzIL program written to corpus/regress-681383.fzil

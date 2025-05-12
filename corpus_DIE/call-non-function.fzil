@@ -1,0 +1,70 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateArray []
+    v3 <- CreateNamedVariable 'caught', 'var', v2
+    BeginTry
+        v4 <- CallFunction v1, []
+    BeginCatch -> v5
+        v6 <- CallMethod v3, 'push', [v5]
+    EndTryCatch
+    BeginTry
+        v7 <- Construct v1, []
+    BeginCatch -> v8
+        v9 <- CallMethod v3, 'push', [v8]
+    EndTryCatch
+    v10 <- GetElement v3, '0'
+    v11 <- CreateNamedVariable 'TypeError', 'none'
+    v12 <- TestInstanceOf v10, v11
+    v13 <- GetElement v3, '1'
+    v14 <- TestInstanceOf v13, v11
+EndPlainFunction
+v15 <- LoadThis
+v16 <- CallFunction v0, [v15]
+v17 <- CreateNamedVariable 'Math', 'none'
+v18 <- CallFunction v0, [v17]
+v19 <- LoadBoolean 'true'
+v20 <- CallFunction v0, [v19]
+v21 <- LoadInteger '1234'
+v22 <- CallFunction v0, [v21]
+v23 <- LoadString 'hest'
+v24 <- CallFunction v0, [v23]
+v25 <- LoadInteger '42'
+v26 <- CreateNamedVariable 'NonFunction', 'var', v25
+v27 <- BeginPlainFunction -> 
+    v28 <- CallFunction v26, []
+EndPlainFunction
+v29 <- CallFunction v27, []
+v30 <- CallFunction v27, []
+v31 <- CallFunction v27, []
+v32 <- CallFunction v27, []
+
+
+function TryCall(a1) {
+    var caught = [];
+    try {
+        a1();
+    } catch(e5) {
+        caught.push(e5);
+    }
+    try {
+        new a1();
+    } catch(e8) {
+        caught.push(e8);
+    }
+    caught[0] instanceof TypeError;
+    caught[1] instanceof TypeError;
+}
+TryCall(this);
+TryCall(Math);
+TryCall(true);
+TryCall(1234);
+TryCall("hest");
+var NonFunction = 42;
+function WillThrow() {
+    NonFunction();
+}
+WillThrow();
+WillThrow();
+WillThrow();
+WillThrow();
+
+FuzzIL program written to corpus/call-non-function.fzil

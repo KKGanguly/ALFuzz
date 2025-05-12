@@ -1,0 +1,114 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '>>>', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '15'
+v5 <- LoadInteger '15'
+v6 <- LoadInteger '0'
+v7 <- CallFunction v0, [v5, v6]
+v8 <- LoadString '15 >>> 0'
+v9 <- LoadInteger '7'
+v10 <- LoadInteger '15'
+v11 <- LoadInteger '1'
+v12 <- CallFunction v0, [v10, v11]
+v13 <- LoadString '15 >>> 1'
+v14 <- LoadInteger '3'
+v15 <- LoadInteger '15'
+v16 <- LoadInteger '2'
+v17 <- CallFunction v0, [v15, v16]
+v18 <- LoadString '15 >>> 2'
+v19 <- LoadInteger '4294967288'
+v20 <- LoadInteger '8'
+v21 <- UnaryOperation '-', v20
+v22 <- LoadInteger '0'
+v23 <- CallFunction v0, [v21, v22]
+v24 <- LoadString '-8 >>> 0'
+v25 <- LoadInteger '2147483644'
+v26 <- LoadInteger '8'
+v27 <- UnaryOperation '-', v26
+v28 <- LoadInteger '1'
+v29 <- CallFunction v0, [v27, v28]
+v30 <- LoadString '-8 >>> 1'
+v31 <- LoadInteger '1073741822'
+v32 <- LoadInteger '8'
+v33 <- UnaryOperation '-', v32
+v34 <- LoadInteger '2'
+v35 <- CallFunction v0, [v33, v34]
+v36 <- LoadString '-8 >>> 2'
+v37 <- LoadInteger '1'
+v38 <- LoadInteger '8'
+v39 <- UnaryOperation '-', v38
+v40 <- LoadInteger '31'
+v41 <- CallFunction v0, [v39, v40]
+v42 <- LoadString '-8 >>> 31'
+v43 <- LoadInteger '4294967288'
+v44 <- LoadInteger '8'
+v45 <- UnaryOperation '-', v44
+v46 <- LoadInteger '32'
+v47 <- CallFunction v0, [v45, v46]
+v48 <- LoadString '-8 >>> 32'
+v49 <- LoadInteger '2147483644'
+v50 <- LoadInteger '8'
+v51 <- UnaryOperation '-', v50
+v52 <- LoadInteger '33'
+v53 <- CallFunction v0, [v51, v52]
+v54 <- LoadString '-8 >>> 33'
+v55 <- LoadInteger '1073741822'
+v56 <- LoadInteger '8'
+v57 <- UnaryOperation '-', v56
+v58 <- LoadInteger '34'
+v59 <- CallFunction v0, [v57, v58]
+v60 <- LoadString '-8 >>> 34'
+v61 <- LoadInteger '2147483648'
+v62 <- LoadInteger '2147483648'
+v63 <- LoadInteger '0'
+v64 <- CallFunction v0, [v62, v63]
+v65 <- LoadString '0x80000000 >>> 0'
+v66 <- LoadInteger '1073741824'
+v67 <- LoadInteger '2147483648'
+v68 <- LoadInteger '1'
+v69 <- CallFunction v0, [v67, v68]
+v70 <- LoadString '0x80000000 >>> 1'
+v71 <- LoadInteger '536870912'
+v72 <- LoadInteger '2147483648'
+v73 <- LoadInteger '2'
+v74 <- CallFunction v0, [v72, v73]
+v75 <- LoadString '0x80000000 >>> 2'
+v76 <- LoadInteger '1073741824'
+v77 <- LoadInteger '1073741824'
+v78 <- LoadInteger '0'
+v79 <- CallFunction v0, [v77, v78]
+v80 <- LoadString '0x40000000 >>> 0'
+v81 <- LoadInteger '536870912'
+v82 <- LoadInteger '1073741824'
+v83 <- LoadInteger '1'
+v84 <- CallFunction v0, [v82, v83]
+v85 <- LoadString '0x40000000 >>> 1'
+v86 <- LoadInteger '268435456'
+v87 <- LoadInteger '1073741824'
+v88 <- LoadInteger '2'
+v89 <- CallFunction v0, [v87, v88]
+v90 <- LoadString '0x40000000 >>> 2'
+
+
+function unsignedShiftRight(a1, a2) {
+    return a1 >>> a2;
+}
+unsignedShiftRight(15, 0);
+unsignedShiftRight(15, 1);
+unsignedShiftRight(15, 2);
+unsignedShiftRight(-8, 0);
+unsignedShiftRight(-8, 1);
+unsignedShiftRight(-8, 2);
+unsignedShiftRight(-8, 31);
+unsignedShiftRight(-8, 32);
+unsignedShiftRight(-8, 33);
+unsignedShiftRight(-8, 34);
+unsignedShiftRight(2147483648, 0);
+unsignedShiftRight(2147483648, 1);
+unsignedShiftRight(2147483648, 2);
+unsignedShiftRight(1073741824, 0);
+unsignedShiftRight(1073741824, 1);
+unsignedShiftRight(1073741824, 2);
+
+FuzzIL program written to corpus/regress-1050043.fzil

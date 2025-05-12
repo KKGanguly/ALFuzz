@@ -1,0 +1,56 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetElement v2, '0'
+    v4 <- CreateNamedVariable 's', 'var', v3
+    v5 <- GetElement v1, '0'
+    v6 <- CreateNamedVariable 't', 'var', v5
+    v7 <- LoadFloat '0.3'
+    SetElement v2, '0', v7
+EndPlainFunction
+v8 <- CreateNamedVariable 'Array', 'none'
+v9 <- LoadInteger '1'
+v10 <- Construct v8, [v9]
+v11 <- CreateNamedVariable 'fast_elem', 'var', v10
+v12 <- LoadString 'tagged'
+SetElement v11, '0', v12
+v13 <- LoadInteger '1'
+v14 <- CreateArray [v13]
+v15 <- CallFunction v0, [v11, v14]
+v16 <- LoadInteger '1'
+v17 <- Construct v8, [v16]
+v18 <- CreateNamedVariable 'double_elem', 'var', v17
+v19 <- LoadFloat '0.1'
+SetElement v18, '0', v19
+v20 <- CallFunction v0, [v18, v18]
+v21 <- LoadInteger '10'
+v22 <- Construct v8, [v21]
+Reassign v18, v22
+v23 <- LoadFloat '0.1'
+SetElement v18, '0', v23
+v24 <- CallFunction v0, [v18, v18]
+v25 <- LoadFloat '0.3'
+v26 <- GetElement v18, '0'
+v27 <- LoadUndefined
+v28 <- GetElement v18, '1'
+
+
+function boom(a1, a2) {
+    var s = a2[0];
+    var t = a1[0];
+    a2[0] = 0.3;
+}
+const v10 = new Array(1);
+var fast_elem = v10;
+fast_elem[0] = "tagged";
+boom(fast_elem, [1]);
+const v17 = new Array(1);
+var double_elem = v17;
+double_elem[0] = 0.1;
+boom(double_elem, double_elem);
+const v22 = new Array(10);
+double_elem = v22;
+double_elem[0] = 0.1;
+boom(double_elem, double_elem);
+double_elem[0];
+double_elem[1];
+
+FuzzIL program written to corpus/regress-460917.fzil

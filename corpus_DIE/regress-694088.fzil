@@ -1,0 +1,146 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v2 <- LoadInteger '4'
+    v3 <- Construct v1, [v2]
+    v4 <- CreateNamedVariable 'buffer', 'var', v3
+    v5 <- CreateNamedVariable 'Int32Array', 'none'
+    v6 <- Construct v5, [v4]
+    v7 <- CreateNamedVariable 'HEAP32', 'none'
+    Reassign v7, v6
+    v8 <- CreateNamedVariable 'Uint8Array', 'none'
+    v9 <- Construct v8, [v4]
+    v10 <- CreateNamedVariable 'HEAPU8', 'none'
+    Reassign v10, v9
+    v11 <- LoadInteger '255'
+    v12 <- CreateNamedVariable 'HEAP32', 'none'
+    SetElement v12, '0', v11
+    v13 <- CreateNamedVariable 'HEAPU8', 'none'
+    v14 <- GetElement v13, '0'
+    v15 <- LoadInteger '255'
+    v16 <- Compare v14, '===', v15
+    v17 <- GetElement v13, '3'
+    v18 <- LoadInteger '0'
+    v19 <- Compare v17, '===', v18
+    v20 <- BinaryOperation v16, '&&', v19
+    BeginIf v20
+        v21 <- LoadBoolean 'true'
+        Return v21
+    BeginElse
+        v22 <- LoadBoolean 'false'
+        Return v22
+    EndIf
+EndPlainFunction
+v23 <- BeginPlainFunction -> 
+    v24 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v25 <- LoadInteger '8'
+    v26 <- Construct v24, [v25]
+    v27 <- CreateNamedVariable 'buffer', 'var', v26
+    v28 <- CreateNamedVariable 'Int32Array', 'none'
+    v29 <- Construct v28, [v27]
+    v30 <- CreateNamedVariable 'i32', 'var', v29
+    v31 <- CreateNamedVariable 'Float64Array', 'none'
+    v32 <- Construct v31, [v27]
+    v33 <- CreateNamedVariable 'f64', 'var', v32
+    v34 <- BeginPlainFunction -> 
+        v35 <- LoadInteger '1'
+        SetElement v33, '0', v35
+        v36 <- GetElement v33, '0'
+        v37 <- CreateNamedVariable 'x', 'var', v36
+        v38 <- CallFunction v0, []
+        BeginIf v38
+            v39 <- GetElement v30, '0'
+            Return v39
+        BeginElse
+            v40 <- GetElement v30, '1'
+            Return v40
+        EndIf
+    EndPlainFunction
+    v41 <- LoadInteger '0'
+    v42 <- CallFunction v34, []
+EndPlainFunction
+v43 <- CallFunction v23, []
+v44 <- BeginPlainFunction -> 
+    v45 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v46 <- LoadInteger '8'
+    v47 <- Construct v45, [v46]
+    v48 <- CreateNamedVariable 'buffer', 'var', v47
+    v49 <- CreateNamedVariable 'Int16Array', 'none'
+    v50 <- Construct v49, [v48]
+    v51 <- CreateNamedVariable 'i16', 'var', v50
+    v52 <- CreateNamedVariable 'Int32Array', 'none'
+    v53 <- Construct v52, [v48]
+    v54 <- CreateNamedVariable 'i32', 'var', v53
+    v55 <- BeginPlainFunction -> 
+        v56 <- LoadInteger '131073'
+        SetElement v54, '0', v56
+        v57 <- GetElement v54, '0'
+        v58 <- CreateNamedVariable 'x', 'var', v57
+        v59 <- CallFunction v0, []
+        BeginIf v59
+            v60 <- GetElement v51, '0'
+            Return v60
+        BeginElse
+            v61 <- GetElement v51, '1'
+            Return v61
+        EndIf
+    EndPlainFunction
+    v62 <- LoadInteger '1'
+    v63 <- CallFunction v55, []
+EndPlainFunction
+v64 <- CallFunction v44, []
+
+
+function is_little_endian() {
+    const v3 = new ArrayBuffer(4);
+    var buffer = v3;
+    const v6 = new Int32Array(buffer);
+    HEAP32 = v6;
+    const v9 = new Uint8Array(buffer);
+    HEAPU8 = v9;
+    HEAP32[0] = 255;
+    if ((HEAPU8[0] === 255) && (HEAPU8[3] === 0)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+function f23() {
+    const v26 = new ArrayBuffer(8);
+    var buffer = v26;
+    const v29 = new Int32Array(buffer);
+    var i32 = v29;
+    const v32 = new Float64Array(buffer);
+    var f64 = v32;
+    function foo() {
+        f64[0] = 1;
+        var x = f64[0];
+        if (is_little_endian()) {
+            return i32[0];
+        } else {
+            return i32[1];
+        }
+    }
+    foo();
+}
+f23();
+function f44() {
+    const v47 = new ArrayBuffer(8);
+    var buffer = v47;
+    const v50 = new Int16Array(buffer);
+    var i16 = v50;
+    const v53 = new Int32Array(buffer);
+    var i32 = v53;
+    function foo() {
+        i32[0] = 131073;
+        var x = i32[0];
+        if (is_little_endian()) {
+            return i16[0];
+        } else {
+            return i16[1];
+        }
+    }
+    foo();
+}
+f44();
+
+FuzzIL program written to corpus/regress-694088.fzil

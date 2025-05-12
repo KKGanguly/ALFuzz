@@ -1,0 +1,66 @@
+BeginBlockStatement
+    v0 <- BeginGeneratorFunction -> 
+    EndGeneratorFunction
+    v1 <- LoadString 'function'
+    v2 <- TypeOf v0
+EndBlockStatement
+v3 <- LoadString 'undefined'
+v4 <- CreateNamedVariable 'foo', 'none'
+v5 <- TypeOf v4
+v6 <- BeginPlainFunction -> 
+    BeginBlockStatement
+        v7 <- BeginGeneratorFunction -> 
+        EndGeneratorFunction
+    EndBlockStatement
+    v8 <- LoadString 'undefined'
+    v9 <- CreateNamedVariable 'bar', 'none'
+    v10 <- TypeOf v9
+EndPlainFunction
+v11 <- CallFunction v6, []
+v12 <- BeginPlainFunction -> 
+    v13 <- BeginGeneratorFunction -> 
+        v14 <- LoadInteger '1'
+        v15 <- Yield v14
+    EndGeneratorFunction
+    BeginBlockStatement
+        v16 <- BeginGeneratorFunction -> 
+            v17 <- LoadInteger '2'
+            v18 <- Yield v17
+        EndGeneratorFunction
+    EndBlockStatement
+    v19 <- LoadInteger '1'
+    v20 <- CallFunction v13, []
+    v21 <- CallMethod v20, 'next', []
+    v22 <- GetProperty v21, 'value'
+EndPlainFunction
+v23 <- CallFunction v12, []
+
+
+{
+    function* foo() {
+    }
+    typeof foo;
+}
+typeof foo;
+function f6() {
+    {
+        function* bar() {
+        }
+    }
+    typeof bar;
+}
+f6();
+function f12() {
+    function* x() {
+        yield 1;
+    }
+    {
+        function* x() {
+            yield 2;
+        }
+    }
+    x().next().value;
+}
+f12();
+
+FuzzIL program written to corpus/sloppy-no-duplicate-generators.fzil

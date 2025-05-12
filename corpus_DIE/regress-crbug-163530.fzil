@@ -1,0 +1,134 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `deopt`, v1
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable 'deoptimize', 'var', v2
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'object', 'var', v4
+    v6 <- BeginPlainFunction -> v7, v8, v9
+        v10 <- LoadInteger '0'
+        v11 <- LoadArguments
+        v12 <- GetProperty v11, 'length'
+        v13 <- LoadThis
+        v14 <- CallMethod v13, 'b', []
+        Return v14
+    EndPlainFunction
+    SetProperty v5, 'a', v6
+    v15 <- BeginPlainFunction -> 
+        v16 <- LoadInteger '0'
+        v17 <- LoadArguments
+        v18 <- GetProperty v17, 'length'
+        v19 <- GetProperty v3, 'deopt'
+        v20 <- LoadArguments
+        v21 <- GetProperty v20, 'length'
+        Return v21
+    EndPlainFunction
+    SetProperty v5, 'b', v15
+    v22 <- LoadInteger '0'
+    v23 <- CallMethod v5, 'a', []
+    v24 <- LoadInteger '0'
+    v25 <- CallMethod v5, 'a', []
+    v26 <- LoadInteger '0'
+    v27 <- CallMethod v5, 'a', []
+    v28 <- DeleteProperty v3, 'deopt'
+    v29 <- LoadInteger '0'
+    v30 <- CallMethod v5, 'a', []
+EndPlainFunction
+v31 <- CallFunction v0, []
+v32 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v33 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `deopt`, v33
+    v34 <- EndObjectLiteral
+    v35 <- CreateNamedVariable 'deoptimize', 'var', v34
+    BeginObjectLiteral
+    v36 <- EndObjectLiteral
+    v37 <- CreateNamedVariable 'object', 'var', v36
+    v38 <- BeginPlainFunction -> v39, v40, v41
+        v42 <- LoadInteger '0'
+        v43 <- LoadArguments
+        v44 <- GetProperty v43, 'length'
+        v45 <- LoadInteger '1'
+        v46 <- LoadInteger '2'
+        v47 <- LoadInteger '3'
+        v48 <- LoadInteger '4'
+        v49 <- LoadInteger '5'
+        v50 <- LoadInteger '6'
+        v51 <- LoadInteger '7'
+        v52 <- LoadInteger '8'
+        v53 <- LoadThis
+        v54 <- CallMethod v53, 'b', [v45, v46, v47, v48, v49, v50, v51, v52]
+        Return v54
+    EndPlainFunction
+    SetProperty v37, 'a', v38
+    v55 <- BeginPlainFunction -> v56, v57, v58, v59, v60, v61, v62, v63
+        v64 <- LoadInteger '8'
+        v65 <- LoadArguments
+        v66 <- GetProperty v65, 'length'
+        v67 <- GetProperty v35, 'deopt'
+        v68 <- LoadArguments
+        v69 <- GetProperty v68, 'length'
+        Return v69
+    EndPlainFunction
+    SetProperty v37, 'b', v55
+    v70 <- LoadInteger '8'
+    v71 <- CallMethod v37, 'a', []
+    v72 <- LoadInteger '8'
+    v73 <- CallMethod v37, 'a', []
+    v74 <- LoadInteger '8'
+    v75 <- CallMethod v37, 'a', []
+    v76 <- DeleteProperty v35, 'deopt'
+    v77 <- LoadInteger '8'
+    v78 <- CallMethod v37, 'a', []
+EndPlainFunction
+v79 <- CallFunction v32, []
+
+
+function f0() {
+    var deoptimize = { deopt: true };
+    var object = {};
+    function A(a7, a8, a9) {
+        arguments.length;
+        return this.b();
+    }
+    object.a = A;
+    function B() {
+        arguments.length;
+        deoptimize.deopt;
+        return arguments.length;
+    }
+    object.b = B;
+    object.a();
+    object.a();
+    object.a();
+    delete deoptimize.deopt;
+    object.a();
+}
+f0();
+function f32() {
+    'use strict';
+    var deoptimize = { deopt: true };
+    var object = {};
+    function A(a39, a40, a41) {
+        arguments.length;
+        return this.b(1, 2, 3, 4, 5, 6, 7, 8);
+    }
+    object.a = A;
+    function B(a56, a57, a58, a59, a60, a61, a62, a63) {
+        arguments.length;
+        deoptimize.deopt;
+        return arguments.length;
+    }
+    object.b = B;
+    object.a();
+    object.a();
+    object.a();
+    delete deoptimize.deopt;
+    object.a();
+}
+f32();
+
+FuzzIL program written to corpus/regress-crbug-163530.fzil

@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> v1
+    BeginForInLoop v1 -> v2
+        v3 <- LoadInteger '1'
+        v4 <- DeleteElement v1, '1'
+    EndForInLoop
+EndPlainFunction
+v5 <- LoadInteger '1'
+v6 <- LoadInteger '2'
+v7 <- LoadInteger '3'
+v8 <- CreateArray [v5, v6, v7]
+v9 <- CallFunction v0, [v8]
+v10 <- LoadInteger '2'
+v11 <- LoadInteger '3'
+v12 <- LoadInteger '4'
+v13 <- CreateArray [v10, v11, v12]
+v14 <- CallFunction v0, [v13]
+v15 <- LoadInteger '1'
+v16 <- LoadInteger '2'
+v17 <- LoadInteger '3'
+v18 <- CreateArray [v15, v16, v17]
+v19 <- CallFunction v0, [v18]
+v20 <- CallFunction v0, []
+
+
+function foo(a1) {
+    for (const v2 in a1) {
+        delete a1[1];
+    }
+}
+foo([1,2,3]);
+foo([2,3,4]);
+foo([1,2,3]);
+foo();
+
+FuzzIL program written to corpus/regress-3650-3.fzil

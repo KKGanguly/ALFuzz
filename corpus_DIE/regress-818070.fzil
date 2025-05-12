@@ -1,0 +1,120 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Math', 'none'
+    v3 <- CallMethod v2, 'imul', [v1]
+EndPlainFunction
+v4 <- BeginArrowFunction -> 
+    v5 <- CreateNamedVariable 'FAIL', 'none'
+    Return v5
+EndArrowFunction
+v6 <- CreateNamedVariable 'Symbol', 'none'
+v7 <- GetProperty v6, 'toPrimitive'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v7, v4
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'x', 'none'
+Reassign v9, v8
+v10 <- LoadInteger '1'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadInteger '1'
+v13 <- CallFunction v0, [v12]
+v14 <- BeginArrowFunction -> 
+    v15 <- CreateNamedVariable 'x', 'none'
+    v16 <- CallFunction v0, [v15]
+    Return v16
+EndArrowFunction
+v17 <- CallFunction v14, []
+v18 <- CreateNamedVariable 'ReferenceError', 'none'
+v19 <- BeginPlainFunction -> v20
+    v21 <- CreateNamedVariable 'Math', 'none'
+    v22 <- CallMethod v21, 'pow', [v20]
+EndPlainFunction
+v23 <- BeginArrowFunction -> 
+    v24 <- CreateNamedVariable 'FAIL', 'none'
+    Return v24
+EndArrowFunction
+v25 <- GetProperty v6, 'toPrimitive'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v25, v23
+v26 <- EndObjectLiteral
+v27 <- CreateNamedVariable 'x', 'none'
+Reassign v27, v26
+v28 <- LoadInteger '1'
+v29 <- CallFunction v19, [v28]
+v30 <- LoadInteger '1'
+v31 <- CallFunction v19, [v30]
+v32 <- BeginArrowFunction -> 
+    v33 <- CreateNamedVariable 'x', 'none'
+    v34 <- CallFunction v19, [v33]
+    Return v34
+EndArrowFunction
+v35 <- CallFunction v32, []
+v36 <- BeginPlainFunction -> v37
+    v38 <- CreateNamedVariable 'Math', 'none'
+    v39 <- CallMethod v38, 'atan2', [v37]
+EndPlainFunction
+v40 <- BeginArrowFunction -> 
+    v41 <- CreateNamedVariable 'FAIL', 'none'
+    Return v41
+EndArrowFunction
+v42 <- GetProperty v6, 'toPrimitive'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v42, v40
+v43 <- EndObjectLiteral
+v44 <- CreateNamedVariable 'x', 'none'
+Reassign v44, v43
+v45 <- LoadInteger '1'
+v46 <- CallFunction v36, [v45]
+v47 <- LoadInteger '1'
+v48 <- CallFunction v36, [v47]
+v49 <- BeginArrowFunction -> 
+    v50 <- CreateNamedVariable 'x', 'none'
+    v51 <- CallFunction v36, [v50]
+    Return v51
+EndArrowFunction
+v52 <- CallFunction v49, []
+
+
+function f(a1) {
+    Math.imul(a1);
+}
+const v4 = () => {
+    return FAIL;
+};
+const v7 = Symbol.toPrimitive;
+x = { [v7]: v4 };
+f(1);
+f(1);
+const v14 = () => {
+    return f(x);
+};
+v14();
+function f(a20) {
+    Math.pow(a20);
+}
+const v23 = () => {
+    return FAIL;
+};
+const v25 = Symbol.toPrimitive;
+x = { [v25]: v23 };
+f(1);
+f(1);
+const v32 = () => {
+    return f(x);
+};
+v32();
+function f(a37) {
+    Math.atan2(a37);
+}
+const v40 = () => {
+    return FAIL;
+};
+const v42 = Symbol.toPrimitive;
+x = { [v42]: v40 };
+f(1);
+f(1);
+const v49 = () => {
+    return f(x);
+};
+v49();
+
+FuzzIL program written to corpus/regress-818070.fzil

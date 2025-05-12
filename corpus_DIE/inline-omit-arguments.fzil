@@ -1,0 +1,28 @@
+v0 <- LoadInteger '42'
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4, v5, v6
+    v7 <- BinaryOperation v1, '+', v3
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9, v10
+    v11 <- CallFunction v2, [v9]
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '42'
+v13 <- LoadInteger '12'
+v14 <- BinaryOperation v12, '+', v13
+v15 <- LoadInteger '12'
+v16 <- CallFunction v8, [v15]
+
+
+var x = 42;
+function bar(a3, a4, a5, a6) {
+    return x + a3;
+}
+function foo(a9, a10) {
+    return bar(a9);
+}
+42 + 12;
+foo(12);
+
+FuzzIL program written to corpus/inline-omit-arguments.fzil

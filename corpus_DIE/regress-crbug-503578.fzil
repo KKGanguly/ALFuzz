@@ -1,0 +1,42 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Worker'
+BeginIf v1
+    v2 <- BeginPlainFunction -> v3
+        v4 <- CreateNamedVariable 'ArrayBuffer', 'none'
+        v5 <- Construct v4, [v3]
+        v6 <- CreateNamedVariable '__v_1', 'var', v5
+        v7 <- CreateNamedVariable 'Uint32Array', 'none'
+        v8 <- Construct v7, [v6]
+        v9 <- CreateNamedVariable '__v_5', 'var', v8
+        Return v9
+    EndPlainFunction
+    v10 <- CreateNamedVariable 'Worker', 'none'
+    v11 <- LoadString 'onmessage = function() {}'
+    v12 <- LoadString 'string'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `type`, v12
+    v13 <- EndObjectLiteral
+    v14 <- Construct v10, [v11, v13]
+    v15 <- CreateNamedVariable '__v_6', 'var', v14
+    v16 <- LoadInteger '16'
+    v17 <- CallFunction v2, [v16]
+    v18 <- CreateNamedVariable '__v_3', 'var', v17
+    v19 <- CallMethod v15, 'postMessage', [v18]
+EndIf
+
+
+if (this.Worker) {
+    function __f_0(a3) {
+        const v5 = new ArrayBuffer(a3);
+        var __v_1 = v5;
+        const v8 = new Uint32Array(__v_1);
+        var __v_5 = v8;
+        return __v_5;
+    }
+    const v14 = new Worker("onmessage = function() {}", { type: "string" });
+    var __v_6 = v14;
+    var __v_3 = __f_0(16);
+    __v_6.postMessage(__v_3);
+}
+
+FuzzIL program written to corpus/regress-crbug-503578.fzil

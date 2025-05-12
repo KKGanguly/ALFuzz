@@ -1,0 +1,31 @@
+BeginTry
+    BeginObjectLiteral
+    v0 <- EndObjectLiteral
+    v1 <- CreateNamedVariable 'object', 'var', v0
+    v2 <- BeginPlainFunction -> v3
+        v4 <- LoadString '#2: var x = 1; x <= 1 === true'
+        v5 <- CreateNamedVariable 'encodeURI', 'none'
+        v6 <- TestInstanceOf v1, v5
+        v7 <- CallFunction v6, [v4]
+        v8 <- CreateNamedVariable 'f0', 'var', v7
+        v9 <- LoadInteger '1'
+        v10 <- CreateNamedVariable 'f1', 'var', v9
+    EndPlainFunction
+    v11 <- LoadInteger '75'
+    v12 <- CallFunction v2, [v11]
+BeginCatch -> v13
+EndTryCatch
+
+
+try {
+    var object = {};
+    function fib(a3) {
+        const t3 = object instanceof encodeURI;
+        var f0 = t3("#2: var x = 1; x <= 1 === true");
+        var f1 = 1;
+    }
+    fib(75);
+} catch(e13) {
+}
+
+FuzzIL program written to corpus/regress-1207.fzil

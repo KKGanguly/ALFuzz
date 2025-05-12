@@ -1,0 +1,50 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadThis
+    SetProperty v2, 'x', v1
+EndPlainFunction
+v3 <- CreateNamedVariable 'CustomError', 'var', v0
+v4 <- CreateNamedVariable 'Error', 'none'
+v5 <- Construct v4, []
+SetProperty v3, 'prototype', v5
+v6 <- LoadString 'prototype'
+v7 <- GetProperty v3, 'prototype'
+SetProperty v7, 'x', v6
+v8 <- GetProperty v3, 'prototype'
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadThis
+    v11 <- GetProperty v10, 'x'
+    Return v11
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v9
+v12 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `message`, v12
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'Object', 'none'
+v15 <- CallMethod v14, 'defineProperties', [v8, v13]
+v16 <- LoadString 'Error: instance'
+v17 <- LoadString 'instance'
+v18 <- Construct v3, [v17]
+v19 <- CreateNamedVariable 'String', 'none'
+v20 <- CallFunction v19, [v18]
+
+
+function f0(a1) {
+    this.x = a1;
+}
+var CustomError = f0;
+const v5 = new Error();
+CustomError.prototype = v5;
+const t6 = CustomError.prototype;
+t6.x = "prototype";
+const v8 = CustomError.prototype;
+function f9() {
+    return this.x;
+}
+const v12 = { get: f9 };
+Object.defineProperties(v8, { message: v12 });
+const v18 = new CustomError("instance");
+String(v18);
+
+FuzzIL program written to corpus/regress-crbug-306220.fzil

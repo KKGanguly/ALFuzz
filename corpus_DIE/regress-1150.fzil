@@ -1,0 +1,26 @@
+v0 <- LoadInteger '10'
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadThis
+    Return v3
+EndPlainFunction
+v4 <- CallFunction v2, []
+v5 <- CreateNamedVariable 'global', 'var', v4
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'keys', [v5]
+v8 <- CreateNamedVariable 'keys', 'var', v7
+v9 <- LoadString 'a'
+v10 <- CallMethod v8, 'indexOf', [v9]
+v11 <- LoadInteger '0'
+v12 <- Compare v10, '>', v11
+
+
+var a = 10;
+function f2() {
+    return this;
+}
+var global = f2();
+var keys = Object.keys(global);
+keys.indexOf("a") > 0;
+
+FuzzIL program written to corpus/regress-1150.fzil

@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    v2 <- TypeOf v1
+    v3 <- LoadString 'undefined'
+    v4 <- Compare v2, '===', v3
+    Return v4
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+v7 <- CallFunction v0, []
+v8 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v9 <- EndObjectLiteral
+    v10 <- TypeOf v9
+    v11 <- CreateNamedVariable 'foo', 'var', v10
+    v12 <- LoadString 'undefined'
+    v13 <- Compare v11, '===', v12
+    Return v13
+EndPlainFunction
+v14 <- CallFunction v8, []
+v15 <- CallFunction v8, []
+v16 <- CallFunction v8, []
+
+
+function typeofDirectly() {
+    return typeof {} === "undefined";
+}
+typeofDirectly();
+typeofDirectly();
+typeofDirectly();
+function typeofViaVariable() {
+    var foo = typeof {};
+    return foo === "undefined";
+}
+typeofViaVariable();
+typeofViaVariable();
+typeofViaVariable();
+
+FuzzIL program written to corpus/optimized-typeof.fzil

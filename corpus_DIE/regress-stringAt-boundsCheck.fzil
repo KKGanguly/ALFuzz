@@ -1,0 +1,40 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        BeginForLoopInitializer
+            v3 <- LoadInteger '0'
+        BeginForLoopCondition -> v4
+            v5 <- LoadInteger '20'
+            v6 <- Compare v4, '<', v5
+        BeginForLoopAfterthought v6 -> v7
+            v8 <- UnaryOperation '++', v7
+        BeginForLoopBody -> v9
+            v10 <- LoadString ''
+            v11 <- CallMethod v2, 'codePointAt', []
+            v12 <- BinaryOperation v10, '+', v11
+            v13 <- CreateNamedVariable 'print', 'none'
+            v14 <- CallFunction v13, [v12]
+        EndForLoop
+    EndPlainFunction
+    v15 <- LoadString 'test'
+    v16 <- CallFunction v1, [v15]
+    v17 <- LoadString 'foo'
+    v18 <- CallFunction v1, [v17]
+    v19 <- LoadString ''
+    v20 <- CallFunction v1, [v19]
+EndArrowFunction
+v21 <- CallFunction v0, []
+
+
+const v0 = () => {
+    function f(a2) {
+        for (let i4 = 0; i4 < 20; ++i4) {
+            print("" + a2.codePointAt());
+        }
+    }
+    f("test");
+    f("foo");
+    f("");
+};
+v0();
+
+FuzzIL program written to corpus/regress-stringAt-boundsCheck.fzil

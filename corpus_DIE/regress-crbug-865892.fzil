@@ -1,0 +1,24 @@
+v0 <- BeginAsyncFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `toString` -> v1
+            v2 <- LoadString 'modules-skip-1.js'
+            Return v2
+        EndObjectLiteralMethod
+    v3 <- EndObjectLiteral
+    v4 <- CreateNamedVariable 'x', 'let', v3
+    v5 <- LoadString 'await import(x);'
+EndAsyncFunction
+v6 <- CallFunction v0, []
+
+
+async function foo() {
+    const v3 = {
+        toString() {
+            return "modules-skip-1.js";
+        },
+    };
+    let x = v3;
+}
+foo();
+
+FuzzIL program written to corpus/regress-crbug-865892.fzil

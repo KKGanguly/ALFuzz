@@ -1,0 +1,18 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'var', v0
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v1
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'o', 'var', v2
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'preventExtensions', [v3]
+v6 <- LoadString 'abc'
+SetProperty v3, 'length', v6
+
+
+var a = [];
+var o = { __proto__: a };
+Object.preventExtensions(o);
+o.length = "abc";
+
+FuzzIL program written to corpus/regress-mask-array-length.fzil

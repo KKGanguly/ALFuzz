@@ -1,0 +1,301 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- Compare v1, '===', v2
+    BeginIf v3
+        v4 <- LoadBoolean 'true'
+        Return v4
+    EndIf
+    v5 <- TypeOf v1
+    v6 <- TypeOf v2
+    v7 <- Compare v5, '!=', v6
+    BeginIf v7
+        v8 <- LoadBoolean 'false'
+        Return v8
+    EndIf
+    v9 <- TypeOf v1
+    v10 <- LoadString 'number'
+    v11 <- Compare v9, '==', v10
+    BeginIf v11
+    EndIf
+    v12 <- TypeOf v1
+    v13 <- LoadString 'object'
+    v14 <- Compare v12, '!==', v13
+    v15 <- TypeOf v1
+    v16 <- LoadString 'function'
+    v17 <- Compare v15, '!==', v16
+    v18 <- BinaryOperation v14, '&&', v17
+    BeginIf v18
+        v19 <- LoadBoolean 'false'
+        Return v19
+    EndIf
+    v20 <- CreateNamedVariable 'classOf', 'none'
+    v21 <- CallFunction v20, []
+    v22 <- CreateNamedVariable 'objectClass', 'var', v21
+    BeginIf v2
+        v23 <- LoadBoolean 'false'
+        Return v23
+    EndIf
+    v24 <- LoadString 'RegExp'
+    v25 <- Compare v22, '===', v24
+    BeginIf v25
+    EndIf
+    v26 <- LoadString 'Function'
+    v27 <- Compare v22, '===', v26
+    BeginIf v27
+        v28 <- LoadBoolean 'false'
+        Return v28
+    EndIf
+    v29 <- LoadString 'Array'
+    v30 <- Compare v22, '===', v29
+    BeginIf v30
+        v31 <- LoadInteger '0'
+        v32 <- CreateNamedVariable 'elementCount', 'var', v31
+        v33 <- GetProperty v1, 'length'
+        v34 <- GetProperty v2, 'length'
+        v35 <- Compare v33, '!=', v34
+        BeginIf v35
+            v36 <- LoadBoolean 'false'
+            Return v36
+        EndIf
+        BeginForLoopInitializer
+            v37 <- LoadInteger '0'
+        BeginForLoopCondition -> v38
+            v39 <- GetProperty v1, 'length'
+            v40 <- Compare v38, '<', v39
+        BeginForLoopAfterthought v40 -> v41
+            v42 <- UnaryOperation v41, '++'
+        BeginForLoopBody -> v43
+            v44 <- GetComputedProperty v1, v43
+            v45 <- GetComputedProperty v44, v43
+            BeginIf v45
+                v46 <- LoadBoolean 'false'
+                Return v46
+            EndIf
+        EndForLoop
+        v47 <- LoadBoolean 'true'
+        Return v47
+    EndIf
+    v48 <- LoadString 'String'
+    v49 <- Compare v22, '==', v48
+    v50 <- LoadString 'Number'
+    v51 <- Compare v22, '==', v50
+    v52 <- BinaryOperation v49, '||', v51
+    v53 <- LoadString 'Boolean'
+    v54 <- Compare v22, '==', v53
+    v55 <- BinaryOperation v52, '||', v54
+    v56 <- LoadString 'Date'
+    v57 <- Compare v22, '==', v56
+    v58 <- BinaryOperation v55, '||', v57
+    BeginIf v58
+        v59 <- CallMethod v1, 'valueOf', []
+        BeginIf v59
+            v60 <- LoadBoolean 'false'
+            Return v60
+        EndIf
+    EndIf
+EndPlainFunction
+v61 <- BeginPlainFunction -> v62, v63, v64
+    v65 <- CallFunction v0, [v63, v62]
+    v66 <- UnaryOperation '!', v65
+    BeginIf v66
+    EndIf
+EndPlainFunction
+v67 <- BeginPlainFunction -> v68, v69
+    v70 <- TestInstanceOf v68, v69
+    v71 <- UnaryOperation '!', v70
+    BeginIf v71
+        v72 <- LoadNull
+        v73 <- CreateNamedVariable 'actualTypeName', 'var', v72
+        v74 <- CreateNamedVariable 'Object', 'none'
+        v75 <- CallMethod v74, 'getPrototypeOf', []
+        v76 <- GetProperty v75, 'constructor'
+        v77 <- CreateNamedVariable 'actualConstructor', 'var', v76
+        v78 <- TypeOf v77
+        v79 <- LoadString 'function'
+        v80 <- Compare v78, '==', v79
+        BeginIf v80
+        EndIf
+    EndIf
+EndPlainFunction
+v81 <- LoadInteger '1'
+v82 <- CreateNamedVariable '__v_0', 'var', v81
+BeginObjectLiteral
+v83 <- EndObjectLiteral
+v84 <- CreateNamedVariable '__v_6', 'var', v83
+BeginObjectLiteral
+v85 <- EndObjectLiteral
+v86 <- CreateNamedVariable '__v_9', 'var', v85
+v87 <- BeginPlainFunction -> 
+    v88 <- BeginPlainFunction -> 
+    EndPlainFunction
+    Return v88
+EndPlainFunction
+v89 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v90 <- LoadInteger '10'
+v91 <- Construct v89, [v90]
+Reassign v84, v91
+v92 <- BeginPlainFunction -> 
+    v93 <- LoadFloat '0.499'
+    SetElement v84, '0', v93
+    v94 <- CallFunction v87, []
+    v95 <- CreateNamedVariable 'Function', 'none'
+    v96 <- CallFunction v67, [v94, v95]
+    v97 <- CallFunction v61, []
+    v98 <- LoadFloat '0.5'
+    SetElement v84, '0', v98
+    v99 <- CallFunction v61, []
+    v100 <- LoadFloat '0.501'
+    SetElement v82, '0', v100
+    v101 <- GetElement v84, '4294967295'
+    v102 <- CallFunction v61, [v101]
+    v103 <- LoadFloat '1.499'
+    SetElement v84, '0', v103
+    v104 <- CallFunction v61, []
+    v105 <- LoadFloat '1.5'
+    SetElement v84, '0', v105
+    v106 <- CallFunction v61, []
+    v107 <- LoadFloat '1.501'
+    SetElement v84, '0', v107
+    v108 <- CallFunction v61, []
+    v109 <- LoadFloat '2.5'
+    SetElement v84, '0', v109
+    v110 <- LoadInteger '1073741824'
+    v111 <- UnaryOperation '-', v110
+    v112 <- GetComputedProperty v84, v111
+    v113 <- CallFunction v61, [v112]
+    v114 <- LoadFloat '3.5'
+    SetElement v84, '0', v114
+    v115 <- CallFunction v61, []
+    v116 <- LoadFloat '252.5'
+    SetElement v84, '0', v116
+    v117 <- CallFunction v61, []
+    v118 <- LoadFloat '253.5'
+    SetElement v84, '0', v118
+    v119 <- CallFunction v61, []
+    v120 <- LoadFloat '254.5'
+    SetElement v84, '0', v120
+    v121 <- CallFunction v61, []
+    v122 <- LoadFloat '256.5'
+    SetElement v84, '0', v122
+    v123 <- CallFunction v61, []
+    v124 <- LoadFloat '0.5'
+    v125 <- UnaryOperation '-', v124
+    SetElement v84, '0', v125
+    v126 <- GetElement v84, '8'
+    v127 <- CallFunction v61, [v126]
+    v128 <- LoadFloat '1.5'
+    v129 <- UnaryOperation '-', v128
+    SetElement v84, '0', v129
+    v130 <- CallFunction v61, []
+    v131 <- LoadInteger '1000000000000'
+    SetElement v84, '0', v131
+    v132 <- CallFunction v61, []
+    v133 <- LoadInteger '1000000000000'
+    v134 <- UnaryOperation '-', v133
+    SetElement v86, '0', v134
+    v135 <- GetElement v84, '0'
+    v136 <- CallFunction v61, [v135]
+EndPlainFunction
+v137 <- CallFunction v92, []
+v138 <- CallFunction v92, []
+
+
+function deepEquals(a1, a2) {
+    if (a1 === a2) {
+        return true;
+    }
+    if (typeof a1 != typeof a2) {
+        return false;
+    }
+    if (typeof a1 == "number") {
+    }
+    if ((typeof a1 !== "object") && (typeof a1 !== "function")) {
+        return false;
+    }
+    var objectClass = classOf();
+    if (a2) {
+        return false;
+    }
+    if (objectClass === "RegExp") {
+    }
+    if (objectClass === "Function") {
+        return false;
+    }
+    if (objectClass === "Array") {
+        var elementCount = 0;
+        if (a1.length != a2.length) {
+            return false;
+        }
+        for (let i38 = 0; i38 < a1.length; i38++) {
+            if (a1[i38][i38]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    if ((((objectClass == "String") || (objectClass == "Number")) || (objectClass == "Boolean")) || (objectClass == "Date")) {
+        if (a1.valueOf()) {
+            return false;
+        }
+    }
+}
+function equals(a62, a63, a64) {
+    if (!deepEquals(a63, a62)) {
+    }
+}
+function instof(a68, a69) {
+    if (!(a68 instanceof a69)) {
+        var actualTypeName = null;
+        var actualConstructor = Object.getPrototypeOf().constructor;
+        if (typeof actualConstructor == "function") {
+        }
+    }
+}
+var __v_0 = 1;
+var __v_6 = {};
+var __v_9 = {};
+function __f_4() {
+    function f88() {
+    }
+    return f88;
+}
+const v91 = new Uint8ClampedArray(10);
+__v_6 = v91;
+function __f_6() {
+    __v_6[0] = 0.499;
+    instof(__f_4(), Function);
+    equals();
+    __v_6[0] = 0.5;
+    equals();
+    __v_0[0] = 0.501;
+    equals(__v_6[4294967295]);
+    __v_6[0] = 1.499;
+    equals();
+    __v_6[0] = 1.5;
+    equals();
+    __v_6[0] = 1.501;
+    equals();
+    __v_6[0] = 2.5;
+    equals(__v_6[-1073741824]);
+    __v_6[0] = 3.5;
+    equals();
+    __v_6[0] = 252.5;
+    equals();
+    __v_6[0] = 253.5;
+    equals();
+    __v_6[0] = 254.5;
+    equals();
+    __v_6[0] = 256.5;
+    equals();
+    __v_6[0] = -0.5;
+    equals(__v_6[8]);
+    __v_6[0] = -1.5;
+    equals();
+    __v_6[0] = 1000000000000;
+    equals();
+    __v_9[0] = -1000000000000;
+    equals(__v_6[0]);
+}
+__f_6();
+__f_6();
+
+FuzzIL program written to corpus/regress-500831.fzil

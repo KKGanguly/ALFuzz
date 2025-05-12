@@ -1,0 +1,31 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginArrowFunction -> 
+        v2 <- LoadInteger '1'
+        Return v2
+    EndArrowFunction
+    v3 <- LoadInteger '5'
+    v4 <- CreateNamedVariable 'Array', 'none'
+    v5 <- CallFunction v4, [v3]
+    v6 <- CallFunctionWithSpread v4, [...v5]
+    v7 <- CallMethod v6, 'map', [v1]
+    v8 <- CreateNamedVariable 'a', 'var', v7
+    v9 <- LoadInteger '1'
+    v10 <- LoadInteger '1'
+    v11 <- LoadInteger '1'
+    v12 <- LoadInteger '1'
+    v13 <- LoadInteger '1'
+    v14 <- CreateArray [v9, v10, v11, v12, v13]
+EndPlainFunction
+v15 <- CallFunction v0, []
+
+
+function f0() {
+    const v1 = () => {
+        return 1;
+    };
+    var a = Array(...Array(5)).map(v1);
+    [1,1,1,1,1];
+}
+f0();
+
+FuzzIL program written to corpus/regress-5974.fzil

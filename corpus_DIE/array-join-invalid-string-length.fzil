@@ -1,0 +1,191 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- LoadInteger '4294967295'
+    v3 <- Construct v1, [v2]
+    v4 <- CreateNamedVariable 'a', 'const', v3
+    v5 <- LoadString '12'
+    v6 <- CreateNamedVariable 'sep', 'const', v5
+    v7 <- BeginArrowFunction -> 
+        v8 <- CallMethod v4, 'join', [v6]
+        Return v8
+    EndArrowFunction
+    v9 <- CallFunction v7, []
+    v10 <- CreateNamedVariable 'RangeError', 'none'
+    v11 <- BeginArrowFunction -> 
+        v12 <- CallMethod v4, 'join', [v6]
+        Return v12
+    EndArrowFunction
+    v13 <- CallFunction v11, []
+    v14 <- LoadInteger '3'
+    SetProperty v4, 'length', v14
+    v15 <- LoadString 'a'
+    SetElement v4, '0', v15
+    v16 <- LoadString 'b'
+    SetElement v4, '1', v16
+    v17 <- LoadString 'c'
+    SetElement v4, '2', v17
+    v18 <- LoadString 'a,b,c'
+    v19 <- CallMethod v4, 'join', []
+EndPlainFunction
+v20 <- CallFunction v0, []
+v21 <- BeginPlainFunction -> 
+    v22 <- LoadString 'a'
+    v23 <- LoadUndefined
+    v24 <- LoadString 'b'
+    v25 <- CreateArray [v22, v23, v23, v23, v23, v24]
+    v26 <- CreateNamedVariable 'a', 'const', v25
+    v27 <- LoadInteger '4294967295'
+    v28 <- LoadString ','
+    v29 <- CallMethod v28, 'repeat', [v27]
+    v30 <- CreateNamedVariable 'sep', 'const', v29
+    v31 <- BeginArrowFunction -> 
+        v32 <- CallMethod v26, 'join', [v30]
+        Return v32
+    EndArrowFunction
+    v33 <- CallFunction v31, []
+    v34 <- CreateNamedVariable 'RangeError', 'none'
+    v35 <- BeginArrowFunction -> 
+        v36 <- CallMethod v26, 'join', [v30]
+        Return v36
+    EndArrowFunction
+    v37 <- CallFunction v35, []
+    v38 <- LoadString 'a,,,,,b'
+    v39 <- CallMethod v26, 'join', []
+EndPlainFunction
+v40 <- CallFunction v21, []
+v41 <- BeginPlainFunction -> 
+    v42 <- LoadInteger '4294967295'
+    v43 <- LoadString ','
+    v44 <- CallMethod v43, 'repeat', [v42]
+    v45 <- CreateNamedVariable 'el', 'const', v44
+    v46 <- CreateArray [v45, v45, v45, v45, v45]
+    v47 <- CreateNamedVariable 'a', 'const', v46
+    v48 <- BeginArrowFunction -> 
+        v49 <- CallMethod v47, 'join', []
+        Return v49
+    EndArrowFunction
+    v50 <- CallFunction v48, []
+    v51 <- CreateNamedVariable 'RangeError', 'none'
+    v52 <- BeginArrowFunction -> 
+        v53 <- CallMethod v47, 'join', []
+        Return v53
+    EndArrowFunction
+    v54 <- CallFunction v52, []
+    v55 <- LoadString 'a'
+    SetElement v47, '0', v55
+    v56 <- LoadString 'b'
+    SetElement v47, '1', v56
+    v57 <- LoadString 'c'
+    SetElement v47, '2', v57
+    v58 <- LoadString 'd'
+    SetElement v47, '3', v58
+    v59 <- LoadString 'e'
+    SetElement v47, '4', v59
+    v60 <- LoadString 'a,b,c,d,e'
+    v61 <- CallMethod v47, 'join', []
+EndPlainFunction
+v62 <- CallFunction v41, []
+v63 <- BeginPlainFunction -> 
+    v64 <- LoadInteger '4294967295'
+    v65 <- LoadString ','
+    v66 <- CallMethod v65, 'repeat', [v64]
+    v67 <- CreateNamedVariable 'el', 'const', v66
+    v68 <- CreateArray [v67, v67, v67, v67]
+    v69 <- CreateNamedVariable 'a', 'const', v68
+    v70 <- BeginArrowFunction -> 
+        v71 <- CallMethod v69, 'join', [v67]
+        Return v71
+    EndArrowFunction
+    v72 <- CallFunction v70, []
+    v73 <- CreateNamedVariable 'RangeError', 'none'
+    v74 <- BeginArrowFunction -> 
+        v75 <- CallMethod v69, 'join', [v67]
+        Return v75
+    EndArrowFunction
+    v76 <- CallFunction v74, []
+    v77 <- LoadString 'a'
+    SetElement v69, '0', v77
+    v78 <- LoadString 'b'
+    SetElement v69, '1', v78
+    v79 <- LoadString 'c'
+    SetElement v69, '2', v79
+    v80 <- LoadString 'd'
+    SetElement v69, '3', v80
+    v81 <- LoadString 'a,b,c,d'
+    v82 <- CallMethod v69, 'join', []
+EndPlainFunction
+v83 <- CallFunction v63, []
+
+
+function DictionaryStringRepeatFastPath() {
+    const v3 = new Array(4294967295);
+    const a = v3;
+    const sep = "12";
+    const v7 = () => {
+        return a.join(sep);
+    };
+    v7();
+    const v11 = () => {
+        return a.join(sep);
+    };
+    v11();
+    a.length = 3;
+    a[0] = "a";
+    a[1] = "b";
+    a[2] = "c";
+    a.join();
+}
+DictionaryStringRepeatFastPath();
+function SeparatorOverflow() {
+    const a = ["a",,,,,"b"];
+    const sep = (",").repeat(4294967295);
+    const v31 = () => {
+        return a.join(sep);
+    };
+    v31();
+    const v35 = () => {
+        return a.join(sep);
+    };
+    v35();
+    a.join();
+}
+SeparatorOverflow();
+function ElementOverflow() {
+    const el = (",").repeat(4294967295);
+    const a = [el,el,el,el,el];
+    const v48 = () => {
+        return a.join();
+    };
+    v48();
+    const v52 = () => {
+        return a.join();
+    };
+    v52();
+    a[0] = "a";
+    a[1] = "b";
+    a[2] = "c";
+    a[3] = "d";
+    a[4] = "e";
+    a.join();
+}
+ElementOverflow();
+function ElementSeparatorOverflow() {
+    const el = (",").repeat(4294967295);
+    const a = [el,el,el,el];
+    const v70 = () => {
+        return a.join(el);
+    };
+    v70();
+    const v74 = () => {
+        return a.join(el);
+    };
+    v74();
+    a[0] = "a";
+    a[1] = "b";
+    a[2] = "c";
+    a[3] = "d";
+    a.join();
+}
+ElementSeparatorOverflow();
+
+FuzzIL program written to corpus/array-join-invalid-string-length.fzil

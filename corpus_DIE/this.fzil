@@ -1,0 +1,82 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadThis
+    Return v1
+EndPlainFunction
+v2 <- LoadThis
+v3 <- LoadNull
+v4 <- Compare v2, '==', v3
+v5 <- LoadString '[object global]'
+v6 <- LoadThis
+v7 <- CreateNamedVariable 'String', 'none'
+v8 <- CallFunction v7, [v6]
+v9 <- LoadThis
+v10 <- LoadThis
+v11 <- Compare v9, '===', v10
+v12 <- LoadThis
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadThis
+    Return v14
+EndPlainFunction
+v15 <- CallFunction v13, []
+v16 <- Compare v12, '===', v15
+v17 <- LoadThis
+v18 <- CallFunction v0, []
+v19 <- Compare v17, '===', v18
+BeginObjectLiteral
+v20 <- EndObjectLiteral
+v21 <- CreateNamedVariable 'x', 'var', v20
+BeginObjectLiteral
+v22 <- EndObjectLiteral
+v23 <- CreateNamedVariable 'y', 'var', v22
+SetProperty v23, 'f', v0
+SetProperty v21, 'f', v0
+v24 <- CallFunction v0, []
+v25 <- Compare v21, '===', v24
+v26 <- CallFunction v0, []
+v27 <- Compare v23, '===', v26
+v28 <- CallMethod v21, 'f', []
+v29 <- Compare v21, '===', v28
+v30 <- LoadString 'f'
+v31 <- Construct v7, [v30]
+v32 <- CallComputedMethod v21, v31, []
+v33 <- Compare v21, '===', v32
+v34 <- CallMethod v23, 'f', []
+v35 <- Compare v23, '===', v34
+v36 <- LoadString 'y.f()'
+v37 <- LoadString 'f'
+v38 <- Construct v7, [v37]
+v39 <- CallComputedMethod v23, v38, []
+v40 <- Compare v23, '===', v39
+v41 <- CallMethod v23, 'f', []
+v42 <- Compare v21, '===', v41
+v43 <- CallMethod v21, 'f', []
+v44 <- Compare v23, '===', v43
+
+
+function f() {
+    return this;
+}
+this == null;
+String(this);
+this === this;
+function f13() {
+    return this;
+}
+this === f13();
+this === f();
+var x = {};
+var y = {};
+y.f = f;
+x.f = f;
+x === f();
+y === f();
+x === x.f();
+const v31 = new String("f");
+x === x[v31]();
+y === y.f();
+const v38 = new String("f");
+y === y[v38]();
+x === y.f();
+y === x.f();
+
+FuzzIL program written to corpus/this.fzil

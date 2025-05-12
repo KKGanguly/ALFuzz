@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '0'
+    BeginForLoopCondition -> v2
+        v3 <- LoadInteger '3'
+        v4 <- Compare v2, '<', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- UnaryOperation '++', v5
+    BeginForLoopBody -> v7
+        v8 <- LoadInteger '1'
+        v9 <- Compare v7, '==', v8
+        BeginIf v9
+            Break
+        EndIf
+    EndForLoop
+    BeginWhileLoopHeader
+        v10 <- LoadBoolean 'true'
+    BeginWhileLoopBody v10
+        v11 <- LoadString 'no loop, thank you'
+        ThrowException v11
+    EndWhileLoop
+EndPlainFunction
+v12 <- CallFunction v0, []
+
+
+function f() {
+    for (let i2 = 0; i2 < 3; ++i2) {
+        if (i2 == 1) {
+            break;
+        }
+    }
+    while (true) {
+        throw "no loop, thank you";
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-crbug-645888.fzil

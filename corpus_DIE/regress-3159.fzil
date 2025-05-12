@@ -1,0 +1,22 @@
+BeginTry
+    v0 <- CreateNamedVariable 'Uint32Array', 'none'
+    v1 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v2 <- LoadInteger '1'
+    v3 <- Construct v1, [v2]
+    v4 <- LoadInteger '2'
+    v5 <- LoadInteger '3'
+    v6 <- Construct v0, [v3, v4, v5]
+BeginCatch -> v7
+    v8 <- LoadString 'start offset of Uint32Array should be a multiple of 4'
+    v9 <- GetProperty v7, 'message'
+EndTryCatch
+
+
+try {
+    const v3 = new ArrayBuffer(1);
+    new Uint32Array(v3, 2, 3);
+} catch(e7) {
+    e7.message;
+}
+
+FuzzIL program written to corpus/regress-3159.fzil

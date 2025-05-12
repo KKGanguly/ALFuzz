@@ -1,0 +1,12 @@
+v0 <- CreateNamedVariable 'Error', 'none'
+v1 <- Construct v0, []
+v2 <- LoadString 'stack'
+v3 <- LoadInteger '0'
+v4 <- CreateNamedVariable 'Reflect', 'none'
+v5 <- CallMethod v4, 'get', [v1, v2, v3]
+
+
+const v1 = new Error();
+Reflect.get(v1, "stack", 0);
+
+FuzzIL program written to corpus/regress-693500.fzil

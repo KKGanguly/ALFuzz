@@ -1,0 +1,44 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadInteger '65535'
+v3 <- CreateNamedVariable 'endIndex', 'var', v2
+v4 <- LoadInteger '3'
+SetComputedProperty v1, v3, v4
+v5 <- LoadInteger '0'
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '2'
+    v8 <- LoadThis
+    SetElement v8, '1', v7
+    v9 <- LoadInteger '1'
+    Return v9
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v6
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'Object', 'none'
+v12 <- CallMethod v11, 'defineProperty', [v1, v5, v10]
+v13 <- LoadString '123'
+v14 <- LoadString ''
+v15 <- CallMethod v1, 'join', [v14]
+v16 <- LoadInteger '1'
+v17 <- DeleteElement v1, '1'
+v18 <- LoadString '1,2,'
+v19 <- LoadInteger '0'
+v20 <- LoadInteger '4'
+v21 <- CallMethod v1, 'join', []
+v22 <- CallMethod v21, 'slice', [v19, v20]
+
+
+var a = [];
+var endIndex = 65535;
+a[endIndex] = 3;
+function f6() {
+    this[1] = 2;
+    return 1;
+}
+Object.defineProperty(a, 0, { get: f6 });
+a.join("");
+delete a[1];
+a.join().slice(0, 4);
+
+FuzzIL program written to corpus/regress-3621.fzil

@@ -1,0 +1,199 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        v4 <- CallMethod v2, 'toString', []
+        v5 <- CreateNamedVariable 'result', 'var', v4
+    EndPlainFunction
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- LoadInteger '10'
+        v9 <- Compare v7, '<', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation v10, '++'
+    BeginForLoopBody -> v12
+        v13 <- CreateNamedVariable 'String', 'none'
+        v14 <- CallMethod v13, 'fromCharCode', [v12]
+        v15 <- CreateNamedVariable 's', 'var', v14
+        v16 <- CallFunction v1, [v15, v15]
+    EndForLoop
+    v17 <- BeginPlainFunction -> 
+        v18 <- LoadString 'ostehaps'
+        Return v18
+    EndPlainFunction
+    v19 <- CreateNamedVariable 'String', 'none'
+    v20 <- GetProperty v19, 'prototype'
+    SetProperty v20, 'toString', v17
+    BeginForLoopInitializer
+        v21 <- LoadInteger '0'
+    BeginForLoopCondition -> v22
+        v23 <- LoadInteger '10'
+        v24 <- Compare v22, '<', v23
+    BeginForLoopAfterthought v24 -> v25
+        v26 <- UnaryOperation v25, '++'
+    BeginForLoopBody -> v27
+        v28 <- CallMethod v19, 'fromCharCode', [v27]
+        v29 <- CreateNamedVariable 's', 'var', v28
+        v30 <- LoadString 'ostehaps'
+        v31 <- CallFunction v1, [v29, v30]
+    EndForLoop
+EndPlainFunction
+v32 <- CallFunction v0, []
+v33 <- BeginPlainFunction -> 
+    v34 <- BeginPlainFunction -> 
+        v35 <- LoadInteger '0'
+        Return v35
+    EndPlainFunction
+    v36 <- CreateNamedVariable 'Number', 'none'
+    v37 <- GetProperty v36, 'prototype'
+    SetProperty v37, 'toString', v34
+    v38 <- BeginPlainFunction -> v39, v40
+        v41 <- CallMethod v39, 'toString', []
+        v42 <- CreateNamedVariable 'result', 'var', v41
+    EndPlainFunction
+    BeginForLoopInitializer
+        v43 <- LoadInteger '0'
+    BeginForLoopCondition -> v44
+        v45 <- LoadInteger '10'
+        v46 <- Compare v44, '<', v45
+    BeginForLoopAfterthought v46 -> v47
+        v48 <- UnaryOperation v47, '++'
+    BeginForLoopBody -> v49
+        v50 <- LoadInteger '0'
+        v51 <- CallFunction v38, [v49, v50]
+    EndForLoop
+    v52 <- BeginPlainFunction -> 
+        v53 <- LoadInteger '42'
+        Return v53
+    EndPlainFunction
+    v54 <- GetProperty v36, 'prototype'
+    SetProperty v54, 'toString', v52
+    BeginForLoopInitializer
+        v55 <- LoadInteger '0'
+    BeginForLoopCondition -> v56
+        v57 <- LoadInteger '10'
+        v58 <- Compare v56, '<', v57
+    BeginForLoopAfterthought v58 -> v59
+        v60 <- UnaryOperation v59, '++'
+    BeginForLoopBody -> v61
+        v62 <- LoadInteger '42'
+        v63 <- CallFunction v38, [v61, v62]
+    EndForLoop
+EndPlainFunction
+v64 <- CallFunction v33, []
+v65 <- BeginPlainFunction -> 
+    v66 <- BeginPlainFunction -> 
+        v67 <- LoadInteger '0'
+        Return v67
+    EndPlainFunction
+    v68 <- CreateNamedVariable 'Boolean', 'none'
+    v69 <- GetProperty v68, 'prototype'
+    SetProperty v69, 'toString', v66
+    v70 <- BeginPlainFunction -> v71, v72
+        v73 <- CallMethod v71, 'toString', []
+        v74 <- CreateNamedVariable 'result', 'var', v73
+    EndPlainFunction
+    BeginForLoopInitializer
+        v75 <- LoadInteger '0'
+    BeginForLoopCondition -> v76
+        v77 <- LoadInteger '10'
+        v78 <- Compare v76, '<', v77
+    BeginForLoopAfterthought v78 -> v79
+        v80 <- UnaryOperation v79, '++'
+    BeginForLoopBody -> v81
+        v82 <- LoadInteger '2'
+        v83 <- BinaryOperation v81, '%', v82
+        v84 <- LoadInteger '0'
+        v85 <- Compare v83, '==', v84
+        v86 <- LoadInteger '0'
+        v87 <- CallFunction v70, [v85, v86]
+    EndForLoop
+    v88 <- BeginPlainFunction -> 
+        v89 <- LoadInteger '42'
+        Return v89
+    EndPlainFunction
+    v90 <- GetProperty v68, 'prototype'
+    SetProperty v90, 'toString', v88
+    BeginForLoopInitializer
+        v91 <- LoadInteger '0'
+    BeginForLoopCondition -> v92
+        v93 <- LoadInteger '10'
+        v94 <- Compare v92, '<', v93
+    BeginForLoopAfterthought v94 -> v95
+        v96 <- UnaryOperation v95, '++'
+    BeginForLoopBody -> v97
+        v98 <- LoadInteger '2'
+        v99 <- BinaryOperation v97, '%', v98
+        v100 <- LoadInteger '0'
+        v101 <- Compare v99, '==', v100
+        v102 <- LoadInteger '42'
+        v103 <- CallFunction v70, [v101, v102]
+    EndForLoop
+EndPlainFunction
+v104 <- CallFunction v65, []
+
+
+function testString() {
+    function f(a2, a3) {
+        var result = a2.toString();
+    }
+    for (let i7 = 0; i7 < 10; i7++) {
+        var s = String.fromCharCode(i7);
+        f(s, s);
+    }
+    function f17() {
+        return "ostehaps";
+    }
+    const t11 = String.prototype;
+    t11.toString = f17;
+    for (let i22 = 0; i22 < 10; i22++) {
+        var s = String.fromCharCode(i22);
+        f(s, "ostehaps");
+    }
+}
+testString();
+function testNumber() {
+    function f34() {
+        return 0;
+    }
+    const t23 = Number.prototype;
+    t23.toString = f34;
+    function f(a39, a40) {
+        var result = a39.toString();
+    }
+    for (let i44 = 0; i44 < 10; i44++) {
+        f(i44, 0);
+    }
+    function f52() {
+        return 42;
+    }
+    const t34 = Number.prototype;
+    t34.toString = f52;
+    for (let i56 = 0; i56 < 10; i56++) {
+        f(i56, 42);
+    }
+}
+testNumber();
+function testBoolean() {
+    function f66() {
+        return 0;
+    }
+    const t45 = Boolean.prototype;
+    t45.toString = f66;
+    function f(a71, a72) {
+        var result = a71.toString();
+    }
+    for (let i76 = 0; i76 < 10; i76++) {
+        f((i76 % 2) == 0, 0);
+    }
+    function f88() {
+        return 42;
+    }
+    const t56 = Boolean.prototype;
+    t56.toString = f88;
+    for (let i92 = 0; i92 < 10; i92++) {
+        f((i92 % 2) == 0, 42);
+    }
+}
+testBoolean();
+
+FuzzIL program written to corpus/value-callic-prototype-change.fzil

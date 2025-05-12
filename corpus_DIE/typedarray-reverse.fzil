@@ -1,0 +1,176 @@
+v0 <- BeginPlainFunction -> v1
+    Return v1
+EndPlainFunction
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- GetProperty v2, 'prototype'
+SetProperty v0, 'prototype', v3
+v4 <- CreateNamedVariable 'Uint8Array', 'none'
+v5 <- CreateNamedVariable 'Int8Array', 'none'
+v6 <- CreateNamedVariable 'Uint16Array', 'none'
+v7 <- CreateNamedVariable 'Int16Array', 'none'
+v8 <- CreateNamedVariable 'Uint32Array', 'none'
+v9 <- CreateNamedVariable 'Int32Array', 'none'
+v10 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v11 <- CreateNamedVariable 'Float32Array', 'none'
+v12 <- CreateNamedVariable 'Float64Array', 'none'
+v13 <- CreateArray [v4, v5, v6, v7, v8, v9, v10, v11, v12, v0]
+v14 <- CreateNamedVariable 'arrayConstructors', 'var', v13
+v15 <- BeginPlainFunction -> v16, v17, v18
+    v19 <- GetProperty v16, '__proto__'
+    v20 <- GetProperty v18, 'prototype'
+    v21 <- GetProperty v17, 'length'
+    v22 <- GetProperty v16, 'length'
+    BeginForLoopInitializer
+        v23 <- LoadInteger '0'
+    BeginForLoopCondition -> v24
+        v25 <- GetProperty v16, 'length'
+        v26 <- Compare v24, '<', v25
+    BeginForLoopAfterthought v26 -> v27
+        v28 <- UnaryOperation '++', v27
+    BeginForLoopBody -> v29
+        v30 <- GetComputedProperty v17, v29
+        v31 <- GetComputedProperty v16, v29
+    EndForLoop
+EndPlainFunction
+BeginForOfLoop v14 -> v32
+    v33 <- LoadInteger '1'
+    v34 <- LoadInteger '2'
+    v35 <- LoadInteger '3'
+    v36 <- CreateArray [v33, v34, v35]
+    v37 <- Construct v32, [v36]
+    v38 <- CreateNamedVariable 'a', 'var', v37
+    v39 <- CallMethod v38, 'reverse', []
+    v40 <- LoadInteger '3'
+    v41 <- LoadInteger '2'
+    v42 <- LoadInteger '1'
+    v43 <- CreateArray [v40, v41, v42]
+    v44 <- LoadInteger '3'
+    v45 <- LoadInteger '2'
+    v46 <- LoadInteger '1'
+    v47 <- CreateArray [v44, v45, v46]
+    v48 <- LoadInteger '1'
+    v49 <- LoadInteger '2'
+    v50 <- LoadInteger '3'
+    v51 <- LoadInteger '4'
+    v52 <- CreateArray [v48, v49, v50, v51]
+    v53 <- Construct v32, [v52]
+    Reassign v38, v53
+    v54 <- CallMethod v38, 'reverse', []
+    v55 <- LoadInteger '4'
+    v56 <- LoadInteger '3'
+    v57 <- LoadInteger '2'
+    v58 <- LoadInteger '1'
+    v59 <- CreateArray [v55, v56, v57, v58]
+    v60 <- LoadInteger '4'
+    v61 <- LoadInteger '3'
+    v62 <- LoadInteger '2'
+    v63 <- LoadInteger '1'
+    v64 <- CreateArray [v60, v61, v62, v63]
+    v65 <- Compare v32, '!=', v0
+    BeginIf v65
+        v66 <- BeginPlainFunction -> 
+            v67 <- LoadInteger '0'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `length`, v67
+            v68 <- EndObjectLiteral
+            v69 <- GetProperty v38, 'reverse'
+            v70 <- CallMethod v69, 'call', [v68]
+        EndPlainFunction
+        v71 <- CallFunction v66, []
+        v72 <- CreateNamedVariable 'TypeError', 'none'
+    BeginElse
+        v73 <- LoadInteger '2'
+        v74 <- LoadInteger '5'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `length`, v73
+            ObjectLiteralAddElement `1`, v74
+        v75 <- EndObjectLiteral
+        v76 <- CreateNamedVariable 'x', 'var', v75
+        v77 <- GetProperty v38, 'reverse'
+        v78 <- CallMethod v77, 'call', [v76]
+        v79 <- LoadInteger '2'
+        v80 <- GetProperty v76, 'length'
+        v81 <- LoadString '1'
+        v82 <- CreateNamedVariable 'Object', 'none'
+        v83 <- CallMethod v82, 'hasOwnProperty', [v76, v81]
+        v84 <- LoadInteger '5'
+        v85 <- GetElement v76, '0'
+    EndIf
+    v86 <- LoadInteger '0'
+    v87 <- GetProperty v38, 'reverse'
+    v88 <- GetProperty v87, 'length'
+    v89 <- Compare v32, '!=', v0
+    BeginIf v89
+        v90 <- LoadInteger '1'
+        v91 <- LoadInteger '2'
+        v92 <- LoadInteger '3'
+        v93 <- LoadInteger '4'
+        v94 <- LoadInteger '5'
+        v95 <- LoadInteger '6'
+        v96 <- LoadInteger '7'
+        v97 <- LoadInteger '8'
+        v98 <- LoadInteger '9'
+        v99 <- LoadInteger '10'
+        v100 <- CreateArray [v90, v91, v92, v93, v94, v95, v96, v97, v98, v99]
+        v101 <- Construct v32, [v100]
+        v102 <- CreateNamedVariable 'array', 'var', v101
+        v103 <- BeginArrowFunction -> 
+            v104 <- CallMethod v102, 'reverse', []
+            Return v104
+        EndArrowFunction
+        v105 <- CallFunction v103, []
+        v106 <- CreateNamedVariable 'TypeError', 'none'
+    EndIf
+EndForOfLoop
+
+
+function ArrayMaker(a1) {
+    return a1;
+}
+ArrayMaker.prototype = Array.prototype;
+var arrayConstructors = [Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,Uint8ClampedArray,Float32Array,Float64Array,ArrayMaker];
+function assertArrayLikeEquals(a16, a17, a18) {
+    a16.__proto__;
+    a18.prototype;
+    a17.length;
+    a16.length;
+    for (let i24 = 0; i24 < a16.length; ++i24) {
+        a17[i24];
+        a16[i24];
+    }
+}
+for (const v32 of arrayConstructors) {
+    const v37 = new v32([1,2,3]);
+    var a = v37;
+    a.reverse();
+    [3,2,1];
+    [3,2,1];
+    const v53 = new v32([1,2,3,4]);
+    (a = v53).reverse();
+    [4,3,2,1];
+    [4,3,2,1];
+    if (v32 != ArrayMaker) {
+        function f66() {
+            const v68 = { length: 0 };
+            a.reverse.call(v68);
+        }
+        f66();
+    } else {
+        var x = { length: 2, 1: 5 };
+        a.reverse.call(x);
+        x.length;
+        Object.hasOwnProperty(x, "1");
+        x[0];
+    }
+    a.reverse.length;
+    if (v32 != ArrayMaker) {
+        const v101 = new v32([1,2,3,4,5,6,7,8,9,10]);
+        var array = v101;
+        const v103 = () => {
+            return array.reverse();
+        };
+        v103();
+    }
+}
+
+FuzzIL program written to corpus/typedarray-reverse.fzil

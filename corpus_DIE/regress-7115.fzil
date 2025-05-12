@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginClassDefinition v1
+    EndClassDefinition
+EndPlainFunction
+v3 <- CreateNamedVariable 'Uint8Array', 'none'
+v4 <- GetProperty v3, '__proto__'
+v5 <- CreateNamedVariable 'TypedArray', 'let', v4
+v6 <- CreateNamedVariable 'RegExp', 'none'
+v7 <- CallFunction v0, [v6]
+v8 <- CreateNamedVariable 'Promise', 'none'
+v9 <- CallFunction v0, [v8]
+v10 <- CreateNamedVariable 'Array', 'none'
+v11 <- CallFunction v0, [v10]
+v12 <- CallFunction v0, [v5]
+v13 <- CallFunction v0, [v3]
+v14 <- CreateNamedVariable 'Int8Array', 'none'
+v15 <- CallFunction v0, [v14]
+v16 <- CreateNamedVariable 'Uint16Array', 'none'
+v17 <- CallFunction v0, [v16]
+v18 <- CreateNamedVariable 'Int16Array', 'none'
+v19 <- CallFunction v0, [v18]
+v20 <- CreateNamedVariable 'Uint32Array', 'none'
+v21 <- CallFunction v0, [v20]
+v22 <- CreateNamedVariable 'Int32Array', 'none'
+v23 <- CallFunction v0, [v22]
+v24 <- CreateNamedVariable 'Float32Array', 'none'
+v25 <- CallFunction v0, [v24]
+v26 <- CreateNamedVariable 'Float64Array', 'none'
+v27 <- CallFunction v0, [v26]
+v28 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v29 <- CallFunction v0, [v28]
+
+
+function TestBuiltinSubclassing(a1) {
+    class C2 extends a1 {
+    }
+}
+let TypedArray = Uint8Array.__proto__;
+TestBuiltinSubclassing(RegExp);
+TestBuiltinSubclassing(Promise);
+TestBuiltinSubclassing(Array);
+TestBuiltinSubclassing(TypedArray);
+TestBuiltinSubclassing(Uint8Array);
+TestBuiltinSubclassing(Int8Array);
+TestBuiltinSubclassing(Uint16Array);
+TestBuiltinSubclassing(Int16Array);
+TestBuiltinSubclassing(Uint32Array);
+TestBuiltinSubclassing(Int32Array);
+TestBuiltinSubclassing(Float32Array);
+TestBuiltinSubclassing(Float64Array);
+TestBuiltinSubclassing(Uint8ClampedArray);
+
+FuzzIL program written to corpus/regress-7115.fzil

@@ -1,0 +1,55 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'array', 'var', v0
+v2 <- LoadInteger '0'
+v3 <- CreateNamedVariable 'v', 'var', v2
+v4 <- CreateNamedVariable 'Array', 'none'
+v5 <- GetProperty v4, 'prototype'
+v6 <- LoadString '0'
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadString 'get '
+    v9 <- BinaryOperation v8, '+', v3
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> v11
+    Update v3, '+', v11
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v7
+    ObjectLiteralAddProperty `set`, v10
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'Object', 'none'
+v14 <- CallMethod v13, 'defineProperty', [v5, v6, v12]
+v15 <- LoadInteger '10'
+SetElement v1, '0', v15
+v16 <- LoadInteger '0'
+v17 <- GetProperty v1, 'length'
+v18 <- LoadInteger '10'
+v19 <- LoadString 'get 10'
+v20 <- GetElement v1, '0'
+v21 <- LoadInteger '100'
+v22 <- CallMethod v1, 'push', [v21]
+v23 <- LoadInteger '1'
+v24 <- GetProperty v1, 'length'
+v25 <- LoadInteger '110'
+v26 <- LoadString 'get 110'
+v27 <- GetElement v1, '0'
+
+
+var array = [];
+var v = 0;
+const v5 = Array.prototype;
+function f7() {
+    return "get " + v;
+}
+function f10(a11) {
+    v += a11;
+}
+Object.defineProperty(v5, "0", { get: f7, set: f10 });
+array[0] = 10;
+array.length;
+array[0];
+array.push(100);
+array.length;
+array[0];
+
+FuzzIL program written to corpus/array-push2.fzil

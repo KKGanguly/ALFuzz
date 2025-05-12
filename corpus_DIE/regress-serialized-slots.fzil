@@ -1,0 +1,84 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '10000'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- LoadThis
+        v11 <- LoadInteger '10'
+        v12 <- CallMethod v1, 'call', [v10, v11]
+    EndForLoop
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14
+    v15 <- LoadThis
+    v16 <- CreateNamedVariable 'func', 'var', v15
+    v17 <- LoadArguments
+    v18 <- LoadInteger '1'
+    v19 <- CreateNamedVariable 'Array', 'none'
+    v20 <- GetProperty v19, 'prototype'
+    v21 <- GetProperty v20, 'slice'
+    v22 <- CallMethod v21, 'call', [v17, v18]
+    v23 <- CreateNamedVariable 'args', 'var', v22
+    v24 <- BeginPlainFunction -> 
+        v25 <- LoadArguments
+        v26 <- LoadInteger '0'
+        v27 <- GetProperty v19, 'prototype'
+        v28 <- GetProperty v27, 'slice'
+        v29 <- CallMethod v28, 'call', [v25, v26]
+        v30 <- CallMethod v23, 'concat', [v29]
+        v31 <- CallMethod v16, 'apply', [v14, v30]
+        Return v31
+    EndPlainFunction
+    Return v24
+EndPlainFunction
+v32 <- CreateNamedVariable 'Function', 'none'
+v33 <- GetProperty v32, 'prototype'
+SetProperty v33, 'bind', v13
+v34 <- BeginPlainFunction -> v35, v36
+    v37 <- BinaryOperation v35, '+', v36
+    Return v37
+EndPlainFunction
+v38 <- BeginPlainFunction -> v39
+    v40 <- LoadThis
+    v41 <- CallMethod v34, 'bind', [v40, v39]
+    v42 <- LoadInteger '10'
+    v43 <- BinaryOperation v39, '+', v42
+    v44 <- CallFunction v0, [v41, v43]
+EndPlainFunction
+v45 <- LoadInteger '1'
+v46 <- CallFunction v38, [v45]
+v47 <- LoadInteger '42'
+v48 <- CallFunction v38, [v47]
+v49 <- LoadInteger '239'
+v50 <- CallFunction v38, [v49]
+
+
+function runner(a1, a2) {
+    for (let i4 = 0; i4 < 10000; i4++) {
+        a1.call(this, 10);
+    }
+}
+function f13(a14) {
+    var func = this;
+    var args = Array.prototype.slice.call(arguments, 1);
+    function bound() {
+        return func.apply(a14, args.concat(Array.prototype.slice.call(arguments, 0)));
+    }
+    return bound;
+}
+const t13 = Function.prototype;
+t13.bind = f13;
+function sum(a35, a36) {
+    return a35 + a36;
+}
+function test(a39) {
+    runner(sum.bind(this, a39), a39 + 10);
+}
+test(1);
+test(42);
+test(239);
+
+FuzzIL program written to corpus/regress-serialized-slots.fzil

@@ -1,0 +1,65 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- BinaryOperation v1, '*', v2
+    v4 <- LoadInteger '1'
+    v5 <- BinaryOperation v3, '-', v4
+    v6 <- CreateNamedVariable 'xp', 'var', v5
+    Return v6
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadUndefined
+    v10 <- CreateNamedVariable 'i', 'var', v9
+    BeginForLoopInitializer
+        v11 <- LoadInteger '0'
+    BeginForLoopCondition -> v12
+        v13 <- Compare v12, '<', v8
+    BeginForLoopAfterthought v13 -> v14
+        v15 <- UnaryOperation v14, '++'
+    BeginForLoopBody -> v16
+        BeginForLoopInitializer
+            v17 <- LoadInteger '0'
+        BeginForLoopCondition -> v18
+            v19 <- Compare v18, '<', v8
+        BeginForLoopAfterthought v19 -> v20
+            v21 <- UnaryOperation v20, '++'
+        BeginForLoopBody -> v22
+            v23 <- LoadInteger '100'
+            v24 <- BinaryOperation v16, '/', v23
+            v25 <- CallFunction v0, [v24]
+            Reassign v10, v25
+        EndForLoop
+    EndForLoop
+    v26 <- LoadInteger '1'
+    v27 <- BinaryOperation v8, '-', v26
+    v28 <- LoadInteger '100'
+    v29 <- BinaryOperation v27, '/', v28
+    v30 <- LoadInteger '1'
+    v31 <- BinaryOperation v10, '+', v30
+EndPlainFunction
+v32 <- LoadInteger '150'
+v33 <- CallFunction v7, [v32]
+v34 <- LoadInteger '200'
+v35 <- CallFunction v7, [v34]
+v36 <- LoadInteger '350'
+v37 <- CallFunction v7, [v36]
+
+
+function test(a1) {
+    var xp = (a1 * 1) - 1;
+    return xp;
+}
+function check(a8) {
+    var i;
+    for (let i12 = 0; i12 < a8; i12++) {
+        for (let i18 = 0; i18 < a8; i18++) {
+            i = test(i12 / 100);
+        }
+    }
+    (a8 - 1) / 100;
+    i + 1;
+}
+check(150);
+check(200);
+check(350);
+
+FuzzIL program written to corpus/regress-1181.fzil

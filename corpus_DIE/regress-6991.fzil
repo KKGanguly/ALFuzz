@@ -1,0 +1,42 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'x'
+    Return v2
+EndPlainFunction
+v3 <- LoadUndefined
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CallFunction v0, [v4]
+v6 <- LoadUndefined
+v7 <- LoadInteger '1'
+v8 <- CallFunction v0, [v7]
+v9 <- LoadUndefined
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CallFunction v0, [v10]
+v12 <- LoadUndefined
+v13 <- LoadInteger '1'
+v14 <- CallFunction v0, [v13]
+v15 <- LoadUndefined
+BeginObjectLiteral
+v16 <- EndObjectLiteral
+v17 <- CallFunction v0, [v16]
+v18 <- CallFunction v0, []
+v19 <- LoadUndefined
+v20 <- LoadInteger '1'
+v21 <- CallFunction v0, [v20]
+v22 <- CallFunction v0, []
+
+
+function foo(a1) {
+    return a1.x;
+}
+foo({});
+foo(1);
+foo({});
+foo(1);
+foo({});
+foo();
+foo(1);
+foo();
+
+FuzzIL program written to corpus/regress-6991.fzil

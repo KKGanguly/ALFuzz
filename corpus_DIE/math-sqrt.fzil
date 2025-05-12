@@ -1,0 +1,68 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CreateNamedVariable 'Math', 'none'
+    v4 <- CallMethod v3, 'sqrt', [v2]
+    v5 <- CreateNamedVariable 'isFinite', 'none'
+    v6 <- CallFunction v5, [v2]
+    BeginIf v6
+        v7 <- LoadInteger '0'
+        v8 <- Compare v2, '===', v7
+        v9 <- LoadInteger '1'
+        v10 <- BinaryOperation v9, '/', v2
+        v11 <- CreateNamedVariable 'Infinity', 'none'
+        v12 <- UnaryOperation '-', v11
+        v13 <- Compare v10, '==', v12
+        v14 <- BinaryOperation v8, '&&', v13
+        BeginIf v14
+            v15 <- LoadInteger '0'
+            Reassign v1, v15
+        EndIf
+        v16 <- LoadFloat '0.5'
+        v17 <- CallMethod v3, 'pow', [v2, v16]
+    EndIf
+EndPlainFunction
+v18 <- LoadInteger '2'
+v19 <- LoadInteger '4'
+v20 <- CallFunction v0, [v18, v19]
+v21 <- LoadFloat '0.1'
+v22 <- LoadFloat '0.01'
+v23 <- CallFunction v0, [v21, v22]
+v24 <- CreateNamedVariable 'NaN', 'none'
+v25 <- CallFunction v0, [v24, v24]
+v26 <- LoadInteger '1'
+v27 <- UnaryOperation '-', v26
+v28 <- CallFunction v0, [v24, v27]
+v29 <- LoadInteger '0'
+v30 <- UnaryOperation '+', v29
+v31 <- LoadInteger '0'
+v32 <- UnaryOperation '+', v31
+v33 <- CallFunction v0, [v30, v32]
+v34 <- LoadInteger '0'
+v35 <- UnaryOperation '-', v34
+v36 <- LoadInteger '0'
+v37 <- UnaryOperation '-', v36
+v38 <- CallFunction v0, [v35, v37]
+v39 <- CreateNamedVariable 'Infinity', 'none'
+v40 <- CallFunction v0, [v39, v39]
+v41 <- UnaryOperation '-', v39
+v42 <- CallFunction v0, [v24, v41]
+
+
+function test(a1, a2) {
+    Math.sqrt(a2);
+    if (isFinite(a2)) {
+        if ((a2 === 0) && ((1 / a2) == -Infinity)) {
+            a1 = 0;
+        }
+        Math.pow(a2, 0.5);
+    }
+}
+test(2, 4);
+test(0.1, 0.01);
+test(NaN, NaN);
+test(NaN, -1);
+test(+0, +0);
+test(-0, -0);
+test(Infinity, Infinity);
+test(NaN, -Infinity);
+
+FuzzIL program written to corpus/math-sqrt.fzil

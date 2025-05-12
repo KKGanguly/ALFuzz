@@ -1,0 +1,48 @@
+v0 <- BeginGeneratorFunction -> 
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v1 <- LoadBoolean 'true'
+    BeginForLoopAfterthought v1
+    BeginForLoopBody
+        v2 <- LoadBoolean 'true'
+        BeginIf v2
+        BeginElse
+            v3 <- Yield
+        EndIf
+    EndForLoop
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v4 <- LoadBoolean 'true'
+    BeginForLoopAfterthought v4
+    BeginForLoopBody
+        v5 <- LoadBoolean 'true'
+        BeginIf v5
+        BeginElse
+            v6 <- Yield
+        EndIf
+    EndForLoop
+EndGeneratorFunction
+v7 <- CallFunction v0, []
+v8 <- CallFunction v0, []
+v9 <- CallFunction v0, []
+
+
+function* opt() {
+    for (;;) {
+        if (true) {
+        } else {
+            yield;
+        }
+    }
+    for (;;) {
+        if (true) {
+        } else {
+            yield;
+        }
+    }
+}
+opt();
+opt();
+opt();
+
+FuzzIL program written to corpus/regress-794825.fzil

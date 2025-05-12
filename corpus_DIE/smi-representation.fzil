@@ -1,0 +1,103 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `smi`, v1
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable 'o', 'var', v2
+    v4 <- LoadInteger '0'
+    SetProperty v3, 'smi', v4
+    Return v3
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6, v7, v8
+    v9 <- GetProperty v6, 'smi'
+    v10 <- CreateNamedVariable 's', 'var', v9
+    v11 <- BinaryOperation v7, '-', v8
+    v12 <- CreateNamedVariable 'd', 'var', v11
+    v13 <- BinaryOperation v10, '+', v12
+    Reassign v10, v13
+    SetProperty v6, 'smi', v10
+    Return v6
+EndPlainFunction
+v14 <- CallFunction v0, []
+v15 <- CreateNamedVariable 'test', 'var', v14
+v16 <- CallFunction v0, []
+v17 <- LoadInteger '5'
+v18 <- LoadInteger '3'
+v19 <- CallFunction v5, [v16, v17, v18]
+v20 <- CallFunction v0, []
+v21 <- LoadInteger '6'
+v22 <- LoadInteger '2'
+v23 <- CallFunction v5, [v20, v21, v22]
+v24 <- CallFunction v0, []
+v25 <- LoadInteger '8'
+v26 <- LoadInteger '1'
+v27 <- CallFunction v5, [v24, v25, v26]
+v28 <- CreateNamedVariable 'val', 'var', v27
+v29 <- BeginPlainFunction -> 
+    v30 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `tag`, v30
+    v31 <- EndObjectLiteral
+    v32 <- CreateNamedVariable 'o', 'var', v31
+    v33 <- LoadInteger '10'
+    SetProperty v32, 'tag', v33
+    Return v32
+EndPlainFunction
+v34 <- BeginPlainFunction -> v35, v36
+    v37 <- GetProperty v36, 'tag'
+    v38 <- CreateNamedVariable 't', 'var', v37
+    SetProperty v35, 'smi', v38
+    Return v35
+EndPlainFunction
+v39 <- CallFunction v0, []
+v40 <- CallFunction v29, []
+v41 <- CallFunction v34, [v39, v40]
+v42 <- CallFunction v0, []
+v43 <- CallFunction v29, []
+v44 <- CallFunction v34, [v42, v43]
+v45 <- CallFunction v0, []
+v46 <- CallFunction v29, []
+v47 <- CallFunction v34, [v45, v46]
+v48 <- CreateNamedVariable 'val', 'var', v47
+v49 <- CallFunction v29, []
+v50 <- CreateNamedVariable 'overflow', 'var', v49
+v51 <- LoadInteger '2147483648'
+SetProperty v50, 'tag', v51
+v52 <- CallFunction v0, []
+v53 <- CallFunction v34, [v52, v50]
+v54 <- CreateNamedVariable 'val', 'var', v53
+
+
+function smi_field() {
+    var o = { smi: 1 };
+    o.smi = 0;
+    return o;
+}
+function check_smi_repr(a6, a7, a8) {
+    var s = a6.smi;
+    var d = a7 - a8;
+    a6.smi = s = s + d;
+    return a6;
+}
+var test = smi_field();
+check_smi_repr(smi_field(), 5, 3);
+check_smi_repr(smi_field(), 6, 2);
+var val = check_smi_repr(smi_field(), 8, 1);
+function tagged_smi_field() {
+    var o = { tag: false };
+    o.tag = 10;
+    return o;
+}
+function check_smi_repr_from_tagged(a35, a36) {
+    var t = a36.tag;
+    a35.smi = t;
+    return a35;
+}
+check_smi_repr_from_tagged(smi_field(), tagged_smi_field());
+check_smi_repr_from_tagged(smi_field(), tagged_smi_field());
+var val = check_smi_repr_from_tagged(smi_field(), tagged_smi_field());
+var overflow = tagged_smi_field();
+overflow.tag = 2147483648;
+var val = check_smi_repr_from_tagged(smi_field(), overflow);
+
+FuzzIL program written to corpus/smi-representation.fzil

@@ -1,0 +1,82 @@
+v0 <- CreateNamedVariable 'f0', 'none'
+v1 <- CallFunction v0, []
+v2 <- UnaryOperation '!', v1
+BeginIf v2
+    v3 <- LoadString 'Concurrent recompilation is disabled. Skipping this test.'
+    v4 <- CreateNamedVariable 'print', 'none'
+    v5 <- CallFunction v4, [v3]
+    v6 <- CreateNamedVariable 'quit', 'none'
+    v7 <- CallFunction v6, []
+EndIf
+v8 <- BeginPlainFunction -> v9
+    v10 <- BinaryOperation v9, '*', v9
+    v11 <- CreateNamedVariable 'xx', 'var', v10
+    v12 <- CallMethod v11, 'toString', []
+    v13 <- CreateNamedVariable 'xxstr', 'var', v12
+    v14 <- GetProperty v13, 'length'
+    Return v14
+EndPlainFunction
+v15 <- BeginPlainFunction -> v16
+    v17 <- CreateNamedVariable 'Math', 'none'
+    v18 <- CallMethod v17, 'sqrt', [v16]
+    v19 <- LoadInteger '0'
+    v20 <- BinaryOperation v18, '|', v19
+    v21 <- CreateNamedVariable 'xxx', 'var', v20
+    v22 <- CallMethod v21, 'toString', []
+    v23 <- CreateNamedVariable 'xxxstr', 'var', v22
+    v24 <- GetProperty v23, 'length'
+    Return v24
+EndPlainFunction
+v25 <- BeginPlainFunction -> v26
+    v27 <- BinaryOperation v26, '*', v26
+    Return v27
+EndPlainFunction
+v28 <- LoadInteger '1'
+v29 <- CallFunction v15, [v28]
+v30 <- CallFunction v8, [v29]
+v31 <- LoadInteger '2'
+v32 <- CallFunction v15, [v31]
+v33 <- CallFunction v8, [v32]
+v34 <- CallFunction v8, []
+v35 <- CallFunction v15, []
+v36 <- LoadInteger '3'
+v37 <- CallFunction v15, [v36]
+v38 <- CallFunction v8, [v37]
+v39 <- CallFunction v8, []
+v40 <- LoadString 'no sync'
+v41 <- CallFunction v15, []
+v42 <- LoadString 'no sync'
+v43 <- CallFunction v8, []
+v44 <- LoadString 'sync'
+v45 <- CallFunction v15, []
+v46 <- LoadString 'sync'
+
+
+if (!f0()) {
+    print("Concurrent recompilation is disabled. Skipping this test.");
+    quit();
+}
+function f(a9) {
+    var xx = a9 * a9;
+    var xxstr = xx.toString();
+    return xxstr.length;
+}
+function g(a16) {
+    var xxx = Math.sqrt(a16) | 0;
+    var xxxstr = xxx.toString();
+    return xxxstr.length;
+}
+function k(a26) {
+    return a26 * a26;
+}
+f(g(1));
+f(g(2));
+f();
+g();
+f(g(3));
+f();
+g();
+f();
+g();
+
+FuzzIL program written to corpus/manual-concurrent-recompile.fzil

@@ -1,0 +1,55 @@
+v0 <- LoadInteger '272'
+v1 <- LoadString '272'
+v2 <- CreateNamedVariable 'Number', 'none'
+v3 <- CallFunction v2, [v1]
+v4 <- LoadString '2ᄷ2'
+v5 <- CallFunction v2, [v4]
+v6 <- CreateNamedVariable 'isNaN', 'none'
+v7 <- CallFunction v6, [v5]
+v8 <- LoadString 'short-string'
+v9 <- LoadString '1'
+v10 <- CreateNamedVariable 's', 'var', v9
+BeginForLoopInitializer
+    v11 <- LoadInteger '0'
+BeginForLoopCondition -> v12
+    v13 <- LoadInteger '7'
+    v14 <- Compare v12, '<', v13
+BeginForLoopAfterthought v14 -> v15
+    v16 <- UnaryOperation v15, '++'
+BeginForLoopBody -> v17
+    Update v10, '+', v10
+EndForLoop
+v18 <- CallFunction v2, [v10]
+v19 <- CreateNamedVariable 'isFinite', 'none'
+v20 <- CallFunction v19, [v18]
+v21 <- LoadString 'ᄱ'
+v22 <- CreateNamedVariable 's', 'var', v21
+BeginForLoopInitializer
+    v23 <- LoadInteger '0'
+BeginForLoopCondition -> v24
+    v25 <- LoadInteger '7'
+    v26 <- Compare v24, '<', v25
+BeginForLoopAfterthought v26 -> v27
+    v28 <- UnaryOperation v27, '++'
+BeginForLoopBody -> v29
+    Update v22, '+', v22
+EndForLoop
+v30 <- CallFunction v2, [v22]
+v31 <- CallFunction v6, [v30]
+v32 <- LoadString 'long-string'
+
+
+Number("272");
+isNaN(Number("2ᄷ2"));
+var s = "1";
+for (let i12 = 0; i12 < 7; i12++) {
+    s += s;
+}
+isFinite(Number(s));
+var s = "ᄱ";
+for (let i24 = 0; i24 < 7; i24++) {
+    s += s;
+}
+isNaN(Number(s));
+
+FuzzIL program written to corpus/unicode-string-to-number.fzil

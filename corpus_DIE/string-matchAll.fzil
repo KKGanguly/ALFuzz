@@ -1,0 +1,230 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadRegExp '.' ''
+    v2 <- LoadString 'a'
+    v3 <- CallMethod v2, 'matchAll', [v1]
+    v4 <- CreateNamedVariable 'iter', 'const', v3
+    v5 <- BeginArrowFunction -> 
+        v6 <- LoadInteger '0'
+        v7 <- GetProperty v4, 'next'
+        v8 <- CallMethod v7, 'call', [v6]
+        Return v8
+    EndArrowFunction
+    v9 <- CallFunction v5, []
+    v10 <- CreateNamedVariable 'TypeError', 'none'
+EndPlainFunction
+v11 <- CallFunction v0, []
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadRegExp '.' ''
+    v14 <- LoadString 'a'
+    v15 <- CallMethod v14, 'matchAll', [v13]
+    v16 <- CreateNamedVariable 'Object', 'none'
+    v17 <- CallMethod v16, 'getPrototypeOf', [v15]
+    v18 <- CreateNamedVariable 'iterProto', 'const', v17
+    v19 <- CreateArray []
+    v20 <- CreateNamedVariable 'Symbol', 'none'
+    v21 <- GetProperty v20, 'iterator'
+    v22 <- CallComputedMethod v19, v21, []
+    v23 <- CallMethod v16, 'getPrototypeOf', [v22]
+    v24 <- CreateNamedVariable 'arrProto', 'const', v23
+    v25 <- CallMethod v16, 'getPrototypeOf', [v18]
+    v26 <- CallMethod v16, 'getPrototypeOf', [v24]
+EndPlainFunction
+v27 <- CallFunction v12, []
+v28 <- BeginPlainFunction -> v29, v30
+    v31 <- CallMethod v29, 'matchAll', [v30]
+    v32 <- CallMethod v31, 'next', []
+    v33 <- CreateNamedVariable 'next_result', 'const', v32
+    v34 <- LoadUndefined
+    v35 <- GetProperty v33, 'value'
+    v36 <- GetProperty v33, 'done'
+EndPlainFunction
+v37 <- LoadString 'a'
+v38 <- LoadRegExp 'b' ''
+v39 <- CallFunction v28, [v37, v38]
+v40 <- LoadString 'a'
+v41 <- LoadRegExp 'b' 'g'
+v42 <- CallFunction v28, [v40, v41]
+v43 <- LoadString 'a'
+v44 <- LoadString 'b'
+v45 <- CallFunction v28, [v43, v44]
+v46 <- BeginPlainFunction -> 
+    v47 <- LoadRegExp '.' ''
+    v48 <- LoadString 'ab'
+    v49 <- CallMethod v48, 'matchAll', [v47]
+    v50 <- CreateNamedVariable 'iter', 'const', v49
+    v51 <- CallMethod v50, 'next', []
+    v52 <- CreateNamedVariable 'next_result', 'let', v51
+    v53 <- LoadString 'a'
+    v54 <- CreateArray [v53]
+    v55 <- GetProperty v52, 'value'
+    v56 <- GetProperty v52, 'done'
+    v57 <- CallMethod v50, 'next', []
+    Reassign v52, v57
+    v58 <- LoadUndefined
+    v59 <- GetProperty v52, 'value'
+    v60 <- GetProperty v52, 'done'
+EndPlainFunction
+v61 <- CallFunction v46, []
+v62 <- BeginPlainFunction -> v63
+    v64 <- LoadRegExp '.' 'g'
+    v65 <- LoadString 'ab'
+    v66 <- CallMethod v65, 'matchAll', [v64]
+    v67 <- CreateNamedVariable 'iter', 'const', v66
+    v68 <- CallMethod v67, 'next', []
+    v69 <- CreateNamedVariable 'next_result', 'let', v68
+    v70 <- LoadString 'a'
+    v71 <- CreateArray [v70]
+    v72 <- GetProperty v69, 'value'
+    v73 <- GetProperty v69, 'done'
+    v74 <- CallMethod v67, 'next', []
+    Reassign v69, v74
+    v75 <- LoadString 'b'
+    v76 <- CreateArray [v75]
+    v77 <- GetProperty v69, 'value'
+    v78 <- GetProperty v69, 'done'
+    v79 <- CallMethod v67, 'next', []
+    Reassign v69, v79
+    v80 <- LoadUndefined
+    v81 <- GetProperty v69, 'value'
+    v82 <- GetProperty v69, 'done'
+EndPlainFunction
+v83 <- LoadRegExp '.' 'g'
+v84 <- CallFunction v62, [v83]
+v85 <- LoadString '.'
+v86 <- CallFunction v62, [v85]
+v87 <- BeginPlainFunction -> v88
+    v89 <- LoadString 'd'
+    v90 <- CallMethod v89, 'matchAll', [v88]
+    v91 <- CreateNamedVariable 'iter', 'const', v90
+    v92 <- CallMethod v91, 'next', []
+    v93 <- CreateNamedVariable 'next_result', 'let', v92
+    v94 <- LoadString ''
+    v95 <- CreateArray [v94]
+    v96 <- GetProperty v93, 'value'
+    v97 <- GetProperty v93, 'done'
+    v98 <- CallMethod v91, 'next', []
+    Reassign v93, v98
+    v99 <- LoadString ''
+    v100 <- CreateArray [v99]
+    v101 <- GetProperty v93, 'value'
+    v102 <- GetProperty v93, 'done'
+    v103 <- CallMethod v91, 'next', []
+    Reassign v93, v103
+    v104 <- LoadUndefined
+    v105 <- GetProperty v93, 'value'
+    v106 <- GetProperty v93, 'done'
+EndPlainFunction
+v107 <- LoadUndefined
+v108 <- CallFunction v87, [v107]
+v109 <- LoadRegExp '(?:)' 'g'
+v110 <- CallFunction v87, [v109]
+v111 <- LoadString ''
+v112 <- CallFunction v87, [v111]
+v113 <- BeginPlainFunction -> 
+    v114 <- LoadRegExp '.' 'g'
+    v115 <- CreateNamedVariable 'regex', 'const', v114
+    v116 <- LoadString 'abc'
+    v117 <- CreateNamedVariable 'string', 'const', v116
+    v118 <- CallMethod v115, 'exec', [v117]
+    v119 <- LoadInteger '1'
+    v120 <- GetProperty v115, 'lastIndex'
+    v121 <- CallMethod v117, 'matchAll', [v115]
+    v122 <- CreateNamedVariable 'iter', 'const', v121
+    v123 <- CallMethod v115, 'exec', [v117]
+    v124 <- LoadInteger '2'
+    v125 <- GetProperty v115, 'lastIndex'
+    v126 <- CallMethod v122, 'next', []
+    v127 <- CreateNamedVariable 'next_result', 'let', v126
+    v128 <- LoadString 'b'
+    v129 <- CreateArray [v128]
+    v130 <- GetProperty v127, 'value'
+    v131 <- GetProperty v127, 'done'
+    v132 <- LoadInteger '2'
+    v133 <- GetProperty v115, 'lastIndex'
+EndPlainFunction
+v134 <- CallFunction v113, []
+
+
+function TestReceiverNonString() {
+    const iter = ("a").matchAll(/./);
+    const v5 = () => {
+        return iter.next.call(0);
+    };
+    v5();
+}
+TestReceiverNonString();
+function TestAncestry() {
+    const iterProto = Object.getPrototypeOf(("a").matchAll(/./));
+    const arrProto = Object.getPrototypeOf(([])[Symbol.iterator]());
+    Object.getPrototypeOf(iterProto);
+    Object.getPrototypeOf(arrProto);
+}
+TestAncestry();
+function TestNoMatch(a29, a30) {
+    const next_result = a29.matchAll(a30).next();
+    next_result.value;
+    next_result.done;
+}
+TestNoMatch("a", /b/);
+TestNoMatch("a", /b/g);
+TestNoMatch("a", "b");
+function NonGlobalRegex() {
+    const iter = ("ab").matchAll(/./);
+    let next_result = iter.next();
+    ["a"];
+    next_result.value;
+    next_result.done;
+    (next_result = iter.next()).value;
+    next_result.done;
+}
+NonGlobalRegex();
+function TestGlobalRegex(a63) {
+    const iter = ("ab").matchAll(/./g);
+    let next_result = iter.next();
+    ["a"];
+    next_result.value;
+    next_result.done;
+    next_result = iter.next();
+    ["b"];
+    next_result.value;
+    next_result.done;
+    next_result = iter.next();
+    next_result.value;
+    next_result.done;
+}
+TestGlobalRegex(/./g);
+TestGlobalRegex(".");
+function TestEmptyGlobalRegExp(a88) {
+    const iter = ("d").matchAll(a88);
+    let next_result = iter.next();
+    [""];
+    next_result.value;
+    next_result.done;
+    next_result = iter.next();
+    [""];
+    next_result.value;
+    next_result.done;
+    next_result = iter.next();
+    next_result.value;
+    next_result.done;
+}
+TestEmptyGlobalRegExp(undefined);
+TestEmptyGlobalRegExp(/(?:)/g);
+TestEmptyGlobalRegExp("");
+function TestGlobalRegExpLastIndex() {
+    const regex = /./g;
+    const string = "abc";
+    regex.exec(string);
+    regex.lastIndex;
+    const iter = string.matchAll(regex);
+    regex.exec(string);
+    regex.lastIndex;
+    let next_result = iter.next();
+    ["b"];
+    next_result.value;
+    next_result.done;
+    regex.lastIndex;
+}
+TestGlobalRegExpLastIndex();
+
+FuzzIL program written to corpus/string-matchAll.fzil

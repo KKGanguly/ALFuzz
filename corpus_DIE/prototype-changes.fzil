@@ -1,0 +1,145 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'a'
+    v2 <- LoadThis
+    SetProperty v2, 'a', v1
+EndPlainFunction
+v3 <- Construct v0, []
+v4 <- CreateNamedVariable 'a', 'var', v3
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadString 'b'
+    v7 <- LoadThis
+    SetProperty v7, 'b', v6
+EndPlainFunction
+SetProperty v5, 'prototype', v4
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadString 'c'
+    v10 <- LoadThis
+    SetProperty v10, 'c', v9
+EndPlainFunction
+v11 <- Construct v5, []
+SetProperty v8, 'prototype', v11
+v12 <- Construct v8, []
+v13 <- CreateNamedVariable 'c', 'var', v12
+v14 <- BeginPlainFunction -> v15
+    v16 <- GetProperty v13, 'z'
+    v17 <- CreateNamedVariable 'result', 'var', v16
+EndPlainFunction
+v18 <- LoadUndefined
+v19 <- CallFunction v14, [v18]
+v20 <- LoadUndefined
+v21 <- CallFunction v14, [v20]
+v22 <- LoadUndefined
+v23 <- CallFunction v14, [v22]
+v24 <- LoadString 'z'
+SetProperty v4, 'z', v24
+v25 <- LoadString 'z'
+v26 <- CallFunction v14, [v25]
+v27 <- LoadString 'z'
+v28 <- CallFunction v14, [v27]
+v29 <- LoadFloat '1.5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v29
+v30 <- EndObjectLiteral
+v31 <- CreateNamedVariable 'p1', 'var', v30
+BeginObjectLiteral
+v32 <- EndObjectLiteral
+v33 <- CreateNamedVariable 'p2', 'var', v32
+SetProperty v33, '__proto__', v31
+BeginObjectLiteral
+v34 <- EndObjectLiteral
+v35 <- CreateNamedVariable 'p3', 'var', v34
+SetProperty v35, '__proto__', v33
+BeginObjectLiteral
+v36 <- EndObjectLiteral
+v37 <- CreateNamedVariable 'o', 'var', v36
+SetProperty v37, '__proto__', v35
+BeginForLoopInitializer
+    v38 <- LoadInteger '0'
+BeginForLoopCondition -> v39
+    v40 <- LoadInteger '2'
+    v41 <- Compare v39, '<', v40
+BeginForLoopAfterthought v41 -> v42
+    v43 <- UnaryOperation v42, '++'
+BeginForLoopBody -> v44
+    v45 <- GetProperty v37, 'foo'
+EndForLoop
+v46 <- LoadFloat '1.7'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v46
+v47 <- EndObjectLiteral
+v48 <- CreateNamedVariable 'p1a', 'var', v47
+SetProperty v33, '__proto__', v48
+v49 <- BeginPlainFunction -> v50, v51
+    v52 <- GetProperty v50, 'foo'
+    v53 <- CreateNamedVariable 'result', 'var', v52
+EndPlainFunction
+v54 <- LoadFloat '1.7'
+v55 <- CallFunction v49, [v37, v54]
+v56 <- LoadFloat '1.7'
+v57 <- CallFunction v49, [v37, v56]
+v58 <- LoadFloat '1.7'
+v59 <- CallFunction v49, [v37, v58]
+v60 <- LoadString 'foo'
+v61 <- BeginPlainFunction -> 
+    v62 <- LoadString 'foo'
+    Return v62
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v61
+v63 <- EndObjectLiteral
+v64 <- CreateNamedVariable 'Object', 'none'
+v65 <- CallMethod v64, 'defineProperty', [v48, v60, v63]
+v66 <- LoadString 'foo'
+v67 <- CallFunction v49, [v37, v66]
+
+
+function A() {
+    this.a = "a";
+}
+const v3 = new A();
+var a = v3;
+function B() {
+    this.b = "b";
+}
+B.prototype = a;
+function C() {
+    this.c = "c";
+}
+const v11 = new B();
+C.prototype = v11;
+const v12 = new C();
+var c = v12;
+function f(a15) {
+    var result = c.z;
+}
+f(undefined);
+f(undefined);
+f(undefined);
+a.z = "z";
+f("z");
+f("z");
+var p1 = { foo: 1.5 };
+var p2 = {};
+p2.__proto__ = p1;
+var p3 = {};
+p3.__proto__ = p2;
+var o = {};
+o.__proto__ = p3;
+for (let i39 = 0; i39 < 2; i39++) {
+    o.foo;
+}
+var p1a = { foo: 1.7 };
+p2.__proto__ = p1a;
+function g(a50, a51) {
+    var result = a50.foo;
+}
+g(o, 1.7);
+g(o, 1.7);
+g(o, 1.7);
+function f61() {
+    return "foo";
+}
+Object.defineProperty(p1a, "foo", { get: f61 });
+g(o, "foo");
+
+FuzzIL program written to corpus/prototype-changes.fzil

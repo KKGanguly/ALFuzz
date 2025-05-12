@@ -1,0 +1,71 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'a', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '2'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- LoadInteger '42'
+    v10 <- BinaryOperation v9, '+', v1
+    BeginObjectLiteral
+    v11 <- EndObjectLiteral
+    v12 <- BinaryOperation v10, '-', v11
+    v13 <- CreateNamedVariable 'x', 'var', v12
+    v14 <- CreateNamedVariable 'print', 'none'
+    v15 <- CallFunction v14, [v13]
+    v16 <- LoadString ''
+    Reassign v1, v16
+EndForLoop
+v17 <- LoadFloat '1.4'
+v18 <- CreateNamedVariable 'b', 'var', v17
+v19 <- LoadInteger '0'
+v20 <- CreateNamedVariable 'val', 'var', v19
+v21 <- BeginPlainFunction -> 
+    v22 <- UnaryOperation v20, '++'
+    v23 <- LoadInteger '10'
+    Return v23
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v21
+v24 <- EndObjectLiteral
+v25 <- CreateNamedVariable 'o', 'var', v24
+BeginForLoopInitializer
+    v26 <- LoadInteger '0'
+BeginForLoopCondition -> v27
+    v28 <- LoadInteger '2'
+    v29 <- Compare v27, '<', v28
+BeginForLoopAfterthought v29 -> v30
+    v31 <- UnaryOperation v30, '++'
+BeginForLoopBody -> v32
+    v33 <- BinaryOperation v18, '+', v32
+    v34 <- BinaryOperation v33, '+', v25
+    v35 <- CreateNamedVariable 'x', 'var', v34
+    v36 <- LoadString ''
+    Reassign v18, v36
+EndForLoop
+v37 <- LoadInteger '2'
+
+
+var a;
+for (let i3 = 0; i3 < 2; i3++) {
+    const v10 = 42 + a;
+    var x = v10 - {};
+    print(x);
+    a = "";
+}
+var b = 1.4;
+var val = 0;
+function f21() {
+    val++;
+    return 10;
+}
+var o = { valueOf: f21 };
+for (let i27 = 0; i27 < 2; i27++) {
+    var x = (b + i27) + o;
+    b = "";
+}
+
+FuzzIL program written to corpus/regress-359525.fzil

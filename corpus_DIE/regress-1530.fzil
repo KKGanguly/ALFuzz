@@ -1,0 +1,169 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CreateNamedVariable 'f', 'var', v0
+v2 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'a', 'var', v3
+SetProperty v1, 'prototype', v4
+v5 <- GetProperty v1, 'prototype'
+v6 <- GetProperty v1, 'prototype'
+v7 <- GetProperty v6, 'foo'
+v8 <- LoadString 'bar'
+v9 <- Construct v1, []
+v10 <- GetProperty v9, 'foo'
+v11 <- LoadString 'bar'
+v12 <- Construct v1, []
+v13 <- CreateNamedVariable 'Object', 'none'
+v14 <- CallMethod v13, 'getPrototypeOf', [v12]
+v15 <- LoadString 'prototype'
+v16 <- CallMethod v13, 'getOwnPropertyDescriptor', [v1, v15]
+v17 <- GetProperty v16, 'value'
+v18 <- LoadString 'prototype'
+v19 <- CallMethod v13, 'getOwnPropertyDescriptor', [v1, v18]
+v20 <- GetProperty v19, 'writable'
+v21 <- LoadString 'baz'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v21
+v22 <- EndObjectLiteral
+v23 <- CreateNamedVariable 'b', 'var', v22
+v24 <- LoadString 'prototype'
+v25 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v23
+    ObjectLiteralAddProperty `writable`, v25
+v26 <- EndObjectLiteral
+v27 <- CallMethod v13, 'defineProperty', [v1, v24, v26]
+v28 <- GetProperty v1, 'prototype'
+v29 <- GetProperty v1, 'prototype'
+v30 <- GetProperty v29, 'foo'
+v31 <- LoadString 'baz'
+v32 <- Construct v1, []
+v33 <- GetProperty v32, 'foo'
+v34 <- LoadString 'baz'
+v35 <- Construct v1, []
+v36 <- CallMethod v13, 'getPrototypeOf', [v35]
+v37 <- LoadString 'prototype'
+v38 <- CallMethod v13, 'getOwnPropertyDescriptor', [v1, v37]
+v39 <- GetProperty v38, 'value'
+v40 <- LoadString 'prototype'
+v41 <- CallMethod v13, 'getOwnPropertyDescriptor', [v1, v40]
+v42 <- GetProperty v41, 'writable'
+v43 <- LoadString 'other'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v43
+v44 <- EndObjectLiteral
+v45 <- CreateNamedVariable 'c', 'var', v44
+SetProperty v1, 'prototype', v45
+v46 <- GetProperty v1, 'prototype'
+v47 <- GetProperty v1, 'prototype'
+v48 <- GetProperty v47, 'foo'
+v49 <- LoadString 'other'
+v50 <- Construct v1, []
+v51 <- GetProperty v50, 'foo'
+v52 <- LoadString 'other'
+v53 <- Construct v1, []
+v54 <- CallMethod v13, 'getPrototypeOf', [v53]
+v55 <- LoadString 'prototype'
+v56 <- CallMethod v13, 'getOwnPropertyDescriptor', [v1, v55]
+v57 <- GetProperty v56, 'value'
+v58 <- LoadString 'prototype'
+v59 <- CallMethod v13, 'getOwnPropertyDescriptor', [v1, v58]
+v60 <- GetProperty v59, 'writable'
+v61 <- LoadString 'final'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v61
+v62 <- EndObjectLiteral
+v63 <- CreateNamedVariable 'd', 'var', v62
+v64 <- LoadString 'prototype'
+v65 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v63
+    ObjectLiteralAddProperty `writable`, v65
+v66 <- EndObjectLiteral
+v67 <- CallMethod v13, 'defineProperty', [v1, v64, v66]
+v68 <- GetProperty v1, 'prototype'
+v69 <- GetProperty v1, 'prototype'
+v70 <- GetProperty v69, 'foo'
+v71 <- LoadString 'final'
+v72 <- Construct v1, []
+v73 <- GetProperty v72, 'foo'
+v74 <- LoadString 'final'
+v75 <- Construct v1, []
+v76 <- CallMethod v13, 'getPrototypeOf', [v75]
+v77 <- LoadString 'prototype'
+v78 <- CallMethod v13, 'getOwnPropertyDescriptor', [v1, v77]
+v79 <- GetProperty v78, 'value'
+v80 <- LoadString 'prototype'
+v81 <- CallMethod v13, 'getOwnPropertyDescriptor', [v1, v80]
+v82 <- GetProperty v81, 'writable'
+v83 <- LoadString ''use strict'; f.prototype = {}'
+v84 <- LoadString 'Object.defineProperty(f, 'prototype', { value: {} })'
+v85 <- LoadString 'name'
+BeginObjectLiteral
+v86 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v86
+v87 <- EndObjectLiteral
+v88 <- CallMethod v13, 'defineProperty', [v1, v85, v87]
+v89 <- LoadString 'length'
+BeginObjectLiteral
+v90 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v90
+v91 <- EndObjectLiteral
+v92 <- CallMethod v13, 'defineProperty', [v1, v89, v91]
+v93 <- LoadString 'Object.defineProperty(f, 'caller', { value: {} })'
+v94 <- LoadString 'Object.defineProperty(f, 'arguments', { value: {} })'
+
+
+function f0() {
+}
+var f = f0;
+var a = { foo: "bar" };
+f.prototype = a;
+f.prototype;
+f.prototype.foo;
+const v9 = new f();
+v9.foo;
+const v12 = new f();
+Object.getPrototypeOf(v12);
+Object.getOwnPropertyDescriptor(f, "prototype").value;
+Object.getOwnPropertyDescriptor(f, "prototype").writable;
+var b = { foo: "baz" };
+Object.defineProperty(f, "prototype", { value: b, writable: true });
+f.prototype;
+f.prototype.foo;
+const v32 = new f();
+v32.foo;
+const v35 = new f();
+Object.getPrototypeOf(v35);
+Object.getOwnPropertyDescriptor(f, "prototype").value;
+Object.getOwnPropertyDescriptor(f, "prototype").writable;
+var c = { foo: "other" };
+f.prototype = c;
+f.prototype;
+f.prototype.foo;
+const v50 = new f();
+v50.foo;
+const v53 = new f();
+Object.getPrototypeOf(v53);
+Object.getOwnPropertyDescriptor(f, "prototype").value;
+Object.getOwnPropertyDescriptor(f, "prototype").writable;
+var d = { foo: "final" };
+Object.defineProperty(f, "prototype", { value: d, writable: false });
+f.prototype;
+f.prototype.foo;
+const v72 = new f();
+v72.foo;
+const v75 = new f();
+Object.getPrototypeOf(v75);
+Object.getOwnPropertyDescriptor(f, "prototype").value;
+Object.getOwnPropertyDescriptor(f, "prototype").writable;
+const v86 = {};
+Object.defineProperty(f, "name", { value: v86 });
+const v90 = {};
+Object.defineProperty(f, "length", { value: v90 });
+
+FuzzIL program written to corpus/regress-1530.fzil

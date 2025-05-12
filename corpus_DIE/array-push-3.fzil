@@ -1,0 +1,203 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateNamedVariable 'a', 'const', v1
+    v3 <- BeginArrowFunction -> v4
+        v5 <- CallMethod v2, 'push', [v4]
+        Return v4
+    EndArrowFunction
+    v6 <- CreateNamedVariable 'bar', 'const', v3
+    v7 <- BeginArrowFunction -> v8
+        v9 <- CallFunction v6, [v8]
+        v10 <- CallFunction v6, [v8]
+        v11 <- CallMethod v2, 'push', [v9, v10]
+        Return v11
+    EndArrowFunction
+    v12 <- CreateNamedVariable 'foo', 'const', v7
+    v13 <- LoadInteger '1'
+    v14 <- CallFunction v12, [v13]
+    v15 <- LoadInteger '2'
+    v16 <- CallFunction v12, [v15]
+    v17 <- LoadInteger '3'
+    v18 <- CallFunction v12, [v17]
+    v19 <- LoadInteger '1'
+    v20 <- LoadInteger '1'
+    v21 <- LoadInteger '1'
+    v22 <- LoadInteger '1'
+    v23 <- LoadInteger '2'
+    v24 <- LoadInteger '2'
+    v25 <- LoadInteger '2'
+    v26 <- LoadInteger '2'
+    v27 <- LoadInteger '3'
+    v28 <- LoadInteger '3'
+    v29 <- LoadInteger '3'
+    v30 <- LoadInteger '3'
+    v31 <- CreateArray [v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30]
+EndPlainFunction
+v32 <- CallFunction v0, []
+v33 <- BeginPlainFunction -> 
+    v34 <- LoadInteger '1'
+    v35 <- CreateNamedVariable 'y', 'let', v34
+    v36 <- CreateArray []
+    v37 <- CreateNamedVariable 'a', 'const', v36
+    v38 <- BeginArrowFunction -> v39
+        v40 <- CallMethod v37, 'push', [v35]
+        Return v39
+    EndArrowFunction
+    v41 <- CreateNamedVariable 'bar', 'const', v38
+    v42 <- BeginArrowFunction -> v43
+        v44 <- CallFunction v41, [v43]
+        v45 <- CallFunction v41, [v43]
+        v46 <- CallMethod v37, 'push', [v44, v45]
+        Return v46
+    EndArrowFunction
+    v47 <- CreateNamedVariable 'foo', 'const', v42
+    v48 <- LoadInteger '1'
+    v49 <- CallFunction v47, [v48]
+    v50 <- LoadInteger '2'
+    Reassign v35, v50
+    v51 <- LoadInteger '2'
+    v52 <- CallFunction v47, [v51]
+    v53 <- LoadInteger '3'
+    Reassign v35, v53
+    v54 <- LoadInteger '3'
+    v55 <- CallFunction v47, [v54]
+    v56 <- LoadFloat '4.4'
+    Reassign v35, v56
+    v57 <- LoadInteger '4'
+    v58 <- CallFunction v47, [v57]
+    v59 <- LoadInteger '1'
+    v60 <- LoadInteger '1'
+    v61 <- LoadInteger '1'
+    v62 <- LoadInteger '1'
+    v63 <- LoadInteger '2'
+    v64 <- LoadInteger '2'
+    v65 <- LoadInteger '2'
+    v66 <- LoadInteger '2'
+    v67 <- LoadInteger '3'
+    v68 <- LoadInteger '3'
+    v69 <- LoadInteger '3'
+    v70 <- LoadInteger '3'
+    v71 <- LoadFloat '4.4'
+    v72 <- LoadFloat '4.4'
+    v73 <- LoadInteger '4'
+    v74 <- LoadInteger '4'
+    v75 <- CreateArray [v59, v60, v61, v62, v63, v64, v65, v66, v67, v68, v69, v70, v71, v72, v73, v74]
+EndPlainFunction
+v76 <- CallFunction v33, []
+v77 <- BeginPlainFunction -> 
+    v78 <- LoadInteger '1'
+    v79 <- CreateNamedVariable 'y', 'let', v78
+    v80 <- LoadFloat '0.5'
+    v81 <- CreateArray [v80]
+    v82 <- CreateNamedVariable 'a', 'const', v81
+    v83 <- BeginArrowFunction -> v84
+        v85 <- CallMethod v82, 'push', [v79]
+        Return v84
+    EndArrowFunction
+    v86 <- CreateNamedVariable 'bar', 'const', v83
+    v87 <- BeginArrowFunction -> v88
+        v89 <- CallFunction v86, [v88]
+        v90 <- CallFunction v86, [v88]
+        v91 <- CallMethod v82, 'push', [v89, v90]
+        Return v91
+    EndArrowFunction
+    v92 <- CreateNamedVariable 'foo', 'const', v87
+    v93 <- LoadInteger '1'
+    v94 <- CallFunction v92, [v93]
+    v95 <- LoadInteger '2'
+    Reassign v79, v95
+    v96 <- LoadInteger '2'
+    v97 <- CallFunction v92, [v96]
+    v98 <- LoadInteger '3'
+    Reassign v79, v98
+    v99 <- LoadInteger '3'
+    v100 <- CallFunction v92, [v99]
+    v101 <- LoadString '4'
+    Reassign v79, v101
+    v102 <- LoadInteger '4'
+    v103 <- CallFunction v92, [v102]
+    v104 <- LoadFloat '0.5'
+    v105 <- LoadInteger '1'
+    v106 <- LoadInteger '1'
+    v107 <- LoadInteger '1'
+    v108 <- LoadInteger '1'
+    v109 <- LoadInteger '2'
+    v110 <- LoadInteger '2'
+    v111 <- LoadInteger '2'
+    v112 <- LoadInteger '2'
+    v113 <- LoadInteger '3'
+    v114 <- LoadInteger '3'
+    v115 <- LoadInteger '3'
+    v116 <- LoadInteger '3'
+    v117 <- LoadString '4'
+    v118 <- LoadString '4'
+    v119 <- LoadInteger '4'
+    v120 <- LoadInteger '4'
+    v121 <- CreateArray [v104, v105, v106, v107, v108, v109, v110, v111, v112, v113, v114, v115, v116, v117, v118, v119, v120]
+EndPlainFunction
+v122 <- CallFunction v77, []
+
+
+function f0() {
+    const a = [];
+    const v3 = (a4) => {
+        a.push(a4);
+        return a4;
+    };
+    const bar = v3;
+    const v7 = (a8) => {
+        return a.push(bar(a8), bar(a8));
+    };
+    const foo = v7;
+    foo(1);
+    foo(2);
+    foo(3);
+    [1,1,1,1,2,2,2,2,3,3,3,3];
+}
+f0();
+function f33() {
+    let y = 1;
+    const a = [];
+    const v38 = (a39) => {
+        a.push(y);
+        return a39;
+    };
+    const bar = v38;
+    const v42 = (a43) => {
+        return a.push(bar(a43), bar(a43));
+    };
+    const foo = v42;
+    foo(1);
+    y = 2;
+    foo(2);
+    y = 3;
+    foo(3);
+    y = 4.4;
+    foo(4);
+    [1,1,1,1,2,2,2,2,3,3,3,3,4.4,4.4,4,4];
+}
+f33();
+function f77() {
+    let y = 1;
+    const a = [0.5];
+    const v83 = (a84) => {
+        a.push(y);
+        return a84;
+    };
+    const bar = v83;
+    const v87 = (a88) => {
+        return a.push(bar(a88), bar(a88));
+    };
+    const foo = v87;
+    foo(1);
+    y = 2;
+    foo(2);
+    y = 3;
+    foo(3);
+    y = "4";
+    foo(4);
+    [0.5,1,1,1,1,2,2,2,2,3,3,3,3,"4","4",4,4];
+}
+f77();
+
+FuzzIL program written to corpus/array-push-3.fzil

@@ -1,0 +1,22 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        v1 <- CallFunction v0, []
+    BeginCatch -> v2
+        v3 <- LoadRegExp '(b)' 'g'
+        v4 <- LoadString 'b'
+        v5 <- CallMethod v4, 'replace', [v3]
+    EndTryCatch
+EndPlainFunction
+v6 <- CallFunction v0, []
+
+
+function call_replace_close_to_stack_overflow() {
+    try {
+        call_replace_close_to_stack_overflow();
+    } catch(e2) {
+        ("b").replace(/(b)/g);
+    }
+}
+call_replace_close_to_stack_overflow();
+
+FuzzIL program written to corpus/regress-705934.fzil

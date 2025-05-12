@@ -1,0 +1,142 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginClassDefinition
+    EndClassDefinition
+    v2 <- BeginClassDefinition v1
+    EndClassDefinition
+    v3 <- Construct v2, []
+    v4 <- CreateNamedVariable 'd1', 'let', v3
+    v5 <- Construct v2, []
+    v6 <- CreateNamedVariable 'd2', 'let', v5
+EndPlainFunction
+v7 <- CallFunction v0, []
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '0'
+    v10 <- CreateNamedVariable 'called', 'let', v9
+    v11 <- BeginPlainFunction -> 
+        v12 <- UnaryOperation v10, '++'
+        v13 <- LoadThis
+        v14 <- CreateNamedVariable 'Array', 'none'
+        v15 <- CallMethod v14, 'isArray', [v13]
+    EndPlainFunction
+    v16 <- CreateNamedVariable 'Array', 'none'
+    v17 <- BeginClassDefinition v16
+    EndClassDefinition
+    v18 <- GetProperty v17, '__proto__'
+    v19 <- Construct v17, []
+    v20 <- CreateNamedVariable 'd1', 'let', v19
+    v21 <- CallMethod v16, 'isArray', [v20]
+    SetProperty v17, '__proto__', v11
+    v22 <- LoadInteger '0'
+    Reassign v10, v22
+    v23 <- Construct v17, []
+    v24 <- CreateNamedVariable 'd2', 'let', v23
+    v25 <- LoadInteger '1'
+    v26 <- CallMethod v16, 'isArray', [v24]
+EndPlainFunction
+v27 <- CallFunction v8, []
+v28 <- BeginPlainFunction -> 
+    v29 <- LoadInteger '0'
+    v30 <- CreateNamedVariable 'called', 'let', v29
+    v31 <- BeginPlainFunction -> 
+        v32 <- UnaryOperation v30, '++'
+        v33 <- LoadNull
+        v34 <- CreateNamedVariable 'exn', 'let', v33
+        BeginTry
+            v35 <- LoadThis
+            v36 <- GetProperty v35, 'byteLength'
+        BeginCatch -> v37
+            Reassign v34, v37
+        EndTryCatch
+        v38 <- CreateNamedVariable 'TypeError', 'none'
+        v39 <- TestInstanceOf v34, v38
+    EndPlainFunction
+    v40 <- CreateNamedVariable 'Uint8Array', 'none'
+    v41 <- BeginClassDefinition v40
+        BeginClassConstructor -> v42
+            v43 <- LoadInteger '10'
+            CallSuperConstructor [v43]
+        EndClassConstructor
+    EndClassDefinition
+    v44 <- GetProperty v41, '__proto__'
+    v45 <- Construct v41, []
+    v46 <- CreateNamedVariable 'd1', 'let', v45
+    v47 <- LoadInteger '10'
+    v48 <- GetProperty v46, 'byteLength'
+    SetProperty v41, '__proto__', v31
+    v49 <- LoadInteger '0'
+    Reassign v30, v49
+    v50 <- Construct v41, []
+    v51 <- CreateNamedVariable 'd2', 'let', v50
+    v52 <- LoadInteger '1'
+    v53 <- BeginPlainFunction -> 
+        v54 <- GetProperty v51, 'byteLength'
+    EndPlainFunction
+    v55 <- CallFunction v53, []
+    v56 <- CreateNamedVariable 'TypeError', 'none'
+EndPlainFunction
+v57 <- CallFunction v28, []
+
+
+function TestMaps() {
+    class C1 {
+    }
+    class C2 extends C1 {
+    }
+    const v3 = new C2();
+    let d1 = v3;
+    const v5 = new C2();
+    let d2 = v5;
+}
+TestMaps();
+function TestProtoModificationArray() {
+    let called = 0;
+    function F() {
+        called++;
+        Array.isArray(this);
+    }
+    class C17 extends Array {
+    }
+    C17.__proto__;
+    const v19 = new C17();
+    let d1 = v19;
+    Array.isArray(d1);
+    C17.__proto__ = F;
+    called = 0;
+    const v23 = new C17();
+    let d2 = v23;
+    Array.isArray(d2);
+}
+TestProtoModificationArray();
+function TestProtoModification() {
+    let called = 0;
+    function F() {
+        called++;
+        let exn = null;
+        try {
+            this.byteLength;
+        } catch(e37) {
+            exn = e37;
+        }
+        exn instanceof TypeError;
+    }
+    class C41 extends Uint8Array {
+        constructor() {
+            super(10);
+        }
+    }
+    C41.__proto__;
+    const v45 = new C41();
+    let d1 = v45;
+    d1.byteLength;
+    C41.__proto__ = F;
+    called = 0;
+    const v50 = new C41();
+    let d2 = v50;
+    function f53() {
+        d2.byteLength;
+    }
+    f53();
+}
+TestProtoModification();
+
+FuzzIL program written to corpus/classes-maps.fzil

@@ -1,0 +1,42 @@
+v0 <- BeginAsyncFunction -> 
+    v1 <- CreateNamedVariable 'Int8Array', 'none'
+    v2 <- LoadUndefined
+    v3 <- CreateNamedVariable 'Uint8Array', 'none'
+    v4 <- LoadInteger '65536'
+    v5 <- Construct v3, [v4]
+    v6 <- CreateArrayWithSpread [v2, ...v5]
+    v7 <- Construct v1, [v6]
+    v8 <- CreateArrayWithSpread [...v7]
+    v9 <- CreateNamedVariable 'a', 'var', v8
+    v10 <- CreateNamedVariable 'Proxy', 'none'
+    v11 <- CreateArray [v0]
+    v12 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v13 <- LoadUndefined
+    v14 <- GetProperty v13, 'prototype'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `set`, v12
+        ObjectLiteralAddProperty `done`, v14
+    v15 <- EndObjectLiteral
+    v16 <- Construct v10, [v11, v15]
+    v17 <- CreateNamedVariable 'p', 'var', v16
+EndAsyncFunction
+v18 <- CallFunction v0, []
+v19 <- CallFunction v0, []
+
+
+async function f() {
+    const v5 = new Uint8Array(65536);
+    const v7 = new Int8Array([,...v5]);
+    var a = [...v7];
+    const v11 = [f];
+    function f12() {
+    }
+    const v14 = undefined.prototype;
+    const v16 = new Proxy(v11, { set: f12, done: v14 });
+    var p = v16;
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-902608.fzil

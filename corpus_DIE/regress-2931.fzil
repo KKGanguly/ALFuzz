@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'BAM'
+    v2 <- CreateNamedVariable 'Error', 'none'
+    v3 <- CallFunction v2, [v1]
+    ThrowException v3
+EndPlainFunction
+v4 <- LoadThis
+SetProperty v4, 'ArrayBuffer', v0
+v5 <- CreateNamedVariable 'Uint8Array', 'none'
+v6 <- LoadInteger '100'
+v7 <- Construct v5, [v6]
+v8 <- CreateNamedVariable 'u8', 'var', v7
+v9 <- LoadInteger '100'
+v10 <- GetProperty v8, 'byteLength'
+
+
+function f0() {
+    throw Error("BAM");
+}
+this.ArrayBuffer = f0;
+const v7 = new Uint8Array(100);
+var u8 = v7;
+u8.byteLength;
+
+FuzzIL program written to corpus/regress-2931.fzil

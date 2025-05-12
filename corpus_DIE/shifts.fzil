@@ -1,0 +1,21 @@
+v0 <- LoadInteger '1073741823'
+v1 <- CreateNamedVariable 's1', 'var', v0
+v2 <- LoadInteger '2147483647'
+v3 <- LoadInteger '1'
+v4 <- BinaryOperation v1, '<<', v3
+v5 <- LoadInteger '1'
+v6 <- BinaryOperation v4, '+', v5
+v7 <- LoadInteger '1'
+v8 <- UnaryOperation '-', v7
+v9 <- CreateNamedVariable 's2', 'var', v8
+v10 <- LoadInteger '4294967295'
+v11 <- LoadInteger '0'
+v12 <- BinaryOperation v9, '>>>', v11
+
+
+var s1 = 1073741823;
+(s1 << 1) + 1;
+var s2 = -1;
+s2 >>> 0;
+
+FuzzIL program written to corpus/shifts.fzil

@@ -1,0 +1,54 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Worker'
+BeginIf v1
+    v2 <- CreateNamedVariable 'Worker', 'none'
+    v3 <- LoadString 'onmessage = function() {};'
+    v4 <- LoadString 'string'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `type`, v4
+    v5 <- EndObjectLiteral
+    v6 <- Construct v2, [v3, v5]
+    v7 <- CreateNamedVariable '__v_7', 'var', v6
+    v8 <- LoadUndefined
+    v9 <- CreateNamedVariable 'e', 'var', v8
+    v10 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v11 <- LoadInteger '2'
+    v12 <- LoadInteger '1000'
+    v13 <- BinaryOperation v11, '*', v12
+    v14 <- LoadInteger '1000'
+    v15 <- BinaryOperation v13, '*', v14
+    v16 <- Construct v10, [v15]
+    v17 <- CreateNamedVariable 'ab', 'var', v16
+    BeginTry
+        v18 <- CallMethod v7, 'postMessage', [v17]
+        v19 <- LoadBoolean 'false'
+        v20 <- CreateNamedVariable 'threw', 'none'
+        Reassign v20, v19
+    BeginCatch -> v21
+        v22 <- LoadString 'cloned'
+        v23 <- GetProperty v21, 'message'
+        v24 <- LoadBoolean 'true'
+        v25 <- CreateNamedVariable 'threw', 'none'
+        Reassign v25, v24
+    EndTryCatch
+    v26 <- CreateNamedVariable 'threw', 'none'
+    v27 <- LoadString 'Should throw when trying to serialize large message.'
+EndIf
+
+
+if (this.Worker) {
+    const v6 = new Worker("onmessage = function() {};", { type: "string" });
+    var __v_7 = v6;
+    var e;
+    const v16 = new ArrayBuffer((2 * 1000) * 1000);
+    var ab = v16;
+    try {
+        __v_7.postMessage(ab);
+        threw = false;
+    } catch(e21) {
+        e21.message;
+        threw = true;
+    }
+}
+
+FuzzIL program written to corpus/regress-crbug-514081.fzil

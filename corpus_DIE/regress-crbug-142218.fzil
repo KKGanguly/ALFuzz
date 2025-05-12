@@ -1,0 +1,60 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '16'
+v2 <- BinaryOperation v0, '<<', v1
+v3 <- CreateNamedVariable 'length', 'none'
+Reassign v3, v2
+v4 <- CreateNamedVariable 'Array', 'none'
+v5 <- CreateNamedVariable 'length', 'none'
+v6 <- Construct v4, [v5]
+v7 <- CreateNamedVariable 'a', 'none'
+Reassign v7, v6
+v8 <- BeginPlainFunction -> v9
+    v10 <- LoadInteger '42'
+    v11 <- CreateNamedVariable 'a', 'none'
+    SetComputedProperty v11, v9, v10
+EndPlainFunction
+v12 <- LoadInteger '1'
+v13 <- CallFunction v8, [v12]
+v14 <- CreateNamedVariable 'Object', 'none'
+v15 <- Construct v14, []
+v16 <- CallFunction v8, [v15]
+v17 <- LoadInteger '0'
+v18 <- CreateNamedVariable 'count', 'none'
+Reassign v18, v17
+BeginForLoopInitializer
+    v19 <- LoadInteger '0'
+BeginForLoopCondition -> v20
+    v21 <- Compare v20, '<', v5
+BeginForLoopAfterthought v21 -> v22
+    v23 <- UnaryOperation v22, '++'
+BeginForLoopBody -> v24
+    v25 <- CreateNamedVariable 'a', 'none'
+    v26 <- GetComputedProperty v25, v24
+    v27 <- LoadUndefined
+    v28 <- Compare v26, '!=', v27
+    BeginIf v28
+        v29 <- CreateNamedVariable 'count', 'none'
+        v30 <- UnaryOperation v29, '++'
+    EndIf
+EndForLoop
+v31 <- LoadInteger '1'
+v32 <- CreateNamedVariable 'count', 'none'
+
+
+length = 1 << 16;
+const v6 = new Array(length);
+a = v6;
+function insert_element(a9) {
+    a[a9] = 42;
+}
+insert_element(1);
+const v15 = new Object();
+insert_element(v15);
+count = 0;
+for (let i20 = 0; i20 < length; i20++) {
+    if (a[i20] != undefined) {
+        count++;
+    }
+}
+
+FuzzIL program written to corpus/regress-crbug-142218.fzil

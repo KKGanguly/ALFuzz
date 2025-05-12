@@ -1,0 +1,146 @@
+v0 <- LoadInteger '16'
+v1 <- LoadInteger '9'
+v2 <- BinaryOperation v0, '/', v1
+v3 <- CreateNamedVariable 'gdpRatio', 'var', v2
+v4 <- BeginPlainFunction -> v5, v6, v7, v8
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v5
+        ObjectLiteralAddProperty `y`, v6
+    v9 <- EndObjectLiteral
+    v10 <- LoadThis
+    SetProperty v10, 'ORIGIN', v9
+    v11 <- LoadThis
+    SetProperty v11, 'scale', v7
+    v12 <- LoadThis
+    SetProperty v12, 'mapHeight', v8
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14, v15, v16, v17
+    v18 <- LoadInteger '64'
+    v19 <- LoadFloat '0.25'
+    v20 <- BinaryOperation v18, '*', v19
+    v21 <- LoadThis
+    v22 <- GetProperty v21, 'scale'
+    v23 <- BinaryOperation v20, '*', v22
+    v24 <- CreateNamedVariable 'tileHeight', 'var', v23
+    v25 <- LoadInteger '128'
+    v26 <- LoadFloat '0.25'
+    v27 <- BinaryOperation v25, '*', v26
+    v28 <- LoadThis
+    v29 <- GetProperty v28, 'scale'
+    v30 <- BinaryOperation v27, '*', v29
+    v31 <- CreateNamedVariable 'tileWidth', 'var', v30
+    v32 <- LoadFloat '0.5'
+    v33 <- BinaryOperation v16, '*', v32
+    v34 <- LoadInteger '0'
+    v35 <- BinaryOperation v33, '||', v34
+    v36 <- CreateNamedVariable 'xOffset', 'var', v35
+    v37 <- LoadFloat '0.5'
+    v38 <- BinaryOperation v17, '*', v37
+    v39 <- LoadInteger '0'
+    v40 <- BinaryOperation v38, '||', v39
+    v41 <- CreateNamedVariable 'yOffset', 'var', v40
+    v42 <- BinaryOperation v36, '*', v3
+    v43 <- LoadThis
+    v44 <- GetProperty v43, 'ORIGIN'
+    v45 <- GetProperty v44, 'x'
+    v46 <- LoadThis
+    v47 <- GetProperty v46, 'scale'
+    v48 <- BinaryOperation v45, '*', v47
+    v49 <- BinaryOperation v42, '+', v48
+    v50 <- BinaryOperation v15, '*', v31
+    v51 <- BinaryOperation v50, '*', v3
+    v52 <- BinaryOperation v49, '-', v51
+    v53 <- BinaryOperation v14, '*', v31
+    v54 <- BinaryOperation v53, '*', v3
+    v55 <- BinaryOperation v52, '+', v54
+    v56 <- CreateNamedVariable 'xPos', 'var', v55
+    v57 <- BinaryOperation v41, '*', v3
+    v58 <- LoadThis
+    v59 <- GetProperty v58, 'ORIGIN'
+    v60 <- GetProperty v59, 'y'
+    v61 <- LoadThis
+    v62 <- GetProperty v61, 'scale'
+    v63 <- BinaryOperation v60, '*', v62
+    v64 <- BinaryOperation v57, '+', v63
+    v65 <- BinaryOperation v15, '*', v24
+    v66 <- BinaryOperation v65, '*', v3
+    v67 <- BinaryOperation v64, '+', v66
+    v68 <- BinaryOperation v14, '*', v24
+    v69 <- BinaryOperation v68, '*', v3
+    v70 <- BinaryOperation v67, '+', v69
+    v71 <- CreateNamedVariable 'yPos', 'var', v70
+    v72 <- BinaryOperation v31, '*', v3
+    v73 <- CreateNamedVariable 'Math', 'none'
+    v74 <- CallMethod v73, 'round', [v72]
+    v75 <- BinaryOperation v56, '-', v74
+    v76 <- LoadThis
+    v77 <- GetProperty v76, 'mapHeight'
+    v78 <- BinaryOperation v31, '*', v3
+    v79 <- CallMethod v73, 'round', [v78]
+    v80 <- BinaryOperation v77, '*', v79
+    v81 <- BinaryOperation v75, '+', v80
+    Reassign v56, v81
+    v82 <- CallMethod v73, 'floor', [v56]
+    v83 <- CallMethod v73, 'floor', [v71]
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v82
+        ObjectLiteralAddProperty `y`, v83
+    v84 <- EndObjectLiteral
+    Return v84
+EndPlainFunction
+v85 <- GetProperty v4, 'prototype'
+SetProperty v85, 'bar', v13
+v86 <- LoadInteger '10'
+v87 <- LoadInteger '20'
+v88 <- LoadFloat '2.5'
+v89 <- LoadInteger '400'
+v90 <- Construct v4, [v86, v87, v88, v89]
+v91 <- CreateNamedVariable 'f', 'var', v90
+v92 <- BeginPlainFunction -> 
+    v93 <- LoadFloat '1.1'
+    v94 <- LoadFloat '2.2'
+    v95 <- LoadFloat '3.3'
+    v96 <- LoadFloat '4.4'
+    v97 <- CallMethod v91, 'bar', [v93, v94, v95, v96]
+    v98 <- CreateNamedVariable 'b', 'var', v97
+    v99 <- LoadInteger '56529'
+    v100 <- GetProperty v98, 'x'
+    v101 <- LoadInteger '288'
+    v102 <- GetProperty v98, 'y'
+EndPlainFunction
+v103 <- CallFunction v92, []
+v104 <- CallFunction v92, []
+v105 <- CallFunction v92, []
+
+
+var gdpRatio = 16 / 9;
+function Foo(a5, a6, a7, a8) {
+    this.ORIGIN = { x: a5, y: a6 };
+    this.scale = a7;
+    this.mapHeight = a8;
+}
+function f13(a14, a15, a16, a17) {
+    var tileHeight = (64 * 0.25) * this.scale;
+    var tileWidth = (128 * 0.25) * this.scale;
+    var xOffset = (a16 * 0.5) || 0;
+    var yOffset = (a17 * 0.5) || 0;
+    var xPos = (((xOffset * gdpRatio) + (this.ORIGIN.x * this.scale)) - ((a15 * tileWidth) * gdpRatio)) + ((a14 * tileWidth) * gdpRatio);
+    var yPos = (((yOffset * gdpRatio) + (this.ORIGIN.y * this.scale)) + ((a15 * tileHeight) * gdpRatio)) + ((a14 * tileHeight) * gdpRatio);
+    const v82 = Math.floor(xPos = (xPos - Math.round(tileWidth * gdpRatio)) + (this.mapHeight * Math.round(tileWidth * gdpRatio)));
+    const v83 = Math.floor(yPos);
+    return { x: v82, y: v83 };
+}
+const t17 = Foo.prototype;
+t17.bar = f13;
+const v90 = new Foo(10, 20, 2.5, 400);
+var f = v90;
+function baz() {
+    var b = f.bar(1.1, 2.2, 3.3, 4.4);
+    b.x;
+    b.y;
+}
+baz();
+baz();
+baz();
+
+FuzzIL program written to corpus/regress-201590.fzil

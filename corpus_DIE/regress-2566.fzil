@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    SetComputedProperty v1, v2, v3
+EndPlainFunction
+v4 <- CreateArray []
+v5 <- CreateNamedVariable 'obj', 'var', v4
+v6 <- LoadString 'length'
+v7 <- LoadInteger '1'
+v8 <- CallFunction v0, [v5, v6, v7]
+v9 <- LoadInteger '0'
+v10 <- LoadInteger '5'
+v11 <- CallFunction v0, [v5, v9, v10]
+v12 <- LoadInteger '1'
+v13 <- GetProperty v5, 'length'
+
+
+function setProp(a1, a2, a3) {
+    a1[a2] = a3;
+}
+var obj = [];
+setProp(obj, "length", 1);
+setProp(obj, 0, 5);
+obj.length;
+
+FuzzIL program written to corpus/regress-2566.fzil

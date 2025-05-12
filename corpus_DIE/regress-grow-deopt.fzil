@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetProperty v1, 'length'
+    SetComputedProperty v1, v3, v2
+EndPlainFunction
+v4 <- LoadFloat '1.4'
+v5 <- CreateArray [v4]
+v6 <- CreateNamedVariable 'a', 'var', v5
+v7 <- LoadInteger '1'
+v8 <- CallFunction v0, [v6, v7]
+v9 <- LoadInteger '2'
+v10 <- CallFunction v0, [v6, v9]
+BeginObjectLiteral
+v11 <- EndObjectLiteral
+v12 <- CallFunction v0, [v6, v11]
+v13 <- LoadInteger '4'
+v14 <- GetProperty v6, 'length'
+
+
+function f(a1, a2) {
+    a1[a1.length] = a2;
+}
+var a = [1.4];
+f(a, 1);
+f(a, 2);
+f(a, {});
+a.length;
+
+FuzzIL program written to corpus/regress-grow-deopt.fzil

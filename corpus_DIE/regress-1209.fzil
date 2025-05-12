@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateArray []
+    v3 <- CreateNamedVariable 'nasty', 'var', v2
+    BeginWhileLoopHeader
+        v4 <- UnaryOperation v1, '--'
+    BeginWhileLoopBody v4
+        v5 <- LoadString 'a'
+        v6 <- LoadInteger '0'
+        v7 <- BinaryOperation v5, '+', v6
+        v8 <- CallMethod v3, 'push', [v7]
+    EndWhileLoop
+    v9 <- LoadNull
+    v10 <- CreateNamedVariable 'Function', 'none'
+    v11 <- CallMethod v10, 'apply', [v9, v3]
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '64'
+v13 <- LoadInteger '1'
+v14 <- BinaryOperation v12, '+', v13
+v15 <- CallFunction v0, [v14]
+v16 <- GetProperty v15, 'length'
+
+
+function crashMe(a1) {
+    var nasty = [];
+    while (a1--) {
+        nasty.push("a" + 0);
+    }
+    return Function.apply(null, nasty);
+}
+crashMe(64 + 1).length;
+
+FuzzIL program written to corpus/regress-1209.fzil

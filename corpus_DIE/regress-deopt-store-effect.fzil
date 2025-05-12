@@ -1,0 +1,149 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'pro', 'var', v1
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'a', 'var', v3
+SetProperty v4, '__proto__', v2
+v5 <- DeleteProperty v2, 'x'
+v6 <- BeginPlainFunction -> v7
+    v8 <- LoadInteger '7'
+    v9 <- LoadInteger '1'
+    SetProperty v7, 'z', v9
+    v10 <- LoadInteger '20'
+    v11 <- BinaryOperation v8, '+', v10
+    Return v11
+EndPlainFunction
+v12 <- CallFunction v6, [v4]
+v13 <- CallFunction v6, [v4]
+v14 <- LoadString 'z'
+v15 <- BeginPlainFunction -> 
+    v16 <- LoadInteger '20'
+    Return v16
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v15
+v17 <- EndObjectLiteral
+v18 <- CreateNamedVariable 'Object', 'none'
+v19 <- CallMethod v18, 'defineProperty', [v2, v14, v17]
+v20 <- LoadInteger '27'
+v21 <- CallFunction v6, [v4]
+v22 <- LoadInteger '2'
+v23 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `z`, v22
+    ObjectLiteralAddProperty `r`, v23
+v24 <- EndObjectLiteral
+v25 <- CreateNamedVariable 'i', 'var', v24
+v26 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `z`, v26
+v27 <- EndObjectLiteral
+v28 <- CreateNamedVariable 'j', 'var', v27
+v29 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v29
+v30 <- EndObjectLiteral
+v31 <- CreateNamedVariable 'p', 'var', v30
+v32 <- LoadInteger '20'
+v33 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v32
+    ObjectLiteralAddProperty `b`, v33
+v34 <- EndObjectLiteral
+v35 <- CreateNamedVariable 'pp', 'var', v34
+v36 <- BeginPlainFunction -> v37, v38
+    v39 <- LoadInteger '7'
+    v40 <- LoadInteger '1'
+    SetProperty v37, 'z', v40
+    v41 <- GetProperty v38, 'a'
+    v42 <- BinaryOperation v39, '+', v41
+    Return v42
+EndPlainFunction
+v43 <- CallFunction v36, [v25, v31]
+v44 <- CallFunction v36, [v25, v31]
+v45 <- CallFunction v36, [v28, v31]
+v46 <- LoadInteger '27'
+v47 <- CallFunction v36, [v25, v35]
+v48 <- LoadInteger '1'
+v49 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `r`, v48
+    ObjectLiteralAddProperty `z`, v49
+v50 <- EndObjectLiteral
+v51 <- CreateNamedVariable 'i', 'var', v50
+v52 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `z`, v52
+v53 <- EndObjectLiteral
+v54 <- CreateNamedVariable 'j', 'var', v53
+v55 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v55
+v56 <- EndObjectLiteral
+v57 <- CreateNamedVariable 'p', 'var', v56
+v58 <- LoadInteger '20'
+v59 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v58
+    ObjectLiteralAddProperty `b`, v59
+v60 <- EndObjectLiteral
+v61 <- CreateNamedVariable 'pp', 'var', v60
+v62 <- BeginPlainFunction -> v63, v64
+    v65 <- LoadInteger '7'
+    v66 <- LoadInteger '1'
+    SetProperty v63, 'z', v66
+    v67 <- GetProperty v64, 'a'
+    v68 <- BinaryOperation v65, '+', v67
+    Return v68
+EndPlainFunction
+v69 <- CallFunction v62, [v51, v57]
+v70 <- CallFunction v62, [v51, v57]
+v71 <- CallFunction v62, [v54, v57]
+v72 <- LoadInteger '27'
+v73 <- CallFunction v62, [v51, v61]
+
+
+var pro = { x: 1 };
+var a = {};
+a.__proto__ = pro;
+delete pro.x;
+function g(a7) {
+    a7.z = 1;
+    return 7 + 20;
+}
+g(a);
+g(a);
+function f15() {
+    return 20;
+}
+Object.defineProperty(pro, "z", { get: f15 });
+g(a);
+var i = { z: 2, r: 1 };
+var j = { z: 2 };
+var p = { a: 10 };
+var pp = { a: 20, b: 1 };
+function bar(a37, a38) {
+    a37.z = 1;
+    return 7 + a38.a;
+}
+bar(i, p);
+bar(i, p);
+bar(j, p);
+bar(i, pp);
+var i = { r: 1, z: 2 };
+var j = { z: 2 };
+var p = { a: 10 };
+var pp = { a: 20, b: 1 };
+function bar1(a63, a64) {
+    a63.z = 1;
+    return 7 + a64.a;
+}
+bar1(i, p);
+bar1(i, p);
+bar1(j, p);
+bar1(i, pp);
+
+FuzzIL program written to corpus/regress-deopt-store-effect.fzil

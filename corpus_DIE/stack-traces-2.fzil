@@ -1,0 +1,70 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'FAIL', 'none'
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'FAIL', 'none'
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v0
+    ObjectLiteralAddProperty `toString`, v2
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'thrower', 'var', v4
+v6 <- BeginPlainFunction -> v7
+    v8 <- GetProperty v7, 'name'
+    v9 <- CreateNamedVariable 'nativeFuncName', 'var', v8
+    BeginTry
+        v10 <- Construct v7, [v5]
+    BeginCatch -> v11
+        v12 <- GetProperty v11, 'stack'
+        v13 <- CallMethod v12, 'indexOf', [v9]
+        v14 <- LoadInteger '0'
+        v15 <- Compare v13, '>=', v14
+    EndTryCatch
+EndPlainFunction
+v16 <- BeginPlainFunction -> v17
+    v18 <- GetProperty v17, 'name'
+    v19 <- CreateNamedVariable 'nativeFuncName', 'var', v18
+    BeginTry
+        v20 <- CallFunction v17, [v5]
+    BeginCatch -> v21
+        v22 <- GetProperty v21, 'stack'
+        v23 <- CallMethod v22, 'indexOf', [v19]
+        v24 <- LoadInteger '0'
+        v25 <- Compare v23, '>=', v24
+    EndTryCatch
+EndPlainFunction
+v26 <- CreateNamedVariable 'String', 'none'
+v27 <- CallFunction v16, [v26]
+v28 <- CreateNamedVariable 'RegExp', 'none'
+v29 <- CallFunction v16, [v28]
+v30 <- CallFunction v6, [v26]
+v31 <- CallFunction v6, [v28]
+
+
+function f0() {
+}
+function f2() {
+}
+var thrower = { valueOf: f0, toString: f2 };
+function testTraceNativeConstructor(a7) {
+    var nativeFuncName = a7.name;
+    try {
+        new a7(thrower);
+    } catch(e11) {
+        e11.stack.indexOf(nativeFuncName) >= 0;
+    }
+}
+function testTraceNativeConversion(a17) {
+    var nativeFuncName = a17.name;
+    try {
+        a17(thrower);
+    } catch(e21) {
+        e21.stack.indexOf(nativeFuncName) >= 0;
+    }
+}
+testTraceNativeConversion(String);
+testTraceNativeConversion(RegExp);
+testTraceNativeConstructor(String);
+testTraceNativeConstructor(RegExp);
+
+FuzzIL program written to corpus/stack-traces-2.fzil

@@ -1,0 +1,21 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- CallFunction v0, []
+    v3 <- LoadInteger '0'
+    v4 <- LoadInteger '1'
+    v5 <- TernaryOperation v2, v3, v4
+    Return v5
+EndPlainFunction
+v6 <- LoadInteger '1'
+v7 <- CallFunction v1, []
+
+
+function always_false() {
+}
+function test() {
+    return always_false() ? 0 : 1;
+}
+test();
+
+FuzzIL program written to corpus/regress-3260426.fzil

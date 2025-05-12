@@ -1,0 +1,25 @@
+BeginTry
+    v0 <- CreateNamedVariable 'Int8Array', 'none'
+    v1 <- CreateNamedVariable 'Object', 'none'
+    v2 <- CallMethod v1, 'getPrototypeOf', [v0]
+    v3 <- CreateNamedVariable 'TA', 'var', v2
+    v4 <- CreateArray []
+    v5 <- CreateNamedVariable 'Reflect', 'none'
+    v6 <- CallMethod v5, 'construct', [v3, v4, v0]
+    v7 <- CreateNamedVariable 'obj', 'var', v6
+    v8 <- GetProperty v0, 'prototype'
+    v9 <- GetProperty v8, 'values'
+    v10 <- CallMethod v9, 'call', [v7]
+    v11 <- CallMethod v10, 'next', []
+BeginCatch -> v12
+EndTryCatch
+
+
+try {
+    var TA = Object.getPrototypeOf(Int8Array);
+    var obj = Reflect.construct(TA, [], Int8Array);
+    Int8Array.prototype.values.call(obj).next();
+} catch(e12) {
+}
+
+FuzzIL program written to corpus/regress-5763-1.fzil

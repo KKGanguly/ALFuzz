@@ -1,0 +1,39 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '10'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'arr', 'let', v2
+v4 <- LoadInteger '0'
+v5 <- LoadInteger '10'
+v6 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v5
+    ObjectLiteralAddProperty `writable`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'defineProperty', [v3, v4, v7]
+v10 <- LoadInteger '9'
+v11 <- LoadInteger '1'
+v12 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v11
+    ObjectLiteralAddProperty `writable`, v12
+v13 <- EndObjectLiteral
+v14 <- CallMethod v8, 'defineProperty', [v3, v10, v13]
+v15 <- BeginArrowFunction -> 
+    v16 <- CallMethod v3, 'sort', []
+    Return v16
+EndArrowFunction
+v17 <- CallFunction v15, []
+v18 <- CreateNamedVariable 'TypeError', 'none'
+
+
+const v2 = new Array(10);
+let arr = v2;
+Object.defineProperty(arr, 0, { value: 10, writable: false });
+Object.defineProperty(arr, 9, { value: 1, writable: false });
+const v15 = () => {
+    return arr.sort();
+};
+v15();
+
+FuzzIL program written to corpus/regress-crbug-7907.fzil

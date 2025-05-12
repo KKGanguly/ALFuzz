@@ -1,0 +1,79 @@
+v0 <- CreateNamedVariable 'x', 'none'
+v1 <- UnaryOperation '!', v0
+v2 <- TypeOf v0
+v3 <- LoadString 'undefined'
+v4 <- Compare v2, '==', v3
+v5 <- BinaryOperation v1, '&&', v4
+v6 <- CreateNamedVariable 'y', 'none'
+v7 <- UnaryOperation '!', v6
+v8 <- TypeOf v6
+v9 <- LoadString 'undefined'
+v10 <- Compare v8, '==', v9
+v11 <- BinaryOperation v7, '&&', v10
+v12 <- LoadBoolean 'false'
+BeginIf v12
+    v13 <- LoadInteger '42'
+    v14 <- CreateNamedVariable 'x', 'var', v13
+EndIf
+v15 <- LoadBoolean 'true'
+BeginIf v15
+    v16 <- LoadInteger '87'
+    v17 <- CreateNamedVariable 'y', 'var', v16
+EndIf
+v18 <- UnaryOperation '!', v0
+v19 <- TypeOf v0
+v20 <- LoadString 'undefined'
+v21 <- Compare v19, '==', v20
+v22 <- BinaryOperation v18, '&&', v21
+v23 <- LoadInteger '87'
+v24 <- CreateNamedVariable 'z', 'none'
+v25 <- UnaryOperation '!', v24
+v26 <- TypeOf v24
+v27 <- LoadString 'undefined'
+v28 <- Compare v26, '==', v27
+v29 <- BinaryOperation v25, '&&', v28
+v30 <- LoadBoolean 'false'
+BeginIf v30
+    v31 <- LoadUndefined
+    v32 <- CreateNamedVariable 'z', 'var', v31
+EndIf
+v33 <- UnaryOperation '!', v24
+v34 <- TypeOf v24
+v35 <- LoadString 'undefined'
+v36 <- Compare v34, '==', v35
+v37 <- BinaryOperation v33, '&&', v36
+v38 <- LoadString 'var ⸯ;'
+v39 <- CreateNamedVariable 'SyntaxError', 'none'
+v40 <- LoadString 'var \u2E2F;'
+v41 <- LoadString 'var ℘;'
+v42 <- LoadString 'var \u2118;'
+v43 <- LoadString 'var ℮;'
+v44 <- LoadString 'var \u212E;'
+v45 <- LoadString 'var ゛;'
+v46 <- LoadString 'var \u309B;'
+v47 <- LoadString 'var ゜;'
+v48 <- LoadString 'var \u309C;'
+v49 <- LoadString 'var $·;'
+v50 <- LoadString 'var $·;'
+v51 <- LoadString 'var $፩;'
+v52 <- LoadString 'var $፰;'
+v53 <- LoadString 'var $፱;'
+v54 <- LoadString 'var $᧚;'
+
+
+!x && (typeof x == "undefined");
+!y && (typeof y == "undefined");
+if (false) {
+    var x = 42;
+}
+if (true) {
+    var y = 87;
+}
+!x && (typeof x == "undefined");
+!z && (typeof z == "undefined");
+if (false) {
+    var z;
+}
+!z && (typeof z == "undefined");
+
+FuzzIL program written to corpus/var.fzil

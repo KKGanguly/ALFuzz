@@ -1,0 +1,42 @@
+v0 <- CreateNamedVariable 'Boolean', 'none'
+v1 <- LoadBoolean 'true'
+v2 <- Construct v0, [v1]
+v3 <- UnaryOperation '!', v2
+v4 <- UnaryOperation '!', v3
+v5 <- LoadString 'new Boolean(true)'
+v6 <- LoadBoolean 'false'
+v7 <- Construct v0, [v6]
+v8 <- UnaryOperation '!', v7
+v9 <- UnaryOperation '!', v8
+v10 <- LoadString 'new Boolean(false)'
+v11 <- CreateNamedVariable 'Number', 'none'
+v12 <- LoadInteger '1'
+v13 <- UnaryOperation '-', v12
+v14 <- Construct v11, [v13]
+v15 <- UnaryOperation '!', v14
+v16 <- UnaryOperation '!', v15
+v17 <- LoadString 'new Number(-1)'
+v18 <- LoadInteger '0'
+v19 <- Construct v11, [v18]
+v20 <- UnaryOperation '!', v19
+v21 <- UnaryOperation '!', v20
+v22 <- LoadString 'new Number(0)'
+v23 <- LoadInteger '1'
+v24 <- Construct v11, [v23]
+v25 <- UnaryOperation '!', v24
+v26 <- UnaryOperation '!', v25
+v27 <- LoadString 'new Number(1)'
+
+
+const v2 = new Boolean(true);
+!(!v2);
+const v7 = new Boolean(false);
+!(!v7);
+const v14 = new Number(-1);
+!(!v14);
+const v19 = new Number(0);
+!(!v19);
+const v24 = new Number(1);
+!(!v24);
+
+FuzzIL program written to corpus/tobool.fzil

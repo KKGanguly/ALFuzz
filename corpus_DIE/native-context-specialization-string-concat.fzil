@@ -1,0 +1,74 @@
+v0 <- LoadString 'foo'
+v1 <- CreateNamedVariable 'foo', 'var', v0
+v2 <- LoadString 'bar'
+v3 <- CreateNamedVariable 'bar', 'var', v2
+v4 <- LoadUndefined
+v5 <- CreateNamedVariable 'a', 'var', v4
+v6 <- LoadUndefined
+v7 <- CreateNamedVariable 'b', 'var', v6
+v8 <- LoadUndefined
+v9 <- CreateNamedVariable 'c', 'var', v8
+v10 <- LoadUndefined
+v11 <- CreateNamedVariable 'd', 'var', v10
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadString 'baz'
+    Return v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> v15
+    v16 <- LoadString '"'
+    v17 <- BinaryOperation v16, '+', v1
+    v18 <- LoadString '-'
+    v19 <- BinaryOperation v17, '+', v18
+    v20 <- BinaryOperation v19, '+', v3
+    v21 <- LoadString '"'
+    v22 <- BinaryOperation v20, '+', v21
+    Reassign v5, v22
+    v23 <- LoadString '"'
+    v24 <- BinaryOperation v23, '+', v1
+    v25 <- LoadString '-'
+    v26 <- BinaryOperation v24, '+', v25
+    v27 <- CallFunction v12, []
+    v28 <- BinaryOperation v26, '+', v27
+    v29 <- LoadString '"'
+    v30 <- BinaryOperation v28, '+', v29
+    Reassign v7, v30
+    v31 <- BinaryOperation v1, '+', v3
+    v32 <- BinaryOperation v31, '+', v15
+    Reassign v9, v32
+    v33 <- LoadString '"'
+    v34 <- BinaryOperation v33, '+', v1
+    v35 <- BinaryOperation v34, '+', v15
+    v36 <- BinaryOperation v35, '+', v3
+    v37 <- LoadString '"'
+    v38 <- BinaryOperation v36, '+', v37
+    Reassign v11, v38
+EndPlainFunction
+v39 <- LoadString 'boo'
+v40 <- CallFunction v14, [v39]
+v41 <- LoadString 'baa'
+v42 <- CallFunction v14, [v41]
+v43 <- LoadString '"foo-bar"'
+v44 <- LoadString '"foo-baz"'
+v45 <- LoadString 'foobarbaa'
+v46 <- LoadString '"foobaabar"'
+
+
+var foo = "foo";
+var bar = "bar";
+var a;
+var b;
+var c;
+var d;
+function baz() {
+    return "baz";
+}
+function test(a15) {
+    a = (((""" + foo) + "-") + bar) + """;
+    b = (((""" + foo) + "-") + baz()) + """;
+    c = (foo + bar) + a15;
+    d = (((""" + foo) + a15) + bar) + """;
+}
+test("boo");
+test("baa");
+
+FuzzIL program written to corpus/native-context-specialization-string-concat.fzil

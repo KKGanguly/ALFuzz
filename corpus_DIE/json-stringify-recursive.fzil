@@ -1,0 +1,119 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'a', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'i', 'none'
+    Reassign v3, v2
+BeginForLoopCondition
+    v4 <- CreateNamedVariable 'i', 'none'
+    v5 <- LoadInteger '10000'
+    v6 <- Compare v4, '<', v5
+BeginForLoopAfterthought v6
+    v7 <- CreateNamedVariable 'i', 'none'
+    v8 <- UnaryOperation v7, '++'
+BeginForLoopBody
+    BeginObjectLiteral
+    v9 <- EndObjectLiteral
+    v10 <- CreateNamedVariable 'current', 'var', v9
+    SetProperty v10, 'a', v1
+    Reassign v1, v10
+EndForLoop
+v11 <- BeginPlainFunction -> v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25
+    v26 <- CreateNamedVariable 'JSON', 'none'
+    v27 <- CallMethod v26, 'stringify', [v12]
+    v28 <- CallFunction v11, [v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25]
+EndPlainFunction
+v29 <- BeginPlainFunction -> 
+    v30 <- LoadInteger '1'
+    v31 <- LoadInteger '2'
+    v32 <- LoadInteger '3'
+    v33 <- LoadInteger '4'
+    v34 <- LoadInteger '5'
+    v35 <- LoadInteger '6'
+    v36 <- LoadInteger '7'
+    v37 <- LoadInteger '8'
+    v38 <- LoadInteger '9'
+    v39 <- LoadInteger '0'
+    v40 <- LoadInteger '1'
+    v41 <- LoadInteger '2'
+    v42 <- LoadInteger '3'
+    v43 <- LoadInteger '4'
+    v44 <- CallFunction v11, [v30, v31, v32, v33, v34, v35, v36, v37, v38, v39, v40, v41, v42, v43]
+EndPlainFunction
+v45 <- CallFunction v29, []
+v46 <- CreateNamedVariable 'RangeError', 'none'
+v47 <- LoadInteger '10000'
+v48 <- CreateNamedVariable 'depth', 'var', v47
+v49 <- CreateArray []
+v50 <- CreateNamedVariable 'deepArray', 'var', v49
+BeginForLoopInitializer
+    v51 <- LoadInteger '0'
+BeginForLoopCondition -> v52
+    v53 <- Compare v52, '<', v48
+BeginForLoopAfterthought v53 -> v54
+    v55 <- UnaryOperation v54, '++'
+BeginForLoopBody -> v56
+    v57 <- CreateArray [v50]
+    Reassign v50, v57
+EndForLoop
+v58 <- BeginPlainFunction -> 
+    v59 <- CreateNamedVariable 'JSON', 'none'
+    v60 <- CallMethod v59, 'stringify', [v50]
+EndPlainFunction
+v61 <- CallFunction v58, []
+BeginObjectLiteral
+v62 <- EndObjectLiteral
+v63 <- CreateNamedVariable 'deepObject', 'var', v62
+BeginForLoopInitializer
+    v64 <- LoadInteger '0'
+BeginForLoopCondition -> v65
+    v66 <- Compare v65, '<', v48
+BeginForLoopAfterthought v66 -> v67
+    v68 <- UnaryOperation v67, '++'
+BeginForLoopBody -> v69
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `next`, v63
+    v70 <- EndObjectLiteral
+    Reassign v63, v70
+EndForLoop
+v71 <- BeginPlainFunction -> 
+    v72 <- CreateNamedVariable 'JSON', 'none'
+    v73 <- CallMethod v72, 'stringify', [v63]
+EndPlainFunction
+v74 <- CallFunction v71, []
+
+
+var a = {};
+for (i = 0; i < 10000; i++) {
+    var current = {};
+    current.a = a;
+    a = current;
+}
+function rec(a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25) {
+    JSON.stringify(a12);
+    rec(a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25);
+}
+function f29() {
+    rec(1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4);
+}
+f29();
+var depth = 10000;
+var deepArray = [];
+for (let i52 = 0; i52 < depth; i52++) {
+    deepArray = [deepArray];
+}
+function f58() {
+    JSON.stringify(deepArray);
+}
+f58();
+var deepObject = {};
+for (let i65 = 0; i65 < depth; i65++) {
+    deepObject = { next: deepObject };
+}
+function f71() {
+    JSON.stringify(deepObject);
+}
+f71();
+
+FuzzIL program written to corpus/json-stringify-recursive.fzil

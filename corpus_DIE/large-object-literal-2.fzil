@@ -1,0 +1,73 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateNamedVariable 'properties', 'let', v1
+    v3 <- LoadInteger '126782'
+    v4 <- LoadInteger '3'
+    v5 <- BinaryOperation v3, '/', v4
+    v6 <- CreateNamedVariable 'max', 'const', v5
+    BeginForLoopInitializer
+        v7 <- LoadInteger '0'
+    BeginForLoopCondition -> v8
+        v9 <- Compare v8, '<', v6
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation v10, '++'
+    BeginForLoopBody -> v12
+        v13 <- LoadString 'p'
+        v14 <- BinaryOperation v13, '+', v12
+        v15 <- CallMethod v2, 'push', [v14]
+    EndForLoop
+    v16 <- LoadString 'return { __proto__:null, '
+    v17 <- LoadString ':'','
+    v18 <- CallMethod v2, 'join', [v17]
+    v19 <- BinaryOperation v16, '+', v18
+    v20 <- LoadString ':''}'
+    v21 <- BinaryOperation v19, '+', v20
+    v22 <- CreateNamedVariable 'source', 'let', v21
+    v23 <- CreateNamedVariable 'Function', 'none'
+    v24 <- Construct v23, [v22]
+    v25 <- CreateNamedVariable 'createObject', 'let', v24
+    v26 <- CallFunction v25, []
+    v27 <- CreateNamedVariable 'object', 'let', v26
+    v28 <- CreateNamedVariable 'Object', 'none'
+    v29 <- CallMethod v28, 'getPrototypeOf', [v27]
+    v30 <- LoadNull
+    v31 <- CallMethod v28, 'keys', [v27]
+    v32 <- CreateNamedVariable 'keys', 'let', v31
+    BeginObjectLiteral
+    v33 <- EndObjectLiteral
+    v34 <- LoadString 'new_property'
+    SetComputedProperty v27, v34, v33
+    v35 <- LoadInteger '12'
+    SetElement v27, '1', v35
+    v36 <- CallFunction v25, []
+    v37 <- CreateNamedVariable 'object2', 'let', v36
+    v38 <- Compare v37, '===', v27
+    v39 <- CallMethod v28, 'getPrototypeOf', [v37]
+    v40 <- LoadNull
+    v41 <- CallMethod v28, 'keys', [v37]
+EndPlainFunction
+v42 <- CallFunction v0, []
+
+
+function TestLargeObjectDictionaryLiteral() {
+    let properties = [];
+    const max = 126782 / 3;
+    for (let i8 = 0; i8 < max; i8++) {
+        properties.push("p" + i8);
+    }
+    let source = ("return { __proto__:null, " + properties.join(":'',")) + ":''}";
+    const v24 = new Function(source);
+    let createObject = v24;
+    let object = createObject();
+    Object.getPrototypeOf(object);
+    let keys = Object.keys(object);
+    object["new_property"] = {};
+    object[1] = 12;
+    let object2 = createObject();
+    object2 === object;
+    Object.getPrototypeOf(object2);
+    Object.keys(object2);
+}
+TestLargeObjectDictionaryLiteral();
+
+FuzzIL program written to corpus/large-object-literal-2.fzil

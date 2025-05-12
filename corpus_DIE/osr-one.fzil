@@ -1,0 +1,37 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'sum', 'var', v2
+    v4 <- LoadInteger '10'
+    v5 <- CreateNamedVariable 'count', 'var', v4
+    BeginWhileLoopHeader
+        v6 <- LoadInteger '0'
+        v7 <- Compare v5, '>', v6
+    BeginWhileLoopBody v7
+        Update v3, '+', v1
+        v8 <- UnaryOperation v5, '--'
+        v9 <- LoadInteger '5'
+        v10 <- Compare v5, '==', v9
+        BeginIf v10
+        EndIf
+    EndWhileLoop
+    Return v3
+EndPlainFunction
+v11 <- LoadInteger '50'
+v12 <- LoadInteger '5'
+v13 <- CallFunction v0, [v12]
+
+
+function f(a1) {
+    var sum = 0;
+    var count = 10;
+    while (count > 0) {
+        sum += a1;
+        count--;
+        if (count == 5) {
+        }
+    }
+    return sum;
+}
+f(5);
+
+FuzzIL program written to corpus/osr-one.fzil

@@ -1,0 +1,12 @@
+v0 <- LoadString '{"\u0030":100}'
+v1 <- CreateNamedVariable 'JSON', 'none'
+v2 <- CallMethod v1, 'parse', [v0]
+v3 <- CreateNamedVariable 'o', 'var', v2
+v4 <- LoadInteger '100'
+v5 <- GetElement v3, '0'
+
+
+var o = JSON.parse("{"\u0030":100}");
+o[0];
+
+FuzzIL program written to corpus/regress-json-parse-index.fzil

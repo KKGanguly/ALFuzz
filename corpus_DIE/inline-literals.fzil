@@ -1,0 +1,233 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '+', v2
+    v4 <- CreateArray [v1, v2, v3]
+    Return v4
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6, v7, v8
+    v9 <- CallFunction v0, [v7, v8]
+    v10 <- CreateArray [v6, v9]
+    Return v10
+EndPlainFunction
+v11 <- BeginPlainFunction -> v12, v13, v14
+    v15 <- BinaryOperation v13, '+', v14
+    v16 <- CreateArray [v13, v14, v15]
+    v17 <- CreateArray [v12, v16]
+    v18 <- CreateNamedVariable 'expected', 'var', v17
+    v19 <- CallFunction v5, [v12, v13, v14]
+    v20 <- CreateNamedVariable 'result', 'var', v19
+    v21 <- LoadString 'TestArrayLiteral'
+EndPlainFunction
+v22 <- LoadInteger '1'
+v23 <- LoadInteger '2'
+v24 <- LoadInteger '3'
+v25 <- CallFunction v11, [v22, v23, v24]
+v26 <- LoadInteger '1'
+v27 <- LoadInteger '2'
+v28 <- LoadInteger '3'
+v29 <- CallFunction v11, [v26, v27, v28]
+v30 <- LoadInteger '1'
+v31 <- LoadInteger '2'
+v32 <- LoadInteger '3'
+v33 <- CallFunction v11, [v30, v31, v32]
+v34 <- LoadString 'a'
+v35 <- LoadString 'b'
+v36 <- LoadString 'c'
+v37 <- CallFunction v11, [v34, v35, v36]
+v38 <- BeginPlainFunction -> v39, v40
+    v41 <- BinaryOperation v39, '+', v40
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `b`, v39
+        ObjectLiteralAddProperty `c`, v40
+        ObjectLiteralAddProperty `y`, v41
+    v42 <- EndObjectLiteral
+    Return v42
+EndPlainFunction
+v43 <- BeginPlainFunction -> v44, v45, v46
+    v47 <- CallFunction v38, [v45, v46]
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v44
+        ObjectLiteralAddProperty `x`, v47
+    v48 <- EndObjectLiteral
+    Return v48
+EndPlainFunction
+v49 <- BeginPlainFunction -> v50, v51, v52
+    v53 <- BinaryOperation v51, '+', v52
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `b`, v51
+        ObjectLiteralAddProperty `c`, v52
+        ObjectLiteralAddProperty `y`, v53
+    v54 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v50
+        ObjectLiteralAddProperty `x`, v54
+    v55 <- EndObjectLiteral
+    v56 <- CreateNamedVariable 'expected', 'var', v55
+    v57 <- CallFunction v43, [v50, v51, v52]
+    v58 <- CreateNamedVariable 'result', 'var', v57
+    v59 <- LoadString 'TestObjectLiteral'
+EndPlainFunction
+v60 <- LoadInteger '1'
+v61 <- LoadInteger '2'
+v62 <- LoadInteger '3'
+v63 <- CallFunction v49, [v60, v61, v62]
+v64 <- LoadInteger '1'
+v65 <- LoadInteger '2'
+v66 <- LoadInteger '3'
+v67 <- CallFunction v49, [v64, v65, v66]
+v68 <- LoadInteger '1'
+v69 <- LoadInteger '2'
+v70 <- LoadInteger '3'
+v71 <- CallFunction v49, [v68, v69, v70]
+v72 <- LoadString 'a'
+v73 <- LoadString 'b'
+v74 <- LoadString 'c'
+v75 <- CallFunction v49, [v72, v73, v74]
+v76 <- BeginPlainFunction -> v77, v78, v79
+    v80 <- LoadRegExp 'a' ''
+    v81 <- BinaryOperation v78, '+', v79
+    v82 <- CallMethod v77, 'replace', [v80, v81]
+    Return v82
+EndPlainFunction
+v83 <- BeginPlainFunction -> v84, v85, v86
+    v87 <- LoadRegExp 'b' ''
+    v88 <- BinaryOperation v86, '+', v85
+    v89 <- CallFunction v76, [v84, v85, v86]
+    v90 <- CallMethod v89, 'replace', [v87, v88]
+    Return v90
+EndPlainFunction
+v91 <- BeginPlainFunction -> v92, v93, v94, v95
+    v96 <- CallFunction v83, [v92, v93, v94]
+    v97 <- CreateNamedVariable 'result', 'var', v96
+    v98 <- LoadString 'TestRegExpLiteral'
+EndPlainFunction
+v99 <- LoadString 'a-'
+v100 <- LoadString 'reg'
+v101 <- LoadString 'exp'
+v102 <- LoadString 'regexp-'
+v103 <- CallFunction v91, [v99, v100, v101, v102]
+v104 <- LoadString '-b'
+v105 <- LoadString 'reg'
+v106 <- LoadString 'exp'
+v107 <- LoadString '-expreg'
+v108 <- CallFunction v91, [v104, v105, v106, v107]
+v109 <- LoadString 'ab'
+v110 <- LoadString 'reg'
+v111 <- LoadString 'exp'
+v112 <- LoadString 'regexpexpreg'
+v113 <- CallFunction v91, [v109, v110, v111, v112]
+v114 <- LoadString 'ab'
+v115 <- LoadInteger '12345'
+v116 <- LoadInteger '54321'
+v117 <- LoadString '6666666666'
+v118 <- CallFunction v91, [v114, v115, v116, v117]
+v119 <- BeginPlainFunction -> v120, v121
+    v122 <- BeginPlainFunction -> v123, v124
+        v125 <- BinaryOperation v123, '+', v124
+        Return v125
+    EndPlainFunction
+    v126 <- CreateNamedVariable 'closure', 'var', v122
+    v127 <- BinaryOperation v120, '+', v121
+    v128 <- CreateNamedVariable 'value', 'var', v127
+    Return v126
+EndPlainFunction
+v129 <- BeginPlainFunction -> v130, v131, v132
+    v133 <- CallFunction v119, [v131, v132]
+    v134 <- CallFunction v133, [v131, v132]
+    v135 <- BinaryOperation v130, '+', v134
+    Return v135
+EndPlainFunction
+v136 <- BeginPlainFunction -> v137, v138, v139, v140
+    v141 <- CallFunction v129, [v137, v138, v139]
+    v142 <- CreateNamedVariable 'result', 'var', v141
+    v143 <- LoadString 'TestFunctionLiteral'
+EndPlainFunction
+v144 <- LoadInteger '1'
+v145 <- LoadInteger '2'
+v146 <- LoadInteger '3'
+v147 <- LoadInteger '6'
+v148 <- CallFunction v136, [v144, v145, v146, v147]
+v149 <- LoadInteger '4'
+v150 <- LoadInteger '5'
+v151 <- LoadInteger '6'
+v152 <- LoadInteger '15'
+v153 <- CallFunction v136, [v149, v150, v151, v152]
+v154 <- LoadInteger '7'
+v155 <- LoadInteger '8'
+v156 <- LoadInteger '9'
+v157 <- LoadInteger '24'
+v158 <- CallFunction v136, [v154, v155, v156, v157]
+v159 <- LoadString 'a'
+v160 <- LoadString 'b'
+v161 <- LoadString 'c'
+v162 <- LoadString 'abc'
+v163 <- CallFunction v136, [v159, v160, v161, v162]
+
+
+function a2(a1, a2) {
+    return [a1,a2,a1 + a2];
+}
+function a1(a6, a7, a8) {
+    return [a6,a2(a7, a8)];
+}
+function TestArrayLiteral(a12, a13, a14) {
+    var expected = [a12,[a13,a14,a13 + a14]];
+    var result = a1(a12, a13, a14);
+}
+TestArrayLiteral(1, 2, 3);
+TestArrayLiteral(1, 2, 3);
+TestArrayLiteral(1, 2, 3);
+TestArrayLiteral("a", "b", "c");
+function o2(a39, a40) {
+    const v41 = a39 + a40;
+    return { b: a39, c: a40, y: v41 };
+}
+function o1(a44, a45, a46) {
+    const v47 = o2(a45, a46);
+    return { a: a44, x: v47 };
+}
+function TestObjectLiteral(a50, a51, a52) {
+    const v53 = a51 + a52;
+    const v54 = { b: a51, c: a52, y: v53 };
+    var expected = { a: a50, x: v54 };
+    var result = o1(a50, a51, a52);
+}
+TestObjectLiteral(1, 2, 3);
+TestObjectLiteral(1, 2, 3);
+TestObjectLiteral(1, 2, 3);
+TestObjectLiteral("a", "b", "c");
+function r2(a77, a78, a79) {
+    return a77.replace(/a/, a78 + a79);
+}
+function r1(a84, a85, a86) {
+    const v87 = /b/;
+    const v88 = a86 + a85;
+    return r2(a84, a85, a86).replace(v87, v88);
+}
+function TestRegExpLiteral(a92, a93, a94, a95) {
+    var result = r1(a92, a93, a94);
+}
+TestRegExpLiteral("a-", "reg", "exp", "regexp-");
+TestRegExpLiteral("-b", "reg", "exp", "-expreg");
+TestRegExpLiteral("ab", "reg", "exp", "regexpexpreg");
+TestRegExpLiteral("ab", 12345, 54321, "6666666666");
+function f2(a120, a121) {
+    function f122(a123, a124) {
+        return a123 + a124;
+    }
+    var closure = f122;
+    var value = a120 + a121;
+    return closure;
+}
+function f1(a130, a131, a132) {
+    const t56 = f2(a131, a132);
+    return a130 + t56(a131, a132);
+}
+function TestFunctionLiteral(a137, a138, a139, a140) {
+    var result = f1(a137, a138, a139);
+}
+TestFunctionLiteral(1, 2, 3, 6);
+TestFunctionLiteral(4, 5, 6, 15);
+TestFunctionLiteral(7, 8, 9, 24);
+TestFunctionLiteral("a", "b", "c", "abc");
+
+FuzzIL program written to corpus/inline-literals.fzil

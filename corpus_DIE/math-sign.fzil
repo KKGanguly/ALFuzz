@@ -1,0 +1,189 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- BinaryOperation v1, '|', v2
+    Reassign v1, v3
+    v4 <- CreateNamedVariable 'Math', 'none'
+    v5 <- CallMethod v4, 'sign', [v1]
+    Return v5
+EndPlainFunction
+v6 <- LoadInteger '0'
+v7 <- CallFunction v0, [v6]
+v8 <- LoadInteger '2'
+v9 <- CallFunction v0, [v8]
+v10 <- LoadInteger '1'
+v11 <- LoadInteger '1'
+v12 <- CallFunction v0, [v11]
+v13 <- LoadInteger '0'
+v14 <- LoadInteger '0'
+v15 <- CallFunction v0, [v14]
+v16 <- LoadInteger '1'
+v17 <- UnaryOperation '-', v16
+v18 <- LoadInteger '1'
+v19 <- UnaryOperation '-', v18
+v20 <- CallFunction v0, [v19]
+v21 <- LoadInteger '1'
+v22 <- UnaryOperation '-', v21
+v23 <- LoadInteger '1'
+v24 <- UnaryOperation '-', v23
+v25 <- CallFunction v0, [v24]
+v26 <- LoadInteger '1'
+v27 <- LoadInteger '2147483647'
+v28 <- CallFunction v0, [v27]
+v29 <- LoadInteger '1'
+v30 <- UnaryOperation '-', v29
+v31 <- LoadInteger '2147483648'
+v32 <- CallFunction v0, [v31]
+v33 <- LoadInteger '1'
+v34 <- UnaryOperation '-', v33
+v35 <- LoadInteger '2147483648'
+v36 <- UnaryOperation '-', v35
+v37 <- CallFunction v0, [v36]
+v38 <- LoadInteger '0'
+v39 <- CreateNamedVariable 'NaN', 'none'
+v40 <- CallFunction v0, [v39]
+v41 <- LoadInteger '0'
+v42 <- LoadUndefined
+v43 <- CallFunction v0, [v42]
+v44 <- LoadInteger '0'
+v45 <- LoadInteger '0'
+v46 <- UnaryOperation '-', v45
+v47 <- CallFunction v0, [v46]
+v48 <- BeginPlainFunction -> v49
+    v50 <- UnaryOperation '+', v49
+    v51 <- CreateNamedVariable 'Math', 'none'
+    v52 <- CallMethod v51, 'sign', [v50]
+    Return v52
+EndPlainFunction
+v53 <- LoadFloat '0.1'
+v54 <- CallFunction v48, [v53]
+v55 <- LoadFloat '0.1'
+v56 <- UnaryOperation '-', v55
+v57 <- CallFunction v48, [v56]
+v58 <- LoadInteger '1'
+v59 <- LoadInteger '1'
+v60 <- CallFunction v48, [v59]
+v61 <- LoadInteger '1'
+v62 <- LoadFloat '0.001'
+v63 <- CallFunction v48, [v62]
+v64 <- LoadInteger '1'
+v65 <- UnaryOperation '-', v64
+v66 <- LoadFloat '0.002'
+v67 <- UnaryOperation '-', v66
+v68 <- CallFunction v48, [v67]
+v69 <- LoadInteger '1'
+v70 <- LoadFloat '1e+100'
+v71 <- CallFunction v48, [v70]
+v72 <- LoadInteger '1'
+v73 <- UnaryOperation '-', v72
+v74 <- LoadFloat '2e+100'
+v75 <- UnaryOperation '-', v74
+v76 <- CallFunction v48, [v75]
+v77 <- LoadInteger '0'
+v78 <- LoadInteger '0'
+v79 <- CallFunction v48, [v78]
+v80 <- CreateNamedVariable 'Infinity', 'none'
+v81 <- LoadInteger '1'
+v82 <- LoadInteger '0'
+v83 <- CallFunction v48, [v82]
+v84 <- BinaryOperation v81, '/', v83
+v85 <- LoadInteger '1'
+v86 <- UnaryOperation '-', v85
+v87 <- LoadInteger '1'
+v88 <- UnaryOperation '-', v87
+v89 <- CallFunction v48, [v88]
+v90 <- LoadInteger '1'
+v91 <- UnaryOperation '-', v90
+v92 <- LoadInteger '1'
+v93 <- UnaryOperation '-', v92
+v94 <- CallFunction v48, [v93]
+v95 <- LoadInteger '1'
+v96 <- LoadInteger '2147483647'
+v97 <- CallFunction v48, [v96]
+v98 <- LoadInteger '1'
+v99 <- LoadInteger '2147483648'
+v100 <- CallFunction v48, [v99]
+v101 <- LoadInteger '1'
+v102 <- UnaryOperation '-', v101
+v103 <- LoadInteger '2147483647'
+v104 <- UnaryOperation '-', v103
+v105 <- CallFunction v48, [v104]
+v106 <- LoadInteger '1'
+v107 <- UnaryOperation '-', v106
+v108 <- LoadInteger '2147483648'
+v109 <- UnaryOperation '-', v108
+v110 <- CallFunction v48, [v109]
+v111 <- LoadInteger '1'
+v112 <- UnaryOperation '-', v111
+v113 <- LoadInteger '2147483649'
+v114 <- UnaryOperation '-', v113
+v115 <- CallFunction v48, [v114]
+v116 <- LoadInteger '0'
+v117 <- UnaryOperation '-', v116
+v118 <- LoadInteger '0'
+v119 <- UnaryOperation '-', v118
+v120 <- CallFunction v48, [v119]
+v121 <- CallFunction v48, [v39]
+v122 <- LoadUndefined
+v123 <- CallFunction v48, [v122]
+v124 <- LoadInteger '1'
+v125 <- CallFunction v48, [v80]
+v126 <- LoadInteger '1'
+v127 <- UnaryOperation '-', v126
+v128 <- UnaryOperation '-', v80
+v129 <- CallFunction v48, [v128]
+
+
+function signInt32(a1) {
+    return Math.sign(a1 = a1 | 0);
+}
+signInt32(0);
+signInt32(2);
+signInt32(1);
+signInt32(0);
+-1;
+signInt32(-1);
+-1;
+signInt32(-1);
+signInt32(2147483647);
+-1;
+signInt32(2147483648);
+-1;
+signInt32(-2147483648);
+signInt32(NaN);
+signInt32(undefined);
+signInt32(-0);
+function signFloat64(a49) {
+    return Math.sign(+a49);
+}
+signFloat64(0.1);
+signFloat64(-0.1);
+signFloat64(1);
+signFloat64(0.001);
+-1;
+signFloat64(-0.002);
+signFloat64(1e+100);
+-1;
+signFloat64(-2e+100);
+signFloat64(0);
+1 / signFloat64(0);
+-1;
+signFloat64(-1);
+-1;
+signFloat64(-1);
+signFloat64(2147483647);
+signFloat64(2147483648);
+-1;
+signFloat64(-2147483647);
+-1;
+signFloat64(-2147483648);
+-1;
+signFloat64(-2147483649);
+-0;
+signFloat64(-0);
+signFloat64(NaN);
+signFloat64(undefined);
+signFloat64(Infinity);
+-1;
+signFloat64(-Infinity);
+
+FuzzIL program written to corpus/math-sign.fzil

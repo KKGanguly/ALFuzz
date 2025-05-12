@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginArrowFunction -> 
+        v2 <- CreateNamedVariable 'WebAssembly', 'none'
+        v3 <- GetProperty v2, 'Memory'
+        v4 <- LoadInteger '59199'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `initial`, v4
+        v5 <- EndObjectLiteral
+        v6 <- Construct v3, [v5]
+        Return v6
+    EndArrowFunction
+    v7 <- CallFunction v1, []
+    v8 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v9 <- CallFunction v0, []
+
+
+function __f_7() {
+    const v1 = () => {
+        const v3 = WebAssembly.Memory;
+        const v6 = new v3({ initial: 59199 });
+        return v6;
+    };
+    v1();
+}
+__f_7();
+
+FuzzIL program written to corpus/regress-666741.fzil

@@ -1,0 +1,48 @@
+v0 <- BeginPlainFunction -> v1
+    BeginObjectLiteral
+    v2 <- EndObjectLiteral
+    BeginObjectLiteral
+    v3 <- EndObjectLiteral
+    v4 <- Compare v2, '===', v3
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `c`, v4
+    v5 <- EndObjectLiteral
+    v6 <- CreateNamedVariable 'c', 'var', v5
+    BeginIf v1
+        v7 <- LoadBoolean 'true'
+        SetProperty v6, 'c', v7
+    EndIf
+    v8 <- GetProperty v6, 'c'
+    Return v8
+EndPlainFunction
+v9 <- LoadBoolean 'true'
+v10 <- CallFunction v0, [v9]
+v11 <- LoadBoolean 'false'
+v12 <- CallFunction v0, [v11]
+v13 <- LoadBoolean 'true'
+v14 <- CallFunction v0, [v13]
+v15 <- LoadBoolean 'false'
+v16 <- CallFunction v0, [v15]
+v17 <- LoadBoolean 'true'
+v18 <- CallFunction v0, [v17]
+v19 <- LoadBoolean 'false'
+v20 <- CallFunction v0, [v19]
+
+
+function foo(a1) {
+    const v2 = {};
+    const v4 = v2 === {};
+    var c = { c: v4 };
+    if (a1) {
+        c.c = true;
+    }
+    return c.c;
+}
+foo(true);
+foo(false);
+foo(true);
+foo(false);
+foo(true);
+foo(false);
+
+FuzzIL program written to corpus/escape-analysis-replacement.fzil

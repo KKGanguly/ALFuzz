@@ -1,0 +1,11 @@
+v0 <- LoadString 'ott'
+v1 <- GetProperty v0, '__proto__'
+v2 <- CreateNamedVariable 'Symbol', 'none'
+v3 <- GetProperty v2, 'iterator'
+v4 <- DeleteComputedProperty v1, v3
+
+
+const t0 = ("ott").__proto__;
+delete t0[Symbol.iterator];
+
+FuzzIL program written to corpus/string-iterator6.fzil

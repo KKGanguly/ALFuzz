@@ -1,0 +1,36 @@
+v0 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `p`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'v', 'var', v1
+v3 <- LoadString 'p'
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '13'
+    Return v5
+EndPlainFunction
+v6 <- CallMethod v2, '__defineGetter__', [v3, v4]
+v7 <- BeginPlainFunction -> 
+    SetProperty v2, 'foo', v2
+    v8 <- CreateNamedVariable 'boom', 'var', v2
+    v9 <- GetProperty v8, 'foo'
+EndPlainFunction
+v10 <- CallFunction v7, []
+v11 <- CallFunction v7, []
+v12 <- CallFunction v7, []
+
+
+var v = { p: 0 };
+function f4() {
+    return 13;
+}
+v.__defineGetter__("p", f4);
+function f() {
+    v.foo = v;
+    var boom = v;
+    boom.foo;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-650973.fzil

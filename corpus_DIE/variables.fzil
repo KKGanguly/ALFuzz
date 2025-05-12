@@ -1,0 +1,97 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- BeginPlainFunction -> 
+    Return v1
+EndPlainFunction
+v3 <- LoadInteger '0'
+v4 <- CallFunction v2, []
+v5 <- BeginPlainFunction -> v6
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '1'
+v8 <- LoadInteger '1'
+v9 <- CallFunction v5, [v8]
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadInteger '2'
+    v12 <- CreateNamedVariable 'x', 'var', v11
+    Return v12
+EndPlainFunction
+v13 <- LoadInteger '2'
+v14 <- CallFunction v10, []
+v15 <- BeginPlainFunction -> v16
+    v17 <- BeginPlainFunction -> 
+        Return v16
+    EndPlainFunction
+    Return v16
+EndPlainFunction
+v18 <- LoadInteger '3'
+v19 <- LoadInteger '3'
+v20 <- CallFunction v15, [v19]
+v21 <- BeginPlainFunction -> v22
+    v23 <- BeginPlainFunction -> 
+        Return v22
+    EndPlainFunction
+    v24 <- CallFunction v23, []
+    Return v24
+EndPlainFunction
+v25 <- LoadInteger '4'
+v26 <- LoadInteger '4'
+v27 <- CallFunction v21, [v26]
+v28 <- BeginPlainFunction -> v29
+    BeginObjectLiteral
+    v30 <- EndObjectLiteral
+    BeginWith v30
+        Return v29
+    EndWith
+EndPlainFunction
+v31 <- LoadInteger '5'
+v32 <- LoadInteger '5'
+v33 <- CallFunction v28, [v32]
+v34 <- BeginPlainFunction -> v35
+    Return v35
+EndPlainFunction
+v36 <- LoadInteger '6'
+v37 <- LoadInteger '6'
+v38 <- CallFunction v34, [v37]
+
+
+var x = 0;
+function f0() {
+    return x;
+}
+f0();
+function f1(a6) {
+    return a6;
+}
+f1(1);
+function f2() {
+    var x = 2;
+    return x;
+}
+f2();
+function f3(a16) {
+    function g() {
+        return a16;
+    }
+    return a16;
+}
+f3(3);
+function f4(a22) {
+    function g() {
+        return a22;
+    }
+    return g();
+}
+f4(4);
+function f5(a29) {
+    with ({}) {
+        return a29;
+    }
+}
+f5(5);
+function f6(a35) {
+    return a35;
+}
+f6(6);
+
+FuzzIL program written to corpus/variables.fzil

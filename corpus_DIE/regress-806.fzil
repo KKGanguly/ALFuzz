@@ -1,0 +1,105 @@
+v0 <- BeginPlainFunction -> v1
+    BeginForLoopInitializer
+        v2 <- LoadInteger '1'
+    BeginForLoopCondition -> v3
+        v4 <- LoadInteger '2'
+        v5 <- Compare v3, '<', v4
+    BeginForLoopAfterthought v5 -> v6
+        v7 <- UnaryOperation v6, '++'
+    BeginForLoopBody -> v8
+        BeginForLoopInitializer
+            v9 <- LoadInteger '1'
+        BeginForLoopCondition -> v10
+            v11 <- LoadInteger '2'
+            v12 <- Compare v10, '<', v11
+        BeginForLoopAfterthought v12 -> v13
+            v14 <- UnaryOperation v13, '++'
+        BeginForLoopBody -> v15
+            BeginForLoopInitializer
+                v16 <- LoadInteger '1'
+            BeginForLoopCondition -> v17
+                v18 <- LoadInteger '2'
+                v19 <- Compare v17, '<', v18
+            BeginForLoopAfterthought v19 -> v20
+                v21 <- UnaryOperation v20, '++'
+            BeginForLoopBody -> v22
+                BeginForLoopInitializer
+                    v23 <- LoadInteger '1'
+                BeginForLoopCondition -> v24
+                    v25 <- LoadInteger '2'
+                    v26 <- Compare v24, '<', v25
+                BeginForLoopAfterthought v26 -> v27
+                    v28 <- UnaryOperation v27, '++'
+                BeginForLoopBody -> v29
+                    BeginForLoopInitializer
+                        v30 <- LoadInteger '1'
+                    BeginForLoopCondition -> v31
+                        v32 <- LoadInteger '2'
+                        v33 <- Compare v31, '<', v32
+                    BeginForLoopAfterthought v33 -> v34
+                        v35 <- UnaryOperation v34, '++'
+                    BeginForLoopBody -> v36
+                        BeginForLoopInitializer
+                            v37 <- LoadInteger '1'
+                        BeginForLoopCondition -> v38
+                            v39 <- LoadInteger '2'
+                            v40 <- Compare v38, '<', v39
+                        BeginForLoopAfterthought v40 -> v41
+                            v42 <- UnaryOperation v41, '++'
+                        BeginForLoopBody -> v43
+                            BeginForLoopInitializer
+                                v44 <- LoadInteger '1'
+                            BeginForLoopCondition -> v45
+                                v46 <- LoadInteger '2'
+                                v47 <- Compare v45, '<', v46
+                            BeginForLoopAfterthought v47 -> v48
+                                v49 <- UnaryOperation v48, '++'
+                            BeginForLoopBody -> v50
+                                v51 <- GetProperty v1, 'foo'
+                                v52 <- CreateNamedVariable 'z', 'var', v51
+                                v53 <- BinaryOperation v36, '*', v43
+                                v54 <- BinaryOperation v53, '*', v50
+                                v55 <- BinaryOperation v54, '*', v22
+                                v56 <- BinaryOperation v55, '*', v15
+                                v57 <- BinaryOperation v56, '*', v8
+                                SetProperty v52, 'foo', v57
+                            EndForLoop
+                        EndForLoop
+                    EndForLoop
+                EndForLoop
+            EndForLoop
+        EndForLoop
+    EndForLoop
+EndPlainFunction
+v58 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v58
+v59 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v59
+v60 <- EndObjectLiteral
+v61 <- CallFunction v0, [v60]
+
+
+function foo(a1) {
+    for (let i3 = 1; i3 < 2; i3++) {
+        for (let i10 = 1; i10 < 2; i10++) {
+            for (let i17 = 1; i17 < 2; i17++) {
+                for (let i24 = 1; i24 < 2; i24++) {
+                    for (let i31 = 1; i31 < 2; i31++) {
+                        for (let i38 = 1; i38 < 2; i38++) {
+                            for (let i45 = 1; i45 < 2; i45++) {
+                                var z = a1.foo;
+                                z.foo = ((((i31 * i38) * i45) * i17) * i10) * i3;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+const v59 = { foo: 1 };
+foo({ foo: v59 });
+
+FuzzIL program written to corpus/regress-806.fzil

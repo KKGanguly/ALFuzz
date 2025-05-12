@@ -1,0 +1,136 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- CreateNamedVariable 'WebAssembly', 'none'
+    v3 <- GetProperty v2, 'Module'
+    v4 <- Construct v3, []
+EndPlainFunction
+v5 <- CallFunction v1, []
+v6 <- BeginPlainFunction -> 
+    v7 <- CreateNamedVariable 'WebAssembly', 'none'
+    v8 <- GetProperty v7, 'Module'
+    v9 <- LoadInteger '0'
+    v10 <- Construct v8, [v9]
+EndPlainFunction
+v11 <- CallFunction v6, []
+v12 <- BeginPlainFunction -> 
+    v13 <- CreateNamedVariable 'WebAssembly', 'none'
+    v14 <- GetProperty v13, 'Module'
+    v15 <- LoadString 's'
+    v16 <- Construct v14, [v15]
+EndPlainFunction
+v17 <- CallFunction v12, []
+v18 <- BeginPlainFunction -> 
+    v19 <- CreateNamedVariable 'WebAssembly', 'none'
+    v20 <- GetProperty v19, 'Module'
+    v21 <- LoadUndefined
+    v22 <- Construct v20, [v21]
+EndPlainFunction
+v23 <- CallFunction v18, []
+v24 <- BeginPlainFunction -> 
+    v25 <- CreateNamedVariable 'WebAssembly', 'none'
+    v26 <- GetProperty v25, 'Module'
+    v27 <- LoadFloat '1.1'
+    v28 <- Construct v26, [v27]
+EndPlainFunction
+v29 <- CallFunction v24, []
+v30 <- BeginPlainFunction -> 
+    v31 <- CreateNamedVariable 'WebAssembly', 'none'
+    v32 <- GetProperty v31, 'Module'
+    v33 <- LoadInteger '1'
+    v34 <- LoadInteger '0'
+    v35 <- BinaryOperation v33, '/', v34
+    v36 <- Construct v32, [v35]
+EndPlainFunction
+v37 <- CallFunction v30, []
+v38 <- BeginPlainFunction -> 
+    v39 <- CreateNamedVariable 'WebAssembly', 'none'
+    v40 <- GetProperty v39, 'Module'
+    v41 <- LoadNull
+    v42 <- Construct v40, [v41]
+EndPlainFunction
+v43 <- CallFunction v38, []
+v44 <- BeginPlainFunction -> 
+    v45 <- CreateNamedVariable 'WebAssembly', 'none'
+    v46 <- GetProperty v45, 'Module'
+    v47 <- Construct v0, []
+    v48 <- Construct v46, [v47]
+EndPlainFunction
+v49 <- CallFunction v44, []
+v50 <- BeginPlainFunction -> 
+    v51 <- CreateNamedVariable 'WebAssembly', 'none'
+    v52 <- GetProperty v51, 'Module'
+    v53 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v54 <- LoadInteger '0'
+    v55 <- Construct v53, [v54]
+    v56 <- Construct v52, [v55]
+EndPlainFunction
+v57 <- CallFunction v50, []
+v58 <- BeginPlainFunction -> 
+    v59 <- CreateNamedVariable 'WebAssembly', 'none'
+    v60 <- GetProperty v59, 'Module'
+    v61 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v62 <- LoadInteger '7'
+    v63 <- Construct v61, [v62]
+    v64 <- Construct v60, [v63]
+EndPlainFunction
+v65 <- CallFunction v58, []
+
+
+function Foo() {
+}
+function f1() {
+    const t3 = WebAssembly.Module;
+    new t3();
+}
+f1();
+function f6() {
+    const t8 = WebAssembly.Module;
+    new t8(0);
+}
+f6();
+function f12() {
+    const t13 = WebAssembly.Module;
+    new t13("s");
+}
+f12();
+function f18() {
+    const t18 = WebAssembly.Module;
+    new t18(undefined);
+}
+f18();
+function f24() {
+    const t23 = WebAssembly.Module;
+    new t23(1.1);
+}
+f24();
+function f30() {
+    const t28 = WebAssembly.Module;
+    new t28(1 / 0);
+}
+f30();
+function f38() {
+    const t33 = WebAssembly.Module;
+    new t33(null);
+}
+f38();
+function f44() {
+    const v46 = WebAssembly.Module;
+    const v47 = new Foo();
+    new v46(v47);
+}
+f44();
+function f50() {
+    const v52 = WebAssembly.Module;
+    const v55 = new ArrayBuffer(0);
+    new v52(v55);
+}
+f50();
+function f58() {
+    const v60 = WebAssembly.Module;
+    const v63 = new ArrayBuffer(7);
+    new v60(v63);
+}
+f58();
+
+FuzzIL program written to corpus/verify-module-basic-errors.fzil

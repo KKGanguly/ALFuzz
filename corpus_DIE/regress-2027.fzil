@@ -1,0 +1,74 @@
+v0 <- CreateNamedVariable 'Date', 'none'
+v1 <- LoadInteger '2010'
+v2 <- LoadInteger '1'
+v3 <- LoadInteger '1'
+v4 <- Construct v0, [v1, v2, v3]
+v5 <- CreateNamedVariable 'd', 'var', v4
+v6 <- BeginPlainFunction -> v7
+    v8 <- CallMethod v5, 'getTime', []
+EndPlainFunction
+v9 <- LoadInteger '10'
+v10 <- CallMethod v5, 'setMilliseconds', [v9]
+v11 <- CallFunction v6, [v10]
+v12 <- LoadInteger '10'
+v13 <- CallMethod v5, 'setSeconds', [v12]
+v14 <- CallFunction v6, [v13]
+v15 <- LoadInteger '10'
+v16 <- CallMethod v5, 'setMinutes', [v15]
+v17 <- CallFunction v6, [v16]
+v18 <- LoadInteger '10'
+v19 <- CallMethod v5, 'setHours', [v18]
+v20 <- CallFunction v6, [v19]
+v21 <- LoadInteger '10'
+v22 <- CallMethod v5, 'setDate', [v21]
+v23 <- CallFunction v6, [v22]
+v24 <- LoadInteger '10'
+v25 <- CallMethod v5, 'setMonth', [v24]
+v26 <- CallFunction v6, [v25]
+v27 <- LoadInteger '2010'
+v28 <- CallMethod v5, 'setFullYear', [v27]
+v29 <- CallFunction v6, [v28]
+v30 <- LoadInteger '10'
+v31 <- CallMethod v5, 'setUTCMilliseconds', [v30]
+v32 <- CallFunction v6, [v31]
+v33 <- LoadInteger '10'
+v34 <- CallMethod v5, 'setUTCSeconds', [v33]
+v35 <- CallFunction v6, [v34]
+v36 <- LoadInteger '10'
+v37 <- CallMethod v5, 'setUTCMinutes', [v36]
+v38 <- CallFunction v6, [v37]
+v39 <- LoadInteger '10'
+v40 <- CallMethod v5, 'setUTCHours', [v39]
+v41 <- CallFunction v6, [v40]
+v42 <- LoadInteger '10'
+v43 <- CallMethod v5, 'setUTCDate', [v42]
+v44 <- CallFunction v6, [v43]
+v45 <- LoadInteger '10'
+v46 <- CallMethod v5, 'setUTCMonth', [v45]
+v47 <- CallFunction v6, [v46]
+v48 <- LoadInteger '2010'
+v49 <- CallMethod v5, 'setUTCFullYear', [v48]
+v50 <- CallFunction v6, [v49]
+
+
+const v4 = new Date(2010, 1, 1);
+var d = v4;
+function Check(a7) {
+    d.getTime();
+}
+Check(d.setMilliseconds(10));
+Check(d.setSeconds(10));
+Check(d.setMinutes(10));
+Check(d.setHours(10));
+Check(d.setDate(10));
+Check(d.setMonth(10));
+Check(d.setFullYear(2010));
+Check(d.setUTCMilliseconds(10));
+Check(d.setUTCSeconds(10));
+Check(d.setUTCMinutes(10));
+Check(d.setUTCHours(10));
+Check(d.setUTCDate(10));
+Check(d.setUTCMonth(10));
+Check(d.setUTCFullYear(2010));
+
+FuzzIL program written to corpus/regress-2027.fzil

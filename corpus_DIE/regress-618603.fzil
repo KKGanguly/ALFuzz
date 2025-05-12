@@ -1,0 +1,42 @@
+BeginTry
+BeginCatch -> v0
+EndTryCatch
+v1 <- BeginPlainFunction -> v2, v3
+    v4 <- CallFunction v3, []
+    v5 <- CreateNamedVariable '__v_10', 'var', v4
+EndPlainFunction
+v6 <- LoadString '[1,2,3]'
+v7 <- BeginArrowFunction -> 
+    v8 <- BeginPlainFunction -> 
+        v9 <- BeginAsyncArrowFunction -> 
+            v10 <- LoadArguments
+            v11 <- Await v10
+            v12 <- CreateArrayWithSpread [...v11]
+        EndAsyncArrowFunction
+        v13 <- CallFunction v9, []
+        Return v13
+    EndPlainFunction
+    v14 <- CallFunction v8, []
+    Return v14
+EndArrowFunction
+v15 <- CallFunction v1, [v6, v7]
+
+
+try {
+} catch(e0) {
+}
+function __f_7(a2, a3) {
+    var __v_10 = a3();
+}
+const v7 = () => {
+    function f8() {
+        const v9 = async () => {
+            [...await arguments];
+        };
+        return v9();
+    }
+    return f8();
+};
+__f_7("[1,2,3]", v7);
+
+FuzzIL program written to corpus/regress-618603.fzil

@@ -1,0 +1,33 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'obj', 'var', v0
+v2 <- LoadString 'foo'
+v3 <- LoadInteger '10'
+v4 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v3
+    ObjectLiteralAddProperty `configurable`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v1, v2, v5]
+v8 <- GetProperty v1, 'foo'
+v9 <- LoadInteger '10'
+v10 <- LoadString 'foo'
+v11 <- LoadInteger '20'
+v12 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v11
+    ObjectLiteralAddProperty `configurable`, v12
+v13 <- EndObjectLiteral
+v14 <- CallMethod v6, 'defineProperty', [v1, v10, v13]
+v15 <- GetProperty v1, 'foo'
+v16 <- LoadInteger '20'
+
+
+var obj = {};
+Object.defineProperty(obj, "foo", { value: 10, configurable: true });
+obj.foo;
+Object.defineProperty(obj, "foo", { value: 20, configurable: true });
+obj.foo;
+
+FuzzIL program written to corpus/regress-crbug-72736.fzil

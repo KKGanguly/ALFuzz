@@ -1,0 +1,35 @@
+v0 <- LoadInteger '1073741824'
+v1 <- UnaryOperation '-', v0
+v2 <- CreateNamedVariable 'global', 'none'
+Reassign v2, v1
+v3 <- LoadInteger '2'
+v4 <- CreateNamedVariable 'global', 'none'
+Reassign v4, v3
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadString 'a'
+    v7 <- CreateNamedVariable 'global', 'none'
+    Reassign v7, v6
+    v8 <- CreateNamedVariable 'global', 'none'
+    Reassign v8, v8
+    v9 <- CreateNamedVariable 'o', 'var', v8
+    BeginWhileLoopHeader
+        v10 <- LoadInteger '2'
+        v11 <- Compare v9, '<', v10
+    BeginWhileLoopBody v11
+    EndWhileLoop
+EndPlainFunction
+v12 <- CallFunction v5, []
+
+
+global = -1073741824;
+global = 2;
+function foo() {
+    global = "a";
+    global = global;
+    var o = global;
+    while (o < 2) {
+    }
+}
+foo();
+
+FuzzIL program written to corpus/regress-674469.fzil

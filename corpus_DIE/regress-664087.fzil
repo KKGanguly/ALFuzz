@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    ThrowException v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v0
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'v', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- UnaryOperation v5, '++'
+EndPlainFunction
+v7 <- BeginPlainFunction -> 
+    v8 <- CallFunction v4, [v3]
+EndPlainFunction
+v9 <- CallFunction v7, []
+v10 <- BeginPlainFunction -> 
+    v11 <- CallFunction v4, [v3]
+EndPlainFunction
+v12 <- CallFunction v10, []
+v13 <- BeginPlainFunction -> 
+    v14 <- CallFunction v4, [v3]
+EndPlainFunction
+v15 <- CallFunction v13, []
+
+
+function g() {
+    throw 1;
+}
+var v = { valueOf: g };
+function foo(a5) {
+    a5++;
+}
+function f7() {
+    foo(v);
+}
+f7();
+function f10() {
+    foo(v);
+}
+f10();
+function f13() {
+    foo(v);
+}
+f13();
+
+FuzzIL program written to corpus/regress-664087.fzil

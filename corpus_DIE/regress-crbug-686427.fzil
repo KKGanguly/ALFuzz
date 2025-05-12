@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '23'
+    v4 <- LoadInteger '4'
+    v5 <- BinaryOperation v2, '+', v4
+    SetComputedProperty v1, v5, v3
+    Return v1
+EndPlainFunction
+v6 <- LoadInteger '1073741824'
+v7 <- CreateNamedVariable 'i', 'var', v6
+v8 <- LoadInteger '23'
+BeginObjectLiteral
+v9 <- EndObjectLiteral
+v10 <- LoadInteger '1'
+v11 <- CallFunction v0, [v9, v10]
+v12 <- LoadInteger '1'
+v13 <- LoadInteger '4'
+v14 <- BinaryOperation v12, '+', v13
+v15 <- GetComputedProperty v11, v14
+v16 <- LoadInteger '23'
+v17 <- CreateArray []
+v18 <- LoadInteger '2'
+v19 <- CallFunction v0, [v17, v18]
+v20 <- LoadInteger '2'
+v21 <- LoadInteger '4'
+v22 <- BinaryOperation v20, '+', v21
+v23 <- GetComputedProperty v19, v22
+v24 <- LoadInteger '23'
+BeginObjectLiteral
+v25 <- EndObjectLiteral
+v26 <- CallFunction v0, [v25, v7]
+v27 <- LoadInteger '4'
+v28 <- BinaryOperation v7, '+', v27
+v29 <- GetComputedProperty v26, v28
+
+
+function f(a1, a2) {
+    a1[a2 + 4] = 23;
+    return a1;
+}
+var i = 1073741824;
+f({}, 1)[1 + 4];
+f([], 2)[2 + 4];
+f({}, i)[i + 4];
+
+FuzzIL program written to corpus/regress-crbug-686427.fzil

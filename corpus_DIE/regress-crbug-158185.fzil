@@ -1,0 +1,39 @@
+v0 <- LoadString '{"0023456": 1}'
+v1 <- CreateNamedVariable 'JSON', 'none'
+v2 <- CallMethod v1, 'parse', [v0]
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- CallMethod v3, 'keys', [v2]
+v5 <- GetElement v4, '0'
+v6 <- LoadString '1234567890123'
+v7 <- LoadString '{"1234567890123": 1}'
+v8 <- CallMethod v1, 'parse', [v7]
+v9 <- CallMethod v3, 'keys', [v8]
+v10 <- GetElement v9, '0'
+v11 <- LoadString '123456789ABCD'
+v12 <- LoadString '{"123456789ABCD": 1}'
+v13 <- CallMethod v1, 'parse', [v12]
+v14 <- CallMethod v3, 'keys', [v13]
+v15 <- GetElement v14, '0'
+v16 <- LoadString '12A'
+v17 <- LoadString '{"12A": 1}'
+v18 <- CallMethod v1, 'parse', [v17]
+v19 <- CallMethod v3, 'keys', [v18]
+v20 <- GetElement v19, '0'
+v21 <- LoadInteger '1'
+v22 <- LoadString '{"0":1}'
+v23 <- CallMethod v1, 'parse', [v22]
+v24 <- GetElement v23, '0'
+v25 <- LoadUndefined
+v26 <- LoadString '{"00":1}'
+v27 <- CallMethod v1, 'parse', [v26]
+v28 <- GetElement v27, '0'
+
+
+Object.keys(JSON.parse("{"0023456": 1}"))[0];
+Object.keys(JSON.parse("{"1234567890123": 1}"))[0];
+Object.keys(JSON.parse("{"123456789ABCD": 1}"))[0];
+Object.keys(JSON.parse("{"12A": 1}"))[0];
+JSON.parse("{"0":1}")[0];
+JSON.parse("{"00":1}")[0];
+
+FuzzIL program written to corpus/regress-crbug-158185.fzil

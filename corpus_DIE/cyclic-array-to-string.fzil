@@ -1,0 +1,102 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'a1', 'var', v2
+v4 <- LoadString '1,2'
+v5 <- CallMethod v3, 'toString', []
+v6 <- LoadString '1,2'
+v7 <- CallMethod v3, 'toLocaleString', []
+v8 <- LoadString '1,2'
+v9 <- CallMethod v3, 'join', []
+v10 <- CallMethod v3, 'push', [v3]
+v11 <- LoadString '1,2,'
+v12 <- CallMethod v3, 'toString', []
+v13 <- LoadString '1,2,'
+v14 <- CallMethod v3, 'toLocaleString', []
+v15 <- LoadString '1,2,'
+v16 <- CallMethod v3, 'join', []
+v17 <- LoadInteger '1'
+v18 <- CallMethod v3, 'push', [v17]
+v19 <- LoadString '1,2,,1'
+v20 <- CallMethod v3, 'toString', []
+v21 <- LoadString '1,2,,1'
+v22 <- CallMethod v3, 'toLocaleString', []
+v23 <- LoadString '1,2,,1'
+v24 <- CallMethod v3, 'join', []
+v25 <- CallMethod v3, 'push', [v3]
+v26 <- LoadString '1,2,,1,'
+v27 <- CallMethod v3, 'toString', []
+v28 <- LoadString '1,2,,1,'
+v29 <- CallMethod v3, 'toLocaleString', []
+v30 <- LoadString '1,2,,1,'
+v31 <- CallMethod v3, 'join', []
+v32 <- LoadInteger '1'
+v33 <- LoadInteger '2'
+v34 <- CreateArray [v32, v33]
+Reassign v3, v34
+v35 <- LoadInteger '3'
+v36 <- LoadInteger '4'
+v37 <- CreateArray [v35, v36]
+v38 <- CreateNamedVariable 'a2', 'var', v37
+v39 <- CallMethod v3, 'push', [v38]
+v40 <- CallMethod v3, 'push', [v38]
+v41 <- LoadString '1,2,3,4,3,4'
+v42 <- CallMethod v3, 'toString', []
+v43 <- LoadString '1,2,3,4,3,4'
+v44 <- CallMethod v3, 'toLocaleString', []
+v45 <- LoadString '1,2,3,4,3,4'
+v46 <- CallMethod v3, 'join', []
+v47 <- CallMethod v38, 'push', [v3]
+v48 <- LoadString '1,2,3,4,,3,4,'
+v49 <- CallMethod v3, 'toString', []
+v50 <- LoadString '1,2,3,4,,3,4,'
+v51 <- CallMethod v3, 'toLocaleString', []
+v52 <- LoadString '1,2,3,4,,3,4,'
+v53 <- CallMethod v3, 'join', []
+v54 <- CreateArray []
+Reassign v3, v54
+v55 <- CreateArray [v3]
+Reassign v38, v55
+v56 <- CallMethod v3, 'push', [v38]
+v57 <- LoadString ''
+v58 <- CallMethod v3, 'toString', []
+v59 <- LoadString ''
+v60 <- CallMethod v3, 'toLocaleString', []
+v61 <- LoadString ''
+v62 <- CallMethod v3, 'join', []
+
+
+var a1 = [1,2];
+a1.toString();
+a1.toLocaleString();
+a1.join();
+a1.push(a1);
+a1.toString();
+a1.toLocaleString();
+a1.join();
+a1.push(1);
+a1.toString();
+a1.toLocaleString();
+a1.join();
+a1.push(a1);
+a1.toString();
+a1.toLocaleString();
+a1.join();
+a1 = [1,2];
+var a2 = [3,4];
+a1.push(a2);
+a1.push(a2);
+a1.toString();
+a1.toLocaleString();
+a1.join();
+a2.push(a1);
+a1.toString();
+a1.toLocaleString();
+a1.join();
+a1 = [];
+a1.push(a2 = [a1]);
+a1.toString();
+a1.toLocaleString();
+a1.join();
+
+FuzzIL program written to corpus/cyclic-array-to-string.fzil

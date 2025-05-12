@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadThis
+    v2 <- GetProperty v1, 'x'
+    v3 <- GetProperty v2, 'x'
+    v4 <- LoadThis
+    SetProperty v4, 'x', v3
+EndPlainFunction
+v5 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v5
+v6 <- EndObjectLiteral
+v7 <- GetProperty v0, 'prototype'
+SetProperty v7, 'x', v6
+v8 <- Construct v0, []
+v9 <- Construct v0, []
+v10 <- Construct v0, []
+
+
+function Fuu() {
+    this.x = this.x.x;
+}
+const v6 = { x: 1 };
+const t4 = Fuu.prototype;
+t4.x = v6;
+new Fuu();
+new Fuu();
+new Fuu();
+
+FuzzIL program written to corpus/regress-363956.fzil

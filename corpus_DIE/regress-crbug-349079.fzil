@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- Compare v2, '===', v1
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '1'
+    v6 <- CreateNamedVariable 'a', 'var', v5
+    v7 <- LoadInteger '0'
+    v8 <- UnaryOperation '-', v7
+    v9 <- CreateNamedVariable 'b', 'var', v8
+    v10 <- LoadFloat '1.5'
+    v11 <- CreateNamedVariable 'c', 'var', v10
+    v12 <- UnaryOperation v9, '++'
+    v13 <- UnaryOperation v11, '++'
+    v14 <- CreateNamedVariable 'Math', 'none'
+    v15 <- CallMethod v14, 'max', [v12, v13]
+    v16 <- UnaryOperation v9, '++'
+    v17 <- UnaryOperation v11, '++'
+    v18 <- CallMethod v14, 'min', [v16, v17]
+    v19 <- UnaryOperation v9, '++'
+    v20 <- UnaryOperation v6, '++'
+    v21 <- CallMethod v14, 'max', [v19, v20]
+EndPlainFunction
+v22 <- CallFunction v4, []
+v23 <- CallFunction v4, []
+v24 <- CallFunction v4, []
+
+
+function assertEquals(a1, a2) {
+    return a2 === a1;
+}
+function crash() {
+    var a = 1;
+    var b = -0;
+    var c = 1.5;
+    Math.max(b++, c++);
+    Math.min(b++, c++);
+    Math.max(b++, a++);
+}
+crash();
+crash();
+crash();
+
+FuzzIL program written to corpus/regress-crbug-349079.fzil

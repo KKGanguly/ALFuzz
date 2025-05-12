@@ -1,0 +1,63 @@
+v0 <- LoadString '5'
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- LoadBoolean 'false'
+v3 <- CreateNamedVariable 'b', 'var', v2
+v4 <- BeginPlainFunction -> 
+    BeginIf v3
+        BeginObjectLiteral
+        v5 <- EndObjectLiteral
+        Reassign v1, v5
+    EndIf
+    v6 <- LoadInteger '0'
+    Return v6
+EndPlainFunction
+v7 <- CreateNamedVariable 'check', 'none'
+Reassign v7, v4
+BeginObjectLiteral
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'obj', 'var', v8
+v10 <- CreateNamedVariable 'check', 'none'
+SetProperty v9, 'valueOf', v10
+v11 <- BeginPlainFunction -> 
+    BeginTry
+        v12 <- CreateNamedVariable 'Number', 'none'
+        v13 <- CallFunction v12, [v9]
+        v14 <- BinaryOperation v1, '+', v13
+        Return v14
+    BeginCatch -> v15
+        v16 <- GetProperty v15, 'stack'
+        v17 <- CreateNamedVariable 'console', 'none'
+        v18 <- CallMethod v17, 'log', [v16]
+    EndTryCatch
+EndPlainFunction
+v19 <- CallFunction v11, []
+v20 <- CallFunction v11, []
+v21 <- LoadBoolean 'true'
+Reassign v3, v21
+v22 <- CallFunction v11, []
+
+
+var x = "5";
+var b = false;
+function f4() {
+    if (b) {
+        x = {};
+    }
+    return 0;
+}
+check = f4;
+var obj = {};
+obj.valueOf = check;
+function f() {
+    try {
+        return x + Number(obj);
+    } catch(e15) {
+        console.log(e15.stack);
+    }
+}
+f();
+f();
+b = true;
+f();
+
+FuzzIL program written to corpus/number-constructor-deopt.fzil

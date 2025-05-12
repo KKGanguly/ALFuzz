@@ -1,0 +1,96 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadInteger '1'
+        v3 <- LoadInteger '1'
+        v4 <- LoadInteger '1'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `a`, v2
+            ObjectLiteralAddProperty `b`, v3
+            ObjectLiteralAddProperty `c`, v4
+        v5 <- EndObjectLiteral
+        Return v5
+    EndPlainFunction
+    v6 <- CallFunction v1, []
+    v7 <- CreateNamedVariable 'a', 'const', v6
+    v8 <- BeginPlainFunction -> 
+        v9 <- CreateNamedVariable 'Promise', 'none'
+        v10 <- CallMethod v9, 'resolve', [v7]
+        Return v10
+    EndPlainFunction
+    v11 <- CallFunction v8, []
+    v12 <- CreateNamedVariable 'Promise', 'none'
+    v13 <- CallFunction v8, []
+    v14 <- CallFunction v8, []
+    v15 <- CallFunction v8, []
+    v16 <- CallFunction v1, []
+    v17 <- CreateNamedVariable 'b', 'const', v16
+    v18 <- LoadInteger '1'
+    SetProperty v17, 'd', v18
+    v19 <- CallFunction v8, []
+EndPlainFunction
+v20 <- CallFunction v0, []
+v21 <- BeginPlainFunction -> 
+    v22 <- BeginPlainFunction -> 
+        v23 <- LoadInteger '1'
+        v24 <- LoadInteger '1'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v23
+            ObjectLiteralAddProperty `y`, v24
+        v25 <- EndObjectLiteral
+        Return v25
+    EndPlainFunction
+    v26 <- CallFunction v22, []
+    v27 <- CreateNamedVariable 'a', 'const', v26
+    v28 <- BeginAsyncFunction -> 
+        Return v27
+    EndAsyncFunction
+    v29 <- CallFunction v28, []
+    v30 <- CreateNamedVariable 'Promise', 'none'
+    v31 <- CallFunction v28, []
+    v32 <- CallFunction v28, []
+    v33 <- CallFunction v28, []
+    v34 <- CallFunction v22, []
+    v35 <- CreateNamedVariable 'b', 'const', v34
+    v36 <- LoadInteger '1'
+    SetProperty v35, 'z', v36
+    v37 <- CallFunction v28, []
+EndPlainFunction
+v38 <- CallFunction v21, []
+
+
+function f0() {
+    function makeObjectWithStableMap() {
+        return { a: 1, b: 1, c: 1 };
+    }
+    const a = makeObjectWithStableMap();
+    function foo() {
+        return Promise.resolve(a);
+    }
+    foo();
+    foo();
+    foo();
+    foo();
+    const b = makeObjectWithStableMap();
+    b.d = 1;
+    foo();
+}
+f0();
+function f21() {
+    function makeObjectWithStableMap() {
+        return { x: 1, y: 1 };
+    }
+    const a = makeObjectWithStableMap();
+    async function foo() {
+        return a;
+    }
+    foo();
+    foo();
+    foo();
+    foo();
+    const b = makeObjectWithStableMap();
+    b.z = 1;
+    foo();
+}
+f21();
+
+FuzzIL program written to corpus/promise-resolve-stable-maps.fzil

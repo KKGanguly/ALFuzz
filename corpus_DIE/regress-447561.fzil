@@ -1,0 +1,38 @@
+v0 <- LoadRegExp 'foo' 'gi'
+v1 <- CreateNamedVariable '__proto__', 'none'
+Reassign v1, v0
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'source', 'none'
+EndPlainFunction
+v4 <- CallFunction v2, []
+v5 <- BeginPlainFunction -> 
+    v6 <- CreateNamedVariable 'global', 'none'
+EndPlainFunction
+v7 <- CallFunction v5, []
+v8 <- BeginPlainFunction -> 
+    v9 <- CreateNamedVariable 'ignoreCase', 'none'
+EndPlainFunction
+v10 <- CallFunction v8, []
+v11 <- BeginPlainFunction -> 
+    v12 <- CreateNamedVariable 'multiline', 'none'
+EndPlainFunction
+v13 <- CallFunction v11, []
+v14 <- LoadInteger '0'
+v15 <- CreateNamedVariable 'lastIndex', 'none'
+
+
+__proto__ = /foo/gi;
+function f2() {
+}
+f2();
+function f5() {
+}
+f5();
+function f8() {
+}
+f8();
+function f11() {
+}
+f11();
+
+FuzzIL program written to corpus/regress-447561.fzil

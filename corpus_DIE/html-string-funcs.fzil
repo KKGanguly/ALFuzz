@@ -1,0 +1,100 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadString '<'
+    v4 <- BinaryOperation v3, '+', v2
+    v5 <- LoadString '>foo</'
+    v6 <- BinaryOperation v4, '+', v5
+    v7 <- BinaryOperation v6, '+', v2
+    v8 <- LoadString '>'
+    v9 <- BinaryOperation v7, '+', v8
+    v10 <- LoadString 'foo'
+    v11 <- CallComputedMethod v10, v1, []
+    v12 <- CallMethod v11, 'toLowerCase', []
+EndPlainFunction
+v13 <- LoadString 'big'
+v14 <- LoadString 'blink'
+v15 <- LoadString 'b'
+v16 <- LoadString 'tt'
+v17 <- LoadString 'i'
+v18 <- LoadString 'small'
+v19 <- LoadString 'strike'
+v20 <- LoadString 'sub'
+v21 <- LoadString 'sup'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `big`, v13
+    ObjectLiteralAddProperty `blink`, v14
+    ObjectLiteralAddProperty `bold`, v15
+    ObjectLiteralAddProperty `fixed`, v16
+    ObjectLiteralAddProperty `italics`, v17
+    ObjectLiteralAddProperty `small`, v18
+    ObjectLiteralAddProperty `strike`, v19
+    ObjectLiteralAddProperty `sub`, v20
+    ObjectLiteralAddProperty `sup`, v21
+v22 <- EndObjectLiteral
+v23 <- CreateNamedVariable 'simple', 'var', v22
+BeginForInLoop v23 -> v24
+    v25 <- GetComputedProperty v23, v24
+    v26 <- CallFunction v0, [v24, v25]
+EndForInLoop
+v27 <- BeginPlainFunction -> v28, v29, v30
+    v31 <- LoadString '<'
+    v32 <- BinaryOperation v31, '+', v29
+    v33 <- LoadString ' '
+    v34 <- BinaryOperation v32, '+', v33
+    v35 <- BinaryOperation v34, '+', v30
+    v36 <- LoadString '="bar">foo</'
+    v37 <- BinaryOperation v35, '+', v36
+    v38 <- BinaryOperation v37, '+', v29
+    v39 <- LoadString '>'
+    v40 <- BinaryOperation v38, '+', v39
+    v41 <- LoadString 'bar'
+    v42 <- LoadString 'foo'
+    v43 <- CallComputedMethod v42, v28, [v41]
+    v44 <- CallMethod v43, 'toLowerCase', []
+EndPlainFunction
+v45 <- LoadString 'anchor'
+v46 <- LoadString 'a'
+v47 <- LoadString 'name'
+v48 <- CallFunction v27, [v45, v46, v47]
+v49 <- LoadString 'link'
+v50 <- LoadString 'a'
+v51 <- LoadString 'href'
+v52 <- CallFunction v27, [v49, v50, v51]
+v53 <- LoadString 'fontcolor'
+v54 <- LoadString 'font'
+v55 <- LoadString 'color'
+v56 <- CallFunction v27, [v53, v54, v55]
+v57 <- LoadString 'fontsize'
+v58 <- LoadString 'font'
+v59 <- LoadString 'size'
+v60 <- CallFunction v27, [v57, v58, v59]
+
+
+function CheckSimple(a1, a2) {
+    ((("<" + a2) + ">foo</") + a2) + ">";
+    ("foo")[a1]().toLowerCase();
+}
+const v22 = {
+    big: "big",
+    blink: "blink",
+    bold: "b",
+    fixed: "tt",
+    italics: "i",
+    small: "small",
+    strike: "strike",
+    sub: "sub",
+    sup: "sup",
+};
+var simple = v22;
+for (const v24 in simple) {
+    CheckSimple(v24, simple[v24]);
+}
+function CheckCompound(a28, a29, a30) {
+    ((((("<" + a29) + " ") + a30) + "="bar">foo</") + a29) + ">";
+    ("foo")[a28]("bar").toLowerCase();
+}
+CheckCompound("anchor", "a", "name");
+CheckCompound("link", "a", "href");
+CheckCompound("fontcolor", "font", "color");
+CheckCompound("fontsize", "font", "size");
+
+FuzzIL program written to corpus/html-string-funcs.fzil

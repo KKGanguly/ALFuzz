@@ -1,0 +1,15 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString '{"0":1}'
+    v2 <- CreateNamedVariable 'JSON', 'none'
+    v3 <- CallMethod v2, 'parse', [v1]
+    v4 <- CallFunction v0, [v3]
+EndPlainFunction
+v5 <- LoadString 'shouldThrow()'
+v6 <- CreateNamedVariable 'RangeError', 'none'
+
+
+function shouldThrow() {
+    shouldThrow(JSON.parse("{"0":1}"));
+}
+
+FuzzIL program written to corpus/regress-472504.fzil

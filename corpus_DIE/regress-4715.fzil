@@ -1,0 +1,103 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'training', 'var', v0
+v2 <- LoadString 'nop'
+SetProperty v1, 'a', v2
+v3 <- LoadString 'nop'
+SetProperty v1, 'slow', v3
+v4 <- DeleteProperty v1, 'slow'
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'keepalive', 'var', v5
+v7 <- LoadString 'nop'
+SetProperty v6, 'a', v7
+v8 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v9 <- EndObjectLiteral
+    v10 <- CreateNamedVariable 'r', 'var', v9
+    v11 <- LoadString 'nop'
+    SetProperty v10, 'a', v11
+    v12 <- LoadString 'nop'
+    SetProperty v10, 'b', v12
+    v13 <- LoadString 'dictionarize'
+    SetProperty v10, 'c', v13
+    v14 <- LoadString 'gc'
+    SetProperty v10, 'd', v14
+    v15 <- LoadString 'result'
+    SetProperty v10, 'e', v15
+    Return v10
+EndPlainFunction
+v16 <- BeginPlainFunction -> v17, v18
+    v19 <- LoadString 'dictionarize'
+    v20 <- Compare v18, '===', v19
+    BeginIf v20
+        v21 <- DeleteProperty v17, 'a'
+    BeginElse
+        v22 <- LoadString 'gc'
+        v23 <- Compare v18, '===', v22
+        BeginIf v23
+            v24 <- CreateNamedVariable 'gc', 'none'
+            v25 <- CallFunction v24, []
+        EndIf
+    EndIf
+EndPlainFunction
+v26 <- BeginPlainFunction -> v27
+    BeginForInLoop v27 -> v28
+        v29 <- GetComputedProperty v27, v28
+        v30 <- CallFunction v16, [v27, v29]
+    EndForInLoop
+    v31 <- CreateNamedVariable 'key', 'none'
+    Return v31
+EndPlainFunction
+v32 <- CallFunction v26, [v1]
+v33 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v33
+v34 <- EndObjectLiteral
+v35 <- LoadString 'dictionarize'
+v36 <- CallFunction v16, [v34, v35]
+BeginObjectLiteral
+v37 <- EndObjectLiteral
+v38 <- LoadString 'gc'
+v39 <- CallFunction v16, [v37, v38]
+v40 <- LoadString 'e'
+v41 <- CallFunction v8, []
+v42 <- CallFunction v26, [v41]
+
+
+var training = {};
+training.a = "nop";
+training.slow = "nop";
+delete training.slow;
+var keepalive = {};
+keepalive.a = "nop";
+function GetReal() {
+    var r = {};
+    r.a = "nop";
+    r.b = "nop";
+    r.c = "dictionarize";
+    r.d = "gc";
+    r.e = "result";
+    return r;
+}
+function SideEffect(a17, a18) {
+    if (a18 === "dictionarize") {
+        delete a17.a;
+    } else {
+        if (a18 === "gc") {
+            gc();
+        }
+    }
+}
+function foo(a27) {
+    for (const v28 in a27) {
+        SideEffect(a27, a27[v28]);
+    }
+    return key;
+}
+foo(training);
+SideEffect({ a: 0 }, "dictionarize");
+SideEffect({}, "gc");
+foo(GetReal());
+
+FuzzIL program written to corpus/regress-4715.fzil

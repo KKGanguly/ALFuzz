@@ -1,0 +1,140 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '1'
+    v4 <- LoadInteger '2'
+    v5 <- LoadInteger '3'
+    v6 <- CreateArray [v3, v4, v5]
+    v7 <- CreateNamedVariable 'array', 'var', v6
+    v8 <- LoadInteger '0'
+    v9 <- CreateNamedVariable 'callback_count', 'var', v8
+    v10 <- BeginPlainFunction -> 
+        v11 <- UnaryOperation v9, '++'
+        v12 <- CallFunction v2, []
+        Return v12
+    EndPlainFunction
+    v13 <- CreateNamedVariable 'callback_wrapper', 'var', v10
+    v14 <- LoadString '1'
+    v15 <- BeginPlainFunction -> 
+        v16 <- LoadInteger '1'
+        v17 <- DeleteElement v7, '1'
+    EndPlainFunction
+    v18 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v15
+        ObjectLiteralAddProperty `configurable`, v18
+    v19 <- EndObjectLiteral
+    v20 <- CreateNamedVariable 'Object', 'none'
+    v21 <- CallMethod v20, 'defineProperty', [v7, v14, v19]
+    v22 <- LoadString '1'
+    v23 <- CallMethod v7, 'hasOwnProperty', [v22]
+    v24 <- LoadString 'argument'
+    v25 <- CreateArray [v13, v24]
+    v26 <- CallMethod v1, 'apply', [v7, v25]
+    v27 <- LoadString '1'
+    v28 <- CallMethod v7, 'hasOwnProperty', [v27]
+    v29 <- LoadInteger '3'
+EndPlainFunction
+v30 <- CreateNamedVariable 'Array', 'none'
+v31 <- GetProperty v30, 'prototype'
+v32 <- GetProperty v31, 'every'
+v33 <- BeginPlainFunction -> 
+    v34 <- LoadBoolean 'true'
+    Return v34
+EndPlainFunction
+v35 <- CallFunction v0, [v32, v33]
+v36 <- GetProperty v30, 'prototype'
+v37 <- GetProperty v36, 'filter'
+v38 <- BeginPlainFunction -> 
+    v39 <- LoadBoolean 'true'
+    Return v39
+EndPlainFunction
+v40 <- CallFunction v0, [v37, v38]
+v41 <- GetProperty v30, 'prototype'
+v42 <- GetProperty v41, 'forEach'
+v43 <- BeginPlainFunction -> 
+    v44 <- LoadInteger '0'
+    Return v44
+EndPlainFunction
+v45 <- CallFunction v0, [v42, v43]
+v46 <- GetProperty v30, 'prototype'
+v47 <- GetProperty v46, 'map'
+v48 <- BeginPlainFunction -> 
+    v49 <- LoadInteger '0'
+    Return v49
+EndPlainFunction
+v50 <- CallFunction v0, [v47, v48]
+v51 <- GetProperty v30, 'prototype'
+v52 <- GetProperty v51, 'reduce'
+v53 <- BeginPlainFunction -> 
+    v54 <- LoadInteger '0'
+    Return v54
+EndPlainFunction
+v55 <- CallFunction v0, [v52, v53]
+v56 <- GetProperty v30, 'prototype'
+v57 <- GetProperty v56, 'reduceRight'
+v58 <- BeginPlainFunction -> 
+    v59 <- LoadInteger '0'
+    Return v59
+EndPlainFunction
+v60 <- CallFunction v0, [v57, v58]
+v61 <- GetProperty v30, 'prototype'
+v62 <- GetProperty v61, 'some'
+v63 <- BeginPlainFunction -> 
+    v64 <- LoadBoolean 'false'
+    Return v64
+EndPlainFunction
+v65 <- CallFunction v0, [v62, v63]
+
+
+function CheckSequence(a1, a2) {
+    var array = [1,2,3];
+    var callback_count = 0;
+    function f10() {
+        callback_count++;
+        return a2();
+    }
+    var callback_wrapper = f10;
+    function f15() {
+        delete array[1];
+    }
+    Object.defineProperty(array, "1", { get: f15, configurable: true });
+    array.hasOwnProperty("1");
+    a1.apply(array, [callback_wrapper,"argument"]);
+    array.hasOwnProperty("1");
+}
+const v32 = Array.prototype.every;
+function f33() {
+    return true;
+}
+CheckSequence(v32, f33);
+const v37 = Array.prototype.filter;
+function f38() {
+    return true;
+}
+CheckSequence(v37, f38);
+const v42 = Array.prototype.forEach;
+function f43() {
+    return 0;
+}
+CheckSequence(v42, f43);
+const v47 = Array.prototype.map;
+function f48() {
+    return 0;
+}
+CheckSequence(v47, f48);
+const v52 = Array.prototype.reduce;
+function f53() {
+    return 0;
+}
+CheckSequence(v52, f53);
+const v57 = Array.prototype.reduceRight;
+function f58() {
+    return 0;
+}
+CheckSequence(v57, f58);
+const v62 = Array.prototype.some;
+function f63() {
+    return false;
+}
+CheckSequence(v62, f63);
+
+FuzzIL program written to corpus/regress-1790.fzil

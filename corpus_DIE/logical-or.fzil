@@ -1,0 +1,132 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '0'
+    v4 <- Compare v1, '==', v3
+    v5 <- LoadInteger '0'
+    v6 <- Compare v2, '==', v5
+    v7 <- BinaryOperation v4, '||', v6
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9, v10
+    v11 <- LoadInteger '0'
+    v12 <- Compare v9, '==', v11
+    v13 <- BinaryOperation v12, '||', v10
+    Return v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> v15, v16
+    v17 <- LoadInteger '0'
+    v18 <- Compare v16, '==', v17
+    v19 <- BinaryOperation v15, '||', v18
+    Return v19
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21, v22
+    v23 <- BinaryOperation v21, '||', v22
+    Return v23
+EndPlainFunction
+v24 <- LoadInteger '0'
+v25 <- LoadInteger '0'
+v26 <- CallFunction v0, [v24, v25]
+v27 <- LoadInteger '1'
+v28 <- LoadInteger '0'
+v29 <- CallFunction v0, [v27, v28]
+v30 <- LoadInteger '0'
+v31 <- LoadInteger '1'
+v32 <- CallFunction v0, [v30, v31]
+v33 <- LoadInteger '1'
+v34 <- LoadInteger '1'
+v35 <- CallFunction v0, [v33, v34]
+v36 <- LoadInteger '0'
+v37 <- LoadInteger '0'
+v38 <- CallFunction v8, [v36, v37]
+v39 <- LoadInteger '0'
+v40 <- LoadInteger '1'
+v41 <- LoadInteger '0'
+v42 <- CallFunction v8, [v40, v41]
+v43 <- LoadInteger '0'
+v44 <- LoadInteger '1'
+v45 <- CallFunction v8, [v43, v44]
+v46 <- LoadInteger '1'
+v47 <- LoadInteger '1'
+v48 <- LoadInteger '1'
+v49 <- CallFunction v8, [v47, v48]
+v50 <- LoadInteger '2'
+v51 <- LoadInteger '1'
+v52 <- LoadInteger '2'
+v53 <- CallFunction v8, [v51, v52]
+v54 <- LoadInteger '0'
+v55 <- LoadInteger '0'
+v56 <- CallFunction v14, [v54, v55]
+v57 <- LoadInteger '1'
+v58 <- LoadInteger '1'
+v59 <- LoadInteger '0'
+v60 <- CallFunction v14, [v58, v59]
+v61 <- LoadInteger '0'
+v62 <- LoadInteger '1'
+v63 <- CallFunction v14, [v61, v62]
+v64 <- LoadInteger '1'
+v65 <- LoadInteger '1'
+v66 <- LoadInteger '1'
+v67 <- CallFunction v14, [v65, v66]
+v68 <- LoadInteger '2'
+v69 <- LoadInteger '2'
+v70 <- LoadInteger '1'
+v71 <- CallFunction v14, [v69, v70]
+v72 <- LoadInteger '0'
+v73 <- LoadInteger '0'
+v74 <- LoadInteger '0'
+v75 <- CallFunction v20, [v73, v74]
+v76 <- LoadInteger '1'
+v77 <- LoadInteger '1'
+v78 <- LoadInteger '0'
+v79 <- CallFunction v20, [v77, v78]
+v80 <- LoadInteger '2'
+v81 <- LoadInteger '2'
+v82 <- LoadInteger '0'
+v83 <- CallFunction v20, [v81, v82]
+v84 <- LoadInteger '1'
+v85 <- LoadInteger '0'
+v86 <- LoadInteger '1'
+v87 <- CallFunction v20, [v85, v86]
+v88 <- LoadInteger '2'
+v89 <- LoadInteger '0'
+v90 <- LoadInteger '2'
+v91 <- CallFunction v20, [v89, v90]
+v92 <- LoadInteger '1'
+v93 <- LoadInteger '1'
+v94 <- LoadInteger '2'
+v95 <- CallFunction v20, [v93, v94]
+
+
+function OrBB(a1, a2) {
+    return (a1 == 0) || (a2 == 0);
+}
+function OrBN(a9, a10) {
+    return (a9 == 0) || a10;
+}
+function OrNB(a15, a16) {
+    return a15 || (a16 == 0);
+}
+function OrNN(a21, a22) {
+    return a21 || a22;
+}
+OrBB(0, 0);
+OrBB(1, 0);
+OrBB(0, 1);
+OrBB(1, 1);
+OrBN(0, 0);
+OrBN(1, 0);
+OrBN(0, 1);
+OrBN(1, 1);
+OrBN(1, 2);
+OrNB(0, 0);
+OrNB(1, 0);
+OrNB(0, 1);
+OrNB(1, 1);
+OrNB(2, 1);
+OrNN(0, 0);
+OrNN(1, 0);
+OrNN(2, 0);
+OrNN(0, 1);
+OrNN(0, 2);
+OrNN(1, 2);
+
+FuzzIL program written to corpus/logical-or.fzil

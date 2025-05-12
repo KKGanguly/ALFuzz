@@ -1,0 +1,59 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginForLoopInitializer
+    v1 <- LoadInteger '0'
+BeginForLoopCondition -> v2
+    v3 <- LoadInteger '10000'
+    v4 <- Compare v2, '<', v3
+BeginForLoopAfterthought v4 -> v5
+    v6 <- UnaryOperation v5, '++'
+BeginForLoopBody -> v7
+    v8 <- LoadInteger '1'
+    v9 <- GetProperty v0, 'prototype'
+    v10 <- LoadString 'b'
+    v11 <- BinaryOperation v10, '+', v7
+    SetComputedProperty v9, v11, v8
+EndForLoop
+v12 <- Construct v0, []
+v13 <- CreateNamedVariable 'o', 'var', v12
+v14 <- BeginPlainFunction -> v15, v16
+    v17 <- GetComputedProperty v15, v16
+    Return v17
+EndPlainFunction
+v18 <- LoadString 'b'
+v19 <- CreateNamedVariable 'p', 'var', v18
+v20 <- LoadInteger '10001'
+Update v19, '+', v20
+v21 <- LoadUndefined
+v22 <- CallFunction v14, [v13, v19]
+v23 <- LoadUndefined
+v24 <- CallFunction v14, [v13, v19]
+v25 <- LoadUndefined
+v26 <- CallFunction v14, [v13, v19]
+v27 <- LoadInteger '100'
+v28 <- GetProperty v0, 'prototype'
+SetComputedProperty v28, v19, v27
+v29 <- LoadInteger '100'
+v30 <- CallFunction v14, [v13, v19]
+
+
+function f() {
+}
+for (let i2 = 0; i2 < 10000; i2++) {
+    const t3 = f.prototype;
+    t3["b" + i2] = 1;
+}
+const v12 = new f();
+var o = v12;
+function access(a15, a16) {
+    return a15[a16];
+}
+var p = "b";
+access(o, p += 10001);
+access(o, p);
+access(o, p);
+const t12 = f.prototype;
+t12[p] = 100;
+access(o, p);
+
+FuzzIL program written to corpus/regress-crbug-731193.fzil

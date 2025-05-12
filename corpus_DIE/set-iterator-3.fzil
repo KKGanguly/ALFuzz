@@ -1,0 +1,55 @@
+v0 <- CreateNamedVariable 'Set', 'none'
+v1 <- LoadInteger '1'
+v2 <- LoadInteger '2'
+v3 <- LoadInteger '3'
+v4 <- CreateArray [v1, v2, v3]
+v5 <- Construct v0, [v4]
+v6 <- CreateNamedVariable 'set', 'var', v5
+v7 <- CreateNamedVariable 'Symbol', 'none'
+v8 <- GetProperty v7, 'iterator'
+v9 <- CallComputedMethod v6, v8, []
+v10 <- CreateNamedVariable 'iterator', 'var', v9
+v11 <- BeginArrowFunction -> 
+    v12 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `done`, v12
+    v13 <- EndObjectLiteral
+    Return v13
+EndArrowFunction
+v14 <- GetProperty v10, '__proto__'
+SetProperty v14, 'next', v11
+v15 <- CreateArray []
+v16 <- CreateArrayWithSpread [...v6]
+v17 <- CreateArray []
+v18 <- CallMethod v6, 'entries', []
+v19 <- CreateArrayWithSpread [...v18]
+v20 <- CreateArray []
+v21 <- CallMethod v6, 'keys', []
+v22 <- CreateArrayWithSpread [...v21]
+v23 <- CreateArray []
+v24 <- CallMethod v6, 'values', []
+v25 <- CreateArrayWithSpread [...v24]
+v26 <- CreateArray []
+v27 <- CreateArrayWithSpread [...v10]
+
+
+const v5 = new Set([1,2,3]);
+var set = v5;
+var iterator = set[Symbol.iterator]();
+const v11 = () => {
+    return { done: true };
+};
+const t6 = iterator.__proto__;
+t6.next = v11;
+[];
+[...set];
+[];
+[...set.entries()];
+[];
+[...set.keys()];
+[];
+[...set.values()];
+[];
+[...iterator];
+
+FuzzIL program written to corpus/set-iterator-3.fzil

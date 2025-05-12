@@ -1,0 +1,28 @@
+v0 <- CreateNamedVariable 'Uint32Array', 'none'
+v1 <- LoadInteger '1'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- GetProperty v5, 'length'
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '1'
+v8 <- CallFunction v4, [v3]
+v9 <- LoadInteger '1'
+v10 <- CallFunction v4, [v3]
+v11 <- LoadInteger '1'
+v12 <- CallFunction v4, [v3]
+v13 <- CallFunction v4, []
+
+
+const v2 = new Uint32Array(1);
+var a = v2;
+function len(a5) {
+    return a5.length;
+}
+len(a);
+len(a);
+len(a);
+len();
+
+FuzzIL program written to corpus/optimized-uint32array-length.fzil

@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString ''
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'a', 'var', v2
+    v4 <- GetElement v3, '0'
+    v5 <- CreateNamedVariable 'print', 'none'
+    v6 <- CallFunction v5, [v4]
+    Return v3
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadString 'bazinga!'
+    SetElement v8, '0', v9
+EndPlainFunction
+BeginForLoopInitializer
+    v10 <- LoadInteger '0'
+BeginForLoopCondition -> v11
+    v12 <- LoadInteger '5'
+    v13 <- Compare v11, '<', v12
+BeginForLoopAfterthought v13 -> v14
+    v15 <- UnaryOperation v14, '++'
+BeginForLoopBody -> v16
+    v17 <- CreateArray []
+    v18 <- CallFunction v7, [v17]
+EndForLoop
+v19 <- CallFunction v0, []
+v20 <- CallFunction v7, [v19]
+v21 <- LoadString ''
+v22 <- CreateArray [v21]
+v23 <- CallFunction v0, []
+
+
+function foo() {
+    var a = [""];
+    print(a[0]);
+    return a;
+}
+function bar(a8) {
+    a8[0] = "bazinga!";
+}
+for (let i11 = 0; i11 < 5; i11++) {
+    bar([]);
+}
+bar(foo());
+[""];
+foo();
+
+FuzzIL program written to corpus/regress-805768.fzil

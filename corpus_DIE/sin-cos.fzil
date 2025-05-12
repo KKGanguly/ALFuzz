@@ -1,0 +1,928 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '0'
+v2 <- UnaryOperation '-', v1
+v3 <- CreateNamedVariable 'Math', 'none'
+v4 <- CallMethod v3, 'sin', [v2]
+v5 <- BinaryOperation v0, '/', v4
+v6 <- CreateNamedVariable 'String', 'none'
+v7 <- CallFunction v6, [v5]
+v8 <- LoadInteger '1'
+v9 <- LoadInteger '0'
+v10 <- UnaryOperation '-', v9
+v11 <- CallMethod v3, 'cos', [v10]
+v12 <- LoadString '-Infinity'
+v13 <- LoadInteger '1'
+v14 <- LoadInteger '0'
+v15 <- UnaryOperation '-', v14
+v16 <- CallMethod v3, 'tan', [v15]
+v17 <- BinaryOperation v13, '/', v16
+v18 <- CallFunction v6, [v17]
+v19 <- BeginPlainFunction -> v20
+    v21 <- CallMethod v3, 'sin', [v20]
+    v22 <- CallMethod v3, 'cos', [v20]
+    v23 <- BinaryOperation v21, '+', v22
+    v24 <- CallMethod v3, 'tan', [v20]
+    v25 <- BinaryOperation v23, '+', v24
+    Return v25
+EndPlainFunction
+v26 <- LoadInteger '1'
+v27 <- CallFunction v19, [v26]
+v28 <- LoadInteger '1'
+v29 <- CallFunction v19, [v28]
+v30 <- LoadInteger '0'
+v31 <- UnaryOperation '-', v30
+v32 <- CallFunction v19, [v31]
+v33 <- CallFunction v19, []
+v34 <- BeginPlainFunction -> 
+    v35 <- LoadInteger '0'
+    v36 <- LoadInteger '0'
+    v37 <- CallMethod v3, 'sin', [v36]
+    v38 <- LoadInteger '1'
+    v39 <- GetProperty v3, 'PI'
+    v40 <- LoadInteger '2'
+    v41 <- BinaryOperation v39, '/', v40
+    v42 <- CallMethod v3, 'sin', [v41]
+EndPlainFunction
+v43 <- BeginPlainFunction -> 
+    v44 <- LoadInteger '1'
+    v45 <- LoadInteger '0'
+    v46 <- CallMethod v3, 'cos', [v45]
+    v47 <- LoadInteger '1'
+    v48 <- UnaryOperation '-', v47
+    v49 <- GetProperty v3, 'PI'
+    v50 <- CallMethod v3, 'cos', [v49]
+EndPlainFunction
+v51 <- CallFunction v34, []
+v52 <- CallFunction v43, []
+v53 <- LoadInteger '2'
+v54 <- LoadInteger '30'
+v55 <- CallMethod v3, 'pow', [v53, v54]
+v56 <- CreateNamedVariable 'x', 'var', v55
+v57 <- CallMethod v3, 'sin', [v56]
+v58 <- CallMethod v3, 'cos', [v56]
+v59 <- Compare v57, '!=', v58
+v60 <- LoadFloat '0.5'
+Reassign v56, v60
+v61 <- CallMethod v3, 'sin', [v56]
+v62 <- CallMethod v3, 'log', [v56]
+v63 <- Compare v61, '!=', v62
+v64 <- LoadInteger '1'
+v65 <- CreateArray [v64]
+v66 <- CreateNamedVariable 'factorial', 'var', v65
+v67 <- LoadInteger '50'
+v68 <- CreateNamedVariable 'accuracy', 'var', v67
+BeginForLoopInitializer
+    v69 <- LoadInteger '1'
+BeginForLoopCondition -> v70
+    v71 <- Compare v70, '<', v68
+BeginForLoopAfterthought v71 -> v72
+    v73 <- UnaryOperation v72, '++'
+BeginForLoopBody -> v74
+    v75 <- LoadInteger '1'
+    v76 <- BinaryOperation v74, '-', v75
+    v77 <- GetComputedProperty v66, v76
+    v78 <- BinaryOperation v77, '*', v74
+    SetComputedProperty v66, v74, v78
+EndForLoop
+v79 <- BeginPlainFunction -> v80
+    v81 <- LoadInteger '0'
+    v82 <- CreateNamedVariable 'result', 'var', v81
+    BeginWhileLoopHeader
+        v83 <- GetProperty v80, 'length'
+        v84 <- LoadInteger '0'
+        v85 <- Compare v83, '>', v84
+    BeginWhileLoopBody v85
+        v86 <- CallMethod v80, 'pop', []
+        Update v82, '+', v86
+    EndWhileLoop
+    Return v82
+EndPlainFunction
+v87 <- BeginPlainFunction -> v88
+    v89 <- LoadInteger '1'
+    v90 <- CreateNamedVariable 'sign', 'var', v89
+    v91 <- BinaryOperation v88, '*', v88
+    v92 <- CreateNamedVariable 'x2', 'var', v91
+    v93 <- CreateArray []
+    v94 <- CreateNamedVariable 'terms', 'var', v93
+    BeginForLoopInitializer
+        v95 <- LoadInteger '1'
+    BeginForLoopCondition -> v96
+        v97 <- Compare v96, '<', v68
+    BeginForLoopAfterthought v97 -> v98
+        v99 <- LoadInteger '2'
+        Update v98, '+', v99
+    BeginForLoopBody -> v100
+        v101 <- BinaryOperation v90, '*', v88
+        v102 <- GetComputedProperty v66, v100
+        v103 <- BinaryOperation v101, '/', v102
+        v104 <- CallMethod v94, 'push', [v103]
+        Update v88, '*', v92
+        v105 <- LoadInteger '1'
+        v106 <- UnaryOperation '-', v105
+        Update v90, '*', v106
+    EndForLoop
+    v107 <- CallFunction v79, [v94]
+    Return v107
+EndPlainFunction
+v108 <- BeginPlainFunction -> v109
+    v110 <- LoadInteger '1'
+    v111 <- UnaryOperation '-', v110
+    v112 <- CreateNamedVariable 'sign', 'var', v111
+    v113 <- BinaryOperation v109, '*', v109
+    v114 <- CreateNamedVariable 'x2', 'var', v113
+    Reassign v109, v114
+    v115 <- LoadInteger '1'
+    v116 <- CreateArray [v115]
+    v117 <- CreateNamedVariable 'terms', 'var', v116
+    BeginForLoopInitializer
+        v118 <- LoadInteger '2'
+    BeginForLoopCondition -> v119
+        v120 <- Compare v119, '<', v68
+    BeginForLoopAfterthought v120 -> v121
+        v122 <- LoadInteger '2'
+        Update v121, '+', v122
+    BeginForLoopBody -> v123
+        v124 <- BinaryOperation v112, '*', v109
+        v125 <- GetComputedProperty v66, v123
+        v126 <- BinaryOperation v124, '/', v125
+        v127 <- CallMethod v117, 'push', [v126]
+        Update v109, '*', v114
+        v128 <- LoadInteger '1'
+        v129 <- UnaryOperation '-', v128
+        Update v112, '*', v129
+    EndForLoop
+    v130 <- CallFunction v79, [v117]
+    Return v130
+EndPlainFunction
+v131 <- BeginPlainFunction -> v132, v133, v134
+    v135 <- CallFunction v133, [v134]
+    v136 <- CallFunction v132, [v134]
+    v137 <- BinaryOperation v135, '-', v136
+    v138 <- CallMethod v3, 'abs', [v137]
+    Return v138
+EndPlainFunction
+v139 <- CreateArray []
+v140 <- CreateNamedVariable 'test_inputs', 'var', v139
+BeginForLoopInitializer
+    v141 <- LoadInteger '10000'
+    v142 <- UnaryOperation '-', v141
+BeginForLoopCondition -> v143
+    v144 <- LoadInteger '10000'
+    v145 <- Compare v143, '<', v144
+BeginForLoopAfterthought v145 -> v146
+    v147 <- LoadInteger '177'
+    Update v146, '+', v147
+BeginForLoopBody -> v148
+    v149 <- LoadInteger '1257'
+    v150 <- BinaryOperation v148, '/', v149
+    v151 <- CallMethod v140, 'push', [v150]
+EndForLoop
+v152 <- LoadFloat '1e-07'
+v153 <- CreateNamedVariable 'epsilon', 'var', v152
+v154 <- LoadInteger '0'
+v155 <- CallMethod v140, 'push', [v154]
+v156 <- LoadInteger '0'
+v157 <- BinaryOperation v156, '+', v153
+v158 <- CallMethod v140, 'push', [v157]
+v159 <- LoadInteger '0'
+v160 <- BinaryOperation v159, '-', v153
+v161 <- CallMethod v140, 'push', [v160]
+v162 <- GetProperty v3, 'PI'
+v163 <- LoadInteger '2'
+v164 <- BinaryOperation v162, '/', v163
+v165 <- CallMethod v140, 'push', [v164]
+v166 <- GetProperty v3, 'PI'
+v167 <- LoadInteger '2'
+v168 <- BinaryOperation v166, '/', v167
+v169 <- BinaryOperation v168, '+', v153
+v170 <- CallMethod v140, 'push', [v169]
+v171 <- GetProperty v3, 'PI'
+v172 <- LoadInteger '2'
+v173 <- BinaryOperation v171, '/', v172
+v174 <- BinaryOperation v173, '-', v153
+v175 <- CallMethod v140, 'push', [v174]
+v176 <- GetProperty v3, 'PI'
+v177 <- CallMethod v140, 'push', [v176]
+v178 <- GetProperty v3, 'PI'
+v179 <- BinaryOperation v178, '+', v153
+v180 <- CallMethod v140, 'push', [v179]
+v181 <- GetProperty v3, 'PI'
+v182 <- BinaryOperation v181, '-', v153
+v183 <- CallMethod v140, 'push', [v182]
+v184 <- LoadInteger '2'
+v185 <- UnaryOperation '-', v184
+v186 <- GetProperty v3, 'PI'
+v187 <- BinaryOperation v185, '*', v186
+v188 <- CallMethod v140, 'push', [v187]
+v189 <- LoadInteger '2'
+v190 <- UnaryOperation '-', v189
+v191 <- GetProperty v3, 'PI'
+v192 <- BinaryOperation v190, '*', v191
+v193 <- BinaryOperation v192, '+', v153
+v194 <- CallMethod v140, 'push', [v193]
+v195 <- LoadInteger '2'
+v196 <- UnaryOperation '-', v195
+v197 <- GetProperty v3, 'PI'
+v198 <- BinaryOperation v196, '*', v197
+v199 <- BinaryOperation v198, '-', v153
+v200 <- CallMethod v140, 'push', [v199]
+v201 <- CreateArray []
+v202 <- CreateNamedVariable 'squares', 'var', v201
+BeginForLoopInitializer
+    v203 <- LoadInteger '0'
+BeginForLoopCondition -> v204
+    v205 <- GetProperty v140, 'length'
+    v206 <- Compare v204, '<', v205
+BeginForLoopAfterthought v206 -> v207
+    v208 <- UnaryOperation v207, '++'
+BeginForLoopBody -> v209
+    v210 <- GetComputedProperty v140, v209
+    v211 <- CreateNamedVariable 'x', 'var', v210
+    v212 <- GetProperty v3, 'sin'
+    v213 <- CallFunction v131, [v212, v87, v211]
+    v214 <- CreateNamedVariable 'err_sin', 'var', v213
+    v215 <- GetProperty v3, 'cos'
+    v216 <- CallFunction v131, [v215, v108, v211]
+    v217 <- CreateNamedVariable 'err_cos', 'var', v216
+    v218 <- LoadInteger '0'
+    v219 <- LoadFloat '1e-13'
+    v220 <- LoadInteger '0'
+    v221 <- LoadFloat '1e-13'
+    v222 <- BinaryOperation v214, '*', v214
+    v223 <- BinaryOperation v217, '*', v217
+    v224 <- BinaryOperation v222, '+', v223
+    v225 <- CallMethod v202, 'push', [v224]
+EndForLoop
+BeginWhileLoopHeader
+    v226 <- GetProperty v202, 'length'
+    v227 <- LoadInteger '1'
+    v228 <- Compare v226, '>', v227
+BeginWhileLoopBody v228
+    v229 <- CreateArray []
+    v230 <- CreateNamedVariable 'reduced', 'var', v229
+    v231 <- GetProperty v202, 'length'
+    v232 <- LoadInteger '2'
+    v233 <- BinaryOperation v231, '%', v232
+    v234 <- LoadInteger '1'
+    v235 <- Compare v233, '==', v234
+    BeginIf v235
+        v236 <- CallMethod v202, 'pop', []
+        v237 <- CallMethod v230, 'push', [v236]
+    EndIf
+    BeginWhileLoopHeader
+        v238 <- GetProperty v202, 'length'
+        v239 <- LoadInteger '1'
+        v240 <- Compare v238, '>', v239
+    BeginWhileLoopBody v240
+        v241 <- CallMethod v202, 'pop', []
+        v242 <- CallMethod v202, 'pop', []
+        v243 <- BinaryOperation v241, '+', v242
+        v244 <- CallMethod v230, 'push', [v243]
+    EndWhileLoop
+    Reassign v202, v230
+EndWhileLoop
+v245 <- GetElement v202, '0'
+v246 <- GetProperty v140, 'length'
+v247 <- BinaryOperation v245, '/', v246
+v248 <- LoadInteger '2'
+v249 <- BinaryOperation v247, '/', v248
+v250 <- CallMethod v3, 'sqrt', [v249]
+v251 <- CreateNamedVariable 'err_rms', 'var', v250
+v252 <- LoadInteger '0'
+v253 <- LoadFloat '1e-14'
+v254 <- LoadInteger '1'
+v255 <- UnaryOperation '-', v254
+v256 <- BeginPlainFunction -> 
+    v257 <- GetProperty v3, 'PI'
+    Return v257
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v256
+v258 <- EndObjectLiteral
+v259 <- CallMethod v3, 'cos', [v258]
+v260 <- LoadInteger '0'
+v261 <- LoadString '0x00000'
+v262 <- CallMethod v3, 'sin', [v261]
+v263 <- LoadInteger '1'
+v264 <- LoadString '0x00000'
+v265 <- CallMethod v3, 'cos', [v264]
+v266 <- CreateNamedVariable 'Infinity', 'none'
+v267 <- CallMethod v3, 'sin', [v266]
+v268 <- CreateNamedVariable 'isNaN', 'none'
+v269 <- CallFunction v268, [v267]
+v270 <- LoadString '-Infinity'
+v271 <- CallMethod v3, 'cos', [v270]
+v272 <- CallFunction v268, [v271]
+v273 <- GetProperty v3, 'PI'
+v274 <- LoadInteger '2'
+v275 <- BinaryOperation v273, '/', v274
+v276 <- CallMethod v3, 'tan', [v275]
+v277 <- LoadInteger '10000000000000000'
+v278 <- Compare v276, '>', v277
+v279 <- GetProperty v3, 'PI'
+v280 <- UnaryOperation '-', v279
+v281 <- LoadInteger '2'
+v282 <- BinaryOperation v280, '/', v281
+v283 <- CallMethod v3, 'tan', [v282]
+v284 <- LoadInteger '10000000000000000'
+v285 <- UnaryOperation '-', v284
+v286 <- Compare v283, '<', v285
+v287 <- LoadString '-Infinity'
+v288 <- LoadInteger '1'
+v289 <- LoadString '-0'
+v290 <- CallMethod v3, 'sin', [v289]
+v291 <- BinaryOperation v288, '/', v290
+v292 <- CallFunction v6, [v291]
+v293 <- BeginPlainFunction -> v294, v295, v296
+    v297 <- BinaryOperation v295, '-', v294
+    v298 <- CallMethod v3, 'abs', [v297]
+    v299 <- Compare v298, '<', v296
+EndPlainFunction
+v300 <- LoadFloat '0.9367521275331447'
+v301 <- LoadInteger '1000000'
+v302 <- CallMethod v3, 'cos', [v301]
+v303 <- LoadFloat '1e-15'
+v304 <- LoadFloat '0.873119622676856'
+v305 <- LoadInteger '10000000000'
+v306 <- CallMethod v3, 'cos', [v305]
+v307 <- LoadFloat '1e-08'
+v308 <- LoadFloat '0.9367521275331447'
+v309 <- LoadInteger '1000000'
+v310 <- UnaryOperation '-', v309
+v311 <- CallMethod v3, 'cos', [v310]
+v312 <- LoadFloat '1e-15'
+v313 <- LoadFloat '0.873119622676856'
+v314 <- LoadInteger '10000000000'
+v315 <- UnaryOperation '-', v314
+v316 <- CallMethod v3, 'cos', [v315]
+v317 <- LoadFloat '1e-08'
+v318 <- LoadFloat '0.3499935021712929'
+v319 <- UnaryOperation '-', v318
+v320 <- LoadInteger '1000000'
+v321 <- CallMethod v3, 'sin', [v320]
+v322 <- LoadFloat '1e-15'
+v323 <- LoadFloat '0.4875060250875106'
+v324 <- UnaryOperation '-', v323
+v325 <- LoadInteger '10000000000'
+v326 <- CallMethod v3, 'sin', [v325]
+v327 <- LoadFloat '1e-08'
+v328 <- LoadFloat '0.3499935021712929'
+v329 <- LoadInteger '1000000'
+v330 <- UnaryOperation '-', v329
+v331 <- CallMethod v3, 'sin', [v330]
+v332 <- LoadFloat '1e-15'
+v333 <- LoadFloat '0.4875060250875106'
+v334 <- LoadInteger '10000000000'
+v335 <- UnaryOperation '-', v334
+v336 <- CallMethod v3, 'sin', [v335]
+v337 <- LoadFloat '1e-08'
+v338 <- LoadFloat '0.7796880066069787'
+v339 <- LoadInteger '10000000000000000'
+v340 <- CallMethod v3, 'sin', [v339]
+v341 <- LoadFloat '1e-05'
+v342 <- LoadFloat '0.6261681981330861'
+v343 <- UnaryOperation '-', v342
+v344 <- LoadInteger '10000000000000000'
+v345 <- CallMethod v3, 'cos', [v344]
+v346 <- LoadFloat '1e-05'
+BeginForLoopInitializer
+    v347 <- LoadInteger '1024'
+    v348 <- UnaryOperation '-', v347
+BeginForLoopCondition -> v349
+    v350 <- LoadInteger '1024'
+    v351 <- Compare v349, '<', v350
+BeginForLoopAfterthought v351 -> v352
+    v353 <- UnaryOperation v352, '++'
+BeginForLoopBody -> v354
+    v355 <- LoadInteger '2'
+    v356 <- CallMethod v3, 'pow', [v355, v354]
+    v357 <- CallMethod v3, 'sin', [v356]
+    v358 <- CallFunction v268, [v357]
+EndForLoop
+v359 <- LoadFloat '1.570796326794897'
+v360 <- CallMethod v3, 'cos', [v359]
+v361 <- CallFunction v268, [v360]
+v362 <- LoadFloat '1e-100'
+v363 <- UnaryOperation '-', v362
+v364 <- CallMethod v3, 'cos', [v363]
+v365 <- CallFunction v268, [v364]
+v366 <- LoadFloat '1e-323'
+v367 <- UnaryOperation '-', v366
+v368 <- CallMethod v3, 'cos', [v367]
+v369 <- CallFunction v268, [v368]
+v370 <- LoadInteger '2'
+v371 <- LoadInteger '32'
+v372 <- UnaryOperation '-', v371
+v373 <- CallMethod v3, 'pow', [v370, v372]
+v374 <- CreateNamedVariable 'two_32', 'var', v373
+v375 <- LoadInteger '2'
+v376 <- LoadInteger '28'
+v377 <- UnaryOperation '-', v376
+v378 <- CallMethod v3, 'pow', [v375, v377]
+v379 <- CreateNamedVariable 'two_28', 'var', v378
+v380 <- LoadInteger '1'
+v381 <- LoadInteger '0'
+v382 <- UnaryOperation '+', v381
+v383 <- CallMethod v3, 'sin', [v382]
+v384 <- BinaryOperation v380, '/', v383
+v385 <- UnaryOperation '-', v266
+v386 <- LoadInteger '1'
+v387 <- LoadInteger '0'
+v388 <- UnaryOperation '-', v387
+v389 <- CallMethod v3, 'sin', [v388]
+v390 <- BinaryOperation v386, '/', v389
+v391 <- CallMethod v3, 'sin', [v374]
+v392 <- UnaryOperation '-', v374
+v393 <- UnaryOperation '-', v374
+v394 <- CallMethod v3, 'sin', [v393]
+v395 <- LoadFloat '0.3826834323650898'
+v396 <- GetProperty v3, 'PI'
+v397 <- LoadInteger '8'
+v398 <- BinaryOperation v396, '/', v397
+v399 <- CallMethod v3, 'sin', [v398]
+v400 <- LoadFloat '0.3826834323650898'
+v401 <- UnaryOperation '-', v400
+v402 <- GetProperty v3, 'PI'
+v403 <- LoadInteger '8'
+v404 <- BinaryOperation v402, '/', v403
+v405 <- CallMethod v3, 'sin', [v404]
+v406 <- UnaryOperation '-', v405
+v407 <- LoadInteger '1'
+v408 <- CallMethod v3, 'cos', [v374]
+v409 <- LoadInteger '1'
+v410 <- UnaryOperation '-', v374
+v411 <- CallMethod v3, 'cos', [v410]
+v412 <- LoadFloat '0.9876883405951378'
+v413 <- GetProperty v3, 'PI'
+v414 <- LoadInteger '20'
+v415 <- BinaryOperation v413, '/', v414
+v416 <- CallMethod v3, 'cos', [v415]
+v417 <- LoadFloat '0.7100335477927638'
+v418 <- LoadFloat '0.7812504768371582'
+v419 <- CallMethod v3, 'cos', [v418]
+v420 <- LoadFloat '0.7100338835660797'
+v421 <- LoadFloat '0.78125'
+v422 <- CallMethod v3, 'cos', [v421]
+v423 <- LoadFloat '0.9238795325112867'
+v424 <- GetProperty v3, 'PI'
+v425 <- LoadInteger '8'
+v426 <- BinaryOperation v424, '/', v425
+v427 <- CallMethod v3, 'cos', [v426]
+v428 <- LoadFloat '0.9238795325112867'
+v429 <- GetProperty v3, 'PI'
+v430 <- UnaryOperation '-', v429
+v431 <- LoadInteger '8'
+v432 <- BinaryOperation v430, '/', v431
+v433 <- CallMethod v3, 'cos', [v432]
+v434 <- LoadInteger '1'
+v435 <- LoadInteger '0'
+v436 <- CallMethod v3, 'tan', [v435]
+v437 <- BinaryOperation v434, '/', v436
+v438 <- UnaryOperation '-', v266
+v439 <- LoadInteger '1'
+v440 <- LoadInteger '0'
+v441 <- UnaryOperation '-', v440
+v442 <- CallMethod v3, 'tan', [v441]
+v443 <- BinaryOperation v439, '/', v442
+v444 <- CallMethod v3, 'tan', [v374]
+v445 <- UnaryOperation '-', v374
+v446 <- UnaryOperation '-', v374
+v447 <- CallMethod v3, 'tan', [v446]
+v448 <- LoadFloat '0.8211418015898941'
+v449 <- LoadInteger '11'
+v450 <- LoadInteger '16'
+v451 <- BinaryOperation v449, '/', v450
+v452 <- CallMethod v3, 'tan', [v451]
+v453 <- LoadFloat '0.8211418015898941'
+v454 <- UnaryOperation '-', v453
+v455 <- LoadInteger '11'
+v456 <- UnaryOperation '-', v455
+v457 <- LoadInteger '16'
+v458 <- BinaryOperation v456, '/', v457
+v459 <- CallMethod v3, 'tan', [v458]
+v460 <- LoadFloat '0.41421356237309503'
+v461 <- GetProperty v3, 'PI'
+v462 <- LoadInteger '8'
+v463 <- BinaryOperation v461, '/', v462
+v464 <- CallMethod v3, 'tan', [v463]
+v465 <- LoadFloat '0.7993357819992383'
+v466 <- LoadFloat '0.6743358'
+v467 <- CallMethod v3, 'tan', [v466]
+v468 <- LoadFloat '0.479425538604203'
+v469 <- LoadFloat '0.5'
+v470 <- CallMethod v3, 'sin', [v469]
+v471 <- LoadFloat '0.479425538604203'
+v472 <- UnaryOperation '-', v471
+v473 <- LoadFloat '0.5'
+v474 <- UnaryOperation '-', v473
+v475 <- CallMethod v3, 'sin', [v474]
+v476 <- LoadInteger '1'
+v477 <- GetProperty v3, 'PI'
+v478 <- LoadInteger '2'
+v479 <- BinaryOperation v477, '/', v478
+v480 <- CallMethod v3, 'sin', [v479]
+v481 <- LoadInteger '1'
+v482 <- UnaryOperation '-', v481
+v483 <- GetProperty v3, 'PI'
+v484 <- UnaryOperation '-', v483
+v485 <- LoadInteger '2'
+v486 <- BinaryOperation v484, '/', v485
+v487 <- CallMethod v3, 'sin', [v486]
+v488 <- LoadFloat '1.2246467991473532e-16'
+v489 <- GetProperty v3, 'PI'
+v490 <- CallMethod v3, 'sin', [v489]
+v491 <- LoadFloat '7.047032979958965e-14'
+v492 <- UnaryOperation '-', v491
+v493 <- LoadInteger '2200'
+v494 <- GetProperty v3, 'PI'
+v495 <- BinaryOperation v493, '*', v494
+v496 <- CallMethod v3, 'sin', [v495]
+v497 <- LoadFloat '0.7071067811865477'
+v498 <- UnaryOperation '-', v497
+v499 <- LoadInteger '7'
+v500 <- LoadInteger '4'
+v501 <- BinaryOperation v499, '/', v500
+v502 <- GetProperty v3, 'PI'
+v503 <- BinaryOperation v501, '*', v502
+v504 <- CallMethod v3, 'sin', [v503]
+v505 <- LoadFloat '0.7071067811865474'
+v506 <- LoadInteger '9'
+v507 <- LoadInteger '4'
+v508 <- BinaryOperation v506, '/', v507
+v509 <- GetProperty v3, 'PI'
+v510 <- BinaryOperation v508, '*', v509
+v511 <- CallMethod v3, 'sin', [v510]
+v512 <- LoadFloat '0.7071067811865483'
+v513 <- LoadInteger '11'
+v514 <- LoadInteger '4'
+v515 <- BinaryOperation v513, '/', v514
+v516 <- GetProperty v3, 'PI'
+v517 <- BinaryOperation v515, '*', v516
+v518 <- CallMethod v3, 'sin', [v517]
+v519 <- LoadFloat '0.7071067811865479'
+v520 <- UnaryOperation '-', v519
+v521 <- LoadInteger '13'
+v522 <- LoadInteger '4'
+v523 <- BinaryOperation v521, '/', v522
+v524 <- GetProperty v3, 'PI'
+v525 <- BinaryOperation v523, '*', v524
+v526 <- CallMethod v3, 'sin', [v525]
+v527 <- LoadFloat '3.2103381051568376e-11'
+v528 <- UnaryOperation '-', v527
+v529 <- LoadInteger '1048576'
+v530 <- LoadInteger '4'
+v531 <- BinaryOperation v529, '/', v530
+v532 <- GetProperty v3, 'PI'
+v533 <- BinaryOperation v531, '*', v532
+v534 <- CallMethod v3, 'sin', [v533]
+v535 <- LoadInteger '1'
+v536 <- CallMethod v3, 'cos', [v379]
+v537 <- LoadFloat '0.9689124217106447'
+v538 <- LoadFloat '0.25'
+v539 <- CallMethod v3, 'cos', [v538]
+v540 <- LoadFloat '0.8775825618903728'
+v541 <- LoadFloat '0.5'
+v542 <- CallMethod v3, 'cos', [v541]
+v543 <- LoadFloat '0.7073882691671998'
+v544 <- LoadFloat '0.785'
+v545 <- CallMethod v3, 'cos', [v544]
+v546 <- LoadFloat '6.123233995736766e-17'
+v547 <- GetProperty v3, 'PI'
+v548 <- LoadInteger '2'
+v549 <- BinaryOperation v547, '/', v548
+v550 <- CallMethod v3, 'cos', [v549]
+v551 <- LoadFloat '0.7071067811865474'
+v552 <- LoadInteger '7'
+v553 <- LoadInteger '4'
+v554 <- BinaryOperation v552, '/', v553
+v555 <- GetProperty v3, 'PI'
+v556 <- BinaryOperation v554, '*', v555
+v557 <- CallMethod v3, 'cos', [v556]
+v558 <- LoadFloat '0.7071067811865477'
+v559 <- LoadInteger '9'
+v560 <- LoadInteger '4'
+v561 <- BinaryOperation v559, '/', v560
+v562 <- GetProperty v3, 'PI'
+v563 <- BinaryOperation v561, '*', v562
+v564 <- CallMethod v3, 'cos', [v563]
+v565 <- LoadFloat '0.7071067811865467'
+v566 <- UnaryOperation '-', v565
+v567 <- LoadInteger '11'
+v568 <- LoadInteger '4'
+v569 <- BinaryOperation v567, '/', v568
+v570 <- GetProperty v3, 'PI'
+v571 <- BinaryOperation v569, '*', v570
+v572 <- CallMethod v3, 'cos', [v571]
+v573 <- LoadFloat '0.7071067811865471'
+v574 <- UnaryOperation '-', v573
+v575 <- LoadInteger '13'
+v576 <- LoadInteger '4'
+v577 <- BinaryOperation v575, '/', v576
+v578 <- GetProperty v3, 'PI'
+v579 <- BinaryOperation v577, '*', v578
+v580 <- CallMethod v3, 'cos', [v579]
+v581 <- LoadFloat '0.9367521275331447'
+v582 <- LoadInteger '1000000'
+v583 <- CallMethod v3, 'cos', [v582]
+v584 <- LoadFloat '3.435757038074824e-12'
+v585 <- UnaryOperation '-', v584
+v586 <- LoadInteger '1048575'
+v587 <- LoadInteger '2'
+v588 <- BinaryOperation v586, '/', v587
+v589 <- GetProperty v3, 'PI'
+v590 <- BinaryOperation v588, '*', v589
+v591 <- CallMethod v3, 'cos', [v590]
+v592 <- CallMethod v3, 'tan', [v379]
+v593 <- LoadInteger '16331239353195370'
+v594 <- GetProperty v3, 'PI'
+v595 <- LoadInteger '2'
+v596 <- BinaryOperation v594, '/', v595
+v597 <- CallMethod v3, 'tan', [v596]
+v598 <- LoadFloat '0.5463024898437905'
+v599 <- LoadFloat '0.5'
+v600 <- CallMethod v3, 'tan', [v599]
+v601 <- LoadFloat '2.0000000000000027'
+v602 <- LoadFloat '1.107148717794091'
+v603 <- CallMethod v3, 'tan', [v602]
+v604 <- LoadFloat '1.0000000000000004'
+v605 <- UnaryOperation '-', v604
+v606 <- LoadInteger '7'
+v607 <- LoadInteger '4'
+v608 <- BinaryOperation v606, '/', v607
+v609 <- GetProperty v3, 'PI'
+v610 <- BinaryOperation v608, '*', v609
+v611 <- CallMethod v3, 'tan', [v610]
+v612 <- LoadFloat '0.9999999999999994'
+v613 <- LoadInteger '9'
+v614 <- LoadInteger '4'
+v615 <- BinaryOperation v613, '/', v614
+v616 <- GetProperty v3, 'PI'
+v617 <- BinaryOperation v615, '*', v616
+v618 <- CallMethod v3, 'tan', [v617]
+v619 <- LoadFloat '6.420676210313675e-11'
+v620 <- UnaryOperation '-', v619
+v621 <- LoadInteger '1048576'
+v622 <- LoadInteger '2'
+v623 <- BinaryOperation v621, '/', v622
+v624 <- GetProperty v3, 'PI'
+v625 <- BinaryOperation v623, '*', v624
+v626 <- CallMethod v3, 'tan', [v625]
+v627 <- LoadFloat '291056669292.4059'
+v628 <- LoadInteger '1048575'
+v629 <- LoadInteger '2'
+v630 <- BinaryOperation v628, '/', v629
+v631 <- GetProperty v3, 'PI'
+v632 <- BinaryOperation v630, '*', v631
+v633 <- CallMethod v3, 'tan', [v632]
+v634 <- LoadFloat '0.377820109360752'
+v635 <- LoadInteger '2'
+v636 <- LoadInteger '120'
+v637 <- CallMethod v3, 'pow', [v635, v636]
+v638 <- CallMethod v3, 'sin', [v637]
+v639 <- LoadFloat '0.9258790228548379'
+v640 <- UnaryOperation '-', v639
+v641 <- LoadInteger '2'
+v642 <- LoadInteger '120'
+v643 <- CallMethod v3, 'pow', [v641, v642]
+v644 <- CallMethod v3, 'cos', [v643]
+v645 <- LoadFloat '0.40806638884180424'
+v646 <- UnaryOperation '-', v645
+v647 <- LoadInteger '2'
+v648 <- LoadInteger '120'
+v649 <- CallMethod v3, 'pow', [v647, v648]
+v650 <- CallMethod v3, 'tan', [v649]
+v651 <- LoadFloat '0.377820109360752'
+v652 <- UnaryOperation '-', v651
+v653 <- LoadInteger '2'
+v654 <- LoadInteger '120'
+v655 <- CallMethod v3, 'pow', [v653, v654]
+v656 <- UnaryOperation '-', v655
+v657 <- CallMethod v3, 'sin', [v656]
+v658 <- LoadFloat '0.9258790228548379'
+v659 <- UnaryOperation '-', v658
+v660 <- LoadInteger '2'
+v661 <- LoadInteger '120'
+v662 <- CallMethod v3, 'pow', [v660, v661]
+v663 <- UnaryOperation '-', v662
+v664 <- CallMethod v3, 'cos', [v663]
+v665 <- LoadFloat '0.40806638884180424'
+v666 <- LoadInteger '2'
+v667 <- LoadInteger '120'
+v668 <- CallMethod v3, 'pow', [v666, v667]
+v669 <- UnaryOperation '-', v668
+v670 <- CallMethod v3, 'tan', [v669]
+
+
+String(1 / Math.sin(-0));
+Math.cos(-0);
+String(1 / Math.tan(-0));
+function no_deopt_on_minus_zero(a20) {
+    return (Math.sin(a20) + Math.cos(a20)) + Math.tan(a20);
+}
+no_deopt_on_minus_zero(1);
+no_deopt_on_minus_zero(1);
+no_deopt_on_minus_zero(-0);
+no_deopt_on_minus_zero();
+function sinTest() {
+    Math.sin(0);
+    Math.sin(Math.PI / 2);
+}
+function cosTest() {
+    Math.cos(0);
+    -1;
+    Math.cos(Math.PI);
+}
+sinTest();
+cosTest();
+var x = Math.pow(2, 30);
+Math.sin(x) != Math.cos(x);
+Math.sin(x = 0.5) != Math.log(x);
+var factorial = [1];
+var accuracy = 50;
+for (let i70 = 1; i70 < accuracy; i70++) {
+    factorial[i70] = factorial[i70 - 1] * i70;
+}
+function precision_sum(a80) {
+    var result = 0;
+    while (a80.length > 0) {
+        result += a80.pop();
+    }
+    return result;
+}
+function sin(a88) {
+    var sign = 1;
+    var x2 = a88 * a88;
+    var terms = [];
+    for (let i96 = 1; i96 < accuracy; i96 += 2) {
+        terms.push((sign * a88) / factorial[i96]);
+        a88 *= x2;
+        sign *= -1;
+    }
+    return precision_sum(terms);
+}
+function cos(a109) {
+    var sign = -1;
+    var x2 = a109 * a109;
+    a109 = x2;
+    var terms = [1];
+    for (let i119 = 2; i119 < accuracy; i119 += 2) {
+        terms.push((sign * a109) / factorial[i119]);
+        a109 *= x2;
+        sign *= -1;
+    }
+    return precision_sum(terms);
+}
+function abs_error(a132, a133, a134) {
+    return Math.abs(a133(a134) - a132(a134));
+}
+var test_inputs = [];
+for (let i143 = -10000; i143 < 10000; i143 += 177) {
+    test_inputs.push(i143 / 1257);
+}
+var epsilon = 1e-07;
+test_inputs.push(0);
+test_inputs.push(0 + epsilon);
+test_inputs.push(0 - epsilon);
+test_inputs.push(Math.PI / 2);
+test_inputs.push((Math.PI / 2) + epsilon);
+test_inputs.push((Math.PI / 2) - epsilon);
+test_inputs.push(Math.PI);
+test_inputs.push(Math.PI + epsilon);
+test_inputs.push(Math.PI - epsilon);
+test_inputs.push(-2 * Math.PI);
+test_inputs.push((-2 * Math.PI) + epsilon);
+test_inputs.push((-2 * Math.PI) - epsilon);
+var squares = [];
+for (let i204 = 0; i204 < test_inputs.length; i204++) {
+    var x = test_inputs[i204];
+    var err_sin = abs_error(Math.sin, sin, x);
+    var err_cos = abs_error(Math.cos, cos, x);
+    squares.push((err_sin * err_sin) + (err_cos * err_cos));
+}
+while (squares.length > 1) {
+    var reduced = [];
+    if ((squares.length % 2) == 1) {
+        reduced.push(squares.pop());
+    }
+    while (squares.length > 1) {
+        reduced.push(squares.pop() + squares.pop());
+    }
+    squares = reduced;
+}
+var err_rms = Math.sqrt((squares[0] / test_inputs.length) / 2);
+-1;
+function f256() {
+    return Math.PI;
+}
+Math.cos({ valueOf: f256 });
+Math.sin("0x00000");
+Math.cos("0x00000");
+isNaN(Math.sin(Infinity));
+isNaN(Math.cos("-Infinity"));
+Math.tan(Math.PI / 2) > 10000000000000000;
+Math.tan(-Math.PI / 2) < -10000000000000000;
+String(1 / Math.sin("-0"));
+function assertError(a294, a295, a296) {
+    Math.abs(a295 - a294) < a296;
+}
+Math.cos(1000000);
+Math.cos(10000000000);
+Math.cos(-1000000);
+Math.cos(-10000000000);
+-0.3499935021712929;
+Math.sin(1000000);
+-0.4875060250875106;
+Math.sin(10000000000);
+Math.sin(-1000000);
+Math.sin(-10000000000);
+Math.sin(10000000000000000);
+-0.6261681981330861;
+Math.cos(10000000000000000);
+for (let i349 = -1024; i349 < 1024; i349++) {
+    isNaN(Math.sin(Math.pow(2, i349)));
+}
+isNaN(Math.cos(1.570796326794897));
+isNaN(Math.cos(-1e-100));
+isNaN(Math.cos(-1e-323));
+var two_32 = Math.pow(2, -32);
+var two_28 = Math.pow(2, -28);
+1 / Math.sin(+0);
+-Infinity;
+1 / Math.sin(-0);
+Math.sin(two_32);
+-two_32;
+Math.sin(-two_32);
+Math.sin(Math.PI / 8);
+-0.3826834323650898;
+-Math.sin(Math.PI / 8);
+Math.cos(two_32);
+Math.cos(-two_32);
+Math.cos(Math.PI / 20);
+Math.cos(0.7812504768371582);
+Math.cos(0.78125);
+Math.cos(Math.PI / 8);
+Math.cos(-Math.PI / 8);
+1 / Math.tan(0);
+-Infinity;
+1 / Math.tan(-0);
+Math.tan(two_32);
+-two_32;
+Math.tan(-two_32);
+Math.tan(11 / 16);
+-0.8211418015898941;
+Math.tan(-11 / 16);
+Math.tan(Math.PI / 8);
+Math.tan(0.6743358);
+Math.sin(0.5);
+-0.479425538604203;
+Math.sin(-0.5);
+Math.sin(Math.PI / 2);
+-1;
+Math.sin(-Math.PI / 2);
+Math.sin(Math.PI);
+-7.047032979958965e-14;
+Math.sin(2200 * Math.PI);
+-0.7071067811865477;
+Math.sin((7 / 4) * Math.PI);
+Math.sin((9 / 4) * Math.PI);
+Math.sin((11 / 4) * Math.PI);
+-0.7071067811865479;
+Math.sin((13 / 4) * Math.PI);
+-3.2103381051568376e-11;
+Math.sin((1048576 / 4) * Math.PI);
+Math.cos(two_28);
+Math.cos(0.25);
+Math.cos(0.5);
+Math.cos(0.785);
+Math.cos(Math.PI / 2);
+Math.cos((7 / 4) * Math.PI);
+Math.cos((9 / 4) * Math.PI);
+-0.7071067811865467;
+Math.cos((11 / 4) * Math.PI);
+-0.7071067811865471;
+Math.cos((13 / 4) * Math.PI);
+Math.cos(1000000);
+-3.435757038074824e-12;
+Math.cos((1048575 / 2) * Math.PI);
+Math.tan(two_28);
+Math.tan(Math.PI / 2);
+Math.tan(0.5);
+Math.tan(1.107148717794091);
+-1.0000000000000004;
+Math.tan((7 / 4) * Math.PI);
+Math.tan((9 / 4) * Math.PI);
+-6.420676210313675e-11;
+Math.tan((1048576 / 2) * Math.PI);
+Math.tan((1048575 / 2) * Math.PI);
+Math.sin(Math.pow(2, 120));
+-0.9258790228548379;
+Math.cos(Math.pow(2, 120));
+-0.40806638884180424;
+Math.tan(Math.pow(2, 120));
+-0.377820109360752;
+Math.sin(-Math.pow(2, 120));
+-0.9258790228548379;
+Math.cos(-Math.pow(2, 120));
+Math.tan(-Math.pow(2, 120));
+
+FuzzIL program written to corpus/sin-cos.fzil

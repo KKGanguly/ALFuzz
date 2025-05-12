@@ -1,0 +1,63 @@
+v0 <- LoadString 'x'
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadInteger '0'
+    Return v2
+EndPlainFunction
+v3 <- LoadThis
+v4 <- CallMethod v3, '__defineGetter__', [v0, v1]
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '23'
+    v7 <- CreateNamedVariable 'x', 'none'
+    Reassign v7, v6
+EndPlainFunction
+v8 <- CallFunction v5, []
+v9 <- CallFunction v5, []
+v10 <- LoadInteger '0'
+v11 <- CreateNamedVariable 'x', 'none'
+v12 <- LoadInteger '42'
+v13 <- CallFunction v5, []
+v14 <- LoadInteger '23'
+v15 <- LoadString 'y'
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadInteger '0'
+    Return v17
+EndPlainFunction
+v18 <- LoadThis
+v19 <- CallMethod v18, '__defineGetter__', [v15, v16]
+v20 <- BeginPlainFunction -> 
+    v21 <- LoadInteger '23'
+    v22 <- CreateNamedVariable 'y', 'none'
+    Reassign v22, v21
+EndPlainFunction
+v23 <- CallFunction v20, []
+v24 <- CallFunction v20, []
+v25 <- LoadInteger '0'
+v26 <- CreateNamedVariable 'y', 'none'
+v27 <- LoadInteger '42'
+v28 <- CallFunction v20, []
+v29 <- CreateNamedVariable 'TypeError', 'none'
+v30 <- LoadInteger '42'
+
+
+function f1() {
+    return 0;
+}
+this.__defineGetter__("x", f1);
+function store_x() {
+    x = 23;
+}
+store_x();
+store_x();
+store_x();
+function f16() {
+    return 0;
+}
+this.__defineGetter__("y", f16);
+function store_y() {
+    y = 23;
+}
+store_y();
+store_y();
+store_y();
+
+FuzzIL program written to corpus/regress-crbug-768875.fzil

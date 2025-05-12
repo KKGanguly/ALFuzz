@@ -1,0 +1,79 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadNull
+    v2 <- LoadString 'x'
+    v3 <- CreateNamedVariable 'Object', 'none'
+    v4 <- CallMethod v3, 'getOwnPropertyDescriptor', [v1, v2]
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- CreateNamedVariable 'TypeError', 'none'
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadUndefined
+    v9 <- LoadString 'x'
+    v10 <- CreateNamedVariable 'Object', 'none'
+    v11 <- CallMethod v10, 'getOwnPropertyDescriptor', [v8, v9]
+EndPlainFunction
+v12 <- CallFunction v7, []
+v13 <- LoadBoolean 'false'
+v14 <- LoadBoolean 'false'
+v15 <- LoadInteger '3'
+v16 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v13
+    ObjectLiteralAddProperty `enumerable`, v14
+    ObjectLiteralAddProperty `value`, v15
+    ObjectLiteralAddProperty `writable`, v16
+v17 <- EndObjectLiteral
+v18 <- LoadString 'abc'
+v19 <- LoadString 'length'
+v20 <- CreateNamedVariable 'Object', 'none'
+v21 <- CallMethod v20, 'getOwnPropertyDescriptor', [v18, v19]
+v22 <- LoadBoolean 'false'
+v23 <- LoadBoolean 'true'
+v24 <- LoadString 'a'
+v25 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v22
+    ObjectLiteralAddProperty `enumerable`, v23
+    ObjectLiteralAddProperty `value`, v24
+    ObjectLiteralAddProperty `writable`, v25
+v26 <- EndObjectLiteral
+v27 <- LoadString 'abc'
+v28 <- LoadInteger '0'
+v29 <- CallMethod v20, 'getOwnPropertyDescriptor', [v27, v28]
+v30 <- LoadUndefined
+v31 <- LoadInteger '42'
+v32 <- LoadString 'x'
+v33 <- CallMethod v20, 'getOwnPropertyDescriptor', [v31, v32]
+v34 <- LoadUndefined
+v35 <- LoadBoolean 'true'
+v36 <- LoadString 'x'
+v37 <- CallMethod v20, 'getOwnPropertyDescriptor', [v35, v36]
+v38 <- LoadUndefined
+v39 <- LoadBoolean 'false'
+v40 <- LoadString 'x'
+v41 <- CallMethod v20, 'getOwnPropertyDescriptor', [v39, v40]
+v42 <- LoadUndefined
+v43 <- CreateNamedVariable 'Symbol', 'none'
+v44 <- CallFunction v43, []
+v45 <- LoadString 'x'
+v46 <- CallMethod v20, 'getOwnPropertyDescriptor', [v44, v45]
+
+
+function f0() {
+    Object.getOwnPropertyDescriptor(null, "x");
+}
+f0();
+function f7() {
+    Object.getOwnPropertyDescriptor(undefined, "x");
+}
+f7();
+const v17 = { configurable: false, enumerable: false, value: 3, writable: false };
+Object.getOwnPropertyDescriptor("abc", "length");
+const v26 = { configurable: false, enumerable: true, value: "a", writable: false };
+Object.getOwnPropertyDescriptor("abc", 0);
+Object.getOwnPropertyDescriptor(42, "x");
+Object.getOwnPropertyDescriptor(true, "x");
+Object.getOwnPropertyDescriptor(false, "x");
+Object.getOwnPropertyDescriptor(Symbol(), "x");
+
+FuzzIL program written to corpus/get-own-property-descriptor-non-objects.fzil

@@ -1,0 +1,279 @@
+v0 <- CreateNamedVariable 'NaN', 'none'
+v1 <- CreateNamedVariable 'Math', 'none'
+v2 <- CallMethod v1, 'expm1', [v0]
+v3 <- CreateNamedVariable 'isNaN', 'none'
+v4 <- CallFunction v3, [v2]
+v5 <- BeginPlainFunction -> 
+EndPlainFunction
+v6 <- CallMethod v1, 'expm1', [v5]
+v7 <- CallFunction v3, [v6]
+v8 <- BeginPlainFunction -> 
+    Return v0
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v8
+v9 <- EndObjectLiteral
+v10 <- CallMethod v1, 'expm1', [v9]
+v11 <- CallFunction v3, [v10]
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadString 'abc'
+    Return v13
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v12
+v14 <- EndObjectLiteral
+v15 <- CallMethod v1, 'expm1', [v14]
+v16 <- CallFunction v3, [v15]
+v17 <- CreateNamedVariable 'Infinity', 'none'
+v18 <- LoadInteger '1'
+v19 <- LoadInteger '0'
+v20 <- CallMethod v1, 'expm1', [v19]
+v21 <- BinaryOperation v18, '/', v20
+v22 <- UnaryOperation '-', v17
+v23 <- LoadInteger '1'
+v24 <- LoadInteger '0'
+v25 <- UnaryOperation '-', v24
+v26 <- CallMethod v1, 'expm1', [v25]
+v27 <- BinaryOperation v23, '/', v26
+v28 <- CallMethod v1, 'expm1', [v17]
+v29 <- LoadInteger '1'
+v30 <- UnaryOperation '-', v29
+v31 <- UnaryOperation '-', v17
+v32 <- CallMethod v1, 'expm1', [v31]
+BeginForLoopInitializer
+    v33 <- LoadInteger '1'
+BeginForLoopCondition -> v34
+    v35 <- LoadInteger '700'
+    v36 <- Compare v34, '<', v35
+BeginForLoopAfterthought v36 -> v37
+    v38 <- LoadFloat '0.25'
+    Update v37, '+', v38
+BeginForLoopBody -> v39
+    v40 <- CallMethod v1, 'exp', [v39]
+    v41 <- LoadInteger '1'
+    v42 <- BinaryOperation v40, '-', v41
+    v43 <- CreateNamedVariable 'expected', 'var', v42
+    v44 <- CallMethod v1, 'expm1', [v39]
+    v45 <- LoadFloat '1e-15'
+    v46 <- BinaryOperation v43, '*', v45
+    v47 <- UnaryOperation '-', v39
+    v48 <- CallMethod v1, 'exp', [v47]
+    v49 <- LoadInteger '1'
+    v50 <- BinaryOperation v48, '-', v49
+    Reassign v43, v50
+    v51 <- UnaryOperation '-', v39
+    v52 <- CallMethod v1, 'expm1', [v51]
+    v53 <- UnaryOperation '-', v43
+    v54 <- LoadFloat '1e-15'
+    v55 <- BinaryOperation v53, '*', v54
+EndForLoop
+v56 <- BeginPlainFunction -> v57
+    v58 <- LoadInteger '1'
+    v59 <- LoadInteger '1'
+    v60 <- LoadInteger '2'
+    v61 <- BinaryOperation v59, '/', v60
+    v62 <- LoadInteger '1'
+    v63 <- LoadInteger '6'
+    v64 <- BinaryOperation v62, '/', v63
+    v65 <- LoadInteger '1'
+    v66 <- LoadInteger '24'
+    v67 <- BinaryOperation v65, '/', v66
+    v68 <- LoadInteger '1'
+    v69 <- LoadInteger '120'
+    v70 <- BinaryOperation v68, '/', v69
+    v71 <- LoadInteger '1'
+    v72 <- LoadInteger '720'
+    v73 <- BinaryOperation v71, '/', v72
+    v74 <- LoadInteger '1'
+    v75 <- LoadInteger '5040'
+    v76 <- BinaryOperation v74, '/', v75
+    v77 <- LoadInteger '1'
+    v78 <- LoadInteger '40320'
+    v79 <- BinaryOperation v77, '/', v78
+    v80 <- LoadInteger '1'
+    v81 <- LoadInteger '362880'
+    v82 <- BinaryOperation v80, '/', v81
+    v83 <- LoadInteger '1'
+    v84 <- LoadInteger '3628800'
+    v85 <- BinaryOperation v83, '/', v84
+    v86 <- BinaryOperation v57, '*', v85
+    v87 <- BinaryOperation v82, '+', v86
+    v88 <- BinaryOperation v57, '*', v87
+    v89 <- BinaryOperation v79, '+', v88
+    v90 <- BinaryOperation v57, '*', v89
+    v91 <- BinaryOperation v76, '+', v90
+    v92 <- BinaryOperation v57, '*', v91
+    v93 <- BinaryOperation v73, '+', v92
+    v94 <- BinaryOperation v57, '*', v93
+    v95 <- BinaryOperation v70, '+', v94
+    v96 <- BinaryOperation v57, '*', v95
+    v97 <- BinaryOperation v67, '+', v96
+    v98 <- BinaryOperation v57, '*', v97
+    v99 <- BinaryOperation v64, '+', v98
+    v100 <- BinaryOperation v57, '*', v99
+    v101 <- BinaryOperation v61, '+', v100
+    v102 <- BinaryOperation v57, '*', v101
+    v103 <- BinaryOperation v58, '+', v102
+    v104 <- BinaryOperation v57, '*', v103
+    Return v104
+EndPlainFunction
+BeginForLoopInitializer
+    v105 <- LoadFloat '0.1'
+BeginForLoopCondition -> v106
+    v107 <- LoadFloat '1e-300'
+    v108 <- Compare v106, '>', v107
+BeginForLoopAfterthought v108 -> v109
+    v110 <- LoadFloat '0.8'
+    Update v109, '*', v110
+BeginForLoopBody -> v111
+    v112 <- CallFunction v56, [v111]
+    v113 <- CreateNamedVariable 'expected', 'var', v112
+    v114 <- CallMethod v1, 'expm1', [v111]
+    v115 <- LoadFloat '1e-15'
+    v116 <- BinaryOperation v113, '*', v115
+EndForLoop
+v117 <- LoadFloat '709.8'
+v118 <- CallMethod v1, 'expm1', [v117]
+v119 <- LoadFloat '1.7976931348623157e+308'
+v120 <- CallMethod v1, 'exp', [v119]
+v121 <- LoadInteger '1'
+v122 <- UnaryOperation '-', v121
+v123 <- LoadInteger '56'
+v124 <- UnaryOperation '-', v123
+v125 <- GetProperty v1, 'LN2'
+v126 <- BinaryOperation v124, '*', v125
+v127 <- CallMethod v1, 'expm1', [v126]
+v128 <- LoadInteger '1'
+v129 <- UnaryOperation '-', v128
+v130 <- LoadInteger '50'
+v131 <- UnaryOperation '-', v130
+v132 <- CallMethod v1, 'expm1', [v131]
+v133 <- LoadInteger '1'
+v134 <- UnaryOperation '-', v133
+v135 <- LoadFloat '1.7976931348623157e+308'
+v136 <- UnaryOperation '-', v135
+v137 <- CallMethod v1, 'expm1', [v136]
+v138 <- GetProperty v1, 'E'
+v139 <- LoadInteger '1'
+v140 <- BinaryOperation v138, '-', v139
+v141 <- LoadInteger '1'
+v142 <- CallMethod v1, 'expm1', [v141]
+v143 <- LoadInteger '1'
+v144 <- GetProperty v1, 'E'
+v145 <- BinaryOperation v143, '/', v144
+v146 <- LoadInteger '1'
+v147 <- BinaryOperation v145, '-', v146
+v148 <- LoadInteger '1'
+v149 <- UnaryOperation '-', v148
+v150 <- CallMethod v1, 'expm1', [v149]
+v151 <- LoadFloat '6.38905609893065'
+v152 <- LoadInteger '2'
+v153 <- CallMethod v1, 'expm1', [v152]
+v154 <- LoadFloat '0.8646647167633873'
+v155 <- UnaryOperation '-', v154
+v156 <- LoadInteger '2'
+v157 <- UnaryOperation '-', v156
+v158 <- CallMethod v1, 'expm1', [v157]
+v159 <- LoadInteger '0'
+v160 <- LoadInteger '0'
+v161 <- CallMethod v1, 'expm1', [v160]
+v162 <- LoadInteger '2'
+v163 <- LoadInteger '55'
+v164 <- UnaryOperation '-', v163
+v165 <- CallMethod v1, 'pow', [v162, v164]
+v166 <- LoadInteger '2'
+v167 <- LoadInteger '55'
+v168 <- UnaryOperation '-', v167
+v169 <- CallMethod v1, 'pow', [v166, v168]
+v170 <- CallMethod v1, 'expm1', [v169]
+v171 <- LoadFloat '0.18920711500272105'
+v172 <- LoadFloat '0.25'
+v173 <- GetProperty v1, 'LN2'
+v174 <- BinaryOperation v172, '*', v173
+v175 <- CallMethod v1, 'expm1', [v174]
+v176 <- LoadFloat '0.5'
+v177 <- UnaryOperation '-', v176
+v178 <- GetProperty v1, 'LN2'
+v179 <- UnaryOperation '-', v178
+v180 <- CallMethod v1, 'expm1', [v179]
+v181 <- LoadInteger '1'
+v182 <- GetProperty v1, 'LN2'
+v183 <- CallMethod v1, 'expm1', [v182]
+v184 <- LoadInteger '144115188075855824'
+v185 <- LoadInteger '57'
+v186 <- GetProperty v1, 'LN2'
+v187 <- BinaryOperation v185, '*', v186
+v188 <- CallMethod v1, 'expm1', [v187]
+v189 <- LoadFloat '524286.99999999994'
+v190 <- LoadInteger '19'
+v191 <- GetProperty v1, 'LN2'
+v192 <- BinaryOperation v190, '*', v191
+v193 <- CallMethod v1, 'expm1', [v192]
+v194 <- LoadInteger '1048575'
+v195 <- LoadInteger '20'
+v196 <- GetProperty v1, 'LN2'
+v197 <- BinaryOperation v195, '*', v196
+v198 <- CallMethod v1, 'expm1', [v197]
+
+
+isNaN(Math.expm1(NaN));
+function f5() {
+}
+isNaN(Math.expm1(f5));
+function f8() {
+    return NaN;
+}
+isNaN(Math.expm1({ toString: f8 }));
+function f12() {
+    return "abc";
+}
+isNaN(Math.expm1({ valueOf: f12 }));
+1 / Math.expm1(0);
+-Infinity;
+1 / Math.expm1(-0);
+Math.expm1(Infinity);
+-1;
+Math.expm1(-Infinity);
+for (let i34 = 1; i34 < 700; i34 += 0.25) {
+    var expected = Math.exp(i34) - 1;
+    Math.expm1(i34);
+    expected * 1e-15;
+    expected = Math.exp(-i34) - 1;
+    Math.expm1(-i34);
+    -expected * 1e-15;
+}
+function expm1(a57) {
+    return a57 * (1 + (a57 * ((1 / 2) + (a57 * ((1 / 6) + (a57 * ((1 / 24) + (a57 * ((1 / 120) + (a57 * ((1 / 720) + (a57 * ((1 / 5040) + (a57 * ((1 / 40320) + (a57 * ((1 / 362880) + (a57 * (1 / 3628800)))))))))))))))))));
+}
+for (let i106 = 0.1; i106 > 1e-300; i106 *= 0.8) {
+    var expected = expm1(i106);
+    Math.expm1(i106);
+    expected * 1e-15;
+}
+Math.expm1(709.8);
+Math.exp(1.7976931348623157e+308);
+-1;
+Math.expm1(-56 * Math.LN2);
+-1;
+Math.expm1(-50);
+-1;
+Math.expm1(-1.7976931348623157e+308);
+Math.E - 1;
+Math.expm1(1);
+(1 / Math.E) - 1;
+Math.expm1(-1);
+Math.expm1(2);
+-0.8646647167633873;
+Math.expm1(-2);
+Math.expm1(0);
+Math.pow(2, -55);
+Math.expm1(Math.pow(2, -55));
+Math.expm1(0.25 * Math.LN2);
+-0.5;
+Math.expm1(-Math.LN2);
+Math.expm1(Math.LN2);
+Math.expm1(57 * Math.LN2);
+Math.expm1(19 * Math.LN2);
+Math.expm1(20 * Math.LN2);
+
+FuzzIL program written to corpus/math-expm1.fzil

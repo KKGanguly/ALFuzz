@@ -1,0 +1,21 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- GetProperty v1, 'isPrototypeOf'
+v3 <- CallMethod v2, 'call', []
+v4 <- LoadNull
+v5 <- LoadInteger '1'
+v6 <- GetProperty v0, 'prototype'
+v7 <- GetProperty v6, 'isPrototypeOf'
+v8 <- CallMethod v7, 'call', [v4, v5]
+v9 <- LoadUndefined
+v10 <- LoadInteger '1'
+v11 <- GetProperty v0, 'prototype'
+v12 <- GetProperty v11, 'isPrototypeOf'
+v13 <- CallMethod v12, 'call', [v9, v10]
+
+
+Object.prototype.isPrototypeOf.call();
+Object.prototype.isPrototypeOf.call(null, 1);
+Object.prototype.isPrototypeOf.call(undefined, 1);
+
+FuzzIL program written to corpus/regress-3483.fzil

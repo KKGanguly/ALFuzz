@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadThis
+    v4 <- CallMethod v1, 'call', [v3]
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6
+    v7 <- BeginPlainFunction -> 
+        v8 <- LoadInteger '2'
+        v9 <- BinaryOperation v6, '*', v8
+        v10 <- LoadArguments
+        v11 <- GetProperty v10, 'length'
+        v12 <- BinaryOperation v9, '+', v11
+        v13 <- CreateNamedVariable 'result', 'var', v12
+        Return v13
+    EndPlainFunction
+    BeginForLoopInitializer
+        v14 <- LoadInteger '0'
+    BeginForLoopCondition -> v15
+        v16 <- LoadInteger '5'
+        v17 <- Compare v15, '<', v16
+    BeginForLoopAfterthought v17 -> v18
+        v19 <- UnaryOperation '++', v18
+    BeginForLoopBody -> v20
+        v21 <- CallFunction v7, []
+    EndForLoop
+    v22 <- LoadInteger '2'
+    v23 <- BinaryOperation v6, '*', v22
+    v24 <- CallFunction v0, [v7, v23]
+EndPlainFunction
+v25 <- LoadInteger '1'
+v26 <- CallFunction v5, [v25]
+v27 <- LoadInteger '42'
+v28 <- CallFunction v5, [v27]
+v29 <- LoadInteger '239'
+v30 <- CallFunction v5, [v29]
+
+
+function runner(a1, a2) {
+    a1.call(this);
+}
+function test(a6) {
+    function MyFunction() {
+        var result = (a6 * 2) + arguments.length;
+        return result;
+    }
+    for (let i15 = 0; i15 < 5; ++i15) {
+        MyFunction();
+    }
+    runner(MyFunction, a6 * 2);
+}
+test(1);
+test(42);
+test(239);
+
+FuzzIL program written to corpus/closures.fzil

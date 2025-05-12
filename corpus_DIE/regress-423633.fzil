@@ -1,0 +1,61 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString '0'
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadBoolean 'false'
+    Return v4
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v1, v2, v5]
+v8 <- LoadInteger '1'
+v9 <- LoadInteger '2'
+v10 <- LoadInteger '3'
+v11 <- CreateArray [v8, v9, v10]
+v12 <- CreateNamedVariable 'a', 'var', v11
+v13 <- CallMethod v12, 'slice', []
+v14 <- LoadInteger '3'
+v15 <- CreateArray [v14]
+v16 <- LoadInteger '2'
+v17 <- LoadInteger '1'
+v18 <- CallMethod v12, 'splice', [v16, v17]
+v19 <- LoadInteger '1'
+v20 <- LoadInteger '2'
+v21 <- LoadInteger '3'
+v22 <- CreateArray [v19, v20, v21]
+Reassign v12, v22
+v23 <- LoadInteger '4'
+SetElement v12, '65535', v23
+v24 <- LoadNull
+SetProperty v12, '__proto__', v24
+v25 <- GetProperty v0, 'prototype'
+v26 <- GetProperty v25, 'slice'
+v27 <- CallMethod v26, 'call', [v12]
+v28 <- LoadInteger '3'
+v29 <- CreateArray [v28]
+v30 <- LoadInteger '2'
+v31 <- LoadInteger '1'
+v32 <- GetProperty v0, 'prototype'
+v33 <- GetProperty v32, 'splice'
+v34 <- CallMethod v33, 'call', [v12, v30, v31]
+
+
+const v1 = Array.prototype;
+function f3() {
+    return false;
+}
+Object.defineProperty(v1, "0", { get: f3 });
+var a = [1,2,3];
+a.slice();
+[3];
+a.splice(2, 1);
+a = [1,2,3];
+a[65535] = 4;
+a.__proto__ = null;
+Array.prototype.slice.call(a);
+[3];
+Array.prototype.splice.call(a, 2, 1);
+
+FuzzIL program written to corpus/regress-423633.fzil

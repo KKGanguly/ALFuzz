@@ -1,0 +1,41 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'j', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '80000'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- UnaryOperation v1, '++'
+EndForLoop
+v10 <- BeginPlainFunction -> v11
+    v12 <- LoadInteger '2'
+    v13 <- UnaryOperation '-', v12
+    v14 <- LoadInteger '0'
+    v15 <- BinaryOperation v13, '>>>', v14
+    v16 <- BinaryOperation v11, '>>', v15
+    Return v16
+EndPlainFunction
+v17 <- LoadInteger '2147483648'
+v18 <- CreateNamedVariable 'K3', 'var', v17
+v19 <- LoadInteger '2'
+v20 <- UnaryOperation '-', v19
+v21 <- LoadInteger '0'
+v22 <- BinaryOperation v18, '|', v21
+v23 <- CallFunction v10, [v22]
+
+
+var j = 0;
+for (let i3 = 0; i3 < 80000; i3++) {
+    j++;
+}
+function SarShr(a11) {
+    return a11 >> (-2 >>> 0);
+}
+var K3 = 2147483648;
+-2;
+SarShr(K3 | 0);
+
+FuzzIL program written to corpus/osr-uint32.fzil

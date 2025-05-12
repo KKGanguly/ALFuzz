@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    v3 <- LoadUndefined
+    Reassign v2, v3
+    BeginWhileLoopHeader
+        v4 <- UnaryOperation v2, '--'
+    BeginWhileLoopBody v4
+    EndWhileLoop
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+
+
+function foo() {
+    var x = 1;
+    x = undefined;
+    while (x--) {
+    }
+}
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-879560.fzil

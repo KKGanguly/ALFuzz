@@ -1,0 +1,83 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'oobArray', 'let', v0
+v2 <- LoadInteger '1028'
+v3 <- LoadInteger '8'
+v4 <- BinaryOperation v2, '*', v3
+v5 <- CreateNamedVariable 'maxSize', 'let', v4
+v6 <- BeginPlainFunction -> 
+    Return v1
+EndPlainFunction
+v7 <- BeginArrowFunction -> v8
+    v9 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `counter`, v9
+        BeginObjectLiteralMethod `next` -> v10
+            v11 <- GetProperty v10, 'counter'
+            v12 <- UnaryOperation v11, '++'
+            v13 <- CreateNamedVariable 'result', 'let', v12
+            v14 <- GetProperty v10, 'counter'
+            v15 <- Compare v14, '>', v5
+            BeginIf v15
+                v16 <- LoadInteger '0'
+                SetProperty v1, 'length', v16
+                v17 <- LoadBoolean 'true'
+                BeginObjectLiteral
+                    ObjectLiteralAddProperty `done`, v17
+                v18 <- EndObjectLiteral
+                Return v18
+            BeginElse
+                v19 <- LoadBoolean 'false'
+                BeginObjectLiteral
+                    ObjectLiteralAddProperty `value`, v13
+                    ObjectLiteralAddProperty `done`, v19
+                v20 <- EndObjectLiteral
+                Return v20
+            EndIf
+        EndObjectLiteralMethod
+    v21 <- EndObjectLiteral
+    Return v21
+EndArrowFunction
+v22 <- CreateNamedVariable 'Symbol', 'none'
+v23 <- GetProperty v22, 'iterator'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v23, v7
+v24 <- EndObjectLiteral
+v25 <- CreateNamedVariable 'Array', 'none'
+v26 <- GetProperty v25, 'from'
+v27 <- CallMethod v26, 'call', [v6, v24]
+v28 <- GetProperty v1, 'length'
+v29 <- LoadInteger '1094795585'
+v30 <- GetProperty v1, 'length'
+v31 <- LoadInteger '1'
+v32 <- BinaryOperation v30, '-', v31
+SetComputedProperty v1, v32, v29
+
+
+let oobArray = [];
+let maxSize = 1028 * 8;
+function f6() {
+    return oobArray;
+}
+const v7 = (a8) => {
+    const v21 = {
+        counter: 0,
+        next() {
+            let v11 = this.counter;
+            let result = v11++;
+            if (this.counter > maxSize) {
+                oobArray.length = 0;
+                return { done: true };
+            } else {
+                return { value: result, done: false };
+            }
+        },
+    };
+    return v21;
+};
+const v23 = Symbol.iterator;
+const v24 = { [v23]: v7 };
+Array.from.call(f6, v24);
+oobArray.length;
+oobArray[oobArray.length - 1] = 1094795585;
+
+FuzzIL program written to corpus/regress-821137.fzil

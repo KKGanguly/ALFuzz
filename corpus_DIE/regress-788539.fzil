@@ -1,0 +1,78 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadThis
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3, v4, v5
+    v6 <- TestInstanceOf v3, v5
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadInteger '0'
+    SetProperty v8, 'x', v9
+    v10 <- GetProperty v8, 'x'
+    v11 <- LoadInteger '0'
+    v12 <- Compare v10, '===', v11
+    BeginIf v12
+        v13 <- LoadFloat '0.1'
+        SetElement v8, '1', v13
+    EndIf
+    v14 <- BeginClassDefinition
+    EndClassDefinition
+    v15 <- BeginClassDefinition v14
+        BeginClassInstanceMethod 'bar' -> v16
+            v17 <- CallSuperMethod 'foo', []
+            Return v17
+        EndClassInstanceMethod
+    EndClassDefinition
+    v18 <- GetProperty v14, 'prototype'
+    SetProperty v18, 'foo', v0
+    v19 <- Construct v15, []
+    v20 <- GetProperty v19, 'bar'
+    v21 <- CallMethod v20, 'call', []
+    v22 <- CreateNamedVariable 'Object', 'none'
+    v23 <- CallFunction v22, []
+    v24 <- CreateNamedVariable 'String', 'none'
+    v25 <- CallFunction v2, [v21, v23, v24]
+EndPlainFunction
+v26 <- CreateNamedVariable 'Array', 'none'
+v27 <- LoadInteger '1'
+v28 <- Construct v26, [v27]
+v29 <- CallFunction v7, [v28]
+v30 <- LoadInteger '1'
+v31 <- Construct v26, [v30]
+v32 <- CallFunction v7, [v31]
+v33 <- LoadInteger '1'
+v34 <- Construct v26, [v33]
+v35 <- CallFunction v7, [v34]
+
+
+function f1() {
+    return this;
+}
+function f2(a3, a4, a5) {
+    a3 instanceof a5;
+}
+function f3(a8) {
+    a8.x = 0;
+    if (a8.x === 0) {
+        a8[1] = 0.1;
+    }
+    class C14 {
+    }
+    class C15 extends C14 {
+        bar() {
+            return super.foo();
+        }
+    }
+    const t18 = C14.prototype;
+    t18.foo = f1;
+    const v19 = new C15();
+    f2(v19.bar.call(), Object(), String);
+}
+const v28 = new Array(1);
+f3(v28);
+const v31 = new Array(1);
+f3(v31);
+const v34 = new Array(1);
+f3(v34);
+
+FuzzIL program written to corpus/regress-788539.fzil

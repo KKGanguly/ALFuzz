@@ -1,0 +1,90 @@
+v0 <- BeginPlainFunction -> v1, v2, v3, v4, v5
+    v6 <- CreateNamedVariable 'print', 'none'
+    v7 <- CallFunction v6, [v1]
+    v8 <- CreateNamedVariable 'RegExp', 'none'
+    v9 <- Construct v8, [v3, v4]
+    v10 <- CreateNamedVariable 're', 'var', v9
+    v11 <- CreateNamedVariable 'MakeReplaceString', 'none'
+    v12 <- CallMethod v5, 'replace', [v10, v11]
+    v13 <- CreateNamedVariable 'output', 'var', v12
+EndPlainFunction
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadArguments
+    v16 <- GetProperty v15, 'length'
+    v17 <- CreateNamedVariable 'l', 'var', v16
+    v18 <- CreateNamedVariable 'Array', 'none'
+    v19 <- LoadInteger '3'
+    v20 <- BinaryOperation v17, '-', v19
+    v21 <- Construct v18, [v20]
+    v22 <- CreateNamedVariable 'a', 'var', v21
+    v23 <- LoadArguments
+    v24 <- GetElement v23, '0'
+    v25 <- CallMethod v22, 'push', [v24]
+    BeginForLoopInitializer
+        v26 <- LoadInteger '2'
+    BeginForLoopCondition -> v27
+        v28 <- LoadInteger '2'
+        v29 <- BinaryOperation v17, '-', v28
+        v30 <- Compare v27, '<', v29
+    BeginForLoopAfterthought v30 -> v31
+        v32 <- UnaryOperation v31, '++'
+    BeginForLoopBody -> v33
+        v34 <- LoadArguments
+        v35 <- GetComputedProperty v34, v33
+        v36 <- CallMethod v22, 'push', [v35]
+    EndForLoop
+    v37 <- LoadString '[@'
+    v38 <- LoadArguments
+    v39 <- LoadInteger '2'
+    v40 <- BinaryOperation v17, '-', v39
+    v41 <- GetComputedProperty v38, v40
+    v42 <- BinaryOperation v37, '+', v41
+    v43 <- LoadString ':'
+    v44 <- BinaryOperation v42, '+', v43
+    v45 <- LoadString ','
+    v46 <- CallMethod v22, 'join', [v45]
+    v47 <- BinaryOperation v44, '+', v46
+    v48 <- LoadString ']'
+    v49 <- BinaryOperation v47, '+', v48
+    Return v49
+EndPlainFunction
+v50 <- BeginPlainFunction -> 
+    v51 <- LoadInteger '1'
+    v52 <- LoadString 'ajaxNiceForm.villesHome([@24:#OBJ#])'
+    v53 <- LoadString '#OBJ#'
+    v54 <- LoadString 'g'
+    v55 <- LoadString 'ajaxNiceForm.villesHome(#OBJ#)'
+    v56 <- CallFunction v0, [v51, v52, v53, v54, v55]
+    v57 <- LoadInteger '2'
+    v58 <- LoadString 'A long string with no non-ASCII characters'
+    v59 <- LoadString 'Unicode string ሴ'
+    v60 <- LoadString 'g'
+    v61 <- LoadString 'A long string with no non-ASCII characters'
+    v62 <- CallFunction v0, [v57, v58, v59, v60, v61]
+EndPlainFunction
+v63 <- CallFunction v50, []
+
+
+function TestCase(a1, a2, a3, a4, a5) {
+    print(a1);
+    const v9 = new RegExp(a3, a4);
+    var re = v9;
+    var output = a5.replace(re, MakeReplaceString);
+}
+function MakeReplaceString() {
+    var l = arguments.length;
+    const v21 = new Array(l - 3);
+    var a = v21;
+    a.push(arguments[0]);
+    for (let i27 = 2; i27 < (l - 2); i27++) {
+        a.push(arguments[i27]);
+    }
+    return ((("[@" + arguments[l - 2]) + ":") + a.join(",")) + "]";
+}
+function f50() {
+    TestCase(1, "ajaxNiceForm.villesHome([@24:#OBJ#])", "#OBJ#", "g", "ajaxNiceForm.villesHome(#OBJ#)");
+    TestCase(2, "A long string with no non-ASCII characters", "Unicode string ሴ", "g", "A long string with no non-ASCII characters");
+}
+f50();
+
+FuzzIL program written to corpus/search-string-multiple.fzil

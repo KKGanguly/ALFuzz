@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- BinaryOperation v1, '>>>', v2
+    v4 <- CreateNamedVariable 'x', 'var', v3
+    v5 <- LoadInteger '1'
+    v6 <- BinaryOperation v4, '*', v5
+    v7 <- LoadInteger '1'
+    v8 <- BinaryOperation v4, '*', v7
+    v9 <- BinaryOperation v6, '+', v8
+    v10 <- LoadInteger '0'
+    v11 <- BinaryOperation v9, '<<', v10
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '2'
+v13 <- UnaryOperation '-', v12
+v14 <- LoadInteger '1'
+v15 <- UnaryOperation '-', v14
+v16 <- CallFunction v0, [v15]
+
+
+function f(a1) {
+    var x = a1 >>> 0;
+    return ((x * 1) + (x * 1)) << 0;
+}
+-2;
+f(-1);
+
+FuzzIL program written to corpus/regress-unsigned-mul-add.fzil

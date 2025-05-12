@@ -1,0 +1,85 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3, v4
+        v5 <- LoadInteger '10'
+        v6 <- BinaryOperation v2, '+', v5
+        v7 <- LoadString 'result'
+        v8 <- CreateNamedVariable 'result', 'var', v7
+        v9 <- LoadInteger '0'
+        v10 <- BinaryOperation v3, '+', v9
+        v11 <- CreateNamedVariable 'dummy', 'var', v10
+        Return v8
+    EndPlainFunction
+    v12 <- LoadString 'result'
+    v13 <- LoadBoolean 'true'
+    v14 <- LoadInteger '3'
+    v15 <- LoadBoolean 'false'
+    v16 <- CallFunction v1, [v13, v14, v15]
+    v17 <- LoadString 'result'
+    v18 <- LoadBoolean 'true'
+    v19 <- LoadInteger '3'
+    v20 <- LoadBoolean 'false'
+    v21 <- CallFunction v1, [v18, v19, v20]
+    v22 <- LoadString 'result'
+    v23 <- LoadBoolean 'true'
+    v24 <- LoadString 'foo'
+    v25 <- LoadBoolean 'true'
+    v26 <- CallFunction v1, [v23, v24, v25]
+EndPlainFunction
+v27 <- CallFunction v0, []
+v28 <- BeginPlainFunction -> 
+    v29 <- BeginPlainFunction -> 
+        v30 <- LoadString 'dummy'
+        Return v30
+    EndPlainFunction
+    v31 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `toString`, v29
+        v32 <- EndObjectLiteral
+        Return v32
+    EndPlainFunction
+    v33 <- BeginPlainFunction -> v34
+    EndPlainFunction
+    v35 <- BeginPlainFunction -> 
+        v36 <- CallFunction v31, []
+        v37 <- LoadString ''
+        v38 <- BinaryOperation v36, '+', v37
+        v39 <- Void_ v38
+        v40 <- CallFunction v33, [v39]
+        Return v40
+    EndPlainFunction
+    v41 <- CallFunction v35, []
+    v42 <- CallFunction v35, []
+EndPlainFunction
+v43 <- CallFunction v28, []
+
+
+function BinopInEffectContextDeoptAndOsr() {
+    function f(a2, a3, a4) {
+        a2 + 10;
+        var result = "result";
+        var dummy = a3 + 0;
+        return result;
+    }
+    f(true, 3, false);
+    f(true, 3, false);
+    f(true, "foo", true);
+}
+BinopInEffectContextDeoptAndOsr();
+function BinopInEffectContextLazyDeopt() {
+    function deopt_f() {
+        return "dummy";
+    }
+    function h() {
+        return { toString: deopt_f };
+    }
+    function g(a34) {
+    }
+    function f() {
+        return g(void (h() + ""));
+    }
+    f();
+    f();
+}
+BinopInEffectContextLazyDeopt();
+
+FuzzIL program written to corpus/binop-in-effect-context-deopt.fzil

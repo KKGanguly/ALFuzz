@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString '0'
+    v2 <- UnaryOperation '-', v1
+    Return v2
+EndPlainFunction
+v3 <- CallFunction v0, []
+v4 <- CallFunction v0, []
+v5 <- CallFunction v0, []
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadString '1'
+    v8 <- UnaryOperation '-', v7
+    Return v8
+EndPlainFunction
+v9 <- CallFunction v6, []
+v10 <- CallFunction v6, []
+v11 <- CallFunction v6, []
+
+
+function foo() {
+    return -"0";
+}
+foo();
+foo();
+foo();
+function bar() {
+    return -"1";
+}
+bar();
+bar();
+bar();
+
+FuzzIL program written to corpus/regress-7135.fzil

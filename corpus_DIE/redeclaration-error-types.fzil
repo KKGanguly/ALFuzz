@@ -1,0 +1,148 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- GetProperty v1, 'length'
+        v6 <- LoadInteger '1'
+        v7 <- BinaryOperation v5, '-', v6
+        v8 <- Compare v4, '<', v7
+    BeginForLoopAfterthought v8 -> v9
+        v10 <- UnaryOperation v9, '++'
+    BeginForLoopBody -> v11
+    EndForLoop
+EndPlainFunction
+v12 <- LoadString 'var a;'
+v13 <- LoadString 'let a;'
+v14 <- CreateArray [v12, v13]
+v15 <- LoadString 'SyntaxError'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `scripts`, v14
+    ObjectLiteralAddProperty `expectedError`, v15
+v16 <- EndObjectLiteral
+v17 <- LoadString 'let a;'
+v18 <- LoadString 'var a;'
+v19 <- CreateArray [v17, v18]
+v20 <- LoadString 'SyntaxError'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `scripts`, v19
+    ObjectLiteralAddProperty `expectedError`, v20
+v21 <- EndObjectLiteral
+v22 <- LoadString 'let a;'
+v23 <- LoadString 'let a;'
+v24 <- CreateArray [v22, v23]
+v25 <- LoadString 'SyntaxError'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `scripts`, v24
+    ObjectLiteralAddProperty `expectedError`, v25
+v26 <- EndObjectLiteral
+v27 <- LoadString 'let a; eval("var a;");'
+v28 <- CreateArray [v27]
+v29 <- LoadString 'SyntaxError'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `scripts`, v28
+    ObjectLiteralAddProperty `expectedError`, v29
+v30 <- EndObjectLiteral
+v31 <- LoadString 'let a; eval("function a() {}");'
+v32 <- CreateArray [v31]
+v33 <- LoadString 'SyntaxError'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `scripts`, v32
+    ObjectLiteralAddProperty `expectedError`, v33
+v34 <- EndObjectLiteral
+v35 <- LoadString '(function() { let a; eval("var a;"); })();'
+v36 <- CreateArray [v35]
+v37 <- LoadString 'SyntaxError'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `scripts`, v36
+    ObjectLiteralAddProperty `expectedError`, v37
+v38 <- EndObjectLiteral
+v39 <- LoadString '(function() { let a; eval("function a() {}"); })();'
+v40 <- CreateArray [v39]
+v41 <- LoadString 'SyntaxError'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `scripts`, v40
+    ObjectLiteralAddProperty `expectedError`, v41
+v42 <- EndObjectLiteral
+v43 <- LoadString 'let NaN;'
+v44 <- CreateArray [v43]
+v45 <- LoadString 'SyntaxError'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `scripts`, v44
+    ObjectLiteralAddProperty `expectedError`, v45
+v46 <- EndObjectLiteral
+v47 <- LoadString 'function NaN() {}'
+v48 <- CreateArray [v47]
+v49 <- LoadString 'SyntaxError'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `scripts`, v48
+    ObjectLiteralAddProperty `expectedError`, v49
+v50 <- EndObjectLiteral
+v51 <- LoadString 'eval("function NaN() {}");'
+v52 <- CreateArray [v51]
+v53 <- LoadString 'TypeError'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `scripts`, v52
+    ObjectLiteralAddProperty `expectedError`, v53
+v54 <- EndObjectLiteral
+v55 <- CreateTemplateString ['\n        let a;\n        try {\n          eval("function a() {}");\n        } catch (e) {}\n        eval("function NaN() {}");\n      '], []
+v56 <- CreateArray [v55]
+v57 <- LoadString 'TypeError'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `scripts`, v56
+    ObjectLiteralAddProperty `expectedError`, v57
+v58 <- EndObjectLiteral
+v59 <- LoadRegExp '"' 'g'
+v60 <- LoadString '`'
+v61 <- CreateTemplateString ['\n        eval("\n          function f() {\n            function b() {\n              (0, eval)('function NaN() {}');\n            }\n            b();\n          }\n          f();\n        ");\n      '], []
+v62 <- CallMethod v61, 'replace', [v59, v60]
+v63 <- CreateArray [v62]
+v64 <- LoadString 'TypeError'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `scripts`, v63
+    ObjectLiteralAddProperty `expectedError`, v64
+v65 <- EndObjectLiteral
+v66 <- CreateArray [v16, v21, v26, v30, v34, v38, v42, v46, v50, v54, v58, v65]
+v67 <- CreateNamedVariable 'tests', 'var', v66
+v68 <- BeginPlainFunction -> v69
+    v70 <- GetProperty v69, 'scripts'
+    v71 <- GetProperty v69, 'expectedError'
+    v72 <- CallFunction v0, [v70, v71]
+EndPlainFunction
+v73 <- CallMethod v67, 'forEach', [v68]
+
+
+function doTest(a1, a2) {
+    for (let i4 = 0; i4 < (a1.length - 1); i4++) {
+    }
+}
+const v14 = ["var a;","let a;"];
+const v16 = { scripts: v14, expectedError: "SyntaxError" };
+const v19 = ["let a;","var a;"];
+const v21 = { scripts: v19, expectedError: "SyntaxError" };
+const v24 = ["let a;","let a;"];
+const v26 = { scripts: v24, expectedError: "SyntaxError" };
+const v28 = ["let a; eval("var a;");"];
+const v30 = { scripts: v28, expectedError: "SyntaxError" };
+const v32 = ["let a; eval("function a() {}");"];
+const v34 = { scripts: v32, expectedError: "SyntaxError" };
+const v36 = ["(function() { let a; eval("var a;"); })();"];
+const v38 = { scripts: v36, expectedError: "SyntaxError" };
+const v40 = ["(function() { let a; eval("function a() {}"); })();"];
+const v42 = { scripts: v40, expectedError: "SyntaxError" };
+const v44 = ["let NaN;"];
+const v46 = { scripts: v44, expectedError: "SyntaxError" };
+const v48 = ["function NaN() {}"];
+const v50 = { scripts: v48, expectedError: "SyntaxError" };
+const v52 = ["eval("function NaN() {}");"];
+const v54 = { scripts: v52, expectedError: "TypeError" };
+const v56 = [`\n        let a;\n        try {\n          eval("function a() {}");\n        } catch (e) {}\n        eval("function NaN() {}");\n      `];
+const v58 = { scripts: v56, expectedError: "TypeError" };
+const v59 = /"/g;
+const v63 = [(`\n        eval("\n          function f() {\n            function b() {\n              (0, eval)('function NaN() {}');\n            }\n            b();\n          }\n          f();\n        ");\n      `).replace(v59, "`")];
+var tests = [v16,v21,v26,v30,v34,v38,v42,v46,v50,v54,v58,{ scripts: v63, expectedError: "TypeError" }];
+function f68(a69) {
+    doTest(a69.scripts, a69.expectedError);
+}
+tests.forEach(f68);
+
+FuzzIL program written to corpus/redeclaration-error-types.fzil

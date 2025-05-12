@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'a', 'var', v2
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    SetElement v3, '0', v4
+    v5 <- CreateNamedVariable 'FAIL', 'none'
+    v6 <- GetElement v3, '0'
+    SetProperty v6, 'toString', v5
+EndPlainFunction
+BeginTry
+    v7 <- CallFunction v0, []
+BeginCatch -> v8
+EndTryCatch
+BeginTry
+    v9 <- CallFunction v0, []
+BeginCatch -> v10
+EndTryCatch
+BeginTry
+    v11 <- CallFunction v0, []
+BeginCatch -> v12
+EndTryCatch
+
+
+function foo() {
+    var a = [,];
+    a[0] = {};
+    const t3 = a[0];
+    t3.toString = FAIL;
+}
+try {
+    foo();
+} catch(e8) {
+}
+try {
+    foo();
+} catch(e10) {
+}
+try {
+    foo();
+} catch(e12) {
+}
+
+FuzzIL program written to corpus/regress-crbug-669451.fzil

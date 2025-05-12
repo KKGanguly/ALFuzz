@@ -1,0 +1,297 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '3'
+v3 <- LoadInteger '4'
+v4 <- LoadInteger '5'
+v5 <- LoadInteger '6'
+v6 <- LoadInteger '7'
+v7 <- LoadInteger '8'
+v8 <- LoadInteger '9'
+v9 <- LoadInteger '10'
+v10 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9]
+v11 <- CreateNamedVariable 'a', 'var', v10
+v12 <- BeginPlainFunction -> v13
+    v14 <- LoadInteger '1'
+    v15 <- BinaryOperation v13, '+', v14
+    v16 <- GetComputedProperty v11, v15
+    Return v16
+EndPlainFunction
+v17 <- LoadInteger '1'
+v18 <- CallFunction v12, [v17]
+v19 <- LoadInteger '1'
+v20 <- UnaryOperation '-', v19
+v21 <- CallFunction v12, [v20]
+v22 <- LoadInteger '1'
+v23 <- UnaryOperation '-', v22
+v24 <- CallFunction v12, [v23]
+v25 <- BeginPlainFunction -> v26
+    v27 <- LoadInteger '0'
+    v28 <- CreateNamedVariable 'ret', 'var', v27
+    v29 <- LoadInteger '0'
+    v30 <- Compare v26, '<', v29
+    BeginIf v30
+        v31 <- LoadInteger '10'
+        v32 <- BinaryOperation v26, '+', v31
+        v33 <- GetComputedProperty v11, v32
+        Reassign v28, v33
+    BeginElse
+        v34 <- GetComputedProperty v11, v26
+        Reassign v28, v34
+    EndIf
+    Return v28
+EndPlainFunction
+v35 <- LoadInteger '1'
+v36 <- CallFunction v25, [v35]
+v37 <- LoadInteger '1'
+v38 <- UnaryOperation '-', v37
+v39 <- CallFunction v25, [v38]
+v40 <- LoadInteger '1'
+v41 <- UnaryOperation '-', v40
+v42 <- CallFunction v25, [v41]
+v43 <- BeginPlainFunction -> 
+    v44 <- LoadInteger '0'
+    v45 <- CreateNamedVariable 'ret', 'var', v44
+    BeginForLoopInitializer
+        v46 <- LoadInteger '4'
+    BeginForLoopCondition -> v47
+        v48 <- LoadInteger '0'
+        v49 <- Compare v47, '>', v48
+    BeginForLoopAfterthought v49 -> v50
+        v51 <- LoadInteger '1'
+        Update v50, '-', v51
+    BeginForLoopBody -> v52
+        v53 <- UnaryOperation '-', v52
+        v54 <- LoadInteger '4'
+        v55 <- BinaryOperation v53, '+', v54
+        v56 <- GetComputedProperty v11, v55
+        Update v45, '+', v56
+    EndForLoop
+    Return v45
+EndPlainFunction
+v57 <- CallFunction v43, []
+v58 <- CallFunction v43, []
+v59 <- CallFunction v43, []
+v60 <- BeginPlainFunction -> 
+    v61 <- LoadInteger '0'
+    v62 <- CreateNamedVariable 'ret', 'var', v61
+    BeginForLoopInitializer
+        v63 <- LoadInteger '0'
+    BeginForLoopCondition -> v64
+        v65 <- LoadInteger '5'
+        v66 <- Compare v64, '<', v65
+    BeginForLoopAfterthought v66 -> v67
+        v68 <- LoadInteger '1'
+        Update v67, '+', v68
+    BeginForLoopBody -> v69
+        v70 <- LoadInteger '1'
+        v71 <- BinaryOperation v69, '+', v70
+        v72 <- GetComputedProperty v11, v71
+        Update v62, '+', v72
+    EndForLoop
+    Return v62
+EndPlainFunction
+v73 <- CallFunction v60, []
+v74 <- CallFunction v60, []
+v75 <- CallFunction v60, []
+v76 <- BeginPlainFunction -> 
+    v77 <- LoadInteger '0'
+    v78 <- CreateNamedVariable 'ret', 'var', v77
+    BeginForLoopInitializer
+        v79 <- LoadInteger '0'
+    BeginForLoopCondition -> v80
+        v81 <- LoadInteger '5'
+        v82 <- Compare v80, '<', v81
+    BeginForLoopAfterthought v82 -> v83
+        v84 <- LoadInteger '1'
+        Update v83, '+', v84
+    BeginForLoopBody -> v85
+        v86 <- GetComputedProperty v11, v85
+        Update v78, '+', v86
+        v87 <- LoadInteger '1'
+        v88 <- BinaryOperation v85, '+', v87
+        v89 <- GetComputedProperty v11, v88
+        Update v78, '+', v89
+    EndForLoop
+    Return v78
+EndPlainFunction
+v90 <- CallFunction v76, []
+v91 <- CallFunction v76, []
+v92 <- CallFunction v76, []
+v93 <- BeginPlainFunction -> 
+    v94 <- LoadInteger '0'
+    v95 <- CreateNamedVariable 'ret', 'var', v94
+    BeginForLoopInitializer
+        v96 <- LoadInteger '3'
+        v97 <- UnaryOperation '-', v96
+    BeginForLoopCondition -> v98
+        v99 <- LoadInteger '4'
+        v100 <- Compare v98, '<', v99
+    BeginForLoopAfterthought v100 -> v101
+        v102 <- LoadInteger '1'
+        Update v101, '+', v102
+    BeginForLoopBody -> v103
+        v104 <- LoadInteger '0'
+        v105 <- Compare v103, '<', v104
+        BeginIf v105
+            v106 <- LoadInteger '4'
+            v107 <- BinaryOperation v103, '+', v106
+            v108 <- GetComputedProperty v11, v107
+            Update v95, '+', v108
+        BeginElse
+            v109 <- GetComputedProperty v11, v103
+            Update v95, '+', v109
+        EndIf
+    EndForLoop
+    Return v95
+EndPlainFunction
+v110 <- CallFunction v93, []
+v111 <- CallFunction v93, []
+v112 <- CallFunction v93, []
+v113 <- BeginPlainFunction -> v114
+    v115 <- LoadInteger '0'
+    v116 <- Compare v114, '>', v115
+    BeginIf v116
+        v117 <- LoadInteger '1'
+        Update v114, '+', v117
+    BeginElse
+        v118 <- LoadInteger '1'
+        v119 <- UnaryOperation '-', v118
+        Update v114, '+', v119
+    EndIf
+    v120 <- LoadInteger '3'
+    v121 <- BinaryOperation v114, '+', v120
+    v122 <- GetComputedProperty v11, v121
+    Return v122
+EndPlainFunction
+v123 <- LoadInteger '1'
+v124 <- UnaryOperation '-', v123
+v125 <- CallFunction v113, [v124]
+v126 <- LoadInteger '1'
+v127 <- UnaryOperation '-', v126
+v128 <- CallFunction v113, [v127]
+v129 <- LoadInteger '1'
+v130 <- UnaryOperation '-', v129
+v131 <- CallFunction v113, [v130]
+v132 <- BeginPlainFunction -> 
+    v133 <- LoadInteger '1'
+    Return v133
+EndPlainFunction
+v134 <- BeginPlainFunction -> 
+    v135 <- CallFunction v132, []
+    v136 <- LoadInteger '3'
+    v137 <- BinaryOperation v135, '+', v136
+    v138 <- GetComputedProperty v11, v137
+    Return v138
+EndPlainFunction
+v139 <- CallFunction v134, []
+v140 <- CallFunction v134, []
+v141 <- CallFunction v134, []
+v142 <- BeginPlainFunction -> v143
+    v144 <- GetComputedProperty v11, v143
+    v145 <- LoadInteger '1'
+    v146 <- BinaryOperation v143, '+', v145
+    v147 <- GetComputedProperty v11, v146
+    v148 <- BinaryOperation v144, '+', v147
+    Return v148
+EndPlainFunction
+v149 <- LoadInteger '1'
+v150 <- CallFunction v142, [v149]
+v151 <- LoadInteger '1'
+v152 <- CallFunction v142, [v151]
+v153 <- LoadInteger '1'
+v154 <- UnaryOperation '-', v153
+v155 <- CallFunction v142, [v154]
+
+
+var a = [1,2,3,4,5,6,7,8,9,10];
+function aoo(a13) {
+    return a[a13 + 1];
+}
+aoo(1);
+aoo(-1);
+aoo(-1);
+function boo(a26) {
+    var ret = 0;
+    if (a26 < 0) {
+        ret = a[a26 + 10];
+    } else {
+        ret = a[a26];
+    }
+    return ret;
+}
+boo(1);
+boo(-1);
+boo(-1);
+function coo() {
+    var ret = 0;
+    for (let i47 = 4; i47 > 0; i47 -= 1) {
+        ret += a[-i47 + 4];
+    }
+    return ret;
+}
+coo();
+coo();
+coo();
+function doo() {
+    var ret = 0;
+    for (let i64 = 0; i64 < 5; i64 += 1) {
+        ret += a[i64 + 1];
+    }
+    return ret;
+}
+doo();
+doo();
+doo();
+function eoo() {
+    var ret = 0;
+    for (let i80 = 0; i80 < 5; i80 += 1) {
+        ret += a[i80];
+        ret += a[i80 + 1];
+    }
+    return ret;
+}
+eoo();
+eoo();
+eoo();
+function foo() {
+    var ret = 0;
+    for (let i98 = -3; i98 < 4; i98 += 1) {
+        if (i98 < 0) {
+            ret += a[i98 + 4];
+        } else {
+            ret += a[i98];
+        }
+    }
+    return ret;
+}
+foo();
+foo();
+foo();
+function goo(a114) {
+    if (a114 > 0) {
+        a114 += 1;
+    } else {
+        a114 += -1;
+    }
+    return a[a114 + 3];
+}
+goo(-1);
+goo(-1);
+goo(-1);
+function index() {
+    return 1;
+}
+function hoo() {
+    return a[index() + 3];
+}
+hoo();
+hoo();
+hoo();
+function ioo(a143) {
+    return a[a143] + a[a143 + 1];
+}
+ioo(1);
+ioo(1);
+ioo(-1);
+
+FuzzIL program written to corpus/dehoisted-array-index.fzil

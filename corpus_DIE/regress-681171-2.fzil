@@ -1,0 +1,25 @@
+v0 <- BeginGeneratorFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '0'
+    BeginForLoopCondition -> v2
+        v3 <- LoadInteger '3'
+        v4 <- Compare v2, '<', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- UnaryOperation '++', v5
+    BeginForLoopBody -> v7
+        v8 <- Yield v7
+    EndForLoop
+EndGeneratorFunction
+v9 <- CreateNamedVariable 'gen', 'none'
+v10 <- CallFunction v9, []
+v11 <- CallMethod v10, 'next', []
+
+
+function* gen1() {
+    for (let i2 = 0; i2 < 3; ++i2) {
+        yield i2;
+    }
+}
+gen().next();
+
+FuzzIL program written to corpus/regress-681171-2.fzil

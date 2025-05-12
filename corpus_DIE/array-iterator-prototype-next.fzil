@@ -1,0 +1,36 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'array', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- CreateNamedVariable 'Symbol', 'none'
+        v6 <- GetProperty v5, 'iterator'
+        v7 <- CallComputedMethod v3, v6, []
+        v8 <- CallMethod v7, 'next', []
+        Return v8
+    EndPlainFunction
+    v9 <- CallFunction v4, []
+    v10 <- GetProperty v9, 'value'
+    v11 <- LoadUndefined
+    v12 <- LoadInteger '5'
+    v13 <- GetProperty v3, '__proto__'
+    v14 <- CallMethod v13, 'push', [v12]
+    v15 <- CallFunction v4, []
+    v16 <- GetProperty v15, 'value'
+    v17 <- LoadInteger '5'
+EndPlainFunction
+v18 <- CallFunction v0, []
+
+
+function f0() {
+    var array = [,];
+    function next() {
+        return array[Symbol.iterator]().next();
+    }
+    next().value;
+    array.__proto__.push(5);
+    next().value;
+}
+f0();
+
+FuzzIL program written to corpus/array-iterator-prototype-next.fzil

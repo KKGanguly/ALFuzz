@@ -1,0 +1,50 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'x', 'let', v0
+v2 <- BeginPlainFunction -> v3
+    Update v1, '+', v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- CallFunction v2, [v5]
+    Return v1
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    Reassign v1, v8
+    Return v1
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadInteger '1'
+    v11 <- CallFunction v4, [v10]
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '1'
+v13 <- LoadInteger '1'
+v14 <- CallFunction v7, [v13]
+v15 <- LoadInteger '2'
+v16 <- CallFunction v9, []
+v17 <- LoadInteger '3'
+v18 <- CallFunction v9, []
+v19 <- LoadInteger '4'
+v20 <- CallFunction v9, []
+
+
+let x;
+function f(a3) {
+    x += a3;
+}
+function g(a5) {
+    f(a5);
+    return x;
+}
+function h(a8) {
+    x = a8;
+    return x;
+}
+function boom() {
+    return g(1);
+}
+h(1);
+boom();
+boom();
+boom();
+
+FuzzIL program written to corpus/regress-crbug-659915a.fzil

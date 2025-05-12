@@ -1,0 +1,41 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'sparse_array', 'var', v0
+v2 <- LoadInteger '3'
+SetElement v1, '100', v2
+v3 <- LoadUndefined
+SetElement v1, '200', v3
+v4 <- LoadInteger '4'
+SetElement v1, '300', v4
+v5 <- LoadInteger '5'
+SetElement v1, '400', v5
+v6 <- LoadInteger '6'
+SetElement v1, '500', v6
+v7 <- LoadInteger '5'
+SetElement v1, '600', v7
+v8 <- LoadInteger '4'
+SetElement v1, '700', v8
+v9 <- LoadUndefined
+SetElement v1, '800', v9
+v10 <- LoadInteger '3'
+SetElement v1, '900', v10
+v11 <- LoadString 'filler'
+SetElement v1, '41999', v11
+v12 <- LoadInteger '3'
+v13 <- LoadInteger '99'
+v14 <- CallMethod v1, 'lastIndexOf', [v12, v13]
+
+
+var sparse_array = [];
+sparse_array[100] = 3;
+sparse_array[200] = undefined;
+sparse_array[300] = 4;
+sparse_array[400] = 5;
+sparse_array[500] = 6;
+sparse_array[600] = 5;
+sparse_array[700] = 4;
+sparse_array[800] = undefined;
+sparse_array[900] = 3;
+sparse_array[41999] = "filler";
+sparse_array.lastIndexOf(3, 99);
+
+FuzzIL program written to corpus/regress-843062-1.fzil

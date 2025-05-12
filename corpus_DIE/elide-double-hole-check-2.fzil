@@ -1,0 +1,48 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    v4 <- LoadFloat '0.5'
+    v5 <- BinaryOperation v3, '+', v4
+    Return v5
+EndPlainFunction
+v6 <- LoadInteger '0'
+v7 <- LoadUndefined
+v8 <- CreateArray [v6, v7]
+v9 <- CreateNamedVariable 'arr', 'var', v8
+v10 <- LoadFloat '0.5'
+v11 <- LoadInteger '0'
+v12 <- CallFunction v0, [v9, v11]
+v13 <- LoadFloat '0.5'
+v14 <- LoadInteger '0'
+v15 <- CallFunction v0, [v9, v14]
+v16 <- LoadFloat '0.5'
+v17 <- LoadInteger '0'
+v18 <- CallFunction v0, [v9, v17]
+v19 <- CreateNamedVariable 'NaN', 'none'
+v20 <- LoadInteger '1'
+v21 <- CallFunction v0, [v9, v20]
+v22 <- LoadFloat '1.5'
+v23 <- LoadFloat '1.5'
+v24 <- LoadFloat '1.5'
+v25 <- CreateArray [v22, v23, v24]
+SetProperty v9, '__proto__', v25
+v26 <- LoadInteger '2'
+v27 <- LoadInteger '1'
+v28 <- CallFunction v0, [v9, v27]
+v29 <- LoadFloat '0.5'
+v30 <- LoadInteger '0'
+v31 <- CallFunction v0, [v9, v30]
+
+
+function f(a1, a2) {
+    return a1[a2] + 0.5;
+}
+var arr = [0,,];
+f(arr, 0);
+f(arr, 0);
+f(arr, 0);
+f(arr, 1);
+arr.__proto__ = [1.5,1.5,1.5];
+f(arr, 1);
+f(arr, 0);
+
+FuzzIL program written to corpus/elide-double-hole-check-2.fzil

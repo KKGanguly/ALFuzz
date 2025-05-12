@@ -1,0 +1,35 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '20'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    v7 <- LoadInteger '500'
+    v8 <- CreateNamedVariable 'stride', 'var', v7
+    v9 <- CreateArray []
+    v10 <- CreateNamedVariable 'array', 'var', v9
+    BeginForLoopInitializer
+        v11 <- LoadInteger '0'
+    BeginForLoopCondition -> v12
+        v13 <- LoadInteger '1000'
+        v14 <- Compare v12, '<', v13
+    BeginForLoopAfterthought v14 -> v15
+        v16 <- UnaryOperation v15, '++'
+    BeginForLoopBody -> v17
+        v18 <- BinaryOperation v17, '*', v8
+        SetComputedProperty v10, v18, v17
+    EndForLoop
+EndForLoop
+
+
+for (let i1 = 0; i1 < 20; i1++) {
+    var stride = 500;
+    var array = [];
+    for (let i12 = 0; i12 < 1000; i12++) {
+        array[i12 * stride] = i12;
+    }
+}
+
+FuzzIL program written to corpus/sparse-array.fzil

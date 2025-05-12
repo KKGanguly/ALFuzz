@@ -1,0 +1,68 @@
+v0 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'forceDeopt', 'var', v1
+v3 <- LoadString 'bad'
+v4 <- BeginPlainFunction -> v5
+    BeginObjectLiteral
+    v6 <- EndObjectLiteral
+    v7 <- CreateNamedVariable 'obj', 'var', v6
+    v8 <- LoadString 'getterProperty'
+    v9 <- BeginPlainFunction -> 
+        v10 <- GetProperty v2, 'x'
+        Return v5
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v9
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'Object', 'none'
+    v13 <- CallMethod v12, 'defineProperty', [v7, v8, v11]
+    Return v7
+EndPlainFunction
+v14 <- CallFunction v4, [v3]
+v15 <- CreateNamedVariable 'objectWithGetterProperty', 'var', v14
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadString 'good'
+    v18 <- CreateNamedVariable 'iAmContextAllocated', 'var', v17
+    v19 <- GetProperty v15, 'getterProperty'
+    Return v18
+    v20 <- BeginPlainFunction -> 
+    EndPlainFunction
+EndPlainFunction
+v21 <- LoadString 'good'
+v22 <- CallFunction v16, []
+v23 <- LoadString 'good'
+v24 <- CallFunction v16, []
+v25 <- LoadString 'good'
+v26 <- CallFunction v16, []
+v27 <- DeleteProperty v2, 'x'
+v28 <- LoadString 'good'
+v29 <- CallFunction v16, []
+
+
+var forceDeopt = { x: 0 };
+function f4(a5) {
+    var obj = {};
+    function foo() {
+        forceDeopt.x;
+        return a5;
+    }
+    Object.defineProperty(obj, "getterProperty", { get: foo });
+    return obj;
+}
+var objectWithGetterProperty = f4("bad");
+function test() {
+    var iAmContextAllocated = "good";
+    objectWithGetterProperty.getterProperty;
+    return iAmContextAllocated;
+    function unused() {
+    }
+}
+test();
+test();
+test();
+delete forceDeopt.x;
+test();
+
+FuzzIL program written to corpus/regress-crbug-134609.fzil

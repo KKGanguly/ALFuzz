@@ -1,0 +1,52 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '0'
+    v4 <- LoadThis
+    SetProperty v4, 'x', v3
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- Compare v6, '<', v1
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation v8, '++'
+    BeginForLoopBody -> v10
+        v11 <- LoadInteger '100'
+        v12 <- BinaryOperation v10, '/', v11
+        v13 <- LoadThis
+        SetProperty v13, 'x', v12
+    EndForLoop
+    v14 <- LoadThis
+    SetProperty v14, 'val', v2
+EndPlainFunction
+v15 <- BeginPlainFunction -> v16
+    v17 <- LoadFloat '0.5'
+    v18 <- CreateNamedVariable 'val', 'var', v17
+    v19 <- Construct v0, [v16, v18]
+    v20 <- CreateNamedVariable 'obj', 'var', v19
+    v21 <- GetProperty v20, 'val'
+EndPlainFunction
+v22 <- LoadInteger '1'
+v23 <- CallFunction v15, [v22]
+v24 <- LoadInteger '1'
+v25 <- CallFunction v15, [v24]
+v26 <- LoadInteger '200000'
+v27 <- CallFunction v15, [v26]
+
+
+function g(a1, a2) {
+    this.x = 0;
+    for (let i6 = 0; i6 < a1; i6++) {
+        this.x = i6 / 100;
+    }
+    this.val = a2;
+}
+function f(a16) {
+    var val = 0.5;
+    const v19 = new g(a16, val);
+    var obj = v19;
+    obj.val;
+}
+f(1);
+f(1);
+f(200000);
+
+FuzzIL program written to corpus/regress-123919.fzil

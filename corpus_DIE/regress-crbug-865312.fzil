@@ -1,0 +1,61 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- CreateNamedVariable 'Int8Array', 'none'
+v2 <- CreateNamedVariable 'Uint16Array', 'none'
+v3 <- CreateNamedVariable 'Int16Array', 'none'
+v4 <- CreateNamedVariable 'Uint32Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v7 <- CreateArray [v0, v1, v2, v3, v4, v5, v6]
+v8 <- CreateNamedVariable 'intArrayConstructors', 'const', v7
+v9 <- CreateNamedVariable 'Float32Array', 'none'
+v10 <- CreateNamedVariable 'Float64Array', 'none'
+v11 <- CreateArray [v9, v10]
+v12 <- CreateNamedVariable 'floatArrayConstructors', 'const', v11
+v13 <- CreateArrayWithSpread [...v8, ...v12]
+v14 <- CreateNamedVariable 'typedArrayConstructors', 'const', v13
+BeginForOfLoop v14 -> v15
+    v16 <- LoadInteger '2'
+    v17 <- LoadInteger '2'
+    v18 <- CreateArray [v16, v17]
+    v19 <- Construct v15, [v18]
+    v20 <- CreateNamedVariable 'array', 'let', v19
+    v21 <- LoadInteger '2'
+    v22 <- GetProperty v20, 'length'
+    v23 <- LoadString 'length'
+    v24 <- LoadInteger '5'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v24
+    v25 <- EndObjectLiteral
+    v26 <- CreateNamedVariable 'Object', 'none'
+    v27 <- CallMethod v26, 'defineProperty', [v20, v23, v25]
+    v28 <- LoadInteger '5'
+    v29 <- CreateNamedVariable 'Array', 'none'
+    v30 <- GetProperty v29, 'prototype'
+    v31 <- GetProperty v30, 'fill'
+    v32 <- CallMethod v31, 'call', [v20, v28]
+    v33 <- LoadInteger '5'
+    v34 <- LoadInteger '5'
+    v35 <- CreateArray [v33, v34]
+    v36 <- GetElement v20, '0'
+    v37 <- GetElement v20, '1'
+    v38 <- CreateArray [v36, v37]
+    v39 <- LoadUndefined
+    v40 <- GetElement v20, '2'
+EndForOfLoop
+
+
+const intArrayConstructors = [Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,Uint8ClampedArray];
+const floatArrayConstructors = [Float32Array,Float64Array];
+const typedArrayConstructors = [...intArrayConstructors,...floatArrayConstructors];
+for (const v15 of typedArrayConstructors) {
+    const v19 = new v15([2,2]);
+    let array = v19;
+    array.length;
+    Object.defineProperty(array, "length", { value: 5 });
+    Array.prototype.fill.call(array, 5);
+    [5,5];
+    [array[0],array[1]];
+    array[2];
+}
+
+FuzzIL program written to corpus/regress-crbug-865312.fzil

@@ -1,0 +1,28 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'isFinite', 'none'
+Reassign v1, v0
+v2 <- LoadInteger '0'
+v3 <- CreateNamedVariable 'Math', 'none'
+SetProperty v3, 'floor', v2
+v4 <- LoadInteger '0'
+SetProperty v3, 'abs', v4
+v5 <- LoadInteger '4'
+v6 <- LoadFloat '4.5'
+v7 <- CreateNamedVariable 'parseInt', 'none'
+v8 <- CallFunction v7, [v6]
+v9 <- LoadString 'string'
+v10 <- CreateNamedVariable 'Date', 'none'
+v11 <- LoadInteger '9999'
+v12 <- Construct v10, [v11]
+v13 <- CallMethod v12, 'toString', []
+v14 <- TypeOf v13
+
+
+isFinite = 0;
+Math.floor = 0;
+Math.abs = 0;
+parseInt(4.5);
+const v12 = new Date(9999);
+typeof v12.toString();
+
+FuzzIL program written to corpus/regress-1177518.fzil

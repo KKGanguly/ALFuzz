@@ -1,0 +1,51 @@
+v0 <- LoadInteger '50000'
+v1 <- CreateNamedVariable 'kMaxLocals', 'const', v0
+v2 <- LoadString '"use asm";\nfunction f() { LOCALS }\nreturn f;'
+v3 <- CreateNamedVariable 'fn_template', 'const', v2
+BeginForLoopInitializer
+BeginForLoopCondition -> v4
+    v5 <- LoadInteger '2'
+    v6 <- BinaryOperation v1, '+', v5
+    v7 <- Compare v4, '<', v6
+BeginForLoopAfterthought v7 -> v8
+    v9 <- UnaryOperation '++', v8
+BeginForLoopBody -> v10
+    v11 <- LoadString 'LOCALS'
+    v12 <- LoadString '\n'
+    v13 <- BeginArrowFunction -> v14, v15
+        v16 <- LoadString 'var l'
+        v17 <- BinaryOperation v16, '+', v15
+        v18 <- LoadString ' = 0;'
+        v19 <- BinaryOperation v17, '+', v18
+        Return v19
+    EndArrowFunction
+    v20 <- CreateNamedVariable 'Array', 'none'
+    v21 <- CallFunction v20, [v10]
+    v22 <- CallMethod v21, 'fill', []
+    v23 <- CallMethod v22, 'map', [v13]
+    v24 <- CallMethod v23, 'join', [v12]
+    v25 <- CallMethod v3, 'replace', [v11, v24]
+    v26 <- CreateNamedVariable 'fn_code', 'const', v25
+    v27 <- CreateNamedVariable 'Function', 'none'
+    v28 <- Construct v27, [v26]
+    v29 <- CreateNamedVariable 'asm_fn', 'const', v28
+    v30 <- CallFunction v29, []
+    v31 <- CreateNamedVariable 'f', 'const', v30
+    v32 <- CallFunction v31, []
+EndForLoop
+
+
+const kMaxLocals = 50000;
+const fn_template = ""use asm";\nfunction f() { LOCALS }\nreturn f;";
+for (let i4 = kMaxLocals; i4 < (kMaxLocals + 2); ++i4) {
+    const v13 = (a14, a15) => {
+        return ("var l" + a15) + " = 0;";
+    };
+    const fn_code = fn_template.replace("LOCALS", Array(i4).fill().map(v13).join("\n"));
+    const v28 = new Function(fn_code);
+    const asm_fn = v28;
+    const f = asm_fn();
+    f();
+}
+
+FuzzIL program written to corpus/regress-775710.fzil

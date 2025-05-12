@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetProperty v2, 'length'
+    v4 <- GetProperty v1, 'length'
+    v5 <- Compare v3, '!==', v4
+EndPlainFunction
+v6 <- CreateArray []
+v7 <- CreateArray []
+v8 <- LoadString 'a'
+v9 <- LoadString 'a'
+v10 <- CreateArray []
+v11 <- CreateArray []
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '0'
+    v14 <- LoadUndefined
+EndPlainFunction
+BeginTry
+    v15 <- CallFunction v12, []
+BeginCatch -> v16
+EndTryCatch
+BeginTry
+    v17 <- CallFunction v12, []
+BeginCatch -> v18
+EndTryCatch
+
+
+function assertEquals(a1, a2) {
+    a2.length !== a1.length;
+}
+[];
+[];
+[];
+[];
+function f() {
+}
+try {
+    f();
+} catch(e16) {
+}
+try {
+    f();
+} catch(e18) {
+}
+
+FuzzIL program written to corpus/regress-802060.fzil

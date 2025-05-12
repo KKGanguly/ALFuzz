@@ -1,0 +1,83 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- CallMethod v2, 'catch', []
+        Return v3
+    EndPlainFunction
+    v4 <- LoadInteger '1'
+    v5 <- CreateNamedVariable 'Promise', 'none'
+    v6 <- CallMethod v5, 'resolve', [v4]
+    v7 <- CallFunction v1, [v6]
+    v8 <- LoadInteger '1'
+    v9 <- CallMethod v5, 'resolve', [v8]
+    v10 <- CallFunction v1, [v9]
+    v11 <- LoadInteger '1'
+    v12 <- CallMethod v5, 'resolve', [v11]
+    v13 <- CallFunction v1, [v12]
+EndPlainFunction
+v14 <- CallFunction v0, []
+v15 <- BeginPlainFunction -> 
+    v16 <- BeginPlainFunction -> v17
+        v18 <- CallMethod v17, 'catch', [v16]
+        Return v18
+    EndPlainFunction
+    v19 <- LoadInteger '1'
+    v20 <- CreateNamedVariable 'Promise', 'none'
+    v21 <- CallMethod v20, 'resolve', [v19]
+    v22 <- CallFunction v16, [v21]
+    v23 <- LoadInteger '1'
+    v24 <- CallMethod v20, 'resolve', [v23]
+    v25 <- CallFunction v16, [v24]
+    v26 <- LoadInteger '1'
+    v27 <- CallMethod v20, 'resolve', [v26]
+    v28 <- CallFunction v16, [v27]
+EndPlainFunction
+v29 <- CallFunction v15, []
+v30 <- BeginPlainFunction -> 
+    v31 <- BeginPlainFunction -> v32
+        v33 <- LoadUndefined
+        v34 <- CallMethod v32, 'catch', [v31, v33]
+        Return v34
+    EndPlainFunction
+    v35 <- LoadInteger '1'
+    v36 <- CreateNamedVariable 'Promise', 'none'
+    v37 <- CallMethod v36, 'resolve', [v35]
+    v38 <- CallFunction v31, [v37]
+    v39 <- LoadInteger '1'
+    v40 <- CallMethod v36, 'resolve', [v39]
+    v41 <- CallFunction v31, [v40]
+    v42 <- LoadInteger '1'
+    v43 <- CallMethod v36, 'resolve', [v42]
+    v44 <- CallFunction v31, [v43]
+EndPlainFunction
+v45 <- CallFunction v30, []
+
+
+function f0() {
+    function foo(a2) {
+        return a2.catch();
+    }
+    foo(Promise.resolve(1));
+    foo(Promise.resolve(1));
+    foo(Promise.resolve(1));
+}
+f0();
+function f15() {
+    function foo(a17) {
+        return a17.catch(foo);
+    }
+    foo(Promise.resolve(1));
+    foo(Promise.resolve(1));
+    foo(Promise.resolve(1));
+}
+f15();
+function f30() {
+    function foo(a32) {
+        return a32.catch(foo, undefined);
+    }
+    foo(Promise.resolve(1));
+    foo(Promise.resolve(1));
+    foo(Promise.resolve(1));
+}
+f30();
+
+FuzzIL program written to corpus/promise-prototype-catch.fzil

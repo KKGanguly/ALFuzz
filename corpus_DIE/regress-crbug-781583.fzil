@@ -1,0 +1,72 @@
+v0 <- BeginGeneratorFunction -> v1
+    v2 <- CallMethod v1, 'pop', []
+    v3 <- CallMethod v2, 'next', []
+EndGeneratorFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- BeginArrowFunction -> 
+        v7 <- LoadInteger '0'
+        Return v7
+    EndArrowFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `next`, v6
+    v8 <- EndObjectLiteral
+    v9 <- CreateArray [v8]
+    v10 <- CreateNamedVariable 'a', 'var', v9
+    BeginForLoopInitializer
+        v11 <- LoadInteger '0'
+    BeginForLoopCondition -> v12
+        v13 <- Compare v12, '<', v5
+    BeginForLoopAfterthought v13 -> v14
+        v15 <- UnaryOperation '++', v14
+    BeginForLoopBody -> v16
+        v17 <- CallFunction v0, [v10]
+        v18 <- CallMethod v10, 'push', [v17]
+    EndForLoop
+    Return v10
+EndPlainFunction
+v19 <- LoadInteger '10'
+v20 <- CallFunction v4, [v19]
+v21 <- CreateNamedVariable 'gens1', 'var', v20
+v22 <- BeginArrowFunction -> 
+    v23 <- CallMethod v21, 'pop', []
+    v24 <- CallMethod v23, 'next', []
+    Return v24
+EndArrowFunction
+v25 <- CallFunction v22, []
+v26 <- LoadInteger '200000'
+v27 <- CallFunction v4, [v26]
+v28 <- CreateNamedVariable 'gens2', 'var', v27
+v29 <- BeginArrowFunction -> 
+    v30 <- CallMethod v28, 'pop', []
+    v31 <- CallMethod v30, 'next', []
+    Return v31
+EndArrowFunction
+v32 <- CallFunction v29, []
+v33 <- CreateNamedVariable 'RangeError', 'none'
+
+
+function* generator(a1) {
+    a1.pop().next();
+}
+function prepareGenerators(a5) {
+    const v6 = () => {
+        return 0;
+    };
+    var a = [{ next: v6 }];
+    for (let i12 = 0; i12 < a5; ++i12) {
+        a.push(generator(a));
+    }
+    return a;
+}
+var gens1 = prepareGenerators(10);
+const v22 = () => {
+    return gens1.pop().next();
+};
+v22();
+var gens2 = prepareGenerators(200000);
+const v29 = () => {
+    return gens2.pop().next();
+};
+v29();
+
+FuzzIL program written to corpus/regress-crbug-781583.fzil

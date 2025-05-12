@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, '__proto__'
+    v3 <- CreateNamedVariable 'Symbol', 'none'
+    v4 <- GetProperty v3, 'toStringTag'
+    v5 <- LoadString 'bogus'
+    v6 <- LoadBoolean 'true'
+    v7 <- LoadBoolean 'false'
+    v8 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v5
+        ObjectLiteralAddProperty `configurable`, v6
+        ObjectLiteralAddProperty `writable`, v7
+        ObjectLiteralAddProperty `enumerable`, v8
+    v9 <- EndObjectLiteral
+    v10 <- CreateNamedVariable 'Object', 'none'
+    v11 <- CallMethod v10, 'defineProperty', [v2, v4, v9]
+    v12 <- LoadString '[object bogus]'
+    v13 <- GetProperty v10, 'prototype'
+    v14 <- GetProperty v13, 'toString'
+    v15 <- CallMethod v14, 'call', [v1]
+EndPlainFunction
+v16 <- LoadString ''
+v17 <- CallFunction v0, [v16]
+v18 <- LoadBoolean 'true'
+v19 <- CallFunction v0, [v18]
+v20 <- LoadInteger '42'
+v21 <- CallFunction v0, [v20]
+v22 <- LoadFloat '42.42'
+v23 <- CallFunction v0, [v22]
+v24 <- CreateNamedVariable 'Symbol', 'none'
+v25 <- CallFunction v24, []
+v26 <- CallFunction v0, [v25]
+
+
+function testMutatedPrimitiveToStringTag(a1) {
+    const v2 = a1.__proto__;
+    const v4 = Symbol.toStringTag;
+    Object.defineProperty(v2, v4, { value: "bogus", configurable: true, writable: false, enumerable: false });
+    Object.prototype.toString.call(a1);
+}
+testMutatedPrimitiveToStringTag("");
+testMutatedPrimitiveToStringTag(true);
+testMutatedPrimitiveToStringTag(42);
+testMutatedPrimitiveToStringTag(42.42);
+testMutatedPrimitiveToStringTag(Symbol());
+
+FuzzIL program written to corpus/regress-5780.fzil

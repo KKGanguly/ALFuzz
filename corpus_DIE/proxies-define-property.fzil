@@ -1,0 +1,194 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'g_target', 'var', v0
+v2 <- LoadUndefined
+v3 <- CreateNamedVariable 'g_name', 'var', v2
+v4 <- LoadUndefined
+v5 <- CreateNamedVariable 'g_desc', 'var', v4
+v6 <- BeginPlainFunction -> v7, v8, v9
+    Reassign v1, v7
+    Reassign v3, v8
+    Reassign v5, v9
+    v10 <- LoadBoolean 'true'
+    Return v10
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `defineProperty`, v6
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable 'handler', 'var', v11
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'target', 'var', v13
+v15 <- CreateNamedVariable 'Proxy', 'none'
+v16 <- Construct v15, [v14, v12]
+v17 <- CreateNamedVariable 'proxy', 'var', v16
+v18 <- LoadInteger '1'
+v19 <- LoadBoolean 'true'
+v20 <- LoadBoolean 'true'
+v21 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v18
+    ObjectLiteralAddProperty `writable`, v19
+    ObjectLiteralAddProperty `configurable`, v20
+    ObjectLiteralAddProperty `enumerable`, v21
+v22 <- EndObjectLiteral
+v23 <- CreateNamedVariable 'desc', 'var', v22
+v24 <- LoadString 'foo'
+v25 <- CreateNamedVariable 'Object', 'none'
+v26 <- CallMethod v25, 'defineProperty', [v17, v24, v23]
+v27 <- LoadString 'foo'
+v28 <- CallMethod v15, 'revocable', [v14, v12]
+v29 <- CreateNamedVariable 'pair', 'var', v28
+v30 <- LoadString 'foo2'
+v31 <- CallMethod v25, 'defineProperty', [v17, v30, v23]
+v32 <- LoadString 'foo2'
+v33 <- CallMethod v29, 'revoke', []
+v34 <- LoadString 'Object.defineProperty(pair.proxy, "bar", desc);'
+v35 <- CreateNamedVariable 'TypeError', 'none'
+v36 <- LoadInteger '1'
+SetProperty v12, 'defineProperty', v36
+v37 <- LoadString 'Object.defineProperty(proxy, 'foo', {value: 2})'
+v38 <- LoadUndefined
+SetProperty v12, 'defineProperty', v38
+v39 <- LoadString 'prop1'
+v40 <- CallMethod v25, 'defineProperty', [v17, v39, v23]
+v41 <- LoadString 'prop1'
+v42 <- CallMethod v25, 'getOwnPropertyDescriptor', [v14, v41]
+BeginObjectLiteral
+v43 <- EndObjectLiteral
+v44 <- CreateNamedVariable 'target2', 'var', v43
+BeginObjectLiteral
+v45 <- EndObjectLiteral
+v46 <- Construct v15, [v44, v45]
+v47 <- CreateNamedVariable 'proxy2', 'var', v46
+v48 <- LoadString 'prop2'
+v49 <- CallMethod v25, 'defineProperty', [v47, v48, v23]
+v50 <- LoadString 'prop2'
+v51 <- CallMethod v25, 'getOwnPropertyDescriptor', [v44, v50]
+v52 <- BeginPlainFunction -> v53, v54, v55
+    Reassign v3, v54
+    v56 <- LoadBoolean 'true'
+    Return v56
+EndPlainFunction
+SetProperty v12, 'defineProperty', v52
+v57 <- LoadInteger '0'
+v58 <- CallMethod v25, 'defineProperty', [v17, v57, v23]
+v59 <- TypeOf v3
+v60 <- LoadString 'string'
+v61 <- Compare v59, '===', v60
+v62 <- LoadString '0'
+v63 <- BeginPlainFunction -> v64, v65, v66
+    v67 <- LoadBoolean 'false'
+    Return v67
+EndPlainFunction
+SetProperty v12, 'defineProperty', v63
+v68 <- LoadString 'Object.defineProperty(proxy, 'foo', desc)'
+v69 <- BeginPlainFunction -> v70, v71, v72
+    v73 <- LoadBoolean 'true'
+    Return v73
+EndPlainFunction
+SetProperty v12, 'defineProperty', v69
+v74 <- CallMethod v25, 'preventExtensions', [v14]
+v75 <- LoadString 'Object.defineProperty(proxy, 'foo', desc)'
+BeginObjectLiteral
+v76 <- EndObjectLiteral
+Reassign v14, v76
+v77 <- Construct v15, [v14, v12]
+Reassign v17, v77
+v78 <- LoadInteger '1'
+v79 <- LoadBoolean 'true'
+v80 <- LoadBoolean 'false'
+v81 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v78
+    ObjectLiteralAddProperty `writable`, v79
+    ObjectLiteralAddProperty `configurable`, v80
+    ObjectLiteralAddProperty `enumerable`, v81
+v82 <- EndObjectLiteral
+Reassign v23, v82
+v83 <- LoadString 'Object.defineProperty(proxy, 'foo', desc)'
+v84 <- LoadString 'nonconf'
+v85 <- LoadInteger '1'
+v86 <- LoadBoolean 'true'
+v87 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v85
+    ObjectLiteralAddProperty `writable`, v86
+    ObjectLiteralAddProperty `configurable`, v87
+v88 <- EndObjectLiteral
+v89 <- CallMethod v25, 'defineProperty', [v14, v84, v88]
+v90 <- LoadString 'nonconf'
+v91 <- LoadInteger '2'
+v92 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v91
+    ObjectLiteralAddProperty `configurable`, v92
+v93 <- EndObjectLiteral
+v94 <- CallMethod v25, 'defineProperty', [v17, v90, v93]
+v95 <- LoadString 'foo'
+v96 <- LoadInteger '1'
+v97 <- LoadBoolean 'false'
+v98 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v96
+    ObjectLiteralAddProperty `writable`, v97
+    ObjectLiteralAddProperty `configurable`, v98
+v99 <- EndObjectLiteral
+v100 <- CallMethod v25, 'defineProperty', [v14, v95, v99]
+v101 <- LoadString 'Object.defineProperty(proxy, 'foo', {value: 2})'
+v102 <- LoadString 'baz'
+SetProperty v14, 'bar', v102
+v103 <- LoadString 'Object.defineProperty(proxy, 'bar', {configurable: false})'
+
+
+var g_target;
+var g_name;
+var g_desc;
+function f6(a7, a8, a9) {
+    g_target = a7;
+    g_name = a8;
+    g_desc = a9;
+    return true;
+}
+var handler = { defineProperty: f6 };
+var target = {};
+const v16 = new Proxy(target, handler);
+var proxy = v16;
+var desc = { value: 1, writable: true, configurable: true, enumerable: true };
+Object.defineProperty(proxy, "foo", desc);
+var pair = Proxy.revocable(target, handler);
+Object.defineProperty(proxy, "foo2", desc);
+pair.revoke();
+handler.defineProperty = 1;
+handler.defineProperty = undefined;
+Object.defineProperty(proxy, "prop1", desc);
+Object.getOwnPropertyDescriptor(target, "prop1");
+var target2 = {};
+const v46 = new Proxy(target2, {});
+var proxy2 = v46;
+Object.defineProperty(proxy2, "prop2", desc);
+Object.getOwnPropertyDescriptor(target2, "prop2");
+function f52(a53, a54, a55) {
+    g_name = a54;
+    return true;
+}
+handler.defineProperty = f52;
+Object.defineProperty(proxy, 0, desc);
+typeof g_name === "string";
+function f63(a64, a65, a66) {
+    return false;
+}
+handler.defineProperty = f63;
+function f69(a70, a71, a72) {
+    return true;
+}
+handler.defineProperty = f69;
+Object.preventExtensions(target);
+const v77 = new Proxy(target = {}, handler);
+proxy = v77;
+desc = { value: 1, writable: true, configurable: false, enumerable: true };
+Object.defineProperty(target, "nonconf", { value: 1, writable: true, configurable: false });
+Object.defineProperty(proxy, "nonconf", { value: 2, configurable: false });
+Object.defineProperty(target, "foo", { value: 1, writable: false, configurable: false });
+target.bar = "baz";
+
+FuzzIL program written to corpus/proxies-define-property.fzil

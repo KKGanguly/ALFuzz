@@ -1,0 +1,14 @@
+v0 <- LoadRegExp 'a' ''
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadFloat '1.5'
+SetElement v1, '4', v2
+BeginForInLoop v1 -> v3
+EndForInLoop
+
+
+var a = /a/;
+a[4] = 1.5;
+for (const v3 in a) {
+}
+
+FuzzIL program written to corpus/regress-crbug-568525.fzil

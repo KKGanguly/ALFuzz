@@ -1,0 +1,93 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'foo_call_count', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- UnaryOperation v1, '++'
+EndPlainFunction
+v4 <- LoadBoolean 'true'
+v5 <- CallFunction v2, []
+v6 <- BinaryOperation v4, '||', v5
+v7 <- LoadInteger '1'
+v8 <- LoadInteger '2'
+v9 <- TernaryOperation v6, v7, v8
+v10 <- LoadInteger '0'
+v11 <- Compare v1, '==', v10
+v12 <- LoadBoolean 'false'
+v13 <- CallFunction v2, []
+v14 <- BinaryOperation v12, '&&', v13
+v15 <- LoadInteger '1'
+v16 <- LoadInteger '2'
+v17 <- TernaryOperation v14, v15, v16
+v18 <- LoadInteger '0'
+v19 <- Compare v1, '==', v18
+v20 <- CallFunction v2, []
+v21 <- LoadBoolean 'true'
+v22 <- BinaryOperation v20, '||', v21
+v23 <- LoadInteger '1'
+v24 <- LoadInteger '2'
+v25 <- TernaryOperation v22, v23, v24
+v26 <- LoadInteger '1'
+v27 <- Compare v1, '==', v26
+v28 <- LoadBoolean 'false'
+v29 <- CallFunction v2, []
+v30 <- BinaryOperation v28, '||', v29
+v31 <- LoadInteger '1'
+v32 <- LoadInteger '2'
+v33 <- TernaryOperation v30, v31, v32
+v34 <- LoadInteger '2'
+v35 <- Compare v1, '==', v34
+v36 <- CallFunction v2, []
+v37 <- LoadBoolean 'false'
+v38 <- BinaryOperation v36, '||', v37
+v39 <- LoadInteger '1'
+v40 <- LoadInteger '2'
+v41 <- TernaryOperation v38, v39, v40
+v42 <- LoadInteger '3'
+v43 <- Compare v1, '==', v42
+v44 <- LoadBoolean 'true'
+v45 <- CallFunction v2, []
+v46 <- BinaryOperation v44, '&&', v45
+v47 <- LoadInteger '1'
+v48 <- LoadInteger '2'
+v49 <- TernaryOperation v46, v47, v48
+v50 <- LoadInteger '4'
+v51 <- Compare v1, '==', v50
+v52 <- CallFunction v2, []
+v53 <- LoadBoolean 'true'
+v54 <- BinaryOperation v52, '&&', v53
+v55 <- LoadInteger '1'
+v56 <- LoadInteger '2'
+v57 <- TernaryOperation v54, v55, v56
+v58 <- LoadInteger '5'
+v59 <- Compare v1, '==', v58
+v60 <- CallFunction v2, []
+v61 <- LoadBoolean 'false'
+v62 <- BinaryOperation v60, '&&', v61
+v63 <- LoadInteger '1'
+v64 <- LoadInteger '2'
+v65 <- TernaryOperation v62, v63, v64
+v66 <- LoadInteger '6'
+v67 <- Compare v1, '==', v66
+
+
+var foo_call_count = 0;
+function foo() {
+    foo_call_count++;
+}
+true || foo() ? 1 : 2;
+foo_call_count == 0;
+false && foo() ? 1 : 2;
+foo_call_count == 0;
+foo() || true ? 1 : 2;
+foo_call_count == 1;
+false || foo() ? 1 : 2;
+foo_call_count == 2;
+foo() || false ? 1 : 2;
+foo_call_count == 3;
+true && foo() ? 1 : 2;
+foo_call_count == 4;
+foo() && true ? 1 : 2;
+foo_call_count == 5;
+foo() && false ? 1 : 2;
+foo_call_count == 6;
+
+FuzzIL program written to corpus/regress-664146.fzil

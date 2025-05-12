@@ -1,0 +1,171 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- LoadInteger '5'
+v3 <- CreateNamedVariable 'MAX', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    Directive 'use strict'
+    v6 <- LoadString 'strict'
+    Reassign v1, v6
+    v7 <- Compare v5, '==', v3
+    BeginIf v7
+        v8 <- LoadString 'value'
+        v9 <- CreateNamedVariable 'undefined_variable_strict', 'none'
+        Reassign v9, v8
+    EndIf
+EndPlainFunction
+v10 <- BeginPlainFunction -> v11
+    v12 <- CallFunction v4, [v11]
+EndPlainFunction
+v13 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v14 <- LoadInteger '0'
+    BeginForLoopCondition -> v15
+        v16 <- Compare v15, '<=', v3
+    BeginForLoopAfterthought v16 -> v17
+        v18 <- UnaryOperation v17, '++'
+    BeginForLoopBody -> v19
+        BeginTry
+            v20 <- CallFunction v10, [v19]
+        BeginCatch -> v21
+            v22 <- CreateNamedVariable 'ReferenceError', 'none'
+            Return
+        EndTryCatch
+    EndForLoop
+    v23 <- LoadString 'ReferenceError after MAX iterations'
+    v24 <- LoadString 'no exception'
+    v25 <- CreateNamedVariable 'fail', 'none'
+    v26 <- CallFunction v25, [v23, v24]
+EndPlainFunction
+v27 <- CallFunction v13, []
+v28 <- BeginPlainFunction -> v29
+    v30 <- LoadString 'nonstrict'
+    Reassign v1, v30
+    v31 <- Compare v29, '==', v3
+    BeginIf v31
+        v32 <- LoadString 'The nonstrict value'
+        v33 <- CreateNamedVariable 'undefined_variable_nonstrict', 'none'
+        Reassign v33, v32
+    EndIf
+EndPlainFunction
+v34 <- BeginPlainFunction -> v35
+    Directive 'use strict'
+    v36 <- CallFunction v28, [v35]
+EndPlainFunction
+v37 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v38 <- LoadInteger '0'
+    BeginForLoopCondition -> v39
+        v40 <- Compare v39, '<=', v3
+    BeginForLoopAfterthought v40 -> v41
+        v42 <- UnaryOperation v41, '++'
+    BeginForLoopBody -> v43
+        BeginTry
+            v44 <- CallFunction v34, [v43]
+        BeginCatch -> v45
+            v46 <- LoadString 'no exception'
+            v47 <- LoadString 'exception'
+            v48 <- CreateNamedVariable 'fail', 'none'
+            v49 <- CallFunction v48, [v46, v47]
+        EndTryCatch
+    EndForLoop
+    v50 <- LoadString 'The nonstrict value'
+    v51 <- CreateNamedVariable 'undefined_variable_nonstrict', 'none'
+EndPlainFunction
+v52 <- CallFunction v37, []
+v53 <- BeginPlainFunction -> v54
+    Directive 'use strict'
+    v55 <- LoadString 'strict'
+    Reassign v1, v55
+    v56 <- Compare v54, '==', v3
+    BeginIf v56
+        v57 <- LoadString 'value'
+        v58 <- CreateNamedVariable 'undefined_variable_strict_2', 'none'
+        Reassign v58, v57
+    EndIf
+EndPlainFunction
+v59 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v60 <- LoadInteger '0'
+    BeginForLoopCondition -> v61
+        v62 <- Compare v61, '<=', v3
+    BeginForLoopAfterthought v62 -> v63
+        v64 <- UnaryOperation v63, '++'
+    BeginForLoopBody -> v65
+        BeginTry
+            v66 <- CallFunction v53, [v65]
+        BeginCatch -> v67
+            v68 <- CreateNamedVariable 'ReferenceError', 'none'
+            Return
+        EndTryCatch
+    EndForLoop
+    v69 <- LoadString 'ReferenceError after MAX iterations'
+    v70 <- LoadString 'no exception'
+    v71 <- CreateNamedVariable 'fail', 'none'
+    v72 <- CallFunction v71, [v69, v70]
+EndPlainFunction
+v73 <- CallFunction v59, []
+
+
+var global = 0;
+var MAX = 5;
+function strictToBeInlined(a5) {
+    'use strict';
+    global = "strict";
+    if (a5 == MAX) {
+        undefined_variable_strict = "value";
+    }
+}
+function nonstrictCallStrict(a11) {
+    strictToBeInlined(a11);
+}
+function testInlineStrictInNonStrict() {
+    for (let i15 = 0; i15 <= MAX; i15++) {
+        try {
+            nonstrictCallStrict(i15);
+        } catch(e21) {
+            return;
+        }
+    }
+    fail("ReferenceError after MAX iterations", "no exception");
+}
+testInlineStrictInNonStrict();
+function nonstrictToBeInlined(a29) {
+    global = "nonstrict";
+    if (a29 == MAX) {
+        undefined_variable_nonstrict = "The nonstrict value";
+    }
+}
+function strictCallNonStrict(a35) {
+    'use strict';
+    nonstrictToBeInlined(a35);
+}
+function testInlineNonStrictInStrict() {
+    for (let i39 = 0; i39 <= MAX; i39++) {
+        try {
+            strictCallNonStrict(i39);
+        } catch(e45) {
+            fail("no exception", "exception");
+        }
+    }
+}
+testInlineNonStrictInStrict();
+function strictAssignToUndefined(a54) {
+    'use strict';
+    global = "strict";
+    if (a54 == MAX) {
+        undefined_variable_strict_2 = "value";
+    }
+}
+function testOptimizeStrictAssignToUndefined() {
+    for (let i61 = 0; i61 <= MAX; i61++) {
+        try {
+            strictAssignToUndefined(i61);
+        } catch(e67) {
+            return;
+        }
+    }
+    fail("ReferenceError after MAX iterations", "no exception");
+}
+testOptimizeStrictAssignToUndefined();
+
+FuzzIL program written to corpus/strict-mode-opt.fzil

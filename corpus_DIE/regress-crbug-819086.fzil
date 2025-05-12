@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'Infinity', 'none'
+    v3 <- UnaryOperation '-', v2
+    v4 <- CreateArray [v1, v3]
+    v5 <- CreateArrayWithSpread [...v4]
+    Return v5
+EndPlainFunction
+v6 <- CallFunction v0, []
+v7 <- GetElement v6, '0'
+v8 <- CallFunction v0, []
+v9 <- GetElement v8, '0'
+v10 <- CallFunction v0, []
+v11 <- GetElement v10, '0'
+
+
+function foo() {
+    return [...[,-Infinity]];
+}
+foo()[0];
+foo()[0];
+foo()[0];
+
+FuzzIL program written to corpus/regress-crbug-819086.fzil

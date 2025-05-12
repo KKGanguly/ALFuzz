@@ -1,0 +1,21 @@
+v0 <- LoadFloat '1.2'
+v1 <- LoadFloat '1.2'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'array', 'var', v2
+v4 <- LoadInteger '0'
+SetProperty v3, 'length', v4
+v5 <- LoadUndefined
+v6 <- CallMethod v3, 'push', [v5]
+v7 <- LoadInteger '1'
+v8 <- GetProperty v3, 'length'
+v9 <- LoadUndefined
+v10 <- CreateArray [v9]
+
+
+var array = [1.2,1.2];
+array.length = 0;
+array.push(undefined);
+array.length;
+[,];
+
+FuzzIL program written to corpus/regress-599089-array-push.fzil

@@ -1,0 +1,16 @@
+v0 <- LoadString 'Object'
+v1 <- BeginArrowFunction -> 
+    v2 <- LoadInteger '0'
+    Return v2
+EndArrowFunction
+v3 <- LoadThis
+v4 <- CallMethod v3, '__defineGetter__', [v0, v1]
+v5 <- CreateNamedVariable 'Object', 'none'
+
+
+const v1 = () => {
+    return 0;
+};
+this.__defineGetter__("Object", v1);
+
+FuzzIL program written to corpus/regress-crbug-702798.fzil

@@ -1,0 +1,25 @@
+v0 <- BeginClassDefinition
+    BeginClassInstanceMethod 'm' -> v1
+        v2 <- LoadInteger '10'
+        SetSuperProperty 'length', v2
+    EndClassInstanceMethod
+EndClassDefinition
+v3 <- CreateArray []
+v4 <- CreateNamedVariable 'array', 'var', v3
+v5 <- GetProperty v0, 'prototype'
+v6 <- GetProperty v5, 'm'
+v7 <- CallMethod v6, 'call', [v4]
+v8 <- LoadInteger '10'
+v9 <- GetProperty v4, 'length'
+
+
+class C0 {
+    m() {
+        super.length = 10;
+    }
+}
+var array = [];
+C0.prototype.m.call(array);
+array.length;
+
+FuzzIL program written to corpus/classes-super.fzil

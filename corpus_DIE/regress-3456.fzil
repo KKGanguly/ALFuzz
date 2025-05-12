@@ -1,0 +1,13 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadThis
+    v2 <- GetProperty v1, 'foo'
+    v3 <- UnaryOperation '++', v2
+EndPlainFunction
+
+
+function f() {
+    let v2 = this.foo;
+    ++v2;
+}
+
+FuzzIL program written to corpus/regress-3456.fzil

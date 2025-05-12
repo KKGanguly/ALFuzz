@@ -1,0 +1,27 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'a', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'b', 'var', v2
+v4 <- LoadInteger '4294967296'
+SetProperty v1, 'length', v4
+v5 <- BeginArrowFunction -> 
+    v6 <- CreateNamedVariable 'Array', 'none'
+    v7 <- GetProperty v6, 'prototype'
+    v8 <- GetProperty v7, 'join'
+    v9 <- CallMethod v8, 'call', [v1, v3]
+    Return v9
+EndArrowFunction
+v10 <- CallFunction v5, []
+v11 <- CreateNamedVariable 'TypeError', 'none'
+
+
+var a = this;
+var b = {};
+a.length = 4294967296;
+const v5 = () => {
+    return Array.prototype.join.call(a, b);
+};
+v5();
+
+FuzzIL program written to corpus/regress-crbug-902672.fzil

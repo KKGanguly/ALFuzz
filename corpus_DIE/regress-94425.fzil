@@ -1,0 +1,46 @@
+v0 <- LoadInteger '2040'
+v1 <- LoadInteger '2'
+v2 <- BinaryOperation v0, '-', v1
+v3 <- LoadInteger '10'
+v4 <- BinaryOperation v2, '+', v3
+v5 <- CreateNamedVariable 'N', 'var', v4
+v6 <- CreateNamedVariable 'Array', 'none'
+v7 <- Construct v6, [v5]
+v8 <- CreateNamedVariable 'arr', 'var', v7
+v9 <- CreateNamedVariable 'gc', 'none'
+v10 <- CallFunction v9, []
+v11 <- CallFunction v9, []
+v12 <- CallFunction v9, []
+v13 <- CreateNamedVariable 'Object', 'none'
+v14 <- Construct v13, []
+v15 <- GetProperty v8, 'length'
+v16 <- LoadInteger '2'
+v17 <- BinaryOperation v15, '-', v16
+SetComputedProperty v8, v17, v14
+BeginForLoopInitializer
+    v18 <- LoadInteger '0'
+BeginForLoopCondition -> v19
+    v20 <- LoadInteger '9'
+    v21 <- Compare v19, '<', v20
+BeginForLoopAfterthought v21 -> v22
+    v23 <- UnaryOperation v22, '++'
+BeginForLoopBody -> v24
+    v25 <- CallMethod v8, 'shift', []
+EndForLoop
+v26 <- CallFunction v9, []
+
+
+var N = (2040 - 2) + 10;
+const v7 = new Array(N);
+var arr = v7;
+gc();
+gc();
+gc();
+const v14 = new Object();
+arr[arr.length - 2] = v14;
+for (let i19 = 0; i19 < 9; i19++) {
+    arr.shift();
+}
+gc();
+
+FuzzIL program written to corpus/regress-94425.fzil

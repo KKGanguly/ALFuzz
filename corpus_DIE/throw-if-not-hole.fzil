@@ -1,0 +1,74 @@
+v0 <- BeginClassDefinition
+    BeginClassConstructor -> v1
+    EndClassConstructor
+EndClassDefinition
+v2 <- BeginClassDefinition v0
+    BeginClassConstructor -> v3, v4
+        CallSuperConstructor []
+        BeginIf v4
+            CallSuperConstructor []
+        EndIf
+    EndClassConstructor
+EndClassDefinition
+v5 <- LoadInteger '0'
+v6 <- Construct v2, [v5]
+v7 <- CreateNamedVariable 'test', 'none'
+Reassign v7, v6
+v8 <- LoadInteger '0'
+v9 <- Construct v2, [v8]
+v10 <- CreateNamedVariable 'test', 'none'
+Reassign v10, v9
+v11 <- BeginArrowFunction -> 
+    v12 <- LoadInteger '1'
+    v13 <- Construct v2, [v12]
+EndArrowFunction
+v14 <- CallFunction v11, []
+v15 <- CreateNamedVariable 'ReferenceError', 'none'
+v16 <- BeginArrowFunction -> 
+    v17 <- LoadInteger '1'
+    v18 <- Construct v2, [v17]
+EndArrowFunction
+v19 <- CallFunction v16, []
+v20 <- LoadInteger '0'
+v21 <- Construct v2, [v20]
+v22 <- CreateNamedVariable 'test', 'none'
+Reassign v22, v21
+v23 <- BeginArrowFunction -> 
+    v24 <- LoadInteger '1'
+    v25 <- Construct v2, [v24]
+EndArrowFunction
+v26 <- CallFunction v23, []
+
+
+class C0 {
+    constructor() {
+    }
+}
+class C2 extends C0 {
+    constructor(a4) {
+        super();
+        if (a4) {
+            super();
+        }
+    }
+}
+const v6 = new C2(0);
+test = v6;
+const v9 = new C2(0);
+test = v9;
+const v11 = () => {
+    new C2(1);
+};
+v11();
+const v16 = () => {
+    new C2(1);
+};
+v16();
+const v21 = new C2(0);
+test = v21;
+const v23 = () => {
+    new C2(1);
+};
+v23();
+
+FuzzIL program written to corpus/throw-if-not-hole.fzil

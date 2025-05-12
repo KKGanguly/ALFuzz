@@ -1,0 +1,92 @@
+v0 <- LoadFloat '1e+40'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'badObj', 'var', v1
+v3 <- BeginPlainFunction -> 
+    v4 <- CreateNamedVariable 'Uint8Array', 'none'
+    v5 <- Construct v4, [v2]
+EndPlainFunction
+v6 <- CallFunction v3, []
+v7 <- CreateNamedVariable 'RangeError', 'none'
+v8 <- BeginPlainFunction -> 
+    v9 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+    v10 <- Construct v9, [v2]
+EndPlainFunction
+v11 <- CallFunction v8, []
+v12 <- BeginPlainFunction -> 
+    v13 <- CreateNamedVariable 'Int8Array', 'none'
+    v14 <- Construct v13, [v2]
+EndPlainFunction
+v15 <- CallFunction v12, []
+v16 <- BeginPlainFunction -> 
+    v17 <- CreateNamedVariable 'Uint16Array', 'none'
+    v18 <- Construct v17, [v2]
+EndPlainFunction
+v19 <- CallFunction v16, []
+v20 <- BeginPlainFunction -> 
+    v21 <- CreateNamedVariable 'Int16Array', 'none'
+    v22 <- Construct v21, [v2]
+EndPlainFunction
+v23 <- CallFunction v20, []
+v24 <- BeginPlainFunction -> 
+    v25 <- CreateNamedVariable 'Uint32Array', 'none'
+    v26 <- Construct v25, [v2]
+EndPlainFunction
+v27 <- CallFunction v24, []
+v28 <- BeginPlainFunction -> 
+    v29 <- CreateNamedVariable 'Int32Array', 'none'
+    v30 <- Construct v29, [v2]
+EndPlainFunction
+v31 <- CallFunction v28, []
+v32 <- BeginPlainFunction -> 
+    v33 <- CreateNamedVariable 'Float32Array', 'none'
+    v34 <- Construct v33, [v2]
+EndPlainFunction
+v35 <- CallFunction v32, []
+v36 <- BeginPlainFunction -> 
+    v37 <- CreateNamedVariable 'Float64Array', 'none'
+    v38 <- Construct v37, [v2]
+EndPlainFunction
+v39 <- CallFunction v36, []
+
+
+var badObj = { length: 1e+40 };
+function f3() {
+    new Uint8Array(badObj);
+}
+f3();
+function f8() {
+    new Uint8ClampedArray(badObj);
+}
+f8();
+function f12() {
+    new Int8Array(badObj);
+}
+f12();
+function f16() {
+    new Uint16Array(badObj);
+}
+f16();
+function f20() {
+    new Int16Array(badObj);
+}
+f20();
+function f24() {
+    new Uint32Array(badObj);
+}
+f24();
+function f28() {
+    new Int32Array(badObj);
+}
+f28();
+function f32() {
+    new Float32Array(badObj);
+}
+f32();
+function f36() {
+    new Float64Array(badObj);
+}
+f36();
+
+FuzzIL program written to corpus/regress-324028.fzil

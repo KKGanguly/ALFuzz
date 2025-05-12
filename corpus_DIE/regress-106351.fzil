@@ -1,0 +1,31 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Math', 'none'
+    v3 <- CallMethod v2, 'round', [v1]
+    v4 <- BinaryOperation v3, '-', v1
+    v5 <- CreateNamedVariable 'v', 'var', v4
+    v6 <- LoadFloat '0.5'
+EndPlainFunction
+BeginForLoopInitializer
+    v7 <- LoadInteger '0'
+BeginForLoopCondition -> v8
+    v9 <- LoadInteger '5'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10 -> v11
+    v12 <- UnaryOperation '++', v11
+BeginForLoopBody -> v13
+    v14 <- LoadFloat '0.5'
+    v15 <- CallFunction v0, [v14]
+EndForLoop
+v16 <- LoadFloat '0.5'
+v17 <- CallFunction v0, [v16]
+
+
+function test(a1) {
+    var v = Math.round(a1) - a1;
+}
+for (let i8 = 0; i8 < 5; ++i8) {
+    test(0.5);
+}
+test(0.5);
+
+FuzzIL program written to corpus/regress-106351.fzil

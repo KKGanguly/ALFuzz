@@ -1,0 +1,51 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '2'
+    v2 <- LoadArguments
+    v3 <- GetProperty v2, 'length'
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- CreateNamedVariable 'G', 'none'
+    v6 <- GetProperty v5, 'x'
+    v7 <- LoadThis
+    v8 <- LoadArguments
+    v9 <- CallMethod v0, 'apply', [v7, v8]
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadInteger '1'
+    v12 <- LoadInteger '2'
+    v13 <- CallFunction v4, [v11, v12]
+    Return v13
+EndPlainFunction
+v14 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v14
+v15 <- EndObjectLiteral
+v16 <- CreateNamedVariable 'G', 'none'
+Reassign v16, v15
+v17 <- CallFunction v10, []
+v18 <- CallFunction v10, []
+v19 <- CallFunction v10, []
+v20 <- CreateNamedVariable 'G', 'none'
+v21 <- DeleteProperty v20, 'x'
+v22 <- CallFunction v10, []
+
+
+function foo() {
+    arguments.length;
+}
+function bar() {
+    G.x;
+    return foo.apply(this, arguments);
+}
+function baz() {
+    return bar(1, 2);
+}
+G = { x: 0 };
+baz();
+baz();
+baz();
+delete G.x;
+baz();
+
+FuzzIL program written to corpus/regress-2045.fzil

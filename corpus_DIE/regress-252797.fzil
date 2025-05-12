@@ -1,0 +1,74 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v1
+v2 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `holderMethod`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'create', [v0, v3]
+v6 <- CreateNamedVariable 'holder', 'var', v5
+v7 <- LoadNull
+v8 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v8
+v9 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `holderMethod`, v9
+v10 <- EndObjectLiteral
+v11 <- CallMethod v4, 'create', [v7, v10]
+v12 <- CreateNamedVariable 'holder', 'var', v11
+v13 <- LoadInteger '0'
+v14 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v13
+    ObjectLiteralAddProperty `configurable`, v14
+v15 <- EndObjectLiteral
+v16 <- LoadInteger '0'
+v17 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v16
+    ObjectLiteralAddProperty `configurable`, v17
+v18 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `killMe`, v15
+    ObjectLiteralAddProperty `keepMe`, v18
+v19 <- EndObjectLiteral
+v20 <- CallMethod v4, 'create', [v12, v19]
+v21 <- CreateNamedVariable 'receiver', 'var', v20
+v22 <- DeleteProperty v21, 'killMe'
+v23 <- BeginPlainFunction -> v24
+    v25 <- CallMethod v24, 'holderMethod', []
+EndPlainFunction
+v26 <- CallFunction v23, [v21]
+v27 <- CallFunction v23, [v21]
+v28 <- CallFunction v23, [v21]
+v29 <- CallFunction v23, []
+
+
+const v0 = {};
+function f1() {
+}
+const v2 = { value: f1 };
+var holder = Object.create(v0, { holderMethod: v2 });
+function f8() {
+}
+const v9 = { value: f8 };
+var holder = Object.create(null, { holderMethod: v9 });
+const v15 = { value: 0, configurable: true };
+const v18 = { value: 0, configurable: true };
+var receiver = Object.create(holder, { killMe: v15, keepMe: v18 });
+delete receiver.killMe;
+function callConstantFunctionOnPrototype(a24) {
+    a24.holderMethod();
+}
+callConstantFunctionOnPrototype(receiver);
+callConstantFunctionOnPrototype(receiver);
+callConstantFunctionOnPrototype(receiver);
+callConstantFunctionOnPrototype();
+
+FuzzIL program written to corpus/regress-252797.fzil

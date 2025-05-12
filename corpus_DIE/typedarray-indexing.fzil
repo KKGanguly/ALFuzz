@@ -1,0 +1,370 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- CreateNamedVariable 'Int8Array', 'none'
+v2 <- CreateNamedVariable 'Uint16Array', 'none'
+v3 <- CreateNamedVariable 'Int16Array', 'none'
+v4 <- CreateNamedVariable 'Uint32Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v7 <- CreateNamedVariable 'Float32Array', 'none'
+v8 <- CreateNamedVariable 'Float64Array', 'none'
+v9 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8]
+v10 <- CreateNamedVariable 'typedArrayConstructors', 'var', v9
+v11 <- CreateNamedVariable 'Symbol', 'none'
+v12 <- GetProperty v11, 'toPrimitive'
+BeginObjectLiteral
+    BeginObjectLiteralComputedMethod v12 -> v13
+        v14 <- LoadString 'Parameter should not be processed when '
+        v15 <- LoadString 'array.[[ViewedArrayBuffer]] is detached.'
+        v16 <- BinaryOperation v14, '+', v15
+        v17 <- LoadInteger '0'
+        Return v17
+    EndObjectLiteralComputedMethod
+v18 <- EndObjectLiteral
+v19 <- CreateNamedVariable 'tmp', 'var', v18
+BeginForOfLoop v10 -> v20
+    v21 <- LoadInteger '1'
+    v22 <- LoadInteger '2'
+    v23 <- LoadInteger '3'
+    v24 <- LoadInteger '1'
+    v25 <- LoadInteger '2'
+    v26 <- LoadInteger '3'
+    v27 <- LoadInteger '1'
+    v28 <- LoadInteger '2'
+    v29 <- LoadInteger '3'
+    v30 <- LoadInteger '1'
+    v31 <- LoadInteger '2'
+    v32 <- LoadInteger '3'
+    v33 <- CreateArray [v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32]
+    v34 <- Construct v20, [v33]
+    v35 <- CreateNamedVariable 'array', 'var', v34
+    v36 <- LoadInteger '1'
+    v37 <- UnaryOperation '-', v36
+    v38 <- LoadInteger '1'
+    v39 <- CreateArray []
+    v40 <- Construct v20, [v39]
+    v41 <- CallMethod v40, 'indexOf', [v38]
+    v42 <- LoadInteger '1'
+    v43 <- UnaryOperation '-', v42
+    v44 <- LoadInteger '4'
+    v45 <- CallMethod v35, 'indexOf', [v44]
+    v46 <- LoadInteger '1'
+    v47 <- UnaryOperation '-', v46
+    v48 <- LoadInteger '3'
+    v49 <- GetProperty v35, 'length'
+    v50 <- CallMethod v35, 'indexOf', [v48, v49]
+    v51 <- LoadInteger '2'
+    v52 <- LoadInteger '3'
+    v53 <- CallMethod v35, 'indexOf', [v52]
+    v54 <- LoadInteger '0'
+    v55 <- LoadInteger '1'
+    v56 <- LoadInteger '17'
+    v57 <- UnaryOperation '-', v56
+    v58 <- CallMethod v35, 'indexOf', [v55, v57]
+    v59 <- LoadInteger '3'
+    v60 <- LoadInteger '1'
+    v61 <- LoadInteger '11'
+    v62 <- UnaryOperation '-', v61
+    v63 <- CallMethod v35, 'indexOf', [v60, v62]
+    v64 <- LoadInteger '3'
+    v65 <- LoadInteger '1'
+    v66 <- LoadInteger '1'
+    v67 <- CallMethod v35, 'indexOf', [v65, v66]
+    v68 <- LoadInteger '3'
+    v69 <- LoadInteger '1'
+    v70 <- LoadInteger '3'
+    v71 <- CallMethod v35, 'indexOf', [v69, v70]
+    v72 <- LoadInteger '6'
+    v73 <- LoadInteger '1'
+    v74 <- LoadInteger '4'
+    v75 <- CallMethod v35, 'indexOf', [v73, v74]
+    v76 <- LoadInteger '1'
+    v77 <- GetProperty v35, 'indexOf'
+    v78 <- GetProperty v77, 'length'
+    v79 <- BeginPlainFunction -> 
+        v80 <- LoadInteger '1'
+        v81 <- CreateArray [v80]
+        v82 <- LoadInteger '1'
+        v83 <- GetProperty v35, 'indexOf'
+        v84 <- CallMethod v83, 'call', [v81, v82]
+    EndPlainFunction
+    v85 <- CallFunction v79, []
+    v86 <- CreateNamedVariable 'TypeError', 'none'
+    v87 <- LoadString 'length'
+    v88 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v88
+    v89 <- EndObjectLiteral
+    v90 <- CreateNamedVariable 'Object', 'none'
+    v91 <- CallMethod v90, 'defineProperty', [v35, v87, v89]
+    v92 <- LoadInteger '2'
+    v93 <- CallMethod v35, 'indexOf', [v92]
+    v94 <- LoadInteger '1'
+    v95 <- CreateNamedVariable 'NaN', 'none'
+    v96 <- LoadInteger '2'
+    v97 <- LoadInteger '3'
+    v98 <- CreateNamedVariable 'Infinity', 'none'
+    v99 <- UnaryOperation '+', v98
+    v100 <- UnaryOperation '-', v98
+    v101 <- LoadInteger '5'
+    v102 <- LoadInteger '6'
+    v103 <- CreateArray [v95, v96, v97, v99, v100, v101, v102]
+    v104 <- Construct v20, [v103]
+    Reassign v35, v104
+    v105 <- Compare v20, '==', v7
+    v106 <- Compare v20, '==', v8
+    v107 <- BinaryOperation v105, '||', v106
+    BeginIf v107
+        v108 <- LoadInteger '3'
+        v109 <- CallMethod v35, 'indexOf', [v98]
+        v110 <- LoadInteger '4'
+        v111 <- UnaryOperation '-', v98
+        v112 <- CallMethod v35, 'indexOf', [v111]
+    BeginElse
+        v113 <- LoadInteger '1'
+        v114 <- UnaryOperation '-', v113
+        v115 <- CallMethod v35, 'indexOf', [v98]
+        v116 <- LoadInteger '1'
+        v117 <- UnaryOperation '-', v116
+        v118 <- UnaryOperation '-', v98
+        v119 <- CallMethod v35, 'indexOf', [v118]
+    EndIf
+    v120 <- LoadInteger '1'
+    v121 <- UnaryOperation '-', v120
+    v122 <- CallMethod v35, 'indexOf', [v95]
+    v123 <- LoadInteger '1'
+    v124 <- LoadInteger '2'
+    v125 <- LoadInteger '3'
+    v126 <- LoadInteger '4'
+    v127 <- LoadInteger '5'
+    v128 <- LoadInteger '6'
+    v129 <- LoadInteger '7'
+    v130 <- LoadInteger '8'
+    v131 <- LoadInteger '9'
+    v132 <- LoadInteger '10'
+    v133 <- CreateArray [v123, v124, v125, v126, v127, v128, v129, v130, v131, v132]
+    v134 <- Construct v20, [v133]
+    v135 <- CreateNamedVariable 'array', 'var', v134
+    v136 <- BeginArrowFunction -> 
+        v137 <- CallMethod v135, 'indexOf', [v19]
+        Return v137
+    EndArrowFunction
+    v138 <- CallFunction v136, []
+    v139 <- LoadInteger '1'
+    v140 <- LoadInteger '2'
+    v141 <- LoadInteger '3'
+    v142 <- LoadInteger '1'
+    v143 <- LoadInteger '2'
+    v144 <- LoadInteger '3'
+    v145 <- LoadInteger '1'
+    v146 <- LoadInteger '2'
+    v147 <- LoadInteger '3'
+    v148 <- LoadInteger '1'
+    v149 <- LoadInteger '2'
+    v150 <- LoadInteger '3'
+    v151 <- CreateArray [v139, v140, v141, v142, v143, v144, v145, v146, v147, v148, v149, v150]
+    v152 <- Construct v20, [v151]
+    Reassign v135, v152
+    v153 <- LoadInteger '1'
+    v154 <- UnaryOperation '-', v153
+    v155 <- LoadInteger '1'
+    v156 <- CreateArray []
+    v157 <- Construct v20, [v156]
+    v158 <- CallMethod v157, 'lastIndexOf', [v155]
+    v159 <- LoadInteger '1'
+    v160 <- UnaryOperation '-', v159
+    v161 <- LoadInteger '1'
+    v162 <- LoadInteger '17'
+    v163 <- UnaryOperation '-', v162
+    v164 <- CallMethod v135, 'lastIndexOf', [v161, v163]
+    v165 <- LoadInteger '9'
+    v166 <- LoadInteger '1'
+    v167 <- CallMethod v135, 'lastIndexOf', [v166]
+    v168 <- LoadInteger '9'
+    v169 <- LoadInteger '1'
+    v170 <- GetProperty v135, 'length'
+    v171 <- CallMethod v135, 'lastIndexOf', [v169, v170]
+    v172 <- LoadInteger '0'
+    v173 <- LoadInteger '1'
+    v174 <- LoadInteger '2'
+    v175 <- CallMethod v135, 'lastIndexOf', [v173, v174]
+    v176 <- LoadInteger '3'
+    v177 <- LoadInteger '1'
+    v178 <- LoadInteger '4'
+    v179 <- CallMethod v135, 'lastIndexOf', [v177, v178]
+    v180 <- LoadInteger '3'
+    v181 <- LoadInteger '1'
+    v182 <- LoadInteger '3'
+    v183 <- CallMethod v135, 'lastIndexOf', [v181, v182]
+    v184 <- LoadInteger '0'
+    v185 <- LoadInteger '1'
+    v186 <- LoadInteger '11'
+    v187 <- UnaryOperation '-', v186
+    v188 <- CallMethod v135, 'lastIndexOf', [v185, v187]
+    v189 <- LoadInteger '1'
+    v190 <- GetProperty v135, 'lastIndexOf'
+    v191 <- GetProperty v190, 'length'
+    v192 <- BeginPlainFunction -> 
+        v193 <- LoadInteger '1'
+        v194 <- CreateArray [v193]
+        v195 <- LoadInteger '1'
+        v196 <- GetProperty v135, 'lastIndexOf'
+        v197 <- CallMethod v196, 'call', [v194, v195]
+    EndPlainFunction
+    v198 <- CallFunction v192, []
+    v199 <- LoadString 'length'
+    v200 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v200
+    v201 <- EndObjectLiteral
+    v202 <- CallMethod v90, 'defineProperty', [v135, v199, v201]
+    v203 <- LoadInteger '2'
+    v204 <- CallMethod v135, 'lastIndexOf', [v203]
+    v205 <- LoadInteger '10'
+    v206 <- DeleteProperty v135, 'length'
+    v207 <- LoadInteger '2'
+    v208 <- LoadInteger '3'
+    v209 <- UnaryOperation '+', v98
+    v210 <- UnaryOperation '-', v98
+    v211 <- LoadInteger '5'
+    v212 <- LoadInteger '6'
+    v213 <- CreateArray [v95, v207, v208, v209, v210, v211, v212]
+    v214 <- Construct v20, [v213]
+    Reassign v135, v214
+    v215 <- Compare v20, '==', v7
+    v216 <- Compare v20, '==', v8
+    v217 <- BinaryOperation v215, '||', v216
+    BeginIf v217
+        v218 <- LoadInteger '3'
+        v219 <- CallMethod v135, 'lastIndexOf', [v98]
+        v220 <- LoadInteger '4'
+        v221 <- UnaryOperation '-', v98
+        v222 <- CallMethod v135, 'lastIndexOf', [v221]
+    BeginElse
+        v223 <- LoadInteger '1'
+        v224 <- UnaryOperation '-', v223
+        v225 <- CallMethod v135, 'lastIndexOf', [v98]
+        v226 <- LoadInteger '1'
+        v227 <- UnaryOperation '-', v226
+        v228 <- UnaryOperation '-', v98
+        v229 <- CallMethod v135, 'lastIndexOf', [v228]
+    EndIf
+    v230 <- LoadInteger '1'
+    v231 <- UnaryOperation '-', v230
+    v232 <- CallMethod v135, 'lastIndexOf', [v95]
+    v233 <- LoadInteger '1'
+    v234 <- LoadInteger '2'
+    v235 <- LoadInteger '3'
+    v236 <- LoadInteger '4'
+    v237 <- LoadInteger '5'
+    v238 <- LoadInteger '6'
+    v239 <- LoadInteger '7'
+    v240 <- LoadInteger '8'
+    v241 <- LoadInteger '9'
+    v242 <- LoadInteger '10'
+    v243 <- CreateArray [v233, v234, v235, v236, v237, v238, v239, v240, v241, v242]
+    v244 <- Construct v20, [v243]
+    v245 <- CreateNamedVariable 'array', 'var', v244
+    v246 <- BeginArrowFunction -> 
+        v247 <- CallMethod v245, 'lastIndexOf', [v19]
+        Return v247
+    EndArrowFunction
+    v248 <- CallFunction v246, []
+EndForOfLoop
+
+
+var typedArrayConstructors = [Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,Uint8ClampedArray,Float32Array,Float64Array];
+const v12 = Symbol.toPrimitive;
+const v18 = {
+    [v12]() {
+        "Parameter should not be processed when " + "array.[[ViewedArrayBuffer]] is detached.";
+        return 0;
+    },
+};
+var tmp = v18;
+for (const v20 of typedArrayConstructors) {
+    const v34 = new v20([1,2,3,1,2,3,1,2,3,1,2,3]);
+    var array = v34;
+    -1;
+    const v40 = new v20([]);
+    v40.indexOf(1);
+    -1;
+    array.indexOf(4);
+    -1;
+    array.indexOf(3, array.length);
+    array.indexOf(3);
+    array.indexOf(1, -17);
+    array.indexOf(1, -11);
+    array.indexOf(1, 1);
+    array.indexOf(1, 3);
+    array.indexOf(1, 4);
+    array.indexOf.length;
+    function f79() {
+        const v81 = [1];
+        array.indexOf.call(v81, 1);
+    }
+    f79();
+    Object.defineProperty(array, "length", { value: 1 });
+    array.indexOf(2);
+    const v104 = new v20([NaN,2,3,+Infinity,-Infinity,5,6]);
+    array = v104;
+    if ((v20 == Float32Array) || (v20 == Float64Array)) {
+        array.indexOf(Infinity);
+        array.indexOf(-Infinity);
+    } else {
+        -1;
+        array.indexOf(Infinity);
+        -1;
+        array.indexOf(-Infinity);
+    }
+    -1;
+    array.indexOf(NaN);
+    const v134 = new v20([1,2,3,4,5,6,7,8,9,10]);
+    var array = v134;
+    const v136 = () => {
+        return array.indexOf(tmp);
+    };
+    v136();
+    const v152 = new v20([1,2,3,1,2,3,1,2,3,1,2,3]);
+    array = v152;
+    -1;
+    const v157 = new v20([]);
+    v157.lastIndexOf(1);
+    -1;
+    array.lastIndexOf(1, -17);
+    array.lastIndexOf(1);
+    array.lastIndexOf(1, array.length);
+    array.lastIndexOf(1, 2);
+    array.lastIndexOf(1, 4);
+    array.lastIndexOf(1, 3);
+    array.lastIndexOf(1, -11);
+    array.lastIndexOf.length;
+    function f192() {
+        const v194 = [1];
+        array.lastIndexOf.call(v194, 1);
+    }
+    f192();
+    Object.defineProperty(array, "length", { value: 1 });
+    array.lastIndexOf(2);
+    delete array.length;
+    const v214 = new v20([NaN,2,3,+Infinity,-Infinity,5,6]);
+    array = v214;
+    if ((v20 == Float32Array) || (v20 == Float64Array)) {
+        array.lastIndexOf(Infinity);
+        array.lastIndexOf(-Infinity);
+    } else {
+        -1;
+        array.lastIndexOf(Infinity);
+        -1;
+        array.lastIndexOf(-Infinity);
+    }
+    -1;
+    array.lastIndexOf(NaN);
+    const v244 = new v20([1,2,3,4,5,6,7,8,9,10]);
+    var array = v244;
+    const v246 = () => {
+        return array.lastIndexOf(tmp);
+    };
+    v246();
+}
+
+FuzzIL program written to corpus/typedarray-indexing.fzil

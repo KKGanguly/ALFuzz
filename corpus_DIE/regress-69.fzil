@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1
+    BeginTry
+        BeginSwitch v1
+            BeginSwitchDefaultCase
+                Break
+            EndSwitchCase fallsThrough
+        EndSwitch
+    BeginCatch -> v2
+    EndTryCatch
+    v3 <- CreateNamedVariable 'gc', 'none'
+    v4 <- CallFunction v3, []
+EndPlainFunction
+v5 <- LoadInteger '1'
+v6 <- CallFunction v0, [v5]
+
+
+function unbalanced_switch(a1) {
+    try {
+        switch (a1) {
+            default:
+                break;
+        }
+    } catch(e2) {
+    }
+    gc();
+}
+unbalanced_switch(1);
+
+FuzzIL program written to corpus/regress-69.fzil

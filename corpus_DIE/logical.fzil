@@ -1,0 +1,93 @@
+v0 <- LoadInteger '0'
+v1 <- Void_ v0
+v2 <- CreateNamedVariable 'undef', 'var', v1
+v3 <- LoadInteger '1'
+v4 <- LoadInteger '1'
+v5 <- LoadInteger '0'
+v6 <- BinaryOperation v4, '||', v5
+v7 <- LoadInteger '2'
+v8 <- LoadInteger '0'
+v9 <- LoadInteger '2'
+v10 <- BinaryOperation v8, '||', v9
+v11 <- LoadString 'foo'
+v12 <- LoadInteger '0'
+v13 <- LoadString 'foo'
+v14 <- BinaryOperation v12, '||', v13
+v15 <- BinaryOperation v2, '||', v2
+v16 <- LoadString 'foo'
+v17 <- LoadString 'foo'
+v18 <- LoadString 'bar'
+v19 <- BinaryOperation v17, '||', v18
+v20 <- LoadString 'bar'
+v21 <- LoadString 'bar'
+v22 <- BinaryOperation v2, '||', v21
+v23 <- LoadString 'bar'
+v24 <- LoadString 'bar'
+v25 <- BinaryOperation v2, '||', v24
+v26 <- LoadString 'baz'
+v27 <- BinaryOperation v25, '||', v26
+v28 <- LoadString 'baz'
+v29 <- BinaryOperation v2, '||', v2
+v30 <- LoadString 'baz'
+v31 <- BinaryOperation v29, '||', v30
+v32 <- LoadInteger '0'
+v33 <- LoadInteger '1'
+v34 <- LoadInteger '0'
+v35 <- BinaryOperation v33, '&&', v34
+v36 <- LoadInteger '0'
+v37 <- LoadInteger '0'
+v38 <- LoadInteger '2'
+v39 <- BinaryOperation v37, '&&', v38
+v40 <- LoadInteger '0'
+v41 <- LoadInteger '0'
+v42 <- LoadString 'foo'
+v43 <- BinaryOperation v41, '&&', v42
+v44 <- BinaryOperation v2, '&&', v2
+v45 <- LoadString 'bar'
+v46 <- LoadString 'foo'
+v47 <- LoadString 'bar'
+v48 <- BinaryOperation v46, '&&', v47
+v49 <- LoadString 'bar'
+v50 <- BinaryOperation v2, '&&', v49
+v51 <- LoadString 'baz'
+v52 <- LoadString 'foo'
+v53 <- LoadString 'bar'
+v54 <- BinaryOperation v52, '&&', v53
+v55 <- LoadString 'baz'
+v56 <- BinaryOperation v54, '&&', v55
+v57 <- LoadString 'foo'
+v58 <- BinaryOperation v57, '&&', v2
+v59 <- LoadString 'baz'
+v60 <- BinaryOperation v58, '&&', v59
+v61 <- LoadInteger '0'
+v62 <- BinaryOperation v2, '&&', v2
+v63 <- LoadInteger '0'
+v64 <- BinaryOperation v62, '||', v63
+v65 <- LoadString 'bar'
+v66 <- LoadInteger '0'
+v67 <- BinaryOperation v2, '&&', v66
+v68 <- LoadString 'bar'
+v69 <- BinaryOperation v67, '||', v68
+
+
+var undef = void 0;
+1 || 0;
+0 || 2;
+0 || "foo";
+undef || undef;
+"foo" || "bar";
+undef || "bar";
+(undef || "bar") || "baz";
+(undef || undef) || "baz";
+1 && 0;
+0 && 2;
+0 && "foo";
+undef && undef;
+"foo" && "bar";
+undef && "bar";
+("foo" && "bar") && "baz";
+("foo" && undef) && "baz";
+(undef && undef) || 0;
+(undef && 0) || "bar";
+
+FuzzIL program written to corpus/logical.fzil

@@ -1,0 +1,54 @@
+v0 <- LoadInteger '777'
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetElement v2, '0', v0
+v3 <- LoadInteger '10'
+v4 <- CreateNamedVariable 'kElements', 'var', v3
+v5 <- CreateArray []
+v6 <- CreateNamedVariable 'input_array', 'var', v5
+BeginForLoopInitializer
+    v7 <- LoadInteger '1'
+BeginForLoopCondition -> v8
+    v9 <- Compare v8, '<', v4
+BeginForLoopAfterthought v9 -> v10
+    v11 <- UnaryOperation v10, '++'
+BeginForLoopBody -> v12
+    v13 <- LoadFloat '0.5'
+    SetComputedProperty v6, v12, v13
+EndForLoop
+v14 <- LoadFloat '0.5'
+v15 <- CallMethod v6, 'concat', [v14]
+v16 <- CreateNamedVariable 'output_array', 'var', v15
+v17 <- LoadInteger '1'
+v18 <- BinaryOperation v4, '+', v17
+v19 <- GetProperty v16, 'length'
+v20 <- LoadInteger '777'
+v21 <- GetElement v16, '0'
+BeginForLoopInitializer
+    v22 <- LoadInteger '1'
+BeginForLoopCondition -> v23
+    v24 <- Compare v23, '<', v4
+BeginForLoopAfterthought v24 -> v25
+    v26 <- UnaryOperation v25, '++'
+BeginForLoopBody -> v27
+    v28 <- LoadFloat '0.5'
+    v29 <- GetComputedProperty v16, v27
+EndForLoop
+
+
+const t0 = Array.prototype;
+t0[0] = 777;
+var kElements = 10;
+var input_array = [];
+for (let i8 = 1; i8 < kElements; i8++) {
+    input_array[i8] = 0.5;
+}
+var output_array = input_array.concat(0.5);
+kElements + 1;
+output_array.length;
+output_array[0];
+for (let i23 = 1; i23 < kElements; i23++) {
+    output_array[i23];
+}
+
+FuzzIL program written to corpus/regress-crbug-403409.fzil

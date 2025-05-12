@@ -1,0 +1,140 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- LoadUndefined
+    v5 <- CreateNamedVariable 'actual', 'var', v4
+    v6 <- LoadBoolean 'false'
+    v7 <- CreateNamedVariable 'hadValue', 'var', v6
+    v8 <- LoadBoolean 'false'
+    v9 <- CreateNamedVariable 'hadError', 'var', v8
+    v10 <- CallFunction v2, []
+    v11 <- CreateNamedVariable 'promise', 'var', v10
+    v12 <- TypeOf v11
+    v13 <- LoadString 'object'
+    v14 <- Compare v12, '!==', v13
+    v15 <- GetProperty v11, 'then'
+    v16 <- TypeOf v15
+    v17 <- LoadString 'function'
+    v18 <- Compare v16, '!==', v17
+    v19 <- BinaryOperation v14, '||', v18
+    BeginIf v19
+        v20 <- CreateNamedVariable 'MjsUnitAssertionError', 'none'
+        v21 <- LoadString 'Expected '
+        v22 <- CallMethod v2, 'toString', []
+        v23 <- BinaryOperation v21, '+', v22
+        v24 <- LoadString ' to return a Promise, but it returned '
+        v25 <- BinaryOperation v23, '+', v24
+        v26 <- CreateNamedVariable 'PrettyPrint', 'none'
+        v27 <- CallFunction v26, [v11]
+        v28 <- BinaryOperation v25, '+', v27
+        v29 <- Construct v20, [v28]
+        ThrowException v29
+    EndIf
+    v30 <- BeginPlainFunction -> v31
+        v32 <- LoadBoolean 'true'
+        Reassign v7, v32
+        Reassign v5, v31
+    EndPlainFunction
+    v33 <- BeginPlainFunction -> v34
+        v35 <- LoadBoolean 'true'
+        Reassign v9, v35
+        Reassign v5, v34
+    EndPlainFunction
+    v36 <- CallMethod v11, 'then', [v30, v33]
+    v37 <- BinaryOperation v7, '||', v9
+    BeginIf v9
+        ThrowException v5
+    EndIf
+    v38 <- LoadString 'Expected ''
+    v39 <- CallMethod v2, 'toString', []
+    v40 <- BinaryOperation v38, '+', v39
+    v41 <- LoadString '' to produce a value'
+    v42 <- BinaryOperation v40, '+', v41
+EndPlainFunction
+v43 <- LoadString '[1,2,3]'
+v44 <- BeginArrowFunction -> 
+    v45 <- LoadInteger '1'
+    v46 <- LoadInteger '2'
+    v47 <- LoadInteger '3'
+    v48 <- BeginPlainFunction -> 
+        v49 <- BeginAsyncArrowFunction -> 
+            v50 <- LoadArguments
+            v51 <- CreateArrayWithSpread [...v50]
+            v52 <- CreateNamedVariable 'JSON', 'none'
+            v53 <- CallMethod v52, 'stringify', [v51]
+            Return v53
+        EndAsyncArrowFunction
+        v54 <- CallFunction v49, []
+        Return v54
+    EndPlainFunction
+    v55 <- CallFunction v48, [v45, v46, v47]
+    Return v55
+EndArrowFunction
+v56 <- CallFunction v44, []
+v57 <- LoadString '[4,5,6]'
+v58 <- BeginArrowFunction -> 
+    v59 <- LoadInteger '4'
+    v60 <- LoadInteger '5'
+    v61 <- LoadInteger '6'
+    v62 <- BeginPlainFunction -> 
+        v63 <- BeginAsyncArrowFunction -> 
+            v64 <- LoadArguments
+            v65 <- Await v64
+            v66 <- CreateArrayWithSpread [...v65]
+            v67 <- CreateNamedVariable 'JSON', 'none'
+            v68 <- CallMethod v67, 'stringify', [v66]
+            Return v68
+        EndAsyncArrowFunction
+        v69 <- CallFunction v63, []
+        Return v69
+    EndPlainFunction
+    v70 <- CallFunction v62, [v59, v60, v61]
+    Return v70
+EndArrowFunction
+v71 <- CallFunction v58, []
+
+
+function assertEqualsAsync(a1, a2, a3) {
+    var actual;
+    var hadValue = false;
+    var hadError = false;
+    var promise = a2();
+    if ((typeof promise !== "object") || (typeof promise.then !== "function")) {
+        const v29 = new MjsUnitAssertionError((("Expected " + a2.toString()) + " to return a Promise, but it returned ") + PrettyPrint(promise));
+        throw v29;
+    }
+    function f30(a31) {
+        hadValue = true;
+        actual = a31;
+    }
+    function f33(a34) {
+        hadError = true;
+        actual = a34;
+    }
+    promise.then(f30, f33);
+    hadValue || hadError;
+    if (hadError) {
+        throw actual;
+    }
+    ("Expected '" + a2.toString()) + "' to produce a value";
+}
+const v44 = () => {
+    function f48() {
+        const v49 = async () => {
+            return JSON.stringify([...arguments]);
+        };
+        return v49();
+    }
+    return f48(1, 2, 3);
+};
+v44();
+const v58 = () => {
+    function f62() {
+        const v63 = async () => {
+            return JSON.stringify([...await arguments]);
+        };
+        return v63();
+    }
+    return f62(4, 5, 6);
+};
+v58();
+
+FuzzIL program written to corpus/async-arrow-lexical-arguments.fzil

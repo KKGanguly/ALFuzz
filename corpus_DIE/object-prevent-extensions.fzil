@@ -1,0 +1,257 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'obj1', 'var', v0
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- CallMethod v2, 'isExtensible', [v1]
+v4 <- CallMethod v2, 'preventExtensions', [v1]
+v5 <- CallMethod v2, 'isExtensible', [v1]
+v6 <- LoadInteger '42'
+SetProperty v1, 'x', v6
+v7 <- LoadUndefined
+v8 <- GetProperty v1, 'x'
+v9 <- LoadInteger '42'
+SetElement v1, '1', v9
+v10 <- LoadUndefined
+v11 <- GetElement v1, '1'
+BeginObjectLiteral
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'obj2', 'var', v12
+v14 <- CallMethod v2, 'isExtensible', [v13]
+v15 <- LoadInteger '42'
+SetProperty v13, 'x', v15
+v16 <- LoadInteger '42'
+v17 <- GetProperty v13, 'x'
+v18 <- CallMethod v2, 'isExtensible', [v13]
+v19 <- CallMethod v2, 'preventExtensions', [v13]
+v20 <- LoadInteger '42'
+v21 <- GetProperty v13, 'x'
+v22 <- LoadInteger '42'
+SetProperty v13, 'y', v22
+v23 <- LoadUndefined
+v24 <- GetProperty v13, 'y'
+v25 <- LoadInteger '43'
+SetProperty v13, 'x', v25
+v26 <- LoadInteger '43'
+v27 <- GetProperty v13, 'x'
+v28 <- BeginPlainFunction -> 
+    v29 <- LoadInteger '42'
+    Return v29
+EndPlainFunction
+v30 <- Construct v28, []
+SetProperty v13, 'y', v30
+v31 <- LoadUndefined
+v32 <- GetProperty v13, 'y'
+v33 <- LoadInteger '43'
+v34 <- GetProperty v13, 'x'
+BeginTry
+    v35 <- LoadString 'y'
+    v36 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v36
+    v37 <- EndObjectLiteral
+    v38 <- CallMethod v2, 'defineProperty', [v13, v35, v37]
+BeginCatch -> v39
+    v40 <- LoadRegExp 'object is not extensible' ''
+    v41 <- CallMethod v40, 'test', [v39]
+EndTryCatch
+v42 <- LoadUndefined
+v43 <- GetProperty v13, 'y'
+v44 <- LoadInteger '43'
+v45 <- GetProperty v13, 'x'
+v46 <- LoadInteger '42'
+SetElement v13, '1', v46
+v47 <- LoadUndefined
+v48 <- GetElement v13, '1'
+v49 <- CreateNamedVariable 'Array', 'none'
+v50 <- Construct v49, []
+v51 <- CreateNamedVariable 'arr', 'var', v50
+v52 <- LoadInteger '10'
+SetElement v51, '1', v52
+v53 <- CallMethod v2, 'preventExtensions', [v51]
+v54 <- LoadInteger '42'
+SetElement v51, '2', v54
+v55 <- LoadInteger '10'
+v56 <- GetElement v51, '1'
+v57 <- LoadInteger '42'
+SetElement v51, '1', v57
+v58 <- LoadInteger '42'
+v59 <- GetElement v51, '1'
+BeginObjectLiteral
+v60 <- EndObjectLiteral
+v61 <- CreateNamedVariable 'parent', 'var', v60
+v62 <- LoadInteger '42'
+SetProperty v61, 'x', v62
+v63 <- CallMethod v2, 'preventExtensions', [v61]
+v64 <- CallMethod v2, 'create', [v61]
+v65 <- CreateNamedVariable 'child', 'var', v64
+v66 <- LoadInteger '42'
+SetProperty v65, 'y', v66
+v67 <- LoadInteger '29'
+SetProperty v61, 'y', v67
+v68 <- BeginPlainFunction -> 
+    v69 <- LoadInteger '42'
+    Return v69
+EndPlainFunction
+v70 <- CallMethod v2, 'preventExtensions', [v68]
+v71 <- LoadInteger '29'
+SetProperty v68, 'x', v71
+v72 <- LoadUndefined
+v73 <- GetProperty v68, 'x'
+BeginObjectLiteral
+v74 <- EndObjectLiteral
+v75 <- CallMethod v2, 'preventExtensions', [v74]
+v76 <- CreateNamedVariable 'o', 'var', v75
+v77 <- LoadInteger '50'
+SetProperty v76, 'v', v77
+v78 <- CreateNamedVariable 'v', 'var', v77
+v79 <- LoadUndefined
+v80 <- GetProperty v76, 'v'
+v81 <- LoadInteger '50'
+v82 <- LoadInteger '100'
+SetElement v76, '0', v82
+v83 <- CreateNamedVariable 'n', 'var', v82
+v84 <- LoadUndefined
+v85 <- GetElement v76, '0'
+v86 <- LoadInteger '100'
+v87 <- LoadInteger '42'
+v88 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v87
+    ObjectLiteralAddProperty `y`, v88
+v89 <- EndObjectLiteral
+v90 <- CreateNamedVariable 'obj', 'none'
+Reassign v90, v89
+v91 <- CreateNamedVariable 'obj', 'none'
+v92 <- CallMethod v2, 'preventExtensions', [v91]
+v93 <- CallMethod v2, 'isExtensible', [v91]
+v94 <- CallMethod v2, 'isSealed', [v91]
+v95 <- LoadInteger '1'
+v96 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop1`, v95
+    ObjectLiteralAddProperty `prop2`, v96
+v97 <- EndObjectLiteral
+Reassign v91, v97
+v98 <- LoadInteger '3'
+v99 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop1`, v98
+    ObjectLiteralAddProperty `prop2`, v99
+v100 <- EndObjectLiteral
+Reassign v13, v100
+v101 <- CallMethod v2, 'preventExtensions', [v91]
+v102 <- CallMethod v2, 'preventExtensions', [v13]
+v103 <- CallMethod v2, 'isExtensible', [v91]
+v104 <- CallMethod v2, 'isExtensible', [v13]
+v105 <- CallMethod v2, 'isSealed', [v91]
+v106 <- CallMethod v2, 'isSealed', [v13]
+v107 <- LoadInteger '1'
+v108 <- LoadInteger '2'
+v109 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop1`, v107
+    ObjectLiteralAddProperty `prop2`, v108
+    ObjectLiteralAddElement `75`, v109
+v110 <- EndObjectLiteral
+Reassign v91, v110
+v111 <- LoadInteger '3'
+v112 <- LoadInteger '4'
+v113 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop1`, v111
+    ObjectLiteralAddProperty `prop2`, v112
+    ObjectLiteralAddElement `150`, v113
+v114 <- EndObjectLiteral
+Reassign v13, v114
+v115 <- CallMethod v2, 'preventExtensions', [v91]
+v116 <- CallMethod v2, 'preventExtensions', [v13]
+v117 <- CallMethod v2, 'isExtensible', [v91]
+v118 <- CallMethod v2, 'isExtensible', [v13]
+v119 <- CallMethod v2, 'isSealed', [v91]
+v120 <- CallMethod v2, 'isSealed', [v13]
+
+
+var obj1 = {};
+Object.isExtensible(obj1);
+Object.preventExtensions(obj1);
+Object.isExtensible(obj1);
+obj1.x = 42;
+obj1.x;
+obj1[1] = 42;
+obj1[1];
+var obj2 = {};
+Object.isExtensible(obj2);
+obj2.x = 42;
+obj2.x;
+Object.isExtensible(obj2);
+Object.preventExtensions(obj2);
+obj2.x;
+obj2.y = 42;
+obj2.y;
+obj2.x = 43;
+obj2.x;
+function f28() {
+    return 42;
+}
+const v30 = new f28();
+obj2.y = v30;
+obj2.y;
+obj2.x;
+try {
+    Object.defineProperty(obj2, "y", { value: 42 });
+} catch(e39) {
+    /object is not extensible/.test(e39);
+}
+obj2.y;
+obj2.x;
+obj2[1] = 42;
+obj2[1];
+const v50 = new Array();
+var arr = v50;
+arr[1] = 10;
+Object.preventExtensions(arr);
+arr[2] = 42;
+arr[1];
+arr[1] = 42;
+arr[1];
+var parent = {};
+parent.x = 42;
+Object.preventExtensions(parent);
+var child = Object.create(parent);
+child.y = 42;
+parent.y = 29;
+function foo() {
+    return 42;
+}
+Object.preventExtensions(foo);
+foo.x = 29;
+foo.x;
+var o = Object.preventExtensions({});
+o.v = 50;
+var v = 50;
+o.v;
+o[0] = 100;
+var n = 100;
+o[0];
+obj = { x: 42, y: "foo" };
+Object.preventExtensions(obj);
+Object.isExtensible(obj);
+Object.isSealed(obj);
+obj = { prop1: 1, prop2: 2 };
+obj2 = { prop1: 3, prop2: 4 };
+Object.preventExtensions(obj);
+Object.preventExtensions(obj2);
+Object.isExtensible(obj);
+Object.isExtensible(obj2);
+Object.isSealed(obj);
+Object.isSealed(obj2);
+obj = { prop1: 1, prop2: 2, 75: "foo" };
+obj2 = { prop1: 3, prop2: 4, 150: "bar" };
+Object.preventExtensions(obj);
+Object.preventExtensions(obj2);
+Object.isExtensible(obj);
+Object.isExtensible(obj2);
+Object.isSealed(obj);
+Object.isSealed(obj2);
+
+FuzzIL program written to corpus/object-prevent-extensions.fzil

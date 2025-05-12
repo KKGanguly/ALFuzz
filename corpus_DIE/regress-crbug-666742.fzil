@@ -1,0 +1,37 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'p', 'var', v1
+v3 <- CreateNamedVariable '__proto__', 'none'
+Reassign v3, v2
+v4 <- CreateNamedVariable 'x', 'none'
+v5 <- LoadInteger '1'
+v6 <- LoadInteger '13'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable '__proto__', 'none'
+Reassign v8, v7
+v9 <- LoadInteger '13'
+v10 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v10
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable '__proto__', 'none'
+Reassign v12, v11
+v13 <- LoadNull
+Reassign v2, v13
+v14 <- CreateNamedVariable 'gc', 'none'
+v15 <- CallFunction v14, []
+v16 <- LoadInteger '42'
+
+
+var p = { x: 1 };
+__proto__ = p;
+__proto__ = { x: 13 };
+__proto__ = { x: 42 };
+p = null;
+gc();
+
+FuzzIL program written to corpus/regress-crbug-666742.fzil

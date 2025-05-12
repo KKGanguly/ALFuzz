@@ -1,0 +1,61 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- LoadInteger '0'
+    v5 <- CreateNamedVariable 'result', 'var', v4
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- LoadArguments
+        v9 <- GetProperty v8, 'length'
+        v10 <- Compare v7, '<', v9
+    BeginForLoopAfterthought v10 -> v11
+        v12 <- UnaryOperation v11, '++'
+    BeginForLoopBody -> v13
+        v14 <- LoadArguments
+        v15 <- GetComputedProperty v14, v13
+        Update v5, '+', v15
+    EndForLoop
+    Return v5
+EndPlainFunction
+v16 <- LoadInteger '6'
+v17 <- LoadThis
+v18 <- LoadInteger '1'
+v19 <- LoadInteger '2'
+v20 <- LoadInteger '3'
+v21 <- CallMethod v0, 'call', [v17, v18, v19, v20]
+v22 <- LoadString 'lazy call'
+v23 <- LoadInteger '6'
+v24 <- LoadInteger '1'
+v25 <- LoadInteger '2'
+v26 <- LoadInteger '3'
+v27 <- CallFunction v0, [v24, v25, v26]
+v28 <- LoadString 'normal'
+v29 <- LoadInteger '6'
+v30 <- LoadThis
+v31 <- LoadInteger '1'
+v32 <- LoadInteger '2'
+v33 <- LoadInteger '3'
+v34 <- CallMethod v0, 'call', [v30, v31, v32, v33]
+v35 <- LoadString 'call'
+v36 <- LoadInteger '6'
+v37 <- LoadThis
+v38 <- LoadInteger '1'
+v39 <- LoadInteger '2'
+v40 <- LoadInteger '3'
+v41 <- CreateArray [v38, v39, v40]
+v42 <- CallMethod v0, 'apply', [v37, v41]
+v43 <- LoadString 'apply'
+
+
+function sum(a1, a2, a3) {
+    var result = 0;
+    for (let i7 = 0; i7 < arguments.length; i7++) {
+        result += arguments[i7];
+    }
+    return result;
+}
+sum.call(this, 1, 2, 3);
+sum(1, 2, 3);
+sum.call(this, 1, 2, 3);
+sum.apply(this, [1,2,3]);
+
+FuzzIL program written to corpus/arguments-call-apply.fzil

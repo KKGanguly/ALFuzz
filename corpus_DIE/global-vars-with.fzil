@@ -1,0 +1,44 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+BeginWith v0
+EndWith
+v1 <- LoadString 'fisk'
+v2 <- LoadThis
+SetProperty v2, 'bar', v1
+v3 <- LoadString 'fisk'
+v4 <- CreateNamedVariable 'bar', 'none'
+v5 <- LoadUndefined
+v6 <- CreateNamedVariable 'bar', 'var', v5
+v7 <- LoadString 'fisk'
+v8 <- LoadString 'hest'
+v9 <- CreateNamedVariable 'bar', 'var', v8
+v10 <- LoadString 'hest'
+BeginObjectLiteral
+v11 <- EndObjectLiteral
+BeginWith v11
+    v12 <- LoadString 'fisk'
+    v13 <- LoadThis
+    SetProperty v13, 'baz', v12
+    v14 <- LoadString 'fisk'
+    v15 <- CreateNamedVariable 'baz', 'none'
+    v16 <- LoadUndefined
+    v17 <- CreateNamedVariable 'baz', 'var', v16
+    v18 <- LoadString 'fisk'
+    v19 <- LoadString 'hest'
+    v20 <- CreateNamedVariable 'baz', 'var', v19
+    v21 <- LoadString 'hest'
+EndWith
+
+
+with ({}) {
+}
+this.bar = "fisk";
+var bar;
+var bar = "hest";
+with ({}) {
+    this.baz = "fisk";
+    var baz;
+    var baz = "hest";
+}
+
+FuzzIL program written to corpus/global-vars-with.fzil

@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- BinaryOperation v2, '<<', v1
+    v4 <- LoadInteger '0'
+    v5 <- BinaryOperation v3, '|', v4
+    v6 <- CreateNamedVariable 'g', 'var', v5
+    v7 <- UnaryOperation '-', v6
+    v8 <- BinaryOperation v6, '&', v7
+    v9 <- LoadInteger '1'
+    v10 <- BinaryOperation v8, '-', v9
+    v11 <- LoadInteger '0'
+    v12 <- BinaryOperation v10, '|', v11
+    Return v12
+EndPlainFunction
+v13 <- LoadInteger '3'
+v14 <- CallFunction v0, [v13]
+v15 <- LoadInteger '3'
+v16 <- CallFunction v0, [v15]
+v17 <- LoadInteger '3'
+v18 <- CallFunction v0, [v17]
+v19 <- CallFunction v0, []
+v20 <- LoadInteger '31'
+v21 <- CallFunction v0, [v20]
+v22 <- LoadInteger '31'
+v23 <- CallFunction v0, [v22]
+v24 <- LoadInteger '31'
+v25 <- CallFunction v0, [v24]
+v26 <- CallFunction v0, []
+
+
+function unaryMinusTest(a1) {
+    var g = (1 << a1) | 0;
+    return ((g & -g) - 1) | 0;
+}
+unaryMinusTest(3);
+unaryMinusTest(3);
+unaryMinusTest(3);
+unaryMinusTest();
+unaryMinusTest(31);
+unaryMinusTest(31);
+unaryMinusTest(31);
+unaryMinusTest();
+
+FuzzIL program written to corpus/unary-minus-deopt.fzil

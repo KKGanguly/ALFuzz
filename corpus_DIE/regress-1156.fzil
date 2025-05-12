@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- DeleteElement v1, '1'
+    v4 <- LoadInteger '2'
+    v5 <- DeleteElement v1, '2'
+    v6 <- LoadInteger '3'
+    v7 <- DeleteElement v1, '3'
+    v8 <- LoadInteger '4'
+    v9 <- DeleteElement v1, '4'
+    v10 <- LoadInteger '5'
+    v11 <- DeleteElement v1, '5'
+    v12 <- LoadInteger '0'
+    v13 <- Void_ v12
+    Return v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadInteger '1'
+    v16 <- LoadInteger '2'
+    v17 <- LoadInteger '3'
+    v18 <- CreateArray [v15, v16, v17]
+    v19 <- CreateNamedVariable 'b', 'var', v18
+    v20 <- CallFunction v0, [v19]
+    v21 <- CallFunction v0, [v19]
+EndPlainFunction
+v22 <- CallFunction v14, []
+
+
+function foo(a1) {
+    delete a1[1];
+    delete a1[2];
+    delete a1[3];
+    delete a1[4];
+    delete a1[5];
+    return void 0;
+}
+function call_and_deopt() {
+    var b = [1,2,3];
+    foo(b);
+    foo(b);
+}
+call_and_deopt();
+
+FuzzIL program written to corpus/regress-1156.fzil

@@ -1,0 +1,133 @@
+v0 <- LoadInteger '19'
+v1 <- CreateNamedVariable 'module_size', 'let', v0
+v2 <- LoadInteger '16777200'
+v3 <- BinaryOperation v2, '-', v1
+v4 <- CreateNamedVariable 'string_len', 'let', v3
+v5 <- LoadString 'Allocating backing store: '
+v6 <- BinaryOperation v4, '+', v1
+v7 <- BinaryOperation v5, '+', v6
+v8 <- CreateNamedVariable 'print', 'none'
+v9 <- CallFunction v8, [v7]
+v10 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v11 <- BinaryOperation v4, '+', v1
+v12 <- Construct v10, [v11]
+v13 <- CreateNamedVariable 'backing', 'let', v12
+v14 <- LoadString 'Allocating typed array buffer'
+v15 <- CallFunction v8, [v14]
+v16 <- CreateNamedVariable 'Uint8Array', 'none'
+v17 <- Construct v16, [v13]
+v18 <- CreateNamedVariable 'buffer', 'let', v17
+v19 <- LoadString 'Filling...'
+v20 <- CallFunction v8, [v19]
+v21 <- LoadInteger '65'
+v22 <- CallMethod v18, 'fill', [v21]
+v23 <- LoadString 'Setting up array buffer'
+v24 <- CallFunction v8, [v23]
+v25 <- LoadInteger '0'
+v26 <- LoadInteger '97'
+v27 <- LoadInteger '115'
+v28 <- LoadInteger '109'
+v29 <- CreateArray [v25, v26, v27, v28]
+v30 <- LoadInteger '0'
+v31 <- CallMethod v18, 'set', [v29, v30]
+v32 <- LoadInteger '1'
+v33 <- LoadInteger '0'
+v34 <- LoadInteger '0'
+v35 <- LoadInteger '0'
+v36 <- CreateArray [v32, v33, v34, v35]
+v37 <- LoadInteger '4'
+v38 <- CallMethod v18, 'set', [v36, v37]
+v39 <- LoadInteger '0'
+v40 <- CreateArray [v39]
+v41 <- LoadInteger '8'
+v42 <- CallMethod v18, 'set', [v40, v41]
+v43 <- LoadInteger '128'
+v44 <- LoadInteger '128'
+v45 <- LoadInteger '128'
+v46 <- LoadInteger '128'
+v47 <- LoadInteger '0'
+v48 <- CreateArray [v43, v44, v45, v46, v47]
+v49 <- LoadInteger '9'
+v50 <- CallMethod v18, 'set', [v48, v49]
+v51 <- LoadInteger '1'
+v52 <- BinaryOperation v4, '+', v51
+v53 <- CreateNamedVariable 'x', 'let', v52
+v54 <- LoadInteger '0'
+v55 <- BinaryOperation v53, '>>', v54
+v56 <- LoadInteger '127'
+v57 <- BinaryOperation v55, '&', v56
+v58 <- LoadInteger '128'
+v59 <- BinaryOperation v57, '|', v58
+v60 <- CreateNamedVariable 'b1', 'let', v59
+v61 <- LoadInteger '7'
+v62 <- BinaryOperation v53, '>>', v61
+v63 <- LoadInteger '127'
+v64 <- BinaryOperation v62, '&', v63
+v65 <- LoadInteger '128'
+v66 <- BinaryOperation v64, '|', v65
+v67 <- CreateNamedVariable 'b2', 'let', v66
+v68 <- LoadInteger '14'
+v69 <- BinaryOperation v53, '>>', v68
+v70 <- LoadInteger '127'
+v71 <- BinaryOperation v69, '&', v70
+v72 <- LoadInteger '128'
+v73 <- BinaryOperation v71, '|', v72
+v74 <- CreateNamedVariable 'b3', 'let', v73
+v75 <- LoadInteger '21'
+v76 <- BinaryOperation v53, '>>', v75
+v77 <- LoadInteger '127'
+v78 <- BinaryOperation v76, '&', v77
+v79 <- CreateNamedVariable 'b4', 'let', v78
+v80 <- CreateArray [v60, v67, v74, v79]
+v81 <- LoadInteger '14'
+v82 <- CallMethod v18, 'set', [v80, v81]
+v83 <- LoadString 'Parsing module...'
+v84 <- CallFunction v8, [v83]
+v85 <- CreateNamedVariable 'WebAssembly', 'none'
+v86 <- GetProperty v85, 'Module'
+v87 <- Construct v86, [v18]
+v88 <- CreateNamedVariable 'm', 'let', v87
+v89 <- LoadString 'Triggering!'
+v90 <- CallFunction v8, [v89]
+v91 <- LoadInteger '1'
+v92 <- BinaryOperation v4, '+', v91
+v93 <- LoadString 'A'
+v94 <- CallMethod v93, 'repeat', [v92]
+v95 <- GetProperty v85, 'Module'
+v96 <- CallMethod v95, 'customSections', [v88, v94]
+v97 <- CreateNamedVariable 'c', 'let', v96
+v98 <- LoadInteger '0'
+v99 <- GetProperty v97, 'length'
+
+
+let module_size = 19;
+let string_len = 16777200 - module_size;
+print("Allocating backing store: " + (string_len + module_size));
+const v12 = new ArrayBuffer(string_len + module_size);
+let backing = v12;
+print("Allocating typed array buffer");
+const v17 = new Uint8Array(backing);
+let buffer = v17;
+print("Filling...");
+buffer.fill(65);
+print("Setting up array buffer");
+buffer.set([0,97,115,109], 0);
+buffer.set([1,0,0,0], 4);
+buffer.set([0], 8);
+buffer.set([128,128,128,128,0], 9);
+let x = string_len + 1;
+let b1 = ((x >> 0) & 127) | 128;
+let b2 = ((x >> 7) & 127) | 128;
+let b3 = ((x >> 14) & 127) | 128;
+let b4 = (x >> 21) & 127;
+buffer.set([b1,b2,b3,b4], 14);
+print("Parsing module...");
+const t20 = WebAssembly.Module;
+const v87 = new t20(buffer);
+let m = v87;
+print("Triggering!");
+const v94 = ("A").repeat(string_len + 1);
+let c = WebAssembly.Module.customSections(m, v94);
+c.length;
+
+FuzzIL program written to corpus/regress-789952.fzil

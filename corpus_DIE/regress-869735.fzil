@@ -1,0 +1,20 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadArguments
+    v2 <- GetProperty v1, 'length'
+    Return v2
+EndPlainFunction
+v3 <- CreateArray []
+v4 <- CreateNamedVariable 'a', 'var', v3
+v5 <- LoadInteger '81832'
+SetProperty v4, 'length', v5
+v6 <- CallFunctionWithSpread v0, [...v4]
+
+
+function f() {
+    return arguments.length;
+}
+var a = [];
+a.length = 81832;
+f(...a);
+
+FuzzIL program written to corpus/regress-869735.fzil

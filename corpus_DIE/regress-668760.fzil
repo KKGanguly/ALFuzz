@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        v1 <- CreateNamedVariable 'o', 'none'
+    BeginCatch -> v2
+        Return v2
+    EndTryCatch
+    v3 <- LoadInteger '0'
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '42'
+    ThrowException v5
+EndPlainFunction
+v6 <- LoadString 'o'
+v7 <- LoadThis
+v8 <- CallMethod v7, '__defineGetter__', [v6, v4]
+v9 <- CallFunction v0, []
+v10 <- CallFunction v0, []
+v11 <- LoadInteger '42'
+v12 <- CallFunction v0, []
+
+
+function f() {
+    try {
+    } catch(e2) {
+        return e2;
+    }
+    return 0;
+}
+function deopt() {
+    throw 42;
+}
+this.__defineGetter__("o", deopt);
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-668760.fzil

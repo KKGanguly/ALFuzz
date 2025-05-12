@@ -1,0 +1,22 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '65536'
+v2 <- CallFunction v0, [v1]
+v3 <- GetProperty v0, 'of'
+v4 <- CallMethod v3, 'apply', [v0, v2]
+v5 <- CallMethod v0, 'isArray', [v4]
+v6 <- LoadBoolean 'true'
+v7 <- LoadNull
+v8 <- LoadInteger '65536'
+v9 <- CallFunction v0, [v8]
+v10 <- GetProperty v0, 'of'
+v11 <- CallMethod v10, 'apply', [v7, v9]
+v12 <- CallMethod v0, 'isArray', [v11]
+v13 <- LoadBoolean 'true'
+
+
+const v2 = Array(65536);
+Array.isArray(Array.of.apply(Array, v2));
+const v9 = Array(65536);
+Array.isArray(Array.of.apply(null, v9));
+
+FuzzIL program written to corpus/regress-803750.fzil

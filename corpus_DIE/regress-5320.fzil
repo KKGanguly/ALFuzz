@@ -1,0 +1,76 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '42'
+    v3 <- LoadInteger '2'
+    v4 <- UnaryOperation '-', v3
+    v5 <- CallFunction v1, [v2, v4]
+    v6 <- LoadInteger '31'
+    v7 <- LoadUndefined
+    v8 <- CallFunction v1, [v6, v7]
+    v9 <- LoadInteger '1'
+    v10 <- UnaryOperation '-', v9
+    v11 <- LoadFloat '2.1'
+    v12 <- CallFunction v1, [v10, v11]
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14, v15
+    v16 <- BinaryOperation v14, '>>', v15
+    Return v16
+EndPlainFunction
+v17 <- CallFunction v0, [v13]
+v18 <- BeginPlainFunction -> v19, v20
+    v21 <- BinaryOperation v19, '>>>', v20
+    Return v21
+EndPlainFunction
+v22 <- CallFunction v0, [v18]
+v23 <- BeginPlainFunction -> v24, v25
+    v26 <- BinaryOperation v24, '<<', v25
+    Return v26
+EndPlainFunction
+v27 <- CallFunction v0, [v23]
+v28 <- BeginPlainFunction -> v29, v30
+    v31 <- BinaryOperation v29, '&', v30
+    Return v31
+EndPlainFunction
+v32 <- CallFunction v0, [v28]
+v33 <- BeginPlainFunction -> v34, v35
+    v36 <- BinaryOperation v34, '|', v35
+    Return v36
+EndPlainFunction
+v37 <- CallFunction v0, [v33]
+v38 <- BeginPlainFunction -> v39, v40
+    v41 <- BinaryOperation v39, '^', v40
+    Return v41
+EndPlainFunction
+v42 <- CallFunction v0, [v38]
+
+
+function OptimizeTruncatingBinaryOp(a1) {
+    a1(42, -2);
+    a1(31, undefined);
+    a1(-1, 2.1);
+}
+function f13(a14, a15) {
+    return a14 >> a15;
+}
+OptimizeTruncatingBinaryOp(f13);
+function f18(a19, a20) {
+    return a19 >>> a20;
+}
+OptimizeTruncatingBinaryOp(f18);
+function f23(a24, a25) {
+    return a24 << a25;
+}
+OptimizeTruncatingBinaryOp(f23);
+function f28(a29, a30) {
+    return a29 & a30;
+}
+OptimizeTruncatingBinaryOp(f28);
+function f33(a34, a35) {
+    return a34 | a35;
+}
+OptimizeTruncatingBinaryOp(f33);
+function f38(a39, a40) {
+    return a39 ^ a40;
+}
+OptimizeTruncatingBinaryOp(f38);
+
+FuzzIL program written to corpus/regress-5320.fzil

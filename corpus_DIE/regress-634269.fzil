@@ -1,0 +1,29 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable '__v_1', 'none'
+Reassign v2, v1
+v3 <- CreateNamedVariable '__v_1', 'none'
+v4 <- GetProperty v3, '__proto__'
+v5 <- LoadString 'length'
+v6 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'defineProperty', [v4, v5, v7]
+v10 <- Construct v0, []
+v11 <- LoadInteger '2'
+v12 <- CreateNamedVariable 'Array', 'none'
+v13 <- GetProperty v12, 'prototype'
+v14 <- GetProperty v13, 'includes'
+v15 <- CallMethod v14, 'call', [v10, v11]
+
+
+const v1 = new Uint8Array();
+__v_1 = v1;
+const v4 = __v_1.__proto__;
+Object.defineProperty(v4, "length", { value: 42 });
+const v10 = new Uint8Array();
+Array.prototype.includes.call(v10, 2);
+
+FuzzIL program written to corpus/regress-634269.fzil

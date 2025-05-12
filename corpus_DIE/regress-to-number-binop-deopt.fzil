@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadInteger '0'
+    v5 <- BinaryOperation v3, '|', v4
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- UnaryOperation '+', v7
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- CreateNamedVariable 'Symbol', 'none'
+    v11 <- CallFunction v10, []
+    v12 <- UnaryOperation '+', v11
+    Return v12
+EndPlainFunction
+v13 <- CallFunction v9, []
+v14 <- CreateNamedVariable 'TypeError', 'none'
+v15 <- LoadInteger '1'
+v16 <- CallFunction v0, [v2]
+v17 <- CallFunction v2, [v16]
+v18 <- LoadFloat '1.1'
+v19 <- CallFunction v0, [v6]
+v20 <- CallFunction v6, [v19]
+
+
+function deopt(a1) {
+}
+function or_zero(a3) {
+    return a3 | 0;
+}
+function multiply_one(a7) {
+    return +a7;
+}
+function multiply_one_symbol() {
+    return +Symbol();
+}
+multiply_one_symbol();
+or_zero(deopt(or_zero));
+multiply_one(deopt(multiply_one));
+
+FuzzIL program written to corpus/regress-to-number-binop-deopt.fzil

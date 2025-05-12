@@ -1,0 +1,98 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadThis
+    v2 <- TestInstanceOf v1, v0
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadThis
+    v5 <- TestInstanceOf v4, v3
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+EndPlainFunction
+v7 <- Construct v6, []
+v8 <- CreateNamedVariable 'o1', 'var', v7
+v9 <- LoadString 't'
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadThis
+    v12 <- GetProperty v8, 'constructor'
+    v13 <- TestInstanceOf v11, v12
+    Return v13
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v10
+v14 <- EndObjectLiteral
+v15 <- CreateNamedVariable 'Object', 'none'
+v16 <- CallMethod v15, 'defineProperty', [v8, v9, v14]
+v17 <- BeginPlainFunction -> 
+EndPlainFunction
+v18 <- Construct v17, []
+v19 <- CreateNamedVariable 'o2', 'var', v18
+v20 <- LoadString 't'
+v21 <- BeginPlainFunction -> 
+    v22 <- LoadThis
+    v23 <- GetProperty v8, 'constructor'
+    v24 <- TestInstanceOf v22, v23
+    Return v24
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v21
+v25 <- EndObjectLiteral
+v26 <- CallMethod v15, 'defineProperty', [v19, v20, v25]
+v27 <- BeginPlainFunction -> 
+EndPlainFunction
+v28 <- Construct v27, []
+v29 <- CreateNamedVariable 'o3', 'var', v28
+v30 <- LoadBoolean 'true'
+SetProperty v29, 't', v30
+v31 <- BeginPlainFunction -> v32
+    v33 <- LoadInteger '1'
+    v34 <- GetProperty v32, 't'
+    v35 <- LoadInteger '1'
+    v36 <- LoadInteger '2'
+    v37 <- TernaryOperation v34, v35, v36
+    v38 <- BinaryOperation v33, '+', v37
+    Return v38
+EndPlainFunction
+v39 <- CallFunction v31, [v8]
+v40 <- CallFunction v31, [v8]
+v41 <- CallFunction v31, [v19]
+v42 <- CallFunction v31, [v29]
+
+
+function t1() {
+    return this instanceof t1;
+}
+function t2() {
+    return this instanceof t2;
+}
+function f6() {
+}
+const v7 = new f6();
+var o1 = v7;
+function f10() {
+    return this instanceof o1.constructor;
+}
+Object.defineProperty(o1, "t", { get: f10 });
+function f17() {
+}
+const v18 = new f17();
+var o2 = v18;
+function f21() {
+    return this instanceof o1.constructor;
+}
+Object.defineProperty(o2, "t", { get: f21 });
+function f27() {
+}
+const v28 = new f27();
+var o3 = v28;
+o3.t = true;
+function f(a32) {
+    return 1 + (a32.t ? 1 : 2);
+}
+f(o1);
+f(o1);
+f(o2);
+f(o3);
+
+FuzzIL program written to corpus/polymorphic-accessor-test-context.fzil

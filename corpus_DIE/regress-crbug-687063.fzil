@@ -1,0 +1,64 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'actual', 'const', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '0'
+    SetProperty v1, 'length', v3
+    v4 <- CreateNamedVariable 'Symbol', 'none'
+    v5 <- CallFunction v4, []
+    v6 <- CreateNamedVariable 'lhs', 'const', v5
+    v7 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v8 <- EndObjectLiteral
+    v9 <- BeginPlainFunction -> v10, v11, v12
+        v13 <- CallMethod v1, 'push', [v11]
+        v14 <- LoadUndefined
+        Return v14
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v9
+    v15 <- EndObjectLiteral
+    v16 <- Construct v7, [v8, v15]
+    v17 <- CreateNamedVariable 'rhs', 'const', v16
+    v18 <- Compare v6, '<', v17
+    Return v18
+EndPlainFunction
+v19 <- CallFunction v2, []
+v20 <- CreateNamedVariable 'TypeError', 'none'
+v21 <- CreateNamedVariable 'Symbol', 'none'
+v22 <- GetProperty v21, 'toPrimitive'
+v23 <- LoadString 'valueOf'
+v24 <- LoadString 'toString'
+v25 <- CreateArray [v22, v23, v24]
+v26 <- CallFunction v2, []
+v27 <- GetProperty v21, 'toPrimitive'
+v28 <- LoadString 'valueOf'
+v29 <- LoadString 'toString'
+v30 <- CreateArray [v27, v28, v29]
+v31 <- CallFunction v2, []
+v32 <- GetProperty v21, 'toPrimitive'
+v33 <- LoadString 'valueOf'
+v34 <- LoadString 'toString'
+v35 <- CreateArray [v32, v33, v34]
+
+
+const actual = [];
+function foo() {
+    actual.length = 0;
+    const lhs = Symbol();
+    const v8 = {};
+    function f9(a10, a11, a12) {
+        actual.push(a11);
+        return undefined;
+    }
+    const v16 = new Proxy(v8, { get: f9 });
+    const rhs = v16;
+    return lhs < rhs;
+}
+foo();
+[Symbol.toPrimitive,"valueOf","toString"];
+foo();
+[Symbol.toPrimitive,"valueOf","toString"];
+foo();
+[Symbol.toPrimitive,"valueOf","toString"];
+
+FuzzIL program written to corpus/regress-crbug-687063.fzil

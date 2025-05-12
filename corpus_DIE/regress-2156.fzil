@@ -1,0 +1,23 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'key1', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'key2', 'var', v2
+v4 <- CreateNamedVariable 'WeakMap', 'none'
+v5 <- Construct v4, []
+v6 <- CreateNamedVariable 'map', 'var', v5
+v7 <- LoadInteger '1'
+v8 <- CallMethod v6, 'set', [v1, v7]
+v9 <- LoadInteger '2'
+v10 <- CallMethod v6, 'set', [v3, v9]
+
+
+var key1 = {};
+var key2 = {};
+const v5 = new WeakMap();
+var map = v5;
+map.set(key1, 1);
+map.set(key2, 2);
+
+FuzzIL program written to corpus/regress-2156.fzil

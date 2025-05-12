@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+    EndPlainFunction
+    v4 <- BeginPlainFunction -> 
+        BeginForLoopInitializer
+            v5 <- LoadInteger '0'
+        BeginForLoopCondition -> v6
+            v7 <- LoadInteger '1'
+            v8 <- Compare v6, '<', v7
+        BeginForLoopAfterthought v8 -> v9
+            v10 <- UnaryOperation '++', v9
+        BeginForLoopBody -> v11
+            v12 <- LoadInteger '32768'
+            v13 <- CallFunction v1, []
+            v14 <- CallFunction v1, [v12, v13]
+        EndForLoop
+    EndPlainFunction
+    v15 <- CallFunction v4, []
+EndPlainFunction
+v16 <- CallFunction v0, []
+
+
+function top() {
+    function g(a2, a3) {
+    }
+    function t() {
+        for (let i6 = 0; i6 < 1; ++i6) {
+            g(32768, g());
+        }
+    }
+    t();
+}
+top();
+
+FuzzIL program written to corpus/regress-2249423.fzil

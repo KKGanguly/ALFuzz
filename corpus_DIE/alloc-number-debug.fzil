@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadFloat '1.5'
+    v3 <- CreateNamedVariable 'x', 'var', v2
+    v4 <- LoadFloat '2.5'
+    v5 <- CreateNamedVariable 'y', 'var', v4
+    BeginForLoopInitializer
+        v6 <- LoadInteger '1'
+    BeginForLoopCondition -> v7
+        v8 <- LoadInteger '3'
+        v9 <- Compare v7, '<', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- LoadInteger '1'
+        Update v10, '+', v11
+    BeginForLoopBody -> v12
+        v13 <- BinaryOperation v3, '+', v5
+        v14 <- BinaryOperation v13, '+', v12
+        SetProperty v1, 'val', v14
+    EndForLoop
+    Return v1
+EndPlainFunction
+v15 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `val`, v15
+v16 <- EndObjectLiteral
+v17 <- CreateNamedVariable 'o', 'var', v16
+v18 <- CallFunction v0, [v17]
+
+
+function f(a1) {
+    var x = 1.5;
+    var y = 2.5;
+    for (let i7 = 1; i7 < 3; i7 += 1) {
+        a1.val = (x + y) + i7;
+    }
+    return a1;
+}
+var o = { val: 0 };
+f(o);
+
+FuzzIL program written to corpus/alloc-number-debug.fzil

@@ -1,0 +1,36 @@
+v0 <- LoadInteger '4294967295'
+v1 <- LoadInteger '4'
+v2 <- BinaryOperation v0, '/', v1
+v3 <- CreateNamedVariable 'Math', 'none'
+v4 <- CallMethod v3, 'floor', [v2]
+v5 <- LoadInteger '1'
+v6 <- BinaryOperation v4, '+', v5
+v7 <- CreateNamedVariable 'size', 'var', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- BeginArrowFunction -> 
+        v10 <- CreateNamedVariable 'Uint16Array', 'none'
+        v11 <- Construct v10, [v7]
+        v12 <- CreateNamedVariable 'WebAssembly', 'none'
+        v13 <- CallMethod v12, 'validate', [v11]
+        Return v13
+    EndArrowFunction
+    v14 <- CallFunction v9, []
+    v15 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v16 <- CallFunction v8, []
+v17 <- CreateNamedVariable 'gc', 'none'
+v18 <- CallFunction v17, []
+
+
+var size = Math.floor(4294967295 / 4) + 1;
+function f8() {
+    const v9 = () => {
+        const v11 = new Uint16Array(size);
+        return WebAssembly.validate(v11);
+    };
+    v9();
+}
+f8();
+gc();
+
+FuzzIL program written to corpus/regress-694433.fzil

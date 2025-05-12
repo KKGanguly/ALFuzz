@@ -1,0 +1,58 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- BeginPlainFunction -> 
+            v3 <- LoadString 'caller'
+            v4 <- CreateNamedVariable 'Object', 'none'
+            v5 <- CallMethod v4, 'getOwnPropertyDescriptor', [v2, v3]
+        EndPlainFunction
+        v6 <- LoadInteger '0'
+        v7 <- CreateArray [v6]
+        v8 <- CallMethod v7, 'forEach', [v2]
+    EndPlainFunction
+    v9 <- CallFunction v1, []
+    v10 <- CallFunction v1, []
+    v11 <- CallFunction v1, []
+EndPlainFunction
+v12 <- CallFunction v0, []
+v13 <- BeginPlainFunction -> 
+    v14 <- BeginPlainFunction -> 
+        v15 <- GetProperty v14, 'arguments'
+    EndPlainFunction
+    v16 <- BeginPlainFunction -> 
+        v17 <- LoadInteger '0'
+        v18 <- CreateArray [v17]
+        v19 <- CallMethod v18, 'forEach', [v14]
+    EndPlainFunction
+    v20 <- CallFunction v16, []
+    v21 <- CallFunction v16, []
+    v22 <- CallFunction v16, []
+EndPlainFunction
+v23 <- CallFunction v13, []
+
+
+function FunctionCallerFromInlinedBuiltin() {
+    function f() {
+        function g() {
+            Object.getOwnPropertyDescriptor(g, "caller");
+        }
+        ([0]).forEach(g);
+    }
+    f();
+    f();
+    f();
+}
+FunctionCallerFromInlinedBuiltin();
+function FunctionArgumentsFromInlinedBuiltin() {
+    function g() {
+        g.arguments;
+    }
+    function f() {
+        ([0]).forEach(g);
+    }
+    f();
+    f();
+    f();
+}
+FunctionArgumentsFromInlinedBuiltin();
+
+FuzzIL program written to corpus/regress-crbug-770543.fzil

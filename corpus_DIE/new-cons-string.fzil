@@ -1,0 +1,166 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadString 'abcdefghijklm'
+        v4 <- BinaryOperation v3, '+', v2
+        Return v4
+    EndPlainFunction
+    v5 <- LoadString '0'
+    v6 <- CallFunction v1, [v5]
+    v7 <- CreateNamedVariable 'isOneByteString', 'none'
+    v8 <- CallFunction v7, [v6]
+    v9 <- LoadString '0'
+    v10 <- CallFunction v1, [v9]
+    v11 <- CallFunction v7, [v10]
+    v12 <- LoadString '0'
+    v13 <- CallFunction v1, [v12]
+    v14 <- CallFunction v7, [v13]
+EndPlainFunction
+v15 <- CallFunction v0, []
+v16 <- BeginPlainFunction -> 
+    v17 <- BeginPlainFunction -> v18
+        v19 <- LoadString 'abcdefghijklm'
+        v20 <- BinaryOperation v18, '+', v19
+        Return v20
+    EndPlainFunction
+    v21 <- LoadString '0'
+    v22 <- CallFunction v17, [v21]
+    v23 <- CreateNamedVariable 'isOneByteString', 'none'
+    v24 <- CallFunction v23, [v22]
+    v25 <- LoadString '0'
+    v26 <- CallFunction v17, [v25]
+    v27 <- CallFunction v23, [v26]
+    v28 <- LoadString '0'
+    v29 <- CallFunction v17, [v28]
+    v30 <- CallFunction v23, [v29]
+EndPlainFunction
+v31 <- CallFunction v16, []
+v32 <- BeginPlainFunction -> 
+    v33 <- BeginPlainFunction -> v34
+        v35 <- LoadString 'abcdefghijklm'
+        v36 <- BinaryOperation v35, '+', v34
+        Return v36
+    EndPlainFunction
+    v37 <- LoadString 'ሴ'
+    v38 <- CallFunction v33, [v37]
+    v39 <- CreateNamedVariable 'isOneByteString', 'none'
+    v40 <- CallFunction v39, [v38]
+    v41 <- LoadString 'ሴ'
+    v42 <- CallFunction v33, [v41]
+    v43 <- CallFunction v39, [v42]
+    v44 <- LoadString 'ሴ'
+    v45 <- CallFunction v33, [v44]
+    v46 <- CallFunction v39, [v45]
+EndPlainFunction
+v47 <- CallFunction v32, []
+v48 <- BeginPlainFunction -> 
+    v49 <- BeginPlainFunction -> v50
+        v51 <- LoadString 'abcdefghijklm'
+        v52 <- BinaryOperation v50, '+', v51
+        Return v52
+    EndPlainFunction
+    v53 <- LoadString 'ሴ'
+    v54 <- CallFunction v49, [v53]
+    v55 <- CreateNamedVariable 'isOneByteString', 'none'
+    v56 <- CallFunction v55, [v54]
+    v57 <- LoadString 'ሴ'
+    v58 <- CallFunction v49, [v57]
+    v59 <- CallFunction v55, [v58]
+    v60 <- LoadString 'ሴ'
+    v61 <- CallFunction v49, [v60]
+    v62 <- CallFunction v55, [v61]
+EndPlainFunction
+v63 <- CallFunction v48, []
+v64 <- BeginPlainFunction -> 
+    v65 <- BeginPlainFunction -> v66
+        v67 <- LoadString 'abcdefghijklሴ'
+        v68 <- BinaryOperation v67, '+', v66
+        Return v68
+    EndPlainFunction
+    v69 <- LoadString '0'
+    v70 <- CallFunction v65, [v69]
+    v71 <- CreateNamedVariable 'isOneByteString', 'none'
+    v72 <- CallFunction v71, [v70]
+    v73 <- LoadString '0'
+    v74 <- CallFunction v65, [v73]
+    v75 <- CallFunction v71, [v74]
+    v76 <- LoadString '0'
+    v77 <- CallFunction v65, [v76]
+    v78 <- CallFunction v71, [v77]
+EndPlainFunction
+v79 <- CallFunction v64, []
+v80 <- BeginPlainFunction -> 
+    v81 <- BeginPlainFunction -> v82
+        v83 <- LoadString 'abcdefghijklሴ'
+        v84 <- BinaryOperation v82, '+', v83
+        Return v84
+    EndPlainFunction
+    v85 <- LoadString '0'
+    v86 <- CallFunction v81, [v85]
+    v87 <- CreateNamedVariable 'isOneByteString', 'none'
+    v88 <- CallFunction v87, [v86]
+    v89 <- LoadString '0'
+    v90 <- CallFunction v81, [v89]
+    v91 <- CallFunction v87, [v90]
+    v92 <- LoadString '0'
+    v93 <- CallFunction v81, [v92]
+    v94 <- CallFunction v87, [v93]
+EndPlainFunction
+v95 <- CallFunction v80, []
+
+
+function f0() {
+    function foo(a2) {
+        return "abcdefghijklm" + a2;
+    }
+    isOneByteString(foo("0"));
+    isOneByteString(foo("0"));
+    isOneByteString(foo("0"));
+}
+f0();
+function f16() {
+    function foo(a18) {
+        return a18 + "abcdefghijklm";
+    }
+    isOneByteString(foo("0"));
+    isOneByteString(foo("0"));
+    isOneByteString(foo("0"));
+}
+f16();
+function f32() {
+    function foo(a34) {
+        return "abcdefghijklm" + a34;
+    }
+    isOneByteString(foo("ሴ"));
+    isOneByteString(foo("ሴ"));
+    isOneByteString(foo("ሴ"));
+}
+f32();
+function f48() {
+    function foo(a50) {
+        return a50 + "abcdefghijklm";
+    }
+    isOneByteString(foo("ሴ"));
+    isOneByteString(foo("ሴ"));
+    isOneByteString(foo("ሴ"));
+}
+f48();
+function f64() {
+    function foo(a66) {
+        return "abcdefghijklሴ" + a66;
+    }
+    isOneByteString(foo("0"));
+    isOneByteString(foo("0"));
+    isOneByteString(foo("0"));
+}
+f64();
+function f80() {
+    function foo(a82) {
+        return a82 + "abcdefghijklሴ";
+    }
+    isOneByteString(foo("0"));
+    isOneByteString(foo("0"));
+    isOneByteString(foo("0"));
+}
+f80();
+
+FuzzIL program written to corpus/new-cons-string.fzil

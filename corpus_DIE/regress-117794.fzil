@@ -1,0 +1,78 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CreateNamedVariable 'print', 'none'
+Reassign v1, v0
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4, v5
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- Compare v7, '<', v5
+    BeginForLoopAfterthought v8 -> v9
+        v10 <- UnaryOperation v9, '++'
+    BeginForLoopBody -> v11
+    EndForLoop
+EndPlainFunction
+BeginTry
+    v12 <- CreateNamedVariable 'Object', 'none'
+    v13 <- CallMethod v12, 'keys', []
+BeginCatch -> v14
+    v15 <- GetProperty v14, 'stack'
+    v16 <- CreateNamedVariable 'print', 'none'
+    v17 <- CallFunction v16, [v15]
+EndTryCatch
+v18 <- CreateNamedVariable 'Object', 'none'
+v19 <- Construct v18, []
+v20 <- CreateNamedVariable 'x1', 'var', v19
+BeginTry
+    v21 <- CreateNamedVariable 'Function', 'none'
+    v22 <- LoadString 'A Man Called Horse'
+    v23 <- GetProperty v20, 'd'
+    v24 <- Construct v21, [v22, v23]
+BeginCatch -> v25
+    v26 <- GetProperty v25, 'stack'
+    v27 <- CreateNamedVariable 'print', 'none'
+    v28 <- CallFunction v27, [v26]
+EndTryCatch
+BeginTry
+    v29 <- LoadInteger '48'
+    v30 <- LoadString 'lib1-f1'
+    v31 <- LoadBoolean 'true'
+    v32 <- UnaryOperation '-', v31
+    v33 <- CallMethod v32, 'toPrecision', [v29, v30]
+BeginCatch -> v34
+    v35 <- GetProperty v34, 'stack'
+    v36 <- CreateNamedVariable 'print', 'none'
+    v37 <- CallFunction v36, [v35]
+EndTryCatch
+
+
+function f0() {
+}
+print = f0;
+function constructor() {
+}
+function assertHasOwnProperties(a4, a5) {
+    for (let i7 = 0; i7 < a5; i7++) {
+    }
+}
+try {
+    Object.keys();
+} catch(e14) {
+    print(e14.stack);
+}
+const v19 = new Object();
+var x1 = v19;
+try {
+    new Function("A Man Called Horse", x1.d);
+} catch(e25) {
+    print(e25.stack);
+}
+try {
+    (-true).toPrecision(48, "lib1-f1");
+} catch(e34) {
+    print(e34.stack);
+}
+
+FuzzIL program written to corpus/regress-117794.fzil

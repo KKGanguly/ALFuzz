@@ -1,0 +1,996 @@
+v0 <- BeginPlainFunction -> v1, v2, v3, v4
+    v5 <- BeginPlainFunction -> v6
+        v7 <- CreateNamedVariable 'Proxy', 'none'
+        BeginObjectLiteral
+        v8 <- EndObjectLiteral
+        v9 <- Construct v7, [v8, v6]
+        Return v9
+    EndPlainFunction
+    v10 <- CallFunction v1, [v5, v2, v3, v4]
+    v11 <- BeginPlainFunction -> v12
+        v13 <- CreateNamedVariable 'Proxy', 'none'
+        v14 <- BeginPlainFunction -> 
+        EndPlainFunction
+        v15 <- Construct v13, [v14, v12]
+        Return v15
+    EndPlainFunction
+    v16 <- CallFunction v1, [v11, v2, v3, v4]
+EndPlainFunction
+v17 <- BeginPlainFunction -> v18
+    v19 <- CreateNamedVariable 'TestWithGet2', 'none'
+    v20 <- CallFunction v0, [v19, v18]
+EndPlainFunction
+v21 <- LoadString 'global'
+v22 <- CreateNamedVariable 'c', 'var', v21
+v23 <- LoadString ''
+v24 <- CreateNamedVariable 'key', 'var', v23
+v25 <- BeginPlainFunction -> v26, v27
+    v28 <- LoadString 'local'
+    v29 <- CreateNamedVariable 'b', 'var', v28
+    v30 <- CallFunction v26, [v27]
+    v31 <- CreateNamedVariable 'p', 'var', v30
+    v32 <- LoadString 'onproxy'
+    v33 <- GetProperty v31, 'a'
+    v34 <- LoadUndefined
+    v35 <- GetProperty v31, 'b'
+    v36 <- LoadUndefined
+    v37 <- GetProperty v31, 'c'
+    BeginWith v31
+        v38 <- LoadString 'onproxy'
+        v39 <- CreateNamedVariable 'a', 'none'
+        v40 <- LoadString 'local'
+        v41 <- LoadString 'global'
+    EndWith
+    v42 <- LoadString 'own'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v42
+    v43 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `d`, v43
+    v44 <- EndObjectLiteral
+    v45 <- CreateNamedVariable 'Object', 'none'
+    v46 <- CallMethod v45, 'create', [v31, v44]
+    v47 <- CreateNamedVariable 'o', 'var', v46
+    BeginWith v47
+        v48 <- LoadString 'onproxy'
+        v49 <- CreateNamedVariable 'a', 'none'
+        v50 <- LoadString 'local'
+        v51 <- LoadString 'global'
+        v52 <- LoadString 'own'
+        v53 <- CreateNamedVariable 'd', 'none'
+    EndWith
+EndPlainFunction
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v54, v55, v56
+        Reassign v24, v56
+        v57 <- LoadString 'a'
+        v58 <- Compare v56, '===', v57
+        v59 <- LoadString 'onproxy'
+        v60 <- LoadUndefined
+        v61 <- TernaryOperation v58, v59, v60
+        Return v61
+    EndObjectLiteralMethod
+    BeginObjectLiteralMethod `has` -> v62, v63, v64
+        v65 <- LoadString 'a'
+        v66 <- Compare v64, '===', v65
+        Return v66
+    EndObjectLiteralMethod
+v67 <- EndObjectLiteral
+v68 <- CallFunction v17, [v67]
+v69 <- BeginPlainFunction -> v70, v71
+    v72 <- LoadThis
+    v73 <- CallMethod v72, 'get2', [v70, v71]
+    Return v73
+EndPlainFunction
+v74 <- BeginPlainFunction -> v75, v76
+    Reassign v24, v76
+    v77 <- LoadString 'a'
+    v78 <- Compare v76, '===', v77
+    v79 <- LoadString 'onproxy'
+    v80 <- LoadUndefined
+    v81 <- TernaryOperation v78, v79, v80
+    Return v81
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v69
+    ObjectLiteralAddProperty `get2`, v74
+    BeginObjectLiteralMethod `has` -> v82, v83, v84
+        v85 <- LoadString 'a'
+        v86 <- Compare v84, '===', v85
+        Return v86
+    EndObjectLiteralMethod
+v87 <- EndObjectLiteral
+v88 <- CallFunction v17, [v87]
+v89 <- BeginPlainFunction -> v90
+    v91 <- CreateNamedVariable 'TestWithGetCall2', 'none'
+    v92 <- CallFunction v0, [v91, v90]
+EndPlainFunction
+v93 <- LoadNull
+v94 <- CreateNamedVariable 'receiver', 'var', v93
+v95 <- BeginPlainFunction -> 
+    v96 <- LoadString 'global'
+    Return v96
+EndPlainFunction
+v97 <- CreateNamedVariable 'c', 'var', v95
+v98 <- BeginPlainFunction -> v99, v100
+    v101 <- BeginPlainFunction -> 
+        v102 <- LoadString 'local'
+        Return v102
+    EndPlainFunction
+    v103 <- CreateNamedVariable 'b', 'var', v101
+    v104 <- CallFunction v99, [v100]
+    v105 <- CreateNamedVariable 'p', 'var', v104
+    BeginWith v105
+        v106 <- LoadNull
+        Reassign v94, v106
+        v107 <- LoadString 'onproxy'
+        v108 <- CreateNamedVariable 'a', 'none'
+        v109 <- CallFunction v108, []
+        v110 <- LoadString 'local'
+        v111 <- CallFunction v103, []
+        v112 <- LoadString 'global'
+        v113 <- CallFunction v97, []
+    EndWith
+    v114 <- BeginPlainFunction -> 
+        v115 <- LoadString 'own'
+        Return v115
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v114
+    v116 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `d`, v116
+    v117 <- EndObjectLiteral
+    v118 <- CreateNamedVariable 'Object', 'none'
+    v119 <- CallMethod v118, 'create', [v105, v117]
+    v120 <- CreateNamedVariable 'o', 'var', v119
+    BeginWith v120
+        v121 <- LoadNull
+        Reassign v94, v121
+        v122 <- LoadString 'onproxy'
+        v123 <- CreateNamedVariable 'a', 'none'
+        v124 <- CallFunction v123, []
+        v125 <- LoadString 'local'
+        v126 <- CallFunction v103, []
+        v127 <- LoadString 'global'
+        v128 <- CallFunction v97, []
+        v129 <- LoadString 'own'
+        v130 <- CreateNamedVariable 'd', 'none'
+        v131 <- CallFunction v130, []
+    EndWith
+EndPlainFunction
+v132 <- BeginPlainFunction -> 
+    v133 <- LoadThis
+    Reassign v94, v133
+    v134 <- LoadString 'onproxy'
+    Return v134
+EndPlainFunction
+v135 <- BeginPlainFunction -> v136, v137
+    Reassign v24, v137
+    v138 <- LoadString 'a'
+    v139 <- Compare v137, '===', v138
+    v140 <- LoadUndefined
+    v141 <- TernaryOperation v139, v132, v140
+    Return v141
+EndPlainFunction
+v142 <- BeginPlainFunction -> v143, v144
+    Reassign v24, v144
+    v145 <- LoadString 'a'
+    v146 <- Compare v144, '===', v145
+    Return v146
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v135
+    ObjectLiteralAddProperty `has`, v142
+v147 <- EndObjectLiteral
+v148 <- CallFunction v89, [v147]
+v149 <- BeginPlainFunction -> v150, v151
+    v152 <- LoadThis
+    v153 <- CallMethod v152, 'get2', [v150, v151]
+    Return v153
+EndPlainFunction
+v154 <- BeginPlainFunction -> v155, v156
+    Reassign v24, v156
+    v157 <- LoadString 'a'
+    v158 <- Compare v156, '===', v157
+    v159 <- LoadUndefined
+    v160 <- TernaryOperation v158, v132, v159
+    Return v160
+EndPlainFunction
+v161 <- BeginPlainFunction -> v162, v163
+    Reassign v24, v163
+    v164 <- LoadString 'a'
+    v165 <- Compare v163, '===', v164
+    Return v165
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v149
+    ObjectLiteralAddProperty `get2`, v154
+    ObjectLiteralAddProperty `has`, v161
+v166 <- EndObjectLiteral
+v167 <- CallFunction v89, [v166]
+v168 <- BeginPlainFunction -> v169, v170
+    Reassign v24, v170
+    v171 <- LoadString 'a'
+    v172 <- Compare v170, '===', v171
+    v173 <- LoadUndefined
+    v174 <- TernaryOperation v172, v132, v173
+    Return v174
+EndPlainFunction
+v175 <- BeginPlainFunction -> v176, v177
+    v178 <- LoadThis
+    v179 <- CallMethod v178, 'has2', [v177]
+    Return v179
+EndPlainFunction
+v180 <- BeginPlainFunction -> v181
+    Reassign v24, v181
+    v182 <- LoadString 'a'
+    v183 <- Compare v181, '===', v182
+    Return v183
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v168
+    ObjectLiteralAddProperty `has`, v175
+    ObjectLiteralAddProperty `has2`, v180
+v184 <- EndObjectLiteral
+v185 <- CallFunction v89, [v184]
+v186 <- BeginPlainFunction -> v187, v188
+    Reassign v24, v188
+    v189 <- LoadString 'a'
+    v190 <- Compare v188, '===', v189
+    v191 <- LoadUndefined
+    v192 <- TernaryOperation v190, v132, v191
+    Return v192
+EndPlainFunction
+v193 <- BeginPlainFunction -> v194, v195
+    Reassign v24, v195
+    v196 <- LoadString 'a'
+    v197 <- Compare v195, '===', v196
+    Return v197
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v186
+    ObjectLiteralAddProperty `has`, v193
+v198 <- EndObjectLiteral
+v199 <- CallFunction v89, [v198]
+v200 <- BeginPlainFunction -> v201
+    v202 <- CreateNamedVariable 'TestWithGetCallThrow2', 'none'
+    v203 <- CallFunction v0, [v202, v201]
+EndPlainFunction
+v204 <- BeginPlainFunction -> v205, v206
+    v207 <- BeginPlainFunction -> 
+        v208 <- LoadString 'local'
+        Return v208
+    EndPlainFunction
+    v209 <- CreateNamedVariable 'b', 'var', v207
+    v210 <- CallFunction v205, [v206]
+    v211 <- CreateNamedVariable 'p', 'var', v210
+    BeginWith v211
+        v212 <- BeginPlainFunction -> 
+            v213 <- CreateNamedVariable 'a', 'none'
+            v214 <- CallFunction v213, []
+        EndPlainFunction
+        v215 <- CallFunction v212, []
+        v216 <- LoadString 'myexn'
+        v217 <- LoadString 'local'
+        v218 <- CallFunction v209, []
+        v219 <- LoadString 'global'
+        v220 <- CallFunction v97, []
+    EndWith
+    v221 <- BeginPlainFunction -> 
+        v222 <- LoadString 'own'
+        Return v222
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v221
+    v223 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `d`, v223
+    v224 <- EndObjectLiteral
+    v225 <- CreateNamedVariable 'Object', 'none'
+    v226 <- CallMethod v225, 'create', [v211, v224]
+    v227 <- CreateNamedVariable 'o', 'var', v226
+    BeginWith v227
+        v228 <- BeginPlainFunction -> 
+            v229 <- CreateNamedVariable 'a', 'none'
+            v230 <- CallFunction v229, []
+        EndPlainFunction
+        v231 <- CallFunction v228, []
+        v232 <- LoadString 'myexn'
+        v233 <- LoadString 'local'
+        v234 <- CallFunction v209, []
+        v235 <- LoadString 'global'
+        v236 <- CallFunction v97, []
+        v237 <- LoadString 'own'
+        v238 <- CreateNamedVariable 'd', 'none'
+        v239 <- CallFunction v238, []
+    EndWith
+EndPlainFunction
+v240 <- BeginPlainFunction -> 
+    v241 <- LoadString 'myexn'
+    ThrowException v241
+EndPlainFunction
+v242 <- BeginPlainFunction -> v243, v244
+    v245 <- LoadString 'a'
+    v246 <- Compare v244, '===', v245
+    Return v246
+EndPlainFunction
+v247 <- BeginPlainFunction -> v248, v249
+    Reassign v24, v249
+    v250 <- LoadString 'a'
+    v251 <- Compare v249, '===', v250
+    v252 <- LoadUndefined
+    v253 <- TernaryOperation v251, v240, v252
+    Return v253
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v242
+    ObjectLiteralAddProperty `get`, v247
+v254 <- EndObjectLiteral
+v255 <- CallFunction v200, [v254]
+v256 <- BeginPlainFunction -> v257, v258
+    v259 <- LoadString 'a'
+    v260 <- Compare v258, '===', v259
+    Return v260
+EndPlainFunction
+v261 <- BeginPlainFunction -> v262, v263
+    v264 <- LoadThis
+    v265 <- CallMethod v264, 'get2', [v262, v263]
+    Return v265
+EndPlainFunction
+v266 <- BeginPlainFunction -> v267, v268
+    Reassign v24, v268
+    v269 <- LoadString 'a'
+    v270 <- Compare v268, '===', v269
+    v271 <- LoadUndefined
+    v272 <- TernaryOperation v270, v240, v271
+    Return v272
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v256
+    ObjectLiteralAddProperty `get`, v261
+    ObjectLiteralAddProperty `get2`, v266
+v273 <- EndObjectLiteral
+v274 <- CallFunction v200, [v273]
+v275 <- LoadUndefined
+v276 <- CreateNamedVariable 'key', 'var', v275
+v277 <- LoadUndefined
+v278 <- CreateNamedVariable 'val', 'var', v277
+v279 <- BeginPlainFunction -> v280, v281
+    v282 <- CreateNamedVariable 'TestWithSet2', 'none'
+    v283 <- CallFunction v0, [v282, v280, v281]
+EndPlainFunction
+v284 <- LoadString 'global'
+v285 <- CreateNamedVariable 'c', 'var', v284
+v286 <- BeginPlainFunction -> v287, v288, v289
+    v290 <- LoadString 'local'
+    v291 <- CreateNamedVariable 'b', 'var', v290
+    v292 <- CallFunction v287, [v288]
+    v293 <- CreateNamedVariable 'p', 'var', v292
+    v294 <- LoadUndefined
+    Reassign v278, v294
+    Reassign v276, v294
+    BeginWith v293
+        v295 <- LoadString 'set'
+        v296 <- CreateNamedVariable 'a', 'none'
+        Reassign v296, v295
+        v297 <- LoadString 'a'
+        v298 <- LoadString 'set'
+        v299 <- LoadString 'local'
+        v300 <- LoadString 'global'
+        v301 <- LoadString 'local'
+        Reassign v291, v301
+        v302 <- LoadString 'global'
+        Reassign v285, v302
+        v303 <- LoadString 'a'
+        v304 <- LoadString 'set'
+    EndWith
+    v305 <- UnaryOperation '!', v289
+    BeginIf v305
+        Return
+    EndIf
+    v306 <- LoadString 'own'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v306
+    v307 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `d`, v307
+    v308 <- EndObjectLiteral
+    v309 <- CreateNamedVariable 'Object', 'none'
+    v310 <- CallMethod v309, 'create', [v293, v308]
+    v311 <- CreateNamedVariable 'o', 'var', v310
+    v312 <- LoadUndefined
+    Reassign v278, v312
+    Reassign v276, v312
+    BeginWith v311
+        v313 <- LoadString 'set'
+        v314 <- CreateNamedVariable 'a', 'none'
+        Reassign v314, v313
+        v315 <- LoadString 'a'
+        v316 <- LoadString 'set'
+        v317 <- LoadString 'local'
+        v318 <- LoadString 'global'
+        v319 <- LoadString 'own'
+        v320 <- CreateNamedVariable 'd', 'none'
+        v321 <- LoadString 'local'
+        Reassign v291, v321
+        v322 <- LoadString 'global'
+        Reassign v285, v322
+        v323 <- LoadString 'own'
+        Reassign v320, v323
+        v324 <- LoadString 'a'
+        v325 <- LoadString 'set'
+    EndWith
+EndPlainFunction
+v326 <- BeginPlainFunction -> v327, v328, v329
+    Reassign v276, v328
+    Reassign v278, v329
+    v330 <- LoadBoolean 'true'
+    Return v330
+EndPlainFunction
+v331 <- BeginPlainFunction -> v332, v333
+    v334 <- LoadString 'a'
+    v335 <- Compare v333, '===', v334
+    Return v335
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v326
+    ObjectLiteralAddProperty `has`, v331
+v336 <- EndObjectLiteral
+v337 <- CallFunction v279, [v336]
+v338 <- BeginPlainFunction -> v339, v340, v341
+    v342 <- LoadThis
+    v343 <- CallMethod v342, 'set2', [v339, v340, v341]
+    Return v343
+EndPlainFunction
+v344 <- BeginPlainFunction -> v345, v346, v347
+    Reassign v276, v346
+    Reassign v278, v347
+    v348 <- LoadBoolean 'true'
+    Return v348
+EndPlainFunction
+v349 <- BeginPlainFunction -> v350, v351
+    v352 <- LoadString 'a'
+    v353 <- Compare v351, '===', v352
+    Return v353
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v338
+    ObjectLiteralAddProperty `set2`, v344
+    ObjectLiteralAddProperty `has`, v349
+v354 <- EndObjectLiteral
+v355 <- CallFunction v279, [v354]
+v356 <- BeginPlainFunction -> v357, v358
+    v359 <- LoadString 'a'
+    v360 <- Compare v358, '===', v359
+    Return v360
+EndPlainFunction
+v361 <- BeginPlainFunction -> v362, v363, v364
+    Reassign v276, v363
+    v365 <- GetProperty v364, 'value'
+    Reassign v278, v365
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v356
+    ObjectLiteralAddProperty `defineProperty`, v361
+v366 <- EndObjectLiteral
+v367 <- CallFunction v279, [v366]
+v368 <- BeginPlainFunction -> v369, v370
+    v371 <- LoadThis
+    v372 <- CallMethod v371, 'has2', [v370]
+    Return v372
+EndPlainFunction
+v373 <- BeginPlainFunction -> v374
+    v375 <- LoadString 'a'
+    v376 <- Compare v374, '===', v375
+    Return v376
+EndPlainFunction
+v377 <- BeginPlainFunction -> v378, v379, v380
+    v381 <- LoadThis
+    v382 <- CallMethod v381, 'defineProperty2', [v379, v380]
+EndPlainFunction
+v383 <- BeginPlainFunction -> v384, v385
+    Reassign v276, v384
+    v386 <- GetProperty v385, 'value'
+    Reassign v278, v386
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v368
+    ObjectLiteralAddProperty `has2`, v373
+    ObjectLiteralAddProperty `defineProperty`, v377
+    ObjectLiteralAddProperty `defineProperty2`, v383
+v387 <- EndObjectLiteral
+v388 <- CallFunction v279, [v387]
+v389 <- BeginPlainFunction -> v390, v391
+    v392 <- LoadString 'a'
+    v393 <- Compare v391, '===', v392
+    Return v393
+EndPlainFunction
+v394 <- BeginPlainFunction -> v395, v396, v397
+    Reassign v276, v396
+    v398 <- GetProperty v397, 'value'
+    Reassign v278, v398
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v389
+    ObjectLiteralAddProperty `defineProperty`, v394
+v399 <- EndObjectLiteral
+v400 <- CallFunction v279, [v399]
+v401 <- BeginPlainFunction -> v402, v403
+    v404 <- LoadThis
+    v405 <- CallMethod v404, 'has2', [v403]
+    Return v405
+EndPlainFunction
+v406 <- BeginPlainFunction -> v407
+    v408 <- LoadString 'a'
+    v409 <- Compare v407, '===', v408
+    Return v409
+EndPlainFunction
+v410 <- BeginPlainFunction -> v411, v412, v413
+    Reassign v276, v412
+    Reassign v278, v413
+    v414 <- LoadBoolean 'true'
+    Return v414
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v401
+    ObjectLiteralAddProperty `has2`, v406
+    ObjectLiteralAddProperty `set`, v410
+v415 <- EndObjectLiteral
+v416 <- LoadBoolean 'true'
+v417 <- CallFunction v279, [v415, v416]
+v418 <- BeginPlainFunction -> v419, v420
+    v421 <- LoadString 'a'
+    v422 <- Compare v420, '===', v421
+    Return v422
+EndPlainFunction
+v423 <- BeginPlainFunction -> v424, v425, v426
+    Reassign v276, v425
+    v427 <- GetProperty v426, 'value'
+    Reassign v278, v427
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v418
+    ObjectLiteralAddProperty `defineProperty`, v423
+v428 <- EndObjectLiteral
+v429 <- CallFunction v279, [v428]
+v430 <- BeginPlainFunction -> v431, v432
+    v433 <- CreateNamedVariable 'TestWithSetThrow2', 'none'
+    v434 <- CallFunction v0, [v433, v431, v432]
+EndPlainFunction
+v435 <- BeginPlainFunction -> v436, v437, v438
+    v439 <- CallFunction v436, [v437]
+    v440 <- CreateNamedVariable 'p', 'var', v439
+    v441 <- BeginPlainFunction -> 
+        BeginWith v440
+            v442 <- LoadInteger '1'
+            v443 <- CreateNamedVariable 'a', 'none'
+            Reassign v443, v442
+        EndWith
+    EndPlainFunction
+    v444 <- CallFunction v441, []
+    v445 <- LoadString 'myexn'
+    v446 <- UnaryOperation '!', v438
+    BeginIf v446
+        Return
+    EndIf
+    BeginObjectLiteral
+    v447 <- EndObjectLiteral
+    v448 <- CreateNamedVariable 'Object', 'none'
+    v449 <- CallMethod v448, 'create', [v440, v447]
+    v450 <- CreateNamedVariable 'o', 'var', v449
+    v451 <- BeginPlainFunction -> 
+        BeginWith v450
+            v452 <- LoadInteger '1'
+            v453 <- CreateNamedVariable 'a', 'none'
+            Reassign v453, v452
+        EndWith
+    EndPlainFunction
+    v454 <- CallFunction v451, []
+    v455 <- LoadString 'myexn'
+EndPlainFunction
+v456 <- BeginPlainFunction -> 
+    v457 <- LoadString 'myexn'
+    ThrowException v457
+EndPlainFunction
+v458 <- BeginPlainFunction -> v459, v460
+    v461 <- LoadString 'a'
+    v462 <- Compare v460, '===', v461
+    Return v462
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v456
+    ObjectLiteralAddProperty `has`, v458
+v463 <- EndObjectLiteral
+v464 <- CallFunction v430, [v463]
+v465 <- BeginPlainFunction -> 
+    v466 <- LoadString 'myexn'
+    ThrowException v466
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v465
+v467 <- EndObjectLiteral
+v468 <- CallFunction v430, [v467]
+v469 <- BeginPlainFunction -> 
+    v470 <- LoadString 'myexn'
+    ThrowException v470
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v469
+v471 <- EndObjectLiteral
+v472 <- CallFunction v430, [v471]
+v473 <- BeginPlainFunction -> v474, v475
+    v476 <- LoadString 'a'
+    v477 <- Compare v475, '===', v476
+    Return v477
+EndPlainFunction
+v478 <- BeginPlainFunction -> 
+    v479 <- LoadString 'myexn'
+    ThrowException v479
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v473
+    ObjectLiteralAddProperty `defineProperty`, v478
+v480 <- EndObjectLiteral
+v481 <- CallFunction v430, [v480]
+v482 <- BeginPlainFunction -> v483, v484
+    v485 <- LoadString 'a'
+    v486 <- Compare v484, '===', v485
+    Return v486
+EndPlainFunction
+v487 <- BeginPlainFunction -> 
+    v488 <- LoadString 'myexn'
+    ThrowException v488
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v482
+    ObjectLiteralAddProperty `set`, v487
+v489 <- EndObjectLiteral
+v490 <- LoadBoolean 'true'
+v491 <- CallFunction v430, [v489, v490]
+
+
+function TestWithProxies(a1, a2, a3, a4) {
+    function f5(a6) {
+        const v9 = new Proxy({}, a6);
+        return v9;
+    }
+    a1(f5, a2, a3, a4);
+    function f11(a12) {
+        function f14() {
+        }
+        const v15 = new Proxy(f14, a12);
+        return v15;
+    }
+    a1(f11, a2, a3, a4);
+}
+function TestWithGet(a18) {
+    TestWithProxies(TestWithGet2, a18);
+}
+var c = "global";
+var key = "";
+function TestWithGet2(a26, a27) {
+    var b = "local";
+    var p = a26(a27);
+    p.a;
+    p.b;
+    p.c;
+    with (p) {
+    }
+    const v43 = { value: "own" };
+    var o = Object.create(p, { d: v43 });
+    with (o) {
+    }
+}
+const v67 = {
+    get(a55, a56) {
+        key = a56;
+        return a56 === "a" ? "onproxy" : undefined;
+    },
+    has(a63, a64) {
+        return a64 === "a";
+    },
+};
+TestWithGet(v67);
+function f69(a70, a71) {
+    return this.get2(a70, a71);
+}
+function f74(a75, a76) {
+    key = a76;
+    return a76 === "a" ? "onproxy" : undefined;
+}
+const v87 = {
+    get: f69,
+    get2: f74,
+    has(a83, a84) {
+        return a84 === "a";
+    },
+};
+TestWithGet(v87);
+function TestWithGetCall(a90) {
+    TestWithProxies(TestWithGetCall2, a90);
+}
+var receiver = null;
+function f95() {
+    return "global";
+}
+var c = f95;
+function TestWithGetCall2(a99, a100) {
+    function f101() {
+        return "local";
+    }
+    var b = f101;
+    var p = a99(a100);
+    with (p) {
+        receiver = null;
+        a();
+        b();
+        c();
+    }
+    function f114() {
+        return "own";
+    }
+    const v116 = { value: f114 };
+    var o = Object.create(p, { d: v116 });
+    with (o) {
+        receiver = null;
+        a();
+        b();
+        c();
+        d();
+    }
+}
+function onproxy() {
+    receiver = this;
+    return "onproxy";
+}
+function f135(a136, a137) {
+    key = a137;
+    return a137 === "a" ? onproxy : undefined;
+}
+function f142(a143, a144) {
+    key = a144;
+    return a144 === "a";
+}
+TestWithGetCall({ get: f135, has: f142 });
+function f149(a150, a151) {
+    return this.get2(a150, a151);
+}
+function f154(a155, a156) {
+    key = a156;
+    return a156 === "a" ? onproxy : undefined;
+}
+function f161(a162, a163) {
+    key = a163;
+    return a163 === "a";
+}
+TestWithGetCall({ get: f149, get2: f154, has: f161 });
+function f168(a169, a170) {
+    key = a170;
+    return a170 === "a" ? onproxy : undefined;
+}
+function f175(a176, a177) {
+    return this.has2(a177);
+}
+function f180(a181) {
+    key = a181;
+    return a181 === "a";
+}
+TestWithGetCall({ get: f168, has: f175, has2: f180 });
+function f186(a187, a188) {
+    key = a188;
+    return a188 === "a" ? onproxy : undefined;
+}
+function f193(a194, a195) {
+    key = a195;
+    return a195 === "a";
+}
+TestWithGetCall({ get: f186, has: f193 });
+function TestWithGetCallThrow(a201) {
+    TestWithProxies(TestWithGetCallThrow2, a201);
+}
+function TestWithGetCallThrow2(a205, a206) {
+    function f207() {
+        return "local";
+    }
+    var b = f207;
+    var p = a205(a206);
+    with (p) {
+        function f212() {
+            a();
+        }
+        f212();
+        b();
+        c();
+    }
+    function f221() {
+        return "own";
+    }
+    const v223 = { value: f221 };
+    var o = Object.create(p, { d: v223 });
+    with (o) {
+        function f228() {
+            a();
+        }
+        f228();
+        b();
+        c();
+        d();
+    }
+}
+function onproxythrow() {
+    throw "myexn";
+}
+function f242(a243, a244) {
+    return a244 === "a";
+}
+function f247(a248, a249) {
+    key = a249;
+    return a249 === "a" ? onproxythrow : undefined;
+}
+TestWithGetCallThrow({ has: f242, get: f247 });
+function f256(a257, a258) {
+    return a258 === "a";
+}
+function f261(a262, a263) {
+    return this.get2(a262, a263);
+}
+function f266(a267, a268) {
+    key = a268;
+    return a268 === "a" ? onproxythrow : undefined;
+}
+TestWithGetCallThrow({ has: f256, get: f261, get2: f266 });
+var key;
+var val;
+function TestWithSet(a280, a281) {
+    TestWithProxies(TestWithSet2, a280, a281);
+}
+var c = "global";
+function TestWithSet2(a287, a288, a289) {
+    var b = "local";
+    var p = a287(a288);
+    val = undefined;
+    key = undefined;
+    with (p) {
+        a = "set";
+        b = "local";
+        c = "global";
+    }
+    if (!a289) {
+        return;
+    }
+    const v307 = { value: "own" };
+    var o = Object.create(p, { d: v307 });
+    val = undefined;
+    key = undefined;
+    with (o) {
+        a = "set";
+        b = "local";
+        c = "global";
+        d = "own";
+    }
+}
+function f326(a327, a328, a329) {
+    key = a328;
+    val = a329;
+    return true;
+}
+function f331(a332, a333) {
+    return a333 === "a";
+}
+TestWithSet({ set: f326, has: f331 });
+function f338(a339, a340, a341) {
+    return this.set2(a339, a340, a341);
+}
+function f344(a345, a346, a347) {
+    key = a346;
+    val = a347;
+    return true;
+}
+function f349(a350, a351) {
+    return a351 === "a";
+}
+TestWithSet({ set: f338, set2: f344, has: f349 });
+function f356(a357, a358) {
+    return a358 === "a";
+}
+function f361(a362, a363, a364) {
+    key = a363;
+    val = a364.value;
+}
+TestWithSet({ has: f356, defineProperty: f361 });
+function f368(a369, a370) {
+    return this.has2(a370);
+}
+function f373(a374) {
+    return a374 === "a";
+}
+function f377(a378, a379, a380) {
+    this.defineProperty2(a379, a380);
+}
+function f383(a384, a385) {
+    key = a384;
+    val = a385.value;
+}
+TestWithSet({ has: f368, has2: f373, defineProperty: f377, defineProperty2: f383 });
+function f389(a390, a391) {
+    return a391 === "a";
+}
+function f394(a395, a396, a397) {
+    key = a396;
+    val = a397.value;
+}
+TestWithSet({ has: f389, defineProperty: f394 });
+function f401(a402, a403) {
+    return this.has2(a403);
+}
+function f406(a407) {
+    return a407 === "a";
+}
+function f410(a411, a412, a413) {
+    key = a412;
+    val = a413;
+    return true;
+}
+TestWithSet({ has: f401, has2: f406, set: f410 }, true);
+function f418(a419, a420) {
+    return a420 === "a";
+}
+function f423(a424, a425, a426) {
+    key = a425;
+    val = a426.value;
+}
+TestWithSet({ has: f418, defineProperty: f423 });
+function TestWithSetThrow(a431, a432) {
+    TestWithProxies(TestWithSetThrow2, a431, a432);
+}
+function TestWithSetThrow2(a436, a437, a438) {
+    var p = a436(a437);
+    function f441() {
+        with (p) {
+            a = 1;
+        }
+    }
+    f441();
+    if (!a438) {
+        return;
+    }
+    var o = Object.create(p, {});
+    function f451() {
+        with (o) {
+            a = 1;
+        }
+    }
+    f451();
+}
+function f456() {
+    throw "myexn";
+}
+function f458(a459, a460) {
+    return a460 === "a";
+}
+TestWithSetThrow({ set: f456, has: f458 });
+function f465() {
+    throw "myexn";
+}
+TestWithSetThrow({ has: f465 });
+function f469() {
+    throw "myexn";
+}
+TestWithSetThrow({ has: f469 });
+function f473(a474, a475) {
+    return a475 === "a";
+}
+function f478() {
+    throw "myexn";
+}
+TestWithSetThrow({ has: f473, defineProperty: f478 });
+function f482(a483, a484) {
+    return a484 === "a";
+}
+function f487() {
+    throw "myexn";
+}
+TestWithSetThrow({ has: f482, set: f487 }, true);
+
+FuzzIL program written to corpus/proxies-with.fzil

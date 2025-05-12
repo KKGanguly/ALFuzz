@@ -1,0 +1,81 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CreateNamedVariable 'Uint8Array', 'none'
+v2 <- GetProperty v1, 'prototype'
+v3 <- GetProperty v0, 'prototype'
+SetProperty v3, '__proto__', v2
+SetProperty v0, '__proto__', v1
+v4 <- LoadInteger '10'
+v5 <- Construct v1, [v4]
+v6 <- CreateNamedVariable 'buf', 'var', v5
+v7 <- GetProperty v0, 'prototype'
+SetProperty v6, '__proto__', v7
+v8 <- BeginArrowFunction -> 
+    v9 <- LoadInteger '2'
+    v10 <- CallMethod v6, 'subarray', [v9]
+    Return v10
+EndArrowFunction
+v11 <- CallFunction v8, []
+v12 <- CreateNamedVariable 'TypeError', 'none'
+v13 <- CreateArray []
+v14 <- CreateNamedVariable 'seen_args', 'let', v13
+v15 <- BeginPlainFunction -> v16
+    v17 <- CallMethod v14, 'push', [v16]
+    v18 <- Construct v1, [v16]
+    v19 <- CreateNamedVariable 'arr', 'var', v18
+    v20 <- GetProperty v15, 'prototype'
+    SetProperty v19, '__proto__', v20
+    Return v19
+EndPlainFunction
+v21 <- GetProperty v1, 'prototype'
+v22 <- GetProperty v15, 'prototype'
+SetProperty v22, '__proto__', v21
+SetProperty v15, '__proto__', v1
+v23 <- LoadInteger '10'
+v24 <- Construct v15, [v23]
+v25 <- CreateNamedVariable 'buf3', 'var', v24
+v26 <- LoadInteger '10'
+v27 <- CreateArray [v26]
+v28 <- LoadInteger '2'
+v29 <- CallMethod v25, 'subarray', [v28]
+v30 <- CreateNamedVariable 'buf4', 'var', v29
+v31 <- LoadInteger '10'
+v32 <- GetProperty v30, 'length'
+v33 <- LoadInteger '10'
+v34 <- GetProperty v25, 'buffer'
+v35 <- CreateArray [v33, v34]
+
+
+function FirstBuffer() {
+}
+const v2 = Uint8Array.prototype;
+const t3 = FirstBuffer.prototype;
+t3.__proto__ = v2;
+FirstBuffer.__proto__ = Uint8Array;
+const v5 = new Uint8Array(10);
+var buf = v5;
+buf.__proto__ = FirstBuffer.prototype;
+const v8 = () => {
+    return buf.subarray(2);
+};
+v8();
+let seen_args = [];
+function SecondBuffer(a16) {
+    seen_args.push(a16);
+    const v18 = new Uint8Array(a16);
+    var arr = v18;
+    arr.__proto__ = SecondBuffer.prototype;
+    return arr;
+}
+const v21 = Uint8Array.prototype;
+const t22 = SecondBuffer.prototype;
+t22.__proto__ = v21;
+SecondBuffer.__proto__ = Uint8Array;
+const v24 = new SecondBuffer(10);
+var buf3 = v24;
+[10];
+var buf4 = buf3.subarray(2);
+buf4.length;
+[10,buf3.buffer];
+
+FuzzIL program written to corpus/regress-4665.fzil

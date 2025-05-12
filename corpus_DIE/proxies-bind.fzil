@@ -1,0 +1,450 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'log', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'logger', 'var', v2
+v4 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- Construct v4, [v5, v3]
+v7 <- CreateNamedVariable 'handler', 'var', v6
+v8 <- BeginPlainFunction -> v9, v10, v11
+    v12 <- BeginPlainFunction -> 
+        v13 <- LoadArguments
+        v14 <- CreateArrayWithSpread [v10, ...v13]
+        v15 <- CallMethod v1, 'push', [v14]
+        v16 <- LoadArguments
+        v17 <- CreateNamedVariable 'Reflect', 'none'
+        v18 <- CallComputedMethodWithSpread v17, v10, [...v16]
+        Return v18
+    EndPlainFunction
+    Return v12
+EndPlainFunction
+SetProperty v3, 'get', v8
+v19 <- BeginPlainFunction -> v20, v21, v22
+    Directive 'use strict'
+    v23 <- LoadThis
+    Return v23
+EndPlainFunction
+v24 <- CreateNamedVariable 'target', 'var', v19
+v25 <- Construct v4, [v24, v7]
+v26 <- CreateNamedVariable 'proxy', 'var', v25
+v27 <- CreateNamedVariable 'Symbol', 'none'
+v28 <- CallFunction v27, []
+v29 <- CreateNamedVariable 'this_value', 'var', v28
+v30 <- LoadInteger '0'
+SetProperty v1, 'length', v30
+v31 <- LoadString 'foo'
+v32 <- CreateNamedVariable 'Function', 'none'
+v33 <- GetProperty v32, 'prototype'
+v34 <- GetProperty v33, 'bind'
+v35 <- CallMethod v34, 'call', [v26, v29, v31]
+v36 <- CreateNamedVariable 'result', 'none'
+Reassign v36, v35
+v37 <- LoadInteger '2'
+v38 <- CreateNamedVariable 'result', 'none'
+v39 <- GetProperty v38, 'length'
+v40 <- GetProperty v24, '__proto__'
+v41 <- GetProperty v38, '__proto__'
+v42 <- CallFunction v38, []
+v43 <- LoadInteger '5'
+v44 <- GetProperty v1, 'length'
+BeginForInLoop v1 -> v45
+    v46 <- GetComputedProperty v1, v45
+    v47 <- GetElement v46, '1'
+EndForInLoop
+v48 <- LoadString 'getPrototypeOf'
+v49 <- CreateArray [v48, v24]
+v50 <- GetElement v1, '0'
+v51 <- LoadString 'getOwnPropertyDescriptor'
+v52 <- LoadString 'length'
+v53 <- CreateArray [v51, v24, v52]
+v54 <- GetElement v1, '1'
+v55 <- LoadString 'get'
+v56 <- LoadString 'length'
+v57 <- CreateArray [v55, v24, v56, v26]
+v58 <- GetElement v1, '2'
+v59 <- LoadString 'get'
+v60 <- LoadString 'name'
+v61 <- CreateArray [v59, v24, v60, v26]
+v62 <- GetElement v1, '3'
+v63 <- LoadString 'apply'
+v64 <- LoadString 'foo'
+v65 <- CreateArray [v64]
+v66 <- CreateArray [v63, v24, v29, v65]
+v67 <- GetElement v1, '4'
+v68 <- Construct v24, []
+v69 <- Construct v38, []
+v70 <- LoadInteger '0'
+SetProperty v1, 'length', v70
+v71 <- LoadString 'gaga'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `radio`, v71
+v72 <- EndObjectLiteral
+SetProperty v24, '__proto__', v72
+v73 <- LoadString 'foo'
+v74 <- GetProperty v32, 'prototype'
+v75 <- GetProperty v74, 'bind'
+v76 <- CallMethod v75, 'call', [v26, v29, v73]
+Reassign v38, v76
+v77 <- LoadInteger '2'
+v78 <- GetProperty v38, 'length'
+v79 <- GetProperty v24, '__proto__'
+v80 <- GetProperty v38, '__proto__'
+v81 <- CallFunction v38, []
+v82 <- LoadInteger '5'
+v83 <- GetProperty v1, 'length'
+BeginForInLoop v1 -> v84
+    v85 <- GetComputedProperty v1, v84
+    v86 <- GetElement v85, '1'
+EndForInLoop
+v87 <- LoadString 'getPrototypeOf'
+v88 <- CreateArray [v87, v24]
+v89 <- GetElement v1, '0'
+v90 <- LoadString 'getOwnPropertyDescriptor'
+v91 <- LoadString 'length'
+v92 <- CreateArray [v90, v24, v91]
+v93 <- GetElement v1, '1'
+v94 <- LoadString 'get'
+v95 <- LoadString 'length'
+v96 <- CreateArray [v94, v24, v95, v26]
+v97 <- GetElement v1, '2'
+v98 <- LoadString 'get'
+v99 <- LoadString 'name'
+v100 <- CreateArray [v98, v24, v99, v26]
+v101 <- GetElement v1, '3'
+v102 <- LoadString 'apply'
+v103 <- LoadString 'foo'
+v104 <- CreateArray [v103]
+v105 <- CreateArray [v102, v24, v29, v104]
+v106 <- GetElement v1, '4'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v107
+        v108 <- LoadInteger '42'
+        Return v108
+    EndObjectLiteralMethod
+    BeginObjectLiteralMethod `getOwnPropertyDescriptor` -> v109
+        v110 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `configurable`, v110
+        v111 <- EndObjectLiteral
+        Return v111
+    EndObjectLiteralMethod
+v112 <- EndObjectLiteral
+Reassign v7, v112
+v113 <- Construct v4, [v24, v7]
+Reassign v26, v113
+v114 <- LoadString 'foo'
+v115 <- GetProperty v32, 'prototype'
+v116 <- GetProperty v115, 'bind'
+v117 <- CallMethod v116, 'call', [v26, v29, v114]
+Reassign v38, v117
+v118 <- LoadInteger '41'
+v119 <- GetProperty v38, 'length'
+v120 <- CallFunction v38, []
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v121
+        v122 <- LoadInteger '2'
+        v123 <- LoadInteger '100'
+        v124 <- CreateNamedVariable 'Math', 'none'
+        v125 <- CallMethod v124, 'pow', [v122, v123]
+        Return v125
+    EndObjectLiteralMethod
+    BeginObjectLiteralMethod `getOwnPropertyDescriptor` -> v126
+        v127 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `configurable`, v127
+        v128 <- EndObjectLiteral
+        Return v128
+    EndObjectLiteralMethod
+v129 <- EndObjectLiteral
+Reassign v7, v129
+v130 <- Construct v4, [v24, v7]
+Reassign v26, v130
+v131 <- LoadString 'foo'
+v132 <- GetProperty v32, 'prototype'
+v133 <- GetProperty v132, 'bind'
+v134 <- CallMethod v133, 'call', [v26, v29, v131]
+Reassign v38, v134
+v135 <- LoadInteger '2'
+v136 <- LoadInteger '100'
+v137 <- CreateNamedVariable 'Math', 'none'
+v138 <- CallMethod v137, 'pow', [v135, v136]
+v139 <- LoadInteger '1'
+v140 <- BinaryOperation v138, '-', v139
+v141 <- GetProperty v38, 'length'
+v142 <- CallFunction v38, []
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v143
+        v144 <- LoadInteger '1'
+        v145 <- LoadInteger '0'
+        v146 <- BinaryOperation v144, '/', v145
+        Return v146
+    EndObjectLiteralMethod
+    BeginObjectLiteralMethod `getOwnPropertyDescriptor` -> v147
+        v148 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `configurable`, v148
+        v149 <- EndObjectLiteral
+        Return v149
+    EndObjectLiteralMethod
+v150 <- EndObjectLiteral
+Reassign v7, v150
+v151 <- Construct v4, [v24, v7]
+Reassign v26, v151
+v152 <- LoadString 'foo'
+v153 <- GetProperty v32, 'prototype'
+v154 <- GetProperty v153, 'bind'
+v155 <- CallMethod v154, 'call', [v26, v29, v152]
+Reassign v38, v155
+v156 <- LoadInteger '1'
+v157 <- LoadInteger '0'
+v158 <- BinaryOperation v156, '/', v157
+v159 <- GetProperty v38, 'length'
+v160 <- CallFunction v38, []
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v161
+        v162 <- LoadFloat '4.2'
+        Return v162
+    EndObjectLiteralMethod
+    BeginObjectLiteralMethod `getOwnPropertyDescriptor` -> v163
+        v164 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `configurable`, v164
+        v165 <- EndObjectLiteral
+        Return v165
+    EndObjectLiteralMethod
+v166 <- EndObjectLiteral
+Reassign v7, v166
+v167 <- Construct v4, [v24, v7]
+Reassign v26, v167
+v168 <- LoadString 'foo'
+v169 <- GetProperty v32, 'prototype'
+v170 <- GetProperty v169, 'bind'
+v171 <- CallMethod v170, 'call', [v26, v29, v168]
+Reassign v38, v171
+v172 <- LoadInteger '3'
+v173 <- GetProperty v38, 'length'
+v174 <- CallFunction v38, []
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v175
+    EndObjectLiteralMethod
+    BeginObjectLiteralMethod `getOwnPropertyDescriptor` -> v176
+        v177 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `configurable`, v177
+        v178 <- EndObjectLiteral
+        Return v178
+    EndObjectLiteralMethod
+v179 <- EndObjectLiteral
+Reassign v7, v179
+v180 <- Construct v4, [v24, v7]
+Reassign v26, v180
+v181 <- LoadString 'foo'
+v182 <- GetProperty v32, 'prototype'
+v183 <- GetProperty v182, 'bind'
+v184 <- CallMethod v183, 'call', [v26, v29, v181]
+Reassign v38, v184
+v185 <- LoadInteger '0'
+v186 <- GetProperty v38, 'length'
+v187 <- CallFunction v38, []
+v188 <- BeginArrowFunction -> 
+    BeginObjectLiteral
+    v189 <- EndObjectLiteral
+    BeginObjectLiteral
+    v190 <- EndObjectLiteral
+    v191 <- Construct v4, [v189, v190]
+    v192 <- GetProperty v32, 'prototype'
+    v193 <- GetProperty v192, 'bind'
+    v194 <- CallMethod v193, 'call', [v191]
+    Return v194
+EndArrowFunction
+v195 <- CallFunction v188, []
+v196 <- CreateNamedVariable 'TypeError', 'none'
+v197 <- BeginArrowFunction -> 
+    v198 <- CreateArray []
+    BeginObjectLiteral
+    v199 <- EndObjectLiteral
+    v200 <- Construct v4, [v198, v199]
+    v201 <- GetProperty v32, 'prototype'
+    v202 <- GetProperty v201, 'bind'
+    v203 <- CallMethod v202, 'call', [v200]
+    Return v203
+EndArrowFunction
+v204 <- CallFunction v197, []
+v205 <- BeginArrowFunction -> 
+    v206 <- LoadInteger '42'
+    Return v206
+EndArrowFunction
+v207 <- LoadString 'foo'
+v208 <- GetProperty v32, 'prototype'
+v209 <- GetProperty v208, 'bind'
+v210 <- CallMethod v209, 'call', [v205, v29, v207]
+Reassign v38, v210
+v211 <- LoadInteger '42'
+v212 <- CallFunction v38, []
+v213 <- BeginArrowFunction -> 
+    v214 <- Construct v38, []
+    Return v214
+EndArrowFunction
+v215 <- CallFunction v213, []
+
+
+var log = [];
+var logger = {};
+const v6 = new Proxy({}, logger);
+var handler = v6;
+function f8(a9, a10, a11) {
+    function f12() {
+        log.push([a10,...arguments]);
+        return Reflect[a10](...arguments);
+    }
+    return f12;
+}
+logger.get = f8;
+function f19(a20, a21, a22) {
+    'use strict';
+    return this;
+}
+var target = f19;
+const v25 = new Proxy(target, handler);
+var proxy = v25;
+var this_value = Symbol();
+log.length = 0;
+result = Function.prototype.bind.call(proxy, this_value, "foo");
+result.length;
+target.__proto__;
+result.__proto__;
+result();
+log.length;
+for (const v45 in log) {
+    log[v45][1];
+}
+["getPrototypeOf",target];
+log[0];
+["getOwnPropertyDescriptor",target,"length"];
+log[1];
+["get",target,"length",proxy];
+log[2];
+["get",target,"name",proxy];
+log[3];
+["apply",target,this_value,["foo"]];
+log[4];
+new target();
+new result();
+log.length = 0;
+target.__proto__ = { radio: "gaga" };
+result = Function.prototype.bind.call(proxy, this_value, "foo");
+result.length;
+target.__proto__;
+result.__proto__;
+result();
+log.length;
+for (const v84 in log) {
+    log[v84][1];
+}
+["getPrototypeOf",target];
+log[0];
+["getOwnPropertyDescriptor",target,"length"];
+log[1];
+["get",target,"length",proxy];
+log[2];
+["get",target,"name",proxy];
+log[3];
+["apply",target,this_value,["foo"]];
+log[4];
+const v112 = {
+    get() {
+        return 42;
+    },
+    getOwnPropertyDescriptor() {
+        return { configurable: true };
+    },
+};
+handler = v112;
+const v113 = new Proxy(target, handler);
+proxy = v113;
+result = Function.prototype.bind.call(proxy, this_value, "foo");
+result.length;
+result();
+const v129 = {
+    get() {
+        return Math.pow(2, 100);
+    },
+    getOwnPropertyDescriptor() {
+        return { configurable: true };
+    },
+};
+handler = v129;
+const v130 = new Proxy(target, handler);
+proxy = v130;
+result = Function.prototype.bind.call(proxy, this_value, "foo");
+Math.pow(2, 100) - 1;
+result.length;
+result();
+const v150 = {
+    get() {
+        return 1 / 0;
+    },
+    getOwnPropertyDescriptor() {
+        return { configurable: true };
+    },
+};
+handler = v150;
+const v151 = new Proxy(target, handler);
+proxy = v151;
+result = Function.prototype.bind.call(proxy, this_value, "foo");
+1 / 0;
+result.length;
+result();
+const v166 = {
+    get() {
+        return 4.2;
+    },
+    getOwnPropertyDescriptor() {
+        return { configurable: true };
+    },
+};
+handler = v166;
+const v167 = new Proxy(target, handler);
+proxy = v167;
+result = Function.prototype.bind.call(proxy, this_value, "foo");
+result.length;
+result();
+const v179 = {
+    get() {
+    },
+    getOwnPropertyDescriptor() {
+        return { configurable: true };
+    },
+};
+handler = v179;
+const v180 = new Proxy(target, handler);
+proxy = v180;
+result = Function.prototype.bind.call(proxy, this_value, "foo");
+result.length;
+result();
+const v188 = () => {
+    const v189 = {};
+    const v191 = new Proxy(v189, {});
+    return Function.prototype.bind.call(v191);
+};
+v188();
+const v197 = () => {
+    const v198 = [];
+    const v200 = new Proxy(v198, {});
+    return Function.prototype.bind.call(v200);
+};
+v197();
+const v205 = () => {
+    return 42;
+};
+result = Function.prototype.bind.call(v205, this_value, "foo");
+result();
+const v213 = () => {
+    const v214 = new result();
+    return v214;
+};
+v213();
+
+FuzzIL program written to corpus/proxies-bind.fzil

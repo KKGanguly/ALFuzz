@@ -1,0 +1,323 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '30'
+v2 <- BinaryOperation v0, '<<', v1
+v3 <- LoadInteger '1'
+v4 <- BinaryOperation v2, '-', v3
+v5 <- CreateNamedVariable 'kMax31BitSmi', 'let', v4
+v6 <- LoadInteger '1'
+v7 <- LoadInteger '1024'
+v8 <- BinaryOperation v6, '*', v7
+v9 <- LoadInteger '1024'
+v10 <- BinaryOperation v8, '*', v9
+v11 <- CreateNamedVariable 'k1MiB', 'let', v10
+v12 <- LoadInteger '1'
+v13 <- LoadInteger '1024'
+v14 <- BinaryOperation v12, '*', v13
+v15 <- LoadInteger '1024'
+v16 <- BinaryOperation v14, '*', v15
+v17 <- LoadInteger '1024'
+v18 <- BinaryOperation v16, '*', v17
+v19 <- CreateNamedVariable 'k1GiB', 'let', v18
+v20 <- LoadInteger '4'
+v21 <- BinaryOperation v20, '*', v19
+v22 <- CreateNamedVariable 'k4GiB', 'let', v21
+v23 <- LoadInteger '65536'
+v24 <- CreateNamedVariable 'kPageSize', 'let', v23
+v25 <- LoadInteger '2'
+v26 <- BinaryOperation v25, '*', v19
+v27 <- BinaryOperation v26, '-', v24
+v28 <- CreateNamedVariable 'kMaxArrayBufferSize', 'let', v27
+v29 <- LoadInteger '65536'
+v30 <- CreateNamedVariable 'kStrideLength', 'let', v29
+v31 <- BeginPlainFunction -> 
+    v32 <- LoadUndefined
+    v33 <- CreateNamedVariable 'buffer', 'var', v32
+    BeginTry
+        v34 <- CreateNamedVariable 'ArrayBuffer', 'none'
+        v35 <- Construct v34, [v28]
+        Reassign v33, v35
+    BeginCatch -> v36
+        v37 <- LoadString 'OOM: sorry, best effort max array buffer size test!'
+        v38 <- CreateNamedVariable 'print', 'none'
+        v39 <- CallFunction v38, [v37]
+        Return
+    EndTryCatch
+    v40 <- LoadString 'Allocated '
+    v41 <- GetProperty v33, 'byteLength'
+    v42 <- BinaryOperation v40, '+', v41
+    v43 <- LoadString ' bytes'
+    v44 <- BinaryOperation v42, '+', v43
+    v45 <- CreateNamedVariable 'print', 'none'
+    v46 <- CallFunction v45, [v44]
+    v47 <- GetProperty v33, 'byteLength'
+    v48 <- BeginPlainFunction -> v49, v50, v51
+        v52 <- LoadString '--------------------'
+        v53 <- CallFunction v45, [v52]
+        v54 <- GetProperty v49, 'length'
+        v55 <- CreateNamedVariable 'max', 'let', v54
+        BeginForLoopInitializer
+            v56 <- LoadInteger '0'
+        BeginForLoopCondition -> v57
+            v58 <- Compare v57, '<', v55
+        BeginForLoopAfterthought v58 -> v59
+            Update v59, '+', v50
+        BeginForLoopBody -> v60
+            v61 <- CallFunction v51, [v60]
+            SetComputedProperty v49, v60, v61
+        EndForLoop
+        BeginForLoopInitializer
+            v62 <- LoadInteger '0'
+        BeginForLoopCondition -> v63
+            v64 <- Compare v63, '<', v55
+        BeginForLoopAfterthought v64 -> v65
+            Update v65, '+', v50
+        BeginForLoopBody -> v66
+            v67 <- CallFunction v51, [v66]
+            v68 <- GetComputedProperty v49, v66
+        EndForLoop
+    EndPlainFunction
+    BeginBlockStatement
+        v69 <- LoadInteger '4'
+        v70 <- CreateNamedVariable 'elemSize', 'let', v69
+        v71 <- BinaryOperation v28, '/', v70
+        v72 <- CreateNamedVariable 'viewSize', 'let', v71
+        v73 <- Compare v72, '<=', v5
+        BeginIf v73
+            v74 <- CreateNamedVariable 'Uint32Array', 'none'
+            v75 <- Construct v74, [v33]
+            v76 <- CreateNamedVariable 'uint32', 'let', v75
+            v77 <- BinaryOperation v28, '/', v70
+            v78 <- GetProperty v76, 'length'
+            v79 <- BinaryOperation v30, '/', v70
+            v80 <- BeginArrowFunction -> v81
+                v82 <- LoadInteger '2864434414'
+                v83 <- LoadInteger '11'
+                v84 <- BinaryOperation v81, '>>', v83
+                v85 <- LoadInteger '1114117'
+                v86 <- BinaryOperation v84, '*', v85
+                v87 <- BinaryOperation v82, '^', v86
+                v88 <- LoadInteger '0'
+                v89 <- BinaryOperation v87, '>>>', v88
+                Return v89
+            EndArrowFunction
+            v90 <- CallFunction v48, [v76, v79, v80]
+        EndIf
+    EndBlockStatement
+    BeginBlockStatement
+        v91 <- LoadInteger '2'
+        v92 <- CreateNamedVariable 'elemSize', 'let', v91
+        v93 <- BinaryOperation v28, '/', v92
+        v94 <- CreateNamedVariable 'viewSize', 'let', v93
+        v95 <- Compare v94, '<=', v5
+        BeginIf v95
+            v96 <- CreateNamedVariable 'Uint16Array', 'none'
+            v97 <- Construct v96, [v33]
+            v98 <- CreateNamedVariable 'uint16', 'let', v97
+            v99 <- BinaryOperation v28, '/', v92
+            v100 <- GetProperty v98, 'length'
+            v101 <- BinaryOperation v30, '/', v92
+            v102 <- BeginArrowFunction -> v103
+                v104 <- LoadInteger '52462'
+                v105 <- LoadInteger '11'
+                v106 <- BinaryOperation v103, '>>', v105
+                v107 <- LoadInteger '1114117'
+                v108 <- BinaryOperation v106, '*', v107
+                v109 <- BinaryOperation v104, '^', v108
+                v110 <- LoadInteger '65535'
+                v111 <- BinaryOperation v109, '&', v110
+                Return v111
+            EndArrowFunction
+            v112 <- CallFunction v48, [v98, v101, v102]
+        EndIf
+    EndBlockStatement
+    BeginBlockStatement
+        v113 <- LoadInteger '1'
+        v114 <- CreateNamedVariable 'elemSize', 'let', v113
+        v115 <- BinaryOperation v28, '/', v114
+        v116 <- CreateNamedVariable 'viewSize', 'let', v115
+        v117 <- Compare v116, '<=', v5
+        BeginIf v117
+            v118 <- CreateNamedVariable 'Uint8Array', 'none'
+            v119 <- Construct v118, [v33]
+            v120 <- CreateNamedVariable 'uint8', 'let', v119
+            v121 <- BinaryOperation v28, '/', v114
+            v122 <- GetProperty v120, 'length'
+            v123 <- BinaryOperation v30, '/', v114
+            v124 <- BeginArrowFunction -> v125
+                v126 <- LoadInteger '238'
+                v127 <- LoadInteger '11'
+                v128 <- BinaryOperation v125, '>>', v127
+                v129 <- LoadInteger '5'
+                v130 <- BinaryOperation v128, '*', v129
+                v131 <- BinaryOperation v126, '^', v130
+                v132 <- LoadInteger '255'
+                v133 <- BinaryOperation v131, '&', v132
+                Return v133
+            EndArrowFunction
+            v134 <- CallFunction v48, [v120, v123, v124]
+        EndIf
+    EndBlockStatement
+    BeginBlockStatement
+        v135 <- LoadInteger '8'
+        v136 <- CreateNamedVariable 'elemSize', 'let', v135
+        v137 <- BinaryOperation v28, '/', v136
+        v138 <- CreateNamedVariable 'viewSize', 'let', v137
+        v139 <- Compare v138, '<=', v5
+        BeginIf v139
+            v140 <- CreateNamedVariable 'Float64Array', 'none'
+            v141 <- Construct v140, [v33]
+            v142 <- CreateNamedVariable 'float64', 'let', v141
+            v143 <- BinaryOperation v28, '/', v136
+            v144 <- GetProperty v142, 'length'
+            v145 <- BinaryOperation v30, '/', v136
+            v146 <- BeginArrowFunction -> v147
+                v148 <- LoadInteger '2864434414'
+                v149 <- LoadInteger '11'
+                v150 <- BinaryOperation v147, '>>', v149
+                v151 <- LoadInteger '1114117'
+                v152 <- BinaryOperation v150, '*', v151
+                v153 <- BinaryOperation v148, '^', v152
+                Return v153
+            EndArrowFunction
+            v154 <- CallFunction v48, [v142, v145, v146]
+        EndIf
+    EndBlockStatement
+    BeginBlockStatement
+        v155 <- LoadInteger '4'
+        v156 <- CreateNamedVariable 'elemSize', 'let', v155
+        v157 <- BinaryOperation v28, '/', v156
+        v158 <- CreateNamedVariable 'viewSize', 'let', v157
+        v159 <- Compare v158, '<=', v5
+        BeginIf v159
+            v160 <- CreateNamedVariable 'Float32Array', 'none'
+            v161 <- Construct v160, [v33]
+            v162 <- CreateNamedVariable 'float32', 'let', v161
+            v163 <- BinaryOperation v28, '/', v156
+            v164 <- GetProperty v162, 'length'
+            v165 <- BinaryOperation v30, '/', v156
+            v166 <- BeginArrowFunction -> v167
+                v168 <- LoadInteger '2864434414'
+                v169 <- LoadInteger '11'
+                v170 <- BinaryOperation v167, '>>', v169
+                v171 <- LoadInteger '1114117'
+                v172 <- BinaryOperation v170, '*', v171
+                v173 <- BinaryOperation v168, '^', v172
+                v174 <- CreateNamedVariable 'Math', 'none'
+                v175 <- CallMethod v174, 'fround', [v173]
+                Return v175
+            EndArrowFunction
+            v176 <- CallFunction v48, [v162, v165, v166]
+        EndIf
+    EndBlockStatement
+EndPlainFunction
+v177 <- CallFunction v31, []
+
+
+let kMax31BitSmi = (1 << 30) - 1;
+let k1MiB = (1 * 1024) * 1024;
+let k1GiB = ((1 * 1024) * 1024) * 1024;
+let k4GiB = 4 * k1GiB;
+let kPageSize = 65536;
+let kMaxArrayBufferSize = (2 * k1GiB) - kPageSize;
+let kStrideLength = 65536;
+function Test() {
+    var buffer;
+    try {
+        const v35 = new ArrayBuffer(kMaxArrayBufferSize);
+        buffer = v35;
+    } catch(e36) {
+        print("OOM: sorry, best effort max array buffer size test!");
+        return;
+    }
+    print(("Allocated " + buffer.byteLength) + " bytes");
+    buffer.byteLength;
+    function probe(a49, a50, a51) {
+        print("--------------------");
+        let max = a49.length;
+        for (let i57 = 0; i57 < max; i57 += a50) {
+            a49[i57] = a51(i57);
+        }
+        for (let i63 = 0; i63 < max; i63 += a50) {
+            a51(i63);
+            a49[i63];
+        }
+    }
+    {
+        let elemSize = 4;
+        let viewSize = kMaxArrayBufferSize / elemSize;
+        if (viewSize <= kMax31BitSmi) {
+            const v75 = new Uint32Array(buffer);
+            let uint32 = v75;
+            kMaxArrayBufferSize / elemSize;
+            uint32.length;
+            const v79 = kStrideLength / elemSize;
+            const v80 = (a81) => {
+                return (2864434414 ^ ((a81 >> 11) * 1114117)) >>> 0;
+            };
+            probe(uint32, v79, v80);
+        }
+    }
+    {
+        let elemSize = 2;
+        let viewSize = kMaxArrayBufferSize / elemSize;
+        if (viewSize <= kMax31BitSmi) {
+            const v97 = new Uint16Array(buffer);
+            let uint16 = v97;
+            kMaxArrayBufferSize / elemSize;
+            uint16.length;
+            const v101 = kStrideLength / elemSize;
+            const v102 = (a103) => {
+                return (52462 ^ ((a103 >> 11) * 1114117)) & 65535;
+            };
+            probe(uint16, v101, v102);
+        }
+    }
+    {
+        let elemSize = 1;
+        let viewSize = kMaxArrayBufferSize / elemSize;
+        if (viewSize <= kMax31BitSmi) {
+            const v119 = new Uint8Array(buffer);
+            let uint8 = v119;
+            kMaxArrayBufferSize / elemSize;
+            uint8.length;
+            const v123 = kStrideLength / elemSize;
+            const v124 = (a125) => {
+                return (238 ^ ((a125 >> 11) * 5)) & 255;
+            };
+            probe(uint8, v123, v124);
+        }
+    }
+    {
+        let elemSize = 8;
+        let viewSize = kMaxArrayBufferSize / elemSize;
+        if (viewSize <= kMax31BitSmi) {
+            const v141 = new Float64Array(buffer);
+            let float64 = v141;
+            kMaxArrayBufferSize / elemSize;
+            float64.length;
+            const v145 = kStrideLength / elemSize;
+            const v146 = (a147) => {
+                return 2864434414 ^ ((a147 >> 11) * 1114117);
+            };
+            probe(float64, v145, v146);
+        }
+    }
+    {
+        let elemSize = 4;
+        let viewSize = kMaxArrayBufferSize / elemSize;
+        if (viewSize <= kMax31BitSmi) {
+            const v161 = new Float32Array(buffer);
+            let float32 = v161;
+            kMaxArrayBufferSize / elemSize;
+            float32.length;
+            const v165 = kStrideLength / elemSize;
+            const v166 = (a167) => {
+                return Math.fround(2864434414 ^ ((a167 >> 11) * 1114117));
+            };
+            probe(float32, v165, v166);
+        }
+    }
+}
+Test();
+
+FuzzIL program written to corpus/empirical_max_arraybuffer.fzil

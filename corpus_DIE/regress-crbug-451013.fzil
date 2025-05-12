@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateArray []
+    v3 <- CreateArray []
+    v4 <- CreateArray [v3]
+    v5 <- CreateNamedVariable 'testDeepArrayLiteral', 'none'
+    v6 <- CallFunction v5, [v1, v2, v4]
+EndPlainFunction
+v7 <- CallFunction v0, []
+v8 <- CreateNamedVariable 'RangeError', 'none'
+v9 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v10 <- EndObjectLiteral
+    BeginObjectLiteral
+    v11 <- EndObjectLiteral
+    v12 <- CreateArray []
+    v13 <- CreateArray [v12]
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v13
+    v14 <- EndObjectLiteral
+    v15 <- CreateNamedVariable 'testDeepObjectLiteral', 'none'
+    v16 <- CallFunction v15, [v10, v11, v14]
+EndPlainFunction
+v17 <- CallFunction v9, []
+
+
+function testDeepArrayLiteral() {
+    testDeepArrayLiteral([], [], [[]]);
+}
+testDeepArrayLiteral();
+function testDeepObjectLiteral() {
+    const v10 = {};
+    const v11 = {};
+    const v13 = [[]];
+    testDeepObjectLiteral(v10, v11, { x: v13 });
+}
+testDeepObjectLiteral();
+
+FuzzIL program written to corpus/regress-crbug-451013.fzil

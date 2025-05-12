@@ -1,0 +1,18 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'x'
+    v2 <- GetElement v1, '1'
+    Return v2
+EndPlainFunction
+v3 <- LoadUndefined
+v4 <- CallFunction v0, []
+v5 <- LoadUndefined
+v6 <- CallFunction v0, []
+
+
+function foo() {
+    return ("x")[1];
+}
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-665793.fzil

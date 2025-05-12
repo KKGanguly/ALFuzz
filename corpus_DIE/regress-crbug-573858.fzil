@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+EndPlainFunction
+v1 <- GetProperty v0, '__proto__'
+v2 <- LoadString 'caller'
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- CallMethod v3, 'getOwnPropertyDescriptor', [v1, v2]
+v5 <- GetProperty v4, 'get'
+v6 <- CreateNamedVariable 'throw_type_error', 'var', v5
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadThis
+    v9 <- TestInstanceOf v8, v6
+EndPlainFunction
+v10 <- CallFunction v7, []
+v11 <- BeginPlainFunction -> 
+    v12 <- Construct v6, []
+EndPlainFunction
+v13 <- CallFunction v11, []
+
+
+function f0() {
+    'use strict';
+}
+var throw_type_error = Object.getOwnPropertyDescriptor(f0.__proto__, "caller").get;
+function create_initial_map() {
+    this instanceof throw_type_error;
+}
+create_initial_map();
+function test() {
+    new throw_type_error();
+}
+test();
+
+FuzzIL program written to corpus/regress-crbug-573858.fzil

@@ -1,0 +1,82 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- CreateNamedVariable 'Object', 'none'
+    v5 <- CallMethod v4, 'is', [v2, v3]
+EndPlainFunction
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+v7 <- CreateArray []
+v8 <- CreateNamedVariable 'Infinity', 'none'
+v9 <- UnaryOperation '-', v8
+v10 <- LoadString 's'
+v11 <- LoadString 'ア'
+v12 <- LoadInteger '0'
+v13 <- LoadInteger '0'
+v14 <- LoadInteger '1'
+v15 <- UnaryOperation '-', v14
+v16 <- BinaryOperation v13, '/', v15
+v17 <- LoadNull
+v18 <- LoadUndefined
+v19 <- LoadBoolean 'true'
+v20 <- LoadBoolean 'false'
+v21 <- LoadString 'foo'
+v22 <- CreateNamedVariable 'Symbol', 'none'
+v23 <- CallFunction v22, [v21]
+v24 <- CreateNamedVariable 'NaN', 'none'
+v25 <- CreateArray [v6, v7, v8, v9, v10, v11, v12, v16, v17, v18, v19, v20, v23, v24]
+v26 <- CreateNamedVariable 'test_set', 'var', v25
+BeginForLoopInitializer
+    v27 <- LoadInteger '0'
+BeginForLoopCondition -> v28
+    v29 <- GetProperty v26, 'length'
+    v30 <- Compare v28, '<', v29
+BeginForLoopAfterthought v30 -> v31
+    v32 <- UnaryOperation v31, '++'
+BeginForLoopBody -> v33
+    BeginForLoopInitializer
+        v34 <- LoadInteger '0'
+    BeginForLoopCondition -> v35
+        v36 <- GetProperty v26, 'length'
+        v37 <- Compare v35, '<', v36
+    BeginForLoopAfterthought v37 -> v38
+        v39 <- UnaryOperation v38, '++'
+    BeginForLoopBody -> v40
+        v41 <- Compare v33, '==', v40
+        BeginIf v41
+            v42 <- GetComputedProperty v26, v33
+            v43 <- GetComputedProperty v26, v40
+            v44 <- LoadBoolean 'true'
+            v45 <- GetComputedProperty v26, v33
+            v46 <- GetComputedProperty v26, v40
+            v47 <- CallFunction v0, [v44, v45, v46]
+        BeginElse
+            v48 <- LoadBoolean 'false'
+            v49 <- GetComputedProperty v26, v33
+            v50 <- GetComputedProperty v26, v40
+            v51 <- CallFunction v0, [v48, v49, v50]
+            v52 <- LoadBoolean 'false'
+            v53 <- GetComputedProperty v26, v40
+            v54 <- GetComputedProperty v26, v33
+            v55 <- CallFunction v0, [v52, v53, v54]
+        EndIf
+    EndForLoop
+EndForLoop
+
+
+function TestEgal(a1, a2, a3) {
+    Object.is(a2, a3);
+}
+var test_set = [{},[],Infinity,-Infinity,"s","ア",0,0 / -1,null,,true,false,Symbol("foo"),NaN];
+for (let i28 = 0; i28 < test_set.length; i28++) {
+    for (let i35 = 0; i35 < test_set.length; i35++) {
+        if (i28 == i35) {
+            test_set[i28];
+            test_set[i35];
+            TestEgal(true, test_set[i28], test_set[i35]);
+        } else {
+            TestEgal(false, test_set[i28], test_set[i35]);
+            TestEgal(false, test_set[i35], test_set[i28]);
+        }
+    }
+}
+
+FuzzIL program written to corpus/object-is.fzil

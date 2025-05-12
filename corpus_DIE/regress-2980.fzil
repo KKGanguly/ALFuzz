@@ -1,0 +1,86 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetProperty v2, 'property'
+EndPlainFunction
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'holder', 'var', v4
+v6 <- LoadNull
+SetProperty v5, '__proto__', v6
+v7 <- LoadString 'foo'
+SetProperty v5, 'property', v7
+v8 <- DeleteProperty v5, 'property'
+v9 <- LoadUndefined
+v10 <- CallFunction v0, [v9, v5]
+v11 <- LoadUndefined
+v12 <- CallFunction v0, [v11, v5]
+v13 <- LoadUndefined
+v14 <- CallFunction v0, [v13, v5]
+v15 <- LoadString 'bar'
+SetProperty v5, 'property', v15
+v16 <- LoadString 'bar'
+v17 <- CallFunction v0, [v16, v5]
+v18 <- LoadString 'bar'
+v19 <- CallFunction v0, [v18, v5]
+v20 <- BeginPlainFunction -> v21, v22
+    v23 <- GetProperty v22, 'prop2'
+EndPlainFunction
+BeginObjectLiteral
+v24 <- EndObjectLiteral
+v25 <- CreateNamedVariable 'holder2', 'var', v24
+v26 <- LoadString 'foo'
+SetProperty v25, 'prop2', v26
+v27 <- LoadNull
+SetProperty v25, '__proto__', v27
+v28 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v28, 'prototype', v25
+v29 <- Construct v28, []
+v30 <- CreateNamedVariable 'rec2', 'var', v29
+v31 <- DeleteProperty v25, 'prop2'
+v32 <- LoadUndefined
+v33 <- CallFunction v20, [v32, v30]
+v34 <- LoadUndefined
+v35 <- CallFunction v20, [v34, v30]
+v36 <- LoadUndefined
+v37 <- CallFunction v20, [v36, v30]
+v38 <- LoadString 'bar'
+SetProperty v25, 'prop2', v38
+v39 <- LoadString 'bar'
+v40 <- CallFunction v20, [v39, v30]
+v41 <- LoadString 'bar'
+v42 <- CallFunction v20, [v41, v30]
+
+
+function test(a1, a2) {
+    a2.property;
+}
+var holder = {};
+holder.__proto__ = null;
+holder.property = "foo";
+delete holder.property;
+test(undefined, holder);
+test(undefined, holder);
+test(undefined, holder);
+holder.property = "bar";
+test("bar", holder);
+test("bar", holder);
+function test2(a21, a22) {
+    a22.prop2;
+}
+var holder2 = {};
+holder2.prop2 = "foo";
+holder2.__proto__ = null;
+function Receiver() {
+}
+Receiver.prototype = holder2;
+const v29 = new Receiver();
+var rec2 = v29;
+delete holder2.prop2;
+test2(undefined, rec2);
+test2(undefined, rec2);
+test2(undefined, rec2);
+holder2.prop2 = "bar";
+test2("bar", rec2);
+test2("bar", rec2);
+
+FuzzIL program written to corpus/regress-2980.fzil

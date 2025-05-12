@@ -1,0 +1,30 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '3'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable 'a', 'var', v3
+v5 <- LoadBoolean 'false'
+v6 <- CreateNamedVariable 'was_called', 'var', v5
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadBoolean 'true'
+    Reassign v6, v8
+EndPlainFunction
+SetProperty v4, 'hasOwnProperty', v7
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'freeze', [v4]
+v11 <- LoadString 'a.unshift()'
+v12 <- CreateNamedVariable 'TypeError', 'none'
+v13 <- LoadInteger '3'
+v14 <- GetProperty v4, 'length'
+
+
+var a = [1,2,3];
+var was_called = false;
+function poison() {
+    was_called = true;
+}
+a.hasOwnProperty = poison;
+Object.freeze(a);
+a.length;
+
+FuzzIL program written to corpus/regress-builtinbust-5.fzil

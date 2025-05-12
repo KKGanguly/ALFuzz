@@ -1,0 +1,158 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadThis
+    SetProperty v3, 'x', v1
+    v4 <- LoadThis
+    SetProperty v4, 'y', v2
+    v5 <- LoadThis
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '1'
+    v8 <- LoadInteger '2'
+    v9 <- Construct v0, [v7, v8]
+    v10 <- CreateNamedVariable 'a', 'var', v9
+    v11 <- LoadInteger '3'
+    SetProperty v10, 'x', v11
+    v12 <- LoadInteger '4'
+    SetProperty v10, 'x', v12
+    v13 <- GetProperty v10, 'x'
+    Return v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadInteger '6'
+    v16 <- LoadInteger '7'
+    v17 <- Construct v0, [v15, v16]
+    v18 <- CreateNamedVariable 'a', 'var', v17
+    v19 <- LoadInteger '3'
+    SetProperty v18, 'x', v19
+    v20 <- GetProperty v18, 'y'
+    v21 <- CreateNamedVariable 'r', 'var', v20
+    v22 <- LoadInteger '4'
+    SetProperty v18, 'x', v22
+    Return v21
+EndPlainFunction
+v23 <- BeginPlainFunction -> 
+    v24 <- LoadInteger '6'
+    v25 <- LoadInteger '8'
+    v26 <- Construct v0, [v24, v25]
+    v27 <- CreateNamedVariable 'a', 'var', v26
+    v28 <- LoadInteger '3'
+    SetProperty v27, 'x', v28
+    v29 <- GetProperty v27, 'x'
+    v30 <- CreateNamedVariable 'r', 'var', v29
+    v31 <- LoadInteger '4'
+    SetProperty v27, 'x', v31
+    Return v30
+EndPlainFunction
+v32 <- BeginPlainFunction -> 
+    v33 <- LoadInteger '2'
+    v34 <- LoadInteger '9'
+    v35 <- Construct v0, [v33, v34]
+    v36 <- CreateNamedVariable 'a', 'var', v35
+    v37 <- LoadInteger '3'
+    SetProperty v36, 'x', v37
+    v38 <- CreateNamedVariable 'killall', 'none'
+    v39 <- CallFunction v38, []
+    v40 <- LoadInteger '4'
+    SetProperty v36, 'x', v40
+    v41 <- GetProperty v36, 'y'
+    Return v41
+EndPlainFunction
+v42 <- BeginPlainFunction -> 
+    v43 <- LoadInteger '2'
+    v44 <- LoadInteger '1'
+    v45 <- Construct v0, [v43, v44]
+    v46 <- CreateNamedVariable 'a', 'var', v45
+    v47 <- LoadInteger '3'
+    SetProperty v46, 'x', v47
+    v48 <- LoadInteger '2'
+    v49 <- BinaryOperation v46, '+', v48
+    v50 <- CreateNamedVariable 'c', 'var', v49
+    v51 <- LoadInteger '4'
+    SetProperty v46, 'x', v51
+    v52 <- GetProperty v46, 'y'
+    Return v52
+EndPlainFunction
+v53 <- BeginPlainFunction -> 
+    BeginTry
+    BeginCatch -> v54
+    EndTryCatch
+EndPlainFunction
+v55 <- BeginPlainFunction -> v56, v57
+    v58 <- CallFunction v57, []
+    v59 <- CallFunction v57, []
+    v60 <- CallFunction v57, []
+EndPlainFunction
+v61 <- LoadInteger '4'
+v62 <- CallFunction v55, [v61, v6]
+v63 <- LoadInteger '7'
+v64 <- CallFunction v55, [v63, v14]
+v65 <- LoadInteger '3'
+v66 <- CallFunction v55, [v65, v23]
+v67 <- LoadInteger '9'
+v68 <- CallFunction v55, [v67, v32]
+v69 <- LoadInteger '1'
+v70 <- CallFunction v55, [v69, v42]
+
+
+function B(a1, a2) {
+    this.x = a1;
+    this.y = a2;
+    return this;
+}
+function test_store_store() {
+    const v9 = new B(1, 2);
+    var a = v9;
+    a.x = 3;
+    a.x = 4;
+    return a.x;
+}
+function test_store_load_store1() {
+    const v17 = new B(6, 7);
+    var a = v17;
+    a.x = 3;
+    var r = a.y;
+    a.x = 4;
+    return r;
+}
+function test_store_load_store2() {
+    const v26 = new B(6, 8);
+    var a = v26;
+    a.x = 3;
+    var r = a.x;
+    a.x = 4;
+    return r;
+}
+function test_store_call_store() {
+    const v35 = new B(2, 9);
+    var a = v35;
+    a.x = 3;
+    killall();
+    a.x = 4;
+    return a.y;
+}
+function test_store_deopt_store() {
+    const v45 = new B(2, 1);
+    var a = v45;
+    a.x = 3;
+    var c = a + 2;
+    a.x = 4;
+    return a.y;
+}
+function killall() {
+    try {
+    } catch(e54) {
+    }
+}
+function test(a56, a57) {
+    a57();
+    a57();
+    a57();
+}
+test(4, test_store_store);
+test(7, test_store_load_store1);
+test(3, test_store_load_store2);
+test(9, test_store_call_store);
+test(1, test_store_deopt_store);
+
+FuzzIL program written to corpus/store-elimination.fzil

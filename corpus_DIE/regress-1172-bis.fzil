@@ -1,0 +1,32 @@
+v0 <- LoadInteger '0'
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadInteger '42'
+    ThrowException v2
+EndPlainFunction
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- GetProperty v3, 'prototype'
+v5 <- CallMethod v4, '__defineGetter__', [v0, v1]
+v6 <- LoadBoolean 'false'
+v7 <- CreateNamedVariable 'exception', 'var', v6
+BeginTry
+    v8 <- LoadInteger '0'
+    v9 <- CallComputedMethod v3, v8, []
+BeginCatch -> v10
+    v11 <- LoadBoolean 'true'
+    Reassign v7, v11
+    v12 <- LoadInteger '42'
+EndTryCatch
+
+
+function f1() {
+    throw 42;
+}
+Object.prototype.__defineGetter__(0, f1);
+var exception = false;
+try {
+    Object[0]();
+} catch(e10) {
+    exception = true;
+}
+
+FuzzIL program written to corpus/regress-1172-bis.fzil

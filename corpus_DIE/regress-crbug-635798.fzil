@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    v3 <- CreateArray []
+    v4 <- CreateNamedVariable 'y', 'var', v3
+    SetProperty v2, '__proto__', v4
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- LoadInteger '10000'
+        v8 <- Compare v6, '<', v7
+    BeginForLoopAfterthought v8 -> v9
+        v10 <- UnaryOperation '++', v9
+    BeginForLoopBody -> v11
+        v12 <- LoadInteger '1'
+        SetComputedProperty v4, v11, v12
+    EndForLoop
+EndPlainFunction
+v13 <- CallFunction v0, []
+
+
+function foo() {
+    var x = [];
+    var y = [];
+    x.__proto__ = y;
+    for (let i6 = 0; i6 < 10000; ++i6) {
+        y[i6] = 1;
+    }
+}
+foo();
+
+FuzzIL program written to corpus/regress-crbug-635798.fzil

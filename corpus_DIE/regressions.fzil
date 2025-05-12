@@ -1,0 +1,138 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadInteger '0'
+v3 <- UnaryOperation '-', v2
+v4 <- BinaryOperation v1, '/', v3
+v5 <- CreateNamedVariable 'b', 'var', v4
+v6 <- LoadInteger '0'
+v7 <- LoadInteger '0'
+v8 <- UnaryOperation '-', v7
+v9 <- LoadInteger '0'
+v10 <- LoadInteger '0'
+v11 <- LoadInteger '0'
+v12 <- BinaryOperation v10, '/', v11
+v13 <- LoadInteger '0'
+v14 <- LoadInteger '0'
+v15 <- UnaryOperation '-', v14
+v16 <- LoadInteger '0'
+v17 <- UnaryOperation '-', v16
+v18 <- BinaryOperation v15, '/', v17
+v19 <- LoadInteger '0'
+v20 <- UnaryOperation '-', v19
+v21 <- LoadInteger '0'
+v22 <- UnaryOperation '-', v21
+v23 <- LoadInteger '0'
+v24 <- BinaryOperation v22, '/', v23
+v25 <- LoadInteger '0'
+v26 <- LoadInteger '0'
+v27 <- LoadInteger '0'
+v28 <- BinaryOperation v26, '%', v27
+v29 <- LoadInteger '0'
+v30 <- LoadInteger '0'
+v31 <- UnaryOperation '-', v30
+v32 <- LoadInteger '0'
+v33 <- BinaryOperation v31, '%', v32
+v34 <- LoadInteger '0'
+v35 <- LoadInteger '0'
+v36 <- LoadInteger '0'
+v37 <- UnaryOperation '-', v36
+v38 <- BinaryOperation v35, '%', v37
+v39 <- LoadInteger '0'
+v40 <- LoadInteger '0'
+v41 <- UnaryOperation '-', v40
+v42 <- LoadInteger '0'
+v43 <- UnaryOperation '-', v42
+v44 <- BinaryOperation v41, '%', v43
+v45 <- LoadInteger '0'
+v46 <- LoadInteger '0'
+v47 <- Compare v45, '===', v46
+v48 <- LoadInteger '0'
+v49 <- LoadInteger '1000000000'
+v50 <- BinaryOperation v48, '**', v49
+v51 <- CreateNamedVariable 'close_to_limit', 'var', v50
+v52 <- BeginArrowFunction -> 
+    v53 <- LoadInteger '100'
+    v54 <- BinaryOperation v51, '**', v53
+    Return v54
+EndArrowFunction
+v55 <- CallFunction v52, []
+v56 <- CreateNamedVariable 'RangeError', 'none'
+v57 <- LoadInteger '0'
+v58 <- LoadInteger '30'
+v59 <- BinaryOperation v57, '**', v58
+v60 <- LoadInteger '0'
+v61 <- BinaryOperation v59, '-', v60
+v62 <- CreateNamedVariable 'kMaxInt', 'var', v61
+v63 <- LoadInteger '60'
+v64 <- BinaryOperation v62, '-', v63
+v65 <- LoadInteger '0'
+v66 <- BinaryOperation v64, '-', v65
+v67 <- CreateNamedVariable 'max64', 'var', v66
+v68 <- LoadInteger '30'
+v69 <- BinaryOperation v62, '-', v68
+v70 <- LoadInteger '0'
+v71 <- BinaryOperation v69, '-', v70
+v72 <- CreateNamedVariable 'max32', 'var', v71
+v73 <- BeginArrowFunction -> 
+    v74 <- LoadInteger '0'
+    v75 <- BinaryOperation v74, '**', v72
+    v76 <- CreateNamedVariable 'a', 'var', v75
+    v77 <- LoadInteger '0'
+    v78 <- BinaryOperation v77, '**', v67
+    v79 <- CreateNamedVariable 'b', 'var', v78
+EndArrowFunction
+v80 <- CallFunction v73, []
+v81 <- BeginPlainFunction -> 
+    v82 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v83 <- LoadInteger '0'
+    SetProperty v82, 'prototype', v83
+    v84 <- BeginArrowFunction -> 
+        BeginObjectLiteral
+        v85 <- EndObjectLiteral
+        v86 <- TestInstanceOf v85, v82
+        Return v86
+    EndArrowFunction
+    v87 <- CallFunction v84, []
+    v88 <- CreateNamedVariable 'TypeError', 'none'
+EndPlainFunction
+v89 <- CallFunction v81, []
+
+
+var a = 0;
+var b = a / -0;
+-0;
+0 / 0;
+-0 / -0;
+-0;
+-0 / 0;
+0 % 0;
+-0 % 0;
+0 % -0;
+-0 % -0;
+0 === 0;
+var close_to_limit = 0 ** 1000000000;
+const v52 = () => {
+    return close_to_limit ** 100;
+};
+v52();
+var kMaxInt = (0 ** 30) - 0;
+var max64 = (kMaxInt - 60) - 0;
+var max32 = (kMaxInt - 30) - 0;
+const v73 = () => {
+    var a = 0 ** max32;
+    var b = 0 ** max64;
+};
+v73();
+function f81() {
+    function Constructor() {
+    }
+    Constructor.prototype = 0;
+    const v84 = () => {
+        return {} instanceof Constructor;
+    };
+    v84();
+}
+f81();
+
+FuzzIL program written to corpus/regressions.fzil

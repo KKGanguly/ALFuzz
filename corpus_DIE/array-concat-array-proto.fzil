@@ -1,0 +1,195 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '3'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable 'array', 'var', v3
+v5 <- LoadInteger '1'
+v6 <- LoadString 'a'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v5
+    ObjectLiteralAddProperty `0`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'object', 'var', v7
+v9 <- BeginPlainFunction -> 
+    v10 <- CreateArray []
+    v11 <- CallMethod v10, 'concat', [v4]
+    v12 <- CreateArray []
+    v13 <- CallMethod v4, 'concat', [v12]
+    v14 <- LoadInteger '1'
+    v15 <- LoadInteger '2'
+    v16 <- LoadInteger '3'
+    v17 <- LoadInteger '1'
+    v18 <- LoadInteger '2'
+    v19 <- LoadInteger '3'
+    v20 <- CreateArray [v14, v15, v16, v17, v18, v19]
+    v21 <- CallMethod v4, 'concat', [v4]
+    v22 <- CreateArray [v8]
+    v23 <- CreateArray []
+    v24 <- CallMethod v23, 'concat', [v8]
+    v25 <- LoadInteger '1'
+    v26 <- LoadInteger '2'
+    v27 <- LoadInteger '3'
+    v28 <- CreateArray [v25, v26, v27, v8]
+    v29 <- CallMethod v4, 'concat', [v8]
+    v30 <- CreateArray [v8]
+    v31 <- CreateArray []
+    v32 <- CreateNamedVariable 'Array', 'none'
+    v33 <- GetProperty v32, 'prototype'
+    v34 <- GetProperty v33, 'concat'
+    v35 <- CallMethod v34, 'call', [v8, v31]
+    v36 <- LoadInteger '1'
+    v37 <- LoadInteger '2'
+    v38 <- LoadInteger '3'
+    v39 <- CreateArray [v8, v36, v37, v38]
+    v40 <- GetProperty v32, 'prototype'
+    v41 <- GetProperty v40, 'concat'
+    v42 <- CallMethod v41, 'call', [v8, v4]
+    v43 <- CreateArray [v8, v8]
+    v44 <- GetProperty v32, 'prototype'
+    v45 <- GetProperty v44, 'concat'
+    v46 <- CallMethod v45, 'call', [v8, v8]
+EndPlainFunction
+v47 <- CallFunction v9, []
+v48 <- LoadBoolean 'false'
+v49 <- CreateNamedVariable 'Array', 'none'
+v50 <- GetProperty v49, 'prototype'
+v51 <- CreateNamedVariable 'Symbol', 'none'
+v52 <- GetProperty v51, 'isConcatSpreadable'
+SetComputedProperty v50, v52, v48
+v53 <- CreateArray []
+v54 <- CreateArray [v53, v4]
+v55 <- CreateArray []
+v56 <- CallMethod v55, 'concat', [v4]
+v57 <- CreateArray []
+v58 <- CreateArray [v4, v57]
+v59 <- CreateArray []
+v60 <- CallMethod v4, 'concat', [v59]
+v61 <- CreateArray [v4, v4]
+v62 <- CallMethod v4, 'concat', [v4]
+v63 <- CreateArray []
+v64 <- CreateArray [v63, v8]
+v65 <- CreateArray []
+v66 <- CallMethod v65, 'concat', [v8]
+v67 <- CreateArray [v4, v8]
+v68 <- CallMethod v4, 'concat', [v8]
+v69 <- CreateArray []
+v70 <- CreateArray [v8, v69]
+v71 <- CreateArray []
+v72 <- GetProperty v49, 'prototype'
+v73 <- GetProperty v72, 'concat'
+v74 <- CallMethod v73, 'call', [v8, v71]
+v75 <- CreateArray [v8, v4]
+v76 <- GetProperty v49, 'prototype'
+v77 <- GetProperty v76, 'concat'
+v78 <- CallMethod v77, 'call', [v8, v4]
+v79 <- CreateArray [v8, v8]
+v80 <- GetProperty v49, 'prototype'
+v81 <- GetProperty v80, 'concat'
+v82 <- CallMethod v81, 'call', [v8, v8]
+v83 <- LoadBoolean 'true'
+v84 <- GetProperty v49, 'prototype'
+v85 <- GetProperty v51, 'isConcatSpreadable'
+SetComputedProperty v84, v85, v83
+v86 <- CreateArray []
+v87 <- CallMethod v86, 'concat', [v4]
+v88 <- CreateArray []
+v89 <- CallMethod v4, 'concat', [v88]
+v90 <- LoadInteger '1'
+v91 <- LoadInteger '2'
+v92 <- LoadInteger '3'
+v93 <- LoadInteger '1'
+v94 <- LoadInteger '2'
+v95 <- LoadInteger '3'
+v96 <- CreateArray [v90, v91, v92, v93, v94, v95]
+v97 <- CallMethod v4, 'concat', [v4]
+v98 <- CreateArray [v8]
+v99 <- CreateArray []
+v100 <- CallMethod v99, 'concat', [v8]
+v101 <- LoadInteger '1'
+v102 <- LoadInteger '2'
+v103 <- LoadInteger '3'
+v104 <- CreateArray [v101, v102, v103, v8]
+v105 <- CallMethod v4, 'concat', [v8]
+v106 <- CreateArray [v8]
+v107 <- CreateArray []
+v108 <- GetProperty v49, 'prototype'
+v109 <- GetProperty v108, 'concat'
+v110 <- CallMethod v109, 'call', [v8, v107]
+v111 <- LoadInteger '1'
+v112 <- LoadInteger '2'
+v113 <- LoadInteger '3'
+v114 <- CreateArray [v8, v111, v112, v113]
+v115 <- GetProperty v49, 'prototype'
+v116 <- GetProperty v115, 'concat'
+v117 <- CallMethod v116, 'call', [v8, v4]
+v118 <- CreateArray [v8, v8]
+v119 <- GetProperty v49, 'prototype'
+v120 <- GetProperty v119, 'concat'
+v121 <- CallMethod v120, 'call', [v8, v8]
+v122 <- GetProperty v49, 'prototype'
+v123 <- GetProperty v51, 'isConcatSpreadable'
+v124 <- DeleteComputedProperty v122, v123
+v125 <- CallFunction v9, []
+
+
+var array = [1,2,3];
+var object = { length: 1, 0: "a" };
+function testConcatDefaults() {
+    ([]).concat(array);
+    array.concat([]);
+    [1,2,3,1,2,3];
+    array.concat(array);
+    [object];
+    ([]).concat(object);
+    [1,2,3,object];
+    array.concat(object);
+    [object];
+    const v31 = [];
+    Array.prototype.concat.call(object, v31);
+    [object,1,2,3];
+    Array.prototype.concat.call(object, array);
+    [object,object];
+    Array.prototype.concat.call(object, object);
+}
+testConcatDefaults();
+const t19 = Array.prototype;
+t19[Symbol.isConcatSpreadable] = false;
+[[],array];
+([]).concat(array);
+[array,[]];
+array.concat([]);
+[array,array];
+array.concat(array);
+[[],object];
+([]).concat(object);
+[array,object];
+array.concat(object);
+[object,[]];
+const v71 = [];
+Array.prototype.concat.call(object, v71);
+[object,array];
+Array.prototype.concat.call(object, array);
+[object,object];
+Array.prototype.concat.call(object, object);
+const t34 = Array.prototype;
+t34[Symbol.isConcatSpreadable] = true;
+([]).concat(array);
+array.concat([]);
+[1,2,3,1,2,3];
+array.concat(array);
+[object];
+([]).concat(object);
+[1,2,3,object];
+array.concat(object);
+[object];
+const v107 = [];
+Array.prototype.concat.call(object, v107);
+[object,1,2,3];
+Array.prototype.concat.call(object, array);
+[object,object];
+Array.prototype.concat.call(object, object);
+const t51 = Array.prototype;
+delete t51[Symbol.isConcatSpreadable];
+testConcatDefaults();
+
+FuzzIL program written to corpus/array-concat-array-proto.fzil

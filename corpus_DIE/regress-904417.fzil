@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'hello'
+    v3 <- CreateNamedVariable 'Object', 'none'
+    v4 <- CallMethod v3, 'getPrototypeOf', [v1]
+    Return v4
+EndPlainFunction
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- LoadInteger '44'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v5
+    ObjectLiteralAddProperty `hello`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'y', 'var', v7
+v9 <- LoadInteger '45'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `hello`, v9
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'z', 'var', v10
+v12 <- CallFunction v0, [v8]
+v13 <- CallFunction v0, [v11]
+v14 <- CallFunction v0, [v8]
+v15 <- CallFunction v0, [v8]
+
+
+function bar(a1) {
+    a1.hello;
+    return Object.getPrototypeOf(a1);
+}
+const v5 = {};
+var y = { __proto__: v5, hello: 44 };
+var z = { hello: 45 };
+bar(y);
+bar(z);
+bar(y);
+bar(y);
+
+FuzzIL program written to corpus/regress-904417.fzil

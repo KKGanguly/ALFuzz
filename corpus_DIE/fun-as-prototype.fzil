@@ -1,0 +1,41 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4, v5
+    v6 <- LoadInteger '7'
+    Return v6
+EndPlainFunction
+v7 <- CreateNamedVariable 'Number', 'none'
+v8 <- GetProperty v7, 'prototype'
+SetProperty v8, '__proto__', v2
+v9 <- LoadInteger '3'
+v10 <- GetProperty v1, 'length'
+v11 <- LoadString 'Funky'
+v12 <- GetProperty v1, 'name'
+v13 <- GetProperty v2, 'prototype'
+v14 <- GetProperty v1, 'prototype'
+v15 <- LoadInteger '1'
+v16 <- LoadInteger '2'
+v17 <- LoadInteger '3'
+v18 <- CreateArray [v15, v16, v17]
+v19 <- GetProperty v7, 'prototype'
+SetProperty v19, '__proto__', v18
+v20 <- LoadInteger '3'
+v21 <- GetProperty v1, 'length'
+
+
+var x = 0;
+function Funky(a3, a4, a5) {
+    return 7;
+}
+const t4 = Number.prototype;
+t4.__proto__ = Funky;
+x.length;
+x.name;
+Funky.prototype;
+x.prototype;
+const v18 = [1,2,3];
+const t11 = Number.prototype;
+t11.__proto__ = v18;
+x.length;
+
+FuzzIL program written to corpus/fun-as-prototype.fzil

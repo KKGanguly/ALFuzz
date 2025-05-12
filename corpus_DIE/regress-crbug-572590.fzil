@@ -1,0 +1,17 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CallMethod v0, 'bind', []
+v2 <- CreateNamedVariable 'f', 'var', v1
+v3 <- LoadString 'length'
+v4 <- CallMethod v2, '__defineGetter__', [v3, v0]
+v5 <- CreateNamedVariable 'gc', 'none'
+v6 <- CallFunction v5, []
+
+
+function g() {
+}
+var f = g.bind();
+f.__defineGetter__("length", g);
+gc();
+
+FuzzIL program written to corpus/regress-crbug-572590.fzil

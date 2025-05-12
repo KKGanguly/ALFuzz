@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '+', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v4
+v5 <- EndObjectLiteral
+v6 <- LoadString 'a'
+v7 <- CallFunction v0, [v5, v6]
+v8 <- CreateNamedVariable 'print', 'none'
+v9 <- CallFunction v8, [v7]
+v10 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `b`, v10
+v11 <- EndObjectLiteral
+v12 <- LoadString 'b'
+v13 <- CallFunction v0, [v11, v12]
+v14 <- CallFunction v8, [v13]
+v15 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `c`, v15
+v16 <- EndObjectLiteral
+v17 <- LoadString 'c'
+v18 <- CallFunction v0, [v16, v17]
+v19 <- CallFunction v8, [v18]
+v20 <- LoadString 'a'
+v21 <- LoadInteger '1'
+v22 <- CallFunction v0, [v20, v21]
+v23 <- CallFunction v8, [v22]
+
+
+function add(a1, a2) {
+    return a1 + a2;
+}
+print(add({ a: 1 }, "a"));
+print(add({ b: 1 }, "b"));
+print(add({ c: 1 }, "c"));
+print(add("a", 1));
+
+FuzzIL program written to corpus/regress-crbug-318671.fzil

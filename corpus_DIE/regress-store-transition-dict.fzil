@@ -1,0 +1,221 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        SetProperty v2, 'x', v3
+    EndPlainFunction
+    v4 <- BeginPlainFunction -> v5, v6
+        SetProperty v5, 'y', v6
+    EndPlainFunction
+    BeginObjectLiteral
+    v7 <- EndObjectLiteral
+    v8 <- CreateNamedVariable 'p', 'var', v7
+    v9 <- BeginPlainFunction -> 
+        v10 <- LoadInteger '1'
+        v11 <- LoadInteger '2'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `__proto__`, v8
+            ObjectLiteralAddProperty `b`, v10
+            ObjectLiteralAddProperty `a`, v11
+        v12 <- EndObjectLiteral
+        v13 <- CreateNamedVariable 'o', 'var', v12
+        v14 <- DeleteProperty v13, 'b'
+        Return v13
+    EndPlainFunction
+    BeginForLoopInitializer
+        v15 <- LoadInteger '0'
+    BeginForLoopCondition -> v16
+        v17 <- LoadInteger '10'
+        v18 <- Compare v16, '<', v17
+    BeginForLoopAfterthought v18 -> v19
+        v20 <- UnaryOperation v19, '++'
+    BeginForLoopBody -> v21
+        v22 <- CallFunction v9, []
+        v23 <- CreateNamedVariable 'o', 'var', v22
+        v24 <- LoadInteger '13'
+        v25 <- CallFunction v1, [v23, v24]
+        v26 <- LoadInteger '13'
+        v27 <- CallFunction v4, [v23, v26]
+    EndForLoop
+    v28 <- LoadString 'x'
+    v29 <- LoadInteger '42'
+    v30 <- LoadBoolean 'true'
+    v31 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v29
+        ObjectLiteralAddProperty `configurable`, v30
+        ObjectLiteralAddProperty `writable`, v31
+    v32 <- EndObjectLiteral
+    v33 <- CreateNamedVariable 'Object', 'none'
+    v34 <- CallMethod v33, 'defineProperty', [v8, v28, v32]
+    BeginForLoopInitializer
+        v35 <- LoadInteger '0'
+    BeginForLoopCondition -> v36
+        v37 <- LoadInteger '10'
+        v38 <- Compare v36, '<', v37
+    BeginForLoopAfterthought v38 -> v39
+        v40 <- UnaryOperation v39, '++'
+    BeginForLoopBody -> v41
+        v42 <- CallFunction v9, []
+        v43 <- CreateNamedVariable 'o', 'var', v42
+        v44 <- LoadInteger '13'
+        v45 <- CallFunction v4, [v43, v44]
+    EndForLoop
+    v46 <- CallFunction v9, []
+    v47 <- CreateNamedVariable 'o', 'var', v46
+    v48 <- LoadInteger '42'
+    v49 <- GetProperty v47, 'x'
+    v50 <- LoadInteger '13'
+    v51 <- CallFunction v1, [v47, v50]
+    v52 <- LoadInteger '42'
+    v53 <- GetProperty v47, 'x'
+EndPlainFunction
+v54 <- CallFunction v0, []
+v55 <- BeginPlainFunction -> 
+    v56 <- LoadInteger '10'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v56
+    v57 <- EndObjectLiteral
+    v58 <- CreateNamedVariable 'p1', 'var', v57
+    v59 <- LoadString 'x'
+    v60 <- LoadInteger '42'
+    v61 <- LoadBoolean 'true'
+    v62 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v60
+        ObjectLiteralAddProperty `configurable`, v61
+        ObjectLiteralAddProperty `writable`, v62
+    v63 <- EndObjectLiteral
+    v64 <- CreateNamedVariable 'Object', 'none'
+    v65 <- CallMethod v64, 'defineProperty', [v58, v59, v63]
+    v66 <- LoadInteger '153'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v58
+        ObjectLiteralAddProperty `x`, v66
+    v67 <- EndObjectLiteral
+    v68 <- CreateNamedVariable 'p2', 'var', v67
+    BeginForLoopInitializer
+        v69 <- LoadInteger '0'
+    BeginForLoopCondition -> v70
+        v71 <- LoadInteger '2000'
+        v72 <- Compare v70, '<', v71
+    BeginForLoopAfterthought v72 -> v73
+        v74 <- UnaryOperation v73, '++'
+    BeginForLoopBody -> v75
+        v76 <- LoadInteger '0'
+        v77 <- LoadString 'p'
+        v78 <- BinaryOperation v77, '+', v75
+        SetComputedProperty v58, v78, v76
+        v79 <- LoadInteger '0'
+        v80 <- LoadString 'p'
+        v81 <- BinaryOperation v80, '+', v75
+        SetComputedProperty v68, v81, v79
+    EndForLoop
+    v82 <- BeginPlainFunction -> v83
+        v84 <- GetProperty v83, 'x'
+        Return v84
+    EndPlainFunction
+    v85 <- BeginPlainFunction -> v86, v87
+        SetProperty v86, 'x', v87
+    EndPlainFunction
+    v88 <- BeginPlainFunction -> 
+        v89 <- LoadInteger '1'
+        v90 <- LoadInteger '2'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `__proto__`, v68
+            ObjectLiteralAddProperty `b`, v89
+            ObjectLiteralAddProperty `a`, v90
+        v91 <- EndObjectLiteral
+        v92 <- CreateNamedVariable 'o', 'var', v91
+        Return v92
+    EndPlainFunction
+    BeginForLoopInitializer
+        v93 <- LoadInteger '0'
+    BeginForLoopCondition -> v94
+        v95 <- LoadInteger '10'
+        v96 <- Compare v94, '<', v95
+    BeginForLoopAfterthought v96 -> v97
+        v98 <- UnaryOperation v97, '++'
+    BeginForLoopBody -> v99
+        v100 <- CallFunction v88, []
+        v101 <- CreateNamedVariable 'o', 'var', v100
+        v102 <- LoadInteger '153'
+        v103 <- CallFunction v82, [v101]
+        v104 <- LoadInteger '13'
+        v105 <- CallFunction v85, [v101, v104]
+        v106 <- LoadInteger '13'
+        v107 <- CallFunction v82, [v101]
+    EndForLoop
+    v108 <- DeleteProperty v68, 'x'
+    v109 <- CallFunction v88, []
+    v110 <- CreateNamedVariable 'o', 'var', v109
+    v111 <- LoadInteger '42'
+    v112 <- CallFunction v82, [v110]
+    v113 <- LoadInteger '13'
+    v114 <- CallFunction v85, [v110, v113]
+    v115 <- LoadInteger '42'
+    v116 <- CallFunction v82, [v110]
+EndPlainFunction
+v117 <- CallFunction v55, []
+
+
+function f0() {
+    function SetX(a2, a3) {
+        a2.x = a3;
+    }
+    function SetY(a5, a6) {
+        a5.y = a6;
+    }
+    var p = {};
+    function Create() {
+        var o = { __proto__: p, b: 1, a: 2 };
+        delete o.b;
+        return o;
+    }
+    for (let i16 = 0; i16 < 10; i16++) {
+        var o = Create();
+        SetX(o, 13);
+        SetY(o, 13);
+    }
+    Object.defineProperty(p, "x", { value: 42, configurable: true, writable: false });
+    for (let i36 = 0; i36 < 10; i36++) {
+        var o = Create();
+        SetY(o, 13);
+    }
+    var o = Create();
+    o.x;
+    SetX(o, 13);
+    o.x;
+}
+f0();
+function f55() {
+    var p1 = { a: 10 };
+    Object.defineProperty(p1, "x", { value: 42, configurable: true, writable: false });
+    var p2 = { __proto__: p1, x: 153 };
+    for (let i70 = 0; i70 < 2000; i70++) {
+        p1["p" + i70] = 0;
+        p2["p" + i70] = 0;
+    }
+    function GetX(a83) {
+        return a83.x;
+    }
+    function SetX(a86, a87) {
+        a86.x = a87;
+    }
+    function Create() {
+        var o = { __proto__: p2, b: 1, a: 2 };
+        return o;
+    }
+    for (let i94 = 0; i94 < 10; i94++) {
+        var o = Create();
+        GetX(o);
+        SetX(o, 13);
+        GetX(o);
+    }
+    delete p2.x;
+    var o = Create();
+    GetX(o);
+    SetX(o, 13);
+    GetX(o);
+}
+f55();
+
+FuzzIL program written to corpus/regress-store-transition-dict.fzil

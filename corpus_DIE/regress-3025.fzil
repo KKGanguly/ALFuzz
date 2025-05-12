@@ -1,0 +1,17 @@
+v0 <- LoadFloat '9.223372036854778e+18'
+v1 <- CreateNamedVariable 'n', 'var', v0
+v2 <- LoadFloat '9.223372036854778e+18'
+v3 <- LoadInteger '5'
+v4 <- CallMethod v1, 'toString', [v3]
+v5 <- CreateNamedVariable 's', 'var', v4
+v6 <- LoadInteger '5'
+v7 <- CreateNamedVariable 'parseInt', 'none'
+v8 <- CallFunction v7, [v5, v6]
+v9 <- CreateNamedVariable 'v', 'var', v8
+
+
+var n = 9.223372036854778e+18;
+var s = n.toString(5);
+var v = parseInt(s, 5);
+
+FuzzIL program written to corpus/regress-3025.fzil

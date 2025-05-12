@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> v1, v2
+    SetElement v1, '0', v2
+    Return v1
+EndPlainFunction
+BeginForLoopInitializer
+    v3 <- LoadInteger '0'
+BeginForLoopCondition -> v4
+    v5 <- LoadInteger '3'
+    v6 <- Compare v4, '<', v5
+BeginForLoopAfterthought v6 -> v7
+    v8 <- UnaryOperation '++', v7
+BeginForLoopBody -> v9
+    v10 <- CreateNamedVariable 'Array', 'none'
+    v11 <- CallFunction v10, []
+    v12 <- CreateNamedVariable 'a', 'var', v11
+    v13 <- LoadFloat '1.5'
+    v14 <- CallFunction v0, [v12, v13]
+    Reassign v12, v14
+    v15 <- GetElement v12, '0'
+    v16 <- LoadFloat '1.5'
+    v17 <- LoadInteger '2'
+    v18 <- CallFunction v0, [v12, v17]
+    Reassign v12, v18
+    v19 <- GetElement v12, '0'
+    v20 <- LoadInteger '2'
+EndForLoop
+
+
+function foo(a1, a2) {
+    a1[0] = a2;
+    return a1;
+}
+for (let i4 = 0; i4 < 3; ++i4) {
+    var a = Array();
+    a = foo(a, 1.5);
+    a[0];
+    a = foo(a, 2);
+    a[0];
+}
+
+FuzzIL program written to corpus/elements-transition-and-store.fzil

@@ -1,0 +1,37 @@
+v0 <- LoadInteger '6'
+v1 <- LoadInteger '7'
+v2 <- LoadInteger '8'
+v3 <- LoadInteger '9'
+v4 <- CreateArray [v0, v1, v2, v3]
+v5 <- CreateNamedVariable 'o', 'var', v4
+v6 <- BeginPlainFunction -> v7
+    v8 <- CallMethod v5, 'pop', []
+    v9 <- BinaryOperation v8, '+', v7
+    v10 <- CreateNamedVariable 'v', 'var', v9
+    Return v10
+EndPlainFunction
+v11 <- LoadInteger '10'
+v12 <- LoadInteger '1'
+v13 <- CallFunction v6, [v12]
+v14 <- LoadInteger '9'
+v15 <- LoadInteger '1'
+v16 <- CallFunction v6, [v15]
+v17 <- LoadInteger '8'
+v18 <- LoadInteger '1'
+v19 <- CallFunction v6, [v18]
+v20 <- LoadString '61'
+v21 <- LoadString '1'
+v22 <- CallFunction v6, [v21]
+
+
+var o = [6,7,8,9];
+function f(a7) {
+    var v = o.pop() + a7;
+    return v;
+}
+f(1);
+f(1);
+f(1);
+f("1");
+
+FuzzIL program written to corpus/regress-array-pop-deopt.fzil

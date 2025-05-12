@@ -1,0 +1,81 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadInteger '1'
+    Return v2
+EndPlainFunction
+v3 <- GetProperty v0, 'prototype'
+SetProperty v3, 'f', v1
+v4 <- BeginPlainFunction -> 
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '2'
+    ThrowException v6
+EndPlainFunction
+v7 <- GetProperty v4, 'prototype'
+SetProperty v7, 'f', v5
+v8 <- Construct v0, []
+v9 <- CreateNamedVariable 'o1', 'var', v8
+v10 <- Construct v4, []
+v11 <- CreateNamedVariable 'o2', 'var', v10
+v12 <- BeginPlainFunction -> v13
+    v14 <- CallMethod v13, 'f', []
+    Return v14
+EndPlainFunction
+v15 <- CallFunction v12, [v9]
+BeginTry
+    v16 <- CallFunction v12, [v11]
+BeginCatch -> v17
+EndTryCatch
+v18 <- CallFunction v12, [v9]
+BeginTry
+    v19 <- CallFunction v12, [v11]
+BeginCatch -> v20
+EndTryCatch
+v21 <- LoadInteger '1'
+v22 <- CallFunction v12, [v9]
+v23 <- BeginArrowFunction -> 
+    v24 <- CallFunction v12, [v11]
+    Return v24
+EndArrowFunction
+v25 <- CallFunction v23, []
+
+
+function C1() {
+}
+function f1() {
+    return 1;
+}
+const t5 = C1.prototype;
+t5.f = f1;
+function C2() {
+}
+function f5() {
+    throw 2;
+}
+const t12 = C2.prototype;
+t12.f = f5;
+const v8 = new C1();
+var o1 = v8;
+const v10 = new C2();
+var o2 = v10;
+function foo(a13) {
+    return a13.f();
+}
+foo(o1);
+try {
+    foo(o2);
+} catch(e17) {
+}
+foo(o1);
+try {
+    foo(o2);
+} catch(e20) {
+}
+foo(o1);
+const v23 = () => {
+    return foo(o2);
+};
+v23();
+
+FuzzIL program written to corpus/regress-714483.fzil

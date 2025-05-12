@@ -1,0 +1,72 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginWith v1
+        v3 <- BinaryOperation v1, '+', v2
+        Return v3
+    EndWith
+EndPlainFunction
+v4 <- CreateArray [v0, v0, v0, v0]
+v5 <- LoadUndefined
+v6 <- LoadNull
+v7 <- CreateArray [v0, v0, v5, v6]
+v8 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v9 <- LoadThis
+        v10 <- GetProperty v9, 'functions'
+        v11 <- LoadThis
+        v12 <- GetProperty v11, 'receivers'
+        v13 <- CreateNamedVariable 'a', 'none'
+        v14 <- GetProperty v13, 'length'
+        v15 <- LoadInteger '0'
+    BeginForLoopCondition -> v16, v17, v18, v19
+        v20 <- Compare v19, '<', v18
+    BeginForLoopAfterthought v20 -> v21, v22, v23, v24
+        v25 <- UnaryOperation v24, '++'
+    BeginForLoopBody -> v26, v27, v28, v29
+        v30 <- GetComputedProperty v27, v29
+        v31 <- LoadArguments
+        v32 <- GetComputedProperty v26, v29
+        v33 <- CallMethod v32, 'apply', [v30, v31]
+    EndForLoop
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `functions`, v4
+    ObjectLiteralAddProperty `receivers`, v7
+    ObjectLiteralAddProperty `foo`, v8
+v34 <- EndObjectLiteral
+v35 <- CreateNamedVariable 'obj', 'var', v34
+v36 <- LoadInteger '1'
+v37 <- LoadInteger '2'
+v38 <- LoadInteger '3'
+v39 <- LoadInteger '4'
+v40 <- CallMethod v35, 'foo', [v36, v37, v38, v39]
+v41 <- LoadInteger '1'
+v42 <- LoadInteger '2'
+v43 <- LoadInteger '3'
+v44 <- LoadInteger '4'
+v45 <- CallMethod v35, 'foo', [v41, v42, v43, v44]
+v46 <- LoadInteger '1'
+v47 <- LoadInteger '2'
+v48 <- LoadInteger '3'
+v49 <- LoadInteger '4'
+v50 <- CallMethod v35, 'foo', [v46, v47, v48, v49]
+
+
+function bar(a1, a2) {
+    with (a1) {
+        return a1 + a2;
+    }
+}
+const v4 = [bar,bar,bar,bar];
+const v7 = [bar,bar,,null];
+function f8() {
+    for (let i16 = this.functions, i17 = this.receivers, i18 = a.length, i19 = 0; i19 < i18; i19++) {
+        const v30 = i17[i19];
+        i16[i19].apply(v30, arguments);
+    }
+}
+var obj = { functions: v4, receivers: v7, foo: f8 };
+obj.foo(1, 2, 3, 4);
+obj.foo(1, 2, 3, 4);
+obj.foo(1, 2, 3, 4);
+
+FuzzIL program written to corpus/regress-318420.fzil

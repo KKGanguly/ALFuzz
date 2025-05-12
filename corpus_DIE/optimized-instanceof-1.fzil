@@ -1,0 +1,42 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'f', 'var', v1
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- CallMethod v3, 'getPrototypeOf', [v0]
+v5 <- CreateNamedVariable 'proto', 'var', v4
+v6 <- LoadNull
+v7 <- CallMethod v3, 'setPrototypeOf', [v0, v6]
+v8 <- BeginPlainFunction -> v9
+    v10 <- LoadBoolean 'true'
+    Return v10
+EndPlainFunction
+v11 <- CreateNamedVariable 'Symbol', 'none'
+v12 <- GetProperty v11, 'hasInstance'
+SetComputedProperty v0, v12, v8
+v13 <- CallMethod v3, 'setPrototypeOf', [v0, v5]
+v14 <- BeginPlainFunction -> v15
+    v16 <- TestInstanceOf v15, v0
+    Return v16
+EndPlainFunction
+v17 <- LoadInteger '1'
+v18 <- CallFunction v14, [v17]
+
+
+function F() {
+}
+const v1 = new F();
+var f = v1;
+var proto = Object.getPrototypeOf(F);
+Object.setPrototypeOf(F, null);
+function f8(a9) {
+    return true;
+}
+F[Symbol.hasInstance] = f8;
+Object.setPrototypeOf(F, proto);
+function foo(a15) {
+    return a15 instanceof F;
+}
+foo(1);
+
+FuzzIL program written to corpus/optimized-instanceof-1.fzil

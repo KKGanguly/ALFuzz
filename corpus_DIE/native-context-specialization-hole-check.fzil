@@ -1,0 +1,50 @@
+v0 <- CreateNamedVariable 'isNeverOptimizeLiteMode', 'none'
+v1 <- CallFunction v0, []
+BeginIf v1
+    v2 <- LoadString 'Warning: skipping test that requires optimization in Lite mode.'
+    v3 <- CreateNamedVariable 'print', 'none'
+    v4 <- CallFunction v3, [v2]
+    v5 <- LoadInteger '0'
+    v6 <- CreateNamedVariable 'quit', 'none'
+    v7 <- CallFunction v6, [v5]
+EndIf
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '2'
+    v10 <- CreateNamedVariable 'Array', 'none'
+    v11 <- GetProperty v10, 'prototype'
+    SetElement v11, '10', v9
+    v12 <- Construct v10, []
+    v13 <- CreateNamedVariable 'arr', 'var', v12
+    v14 <- LoadInteger '20'
+    SetElement v13, '500', v14
+    v15 <- GetElement v13, '50'
+    SetElement v13, '10', v15
+EndPlainFunction
+v16 <- BeginPlainFunction -> 
+    v17 <- CallFunction v8, []
+EndPlainFunction
+v18 <- CallFunction v16, []
+v19 <- CallFunction v16, []
+v20 <- CallFunction v16, []
+
+
+if (isNeverOptimizeLiteMode()) {
+    print("Warning: skipping test that requires optimization in Lite mode.");
+    quit(0);
+}
+function f() {
+    const t5 = Array.prototype;
+    t5[10] = 2;
+    const v12 = new Array();
+    var arr = v12;
+    arr[500] = 20;
+    arr[10] = arr[50];
+}
+function g() {
+    f();
+}
+g();
+g();
+g();
+
+FuzzIL program written to corpus/native-context-specialization-hole-check.fzil

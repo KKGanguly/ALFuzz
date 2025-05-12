@@ -1,0 +1,90 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'g', 'none'
+    v2 <- GetProperty v1, 'arguments'
+    v3 <- CreateNamedVariable 'res', 'var', v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- CallFunction v0, []
+    v7 <- CreateNamedVariable 'res', 'var', v6
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v9
+    v10 <- EndObjectLiteral
+    v11 <- CreateNamedVariable 'o', 'var', v10
+    v12 <- CallFunction v4, [v11]
+    v13 <- CreateNamedVariable 'res', 'var', v12
+    v14 <- LoadInteger '1'
+    Return v14
+EndPlainFunction
+v15 <- BeginPlainFunction -> v16, v17
+    Directive 'use strict'
+    v18 <- LoadInteger '5'
+    v19 <- CallFunction v8, [v18]
+    Return v19
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21
+    BeginIf v21
+        v22 <- CreateNamedVariable 'Error', 'none'
+        v23 <- LoadString 'boom!'
+        v24 <- Construct v22, [v23]
+        ThrowException v24
+    EndIf
+EndPlainFunction
+v25 <- CallFunction v15, []
+v26 <- CallFunction v15, []
+v27 <- LoadBoolean 'false'
+v28 <- CallFunction v20, [v27]
+v29 <- LoadBoolean 'false'
+v30 <- CallFunction v20, [v29]
+BeginTry
+    v31 <- LoadInteger '1'
+    v32 <- LoadInteger '2'
+    v33 <- LoadInteger '3'
+    v34 <- CallFunction v15, [v31, v32, v33]
+    v35 <- LoadBoolean 'true'
+    v36 <- LoadInteger '1'
+    v37 <- LoadInteger '2'
+    v38 <- LoadInteger '3'
+    v39 <- CallFunction v20, [v35, v36, v37, v38]
+BeginCatch -> v40
+EndTryCatch
+
+
+function h() {
+    var res = g.arguments;
+    return res;
+}
+function g(a5) {
+    var res = h();
+    return res;
+}
+function f1() {
+    var o = { x: 42 };
+    var res = g(o);
+    return 1;
+}
+function f0(a16, a17) {
+    'use strict';
+    return f1(5);
+}
+function boom(a21) {
+    if (a21) {
+        const v24 = new Error("boom!");
+        throw v24;
+    }
+}
+f0();
+f0();
+boom(false);
+boom(false);
+try {
+    f0(1, 2, 3);
+    boom(true, 1, 2, 3);
+} catch(e40) {
+}
+
+FuzzIL program written to corpus/regress-crbug-604680.fzil

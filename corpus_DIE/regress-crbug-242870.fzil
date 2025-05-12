@@ -1,0 +1,36 @@
+v0 <- LoadBoolean 'true'
+v1 <- CreateNamedVariable 'non_const_true', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadBoolean 'true'
+    v4 <- CreateNamedVariable 'g', 'none'
+    v5 <- CallFunction v4, []
+    v6 <- BinaryOperation v3, '&&', v5
+    v7 <- BinaryOperation v1, '||', v6
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v9 <- LoadBoolean 'true'
+    BeginForLoopAfterthought v9
+    BeginForLoopBody
+    EndForLoop
+EndPlainFunction
+v10 <- CallFunction v2, []
+v11 <- CallFunction v2, []
+v12 <- CallFunction v2, []
+
+
+var non_const_true = true;
+function f() {
+    return non_const_true || (true && g());
+}
+function g() {
+    for (;;) {
+    }
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-242870.fzil

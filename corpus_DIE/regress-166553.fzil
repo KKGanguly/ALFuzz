@@ -1,0 +1,26 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '11'
+v2 <- UnaryOperation '-', v1
+v3 <- CreateNamedVariable 'String', 'none'
+v4 <- CallMethod v3, 'fromCharCode', [v0, v2]
+v5 <- CallMethod v4, 'toString', []
+v6 <- CreateNamedVariable 'JSON', 'none'
+v7 <- CallMethod v6, 'stringify', [v5]
+v8 <- CreateNamedVariable 'gc', 'none'
+v9 <- CallFunction v8, []
+v10 <- LoadInteger '1'
+v11 <- LoadInteger '11'
+v12 <- UnaryOperation '-', v11
+v13 <- CallMethod v3, 'fromCharCode', [v10, v12]
+v14 <- CreateNamedVariable 's', 'var', v13
+v15 <- LoadInteger '65525'
+v16 <- LoadInteger '1'
+v17 <- CallMethod v14, 'charCodeAt', [v16]
+
+
+JSON.stringify(String.fromCharCode(1, -11).toString());
+gc();
+var s = String.fromCharCode(1, -11);
+s.charCodeAt(1);
+
+FuzzIL program written to corpus/regress-166553.fzil

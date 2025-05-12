@@ -1,0 +1,195 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'test_id', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- CreateNamedVariable 'Function', 'none'
+    v6 <- LoadString 'n'
+    v7 <- LoadString '"'
+    v8 <- UnaryOperation v1, '++'
+    v9 <- BinaryOperation v7, '+', v8
+    v10 <- LoadString '";return Math.ceil(n)'
+    v11 <- BinaryOperation v9, '+', v10
+    v12 <- Construct v5, [v6, v11]
+    v13 <- CreateNamedVariable 'test', 'var', v12
+    v14 <- CallFunction v13, [v4]
+    v15 <- CallFunction v13, [v4]
+    v16 <- CallFunction v13, [v4]
+    v17 <- CallFunction v13, [v4]
+    v18 <- LoadString 'n'
+    v19 <- LoadString '"'
+    v20 <- UnaryOperation v1, '++'
+    v21 <- BinaryOperation v19, '+', v20
+    v22 <- LoadString '";return Math.ceil(+n)'
+    v23 <- BinaryOperation v21, '+', v22
+    v24 <- Construct v5, [v18, v23]
+    v25 <- CreateNamedVariable 'test_double_input', 'var', v24
+    v26 <- CallFunction v25, [v4]
+    v27 <- CallFunction v25, [v4]
+    v28 <- CallFunction v25, [v4]
+    v29 <- CallFunction v25, [v4]
+    v30 <- LoadString 'n'
+    v31 <- LoadString '"'
+    v32 <- UnaryOperation v1, '++'
+    v33 <- BinaryOperation v31, '+', v32
+    v34 <- LoadString '";return Math.ceil(n) + -0.0'
+    v35 <- BinaryOperation v33, '+', v34
+    v36 <- Construct v5, [v30, v35]
+    v37 <- CreateNamedVariable 'test_double_output', 'var', v36
+    v38 <- CallFunction v37, [v4]
+    v39 <- CallFunction v37, [v4]
+    v40 <- CallFunction v37, [v4]
+    v41 <- CallFunction v37, [v4]
+    v42 <- LoadString 'n'
+    v43 <- LoadString '"'
+    v44 <- UnaryOperation v1, '++'
+    v45 <- BinaryOperation v43, '+', v44
+    v46 <- LoadString '";return -Math.floor(-n)'
+    v47 <- BinaryOperation v45, '+', v46
+    v48 <- Construct v5, [v42, v47]
+    v49 <- CreateNamedVariable 'test_via_floor', 'var', v48
+    v50 <- CallFunction v49, [v4]
+    v51 <- CallFunction v49, [v4]
+    v52 <- CallFunction v49, [v4]
+    v53 <- CallFunction v49, [v4]
+    v54 <- LoadInteger '0'
+    v55 <- Compare v4, '<=', v54
+    BeginIf v55
+        v56 <- LoadString 'n'
+        v57 <- LoadString '"'
+        v58 <- UnaryOperation v1, '++'
+        v59 <- BinaryOperation v57, '+', v58
+        v60 <- LoadString '";return Math.trunc(n)'
+        v61 <- BinaryOperation v59, '+', v60
+        v62 <- Construct v5, [v56, v61]
+        v63 <- CreateNamedVariable 'test_via_trunc', 'var', v62
+        v64 <- CallFunction v63, [v4]
+        v65 <- CallFunction v63, [v4]
+        v66 <- CallFunction v63, [v4]
+        v67 <- CallFunction v63, [v4]
+    EndIf
+EndPlainFunction
+v68 <- BeginPlainFunction -> 
+    v69 <- LoadInteger '0'
+    v70 <- LoadInteger '0'
+    v71 <- CallFunction v2, [v69, v70]
+    v72 <- LoadInteger '0'
+    v73 <- UnaryOperation '+', v72
+    v74 <- LoadInteger '0'
+    v75 <- UnaryOperation '+', v74
+    v76 <- CallFunction v2, [v73, v75]
+    v77 <- LoadInteger '0'
+    v78 <- UnaryOperation '-', v77
+    v79 <- LoadInteger '0'
+    v80 <- UnaryOperation '-', v79
+    v81 <- CallFunction v2, [v78, v80]
+    v82 <- LoadInteger '1'
+    v83 <- LoadFloat '0.49999'
+    v84 <- CallFunction v2, [v82, v83]
+    v85 <- LoadInteger '1'
+    v86 <- LoadFloat '0.6'
+    v87 <- CallFunction v2, [v85, v86]
+    v88 <- LoadInteger '1'
+    v89 <- LoadFloat '0.5'
+    v90 <- CallFunction v2, [v88, v89]
+    v91 <- LoadInteger '0'
+    v92 <- UnaryOperation '-', v91
+    v93 <- LoadFloat '0.1'
+    v94 <- UnaryOperation '-', v93
+    v95 <- CallFunction v2, [v92, v94]
+    v96 <- LoadInteger '0'
+    v97 <- UnaryOperation '-', v96
+    v98 <- LoadFloat '0.5'
+    v99 <- UnaryOperation '-', v98
+    v100 <- CallFunction v2, [v97, v99]
+    v101 <- LoadInteger '0'
+    v102 <- UnaryOperation '-', v101
+    v103 <- LoadFloat '0.6'
+    v104 <- UnaryOperation '-', v103
+    v105 <- CallFunction v2, [v102, v104]
+    v106 <- LoadInteger '1'
+    v107 <- UnaryOperation '-', v106
+    v108 <- LoadFloat '1.6'
+    v109 <- UnaryOperation '-', v108
+    v110 <- CallFunction v2, [v107, v109]
+    v111 <- LoadInteger '0'
+    v112 <- UnaryOperation '-', v111
+    v113 <- LoadFloat '0.50001'
+    v114 <- UnaryOperation '-', v113
+    v115 <- CallFunction v2, [v112, v114]
+    v116 <- CreateNamedVariable 'Infinity', 'none'
+    v117 <- CallFunction v2, [v116, v116]
+    v118 <- UnaryOperation '-', v116
+    v119 <- UnaryOperation '-', v116
+    v120 <- CallFunction v2, [v118, v119]
+EndPlainFunction
+BeginForLoopInitializer
+    v121 <- LoadInteger '0'
+BeginForLoopCondition -> v122
+    v123 <- LoadInteger '10'
+    v124 <- Compare v122, '<', v123
+BeginForLoopAfterthought v124 -> v125
+    v126 <- UnaryOperation v125, '++'
+BeginForLoopBody -> v127
+    v128 <- CallFunction v68, []
+    v129 <- CreateNamedVariable 'Array', 'none'
+    v130 <- LoadInteger '10000'
+    v131 <- BinaryOperation v127, '*', v130
+    v132 <- Construct v129, [v131]
+EndForLoop
+
+
+var test_id = 0;
+function testCeil(a3, a4) {
+    const v12 = new Function("n", (""" + test_id++) + "";return Math.ceil(n)");
+    var test = v12;
+    test(a4);
+    test(a4);
+    test(a4);
+    test(a4);
+    const v24 = new Function("n", (""" + test_id++) + "";return Math.ceil(+n)");
+    var test_double_input = v24;
+    test_double_input(a4);
+    test_double_input(a4);
+    test_double_input(a4);
+    test_double_input(a4);
+    const v36 = new Function("n", (""" + test_id++) + "";return Math.ceil(n) + -0.0");
+    var test_double_output = v36;
+    test_double_output(a4);
+    test_double_output(a4);
+    test_double_output(a4);
+    test_double_output(a4);
+    const v48 = new Function("n", (""" + test_id++) + "";return -Math.floor(-n)");
+    var test_via_floor = v48;
+    test_via_floor(a4);
+    test_via_floor(a4);
+    test_via_floor(a4);
+    test_via_floor(a4);
+    if (a4 <= 0) {
+        const v62 = new Function("n", (""" + test_id++) + "";return Math.trunc(n)");
+        var test_via_trunc = v62;
+        test_via_trunc(a4);
+        test_via_trunc(a4);
+        test_via_trunc(a4);
+        test_via_trunc(a4);
+    }
+}
+function test() {
+    testCeil(0, 0);
+    testCeil(+0, +0);
+    testCeil(-0, -0);
+    testCeil(1, 0.49999);
+    testCeil(1, 0.6);
+    testCeil(1, 0.5);
+    testCeil(-0, -0.1);
+    testCeil(-0, -0.5);
+    testCeil(-0, -0.6);
+    testCeil(-1, -1.6);
+    testCeil(-0, -0.50001);
+    testCeil(Infinity, Infinity);
+    testCeil(-Infinity, -Infinity);
+}
+for (let i122 = 0; i122 < 10; i122++) {
+    test();
+    new Array(i122 * 10000);
+}
+
+FuzzIL program written to corpus/math-ceil.fzil

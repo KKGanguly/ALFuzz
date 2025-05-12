@@ -1,0 +1,58 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadThis
+    SetProperty v2, 'value', v1
+EndPlainFunction
+v3 <- LoadInteger '23'
+v4 <- CreateNamedVariable 'size', 'var', v3
+v5 <- CreateNamedVariable 'Array', 'none'
+v6 <- Construct v5, [v4]
+v7 <- CreateNamedVariable 'array1', 'var', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '0'
+    v10 <- LoadInteger '1'
+    v11 <- CallMethod v7, 'splice', [v9, v10]
+    v12 <- LoadThis
+    v13 <- GetProperty v12, 'value'
+    v14 <- CallMethod v13, 'toString', []
+    Return v14
+EndPlainFunction
+v15 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v16 <- LoadInteger '0'
+    BeginForLoopCondition -> v17
+        v18 <- Compare v17, '<', v4
+    BeginForLoopAfterthought v18 -> v19
+        v20 <- UnaryOperation v19, '++'
+    BeginForLoopBody -> v21
+        v22 <- Construct v0, [v21]
+        SetComputedProperty v7, v21, v22
+        v23 <- GetComputedProperty v7, v21
+        SetProperty v23, 'toString', v8
+    EndForLoop
+    v24 <- CallMethod v7, 'sort', []
+EndPlainFunction
+v25 <- CallFunction v15, []
+
+
+function Item(a1) {
+    this.value = a1;
+}
+var size = 23;
+const v6 = new Array(size);
+var array1 = v6;
+function myToString() {
+    array1.splice(0, 1);
+    return this.value.toString();
+}
+function test() {
+    for (let i17 = 0; i17 < size; i17++) {
+        const v22 = new Item(i17);
+        array1[i17] = v22;
+        const t14 = array1[i17];
+        t14.toString = myToString;
+    }
+    array1.sort();
+}
+test();
+
+FuzzIL program written to corpus/regress-swapelements.fzil

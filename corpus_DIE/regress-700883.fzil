@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BinaryOperation v1, '+', v1
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '0'
+v4 <- CallFunction v0, [v3]
+v5 <- LoadInteger '1'
+v6 <- CallFunction v0, [v5]
+v7 <- CreateNamedVariable 'Math', 'none'
+v8 <- GetProperty v7, 'min'
+v9 <- CreateNamedVariable 'min', 'var', v8
+v10 <- BeginPlainFunction -> v11
+    v12 <- LoadInteger '0'
+    v13 <- BinaryOperation v11, '|', v12
+    Reassign v11, v13
+    v14 <- LoadInteger '800000000000'
+    v15 <- CreateNamedVariable 'NaN', 'none'
+    v16 <- TernaryOperation v11, v14, v15
+    v17 <- CallFunction v0, [v16]
+    v18 <- CreateNamedVariable 'y', 'let', v17
+    v19 <- CallFunction v9, [v18, v11]
+    Return v19
+EndPlainFunction
+v20 <- CallFunction v10, []
+v21 <- CallFunction v10, []
+
+
+function add(a1) {
+    return a1 + a1;
+}
+add(0);
+add(1);
+var min = Math.min;
+function foo(a11) {
+    let y = add((a11 = a11 | 0) ? 800000000000 : NaN);
+    return min(y, a11);
+}
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-700883.fzil

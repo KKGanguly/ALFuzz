@@ -1,0 +1,110 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'toString'
+    Return v2
+EndPlainFunction
+v3 <- CreateNamedVariable 'Symbol', 'none'
+v4 <- CallFunction v3, []
+v5 <- CallFunction v0, [v4]
+v6 <- GetProperty v3, 'prototype'
+v7 <- CallMethod v6, 'toString', []
+v8 <- CallFunction v3, []
+v9 <- CallFunction v0, [v8]
+v10 <- GetProperty v3, 'prototype'
+v11 <- CallMethod v10, 'toString', []
+v12 <- CallFunction v3, []
+v13 <- CallFunction v0, [v12]
+v14 <- GetProperty v3, 'prototype'
+v15 <- CallMethod v14, 'toString', []
+v16 <- BeginPlainFunction -> v17
+    v18 <- GetProperty v17, 'valueOf'
+    Return v18
+EndPlainFunction
+v19 <- CallFunction v3, []
+v20 <- CallFunction v16, [v19]
+v21 <- GetProperty v3, 'prototype'
+v22 <- CallMethod v21, 'valueOf', []
+v23 <- CallFunction v3, []
+v24 <- CallFunction v16, [v23]
+v25 <- GetProperty v3, 'prototype'
+v26 <- CallMethod v25, 'valueOf', []
+v27 <- CallFunction v3, []
+v28 <- CallFunction v16, [v27]
+v29 <- GetProperty v3, 'prototype'
+v30 <- CallMethod v29, 'valueOf', []
+v31 <- LoadInteger '1'
+v32 <- GetProperty v3, 'prototype'
+SetProperty v32, 'foo', v31
+v33 <- BeginPlainFunction -> v34
+    v35 <- LoadString 'foo'
+    v36 <- GetComputedProperty v34, v35
+    Return v36
+EndPlainFunction
+v37 <- CallFunction v3, []
+v38 <- CallFunction v33, [v37]
+v39 <- LoadInteger '1'
+v40 <- CallFunction v3, []
+v41 <- CallFunction v33, [v40]
+v42 <- LoadInteger '1'
+v43 <- CallFunction v3, []
+v44 <- CallFunction v33, [v43]
+v45 <- LoadInteger '1'
+v46 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v47 <- LoadThis
+    Return v47
+EndPlainFunction
+v48 <- GetProperty v3, 'prototype'
+SetProperty v48, 'bar', v46
+v49 <- BeginPlainFunction -> v50
+    v51 <- CallMethod v50, 'bar', []
+    Return v51
+EndPlainFunction
+v52 <- LoadString 'foo'
+v53 <- CallFunction v3, [v52]
+v54 <- CreateNamedVariable 's', 'var', v53
+v55 <- CallFunction v49, [v54]
+v56 <- CallFunction v49, [v54]
+v57 <- CallFunction v49, [v54]
+
+
+function test1(a1) {
+    return a1.toString;
+}
+test1(Symbol());
+Symbol.prototype.toString();
+test1(Symbol());
+Symbol.prototype.toString();
+test1(Symbol());
+Symbol.prototype.toString();
+function test2(a17) {
+    return a17.valueOf;
+}
+test2(Symbol());
+Symbol.prototype.valueOf();
+test2(Symbol());
+Symbol.prototype.valueOf();
+test2(Symbol());
+Symbol.prototype.valueOf();
+const t12 = Symbol.prototype;
+t12.foo = 1;
+function test3(a34) {
+    return a34["foo"];
+}
+test3(Symbol());
+test3(Symbol());
+test3(Symbol());
+function f46() {
+    'use strict';
+    return this;
+}
+const t30 = Symbol.prototype;
+t30.bar = f46;
+function test4(a50) {
+    return a50.bar();
+}
+var s = Symbol("foo");
+test4(s);
+test4(s);
+test4(s);
+
+FuzzIL program written to corpus/symbol-protototype.fzil

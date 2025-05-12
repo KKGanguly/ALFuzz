@@ -1,0 +1,34 @@
+v0 <- LoadString '('
+v1 <- LoadInteger '50000'
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- CallFunction v2, [v1]
+v4 <- CallMethod v3, 'join', [v0]
+v5 <- LoadString 'a'
+v6 <- BinaryOperation v4, '+', v5
+v7 <- LoadString ')'
+v8 <- LoadInteger '50000'
+v9 <- CallFunction v2, [v8]
+v10 <- CallMethod v9, 'join', [v7]
+v11 <- BinaryOperation v6, '+', v10
+v12 <- CreateNamedVariable 'source', 'var', v11
+v13 <- CreateNamedVariable 'RegExp', 'none'
+v14 <- CallFunction v13, [v12]
+v15 <- CreateNamedVariable 'r', 'var', v14
+BeginTry
+    v16 <- LoadString ''
+    v17 <- CallMethod v15, 'test', [v16]
+BeginCatch -> v18
+EndTryCatch
+v19 <- CreateNamedVariable 'gc', 'none'
+v20 <- CallFunction v19, []
+
+
+var source = (Array(50000).join("(") + "a") + Array(50000).join(")");
+var r = RegExp(source);
+try {
+    r.test("");
+} catch(e18) {
+}
+gc();
+
+FuzzIL program written to corpus/regress-1129.fzil

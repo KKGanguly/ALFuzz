@@ -1,0 +1,687 @@
+v0 <- LoadInteger '42'
+v1 <- LoadInteger '42'
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadArguments
+    Return v3
+EndPlainFunction
+v4 <- CallFunction v2, [v1]
+v5 <- GetElement v4, '0'
+v6 <- LoadString 'return arguments value'
+v7 <- LoadInteger '42'
+v8 <- LoadInteger '42'
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadArguments
+    Return v10
+EndPlainFunction
+v11 <- CallFunction v9, [v8]
+v12 <- GetElement v11, '0'
+v13 <- LoadString 'arguments in plain value context'
+v14 <- LoadInteger '42'
+v15 <- LoadInteger '37'
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadArguments
+    v18 <- LoadInteger '42'
+    Return v18
+EndPlainFunction
+v19 <- CallFunction v16, [v15]
+v20 <- LoadString 'arguments in effect context'
+v21 <- LoadInteger '42'
+v22 <- BeginPlainFunction -> 
+    v23 <- LoadArguments
+    BeginIf v23
+        v24 <- LoadInteger '42'
+        Return v24
+    EndIf
+EndPlainFunction
+v25 <- CallFunction v22, []
+v26 <- LoadString 'arguments in a boolean context'
+v27 <- LoadInteger '42'
+v28 <- LoadInteger '42'
+v29 <- BeginPlainFunction -> 
+    v30 <- LoadArguments
+    v31 <- LoadBoolean 'true'
+    v32 <- BinaryOperation v30, '||', v31
+    Return v32
+EndPlainFunction
+v33 <- CallFunction v29, [v28]
+v34 <- GetElement v33, '0'
+v35 <- LoadString 'arguments in a short-circuit boolean context - or'
+v36 <- LoadBoolean 'true'
+v37 <- LoadInteger '42'
+v38 <- BeginPlainFunction -> 
+    v39 <- LoadArguments
+    v40 <- LoadBoolean 'true'
+    v41 <- CreateArray [v40]
+    v42 <- BinaryOperation v39, '&&', v41
+    Return v42
+EndPlainFunction
+v43 <- CallFunction v38, [v37]
+v44 <- GetElement v43, '0'
+v45 <- LoadString 'arguments in a short-circuit boolean context - and'
+v46 <- LoadInteger '42'
+v47 <- BeginPlainFunction -> 
+    v48 <- LoadInteger '42'
+    v49 <- CreateNamedVariable 'arguments', 'none'
+    Reassign v49, v48
+    v50 <- LoadInteger '42'
+    Return v50
+EndPlainFunction
+v51 <- CallFunction v47, []
+v52 <- LoadString 'arguments assignment'
+v53 <- LoadInteger '42'
+v54 <- LoadInteger '42'
+v55 <- BeginPlainFunction -> 
+    v56 <- LoadArguments
+    v57 <- GetElement v56, '0'
+    Return v57
+EndPlainFunction
+v58 <- CallFunction v55, [v54]
+v59 <- LoadString 'args[0] value returned'
+v60 <- LoadInteger '42'
+v61 <- BeginPlainFunction -> 
+    v62 <- LoadArguments
+    v63 <- GetElement v62, '0'
+    v64 <- LoadInteger '42'
+    Return v64
+EndPlainFunction
+v65 <- CallFunction v61, []
+v66 <- LoadString 'args[0] value ignored'
+v67 <- LoadInteger '42'
+v68 <- LoadInteger '37'
+v69 <- BeginPlainFunction -> 
+    v70 <- LoadArguments
+    v71 <- GetElement v70, '0'
+    BeginIf v71
+        v72 <- LoadInteger '42'
+        Return v72
+    EndIf
+EndPlainFunction
+v73 <- CallFunction v69, [v68]
+v74 <- LoadString 'args[0] to boolean'
+v75 <- LoadInteger '42'
+v76 <- LoadInteger '42'
+v77 <- BeginPlainFunction -> 
+    v78 <- LoadArguments
+    v79 <- GetElement v78, '0'
+    v80 <- LoadString 'no'
+    v81 <- BinaryOperation v79, '||', v80
+    Return v81
+EndPlainFunction
+v82 <- CallFunction v77, [v76]
+v83 <- LoadString 'args[0] short-circuit boolean or true'
+v84 <- LoadInteger '42'
+v85 <- LoadInteger '0'
+v86 <- BeginPlainFunction -> 
+    v87 <- LoadArguments
+    v88 <- GetElement v87, '0'
+    v89 <- LoadInteger '42'
+    v90 <- BinaryOperation v88, '||', v89
+    Return v90
+EndPlainFunction
+v91 <- CallFunction v86, [v85]
+v92 <- LoadString 'args[0] short-circuit boolean or false'
+v93 <- LoadInteger '37'
+v94 <- LoadInteger '42'
+v95 <- BeginPlainFunction -> 
+    v96 <- LoadArguments
+    v97 <- GetElement v96, '0'
+    v98 <- LoadInteger '37'
+    v99 <- BinaryOperation v97, '&&', v98
+    Return v99
+EndPlainFunction
+v100 <- CallFunction v95, [v94]
+v101 <- LoadString 'args[0] short-circuit boolean and true'
+v102 <- LoadInteger '0'
+v103 <- LoadInteger '0'
+v104 <- BeginPlainFunction -> 
+    v105 <- LoadArguments
+    v106 <- GetElement v105, '0'
+    v107 <- LoadInteger '42'
+    v108 <- BinaryOperation v106, '&&', v107
+    Return v108
+EndPlainFunction
+v109 <- CallFunction v104, [v103]
+v110 <- LoadString 'args[0] short-circuit boolean and false'
+v111 <- LoadInteger '42'
+v112 <- LoadInteger '37'
+v113 <- BeginPlainFunction -> 
+    v114 <- LoadInteger '42'
+    v115 <- LoadArguments
+    SetElement v115, '0', v114
+    v116 <- LoadArguments
+    v117 <- GetElement v116, '0'
+    Return v117
+EndPlainFunction
+v118 <- CallFunction v113, [v112]
+v119 <- LoadString 'args[0] assignment'
+v120 <- LoadInteger '42'
+v121 <- LoadInteger '37'
+v122 <- BeginPlainFunction -> v123
+    v124 <- LoadInteger '42'
+    v125 <- LoadArguments
+    SetElement v125, '0', v124
+    Return v123
+EndPlainFunction
+v126 <- CallFunction v122, [v121]
+v127 <- LoadString 'assign args[0]->a'
+v128 <- LoadInteger '42'
+v129 <- LoadInteger '37'
+v130 <- BeginPlainFunction -> v131
+    v132 <- LoadInteger '42'
+    Reassign v131, v132
+    v133 <- LoadArguments
+    v134 <- GetElement v133, '0'
+    Return v134
+EndPlainFunction
+v135 <- CallFunction v130, [v129]
+v136 <- LoadString 'assign a->args[0]'
+v137 <- LoadInteger '54'
+v138 <- LoadInteger '42'
+v139 <- LoadInteger '37'
+v140 <- BeginPlainFunction -> v141, v142
+    v143 <- LoadInteger '54'
+    v144 <- LoadArguments
+    SetElement v144, '1', v143
+    Return v142
+EndPlainFunction
+v145 <- CallFunction v140, [v138, v139]
+v146 <- LoadString 'assign args[1]->b:b'
+v147 <- LoadInteger '54'
+v148 <- LoadInteger '42'
+v149 <- LoadInteger '47'
+v150 <- BeginPlainFunction -> v151, v152
+    v153 <- LoadInteger '54'
+    Reassign v152, v153
+    v154 <- LoadArguments
+    v155 <- GetElement v154, '1'
+    Return v155
+EndPlainFunction
+v156 <- CallFunction v150, [v148, v149]
+v157 <- LoadString 'assign b->args[1]:b'
+v158 <- LoadInteger '42'
+v159 <- LoadInteger '42'
+v160 <- LoadInteger '37'
+v161 <- BeginPlainFunction -> v162, v163
+    v164 <- LoadInteger '54'
+    v165 <- LoadArguments
+    SetElement v165, '1', v164
+    Return v162
+EndPlainFunction
+v166 <- CallFunction v161, [v159, v160]
+v167 <- LoadString 'assign args[1]->b:a'
+v168 <- LoadInteger '42'
+v169 <- LoadInteger '42'
+v170 <- LoadInteger '47'
+v171 <- BeginPlainFunction -> v172, v173
+    v174 <- LoadInteger '54'
+    Reassign v173, v174
+    v175 <- LoadArguments
+    v176 <- GetElement v175, '0'
+    Return v176
+EndPlainFunction
+v177 <- CallFunction v171, [v169, v170]
+v178 <- LoadString 'assign b->args[1]:a'
+v179 <- LoadInteger '33'
+v180 <- LoadInteger '7'
+v181 <- LoadInteger '6'
+v182 <- BeginPlainFunction -> v183, v184
+    v185 <- LoadArguments
+    v186 <- GetElement v185, '0'
+    v187 <- BinaryOperation v183, '+', v186
+    v188 <- BeginPlainFunction -> v189
+        v190 <- BinaryOperation v183, '+', v189
+        v191 <- LoadArguments
+        v192 <- GetElement v191, '0'
+        v193 <- BinaryOperation v190, '+', v192
+        Return v193
+    EndPlainFunction
+    v194 <- CallFunction v188, [v184]
+    v195 <- BinaryOperation v187, '+', v194
+    Return v195
+EndPlainFunction
+v196 <- CallFunction v182, [v180, v181]
+v197 <- LoadString 'captured parameters'
+v198 <- LoadInteger '42'
+v199 <- LoadInteger '37'
+v200 <- BeginPlainFunction -> v201
+    v202 <- LoadInteger '42'
+    v203 <- LoadArguments
+    SetElement v203, '0', v202
+    v204 <- BeginPlainFunction -> v205
+        Return v201
+    EndPlainFunction
+    v206 <- CallFunction v204, []
+    Return v206
+EndPlainFunction
+v207 <- CallFunction v200, [v199]
+v208 <- LoadString 'capture value returned'
+v209 <- LoadInteger '42'
+v210 <- LoadInteger '37'
+v211 <- BeginPlainFunction -> v212
+    v213 <- LoadInteger '26'
+    v214 <- LoadArguments
+    SetElement v214, '0', v213
+    v215 <- BeginPlainFunction -> v216
+        v217 <- LoadInteger '42'
+        Return v217
+    EndPlainFunction
+    v218 <- CallFunction v215, []
+    Return v218
+EndPlainFunction
+v219 <- CallFunction v211, [v210]
+v220 <- LoadString 'capture value ignored'
+v221 <- LoadInteger '42'
+v222 <- LoadInteger '37'
+v223 <- BeginPlainFunction -> v224
+    v225 <- LoadInteger '26'
+    v226 <- LoadArguments
+    SetElement v226, '0', v225
+    v227 <- BeginPlainFunction -> v228
+        BeginIf v224
+            v229 <- LoadInteger '42'
+            Return v229
+        EndIf
+    EndPlainFunction
+    v230 <- CallFunction v227, []
+    Return v230
+EndPlainFunction
+v231 <- CallFunction v223, [v222]
+v232 <- LoadString 'capture to boolean'
+v233 <- LoadInteger '42'
+v234 <- LoadInteger '37'
+v235 <- BeginPlainFunction -> v236
+    v237 <- LoadInteger '42'
+    v238 <- LoadArguments
+    SetElement v238, '0', v237
+    v239 <- BeginPlainFunction -> v240
+        v241 <- LoadString 'no'
+        v242 <- BinaryOperation v236, '||', v241
+        Return v242
+    EndPlainFunction
+    v243 <- CallFunction v239, []
+    Return v243
+EndPlainFunction
+v244 <- CallFunction v235, [v234]
+v245 <- LoadString 'capture short-circuit boolean or true'
+v246 <- LoadInteger '0'
+v247 <- LoadInteger '37'
+v248 <- BeginPlainFunction -> v249
+    v250 <- LoadInteger '0'
+    v251 <- LoadArguments
+    SetElement v251, '0', v250
+    v252 <- BeginPlainFunction -> v253
+        v254 <- LoadInteger '42'
+        v255 <- BinaryOperation v249, '&&', v254
+        Return v255
+    EndPlainFunction
+    v256 <- CallFunction v252, []
+    Return v256
+EndPlainFunction
+v257 <- CallFunction v248, [v247]
+v258 <- LoadString 'capture short-circuit boolean and false'
+v259 <- LoadInteger '42'
+v260 <- LoadInteger '7'
+v261 <- LoadInteger '14'
+v262 <- LoadInteger '21'
+v263 <- BeginPlainFunction -> v264, v265
+    v266 <- LoadArguments
+    v267 <- GetElement v266, '2'
+    v268 <- BeginPlainFunction -> 
+        v269 <- BeginPlainFunction -> 
+            Return v264
+        EndPlainFunction
+        v270 <- CallFunction v269, []
+        v271 <- BinaryOperation v265, '+', v270
+        Return v271
+    EndPlainFunction
+    v272 <- CallFunction v268, []
+    v273 <- BinaryOperation v267, '+', v272
+    Return v273
+EndPlainFunction
+v274 <- CallFunction v263, [v260, v261, v262]
+v275 <- LoadString 'deep nested capture'
+v276 <- LoadInteger '42'
+v277 <- LoadInteger '20'
+v278 <- LoadInteger '37'
+v279 <- BeginPlainFunction -> v280, v281
+    v282 <- LoadInteger '11'
+    v283 <- LoadArguments
+    SetElement v283, '1', v282
+    v284 <- BeginPlainFunction -> 
+        Reassign v280, v281
+        Return v280
+    EndPlainFunction
+    v285 <- CallFunction v284, []
+    v286 <- BinaryOperation v280, '+', v285
+    v287 <- BinaryOperation v286, '+', v280
+    Return v287
+EndPlainFunction
+v288 <- CallFunction v279, [v277, v278]
+v289 <- LoadString 'captured assignment'
+v290 <- LoadInteger '42'
+v291 <- LoadInteger '37'
+v292 <- BeginPlainFunction -> v293
+    v294 <- LoadInteger '20'
+    v295 <- LoadArguments
+    SetElement v295, '0', v294
+    v296 <- LoadInteger '22'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `b`, v296
+    v297 <- EndObjectLiteral
+    BeginWith v297
+        v298 <- CreateNamedVariable 'b', 'none'
+        v299 <- BinaryOperation v293, '+', v298
+        Return v299
+    EndWith
+EndPlainFunction
+v300 <- CallFunction v292, [v291]
+v301 <- LoadString 'a in with'
+v302 <- LoadInteger '42'
+v303 <- LoadInteger '20'
+v304 <- BeginPlainFunction -> v305
+    v306 <- LoadInteger '22'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `b`, v306
+    v307 <- EndObjectLiteral
+    BeginWith v307
+        v308 <- LoadArguments
+        v309 <- GetElement v308, '0'
+        v310 <- CreateNamedVariable 'b', 'none'
+        v311 <- BinaryOperation v309, '+', v310
+        Return v311
+    EndWith
+EndPlainFunction
+v312 <- CallFunction v304, [v303]
+v313 <- LoadString 'args in with'
+v314 <- LoadInteger '42'
+v315 <- LoadInteger '37'
+v316 <- BeginPlainFunction -> v317
+    v318 <- LoadInteger '20'
+    v319 <- LoadArguments
+    SetElement v319, '0', v318
+    v320 <- LoadInteger '22'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `b`, v320
+    v321 <- EndObjectLiteral
+    BeginWith v321
+        v322 <- BeginPlainFunction -> 
+            Return v317
+        EndPlainFunction
+        v323 <- CallFunction v322, []
+        v324 <- CreateNamedVariable 'b', 'none'
+        v325 <- BinaryOperation v323, '+', v324
+        Return v325
+    EndWith
+EndPlainFunction
+v326 <- CallFunction v316, [v315]
+v327 <- LoadString 'captured a in with'
+v328 <- LoadInteger '42'
+v329 <- LoadInteger '37'
+v330 <- BeginPlainFunction -> v331
+    v332 <- LoadInteger '12'
+    v333 <- LoadArguments
+    SetElement v333, '0', v332
+    v334 <- LoadInteger '22'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `b`, v334
+    v335 <- EndObjectLiteral
+    BeginWith v335
+        v336 <- BeginPlainFunction -> 
+            BeginTry
+                v337 <- LoadInteger '8'
+                ThrowException v337
+            BeginCatch -> v338
+                v339 <- BinaryOperation v338, '+', v331
+                Return v339
+            EndTryCatch
+        EndPlainFunction
+        v340 <- CallFunction v336, []
+        v341 <- CreateNamedVariable 'b', 'none'
+        v342 <- BinaryOperation v340, '+', v341
+        Return v342
+    EndWith
+EndPlainFunction
+v343 <- CallFunction v330, [v329]
+v344 <- LoadString 'in a catch in a named function captured a in with '
+v345 <- BeginPlainFunction -> v346, v347, v348
+    v349 <- UnaryOperation '!', v346
+    BeginIf v349
+        v350 <- LoadArguments
+        Return v350
+    EndIf
+    v351 <- GetElement v347, '2'
+    v352 <- CreateArray [v351, v348]
+    Return v352
+EndPlainFunction
+v353 <- LoadBoolean 'false'
+v354 <- LoadNull
+v355 <- LoadInteger '40'
+v356 <- CallFunction v345, [v353, v354, v355]
+v357 <- CreateNamedVariable 'args1', 'var', v356
+v358 <- LoadBoolean 'true'
+v359 <- LoadInteger '15'
+v360 <- CallFunction v345, [v358, v357, v359]
+v361 <- CreateNamedVariable 'res', 'var', v360
+v362 <- LoadInteger '40'
+v363 <- GetElement v361, '0'
+v364 <- LoadString 'return old args element'
+v365 <- LoadInteger '15'
+v366 <- GetElement v361, '1'
+v367 <- LoadString 'return own args element'
+
+
+function f2() {
+    return arguments;
+}
+f2(42)[0];
+function f9() {
+    return arguments;
+}
+f9(42)[0];
+function f16() {
+    return 42;
+}
+f16(37);
+function f22() {
+    if (arguments) {
+        return 42;
+    }
+}
+f22();
+function f29() {
+    return arguments || true;
+}
+f29(42)[0];
+function f38() {
+    return arguments && [true];
+}
+f38(42)[0];
+function f47() {
+    arguments = 42;
+    return 42;
+}
+f47();
+function f55() {
+    return arguments[0];
+}
+f55(42);
+function f61() {
+    arguments[0];
+    return 42;
+}
+f61();
+function f69() {
+    if (arguments[0]) {
+        return 42;
+    }
+}
+f69(37);
+function f77() {
+    return arguments[0] || "no";
+}
+f77(42);
+function f86() {
+    return arguments[0] || 42;
+}
+f86(0);
+function f95() {
+    return arguments[0] && 37;
+}
+f95(42);
+function f104() {
+    return arguments[0] && 42;
+}
+f104(0);
+function f113() {
+    arguments[0] = 42;
+    return arguments[0];
+}
+f113(37);
+function f122(a123) {
+    arguments[0] = 42;
+    return a123;
+}
+f122(37);
+function f130(a131) {
+    a131 = 42;
+    return arguments[0];
+}
+f130(37);
+function f140(a141, a142) {
+    arguments[1] = 54;
+    return a142;
+}
+f140(42, 37);
+function f150(a151, a152) {
+    a152 = 54;
+    return arguments[1];
+}
+f150(42, 47);
+function f161(a162, a163) {
+    arguments[1] = 54;
+    return a162;
+}
+f161(42, 37);
+function f171(a172, a173) {
+    a173 = 54;
+    return arguments[0];
+}
+f171(42, 47);
+function f182(a183, a184) {
+    const v187 = a183 + arguments[0];
+    function f188(a189) {
+        return (a183 + a189) + arguments[0];
+    }
+    return v187 + f188(a184);
+}
+f182(7, 6);
+function f200(a201) {
+    arguments[0] = 42;
+    function f204(a205) {
+        return a201;
+    }
+    return f204();
+}
+f200(37);
+function f211(a212) {
+    arguments[0] = 26;
+    function f215(a216) {
+        return 42;
+    }
+    return f215();
+}
+f211(37);
+function f223(a224) {
+    arguments[0] = 26;
+    function f227(a228) {
+        if (a224) {
+            return 42;
+        }
+    }
+    return f227();
+}
+f223(37);
+function f235(a236) {
+    arguments[0] = 42;
+    function f239(a240) {
+        return a236 || "no";
+    }
+    return f239();
+}
+f235(37);
+function f248(a249) {
+    arguments[0] = 0;
+    function f252(a253) {
+        return a249 && 42;
+    }
+    return f252();
+}
+f248(37);
+function f263(a264, a265) {
+    const v267 = arguments[2];
+    function f268() {
+        function f269() {
+            return a264;
+        }
+        return a265 + f269();
+    }
+    return v267 + f268();
+}
+f263(7, 14, 21);
+function f279(a280, a281) {
+    arguments[1] = 11;
+    function f284() {
+        return a280 = a281;
+    }
+    return (a280 + f284()) + a280;
+}
+f279(20, 37);
+function f292(a293) {
+    arguments[0] = 20;
+    with ({ b: 22 }) {
+        return a293 + b;
+    }
+}
+f292(37);
+function f304(a305) {
+    with ({ b: 22 }) {
+        return arguments[0] + b;
+    }
+}
+f304(20);
+function f316(a317) {
+    arguments[0] = 20;
+    with ({ b: 22 }) {
+        function f322() {
+            return a317;
+        }
+        return f322() + b;
+    }
+}
+f316(37);
+function f330(a331) {
+    arguments[0] = 12;
+    with ({ b: 22 }) {
+        function f() {
+            try {
+                throw 8;
+            } catch(e338) {
+                return e338 + a331;
+            }
+        }
+        return f() + b;
+    }
+}
+f330(37);
+function weirdargs(a346, a347, a348) {
+    if (!a346) {
+        return arguments;
+    }
+    return [a347[2],a348];
+}
+var args1 = weirdargs(false, null, 40);
+var res = weirdargs(true, args1, 15);
+res[0];
+res[1];
+
+FuzzIL program written to corpus/arguments-read-and-assignment.fzil

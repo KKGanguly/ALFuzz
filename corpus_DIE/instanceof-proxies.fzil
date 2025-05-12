@@ -1,0 +1,163 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- CreateNamedVariable 'Array', 'none'
+        v4 <- TestInstanceOf v2, v3
+        Return v4
+    EndPlainFunction
+    v5 <- CreateArray []
+    v6 <- CallFunction v1, [v5]
+    BeginObjectLiteral
+    v7 <- EndObjectLiteral
+    v8 <- CallFunction v1, [v7]
+    v9 <- CreateArray []
+    v10 <- CallFunction v1, [v9]
+    BeginObjectLiteral
+    v11 <- EndObjectLiteral
+    v12 <- CallFunction v1, [v11]
+    v13 <- BeginPlainFunction -> v14
+        v15 <- CreateNamedVariable 'Array', 'none'
+        v16 <- GetProperty v15, 'prototype'
+        Return v16
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `getPrototypeOf`, v13
+    v17 <- EndObjectLiteral
+    v18 <- CreateNamedVariable 'handler', 'var', v17
+    v19 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v20 <- EndObjectLiteral
+    v21 <- Construct v19, [v20, v18]
+    v22 <- CreateNamedVariable 'p', 'var', v21
+    v23 <- CallFunction v1, [v22]
+    BeginObjectLiteral
+    v24 <- EndObjectLiteral
+    v25 <- CreateNamedVariable 'o', 'var', v24
+    SetProperty v25, '__proto__', v22
+    v26 <- CallFunction v1, [v25]
+    v27 <- BeginPlainFunction -> v28
+        v29 <- LoadString 'uncooperative'
+        ThrowException v29
+    EndPlainFunction
+    SetProperty v18, 'getPrototypeOf', v27
+    v30 <- LoadString 'foo(o)'
+    v31 <- BeginPlainFunction -> v32
+        BeginTry
+            v33 <- CreateNamedVariable 'Array', 'none'
+            v34 <- TestInstanceOf v32, v33
+        BeginCatch -> v35
+            v36 <- LoadString 'uncooperative'
+            v37 <- LoadBoolean 'true'
+            Return v37
+        EndTryCatch
+        v38 <- LoadBoolean 'false'
+        Return v38
+    EndPlainFunction
+    v39 <- CallFunction v31, [v25]
+    v40 <- CallFunction v31, [v25]
+    v41 <- BeginPlainFunction -> v42
+        v43 <- CreateNamedVariable 'Array', 'none'
+        v44 <- GetProperty v43, 'prototype'
+        Return v44
+    EndPlainFunction
+    SetProperty v18, 'getPrototypeOf', v41
+    v45 <- CallFunction v31, [v25]
+EndPlainFunction
+v46 <- CallFunction v0, []
+v47 <- BeginPlainFunction -> 
+    v48 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v49 <- EndObjectLiteral
+    BeginObjectLiteral
+    v50 <- EndObjectLiteral
+    v51 <- Construct v48, [v49, v50]
+    v52 <- CreateNamedVariable 'proxy', 'var', v51
+    SetProperty v52, '__proto__', v52
+    v53 <- BeginArrowFunction -> 
+        v54 <- CreateNamedVariable 'Object', 'none'
+        v55 <- TestInstanceOf v52, v54
+    EndArrowFunction
+    v56 <- CallFunction v53, []
+    v57 <- CreateNamedVariable 'RangeError', 'none'
+    BeginObjectLiteral
+    v58 <- EndObjectLiteral
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `getPrototypeOf` -> v59
+            v60 <- CreateNamedVariable 'proxy2', 'none'
+            Return v60
+        EndObjectLiteralMethod
+    v61 <- EndObjectLiteral
+    v62 <- Construct v48, [v58, v61]
+    v63 <- CreateNamedVariable 'proxy2', 'var', v62
+    v64 <- BeginArrowFunction -> 
+        v65 <- CreateNamedVariable 'Object', 'none'
+        v66 <- TestInstanceOf v52, v65
+    EndArrowFunction
+    v67 <- CallFunction v64, []
+EndPlainFunction
+v68 <- CallFunction v47, []
+
+
+function TestInstanceOfWithProxies() {
+    function foo(a2) {
+        return a2 instanceof Array;
+    }
+    foo([]);
+    foo({});
+    foo([]);
+    foo({});
+    function f13(a14) {
+        return Array.prototype;
+    }
+    var handler = { getPrototypeOf: f13 };
+    const v21 = new Proxy({}, handler);
+    var p = v21;
+    foo(p);
+    var o = {};
+    o.__proto__ = p;
+    foo(o);
+    function f27(a28) {
+        throw "uncooperative";
+    }
+    handler.getPrototypeOf = f27;
+    function foo_catch(a32) {
+        try {
+            a32 instanceof Array;
+        } catch(e35) {
+            return true;
+        }
+        return false;
+    }
+    foo_catch(o);
+    foo_catch(o);
+    function f41(a42) {
+        return Array.prototype;
+    }
+    handler.getPrototypeOf = f41;
+    foo_catch(o);
+}
+TestInstanceOfWithProxies();
+function testInstanceOfWithRecursiveProxy() {
+    const v49 = {};
+    const v51 = new Proxy(v49, {});
+    var proxy = v51;
+    proxy.__proto__ = proxy;
+    const v53 = () => {
+        proxy instanceof Object;
+    };
+    v53();
+    const v58 = {};
+    const v61 = {
+        getPrototypeOf() {
+            return proxy2;
+        },
+    };
+    const v62 = new Proxy(v58, v61);
+    var proxy2 = v62;
+    const v64 = () => {
+        proxy instanceof Object;
+    };
+    v64();
+}
+testInstanceOfWithRecursiveProxy();
+
+FuzzIL program written to corpus/instanceof-proxies.fzil

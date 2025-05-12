@@ -1,0 +1,770 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v2 <- EndObjectLiteral
+    BeginObjectLiteral
+    v3 <- EndObjectLiteral
+    v4 <- Construct v1, [v2, v3]
+    v5 <- CreateNamedVariable 'proxy', 'var', v4
+    v6 <- BeginPlainFunction -> 
+        v7 <- CallFunction v5, []
+    EndPlainFunction
+    v8 <- CallFunction v6, []
+    v9 <- CreateNamedVariable 'TypeError', 'none'
+    BeginObjectLiteral
+    v10 <- EndObjectLiteral
+    v11 <- Construct v1, [v5, v10]
+    v12 <- CreateNamedVariable 'proxy2', 'var', v11
+    v13 <- BeginPlainFunction -> 
+        v14 <- CallFunction v12, []
+    EndPlainFunction
+    v15 <- CallFunction v13, []
+EndPlainFunction
+v16 <- CallFunction v0, []
+v17 <- BeginPlainFunction -> 
+    v18 <- LoadBoolean 'false'
+    v19 <- CreateNamedVariable 'called', 'var', v18
+    v20 <- BeginPlainFunction -> 
+        v21 <- LoadBoolean 'true'
+        Reassign v19, v21
+    EndPlainFunction
+    v22 <- CreateNamedVariable 'target', 'var', v20
+    v23 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v24 <- EndObjectLiteral
+    v25 <- Construct v23, [v22, v24]
+    v26 <- CreateNamedVariable 'proxy', 'var', v25
+    v27 <- CallFunction v26, []
+    v28 <- LoadBoolean 'false'
+    Reassign v19, v28
+    BeginObjectLiteral
+    v29 <- EndObjectLiteral
+    v30 <- Construct v23, [v26, v29]
+    v31 <- CreateNamedVariable 'proxy2', 'var', v30
+    v32 <- CallFunction v31, []
+EndPlainFunction
+v33 <- CallFunction v17, []
+v34 <- BeginPlainFunction -> 
+    v35 <- LoadBoolean 'false'
+    v36 <- CreateNamedVariable 'called', 'var', v35
+    v37 <- BeginPlainFunction -> v38
+        v39 <- LoadBoolean 'true'
+        Reassign v36, v39
+        v40 <- LoadString '1'
+    EndPlainFunction
+    v41 <- CreateNamedVariable 'target', 'var', v37
+    v42 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v43 <- EndObjectLiteral
+    v44 <- Construct v42, [v41, v43]
+    v45 <- CreateNamedVariable 'proxy', 'var', v44
+    v46 <- LoadString '1'
+    v47 <- CallFunction v45, [v46]
+EndPlainFunction
+v48 <- CallFunction v34, []
+v49 <- BeginPlainFunction -> 
+    v50 <- LoadBoolean 'false'
+    v51 <- CreateNamedVariable 'called', 'var', v50
+    v52 <- BeginPlainFunction -> v53, v54
+        v55 <- LoadBoolean 'true'
+        Reassign v51, v55
+        v56 <- LoadString '1'
+        v57 <- LoadString '2'
+    EndPlainFunction
+    v58 <- CreateNamedVariable 'target', 'var', v52
+    v59 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v60 <- EndObjectLiteral
+    v61 <- Construct v59, [v58, v60]
+    v62 <- CreateNamedVariable 'proxy', 'var', v61
+    v63 <- LoadString '1'
+    v64 <- LoadString '2'
+    v65 <- CallFunction v62, [v63, v64]
+EndPlainFunction
+v66 <- CallFunction v49, []
+v67 <- BeginPlainFunction -> 
+    v68 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `receiver`, v68
+    v69 <- EndObjectLiteral
+    v70 <- CreateNamedVariable 'apply_receiver', 'var', v69
+    v71 <- LoadUndefined
+    v72 <- CreateNamedVariable 'seen_receiver', 'var', v71
+    v73 <- BeginPlainFunction -> 
+        v74 <- LoadThis
+        Reassign v72, v74
+    EndPlainFunction
+    v75 <- CreateNamedVariable 'target', 'var', v73
+    v76 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v77 <- EndObjectLiteral
+    v78 <- Construct v76, [v75, v77]
+    v79 <- CreateNamedVariable 'proxy', 'var', v78
+    v80 <- LoadUndefined
+    v81 <- LoadInteger '1'
+    v82 <- LoadInteger '2'
+    v83 <- LoadInteger '3'
+    v84 <- LoadInteger '4'
+    v85 <- CreateArray [v81, v82, v83, v84]
+    v86 <- CreateNamedVariable 'Reflect', 'none'
+    v87 <- CallMethod v86, 'apply', [v79, v70, v85]
+EndPlainFunction
+v88 <- CallFunction v67, []
+v89 <- BeginPlainFunction -> 
+    v90 <- LoadBoolean 'false'
+    v91 <- CreateNamedVariable 'called_target', 'var', v90
+    v92 <- LoadBoolean 'false'
+    v93 <- CreateNamedVariable 'called_handler', 'var', v92
+    v94 <- BeginPlainFunction -> v95, v96
+        v97 <- LoadBoolean 'true'
+        Reassign v91, v97
+        v98 <- LoadInteger '1'
+        v99 <- LoadInteger '2'
+    EndPlainFunction
+    v100 <- CreateNamedVariable 'target', 'var', v94
+    v101 <- BeginPlainFunction -> v102, v103, v104
+        v105 <- CallMethod v102, 'apply', [v103, v104]
+        v106 <- LoadBoolean 'true'
+        Reassign v93, v106
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `apply`, v101
+    v107 <- EndObjectLiteral
+    v108 <- CreateNamedVariable 'handler', 'var', v107
+    v109 <- CreateNamedVariable 'Proxy', 'none'
+    v110 <- Construct v109, [v100, v108]
+    v111 <- CreateNamedVariable 'proxy', 'var', v110
+    v112 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `rec`, v112
+    v113 <- EndObjectLiteral
+    v114 <- LoadInteger '1'
+    v115 <- LoadInteger '2'
+    v116 <- CreateArray [v114, v115]
+    v117 <- CreateNamedVariable 'Reflect', 'none'
+    v118 <- CallMethod v117, 'apply', [v111, v113, v116]
+EndPlainFunction
+v119 <- CallFunction v89, []
+v120 <- BeginPlainFunction -> 
+    v121 <- LoadBoolean 'false'
+    v122 <- CreateNamedVariable 'called_target', 'var', v121
+    v123 <- LoadBoolean 'false'
+    v124 <- CreateNamedVariable 'called_handler', 'var', v123
+    v125 <- BeginPlainFunction -> v126, v127
+        v128 <- LoadBoolean 'true'
+        Reassign v122, v128
+        v129 <- LoadInteger '1'
+        v130 <- LoadInteger '2'
+        v131 <- CreateArray [v129, v130]
+        v132 <- LoadInteger '3'
+    EndPlainFunction
+    v133 <- CreateNamedVariable 'target', 'var', v125
+    v134 <- BeginPlainFunction -> v135, v136, v137
+        v138 <- CallMethod v135, 'apply', [v136, v137]
+        v139 <- LoadBoolean 'true'
+        Reassign v124, v139
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `apply`, v134
+    v140 <- EndObjectLiteral
+    v141 <- CreateNamedVariable 'handler', 'var', v140
+    v142 <- CreateNamedVariable 'Proxy', 'none'
+    v143 <- Construct v142, [v133, v141]
+    v144 <- CreateNamedVariable 'proxy', 'var', v143
+    v145 <- LoadInteger '1'
+    v146 <- LoadInteger '2'
+    v147 <- CreateArray [v145, v146]
+    v148 <- LoadInteger '3'
+    v149 <- CallFunction v144, [v147, v148]
+EndPlainFunction
+v150 <- CallFunction v120, []
+v151 <- BeginPlainFunction -> 
+    v152 <- LoadBoolean 'false'
+    v153 <- CreateNamedVariable 'called_target', 'var', v152
+    v154 <- LoadBoolean 'false'
+    v155 <- CreateNamedVariable 'called_handler', 'var', v154
+    v156 <- BeginPlainFunction -> v157
+        v158 <- LoadBoolean 'true'
+        Reassign v153, v158
+        v159 <- LoadInteger '1'
+        v160 <- LoadInteger '2'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `a`, v159
+            ObjectLiteralAddProperty `b`, v160
+        v161 <- EndObjectLiteral
+    EndPlainFunction
+    v162 <- CreateNamedVariable 'target', 'var', v156
+    v163 <- BeginPlainFunction -> v164, v165, v166
+        v167 <- CallMethod v164, 'apply', [v165, v166]
+        v168 <- LoadBoolean 'true'
+        Reassign v155, v168
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `apply`, v163
+    v169 <- EndObjectLiteral
+    v170 <- CreateNamedVariable 'handler', 'var', v169
+    v171 <- CreateNamedVariable 'Proxy', 'none'
+    v172 <- Construct v171, [v162, v170]
+    v173 <- CreateNamedVariable 'proxy', 'var', v172
+    v174 <- LoadInteger '1'
+    v175 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v174
+        ObjectLiteralAddProperty `b`, v175
+    v176 <- EndObjectLiteral
+    v177 <- CallFunction v173, [v176]
+EndPlainFunction
+v178 <- CallFunction v151, []
+v179 <- BeginPlainFunction -> 
+    v180 <- BeginGeneratorFunction -> 
+        v181 <- LoadInteger '1'
+        v182 <- Yield v181
+        v183 <- LoadInteger '2'
+        v184 <- Yield v183
+        v185 <- LoadInteger '3'
+        v186 <- Yield v185
+    EndGeneratorFunction
+    v187 <- LoadBoolean 'false'
+    v188 <- CreateNamedVariable 'called_target', 'var', v187
+    v189 <- LoadBoolean 'false'
+    v190 <- CreateNamedVariable 'called_handler', 'var', v189
+    v191 <- BeginPlainFunction -> v192
+        v193 <- LoadBoolean 'true'
+        Reassign v188, v193
+        v194 <- LoadInteger '1'
+        v195 <- LoadInteger '2'
+        v196 <- LoadInteger '3'
+        v197 <- CreateArray [v194, v195, v196]
+        v198 <- CreateArrayWithSpread [...v192]
+    EndPlainFunction
+    v199 <- CreateNamedVariable 'target', 'var', v191
+    v200 <- BeginPlainFunction -> v201, v202, v203
+        v204 <- CallMethod v201, 'apply', [v202, v203]
+        v205 <- LoadBoolean 'true'
+        Reassign v190, v205
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `apply`, v200
+    v206 <- EndObjectLiteral
+    v207 <- CreateNamedVariable 'handler', 'var', v206
+    v208 <- CreateNamedVariable 'Proxy', 'none'
+    v209 <- Construct v208, [v199, v207]
+    v210 <- CreateNamedVariable 'proxy', 'var', v209
+    v211 <- CreateNamedVariable 'gen', 'none'
+    v212 <- CallFunction v211, []
+    v213 <- CallFunction v210, [v212]
+EndPlainFunction
+v214 <- CallFunction v179, []
+v215 <- BeginPlainFunction -> 
+    v216 <- LoadUndefined
+    v217 <- CreateNamedVariable '_target', 'var', v216
+    v218 <- LoadUndefined
+    v219 <- CreateNamedVariable '_args', 'var', v218
+    v220 <- LoadUndefined
+    v221 <- CreateNamedVariable '_handler', 'var', v220
+    v222 <- LoadUndefined
+    v223 <- CreateNamedVariable '_context', 'var', v222
+    v224 <- BeginPlainFunction -> v225, v226
+        v227 <- BinaryOperation v225, '+', v226
+        Return v227
+    EndPlainFunction
+    v228 <- CreateNamedVariable 'target', 'var', v224
+    v229 <- BeginPlainFunction -> v230, v231, v232
+        v233 <- LoadThis
+        Reassign v221, v233
+        Reassign v217, v230
+        Reassign v223, v231
+        Reassign v219, v232
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `apply`, v229
+    v234 <- EndObjectLiteral
+    v235 <- CreateNamedVariable 'handler', 'var', v234
+    v236 <- CreateNamedVariable 'Proxy', 'none'
+    v237 <- Construct v236, [v228, v235]
+    v238 <- CreateNamedVariable 'proxy', 'var', v237
+    BeginObjectLiteral
+    v239 <- EndObjectLiteral
+    v240 <- CreateNamedVariable 'context', 'var', v239
+    v241 <- LoadInteger '1'
+    v242 <- LoadInteger '2'
+    v243 <- CallMethod v238, 'call', [v240, v241, v242]
+    v244 <- GetProperty v219, 'length'
+    v245 <- LoadInteger '2'
+    v246 <- GetElement v219, '0'
+    v247 <- LoadInteger '1'
+    v248 <- GetElement v219, '1'
+    v249 <- LoadInteger '2'
+EndPlainFunction
+v250 <- CallFunction v215, []
+v251 <- BeginPlainFunction -> 
+    v252 <- LoadBoolean 'false'
+    v253 <- CreateNamedVariable 'called_target', 'var', v252
+    v254 <- BeginPlainFunction -> 
+        v255 <- LoadBoolean 'true'
+        Reassign v253, v255
+    EndPlainFunction
+    v256 <- CreateNamedVariable 'target', 'var', v254
+    v257 <- LoadString 'non callable trap'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `apply`, v257
+    v258 <- EndObjectLiteral
+    v259 <- CreateNamedVariable 'handler', 'var', v258
+    v260 <- CreateNamedVariable 'Proxy', 'none'
+    v261 <- Construct v260, [v256, v259]
+    v262 <- CreateNamedVariable 'proxy', 'var', v261
+    v263 <- BeginPlainFunction -> 
+        v264 <- CallFunction v262, []
+    EndPlainFunction
+    v265 <- CallFunction v263, []
+    v266 <- CreateNamedVariable 'TypeError', 'none'
+EndPlainFunction
+v267 <- CallFunction v251, []
+v268 <- BeginPlainFunction -> 
+    v269 <- LoadUndefined
+    v270 <- CreateNamedVariable '_args', 'var', v269
+    v271 <- BeginPlainFunction -> v272, v273
+        v274 <- CreateArray [v272, v273]
+        Reassign v270, v274
+        v275 <- BinaryOperation v272, '+', v273
+        Return v275
+    EndPlainFunction
+    v276 <- CreateNamedVariable 'target', 'var', v271
+    v277 <- LoadNull
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `apply`, v277
+    v278 <- EndObjectLiteral
+    v279 <- CreateNamedVariable 'handler', 'var', v278
+    v280 <- CreateNamedVariable 'Proxy', 'none'
+    v281 <- Construct v280, [v276, v279]
+    v282 <- CreateNamedVariable 'proxy', 'var', v281
+    v283 <- LoadInteger '1'
+    v284 <- LoadInteger '2'
+    v285 <- CallFunction v282, [v283, v284]
+    v286 <- CreateNamedVariable 'result', 'var', v285
+    v287 <- LoadInteger '3'
+    v288 <- GetProperty v270, 'length'
+    v289 <- LoadInteger '2'
+    v290 <- GetElement v270, '0'
+    v291 <- LoadInteger '1'
+    v292 <- GetElement v270, '1'
+    v293 <- LoadInteger '2'
+EndPlainFunction
+v294 <- CallFunction v268, []
+v295 <- BeginPlainFunction -> 
+    v296 <- CreateNamedVariable 'NaN', 'none'
+    v297 <- LoadFloat '1.5'
+    v298 <- LoadInteger '100'
+    v299 <- LoadRegExp 'RegExp' ''
+    v300 <- LoadString 'string'
+    BeginObjectLiteral
+    v301 <- EndObjectLiteral
+    v302 <- CreateArray []
+    v303 <- CreateNamedVariable 'Symbol', 'none'
+    v304 <- CallFunction v303, []
+    v305 <- CreateNamedVariable 'Map', 'none'
+    v306 <- Construct v305, []
+    v307 <- CreateNamedVariable 'Set', 'none'
+    v308 <- Construct v307, []
+    v309 <- CreateNamedVariable 'WeakMap', 'none'
+    v310 <- Construct v309, []
+    v311 <- CreateNamedVariable 'WeakSet', 'none'
+    v312 <- Construct v311, []
+    v313 <- CreateArray [v296, v297, v298, v299, v300, v301, v302, v304, v306, v308, v310, v312]
+    v314 <- CreateNamedVariable 'values', 'var', v313
+    v315 <- BeginArrowFunction -> v316
+        v317 <- CreateNamedVariable 'Object', 'none'
+        v318 <- CallFunction v317, [v316]
+        Reassign v316, v318
+        v319 <- CreateNamedVariable 'Proxy', 'none'
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `apply` -> v320
+            EndObjectLiteralMethod
+        v321 <- EndObjectLiteral
+        v322 <- Construct v319, [v316, v321]
+        v323 <- CreateNamedVariable 'proxy', 'var', v322
+        v324 <- BeginArrowFunction -> 
+            v325 <- CallFunction v323, []
+        EndArrowFunction
+        v326 <- CallFunction v324, []
+        v327 <- CreateNamedVariable 'TypeError', 'none'
+        v328 <- BeginArrowFunction -> 
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `proxy`, v323
+            v329 <- EndObjectLiteral
+            v330 <- CallMethod v329, 'proxy', []
+        EndArrowFunction
+        v331 <- CallFunction v328, []
+        v332 <- BeginArrowFunction -> 
+            v333 <- LoadNull
+            v334 <- CreateArray []
+            v335 <- CreateNamedVariable 'Reflect', 'none'
+            v336 <- CallMethod v335, 'apply', [v323, v333, v334]
+        EndArrowFunction
+        v337 <- CallFunction v332, []
+        v338 <- BeginArrowFunction -> 
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `proxy`, v323
+            v339 <- EndObjectLiteral
+            v340 <- CreateArray []
+            v341 <- CreateNamedVariable 'Reflect', 'none'
+            v342 <- CallMethod v341, 'apply', [v323, v339, v340]
+        EndArrowFunction
+        v343 <- CallFunction v338, []
+        v344 <- BeginArrowFunction -> 
+            v345 <- LoadNull
+            v346 <- CreateArray [v345]
+            v347 <- CreateNamedVariable 'Function', 'none'
+            v348 <- GetProperty v347, 'prototype'
+            v349 <- GetProperty v348, 'call'
+            v350 <- CallMethod v349, 'apply', [v323, v346]
+        EndArrowFunction
+        v351 <- CallFunction v344, []
+        v352 <- BeginArrowFunction -> 
+            v353 <- LoadNull
+            v354 <- CreateArray []
+            v355 <- CreateArray [v353, v354]
+            v356 <- CreateNamedVariable 'Function', 'none'
+            v357 <- GetProperty v356, 'prototype'
+            v358 <- GetProperty v357, 'apply'
+            v359 <- CallMethod v358, 'apply', [v323, v355]
+        EndArrowFunction
+        v360 <- CallFunction v352, []
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `apply` -> v361
+            EndObjectLiteralMethod
+        v362 <- EndObjectLiteral
+        v363 <- Construct v319, [v323, v362]
+        v364 <- CreateNamedVariable 'proxy_to_proxy', 'var', v363
+        v365 <- BeginArrowFunction -> 
+            v366 <- CallFunction v364, []
+        EndArrowFunction
+        v367 <- CallFunction v365, []
+        v368 <- BeginArrowFunction -> 
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `proxy_to_proxy`, v364
+            v369 <- EndObjectLiteral
+            v370 <- CallMethod v369, 'proxy_to_proxy', []
+        EndArrowFunction
+        v371 <- CallFunction v368, []
+        v372 <- BeginArrowFunction -> 
+            v373 <- LoadNull
+            v374 <- CreateArray []
+            v375 <- CreateNamedVariable 'Reflect', 'none'
+            v376 <- CallMethod v375, 'apply', [v364, v373, v374]
+        EndArrowFunction
+        v377 <- CallFunction v372, []
+        v378 <- BeginArrowFunction -> 
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `proxy`, v323
+            v379 <- EndObjectLiteral
+            v380 <- CreateArray []
+            v381 <- CreateNamedVariable 'Reflect', 'none'
+            v382 <- CallMethod v381, 'apply', [v364, v379, v380]
+        EndArrowFunction
+        v383 <- CallFunction v378, []
+        v384 <- BeginArrowFunction -> 
+            v385 <- LoadNull
+            v386 <- CreateArray [v385]
+            v387 <- CreateNamedVariable 'Function', 'none'
+            v388 <- GetProperty v387, 'prototype'
+            v389 <- GetProperty v388, 'call'
+            v390 <- CallMethod v389, 'apply', [v364, v386]
+        EndArrowFunction
+        v391 <- CallFunction v384, []
+        v392 <- BeginArrowFunction -> 
+            v393 <- LoadNull
+            v394 <- CreateArray []
+            v395 <- CreateArray [v393, v394]
+            v396 <- CreateNamedVariable 'Function', 'none'
+            v397 <- GetProperty v396, 'prototype'
+            v398 <- GetProperty v397, 'apply'
+            v399 <- CallMethod v398, 'apply', [v364, v395]
+        EndArrowFunction
+        v400 <- CallFunction v392, []
+    EndArrowFunction
+    v401 <- CallMethod v314, 'forEach', [v315]
+EndPlainFunction
+v402 <- CallFunction v295, []
+
+
+function testNonCallable() {
+    const v2 = {};
+    const v4 = new Proxy(v2, {});
+    var proxy = v4;
+    function f6() {
+        proxy();
+    }
+    f6();
+    const v11 = new Proxy(proxy, {});
+    var proxy2 = v11;
+    function f13() {
+        proxy2();
+    }
+    f13();
+}
+testNonCallable();
+function testCallProxyFallbackNoArguments() {
+    var called = false;
+    function f20() {
+        called = true;
+    }
+    var target = f20;
+    const v25 = new Proxy(target, {});
+    var proxy = v25;
+    proxy();
+    called = false;
+    const v30 = new Proxy(proxy, {});
+    var proxy2 = v30;
+    proxy2();
+}
+testCallProxyFallbackNoArguments();
+function testCallProxyFallback1Argument() {
+    var called = false;
+    function f37(a38) {
+        called = true;
+    }
+    var target = f37;
+    const v44 = new Proxy(target, {});
+    var proxy = v44;
+    proxy("1");
+}
+testCallProxyFallback1Argument();
+function testCallProxyFallback2Arguments() {
+    var called = false;
+    function f52(a53, a54) {
+        called = true;
+    }
+    var target = f52;
+    const v61 = new Proxy(target, {});
+    var proxy = v61;
+    proxy("1", "2");
+}
+testCallProxyFallback2Arguments();
+function testCallProxyFallbackChangedReceiver() {
+    var apply_receiver = { receiver: true };
+    var seen_receiver;
+    function f73() {
+        seen_receiver = this;
+    }
+    var target = f73;
+    const v78 = new Proxy(target, {});
+    var proxy = v78;
+    Reflect.apply(proxy, apply_receiver, [1,2,3,4]);
+}
+testCallProxyFallbackChangedReceiver();
+function testCallProxyTrap() {
+    var called_target = false;
+    var called_handler = false;
+    function f94(a95, a96) {
+        called_target = true;
+    }
+    var target = f94;
+    function f101(a102, a103, a104) {
+        a102.apply(a103, a104);
+        called_handler = true;
+    }
+    var handler = { apply: f101 };
+    const v110 = new Proxy(target, handler);
+    var proxy = v110;
+    Reflect.apply(proxy, { rec: 1 }, [1,2]);
+}
+testCallProxyTrap();
+function testCallProxyTrapArrayArg() {
+    var called_target = false;
+    var called_handler = false;
+    function f125(a126, a127) {
+        called_target = true;
+        [1,2];
+    }
+    var target = f125;
+    function f134(a135, a136, a137) {
+        a135.apply(a136, a137);
+        called_handler = true;
+    }
+    var handler = { apply: f134 };
+    const v143 = new Proxy(target, handler);
+    var proxy = v143;
+    proxy([1,2], 3);
+}
+testCallProxyTrapArrayArg();
+function testCallProxyTrapObjectArg() {
+    var called_target = false;
+    var called_handler = false;
+    function f156(a157) {
+        called_target = true;
+        const v161 = { a: 1, b: 2 };
+    }
+    var target = f156;
+    function f163(a164, a165, a166) {
+        a164.apply(a165, a166);
+        called_handler = true;
+    }
+    var handler = { apply: f163 };
+    const v172 = new Proxy(target, handler);
+    var proxy = v172;
+    proxy({ a: 1, b: 2 });
+}
+testCallProxyTrapObjectArg();
+function testCallProxyTrapGeneratorArg() {
+    function* gen1() {
+        yield 1;
+        yield 2;
+        yield 3;
+    }
+    var called_target = false;
+    var called_handler = false;
+    function f191(a192) {
+        called_target = true;
+        [1,2,3];
+        [...a192];
+    }
+    var target = f191;
+    function f200(a201, a202, a203) {
+        a201.apply(a202, a203);
+        called_handler = true;
+    }
+    var handler = { apply: f200 };
+    const v209 = new Proxy(target, handler);
+    var proxy = v209;
+    proxy(gen());
+}
+testCallProxyTrapGeneratorArg();
+function testProxyTrapContext() {
+    var _target;
+    var _args;
+    var _handler;
+    var _context;
+    function f224(a225, a226) {
+        return a225 + a226;
+    }
+    var target = f224;
+    function f229(a230, a231, a232) {
+        _handler = this;
+        _target = a230;
+        _context = a231;
+        _args = a232;
+    }
+    var handler = { apply: f229 };
+    const v237 = new Proxy(target, handler);
+    var proxy = v237;
+    var context = {};
+    proxy.call(context, 1, 2);
+    _args.length;
+    _args[0];
+    _args[1];
+}
+testProxyTrapContext();
+function testCallProxyNonCallableTrap() {
+    var called_target = false;
+    function f254() {
+        called_target = true;
+    }
+    var target = f254;
+    var handler = { apply: "non callable trap" };
+    const v261 = new Proxy(target, handler);
+    var proxy = v261;
+    function f263() {
+        proxy();
+    }
+    f263();
+}
+testCallProxyNonCallableTrap();
+function testCallProxyNullTrap() {
+    var _args;
+    function f271(a272, a273) {
+        _args = [a272,a273];
+        return a272 + a273;
+    }
+    var target = f271;
+    var handler = { apply: null };
+    const v281 = new Proxy(target, handler);
+    var proxy = v281;
+    var result = proxy(1, 2);
+    _args.length;
+    _args[0];
+    _args[1];
+}
+testCallProxyNullTrap();
+function testCallProxyNonCallableTarget() {
+    const v299 = /RegExp/;
+    const v301 = {};
+    const v302 = [];
+    const v304 = Symbol();
+    const v306 = new Map();
+    const v308 = new Set();
+    const v310 = new WeakMap();
+    const v312 = new WeakSet();
+    var values = [NaN,1.5,100,v299,"string",v301,v302,v304,v306,v308,v310,v312];
+    const v315 = (a316) => {
+        a316 = Object(a316);
+        const v321 = {
+            apply() {
+            },
+        };
+        const v322 = new Proxy(a316, v321);
+        var proxy = v322;
+        const v324 = () => {
+            proxy();
+        };
+        v324();
+        const v328 = () => {
+            ({ proxy: proxy }).proxy();
+        };
+        v328();
+        const v332 = () => {
+            Reflect.apply(proxy, null, []);
+        };
+        v332();
+        const v338 = () => {
+            Reflect.apply(proxy, { proxy: proxy }, []);
+        };
+        v338();
+        const v344 = () => {
+            const v346 = [null];
+            Function.prototype.call.apply(proxy, v346);
+        };
+        v344();
+        const v352 = () => {
+            const v355 = [null,[]];
+            Function.prototype.apply.apply(proxy, v355);
+        };
+        v352();
+        const v362 = {
+            apply() {
+            },
+        };
+        const v363 = new Proxy(proxy, v362);
+        var proxy_to_proxy = v363;
+        const v365 = () => {
+            proxy_to_proxy();
+        };
+        v365();
+        const v368 = () => {
+            ({ proxy_to_proxy: proxy_to_proxy }).proxy_to_proxy();
+        };
+        v368();
+        const v372 = () => {
+            Reflect.apply(proxy_to_proxy, null, []);
+        };
+        v372();
+        const v378 = () => {
+            Reflect.apply(proxy_to_proxy, { proxy: proxy }, []);
+        };
+        v378();
+        const v384 = () => {
+            const v386 = [null];
+            Function.prototype.call.apply(proxy_to_proxy, v386);
+        };
+        v384();
+        const v392 = () => {
+            const v395 = [null,[]];
+            Function.prototype.apply.apply(proxy_to_proxy, v395);
+        };
+        v392();
+    };
+    values.forEach(v315);
+}
+testCallProxyNonCallableTarget();
+
+FuzzIL program written to corpus/proxies-apply.fzil

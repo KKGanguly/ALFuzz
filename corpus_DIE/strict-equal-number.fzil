@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        v4 <- Compare v2, '===', v3
+        Return v4
+    EndPlainFunction
+    v5 <- LoadFloat '0.1'
+    v6 <- LoadFloat '0.1'
+    v7 <- CallFunction v1, [v5, v6]
+    v8 <- LoadUndefined
+    v9 <- LoadUndefined
+    v10 <- CallFunction v1, [v8, v9]
+    v11 <- LoadUndefined
+    v12 <- LoadUndefined
+    v13 <- CallFunction v1, [v11, v12]
+EndPlainFunction
+v14 <- CallFunction v0, []
+
+
+function f0() {
+    function foo(a2, a3) {
+        return a2 === a3;
+    }
+    foo(0.1, 0.1);
+    foo(undefined, undefined);
+    foo(undefined, undefined);
+}
+f0();
+
+FuzzIL program written to corpus/strict-equal-number.fzil

@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'f'
+    v2 <- CreateNamedVariable 's', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '18'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        Update v2, '+', v2
+    EndForLoop
+    v10 <- CreateArrayWithSpread [...v2]
+    v11 <- CreateNamedVariable 'ss', 'var', v10
+EndPlainFunction
+v12 <- CallFunction v0, []
+
+
+function f0() {
+    var s = "f";
+    for (let i4 = 0; i4 < 18; i4++) {
+        s += s;
+    }
+    var ss = [...s];
+}
+f0();
+
+FuzzIL program written to corpus/regress-cr895860.fzil

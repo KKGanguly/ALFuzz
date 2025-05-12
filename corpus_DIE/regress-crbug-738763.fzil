@@ -1,0 +1,45 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'constant', 'let', v1
+v3 <- BeginPlainFunction -> v4
+    SetProperty v4, 'x', v2
+    v5 <- LoadUndefined
+    SetElement v4, '0', v5
+    Return v4
+EndPlainFunction
+v6 <- LoadInteger '1'
+v7 <- CreateArray [v6]
+v8 <- CreateNamedVariable 'ar1', 'let', v7
+v9 <- LoadInteger '2'
+v10 <- CreateArray [v9]
+v11 <- CreateNamedVariable 'ar2', 'let', v10
+v12 <- LoadInteger '3'
+v13 <- CreateArray [v12]
+v14 <- CreateNamedVariable 'ar3', 'let', v13
+v15 <- CreateNamedVariable 'gc', 'none'
+v16 <- CallFunction v15, []
+v17 <- CallFunction v15, []
+v18 <- CallFunction v3, [v8]
+v19 <- CallFunction v3, [v11]
+Reassign v2, v19
+v20 <- CallFunction v3, [v14]
+
+
+let constant = { a: 1 };
+function update_array(a4) {
+    a4.x = constant;
+    a4[0] = undefined;
+    return a4;
+}
+let ar1 = [1];
+let ar2 = [2];
+let ar3 = [3];
+gc();
+gc();
+update_array(ar1);
+constant = update_array(ar2);
+update_array(ar3);
+
+FuzzIL program written to corpus/regress-crbug-738763.fzil

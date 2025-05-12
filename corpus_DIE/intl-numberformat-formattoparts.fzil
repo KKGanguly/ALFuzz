@@ -1,0 +1,736 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Intl'
+BeginIf v1
+    v2 <- BeginPlainFunction -> v3
+        v4 <- BeginPlainFunction -> v5
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `type`, v3
+                ObjectLiteralAddProperty `value`, v5
+            v6 <- EndObjectLiteral
+            Return v6
+        EndPlainFunction
+        Return v4
+    EndPlainFunction
+    v7 <- LoadString 'nan'
+    v8 <- CallFunction v2, [v7]
+    v9 <- CreateNamedVariable 'Nan', 'var', v8
+    v10 <- LoadString 'infinity'
+    v11 <- CallFunction v2, [v10]
+    v12 <- CreateNamedVariable 'Inf', 'var', v11
+    v13 <- LoadString 'integer'
+    v14 <- CallFunction v2, [v13]
+    v15 <- CreateNamedVariable 'Integer', 'var', v14
+    v16 <- LoadString 'group'
+    v17 <- CallFunction v2, [v16]
+    v18 <- CreateNamedVariable 'Group', 'var', v17
+    v19 <- LoadString 'decimal'
+    v20 <- CallFunction v2, [v19]
+    v21 <- CreateNamedVariable 'Decimal', 'var', v20
+    v22 <- LoadString 'fraction'
+    v23 <- CallFunction v2, [v22]
+    v24 <- CreateNamedVariable 'Fraction', 'var', v23
+    v25 <- LoadString 'minusSign'
+    v26 <- CallFunction v2, [v25]
+    v27 <- CreateNamedVariable 'MinusSign', 'var', v26
+    v28 <- LoadString 'plusSign'
+    v29 <- CallFunction v2, [v28]
+    v30 <- CreateNamedVariable 'PlusSign', 'var', v29
+    v31 <- LoadString 'percentSign'
+    v32 <- CallFunction v2, [v31]
+    v33 <- CreateNamedVariable 'PercentSign', 'var', v32
+    v34 <- LoadString 'currency'
+    v35 <- CallFunction v2, [v34]
+    v36 <- CreateNamedVariable 'Currency', 'var', v35
+    v37 <- LoadString 'literal'
+    v38 <- CallFunction v2, [v37]
+    v39 <- CreateNamedVariable 'Literal', 'var', v38
+    v40 <- BeginPlainFunction -> v41, v42, v43
+        v44 <- CallMethod v41, 'formatToParts', [v42]
+        v45 <- CreateNamedVariable 'parts', 'var', v44
+        v46 <- CallMethod v41, 'format', [v42]
+        v47 <- LoadString ''
+        v48 <- BeginArrowFunction -> v49
+            v50 <- GetProperty v49, 'value'
+            Return v50
+        EndArrowFunction
+        v51 <- CallMethod v45, 'map', [v48]
+        v52 <- CallMethod v51, 'join', [v47]
+        v53 <- GetProperty v45, 'length'
+        v54 <- CreateNamedVariable 'len', 'var', v53
+        v55 <- GetProperty v43, 'length'
+        BeginForLoopInitializer
+            v56 <- LoadInteger '0'
+        BeginForLoopCondition -> v57
+            v58 <- Compare v57, '<', v54
+        BeginForLoopAfterthought v58 -> v59
+            v60 <- UnaryOperation v59, '++'
+        BeginForLoopBody -> v61
+            v62 <- GetComputedProperty v43, v61
+            v63 <- GetProperty v62, 'type'
+            v64 <- GetComputedProperty v45, v61
+            v65 <- GetProperty v64, 'type'
+            v66 <- GetComputedProperty v43, v61
+            v67 <- GetProperty v66, 'value'
+            v68 <- GetComputedProperty v45, v61
+            v69 <- GetProperty v68, 'value'
+        EndForLoop
+    EndPlainFunction
+    v70 <- LoadString 'currency'
+    v71 <- LoadString 'USD'
+    v72 <- LoadString 'code'
+    v73 <- LoadInteger '0'
+    v74 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `style`, v70
+        ObjectLiteralAddProperty `currency`, v71
+        ObjectLiteralAddProperty `currencyDisplay`, v72
+        ObjectLiteralAddProperty `minimumFractionDigits`, v73
+        ObjectLiteralAddProperty `maximumFractionDigits`, v74
+    v75 <- EndObjectLiteral
+    v76 <- CreateNamedVariable 'usdCodeOptions', 'var', v75
+    v77 <- CreateNamedVariable 'Intl', 'none'
+    v78 <- GetProperty v77, 'NumberFormat'
+    v79 <- LoadString 'en-US'
+    v80 <- Construct v78, [v79, v76]
+    v81 <- CreateNamedVariable 'usDollarsCode', 'var', v80
+    v82 <- LoadInteger '25'
+    v83 <- LoadString 'USD'
+    v84 <- CallFunction v36, [v83]
+    v85 <- LoadString ' '
+    v86 <- CallFunction v39, [v85]
+    v87 <- LoadString '25'
+    v88 <- CallFunction v15, [v87]
+    v89 <- CreateArray [v84, v86, v88]
+    v90 <- LoadString 'currency'
+    v91 <- LoadString 'XQQ'
+    v92 <- LoadString 'code'
+    v93 <- LoadInteger '0'
+    v94 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `style`, v90
+        ObjectLiteralAddProperty `currency`, v91
+        ObjectLiteralAddProperty `currencyDisplay`, v92
+        ObjectLiteralAddProperty `minimumFractionDigits`, v93
+        ObjectLiteralAddProperty `maximumFractionDigits`, v94
+    v95 <- EndObjectLiteral
+    v96 <- CreateNamedVariable 'xqqCodeOptions', 'var', v95
+    v97 <- GetProperty v77, 'NumberFormat'
+    v98 <- LoadString 'en-US'
+    v99 <- Construct v97, [v98, v96]
+    v100 <- CreateNamedVariable 'xqqMoneyCode', 'var', v99
+    v101 <- LoadInteger '25'
+    v102 <- LoadString 'XQQ'
+    v103 <- CallFunction v36, [v102]
+    v104 <- LoadString ' '
+    v105 <- CallFunction v39, [v104]
+    v106 <- LoadString '25'
+    v107 <- CallFunction v15, [v106]
+    v108 <- CreateArray [v103, v105, v107]
+    v109 <- LoadString 'currency'
+    v110 <- LoadString 'USD'
+    v111 <- LoadString 'name'
+    v112 <- LoadInteger '0'
+    v113 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `style`, v109
+        ObjectLiteralAddProperty `currency`, v110
+        ObjectLiteralAddProperty `currencyDisplay`, v111
+        ObjectLiteralAddProperty `minimumFractionDigits`, v112
+        ObjectLiteralAddProperty `maximumFractionDigits`, v113
+    v114 <- EndObjectLiteral
+    v115 <- CreateNamedVariable 'usdNameOptions', 'var', v114
+    v116 <- GetProperty v77, 'NumberFormat'
+    v117 <- LoadString 'en-US'
+    v118 <- Construct v116, [v117, v115]
+    v119 <- CreateNamedVariable 'usDollarsName', 'var', v118
+    v120 <- LoadInteger '25'
+    v121 <- LoadString '25'
+    v122 <- CallFunction v15, [v121]
+    v123 <- LoadString ' '
+    v124 <- CallFunction v39, [v123]
+    v125 <- LoadString 'US dollars'
+    v126 <- CallFunction v36, [v125]
+    v127 <- CreateArray [v122, v124, v126]
+    v128 <- LoadString 'currency'
+    v129 <- LoadString 'USD'
+    v130 <- LoadString 'name'
+    v131 <- LoadInteger '0'
+    v132 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `style`, v128
+        ObjectLiteralAddProperty `currency`, v129
+        ObjectLiteralAddProperty `currencyDisplay`, v130
+        ObjectLiteralAddProperty `minimumFractionDigits`, v131
+        ObjectLiteralAddProperty `maximumFractionDigits`, v132
+    v133 <- EndObjectLiteral
+    v134 <- CreateNamedVariable 'usdNameGroupingOptions', 'var', v133
+    v135 <- GetProperty v77, 'NumberFormat'
+    v136 <- LoadString 'en-US'
+    v137 <- Construct v135, [v136, v134]
+    v138 <- CreateNamedVariable 'usDollarsNameGrouping', 'var', v137
+    v139 <- LoadInteger '12345678'
+    v140 <- LoadString '12'
+    v141 <- CallFunction v15, [v140]
+    v142 <- LoadString ','
+    v143 <- CallFunction v18, [v142]
+    v144 <- LoadString '345'
+    v145 <- CallFunction v15, [v144]
+    v146 <- LoadString ','
+    v147 <- CallFunction v18, [v146]
+    v148 <- LoadString '678'
+    v149 <- CallFunction v15, [v148]
+    v150 <- LoadString ' '
+    v151 <- CallFunction v39, [v150]
+    v152 <- LoadString 'US dollars'
+    v153 <- CallFunction v36, [v152]
+    v154 <- CreateArray [v141, v143, v145, v147, v149, v151, v153]
+    v155 <- LoadString 'currency'
+    v156 <- LoadString 'XQQ'
+    v157 <- LoadString 'name'
+    v158 <- LoadInteger '0'
+    v159 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `style`, v155
+        ObjectLiteralAddProperty `currency`, v156
+        ObjectLiteralAddProperty `currencyDisplay`, v157
+        ObjectLiteralAddProperty `minimumFractionDigits`, v158
+        ObjectLiteralAddProperty `maximumFractionDigits`, v159
+    v160 <- EndObjectLiteral
+    v161 <- CreateNamedVariable 'xqqNameOptions', 'var', v160
+    v162 <- GetProperty v77, 'NumberFormat'
+    v163 <- LoadString 'en-US'
+    v164 <- Construct v162, [v163, v161]
+    v165 <- CreateNamedVariable 'xqqMoneyName', 'var', v164
+    v166 <- LoadInteger '25'
+    v167 <- LoadString '25'
+    v168 <- CallFunction v15, [v167]
+    v169 <- LoadString ' '
+    v170 <- CallFunction v39, [v169]
+    v171 <- LoadString 'XQQ'
+    v172 <- CallFunction v36, [v171]
+    v173 <- CreateArray [v168, v170, v172]
+    v174 <- LoadString 'currency'
+    v175 <- LoadString 'USD'
+    v176 <- LoadString 'name'
+    v177 <- LoadInteger '2'
+    v178 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `style`, v174
+        ObjectLiteralAddProperty `currency`, v175
+        ObjectLiteralAddProperty `currencyDisplay`, v176
+        ObjectLiteralAddProperty `minimumFractionDigits`, v177
+        ObjectLiteralAddProperty `maximumFractionDigits`, v178
+    v179 <- EndObjectLiteral
+    v180 <- CreateNamedVariable 'usdNameFractionOptions', 'var', v179
+    v181 <- GetProperty v77, 'NumberFormat'
+    v182 <- LoadString 'en-US'
+    v183 <- Construct v181, [v182, v180]
+    v184 <- CreateNamedVariable 'usdNameFractionFormatter', 'var', v183
+    v185 <- LoadFloat '19766580028249.41'
+    v186 <- UnaryOperation '-', v185
+    v187 <- CreateNamedVariable 'usNationalSurplus', 'var', v186
+    v188 <- LoadString '-'
+    v189 <- CallFunction v27, [v188]
+    v190 <- LoadString '19'
+    v191 <- CallFunction v15, [v190]
+    v192 <- LoadString ','
+    v193 <- CallFunction v18, [v192]
+    v194 <- LoadString '766'
+    v195 <- CallFunction v15, [v194]
+    v196 <- LoadString ','
+    v197 <- CallFunction v18, [v196]
+    v198 <- LoadString '580'
+    v199 <- CallFunction v15, [v198]
+    v200 <- LoadString ','
+    v201 <- CallFunction v18, [v200]
+    v202 <- LoadString '028'
+    v203 <- CallFunction v15, [v202]
+    v204 <- LoadString ','
+    v205 <- CallFunction v18, [v204]
+    v206 <- LoadString '249'
+    v207 <- CallFunction v15, [v206]
+    v208 <- LoadString '.'
+    v209 <- CallFunction v21, [v208]
+    v210 <- LoadString '41'
+    v211 <- CallFunction v24, [v210]
+    v212 <- LoadString ' '
+    v213 <- CallFunction v39, [v212]
+    v214 <- LoadString 'US dollars'
+    v215 <- CallFunction v36, [v214]
+    v216 <- CreateArray [v189, v191, v193, v195, v197, v199, v201, v203, v205, v207, v209, v211, v213, v215]
+    v217 <- LoadString 'percent'
+    v218 <- LoadInteger '1'
+    v219 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `style`, v217
+        ObjectLiteralAddProperty `minimumFractionDigits`, v218
+        ObjectLiteralAddProperty `maximumFractionDigits`, v219
+    v220 <- EndObjectLiteral
+    v221 <- CreateNamedVariable 'usPercentOptions', 'var', v220
+    v222 <- GetProperty v77, 'NumberFormat'
+    v223 <- LoadString 'en-US'
+    v224 <- Construct v222, [v223, v221]
+    v225 <- CreateNamedVariable 'usPercentFormatter', 'var', v224
+    v226 <- LoadFloat '0.375'
+    v227 <- LoadString '37'
+    v228 <- CallFunction v15, [v227]
+    v229 <- LoadString '.'
+    v230 <- CallFunction v21, [v229]
+    v231 <- LoadString '5'
+    v232 <- CallFunction v24, [v231]
+    v233 <- LoadString '%'
+    v234 <- CallFunction v33, [v233]
+    v235 <- CreateArray [v228, v230, v232, v234]
+    v236 <- LoadFloat '1284.375'
+    v237 <- UnaryOperation '-', v236
+    v238 <- LoadString '-'
+    v239 <- CallFunction v27, [v238]
+    v240 <- LoadString '128'
+    v241 <- CallFunction v15, [v240]
+    v242 <- LoadString ','
+    v243 <- CallFunction v18, [v242]
+    v244 <- LoadString '437'
+    v245 <- CallFunction v15, [v244]
+    v246 <- LoadString '.'
+    v247 <- CallFunction v21, [v246]
+    v248 <- LoadString '5'
+    v249 <- CallFunction v24, [v248]
+    v250 <- LoadString '%'
+    v251 <- CallFunction v33, [v250]
+    v252 <- CreateArray [v239, v241, v243, v245, v247, v249, v251]
+    v253 <- CreateNamedVariable 'NaN', 'none'
+    v254 <- LoadString 'NaN'
+    v255 <- CallFunction v9, [v254]
+    v256 <- LoadString '%'
+    v257 <- CallFunction v33, [v256]
+    v258 <- CreateArray [v255, v257]
+    v259 <- CreateNamedVariable 'Infinity', 'none'
+    v260 <- LoadString '∞'
+    v261 <- CallFunction v12, [v260]
+    v262 <- LoadString '%'
+    v263 <- CallFunction v33, [v262]
+    v264 <- CreateArray [v261, v263]
+    v265 <- UnaryOperation '-', v259
+    v266 <- LoadString '-'
+    v267 <- CallFunction v27, [v266]
+    v268 <- LoadString '∞'
+    v269 <- CallFunction v12, [v268]
+    v270 <- LoadString '%'
+    v271 <- CallFunction v33, [v270]
+    v272 <- CreateArray [v267, v269, v271]
+    v273 <- LoadString 'percent'
+    v274 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `style`, v273
+        ObjectLiteralAddProperty `minimumFractionDigits`, v274
+    v275 <- EndObjectLiteral
+    v276 <- CreateNamedVariable 'arPercentOptions', 'var', v275
+    v277 <- GetProperty v77, 'NumberFormat'
+    v278 <- LoadString 'ar-IQ'
+    v279 <- Construct v277, [v278, v276]
+    v280 <- CreateNamedVariable 'arPercentFormatter', 'var', v279
+    v281 <- LoadFloat '135.32'
+    v282 <- UnaryOperation '-', v281
+    v283 <- LoadString '؜-'
+    v284 <- CallFunction v27, [v283]
+    v285 <- LoadString '١٣'
+    v286 <- CallFunction v15, [v285]
+    v287 <- LoadString '٬'
+    v288 <- CallFunction v18, [v287]
+    v289 <- LoadString '٥٣٢'
+    v290 <- CallFunction v15, [v289]
+    v291 <- LoadString '٫'
+    v292 <- CallFunction v21, [v291]
+    v293 <- LoadString '٠٠'
+    v294 <- CallFunction v24, [v293]
+    v295 <- LoadString '٪؜'
+    v296 <- CallFunction v33, [v295]
+    v297 <- CreateArray [v284, v286, v288, v290, v292, v294, v296]
+    v298 <- LoadString 'decimal'
+    v299 <- LoadInteger '7'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `style`, v298
+        ObjectLiteralAddProperty `maximumFractionDigits`, v299
+    v300 <- EndObjectLiteral
+    v301 <- CreateNamedVariable 'usDecimalOptions', 'var', v300
+    v302 <- GetProperty v77, 'NumberFormat'
+    v303 <- LoadString 'en-US'
+    v304 <- Construct v302, [v303, v301]
+    v305 <- CreateNamedVariable 'usDecimalFormatter', 'var', v304
+    v306 <- LoadInteger '42'
+    v307 <- LoadString '42'
+    v308 <- CallFunction v15, [v307]
+    v309 <- CreateArray [v308]
+    v310 <- LoadInteger '1337'
+    v311 <- LoadString '1'
+    v312 <- CallFunction v15, [v311]
+    v313 <- LoadString ','
+    v314 <- CallFunction v18, [v313]
+    v315 <- LoadString '337'
+    v316 <- CallFunction v15, [v315]
+    v317 <- CreateArray [v312, v314, v316]
+    v318 <- LoadFloat '6.25'
+    v319 <- UnaryOperation '-', v318
+    v320 <- LoadString '-'
+    v321 <- CallFunction v27, [v320]
+    v322 <- LoadString '6'
+    v323 <- CallFunction v15, [v322]
+    v324 <- LoadString '.'
+    v325 <- CallFunction v21, [v324]
+    v326 <- LoadString '25'
+    v327 <- CallFunction v24, [v326]
+    v328 <- CreateArray [v321, v323, v325, v327]
+    v329 <- LoadFloat '1376.25'
+    v330 <- UnaryOperation '-', v329
+    v331 <- LoadString '-'
+    v332 <- CallFunction v27, [v331]
+    v333 <- LoadString '1'
+    v334 <- CallFunction v15, [v333]
+    v335 <- LoadString ','
+    v336 <- CallFunction v18, [v335]
+    v337 <- LoadString '376'
+    v338 <- CallFunction v15, [v337]
+    v339 <- LoadString '.'
+    v340 <- CallFunction v21, [v339]
+    v341 <- LoadString '25'
+    v342 <- CallFunction v24, [v341]
+    v343 <- CreateArray [v332, v334, v336, v338, v340, v342]
+    v344 <- LoadFloat '124816.8359375'
+    v345 <- LoadString '124'
+    v346 <- CallFunction v15, [v345]
+    v347 <- LoadString ','
+    v348 <- CallFunction v18, [v347]
+    v349 <- LoadString '816'
+    v350 <- CallFunction v15, [v349]
+    v351 <- LoadString '.'
+    v352 <- CallFunction v21, [v351]
+    v353 <- LoadString '8359375'
+    v354 <- CallFunction v24, [v353]
+    v355 <- CreateArray [v346, v348, v350, v352, v354]
+    v356 <- LoadString 'decimal'
+    v357 <- LoadBoolean 'false'
+    v358 <- LoadInteger '7'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `style`, v356
+        ObjectLiteralAddProperty `useGrouping`, v357
+        ObjectLiteralAddProperty `maximumFractionDigits`, v358
+    v359 <- EndObjectLiteral
+    v360 <- CreateNamedVariable 'usNoGroupingDecimalOptions', 'var', v359
+    v361 <- GetProperty v77, 'NumberFormat'
+    v362 <- LoadString 'en-US'
+    v363 <- Construct v361, [v362, v360]
+    v364 <- CreateNamedVariable 'usNoGroupingDecimalFormatter', 'var', v363
+    v365 <- LoadInteger '1337'
+    v366 <- LoadString '1337'
+    v367 <- CallFunction v15, [v366]
+    v368 <- CreateArray [v367]
+    v369 <- LoadFloat '6.25'
+    v370 <- UnaryOperation '-', v369
+    v371 <- LoadString '-'
+    v372 <- CallFunction v27, [v371]
+    v373 <- LoadString '6'
+    v374 <- CallFunction v15, [v373]
+    v375 <- LoadString '.'
+    v376 <- CallFunction v21, [v375]
+    v377 <- LoadString '25'
+    v378 <- CallFunction v24, [v377]
+    v379 <- CreateArray [v372, v374, v376, v378]
+    v380 <- LoadFloat '1376.25'
+    v381 <- UnaryOperation '-', v380
+    v382 <- LoadString '-'
+    v383 <- CallFunction v27, [v382]
+    v384 <- LoadString '1376'
+    v385 <- CallFunction v15, [v384]
+    v386 <- LoadString '.'
+    v387 <- CallFunction v21, [v386]
+    v388 <- LoadString '25'
+    v389 <- CallFunction v24, [v388]
+    v390 <- CreateArray [v383, v385, v387, v389]
+    v391 <- LoadFloat '124816.8359375'
+    v392 <- LoadString '124816'
+    v393 <- CallFunction v15, [v392]
+    v394 <- LoadString '.'
+    v395 <- CallFunction v21, [v394]
+    v396 <- LoadString '8359375'
+    v397 <- CallFunction v24, [v396]
+    v398 <- CreateArray [v393, v395, v397]
+    v399 <- LoadString 'decimal'
+    v400 <- LoadInteger '7'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `style`, v399
+        ObjectLiteralAddProperty `maximumFractionDigits`, v400
+    v401 <- EndObjectLiteral
+    v402 <- CreateNamedVariable 'deDecimalOptions', 'var', v401
+    v403 <- GetProperty v77, 'NumberFormat'
+    v404 <- LoadString 'de-DE'
+    v405 <- Construct v403, [v404, v402]
+    v406 <- CreateNamedVariable 'deDecimalFormatter', 'var', v405
+    v407 <- LoadInteger '42'
+    v408 <- LoadString '42'
+    v409 <- CallFunction v15, [v408]
+    v410 <- CreateArray [v409]
+    v411 <- LoadInteger '1337'
+    v412 <- LoadString '1'
+    v413 <- CallFunction v15, [v412]
+    v414 <- LoadString '.'
+    v415 <- CallFunction v18, [v414]
+    v416 <- LoadString '337'
+    v417 <- CallFunction v15, [v416]
+    v418 <- CreateArray [v413, v415, v417]
+    v419 <- LoadFloat '6.25'
+    v420 <- UnaryOperation '-', v419
+    v421 <- LoadString '-'
+    v422 <- CallFunction v27, [v421]
+    v423 <- LoadString '6'
+    v424 <- CallFunction v15, [v423]
+    v425 <- LoadString ','
+    v426 <- CallFunction v21, [v425]
+    v427 <- LoadString '25'
+    v428 <- CallFunction v24, [v427]
+    v429 <- CreateArray [v422, v424, v426, v428]
+    v430 <- LoadFloat '1376.25'
+    v431 <- UnaryOperation '-', v430
+    v432 <- LoadString '-'
+    v433 <- CallFunction v27, [v432]
+    v434 <- LoadString '1'
+    v435 <- CallFunction v15, [v434]
+    v436 <- LoadString '.'
+    v437 <- CallFunction v18, [v436]
+    v438 <- LoadString '376'
+    v439 <- CallFunction v15, [v438]
+    v440 <- LoadString ','
+    v441 <- CallFunction v21, [v440]
+    v442 <- LoadString '25'
+    v443 <- CallFunction v24, [v442]
+    v444 <- CreateArray [v433, v435, v437, v439, v441, v443]
+    v445 <- LoadFloat '124816.8359375'
+    v446 <- LoadString '124'
+    v447 <- CallFunction v15, [v446]
+    v448 <- LoadString '.'
+    v449 <- CallFunction v18, [v448]
+    v450 <- LoadString '816'
+    v451 <- CallFunction v15, [v450]
+    v452 <- LoadString ','
+    v453 <- CallFunction v21, [v452]
+    v454 <- LoadString '8359375'
+    v455 <- CallFunction v24, [v454]
+    v456 <- CreateArray [v447, v449, v451, v453, v455]
+    v457 <- LoadString 'decimal'
+    v458 <- LoadBoolean 'false'
+    v459 <- LoadInteger '7'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `style`, v457
+        ObjectLiteralAddProperty `useGrouping`, v458
+        ObjectLiteralAddProperty `maximumFractionDigits`, v459
+    v460 <- EndObjectLiteral
+    v461 <- CreateNamedVariable 'deNoGroupingDecimalOptions', 'var', v460
+    v462 <- GetProperty v77, 'NumberFormat'
+    v463 <- LoadString 'de-DE'
+    v464 <- Construct v462, [v463, v461]
+    v465 <- CreateNamedVariable 'deNoGroupingDecimalFormatter', 'var', v464
+    v466 <- LoadInteger '1337'
+    v467 <- LoadString '1337'
+    v468 <- CallFunction v15, [v467]
+    v469 <- CreateArray [v468]
+    v470 <- LoadFloat '6.25'
+    v471 <- UnaryOperation '-', v470
+    v472 <- LoadString '-'
+    v473 <- CallFunction v27, [v472]
+    v474 <- LoadString '6'
+    v475 <- CallFunction v15, [v474]
+    v476 <- LoadString ','
+    v477 <- CallFunction v21, [v476]
+    v478 <- LoadString '25'
+    v479 <- CallFunction v24, [v478]
+    v480 <- CreateArray [v473, v475, v477, v479]
+    v481 <- LoadFloat '1376.25'
+    v482 <- UnaryOperation '-', v481
+    v483 <- LoadString '-'
+    v484 <- CallFunction v27, [v483]
+    v485 <- LoadString '1376'
+    v486 <- CallFunction v15, [v485]
+    v487 <- LoadString ','
+    v488 <- CallFunction v21, [v487]
+    v489 <- LoadString '25'
+    v490 <- CallFunction v24, [v489]
+    v491 <- CreateArray [v484, v486, v488, v490]
+    v492 <- LoadFloat '124816.8359375'
+    v493 <- LoadString '124816'
+    v494 <- CallFunction v15, [v493]
+    v495 <- LoadString ','
+    v496 <- CallFunction v21, [v495]
+    v497 <- LoadString '8359375'
+    v498 <- CallFunction v24, [v497]
+    v499 <- CreateArray [v494, v496, v498]
+EndIf
+
+
+if (this.Intl) {
+    function GenericPartCreator(a3) {
+        function f4(a5) {
+            return { type: a3, value: a5 };
+        }
+        return f4;
+    }
+    var Nan = GenericPartCreator("nan");
+    var Inf = GenericPartCreator("infinity");
+    var Integer = GenericPartCreator("integer");
+    var Group = GenericPartCreator("group");
+    var Decimal = GenericPartCreator("decimal");
+    var Fraction = GenericPartCreator("fraction");
+    var MinusSign = GenericPartCreator("minusSign");
+    var PlusSign = GenericPartCreator("plusSign");
+    var PercentSign = GenericPartCreator("percentSign");
+    var Currency = GenericPartCreator("currency");
+    var Literal = GenericPartCreator("literal");
+    function assertParts(a41, a42, a43) {
+        var parts = a41.formatToParts(a42);
+        a41.format(a42);
+        const v48 = (a49) => {
+            return a49.value;
+        };
+        parts.map(v48).join("");
+        var len = parts.length;
+        a43.length;
+        for (let i57 = 0; i57 < len; i57++) {
+            a43[i57].type;
+            parts[i57].type;
+            a43[i57].value;
+            parts[i57].value;
+        }
+    }
+    const v75 = {
+        style: "currency",
+        currency: "USD",
+        currencyDisplay: "code",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    };
+    var usdCodeOptions = v75;
+    const t42 = Intl.NumberFormat;
+    const v80 = new t42("en-US", usdCodeOptions);
+    var usDollarsCode = v80;
+    [Currency("USD"),Literal(" "),Integer("25")];
+    const v95 = {
+        style: "currency",
+        currency: "XQQ",
+        currencyDisplay: "code",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    };
+    var xqqCodeOptions = v95;
+    const t54 = Intl.NumberFormat;
+    const v99 = new t54("en-US", xqqCodeOptions);
+    var xqqMoneyCode = v99;
+    [Currency("XQQ"),Literal(" "),Integer("25")];
+    const v114 = {
+        style: "currency",
+        currency: "USD",
+        currencyDisplay: "name",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    };
+    var usdNameOptions = v114;
+    const t66 = Intl.NumberFormat;
+    const v118 = new t66("en-US", usdNameOptions);
+    var usDollarsName = v118;
+    [Integer("25"),Literal(" "),Currency("US dollars")];
+    const v133 = {
+        style: "currency",
+        currency: "USD",
+        currencyDisplay: "name",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    };
+    var usdNameGroupingOptions = v133;
+    const t78 = Intl.NumberFormat;
+    const v137 = new t78("en-US", usdNameGroupingOptions);
+    var usDollarsNameGrouping = v137;
+    [Integer("12"),Group(","),Integer("345"),Group(","),Integer("678"),Literal(" "),Currency("US dollars")];
+    const v160 = {
+        style: "currency",
+        currency: "XQQ",
+        currencyDisplay: "name",
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    };
+    var xqqNameOptions = v160;
+    const t90 = Intl.NumberFormat;
+    const v164 = new t90("en-US", xqqNameOptions);
+    var xqqMoneyName = v164;
+    [Integer("25"),Literal(" "),Currency("XQQ")];
+    const v179 = {
+        style: "currency",
+        currency: "USD",
+        currencyDisplay: "name",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    };
+    var usdNameFractionOptions = v179;
+    const t102 = Intl.NumberFormat;
+    const v183 = new t102("en-US", usdNameFractionOptions);
+    var usdNameFractionFormatter = v183;
+    var usNationalSurplus = -19766580028249.41;
+    [MinusSign("-"),Integer("19"),Group(","),Integer("766"),Group(","),Integer("580"),Group(","),Integer("028"),Group(","),Integer("249"),Decimal("."),Fraction("41"),Literal(" "),Currency("US dollars")];
+    var usPercentOptions = { style: "percent", minimumFractionDigits: 1, maximumFractionDigits: 1 };
+    const t108 = Intl.NumberFormat;
+    const v224 = new t108("en-US", usPercentOptions);
+    var usPercentFormatter = v224;
+    [Integer("37"),Decimal("."),Fraction("5"),PercentSign("%")];
+    -1284.375;
+    [MinusSign("-"),Integer("128"),Group(","),Integer("437"),Decimal("."),Fraction("5"),PercentSign("%")];
+    [Nan("NaN"),PercentSign("%")];
+    [Inf("∞"),PercentSign("%")];
+    -Infinity;
+    [MinusSign("-"),Inf("∞"),PercentSign("%")];
+    var arPercentOptions = { style: "percent", minimumFractionDigits: 2 };
+    const t119 = Intl.NumberFormat;
+    const v279 = new t119("ar-IQ", arPercentOptions);
+    var arPercentFormatter = v279;
+    -135.32;
+    [MinusSign("؜-"),Integer("١٣"),Group("٬"),Integer("٥٣٢"),Decimal("٫"),Fraction("٠٠"),PercentSign("٪؜")];
+    var usDecimalOptions = { style: "decimal", maximumFractionDigits: 7 };
+    const t125 = Intl.NumberFormat;
+    const v304 = new t125("en-US", usDecimalOptions);
+    var usDecimalFormatter = v304;
+    [Integer("42")];
+    [Integer("1"),Group(","),Integer("337")];
+    -6.25;
+    [MinusSign("-"),Integer("6"),Decimal("."),Fraction("25")];
+    -1376.25;
+    [MinusSign("-"),Integer("1"),Group(","),Integer("376"),Decimal("."),Fraction("25")];
+    [Integer("124"),Group(","),Integer("816"),Decimal("."),Fraction("8359375")];
+    var usNoGroupingDecimalOptions = { style: "decimal", useGrouping: false, maximumFractionDigits: 7 };
+    const t136 = Intl.NumberFormat;
+    const v363 = new t136("en-US", usNoGroupingDecimalOptions);
+    var usNoGroupingDecimalFormatter = v363;
+    [Integer("1337")];
+    -6.25;
+    [MinusSign("-"),Integer("6"),Decimal("."),Fraction("25")];
+    -1376.25;
+    [MinusSign("-"),Integer("1376"),Decimal("."),Fraction("25")];
+    [Integer("124816"),Decimal("."),Fraction("8359375")];
+    var deDecimalOptions = { style: "decimal", maximumFractionDigits: 7 };
+    const t146 = Intl.NumberFormat;
+    const v405 = new t146("de-DE", deDecimalOptions);
+    var deDecimalFormatter = v405;
+    [Integer("42")];
+    [Integer("1"),Group("."),Integer("337")];
+    -6.25;
+    [MinusSign("-"),Integer("6"),Decimal(","),Fraction("25")];
+    -1376.25;
+    [MinusSign("-"),Integer("1"),Group("."),Integer("376"),Decimal(","),Fraction("25")];
+    [Integer("124"),Group("."),Integer("816"),Decimal(","),Fraction("8359375")];
+    var deNoGroupingDecimalOptions = { style: "decimal", useGrouping: false, maximumFractionDigits: 7 };
+    const t157 = Intl.NumberFormat;
+    const v464 = new t157("de-DE", deNoGroupingDecimalOptions);
+    var deNoGroupingDecimalFormatter = v464;
+    [Integer("1337")];
+    -6.25;
+    [MinusSign("-"),Integer("6"),Decimal(","),Fraction("25")];
+    -1376.25;
+    [MinusSign("-"),Integer("1376"),Decimal(","),Fraction("25")];
+    [Integer("124816"),Decimal(","),Fraction("8359375")];
+}
+
+FuzzIL program written to corpus/intl-numberformat-formattoparts.fzil

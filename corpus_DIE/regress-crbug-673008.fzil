@@ -1,0 +1,79 @@
+v0 <- LoadBoolean 'true'
+v1 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `33`, v0
+    ObjectLiteralAddProperty `-1`, v1
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadString ''
+    v7 <- BinaryOperation v6, '+', v5
+    Return v7
+EndPlainFunction
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'keys', [v3]
+v10 <- CallMethod v9, 'map', [v4]
+v11 <- CreateNamedVariable 'strkeys', 'var', v10
+v12 <- BeginPlainFunction -> v13
+    v14 <- UnaryOperation '+', v13
+    Return v14
+EndPlainFunction
+v15 <- CallMethod v8, 'keys', [v3]
+v16 <- CallMethod v15, 'map', [v12]
+v17 <- CreateNamedVariable 'numkeys', 'var', v16
+v18 <- CallMethod v11, 'concat', [v17]
+v19 <- CreateNamedVariable 'keys', 'var', v18
+v20 <- BeginPlainFunction -> v21
+    v22 <- CallMethod v3, 'hasOwnProperty', [v21]
+    v23 <- LoadString 'property not found: '
+    v24 <- BinaryOperation v23, '+', v21
+    v25 <- LoadString '('
+    v26 <- BinaryOperation v24, '+', v25
+    v27 <- TypeOf v21
+    v28 <- BinaryOperation v26, '+', v27
+    v29 <- LoadString ')'
+    v30 <- BinaryOperation v28, '+', v29
+EndPlainFunction
+v31 <- CallMethod v19, 'forEach', [v20]
+BeginObjectLiteral
+v32 <- EndObjectLiteral
+v33 <- CreateNamedVariable 'b', 'var', v32
+SetProperty v33, '__proto__', v3
+v34 <- BeginPlainFunction -> v35
+    v36 <- TestIn v35, v33
+    v37 <- LoadString 'property not found: '
+    v38 <- BinaryOperation v37, '+', v35
+    v39 <- LoadString '('
+    v40 <- BinaryOperation v38, '+', v39
+    v41 <- TypeOf v35
+    v42 <- BinaryOperation v40, '+', v41
+    v43 <- LoadString ')'
+    v44 <- BinaryOperation v42, '+', v43
+EndPlainFunction
+v45 <- CallMethod v19, 'forEach', [v34]
+
+
+var a = { 33: true, -1: true };
+function f4(a5) {
+    return "" + a5;
+}
+var strkeys = Object.keys(a).map(f4);
+function f12(a13) {
+    return +a13;
+}
+var numkeys = Object.keys(a).map(f12);
+var keys = strkeys.concat(numkeys);
+function f20(a21) {
+    a.hasOwnProperty(a21);
+    ((("property not found: " + a21) + "(") + typeof a21) + ")";
+}
+keys.forEach(f20);
+var b = {};
+b.__proto__ = a;
+function f34(a35) {
+    a35 in b;
+    ((("property not found: " + a35) + "(") + typeof a35) + ")";
+}
+keys.forEach(f34);
+
+FuzzIL program written to corpus/regress-crbug-673008.fzil

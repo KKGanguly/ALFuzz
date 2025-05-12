@@ -1,0 +1,26 @@
+v0 <- LoadString '0101010101010101'
+v1 <- LoadString '01010101'
+v2 <- BinaryOperation v0, '+', v1
+v3 <- CreateNamedVariable 'k', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- BinaryOperation v3, '+', v5
+    Return v6
+EndPlainFunction
+v7 <- LoadString 'a'
+v8 <- CallFunction v4, [v7]
+v9 <- LoadString 'a'
+v10 <- CallFunction v4, [v9]
+v11 <- LoadString ''
+v12 <- CallFunction v4, [v11]
+v13 <- CreateNamedVariable 'x', 'var', v12
+
+
+var k = "0101010101010101" + "01010101";
+function foo(a5) {
+    return k + a5;
+}
+foo("a");
+foo("a");
+var x = foo("");
+
+FuzzIL program written to corpus/regress-crbug-654723.fzil

@@ -1,0 +1,13 @@
+v0 <- CreateNamedVariable 'eval', 'none'
+v1 <- CreateNamedVariable 'globalEval', 'var', v0
+v2 <- LoadString 'this; eval('42')'
+v3 <- CallFunction v1, [v2]
+v4 <- LoadString 'eval('42'); this'
+v5 <- CallFunction v1, [v4]
+
+
+var globalEval = eval;
+globalEval("this; eval('42')");
+globalEval("eval('42'); this");
+
+FuzzIL program written to corpus/this-dynamic-lookup.fzil

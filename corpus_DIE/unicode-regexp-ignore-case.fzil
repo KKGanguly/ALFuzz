@@ -1,0 +1,180 @@
+v0 <- LoadString 'Å'
+v1 <- LoadRegExp '[\u00e5]' 'i'
+v2 <- CallMethod v1, 'test', [v0]
+v3 <- LoadString 'åሴ'
+v4 <- LoadRegExp '[\u212b]' 'i'
+v5 <- CallMethod v4, 'test', [v3]
+v6 <- LoadString 'å'
+v7 <- LoadRegExp '[\u212b]' 'i'
+v8 <- CallMethod v7, 'test', [v6]
+v9 <- LoadString 'Å'
+v10 <- CallMethod v9, 'toLowerCase', []
+v11 <- LoadString 'å'
+v12 <- Compare v10, '==', v11
+v13 <- LoadString 'Å'
+v14 <- CallMethod v13, 'toLowerCase', []
+v15 <- LoadString 'å'
+v16 <- Compare v14, '==', v15
+v17 <- LoadString 'å'
+v18 <- CallMethod v17, 'toUpperCase', []
+v19 <- LoadString 'Å'
+v20 <- Compare v18, '==', v19
+v21 <- LoadString 'Å'
+v22 <- LoadRegExp '\u00e5' 'iu'
+v23 <- CallMethod v22, 'test', [v21]
+v24 <- LoadString 'Å'
+v25 <- LoadRegExp '\u00e5' 'iu'
+v26 <- CallMethod v25, 'test', [v24]
+v27 <- LoadString 'å'
+v28 <- LoadRegExp '\u00e5' 'iu'
+v29 <- CallMethod v28, 'test', [v27]
+v30 <- LoadString 'Å'
+v31 <- LoadRegExp '\u00e5' 'iu'
+v32 <- CallMethod v31, 'test', [v30]
+v33 <- LoadString 'å'
+v34 <- LoadRegExp '\u00c5' 'iu'
+v35 <- CallMethod v34, 'test', [v33]
+v36 <- LoadString 'Å'
+v37 <- LoadRegExp '\u00c5' 'iu'
+v38 <- CallMethod v37, 'test', [v36]
+v39 <- LoadString 'Å'
+v40 <- LoadRegExp '\u00c5' 'iu'
+v41 <- CallMethod v40, 'test', [v39]
+v42 <- LoadString 'Å'
+v43 <- LoadRegExp '\u212b' 'iu'
+v44 <- CallMethod v43, 'test', [v42]
+v45 <- LoadString 'å'
+v46 <- LoadRegExp '\u212b' 'iu'
+v47 <- CallMethod v46, 'test', [v45]
+v48 <- LoadString 'Å'
+v49 <- LoadRegExp '\u212b' 'iu'
+v50 <- CallMethod v49, 'test', [v48]
+v51 <- LoadString '𐐨'
+v52 <- LoadRegExp '\u{10400}' 'i'
+v53 <- CallMethod v52, 'test', [v51]
+v54 <- LoadString '𐐨'
+v55 <- LoadRegExp '\u{10400}' 'iu'
+v56 <- CallMethod v55, 'test', [v54]
+v57 <- LoadString '𐐨'
+v58 <- LoadRegExp '\ud801\udc00' 'iu'
+v59 <- CallMethod v58, 'test', [v57]
+v60 <- LoadString '𐐀'
+v61 <- LoadRegExp '[\u{10428}]' 'iu'
+v62 <- CallMethod v61, 'test', [v60]
+v63 <- LoadString '𐐀'
+v64 <- LoadRegExp '[\ud801\udc28]' 'iu'
+v65 <- CallMethod v64, 'test', [v63]
+v66 <- LoadString 'Ａ𐐀'
+v67 <- CreateArray [v66]
+v68 <- LoadString 'Ａ𐐀abc'
+v69 <- LoadRegExp '[\uff40-\u{10428}]+' 'iu'
+v70 <- CallMethod v69, 'exec', [v68]
+v71 <- LoadString 'abc'
+v72 <- CreateArray [v71]
+v73 <- LoadString 'Ａ𐐀abcＣ'
+v74 <- LoadRegExp '[^\uff40-\u{10428}]+' 'iu'
+v75 <- CallMethod v74, 'exec', [v73]
+v76 <- LoadString 'ｓⒻ'
+v77 <- CreateArray [v76]
+v78 <- LoadString 'ｔｓⒻⒺ'
+v79 <- LoadRegExp '[\u24d5-\uff33]+' 'iu'
+v80 <- CallMethod v79, 'exec', [v78]
+v81 <- LoadString 'SS'
+v82 <- LoadRegExp '\u00df' 'iu'
+v83 <- CallMethod v82, 'test', [v81]
+v84 <- LoadString 'ἅι'
+v85 <- LoadRegExp '\u1f8d' 'iu'
+v86 <- CallMethod v85, 'test', [v84]
+v87 <- LoadString 'ᾅ'
+v88 <- LoadRegExp '\u1f8d' 'iu'
+v89 <- CallMethod v88, 'test', [v87]
+v90 <- LoadString 'ὣ'
+v91 <- LoadRegExp '\u1f6b' 'iu'
+v92 <- CallMethod v91, 'test', [v90]
+v93 <- LoadString 'åÅÅ'
+v94 <- LoadString 'å'
+v95 <- CreateArray [v93, v94]
+v96 <- LoadString 'åÅÅ'
+v97 <- LoadRegExp '(.)\1\1' 'iu'
+v98 <- CallMethod v97, 'exec', [v96]
+v99 <- LoadString '𑢪𑣊'
+v100 <- LoadString '𑢪'
+v101 <- CreateArray [v99, v100]
+v102 <- LoadString '𑢪𑣊'
+v103 <- LoadRegExp '(.)\1' 'iu'
+v104 <- CallMethod v103, 'exec', [v102]
+v105 <- LoadString 'ÅåÅ'
+v106 <- LoadRegExp '\u00e5\u00e5\u00e5' 'iu'
+v107 <- CallMethod v106, 'test', [v105]
+v108 <- LoadString 'ab𐐨'
+v109 <- LoadRegExp 'AB\u{10400}' 'iu'
+v110 <- CallMethod v109, 'test', [v108]
+v111 <- LoadString 's'
+v112 <- CreateArray [v111]
+v113 <- LoadString 's'
+v114 <- LoadRegExp '^\u017F' 'iu'
+v115 <- CallMethod v114, 'exec', [v113]
+v116 <- LoadString 's'
+v117 <- CreateArray [v116]
+v118 <- LoadString 'sሴ'
+v119 <- LoadRegExp '^\u017F' 'iu'
+v120 <- CallMethod v119, 'exec', [v118]
+v121 <- LoadString 'as'
+v122 <- CreateArray [v121]
+v123 <- LoadString 'as'
+v124 <- LoadRegExp '^a[\u017F]' 'iu'
+v125 <- CallMethod v124, 'exec', [v123]
+v126 <- LoadString 'as'
+v127 <- CreateArray [v126]
+v128 <- LoadString 'asሴ'
+v129 <- LoadRegExp '^a[\u017F]' 'iu'
+v130 <- CallMethod v129, 'exec', [v128]
+
+
+/[\u00e5]/i.test("Å");
+/[\u212b]/i.test("åሴ");
+/[\u212b]/i.test("å");
+("Å").toLowerCase() == "å";
+("Å").toLowerCase() == "å";
+("å").toUpperCase() == "Å";
+/\u00e5/iu.test("Å");
+/\u00e5/iu.test("Å");
+/\u00e5/iu.test("å");
+/\u00e5/iu.test("Å");
+/\u00c5/iu.test("å");
+/\u00c5/iu.test("Å");
+/\u00c5/iu.test("Å");
+/\u212b/iu.test("Å");
+/\u212b/iu.test("å");
+/\u212b/iu.test("Å");
+/\u{10400}/i.test("𐐨");
+/\u{10400}/iu.test("𐐨");
+/\ud801\udc00/iu.test("𐐨");
+/[\u{10428}]/iu.test("𐐀");
+/[\ud801\udc28]/iu.test("𐐀");
+["Ａ𐐀"];
+/[\uff40-\u{10428}]+/iu.exec("Ａ𐐀abc");
+["abc"];
+/[^\uff40-\u{10428}]+/iu.exec("Ａ𐐀abcＣ");
+["ｓⒻ"];
+/[\u24d5-\uff33]+/iu.exec("ｔｓⒻⒺ");
+/\u00df/iu.test("SS");
+/\u1f8d/iu.test("ἅι");
+/\u1f8d/iu.test("ᾅ");
+/\u1f6b/iu.test("ὣ");
+["åÅÅ","å"];
+/(.)\1\1/iu.exec("åÅÅ");
+["𑢪𑣊","𑢪"];
+/(.)\1/iu.exec("𑢪𑣊");
+/\u00e5\u00e5\u00e5/iu.test("ÅåÅ");
+/AB\u{10400}/iu.test("ab𐐨");
+["s"];
+/^\u017F/iu.exec("s");
+["s"];
+/^\u017F/iu.exec("sሴ");
+["as"];
+/^a[\u017F]/iu.exec("as");
+["as"];
+/^a[\u017F]/iu.exec("asሴ");
+
+FuzzIL program written to corpus/unicode-regexp-ignore-case.fzil

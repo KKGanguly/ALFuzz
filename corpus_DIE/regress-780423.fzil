@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+    EndPlainFunction
+    Return v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `create`, v0
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'Class', 'var', v2
+v4 <- CallMethod v3, 'create', []
+v5 <- CreateNamedVariable 'o1', 'var', v4
+v6 <- CallMethod v3, 'create', []
+v7 <- CreateNamedVariable 'o2', 'var', v6
+v8 <- Compare v5, '!==', v7
+v9 <- LoadString 'different functions'
+v10 <- GetProperty v5, 'prototype'
+v11 <- GetProperty v7, 'prototype'
+v12 <- Compare v10, '!==', v11
+v13 <- LoadString 'different protos'
+
+
+function f0() {
+    function kurt() {
+    }
+    return kurt;
+}
+var Class = { create: f0 };
+var o1 = Class.create();
+var o2 = Class.create();
+o1 !== o2;
+o1.prototype !== o2.prototype;
+
+FuzzIL program written to corpus/regress-780423.fzil

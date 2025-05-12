@@ -1,0 +1,47 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString 'values'
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- CallMethod v3, 'getOwnPropertyDescriptor', [v1, v2]
+v5 <- CreateNamedVariable 'valuesDesc', 'var', v4
+v6 <- LoadString 'object'
+v7 <- TypeOf v5
+v8 <- GetProperty v0, 'prototype'
+v9 <- CreateNamedVariable 'Symbol', 'none'
+v10 <- GetProperty v9, 'iterator'
+v11 <- GetComputedProperty v8, v10
+v12 <- GetProperty v5, 'value'
+v13 <- GetProperty v5, 'configurable'
+v14 <- GetProperty v5, 'writable'
+v15 <- GetProperty v5, 'enumerable'
+v16 <- GetProperty v0, 'prototype'
+v17 <- GetProperty v9, 'unscopables'
+v18 <- GetComputedProperty v16, v17
+v19 <- GetProperty v18, 'values'
+v20 <- BeginArrowFunction -> 
+    v21 <- GetProperty v0, 'prototype'
+    v22 <- GetProperty v9, 'iterator'
+    v23 <- GetComputedProperty v21, v22
+    v24 <- Construct v23, []
+    Return v24
+EndArrowFunction
+v25 <- CallFunction v20, []
+v26 <- CreateNamedVariable 'TypeError', 'none'
+
+
+var valuesDesc = Object.getOwnPropertyDescriptor(Array.prototype, "values");
+typeof valuesDesc;
+Array.prototype[Symbol.iterator];
+valuesDesc.value;
+valuesDesc.configurable;
+valuesDesc.writable;
+valuesDesc.enumerable;
+Array.prototype[Symbol.unscopables].values;
+const v20 = () => {
+    const t9 = Array.prototype[Symbol.iterator];
+    const v24 = new t9();
+    return v24;
+};
+v20();
+
+FuzzIL program written to corpus/array-prototype-values.fzil

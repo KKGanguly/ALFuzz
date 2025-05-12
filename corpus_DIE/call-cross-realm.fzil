@@ -1,0 +1,29 @@
+v0 <- CreateNamedVariable 'f', 'none'
+v1 <- CreateNamedVariable 'Number', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetProperty v2, 'f', v0
+v3 <- LoadInteger '1'
+v4 <- CreateNamedVariable 'number', 'var', v3
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'object', 'var', v5
+v7 <- GetProperty v6, 'prototype'
+v8 <- CallMethod v0, 'call', [v4]
+v9 <- GetProperty v8, '__proto__'
+v10 <- GetProperty v9, '__proto__'
+v11 <- GetProperty v6, 'prototype'
+v12 <- CallMethod v4, 'f', []
+v13 <- GetProperty v12, '__proto__'
+v14 <- GetProperty v13, '__proto__'
+
+
+const t0 = Number.prototype;
+t0.f = f;
+var number = 1;
+var object = {};
+object.prototype;
+f.call(number).__proto__.__proto__;
+object.prototype;
+number.f().__proto__.__proto__;
+
+FuzzIL program written to corpus/call-cross-realm.fzil

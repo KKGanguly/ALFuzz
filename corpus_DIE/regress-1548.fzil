@@ -1,0 +1,85 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- CreateArray [v2]
+    v4 <- CallMethod v3, 'map', [v1]
+    v5 <- GetElement v4, '0'
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- CreateArray []
+    v8 <- GetProperty v7, 'map'
+    v9 <- GetProperty v8, 'caller'
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> 
+    v11 <- CallFunction v0, [v6]
+EndPlainFunction
+v12 <- CallFunction v10, []
+v13 <- CreateNamedVariable 'Array', 'none'
+v14 <- GetProperty v13, 'prototype'
+v15 <- GetProperty v14, 'map'
+v16 <- DeleteProperty v15, 'caller'
+v17 <- BeginPlainFunction -> 
+    v18 <- CallFunction v0, [v6]
+EndPlainFunction
+v19 <- CallFunction v17, []
+v20 <- BeginPlainFunction -> v21
+    v22 <- LoadInteger '1'
+    v23 <- CreateArray [v22]
+    v24 <- CallMethod v23, 'map', [v21]
+    v25 <- GetElement v24, '0'
+    Return v25
+EndPlainFunction
+v26 <- BeginPlainFunction -> 
+    v27 <- CreateArray []
+    v28 <- GetProperty v27, 'map'
+    v29 <- GetProperty v28, 'arguments'
+    Return v29
+EndPlainFunction
+v30 <- BeginPlainFunction -> 
+    v31 <- CallFunction v20, [v26]
+EndPlainFunction
+v32 <- CallFunction v30, []
+v33 <- GetProperty v13, 'prototype'
+v34 <- GetProperty v33, 'map'
+v35 <- DeleteProperty v34, 'arguments'
+v36 <- BeginPlainFunction -> 
+    v37 <- CallFunction v20, [v26]
+EndPlainFunction
+v38 <- CallFunction v36, []
+
+
+function testfn(a1) {
+    return ([1]).map(a1)[0];
+}
+function foo() {
+    return ([]).map.caller;
+}
+function f10() {
+    testfn(foo);
+}
+f10();
+const t9 = Array.prototype.map;
+delete t9.caller;
+function f17() {
+    testfn(foo);
+}
+f17();
+function testarguments(a21) {
+    return ([1]).map(a21)[0];
+}
+function bar() {
+    return ([]).map.arguments;
+}
+function f30() {
+    testarguments(bar);
+}
+f30();
+const t25 = Array.prototype.map;
+delete t25.arguments;
+function f36() {
+    testarguments(bar);
+}
+f36();
+
+FuzzIL program written to corpus/regress-1548.fzil

@@ -1,0 +1,25 @@
+v0 <- CreateNamedVariable 'RegExp', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- CreateNamedVariable 'Symbol', 'none'
+v3 <- GetProperty v2, 'matchAll'
+v4 <- DeleteComputedProperty v1, v3
+v5 <- LoadString 'a'
+v6 <- CreateNamedVariable 'str', 'const', v5
+v7 <- BeginArrowFunction -> 
+    v8 <- LoadRegExp '\w' 'g'
+    v9 <- CallMethod v6, 'matchAll', [v8]
+    Return v9
+EndArrowFunction
+v10 <- CallFunction v7, []
+v11 <- CreateNamedVariable 'TypeError', 'none'
+
+
+const t0 = RegExp.prototype;
+delete t0[Symbol.matchAll];
+const str = "a";
+const v7 = () => {
+    return str.matchAll(/\w/g);
+};
+v7();
+
+FuzzIL program written to corpus/string-matchAll-deleted-matchAll.fzil

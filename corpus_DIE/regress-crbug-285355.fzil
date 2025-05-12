@@ -1,0 +1,42 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- UnaryOperation '~', v1
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- LoadInteger '2'
+    v6 <- CallFunction v0, []
+    v7 <- UnaryOperation '~', v6
+    SetComputedProperty v4, v7, v5
+    Return v5
+EndPlainFunction
+v8 <- LoadInteger '2'
+v9 <- CreateNamedVariable 'Array', 'none'
+v10 <- LoadInteger '1'
+v11 <- Construct v9, [v10]
+v12 <- CallFunction v3, [v11]
+v13 <- LoadInteger '2'
+v14 <- LoadInteger '1'
+v15 <- Construct v9, [v14]
+v16 <- CallFunction v3, [v15]
+v17 <- LoadInteger '2'
+v18 <- LoadInteger '1'
+v19 <- Construct v9, [v18]
+v20 <- CallFunction v3, [v19]
+
+
+function inverted_index() {
+    return ~1;
+}
+function crash(a4) {
+    a4[~inverted_index()] = 2;
+    return 2;
+}
+const v11 = new Array(1);
+crash(v11);
+const v15 = new Array(1);
+crash(v15);
+const v19 = new Array(1);
+crash(v19);
+
+FuzzIL program written to corpus/regress-crbug-285355.fzil

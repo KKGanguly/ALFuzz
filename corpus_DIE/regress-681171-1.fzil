@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CreateNamedVariable 'bar', 'none'
+Reassign v1, v0
+BeginTry
+    v2 <- BeginPlainFunction -> 
+        v3 <- BeginGeneratorFunction -> 
+            v4 <- LoadInteger '1'
+            v5 <- Yield v4
+            v6 <- LoadInteger '2'
+            v7 <- Yield v6
+            v8 <- LoadInteger '3'
+            v9 <- Yield v8
+        EndGeneratorFunction
+        v10 <- CallFunction v3, []
+        v11 <- CreateNamedVariable 'bar', 'none'
+        v12 <- CallFunctionWithSpread v11, [...v10]
+    EndPlainFunction
+    v13 <- CallFunction v2, []
+BeginCatch -> v14
+EndTryCatch
+
+
+function f0() {
+}
+bar = f0;
+try {
+    function f2() {
+        function* f3() {
+            yield 1;
+            yield 2;
+            yield 3;
+        }
+        bar(...f3());
+    }
+    f2();
+} catch(e14) {
+}
+
+FuzzIL program written to corpus/regress-681171-1.fzil

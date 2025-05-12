@@ -1,0 +1,50 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'foo'
+    v3 <- LoadString 'bar'
+    BeginSwitch v1
+        BeginSwitchCase v2
+            v4 <- LoadInteger '87'
+            Return v4
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v3
+            v5 <- LoadInteger '42'
+            Return v5
+        EndSwitchCase fallsThrough
+    EndSwitch
+    v6 <- LoadInteger '99'
+    Return v6
+EndPlainFunction
+BeginForLoopInitializer
+    v7 <- LoadInteger '0'
+BeginForLoopCondition -> v8
+    v9 <- LoadInteger '5'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10 -> v11
+    v12 <- UnaryOperation v11, '++'
+BeginForLoopBody -> v13
+    v14 <- LoadString 'foo'
+    v15 <- CallFunction v0, [v14]
+EndForLoop
+v16 <- LoadString 'foo'
+v17 <- CallFunction v0, [v16]
+v18 <- LoadInteger '42'
+v19 <- LoadString 'bar'
+v20 <- CallFunction v0, [v19]
+
+
+function f(a1) {
+    switch (a1) {
+        case "foo":
+            return 87;
+        case "bar":
+            return 42;
+    }
+    return 99;
+}
+for (let i8 = 0; i8 < 5; i8++) {
+    f("foo");
+}
+f("foo");
+f("bar");
+
+FuzzIL program written to corpus/switch-bailout.fzil

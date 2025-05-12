@@ -1,0 +1,37 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadUndefined
+v3 <- CreateNamedVariable 'b', 'var', v2
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+BeginForLoopCondition -> v5
+    v6 <- LoadInteger '100000'
+    v7 <- Compare v5, '<', v6
+BeginForLoopAfterthought v7 -> v8
+    v9 <- UnaryOperation v8, '++'
+BeginForLoopBody -> v10
+    v11 <- LoadInteger '1'
+    Reassign v3, v11
+    v12 <- LoadInteger '0'
+    v13 <- UnaryOperation '-', v12
+    v14 <- BinaryOperation v10, '+', v13
+    Reassign v1, v14
+    Reassign v3, v1
+EndForLoop
+v15 <- Compare v1, '===', v3
+v16 <- CreateNamedVariable 'gc', 'none'
+v17 <- CallFunction v16, []
+v18 <- Compare v1, '===', v3
+
+
+var a;
+var b;
+for (let i5 = 0; i5 < 100000; i5++) {
+    b = 1;
+    b = (a = i5 + -0);
+}
+a === b;
+gc();
+a === b;
+
+FuzzIL program written to corpus/regress-791245.fzil

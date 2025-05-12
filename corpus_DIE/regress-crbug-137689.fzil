@@ -1,0 +1,75 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '10'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '20'
+    Return v5
+EndPlainFunction
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'o', 'var', v6
+BeginObjectLiteral
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'o2', 'var', v8
+v10 <- LoadString 'foo'
+v11 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v0
+    ObjectLiteralAddProperty `configurable`, v11
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'Object', 'none'
+v14 <- CallMethod v13, 'defineProperty', [v7, v10, v12]
+v15 <- LoadString 'foo'
+v16 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v0
+    ObjectLiteralAddProperty `configurable`, v16
+v17 <- EndObjectLiteral
+v18 <- CallMethod v13, 'defineProperty', [v9, v15, v17]
+v19 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v4
+v20 <- EndObjectLiteral
+v21 <- CallMethod v13, 'defineProperty', [v7, v19, v20]
+v22 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v4
+v23 <- EndObjectLiteral
+v24 <- CallMethod v13, 'defineProperty', [v9, v22, v23]
+v25 <- LoadString 'foo'
+v26 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v2
+    ObjectLiteralAddProperty `configurable`, v26
+v27 <- EndObjectLiteral
+v28 <- CallMethod v13, 'defineProperty', [v7, v25, v27]
+v29 <- LoadString 'foo'
+v30 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v2
+    ObjectLiteralAddProperty `configurable`, v30
+v31 <- EndObjectLiteral
+v32 <- CallMethod v13, 'defineProperty', [v9, v29, v31]
+
+
+function getter() {
+    return 10;
+}
+function setter(a3) {
+}
+function getter2() {
+    return 20;
+}
+var o = {};
+var o2 = {};
+Object.defineProperty(o, "foo", { get: getter, configurable: true });
+Object.defineProperty(o2, "foo", { get: getter, configurable: true });
+Object.defineProperty(o, "bar", { get: getter2 });
+Object.defineProperty(o2, "bar", { get: getter2 });
+Object.defineProperty(o, "foo", { set: setter, configurable: true });
+Object.defineProperty(o2, "foo", { set: setter, configurable: true });
+
+FuzzIL program written to corpus/regress-crbug-137689.fzil

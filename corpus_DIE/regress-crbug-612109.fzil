@@ -1,0 +1,29 @@
+v0 <- LoadString 'string for triggering osr in __f_0'
+v1 <- CreateNamedVariable 's', 'none'
+Reassign v1, v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '16'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- CreateNamedVariable 's', 'none'
+    v10 <- BinaryOperation v9, '+', v9
+    Reassign v9, v10
+EndForLoop
+v11 <- CreateNamedVariable 's', 'none'
+v12 <- CreateNamedVariable 'encodeURI', 'none'
+v13 <- CallFunction v12, [v11]
+v14 <- CreateNamedVariable 'decodeURI', 'none'
+v15 <- CallFunction v14, [v13]
+
+
+s = "string for triggering osr in __f_0";
+for (let i3 = 0; i3 < 16; i3++) {
+    s = s + s;
+}
+decodeURI(encodeURI(s));
+
+FuzzIL program written to corpus/regress-crbug-612109.fzil

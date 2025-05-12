@@ -1,0 +1,30 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadInteger '1'
+    v5 <- GetProperty v3, 't'
+    v6 <- LoadInteger '1'
+    v7 <- LoadInteger '2'
+    v8 <- TernaryOperation v5, v6, v7
+    v9 <- BinaryOperation v4, '+', v8
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> 
+    v11 <- CallFunction v2, [v1]
+EndPlainFunction
+v12 <- CallFunction v10, []
+v13 <- CallFunction v10, []
+
+
+var o = {};
+function bar(a3) {
+    return 1 + (a3.t ? 1 : 2);
+}
+function foo() {
+    bar(o);
+}
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-630923.fzil

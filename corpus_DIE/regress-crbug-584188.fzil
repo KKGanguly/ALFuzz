@@ -1,0 +1,37 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'x', 'var', v0
+BeginTry
+    v2 <- CreateNamedVariable 'String', 'none'
+    v3 <- GetProperty v2, 'prototype'
+    v4 <- LoadString '3'
+    v5 <- BeginPlainFunction -> 
+        v6 <- CreateNamedVariable 'v', 'none'
+        Reassign v1, v6
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v5
+    v7 <- EndObjectLiteral
+    v8 <- CreateNamedVariable 'Object', 'none'
+    v9 <- CallMethod v8, 'defineProperty', [v3, v4, v7]
+    v10 <- LoadString 'bla'
+    v11 <- CreateNamedVariable 'string', 'none'
+    Reassign v11, v10
+BeginCatch -> v12
+EndTryCatch
+v13 <- LoadString 'Array.prototype.sort.call(string);'
+v14 <- CreateNamedVariable 'TypeError', 'none'
+
+
+var x = {};
+try {
+    const v3 = String.prototype;
+    function f5() {
+        x = v;
+    }
+    Object.defineProperty(v3, "3", { x: f5 });
+    string = "bla";
+} catch(e12) {
+}
+
+FuzzIL program written to corpus/regress-crbug-584188.fzil

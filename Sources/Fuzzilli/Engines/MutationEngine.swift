@@ -72,8 +72,12 @@ public class MutationEngine: FuzzEngine {
             }
 
             assert(program !== parent)
+            var fuzzEngineParams: FuzzEngineParams = FuzzEngineParams()
             let outcome = execute(program)
+            fuzzEngineParams.executionOutcome = outcome
 
+            //trigger event to log
+            fuzzer.dispatchEvent(fuzzer.events.mutationComplete, data: fuzzEngineParams)
             // Mutate the program further if it succeeded.
             if .succeeded == outcome {
                 parent = program

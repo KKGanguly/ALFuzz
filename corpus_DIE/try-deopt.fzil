@@ -1,0 +1,94 @@
+v0 <- BeginPlainFunction -> v1
+    BeginTry
+        ThrowException v1
+    BeginCatch -> v2
+        v3 <- LoadInteger '1'
+        v4 <- BinaryOperation v2, '+', v3
+        Return v4
+    EndTryCatch
+    v5 <- LoadInteger '2'
+    v6 <- BinaryOperation v1, '+', v5
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '24'
+v8 <- LoadInteger '23'
+v9 <- CallFunction v0, [v8]
+v10 <- BeginPlainFunction -> v11
+    BeginTry
+        ThrowException v11
+    BeginCatch -> v12
+        v13 <- LoadInteger '1'
+        v14 <- BinaryOperation v12, '+', v13
+        Return v14
+    EndTryCatch
+    v15 <- LoadInteger '2'
+    v16 <- BinaryOperation v11, '+', v15
+    Return v16
+EndPlainFunction
+v17 <- LoadInteger '24'
+v18 <- LoadInteger '23'
+v19 <- CallFunction v10, [v18]
+v20 <- BeginPlainFunction -> v21
+    BeginTry
+        ThrowException v21
+    BeginFinally
+        v22 <- LoadInteger '1'
+        v23 <- BinaryOperation v21, '+', v22
+        Return v23
+    EndTryCatch
+    v24 <- LoadInteger '2'
+    v25 <- BinaryOperation v21, '+', v24
+    Return v25
+EndPlainFunction
+v26 <- LoadInteger '24'
+v27 <- LoadInteger '23'
+v28 <- CallFunction v20, [v27]
+v29 <- BeginPlainFunction -> v30
+    BeginTry
+        ThrowException v30
+    BeginFinally
+    EndTryCatch
+    v31 <- LoadInteger '2'
+    v32 <- BinaryOperation v30, '+', v31
+    Return v32
+EndPlainFunction
+v33 <- LoadString 'DeoptFromFinally_ReThrow(new Error)'
+v34 <- CreateNamedVariable 'Error', 'none'
+
+
+function DeoptFromTry(a1) {
+    try {
+        throw a1;
+    } catch(e2) {
+        return e2 + 1;
+    }
+    return a1 + 2;
+}
+DeoptFromTry(23);
+function DeoptFromCatch(a11) {
+    try {
+        throw a11;
+    } catch(e12) {
+        return e12 + 1;
+    }
+    return a11 + 2;
+}
+DeoptFromCatch(23);
+function DeoptFromFinally_Return(a21) {
+    try {
+        throw a21;
+    } finally {
+        return a21 + 1;
+    }
+    return a21 + 2;
+}
+DeoptFromFinally_Return(23);
+function DeoptFromFinally_ReThrow(a30) {
+    try {
+        throw a30;
+    } finally {
+    }
+    return a30 + 2;
+}
+
+FuzzIL program written to corpus/try-deopt.fzil

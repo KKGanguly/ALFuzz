@@ -1,0 +1,54 @@
+v0 <- BeginClassDefinition
+    BeginClassConstructor -> v1
+    EndClassConstructor
+EndClassDefinition
+v2 <- BeginClassDefinition v0
+    BeginClassConstructor -> v3, v4
+        BeginIf v4
+            CallSuperConstructor []
+        EndIf
+    EndClassConstructor
+EndClassDefinition
+v5 <- LoadInteger '1'
+v6 <- Construct v2, [v5]
+v7 <- CreateNamedVariable 'test', 'none'
+Reassign v7, v6
+v8 <- LoadInteger '1'
+v9 <- Construct v2, [v8]
+v10 <- CreateNamedVariable 'test', 'none'
+Reassign v10, v9
+v11 <- LoadInteger '1'
+v12 <- Construct v2, [v11]
+v13 <- CreateNamedVariable 'test', 'none'
+Reassign v13, v12
+v14 <- BeginArrowFunction -> 
+    v15 <- LoadInteger '0'
+    v16 <- Construct v2, [v15]
+EndArrowFunction
+v17 <- CallFunction v14, []
+v18 <- CreateNamedVariable 'ReferenceError', 'none'
+
+
+class C0 {
+    constructor() {
+    }
+}
+class C2 extends C0 {
+    constructor(a4) {
+        if (a4) {
+            super();
+        }
+    }
+}
+const v6 = new C2(1);
+test = v6;
+const v9 = new C2(1);
+test = v9;
+const v12 = new C2(1);
+test = v12;
+const v14 = () => {
+    new C2(0);
+};
+v14();
+
+FuzzIL program written to corpus/throw-super-not-called.fzil

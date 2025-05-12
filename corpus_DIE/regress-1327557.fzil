@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'x'
+    ThrowException v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v0
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'x', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadString 'y'
+    ThrowException v5
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v4
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'y', 'var', v6
+v8 <- LoadBoolean 'false'
+v9 <- CreateNamedVariable 'exception', 'var', v8
+BeginTry
+    v10 <- UnaryOperation '-', v7
+    v11 <- BinaryOperation v3, '*', v10
+BeginCatch -> v12
+    v13 <- LoadBoolean 'true'
+    Reassign v9, v13
+    v14 <- LoadString 'y'
+EndTryCatch
+
+
+function f0() {
+    throw "x";
+}
+var x = { valueOf: f0 };
+function f4() {
+    throw "y";
+}
+var y = { valueOf: f4 };
+var exception = false;
+try {
+    x * -y;
+} catch(e12) {
+    exception = true;
+}
+
+FuzzIL program written to corpus/regress-1327557.fzil

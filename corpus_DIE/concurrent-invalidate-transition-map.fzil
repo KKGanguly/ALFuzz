@@ -1,0 +1,68 @@
+v0 <- CreateNamedVariable 'f0', 'none'
+v1 <- CallFunction v0, []
+v2 <- UnaryOperation '!', v1
+BeginIf v2
+    v3 <- LoadString 'Concurrent recompilation is disabled. Skipping this test.'
+    v4 <- CreateNamedVariable 'print', 'none'
+    v5 <- CallFunction v4, [v3]
+    v6 <- CreateNamedVariable 'quit', 'none'
+    v7 <- CallFunction v6, []
+EndIf
+v8 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v9 <- EndObjectLiteral
+    v10 <- CreateNamedVariable 'o', 'var', v9
+    v11 <- LoadInteger '1'
+    SetProperty v10, 'a', v11
+    v12 <- LoadInteger '2'
+    SetProperty v10, 'b', v12
+    Return v10
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14
+    v15 <- LoadInteger '0'
+    SetProperty v14, 'c', v15
+    v16 <- LoadInteger '3'
+    SetProperty v14, 'c', v16
+EndPlainFunction
+v17 <- CallFunction v8, []
+v18 <- CreateNamedVariable 'obj1', 'var', v17
+v19 <- CallFunction v8, []
+v20 <- CreateNamedVariable 'obj2', 'var', v19
+v21 <- CallFunction v13, [v18]
+v22 <- CallFunction v13, [v20]
+v23 <- CallFunction v8, []
+v24 <- CreateNamedVariable 'o', 'var', v23
+v25 <- CallFunction v13, [v24]
+v26 <- LoadFloat '2.2'
+SetProperty v24, 'c', v26
+v27 <- CallFunction v13, []
+v28 <- LoadString 'no sync'
+v29 <- CallFunction v13, []
+v30 <- LoadString 'sync'
+
+
+if (!f0()) {
+    print("Concurrent recompilation is disabled. Skipping this test.");
+    quit();
+}
+function new_object() {
+    var o = {};
+    o.a = 1;
+    o.b = 2;
+    return o;
+}
+function add_field(a14) {
+    a14.c = 0;
+    a14.c = 3;
+}
+var obj1 = new_object();
+var obj2 = new_object();
+add_field(obj1);
+add_field(obj2);
+var o = new_object();
+add_field(o);
+o.c = 2.2;
+add_field();
+add_field();
+
+FuzzIL program written to corpus/concurrent-invalidate-transition-map.fzil

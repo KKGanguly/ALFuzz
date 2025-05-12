@@ -1,0 +1,42 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v3 <- LoadInteger '0'
+    v4 <- Void_ v3
+    v5 <- LoadThis
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadThis
+EndPlainFunction
+v8 <- LoadInteger '1'
+v9 <- LoadInteger '2'
+v10 <- LoadInteger '3'
+v11 <- CreateArray [v8, v9, v10]
+v12 <- CallMethod v11, 'sort', [v2]
+v13 <- LoadInteger '1'
+v14 <- LoadInteger '2'
+v15 <- LoadInteger '3'
+v16 <- CreateArray [v13, v14, v15]
+v17 <- CallMethod v16, 'sort', [v6]
+v18 <- LoadString 'x'
+v19 <- LoadString 'axc'
+v20 <- CallMethod v19, 'replace', [v18, v2]
+v21 <- LoadString 'x'
+v22 <- LoadString 'axc'
+v23 <- CallMethod v22, 'replace', [v21, v6]
+
+
+var global = this;
+function strict() {
+    'use strict';
+    void 0;
+}
+function non_strict() {
+}
+([1,2,3]).sort(strict);
+([1,2,3]).sort(non_strict);
+("axc").replace("x", strict);
+("axc").replace("x", non_strict);
+
+FuzzIL program written to corpus/regress-1360.fzil

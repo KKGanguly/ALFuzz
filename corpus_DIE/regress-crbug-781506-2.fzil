@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetElement v1, '0'
+    Return v2
+EndPlainFunction
+v3 <- LoadUndefined
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CallFunction v0, [v4]
+v6 <- LoadInteger '0'
+v7 <- CreateNamedVariable 'Array', 'none'
+v8 <- GetProperty v7, 'prototype'
+SetElement v8, '0', v6
+v9 <- LoadUndefined
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CallFunction v0, [v10]
+v12 <- LoadUndefined
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- CallFunction v0, [v13]
+
+
+function foo(a1) {
+    return a1[0];
+}
+foo({});
+const t3 = Array.prototype;
+t3[0] = 0;
+foo({});
+foo({});
+
+FuzzIL program written to corpus/regress-crbug-781506-2.fzil

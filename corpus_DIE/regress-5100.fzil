@@ -1,0 +1,125 @@
+v0 <- LoadInteger '0'
+v1 <- LoadInteger '1'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- LoadString 'true'
+v5 <- LoadString 'true'
+SetComputedProperty v3, v5, v4
+v6 <- LoadString 'false'
+v7 <- LoadString 'false'
+SetComputedProperty v3, v7, v6
+v8 <- LoadString 'null'
+v9 <- LoadString 'null'
+SetComputedProperty v3, v9, v8
+v10 <- LoadString 'undefined'
+v11 <- LoadString 'undefined'
+SetComputedProperty v3, v11, v10
+v12 <- BeginPlainFunction -> 
+    v13 <- BeginPlainFunction -> v14
+        v15 <- GetComputedProperty v3, v14
+        Return v15
+    EndPlainFunction
+    v16 <- LoadInteger '0'
+    v17 <- LoadInteger '0'
+    v18 <- CallFunction v13, [v17]
+    v19 <- LoadInteger '0'
+    v20 <- LoadInteger '0'
+    v21 <- CallFunction v13, [v20]
+    v22 <- LoadString 'true'
+    v23 <- LoadBoolean 'true'
+    v24 <- CallFunction v13, [v23]
+EndPlainFunction
+v25 <- CallFunction v12, []
+v26 <- BeginPlainFunction -> 
+    v27 <- BeginPlainFunction -> v28
+        v29 <- GetComputedProperty v3, v28
+        Return v29
+    EndPlainFunction
+    v30 <- LoadInteger '0'
+    v31 <- LoadInteger '0'
+    v32 <- CallFunction v27, [v31]
+    v33 <- LoadInteger '0'
+    v34 <- LoadInteger '0'
+    v35 <- CallFunction v27, [v34]
+    v36 <- LoadString 'false'
+    v37 <- LoadBoolean 'false'
+    v38 <- CallFunction v27, [v37]
+EndPlainFunction
+v39 <- CallFunction v26, []
+v40 <- BeginPlainFunction -> 
+    v41 <- BeginPlainFunction -> v42
+        v43 <- GetComputedProperty v3, v42
+        Return v43
+    EndPlainFunction
+    v44 <- LoadInteger '0'
+    v45 <- LoadInteger '0'
+    v46 <- CallFunction v41, [v45]
+    v47 <- LoadInteger '0'
+    v48 <- LoadInteger '0'
+    v49 <- CallFunction v41, [v48]
+    v50 <- LoadString 'null'
+    v51 <- LoadNull
+    v52 <- CallFunction v41, [v51]
+EndPlainFunction
+v53 <- CallFunction v40, []
+v54 <- BeginPlainFunction -> 
+    v55 <- BeginPlainFunction -> v56
+        v57 <- GetComputedProperty v3, v56
+        Return v57
+    EndPlainFunction
+    v58 <- LoadInteger '0'
+    v59 <- LoadInteger '0'
+    v60 <- CallFunction v55, [v59]
+    v61 <- LoadInteger '0'
+    v62 <- LoadInteger '0'
+    v63 <- CallFunction v55, [v62]
+    v64 <- LoadString 'undefined'
+    v65 <- LoadUndefined
+    v66 <- CallFunction v55, [v65]
+EndPlainFunction
+v67 <- CallFunction v54, []
+
+
+var a = [0,1];
+a["true"] = "true";
+a["false"] = "false";
+a["null"] = "null";
+a["undefined"] = "undefined";
+function f12() {
+    function f(a14) {
+        return a[a14];
+    }
+    f(0);
+    f(0);
+    f(true);
+}
+f12();
+function f26() {
+    function f(a28) {
+        return a[a28];
+    }
+    f(0);
+    f(0);
+    f(false);
+}
+f26();
+function f40() {
+    function f(a42) {
+        return a[a42];
+    }
+    f(0);
+    f(0);
+    f(null);
+}
+f40();
+function f54() {
+    function f(a56) {
+        return a[a56];
+    }
+    f(0);
+    f(0);
+    f(undefined);
+}
+f54();
+
+FuzzIL program written to corpus/regress-5100.fzil

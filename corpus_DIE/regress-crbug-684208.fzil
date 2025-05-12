@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadFloat '2.3'
+    v3 <- LoadUndefined
+    v4 <- LoadFloat '4.2'
+    v5 <- CreateArray [v1, v2, v3, v4]
+    v6 <- CreateNamedVariable 'a', 'var', v5
+    v7 <- GetElement v6, '2'
+    Return v7
+EndPlainFunction
+v8 <- LoadUndefined
+v9 <- CallFunction v0, []
+v10 <- LoadUndefined
+v11 <- CallFunction v0, []
+v12 <- LoadUndefined
+v13 <- CallFunction v0, []
+
+
+function foo() {
+    var a = [1,2.3,,4.2];
+    return a[2];
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-684208.fzil

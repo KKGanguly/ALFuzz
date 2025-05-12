@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginPlainFunction -> v3
+        v4 <- LoadString ''
+        SetElement v3, '0', v4
+        v5 <- LoadInteger '0'
+        v6 <- GetElement v3, '0'
+        BeginObjectLiteral
+        v7 <- EndObjectLiteral
+        SetElement v3, '0', v7
+        v8 <- LoadInteger '0'
+        v9 <- GetElement v3, '0'
+        v10 <- BeginPlainFunction -> 
+            v11 <- LoadInteger '27'
+            Return v11
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `valueOf`, v10
+        v12 <- EndObjectLiteral
+        SetElement v3, '0', v12
+        v13 <- LoadInteger '27'
+        v14 <- GetElement v3, '0'
+    EndPlainFunction
+    v15 <- LoadInteger '1'
+    v16 <- Construct v1, [v15]
+    v17 <- CallFunction v2, [v16]
+    v18 <- LoadInteger '100'
+    v19 <- Construct v1, [v18]
+    v20 <- CallFunction v2, [v19]
+EndPlainFunction
+v21 <- CreateNamedVariable 'Uint8Array', 'none'
+v22 <- CallFunction v0, [v21]
+
+
+function TestArray(a1) {
+    function Check(a3) {
+        a3[0] = "";
+        a3[0];
+        a3[0] = {};
+        a3[0];
+        function f10() {
+            return 27;
+        }
+        a3[0] = { valueOf: f10 };
+        a3[0];
+    }
+    const v16 = new a1(1);
+    Check(v16);
+    const v19 = new a1(100);
+    Check(v19);
+}
+TestArray(Uint8Array);
+
+FuzzIL program written to corpus/regress-357108.fzil

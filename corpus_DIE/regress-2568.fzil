@@ -1,0 +1,128 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BeginPlainFunction -> v4
+        v5 <- GetComputedProperty v4, v2
+        Return v5
+    EndPlainFunction
+    v6 <- CallMethod v1, 'map', [v3]
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '2'
+v8 <- LoadInteger '2'
+v9 <- CreateArray [v7, v8]
+v10 <- LoadInteger '0'
+v11 <- LoadInteger '0'
+v12 <- CreateArray [v10, v11]
+v13 <- LoadInteger '0'
+v14 <- LoadInteger '0'
+v15 <- CreateArray [v13, v14]
+v16 <- CreateArray [v12, v15]
+v17 <- LoadString 'length'
+v18 <- CallFunction v0, [v16, v17]
+v19 <- LoadInteger '1'
+v20 <- LoadInteger '3'
+v21 <- CreateArray [v19, v20]
+v22 <- LoadInteger '1'
+v23 <- LoadInteger '2'
+v24 <- CreateArray [v22, v23]
+v25 <- LoadInteger '3'
+v26 <- LoadInteger '4'
+v27 <- CreateArray [v25, v26]
+v28 <- CreateArray [v24, v27]
+v29 <- LoadString '0'
+v30 <- CallFunction v0, [v28, v29]
+v31 <- BeginPlainFunction -> v32, v33
+    v34 <- BeginPlainFunction -> v35
+        v36 <- GetComputedProperty v35, v33
+        Return v36
+    EndPlainFunction
+    v37 <- CallMethod v32, 'map', [v34]
+    Return v37
+EndPlainFunction
+v38 <- LoadInteger '2'
+v39 <- LoadInteger '2'
+v40 <- CreateArray [v38, v39]
+v41 <- LoadString 'ab'
+v42 <- LoadString 'cd'
+v43 <- CreateArray [v41, v42]
+v44 <- LoadString 'length'
+v45 <- CallFunction v31, [v43, v44]
+v46 <- LoadString 'a'
+v47 <- LoadString 'c'
+v48 <- CreateArray [v46, v47]
+v49 <- LoadString 'ab'
+v50 <- LoadString 'cd'
+v51 <- CreateArray [v49, v50]
+v52 <- LoadString '0'
+v53 <- CallFunction v31, [v51, v52]
+v54 <- BeginPlainFunction -> v55, v56
+    v57 <- BeginPlainFunction -> v58
+        v59 <- GetComputedProperty v58, v56
+        Return v59
+    EndPlainFunction
+    v60 <- CallMethod v55, 'map', [v57]
+    Return v60
+EndPlainFunction
+v61 <- BeginPlainFunction -> 
+    v62 <- LoadInteger '1'
+EndPlainFunction
+v63 <- CreateNamedVariable 'f', 'none'
+Reassign v63, v61
+v64 <- BeginPlainFunction -> 
+    v65 <- LoadInteger '2'
+EndPlainFunction
+v66 <- CreateNamedVariable 'g', 'none'
+Reassign v66, v64
+v67 <- CreateNamedVariable 'f', 'none'
+SetProperty v67, 'prototype', v64
+v68 <- CreateNamedVariable 'g', 'none'
+v69 <- CreateArray [v68, v68]
+v70 <- CreateArray [v67, v67]
+v71 <- LoadString 'prototype'
+v72 <- CallFunction v54, [v70, v71]
+v73 <- LoadUndefined
+v74 <- LoadUndefined
+v75 <- CreateArray [v73, v74]
+v76 <- CreateArray [v67, v67]
+v77 <- LoadString '0'
+v78 <- CallFunction v54, [v76, v77]
+
+
+function pluck1(a1, a2) {
+    function f3(a4) {
+        return a4[a2];
+    }
+    return a1.map(f3);
+}
+[2,2];
+pluck1([[0,0],[0,0]], "length");
+[1,3];
+pluck1([[1,2],[3,4]], "0");
+function pluck2(a32, a33) {
+    function f34(a35) {
+        return a35[a33];
+    }
+    return a32.map(f34);
+}
+[2,2];
+pluck2(["ab","cd"], "length");
+["a","c"];
+pluck2(["ab","cd"], "0");
+function pluck3(a55, a56) {
+    function f57(a58) {
+        return a58[a56];
+    }
+    return a55.map(f57);
+}
+function f61() {
+}
+f = f61;
+function f64() {
+}
+g = f64;
+f.prototype = f64;
+[g,g];
+pluck3([f,f], "prototype");
+[,,];
+pluck3([f,f], "0");
+
+FuzzIL program written to corpus/regress-2568.fzil

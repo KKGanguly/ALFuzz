@@ -1,0 +1,172 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CallFunction v2, []
+    v4 <- CallFunction v2, []
+    v5 <- CallFunction v2, []
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadUndefined
+    v8 <- CreateNamedVariable 'result', 'var', v7
+    BeginBlockStatement
+        v9 <- LoadInteger '0'
+        v10 <- CreateNamedVariable 'sum', 'let', v9
+        BeginForLoopInitializer
+            v11 <- LoadInteger '0'
+        BeginForLoopCondition -> v12
+            v13 <- LoadInteger '90'
+            v14 <- Compare v12, '<', v13
+        BeginForLoopAfterthought v14 -> v15
+            v16 <- UnaryOperation v15, '++'
+        BeginForLoopBody -> v17
+            Update v10, '+', v17
+        EndForLoop
+        Reassign v8, v10
+    EndBlockStatement
+    Return v8
+EndPlainFunction
+v18 <- LoadInteger '4005'
+v19 <- CallFunction v0, [v18, v6]
+v20 <- BeginPlainFunction -> 
+    v21 <- LoadInteger '0'
+    v22 <- CreateNamedVariable 'sum', 'let', v21
+    BeginForLoopInitializer
+        v23 <- LoadInteger '0'
+    BeginForLoopCondition -> v24
+        v25 <- LoadInteger '2'
+        v26 <- Compare v24, '<', v25
+    BeginForLoopAfterthought v26 -> v27
+        v28 <- UnaryOperation v27, '++'
+    BeginForLoopBody -> v29
+        v30 <- LoadInteger '2'
+        Reassign v22, v30
+    EndForLoop
+    Return v22
+EndPlainFunction
+v31 <- LoadInteger '2'
+v32 <- CallFunction v0, [v31, v20]
+v33 <- BeginPlainFunction -> 
+    v34 <- LoadInteger '0'
+    v35 <- CreateNamedVariable 'result', 'var', v34
+    BeginForLoopInitializer
+        v36 <- LoadInteger '0'
+    BeginForLoopCondition -> v37
+        v38 <- LoadInteger '2'
+        v39 <- Compare v37, '<', v38
+    BeginForLoopAfterthought v39 -> v40
+        v41 <- UnaryOperation v40, '++'
+    BeginForLoopBody -> v42
+        Reassign v35, v42
+    EndForLoop
+    Return v35
+EndPlainFunction
+v43 <- LoadInteger '1'
+v44 <- CallFunction v0, [v43, v33]
+v45 <- BeginPlainFunction -> 
+    v46 <- LoadInteger '0'
+    v47 <- CreateNamedVariable 'result', 'var', v46
+    BeginForLoopInitializer
+        v48 <- LoadInteger '0'
+    BeginForLoopCondition -> v49
+        v50 <- LoadInteger '2'
+        v51 <- Compare v49, '<', v50
+    BeginForLoopAfterthought v51 -> v52
+        v53 <- UnaryOperation v52, '++'
+    BeginForLoopBody -> v54
+        BeginBlockStatement
+            v55 <- CreateNamedVariable 'sum', 'let', v54
+            Reassign v47, v55
+        EndBlockStatement
+    EndForLoop
+    Return v47
+EndPlainFunction
+v56 <- LoadInteger '1'
+v57 <- CallFunction v0, [v56, v45]
+v58 <- BeginPlainFunction -> 
+    v59 <- LoadUndefined
+    v60 <- CreateNamedVariable 'result', 'var', v59
+    BeginBlockStatement
+        v61 <- LoadInteger '0'
+        v62 <- CreateNamedVariable 'sum', 'let', v61
+        BeginForLoopInitializer
+            v63 <- LoadInteger '0'
+        BeginForLoopCondition -> v64
+            v65 <- LoadInteger '90'
+            v66 <- Compare v64, '<', v65
+        BeginForLoopAfterthought v66 -> v67
+            v68 <- UnaryOperation v67, '++'
+        BeginForLoopBody -> v69
+            Update v62, '+', v69
+        EndForLoop
+        v70 <- CreateNamedVariable 'ret', 'none'
+        Reassign v60, v70
+        v71 <- BeginPlainFunction -> 
+            Return v62
+        EndPlainFunction
+    EndBlockStatement
+    Return v60
+EndPlainFunction
+v72 <- LoadInteger '4005'
+v73 <- CallFunction v58, []
+v74 <- CallFunction v0, [v72, v73]
+
+
+function test(a1, a2) {
+    a2();
+    a2();
+    a2();
+}
+function bar() {
+    var result;
+    {
+        let sum = 0;
+        for (let i12 = 0; i12 < 90; i12++) {
+            sum += i12;
+        }
+        result = sum;
+    }
+    return result;
+}
+test(4005, bar);
+function baz() {
+    let sum = 0;
+    for (let i24 = 0; i24 < 2; i24++) {
+        sum = 2;
+    }
+    return sum;
+}
+test(2, baz);
+function qux() {
+    var result = 0;
+    for (let i37 = 0; i37 < 2; i37++) {
+        result = i37;
+    }
+    return result;
+}
+test(1, qux);
+function nux() {
+    var result = 0;
+    for (let i49 = 0; i49 < 2; i49++) {
+        {
+            let sum = i49;
+            result = sum;
+        }
+    }
+    return result;
+}
+test(1, nux);
+function blo() {
+    var result;
+    {
+        let sum = 0;
+        for (let i64 = 0; i64 < 90; i64++) {
+            sum += i64;
+        }
+        result = ret;
+        function ret() {
+            return sum;
+        }
+    }
+    return result;
+}
+test(4005, blo());
+
+FuzzIL program written to corpus/osr-for-let.fzil

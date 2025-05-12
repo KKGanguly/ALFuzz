@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- Compare v1, '==', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadString 'abc'
+v5 <- CreateNamedVariable 'a', 'var', v4
+v6 <- LoadString 'abc'
+v7 <- CreateNamedVariable 'b', 'var', v6
+v8 <- CallFunction v0, [v5, v7]
+v9 <- CallFunction v0, [v5, v7]
+v10 <- LoadFloat '1.3'
+v11 <- LoadFloat '1.3'
+v12 <- CallFunction v0, [v10, v11]
+
+
+function equal(a1, a2) {
+    return a1 == a2;
+}
+var a = "abc";
+var b = "abc";
+equal(a, b);
+equal(a, b);
+equal(1.3, 1.3);
+
+FuzzIL program written to corpus/internalized-string-not-equal.fzil

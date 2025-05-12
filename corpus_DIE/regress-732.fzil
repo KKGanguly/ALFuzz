@@ -1,0 +1,54 @@
+v0 <- LoadInteger '10000000'
+v1 <- CreateNamedVariable 'idx', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'obj', 'var', v2
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+BeginForLoopCondition -> v5
+    v6 <- LoadInteger '100000'
+    v7 <- Compare v5, '<', v6
+BeginForLoopAfterthought v7 -> v8
+    v9 <- LoadInteger '100'
+    Update v8, '+', v9
+BeginForLoopBody -> v10
+    v11 <- LoadString 'obj'
+    v12 <- BinaryOperation v11, '+', v10
+    SetComputedProperty v3, v10, v12
+EndForLoop
+v13 <- LoadString 'obj'
+v14 <- BinaryOperation v13, '+', v1
+SetComputedProperty v3, v1, v14
+v15 <- LoadString ''
+v16 <- BinaryOperation v15, '+', v1
+v17 <- CreateNamedVariable 'str', 'var', v16
+BeginForLoopInitializer
+    v18 <- LoadInteger '0'
+BeginForLoopCondition -> v19
+    v20 <- LoadInteger '10'
+    v21 <- Compare v19, '<', v20
+BeginForLoopAfterthought v21 -> v22
+    v23 <- UnaryOperation v22, '++'
+BeginForLoopBody -> v24
+    BeginObjectLiteral
+    v25 <- EndObjectLiteral
+    v26 <- GetComputedProperty v25, v17
+EndForLoop
+v27 <- GetComputedProperty v3, v17
+v28 <- GetComputedProperty v3, v1
+
+
+var idx = 10000000;
+var obj = {};
+for (let i5 = 0; i5 < 100000; i5 += 100) {
+    obj[i5] = "obj" + i5;
+}
+obj[idx] = "obj" + idx;
+var str = "" + idx;
+for (let i19 = 0; i19 < 10; i19++) {
+    ({})[str];
+}
+obj[str];
+obj[idx];
+
+FuzzIL program written to corpus/regress-732.fzil

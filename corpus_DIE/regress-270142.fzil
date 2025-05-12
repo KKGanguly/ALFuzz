@@ -1,0 +1,37 @@
+v0 <- BeginPlainFunction -> v1
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    Directive 'use strict'
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadString 'name'
+    v7 <- CreateNamedVariable 'Object', 'none'
+    v8 <- CallMethod v7, 'getOwnPropertyDescriptor', [v5, v6]
+    v9 <- CreateNamedVariable 'descriptor', 'var', v8
+    v10 <- GetProperty v9, 'configurable'
+    v11 <- GetProperty v9, 'enumerable'
+    v12 <- GetProperty v9, 'writable'
+EndPlainFunction
+v13 <- CallFunction v4, [v0]
+v14 <- CallFunction v4, [v2]
+
+
+function f(a1) {
+    return a1;
+}
+function g(a3) {
+    'use strict';
+    return a3;
+}
+function checkNameDescriptor(a5) {
+    var descriptor = Object.getOwnPropertyDescriptor(a5, "name");
+    descriptor.configurable;
+    descriptor.enumerable;
+    descriptor.writable;
+}
+checkNameDescriptor(f);
+checkNameDescriptor(g);
+
+FuzzIL program written to corpus/regress-270142.fzil

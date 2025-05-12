@@ -1,0 +1,100 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- UnaryOperation '+', v2
+        v4 <- LoadInteger '0'
+        v5 <- CreateNamedVariable 'Math', 'none'
+        v6 <- CallMethod v5, 'min', [v3, v4]
+        v7 <- CallMethod v5, 'abs', [v6]
+        Return v7
+    EndPlainFunction
+    v8 <- CreateNamedVariable 'NaN', 'none'
+    v9 <- CallFunction v1, []
+    v10 <- CallFunction v1, []
+    v11 <- CallFunction v1, []
+EndPlainFunction
+v12 <- CallFunction v0, []
+v13 <- BeginPlainFunction -> 
+    v14 <- BeginPlainFunction -> v15
+        v16 <- UnaryOperation '-', v15
+        v17 <- LoadInteger '0'
+        v18 <- CreateNamedVariable 'Math', 'none'
+        v19 <- CallMethod v18, 'min', [v16, v17]
+        v20 <- CallMethod v18, 'abs', [v19]
+        Return v20
+    EndPlainFunction
+    v21 <- CreateNamedVariable 'NaN', 'none'
+    v22 <- CallFunction v14, []
+    v23 <- CallFunction v14, []
+    v24 <- CallFunction v14, []
+EndPlainFunction
+v25 <- CallFunction v13, []
+v26 <- BeginPlainFunction -> 
+    v27 <- BeginPlainFunction -> v28
+        v29 <- LoadInteger '0'
+        v30 <- UnaryOperation '+', v28
+        v31 <- CreateNamedVariable 'Math', 'none'
+        v32 <- CallMethod v31, 'max', [v29, v30]
+        v33 <- CallMethod v31, 'abs', [v32]
+        Return v33
+    EndPlainFunction
+    v34 <- CreateNamedVariable 'NaN', 'none'
+    v35 <- CallFunction v27, []
+    v36 <- CallFunction v27, []
+    v37 <- CallFunction v27, []
+EndPlainFunction
+v38 <- CallFunction v26, []
+v39 <- BeginPlainFunction -> 
+    v40 <- BeginPlainFunction -> v41
+        v42 <- LoadInteger '0'
+        v43 <- UnaryOperation '-', v41
+        v44 <- CreateNamedVariable 'Math', 'none'
+        v45 <- CallMethod v44, 'max', [v42, v43]
+        v46 <- CallMethod v44, 'abs', [v45]
+        Return v46
+    EndPlainFunction
+    v47 <- CreateNamedVariable 'NaN', 'none'
+    v48 <- CallFunction v40, []
+    v49 <- CallFunction v40, []
+    v50 <- CallFunction v40, []
+EndPlainFunction
+v51 <- CallFunction v39, []
+
+
+function f0() {
+    function foo(a2) {
+        return Math.abs(Math.min(+a2, 0));
+    }
+    foo();
+    foo();
+    foo();
+}
+f0();
+function f13() {
+    function foo(a15) {
+        return Math.abs(Math.min(-a15, 0));
+    }
+    foo();
+    foo();
+    foo();
+}
+f13();
+function f26() {
+    function foo(a28) {
+        return Math.abs(Math.max(0, +a28));
+    }
+    foo();
+    foo();
+    foo();
+}
+f26();
+function f39() {
+    function foo(a41) {
+        return Math.abs(Math.max(0, -a41));
+    }
+    foo();
+    foo();
+    foo();
+}
+f39();
+
+FuzzIL program written to corpus/regress-crbug-905457.fzil

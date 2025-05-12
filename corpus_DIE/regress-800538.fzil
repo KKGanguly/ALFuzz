@@ -1,0 +1,20 @@
+v0 <- LoadString 'global'
+v1 <- BeginArrowFunction -> 
+    v2 <- LoadBoolean 'true'
+    Return v2
+EndArrowFunction
+v3 <- CreateNamedVariable 'RegExp', 'none'
+v4 <- GetProperty v3, 'prototype'
+v5 <- CallMethod v4, '__defineGetter__', [v0, v1]
+v6 <- LoadString '/()/g'
+v7 <- LoadRegExp '()' ''
+v8 <- CallMethod v7, 'toString', []
+
+
+const v1 = () => {
+    return true;
+};
+RegExp.prototype.__defineGetter__("global", v1);
+/()/.toString();
+
+FuzzIL program written to corpus/regress-800538.fzil

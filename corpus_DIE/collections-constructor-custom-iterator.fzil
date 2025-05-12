@@ -1,0 +1,183 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'k1', 'const', v4
+    BeginObjectLiteral
+    v6 <- EndObjectLiteral
+    v7 <- CreateNamedVariable 'k2', 'const', v6
+    v8 <- CreateArray [v5]
+    v9 <- CreateNamedVariable 'entries', 'const', v8
+    v10 <- LoadInteger '0'
+    v11 <- CreateNamedVariable 'callCount', 'let', v10
+    v12 <- BeginArrowFunction -> 
+        v13 <- BeginArrowFunction -> 
+            v14 <- UnaryOperation v11, '++'
+            v15 <- LoadInteger '0'
+            v16 <- Compare v14, '===', v15
+            v17 <- LoadBoolean 'false'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `value`, v7
+                ObjectLiteralAddProperty `done`, v17
+            v18 <- EndObjectLiteral
+            v19 <- LoadBoolean 'true'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `done`, v19
+            v20 <- EndObjectLiteral
+            v21 <- TernaryOperation v16, v18, v20
+            Return v21
+        EndArrowFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `next`, v13
+        v22 <- EndObjectLiteral
+        Return v22
+    EndArrowFunction
+    v23 <- CreateNamedVariable 'Symbol', 'none'
+    v24 <- GetProperty v23, 'iterator'
+    SetComputedProperty v9, v24, v12
+    v25 <- Construct v3, [v9]
+    v26 <- CreateNamedVariable 'set', 'const', v25
+    v27 <- CallMethod v26, 'has', [v5]
+    v28 <- CallMethod v26, 'has', [v7]
+    v29 <- LoadInteger '2'
+    Reassign v1, v9
+EndPlainFunction
+v30 <- CreateNamedVariable 'Set', 'none'
+v31 <- CallFunction v2, [v30]
+v32 <- CallFunction v2, [v30]
+v33 <- CallFunction v2, [v30]
+v34 <- CallFunction v2, [v30]
+v35 <- CallFunction v2, []
+v36 <- CreateNamedVariable 'WeakSet', 'none'
+v37 <- CallFunction v2, [v36]
+v38 <- CallFunction v2, [v36]
+v39 <- CallFunction v2, [v36]
+v40 <- CallFunction v2, [v36]
+v41 <- CallFunction v2, []
+v42 <- BeginPlainFunction -> v43
+    BeginObjectLiteral
+    v44 <- EndObjectLiteral
+    v45 <- CreateNamedVariable 'k1', 'const', v44
+    BeginObjectLiteral
+    v46 <- EndObjectLiteral
+    v47 <- CreateNamedVariable 'k2', 'const', v46
+    v48 <- LoadInteger '1'
+    v49 <- CreateArray [v45, v48]
+    v50 <- CreateArray [v49]
+    v51 <- CreateNamedVariable 'entries', 'const', v50
+    v52 <- LoadInteger '0'
+    v53 <- CreateNamedVariable 'callCount', 'let', v52
+    v54 <- BeginArrowFunction -> 
+        v55 <- BeginArrowFunction -> 
+            v56 <- UnaryOperation v53, '++'
+            v57 <- LoadInteger '0'
+            v58 <- Compare v56, '===', v57
+            v59 <- LoadInteger '2'
+            v60 <- CreateArray [v47, v59]
+            v61 <- LoadBoolean 'false'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `value`, v60
+                ObjectLiteralAddProperty `done`, v61
+            v62 <- EndObjectLiteral
+            v63 <- LoadBoolean 'true'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `done`, v63
+            v64 <- EndObjectLiteral
+            v65 <- TernaryOperation v58, v62, v64
+            Return v65
+        EndArrowFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `next`, v55
+        v66 <- EndObjectLiteral
+        Return v66
+    EndArrowFunction
+    v67 <- CreateNamedVariable 'Symbol', 'none'
+    v68 <- GetProperty v67, 'iterator'
+    SetComputedProperty v51, v68, v54
+    v69 <- Construct v43, [v51]
+    v70 <- CreateNamedVariable 'map', 'const', v69
+    v71 <- CallMethod v70, 'has', [v45]
+    v72 <- LoadInteger '2'
+    v73 <- CallMethod v70, 'get', [v47]
+    v74 <- LoadInteger '2'
+    Reassign v1, v51
+EndPlainFunction
+v75 <- CreateNamedVariable 'Map', 'none'
+v76 <- CallFunction v42, [v75]
+v77 <- CallFunction v42, [v75]
+v78 <- CallFunction v42, [v75]
+v79 <- CallFunction v42, [v75]
+v80 <- CallFunction v42, []
+v81 <- CreateNamedVariable 'WeakMap', 'none'
+v82 <- CallFunction v42, [v81]
+v83 <- CallFunction v42, [v81]
+v84 <- CallFunction v42, [v81]
+v85 <- CallFunction v42, [v81]
+v86 <- CallFunction v42, []
+
+
+var global;
+function TestSetWithCustomIterator(a3) {
+    const k1 = {};
+    const k2 = {};
+    const entries = [k1];
+    let callCount = 0;
+    const v12 = () => {
+        const v13 = () => {
+            const v16 = callCount++ === 0;
+            const v18 = { value: k2, done: false };
+            return v16 ? v18 : { done: true };
+        };
+        return { next: v13 };
+    };
+    entries[Symbol.iterator] = v12;
+    const v25 = new a3(entries);
+    const set = v25;
+    set.has(k1);
+    set.has(k2);
+    global = entries;
+}
+TestSetWithCustomIterator(Set);
+TestSetWithCustomIterator(Set);
+TestSetWithCustomIterator(Set);
+TestSetWithCustomIterator(Set);
+TestSetWithCustomIterator();
+TestSetWithCustomIterator(WeakSet);
+TestSetWithCustomIterator(WeakSet);
+TestSetWithCustomIterator(WeakSet);
+TestSetWithCustomIterator(WeakSet);
+TestSetWithCustomIterator();
+function TestMapWithCustomIterator(a43) {
+    const k1 = {};
+    const k2 = {};
+    const entries = [[k1,1]];
+    let callCount = 0;
+    const v54 = () => {
+        const v55 = () => {
+            const v58 = callCount++ === 0;
+            const v60 = [k2,2];
+            const v62 = { value: v60, done: false };
+            return v58 ? v62 : { done: true };
+        };
+        return { next: v55 };
+    };
+    entries[Symbol.iterator] = v54;
+    const v69 = new a43(entries);
+    const map = v69;
+    map.has(k1);
+    map.get(k2);
+    global = entries;
+}
+TestMapWithCustomIterator(Map);
+TestMapWithCustomIterator(Map);
+TestMapWithCustomIterator(Map);
+TestMapWithCustomIterator(Map);
+TestMapWithCustomIterator();
+TestMapWithCustomIterator(WeakMap);
+TestMapWithCustomIterator(WeakMap);
+TestMapWithCustomIterator(WeakMap);
+TestMapWithCustomIterator(WeakMap);
+TestMapWithCustomIterator();
+
+FuzzIL program written to corpus/collections-constructor-custom-iterator.fzil

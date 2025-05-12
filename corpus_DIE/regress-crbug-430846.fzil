@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    Return v1
+EndPlainFunction
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'o1', 'var', v2
+SetProperty v3, 'foo', v0
+v4 <- LoadString '{"foo": {"x": 1}}'
+v5 <- CreateNamedVariable 'json', 'var', v4
+v6 <- CreateNamedVariable 'JSON', 'none'
+v7 <- CallMethod v6, 'parse', [v5]
+v8 <- CreateNamedVariable 'o2', 'var', v7
+v9 <- CallMethod v6, 'parse', [v5]
+v10 <- CreateNamedVariable 'o3', 'var', v9
+
+
+function foo() {
+    return 1;
+}
+var o1 = {};
+o1.foo = foo;
+var json = "{"foo": {"x": 1}}";
+var o2 = JSON.parse(json);
+var o3 = JSON.parse(json);
+
+FuzzIL program written to corpus/regress-crbug-430846.fzil

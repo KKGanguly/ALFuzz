@@ -1,0 +1,19 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadString '10'
+    v3 <- LoadInteger '10'
+    v4 <- BinaryOperation v2, '||', v3
+    v5 <- LoadInteger '1'
+    v6 <- BinaryOperation v4, '-', v5
+    v7 <- Compare v1, '>', v6
+    Return v7
+EndPlainFunction
+v8 <- CallFunction v0, []
+
+
+function foo() {
+    return 0 > (("10" || 10) - 1);
+}
+foo();
+
+FuzzIL program written to corpus/regress-3408144.fzil

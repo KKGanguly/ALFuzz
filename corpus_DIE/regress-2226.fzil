@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+EndPlainFunction
+v2 <- CreateNamedVariable 'foo', 'var', v0
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '1'
+EndPlainFunction
+v5 <- CreateNamedVariable 'bar', 'var', v3
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '2'
+EndPlainFunction
+v8 <- CreateNamedVariable 'baz', 'var', v6
+SetProperty v5, 'test', v8
+SetProperty v2, 'test', v8
+v9 <- CreateNamedVariable 'test', 'var', v8
+v10 <- GetProperty v2, 'test'
+v11 <- GetProperty v5, 'test'
+
+
+function f0() {
+}
+var foo = f0;
+function f3() {
+}
+var bar = f3;
+function f6() {
+}
+var baz = f6;
+bar.test = baz;
+foo.test = baz;
+var test = baz;
+foo.test;
+bar.test;
+
+FuzzIL program written to corpus/regress-2226.fzil

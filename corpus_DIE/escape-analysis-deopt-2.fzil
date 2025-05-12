@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadArguments
+        Return v3
+    EndPlainFunction
+    v4 <- BeginPlainFunction -> 
+        v5 <- LoadInteger '1'
+        v6 <- LoadInteger '2'
+        v7 <- LoadInteger '3'
+        v8 <- CallFunction v1, [v5, v6, v7]
+        v9 <- CreateNamedVariable 'o1', 'var', v8
+        v10 <- LoadInteger '4'
+        v11 <- CallFunction v1, [v10, v9]
+        v12 <- CreateNamedVariable 'o2', 'var', v11
+        v13 <- LoadInteger '1'
+        v14 <- GetElement v9, '0'
+        v15 <- LoadInteger '2'
+        v16 <- GetElement v9, '1'
+        v17 <- LoadInteger '3'
+        v18 <- GetElement v9, '2'
+        v19 <- LoadInteger '4'
+        v20 <- GetElement v12, '0'
+        v21 <- GetElement v12, '1'
+    EndPlainFunction
+    v22 <- CallFunction v4, []
+    v23 <- CallFunction v4, []
+    v24 <- CallFunction v4, []
+EndPlainFunction
+v25 <- CallFunction v0, []
+
+
+function testDeoptLocal() {
+    'use strict';
+    function constructor1(a2) {
+        return arguments;
+    }
+    function func() {
+        var o1 = constructor1(1, 2, 3);
+        var o2 = constructor1(4, o1);
+        o1[0];
+        o1[1];
+        o1[2];
+        o2[0];
+        o2[1];
+    }
+    func();
+    func();
+    func();
+}
+testDeoptLocal();
+
+FuzzIL program written to corpus/escape-analysis-deopt-2.fzil

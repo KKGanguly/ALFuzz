@@ -1,0 +1,50 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- UnaryOperation '~', v1
+    v3 <- UnaryOperation '~', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '42'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadInteger '42'
+v7 <- CallFunction v0, [v6]
+v8 <- LoadInteger '42'
+v9 <- LoadInteger '42'
+v10 <- CallFunction v0, [v9]
+v11 <- LoadInteger '42'
+v12 <- LoadFloat '42.5'
+v13 <- CallFunction v0, [v12]
+v14 <- LoadInteger '1'
+v15 <- LoadInteger '0'
+v16 <- BinaryOperation v14, '/', v15
+v17 <- LoadInteger '1'
+v18 <- LoadInteger '0'
+v19 <- UnaryOperation '-', v18
+v20 <- CallFunction v0, [v19]
+v21 <- BinaryOperation v17, '/', v20
+v22 <- LoadInteger '1'
+v23 <- UnaryOperation '-', v22
+v24 <- LoadInteger '4294967295'
+v25 <- CallFunction v0, [v24]
+v26 <- LoadInteger '0'
+v27 <- LoadUndefined
+v28 <- CallFunction v0, [v27]
+v29 <- LoadInteger '0'
+v30 <- LoadString 'abc'
+v31 <- CallFunction v0, [v30]
+
+
+function f(a1) {
+    return ~(~a1);
+}
+f(42);
+f(42);
+f(42);
+f(42.5);
+1 / 0;
+1 / f(-0);
+-1;
+f(4294967295);
+f(undefined);
+f("abc");
+
+FuzzIL program written to corpus/optimize-bitnot.fzil

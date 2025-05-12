@@ -1,0 +1,75 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginAsyncFunction -> 
+    EndAsyncFunction
+    v2 <- BeginAsyncFunction -> 
+        v3 <- CallFunction v1, []
+        v4 <- Await v3
+        v5 <- CreateNamedVariable 'Error', 'none'
+        v6 <- Construct v5, []
+        ThrowException v6
+    EndAsyncFunction
+    v7 <- BeginAsyncFunction -> 
+        v8 <- CallFunction v1, []
+        v9 <- CallFunction v1, []
+        v10 <- CallFunction v2, []
+        v11 <- CallFunction v2, []
+        v12 <- CreateArray [v8, v9, v10, v11]
+        v13 <- CreateNamedVariable 'Promise', 'none'
+        v14 <- CallMethod v13, 'all', [v12]
+        v15 <- Await v14
+    EndAsyncFunction
+    v16 <- BeginAsyncFunction -> v17
+        BeginTry
+            v18 <- CallFunction v17, []
+            v19 <- Await v18
+        BeginCatch -> v20
+            v21 <- CreateNamedVariable 'Error', 'none'
+            v22 <- LoadRegExp 'Error.+at thrower.+at async Promise.all \(index 2\).+at async driver.+at async test' 'sm'
+            v23 <- GetProperty v20, 'stack'
+        EndTryCatch
+    EndAsyncFunction
+    v24 <- BeginAsyncArrowFunction -> 
+        v25 <- CallFunction v16, [v7]
+        v26 <- Await v25
+        v27 <- CallFunction v16, [v7]
+        v28 <- Await v27
+        v29 <- CallFunction v16, [v7]
+        v30 <- Await v29
+        v31 <- CallFunction v16, [v7]
+        v32 <- Await v31
+    EndAsyncArrowFunction
+    v33 <- CallFunction v24, []
+EndPlainFunction
+v34 <- CallFunction v0, []
+
+
+function f0() {
+    async function fine() {
+    }
+    async function thrower() {
+        await fine();
+        const v6 = new Error();
+        throw v6;
+    }
+    async function driver() {
+        await Promise.all([fine(),fine(),thrower(),thrower()]);
+    }
+    async function test(a17) {
+        try {
+            await a17();
+        } catch(e20) {
+            /Error.+at thrower.+at async Promise.all \(index 2\).+at async driver.+at async test/sm;
+            e20.stack;
+        }
+    }
+    const v24 = async () => {
+        await test(driver);
+        await test(driver);
+        await test(driver);
+        await test(driver);
+    };
+    v24();
+}
+f0();
+
+FuzzIL program written to corpus/async-stack-traces-promise-all.fzil

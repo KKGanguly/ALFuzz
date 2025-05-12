@@ -1,0 +1,42 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '42'
+    Return v1
+EndPlainFunction
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'o', 'var', v2
+v4 <- BeginPlainFunction -> v5, v6
+    SetProperty v5, 'f', v6
+EndPlainFunction
+v7 <- CallFunction v4, [v3, v0]
+v8 <- CallFunction v4, [v3, v0]
+v9 <- CallFunction v4, [v3, v0]
+v10 <- LoadInteger '42'
+v11 <- CallMethod v3, 'f', []
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '0'
+    Return v13
+EndPlainFunction
+v14 <- CallFunction v4, [v3, v12]
+v15 <- LoadInteger '0'
+v16 <- CallMethod v3, 'f', []
+
+
+function g() {
+    return 42;
+}
+var o = {};
+function f(a5, a6) {
+    a5.f = a6;
+}
+f(o, g);
+f(o, g);
+f(o, g);
+o.f();
+function f12() {
+    return 0;
+}
+f(o, f12);
+o.f();
+
+FuzzIL program written to corpus/regress-626986.fzil

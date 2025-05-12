@@ -1,0 +1,106 @@
+v0 <- LoadInteger '42'
+v1 <- CreateNamedVariable 'g1', 'var', v0
+v2 <- LoadInteger '43'
+v3 <- CreateNamedVariable 'g2', 'var', v2
+v4 <- LoadInteger '44'
+v5 <- CreateNamedVariable 'g3', 'var', v4
+v6 <- LoadString 'g4'
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadInteger '45'
+    Return v8
+EndPlainFunction
+v9 <- LoadThis
+v10 <- CallMethod v9, '__defineGetter__', [v6, v7]
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadThis
+    SetProperty v12, 'z', v1
+    v13 <- LoadThis
+    SetProperty v13, 'y', v1
+    v14 <- LoadThis
+    SetProperty v14, 'x', v1
+EndPlainFunction
+v15 <- BeginPlainFunction -> 
+    v16 <- LoadThis
+    SetProperty v16, 'x', v1
+    v17 <- LoadThis
+    SetProperty v17, 'y', v3
+    v18 <- LoadThis
+    SetProperty v18, 'z', v5
+EndPlainFunction
+v19 <- BeginPlainFunction -> 
+    v20 <- CreateNamedVariable 'g4', 'none'
+    v21 <- LoadThis
+    SetProperty v21, 'x', v20
+EndPlainFunction
+v22 <- LoadInteger '0'
+v23 <- LoadInteger '0'
+v24 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v22
+    ObjectLiteralAddProperty `y`, v23
+    ObjectLiteralAddProperty `z`, v24
+    ObjectLiteralAddProperty `test1`, v11
+    ObjectLiteralAddProperty `test2`, v15
+    ObjectLiteralAddProperty `test3`, v19
+v25 <- EndObjectLiteral
+v26 <- CreateNamedVariable 'o', 'var', v25
+v27 <- CallMethod v26, 'test1', []
+v28 <- LoadInteger '42'
+v29 <- GetProperty v26, 'x'
+v30 <- LoadInteger '42'
+v31 <- GetProperty v26, 'y'
+v32 <- LoadInteger '42'
+v33 <- GetProperty v26, 'z'
+v34 <- CallMethod v26, 'test2', []
+v35 <- LoadInteger '42'
+v36 <- GetProperty v26, 'x'
+v37 <- LoadInteger '43'
+v38 <- GetProperty v26, 'y'
+v39 <- LoadInteger '44'
+v40 <- GetProperty v26, 'z'
+v41 <- CallMethod v26, 'test3', []
+v42 <- LoadInteger '45'
+v43 <- GetProperty v26, 'x'
+
+
+var g1 = 42;
+var g2 = 43;
+var g3 = 44;
+function f7() {
+    return 45;
+}
+this.__defineGetter__("g4", f7);
+function f1() {
+    this.z = g1;
+    this.y = g1;
+    this.x = g1;
+}
+function f2() {
+    this.x = g1;
+    this.y = g2;
+    this.z = g3;
+}
+function f3() {
+    this.x = g4;
+}
+const v25 = {
+    x: 0,
+    y: 0,
+    z: 0,
+    test1: f1,
+    test2: f2,
+    test3: f3,
+};
+var o = v25;
+o.test1();
+o.x;
+o.y;
+o.z;
+o.test2();
+o.x;
+o.y;
+o.z;
+o.test3();
+o.x;
+
+FuzzIL program written to corpus/simple-global-access.fzil

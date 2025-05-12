@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '1'
+    v4 <- BinaryOperation v2, '+', v3
+    v5 <- GetComputedProperty v1, v4
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- LoadInteger '0'
+    v9 <- LoadInteger '1'
+    v10 <- LoadInteger '2'
+    v11 <- LoadInteger '3'
+    v12 <- CreateArray [v8, v9, v10, v11]
+    v13 <- CreateNamedVariable 'a', 'var', v12
+    v14 <- LoadInteger '0'
+    v15 <- CreateNamedVariable 'result', 'var', v14
+    v16 <- GetComputedProperty v13, v7
+    Update v15, '+', v16
+    v17 <- CallFunction v0, [v13, v7]
+    Update v15, '+', v17
+    Return v15
+EndPlainFunction
+v18 <- LoadInteger '0'
+v19 <- CallFunction v6, [v18]
+v20 <- LoadInteger '0'
+v21 <- CallFunction v6, [v20]
+v22 <- LoadInteger '0'
+v23 <- CallFunction v6, [v22]
+
+
+function inlined(a1, a2) {
+    return a1[a2 + 1];
+}
+function foo(a7) {
+    var a = [0,1,2,3];
+    var result = 0;
+    result += a[a7];
+    result += inlined(a, a7);
+    return result;
+}
+foo(0);
+foo(0);
+foo(0);
+
+FuzzIL program written to corpus/regress-crbug-487608.fzil

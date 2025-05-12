@@ -1,0 +1,72 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadFloat '1e-05'
+    v4 <- CreateNamedVariable 'delta', 'var', v3
+    v5 <- BinaryOperation v1, '-', v2
+    v6 <- CreateNamedVariable 'Math', 'none'
+    v7 <- CallMethod v6, 'abs', [v5]
+    v8 <- Compare v7, '>', v4
+    BeginIf v8
+        v9 <- LoadString 'Failure: Expected <'
+        v10 <- BinaryOperation v9, '+', v2
+        v11 <- LoadString '> to be close to <'
+        v12 <- BinaryOperation v10, '+', v11
+        v13 <- BinaryOperation v12, '+', v1
+        v14 <- LoadString '>'
+        v15 <- BinaryOperation v13, '+', v14
+        v16 <- CreateNamedVariable 'print', 'none'
+        v17 <- CallFunction v16, [v15]
+    EndIf
+EndPlainFunction
+v18 <- LoadInteger '1'
+v19 <- CreateNamedVariable 'NaN', 'none'
+v20 <- LoadInteger '0'
+v21 <- CreateNamedVariable 'Math', 'none'
+v22 <- CallMethod v21, 'pow', [v19, v20]
+v23 <- CreateNamedVariable 'Number', 'none'
+v24 <- GetProperty v23, 'POSITIVE_INFINITY'
+v25 <- CreateNamedVariable 'pinf', 'var', v24
+v26 <- GetProperty v23, 'NEGATIVE_INFINITY'
+v27 <- CreateNamedVariable 'ninf', 'var', v26
+v28 <- GetProperty v21, 'PI'
+v29 <- LoadInteger '4'
+v30 <- BinaryOperation v28, '/', v29
+v31 <- CallMethod v21, 'atan2', [v25, v25]
+v32 <- GetProperty v21, 'PI'
+v33 <- UnaryOperation '-', v32
+v34 <- LoadInteger '4'
+v35 <- BinaryOperation v33, '/', v34
+v36 <- CallMethod v21, 'atan2', [v27, v25]
+v37 <- LoadInteger '3'
+v38 <- GetProperty v21, 'PI'
+v39 <- BinaryOperation v37, '*', v38
+v40 <- LoadInteger '4'
+v41 <- BinaryOperation v39, '/', v40
+v42 <- CallMethod v21, 'atan2', [v25, v27]
+v43 <- LoadInteger '3'
+v44 <- UnaryOperation '-', v43
+v45 <- GetProperty v21, 'PI'
+v46 <- BinaryOperation v44, '*', v45
+v47 <- LoadInteger '4'
+v48 <- BinaryOperation v46, '/', v47
+v49 <- CallMethod v21, 'atan2', [v27, v27]
+
+
+function assertClose(a1, a2) {
+    var delta = 1e-05;
+    if (Math.abs(a1 - a2) > delta) {
+        print(((("Failure: Expected <" + a2) + "> to be close to <") + a1) + ">");
+    }
+}
+Math.pow(NaN, 0);
+var pinf = Number.POSITIVE_INFINITY;
+var ninf = Number.NEGATIVE_INFINITY;
+Math.PI / 4;
+Math.atan2(pinf, pinf);
+-Math.PI / 4;
+Math.atan2(ninf, pinf);
+(3 * Math.PI) / 4;
+Math.atan2(pinf, ninf);
+(-3 * Math.PI) / 4;
+Math.atan2(ninf, ninf);
+
+FuzzIL program written to corpus/regress-925537.fzil

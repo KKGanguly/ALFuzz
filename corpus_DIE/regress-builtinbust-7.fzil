@@ -1,0 +1,115 @@
+v0 <- LoadString 'Intl'
+v1 <- LoadThis
+v2 <- TestIn v0, v1
+BeginIf v2
+    v3 <- BeginPlainFunction -> 
+        v4 <- CallFunction v3, []
+        v5 <- LoadInteger '1'
+        v6 <- BinaryOperation v4, '+', v5
+        Return v6
+    EndPlainFunction
+    v7 <- CreateNamedVariable 'Object', 'none'
+    SetProperty v7, 'defineProperty', v3
+    v8 <- BeginPlainFunction -> 
+        v9 <- LoadString 'en'
+        v10 <- CreateNamedVariable 'Intl', 'none'
+        v11 <- GetProperty v10, 'Collator'
+        v12 <- CallMethod v11, 'supportedLocalesOf', [v9]
+    EndPlainFunction
+    v13 <- CallFunction v8, []
+    v14 <- CreateNamedVariable 'Date', 'none'
+    v15 <- LoadInteger '2004'
+    v16 <- LoadInteger '12'
+    v17 <- LoadInteger '25'
+    v18 <- LoadInteger '3'
+    v19 <- LoadInteger '0'
+    v20 <- LoadInteger '0'
+    v21 <- CallMethod v14, 'UTC', [v15, v16, v17, v18, v19, v20]
+    v22 <- Construct v14, [v21]
+    v23 <- CreateNamedVariable 'date', 'var', v22
+    v24 <- LoadString 'long'
+    v25 <- LoadString 'numeric'
+    v26 <- LoadString 'long'
+    v27 <- LoadString 'numeric'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `weekday`, v24
+        ObjectLiteralAddProperty `year`, v25
+        ObjectLiteralAddProperty `month`, v26
+        ObjectLiteralAddProperty `day`, v27
+    v28 <- EndObjectLiteral
+    v29 <- CreateNamedVariable 'options', 'var', v28
+    SetProperty v7, 'apply', v3
+    v30 <- BeginPlainFunction -> 
+        v31 <- LoadString 'de-DE'
+        v32 <- CallMethod v23, 'toLocaleDateString', [v31, v29]
+    EndPlainFunction
+    v33 <- CallFunction v30, []
+    BeginObjectLiteral
+    v34 <- EndObjectLiteral
+    v35 <- CreateNamedVariable 'options_incomplete', 'var', v34
+    v36 <- BeginPlainFunction -> 
+        v37 <- LoadString 'de-DE'
+        v38 <- CallMethod v23, 'toLocaleDateString', [v37, v35]
+    EndPlainFunction
+    v39 <- CallFunction v36, []
+    v40 <- LoadString 'year'
+    v41 <- CallMethod v35, 'hasOwnProperty', [v40]
+    v42 <- BeginPlainFunction -> 
+        v43 <- LoadString 'de-DE'
+        v44 <- LoadUndefined
+        v45 <- CallMethod v23, 'toLocaleDateString', [v43, v44]
+    EndPlainFunction
+    v46 <- CallFunction v42, []
+    v47 <- BeginPlainFunction -> 
+        v48 <- LoadString 'de-DE'
+        v49 <- CallMethod v23, 'toLocaleDateString', [v48]
+    EndPlainFunction
+    v50 <- CallFunction v47, []
+    v51 <- BeginPlainFunction -> 
+        v52 <- LoadString 'de-DE'
+        v53 <- LoadNull
+        v54 <- CallMethod v23, 'toLocaleDateString', [v52, v53]
+    EndPlainFunction
+    v55 <- CallFunction v51, []
+    v56 <- CreateNamedVariable 'TypeError', 'none'
+EndIf
+
+
+if ("Intl" in this) {
+    function overflow() {
+        return overflow() + 1;
+    }
+    Object.defineProperty = overflow;
+    function f8() {
+        Intl.Collator.supportedLocalesOf("en");
+    }
+    f8();
+    const v22 = new Date(Date.UTC(2004, 12, 25, 3, 0, 0));
+    var date = v22;
+    var options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+    Object.apply = overflow;
+    function f30() {
+        date.toLocaleDateString("de-DE", options);
+    }
+    f30();
+    var options_incomplete = {};
+    function f36() {
+        date.toLocaleDateString("de-DE", options_incomplete);
+    }
+    f36();
+    options_incomplete.hasOwnProperty("year");
+    function f42() {
+        date.toLocaleDateString("de-DE", undefined);
+    }
+    f42();
+    function f47() {
+        date.toLocaleDateString("de-DE");
+    }
+    f47();
+    function f51() {
+        date.toLocaleDateString("de-DE", null);
+    }
+    f51();
+}
+
+FuzzIL program written to corpus/regress-builtinbust-7.fzil

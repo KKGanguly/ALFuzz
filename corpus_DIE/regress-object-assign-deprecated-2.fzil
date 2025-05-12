@@ -1,0 +1,44 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v0
+    ObjectLiteralAddProperty `b`, v1
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'x', 'var', v2
+v4 <- LoadString 'c'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `set` -> v5, v6
+    EndObjectLiteralMethod
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'defineProperty', [v3, v4, v7]
+BeginObjectLiteral
+    BeginObjectLiteralGetter `c` -> v10
+        v11 <- LoadInteger '1'
+        v12 <- LoadFloat '2.5'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `a`, v11
+            ObjectLiteralAddProperty `b`, v12
+        v13 <- EndObjectLiteral
+        Return v13
+    EndObjectLiteralGetter
+v14 <- EndObjectLiteral
+v15 <- CreateNamedVariable 'y', 'var', v14
+v16 <- CallMethod v8, 'assign', [v3, v15, v3]
+
+
+var x = { a: 1, b: 2 };
+const v7 = {
+    set(a6) {
+    },
+};
+Object.defineProperty(x, "c", v7);
+const v14 = {
+    get c() {
+        return { a: 1, b: 2.5 };
+    },
+};
+var y = v14;
+Object.assign(x, y, x);
+
+FuzzIL program written to corpus/regress-object-assign-deprecated-2.fzil

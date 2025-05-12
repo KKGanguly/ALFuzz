@@ -1,0 +1,21 @@
+v0 <- LoadRegExp 'a' ''
+v1 <- CreateNamedVariable 'Proxy', 'none'
+v2 <- BeginArrowFunction -> 
+    v3 <- LoadString 'b'
+    Return v3
+EndArrowFunction
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- Construct v1, [v2, v4]
+v6 <- LoadString 'a'
+v7 <- CallMethod v6, 'replace', [v0, v5]
+
+
+const v0 = /a/;
+const v2 = () => {
+    return "b";
+};
+const v5 = new Proxy(v2, {});
+("a").replace(v0, v5);
+
+FuzzIL program written to corpus/regress-6186.fzil

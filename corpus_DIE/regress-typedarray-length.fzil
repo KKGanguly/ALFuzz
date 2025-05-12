@@ -1,0 +1,333 @@
+v0 <- CreateNamedVariable 'Int32Array', 'none'
+v1 <- LoadInteger '100'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- LoadNull
+SetProperty v3, '__proto__', v4
+v5 <- BeginPlainFunction -> v6
+    v7 <- GetProperty v6, 'length'
+    Return v7
+EndPlainFunction
+v8 <- LoadUndefined
+v9 <- CallFunction v5, [v3]
+v10 <- LoadUndefined
+v11 <- CallFunction v5, [v3]
+v12 <- LoadUndefined
+v13 <- CallFunction v5, [v3]
+v14 <- LoadUndefined
+v15 <- CallFunction v5, [v3]
+v16 <- BeginPlainFunction -> v17
+    v18 <- GetProperty v17, 'byteLength'
+    Return v18
+EndPlainFunction
+Reassign v5, v16
+v19 <- LoadUndefined
+v20 <- CallFunction v5, [v3]
+v21 <- LoadUndefined
+v22 <- CallFunction v5, [v3]
+v23 <- LoadUndefined
+v24 <- CallFunction v5, [v3]
+v25 <- LoadUndefined
+v26 <- CallFunction v5, [v3]
+v27 <- BeginPlainFunction -> v28
+    v29 <- GetProperty v28, 'byteOffset'
+    Return v29
+EndPlainFunction
+Reassign v5, v27
+v30 <- LoadUndefined
+v31 <- CallFunction v5, [v3]
+v32 <- LoadUndefined
+v33 <- CallFunction v5, [v3]
+v34 <- LoadUndefined
+v35 <- CallFunction v5, [v3]
+v36 <- LoadUndefined
+v37 <- CallFunction v5, [v3]
+v38 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v39 <- BeginClassDefinition v0
+        BeginClassInstanceGetter `length` -> v40
+            v41 <- LoadString 'length'
+            Return v41
+        EndClassInstanceGetter
+    EndClassDefinition
+    v42 <- Construct v39, []
+    Reassign v3, v42
+    v43 <- BeginPlainFunction -> v44
+        v45 <- GetProperty v44, 'length'
+        Return v45
+    EndPlainFunction
+    Reassign v5, v43
+    v46 <- LoadString 'length'
+    v47 <- CallFunction v5, [v3]
+    v48 <- LoadString 'length'
+    v49 <- CallFunction v5, [v3]
+    v50 <- LoadString 'length'
+    v51 <- CallFunction v5, [v3]
+    v52 <- LoadString 'length'
+    v53 <- CallFunction v5, [v3]
+    v54 <- LoadNull
+    SetProperty v3, '__proto__', v54
+    v55 <- BeginPlainFunction -> v56
+        v57 <- GetProperty v56, 'length'
+        Return v57
+    EndPlainFunction
+    Reassign v5, v55
+    v58 <- LoadUndefined
+    v59 <- CallFunction v5, [v3]
+    v60 <- LoadUndefined
+    v61 <- CallFunction v5, [v3]
+    v62 <- LoadUndefined
+    v63 <- CallFunction v5, [v3]
+    v64 <- LoadUndefined
+    v65 <- CallFunction v5, [v3]
+EndPlainFunction
+v66 <- CallFunction v38, []
+v67 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v68 <- BeginClassDefinition v0
+        BeginClassConstructor -> v69, v70
+            CallSuperConstructor [v70]
+        EndClassConstructor
+    EndClassDefinition
+    v71 <- LoadInteger '1024'
+    v72 <- Construct v68, [v71]
+    Reassign v3, v72
+    v73 <- BeginPlainFunction -> v74
+        v75 <- GetProperty v74, 'length'
+        Return v75
+    EndPlainFunction
+    Reassign v5, v73
+    v76 <- LoadInteger '1024'
+    v77 <- CallFunction v5, [v3]
+    v78 <- LoadInteger '1024'
+    v79 <- CallFunction v5, [v3]
+    v80 <- LoadInteger '1024'
+    v81 <- CallFunction v5, [v3]
+    v82 <- LoadInteger '1024'
+    v83 <- CallFunction v5, [v3]
+EndPlainFunction
+v84 <- CallFunction v67, []
+v85 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v86 <- CreateNamedVariable 'Uint8Array', 'none'
+    v87 <- LoadInteger '4'
+    v88 <- Construct v86, [v87]
+    v89 <- CreateNamedVariable 'a', 'var', v88
+    v90 <- LoadString 'length'
+    v91 <- BeginPlainFunction -> 
+        v92 <- LoadString 'blah'
+        Return v92
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v91
+    v93 <- EndObjectLiteral
+    v94 <- CreateNamedVariable 'Object', 'none'
+    v95 <- CallMethod v94, 'defineProperty', [v89, v90, v93]
+    v96 <- BeginPlainFunction -> v97
+        v98 <- GetProperty v97, 'length'
+        Return v98
+    EndPlainFunction
+    Reassign v5, v96
+    v99 <- LoadString 'blah'
+    v100 <- CallFunction v5, [v89]
+    v101 <- LoadString 'blah'
+    v102 <- CallFunction v5, [v89]
+    v103 <- LoadString 'blah'
+    v104 <- CallFunction v5, [v89]
+    v105 <- LoadString 'blah'
+    v106 <- CallFunction v5, [v89]
+EndPlainFunction
+v107 <- CallFunction v85, []
+v108 <- LoadString 'length'
+v109 <- GetProperty v0, 'prototype'
+v110 <- GetProperty v109, '__proto__'
+v111 <- CallMethod v110, 'hasOwnProperty', [v108]
+v112 <- LoadString 'byteOffset'
+v113 <- GetProperty v0, 'prototype'
+v114 <- GetProperty v113, '__proto__'
+v115 <- CallMethod v114, 'hasOwnProperty', [v112]
+v116 <- LoadString 'byteLength'
+v117 <- GetProperty v0, 'prototype'
+v118 <- GetProperty v117, '__proto__'
+v119 <- CallMethod v118, 'hasOwnProperty', [v116]
+v120 <- GetProperty v0, 'prototype'
+v121 <- GetProperty v120, '__proto__'
+v122 <- DeleteProperty v121, 'length'
+v123 <- GetProperty v0, 'prototype'
+v124 <- GetProperty v123, '__proto__'
+v125 <- DeleteProperty v124, 'byteOffset'
+v126 <- GetProperty v0, 'prototype'
+v127 <- GetProperty v126, '__proto__'
+v128 <- DeleteProperty v127, 'byteLength'
+v129 <- LoadInteger '100'
+v130 <- Construct v0, [v129]
+Reassign v3, v130
+v131 <- BeginPlainFunction -> v132
+    v133 <- GetProperty v132, 'length'
+    Return v133
+EndPlainFunction
+Reassign v5, v131
+v134 <- LoadUndefined
+v135 <- CallFunction v5, [v3]
+v136 <- LoadUndefined
+v137 <- CallFunction v5, [v3]
+v138 <- LoadUndefined
+v139 <- CallFunction v5, [v3]
+v140 <- LoadUndefined
+v141 <- CallFunction v5, [v3]
+v142 <- BeginPlainFunction -> v143
+    v144 <- GetProperty v143, 'byteLength'
+    Return v144
+EndPlainFunction
+Reassign v5, v142
+v145 <- LoadUndefined
+v146 <- CallFunction v5, [v3]
+v147 <- LoadUndefined
+v148 <- CallFunction v5, [v3]
+v149 <- LoadUndefined
+v150 <- CallFunction v5, [v3]
+v151 <- LoadUndefined
+v152 <- CallFunction v5, [v3]
+v153 <- BeginPlainFunction -> v154
+    v155 <- GetProperty v154, 'byteOffset'
+    Return v155
+EndPlainFunction
+Reassign v5, v153
+v156 <- LoadUndefined
+v157 <- CallFunction v5, [v3]
+v158 <- LoadUndefined
+v159 <- CallFunction v5, [v3]
+v160 <- LoadUndefined
+v161 <- CallFunction v5, [v3]
+v162 <- LoadUndefined
+v163 <- CallFunction v5, [v3]
+
+
+const v2 = new Int32Array(100);
+var a = v2;
+a.__proto__ = null;
+function get(a6) {
+    return a6.length;
+}
+get(a);
+get(a);
+get(a);
+get(a);
+function f16(a17) {
+    return a17.byteLength;
+}
+get = f16;
+get(a);
+get(a);
+get(a);
+get(a);
+function f27(a28) {
+    return a28.byteOffset;
+}
+get = f27;
+get(a);
+get(a);
+get(a);
+get(a);
+function f38() {
+    'use strict';
+    class C39 extends Int32Array {
+        get length() {
+            return "length";
+        }
+    }
+    const v42 = new C39();
+    a = v42;
+    function f43(a44) {
+        return a44.length;
+    }
+    get = f43;
+    get(a);
+    get(a);
+    get(a);
+    get(a);
+    a.__proto__ = null;
+    function f55(a56) {
+        return a56.length;
+    }
+    get = f55;
+    get(a);
+    get(a);
+    get(a);
+    get(a);
+}
+f38();
+function f67() {
+    'use strict';
+    class C68 extends Int32Array {
+        constructor(a70) {
+            super(a70);
+        }
+    }
+    const v72 = new C68(1024);
+    a = v72;
+    function f73(a74) {
+        return a74.length;
+    }
+    get = f73;
+    get(a);
+    get(a);
+    get(a);
+    get(a);
+}
+f67();
+function f85() {
+    'use strict';
+    const v88 = new Uint8Array(4);
+    var a = v88;
+    function f91() {
+        return "blah";
+    }
+    Object.defineProperty(a, "length", { get: f91 });
+    function f96(a97) {
+        return a97.length;
+    }
+    get = f96;
+    get(a);
+    get(a);
+    get(a);
+    get(a);
+}
+f85();
+Int32Array.prototype.__proto__.hasOwnProperty("length");
+Int32Array.prototype.__proto__.hasOwnProperty("byteOffset");
+Int32Array.prototype.__proto__.hasOwnProperty("byteLength");
+const t90 = Int32Array.prototype.__proto__;
+delete t90.length;
+const t95 = Int32Array.prototype.__proto__;
+delete t95.byteOffset;
+const t97 = Int32Array.prototype.__proto__;
+delete t97.byteLength;
+const v130 = new Int32Array(100);
+a = v130;
+function f131(a132) {
+    return a132.length;
+}
+get = f131;
+get(a);
+get(a);
+get(a);
+get(a);
+function f142(a143) {
+    return a143.byteLength;
+}
+get = f142;
+get(a);
+get(a);
+get(a);
+get(a);
+function f153(a154) {
+    return a154.byteOffset;
+}
+get = f153;
+get(a);
+get(a);
+get(a);
+get(a);
+
+FuzzIL program written to corpus/regress-typedarray-length.fzil

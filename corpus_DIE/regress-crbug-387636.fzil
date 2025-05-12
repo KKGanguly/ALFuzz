@@ -1,0 +1,18 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1073741824'
+    v2 <- CreateArray []
+    v3 <- CallMethod v2, 'indexOf', [v1]
+EndPlainFunction
+v4 <- CallFunction v0, []
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+
+
+function f() {
+    ([]).indexOf(1073741824);
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-387636.fzil

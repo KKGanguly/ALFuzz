@@ -1,0 +1,90 @@
+v0 <- BeginArrowFunction -> v1, v2
+    Return v2
+EndArrowFunction
+v3 <- CreateNamedVariable 'Int8Array', 'none'
+v4 <- LoadInteger '20'
+v5 <- Construct v3, [v4]
+v6 <- CallMethod v5, 'map', [v0]
+v7 <- GetProperty v6, 'buffer'
+v8 <- CreateNamedVariable 'ab', 'var', v7
+v9 <- LoadInteger '0'
+v10 <- LoadInteger '10'
+v11 <- Construct v3, [v8, v9, v10]
+v12 <- CreateNamedVariable 'ta', 'var', v11
+v13 <- LoadInteger '1'
+v14 <- UnaryOperation '-', v13
+v15 <- CreateNamedVariable 'seen_length', 'var', v14
+v16 <- BeginPlainFunction -> v17
+    Reassign v15, v17
+    v18 <- LoadInteger '1'
+    v19 <- Construct v3, [v8, v18, v17]
+    Return v19
+EndPlainFunction
+v20 <- CreateNamedVariable 'Symbol', 'none'
+v21 <- GetProperty v20, 'species'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v21, v16
+v22 <- EndObjectLiteral
+SetProperty v12, 'constructor', v22
+v23 <- LoadInteger '1'
+v24 <- UnaryOperation '-', v23
+v25 <- LoadInteger '0'
+v26 <- LoadInteger '1'
+v27 <- LoadInteger '2'
+v28 <- LoadInteger '3'
+v29 <- LoadInteger '4'
+v30 <- LoadInteger '5'
+v31 <- LoadInteger '6'
+v32 <- LoadInteger '7'
+v33 <- LoadInteger '8'
+v34 <- LoadInteger '9'
+v35 <- CreateArray [v25, v26, v27, v28, v29, v30, v31, v32, v33, v34]
+v36 <- CallMethod v12, 'slice', []
+v37 <- CreateNamedVariable 'tb', 'var', v36
+v38 <- LoadInteger '10'
+v39 <- LoadInteger '0'
+v40 <- LoadInteger '0'
+v41 <- LoadInteger '0'
+v42 <- LoadInteger '0'
+v43 <- LoadInteger '0'
+v44 <- LoadInteger '0'
+v45 <- LoadInteger '0'
+v46 <- LoadInteger '0'
+v47 <- LoadInteger '0'
+v48 <- LoadInteger '0'
+v49 <- CreateArray [v39, v40, v41, v42, v43, v44, v45, v46, v47, v48]
+v50 <- LoadInteger '0'
+v51 <- LoadInteger '0'
+v52 <- LoadInteger '0'
+v53 <- LoadInteger '0'
+v54 <- LoadInteger '0'
+v55 <- LoadInteger '0'
+v56 <- LoadInteger '0'
+v57 <- LoadInteger '0'
+v58 <- LoadInteger '0'
+v59 <- LoadInteger '0'
+v60 <- CreateArray [v50, v51, v52, v53, v54, v55, v56, v57, v58, v59]
+
+
+const v0 = (a1, a2) => {
+    return a2;
+};
+const v5 = new Int8Array(20);
+var ab = v5.map(v0).buffer;
+const v11 = new Int8Array(ab, 0, 10);
+var ta = v11;
+var seen_length = -1;
+function f16(a17) {
+    seen_length = a17;
+    const v19 = new Int8Array(ab, 1, a17);
+    return v19;
+}
+const v21 = Symbol.species;
+ta.constructor = { [v21]: f16 };
+-1;
+[0,1,2,3,4,5,6,7,8,9];
+var tb = ta.slice();
+[0,0,0,0,0,0,0,0,0,0];
+[0,0,0,0,0,0,0,0,0,0];
+
+FuzzIL program written to corpus/regress-6223.fzil

@@ -1,0 +1,16 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'Object', 'none'
+v2 <- CallMethod v1, 'create', [v0]
+v3 <- CreateNamedVariable 'o', 'var', v2
+v4 <- LoadString 'asdf'
+v5 <- CreateNamedVariable 'value', 'var', v4
+SetProperty v3, 'length', v5
+v6 <- GetProperty v3, 'length'
+
+
+var o = Object.create([]);
+var value = "asdf";
+o.length = value;
+o.length;
+
+FuzzIL program written to corpus/regress-1491.fzil

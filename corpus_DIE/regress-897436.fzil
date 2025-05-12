@@ -1,0 +1,26 @@
+v0 <- BeginAsyncGeneratorFunction -> 
+    v1 <- CreateNamedVariable 'Promise', 'none'
+    v2 <- BeginArrowFunction -> 
+    EndArrowFunction
+    v3 <- Construct v1, [v2]
+    v4 <- CreateNamedVariable 'alwaysPending', 'const', v3
+    v5 <- LoadString 'non-callable then'
+    SetProperty v4, 'then', v5
+    v6 <- Yield v4
+EndAsyncGeneratorFunction
+v7 <- CreateNamedVariable 'gen', 'none'
+v8 <- CallFunction v7, []
+v9 <- CallMethod v8, 'next', []
+
+
+async function* gen1() {
+    const v2 = () => {
+    };
+    const v3 = new Promise(v2);
+    const alwaysPending = v3;
+    alwaysPending.then = "non-callable then";
+    yield alwaysPending;
+}
+gen().next();
+
+FuzzIL program written to corpus/regress-897436.fzil

@@ -1,0 +1,27 @@
+v0 <- LoadInteger '1000000000'
+v1 <- CreateNamedVariable 'l', 'const', v0
+v2 <- CreateArray []
+v3 <- CreateNamedVariable 'a', 'const', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- CreateNamedVariable 'Int32Array', 'none'
+    v6 <- Construct v5, [v1]
+    v7 <- CreateNamedVariable 'x', 'var', v6
+EndPlainFunction
+BeginTry
+    v8 <- CallFunction v4, []
+BeginCatch -> v9
+EndTryCatch
+
+
+const l = 1000000000;
+const a = [];
+function foo() {
+    const v6 = new Int32Array(l);
+    var x = v6;
+}
+try {
+    foo();
+} catch(e9) {
+}
+
+FuzzIL program written to corpus/regress-crbug-887891.fzil

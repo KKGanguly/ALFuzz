@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadInteger '3'
+        v4 <- LoadFloat '3.5'
+        v5 <- CreateArray [v3, v4]
+        v6 <- GetElement v5, '0'
+        v7 <- CreateNamedVariable 'double_var', 'var', v6
+        v8 <- LoadInteger '1'
+        v9 <- CreateArray [v8, v7]
+        v10 <- LoadFloat '3.5'
+        v11 <- CreateArray [v7, v10]
+        v12 <- TernaryOperation v2, v9, v11
+        v13 <- CreateNamedVariable 'literal', 'var', v12
+        v14 <- GetElement v13, '0'
+        Return v14
+    EndPlainFunction
+    Return v1
+EndPlainFunction
+v15 <- CallFunction v0, []
+v16 <- CreateNamedVariable 'f1', 'var', v15
+v17 <- CallFunction v0, []
+v18 <- CreateNamedVariable 'f2', 'var', v17
+v19 <- LoadBoolean 'false'
+v20 <- CallFunction v16, [v19]
+v21 <- LoadBoolean 'false'
+v22 <- CallFunction v18, [v21]
+v23 <- LoadBoolean 'false'
+v24 <- CallFunction v16, [v23]
+v25 <- LoadBoolean 'true'
+v26 <- CallFunction v18, [v25]
+v27 <- LoadBoolean 'true'
+v28 <- CallFunction v16, [v27]
+v29 <- CreateNamedVariable 'l', 'var', v28
+v30 <- LoadInteger '1'
+
+
+function foo() {
+    function f1(a2) {
+        var double_var = ([3,3.5])[0];
+        var literal = a2 ? [1,double_var] : [double_var,3.5];
+        return literal[0];
+    }
+    return f1;
+}
+var f1 = foo();
+var f2 = foo();
+f1(false);
+f2(false);
+f1(false);
+f2(true);
+var l = f1(true);
+
+FuzzIL program written to corpus/regress-606021.fzil

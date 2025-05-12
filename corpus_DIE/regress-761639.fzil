@@ -1,0 +1,32 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '10'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    v7 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v8 <- EndObjectLiteral
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `getPrototypeOf` -> v9
+        EndObjectLiteralMethod
+    v10 <- EndObjectLiteral
+    v11 <- Construct v7, [v8, v10]
+    v12 <- CreateNamedVariable '__proto__', 'none'
+    Reassign v12, v11
+EndForLoop
+
+
+for (let i1 = 0; i1 < 10; i1++) {
+    const v8 = {};
+    const v10 = {
+        getPrototypeOf() {
+        },
+    };
+    const v11 = new Proxy(v8, v10);
+    __proto__ = v11;
+}
+
+FuzzIL program written to corpus/regress-761639.fzil

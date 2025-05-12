@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString ' '
+    v2 <- CreateNamedVariable 'a', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '100'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        Update v2, '+', v2
+    EndForLoop
+    Return v2
+EndPlainFunction
+v10 <- CallFunction v0, []
+v11 <- CreateNamedVariable 'RangeError', 'none'
+
+
+function concat() {
+    var a = " ";
+    for (let i4 = 0; i4 < 100; i4++) {
+        a += a;
+    }
+    return a;
+}
+concat();
+
+FuzzIL program written to corpus/string-oom-concat.fzil

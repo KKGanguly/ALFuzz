@@ -1,0 +1,15 @@
+v0 <- CreateNamedVariable 'Error', 'none'
+v1 <- BeginClassDefinition v0
+EndClassDefinition
+v2 <- LoadString 'at MyError'
+v3 <- Construct v1, []
+v4 <- GetProperty v3, 'stack'
+v5 <- CallMethod v4, 'includes', [v2]
+
+
+class C1 extends Error {
+}
+const v3 = new C1();
+v3.stack.includes("at MyError");
+
+FuzzIL program written to corpus/regress-5216.fzil

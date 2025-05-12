@@ -1,0 +1,26 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- CreateNamedVariable 'Object', 'none'
+    v6 <- CallMethod v5, 'getOwnPropertyNames', [v3]
+    v7 <- CreateNamedVariable 'properties', 'var', v6
+    v8 <- GetProperty v7, 'length'
+    v9 <- BinaryOperation v4, '%', v8
+    v10 <- GetComputedProperty v7, v9
+    Return v10
+EndPlainFunction
+v11 <- LoadInteger '211203344'
+v12 <- CallFunction v2, [v1, v11]
+v13 <- GetComputedProperty v1, v12
+SetProperty v1, '__p_211203344', v13
+
+
+var o = {};
+function getRandomProperty(a3, a4) {
+    var properties = Object.getOwnPropertyNames(a3);
+    return properties[a4 % properties.length];
+}
+o.__p_211203344 = o[getRandomProperty(o, 211203344)];
+
+FuzzIL program written to corpus/regress-889722.fzil

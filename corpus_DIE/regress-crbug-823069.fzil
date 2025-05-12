@@ -1,0 +1,33 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'v', 'var', v0
+v2 <- LoadString 'length'
+v3 <- LoadInteger '3'
+v4 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v3
+    ObjectLiteralAddProperty `writable`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v1, v2, v5]
+v8 <- BeginArrowFunction -> 
+    v9 <- CallMethod v1, 'pop', []
+EndArrowFunction
+v10 <- CallFunction v8, []
+v11 <- BeginArrowFunction -> 
+    v12 <- CallMethod v1, 'shift', []
+EndArrowFunction
+v13 <- CallFunction v11, []
+
+
+var v = [];
+Object.defineProperty(v, "length", { value: 3, writable: false });
+const v8 = () => {
+    v.pop();
+};
+v8();
+const v11 = () => {
+    v.shift();
+};
+v11();
+
+FuzzIL program written to corpus/regress-crbug-823069.fzil

@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- Construct v1, []
+    Return v2
+EndPlainFunction
+v3 <- CallFunction v0, []
+v4 <- CreateNamedVariable 'a', 'var', v3
+v5 <- LoadFloat '1.1'
+SetElement v4, '0', v5
+v6 <- BeginPlainFunction -> v7, v8
+    SetElement v7, '0', v8
+EndPlainFunction
+v9 <- LoadFloat '1.1'
+v10 <- CreateArray [v9]
+v11 <- LoadString 'a'
+v12 <- CallFunction v6, [v10, v11]
+v13 <- LoadFloat '1.1'
+v14 <- CreateArray [v13]
+v15 <- LoadFloat '1.1'
+v16 <- CallFunction v6, [v14, v15]
+v17 <- CallFunction v0, []
+v18 <- CreateNamedVariable 'b', 'var', v17
+v19 <- LoadString 'a'
+v20 <- CallFunction v6, [v18, v19]
+
+
+function foo() {
+    const v2 = new Array();
+    return v2;
+}
+var a = foo();
+a[0] = 1.1;
+function store(a7, a8) {
+    a7[0] = a8;
+}
+store([1.1], "a");
+store([1.1], 1.1);
+var b = foo();
+store(b, "a");
+
+FuzzIL program written to corpus/transition-elements-kind.fzil

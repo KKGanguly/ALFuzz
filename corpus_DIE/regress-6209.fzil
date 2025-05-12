@@ -1,0 +1,88 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '0'
+    v4 <- CreateNamedVariable 'exec_count', 'let', v3
+    v5 <- LoadInteger '1'
+    v6 <- UnaryOperation '-', v5
+    v7 <- CreateNamedVariable 'last_last_index', 'let', v6
+    v8 <- BeginArrowFunction -> 
+        v9 <- UnaryOperation v4, '++'
+        v10 <- LoadInteger '0'
+        v11 <- Compare v9, '==', v10
+        v12 <- LoadString ''
+        v13 <- CreateArray [v12]
+        v14 <- LoadNull
+        v15 <- TernaryOperation v11, v13, v14
+        Return v15
+    EndArrowFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `exec`, v8
+        BeginObjectLiteralGetter `lastIndex` -> v16
+            Return v1
+        EndObjectLiteralGetter
+        BeginObjectLiteralSetter `lastIndex` -> v17, v18
+            Reassign v7, v18
+        EndObjectLiteralSetter
+        BeginObjectLiteralGetter `global` -> v19
+            v20 <- LoadBoolean 'true'
+            Return v20
+        EndObjectLiteralGetter
+        BeginObjectLiteralGetter `flags` -> v21
+            v22 <- LoadString 'g'
+            Return v22
+        EndObjectLiteralGetter
+    v23 <- EndObjectLiteral
+    v24 <- CreateNamedVariable 'fake_re', 'let', v23
+    v25 <- LoadString ''
+    v26 <- CreateArray [v25]
+    v27 <- LoadString 'abc'
+    v28 <- CreateNamedVariable 'RegExp', 'none'
+    v29 <- GetProperty v28, 'prototype'
+    v30 <- CreateNamedVariable 'Symbol', 'none'
+    v31 <- GetProperty v30, 'match'
+    v32 <- GetComputedProperty v29, v31
+    v33 <- CallMethod v32, 'call', [v24, v27]
+EndPlainFunction
+v34 <- CreateNamedVariable 'Number', 'none'
+v35 <- LoadInteger '42'
+v36 <- Construct v34, [v35]
+v37 <- LoadInteger '43'
+v38 <- CallFunction v0, [v36, v37]
+v39 <- LoadInteger '0'
+v40 <- LoadInteger '1'
+v41 <- CallFunction v0, [v39, v40]
+v42 <- LoadInteger '4294967295'
+v43 <- LoadInteger '4294967296'
+v44 <- CallFunction v0, [v42, v43]
+
+
+function testAdvanceStringIndex(a1, a2) {
+    let exec_count = 0;
+    let last_last_index = -1;
+    const v8 = () => {
+        return exec_count++ == 0 ? [""] : null;
+    };
+    const v23 = {
+        exec: v8,
+        get lastIndex() {
+            return a1;
+        },
+        set lastIndex(a18) {
+            last_last_index = a18;
+        },
+        get global() {
+            return true;
+        },
+        get flags() {
+            return "g";
+        },
+    };
+    let fake_re = v23;
+    [""];
+    RegExp.prototype[Symbol.match].call(fake_re, "abc");
+}
+const v36 = new Number(42);
+testAdvanceStringIndex(v36, 43);
+testAdvanceStringIndex(0, 1);
+testAdvanceStringIndex(4294967295, 4294967296);
+
+FuzzIL program written to corpus/regress-6209.fzil

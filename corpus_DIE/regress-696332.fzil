@@ -1,0 +1,28 @@
+BeginTry
+    v0 <- LoadInteger '1'
+    ThrowException v0
+BeginCatch -> v1
+    v2 <- BeginPlainFunction -> 
+        Return v1
+    EndPlainFunction
+    v3 <- CallFunction v2, []
+    v4 <- LoadInteger '2'
+    Reassign v1, v4
+EndTryCatch
+v5 <- LoadInteger '2'
+v6 <- CreateNamedVariable 'foo', 'none'
+v7 <- CallFunction v6, []
+
+
+try {
+    throw 1;
+} catch(e1) {
+    function foo() {
+        return e1;
+    }
+    foo();
+    e1 = 2;
+}
+foo();
+
+FuzzIL program written to corpus/regress-696332.fzil

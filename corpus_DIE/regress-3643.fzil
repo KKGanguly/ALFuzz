@@ -1,0 +1,75 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadInteger '2'
+    v3 <- LoadInteger '3'
+    v4 <- CreateArray [v1, v2, v3]
+    v5 <- CreateNamedVariable 'arr', 'var', v4
+    v6 <- LoadString '1'
+    v7 <- BeginPlainFunction -> 
+        v8 <- LoadThis
+        v9 <- LoadInteger '1'
+        v10 <- DeleteElement v8, '1'
+        v11 <- LoadUndefined
+        Return v11
+    EndPlainFunction
+    v12 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v7
+        ObjectLiteralAddProperty `configurable`, v12
+    v13 <- EndObjectLiteral
+    v14 <- CreateNamedVariable 'Object', 'none'
+    v15 <- CallMethod v14, 'defineProperty', [v5, v6, v13]
+    Return v5
+EndPlainFunction
+v16 <- CallFunction v0, []
+v17 <- CreateNamedVariable 'a', 'var', v16
+v18 <- LoadInteger '1'
+v19 <- CallMethod v17, 'slice', [v18]
+v20 <- CreateNamedVariable 's', 'var', v19
+v21 <- LoadString '0'
+v22 <- TestIn v21, v20
+v23 <- CallFunction v0, []
+Reassign v17, v23
+v24 <- LoadInteger '4'
+SetElement v17, '65535', v24
+v25 <- LoadInteger '1'
+v26 <- CallMethod v17, 'slice', [v25]
+Reassign v20, v26
+v27 <- LoadString '0'
+v28 <- TestIn v27, v20
+v29 <- CallFunction v0, []
+Reassign v17, v29
+v30 <- CallMethod v17, 'shift', []
+v31 <- LoadString '0'
+v32 <- TestIn v31, v17
+v33 <- CallFunction v0, []
+Reassign v17, v33
+v34 <- LoadInteger '0'
+v35 <- CallMethod v17, 'unshift', [v34]
+v36 <- LoadString '2'
+v37 <- TestIn v36, v17
+
+
+function newArrayWithGetter() {
+    var arr = [1,2,3];
+    function f7() {
+        delete this[1];
+        return undefined;
+    }
+    Object.defineProperty(arr, "1", { get: f7, configurable: true });
+    return arr;
+}
+var a = newArrayWithGetter();
+var s = a.slice(1);
+"0" in s;
+a = newArrayWithGetter();
+a[65535] = 4;
+"0" in (s = a.slice(1));
+a = newArrayWithGetter();
+a.shift();
+"0" in a;
+a = newArrayWithGetter();
+a.unshift(0);
+"2" in a;
+
+FuzzIL program written to corpus/regress-3643.fzil

@@ -1,0 +1,40 @@
+v0 <- BeginGeneratorFunction -> 
+    v1 <- LoadInteger '42'
+    v2 <- Yield v1
+EndGeneratorFunction
+v3 <- BeginGeneratorFunction -> 
+    v4 <- LoadInteger '42'
+    v5 <- Yield v4
+EndGeneratorFunction
+v6 <- CallFunction v0, []
+v7 <- CreateNamedVariable 'f', 'var', v6
+v8 <- CallFunction v3, []
+v9 <- CreateNamedVariable 'g', 'var', v8
+v10 <- LoadInteger '42'
+v11 <- CallMethod v7, 'next', []
+v12 <- GetProperty v11, 'value'
+v13 <- LoadInteger '42'
+v14 <- CallMethod v9, 'next', []
+v15 <- GetProperty v14, 'value'
+v16 <- LoadBoolean 'true'
+v17 <- CallMethod v7, 'next', []
+v18 <- GetProperty v17, 'done'
+v19 <- LoadBoolean 'true'
+v20 <- CallMethod v9, 'next', []
+v21 <- GetProperty v20, 'done'
+
+
+function* foo() {
+    yield 42;
+}
+function* goo() {
+    yield 42;
+}
+var f = foo();
+var g = goo();
+f.next().value;
+g.next().value;
+f.next().done;
+g.next().done;
+
+FuzzIL program written to corpus/regress-618657.fzil

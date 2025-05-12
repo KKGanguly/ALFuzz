@@ -1,0 +1,236 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'testAsync', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- BeginClassDefinition
+        BeginClassConstructor -> v4, v5, v6
+            v7 <- LoadInteger '1'
+            v8 <- UnaryOperation '-', v7
+            SetProperty v4, 'expectedAsserts_', v8
+            v9 <- LoadInteger '0'
+            SetProperty v4, 'actualAsserts_', v9
+            SetProperty v4, 'test_', v5
+            v10 <- LoadString ''
+            v11 <- BinaryOperation v6, '||', v10
+            SetProperty v4, 'name_', v11
+        EndClassConstructor
+        BeginClassInstanceMethod 'plan' -> v12, v13
+            SetProperty v12, 'expectedAsserts_', v13
+        EndClassInstanceMethod
+        BeginClassInstanceMethod 'fail' -> v14, v15, v16
+            v17 <- CreateNamedVariable 'formatFailureText', 'none'
+            v18 <- CallFunction v17, [v15, v16]
+            v19 <- CreateNamedVariable 'message', 'let', v18
+            v20 <- LoadString '\nin test:'
+            v21 <- GetProperty v14, 'name_'
+            v22 <- BinaryOperation v20, '+', v21
+            Update v19, '+', v22
+            v23 <- LoadString '\n'
+            v24 <- GetProperty v14, 'test_'
+            v25 <- CreateNamedVariable 'Function', 'none'
+            v26 <- GetProperty v25, 'prototype'
+            v27 <- GetProperty v26, 'toString'
+            v28 <- CallMethod v27, 'apply', [v24]
+            v29 <- BinaryOperation v23, '+', v28
+            Update v19, '+', v29
+            v30 <- CreateNamedVariable 'print', 'none'
+            v31 <- CallFunction v30, [v19]
+        EndClassInstanceMethod
+        BeginClassInstanceMethod 'equals' -> v32, v33, v34, v35
+            v36 <- GetProperty v32, 'actualAsserts_'
+            v37 <- UnaryOperation v36, '++'
+            v38 <- CreateNamedVariable 'deepEquals', 'none'
+            v39 <- CallFunction v38, [v33, v34]
+            v40 <- UnaryOperation '!', v39
+            BeginIf v40
+                v41 <- CreateNamedVariable 'prettyPrinted', 'none'
+                v42 <- CallFunction v41, [v33]
+                v43 <- CallMethod v32, 'fail', [v42, v34, v35]
+            EndIf
+        EndClassInstanceMethod
+        BeginClassInstanceMethod 'unreachable' -> v44
+            v45 <- LoadString 'Failure: unreachable in test: '
+            v46 <- GetProperty v44, 'name_'
+            v47 <- BinaryOperation v45, '+', v46
+            v48 <- CreateNamedVariable 'message', 'let', v47
+            v49 <- LoadString '\n'
+            v50 <- GetProperty v44, 'test_'
+            v51 <- CreateNamedVariable 'Function', 'none'
+            v52 <- GetProperty v51, 'prototype'
+            v53 <- GetProperty v52, 'toString'
+            v54 <- CallMethod v53, 'apply', [v50]
+            v55 <- BinaryOperation v49, '+', v54
+            Update v48, '+', v55
+            v56 <- CreateNamedVariable 'print', 'none'
+            v57 <- CallFunction v56, [v48]
+        EndClassInstanceMethod
+        BeginClassInstanceMethod 'unexpectedRejection' -> v58, v59
+            v60 <- BeginArrowFunction -> v61
+                v62 <- LoadString 'Failure: unexpected Promise rejection in test: '
+                v63 <- GetProperty v58, 'name_'
+                v64 <- BinaryOperation v62, '+', v63
+                v65 <- CreateNamedVariable 'message', 'let', v64
+                BeginIf v59
+                    v66 <- LoadString '\n    @'
+                    v67 <- BinaryOperation v66, '+', v59
+                    Update v65, '+', v67
+                EndIf
+                v68 <- CreateNamedVariable 'Error', 'none'
+                v69 <- TestInstanceOf v61, v68
+                BeginIf v69
+                    v70 <- LoadString '\n'
+                    v71 <- GetProperty v61, 'stack'
+                    v72 <- CreateNamedVariable 'String', 'none'
+                    v73 <- CallFunction v72, [v71]
+                    v74 <- BinaryOperation v70, '+', v73
+                    Update v65, '+', v74
+                BeginElse
+                    v75 <- LoadString '\n'
+                    v76 <- CreateNamedVariable 'String', 'none'
+                    v77 <- CallFunction v76, [v61]
+                    v78 <- BinaryOperation v75, '+', v77
+                    Update v65, '+', v78
+                EndIf
+                v79 <- LoadString '\n\n'
+                v80 <- GetProperty v58, 'test_'
+                v81 <- CreateNamedVariable 'Function', 'none'
+                v82 <- GetProperty v81, 'prototype'
+                v83 <- GetProperty v82, 'toString'
+                v84 <- CallMethod v83, 'apply', [v80]
+                v85 <- BinaryOperation v79, '+', v84
+                Update v65, '+', v85
+                v86 <- CreateNamedVariable 'print', 'none'
+                v87 <- CallFunction v86, [v65]
+            EndArrowFunction
+            Return v60
+        EndClassInstanceMethod
+        BeginClassInstanceMethod 'drainMicrotasks' -> v88
+        EndClassInstanceMethod
+        BeginClassInstanceMethod 'done_' -> v89
+            v90 <- GetProperty v89, 'expectedAsserts_'
+            v91 <- LoadInteger '1'
+            v92 <- UnaryOperation '-', v91
+            v93 <- Compare v90, '===', v92
+            BeginIf v93
+                v94 <- LoadString 'Please call t.plan(count) to initialize test harness '
+                v95 <- LoadString 'with correct assert count (Note: count > 0)'
+                v96 <- BinaryOperation v94, '+', v95
+                v97 <- CreateNamedVariable 'message', 'let', v96
+                v98 <- CreateNamedVariable 'print', 'none'
+                v99 <- CallFunction v98, [v97]
+            EndIf
+            v100 <- GetProperty v89, 'expectedAsserts_'
+            v101 <- GetProperty v89, 'actualAsserts_'
+            v102 <- Compare v100, '!==', v101
+            BeginIf v102
+                v103 <- LoadString 'Expected asserts: '
+                v104 <- GetProperty v89, 'expectedAsserts_'
+                v105 <- BinaryOperation v103, '+', v104
+                v106 <- CreateNamedVariable 'message', 'let', v105
+                v107 <- LoadString ', Actual asserts: '
+                v108 <- GetProperty v89, 'actualAsserts_'
+                v109 <- BinaryOperation v107, '+', v108
+                Update v106, '+', v109
+                v110 <- LoadString '\nin test: '
+                v111 <- GetProperty v89, 'name_'
+                v112 <- BinaryOperation v110, '+', v111
+                Update v106, '+', v112
+                v113 <- LoadString '\n'
+                v114 <- GetProperty v89, 'test_'
+                v115 <- CreateNamedVariable 'Function', 'none'
+                v116 <- GetProperty v115, 'prototype'
+                v117 <- GetProperty v116, 'toString'
+                v118 <- CallMethod v117, 'apply', [v114]
+                v119 <- BinaryOperation v113, '+', v118
+                Update v106, '+', v119
+                v120 <- CreateNamedVariable 'print', 'none'
+                v121 <- CallFunction v120, [v106]
+            EndIf
+        EndClassInstanceMethod
+    EndClassDefinition
+    v122 <- BeginPlainFunction -> v123, v124
+        v125 <- Construct v3, [v123, v124]
+        v126 <- CreateNamedVariable 'assert', 'let', v125
+        v127 <- CallFunction v123, [v126]
+        v128 <- CallMethod v126, 'done_', []
+    EndPlainFunction
+    Reassign v1, v122
+EndPlainFunction
+v129 <- CallFunction v2, []
+
+
+var testAsync;
+function f2() {
+    class C3 {
+        constructor(a5, a6) {
+            this.expectedAsserts_ = -1;
+            this.actualAsserts_ = 0;
+            this.test_ = a5;
+            this.name_ = a6 || "";
+        }
+        plan(a13) {
+            this.expectedAsserts_ = a13;
+        }
+        fail(a15, a16) {
+            let message = formatFailureText(a15, a16);
+            message += "\nin test:" + this.name_;
+            const v24 = this.test_;
+            message += "\n" + Function.prototype.toString.apply(v24);
+            print(message);
+        }
+        equals(a33, a34, a35) {
+            let v36 = this.actualAsserts_;
+            v36++;
+            if (!deepEquals(a33, a34)) {
+                this.fail(prettyPrinted(a33), a34, a35);
+            }
+        }
+        unreachable() {
+            let message = "Failure: unreachable in test: " + this.name_;
+            const v50 = this.test_;
+            print(message += "\n" + Function.prototype.toString.apply(v50));
+        }
+        unexpectedRejection(a59) {
+            const v60 = (a61) => {
+                let message = "Failure: unexpected Promise rejection in test: " + this.name_;
+                if (a59) {
+                    message += "\n    @" + a59;
+                }
+                if (a61 instanceof Error) {
+                    message += "\n" + String(a61.stack);
+                } else {
+                    message += "\n" + String(a61);
+                }
+                const v80 = this.test_;
+                message += "\n\n" + Function.prototype.toString.apply(v80);
+                print(message);
+            };
+            return v60;
+        }
+        drainMicrotasks() {
+        }
+        done_() {
+            if (this.expectedAsserts_ === -1) {
+                let message = "Please call t.plan(count) to initialize test harness " + "with correct assert count (Note: count > 0)";
+                print(message);
+            }
+            if (this.expectedAsserts_ !== this.actualAsserts_) {
+                let message = "Expected asserts: " + this.expectedAsserts_;
+                message += ", Actual asserts: " + this.actualAsserts_;
+                message += "\nin test: " + this.name_;
+                const v114 = this.test_;
+                message += "\n" + Function.prototype.toString.apply(v114);
+                print(message);
+            }
+        }
+    }
+    function f122(a123, a124) {
+        const v125 = new C3(a123, a124);
+        let assert = v125;
+        a123(assert);
+        assert.done_();
+    }
+    testAsync = f122;
+}
+f2();
+
+FuzzIL program written to corpus/test-async.fzil

@@ -1,0 +1,82 @@
+v0 <- BeginPlainFunction -> v1
+    BeginForLoopInitializer
+        v2 <- LoadInteger '0'
+    BeginForLoopCondition -> v3
+        v4 <- LoadInteger '256'
+        v5 <- Compare v3, '<', v4
+    BeginForLoopAfterthought v5 -> v6
+        v7 <- UnaryOperation v6, '++'
+    BeginForLoopBody -> v8
+        v9 <- CreateNamedVariable 'c', 'var', v8
+        BeginForLoopInitializer
+            v10 <- LoadInteger '0'
+        BeginForLoopCondition -> v11
+            v12 <- LoadInteger '8'
+            v13 <- Compare v11, '<', v12
+        BeginForLoopAfterthought v13 -> v14
+            v15 <- UnaryOperation v14, '++'
+        BeginForLoopBody -> v16
+            v17 <- LoadInteger '1'
+            v18 <- BinaryOperation v9, '&', v17
+            BeginIf v18
+                v19 <- LoadInteger '306674912'
+                v20 <- UnaryOperation '-', v19
+                v21 <- LoadInteger '1'
+                v22 <- BinaryOperation v9, '>>', v21
+                v23 <- LoadInteger '2147483647'
+                v24 <- BinaryOperation v22, '&', v23
+                v25 <- BinaryOperation v20, '^', v24
+                Reassign v9, v25
+            BeginElse
+                v26 <- LoadInteger '1'
+                v27 <- BinaryOperation v9, '>>', v26
+                v28 <- LoadInteger '2147483647'
+                v29 <- BinaryOperation v27, '&', v28
+                Reassign v9, v29
+            EndIf
+        EndForLoop
+        SetComputedProperty v1, v8, v9
+    EndForLoop
+EndPlainFunction
+v30 <- LoadFloat '0.5'
+v31 <- CreateArray [v30]
+v32 <- CreateNamedVariable 'a', 'var', v31
+BeginForLoopInitializer
+    v33 <- LoadInteger '0'
+BeginForLoopCondition -> v34
+    v35 <- LoadInteger '256'
+    v36 <- Compare v34, '<', v35
+BeginForLoopAfterthought v36 -> v37
+    v38 <- UnaryOperation '++', v37
+BeginForLoopBody -> v39
+    SetComputedProperty v32, v39, v39
+EndForLoop
+v40 <- LoadFloat '0.5'
+v41 <- CreateArray [v40]
+v42 <- CallFunction v0, [v41]
+v43 <- CallFunction v0, [v32]
+v44 <- CallFunction v0, [v32]
+
+
+function test(a1) {
+    for (let i3 = 0; i3 < 256; i3++) {
+        var c = i3;
+        for (let i11 = 0; i11 < 8; i11++) {
+            if (c & 1) {
+                c = -306674912 ^ ((c >> 1) & 2147483647);
+            } else {
+                c = (c >> 1) & 2147483647;
+            }
+        }
+        a1[i3] = c;
+    }
+}
+var a = [0.5];
+for (let i34 = 0; i34 < 256; ++i34) {
+    a[i34] = i34;
+}
+test([0.5]);
+test(a);
+test(a);
+
+FuzzIL program written to corpus/regress-grow-store-smi-check.fzil

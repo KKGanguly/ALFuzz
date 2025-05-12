@@ -1,0 +1,112 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadInteger '1'
+    v3 <- LoadInteger '2'
+    v4 <- LoadUndefined
+    v5 <- LoadInteger '7'
+    v6 <- CreateArray [v1, v2, v3, v4, v4, v4, v5]
+    v7 <- CreateNamedVariable 'a', 'var', v6
+    BeginObjectLiteral
+    v8 <- EndObjectLiteral
+    v9 <- CreateNamedVariable 'proto', 'var', v8
+    SetProperty v7, '__proto__', v9
+    v10 <- LoadInteger '0'
+    v11 <- CreateNamedVariable 'visits', 'var', v10
+    v12 <- BeginArrowFunction -> v13, v14, v15
+        v16 <- UnaryOperation '++', v11
+        v17 <- LoadInteger '4'
+        SetElement v9, '4', v17
+    EndArrowFunction
+    v18 <- CreateNamedVariable 'Array', 'none'
+    v19 <- GetProperty v18, 'prototype'
+    v20 <- GetProperty v19, 'forEach'
+    v21 <- CallMethod v20, 'call', [v7, v12]
+    v22 <- LoadInteger '5'
+EndArrowFunction
+v23 <- CallFunction v0, []
+v24 <- BeginArrowFunction -> 
+    v25 <- LoadInteger '1'
+    v26 <- LoadInteger '2'
+    v27 <- LoadInteger '3'
+    v28 <- LoadUndefined
+    v29 <- LoadInteger '7'
+    v30 <- CreateArray [v25, v26, v27, v28, v28, v28, v29]
+    v31 <- CreateNamedVariable 'a', 'let', v30
+    v32 <- BeginPlainFunction -> v33, v34
+        v35 <- LoadInteger '2'
+        v36 <- Compare v34, '===', v35
+        BeginIf v36
+            v37 <- LoadInteger '3'
+            v38 <- CreateArray []
+            v39 <- GetProperty v38, '__proto__'
+            SetElement v39, '4', v37
+        EndIf
+        v40 <- BinaryOperation v33, '*', v33
+        Return v40
+    EndPlainFunction
+    v41 <- CallMethod v31, 'forEach', [v32]
+EndArrowFunction
+v42 <- CallFunction v24, []
+v43 <- BeginArrowFunction -> 
+    v44 <- LoadInteger '1'
+    v45 <- LoadFloat '2.5'
+    v46 <- LoadInteger '3'
+    v47 <- LoadUndefined
+    v48 <- LoadInteger '7'
+    v49 <- CreateArray [v44, v45, v46, v47, v47, v47, v48]
+    v50 <- CreateNamedVariable 'a', 'let', v49
+    v51 <- BeginPlainFunction -> v52, v53
+        v54 <- LoadInteger '2'
+        v55 <- Compare v53, '===', v54
+        BeginIf v55
+            v56 <- LoadInteger '3'
+            v57 <- CreateArray []
+            v58 <- GetProperty v57, '__proto__'
+            SetElement v58, '4', v56
+        EndIf
+        v59 <- BinaryOperation v52, '*', v52
+        Return v59
+    EndPlainFunction
+    v60 <- CallMethod v50, 'forEach', [v51]
+EndArrowFunction
+v61 <- CallFunction v43, []
+
+
+const v0 = () => {
+    var a = [0,1,2,,,,7];
+    var proto = {};
+    a.__proto__ = proto;
+    var visits = 0;
+    const v12 = (a13, a14, a15) => {
+        ++visits;
+        proto[4] = 4;
+    };
+    Array.prototype.forEach.call(a, v12);
+};
+v0();
+const v24 = () => {
+    let a = [1,2,3,,,,7];
+    function poison(a33, a34) {
+        if (a34 === 2) {
+            const t16 = ([]).__proto__;
+            t16[4] = 3;
+        }
+        return a33 * a33;
+    }
+    a.forEach(poison);
+};
+v24();
+const v43 = () => {
+    let a = [1,2.5,3,,,,7];
+    function poison(a52, a53) {
+        if (a53 === 2) {
+            const t28 = ([]).__proto__;
+            t28[4] = 3;
+        }
+        return a52 * a52;
+    }
+    a.forEach(poison);
+};
+v43();
+
+FuzzIL program written to corpus/proto-elements-add-during-foreach.fzil

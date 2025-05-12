@@ -1,0 +1,121 @@
+BeginTry
+    v0 <- BeginPlainFunction -> v1
+    EndPlainFunction
+    v2 <- LoadUndefined
+    v3 <- CreateNamedVariable 'o', 'var', v2
+    v4 <- LoadUndefined
+    v5 <- CreateNamedVariable 'p', 'var', v4
+    v6 <- BeginPlainFunction -> v7
+        BeginIf v7
+            v8 <- LoadArguments
+            Reassign v3, v8
+        BeginElse
+            v9 <- LoadArguments
+            Reassign v5, v9
+            v10 <- LoadInteger '0'
+            v11 <- LoadString 'o'
+            v12 <- LoadArguments
+            v13 <- LoadInteger '1901'
+            v14 <- BinaryOperation v12, '-', v13
+            v15 <- CallFunction v14, [v11]
+            v16 <- CallMethod v3, 'watch', [v10, v15]
+            v17 <- LoadInteger '0'
+            v18 <- LoadString 'p'
+            v19 <- CallFunction v0, [v18]
+            v20 <- CallMethod v5, 'watch', [v17, v19]
+            v21 <- LoadInteger '0'
+            v22 <- CallMethod v5, 'unwatch', [v21]
+            v23 <- LoadInteger '0'
+            v24 <- CallMethod v3, 'unwatch', [v23]
+            v25 <- LoadInteger '4'
+            SetElement v5, '0', v25
+            v26 <- LoadInteger '4'
+        EndIf
+    EndPlainFunction
+    v27 <- LoadBoolean 'true'
+    v28 <- CallFunction v6, [v27]
+    v29 <- LoadBoolean 'false'
+    v30 <- CallFunction v6, [v29]
+    v31 <- LoadBoolean 'true'
+    v32 <- LoadBoolean 'true'
+    v33 <- CreateNamedVariable 'reportCompare', 'none'
+    v34 <- CallFunction v33, [v31, v32]
+BeginCatch -> v35
+EndTryCatch
+BeginTry
+    v36 <- BeginPlainFunction -> 
+        v37 <- CreateNamedVariable 'anonymous', 'none'
+        v38 <- LoadString '1'
+        v39 <- Compare v37, '==', v38
+        BeginIf v39
+            v40 <- CreateNamedVariable 'NaN', 'none'
+            Return v40
+        EndIf
+        v41 <- CreateNamedVariable '__construct__', 'none'
+        Return v41
+    EndPlainFunction
+    v42 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v43 <- CreateNamedVariable 'f', 'none'
+    SetProperty v43, 'p', v42
+    v44 <- CreateNamedVariable 'p', 'none'
+    v45 <- CreateNamedVariable 'Object', 'none'
+    v46 <- CallMethod v45, 'freeze', [v44]
+    v47 <- CreateNamedVariable 'freeze', 'none'
+    v48 <- Construct v47, []
+    v49 <- GetProperty v48, 'p'
+    v50 <- Construct v49, []
+    v51 <- LoadInteger '0'
+    v52 <- LoadInteger '0'
+    v53 <- LoadString 'ok'
+    v54 <- CreateNamedVariable 'reportCompare', 'none'
+    v55 <- CallFunction v54, [v51, v52, v53]
+BeginCatch -> v56
+EndTryCatch
+v57 <- CreateNamedVariable 'gc', 'none'
+v58 <- CallFunction v57, []
+
+
+try {
+    function make_watcher(a1) {
+    }
+    var o;
+    var p;
+    function f(a7) {
+        if (a7) {
+            o = arguments;
+        } else {
+            p = arguments;
+            const t9 = arguments - 1901;
+            o.watch(0, t9("o"));
+            p.watch(0, make_watcher("p"));
+            p.unwatch(0);
+            o.unwatch(0);
+            p[0] = 4;
+        }
+    }
+    f(true);
+    f(false);
+    reportCompare(true, true);
+} catch(e35) {
+}
+try {
+    function __noSuchMethod__() {
+        if (anonymous == "1") {
+            return NaN;
+        }
+        return __construct__;
+    }
+    function f42() {
+    }
+    f.p = f42;
+    Object.freeze(p);
+    const v48 = new freeze();
+    const t35 = v48.p;
+    new t35();
+    reportCompare(0, 0, "ok");
+} catch(e56) {
+}
+gc();
+
+FuzzIL program written to corpus/regress-88858.fzil

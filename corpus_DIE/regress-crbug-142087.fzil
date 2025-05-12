@@ -1,0 +1,38 @@
+v0 <- LoadString 'What are you looking for?'
+v1 <- CreateNamedVariable 'string', 'var', v0
+v2 <- LoadString ''
+v3 <- CreateArray [v2]
+v4 <- CreateNamedVariable 'expected_match', 'var', v3
+BeginForLoopInitializer
+    v5 <- LoadInteger '0'
+BeginForLoopCondition -> v6
+    v7 <- GetProperty v1, 'length'
+    v8 <- Compare v6, '<', v7
+BeginForLoopAfterthought v8 -> v9
+    v10 <- UnaryOperation v9, '++'
+BeginForLoopBody -> v11
+    v12 <- LoadString ''
+    v13 <- CallMethod v4, 'push', [v12]
+EndForLoop
+v14 <- LoadRegExp '(_)|(_|)' 'g'
+v15 <- LoadString ''
+v16 <- CallMethod v1, 'replace', [v14, v15]
+v17 <- LoadRegExp '(_)|(_|)' 'g'
+v18 <- LoadString ''
+v19 <- CallMethod v1, 'match', [v17, v18]
+v20 <- LoadRegExp '((\\)|(\*)|(\$))' 'g'
+v21 <- LoadString '.'
+v22 <- LoadString '***************************************'
+v23 <- CallMethod v22, 'match', [v20, v21]
+
+
+var string = "What are you looking for?";
+var expected_match = [""];
+for (let i6 = 0; i6 < string.length; i6++) {
+    expected_match.push("");
+}
+string.replace(/(_)|(_|)/g, "");
+string.match(/(_)|(_|)/g, "");
+("***************************************").match(/((\\)|(\*)|(\$))/g, ".");
+
+FuzzIL program written to corpus/regress-crbug-142087.fzil

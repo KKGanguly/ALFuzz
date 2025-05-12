@@ -1,0 +1,78 @@
+v0 <- CreateNamedVariable 'f0', 'none'
+v1 <- CallFunction v0, []
+v2 <- UnaryOperation '!', v1
+BeginIf v2
+    v3 <- LoadString 'Concurrent recompilation is disabled. Skipping this test.'
+    v4 <- CreateNamedVariable 'print', 'none'
+    v5 <- CallFunction v4, [v3]
+    v6 <- CreateNamedVariable 'quit', 'none'
+    v7 <- CallFunction v6, []
+EndIf
+v8 <- BeginPlainFunction -> v9
+    v10 <- CallMethod v9, 'bar', []
+    Return v10
+EndPlainFunction
+BeginObjectLiteral
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable 'o', 'var', v11
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadInteger '1'
+    Return v14
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `bar`, v13
+v15 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v15
+v16 <- EndObjectLiteral
+SetProperty v12, '__proto__', v16
+v17 <- LoadInteger '1'
+v18 <- CallFunction v8, [v12]
+v19 <- LoadInteger '1'
+v20 <- CallFunction v8, [v12]
+v21 <- LoadInteger '1'
+v22 <- CallFunction v8, [v12]
+v23 <- BeginPlainFunction -> 
+    v24 <- LoadInteger '2'
+    Return v24
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `bar`, v23
+v25 <- EndObjectLiteral
+v26 <- GetProperty v12, '__proto__'
+SetProperty v26, '__proto__', v25
+v27 <- CallFunction v8, []
+v28 <- LoadString 'no sync'
+v29 <- CallFunction v8, []
+v30 <- LoadString 'sync'
+v31 <- LoadInteger '2'
+v32 <- CallFunction v8, [v12]
+
+
+if (!f0()) {
+    print("Concurrent recompilation is disabled. Skipping this test.");
+    quit();
+}
+function f(a9) {
+    return a9.bar();
+}
+var o = {};
+function f13() {
+    return 1;
+}
+const v15 = { bar: f13 };
+o.__proto__ = { __proto__: v15 };
+f(o);
+f(o);
+f(o);
+function f23() {
+    return 2;
+}
+const v25 = { bar: f23 };
+const t20 = o.__proto__;
+t20.__proto__ = v25;
+f();
+f();
+f(o);
+
+FuzzIL program written to corpus/concurrent-proto-change.fzil

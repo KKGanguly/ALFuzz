@@ -1,0 +1,81 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadString ''
+        v3 <- CreateNamedVariable 'Reflect', 'none'
+        v4 <- CallMethod v3, 'getPrototypeOf', [v2]
+        Return v4
+    EndPlainFunction
+    v5 <- CallFunction v1, []
+    v6 <- CreateNamedVariable 'TypeError', 'none'
+    v7 <- CallFunction v1, []
+    v8 <- CallFunction v1, []
+EndPlainFunction
+v9 <- CallFunction v0, []
+v10 <- BeginPlainFunction -> 
+    v11 <- BeginPlainFunction -> 
+        v12 <- LoadString ''
+        v13 <- CreateNamedVariable 'Object', 'none'
+        v14 <- CallMethod v13, 'getPrototypeOf', [v12]
+        Return v14
+    EndPlainFunction
+    v15 <- CreateNamedVariable 'String', 'none'
+    v16 <- GetProperty v15, 'prototype'
+    v17 <- CallFunction v11, []
+    v18 <- GetProperty v15, 'prototype'
+    v19 <- CallFunction v11, []
+    v20 <- GetProperty v15, 'prototype'
+    v21 <- CallFunction v11, []
+EndPlainFunction
+v22 <- CallFunction v10, []
+v23 <- BeginPlainFunction -> 
+    v24 <- BeginPlainFunction -> 
+        v25 <- LoadString ''
+        v26 <- GetProperty v25, '__proto__'
+        Return v26
+    EndPlainFunction
+    v27 <- CreateNamedVariable 'String', 'none'
+    v28 <- GetProperty v27, 'prototype'
+    v29 <- CallFunction v24, []
+    v30 <- GetProperty v27, 'prototype'
+    v31 <- CallFunction v24, []
+    v32 <- GetProperty v27, 'prototype'
+    v33 <- CallFunction v24, []
+EndPlainFunction
+v34 <- CallFunction v23, []
+
+
+function TestReflectGetPrototypeOfOnPrimitive() {
+    function f() {
+        return Reflect.getPrototypeOf("");
+    }
+    f();
+    f();
+    f();
+}
+TestReflectGetPrototypeOfOnPrimitive();
+function TestObjectGetPrototypeOfOnPrimitive() {
+    function f() {
+        return Object.getPrototypeOf("");
+    }
+    String.prototype;
+    f();
+    String.prototype;
+    f();
+    String.prototype;
+    f();
+}
+TestObjectGetPrototypeOfOnPrimitive();
+function TestDunderProtoOnPrimitive() {
+    function f() {
+        return ("").__proto__;
+    }
+    String.prototype;
+    f();
+    String.prototype;
+    f();
+    String.prototype;
+    f();
+}
+TestDunderProtoOnPrimitive();
+
+FuzzIL program written to corpus/regress-crbug-740116.fzil

@@ -1,0 +1,154 @@
+BeginObjectLiteral
+    BeginObjectLiteralGetter `value` -> v0
+    EndObjectLiteralGetter
+    BeginObjectLiteralSetter `value` -> v1, v2
+        v3 <- LoadString 'Error'
+        ThrowException v3
+    EndObjectLiteralSetter
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'obj', 'var', v4
+v6 <- LoadString 'value'
+v7 <- LoadInteger '5'
+v8 <- LoadBoolean 'true'
+v9 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v7
+    ObjectLiteralAddProperty `writable`, v8
+    ObjectLiteralAddProperty `configurable`, v9
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'Object', 'none'
+v12 <- CallMethod v11, 'defineProperty', [v5, v6, v10]
+v13 <- LoadString 'value'
+v14 <- CallMethod v11, 'getOwnPropertyDescriptor', [v5, v13]
+v15 <- CreateNamedVariable 'desc', 'var', v14
+v16 <- GetProperty v5, 'value'
+v17 <- LoadInteger '5'
+v18 <- GetProperty v15, 'configurable'
+v19 <- GetProperty v15, 'enumerable'
+v20 <- GetProperty v15, 'writable'
+v21 <- GetProperty v15, 'get'
+v22 <- LoadUndefined
+v23 <- GetProperty v15, 'set'
+v24 <- LoadUndefined
+BeginObjectLiteral
+    BeginObjectLiteralGetter `value` -> v25
+    EndObjectLiteralGetter
+    BeginObjectLiteralSetter `value` -> v26, v27
+        v28 <- LoadString 'value'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `value`, v27
+        v29 <- EndObjectLiteral
+        v30 <- CallMethod v11, 'defineProperty', [v26, v28, v29]
+    EndObjectLiteralSetter
+v31 <- EndObjectLiteral
+v32 <- CreateNamedVariable 'proto', 'var', v31
+v33 <- CallMethod v11, 'create', [v32]
+v34 <- CreateNamedVariable 'create', 'var', v33
+v35 <- GetProperty v34, 'value'
+v36 <- LoadUndefined
+v37 <- LoadInteger '4'
+SetProperty v34, 'value', v37
+v38 <- GetProperty v34, 'value'
+v39 <- LoadInteger '4'
+BeginObjectLiteral
+v40 <- EndObjectLiteral
+v41 <- CreateNamedVariable 'obj1', 'var', v40
+v42 <- LoadString 'p'
+v43 <- LoadUndefined
+v44 <- LoadUndefined
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v43
+    ObjectLiteralAddProperty `set`, v44
+v45 <- EndObjectLiteral
+v46 <- CallMethod v11, 'defineProperty', [v41, v42, v45]
+v47 <- LoadString 'p'
+v48 <- TestIn v47, v41
+v49 <- LoadString 'p'
+v50 <- CallMethod v11, 'getOwnPropertyDescriptor', [v41, v49]
+Reassign v15, v50
+v51 <- GetProperty v15, 'configurable'
+v52 <- GetProperty v15, 'enumerable'
+v53 <- GetProperty v15, 'value'
+v54 <- LoadUndefined
+v55 <- GetProperty v15, 'get'
+v56 <- LoadUndefined
+v57 <- GetProperty v15, 'set'
+v58 <- LoadUndefined
+BeginObjectLiteral
+    BeginObjectLiteralGetter `p` -> v59
+    EndObjectLiteralGetter
+v60 <- EndObjectLiteral
+v61 <- CreateNamedVariable 'obj2', 'var', v60
+v62 <- LoadString 'p'
+v63 <- LoadUndefined
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v63
+v64 <- EndObjectLiteral
+v65 <- CallMethod v11, 'defineProperty', [v61, v62, v64]
+v66 <- LoadString 'p'
+v67 <- TestIn v66, v61
+v68 <- LoadString 'p'
+v69 <- CallMethod v11, 'getOwnPropertyDescriptor', [v61, v68]
+Reassign v15, v69
+v70 <- GetProperty v15, 'configurable'
+v71 <- GetProperty v15, 'enumerable'
+v72 <- GetProperty v15, 'value'
+v73 <- LoadUndefined
+v74 <- GetProperty v15, 'get'
+v75 <- LoadUndefined
+v76 <- GetProperty v15, 'set'
+v77 <- LoadUndefined
+
+
+const v4 = {
+    get value() {
+    },
+    set value(a2) {
+        throw "Error";
+    },
+};
+var obj = v4;
+Object.defineProperty(obj, "value", { value: 5, writable: true, configurable: true });
+var desc = Object.getOwnPropertyDescriptor(obj, "value");
+obj.value;
+desc.configurable;
+desc.enumerable;
+desc.writable;
+desc.get;
+desc.set;
+const v31 = {
+    get value() {
+    },
+    set value(a27) {
+        Object.defineProperty(this, "value", { value: a27 });
+    },
+};
+var proto = v31;
+var create = Object.create(proto);
+create.value;
+create.value = 4;
+create.value;
+var obj1 = {};
+Object.defineProperty(obj1, "p", { get: undefined, set: undefined });
+"p" in obj1;
+desc = Object.getOwnPropertyDescriptor(obj1, "p");
+desc.configurable;
+desc.enumerable;
+desc.value;
+desc.get;
+desc.set;
+const v60 = {
+    get p() {
+    },
+};
+var obj2 = v60;
+Object.defineProperty(obj2, "p", { get: undefined });
+"p" in obj2;
+desc = Object.getOwnPropertyDescriptor(obj2, "p");
+desc.configurable;
+desc.enumerable;
+desc.value;
+desc.get;
+desc.set;
+
+FuzzIL program written to corpus/regress-687.fzil

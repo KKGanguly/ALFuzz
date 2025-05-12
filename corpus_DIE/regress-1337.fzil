@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    ThrowException v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- CallFunction v0, []
+EndPlainFunction
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+BeginForLoopCondition -> v5
+    v6 <- LoadInteger '5'
+    v7 <- Compare v5, '<', v6
+BeginForLoopAfterthought v7 -> v8
+    v9 <- UnaryOperation '++', v8
+BeginForLoopBody -> v10
+    BeginTry
+        v11 <- CallFunction v2, []
+    BeginCatch -> v12
+    EndTryCatch
+EndForLoop
+BeginTry
+    v13 <- CallFunction v2, []
+BeginCatch -> v14
+EndTryCatch
+
+
+function bar() {
+    throw {};
+}
+function foo() {
+    bar();
+}
+for (let i5 = 0; i5 < 5; ++i5) {
+    try {
+        foo();
+    } catch(e12) {
+    }
+}
+try {
+    foo();
+} catch(e14) {
+}
+
+FuzzIL program written to corpus/regress-1337.fzil

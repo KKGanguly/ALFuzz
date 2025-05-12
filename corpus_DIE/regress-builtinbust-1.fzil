@@ -1,0 +1,67 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadBoolean 'false'
+    Return v1
+EndPlainFunction
+v2 <- LoadInteger '1'
+v3 <- LoadInteger '2'
+v4 <- LoadInteger '3'
+v5 <- CreateArray [v2, v3, v4]
+v6 <- CreateNamedVariable 'a', 'var', v5
+v7 <- CreateNamedVariable 'Object', 'none'
+v8 <- CallMethod v7, 'seal', [v6]
+SetProperty v7, 'isSealed', v0
+v9 <- BeginPlainFunction -> 
+    v10 <- CallMethod v6, 'pop', []
+EndPlainFunction
+v11 <- CallFunction v9, []
+v12 <- CreateNamedVariable 'TypeError', 'none'
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadInteger '5'
+    v15 <- CallMethod v6, 'push', [v14]
+EndPlainFunction
+v16 <- CallFunction v13, []
+v17 <- BeginPlainFunction -> 
+    v18 <- CallMethod v6, 'shift', []
+EndPlainFunction
+v19 <- CallFunction v17, []
+v20 <- BeginPlainFunction -> 
+    v21 <- LoadInteger '5'
+    v22 <- CallMethod v6, 'unshift', [v21]
+EndPlainFunction
+v23 <- CallFunction v20, []
+v24 <- BeginPlainFunction -> 
+    v25 <- LoadInteger '0'
+    v26 <- LoadInteger '1'
+    v27 <- CallMethod v6, 'splice', [v25, v26]
+EndPlainFunction
+v28 <- CallFunction v24, []
+
+
+function nope() {
+    return false;
+}
+var a = [1,2,3];
+Object.seal(a);
+Object.isSealed = nope;
+function f9() {
+    a.pop();
+}
+f9();
+function f13() {
+    a.push(5);
+}
+f13();
+function f17() {
+    a.shift();
+}
+f17();
+function f20() {
+    a.unshift(5);
+}
+f20();
+function f24() {
+    a.splice(0, 1);
+}
+f24();
+
+FuzzIL program written to corpus/regress-builtinbust-1.fzil

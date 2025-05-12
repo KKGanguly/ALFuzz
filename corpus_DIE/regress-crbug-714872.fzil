@@ -1,0 +1,18 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadInteger '1'
+SetProperty v0, 'prototype', v1
+v2 <- LoadInteger '1'
+SetProperty v0, 'foo', v2
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+SetProperty v0, 'prototype', v3
+
+
+function f() {
+}
+f.prototype = 1;
+f.foo = 1;
+f.prototype = {};
+
+FuzzIL program written to corpus/regress-crbug-714872.fzil

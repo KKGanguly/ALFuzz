@@ -1,0 +1,96 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'shouldThrow', 'var', v0
+v2 <- BeginPlainFunction -> 
+    BeginTry
+    BeginCatch -> v3
+    EndTryCatch
+    v4 <- CreateNamedVariable 'g', 'none'
+    v5 <- GetProperty v4, 'arguments'
+    v6 <- GetElement v5, '0'
+    v7 <- GetProperty v6, 'x'
+    v8 <- CreateNamedVariable 'res', 'var', v7
+    BeginIf v1
+        ThrowException v8
+    EndIf
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    v11 <- CallFunction v2, []
+EndPlainFunction
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v13
+    v14 <- EndObjectLiteral
+    v15 <- CreateNamedVariable 'o', 'var', v14
+    v16 <- CallFunction v9, [v15]
+    v17 <- GetProperty v15, 'x'
+    Return v17
+EndPlainFunction
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v19
+    v20 <- EndObjectLiteral
+    v21 <- CreateNamedVariable 'o', 'var', v20
+    v22 <- CallFunction v9, [v21]
+    v23 <- GetProperty v21, 'x'
+    Return v23
+EndPlainFunction
+v24 <- CallFunction v12, []
+v25 <- CallFunction v18, []
+v26 <- CallFunction v12, []
+v27 <- CallFunction v18, []
+v28 <- LoadBoolean 'true'
+Reassign v1, v28
+BeginTry
+    v29 <- CallFunction v12, []
+BeginCatch -> v30
+    v31 <- LoadInteger '1'
+EndTryCatch
+BeginTry
+    v32 <- CallFunction v18, []
+BeginCatch -> v33
+    v34 <- LoadInteger '2'
+EndTryCatch
+
+
+var shouldThrow = false;
+function h() {
+    try {
+    } catch(e3) {
+    }
+    var res = g.arguments[0].x;
+    if (shouldThrow) {
+        throw res;
+    }
+    return res;
+}
+function g(a10) {
+    h();
+}
+function f1() {
+    var o = { x: 1 };
+    g(o);
+    return o.x;
+}
+function f2() {
+    var o = { x: 2 };
+    g(o);
+    return o.x;
+}
+f1();
+f2();
+f1();
+f2();
+shouldThrow = true;
+try {
+    f1();
+} catch(e30) {
+}
+try {
+    f2();
+} catch(e33) {
+}
+
+FuzzIL program written to corpus/regress-3985.fzil

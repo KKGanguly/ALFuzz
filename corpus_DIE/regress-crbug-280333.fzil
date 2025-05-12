@@ -1,0 +1,62 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadBoolean 'false'
+    Return v1
+EndPlainFunction
+v2 <- LoadUndefined
+v3 <- CreateNamedVariable 'global', 'var', v2
+v4 <- BeginPlainFunction -> v5, v6
+    v7 <- LoadInteger '1'
+    v8 <- BinaryOperation v5, '+', v7
+    v9 <- CreateNamedVariable 'a', 'var', v8
+    v10 <- LoadInteger '2'
+    v11 <- BinaryOperation v5, '+', v10
+    v12 <- CreateNamedVariable 'b', 'var', v11
+    v13 <- LoadBoolean 'true'
+    Reassign v3, v13
+    v14 <- CallFunction v6, []
+    BeginIf v14
+        Return v9
+    EndIf
+    v15 <- LoadInteger '0'
+    Return v15
+EndPlainFunction
+v16 <- LoadInteger '0'
+v17 <- LoadInteger '1'
+v18 <- CallFunction v4, [v17, v0]
+v19 <- LoadInteger '0'
+v20 <- LoadInteger '1'
+v21 <- CallFunction v4, [v20, v0]
+v22 <- LoadInteger '0'
+v23 <- LoadInteger '1'
+v24 <- CallFunction v4, [v23, v0]
+v25 <- LoadInteger '2'
+v26 <- LoadInteger '1'
+v27 <- BeginPlainFunction -> 
+    v28 <- LoadBoolean 'true'
+    Return v28
+EndPlainFunction
+v29 <- CallFunction v4, [v26, v27]
+
+
+function funky() {
+    return false;
+}
+var global;
+function foo(a5, a6) {
+    var a = a5 + 1;
+    var b = a5 + 2;
+    global = true;
+    if (a6()) {
+        return a;
+    }
+    return 0;
+}
+foo(1, funky);
+foo(1, funky);
+foo(1, funky);
+function f27() {
+    return true;
+}
+foo(1, f27);
+
+FuzzIL program written to corpus/regress-crbug-280333.fzil

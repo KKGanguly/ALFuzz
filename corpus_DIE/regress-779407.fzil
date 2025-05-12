@@ -1,0 +1,31 @@
+v0 <- LoadString 'ሴ-------'
+v1 <- CreateNamedVariable 's', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '17'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    BeginTry
+        Update v1, '+', v1
+        Update v1, '+', v1
+    BeginCatch -> v9
+    EndTryCatch
+EndForLoop
+v10 <- LoadRegExp '[a]' 'g'
+v11 <- CallMethod v1, 'replace', [v10]
+
+
+var s = "ሴ-------";
+for (let i3 = 0; i3 < 17; i3++) {
+    try {
+        s += s;
+        s += s;
+    } catch(e9) {
+    }
+}
+s.replace(/[a]/g);
+
+FuzzIL program written to corpus/regress-779407.fzil

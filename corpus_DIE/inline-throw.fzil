@@ -1,0 +1,110 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'uha'
+    ThrowException v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadInteger '42'
+    v5 <- Compare v3, '==', v4
+    BeginIf v5
+        v6 <- CallFunction v0, []
+        ThrowException v6
+    EndIf
+    v7 <- LoadInteger '43'
+    v8 <- Compare v3, '==', v7
+    BeginIf v8
+        v9 <- LoadString 'wow'
+        ThrowException v9
+    EndIf
+    v10 <- LoadInteger '0'
+    v11 <- Compare v3, '==', v10
+    Return v11
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13
+    v14 <- CallFunction v2, [v13]
+    Return v14
+EndPlainFunction
+BeginForLoopInitializer
+    v15 <- LoadInteger '0'
+BeginForLoopCondition -> v16
+    v17 <- LoadInteger '5'
+    v18 <- Compare v16, '<', v17
+BeginForLoopAfterthought v18 -> v19
+    v20 <- UnaryOperation v19, '++'
+BeginForLoopBody -> v21
+    v22 <- LoadInteger '0'
+    v23 <- CallFunction v12, [v22]
+EndForLoop
+v24 <- LoadBoolean 'true'
+v25 <- LoadInteger '0'
+v26 <- CallFunction v12, [v25]
+BeginTry
+    v27 <- LoadInteger '42'
+    v28 <- CallFunction v12, [v27]
+BeginCatch -> v29
+    v30 <- LoadString 'uha'
+EndTryCatch
+v31 <- BeginPlainFunction -> v32
+    v33 <- CallFunction v2, [v32]
+    v34 <- LoadString 'yes'
+    v35 <- LoadString 'no'
+    v36 <- TernaryOperation v33, v34, v35
+    Return v36
+EndPlainFunction
+BeginForLoopInitializer
+    v37 <- LoadInteger '0'
+BeginForLoopCondition -> v38
+    v39 <- LoadInteger '5'
+    v40 <- Compare v38, '<', v39
+BeginForLoopAfterthought v40 -> v41
+    v42 <- UnaryOperation v41, '++'
+BeginForLoopBody -> v43
+    v44 <- LoadInteger '0'
+    v45 <- CallFunction v31, [v44]
+EndForLoop
+v46 <- LoadString 'yes'
+v47 <- LoadInteger '0'
+v48 <- CallFunction v31, [v47]
+BeginTry
+    v49 <- LoadInteger '43'
+    v50 <- CallFunction v31, [v49]
+BeginCatch -> v51
+    v52 <- LoadString 'wow'
+EndTryCatch
+
+
+function doThrow() {
+    throw "uha";
+}
+function f(a3) {
+    if (a3 == 42) {
+        throw doThrow();
+    }
+    if (a3 == 43) {
+        throw "wow";
+    }
+    return a3 == 0;
+}
+function g(a13) {
+    return f(a13);
+}
+for (let i16 = 0; i16 < 5; i16++) {
+    g(0);
+}
+g(0);
+try {
+    g(42);
+} catch(e29) {
+}
+function h(a32) {
+    return f(a32) ? "yes" : "no";
+}
+for (let i38 = 0; i38 < 5; i38++) {
+    h(0);
+}
+h(0);
+try {
+    h(43);
+} catch(e51) {
+}
+
+FuzzIL program written to corpus/inline-throw.fzil

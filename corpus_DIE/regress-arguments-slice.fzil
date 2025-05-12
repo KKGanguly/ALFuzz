@@ -1,0 +1,23 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadArguments
+    Return v1
+EndPlainFunction
+v2 <- CallFunction v0, []
+v3 <- CreateNamedVariable 'o', 'var', v2
+v4 <- LoadInteger '100'
+v5 <- UnaryOperation '-', v4
+SetProperty v3, 'length', v5
+v6 <- CreateNamedVariable 'Array', 'none'
+v7 <- GetProperty v6, 'prototype'
+v8 <- GetProperty v7, 'slice'
+v9 <- CallMethod v8, 'call', [v3]
+
+
+function f() {
+    return arguments;
+}
+var o = f();
+o.length = -100;
+Array.prototype.slice.call(o);
+
+FuzzIL program written to corpus/regress-arguments-slice.fzil

@@ -1,0 +1,111 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v1
+v2 <- EndObjectLiteral
+SetProperty v0, 'prototype', v2
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v4
+    v5 <- EndObjectLiteral
+    SetProperty v0, 'prototype', v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7, v8
+    v9 <- CallFunction v8, []
+    v10 <- CreateNamedVariable 'unoptimized_closure', 'var', v9
+    BeginIf v7
+        v11 <- CallFunction v10, []
+    EndIf
+    v12 <- BeginArrowFunction -> 
+        v13 <- CallFunction v8, []
+        v14 <- CreateNamedVariable 'optimized_closure', 'var', v13
+        v15 <- LoadUndefined
+        v16 <- CallMethod v14, 'call', [v15]
+        v17 <- LoadUndefined
+        v18 <- CallMethod v14, 'call', [v17]
+    EndArrowFunction
+    v19 <- CallFunction v12, []
+    v20 <- BeginArrowFunction -> 
+        v21 <- BeginPlainFunction -> 
+            v22 <- LoadInteger '1'
+            Return v22
+        EndPlainFunction
+        v23 <- CreateNamedVariable 'dummy', 'var', v21
+        v24 <- CallFunction v23, []
+    EndArrowFunction
+    v25 <- CallFunction v20, []
+    v26 <- LoadBoolean 'true'
+    v27 <- CreateNamedVariable 'gc', 'none'
+    v28 <- CallFunction v27, [v26]
+    v29 <- CallFunction v3, []
+    v30 <- CallFunction v10, []
+EndPlainFunction
+v31 <- LoadBoolean 'false'
+v32 <- BeginArrowFunction -> 
+    v33 <- BeginArrowFunction -> 
+        v34 <- Construct v0, []
+        Return v34
+    EndArrowFunction
+    Return v33
+EndArrowFunction
+v35 <- CallFunction v6, [v31, v32]
+v36 <- LoadBoolean 'true'
+v37 <- BeginArrowFunction -> 
+    v38 <- BeginArrowFunction -> 
+        v39 <- Construct v0, []
+        Return v39
+    EndArrowFunction
+    Return v38
+EndArrowFunction
+v40 <- CallFunction v6, [v36, v37]
+
+
+function Data() {
+}
+Data.prototype = { x: 1 };
+function TriggerDeopt() {
+    Data.prototype = { x: 2 };
+}
+function TestDontSelfHealWithDeoptedCode(a7, a8) {
+    var unoptimized_closure = a8();
+    if (a7) {
+        unoptimized_closure();
+    }
+    const v12 = () => {
+        var optimized_closure = a8();
+        optimized_closure.call(undefined);
+        optimized_closure.call(undefined);
+    };
+    v12();
+    const v20 = () => {
+        function f21() {
+            return 1;
+        }
+        var dummy = f21;
+        dummy();
+    };
+    v20();
+    gc(true);
+    TriggerDeopt();
+    unoptimized_closure();
+}
+const v32 = () => {
+    const v33 = () => {
+        const v34 = new Data();
+        return v34;
+    };
+    return v33;
+};
+TestDontSelfHealWithDeoptedCode(false, v32);
+const v37 = () => {
+    const v38 = () => {
+        const v39 = new Data();
+        return v39;
+    };
+    return v38;
+};
+TestDontSelfHealWithDeoptedCode(true, v37);
+
+FuzzIL program written to corpus/regress-718891.fzil

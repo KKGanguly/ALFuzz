@@ -1,0 +1,51 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '4294967295'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'array', 'let', v2
+v4 <- CallMethod v3, 'keys', []
+v5 <- CreateNamedVariable 'it', 'let', v4
+v6 <- LoadInteger '0'
+v7 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v6
+    ObjectLiteralAddProperty `done`, v7
+v8 <- EndObjectLiteral
+v9 <- CallMethod v5, 'next', []
+v10 <- CallMethod v3, 'entries', []
+Reassign v5, v10
+v11 <- LoadInteger '0'
+v12 <- LoadUndefined
+v13 <- CreateArray [v11, v12]
+v14 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v13
+    ObjectLiteralAddProperty `done`, v14
+v15 <- EndObjectLiteral
+v16 <- CallMethod v5, 'next', []
+v17 <- CreateNamedVariable 'Symbol', 'none'
+v18 <- GetProperty v17, 'iterator'
+v19 <- CallComputedMethod v3, v18, []
+Reassign v5, v19
+v20 <- LoadUndefined
+v21 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v20
+    ObjectLiteralAddProperty `done`, v21
+v22 <- EndObjectLiteral
+v23 <- CallMethod v5, 'next', []
+
+
+const v2 = new Array(4294967295);
+let array = v2;
+let it = array.keys();
+const v8 = { value: 0, done: false };
+it.next();
+it = array.entries();
+const v13 = [0,,];
+const v15 = { value: v13, done: false };
+it.next();
+it = array[Symbol.iterator]();
+const v22 = { value: undefined, done: false };
+it.next();
+
+FuzzIL program written to corpus/regress-660925.fzil

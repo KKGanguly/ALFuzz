@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    v3 <- LoadThis
+    v4 <- CreateNamedVariable 'y', 'var', v3
+    v5 <- CallMethod v2, 'gc', []
+    v6 <- CallMethod v2, 'gc', []
+    Return v4
+EndPlainFunction
+v7 <- CreateNamedVariable 'gc', 'none'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `gc`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'o', 'var', v8
+v10 <- CallFunction v0, [v9]
+v11 <- LoadThis
+v12 <- Compare v10, '===', v11
+
+
+function Test(a1) {
+    var x = a1;
+    var y = this;
+    x.gc();
+    x.gc();
+    return y;
+}
+var o = { gc: gc };
+Test(o) === this;
+
+FuzzIL program written to corpus/safepoint.fzil

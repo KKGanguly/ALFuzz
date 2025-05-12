@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Error', 'none'
+    v2 <- LoadString 'test stack'
+    v3 <- Construct v1, [v2]
+    ThrowException v3
+EndPlainFunction
+v4 <- LoadString ''
+v5 <- CreateNamedVariable 'error_stack', 'var', v4
+BeginTry
+    v6 <- LoadNull
+    v7 <- CallMethod v0, 'call', [v6]
+BeginCatch -> v8
+    v9 <- GetProperty v8, 'stack'
+    Reassign v5, v9
+EndTryCatch
+v10 <- LoadString 'test stack'
+v11 <- CallMethod v5, 'indexOf', [v10]
+v12 <- LoadInteger '0'
+v13 <- Compare v11, '>', v12
+v14 <- LoadString 'illegal'
+v15 <- CallMethod v5, 'indexOf', [v14]
+v16 <- LoadInteger '0'
+v17 <- Compare v15, '<', v16
+
+
+function f() {
+    const v3 = new Error("test stack");
+    throw v3;
+}
+var error_stack = "";
+try {
+    f.call(null);
+} catch(e8) {
+    error_stack = e8.stack;
+}
+error_stack.indexOf("test stack") > 0;
+error_stack.indexOf("illegal") < 0;
+
+FuzzIL program written to corpus/regress-237617.fzil

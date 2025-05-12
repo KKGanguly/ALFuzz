@@ -1,0 +1,78 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v1
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable 'a', 'var', v2
+    v4 <- LoadFloat '1.5'
+    v5 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v4
+        ObjectLiteralAddProperty `y`, v5
+    v6 <- EndObjectLiteral
+    v7 <- CreateNamedVariable 'b', 'var', v6
+    v8 <- LoadInteger '0'
+    v9 <- CreateNamedVariable 'x', 'var', v8
+    BeginForLoopInitializer
+        v10 <- LoadInteger '0'
+    BeginForLoopCondition -> v11
+        v12 <- LoadInteger '1'
+        v13 <- Compare v11, '<', v12
+    BeginForLoopAfterthought v13 -> v14
+        BeginObjectLiteral
+        v15 <- EndObjectLiteral
+        Reassign v14, v15
+    BeginForLoopBody -> v16
+        v17 <- GetProperty v3, 'x'
+        v18 <- LoadFloat '0.5'
+        v19 <- BinaryOperation v17, '+', v18
+        Update v9, '+', v19
+        v20 <- GetProperty v3, 'x'
+        v21 <- LoadFloat '0.5'
+        v22 <- BinaryOperation v20, '%', v21
+        Update v9, '+', v22
+        v23 <- GetProperty v3, 'x'
+        v24 <- CreateNamedVariable 'Math', 'none'
+        v25 <- CallMethod v24, 'abs', [v23]
+        Update v9, '+', v25
+        v26 <- GetProperty v3, 'x'
+        v27 <- LoadInteger '6'
+        v28 <- Compare v26, '<', v27
+        Update v9, '+', v28
+        v29 <- GetProperty v3, 'x'
+        v30 <- LoadInteger '7'
+        v31 <- Compare v29, '===', v30
+        Update v9, '+', v31
+        v32 <- GetProperty v3, 'x'
+        v33 <- LoadInteger '8'
+        v34 <- Compare v32, '<=', v33
+        Update v9, '+', v34
+        Reassign v3, v7
+    EndForLoop
+    Return v9
+EndPlainFunction
+v35 <- CallFunction v0, []
+v36 <- CallFunction v0, []
+v37 <- CallFunction v0, []
+
+
+function foo() {
+    var a = { x: 1 };
+    var b = { x: 1.5, y: 1 };
+    var x = 0;
+    for (let i11 = 0; i11 < 1; i11 = {}) {
+        x += a.x + 0.5;
+        x += a.x % 0.5;
+        x += Math.abs(a.x);
+        x += a.x < 6;
+        x += a.x === 7;
+        x += a.x <= 8;
+        a = b;
+    }
+    return x;
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/escape-analysis-17.fzil

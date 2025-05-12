@@ -1,0 +1,26 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'x', 'var', v1
+v3 <- LoadString 'a'
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '7'
+    Return v5
+EndPlainFunction
+v6 <- CallMethod v2, '__defineGetter__', [v3, v4]
+v7 <- LoadString '{"a":2600753951}'
+v8 <- CreateNamedVariable 'JSON', 'none'
+v9 <- CallMethod v8, 'parse', [v7]
+v10 <- CreateNamedVariable 'gc', 'none'
+v11 <- CallFunction v10, []
+
+
+const v1 = new Object();
+var x = v1;
+function f4() {
+    return 7;
+}
+x.__defineGetter__("a", f4);
+JSON.parse("{"a":2600753951}");
+gc();
+
+FuzzIL program written to corpus/regress-361025.fzil

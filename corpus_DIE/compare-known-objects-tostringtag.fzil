@@ -1,0 +1,168 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- Compare v1, '<=', v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5, v6
+    v7 <- Compare v5, '<', v6
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9, v10
+    v11 <- Compare v9, '>=', v10
+    Return v11
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13, v14
+    v15 <- Compare v13, '>', v14
+    Return v15
+EndPlainFunction
+v16 <- BeginPlainFunction -> v17, v18
+    v19 <- BeginPlainFunction -> 
+        v20 <- CallFunction v0, [v17, v17]
+    EndPlainFunction
+    v21 <- CallFunction v19, []
+    v22 <- BeginPlainFunction -> 
+        v23 <- CallFunction v0, [v17, v18]
+    EndPlainFunction
+    v24 <- CallFunction v22, []
+    v25 <- BeginPlainFunction -> 
+        v26 <- CallFunction v0, [v18, v17]
+    EndPlainFunction
+    v27 <- CallFunction v25, []
+    v28 <- BeginPlainFunction -> 
+        v29 <- CallFunction v4, [v17, v17]
+    EndPlainFunction
+    v30 <- CallFunction v28, []
+    v31 <- BeginPlainFunction -> 
+        v32 <- CallFunction v4, [v17, v18]
+    EndPlainFunction
+    v33 <- CallFunction v31, []
+    v34 <- BeginPlainFunction -> 
+        v35 <- CallFunction v4, [v18, v17]
+    EndPlainFunction
+    v36 <- CallFunction v34, []
+    v37 <- BeginPlainFunction -> 
+        v38 <- CallFunction v8, [v17, v17]
+    EndPlainFunction
+    v39 <- CallFunction v37, []
+    v40 <- BeginPlainFunction -> 
+        v41 <- CallFunction v8, [v17, v18]
+    EndPlainFunction
+    v42 <- CallFunction v40, []
+    v43 <- BeginPlainFunction -> 
+        v44 <- CallFunction v8, [v18, v17]
+    EndPlainFunction
+    v45 <- CallFunction v43, []
+    v46 <- BeginPlainFunction -> 
+        v47 <- CallFunction v12, [v17, v17]
+    EndPlainFunction
+    v48 <- CallFunction v46, []
+    v49 <- BeginPlainFunction -> 
+        v50 <- CallFunction v12, [v17, v18]
+    EndPlainFunction
+    v51 <- CallFunction v49, []
+    v52 <- BeginPlainFunction -> 
+        v53 <- CallFunction v12, [v18, v17]
+    EndPlainFunction
+    v54 <- CallFunction v52, []
+EndPlainFunction
+v55 <- BeginPlainFunction -> 
+EndPlainFunction
+v56 <- GetProperty v55, 'prototype'
+v57 <- CreateNamedVariable 'Symbol', 'none'
+v58 <- GetProperty v57, 'toStringTag'
+v59 <- BeginPlainFunction -> 
+    v60 <- LoadString '@@toStringTag called!'
+    ThrowException v60
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v59
+v61 <- EndObjectLiteral
+v62 <- CreateNamedVariable 'Object', 'none'
+v63 <- CallMethod v62, 'defineProperty', [v56, v58, v61]
+v64 <- Construct v55, []
+v65 <- CreateNamedVariable 'obj1', 'var', v64
+v66 <- Construct v55, []
+v67 <- CreateNamedVariable 'obj2', 'var', v66
+v68 <- CallFunction v16, [v65, v67]
+v69 <- CallFunction v16, [v65, v67]
+v70 <- CallFunction v16, [v65, v67]
+
+
+function le(a1, a2) {
+    return a1 <= a2;
+}
+function lt(a5, a6) {
+    return a5 < a6;
+}
+function ge(a9, a10) {
+    return a9 >= a10;
+}
+function gt(a13, a14) {
+    return a13 > a14;
+}
+function test(a17, a18) {
+    function f19() {
+        le(a17, a17);
+    }
+    f19();
+    function f22() {
+        le(a17, a18);
+    }
+    f22();
+    function f25() {
+        le(a18, a17);
+    }
+    f25();
+    function f28() {
+        lt(a17, a17);
+    }
+    f28();
+    function f31() {
+        lt(a17, a18);
+    }
+    f31();
+    function f34() {
+        lt(a18, a17);
+    }
+    f34();
+    function f37() {
+        ge(a17, a17);
+    }
+    f37();
+    function f40() {
+        ge(a17, a18);
+    }
+    f40();
+    function f43() {
+        ge(a18, a17);
+    }
+    f43();
+    function f46() {
+        gt(a17, a17);
+    }
+    f46();
+    function f49() {
+        gt(a17, a18);
+    }
+    f49();
+    function f52() {
+        gt(a18, a17);
+    }
+    f52();
+}
+function O() {
+}
+const v56 = O.prototype;
+const v58 = Symbol.toStringTag;
+function f59() {
+    throw "@@toStringTag called!";
+}
+Object.defineProperty(v56, v58, { get: f59 });
+const v64 = new O();
+var obj1 = v64;
+const v66 = new O();
+var obj2 = v66;
+test(obj1, obj2);
+test(obj1, obj2);
+test(obj1, obj2);
+
+FuzzIL program written to corpus/compare-known-objects-tostringtag.fzil

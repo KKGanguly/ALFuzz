@@ -1,0 +1,50 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    BeginWith v1
+        BeginObjectLiteral
+        v2 <- EndObjectLiteral
+        BeginForInLoop v2 -> v3
+            Return
+        EndForInLoop
+    EndWith
+EndPlainFunction
+v4 <- CallFunction v0, []
+v5 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v6 <- EndObjectLiteral
+    BeginWith v6
+        BeginTry
+        BeginFinally
+            BeginObjectLiteral
+            v7 <- EndObjectLiteral
+            BeginWith v7
+                Return
+            EndWith
+        EndTryCatch
+    EndWith
+EndPlainFunction
+v8 <- CallFunction v5, []
+
+
+function test0() {
+    with ({}) {
+        for (const v3 in {}) {
+            return;
+        }
+    }
+}
+test0();
+function test1() {
+    with ({}) {
+        try {
+        } finally {
+            with ({}) {
+                return;
+            }
+        }
+    }
+}
+test1();
+
+FuzzIL program written to corpus/regress-263.fzil

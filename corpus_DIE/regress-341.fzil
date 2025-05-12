@@ -1,0 +1,16 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadInteger '1'
+SetProperty v0, 'prototype', v1
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'o', 'var', v2
+v4 <- LoadString 'o instanceof F'
+
+
+function F() {
+}
+F.prototype = 1;
+var o = {};
+
+FuzzIL program written to corpus/regress-341.fzil

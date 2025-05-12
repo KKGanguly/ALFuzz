@@ -1,0 +1,114 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'handler', 'var', v0
+v2 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'target', 'var', v3
+v5 <- CreateNamedVariable 'Proxy', 'none'
+v6 <- Construct v5, [v4, v1]
+v7 <- CreateNamedVariable 'proxy', 'var', v6
+v8 <- LoadString 'a'
+v9 <- CallMethod v4, 'hasOwnProperty', [v8]
+v10 <- LoadString 'a'
+v11 <- CallMethod v7, 'hasOwnProperty', [v10]
+v12 <- LoadString 'b'
+v13 <- CallMethod v4, 'hasOwnProperty', [v12]
+v14 <- LoadString 'b'
+v15 <- CallMethod v7, 'hasOwnProperty', [v14]
+v16 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v1, 'has', v16
+v17 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v1, 'getOwnPropertyDescriptor', v17
+v18 <- LoadString 'a'
+v19 <- CallMethod v4, 'hasOwnProperty', [v18]
+v20 <- LoadString 'a'
+v21 <- CallMethod v7, 'hasOwnProperty', [v20]
+v22 <- LoadString 'b'
+v23 <- CallMethod v4, 'hasOwnProperty', [v22]
+v24 <- LoadString 'b'
+v25 <- CallMethod v7, 'hasOwnProperty', [v24]
+v26 <- BeginPlainFunction -> 
+    v27 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `configurable`, v27
+    v28 <- EndObjectLiteral
+    Return v28
+EndPlainFunction
+SetProperty v1, 'getOwnPropertyDescriptor', v26
+v29 <- LoadString 'a'
+v30 <- CallMethod v4, 'hasOwnProperty', [v29]
+v31 <- LoadString 'a'
+v32 <- CallMethod v7, 'hasOwnProperty', [v31]
+v33 <- LoadString 'b'
+v34 <- CallMethod v4, 'hasOwnProperty', [v33]
+v35 <- LoadString 'b'
+v36 <- CallMethod v7, 'hasOwnProperty', [v35]
+v37 <- BeginPlainFunction -> 
+    v38 <- CreateNamedVariable 'Error', 'none'
+    v39 <- CallFunction v38, []
+    ThrowException v39
+EndPlainFunction
+SetProperty v1, 'getOwnPropertyDescriptor', v37
+v40 <- LoadString 'a'
+v41 <- CallMethod v4, 'hasOwnProperty', [v40]
+v42 <- BeginPlainFunction -> 
+    v43 <- LoadString 'a'
+    v44 <- CallMethod v7, 'hasOwnProperty', [v43]
+EndPlainFunction
+v45 <- CallFunction v42, []
+v46 <- CreateNamedVariable 'Error', 'none'
+v47 <- LoadString 'b'
+v48 <- CallMethod v4, 'hasOwnProperty', [v47]
+v49 <- BeginPlainFunction -> 
+    v50 <- LoadString 'b'
+    v51 <- CallMethod v7, 'hasOwnProperty', [v50]
+EndPlainFunction
+v52 <- CallFunction v49, []
+
+
+var handler = {};
+var target = { a: 1 };
+const v6 = new Proxy(target, handler);
+var proxy = v6;
+target.hasOwnProperty("a");
+proxy.hasOwnProperty("a");
+target.hasOwnProperty("b");
+proxy.hasOwnProperty("b");
+function f16() {
+}
+handler.has = f16;
+function f17() {
+}
+handler.getOwnPropertyDescriptor = f17;
+target.hasOwnProperty("a");
+proxy.hasOwnProperty("a");
+target.hasOwnProperty("b");
+proxy.hasOwnProperty("b");
+function f26() {
+    return { configurable: true };
+}
+handler.getOwnPropertyDescriptor = f26;
+target.hasOwnProperty("a");
+proxy.hasOwnProperty("a");
+target.hasOwnProperty("b");
+proxy.hasOwnProperty("b");
+function f37() {
+    throw Error();
+}
+handler.getOwnPropertyDescriptor = f37;
+target.hasOwnProperty("a");
+function f42() {
+    proxy.hasOwnProperty("a");
+}
+f42();
+target.hasOwnProperty("b");
+function f49() {
+    proxy.hasOwnProperty("b");
+}
+f49();
+
+FuzzIL program written to corpus/proxies-has-own-property.fzil

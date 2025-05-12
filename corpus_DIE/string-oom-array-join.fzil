@@ -1,0 +1,36 @@
+v0 <- LoadInteger '4294967295'
+v1 <- LoadInteger '10'
+v2 <- BinaryOperation v0, '/', v1
+v3 <- LoadString 'a'
+v4 <- CallMethod v3, 'repeat', [v2]
+v5 <- CreateNamedVariable 'a', 'var', v4
+v6 <- CreateArray []
+v7 <- CreateNamedVariable 'b', 'var', v6
+BeginForLoopInitializer
+    v8 <- LoadInteger '0'
+BeginForLoopCondition -> v9
+    v10 <- LoadInteger '11'
+    v11 <- Compare v9, '<', v10
+BeginForLoopAfterthought v11 -> v12
+    v13 <- UnaryOperation v12, '++'
+BeginForLoopBody -> v14
+    v15 <- CallMethod v7, 'push', [v5]
+EndForLoop
+v16 <- BeginPlainFunction -> 
+    v17 <- CallMethod v7, 'join', []
+EndPlainFunction
+v18 <- CallFunction v16, []
+v19 <- CreateNamedVariable 'RangeError', 'none'
+
+
+var a = ("a").repeat(4294967295 / 10);
+var b = [];
+for (let i9 = 0; i9 < 11; i9++) {
+    b.push(a);
+}
+function join() {
+    b.join();
+}
+join();
+
+FuzzIL program written to corpus/string-oom-array-join.fzil

@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> v1
+    Directive 'use strict'
+    v2 <- LoadArguments
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v4 <- LoadInteger '1'
+    v5 <- LoadInteger '2'
+    v6 <- LoadInteger '3'
+    v7 <- CallFunction v0, [v4, v5, v6]
+    v8 <- CreateNamedVariable 'x', 'var', v7
+    BeginWhileLoopHeader
+        v9 <- GetProperty v8, 'length'
+        v10 <- LoadInteger '4'
+        v11 <- Compare v9, '<', v10
+    BeginWhileLoopBody v11
+        v12 <- LoadInteger '4'
+        v13 <- LoadInteger '5'
+        v14 <- LoadInteger '6'
+        v15 <- LoadInteger '7'
+        v16 <- LoadInteger '8'
+        v17 <- CallFunction v0, [v12, v13, v14, v15, v16]
+        Reassign v8, v17
+    EndWhileLoop
+    v18 <- GetProperty v8, 'length'
+    Return v18
+EndPlainFunction
+v19 <- LoadInteger '5'
+v20 <- CallFunction v3, []
+v21 <- LoadInteger '5'
+v22 <- CallFunction v3, []
+v23 <- LoadInteger '5'
+v24 <- CallFunction v3, []
+
+
+function f(a1) {
+    'use strict';
+    return arguments;
+}
+function g() {
+    'use strict';
+    var x = f(1, 2, 3);
+    while (x.length < 4) {
+        x = f(4, 5, 6, 7, 8);
+    }
+    return x.length;
+}
+g();
+g();
+g();
+
+FuzzIL program written to corpus/escape-analysis-6.fzil

@@ -1,0 +1,58 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'v11', 'var', v0
+v2 <- GetProperty v1, '__proto__'
+v3 <- LoadInteger '0'
+v4 <- BeginPlainFunction -> 
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    BeginTry
+        v6 <- CreateNamedVariable 'WebAssembly', 'none'
+        v7 <- CallMethod v6, 'instantiate', []
+        v8 <- LoadInteger '0'
+        SetElement v1, '0', v8
+    BeginCatch -> v9
+        v10 <- CreateNamedVariable 'RangeError', 'none'
+        v11 <- TestInstanceOf v9, v10
+    EndTryCatch
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v4
+    ObjectLiteralAddProperty `set`, v5
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'Object', 'none'
+v14 <- CallMethod v13, 'defineProperty', [v2, v3, v12]
+v15 <- CreateNamedVariable 'Array', 'none'
+v16 <- Construct v15, []
+v17 <- CreateNamedVariable 'v66', 'none'
+Reassign v17, v16
+v18 <- CreateNamedVariable 'v66', 'none'
+v19 <- CreateNamedVariable 'cv', 'none'
+Reassign v19, v18
+v20 <- LoadFloat '0.1'
+v21 <- CreateNamedVariable 'cv', 'none'
+SetElement v21, '0', v20
+v22 <- LoadFloat '0.2'
+SetElement v21, '2', v22
+
+
+var v11 = {};
+const v2 = v11.__proto__;
+function f4() {
+}
+function f5() {
+    try {
+        WebAssembly.instantiate();
+        v11[0] = 0;
+    } catch(e9) {
+        e9 instanceof RangeError;
+    }
+}
+Object.defineProperty(v2, 0, { get: f4, set: f5 });
+const v16 = new Array();
+v66 = v16;
+cv = v66;
+cv[0] = 0.1;
+cv[2] = 0.2;
+
+FuzzIL program written to corpus/regress-712569.fzil

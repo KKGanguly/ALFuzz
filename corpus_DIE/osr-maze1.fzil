@@ -1,0 +1,143 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'count', 'var', v2
+    v4 <- LoadInteger '11'
+    v5 <- CreateNamedVariable 'sum', 'var', v4
+    v6 <- LoadInteger '35'
+    v7 <- CreateNamedVariable 'i', 'var', v6
+    BeginWhileLoopHeader
+        v8 <- UnaryOperation v7, '--'
+        v9 <- LoadInteger '33'
+        v10 <- Compare v8, '>', v9
+    BeginWhileLoopBody v10
+        v11 <- BinaryOperation v5, '+', v7
+        Reassign v5, v11
+    EndWhileLoop
+    BeginWhileLoopHeader
+        v12 <- UnaryOperation v7, '--'
+        v13 <- LoadInteger '31'
+        v14 <- Compare v12, '>', v13
+    BeginWhileLoopBody v14
+        v15 <- LoadInteger '9'
+        v16 <- CreateNamedVariable 'j', 'none'
+        Reassign v16, v15
+        BeginWhileLoopHeader
+            v17 <- CreateNamedVariable 'j', 'none'
+            v18 <- UnaryOperation v17, '--'
+            v19 <- LoadInteger '7'
+            v20 <- Compare v18, '>', v19
+        BeginWhileLoopBody v20
+            v21 <- CreateNamedVariable 'j', 'none'
+            v22 <- LoadInteger '3'
+            v23 <- BinaryOperation v21, '*', v22
+            v24 <- BinaryOperation v5, '+', v23
+            Reassign v5, v24
+        EndWhileLoop
+        BeginWhileLoopHeader
+            v25 <- CreateNamedVariable 'j', 'none'
+            v26 <- UnaryOperation v25, '--'
+            v27 <- LoadInteger '5'
+            v28 <- Compare v26, '>', v27
+        BeginWhileLoopBody v28
+            v29 <- CreateNamedVariable 'j', 'none'
+            v30 <- LoadInteger '5'
+            v31 <- BinaryOperation v29, '*', v30
+            v32 <- BinaryOperation v5, '+', v31
+            Reassign v5, v32
+        EndWhileLoop
+    EndWhileLoop
+    BeginWhileLoopHeader
+        v33 <- UnaryOperation v7, '--'
+        v34 <- LoadInteger '29'
+        v35 <- Compare v33, '>', v34
+    BeginWhileLoopBody v35
+        BeginWhileLoopHeader
+            v36 <- CreateNamedVariable 'j', 'none'
+            v37 <- UnaryOperation v36, '--'
+            v38 <- LoadInteger '3'
+            v39 <- Compare v37, '>', v38
+        BeginWhileLoopBody v39
+            v40 <- LoadInteger '10'
+            v41 <- CreateNamedVariable 'k', 'var', v40
+            BeginWhileLoopHeader
+                v42 <- UnaryOperation v41, '--'
+                v43 <- LoadInteger '8'
+                v44 <- Compare v42, '>', v43
+            BeginWhileLoopBody v44
+                v45 <- LoadInteger '11'
+                v46 <- BinaryOperation v41, '*', v45
+                v47 <- BinaryOperation v5, '+', v46
+                Reassign v5, v47
+            EndWhileLoop
+        EndWhileLoop
+        BeginWhileLoopHeader
+            v48 <- CreateNamedVariable 'j', 'none'
+            v49 <- UnaryOperation v48, '--'
+            v50 <- LoadInteger '1'
+            v51 <- Compare v49, '>', v50
+        BeginWhileLoopBody v51
+            BeginWhileLoopHeader
+                v52 <- CreateNamedVariable 'k', 'none'
+                v53 <- UnaryOperation v52, '--'
+                v54 <- LoadInteger '6'
+                v55 <- Compare v53, '>', v54
+            BeginWhileLoopBody v55
+                v56 <- CreateNamedVariable 'j', 'none'
+                v57 <- LoadInteger '13'
+                v58 <- BinaryOperation v56, '*', v57
+                v59 <- BinaryOperation v5, '+', v58
+                Reassign v5, v59
+            EndWhileLoop
+        EndWhileLoop
+    EndWhileLoop
+    Return v5
+EndPlainFunction
+BeginForLoopInitializer
+    v60 <- LoadInteger '0'
+BeginForLoopCondition -> v61
+    v62 <- LoadInteger '13'
+    v63 <- Compare v61, '<', v62
+BeginForLoopAfterthought v63 -> v64
+    v65 <- UnaryOperation v64, '++'
+BeginForLoopBody -> v66
+    v67 <- LoadInteger '348'
+    v68 <- CallFunction v0, [v66]
+EndForLoop
+
+
+function bar(a1) {
+    var count = 0;
+    var sum = 11;
+    var i = 35;
+    while (i-- > 33) {
+        sum = sum + i;
+    }
+    while (i-- > 31) {
+        j = 9;
+        while (j-- > 7) {
+            sum = sum + (j * 3);
+        }
+        while (j-- > 5) {
+            sum = sum + (j * 5);
+        }
+    }
+    while (i-- > 29) {
+        while (j-- > 3) {
+            var k = 10;
+            while (k-- > 8) {
+                sum = sum + (k * 11);
+            }
+        }
+        while (j-- > 1) {
+            while (k-- > 6) {
+                sum = sum + (j * 13);
+            }
+        }
+    }
+    return sum;
+}
+for (let i61 = 0; i61 < 13; i61++) {
+    bar(i61);
+}
+
+FuzzIL program written to corpus/osr-maze1.fzil

@@ -1,0 +1,29 @@
+v0 <- LoadString 'x'
+v1 <- CreateNamedVariable 'X', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '42'
+    v4 <- LoadThis
+    SetComputedProperty v4, v1, v3
+EndPlainFunction
+v5 <- Construct v2, []
+v6 <- CreateNamedVariable 'a', 'var', v5
+v7 <- Construct v2, []
+v8 <- CreateNamedVariable 'b', 'var', v7
+v9 <- LoadInteger '42'
+v10 <- GetProperty v6, 'x'
+v11 <- LoadInteger '42'
+v12 <- GetProperty v8, 'x'
+
+
+var X = "x";
+function C() {
+    this[X] = 42;
+}
+const v5 = new C();
+var a = v5;
+const v7 = new C();
+var b = v7;
+a.x;
+b.x;
+
+FuzzIL program written to corpus/regress-502.fzil

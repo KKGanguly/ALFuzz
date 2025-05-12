@@ -1,0 +1,23 @@
+v0 <- BeginGeneratorFunction -> 
+    v1 <- CreateNamedVariable 'x', 'none'
+    v2 <- CallMethod v1, '__defineGetter__', []
+    v3 <- LoadInteger '0'
+    v4 <- CreateNamedVariable 'x', 'var', v3
+    v5 <- CreateNamedVariable 'iterable', 'none'
+    BeginForOfLoop v5 -> v6
+        v7 <- Yield v6
+    EndForOfLoop
+EndGeneratorFunction
+v8 <- CallFunction v0, []
+
+
+function* f() {
+    x.__defineGetter__();
+    var x = 0;
+    for (const v6 of iterable) {
+        yield v6;
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-729369.fzil

@@ -1,0 +1,16 @@
+v0 <- LoadInteger '0'
+v1 <- LoadInteger '0'
+v2 <- LoadInteger '20'
+v3 <- BinaryOperation v1, '**', v2
+v4 <- BinaryOperation v0, '**', v3
+v5 <- CreateNamedVariable 'x', 'const', v4
+v6 <- LoadInteger '0'
+v7 <- LoadInteger '0'
+v8 <- BinaryOperation v5, '-', v7
+v9 <- BinaryOperation v5, '-', v8
+
+
+const x = 0 ** (0 ** 20);
+x - (x - 0);
+
+FuzzIL program written to corpus/misc.fzil

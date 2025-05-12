@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'x', 'none'
+    Reassign v2, v1
+EndPlainFunction
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'o', 'var', v3
+v5 <- CallFunction v0, [v4]
+v6 <- CallFunction v0, [v4]
+v7 <- CreateNamedVariable 'x', 'none'
+v8 <- LoadThis
+v9 <- LoadString 'x'
+v10 <- LoadInteger '5'
+v11 <- LoadBoolean 'false'
+v12 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v10
+    ObjectLiteralAddProperty `writable`, v11
+    ObjectLiteralAddProperty `configurable`, v12
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'Object', 'none'
+v15 <- CallMethod v14, 'defineProperty', [v8, v9, v13]
+v16 <- LoadInteger '5'
+v17 <- CallFunction v0, [v4]
+v18 <- CallFunction v0, [v4]
+v19 <- LoadInteger '5'
+v20 <- LoadThis
+v21 <- LoadString 'x'
+v22 <- LoadInteger '42'
+v23 <- LoadBoolean 'true'
+v24 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v22
+    ObjectLiteralAddProperty `writable`, v23
+    ObjectLiteralAddProperty `configurable`, v24
+v25 <- EndObjectLiteral
+v26 <- CallMethod v14, 'defineProperty', [v20, v21, v25]
+v27 <- LoadInteger '42'
+v28 <- CallFunction v0, [v4]
+
+
+function set_x(a1) {
+    x = a1;
+}
+var o = {};
+set_x(o);
+set_x(o);
+Object.defineProperty(this, "x", { value: 5, writable: false, configurable: true });
+set_x(o);
+set_x(o);
+Object.defineProperty(this, "x", { value: 42, writable: true, configurable: true });
+set_x(o);
+
+FuzzIL program written to corpus/regress-crbug-722783.fzil

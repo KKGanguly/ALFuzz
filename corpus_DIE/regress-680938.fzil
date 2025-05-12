@@ -1,0 +1,26 @@
+v0 <- LoadInteger '42'
+v1 <- CreateNamedVariable 'v17', 'var', v0
+v2 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `initial`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'v32', 'var', v3
+v5 <- CreateNamedVariable 'WebAssembly', 'none'
+v6 <- GetProperty v5, 'Memory'
+v7 <- Construct v6, [v4]
+v8 <- CreateNamedVariable 'v39', 'none'
+Reassign v8, v7
+v9 <- CreateNamedVariable 'v39', 'none'
+v10 <- CallMethod v9, 'grow', [v1]
+v11 <- CreateNamedVariable 'v49', 'none'
+Reassign v11, v10
+
+
+var v17 = 42;
+var v32 = { initial: 1 };
+const t2 = WebAssembly.Memory;
+const v7 = new t2(v32);
+v39 = v7;
+v49 = v39.grow(v17);
+
+FuzzIL program written to corpus/regress-680938.fzil

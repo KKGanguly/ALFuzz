@@ -1,0 +1,32 @@
+v0 <- CreateNamedVariable 'Set', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 's', 'const', v1
+v3 <- BeginPlainFunction -> v4
+    v5 <- CreateNamedVariable 'Symbol', 'none'
+    v6 <- GetProperty v5, 'iterator'
+    v7 <- CallComputedMethod v4, v6, []
+    v8 <- CreateNamedVariable 'i', 'const', v7
+    v9 <- CallMethod v8, 'next', []
+    Return v8
+EndPlainFunction
+v10 <- CallFunction v3, [v2]
+v11 <- CreateNamedVariable 'console', 'none'
+v12 <- CallMethod v11, 'log', [v10]
+v13 <- CallFunction v3, [v2]
+v14 <- CallMethod v11, 'log', [v13]
+v15 <- CallFunction v3, [v2]
+v16 <- CallMethod v11, 'log', [v15]
+
+
+const v1 = new Set();
+const s = v1;
+function foo(a4) {
+    const i = a4[Symbol.iterator]();
+    i.next();
+    return i;
+}
+console.log(foo(s));
+console.log(foo(s));
+console.log(foo(s));
+
+FuzzIL program written to corpus/regress-crbug-791245-2.fzil

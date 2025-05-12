@@ -1,0 +1,12 @@
+v0 <- LoadString 'f'
+v1 <- LoadUndefined
+v2 <- CreateArray [v0, v1]
+v3 <- LoadRegExp '(?:(?=(f)o)fx|).' ''
+v4 <- LoadString 'foo'
+v5 <- CallMethod v4, 'match', [v3]
+
+
+["f",,];
+("foo").match(/(?:(?=(f)o)fx|)./);
+
+FuzzIL program written to corpus/regress-187.fzil

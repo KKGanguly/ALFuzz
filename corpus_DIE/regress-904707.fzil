@@ -1,0 +1,25 @@
+v0 <- CreateNamedVariable 'Float64Array', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- GetProperty v1, '__proto__'
+v3 <- CreateNamedVariable 'Symbol', 'none'
+v4 <- GetProperty v3, 'iterator'
+v5 <- DeleteComputedProperty v2, v4
+v6 <- LoadInteger '9'
+v7 <- Construct v0, [v6]
+v8 <- CreateNamedVariable 'a', 'let', v7
+v9 <- LoadString 'length'
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'Object', 'none'
+v12 <- CallMethod v11, 'defineProperty', [v8, v9, v10]
+v13 <- CallMethod v0, 'from', [v8]
+
+
+const t0 = Float64Array.prototype.__proto__;
+delete t0[Symbol.iterator];
+const v7 = new Float64Array(9);
+let a = v7;
+Object.defineProperty(a, "length", {});
+Float64Array.from(a);
+
+FuzzIL program written to corpus/regress-904707.fzil

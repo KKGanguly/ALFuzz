@@ -1,0 +1,41 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '4'
+v2 <- LoadInteger '1024'
+v3 <- BinaryOperation v1, '*', v2
+v4 <- LoadInteger '1024'
+v5 <- BinaryOperation v3, '*', v4
+v6 <- Construct v0, [v5]
+v7 <- CreateNamedVariable 'array', 'none'
+Reassign v7, v6
+v8 <- BeginArrowFunction -> v9
+    v10 <- CreateNamedVariable 'array', 'none'
+    v11 <- GetProperty v10, 'length'
+    v12 <- LoadInteger '1'
+    v13 <- Compare v11, '!=', v12
+    BeginIf v13
+        v14 <- LoadInteger '1'
+        SetProperty v10, 'length', v14
+        v15 <- CreateNamedVariable 'gc', 'none'
+        v16 <- CallFunction v15, []
+    EndIf
+EndArrowFunction
+v17 <- CreateNamedVariable 'Set', 'none'
+v18 <- GetProperty v17, 'prototype'
+SetProperty v18, 'add', v8
+v19 <- CreateNamedVariable 'array', 'none'
+v20 <- Construct v17, [v19]
+
+
+const v6 = new Array((4 * 1024) * 1024);
+array = v6;
+const v8 = (a9) => {
+    if (array.length != 1) {
+        array.length = 1;
+        gc();
+    }
+};
+const t8 = Set.prototype;
+t8.add = v8;
+new Set(array);
+
+FuzzIL program written to corpus/regress-crbug-798026.fzil

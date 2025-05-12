@@ -1,0 +1,98 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- LoadThis
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadThis
+    Return v3
+EndPlainFunction
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'obj', 'var', v4
+v6 <- LoadBoolean 'true'
+v7 <- LoadBoolean 'true'
+v8 <- CallMethod v0, 'bind', [v7]
+v9 <- CallFunction v8, []
+v10 <- LoadInteger '42'
+v11 <- LoadInteger '42'
+v12 <- CallMethod v0, 'bind', [v11]
+v13 <- CallFunction v12, []
+v14 <- LoadString ''
+v15 <- LoadString ''
+v16 <- CallMethod v0, 'bind', [v15]
+v17 <- CallFunction v16, []
+v18 <- LoadNull
+v19 <- LoadNull
+v20 <- CallMethod v0, 'bind', [v19]
+v21 <- CallFunction v20, []
+v22 <- LoadUndefined
+v23 <- LoadUndefined
+v24 <- CallMethod v0, 'bind', [v23]
+v25 <- CallFunction v24, []
+v26 <- CallMethod v0, 'bind', [v5]
+v27 <- CallFunction v26, []
+v28 <- LoadBoolean 'true'
+v29 <- LoadBoolean 'true'
+v30 <- CallMethod v2, 'bind', [v29]
+v31 <- CallFunction v30, []
+v32 <- CreateNamedVariable 'Boolean', 'none'
+v33 <- TestInstanceOf v31, v32
+v34 <- LoadBoolean 'true'
+v35 <- LoadInteger '42'
+v36 <- CallMethod v2, 'bind', [v35]
+v37 <- CallFunction v36, []
+v38 <- CreateNamedVariable 'Number', 'none'
+v39 <- TestInstanceOf v37, v38
+v40 <- LoadBoolean 'true'
+v41 <- LoadString ''
+v42 <- CallMethod v2, 'bind', [v41]
+v43 <- CallFunction v42, []
+v44 <- CreateNamedVariable 'String', 'none'
+v45 <- TestInstanceOf v43, v44
+v46 <- LoadThis
+v47 <- LoadNull
+v48 <- CallMethod v2, 'bind', [v47]
+v49 <- CallFunction v48, []
+v50 <- LoadThis
+v51 <- LoadUndefined
+v52 <- CallMethod v2, 'bind', [v51]
+v53 <- CallFunction v52, []
+v54 <- CallMethod v2, 'bind', [v5]
+v55 <- CallFunction v54, []
+
+
+function strict() {
+    'use strict';
+    return this;
+}
+function lenient() {
+    return this;
+}
+var obj = {};
+const t8 = strict.bind(true);
+t8();
+const t9 = strict.bind(42);
+t9();
+const t11 = strict.bind("");
+t11();
+const t13 = strict.bind(null);
+t13();
+const t15 = strict.bind(undefined);
+t15();
+const t17 = strict.bind(obj);
+t17();
+const t19 = lenient.bind(true);
+t19() instanceof Boolean;
+const t21 = lenient.bind(42);
+t21() instanceof Number;
+const t23 = lenient.bind("");
+t23() instanceof String;
+const t25 = lenient.bind(null);
+t25();
+const t27 = lenient.bind(undefined);
+t27();
+const t29 = lenient.bind(obj);
+t29();
+
+FuzzIL program written to corpus/regress-bind-receiver.fzil

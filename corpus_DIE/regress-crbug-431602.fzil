@@ -1,0 +1,53 @@
+v0 <- LoadFloat '1.5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'heap_number_producer', 'var', v1
+v3 <- LoadInteger '0'
+SetProperty v2, 'y', v3
+v4 <- GetProperty v2, 'y'
+v5 <- CreateNamedVariable 'heap_number_zero', 'var', v4
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'non_constant_eight', 'var', v6
+v8 <- LoadInteger '8'
+Reassign v7, v8
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadInteger '1'
+    v11 <- BinaryOperation v10, '|', v7
+    v12 <- BinaryOperation v5, '|', v11
+    Return v12
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14, v15, v16
+    Return v15
+EndPlainFunction
+v17 <- LoadInteger '9'
+v18 <- LoadInteger '8'
+v19 <- LoadInteger '9'
+v20 <- LoadInteger '10'
+v21 <- CallFunction v13, [v18, v19, v20]
+v22 <- LoadInteger '9'
+v23 <- LoadInteger '8'
+v24 <- CallFunction v9, []
+v25 <- LoadInteger '10'
+v26 <- CallFunction v13, [v23, v24, v25]
+v27 <- LoadInteger '9'
+v28 <- CallFunction v9, []
+
+
+var heap_number_producer = { y: 1.5 };
+heap_number_producer.y = 0;
+var heap_number_zero = heap_number_producer.y;
+var non_constant_eight = {};
+non_constant_eight = 8;
+function BreakIt() {
+    return heap_number_zero | (1 | non_constant_eight);
+}
+function expose(a14, a15, a16) {
+    return a15;
+}
+expose(8, 9, 10);
+expose(8, BreakIt(), 10);
+BreakIt();
+
+FuzzIL program written to corpus/regress-crbug-431602.fzil

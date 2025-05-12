@@ -1,0 +1,12 @@
+v0 <- LoadString 'a'
+v1 <- LoadString 'b'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'fast_array', 'var', v2
+v4 <- CallMethod v3, 'concat', [v3]
+v5 <- CreateNamedVariable 'array', 'var', v4
+
+
+var fast_array = ["a","b"];
+var array = fast_array.concat(fast_array);
+
+FuzzIL program written to corpus/regress-smi-only-concat.fzil

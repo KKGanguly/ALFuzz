@@ -1,0 +1,51 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Set', 'none'
+    v3 <- Construct v2, []
+    v4 <- CallMethod v3, 'values', []
+    v5 <- CreateNamedVariable 'iterator', 'let', v4
+    v6 <- LoadInteger '0'
+    SetProperty v5, 'x', v6
+    v7 <- CreateArray [v5, v5]
+    v8 <- CreateNamedVariable 'arr', 'let', v7
+    BeginIf v1
+        v9 <- CallMethod v8, 'slice', []
+        Return v9
+    EndIf
+EndPlainFunction
+v10 <- LoadBoolean 'false'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadBoolean 'false'
+v13 <- CallFunction v0, [v12]
+v14 <- LoadBoolean 'true'
+v15 <- CallFunction v0, [v14]
+v16 <- CreateNamedVariable 'res', 'let', v15
+v17 <- GetElement v16, '0'
+v18 <- CreateNamedVariable 'a', 'let', v17
+v19 <- GetElement v16, '1'
+v20 <- CreateNamedVariable 'b', 'let', v19
+v21 <- Compare v18, '===', v20
+v22 <- LoadInteger '7'
+SetProperty v18, 'x', v22
+v23 <- LoadInteger '7'
+v24 <- GetProperty v20, 'x'
+
+
+function opt(a1) {
+    const v3 = new Set();
+    let iterator = v3.values();
+    iterator.x = 0;
+    let arr = [iterator,iterator];
+    if (a1) {
+        return arr.slice();
+    }
+}
+opt(false);
+opt(false);
+let res = opt(true);
+let a = res[0];
+let b = res[1];
+a === b;
+a.x = 7;
+b.x;
+
+FuzzIL program written to corpus/compiler-regress-787301.fzil

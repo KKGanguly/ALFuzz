@@ -1,0 +1,69 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadString 'called a('
+    v4 <- BinaryOperation v3, '+', v1
+    v5 <- LoadString ', '
+    v6 <- BinaryOperation v4, '+', v5
+    v7 <- BinaryOperation v6, '+', v2
+    v8 <- LoadString ')'
+    v9 <- BinaryOperation v7, '+', v8
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> v11, v12
+    v13 <- LoadString 'called b('
+    v14 <- BinaryOperation v13, '+', v11
+    v15 <- LoadString ', '
+    v16 <- BinaryOperation v14, '+', v15
+    v17 <- BinaryOperation v16, '+', v12
+    v18 <- LoadString ')'
+    v19 <- BinaryOperation v17, '+', v18
+    Return v19
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v0
+    ObjectLiteralAddProperty `b`, v10
+v20 <- EndObjectLiteral
+v21 <- CreateNamedVariable 'y', 'var', v20
+v22 <- BeginPlainFunction -> 
+EndPlainFunction
+v23 <- BeginPlainFunction -> 
+    v24 <- LoadInteger '0'
+    v25 <- LoadInteger '1'
+    v26 <- LoadThis
+    v27 <- GetProperty v26, 'a'
+    v28 <- LoadInteger '1'
+    v29 <- Compare v27, '==', v28
+    v30 <- LoadString 'a'
+    v31 <- LoadString 'b'
+    v32 <- TernaryOperation v29, v30, v31
+    v33 <- CallComputedMethod v21, v32, [v24, v25]
+    Return v33
+EndPlainFunction
+v34 <- GetProperty v22, 'prototype'
+SetProperty v34, 'f', v23
+v35 <- Construct v22, []
+v36 <- CreateNamedVariable 'obj', 'none'
+Reassign v36, v35
+v37 <- LoadString 'called b(0, 1)'
+v38 <- CreateNamedVariable 'obj', 'none'
+v39 <- CallMethod v38, 'f', []
+
+
+function f0(a1, a2) {
+    return ((("called a(" + a1) + ", ") + a2) + ")";
+}
+function f10(a11, a12) {
+    return ((("called b(" + a11) + ", ") + a12) + ")";
+}
+var y = { a: f0, b: f10 };
+function C() {
+}
+function f23() {
+    return y[this.a == 1 ? "a" : "b"](0, 1);
+}
+const t12 = C.prototype;
+t12.f = f23;
+const v35 = new C();
+obj = v35;
+obj.f();
+
+FuzzIL program written to corpus/regress-3199913.fzil

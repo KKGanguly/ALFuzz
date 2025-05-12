@@ -1,0 +1,77 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'g', 'none'
+    v2 <- CallFunction v1, []
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '0'
+    v5 <- CreateNamedVariable 'result', 'var', v4
+    v6 <- GetProperty v0, 'arguments'
+    v7 <- CreateNamedVariable 'array', 'var', v6
+    BeginForLoopInitializer
+        v8 <- LoadInteger '0'
+    BeginForLoopCondition -> v9
+        v10 <- GetProperty v7, 'length'
+        v11 <- Compare v9, '<', v10
+    BeginForLoopAfterthought v11 -> v12
+        v13 <- UnaryOperation v12, '++'
+    BeginForLoopBody -> v14
+        v15 <- GetComputedProperty v7, v14
+        Update v5, '+', v15
+    EndForLoop
+    Return v5
+EndPlainFunction
+BeginForLoopInitializer
+    v16 <- LoadInteger '0'
+BeginForLoopCondition -> v17
+    v18 <- LoadInteger '25'
+    v19 <- Compare v17, '<', v18
+BeginForLoopAfterthought v19 -> v20
+    v21 <- UnaryOperation v20, '++'
+BeginForLoopBody -> v22
+    v23 <- CreateNamedVariable 'Array', 'none'
+    v24 <- Construct v23, [v22]
+    v25 <- CreateNamedVariable 'array', 'var', v24
+    v26 <- LoadInteger '0'
+    v27 <- CreateNamedVariable 'expected', 'var', v26
+    BeginForLoopInitializer
+        v28 <- LoadInteger '0'
+    BeginForLoopCondition -> v29
+        v30 <- Compare v29, '<', v22
+    BeginForLoopAfterthought v30 -> v31
+        v32 <- UnaryOperation v31, '++'
+    BeginForLoopBody -> v33
+        Update v27, '+', v33
+        SetComputedProperty v25, v33, v33
+    EndForLoop
+    v34 <- LoadNull
+    v35 <- CallMethod v0, 'apply', [v34, v25]
+    v36 <- CreateNamedVariable 'String', 'none'
+    v37 <- CallFunction v36, [v22]
+EndForLoop
+
+
+function f() {
+    return g();
+}
+function g() {
+    var result = 0;
+    var array = f.arguments;
+    for (let i9 = 0; i9 < array.length; i9++) {
+        result += array[i9];
+    }
+    return result;
+}
+for (let i17 = 0; i17 < 25; i17++) {
+    const v24 = new Array(i17);
+    var array = v24;
+    var expected = 0;
+    for (let i29 = 0; i29 < i17; i29++) {
+        expected += i29;
+        array[i29] = i29;
+    }
+    f.apply(null, array);
+    String(i17);
+}
+
+FuzzIL program written to corpus/extra-arguments.fzil

@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'WebAssembly', 'none'
+    Return v1
+EndPlainFunction
+v2 <- LoadBoolean 'true'
+v3 <- CreateNamedVariable 'WASM_ON_BY_DEFAULT', 'let', v2
+BeginIf v3
+    BeginTry
+        v4 <- LoadUndefined
+        v5 <- CallFunction v0, []
+        v6 <- Compare v4, '===', v5
+    BeginCatch -> v7
+        v8 <- LoadBoolean 'false'
+    EndTryCatch
+BeginElse
+    v9 <- CallFunction v0, []
+EndIf
+
+
+function GetWebAssembly() {
+    return WebAssembly;
+}
+let WASM_ON_BY_DEFAULT = true;
+if (WASM_ON_BY_DEFAULT) {
+    try {
+        undefined === GetWebAssembly();
+    } catch(e7) {
+    }
+} else {
+    GetWebAssembly();
+}
+
+FuzzIL program written to corpus/wasm-default.fzil

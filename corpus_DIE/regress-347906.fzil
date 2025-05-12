@@ -1,0 +1,19 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadFloat '12.34'
+    v2 <- CreateNamedVariable 'Math', 'none'
+    v3 <- CallMethod v2, 'clz32', [v1]
+    Return v3
+EndPlainFunction
+v4 <- CallFunction v0, []
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+
+
+function foo() {
+    return Math.clz32(12.34);
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-347906.fzil

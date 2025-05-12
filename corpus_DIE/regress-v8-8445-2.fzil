@@ -1,0 +1,95 @@
+v0 <- BeginClassDefinition
+    BeginClassInstanceMethod 'exec' -> v1
+        v2 <- LoadNull
+        Return v2
+    EndClassInstanceMethod
+EndClassDefinition
+v3 <- LoadRegExp 'c' ''
+v4 <- CreateNamedVariable 'r', 'var', v3
+v5 <- LoadString 'ab'
+v6 <- LoadString ''
+v7 <- CreateArray [v5, v6]
+v8 <- LoadString 'abc'
+v9 <- CallMethod v8, 'split', [v4]
+v10 <- LoadString 'c'
+v11 <- CreateArray [v10]
+v12 <- CreateArray [v11]
+v13 <- LoadString 'c'
+v14 <- CallMethod v13, 'matchAll', [v4]
+v15 <- CreateArrayWithSpread [...v14]
+v16 <- CreateNamedVariable 'Symbol', 'none'
+v17 <- GetProperty v16, 'species'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v17, v0
+v18 <- EndObjectLiteral
+SetProperty v4, 'constructor', v18
+v19 <- LoadString 'abc'
+v20 <- CreateArray [v19]
+v21 <- LoadString 'abc'
+v22 <- CallMethod v21, 'split', [v4]
+v23 <- CreateArray []
+v24 <- LoadString 'c'
+v25 <- CallMethod v24, 'matchAll', [v4]
+v26 <- CreateArrayWithSpread [...v25]
+v27 <- LoadString 'ab'
+v28 <- LoadString ''
+v29 <- CreateArray [v27, v28]
+v30 <- LoadRegExp 'c' ''
+v31 <- LoadString 'abc'
+v32 <- CallMethod v31, 'split', [v30]
+v33 <- LoadString 'c'
+v34 <- CreateArray [v33]
+v35 <- CreateArray [v34]
+v36 <- LoadRegExp 'c' ''
+v37 <- LoadString 'c'
+v38 <- CallMethod v37, 'matchAll', [v36]
+v39 <- CreateArrayWithSpread [...v38]
+v40 <- GetProperty v16, 'species'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v40, v0
+v41 <- EndObjectLiteral
+v42 <- CreateNamedVariable 'RegExp', 'none'
+v43 <- GetProperty v42, 'prototype'
+SetProperty v43, 'constructor', v41
+v44 <- LoadString 'abc'
+v45 <- CreateArray [v44]
+v46 <- LoadRegExp 'c' ''
+v47 <- LoadString 'abc'
+v48 <- CallMethod v47, 'split', [v46]
+v49 <- CreateArray []
+v50 <- LoadRegExp 'c' ''
+v51 <- LoadString 'c'
+v52 <- CallMethod v51, 'matchAll', [v50]
+v53 <- CreateArrayWithSpread [...v52]
+
+
+class C0 {
+    exec() {
+        return null;
+    }
+}
+var r = /c/;
+["ab",""];
+("abc").split(r);
+[["c"]];
+[...("c").matchAll(r)];
+const v17 = Symbol.species;
+r.constructor = { [v17]: C0 };
+["abc"];
+("abc").split(r);
+[];
+[...("c").matchAll(r)];
+["ab",""];
+("abc").split(/c/);
+[["c"]];
+[...("c").matchAll(/c/)];
+const v40 = Symbol.species;
+const v41 = { [v40]: C0 };
+const t22 = RegExp.prototype;
+t22.constructor = v41;
+["abc"];
+("abc").split(/c/);
+[];
+[...("c").matchAll(/c/)];
+
+FuzzIL program written to corpus/regress-v8-8445-2.fzil

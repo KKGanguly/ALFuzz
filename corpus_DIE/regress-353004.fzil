@@ -1,0 +1,296 @@
+v0 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v1 <- LoadInteger '100'
+v2 <- LoadInteger '1024'
+v3 <- BinaryOperation v1, '*', v2
+v4 <- Construct v0, [v3]
+v5 <- CreateNamedVariable 'buffer1', 'var', v4
+v6 <- BeginPlainFunction -> 
+    v7 <- CreateNamedVariable 'Uint8Array', 'none'
+    v8 <- BeginPlainFunction -> 
+        v9 <- LoadInteger '0'
+        Return v9
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v8
+    v10 <- EndObjectLiteral
+    v11 <- Construct v7, [v5, v10]
+    v12 <- CreateNamedVariable 'array1', 'var', v11
+EndPlainFunction
+v13 <- CallFunction v6, []
+v14 <- CreateNamedVariable 'TypeError', 'none'
+v15 <- LoadInteger '100'
+v16 <- LoadInteger '1024'
+v17 <- BinaryOperation v15, '*', v16
+v18 <- Construct v0, [v17]
+v19 <- CreateNamedVariable 'buffer2', 'var', v18
+v20 <- BeginPlainFunction -> 
+    v21 <- CreateNamedVariable 'Uint8Array', 'none'
+    v22 <- LoadInteger '0'
+    v23 <- BeginPlainFunction -> 
+        v24 <- LoadInteger '100'
+        v25 <- LoadInteger '1024'
+        v26 <- BinaryOperation v24, '*', v25
+        Return v26
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v23
+    v27 <- EndObjectLiteral
+    v28 <- Construct v21, [v19, v22, v27]
+    v29 <- CreateNamedVariable 'array2', 'var', v28
+EndPlainFunction
+v30 <- CallFunction v20, []
+v31 <- LoadBoolean 'false'
+v32 <- CreateNamedVariable 'convertedOffset', 'let', v31
+v33 <- LoadBoolean 'false'
+v34 <- CreateNamedVariable 'convertedLength', 'let', v33
+v35 <- BeginArrowFunction -> 
+    v36 <- CreateNamedVariable 'Uint8Array', 'none'
+    v37 <- BeginPlainFunction -> 
+        v38 <- LoadBoolean 'true'
+        Reassign v32, v38
+        v39 <- LoadInteger '0'
+        Return v39
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v37
+    v40 <- EndObjectLiteral
+    v41 <- BeginPlainFunction -> 
+        v42 <- LoadBoolean 'true'
+        Reassign v34, v42
+        v43 <- LoadInteger '0'
+        Return v43
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v41
+    v44 <- EndObjectLiteral
+    v45 <- Construct v36, [v5, v40, v44]
+    Return v45
+EndArrowFunction
+v46 <- CallFunction v35, []
+v47 <- LoadInteger '100'
+v48 <- LoadInteger '1024'
+v49 <- BinaryOperation v47, '*', v48
+v50 <- LoadInteger '1024'
+v51 <- BinaryOperation v49, '*', v50
+v52 <- Construct v0, [v51]
+v53 <- CreateNamedVariable 'buffer3', 'var', v52
+v54 <- CreateNamedVariable 'DataView', 'none'
+v55 <- BeginPlainFunction -> 
+    v56 <- LoadInteger '0'
+    Return v56
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v55
+v57 <- EndObjectLiteral
+v58 <- Construct v54, [v53, v57]
+v59 <- CreateNamedVariable 'dataView1', 'var', v58
+v60 <- LoadInteger '0'
+v61 <- GetProperty v59, 'byteLength'
+v62 <- LoadInteger '100'
+v63 <- LoadInteger '1024'
+v64 <- BinaryOperation v62, '*', v63
+v65 <- Construct v0, [v64]
+v66 <- CreateNamedVariable 'buffer4', 'var', v65
+v67 <- BeginPlainFunction -> 
+    v68 <- LoadInteger '0'
+    v69 <- BeginPlainFunction -> 
+        v70 <- LoadInteger '100'
+        v71 <- LoadInteger '1024'
+        v72 <- BinaryOperation v70, '*', v71
+        v73 <- LoadInteger '1024'
+        v74 <- BinaryOperation v72, '*', v73
+        Return v74
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v69
+    v75 <- EndObjectLiteral
+    v76 <- Construct v54, [v66, v68, v75]
+    v77 <- CreateNamedVariable 'dataView2', 'var', v76
+EndPlainFunction
+v78 <- CallFunction v67, []
+v79 <- CreateNamedVariable 'RangeError', 'none'
+v80 <- LoadInteger '100'
+v81 <- LoadInteger '1024'
+v82 <- BinaryOperation v80, '*', v81
+v83 <- Construct v0, [v82]
+v84 <- CreateNamedVariable 'buffer5', 'var', v83
+v85 <- BeginPlainFunction -> 
+    v86 <- BeginPlainFunction -> 
+        v87 <- LoadInteger '0'
+        Return v87
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v86
+    v88 <- EndObjectLiteral
+    v89 <- LoadInteger '100'
+    v90 <- LoadInteger '1024'
+    v91 <- BinaryOperation v89, '*', v90
+    v92 <- LoadInteger '1024'
+    v93 <- BinaryOperation v91, '*', v92
+    v94 <- CallMethod v84, 'slice', [v88, v93]
+EndPlainFunction
+v95 <- CallFunction v85, []
+v96 <- LoadInteger '100'
+v97 <- LoadInteger '1024'
+v98 <- BinaryOperation v96, '*', v97
+v99 <- LoadInteger '1024'
+v100 <- BinaryOperation v98, '*', v99
+v101 <- Construct v0, [v100]
+v102 <- CreateNamedVariable 'buffer7', 'var', v101
+v103 <- BeginPlainFunction -> 
+    v104 <- LoadInteger '0'
+    v105 <- BeginPlainFunction -> 
+        v106 <- LoadInteger '100'
+        v107 <- LoadInteger '1024'
+        v108 <- BinaryOperation v106, '*', v107
+        v109 <- LoadInteger '1024'
+        v110 <- BinaryOperation v108, '*', v109
+        Return v110
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v105
+    v111 <- EndObjectLiteral
+    v112 <- CallMethod v102, 'slice', [v104, v111]
+EndPlainFunction
+v113 <- CallFunction v103, []
+v114 <- LoadInteger '1024'
+v115 <- Construct v0, [v114]
+v116 <- CreateNamedVariable 'buffer9', 'var', v115
+v117 <- CreateNamedVariable 'Uint8Array', 'none'
+v118 <- Construct v117, [v116]
+v119 <- CreateNamedVariable 'array9', 'var', v118
+v120 <- BeginArrowFunction -> 
+    v121 <- BeginPlainFunction -> 
+        v122 <- LoadInteger '0'
+        Return v122
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v121
+    v123 <- EndObjectLiteral
+    v124 <- LoadInteger '1024'
+    v125 <- CallMethod v119, 'subarray', [v123, v124]
+    Return v125
+EndArrowFunction
+v126 <- CallFunction v120, []
+v127 <- LoadInteger '0'
+v128 <- GetProperty v119, 'length'
+v129 <- LoadInteger '1024'
+v130 <- Construct v0, [v129]
+v131 <- CreateNamedVariable 'buffer11', 'var', v130
+v132 <- Construct v117, [v131]
+v133 <- CreateNamedVariable 'array11', 'var', v132
+v134 <- BeginArrowFunction -> 
+    v135 <- LoadInteger '0'
+    v136 <- BeginPlainFunction -> 
+        v137 <- LoadInteger '1024'
+        Return v137
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v136
+    v138 <- EndObjectLiteral
+    v139 <- CallMethod v133, 'subarray', [v135, v138]
+    Return v139
+EndArrowFunction
+v140 <- CallFunction v134, []
+v141 <- LoadInteger '0'
+v142 <- GetProperty v133, 'length'
+
+
+const v4 = new ArrayBuffer(100 * 1024);
+var buffer1 = v4;
+function f6() {
+    function f8() {
+        return 0;
+    }
+    const v11 = new Uint8Array(buffer1, { valueOf: f8 });
+    var array1 = v11;
+}
+f6();
+const v18 = new ArrayBuffer(100 * 1024);
+var buffer2 = v18;
+function f20() {
+    function f23() {
+        return 100 * 1024;
+    }
+    const v28 = new Uint8Array(buffer2, 0, { valueOf: f23 });
+    var array2 = v28;
+}
+f20();
+let convertedOffset = false;
+let convertedLength = false;
+const v35 = () => {
+    function f37() {
+        convertedOffset = true;
+        return 0;
+    }
+    const v40 = { valueOf: f37 };
+    function f41() {
+        convertedLength = true;
+        return 0;
+    }
+    const v45 = new Uint8Array(buffer1, v40, { valueOf: f41 });
+    return v45;
+};
+v35();
+const v52 = new ArrayBuffer((100 * 1024) * 1024);
+var buffer3 = v52;
+function f55() {
+    return 0;
+}
+const v58 = new DataView(buffer3, { valueOf: f55 });
+var dataView1 = v58;
+dataView1.byteLength;
+const v65 = new ArrayBuffer(100 * 1024);
+var buffer4 = v65;
+function f67() {
+    function f69() {
+        return (100 * 1024) * 1024;
+    }
+    const v76 = new DataView(buffer4, 0, { valueOf: f69 });
+    var dataView2 = v76;
+}
+f67();
+const v83 = new ArrayBuffer(100 * 1024);
+var buffer5 = v83;
+function f85() {
+    function f86() {
+        return 0;
+    }
+    buffer5.slice({ valueOf: f86 }, (100 * 1024) * 1024);
+}
+f85();
+const v101 = new ArrayBuffer((100 * 1024) * 1024);
+var buffer7 = v101;
+function f103() {
+    function f105() {
+        return (100 * 1024) * 1024;
+    }
+    buffer7.slice(0, { valueOf: f105 });
+}
+f103();
+const v115 = new ArrayBuffer(1024);
+var buffer9 = v115;
+const v118 = new Uint8Array(buffer9);
+var array9 = v118;
+const v120 = () => {
+    function f121() {
+        return 0;
+    }
+    return array9.subarray({ valueOf: f121 }, 1024);
+};
+v120();
+array9.length;
+const v130 = new ArrayBuffer(1024);
+var buffer11 = v130;
+const v132 = new Uint8Array(buffer11);
+var array11 = v132;
+const v134 = () => {
+    function f136() {
+        return 1024;
+    }
+    return array11.subarray(0, { valueOf: f136 });
+};
+v134();
+array11.length;
+
+FuzzIL program written to corpus/regress-353004.fzil

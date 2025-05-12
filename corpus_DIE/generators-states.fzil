@@ -1,0 +1,311 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3, v4, v5
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v3
+        ObjectLiteralAddProperty `done`, v4
+    v6 <- EndObjectLiteral
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadUndefined
+    v10 <- LoadBoolean 'true'
+    v11 <- CallMethod v8, 'next', []
+    v12 <- BeginPlainFunction -> 
+        v13 <- CallMethod v8, 'next', []
+    EndPlainFunction
+    v14 <- CallFunction v12, []
+    v15 <- BeginPlainFunction -> 
+        v16 <- Construct v1, []
+        v17 <- CallMethod v8, 'throw', [v16]
+    EndPlainFunction
+    v18 <- CallFunction v15, []
+    v19 <- CallFunction v1, []
+EndPlainFunction
+v20 <- LoadUndefined
+v21 <- CreateNamedVariable 'iter', 'var', v20
+v22 <- BeginGeneratorFunction -> 
+    v23 <- CallMethod v21, 'next', []
+    v24 <- Yield v23
+EndGeneratorFunction
+v25 <- BeginGeneratorFunction -> 
+    v26 <- Construct v1, []
+    v27 <- CallMethod v21, 'throw', [v26]
+    v28 <- Yield v27
+EndGeneratorFunction
+v29 <- CallFunction v22, []
+Reassign v21, v29
+v30 <- BeginPlainFunction -> 
+    v31 <- Construct v0, []
+    v32 <- CallMethod v21, 'throw', [v31]
+EndPlainFunction
+v33 <- CallFunction v30, []
+v34 <- CallFunction v0, []
+v35 <- BeginPlainFunction -> 
+    v36 <- Construct v0, []
+    v37 <- CallMethod v21, 'throw', [v36]
+EndPlainFunction
+v38 <- CallFunction v35, []
+v39 <- CallFunction v0, []
+v40 <- CallFunction v25, []
+Reassign v21, v40
+v41 <- BeginPlainFunction -> 
+    v42 <- Construct v0, []
+    v43 <- CallMethod v21, 'throw', [v42]
+EndPlainFunction
+v44 <- CallFunction v41, []
+v45 <- CallFunction v0, []
+v46 <- BeginPlainFunction -> 
+    v47 <- Construct v0, []
+    v48 <- CallMethod v21, 'throw', [v47]
+EndPlainFunction
+v49 <- CallFunction v46, []
+v50 <- CallFunction v0, []
+v51 <- CallFunction v22, []
+Reassign v21, v51
+v52 <- BeginPlainFunction -> 
+    v53 <- CallMethod v21, 'next', []
+EndPlainFunction
+v54 <- CallFunction v52, []
+v55 <- CreateNamedVariable 'TypeError', 'none'
+v56 <- CallFunction v25, []
+Reassign v21, v56
+v57 <- BeginPlainFunction -> 
+    v58 <- CallMethod v21, 'next', []
+EndPlainFunction
+v59 <- CallFunction v57, []
+v60 <- BeginGeneratorFunction -> 
+    BeginTry
+        v61 <- CallMethod v21, 'next', []
+        v62 <- LoadInteger '1'
+        v63 <- Yield v62
+    BeginCatch -> v64
+        BeginTry
+            v65 <- CallMethod v21, 'next', []
+            v66 <- LoadInteger '2'
+            v67 <- Yield v66
+        BeginCatch -> v68
+            v69 <- LoadInteger '3'
+            v70 <- Yield v69
+        EndTryCatch
+    EndTryCatch
+    v71 <- LoadInteger '4'
+    v72 <- Yield v71
+EndGeneratorFunction
+v73 <- CallFunction v60, []
+Reassign v21, v73
+v74 <- LoadInteger '3'
+v75 <- LoadBoolean 'false'
+v76 <- CallMethod v21, 'next', []
+v77 <- LoadInteger '4'
+v78 <- LoadBoolean 'false'
+v79 <- CallMethod v21, 'next', []
+BeginBlockStatement
+    v80 <- BeginGeneratorFunction -> 
+        BeginTry
+            v81 <- LoadInteger '42'
+            Return v81
+        BeginFinally
+            v82 <- LoadInteger '43'
+            v83 <- Yield v82
+        EndTryCatch
+    EndGeneratorFunction
+    v84 <- CreateNamedVariable 'g', 'let', v80
+    v85 <- CallFunction v84, []
+    v86 <- CreateNamedVariable 'x', 'let', v85
+    v87 <- LoadInteger '43'
+    v88 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v87
+        ObjectLiteralAddProperty `done`, v88
+    v89 <- EndObjectLiteral
+    v90 <- CallMethod v86, 'next', []
+    v91 <- LoadInteger '42'
+    v92 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v91
+        ObjectLiteralAddProperty `done`, v92
+    v93 <- EndObjectLiteral
+    v94 <- CallMethod v86, 'next', []
+EndBlockStatement
+BeginBlockStatement
+    v95 <- LoadUndefined
+    v96 <- CreateNamedVariable 'x', 'let', v95
+    v97 <- BeginGeneratorFunction -> 
+        BeginTry
+            v98 <- LoadInteger '42'
+            Return v98
+        BeginFinally
+            v99 <- LoadInteger '666'
+            v100 <- CallMethod v96, 'throw', [v99]
+        EndTryCatch
+    EndGeneratorFunction
+    v101 <- CreateNamedVariable 'g', 'let', v97
+    v102 <- CallFunction v101, []
+    Reassign v96, v102
+    v103 <- BeginArrowFunction -> 
+        v104 <- CallMethod v96, 'next', []
+        Return v104
+    EndArrowFunction
+    v105 <- CallFunction v103, []
+EndBlockStatement
+BeginBlockStatement
+    v106 <- LoadUndefined
+    v107 <- CreateNamedVariable 'x', 'let', v106
+    v108 <- BeginGeneratorFunction -> 
+        BeginTry
+            v109 <- LoadInteger '42'
+            Return v109
+        BeginFinally
+            BeginTry
+                v110 <- LoadInteger '666'
+                v111 <- CallMethod v107, 'throw', [v110]
+            BeginCatch -> v112
+            EndTryCatch
+        EndTryCatch
+    EndGeneratorFunction
+    v113 <- CreateNamedVariable 'g', 'let', v108
+    v114 <- CallFunction v113, []
+    Reassign v107, v114
+    v115 <- LoadInteger '42'
+    v116 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v115
+        ObjectLiteralAddProperty `done`, v116
+    v117 <- EndObjectLiteral
+    v118 <- CallMethod v107, 'next', []
+EndBlockStatement
+
+
+function Foo() {
+}
+function Bar() {
+}
+function assertIteratorResult(a3, a4, a5) {
+    const v6 = { value: a3, done: a4 };
+}
+function assertIteratorIsClosed(a8) {
+    a8.next();
+    function f12() {
+        a8.next();
+    }
+    f12();
+    function f15() {
+        const v16 = new Bar();
+        a8.throw(v16);
+    }
+    f15();
+    Bar();
+}
+var iter;
+function* nextGenerator() {
+    yield iter.next();
+}
+function* throwGenerator() {
+    const v26 = new Bar();
+    yield iter.throw(v26);
+}
+iter = nextGenerator();
+function f30() {
+    const v31 = new Foo();
+    iter.throw(v31);
+}
+f30();
+Foo();
+function f35() {
+    const v36 = new Foo();
+    iter.throw(v36);
+}
+f35();
+Foo();
+iter = throwGenerator();
+function f41() {
+    const v42 = new Foo();
+    iter.throw(v42);
+}
+f41();
+Foo();
+function f46() {
+    const v47 = new Foo();
+    iter.throw(v47);
+}
+f46();
+Foo();
+iter = nextGenerator();
+function f52() {
+    iter.next();
+}
+f52();
+iter = throwGenerator();
+function f57() {
+    iter.next();
+}
+f57();
+function* f60() {
+    try {
+        iter.next();
+        yield 1;
+    } catch(e64) {
+        try {
+            iter.next();
+            yield 2;
+        } catch(e68) {
+            yield 3;
+        }
+    }
+    yield 4;
+}
+iter = f60();
+iter.next();
+iter.next();
+{
+    function* f80() {
+        try {
+            return 42;
+        } finally {
+            yield 43;
+        }
+    }
+    let g = f80;
+    let x = g();
+    const v89 = { value: 43, done: false };
+    x.next();
+    const v93 = { value: 42, done: true };
+    x.next();
+}
+{
+    let x;
+    function* f97() {
+        try {
+            return 42;
+        } finally {
+            x.throw(666);
+        }
+    }
+    let g = f97;
+    x = g();
+    const v103 = () => {
+        return x.next();
+    };
+    v103();
+}
+{
+    let x;
+    function* f108() {
+        try {
+            return 42;
+        } finally {
+            try {
+                x.throw(666);
+            } catch(e112) {
+            }
+        }
+    }
+    let g = f108;
+    x = g();
+    const v117 = { value: 42, done: true };
+    x.next();
+}
+
+FuzzIL program written to corpus/generators-states.fzil

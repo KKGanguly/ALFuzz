@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- UnaryOperation '-', v2
+    v4 <- BinaryOperation v1, '/', v3
+    v5 <- LoadInteger '1'
+    v6 <- BinaryOperation v4, '^', v5
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '1'
+v8 <- LoadInteger '31'
+v9 <- BinaryOperation v7, '<<', v8
+v10 <- CreateNamedVariable '__v_0', 'var', v9
+v11 <- CallFunction v0, [v10]
+v12 <- CreateNamedVariable '__v_2', 'var', v11
+v13 <- LoadBoolean 'false'
+v14 <- CreateNamedVariable 'caught', 'none'
+Reassign v14, v13
+BeginTry
+BeginCatch -> v15
+    v16 <- LoadBoolean 'true'
+    v17 <- CreateNamedVariable 'caught', 'none'
+    Reassign v17, v16
+EndTryCatch
+v18 <- CreateNamedVariable 'caught', 'none'
+v19 <- LoadString 'exception not caught'
+
+
+function __f_1(a1) {
+    return (a1 / -1) ^ 1;
+}
+var __v_0 = 1 << 31;
+var __v_2 = __f_1(__v_0);
+caught = false;
+try {
+} catch(e15) {
+    caught = true;
+}
+
+FuzzIL program written to corpus/regress-cr-344285.fzil

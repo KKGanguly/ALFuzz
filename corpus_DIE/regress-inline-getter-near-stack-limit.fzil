@@ -1,0 +1,80 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginPlainFunction -> 
+        BeginTry
+            v3 <- CallFunction v2, []
+        BeginCatch -> v4
+            v5 <- CallFunction v1, []
+        EndTryCatch
+    EndPlainFunction
+    BeginTry
+        v6 <- CallFunction v2, []
+    BeginCatch -> v7
+    EndTryCatch
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9
+    v10 <- GetProperty v9, 'bar'
+    Return v10
+EndPlainFunction
+v11 <- BeginPlainFunction -> 
+EndPlainFunction
+v12 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v11
+v15 <- EndObjectLiteral
+v16 <- CreateNamedVariable 'Object', 'none'
+v17 <- CallMethod v16, 'defineProperty', [v13, v14, v15]
+v18 <- CreateNamedVariable 'x', 'var', v17
+v19 <- CallFunction v8, [v18]
+v20 <- CallFunction v8, [v18]
+BeginObjectLiteral
+v21 <- EndObjectLiteral
+v22 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v12
+v23 <- EndObjectLiteral
+v24 <- CallMethod v16, 'defineProperty', [v21, v22, v23]
+v25 <- CreateNamedVariable 'y', 'var', v24
+v26 <- CallFunction v8, [v25]
+v27 <- BeginPlainFunction -> 
+    v28 <- CallFunction v8, [v25]
+EndPlainFunction
+v29 <- CallFunction v0, [v27]
+
+
+function runNearStackLimit(a1) {
+    function t() {
+        try {
+            t();
+        } catch(e4) {
+            a1();
+        }
+    }
+    try {
+        t();
+    } catch(e7) {
+    }
+}
+function g(a9) {
+    return a9.bar;
+}
+function f1() {
+}
+function f2() {
+}
+const v13 = {};
+var x = Object.defineProperty(v13, "bar", { get: f1 });
+g(x);
+g(x);
+const v21 = {};
+var y = Object.defineProperty(v21, "bar", { get: f2 });
+g(y);
+function f27() {
+    g(y);
+}
+runNearStackLimit(f27);
+
+FuzzIL program written to corpus/regress-inline-getter-near-stack-limit.fzil

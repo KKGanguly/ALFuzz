@@ -1,0 +1,307 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadUndefined
+    v3 <- CreateNamedVariable 'x', 'let', v2
+    v4 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v4
+    v5 <- EndObjectLiteral
+    v6 <- CreateNamedVariable 'obj', 'const', v5
+    v7 <- LoadInteger '5'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `get` -> v8
+            Return v3
+        EndObjectLiteralMethod
+        BeginObjectLiteralMethod `set` -> v9, v10
+            Reassign v3, v10
+        EndObjectLiteralMethod
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'Object', 'none'
+    v13 <- CallMethod v12, 'defineProperty', [v6, v7, v11]
+    v14 <- CallMethod v12, 'freeze', [v6]
+    v15 <- CallMethod v12, 'seal', [v6]
+    v16 <- TernaryOperation v1, v14, v15
+    Return v16
+EndPlainFunction
+BeginBlockStatement
+    v17 <- LoadBoolean 'false'
+    v18 <- CallFunction v0, [v17]
+    v19 <- CreateNamedVariable 'sealed', 'const', v18
+    v20 <- LoadString 'foo'
+    v21 <- LoadInteger '5'
+    v22 <- LoadInteger '6'
+    v23 <- CreateNamedVariable 'Array', 'none'
+    v24 <- GetProperty v23, 'prototype'
+    v25 <- GetProperty v24, 'fill'
+    v26 <- CallMethod v25, 'call', [v19, v20, v21, v22]
+    v27 <- LoadString 'foo'
+    v28 <- GetElement v19, '5'
+    v29 <- BeginArrowFunction -> 
+        v30 <- LoadString 'foo'
+        v31 <- GetProperty v23, 'prototype'
+        v32 <- GetProperty v31, 'fill'
+        v33 <- CallMethod v32, 'call', [v19, v30]
+        Return v33
+    EndArrowFunction
+    v34 <- CallFunction v29, []
+    v35 <- CreateNamedVariable 'TypeError', 'none'
+EndBlockStatement
+BeginBlockStatement
+    v36 <- LoadBoolean 'true'
+    v37 <- CallFunction v0, [v36]
+    v38 <- CreateNamedVariable 'frozen', 'const', v37
+    v39 <- LoadString 'foo'
+    v40 <- LoadInteger '5'
+    v41 <- LoadInteger '6'
+    v42 <- CreateNamedVariable 'Array', 'none'
+    v43 <- GetProperty v42, 'prototype'
+    v44 <- GetProperty v43, 'fill'
+    v45 <- CallMethod v44, 'call', [v38, v39, v40, v41]
+    v46 <- LoadString 'foo'
+    v47 <- GetElement v38, '5'
+    v48 <- BeginArrowFunction -> 
+        v49 <- LoadString 'foo'
+        v50 <- GetProperty v42, 'prototype'
+        v51 <- GetProperty v50, 'fill'
+        v52 <- CallMethod v51, 'call', [v38, v49]
+        Return v52
+    EndArrowFunction
+    v53 <- CallFunction v48, []
+    v54 <- CreateNamedVariable 'TypeError', 'none'
+EndBlockStatement
+BeginBlockStatement
+    v55 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v55
+    v56 <- EndObjectLiteral
+    v57 <- CreateNamedVariable 'Object', 'none'
+    v58 <- CallMethod v57, 'seal', [v56]
+    v59 <- CreateNamedVariable 'sealed', 'const', v58
+    v60 <- LoadUndefined
+    v61 <- CreateNamedVariable 'Array', 'none'
+    v62 <- GetProperty v61, 'prototype'
+    v63 <- GetProperty v62, 'shift'
+    v64 <- CallMethod v63, 'call', [v59]
+EndBlockStatement
+BeginBlockStatement
+    v65 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v65
+    v66 <- EndObjectLiteral
+    v67 <- CreateNamedVariable 'Object', 'none'
+    v68 <- CallMethod v67, 'seal', [v66]
+    v69 <- CreateNamedVariable 'sealed', 'const', v68
+    v70 <- LoadUndefined
+    v71 <- CreateNamedVariable 'Array', 'none'
+    v72 <- GetProperty v71, 'prototype'
+    v73 <- GetProperty v72, 'shift'
+    v74 <- CallMethod v73, 'call', [v69]
+EndBlockStatement
+BeginBlockStatement
+    v75 <- LoadUndefined
+    v76 <- CreateNamedVariable 'x', 'let', v75
+    v77 <- LoadInteger '42'
+    v78 <- LoadString 'foo'
+    v79 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v77
+        ObjectLiteralAddComputedProperty v79, v78
+    v80 <- EndObjectLiteral
+    v81 <- CreateNamedVariable 'obj', 'let', v80
+    v82 <- LoadInteger '0'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `get` -> v83
+            Return v76
+        EndObjectLiteralMethod
+        BeginObjectLiteralMethod `set` -> v84, v85
+            Reassign v76, v85
+        EndObjectLiteralMethod
+    v86 <- EndObjectLiteral
+    v87 <- CreateNamedVariable 'Object', 'none'
+    v88 <- CallMethod v87, 'defineProperty', [v81, v82, v86]
+    v89 <- CallMethod v87, 'seal', [v81]
+    v90 <- CreateNamedVariable 'sealed', 'const', v89
+    v91 <- BeginArrowFunction -> 
+        v92 <- CreateNamedVariable 'Array', 'none'
+        v93 <- GetProperty v92, 'prototype'
+        v94 <- GetProperty v93, 'shift'
+        v95 <- CallMethod v94, 'call', [v90]
+        Return v95
+    EndArrowFunction
+    v96 <- CallFunction v91, []
+    v97 <- CreateNamedVariable 'TypeError', 'none'
+    v98 <- LoadString 'foo'
+    v99 <- GetElement v90, '0'
+EndBlockStatement
+BeginBlockStatement
+    v100 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v100
+    v101 <- EndObjectLiteral
+    v102 <- CreateNamedVariable 'Object', 'none'
+    v103 <- CallMethod v102, 'freeze', [v101]
+    v104 <- CreateNamedVariable 'frozen', 'const', v103
+    v105 <- BeginArrowFunction -> 
+        v106 <- CreateNamedVariable 'Array', 'none'
+        v107 <- GetProperty v106, 'prototype'
+        v108 <- GetProperty v107, 'shift'
+        v109 <- CallMethod v108, 'call', [v104]
+        Return v109
+    EndArrowFunction
+    v110 <- CallFunction v105, []
+    v111 <- CreateNamedVariable 'TypeError', 'none'
+EndBlockStatement
+BeginBlockStatement
+    v112 <- LoadBoolean 'false'
+    v113 <- CallFunction v0, [v112]
+    v114 <- CreateNamedVariable 'sealed', 'const', v113
+    v115 <- LoadUndefined
+    v116 <- CreateArray [v115]
+    v117 <- LoadInteger '5'
+    v118 <- LoadInteger '1'
+    v119 <- LoadString 'foo'
+    v120 <- CreateNamedVariable 'Array', 'none'
+    v121 <- GetProperty v120, 'prototype'
+    v122 <- GetProperty v121, 'splice'
+    v123 <- CallMethod v122, 'call', [v114, v117, v118, v119]
+    v124 <- LoadString 'foo'
+    v125 <- GetElement v114, '5'
+    v126 <- BeginArrowFunction -> 
+        v127 <- LoadInteger '5'
+        v128 <- LoadInteger '0'
+        v129 <- LoadString 'bar'
+        v130 <- GetProperty v120, 'prototype'
+        v131 <- GetProperty v130, 'splice'
+        v132 <- CallMethod v131, 'call', [v114, v127, v128, v129]
+        Return v132
+    EndArrowFunction
+    v133 <- CallFunction v126, []
+    v134 <- CreateNamedVariable 'TypeError', 'none'
+    v135 <- LoadString 'foo'
+    v136 <- GetElement v114, '5'
+EndBlockStatement
+BeginBlockStatement
+    v137 <- LoadBoolean 'true'
+    v138 <- CallFunction v0, [v137]
+    v139 <- CreateNamedVariable 'frozen', 'const', v138
+    v140 <- BeginArrowFunction -> 
+        v141 <- LoadInteger '5'
+        v142 <- LoadInteger '1'
+        v143 <- LoadString 'foo'
+        v144 <- CreateNamedVariable 'Array', 'none'
+        v145 <- GetProperty v144, 'prototype'
+        v146 <- GetProperty v145, 'splice'
+        v147 <- CallMethod v146, 'call', [v139, v141, v142, v143]
+        Return v147
+    EndArrowFunction
+    v148 <- CallFunction v140, []
+    v149 <- CreateNamedVariable 'TypeError', 'none'
+    v150 <- LoadString 'foo'
+    v151 <- GetElement v139, '5'
+    v152 <- BeginArrowFunction -> 
+        v153 <- LoadInteger '5'
+        v154 <- LoadInteger '0'
+        v155 <- LoadString 'bar'
+        v156 <- CreateNamedVariable 'Array', 'none'
+        v157 <- GetProperty v156, 'prototype'
+        v158 <- GetProperty v157, 'splice'
+        v159 <- CallMethod v158, 'call', [v139, v153, v154, v155]
+        Return v159
+    EndArrowFunction
+    v160 <- CallFunction v152, []
+    v161 <- LoadString 'foo'
+    v162 <- GetElement v139, '5'
+EndBlockStatement
+
+
+function arraylike(a1) {
+    let x;
+    const obj = { length: 42 };
+    const v11 = {
+        get() {
+            return x;
+        },
+        set(a10) {
+            x = a10;
+        },
+    };
+    Object.defineProperty(obj, 5, v11);
+    return a1 ? Object.freeze(obj) : Object.seal(obj);
+}
+{
+    const sealed = arraylike(false);
+    Array.prototype.fill.call(sealed, "foo", 5, 6);
+    sealed[5];
+    const v29 = () => {
+        return Array.prototype.fill.call(sealed, "foo");
+    };
+    v29();
+}
+{
+    const frozen = arraylike(true);
+    Array.prototype.fill.call(frozen, "foo", 5, 6);
+    frozen[5];
+    const v48 = () => {
+        return Array.prototype.fill.call(frozen, "foo");
+    };
+    v48();
+}
+{
+    const sealed = Object.seal({ length: 0 });
+    Array.prototype.shift.call(sealed);
+}
+{
+    const sealed = Object.seal({ length: 42 });
+    Array.prototype.shift.call(sealed);
+}
+{
+    let x;
+    let obj = { length: 42, [1]: "foo" };
+    const v86 = {
+        get() {
+            return x;
+        },
+        set(a85) {
+            x = a85;
+        },
+    };
+    Object.defineProperty(obj, 0, v86);
+    const sealed = Object.seal(obj);
+    const v91 = () => {
+        return Array.prototype.shift.call(sealed);
+    };
+    v91();
+    sealed[0];
+}
+{
+    const frozen = Object.freeze({ length: 0 });
+    const v105 = () => {
+        return Array.prototype.shift.call(frozen);
+    };
+    v105();
+}
+{
+    const sealed = arraylike(false);
+    [,];
+    Array.prototype.splice.call(sealed, 5, 1, "foo");
+    sealed[5];
+    const v126 = () => {
+        return Array.prototype.splice.call(sealed, 5, 0, "bar");
+    };
+    v126();
+    sealed[5];
+}
+{
+    const frozen = arraylike(true);
+    const v140 = () => {
+        return Array.prototype.splice.call(frozen, 5, 1, "foo");
+    };
+    v140();
+    frozen[5];
+    const v152 = () => {
+        return Array.prototype.splice.call(frozen, 5, 0, "bar");
+    };
+    v152();
+    frozen[5];
+}
+
+FuzzIL program written to corpus/regress-7677.fzil

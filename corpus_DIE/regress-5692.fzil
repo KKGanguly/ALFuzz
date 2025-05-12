@@ -1,0 +1,18 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'wasTouched', 'var', v0
+BeginDoWhileLoopBody
+    Break
+    v2 <- LoadBoolean 'true'
+    Reassign v1, v2
+BeginDoWhileLoopHeader
+    v3 <- LoadBoolean 'false'
+EndDoWhileLoop v3
+
+
+var wasTouched = false;
+do {
+    break;
+    wasTouched = true;
+} while (false)
+
+FuzzIL program written to corpus/regress-5692.fzil

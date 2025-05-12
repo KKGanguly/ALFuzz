@@ -1,0 +1,128 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- Construct v1, [v2, v3]
+    Return v4
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadInteger '0'
+    v8 <- LoadInteger '0'
+    v9 <- CallFunction v0, [v6, v7, v8]
+    v10 <- LoadInteger '0'
+    v11 <- LoadInteger '0'
+    v12 <- CallFunction v0, [v6, v10, v11]
+    v13 <- LoadInteger '1'
+    v14 <- LoadInteger '2'
+    v15 <- CallFunction v0, [v6, v13, v14]
+    v16 <- CreateNamedVariable 'o', 'var', v15
+    v17 <- LoadInteger '3'
+    SetProperty v16, 'z', v17
+    v18 <- LoadInteger '1'
+    v19 <- GetProperty v16, 'x'
+    v20 <- LoadInteger '2'
+    v21 <- GetProperty v16, 'y'
+    v22 <- LoadInteger '3'
+    v23 <- GetProperty v16, 'z'
+    v24 <- LoadInteger '6'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `z`, v24
+    v25 <- EndObjectLiteral
+    SetProperty v6, 'prototype', v25
+    v26 <- LoadInteger '4'
+    v27 <- LoadInteger '5'
+    v28 <- CallFunction v0, [v6, v26, v27]
+    v29 <- CreateNamedVariable 'o', 'var', v28
+    v30 <- LoadInteger '4'
+    v31 <- GetProperty v29, 'x'
+    v32 <- LoadInteger '5'
+    v33 <- GetProperty v29, 'y'
+    v34 <- LoadInteger '6'
+    v35 <- GetProperty v29, 'z'
+EndPlainFunction
+v36 <- BeginPlainFunction -> v37
+    BeginForLoopInitializer
+        v38 <- LoadInteger '0'
+    BeginForLoopCondition -> v39
+        v40 <- LoadInteger '8'
+        v41 <- Compare v39, '<', v40
+    BeginForLoopAfterthought v41 -> v42
+        v43 <- UnaryOperation v42, '++'
+    BeginForLoopBody -> v44
+        v45 <- LoadInteger '0'
+        v46 <- LoadInteger '0'
+        v47 <- Construct v37, [v45, v46]
+    EndForLoop
+EndPlainFunction
+v48 <- BeginPlainFunction -> v49, v50
+    v51 <- LoadThis
+    SetProperty v51, 'x', v49
+    v52 <- LoadThis
+    SetProperty v52, 'y', v50
+EndPlainFunction
+v53 <- CallFunction v36, [v48]
+v54 <- CallFunction v5, [v48]
+v55 <- BeginPlainFunction -> v56, v57
+    v58 <- LoadInteger '0'
+    v59 <- Compare v56, '<', v58
+    v60 <- LoadInteger '0'
+    v61 <- TernaryOperation v59, v60, v56
+    v62 <- LoadThis
+    SetProperty v62, 'x', v61
+    v63 <- LoadInteger '0'
+    v64 <- Compare v57, '>', v63
+    v65 <- LoadInteger '0'
+    v66 <- TernaryOperation v64, v57, v65
+    v67 <- LoadThis
+    SetProperty v67, 'y', v66
+EndPlainFunction
+v68 <- CallFunction v36, [v55]
+v69 <- CallFunction v5, [v55]
+v70 <- BeginPlainFunction -> v71, v72
+    v73 <- LoadThis
+    SetProperty v73, 'x', v71
+    v74 <- LoadThis
+    SetProperty v74, 'y', v72
+EndPlainFunction
+v75 <- CallFunction v5, [v70]
+
+
+function test_helper(a1, a2, a3) {
+    const v4 = new a1(a2, a3);
+    return v4;
+}
+function test(a6) {
+    test_helper(a6, 0, 0);
+    test_helper(a6, 0, 0);
+    var o = test_helper(a6, 1, 2);
+    o.z = 3;
+    o.x;
+    o.y;
+    o.z;
+    a6.prototype = { z: 6 };
+    var o = test_helper(a6, 4, 5);
+    o.x;
+    o.y;
+    o.z;
+}
+function finalize_slack_tracking(a37) {
+    for (let i39 = 0; i39 < 8; i39++) {
+        new a37(0, 0);
+    }
+}
+function ConstructInObjectPreAllocated(a49, a50) {
+    this.x = a49;
+    this.y = a50;
+}
+finalize_slack_tracking(ConstructInObjectPreAllocated);
+test(ConstructInObjectPreAllocated);
+function ConstructInObjectUnused(a56, a57) {
+    this.x = a56 < 0 ? 0 : a56;
+    this.y = a57 > 0 ? a57 : 0;
+}
+finalize_slack_tracking(ConstructInObjectUnused);
+test(ConstructInObjectUnused);
+function ConstructWhileSlackTracking(a71, a72) {
+    this.x = a71;
+    this.y = a72;
+}
+test(ConstructWhileSlackTracking);
+
+FuzzIL program written to corpus/alloc-object.fzil

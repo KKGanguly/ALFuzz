@@ -1,0 +1,51 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Array', 'none'
+    v3 <- LoadInteger '1'
+    v4 <- Construct v2, [v3]
+    v5 <- CreateNamedVariable 'a', 'var', v4
+    SetElement v5, '0', v1
+    Return v5
+EndPlainFunction
+v6 <- LoadInteger '1'
+v7 <- CreateArray [v6]
+v8 <- LoadInteger '1'
+v9 <- CallFunction v0, [v8]
+v10 <- LoadInteger '1'
+v11 <- CreateArray [v10]
+v12 <- LoadInteger '1'
+v13 <- CallFunction v0, [v12]
+v14 <- LoadInteger '1'
+v15 <- CreateArray [v14]
+v16 <- LoadInteger '1'
+v17 <- CallFunction v0, [v16]
+v18 <- LoadString '0'
+v19 <- BeginPlainFunction -> 
+EndPlainFunction
+v20 <- CreateNamedVariable 'Object', 'none'
+v21 <- GetProperty v20, 'prototype'
+v22 <- CallMethod v21, '__defineSetter__', [v18, v19]
+v23 <- LoadUndefined
+v24 <- CreateArray [v23]
+v25 <- LoadInteger '1'
+v26 <- CallFunction v0, [v25]
+
+
+function foo(a1) {
+    const v4 = new Array(1);
+    var a = v4;
+    a[0] = a1;
+    return a;
+}
+[1];
+foo(1);
+[1];
+foo(1);
+[1];
+foo(1);
+function f19() {
+}
+Object.prototype.__defineSetter__("0", f19);
+[,];
+foo(1);
+
+FuzzIL program written to corpus/regress-5275-2.fzil

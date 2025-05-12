@@ -1,0 +1,149 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadThis
+    SetProperty v3, 'x', v1
+    v4 <- LoadThis
+    SetProperty v4, 'y', v2
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6, v7
+    v8 <- LoadThis
+    SetProperty v8, 'x', v6
+    v9 <- LoadThis
+    SetProperty v9, 'y', v7
+EndPlainFunction
+v10 <- BeginPlainFunction -> v11, v12
+    v13 <- Compare v11, '==', v12
+    BeginIf v13
+        v14 <- GetProperty v11, 'x'
+        Return v14
+    BeginElse
+        v15 <- GetProperty v12, 'x'
+        Return v15
+    EndIf
+EndPlainFunction
+v16 <- BeginPlainFunction -> v17, v18
+    v19 <- Compare v17, '==', v18
+    BeginIf v19
+        v20 <- GetProperty v17, 'x'
+        Return v20
+    BeginElse
+        v21 <- GetProperty v18, 'x'
+        Return v21
+    EndIf
+EndPlainFunction
+v22 <- BeginPlainFunction -> v23, v24
+    v25 <- GetProperty v23, 'y'
+    v26 <- CreateNamedVariable 'f', 'var', v25
+    v27 <- Compare v23, '==', v24
+    BeginIf v27
+        v28 <- GetProperty v23, 'x'
+        Return v28
+    BeginElse
+        v29 <- GetProperty v24, 'x'
+        Return v29
+    EndIf
+EndPlainFunction
+v30 <- BeginPlainFunction -> v31, v32
+    v33 <- GetProperty v32, 'y'
+    v34 <- CreateNamedVariable 'f', 'var', v33
+    v35 <- Compare v31, '==', v32
+    BeginIf v35
+        v36 <- GetProperty v31, 'x'
+        Return v36
+    BeginElse
+        v37 <- GetProperty v32, 'x'
+        Return v37
+    EndIf
+EndPlainFunction
+v38 <- BeginPlainFunction -> v39, v40, v41
+    v42 <- CallFunction v39, [v40, v40]
+    v43 <- CallFunction v39, [v40, v41]
+    v44 <- CallFunction v39, [v41, v40]
+    v45 <- CreateNamedVariable 'c', 'none'
+    v46 <- CallFunction v39, [v41, v45]
+    v47 <- CallFunction v39, [v41, v41]
+    v48 <- CallFunction v39, [v45, v45]
+    v49 <- GetProperty v40, 'x'
+    v50 <- CallFunction v39, [v40, v40]
+    v51 <- GetProperty v41, 'x'
+    v52 <- CallFunction v39, [v41, v41]
+EndPlainFunction
+v53 <- LoadInteger '3'
+v54 <- LoadInteger '5'
+v55 <- Construct v0, [v53, v54]
+v56 <- CreateNamedVariable 'a', 'var', v55
+v57 <- LoadInteger '2'
+v58 <- LoadInteger '6'
+v59 <- Construct v5, [v57, v58]
+v60 <- CreateNamedVariable 'b', 'var', v59
+v61 <- LoadInteger '1'
+v62 <- LoadInteger '7'
+v63 <- Construct v0, [v61, v62]
+v64 <- CreateNamedVariable 'c', 'var', v63
+v65 <- CallFunction v38, [v10, v56, v64]
+v66 <- CallFunction v38, [v16, v56, v60]
+v67 <- CallFunction v38, [v22, v56, v60]
+v68 <- CallFunction v38, [v30, v56, v60]
+
+
+function A(a1, a2) {
+    this.x = a1;
+    this.y = a2;
+}
+function B(a6, a7) {
+    this.x = a6;
+    this.y = a7;
+}
+function F1(a11, a12) {
+    if (a11 == a12) {
+        return a11.x;
+    } else {
+        return a12.x;
+    }
+}
+function F2(a17, a18) {
+    if (a17 == a18) {
+        return a17.x;
+    } else {
+        return a18.x;
+    }
+}
+function F3(a23, a24) {
+    var f = a23.y;
+    if (a23 == a24) {
+        return a23.x;
+    } else {
+        return a24.x;
+    }
+}
+function F4(a31, a32) {
+    var f = a32.y;
+    if (a31 == a32) {
+        return a31.x;
+    } else {
+        return a32.x;
+    }
+}
+function test(a39, a40, a41) {
+    a39(a40, a40);
+    a39(a40, a41);
+    a39(a41, a40);
+    a39(a41, c);
+    a39(a41, a41);
+    a39(c, c);
+    a40.x;
+    a39(a40, a40);
+    a41.x;
+    a39(a41, a41);
+}
+const v55 = new A(3, 5);
+var a = v55;
+const v59 = new B(2, 6);
+var b = v59;
+const v63 = new A(1, 7);
+var c = v63;
+test(F1, a, c);
+test(F2, a, b);
+test(F3, a, b);
+test(F4, a, b);
+
+FuzzIL program written to corpus/compare-objeq-elim.fzil

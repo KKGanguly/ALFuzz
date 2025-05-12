@@ -1,0 +1,269 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `p`, v1
+        ObjectLiteralAddProperty `p`, v2
+    v3 <- EndObjectLiteral
+    v4 <- CreateNamedVariable 'o', 'var', v3
+    v5 <- LoadInteger '2'
+    v6 <- GetProperty v4, 'p'
+EndPlainFunction
+v7 <- CallFunction v0, []
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '1'
+    v10 <- CreateArray [v9]
+    v11 <- LoadInteger '2'
+    v12 <- CreateArray [v11]
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `p`, v10
+        ObjectLiteralAddProperty `p`, v12
+    v13 <- EndObjectLiteral
+    v14 <- CreateNamedVariable 'o', 'var', v13
+    v15 <- LoadInteger '2'
+    v16 <- GetProperty v14, 'p'
+    v17 <- GetElement v16, '0'
+EndPlainFunction
+v18 <- CallFunction v8, []
+v19 <- BeginPlainFunction -> 
+    v20 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v21 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `p`, v20
+        ObjectLiteralAddProperty `p`, v21
+    v22 <- EndObjectLiteral
+    v23 <- CreateNamedVariable 'o', 'var', v22
+    v24 <- LoadInteger '2'
+    v25 <- GetProperty v23, 'p'
+EndPlainFunction
+v26 <- CallFunction v19, []
+v27 <- BeginPlainFunction -> 
+    v28 <- BeginPlainFunction -> 
+        v29 <- LoadInteger '1'
+        Return v29
+    EndPlainFunction
+    v30 <- CallFunction v28, []
+    v31 <- BeginPlainFunction -> 
+        v32 <- LoadInteger '2'
+        Return v32
+    EndPlainFunction
+    v33 <- CallFunction v31, []
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `p`, v30
+        ObjectLiteralAddProperty `p`, v33
+    v34 <- EndObjectLiteral
+    v35 <- CreateNamedVariable 'o', 'var', v34
+    v36 <- LoadInteger '2'
+    v37 <- GetProperty v35, 'p'
+EndPlainFunction
+v38 <- CallFunction v27, []
+v39 <- BeginPlainFunction -> 
+    v40 <- BeginPlainFunction -> 
+        v41 <- LoadInteger '1'
+        Return v41
+    EndPlainFunction
+    v42 <- CallFunction v40, []
+    v43 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `p`, v42
+        ObjectLiteralAddProperty `p`, v43
+    v44 <- EndObjectLiteral
+    v45 <- CreateNamedVariable 'o', 'var', v44
+    v46 <- LoadInteger '2'
+    v47 <- GetProperty v45, 'p'
+EndPlainFunction
+v48 <- CallFunction v39, []
+v49 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `p` -> v50
+            v51 <- LoadInteger '1'
+            Return v51
+        EndObjectLiteralGetter
+        BeginObjectLiteralGetter `p` -> v52
+            v53 <- LoadInteger '2'
+            Return v53
+        EndObjectLiteralGetter
+    v54 <- EndObjectLiteral
+    v55 <- CreateNamedVariable 'o', 'var', v54
+    v56 <- LoadInteger '2'
+    v57 <- GetProperty v55, 'p'
+EndPlainFunction
+v58 <- CallFunction v49, []
+v59 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `p` -> v60
+            v61 <- LoadInteger '1'
+            Return v61
+        EndObjectLiteralGetter
+        BeginObjectLiteralSetter `p` -> v62, v63
+        EndObjectLiteralSetter
+    v64 <- EndObjectLiteral
+    v65 <- CreateNamedVariable 'o', 'var', v64
+    v66 <- LoadInteger '1'
+    v67 <- GetProperty v65, 'p'
+    BeginObjectLiteral
+        BeginObjectLiteralSetter `p` -> v68, v69
+        EndObjectLiteralSetter
+        BeginObjectLiteralGetter `p` -> v70
+            v71 <- LoadInteger '2'
+            Return v71
+        EndObjectLiteralGetter
+    v72 <- EndObjectLiteral
+    Reassign v65, v72
+    v73 <- LoadInteger '2'
+    v74 <- GetProperty v65, 'p'
+EndPlainFunction
+v75 <- CallFunction v59, []
+v76 <- BeginPlainFunction -> 
+    v77 <- LoadInteger '2'
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `p` -> v78
+            v79 <- LoadInteger '1'
+            Return v79
+        EndObjectLiteralGetter
+        ObjectLiteralAddProperty `p`, v77
+    v80 <- EndObjectLiteral
+    v81 <- CreateNamedVariable 'o', 'var', v80
+    v82 <- LoadInteger '2'
+    v83 <- GetProperty v81, 'p'
+    v84 <- LoadInteger '2'
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `p` -> v85
+            v86 <- LoadInteger '1'
+            Return v86
+        EndObjectLiteralGetter
+        ObjectLiteralAddProperty `p`, v84
+        BeginObjectLiteralGetter `p` -> v87
+            v88 <- LoadInteger '3'
+            Return v88
+        EndObjectLiteralGetter
+    v89 <- EndObjectLiteral
+    Reassign v81, v89
+    v90 <- LoadInteger '3'
+    v91 <- GetProperty v81, 'p'
+    v92 <- LoadInteger '2'
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `p` -> v93
+            v94 <- LoadInteger '1'
+            Return v94
+        EndObjectLiteralGetter
+        ObjectLiteralAddProperty `p`, v92
+        BeginObjectLiteralSetter `p` -> v95, v96
+        EndObjectLiteralSetter
+    v97 <- EndObjectLiteral
+    Reassign v81, v97
+    v98 <- LoadUndefined
+    v99 <- GetProperty v81, 'p'
+EndPlainFunction
+v100 <- CallFunction v76, []
+
+
+function TestConstants() {
+    var o = { p: 1, p: 2 };
+    o.p;
+}
+TestConstants();
+function TestMaterialized() {
+    const v10 = [1];
+    const v12 = [2];
+    var o = { p: v10, p: v12 };
+    o.p[0];
+}
+TestMaterialized();
+function TestMaterialize2() {
+    function f20() {
+    }
+    var o = { p: f20, p: 2 };
+    o.p;
+}
+TestMaterialize2();
+function TestComputed() {
+    function f28() {
+        return 1;
+    }
+    const v30 = f28();
+    function f31() {
+        return 2;
+    }
+    const v33 = f31();
+    var o = { p: v30, p: v33 };
+    o.p;
+}
+TestComputed();
+function TestComputed2() {
+    function f40() {
+        return 1;
+    }
+    const v42 = f40();
+    var o = { p: v42, p: 2 };
+    o.p;
+}
+TestComputed2();
+function TestGetter() {
+    const v54 = {
+        get p() {
+            return 1;
+        },
+        get p() {
+            return 2;
+        },
+    };
+    var o = v54;
+    o.p;
+}
+TestGetter();
+function TestGetterSetter() {
+    const v64 = {
+        get p() {
+            return 1;
+        },
+        set p(a63) {
+        },
+    };
+    var o = v64;
+    o.p;
+    const v72 = {
+        set p(a69) {
+        },
+        get p() {
+            return 2;
+        },
+    };
+    (o = v72).p;
+}
+TestGetterSetter();
+function TestCombined() {
+    const v80 = {
+        get p() {
+            return 1;
+        },
+        p: 2,
+    };
+    var o = v80;
+    o.p;
+    const v89 = {
+        get p() {
+            return 1;
+        },
+        p: 2,
+        get p() {
+            return 3;
+        },
+    };
+    o = v89;
+    o.p;
+    const v97 = {
+        get p() {
+            return 1;
+        },
+        p: 2,
+        set p(a96) {
+        },
+    };
+    o = v97;
+    o.p;
+}
+TestCombined();
+
+FuzzIL program written to corpus/object-literal-multiple-fields.fzil

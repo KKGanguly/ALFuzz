@@ -1,0 +1,40 @@
+v0 <- CreateNamedVariable 'Int8Array', 'none'
+v1 <- LoadInteger '1'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'typedArray', 'var', v2
+v4 <- LoadUndefined
+v5 <- CreateNamedVariable 'saved', 'var', v4
+v6 <- LoadUndefined
+v7 <- CreateNamedVariable 'called', 'var', v6
+v8 <- BeginClassDefinition v0
+    BeginClassConstructor -> v9, v10
+        CallSuperConstructor [v10]
+        v11 <- LoadBoolean 'true'
+        Reassign v7, v11
+        Reassign v5, v10
+    EndClassConstructor
+EndClassDefinition
+SetProperty v3, 'constructor', v8
+v12 <- BeginPlainFunction -> 
+EndPlainFunction
+v13 <- CallMethod v3, 'map', [v12]
+v14 <- LoadInteger '1'
+
+
+const v2 = new Int8Array(1);
+var typedArray = v2;
+var saved;
+var called;
+class C8 extends Int8Array {
+    constructor(a10) {
+        super(a10);
+        called = true;
+        saved = a10;
+    }
+}
+typedArray.constructor = C8;
+function f12() {
+}
+typedArray.map(f12);
+
+FuzzIL program written to corpus/regress-544991.fzil

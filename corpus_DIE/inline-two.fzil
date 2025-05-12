@@ -1,0 +1,231 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallMethod v1, 'g', []
+    v3 <- CallMethod v1, 'g', []
+    v4 <- CreateNamedVariable 'x', 'var', v3
+    v5 <- LoadInteger '42'
+    v6 <- LoadInteger '42'
+    v7 <- CallMethod v1, 'g', []
+    v8 <- CallMethod v1, 'g', []
+    v9 <- UnaryOperation '!', v8
+    BeginIf v9
+        v10 <- LoadBoolean 'false'
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable 'o2', 'var', v11
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadInteger '42'
+    Return v14
+EndPlainFunction
+SetProperty v12, 'size', v13
+v15 <- BeginPlainFunction -> 
+    v16 <- LoadThis
+    v17 <- CallMethod v16, 'size', []
+    Return v17
+EndPlainFunction
+SetProperty v12, 'g', v15
+BeginForLoopInitializer
+    v18 <- LoadInteger '0'
+BeginForLoopCondition -> v19
+    v20 <- LoadInteger '5'
+    v21 <- Compare v19, '<', v20
+BeginForLoopAfterthought v21 -> v22
+    v23 <- UnaryOperation v22, '++'
+BeginForLoopBody -> v24
+    v25 <- CallFunction v0, [v12]
+EndForLoop
+v26 <- CallFunction v0, [v12]
+v27 <- GetProperty v12, 'g'
+v28 <- GetProperty v12, 'size'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `g`, v27
+    ObjectLiteralAddProperty `size`, v28
+v29 <- EndObjectLiteral
+v30 <- CallFunction v0, [v29]
+v31 <- BeginPlainFunction -> v32
+    v33 <- CallMethod v32, 'h', []
+    v34 <- CallMethod v32, 'h', []
+    v35 <- CreateNamedVariable 'x', 'var', v34
+    v36 <- LoadInteger '42'
+    v37 <- LoadInteger '42'
+    v38 <- CallMethod v32, 'h', []
+    v39 <- CallMethod v32, 'h', []
+    v40 <- UnaryOperation '!', v39
+    BeginIf v40
+        v41 <- LoadBoolean 'false'
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+v42 <- EndObjectLiteral
+v43 <- CreateNamedVariable 'obj', 'var', v42
+v44 <- BeginPlainFunction -> 
+    v45 <- LoadInteger '42'
+    Return v45
+EndPlainFunction
+SetProperty v43, 'foo', v44
+BeginObjectLiteral
+v46 <- EndObjectLiteral
+v47 <- CreateNamedVariable 'o3', 'var', v46
+SetProperty v47, 'v', v43
+v48 <- BeginPlainFunction -> 
+    v49 <- LoadThis
+    v50 <- GetProperty v49, 'v'
+    v51 <- CallMethod v50, 'foo', []
+    Return v51
+EndPlainFunction
+SetProperty v47, 'h', v48
+BeginForLoopInitializer
+    v52 <- LoadInteger '0'
+BeginForLoopCondition -> v53
+    v54 <- LoadInteger '5'
+    v55 <- Compare v53, '<', v54
+BeginForLoopAfterthought v55 -> v56
+    v57 <- UnaryOperation v56, '++'
+BeginForLoopBody -> v58
+    v59 <- CallFunction v31, [v47]
+EndForLoop
+v60 <- CallFunction v31, [v47]
+v61 <- GetProperty v47, 'h'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `h`, v61
+    ObjectLiteralAddProperty `v`, v43
+v62 <- EndObjectLiteral
+v63 <- CallFunction v31, [v62]
+v64 <- BeginPlainFunction -> v65
+    v66 <- CallMethod v65, 'h', []
+    v67 <- CallMethod v65, 'h', []
+    v68 <- CreateNamedVariable 'x', 'var', v67
+    v69 <- LoadInteger '42'
+    v70 <- LoadInteger '42'
+    v71 <- CallMethod v65, 'h', []
+    v72 <- CallMethod v65, 'h', []
+    v73 <- UnaryOperation '!', v72
+    BeginIf v73
+        v74 <- LoadBoolean 'false'
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+v75 <- EndObjectLiteral
+v76 <- CreateNamedVariable 'obj', 'var', v75
+v77 <- BeginPlainFunction -> 
+    v78 <- LoadInteger '42'
+    Return v78
+EndPlainFunction
+SetProperty v76, 'g', v77
+BeginObjectLiteral
+v79 <- EndObjectLiteral
+v80 <- CreateNamedVariable 'o3', 'var', v79
+SetProperty v80, 'v', v76
+v81 <- BeginPlainFunction -> 
+    v82 <- LoadThis
+    v83 <- GetProperty v82, 'v'
+    Return v83
+EndPlainFunction
+SetProperty v80, 'f', v81
+v84 <- BeginPlainFunction -> 
+    v85 <- LoadThis
+    v86 <- CallMethod v85, 'f', []
+    v87 <- CallMethod v86, 'g', []
+    Return v87
+EndPlainFunction
+SetProperty v80, 'h', v84
+BeginForLoopInitializer
+    v88 <- LoadInteger '0'
+BeginForLoopCondition -> v89
+    v90 <- LoadInteger '5'
+    v91 <- Compare v89, '<', v90
+BeginForLoopAfterthought v91 -> v92
+    v93 <- UnaryOperation v92, '++'
+BeginForLoopBody -> v94
+    v95 <- CallFunction v64, [v80]
+EndForLoop
+v96 <- CallFunction v64, [v80]
+v97 <- GetProperty v80, 'h'
+v98 <- GetProperty v80, 'f'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `h`, v97
+    ObjectLiteralAddProperty `f`, v98
+    ObjectLiteralAddProperty `v`, v76
+v99 <- EndObjectLiteral
+v100 <- CallFunction v64, [v99]
+
+
+function TestInlineX(a1) {
+    a1.g();
+    var x = a1.g();
+    a1.g();
+    if (!a1.g()) {
+    }
+}
+var o2 = {};
+function f13() {
+    return 42;
+}
+o2.size = f13;
+function f15() {
+    return this.size();
+}
+o2.g = f15;
+for (let i19 = 0; i19 < 5; i19++) {
+    TestInlineX(o2);
+}
+TestInlineX(o2);
+const v27 = o2.g;
+const v28 = o2.size;
+TestInlineX({ g: v27, size: v28 });
+function TestInlineX2(a32) {
+    a32.h();
+    var x = a32.h();
+    a32.h();
+    if (!a32.h()) {
+    }
+}
+var obj = {};
+function f44() {
+    return 42;
+}
+obj.foo = f44;
+var o3 = {};
+o3.v = obj;
+function f48() {
+    return this.v.foo();
+}
+o3.h = f48;
+for (let i53 = 0; i53 < 5; i53++) {
+    TestInlineX2(o3);
+}
+TestInlineX2(o3);
+const v61 = o3.h;
+TestInlineX2({ h: v61, v: obj });
+function TestInlineFG(a65) {
+    a65.h();
+    var x = a65.h();
+    a65.h();
+    if (!a65.h()) {
+    }
+}
+var obj = {};
+function f77() {
+    return 42;
+}
+obj.g = f77;
+var o3 = {};
+o3.v = obj;
+function f81() {
+    return this.v;
+}
+o3.f = f81;
+function f84() {
+    return this.f().g();
+}
+o3.h = f84;
+for (let i89 = 0; i89 < 5; i89++) {
+    TestInlineFG(o3);
+}
+TestInlineFG(o3);
+const v97 = o3.h;
+const v98 = o3.f;
+TestInlineFG({ h: v97, f: v98, v: obj });
+
+FuzzIL program written to corpus/inline-two.fzil

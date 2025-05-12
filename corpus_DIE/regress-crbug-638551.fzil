@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v2 <- CallFunction v1, []
+EndPlainFunction
+v3 <- CallFunction v0, []
+v4 <- CreateNamedVariable 'gc', 'none'
+v5 <- CallFunction v4, []
+v6 <- CallFunction v4, []
+v7 <- CallFunction v4, []
+v8 <- CallFunction v4, []
+v9 <- CallFunction v0, []
+
+
+function f() {
+    function g() {
+    }
+    g();
+}
+f();
+gc();
+gc();
+gc();
+gc();
+f();
+
+FuzzIL program written to corpus/regress-crbug-638551.fzil

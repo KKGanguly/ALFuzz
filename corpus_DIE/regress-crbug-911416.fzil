@@ -1,0 +1,16 @@
+v0 <- LoadInteger '7'
+v1 <- LoadInteger '7'
+v2 <- CreateNamedVariable 'Symbol', 'none'
+v3 <- GetProperty v2, 'hasInstance'
+v4 <- GetProperty v3, 'description'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v4, v1
+v5 <- EndObjectLiteral
+v6 <- LoadString 'Symbol.hasInstance'
+v7 <- GetComputedProperty v5, v6
+
+
+const v4 = Symbol.hasInstance.description;
+({ [v4]: 7 })["Symbol.hasInstance"];
+
+FuzzIL program written to corpus/regress-crbug-911416.fzil

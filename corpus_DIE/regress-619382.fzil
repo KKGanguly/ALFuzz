@@ -1,0 +1,122 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CallFunction v0, []
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadInteger '5'
+    v5 <- CreateNamedVariable '__v_22', 'var', v4
+    v6 <- CreateArray []
+    v7 <- CreateNamedVariable '__v_25', 'var', v6
+    v8 <- CreateNamedVariable 'gc', 'none'
+    v9 <- CallFunction v8, []
+    v10 <- CallFunction v8, []
+    v11 <- CallFunction v8, []
+    BeginForLoopInitializer
+        v12 <- LoadInteger '0'
+    BeginForLoopCondition -> v13
+        v14 <- Compare v13, '<', v5
+    BeginForLoopAfterthought v14 -> v15
+        v16 <- UnaryOperation v15, '++'
+    BeginForLoopBody -> v17
+        v18 <- GetProperty v3, 'ctor'
+        v19 <- CallMethod v18, 'apply', []
+        SetComputedProperty v7, v17, v19
+    EndForLoop
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v21
+    v22 <- EndObjectLiteral
+    Return v22
+EndPlainFunction
+v23 <- BeginPlainFunction -> 
+    v24 <- LoadFloat '1.5'
+    v25 <- CreateNamedVariable '__v_18', 'none'
+    v26 <- BinaryOperation v24, '+', v25
+    v27 <- CreateArray [v26]
+    Return v27
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v20
+    ObjectLiteralAddProperty `args`, v23
+v28 <- EndObjectLiteral
+v29 <- BeginPlainFunction -> v30
+    v31 <- CreateArray []
+    v32 <- CreateNamedVariable '__v_21', 'var', v31
+    SetElement v32, '1', v30
+    SetElement v32, '200000', v30
+    Return v32
+EndPlainFunction
+v33 <- BeginPlainFunction -> 
+    v34 <- LoadFloat '1.5'
+    v35 <- CreateNamedVariable '__v_18', 'none'
+    v36 <- BinaryOperation v34, '+', v35
+    v37 <- CreateArray [v36]
+    Return v37
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v29
+    ObjectLiteralAddProperty `args`, v33
+v38 <- EndObjectLiteral
+v39 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v39
+v40 <- EndObjectLiteral
+v41 <- CreateArray [v28, v38, v40]
+v42 <- CreateNamedVariable '__v_28', 'var', v41
+BeginObjectLiteral
+v43 <- EndObjectLiteral
+v44 <- CreateArray [v43]
+v45 <- CreateNamedVariable '__v_26', 'var', v44
+v46 <- BeginPlainFunction -> v47
+    v48 <- BeginPlainFunction -> v49
+        v50 <- CallFunction v2, [v49]
+    EndPlainFunction
+    v51 <- CallMethod v42, 'forEach', [v48]
+EndPlainFunction
+v52 <- CallMethod v45, 'forEach', [v46]
+
+
+function __f_9() {
+}
+__f_9();
+function __f_16(a3) {
+    var __v_22 = 5;
+    var __v_25 = [];
+    gc();
+    gc();
+    gc();
+    for (let i13 = 0; i13 < __v_22; i13++) {
+        __v_25[i13] = a3.ctor.apply();
+    }
+}
+function f20(a21) {
+    return { a: a21 };
+}
+function f23() {
+    return [1.5 + __v_18];
+}
+const v28 = { ctor: f20, args: f23 };
+function f29(a30) {
+    var __v_21 = [];
+    __v_21[1] = a30;
+    __v_21[200000] = a30;
+    return __v_21;
+}
+function f33() {
+    return [1.5 + __v_18];
+}
+const v38 = { ctor: f29, args: f33 };
+function f39() {
+}
+var __v_28 = [v28,v38,{ ctor: f39 }];
+var __v_26 = [{}];
+function f46(a47) {
+    function f48(a49) {
+        __f_16(a49);
+    }
+    __v_28.forEach(f48);
+}
+__v_26.forEach(f46);
+
+FuzzIL program written to corpus/regress-619382.fzil

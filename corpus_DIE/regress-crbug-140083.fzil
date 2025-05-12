@@ -1,0 +1,41 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString 'foo'
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '123'
+    Return v4
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+v5 <- EndObjectLiteral
+v6 <- CallMethod v0, 'defineProperty', [v1, v2, v5]
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadInteger '42'
+    UpdateProperty v8, '+', v9
+    v10 <- GetProperty v8, 'foo'
+    v11 <- UnaryOperation v10, '++'
+EndPlainFunction
+BeginObjectLiteral
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'baz', 'var', v12
+v14 <- CallFunction v7, [v13]
+v15 <- CallFunction v7, [v13]
+v16 <- CallFunction v7, [v13]
+
+
+const v1 = Object.prototype;
+function f3() {
+    return 123;
+}
+Object.defineProperty(v1, "foo", { get: f3 });
+function bar(a8) {
+    a8.foo += 42;
+    let v10 = a8.foo;
+    v10++;
+}
+var baz = {};
+bar(baz);
+bar(baz);
+bar(baz);
+
+FuzzIL program written to corpus/regress-crbug-140083.fzil

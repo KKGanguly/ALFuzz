@@ -1,0 +1,46 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetProperty v2, 'push', v0
+v3 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v3
+v4 <- EndObjectLiteral
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '42'
+    Return v6
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+v7 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v4
+    ObjectLiteralAddProperty `bar`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'desc', 'var', v8
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'obj', 'var', v10
+v12 <- CreateNamedVariable 'Object', 'none'
+v13 <- CallMethod v12, 'defineProperties', [v11, v9]
+v14 <- CreateNamedVariable 'x', 'var', v13
+v15 <- GetProperty v14, 'foo'
+v16 <- LoadInteger '10'
+v17 <- GetProperty v14, 'bar'
+v18 <- LoadInteger '42'
+
+
+const t0 = Array.prototype;
+t0.push = 1;
+const v4 = { value: 10 };
+function f5() {
+    return 42;
+}
+const v7 = { get: f5 };
+var desc = { foo: v4, bar: v7 };
+var obj = {};
+var x = Object.defineProperties(obj, desc);
+x.foo;
+x.bar;
+
+FuzzIL program written to corpus/regress-1625.fzil

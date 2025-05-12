@@ -1,0 +1,28 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'got_here', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '1'
+    Reassign v1, v3
+EndPlainFunction
+v4 <- CreateNamedVariable 'RegExp', 'none'
+v5 <- GetProperty v4, 'prototype'
+SetProperty v5, 'exec', v2
+v6 <- LoadRegExp 'foo' ''
+v7 <- CreateNamedVariable 're', 'var', v6
+SetProperty v7, 'exec', v2
+v8 <- LoadString 'foo'
+v9 <- CallFunction v7, [v8]
+v10 <- LoadInteger '0'
+
+
+var got_here = 0;
+function make_sure_we_dont_get_here() {
+    got_here = 1;
+}
+const t4 = RegExp.prototype;
+t4.exec = make_sure_we_dont_get_here;
+var re = /foo/;
+re.exec = make_sure_we_dont_get_here;
+re("foo");
+
+FuzzIL program written to corpus/bug-617.fzil

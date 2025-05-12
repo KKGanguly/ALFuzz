@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> v1
+    BeginIf v1
+        v2 <- LoadString 'X'
+        v3 <- LoadBoolean 'true'
+        v4 <- BinaryOperation v2, '+', v3
+        v5 <- LoadString 'Y'
+        v6 <- BinaryOperation v4, '+', v5
+        Return v6
+    BeginElse
+        v7 <- LoadString 'X'
+        v8 <- LoadBoolean 'false'
+        v9 <- BinaryOperation v7, '+', v8
+        v10 <- LoadString 'Y'
+        v11 <- BinaryOperation v9, '+', v10
+        Return v11
+    EndIf
+EndPlainFunction
+BeginForLoopInitializer
+    v12 <- LoadInteger '0'
+BeginForLoopCondition -> v13
+    v14 <- LoadInteger '1000'
+    v15 <- Compare v13, '<', v14
+BeginForLoopAfterthought v15 -> v16
+    v17 <- UnaryOperation v16, '++'
+BeginForLoopBody -> v18
+    v19 <- LoadString 'XtrueY'
+    v20 <- LoadBoolean 'true'
+    v21 <- CallFunction v0, [v20]
+    v22 <- LoadString 'XfalseY'
+    v23 <- LoadBoolean 'false'
+    v24 <- CallFunction v0, [v23]
+EndForLoop
+
+
+function format(a1) {
+    if (a1) {
+        return ("X" + true) + "Y";
+    } else {
+        return ("X" + false) + "Y";
+    }
+}
+for (let i13 = 0; i13 < 1000; i13++) {
+    format(true);
+    format(false);
+}
+
+FuzzIL program written to corpus/bool-concat.fzil

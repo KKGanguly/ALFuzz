@@ -1,0 +1,66 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadFloat '1.5'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v3
+            ObjectLiteralAddProperty `x`, v2
+        v4 <- EndObjectLiteral
+        Return v4
+    EndPlainFunction
+    BeginObjectLiteral
+    v5 <- EndObjectLiteral
+    BeginObjectLiteral
+    v6 <- EndObjectLiteral
+    v7 <- CallFunction v1, [v6]
+    v8 <- GetProperty v7, 'x'
+EndPlainFunction
+v9 <- CallFunction v0, []
+v10 <- BeginPlainFunction -> 
+    v11 <- BeginPlainFunction -> v12
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `y`, v12
+        v13 <- EndObjectLiteral
+        Return v13
+    EndPlainFunction
+    v14 <- BeginPlainFunction -> v15
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `y`, v15
+        v16 <- EndObjectLiteral
+        Return v16
+    EndPlainFunction
+    v17 <- LoadFloat '1.5'
+    v18 <- LoadFloat '1.5'
+    v19 <- CallFunction v11, [v18]
+    v20 <- GetProperty v19, 'y'
+    BeginObjectLiteral
+    v21 <- EndObjectLiteral
+    BeginObjectLiteral
+    v22 <- EndObjectLiteral
+    v23 <- CallFunction v14, [v22]
+    v24 <- GetProperty v23, 'y'
+EndPlainFunction
+v25 <- CallFunction v10, []
+
+
+function f0() {
+    function test1(a2) {
+        return { x: 1.5, x: a2 };
+    }
+    const v5 = {};
+    test1({}).x;
+}
+f0();
+function f10() {
+    function test1(a12) {
+        return { y: a12 };
+    }
+    function test2(a15) {
+        return { y: a15 };
+    }
+    test1(1.5).y;
+    const v21 = {};
+    test2({}).y;
+}
+f10();
+
+FuzzIL program written to corpus/regress-2717.fzil

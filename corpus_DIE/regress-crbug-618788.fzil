@@ -1,0 +1,58 @@
+v0 <- CreateNamedVariable 'Int32Array', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString 'length'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `set` -> v3, v4
+    EndObjectLiteralMethod
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v1, v2, v5]
+v8 <- BeginPlainFunction -> 
+    v9 <- CreateNamedVariable 'Array', 'none'
+    v10 <- Construct v9, []
+    v11 <- CreateNamedVariable 'a', 'var', v10
+    SetProperty v11, 'constructor', v0
+    v12 <- LoadInteger '1000'
+    SetProperty v11, 'length', v12
+    v13 <- CallMethod v11, 'slice', []
+    v14 <- TestInstanceOf v13, v0
+EndPlainFunction
+v15 <- CallFunction v8, []
+v16 <- BeginPlainFunction -> 
+    v17 <- CreateNamedVariable 'Array', 'none'
+    v18 <- Construct v17, []
+    v19 <- CreateNamedVariable 'a', 'var', v18
+    SetProperty v19, 'constructor', v0
+    v20 <- LoadInteger '1000'
+    SetProperty v19, 'length', v20
+    v21 <- LoadInteger '1'
+    v22 <- CallMethod v19, 'splice', [v21]
+    v23 <- TestInstanceOf v22, v0
+EndPlainFunction
+v24 <- CallFunction v16, []
+
+
+const v1 = Int32Array.prototype;
+const v5 = {
+    set(a4) {
+    },
+};
+Object.defineProperty(v1, "length", v5);
+function testSlice() {
+    const v10 = new Array();
+    var a = v10;
+    a.constructor = Int32Array;
+    a.length = 1000;
+    a.slice() instanceof Int32Array;
+}
+testSlice();
+function testSplice() {
+    const v18 = new Array();
+    var a = v18;
+    a.constructor = Int32Array;
+    a.length = 1000;
+    a.splice(1) instanceof Int32Array;
+}
+testSplice();
+
+FuzzIL program written to corpus/regress-crbug-618788.fzil

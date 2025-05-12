@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadBoolean 'true'
+    v3 <- LoadString '7'
+    v4 <- TernaryOperation v1, v2, v3
+    v5 <- LoadInteger '0'
+    v6 <- BinaryOperation v4, '<<', v5
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '1'
+v8 <- LoadInteger '1'
+v9 <- CallFunction v0, [v8]
+v10 <- LoadInteger '1'
+v11 <- LoadInteger '1'
+v12 <- CallFunction v0, [v11]
+v13 <- LoadInteger '7'
+v14 <- LoadInteger '0'
+v15 <- CallFunction v0, [v14]
+
+
+function foo(a1) {
+    return (a1 ? true : "7") << 0;
+}
+foo(1);
+foo(1);
+foo(0);
+
+FuzzIL program written to corpus/regress-v8-5255-2.fzil

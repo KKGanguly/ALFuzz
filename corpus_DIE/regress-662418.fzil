@@ -1,0 +1,40 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'valueof_calls', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'w', 'none'
+    v4 <- UnaryOperation v3, '++'
+    v5 <- CreateNamedVariable 'z', 'var', v4
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v2
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'v', 'var', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- UnaryOperation v1, '++'
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v8
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'w', 'var', v10
+v12 <- LoadString 'B'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v7, v12
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'x', 'var', v13
+v15 <- LoadInteger '1'
+v16 <- Compare v1, '==', v15
+
+
+var valueof_calls = 0;
+function f2() {
+    var z = w++;
+}
+var v = { toString: f2 };
+function f8() {
+    valueof_calls++;
+}
+var w = { valueOf: f8 };
+var x = { [v]: "B" };
+valueof_calls == 1;
+
+FuzzIL program written to corpus/regress-662418.fzil

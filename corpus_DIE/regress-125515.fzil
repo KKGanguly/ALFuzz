@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadFloat '1.5'
+    SetElement v1, '0', v2
+    v3 <- LoadInteger '0'
+    v4 <- LoadInteger '0'
+    SetProperty v1, 'length', v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'Array', 'none'
+v6 <- Construct v5, []
+v7 <- CreateNamedVariable 'a', 'none'
+Reassign v7, v6
+v8 <- CreateNamedVariable 'a', 'none'
+v9 <- CallFunction v0, [v8]
+v10 <- CallFunction v0, [v8]
+v11 <- CreateNamedVariable 'gc', 'none'
+v12 <- CallFunction v11, []
+v13 <- CallFunction v11, []
+v14 <- CallFunction v0, [v8]
+v15 <- CallFunction v0, [v8]
+
+
+function test(a1) {
+    a1[0] = 1.5;
+    a1.length = 0;
+}
+const v6 = new Array();
+a = v6;
+test(a);
+test(a);
+gc();
+gc();
+test(a);
+test(a);
+
+FuzzIL program written to corpus/regress-125515.fzil

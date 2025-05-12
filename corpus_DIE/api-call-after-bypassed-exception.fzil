@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        v1 <- LoadString 'bar'
+        ThrowException v1
+    BeginFinally
+        v2 <- LoadString 'baz'
+        Return v2
+    EndTryCatch
+EndPlainFunction
+v3 <- CallFunction v0, []
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'print', 'none'
+v6 <- CallFunction v5, [v4]
+
+
+function foo() {
+    try {
+        throw "bar";
+    } finally {
+        return "baz";
+    }
+}
+foo();
+print({});
+
+FuzzIL program written to corpus/api-call-after-bypassed-exception.fzil

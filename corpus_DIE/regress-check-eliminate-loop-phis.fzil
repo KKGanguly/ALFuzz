@@ -1,0 +1,52 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v1
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable 'o', 'var', v2
+    v4 <- LoadFloat '2.5'
+    v5 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v4
+        ObjectLiteralAddProperty `x`, v5
+    v6 <- EndObjectLiteral
+    v7 <- CreateNamedVariable 'y', 'var', v6
+    v8 <- LoadUndefined
+    v9 <- CreateNamedVariable 'result', 'var', v8
+    BeginForLoopInitializer
+        v10 <- LoadInteger '0'
+    BeginForLoopCondition -> v11
+        v12 <- LoadInteger '2'
+        v13 <- Compare v11, '<', v12
+    BeginForLoopAfterthought v13 -> v14
+        v15 <- UnaryOperation v14, '++'
+    BeginForLoopBody -> v16
+        v17 <- GetProperty v3, 'x'
+        v18 <- LoadInteger '3'
+        v19 <- BinaryOperation v17, '+', v18
+        Reassign v9, v19
+        Reassign v3, v7
+    EndForLoop
+    Return v9
+EndPlainFunction
+v20 <- CallFunction v0, []
+v21 <- CallFunction v0, []
+v22 <- LoadInteger '3'
+v23 <- CallFunction v0, []
+
+
+function f() {
+    var o = { x: 1 };
+    var y = { y: 2.5, x: 0 };
+    var result;
+    for (let i11 = 0; i11 < 2; i11++) {
+        result = o.x + 3;
+        o = y;
+    }
+    return result;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-check-eliminate-loop-phis.fzil

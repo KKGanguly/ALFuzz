@@ -1,0 +1,49 @@
+v0 <- CreateNamedVariable 'Promise', 'none'
+v1 <- CallMethod v0, 'resolve', []
+v2 <- CreateNamedVariable 'resolved', 'var', v1
+v3 <- LoadInteger '0'
+v4 <- CreateNamedVariable 'count', 'var', v3
+v5 <- GetProperty v0, 'prototype'
+v6 <- LoadString 'constructor'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v7
+        v8 <- UnaryOperation v4, '++'
+        Return v0
+    EndObjectLiteralMethod
+v9 <- EndObjectLiteral
+v10 <- CreateNamedVariable 'Object', 'none'
+v11 <- CallMethod v10, 'defineProperty', [v5, v6, v9]
+v12 <- BeginAsyncFunction -> 
+    v13 <- Await v2
+    Return v2
+EndAsyncFunction
+v14 <- BeginAsyncFunction -> 
+    v15 <- LoadInteger '1'
+    ThrowException v15
+EndAsyncFunction
+v16 <- CallFunction v12, []
+v17 <- CallFunction v14, []
+v18 <- LoadInteger '2'
+
+
+var resolved = Promise.resolve();
+var count = 0;
+const v5 = Promise.prototype;
+const v9 = {
+    get() {
+        count++;
+        return Promise;
+    },
+};
+Object.defineProperty(v5, "constructor", v9);
+async function foo() {
+    await resolved;
+    return resolved;
+}
+async function bar() {
+    throw 1;
+}
+foo();
+bar();
+
+FuzzIL program written to corpus/async-await-no-constructor.fzil

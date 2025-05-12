@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        v1 <- CreateArray []
+        v2 <- CallMethod v1, 'foo', []
+    BeginCatch -> v3
+        v4 <- GetProperty v3, 'message'
+        Return v4
+    EndTryCatch
+EndPlainFunction
+v5 <- LoadString '[].foo is not a function'
+v6 <- CallFunction v0, []
+v7 <- LoadString '[].foo is not a function'
+v8 <- CallFunction v0, []
+
+
+function test() {
+    try {
+        ([]).foo();
+    } catch(e3) {
+        return e3.message;
+    }
+}
+test();
+test();
+
+FuzzIL program written to corpus/regress-4266.fzil

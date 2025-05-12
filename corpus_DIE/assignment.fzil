@@ -1,0 +1,541 @@
+v0 <- LoadInteger '2'
+v1 <- CreateNamedVariable 'z', 'none'
+Reassign v1, v0
+v2 <- LoadInteger '4'
+v3 <- CreateNamedVariable 'z', 'none'
+Update v3, '+', v2
+v4 <- CreateNamedVariable 'z', 'none'
+v5 <- LoadInteger '6'
+v6 <- CreateNamedVariable 'Array', 'none'
+v7 <- LoadInteger '10'
+v8 <- Construct v6, [v7]
+v9 <- CreateNamedVariable 'a', 'none'
+Reassign v9, v8
+v10 <- LoadInteger '7'
+v11 <- CreateNamedVariable 'a', 'none'
+UpdateElement v11, '2', '+', v10
+v12 <- LoadInteger '15'
+SetElement v11, '2', v12
+v13 <- LoadInteger '2'
+UpdateElement v11, '2', '+', v13
+v14 <- LoadInteger '17'
+v15 <- GetElement v11, '2'
+v16 <- CreateNamedVariable 'Object', 'none'
+v17 <- Construct v16, []
+v18 <- CreateNamedVariable 'b', 'none'
+Reassign v18, v17
+v19 <- LoadInteger '5'
+v20 <- CreateNamedVariable 'b', 'none'
+SetProperty v20, 'foo', v19
+v21 <- LoadInteger '12'
+UpdateProperty v20, '+', v21
+v22 <- LoadInteger '17'
+v23 <- GetProperty v20, 'foo'
+v24 <- BeginPlainFunction -> 
+    v25 <- LoadInteger '2'
+    v26 <- CreateNamedVariable 'z', 'var', v25
+    v27 <- LoadInteger '4'
+    Update v26, '+', v27
+    v28 <- LoadInteger '6'
+    v29 <- LoadInteger '10'
+    v30 <- Construct v6, [v29]
+    v31 <- CreateNamedVariable 'a', 'var', v30
+    v32 <- LoadInteger '7'
+    UpdateElement v31, '2', '+', v32
+    v33 <- LoadInteger '15'
+    SetElement v31, '2', v33
+    v34 <- LoadInteger '2'
+    UpdateElement v31, '2', '+', v34
+    v35 <- LoadInteger '17'
+    v36 <- GetElement v31, '2'
+    v37 <- Construct v16, []
+    v38 <- CreateNamedVariable 'b', 'var', v37
+    v39 <- LoadInteger '5'
+    SetProperty v38, 'foo', v39
+    v40 <- LoadInteger '12'
+    UpdateProperty v38, '+', v40
+    v41 <- LoadInteger '17'
+    v42 <- GetProperty v38, 'foo'
+EndPlainFunction
+v43 <- CallFunction v24, []
+v44 <- BeginPlainFunction -> 
+    v45 <- LoadInteger '2'
+    Reassign v4, v45
+    v46 <- LoadInteger '4'
+    Update v4, '+', v46
+    v47 <- LoadInteger '6'
+    v48 <- LoadInteger '10'
+    v49 <- Construct v6, [v48]
+    Reassign v11, v49
+    v50 <- LoadInteger '7'
+    UpdateElement v11, '2', '+', v50
+    v51 <- LoadInteger '15'
+    SetElement v11, '2', v51
+    v52 <- LoadInteger '2'
+    UpdateElement v11, '2', '+', v52
+    v53 <- LoadInteger '17'
+    v54 <- GetElement v11, '2'
+    v55 <- Construct v16, []
+    Reassign v20, v55
+    v56 <- LoadInteger '5'
+    SetProperty v20, 'foo', v56
+    v57 <- LoadInteger '12'
+    UpdateProperty v20, '+', v57
+    v58 <- LoadInteger '17'
+    v59 <- GetProperty v20, 'foo'
+EndPlainFunction
+v60 <- CallFunction v44, []
+v61 <- BeginPlainFunction -> 
+    v62 <- LoadInteger '3'
+    v63 <- CreateNamedVariable 'z', 'var', v62
+    v64 <- LoadInteger '4'
+    Update v63, '+', v64
+    v65 <- LoadInteger '7'
+    v66 <- LoadInteger '10'
+    v67 <- Construct v6, [v66]
+    v68 <- CreateNamedVariable 'a', 'var', v67
+    v69 <- LoadInteger '7'
+    UpdateElement v68, '2', '+', v69
+    v70 <- LoadInteger '15'
+    SetElement v68, '2', v70
+    v71 <- LoadInteger '2'
+    UpdateElement v68, '2', '+', v71
+    v72 <- LoadInteger '17'
+    v73 <- GetElement v68, '2'
+    v74 <- Construct v16, []
+    v75 <- CreateNamedVariable 'b', 'var', v74
+    v76 <- LoadInteger '5'
+    SetProperty v75, 'foo', v76
+    v77 <- LoadInteger '12'
+    UpdateProperty v75, '+', v77
+    v78 <- LoadInteger '17'
+    v79 <- GetProperty v75, 'foo'
+EndPlainFunction
+v80 <- CallFunction v61, []
+v81 <- BeginPlainFunction -> 
+    v82 <- LoadInteger '2'
+    Reassign v4, v82
+    v83 <- LoadInteger '5'
+    Update v4, '+', v83
+    v84 <- LoadInteger '7'
+    v85 <- LoadInteger '10'
+    v86 <- Construct v6, [v85]
+    Reassign v11, v86
+    v87 <- LoadInteger '7'
+    UpdateElement v11, '2', '+', v87
+    v88 <- LoadInteger '15'
+    SetElement v11, '2', v88
+    v89 <- LoadInteger '2'
+    UpdateElement v11, '2', '+', v89
+    v90 <- LoadInteger '17'
+    v91 <- GetElement v11, '2'
+    v92 <- Construct v16, []
+    Reassign v20, v92
+    v93 <- LoadInteger '5'
+    SetProperty v20, 'foo', v93
+    v94 <- LoadInteger '12'
+    UpdateProperty v20, '+', v94
+    v95 <- LoadInteger '17'
+    v96 <- GetProperty v20, 'foo'
+EndPlainFunction
+v97 <- CallFunction v81, []
+BeginForLoopInitializer
+    v98 <- LoadInteger '0'
+    v99 <- CreateNamedVariable 'i', 'none'
+    Reassign v99, v98
+BeginForLoopCondition
+    v100 <- CreateNamedVariable 'i', 'none'
+    v101 <- LoadInteger '5'
+    v102 <- Compare v100, '<', v101
+BeginForLoopAfterthought v102
+    v103 <- CreateNamedVariable 'i', 'none'
+    v104 <- UnaryOperation '++', v103
+BeginForLoopBody
+    v105 <- LoadInteger '2'
+    Reassign v4, v105
+    v106 <- LoadInteger '4'
+    Update v4, '+', v106
+    v107 <- LoadInteger '6'
+    v108 <- LoadInteger '10'
+    v109 <- Construct v6, [v108]
+    Reassign v11, v109
+    v110 <- LoadInteger '7'
+    UpdateElement v11, '2', '+', v110
+    v111 <- LoadInteger '15'
+    SetElement v11, '2', v111
+    v112 <- LoadInteger '2'
+    UpdateElement v11, '2', '+', v112
+    v113 <- LoadInteger '17'
+    v114 <- GetElement v11, '2'
+    v115 <- Construct v16, []
+    Reassign v20, v115
+    v116 <- LoadInteger '5'
+    SetProperty v20, 'foo', v116
+    v117 <- LoadInteger '12'
+    UpdateProperty v20, '+', v117
+    v118 <- LoadInteger '17'
+    v119 <- GetProperty v20, 'foo'
+EndForLoop
+v120 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v121 <- LoadInteger '0'
+    BeginForLoopCondition -> v122
+        v123 <- LoadInteger '5'
+        v124 <- Compare v122, '<', v123
+    BeginForLoopAfterthought v124 -> v125
+        v126 <- UnaryOperation '++', v125
+    BeginForLoopBody -> v127
+        v128 <- LoadInteger '2'
+        v129 <- CreateNamedVariable 'z', 'var', v128
+        v130 <- LoadInteger '4'
+        Update v129, '+', v130
+        v131 <- LoadInteger '6'
+        v132 <- LoadInteger '10'
+        v133 <- Construct v6, [v132]
+        v134 <- CreateNamedVariable 'a', 'var', v133
+        v135 <- LoadInteger '7'
+        UpdateElement v134, '2', '+', v135
+        v136 <- LoadInteger '15'
+        SetElement v134, '2', v136
+        v137 <- LoadInteger '2'
+        UpdateElement v134, '2', '+', v137
+        v138 <- LoadInteger '17'
+        v139 <- GetElement v134, '2'
+        v140 <- Construct v16, []
+        v141 <- CreateNamedVariable 'b', 'var', v140
+        v142 <- LoadInteger '5'
+        SetProperty v141, 'foo', v142
+        v143 <- LoadInteger '12'
+        UpdateProperty v141, '+', v143
+        v144 <- LoadInteger '17'
+        v145 <- GetProperty v141, 'foo'
+    EndForLoop
+EndPlainFunction
+v146 <- CallFunction v120, []
+v147 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v148 <- LoadInteger '0'
+        v149 <- CreateNamedVariable 'i', 'none'
+        Reassign v149, v148
+    BeginForLoopCondition
+        v150 <- CreateNamedVariable 'i', 'none'
+        v151 <- LoadInteger '5'
+        v152 <- Compare v150, '<', v151
+    BeginForLoopAfterthought v152
+        v153 <- CreateNamedVariable 'i', 'none'
+        v154 <- UnaryOperation '++', v153
+    BeginForLoopBody
+        v155 <- LoadInteger '2'
+        Reassign v4, v155
+        v156 <- LoadInteger '4'
+        Update v4, '+', v156
+        v157 <- LoadInteger '6'
+        v158 <- LoadInteger '10'
+        v159 <- Construct v6, [v158]
+        Reassign v11, v159
+        v160 <- LoadInteger '7'
+        UpdateElement v11, '2', '+', v160
+        v161 <- LoadInteger '15'
+        SetElement v11, '2', v161
+        v162 <- LoadInteger '2'
+        UpdateElement v11, '2', '+', v162
+        v163 <- LoadInteger '17'
+        v164 <- GetElement v11, '2'
+        v165 <- Construct v16, []
+        Reassign v20, v165
+        v166 <- LoadInteger '5'
+        SetProperty v20, 'foo', v166
+        v167 <- LoadInteger '12'
+        UpdateProperty v20, '+', v167
+        v168 <- LoadInteger '17'
+        v169 <- GetProperty v20, 'foo'
+    EndForLoop
+EndPlainFunction
+v170 <- CallFunction v147, []
+v171 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v172 <- LoadInteger '0'
+        v173 <- CreateNamedVariable 'i', 'none'
+        Reassign v173, v172
+    BeginForLoopCondition
+        v174 <- CreateNamedVariable 'i', 'none'
+        v175 <- LoadInteger '5'
+        v176 <- Compare v174, '<', v175
+    BeginForLoopAfterthought v176
+        v177 <- CreateNamedVariable 'i', 'none'
+        v178 <- UnaryOperation '++', v177
+    BeginForLoopBody
+        v179 <- LoadInteger '3'
+        v180 <- CreateNamedVariable 'z', 'var', v179
+        v181 <- LoadInteger '4'
+        Update v180, '+', v181
+        v182 <- LoadInteger '7'
+        v183 <- LoadInteger '10'
+        v184 <- Construct v6, [v183]
+        v185 <- CreateNamedVariable 'a', 'var', v184
+        v186 <- LoadInteger '7'
+        UpdateElement v185, '2', '+', v186
+        v187 <- LoadInteger '15'
+        SetElement v185, '2', v187
+        v188 <- LoadInteger '2'
+        UpdateElement v185, '2', '+', v188
+        v189 <- LoadInteger '17'
+        v190 <- GetElement v185, '2'
+        v191 <- Construct v16, []
+        v192 <- CreateNamedVariable 'b', 'var', v191
+        v193 <- LoadInteger '5'
+        SetProperty v192, 'foo', v193
+        v194 <- LoadInteger '12'
+        UpdateProperty v192, '+', v194
+        v195 <- LoadInteger '17'
+        v196 <- GetProperty v192, 'foo'
+    EndForLoop
+EndPlainFunction
+v197 <- CallFunction v171, []
+v198 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v199 <- LoadInteger '0'
+        v200 <- CreateNamedVariable 'i', 'none'
+        Reassign v200, v199
+    BeginForLoopCondition
+        v201 <- CreateNamedVariable 'i', 'none'
+        v202 <- LoadInteger '5'
+        v203 <- Compare v201, '<', v202
+    BeginForLoopAfterthought v203
+        v204 <- CreateNamedVariable 'i', 'none'
+        v205 <- UnaryOperation '++', v204
+    BeginForLoopBody
+        v206 <- LoadInteger '2'
+        Reassign v4, v206
+        v207 <- LoadInteger '5'
+        Update v4, '+', v207
+        v208 <- LoadInteger '7'
+        v209 <- LoadInteger '10'
+        v210 <- Construct v6, [v209]
+        Reassign v11, v210
+        v211 <- LoadInteger '7'
+        UpdateElement v11, '2', '+', v211
+        v212 <- LoadInteger '15'
+        SetElement v11, '2', v212
+        v213 <- LoadInteger '2'
+        UpdateElement v11, '2', '+', v213
+        v214 <- LoadInteger '17'
+        v215 <- GetElement v11, '2'
+        v216 <- Construct v16, []
+        Reassign v20, v216
+        v217 <- LoadInteger '5'
+        SetProperty v20, 'foo', v217
+        v218 <- LoadInteger '12'
+        UpdateProperty v20, '+', v218
+        v219 <- LoadInteger '17'
+        v220 <- GetProperty v20, 'foo'
+    EndForLoop
+EndPlainFunction
+v221 <- CallFunction v198, []
+v222 <- BeginPlainFunction -> v223, v224
+    Reassign v223, v224
+    BeginIf v224
+        Return v223
+    EndIf
+EndPlainFunction
+v225 <- LoadInteger '42'
+v226 <- LoadInteger '0'
+v227 <- LoadInteger '42'
+v228 <- CallFunction v222, [v226, v227]
+v229 <- LoadString 'undefined'
+v230 <- LoadInteger '42'
+v231 <- LoadInteger '0'
+v232 <- CallFunction v222, [v230, v231]
+v233 <- TypeOf v232
+v234 <- BeginPlainFunction -> 
+    v235 <- Construct v16, []
+    v236 <- CreateNamedVariable 'i', 'var', v235
+    SetComputedProperty v236, v236, v236
+EndPlainFunction
+v237 <- CallFunction v234, []
+v238 <- CallFunction v234, []
+v239 <- CallFunction v234, []
+
+
+z = 2;
+z += 4;
+const v8 = new Array(10);
+a = v8;
+a[2] += 7;
+a[2] = 15;
+a[2] += 2;
+a[2];
+const v17 = new Object();
+b = v17;
+b.foo = 5;
+b.foo += 12;
+b.foo;
+function f24() {
+    var z = 2;
+    z += 4;
+    const v30 = new Array(10);
+    var a = v30;
+    a[2] += 7;
+    a[2] = 15;
+    a[2] += 2;
+    a[2];
+    const v37 = new Object();
+    var b = v37;
+    b.foo = 5;
+    b.foo += 12;
+    b.foo;
+}
+f24();
+function f44() {
+    z = 2;
+    z += 4;
+    const v49 = new Array(10);
+    a = v49;
+    a[2] += 7;
+    a[2] = 15;
+    a[2] += 2;
+    a[2];
+    const v55 = new Object();
+    b = v55;
+    b.foo = 5;
+    b.foo += 12;
+    b.foo;
+}
+f44();
+function foo() {
+    var z = 3;
+    z += 4;
+    const v67 = new Array(10);
+    var a = v67;
+    a[2] += 7;
+    a[2] = 15;
+    a[2] += 2;
+    a[2];
+    const v74 = new Object();
+    var b = v74;
+    b.foo = 5;
+    b.foo += 12;
+    b.foo;
+}
+foo();
+function bar() {
+    z = 2;
+    z += 5;
+    const v86 = new Array(10);
+    a = v86;
+    a[2] += 7;
+    a[2] = 15;
+    a[2] += 2;
+    a[2];
+    const v92 = new Object();
+    b = v92;
+    b.foo = 5;
+    b.foo += 12;
+    b.foo;
+}
+bar();
+for (i = 0; i < 5; ++i) {
+    z = 2;
+    z += 4;
+    const v109 = new Array(10);
+    a = v109;
+    a[2] += 7;
+    a[2] = 15;
+    a[2] += 2;
+    a[2];
+    const v115 = new Object();
+    b = v115;
+    b.foo = 5;
+    b.foo += 12;
+    b.foo;
+}
+function f120() {
+    for (let i122 = 0; i122 < 5; ++i122) {
+        var z = 2;
+        z += 4;
+        const v133 = new Array(10);
+        var a = v133;
+        a[2] += 7;
+        a[2] = 15;
+        a[2] += 2;
+        a[2];
+        const v140 = new Object();
+        var b = v140;
+        b.foo = 5;
+        b.foo += 12;
+        b.foo;
+    }
+}
+f120();
+function f147() {
+    for (i = 0; i < 5; ++i) {
+        z = 2;
+        z += 4;
+        const v159 = new Array(10);
+        a = v159;
+        a[2] += 7;
+        a[2] = 15;
+        a[2] += 2;
+        a[2];
+        const v165 = new Object();
+        b = v165;
+        b.foo = 5;
+        b.foo += 12;
+        b.foo;
+    }
+}
+f147();
+function foo_loop() {
+    for (i = 0; i < 5; ++i) {
+        var z = 3;
+        z += 4;
+        const v184 = new Array(10);
+        var a = v184;
+        a[2] += 7;
+        a[2] = 15;
+        a[2] += 2;
+        a[2];
+        const v191 = new Object();
+        var b = v191;
+        b.foo = 5;
+        b.foo += 12;
+        b.foo;
+    }
+}
+foo_loop();
+function bar_loop() {
+    for (i = 0; i < 5; ++i) {
+        z = 2;
+        z += 5;
+        const v210 = new Array(10);
+        a = v210;
+        a[2] += 7;
+        a[2] = 15;
+        a[2] += 2;
+        a[2];
+        const v216 = new Object();
+        b = v216;
+        b.foo = 5;
+        b.foo += 12;
+        b.foo;
+    }
+}
+bar_loop();
+function test_assign(a223, a224) {
+    a223 = a224;
+    if (a224) {
+        return a223;
+    }
+}
+test_assign(0, 42);
+typeof test_assign(42, 0);
+function store_i_in_element_i_of_object_i() {
+    const v235 = new Object();
+    var i = v235;
+    i[i] = i;
+}
+store_i_in_element_i_of_object_i();
+store_i_in_element_i_of_object_i();
+store_i_in_element_i_of_object_i();
+
+FuzzIL program written to corpus/assignment.fzil

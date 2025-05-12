@@ -1,0 +1,71 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'sum', 'var', v2
+    BeginForInLoop v1 -> v4
+        v5 <- GetComputedProperty v1, v4
+        v6 <- CreateNamedVariable 'i', 'var', v5
+        v7 <- LoadInteger '2'
+        v8 <- BinaryOperation v6, '+', v7
+        v9 <- CreateNamedVariable 'x', 'var', v8
+        v10 <- LoadInteger '5'
+        v11 <- BinaryOperation v9, '+', v10
+        v12 <- CreateNamedVariable 'y', 'var', v11
+        v13 <- LoadInteger '3'
+        v14 <- BinaryOperation v12, '+', v13
+        v15 <- CreateNamedVariable 'z', 'var', v14
+        Update v3, '+', v15
+    EndForInLoop
+    Return v3
+EndPlainFunction
+v16 <- CreateNamedVariable 'Array', 'none'
+v17 <- LoadInteger '10000'
+v18 <- Construct v16, [v17]
+v19 <- CreateNamedVariable 'a', 'var', v18
+BeginForLoopInitializer
+    v20 <- LoadInteger '0'
+BeginForLoopCondition -> v21
+    v22 <- LoadInteger '10000'
+    v23 <- Compare v21, '<', v22
+BeginForLoopAfterthought v23 -> v24
+    v25 <- UnaryOperation v24, '++'
+BeginForLoopBody -> v26
+    v27 <- LoadInteger '999'
+    v28 <- BinaryOperation v26, '*', v27
+    v29 <- LoadInteger '77'
+    v30 <- BinaryOperation v28, '%', v29
+    SetComputedProperty v19, v26, v30
+EndForLoop
+BeginForLoopInitializer
+    v31 <- LoadInteger '0'
+BeginForLoopCondition -> v32
+    v33 <- LoadInteger '3'
+    v34 <- Compare v32, '<', v33
+BeginForLoopAfterthought v34 -> v35
+    v36 <- UnaryOperation v35, '++'
+BeginForLoopBody -> v37
+    v38 <- LoadInteger '480270'
+    v39 <- CallFunction v0, [v19]
+EndForLoop
+
+
+function f(a1) {
+    var sum = 0;
+    for (const v4 in a1) {
+        var i = a1[v4];
+        var x = i + 2;
+        var y = x + 5;
+        var z = y + 3;
+        sum += z;
+    }
+    return sum;
+}
+const v18 = new Array(10000);
+var a = v18;
+for (let i21 = 0; i21 < 10000; i21++) {
+    a[i21] = (i21 * 999) % 77;
+}
+for (let i32 = 0; i32 < 3; i32++) {
+    f(a);
+}
+
+FuzzIL program written to corpus/osr-forin.fzil

@@ -1,0 +1,61 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v2 <- CallFunction v1, []
+    Return v2
+EndArrowFunction
+v3 <- CreateArray []
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'getPrototypeOf', [v3]
+v6 <- CreateNamedVariable 'Symbol', 'none'
+v7 <- GetProperty v6, 'iterator'
+SetComputedProperty v5, v7, v0
+v8 <- LoadInteger '42'
+v9 <- CreateArray [v8]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v9
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'JSON', 'none'
+v12 <- CallMethod v11, 'stringify', [v10]
+v13 <- LoadInteger '42'
+v14 <- CreateArray [v13]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v14
+v15 <- EndObjectLiteral
+v16 <- CreateArray []
+v17 <- CallMethod v11, 'stringify', [v15, v16]
+v18 <- LoadInteger '42'
+v19 <- CreateArray [v18]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v19
+v20 <- EndObjectLiteral
+v21 <- LoadUndefined
+v22 <- LoadString ' '
+v23 <- CallMethod v11, 'stringify', [v20, v21, v22]
+v24 <- LoadInteger '42'
+v25 <- CreateArray [v24]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v25
+v26 <- EndObjectLiteral
+v27 <- CreateArray []
+v28 <- LoadString ' '
+v29 <- CallMethod v11, 'stringify', [v26, v27, v28]
+
+
+const v0 = () => {
+    function f1() {
+    }
+    return f1();
+};
+const t5 = Object.getPrototypeOf([]);
+t5[Symbol.iterator] = v0;
+const v9 = [42];
+JSON.stringify({ foo: v9 });
+const v14 = [42];
+JSON.stringify({ foo: v14 }, []);
+const v19 = [42];
+JSON.stringify({ foo: v19 }, undefined, " ");
+const v25 = [42];
+JSON.stringify({ foo: v25 }, [], " ");
+
+FuzzIL program written to corpus/regress-4769.fzil

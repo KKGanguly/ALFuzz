@@ -1,0 +1,31 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 's2'
+    v2 <- CreateNamedVariable 's2', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '2'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- LoadInteger '1'
+        v11 <- BinaryOperation v10, '+', v2
+        v12 <- CreateNamedVariable 'res', 'var', v11
+        v13 <- LoadInteger '2'
+        Reassign v2, v13
+    EndForLoop
+EndPlainFunction
+v14 <- CallFunction v0, []
+
+
+function test() {
+    var s2 = "s2";
+    for (let i4 = 0; i4 < 2; i4++) {
+        var res = 1 + s2;
+        s2 = 2;
+    }
+}
+test();
+
+FuzzIL program written to corpus/regress-1919169.fzil

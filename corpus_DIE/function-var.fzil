@@ -1,0 +1,61 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        BeginBlockStatement
+            v2 <- BeginPlainFunction -> 
+                v3 <- LoadInteger '42'
+                Return v3
+            EndPlainFunction
+        EndBlockStatement
+        v4 <- BeginPlainFunction -> 
+            Return v1
+        EndPlainFunction
+        Return v4
+    EndPlainFunction
+    v5 <- CallFunction v1, []
+    v6 <- CreateNamedVariable 'g', 'var', v5
+    v7 <- CallFunction v6, []
+    v8 <- CreateNamedVariable 'inner_f', 'var', v7
+    v9 <- LoadInteger '42'
+    v10 <- CallFunction v8, []
+EndPlainFunction
+v11 <- CallFunction v0, []
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '100'
+    v14 <- CreateNamedVariable 'y', 'var', v13
+    v15 <- BeginPlainFunction -> 
+        Return v14
+    EndPlainFunction
+    v16 <- CreateNamedVariable 'z', 'var', v15
+    v17 <- CallFunction v16, []
+EndPlainFunction
+v18 <- CallFunction v12, []
+
+
+function f0() {
+    function f() {
+        {
+            function f() {
+                return 42;
+            }
+        }
+        function g() {
+            return f;
+        }
+        return g;
+    }
+    var g = f();
+    var inner_f = g();
+    inner_f();
+}
+f0();
+function f12() {
+    var y = 100;
+    function y() {
+        return y;
+    }
+    var z = y;
+    z();
+}
+f12();
+
+FuzzIL program written to corpus/function-var.fzil

@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    v4 <- CreateNamedVariable 'h', 'none'
+    v5 <- CallFunction v0, [v4]
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- LoadInteger '1'
+    v9 <- CallFunction v2, [v7, v8]
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> v11
+    v12 <- LoadInteger '1'
+    v13 <- CallFunction v6, [v11, v12]
+EndPlainFunction
+v14 <- LoadInteger '1'
+v15 <- CallFunction v10, [v14]
+v16 <- LoadInteger '1'
+v17 <- CallFunction v10, [v16]
+v18 <- LoadInteger '1'
+v19 <- CallFunction v10, [v18]
+
+
+function deopt_function(a1) {
+}
+function f(a3) {
+    return deopt_function(h);
+}
+function g(a7) {
+    return f(a7, 1);
+}
+function h(a11) {
+    g(a11, 1);
+}
+h(1);
+h(1);
+h(1);
+
+FuzzIL program written to corpus/regress-crbug-598998.fzil

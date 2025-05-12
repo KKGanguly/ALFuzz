@@ -1,0 +1,72 @@
+BeginTry
+    v0 <- LoadInteger '0'
+    v1 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- GetProperty v2, 'prototype'
+    v4 <- CallMethod v3, '__defineGetter__', [v0, v1]
+    v5 <- LoadString 'x'
+BeginCatch -> v6
+    v7 <- LoadString 'Caught: '
+    v8 <- BinaryOperation v7, '+', v6
+    v9 <- CreateNamedVariable 'print', 'none'
+    v10 <- CallFunction v9, [v8]
+EndTryCatch
+BeginTry
+    v11 <- BeginPlainFunction -> 
+        v12 <- CreateArray []
+        v13 <- CreateNamedVariable 'asyncIds', 'let', v12
+        v14 <- CreateArray []
+        v15 <- CreateNamedVariable 'triggerIds', 'let', v14
+        v16 <- BeginAsyncFunction -> 
+        EndAsyncFunction
+        v17 <- CallFunction v16, []
+    EndPlainFunction
+    v18 <- CallFunction v11, []
+BeginCatch -> v19
+    v20 <- LoadString 'Caught: '
+    v21 <- BinaryOperation v20, '+', v19
+    v22 <- CreateNamedVariable 'print', 'none'
+    v23 <- CallFunction v22, [v21]
+EndTryCatch
+BeginTry
+    v24 <- LoadInteger '7'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `prop`, v24
+    v25 <- EndObjectLiteral
+    v26 <- CreateNamedVariable 'obj', 'var', v25
+    v27 <- LoadString 'nonexistent(obj)'
+BeginCatch -> v28
+    v29 <- LoadString 'Caught: '
+    v30 <- BinaryOperation v29, '+', v28
+    v31 <- CreateNamedVariable 'print', 'none'
+    v32 <- CallFunction v31, [v30]
+EndTryCatch
+
+
+try {
+    function f1() {
+    }
+    Object.prototype.__defineGetter__(0, f1);
+} catch(e6) {
+    print("Caught: " + e6);
+}
+try {
+    function f11() {
+        let asyncIds = [];
+        let triggerIds = [];
+        async function foo() {
+        }
+        foo();
+    }
+    f11();
+} catch(e19) {
+    print("Caught: " + e19);
+}
+try {
+    var obj = { prop: 7 };
+} catch(e28) {
+    print("Caught: " + e28);
+}
+
+FuzzIL program written to corpus/regress-crbug-860788.fzil

@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadInteger '1'
+    v3 <- LoadInteger '2'
+    v4 <- LoadInteger '3'
+    v5 <- LoadInteger '4'
+    v6 <- CreateArray [v1, v2, v3, v4, v5]
+    v7 <- CreateNamedVariable 'result', 'var', v6
+    v8 <- LoadInteger '5'
+    v9 <- LoadInteger '256'
+    v10 <- LoadInteger '1024'
+    v11 <- BinaryOperation v9, '*', v10
+    SetComputedProperty v7, v11, v8
+    Return v7
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13, v14
+    v15 <- GetComputedProperty v13, v14
+    Return v15
+EndPlainFunction
+v16 <- CallFunction v0, []
+v17 <- CreateNamedVariable 'array1', 'var', v16
+v18 <- LoadInteger '1'
+v19 <- CallFunction v12, [v17, v18]
+v20 <- LoadInteger '2'
+v21 <- CallFunction v12, [v17, v20]
+v22 <- LoadInteger '12345'
+v23 <- LoadInteger '2'
+v24 <- CallFunction v12, [v22, v23]
+
+
+function generate_dictionary_array() {
+    var result = [0,1,2,3,4];
+    result[256 * 1024] = 5;
+    return result;
+}
+function get_accessor(a13, a14) {
+    return a13[a14];
+}
+var array1 = generate_dictionary_array();
+get_accessor(array1, 1);
+get_accessor(array1, 2);
+get_accessor(12345, 2);
+
+FuzzIL program written to corpus/keyed-load-dictionary-stub.fzil

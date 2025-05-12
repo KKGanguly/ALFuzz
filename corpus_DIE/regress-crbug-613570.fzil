@@ -1,0 +1,12 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- CreateArray [v0, v1]
+v3 <- LoadNull
+v4 <- LoadString '☃'
+v5 <- CreateNamedVariable 'JSON', 'none'
+v6 <- CallMethod v5, 'stringify', [v2, v3, v4]
+
+
+JSON.stringify([1,2], null, "☃");
+
+FuzzIL program written to corpus/regress-crbug-613570.fzil

@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadNull
+    v2 <- CreateNamedVariable 'custom_valueOf', 'none'
+    v3 <- GetProperty v2, 'caller'
+    v4 <- LoadInteger '2'
+    Return v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'custom_valueOf', 'var', v0
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadNull
+    v8 <- CreateNamedVariable 'custom_toString', 'none'
+    v9 <- GetProperty v8, 'caller'
+    v10 <- LoadString 'I used to be an adventurer like you'
+    Return v10
+EndPlainFunction
+v11 <- CreateNamedVariable 'custom_toString', 'var', v6
+BeginObjectLiteral
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'object', 'var', v12
+SetProperty v13, 'valueOf', v5
+SetProperty v13, 'toString', v11
+v14 <- LoadInteger '2'
+v15 <- CreateNamedVariable 'Number', 'none'
+v16 <- CallFunction v15, [v13]
+v17 <- LoadString 'I'
+v18 <- CreateNamedVariable 'String', 'none'
+v19 <- CallFunction v18, [v13]
+v20 <- GetElement v19, '0'
+
+
+function f0() {
+    custom_valueOf.caller;
+    return 2;
+}
+var custom_valueOf = f0;
+function f6() {
+    custom_toString.caller;
+    return "I used to be an adventurer like you";
+}
+var custom_toString = f6;
+var object = {};
+object.valueOf = custom_valueOf;
+object.toString = custom_toString;
+Number(object);
+String(object)[0];
+
+FuzzIL program written to corpus/regress-105.fzil

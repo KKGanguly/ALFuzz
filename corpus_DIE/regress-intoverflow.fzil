@@ -1,0 +1,149 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '2'
+    Update v1, '*', v3
+    v4 <- LoadInteger '2'
+    Update v2, '*', v4
+    v5 <- LoadInteger '1'
+    v6 <- Compare v1, '<', v5
+    v7 <- LoadInteger '1'
+    v8 <- Compare v2, '<', v7
+    v9 <- BinaryOperation v6, '&&', v8
+    BeginIf v9
+        v10 <- BinaryOperation v1, '*', v2
+        Return v10
+    EndIf
+EndPlainFunction
+BeginForLoopInitializer
+    v11 <- LoadInteger '0'
+BeginForLoopCondition -> v12
+    v13 <- LoadInteger '5'
+    v14 <- Compare v12, '<', v13
+BeginForLoopAfterthought v14 -> v15
+    v16 <- UnaryOperation v15, '++'
+BeginForLoopBody -> v17
+    v18 <- LoadInteger '0'
+    v19 <- LoadInteger '0'
+    v20 <- CallFunction v0, [v18, v19]
+EndForLoop
+v21 <- LoadInteger '4611686018427387904'
+v22 <- LoadInteger '1073741824'
+v23 <- UnaryOperation '-', v22
+v24 <- LoadInteger '1073741824'
+v25 <- UnaryOperation '-', v24
+v26 <- CallFunction v0, [v23, v25]
+v27 <- BeginPlainFunction -> v28, v29
+    v30 <- LoadInteger '2'
+    Update v28, '*', v30
+    v31 <- LoadInteger '2'
+    Update v29, '*', v31
+    v32 <- LoadInteger '1'
+    v33 <- Compare v28, '<', v32
+    v34 <- LoadInteger '1'
+    v35 <- Compare v29, '<', v34
+    v36 <- BinaryOperation v33, '&&', v35
+    BeginIf v36
+        v37 <- BinaryOperation v28, '+', v29
+        Return v37
+    EndIf
+EndPlainFunction
+BeginForLoopInitializer
+    v38 <- LoadInteger '0'
+BeginForLoopCondition -> v39
+    v40 <- LoadInteger '5'
+    v41 <- Compare v39, '<', v40
+BeginForLoopAfterthought v41 -> v42
+    v43 <- UnaryOperation v42, '++'
+BeginForLoopBody -> v44
+    v45 <- LoadInteger '0'
+    v46 <- LoadInteger '0'
+    v47 <- CallFunction v27, [v45, v46]
+EndForLoop
+v48 <- LoadInteger '4294967296'
+v49 <- UnaryOperation '-', v48
+v50 <- LoadInteger '1073741824'
+v51 <- UnaryOperation '-', v50
+v52 <- LoadInteger '1073741824'
+v53 <- UnaryOperation '-', v52
+v54 <- CallFunction v27, [v51, v53]
+v55 <- BeginPlainFunction -> v56, v57
+    v58 <- LoadInteger '2'
+    Update v56, '*', v58
+    v59 <- LoadInteger '2'
+    Update v57, '*', v59
+    v60 <- LoadInteger '2'
+    v61 <- Compare v57, '==', v60
+    BeginIf v61
+        v62 <- CreateNamedVariable 'print', 'none'
+        v63 <- CallFunction v62, [v56]
+        v64 <- CallFunction v62, [v57]
+    EndIf
+    v65 <- LoadInteger '1'
+    v66 <- Compare v56, '<', v65
+    v67 <- LoadInteger '3'
+    v68 <- Compare v57, '<', v67
+    v69 <- BinaryOperation v66, '&&', v68
+    BeginIf v69
+        v70 <- BinaryOperation v56, '-', v57
+        Return v70
+    EndIf
+EndPlainFunction
+BeginForLoopInitializer
+    v71 <- LoadInteger '0'
+BeginForLoopCondition -> v72
+    v73 <- LoadInteger '5'
+    v74 <- Compare v72, '<', v73
+BeginForLoopAfterthought v74 -> v75
+    v76 <- UnaryOperation v75, '++'
+BeginForLoopBody -> v77
+    v78 <- LoadInteger '0'
+    v79 <- LoadInteger '0'
+    v80 <- CallFunction v55, [v78, v79]
+EndForLoop
+v81 <- LoadInteger '2147483650'
+v82 <- UnaryOperation '-', v81
+v83 <- LoadInteger '1073741824'
+v84 <- UnaryOperation '-', v83
+v85 <- LoadInteger '1'
+v86 <- CallFunction v55, [v84, v85]
+
+
+function testMul(a1, a2) {
+    a1 *= 2;
+    a2 *= 2;
+    if ((a1 < 1) && (a2 < 1)) {
+        return a1 * a2;
+    }
+}
+for (let i12 = 0; i12 < 5; i12++) {
+    testMul(0, 0);
+}
+testMul(-1073741824, -1073741824);
+function testAdd(a28, a29) {
+    a28 *= 2;
+    a29 *= 2;
+    if ((a28 < 1) && (a29 < 1)) {
+        return a28 + a29;
+    }
+}
+for (let i39 = 0; i39 < 5; i39++) {
+    testAdd(0, 0);
+}
+-4294967296;
+testAdd(-1073741824, -1073741824);
+function testSub(a56, a57) {
+    a56 *= 2;
+    if ((a57 *= 2) == 2) {
+        print(a56);
+        print(a57);
+    }
+    if ((a56 < 1) && (a57 < 3)) {
+        return a56 - a57;
+    }
+}
+for (let i72 = 0; i72 < 5; i72++) {
+    testSub(0, 0);
+}
+-2147483650;
+testSub(-1073741824, 1);
+
+FuzzIL program written to corpus/regress-intoverflow.fzil

@@ -1,0 +1,157 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'defineProperty'
+v2 <- CreateNamedVariable 'dp', 'var', v1
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '111'
+    Return v4
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadInteger '222'
+    v8 <- CreateNamedVariable 'print', 'none'
+    v9 <- CallFunction v8, [v7]
+EndPlainFunction
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadInteger '333'
+    Return v11
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13
+    v14 <- LoadInteger '444'
+    v15 <- CreateNamedVariable 'print', 'none'
+    v16 <- CallFunction v15, [v14]
+EndPlainFunction
+v17 <- LoadUndefined
+v18 <- CreateNamedVariable 'obj1', 'var', v17
+v19 <- LoadUndefined
+v20 <- CreateNamedVariable 'obj2', 'var', v19
+BeginObjectLiteral
+v21 <- EndObjectLiteral
+Reassign v18, v21
+v22 <- LoadString 'alpha'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+    ObjectLiteralAddProperty `set`, v5
+v23 <- EndObjectLiteral
+v24 <- CallFunction v2, [v18, v22, v23]
+BeginObjectLiteral
+v25 <- EndObjectLiteral
+Reassign v20, v25
+v26 <- LoadString 'alpha'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+v27 <- EndObjectLiteral
+v28 <- CallFunction v2, [v20, v26, v27]
+BeginObjectLiteral
+v29 <- EndObjectLiteral
+Reassign v18, v29
+v30 <- LoadInteger '111'
+v31 <- GetProperty v20, 'alpha'
+v32 <- CreateNamedVariable 'gc', 'none'
+v33 <- CallFunction v32, []
+v34 <- LoadInteger '111'
+v35 <- GetProperty v20, 'alpha'
+BeginObjectLiteral
+v36 <- EndObjectLiteral
+Reassign v18, v36
+v37 <- LoadString 'alpha'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+    ObjectLiteralAddProperty `set`, v5
+v38 <- EndObjectLiteral
+v39 <- CallFunction v2, [v18, v37, v38]
+BeginObjectLiteral
+v40 <- EndObjectLiteral
+Reassign v20, v40
+v41 <- LoadString 'alpha'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+v42 <- EndObjectLiteral
+v43 <- CallFunction v2, [v20, v41, v42]
+BeginObjectLiteral
+v44 <- EndObjectLiteral
+Reassign v18, v44
+v45 <- CallFunction v32, []
+BeginObjectLiteral
+v46 <- EndObjectLiteral
+v47 <- CreateNamedVariable 'obj3', 'none'
+Reassign v47, v46
+v48 <- CreateNamedVariable 'obj3', 'none'
+v49 <- LoadString 'alpha'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+v50 <- EndObjectLiteral
+v51 <- CallFunction v2, [v48, v49, v50]
+BeginObjectLiteral
+v52 <- EndObjectLiteral
+Reassign v18, v52
+v53 <- LoadString 'alpha'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+    ObjectLiteralAddProperty `set`, v5
+v54 <- EndObjectLiteral
+v55 <- CallFunction v2, [v18, v53, v54]
+v56 <- LoadInteger '10'
+SetProperty v18, 'beta', v56
+BeginObjectLiteral
+v57 <- EndObjectLiteral
+Reassign v20, v57
+v58 <- LoadString 'alpha'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+    ObjectLiteralAddProperty `set`, v5
+v59 <- EndObjectLiteral
+v60 <- CallFunction v2, [v20, v58, v59]
+BeginObjectLiteral
+v61 <- EndObjectLiteral
+Reassign v18, v61
+v62 <- LoadInteger '111'
+v63 <- GetProperty v20, 'alpha'
+v64 <- CallFunction v32, []
+v65 <- LoadInteger '100'
+SetProperty v20, 'alpha', v65
+v66 <- LoadInteger '111'
+v67 <- GetProperty v20, 'alpha'
+
+
+var dp = Object.defineProperty;
+function getter() {
+    return 111;
+}
+function setter(a6) {
+    print(222);
+}
+function anotherGetter() {
+    return 333;
+}
+function anotherSetter(a13) {
+    print(444);
+}
+var obj1;
+var obj2;
+obj1 = {};
+dp(obj1, "alpha", { get: getter, set: setter });
+obj2 = {};
+dp(obj2, "alpha", { get: getter });
+obj1 = {};
+obj2.alpha;
+gc();
+obj2.alpha;
+obj1 = {};
+dp(obj1, "alpha", { get: getter, set: setter });
+obj2 = {};
+dp(obj2, "alpha", { get: getter });
+obj1 = {};
+gc();
+obj3 = {};
+dp(obj3, "alpha", { get: getter });
+obj1 = {};
+dp(obj1, "alpha", { get: getter, set: setter });
+obj1.beta = 10;
+obj2 = {};
+dp(obj2, "alpha", { get: getter, set: setter });
+obj1 = {};
+obj2.alpha;
+gc();
+obj2.alpha = 100;
+obj2.alpha;
+
+FuzzIL program written to corpus/regress-2163.fzil

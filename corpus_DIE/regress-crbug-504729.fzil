@@ -1,0 +1,37 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Worker'
+BeginIf v1
+    v2 <- LoadString 'foo'
+    v3 <- CreateNamedVariable 'Function', 'none'
+    v4 <- GetProperty v3, 'prototype'
+    SetProperty v4, 'toString', v2
+    v5 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v6 <- BeginPlainFunction -> 
+        v7 <- CreateNamedVariable 'Worker', 'none'
+        v8 <- CallMethod v5, 'toString', []
+        v9 <- LoadString 'string'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `type`, v9
+        v10 <- EndObjectLiteral
+        v11 <- Construct v7, [v8, v10]
+        v12 <- CreateNamedVariable '__v_5', 'var', v11
+    EndPlainFunction
+    v13 <- CallFunction v6, []
+EndIf
+
+
+if (this.Worker) {
+    const t1 = Function.prototype;
+    t1.toString = "foo";
+    function __f_7() {
+    }
+    function f6() {
+        const v8 = __f_7.toString();
+        const v11 = new Worker(v8, { type: "string" });
+        var __v_5 = v11;
+    }
+    f6();
+}
+
+FuzzIL program written to corpus/regress-crbug-504729.fzil

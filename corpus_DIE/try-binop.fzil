@@ -1,0 +1,93 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'boom'
+    ThrowException v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v0
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'boom', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    BeginTry
+        v6 <- LoadInteger '2'
+        v7 <- BinaryOperation v6, '*', v5
+        Return v7
+    BeginCatch -> v8
+        Return v8
+    EndTryCatch
+EndPlainFunction
+v9 <- LoadString 'boom'
+v10 <- CallFunction v4, [v3]
+v11 <- LoadInteger '46'
+v12 <- LoadInteger '23'
+v13 <- CallFunction v4, [v12]
+v14 <- BeginPlainFunction -> v15
+    BeginTry
+        v16 <- LoadInteger '3'
+        v17 <- BinaryOperation v15, '*', v16
+        Return v17
+    BeginCatch -> v18
+        Return v18
+    EndTryCatch
+EndPlainFunction
+v19 <- LoadString 'boom'
+v20 <- CallFunction v14, [v3]
+v21 <- LoadInteger '69'
+v22 <- LoadInteger '23'
+v23 <- CallFunction v14, [v22]
+v24 <- BeginPlainFunction -> v25, v26
+    BeginTry
+        v27 <- BinaryOperation v25, '*', v26
+        Return v27
+    BeginCatch -> v28
+        Return v28
+    EndTryCatch
+EndPlainFunction
+v29 <- LoadString 'boom'
+v30 <- CallFunction v24, [v3, v3]
+v31 <- LoadString 'boom'
+v32 <- LoadInteger '2'
+v33 <- CallFunction v24, [v3, v32]
+v34 <- LoadString 'boom'
+v35 <- LoadInteger '2'
+v36 <- CallFunction v24, [v35, v3]
+v37 <- LoadInteger '966'
+v38 <- LoadInteger '23'
+v39 <- LoadInteger '42'
+v40 <- CallFunction v24, [v38, v39]
+
+
+function f0() {
+    throw "boom";
+}
+var boom = { valueOf: f0 };
+function mult_left_plain(a5) {
+    try {
+        return 2 * a5;
+    } catch(e8) {
+        return e8;
+    }
+}
+mult_left_plain(boom);
+mult_left_plain(23);
+function mult_right_plain(a15) {
+    try {
+        return a15 * 3;
+    } catch(e18) {
+        return e18;
+    }
+}
+mult_right_plain(boom);
+mult_right_plain(23);
+function mult_none_plain(a25, a26) {
+    try {
+        return a25 * a26;
+    } catch(e28) {
+        return e28;
+    }
+}
+mult_none_plain(boom, boom);
+mult_none_plain(boom, 2);
+mult_none_plain(2, boom);
+mult_none_plain(23, 42);
+
+FuzzIL program written to corpus/try-binop.fzil

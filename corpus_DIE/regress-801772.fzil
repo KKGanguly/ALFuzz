@@ -1,0 +1,20 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallFunction v1, []
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- BeginPlainFunction -> 
+    EndPlainFunction
+EndPlainFunction
+v5 <- CallFunction v0, [v3]
+
+
+function foo(a1) {
+    a1();
+}
+function arguments() {
+    function skippable() {
+    }
+}
+foo(arguments);
+
+FuzzIL program written to corpus/regress-801772.fzil

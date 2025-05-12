@@ -1,0 +1,20 @@
+v0 <- CreateNamedVariable 'String', 'none'
+v1 <- LoadString 'a'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 's', 'var', v2
+v4 <- LoadString 'bente'
+SetElement v3, '10000000', v4
+v5 <- LoadString '0'
+v6 <- LoadString '10000000'
+v7 <- CreateArray [v5, v6]
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'keys', [v3]
+
+
+const v2 = new String("a");
+var s = v2;
+s[10000000] = "bente";
+["0","10000000"];
+Object.keys(s);
+
+FuzzIL program written to corpus/regress-crbug-510426.fzil

@@ -1,0 +1,144 @@
+v0 <- BeginPlainFunction -> v1
+    BeginTry
+        v2 <- LoadString '.(.)'
+        v3 <- LoadInteger '12'
+        v4 <- CreateNamedVariable 'repeat', 'none'
+        v5 <- CallFunction v4, [v2, v3]
+        v6 <- BinaryOperation v5, '+', v1
+        v7 <- CreateNamedVariable 'regexp_src', 'var', v6
+        v8 <- CreateNamedVariable 'use_space', 'none'
+        v9 <- CallFunction v8, [v1, v7]
+        v10 <- LoadBoolean 'true'
+        Return v10
+    BeginCatch -> v11
+        v12 <- LoadString 'tack'
+        v13 <- LoadString ''
+        v14 <- BinaryOperation v13, '+', v11
+        v15 <- CallMethod v14, 'indexOf', [v12]
+        v16 <- LoadInteger '1'
+        v17 <- UnaryOperation '-', v16
+        v18 <- Compare v15, '==', v17
+        v19 <- LoadBoolean 'false'
+        Return v19
+    EndTryCatch
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21, v22
+    v23 <- UnaryOperation '--', v21
+    v24 <- LoadInteger '0'
+    v25 <- Compare v23, '==', v24
+    BeginIf v25
+        v26 <- CreateNamedVariable 'do_test', 'none'
+        v27 <- CallFunction v26, [v22]
+        Return
+    EndIf
+    v28 <- CallFunction v20, [v21, v22]
+EndPlainFunction
+v29 <- BeginPlainFunction -> v30, v31
+    v32 <- LoadString ''
+    v33 <- CreateNamedVariable 'answer', 'var', v32
+    BeginWhileLoopHeader
+        v34 <- UnaryOperation v31, '--'
+        v35 <- LoadInteger '0'
+        v36 <- Compare v34, '!=', v35
+    BeginWhileLoopBody v36
+        Update v33, '+', v30
+    EndWhileLoop
+    Return v33
+EndPlainFunction
+v37 <- LoadString 'y'
+v38 <- LoadInteger '200'
+v39 <- CallFunction v29, [v37, v38]
+v40 <- CreateNamedVariable 'subject', 'var', v39
+v41 <- BeginPlainFunction -> v42
+    v43 <- CreateNamedVariable 'RegExp', 'none'
+    v44 <- Construct v43, [v42]
+    v45 <- CreateNamedVariable 're', 'var', v44
+    v46 <- CallMethod v45, 'test', [v40]
+EndPlainFunction
+v47 <- BeginPlainFunction -> 
+    v48 <- LoadInteger '100'
+    v49 <- CreateNamedVariable 'lower', 'var', v48
+    v50 <- LoadInteger '100000'
+    v51 <- CreateNamedVariable 'higher', 'var', v50
+    BeginWhileLoopHeader
+        v52 <- LoadInteger '1'
+        v53 <- BinaryOperation v51, '-', v52
+        v54 <- Compare v49, '<', v53
+    BeginWhileLoopBody v54
+        v55 <- BinaryOperation v49, '+', v51
+        v56 <- LoadInteger '2'
+        v57 <- BinaryOperation v55, '/', v56
+        v58 <- CreateNamedVariable 'Math', 'none'
+        v59 <- CallMethod v58, 'floor', [v57]
+        v60 <- CreateNamedVariable 'average', 'var', v59
+        v61 <- CallFunction v0, [v60]
+        BeginIf v61
+            Reassign v49, v60
+        BeginElse
+            Reassign v51, v60
+        EndIf
+    EndWhileLoop
+    BeginForLoopInitializer
+        v62 <- LoadInteger '5'
+        v63 <- BinaryOperation v49, '-', v62
+    BeginForLoopCondition -> v64
+        v65 <- LoadInteger '5'
+        v66 <- BinaryOperation v51, '+', v65
+        v67 <- Compare v64, '<', v66
+    BeginForLoopAfterthought v67 -> v68
+        v69 <- UnaryOperation v68, '++'
+    BeginForLoopBody -> v70
+        v71 <- CallFunction v0, [v70]
+    EndForLoop
+EndPlainFunction
+v72 <- CallFunction v47, []
+
+
+function use_space_then_do_test(a1) {
+    try {
+        var regexp_src = repeat(".(.)", 12) + a1;
+        use_space(a1, regexp_src);
+        return true;
+    } catch(e11) {
+        ("" + e11).indexOf("tack") == -1;
+        return false;
+    }
+}
+function use_space(a21, a22) {
+    if (--a21 == 0) {
+        do_test(a22);
+        return;
+    }
+    use_space(a21, a22);
+}
+function repeat(a30, a31) {
+    var answer = "";
+    while (a31-- != 0) {
+        answer += a30;
+    }
+    return answer;
+}
+var subject = repeat("y", 200);
+function do_test(a42) {
+    const v44 = new RegExp(a42);
+    var re = v44;
+    re.test(subject);
+}
+function try_different_stack_limits() {
+    var lower = 100;
+    var higher = 100000;
+    while (lower < (higher - 1)) {
+        var average = Math.floor((lower + higher) / 2);
+        if (use_space_then_do_test(average)) {
+            lower = average;
+        } else {
+            higher = average;
+        }
+    }
+    for (let i64 = lower - 5; i64 < (higher + 5); i64++) {
+        use_space_then_do_test(i64);
+    }
+}
+try_different_stack_limits();
+
+FuzzIL program written to corpus/regress-475705.fzil

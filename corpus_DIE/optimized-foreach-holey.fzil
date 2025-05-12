@@ -1,0 +1,50 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'result', 'var', v1
+    v3 <- BeginPlainFunction -> 
+        v4 <- LoadUndefined
+        v5 <- CreateArray [v4, v4]
+        v6 <- CreateNamedVariable 'b', 'var', v5
+        v7 <- LoadInteger '0'
+        SetElement v6, '0', v7
+        v8 <- LoadInteger '2'
+        SetElement v6, '2', v8
+        v9 <- BeginPlainFunction -> v10, v11, v12
+            Update v2, '+', v11
+        EndPlainFunction
+        v13 <- CreateNamedVariable 'sum', 'var', v9
+        v14 <- CallMethod v6, 'forEach', [v13]
+    EndPlainFunction
+    v15 <- CreateNamedVariable 'f', 'var', v3
+    v16 <- CallFunction v15, []
+    v17 <- CallFunction v15, []
+    v18 <- CallFunction v15, []
+    v19 <- CallFunction v15, []
+    v20 <- CallFunction v15, []
+    v21 <- LoadInteger '10'
+EndPlainFunction
+v22 <- CallFunction v0, []
+
+
+function f0() {
+    var result = 0;
+    function f3() {
+        var b = [,,];
+        b[0] = 0;
+        b[2] = 2;
+        function f9(a10, a11, a12) {
+            result += a11;
+        }
+        var sum = f9;
+        b.forEach(sum);
+    }
+    var f = f3;
+    f();
+    f();
+    f();
+    f();
+    f();
+}
+f0();
+
+FuzzIL program written to corpus/optimized-foreach-holey.fzil

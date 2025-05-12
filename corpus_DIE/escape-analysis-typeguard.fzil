@@ -1,0 +1,53 @@
+v0 <- BeginClassDefinition
+    BeginClassConstructor -> v1, v2
+        SetProperty v1, 'a', v2
+    EndClassConstructor
+EndClassDefinition
+v3 <- BeginClassDefinition
+    BeginClassConstructor -> v4, v5
+        SetProperty v4, 'a', v5
+    EndClassConstructor
+EndClassDefinition
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '7'
+    v8 <- Construct v0, [v7]
+    v9 <- CreateNamedVariable 'x', 'var', v8
+    v10 <- Construct v3, [v9]
+    v11 <- CreateNamedVariable 'y', 'var', v10
+    v12 <- GetProperty v11, 'a'
+    v13 <- CreateNamedVariable 'z', 'var', v12
+    v14 <- LoadInteger '7'
+    v15 <- GetProperty v13, 'a'
+EndPlainFunction
+v16 <- CallFunction v6, []
+v17 <- CallFunction v6, []
+v18 <- CallFunction v6, []
+v19 <- CallFunction v6, []
+v20 <- CallFunction v6, []
+
+
+class C0 {
+    constructor(a2) {
+        this.a = a2;
+    }
+}
+class C3 {
+    constructor(a5) {
+        this.a = a5;
+    }
+}
+function foo() {
+    const v8 = new C0(7);
+    var x = v8;
+    const v10 = new C3(x);
+    var y = v10;
+    var z = y.a;
+    z.a;
+}
+foo();
+foo();
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/escape-analysis-typeguard.fzil

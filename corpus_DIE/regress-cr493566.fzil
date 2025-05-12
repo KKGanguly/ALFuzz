@@ -1,0 +1,234 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- BeginClassDefinition
+        BeginClassInstanceMethod 's' -> v4, v5
+            SetSuperProperty 'bla', v5
+        EndClassInstanceMethod
+    EndClassDefinition
+    v6 <- Construct v3, []
+    v7 <- CreateNamedVariable 'a', 'var', v6
+    v8 <- LoadInteger '9'
+    v9 <- CallMethod v7, 's', [v8]
+    v10 <- LoadUndefined
+    v11 <- GetProperty v1, 'bla'
+    v12 <- LoadInteger '9'
+    v13 <- GetProperty v7, 'bla'
+    v14 <- Construct v3, []
+    Reassign v7, v14
+    v15 <- LoadInteger '10'
+    v16 <- GetProperty v7, 's'
+    v17 <- CallMethod v16, 'call', [v1, v15]
+    v18 <- LoadInteger '10'
+    v19 <- GetProperty v1, 'bla'
+    v20 <- LoadUndefined
+    v21 <- GetProperty v7, 'bla'
+EndPlainFunction
+v22 <- CallFunction v2, []
+v23 <- BeginPlainFunction -> 
+    v24 <- LoadInteger '0'
+    v25 <- CreateNamedVariable 'calls', 'var', v24
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `set` -> v26, v27, v28, v29, v30
+            v31 <- UnaryOperation v25, '++'
+            v32 <- CreateNamedVariable 'Reflect', 'none'
+            v33 <- CallMethod v32, 'set', [v27, v28, v29, v30]
+            Return v33
+        EndObjectLiteralMethod
+        BeginObjectLiteralMethod `getPropertyDescriptor` -> v34, v35, v36
+            v37 <- LoadInteger '10'
+            Update v25, '+', v37
+            v38 <- LoadUndefined
+            Return v38
+        EndObjectLiteralMethod
+    v39 <- EndObjectLiteral
+    v40 <- CreateNamedVariable 'handler', 'var', v39
+    BeginObjectLiteral
+    v41 <- EndObjectLiteral
+    v42 <- CreateNamedVariable 'target', 'var', v41
+    v43 <- CreateNamedVariable 'Proxy', 'none'
+    v44 <- Construct v43, [v42, v40]
+    v45 <- CreateNamedVariable 'proxy', 'var', v44
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v45
+        BeginObjectLiteralMethod `setX` -> v46, v47
+            SetSuperProperty 'x', v47
+        EndObjectLiteralMethod
+        BeginObjectLiteralMethod `setSymbol` -> v48, v49, v50
+            SetComputedSuperProperty v49, v50
+        EndObjectLiteralMethod
+    v51 <- EndObjectLiteral
+    v52 <- CreateNamedVariable 'object', 'var', v51
+    v53 <- LoadInteger '1'
+    v54 <- CallMethod v52, 'setX', [v53]
+    v55 <- LoadInteger '1'
+    v56 <- GetProperty v52, 'x'
+    v57 <- LoadInteger '1'
+    v58 <- LoadString 'x'
+    v59 <- CreateNamedVariable 'Object', 'none'
+    v60 <- CallMethod v59, 'getOwnPropertyDescriptor', [v52, v58]
+    v61 <- GetProperty v60, 'value'
+    v62 <- LoadInteger '1'
+    v63 <- LoadInteger '0'
+    Reassign v25, v63
+    v64 <- LoadInteger '2'
+    v65 <- GetProperty v52, 'setX'
+    v66 <- CallMethod v65, 'call', [v45, v64]
+    v67 <- LoadInteger '2'
+    v68 <- GetProperty v42, 'x'
+    v69 <- LoadInteger '1'
+    v70 <- LoadString 'x'
+    v71 <- CallMethod v59, 'getOwnPropertyDescriptor', [v52, v70]
+    v72 <- GetProperty v71, 'value'
+    v73 <- LoadInteger '1'
+    v74 <- CreateNamedVariable 'Symbol', 'none'
+    v75 <- CallFunction v74, []
+    v76 <- CreateNamedVariable 'sym', 'var', v75
+    v77 <- LoadInteger '0'
+    Reassign v25, v77
+    v78 <- LoadInteger '2'
+    v79 <- GetProperty v52, 'setSymbol'
+    v80 <- CallMethod v79, 'call', [v1, v76, v78]
+    v81 <- LoadInteger '2'
+    v82 <- CallMethod v59, 'getOwnPropertyDescriptor', [v1, v76]
+    v83 <- GetProperty v82, 'value'
+    v84 <- LoadInteger '1'
+EndPlainFunction
+v85 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `setY` -> v86, v87
+            SetSuperProperty 'y', v87
+        EndObjectLiteralMethod
+    v88 <- EndObjectLiteral
+    v89 <- CreateNamedVariable 'object', 'var', v88
+    v90 <- LoadInteger '0'
+    v91 <- CreateNamedVariable 'calls', 'var', v90
+    v92 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `target`, v92
+    v93 <- EndObjectLiteral
+    v94 <- CreateNamedVariable 'target', 'var', v93
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `getOwnPropertyDescriptor` -> v95, v96, v97
+            v98 <- UnaryOperation v91, '++'
+        EndObjectLiteralMethod
+        BeginObjectLiteralMethod `defineProperty` -> v99, v100, v101, v102
+            v103 <- LoadInteger '10'
+            Update v91, '+', v103
+            v104 <- GetProperty v102, 'value'
+            SetComputedProperty v100, v101, v104
+            v105 <- LoadBoolean 'true'
+            Return v105
+        EndObjectLiteralMethod
+        BeginObjectLiteralMethod `set` -> v106, v107, v108, v109
+        EndObjectLiteralMethod
+    v110 <- EndObjectLiteral
+    v111 <- CreateNamedVariable 'handler', 'var', v110
+    v112 <- CreateNamedVariable 'Proxy', 'none'
+    v113 <- Construct v112, [v94, v111]
+    v114 <- CreateNamedVariable 'proxy', 'var', v113
+    v115 <- LoadUndefined
+    v116 <- GetProperty v89, 'y'
+    v117 <- LoadInteger '10'
+    v118 <- CallMethod v89, 'setY', [v117]
+    v119 <- LoadInteger '10'
+    v120 <- GetProperty v89, 'y'
+    v121 <- LoadInteger '3'
+    v122 <- GetProperty v89, 'setY'
+    v123 <- CallMethod v122, 'call', [v114, v121]
+    v124 <- LoadInteger '3'
+    v125 <- GetProperty v94, 'y'
+    v126 <- LoadInteger '11'
+EndPlainFunction
+v127 <- CallFunction v85, []
+
+
+var global = this;
+function TestGlobalReceiver() {
+    class C3 {
+        s(a5) {
+            super.bla = a5;
+        }
+    }
+    const v6 = new C3();
+    var a = v6;
+    a.s(9);
+    global.bla;
+    a.bla;
+    const v14 = new C3();
+    (a = v14).s.call(global, 10);
+    global.bla;
+    a.bla;
+}
+TestGlobalReceiver();
+function TestProxyProto() {
+    var calls = 0;
+    const v39 = {
+        set(a27, a28, a29, a30) {
+            calls++;
+            return Reflect.set(a27, a28, a29, a30);
+        },
+        getPropertyDescriptor(a35, a36) {
+            calls += 10;
+            return undefined;
+        },
+    };
+    var handler = v39;
+    var target = {};
+    const v44 = new Proxy(target, handler);
+    var proxy = v44;
+    const v51 = {
+        __proto__: proxy,
+        setX(a47) {
+            super.x = a47;
+        },
+        setSymbol(a49, a50) {
+            super[a49] = a50;
+        },
+    };
+    var object = v51;
+    object.setX(1);
+    object.x;
+    Object.getOwnPropertyDescriptor(object, "x").value;
+    calls = 0;
+    object.setX.call(proxy, 2);
+    target.x;
+    Object.getOwnPropertyDescriptor(object, "x").value;
+    var sym = Symbol();
+    calls = 0;
+    object.setSymbol.call(global, sym, 2);
+    Object.getOwnPropertyDescriptor(global, sym).value;
+}
+function TestProxyReceiver() {
+    const v88 = {
+        setY(a87) {
+            super.y = a87;
+        },
+    };
+    var object = v88;
+    var calls = 0;
+    var target = { target: 1 };
+    const v110 = {
+        getOwnPropertyDescriptor(a96, a97) {
+            calls++;
+        },
+        defineProperty(a100, a101, a102) {
+            calls += 10;
+            a100[a101] = a102.value;
+            return true;
+        },
+        set(a107, a108, a109) {
+        },
+    };
+    var handler = v110;
+    const v113 = new Proxy(target, handler);
+    var proxy = v113;
+    object.y;
+    object.setY(10);
+    object.y;
+    object.setY.call(proxy, 3);
+    target.y;
+}
+TestProxyReceiver();
+
+FuzzIL program written to corpus/regress-cr493566.fzil

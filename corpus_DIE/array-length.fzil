@@ -1,0 +1,79 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'length'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4, v5, v6
+    v7 <- LoadInteger '0'
+    v8 <- CallFunction v0, [v4]
+    v9 <- LoadInteger '2'
+    v10 <- CallFunction v0, [v5]
+    v11 <- LoadInteger '5'
+    v12 <- CallFunction v0, [v6]
+EndPlainFunction
+v13 <- CreateArray []
+v14 <- CreateNamedVariable 'a0', 'var', v13
+v15 <- LoadInteger '1'
+v16 <- LoadInteger '2'
+v17 <- CreateArray [v15, v16]
+v18 <- CreateNamedVariable 'a2', 'var', v17
+v19 <- LoadInteger '1'
+v20 <- LoadInteger '2'
+v21 <- LoadInteger '3'
+v22 <- LoadInteger '4'
+v23 <- LoadInteger '5'
+v24 <- CreateArray [v19, v20, v21, v22, v23]
+v25 <- CreateNamedVariable 'a5', 'var', v24
+BeginForLoopInitializer
+    v26 <- LoadInteger '0'
+BeginForLoopCondition -> v27
+    v28 <- LoadInteger '5'
+    v29 <- Compare v27, '<', v28
+BeginForLoopAfterthought v29 -> v30
+    v31 <- UnaryOperation v30, '++'
+BeginForLoopBody -> v32
+    v33 <- CallFunction v3, [v14, v18, v25]
+EndForLoop
+v34 <- CallFunction v3, [v14, v18, v25]
+v35 <- LoadString 'undefined'
+v36 <- LoadInteger '0'
+v37 <- CallFunction v0, [v36]
+v38 <- TypeOf v37
+BeginForLoopInitializer
+    v39 <- LoadInteger '0'
+BeginForLoopCondition -> v40
+    v41 <- LoadInteger '5'
+    v42 <- Compare v40, '<', v41
+BeginForLoopAfterthought v42 -> v43
+    v44 <- UnaryOperation v43, '++'
+BeginForLoopBody -> v45
+    v46 <- CallFunction v3, [v14, v18, v25]
+EndForLoop
+v47 <- CallFunction v3, [v14, v18, v25]
+v48 <- LoadInteger '4'
+v49 <- LoadString 'hest'
+v50 <- CallFunction v0, [v49]
+
+
+function ArrayLength(a1) {
+    return a1.length;
+}
+function Test(a4, a5, a6) {
+    ArrayLength(a4);
+    ArrayLength(a5);
+    ArrayLength(a6);
+}
+var a0 = [];
+var a2 = [1,2];
+var a5 = [1,2,3,4,5];
+for (let i27 = 0; i27 < 5; i27++) {
+    Test(a0, a2, a5);
+}
+Test(a0, a2, a5);
+typeof ArrayLength(0);
+for (let i40 = 0; i40 < 5; i40++) {
+    Test(a0, a2, a5);
+}
+Test(a0, a2, a5);
+ArrayLength("hest");
+
+FuzzIL program written to corpus/array-length.fzil

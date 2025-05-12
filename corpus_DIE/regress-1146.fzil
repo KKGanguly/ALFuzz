@@ -1,0 +1,72 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'a', 'var', v1
+v3 <- BeginPlainFunction -> v4
+    v5 <- CallComputedMethod v2, v4, []
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '11'
+    Return v7
+EndPlainFunction
+SetProperty v2, 'first', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '22'
+    Return v9
+EndPlainFunction
+SetElement v2, '0', v8
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'obj', 'var', v10
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '33'
+    Return v13
+EndPlainFunction
+SetComputedProperty v2, v11, v12
+v14 <- LoadInteger '0'
+SetProperty v2, 'foo', v14
+v15 <- DeleteProperty v2, 'foo'
+v16 <- LoadString 'first'
+v17 <- CreateNamedVariable 'b', 'var', v16
+v18 <- CallFunction v3, [v17]
+v19 <- CallFunction v3, [v17]
+v20 <- LoadInteger '11'
+v21 <- CallFunction v3, [v17]
+v22 <- LoadInteger '22'
+v23 <- LoadInteger '0'
+v24 <- CallFunction v3, [v23]
+v25 <- LoadInteger '33'
+v26 <- CallFunction v3, [v11]
+
+
+function F() {
+}
+const v1 = new F();
+var a = v1;
+function f(a4) {
+    return a[a4]();
+}
+function f6() {
+    return 11;
+}
+a.first = f6;
+function f8() {
+    return 22;
+}
+a[0] = f8;
+var obj = {};
+function f12() {
+    return 33;
+}
+a[obj] = f12;
+a.foo = 0;
+delete a.foo;
+var b = "first";
+f(b);
+f(b);
+f(b);
+f(0);
+f(obj);
+
+FuzzIL program written to corpus/regress-1146.fzil

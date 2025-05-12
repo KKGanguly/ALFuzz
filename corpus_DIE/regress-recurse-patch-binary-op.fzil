@@ -1,0 +1,33 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'i', 'var', v0
+v2 <- BeginPlainFunction -> 
+    BeginWhileLoopHeader
+        v3 <- LoadBoolean 'true'
+    BeginWhileLoopBody v3
+        v4 <- UnaryOperation v1, '++'
+        v5 <- LoadInteger '4'
+        v6 <- Compare v4, '<', v5
+        v7 <- LoadInteger '1'
+        v8 <- LoadThis
+        v9 <- BinaryOperation v7, '+', v8
+        v10 <- LoadInteger '2'
+        v11 <- TernaryOperation v6, v9, v10
+        Return v11
+    EndWhileLoop
+EndPlainFunction
+v12 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v2
+v13 <- EndObjectLiteral
+v14 <- BinaryOperation v12, '+', v13
+
+
+var i = 0;
+function valueOf() {
+    while (true) {
+        return i++ < 4 ? 1 + this : 2;
+    }
+}
+1 + { valueOf: valueOf };
+
+FuzzIL program written to corpus/regress-recurse-patch-binary-op.fzil

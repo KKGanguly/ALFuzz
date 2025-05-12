@@ -1,0 +1,105 @@
+v0 <- LoadInteger '14'
+v1 <- LoadInteger '14'
+v2 <- LoadInteger '14'
+v3 <- LoadInteger '14'
+v4 <- LoadInteger '14'
+v5 <- LoadInteger '14'
+v6 <- LoadInteger '14'
+v7 <- LoadInteger '14'
+v8 <- LoadInteger '14'
+v9 <- LoadInteger '14'
+v10 <- LoadInteger '14'
+v11 <- LoadInteger '14'
+v12 <- LoadInteger '14'
+v13 <- LoadInteger '14'
+v14 <- LoadInteger '14'
+v15 <- LoadInteger '14'
+v16 <- LoadInteger '14'
+v17 <- LoadInteger '14'
+v18 <- LoadInteger '14'
+v19 <- LoadInteger '14'
+v20 <- LoadInteger '14'
+v21 <- LoadInteger '14'
+v22 <- LoadInteger '14'
+v23 <- LoadInteger '14'
+v24 <- LoadInteger '14'
+v25 <- LoadInteger '14'
+v26 <- LoadInteger '14'
+v27 <- LoadInteger '14'
+v28 <- LoadInteger '14'
+v29 <- LoadInteger '14'
+v30 <- LoadInteger '14'
+v31 <- LoadInteger '14'
+v32 <- LoadInteger '14'
+v33 <- LoadInteger '14'
+v34 <- LoadInteger '14'
+v35 <- LoadInteger '14'
+v36 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, v35]
+v37 <- CreateNamedVariable 'r', 'none'
+Reassign v37, v36
+v38 <- BeginPlainFunction -> 
+    v39 <- BeginPlainFunction -> v40
+        v41 <- LoadInteger '64'
+        v42 <- BinaryOperation v40, '/', v41
+        Return v42
+    EndPlainFunction
+    v43 <- CreateNamedVariable 'r', 'none'
+    v44 <- CallMethod v43, 'map', [v39]
+    v45 <- CreateNamedVariable 'r2', 'none'
+    Reassign v45, v44
+    v46 <- CreateNamedVariable 'r2', 'none'
+    v47 <- GetElement v46, '0'
+    v48 <- LoadInteger '1'
+    v49 <- Compare v47, '<', v48
+EndPlainFunction
+BeginForLoopInitializer
+    v50 <- LoadInteger '0'
+BeginForLoopCondition -> v51
+    v52 <- LoadInteger '1000'
+    v53 <- Compare v51, '<', v52
+BeginForLoopAfterthought v53 -> v54
+    v55 <- UnaryOperation '++', v54
+BeginForLoopBody -> v56
+    v57 <- CallFunction v38, []
+EndForLoop
+BeginForLoopInitializer
+    v58 <- LoadInteger '0'
+BeginForLoopCondition -> v59
+    v60 <- LoadInteger '1000'
+    v61 <- Compare v59, '<', v60
+BeginForLoopAfterthought v61 -> v62
+    v63 <- UnaryOperation '++', v62
+BeginForLoopBody -> v64
+    v65 <- CallFunction v38, []
+EndForLoop
+BeginForLoopInitializer
+    v66 <- LoadInteger '0'
+BeginForLoopCondition -> v67
+    v68 <- LoadInteger '1000'
+    v69 <- Compare v67, '<', v68
+BeginForLoopAfterthought v69 -> v70
+    v71 <- UnaryOperation '++', v70
+BeginForLoopBody -> v72
+    v73 <- CallFunction v38, []
+EndForLoop
+
+
+r = [14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14];
+function f() {
+    function f39(a40) {
+        return a40 / 64;
+    }
+    r2 = r.map(f39);
+    r2[0] < 1;
+}
+for (let i51 = 0; i51 < 1000; ++i51) {
+    f();
+}
+for (let i59 = 0; i59 < 1000; ++i59) {
+    f();
+}
+for (let i67 = 0; i67 < 1000; ++i67) {
+    f();
+}
+
+FuzzIL program written to corpus/regress-747075.fzil

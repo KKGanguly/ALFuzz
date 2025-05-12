@@ -1,0 +1,136 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- CreateNamedVariable 'Infinity', 'none'
+        v3 <- LoadInteger '0'
+        v4 <- UnaryOperation '-', v3
+        v5 <- LoadInteger '0'
+        v6 <- UnaryOperation '+', v5
+        v7 <- CreateNamedVariable 'Math', 'none'
+        v8 <- CallMethod v7, 'max', [v4, v6]
+        v9 <- BinaryOperation v2, '/', v8
+        Return v9
+    EndPlainFunction
+    v10 <- CreateNamedVariable 'Infinity', 'none'
+    v11 <- UnaryOperation '+', v10
+    v12 <- CallFunction v1, []
+    v13 <- UnaryOperation '+', v10
+    v14 <- CallFunction v1, []
+    v15 <- UnaryOperation '+', v10
+    v16 <- CallFunction v1, []
+EndPlainFunction
+v17 <- CallFunction v0, []
+v18 <- BeginPlainFunction -> 
+    v19 <- BeginPlainFunction -> 
+        v20 <- CreateNamedVariable 'Infinity', 'none'
+        v21 <- LoadInteger '0'
+        v22 <- UnaryOperation '+', v21
+        v23 <- LoadInteger '0'
+        v24 <- UnaryOperation '-', v23
+        v25 <- CreateNamedVariable 'Math', 'none'
+        v26 <- CallMethod v25, 'max', [v22, v24]
+        v27 <- BinaryOperation v20, '/', v26
+        Return v27
+    EndPlainFunction
+    v28 <- CreateNamedVariable 'Infinity', 'none'
+    v29 <- UnaryOperation '+', v28
+    v30 <- CallFunction v19, []
+    v31 <- UnaryOperation '+', v28
+    v32 <- CallFunction v19, []
+    v33 <- UnaryOperation '+', v28
+    v34 <- CallFunction v19, []
+EndPlainFunction
+v35 <- CallFunction v18, []
+v36 <- BeginPlainFunction -> 
+    v37 <- BeginPlainFunction -> 
+        v38 <- CreateNamedVariable 'Infinity', 'none'
+        v39 <- LoadInteger '0'
+        v40 <- UnaryOperation '-', v39
+        v41 <- LoadInteger '0'
+        v42 <- UnaryOperation '+', v41
+        v43 <- CreateNamedVariable 'Math', 'none'
+        v44 <- CallMethod v43, 'min', [v40, v42]
+        v45 <- BinaryOperation v38, '/', v44
+        Return v45
+    EndPlainFunction
+    v46 <- CreateNamedVariable 'Infinity', 'none'
+    v47 <- UnaryOperation '-', v46
+    v48 <- CallFunction v37, []
+    v49 <- UnaryOperation '-', v46
+    v50 <- CallFunction v37, []
+    v51 <- UnaryOperation '-', v46
+    v52 <- CallFunction v37, []
+EndPlainFunction
+v53 <- CallFunction v36, []
+v54 <- BeginPlainFunction -> 
+    v55 <- BeginPlainFunction -> 
+        v56 <- CreateNamedVariable 'Infinity', 'none'
+        v57 <- LoadInteger '0'
+        v58 <- UnaryOperation '+', v57
+        v59 <- LoadInteger '0'
+        v60 <- UnaryOperation '-', v59
+        v61 <- CreateNamedVariable 'Math', 'none'
+        v62 <- CallMethod v61, 'min', [v58, v60]
+        v63 <- BinaryOperation v56, '/', v62
+        Return v63
+    EndPlainFunction
+    v64 <- CreateNamedVariable 'Infinity', 'none'
+    v65 <- UnaryOperation '-', v64
+    v66 <- CallFunction v55, []
+    v67 <- UnaryOperation '-', v64
+    v68 <- CallFunction v55, []
+    v69 <- UnaryOperation '-', v64
+    v70 <- CallFunction v55, []
+EndPlainFunction
+v71 <- CallFunction v54, []
+
+
+function f0() {
+    function foo() {
+        return Infinity / Math.max(-0, +0);
+    }
+    +Infinity;
+    foo();
+    +Infinity;
+    foo();
+    +Infinity;
+    foo();
+}
+f0();
+function f18() {
+    function foo() {
+        return Infinity / Math.max(+0, -0);
+    }
+    +Infinity;
+    foo();
+    +Infinity;
+    foo();
+    +Infinity;
+    foo();
+}
+f18();
+function f36() {
+    function foo() {
+        return Infinity / Math.min(-0, +0);
+    }
+    -Infinity;
+    foo();
+    -Infinity;
+    foo();
+    -Infinity;
+    foo();
+}
+f36();
+function f54() {
+    function foo() {
+        return Infinity / Math.min(+0, -0);
+    }
+    -Infinity;
+    foo();
+    -Infinity;
+    foo();
+    -Infinity;
+    foo();
+}
+f54();
+
+FuzzIL program written to corpus/regress-crbug-906870.fzil

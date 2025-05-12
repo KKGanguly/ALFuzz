@@ -1,0 +1,71 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CreateNamedVariable 'Object', 'none'
+    v4 <- CallMethod v3, 'getOwnPropertyNames', [v1]
+    v5 <- CreateNamedVariable 'properties', 'var', v4
+    v6 <- LoadString 'constructor'
+    v7 <- GetProperty v1, 'constructor'
+    v8 <- CallMethod v7, 'hasOwnProperty', []
+    v9 <- BinaryOperation v6, '&&', v8
+    BeginIf v9
+    EndIf
+    v10 <- GetProperty v5, 'length'
+    v11 <- LoadInteger '0'
+    v12 <- Compare v10, '==', v11
+    BeginIf v12
+        v13 <- LoadString '0'
+        Return v13
+    EndIf
+    v14 <- GetProperty v5, 'length'
+    v15 <- BinaryOperation v2, '%', v14
+    v16 <- GetComputedProperty v5, v15
+    Return v16
+EndPlainFunction
+v17 <- LoadString 'foo'
+v18 <- CreateNamedVariable 'NaN', 'none'
+v19 <- LoadString 'bar'
+v20 <- BeginPlainFunction -> v21
+    v22 <- LoadArguments
+    Return v22
+EndPlainFunction
+v23 <- CallFunction v20, [v17, v18, v19]
+v24 <- CreateNamedVariable 'args', 'var', v23
+v25 <- LoadString 'foo'
+SetProperty v24, '__p_293850326', v25
+v26 <- LoadInteger '990787501'
+v27 <- CallFunction v0, [v26]
+v28 <- BeginPlainFunction -> 
+    v29 <- CreateNamedVariable 'gc', 'none'
+    v30 <- CallFunction v29, []
+    v31 <- GetProperty v24, '__p_293850326'
+    Return v31
+EndPlainFunction
+v32 <- CallMethod v24, '__defineGetter__', [v27, v28]
+v33 <- CreateNamedVariable 'Array', 'none'
+v34 <- GetProperty v33, 'prototype'
+v35 <- GetProperty v34, 'indexOf'
+v36 <- CallMethod v35, 'call', [v24]
+
+
+function getRandomProperty(a1, a2) {
+    var properties = Object.getOwnPropertyNames(a1);
+    if ("constructor" && a1.constructor.hasOwnProperty()) {
+    }
+    if (properties.length == 0) {
+        return "0";
+    }
+    return properties[a2 % properties.length];
+}
+function f20(a21) {
+    return arguments;
+}
+var args = f20("foo", NaN, "bar");
+args.__p_293850326 = "foo";
+const v27 = getRandomProperty(990787501);
+function f28() {
+    gc();
+    return args.__p_293850326;
+}
+args.__defineGetter__(v27, f28);
+Array.prototype.indexOf.call(args);
+
+FuzzIL program written to corpus/regress-645680.fzil

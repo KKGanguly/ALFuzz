@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> v1, v2
+    SetElement v1, '1', v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadFloat '1.5'
+    v5 <- LoadInteger '0'
+    v6 <- LoadInteger '0'
+    v7 <- CreateArray [v4, v5, v6]
+    v8 <- CreateNamedVariable 'arr', 'var', v7
+    v9 <- LoadFloat '1.5'
+    v10 <- CallFunction v0, [v9]
+    v11 <- CallFunction v0, [v8]
+EndPlainFunction
+v12 <- CallFunction v3, []
+
+
+function __f_2(a1, a2) {
+    a1[1] = a2;
+}
+function __f_9() {
+    var arr = [1.5,0,0];
+    __f_2(1.5);
+    __f_2(arr);
+}
+__f_9();
+
+FuzzIL program written to corpus/regress-597565-double-to-object-transition.fzil

@@ -1,0 +1,11 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'Object', 'none'
+v2 <- CallMethod v1, 'preventExtensions', [v0]
+v3 <- CreateNamedVariable 'o', 'var', v2
+v4 <- LoadString 'o.__proto__ = {}'
+
+
+var o = Object.preventExtensions({});
+
+FuzzIL program written to corpus/regress-1309.fzil

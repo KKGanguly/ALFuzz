@@ -1,0 +1,87 @@
+v0 <- LoadString '                                                                   Error.prepareStackTrace = function(a, b) { return b; };                        try {                                                                          } catch (e) {                                                                  }                                                                              try {                                                                          } catch (e) {                                                                  }                                                                            '
+v1 <- CreateNamedVariable 'script', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- GetProperty v4, 'length'
+        v8 <- Compare v6, '<', v7
+    BeginForLoopAfterthought v8 -> v9
+        v10 <- UnaryOperation v9, '++'
+    BeginForLoopBody -> v11
+        v12 <- LoadBoolean 'false'
+        v13 <- GetComputedProperty v4, v11
+        v14 <- CallMethod v13, 'getFunction', []
+        v15 <- Compare v12, '===', v14
+    EndForLoop
+EndPlainFunction
+v16 <- LoadString '(function (f) { f(); })'
+v17 <- CreateNamedVariable 'caller_script', 'var', v16
+v18 <- LoadString '  '
+Reassign v1, v18
+v19 <- LoadNull
+v20 <- CreateNamedVariable 'f', 'none'
+SetProperty v20, 'prototype', v19
+v21 <- Construct v20, []
+v22 <- CreateNamedVariable 'o', 'var', v21
+BeginObjectLiteral
+v23 <- EndObjectLiteral
+v24 <- CreateNamedVariable 'otherObject', 'var', v23
+v25 <- CreateNamedVariable 'Object', 'none'
+v26 <- CallMethod v25, 'getPrototypeOf', [v22]
+v27 <- CreateNamedVariable 'proto', 'var', v26
+v28 <- GetProperty v25, 'prototype'
+v29 <- Compare v27, '===', v28
+v30 <- GetProperty v24, 'prototype'
+v31 <- Compare v27, '===', v30
+v32 <- CallMethod v25, 'getPrototypeOf', [v22]
+Reassign v27, v32
+v33 <- GetProperty v25, 'prototype'
+v34 <- Compare v27, '===', v33
+v35 <- GetProperty v24, 'prototype'
+v36 <- Compare v27, '===', v35
+v37 <- LoadString 'Function'
+v38 <- CreateNamedVariable 'ctor_script', 'var', v37
+v39 <- LoadString '(function() { return Function.apply(this, ['return 1;']); })'
+v40 <- CreateNamedVariable 'ctor_a_script', 'var', v39
+v41 <- LoadString 'Function.bind(this, 'return 1;')'
+v42 <- CreateNamedVariable 'ctor_b_script', 'var', v41
+v43 <- LoadString '(function() { return Function.call(this, 'return 1;'); })'
+v44 <- CreateNamedVariable 'ctor_c_script', 'var', v43
+v45 <- LoadString 'Promise'
+v46 <- CreateNamedVariable 'promise_ctor_script', 'var', v45
+v47 <- LoadString '   '
+v48 <- CreateNamedVariable 'script_0', 'var', v47
+v49 <- LoadRegExp '_0' 'g'
+v50 <- LoadString '_1'
+v51 <- CallMethod v48, 'replace', [v49, v50]
+v52 <- BinaryOperation v48, '+', v51
+Reassign v1, v52
+
+
+var script = "                                                                   Error.prepareStackTrace = function(a, b) { return b; };                        try {                                                                          } catch (e) {                                                                  }                                                                              try {                                                                          } catch (e) {                                                                  }                                                                            ";
+function assertNotIn(a3, a4) {
+    for (let i6 = 0; i6 < a4.length; i6++) {
+        false === a4[i6].getFunction();
+    }
+}
+var caller_script = "(function (f) { f(); })";
+script = "  ";
+f.prototype = null;
+const v21 = new f();
+var o = v21;
+var otherObject = {};
+var proto = Object.getPrototypeOf(o);
+proto === Object.prototype;
+proto === otherObject.prototype;
+(proto = Object.getPrototypeOf(o)) === Object.prototype;
+proto === otherObject.prototype;
+var ctor_script = "Function";
+var ctor_a_script = "(function() { return Function.apply(this, ['return 1;']); })";
+var ctor_b_script = "Function.bind(this, 'return 1;')";
+var ctor_c_script = "(function() { return Function.call(this, 'return 1;'); })";
+var promise_ctor_script = "Promise";
+var script_0 = "   ";
+script = script_0 + script_0.replace(/_0/g, "_1");
+
+FuzzIL program written to corpus/cross-realm-filtering.fzil

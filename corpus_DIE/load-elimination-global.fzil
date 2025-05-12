@@ -1,0 +1,500 @@
+v0 <- LoadBoolean 'true'
+v1 <- CreateNamedVariable 'X', 'var', v0
+v2 <- LoadBoolean 'false'
+Reassign v1, v2
+v3 <- LoadBoolean 'true'
+Reassign v1, v3
+v4 <- LoadBoolean 'false'
+Reassign v1, v4
+v5 <- BeginPlainFunction -> v6, v7
+    v8 <- LoadThis
+    SetProperty v8, 'x', v6
+    v9 <- LoadThis
+    SetProperty v9, 'y', v7
+    v10 <- LoadThis
+    Return v10
+EndPlainFunction
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadInteger '1'
+    v13 <- LoadInteger '2'
+    v14 <- Construct v5, [v12, v13]
+    v15 <- CreateNamedVariable 'a', 'var', v14
+    v16 <- GetProperty v15, 'x'
+    v17 <- GetProperty v15, 'x'
+    v18 <- BinaryOperation v16, '+', v17
+    v19 <- CreateNamedVariable 'f', 'var', v18
+    v20 <- LoadBoolean 'false'
+    BeginIf v20
+    EndIf
+    v21 <- GetProperty v15, 'x'
+    v22 <- BinaryOperation v19, '+', v21
+    v23 <- GetProperty v15, 'x'
+    v24 <- BinaryOperation v22, '+', v23
+    Return v24
+EndPlainFunction
+v25 <- BeginPlainFunction -> 
+    v26 <- LoadInteger '1'
+    v27 <- LoadInteger '2'
+    v28 <- Construct v5, [v26, v27]
+    v29 <- CreateNamedVariable 'a', 'var', v28
+    v30 <- GetProperty v29, 'x'
+    v31 <- GetProperty v29, 'x'
+    v32 <- BinaryOperation v30, '+', v31
+    v33 <- CreateNamedVariable 'f', 'var', v32
+    v34 <- LoadBoolean 'true'
+    BeginIf v34
+    EndIf
+    v35 <- GetProperty v29, 'x'
+    v36 <- BinaryOperation v33, '+', v35
+    v37 <- GetProperty v29, 'x'
+    v38 <- BinaryOperation v36, '+', v37
+    Return v38
+EndPlainFunction
+v39 <- BeginPlainFunction -> 
+    v40 <- LoadInteger '1'
+    v41 <- LoadInteger '2'
+    v42 <- Construct v5, [v40, v41]
+    v43 <- CreateNamedVariable 'a', 'var', v42
+    v44 <- LoadInteger '4'
+    SetProperty v43, 'x', v44
+    v45 <- GetProperty v43, 'x'
+    v46 <- GetProperty v43, 'x'
+    v47 <- TernaryOperation v1, v45, v46
+    v48 <- CreateNamedVariable 'b', 'var', v47
+    v49 <- GetProperty v43, 'x'
+    v50 <- BinaryOperation v48, '+', v49
+    Return v50
+EndPlainFunction
+v51 <- BeginPlainFunction -> 
+    v52 <- LoadInteger '1'
+    v53 <- LoadInteger '2'
+    v54 <- Construct v5, [v52, v53]
+    v55 <- CreateNamedVariable 'a', 'var', v54
+    v56 <- LoadInteger '6'
+    v57 <- CreateNamedVariable 'c', 'var', v56
+    BeginIf v1
+        SetProperty v55, 'x', v57
+    BeginElse
+        SetProperty v55, 'x', v57
+    EndIf
+    v58 <- GetProperty v55, 'x'
+    v59 <- GetProperty v55, 'x'
+    v60 <- BinaryOperation v58, '+', v59
+    Return v60
+EndPlainFunction
+v61 <- BeginPlainFunction -> 
+    v62 <- LoadInteger '2'
+    v63 <- LoadInteger '3'
+    v64 <- Construct v5, [v62, v63]
+    v65 <- CreateNamedVariable 'a', 'var', v64
+    v66 <- LoadInteger '3'
+    v67 <- LoadInteger '4'
+    v68 <- Construct v5, [v66, v67]
+    v69 <- CreateNamedVariable 'b', 'var', v68
+    BeginIf v1
+    EndIf
+    v70 <- LoadInteger '4'
+    SetProperty v69, 'x', v70
+    BeginIf v1
+    EndIf
+    v71 <- GetProperty v65, 'x'
+    v72 <- CreateNamedVariable 'f', 'var', v71
+    BeginIf v1
+    EndIf
+    v73 <- LoadInteger '5'
+    SetProperty v69, 'x', v73
+    BeginIf v1
+    EndIf
+    v74 <- GetProperty v65, 'x'
+    v75 <- CreateNamedVariable 'g', 'var', v74
+    BeginIf v1
+    EndIf
+    v76 <- LoadInteger '6'
+    SetProperty v69, 'x', v76
+    BeginIf v1
+    EndIf
+    v77 <- GetProperty v65, 'x'
+    v78 <- CreateNamedVariable 'h', 'var', v77
+    BeginIf v1
+    EndIf
+    v79 <- LoadInteger '7'
+    SetProperty v69, 'x', v79
+    BeginIf v1
+    EndIf
+    v80 <- BinaryOperation v72, '+', v75
+    v81 <- BinaryOperation v80, '+', v78
+    v82 <- GetProperty v65, 'x'
+    v83 <- BinaryOperation v81, '+', v82
+    Return v83
+EndPlainFunction
+v84 <- BeginPlainFunction -> v85
+    v86 <- LoadInteger '2'
+    v87 <- LoadInteger '3'
+    v88 <- Construct v5, [v86, v87]
+    v89 <- CreateNamedVariable 'a', 'var', v88
+    v90 <- GetProperty v89, 'x'
+    v91 <- CreateNamedVariable 'v', 'var', v90
+    v92 <- CreateNamedVariable 'total', 'var', v91
+    v93 <- LoadInteger '0'
+    v94 <- CreateNamedVariable 'i', 'var', v93
+    BeginWhileLoopHeader
+        v95 <- UnaryOperation v94, '++'
+        v96 <- LoadInteger '10'
+        v97 <- Compare v95, '<', v96
+    BeginWhileLoopBody v97
+        v98 <- GetProperty v89, 'x'
+        Reassign v92, v98
+        v99 <- LoadInteger '4'
+        SetProperty v89, 'y', v99
+    EndWhileLoop
+    Return v92
+EndPlainFunction
+v100 <- BeginPlainFunction -> v101
+    v102 <- LoadInteger '2'
+    v103 <- LoadInteger '3'
+    v104 <- Construct v5, [v102, v103]
+    v105 <- CreateNamedVariable 'a', 'var', v104
+    v106 <- GetProperty v105, 'x'
+    v107 <- CreateNamedVariable 'v', 'var', v106
+    v108 <- CreateNamedVariable 'total', 'var', v107
+    v109 <- LoadInteger '0'
+    v110 <- CreateNamedVariable 'i', 'var', v109
+    BeginWhileLoopHeader
+        v111 <- UnaryOperation v110, '++'
+        v112 <- LoadInteger '10'
+        v113 <- Compare v111, '<', v112
+    BeginWhileLoopBody v113
+        v114 <- GetProperty v105, 'x'
+        Reassign v108, v114
+        v115 <- LoadInteger '4'
+        SetProperty v105, 'y', v115
+        v116 <- LoadInteger '0'
+        v117 <- CreateNamedVariable 'j', 'var', v116
+        BeginWhileLoopHeader
+            v118 <- UnaryOperation v117, '++'
+            v119 <- LoadInteger '10'
+            v120 <- Compare v118, '<', v119
+        BeginWhileLoopBody v120
+            v121 <- GetProperty v105, 'x'
+            Reassign v108, v121
+            v122 <- LoadInteger '5'
+            SetProperty v105, 'y', v122
+        EndWhileLoop
+        v123 <- GetProperty v105, 'x'
+        Reassign v108, v123
+        v124 <- LoadInteger '6'
+        SetProperty v105, 'y', v124
+        v125 <- LoadInteger '0'
+        Reassign v117, v125
+        BeginWhileLoopHeader
+            v126 <- UnaryOperation v117, '++'
+            v127 <- LoadInteger '10'
+            v128 <- Compare v126, '<', v127
+        BeginWhileLoopBody v128
+            v129 <- GetProperty v105, 'x'
+            Reassign v108, v129
+            v130 <- LoadInteger '7'
+            SetProperty v105, 'y', v130
+        EndWhileLoop
+    EndWhileLoop
+    Return v108
+EndPlainFunction
+v131 <- BeginPlainFunction -> 
+    BeginTry
+    BeginCatch -> v132
+    EndTryCatch
+EndPlainFunction
+v133 <- BeginPlainFunction -> 
+    v134 <- LoadInteger '1'
+    v135 <- LoadInteger '2'
+    v136 <- Construct v5, [v134, v135]
+    v137 <- CreateNamedVariable 'a', 'var', v136
+    BeginIf v1
+    EndIf
+    v138 <- LoadInteger '4'
+    SetProperty v137, 'x', v138
+    BeginIf v1
+    EndIf
+    v139 <- GetProperty v137, 'x'
+    v140 <- CreateNamedVariable 'f', 'var', v139
+    BeginIf v1
+    EndIf
+    v141 <- LoadInteger '5'
+    SetProperty v137, 'x', v141
+    BeginIf v1
+    EndIf
+    v142 <- GetProperty v137, 'x'
+    v143 <- CreateNamedVariable 'g', 'var', v142
+    BeginIf v1
+    EndIf
+    v144 <- CallFunction v131, []
+    BeginIf v1
+    EndIf
+    v145 <- LoadInteger '6'
+    SetProperty v137, 'x', v145
+    BeginIf v1
+    EndIf
+    v146 <- GetProperty v137, 'x'
+    v147 <- CreateNamedVariable 'h', 'var', v146
+    BeginIf v1
+    EndIf
+    v148 <- LoadInteger '7'
+    SetProperty v137, 'x', v148
+    BeginIf v1
+    EndIf
+    v149 <- BinaryOperation v140, '+', v143
+    v150 <- BinaryOperation v149, '+', v147
+    v151 <- GetProperty v137, 'x'
+    v152 <- BinaryOperation v150, '+', v151
+    Return v152
+EndPlainFunction
+v153 <- BeginPlainFunction -> 
+    v154 <- LoadInteger '6'
+    v155 <- LoadInteger '7'
+    v156 <- Construct v5, [v154, v155]
+    v157 <- CreateNamedVariable 'a', 'var', v156
+    BeginIf v1
+    EndIf
+    v158 <- LoadInteger '7'
+    SetProperty v157, 'x', v158
+    BeginIf v1
+    EndIf
+    v159 <- LoadInteger '7'
+    SetProperty v157, 'x', v159
+    BeginIf v1
+    EndIf
+    v160 <- LoadInteger '7'
+    SetProperty v157, 'x', v160
+    BeginIf v1
+    EndIf
+    v161 <- LoadInteger '7'
+    SetProperty v157, 'x', v161
+    BeginIf v1
+    EndIf
+    v162 <- GetProperty v157, 'x'
+    Return v162
+EndPlainFunction
+v163 <- BeginPlainFunction -> v164, v165
+    v166 <- LoadBoolean 'true'
+    Reassign v1, v166
+    v167 <- CallFunction v165, []
+    v168 <- CallFunction v165, []
+    v169 <- LoadBoolean 'false'
+    Reassign v1, v169
+    v170 <- CallFunction v165, []
+    v171 <- CallFunction v165, []
+    v172 <- LoadBoolean 'true'
+    Reassign v1, v172
+    v173 <- CallFunction v165, []
+    v174 <- CallFunction v165, []
+    v175 <- LoadBoolean 'false'
+    Reassign v1, v175
+    v176 <- CallFunction v165, []
+    v177 <- CallFunction v165, []
+EndPlainFunction
+v178 <- LoadInteger '4'
+v179 <- CallFunction v163, [v178, v11]
+v180 <- LoadInteger '8'
+v181 <- CallFunction v163, [v180, v39]
+v182 <- LoadInteger '12'
+v183 <- CallFunction v163, [v182, v51]
+v184 <- LoadInteger '8'
+v185 <- CallFunction v163, [v184, v61]
+v186 <- LoadInteger '22'
+v187 <- CallFunction v163, [v186, v133]
+v188 <- LoadInteger '7'
+v189 <- CallFunction v163, [v188, v153]
+v190 <- LoadInteger '2'
+v191 <- CallFunction v163, [v190, v84]
+v192 <- LoadInteger '2'
+v193 <- CallFunction v163, [v192, v100]
+
+
+var X = true;
+X = false;
+X = true;
+X = false;
+function B(a6, a7) {
+    this.x = a6;
+    this.y = a7;
+    return this;
+}
+function test_load() {
+    const v14 = new B(1, 2);
+    var a = v14;
+    var f = a.x + a.x;
+    if (false) {
+    }
+    return (f + a.x) + a.x;
+}
+function test_load2() {
+    const v28 = new B(1, 2);
+    var a = v28;
+    var f = a.x + a.x;
+    if (true) {
+    }
+    return (f + a.x) + a.x;
+}
+function test_store_load() {
+    const v42 = new B(1, 2);
+    var a = v42;
+    a.x = 4;
+    var b = X ? a.x : a.x;
+    return b + a.x;
+}
+function test_store_load2() {
+    const v54 = new B(1, 2);
+    var a = v54;
+    var c = 6;
+    if (X) {
+        a.x = c;
+    } else {
+        a.x = c;
+    }
+    return a.x + a.x;
+}
+function test_nonaliasing_store1() {
+    const v64 = new B(2, 3);
+    var a = v64;
+    const v68 = new B(3, 4);
+    var b = v68;
+    if (X) {
+    }
+    b.x = 4;
+    if (X) {
+    }
+    var f = a.x;
+    if (X) {
+    }
+    b.x = 5;
+    if (X) {
+    }
+    var g = a.x;
+    if (X) {
+    }
+    b.x = 6;
+    if (X) {
+    }
+    var h = a.x;
+    if (X) {
+    }
+    b.x = 7;
+    if (X) {
+    }
+    return ((f + g) + h) + a.x;
+}
+function test_loop(a85) {
+    const v88 = new B(2, 3);
+    var a = v88;
+    var v = a.x;
+    var total = v;
+    var i = 0;
+    while (i++ < 10) {
+        total = a.x;
+        a.y = 4;
+    }
+    return total;
+}
+function test_loop2(a101) {
+    const v104 = new B(2, 3);
+    var a = v104;
+    var v = a.x;
+    var total = v;
+    var i = 0;
+    while (i++ < 10) {
+        total = a.x;
+        a.y = 4;
+        var j = 0;
+        while (j++ < 10) {
+            total = a.x;
+            a.y = 5;
+        }
+        total = a.x;
+        a.y = 6;
+        j = 0;
+        while (j++ < 10) {
+            total = a.x;
+            a.y = 7;
+        }
+    }
+    return total;
+}
+function killall() {
+    try {
+    } catch(e132) {
+    }
+}
+function test_store_load_kill() {
+    const v136 = new B(1, 2);
+    var a = v136;
+    if (X) {
+    }
+    a.x = 4;
+    if (X) {
+    }
+    var f = a.x;
+    if (X) {
+    }
+    a.x = 5;
+    if (X) {
+    }
+    var g = a.x;
+    if (X) {
+    }
+    killall();
+    if (X) {
+    }
+    a.x = 6;
+    if (X) {
+    }
+    var h = a.x;
+    if (X) {
+    }
+    a.x = 7;
+    if (X) {
+    }
+    return ((f + g) + h) + a.x;
+}
+function test_store_store() {
+    const v156 = new B(6, 7);
+    var a = v156;
+    if (X) {
+    }
+    a.x = 7;
+    if (X) {
+    }
+    a.x = 7;
+    if (X) {
+    }
+    a.x = 7;
+    if (X) {
+    }
+    a.x = 7;
+    if (X) {
+    }
+    return a.x;
+}
+function test(a164, a165) {
+    X = true;
+    a165();
+    a165();
+    X = false;
+    a165();
+    a165();
+    X = true;
+    a165();
+    a165();
+    X = false;
+    a165();
+    a165();
+}
+test(4, test_load);
+test(8, test_store_load);
+test(12, test_store_load2);
+test(8, test_nonaliasing_store1);
+test(22, test_store_load_kill);
+test(7, test_store_store);
+test(2, test_loop);
+test(2, test_loop2);
+
+FuzzIL program written to corpus/load-elimination-global.fzil

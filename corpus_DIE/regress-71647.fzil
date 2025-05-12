@@ -1,0 +1,27 @@
+v0 <- LoadString 'object'
+v1 <- CreateNamedVariable 'qe', 'var', v0
+v2 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '10000'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- TypeOf v9
+        v11 <- Compare v10, '===', v1
+    EndForLoop
+EndPlainFunction
+v12 <- CallFunction v2, []
+
+
+var qe = "object";
+function g() {
+    for (let i4 = 0; i4 < 10000; i4++) {
+        typeof i4 === qe;
+    }
+}
+g();
+
+FuzzIL program written to corpus/regress-71647.fzil

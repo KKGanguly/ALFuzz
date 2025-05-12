@@ -1,0 +1,59 @@
+v0 <- CreateNamedVariable 'Date', 'none'
+v1 <- LoadString '2016/01/02 10:00 GMT-8'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'date', 'var', v2
+v4 <- LoadInteger '0'
+v5 <- CallMethod v3, 'getMinutes', []
+v6 <- LoadInteger '18'
+v7 <- CallMethod v3, 'getUTCHours', []
+v8 <- LoadString '2016/01/02 10:00 GMT-12'
+v9 <- Construct v0, [v8]
+Reassign v3, v9
+v10 <- LoadInteger '0'
+v11 <- CallMethod v3, 'getMinutes', []
+v12 <- LoadInteger '22'
+v13 <- CallMethod v3, 'getUTCHours', []
+v14 <- LoadString '2016/01/02 10:00 GMT-123'
+v15 <- Construct v0, [v14]
+Reassign v3, v15
+v16 <- LoadInteger '23'
+v17 <- CallMethod v3, 'getMinutes', []
+v18 <- LoadInteger '11'
+v19 <- CallMethod v3, 'getUTCHours', []
+v20 <- LoadString '2016/01/02 10:00 GMT-0856'
+v21 <- Construct v0, [v20]
+Reassign v3, v21
+v22 <- LoadInteger '56'
+v23 <- CallMethod v3, 'getMinutes', []
+v24 <- LoadInteger '18'
+v25 <- CallMethod v3, 'getUTCHours', []
+v26 <- LoadString '2016/01/02 10:00 GMT-08000'
+v27 <- Construct v0, [v26]
+Reassign v3, v27
+v28 <- CreateNamedVariable 'NaN', 'none'
+v29 <- CallMethod v3, 'getMinutes', []
+v30 <- CallMethod v3, 'getUTCHours', []
+
+
+const v2 = new Date("2016/01/02 10:00 GMT-8");
+var date = v2;
+date.getMinutes();
+date.getUTCHours();
+const v9 = new Date("2016/01/02 10:00 GMT-12");
+date = v9;
+date.getMinutes();
+date.getUTCHours();
+const v15 = new Date("2016/01/02 10:00 GMT-123");
+date = v15;
+date.getMinutes();
+date.getUTCHours();
+const v21 = new Date("2016/01/02 10:00 GMT-0856");
+date = v21;
+date.getMinutes();
+date.getUTCHours();
+const v27 = new Date("2016/01/02 10:00 GMT-08000");
+date = v27;
+date.getMinutes();
+date.getUTCHours();
+
+FuzzIL program written to corpus/regress-crbug-422858.fzil

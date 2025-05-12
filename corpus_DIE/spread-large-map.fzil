@@ -1,0 +1,61 @@
+v0 <- LoadInteger '130000'
+v1 <- CreateNamedVariable 'n', 'const', v0
+BeginBlockStatement
+    v2 <- CreateNamedVariable 'Map', 'none'
+    v3 <- Construct v2, []
+    v4 <- CreateNamedVariable 'x', 'let', v3
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- Compare v6, '<', v1
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation '++', v8
+    BeginForLoopBody -> v10
+        v11 <- CreateNamedVariable 'String', 'none'
+        v12 <- CallFunction v11, [v10]
+        v13 <- CallMethod v4, 'set', [v10, v12]
+    EndForLoop
+    v14 <- CallMethod v4, 'values', []
+    v15 <- CreateArrayWithSpread [...v14]
+    v16 <- CreateNamedVariable 'a', 'let', v15
+EndBlockStatement
+BeginBlockStatement
+    v17 <- CreateNamedVariable 'Map', 'none'
+    v18 <- Construct v17, []
+    v19 <- CreateNamedVariable 'x', 'let', v18
+    BeginForLoopInitializer
+        v20 <- LoadInteger '0'
+    BeginForLoopCondition -> v21
+        v22 <- Compare v21, '<', v1
+    BeginForLoopAfterthought v22 -> v23
+        v24 <- UnaryOperation '++', v23
+    BeginForLoopBody -> v25
+        v26 <- CreateNamedVariable 'String', 'none'
+        v27 <- CallFunction v26, [v25]
+        v28 <- CallMethod v19, 'set', [v25, v27]
+    EndForLoop
+    v29 <- CallMethod v19, 'keys', []
+    v30 <- CreateArrayWithSpread [...v29]
+    v31 <- CreateNamedVariable 'a', 'let', v30
+EndBlockStatement
+
+
+const n = 130000;
+{
+    const v3 = new Map();
+    let x = v3;
+    for (let i6 = 0; i6 < n; ++i6) {
+        x.set(i6, String(i6));
+    }
+    let a = [...x.values()];
+}
+{
+    const v18 = new Map();
+    let x = v18;
+    for (let i21 = 0; i21 < n; ++i21) {
+        x.set(i21, String(i21));
+    }
+    let a = [...x.keys()];
+}
+
+FuzzIL program written to corpus/spread-large-map.fzil

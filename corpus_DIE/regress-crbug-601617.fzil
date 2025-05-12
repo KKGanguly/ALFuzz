@@ -1,0 +1,57 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'g', 'none'
+    v2 <- GetProperty v1, 'arguments'
+    v3 <- GetElement v2, '0'
+    v4 <- GetProperty v3, 'x'
+    v5 <- CreateNamedVariable 'res', 'var', v4
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- CallFunction v0, []
+    v9 <- CreateNamedVariable 'res', 'var', v8
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v11
+    v12 <- EndObjectLiteral
+    v13 <- CreateNamedVariable 'o', 'var', v12
+    v14 <- CallFunction v6, [v13]
+    v15 <- CreateNamedVariable 'res', 'var', v14
+    Return v15
+EndPlainFunction
+v16 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v17 <- LoadInteger '5'
+    v18 <- CallFunction v10, [v17]
+    Return v18
+EndPlainFunction
+v19 <- CallFunction v16, []
+v20 <- CallFunction v16, []
+v21 <- LoadInteger '1'
+v22 <- CallFunction v16, []
+
+
+function h() {
+    var res = g.arguments[0].x;
+    return res;
+}
+function g(a7) {
+    var res = h();
+    return res;
+}
+function f1() {
+    var o = { x: 1 };
+    var res = g(o);
+    return res;
+}
+function f0() {
+    'use strict';
+    return f1(5);
+}
+f0();
+f0();
+f0();
+
+FuzzIL program written to corpus/regress-crbug-601617.fzil

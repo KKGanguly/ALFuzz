@@ -1,0 +1,19 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '1000'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '1000000'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- LoadInteger '19703'
+    Update v4, '+', v5
+BeginForLoopBody -> v6
+    v7 <- CreateNamedVariable 'Array', 'none'
+    v8 <- Construct v7, [v6]
+EndForLoop
+
+
+for (let i1 = 1000; i1 < 1000000; i1 += 19703) {
+    new Array(i1);
+}
+
+FuzzIL program written to corpus/regress-2790.fzil

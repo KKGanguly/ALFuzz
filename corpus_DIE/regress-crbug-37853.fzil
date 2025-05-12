@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '1'
+v5 <- LoadString 'a'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v4
+    ObjectLiteralAddElement `1`, v5
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'a', 'none'
+Reassign v7, v6
+v8 <- CreateNamedVariable 'a', 'none'
+v9 <- LoadString 'a'
+v10 <- CallFunction v0, [v8, v9]
+v11 <- LoadString 'a'
+v12 <- CallFunction v0, [v8, v11]
+v13 <- LoadInteger '1'
+v14 <- CallFunction v0, [v8, v13]
+
+
+function f(a1, a2) {
+    return a1[a2];
+}
+a = { a: 1, 1: "a" };
+f(a, "a");
+f(a, "a");
+f(a, 1);
+
+FuzzIL program written to corpus/regress-crbug-37853.fzil

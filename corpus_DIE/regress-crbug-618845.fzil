@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString 'name'
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadString 'FooName'
+    Return v4
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v1, v2, v5]
+v8 <- BeginPlainFunction -> v9
+    v10 <- GetProperty v9, 'prototype'
+    v11 <- GetProperty v10, 'name'
+    Return v11
+EndPlainFunction
+v12 <- LoadString 'FooName'
+v13 <- CallFunction v8, [v0]
+v14 <- LoadString 'FooName'
+v15 <- CallFunction v8, [v0]
+
+
+function Foo() {
+}
+const v1 = Foo.prototype;
+function f3() {
+    return "FooName";
+}
+Object.defineProperty(v1, "name", { get: f3 });
+function ic(a9) {
+    return a9.prototype.name;
+}
+ic(Foo);
+ic(Foo);
+
+FuzzIL program written to corpus/regress-crbug-618845.fzil

@@ -1,0 +1,245 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- LoadNull
+    v2 <- LoadInteger '42'
+    v3 <- CreateNamedVariable 'Array', 'none'
+    v4 <- GetProperty v3, 'prototype'
+    v5 <- GetProperty v4, 'lastIndexOf'
+    v6 <- CallMethod v5, 'call', [v1, v2]
+EndArrowFunction
+v7 <- CallFunction v0, []
+v8 <- CreateNamedVariable 'TypeError', 'none'
+v9 <- BeginArrowFunction -> 
+    v10 <- LoadUndefined
+    v11 <- LoadInteger '42'
+    v12 <- CreateNamedVariable 'Array', 'none'
+    v13 <- GetProperty v12, 'prototype'
+    v14 <- GetProperty v13, 'lastIndexOf'
+    v15 <- CallMethod v14, 'call', [v10, v11]
+EndArrowFunction
+v16 <- CallFunction v9, []
+v17 <- BeginPlainFunction -> 
+    v18 <- LoadInteger '5'
+    v19 <- LoadUndefined
+    v20 <- LoadInteger '7'
+    v21 <- CreateArray [v18, v19, v20]
+    v22 <- CreateNamedVariable 'array', 'var', v21
+    v23 <- BeginPlainFunction -> 
+        v24 <- LoadInteger '1'
+        SetProperty v22, 'length', v24
+        v25 <- LoadInteger '2'
+        Return v25
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v23
+    v26 <- EndObjectLiteral
+    v27 <- CreateNamedVariable 'fromIndex', 'var', v26
+    v28 <- LoadInteger '1'
+    v29 <- UnaryOperation '-', v28
+    v30 <- LoadUndefined
+    v31 <- CallMethod v22, 'lastIndexOf', [v30, v27]
+    v32 <- LoadInteger '5'
+    v33 <- LoadUndefined
+    v34 <- LoadInteger '7'
+    v35 <- CreateArray [v32, v33, v34]
+    Reassign v22, v35
+    v36 <- LoadInteger '0'
+    v37 <- LoadInteger '5'
+    v38 <- CallMethod v22, 'lastIndexOf', [v37, v27]
+EndPlainFunction
+v39 <- CallFunction v17, []
+v40 <- BeginPlainFunction -> v41
+    v42 <- LoadInteger '5'
+    v43 <- LoadUndefined
+    v44 <- LoadInteger '7'
+    v45 <- CreateArray [v42, v43, v44]
+    v46 <- CreateNamedVariable 'array', 'var', v45
+    v47 <- BeginPlainFunction -> 
+        v48 <- LoadInteger '0'
+        SetProperty v46, 'length', v48
+        v49 <- LoadInteger '2'
+        Return v49
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v47
+    v50 <- EndObjectLiteral
+    v51 <- CreateNamedVariable 'fromIndex', 'var', v50
+    v52 <- CreateNamedVariable 'Proxy', 'none'
+    v53 <- CreateNamedVariable 'Array', 'none'
+    v54 <- GetProperty v53, 'prototype'
+    v55 <- BeginPlainFunction -> v56, v57
+        v58 <- TestIn v57, v56
+        Return v58
+    EndPlainFunction
+    v59 <- BeginPlainFunction -> 
+        v60 <- CreateNamedVariable 'Error', 'none'
+        v61 <- LoadString '[[Get]] trap called'
+        v62 <- Construct v60, [v61]
+        ThrowException v62
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `has`, v55
+        ObjectLiteralAddProperty `get`, v59
+    v63 <- EndObjectLiteral
+    v64 <- Construct v52, [v54, v63]
+    v65 <- CreateNamedVariable 'Object', 'none'
+    v66 <- CallMethod v65, 'setPrototypeOf', [v46, v64]
+    v67 <- LoadInteger '1'
+    v68 <- UnaryOperation '-', v67
+    v69 <- GetProperty v53, 'prototype'
+    v70 <- GetProperty v69, 'lastIndexOf'
+    v71 <- CallMethod v70, 'call', [v46, v41, v51]
+EndPlainFunction
+v72 <- CreateNamedVariable 'testHasProperty', 'var', v40
+v73 <- LoadInteger '5'
+v74 <- CallFunction v72, [v73]
+v75 <- LoadUndefined
+v76 <- CallFunction v72, [v75]
+v77 <- BeginPlainFunction -> v78
+    v79 <- LoadInteger '5'
+    v80 <- LoadUndefined
+    v81 <- LoadInteger '7'
+    v82 <- CreateArray [v79, v80, v81]
+    v83 <- CreateNamedVariable 'array', 'var', v82
+    v84 <- CreateArray []
+    v85 <- CreateNamedVariable 'log', 'var', v84
+    v86 <- CreateNamedVariable 'Proxy', 'none'
+    v87 <- CreateNamedVariable 'Array', 'none'
+    v88 <- GetProperty v87, 'prototype'
+    v89 <- BeginPlainFunction -> 
+        v90 <- LoadString 'HasProperty'
+        v91 <- CallMethod v85, 'push', [v90]
+        v92 <- LoadBoolean 'true'
+        Return v92
+    EndPlainFunction
+    v93 <- BeginPlainFunction -> 
+        v94 <- LoadString 'Get'
+        v95 <- CallMethod v85, 'push', [v94]
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `has`, v89
+        ObjectLiteralAddProperty `get`, v93
+    v96 <- EndObjectLiteral
+    v97 <- Construct v86, [v88, v96]
+    v98 <- CreateNamedVariable 'Object', 'none'
+    v99 <- CallMethod v98, 'setPrototypeOf', [v83, v97]
+    v100 <- GetProperty v87, 'prototype'
+    v101 <- GetProperty v100, 'lastIndexOf'
+    v102 <- CallMethod v101, 'call', [v83, v78]
+    v103 <- LoadString 'HasProperty'
+    v104 <- LoadString 'Get'
+    v105 <- CreateArray [v103, v104]
+EndPlainFunction
+v106 <- CreateNamedVariable 'testHasPropertyThenGet', 'var', v77
+v107 <- LoadInteger '5'
+v108 <- CallFunction v106, [v107]
+v109 <- LoadUndefined
+v110 <- CallFunction v106, [v109]
+v111 <- BeginPlainFunction -> 
+    v112 <- CreateNamedVariable 'Array', 'none'
+    v113 <- LoadInteger '10000'
+    v114 <- Construct v112, [v113]
+    v115 <- CreateNamedVariable 'array', 'var', v114
+    v116 <- LoadInteger '5'
+    SetElement v115, '0', v116
+    v117 <- LoadInteger '7'
+    SetElement v115, '9999', v117
+    v118 <- LoadInteger '0'
+    v119 <- CreateNamedVariable 'count', 'var', v118
+    v120 <- GetProperty v115, '__proto__'
+    v121 <- LoadInteger '9998'
+    v122 <- BeginArrowFunction -> 
+        v123 <- UnaryOperation '++', v119
+        Return v123
+    EndArrowFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v122
+    v124 <- EndObjectLiteral
+    v125 <- CreateNamedVariable 'Object', 'none'
+    v126 <- CallMethod v125, 'defineProperty', [v120, v121, v124]
+    v127 <- LoadInteger '0'
+    v128 <- GetProperty v112, 'prototype'
+    v129 <- GetProperty v128, 'lastIndexOf'
+    v130 <- CallMethod v129, 'call', [v115, v127]
+    v131 <- LoadInteger '1'
+EndPlainFunction
+v132 <- CallFunction v111, []
+
+
+const v0 = () => {
+    Array.prototype.lastIndexOf.call(null, 42);
+};
+v0();
+const v9 = () => {
+    Array.prototype.lastIndexOf.call(undefined, 42);
+};
+v9();
+function testFromIndex() {
+    var array = [5,,7];
+    function f23() {
+        array.length = 1;
+        return 2;
+    }
+    var fromIndex = { valueOf: f23 };
+    -1;
+    array.lastIndexOf(undefined, fromIndex);
+    (array = [5,,7]).lastIndexOf(5, fromIndex);
+}
+testFromIndex();
+function f40(a41) {
+    var array = [5,,7];
+    function f47() {
+        array.length = 0;
+        return 2;
+    }
+    var fromIndex = { valueOf: f47 };
+    const v54 = Array.prototype;
+    function f55(a56, a57) {
+        return a57 in a56;
+    }
+    function f59() {
+        const v62 = new Error("[[Get]] trap called");
+        throw v62;
+    }
+    const v64 = new Proxy(v54, { has: f55, get: f59 });
+    Object.setPrototypeOf(array, v64);
+    -1;
+    Array.prototype.lastIndexOf.call(array, a41, fromIndex);
+}
+var testHasProperty = f40;
+testHasProperty(5);
+testHasProperty(undefined);
+function f77(a78) {
+    var array = [5,,7];
+    var log = [];
+    const v88 = Array.prototype;
+    function f89() {
+        log.push("HasProperty");
+        return true;
+    }
+    function f93() {
+        log.push("Get");
+    }
+    const v97 = new Proxy(v88, { has: f89, get: f93 });
+    Object.setPrototypeOf(array, v97);
+    Array.prototype.lastIndexOf.call(array, a78);
+    ["HasProperty","Get"];
+}
+var testHasPropertyThenGet = f77;
+testHasPropertyThenGet(5);
+testHasPropertyThenGet(undefined);
+function f111() {
+    const v114 = new Array(10000);
+    var array = v114;
+    array[0] = 5;
+    array[9999] = 7;
+    var count = 0;
+    const v120 = array.__proto__;
+    const v122 = () => {
+        return ++count;
+    };
+    Object.defineProperty(v120, 9998, { get: v122 });
+    Array.prototype.lastIndexOf.call(array, 0);
+}
+f111();
+
+FuzzIL program written to corpus/array-lastindexof.fzil

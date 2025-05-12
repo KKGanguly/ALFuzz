@@ -1,0 +1,22 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'o', 'var', v2
+    v4 <- LoadInteger '1'
+    Update v3, '^', v4
+    v5 <- GetComputedProperty v3, v4
+    v6 <- CreateNamedVariable 'a', 'var', v5
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '1'
+v8 <- CallFunction v0, []
+
+
+function test() {
+    var o = [1];
+    var a = (o ^= 1)[1];
+    return a;
+}
+test();
+
+FuzzIL program written to corpus/regress-286.fzil

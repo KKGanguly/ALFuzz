@@ -1,0 +1,269 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateNamedVariable 'actual', 'const', v1
+    v3 <- LoadString 'await'
+    v4 <- LoadInteger '1'
+    v5 <- LoadString 'await'
+    v6 <- LoadInteger '2'
+    v7 <- CreateArray [v3, v4, v5, v6]
+    v8 <- CreateNamedVariable 'expected', 'const', v7
+    v9 <- LoadInteger '2'
+    v10 <- CreateNamedVariable 'iterations', 'const', v9
+    v11 <- BeginAsyncFunction -> 
+        v12 <- LoadString 'await'
+        v13 <- CallMethod v2, 'push', [v12]
+    EndAsyncFunction
+    v14 <- BeginAsyncFunction -> 
+        BeginForLoopInitializer
+            v15 <- LoadInteger '0'
+        BeginForLoopCondition -> v16
+            v17 <- Compare v16, '<', v10
+        BeginForLoopAfterthought v17 -> v18
+            v19 <- UnaryOperation v18, '++'
+        BeginForLoopBody -> v20
+            v21 <- CallFunction v11, []
+            v22 <- Await v21
+        EndForLoop
+        v23 <- LoadInteger '0'
+        Return v23
+    EndAsyncFunction
+    v24 <- BeginPlainFunction -> 
+        v25 <- LoadString 'Async/await and promises should be interleaved.'
+    EndPlainFunction
+    v26 <- BeginAsyncArrowFunction -> 
+        v27 <- CallFunction v14, []
+        v28 <- BeginPlainFunction -> 
+            v29 <- LoadInteger '2'
+            v30 <- CallMethod v2, 'push', [v29]
+        EndPlainFunction
+        v31 <- CreateNamedVariable 'Promise', 'none'
+        v32 <- BeginPlainFunction -> v33
+            v34 <- LoadInteger '1'
+            v35 <- CallMethod v2, 'push', [v34]
+            v36 <- CallFunction v33, []
+        EndPlainFunction
+        v37 <- Construct v31, [v32]
+        v38 <- CallMethod v37, 'then', [v28]
+        v39 <- CallMethod v38, 'then', [v24]
+        Return v39
+    EndAsyncArrowFunction
+    v40 <- CallFunction v26, []
+EndPlainFunction
+v41 <- CallFunction v0, []
+v42 <- BeginPlainFunction -> 
+    v43 <- CreateArray []
+    v44 <- CreateNamedVariable 'actual', 'const', v43
+    v45 <- LoadString 'await'
+    v46 <- LoadInteger '1'
+    v47 <- LoadString 'await'
+    v48 <- LoadInteger '2'
+    v49 <- CreateArray [v45, v46, v47, v48]
+    v50 <- CreateNamedVariable 'expected', 'const', v49
+    v51 <- LoadInteger '2'
+    v52 <- CreateNamedVariable 'iterations', 'const', v51
+    v53 <- BeginAsyncFunction -> 
+        v54 <- LoadString 'await'
+        v55 <- CallMethod v44, 'push', [v54]
+    EndAsyncFunction
+    v56 <- BeginAsyncGeneratorFunction -> 
+        BeginForLoopInitializer
+            v57 <- LoadInteger '0'
+        BeginForLoopCondition -> v58
+            v59 <- Compare v58, '<', v52
+        BeginForLoopAfterthought v59 -> v60
+            v61 <- UnaryOperation v60, '++'
+        BeginForLoopBody -> v62
+            v63 <- CallFunction v53, []
+            v64 <- Await v63
+        EndForLoop
+        v65 <- LoadInteger '0'
+        Return v65
+    EndAsyncGeneratorFunction
+    v66 <- BeginPlainFunction -> 
+        v67 <- LoadString 'Async/await and promises should be interleaved when using async generators.'
+    EndPlainFunction
+    v68 <- BeginAsyncArrowFunction -> 
+        v69 <- CallFunction v56, []
+        v70 <- CallMethod v69, 'next', []
+        v71 <- BeginPlainFunction -> 
+            v72 <- LoadInteger '2'
+            v73 <- CallMethod v44, 'push', [v72]
+        EndPlainFunction
+        v74 <- CreateNamedVariable 'Promise', 'none'
+        v75 <- BeginPlainFunction -> v76
+            v77 <- LoadInteger '1'
+            v78 <- CallMethod v44, 'push', [v77]
+            v79 <- CallFunction v76, []
+        EndPlainFunction
+        v80 <- Construct v74, [v75]
+        v81 <- CallMethod v80, 'then', [v71]
+        v82 <- CallMethod v81, 'then', [v66]
+        Return v82
+    EndAsyncArrowFunction
+    v83 <- CallFunction v68, []
+EndPlainFunction
+v84 <- CallFunction v42, []
+v85 <- BeginPlainFunction -> 
+    v86 <- CreateArray []
+    v87 <- CreateNamedVariable 'actual', 'const', v86
+    v88 <- LoadString 'Promise: 6'
+    v89 <- LoadString 'Promise: 5'
+    v90 <- LoadString 'Await: 3'
+    v91 <- LoadString 'Promise: 4'
+    v92 <- LoadString 'Promise: 3'
+    v93 <- LoadString 'Await: 2'
+    v94 <- LoadString 'Promise: 2'
+    v95 <- LoadString 'Promise: 1'
+    v96 <- LoadString 'Await: 1'
+    v97 <- LoadString 'Promise: 0'
+    v98 <- CreateArray [v88, v89, v90, v91, v92, v93, v94, v95, v96, v97]
+    v99 <- CreateNamedVariable 'expected', 'const', v98
+    v100 <- LoadInteger '3'
+    v101 <- CreateNamedVariable 'iterations', 'const', v100
+    v102 <- BeginAsyncGeneratorFunction -> v103
+        v104 <- CreateNamedVariable 'current', 'let', v103
+        BeginWhileLoopHeader
+            v105 <- LoadInteger '0'
+            v106 <- Compare v104, '>', v105
+        BeginWhileLoopBody v106
+            v107 <- UnaryOperation v104, '--'
+            v108 <- CreateNamedVariable 'Promise', 'none'
+            v109 <- CallMethod v108, 'resolve', [v107]
+            v110 <- Yield v109
+        EndWhileLoop
+    EndAsyncGeneratorFunction
+    v111 <- BeginAsyncFunction -> 
+        v112 <- CallFunction v102, [v101]
+        BeginForOfLoop v112 -> v113
+            v114 <- LoadString 'Await: '
+            v115 <- BinaryOperation v114, '+', v113
+            v116 <- CallMethod v87, 'push', [v115]
+        EndForOfLoop
+    EndAsyncFunction
+    v117 <- BeginAsyncFunction -> 
+        v118 <- LoadString 'Async/await and promises should be interleaved when yielding.'
+    EndAsyncFunction
+    v119 <- BeginAsyncFunction -> v120
+        v121 <- LoadString 'Promise: '
+        v122 <- BinaryOperation v121, '+', v120
+        v123 <- CallMethod v87, 'push', [v122]
+        v124 <- LoadInteger '0'
+        v125 <- Compare v120, '>', v124
+        BeginIf v125
+            v126 <- LoadInteger '1'
+            v127 <- BinaryOperation v120, '-', v126
+            v128 <- CreateNamedVariable 'Promise', 'none'
+            v129 <- CallMethod v128, 'resolve', [v127]
+            v130 <- CallMethod v129, 'then', [v119]
+            Return v130
+        BeginElse
+            v131 <- CallFunction v117, []
+            v132 <- Await v131
+        EndIf
+    EndAsyncFunction
+    v133 <- BeginAsyncArrowFunction -> 
+        v134 <- CallFunction v111, []
+        v135 <- LoadInteger '2'
+        v136 <- BinaryOperation v101, '*', v135
+        v137 <- CallFunction v119, [v136]
+        Return v137
+    EndAsyncArrowFunction
+    v138 <- CallFunction v133, []
+EndPlainFunction
+v139 <- CallFunction v85, []
+
+
+function f0() {
+    const actual = [];
+    const expected = ["await",1,"await",2];
+    const iterations = 2;
+    async function pushAwait() {
+        actual.push("await");
+    }
+    async function callAsync() {
+        for (let i16 = 0; i16 < iterations; i16++) {
+            await pushAwait();
+        }
+        return 0;
+    }
+    function checkAssertions() {
+    }
+    const v26 = async () => {
+        callAsync();
+        function f28() {
+            actual.push(2);
+        }
+        function f32(a33) {
+            actual.push(1);
+            a33();
+        }
+        const v37 = new Promise(f32);
+        return v37.then(f28).then(checkAssertions);
+    };
+    v26();
+}
+f0();
+function f42() {
+    const actual = [];
+    const expected = ["await",1,"await",2];
+    const iterations = 2;
+    async function pushAwait() {
+        actual.push("await");
+    }
+    async function* callAsync() {
+        for (let i58 = 0; i58 < iterations; i58++) {
+            await pushAwait();
+        }
+        return 0;
+    }
+    function checkAssertions() {
+    }
+    const v68 = async () => {
+        callAsync().next();
+        function f71() {
+            actual.push(2);
+        }
+        function f75(a76) {
+            actual.push(1);
+            a76();
+        }
+        const v80 = new Promise(f75);
+        return v80.then(f71).then(checkAssertions);
+    };
+    v68();
+}
+f42();
+function f85() {
+    const actual = [];
+    const expected = ["Promise: 6","Promise: 5","Await: 3","Promise: 4","Promise: 3","Await: 2","Promise: 2","Promise: 1","Await: 1","Promise: 0"];
+    const iterations = 3;
+    async function* naturalNumbers(a103) {
+        let current = a103;
+        while (current > 0) {
+            yield Promise.resolve(current--);
+        }
+    }
+    async function trigger() {
+        for (const v113 of naturalNumbers(iterations)) {
+            actual.push("Await: " + v113);
+        }
+    }
+    async function checkAssertions() {
+    }
+    async function countdown(a120) {
+        actual.push("Promise: " + a120);
+        if (a120 > 0) {
+            return Promise.resolve(a120 - 1).then(countdown);
+        } else {
+            await checkAssertions();
+        }
+    }
+    const v133 = async () => {
+        trigger();
+        return countdown(iterations * 2);
+    };
+    v133();
+}
+f85();
+
+FuzzIL program written to corpus/async-await-optimization.fzil

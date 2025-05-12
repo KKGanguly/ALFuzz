@@ -1,0 +1,68 @@
+v0 <- CreateNamedVariable 'f0', 'none'
+v1 <- CallFunction v0, []
+v2 <- UnaryOperation '!', v1
+BeginIf v2
+    v3 <- LoadString 'Concurrent recompilation is disabled. Skipping this test.'
+    v4 <- CreateNamedVariable 'print', 'none'
+    v5 <- CallFunction v4, [v3]
+    v6 <- CreateNamedVariable 'quit', 'none'
+    v7 <- CallFunction v6, []
+EndIf
+v8 <- BeginPlainFunction -> v9
+    v10 <- CallFunction v9, []
+    v11 <- CallFunction v9, []
+    v12 <- CallFunction v9, []
+    v13 <- CreateNamedVariable 'gc', 'none'
+    v14 <- CallFunction v13, []
+    v15 <- LoadString 'no sync'
+    v16 <- LoadString 'sync'
+    v17 <- CallFunction v13, []
+EndPlainFunction
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadString 'abcdefghijklmn'
+    v20 <- LoadString '123456789'
+    v21 <- BinaryOperation v19, '+', v20
+    Return v21
+EndPlainFunction
+v22 <- BeginPlainFunction -> 
+    v23 <- LoadString 'abcdefghijklmn☃'
+    v24 <- LoadString '123456789'
+    v25 <- BinaryOperation v23, '+', v24
+    Return v25
+EndPlainFunction
+v26 <- BeginPlainFunction -> 
+    v27 <- LoadString 'abcdefghijklmn☃'
+    v28 <- LoadString '123456789☄'
+    v29 <- BinaryOperation v27, '+', v28
+    Return v29
+EndPlainFunction
+v30 <- CallFunction v8, [v18]
+v31 <- CallFunction v8, [v22]
+v32 <- CallFunction v8, [v26]
+
+
+if (!f0()) {
+    print("Concurrent recompilation is disabled. Skipping this test.");
+    quit();
+}
+function test(a9) {
+    a9();
+    a9();
+    a9();
+    gc();
+    gc();
+}
+function f() {
+    return "abcdefghijklmn" + "123456789";
+}
+function g() {
+    return "abcdefghijklmn☃" + "123456789";
+}
+function h() {
+    return "abcdefghijklmn☃" + "123456789☄";
+}
+test(f);
+test(g);
+test(h);
+
+FuzzIL program written to corpus/regress-embedded-cons-string.fzil

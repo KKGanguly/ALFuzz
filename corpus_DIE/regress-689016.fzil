@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v2 <- BeginPlainFunction -> 
+        v3 <- LoadInteger '1000000'
+        v4 <- CreateNamedVariable 'Array', 'none'
+        v5 <- CallFunction v4, [v3]
+        v6 <- CallFunctionWithSpread v1, [...v5]
+    EndPlainFunction
+    v7 <- CallFunction v2, []
+    v8 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v9 <- CallFunction v0, []
+
+
+function f0() {
+    function f() {
+    }
+    function f2() {
+        f(...Array(1000000));
+    }
+    f2();
+}
+f0();
+
+FuzzIL program written to corpus/regress-689016.fzil

@@ -1,0 +1,55 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable '__v_5', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '0'
+    v4 <- LoadInteger '0'
+    v5 <- LoadInteger '0'
+    v6 <- CreateArray [v3, v4, v5]
+    v7 <- CreateNamedVariable '__v_2', 'var', v6
+    v8 <- LoadInteger '0'
+    SetElement v7, '0', v8
+    v9 <- CreateNamedVariable 'gc', 'none'
+    v10 <- CallFunction v9, []
+    Return v7
+EndPlainFunction
+v11 <- BeginPlainFunction -> v12
+    v13 <- LoadUndefined
+    SetElement v12, '1', v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> 
+    v15 <- CallFunction v2, []
+    v16 <- CreateNamedVariable '__v_4', 'var', v15
+    v17 <- CallFunction v2, []
+    v18 <- CallFunction v11, [v17]
+    v19 <- CallFunction v2, []
+    Reassign v1, v19
+    v20 <- CallFunction v2, []
+    Reassign v16, v20
+    v21 <- CallFunction v11, [v1]
+EndPlainFunction
+v22 <- CallFunction v14, []
+v23 <- CallFunction v14, []
+
+
+var __v_5 = {};
+function __f_10() {
+    var __v_2 = [0,0,0];
+    __v_2[0] = 0;
+    gc();
+    return __v_2;
+}
+function __f_2(a12) {
+    a12[1] = undefined;
+}
+function __f_9() {
+    var __v_4 = __f_10();
+    __f_2(__f_10());
+    __v_5 = __f_10();
+    __v_4 = __f_10();
+    __f_2(__v_5);
+}
+__f_9();
+__f_9();
+
+FuzzIL program written to corpus/regress-590074.fzil

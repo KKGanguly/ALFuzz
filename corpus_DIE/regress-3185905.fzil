@@ -1,0 +1,85 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadArguments
+    v3 <- GetProperty v2, 'callee'
+    v4 <- CreateNamedVariable 'a', 'var', v3
+    v5 <- LoadInteger '1'
+    Reassign v1, v5
+    v6 <- LoadInteger '2'
+    Reassign v1, v6
+    v7 <- LoadInteger '2'
+EndPlainFunction
+v8 <- LoadInteger '0'
+v9 <- CallFunction v0, [v8]
+v10 <- BeginPlainFunction -> v11
+    v12 <- LoadArguments
+    v13 <- GetProperty v12, 'callee'
+    v14 <- CreateNamedVariable 'a', 'var', v13
+    v15 <- UnaryOperation v11, '++'
+    v16 <- UnaryOperation v11, '++'
+    v17 <- LoadInteger '2'
+EndPlainFunction
+v18 <- LoadInteger '0'
+v19 <- CallFunction v10, [v18]
+v20 <- BeginPlainFunction -> v21
+    v22 <- LoadArguments
+    v23 <- GetProperty v22, 'callee'
+    v24 <- CreateNamedVariable 'a', 'var', v23
+    v25 <- LoadInteger '1'
+    Update v21, '+', v25
+    v26 <- LoadInteger '1'
+    Update v21, '+', v26
+    v27 <- LoadInteger '2'
+EndPlainFunction
+v28 <- LoadInteger '0'
+v29 <- CallFunction v20, [v28]
+v30 <- BeginPlainFunction -> v31
+    v32 <- LoadInteger '3'
+    v33 <- LoadInteger '4'
+    BeginObjectLiteral
+        ObjectLiteralAddElement `0`, v32
+        ObjectLiteralAddProperty `x`, v33
+    v34 <- EndObjectLiteral
+    v35 <- CreateNamedVariable 'arguments', 'var', v34
+    v36 <- LoadInteger '1'
+    Update v31, '+', v36
+    v37 <- LoadInteger '1'
+    Update v31, '+', v37
+    v38 <- LoadInteger '2'
+    v39 <- LoadInteger '3'
+    v40 <- GetElement v35, '0'
+    v41 <- LoadInteger '4'
+    v42 <- LoadString 'x'
+    v43 <- GetComputedProperty v35, v42
+EndPlainFunction
+v44 <- LoadInteger '0'
+v45 <- CallFunction v30, [v44]
+
+
+function test1(a1) {
+    var a = arguments.callee;
+    a1 = 1;
+    a1 = 2;
+}
+test1(0);
+function test2(a11) {
+    var a = arguments.callee;
+    a11++;
+    a11++;
+}
+test2(0);
+function test3(a21) {
+    var a = arguments.callee;
+    a21 += 1;
+    a21 += 1;
+}
+test3(0);
+function test4(a31) {
+    var arguments = { 0: 3, x: 4 };
+    a31 += 1;
+    a31 += 1;
+    arguments[0];
+    arguments["x"];
+}
+test4(0);
+
+FuzzIL program written to corpus/regress-3185905.fzil

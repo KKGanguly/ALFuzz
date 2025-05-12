@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '35'
+    SetComputedProperty v1, v2, v3
+EndPlainFunction
+v4 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `bilbo`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'x', 'var', v5
+v7 <- LoadInteger '3'
+v8 <- LoadString 'hi'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `frodo`, v7
+    ObjectLiteralAddProperty `bilbo`, v8
+v9 <- EndObjectLiteral
+v10 <- CreateNamedVariable 'y', 'var', v9
+v11 <- LoadString 'bilbo'
+v12 <- CallFunction v0, [v6, v11]
+v13 <- LoadString 'bilbo'
+v14 <- CallFunction v0, [v6, v13]
+v15 <- LoadString 'bilbo'
+v16 <- CallFunction v0, [v10, v15]
+
+
+function foo(a1, a2) {
+    a1[a2] = 35;
+}
+var x = { bilbo: 3 };
+var y = { frodo: 3, bilbo: "hi" };
+foo(x, "bilbo");
+foo(x, "bilbo");
+foo(y, "bilbo");
+
+FuzzIL program written to corpus/regress-4495.fzil

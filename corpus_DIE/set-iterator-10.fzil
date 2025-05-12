@@ -1,0 +1,111 @@
+v0 <- CreateNamedVariable 'Map', 'none'
+v1 <- LoadInteger '1'
+v2 <- LoadInteger '2'
+v3 <- CreateArray [v1, v2]
+v4 <- LoadInteger '2'
+v5 <- LoadInteger '3'
+v6 <- CreateArray [v4, v5]
+v7 <- LoadInteger '3'
+v8 <- LoadInteger '4'
+v9 <- CreateArray [v7, v8]
+v10 <- CreateArray [v3, v6, v9]
+v11 <- Construct v0, [v10]
+v12 <- CreateNamedVariable 'map', 'var', v11
+v13 <- CreateNamedVariable 'Set', 'none'
+v14 <- LoadInteger '1'
+v15 <- LoadInteger '2'
+v16 <- LoadInteger '3'
+v17 <- CreateArray [v14, v15, v16]
+v18 <- Construct v13, [v17]
+v19 <- CreateNamedVariable 'set', 'var', v18
+v20 <- CallMethod v19, 'keys', []
+v21 <- CreateNamedVariable 'iterator', 'var', v20
+v22 <- BeginArrowFunction -> 
+    v23 <- BeginArrowFunction -> 
+        v24 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `done`, v24
+        v25 <- EndObjectLiteral
+        Return v25
+    EndArrowFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `next`, v23
+    v26 <- EndObjectLiteral
+    Return v26
+EndArrowFunction
+v27 <- GetProperty v21, '__proto__'
+v28 <- GetProperty v27, '__proto__'
+v29 <- CreateNamedVariable 'Symbol', 'none'
+v30 <- GetProperty v29, 'iterator'
+SetComputedProperty v28, v30, v22
+v31 <- LoadInteger '1'
+v32 <- LoadInteger '2'
+v33 <- CreateArray [v31, v32]
+v34 <- LoadInteger '2'
+v35 <- LoadInteger '3'
+v36 <- CreateArray [v34, v35]
+v37 <- LoadInteger '3'
+v38 <- LoadInteger '4'
+v39 <- CreateArray [v37, v38]
+v40 <- CreateArray [v33, v36, v39]
+v41 <- CreateArrayWithSpread [...v12]
+v42 <- CreateArray []
+v43 <- CallMethod v12, 'entries', []
+v44 <- CreateArrayWithSpread [...v43]
+v45 <- CreateArray []
+v46 <- CallMethod v12, 'keys', []
+v47 <- CreateArrayWithSpread [...v46]
+v48 <- CreateArray []
+v49 <- CallMethod v12, 'values', []
+v50 <- CreateArrayWithSpread [...v49]
+v51 <- CreateArray []
+v52 <- CallMethod v19, 'entries', []
+v53 <- CreateArrayWithSpread [...v52]
+v54 <- LoadInteger '1'
+v55 <- LoadInteger '2'
+v56 <- LoadInteger '3'
+v57 <- CreateArray [v54, v55, v56]
+v58 <- CreateArrayWithSpread [...v19]
+v59 <- CreateArray []
+v60 <- CallMethod v19, 'keys', []
+v61 <- CreateArrayWithSpread [...v60]
+v62 <- CreateArray []
+v63 <- CallMethod v19, 'values', []
+v64 <- CreateArrayWithSpread [...v63]
+v65 <- CreateArray []
+v66 <- CreateArrayWithSpread [...v21]
+
+
+const v11 = new Map([[1,2],[2,3],[3,4]]);
+var map = v11;
+const v18 = new Set([1,2,3]);
+var set = v18;
+var iterator = set.keys();
+const v22 = () => {
+    const v23 = () => {
+        return { done: true };
+    };
+    return { next: v23 };
+};
+const t11 = iterator.__proto__.__proto__;
+t11[Symbol.iterator] = v22;
+[[1,2],[2,3],[3,4]];
+[...map];
+[];
+[...map.entries()];
+[];
+[...map.keys()];
+[];
+[...map.values()];
+[];
+[...set.entries()];
+[1,2,3];
+[...set];
+[];
+[...set.keys()];
+[];
+[...set.values()];
+[];
+[...iterator];
+
+FuzzIL program written to corpus/set-iterator-10.fzil

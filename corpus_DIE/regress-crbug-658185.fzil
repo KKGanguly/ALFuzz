@@ -1,0 +1,50 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 't', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v3
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'o', 'var', v4
+    v6 <- LoadFloat '2.5'
+    v7 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v6
+        ObjectLiteralAddProperty `x`, v7
+    v8 <- EndObjectLiteral
+    v9 <- CreateNamedVariable 'p', 'var', v8
+    v10 <- CreateArray []
+    Reassign v5, v10
+    BeginForLoopInitializer
+        v11 <- LoadInteger '0'
+    BeginForLoopCondition -> v12
+        v13 <- LoadInteger '2'
+        v14 <- Compare v12, '<', v13
+    BeginForLoopAfterthought v14 -> v15
+        v16 <- UnaryOperation '++', v15
+    BeginForLoopBody -> v17
+        v18 <- GetProperty v5, 'x'
+        Reassign v1, v18
+        Reassign v5, v9
+    EndForLoop
+EndPlainFunction
+v19 <- CallFunction v2, []
+v20 <- CallFunction v2, []
+v21 <- CallFunction v2, []
+
+
+var t = 0;
+function foo() {
+    var o = { x: 1 };
+    var p = { y: 2.5, x: 0 };
+    o = [];
+    for (let i12 = 0; i12 < 2; ++i12) {
+        t = o.x;
+        o = p;
+    }
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-658185.fzil

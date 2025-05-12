@@ -1,0 +1,15 @@
+v0 <- CreateNamedVariable 'Date', 'none'
+v1 <- LoadString 'Thu, 29 Aug 2013 00:00:01 UTC'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'date1', 'var', v2
+v4 <- LoadString 'Thu, 29 Aug 2013 00:00:01 UTC'
+v5 <- Construct v0, [v4]
+v6 <- CreateNamedVariable 'date2', 'var', v5
+
+
+const v2 = new Date("Thu, 29 Aug 2013 00:00:01 UTC");
+var date1 = v2;
+const v5 = new Date("Thu, 29 Aug 2013 00:00:01 UTC");
+var date2 = v5;
+
+FuzzIL program written to corpus/regress-280531.fzil

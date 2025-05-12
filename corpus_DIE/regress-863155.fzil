@@ -1,0 +1,27 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '5'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    BeginTry
+        v7 <- CreateNamedVariable 'x', 'none'
+        v8 <- TypeOf v7
+    BeginCatch -> v9
+    EndTryCatch
+    v10 <- LoadUndefined
+    v11 <- CreateNamedVariable 'x', 'let', v10
+EndForLoop
+
+
+for (let i1 = 0; i1 < 5; i1++) {
+    try {
+        typeof x;
+    } catch(e9) {
+    }
+    let x;
+}
+
+FuzzIL program written to corpus/regress-863155.fzil

@@ -1,0 +1,381 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        v1 <- LoadNull
+        BeginForInLoop v1 -> v2
+            v3 <- LoadBoolean 'false'
+            Return v3
+        EndForInLoop
+    BeginCatch -> v4
+        v5 <- LoadBoolean 'false'
+        Return v5
+    EndTryCatch
+    v6 <- LoadBoolean 'true'
+    Return v6
+EndPlainFunction
+v7 <- BeginPlainFunction -> 
+    BeginTry
+        v8 <- LoadUndefined
+        BeginForInLoop v8 -> v9
+            v10 <- LoadBoolean 'false'
+            Return v10
+        EndForInLoop
+    BeginCatch -> v11
+        v12 <- LoadBoolean 'false'
+        Return v12
+    EndTryCatch
+    v13 <- LoadBoolean 'true'
+    Return v13
+EndPlainFunction
+BeginForLoopInitializer
+    v14 <- LoadInteger '0'
+BeginForLoopCondition -> v15
+    v16 <- LoadInteger '10'
+    v17 <- Compare v15, '<', v16
+BeginForLoopAfterthought v17 -> v18
+    v19 <- UnaryOperation '++', v18
+BeginForLoopBody -> v20
+    v21 <- CallFunction v0, []
+    v22 <- CreateNamedVariable 'gc', 'none'
+    v23 <- CallFunction v22, []
+EndForLoop
+BeginForLoopInitializer
+    v24 <- LoadInteger '0'
+BeginForLoopCondition -> v25
+    v26 <- LoadInteger '10'
+    v27 <- Compare v25, '<', v26
+BeginForLoopAfterthought v27 -> v28
+    v29 <- UnaryOperation '++', v28
+BeginForLoopBody -> v30
+    v31 <- CallFunction v7, []
+    v32 <- CreateNamedVariable 'gc', 'none'
+    v33 <- CallFunction v32, []
+EndForLoop
+v34 <- LoadInteger '10'
+v35 <- CreateNamedVariable 'i', 'none'
+v36 <- LoadInteger '10'
+v37 <- CreateNamedVariable 'j', 'none'
+v38 <- BeginPlainFunction -> v39
+    v40 <- CreateArray []
+    v41 <- CreateNamedVariable 'accumulator', 'var', v40
+    BeginForInLoop v39 -> v42
+        v43 <- CallMethod v41, 'push', [v42]
+    EndForInLoop
+    Return v41
+EndPlainFunction
+BeginForLoopInitializer
+    v44 <- LoadInteger '0'
+BeginForLoopCondition -> v45
+    v46 <- LoadInteger '3'
+    v47 <- Compare v45, '<', v46
+BeginForLoopAfterthought v47 -> v48
+    v49 <- UnaryOperation '++', v48
+BeginForLoopBody -> v50
+    v51 <- LoadString 'abcd'
+    v52 <- CallFunction v38, [v51]
+    v53 <- LoadString '0'
+    v54 <- LoadString '1'
+    v55 <- LoadString '2'
+    v56 <- LoadString '3'
+    v57 <- CreateArray [v53, v54, v55, v56]
+EndForLoop
+v58 <- BeginPlainFunction -> 
+    v59 <- CreateNamedVariable 'String', 'none'
+    v60 <- LoadString 'abc'
+    v61 <- Construct v59, [v60]
+    v62 <- CreateNamedVariable 'x', 'var', v61
+    v63 <- LoadInteger '19'
+    SetProperty v62, 'foo', v63
+    v64 <- BeginPlainFunction -> 
+        v65 <- LoadInteger '5'
+        v66 <- LoadThis
+        SetProperty v66, 'bar', v65
+        v67 <- LoadInteger '4'
+        v68 <- LoadThis
+        SetElement v68, '7', v67
+    EndPlainFunction
+    SetProperty v64, 'prototype', v62
+    v69 <- Construct v64, []
+    v70 <- CreateNamedVariable 'y', 'var', v69
+    v71 <- LoadInteger '13'
+    SetProperty v70, 'gub', v71
+    v72 <- CallFunction v38, [v70]
+    v73 <- CreateNamedVariable 'elements', 'var', v72
+    v74 <- CallFunction v38, [v70]
+    v75 <- CreateNamedVariable 'elements1', 'var', v74
+    v76 <- LoadString 'For-in elements not the same both times.'
+    v77 <- LoadString '7'
+    v78 <- LoadString 'bar'
+    v79 <- LoadString 'gub'
+    v80 <- LoadString '0'
+    v81 <- LoadString '1'
+    v82 <- LoadString '2'
+    v83 <- LoadString 'foo'
+    v84 <- CreateArray [v77, v78, v79, v80, v81, v82, v83]
+    v85 <- LoadString '0'
+    v86 <- LoadString '1'
+    v87 <- LoadString '2'
+    v88 <- LoadString 'foo'
+    v89 <- CreateArray [v85, v86, v87, v88]
+    v90 <- CallFunction v38, [v62]
+EndPlainFunction
+v91 <- CallFunction v58, []
+v92 <- CallFunction v58, []
+v93 <- BeginPlainFunction -> 
+    v94 <- LoadInteger '0'
+    v95 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `prop`, v94
+        ObjectLiteralAddProperty `prop1`, v95
+    v96 <- EndObjectLiteral
+    v97 <- CreateNamedVariable 'prototype1', 'let', v96
+    v98 <- LoadNull
+    v99 <- LoadBoolean 'false'
+    v100 <- LoadBoolean 'true'
+    v101 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v99
+        ObjectLiteralAddProperty `configurable`, v100
+        ObjectLiteralAddProperty `value`, v101
+    v102 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `prop`, v102
+    v103 <- EndObjectLiteral
+    v104 <- CreateNamedVariable 'Object', 'none'
+    v105 <- CallMethod v104, 'create', [v98, v103]
+    v106 <- CreateNamedVariable 'derived1', 'let', v105
+    v107 <- CallMethod v104, 'setPrototypeOf', [v106, v97]
+    v108 <- LoadInteger '0'
+    v109 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `prop`, v108
+        ObjectLiteralAddProperty `prop1`, v109
+    v110 <- EndObjectLiteral
+    v111 <- CreateNamedVariable 'prototype2', 'let', v110
+    v112 <- LoadBoolean 'false'
+    v113 <- LoadBoolean 'true'
+    v114 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v112
+        ObjectLiteralAddProperty `configurable`, v113
+        ObjectLiteralAddProperty `value`, v114
+    v115 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `prop`, v115
+    v116 <- EndObjectLiteral
+    v117 <- CallMethod v104, 'create', [v111, v116]
+    v118 <- CreateNamedVariable 'derived2', 'let', v117
+    BeginForLoopInitializer
+        v119 <- LoadInteger '0'
+    BeginForLoopCondition -> v120
+        v121 <- LoadInteger '3'
+        v122 <- Compare v120, '<', v121
+    BeginForLoopAfterthought v122 -> v123
+        v124 <- UnaryOperation v123, '++'
+    BeginForLoopBody -> v125
+        v126 <- LoadString 'prop1'
+        v127 <- CreateArray [v126]
+        v128 <- CallFunction v38, [v106]
+        v129 <- LoadString 'prop1'
+        v130 <- CreateArray [v129]
+        v131 <- CallFunction v38, [v118]
+    EndForLoop
+EndPlainFunction
+v132 <- CallFunction v93, []
+v133 <- BeginPlainFunction -> 
+    v134 <- LoadInteger '0'
+    v135 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `prop`, v134
+        ObjectLiteralAddProperty `prop1`, v135
+    v136 <- EndObjectLiteral
+    v137 <- CreateNamedVariable 'prototype1', 'let', v136
+    v138 <- LoadNull
+    v139 <- LoadBoolean 'false'
+    v140 <- LoadBoolean 'true'
+    v141 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v139
+        ObjectLiteralAddProperty `configurable`, v140
+        ObjectLiteralAddProperty `value`, v141
+    v142 <- EndObjectLiteral
+    v143 <- LoadBoolean 'true'
+    v144 <- LoadBoolean 'true'
+    v145 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v143
+        ObjectLiteralAddProperty `configurable`, v144
+        ObjectLiteralAddProperty `value`, v145
+    v146 <- EndObjectLiteral
+    v147 <- LoadBoolean 'false'
+    v148 <- LoadBoolean 'true'
+    v149 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v147
+        ObjectLiteralAddProperty `configurable`, v148
+        ObjectLiteralAddProperty `value`, v149
+    v150 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `prop`, v142
+        ObjectLiteralAddProperty `prop2`, v146
+        ObjectLiteralAddProperty `prop3`, v150
+    v151 <- EndObjectLiteral
+    v152 <- CreateNamedVariable 'Object', 'none'
+    v153 <- CallMethod v152, 'create', [v138, v151]
+    v154 <- CreateNamedVariable 'derived1', 'let', v153
+    v155 <- CallMethod v152, 'setPrototypeOf', [v154, v137]
+    v156 <- LoadInteger '0'
+    v157 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `prop`, v156
+        ObjectLiteralAddProperty `prop1`, v157
+    v158 <- EndObjectLiteral
+    v159 <- CreateNamedVariable 'prototype2', 'let', v158
+    v160 <- LoadBoolean 'false'
+    v161 <- LoadBoolean 'true'
+    v162 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v160
+        ObjectLiteralAddProperty `configurable`, v161
+        ObjectLiteralAddProperty `value`, v162
+    v163 <- EndObjectLiteral
+    v164 <- LoadBoolean 'true'
+    v165 <- LoadBoolean 'true'
+    v166 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v164
+        ObjectLiteralAddProperty `configurable`, v165
+        ObjectLiteralAddProperty `value`, v166
+    v167 <- EndObjectLiteral
+    v168 <- LoadBoolean 'false'
+    v169 <- LoadBoolean 'true'
+    v170 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v168
+        ObjectLiteralAddProperty `configurable`, v169
+        ObjectLiteralAddProperty `value`, v170
+    v171 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `prop`, v163
+        ObjectLiteralAddProperty `prop2`, v167
+        ObjectLiteralAddProperty `prop3`, v171
+    v172 <- EndObjectLiteral
+    v173 <- CallMethod v152, 'create', [v159, v172]
+    v174 <- CreateNamedVariable 'derived2', 'let', v173
+    BeginForLoopInitializer
+        v175 <- LoadInteger '0'
+    BeginForLoopCondition -> v176
+        v177 <- LoadInteger '3'
+        v178 <- Compare v176, '<', v177
+    BeginForLoopAfterthought v178 -> v179
+        v180 <- UnaryOperation v179, '++'
+    BeginForLoopBody -> v181
+        v182 <- LoadString 'prop2'
+        v183 <- LoadString 'prop1'
+        v184 <- CreateArray [v182, v183]
+        v185 <- CallFunction v38, [v154]
+        v186 <- LoadString 'prop2'
+        v187 <- LoadString 'prop1'
+        v188 <- CreateArray [v186, v187]
+        v189 <- CallFunction v38, [v174]
+    EndForLoop
+EndPlainFunction
+v190 <- CallFunction v133, []
+
+
+function for_in_null() {
+    try {
+        for (const v2 in null) {
+            return false;
+        }
+    } catch(e4) {
+        return false;
+    }
+    return true;
+}
+function for_in_undefined() {
+    try {
+        for (const v9 in undefined) {
+            return false;
+        }
+    } catch(e11) {
+        return false;
+    }
+    return true;
+}
+for (let i15 = 0; i15 < 10; ++i15) {
+    for_in_null();
+    gc();
+}
+for (let i25 = 0; i25 < 10; ++i25) {
+    for_in_undefined();
+    gc();
+}
+function Accumulate(a39) {
+    var accumulator = [];
+    for (const v42 in a39) {
+        accumulator.push(v42);
+    }
+    return accumulator;
+}
+for (let i45 = 0; i45 < 3; ++i45) {
+    Accumulate("abcd");
+    ["0","1","2","3"];
+}
+function for_in_string_prototype() {
+    const v61 = new String("abc");
+    var x = v61;
+    x.foo = 19;
+    function B() {
+        this.bar = 5;
+        this[7] = 4;
+    }
+    B.prototype = x;
+    const v69 = new B();
+    var y = v69;
+    y.gub = 13;
+    var elements = Accumulate(y);
+    var elements1 = Accumulate(y);
+    ["7","bar","gub","0","1","2","foo"];
+    ["0","1","2","foo"];
+    Accumulate(x);
+}
+for_in_string_prototype();
+for_in_string_prototype();
+function for_in_dictionary_prototype_1() {
+    let prototype1 = { prop: 0, prop1: 1 };
+    const v102 = { enumerable: false, configurable: true, value: 0 };
+    let derived1 = Object.create(null, { prop: v102 });
+    Object.setPrototypeOf(derived1, prototype1);
+    let prototype2 = { prop: 0, prop1: 1 };
+    const v115 = { enumerable: false, configurable: true, value: 0 };
+    let derived2 = Object.create(prototype2, { prop: v115 });
+    for (let i120 = 0; i120 < 3; i120++) {
+        ["prop1"];
+        Accumulate(derived1);
+        ["prop1"];
+        Accumulate(derived2);
+    }
+}
+for_in_dictionary_prototype_1();
+function for_in_dictionary_prototype_2() {
+    let prototype1 = { prop: 0, prop1: 1 };
+    const v142 = { enumerable: false, configurable: true, value: 1 };
+    const v146 = { enumerable: true, configurable: true, value: 2 };
+    const v150 = { enumerable: false, configurable: true, value: 3 };
+    let derived1 = Object.create(null, { prop: v142, prop2: v146, prop3: v150 });
+    Object.setPrototypeOf(derived1, prototype1);
+    let prototype2 = { prop: 0, prop1: 1 };
+    const v163 = { enumerable: false, configurable: true, value: 0 };
+    const v167 = { enumerable: true, configurable: true, value: 2 };
+    const v171 = { enumerable: false, configurable: true, value: 3 };
+    let derived2 = Object.create(prototype2, { prop: v163, prop2: v167, prop3: v171 });
+    for (let i176 = 0; i176 < 3; i176++) {
+        ["prop2","prop1"];
+        Accumulate(derived1);
+        ["prop2","prop1"];
+        Accumulate(derived2);
+    }
+}
+for_in_dictionary_prototype_2();
+
+FuzzIL program written to corpus/for-in-special-cases.fzil

@@ -1,0 +1,236 @@
+v0 <- CreateTemplateString ['postMessage('Starting worker');\n// Set a global variable; should not be visible outside of the worker's\n// context.\n   foo = 100;\n   var c = 0;\n   onmessage = function(m) {\n     switch (c++) {\n       case 0:\n         if (m !== undefined) throw new Error('undefined');\n         break;\n       case 1:\n         if (m !== null) throw new Error('null');\n         break;\n       case 2:\n         if (m !== true) throw new Error('true');\n         break;\n       case 3:\n         if (m !== false) throw new Error('false');\n         break;\n       case 4:\n         if (m !== 100) throw new Error('Number');\n         break;\n       case 5:\n         if (m !== 'hi') throw new Error('String');\n         break;\n       case 6:\n         if (JSON.stringify(m) !== '[4,true,\"bye\"]') {\n           throw new Error('Array');\n         }\n         break;\n       case 7:\n         if (JSON.stringify(m) !== '{"a":1,"b":2.5,"c":"three"}')\n           throw new Error('Object' + JSON.stringify(m));\n         break;\n       case 8:\n         var ab = m;\n         var t = new Uint32Array(ab);\n         if (ab.byteLength !== 16)\n           throw new Error('ArrayBuffer clone byteLength');\n         for (var i = 0; i < 4; ++i)\n           if (t[i] !== i)\n             throw new Error('ArrayBuffer clone value ' + i);\n         break;\n       case 9:\n         var ab = m;\n         var t = new Uint32Array(ab);\n         if (ab.byteLength !== 32)\n           throw new Error('ArrayBuffer transfer byteLength');\n         for (var i = 0; i < 8; ++i)\n           if (t[i] !== i)\n             throw new Error('ArrayBuffer transfer value ' + i);\n         break;\n     }\n     if (c == 10) {\n       postMessage('DONE');\n     }\n   };'], []
+v1 <- CreateNamedVariable 'workerScript', 'var', v0
+v2 <- LoadThis
+v3 <- GetProperty v2, 'Worker'
+BeginIf v3
+    v4 <- BeginPlainFunction -> v5
+        v6 <- CreateNamedVariable 'ArrayBuffer', 'none'
+        v7 <- Construct v6, [v5]
+        v8 <- CreateNamedVariable 'ab', 'var', v7
+        v9 <- CreateNamedVariable 'Uint32Array', 'none'
+        v10 <- Construct v9, [v8]
+        v11 <- CreateNamedVariable 't', 'var', v10
+        BeginForLoopInitializer
+            v12 <- LoadInteger '0'
+        BeginForLoopCondition -> v13
+            v14 <- LoadInteger '4'
+            v15 <- BinaryOperation v5, '/', v14
+            v16 <- Compare v13, '<', v15
+        BeginForLoopAfterthought v16 -> v17
+            v18 <- UnaryOperation '++', v17
+        BeginForLoopBody -> v19
+            SetComputedProperty v11, v19, v19
+        EndForLoop
+        Return v8
+    EndPlainFunction
+    v20 <- BeginPlainFunction -> 
+        v21 <- CreateNamedVariable 'Worker', 'none'
+        v22 <- LoadInteger '123'
+        v23 <- Construct v21, [v1, v22]
+    EndPlainFunction
+    v24 <- CallFunction v20, []
+    v25 <- BeginPlainFunction -> 
+        v26 <- CreateNamedVariable 'Worker', 'none'
+        v27 <- LoadString 'test/mjsunit/d8/d8-worker.js'
+        v28 <- LoadString 'invalid'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `type`, v28
+        v29 <- EndObjectLiteral
+        v30 <- Construct v26, [v27, v29]
+    EndPlainFunction
+    v31 <- CallFunction v25, []
+    v32 <- BeginPlainFunction -> 
+        v33 <- CreateNamedVariable 'Worker', 'none'
+        v34 <- Construct v33, [v1]
+    EndPlainFunction
+    v35 <- CallFunction v32, []
+    v36 <- CreateNamedVariable 'Worker', 'none'
+    v37 <- LoadString 'string'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `type`, v37
+    v38 <- EndObjectLiteral
+    v39 <- Construct v36, [v1, v38]
+    v40 <- CreateNamedVariable 'w', 'var', v39
+    v41 <- LoadString 'Starting worker'
+    v42 <- CallMethod v40, 'getMessage', []
+    v43 <- LoadUndefined
+    v44 <- CallMethod v40, 'postMessage', [v43]
+    v45 <- LoadNull
+    v46 <- CallMethod v40, 'postMessage', [v45]
+    v47 <- LoadBoolean 'true'
+    v48 <- CallMethod v40, 'postMessage', [v47]
+    v49 <- LoadBoolean 'false'
+    v50 <- CallMethod v40, 'postMessage', [v49]
+    v51 <- LoadInteger '100'
+    v52 <- CallMethod v40, 'postMessage', [v51]
+    v53 <- LoadString 'hi'
+    v54 <- CallMethod v40, 'postMessage', [v53]
+    v55 <- LoadInteger '4'
+    v56 <- LoadBoolean 'true'
+    v57 <- LoadString 'bye'
+    v58 <- CreateArray [v55, v56, v57]
+    v59 <- CallMethod v40, 'postMessage', [v58]
+    v60 <- LoadInteger '1'
+    v61 <- LoadFloat '2.5'
+    v62 <- LoadString 'three'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v60
+        ObjectLiteralAddProperty `b`, v61
+        ObjectLiteralAddProperty `c`, v62
+    v63 <- EndObjectLiteral
+    v64 <- CallMethod v40, 'postMessage', [v63]
+    v65 <- LoadUndefined
+    v66 <- CreateArray [v65]
+    v67 <- CreateNamedVariable 'transferList', 'var', v66
+    v68 <- LoadString '0'
+    v69 <- BeginPlainFunction -> 
+        v70 <- LoadString 'unexpected!'
+        ThrowException v70
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v69
+    v71 <- EndObjectLiteral
+    v72 <- CreateNamedVariable 'Object', 'none'
+    v73 <- CallMethod v72, 'defineProperty', [v67, v68, v71]
+    v74 <- BeginPlainFunction -> 
+        v75 <- CreateArray []
+        v76 <- CallMethod v40, 'postMessage', [v75, v67]
+    EndPlainFunction
+    v77 <- CallFunction v74, []
+    v78 <- BeginPlainFunction -> 
+        v79 <- LoadUndefined
+        v80 <- CreateArray [v79]
+        v81 <- CreateNamedVariable 'val', 'var', v80
+        v82 <- LoadString '0'
+        v83 <- BeginArrowFunction -> 
+            v84 <- CreateNamedVariable 'console', 'none'
+            v85 <- CallMethod v84, 'log', []
+            Return v85
+        EndArrowFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `get`, v83
+        v86 <- EndObjectLiteral
+        v87 <- CallMethod v72, 'defineProperty', [v81, v82, v86]
+        v88 <- BeginPlainFunction -> 
+            v89 <- CreateArray [v81]
+            v90 <- CallMethod v40, 'postMessage', [v81, v89]
+        EndPlainFunction
+        v91 <- CallFunction v88, []
+    EndPlainFunction
+    v92 <- CallFunction v78, []
+    v93 <- LoadInteger '16'
+    v94 <- CallFunction v4, [v93]
+    v95 <- CreateNamedVariable 'ab1', 'var', v94
+    v96 <- CallMethod v40, 'postMessage', [v95]
+    v97 <- LoadInteger '16'
+    v98 <- GetProperty v95, 'byteLength'
+    v99 <- LoadInteger '32'
+    v100 <- CallFunction v4, [v99]
+    v101 <- CreateNamedVariable 'ab2', 'var', v100
+    v102 <- CreateArray [v101]
+    v103 <- CallMethod v40, 'postMessage', [v101, v102]
+    v104 <- LoadInteger '0'
+    v105 <- GetProperty v101, 'byteLength'
+    v106 <- BeginPlainFunction -> 
+        v107 <- LoadInteger '4'
+        v108 <- CallFunction v4, [v107]
+        v109 <- CreateNamedVariable 'ab3', 'var', v108
+        v110 <- CreateArray [v109, v109]
+        v111 <- CallMethod v40, 'postMessage', [v109, v110]
+    EndPlainFunction
+    v112 <- CallFunction v106, []
+    v113 <- LoadString 'undefined'
+    v114 <- CreateNamedVariable 'foo', 'none'
+    v115 <- TypeOf v114
+    v116 <- LoadString 'DONE'
+    v117 <- CallMethod v40, 'getMessage', []
+    v118 <- CallMethod v40, 'terminate', []
+    v119 <- LoadString ''
+    v120 <- LoadString 'string'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `type`, v120
+    v121 <- EndObjectLiteral
+    v122 <- Construct v36, [v119, v121]
+    v123 <- CreateNamedVariable 'w2', 'var', v122
+    v124 <- CallMethod v123, 'getMessage', []
+    v125 <- CreateNamedVariable 'msg', 'var', v124
+    v126 <- LoadUndefined
+EndIf
+
+
+var workerScript = `postMessage('Starting worker');\n// Set a global variable; should not be visible outside of the worker's\n// context.\n   foo = 100;\n   var c = 0;\n   onmessage = function(m) {\n     switch (c++) {\n       case 0:\n         if (m !== undefined) throw new Error('undefined');\n         break;\n       case 1:\n         if (m !== null) throw new Error('null');\n         break;\n       case 2:\n         if (m !== true) throw new Error('true');\n         break;\n       case 3:\n         if (m !== false) throw new Error('false');\n         break;\n       case 4:\n         if (m !== 100) throw new Error('Number');\n         break;\n       case 5:\n         if (m !== 'hi') throw new Error('String');\n         break;\n       case 6:\n         if (JSON.stringify(m) !== '[4,true,\"bye\"]') {\n           throw new Error('Array');\n         }\n         break;\n       case 7:\n         if (JSON.stringify(m) !== '{"a":1,"b":2.5,"c":"three"}')\n           throw new Error('Object' + JSON.stringify(m));\n         break;\n       case 8:\n         var ab = m;\n         var t = new Uint32Array(ab);\n         if (ab.byteLength !== 16)\n           throw new Error('ArrayBuffer clone byteLength');\n         for (var i = 0; i < 4; ++i)\n           if (t[i] !== i)\n             throw new Error('ArrayBuffer clone value ' + i);\n         break;\n       case 9:\n         var ab = m;\n         var t = new Uint32Array(ab);\n         if (ab.byteLength !== 32)\n           throw new Error('ArrayBuffer transfer byteLength');\n         for (var i = 0; i < 8; ++i)\n           if (t[i] !== i)\n             throw new Error('ArrayBuffer transfer value ' + i);\n         break;\n     }\n     if (c == 10) {\n       postMessage('DONE');\n     }\n   };`;
+if (this.Worker) {
+    function createArrayBuffer(a5) {
+        const v7 = new ArrayBuffer(a5);
+        var ab = v7;
+        const v10 = new Uint32Array(ab);
+        var t = v10;
+        for (let i13 = 0; i13 < (a5 / 4); ++i13) {
+            t[i13] = i13;
+        }
+        return ab;
+    }
+    function f20() {
+        new Worker(workerScript, 123);
+    }
+    f20();
+    function f25() {
+        new Worker("test/mjsunit/d8/d8-worker.js", { type: "invalid" });
+    }
+    f25();
+    function f32() {
+        new Worker(workerScript);
+    }
+    f32();
+    const v39 = new Worker(workerScript, { type: "string" });
+    var w = v39;
+    w.getMessage();
+    w.postMessage(undefined);
+    w.postMessage(null);
+    w.postMessage(true);
+    w.postMessage(false);
+    w.postMessage(100);
+    w.postMessage("hi");
+    w.postMessage([4,true,"bye"]);
+    w.postMessage({ a: 1, b: 2.5, c: "three" });
+    var transferList = [,];
+    function f69() {
+        throw "unexpected!";
+    }
+    Object.defineProperty(transferList, "0", { get: f69 });
+    function f74() {
+        w.postMessage([], transferList);
+    }
+    f74();
+    function f78() {
+        var val = [,];
+        const v83 = () => {
+            return console.log();
+        };
+        Object.defineProperty(val, "0", { get: v83 });
+        function f88() {
+            w.postMessage(val, [val]);
+        }
+        f88();
+    }
+    f78();
+    var ab1 = createArrayBuffer(16);
+    w.postMessage(ab1);
+    ab1.byteLength;
+    var ab2 = createArrayBuffer(32);
+    w.postMessage(ab2, [ab2]);
+    ab2.byteLength;
+    function f106() {
+        var ab3 = createArrayBuffer(4);
+        w.postMessage(ab3, [ab3,ab3]);
+    }
+    f106();
+    typeof foo;
+    w.getMessage();
+    w.terminate();
+    const v122 = new Worker("", { type: "string" });
+    var w2 = v122;
+    var msg = w2.getMessage();
+}
+
+FuzzIL program written to corpus/d8-worker.fzil

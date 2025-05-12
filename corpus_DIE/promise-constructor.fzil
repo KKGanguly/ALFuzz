@@ -1,0 +1,455 @@
+v0 <- BeginArrowFunction -> v1
+    v2 <- CreateNamedVariable 'print', 'none'
+    v3 <- CallFunction v2, [v1]
+    Return v3
+EndArrowFunction
+v4 <- CreateNamedVariable 'failWithMessage', 'none'
+Reassign v4, v0
+v5 <- BeginPlainFunction -> 
+    v6 <- BeginPlainFunction -> 
+        v7 <- LoadUndefined
+        v8 <- CreateNamedVariable 'resolve', 'let', v7
+        v9 <- LoadUndefined
+        v10 <- CreateNamedVariable 'reject', 'let', v9
+        v11 <- LoadUndefined
+        v12 <- CreateNamedVariable 'promise', 'let', v11
+        v13 <- CreateNamedVariable 'Promise', 'none'
+        v14 <- BeginArrowFunction -> v15, v16
+            Reassign v8, v15
+            Reassign v10, v16
+        EndArrowFunction
+        v17 <- Construct v13, [v14]
+        Reassign v12, v17
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `resolve`, v8
+            ObjectLiteralAddProperty `reject`, v10
+            ObjectLiteralAddProperty `promise`, v12
+        v18 <- EndObjectLiteral
+        Return v18
+    EndPlainFunction
+    v19 <- CallFunction v6, []
+    v20 <- CallFunction v6, []
+    v21 <- CallFunction v6, []
+EndPlainFunction
+v22 <- CallFunction v5, []
+v23 <- BeginPlainFunction -> 
+    v24 <- BeginPlainFunction -> 
+        v25 <- CreateNamedVariable 'Promise', 'none'
+        v26 <- LoadInteger '1'
+        v27 <- Construct v25, [v26]
+        Return v27
+    EndPlainFunction
+    v28 <- CallFunction v24, []
+    v29 <- CreateNamedVariable 'TypeError', 'none'
+    v30 <- CallFunction v24, []
+    v31 <- CallFunction v24, []
+EndPlainFunction
+v32 <- CallFunction v23, []
+v33 <- BeginPlainFunction -> 
+    v34 <- BeginPlainFunction -> 
+        v35 <- CreateNamedVariable 'Promise', 'none'
+        v36 <- LoadInteger '1'
+        v37 <- Construct v35, [v36]
+        Return v37
+    EndPlainFunction
+    v38 <- LoadUndefined
+    v39 <- CreateNamedVariable 'threw', 'let', v38
+    BeginTry
+        v40 <- LoadBoolean 'false'
+        Reassign v39, v40
+        v41 <- CallFunction v34, []
+    BeginCatch -> v42
+        v43 <- LoadBoolean 'true'
+        Reassign v39, v43
+        v44 <- LoadString 'new Promise'
+        v45 <- GetProperty v42, 'stack'
+    BeginFinally
+    EndTryCatch
+    BeginTry
+        v46 <- LoadBoolean 'false'
+        Reassign v39, v46
+        v47 <- CallFunction v34, []
+    BeginCatch -> v48
+        v49 <- LoadBoolean 'true'
+        Reassign v39, v49
+        v50 <- LoadString 'new Promise'
+        v51 <- GetProperty v48, 'stack'
+    BeginFinally
+    EndTryCatch
+    BeginTry
+        v52 <- LoadBoolean 'false'
+        Reassign v39, v52
+        v53 <- CallFunction v34, []
+    BeginCatch -> v54
+        v55 <- LoadBoolean 'true'
+        Reassign v39, v55
+        v56 <- LoadString 'new Promise'
+        v57 <- GetProperty v54, 'stack'
+    BeginFinally
+    EndTryCatch
+EndPlainFunction
+v58 <- CallFunction v33, []
+v59 <- BeginPlainFunction -> 
+    v60 <- BeginPlainFunction -> 
+        v61 <- CreateNamedVariable 'Promise', 'none'
+        v62 <- BeginArrowFunction -> v63, v64
+            v65 <- CreateNamedVariable 'Error', 'none'
+            v66 <- Construct v65, []
+            ThrowException v66
+        EndArrowFunction
+        v67 <- Construct v61, [v62]
+        Return v67
+    EndPlainFunction
+    v68 <- BeginPlainFunction -> v69
+        v70 <- LoadNull
+        v71 <- CreateNamedVariable 'error', 'let', v70
+        v72 <- BeginArrowFunction -> v73
+            v74 <- LoadInteger '1'
+            Reassign v71, v74
+            Return v74
+        EndArrowFunction
+        v75 <- BeginArrowFunction -> v76
+            Reassign v71, v76
+            Return v76
+        EndArrowFunction
+        v77 <- CallFunction v60, []
+        v78 <- CallMethod v77, 'then', [v72, v75]
+    EndPlainFunction
+    v79 <- LoadInteger '3'
+    v80 <- CallFunction v68, [v79]
+EndPlainFunction
+v81 <- CallFunction v59, []
+v82 <- BeginPlainFunction -> 
+    v83 <- BeginPlainFunction -> 
+        v84 <- LoadUndefined
+        v85 <- CreateNamedVariable 'p', 'let', v84
+        BeginTry
+        BeginCatch -> v86
+        EndTryCatch
+        v87 <- CreateNamedVariable 'Promise', 'none'
+    EndPlainFunction
+    v88 <- CallFunction v83, []
+    v89 <- CallFunction v83, []
+    v90 <- CallFunction v83, []
+EndPlainFunction
+v91 <- CallFunction v82, []
+v92 <- BeginPlainFunction -> 
+    v93 <- BeginPlainFunction -> v94, v95
+    EndPlainFunction
+    v96 <- BeginPlainFunction -> 
+        v97 <- LoadUndefined
+        v98 <- CreateNamedVariable 'p', 'let', v97
+        BeginTry
+            v99 <- CreateNamedVariable 'Promise', 'none'
+            v100 <- Construct v99, [v93]
+            Reassign v98, v100
+        BeginCatch -> v101
+        EndTryCatch
+        v102 <- CreateNamedVariable 'Promise', 'none'
+    EndPlainFunction
+    v103 <- CallFunction v96, []
+    v104 <- CallFunction v96, []
+    v105 <- CallFunction v96, []
+EndPlainFunction
+v106 <- CallFunction v92, []
+v107 <- BeginPlainFunction -> 
+    v108 <- BeginPlainFunction -> 
+        v109 <- LoadUndefined
+        v110 <- CreateNamedVariable 'p', 'let', v109
+        BeginTry
+            v111 <- CreateNamedVariable 'Promise', 'none'
+            v112 <- BeginArrowFunction -> v113, v114
+                v115 <- CreateNamedVariable 'Error', 'none'
+                v116 <- Construct v115, []
+                ThrowException v116
+            EndArrowFunction
+            v117 <- Construct v111, [v112]
+            Reassign v110, v117
+        BeginCatch -> v118
+        EndTryCatch
+        v119 <- CreateNamedVariable 'Promise', 'none'
+    EndPlainFunction
+    v120 <- CallFunction v108, []
+    v121 <- CallFunction v108, []
+    v122 <- CallFunction v108, []
+EndPlainFunction
+v123 <- CallFunction v107, []
+v124 <- BeginPlainFunction -> 
+    v125 <- BeginPlainFunction -> 
+        v126 <- LoadUndefined
+        v127 <- CreateNamedVariable 'p', 'let', v126
+        BeginTry
+            v128 <- CreateNamedVariable 'Promise', 'none'
+            v129 <- BeginArrowFunction -> v130, v131
+                v132 <- CreateNamedVariable 'bar', 'none'
+                v133 <- CallFunction v132, []
+                v134 <- CallFunction v130, []
+            EndArrowFunction
+            v135 <- Construct v128, [v129]
+            Reassign v127, v135
+        BeginCatch -> v136
+        EndTryCatch
+        v137 <- CreateNamedVariable 'Promise', 'none'
+    EndPlainFunction
+    v138 <- BeginPlainFunction -> 
+        v139 <- CreateNamedVariable 'Error', 'none'
+        v140 <- Construct v139, []
+        ThrowException v140
+    EndPlainFunction
+    v141 <- CallFunction v125, []
+    v142 <- CallFunction v125, []
+    v143 <- CallFunction v125, []
+EndPlainFunction
+v144 <- CallFunction v124, []
+v145 <- BeginPlainFunction -> 
+    v146 <- LoadUndefined
+    v147 <- CreateNamedVariable 'resolve', 'let', v146
+    v148 <- LoadUndefined
+    v149 <- CreateNamedVariable 'reject', 'let', v148
+    v150 <- LoadUndefined
+    v151 <- CreateNamedVariable 'promise', 'let', v150
+    v152 <- BeginPlainFunction -> v153, v154
+        Reassign v147, v153
+        Reassign v149, v154
+        v155 <- CreateNamedVariable 'Error', 'none'
+        v156 <- Construct v155, []
+        ThrowException v156
+    EndPlainFunction
+    v157 <- BeginPlainFunction -> 
+        v158 <- CreateNamedVariable 'Promise', 'none'
+        v159 <- Construct v158, [v152]
+        Reassign v151, v159
+    EndPlainFunction
+    v160 <- CallFunction v157, []
+    v161 <- CallFunction v157, []
+    v162 <- CallFunction v157, []
+EndPlainFunction
+v163 <- CallFunction v145, []
+v164 <- BeginPlainFunction -> 
+    v165 <- LoadUndefined
+    v166 <- CreateNamedVariable 'resolve', 'let', v165
+    v167 <- LoadUndefined
+    v168 <- CreateNamedVariable 'reject', 'let', v167
+    v169 <- LoadUndefined
+    v170 <- CreateNamedVariable 'promise', 'let', v169
+    v171 <- BeginPlainFunction -> v172, v173
+        Reassign v166, v172
+        Reassign v168, v173
+        v174 <- CreateNamedVariable 'Error', 'none'
+        v175 <- Construct v174, []
+        v176 <- GetProperty v175, 'stack'
+        v177 <- CreateNamedVariable 'stack', 'let', v176
+        v178 <- LoadString 'new Promise'
+        v179 <- Construct v174, []
+        ThrowException v179
+    EndPlainFunction
+    v180 <- BeginPlainFunction -> 
+        v181 <- CreateNamedVariable 'Promise', 'none'
+        v182 <- Construct v181, [v171]
+        Reassign v170, v182
+    EndPlainFunction
+    v183 <- CallFunction v180, []
+    v184 <- CallFunction v180, []
+    v185 <- CallFunction v180, []
+EndPlainFunction
+v186 <- CallFunction v164, []
+
+
+const v0 = (a1) => {
+    return print(a1);
+};
+failWithMessage = v0;
+function f5() {
+    function foo() {
+        let resolve;
+        let reject;
+        let promise;
+        const v14 = (a15, a16) => {
+            resolve = a15;
+            reject = a16;
+        };
+        const v17 = new Promise(v14);
+        promise = v17;
+        return { resolve: resolve, reject: reject, promise: promise };
+    }
+    foo();
+    foo();
+    foo();
+}
+f5();
+function f23() {
+    function foo() {
+        const v27 = new Promise(1);
+        return v27;
+    }
+    foo();
+    foo();
+    foo();
+}
+f23();
+function f33() {
+    function foo() {
+        const v37 = new Promise(1);
+        return v37;
+    }
+    let threw;
+    try {
+        threw = false;
+        foo();
+    } catch(e42) {
+        threw = true;
+        e42.stack;
+    } finally {
+    }
+    try {
+        threw = false;
+        foo();
+    } catch(e48) {
+        threw = true;
+        e48.stack;
+    } finally {
+    }
+    try {
+        threw = false;
+        foo();
+    } catch(e54) {
+        threw = true;
+        e54.stack;
+    } finally {
+    }
+}
+f33();
+function f59() {
+    function foo() {
+        const v62 = (a63, a64) => {
+            const v66 = new Error();
+            throw v66;
+        };
+        const v67 = new Promise(v62);
+        return v67;
+    }
+    function bar(a69) {
+        let error = null;
+        const v72 = (a73) => {
+            error = 1;
+            return 1;
+        };
+        const v75 = (a76) => {
+            error = a76;
+            return a76;
+        };
+        foo().then(v72, v75);
+    }
+    bar(3);
+}
+f59();
+function f82() {
+    function foo() {
+        let p;
+        try {
+        } catch(e86) {
+        }
+    }
+    foo();
+    foo();
+    foo();
+}
+f82();
+function f92() {
+    function executor(a94, a95) {
+    }
+    function foo() {
+        let p;
+        try {
+            const v100 = new Promise(executor);
+            p = v100;
+        } catch(e101) {
+        }
+    }
+    foo();
+    foo();
+    foo();
+}
+f92();
+function f107() {
+    function foo() {
+        let p;
+        try {
+            const v112 = (a113, a114) => {
+                const v116 = new Error();
+                throw v116;
+            };
+            const v117 = new Promise(v112);
+            p = v117;
+        } catch(e118) {
+        }
+    }
+    foo();
+    foo();
+    foo();
+}
+f107();
+function f124() {
+    function foo() {
+        let p;
+        try {
+            const v129 = (a130, a131) => {
+                bar();
+                a130();
+            };
+            const v135 = new Promise(v129);
+            p = v135;
+        } catch(e136) {
+        }
+    }
+    function bar() {
+        const v140 = new Error();
+        throw v140;
+    }
+    foo();
+    foo();
+    foo();
+}
+f124();
+function f145() {
+    let resolve;
+    let reject;
+    let promise;
+    function bar(a153, a154) {
+        resolve = a153;
+        reject = a154;
+        const v156 = new Error();
+        throw v156;
+    }
+    function foo() {
+        const v159 = new Promise(bar);
+        promise = v159;
+    }
+    foo();
+    foo();
+    foo();
+}
+f145();
+function f164() {
+    let resolve;
+    let reject;
+    let promise;
+    function bar(a172, a173) {
+        resolve = a172;
+        reject = a173;
+        const v175 = new Error();
+        let stack = v175.stack;
+        const v179 = new Error();
+        throw v179;
+    }
+    function foo() {
+        const v182 = new Promise(bar);
+        promise = v182;
+    }
+    foo();
+    foo();
+    foo();
+}
+f164();
+
+FuzzIL program written to corpus/promise-constructor.fzil

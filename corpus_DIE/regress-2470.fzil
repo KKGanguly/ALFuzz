@@ -1,0 +1,21 @@
+v0 <- CreateNamedVariable 'SyntaxError', 'none'
+v1 <- LoadString 'Function("});(function(){");'
+v2 <- LoadString 'Function("/*", "*/", "/**/");'
+v3 <- LoadString 'Function("/*", "a", "*/", "/**/");'
+v4 <- LoadString 'Function("a", "/*", "*/", "/**/");'
+v5 <- LoadString 'Function("a", "/*", "*/", "b", "/*", "*/", "/**/");'
+v6 <- LoadString 'Function("//", "//")'
+v7 <- LoadString 'Function("//", "//", "//")'
+v8 <- LoadString 'Function("a", "//", "//")'
+v9 <- LoadString 'Function("a", "", "//", "//")'
+v10 <- LoadString 'return 23'
+v11 <- CreateNamedVariable 'Function', 'none'
+v12 <- CallFunction v11, [v10]
+v13 <- CallMethod v12, 'toString', []
+v14 <- CreateNamedVariable 'asString', 'var', v13
+v15 <- LoadString 'function anonymous(\n) {\nreturn 23\n}'
+
+
+var asString = Function("return 23").toString();
+
+FuzzIL program written to corpus/regress-2470.fzil

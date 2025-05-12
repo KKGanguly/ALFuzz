@@ -1,0 +1,67 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'GLOBAL', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadInteger '42'
+    Reassign v1, v4
+    v5 <- CallMethod v3, 'f', []
+    v6 <- CallMethod v3, 'f', []
+    v7 <- CreateNamedVariable 'x', 'var', v6
+    v8 <- LoadInteger '42'
+    v9 <- LoadInteger '87'
+    Reassign v1, v9
+    v10 <- LoadInteger '87'
+    v11 <- CallMethod v3, 'f', []
+    v12 <- CallMethod v3, 'f', []
+    v13 <- UnaryOperation '!', v12
+    BeginIf v13
+        v14 <- LoadBoolean 'false'
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+v15 <- EndObjectLiteral
+v16 <- CreateNamedVariable 'o', 'var', v15
+v17 <- BeginPlainFunction -> 
+    Return v1
+EndPlainFunction
+SetProperty v16, 'f', v17
+BeginForLoopInitializer
+    v18 <- LoadInteger '0'
+BeginForLoopCondition -> v19
+    v20 <- LoadInteger '5'
+    v21 <- Compare v19, '<', v20
+BeginForLoopAfterthought v21 -> v22
+    v23 <- UnaryOperation v22, '++'
+BeginForLoopBody -> v24
+    v25 <- CallFunction v2, [v16]
+EndForLoop
+v26 <- CallFunction v2, [v16]
+v27 <- GetProperty v16, 'f'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v27
+v28 <- EndObjectLiteral
+v29 <- CallFunction v2, [v28]
+
+
+var GLOBAL;
+function TestInlineGlobalLoad(a3) {
+    GLOBAL = 42;
+    a3.f();
+    var x = a3.f();
+    GLOBAL = 87;
+    a3.f();
+    if (!a3.f()) {
+    }
+}
+var o = {};
+function f17() {
+    return GLOBAL;
+}
+o.f = f17;
+for (let i19 = 0; i19 < 5; i19++) {
+    TestInlineGlobalLoad(o);
+}
+TestInlineGlobalLoad(o);
+const v27 = o.f;
+TestInlineGlobalLoad({ f: v27 });
+
+FuzzIL program written to corpus/inline-global-access.fzil

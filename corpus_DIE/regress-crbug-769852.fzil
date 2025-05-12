@@ -1,0 +1,60 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v3 <- BeginArrowFunction -> v4
+        v5 <- CallFunction v2, []
+        Return v5
+    EndArrowFunction
+    v6 <- CreateNamedVariable 'Object', 'none'
+    v7 <- CallMethod v6, 'keys', [v1]
+    v8 <- CallMethod v7, 'forEach', [v3]
+EndPlainFunction
+v9 <- BeginArrowFunction -> 
+    BeginObjectLiteral
+    v10 <- EndObjectLiteral
+    v11 <- CallFunction v0, [v10]
+    Return v11
+EndArrowFunction
+v12 <- CallFunction v9, []
+v13 <- BeginArrowFunction -> 
+    v14 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v14
+    v15 <- EndObjectLiteral
+    v16 <- CallFunction v0, [v15]
+    Return v16
+EndArrowFunction
+v17 <- CallFunction v13, []
+v18 <- BeginArrowFunction -> 
+    v19 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v19
+    v20 <- EndObjectLiteral
+    v21 <- CallFunction v0, [v20]
+    Return v21
+EndArrowFunction
+v22 <- CallFunction v18, []
+
+
+function f(a1) {
+    function g() {
+    }
+    const v3 = (a4) => {
+        return g();
+    };
+    Object.keys(a1).forEach(v3);
+}
+const v9 = () => {
+    return f({});
+};
+v9();
+const v13 = () => {
+    return f({ x: 0 });
+};
+v13();
+const v18 = () => {
+    return f({ x: 0 });
+};
+v18();
+
+FuzzIL program written to corpus/regress-crbug-769852.fzil

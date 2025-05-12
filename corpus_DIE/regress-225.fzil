@@ -1,0 +1,22 @@
+v0 <- LoadRegExp '(?:)' 'g'
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadString ''
+    Return v2
+EndPlainFunction
+v3 <- LoadString 'foo'
+v4 <- CallMethod v3, 'replace', [v0, v1]
+v5 <- LoadString 'foo'
+v6 <- LoadRegExp '(?:)' 'g'
+v7 <- LoadString ''
+v8 <- LoadString 'foo'
+v9 <- CallMethod v8, 'replace', [v6, v7]
+
+
+const v0 = /(?:)/g;
+function f1() {
+    return "";
+}
+("foo").replace(v0, f1);
+("foo").replace(/(?:)/g, "");
+
+FuzzIL program written to corpus/regress-225.fzil

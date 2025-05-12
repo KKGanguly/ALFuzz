@@ -1,0 +1,55 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '500'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+BeginForLoopCondition -> v5
+    v6 <- GetProperty v3, 'length'
+    v7 <- Compare v5, '<', v6
+BeginForLoopAfterthought v7 -> v8
+    v9 <- UnaryOperation v8, '++'
+BeginForLoopBody -> v10
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `idx`, v10
+    v11 <- EndObjectLiteral
+    SetComputedProperty v3, v10, v11
+EndForLoop
+v12 <- CreateNamedVariable 'gc', 'none'
+v13 <- CallFunction v12, []
+v14 <- CallFunction v12, []
+v15 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `idx`, v15
+v16 <- EndObjectLiteral
+SetElement v3, '0', v16
+v17 <- LoadInteger '2'
+v18 <- LoadInteger '200'
+v19 <- CallMethod v3, 'splice', [v17, v18]
+v20 <- CallFunction v12, []
+v21 <- LoadInteger '0'
+v22 <- GetElement v3, '0'
+v23 <- GetProperty v22, 'idx'
+v24 <- LoadInteger '1'
+v25 <- GetElement v3, '1'
+v26 <- GetProperty v25, 'idx'
+v27 <- LoadInteger '202'
+v28 <- GetElement v3, '2'
+v29 <- GetProperty v28, 'idx'
+
+
+const v2 = new Array(500);
+var a = v2;
+for (let i5 = 0; i5 < a.length; i5++) {
+    a[i5] = { idx: i5 };
+}
+gc();
+gc();
+a[0] = { idx: 0 };
+a.splice(2, 200);
+gc();
+a[0].idx;
+a[1].idx;
+a[2].idx;
+
+FuzzIL program written to corpus/splice-missing-wb.fzil

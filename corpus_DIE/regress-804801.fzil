@@ -1,0 +1,101 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '42'
+    Return v1
+EndPlainFunction
+v2 <- CallMethod v0, 'bind', []
+v3 <- CreateNamedVariable 'bound_function', 'const', v2
+v4 <- CreateNamedVariable 'Proxy', 'none'
+v5 <- BeginPlainFunction -> 
+EndPlainFunction
+v6 <- GetProperty v5, '__proto__'
+BeginObjectLiteral
+v7 <- EndObjectLiteral
+v8 <- Construct v4, [v6, v7]
+v9 <- CreateNamedVariable 'callable_proxy', 'const', v8
+v10 <- BeginPlainFunction -> v11
+    v12 <- CreateArray []
+    v13 <- Construct v11, [v12]
+    BeginObjectLiteral
+    v14 <- EndObjectLiteral
+    BeginObjectLiteral
+    v15 <- EndObjectLiteral
+    v16 <- CreateArray [v14, v15]
+    v17 <- Construct v11, [v16]
+EndPlainFunction
+v18 <- BeginPlainFunction -> v19
+    v20 <- CreateArray []
+    v21 <- Construct v19, [v20]
+    BeginObjectLiteral
+    v22 <- EndObjectLiteral
+    BeginObjectLiteral
+    v23 <- EndObjectLiteral
+    v24 <- CreateArray [v22, v23]
+    BeginObjectLiteral
+    v25 <- EndObjectLiteral
+    BeginObjectLiteral
+    v26 <- EndObjectLiteral
+    v27 <- CreateArray [v25, v26]
+    v28 <- CreateArray [v24, v27]
+    v29 <- Construct v19, [v28]
+EndPlainFunction
+v30 <- BeginPlainFunction -> v31
+    v32 <- CreateNamedVariable 'Set', 'none'
+    v33 <- GetProperty v32, 'prototype'
+    SetProperty v33, 'add', v31
+    v34 <- CallFunction v10, [v32]
+    v35 <- CreateNamedVariable 'WeakSet', 'none'
+    v36 <- GetProperty v35, 'prototype'
+    SetProperty v36, 'add', v31
+    v37 <- CallFunction v10, [v35]
+    v38 <- CreateNamedVariable 'Map', 'none'
+    v39 <- GetProperty v38, 'prototype'
+    SetProperty v39, 'set', v31
+    v40 <- CallFunction v18, [v38]
+    v41 <- CreateNamedVariable 'WeakMap', 'none'
+    v42 <- GetProperty v41, 'prototype'
+    SetProperty v42, 'set', v31
+    v43 <- CallFunction v18, [v41]
+EndPlainFunction
+v44 <- CallFunction v30, [v3]
+v45 <- CallFunction v30, [v9]
+
+
+function f() {
+    return 42;
+}
+const bound_function = f.bind();
+function f5() {
+}
+const v6 = f5.__proto__;
+const v8 = new Proxy(v6, {});
+const callable_proxy = v8;
+function testSet(a11) {
+    new a11([]);
+    const v14 = {};
+    new a11([v14,{}]);
+}
+function testMap(a19) {
+    new a19([]);
+    const v22 = {};
+    const v24 = [v22,{}];
+    const v25 = {};
+    new a19([v24,[v25,{}]]);
+}
+function testAllVariants(a31) {
+    const t22 = Set.prototype;
+    t22.add = a31;
+    testSet(Set);
+    const t24 = WeakSet.prototype;
+    t24.add = a31;
+    testSet(WeakSet);
+    const t27 = Map.prototype;
+    t27.set = a31;
+    testMap(Map);
+    const t30 = WeakMap.prototype;
+    t30.set = a31;
+    testMap(WeakMap);
+}
+testAllVariants(bound_function);
+testAllVariants(callable_proxy);
+
+FuzzIL program written to corpus/regress-804801.fzil

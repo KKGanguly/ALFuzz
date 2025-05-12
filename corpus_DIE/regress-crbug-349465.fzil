@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '1'
+    SetComputedProperty v1, v2, v3
+    v4 <- LoadInteger '2'
+    v5 <- LoadInteger '4'
+    v6 <- BinaryOperation v2, '+', v5
+    SetComputedProperty v1, v6, v4
+    v7 <- LoadInteger '3'
+    SetComputedProperty v1, v2, v7
+EndPlainFunction
+v8 <- CreateNamedVariable 'Array', 'none'
+v9 <- LoadInteger '1024'
+v10 <- Construct v8, [v9]
+v11 <- CreateNamedVariable 'a1', 'var', v10
+v12 <- LoadInteger '128'
+v13 <- Construct v8, [v12]
+v14 <- CreateNamedVariable 'a2', 'var', v13
+v15 <- LoadInteger '1'
+v16 <- CallFunction v0, [v11, v15]
+v17 <- LoadInteger '2'
+v18 <- UnaryOperation '-', v17
+v19 <- CallFunction v0, [v14, v18]
+v20 <- LoadInteger '2'
+v21 <- UnaryOperation '-', v20
+v22 <- CallFunction v0, [v11, v21]
+
+
+function f(a1, a2) {
+    a1[a2] = 1;
+    a1[a2 + 4] = 2;
+    a1[a2] = 3;
+}
+const v10 = new Array(1024);
+var a1 = v10;
+const v13 = new Array(128);
+var a2 = v13;
+f(a1, 1);
+f(a2, -2);
+f(a1, -2);
+
+FuzzIL program written to corpus/regress-crbug-349465.fzil

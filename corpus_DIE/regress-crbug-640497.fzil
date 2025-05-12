@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'length'
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '1'
+v4 <- LoadString 'x'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadInteger '2'
+v7 <- LoadString 'xy'
+v8 <- CallFunction v0, [v7]
+v9 <- LoadInteger '1'
+v10 <- LoadInteger '1'
+v11 <- CreateArray [v10]
+v12 <- CallFunction v0, [v11]
+v13 <- LoadInteger '2'
+v14 <- LoadInteger '1'
+v15 <- LoadInteger '2'
+v16 <- CreateArray [v14, v15]
+v17 <- CallFunction v0, [v16]
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadInteger '0'
+    v20 <- CreateArray []
+    v21 <- CallFunction v0, [v20]
+EndPlainFunction
+v22 <- CallFunction v18, []
+v23 <- CallFunction v18, []
+v24 <- CallFunction v18, []
+
+
+function g(a1) {
+    return a1.length;
+}
+g("x");
+g("xy");
+g([1]);
+g([1,2]);
+function f() {
+    g([]);
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-640497.fzil

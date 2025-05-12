@@ -1,0 +1,53 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- LoadInteger '1'
+v3 <- LoadString ''
+SetComputedProperty v1, v3, v2
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v1
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'x', 'var', v4
+BeginForLoopInitializer
+    v6 <- LoadInteger '0'
+    v7 <- CreateNamedVariable 'i', 'none'
+    Reassign v7, v6
+BeginForLoopCondition
+    v8 <- CreateNamedVariable 'i', 'none'
+    v9 <- LoadInteger '3'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10
+    v11 <- CreateNamedVariable 'i', 'none'
+    v12 <- UnaryOperation v11, '++'
+BeginForLoopBody
+    v13 <- LoadString ''
+    v14 <- GetComputedProperty v1, v13
+EndForLoop
+BeginForLoopInitializer
+    v15 <- LoadInteger '0'
+    v16 <- CreateNamedVariable 'i', 'none'
+    Reassign v16, v15
+BeginForLoopCondition
+    v17 <- CreateNamedVariable 'i', 'none'
+    v18 <- LoadInteger '3'
+    v19 <- Compare v17, '<', v18
+BeginForLoopAfterthought v19
+    v20 <- CreateNamedVariable 'i', 'none'
+    v21 <- UnaryOperation v20, '++'
+BeginForLoopBody
+    v22 <- LoadUndefined
+    v23 <- GetProperty v1, 'x'
+EndForLoop
+
+
+var o = {};
+o[""] = 1;
+var x = { __proto__: o };
+for (i = 0; i < 3; i++) {
+    o[""];
+}
+for (i = 0; i < 3; i++) {
+    o.x;
+}
+
+FuzzIL program written to corpus/regress-fast-empty-string.fzil

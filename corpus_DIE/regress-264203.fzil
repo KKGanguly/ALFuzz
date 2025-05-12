@@ -1,0 +1,56 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- LoadInteger '2'
+    v4 <- LoadInteger '3'
+    v5 <- LoadInteger '4'
+    v6 <- LoadInteger '5'
+    v7 <- LoadInteger '6'
+    v8 <- LoadInteger '7'
+    v9 <- LoadInteger '8'
+    v10 <- CreateArray [v2, v3, v4, v5, v6, v7, v8, v9]
+    v11 <- CreateNamedVariable 'a', 'var', v10
+    v12 <- LoadInteger '5'
+    v13 <- BinaryOperation v1, '+', v12
+    v14 <- GetComputedProperty v11, v13
+    v15 <- LoadUndefined
+    v16 <- CreateNamedVariable 'result', 'var', v15
+    BeginForLoopInitializer
+        v17 <- LoadInteger '0'
+    BeginForLoopCondition -> v18
+        v19 <- LoadInteger '3'
+        v20 <- Compare v18, '<', v19
+    BeginForLoopAfterthought v20 -> v21
+        v22 <- UnaryOperation v21, '++'
+    BeginForLoopBody -> v23
+        v24 <- LoadInteger '0'
+        v25 <- BinaryOperation v24, '-', v1
+        v26 <- GetComputedProperty v11, v25
+        Reassign v16, v26
+    EndForLoop
+    Return v16
+EndPlainFunction
+v27 <- LoadInteger '0'
+v28 <- CallFunction v0, [v27]
+v29 <- LoadInteger '0'
+v30 <- CallFunction v0, [v29]
+v31 <- LoadInteger '2'
+v32 <- UnaryOperation '-', v31
+v33 <- CallFunction v0, [v32]
+v34 <- CreateNamedVariable 'r', 'var', v33
+v35 <- LoadInteger '3'
+
+
+function foo(a1) {
+    var a = [1,2,3,4,5,6,7,8];
+    a[a1 + 5];
+    var result;
+    for (let i18 = 0; i18 < 3; i18++) {
+        result = a[0 - a1];
+    }
+    return result;
+}
+foo(0);
+foo(0);
+var r = foo(-2);
+
+FuzzIL program written to corpus/regress-264203.fzil

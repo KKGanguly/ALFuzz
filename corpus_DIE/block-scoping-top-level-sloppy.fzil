@@ -1,0 +1,79 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'xxx', 'let', v0
+v2 <- LoadUndefined
+v3 <- CreateNamedVariable 'ff', 'let', v2
+BeginBlockStatement
+    v4 <- CreateNamedVariable 'inner_x', 'let', v1
+    v5 <- BeginPlainFunction -> 
+        Return v4
+    EndPlainFunction
+    Reassign v3, v5
+EndBlockStatement
+v6 <- LoadInteger '1'
+v7 <- CallFunction v3, []
+v8 <- LoadInteger '42'
+Reassign v1, v8
+BeginBlockStatement
+    v9 <- BeginPlainFunction -> 
+        v10 <- CreateNamedVariable 'inner_x1', 'none'
+        Return v10
+    EndPlainFunction
+    Reassign v3, v9
+    v11 <- CreateNamedVariable 'inner_x1', 'let', v1
+EndBlockStatement
+v12 <- LoadInteger '42'
+v13 <- CallFunction v3, []
+v14 <- LoadInteger '31'
+Reassign v1, v14
+BeginBlockStatement
+    v15 <- CreateNamedVariable 'inner_x1', 'let', v1
+    BeginTry
+        v16 <- CreateNamedVariable 'Error', 'none'
+        v17 <- Construct v16, []
+        ThrowException v17
+    BeginCatch -> v18
+        v19 <- BeginPlainFunction -> 
+            Return v15
+        EndPlainFunction
+        Reassign v3, v19
+    EndTryCatch
+EndBlockStatement
+v20 <- LoadInteger '31'
+v21 <- CallFunction v3, []
+
+
+let xxx = 1;
+let ff;
+{
+    let inner_x = xxx;
+    function f5() {
+        return inner_x;
+    }
+    ff = f5;
+}
+ff();
+xxx = 42;
+{
+    function f9() {
+        return inner_x1;
+    }
+    ff = f9;
+    let inner_x1 = xxx;
+}
+ff();
+xxx = 31;
+{
+    let inner_x1 = xxx;
+    try {
+        const v17 = new Error();
+        throw v17;
+    } catch(e18) {
+        function f19() {
+            return inner_x1;
+        }
+        ff = f19;
+    }
+}
+ff();
+
+FuzzIL program written to corpus/block-scoping-top-level-sloppy.fzil

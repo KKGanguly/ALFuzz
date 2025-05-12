@@ -1,0 +1,235 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v0
+    ObjectLiteralAddProperty `b`, v1
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'obj', 'var', v2
+v4 <- CreateNamedVariable 'Reflect', 'none'
+v5 <- CallMethod v4, 'ownKeys', [v3]
+v6 <- CreateNamedVariable 'keys', 'var', v5
+v7 <- LoadInteger '2'
+v8 <- GetProperty v6, 'length'
+v9 <- LoadString 'a'
+v10 <- GetElement v6, '0'
+v11 <- LoadString 'b'
+v12 <- GetElement v6, '1'
+v13 <- BeginPlainFunction -> 
+EndPlainFunction
+v14 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v13
+    ObjectLiteralAddProperty `b`, v14
+v15 <- EndObjectLiteral
+v16 <- CreateNamedVariable 'obj', 'var', v15
+v17 <- CallMethod v4, 'ownKeys', [v16]
+v18 <- CreateNamedVariable 'keys', 'var', v17
+v19 <- LoadInteger '2'
+v20 <- GetProperty v18, 'length'
+v21 <- LoadString 'a'
+v22 <- GetElement v18, '0'
+v23 <- LoadString 'b'
+v24 <- GetElement v18, '1'
+v25 <- LoadInteger '1'
+v26 <- LoadInteger '2'
+v27 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v25
+    ObjectLiteralAddProperty `b`, v26
+    ObjectLiteralAddProperty `c`, v27
+v28 <- EndObjectLiteral
+v29 <- CreateNamedVariable 'obj', 'var', v28
+v30 <- DeleteProperty v29, 'b'
+v31 <- CallMethod v4, 'ownKeys', [v29]
+v32 <- CreateNamedVariable 'keys', 'var', v31
+v33 <- LoadInteger '2'
+v34 <- GetProperty v32, 'length'
+v35 <- LoadString 'a'
+v36 <- GetElement v32, '0'
+v37 <- LoadString 'c'
+v38 <- GetElement v32, '1'
+v39 <- LoadInteger '1'
+v40 <- LoadInteger '2'
+v41 <- CreateArray [v39, v40]
+v42 <- CallMethod v4, 'ownKeys', [v41]
+v43 <- CreateNamedVariable 'keys', 'var', v42
+v44 <- LoadInteger '3'
+v45 <- GetProperty v43, 'length'
+v46 <- LoadString '0'
+v47 <- GetElement v43, '0'
+v48 <- LoadString '1'
+v49 <- GetElement v43, '1'
+v50 <- LoadString 'string'
+v51 <- GetElement v43, '0'
+v52 <- TypeOf v51
+v53 <- LoadString 'string'
+v54 <- GetElement v43, '1'
+v55 <- TypeOf v54
+v56 <- LoadString 'length'
+v57 <- GetElement v43, '2'
+v58 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v58
+v59 <- EndObjectLiteral
+v60 <- CreateNamedVariable 'obj', 'var', v59
+v61 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `bar`, v61
+v62 <- EndObjectLiteral
+SetProperty v60, '__proto__', v62
+v63 <- CallMethod v4, 'ownKeys', [v60]
+Reassign v43, v63
+v64 <- LoadInteger '1'
+v65 <- GetProperty v43, 'length'
+v66 <- LoadString 'foo'
+v67 <- GetElement v43, '0'
+BeginObjectLiteral
+v68 <- EndObjectLiteral
+v69 <- CreateNamedVariable 'obj', 'var', v68
+v70 <- LoadString 'getter'
+v71 <- BeginPlainFunction -> 
+EndPlainFunction
+v72 <- CallMethod v69, '__defineGetter__', [v70, v71]
+v73 <- CallMethod v4, 'ownKeys', [v69]
+Reassign v43, v73
+v74 <- LoadInteger '1'
+v75 <- GetProperty v43, 'length'
+v76 <- LoadString 'getter'
+v77 <- GetElement v43, '0'
+v78 <- CreateNamedVariable 'Array', 'none'
+v79 <- GetProperty v78, 'prototype'
+v80 <- GetProperty v79, 'concat'
+v81 <- CreateNamedVariable 'savedConcat', 'var', v80
+v82 <- BeginPlainFunction -> 
+    v83 <- CreateArray []
+    Return v83
+EndPlainFunction
+v84 <- GetProperty v78, 'prototype'
+SetProperty v84, 'concat', v82
+v85 <- LoadString 'foo'
+v86 <- LoadString 'baz'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v85
+    ObjectLiteralAddProperty `bar`, v86
+v87 <- EndObjectLiteral
+v88 <- CallMethod v4, 'ownKeys', [v87]
+Reassign v43, v88
+v89 <- LoadInteger '2'
+v90 <- GetProperty v43, 'length'
+v91 <- LoadString '0'
+v92 <- GetElement v43, '0'
+v93 <- LoadString 'bar'
+v94 <- GetElement v43, '1'
+v95 <- GetProperty v78, 'prototype'
+v96 <- GetProperty v43, '__proto__'
+v97 <- GetProperty v78, 'prototype'
+SetProperty v97, 'concat', v81
+v98 <- BeginPlainFunction -> 
+    v99 <- LoadInteger '4'
+    v100 <- CallMethod v4, 'ownKeys', [v99]
+EndPlainFunction
+v101 <- CallFunction v98, []
+v102 <- CreateNamedVariable 'TypeError', 'none'
+v103 <- BeginPlainFunction -> 
+    v104 <- LoadString 'foo'
+    v105 <- CallMethod v4, 'ownKeys', [v104]
+EndPlainFunction
+v106 <- CallFunction v103, []
+v107 <- BeginPlainFunction -> 
+    v108 <- LoadBoolean 'true'
+    v109 <- CallMethod v4, 'ownKeys', [v108]
+EndPlainFunction
+v110 <- CallFunction v107, []
+v111 <- LoadInteger '4'
+v112 <- CreateNamedVariable 'Object', 'none'
+v113 <- CallFunction v112, [v111]
+v114 <- CallMethod v4, 'ownKeys', [v113]
+v115 <- CreateArray []
+v116 <- LoadString 'foo'
+v117 <- CallFunction v112, [v116]
+v118 <- CallMethod v4, 'ownKeys', [v117]
+v119 <- LoadString '0'
+v120 <- LoadString '1'
+v121 <- LoadString '2'
+v122 <- LoadString 'length'
+v123 <- CreateArray [v119, v120, v121, v122]
+v124 <- LoadBoolean 'true'
+v125 <- CallFunction v112, [v124]
+v126 <- CallMethod v4, 'ownKeys', [v125]
+v127 <- CreateArray []
+
+
+var obj = { a: 1, b: 2 };
+var keys = Reflect.ownKeys(obj);
+keys.length;
+keys[0];
+keys[1];
+function f13() {
+}
+function f14() {
+}
+var obj = { a: f13, b: f14 };
+var keys = Reflect.ownKeys(obj);
+keys.length;
+keys[0];
+keys[1];
+var obj = { a: 1, b: 2, c: 3 };
+delete obj.b;
+var keys = Reflect.ownKeys(obj);
+keys.length;
+keys[0];
+keys[1];
+var keys = Reflect.ownKeys([1,2]);
+keys.length;
+keys[0];
+keys[1];
+typeof keys[0];
+typeof keys[1];
+keys[2];
+var obj = { foo: "foo" };
+obj.__proto__ = { bar: "bar" };
+keys = Reflect.ownKeys(obj);
+keys.length;
+keys[0];
+var obj = {};
+function f71() {
+}
+obj.__defineGetter__("getter", f71);
+keys = Reflect.ownKeys(obj);
+keys.length;
+keys[0];
+var savedConcat = Array.prototype.concat;
+function f82() {
+    return [];
+}
+const t43 = Array.prototype;
+t43.concat = f82;
+keys = Reflect.ownKeys({ 0: "foo", bar: "baz" });
+keys.length;
+keys[0];
+keys[1];
+Array.prototype;
+keys.__proto__;
+const t46 = Array.prototype;
+t46.concat = savedConcat;
+function f98() {
+    Reflect.ownKeys(4);
+}
+f98();
+function f103() {
+    Reflect.ownKeys("foo");
+}
+f103();
+function f107() {
+    Reflect.ownKeys(true);
+}
+f107();
+Reflect.ownKeys(Object(4));
+[];
+Reflect.ownKeys(Object("foo"));
+["0","1","2","length"];
+Reflect.ownKeys(Object(true));
+[];
+
+FuzzIL program written to corpus/reflect-own-keys.fzil

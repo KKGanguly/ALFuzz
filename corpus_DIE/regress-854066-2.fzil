@@ -1,0 +1,49 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'oobArray', 'none'
+Reassign v1, v0
+v2 <- CreateNamedVariable 'oobArray', 'none'
+v3 <- GetProperty v2, '__proto__'
+v4 <- CreateNamedVariable 'Symbol', 'none'
+v5 <- GetProperty v4, 'iterator'
+v6 <- DeleteComputedProperty v3, v5
+BeginForLoopInitializer
+    v7 <- LoadInteger '0'
+BeginForLoopCondition -> v8
+    v9 <- LoadInteger '100000'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10 -> v11
+    v12 <- UnaryOperation '++', v11
+BeginForLoopBody -> v13
+    v14 <- LoadFloat '1.1'
+    SetComputedProperty v2, v13, v14
+EndForLoop
+v15 <- CreateNamedVariable 'Float64Array', 'none'
+v16 <- GetProperty v2, 'length'
+v17 <- Construct v15, [v16]
+v18 <- CreateNamedVariable 'floatArray', 'none'
+Reassign v18, v17
+v19 <- BeginPlainFunction -> v20
+    v21 <- LoadInteger '0'
+    SetProperty v2, 'length', v21
+    v22 <- CreateNamedVariable 'floatArray', 'none'
+    Return v22
+EndPlainFunction
+v23 <- GetProperty v15, 'from'
+v24 <- CallMethod v23, 'call', [v19, v2]
+
+
+oobArray = [];
+const t0 = oobArray.__proto__;
+delete t0[Symbol.iterator];
+for (let i8 = 0; i8 < 100000; ++i8) {
+    oobArray[i8] = 1.1;
+}
+const v17 = new Float64Array(oobArray.length);
+floatArray = v17;
+function f19(a20) {
+    oobArray.length = 0;
+    return floatArray;
+}
+Float64Array.from.call(f19, oobArray);
+
+FuzzIL program written to corpus/regress-854066-2.fzil

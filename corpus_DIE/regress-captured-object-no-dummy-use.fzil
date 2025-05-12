@@ -1,0 +1,39 @@
+v0 <- LoadString '10.1'
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- LoadThis
+    SetProperty v5, 'd', v4
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- Construct v2, []
+    v8 <- CreateNamedVariable 'x', 'var', v7
+    v9 <- LoadThis
+    SetProperty v1, 'dummy', v9
+    v10 <- Construct v3, [v8]
+    v11 <- CreateNamedVariable 'y', 'var', v10
+EndPlainFunction
+v12 <- CallFunction v6, []
+v13 <- CallFunction v6, []
+v14 <- CallFunction v6, []
+
+
+var global = "10.1";
+function f() {
+}
+function g(a4) {
+    this.d = a4;
+}
+function h() {
+    const v7 = new f();
+    var x = v7;
+    global.dummy = this;
+    const v10 = new g(x);
+    var y = v10;
+}
+h();
+h();
+h();
+
+FuzzIL program written to corpus/regress-captured-object-no-dummy-use.fzil

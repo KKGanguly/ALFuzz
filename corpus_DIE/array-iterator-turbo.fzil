@@ -1,0 +1,663 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'global', 'let', v0
+BeginObjectLiteral
+    BeginObjectLiteralMethod `FastElementsKind` -> v2
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `PACKED_SMI_ELEMENTS` -> v3, v4
+                v5 <- LoadInteger '0'
+                v6 <- CreateNamedVariable 'sum', 'let', v5
+                BeginForOfLoop v4 -> v7
+                    Update v6, '+', v7
+                EndForOfLoop
+                Return v6
+            EndObjectLiteralMethod
+            BeginObjectLiteralMethod `HOLEY_SMI_ELEMENTS` -> v8, v9
+                v10 <- LoadInteger '0'
+                v11 <- CreateNamedVariable 'sum', 'let', v10
+                BeginForOfLoop v9 -> v12
+                    BeginIf v12
+                        Update v11, '+', v12
+                    EndIf
+                EndForOfLoop
+                Return v11
+            EndObjectLiteralMethod
+            BeginObjectLiteralMethod `PACKED_ELEMENTS` -> v13, v14
+                v15 <- LoadString ''
+                v16 <- CreateNamedVariable 'ret', 'let', v15
+                BeginForOfLoop v14 -> v17
+                    v18 <- CreateTemplateString ['> ', ''], [v17]
+                    Update v16, '+', v18
+                EndForOfLoop
+                Return v16
+            EndObjectLiteralMethod
+            BeginObjectLiteralMethod `HOLEY_ELEMENTS` -> v19, v20
+                v21 <- LoadString ''
+                v22 <- CreateNamedVariable 'ret', 'let', v21
+                BeginForOfLoop v20 -> v23
+                    v24 <- CreateTemplateString ['> ', ''], [v23]
+                    Update v22, '+', v24
+                EndForOfLoop
+                Return v22
+            EndObjectLiteralMethod
+            BeginObjectLiteralMethod `PACKED_DOUBLE_ELEMENTS` -> v25, v26
+                v27 <- LoadInteger '0'
+                v28 <- CreateNamedVariable 'sum', 'let', v27
+                BeginForOfLoop v26 -> v29
+                    Update v28, '+', v29
+                EndForOfLoop
+                Return v28
+            EndObjectLiteralMethod
+        v30 <- EndObjectLiteral
+        v31 <- CreateNamedVariable 'runners', 'let', v30
+        v32 <- LoadInteger '1'
+        v33 <- LoadInteger '2'
+        v34 <- LoadInteger '3'
+        v35 <- LoadInteger '4'
+        v36 <- LoadInteger '5'
+        v37 <- LoadInteger '6'
+        v38 <- LoadInteger '7'
+        v39 <- LoadInteger '8'
+        v40 <- LoadInteger '9'
+        v41 <- LoadInteger '10'
+        v42 <- CreateArray [v32, v33, v34, v35, v36, v37, v38, v39, v40, v41]
+        v43 <- LoadInteger '55'
+        v44 <- LoadInteger '1'
+        v45 <- LoadInteger '2'
+        v46 <- LoadInteger '3'
+        v47 <- CreateArray [v44, v45, v46]
+        v48 <- LoadInteger '6'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v42
+            ObjectLiteralAddProperty `expected`, v43
+            ObjectLiteralAddProperty `array2`, v47
+            ObjectLiteralAddProperty `expected2`, v48
+        v49 <- EndObjectLiteral
+        v50 <- LoadInteger '1'
+        v51 <- LoadUndefined
+        v52 <- LoadInteger '3'
+        v53 <- LoadInteger '5'
+        v54 <- LoadInteger '7'
+        v55 <- LoadInteger '9'
+        v56 <- CreateArray [v50, v51, v52, v51, v53, v51, v54, v51, v55, v51]
+        v57 <- LoadInteger '25'
+        v58 <- LoadInteger '1'
+        v59 <- LoadUndefined
+        v60 <- LoadInteger '3'
+        v61 <- CreateArray [v58, v59, v60]
+        v62 <- LoadInteger '4'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v56
+            ObjectLiteralAddProperty `expected`, v57
+            ObjectLiteralAddProperty `array2`, v61
+            ObjectLiteralAddProperty `expected2`, v62
+        v63 <- EndObjectLiteral
+        v64 <- LoadString 'a'
+        v65 <- LoadString 'b'
+        v66 <- LoadString 'c'
+        v67 <- LoadString 'd'
+        v68 <- LoadString 'e'
+        v69 <- LoadString 'f'
+        v70 <- LoadString 'g'
+        v71 <- LoadString 'h'
+        v72 <- LoadString 'i'
+        v73 <- LoadString 'j'
+        v74 <- CreateArray [v64, v65, v66, v67, v68, v69, v70, v71, v72, v73]
+        v75 <- LoadString '> a> b> c> d> e> f> g> h> i> j'
+        v76 <- LoadString 'a'
+        v77 <- LoadString 'b'
+        v78 <- LoadString 'c'
+        v79 <- CreateArray [v76, v77, v78]
+        v80 <- LoadString '> a> b> c'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v74
+            ObjectLiteralAddProperty `expected`, v75
+            ObjectLiteralAddProperty `array2`, v79
+            ObjectLiteralAddProperty `expected2`, v80
+        v81 <- EndObjectLiteral
+        v82 <- LoadString 'a'
+        v83 <- LoadUndefined
+        v84 <- LoadString 'c'
+        v85 <- LoadString 'e'
+        v86 <- LoadString 'g'
+        v87 <- LoadString 'i'
+        v88 <- CreateArray [v82, v83, v84, v83, v85, v83, v86, v83, v87, v83]
+        v89 <- LoadString '> a> undefined> c> undefined> e> undefined> g'
+        v90 <- LoadString '> undefined> i> undefined'
+        v91 <- BinaryOperation v89, '+', v90
+        v92 <- LoadString 'a'
+        v93 <- LoadUndefined
+        v94 <- LoadString 'c'
+        v95 <- CreateArray [v92, v93, v94]
+        v96 <- LoadString '> a> undefined> c'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v88
+            ObjectLiteralAddProperty `expected`, v91
+            ObjectLiteralAddProperty `array2`, v95
+            ObjectLiteralAddProperty `expected2`, v96
+        v97 <- EndObjectLiteral
+        v98 <- LoadFloat '0.1'
+        v99 <- LoadFloat '0.2'
+        v100 <- LoadFloat '0.3'
+        v101 <- LoadFloat '0.4'
+        v102 <- LoadFloat '0.5'
+        v103 <- LoadFloat '0.6'
+        v104 <- LoadFloat '0.7'
+        v105 <- LoadFloat '0.8'
+        v106 <- LoadFloat '0.9'
+        v107 <- LoadInteger '1'
+        v108 <- CreateArray [v98, v99, v100, v101, v102, v103, v104, v105, v106, v107]
+        v109 <- LoadFloat '5.5'
+        v110 <- LoadFloat '0.6'
+        v111 <- LoadFloat '0.4'
+        v112 <- LoadFloat '0.2'
+        v113 <- CreateArray [v110, v111, v112]
+        v114 <- LoadFloat '1.2'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v108
+            ObjectLiteralAddProperty `expected`, v109
+            ObjectLiteralAddProperty `array2`, v113
+            ObjectLiteralAddProperty `expected2`, v114
+        v115 <- EndObjectLiteral
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `PACKED_SMI_ELEMENTS`, v49
+            ObjectLiteralAddProperty `HOLEY_SMI_ELEMENTS`, v63
+            ObjectLiteralAddProperty `PACKED_ELEMENTS`, v81
+            ObjectLiteralAddProperty `HOLEY_ELEMENTS`, v97
+            ObjectLiteralAddProperty `PACKED_DOUBLE_ELEMENTS`, v115
+        v116 <- EndObjectLiteral
+        v117 <- CreateNamedVariable 'tests', 'let', v116
+        v118 <- CreateNamedVariable 'Object', 'none'
+        v119 <- CallMethod v118, 'keys', [v31]
+        BeginForOfLoop v119 -> v120
+            v121 <- GetComputedProperty v31, v120
+            v122 <- CreateNamedVariable 'fn', 'let', v121
+            v123 <- GetComputedProperty v117, v120
+            v124 <- CreateNamedVariable '', 'let', v123
+            v125 <- CreateNamedVariable 'array', 'none'
+            v126 <- CallFunction v122, [v125]
+            v127 <- CallFunction v122, [v125]
+            v128 <- CallFunction v122, [v125]
+            v129 <- LoadString ''
+            v130 <- CreateNamedVariable 'expected', 'none'
+            v131 <- CallFunction v122, [v125]
+            v132 <- LoadString ''
+            v133 <- LoadString ''
+            v134 <- CreateNamedVariable 'expected2', 'none'
+            v135 <- CreateNamedVariable 'array2', 'none'
+            v136 <- CallFunction v122, [v135]
+            v137 <- LoadInteger '1'
+            v138 <- LoadInteger '2'
+            v139 <- LoadInteger '3'
+            v140 <- CreateArray [v137, v138, v139]
+            v141 <- LoadInteger '2'
+            v142 <- LoadBoolean 'false'
+            v143 <- LoadBoolean 'false'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `enumerable`, v142
+                ObjectLiteralAddProperty `configurable`, v143
+                BeginObjectLiteralMethod `get` -> v144
+                    v145 <- LoadInteger '7'
+                    Return v145
+                EndObjectLiteralMethod
+            v146 <- EndObjectLiteral
+            v147 <- CallMethod v118, 'defineProperty', [v140, v141, v146]
+            v148 <- CreateNamedVariable 'newArray', 'let', v147
+            v149 <- CallFunction v122, [v148]
+            v150 <- LoadString ''
+        EndForOfLoop
+    EndObjectLiteralMethod
+    BeginObjectLiteralMethod `TypedArrays` -> v151
+        v152 <- CreateNamedVariable 'Uint8Array', 'none'
+        v153 <- LoadInteger '1'
+        v154 <- LoadInteger '2'
+        v155 <- LoadInteger '3'
+        v156 <- LoadInteger '4'
+        v157 <- LoadInteger '5'
+        v158 <- LoadInteger '6'
+        v159 <- LoadInteger '7'
+        v160 <- LoadInteger '8'
+        v161 <- LoadInteger '1'
+        v162 <- UnaryOperation '-', v161
+        v163 <- LoadInteger '256'
+        v164 <- CreateArray [v153, v154, v155, v156, v157, v158, v159, v160, v162, v163]
+        v165 <- Construct v152, [v164]
+        v166 <- LoadInteger '291'
+        v167 <- LoadInteger '1'
+        v168 <- LoadInteger '2'
+        v169 <- LoadInteger '3'
+        v170 <- CreateArray [v167, v168, v169]
+        v171 <- Construct v152, [v170]
+        v172 <- LoadInteger '6'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v165
+            ObjectLiteralAddProperty `expected`, v166
+            ObjectLiteralAddProperty `array2`, v171
+            ObjectLiteralAddProperty `expected2`, v172
+        v173 <- EndObjectLiteral
+        v174 <- CreateNamedVariable 'Int8Array', 'none'
+        v175 <- LoadInteger '1'
+        v176 <- LoadInteger '2'
+        v177 <- LoadInteger '3'
+        v178 <- LoadInteger '4'
+        v179 <- LoadInteger '5'
+        v180 <- LoadInteger '6'
+        v181 <- LoadInteger '7'
+        v182 <- LoadInteger '8'
+        v183 <- LoadInteger '129'
+        v184 <- UnaryOperation '-', v183
+        v185 <- LoadInteger '128'
+        v186 <- CreateArray [v175, v176, v177, v178, v179, v180, v181, v182, v184, v185]
+        v187 <- Construct v174, [v186]
+        v188 <- LoadInteger '35'
+        v189 <- LoadInteger '1'
+        v190 <- LoadInteger '2'
+        v191 <- LoadInteger '3'
+        v192 <- CreateArray [v189, v190, v191]
+        v193 <- Construct v174, [v192]
+        v194 <- LoadInteger '6'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v187
+            ObjectLiteralAddProperty `expected`, v188
+            ObjectLiteralAddProperty `array2`, v193
+            ObjectLiteralAddProperty `expected2`, v194
+        v195 <- EndObjectLiteral
+        v196 <- CreateNamedVariable 'Uint16Array', 'none'
+        v197 <- LoadInteger '1'
+        v198 <- LoadInteger '2'
+        v199 <- LoadInteger '3'
+        v200 <- LoadInteger '4'
+        v201 <- LoadInteger '5'
+        v202 <- LoadInteger '6'
+        v203 <- LoadInteger '7'
+        v204 <- LoadInteger '8'
+        v205 <- LoadInteger '1'
+        v206 <- UnaryOperation '-', v205
+        v207 <- LoadInteger '65536'
+        v208 <- CreateArray [v197, v198, v199, v200, v201, v202, v203, v204, v206, v207]
+        v209 <- Construct v196, [v208]
+        v210 <- LoadInteger '65571'
+        v211 <- LoadInteger '1'
+        v212 <- LoadInteger '2'
+        v213 <- LoadInteger '3'
+        v214 <- CreateArray [v211, v212, v213]
+        v215 <- Construct v196, [v214]
+        v216 <- LoadInteger '6'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v209
+            ObjectLiteralAddProperty `expected`, v210
+            ObjectLiteralAddProperty `array2`, v215
+            ObjectLiteralAddProperty `expected2`, v216
+        v217 <- EndObjectLiteral
+        v218 <- CreateNamedVariable 'Int16Array', 'none'
+        v219 <- LoadInteger '1'
+        v220 <- LoadInteger '2'
+        v221 <- LoadInteger '3'
+        v222 <- LoadInteger '4'
+        v223 <- LoadInteger '5'
+        v224 <- LoadInteger '6'
+        v225 <- LoadInteger '7'
+        v226 <- LoadInteger '8'
+        v227 <- LoadInteger '32769'
+        v228 <- UnaryOperation '-', v227
+        v229 <- LoadInteger '32767'
+        v230 <- CreateArray [v219, v220, v221, v222, v223, v224, v225, v226, v228, v229]
+        v231 <- Construct v218, [v230]
+        v232 <- LoadInteger '65570'
+        v233 <- LoadInteger '1'
+        v234 <- LoadInteger '2'
+        v235 <- LoadInteger '3'
+        v236 <- CreateArray [v233, v234, v235]
+        v237 <- Construct v218, [v236]
+        v238 <- LoadInteger '6'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v231
+            ObjectLiteralAddProperty `expected`, v232
+            ObjectLiteralAddProperty `array2`, v237
+            ObjectLiteralAddProperty `expected2`, v238
+        v239 <- EndObjectLiteral
+        v240 <- CreateNamedVariable 'Uint32Array', 'none'
+        v241 <- LoadInteger '1'
+        v242 <- LoadInteger '2'
+        v243 <- LoadInteger '3'
+        v244 <- LoadInteger '4'
+        v245 <- LoadInteger '5'
+        v246 <- LoadInteger '6'
+        v247 <- LoadInteger '7'
+        v248 <- LoadInteger '8'
+        v249 <- LoadInteger '1'
+        v250 <- UnaryOperation '-', v249
+        v251 <- LoadInteger '4294967296'
+        v252 <- CreateArray [v241, v242, v243, v244, v245, v246, v247, v248, v250, v251]
+        v253 <- Construct v240, [v252]
+        v254 <- LoadInteger '4294967331'
+        v255 <- LoadInteger '1'
+        v256 <- LoadInteger '2'
+        v257 <- LoadInteger '3'
+        v258 <- CreateArray [v255, v256, v257]
+        v259 <- Construct v240, [v258]
+        v260 <- LoadInteger '6'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v253
+            ObjectLiteralAddProperty `expected`, v254
+            ObjectLiteralAddProperty `array2`, v259
+            ObjectLiteralAddProperty `expected2`, v260
+        v261 <- EndObjectLiteral
+        v262 <- CreateNamedVariable 'Int32Array', 'none'
+        v263 <- LoadInteger '1'
+        v264 <- LoadInteger '2'
+        v265 <- LoadInteger '3'
+        v266 <- LoadInteger '4'
+        v267 <- LoadInteger '5'
+        v268 <- LoadInteger '6'
+        v269 <- LoadInteger '7'
+        v270 <- LoadInteger '8'
+        v271 <- LoadInteger '2147483649'
+        v272 <- UnaryOperation '-', v271
+        v273 <- LoadInteger '2147483647'
+        v274 <- CreateArray [v263, v264, v265, v266, v267, v268, v269, v270, v272, v273]
+        v275 <- Construct v262, [v274]
+        v276 <- LoadInteger '4294967330'
+        v277 <- LoadInteger '1'
+        v278 <- LoadInteger '2'
+        v279 <- LoadInteger '3'
+        v280 <- CreateArray [v277, v278, v279]
+        v281 <- Construct v262, [v280]
+        v282 <- LoadInteger '6'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v275
+            ObjectLiteralAddProperty `expected`, v276
+            ObjectLiteralAddProperty `array2`, v281
+            ObjectLiteralAddProperty `expected2`, v282
+        v283 <- EndObjectLiteral
+        v284 <- CreateNamedVariable 'Float32Array', 'none'
+        v285 <- LoadFloat '9.5'
+        v286 <- LoadInteger '8'
+        v287 <- LoadInteger '7'
+        v288 <- LoadInteger '7'
+        v289 <- LoadInteger '5'
+        v290 <- LoadInteger '4'
+        v291 <- LoadInteger '3'
+        v292 <- LoadInteger '2'
+        v293 <- CreateArray [v285, v286, v287, v288, v289, v290, v291, v292]
+        v294 <- Construct v284, [v293]
+        v295 <- LoadFloat '45.5'
+        v296 <- LoadFloat '10.5'
+        v297 <- LoadFloat '5.5'
+        v298 <- LoadFloat '1.5'
+        v299 <- CreateArray [v296, v297, v298]
+        v300 <- Construct v284, [v299]
+        v301 <- LoadFloat '17.5'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v294
+            ObjectLiteralAddProperty `expected`, v295
+            ObjectLiteralAddProperty `array2`, v300
+            ObjectLiteralAddProperty `expected2`, v301
+        v302 <- EndObjectLiteral
+        v303 <- CreateNamedVariable 'Float64Array', 'none'
+        v304 <- LoadFloat '9.5'
+        v305 <- LoadInteger '8'
+        v306 <- LoadInteger '7'
+        v307 <- LoadInteger '7'
+        v308 <- LoadInteger '5'
+        v309 <- LoadInteger '4'
+        v310 <- LoadInteger '3'
+        v311 <- LoadInteger '2'
+        v312 <- CreateArray [v304, v305, v306, v307, v308, v309, v310, v311]
+        v313 <- Construct v303, [v312]
+        v314 <- LoadFloat '45.5'
+        v315 <- LoadFloat '10.5'
+        v316 <- LoadFloat '5.5'
+        v317 <- LoadFloat '1.5'
+        v318 <- CreateArray [v315, v316, v317]
+        v319 <- Construct v303, [v318]
+        v320 <- LoadFloat '17.5'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v313
+            ObjectLiteralAddProperty `expected`, v314
+            ObjectLiteralAddProperty `array2`, v319
+            ObjectLiteralAddProperty `expected2`, v320
+        v321 <- EndObjectLiteral
+        v322 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+        v323 <- LoadFloat '4.3'
+        v324 <- LoadFloat '7.45632'
+        v325 <- LoadFloat '3.14'
+        v326 <- LoadFloat '4.61'
+        v327 <- LoadFloat '5.0004'
+        v328 <- LoadFloat '6.493'
+        v329 <- LoadFloat '7.12'
+        v330 <- LoadInteger '8'
+        v331 <- LoadFloat '1.7'
+        v332 <- LoadFloat '3.6'
+        v333 <- CreateArray [v323, v324, v325, v326, v327, v328, v329, v330, v331, v332]
+        v334 <- Construct v322, [v333]
+        v335 <- LoadInteger '51'
+        v336 <- LoadInteger '1'
+        v337 <- LoadInteger '2'
+        v338 <- LoadInteger '3'
+        v339 <- CreateArray [v336, v337, v338]
+        v340 <- Construct v322, [v339]
+        v341 <- LoadInteger '6'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `array`, v334
+            ObjectLiteralAddProperty `expected`, v335
+            ObjectLiteralAddProperty `array2`, v340
+            ObjectLiteralAddProperty `expected2`, v341
+        v342 <- EndObjectLiteral
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `Uint8Array`, v173
+            ObjectLiteralAddProperty `Int8Array`, v195
+            ObjectLiteralAddProperty `Uint16Array`, v217
+            ObjectLiteralAddProperty `Int16Array`, v239
+            ObjectLiteralAddProperty `Uint32Array`, v261
+            ObjectLiteralAddProperty `Int32Array`, v283
+            ObjectLiteralAddProperty `Float32Array`, v302
+            ObjectLiteralAddProperty `Float64Array`, v321
+            ObjectLiteralAddProperty `Uint8ClampedArray`, v342
+        v343 <- EndObjectLiteral
+        v344 <- CreateNamedVariable 'tests', 'let', v343
+        v345 <- CreateNamedVariable 'Object', 'none'
+        v346 <- CallMethod v345, 'keys', [v344]
+        BeginForOfLoop v346 -> v347
+            v348 <- GetComputedProperty v344, v347
+            v349 <- CreateNamedVariable 'test', 'let', v348
+            v350 <- CreateNamedVariable '', 'let', v349
+            v351 <- BeginPlainFunction -> v352
+                v353 <- LoadInteger '0'
+                v354 <- CreateNamedVariable 'ret', 'let', v353
+                BeginForOfLoop v352 -> v355
+                    Update v354, '+', v355
+                EndForOfLoop
+                Return v354
+            EndPlainFunction
+            v356 <- CreateNamedVariable 'sum', 'let', v351
+            v357 <- CreateNamedVariable 'array', 'none'
+            v358 <- CallFunction v356, [v357]
+            v359 <- CallFunction v356, [v357]
+            v360 <- CreateNamedVariable 'expected', 'none'
+            v361 <- CallFunction v356, [v357]
+            v362 <- LoadString ''
+            v363 <- CreateNamedVariable 'expected2', 'none'
+            v364 <- CreateNamedVariable 'array2', 'none'
+            v365 <- CallFunction v356, [v364]
+            v366 <- LoadString ''
+            v367 <- GetProperty v357, 'constructor'
+            v368 <- Construct v367, [v357]
+            v369 <- CreateNamedVariable 'clone', 'let', v368
+            v370 <- BeginArrowFunction -> 
+                v371 <- CallFunction v356, [v369]
+                Return v371
+            EndArrowFunction
+            v372 <- CallFunction v370, []
+            v373 <- CreateNamedVariable 'TypeError', 'none'
+        EndForOfLoop
+    EndObjectLiteralMethod
+v374 <- EndObjectLiteral
+v375 <- CreateNamedVariable 'tests', 'let', v374
+v376 <- CreateNamedVariable 'Object', 'none'
+v377 <- CallMethod v376, 'keys', [v375]
+BeginForOfLoop v377 -> v378
+    v379 <- GetComputedProperty v375, v378
+    v380 <- CreateNamedVariable 'test', 'let', v379
+    v381 <- CallFunction v380, []
+EndForOfLoop
+
+
+let global = this;
+const v374 = {
+    FastElementsKind() {
+        const v30 = {
+            PACKED_SMI_ELEMENTS(a4) {
+                let sum = 0;
+                for (const v7 of a4) {
+                    sum += v7;
+                }
+                return sum;
+            },
+            HOLEY_SMI_ELEMENTS(a9) {
+                let sum = 0;
+                for (const v12 of a9) {
+                    if (v12) {
+                        sum += v12;
+                    }
+                }
+                return sum;
+            },
+            PACKED_ELEMENTS(a14) {
+                let ret = "";
+                for (const v17 of a14) {
+                    ret += `> ${v17}`;
+                }
+                return ret;
+            },
+            HOLEY_ELEMENTS(a20) {
+                let ret = "";
+                for (const v23 of a20) {
+                    ret += `> ${v23}`;
+                }
+                return ret;
+            },
+            PACKED_DOUBLE_ELEMENTS(a26) {
+                let sum = 0;
+                for (const v29 of a26) {
+                    sum += v29;
+                }
+                return sum;
+            },
+        };
+        let runners = v30;
+        const v42 = [1,2,3,4,5,6,7,8,9,10];
+        const v47 = [1,2,3];
+        const v49 = { array: v42, expected: 55, array2: v47, expected2: 6 };
+        const v56 = [1,,3,,5,,7,,9,,];
+        const v61 = [1,,3];
+        const v63 = { array: v56, expected: 25, array2: v61, expected2: 4 };
+        const v74 = ["a","b","c","d","e","f","g","h","i","j"];
+        const v79 = ["a","b","c"];
+        const v81 = { array: v74, expected: "> a> b> c> d> e> f> g> h> i> j", array2: v79, expected2: "> a> b> c" };
+        const v88 = ["a",,"c",,"e",,"g",,"i",,];
+        const v91 = "> a> undefined> c> undefined> e> undefined> g" + "> undefined> i> undefined";
+        const v95 = ["a",,"c"];
+        const v97 = { array: v88, expected: v91, array2: v95, expected2: "> a> undefined> c" };
+        const v108 = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1];
+        const v113 = [0.6,0.4,0.2];
+        const v115 = { array: v108, expected: 5.5, array2: v113, expected2: 1.2 };
+        const v116 = {
+            PACKED_SMI_ELEMENTS: v49,
+            HOLEY_SMI_ELEMENTS: v63,
+            PACKED_ELEMENTS: v81,
+            HOLEY_ELEMENTS: v97,
+            PACKED_DOUBLE_ELEMENTS: v115,
+        };
+        let tests = v116;
+        for (const v120 of Object.keys(runners)) {
+            let fn = runners[v120];
+            let  = tests[v120];
+            fn(array);
+            fn(array);
+            fn(array);
+            fn(array);
+            fn(array2);
+            const v140 = [1,2,3];
+            const v146 = {
+                enumerable: false,
+                configurable: false,
+                get() {
+                    return 7;
+                },
+            };
+            let newArray = Object.defineProperty(v140, 2, v146);
+            fn(newArray);
+        }
+    },
+    TypedArrays() {
+        const v165 = new Uint8Array([1,2,3,4,5,6,7,8,-1,256]);
+        const v171 = new Uint8Array([1,2,3]);
+        const v173 = { array: v165, expected: 291, array2: v171, expected2: 6 };
+        const v187 = new Int8Array([1,2,3,4,5,6,7,8,-129,128]);
+        const v193 = new Int8Array([1,2,3]);
+        const v195 = { array: v187, expected: 35, array2: v193, expected2: 6 };
+        const v209 = new Uint16Array([1,2,3,4,5,6,7,8,-1,65536]);
+        const v215 = new Uint16Array([1,2,3]);
+        const v217 = { array: v209, expected: 65571, array2: v215, expected2: 6 };
+        const v231 = new Int16Array([1,2,3,4,5,6,7,8,-32769,32767]);
+        const v237 = new Int16Array([1,2,3]);
+        const v239 = { array: v231, expected: 65570, array2: v237, expected2: 6 };
+        const v253 = new Uint32Array([1,2,3,4,5,6,7,8,-1,4294967296]);
+        const v259 = new Uint32Array([1,2,3]);
+        const v261 = { array: v253, expected: 4294967331, array2: v259, expected2: 6 };
+        const v275 = new Int32Array([1,2,3,4,5,6,7,8,-2147483649,2147483647]);
+        const v281 = new Int32Array([1,2,3]);
+        const v283 = { array: v275, expected: 4294967330, array2: v281, expected2: 6 };
+        const v294 = new Float32Array([9.5,8,7,7,5,4,3,2]);
+        const v300 = new Float32Array([10.5,5.5,1.5]);
+        const v302 = { array: v294, expected: 45.5, array2: v300, expected2: 17.5 };
+        const v313 = new Float64Array([9.5,8,7,7,5,4,3,2]);
+        const v319 = new Float64Array([10.5,5.5,1.5]);
+        const v321 = { array: v313, expected: 45.5, array2: v319, expected2: 17.5 };
+        const v334 = new Uint8ClampedArray([4.3,7.45632,3.14,4.61,5.0004,6.493,7.12,8,1.7,3.6]);
+        const v340 = new Uint8ClampedArray([1,2,3]);
+        const v342 = { array: v334, expected: 51, array2: v340, expected2: 6 };
+        const v343 = {
+            Uint8Array: v173,
+            Int8Array: v195,
+            Uint16Array: v217,
+            Int16Array: v239,
+            Uint32Array: v261,
+            Int32Array: v283,
+            Float32Array: v302,
+            Float64Array: v321,
+            Uint8ClampedArray: v342,
+        };
+        let tests = v343;
+        for (const v347 of Object.keys(tests)) {
+            let test = tests[v347];
+            let  = test;
+            function f351(a352) {
+                let ret = 0;
+                for (const v355 of a352) {
+                    ret += v355;
+                }
+                return ret;
+            }
+            let sum = f351;
+            sum(array);
+            sum(array);
+            sum(array);
+            sum(array2);
+            const t50 = array.constructor;
+            const v368 = new t50(array);
+            let clone = v368;
+            const v370 = () => {
+                return sum(clone);
+            };
+            v370();
+        }
+    },
+};
+let tests = v374;
+for (const v378 of Object.keys(tests)) {
+    let test = tests[v378];
+    test();
+}
+
+FuzzIL program written to corpus/array-iterator-turbo.fzil

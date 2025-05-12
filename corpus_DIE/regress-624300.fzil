@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        v1 <- CreateNamedVariable 'f', 'none'
+        v2 <- CallFunction v1, []
+    BeginCatch -> v3
+        v4 <- BeginAsyncArrowFunction -> 
+            v5 <- LoadInteger '1'
+            v6 <- Await v5
+            Return v6
+        EndAsyncArrowFunction
+        v7 <- GetProperty v4, 'length'
+    EndTryCatch
+EndPlainFunction
+v8 <- CallFunction v0, []
+
+
+function f() {
+    try {
+        f();
+    } catch(e3) {
+        const v4 = async () => {
+            return await 1;
+        };
+        v4.length;
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-624300.fzil

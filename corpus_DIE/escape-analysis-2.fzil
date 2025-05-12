@@ -1,0 +1,42 @@
+v0 <- BeginPlainFunction -> v1
+    Directive 'use strict'
+    v2 <- LoadArguments
+    v3 <- Compare v2, '===', v1
+    BeginIf v3
+        v4 <- LoadInteger '1'
+        Return v4
+    EndIf
+    v5 <- LoadArguments
+    v6 <- GetProperty v5, 'length'
+    Return v6
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadInteger '1'
+    v10 <- LoadInteger '2'
+    v11 <- LoadInteger '3'
+    v12 <- CallFunction v0, [v8, v9, v10, v11]
+    Return v12
+EndPlainFunction
+v13 <- LoadInteger '4'
+v14 <- CallFunction v7, []
+v15 <- LoadInteger '4'
+v16 <- CallFunction v7, []
+v17 <- LoadInteger '4'
+v18 <- CallFunction v7, []
+
+
+function f(a1) {
+    'use strict';
+    if (arguments === a1) {
+        return 1;
+    }
+    return arguments.length;
+}
+function g(a8) {
+    return f(a8, 1, 2, 3);
+}
+g();
+g();
+g();
+
+FuzzIL program written to corpus/escape-analysis-2.fzil

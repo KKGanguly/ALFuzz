@@ -1,0 +1,39 @@
+v0 <- LoadInteger '0'
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- CreateArray []
+v3 <- CallMethod v2, '__defineSetter__', [v0, v1]
+v4 <- BeginPlainFunction -> v5, v6, v7
+    SetComputedProperty v5, v6, v7
+EndPlainFunction
+v8 <- LoadInteger '0'
+v9 <- LoadInteger '0'
+v10 <- LoadInteger '0'
+v11 <- CreateArray [v8, v9, v10]
+v12 <- CreateNamedVariable 'a', 'none'
+Reassign v12, v11
+v13 <- CreateNamedVariable 'a', 'none'
+v14 <- LoadInteger '0'
+v15 <- LoadInteger '5'
+v16 <- CallFunction v4, [v13, v14, v15]
+v17 <- CreateNamedVariable 'Float32Array', 'none'
+v18 <- LoadInteger '5'
+v19 <- Construct v17, [v18]
+Reassign v13, v19
+v20 <- LoadInteger '2'
+v21 <- LoadFloat '5.5'
+v22 <- CallFunction v4, [v13, v20, v21]
+
+
+function f1() {
+}
+([]).__defineSetter__(0, f1);
+function f(a5, a6, a7) {
+    a5[a6] = a7;
+}
+a = [0,0,0];
+f(a, 0, 5);
+const v19 = new Float32Array(5);
+f(a = v19, 2, 5.5);
+
+FuzzIL program written to corpus/regress-357054.fzil

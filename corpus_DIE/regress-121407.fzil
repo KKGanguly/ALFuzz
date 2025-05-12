@@ -1,0 +1,64 @@
+v0 <- LoadInteger '0'
+v1 <- LoadInteger '1'
+v2 <- LoadInteger '2'
+v3 <- LoadInteger '3'
+v4 <- CreateArray [v0, v1, v2, v3]
+v5 <- CreateNamedVariable 'a', 'var', v4
+v6 <- LoadInteger '2000000'
+SetElement v5, '2000000', v6
+v7 <- LoadInteger '2000'
+SetProperty v5, 'length', v7
+BeginForLoopInitializer
+    v8 <- LoadInteger '0'
+BeginForLoopCondition -> v9
+    v10 <- LoadInteger '256'
+    v11 <- Compare v9, '<=', v10
+BeginForLoopAfterthought v11 -> v12
+    v13 <- UnaryOperation v12, '++'
+BeginForLoopBody -> v14
+    v15 <- CreateNamedVariable 'Object', 'none'
+    v16 <- Construct v15, []
+    SetComputedProperty v5, v14, v16
+EndForLoop
+v17 <- LoadFloat '0.5'
+v18 <- LoadFloat '1.5'
+v19 <- LoadFloat '2.5'
+v20 <- LoadFloat '3.5'
+v21 <- LoadFloat '4.5'
+v22 <- LoadFloat '5.5'
+v23 <- CreateArray [v17, v18, v19, v20, v21, v22]
+Reassign v5, v23
+v24 <- LoadInteger '2000000'
+SetElement v5, '2000000', v24
+v25 <- LoadInteger '2000'
+SetProperty v5, 'length', v25
+BeginForLoopInitializer
+    v26 <- LoadInteger '0'
+BeginForLoopCondition -> v27
+    v28 <- LoadInteger '256'
+    v29 <- Compare v27, '<=', v28
+BeginForLoopAfterthought v29 -> v30
+    v31 <- UnaryOperation v30, '++'
+BeginForLoopBody -> v32
+    v33 <- CreateNamedVariable 'Object', 'none'
+    v34 <- Construct v33, []
+    SetComputedProperty v5, v32, v34
+EndForLoop
+
+
+var a = [0,1,2,3];
+a[2000000] = 2000000;
+a.length = 2000;
+for (let i9 = 0; i9 <= 256; i9++) {
+    const v16 = new Object();
+    a[i9] = v16;
+}
+a = [0.5,1.5,2.5,3.5,4.5,5.5];
+a[2000000] = 2000000;
+a.length = 2000;
+for (let i27 = 0; i27 <= 256; i27++) {
+    const v34 = new Object();
+    a[i27] = v34;
+}
+
+FuzzIL program written to corpus/regress-121407.fzil

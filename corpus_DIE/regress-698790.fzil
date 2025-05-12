@@ -1,0 +1,27 @@
+v0 <- LoadString 'aaaaaaaaaaaaaa'
+v1 <- CreateNamedVariable 'cons_string', 'var', v0
+v2 <- CreateNamedVariable 'RegExp', 'none'
+v3 <- Construct v2, [v1]
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadString 'aaaaaaaaaaaaaa'
+    v7 <- BinaryOperation v5, '+', v6
+    Return v7
+EndPlainFunction
+v8 <- LoadString ''
+v9 <- CallFunction v4, [v8]
+v10 <- LoadString ''
+v11 <- CallFunction v4, [v10]
+v12 <- CreateNamedVariable 'cons_str', 'var', v11
+v13 <- Construct v2, [v12]
+
+
+var cons_string = "aaaaaaaaaaaaaa";
+new RegExp(cons_string);
+function make_cons_string(a5) {
+    return a5 + "aaaaaaaaaaaaaa";
+}
+make_cons_string("");
+var cons_str = make_cons_string("");
+new RegExp(cons_str);
+
+FuzzIL program written to corpus/regress-698790.fzil

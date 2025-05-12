@@ -1,0 +1,55 @@
+v0 <- CreateNamedVariable 'Int8Array', 'none'
+v1 <- LoadInteger '42'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- CallMethod v3, 'preventExtensions', [v2]
+v5 <- LoadInteger '42'
+v6 <- Construct v0, [v5]
+v7 <- CallMethod v3, 'seal', [v6]
+v8 <- LoadInteger '0'
+v9 <- Construct v0, [v8]
+v10 <- CallMethod v3, 'freeze', [v9]
+v11 <- LoadInteger '42'
+v12 <- Construct v0, [v11]
+v13 <- CreateNamedVariable 'o', 'var', v12
+v14 <- BeginPlainFunction -> 
+    v15 <- CallMethod v3, 'freeze', [v13]
+EndPlainFunction
+v16 <- CallFunction v14, []
+v17 <- CreateNamedVariable 'TypeError', 'none'
+v18 <- CallMethod v3, 'isExtensible', [v13]
+v19 <- BeginPlainFunction -> 
+    v20 <- LoadInteger '42'
+    v21 <- Construct v0, [v20]
+    v22 <- LoadString '1'
+    v23 <- LoadBoolean 'false'
+    v24 <- LoadString '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `writable`, v23
+        ObjectLiteralAddProperty `value`, v24
+    v25 <- EndObjectLiteral
+    v26 <- CallMethod v3, 'defineProperty', [v21, v22, v25]
+EndPlainFunction
+v27 <- CallFunction v19, []
+
+
+const v2 = new Int8Array(42);
+Object.preventExtensions(v2);
+const v6 = new Int8Array(42);
+Object.seal(v6);
+const v9 = new Int8Array(0);
+Object.freeze(v9);
+const v12 = new Int8Array(42);
+var o = v12;
+function f14() {
+    Object.freeze(o);
+}
+f14();
+Object.isExtensible(o);
+function f19() {
+    const v21 = new Int8Array(42);
+    Object.defineProperty(v21, "1", { writable: false, value: "1" });
+}
+f19();
+
+FuzzIL program written to corpus/regress-95920.fzil

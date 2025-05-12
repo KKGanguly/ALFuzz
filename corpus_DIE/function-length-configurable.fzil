@@ -1,0 +1,262 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- BeginPlainFunction -> v2
+    EndPlainFunction
+    Return v1
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- BeginPlainFunction -> v5
+    EndPlainFunction
+    Return v4
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v7 <- BeginGeneratorFunction -> v8
+    EndGeneratorFunction
+    Return v7
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- BeginGeneratorFunction -> v11
+    EndGeneratorFunction
+    Return v10
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13
+    v14 <- CallFunction v0, []
+    v15 <- CallFunction v13, [v14]
+    v16 <- CallFunction v3, []
+    v17 <- CallFunction v13, [v16]
+    v18 <- CallFunction v6, []
+    v19 <- CallFunction v13, [v18]
+    v20 <- CallFunction v9, []
+    v21 <- CallFunction v13, [v20]
+EndPlainFunction
+v22 <- BeginPlainFunction -> v23
+    v24 <- LoadString 'length'
+    v25 <- CreateNamedVariable 'Object', 'none'
+    v26 <- CallMethod v25, 'getOwnPropertyDescriptor', [v23, v24]
+    v27 <- CreateNamedVariable 'descr', 'var', v26
+    v28 <- GetProperty v27, 'configurable'
+    v29 <- GetProperty v27, 'enumerable'
+    v30 <- LoadInteger '1'
+    v31 <- GetProperty v27, 'value'
+    v32 <- GetProperty v27, 'writable'
+EndPlainFunction
+v33 <- CallFunction v12, [v22]
+v34 <- BeginPlainFunction -> v35
+    v36 <- LoadInteger '2'
+    SetProperty v35, 'length', v36
+    v37 <- LoadInteger '1'
+    v38 <- GetProperty v35, 'length'
+EndPlainFunction
+v39 <- CallFunction v12, [v34]
+v40 <- BeginPlainFunction -> v41
+    Directive 'use strict'
+    v42 <- BeginPlainFunction -> 
+        v43 <- LoadInteger '2'
+        SetProperty v41, 'length', v43
+    EndPlainFunction
+    v44 <- CallFunction v42, []
+    v45 <- CreateNamedVariable 'TypeError', 'none'
+EndPlainFunction
+v46 <- CallFunction v12, [v40]
+v47 <- BeginPlainFunction -> v48
+    v49 <- LoadString 'length'
+    v50 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v50
+    v51 <- EndObjectLiteral
+    v52 <- CreateNamedVariable 'Object', 'none'
+    v53 <- CallMethod v52, 'defineProperty', [v48, v49, v51]
+    v54 <- LoadInteger '2'
+    v55 <- GetProperty v48, 'length'
+    v56 <- LoadString 'length'
+    v57 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `writable`, v57
+    v58 <- EndObjectLiteral
+    v59 <- CallMethod v52, 'defineProperty', [v48, v56, v58]
+    v60 <- LoadInteger '3'
+    SetProperty v48, 'length', v60
+    v61 <- LoadInteger '3'
+    v62 <- GetProperty v48, 'length'
+    v63 <- LoadInteger '42'
+    SetProperty v48, 'length', v63
+    v64 <- LoadInteger '42'
+    v65 <- GetProperty v48, 'length'
+EndPlainFunction
+v66 <- CallFunction v12, [v47]
+v67 <- BeginPlainFunction -> v68
+    v69 <- LoadInteger '2'
+    v70 <- CreateNamedVariable 'length', 'var', v69
+    v71 <- LoadString 'length'
+    v72 <- BeginPlainFunction -> 
+        Return v70
+    EndPlainFunction
+    v73 <- BeginPlainFunction -> v74
+        Reassign v70, v74
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v72
+        ObjectLiteralAddProperty `set`, v73
+    v75 <- EndObjectLiteral
+    v76 <- CreateNamedVariable 'Object', 'none'
+    v77 <- CallMethod v76, 'defineProperty', [v68, v71, v75]
+    v78 <- LoadInteger '2'
+    v79 <- GetProperty v68, 'length'
+    v80 <- LoadInteger '3'
+    SetProperty v68, 'length', v80
+    v81 <- LoadInteger '3'
+    v82 <- GetProperty v68, 'length'
+EndPlainFunction
+v83 <- CallFunction v12, [v67]
+v84 <- BeginPlainFunction -> 
+    v85 <- LoadString 'length'
+    v86 <- CreateNamedVariable 'Function', 'none'
+    v87 <- GetProperty v86, 'prototype'
+    v88 <- CallMethod v87, 'hasOwnProperty', [v85]
+    v89 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v90 <- DeleteProperty v89, 'length'
+    v91 <- LoadInteger '0'
+    v92 <- GetProperty v89, 'length'
+    v93 <- LoadInteger '42'
+    SetProperty v89, 'length', v93
+    v94 <- LoadInteger '0'
+    v95 <- GetProperty v89, 'length'
+    v96 <- LoadString 'length'
+    v97 <- CallMethod v89, 'hasOwnProperty', [v96]
+    v98 <- GetProperty v86, 'prototype'
+    v99 <- LoadString 'length'
+    v100 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `writable`, v100
+    v101 <- EndObjectLiteral
+    v102 <- CreateNamedVariable 'Object', 'none'
+    v103 <- CallMethod v102, 'defineProperty', [v98, v99, v101]
+    v104 <- LoadInteger '123'
+    SetProperty v89, 'length', v104
+    v105 <- LoadString 'length'
+    v106 <- CallMethod v89, 'hasOwnProperty', [v105]
+    v107 <- LoadInteger '123'
+    v108 <- GetProperty v89, 'length'
+EndPlainFunction
+v109 <- CallFunction v84, []
+v110 <- BeginPlainFunction -> 
+    v111 <- BeginPlainFunction -> v112
+    EndPlainFunction
+    v113 <- DeleteProperty v111, 'length'
+    v114 <- LoadString 'length'
+    v115 <- CallMethod v111, 'hasOwnProperty', [v114]
+    v116 <- LoadInteger '0'
+    v117 <- GetProperty v111, 'length'
+    v118 <- CreateNamedVariable 'Function', 'none'
+    v119 <- GetProperty v118, 'prototype'
+    v120 <- DeleteProperty v119, 'length'
+    v121 <- LoadUndefined
+    v122 <- GetProperty v111, 'length'
+EndPlainFunction
+v123 <- CallFunction v110, []
+
+
+function getStrictF() {
+    'use strict';
+    function f(a2) {
+    }
+    return f;
+}
+function getSloppyF() {
+    function f(a5) {
+    }
+    return f;
+}
+function getStrictGenerator() {
+    'use strict';
+    function* f(a8) {
+    }
+    return f;
+}
+function getSloppyGenerator() {
+    function* f(a11) {
+    }
+    return f;
+}
+function test(a13) {
+    a13(getStrictF());
+    a13(getSloppyF());
+    a13(getStrictGenerator());
+    a13(getSloppyGenerator());
+}
+function testDescriptor(a23) {
+    var descr = Object.getOwnPropertyDescriptor(a23, "length");
+    descr.configurable;
+    descr.enumerable;
+    descr.value;
+    descr.writable;
+}
+test(testDescriptor);
+function testSet(a35) {
+    a35.length = 2;
+    a35.length;
+}
+test(testSet);
+function testSetStrict(a41) {
+    'use strict';
+    function f42() {
+        a41.length = 2;
+    }
+    f42();
+}
+test(testSetStrict);
+function testReconfigureAsDataProperty(a48) {
+    Object.defineProperty(a48, "length", { value: 2 });
+    a48.length;
+    Object.defineProperty(a48, "length", { writable: true });
+    a48.length = 3;
+    a48.length;
+    a48.length = 42;
+    a48.length;
+}
+test(testReconfigureAsDataProperty);
+function testReconfigureAsAccessorProperty(a68) {
+    var length = 2;
+    function f72() {
+        return length;
+    }
+    function f73(a74) {
+        length = a74;
+    }
+    Object.defineProperty(a68, "length", { get: f72, set: f73 });
+    a68.length;
+    a68.length = 3;
+    a68.length;
+}
+test(testReconfigureAsAccessorProperty);
+function testSetOnInstance() {
+    Function.prototype.hasOwnProperty("length");
+    function f() {
+    }
+    delete f.length;
+    f.length;
+    f.length = 42;
+    f.length;
+    f.hasOwnProperty("length");
+    const v98 = Function.prototype;
+    Object.defineProperty(v98, "length", { writable: true });
+    f.length = 123;
+    f.hasOwnProperty("length");
+    f.length;
+}
+testSetOnInstance();
+function testDelete() {
+    function f(a112) {
+    }
+    delete f.length;
+    f.hasOwnProperty("length");
+    f.length;
+    const t92 = Function.prototype;
+    delete t92.length;
+    f.length;
+}
+testDelete();
+
+FuzzIL program written to corpus/function-length-configurable.fzil

@@ -1,0 +1,15 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'Object', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetElement v2, '0', v0
+v3 <- LoadInteger '3'
+v4 <- CreateArray [v3]
+v5 <- CreateNamedVariable 'Math', 'none'
+v6 <- CallMethodWithSpread v5, 'max', [...v4]
+
+
+const t0 = Object.prototype;
+t0[0] = 0;
+Math.max(...[3]);
+
+FuzzIL program written to corpus/regress-crbug-821159-2.fzil

@@ -1,0 +1,177 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CallFunction v1, [v2]
+    v4 <- CreateNamedVariable 'Number', 'none'
+    v5 <- GetProperty v4, 'MIN_SAFE_INTEGER'
+    v6 <- CallFunction v1, [v5]
+    v7 <- GetProperty v4, 'MIN_SAFE_INTEGER'
+    v8 <- LoadInteger '13'
+    v9 <- BinaryOperation v7, '-', v8
+    v10 <- CallFunction v1, [v9]
+    v11 <- GetProperty v4, 'MIN_SAFE_INTEGER'
+    v12 <- LoadInteger '13'
+    v13 <- BinaryOperation v11, '+', v12
+    v14 <- CallFunction v1, [v13]
+    v15 <- GetProperty v4, 'MAX_SAFE_INTEGER'
+    v16 <- CallFunction v1, [v15]
+    v17 <- GetProperty v4, 'MAX_SAFE_INTEGER'
+    v18 <- LoadInteger '23'
+    v19 <- BinaryOperation v17, '+', v18
+    v20 <- CallFunction v1, [v19]
+    v21 <- GetProperty v4, 'MAX_SAFE_INTEGER'
+    v22 <- LoadInteger '23'
+    v23 <- BinaryOperation v21, '-', v22
+    v24 <- CallFunction v1, [v23]
+    v25 <- GetProperty v4, 'MIN_VALUE'
+    v26 <- CallFunction v1, [v25]
+    v27 <- GetProperty v4, 'MAX_VALUE'
+    v28 <- CallFunction v1, [v27]
+    v29 <- GetProperty v4, 'NaN'
+    v30 <- CallFunction v1, [v29]
+    v31 <- GetProperty v4, 'POSITIVE_INFINITY'
+    v32 <- CallFunction v1, [v31]
+    v33 <- GetProperty v4, 'NEGATIVE_INFINITY'
+    v34 <- CallFunction v1, [v33]
+    v35 <- LoadInteger '1'
+    v36 <- LoadInteger '0'
+    v37 <- BinaryOperation v35, '/', v36
+    v38 <- CallFunction v1, [v37]
+    v39 <- LoadInteger '1'
+    v40 <- UnaryOperation '-', v39
+    v41 <- LoadInteger '0'
+    v42 <- BinaryOperation v40, '/', v41
+    v43 <- CallFunction v1, [v42]
+    v44 <- GetProperty v4, 'EPSILON'
+    v45 <- CallFunction v1, [v44]
+    v46 <- LoadInteger '2'
+    v47 <- LoadInteger '52'
+    v48 <- CreateNamedVariable 'Math', 'none'
+    v49 <- CallMethod v48, 'pow', [v46, v47]
+    v50 <- CreateNamedVariable 'near_upper', 'var', v49
+    v51 <- CallFunction v1, [v50]
+    v52 <- LoadInteger '2'
+    v53 <- BinaryOperation v52, '*', v50
+    v54 <- CallFunction v1, [v53]
+    v55 <- LoadInteger '2'
+    v56 <- BinaryOperation v55, '*', v50
+    v57 <- LoadInteger '1'
+    v58 <- BinaryOperation v56, '-', v57
+    v59 <- CallFunction v1, [v58]
+    v60 <- LoadInteger '2'
+    v61 <- BinaryOperation v60, '*', v50
+    v62 <- LoadInteger '2'
+    v63 <- BinaryOperation v61, '-', v62
+    v64 <- CallFunction v1, [v63]
+    v65 <- LoadInteger '2'
+    v66 <- BinaryOperation v65, '*', v50
+    v67 <- LoadInteger '1'
+    v68 <- BinaryOperation v66, '+', v67
+    v69 <- CallFunction v1, [v68]
+    v70 <- LoadInteger '2'
+    v71 <- BinaryOperation v70, '*', v50
+    v72 <- LoadInteger '2'
+    v73 <- BinaryOperation v71, '+', v72
+    v74 <- CallFunction v1, [v73]
+    v75 <- LoadInteger '2'
+    v76 <- BinaryOperation v75, '*', v50
+    v77 <- LoadInteger '7'
+    v78 <- BinaryOperation v76, '+', v77
+    v79 <- CallFunction v1, [v78]
+    v80 <- UnaryOperation '-', v50
+    v81 <- CreateNamedVariable 'near_lower', 'var', v80
+    v82 <- CallFunction v1, [v81]
+    v83 <- LoadInteger '2'
+    v84 <- BinaryOperation v83, '*', v81
+    v85 <- CallFunction v1, [v84]
+    v86 <- LoadInteger '2'
+    v87 <- BinaryOperation v86, '*', v81
+    v88 <- LoadInteger '1'
+    v89 <- BinaryOperation v87, '+', v88
+    v90 <- CallFunction v1, [v89]
+    v91 <- LoadInteger '2'
+    v92 <- BinaryOperation v91, '*', v81
+    v93 <- LoadInteger '2'
+    v94 <- BinaryOperation v92, '+', v93
+    v95 <- CallFunction v1, [v94]
+    v96 <- LoadInteger '2'
+    v97 <- BinaryOperation v96, '*', v81
+    v98 <- LoadInteger '1'
+    v99 <- BinaryOperation v97, '-', v98
+    v100 <- CallFunction v1, [v99]
+    v101 <- LoadInteger '2'
+    v102 <- BinaryOperation v101, '*', v81
+    v103 <- LoadInteger '2'
+    v104 <- BinaryOperation v102, '-', v103
+    v105 <- CallFunction v1, [v104]
+    v106 <- LoadInteger '2'
+    v107 <- BinaryOperation v106, '*', v81
+    v108 <- LoadInteger '7'
+    v109 <- BinaryOperation v107, '-', v108
+    v110 <- CallFunction v1, [v109]
+EndPlainFunction
+v111 <- BeginPlainFunction -> v112
+    v113 <- UnaryOperation '+', v112
+    v114 <- CreateNamedVariable 'Number', 'none'
+    v115 <- CallMethod v114, 'isSafeInteger', [v113]
+    Return v115
+EndPlainFunction
+v116 <- CallFunction v0, [v111]
+v117 <- CallFunction v0, [v111]
+v118 <- CallFunction v0, [v111]
+v119 <- BeginPlainFunction -> v120
+    v121 <- CreateNamedVariable 'Number', 'none'
+    v122 <- CallMethod v121, 'isSafeInteger', [v120]
+    Return v122
+EndPlainFunction
+v123 <- CallFunction v0, [v119]
+v124 <- CallFunction v0, [v119]
+v125 <- CallFunction v0, [v119]
+
+
+function test(a1) {
+    a1(0);
+    a1(Number.MIN_SAFE_INTEGER);
+    a1(Number.MIN_SAFE_INTEGER - 13);
+    a1(Number.MIN_SAFE_INTEGER + 13);
+    a1(Number.MAX_SAFE_INTEGER);
+    a1(Number.MAX_SAFE_INTEGER + 23);
+    a1(Number.MAX_SAFE_INTEGER - 23);
+    a1(Number.MIN_VALUE);
+    a1(Number.MAX_VALUE);
+    a1(Number.NaN);
+    a1(Number.POSITIVE_INFINITY);
+    a1(Number.NEGATIVE_INFINITY);
+    a1(1 / 0);
+    a1(-1 / 0);
+    a1(Number.EPSILON);
+    var near_upper = Math.pow(2, 52);
+    a1(near_upper);
+    a1(2 * near_upper);
+    a1((2 * near_upper) - 1);
+    a1((2 * near_upper) - 2);
+    a1((2 * near_upper) + 1);
+    a1((2 * near_upper) + 2);
+    a1((2 * near_upper) + 7);
+    var near_lower = -near_upper;
+    a1(near_lower);
+    a1(2 * near_lower);
+    a1((2 * near_lower) + 1);
+    a1((2 * near_lower) + 2);
+    a1((2 * near_lower) - 1);
+    a1((2 * near_lower) - 2);
+    a1((2 * near_lower) - 7);
+}
+function NumberIsSafeInteger(a112) {
+    return Number.isSafeInteger(+a112);
+}
+test(NumberIsSafeInteger);
+test(NumberIsSafeInteger);
+test(NumberIsSafeInteger);
+function ObjectIsSafeInteger(a120) {
+    return Number.isSafeInteger(a120);
+}
+test(ObjectIsSafeInteger);
+test(ObjectIsSafeInteger);
+test(ObjectIsSafeInteger);
+
+FuzzIL program written to corpus/number-issafeinteger.fzil

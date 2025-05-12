@@ -1,0 +1,72 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginArrowFunction -> 
+        v2 <- CreateNamedVariable 'NaN', 'none'
+        v3 <- CreateTemplateString ['', ''], [v2]
+        Return v3
+    EndArrowFunction
+    v4 <- CreateNamedVariable 'foo', 'const', v1
+    v5 <- LoadString 'NaN'
+    v6 <- CallFunction v4, []
+    v7 <- LoadString 'NaN'
+    v8 <- CallFunction v4, []
+    v9 <- LoadString 'NaN'
+    v10 <- CallFunction v4, []
+EndPlainFunction
+v11 <- CallFunction v0, []
+v12 <- BeginPlainFunction -> 
+    v13 <- BeginArrowFunction -> v14
+        v15 <- LoadInteger '0'
+        v16 <- LoadInteger '0'
+        v17 <- UnaryOperation '-', v16
+        v18 <- TernaryOperation v14, v15, v17
+        v19 <- CreateTemplateString ['', ''], [v18]
+        Return v19
+    EndArrowFunction
+    v20 <- CreateNamedVariable 'foo', 'const', v13
+    v21 <- LoadString '0'
+    v22 <- LoadBoolean 'true'
+    v23 <- CallFunction v20, [v22]
+    v24 <- LoadString '0'
+    v25 <- LoadBoolean 'false'
+    v26 <- CallFunction v20, [v25]
+    v27 <- LoadString '0'
+    v28 <- LoadBoolean 'true'
+    v29 <- CallFunction v20, [v28]
+    v30 <- LoadString '0'
+    v31 <- LoadBoolean 'false'
+    v32 <- CallFunction v20, [v31]
+    v33 <- LoadString '0'
+    v34 <- LoadBoolean 'true'
+    v35 <- CallFunction v20, [v34]
+    v36 <- LoadString '0'
+    v37 <- LoadBoolean 'false'
+    v38 <- CallFunction v20, [v37]
+EndPlainFunction
+v39 <- CallFunction v12, []
+
+
+function f0() {
+    const v1 = () => {
+        return `${NaN}`;
+    };
+    const foo = v1;
+    foo();
+    foo();
+    foo();
+}
+f0();
+function f12() {
+    const v13 = (a14) => {
+        return `${a14 ? 0 : -0}`;
+    };
+    const foo = v13;
+    foo(true);
+    foo(false);
+    foo(true);
+    foo(false);
+    foo(true);
+    foo(false);
+}
+f12();
+
+FuzzIL program written to corpus/constant-fold-tostring.fzil

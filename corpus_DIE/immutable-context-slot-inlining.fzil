@@ -1,0 +1,61 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallFunction v1, []
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadUndefined
+    v5 <- CreateNamedVariable 'g', 'var', v4
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- LoadInteger '10'
+        v9 <- Compare v7, '<', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation v10, '++'
+    BeginForLoopBody -> v12
+        v13 <- CreateNamedVariable 'y', 'var', v12
+        v14 <- LoadInteger '5'
+        v15 <- Compare v12, '===', v14
+        BeginIf v15
+            v16 <- BeginPlainFunction -> 
+                Return v13
+            EndPlainFunction
+            Reassign v5, v16
+            v17 <- LoadInteger '5'
+            v18 <- CallFunction v0, [v5]
+            v19 <- LoadInteger '5'
+            v20 <- CallFunction v0, [v5]
+            v21 <- LoadInteger '5'
+            v22 <- CallFunction v0, [v5]
+        EndIf
+    EndForLoop
+    Return v5
+EndPlainFunction
+v23 <- CallFunction v3, []
+v24 <- CreateNamedVariable 'myg', 'var', v23
+v25 <- LoadInteger '9'
+v26 <- CallFunction v0, [v24]
+
+
+function h(a1) {
+    return a1();
+}
+function f() {
+    var g;
+    for (let i7 = 0; i7 < 10; i7++) {
+        var y = i7;
+        if (i7 === 5) {
+            function f16() {
+                return y;
+            }
+            h(g = f16);
+            h(g);
+            h(g);
+        }
+    }
+    return g;
+}
+var myg = f();
+h(myg);
+
+FuzzIL program written to corpus/immutable-context-slot-inlining.fzil

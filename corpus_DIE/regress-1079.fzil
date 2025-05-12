@@ -1,0 +1,52 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadNull
+    v2 <- LoadArguments
+    v3 <- CreateNamedVariable 'unoptimized', 'none'
+    v4 <- CallMethod v3, 'apply', [v1, v2]
+    Return v4
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v6 <- EndObjectLiteral
+    BeginWith v6
+        v7 <- GetProperty v0, 'arguments'
+        Return v7
+    EndWith
+EndPlainFunction
+BeginForLoopInitializer
+    v8 <- LoadInteger '0'
+BeginForLoopCondition -> v9
+    v10 <- LoadInteger '5'
+    v11 <- Compare v9, '<', v10
+BeginForLoopAfterthought v11 -> v12
+    v13 <- UnaryOperation '++', v12
+BeginForLoopBody -> v14
+    v15 <- LoadInteger '3'
+    v16 <- LoadInteger '1'
+    v17 <- LoadInteger '2'
+    v18 <- LoadInteger '3'
+    v19 <- CallFunction v0, [v16, v17, v18]
+    v20 <- GetProperty v19, 'length'
+EndForLoop
+v21 <- LoadInteger '3'
+v22 <- LoadInteger '1'
+v23 <- LoadInteger '2'
+v24 <- LoadInteger '3'
+v25 <- CallFunction v0, [v22, v23, v24]
+v26 <- GetProperty v25, 'length'
+
+
+function optimized() {
+    return unoptimized.apply(null, arguments);
+}
+function unoptimized() {
+    with ({}) {
+        return optimized.arguments;
+    }
+}
+for (let i9 = 0; i9 < 5; ++i9) {
+    optimized(1, 2, 3).length;
+}
+optimized(1, 2, 3).length;
+
+FuzzIL program written to corpus/regress-1079.fzil

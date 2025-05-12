@@ -1,0 +1,38 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '2'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- LoadInteger '1'
+        v11 <- BinaryOperation v1, '+', v10
+        Reassign v1, v11
+    EndForLoop
+    v12 <- LoadString 'function x() {};'
+    v13 <- LoadThis
+    v14 <- CallMethod v13, 'eval', [v12]
+    v15 <- LoadThis
+    v16 <- LoadString 'x'
+    v17 <- DeleteComputedProperty v15, v16
+EndPlainFunction
+v18 <- CallFunction v2, []
+v19 <- CallFunction v2, []
+
+
+var x = 0;
+function TestGlobal() {
+    for (let i4 = 0; i4 < 2; i4++) {
+        x = x + 1;
+    }
+    this.eval("function x() {};");
+    delete this["x"];
+}
+TestGlobal();
+TestGlobal();
+
+FuzzIL program written to corpus/regress-1213.fzil

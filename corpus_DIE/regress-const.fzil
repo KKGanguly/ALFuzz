@@ -1,0 +1,96 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '42'
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    BeginWhileLoopHeader
+        v3 <- LoadBoolean 'true'
+    BeginWhileLoopBody v3
+        v4 <- CreateNamedVariable 'y', 'const', v2
+        v5 <- UnaryOperation '--', v2
+        v6 <- LoadInteger '0'
+        v7 <- Compare v5, '==', v6
+        BeginIf v7
+            Return v4
+        EndIf
+    EndWhileLoop
+EndPlainFunction
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '42'
+    v10 <- CreateNamedVariable 'x', 'const', v9
+    Return v10
+EndPlainFunction
+BeginForLoopInitializer
+    v11 <- LoadInteger '0'
+BeginForLoopCondition -> v12
+    v13 <- LoadInteger '5'
+    v14 <- Compare v12, '<', v13
+BeginForLoopAfterthought v14 -> v15
+    v16 <- UnaryOperation v15, '++'
+BeginForLoopBody -> v17
+    v18 <- CallFunction v0, []
+    v19 <- CallFunction v8, []
+EndForLoop
+v20 <- LoadInteger '1'
+v21 <- CallFunction v0, []
+v22 <- LoadInteger '42'
+v23 <- CallFunction v8, []
+v24 <- BeginPlainFunction -> v25, v26
+    v27 <- BinaryOperation v25, '+', v26
+    v28 <- CreateNamedVariable 'r', 'var', v27
+    v29 <- LoadInteger '42'
+    v30 <- CreateNamedVariable 'X', 'const', v29
+    v31 <- BinaryOperation v28, '+', v30
+    Return v31
+EndPlainFunction
+BeginForLoopInitializer
+    v32 <- LoadInteger '0'
+BeginForLoopCondition -> v33
+    v34 <- LoadInteger '5'
+    v35 <- Compare v33, '<', v34
+BeginForLoopAfterthought v35 -> v36
+    v37 <- UnaryOperation v36, '++'
+BeginForLoopBody -> v38
+    v39 <- LoadInteger '1'
+    v40 <- LoadInteger '2'
+    v41 <- CallFunction v24, [v39, v40]
+EndForLoop
+v42 <- LoadInteger '45'
+v43 <- LoadInteger '1'
+v44 <- LoadInteger '2'
+v45 <- CallFunction v24, [v43, v44]
+v46 <- LoadString 'foo742'
+v47 <- LoadString 'foo'
+v48 <- LoadInteger '7'
+v49 <- CallFunction v24, [v47, v48]
+
+
+function f() {
+    var x = 42;
+    while (true) {
+        const y = x;
+        if (--x == 0) {
+            return y;
+        }
+    }
+}
+function g() {
+    const x = 42;
+    return x;
+}
+for (let i12 = 0; i12 < 5; i12++) {
+    f();
+    g();
+}
+f();
+g();
+function h(a25, a26) {
+    var r = a25 + a26;
+    const X = 42;
+    return r + X;
+}
+for (let i33 = 0; i33 < 5; i33++) {
+    h(1, 2);
+}
+h(1, 2);
+h("foo", 7);
+
+FuzzIL program written to corpus/regress-const.fzil

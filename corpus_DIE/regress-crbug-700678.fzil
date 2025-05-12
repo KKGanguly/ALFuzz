@@ -1,0 +1,82 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadString '23'
+        v4 <- LoadString 'length'
+        v5 <- CreateArray [v3, v4]
+        Return v5
+    EndPlainFunction
+    v6 <- CreateArray []
+    v7 <- CreateNamedVariable 'target', 'var', v6
+    v8 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `ownKeys`, v1
+    v9 <- EndObjectLiteral
+    v10 <- Construct v8, [v7, v9]
+    v11 <- CreateNamedVariable 'proxy', 'var', v10
+    v12 <- LoadString '23'
+    v13 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v13
+    v14 <- EndObjectLiteral
+    v15 <- CreateNamedVariable 'Object', 'none'
+    v16 <- CallMethod v15, 'defineProperty', [v7, v12, v14]
+    v17 <- LoadString '23'
+    v18 <- LoadString 'length'
+    v19 <- CreateArray [v17, v18]
+    v20 <- CallMethod v15, 'getOwnPropertyNames', [v11]
+EndPlainFunction
+v21 <- CallFunction v0, []
+v22 <- BeginPlainFunction -> 
+    v23 <- BeginPlainFunction -> v24
+        v25 <- LoadString '42'
+        v26 <- LoadString 'length'
+        v27 <- CreateArray [v25, v26]
+        Return v27
+    EndPlainFunction
+    v28 <- CreateArray []
+    v29 <- CreateNamedVariable 'target', 'var', v28
+    v30 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `ownKeys`, v23
+    v31 <- EndObjectLiteral
+    v32 <- Construct v30, [v29, v31]
+    v33 <- CreateNamedVariable 'proxy', 'var', v32
+    v34 <- LoadBoolean 'true'
+    SetElement v29, '42', v34
+    v35 <- CreateNamedVariable 'Object', 'none'
+    v36 <- CallMethod v35, 'preventExtensions', [v29]
+    v37 <- LoadString '42'
+    v38 <- LoadString 'length'
+    v39 <- CreateArray [v37, v38]
+    v40 <- CallMethod v35, 'getOwnPropertyNames', [v33]
+EndPlainFunction
+v41 <- CallFunction v22, []
+
+
+function testNonConfigurableProperty() {
+    function ownKeys(a2) {
+        return ["23","length"];
+    }
+    var target = [];
+    const v10 = new Proxy(target, { ownKeys: ownKeys });
+    var proxy = v10;
+    Object.defineProperty(target, "23", { value: true });
+    ["23","length"];
+    Object.getOwnPropertyNames(proxy);
+}
+testNonConfigurableProperty();
+function testPreventedExtension() {
+    function ownKeys(a24) {
+        return ["42","length"];
+    }
+    var target = [];
+    const v32 = new Proxy(target, { ownKeys: ownKeys });
+    var proxy = v32;
+    target[42] = true;
+    Object.preventExtensions(target);
+    ["42","length"];
+    Object.getOwnPropertyNames(proxy);
+}
+testPreventedExtension();
+
+FuzzIL program written to corpus/regress-crbug-700678.fzil

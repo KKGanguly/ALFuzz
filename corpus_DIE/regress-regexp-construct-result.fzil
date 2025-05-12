@@ -1,0 +1,59 @@
+v0 <- LoadInteger '1000'
+v1 <- CreateNamedVariable 'num_captures', 'var', v0
+v2 <- LoadString '(a)'
+v3 <- CreateNamedVariable 'regexp_string', 'var', v2
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+BeginForLoopCondition -> v5
+    v6 <- LoadInteger '1'
+    v7 <- BinaryOperation v1, '-', v6
+    v8 <- Compare v5, '<', v7
+BeginForLoopAfterthought v8 -> v9
+    v10 <- UnaryOperation v9, '++'
+BeginForLoopBody -> v11
+    v12 <- LoadString '|(b)'
+    Update v3, '+', v12
+EndForLoop
+v13 <- CreateNamedVariable 'RegExp', 'none'
+v14 <- Construct v13, [v3]
+v15 <- CreateNamedVariable 'regexp2', 'var', v14
+BeginForLoopInitializer
+    v16 <- LoadInteger '0'
+BeginForLoopCondition -> v17
+    v18 <- LoadInteger '10'
+    v19 <- Compare v17, '<', v18
+BeginForLoopAfterthought v19 -> v20
+    v21 <- UnaryOperation v20, '++'
+BeginForLoopBody -> v22
+    v23 <- LoadString 'a'
+    v24 <- CallMethod v15, 'exec', [v23]
+    v25 <- CreateNamedVariable 'matches', 'var', v24
+    v26 <- LoadInteger '0'
+    v27 <- CreateNamedVariable 'count', 'var', v26
+    v28 <- BeginPlainFunction -> 
+        v29 <- UnaryOperation v27, '++'
+    EndPlainFunction
+    v30 <- CallMethod v25, 'forEach', [v28]
+    v31 <- LoadInteger '1'
+    v32 <- BinaryOperation v1, '+', v31
+EndForLoop
+
+
+var num_captures = 1000;
+var regexp_string = "(a)";
+for (let i5 = 0; i5 < (num_captures - 1); i5++) {
+    regexp_string += "|(b)";
+}
+const v14 = new RegExp(regexp_string);
+var regexp2 = v14;
+for (let i17 = 0; i17 < 10; i17++) {
+    var matches = regexp2.exec("a");
+    var count = 0;
+    function f28() {
+        count++;
+    }
+    matches.forEach(f28);
+    num_captures + 1;
+}
+
+FuzzIL program written to corpus/regress-regexp-construct-result.fzil

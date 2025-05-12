@@ -1,0 +1,48 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'v1', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateArray []
+    Reassign v1, v3
+    BeginForLoopInitializer
+        v4 <- LoadInteger '0'
+    BeginForLoopCondition -> v5
+        v6 <- LoadInteger '1'
+        v7 <- Compare v5, '<', v6
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation v8, '++'
+    BeginForLoopBody -> v10
+        v11 <- CallComputedMethod v1, v10, []
+    EndForLoop
+EndPlainFunction
+BeginObjectLiteral
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'v2', 'var', v12
+BeginObjectLiteral
+v14 <- EndObjectLiteral
+v15 <- CreateNamedVariable 'v3', 'var', v14
+v16 <- BeginPlainFunction -> 
+    Reassign v15, v13
+    v17 <- CallFunction v2, []
+EndPlainFunction
+v18 <- CallFunction v2, []
+v19 <- CallFunction v16, []
+
+
+var v1 = {};
+function g() {
+    v1 = [];
+    for (let i5 = 0; i5 < 1; i5++) {
+        v1[i5]();
+    }
+}
+var v2 = {};
+var v3 = {};
+function f() {
+    v3 = v2;
+    g();
+}
+g();
+f();
+
+FuzzIL program written to corpus/regress-crbug-617567.fzil

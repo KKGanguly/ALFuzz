@@ -1,0 +1,28 @@
+v0 <- LoadString 'foo'
+v1 <- LoadString 'bar'
+v2 <- BeginArrowFunction -> v3, v4
+    v5 <- BinaryOperation v3, '+', v4
+    Return v5
+EndArrowFunction
+v6 <- CallFunction v2, [v0, v1]
+v7 <- CreateNamedVariable 'string', 'var', v6
+BeginObjectLiteral
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'obj', 'var', v8
+v10 <- GetComputedProperty v9, v7
+v11 <- LoadString '"'
+v12 <- BinaryOperation v11, '+', v7
+v13 <- LoadString '"'
+v14 <- BinaryOperation v12, '+', v13
+v15 <- LoadString '"foobar"'
+
+
+const v2 = (a3, a4) => {
+    return a3 + a4;
+};
+var string = v2("foo", "bar");
+var obj = {};
+obj[string];
+(""" + string) + """;
+
+FuzzIL program written to corpus/string-concat-external-thin-string.fzil

@@ -1,0 +1,19 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- CreateNamedVariable 'Proxy', 'none'
+v3 <- BeginArrowFunction -> 
+EndArrowFunction
+v4 <- Construct v2, [v3, v1]
+v5 <- CreateNamedVariable 'proxy', 'var', v4
+SetProperty v1, 'apply', v5
+
+
+var o = {};
+const v3 = () => {
+};
+const v4 = new Proxy(v3, o);
+var proxy = v4;
+o.apply = proxy;
+
+FuzzIL program written to corpus/regress-crbug-779344.fzil

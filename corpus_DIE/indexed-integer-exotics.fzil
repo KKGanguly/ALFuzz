@@ -1,0 +1,177 @@
+v0 <- LoadString 'unreachable'
+v1 <- CreateNamedVariable 'Object', 'none'
+v2 <- GetProperty v1, 'prototype'
+v3 <- LoadString '10'
+SetComputedProperty v2, v3, v0
+v4 <- LoadString 'unreachable'
+v5 <- GetProperty v1, 'prototype'
+v6 <- LoadString '7'
+SetComputedProperty v5, v6, v4
+v7 <- LoadString 'unreachable'
+v8 <- GetProperty v1, 'prototype'
+v9 <- LoadString '-1'
+SetComputedProperty v8, v9, v7
+v10 <- LoadString 'unreachable'
+v11 <- GetProperty v1, 'prototype'
+v12 <- LoadString '-0'
+SetComputedProperty v11, v12, v10
+v13 <- LoadString 'unreachable'
+v14 <- GetProperty v1, 'prototype'
+v15 <- LoadString '4294967295'
+SetComputedProperty v14, v15, v13
+v16 <- CreateNamedVariable 'Int32Array', 'none'
+v17 <- LoadInteger '10'
+v18 <- Construct v16, [v17]
+v19 <- CreateNamedVariable 'array', 'var', v18
+v20 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v21 <- LoadInteger '0'
+    BeginForLoopCondition -> v22
+        v23 <- LoadInteger '4'
+        v24 <- Compare v22, '<', v23
+    BeginForLoopAfterthought v24 -> v25
+        v26 <- UnaryOperation v25, '++'
+    BeginForLoopBody -> v27
+        v28 <- LoadUndefined
+        v29 <- LoadString '-1'
+        v30 <- GetComputedProperty v19, v29
+        v31 <- LoadUndefined
+        v32 <- LoadString '-0'
+        v33 <- GetComputedProperty v19, v32
+        v34 <- LoadUndefined
+        v35 <- LoadString '10'
+        v36 <- GetComputedProperty v19, v35
+        v37 <- LoadUndefined
+        v38 <- LoadString '4294967295'
+        v39 <- GetComputedProperty v19, v38
+    EndForLoop
+    v40 <- LoadString 'unreachable'
+    v41 <- GetProperty v19, '__proto__'
+    v42 <- LoadString '-1'
+    v43 <- GetComputedProperty v41, v42
+    v44 <- LoadString 'unreachable'
+    v45 <- GetProperty v19, '__proto__'
+    v46 <- LoadString '-0'
+    v47 <- GetComputedProperty v45, v46
+    v48 <- LoadString 'unreachable'
+    v49 <- GetProperty v19, '__proto__'
+    v50 <- LoadString '10'
+    v51 <- GetComputedProperty v49, v50
+    v52 <- LoadString 'unreachable'
+    v53 <- GetProperty v19, '__proto__'
+    v54 <- LoadString '4294967295'
+    v55 <- GetComputedProperty v53, v54
+EndPlainFunction
+v56 <- CallFunction v20, []
+v57 <- LoadString 'unreachable'
+v58 <- LoadString '-1'
+SetComputedProperty v19, v58, v57
+v59 <- LoadString 'unreachable'
+v60 <- LoadString '-0'
+SetComputedProperty v19, v60, v59
+v61 <- LoadString 'unreachable'
+v62 <- LoadString '10'
+SetComputedProperty v19, v62, v61
+v63 <- LoadString 'unreachable'
+v64 <- LoadString '4294967295'
+SetComputedProperty v19, v64, v63
+v65 <- CallFunction v20, []
+v66 <- LoadString '-0'
+v67 <- DeleteComputedProperty v19, v66
+v68 <- LoadString '-1'
+v69 <- DeleteComputedProperty v19, v68
+v70 <- LoadString '10'
+v71 <- DeleteComputedProperty v19, v70
+v72 <- LoadString '4294967295'
+v73 <- DeleteComputedProperty v19, v72
+v74 <- LoadUndefined
+v75 <- LoadString '-1'
+v76 <- CallMethod v1, 'getOwnPropertyDescriptor', [v19, v75]
+v77 <- LoadUndefined
+v78 <- LoadString '-0'
+v79 <- CallMethod v1, 'getOwnPropertyDescriptor', [v19, v78]
+v80 <- LoadUndefined
+v81 <- LoadString '10'
+v82 <- CallMethod v1, 'getOwnPropertyDescriptor', [v19, v81]
+v83 <- LoadUndefined
+v84 <- LoadString '4294967295'
+v85 <- CallMethod v1, 'getOwnPropertyDescriptor', [v19, v84]
+v86 <- LoadInteger '10'
+v87 <- CallMethod v1, 'keys', [v19]
+v88 <- GetProperty v87, 'length'
+v89 <- CallFunction v20, []
+v90 <- BeginPlainFunction -> 
+    v91 <- LoadString '-1'
+    v92 <- GetComputedProperty v19, v91
+    Return v92
+EndPlainFunction
+BeginForLoopInitializer
+    v93 <- LoadInteger '0'
+BeginForLoopCondition -> v94
+    v95 <- LoadInteger '3'
+    v96 <- Compare v94, '<', v95
+BeginForLoopAfterthought v96 -> v97
+    v98 <- UnaryOperation v97, '++'
+BeginForLoopBody -> v99
+    v100 <- LoadUndefined
+    v101 <- CallFunction v90, []
+EndForLoop
+v102 <- LoadUndefined
+v103 <- CallFunction v90, []
+v104 <- LoadString 'Object.defineProperty(new Int32Array(100), -1, {value: 1})'
+v105 <- LoadString 'Object.defineProperty(new Int32Array(100), "-0", {value: 1})'
+v106 <- LoadString 'Object.defineProperty(new Int32Array(100), -10, {value: 1})'
+v107 <- LoadString 'Object.defineProperty(new Int32Array(), 4294967295, {value: 1})'
+v108 <- CallFunction v20, []
+
+
+const t0 = Object.prototype;
+t0["10"] = "unreachable";
+const t2 = Object.prototype;
+t2["7"] = "unreachable";
+const t4 = Object.prototype;
+t4["-1"] = "unreachable";
+const t6 = Object.prototype;
+t6["-0"] = "unreachable";
+const t8 = Object.prototype;
+t8["4294967295"] = "unreachable";
+const v18 = new Int32Array(10);
+var array = v18;
+function check() {
+    for (let i22 = 0; i22 < 4; i22++) {
+        array["-1"];
+        array["-0"];
+        array["10"];
+        array["4294967295"];
+    }
+    array.__proto__["-1"];
+    array.__proto__["-0"];
+    array.__proto__["10"];
+    array.__proto__["4294967295"];
+}
+check();
+array["-1"] = "unreachable";
+array["-0"] = "unreachable";
+array["10"] = "unreachable";
+array["4294967295"] = "unreachable";
+check();
+delete array["-0"];
+delete array["-1"];
+delete array["10"];
+delete array["4294967295"];
+Object.getOwnPropertyDescriptor(array, "-1");
+Object.getOwnPropertyDescriptor(array, "-0");
+Object.getOwnPropertyDescriptor(array, "10");
+Object.getOwnPropertyDescriptor(array, "4294967295");
+Object.keys(array).length;
+check();
+function f() {
+    return array["-1"];
+}
+for (let i94 = 0; i94 < 3; i94++) {
+    f();
+}
+f();
+check();
+
+FuzzIL program written to corpus/indexed-integer-exotics.fzil

@@ -1,0 +1,16 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    BeginWith v1
+    EndWith
+EndPlainFunction
+v2 <- CallFunction v0, []
+v3 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function f0() {
+    with (undefined) {
+    }
+}
+f0();
+
+FuzzIL program written to corpus/regress-crbug-450642.fzil

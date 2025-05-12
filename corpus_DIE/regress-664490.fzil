@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> v1
+EndPlainFunction
+v2 <- CreateNamedVariable 'foo', 'var', v0
+v3 <- BeginPlainFunction -> v4
+    v5 <- LoadBoolean 'false'
+EndPlainFunction
+Reassign v2, v3
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadUndefined
+    v8 <- LoadInteger '0'
+    v9 <- Compare v7, '==', v8
+    v10 <- CallFunction v2, [v9]
+EndPlainFunction
+v11 <- CallFunction v6, []
+
+
+function f0(a1) {
+}
+var foo = f0;
+function f3(a4) {
+}
+foo = f3;
+function f() {
+    foo(undefined == 0);
+}
+f();
+
+FuzzIL program written to corpus/regress-664490.fzil

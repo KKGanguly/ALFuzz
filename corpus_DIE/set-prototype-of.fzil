@@ -1,0 +1,386 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v2 <- Construct v1, []
+    v3 <- LoadInteger '5'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v3
+    v4 <- EndObjectLiteral
+    v5 <- LoadRegExp 'regexp' ''
+    v6 <- LoadString 'array'
+    v7 <- CreateArray [v6]
+    v8 <- CreateNamedVariable 'Date', 'none'
+    v9 <- Construct v8, []
+    v10 <- CreateNamedVariable 'Number', 'none'
+    v11 <- LoadInteger '1'
+    v12 <- Construct v10, [v11]
+    v13 <- CreateNamedVariable 'Boolean', 'none'
+    v14 <- LoadBoolean 'true'
+    v15 <- Construct v13, [v14]
+    v16 <- CreateNamedVariable 'String', 'none'
+    v17 <- LoadString 'str'
+    v18 <- Construct v16, [v17]
+    v19 <- CreateNamedVariable 'Symbol', 'none'
+    v20 <- CallFunction v19, []
+    v21 <- CreateNamedVariable 'Object', 'none'
+    v22 <- CallFunction v21, [v20]
+    v23 <- CreateArray [v1, v2, v4, v5, v7, v9, v12, v15, v18, v22]
+    Return v23
+EndPlainFunction
+v24 <- LoadInteger '1'
+v25 <- LoadBoolean 'true'
+v26 <- LoadString 'string'
+v27 <- CreateNamedVariable 'Symbol', 'none'
+v28 <- CallFunction v27, []
+v29 <- CreateArray [v24, v25, v26, v28]
+v30 <- CreateNamedVariable 'coercibleValues', 'var', v29
+v31 <- LoadUndefined
+v32 <- LoadNull
+v33 <- CreateArray [v31, v32]
+v34 <- CreateNamedVariable 'nonCoercibleValues', 'var', v33
+v35 <- LoadUndefined
+v36 <- CallMethod v30, 'concat', [v35]
+v37 <- CreateNamedVariable 'valuesWithoutNull', 'var', v36
+v38 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v39 <- LoadInteger '0'
+    BeginForLoopCondition -> v40
+        v41 <- GetProperty v30, 'length'
+        v42 <- Compare v40, '<', v41
+    BeginForLoopAfterthought v42 -> v43
+        v44 <- UnaryOperation v43, '++'
+    BeginForLoopBody -> v45
+        v46 <- GetComputedProperty v30, v45
+        v47 <- CreateNamedVariable 'value', 'var', v46
+        v48 <- CreateNamedVariable 'Object', 'none'
+        v49 <- CallMethod v48, 'getPrototypeOf', [v47]
+        v50 <- CreateNamedVariable 'proto', 'var', v49
+        BeginObjectLiteral
+        v51 <- EndObjectLiteral
+        v52 <- CallMethod v48, 'setPrototypeOf', [v47, v51]
+        v53 <- CallMethod v48, 'getPrototypeOf', [v47]
+    EndForLoop
+EndPlainFunction
+v54 <- CallFunction v38, []
+v55 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v56 <- LoadInteger '0'
+    BeginForLoopCondition -> v57
+        v58 <- GetProperty v34, 'length'
+        v59 <- Compare v57, '<', v58
+    BeginForLoopAfterthought v59 -> v60
+        v61 <- UnaryOperation v60, '++'
+    BeginForLoopBody -> v62
+        v63 <- GetComputedProperty v34, v62
+        v64 <- CreateNamedVariable 'value', 'var', v63
+        v65 <- BeginPlainFunction -> 
+            BeginObjectLiteral
+            v66 <- EndObjectLiteral
+            v67 <- CreateNamedVariable 'Object', 'none'
+            v68 <- CallMethod v67, 'setPrototypeOf', [v64, v66]
+        EndPlainFunction
+        v69 <- CallFunction v65, []
+        v70 <- CreateNamedVariable 'TypeError', 'none'
+    EndForLoop
+EndPlainFunction
+v71 <- CallFunction v55, []
+v72 <- BeginPlainFunction -> v73
+    v74 <- CallFunction v0, []
+    v75 <- CreateNamedVariable 'objects', 'var', v74
+    BeginForLoopInitializer
+        v76 <- LoadInteger '0'
+    BeginForLoopCondition -> v77
+        v78 <- GetProperty v75, 'length'
+        v79 <- Compare v77, '<', v78
+    BeginForLoopAfterthought v79 -> v80
+        v81 <- UnaryOperation v80, '++'
+    BeginForLoopBody -> v82
+        v83 <- GetComputedProperty v75, v82
+        v84 <- CreateNamedVariable 'object', 'var', v83
+        BeginForLoopInitializer
+            v85 <- LoadInteger '0'
+        BeginForLoopCondition -> v86
+            v87 <- GetProperty v37, 'length'
+            v88 <- Compare v86, '<', v87
+        BeginForLoopAfterthought v88 -> v89
+            v90 <- UnaryOperation v89, '++'
+        BeginForLoopBody -> v91
+            v92 <- GetComputedProperty v37, v91
+            v93 <- CreateNamedVariable 'proto', 'var', v92
+            v94 <- BeginPlainFunction -> 
+                v95 <- CreateNamedVariable 'Object', 'none'
+                v96 <- CallMethod v95, 'setPrototypeOf', [v84, v93]
+            EndPlainFunction
+            v97 <- CallFunction v94, []
+            v98 <- CreateNamedVariable 'TypeError', 'none'
+        EndForLoop
+    EndForLoop
+EndPlainFunction
+v99 <- CallFunction v72, []
+v100 <- BeginPlainFunction -> v101, v102
+    v103 <- CreateNamedVariable 'Object', 'none'
+    v104 <- CallMethod v103, 'setPrototypeOf', [v101, v102]
+    v105 <- CallMethod v103, 'getPrototypeOf', [v101]
+EndPlainFunction
+v106 <- BeginPlainFunction -> 
+    v107 <- CallFunction v0, []
+    v108 <- CreateNamedVariable 'objects1', 'var', v107
+    v109 <- CallFunction v0, []
+    v110 <- CreateNamedVariable 'objects2', 'var', v109
+    BeginForLoopInitializer
+        v111 <- LoadInteger '0'
+    BeginForLoopCondition -> v112
+        v113 <- GetProperty v108, 'length'
+        v114 <- Compare v112, '<', v113
+    BeginForLoopAfterthought v114 -> v115
+        v116 <- UnaryOperation v115, '++'
+    BeginForLoopBody -> v117
+        BeginForLoopInitializer
+            v118 <- LoadInteger '0'
+        BeginForLoopCondition -> v119
+            v120 <- GetProperty v110, 'length'
+            v121 <- Compare v119, '<', v120
+        BeginForLoopAfterthought v121 -> v122
+            v123 <- UnaryOperation v122, '++'
+        BeginForLoopBody -> v124
+            v125 <- GetComputedProperty v108, v117
+            v126 <- GetComputedProperty v110, v124
+            v127 <- CallFunction v100, [v125, v126]
+        EndForLoop
+    EndForLoop
+EndPlainFunction
+v128 <- CallFunction v106, []
+v129 <- BeginPlainFunction -> 
+    v130 <- CallFunction v0, []
+    v131 <- CreateNamedVariable 'objects', 'var', v130
+    BeginForLoopInitializer
+        v132 <- LoadInteger '0'
+    BeginForLoopCondition -> v133
+        v134 <- GetProperty v131, 'length'
+        v135 <- Compare v133, '<', v134
+    BeginForLoopAfterthought v135 -> v136
+        v137 <- UnaryOperation v136, '++'
+    BeginForLoopBody -> v138
+        v139 <- GetComputedProperty v131, v138
+        v140 <- LoadNull
+        v141 <- CallFunction v100, [v139, v140]
+    EndForLoop
+EndPlainFunction
+v142 <- CallFunction v129, []
+v143 <- BeginPlainFunction -> 
+    v144 <- CallFunction v0, []
+    v145 <- CreateNamedVariable 'objects', 'var', v144
+    BeginObjectLiteral
+    v146 <- EndObjectLiteral
+    v147 <- CreateNamedVariable 'proto', 'var', v146
+    BeginForLoopInitializer
+        v148 <- LoadInteger '0'
+    BeginForLoopCondition -> v149
+        v150 <- GetProperty v145, 'length'
+        v151 <- Compare v149, '<', v150
+    BeginForLoopAfterthought v151 -> v152
+        v153 <- UnaryOperation v152, '++'
+    BeginForLoopBody -> v154
+        v155 <- GetComputedProperty v145, v154
+        v156 <- CreateNamedVariable 'object', 'var', v155
+        v157 <- CreateNamedVariable 'Object', 'none'
+        v158 <- CallMethod v157, 'preventExtensions', [v156]
+        v159 <- CallMethod v157, 'getPrototypeOf', [v156]
+        v160 <- CallMethod v157, 'setPrototypeOf', [v156, v159]
+        v161 <- BeginPlainFunction -> 
+            v162 <- CallMethod v157, 'setPrototypeOf', [v156, v147]
+        EndPlainFunction
+        v163 <- CallFunction v161, []
+        v164 <- CreateNamedVariable 'TypeError', 'none'
+    EndForLoop
+EndPlainFunction
+v165 <- CallFunction v143, []
+v166 <- BeginPlainFunction -> 
+    v167 <- CreateNamedVariable 'Object', 'none'
+    v168 <- GetProperty v167, 'prototype'
+    BeginObjectLiteral
+    v169 <- EndObjectLiteral
+    v170 <- CreateNamedVariable 'Array', 'none'
+    v171 <- GetProperty v170, 'prototype'
+    v172 <- CreateArray []
+    v173 <- CreateNamedVariable 'Error', 'none'
+    v174 <- GetProperty v173, 'prototype'
+    v175 <- CreateNamedVariable 'TypeError', 'none'
+    v176 <- Construct v175, []
+    v177 <- CreateArray [v168, v169, v171, v172, v174, v176]
+    v178 <- CreateNamedVariable 'objects', 'var', v177
+    BeginForLoopInitializer
+        v179 <- LoadInteger '0'
+    BeginForLoopCondition -> v180
+        v181 <- GetProperty v178, 'length'
+        v182 <- Compare v180, '<', v181
+    BeginForLoopAfterthought v182 -> v183
+        v184 <- LoadInteger '2'
+        Update v183, '+', v184
+    BeginForLoopBody -> v185
+        v186 <- GetComputedProperty v178, v185
+        v187 <- CreateNamedVariable 'object', 'var', v186
+        v188 <- LoadInteger '1'
+        v189 <- BinaryOperation v185, '+', v188
+        v190 <- GetComputedProperty v178, v189
+        v191 <- CreateNamedVariable 'value', 'var', v190
+        v192 <- BeginPlainFunction -> 
+            v193 <- CallMethod v167, 'setPrototypeOf', [v187, v191]
+        EndPlainFunction
+        v194 <- CallFunction v192, []
+    EndForLoop
+EndPlainFunction
+v195 <- CallFunction v166, []
+v196 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v197 <- EndObjectLiteral
+    v198 <- CreateNamedVariable 'object', 'var', v197
+    v199 <- LoadString 'x'
+    v200 <- TestIn v199, v198
+    v201 <- LoadString 'y'
+    v202 <- TestIn v201, v198
+    v203 <- LoadString 'old x'
+    v204 <- LoadString 'old y'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v203
+        ObjectLiteralAddProperty `y`, v204
+    v205 <- EndObjectLiteral
+    v206 <- CreateNamedVariable 'oldProto', 'var', v205
+    v207 <- CreateNamedVariable 'Object', 'none'
+    v208 <- CallMethod v207, 'setPrototypeOf', [v198, v206]
+    v209 <- GetProperty v198, 'x'
+    v210 <- LoadString 'old x'
+    v211 <- GetProperty v198, 'y'
+    v212 <- LoadString 'old y'
+    v213 <- LoadString 'new x'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v213
+    v214 <- EndObjectLiteral
+    v215 <- CreateNamedVariable 'newProto', 'var', v214
+    v216 <- CallMethod v207, 'setPrototypeOf', [v198, v215]
+    v217 <- GetProperty v198, 'x'
+    v218 <- LoadString 'new x'
+    v219 <- LoadString 'y'
+    v220 <- TestIn v219, v198
+EndPlainFunction
+v221 <- CallFunction v196, []
+
+
+function getObjects() {
+    function func() {
+    }
+    const v2 = new func();
+    const v4 = { x: 5 };
+    const v5 = /regexp/;
+    const v7 = ["array"];
+    const v9 = new Date();
+    const v12 = new Number(1);
+    const v15 = new Boolean(true);
+    const v18 = new String("str");
+    return [func,v2,v4,v5,v7,v9,v12,v15,v18,Object(Symbol())];
+}
+var coercibleValues = [1,true,"string",Symbol()];
+var nonCoercibleValues = [,null];
+var valuesWithoutNull = coercibleValues.concat(undefined);
+function TestSetPrototypeOfCoercibleValues() {
+    for (let i40 = 0; i40 < coercibleValues.length; i40++) {
+        var value = coercibleValues[i40];
+        var proto = Object.getPrototypeOf(value);
+        Object.setPrototypeOf(value, {});
+        Object.getPrototypeOf(value);
+    }
+}
+TestSetPrototypeOfCoercibleValues();
+function TestSetPrototypeOfNonCoercibleValues() {
+    for (let i57 = 0; i57 < nonCoercibleValues.length; i57++) {
+        var value = nonCoercibleValues[i57];
+        function f65() {
+            Object.setPrototypeOf(value, {});
+        }
+        f65();
+    }
+}
+TestSetPrototypeOfNonCoercibleValues();
+function TestSetPrototypeToNonObject(a73) {
+    var objects = getObjects();
+    for (let i77 = 0; i77 < objects.length; i77++) {
+        var object = objects[i77];
+        for (let i86 = 0; i86 < valuesWithoutNull.length; i86++) {
+            var proto = valuesWithoutNull[i86];
+            function f94() {
+                Object.setPrototypeOf(object, proto);
+            }
+            f94();
+        }
+    }
+}
+TestSetPrototypeToNonObject();
+function TestSetPrototypeOf(a101, a102) {
+    Object.setPrototypeOf(a101, a102);
+    Object.getPrototypeOf(a101);
+}
+function TestSetPrototypeOfForObjects() {
+    var objects1 = getObjects();
+    var objects2 = getObjects();
+    for (let i112 = 0; i112 < objects1.length; i112++) {
+        for (let i119 = 0; i119 < objects2.length; i119++) {
+            TestSetPrototypeOf(objects1[i112], objects2[i119]);
+        }
+    }
+}
+TestSetPrototypeOfForObjects();
+function TestSetPrototypeToNull() {
+    var objects = getObjects();
+    for (let i133 = 0; i133 < objects.length; i133++) {
+        TestSetPrototypeOf(objects[i133], null);
+    }
+}
+TestSetPrototypeToNull();
+function TestSetPrototypeOfNonExtensibleObject() {
+    var objects = getObjects();
+    var proto = {};
+    for (let i149 = 0; i149 < objects.length; i149++) {
+        var object = objects[i149];
+        Object.preventExtensions(object);
+        Object.setPrototypeOf(object, Object.getPrototypeOf(object));
+        function f161() {
+            Object.setPrototypeOf(object, proto);
+        }
+        f161();
+    }
+}
+TestSetPrototypeOfNonExtensibleObject();
+function TestSetPrototypeCyclic() {
+    const v168 = Object.prototype;
+    const v169 = {};
+    const v171 = Array.prototype;
+    const v172 = [];
+    const v174 = Error.prototype;
+    const v176 = new TypeError();
+    var objects = [v168,v169,v171,v172,v174,v176];
+    for (let i180 = 0; i180 < objects.length; i180 += 2) {
+        var object = objects[i180];
+        var value = objects[i180 + 1];
+        function f192() {
+            Object.setPrototypeOf(object, value);
+        }
+        f192();
+    }
+}
+TestSetPrototypeCyclic();
+function TestLookup() {
+    var object = {};
+    "x" in object;
+    "y" in object;
+    var oldProto = { x: "old x", y: "old y" };
+    Object.setPrototypeOf(object, oldProto);
+    object.x;
+    object.y;
+    var newProto = { x: "new x" };
+    Object.setPrototypeOf(object, newProto);
+    object.x;
+    "y" in object;
+}
+TestLookup();
+
+FuzzIL program written to corpus/set-prototype-of.fzil

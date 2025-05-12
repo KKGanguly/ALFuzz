@@ -1,0 +1,71 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- CreateNamedVariable 'Array', 'none'
+        v4 <- LoadString 'first'
+        v5 <- Construct v3, [v4]
+        v6 <- CreateNamedVariable 'a', 'const', v5
+        v7 <- GetComputedProperty v6, v2
+        Return v7
+    EndPlainFunction
+    v8 <- LoadString 'first'
+    v9 <- LoadInteger '0'
+    v10 <- CallFunction v1, [v9]
+    v11 <- LoadString 'first'
+    v12 <- LoadInteger '0'
+    v13 <- CallFunction v1, [v12]
+    v14 <- LoadString 'first'
+    v15 <- LoadInteger '0'
+    v16 <- CallFunction v1, [v15]
+EndPlainFunction
+v17 <- CallFunction v0, []
+v18 <- BeginPlainFunction -> 
+    v19 <- BeginPlainFunction -> v20
+        v21 <- CreateNamedVariable 'Array', 'none'
+        v22 <- LoadString 'first'
+        v23 <- LoadString 'second'
+        v24 <- Construct v21, [v22, v23]
+        v25 <- CreateNamedVariable 'a', 'const', v24
+        v26 <- GetComputedProperty v25, v20
+        Return v26
+    EndPlainFunction
+    v27 <- LoadString 'first'
+    v28 <- LoadInteger '0'
+    v29 <- CallFunction v19, [v28]
+    v30 <- LoadString 'second'
+    v31 <- LoadInteger '1'
+    v32 <- CallFunction v19, [v31]
+    v33 <- LoadString 'first'
+    v34 <- LoadInteger '0'
+    v35 <- CallFunction v19, [v34]
+    v36 <- LoadString 'second'
+    v37 <- LoadInteger '1'
+    v38 <- CallFunction v19, [v37]
+EndPlainFunction
+v39 <- CallFunction v18, []
+
+
+function testOneElementArrayVariableIndex() {
+    function f(a2) {
+        const v5 = new Array("first");
+        const a = v5;
+        return a[a2];
+    }
+    f(0);
+    f(0);
+    f(0);
+}
+testOneElementArrayVariableIndex();
+function testTwoElementArrayVariableIndex() {
+    function f(a20) {
+        const v24 = new Array("first", "second");
+        const a = v24;
+        return a[a20];
+    }
+    f(0);
+    f(1);
+    f(0);
+    f(1);
+}
+testTwoElementArrayVariableIndex();
+
+FuzzIL program written to corpus/escape-analysis-array.fzil

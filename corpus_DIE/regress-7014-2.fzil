@@ -1,0 +1,69 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetElement v1, '5'
+    Return v2
+EndPlainFunction
+v3 <- LoadString 'f'
+v4 <- LoadString 'abcdef'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadUndefined
+v7 <- LoadString 'a'
+v8 <- CallFunction v0, [v7]
+v9 <- LoadString 'f'
+v10 <- LoadString 'abcdef'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadUndefined
+v13 <- LoadString 'a'
+v14 <- CallFunction v0, [v13]
+v15 <- CallFunction v0, []
+v16 <- CreateNamedVariable 'Proxy', 'none'
+v17 <- CreateNamedVariable 'String', 'none'
+v18 <- GetProperty v17, 'prototype'
+v19 <- GetProperty v18, '__proto__'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v20, v21, v22
+        v23 <- LoadString '5'
+        Return v23
+    EndObjectLiteralMethod
+v24 <- EndObjectLiteral
+v25 <- Construct v16, [v19, v24]
+v26 <- GetProperty v17, 'prototype'
+SetProperty v26, '__proto__', v25
+v27 <- LoadString 'f'
+v28 <- LoadString 'abcdef'
+v29 <- CallFunction v0, [v28]
+v30 <- LoadString '5'
+v31 <- LoadString 'a'
+v32 <- CallFunction v0, [v31]
+v33 <- LoadString 'f'
+v34 <- LoadString 'abcdef'
+v35 <- CallFunction v0, [v34]
+v36 <- LoadString '5'
+v37 <- LoadString 'a'
+v38 <- CallFunction v0, [v37]
+v39 <- CallFunction v0, []
+
+
+function foo(a1) {
+    return a1[5];
+}
+foo("abcdef");
+foo("a");
+foo("abcdef");
+foo("a");
+foo();
+const v19 = String.prototype.__proto__;
+const v24 = {
+    get(a21, a22) {
+        return "5";
+    },
+};
+const v25 = new Proxy(v19, v24);
+const t15 = String.prototype;
+t15.__proto__ = v25;
+foo("abcdef");
+foo("a");
+foo("abcdef");
+foo("a");
+foo();
+
+FuzzIL program written to corpus/regress-7014-2.fzil

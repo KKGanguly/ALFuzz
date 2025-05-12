@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateArray [v1]
+    BeginForInLoop v2 -> v3
+        BeginTry
+        BeginFinally
+            Continue
+        EndTryCatch
+    EndForInLoop
+EndPlainFunction
+v4 <- CallFunction v0, []
+
+
+function Crash() {
+    for (const v3 in [0]) {
+        try {
+        } finally {
+            continue;
+        }
+    }
+}
+Crash();
+
+FuzzIL program written to corpus/regress-1066899.fzil

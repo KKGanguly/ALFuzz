@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginIf v1
+        v3 <- LoadInteger '2'
+        v4 <- BinaryOperation v2, '*', v3
+        v5 <- LoadInteger '2'
+        v6 <- BinaryOperation v4, '*', v5
+    EndIf
+EndPlainFunction
+v7 <- LoadBoolean 'true'
+v8 <- LoadInteger '1'
+v9 <- CallFunction v0, [v7, v8]
+v10 <- LoadBoolean 'true'
+v11 <- LoadInteger '2'
+v12 <- CallFunction v0, [v10, v11]
+v13 <- LoadBoolean 'false'
+v14 <- LoadInteger '1'
+v15 <- CallFunction v0, [v13, v14]
+v16 <- BeginPlainFunction -> v17
+    v18 <- LoadString ''
+    v19 <- CallFunction v0, [v17, v18]
+EndPlainFunction
+v20 <- LoadBoolean 'false'
+v21 <- CallFunction v16, [v20]
+v22 <- LoadBoolean 'false'
+v23 <- CallFunction v16, [v22]
+v24 <- LoadBoolean 'true'
+v25 <- CallFunction v16, [v24]
+
+
+function inlined(a1, a2) {
+    if (a1) {
+        (a2 * 2) * 2;
+    }
+}
+inlined(true, 1);
+inlined(true, 2);
+inlined(false, 1);
+function foo(a17) {
+    inlined(a17, "");
+}
+foo(false);
+foo(false);
+foo(true);
+
+FuzzIL program written to corpus/regress-786521.fzil

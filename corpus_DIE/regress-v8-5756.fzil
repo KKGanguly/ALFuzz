@@ -1,0 +1,64 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'z', 'none'
+Reassign v1, v0
+v2 <- CreateNamedVariable 'Uint8Array', 'none'
+v3 <- LoadInteger '3'
+v4 <- Construct v2, [v3]
+v5 <- CreateNamedVariable 't', 'none'
+Reassign v5, v4
+v6 <- LoadInteger '0'
+v7 <- CreateNamedVariable 'm', 'var', v6
+v8 <- LoadInteger '10'
+v9 <- CreateNamedVariable 'x', 'var', v8
+v10 <- BeginPlainFunction -> 
+    v11 <- UnaryOperation '++', v7
+    v12 <- LoadInteger '10'
+    v13 <- BinaryOperation v7, '%', v12
+    v14 <- LoadInteger '9'
+    v15 <- Compare v13, '!=', v14
+    BeginIf v15
+        v16 <- LoadInteger '20'
+        v17 <- Compare v7, '>', v16
+        BeginIf v17
+            v18 <- LoadString '1'
+            Reassign v9, v18
+        EndIf
+        v19 <- CreateNamedVariable 'z', 'none'
+        v20 <- CreateNamedVariable 't', 'none'
+        SetElement v20, '2', v19
+    EndIf
+EndPlainFunction
+v21 <- BeginPlainFunction -> 
+    v22 <- CreateNamedVariable 'z', 'none'
+    SetProperty v22, 'toString', v10
+    v23 <- CallMethod v22, 'toString', []
+    v24 <- CallMethod v22, 'toString', []
+    v25 <- CallMethod v22, 'toString', []
+EndPlainFunction
+v26 <- CallFunction v21, []
+
+
+z = {};
+const v4 = new Uint8Array(3);
+t = v4;
+var m = 0;
+var x = 10;
+function k() {
+    ++m;
+    if ((m % 10) != 9) {
+        if (m > 20) {
+            x = "1";
+        }
+        t[2] = z;
+    }
+}
+function f1() {
+    z.toString = k;
+    z.toString();
+    z.toString();
+    z.toString();
+}
+f1();
+
+FuzzIL program written to corpus/regress-v8-5756.fzil

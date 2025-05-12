@@ -1,0 +1,18 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Number', 'none'
+    v2 <- CallMethod v1, 'isNaN', []
+    Return v2
+EndPlainFunction
+v3 <- CallFunction v0, []
+v4 <- CallFunction v0, []
+v5 <- CallFunction v0, []
+
+
+function foo() {
+    return Number.isNaN();
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-6082.fzil

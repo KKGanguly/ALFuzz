@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- GetProperty v0, 'arguments'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadString 'R:'
+    v4 <- CreateNamedVariable 'result', 'var', v3
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- LoadInteger '3'
+        v8 <- Compare v6, '<', v7
+    BeginForLoopAfterthought v8 -> v9
+        v10 <- UnaryOperation '++', v9
+    BeginForLoopBody -> v11
+        v12 <- LoadInteger '1'
+        v13 <- CreateArray [v12]
+        v14 <- CallFunction v0, [v13]
+        v15 <- GetElement v14, '0'
+        Update v4, '+', v15
+        v16 <- LoadInteger '2'
+        v17 <- CreateArray [v16]
+        v18 <- CallFunction v0, [v17]
+        v19 <- GetElement v18, '0'
+        Update v4, '+', v19
+    EndForLoop
+    Return v4
+EndPlainFunction
+v20 <- LoadString 'R:121212'
+v21 <- CallFunction v2, []
+
+
+function g() {
+    return g.arguments;
+}
+function f() {
+    var result = "R:";
+    for (let i6 = 0; i6 < 3; ++i6) {
+        result += g([1])[0];
+        result += g([2])[0];
+    }
+    return result;
+}
+f();
+
+FuzzIL program written to corpus/regress-crbug-668795.fzil

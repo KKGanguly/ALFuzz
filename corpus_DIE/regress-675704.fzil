@@ -1,0 +1,51 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadThis
+    SetProperty v2, 'a', v1
+    v3 <- LoadThis
+    v4 <- GetProperty v3, 'a'
+    v5 <- LoadInteger '65535'
+    v6 <- BinaryOperation v4, '+', v5
+    v7 <- LoadThis
+    SetProperty v7, 'x', v6
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9
+    v10 <- LoadInteger '2'
+    v11 <- Construct v0, [v10]
+    BeginIf v9
+        BeginForLoopInitializer
+            v12 <- LoadFloat '0.1'
+        BeginForLoopCondition -> v13
+            v14 <- LoadFloat '1.1'
+            v15 <- Compare v13, '<', v14
+        BeginForLoopAfterthought v15 -> v16
+            v17 <- UnaryOperation v16, '++'
+        BeginForLoopBody -> v18
+            v19 <- Construct v0, [v18]
+        EndForLoop
+    EndIf
+EndPlainFunction
+v20 <- LoadBoolean 'false'
+v21 <- CallFunction v8, [v20]
+v22 <- LoadBoolean 'false'
+v23 <- CallFunction v8, [v22]
+v24 <- LoadBoolean 'true'
+v25 <- CallFunction v8, [v24]
+
+
+function foo(a1) {
+    this.a = a1;
+    this.x = this.a + 65535;
+}
+function g(a9) {
+    new foo(2);
+    if (a9) {
+        for (let i13 = 0.1; i13 < 1.1; i13++) {
+            new foo(i13);
+        }
+    }
+}
+g(false);
+g(false);
+g(true);
+
+FuzzIL program written to corpus/regress-675704.fzil

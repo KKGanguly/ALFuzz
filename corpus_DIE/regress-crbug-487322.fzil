@@ -1,0 +1,88 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Intl'
+BeginIf v1
+    v2 <- CreateNamedVariable 'Intl', 'none'
+    v3 <- GetProperty v2, 'DateTimeFormat'
+    v4 <- LoadString 'en-US'
+    v5 <- LoadString 'Asia/Katmandu'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `timeZone`, v5
+    v6 <- EndObjectLiteral
+    v7 <- Construct v3, [v4, v6]
+    v8 <- CreateNamedVariable 'df1', 'none'
+    Reassign v8, v7
+    v9 <- GetProperty v2, 'DateTimeFormat'
+    v10 <- LoadString 'en-US'
+    v11 <- LoadString 'Asia/Kathmandu'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `timeZone`, v11
+    v12 <- EndObjectLiteral
+    v13 <- Construct v9, [v10, v12]
+    v14 <- CreateNamedVariable 'df2', 'none'
+    Reassign v14, v13
+    v15 <- CreateNamedVariable 'df1', 'none'
+    v16 <- CallMethod v15, 'resolvedOptions', []
+    v17 <- GetProperty v16, 'timeZone'
+    v18 <- CreateNamedVariable 'df2', 'none'
+    v19 <- CallMethod v18, 'resolvedOptions', []
+    v20 <- GetProperty v19, 'timeZone'
+    v21 <- GetProperty v2, 'DateTimeFormat'
+    v22 <- LoadString 'en-US'
+    v23 <- LoadString 'Asia/Ulaanbaatar'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `timeZone`, v23
+    v24 <- EndObjectLiteral
+    v25 <- Construct v21, [v22, v24]
+    v26 <- CreateNamedVariable 'df', 'none'
+    Reassign v26, v25
+    v27 <- LoadString 'Asia/Ulaanbaatar'
+    v28 <- CreateNamedVariable 'df', 'none'
+    v29 <- CallMethod v28, 'resolvedOptions', []
+    v30 <- GetProperty v29, 'timeZone'
+    v31 <- GetProperty v2, 'DateTimeFormat'
+    v32 <- LoadString 'en-US'
+    v33 <- LoadString 'Asia/Ulan_Bator'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `timeZone`, v33
+    v34 <- EndObjectLiteral
+    v35 <- Construct v31, [v32, v34]
+    Reassign v28, v35
+    v36 <- LoadString 'Asia/Ulaanbaatar'
+    v37 <- CallMethod v28, 'resolvedOptions', []
+    v38 <- GetProperty v37, 'timeZone'
+    v39 <- BeginArrowFunction -> 
+        v40 <- LoadUndefined
+        v41 <- LoadString 'Aurope/Paris'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `timeZone`, v41
+        v42 <- EndObjectLiteral
+        v43 <- CallMethod v2, 'DateTimeFormat', [v40, v42]
+        Return v43
+    EndArrowFunction
+    v44 <- CallFunction v39, []
+EndIf
+
+
+if (this.Intl) {
+    const v3 = Intl.DateTimeFormat;
+    const v7 = new v3("en-US", { timeZone: "Asia/Katmandu" });
+    df1 = v7;
+    const v9 = Intl.DateTimeFormat;
+    const v13 = new v9("en-US", { timeZone: "Asia/Kathmandu" });
+    df2 = v13;
+    df1.resolvedOptions().timeZone;
+    df2.resolvedOptions().timeZone;
+    const v21 = Intl.DateTimeFormat;
+    const v25 = new v21("en-US", { timeZone: "Asia/Ulaanbaatar" });
+    df = v25;
+    df.resolvedOptions().timeZone;
+    const v31 = Intl.DateTimeFormat;
+    const v35 = new v31("en-US", { timeZone: "Asia/Ulan_Bator" });
+    (df = v35).resolvedOptions().timeZone;
+    const v39 = () => {
+        return Intl.DateTimeFormat(undefined, { timeZone: "Aurope/Paris" });
+    };
+    v39();
+}
+
+FuzzIL program written to corpus/regress-crbug-487322.fzil

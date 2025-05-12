@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'e', 'var', v2
+    v4 <- CreateNamedVariable 'Object', 'none'
+    v5 <- CallMethod v4, 'preventExtensions', [v3]
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- LoadInteger '4'
+        v9 <- Compare v7, '<', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation v10, '++'
+    BeginForLoopBody -> v12
+        v13 <- CallMethod v3, 'shift', []
+    EndForLoop
+EndPlainFunction
+v14 <- CallFunction v0, []
+v15 <- CallFunction v0, []
+v16 <- CallFunction v0, []
+
+
+function f() {
+    var e = [0];
+    Object.preventExtensions(e);
+    for (let i7 = 0; i7 < 4; i7++) {
+        e.shift();
+    }
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-405517.fzil

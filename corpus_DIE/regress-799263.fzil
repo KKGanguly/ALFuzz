@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '0'
+    SetElement v2, '0', v3
+    v4 <- GetProperty v1, 'length'
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- LoadInteger '1'
+        v8 <- Compare v6, '<', v7
+    BeginForLoopAfterthought v8 -> v9
+        v10 <- UnaryOperation v9, '++'
+    BeginForLoopBody -> v11
+        v12 <- LoadInteger '0'
+        SetElement v1, '0', v12
+    EndForLoop
+    v13 <- LoadFloat '9.431092e-317'
+    SetElement v2, '0', v13
+EndPlainFunction
+v14 <- CreateNamedVariable 'Array', 'none'
+v15 <- LoadInteger '1'
+v16 <- Construct v14, [v15]
+v17 <- CreateNamedVariable 'arr1', 'let', v16
+v18 <- LoadString 'a'
+SetElement v17, '0', v18
+v19 <- LoadInteger '0'
+v20 <- CreateArray [v19]
+v21 <- CallFunction v0, [v17, v20]
+v22 <- LoadFloat '0.1'
+v23 <- CreateArray [v22]
+v24 <- CreateNamedVariable 'arr2', 'let', v23
+v25 <- CallFunction v0, [v24, v24]
+v26 <- CallFunction v0, [v24, v24]
+v27 <- LoadFloat '9.431092e-317'
+v28 <- GetElement v24, '0'
+
+
+function opt(a1, a2) {
+    a2[0] = 0;
+    a1.length;
+    for (let i6 = 0; i6 < 1; i6++) {
+        a1[0] = 0;
+    }
+    a2[0] = 9.431092e-317;
+}
+const v16 = new Array(1);
+let arr1 = v16;
+arr1[0] = "a";
+opt(arr1, [0]);
+let arr2 = [0.1];
+opt(arr2, arr2);
+opt(arr2, arr2);
+arr2[0];
+
+FuzzIL program written to corpus/regress-799263.fzil

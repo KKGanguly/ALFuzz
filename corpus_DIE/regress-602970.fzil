@@ -1,0 +1,38 @@
+v0 <- CreateNamedVariable 'Number', 'none'
+v1 <- LoadInteger '10'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'num', 'var', v2
+v4 <- LoadInteger '0'
+v5 <- BeginPlainFunction -> 
+    Return v3
+EndPlainFunction
+v6 <- CreateNamedVariable 'Array', 'none'
+v7 <- GetProperty v6, 'prototype'
+v8 <- CallMethod v7, '__defineGetter__', [v4, v5]
+v9 <- LoadInteger '0'
+v10 <- BeginPlainFunction -> v11
+EndPlainFunction
+v12 <- GetProperty v6, 'prototype'
+v13 <- CallMethod v12, '__defineSetter__', [v9, v10]
+v14 <- LoadString '%E7%9A%84'
+v15 <- CreateNamedVariable 'decodeURI', 'none'
+v16 <- CallFunction v15, [v14]
+v17 <- CreateNamedVariable 'str', 'var', v16
+v18 <- LoadInteger '30340'
+v19 <- LoadInteger '0'
+v20 <- CallMethod v17, 'charCodeAt', [v19]
+
+
+const v2 = new Number(10);
+var num = v2;
+function f5() {
+    return num;
+}
+Array.prototype.__defineGetter__(0, f5);
+function f10(a11) {
+}
+Array.prototype.__defineSetter__(0, f10);
+var str = decodeURI("%E7%9A%84");
+str.charCodeAt(0);
+
+FuzzIL program written to corpus/regress-602970.fzil

@@ -1,0 +1,49 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'A', 'none'
+Reassign v1, v0
+v2 <- CreateArray []
+v3 <- CreateNamedVariable 'A', 'none'
+SetProperty v3, 'i', v2
+v4 <- BeginPlainFunction -> 
+EndPlainFunction
+v5 <- GetProperty v3, 'i'
+v6 <- CallMethod v5, 'push', [v4]
+v7 <- BeginPlainFunction -> 
+EndPlainFunction
+v8 <- GetProperty v3, 'i'
+v9 <- CallMethod v8, 'push', [v7]
+v10 <- BeginPlainFunction -> v11
+    BeginForLoopInitializer
+        v12 <- LoadInteger '0'
+        v13 <- GetProperty v3, 'i'
+        v14 <- GetProperty v13, 'length'
+    BeginForLoopCondition -> v15, v16
+        v17 <- Compare v15, '<', v16
+    BeginForLoopAfterthought v17 -> v18, v19
+        v20 <- UnaryOperation '++', v18
+    BeginForLoopBody -> v21, v22
+        v23 <- GetProperty v3, 'i'
+        v24 <- CallComputedMethod v23, v21, []
+    EndForLoop
+EndPlainFunction
+v25 <- LoadNull
+v26 <- CallFunction v10, [v25]
+
+
+A = {};
+A.i = [];
+function f4() {
+}
+A.i.push(f4);
+function f7() {
+}
+A.i.push(f7);
+function f(a11) {
+    for (let i15 = 0, i16 = A.i.length; i15 < i16; ++i15) {
+        A.i[i15]();
+    }
+}
+f(null);
+
+FuzzIL program written to corpus/call-keyed.fzil

@@ -1,0 +1,41 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'o0', 'var', v0
+v2 <- CreateArray []
+v3 <- CreateNamedVariable 'o1', 'var', v2
+v4 <- LoadInteger '0'
+v5 <- CreateNamedVariable 'cnt', 'var', v4
+v6 <- LoadInteger '0'
+v7 <- BeginPlainFunction -> 
+    v8 <- UnaryOperation v5, '++'
+    v9 <- LoadInteger '2'
+    v10 <- Compare v8, '>', v9
+    BeginIf v10
+        Return
+    EndIf
+    v11 <- CallMethod v1, 'shift', []
+    v12 <- CreateNamedVariable 'gc', 'none'
+    v13 <- CallFunction v12, []
+    v14 <- LoadInteger '0'
+    v15 <- CallMethod v1, 'push', [v14]
+    v16 <- CallMethod v1, 'concat', [v3]
+EndPlainFunction
+v17 <- CallMethod v3, '__defineGetter__', [v6, v7]
+v18 <- GetElement v3, '0'
+
+
+var o0 = [];
+var o1 = [];
+var cnt = 0;
+function f7() {
+    if (cnt++ > 2) {
+        return;
+    }
+    o0.shift();
+    gc();
+    o0.push(0);
+    o0.concat(o1);
+}
+o1.__defineGetter__(0, f7);
+o1[0];
+
+FuzzIL program written to corpus/regress-620553.fzil

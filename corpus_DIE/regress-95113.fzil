@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- LoadInteger '100000'
+    v3 <- Construct v1, [v2]
+    v4 <- CreateNamedVariable 'a', 'var', v3
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- GetProperty v4, 'length'
+        v8 <- Compare v6, '<', v7
+    BeginForLoopAfterthought v8 -> v9
+    BeginForLoopBody -> v10
+        v11 <- LoadFloat '0.1'
+        v12 <- BinaryOperation v10, '+', v11
+        SetComputedProperty v4, v10, v12
+        v13 <- LoadInteger '1'
+        Update v10, '+', v13
+    EndForLoop
+    v14 <- LoadInteger '1'
+    SetProperty v4, 'length', v14
+    v15 <- LoadFloat '1.5'
+    SetElement v4, '0', v15
+    v16 <- LoadInteger '2'
+    SetProperty v4, 'length', v16
+    v17 <- LoadFloat '2.5'
+    SetElement v4, '1', v17
+    v18 <- GetElement v4, '0'
+    v19 <- LoadFloat '1.5'
+    v20 <- GetElement v4, '1'
+    v21 <- LoadFloat '2.5'
+    Return v4
+EndPlainFunction
+v22 <- CallFunction v0, []
+v23 <- CreateNamedVariable 'a', 'var', v22
+
+
+function get_double_array() {
+    const v3 = new Array(100000);
+    var a = v3;
+    for (let i6 = 0; i6 < a.length;) {
+        a[i6] = i6 + 0.1;
+        i6 += 1;
+    }
+    a.length = 1;
+    a[0] = 1.5;
+    a.length = 2;
+    a[1] = 2.5;
+    a[0];
+    a[1];
+    return a;
+}
+var a = get_double_array();
+
+FuzzIL program written to corpus/regress-95113.fzil

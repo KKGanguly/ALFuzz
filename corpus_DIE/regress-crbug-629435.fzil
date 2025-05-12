@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'constructor'
+EndPlainFunction
+v3 <- CreateArray []
+v4 <- CallFunction v0, [v3]
+v5 <- CreateArray []
+v6 <- CallFunction v0, [v5]
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadInteger '0'
+    v9 <- UnaryOperation '-', v8
+    v10 <- CreateNamedVariable 'x', 'var', v9
+    v11 <- LoadInteger '1'
+    v12 <- BinaryOperation v10, '+', v11
+    v13 <- CallFunction v0, [v12]
+EndPlainFunction
+v14 <- CallFunction v7, []
+
+
+function bar(a1) {
+    a1.constructor;
+}
+bar([]);
+bar([]);
+function foo() {
+    var x = -0;
+    bar(x + 1);
+}
+foo();
+
+FuzzIL program written to corpus/regress-crbug-629435.fzil

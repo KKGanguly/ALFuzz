@@ -1,0 +1,68 @@
+BeginTry
+    v0 <- CreateArray []
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- LoadInteger '100000'
+    v3 <- Construct v1, [v2]
+    v4 <- GetProperty v1, 'prototype'
+    v5 <- GetProperty v4, 'concat'
+    v6 <- CallMethod v5, 'apply', [v0, v3]
+BeginCatch -> v7
+EndTryCatch
+BeginTry
+    v8 <- CreateArray []
+    v9 <- CreateNamedVariable 'Array', 'none'
+    v10 <- LoadInteger '150000'
+    v11 <- Construct v9, [v10]
+    v12 <- GetProperty v9, 'prototype'
+    v13 <- GetProperty v12, 'concat'
+    v14 <- CallMethod v13, 'apply', [v8, v11]
+BeginCatch -> v15
+EndTryCatch
+BeginTry
+    v16 <- CreateArray []
+    v17 <- CreateNamedVariable 'Array', 'none'
+    v18 <- LoadInteger '200000'
+    v19 <- Construct v17, [v18]
+    v20 <- GetProperty v17, 'prototype'
+    v21 <- GetProperty v20, 'concat'
+    v22 <- CallMethod v21, 'apply', [v16, v19]
+BeginCatch -> v23
+EndTryCatch
+BeginTry
+    v24 <- CreateArray []
+    v25 <- CreateNamedVariable 'Array', 'none'
+    v26 <- LoadInteger '248000'
+    v27 <- Construct v25, [v26]
+    v28 <- GetProperty v25, 'prototype'
+    v29 <- GetProperty v28, 'concat'
+    v30 <- CallMethod v29, 'apply', [v24, v27]
+BeginCatch -> v31
+EndTryCatch
+
+
+try {
+    const v0 = [];
+    const v3 = new Array(100000);
+    Array.prototype.concat.apply(v0, v3);
+} catch(e7) {
+}
+try {
+    const v8 = [];
+    const v11 = new Array(150000);
+    Array.prototype.concat.apply(v8, v11);
+} catch(e15) {
+}
+try {
+    const v16 = [];
+    const v19 = new Array(200000);
+    Array.prototype.concat.apply(v16, v19);
+} catch(e23) {
+}
+try {
+    const v24 = [];
+    const v27 = new Array(248000);
+    Array.prototype.concat.apply(v24, v27);
+} catch(e31) {
+}
+
+FuzzIL program written to corpus/regress-crbug-469768.fzil

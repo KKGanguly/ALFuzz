@@ -1,0 +1,55 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'array', 'var', v2
+    v4 <- BeginPlainFunction -> v5, v6, v7
+        v8 <- LoadInteger '1'
+        v9 <- BinaryOperation v5, '+', v8
+        SetComputedProperty v7, v6, v9
+    EndPlainFunction
+    v10 <- BeginPlainFunction -> 
+        v11 <- CallMethod v3, 'forEach', [v4]
+    EndPlainFunction
+    v12 <- CallFunction v10, []
+    v13 <- CallFunction v10, []
+    v14 <- CallFunction v10, []
+    v15 <- LoadUndefined
+    v16 <- CreateArray [v15]
+    v17 <- LoadInteger '5'
+    v18 <- GetProperty v3, '__proto__'
+    v19 <- CallMethod v18, 'push', [v17]
+    v20 <- LoadInteger '0'
+    v21 <- CreateNamedVariable 'Object', 'none'
+    v22 <- CallMethod v21, 'getOwnPropertyDescriptor', [v3, v20]
+    v23 <- LoadUndefined
+    v24 <- CallFunction v10, []
+    v25 <- LoadInteger '0'
+    v26 <- CallMethod v21, 'getOwnPropertyDescriptor', [v3, v25]
+    v27 <- LoadUndefined
+    v28 <- GetElement v3, '0'
+    v29 <- LoadInteger '6'
+EndPlainFunction
+v30 <- CallFunction v0, []
+
+
+function f0() {
+    var array = [,];
+    function increment(a5, a6, a7) {
+        a7[a6] = a5 + 1;
+    }
+    function forEach() {
+        array.forEach(increment);
+    }
+    forEach();
+    forEach();
+    forEach();
+    [,];
+    array.__proto__.push(5);
+    Object.getOwnPropertyDescriptor(array, 0);
+    forEach();
+    Object.getOwnPropertyDescriptor(array, 0);
+    array[0];
+}
+f0();
+
+FuzzIL program written to corpus/deopt-array-prototype-foreach.fzil

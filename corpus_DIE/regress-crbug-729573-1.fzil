@@ -1,0 +1,152 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadThis
+        v3 <- CallMethod v1, 'bind', [v2]
+        v4 <- CreateNamedVariable 'a', 'var', v3
+        v5 <- UnaryOperation '!', v4
+        BeginIf v5
+            Return v4
+        EndIf
+        v6 <- LoadInteger '0'
+        Return v6
+    EndPlainFunction
+    v7 <- LoadInteger '0'
+    v8 <- CallFunction v1, []
+    v9 <- LoadInteger '0'
+    v10 <- CallFunction v1, []
+    v11 <- LoadInteger '0'
+    v12 <- CallFunction v1, []
+EndPlainFunction
+v13 <- CallFunction v0, []
+v14 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v15 <- BeginPlainFunction -> 
+        v16 <- LoadThis
+        v17 <- CallMethod v15, 'bind', [v16]
+        v18 <- CreateNamedVariable 'a', 'var', v17
+        v19 <- UnaryOperation '!', v18
+        BeginIf v19
+            Return v18
+        EndIf
+        v20 <- LoadInteger '0'
+        Return v20
+    EndPlainFunction
+    v21 <- LoadInteger '0'
+    v22 <- CallFunction v15, []
+    v23 <- LoadInteger '0'
+    v24 <- CallFunction v15, []
+    v25 <- LoadInteger '0'
+    v26 <- CallFunction v15, []
+EndPlainFunction
+v27 <- CallFunction v14, []
+v28 <- BeginPlainFunction -> 
+    v29 <- BeginPlainFunction -> 
+        v30 <- LoadThis
+        v31 <- CallMethod v29, 'bind', [v30]
+        v32 <- CreateNamedVariable 'a', 'var', v31
+        v33 <- UnaryOperation '!', v32
+        BeginIf v33
+            Return v32
+        EndIf
+        v34 <- LoadInteger '0'
+        Return v34
+    EndPlainFunction
+    v35 <- LoadString 'prototype'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `custom`, v35
+    v36 <- EndObjectLiteral
+    SetProperty v29, 'prototype', v36
+    v37 <- LoadInteger '0'
+    v38 <- CallFunction v29, []
+    v39 <- LoadInteger '0'
+    v40 <- CallFunction v29, []
+    v41 <- LoadInteger '0'
+    v42 <- CallFunction v29, []
+EndPlainFunction
+v43 <- CallFunction v28, []
+v44 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v45 <- BeginPlainFunction -> 
+        v46 <- LoadThis
+        v47 <- CallMethod v45, 'bind', [v46]
+        v48 <- CreateNamedVariable 'a', 'var', v47
+        v49 <- UnaryOperation '!', v48
+        BeginIf v49
+            Return v48
+        EndIf
+        v50 <- LoadInteger '0'
+        Return v50
+    EndPlainFunction
+    v51 <- LoadString 'prototype'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `custom`, v51
+    v52 <- EndObjectLiteral
+    SetProperty v45, 'prototype', v52
+    v53 <- LoadInteger '0'
+    v54 <- CallFunction v45, []
+    v55 <- LoadInteger '0'
+    v56 <- CallFunction v45, []
+    v57 <- LoadInteger '0'
+    v58 <- CallFunction v45, []
+EndPlainFunction
+v59 <- CallFunction v44, []
+
+
+function f0() {
+    function foo() {
+        var a = foo.bind(this);
+        if (!a) {
+            return a;
+        }
+        return 0;
+    }
+    foo();
+    foo();
+    foo();
+}
+f0();
+function f14() {
+    'use strict';
+    function foo() {
+        var a = foo.bind(this);
+        if (!a) {
+            return a;
+        }
+        return 0;
+    }
+    foo();
+    foo();
+    foo();
+}
+f14();
+function f28() {
+    function foo() {
+        var a = foo.bind(this);
+        if (!a) {
+            return a;
+        }
+        return 0;
+    }
+    foo.prototype = { custom: "prototype" };
+    foo();
+    foo();
+    foo();
+}
+f28();
+function f44() {
+    'use strict';
+    function foo() {
+        var a = foo.bind(this);
+        if (!a) {
+            return a;
+        }
+        return 0;
+    }
+    foo.prototype = { custom: "prototype" };
+    foo();
+    foo();
+    foo();
+}
+f44();
+
+FuzzIL program written to corpus/regress-crbug-729573-1.fzil

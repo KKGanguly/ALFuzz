@@ -1,0 +1,125 @@
+v0 <- BeginClassDefinition
+EndClassDefinition
+v1 <- BeginClassDefinition v0
+    BeginClassConstructor -> v2, v3, v4, v5
+        v6 <- LoadArguments
+        v7 <- GetElement v6, '1'
+    EndClassConstructor
+EndClassDefinition
+v8 <- BeginPlainFunction -> 
+    v9 <- CallFunction v1, []
+EndPlainFunction
+v10 <- CallFunction v8, []
+v11 <- CreateNamedVariable 'TypeError', 'none'
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '1'
+    v14 <- CallFunction v1, [v13]
+EndPlainFunction
+v15 <- CallFunction v12, []
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadInteger '1'
+    v18 <- LoadInteger '2'
+    v19 <- CallFunction v1, [v17, v18]
+EndPlainFunction
+v20 <- CallFunction v16, []
+v21 <- BeginPlainFunction -> 
+    v22 <- LoadInteger '1'
+    v23 <- LoadInteger '2'
+    v24 <- LoadInteger '3'
+    v25 <- CallFunction v1, [v22, v23, v24]
+EndPlainFunction
+v26 <- CallFunction v21, []
+v27 <- BeginPlainFunction -> 
+    v28 <- LoadInteger '1'
+    v29 <- LoadInteger '2'
+    v30 <- LoadInteger '3'
+    v31 <- LoadInteger '4'
+    v32 <- CallFunction v1, [v28, v29, v30, v31]
+EndPlainFunction
+v33 <- CallFunction v27, []
+v34 <- BeginPlainFunction -> 
+    v35 <- CallMethod v1, 'call', []
+EndPlainFunction
+v36 <- CallFunction v34, []
+v37 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v38 <- EndObjectLiteral
+    v39 <- CallMethod v1, 'call', [v38]
+EndPlainFunction
+v40 <- CallFunction v37, []
+v41 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v42 <- EndObjectLiteral
+    v43 <- LoadInteger '1'
+    v44 <- CallMethod v1, 'call', [v42, v43]
+EndPlainFunction
+v45 <- CallFunction v41, []
+v46 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v47 <- EndObjectLiteral
+    v48 <- LoadInteger '1'
+    v49 <- LoadInteger '2'
+    v50 <- CallMethod v1, 'call', [v47, v48, v49]
+EndPlainFunction
+v51 <- CallFunction v46, []
+v52 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v53 <- EndObjectLiteral
+    v54 <- LoadInteger '1'
+    v55 <- LoadInteger '2'
+    v56 <- LoadInteger '3'
+    v57 <- LoadInteger '4'
+    v58 <- CallMethod v1, 'call', [v53, v54, v55, v56, v57]
+EndPlainFunction
+v59 <- CallFunction v52, []
+
+
+class C0 {
+}
+class C1 extends C0 {
+    constructor(a3, a4, a5) {
+        arguments[1];
+    }
+}
+function f8() {
+    C1();
+}
+f8();
+function f12() {
+    C1(1);
+}
+f12();
+function f16() {
+    C1(1, 2);
+}
+f16();
+function f21() {
+    C1(1, 2, 3);
+}
+f21();
+function f27() {
+    C1(1, 2, 3, 4);
+}
+f27();
+function f34() {
+    C1.call();
+}
+f34();
+function f37() {
+    C1.call({});
+}
+f37();
+function f41() {
+    C1.call({}, 1);
+}
+f41();
+function f46() {
+    C1.call({}, 1, 2);
+}
+f46();
+function f52() {
+    C1.call({}, 1, 2, 3, 4);
+}
+f52();
+
+FuzzIL program written to corpus/regress-474783.fzil

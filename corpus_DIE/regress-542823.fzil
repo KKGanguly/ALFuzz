@@ -1,0 +1,45 @@
+v0 <- LoadInteger '100000'
+v1 <- CreateNamedVariable '__v_0', 'none'
+Reassign v1, v0
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- Construct v2, []
+v4 <- CreateNamedVariable '__v_1', 'none'
+Reassign v4, v3
+BeginForLoopInitializer
+    v5 <- LoadInteger '0'
+BeginForLoopCondition -> v6
+    v7 <- CreateNamedVariable '__v_0', 'none'
+    v8 <- Compare v6, '<', v7
+BeginForLoopAfterthought v8 -> v9
+    v10 <- UnaryOperation v9, '++'
+BeginForLoopBody -> v11
+    v12 <- LoadFloat '0.5'
+    v13 <- CreateNamedVariable '__v_1', 'none'
+    SetComputedProperty v13, v11, v12
+EndForLoop
+BeginForLoopInitializer
+    v14 <- LoadInteger '0'
+BeginForLoopCondition -> v15
+    v16 <- LoadInteger '10'
+    v17 <- Compare v15, '<', v16
+BeginForLoopAfterthought v17 -> v18
+    v19 <- UnaryOperation v18, '++'
+BeginForLoopBody -> v20
+    v21 <- CreateNamedVariable '__v_1', 'none'
+    v22 <- LoadFloat '0.5'
+    v23 <- BinaryOperation v21, '+', v22
+    v24 <- CreateNamedVariable '__v_0', 'var', v23
+EndForLoop
+
+
+__v_0 = 100000;
+const v3 = new Array();
+__v_1 = v3;
+for (let i6 = 0; i6 < __v_0; i6++) {
+    __v_1[i6] = 0.5;
+}
+for (let i15 = 0; i15 < 10; i15++) {
+    var __v_0 = __v_1 + 0.5;
+}
+
+FuzzIL program written to corpus/regress-542823.fzil

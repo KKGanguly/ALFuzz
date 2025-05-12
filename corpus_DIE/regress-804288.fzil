@@ -1,0 +1,22 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateArray [v0]
+v2 <- CreateNamedVariable 'arr', 'var', v1
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'setPrototypeOf', [v2, v3]
+v6 <- CreateNamedVariable 'Uint8Array', 'none'
+v7 <- Construct v6, [v2]
+v8 <- CreateNamedVariable 'ta', 'var', v7
+v9 <- LoadInteger '0'
+v10 <- CreateNamedVariable 'kDeclNoLocals', 'let', v9
+
+
+var arr = [{}];
+Object.setPrototypeOf(arr, {});
+const v7 = new Uint8Array(arr);
+var ta = v7;
+let kDeclNoLocals = 0;
+
+FuzzIL program written to corpus/regress-804288.fzil

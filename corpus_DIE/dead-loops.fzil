@@ -1,0 +1,178 @@
+v0 <- BeginPlainFunction -> 
+    BeginWhileLoopHeader
+        v1 <- LoadBoolean 'false'
+    BeginWhileLoopBody v1
+    EndWhileLoop
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '0'
+    v4 <- CreateNamedVariable 'i', 'var', v3
+    BeginWhileLoopHeader
+        v5 <- UnaryOperation v4, '++'
+        v6 <- LoadInteger '10'
+        v7 <- Compare v5, '<', v6
+    BeginWhileLoopBody v7
+    EndWhileLoop
+EndPlainFunction
+v8 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v9 <- LoadInteger '0'
+    BeginForLoopCondition -> v10
+        v11 <- LoadInteger '10'
+        v12 <- Compare v10, '<', v11
+    BeginForLoopAfterthought v12 -> v13
+        v14 <- UnaryOperation v13, '++'
+    BeginForLoopBody -> v15
+    EndForLoop
+EndPlainFunction
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadInteger '0'
+    v18 <- CreateNamedVariable 'a', 'var', v17
+    BeginForLoopInitializer
+        v19 <- LoadInteger '0'
+    BeginForLoopCondition -> v20
+        v21 <- LoadInteger '10'
+        v22 <- Compare v20, '<', v21
+    BeginForLoopAfterthought v22 -> v23
+        v24 <- UnaryOperation v23, '++'
+    BeginForLoopBody -> v25
+        v26 <- UnaryOperation v18, '++'
+    EndForLoop
+EndPlainFunction
+v27 <- BeginPlainFunction -> 
+    v28 <- CreateNamedVariable 'Int32Array', 'none'
+    v29 <- LoadInteger '4'
+    v30 <- Construct v28, [v29]
+    v31 <- CreateNamedVariable 'a', 'var', v30
+    v32 <- LoadInteger '0'
+    v33 <- CreateNamedVariable 'sum', 'var', v32
+    BeginForLoopInitializer
+        v34 <- LoadInteger '0'
+    BeginForLoopCondition -> v35
+        v36 <- GetProperty v31, 'length'
+        v37 <- Compare v35, '<', v36
+    BeginForLoopAfterthought v37 -> v38
+        v39 <- UnaryOperation v38, '++'
+    BeginForLoopBody -> v40
+        v41 <- GetComputedProperty v31, v40
+        Update v33, '+', v41
+    EndForLoop
+EndPlainFunction
+v42 <- BeginPlainFunction -> 
+    v43 <- CreateNamedVariable 'Array', 'none'
+    v44 <- LoadInteger '4'
+    v45 <- Construct v43, [v44]
+    v46 <- CreateNamedVariable 'a', 'var', v45
+    v47 <- LoadInteger '0'
+    v48 <- CreateNamedVariable 'sum', 'var', v47
+    BeginForLoopInitializer
+        v49 <- LoadInteger '0'
+    BeginForLoopCondition -> v50
+        v51 <- GetProperty v46, 'length'
+        v52 <- Compare v50, '<', v51
+    BeginForLoopAfterthought v52 -> v53
+        v54 <- UnaryOperation v53, '++'
+    BeginForLoopBody -> v55
+        v56 <- GetComputedProperty v46, v55
+        Update v48, '+', v56
+    EndForLoop
+EndPlainFunction
+v57 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v58 <- LoadInteger '0'
+    BeginForLoopCondition -> v59
+        v60 <- LoadInteger '10'
+        v61 <- Compare v59, '<', v60
+    BeginForLoopAfterthought v61 -> v62
+        v63 <- UnaryOperation v62, '++'
+    BeginForLoopBody -> v64
+        v65 <- CreateNamedVariable 'Object', 'none'
+        v66 <- Construct v65, []
+    EndForLoop
+EndPlainFunction
+v67 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v68 <- LoadInteger '0'
+    BeginForLoopCondition -> v69
+        v70 <- LoadInteger '10'
+        v71 <- Compare v69, '<', v70
+    BeginForLoopAfterthought v71 -> v72
+        v73 <- UnaryOperation v72, '++'
+    BeginForLoopBody -> v74
+        BeginObjectLiteral
+        v75 <- EndObjectLiteral
+        v76 <- CreateNamedVariable 'x', 'var', v75
+    EndForLoop
+EndPlainFunction
+v77 <- CreateArray [v0, v2, v8, v16, v27, v42, v57, v67]
+v78 <- CreateNamedVariable 'loops', 'var', v77
+BeginForLoopInitializer
+    v79 <- LoadInteger '0'
+BeginForLoopCondition -> v80
+    v81 <- GetProperty v78, 'length'
+    v82 <- Compare v80, '<', v81
+BeginForLoopAfterthought v82 -> v83
+    v84 <- UnaryOperation v83, '++'
+BeginForLoopBody -> v85
+    v86 <- GetComputedProperty v78, v85
+    v87 <- CreateNamedVariable 'f', 'var', v86
+    v88 <- CallFunction v87, []
+    v89 <- CallFunction v87, []
+    v90 <- CallFunction v87, []
+EndForLoop
+
+
+function loop1() {
+    while (false) {
+    }
+}
+function loop2() {
+    var i = 0;
+    while (i++ < 10) {
+    }
+}
+function loop3() {
+    for (let i10 = 0; i10 < 10; i10++) {
+    }
+}
+function loop4() {
+    var a = 0;
+    for (let i20 = 0; i20 < 10; i20++) {
+        a++;
+    }
+}
+function loop5() {
+    const v30 = new Int32Array(4);
+    var a = v30;
+    var sum = 0;
+    for (let i35 = 0; i35 < a.length; i35++) {
+        sum += a[i35];
+    }
+}
+function loop6() {
+    const v45 = new Array(4);
+    var a = v45;
+    var sum = 0;
+    for (let i50 = 0; i50 < a.length; i50++) {
+        sum += a[i50];
+    }
+}
+function loop7() {
+    for (let i59 = 0; i59 < 10; i59++) {
+        new Object();
+    }
+}
+function loop8() {
+    for (let i69 = 0; i69 < 10; i69++) {
+        var x = {};
+    }
+}
+var loops = [loop1,loop2,loop3,loop4,loop5,loop6,loop7,loop8];
+for (let i80 = 0; i80 < loops.length; i80++) {
+    var f = loops[i80];
+    f();
+    f();
+    f();
+}
+
+FuzzIL program written to corpus/dead-loops.fzil

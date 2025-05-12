@@ -1,0 +1,73 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'literal'
+    v2 <- LoadBoolean 'true'
+    v3 <- CreateNamedVariable 'f1', 'none'
+    v4 <- CallFunction v3, [v1, v2]
+    Return v4
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6, v7
+    v8 <- CreateNamedVariable 'f2', 'none'
+    v9 <- CallFunction v8, [v6, v7]
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> v11, v12
+    BeginIf v12
+        v13 <- LoadString 'other-literal'
+        v14 <- CreateNamedVariable 'f3', 'none'
+        v15 <- CallFunction v14, [v11, v13]
+        BeginIf v15
+            v16 <- LoadInteger '0'
+            Return v16
+        BeginElse
+            v17 <- LoadInteger '1'
+            Return v17
+        EndIf
+    BeginElse
+        v18 <- LoadInteger '2'
+        Return v18
+    EndIf
+EndPlainFunction
+v19 <- BeginPlainFunction -> v20, v21
+    v22 <- Compare v20, '===', v21
+    Return v22
+EndPlainFunction
+BeginForLoopInitializer
+    v23 <- LoadInteger '0'
+BeginForLoopCondition -> v24
+    v25 <- LoadInteger '5'
+    v26 <- Compare v24, '<', v25
+BeginForLoopAfterthought v26 -> v27
+    v28 <- UnaryOperation '++', v27
+BeginForLoopBody -> v29
+    v30 <- CallFunction v0, []
+EndForLoop
+v31 <- LoadInteger '1'
+v32 <- CallFunction v0, []
+
+
+function f0() {
+    return f1("literal", true);
+}
+function f1(a6, a7) {
+    return f2(a6, a7);
+}
+function f2(a11, a12) {
+    if (a12) {
+        if (f3(a11, "other-literal")) {
+            return 0;
+        } else {
+            return 1;
+        }
+    } else {
+        return 2;
+    }
+}
+function f3(a20, a21) {
+    return a20 === a21;
+}
+for (let i24 = 0; i24 < 5; ++i24) {
+    f0();
+}
+f0();
+
+FuzzIL program written to corpus/regress-1423.fzil

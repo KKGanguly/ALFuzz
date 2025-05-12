@@ -1,0 +1,30 @@
+v0 <- LoadInteger '10'
+v1 <- LoadBoolean 'false'
+v2 <- LoadString 'test'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable 'values', 'var', v3
+BeginForOfLoop v4 -> v5
+    v6 <- CreateNamedVariable 'Object', 'none'
+    v7 <- CallMethod v6, 'getPrototypeOf', [v5]
+    v8 <- CreateNamedVariable 'proto', 'var', v7
+    v9 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v10 <- EndObjectLiteral
+    BeginObjectLiteral
+    v11 <- EndObjectLiteral
+    v12 <- Construct v9, [v10, v11]
+    v13 <- CreateNamedVariable 'proxy', 'var', v12
+    v14 <- CallMethod v6, 'setPrototypeOf', [v8, v13]
+EndForOfLoop
+
+
+var values = [10,false,"test"];
+for (const v5 of values) {
+    var proto = Object.getPrototypeOf(v5);
+    const v10 = {};
+    const v12 = new Proxy(v10, {});
+    var proxy = v12;
+    Object.setPrototypeOf(proto, proxy);
+}
+
+FuzzIL program written to corpus/regress-crbug-752846.fzil

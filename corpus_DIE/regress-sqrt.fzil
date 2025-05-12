@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Math', 'none'
+    v3 <- CallMethod v2, 'sqrt', [v1]
+    Return v3
+EndPlainFunction
+v4 <- LoadFloat '7.0506280066499245e-233'
+v5 <- CreateNamedVariable 'x', 'var', v4
+v6 <- CallFunction v0, [v5]
+v7 <- CreateNamedVariable 'a', 'var', v6
+v8 <- LoadFloat '0.1'
+v9 <- CallFunction v0, [v8]
+v10 <- LoadFloat '0.2'
+v11 <- CallFunction v0, [v10]
+v12 <- CallFunction v0, [v5]
+v13 <- CreateNamedVariable 'b', 'var', v12
+
+
+function f(a1) {
+    return Math.sqrt(a1);
+}
+var x = 7.0506280066499245e-233;
+var a = f(x);
+f(0.1);
+f(0.2);
+var b = f(x);
+
+FuzzIL program written to corpus/regress-sqrt.fzil

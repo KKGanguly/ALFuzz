@@ -1,0 +1,25 @@
+v0 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'o', 'var', v1
+v3 <- LoadString 'x'
+v4 <- LoadInteger '5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v2, v3, v5]
+v8 <- LoadString 'x'
+v9 <- CallMethod v6, 'getOwnPropertyDescriptor', [v2, v8]
+v10 <- CreateNamedVariable 'desc', 'var', v9
+v11 <- LoadString 'writable'
+v12 <- GetComputedProperty v10, v11
+
+
+var o = { x: 10 };
+Object.defineProperty(o, "x", { value: 5 });
+var desc = Object.getOwnPropertyDescriptor(o, "x");
+desc["writable"];
+
+FuzzIL program written to corpus/regress-720.fzil

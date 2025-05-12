@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'i', 'var', v1
+    BeginWhileLoopHeader
+        v3 <- LoadInteger '1'
+    BeginWhileLoopBody v3
+        BeginObjectLiteral
+        v4 <- EndObjectLiteral
+        BeginIf v4
+            v5 <- CreateNamedVariable 'expected', 'none'
+            v6 <- GetElement v5, '0'
+            v7 <- CreateNamedVariable 'x', 'none'
+            v8 <- GetElement v7, '0'
+            v9 <- Compare v6, '==', v8
+            Reassign v2, v9
+        EndIf
+        v10 <- UnaryOperation v2, '++'
+    EndWhileLoop
+EndPlainFunction
+v11 <- CallFunction v0, []
+
+
+function f() {
+    var i = 0;
+    while (1) {
+        if ({}) {
+            i = expected[0] == x[0];
+        }
+        i++;
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-628516.fzil

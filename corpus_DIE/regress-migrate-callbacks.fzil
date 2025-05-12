@@ -1,0 +1,30 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o1', 'var', v0
+v2 <- LoadInteger '1'
+SetProperty v1, 'x', v2
+v3 <- LoadFloat '1.5'
+SetProperty v1, 'y', v3
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'o2', 'var', v4
+v6 <- LoadFloat '1.5'
+SetProperty v5, 'x', v6
+v7 <- LoadString 'y'
+v8 <- BeginPlainFunction -> v9
+EndPlainFunction
+v10 <- CallMethod v5, '__defineSetter__', [v7, v8]
+v11 <- GetProperty v1, 'y'
+
+
+var o1 = {};
+o1.x = 1;
+o1.y = 1.5;
+var o2 = {};
+o2.x = 1.5;
+function f8(a9) {
+}
+o2.__defineSetter__("y", f8);
+o1.y;
+
+FuzzIL program written to corpus/regress-migrate-callbacks.fzil

@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadThis
+    SetProperty v2, 'x', v1
+EndPlainFunction
+v3 <- LoadInteger '1'
+v4 <- Construct v0, [v3]
+v5 <- CreateNamedVariable 'f', 'var', v4
+v6 <- LoadInteger '2'
+v7 <- Construct v0, [v6]
+v8 <- CreateNamedVariable 'g', 'var', v7
+v9 <- BeginPlainFunction -> v10, v11
+    v12 <- LoadString 'x'
+    v13 <- CreateNamedVariable 'name', 'var', v12
+    v14 <- GetComputedProperty v10, v13
+    v15 <- GetComputedProperty v11, v13
+    v16 <- BinaryOperation v14, '+', v15
+    Return v16
+EndPlainFunction
+v17 <- LoadInteger '3'
+v18 <- CallFunction v9, [v5, v8]
+v19 <- LoadInteger '3'
+v20 <- CallFunction v9, [v8, v5]
+v21 <- LoadInteger '3'
+v22 <- CallFunction v9, [v5, v8]
+v23 <- LoadInteger '3'
+v24 <- CallFunction v9, [v8, v5]
+
+
+function Foo(a1) {
+    this.x = a1;
+}
+const v4 = new Foo(1);
+var f = v4;
+const v7 = new Foo(2);
+var g = v7;
+function add(a10, a11) {
+    var name = "x";
+    return a10[name] + a11[name];
+}
+add(f, g);
+add(g, f);
+add(f, g);
+add(g, f);
+
+FuzzIL program written to corpus/unbox-smi-field-indexed.fzil

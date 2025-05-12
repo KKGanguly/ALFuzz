@@ -1,0 +1,149 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginClassDefinition
+        BeginClassInstanceGetter `x` -> v2
+            v3 <- LoadInteger '1'
+            Return v3
+        EndClassInstanceGetter
+    EndClassDefinition
+    v4 <- Construct v1, []
+    v5 <- CreateNamedVariable 'o', 'var', v4
+    v6 <- BeginPlainFunction -> v7
+        BeginTry
+            v8 <- GetProperty v7, 'x'
+            Return v8
+        BeginCatch -> v9
+            v10 <- LoadInteger '0'
+            Return v10
+        EndTryCatch
+    EndPlainFunction
+    v11 <- LoadInteger '1'
+    v12 <- CallFunction v6, [v5]
+    v13 <- LoadInteger '1'
+    v14 <- CallFunction v6, [v5]
+    v15 <- LoadInteger '1'
+    v16 <- CallFunction v6, [v5]
+EndPlainFunction
+v17 <- CallFunction v0, []
+v18 <- BeginPlainFunction -> 
+    v19 <- BeginClassDefinition
+        BeginClassInstanceGetter `x` -> v20
+            v21 <- LoadInteger '1'
+            Return v21
+        EndClassInstanceGetter
+    EndClassDefinition
+    v22 <- Construct v19, []
+    v23 <- CreateNamedVariable 'o', 'var', v22
+    v24 <- BeginPlainFunction -> v25
+        BeginTry
+            v26 <- GetProperty v25, 'x'
+            Return v26
+        BeginCatch -> v27
+            v28 <- LoadInteger '0'
+            Return v28
+        EndTryCatch
+    EndPlainFunction
+    v29 <- LoadInteger '1'
+    v30 <- CallFunction v24, [v23]
+    v31 <- LoadInteger '1'
+    v32 <- CallFunction v24, [v23]
+    v33 <- LoadInteger '1'
+    v34 <- CallFunction v24, [v23]
+EndPlainFunction
+v35 <- CallFunction v18, []
+v36 <- BeginPlainFunction -> 
+    v37 <- BeginPlainFunction -> v38
+        ThrowException v38
+    EndPlainFunction
+    v39 <- BeginClassDefinition
+        BeginClassInstanceGetter `x` -> v40
+            v41 <- LoadString 'x'
+            v42 <- CallFunction v37, [v41]
+            Return v42
+        EndClassInstanceGetter
+    EndClassDefinition
+    v43 <- Construct v39, []
+    v44 <- CreateNamedVariable 'o', 'var', v43
+    v45 <- BeginPlainFunction -> v46
+        BeginTry
+            v47 <- GetProperty v46, 'x'
+            Return v47
+        BeginCatch -> v48
+            v49 <- LoadInteger '0'
+            Return v49
+        EndTryCatch
+    EndPlainFunction
+    v50 <- LoadInteger '0'
+    v51 <- CallFunction v45, [v44]
+    v52 <- LoadInteger '0'
+    v53 <- CallFunction v45, [v44]
+    v54 <- LoadInteger '0'
+    v55 <- CallFunction v45, [v44]
+EndPlainFunction
+v56 <- CallFunction v36, []
+
+
+function f0() {
+    class C1 {
+        get x() {
+            return 1;
+        }
+    }
+    const v4 = new C1();
+    var o = v4;
+    function foo(a7) {
+        try {
+            return a7.x;
+        } catch(e9) {
+            return 0;
+        }
+    }
+    foo(o);
+    foo(o);
+    foo(o);
+}
+f0();
+function f18() {
+    class C19 {
+        get x() {
+            return 1;
+        }
+    }
+    const v22 = new C19();
+    var o = v22;
+    function foo(a25) {
+        try {
+            return a25.x;
+        } catch(e27) {
+            return 0;
+        }
+    }
+    foo(o);
+    foo(o);
+    foo(o);
+}
+f18();
+function f36() {
+    function bar(a38) {
+        throw a38;
+    }
+    class C39 {
+        get x() {
+            return bar("x");
+        }
+    }
+    const v43 = new C39();
+    var o = v43;
+    function foo(a46) {
+        try {
+            return a46.x;
+        } catch(e48) {
+            return 0;
+        }
+    }
+    foo(o);
+    foo(o);
+    foo(o);
+}
+f36();
+
+FuzzIL program written to corpus/inline-accessors1.fzil

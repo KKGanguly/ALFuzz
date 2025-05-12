@@ -1,0 +1,59 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        BeginObjectLiteral
+        v1 <- EndObjectLiteral
+        v2 <- CreateNamedVariable 'Object', 'none'
+        v3 <- CallMethod v2, 'seal', [v1]
+    BeginFinally
+        BeginTry
+            v4 <- LoadInteger '1'
+            v5 <- UnaryOperation '-', v4
+            BeginObjectLiteral
+                BeginObjectLiteralMethod `toString` -> v6
+                EndObjectLiteralMethod
+            v7 <- EndObjectLiteral
+            v8 <- CallMethod v7, 'apply', [v5]
+            v9 <- CallMethod v8, 'x', []
+        BeginFinally
+            v10 <- LoadFloat '2.2'
+            BeginIf v10
+                Return
+            EndIf
+            BeginTry
+                v11 <- CreateNamedVariable 'Reflect', 'none'
+                v12 <- GetProperty v11, 'construct'
+            BeginFinally
+            EndTryCatch
+        EndTryCatch
+    EndTryCatch
+EndPlainFunction
+v13 <- CallFunction v0, []
+v14 <- CallFunction v0, []
+
+
+function opt() {
+    try {
+        Object.seal({});
+    } finally {
+        try {
+            const v5 = -1;
+            const v7 = {
+                toString() {
+                },
+            };
+            v7.apply(v5).x();
+        } finally {
+            if (2.2) {
+                return;
+            }
+            try {
+                Reflect.construct;
+            } finally {
+            }
+        }
+    }
+}
+opt();
+opt();
+
+FuzzIL program written to corpus/regress-crbug-902395.fzil

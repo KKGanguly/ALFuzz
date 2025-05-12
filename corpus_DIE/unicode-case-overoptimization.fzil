@@ -1,0 +1,39 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '128'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '65534'
+    v3 <- Compare v1, '<=', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    v7 <- CreateNamedVariable 'String', 'none'
+    v8 <- CallMethod v7, 'fromCharCode', [v6]
+    v9 <- CreateNamedVariable 'c', 'var', v8
+    v10 <- LoadInteger '1'
+    v11 <- BinaryOperation v6, '+', v10
+    v12 <- CallMethod v7, 'fromCharCode', [v11]
+    v13 <- CreateNamedVariable 'c2', 'var', v12
+    v14 <- CreateNamedVariable 'RegExp', 'none'
+    v15 <- LoadString '['
+    v16 <- BinaryOperation v15, '+', v9
+    v17 <- LoadString '-'
+    v18 <- BinaryOperation v16, '+', v17
+    v19 <- BinaryOperation v18, '+', v13
+    v20 <- LoadString ']'
+    v21 <- BinaryOperation v19, '+', v20
+    v22 <- LoadString 'i'
+    v23 <- Construct v14, [v21, v22]
+    v24 <- CreateNamedVariable 're', 'var', v23
+    v25 <- CallMethod v24, 'test', [v9]
+EndForLoop
+
+
+for (let i1 = 128; i1 <= 65534; i1++) {
+    var c = String.fromCharCode(i1);
+    var c2 = String.fromCharCode(i1 + 1);
+    const v23 = new RegExp(((("[" + c) + "-") + c2) + "]", "i");
+    var re = v23;
+    re.test(c);
+}
+
+FuzzIL program written to corpus/unicode-case-overoptimization.fzil

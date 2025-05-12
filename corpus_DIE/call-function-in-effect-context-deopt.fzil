@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadString 'result'
+    v4 <- CreateNamedVariable 'result', 'var', v3
+    v5 <- LoadInteger '0'
+    v6 <- BinaryOperation v1, '+', v5
+    v7 <- CreateNamedVariable 'dummy', 'var', v6
+    Return v4
+EndPlainFunction
+v8 <- LoadString 'result'
+v9 <- LoadInteger '3'
+v10 <- LoadBoolean 'false'
+v11 <- CallFunction v0, [v9, v10]
+v12 <- LoadString 'result'
+v13 <- LoadInteger '3'
+v14 <- LoadBoolean 'false'
+v15 <- CallFunction v0, [v13, v14]
+v16 <- LoadString 'result'
+v17 <- LoadString 'foo'
+v18 <- LoadBoolean 'true'
+v19 <- CallFunction v0, [v17, v18]
+
+
+function f(a1, a2) {
+    var result = "result";
+    var dummy = a1 + 0;
+    return result;
+}
+f(3, false);
+f(3, false);
+f("foo", true);
+
+FuzzIL program written to corpus/call-function-in-effect-context-deopt.fzil

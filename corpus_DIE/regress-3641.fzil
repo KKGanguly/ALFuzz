@@ -1,0 +1,115 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'asyncAssertsExpected', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- UnaryOperation '++', v1
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5, v6
+    v7 <- CallFunction v5, []
+    v8 <- UnaryOperation '++', v1
+    v9 <- LoadInteger '0'
+    v10 <- CreateNamedVariable 'iterations', 'var', v9
+    v11 <- BeginPlainFunction -> 
+        v12 <- CallFunction v5, []
+        BeginIf v12
+            v13 <- LoadString 'succeeded'
+            v14 <- CreateNamedVariable 'print', 'none'
+            v15 <- CallFunction v14, [v6, v13]
+            v16 <- UnaryOperation '--', v1
+        BeginElse
+            v17 <- UnaryOperation v10, '++'
+            v18 <- LoadInteger '10'
+            v19 <- Compare v17, '<', v18
+            BeginIf v19
+            BeginElse
+                v20 <- LoadString ' FAILED!'
+                v21 <- BinaryOperation v6, '+', v20
+                v22 <- CreateNamedVariable 'print', 'none'
+                v23 <- CallFunction v22, [v21]
+            EndIf
+        EndIf
+    EndPlainFunction
+EndPlainFunction
+v24 <- BeginPlainFunction -> v25
+    v26 <- LoadInteger '0'
+    v27 <- BinaryOperation v25, '||', v26
+    v28 <- CreateNamedVariable 'iteration', 'var', v27
+    v29 <- LoadInteger '0'
+    v30 <- Compare v1, '===', v29
+    BeginIf v30
+    BeginElse
+        v31 <- LoadInteger '10'
+        v32 <- Compare v28, '>', v31
+        BeginIf v32
+        BeginElse
+        EndIf
+    EndIf
+EndPlainFunction
+v33 <- LoadUndefined
+v34 <- CreateNamedVariable 'y', 'var', v33
+v35 <- CreateNamedVariable 'Promise', 'none'
+v36 <- CallMethod v35, 'resolve', []
+v37 <- CreateNamedVariable 'x', 'var', v36
+v38 <- BeginArrowFunction -> 
+    v39 <- LoadBoolean 'true'
+    Reassign v34, v39
+EndArrowFunction
+SetProperty v37, 'then', v38
+v40 <- BeginArrowFunction -> 
+    Return v37
+EndArrowFunction
+v41 <- CallMethod v35, 'resolve', []
+v42 <- CallMethod v41, 'then', [v40]
+v43 <- BeginArrowFunction -> 
+    v44 <- LoadBoolean 'true'
+    v45 <- Compare v34, '===', v44
+    Return v45
+EndArrowFunction
+v46 <- CallFunction v43, []
+v47 <- LoadString 'y === true'
+
+
+var asyncAssertsExpected = 0;
+function assertAsyncRan() {
+    ++asyncAssertsExpected;
+}
+function assertLater(a5, a6) {
+    a5();
+    ++asyncAssertsExpected;
+    var iterations = 0;
+    function runAssertion() {
+        if (a5()) {
+            print(a6, "succeeded");
+            --asyncAssertsExpected;
+        } else {
+            if (iterations++ < 10) {
+            } else {
+                print(a6 + " FAILED!");
+            }
+        }
+    }
+}
+function assertAsyncDone(a25) {
+    var iteration = a25 || 0;
+    if (asyncAssertsExpected === 0) {
+    } else {
+        if (iteration > 10) {
+        } else {
+        }
+    }
+}
+var y;
+var x = Promise.resolve();
+const v38 = () => {
+    y = true;
+};
+x.then = v38;
+const v40 = () => {
+    return x;
+};
+Promise.resolve().then(v40);
+const v43 = () => {
+    return y === true;
+};
+v43();
+
+FuzzIL program written to corpus/regress-3641.fzil

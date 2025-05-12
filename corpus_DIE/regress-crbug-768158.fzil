@@ -1,0 +1,63 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'result', 'var', v1
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `toString` -> v3
+            v4 <- CreateNamedVariable 'v', 'none'
+            Reassign v2, v4
+        EndObjectLiteralMethod
+    v5 <- EndObjectLiteral
+    v6 <- CreateNamedVariable 'dict', 'var', v5
+    v7 <- LoadString 'fontsize'
+    v8 <- LoadString 'sup'
+    v9 <- CreateArray [v7, v8]
+    BeginForOfLoop v9 -> v10
+        v11 <- CreateNamedVariable 'String', 'none'
+        v12 <- GetProperty v11, 'prototype'
+        v13 <- GetComputedProperty v12, v10
+        v14 <- CallMethod v13, 'call', [v6]
+    EndForOfLoop
+EndPlainFunction
+v15 <- CallFunction v0, []
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadUndefined
+    v18 <- CreateNamedVariable 'result', 'var', v17
+    v19 <- BeginPlainFunction -> 
+        v20 <- CreateNamedVariable 'v', 'none'
+        Reassign v18, v20
+    EndPlainFunction
+    v21 <- LoadString 'hello'
+    v22 <- LoadString 'world'
+    v23 <- CreateArray [v21, v22]
+    BeginForOfLoop v23 -> v24
+        v25 <- CallFunction v19, []
+    EndForOfLoop
+EndPlainFunction
+v26 <- CallFunction v16, []
+
+
+function testOriginalRepro() {
+    var result;
+    const v5 = {
+        toString() {
+            result = v;
+        },
+    };
+    var dict = v5;
+    for (const v10 of ["fontsize","sup"]) {
+        String.prototype[v10].call(dict);
+    }
+}
+testOriginalRepro();
+function testSimpler() {
+    var result;
+    function setResult() {
+        result = v;
+    }
+    for (const v24 of ["hello","world"]) {
+        setResult();
+    }
+}
+testSimpler();
+
+FuzzIL program written to corpus/regress-crbug-768158.fzil

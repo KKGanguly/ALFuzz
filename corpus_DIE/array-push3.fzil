@@ -1,0 +1,62 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'array', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- CallMethod v3, 'push', [v4]
+EndPlainFunction
+v6 <- LoadInteger '0'
+v7 <- CallFunction v2, [v1, v6]
+v8 <- LoadInteger '1'
+v9 <- CallFunction v2, [v1, v8]
+v10 <- LoadInteger '2'
+v11 <- CallFunction v2, [v1, v10]
+v12 <- LoadInteger '3'
+v13 <- CallFunction v2, [v1, v12]
+v14 <- LoadInteger '0'
+v15 <- CreateNamedVariable 'v', 'var', v14
+v16 <- CreateNamedVariable 'Array', 'none'
+v17 <- GetProperty v16, 'prototype'
+v18 <- LoadString '4'
+v19 <- BeginPlainFunction -> 
+    v20 <- LoadInteger '100'
+    Return v20
+EndPlainFunction
+v21 <- BeginPlainFunction -> v22
+    Reassign v15, v22
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v19
+    ObjectLiteralAddProperty `set`, v21
+v23 <- EndObjectLiteral
+v24 <- CreateNamedVariable 'Object', 'none'
+v25 <- CallMethod v24, 'defineProperty', [v17, v18, v23]
+v26 <- LoadInteger '4'
+v27 <- CallFunction v2, [v1, v26]
+v28 <- LoadInteger '5'
+v29 <- GetProperty v1, 'length'
+v30 <- LoadInteger '100'
+v31 <- GetElement v1, '4'
+v32 <- LoadInteger '4'
+
+
+var array = [];
+function push(a3, a4) {
+    a3.push(a4);
+}
+push(array, 0);
+push(array, 1);
+push(array, 2);
+push(array, 3);
+var v = 0;
+const v17 = Array.prototype;
+function f19() {
+    return 100;
+}
+function f21(a22) {
+    v = a22;
+}
+Object.defineProperty(v17, "4", { get: f19, set: f21 });
+push(array, 4);
+array.length;
+array[4];
+
+FuzzIL program written to corpus/array-push3.fzil

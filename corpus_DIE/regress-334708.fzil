@@ -1,0 +1,36 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '/', v2
+    v4 <- CreateNamedVariable 'Math', 'none'
+    v5 <- CallMethod v4, 'floor', [v3]
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7, v8
+    v9 <- LoadInteger '1'
+    v10 <- BinaryOperation v7, '+', v9
+    v11 <- LoadInteger '1'
+    v12 <- BinaryOperation v8, '+', v11
+    v13 <- CallFunction v0, [v10, v12]
+    Return v13
+EndPlainFunction
+v14 <- LoadInteger '16'
+v15 <- LoadString '4'
+v16 <- CallFunction v0, [v14, v15]
+v17 <- LoadInteger '64'
+v18 <- LoadInteger '2'
+v19 <- CallFunction v6, [v17, v18]
+v20 <- LoadInteger '64'
+v21 <- LoadInteger '2'
+v22 <- CallFunction v6, [v20, v21]
+
+
+function foo(a1, a2) {
+    return Math.floor(a1 / a2);
+}
+function bar(a7, a8) {
+    return foo(a7 + 1, a8 + 1);
+}
+foo(16, "4");
+bar(64, 2);
+bar(64, 2);
+
+FuzzIL program written to corpus/regress-334708.fzil

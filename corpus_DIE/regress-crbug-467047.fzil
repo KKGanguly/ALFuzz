@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'local_variable', 'var', v2
+    v4 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v5 <- LoadString 'abcd'
+    v6 <- CallMethod v5, 'replace', [v1, v4]
+    v7 <- LoadString 'abcd'
+    v8 <- CreateNamedVariable 'RegExp', 'none'
+    v9 <- GetProperty v8, 'input'
+    v10 <- LoadString 'a'
+    v11 <- GetProperty v8, 'leftContext'
+    v12 <- LoadString 'bc'
+    v13 <- GetProperty v8, 'lastMatch'
+    v14 <- LoadString 'd'
+    v15 <- GetProperty v8, 'rightContext'
+    v16 <- LoadString 'foo'
+    v17 <- LoadRegExp '^bar' ''
+    v18 <- CallFunction v0, [v17]
+EndPlainFunction
+v19 <- BeginPlainFunction -> 
+    v20 <- LoadRegExp '(bc)' ''
+    v21 <- CallFunction v0, [v20]
+EndPlainFunction
+v22 <- CallFunction v19, []
+v23 <- CreateNamedVariable 'RangeError', 'none'
+
+
+function captureMatch(a1) {
+    var local_variable = 0;
+    function f4() {
+    }
+    ("abcd").replace(a1, f4);
+    RegExp.input;
+    RegExp.leftContext;
+    RegExp.lastMatch;
+    RegExp.rightContext;
+    captureMatch(/^bar/);
+}
+function f19() {
+    captureMatch(/(bc)/);
+}
+f19();
+
+FuzzIL program written to corpus/regress-crbug-467047.fzil

@@ -1,0 +1,80 @@
+v0 <- LoadNull
+v1 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v1
+v2 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f4`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'create', [v0, v3]
+v6 <- CreateNamedVariable 'obj4', 'var', v5
+v7 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v7
+v8 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f3`, v8
+v9 <- EndObjectLiteral
+v10 <- CallMethod v4, 'create', [v6, v9]
+v11 <- CreateNamedVariable 'obj3', 'var', v10
+v12 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v12
+v13 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f2`, v13
+v14 <- EndObjectLiteral
+v15 <- CallMethod v4, 'create', [v11, v14]
+v16 <- CreateNamedVariable 'obj2', 'var', v15
+v17 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v17
+v18 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f1`, v18
+v19 <- EndObjectLiteral
+v20 <- CallMethod v4, 'create', [v16, v19]
+v21 <- CreateNamedVariable 'obj1', 'var', v20
+v22 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v22
+v23 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f0`, v23
+v24 <- EndObjectLiteral
+v25 <- CallMethod v4, 'create', [v21, v24]
+v26 <- CreateNamedVariable 'obj0', 'var', v25
+v27 <- BeginPlainFunction -> v28
+    v29 <- GetProperty v28, 'f4'
+    Return v29
+EndPlainFunction
+v30 <- LoadInteger '4'
+v31 <- CallFunction v27, [v26]
+v32 <- LoadInteger '4'
+v33 <- CallFunction v27, [v26]
+v34 <- LoadInteger '4'
+v35 <- CallFunction v27, [v26]
+v36 <- LoadInteger '4'
+v37 <- CallFunction v27, [v26]
+
+
+const v2 = { value: 4 };
+var obj4 = Object.create(null, { f4: v2 });
+const v8 = { value: 3 };
+var obj3 = Object.create(obj4, { f3: v8 });
+const v13 = { value: 2 };
+var obj2 = Object.create(obj3, { f2: v13 });
+const v18 = { value: 1 };
+var obj1 = Object.create(obj2, { f1: v18 });
+const v23 = { value: 0 };
+var obj0 = Object.create(obj1, { f0: v23 });
+function get4(a28) {
+    return a28.f4;
+}
+get4(obj0);
+get4(obj0);
+get4(obj0);
+get4(obj0);
+
+FuzzIL program written to corpus/proto-chain-load.fzil

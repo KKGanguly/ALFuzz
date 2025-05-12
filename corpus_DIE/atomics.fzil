@@ -1,0 +1,2365 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadThis
+    v3 <- GetProperty v2, 'max'
+    v4 <- LoadThis
+    v5 <- GetProperty v4, 'min'
+    v6 <- BinaryOperation v3, '-', v5
+    v7 <- LoadInteger '1'
+    v8 <- BinaryOperation v6, '+', v7
+    v9 <- CreateNamedVariable 'range', 'var', v8
+    BeginWhileLoopHeader
+        v10 <- LoadThis
+        v11 <- GetProperty v10, 'min'
+        v12 <- Compare v1, '<', v11
+    BeginWhileLoopBody v12
+        Update v1, '+', v9
+    EndWhileLoop
+    BeginWhileLoopHeader
+        v13 <- LoadThis
+        v14 <- GetProperty v13, 'max'
+        v15 <- Compare v1, '>', v14
+    BeginWhileLoopBody v15
+        Update v1, '-', v9
+    EndWhileLoop
+    Return v1
+EndPlainFunction
+v16 <- BeginPlainFunction -> v17, v18, v19, v20
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `constr`, v17
+        ObjectLiteralAddProperty `min`, v18
+        ObjectLiteralAddProperty `max`, v19
+    v21 <- EndObjectLiteral
+    v22 <- CreateNamedVariable 'o', 'var', v21
+    v23 <- CallMethod v0, 'bind', [v22]
+    SetProperty v22, 'toRange', v23
+    Return v22
+EndPlainFunction
+v24 <- CreateNamedVariable 'Int8Array', 'none'
+v25 <- LoadInteger '128'
+v26 <- UnaryOperation '-', v25
+v27 <- LoadInteger '127'
+v28 <- CallFunction v16, [v24, v26, v27]
+v29 <- CreateNamedVariable 'Int16Array', 'none'
+v30 <- LoadInteger '32768'
+v31 <- UnaryOperation '-', v30
+v32 <- LoadInteger '32767'
+v33 <- CallFunction v16, [v29, v31, v32]
+v34 <- CreateNamedVariable 'Int32Array', 'none'
+v35 <- LoadInteger '2147483648'
+v36 <- UnaryOperation '-', v35
+v37 <- LoadInteger '2147483647'
+v38 <- CallFunction v16, [v34, v36, v37]
+v39 <- CreateNamedVariable 'Uint8Array', 'none'
+v40 <- LoadInteger '0'
+v41 <- LoadInteger '255'
+v42 <- CallFunction v16, [v39, v40, v41]
+v43 <- CreateNamedVariable 'Uint16Array', 'none'
+v44 <- LoadInteger '0'
+v45 <- LoadInteger '65535'
+v46 <- CallFunction v16, [v43, v44, v45]
+v47 <- CreateNamedVariable 'Uint32Array', 'none'
+v48 <- LoadInteger '0'
+v49 <- LoadInteger '4294967295'
+v50 <- CallFunction v16, [v47, v48, v49]
+v51 <- CreateArray [v28, v33, v38, v42, v46, v50]
+v52 <- CreateNamedVariable 'IntegerTypedArrayConstructors', 'var', v51
+v53 <- BeginPlainFunction -> 
+    v54 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v55 <- LoadInteger '16'
+    v56 <- Construct v54, [v55]
+    v57 <- CreateNamedVariable 'ab', 'var', v56
+    v58 <- LoadInteger '16'
+    v59 <- Construct v47, [v58]
+    v60 <- CreateNamedVariable 'u32a', 'var', v59
+    v61 <- CreateNamedVariable 'Array', 'none'
+    v62 <- LoadInteger '128'
+    v63 <- Construct v61, [v62]
+    v64 <- CreateNamedVariable 'sab', 'var', v63
+    v65 <- CreateNamedVariable 'Float32Array', 'none'
+    v66 <- Construct v65, [v64]
+    v67 <- CreateNamedVariable 'sf32a', 'var', v66
+    v68 <- CreateNamedVariable 'Float64Array', 'none'
+    v69 <- Construct v68, [v64]
+    v70 <- CreateNamedVariable 'sf64a', 'var', v69
+    v71 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+    v72 <- Construct v71, [v64]
+    v73 <- CreateNamedVariable 'u8ca', 'var', v72
+    v74 <- LoadUndefined
+    v75 <- LoadInteger '1'
+    v76 <- LoadString 'hi'
+    v77 <- LoadFloat '3.4'
+    v78 <- CreateArray [v74, v75, v76, v77, v57, v60, v64, v67, v70, v73]
+    v79 <- CreateNamedVariable 'badArrayTypes', 'var', v78
+    v80 <- BeginPlainFunction -> v81
+        v82 <- BeginPlainFunction -> 
+            v83 <- LoadInteger '0'
+            v84 <- LoadInteger '0'
+            v85 <- LoadInteger '0'
+            v86 <- CreateNamedVariable 'Atomics', 'none'
+            v87 <- CallMethod v86, 'compareExchange', [v81, v83, v84, v85]
+        EndPlainFunction
+        v88 <- CallFunction v82, []
+        v89 <- CreateNamedVariable 'TypeError', 'none'
+        v90 <- BeginPlainFunction -> 
+            v91 <- LoadInteger '0'
+            v92 <- CreateNamedVariable 'Atomics', 'none'
+            v93 <- CallMethod v92, 'load', [v81, v91]
+        EndPlainFunction
+        v94 <- CallFunction v90, []
+        v95 <- BeginPlainFunction -> 
+            v96 <- LoadInteger '0'
+            v97 <- LoadInteger '0'
+            v98 <- CreateNamedVariable 'Atomics', 'none'
+            v99 <- CallMethod v98, 'store', [v81, v96, v97]
+        EndPlainFunction
+        v100 <- CallFunction v95, []
+        v101 <- BeginPlainFunction -> 
+            v102 <- LoadInteger '0'
+            v103 <- LoadInteger '0'
+            v104 <- CreateNamedVariable 'Atomics', 'none'
+            v105 <- CallMethod v104, 'add', [v81, v102, v103]
+        EndPlainFunction
+        v106 <- CallFunction v101, []
+        v107 <- BeginPlainFunction -> 
+            v108 <- LoadInteger '0'
+            v109 <- LoadInteger '0'
+            v110 <- CreateNamedVariable 'Atomics', 'none'
+            v111 <- CallMethod v110, 'sub', [v81, v108, v109]
+        EndPlainFunction
+        v112 <- CallFunction v107, []
+        v113 <- BeginPlainFunction -> 
+            v114 <- LoadInteger '0'
+            v115 <- LoadInteger '0'
+            v116 <- CreateNamedVariable 'Atomics', 'none'
+            v117 <- CallMethod v116, 'and', [v81, v114, v115]
+        EndPlainFunction
+        v118 <- CallFunction v113, []
+        v119 <- BeginPlainFunction -> 
+            v120 <- LoadInteger '0'
+            v121 <- LoadInteger '0'
+            v122 <- CreateNamedVariable 'Atomics', 'none'
+            v123 <- CallMethod v122, 'or', [v81, v120, v121]
+        EndPlainFunction
+        v124 <- CallFunction v119, []
+        v125 <- BeginPlainFunction -> 
+            v126 <- LoadInteger '0'
+            v127 <- LoadInteger '0'
+            v128 <- CreateNamedVariable 'Atomics', 'none'
+            v129 <- CallMethod v128, 'xor', [v81, v126, v127]
+        EndPlainFunction
+        v130 <- CallFunction v125, []
+        v131 <- BeginPlainFunction -> 
+            v132 <- LoadInteger '0'
+            v133 <- LoadInteger '0'
+            v134 <- CreateNamedVariable 'Atomics', 'none'
+            v135 <- CallMethod v134, 'exchange', [v81, v132, v133]
+        EndPlainFunction
+        v136 <- CallFunction v131, []
+    EndPlainFunction
+    v137 <- CallMethod v79, 'forEach', [v80]
+EndPlainFunction
+v138 <- CallFunction v53, []
+v139 <- BeginPlainFunction -> 
+    v140 <- CreateNamedVariable 'Array', 'none'
+    v141 <- LoadInteger '8'
+    v142 <- Construct v140, [v141]
+    v143 <- CreateNamedVariable 'sab', 'var', v142
+    v144 <- Construct v34, [v143]
+    v145 <- CreateNamedVariable 'si32a', 'var', v144
+    v146 <- LoadInteger '4'
+    v147 <- Construct v34, [v143, v146]
+    v148 <- CreateNamedVariable 'si32a2', 'var', v147
+    v149 <- BeginPlainFunction -> v150
+        v151 <- BeginPlainFunction -> 
+            v152 <- LoadInteger '0'
+            v153 <- CreateNamedVariable 'Atomics', 'none'
+            v154 <- CallMethod v153, 'compareExchange', [v145, v150, v152]
+        EndPlainFunction
+        v155 <- CallFunction v151, []
+        v156 <- CreateNamedVariable 'RangeError', 'none'
+        v157 <- BeginPlainFunction -> 
+            v158 <- LoadInteger '0'
+            v159 <- CreateNamedVariable 'Atomics', 'none'
+            v160 <- CallMethod v159, 'load', [v145, v150, v158]
+        EndPlainFunction
+        v161 <- CallFunction v157, []
+        v162 <- BeginPlainFunction -> 
+            v163 <- LoadInteger '0'
+            v164 <- CreateNamedVariable 'Atomics', 'none'
+            v165 <- CallMethod v164, 'store', [v145, v150, v163]
+        EndPlainFunction
+        v166 <- CallFunction v162, []
+        v167 <- BeginPlainFunction -> 
+            v168 <- LoadInteger '0'
+            v169 <- CreateNamedVariable 'Atomics', 'none'
+            v170 <- CallMethod v169, 'add', [v145, v150, v168]
+        EndPlainFunction
+        v171 <- CallFunction v167, []
+        v172 <- BeginPlainFunction -> 
+            v173 <- LoadInteger '0'
+            v174 <- CreateNamedVariable 'Atomics', 'none'
+            v175 <- CallMethod v174, 'sub', [v145, v150, v173]
+        EndPlainFunction
+        v176 <- CallFunction v172, []
+        v177 <- BeginPlainFunction -> 
+            v178 <- LoadInteger '0'
+            v179 <- CreateNamedVariable 'Atomics', 'none'
+            v180 <- CallMethod v179, 'and', [v145, v150, v178]
+        EndPlainFunction
+        v181 <- CallFunction v177, []
+        v182 <- BeginPlainFunction -> 
+            v183 <- LoadInteger '0'
+            v184 <- CreateNamedVariable 'Atomics', 'none'
+            v185 <- CallMethod v184, 'or', [v145, v150, v183]
+        EndPlainFunction
+        v186 <- CallFunction v182, []
+        v187 <- BeginPlainFunction -> 
+            v188 <- LoadInteger '0'
+            v189 <- CreateNamedVariable 'Atomics', 'none'
+            v190 <- CallMethod v189, 'xor', [v145, v150, v188]
+        EndPlainFunction
+        v191 <- CallFunction v187, []
+        v192 <- BeginPlainFunction -> 
+            v193 <- LoadInteger '0'
+            v194 <- CreateNamedVariable 'Atomics', 'none'
+            v195 <- CallMethod v194, 'exchange', [v145, v150, v193]
+        EndPlainFunction
+        v196 <- CallFunction v192, []
+    EndPlainFunction
+    v197 <- CreateNamedVariable 'RangeError', 'none'
+    v198 <- CreateNamedVariable 'Infinity', 'none'
+    v199 <- UnaryOperation '-', v198
+    v200 <- CreateArray [v199, v198]
+    v201 <- CallMethod v200, 'forEach', [v149, v197]
+    v202 <- BeginPlainFunction -> v203
+        v204 <- BeginPlainFunction -> 
+            v205 <- LoadInteger '0'
+            v206 <- LoadInteger '0'
+            v207 <- CreateNamedVariable 'Atomics', 'none'
+            v208 <- CallMethod v207, 'compareExchange', [v145, v203, v205, v206]
+        EndPlainFunction
+        v209 <- CallFunction v204, []
+        v210 <- BeginPlainFunction -> 
+            v211 <- CreateNamedVariable 'Atomics', 'none'
+            v212 <- CallMethod v211, 'load', [v145, v203]
+        EndPlainFunction
+        v213 <- CallFunction v210, []
+        v214 <- BeginPlainFunction -> 
+            v215 <- LoadInteger '0'
+            v216 <- CreateNamedVariable 'Atomics', 'none'
+            v217 <- CallMethod v216, 'store', [v145, v203, v215]
+        EndPlainFunction
+        v218 <- CallFunction v214, []
+        v219 <- BeginPlainFunction -> 
+            v220 <- LoadInteger '0'
+            v221 <- CreateNamedVariable 'Atomics', 'none'
+            v222 <- CallMethod v221, 'add', [v145, v203, v220]
+        EndPlainFunction
+        v223 <- CallFunction v219, []
+        v224 <- BeginPlainFunction -> 
+            v225 <- LoadInteger '0'
+            v226 <- CreateNamedVariable 'Atomics', 'none'
+            v227 <- CallMethod v226, 'sub', [v145, v203, v225]
+        EndPlainFunction
+        v228 <- CallFunction v224, []
+        v229 <- BeginPlainFunction -> 
+            v230 <- LoadInteger '0'
+            v231 <- CreateNamedVariable 'Atomics', 'none'
+            v232 <- CallMethod v231, 'and', [v145, v203, v230]
+        EndPlainFunction
+        v233 <- CallFunction v229, []
+        v234 <- BeginPlainFunction -> 
+            v235 <- LoadInteger '0'
+            v236 <- CreateNamedVariable 'Atomics', 'none'
+            v237 <- CallMethod v236, 'or', [v145, v203, v235]
+        EndPlainFunction
+        v238 <- CallFunction v234, []
+        v239 <- BeginPlainFunction -> 
+            v240 <- LoadInteger '0'
+            v241 <- CreateNamedVariable 'Atomics', 'none'
+            v242 <- CallMethod v241, 'xor', [v145, v203, v240]
+        EndPlainFunction
+        v243 <- CallFunction v239, []
+        v244 <- BeginPlainFunction -> 
+            v245 <- LoadInteger '0'
+            v246 <- CreateNamedVariable 'Atomics', 'none'
+            v247 <- CallMethod v246, 'exchange', [v145, v203, v245]
+        EndPlainFunction
+        v248 <- CallFunction v244, []
+    EndPlainFunction
+    v249 <- LoadInteger '1'
+    v250 <- UnaryOperation '-', v249
+    v251 <- LoadInteger '2'
+    v252 <- LoadInteger '100'
+    v253 <- CreateArray [v250, v251, v252]
+    v254 <- CallMethod v253, 'forEach', [v202, v197]
+    v255 <- BeginPlainFunction -> v256
+        v257 <- BeginPlainFunction -> 
+            v258 <- LoadInteger '0'
+            v259 <- LoadInteger '0'
+            v260 <- CreateNamedVariable 'Atomics', 'none'
+            v261 <- CallMethod v260, 'compareExchange', [v148, v256, v258, v259]
+        EndPlainFunction
+        v262 <- CallFunction v257, []
+        v263 <- BeginPlainFunction -> 
+            v264 <- CreateNamedVariable 'Atomics', 'none'
+            v265 <- CallMethod v264, 'load', [v148, v256]
+        EndPlainFunction
+        v266 <- CallFunction v263, []
+        v267 <- BeginPlainFunction -> 
+            v268 <- LoadInteger '0'
+            v269 <- CreateNamedVariable 'Atomics', 'none'
+            v270 <- CallMethod v269, 'store', [v148, v256, v268]
+        EndPlainFunction
+        v271 <- CallFunction v267, []
+        v272 <- BeginPlainFunction -> 
+            v273 <- LoadInteger '0'
+            v274 <- CreateNamedVariable 'Atomics', 'none'
+            v275 <- CallMethod v274, 'add', [v148, v256, v273]
+        EndPlainFunction
+        v276 <- CallFunction v272, []
+        v277 <- BeginPlainFunction -> 
+            v278 <- LoadInteger '0'
+            v279 <- CreateNamedVariable 'Atomics', 'none'
+            v280 <- CallMethod v279, 'sub', [v148, v256, v278]
+        EndPlainFunction
+        v281 <- CallFunction v277, []
+        v282 <- BeginPlainFunction -> 
+            v283 <- LoadInteger '0'
+            v284 <- CreateNamedVariable 'Atomics', 'none'
+            v285 <- CallMethod v284, 'and', [v148, v256, v283]
+        EndPlainFunction
+        v286 <- CallFunction v282, []
+        v287 <- BeginPlainFunction -> 
+            v288 <- LoadInteger '0'
+            v289 <- CreateNamedVariable 'Atomics', 'none'
+            v290 <- CallMethod v289, 'or', [v148, v256, v288]
+        EndPlainFunction
+        v291 <- CallFunction v287, []
+        v292 <- BeginPlainFunction -> 
+            v293 <- LoadInteger '0'
+            v294 <- CreateNamedVariable 'Atomics', 'none'
+            v295 <- CallMethod v294, 'xor', [v148, v256, v293]
+        EndPlainFunction
+        v296 <- CallFunction v292, []
+        v297 <- BeginPlainFunction -> 
+            v298 <- LoadInteger '0'
+            v299 <- CreateNamedVariable 'Atomics', 'none'
+            v300 <- CallMethod v299, 'exchange', [v148, v256, v298]
+        EndPlainFunction
+        v301 <- CallFunction v297, []
+    EndPlainFunction
+    v302 <- LoadInteger '1'
+    v303 <- UnaryOperation '-', v302
+    v304 <- LoadInteger '1'
+    v305 <- LoadInteger '100'
+    v306 <- CreateArray [v303, v304, v305]
+    v307 <- CallMethod v306, 'forEach', [v255]
+    v308 <- LoadString 'length'
+    v309 <- BeginPlainFunction -> 
+        v310 <- LoadInteger '1000'
+        Return v310
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v309
+    v311 <- EndObjectLiteral
+    v312 <- CreateNamedVariable 'Object', 'none'
+    v313 <- CallMethod v312, 'defineProperty', [v145, v308, v311]
+    v314 <- BeginPlainFunction -> v315
+        v316 <- BeginPlainFunction -> 
+            v317 <- LoadInteger '0'
+            v318 <- LoadInteger '0'
+            v319 <- CreateNamedVariable 'Atomics', 'none'
+            v320 <- CallMethod v319, 'compareExchange', [v145, v315, v317, v318]
+        EndPlainFunction
+        v321 <- CallFunction v316, []
+        v322 <- BeginPlainFunction -> 
+            v323 <- CreateNamedVariable 'Atomics', 'none'
+            v324 <- CallMethod v323, 'load', [v145, v315]
+        EndPlainFunction
+        v325 <- CallFunction v322, []
+        v326 <- BeginPlainFunction -> 
+            v327 <- LoadInteger '0'
+            v328 <- CreateNamedVariable 'Atomics', 'none'
+            v329 <- CallMethod v328, 'store', [v145, v315, v327]
+        EndPlainFunction
+        v330 <- CallFunction v326, []
+        v331 <- BeginPlainFunction -> 
+            v332 <- LoadInteger '0'
+            v333 <- CreateNamedVariable 'Atomics', 'none'
+            v334 <- CallMethod v333, 'add', [v145, v315, v332]
+        EndPlainFunction
+        v335 <- CallFunction v331, []
+        v336 <- BeginPlainFunction -> 
+            v337 <- LoadInteger '0'
+            v338 <- CreateNamedVariable 'Atomics', 'none'
+            v339 <- CallMethod v338, 'sub', [v145, v315, v337]
+        EndPlainFunction
+        v340 <- CallFunction v336, []
+        v341 <- BeginPlainFunction -> 
+            v342 <- LoadInteger '0'
+            v343 <- CreateNamedVariable 'Atomics', 'none'
+            v344 <- CallMethod v343, 'and', [v145, v315, v342]
+        EndPlainFunction
+        v345 <- CallFunction v341, []
+        v346 <- BeginPlainFunction -> 
+            v347 <- LoadInteger '0'
+            v348 <- CreateNamedVariable 'Atomics', 'none'
+            v349 <- CallMethod v348, 'or', [v145, v315, v347]
+        EndPlainFunction
+        v350 <- CallFunction v346, []
+        v351 <- BeginPlainFunction -> 
+            v352 <- LoadInteger '0'
+            v353 <- CreateNamedVariable 'Atomics', 'none'
+            v354 <- CallMethod v353, 'xor', [v145, v315, v352]
+        EndPlainFunction
+        v355 <- CallFunction v351, []
+        v356 <- BeginPlainFunction -> 
+            v357 <- LoadInteger '0'
+            v358 <- CreateNamedVariable 'Atomics', 'none'
+            v359 <- CallMethod v358, 'exchange', [v145, v315, v357]
+        EndPlainFunction
+        v360 <- CallFunction v356, []
+    EndPlainFunction
+    v361 <- LoadInteger '2'
+    v362 <- LoadInteger '100'
+    v363 <- CreateArray [v361, v362]
+    v364 <- CallMethod v363, 'forEach', [v314]
+EndPlainFunction
+v365 <- CallFunction v139, []
+v366 <- BeginPlainFunction -> 
+    v367 <- CreateNamedVariable 'Array', 'none'
+    v368 <- LoadInteger '64'
+    v369 <- Construct v367, [v368]
+    v370 <- CreateNamedVariable 'sab', 'var', v369
+    v371 <- Construct v34, [v370]
+    v372 <- CreateNamedVariable 'si32a', 'var', v371
+    v373 <- LoadInteger '32'
+    v374 <- Construct v34, [v370, v373]
+    v375 <- CreateNamedVariable 'si32a2', 'var', v374
+    v376 <- BeginPlainFunction -> v377, v378, v379, v380, v381
+        BeginForLoopInitializer
+            v382 <- LoadInteger '0'
+        BeginForLoopCondition -> v383
+            v384 <- GetProperty v378, 'length'
+            v385 <- Compare v383, '<', v384
+        BeginForLoopAfterthought v385 -> v386
+            v387 <- UnaryOperation '++', v386
+        BeginForLoopBody -> v388
+            v389 <- LoadInteger '2'
+            v390 <- BinaryOperation v388, '*', v389
+            SetComputedProperty v378, v388, v390
+        EndForLoop
+        v391 <- LoadInteger '0'
+        SetComputedProperty v378, v380, v391
+        v392 <- LoadInteger '0'
+        v393 <- LoadInteger '0'
+        v394 <- CallFunction v377, [v378, v379, v392, v393]
+        v395 <- CreateNamedVariable 'result', 'var', v394
+        v396 <- LoadInteger '0'
+        v397 <- LoadInteger '0'
+        v398 <- GetComputedProperty v378, v380
+        BeginForLoopInitializer
+            v399 <- LoadInteger '0'
+        BeginForLoopCondition -> v400
+            v401 <- GetProperty v378, 'length'
+            v402 <- Compare v400, '<', v401
+        BeginForLoopAfterthought v402 -> v403
+            v404 <- UnaryOperation '++', v403
+        BeginForLoopBody -> v405
+            v406 <- Compare v405, '==', v380
+            BeginIf v406
+                Continue
+            EndIf
+            v407 <- LoadInteger '2'
+            v408 <- BinaryOperation v405, '*', v407
+            v409 <- GetComputedProperty v378, v405
+        EndForLoop
+    EndPlainFunction
+    v410 <- CreateNamedVariable 'testOp', 'var', v376
+    v411 <- BeginPlainFunction -> v412
+        v413 <- CreateNamedVariable 'String', 'none'
+        v414 <- CallFunction v413, [v412]
+        v415 <- CreateNamedVariable 'name', 'var', v414
+        v416 <- BeginPlainFunction -> v417
+            v418 <- CreateNamedVariable 'Atomics', 'none'
+            v419 <- GetProperty v418, 'compareExchange'
+            v420 <- LoadInteger '0'
+            v421 <- CallFunction v410, [v419, v417, v412, v420, v415]
+            v422 <- GetProperty v418, 'load'
+            v423 <- LoadInteger '0'
+            v424 <- CallFunction v410, [v422, v417, v412, v423, v415]
+            v425 <- GetProperty v418, 'store'
+            v426 <- LoadInteger '0'
+            v427 <- CallFunction v410, [v425, v417, v412, v426, v415]
+            v428 <- GetProperty v418, 'add'
+            v429 <- LoadInteger '0'
+            v430 <- CallFunction v410, [v428, v417, v412, v429, v415]
+            v431 <- GetProperty v418, 'sub'
+            v432 <- LoadInteger '0'
+            v433 <- CallFunction v410, [v431, v417, v412, v432, v415]
+            v434 <- GetProperty v418, 'and'
+            v435 <- LoadInteger '0'
+            v436 <- CallFunction v410, [v434, v417, v412, v435, v415]
+            v437 <- GetProperty v418, 'or'
+            v438 <- LoadInteger '0'
+            v439 <- CallFunction v410, [v437, v417, v412, v438, v415]
+            v440 <- GetProperty v418, 'xor'
+            v441 <- LoadInteger '0'
+            v442 <- CallFunction v410, [v440, v417, v412, v441, v415]
+            v443 <- GetProperty v418, 'exchange'
+            v444 <- LoadInteger '0'
+            v445 <- CallFunction v410, [v443, v417, v412, v444, v415]
+        EndPlainFunction
+        v446 <- CreateArray [v372, v375]
+        v447 <- CallMethod v446, 'forEach', [v416]
+    EndPlainFunction
+    v448 <- LoadInteger '0'
+    v449 <- UnaryOperation '-', v448
+    v450 <- LoadInteger '0'
+    v451 <- LoadInteger '0'
+    v452 <- LoadNull
+    v453 <- LoadBoolean 'false'
+    v454 <- CreateNamedVariable 'NaN', 'none'
+    BeginObjectLiteral
+    v455 <- EndObjectLiteral
+    v456 <- LoadString '0.2'
+    v457 <- LoadString 'hi'
+    v458 <- LoadUndefined
+    v459 <- CreateArray [v449, v450, v451, v452, v453, v454, v455, v456, v457, v458]
+    v460 <- CallMethod v459, 'forEach', [v411]
+    v461 <- BeginPlainFunction -> 
+        v462 <- LoadInteger '3'
+        Return v462
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v461
+    v463 <- EndObjectLiteral
+    v464 <- CreateNamedVariable 'valueOf', 'var', v463
+    v465 <- BeginPlainFunction -> 
+        v466 <- LoadString '3'
+        Return v466
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toString`, v465
+    v467 <- EndObjectLiteral
+    v468 <- CreateNamedVariable 'toString', 'var', v467
+    v469 <- BeginPlainFunction -> v470
+        v471 <- CreateNamedVariable 'String', 'none'
+        v472 <- CallFunction v471, [v470]
+        v473 <- CreateNamedVariable 'name', 'var', v472
+        v474 <- BeginPlainFunction -> v475
+            v476 <- CreateNamedVariable 'Atomics', 'none'
+            v477 <- GetProperty v476, 'compareExchange'
+            v478 <- LoadInteger '3'
+            v479 <- CallFunction v410, [v477, v475, v470, v478, v473]
+            v480 <- GetProperty v476, 'load'
+            v481 <- LoadInteger '3'
+            v482 <- CallFunction v410, [v480, v475, v470, v481, v473]
+            v483 <- GetProperty v476, 'store'
+            v484 <- LoadInteger '3'
+            v485 <- CallFunction v410, [v483, v475, v470, v484, v473]
+            v486 <- GetProperty v476, 'add'
+            v487 <- LoadInteger '3'
+            v488 <- CallFunction v410, [v486, v475, v470, v487, v473]
+            v489 <- GetProperty v476, 'sub'
+            v490 <- LoadInteger '3'
+            v491 <- CallFunction v410, [v489, v475, v470, v490, v473]
+            v492 <- GetProperty v476, 'and'
+            v493 <- LoadInteger '3'
+            v494 <- CallFunction v410, [v492, v475, v470, v493, v473]
+            v495 <- GetProperty v476, 'or'
+            v496 <- LoadInteger '3'
+            v497 <- CallFunction v410, [v495, v475, v470, v496, v473]
+            v498 <- GetProperty v476, 'xor'
+            v499 <- LoadInteger '3'
+            v500 <- CallFunction v410, [v498, v475, v470, v499, v473]
+            v501 <- GetProperty v476, 'exchange'
+            v502 <- LoadInteger '3'
+            v503 <- CallFunction v410, [v501, v475, v470, v502, v473]
+        EndPlainFunction
+        v504 <- CreateArray [v372, v375]
+        v505 <- CallMethod v504, 'forEach', [v474]
+    EndPlainFunction
+    v506 <- LoadInteger '3'
+    v507 <- LoadInteger '3'
+    v508 <- LoadString '3'
+    v509 <- LoadString '3.0'
+    v510 <- CreateArray [v506, v507, v508, v509, v464, v468]
+    v511 <- CallMethod v510, 'forEach', [v469]
+EndPlainFunction
+v512 <- CallFunction v366, []
+v513 <- BeginPlainFunction -> v514
+    v515 <- Construct v39, [v514]
+    v516 <- CreateNamedVariable 'ui8', 'var', v515
+    BeginForLoopInitializer
+        v517 <- LoadInteger '0'
+    BeginForLoopCondition -> v518
+        v519 <- GetProperty v514, 'byteLength'
+        v520 <- Compare v518, '<', v519
+    BeginForLoopAfterthought v520 -> v521
+        v522 <- UnaryOperation '++', v521
+    BeginForLoopBody -> v523
+        v524 <- LoadInteger '0'
+        SetComputedProperty v516, v523, v524
+    EndForLoop
+EndPlainFunction
+v525 <- BeginPlainFunction -> 
+    v526 <- BeginPlainFunction -> v527
+        v528 <- CreateNamedVariable 'Array', 'none'
+        v529 <- LoadInteger '10'
+        v530 <- GetProperty v527, 'constr'
+        v531 <- GetProperty v530, 'BYTES_PER_ELEMENT'
+        v532 <- BinaryOperation v529, '*', v531
+        v533 <- Construct v528, [v532]
+        v534 <- CreateNamedVariable 'sab', 'var', v533
+        v535 <- GetProperty v527, 'constr'
+        v536 <- Construct v535, [v534]
+        v537 <- CreateNamedVariable 'sta', 'var', v536
+        v538 <- GetProperty v527, 'constr'
+        v539 <- LoadInteger '5'
+        v540 <- GetProperty v527, 'constr'
+        v541 <- GetProperty v540, 'BYTES_PER_ELEMENT'
+        v542 <- BinaryOperation v539, '*', v541
+        v543 <- Construct v538, [v534, v542]
+        v544 <- CreateNamedVariable 'sta2', 'var', v543
+        v545 <- BeginPlainFunction -> v546
+            v547 <- GetProperty v546, 'buffer'
+            v548 <- CallFunction v513, [v547]
+            v549 <- CreateNamedVariable 'Object', 'none'
+            v550 <- GetProperty v549, 'prototype'
+            v551 <- GetProperty v550, 'toString'
+            v552 <- CallMethod v551, 'call', [v546]
+            v553 <- CreateNamedVariable 'name', 'var', v552
+            BeginForLoopInitializer
+                v554 <- LoadInteger '0'
+            BeginForLoopCondition -> v555
+                v556 <- GetProperty v546, 'length'
+                v557 <- Compare v555, '<', v556
+            BeginForLoopAfterthought v557 -> v558
+                v559 <- UnaryOperation '++', v558
+            BeginForLoopBody -> v560
+                v561 <- LoadInteger '0'
+                v562 <- LoadInteger '0'
+                v563 <- LoadInteger '50'
+                v564 <- CreateNamedVariable 'Atomics', 'none'
+                v565 <- CallMethod v564, 'compareExchange', [v546, v560, v562, v563]
+                v566 <- LoadInteger '50'
+                v567 <- GetComputedProperty v546, v560
+                v568 <- LoadInteger '50'
+                v569 <- LoadInteger '0'
+                v570 <- LoadInteger '100'
+                v571 <- CallMethod v564, 'compareExchange', [v546, v560, v569, v570]
+                v572 <- LoadInteger '50'
+                v573 <- GetComputedProperty v546, v560
+            EndForLoop
+        EndPlainFunction
+        v574 <- CreateArray [v537, v544]
+        v575 <- CallMethod v574, 'forEach', [v545]
+    EndPlainFunction
+    v576 <- CallMethod v52, 'forEach', [v526]
+EndPlainFunction
+v577 <- CallFunction v525, []
+v578 <- BeginPlainFunction -> 
+    v579 <- BeginPlainFunction -> v580
+        v581 <- CreateNamedVariable 'Array', 'none'
+        v582 <- LoadInteger '10'
+        v583 <- GetProperty v580, 'constr'
+        v584 <- GetProperty v583, 'BYTES_PER_ELEMENT'
+        v585 <- BinaryOperation v582, '*', v584
+        v586 <- Construct v581, [v585]
+        v587 <- CreateNamedVariable 'sab', 'var', v586
+        v588 <- GetProperty v580, 'constr'
+        v589 <- Construct v588, [v587]
+        v590 <- CreateNamedVariable 'sta', 'var', v589
+        v591 <- GetProperty v580, 'constr'
+        v592 <- LoadInteger '5'
+        v593 <- GetProperty v580, 'constr'
+        v594 <- GetProperty v593, 'BYTES_PER_ELEMENT'
+        v595 <- BinaryOperation v592, '*', v594
+        v596 <- Construct v591, [v587, v595]
+        v597 <- CreateNamedVariable 'sta2', 'var', v596
+        v598 <- BeginPlainFunction -> v599
+            v600 <- GetProperty v599, 'buffer'
+            v601 <- CallFunction v513, [v600]
+            v602 <- CreateNamedVariable 'Object', 'none'
+            v603 <- GetProperty v602, 'prototype'
+            v604 <- GetProperty v603, 'toString'
+            v605 <- CallMethod v604, 'call', [v599]
+            v606 <- CreateNamedVariable 'name', 'var', v605
+            BeginForLoopInitializer
+                v607 <- LoadInteger '0'
+            BeginForLoopCondition -> v608
+                v609 <- GetProperty v599, 'length'
+                v610 <- Compare v608, '<', v609
+            BeginForLoopAfterthought v610 -> v611
+                v612 <- UnaryOperation '++', v611
+            BeginForLoopBody -> v613
+                v614 <- LoadInteger '0'
+                SetComputedProperty v599, v613, v614
+                v615 <- LoadInteger '0'
+                v616 <- CreateNamedVariable 'Atomics', 'none'
+                v617 <- CallMethod v616, 'load', [v599, v613]
+                v618 <- LoadInteger '50'
+                SetComputedProperty v599, v613, v618
+                v619 <- LoadInteger '50'
+                v620 <- CallMethod v616, 'load', [v599, v613]
+            EndForLoop
+        EndPlainFunction
+        v621 <- CreateArray [v590, v597]
+        v622 <- CallMethod v621, 'forEach', [v598]
+    EndPlainFunction
+    v623 <- CallMethod v52, 'forEach', [v579]
+    v624 <- BeginPlainFunction -> 
+        v625 <- CreateNamedVariable 'Array', 'none'
+        v626 <- LoadInteger '4'
+        v627 <- Construct v625, [v626]
+        v628 <- CreateNamedVariable 'sab', 'var', v627
+        v629 <- Construct v34, [v628]
+        v630 <- CreateNamedVariable 'i32', 'var', v629
+        v631 <- Construct v47, [v628]
+        v632 <- CreateNamedVariable 'u32', 'var', v631
+        v633 <- BeginPlainFunction -> v634, v635
+            SetElement v632, '0', v635
+            v636 <- LoadInteger '0'
+            v637 <- CreateNamedVariable 'Atomics', 'none'
+            v638 <- CallMethod v637, 'load', [v632, v636]
+            v639 <- LoadInteger '0'
+            v640 <- CallMethod v637, 'load', [v630, v639]
+        EndPlainFunction
+        v641 <- LoadInteger '1073741823'
+        v642 <- LoadInteger '1073741823'
+        v643 <- CallFunction v633, [v641, v642]
+        v644 <- LoadInteger '1073741824'
+        v645 <- LoadInteger '1073741824'
+        v646 <- CallFunction v633, [v644, v645]
+        v647 <- LoadInteger '2147483648'
+        v648 <- LoadInteger '2147483648'
+        v649 <- UnaryOperation '-', v648
+        v650 <- CallFunction v633, [v647, v649]
+        v651 <- LoadInteger '4294967295'
+        v652 <- LoadInteger '1'
+        v653 <- UnaryOperation '-', v652
+        v654 <- CallFunction v633, [v651, v653]
+    EndPlainFunction
+EndPlainFunction
+v655 <- CallFunction v578, []
+v656 <- BeginPlainFunction -> 
+    v657 <- BeginPlainFunction -> v658
+        v659 <- CreateNamedVariable 'Array', 'none'
+        v660 <- LoadInteger '10'
+        v661 <- GetProperty v658, 'constr'
+        v662 <- GetProperty v661, 'BYTES_PER_ELEMENT'
+        v663 <- BinaryOperation v660, '*', v662
+        v664 <- Construct v659, [v663]
+        v665 <- CreateNamedVariable 'sab', 'var', v664
+        v666 <- GetProperty v658, 'constr'
+        v667 <- Construct v666, [v665]
+        v668 <- CreateNamedVariable 'sta', 'var', v667
+        v669 <- GetProperty v658, 'constr'
+        v670 <- LoadInteger '5'
+        v671 <- GetProperty v658, 'constr'
+        v672 <- GetProperty v671, 'BYTES_PER_ELEMENT'
+        v673 <- BinaryOperation v670, '*', v672
+        v674 <- Construct v669, [v665, v673]
+        v675 <- CreateNamedVariable 'sta2', 'var', v674
+        v676 <- BeginPlainFunction -> v677
+            v678 <- GetProperty v677, 'buffer'
+            v679 <- CallFunction v513, [v678]
+            v680 <- CreateNamedVariable 'Object', 'none'
+            v681 <- GetProperty v680, 'prototype'
+            v682 <- GetProperty v681, 'toString'
+            v683 <- CallMethod v682, 'call', [v677]
+            v684 <- CreateNamedVariable 'name', 'var', v683
+            BeginForLoopInitializer
+                v685 <- LoadInteger '0'
+            BeginForLoopCondition -> v686
+                v687 <- GetProperty v677, 'length'
+                v688 <- Compare v686, '<', v687
+            BeginForLoopAfterthought v688 -> v689
+                v690 <- UnaryOperation '++', v689
+            BeginForLoopBody -> v691
+                v692 <- LoadInteger '50'
+                v693 <- LoadInteger '50'
+                v694 <- CreateNamedVariable 'Atomics', 'none'
+                v695 <- CallMethod v694, 'store', [v677, v691, v693]
+                v696 <- LoadInteger '50'
+                v697 <- GetComputedProperty v677, v691
+                v698 <- LoadInteger '100'
+                v699 <- LoadInteger '100'
+                v700 <- CallMethod v694, 'store', [v677, v691, v699]
+                v701 <- LoadInteger '100'
+                v702 <- GetComputedProperty v677, v691
+            EndForLoop
+        EndPlainFunction
+        v703 <- CreateArray [v668, v675]
+        v704 <- CallMethod v703, 'forEach', [v676]
+    EndPlainFunction
+    v705 <- CallMethod v52, 'forEach', [v657]
+EndPlainFunction
+v706 <- CallFunction v656, []
+v707 <- BeginPlainFunction -> 
+    v708 <- BeginPlainFunction -> v709
+        v710 <- CreateNamedVariable 'Array', 'none'
+        v711 <- LoadInteger '10'
+        v712 <- GetProperty v709, 'constr'
+        v713 <- GetProperty v712, 'BYTES_PER_ELEMENT'
+        v714 <- BinaryOperation v711, '*', v713
+        v715 <- Construct v710, [v714]
+        v716 <- CreateNamedVariable 'sab', 'var', v715
+        v717 <- GetProperty v709, 'constr'
+        v718 <- Construct v717, [v716]
+        v719 <- CreateNamedVariable 'sta', 'var', v718
+        v720 <- GetProperty v709, 'constr'
+        v721 <- LoadInteger '5'
+        v722 <- GetProperty v709, 'constr'
+        v723 <- GetProperty v722, 'BYTES_PER_ELEMENT'
+        v724 <- BinaryOperation v721, '*', v723
+        v725 <- Construct v720, [v716, v724]
+        v726 <- CreateNamedVariable 'sta2', 'var', v725
+        v727 <- BeginPlainFunction -> v728
+            v729 <- GetProperty v728, 'buffer'
+            v730 <- CallFunction v513, [v729]
+            v731 <- CreateNamedVariable 'Object', 'none'
+            v732 <- GetProperty v731, 'prototype'
+            v733 <- GetProperty v732, 'toString'
+            v734 <- CallMethod v733, 'call', [v728]
+            v735 <- CreateNamedVariable 'name', 'var', v734
+            BeginForLoopInitializer
+                v736 <- LoadInteger '0'
+            BeginForLoopCondition -> v737
+                v738 <- GetProperty v728, 'length'
+                v739 <- Compare v737, '<', v738
+            BeginForLoopAfterthought v739 -> v740
+                v741 <- UnaryOperation '++', v740
+            BeginForLoopBody -> v742
+                v743 <- LoadInteger '0'
+                v744 <- LoadInteger '50'
+                v745 <- CreateNamedVariable 'Atomics', 'none'
+                v746 <- CallMethod v745, 'add', [v728, v742, v744]
+                v747 <- LoadInteger '50'
+                v748 <- GetComputedProperty v728, v742
+                v749 <- LoadInteger '50'
+                v750 <- LoadInteger '70'
+                v751 <- CallMethod v745, 'add', [v728, v742, v750]
+                v752 <- LoadInteger '120'
+                v753 <- GetComputedProperty v728, v742
+            EndForLoop
+        EndPlainFunction
+        v754 <- CreateArray [v719, v726]
+        v755 <- CallMethod v754, 'forEach', [v727]
+    EndPlainFunction
+    v756 <- CallMethod v52, 'forEach', [v708]
+EndPlainFunction
+v757 <- CallFunction v707, []
+v758 <- BeginPlainFunction -> 
+    v759 <- BeginPlainFunction -> v760
+        v761 <- CreateNamedVariable 'Array', 'none'
+        v762 <- LoadInteger '10'
+        v763 <- GetProperty v760, 'constr'
+        v764 <- GetProperty v763, 'BYTES_PER_ELEMENT'
+        v765 <- BinaryOperation v762, '*', v764
+        v766 <- Construct v761, [v765]
+        v767 <- CreateNamedVariable 'sab', 'var', v766
+        v768 <- GetProperty v760, 'constr'
+        v769 <- Construct v768, [v767]
+        v770 <- CreateNamedVariable 'sta', 'var', v769
+        v771 <- GetProperty v760, 'constr'
+        v772 <- LoadInteger '5'
+        v773 <- GetProperty v760, 'constr'
+        v774 <- GetProperty v773, 'BYTES_PER_ELEMENT'
+        v775 <- BinaryOperation v772, '*', v774
+        v776 <- Construct v771, [v767, v775]
+        v777 <- CreateNamedVariable 'sta2', 'var', v776
+        v778 <- BeginPlainFunction -> v779
+            v780 <- GetProperty v779, 'buffer'
+            v781 <- CallFunction v513, [v780]
+            v782 <- CreateNamedVariable 'Object', 'none'
+            v783 <- GetProperty v782, 'prototype'
+            v784 <- GetProperty v783, 'toString'
+            v785 <- CallMethod v784, 'call', [v779]
+            v786 <- CreateNamedVariable 'name', 'var', v785
+            BeginForLoopInitializer
+                v787 <- LoadInteger '0'
+            BeginForLoopCondition -> v788
+                v789 <- GetProperty v779, 'length'
+                v790 <- Compare v788, '<', v789
+            BeginForLoopAfterthought v790 -> v791
+                v792 <- UnaryOperation '++', v791
+            BeginForLoopBody -> v793
+                v794 <- LoadInteger '120'
+                SetComputedProperty v779, v793, v794
+                v795 <- LoadInteger '120'
+                v796 <- LoadInteger '50'
+                v797 <- CreateNamedVariable 'Atomics', 'none'
+                v798 <- CallMethod v797, 'sub', [v779, v793, v796]
+                v799 <- LoadInteger '70'
+                v800 <- GetComputedProperty v779, v793
+                v801 <- LoadInteger '70'
+                v802 <- LoadInteger '70'
+                v803 <- CallMethod v797, 'sub', [v779, v793, v802]
+                v804 <- LoadInteger '0'
+                v805 <- GetComputedProperty v779, v793
+            EndForLoop
+        EndPlainFunction
+        v806 <- CreateArray [v770, v777]
+        v807 <- CallMethod v806, 'forEach', [v778]
+    EndPlainFunction
+    v808 <- CallMethod v52, 'forEach', [v759]
+EndPlainFunction
+v809 <- CallFunction v758, []
+v810 <- BeginPlainFunction -> 
+    v811 <- BeginPlainFunction -> v812
+        v813 <- CreateNamedVariable 'Array', 'none'
+        v814 <- LoadInteger '10'
+        v815 <- GetProperty v812, 'constr'
+        v816 <- GetProperty v815, 'BYTES_PER_ELEMENT'
+        v817 <- BinaryOperation v814, '*', v816
+        v818 <- Construct v813, [v817]
+        v819 <- CreateNamedVariable 'sab', 'var', v818
+        v820 <- GetProperty v812, 'constr'
+        v821 <- Construct v820, [v819]
+        v822 <- CreateNamedVariable 'sta', 'var', v821
+        v823 <- GetProperty v812, 'constr'
+        v824 <- LoadInteger '5'
+        v825 <- GetProperty v812, 'constr'
+        v826 <- GetProperty v825, 'BYTES_PER_ELEMENT'
+        v827 <- BinaryOperation v824, '*', v826
+        v828 <- Construct v823, [v819, v827]
+        v829 <- CreateNamedVariable 'sta2', 'var', v828
+        v830 <- BeginPlainFunction -> v831
+            v832 <- GetProperty v831, 'buffer'
+            v833 <- CallFunction v513, [v832]
+            v834 <- CreateNamedVariable 'Object', 'none'
+            v835 <- GetProperty v834, 'prototype'
+            v836 <- GetProperty v835, 'toString'
+            v837 <- CallMethod v836, 'call', [v822]
+            v838 <- CreateNamedVariable 'name', 'var', v837
+            BeginForLoopInitializer
+                v839 <- LoadInteger '0'
+            BeginForLoopCondition -> v840
+                v841 <- GetProperty v831, 'length'
+                v842 <- Compare v840, '<', v841
+            BeginForLoopAfterthought v842 -> v843
+                v844 <- UnaryOperation '++', v843
+            BeginForLoopBody -> v845
+                v846 <- LoadInteger '63'
+                SetComputedProperty v831, v845, v846
+                v847 <- LoadInteger '63'
+                v848 <- LoadInteger '48'
+                v849 <- CreateNamedVariable 'Atomics', 'none'
+                v850 <- CallMethod v849, 'and', [v831, v845, v848]
+                v851 <- LoadInteger '48'
+                v852 <- GetComputedProperty v831, v845
+                v853 <- LoadInteger '48'
+                v854 <- LoadInteger '32'
+                v855 <- CallMethod v849, 'and', [v831, v845, v854]
+                v856 <- LoadInteger '32'
+                v857 <- GetComputedProperty v831, v845
+            EndForLoop
+        EndPlainFunction
+        v858 <- CreateArray [v822, v829]
+        v859 <- CallMethod v858, 'forEach', [v830]
+    EndPlainFunction
+    v860 <- CallMethod v52, 'forEach', [v811]
+EndPlainFunction
+v861 <- CallFunction v810, []
+v862 <- BeginPlainFunction -> 
+    v863 <- BeginPlainFunction -> v864
+        v865 <- CreateNamedVariable 'Array', 'none'
+        v866 <- LoadInteger '10'
+        v867 <- GetProperty v864, 'constr'
+        v868 <- GetProperty v867, 'BYTES_PER_ELEMENT'
+        v869 <- BinaryOperation v866, '*', v868
+        v870 <- Construct v865, [v869]
+        v871 <- CreateNamedVariable 'sab', 'var', v870
+        v872 <- GetProperty v864, 'constr'
+        v873 <- Construct v872, [v871]
+        v874 <- CreateNamedVariable 'sta', 'var', v873
+        v875 <- GetProperty v864, 'constr'
+        v876 <- LoadInteger '5'
+        v877 <- GetProperty v864, 'constr'
+        v878 <- GetProperty v877, 'BYTES_PER_ELEMENT'
+        v879 <- BinaryOperation v876, '*', v878
+        v880 <- Construct v875, [v871, v879]
+        v881 <- CreateNamedVariable 'sta2', 'var', v880
+        v882 <- BeginPlainFunction -> v883
+            v884 <- GetProperty v883, 'buffer'
+            v885 <- CallFunction v513, [v884]
+            v886 <- CreateNamedVariable 'Object', 'none'
+            v887 <- GetProperty v886, 'prototype'
+            v888 <- GetProperty v887, 'toString'
+            v889 <- CallMethod v888, 'call', [v883]
+            v890 <- CreateNamedVariable 'name', 'var', v889
+            BeginForLoopInitializer
+                v891 <- LoadInteger '0'
+            BeginForLoopCondition -> v892
+                v893 <- GetProperty v883, 'length'
+                v894 <- Compare v892, '<', v893
+            BeginForLoopAfterthought v894 -> v895
+                v896 <- UnaryOperation '++', v895
+            BeginForLoopBody -> v897
+                v898 <- LoadInteger '48'
+                SetComputedProperty v883, v897, v898
+                v899 <- LoadInteger '48'
+                v900 <- LoadInteger '28'
+                v901 <- CreateNamedVariable 'Atomics', 'none'
+                v902 <- CallMethod v901, 'or', [v883, v897, v900]
+                v903 <- LoadInteger '60'
+                v904 <- GetComputedProperty v883, v897
+                v905 <- LoadInteger '60'
+                v906 <- LoadInteger '9'
+                v907 <- CallMethod v901, 'or', [v883, v897, v906]
+                v908 <- LoadInteger '61'
+                v909 <- GetComputedProperty v883, v897
+            EndForLoop
+        EndPlainFunction
+        v910 <- CreateArray [v874, v881]
+        v911 <- CallMethod v910, 'forEach', [v882]
+    EndPlainFunction
+    v912 <- CallMethod v52, 'forEach', [v863]
+EndPlainFunction
+v913 <- CallFunction v862, []
+v914 <- BeginPlainFunction -> 
+    v915 <- BeginPlainFunction -> v916
+        v917 <- CreateNamedVariable 'Array', 'none'
+        v918 <- LoadInteger '10'
+        v919 <- GetProperty v916, 'constr'
+        v920 <- GetProperty v919, 'BYTES_PER_ELEMENT'
+        v921 <- BinaryOperation v918, '*', v920
+        v922 <- Construct v917, [v921]
+        v923 <- CreateNamedVariable 'sab', 'var', v922
+        v924 <- GetProperty v916, 'constr'
+        v925 <- Construct v924, [v923]
+        v926 <- CreateNamedVariable 'sta', 'var', v925
+        v927 <- GetProperty v916, 'constr'
+        v928 <- LoadInteger '5'
+        v929 <- GetProperty v916, 'constr'
+        v930 <- GetProperty v929, 'BYTES_PER_ELEMENT'
+        v931 <- BinaryOperation v928, '*', v930
+        v932 <- Construct v927, [v923, v931]
+        v933 <- CreateNamedVariable 'sta2', 'var', v932
+        v934 <- BeginPlainFunction -> v935
+            v936 <- GetProperty v935, 'buffer'
+            v937 <- CallFunction v513, [v936]
+            v938 <- CreateNamedVariable 'Object', 'none'
+            v939 <- GetProperty v938, 'prototype'
+            v940 <- GetProperty v939, 'toString'
+            v941 <- CallMethod v940, 'call', [v935]
+            v942 <- CreateNamedVariable 'name', 'var', v941
+            BeginForLoopInitializer
+                v943 <- LoadInteger '0'
+            BeginForLoopCondition -> v944
+                v945 <- GetProperty v935, 'length'
+                v946 <- Compare v944, '<', v945
+            BeginForLoopAfterthought v946 -> v947
+                v948 <- UnaryOperation '++', v947
+            BeginForLoopBody -> v949
+                v950 <- LoadInteger '48'
+                SetComputedProperty v935, v949, v950
+                v951 <- LoadInteger '48'
+                v952 <- LoadInteger '28'
+                v953 <- CreateNamedVariable 'Atomics', 'none'
+                v954 <- CallMethod v953, 'xor', [v935, v949, v952]
+                v955 <- LoadInteger '44'
+                v956 <- GetComputedProperty v935, v949
+                v957 <- LoadInteger '44'
+                v958 <- LoadInteger '9'
+                v959 <- CallMethod v953, 'xor', [v935, v949, v958]
+                v960 <- LoadInteger '37'
+                v961 <- GetComputedProperty v935, v949
+            EndForLoop
+        EndPlainFunction
+        v962 <- CreateArray [v926, v933]
+        v963 <- CallMethod v962, 'forEach', [v934]
+    EndPlainFunction
+    v964 <- CallMethod v52, 'forEach', [v915]
+EndPlainFunction
+v965 <- CallFunction v914, []
+v966 <- BeginPlainFunction -> 
+    v967 <- BeginPlainFunction -> v968
+        v969 <- CreateNamedVariable 'Array', 'none'
+        v970 <- LoadInteger '10'
+        v971 <- GetProperty v968, 'constr'
+        v972 <- GetProperty v971, 'BYTES_PER_ELEMENT'
+        v973 <- BinaryOperation v970, '*', v972
+        v974 <- Construct v969, [v973]
+        v975 <- CreateNamedVariable 'sab', 'var', v974
+        v976 <- GetProperty v968, 'constr'
+        v977 <- Construct v976, [v975]
+        v978 <- CreateNamedVariable 'sta', 'var', v977
+        v979 <- GetProperty v968, 'constr'
+        v980 <- LoadInteger '5'
+        v981 <- GetProperty v968, 'constr'
+        v982 <- GetProperty v981, 'BYTES_PER_ELEMENT'
+        v983 <- BinaryOperation v980, '*', v982
+        v984 <- Construct v979, [v975, v983]
+        v985 <- CreateNamedVariable 'sta2', 'var', v984
+        v986 <- BeginPlainFunction -> v987
+            v988 <- GetProperty v987, 'buffer'
+            v989 <- CallFunction v513, [v988]
+            v990 <- CreateNamedVariable 'Object', 'none'
+            v991 <- GetProperty v990, 'prototype'
+            v992 <- GetProperty v991, 'toString'
+            v993 <- CallMethod v992, 'call', [v987]
+            v994 <- CreateNamedVariable 'name', 'var', v993
+            BeginForLoopInitializer
+                v995 <- LoadInteger '0'
+            BeginForLoopCondition -> v996
+                v997 <- GetProperty v987, 'length'
+                v998 <- Compare v996, '<', v997
+            BeginForLoopAfterthought v998 -> v999
+                v1000 <- UnaryOperation '++', v999
+            BeginForLoopBody -> v1001
+                v1002 <- LoadInteger '48'
+                SetComputedProperty v987, v1001, v1002
+                v1003 <- LoadInteger '48'
+                v1004 <- LoadInteger '28'
+                v1005 <- CreateNamedVariable 'Atomics', 'none'
+                v1006 <- CallMethod v1005, 'exchange', [v987, v1001, v1004]
+                v1007 <- LoadInteger '28'
+                v1008 <- GetComputedProperty v987, v1001
+                v1009 <- LoadInteger '28'
+                v1010 <- LoadInteger '9'
+                v1011 <- CallMethod v1005, 'exchange', [v987, v1001, v1010]
+                v1012 <- LoadInteger '9'
+                v1013 <- GetComputedProperty v987, v1001
+            EndForLoop
+        EndPlainFunction
+        v1014 <- CreateArray [v978, v985]
+        v1015 <- CallMethod v1014, 'forEach', [v986]
+    EndPlainFunction
+    v1016 <- CallMethod v52, 'forEach', [v967]
+EndPlainFunction
+v1017 <- CallFunction v966, []
+v1018 <- BeginPlainFunction -> 
+    v1019 <- BeginPlainFunction -> 
+        v1020 <- LoadInteger '3'
+        Return v1020
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v1019
+    v1021 <- EndObjectLiteral
+    v1022 <- CreateNamedVariable 'valueOf', 'var', v1021
+    v1023 <- BeginPlainFunction -> 
+        v1024 <- LoadString '3'
+        Return v1024
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toString`, v1023
+    v1025 <- EndObjectLiteral
+    v1026 <- CreateNamedVariable 'toString', 'var', v1025
+    v1027 <- LoadFloat '3.14'
+    v1028 <- LoadString 'foo'
+    v1029 <- CreateNamedVariable 'Infinity', 'none'
+    v1030 <- CreateNamedVariable 'NaN', 'none'
+    v1031 <- LoadBoolean 'false'
+    v1032 <- LoadUndefined
+    v1033 <- CreateArray [v1027, v1028, v1029, v1030, v1031, v1032, v1022, v1026]
+    v1034 <- CreateNamedVariable 'invalid', 'var', v1033
+    v1035 <- BeginPlainFunction -> v1036
+        v1037 <- LoadBoolean 'false'
+        v1038 <- CreateNamedVariable 'Atomics', 'none'
+        v1039 <- CallMethod v1038, 'isLockFree', [v1036]
+        v1040 <- CreateNamedVariable 'JSON', 'none'
+        v1041 <- CallMethod v1040, 'stringify', [v1036]
+    EndPlainFunction
+    v1042 <- CallMethod v1034, 'forEach', [v1035]
+    v1043 <- LoadBoolean 'true'
+    v1044 <- LoadInteger '1'
+    v1045 <- CreateNamedVariable 'Atomics', 'none'
+    v1046 <- CallMethod v1045, 'isLockFree', [v1044]
+    v1047 <- LoadBoolean 'true'
+    v1048 <- LoadInteger '2'
+    v1049 <- CallMethod v1045, 'isLockFree', [v1048]
+    v1050 <- LoadBoolean 'true'
+    v1051 <- LoadInteger '4'
+    v1052 <- CallMethod v1045, 'isLockFree', [v1051]
+    BeginObjectLiteral
+    v1053 <- EndObjectLiteral
+    v1054 <- CreateNamedVariable 'validSizes', 'var', v1053
+    v1055 <- BeginPlainFunction -> v1056
+        v1057 <- LoadBoolean 'true'
+        v1058 <- GetProperty v1056, 'constr'
+        v1059 <- GetProperty v1058, 'BYTES_PER_ELEMENT'
+        SetComputedProperty v1054, v1059, v1057
+    EndPlainFunction
+    v1060 <- CallMethod v52, 'forEach', [v1055]
+    BeginForLoopInitializer
+        v1061 <- LoadInteger '0'
+    BeginForLoopCondition -> v1062
+        v1063 <- LoadInteger '1000'
+        v1064 <- Compare v1062, '<', v1063
+    BeginForLoopAfterthought v1064 -> v1065
+        v1066 <- UnaryOperation '++', v1065
+    BeginForLoopBody -> v1067
+        v1068 <- GetComputedProperty v1054, v1067
+        v1069 <- UnaryOperation '!', v1068
+        BeginIf v1069
+            v1070 <- LoadBoolean 'false'
+            v1071 <- CallMethod v1045, 'isLockFree', [v1067]
+        EndIf
+    EndForLoop
+EndPlainFunction
+v1072 <- CallFunction v1018, []
+v1073 <- BeginPlainFunction -> 
+    v1074 <- BeginPlainFunction -> v1075
+        v1076 <- CreateNamedVariable 'Array', 'none'
+        v1077 <- LoadInteger '1'
+        v1078 <- GetProperty v1075, 'constr'
+        v1079 <- GetProperty v1078, 'BYTES_PER_ELEMENT'
+        v1080 <- BinaryOperation v1077, '*', v1079
+        v1081 <- Construct v1076, [v1080]
+        v1082 <- CreateNamedVariable 'sab', 'var', v1081
+        v1083 <- GetProperty v1075, 'constr'
+        v1084 <- Construct v1083, [v1082]
+        v1085 <- CreateNamedVariable 'sta', 'var', v1084
+        v1086 <- BeginPlainFunction -> 
+            v1087 <- LoadInteger '3'
+            Return v1087
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `valueOf`, v1086
+        v1088 <- EndObjectLiteral
+        v1089 <- CreateNamedVariable 'valueOf', 'var', v1088
+        v1090 <- BeginPlainFunction -> 
+            v1091 <- LoadString '3'
+            Return v1091
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `toString`, v1090
+        v1092 <- EndObjectLiteral
+        v1093 <- CreateNamedVariable 'toString', 'var', v1092
+        v1094 <- BeginPlainFunction -> v1095
+            v1096 <- CreateNamedVariable 'Object', 'none'
+            v1097 <- GetProperty v1096, 'prototype'
+            v1098 <- GetProperty v1097, 'toString'
+            v1099 <- CallMethod v1098, 'call', [v1085]
+            v1100 <- LoadString ' - '
+            v1101 <- BinaryOperation v1099, '+', v1100
+            v1102 <- BinaryOperation v1101, '+', v1095
+            v1103 <- CreateNamedVariable 'name', 'var', v1102
+            v1104 <- LoadInteger '50'
+            SetElement v1085, '0', v1104
+            v1105 <- LoadInteger '50'
+            v1106 <- LoadInteger '0'
+            v1107 <- CreateNamedVariable 'Atomics', 'none'
+            v1108 <- CallMethod v1107, 'compareExchange', [v1085, v1106, v1095, v1095]
+            v1109 <- LoadInteger '0'
+            v1110 <- BinaryOperation v1095, '|', v1109
+            v1111 <- LoadInteger '0'
+            v1112 <- CallMethod v1107, 'store', [v1085, v1111, v1095]
+            v1113 <- LoadInteger '0'
+            v1114 <- BinaryOperation v1095, '|', v1113
+            v1115 <- GetElement v1085, '0'
+            v1116 <- LoadInteger '120'
+            SetElement v1085, '0', v1116
+            v1117 <- LoadInteger '120'
+            v1118 <- LoadInteger '0'
+            v1119 <- CallMethod v1107, 'add', [v1085, v1118, v1095]
+            v1120 <- LoadInteger '120'
+            v1121 <- LoadInteger '0'
+            v1122 <- BinaryOperation v1095, '|', v1121
+            v1123 <- BinaryOperation v1120, '+', v1122
+            v1124 <- GetElement v1085, '0'
+            v1125 <- LoadInteger '70'
+            SetElement v1085, '0', v1125
+            v1126 <- LoadInteger '70'
+            v1127 <- LoadInteger '0'
+            v1128 <- CallMethod v1107, 'sub', [v1085, v1127, v1095]
+            v1129 <- LoadInteger '70'
+            v1130 <- LoadInteger '0'
+            v1131 <- BinaryOperation v1095, '|', v1130
+            v1132 <- BinaryOperation v1129, '-', v1131
+            v1133 <- GetElement v1085, '0'
+            v1134 <- LoadInteger '32'
+            SetElement v1085, '0', v1134
+            v1135 <- LoadInteger '32'
+            v1136 <- LoadInteger '0'
+            v1137 <- CallMethod v1107, 'and', [v1085, v1136, v1095]
+            v1138 <- LoadInteger '32'
+            v1139 <- LoadInteger '0'
+            v1140 <- BinaryOperation v1095, '|', v1139
+            v1141 <- BinaryOperation v1138, '&', v1140
+            v1142 <- GetElement v1085, '0'
+            v1143 <- LoadInteger '61'
+            SetElement v1085, '0', v1143
+            v1144 <- LoadInteger '61'
+            v1145 <- LoadInteger '0'
+            v1146 <- CallMethod v1107, 'or', [v1085, v1145, v1095]
+            v1147 <- LoadInteger '61'
+            v1148 <- LoadInteger '0'
+            v1149 <- BinaryOperation v1095, '|', v1148
+            v1150 <- BinaryOperation v1147, '|', v1149
+            v1151 <- GetElement v1085, '0'
+            v1152 <- LoadInteger '37'
+            SetElement v1085, '0', v1152
+            v1153 <- LoadInteger '37'
+            v1154 <- LoadInteger '0'
+            v1155 <- CallMethod v1107, 'xor', [v1085, v1154, v1095]
+            v1156 <- LoadInteger '37'
+            v1157 <- LoadInteger '0'
+            v1158 <- BinaryOperation v1095, '|', v1157
+            v1159 <- BinaryOperation v1156, '^', v1158
+            v1160 <- GetElement v1085, '0'
+            v1161 <- LoadInteger '9'
+            SetElement v1085, '0', v1161
+            v1162 <- LoadInteger '9'
+            v1163 <- LoadInteger '0'
+            v1164 <- CallMethod v1107, 'exchange', [v1085, v1163, v1095]
+            v1165 <- LoadInteger '0'
+            v1166 <- BinaryOperation v1095, '|', v1165
+            v1167 <- GetElement v1085, '0'
+        EndPlainFunction
+        v1168 <- LoadBoolean 'false'
+        v1169 <- LoadBoolean 'true'
+        v1170 <- LoadUndefined
+        v1171 <- CreateArray [v1168, v1169, v1170, v1089, v1093]
+        v1172 <- CallMethod v1171, 'forEach', [v1094]
+    EndPlainFunction
+    v1173 <- CallMethod v52, 'forEach', [v1074]
+EndPlainFunction
+v1174 <- CallFunction v1073, []
+v1175 <- BeginPlainFunction -> 
+    v1176 <- BeginPlainFunction -> v1177
+        v1178 <- CreateNamedVariable 'Array', 'none'
+        v1179 <- LoadInteger '10'
+        v1180 <- GetProperty v1177, 'constr'
+        v1181 <- GetProperty v1180, 'BYTES_PER_ELEMENT'
+        v1182 <- BinaryOperation v1179, '*', v1181
+        v1183 <- Construct v1178, [v1182]
+        v1184 <- CreateNamedVariable 'sab', 'var', v1183
+        v1185 <- GetProperty v1177, 'constr'
+        v1186 <- Construct v1185, [v1184]
+        v1187 <- CreateNamedVariable 'sta', 'var', v1186
+        v1188 <- CreateNamedVariable 'Object', 'none'
+        v1189 <- GetProperty v1188, 'prototype'
+        v1190 <- GetProperty v1189, 'toString'
+        v1191 <- CallMethod v1190, 'call', [v1187]
+        v1192 <- CreateNamedVariable 'name', 'var', v1191
+        v1193 <- GetProperty v1177, 'max'
+        v1194 <- GetProperty v1177, 'min'
+        v1195 <- BinaryOperation v1193, '-', v1194
+        v1196 <- LoadInteger '1'
+        v1197 <- BinaryOperation v1195, '+', v1196
+        v1198 <- CreateNamedVariable 'range', 'var', v1197
+        v1199 <- LoadUndefined
+        v1200 <- CreateNamedVariable 'offset', 'var', v1199
+        v1201 <- LoadUndefined
+        v1202 <- CreateNamedVariable 'operand', 'var', v1201
+        v1203 <- LoadUndefined
+        v1204 <- CreateNamedVariable 'val', 'var', v1203
+        v1205 <- LoadUndefined
+        v1206 <- CreateNamedVariable 'newVal', 'var', v1205
+        v1207 <- LoadUndefined
+        v1208 <- CreateNamedVariable 'valWrapped', 'var', v1207
+        v1209 <- LoadUndefined
+        v1210 <- CreateNamedVariable 'newValWrapped', 'var', v1209
+        BeginForLoopInitializer
+            v1211 <- UnaryOperation '-', v1198
+            Reassign v1200, v1211
+        BeginForLoopCondition
+            v1212 <- Compare v1200, '<=', v1198
+        BeginForLoopAfterthought v1212
+            Update v1200, '+', v1198
+        BeginForLoopBody
+            v1213 <- LoadInteger '0'
+            Reassign v1204, v1213
+            SetElement v1187, '0', v1213
+            v1214 <- BinaryOperation v1204, '+', v1200
+            v1215 <- LoadInteger '1'
+            v1216 <- BinaryOperation v1214, '+', v1215
+            Reassign v1206, v1216
+            v1217 <- CallMethod v1177, 'toRange', [v1206]
+            Reassign v1210, v1217
+            v1218 <- LoadInteger '0'
+            v1219 <- CreateNamedVariable 'Atomics', 'none'
+            v1220 <- CallMethod v1219, 'compareExchange', [v1187, v1218, v1204, v1206]
+            v1221 <- GetElement v1187, '0'
+            v1222 <- GetProperty v1177, 'min'
+            Reassign v1204, v1222
+            SetElement v1187, '0', v1222
+            v1223 <- BinaryOperation v1204, '+', v1200
+            v1224 <- LoadInteger '1'
+            v1225 <- BinaryOperation v1223, '-', v1224
+            Reassign v1206, v1225
+            v1226 <- CallMethod v1177, 'toRange', [v1206]
+            Reassign v1210, v1226
+            v1227 <- LoadInteger '0'
+            v1228 <- CallMethod v1219, 'compareExchange', [v1187, v1227, v1204, v1206]
+            v1229 <- GetElement v1187, '0'
+            v1230 <- LoadInteger '0'
+            SetElement v1187, '0', v1230
+            v1231 <- GetProperty v1177, 'max'
+            v1232 <- BinaryOperation v1231, '+', v1200
+            v1233 <- LoadInteger '1'
+            v1234 <- BinaryOperation v1232, '+', v1233
+            Reassign v1204, v1234
+            v1235 <- CallMethod v1177, 'toRange', [v1204]
+            Reassign v1208, v1235
+            v1236 <- LoadInteger '0'
+            v1237 <- CallMethod v1219, 'store', [v1187, v1236, v1204]
+            v1238 <- GetElement v1187, '0'
+            v1239 <- GetProperty v1177, 'min'
+            v1240 <- BinaryOperation v1239, '+', v1200
+            v1241 <- LoadInteger '1'
+            v1242 <- BinaryOperation v1240, '-', v1241
+            Reassign v1204, v1242
+            SetElement v1187, '0', v1242
+            v1243 <- CallMethod v1177, 'toRange', [v1204]
+            Reassign v1208, v1243
+            v1244 <- LoadInteger '0'
+            v1245 <- CallMethod v1219, 'store', [v1187, v1244, v1204]
+            v1246 <- GetElement v1187, '0'
+            v1247 <- GetProperty v1177, 'max'
+            Reassign v1204, v1247
+            SetElement v1187, '0', v1247
+            v1248 <- LoadInteger '1'
+            v1249 <- BinaryOperation v1200, '+', v1248
+            Reassign v1202, v1249
+            v1250 <- BinaryOperation v1204, '+', v1202
+            v1251 <- CallMethod v1177, 'toRange', [v1250]
+            Reassign v1208, v1251
+            v1252 <- LoadInteger '0'
+            v1253 <- CallMethod v1219, 'add', [v1187, v1252, v1202]
+            v1254 <- GetElement v1187, '0'
+            v1255 <- GetProperty v1177, 'min'
+            Reassign v1204, v1255
+            SetElement v1187, '0', v1255
+            v1256 <- LoadInteger '1'
+            v1257 <- BinaryOperation v1200, '-', v1256
+            Reassign v1202, v1257
+            v1258 <- BinaryOperation v1204, '+', v1202
+            v1259 <- CallMethod v1177, 'toRange', [v1258]
+            Reassign v1208, v1259
+            v1260 <- LoadInteger '0'
+            v1261 <- CallMethod v1219, 'add', [v1187, v1260, v1202]
+            v1262 <- GetElement v1187, '0'
+            v1263 <- GetProperty v1177, 'max'
+            Reassign v1204, v1263
+            SetElement v1187, '0', v1263
+            v1264 <- LoadInteger '1'
+            v1265 <- BinaryOperation v1200, '-', v1264
+            Reassign v1202, v1265
+            v1266 <- BinaryOperation v1204, '-', v1202
+            v1267 <- CallMethod v1177, 'toRange', [v1266]
+            Reassign v1208, v1267
+            v1268 <- LoadInteger '0'
+            v1269 <- CallMethod v1219, 'sub', [v1187, v1268, v1202]
+            v1270 <- GetElement v1187, '0'
+            v1271 <- GetProperty v1177, 'min'
+            Reassign v1204, v1271
+            SetElement v1187, '0', v1271
+            v1272 <- LoadInteger '1'
+            v1273 <- BinaryOperation v1200, '+', v1272
+            Reassign v1202, v1273
+            v1274 <- BinaryOperation v1204, '-', v1202
+            v1275 <- CallMethod v1177, 'toRange', [v1274]
+            Reassign v1208, v1275
+            v1276 <- LoadInteger '0'
+            v1277 <- CallMethod v1219, 'sub', [v1187, v1276, v1202]
+            v1278 <- GetElement v1187, '0'
+            v1279 <- LoadInteger '15'
+            Reassign v1204, v1279
+            SetElement v1187, '0', v1279
+            v1280 <- LoadInteger '3'
+            v1281 <- BinaryOperation v1280, '+', v1200
+            Reassign v1202, v1281
+            v1282 <- BinaryOperation v1204, '&', v1202
+            v1283 <- CallMethod v1177, 'toRange', [v1282]
+            Reassign v1208, v1283
+            v1284 <- LoadInteger '0'
+            v1285 <- CallMethod v1219, 'and', [v1187, v1284, v1202]
+            v1286 <- GetElement v1187, '0'
+            v1287 <- LoadInteger '18'
+            Reassign v1204, v1287
+            SetElement v1187, '0', v1287
+            v1288 <- LoadInteger '34'
+            v1289 <- BinaryOperation v1288, '+', v1200
+            Reassign v1202, v1289
+            v1290 <- BinaryOperation v1204, '|', v1202
+            v1291 <- CallMethod v1177, 'toRange', [v1290]
+            Reassign v1208, v1291
+            v1292 <- LoadInteger '0'
+            v1293 <- CallMethod v1219, 'or', [v1187, v1292, v1202]
+            v1294 <- GetElement v1187, '0'
+            v1295 <- LoadInteger '18'
+            Reassign v1204, v1295
+            SetElement v1187, '0', v1295
+            v1296 <- LoadInteger '34'
+            v1297 <- BinaryOperation v1296, '+', v1200
+            Reassign v1202, v1297
+            v1298 <- BinaryOperation v1204, '^', v1202
+            v1299 <- CallMethod v1177, 'toRange', [v1298]
+            Reassign v1208, v1299
+            v1300 <- LoadInteger '0'
+            v1301 <- CallMethod v1219, 'xor', [v1187, v1300, v1202]
+            v1302 <- GetElement v1187, '0'
+            v1303 <- LoadInteger '18'
+            Reassign v1204, v1303
+            SetElement v1187, '0', v1303
+            v1304 <- LoadInteger '34'
+            v1305 <- BinaryOperation v1304, '+', v1200
+            Reassign v1202, v1305
+            v1306 <- CallMethod v1177, 'toRange', [v1202]
+            Reassign v1208, v1306
+            v1307 <- LoadInteger '0'
+            v1308 <- CallMethod v1219, 'exchange', [v1187, v1307, v1202]
+            v1309 <- GetElement v1187, '0'
+        EndForLoop
+    EndPlainFunction
+    v1310 <- CallMethod v52, 'forEach', [v1176]
+EndPlainFunction
+v1311 <- CallFunction v1175, []
+v1312 <- BeginPlainFunction -> 
+    v1313 <- BeginPlainFunction -> v1314, v1315, v1316
+        v1317 <- LoadInteger '0'
+        v1318 <- CreateNamedVariable 'valueof_has_been_called', 'var', v1317
+        v1319 <- BeginPlainFunction -> 
+            v1320 <- LoadInteger '1'
+            Reassign v1318, v1320
+            v1321 <- LoadInteger '0'
+            Return v1321
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `valueOf`, v1319
+        v1322 <- EndObjectLiteral
+        v1323 <- CreateNamedVariable 'value', 'var', v1322
+        v1324 <- LoadInteger '1'
+        v1325 <- UnaryOperation '-', v1324
+        v1326 <- CreateNamedVariable 'index', 'var', v1325
+        v1327 <- LoadInteger '0'
+        SetElement v1315, '0', v1327
+        v1328 <- BeginPlainFunction -> 
+            v1329 <- CallFunction v1314, [v1315, v1326, v1323, v1323]
+        EndPlainFunction
+        v1330 <- CallFunction v1328, []
+        v1331 <- CreateNamedVariable 'RangeError', 'none'
+        v1332 <- LoadInteger '0'
+    EndPlainFunction
+    v1333 <- CreateNamedVariable 'testOp', 'var', v1313
+    v1334 <- BeginPlainFunction -> v1335
+        v1336 <- CreateNamedVariable 'Array', 'none'
+        v1337 <- LoadInteger '10'
+        v1338 <- GetProperty v1335, 'constr'
+        v1339 <- GetProperty v1338, 'BYTES_PER_ELEMENT'
+        v1340 <- BinaryOperation v1337, '*', v1339
+        v1341 <- Construct v1336, [v1340]
+        v1342 <- CreateNamedVariable 'sab', 'var', v1341
+        v1343 <- GetProperty v1335, 'constr'
+        v1344 <- Construct v1343, [v1342]
+        v1345 <- CreateNamedVariable 'sta', 'var', v1344
+        v1346 <- CreateNamedVariable 'Object', 'none'
+        v1347 <- GetProperty v1346, 'prototype'
+        v1348 <- GetProperty v1347, 'toString'
+        v1349 <- CallMethod v1348, 'call', [v1345]
+        v1350 <- CreateNamedVariable 'name', 'var', v1349
+        v1351 <- CreateNamedVariable 'Atomics', 'none'
+        v1352 <- GetProperty v1351, 'compareExchange'
+        v1353 <- CallFunction v1333, [v1352, v1345, v1350]
+        v1354 <- GetProperty v1351, 'load'
+        v1355 <- CallFunction v1333, [v1354, v1345, v1350]
+        v1356 <- GetProperty v1351, 'store'
+        v1357 <- CallFunction v1333, [v1356, v1345, v1350]
+        v1358 <- GetProperty v1351, 'add'
+        v1359 <- CallFunction v1333, [v1358, v1345, v1350]
+        v1360 <- GetProperty v1351, 'sub'
+        v1361 <- CallFunction v1333, [v1360, v1345, v1350]
+        v1362 <- GetProperty v1351, 'and'
+        v1363 <- CallFunction v1333, [v1362, v1345, v1350]
+        v1364 <- GetProperty v1351, 'or'
+        v1365 <- CallFunction v1333, [v1364, v1345, v1350]
+        v1366 <- GetProperty v1351, 'xor'
+        v1367 <- CallFunction v1333, [v1366, v1345, v1350]
+        v1368 <- GetProperty v1351, 'exchange'
+        v1369 <- CallFunction v1333, [v1368, v1345, v1350]
+    EndPlainFunction
+    v1370 <- CallMethod v52, 'forEach', [v1334]
+EndPlainFunction
+v1371 <- CallFunction v1312, []
+
+
+function toRangeWrapped(a1) {
+    var range = (this.max - this.min) + 1;
+    while (a1 < this.min) {
+        a1 += range;
+    }
+    while (a1 > this.max) {
+        a1 -= range;
+    }
+    return a1;
+}
+function makeConstructorObject(a17, a18, a19, a20) {
+    var o = { constr: a17, min: a18, max: a19 };
+    o.toRange = toRangeWrapped.bind(o);
+    return o;
+}
+var IntegerTypedArrayConstructors = [makeConstructorObject(Int8Array, -128, 127),makeConstructorObject(Int16Array, -32768, 32767),makeConstructorObject(Int32Array, -2147483648, 2147483647),makeConstructorObject(Uint8Array, 0, 255),makeConstructorObject(Uint16Array, 0, 65535),makeConstructorObject(Uint32Array, 0, 4294967295)];
+function TestBadArray() {
+    const v56 = new ArrayBuffer(16);
+    var ab = v56;
+    const v59 = new Uint32Array(16);
+    var u32a = v59;
+    const v63 = new Array(128);
+    var sab = v63;
+    const v66 = new Float32Array(sab);
+    var sf32a = v66;
+    const v69 = new Float64Array(sab);
+    var sf64a = v69;
+    const v72 = new Uint8ClampedArray(sab);
+    var u8ca = v72;
+    var badArrayTypes = [,1,"hi",3.4,ab,u32a,sab,sf32a,sf64a,u8ca];
+    function f80(a81) {
+        function f82() {
+            Atomics.compareExchange(a81, 0, 0, 0);
+        }
+        f82();
+        function f90() {
+            Atomics.load(a81, 0);
+        }
+        f90();
+        function f95() {
+            Atomics.store(a81, 0, 0);
+        }
+        f95();
+        function f101() {
+            Atomics.add(a81, 0, 0);
+        }
+        f101();
+        function f107() {
+            Atomics.sub(a81, 0, 0);
+        }
+        f107();
+        function f113() {
+            Atomics.and(a81, 0, 0);
+        }
+        f113();
+        function f119() {
+            Atomics.or(a81, 0, 0);
+        }
+        f119();
+        function f125() {
+            Atomics.xor(a81, 0, 0);
+        }
+        f125();
+        function f131() {
+            Atomics.exchange(a81, 0, 0);
+        }
+        f131();
+    }
+    badArrayTypes.forEach(f80);
+}
+TestBadArray();
+function TestBadIndex() {
+    const v142 = new Array(8);
+    var sab = v142;
+    const v144 = new Int32Array(sab);
+    var si32a = v144;
+    const v147 = new Int32Array(sab, 4);
+    var si32a2 = v147;
+    function f149(a150) {
+        function f151() {
+            Atomics.compareExchange(si32a, a150, 0);
+        }
+        f151();
+        function f157() {
+            Atomics.load(si32a, a150, 0);
+        }
+        f157();
+        function f162() {
+            Atomics.store(si32a, a150, 0);
+        }
+        f162();
+        function f167() {
+            Atomics.add(si32a, a150, 0);
+        }
+        f167();
+        function f172() {
+            Atomics.sub(si32a, a150, 0);
+        }
+        f172();
+        function f177() {
+            Atomics.and(si32a, a150, 0);
+        }
+        f177();
+        function f182() {
+            Atomics.or(si32a, a150, 0);
+        }
+        f182();
+        function f187() {
+            Atomics.xor(si32a, a150, 0);
+        }
+        f187();
+        function f192() {
+            Atomics.exchange(si32a, a150, 0);
+        }
+        f192();
+    }
+    ([-Infinity,Infinity]).forEach(f149, RangeError);
+    function f202(a203) {
+        function f204() {
+            Atomics.compareExchange(si32a, a203, 0, 0);
+        }
+        f204();
+        function f210() {
+            Atomics.load(si32a, a203);
+        }
+        f210();
+        function f214() {
+            Atomics.store(si32a, a203, 0);
+        }
+        f214();
+        function f219() {
+            Atomics.add(si32a, a203, 0);
+        }
+        f219();
+        function f224() {
+            Atomics.sub(si32a, a203, 0);
+        }
+        f224();
+        function f229() {
+            Atomics.and(si32a, a203, 0);
+        }
+        f229();
+        function f234() {
+            Atomics.or(si32a, a203, 0);
+        }
+        f234();
+        function f239() {
+            Atomics.xor(si32a, a203, 0);
+        }
+        f239();
+        function f244() {
+            Atomics.exchange(si32a, a203, 0);
+        }
+        f244();
+    }
+    ([-1,2,100]).forEach(f202, RangeError);
+    function f255(a256) {
+        function f257() {
+            Atomics.compareExchange(si32a2, a256, 0, 0);
+        }
+        f257();
+        function f263() {
+            Atomics.load(si32a2, a256);
+        }
+        f263();
+        function f267() {
+            Atomics.store(si32a2, a256, 0);
+        }
+        f267();
+        function f272() {
+            Atomics.add(si32a2, a256, 0);
+        }
+        f272();
+        function f277() {
+            Atomics.sub(si32a2, a256, 0);
+        }
+        f277();
+        function f282() {
+            Atomics.and(si32a2, a256, 0);
+        }
+        f282();
+        function f287() {
+            Atomics.or(si32a2, a256, 0);
+        }
+        f287();
+        function f292() {
+            Atomics.xor(si32a2, a256, 0);
+        }
+        f292();
+        function f297() {
+            Atomics.exchange(si32a2, a256, 0);
+        }
+        f297();
+    }
+    ([-1,1,100]).forEach(f255);
+    function f309() {
+        return 1000;
+    }
+    Object.defineProperty(si32a, "length", { get: f309 });
+    function f314(a315) {
+        function f316() {
+            Atomics.compareExchange(si32a, a315, 0, 0);
+        }
+        f316();
+        function f322() {
+            Atomics.load(si32a, a315);
+        }
+        f322();
+        function f326() {
+            Atomics.store(si32a, a315, 0);
+        }
+        f326();
+        function f331() {
+            Atomics.add(si32a, a315, 0);
+        }
+        f331();
+        function f336() {
+            Atomics.sub(si32a, a315, 0);
+        }
+        f336();
+        function f341() {
+            Atomics.and(si32a, a315, 0);
+        }
+        f341();
+        function f346() {
+            Atomics.or(si32a, a315, 0);
+        }
+        f346();
+        function f351() {
+            Atomics.xor(si32a, a315, 0);
+        }
+        f351();
+        function f356() {
+            Atomics.exchange(si32a, a315, 0);
+        }
+        f356();
+    }
+    ([2,100]).forEach(f314);
+}
+TestBadIndex();
+function TestGoodIndex() {
+    const v369 = new Array(64);
+    var sab = v369;
+    const v371 = new Int32Array(sab);
+    var si32a = v371;
+    const v374 = new Int32Array(sab, 32);
+    var si32a2 = v374;
+    function f376(a377, a378, a379, a380, a381) {
+        for (let i383 = 0; i383 < a378.length; ++i383) {
+            a378[i383] = i383 * 2;
+        }
+        a378[a380] = 0;
+        var result = a377(a378, a379, 0, 0);
+        a378[a380];
+        for (let i400 = 0; i400 < a378.length; ++i400) {
+            if (i400 == a380) {
+                continue;
+            }
+            i400 * 2;
+            a378[i400];
+        }
+    }
+    var testOp = f376;
+    function f411(a412) {
+        var name = String(a412);
+        function f416(a417) {
+            testOp(Atomics.compareExchange, a417, a412, 0, name);
+            testOp(Atomics.load, a417, a412, 0, name);
+            testOp(Atomics.store, a417, a412, 0, name);
+            testOp(Atomics.add, a417, a412, 0, name);
+            testOp(Atomics.sub, a417, a412, 0, name);
+            testOp(Atomics.and, a417, a412, 0, name);
+            testOp(Atomics.or, a417, a412, 0, name);
+            testOp(Atomics.xor, a417, a412, 0, name);
+            testOp(Atomics.exchange, a417, a412, 0, name);
+        }
+        ([si32a,si32a2]).forEach(f416);
+    }
+    const v449 = -0;
+    ([v449,0,0,null,false,NaN,{},"0.2","hi",,]).forEach(f411);
+    function f461() {
+        return 3;
+    }
+    var valueOf = { valueOf: f461 };
+    function f465() {
+        return "3";
+    }
+    var toString = { toString: f465 };
+    function f469(a470) {
+        var name = String(a470);
+        function f474(a475) {
+            testOp(Atomics.compareExchange, a475, a470, 3, name);
+            testOp(Atomics.load, a475, a470, 3, name);
+            testOp(Atomics.store, a475, a470, 3, name);
+            testOp(Atomics.add, a475, a470, 3, name);
+            testOp(Atomics.sub, a475, a470, 3, name);
+            testOp(Atomics.and, a475, a470, 3, name);
+            testOp(Atomics.or, a475, a470, 3, name);
+            testOp(Atomics.xor, a475, a470, 3, name);
+            testOp(Atomics.exchange, a475, a470, 3, name);
+        }
+        ([si32a,si32a2]).forEach(f474);
+    }
+    ([3,3,"3","3.0",valueOf,toString]).forEach(f469);
+}
+TestGoodIndex();
+function clearArray(a514) {
+    const v515 = new Uint8Array(a514);
+    var ui8 = v515;
+    for (let i518 = 0; i518 < a514.byteLength; ++i518) {
+        ui8[i518] = 0;
+    }
+}
+function TestCompareExchange() {
+    function f526(a527) {
+        const v533 = new Array(10 * a527.constr.BYTES_PER_ELEMENT);
+        var sab = v533;
+        const t317 = a527.constr;
+        const v536 = new t317(sab);
+        var sta = v536;
+        const t320 = a527.constr;
+        const v543 = new t320(sab, 5 * a527.constr.BYTES_PER_ELEMENT);
+        var sta2 = v543;
+        function f545(a546) {
+            clearArray(a546.buffer);
+            var name = Object.prototype.toString.call(a546);
+            for (let i555 = 0; i555 < a546.length; ++i555) {
+                Atomics.compareExchange(a546, i555, 0, 50);
+                a546[i555];
+                Atomics.compareExchange(a546, i555, 0, 100);
+                a546[i555];
+            }
+        }
+        ([sta,sta2]).forEach(f545);
+    }
+    IntegerTypedArrayConstructors.forEach(f526);
+}
+TestCompareExchange();
+function TestLoad() {
+    function f579(a580) {
+        const v586 = new Array(10 * a580.constr.BYTES_PER_ELEMENT);
+        var sab = v586;
+        const t342 = a580.constr;
+        const v589 = new t342(sab);
+        var sta = v589;
+        const t345 = a580.constr;
+        const v596 = new t345(sab, 5 * a580.constr.BYTES_PER_ELEMENT);
+        var sta2 = v596;
+        function f598(a599) {
+            clearArray(a599.buffer);
+            var name = Object.prototype.toString.call(a599);
+            for (let i608 = 0; i608 < a599.length; ++i608) {
+                a599[i608] = 0;
+                Atomics.load(a599, i608);
+                a599[i608] = 50;
+                Atomics.load(a599, i608);
+            }
+        }
+        ([sta,sta2]).forEach(f598);
+    }
+    IntegerTypedArrayConstructors.forEach(f579);
+    function f624() {
+        const v627 = new Array(4);
+        var sab = v627;
+        const v629 = new Int32Array(sab);
+        var i32 = v629;
+        const v631 = new Uint32Array(sab);
+        var u32 = v631;
+        function testLoad(a634, a635) {
+            u32[0] = a635;
+            Atomics.load(u32, 0);
+            Atomics.load(i32, 0);
+        }
+        testLoad(1073741823, 1073741823);
+        testLoad(1073741824, 1073741824);
+        testLoad(2147483648, -2147483648);
+        testLoad(4294967295, -1);
+    }
+}
+TestLoad();
+function TestStore() {
+    function f657(a658) {
+        const v664 = new Array(10 * a658.constr.BYTES_PER_ELEMENT);
+        var sab = v664;
+        const t384 = a658.constr;
+        const v667 = new t384(sab);
+        var sta = v667;
+        const t387 = a658.constr;
+        const v674 = new t387(sab, 5 * a658.constr.BYTES_PER_ELEMENT);
+        var sta2 = v674;
+        function f676(a677) {
+            clearArray(a677.buffer);
+            var name = Object.prototype.toString.call(a677);
+            for (let i686 = 0; i686 < a677.length; ++i686) {
+                Atomics.store(a677, i686, 50);
+                a677[i686];
+                Atomics.store(a677, i686, 100);
+                a677[i686];
+            }
+        }
+        ([sta,sta2]).forEach(f676);
+    }
+    IntegerTypedArrayConstructors.forEach(f657);
+}
+TestStore();
+function TestAdd() {
+    function f708(a709) {
+        const v715 = new Array(10 * a709.constr.BYTES_PER_ELEMENT);
+        var sab = v715;
+        const t409 = a709.constr;
+        const v718 = new t409(sab);
+        var sta = v718;
+        const t412 = a709.constr;
+        const v725 = new t412(sab, 5 * a709.constr.BYTES_PER_ELEMENT);
+        var sta2 = v725;
+        function f727(a728) {
+            clearArray(a728.buffer);
+            var name = Object.prototype.toString.call(a728);
+            for (let i737 = 0; i737 < a728.length; ++i737) {
+                Atomics.add(a728, i737, 50);
+                a728[i737];
+                Atomics.add(a728, i737, 70);
+                a728[i737];
+            }
+        }
+        ([sta,sta2]).forEach(f727);
+    }
+    IntegerTypedArrayConstructors.forEach(f708);
+}
+TestAdd();
+function TestSub() {
+    function f759(a760) {
+        const v766 = new Array(10 * a760.constr.BYTES_PER_ELEMENT);
+        var sab = v766;
+        const t434 = a760.constr;
+        const v769 = new t434(sab);
+        var sta = v769;
+        const t437 = a760.constr;
+        const v776 = new t437(sab, 5 * a760.constr.BYTES_PER_ELEMENT);
+        var sta2 = v776;
+        function f778(a779) {
+            clearArray(a779.buffer);
+            var name = Object.prototype.toString.call(a779);
+            for (let i788 = 0; i788 < a779.length; ++i788) {
+                a779[i788] = 120;
+                Atomics.sub(a779, i788, 50);
+                a779[i788];
+                Atomics.sub(a779, i788, 70);
+                a779[i788];
+            }
+        }
+        ([sta,sta2]).forEach(f778);
+    }
+    IntegerTypedArrayConstructors.forEach(f759);
+}
+TestSub();
+function TestAnd() {
+    function f811(a812) {
+        const v818 = new Array(10 * a812.constr.BYTES_PER_ELEMENT);
+        var sab = v818;
+        const t460 = a812.constr;
+        const v821 = new t460(sab);
+        var sta = v821;
+        const t463 = a812.constr;
+        const v828 = new t463(sab, 5 * a812.constr.BYTES_PER_ELEMENT);
+        var sta2 = v828;
+        function f830(a831) {
+            clearArray(a831.buffer);
+            var name = Object.prototype.toString.call(sta);
+            for (let i840 = 0; i840 < a831.length; ++i840) {
+                a831[i840] = 63;
+                Atomics.and(a831, i840, 48);
+                a831[i840];
+                Atomics.and(a831, i840, 32);
+                a831[i840];
+            }
+        }
+        ([sta,sta2]).forEach(f830);
+    }
+    IntegerTypedArrayConstructors.forEach(f811);
+}
+TestAnd();
+function TestOr() {
+    function f863(a864) {
+        const v870 = new Array(10 * a864.constr.BYTES_PER_ELEMENT);
+        var sab = v870;
+        const t486 = a864.constr;
+        const v873 = new t486(sab);
+        var sta = v873;
+        const t489 = a864.constr;
+        const v880 = new t489(sab, 5 * a864.constr.BYTES_PER_ELEMENT);
+        var sta2 = v880;
+        function f882(a883) {
+            clearArray(a883.buffer);
+            var name = Object.prototype.toString.call(a883);
+            for (let i892 = 0; i892 < a883.length; ++i892) {
+                a883[i892] = 48;
+                Atomics.or(a883, i892, 28);
+                a883[i892];
+                Atomics.or(a883, i892, 9);
+                a883[i892];
+            }
+        }
+        ([sta,sta2]).forEach(f882);
+    }
+    IntegerTypedArrayConstructors.forEach(f863);
+}
+TestOr();
+function TestXor() {
+    function f915(a916) {
+        const v922 = new Array(10 * a916.constr.BYTES_PER_ELEMENT);
+        var sab = v922;
+        const t512 = a916.constr;
+        const v925 = new t512(sab);
+        var sta = v925;
+        const t515 = a916.constr;
+        const v932 = new t515(sab, 5 * a916.constr.BYTES_PER_ELEMENT);
+        var sta2 = v932;
+        function f934(a935) {
+            clearArray(a935.buffer);
+            var name = Object.prototype.toString.call(a935);
+            for (let i944 = 0; i944 < a935.length; ++i944) {
+                a935[i944] = 48;
+                Atomics.xor(a935, i944, 28);
+                a935[i944];
+                Atomics.xor(a935, i944, 9);
+                a935[i944];
+            }
+        }
+        ([sta,sta2]).forEach(f934);
+    }
+    IntegerTypedArrayConstructors.forEach(f915);
+}
+TestXor();
+function TestExchange() {
+    function f967(a968) {
+        const v974 = new Array(10 * a968.constr.BYTES_PER_ELEMENT);
+        var sab = v974;
+        const t538 = a968.constr;
+        const v977 = new t538(sab);
+        var sta = v977;
+        const t541 = a968.constr;
+        const v984 = new t541(sab, 5 * a968.constr.BYTES_PER_ELEMENT);
+        var sta2 = v984;
+        function f986(a987) {
+            clearArray(a987.buffer);
+            var name = Object.prototype.toString.call(a987);
+            for (let i996 = 0; i996 < a987.length; ++i996) {
+                a987[i996] = 48;
+                Atomics.exchange(a987, i996, 28);
+                a987[i996];
+                Atomics.exchange(a987, i996, 9);
+                a987[i996];
+            }
+        }
+        ([sta,sta2]).forEach(f986);
+    }
+    IntegerTypedArrayConstructors.forEach(f967);
+}
+TestExchange();
+function TestIsLockFree() {
+    function f1019() {
+        return 3;
+    }
+    var valueOf = { valueOf: f1019 };
+    function f1023() {
+        return "3";
+    }
+    var toString = { toString: f1023 };
+    var invalid = [3.14,"foo",Infinity,NaN,false,,valueOf,toString];
+    function f1035(a1036) {
+        Atomics.isLockFree(a1036);
+        JSON.stringify(a1036);
+    }
+    invalid.forEach(f1035);
+    Atomics.isLockFree(1);
+    Atomics.isLockFree(2);
+    Atomics.isLockFree(4);
+    var validSizes = {};
+    function f1055(a1056) {
+        validSizes[a1056.constr.BYTES_PER_ELEMENT] = true;
+    }
+    IntegerTypedArrayConstructors.forEach(f1055);
+    for (let i1062 = 0; i1062 < 1000; ++i1062) {
+        if (!validSizes[i1062]) {
+            Atomics.isLockFree(i1062);
+        }
+    }
+}
+TestIsLockFree();
+function TestToNumber() {
+    function f1074(a1075) {
+        const v1081 = new Array(1 * a1075.constr.BYTES_PER_ELEMENT);
+        var sab = v1081;
+        const t594 = a1075.constr;
+        const v1084 = new t594(sab);
+        var sta = v1084;
+        function f1086() {
+            return 3;
+        }
+        var valueOf = { valueOf: f1086 };
+        function f1090() {
+            return "3";
+        }
+        var toString = { toString: f1090 };
+        function f1094(a1095) {
+            var name = (Object.prototype.toString.call(sta) + " - ") + a1095;
+            sta[0] = 50;
+            Atomics.compareExchange(sta, 0, a1095, a1095);
+            a1095 | 0;
+            Atomics.store(sta, 0, a1095);
+            a1095 | 0;
+            sta[0];
+            sta[0] = 120;
+            Atomics.add(sta, 0, a1095);
+            120 + (a1095 | 0);
+            sta[0];
+            sta[0] = 70;
+            Atomics.sub(sta, 0, a1095);
+            70 - (a1095 | 0);
+            sta[0];
+            sta[0] = 32;
+            Atomics.and(sta, 0, a1095);
+            32 & (a1095 | 0);
+            sta[0];
+            sta[0] = 61;
+            Atomics.or(sta, 0, a1095);
+            61 | (a1095 | 0);
+            sta[0];
+            sta[0] = 37;
+            Atomics.xor(sta, 0, a1095);
+            37 ^ (a1095 | 0);
+            sta[0];
+            sta[0] = 9;
+            Atomics.exchange(sta, 0, a1095);
+            a1095 | 0;
+            sta[0];
+        }
+        ([false,true,,valueOf,toString]).forEach(f1094);
+    }
+    IntegerTypedArrayConstructors.forEach(f1074);
+}
+TestToNumber();
+function TestWrapping() {
+    function f1176(a1177) {
+        const v1183 = new Array(10 * a1177.constr.BYTES_PER_ELEMENT);
+        var sab = v1183;
+        const t647 = a1177.constr;
+        const v1186 = new t647(sab);
+        var sta = v1186;
+        var name = Object.prototype.toString.call(sta);
+        var range = (a1177.max - a1177.min) + 1;
+        var offset;
+        var operand;
+        var val;
+        var newVal;
+        var valWrapped;
+        var newValWrapped;
+        for ((() => {
+                offset = -range;
+            })();
+            offset <= range;
+            (() => {
+                offset += range;
+            })()) {
+            val = 0;
+            sta[0] = 0;
+            newVal = (val + offset) + 1;
+            newValWrapped = a1177.toRange(newVal);
+            Atomics.compareExchange(sta, 0, val, newVal);
+            sta[0];
+            const v1222 = a1177.min;
+            val = v1222;
+            sta[0] = v1222;
+            newVal = (val + offset) - 1;
+            newValWrapped = a1177.toRange(newVal);
+            Atomics.compareExchange(sta, 0, val, newVal);
+            sta[0];
+            sta[0] = 0;
+            val = (a1177.max + offset) + 1;
+            valWrapped = a1177.toRange(val);
+            Atomics.store(sta, 0, val);
+            sta[0];
+            const v1242 = (a1177.min + offset) - 1;
+            val = v1242;
+            sta[0] = v1242;
+            valWrapped = a1177.toRange(val);
+            Atomics.store(sta, 0, val);
+            sta[0];
+            const v1247 = a1177.max;
+            val = v1247;
+            sta[0] = v1247;
+            operand = offset + 1;
+            valWrapped = a1177.toRange(val + operand);
+            Atomics.add(sta, 0, operand);
+            sta[0];
+            const v1255 = a1177.min;
+            val = v1255;
+            sta[0] = v1255;
+            operand = offset - 1;
+            valWrapped = a1177.toRange(val + operand);
+            Atomics.add(sta, 0, operand);
+            sta[0];
+            const v1263 = a1177.max;
+            val = v1263;
+            sta[0] = v1263;
+            operand = offset - 1;
+            valWrapped = a1177.toRange(val - operand);
+            Atomics.sub(sta, 0, operand);
+            sta[0];
+            const v1271 = a1177.min;
+            val = v1271;
+            sta[0] = v1271;
+            operand = offset + 1;
+            valWrapped = a1177.toRange(val - operand);
+            Atomics.sub(sta, 0, operand);
+            sta[0];
+            val = 15;
+            sta[0] = 15;
+            operand = 3 + offset;
+            valWrapped = a1177.toRange(val & operand);
+            Atomics.and(sta, 0, operand);
+            sta[0];
+            val = 18;
+            sta[0] = 18;
+            operand = 34 + offset;
+            valWrapped = a1177.toRange(val | operand);
+            Atomics.or(sta, 0, operand);
+            sta[0];
+            val = 18;
+            sta[0] = 18;
+            operand = 34 + offset;
+            valWrapped = a1177.toRange(val ^ operand);
+            Atomics.xor(sta, 0, operand);
+            sta[0];
+            val = 18;
+            sta[0] = 18;
+            operand = 34 + offset;
+            valWrapped = a1177.toRange(operand);
+            Atomics.exchange(sta, 0, operand);
+            sta[0];
+        }
+    }
+    IntegerTypedArrayConstructors.forEach(f1176);
+}
+TestWrapping();
+function TestValidateIndexBeforeValue() {
+    function f1313(a1314, a1315, a1316) {
+        var valueof_has_been_called = 0;
+        function f1319() {
+            valueof_has_been_called = 1;
+            return 0;
+        }
+        var value = { valueOf: f1319 };
+        var index = -1;
+        a1315[0] = 0;
+        function f1328() {
+            a1314(a1315, index, value, value);
+        }
+        f1328();
+    }
+    var testOp = f1313;
+    function f1334(a1335) {
+        const v1341 = new Array(10 * a1335.constr.BYTES_PER_ELEMENT);
+        var sab = v1341;
+        const t765 = a1335.constr;
+        const v1344 = new t765(sab);
+        var sta = v1344;
+        var name = Object.prototype.toString.call(sta);
+        testOp(Atomics.compareExchange, sta, name);
+        testOp(Atomics.load, sta, name);
+        testOp(Atomics.store, sta, name);
+        testOp(Atomics.add, sta, name);
+        testOp(Atomics.sub, sta, name);
+        testOp(Atomics.and, sta, name);
+        testOp(Atomics.or, sta, name);
+        testOp(Atomics.xor, sta, name);
+        testOp(Atomics.exchange, sta, name);
+    }
+    IntegerTypedArrayConstructors.forEach(f1334);
+}
+TestValidateIndexBeforeValue();
+
+FuzzIL program written to corpus/atomics.fzil

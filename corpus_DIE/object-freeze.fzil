@@ -1,0 +1,942 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadUndefined
+v2 <- LoadNull
+v3 <- LoadInteger '1'
+v4 <- LoadInteger '1'
+v5 <- UnaryOperation '-', v4
+v6 <- LoadInteger '0'
+v7 <- LoadFloat '42.43'
+v8 <- LoadString 'test'
+v9 <- CreateNamedVariable 'Symbol', 'none'
+v10 <- CallFunction v9, [v8]
+v11 <- Construct v0, [v1, v2, v3, v5, v6, v7, v10]
+v12 <- CreateNamedVariable 'non_objects', 'var', v11
+BeginForInLoop v12 -> v13
+    v14 <- GetComputedProperty v12, v13
+    v15 <- GetComputedProperty v12, v13
+    v16 <- CreateNamedVariable 'Object', 'none'
+    v17 <- CallMethod v16, 'freeze', [v15]
+EndForInLoop
+BeginForInLoop v12 -> v18
+    v19 <- GetComputedProperty v12, v18
+    v20 <- CreateNamedVariable 'Object', 'none'
+    v21 <- CallMethod v20, 'isFrozen', [v19]
+EndForInLoop
+v22 <- LoadInteger '42'
+v23 <- LoadString 'foobar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v22
+    ObjectLiteralAddProperty `z`, v23
+v24 <- EndObjectLiteral
+v25 <- CreateNamedVariable 'obj', 'var', v24
+v26 <- LoadString 'x'
+v27 <- CreateNamedVariable 'Object', 'none'
+v28 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v26]
+v29 <- CreateNamedVariable 'desc', 'var', v28
+v30 <- GetProperty v29, 'writable'
+v31 <- GetProperty v29, 'configurable'
+v32 <- LoadInteger '42'
+v33 <- GetProperty v29, 'value'
+v34 <- LoadString 'z'
+v35 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v34]
+Reassign v29, v35
+v36 <- GetProperty v29, 'writable'
+v37 <- GetProperty v29, 'configurable'
+v38 <- LoadString 'foobar'
+v39 <- GetProperty v29, 'value'
+v40 <- CallMethod v27, 'isExtensible', [v25]
+v41 <- CallMethod v27, 'isFrozen', [v25]
+v42 <- CallMethod v27, 'freeze', [v25]
+v43 <- CallMethod v27, 'isExtensible', [v25]
+v44 <- CallMethod v27, 'isFrozen', [v25]
+v45 <- LoadInteger '42'
+SetProperty v25, 'foo', v45
+v46 <- GetProperty v25, 'foo'
+v47 <- LoadUndefined
+v48 <- LoadString 'x'
+v49 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v48]
+Reassign v29, v49
+v50 <- GetProperty v29, 'writable'
+v51 <- GetProperty v29, 'configurable'
+v52 <- LoadInteger '42'
+v53 <- GetProperty v29, 'value'
+v54 <- LoadString 'z'
+v55 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v54]
+Reassign v29, v55
+v56 <- GetProperty v29, 'writable'
+v57 <- GetProperty v29, 'configurable'
+v58 <- LoadString 'foobar'
+v59 <- GetProperty v29, 'value'
+v60 <- LoadString 'tete'
+SetProperty v25, 'x', v60
+v61 <- LoadInteger '42'
+v62 <- GetProperty v25, 'x'
+v63 <- BeginPlainFunction -> 
+    v64 <- LoadInteger '43'
+    Return v64
+EndPlainFunction
+v65 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v63
+    ObjectLiteralAddProperty `set`, v65
+v66 <- EndObjectLiteral
+SetProperty v25, 'x', v66
+v67 <- LoadInteger '42'
+v68 <- GetProperty v25, 'x'
+BeginObjectLiteral
+v69 <- EndObjectLiteral
+v70 <- CreateNamedVariable 'obj2', 'var', v69
+v71 <- BeginPlainFunction -> 
+    v72 <- LoadInteger '43'
+    Return v72
+EndPlainFunction
+v73 <- BeginPlainFunction -> 
+EndPlainFunction
+v74 <- LoadString 'x'
+v75 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v71
+    ObjectLiteralAddProperty `set`, v73
+    ObjectLiteralAddProperty `configurable`, v75
+v76 <- EndObjectLiteral
+v77 <- CallMethod v27, 'defineProperty', [v70, v74, v76]
+v78 <- LoadString 'x'
+v79 <- CallMethod v27, 'getOwnPropertyDescriptor', [v70, v78]
+Reassign v29, v79
+v80 <- GetProperty v29, 'configurable'
+v81 <- LoadUndefined
+v82 <- GetProperty v29, 'value'
+v83 <- CallFunction v73, []
+v84 <- GetProperty v29, 'set'
+v85 <- CallFunction v71, []
+v86 <- GetProperty v29, 'get'
+v87 <- CallMethod v27, 'isExtensible', [v70]
+v88 <- CallMethod v27, 'isFrozen', [v70]
+v89 <- CallMethod v27, 'freeze', [v70]
+v90 <- CallMethod v27, 'isFrozen', [v70]
+v91 <- CallMethod v27, 'isExtensible', [v70]
+v92 <- LoadString 'x'
+v93 <- CallMethod v27, 'getOwnPropertyDescriptor', [v70, v92]
+Reassign v29, v93
+v94 <- GetProperty v29, 'configurable'
+v95 <- LoadUndefined
+v96 <- GetProperty v29, 'value'
+v97 <- CallFunction v73, []
+v98 <- GetProperty v29, 'set'
+v99 <- CallFunction v71, []
+v100 <- GetProperty v29, 'get'
+v101 <- LoadInteger '42'
+SetProperty v70, 'foo', v101
+v102 <- GetProperty v70, 'foo'
+v103 <- LoadUndefined
+v104 <- LoadInteger '42'
+v105 <- LoadInteger '43'
+v106 <- Construct v0, [v104, v105]
+v107 <- CreateNamedVariable 'arr', 'var', v106
+v108 <- LoadString '0'
+v109 <- CallMethod v27, 'getOwnPropertyDescriptor', [v107, v108]
+Reassign v29, v109
+v110 <- GetProperty v29, 'configurable'
+v111 <- GetProperty v29, 'writable'
+v112 <- LoadInteger '42'
+v113 <- GetProperty v29, 'value'
+v114 <- LoadString '1'
+v115 <- CallMethod v27, 'getOwnPropertyDescriptor', [v107, v114]
+Reassign v29, v115
+v116 <- GetProperty v29, 'configurable'
+v117 <- GetProperty v29, 'writable'
+v118 <- LoadInteger '43'
+v119 <- GetProperty v29, 'value'
+v120 <- CallMethod v27, 'isExtensible', [v107]
+v121 <- CallMethod v27, 'isFrozen', [v107]
+v122 <- CallMethod v27, 'freeze', [v107]
+v123 <- CallMethod v27, 'isFrozen', [v107]
+v124 <- CallMethod v27, 'isExtensible', [v107]
+v125 <- LoadString '0'
+v126 <- CallMethod v27, 'getOwnPropertyDescriptor', [v107, v125]
+Reassign v29, v126
+v127 <- GetProperty v29, 'configurable'
+v128 <- GetProperty v29, 'writable'
+v129 <- LoadInteger '42'
+v130 <- GetProperty v29, 'value'
+v131 <- LoadString '1'
+v132 <- CallMethod v27, 'getOwnPropertyDescriptor', [v107, v131]
+Reassign v29, v132
+v133 <- GetProperty v29, 'configurable'
+v134 <- GetProperty v29, 'writable'
+v135 <- LoadInteger '43'
+v136 <- GetProperty v29, 'value'
+v137 <- LoadString 'foo'
+SetElement v107, '0', v137
+v138 <- GetElement v107, '0'
+v139 <- LoadInteger '42'
+v140 <- LoadInteger '42'
+v141 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v140
+    ObjectLiteralAddProperty `y`, v141
+v142 <- EndObjectLiteral
+v143 <- CreateNamedVariable 'obj3', 'var', v142
+v144 <- CallMethod v27, 'isFrozen', [v143]
+v145 <- LoadString 'x'
+v146 <- LoadBoolean 'false'
+v147 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v146
+    ObjectLiteralAddProperty `writable`, v147
+v148 <- EndObjectLiteral
+v149 <- CallMethod v27, 'defineProperty', [v143, v145, v148]
+v150 <- LoadString 'y'
+v151 <- LoadBoolean 'false'
+v152 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v151
+    ObjectLiteralAddProperty `writable`, v152
+v153 <- EndObjectLiteral
+v154 <- CallMethod v27, 'defineProperty', [v143, v150, v153]
+v155 <- CallMethod v27, 'preventExtensions', [v143]
+v156 <- CallMethod v27, 'isFrozen', [v143]
+BeginObjectLiteral
+v157 <- EndObjectLiteral
+v158 <- CreateNamedVariable 'obj4', 'var', v157
+v159 <- LoadString 'x'
+v160 <- LoadBoolean 'false'
+v161 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v160
+    ObjectLiteralAddProperty `writable`, v161
+v162 <- EndObjectLiteral
+v163 <- CallMethod v27, 'defineProperty', [v158, v159, v162]
+v164 <- LoadString 'y'
+v165 <- LoadBoolean 'false'
+v166 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v165
+    ObjectLiteralAddProperty `writable`, v166
+v167 <- EndObjectLiteral
+v168 <- CallMethod v27, 'defineProperty', [v158, v164, v167]
+v169 <- CallMethod v27, 'preventExtensions', [v158]
+v170 <- CallMethod v27, 'isFrozen', [v158]
+BeginObjectLiteral
+v171 <- EndObjectLiteral
+v172 <- CreateNamedVariable 'obj5', 'var', v171
+v173 <- LoadString 'x'
+v174 <- LoadBoolean 'true'
+v175 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v174
+    ObjectLiteralAddProperty `writable`, v175
+v176 <- EndObjectLiteral
+v177 <- CallMethod v27, 'defineProperty', [v172, v173, v176]
+v178 <- LoadString 'y'
+v179 <- LoadBoolean 'false'
+v180 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v179
+    ObjectLiteralAddProperty `writable`, v180
+v181 <- EndObjectLiteral
+v182 <- CallMethod v27, 'defineProperty', [v172, v178, v181]
+v183 <- CallMethod v27, 'preventExtensions', [v172]
+v184 <- CallMethod v27, 'isFrozen', [v172]
+BeginObjectLiteral
+v185 <- EndObjectLiteral
+v186 <- CreateNamedVariable 'obj6', 'var', v185
+v187 <- CallMethod v27, 'freeze', [v186]
+v188 <- Compare v186, '===', v187
+v189 <- LoadInteger '42'
+v190 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v189
+    ObjectLiteralAddProperty `y`, v190
+v191 <- EndObjectLiteral
+Reassign v25, v191
+v192 <- LoadString 'y'
+v193 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v193
+v194 <- EndObjectLiteral
+v195 <- CallMethod v27, 'defineProperty', [v25, v192, v194]
+v196 <- CallMethod v27, 'freeze', [v25]
+v197 <- CallMethod v27, 'isFrozen', [v25]
+v198 <- LoadString 'x'
+v199 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v198]
+Reassign v29, v199
+v200 <- GetProperty v29, 'enumerable'
+v201 <- LoadString 'y'
+v202 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v201]
+Reassign v29, v202
+v203 <- GetProperty v29, 'enumerable'
+v204 <- LoadInteger '42'
+v205 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v204
+    ObjectLiteralAddProperty `y`, v205
+v206 <- EndObjectLiteral
+Reassign v25, v206
+v207 <- CallMethod v27, 'freeze', [v25]
+v208 <- CallMethod v27, 'isFrozen', [v25]
+v209 <- LoadInteger '1'
+v210 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop1`, v209
+    ObjectLiteralAddProperty `prop2`, v210
+v211 <- EndObjectLiteral
+Reassign v25, v211
+v212 <- LoadInteger '3'
+v213 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop1`, v212
+    ObjectLiteralAddProperty `prop2`, v213
+v214 <- EndObjectLiteral
+Reassign v70, v214
+v215 <- CallMethod v27, 'freeze', [v25]
+v216 <- CallMethod v27, 'freeze', [v70]
+v217 <- CallMethod v27, 'isFrozen', [v25]
+v218 <- CallMethod v27, 'isFrozen', [v70]
+v219 <- LoadInteger '1'
+v220 <- LoadInteger '2'
+v221 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop1`, v219
+    ObjectLiteralAddProperty `prop2`, v220
+    ObjectLiteralAddElement `75`, v221
+v222 <- EndObjectLiteral
+Reassign v25, v222
+v223 <- LoadInteger '3'
+v224 <- LoadInteger '4'
+v225 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop1`, v223
+    ObjectLiteralAddProperty `prop2`, v224
+    ObjectLiteralAddElement `150`, v225
+v226 <- EndObjectLiteral
+Reassign v70, v226
+v227 <- CallMethod v27, 'freeze', [v25]
+v228 <- CallMethod v27, 'freeze', [v70]
+v229 <- CallMethod v27, 'isFrozen', [v25]
+v230 <- CallMethod v27, 'isFrozen', [v70]
+v231 <- LoadString 'thing'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop`, v231
+v232 <- EndObjectLiteral
+Reassign v25, v232
+v233 <- CallMethod v27, 'freeze', [v25]
+v234 <- CallMethod v27, 'isFrozen', [v25]
+v235 <- LoadString 'hello'
+SetElement v25, '0', v235
+v236 <- LoadInteger '0'
+v237 <- CallMethod v25, 'hasOwnProperty', [v236]
+BeginObjectLiteral
+v238 <- EndObjectLiteral
+Reassign v25, v238
+BeginForLoopInitializer
+    v239 <- LoadInteger '0'
+BeginForLoopCondition -> v240
+    v241 <- LoadInteger '100'
+    v242 <- Compare v240, '<', v241
+BeginForLoopAfterthought v242 -> v243
+    v244 <- UnaryOperation '++', v243
+BeginForLoopBody -> v245
+    v246 <- LoadString 'x'
+    v247 <- BinaryOperation v246, '+', v245
+    SetComputedProperty v25, v247, v245
+EndForLoop
+v248 <- LoadBoolean 'false'
+v249 <- CreateNamedVariable 'accessorDidRun', 'var', v248
+v250 <- LoadString 'accessor'
+v251 <- BeginPlainFunction -> 
+    v252 <- LoadInteger '42'
+    Return v252
+EndPlainFunction
+v253 <- BeginPlainFunction -> 
+    v254 <- LoadBoolean 'true'
+    Reassign v249, v254
+EndPlainFunction
+v255 <- LoadBoolean 'true'
+v256 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v251
+    ObjectLiteralAddProperty `set`, v253
+    ObjectLiteralAddProperty `configurable`, v255
+    ObjectLiteralAddProperty `enumerable`, v256
+v257 <- EndObjectLiteral
+v258 <- CallMethod v27, 'defineProperty', [v25, v250, v257]
+v259 <- CallMethod v27, 'freeze', [v25]
+v260 <- CallMethod v27, 'isFrozen', [v25]
+v261 <- CallMethod v27, 'isExtensible', [v25]
+BeginForLoopInitializer
+    v262 <- LoadInteger '0'
+BeginForLoopCondition -> v263
+    v264 <- LoadInteger '100'
+    v265 <- Compare v263, '<', v264
+BeginForLoopAfterthought v265 -> v266
+    v267 <- UnaryOperation '++', v266
+BeginForLoopBody -> v268
+    v269 <- LoadString 'x'
+    v270 <- BinaryOperation v269, '+', v268
+    v271 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v270]
+    Reassign v29, v271
+    v272 <- GetProperty v29, 'writable'
+    v273 <- GetProperty v29, 'configurable'
+EndForLoop
+v274 <- LoadInteger '42'
+v275 <- GetProperty v25, 'accessor'
+v276 <- LoadString 'ignored value'
+SetProperty v25, 'accessor', v276
+v277 <- BeginPlainFunction -> v278
+    v279 <- LoadArguments
+    v280 <- CallMethod v27, 'freeze', [v279]
+    v281 <- LoadArguments
+    v282 <- CallMethod v27, 'isFrozen', [v281]
+EndPlainFunction
+v283 <- CreateNamedVariable 'func', 'var', v277
+v284 <- LoadString 'hello'
+v285 <- LoadString 'world'
+v286 <- CallFunction v283, [v284, v285]
+v287 <- LoadString 'goodbye'
+v288 <- LoadString 'world'
+v289 <- CallFunction v283, [v287, v288]
+v290 <- LoadInteger '0'
+v291 <- LoadInteger '1'
+v292 <- CreateArray [v290, v291]
+v293 <- CreateNamedVariable 'sparseArr', 'var', v292
+v294 <- LoadInteger '10000'
+SetElement v293, '10000', v294
+v295 <- CallMethod v27, 'freeze', [v293]
+v296 <- CallMethod v27, 'isFrozen', [v293]
+BeginObjectLiteral
+v297 <- EndObjectLiteral
+Reassign v25, v297
+v298 <- LoadString 'accessor'
+v299 <- BeginPlainFunction -> 
+    v300 <- LoadInteger '42'
+    Return v300
+EndPlainFunction
+v301 <- BeginPlainFunction -> 
+    v302 <- LoadBoolean 'true'
+    Reassign v249, v302
+EndPlainFunction
+v303 <- LoadBoolean 'true'
+v304 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v299
+    ObjectLiteralAddProperty `set`, v301
+    ObjectLiteralAddProperty `configurable`, v303
+    ObjectLiteralAddProperty `enumerable`, v304
+v305 <- EndObjectLiteral
+v306 <- CallMethod v27, 'defineProperty', [v25, v298, v305]
+v307 <- CallMethod v27, 'freeze', [v25]
+v308 <- CallMethod v27, 'isFrozen', [v25]
+v309 <- LoadInteger '42'
+v310 <- GetProperty v25, 'accessor'
+v311 <- LoadBoolean 'false'
+Reassign v249, v311
+v312 <- LoadString 'ignored value'
+SetProperty v25, 'accessor', v312
+v313 <- BeginPlainFunction -> 
+    Directive 'use strict'
+EndPlainFunction
+v314 <- CallMethod v27, 'freeze', [v313]
+v315 <- CallMethod v27, 'isFrozen', [v314]
+BeginObjectLiteral
+v316 <- EndObjectLiteral
+Reassign v25, v316
+v317 <- LoadString 'accessor2'
+v318 <- BeginPlainFunction -> 
+    v319 <- LoadInteger '42'
+    Return v319
+EndPlainFunction
+v320 <- BeginPlainFunction -> 
+    v321 <- LoadBoolean 'true'
+    Reassign v249, v321
+EndPlainFunction
+v322 <- LoadBoolean 'true'
+v323 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v318
+    ObjectLiteralAddProperty `set`, v320
+    ObjectLiteralAddProperty `configurable`, v322
+    ObjectLiteralAddProperty `enumerable`, v323
+v324 <- EndObjectLiteral
+v325 <- CallMethod v27, 'defineProperty', [v25, v317, v324]
+v326 <- LoadString 'foo'
+SetProperty v25, 'data', v326
+v327 <- CallMethod v27, 'freeze', [v25]
+v328 <- CallMethod v27, 'isFrozen', [v25]
+v329 <- LoadInteger '1'
+v330 <- LoadInteger '2'
+v331 <- LoadInteger '3'
+v332 <- CreateArray [v329, v330, v331]
+Reassign v25, v332
+v333 <- CallMethod v27, 'freeze', [v25]
+v334 <- CallMethod v27, 'isSealed', [v25]
+v335 <- BeginPlainFunction -> 
+    v336 <- CallMethod v25, 'push', []
+EndPlainFunction
+v337 <- CallFunction v335, []
+v338 <- CreateNamedVariable 'TypeError', 'none'
+v339 <- BeginPlainFunction -> 
+    v340 <- CallMethod v25, 'unshift', []
+EndPlainFunction
+v341 <- CallFunction v339, []
+v342 <- BeginPlainFunction -> 
+    v343 <- LoadInteger '0'
+    v344 <- LoadInteger '0'
+    v345 <- CallMethod v25, 'splice', [v343, v344]
+EndPlainFunction
+v346 <- CallFunction v342, []
+v347 <- CallMethod v27, 'isFrozen', [v25]
+v348 <- BeginPlainFunction -> 
+    v349 <- LoadInteger '0'
+    v350 <- LoadInteger '1'
+    v351 <- LoadInteger '1'
+    v352 <- CallMethod v25, 'splice', [v349, v350, v351]
+EndPlainFunction
+v353 <- CallFunction v348, []
+v354 <- CallMethod v27, 'isFrozen', [v25]
+v355 <- LoadInteger '1'
+v356 <- LoadUndefined
+v357 <- LoadInteger '3'
+v358 <- CreateArray [v355, v356, v357]
+Reassign v25, v358
+v359 <- LoadInteger '1'
+v360 <- GetProperty v25, '__proto__'
+SetElement v360, '1', v359
+v361 <- LoadInteger '1'
+v362 <- GetElement v25, '1'
+v363 <- CallMethod v27, 'freeze', [v25]
+v364 <- BeginPlainFunction -> 
+    v365 <- CallMethod v25, 'unshift', []
+EndPlainFunction
+v366 <- CallFunction v364, []
+v367 <- LoadString 'bar'
+v368 <- LoadString 'element'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v367
+    ObjectLiteralAddElement `0`, v368
+v369 <- EndObjectLiteral
+v370 <- CreateNamedVariable 'obj', 'var', v369
+v371 <- CallMethod v27, 'seal', [v370]
+v372 <- CallMethod v27, 'isSealed', [v370]
+v373 <- CallMethod v27, 'isFrozen', [v370]
+v374 <- CallMethod v27, 'freeze', [v370]
+v375 <- CallMethod v27, 'isSealed', [v370]
+v376 <- CallMethod v27, 'isFrozen', [v370]
+v377 <- BeginPlainFunction -> 
+    v378 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v379 <- CallMethod v27, 'freeze', [v378]
+    v380 <- BeginPlainFunction -> 
+        v381 <- Construct v378, []
+        Return v381
+    EndPlainFunction
+    v382 <- CallFunction v380, []
+    v383 <- LoadBoolean 'true'
+    v384 <- GetProperty v378, 'prototype'
+    SetProperty v384, 'prototypeExists', v383
+    v385 <- Construct v378, []
+    v386 <- GetProperty v385, 'prototypeExists'
+EndPlainFunction
+v387 <- CallFunction v377, []
+v388 <- BeginPlainFunction -> 
+    v389 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v390 <- LoadInteger '1'
+    v391 <- GetProperty v389, 'prototype'
+    SetProperty v391, 'foo', v390
+    v392 <- GetProperty v389, 'prototype'
+    v393 <- CallMethod v27, 'freeze', [v392]
+    v394 <- Construct v389, []
+    v395 <- CreateNamedVariable 'obj', 'var', v394
+    v396 <- LoadInteger '2'
+    SetProperty v395, 'foo', v396
+    v397 <- LoadInteger '1'
+    v398 <- GetProperty v395, 'foo'
+EndPlainFunction
+v399 <- CallFunction v388, []
+v400 <- BeginPlainFunction -> 
+    v401 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v402 <- CallMethod v27, 'freeze', [v401]
+    v403 <- CreateNamedVariable 'func', 'var', v402
+    v404 <- CallMethod v27, 'isFrozen', [v403]
+    v405 <- LoadInteger '42'
+    SetProperty v403, 'prototype', v405
+    v406 <- GetProperty v403, 'prototype'
+    v407 <- LoadInteger '42'
+    v408 <- Compare v406, '===', v407
+    v409 <- LoadString 'prototype'
+    v410 <- CallMethod v27, 'getOwnPropertyDescriptor', [v403, v409]
+    v411 <- GetProperty v410, 'writable'
+EndPlainFunction
+v412 <- CallFunction v400, []
+v413 <- BeginPlainFunction -> 
+    v414 <- BeginPlainFunction -> 
+        Directive 'use strict'
+    EndPlainFunction
+    v415 <- CallMethod v27, 'freeze', [v414]
+    v416 <- CreateNamedVariable 'func', 'var', v415
+    v417 <- CallMethod v27, 'isFrozen', [v416]
+    v418 <- LoadInteger '42'
+    SetProperty v416, 'prototype', v418
+    v419 <- GetProperty v416, 'prototype'
+    v420 <- LoadInteger '42'
+    v421 <- Compare v419, '===', v420
+    v422 <- LoadString 'prototype'
+    v423 <- CallMethod v27, 'getOwnPropertyDescriptor', [v416, v422]
+    v424 <- GetProperty v423, 'writable'
+EndPlainFunction
+v425 <- CallFunction v413, []
+v426 <- BeginPlainFunction -> 
+    v427 <- LoadInteger '0'
+    v428 <- LoadInteger '1'
+    v429 <- LoadInteger '2'
+    v430 <- CreateArray [v427, v428, v429]
+    v431 <- CallMethod v27, 'freeze', [v430]
+    v432 <- CreateNamedVariable 'array', 'var', v431
+    v433 <- CallMethod v27, 'isFrozen', [v432]
+    v434 <- LoadInteger '3'
+    SetElement v432, '0', v434
+    v435 <- LoadInteger '0'
+    v436 <- GetElement v432, '0'
+    v437 <- LoadString 'length'
+    v438 <- CallMethod v27, 'getOwnPropertyDescriptor', [v432, v437]
+    v439 <- GetProperty v438, 'writable'
+EndPlainFunction
+v440 <- CallFunction v426, []
+v441 <- BeginPlainFunction -> 
+    v442 <- LoadInteger '0'
+    v443 <- LoadInteger '1'
+    v444 <- LoadInteger '2'
+    v445 <- BeginPlainFunction -> 
+        v446 <- LoadArguments
+        Return v446
+    EndPlainFunction
+    v447 <- CallFunction v445, [v442, v443, v444]
+    v448 <- CallMethod v27, 'freeze', [v447]
+    v449 <- CreateNamedVariable 'args', 'var', v448
+    v450 <- CallMethod v27, 'isFrozen', [v449]
+    v451 <- LoadInteger '3'
+    SetElement v449, '0', v451
+    v452 <- LoadInteger '0'
+    v453 <- GetElement v449, '0'
+    v454 <- LoadString 'length'
+    v455 <- CallMethod v27, 'getOwnPropertyDescriptor', [v449, v454]
+    v456 <- GetProperty v455, 'writable'
+    v457 <- LoadString 'callee'
+    v458 <- CallMethod v27, 'getOwnPropertyDescriptor', [v449, v457]
+    v459 <- GetProperty v458, 'writable'
+EndPlainFunction
+v460 <- CallFunction v441, []
+
+
+const v11 = new Array(undefined, null, 1, -1, 0, 42.43, Symbol("test"));
+var non_objects = v11;
+for (const v13 in non_objects) {
+    non_objects[v13];
+    Object.freeze(non_objects[v13]);
+}
+for (const v18 in non_objects) {
+    Object.isFrozen(non_objects[v18]);
+}
+var obj = { x: 42, z: "foobar" };
+var desc = Object.getOwnPropertyDescriptor(obj, "x");
+desc.writable;
+desc.configurable;
+desc.value;
+desc = Object.getOwnPropertyDescriptor(obj, "z");
+desc.writable;
+desc.configurable;
+desc.value;
+Object.isExtensible(obj);
+Object.isFrozen(obj);
+Object.freeze(obj);
+Object.isExtensible(obj);
+Object.isFrozen(obj);
+obj.foo = 42;
+obj.foo;
+desc = Object.getOwnPropertyDescriptor(obj, "x");
+desc.writable;
+desc.configurable;
+desc.value;
+desc = Object.getOwnPropertyDescriptor(obj, "z");
+desc.writable;
+desc.configurable;
+desc.value;
+obj.x = "tete";
+obj.x;
+function f63() {
+    return 43;
+}
+function f65() {
+}
+obj.x = { get: f63, set: f65 };
+obj.x;
+var obj2 = {};
+function get() {
+    return 43;
+}
+function set() {
+}
+Object.defineProperty(obj2, "x", { get: get, set: set, configurable: true });
+desc = Object.getOwnPropertyDescriptor(obj2, "x");
+desc.configurable;
+desc.value;
+set();
+desc.set;
+get();
+desc.get;
+Object.isExtensible(obj2);
+Object.isFrozen(obj2);
+Object.freeze(obj2);
+Object.isFrozen(obj2);
+Object.isExtensible(obj2);
+desc = Object.getOwnPropertyDescriptor(obj2, "x");
+desc.configurable;
+desc.value;
+set();
+desc.set;
+get();
+desc.get;
+obj2.foo = 42;
+obj2.foo;
+const v106 = new Array(42, 43);
+var arr = v106;
+desc = Object.getOwnPropertyDescriptor(arr, "0");
+desc.configurable;
+desc.writable;
+desc.value;
+desc = Object.getOwnPropertyDescriptor(arr, "1");
+desc.configurable;
+desc.writable;
+desc.value;
+Object.isExtensible(arr);
+Object.isFrozen(arr);
+Object.freeze(arr);
+Object.isFrozen(arr);
+Object.isExtensible(arr);
+desc = Object.getOwnPropertyDescriptor(arr, "0");
+desc.configurable;
+desc.writable;
+desc.value;
+desc = Object.getOwnPropertyDescriptor(arr, "1");
+desc.configurable;
+desc.writable;
+desc.value;
+arr[0] = "foo";
+arr[0];
+var obj3 = { x: 42, y: "foo" };
+Object.isFrozen(obj3);
+Object.defineProperty(obj3, "x", { configurable: false, writable: false });
+Object.defineProperty(obj3, "y", { configurable: false, writable: false });
+Object.preventExtensions(obj3);
+Object.isFrozen(obj3);
+var obj4 = {};
+Object.defineProperty(obj4, "x", { configurable: false, writable: true });
+Object.defineProperty(obj4, "y", { configurable: false, writable: false });
+Object.preventExtensions(obj4);
+Object.isFrozen(obj4);
+var obj5 = {};
+Object.defineProperty(obj5, "x", { configurable: true, writable: false });
+Object.defineProperty(obj5, "y", { configurable: false, writable: false });
+Object.preventExtensions(obj5);
+Object.isFrozen(obj5);
+var obj6 = {};
+obj6 === Object.freeze(obj6);
+obj = { x: 42, y: "foo" };
+Object.defineProperty(obj, "y", { enumerable: false });
+Object.freeze(obj);
+Object.isFrozen(obj);
+desc = Object.getOwnPropertyDescriptor(obj, "x");
+desc.enumerable;
+desc = Object.getOwnPropertyDescriptor(obj, "y");
+desc.enumerable;
+obj = { x: 42, y: "foo" };
+Object.freeze(obj);
+Object.isFrozen(obj);
+obj = { prop1: 1, prop2: 2 };
+obj2 = { prop1: 3, prop2: 4 };
+Object.freeze(obj);
+Object.freeze(obj2);
+Object.isFrozen(obj);
+Object.isFrozen(obj2);
+obj = { prop1: 1, prop2: 2, 75: "foo" };
+obj2 = { prop1: 3, prop2: 4, 150: "bar" };
+Object.freeze(obj);
+Object.freeze(obj2);
+Object.isFrozen(obj);
+Object.isFrozen(obj2);
+obj = { prop: "thing" };
+Object.freeze(obj);
+Object.isFrozen(obj);
+obj[0] = "hello";
+obj.hasOwnProperty(0);
+obj = {};
+for (let i240 = 0; i240 < 100; ++i240) {
+    obj["x" + i240] = i240;
+}
+var accessorDidRun = false;
+function f251() {
+    return 42;
+}
+function f253() {
+    accessorDidRun = true;
+}
+Object.defineProperty(obj, "accessor", { get: f251, set: f253, configurable: true, enumerable: true });
+Object.freeze(obj);
+Object.isFrozen(obj);
+Object.isExtensible(obj);
+for (let i263 = 0; i263 < 100; ++i263) {
+    desc = Object.getOwnPropertyDescriptor(obj, "x" + i263);
+    desc.writable;
+    desc.configurable;
+}
+obj.accessor;
+obj.accessor = "ignored value";
+function f277(a278) {
+    Object.freeze(arguments);
+    Object.isFrozen(arguments);
+}
+var func = f277;
+func("hello", "world");
+func("goodbye", "world");
+var sparseArr = [0,1];
+sparseArr[10000] = 10000;
+Object.freeze(sparseArr);
+Object.isFrozen(sparseArr);
+obj = {};
+function f299() {
+    return 42;
+}
+function f301() {
+    accessorDidRun = true;
+}
+Object.defineProperty(obj, "accessor", { get: f299, set: f301, configurable: true, enumerable: true });
+Object.freeze(obj);
+Object.isFrozen(obj);
+obj.accessor;
+accessorDidRun = false;
+obj.accessor = "ignored value";
+function f313() {
+    'use strict';
+}
+Object.isFrozen(Object.freeze(f313));
+obj = {};
+function f318() {
+    return 42;
+}
+function f320() {
+    accessorDidRun = true;
+}
+Object.defineProperty(obj, "accessor2", { get: f318, set: f320, configurable: true, enumerable: true });
+obj.data = "foo";
+Object.freeze(obj);
+Object.isFrozen(obj);
+obj = [1,2,3];
+Object.freeze(obj);
+Object.isSealed(obj);
+function f335() {
+    obj.push();
+}
+f335();
+function f339() {
+    obj.unshift();
+}
+f339();
+function f342() {
+    obj.splice(0, 0);
+}
+f342();
+Object.isFrozen(obj);
+function f348() {
+    obj.splice(0, 1, 1);
+}
+f348();
+Object.isFrozen(obj);
+obj = [1,,3];
+const t224 = obj.__proto__;
+t224[1] = 1;
+obj[1];
+Object.freeze(obj);
+function f364() {
+    obj.unshift();
+}
+f364();
+var obj = { foo: "bar", 0: "element" };
+Object.seal(obj);
+Object.isSealed(obj);
+Object.isFrozen(obj);
+Object.freeze(obj);
+Object.isSealed(obj);
+Object.isFrozen(obj);
+function propertiesOfFrozenObjectNotFrozen() {
+    function Frozen() {
+    }
+    Object.freeze(Frozen);
+    function f380() {
+        const v381 = new Frozen();
+        return v381;
+    }
+    f380();
+    const t247 = Frozen.prototype;
+    t247.prototypeExists = true;
+    const v385 = new Frozen();
+    v385.prototypeExists;
+}
+propertiesOfFrozenObjectNotFrozen();
+function frozenPrototypePreventsPUT() {
+    function Constructor() {
+    }
+    const t257 = Constructor.prototype;
+    t257.foo = 1;
+    Object.freeze(Constructor.prototype);
+    const v394 = new Constructor();
+    var obj = v394;
+    obj.foo = 2;
+    obj.foo;
+}
+frozenPrototypePreventsPUT();
+function frozenFunctionSloppy() {
+    function foo() {
+    }
+    var func = Object.freeze(foo);
+    Object.isFrozen(func);
+    func.prototype = 42;
+    func.prototype === 42;
+    Object.getOwnPropertyDescriptor(func, "prototype").writable;
+}
+frozenFunctionSloppy();
+function frozenFunctionStrict() {
+    function foo() {
+        'use strict';
+    }
+    var func = Object.freeze(foo);
+    Object.isFrozen(func);
+    func.prototype = 42;
+    func.prototype === 42;
+    Object.getOwnPropertyDescriptor(func, "prototype").writable;
+}
+frozenFunctionStrict();
+function frozenArrayObject() {
+    var array = Object.freeze([0,1,2]);
+    Object.isFrozen(array);
+    array[0] = 3;
+    array[0];
+    Object.getOwnPropertyDescriptor(array, "length").writable;
+}
+frozenArrayObject();
+function frozenArgumentsObject() {
+    function f445() {
+        return arguments;
+    }
+    var args = Object.freeze(f445(0, 1, 2));
+    Object.isFrozen(args);
+    args[0] = 3;
+    args[0];
+    Object.getOwnPropertyDescriptor(args, "length").writable;
+    Object.getOwnPropertyDescriptor(args, "callee").writable;
+}
+frozenArgumentsObject();
+
+FuzzIL program written to corpus/object-freeze.fzil

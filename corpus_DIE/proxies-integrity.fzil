@@ -1,0 +1,525 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- TypeOf v1
+    v3 <- LoadString 'symbol'
+    v4 <- Compare v2, '===', v3
+    BeginIf v4
+        Return v1
+    EndIf
+    v5 <- CreateNamedVariable 'String', 'none'
+    v6 <- CallFunction v5, [v1]
+    Return v6
+EndPlainFunction
+v7 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'noconf', 'const', v8
+v10 <- LoadBoolean 'false'
+v11 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v10
+    ObjectLiteralAddProperty `writable`, v11
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'noconf_nowrite', 'const', v12
+v14 <- CreateNamedVariable 'Symbol', 'none'
+v15 <- CallFunction v14, []
+v16 <- CreateNamedVariable 'symbol', 'var', v15
+v17 <- CreateArray []
+v18 <- CreateNamedVariable 'log', 'var', v17
+BeginObjectLiteral
+v19 <- EndObjectLiteral
+v20 <- CreateNamedVariable 'logger', 'var', v19
+v21 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v22 <- EndObjectLiteral
+v23 <- Construct v21, [v22, v20]
+v24 <- CreateNamedVariable 'handler', 'var', v23
+v25 <- BeginPlainFunction -> v26, v27, v28
+    v29 <- BeginPlainFunction -> 
+        v30 <- LoadArguments
+        v31 <- CreateArrayWithSpread [v27, ...v30]
+        v32 <- CallMethod v18, 'push', [v31]
+        v33 <- LoadArguments
+        v34 <- CreateNamedVariable 'Reflect', 'none'
+        v35 <- CallComputedMethodWithSpread v34, v27, [...v33]
+        Return v35
+    EndPlainFunction
+    Return v29
+EndPlainFunction
+SetProperty v20, 'get', v25
+v36 <- BeginPlainFunction -> 
+    v37 <- CreateArray []
+    v38 <- CreateNamedVariable 'target', 'var', v37
+    v39 <- Construct v21, [v38, v24]
+    v40 <- CreateNamedVariable 'proxy', 'var', v39
+    v41 <- LoadInteger '0'
+    SetProperty v18, 'length', v41
+    v42 <- LoadInteger '42'
+    SetProperty v38, 'wurst', v42
+    v43 <- LoadBoolean 'true'
+    SetElement v38, '0', v43
+    v44 <- LoadUndefined
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v44
+    v45 <- EndObjectLiteral
+    v46 <- CreateNamedVariable 'Object', 'none'
+    v47 <- CallMethod v46, 'defineProperty', [v38, v16, v45]
+    v48 <- CallMethod v46, 'seal', [v40]
+    v49 <- LoadInteger '6'
+    v50 <- GetProperty v18, 'length'
+    BeginForInLoop v18 -> v51
+        v52 <- GetComputedProperty v18, v51
+        v53 <- GetElement v52, '1'
+    EndForInLoop
+    v54 <- LoadString 'preventExtensions'
+    v55 <- CreateArray [v54, v38]
+    v56 <- GetElement v18, '0'
+    v57 <- LoadString 'ownKeys'
+    v58 <- CreateArray [v57, v38]
+    v59 <- GetElement v18, '1'
+    v60 <- LoadString 'defineProperty'
+    v61 <- LoadInteger '0'
+    v62 <- CallFunction v0, [v61]
+    v63 <- CreateArray [v60, v38, v62, v9]
+    v64 <- GetElement v18, '2'
+    v65 <- LoadString 'defineProperty'
+    v66 <- LoadString 'length'
+    v67 <- CallFunction v0, [v66]
+    v68 <- CreateArray [v65, v38, v67, v9]
+    v69 <- GetElement v18, '3'
+    v70 <- LoadString 'defineProperty'
+    v71 <- LoadString 'wurst'
+    v72 <- CallFunction v0, [v71]
+    v73 <- CreateArray [v70, v38, v72, v9]
+    v74 <- GetElement v18, '4'
+    v75 <- LoadString 'defineProperty'
+    v76 <- CallFunction v0, [v16]
+    v77 <- CreateArray [v75, v38, v76, v9]
+    v78 <- GetElement v18, '5'
+EndPlainFunction
+v79 <- CallFunction v36, []
+v80 <- BeginPlainFunction -> 
+    v81 <- CreateArray []
+    v82 <- CreateNamedVariable 'target', 'var', v81
+    v83 <- Construct v21, [v82, v24]
+    v84 <- CreateNamedVariable 'proxy', 'var', v83
+    v85 <- LoadInteger '0'
+    SetProperty v18, 'length', v85
+    v86 <- LoadInteger '42'
+    SetProperty v82, 'wurst', v86
+    v87 <- LoadBoolean 'true'
+    SetElement v82, '0', v87
+    v88 <- LoadUndefined
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v88
+    v89 <- EndObjectLiteral
+    v90 <- CreateNamedVariable 'Object', 'none'
+    v91 <- CallMethod v90, 'defineProperty', [v82, v16, v89]
+    v92 <- CallMethod v90, 'freeze', [v84]
+    v93 <- LoadInteger '10'
+    v94 <- GetProperty v18, 'length'
+    BeginForInLoop v18 -> v95
+        v96 <- GetComputedProperty v18, v95
+        v97 <- GetElement v96, '1'
+    EndForInLoop
+    v98 <- LoadString 'preventExtensions'
+    v99 <- CreateArray [v98, v82]
+    v100 <- GetElement v18, '0'
+    v101 <- LoadString 'ownKeys'
+    v102 <- CreateArray [v101, v82]
+    v103 <- GetElement v18, '1'
+    v104 <- LoadString 'getOwnPropertyDescriptor'
+    v105 <- LoadInteger '0'
+    v106 <- CallFunction v0, [v105]
+    v107 <- CreateArray [v104, v82, v106]
+    v108 <- GetElement v18, '2'
+    v109 <- LoadString 'defineProperty'
+    v110 <- LoadInteger '0'
+    v111 <- CallFunction v0, [v110]
+    v112 <- CreateArray [v109, v82, v111, v13]
+    v113 <- GetElement v18, '3'
+    v114 <- LoadString 'getOwnPropertyDescriptor'
+    v115 <- LoadString 'length'
+    v116 <- CallFunction v0, [v115]
+    v117 <- CreateArray [v114, v82, v116]
+    v118 <- GetElement v18, '4'
+    v119 <- LoadString 'defineProperty'
+    v120 <- LoadString 'length'
+    v121 <- CallFunction v0, [v120]
+    v122 <- CreateArray [v119, v82, v121, v13]
+    v123 <- GetElement v18, '5'
+    v124 <- LoadString 'getOwnPropertyDescriptor'
+    v125 <- LoadString 'wurst'
+    v126 <- CallFunction v0, [v125]
+    v127 <- CreateArray [v124, v82, v126]
+    v128 <- GetElement v18, '6'
+    v129 <- LoadString 'defineProperty'
+    v130 <- LoadString 'wurst'
+    v131 <- CallFunction v0, [v130]
+    v132 <- CreateArray [v129, v82, v131, v13]
+    v133 <- GetElement v18, '7'
+    v134 <- LoadString 'getOwnPropertyDescriptor'
+    v135 <- CallFunction v0, [v16]
+    v136 <- CreateArray [v134, v82, v135]
+    v137 <- GetElement v18, '8'
+    v138 <- LoadString 'defineProperty'
+    v139 <- CallFunction v0, [v16]
+    v140 <- CreateArray [v138, v82, v139, v9]
+    v141 <- GetElement v18, '9'
+EndPlainFunction
+v142 <- CallFunction v80, []
+v143 <- BeginPlainFunction -> 
+    v144 <- CreateArray []
+    v145 <- CreateNamedVariable 'target', 'var', v144
+    v146 <- Construct v21, [v145, v24]
+    v147 <- CreateNamedVariable 'proxy', 'var', v146
+    v148 <- LoadInteger '42'
+    SetProperty v145, 'wurst', v148
+    v149 <- LoadBoolean 'true'
+    SetElement v145, '0', v149
+    v150 <- LoadUndefined
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v150
+    v151 <- EndObjectLiteral
+    v152 <- CreateNamedVariable 'Object', 'none'
+    v153 <- CallMethod v152, 'defineProperty', [v145, v16, v151]
+    v154 <- LoadInteger '0'
+    SetProperty v18, 'length', v154
+    v155 <- CallMethod v152, 'isSealed', [v147]
+    v156 <- LoadInteger '1'
+    v157 <- GetProperty v18, 'length'
+    BeginForInLoop v18 -> v158
+        v159 <- GetComputedProperty v18, v158
+        v160 <- GetElement v159, '1'
+    EndForInLoop
+    v161 <- LoadString 'isExtensible'
+    v162 <- CreateArray [v161, v145]
+    v163 <- GetElement v18, '0'
+    v164 <- LoadInteger '0'
+    SetProperty v18, 'length', v164
+    v165 <- CallMethod v152, 'preventExtensions', [v145]
+    v166 <- CallMethod v152, 'isSealed', [v147]
+    v167 <- LoadInteger '3'
+    v168 <- GetProperty v18, 'length'
+    BeginForInLoop v18 -> v169
+        v170 <- GetComputedProperty v18, v169
+        v171 <- GetElement v170, '1'
+    EndForInLoop
+    v172 <- LoadString 'isExtensible'
+    v173 <- CreateArray [v172, v145]
+    v174 <- GetElement v18, '0'
+    v175 <- LoadString 'ownKeys'
+    v176 <- CreateArray [v175, v145]
+    v177 <- GetElement v18, '1'
+    v178 <- LoadString 'getOwnPropertyDescriptor'
+    v179 <- LoadInteger '0'
+    v180 <- CallFunction v0, [v179]
+    v181 <- CreateArray [v178, v145, v180]
+    v182 <- GetElement v18, '2'
+    v183 <- LoadInteger '0'
+    SetProperty v18, 'length', v183
+    v184 <- CallMethod v152, 'seal', [v145]
+    v185 <- CallMethod v152, 'isSealed', [v147]
+    v186 <- LoadInteger '6'
+    v187 <- GetProperty v18, 'length'
+    BeginForInLoop v18 -> v188
+        v189 <- GetComputedProperty v18, v188
+        v190 <- GetElement v189, '1'
+    EndForInLoop
+    v191 <- LoadString 'isExtensible'
+    v192 <- CreateArray [v191, v145]
+    v193 <- GetElement v18, '0'
+    v194 <- LoadString 'ownKeys'
+    v195 <- CreateArray [v194, v145]
+    v196 <- GetElement v18, '1'
+    v197 <- LoadString 'getOwnPropertyDescriptor'
+    v198 <- LoadInteger '0'
+    v199 <- CallFunction v0, [v198]
+    v200 <- CreateArray [v197, v145, v199]
+    v201 <- GetElement v18, '2'
+    v202 <- LoadString 'getOwnPropertyDescriptor'
+    v203 <- LoadString 'length'
+    v204 <- CallFunction v0, [v203]
+    v205 <- CreateArray [v202, v145, v204]
+    v206 <- GetElement v18, '3'
+    v207 <- LoadString 'getOwnPropertyDescriptor'
+    v208 <- LoadString 'wurst'
+    v209 <- CallFunction v0, [v208]
+    v210 <- CreateArray [v207, v145, v209]
+    v211 <- GetElement v18, '4'
+    v212 <- LoadString 'getOwnPropertyDescriptor'
+    v213 <- CallFunction v0, [v16]
+    v214 <- CreateArray [v212, v145, v213]
+    v215 <- GetElement v18, '5'
+EndPlainFunction
+v216 <- CallFunction v143, []
+v217 <- BeginPlainFunction -> 
+    v218 <- CreateArray []
+    v219 <- CreateNamedVariable 'target', 'var', v218
+    v220 <- Construct v21, [v219, v24]
+    v221 <- CreateNamedVariable 'proxy', 'var', v220
+    v222 <- LoadInteger '42'
+    SetProperty v219, 'wurst', v222
+    v223 <- LoadBoolean 'true'
+    SetElement v219, '0', v223
+    v224 <- LoadUndefined
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v224
+    v225 <- EndObjectLiteral
+    v226 <- CreateNamedVariable 'Object', 'none'
+    v227 <- CallMethod v226, 'defineProperty', [v219, v16, v225]
+    v228 <- LoadInteger '0'
+    SetProperty v18, 'length', v228
+    v229 <- CallMethod v226, 'isFrozen', [v221]
+    v230 <- LoadInteger '1'
+    v231 <- GetProperty v18, 'length'
+    BeginForInLoop v18 -> v232
+        v233 <- GetComputedProperty v18, v232
+        v234 <- GetElement v233, '1'
+    EndForInLoop
+    v235 <- LoadString 'isExtensible'
+    v236 <- CreateArray [v235, v219]
+    v237 <- GetElement v18, '0'
+    v238 <- LoadInteger '0'
+    SetProperty v18, 'length', v238
+    v239 <- CallMethod v226, 'preventExtensions', [v219]
+    v240 <- CallMethod v226, 'isFrozen', [v221]
+    v241 <- LoadInteger '3'
+    v242 <- GetProperty v18, 'length'
+    BeginForInLoop v18 -> v243
+        v244 <- GetComputedProperty v18, v243
+        v245 <- GetElement v244, '1'
+    EndForInLoop
+    v246 <- LoadString 'isExtensible'
+    v247 <- CreateArray [v246, v219]
+    v248 <- GetElement v18, '0'
+    v249 <- LoadString 'ownKeys'
+    v250 <- CreateArray [v249, v219]
+    v251 <- GetElement v18, '1'
+    v252 <- LoadString 'getOwnPropertyDescriptor'
+    v253 <- LoadInteger '0'
+    v254 <- CallFunction v0, [v253]
+    v255 <- CreateArray [v252, v219, v254]
+    v256 <- GetElement v18, '2'
+    v257 <- LoadInteger '0'
+    SetProperty v18, 'length', v257
+    v258 <- CallMethod v226, 'freeze', [v219]
+    v259 <- CallMethod v226, 'isFrozen', [v221]
+    v260 <- LoadInteger '6'
+    v261 <- GetProperty v18, 'length'
+    BeginForInLoop v18 -> v262
+        v263 <- GetComputedProperty v18, v262
+        v264 <- GetElement v263, '1'
+    EndForInLoop
+    v265 <- LoadString 'isExtensible'
+    v266 <- CreateArray [v265, v219]
+    v267 <- GetElement v18, '0'
+    v268 <- LoadString 'ownKeys'
+    v269 <- CreateArray [v268, v219]
+    v270 <- GetElement v18, '1'
+    v271 <- LoadString 'getOwnPropertyDescriptor'
+    v272 <- LoadInteger '0'
+    v273 <- CallFunction v0, [v272]
+    v274 <- CreateArray [v271, v219, v273]
+    v275 <- GetElement v18, '2'
+    v276 <- LoadString 'getOwnPropertyDescriptor'
+    v277 <- LoadString 'length'
+    v278 <- CallFunction v0, [v277]
+    v279 <- CreateArray [v276, v219, v278]
+    v280 <- GetElement v18, '3'
+    v281 <- LoadString 'getOwnPropertyDescriptor'
+    v282 <- LoadString 'wurst'
+    v283 <- CallFunction v0, [v282]
+    v284 <- CreateArray [v281, v219, v283]
+    v285 <- GetElement v18, '4'
+    v286 <- LoadString 'getOwnPropertyDescriptor'
+    v287 <- CallFunction v0, [v16]
+    v288 <- CreateArray [v286, v219, v287]
+    v289 <- GetElement v18, '5'
+EndPlainFunction
+v290 <- CallFunction v217, []
+
+
+function toKey(a1) {
+    if (typeof a1 === "symbol") {
+        return a1;
+    }
+    return String(a1);
+}
+const noconf = { configurable: false };
+const noconf_nowrite = { configurable: false, writable: false };
+var symbol = Symbol();
+var log = [];
+var logger = {};
+const v23 = new Proxy({}, logger);
+var handler = v23;
+function f25(a26, a27, a28) {
+    function f29() {
+        log.push([a27,...arguments]);
+        return Reflect[a27](...arguments);
+    }
+    return f29;
+}
+logger.get = f25;
+function Seal() {
+    var target = [];
+    const v39 = new Proxy(target, handler);
+    var proxy = v39;
+    log.length = 0;
+    target.wurst = 42;
+    target[0] = true;
+    Object.defineProperty(target, symbol, { get: undefined });
+    Object.seal(proxy);
+    log.length;
+    for (const v51 in log) {
+        log[v51][1];
+    }
+    ["preventExtensions",target];
+    log[0];
+    ["ownKeys",target];
+    log[1];
+    ["defineProperty",target,toKey(0),noconf];
+    log[2];
+    ["defineProperty",target,toKey("length"),noconf];
+    log[3];
+    ["defineProperty",target,toKey("wurst"),noconf];
+    log[4];
+    ["defineProperty",target,toKey(symbol),noconf];
+    log[5];
+}
+Seal();
+function Freeze() {
+    var target = [];
+    const v83 = new Proxy(target, handler);
+    var proxy = v83;
+    log.length = 0;
+    target.wurst = 42;
+    target[0] = true;
+    Object.defineProperty(target, symbol, { get: undefined });
+    Object.freeze(proxy);
+    log.length;
+    for (const v95 in log) {
+        log[v95][1];
+    }
+    ["preventExtensions",target];
+    log[0];
+    ["ownKeys",target];
+    log[1];
+    ["getOwnPropertyDescriptor",target,toKey(0)];
+    log[2];
+    ["defineProperty",target,toKey(0),noconf_nowrite];
+    log[3];
+    ["getOwnPropertyDescriptor",target,toKey("length")];
+    log[4];
+    ["defineProperty",target,toKey("length"),noconf_nowrite];
+    log[5];
+    ["getOwnPropertyDescriptor",target,toKey("wurst")];
+    log[6];
+    ["defineProperty",target,toKey("wurst"),noconf_nowrite];
+    log[7];
+    ["getOwnPropertyDescriptor",target,toKey(symbol)];
+    log[8];
+    ["defineProperty",target,toKey(symbol),noconf];
+    log[9];
+}
+Freeze();
+function IsSealed() {
+    var target = [];
+    const v146 = new Proxy(target, handler);
+    var proxy = v146;
+    target.wurst = 42;
+    target[0] = true;
+    Object.defineProperty(target, symbol, { get: undefined });
+    log.length = 0;
+    Object.isSealed(proxy);
+    log.length;
+    for (const v158 in log) {
+        log[v158][1];
+    }
+    ["isExtensible",target];
+    log[0];
+    log.length = 0;
+    Object.preventExtensions(target);
+    Object.isSealed(proxy);
+    log.length;
+    for (const v169 in log) {
+        log[v169][1];
+    }
+    ["isExtensible",target];
+    log[0];
+    ["ownKeys",target];
+    log[1];
+    ["getOwnPropertyDescriptor",target,toKey(0)];
+    log[2];
+    log.length = 0;
+    Object.seal(target);
+    Object.isSealed(proxy);
+    log.length;
+    for (const v188 in log) {
+        log[v188][1];
+    }
+    ["isExtensible",target];
+    log[0];
+    ["ownKeys",target];
+    log[1];
+    ["getOwnPropertyDescriptor",target,toKey(0)];
+    log[2];
+    ["getOwnPropertyDescriptor",target,toKey("length")];
+    log[3];
+    ["getOwnPropertyDescriptor",target,toKey("wurst")];
+    log[4];
+    ["getOwnPropertyDescriptor",target,toKey(symbol)];
+    log[5];
+}
+IsSealed();
+function IsFrozen() {
+    var target = [];
+    const v220 = new Proxy(target, handler);
+    var proxy = v220;
+    target.wurst = 42;
+    target[0] = true;
+    Object.defineProperty(target, symbol, { get: undefined });
+    log.length = 0;
+    Object.isFrozen(proxy);
+    log.length;
+    for (const v232 in log) {
+        log[v232][1];
+    }
+    ["isExtensible",target];
+    log[0];
+    log.length = 0;
+    Object.preventExtensions(target);
+    Object.isFrozen(proxy);
+    log.length;
+    for (const v243 in log) {
+        log[v243][1];
+    }
+    ["isExtensible",target];
+    log[0];
+    ["ownKeys",target];
+    log[1];
+    ["getOwnPropertyDescriptor",target,toKey(0)];
+    log[2];
+    log.length = 0;
+    Object.freeze(target);
+    Object.isFrozen(proxy);
+    log.length;
+    for (const v262 in log) {
+        log[v262][1];
+    }
+    ["isExtensible",target];
+    log[0];
+    ["ownKeys",target];
+    log[1];
+    ["getOwnPropertyDescriptor",target,toKey(0)];
+    log[2];
+    ["getOwnPropertyDescriptor",target,toKey("length")];
+    log[3];
+    ["getOwnPropertyDescriptor",target,toKey("wurst")];
+    log[4];
+    ["getOwnPropertyDescriptor",target,toKey(symbol)];
+    log[5];
+}
+IsFrozen();
+
+FuzzIL program written to corpus/proxies-integrity.fzil

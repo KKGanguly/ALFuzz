@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> v1
+EndPlainFunction
+v2 <- CreateNamedVariable 'String', 'none'
+v3 <- LoadString 'bar'
+v4 <- Construct v2, [v3]
+v5 <- CallFunction v0, [v4]
+v6 <- BeginPlainFunction -> v7
+    v8 <- LoadNull
+    v9 <- Compare v7, '==', v8
+    BeginIf v9
+        v10 <- LoadNull
+        v11 <- Compare v7, '===', v10
+        BeginIf v11
+            v12 <- LoadBoolean 'false'
+        EndIf
+    EndIf
+EndPlainFunction
+v13 <- LoadUndefined
+v14 <- CallFunction v6, [v13]
+
+
+function f(a1) {
+}
+const v4 = new String("bar");
+f(v4);
+function h(a7) {
+    if (a7 == null) {
+        if (a7 === null) {
+        }
+    }
+}
+h(undefined);
+
+FuzzIL program written to corpus/regress-995.fzil

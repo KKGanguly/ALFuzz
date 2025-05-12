@@ -1,0 +1,76 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString ''
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v1
+        ObjectLiteralAddProperty `v`, v2
+    v3 <- EndObjectLiteral
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `v`, v5
+    v6 <- EndObjectLiteral
+    v7 <- LoadString ''
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v6
+        ObjectLiteralAddProperty `v`, v7
+    v8 <- EndObjectLiteral
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    v11 <- CreateArray []
+    v12 <- LoadString ''
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `v`, v12
+    v13 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v11
+        ObjectLiteralAddProperty `v`, v13
+    v14 <- EndObjectLiteral
+    Return v14
+EndPlainFunction
+v15 <- LoadInteger '0'
+v16 <- CreateArray [v15]
+v17 <- CallFunction v9, [v16]
+v18 <- LoadInteger '1'
+v19 <- CallFunction v0, [v18]
+v20 <- CreateNamedVariable 'a', 'none'
+Reassign v20, v19
+v21 <- LoadString 'v'
+v22 <- BeginPlainFunction -> 
+    v23 <- CreateNamedVariable 'gc', 'none'
+    v24 <- CallFunction v23, []
+    v25 <- LoadThis
+    v26 <- CallFunction v4, [v25]
+    Return v26
+EndPlainFunction
+v27 <- CreateNamedVariable 'a', 'none'
+v28 <- CallMethod v27, '__defineGetter__', [v21, v22]
+v29 <- GetProperty v27, 'v'
+v30 <- LoadInteger '1'
+v31 <- CallFunction v9, [v30]
+
+
+function f1(a1) {
+    return { x: a1, v: "" };
+}
+function f2(a5) {
+    const v6 = { v: a5 };
+    return { x: v6, v: "" };
+}
+function f3(a10) {
+    const v11 = [];
+    const v13 = { v: "" };
+    return { x: v11, v: v13 };
+}
+f3([0]);
+a = f1(1);
+function f22() {
+    gc();
+    return f2(this);
+}
+a.__defineGetter__("v", f22);
+a.v;
+f3(1);
+
+FuzzIL program written to corpus/regress-365172-3.fzil

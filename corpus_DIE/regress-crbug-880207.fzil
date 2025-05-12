@@ -1,0 +1,65 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadInteger '0'
+        v3 <- UnaryOperation '-', v2
+        v4 <- CreateNamedVariable 'Math', 'none'
+        v5 <- CallMethod v4, 'expm1', [v3]
+        v6 <- LoadInteger '0'
+        v7 <- UnaryOperation '-', v6
+        v8 <- CreateNamedVariable 'Object', 'none'
+        v9 <- CallMethod v8, 'is', [v5, v7]
+        Return v9
+    EndPlainFunction
+    v10 <- CallFunction v1, []
+    v11 <- CallFunction v1, []
+EndPlainFunction
+v12 <- CallFunction v0, []
+v13 <- BeginPlainFunction -> 
+    v14 <- BeginPlainFunction -> v15
+        v16 <- CreateNamedVariable 'Math', 'none'
+        v17 <- CallMethod v16, 'expm1', [v15]
+        v18 <- LoadInteger '0'
+        v19 <- UnaryOperation '-', v18
+        v20 <- CreateNamedVariable 'Object', 'none'
+        v21 <- CallMethod v20, 'is', [v17, v19]
+        Return v21
+    EndPlainFunction
+    v22 <- BeginPlainFunction -> 
+        v23 <- LoadInteger '0'
+        v24 <- UnaryOperation '-', v23
+        v25 <- CallFunction v14, [v24]
+        Return v25
+    EndPlainFunction
+    v26 <- LoadInteger '0'
+    v27 <- CallFunction v14, [v26]
+    v28 <- LoadString '0'
+    v29 <- CallFunction v14, [v28]
+    v30 <- CallFunction v22, []
+    v31 <- CallFunction v22, []
+EndPlainFunction
+v32 <- CallFunction v13, []
+
+
+function TestOptimizedFastExpm1MinusZero() {
+    function foo() {
+        return Object.is(Math.expm1(-0), -0);
+    }
+    foo();
+    foo();
+}
+TestOptimizedFastExpm1MinusZero();
+function TestOptimizedExpm1MinusZeroSlowPath() {
+    function f(a15) {
+        return Object.is(Math.expm1(a15), -0);
+    }
+    function g() {
+        return f(-0);
+    }
+    f(0);
+    f("0");
+    g();
+    g();
+}
+TestOptimizedExpm1MinusZeroSlowPath();
+
+FuzzIL program written to corpus/regress-crbug-880207.fzil

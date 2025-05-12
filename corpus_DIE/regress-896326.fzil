@@ -1,0 +1,17 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadInteger '150'
+v2 <- LoadInteger '1024'
+v3 <- BinaryOperation v1, '*', v2
+v4 <- CreateNamedVariable 'Array', 'none'
+v5 <- CallFunction v4, [v3]
+v6 <- CreateNamedVariable 'large_array', 'var', v5
+v7 <- LoadString 'new f(... large_array)'
+v8 <- CreateNamedVariable 'RangeError', 'none'
+
+
+function f() {
+}
+var large_array = Array(150 * 1024);
+
+FuzzIL program written to corpus/regress-896326.fzil

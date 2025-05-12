@@ -1,0 +1,32 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'global', 'none'
+Reassign v1, v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- CreateNamedVariable 'global', 'none'
+    Return v4
+EndPlainFunction
+v5 <- LoadInteger '1'
+v6 <- CallFunction v2, []
+v7 <- LoadInteger '1'
+v8 <- CallFunction v2, []
+v9 <- LoadInteger '1'
+v10 <- CallFunction v2, []
+v11 <- LoadThis
+v12 <- DeleteProperty v11, 'global'
+v13 <- CallFunction v2, []
+v14 <- LoadString 'sync'
+v15 <- CallFunction v2, []
+
+
+global = 1;
+function boom(a3) {
+    return global;
+}
+boom();
+boom();
+boom();
+delete this.global;
+boom();
+boom();
+
+FuzzIL program written to corpus/regress-905555-2.fzil

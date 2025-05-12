@@ -1,0 +1,63 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '100'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    v7 <- LoadInteger '1073741800'
+    v8 <- BinaryOperation v7, '+', v6
+    v9 <- CreateNamedVariable 'key', 'let', v8
+    v10 <- LoadInteger '12'
+    v11 <- LoadInteger '250'
+    v12 <- LoadInteger '251'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v10
+        ObjectLiteralAddElement `1`, v11
+        ObjectLiteralAddComputedProperty v9, v12
+    v13 <- EndObjectLiteral
+    v14 <- CreateNamedVariable 'a', 'var', v13
+    v15 <- LoadString '1'
+    v16 <- LoadString ''
+    v17 <- BinaryOperation v16, '+', v9
+    v18 <- LoadString 'length'
+    v19 <- CreateArray [v15, v17, v18]
+    v20 <- CreateNamedVariable 'Object', 'none'
+    v21 <- CallMethod v20, 'keys', [v14]
+    v22 <- CreateNamedVariable 'Array', 'none'
+    v23 <- GetProperty v22, 'prototype'
+    v24 <- GetProperty v23, 'sort'
+    v25 <- CallMethod v24, 'call', [v14]
+    v26 <- LoadString '0'
+    v27 <- LoadString ''
+    v28 <- BinaryOperation v27, '+', v9
+    v29 <- LoadString 'length'
+    v30 <- CreateArray [v26, v28, v29]
+    v31 <- CallMethod v20, 'keys', [v14]
+    v32 <- GetProperty v22, 'prototype'
+    v33 <- GetProperty v32, 'sort'
+    v34 <- CallMethod v33, 'call', [v14]
+    v35 <- LoadString '0'
+    v36 <- LoadString ''
+    v37 <- BinaryOperation v36, '+', v9
+    v38 <- LoadString 'length'
+    v39 <- CreateArray [v35, v37, v38]
+    v40 <- CallMethod v20, 'keys', [v14]
+EndForLoop
+
+
+for (let i1 = 0; i1 < 100; i1++) {
+    let key = 1073741800 + i1;
+    var a = { length: 12, 1: 250, [key]: 251 };
+    ["1","" + key,"length"];
+    Object.keys(a);
+    Array.prototype.sort.call(a);
+    ["0","" + key,"length"];
+    Object.keys(a);
+    Array.prototype.sort.call(a);
+    ["0","" + key,"length"];
+    Object.keys(a);
+}
+
+FuzzIL program written to corpus/regress-crbug-737645.fzil

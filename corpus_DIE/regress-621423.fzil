@@ -1,0 +1,35 @@
+v0 <- LoadInteger '0'
+v1 <- LoadString ''
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- LoadInteger '0'
+SetElement v3, '0', v4
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadUndefined
+    SetElement v6, '1', v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> 
+    v9 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v10 <- CallFunction v5, [v9]
+    v11 <- CallFunction v5, [v3]
+EndPlainFunction
+v12 <- CallFunction v8, []
+v13 <- CallFunction v8, []
+
+
+var a = [0,""];
+a[0] = 0;
+function g(a6) {
+    a6[1] = undefined;
+}
+function f() {
+    function f9() {
+    }
+    g(f9);
+    g(a);
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-621423.fzil

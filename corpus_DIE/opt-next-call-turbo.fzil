@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'fooed'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v1
+    v2 <- EndObjectLiteral
+    BeginWith v2
+        v3 <- CreateNamedVariable 'value', 'none'
+        Return v3
+    EndWith
+EndPlainFunction
+v4 <- LoadString 'fooed'
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadString 'bared'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v8
+    v9 <- EndObjectLiteral
+    BeginWith v9
+        v10 <- CreateNamedVariable 'value', 'none'
+        Return v10
+    EndWith
+EndPlainFunction
+v11 <- LoadString 'bared'
+v12 <- CallFunction v7, []
+v13 <- LoadString 'bared'
+v14 <- CallFunction v7, []
+v15 <- CallFunction v7, []
+
+
+function foo() {
+    with ({ value: "fooed" }) {
+        return value;
+    }
+}
+foo();
+foo();
+function bar() {
+    with ({ value: "bared" }) {
+        return value;
+    }
+}
+bar();
+bar();
+bar();
+
+FuzzIL program written to corpus/opt-next-call-turbo.fzil

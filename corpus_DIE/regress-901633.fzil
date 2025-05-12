@@ -1,0 +1,61 @@
+v0 <- LoadInteger '2396'
+v1 <- CreateNamedVariable 'magic0', 'const', v0
+v2 <- LoadInteger '1972'
+v3 <- CreateNamedVariable 'magic1', 'const', v2
+v4 <- CreateArray []
+v5 <- CreateNamedVariable 'xs', 'const', v4
+BeginForLoopInitializer
+    v6 <- LoadInteger '0'
+BeginForLoopCondition -> v7
+    v8 <- Compare v7, '<', v1
+BeginForLoopAfterthought v8 -> v9
+    v10 <- UnaryOperation '++', v9
+BeginForLoopBody -> v11
+    v12 <- LoadFloat '0.1'
+    v13 <- BinaryOperation v11, '+', v12
+    v14 <- CreateArray [v13]
+    SetComputedProperty v5, v11, v14
+EndForLoop
+v15 <- LoadInteger '0'
+v16 <- CreateNamedVariable 'cmp_calls', 'let', v15
+v17 <- BeginArrowFunction -> v18, v19
+    v20 <- LoadInteger '0'
+    v21 <- CreateArray [v20]
+    v22 <- BinaryOperation v18, '||', v21
+    Reassign v18, v22
+    v23 <- LoadInteger '0'
+    v24 <- CreateArray [v23]
+    v25 <- BinaryOperation v19, '||', v24
+    Reassign v19, v25
+    v26 <- UnaryOperation v16, '++'
+    v27 <- Compare v26, '==', v3
+    BeginIf v27
+        v28 <- LoadInteger '1'
+        SetProperty v5, 'length', v28
+    EndIf
+    v29 <- GetElement v18, '0'
+    v30 <- GetElement v19, '0'
+    v31 <- BinaryOperation v29, '-', v30
+    Return v31
+EndArrowFunction
+v32 <- CallMethod v5, 'sort', [v17]
+
+
+const magic0 = 2396;
+const magic1 = 1972;
+const xs = [];
+for (let i7 = 0; i7 < magic0; ++i7) {
+    xs[i7] = [i7 + 0.1];
+}
+let cmp_calls = 0;
+const v17 = (a18, a19) => {
+    a18 = a18 || [0];
+    a19 = a19 || [0];
+    if (cmp_calls++ == magic1) {
+        xs.length = 1;
+    }
+    return a18[0] - a19[0];
+};
+xs.sort(v17);
+
+FuzzIL program written to corpus/regress-901633.fzil

@@ -1,0 +1,116 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadThis
+    v2 <- GetProperty v1, 'foo'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadNull
+    v5 <- LoadArguments
+    v6 <- CallMethod v0, 'apply', [v4, v5]
+    Return v6
+EndPlainFunction
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadInteger '0'
+    v9 <- Void_ v8
+    v10 <- LoadArguments
+    v11 <- CallMethod v0, 'apply', [v9, v10]
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '42'
+v13 <- CreateNamedVariable 'foo', 'var', v12
+BeginForLoopInitializer
+    v14 <- LoadInteger '0'
+BeginForLoopCondition -> v15
+    v16 <- LoadInteger '3'
+    v17 <- Compare v15, '<', v16
+BeginForLoopAfterthought v17 -> v18
+    v19 <- UnaryOperation v18, '++'
+BeginForLoopBody -> v20
+    v21 <- LoadInteger '42'
+    v22 <- CallFunction v3, []
+EndForLoop
+v23 <- LoadInteger '42'
+v24 <- CallFunction v3, []
+BeginForLoopInitializer
+    v25 <- LoadInteger '0'
+BeginForLoopCondition -> v26
+    v27 <- LoadInteger '3'
+    v28 <- Compare v26, '<', v27
+BeginForLoopAfterthought v28 -> v29
+    v30 <- UnaryOperation v29, '++'
+BeginForLoopBody -> v31
+    v32 <- LoadInteger '42'
+    v33 <- CallFunction v7, []
+EndForLoop
+v34 <- LoadInteger '42'
+v35 <- CallFunction v7, []
+v36 <- LoadInteger '21'
+v37 <- CreateNamedVariable 'G1', 'var', v36
+v38 <- LoadInteger '22'
+v39 <- CreateNamedVariable 'G2', 'var', v38
+v40 <- BeginPlainFunction -> 
+    v41 <- BinaryOperation v37, '+', v39
+    v42 <- CreateNamedVariable 'v', 'var', v41
+    v43 <- LoadArguments
+    v44 <- CallMethod v0, 'apply', [v42, v43]
+    Return v44
+EndPlainFunction
+v45 <- LoadInteger '42'
+v46 <- CreateNamedVariable 'Number', 'none'
+v47 <- GetProperty v46, 'prototype'
+SetProperty v47, 'foo', v45
+v48 <- GetProperty v46, 'prototype'
+v49 <- DeleteProperty v48, 'foo'
+BeginForLoopInitializer
+    v50 <- LoadInteger '0'
+BeginForLoopCondition -> v51
+    v52 <- LoadInteger '3'
+    v53 <- Compare v51, '<', v52
+BeginForLoopAfterthought v53 -> v54
+    v55 <- UnaryOperation v54, '++'
+BeginForLoopBody -> v56
+    v57 <- LoadInteger '0'
+    v58 <- Void_ v57
+    v59 <- CallFunction v40, []
+EndForLoop
+v60 <- LoadInteger '0'
+v61 <- Void_ v60
+v62 <- CallFunction v40, []
+
+
+function f() {
+    return this.foo;
+}
+function g() {
+    return f.apply(null, arguments);
+}
+function h() {
+    return f.apply(void 0, arguments);
+}
+var foo = 42;
+for (let i15 = 0; i15 < 3; i15++) {
+    g();
+}
+g();
+for (let i26 = 0; i26 < 3; i26++) {
+    h();
+}
+h();
+var G1 = 21;
+var G2 = 22;
+function u() {
+    var v = G1 + G2;
+    return f.apply(v, arguments);
+}
+const t24 = Number.prototype;
+t24.foo = 42;
+const t26 = Number.prototype;
+delete t26.foo;
+for (let i51 = 0; i51 < 3; i51++) {
+    void 0;
+    u();
+}
+void 0;
+u();
+
+FuzzIL program written to corpus/regress-arguments.fzil

@@ -1,0 +1,79 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadString 'warmup'
+        v4 <- Compare v2, '==', v3
+        BeginIf v4
+            v5 <- CreateNamedVariable 'g', 'none'
+            v6 <- CallFunction v5, []
+            Return v6
+        EndIf
+        BeginWith v2
+            v7 <- CreateNamedVariable 'x', 'none'
+            Return v7
+        EndWith
+    EndPlainFunction
+    v8 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v9 <- LoadString 'warmup'
+    v10 <- CallFunction v1, [v9]
+    v11 <- LoadString 'warmup'
+    v12 <- CallFunction v1, [v11]
+    v13 <- LoadNull
+    Reassign v8, v13
+    v14 <- LoadInteger '23'
+    v15 <- LoadInteger '23'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v15
+    v16 <- EndObjectLiteral
+    v17 <- CallFunction v1, [v16]
+    v18 <- LoadInteger '42'
+    v19 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v19
+    v20 <- EndObjectLiteral
+    v21 <- CallFunction v1, [v20]
+    v22 <- LoadInteger '65'
+    v23 <- LoadInteger '65'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v23
+    v24 <- EndObjectLiteral
+    v25 <- CallFunction v1, [v24]
+    v26 <- LoadInteger '99'
+    v27 <- CreateNamedVariable 'Number', 'none'
+    v28 <- GetProperty v27, 'prototype'
+    SetProperty v28, 'x', v26
+    v29 <- LoadInteger '99'
+    v30 <- LoadInteger '0'
+    v31 <- CallFunction v1, [v30]
+    v32 <- LoadInteger '99'
+    v33 <- LoadInteger '0'
+    v34 <- CallFunction v1, [v33]
+EndPlainFunction
+v35 <- CallFunction v0, []
+
+
+function TestGCDuringToObjectForWith() {
+    function f(a2) {
+        if (a2 == "warmup") {
+            return g();
+        }
+        with (a2) {
+            return x;
+        }
+    }
+    function g() {
+    }
+    f("warmup");
+    f("warmup");
+    g = null;
+    f({ x: 23 });
+    f({ x: 42 });
+    f({ x: 65 });
+    const t16 = Number.prototype;
+    t16.x = 99;
+    f(0);
+    f(0);
+}
+TestGCDuringToObjectForWith();
+
+FuzzIL program written to corpus/regress-5205.fzil

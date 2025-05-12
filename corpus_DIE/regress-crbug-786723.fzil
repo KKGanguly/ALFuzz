@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    v2 <- CreateNamedVariable 'o', 'var', v1
+    v3 <- BeginPlainFunction -> 
+        v4 <- LoadInteger '1'
+        SetProperty v2, 'x', v4
+        v5 <- CreateNamedVariable 'Object', 'none'
+        v6 <- CallMethod v5, 'create', [v2]
+        Return v6
+    EndPlainFunction
+    v7 <- CreateNamedVariable 'gc', 'none'
+    v8 <- CallFunction v7, []
+    v9 <- LoadInteger '10'
+    SetProperty v2, 'x', v9
+    v10 <- CallFunction v3, []
+EndPlainFunction
+v11 <- CallFunction v0, []
+v12 <- CallFunction v0, []
+
+
+function f() {
+    var o = {};
+    function g() {
+        o.x = 1;
+        return Object.create(o);
+    }
+    gc();
+    o.x = 10;
+    g();
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-786723.fzil

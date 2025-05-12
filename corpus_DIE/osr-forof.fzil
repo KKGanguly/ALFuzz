@@ -1,0 +1,112 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'sum', 'var', v2
+    BeginForOfLoop v1 -> v4
+        v5 <- LoadInteger '2'
+        v6 <- BinaryOperation v4, '+', v5
+        v7 <- CreateNamedVariable 'x', 'var', v6
+        v8 <- LoadInteger '5'
+        v9 <- BinaryOperation v7, '+', v8
+        v10 <- CreateNamedVariable 'y', 'var', v9
+        v11 <- LoadInteger '3'
+        v12 <- BinaryOperation v10, '+', v11
+        v13 <- CreateNamedVariable 'z', 'var', v12
+        Update v3, '+', v13
+    EndForOfLoop
+    Return v3
+EndPlainFunction
+v14 <- CreateNamedVariable 'Array', 'none'
+v15 <- LoadInteger '10000'
+v16 <- Construct v14, [v15]
+v17 <- CreateNamedVariable 'a', 'var', v16
+BeginForLoopInitializer
+    v18 <- LoadInteger '0'
+BeginForLoopCondition -> v19
+    v20 <- LoadInteger '10000'
+    v21 <- Compare v19, '<', v20
+BeginForLoopAfterthought v21 -> v22
+    v23 <- UnaryOperation v22, '++'
+BeginForLoopBody -> v24
+    v25 <- LoadInteger '999'
+    v26 <- BinaryOperation v24, '*', v25
+    v27 <- LoadInteger '77'
+    v28 <- BinaryOperation v26, '%', v27
+    SetComputedProperty v17, v24, v28
+EndForLoop
+BeginForLoopInitializer
+    v29 <- LoadInteger '0'
+BeginForLoopCondition -> v30
+    v31 <- LoadInteger '3'
+    v32 <- Compare v30, '<', v31
+BeginForLoopAfterthought v32 -> v33
+    v34 <- UnaryOperation v33, '++'
+BeginForLoopBody -> v35
+    v36 <- LoadInteger '480270'
+    v37 <- CreateNamedVariable 'wrap', 'none'
+    v38 <- CallFunction v37, [v17]
+    v39 <- CallFunction v0, [v38]
+EndForLoop
+v40 <- BeginPlainFunction -> v41
+    BeginObjectLiteral
+    v42 <- EndObjectLiteral
+    v43 <- CreateNamedVariable 'iterable', 'var', v42
+    v44 <- LoadInteger '0'
+    v45 <- CreateNamedVariable 'i', 'var', v44
+    v46 <- BeginPlainFunction -> 
+        v47 <- GetProperty v41, 'length'
+        v48 <- Compare v45, '>=', v47
+        v49 <- UnaryOperation v45, '++'
+        v50 <- GetComputedProperty v41, v49
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `done`, v48
+            ObjectLiteralAddProperty `value`, v50
+        v51 <- EndObjectLiteral
+        Return v51
+    EndPlainFunction
+    v52 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `next`, v46
+        v53 <- EndObjectLiteral
+        Return v53
+    EndPlainFunction
+    v54 <- CreateNamedVariable 'Symbol', 'none'
+    v55 <- GetProperty v54, 'iterator'
+    SetComputedProperty v43, v55, v52
+    Return v43
+EndPlainFunction
+
+
+function f(a1) {
+    var sum = 0;
+    for (const v4 of a1) {
+        var x = v4 + 2;
+        var y = x + 5;
+        var z = y + 3;
+        sum += z;
+    }
+    return sum;
+}
+const v16 = new Array(10000);
+var a = v16;
+for (let i19 = 0; i19 < 10000; i19++) {
+    a[i19] = (i19 * 999) % 77;
+}
+for (let i30 = 0; i30 < 3; i30++) {
+    f(wrap(a));
+}
+function wrap(a41) {
+    var iterable = {};
+    var i = 0;
+    function next() {
+        const v48 = i >= a41.length;
+        const v50 = a41[i++];
+        return { done: v48, value: v50 };
+    }
+    function f52() {
+        return { next: next };
+    }
+    iterable[Symbol.iterator] = f52;
+    return iterable;
+}
+
+FuzzIL program written to corpus/osr-forof.fzil

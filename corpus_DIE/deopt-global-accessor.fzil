@@ -1,0 +1,49 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'x', 'none'
+Reassign v1, v0
+v2 <- LoadInteger '2'
+v3 <- CreateNamedVariable 'x', 'none'
+Reassign v3, v2
+v4 <- LoadInteger '3'
+v5 <- CreateNamedVariable 'x', 'none'
+Reassign v5, v4
+v6 <- BeginPlainFunction -> 
+    v7 <- CreateNamedVariable 'x', 'none'
+    Return v7
+EndPlainFunction
+v8 <- CallFunction v6, []
+v9 <- CallFunction v6, []
+v10 <- CallFunction v6, []
+v11 <- CallFunction v6, []
+v12 <- LoadThis
+v13 <- LoadString 'x'
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadInteger '100'
+    Return v15
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v14
+v16 <- EndObjectLiteral
+v17 <- CreateNamedVariable 'Object', 'none'
+v18 <- CallMethod v17, 'defineProperty', [v12, v13, v16]
+v19 <- LoadInteger '100'
+v20 <- CallFunction v6, []
+
+
+x = 1;
+x = 2;
+x = 3;
+function f() {
+    return x;
+}
+f();
+f();
+f();
+f();
+function f14() {
+    return 100;
+}
+Object.defineProperty(this, "x", { get: f14 });
+f();
+
+FuzzIL program written to corpus/deopt-global-accessor.fzil

@@ -1,0 +1,77 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadBoolean 'false'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4, v5
+    v6 <- LoadBoolean 'true'
+    v7 <- CallFunction v0, [v4]
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9
+    v10 <- CreateNamedVariable 'Array', 'none'
+    v11 <- Construct v10, [v9]
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '0'
+v13 <- CallFunction v8, [v12]
+v14 <- CreateNamedVariable 'obj', 'none'
+Reassign v14, v13
+v15 <- CreateNamedVariable 'obj', 'none'
+v16 <- LoadInteger '0'
+v17 <- CallFunction v8, [v16]
+v18 <- LoadInteger '10'
+v19 <- CallFunction v8, [v18]
+Reassign v15, v19
+v20 <- BeginPlainFunction -> v21
+    v22 <- CreateNamedVariable 'Array', 'none'
+    v23 <- Construct v22, [v21]
+    Return v23
+EndPlainFunction
+v24 <- LoadInteger '0'
+v25 <- CallFunction v20, [v24]
+v26 <- LoadInteger '0'
+v27 <- CallFunction v20, [v26]
+v28 <- LoadInteger '10'
+v29 <- CallFunction v20, [v28]
+v30 <- CreateNamedVariable 'a', 'var', v29
+v31 <- BeginPlainFunction -> v32
+    v33 <- GetElement v32, '0'
+    Return v33
+EndPlainFunction
+v34 <- LoadInteger '0'
+v35 <- CreateArray [v34]
+v36 <- CreateNamedVariable 'b', 'var', v35
+v37 <- CallFunction v31, [v36]
+v38 <- CallFunction v31, [v36]
+v39 <- LoadUndefined
+v40 <- CallFunction v31, [v30]
+
+
+function isHoley(a1) {
+    return false;
+}
+function assertHoley(a4, a5) {
+    isHoley(a4);
+}
+function create_array(a9) {
+    const v11 = new Array(a9);
+    return v11;
+}
+obj = create_array(0);
+create_array(0);
+obj = create_array(10);
+function f(a21) {
+    const v23 = new Array(a21);
+    return v23;
+}
+f(0);
+f(0);
+var a = f(10);
+function g(a32) {
+    return a32[0];
+}
+var b = [0];
+g(b);
+g(b);
+g(a);
+
+FuzzIL program written to corpus/regress-crbug-245480.fzil

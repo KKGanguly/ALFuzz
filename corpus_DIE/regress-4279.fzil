@@ -1,0 +1,33 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Worker'
+v2 <- LoadThis
+v3 <- GetProperty v2, 'quit'
+v4 <- BinaryOperation v1, '&&', v3
+BeginIf v4
+    BeginTry
+        v5 <- CreateNamedVariable 'Function', 'none'
+        v6 <- CreateNamedVariable 'Worker', 'none'
+        v7 <- LoadString '55'
+        v8 <- Construct v6, [v7]
+        v9 <- LoadString 'string'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `type`, v9
+        v10 <- EndObjectLiteral
+        v11 <- Construct v5, [v8, v10]
+    BeginCatch -> v12
+    EndTryCatch
+    v13 <- CreateNamedVariable 'quit', 'none'
+    v14 <- CallFunction v13, []
+EndIf
+
+
+if (this.Worker && this.quit) {
+    try {
+        const v8 = new Worker("55");
+        new Function(v8, { type: "string" });
+    } catch(e12) {
+    }
+    quit();
+}
+
+FuzzIL program written to corpus/regress-4279.fzil

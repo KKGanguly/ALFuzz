@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Object', 'none'
+    v2 <- GetProperty v1, 'prototype'
+    v3 <- LoadString 'c'
+    v4 <- BeginPlainFunction -> 
+        v5 <- LoadInteger '21'
+        Return v5
+    EndPlainFunction
+    v6 <- BeginPlainFunction -> 
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v4
+        ObjectLiteralAddProperty `set`, v6
+    v7 <- EndObjectLiteral
+    v8 <- CallMethod v1, 'defineProperty', [v2, v3, v7]
+    BeginObjectLiteral
+    v9 <- EndObjectLiteral
+    v10 <- CreateNamedVariable 'o', 'var', v9
+    v11 <- LoadInteger '7'
+    SetProperty v10, 'c', v11
+    v12 <- LoadInteger '21'
+    v13 <- GetProperty v10, 'c'
+    v14 <- LoadInteger '7'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `c`, v14
+    v15 <- EndObjectLiteral
+    v16 <- CreateNamedVariable 'l', 'var', v15
+    v17 <- LoadInteger '7'
+    v18 <- GetProperty v16, 'c'
+    v19 <- GetProperty v1, 'prototype'
+    v20 <- DeleteProperty v19, 'c'
+EndPlainFunction
+v21 <- CallFunction v0, []
+
+
+function TestModifedPrototypeInObjectLiteral() {
+    const v2 = Object.prototype;
+    function f4() {
+        return 21;
+    }
+    function f6() {
+    }
+    Object.defineProperty(v2, "c", { get: f4, set: f6 });
+    var o = {};
+    o.c = 7;
+    o.c;
+    var l = { c: 7 };
+    l.c;
+    const t12 = Object.prototype;
+    delete t12.c;
+}
+TestModifedPrototypeInObjectLiteral();
+
+FuzzIL program written to corpus/object-literal-modified-object-prototype.fzil

@@ -1,0 +1,594 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'defineProperty'
+v2 <- CreateNamedVariable 'dp', 'var', v1
+v3 <- GetProperty v0, 'getOwnPropertyDescriptor'
+v4 <- CreateNamedVariable 'gop', 'var', v3
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '111'
+    Return v6
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadInteger '222'
+    v10 <- CreateNamedVariable 'print', 'none'
+    v11 <- CallFunction v10, [v9]
+EndPlainFunction
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '333'
+    Return v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> v15
+    v16 <- LoadInteger '444'
+    v17 <- CreateNamedVariable 'print', 'none'
+    v18 <- CallFunction v17, [v16]
+EndPlainFunction
+v19 <- LoadUndefined
+v20 <- CreateNamedVariable 'obj1', 'var', v19
+v21 <- LoadUndefined
+v22 <- CreateNamedVariable 'obj2', 'var', v21
+v23 <- LoadUndefined
+v24 <- CreateNamedVariable 'obj3', 'var', v23
+v25 <- LoadUndefined
+v26 <- CreateNamedVariable 'obj4', 'var', v25
+BeginObjectLiteral
+v27 <- EndObjectLiteral
+Reassign v20, v27
+v28 <- LoadString 'alpha'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+v29 <- EndObjectLiteral
+v30 <- CallFunction v2, [v20, v28, v29]
+BeginObjectLiteral
+v31 <- EndObjectLiteral
+Reassign v22, v31
+v32 <- LoadString 'alpha'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+v33 <- EndObjectLiteral
+v34 <- CallFunction v2, [v22, v32, v33]
+BeginObjectLiteral
+v35 <- EndObjectLiteral
+Reassign v20, v35
+v36 <- LoadString 'bravo'
+v37 <- CallMethod v20, '__defineGetter__', [v36, v5]
+v38 <- CallFunction v5, []
+v39 <- LoadString 'bravo'
+v40 <- CallMethod v20, '__lookupGetter__', [v39]
+BeginObjectLiteral
+v41 <- EndObjectLiteral
+Reassign v22, v41
+v42 <- LoadString 'bravo'
+v43 <- CallMethod v22, '__defineGetter__', [v42, v5]
+v44 <- CallFunction v5, []
+v45 <- LoadString 'bravo'
+v46 <- CallMethod v22, '__lookupGetter__', [v45]
+BeginObjectLiteral
+v47 <- EndObjectLiteral
+Reassign v20, v47
+v48 <- LoadString 'charlie'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v7
+v49 <- EndObjectLiteral
+v50 <- CallFunction v2, [v20, v48, v49]
+BeginObjectLiteral
+v51 <- EndObjectLiteral
+Reassign v22, v51
+v52 <- LoadString 'charlie'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v7
+v53 <- EndObjectLiteral
+v54 <- CallFunction v2, [v22, v52, v53]
+BeginObjectLiteral
+v55 <- EndObjectLiteral
+Reassign v20, v55
+v56 <- LoadString 'delta'
+v57 <- CallMethod v20, '__defineSetter__', [v56, v7]
+v58 <- CallFunction v7, []
+v59 <- LoadString 'delta'
+v60 <- CallMethod v20, '__lookupSetter__', [v59]
+BeginObjectLiteral
+v61 <- EndObjectLiteral
+Reassign v22, v61
+v62 <- LoadString 'delta'
+v63 <- CallMethod v22, '__defineSetter__', [v62, v7]
+v64 <- CallFunction v7, []
+v65 <- LoadString 'delta'
+v66 <- CallMethod v22, '__lookupSetter__', [v65]
+BeginObjectLiteral
+v67 <- EndObjectLiteral
+Reassign v20, v67
+v68 <- LoadString 'foxtrot'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+    ObjectLiteralAddProperty `set`, v7
+v69 <- EndObjectLiteral
+v70 <- CallFunction v2, [v20, v68, v69]
+BeginObjectLiteral
+v71 <- EndObjectLiteral
+Reassign v22, v71
+v72 <- LoadString 'foxtrot'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+    ObjectLiteralAddProperty `set`, v7
+v73 <- EndObjectLiteral
+v74 <- CallFunction v2, [v22, v72, v73]
+BeginObjectLiteral
+v75 <- EndObjectLiteral
+Reassign v20, v75
+v76 <- LoadString 'golf'
+v77 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+    ObjectLiteralAddProperty `configurable`, v77
+v78 <- EndObjectLiteral
+v79 <- CallFunction v2, [v20, v76, v78]
+v80 <- LoadString 'golf'
+v81 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v7
+    ObjectLiteralAddProperty `configurable`, v81
+v82 <- EndObjectLiteral
+v83 <- CallFunction v2, [v20, v80, v82]
+BeginObjectLiteral
+v84 <- EndObjectLiteral
+Reassign v22, v84
+v85 <- LoadString 'golf'
+v86 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+    ObjectLiteralAddProperty `configurable`, v86
+v87 <- EndObjectLiteral
+v88 <- CallFunction v2, [v22, v85, v87]
+v89 <- LoadString 'golf'
+v90 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v7
+    ObjectLiteralAddProperty `configurable`, v90
+v91 <- EndObjectLiteral
+v92 <- CallFunction v2, [v22, v89, v91]
+BeginObjectLiteral
+v93 <- EndObjectLiteral
+Reassign v20, v93
+v94 <- LoadString 'hotel'
+v95 <- CallMethod v20, '__defineGetter__', [v94, v5]
+v96 <- LoadString 'hotel'
+v97 <- CallMethod v20, '__defineSetter__', [v96, v7]
+BeginObjectLiteral
+v98 <- EndObjectLiteral
+Reassign v22, v98
+v99 <- LoadString 'hotel'
+v100 <- CallMethod v22, '__defineGetter__', [v99, v5]
+v101 <- LoadString 'hotel'
+v102 <- CallMethod v22, '__defineSetter__', [v101, v7]
+BeginObjectLiteral
+v103 <- EndObjectLiteral
+Reassign v20, v103
+v104 <- LoadString 'india'
+v105 <- LoadBoolean 'true'
+v106 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+    ObjectLiteralAddProperty `configurable`, v105
+    ObjectLiteralAddProperty `enumerable`, v106
+v107 <- EndObjectLiteral
+v108 <- CallFunction v2, [v20, v104, v107]
+v109 <- CallFunction v5, []
+v110 <- LoadString 'india'
+v111 <- CallFunction v4, [v20, v110]
+v112 <- GetProperty v111, 'get'
+v113 <- LoadString 'india'
+v114 <- CallFunction v4, [v20, v113]
+v115 <- GetProperty v114, 'configurable'
+v116 <- LoadString 'india'
+v117 <- CallFunction v4, [v20, v116]
+v118 <- GetProperty v117, 'enumerable'
+v119 <- LoadString 'india'
+v120 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v120
+v121 <- EndObjectLiteral
+v122 <- CallFunction v2, [v20, v119, v121]
+v123 <- CallFunction v5, []
+v124 <- LoadString 'india'
+v125 <- CallFunction v4, [v20, v124]
+v126 <- GetProperty v125, 'get'
+v127 <- LoadString 'india'
+v128 <- CallFunction v4, [v20, v127]
+v129 <- GetProperty v128, 'configurable'
+v130 <- LoadString 'india'
+v131 <- CallFunction v4, [v20, v130]
+v132 <- GetProperty v131, 'enumerable'
+BeginObjectLiteral
+v133 <- EndObjectLiteral
+Reassign v20, v133
+v134 <- LoadString 'juliet'
+v135 <- LoadBoolean 'true'
+v136 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v7
+    ObjectLiteralAddProperty `configurable`, v135
+    ObjectLiteralAddProperty `enumerable`, v136
+v137 <- EndObjectLiteral
+v138 <- CallFunction v2, [v20, v134, v137]
+v139 <- CallFunction v7, []
+v140 <- LoadString 'juliet'
+v141 <- CallFunction v4, [v20, v140]
+v142 <- GetProperty v141, 'set'
+v143 <- LoadString 'juliet'
+v144 <- CallFunction v4, [v20, v143]
+v145 <- GetProperty v144, 'configurable'
+v146 <- LoadString 'juliet'
+v147 <- CallFunction v4, [v20, v146]
+v148 <- GetProperty v147, 'enumerable'
+BeginObjectLiteral
+v149 <- EndObjectLiteral
+Reassign v22, v149
+v150 <- LoadString 'juliet'
+v151 <- LoadBoolean 'true'
+v152 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v7
+    ObjectLiteralAddProperty `configurable`, v151
+    ObjectLiteralAddProperty `enumerable`, v152
+v153 <- EndObjectLiteral
+v154 <- CallFunction v2, [v22, v150, v153]
+v155 <- CallFunction v7, []
+v156 <- LoadString 'juliet'
+v157 <- CallFunction v4, [v22, v156]
+v158 <- GetProperty v157, 'set'
+v159 <- LoadString 'juliet'
+v160 <- CallFunction v4, [v22, v159]
+v161 <- GetProperty v160, 'configurable'
+v162 <- LoadString 'juliet'
+v163 <- CallFunction v4, [v22, v162]
+v164 <- GetProperty v163, 'enumerable'
+v165 <- LoadString 'juliet'
+v166 <- LoadBoolean 'false'
+v167 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v7
+    ObjectLiteralAddProperty `configurable`, v166
+    ObjectLiteralAddProperty `enumerable`, v167
+v168 <- EndObjectLiteral
+v169 <- CallFunction v2, [v20, v165, v168]
+v170 <- CallFunction v7, []
+v171 <- LoadString 'juliet'
+v172 <- CallFunction v4, [v20, v171]
+v173 <- GetProperty v172, 'set'
+v174 <- LoadString 'juliet'
+v175 <- CallFunction v4, [v20, v174]
+v176 <- GetProperty v175, 'configurable'
+v177 <- LoadString 'juliet'
+v178 <- CallFunction v4, [v20, v177]
+v179 <- GetProperty v178, 'enumerable'
+v180 <- CallFunction v7, []
+v181 <- LoadString 'juliet'
+v182 <- CallFunction v4, [v22, v181]
+v183 <- GetProperty v182, 'set'
+v184 <- LoadString 'juliet'
+v185 <- CallFunction v4, [v22, v184]
+v186 <- GetProperty v185, 'configurable'
+v187 <- LoadString 'juliet'
+v188 <- CallFunction v4, [v22, v187]
+v189 <- GetProperty v188, 'enumerable'
+BeginObjectLiteral
+v190 <- EndObjectLiteral
+Reassign v20, v190
+v191 <- LoadString 'kilo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+v192 <- EndObjectLiteral
+v193 <- CallFunction v2, [v20, v191, v192]
+BeginObjectLiteral
+v194 <- EndObjectLiteral
+Reassign v22, v194
+v195 <- LoadString 'kilo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v12
+v196 <- EndObjectLiteral
+v197 <- CallFunction v2, [v22, v195, v196]
+v198 <- CallFunction v5, []
+v199 <- LoadString 'kilo'
+v200 <- CallFunction v4, [v20, v199]
+v201 <- GetProperty v200, 'get'
+v202 <- CallFunction v12, []
+v203 <- LoadString 'kilo'
+v204 <- CallFunction v4, [v22, v203]
+v205 <- GetProperty v204, 'get'
+BeginObjectLiteral
+v206 <- EndObjectLiteral
+Reassign v20, v206
+v207 <- LoadString 'lima'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+    ObjectLiteralAddProperty `set`, v7
+v208 <- EndObjectLiteral
+v209 <- CallFunction v2, [v20, v207, v208]
+BeginObjectLiteral
+v210 <- EndObjectLiteral
+Reassign v22, v210
+v211 <- LoadString 'lima'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+    ObjectLiteralAddProperty `set`, v14
+v212 <- EndObjectLiteral
+v213 <- CallFunction v2, [v22, v211, v212]
+v214 <- CallFunction v7, []
+v215 <- LoadString 'lima'
+v216 <- CallFunction v4, [v20, v215]
+v217 <- GetProperty v216, 'set'
+v218 <- CallFunction v14, []
+v219 <- LoadString 'lima'
+v220 <- CallFunction v4, [v22, v219]
+v221 <- GetProperty v220, 'set'
+BeginObjectLiteral
+v222 <- EndObjectLiteral
+Reassign v20, v222
+v223 <- LoadString 'mike'
+v224 <- LoadUndefined
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v224
+v225 <- EndObjectLiteral
+v226 <- CallFunction v2, [v20, v223, v225]
+v227 <- LoadString 'mike'
+v228 <- TestIn v227, v20
+v229 <- LoadUndefined
+v230 <- LoadString 'mike'
+v231 <- CallFunction v4, [v20, v230]
+v232 <- GetProperty v231, 'get'
+v233 <- LoadUndefined
+v234 <- LoadString 'mike'
+v235 <- CallMethod v20, '__lookupGetter__', [v234]
+v236 <- LoadUndefined
+v237 <- LoadString 'mike'
+v238 <- CallFunction v4, [v20, v237]
+v239 <- GetProperty v238, 'set'
+v240 <- LoadUndefined
+v241 <- LoadString 'mike'
+v242 <- CallMethod v20, '__lookupSetter__', [v241]
+BeginObjectLiteral
+v243 <- EndObjectLiteral
+Reassign v20, v243
+v244 <- LoadString 'november'
+v245 <- LoadUndefined
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v245
+v246 <- EndObjectLiteral
+v247 <- CallFunction v2, [v20, v244, v246]
+v248 <- LoadString 'november'
+v249 <- TestIn v248, v20
+v250 <- LoadUndefined
+v251 <- LoadString 'november'
+v252 <- CallFunction v4, [v20, v251]
+v253 <- GetProperty v252, 'get'
+v254 <- LoadUndefined
+v255 <- LoadString 'november'
+v256 <- CallMethod v20, '__lookupGetter__', [v255]
+v257 <- LoadUndefined
+v258 <- LoadString 'november'
+v259 <- CallFunction v4, [v20, v258]
+v260 <- GetProperty v259, 'set'
+v261 <- LoadUndefined
+v262 <- LoadString 'november'
+v263 <- CallMethod v20, '__lookupSetter__', [v262]
+BeginObjectLiteral
+v264 <- EndObjectLiteral
+Reassign v20, v264
+v265 <- LoadInteger '12345'
+SetProperty v20, 'oscar', v265
+v266 <- LoadString 'oscar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v7
+v267 <- EndObjectLiteral
+v268 <- CallFunction v2, [v20, v266, v267]
+v269 <- CallFunction v7, []
+v270 <- LoadString 'oscar'
+v271 <- CallFunction v4, [v20, v270]
+v272 <- GetProperty v271, 'set'
+BeginObjectLiteral
+v273 <- EndObjectLiteral
+Reassign v20, v273
+v274 <- LoadString 'papa'
+v275 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+    ObjectLiteralAddProperty `configurable`, v275
+v276 <- EndObjectLiteral
+v277 <- CallFunction v2, [v20, v274, v276]
+v278 <- LoadString 'papa'
+v279 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+    ObjectLiteralAddProperty `set`, v7
+    ObjectLiteralAddProperty `configurable`, v279
+v280 <- EndObjectLiteral
+v281 <- CallFunction v2, [v20, v278, v280]
+v282 <- CallFunction v5, []
+v283 <- LoadString 'papa'
+v284 <- CallFunction v4, [v20, v283]
+v285 <- GetProperty v284, 'get'
+v286 <- CallFunction v7, []
+v287 <- LoadString 'papa'
+v288 <- CallFunction v4, [v20, v287]
+v289 <- GetProperty v288, 'set'
+v290 <- LoadString 'papa'
+v291 <- CallFunction v4, [v20, v290]
+v292 <- GetProperty v291, 'configurable'
+v293 <- LoadString 'papa'
+v294 <- CallFunction v4, [v20, v293]
+v295 <- GetProperty v294, 'enumerable'
+BeginObjectLiteral
+v296 <- EndObjectLiteral
+Reassign v20, v296
+v297 <- LoadString 'quebec'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+v298 <- EndObjectLiteral
+v299 <- CallFunction v2, [v20, v297, v298]
+v300 <- CallMethod v0, 'create', [v20]
+Reassign v22, v300
+v301 <- CallMethod v0, 'create', [v22]
+Reassign v24, v301
+v302 <- CallMethod v0, 'create', [v22]
+Reassign v26, v302
+BeginObjectLiteral
+v303 <- EndObjectLiteral
+Reassign v20, v303
+v304 <- LoadString 'romeo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v7
+v305 <- EndObjectLiteral
+v306 <- CallFunction v2, [v20, v304, v305]
+v307 <- CallMethod v0, 'create', [v20]
+Reassign v22, v307
+v308 <- CallMethod v0, 'create', [v22]
+Reassign v24, v308
+v309 <- CallMethod v0, 'create', [v22]
+Reassign v26, v309
+
+
+var dp = Object.defineProperty;
+var gop = Object.getOwnPropertyDescriptor;
+function getter() {
+    return 111;
+}
+function setter(a8) {
+    print(222);
+}
+function anotherGetter() {
+    return 333;
+}
+function anotherSetter(a15) {
+    print(444);
+}
+var obj1;
+var obj2;
+var obj3;
+var obj4;
+obj1 = {};
+dp(obj1, "alpha", { get: getter });
+obj2 = {};
+dp(obj2, "alpha", { get: getter });
+obj1 = {};
+obj1.__defineGetter__("bravo", getter);
+getter();
+obj1.__lookupGetter__("bravo");
+obj2 = {};
+obj2.__defineGetter__("bravo", getter);
+getter();
+obj2.__lookupGetter__("bravo");
+obj1 = {};
+dp(obj1, "charlie", { set: setter });
+obj2 = {};
+dp(obj2, "charlie", { set: setter });
+obj1 = {};
+obj1.__defineSetter__("delta", setter);
+setter();
+obj1.__lookupSetter__("delta");
+obj2 = {};
+obj2.__defineSetter__("delta", setter);
+setter();
+obj2.__lookupSetter__("delta");
+obj1 = {};
+dp(obj1, "foxtrot", { get: getter, set: setter });
+obj2 = {};
+dp(obj2, "foxtrot", { get: getter, set: setter });
+obj1 = {};
+dp(obj1, "golf", { get: getter, configurable: true });
+dp(obj1, "golf", { set: setter, configurable: true });
+obj2 = {};
+dp(obj2, "golf", { get: getter, configurable: true });
+dp(obj2, "golf", { set: setter, configurable: true });
+obj1 = {};
+obj1.__defineGetter__("hotel", getter);
+obj1.__defineSetter__("hotel", setter);
+obj2 = {};
+obj2.__defineGetter__("hotel", getter);
+obj2.__defineSetter__("hotel", setter);
+obj1 = {};
+dp(obj1, "india", { get: getter, configurable: true, enumerable: true });
+getter();
+gop(obj1, "india").get;
+gop(obj1, "india").configurable;
+gop(obj1, "india").enumerable;
+dp(obj1, "india", { enumerable: false });
+getter();
+gop(obj1, "india").get;
+gop(obj1, "india").configurable;
+gop(obj1, "india").enumerable;
+obj1 = {};
+dp(obj1, "juliet", { set: setter, configurable: true, enumerable: false });
+setter();
+gop(obj1, "juliet").set;
+gop(obj1, "juliet").configurable;
+gop(obj1, "juliet").enumerable;
+obj2 = {};
+dp(obj2, "juliet", { set: setter, configurable: true, enumerable: false });
+setter();
+gop(obj2, "juliet").set;
+gop(obj2, "juliet").configurable;
+gop(obj2, "juliet").enumerable;
+dp(obj1, "juliet", { set: setter, configurable: false, enumerable: true });
+setter();
+gop(obj1, "juliet").set;
+gop(obj1, "juliet").configurable;
+gop(obj1, "juliet").enumerable;
+setter();
+gop(obj2, "juliet").set;
+gop(obj2, "juliet").configurable;
+gop(obj2, "juliet").enumerable;
+obj1 = {};
+dp(obj1, "kilo", { get: getter });
+obj2 = {};
+dp(obj2, "kilo", { get: anotherGetter });
+getter();
+gop(obj1, "kilo").get;
+anotherGetter();
+gop(obj2, "kilo").get;
+obj1 = {};
+dp(obj1, "lima", { get: getter, set: setter });
+obj2 = {};
+dp(obj2, "lima", { get: getter, set: anotherSetter });
+setter();
+gop(obj1, "lima").set;
+anotherSetter();
+gop(obj2, "lima").set;
+obj1 = {};
+dp(obj1, "mike", { get: undefined });
+"mike" in obj1;
+gop(obj1, "mike").get;
+obj1.__lookupGetter__("mike");
+gop(obj1, "mike").set;
+obj1.__lookupSetter__("mike");
+obj1 = {};
+dp(obj1, "november", { set: undefined });
+"november" in obj1;
+gop(obj1, "november").get;
+obj1.__lookupGetter__("november");
+gop(obj1, "november").set;
+obj1.__lookupSetter__("november");
+obj1 = {};
+obj1.oscar = 12345;
+dp(obj1, "oscar", { set: setter });
+setter();
+gop(obj1, "oscar").set;
+obj1 = {};
+dp(obj1, "papa", { get: getter, configurable: true });
+dp(obj1, "papa", { get: getter, set: setter, configurable: true });
+getter();
+gop(obj1, "papa").get;
+setter();
+gop(obj1, "papa").set;
+gop(obj1, "papa").configurable;
+gop(obj1, "papa").enumerable;
+obj1 = {};
+dp(obj1, "quebec", { get: getter });
+obj2 = Object.create(obj1);
+obj3 = Object.create(obj2);
+obj4 = Object.create(obj2);
+obj1 = {};
+dp(obj1, "romeo", { set: setter });
+obj2 = Object.create(obj1);
+obj3 = Object.create(obj2);
+obj4 = Object.create(obj2);
+
+FuzzIL program written to corpus/accessor-map-sharing.fzil

@@ -1,0 +1,28 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '5000'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    BeginTry
+        v7 <- BeginPlainFunction -> 
+        EndPlainFunction
+        v8 <- CreateArray []
+        v9 <- CallMethod v8, 'reduce', [v7]
+    BeginCatch -> v10
+    EndTryCatch
+EndForLoop
+
+
+for (let i1 = 0; i1 < 5000; i1++) {
+    try {
+        function f7() {
+        }
+        ([]).reduce(f7);
+    } catch(e10) {
+    }
+}
+
+FuzzIL program written to corpus/regress-804096.fzil

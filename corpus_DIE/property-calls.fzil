@@ -1,0 +1,56 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallMethod v1, 'g', []
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '42'
+    Return v4
+EndPlainFunction
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'object', 'var', v5
+SetProperty v6, 'g', v3
+BeginForLoopInitializer
+    v7 <- LoadInteger '0'
+BeginForLoopCondition -> v8
+    v9 <- LoadInteger '5'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10 -> v11
+    v12 <- UnaryOperation v11, '++'
+BeginForLoopBody -> v13
+    v14 <- CallFunction v0, [v6]
+EndForLoop
+v15 <- CallFunction v0, [v6]
+v16 <- LoadInteger '42'
+v17 <- CallFunction v0, [v6]
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadInteger '87'
+    Return v19
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `g`, v18
+v20 <- EndObjectLiteral
+Reassign v6, v20
+v21 <- LoadInteger '87'
+v22 <- CallFunction v0, [v6]
+
+
+function f(a1) {
+    return a1.g();
+}
+function g() {
+    return 42;
+}
+var object = {};
+object.g = g;
+for (let i8 = 0; i8 < 5; i8++) {
+    f(object);
+}
+f(object);
+f(object);
+function f18() {
+    return 87;
+}
+f(object = { g: f18 });
+
+FuzzIL program written to corpus/property-calls.fzil

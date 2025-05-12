@@ -1,0 +1,41 @@
+BeginTry
+    BeginTry
+        v0 <- LoadInteger '100'
+        v1 <- LoadInteger '1000'
+        v2 <- BinaryOperation v0, '*', v1
+        v3 <- CreateNamedVariable 'N', 'var', v2
+        v4 <- CreateNamedVariable 'Array', 'none'
+        v5 <- CallFunction v4, [v3]
+        v6 <- CreateNamedVariable 'array', 'var', v5
+        BeginForLoopInitializer
+            v7 <- LoadInteger '0'
+        BeginForLoopCondition -> v8
+            v9 <- Compare v8, '!=', v3
+        BeginForLoopAfterthought v9 -> v10
+            v11 <- UnaryOperation '++', v10
+        BeginForLoopBody -> v12
+            SetComputedProperty v6, v12, v12
+        EndForLoop
+    BeginCatch -> v13
+    EndTryCatch
+    v14 <- LoadString 'Kibo'
+    v15 <- CreateNamedVariable 'array', 'none'
+    v16 <- CallMethod v15, 'unshift', [v14]
+BeginCatch -> v17
+EndTryCatch
+
+
+try {
+    try {
+        var N = 100 * 1000;
+        var array = Array(N);
+        for (let i8 = 0; i8 != N; ++i8) {
+            array[i8] = i8;
+        }
+    } catch(e13) {
+    }
+    array.unshift("Kibo");
+} catch(e17) {
+}
+
+FuzzIL program written to corpus/regress-91010.fzil

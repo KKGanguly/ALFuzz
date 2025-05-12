@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1, v2
+    Return v2
+EndPlainFunction
+v3 <- CreateNamedVariable 'Error', 'none'
+SetProperty v3, 'prepareStackTrace', v0
+BeginTry
+    v4 <- LoadRegExp '(invalid regexp)' ''
+    v5 <- CallFunction v3, [v4]
+    ThrowException v5
+BeginCatch -> v6
+    v7 <- LoadString '[object global]'
+    v8 <- GetProperty v6, 'stack'
+    v9 <- GetElement v8, '0'
+    v10 <- CallMethod v9, 'getThis', []
+    v11 <- CallMethod v10, 'toString', []
+EndTryCatch
+
+
+function f0(a1, a2) {
+    return a2;
+}
+Error.prepareStackTrace = f0;
+try {
+    throw Error(/(invalid regexp)/);
+} catch(e6) {
+    e6.stack[0].getThis().toString();
+}
+
+FuzzIL program written to corpus/regress-crbug-435825.fzil

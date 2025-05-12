@@ -1,0 +1,12 @@
+v0 <- LoadString 'ሴ'
+v1 <- LoadRegExp '[]*1' 'u'
+v2 <- CallMethod v1, 'exec', [v0]
+v3 <- LoadString 'ሴ'
+v4 <- LoadRegExp '[^\u0000-\u{10ffff}]*1' 'u'
+v5 <- CallMethod v4, 'exec', [v3]
+
+
+/[]*1/u.exec("ሴ");
+/[^\u0000-\u{10ffff}]*1/u.exec("ሴ");
+
+FuzzIL program written to corpus/regress-crbug-605862.fzil

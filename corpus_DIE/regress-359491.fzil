@@ -1,0 +1,156 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3, v4
+        BeginIf v4
+            v5 <- Compare v2, '===', v3
+            Return v5
+        BeginElse
+            v6 <- Compare v2, '===', v3
+            Return v6
+        EndIf
+    EndPlainFunction
+    v7 <- LoadString 'a'
+    v8 <- LoadString 'b'
+    v9 <- LoadInteger '1'
+    v10 <- CallFunction v1, [v7, v8, v9]
+    v11 <- LoadString 'c'
+    v12 <- LoadString 'd'
+    v13 <- LoadInteger '1'
+    v14 <- CallFunction v1, [v11, v12, v13]
+    v15 <- LoadString 'a'
+    v16 <- LoadString 'b'
+    v17 <- LoadInteger '0'
+    v18 <- CallFunction v1, [v15, v16, v17]
+    v19 <- LoadString 'c'
+    v20 <- LoadString 'd'
+    v21 <- LoadInteger '0'
+    v22 <- CallFunction v1, [v19, v20, v21]
+    v23 <- BeginPlainFunction -> v24
+        v25 <- LoadInteger '10000000000'
+        v26 <- LoadInteger '0'
+        v27 <- BinaryOperation v25, '|', v26
+        v28 <- CreateNamedVariable 'x', 'var', v27
+        v29 <- CallFunction v1, [v28, v28, v24]
+    EndPlainFunction
+    v30 <- LoadInteger '1'
+    v31 <- CallFunction v23, [v30]
+    v32 <- LoadInteger '1'
+    v33 <- CallFunction v23, [v32]
+    v34 <- LoadInteger '0'
+    v35 <- CallFunction v23, [v34]
+EndPlainFunction
+v36 <- CallFunction v0, []
+v37 <- BeginPlainFunction -> 
+    v38 <- BeginPlainFunction -> v39, v40, v41
+        BeginIf v41
+            v42 <- Compare v39, '===', v40
+            Return v42
+        BeginElse
+            v43 <- Compare v39, '===', v40
+            Return v43
+        EndIf
+    EndPlainFunction
+    v44 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v44
+    v45 <- EndObjectLiteral
+    v46 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `b`, v46
+    v47 <- EndObjectLiteral
+    v48 <- LoadInteger '1'
+    v49 <- CallFunction v38, [v45, v47, v48]
+    v50 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `c`, v50
+    v51 <- EndObjectLiteral
+    v52 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `d`, v52
+    v53 <- EndObjectLiteral
+    v54 <- LoadInteger '1'
+    v55 <- CallFunction v38, [v51, v53, v54]
+    v56 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v56
+    v57 <- EndObjectLiteral
+    v58 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `c`, v58
+    v59 <- EndObjectLiteral
+    v60 <- LoadInteger '0'
+    v61 <- CallFunction v38, [v57, v59, v60]
+    v62 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `b`, v62
+    v63 <- EndObjectLiteral
+    v64 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `d`, v64
+    v65 <- EndObjectLiteral
+    v66 <- LoadInteger '0'
+    v67 <- CallFunction v38, [v63, v65, v66]
+    v68 <- BeginPlainFunction -> v69
+        v70 <- LoadInteger '10000000000'
+        v71 <- LoadInteger '0'
+        v72 <- BinaryOperation v70, '|', v71
+        v73 <- CreateNamedVariable 'x', 'var', v72
+        v74 <- CallFunction v38, [v73, v73, v69]
+    EndPlainFunction
+    v75 <- LoadInteger '1'
+    v76 <- CallFunction v68, [v75]
+    v77 <- LoadInteger '1'
+    v78 <- CallFunction v68, [v77]
+    v79 <- LoadInteger '0'
+    v80 <- CallFunction v68, [v79]
+EndPlainFunction
+v81 <- CallFunction v37, []
+
+
+function f0() {
+    function f(a2, a3, a4) {
+        if (a4) {
+            return a2 === a3;
+        } else {
+            return a2 === a3;
+        }
+    }
+    f("a", "b", 1);
+    f("c", "d", 1);
+    f("a", "b", 0);
+    f("c", "d", 0);
+    function g(a24) {
+        var x = 10000000000 | 0;
+        f(x, x, a24);
+    }
+    g(1);
+    g(1);
+    g(0);
+}
+f0();
+function f37() {
+    function f(a39, a40, a41) {
+        if (a41) {
+            return a39 === a40;
+        } else {
+            return a39 === a40;
+        }
+    }
+    const v45 = { a: 1 };
+    f(v45, { b: 1 }, 1);
+    const v51 = { c: 1 };
+    f(v51, { d: 1 }, 1);
+    const v57 = { a: 1 };
+    f(v57, { c: 1 }, 0);
+    const v63 = { b: 1 };
+    f(v63, { d: 1 }, 0);
+    function g(a69) {
+        var x = 10000000000 | 0;
+        f(x, x, a69);
+    }
+    g(1);
+    g(1);
+    g(0);
+}
+f37();
+
+FuzzIL program written to corpus/regress-359491.fzil

@@ -1,0 +1,49 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    BeginTry
+        v1 <- CreateNamedVariable 'ref_error', 'none'
+        v2 <- CreateNamedVariable 'x', 'none'
+        Reassign v2, v1
+        v3 <- LoadInteger '0'
+        v4 <- CreateNamedVariable 'x', 'let', v3
+    BeginCatch -> v5
+        ThrowException v5
+    EndTryCatch
+EndPlainFunction
+v6 <- CallFunction v0, []
+v7 <- CreateNamedVariable 'ReferenceError', 'none'
+v8 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    BeginTry
+        v9 <- CreateNamedVariable 'ref_error', 'none'
+        v10 <- CreateNamedVariable 'x', 'none'
+        Reassign v10, v9
+        v11 <- LoadInteger '0'
+        v12 <- CreateNamedVariable 'x', 'let', v11
+    BeginFinally
+    EndTryCatch
+EndPlainFunction
+v13 <- CallFunction v8, []
+
+
+function f0() {
+    'use strict';
+    try {
+        x = ref_error;
+        let x = 0;
+    } catch(e5) {
+        throw e5;
+    }
+}
+f0();
+function f8() {
+    'use strict';
+    try {
+        x = ref_error;
+        let x = 0;
+    } finally {
+    }
+}
+f8();
+
+FuzzIL program written to corpus/regress-crbug-467531.fzil

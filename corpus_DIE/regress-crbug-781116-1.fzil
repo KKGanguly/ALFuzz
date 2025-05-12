@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadBoolean 'true'
+    v4 <- Compare v2, '===', v3
+    BeginIf v4
+        v5 <- LoadInteger '1'
+        SetElement v1, '0', v5
+    EndIf
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- CreateNamedVariable 'Array', 'none'
+    v9 <- GetProperty v8, 'prototype'
+    v10 <- CallFunction v0, [v9, v7]
+EndPlainFunction
+v11 <- LoadBoolean 'false'
+v12 <- CallFunction v6, [v11]
+v13 <- LoadBoolean 'false'
+v14 <- CallFunction v6, [v13]
+v15 <- LoadBoolean 'true'
+v16 <- CallFunction v6, [v15]
+v17 <- BeginPlainFunction -> 
+    v18 <- CreateArray []
+    v19 <- CallMethod v18, 'push', []
+EndPlainFunction
+v20 <- CallFunction v17, []
+v21 <- CallFunction v17, []
+v22 <- CallFunction v17, []
+
+
+function baz(a1, a2) {
+    if (a2 === true) {
+        a1[0] = 1;
+    }
+}
+function bar(a7) {
+    baz(Array.prototype, a7);
+}
+bar(false);
+bar(false);
+bar(true);
+function foo() {
+    ([]).push();
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-781116-1.fzil

@@ -1,0 +1,64 @@
+v0 <- BeginArrowFunction -> v1, v2
+    v3 <- LoadUndefined
+    v4 <- GetElement v2, '0'
+    v5 <- CallMethod v4, 'getFunction', []
+    v6 <- CreateNamedVariable 'two', 'none'
+    v7 <- GetProperty v6, 'name'
+    v8 <- GetElement v2, '0'
+    v9 <- CallMethod v8, 'getFunctionName', []
+    v10 <- LoadUndefined
+    v11 <- GetElement v2, '1'
+    v12 <- CallMethod v11, 'getFunction', []
+    v13 <- CreateNamedVariable 'one', 'none'
+    v14 <- GetProperty v13, 'name'
+    v15 <- GetElement v2, '1'
+    v16 <- CallMethod v15, 'getFunctionName', []
+    Return v2
+EndArrowFunction
+v17 <- CreateNamedVariable 'Error', 'none'
+SetProperty v17, 'prepareStackTrace', v0
+v18 <- BeginAsyncFunction -> v19
+    v20 <- CreateNamedVariable 'two', 'none'
+    v21 <- CallFunction v20, [v19]
+    v22 <- Await v21
+    Return v22
+EndAsyncFunction
+v23 <- BeginAsyncFunction -> v24
+    Directive 'use strict'
+    BeginTry
+        v25 <- Await v24
+        Reassign v24, v25
+        v26 <- Construct v17, []
+        ThrowException v26
+    BeginCatch -> v27
+        v28 <- GetProperty v27, 'stack'
+        Return v28
+    EndTryCatch
+EndAsyncFunction
+
+
+const v0 = (a1, a2) => {
+    a2[0].getFunction();
+    two.name;
+    a2[0].getFunctionName();
+    a2[1].getFunction();
+    one.name;
+    a2[1].getFunctionName();
+    return a2;
+};
+Error.prepareStackTrace = v0;
+async function one(a19) {
+    return await two(a19);
+}
+async function two(a24) {
+    'use strict';
+    try {
+        a24 = await a24;
+        const v26 = new Error();
+        throw v26;
+    } catch(e27) {
+        return e27.stack;
+    }
+}
+
+FuzzIL program written to corpus/async-stack-traces-prepare-stacktrace-2.fzil

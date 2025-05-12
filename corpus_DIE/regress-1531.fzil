@@ -1,0 +1,60 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- LoadArguments
+    SetElement v3, '10', v2
+    v4 <- CreateArray []
+    v5 <- CreateNamedVariable 'arr', 'var', v4
+    v6 <- LoadArguments
+    BeginForInLoop v6 -> v7
+        v8 <- CallMethod v5, 'push', [v7]
+    EndForInLoop
+    Return v5
+EndPlainFunction
+v9 <- LoadString '0'
+v10 <- LoadString '10'
+v11 <- CreateArray [v9, v10]
+v12 <- LoadInteger '0'
+v13 <- CallFunction v0, [v12]
+v14 <- BeginPlainFunction -> v15, v16, v17
+    v18 <- LoadString '5'
+    v19 <- BeginPlainFunction -> 
+        v20 <- LoadInteger '0'
+        Return v20
+    EndPlainFunction
+    v21 <- LoadArguments
+    v22 <- CallMethod v21, '__defineGetter__', [v18, v19]
+    v23 <- LoadArguments
+    v24 <- LoadInteger '5'
+    v25 <- DeleteElement v23, '5'
+    v26 <- LoadArguments
+    v27 <- GetElement v26, '2'
+    Return v27
+EndPlainFunction
+v28 <- LoadInteger '0'
+v29 <- Void_ v28
+v30 <- LoadInteger '0'
+v31 <- CallFunction v14, [v30]
+
+
+function test(a1) {
+    arguments[10] = 0;
+    var arr = [];
+    for (const v7 in arguments) {
+        arr.push(v7);
+    }
+    return arr;
+}
+["0","10"];
+test(0);
+function test1(a15, a16, a17) {
+    function f19() {
+        return 0;
+    }
+    arguments.__defineGetter__("5", f19);
+    delete arguments[5];
+    return arguments[2];
+}
+void 0;
+test1(0);
+
+FuzzIL program written to corpus/regress-1531.fzil

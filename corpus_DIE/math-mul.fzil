@@ -1,0 +1,128 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '15'
+    v3 <- BinaryOperation v2, '*', v1
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '45'
+v5 <- LoadInteger '3'
+v6 <- CallFunction v0, [v5]
+v7 <- LoadInteger '3'
+v8 <- CallFunction v0, [v7]
+v9 <- LoadInteger '3'
+v10 <- CallFunction v0, [v9]
+v11 <- BeginPlainFunction -> v12, v13
+    v14 <- BinaryOperation v12, '*', v13
+    v15 <- LoadInteger '0'
+    v16 <- BinaryOperation v14, '|', v15
+    Return v16
+EndPlainFunction
+v17 <- LoadInteger '45'
+v18 <- LoadInteger '3'
+v19 <- LoadInteger '15'
+v20 <- CallFunction v11, [v18, v19]
+v21 <- LoadInteger '3'
+v22 <- LoadInteger '15'
+v23 <- CallFunction v11, [v21, v22]
+v24 <- LoadInteger '3'
+v25 <- LoadInteger '15'
+v26 <- CallFunction v11, [v24, v25]
+v27 <- BeginPlainFunction -> v28, v29
+    v30 <- BinaryOperation v28, '*', v29
+    Return v30
+EndPlainFunction
+v31 <- LoadInteger '12'
+v32 <- LoadInteger '3'
+v33 <- LoadInteger '4'
+v34 <- CallFunction v27, [v32, v33]
+v35 <- LoadInteger '16'
+v36 <- LoadInteger '4'
+v37 <- LoadInteger '4'
+v38 <- CallFunction v27, [v36, v37]
+v39 <- LoadInteger '27'
+v40 <- LoadInteger '9'
+v41 <- LoadInteger '3'
+v42 <- CallFunction v27, [v40, v41]
+v43 <- LoadInteger '0'
+v44 <- UnaryOperation '-', v43
+v45 <- LoadInteger '3'
+v46 <- UnaryOperation '-', v45
+v47 <- LoadInteger '0'
+v48 <- CallFunction v27, [v46, v47]
+v49 <- LoadInteger '0'
+v50 <- UnaryOperation '-', v49
+v51 <- LoadInteger '0'
+v52 <- LoadInteger '0'
+v53 <- UnaryOperation '-', v52
+v54 <- CallFunction v27, [v51, v53]
+v55 <- LoadInteger '1'
+v56 <- LoadInteger '29'
+v57 <- BinaryOperation v55, '<<', v56
+v58 <- LoadInteger '1'
+v59 <- BinaryOperation v57, '-', v58
+v60 <- LoadInteger '1'
+v61 <- LoadInteger '29'
+v62 <- BinaryOperation v60, '<<', v61
+v63 <- BinaryOperation v59, '+', v62
+v64 <- CreateNamedVariable 'SMI_MAX', 'const', v63
+v65 <- UnaryOperation '-', v64
+v66 <- LoadInteger '1'
+v67 <- BinaryOperation v65, '-', v66
+v68 <- CreateNamedVariable 'SMI_MIN', 'const', v67
+v69 <- BinaryOperation v64, '+', v64
+v70 <- BinaryOperation v69, '+', v64
+v71 <- LoadInteger '3'
+v72 <- CallFunction v27, [v64, v71]
+v73 <- BeginPlainFunction -> v74
+    v75 <- LoadInteger '3'
+    v76 <- UnaryOperation '-', v75
+    v77 <- BinaryOperation v76, '*', v74
+    Return v77
+EndPlainFunction
+v78 <- LoadInteger '12'
+v79 <- UnaryOperation '-', v78
+v80 <- LoadInteger '4'
+v81 <- CallFunction v73, [v80]
+v82 <- LoadInteger '12'
+v83 <- UnaryOperation '-', v82
+v84 <- LoadInteger '4'
+v85 <- CallFunction v73, [v84]
+v86 <- LoadInteger '4'
+v87 <- CallFunction v73, [v86]
+
+
+function gotaconstant(a1) {
+    return 15 * a1;
+}
+gotaconstant(3);
+gotaconstant(3);
+gotaconstant(3);
+function gotaconstant_truncated(a12, a13) {
+    return (a12 * a13) | 0;
+}
+gotaconstant_truncated(3, 15);
+gotaconstant_truncated(3, 15);
+gotaconstant_truncated(3, 15);
+function test(a28, a29) {
+    return a28 * a29;
+}
+test(3, 4);
+test(4, 4);
+test(9, 3);
+-0;
+test(-3, 0);
+-0;
+test(0, -0);
+const SMI_MAX = ((1 << 29) - 1) + (1 << 29);
+const SMI_MIN = -SMI_MAX - 1;
+(SMI_MAX + SMI_MAX) + SMI_MAX;
+test(SMI_MAX, 3);
+function negtest(a74) {
+    return -3 * a74;
+}
+-12;
+negtest(4);
+-12;
+negtest(4);
+negtest(4);
+
+FuzzIL program written to corpus/math-mul.fzil

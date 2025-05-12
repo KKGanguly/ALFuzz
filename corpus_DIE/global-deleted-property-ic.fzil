@@ -1,0 +1,89 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'x'
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v3
+v4 <- EndObjectLiteral
+v5 <- LoadThis
+SetProperty v5, '__proto__', v4
+BeginForLoopInitializer
+    v6 <- LoadInteger '0'
+BeginForLoopCondition -> v7
+    v8 <- LoadInteger '3'
+    v9 <- Compare v7, '<', v8
+BeginForLoopAfterthought v9 -> v10
+    v11 <- UnaryOperation v10, '++'
+BeginForLoopBody -> v12
+    v13 <- LoadInteger '42'
+    v14 <- LoadThis
+    v15 <- CallFunction v0, [v14]
+EndForLoop
+v16 <- LoadInteger '87'
+v17 <- LoadThis
+SetProperty v17, 'x', v16
+BeginForLoopInitializer
+    v18 <- LoadInteger '0'
+BeginForLoopCondition -> v19
+    v20 <- LoadInteger '3'
+    v21 <- Compare v19, '<', v20
+BeginForLoopAfterthought v21 -> v22
+    v23 <- UnaryOperation v22, '++'
+BeginForLoopBody -> v24
+    v25 <- LoadInteger '87'
+    v26 <- LoadThis
+    v27 <- CallFunction v0, [v26]
+EndForLoop
+v28 <- LoadThis
+v29 <- DeleteProperty v28, 'x'
+BeginForLoopInitializer
+    v30 <- LoadInteger '0'
+BeginForLoopCondition -> v31
+    v32 <- LoadInteger '3'
+    v33 <- Compare v31, '<', v32
+BeginForLoopAfterthought v33 -> v34
+    v35 <- UnaryOperation v34, '++'
+BeginForLoopBody -> v36
+    v37 <- LoadInteger '42'
+    v38 <- LoadThis
+    v39 <- CallFunction v0, [v38]
+EndForLoop
+v40 <- LoadInteger '99'
+v41 <- LoadThis
+SetProperty v41, 'x', v40
+BeginForLoopInitializer
+    v42 <- LoadInteger '0'
+BeginForLoopCondition -> v43
+    v44 <- LoadInteger '3'
+    v45 <- Compare v43, '<', v44
+BeginForLoopAfterthought v45 -> v46
+    v47 <- UnaryOperation v46, '++'
+BeginForLoopBody -> v48
+    v49 <- LoadInteger '99'
+    v50 <- LoadThis
+    v51 <- CallFunction v0, [v50]
+EndForLoop
+
+
+function LoadX(a1) {
+    return a1.x;
+}
+this.__proto__ = { x: 42 };
+for (let i7 = 0; i7 < 3; i7++) {
+    LoadX(this);
+}
+this.x = 87;
+for (let i19 = 0; i19 < 3; i19++) {
+    LoadX(this);
+}
+delete this.x;
+for (let i31 = 0; i31 < 3; i31++) {
+    LoadX(this);
+}
+this.x = 99;
+for (let i43 = 0; i43 < 3; i43++) {
+    LoadX(this);
+}
+
+FuzzIL program written to corpus/global-deleted-property-ic.fzil

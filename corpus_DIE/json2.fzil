@@ -1,0 +1,550 @@
+v0 <- LoadInteger '12345'
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadString '"a":12345'
+v3 <- LoadThis
+v4 <- CreateNamedVariable 'JSON', 'none'
+v5 <- CallMethod v4, 'stringify', [v3]
+v6 <- CallMethod v5, 'indexOf', [v2]
+v7 <- LoadInteger '0'
+v8 <- Compare v6, '>', v7
+v9 <- LoadString '"a":12345'
+v10 <- LoadThis
+v11 <- LoadNull
+v12 <- LoadInteger '0'
+v13 <- CallMethod v4, 'stringify', [v10, v11, v12]
+v14 <- CallMethod v13, 'indexOf', [v9]
+v15 <- LoadInteger '0'
+v16 <- Compare v14, '>', v15
+v17 <- BeginPlainFunction -> v18, v19
+    v20 <- CallMethod v4, 'stringify', [v19]
+    v21 <- BeginArrowFunction -> v22, v23
+        Return v23
+    EndArrowFunction
+    v24 <- CallMethod v4, 'stringify', [v19, v21]
+    v25 <- LoadNull
+    v26 <- LoadString '='
+    v27 <- CallMethod v4, 'stringify', [v19, v25, v26]
+    v28 <- BeginArrowFunction -> v29, v30
+        Return v30
+    EndArrowFunction
+    v31 <- LoadString '='
+    v32 <- CallMethod v4, 'stringify', [v19, v28, v31]
+EndPlainFunction
+v33 <- CreateArray []
+v34 <- CreateNamedVariable 'array_1', 'var', v33
+v35 <- CreateArray []
+v36 <- CreateNamedVariable 'array_2', 'var', v35
+v37 <- LoadInteger '1'
+v38 <- LoadInteger '1'
+v39 <- LoadInteger '17'
+v40 <- BinaryOperation v38, '<<', v39
+SetComputedProperty v34, v40, v37
+v41 <- BeginPlainFunction -> 
+    v42 <- LoadInteger '1'
+    Return v42
+EndPlainFunction
+v43 <- LoadInteger '1'
+v44 <- LoadInteger '17'
+v45 <- BinaryOperation v43, '<<', v44
+SetComputedProperty v36, v45, v41
+v46 <- LoadString 'null,'
+v47 <- CreateNamedVariable 'nulls', 'var', v46
+BeginForLoopInitializer
+    v48 <- LoadInteger '0'
+BeginForLoopCondition -> v49
+    v50 <- LoadInteger '17'
+    v51 <- Compare v49, '<', v50
+BeginForLoopAfterthought v51 -> v52
+    v53 <- UnaryOperation v52, '++'
+BeginForLoopBody -> v54
+    Update v47, '+', v47
+EndForLoop
+v55 <- LoadString '['
+v56 <- BinaryOperation v55, '+', v47
+v57 <- LoadString '1]'
+v58 <- BinaryOperation v56, '+', v57
+v59 <- CreateNamedVariable 'expected_1', 'none'
+Reassign v59, v58
+v60 <- LoadString '['
+v61 <- BinaryOperation v60, '+', v47
+v62 <- LoadString 'null]'
+v63 <- BinaryOperation v61, '+', v62
+v64 <- CreateNamedVariable 'expected_2', 'none'
+Reassign v64, v63
+v65 <- CreateNamedVariable 'expected_1', 'none'
+v66 <- CallFunction v17, [v65, v34]
+v67 <- CreateNamedVariable 'expected_2', 'none'
+v68 <- CallFunction v17, [v67, v36]
+v69 <- LoadInteger '42'
+v70 <- CreateNamedVariable 'Object', 'none'
+v71 <- CallFunction v70, [v69]
+v72 <- CreateNamedVariable 'num_wrapper', 'var', v71
+v73 <- LoadNull
+v74 <- BeginPlainFunction -> 
+    v75 <- LoadBoolean 'true'
+    Return v75
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v73
+    ObjectLiteralAddProperty `toString`, v74
+v76 <- EndObjectLiteral
+SetProperty v72, '__proto__', v76
+v77 <- LoadString '1'
+v78 <- CallFunction v17, [v77, v72]
+v79 <- LoadString '2'
+v80 <- CallFunction v70, [v79]
+v81 <- CreateNamedVariable 'str_wrapper', 'var', v80
+v82 <- LoadNull
+v83 <- BeginPlainFunction -> 
+    v84 <- LoadBoolean 'true'
+    Return v84
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v82
+    ObjectLiteralAddProperty `toString`, v83
+v85 <- EndObjectLiteral
+SetProperty v81, '__proto__', v85
+v86 <- LoadString '"true"'
+v87 <- CallFunction v17, [v86, v81]
+v88 <- LoadBoolean 'false'
+v89 <- CallFunction v70, [v88]
+v90 <- CreateNamedVariable 'bool_wrapper', 'var', v89
+v91 <- LoadNull
+v92 <- BeginPlainFunction -> 
+    v93 <- LoadBoolean 'true'
+    Return v93
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v91
+    ObjectLiteralAddProperty `toString`, v92
+v94 <- EndObjectLiteral
+SetProperty v90, '__proto__', v94
+v95 <- LoadString 'false'
+v96 <- CallFunction v17, [v95, v90]
+v97 <- LoadInteger '0'
+v98 <- CreateNamedVariable 'counter', 'var', v97
+BeginObjectLiteral
+    BeginObjectLiteralGetter `getter` -> v99
+        v100 <- UnaryOperation v98, '++'
+        v101 <- LoadInteger '123'
+        Return v101
+    EndObjectLiteralGetter
+v102 <- EndObjectLiteral
+v103 <- CreateNamedVariable 'getter_obj', 'var', v102
+v104 <- LoadString '{"getter":123}'
+v105 <- CallFunction v17, [v104, v103]
+v106 <- LoadInteger '4'
+v107 <- BeginPlainFunction -> 
+    v108 <- UnaryOperation v98, '++'
+    v109 <- LoadInteger '1'
+    v110 <- LoadInteger '2'
+    v111 <- CreateArray [v109, v110]
+    Return v111
+EndPlainFunction
+v112 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toJSON`, v107
+    ObjectLiteralAddProperty `a`, v112
+v113 <- EndObjectLiteral
+v114 <- CreateNamedVariable 'tojson_obj', 'var', v113
+v115 <- LoadString '[1,2]'
+v116 <- CallFunction v17, [v115, v114]
+v117 <- LoadInteger '8'
+v118 <- LoadString 'fail'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v118
+v119 <- EndObjectLiteral
+v120 <- CreateNamedVariable 'tojson_proto_obj', 'var', v119
+v121 <- BeginPlainFunction -> 
+    v122 <- UnaryOperation v98, '++'
+    Return v114
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toJSON`, v121
+v123 <- EndObjectLiteral
+SetProperty v120, '__proto__', v123
+v124 <- LoadString '{"a":1}'
+v125 <- CallFunction v17, [v124, v120]
+v126 <- LoadInteger '1'
+BeginObjectLiteral
+    BeginObjectLiteralGetter `toJSON` -> v127
+        v128 <- BeginPlainFunction -> v129
+            v130 <- UnaryOperation v98, '++'
+            v131 <- LoadInteger '321'
+            Return v131
+        EndPlainFunction
+        Return v128
+    EndObjectLiteralGetter
+    ObjectLiteralAddProperty `a`, v126
+v132 <- EndObjectLiteral
+v133 <- CreateNamedVariable 'tojson_via_getter', 'var', v132
+v134 <- LoadString '321'
+v135 <- CallFunction v17, [v134, v133]
+v136 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `toJSON` -> v137
+            v138 <- LoadString 'error'
+            ThrowException v138
+        EndObjectLiteralGetter
+    v139 <- EndObjectLiteral
+    v140 <- CallMethod v4, 'stringify', [v139]
+EndPlainFunction
+v141 <- CallFunction v136, []
+v142 <- BeginPlainFunction -> v143
+    v144 <- BinaryOperation v143, '+', v143
+    Return v144
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toJSON`, v142
+v145 <- EndObjectLiteral
+Reassign v114, v145
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v114
+    ObjectLiteralAddProperty `b`, v114
+v146 <- EndObjectLiteral
+v147 <- CreateNamedVariable 'tojson_with_key_1', 'var', v146
+v148 <- LoadString '{"a":"aa","b":"bb"}'
+v149 <- CallFunction v17, [v148, v147]
+v150 <- CreateArray [v114, v114]
+v151 <- CreateNamedVariable 'tojson_with_key_2', 'var', v150
+v152 <- LoadString '["00","11"]'
+v153 <- CallFunction v17, [v152, v151]
+v154 <- BeginPlainFunction -> v155
+    v156 <- LoadString '123'
+    ThrowException v156
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toJSON`, v154
+v157 <- EndObjectLiteral
+v158 <- CreateNamedVariable 'tojson_ex', 'var', v157
+v159 <- BeginPlainFunction -> 
+    v160 <- CallMethod v4, 'stringify', [v158]
+EndPlainFunction
+v161 <- CallFunction v159, []
+v162 <- BeginPlainFunction -> 
+    v163 <- LoadNull
+    v164 <- LoadInteger '0'
+    v165 <- CallMethod v4, 'stringify', [v158, v163, v164]
+EndPlainFunction
+v166 <- CallFunction v162, []
+v167 <- BeginPlainFunction -> v168
+    v169 <- LoadThis
+    v170 <- GetProperty v169, 'a'
+    v171 <- BinaryOperation v170, '+', v168
+    Return v171
+EndPlainFunction
+v172 <- LoadString 'x'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toJSON`, v167
+    ObjectLiteralAddProperty `a`, v172
+v173 <- EndObjectLiteral
+v174 <- CreateNamedVariable 'obj', 'var', v173
+v175 <- LoadString '{"y":"xy"}'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v174
+v176 <- EndObjectLiteral
+v177 <- CallFunction v17, [v175, v176]
+v178 <- LoadInteger '1'
+v179 <- LoadInteger '2'
+v180 <- LoadInteger '3'
+v181 <- LoadInteger '4'
+v182 <- CreateArray [v178, v179, v180, v181]
+v183 <- CreateNamedVariable 'fast_smi', 'var', v182
+v184 <- LoadInteger '7'
+v185 <- LoadInteger '7'
+v186 <- LoadInteger '7'
+v187 <- LoadInteger '7'
+v188 <- CreateArray [v184, v185, v186, v187]
+SetProperty v183, '__proto__', v188
+v189 <- LoadInteger '2'
+v190 <- DeleteElement v183, '2'
+v191 <- LoadString '[1,2,7,4]'
+v192 <- CallFunction v17, [v191, v183]
+v193 <- LoadFloat '1.1'
+v194 <- LoadInteger '2'
+v195 <- LoadInteger '3'
+v196 <- LoadInteger '4'
+v197 <- CreateArray [v193, v194, v195, v196]
+v198 <- CreateNamedVariable 'fast_double', 'var', v197
+v199 <- LoadInteger '7'
+v200 <- LoadInteger '7'
+v201 <- LoadInteger '7'
+v202 <- LoadInteger '7'
+v203 <- CreateArray [v199, v200, v201, v202]
+SetProperty v198, '__proto__', v203
+v204 <- LoadInteger '2'
+v205 <- DeleteElement v198, '2'
+v206 <- LoadString '[1.1,2,7,4]'
+v207 <- CallFunction v17, [v206, v198]
+v208 <- LoadInteger '1'
+v209 <- LoadInteger '2'
+BeginObjectLiteral
+v210 <- EndObjectLiteral
+BeginObjectLiteral
+v211 <- EndObjectLiteral
+v212 <- CreateArray [v208, v209, v210, v211]
+v213 <- CreateNamedVariable 'fast_obj', 'var', v212
+v214 <- LoadInteger '7'
+v215 <- LoadInteger '7'
+v216 <- LoadInteger '7'
+v217 <- LoadInteger '7'
+v218 <- CreateArray [v214, v215, v216, v217]
+SetProperty v213, '__proto__', v218
+v219 <- LoadInteger '2'
+v220 <- DeleteElement v213, '2'
+v221 <- LoadString '[1,2,7,{}]'
+v222 <- CallFunction v17, [v221, v213]
+v223 <- LoadInteger '1'
+v224 <- LoadInteger '3'
+v225 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v223
+    BeginObjectLiteralGetter `b` -> v226
+        v227 <- DeleteProperty v226, 'a'
+        v228 <- DeleteProperty v226, 'c'
+        v229 <- LoadInteger '5'
+        SetProperty v226, 'e', v229
+        v230 <- LoadInteger '2'
+        Return v230
+    EndObjectLiteralGetter
+    ObjectLiteralAddProperty `c`, v224
+    ObjectLiteralAddProperty `d`, v225
+v231 <- EndObjectLiteral
+v232 <- CreateNamedVariable 'getter_side_effect', 'var', v231
+v233 <- LoadString '{"a":1,"b":2,"d":4}'
+v234 <- CallMethod v4, 'stringify', [v232]
+v235 <- LoadString '{"b":2,"d":4,"e":5}'
+v236 <- CallMethod v4, 'stringify', [v232]
+v237 <- LoadInteger '1'
+v238 <- LoadInteger '3'
+v239 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v237
+    BeginObjectLiteralGetter `b` -> v240
+        v241 <- DeleteProperty v240, 'a'
+        v242 <- DeleteProperty v240, 'c'
+        v243 <- LoadInteger '5'
+        SetProperty v240, 'e', v243
+        v244 <- LoadInteger '2'
+        Return v244
+    EndObjectLiteralGetter
+    ObjectLiteralAddProperty `c`, v238
+    ObjectLiteralAddProperty `d`, v239
+v245 <- EndObjectLiteral
+Reassign v232, v245
+v246 <- LoadString '{"a":1,"b":2,"d":4}'
+v247 <- LoadNull
+v248 <- LoadInteger '0'
+v249 <- CallMethod v4, 'stringify', [v232, v247, v248]
+v250 <- LoadString '{"b":2,"d":4,"e":5}'
+v251 <- LoadNull
+v252 <- LoadInteger '0'
+v253 <- CallMethod v4, 'stringify', [v232, v251, v252]
+BeginObjectLiteral
+v254 <- EndObjectLiteral
+v255 <- CreateNamedVariable 'non_enum', 'var', v254
+v256 <- LoadInteger '1'
+SetProperty v255, 'a', v256
+v257 <- LoadString 'b'
+v258 <- LoadInteger '2'
+v259 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v258
+    ObjectLiteralAddProperty `enumerable`, v259
+v260 <- EndObjectLiteral
+v261 <- CallMethod v70, 'defineProperty', [v255, v257, v260]
+v262 <- LoadInteger '3'
+SetProperty v255, 'c', v262
+v263 <- LoadString '{"a":1,"c":3}'
+v264 <- CallFunction v17, [v263, v255]
+v265 <- LoadString 'external'
+v266 <- CreateNamedVariable 'str', 'var', v265
+BeginTry
+BeginCatch -> v267
+EndTryCatch
+v268 <- LoadString '"external"'
+v269 <- LoadNull
+v270 <- LoadInteger '0'
+v271 <- CallFunction v17, [v268, v266, v269, v270]
+BeginObjectLiteral
+v272 <- EndObjectLiteral
+v273 <- CreateNamedVariable 'o', 'var', v272
+v274 <- LoadInteger '10'
+SetProperty v273, 'somespecialproperty', v274
+v275 <- LoadInteger '10'
+v276 <- LoadString ''
+SetComputedProperty v273, v276, v275
+v277 <- LoadString 'JSON.parse('{"somespecialproperty":100, "":10}')'
+
+
+var a = 12345;
+JSON.stringify(this).indexOf(""a":12345") > 0;
+JSON.stringify(this, null, 0).indexOf(""a":12345") > 0;
+function TestStringify(a18, a19) {
+    JSON.stringify(a19);
+    const v21 = (a22, a23) => {
+        return a23;
+    };
+    JSON.stringify(a19, v21);
+    JSON.stringify(a19, null, "=");
+    const v28 = (a29, a30) => {
+        return a30;
+    };
+    JSON.stringify(a19, v28, "=");
+}
+var array_1 = [];
+var array_2 = [];
+array_1[1 << 17] = 1;
+function f41() {
+    return 1;
+}
+array_2[1 << 17] = f41;
+var nulls = "null,";
+for (let i49 = 0; i49 < 17; i49++) {
+    nulls += nulls;
+}
+expected_1 = ("[" + nulls) + "1]";
+expected_2 = ("[" + nulls) + "null]";
+TestStringify(expected_1, array_1);
+TestStringify(expected_2, array_2);
+var num_wrapper = Object(42);
+function f74() {
+    return true;
+}
+num_wrapper.__proto__ = { __proto__: null, toString: f74 };
+TestStringify("1", num_wrapper);
+var str_wrapper = Object("2");
+function f83() {
+    return true;
+}
+str_wrapper.__proto__ = { __proto__: null, toString: f83 };
+TestStringify(""true"", str_wrapper);
+var bool_wrapper = Object(false);
+function f92() {
+    return true;
+}
+bool_wrapper.__proto__ = { __proto__: null, toString: f92 };
+TestStringify("false", bool_wrapper);
+var counter = 0;
+const v102 = {
+    get getter() {
+        counter++;
+        return 123;
+    },
+};
+var getter_obj = v102;
+TestStringify("{"getter":123}", getter_obj);
+function f107() {
+    counter++;
+    return [1,2];
+}
+var tojson_obj = { toJSON: f107, a: 1 };
+TestStringify("[1,2]", tojson_obj);
+var tojson_proto_obj = { a: "fail" };
+function f121() {
+    counter++;
+    return tojson_obj;
+}
+tojson_proto_obj.__proto__ = { toJSON: f121 };
+TestStringify("{"a":1}", tojson_proto_obj);
+const v132 = {
+    get toJSON() {
+        function f128(a129) {
+            counter++;
+            return 321;
+        }
+        return f128;
+    },
+    a: 1,
+};
+var tojson_via_getter = v132;
+TestStringify("321", tojson_via_getter);
+function f136() {
+    const v139 = {
+        get toJSON() {
+            throw "error";
+        },
+    };
+    JSON.stringify(v139);
+}
+f136();
+function f142(a143) {
+    return a143 + a143;
+}
+tojson_obj = { toJSON: f142 };
+var tojson_with_key_1 = { a: tojson_obj, b: tojson_obj };
+TestStringify("{"a":"aa","b":"bb"}", tojson_with_key_1);
+var tojson_with_key_2 = [tojson_obj,tojson_obj];
+TestStringify("["00","11"]", tojson_with_key_2);
+function f154(a155) {
+    throw "123";
+}
+var tojson_ex = { toJSON: f154 };
+function f159() {
+    JSON.stringify(tojson_ex);
+}
+f159();
+function f162() {
+    JSON.stringify(tojson_ex, null, 0);
+}
+f162();
+function f167(a168) {
+    return this.a + a168;
+}
+var obj = { toJSON: f167, a: "x" };
+TestStringify("{"y":"xy"}", { y: obj });
+var fast_smi = [1,2,3,4];
+fast_smi.__proto__ = [7,7,7,7];
+delete fast_smi[2];
+TestStringify("[1,2,7,4]", fast_smi);
+var fast_double = [1.1,2,3,4];
+fast_double.__proto__ = [7,7,7,7];
+delete fast_double[2];
+TestStringify("[1.1,2,7,4]", fast_double);
+const v210 = {};
+var fast_obj = [1,2,v210,{}];
+fast_obj.__proto__ = [7,7,7,7];
+delete fast_obj[2];
+TestStringify("[1,2,7,{}]", fast_obj);
+const v231 = {
+    a: 1,
+    get b() {
+        delete this.a;
+        delete this.c;
+        this.e = 5;
+        return 2;
+    },
+    c: 3,
+    d: 4,
+};
+var getter_side_effect = v231;
+JSON.stringify(getter_side_effect);
+JSON.stringify(getter_side_effect);
+const v245 = {
+    a: 1,
+    get b() {
+        delete this.a;
+        delete this.c;
+        this.e = 5;
+        return 2;
+    },
+    c: 3,
+    d: 4,
+};
+JSON.stringify(getter_side_effect = v245, null, 0);
+JSON.stringify(getter_side_effect, null, 0);
+var non_enum = {};
+non_enum.a = 1;
+Object.defineProperty(non_enum, "b", { value: 2, enumerable: false });
+non_enum.c = 3;
+TestStringify("{"a":1,"c":3}", non_enum);
+var str = "external";
+try {
+} catch(e267) {
+}
+TestStringify(""external"", str, null, 0);
+var o = {};
+o.somespecialproperty = 10;
+o[""] = 10;
+
+FuzzIL program written to corpus/json2.fzil

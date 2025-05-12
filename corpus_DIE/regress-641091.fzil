@@ -1,0 +1,48 @@
+v0 <- LoadString '🍤'
+v1 <- LoadString '🍤'
+v2 <- CreateArray [v0, v1]
+v3 <- LoadRegExp '🍤' 'ug'
+v4 <- LoadString '🍤🍦🍋ππ🍋🍦🍤'
+v5 <- CallMethod v4, 'match', [v3]
+v6 <- LoadString '🍤'
+v7 <- LoadString '🍦'
+v8 <- LoadString '🍦'
+v9 <- LoadString '🍤'
+v10 <- CreateArray [v6, v7, v8, v9]
+v11 <- LoadRegExp '🍤|🍦' 'ug'
+v12 <- LoadString '🍤🍦🍋ππ🍋🍦🍤'
+v13 <- CallMethod v12, 'match', [v11]
+v14 <- LoadString '🍤'
+v15 <- LoadString '🍦'
+v16 <- LoadString '🍋'
+v17 <- LoadString '🍋'
+v18 <- LoadString '🍦'
+v19 <- LoadString '🍤'
+v20 <- CreateArray [v14, v15, v16, v17, v18, v19]
+v21 <- LoadRegExp '🍤|🍦|🍋' 'ug'
+v22 <- LoadString '🍤🍦🍋ππ🍋🍦🍤'
+v23 <- CallMethod v22, 'match', [v21]
+v24 <- LoadString '🍤'
+v25 <- LoadString '🍦'
+v26 <- LoadString '🍋'
+v27 <- LoadString 'π'
+v28 <- LoadString 'π'
+v29 <- LoadString '🍋'
+v30 <- LoadString '🍦'
+v31 <- LoadString '🍤'
+v32 <- CreateArray [v24, v25, v26, v27, v28, v29, v30, v31]
+v33 <- LoadRegExp '🍤|🍦|π|🍋' 'ug'
+v34 <- LoadString '🍤🍦🍋ππ🍋🍦🍤'
+v35 <- CallMethod v34, 'match', [v33]
+
+
+["🍤","🍤"];
+("🍤🍦🍋ππ🍋🍦🍤").match(/🍤/ug);
+["🍤","🍦","🍦","🍤"];
+("🍤🍦🍋ππ🍋🍦🍤").match(/🍤|🍦/ug);
+["🍤","🍦","🍋","🍋","🍦","🍤"];
+("🍤🍦🍋ππ🍋🍦🍤").match(/🍤|🍦|🍋/ug);
+["🍤","🍦","🍋","π","π","🍋","🍦","🍤"];
+("🍤🍦🍋ππ🍋🍦🍤").match(/🍤|🍦|π|🍋/ug);
+
+FuzzIL program written to corpus/regress-641091.fzil

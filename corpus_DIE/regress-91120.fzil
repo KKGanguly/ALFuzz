@@ -1,0 +1,49 @@
+v0 <- LoadString 'global'
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadString 'function'
+    v4 <- CreateNamedVariable 'x', 'var', v3
+    v5 <- LoadUndefined
+    v6 <- CreateNamedVariable 'g', 'none'
+    v7 <- CallFunction v6, []
+    BeginTry
+        v8 <- LoadUndefined
+        v9 <- CallFunction v6, []
+        v10 <- LoadString 'catch'
+        ThrowException v10
+    BeginCatch -> v11
+        v12 <- BeginPlainFunction -> 
+            Return v11
+        EndPlainFunction
+        v13 <- LoadString 'catch'
+        v14 <- CallFunction v12, []
+    EndTryCatch
+    v15 <- LoadString 'catch'
+    v16 <- CallFunction v6, []
+    Return v6
+EndPlainFunction
+v17 <- LoadString 'catch'
+v18 <- CallFunction v2, []
+v19 <- CallFunction v18, []
+
+
+var x = "global";
+function f() {
+    var x = "function";
+    g();
+    try {
+        g();
+        throw "catch";
+    } catch(e11) {
+        function g() {
+            return e11;
+        }
+        g();
+    }
+    g();
+    return g;
+}
+const t16 = f();
+t16();
+
+FuzzIL program written to corpus/regress-91120.fzil

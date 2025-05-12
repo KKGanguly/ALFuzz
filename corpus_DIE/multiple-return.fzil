@@ -1,0 +1,79 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadInteger '2'
+    v3 <- LoadInteger '3'
+    v4 <- CreateArray [v1, v2, v3]
+    BeginForInLoop v4 -> v5
+        v6 <- LoadInteger '42'
+        Return v6
+    EndForInLoop
+    v7 <- LoadInteger '87'
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '1'
+    v10 <- LoadInteger '2'
+    v11 <- LoadInteger '3'
+    v12 <- CreateArray [v9, v10, v11]
+    BeginForInLoop v12 -> v13
+        BeginTry
+            v14 <- LoadInteger '42'
+            Return v14
+        BeginFinally
+        EndTryCatch
+    EndForInLoop
+    v15 <- LoadInteger '87'
+    Return v15
+EndPlainFunction
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadInteger '1'
+    v18 <- LoadInteger '2'
+    v19 <- LoadInteger '3'
+    v20 <- CreateArray [v17, v18, v19]
+    BeginForInLoop v20 -> v21
+        BeginTry
+            v22 <- LoadInteger '42'
+            Return v22
+        BeginCatch -> v23
+        EndTryCatch
+    EndForInLoop
+    v24 <- LoadInteger '87'
+    Return v24
+EndPlainFunction
+v25 <- LoadInteger '42'
+v26 <- CallFunction v0, []
+v27 <- LoadInteger '42'
+v28 <- CallFunction v8, []
+v29 <- LoadInteger '42'
+v30 <- CallFunction v16, []
+
+
+function F() {
+    for (const v5 in [1,2,3]) {
+        return 42;
+    }
+    return 87;
+}
+function G() {
+    for (const v13 in [1,2,3]) {
+        try {
+            return 42;
+        } finally {
+        }
+    }
+    return 87;
+}
+function H() {
+    for (const v21 in [1,2,3]) {
+        try {
+            return 42;
+        } catch(e23) {
+        }
+    }
+    return 87;
+}
+F();
+G();
+H();
+
+FuzzIL program written to corpus/multiple-return.fzil

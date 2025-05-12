@@ -1,0 +1,61 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> v2
+EndPlainFunction
+v3 <- CallMethod v1, 'bind', [v0]
+v4 <- CreateNamedVariable 'f1', 'var', v3
+v5 <- BeginPlainFunction -> 
+EndPlainFunction
+v6 <- CreateNamedVariable 'f2', 'var', v5
+v7 <- LoadInteger '1'
+v8 <- GetProperty v4, 'length'
+v9 <- CallMethod v6, 'bind', [v0]
+v10 <- LoadInteger '1'
+v11 <- GetProperty v4, 'length'
+v12 <- LoadString 'length'
+v13 <- CreateNamedVariable 'Object', 'none'
+v14 <- CallMethod v13, 'getOwnPropertyDescriptor', [v4, v12]
+v15 <- CreateNamedVariable 'desc', 'var', v14
+v16 <- LoadBoolean 'false'
+v17 <- GetProperty v15, 'writable'
+v18 <- LoadBoolean 'false'
+v19 <- GetProperty v15, 'enumerable'
+v20 <- LoadBoolean 'true'
+v21 <- GetProperty v15, 'configurable'
+v22 <- LoadString 'length'
+v23 <- LoadString 'abc'
+v24 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v23
+    ObjectLiteralAddProperty `writable`, v24
+v25 <- EndObjectLiteral
+v26 <- CallMethod v13, 'defineProperty', [v4, v22, v25]
+v27 <- LoadString 'abc'
+v28 <- GetProperty v4, 'length'
+v29 <- LoadInteger '42'
+SetProperty v4, 'length', v29
+v30 <- LoadInteger '42'
+v31 <- GetProperty v4, 'length'
+
+
+function foo() {
+}
+function f1(a2) {
+}
+var f1 = f1.bind(foo);
+function f5() {
+}
+var f2 = f5;
+f1.length;
+f2.bind(foo);
+f1.length;
+var desc = Object.getOwnPropertyDescriptor(f1, "length");
+desc.writable;
+desc.enumerable;
+desc.configurable;
+Object.defineProperty(f1, "length", { value: "abc", writable: true });
+f1.length;
+f1.length = 42;
+f1.length;
+
+FuzzIL program written to corpus/regress-1419.fzil

@@ -1,0 +1,67 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadThis
+    SetProperty v2, 'message', v1
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- LoadArguments
+    v6 <- GetElement v5, '1'
+    v7 <- LoadUndefined
+    v8 <- Compare v6, '===', v7
+    v9 <- CreateNamedVariable 'dummy', 'var', v8
+    v10 <- TestInstanceOf v4, v0
+    BeginIf v10
+        Return v4
+    EndIf
+    v11 <- LoadString 'unreachable, but we must create register allocation complexity'
+    v12 <- CreateNamedVariable 'print', 'none'
+    v13 <- CallFunction v12, [v11]
+    v14 <- CreateArray []
+    Return v14
+EndPlainFunction
+v15 <- BeginPlainFunction -> v16
+    v17 <- CreateArray []
+    v18 <- CreateNamedVariable 'ret', 'var', v17
+    v19 <- GetElement v16, '0'
+    v20 <- LoadInteger '1'
+    v21 <- LoadInteger '2'
+    v22 <- CallFunction v3, [v19, v20, v21]
+    v23 <- CallMethod v18, 'push', [v22]
+    Return v18
+EndPlainFunction
+v24 <- LoadString 'TEST PASS'
+v25 <- Construct v0, [v24]
+v26 <- CreateArray [v25]
+v27 <- CreateNamedVariable 'input', 'var', v26
+v28 <- CallFunction v15, [v27]
+v29 <- CallFunction v15, [v27]
+v30 <- CallFunction v15, [v27]
+v31 <- CreateNamedVariable 'result', 'var', v30
+v32 <- LoadString 'TEST PASS'
+v33 <- GetElement v31, '0'
+v34 <- GetProperty v33, 'message'
+
+
+function Message(a1) {
+    this.message = a1;
+}
+function Inlined(a4) {
+    var dummy = arguments[1] === undefined;
+    if (a4 instanceof Message) {
+        return a4;
+    }
+    print("unreachable, but we must create register allocation complexity");
+    return [];
+}
+function Process(a16) {
+    var ret = [];
+    ret.push(Inlined(a16[0], 1, 2));
+    return ret;
+}
+const v25 = new Message("TEST PASS");
+var input = [v25];
+Process(input);
+Process(input);
+var result = Process(input);
+result[0].message;
+
+FuzzIL program written to corpus/regress-arm64-spillslots.fzil

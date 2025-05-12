@@ -1,0 +1,56 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'array', 'let', v0
+v2 <- LoadString 'length'
+v3 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- CallMethod v5, 'defineProperty', [v1, v2, v4]
+v7 <- GetProperty v1, 'length'
+v8 <- LoadInteger '0'
+v9 <- BeginArrowFunction -> 
+    v10 <- CallMethod v1, 'shift', []
+    Return v10
+EndArrowFunction
+v11 <- CallFunction v9, []
+v12 <- CreateNamedVariable 'TypeError', 'none'
+v13 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v13
+v14 <- EndObjectLiteral
+v15 <- CreateNamedVariable 'object', 'let', v14
+v16 <- LoadString 'length'
+v17 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v17
+v18 <- EndObjectLiteral
+v19 <- CallMethod v5, 'defineProperty', [v15, v16, v18]
+v20 <- GetProperty v15, 'length'
+v21 <- LoadInteger '0'
+v22 <- BeginArrowFunction -> 
+    v23 <- CreateNamedVariable 'Array', 'none'
+    v24 <- GetProperty v23, 'prototype'
+    v25 <- GetProperty v24, 'shift'
+    v26 <- CallMethod v25, 'call', [v15]
+    Return v26
+EndArrowFunction
+v27 <- CallFunction v22, []
+
+
+let array = [];
+Object.defineProperty(array, "length", { writable: false });
+array.length;
+const v9 = () => {
+    return array.shift();
+};
+v9();
+let object = { length: 0 };
+Object.defineProperty(object, "length", { writable: false });
+object.length;
+const v22 = () => {
+    return Array.prototype.shift.call(object);
+};
+v22();
+
+FuzzIL program written to corpus/regress-crbug-882233-1.fzil

@@ -1,0 +1,36 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- CreateNamedVariable 'String', 'none'
+v3 <- GetProperty v2, 'prototype'
+v4 <- GetProperty v3, 'split'
+SetProperty v1, '__proto__', v4
+v5 <- BeginPlainFunction -> 
+    BeginWith v1
+        v6 <- LoadInteger '23'
+        v7 <- CreateNamedVariable 'length', 'none'
+        Reassign v7, v6
+        v8 <- LoadInteger '24'
+        v9 <- CreateNamedVariable 'length', 'none'
+        Reassign v9, v8
+        v10 <- LoadInteger '2'
+        v11 <- CreateNamedVariable 'length', 'none'
+    EndWith
+    v12 <- LoadInteger '2'
+    v13 <- GetProperty v1, 'length'
+EndPlainFunction
+v14 <- CallFunction v5, []
+
+
+var o = {};
+o.__proto__ = String.prototype.split;
+function f() {
+    with (o) {
+        length = 23;
+        length = 24;
+    }
+    o.length;
+}
+f();
+
+FuzzIL program written to corpus/with-readonly.fzil

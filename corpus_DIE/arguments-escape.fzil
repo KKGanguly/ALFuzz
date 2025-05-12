@@ -1,0 +1,82 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadArguments
+    v3 <- CreateNamedVariable 'a', 'var', v2
+    v4 <- BeginPlainFunction -> v5
+        v6 <- GetElement v3, '0'
+        v7 <- UnaryOperation '++', v6
+    EndPlainFunction
+    v8 <- LoadInteger '1'
+    v9 <- CallFunction v4, [v8]
+    v10 <- LoadInteger '2'
+    v11 <- CallFunction v4, [v10]
+    v12 <- LoadInteger '3'
+    v13 <- CallFunction v4, [v12]
+    Return v4
+EndPlainFunction
+v14 <- LoadInteger '0'
+v15 <- CallFunction v0, [v14]
+v16 <- CreateNamedVariable 'baz', 'var', v15
+v17 <- LoadInteger '4'
+v18 <- CallFunction v16, [v17]
+v19 <- LoadInteger '5'
+v20 <- CallFunction v16, [v19]
+v21 <- LoadInteger '6'
+v22 <- CallFunction v16, [v21]
+v23 <- BeginPlainFunction -> v24
+    v25 <- LoadArguments
+    v26 <- CreateNamedVariable 'a', 'var', v25
+    v27 <- BeginPlainFunction -> v28
+        v29 <- GetElement v26, '0'
+        v30 <- UnaryOperation '++', v29
+    EndPlainFunction
+    v31 <- LoadFloat '1.5'
+    v32 <- CallFunction v27, [v31]
+    v33 <- LoadFloat '2.5'
+    v34 <- CallFunction v27, [v33]
+    v35 <- LoadFloat '3.5'
+    v36 <- CallFunction v27, [v35]
+    Return v27
+EndPlainFunction
+v37 <- LoadFloat '0.5'
+v38 <- CallFunction v23, [v37]
+v39 <- CreateNamedVariable 'baz2', 'var', v38
+v40 <- LoadFloat '4.5'
+v41 <- CallFunction v39, [v40]
+v42 <- LoadFloat '5.5'
+v43 <- CallFunction v39, [v42]
+v44 <- LoadFloat '6.5'
+v45 <- CallFunction v39, [v44]
+
+
+function foo(a1) {
+    var a = arguments;
+    function bar(a5) {
+        let v6 = a[0];
+        ++v6;
+    }
+    bar(1);
+    bar(2);
+    bar(3);
+    return bar;
+}
+var baz = foo(0);
+baz(4);
+baz(5);
+baz(6);
+function foo2(a24) {
+    var a = arguments;
+    function bar2(a28) {
+        let v29 = a[0];
+        ++v29;
+    }
+    bar2(1.5);
+    bar2(2.5);
+    bar2(3.5);
+    return bar2;
+}
+var baz2 = foo2(0.5);
+baz2(4.5);
+baz2(5.5);
+baz2(6.5);
+
+FuzzIL program written to corpus/arguments-escape.fzil

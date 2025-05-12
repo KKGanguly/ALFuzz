@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'foo'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v1
+    v2 <- EndObjectLiteral
+    BeginWith v2
+        v3 <- CreateNamedVariable 'value', 'none'
+        Return v3
+    EndWith
+EndPlainFunction
+v4 <- LoadString 'foo'
+v5 <- CallFunction v0, []
+v6 <- LoadString 'foo'
+v7 <- CallFunction v0, []
+
+
+function f() {
+    with ({ value: "foo" }) {
+        return value;
+    }
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-631027.fzil

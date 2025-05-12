@@ -1,0 +1,35 @@
+v0 <- LoadInteger '10'
+v1 <- CreateNamedVariable 'N', 'var', v0
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- CallFunction v2, [v1]
+v4 <- CreateNamedVariable 'array', 'var', v3
+BeginForLoopInitializer
+    v5 <- LoadInteger '0'
+BeginForLoopCondition -> v6
+    v7 <- Compare v6, '<', v1
+BeginForLoopAfterthought v7 -> v8
+    v9 <- UnaryOperation '++', v8
+BeginForLoopBody -> v10
+    SetComputedProperty v4, v10, v10
+EndForLoop
+v11 <- LoadInteger '2'
+v12 <- BeginPlainFunction -> 
+EndPlainFunction
+v13 <- GetProperty v2, 'prototype'
+v14 <- CallMethod v13, '__defineSetter__', [v11, v12]
+v15 <- LoadString '0,1,2,3,4,5,6,7,8,9'
+v16 <- LoadString ','
+v17 <- CallMethod v4, 'join', [v16]
+
+
+var N = 10;
+var array = Array(N);
+for (let i6 = 0; i6 < N; ++i6) {
+    array[i6] = i6;
+}
+function f12() {
+}
+Array.prototype.__defineSetter__(2, f12);
+array.join(",");
+
+FuzzIL program written to corpus/regress-1160.fzil

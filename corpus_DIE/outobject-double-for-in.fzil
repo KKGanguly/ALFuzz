@@ -1,0 +1,133 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadFloat '0.5'
+    v2 <- LoadThis
+    SetProperty v2, 'x0', v1
+    v3 <- LoadUndefined
+    v4 <- LoadThis
+    SetProperty v4, 'x1', v3
+    v5 <- LoadUndefined
+    v6 <- LoadThis
+    SetProperty v6, 'x2', v5
+    v7 <- LoadUndefined
+    v8 <- LoadThis
+    SetProperty v8, 'x3', v7
+    v9 <- LoadUndefined
+    v10 <- LoadThis
+    SetProperty v10, 'x4', v9
+    v11 <- LoadUndefined
+    v12 <- LoadThis
+    SetProperty v12, 'x5', v11
+    v13 <- LoadUndefined
+    v14 <- LoadThis
+    SetProperty v14, 'x6', v13
+    v15 <- LoadInteger '5'
+    v16 <- LoadThis
+    SetProperty v16, 'x7', v15
+    v17 <- LoadUndefined
+    v18 <- LoadThis
+    SetProperty v18, 'x8', v17
+    v19 <- LoadUndefined
+    v20 <- LoadThis
+    SetProperty v20, 'x9', v19
+    v21 <- LoadUndefined
+    v22 <- LoadThis
+    SetProperty v22, 'x10', v21
+    v23 <- LoadUndefined
+    v24 <- LoadThis
+    SetProperty v24, 'x11', v23
+    v25 <- LoadUndefined
+    v26 <- LoadThis
+    SetProperty v26, 'x12', v25
+    v27 <- LoadUndefined
+    v28 <- LoadThis
+    SetProperty v28, 'x13', v27
+    v29 <- LoadUndefined
+    v30 <- LoadThis
+    SetProperty v30, 'x14', v29
+    v31 <- LoadUndefined
+    v32 <- LoadThis
+    SetProperty v32, 'x15', v31
+    v33 <- LoadBoolean 'true'
+    v34 <- LoadThis
+    SetProperty v34, 'x16', v33
+    v35 <- LoadFloat '2.5'
+    v36 <- LoadThis
+    SetProperty v36, 'y', v35
+EndPlainFunction
+v37 <- Construct v0, []
+v38 <- CreateNamedVariable 'z', 'var', v37
+v39 <- BeginPlainFunction -> v40
+    BeginForInLoop v40 -> v41
+        v42 <- LoadString 'x0'
+        v43 <- Compare v41, '!==', v42
+        v44 <- GetComputedProperty v40, v41
+        v45 <- LoadFloat '0.5'
+        v46 <- Compare v44, '===', v45
+        v47 <- BinaryOperation v43, '||', v46
+        v48 <- LoadString 'y'
+        v49 <- Compare v41, '!==', v48
+        v50 <- GetComputedProperty v40, v41
+        v51 <- LoadFloat '2.5'
+        v52 <- Compare v50, '===', v51
+        v53 <- BinaryOperation v49, '||', v52
+        v54 <- LoadString 'x12'
+        v55 <- Compare v41, '!==', v54
+        v56 <- GetComputedProperty v40, v41
+        v57 <- LoadUndefined
+        v58 <- Compare v56, '===', v57
+        v59 <- BinaryOperation v55, '||', v58
+        v60 <- LoadString 'x16'
+        v61 <- Compare v41, '!==', v60
+        v62 <- GetComputedProperty v40, v41
+        v63 <- LoadBoolean 'true'
+        v64 <- Compare v62, '===', v63
+        v65 <- BinaryOperation v61, '||', v64
+        v66 <- LoadString 'x7'
+        v67 <- Compare v41, '!==', v66
+        v68 <- GetComputedProperty v40, v41
+        v69 <- LoadInteger '5'
+        v70 <- Compare v68, '===', v69
+        v71 <- BinaryOperation v67, '||', v70
+    EndForInLoop
+EndPlainFunction
+v72 <- CallFunction v39, [v38]
+v73 <- CallFunction v39, [v38]
+v74 <- CallFunction v39, [v38]
+
+
+function DoubleContainer() {
+    this.x0 = 0.5;
+    this.x1 = undefined;
+    this.x2 = undefined;
+    this.x3 = undefined;
+    this.x4 = undefined;
+    this.x5 = undefined;
+    this.x6 = undefined;
+    this.x7 = 5;
+    this.x8 = undefined;
+    this.x9 = undefined;
+    this.x10 = undefined;
+    this.x11 = undefined;
+    this.x12 = undefined;
+    this.x13 = undefined;
+    this.x14 = undefined;
+    this.x15 = undefined;
+    this.x16 = true;
+    this.y = 2.5;
+}
+const v37 = new DoubleContainer();
+var z = v37;
+function test_props(a40) {
+    for (const v41 in a40) {
+        (v41 !== "x0") || (a40[v41] === 0.5);
+        (v41 !== "y") || (a40[v41] === 2.5);
+        (v41 !== "x12") || (a40[v41] === undefined);
+        (v41 !== "x16") || (a40[v41] === true);
+        (v41 !== "x7") || (a40[v41] === 5);
+    }
+}
+test_props(z);
+test_props(z);
+test_props(z);
+
+FuzzIL program written to corpus/outobject-double-for-in.fzil

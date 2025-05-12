@@ -1,0 +1,101 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'sum', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '100000'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        Update v2, '+', v9
+    EndForLoop
+    v10 <- BeginPlainFunction -> 
+        Return v2
+    EndPlainFunction
+    Return v10
+EndPlainFunction
+v11 <- LoadInteger '4999950000'
+v12 <- CallFunction v0, []
+v13 <- CallFunction v12, []
+v14 <- LoadInteger '4999950000'
+v15 <- CallFunction v0, []
+v16 <- CallFunction v15, []
+v17 <- LoadInteger '4999950000'
+v18 <- CallFunction v0, []
+v19 <- CallFunction v18, []
+v20 <- BeginPlainFunction -> 
+    v21 <- LoadInteger '0'
+    v22 <- CreateNamedVariable 'sum', 'var', v21
+    v23 <- LoadInteger '0'
+    v24 <- CreateNamedVariable 'ret', 'var', v23
+    BeginForLoopInitializer
+        v25 <- LoadInteger '0'
+    BeginForLoopCondition -> v26
+        v27 <- LoadInteger '90000'
+        v28 <- Compare v26, '<', v27
+    BeginForLoopAfterthought v28 -> v29
+        v30 <- UnaryOperation v29, '++'
+    BeginForLoopBody -> v31
+        Update v22, '+', v31
+        v32 <- LoadInteger '0'
+        v33 <- Compare v31, '==', v32
+        BeginIf v33
+            v34 <- BeginPlainFunction -> 
+                Return v22
+            EndPlainFunction
+            Reassign v24, v34
+        EndIf
+    EndForLoop
+    Return v24
+EndPlainFunction
+v35 <- LoadInteger '4049955000'
+v36 <- CallFunction v20, []
+v37 <- CallFunction v36, []
+v38 <- LoadInteger '4049955000'
+v39 <- CallFunction v20, []
+v40 <- CallFunction v39, []
+v41 <- LoadInteger '4049955000'
+v42 <- CallFunction v20, []
+v43 <- CallFunction v42, []
+
+
+function foo() {
+    var sum = 0;
+    for (let i4 = 0; i4 < 100000; i4++) {
+        sum += i4;
+    }
+    function f10() {
+        return sum;
+    }
+    return f10;
+}
+const t10 = foo();
+t10();
+const t11 = foo();
+t11();
+const t13 = foo();
+t13();
+function bar() {
+    var sum = 0;
+    var ret = 0;
+    for (let i26 = 0; i26 < 90000; i26++) {
+        sum += i26;
+        if (i26 == 0) {
+            function f34() {
+                return sum;
+            }
+            ret = f34;
+        }
+    }
+    return ret;
+}
+const t30 = bar();
+t30();
+const t31 = bar();
+t31();
+const t33 = bar();
+t33();
+
+FuzzIL program written to corpus/osr-function.fzil

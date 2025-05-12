@@ -1,0 +1,26 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'none'
+Reassign v1, v0
+v2 <- LoadFloat '0.1'
+v3 <- CreateNamedVariable 'a', 'none'
+SetElement v3, '1000', v2
+v4 <- LoadInteger '0'
+SetProperty v3, 'length', v4
+v5 <- CreateNamedVariable 'gc', 'none'
+v6 <- CallFunction v5, []
+v7 <- CallFunction v5, []
+v8 <- LoadFloat '0.1'
+SetElement v3, '1000', v8
+v9 <- LoadFloat '0.1'
+v10 <- GetElement v3, '1000'
+
+
+a = [];
+a[1000] = 0.1;
+a.length = 0;
+gc();
+gc();
+a[1000] = 0.1;
+a[1000];
+
+FuzzIL program written to corpus/regress-347530.fzil

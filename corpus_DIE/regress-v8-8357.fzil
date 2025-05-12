@@ -1,0 +1,76 @@
+v0 <- LoadString 'Umbridge has been reading your mail, Harry.'
+v1 <- CreateNamedVariable 's', 'const', v0
+BeginBlockStatement
+    v2 <- LoadBoolean 'false'
+    v3 <- CreateNamedVariable 'monkey_called', 'let', v2
+    v4 <- BeginArrowFunction -> 
+        v5 <- LoadBoolean 'true'
+        Reassign v3, v5
+    EndArrowFunction
+    v6 <- GetProperty v1, '__proto__'
+    v7 <- GetProperty v6, '__proto__'
+    v8 <- CreateNamedVariable 'Symbol', 'none'
+    v9 <- GetProperty v8, 'replace'
+    SetComputedProperty v7, v9, v4
+    v10 <- CallMethod v1, 'replace', [v1]
+EndBlockStatement
+BeginBlockStatement
+    v11 <- LoadBoolean 'false'
+    v12 <- CreateNamedVariable 'monkey_called', 'let', v11
+    v13 <- BeginArrowFunction -> 
+        v14 <- LoadBoolean 'true'
+        Reassign v12, v14
+    EndArrowFunction
+    v15 <- GetProperty v1, '__proto__'
+    v16 <- GetProperty v15, '__proto__'
+    v17 <- CreateNamedVariable 'Symbol', 'none'
+    v18 <- GetProperty v17, 'search'
+    SetComputedProperty v16, v18, v13
+    v19 <- CallMethod v1, 'search', [v1]
+EndBlockStatement
+BeginBlockStatement
+    v20 <- LoadBoolean 'false'
+    v21 <- CreateNamedVariable 'monkey_called', 'let', v20
+    v22 <- BeginArrowFunction -> 
+        v23 <- LoadBoolean 'true'
+        Reassign v21, v23
+    EndArrowFunction
+    v24 <- GetProperty v1, '__proto__'
+    v25 <- GetProperty v24, '__proto__'
+    v26 <- CreateNamedVariable 'Symbol', 'none'
+    v27 <- GetProperty v26, 'match'
+    SetComputedProperty v25, v27, v22
+    v28 <- CallMethod v1, 'match', [v1]
+EndBlockStatement
+
+
+const s = "Umbridge has been reading your mail, Harry.";
+{
+    let monkey_called = false;
+    const v4 = () => {
+        monkey_called = true;
+    };
+    const t6 = s.__proto__.__proto__;
+    t6[Symbol.replace] = v4;
+    s.replace(s);
+}
+{
+    let monkey_called = false;
+    const v13 = () => {
+        monkey_called = true;
+    };
+    const t15 = s.__proto__.__proto__;
+    t15[Symbol.search] = v13;
+    s.search(s);
+}
+{
+    let monkey_called = false;
+    const v22 = () => {
+        monkey_called = true;
+    };
+    const t24 = s.__proto__.__proto__;
+    t24[Symbol.match] = v22;
+    s.match(s);
+}
+
+FuzzIL program written to corpus/regress-v8-8357.fzil

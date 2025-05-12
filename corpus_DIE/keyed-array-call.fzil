@@ -1,0 +1,144 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '10'
+    v3 <- BinaryOperation v1, '+', v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadInteger '20'
+    v7 <- BinaryOperation v5, '+', v6
+    Return v7
+EndPlainFunction
+v8 <- CreateArray [v0, v4]
+v9 <- CreateNamedVariable 'a', 'var', v8
+v10 <- BeginPlainFunction -> v11
+    v12 <- LoadInteger '30'
+    v13 <- BinaryOperation v11, '+', v12
+    Return v13
+EndPlainFunction
+v14 <- GetProperty v9, '__proto__'
+SetProperty v14, 'test', v10
+v15 <- BeginPlainFunction -> v16
+    v17 <- LoadString 'r'
+    v18 <- LoadInteger '1'
+    v19 <- LoadInteger '1'
+    v20 <- BinaryOperation v16, '+', v19
+    v21 <- CallComputedMethod v9, v16, [v20]
+    v22 <- LoadInteger '2'
+    v23 <- BinaryOperation v16, '+', v22
+    v24 <- CallComputedMethod v9, v16, [v23]
+    v25 <- BinaryOperation v17, '+', v24
+    Return v25
+EndPlainFunction
+v26 <- LoadString 'r12'
+v27 <- LoadInteger '0'
+v28 <- CallFunction v15, [v27]
+v29 <- LoadString 'r12'
+v30 <- LoadInteger '0'
+v31 <- CallFunction v15, [v30]
+v32 <- LoadString 'r23'
+v33 <- LoadInteger '1'
+v34 <- CallFunction v15, [v33]
+v35 <- LoadString 'r23'
+v36 <- LoadInteger '1'
+v37 <- CallFunction v15, [v36]
+v38 <- LoadString 'rtest230'
+v39 <- LoadString 'test'
+v40 <- CallFunction v15, [v39]
+v41 <- BeginPlainFunction -> v42
+    v43 <- LoadInteger '10'
+    v44 <- BinaryOperation v42, '+', v43
+    Return v44
+EndPlainFunction
+v45 <- LoadUndefined
+v46 <- BeginPlainFunction -> v47
+    v48 <- LoadInteger '20'
+    v49 <- BinaryOperation v47, '+', v48
+    Return v49
+EndPlainFunction
+v50 <- CreateArray [v41, v45, v46]
+v51 <- CreateNamedVariable 'a2', 'var', v50
+v52 <- BeginPlainFunction -> v53
+    v54 <- LoadInteger '30'
+    v55 <- BinaryOperation v53, '+', v54
+    Return v55
+EndPlainFunction
+v56 <- GetProperty v51, '__proto__'
+SetProperty v56, 'test', v52
+v57 <- BeginPlainFunction -> v58
+    v59 <- LoadString 'r'
+    v60 <- LoadInteger '1'
+    v61 <- LoadInteger '1'
+    v62 <- BinaryOperation v58, '+', v61
+    v63 <- CallComputedMethod v51, v58, [v62]
+    v64 <- LoadInteger '2'
+    v65 <- BinaryOperation v58, '+', v64
+    v66 <- CallComputedMethod v51, v58, [v65]
+    v67 <- BinaryOperation v59, '+', v66
+    Return v67
+EndPlainFunction
+v68 <- LoadString 'r12'
+v69 <- LoadInteger '0'
+v70 <- CallFunction v57, [v69]
+v71 <- LoadString 'r12'
+v72 <- LoadInteger '0'
+v73 <- CallFunction v57, [v72]
+v74 <- LoadString 'r24'
+v75 <- LoadInteger '2'
+v76 <- CallFunction v57, [v75]
+v77 <- LoadString 'r24'
+v78 <- LoadInteger '2'
+v79 <- CallFunction v57, [v78]
+v80 <- BeginPlainFunction -> 
+    v81 <- LoadInteger '1'
+    v82 <- CallFunction v57, [v81]
+EndPlainFunction
+v83 <- CallFunction v80, []
+
+
+function f0(a1) {
+    return a1 + 10;
+}
+function f4(a5) {
+    return a5 + 20;
+}
+var a = [f0,f4];
+function f10(a11) {
+    return a11 + 30;
+}
+const t10 = a.__proto__;
+t10.test = f10;
+function f(a16) {
+    a[a16](a16 + 1);
+    return "r" + a[a16](a16 + 2);
+}
+f(0);
+f(0);
+f(1);
+f(1);
+f("test");
+function f41(a42) {
+    return a42 + 10;
+}
+function f46(a47) {
+    return a47 + 20;
+}
+var a2 = [f41,,f46];
+function f52(a53) {
+    return a53 + 30;
+}
+const t31 = a2.__proto__;
+t31.test = f52;
+function f2(a58) {
+    a2[a58](a58 + 1);
+    return "r" + a2[a58](a58 + 2);
+}
+f2(0);
+f2(0);
+f2(2);
+f2(2);
+function f80() {
+    f2(1);
+}
+f80();
+
+FuzzIL program written to corpus/keyed-array-call.fzil

@@ -1,0 +1,23 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '1536'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    v7 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v8 <- LoadInteger '1024'
+    v9 <- LoadInteger '1024'
+    v10 <- BinaryOperation v8, '*', v9
+    v11 <- Construct v7, [v10]
+    v12 <- CreateNamedVariable 'garbage', 'let', v11
+EndForLoop
+
+
+for (let i1 = 0; i1 < 1536; i1++) {
+    const v11 = new ArrayBuffer(1024 * 1024);
+    let garbage = v11;
+}
+
+FuzzIL program written to corpus/external-backing-store-gc.fzil

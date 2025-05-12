@@ -1,0 +1,110 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '42'
+    v2 <- LoadThis
+    SetProperty v2, 'x', v1
+    v3 <- LoadInteger '87'
+    v4 <- LoadThis
+    SetProperty v4, 'y', v3
+EndPlainFunction
+v5 <- Construct v0, []
+v6 <- Construct v0, []
+v7 <- LoadUndefined
+v8 <- CreateNamedVariable 'result_x', 'var', v7
+v9 <- LoadString 'x'
+v10 <- BeginPlainFunction -> v11
+    Reassign v8, v11
+EndPlainFunction
+v12 <- CreateNamedVariable 'Object', 'none'
+v13 <- GetProperty v12, 'prototype'
+v14 <- CallMethod v13, '__defineSetter__', [v9, v10]
+v15 <- Construct v0, []
+v16 <- CreateNamedVariable 'f', 'var', v15
+v17 <- LoadInteger '42'
+v18 <- GetProperty v16, 'x'
+v19 <- TypeOf v18
+v20 <- LoadString 'undefined'
+v21 <- Compare v19, '==', v20
+v22 <- LoadUndefined
+v23 <- CreateNamedVariable 'result_y', 'var', v22
+v24 <- Construct v12, []
+v25 <- CreateNamedVariable 'proto', 'var', v24
+v26 <- LoadString 'y'
+v27 <- BeginPlainFunction -> v28
+    Reassign v23, v28
+EndPlainFunction
+v29 <- CallMethod v25, '__defineSetter__', [v26, v27]
+v30 <- Construct v0, []
+v31 <- CreateNamedVariable 'f', 'var', v30
+v32 <- LoadUndefined
+SetProperty v31, 'y', v32
+SetProperty v31, '__proto__', v25
+v33 <- CallMethod v0, 'call', [v31]
+v34 <- LoadInteger '87'
+v35 <- GetProperty v31, 'y'
+v36 <- TypeOf v35
+v37 <- LoadString 'undefined'
+v38 <- Compare v36, '==', v37
+v39 <- LoadUndefined
+v40 <- CreateNamedVariable 'result_z', 'var', v39
+v41 <- Construct v12, []
+v42 <- CreateNamedVariable 'o1', 'var', v41
+v43 <- Construct v12, []
+v44 <- CreateNamedVariable 'o2', 'var', v43
+v45 <- LoadInteger '32'
+SetProperty v42, 'z', v45
+v46 <- LoadString 'z'
+v47 <- BeginPlainFunction -> v48
+    Reassign v40, v48
+EndPlainFunction
+v49 <- GetProperty v12, 'prototype'
+v50 <- CallMethod v49, '__defineSetter__', [v46, v47]
+v51 <- LoadInteger '27'
+SetProperty v44, 'z', v51
+v52 <- LoadInteger '27'
+v53 <- GetProperty v44, 'z'
+v54 <- TypeOf v53
+v55 <- LoadString 'undefined'
+v56 <- Compare v54, '==', v55
+
+
+function F() {
+    this.x = 42;
+    this.y = 87;
+}
+new F();
+new F();
+var result_x;
+function f10(a11) {
+    result_x = a11;
+}
+Object.prototype.__defineSetter__("x", f10);
+const v15 = new F();
+var f = v15;
+typeof f.x == "undefined";
+var result_y;
+const v24 = new Object();
+var proto = v24;
+function f27(a28) {
+    result_y = a28;
+}
+proto.__defineSetter__("y", f27);
+const v30 = new F();
+var f = v30;
+f.y = undefined;
+f.__proto__ = proto;
+F.call(f);
+typeof f.y == "undefined";
+var result_z;
+const v41 = new Object();
+var o1 = v41;
+const v43 = new Object();
+var o2 = v43;
+o1.z = 32;
+function f47(a48) {
+    result_z = a48;
+}
+Object.prototype.__defineSetter__("z", f47);
+o2.z = 27;
+typeof o2.z == "undefined";
+
+FuzzIL program written to corpus/bug-1344252.fzil

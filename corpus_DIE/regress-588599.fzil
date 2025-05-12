@@ -1,0 +1,19 @@
+v0 <- CreateNamedVariable 'Infinity', 'none'
+v1 <- UnaryOperation '-', v0
+v2 <- Compare v0, '==', v1
+v3 <- LoadInteger '1'
+v4 <- LoadInteger '0'
+v5 <- BinaryOperation v3, '/', v4
+v6 <- UnaryOperation '-', v0
+v7 <- LoadInteger '1'
+v8 <- LoadInteger '0'
+v9 <- UnaryOperation '-', v8
+v10 <- BinaryOperation v7, '/', v9
+
+
+Infinity == -Infinity;
+1 / 0;
+-Infinity;
+1 / -0;
+
+FuzzIL program written to corpus/regress-588599.fzil

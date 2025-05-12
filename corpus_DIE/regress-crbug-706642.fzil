@@ -1,0 +1,87 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- BeginClassDefinition v0
+    BeginClassConstructor -> v2, v3
+        CallSuperConstructor []
+        v4 <- CreateNamedVariable 'superclass_counter', 'none'
+        v5 <- UnaryOperation v4, '++'
+        v6 <- LoadInteger '3'
+        v7 <- Compare v4, '===', v6
+        BeginIf v7
+            v8 <- LoadInteger '1'
+            Return v8
+        EndIf
+    EndClassConstructor
+EndClassDefinition
+v9 <- BeginClassDefinition v1
+    BeginClassConstructor -> v10
+        v11 <- LoadInteger '123'
+        CallSuperConstructor [v11]
+        v12 <- CreateNamedVariable 'x', 'let', v10
+        v13 <- GetProperty v12, 'a'
+        Return v13
+    EndClassConstructor
+EndClassDefinition
+v14 <- LoadInteger '0'
+v15 <- CreateNamedVariable 'superclass_counter', 'var', v14
+v16 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v17, v18, v19, v20
+        v21 <- LoadString 'prototype'
+        v22 <- Compare v19, '===', v21
+        BeginIf v22
+        EndIf
+        v23 <- CreateNamedVariable 'Reflect', 'none'
+        v24 <- CallMethod v23, 'get', [v18, v19, v20]
+        Return v24
+    EndObjectLiteralMethod
+v25 <- EndObjectLiteral
+v26 <- Construct v16, [v1, v25]
+v27 <- CreateNamedVariable 'observer', 'var', v26
+v28 <- CreateArray []
+v29 <- CreateNamedVariable 'Reflect', 'none'
+v30 <- CallMethod v29, 'construct', [v9, v28, v27]
+v31 <- CreateArray []
+v32 <- CallMethod v29, 'construct', [v9, v31, v27]
+v33 <- BeginArrowFunction -> 
+    v34 <- CreateArray []
+    v35 <- CallMethod v29, 'construct', [v9, v34, v27]
+    Return v35
+EndArrowFunction
+v36 <- CallFunction v33, []
+v37 <- CreateNamedVariable 'TypeError', 'none'
+
+
+class C1 extends Object {
+    constructor(a3) {
+        super();
+        superclass_counter++;
+        if (superclass_counter === 3) {
+            return 1;
+        }
+    }
+}
+class C9 extends C1 {
+    constructor() {
+        super(123);
+        let x = this;
+        return x.a;
+    }
+}
+var superclass_counter = 0;
+const v25 = {
+    get(a18, a19, a20) {
+        if (a19 === "prototype") {
+        }
+        return Reflect.get(a18, a19, a20);
+    },
+};
+const v26 = new Proxy(C1, v25);
+var observer = v26;
+Reflect.construct(C9, [], observer);
+Reflect.construct(C9, [], observer);
+const v33 = () => {
+    return Reflect.construct(C9, [], observer);
+};
+v33();
+
+FuzzIL program written to corpus/regress-crbug-706642.fzil

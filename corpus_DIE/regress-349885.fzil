@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- Construct v2, []
+    SetElement v1, '292755462', v3
+EndPlainFunction
+v4 <- CreateNamedVariable 'Array', 'none'
+v5 <- LoadInteger '5'
+v6 <- Construct v4, [v5]
+v7 <- CallFunction v0, [v6]
+v8 <- LoadInteger '5'
+v9 <- Construct v4, [v8]
+v10 <- CallFunction v0, [v9]
+v11 <- LoadInteger '10'
+v12 <- Construct v4, [v11]
+v13 <- CallFunction v0, [v12]
+
+
+function foo(a1) {
+    const v3 = new Object();
+    a1[292755462] = v3;
+}
+const v6 = new Array(5);
+foo(v6);
+const v9 = new Array(5);
+foo(v9);
+const v12 = new Array(10);
+foo(v12);
+
+FuzzIL program written to corpus/regress-349885.fzil

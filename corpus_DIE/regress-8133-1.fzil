@@ -1,0 +1,32 @@
+v0 <- LoadInteger '1'
+v1 <- LoadUndefined
+v2 <- LoadInteger '3'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable 'arr', 'const', v3
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadInteger '2'
+    v8 <- CreateNamedVariable 'Array', 'none'
+    v9 <- GetProperty v8, 'prototype'
+    SetElement v9, '1', v7
+    v10 <- LoadInteger '1'
+    v11 <- BinaryOperation v6, '+', v10
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '2'
+v13 <- LoadInteger '0'
+v14 <- LoadInteger '4'
+v15 <- CreateArray [v12, v13, v14]
+v16 <- CreateNamedVariable 'Uint16Array', 'none'
+v17 <- CallMethod v16, 'from', [v4, v5]
+
+
+const arr = [1,,3];
+function mapper(a6) {
+    const t2 = Array.prototype;
+    t2[1] = 2;
+    return a6 + 1;
+}
+[2,0,4];
+Uint16Array.from(arr, mapper);
+
+FuzzIL program written to corpus/regress-8133-1.fzil

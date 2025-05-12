@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadInteger '1'
+    v3 <- LoadInteger '2'
+    v4 <- BeginPlainFunction -> v5, v6, v7
+        v8 <- LoadArguments
+        v9 <- LoadInteger '0'
+        v10 <- DeleteElement v8, '0'
+        v11 <- LoadArguments
+        v12 <- LoadString '0'
+        v13 <- LoadInteger '10'
+        v14 <- LoadBoolean 'false'
+        v15 <- LoadBoolean 'false'
+        v16 <- LoadBoolean 'false'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `value`, v13
+            ObjectLiteralAddProperty `writable`, v14
+            ObjectLiteralAddProperty `enumerable`, v15
+            ObjectLiteralAddProperty `configurable`, v16
+        v17 <- EndObjectLiteral
+        v18 <- CreateNamedVariable 'Object', 'none'
+        v19 <- CallMethod v18, 'defineProperty', [v11, v12, v17]
+        v20 <- LoadInteger '10'
+        v21 <- LoadArguments
+        v22 <- GetElement v21, '0'
+    EndPlainFunction
+    v23 <- CallFunction v4, [v1, v2, v3]
+    Return v23
+EndPlainFunction
+v24 <- CallFunction v0, []
+
+
+function testcase() {
+    function f4(a5, a6, a7) {
+        delete arguments[0];
+        Object.defineProperty(arguments, "0", { value: 10, writable: false, enumerable: false, configurable: false });
+        arguments[0];
+    }
+    return f4(0, 1, 2);
+}
+testcase();
+
+FuzzIL program written to corpus/regress-1513.fzil

@@ -1,0 +1,94 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetProperty v1, 'length'
+    v4 <- GetProperty v2, 'length'
+    v5 <- Compare v3, '==', v4
+    v6 <- CreateNamedVariable 'passed', 'var', v5
+    BeginForLoopInitializer
+        v7 <- LoadInteger '0'
+    BeginForLoopCondition -> v8
+        v9 <- GetProperty v1, 'length'
+        v10 <- Compare v8, '<', v9
+    BeginForLoopAfterthought v10 -> v11
+        v12 <- UnaryOperation v11, '++'
+    BeginForLoopBody -> v13
+        BeginIf v6
+            v14 <- GetComputedProperty v1, v13
+            v15 <- GetComputedProperty v2, v13
+            v16 <- Compare v14, '==', v15
+            Reassign v6, v16
+        EndIf
+    EndForLoop
+    v17 <- LoadString 'a'
+    v18 <- CreateNamedVariable 'print', 'none'
+    v19 <- CallFunction v18, [v17]
+    v20 <- CallFunction v18, [v6]
+    v21 <- LoadString 'b'
+    v22 <- CallFunction v18, [v21]
+    v23 <- CallFunction v18, [v6]
+    Return v6
+EndPlainFunction
+v24 <- LoadInteger '0'
+v25 <- LoadInteger '1'
+v26 <- CreateArray [v24, v25]
+v27 <- LoadInteger '0'
+v28 <- LoadInteger '1'
+v29 <- CreateArray [v27, v28]
+v30 <- CallFunction v0, [v26, v29]
+v31 <- LoadInteger '0'
+v32 <- LoadInteger '2'
+v33 <- CreateArray [v31, v32]
+v34 <- LoadInteger '0'
+v35 <- LoadInteger '2'
+v36 <- CreateArray [v34, v35]
+v37 <- CallFunction v0, [v33, v36]
+v38 <- LoadInteger '0'
+v39 <- LoadFloat '2.25'
+v40 <- CreateArray [v38, v39]
+v41 <- LoadInteger '0'
+v42 <- LoadFloat '2.75'
+v43 <- CreateArray [v41, v42]
+v44 <- CallFunction v0, [v40, v43]
+v45 <- LoadInteger '0'
+v46 <- LoadInteger '1'
+v47 <- CreateArray [v45, v46]
+v48 <- LoadInteger '0'
+v49 <- LoadInteger '1'
+v50 <- CreateArray [v48, v49]
+v51 <- CallFunction v0, [v47, v50]
+v52 <- LoadInteger '0'
+v53 <- LoadInteger '2'
+v54 <- CreateArray [v52, v53]
+v55 <- LoadInteger '0'
+v56 <- LoadInteger '2'
+v57 <- CreateArray [v55, v56]
+v58 <- CallFunction v0, [v54, v57]
+v59 <- LoadInteger '0'
+v60 <- LoadFloat '2.25'
+v61 <- CreateArray [v59, v60]
+v62 <- LoadInteger '0'
+v63 <- LoadFloat '2.75'
+v64 <- CreateArray [v62, v63]
+v65 <- CallFunction v0, [v61, v64]
+
+
+function foo(a1, a2) {
+    var passed = a1.length == a2.length;
+    for (let i8 = 0; i8 < a1.length; i8++) {
+        if (passed) {
+            passed = a1[i8] == a2[i8];
+        }
+    }
+    print("a");
+    print(passed);
+    print("b");
+    print(passed);
+    return passed;
+}
+foo([0,1], [0,1]);
+foo([0,2], [0,2]);
+foo([0,2.25], [0,2.75]);
+foo([0,1], [0,1]);
+foo([0,2], [0,2]);
+foo([0,2.25], [0,2.75]);
+
+FuzzIL program written to corpus/deopt-bool2.fzil

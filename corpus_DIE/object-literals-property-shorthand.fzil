@@ -1,0 +1,216 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v2
+    v3 <- EndObjectLiteral
+    v4 <- CreateNamedVariable 'object', 'var', v3
+    v5 <- LoadInteger '1'
+    v6 <- GetProperty v4, 'x'
+    v7 <- CreateNamedVariable 'assertEquals', 'none'
+    v8 <- CallFunction v7, [v5, v6]
+EndPlainFunction
+v9 <- CallFunction v0, []
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadInteger '1'
+    v12 <- CreateNamedVariable 'get', 'var', v11
+    v13 <- LoadInteger '2'
+    v14 <- CreateNamedVariable 'set', 'var', v13
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v12
+        ObjectLiteralAddProperty `set`, v14
+    v15 <- EndObjectLiteral
+    v16 <- CreateNamedVariable 'object', 'var', v15
+    v17 <- LoadInteger '1'
+    v18 <- GetProperty v16, 'get'
+    v19 <- CreateNamedVariable 'assertEquals', 'none'
+    v20 <- CallFunction v19, [v17, v18]
+    v21 <- LoadInteger '2'
+    v22 <- GetProperty v16, 'set'
+    v23 <- CallFunction v19, [v21, v22]
+EndPlainFunction
+v24 <- CallFunction v10, []
+v25 <- BeginPlainFunction -> 
+    v26 <- LoadInteger '1'
+    v27 <- CreateNamedVariable 'x', 'var', v26
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v27
+    v28 <- EndObjectLiteral
+    v29 <- CreateNamedVariable 'object', 'var', v28
+    v30 <- LoadString 'x'
+    v31 <- CreateNamedVariable 'Object', 'none'
+    v32 <- CallMethod v31, 'getOwnPropertyDescriptor', [v29, v30]
+    v33 <- CreateNamedVariable 'descr', 'var', v32
+    v34 <- LoadInteger '1'
+    v35 <- GetProperty v33, 'value'
+    v36 <- CreateNamedVariable 'assertEquals', 'none'
+    v37 <- CallFunction v36, [v34, v35]
+    v38 <- GetProperty v33, 'enumerable'
+    v39 <- CreateNamedVariable 'assertTrue', 'none'
+    v40 <- CallFunction v39, [v38]
+    v41 <- GetProperty v33, 'writable'
+    v42 <- CallFunction v39, [v41]
+    v43 <- GetProperty v33, 'configurable'
+    v44 <- CallFunction v39, [v43]
+EndPlainFunction
+v45 <- CallFunction v25, []
+v46 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v47 <- BeginPlainFunction -> 
+        v48 <- CreateNamedVariable 'notDefined', 'none'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `notDefined`, v48
+        v49 <- EndObjectLiteral
+        Return v49
+    EndPlainFunction
+    v50 <- CreateNamedVariable 'ReferenceError', 'none'
+    v51 <- CreateNamedVariable 'assertThrows', 'none'
+    v52 <- CallFunction v51, [v47, v50]
+EndPlainFunction
+v53 <- CallFunction v46, []
+v54 <- BeginPlainFunction -> 
+    v55 <- LoadInteger '1'
+    v56 <- CreateNamedVariable 'let', 'var', v55
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `let`, v56
+    v57 <- EndObjectLiteral
+    v58 <- CreateNamedVariable 'object', 'var', v57
+    v59 <- LoadInteger '1'
+    v60 <- GetProperty v58, 'let'
+    v61 <- CreateNamedVariable 'assertEquals', 'none'
+    v62 <- CallFunction v61, [v59, v60]
+EndPlainFunction
+v63 <- CallFunction v54, []
+v64 <- BeginPlainFunction -> 
+    v65 <- LoadInteger '1'
+    v66 <- CreateNamedVariable 'yield', 'var', v65
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `yield`, v66
+    v67 <- EndObjectLiteral
+    v68 <- CreateNamedVariable 'object', 'var', v67
+    v69 <- LoadInteger '1'
+    v70 <- GetProperty v68, 'yield'
+    v71 <- CreateNamedVariable 'assertEquals', 'none'
+    v72 <- CallFunction v71, [v69, v70]
+EndPlainFunction
+v73 <- CallFunction v64, []
+v74 <- BeginPlainFunction -> 
+    v75 <- BeginPlainFunction -> v76
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v76
+        v77 <- EndObjectLiteral
+        Return v77
+    EndPlainFunction
+    v78 <- LoadString 'function f(x) { return {x}; }'
+    v79 <- CallMethod v75, 'toString', []
+    v80 <- CreateNamedVariable 'assertEquals', 'none'
+    v81 <- CallFunction v80, [v78, v79]
+EndPlainFunction
+v82 <- CallFunction v74, []
+v83 <- BeginPlainFunction -> 
+    v84 <- LoadInteger '1'
+    v85 <- CreateNamedVariable '__proto__', 'var', v84
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v85
+    v86 <- EndObjectLiteral
+    v87 <- CreateNamedVariable 'object', 'var', v86
+    v88 <- CreateNamedVariable 'Object', 'none'
+    v89 <- GetProperty v88, 'prototype'
+    v90 <- CallMethod v88, 'getPrototypeOf', [v87]
+    v91 <- CreateNamedVariable 'assertEquals', 'none'
+    v92 <- CallFunction v91, [v89, v90]
+    v93 <- LoadInteger '1'
+    v94 <- GetProperty v87, '__proto__'
+    v95 <- CallFunction v91, [v93, v94]
+EndPlainFunction
+v96 <- CallFunction v83, []
+v97 <- BeginPlainFunction -> 
+    v98 <- LoadInteger '1'
+    v99 <- CreateNamedVariable '__proto__', 'var', v98
+    BeginObjectLiteral
+    v100 <- EndObjectLiteral
+    v101 <- CreateNamedVariable 'p', 'var', v100
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v101
+        ObjectLiteralAddProperty `__proto__`, v99
+    v102 <- EndObjectLiteral
+    v103 <- CreateNamedVariable 'object', 'var', v102
+    v104 <- CreateNamedVariable 'Object', 'none'
+    v105 <- CallMethod v104, 'getPrototypeOf', [v103]
+    v106 <- CreateNamedVariable 'assertEquals', 'none'
+    v107 <- CallFunction v106, [v101, v105]
+    v108 <- LoadInteger '1'
+    v109 <- GetProperty v103, '__proto__'
+    v110 <- CallFunction v106, [v108, v109]
+EndPlainFunction
+v111 <- CallFunction v97, []
+
+
+function TestBasics() {
+    var x = 1;
+    var object = { x: x };
+    assertEquals(1, object.x);
+}
+TestBasics();
+function TestBasicsGetSet() {
+    var get = 1;
+    var set = 2;
+    var object = { get: get, set: set };
+    assertEquals(1, object.get);
+    assertEquals(2, object.set);
+}
+TestBasicsGetSet();
+function TestDescriptor() {
+    var x = 1;
+    var object = { x: x };
+    var descr = Object.getOwnPropertyDescriptor(object, "x");
+    assertEquals(1, descr.value);
+    assertTrue(descr.enumerable);
+    assertTrue(descr.writable);
+    assertTrue(descr.configurable);
+}
+TestDescriptor();
+function TestNotDefined() {
+    'use strict';
+    function f47() {
+        return { notDefined: notDefined };
+    }
+    assertThrows(f47, ReferenceError);
+}
+TestNotDefined();
+function TestLet() {
+    var let = 1;
+    var object = { let: let };
+    assertEquals(1, object.let);
+}
+TestLet();
+function TestYieldInFunction() {
+    var yield = 1;
+    var object = { yield: yield };
+    assertEquals(1, object.yield);
+}
+TestYieldInFunction();
+function TestToString() {
+    function f(a76) {
+        return { x: a76 };
+    }
+    assertEquals("function f(x) { return {x}; }", f.toString());
+}
+TestToString();
+function TestProtoName() {
+    var __proto__ = 1;
+    var object = { __proto__: __proto__ };
+    assertEquals(Object.prototype, Object.getPrototypeOf(object));
+    assertEquals(1, object.__proto__);
+}
+TestProtoName();
+function TestProtoName2() {
+    var __proto__ = 1;
+    var p = {};
+    var object = { __proto__: p, __proto__: __proto__ };
+    assertEquals(p, Object.getPrototypeOf(object));
+    assertEquals(1, object.__proto__);
+}
+TestProtoName2();
+
+FuzzIL program written to corpus/object-literals-property-shorthand.fzil

@@ -1,0 +1,39 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'obj', 'none'
+Reassign v1, v0
+v2 <- LoadString 'foobar'
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '42'
+    Return v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'obj', 'none'
+v6 <- CallMethod v5, '__defineGetter__', [v2, v3]
+v7 <- LoadInteger '1'
+SetProperty v5, 'a', v7
+v8 <- LoadInteger '2'
+SetProperty v5, 'b', v8
+v9 <- LoadInteger '3'
+SetProperty v5, 'c', v9
+v10 <- LoadString 'foobar'
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadInteger '42'
+    Return v12
+EndPlainFunction
+v13 <- CallMethod v5, '__defineGetter__', [v10, v11]
+
+
+obj = {};
+function f3() {
+    return 42;
+}
+obj.__defineGetter__("foobar", f3);
+obj.a = 1;
+obj.b = 2;
+obj.c = 3;
+function f11() {
+    return 42;
+}
+obj.__defineGetter__("foobar", f11);
+
+FuzzIL program written to corpus/regress-612.fzil

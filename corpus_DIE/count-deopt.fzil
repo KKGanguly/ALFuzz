@@ -1,0 +1,531 @@
+v0 <- LoadInteger '1073741823'
+v1 <- CreateNamedVariable 'max_smi', 'var', v0
+v2 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'o', 'var', v3
+v5 <- BeginPlainFunction -> v6
+    v7 <- UnaryOperation v6, '++'
+    SetProperty v4, 'x', v6
+EndPlainFunction
+v8 <- CallFunction v5, [v1]
+v9 <- LoadInteger '1'
+v10 <- BinaryOperation v1, '+', v9
+v11 <- GetProperty v4, 'x'
+v12 <- LoadFloat '1.1'
+v13 <- CallFunction v5, [v12]
+v14 <- LoadFloat '2.1'
+v15 <- GetProperty v4, 'x'
+v16 <- BeginPlainFunction -> v17
+    v18 <- GetProperty v17, 'x'
+    v19 <- UnaryOperation v18, '++'
+EndPlainFunction
+v20 <- LoadString '42'
+SetProperty v4, 'x', v20
+v21 <- CallFunction v16, [v4]
+v22 <- LoadInteger '43'
+v23 <- GetProperty v4, 'x'
+v24 <- LoadInteger '10'
+v25 <- BinaryOperation v1, '-', v24
+v26 <- CreateNamedVariable 's', 'var', v25
+SetProperty v4, 'x', v26
+BeginForLoopInitializer
+    v27 <- LoadInteger '0'
+BeginForLoopCondition -> v28
+    v29 <- LoadInteger '20'
+    v30 <- Compare v28, '<', v29
+BeginForLoopAfterthought v30 -> v31
+    v32 <- UnaryOperation v31, '++'
+BeginForLoopBody -> v33
+    v34 <- CallFunction v16, [v4]
+    v35 <- LoadInteger '4'
+    v36 <- Compare v33, '==', v35
+    BeginIf v36
+    EndIf
+EndForLoop
+v37 <- LoadInteger '10'
+v38 <- BinaryOperation v1, '+', v37
+v39 <- GetProperty v4, 'x'
+v40 <- BeginPlainFunction -> v41, v42
+    v43 <- GetComputedProperty v41, v42
+    v44 <- UnaryOperation v43, '++'
+EndPlainFunction
+v45 <- LoadString '42'
+v46 <- CreateArray [v45]
+Reassign v4, v46
+v47 <- LoadInteger '0'
+v48 <- CallFunction v40, [v4, v47]
+v49 <- LoadInteger '43'
+v50 <- GetElement v4, '0'
+v51 <- LoadInteger '10'
+v52 <- BinaryOperation v1, '-', v51
+v53 <- CreateNamedVariable 's', 'var', v52
+SetElement v4, '0', v53
+BeginForLoopInitializer
+    v54 <- LoadInteger '0'
+BeginForLoopCondition -> v55
+    v56 <- LoadInteger '20'
+    v57 <- Compare v55, '<', v56
+BeginForLoopAfterthought v57 -> v58
+    v59 <- UnaryOperation v58, '++'
+BeginForLoopBody -> v60
+    v61 <- LoadInteger '0'
+    v62 <- CallFunction v40, [v4, v61]
+    v63 <- LoadInteger '4'
+    v64 <- Compare v60, '==', v63
+    BeginIf v64
+    EndIf
+EndForLoop
+v65 <- LoadInteger '10'
+v66 <- BinaryOperation v1, '+', v65
+v67 <- GetElement v4, '0'
+v68 <- LoadString '0'
+v69 <- CallFunction v40, [v4, v68]
+v70 <- LoadInteger '11'
+v71 <- BinaryOperation v1, '+', v70
+v72 <- GetElement v4, '0'
+v73 <- LoadInteger '0'
+SetElement v4, '0', v73
+BeginForLoopInitializer
+    v74 <- LoadInteger '0'
+BeginForLoopCondition -> v75
+    v76 <- LoadInteger '5'
+    v77 <- Compare v75, '<', v76
+BeginForLoopAfterthought v77 -> v78
+    v79 <- UnaryOperation v78, '++'
+BeginForLoopBody -> v80
+    v81 <- LoadInteger '0'
+    v82 <- CallFunction v40, [v4, v81]
+EndForLoop
+v83 <- LoadInteger '0'
+v84 <- CallFunction v40, [v4, v83]
+v85 <- LoadInteger '1'
+v86 <- CallFunction v40, [v4, v85]
+v87 <- BeginPlainFunction -> v88, v89
+    v90 <- UnaryOperation v88, '++'
+    v91 <- BinaryOperation v90, '+', v89
+    Return v91
+EndPlainFunction
+BeginForLoopInitializer
+    v92 <- LoadInteger '0'
+BeginForLoopCondition -> v93
+    v94 <- LoadInteger '5'
+    v95 <- Compare v93, '<', v94
+BeginForLoopAfterthought v95 -> v96
+    v97 <- UnaryOperation '++', v96
+BeginForLoopBody -> v98
+    v99 <- LoadInteger '3'
+    v100 <- LoadInteger '2'
+    v101 <- LoadInteger '1'
+    v102 <- CallFunction v87, [v100, v101]
+EndForLoop
+v103 <- LoadInteger '2'
+v104 <- LoadInteger '1'
+v105 <- CallFunction v87, [v103, v104]
+v106 <- LoadFloat '3.1'
+v107 <- LoadInteger '2'
+v108 <- LoadFloat '1.1'
+v109 <- CallFunction v87, [v107, v108]
+v110 <- BeginPlainFunction -> v111, v112
+    v113 <- UnaryOperation '++', v111
+    v114 <- BinaryOperation v113, '+', v112
+    Return v114
+EndPlainFunction
+BeginForLoopInitializer
+    v115 <- LoadInteger '0'
+BeginForLoopCondition -> v116
+    v117 <- LoadInteger '5'
+    v118 <- Compare v116, '<', v117
+BeginForLoopAfterthought v118 -> v119
+    v120 <- UnaryOperation '++', v119
+BeginForLoopBody -> v121
+    v122 <- LoadInteger '4'
+    v123 <- LoadInteger '2'
+    v124 <- LoadInteger '1'
+    v125 <- CallFunction v110, [v123, v124]
+EndForLoop
+v126 <- LoadInteger '4'
+v127 <- LoadInteger '2'
+v128 <- LoadInteger '1'
+v129 <- CallFunction v110, [v127, v128]
+v130 <- LoadFloat '4.1'
+v131 <- LoadInteger '2'
+v132 <- LoadFloat '1.1'
+v133 <- CallFunction v110, [v131, v132]
+v134 <- LoadFloat '4.1'
+v135 <- LoadFloat '2.1'
+v136 <- LoadInteger '1'
+v137 <- CallFunction v110, [v135, v136]
+v138 <- BeginPlainFunction -> v139, v140
+    v141 <- GetProperty v139, 'x'
+    v142 <- UnaryOperation v141, '++'
+    v143 <- BinaryOperation v142, '+', v140
+    Return v143
+EndPlainFunction
+v144 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v144
+v145 <- EndObjectLiteral
+Reassign v4, v145
+BeginForLoopInitializer
+    v146 <- LoadInteger '0'
+BeginForLoopCondition -> v147
+    v148 <- LoadInteger '5'
+    v149 <- Compare v147, '<', v148
+BeginForLoopAfterthought v149 -> v150
+    v151 <- UnaryOperation '++', v150
+BeginForLoopBody -> v152
+    v153 <- LoadInteger '42'
+    SetProperty v4, 'x', v153
+    v154 <- LoadInteger '43'
+    v155 <- LoadInteger '1'
+    v156 <- CallFunction v138, [v4, v155]
+EndForLoop
+v157 <- LoadInteger '42'
+SetProperty v4, 'x', v157
+v158 <- LoadInteger '43'
+v159 <- LoadInteger '1'
+v160 <- CallFunction v138, [v4, v159]
+v161 <- LoadInteger '42'
+SetProperty v4, 'x', v161
+v162 <- LoadFloat '43.1'
+v163 <- LoadFloat '1.1'
+v164 <- CallFunction v138, [v4, v163]
+v165 <- LoadFloat '42.1'
+SetProperty v4, 'x', v165
+v166 <- LoadFloat '43.1'
+v167 <- LoadInteger '1'
+v168 <- CallFunction v138, [v4, v167]
+v169 <- BeginPlainFunction -> v170, v171
+    v172 <- GetProperty v170, 'x'
+    v173 <- UnaryOperation '++', v172
+    v174 <- BinaryOperation v173, '+', v171
+    Return v174
+EndPlainFunction
+v175 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v175
+v176 <- EndObjectLiteral
+Reassign v4, v176
+BeginForLoopInitializer
+    v177 <- LoadInteger '0'
+BeginForLoopCondition -> v178
+    v179 <- LoadInteger '5'
+    v180 <- Compare v178, '<', v179
+BeginForLoopAfterthought v180 -> v181
+    v182 <- UnaryOperation '++', v181
+BeginForLoopBody -> v183
+    v184 <- LoadInteger '42'
+    SetProperty v4, 'x', v184
+    v185 <- LoadInteger '44'
+    v186 <- LoadInteger '1'
+    v187 <- CallFunction v169, [v4, v186]
+EndForLoop
+v188 <- LoadInteger '42'
+SetProperty v4, 'x', v188
+v189 <- LoadInteger '44'
+v190 <- LoadInteger '1'
+v191 <- CallFunction v169, [v4, v190]
+v192 <- LoadInteger '42'
+SetProperty v4, 'x', v192
+v193 <- LoadFloat '44.1'
+v194 <- LoadFloat '1.1'
+v195 <- CallFunction v169, [v4, v194]
+v196 <- LoadFloat '42.1'
+SetProperty v4, 'x', v196
+v197 <- LoadFloat '44.1'
+v198 <- LoadInteger '1'
+v199 <- CallFunction v169, [v4, v198]
+v200 <- BeginPlainFunction -> v201, v202
+    v203 <- GetElement v201, '0'
+    v204 <- UnaryOperation v203, '++'
+    v205 <- BinaryOperation v204, '+', v202
+    Return v205
+EndPlainFunction
+v206 <- LoadInteger '0'
+v207 <- CreateArray [v206]
+v208 <- CreateNamedVariable 'q', 'var', v207
+BeginForLoopInitializer
+    v209 <- LoadInteger '0'
+BeginForLoopCondition -> v210
+    v211 <- LoadInteger '5'
+    v212 <- Compare v210, '<', v211
+BeginForLoopAfterthought v212 -> v213
+    v214 <- UnaryOperation '++', v213
+BeginForLoopBody -> v215
+    v216 <- LoadInteger '42'
+    SetElement v208, '0', v216
+    v217 <- LoadInteger '43'
+    v218 <- LoadInteger '1'
+    v219 <- CallFunction v200, [v208, v218]
+EndForLoop
+v220 <- LoadInteger '42'
+SetElement v208, '0', v220
+v221 <- LoadInteger '43'
+v222 <- LoadInteger '1'
+v223 <- CallFunction v200, [v208, v222]
+v224 <- LoadInteger '42'
+SetElement v208, '0', v224
+v225 <- LoadFloat '43.1'
+v226 <- LoadFloat '1.1'
+v227 <- CallFunction v200, [v208, v226]
+v228 <- LoadFloat '42.1'
+SetElement v208, '0', v228
+v229 <- LoadFloat '43.1'
+v230 <- LoadInteger '1'
+v231 <- CallFunction v200, [v208, v230]
+v232 <- BeginPlainFunction -> v233, v234
+    v235 <- GetElement v233, '0'
+    v236 <- UnaryOperation '++', v235
+    v237 <- BinaryOperation v236, '+', v234
+    Return v237
+EndPlainFunction
+v238 <- LoadInteger '0'
+v239 <- CreateArray [v238]
+Reassign v208, v239
+BeginForLoopInitializer
+    v240 <- LoadInteger '0'
+BeginForLoopCondition -> v241
+    v242 <- LoadInteger '5'
+    v243 <- Compare v241, '<', v242
+BeginForLoopAfterthought v243 -> v244
+    v245 <- UnaryOperation '++', v244
+BeginForLoopBody -> v246
+    v247 <- LoadInteger '42'
+    SetElement v208, '0', v247
+    v248 <- LoadInteger '44'
+    v249 <- LoadInteger '1'
+    v250 <- CallFunction v232, [v208, v249]
+EndForLoop
+v251 <- LoadInteger '42'
+SetElement v208, '0', v251
+v252 <- LoadInteger '44'
+v253 <- LoadInteger '1'
+v254 <- CallFunction v232, [v208, v253]
+v255 <- LoadInteger '42'
+SetElement v208, '0', v255
+v256 <- LoadFloat '44.1'
+v257 <- LoadFloat '1.1'
+v258 <- CallFunction v232, [v208, v257]
+v259 <- LoadFloat '42.1'
+SetElement v208, '0', v259
+v260 <- LoadFloat '44.1'
+v261 <- LoadInteger '1'
+v262 <- CallFunction v232, [v208, v261]
+v263 <- BeginPlainFunction -> v264
+    v265 <- GetProperty v264, 'x'
+    v266 <- UnaryOperation v265, '++'
+    Return v266
+EndPlainFunction
+v267 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v267
+v268 <- EndObjectLiteral
+v269 <- CreateNamedVariable 'g1', 'var', v268
+v270 <- LoadInteger '0'
+v271 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v270
+    ObjectLiteralAddProperty `x`, v271
+v272 <- EndObjectLiteral
+v273 <- CreateNamedVariable 'g2', 'var', v272
+BeginForLoopInitializer
+    v274 <- LoadInteger '0'
+BeginForLoopCondition -> v275
+    v276 <- LoadInteger '5'
+    v277 <- Compare v275, '<', v276
+BeginForLoopAfterthought v277 -> v278
+    v279 <- UnaryOperation '++', v278
+BeginForLoopBody -> v280
+    v281 <- LoadInteger '42'
+    SetProperty v269, 'x', v281
+    v282 <- LoadInteger '42'
+    v283 <- CallFunction v263, [v269]
+    v284 <- LoadInteger '43'
+    v285 <- GetProperty v269, 'x'
+EndForLoop
+v286 <- LoadInteger '42'
+SetProperty v269, 'x', v286
+v287 <- LoadInteger '42'
+v288 <- CallFunction v263, [v269]
+v289 <- LoadInteger '43'
+v290 <- GetProperty v269, 'x'
+v291 <- LoadInteger '42'
+v292 <- CallFunction v263, [v273]
+v293 <- LoadInteger '43'
+v294 <- GetProperty v273, 'x'
+v295 <- BeginPlainFunction -> v296
+    v297 <- LoadThis
+    v298 <- GetProperty v297, 'x'
+    v299 <- UnaryOperation v298, '++'
+    v300 <- GetComputedProperty v296, v299
+    Return v300
+EndPlainFunction
+v301 <- LoadNull
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v301
+    ObjectLiteralAddProperty `f`, v295
+v302 <- EndObjectLiteral
+v303 <- CreateNamedVariable 'g3', 'var', v302
+v304 <- LoadInteger '42'
+v305 <- CreateArray [v304]
+v306 <- CreateNamedVariable 'g4', 'var', v305
+v307 <- LoadInteger '42'
+v308 <- CallMethod v303, 'f', [v306]
+
+
+var max_smi = 1073741823;
+var o = { x: 0 };
+function inc1(a6) {
+    a6++;
+    o.x = a6;
+}
+inc1(max_smi);
+max_smi + 1;
+o.x;
+inc1(1.1);
+o.x;
+function inc2(a17) {
+    let v18 = a17.x;
+    v18++;
+}
+o.x = "42";
+inc2(o);
+o.x;
+var s = max_smi - 10;
+o.x = s;
+for (let i28 = 0; i28 < 20; i28++) {
+    inc2(o);
+    if (i28 == 4) {
+    }
+}
+max_smi + 10;
+o.x;
+function inc3(a41, a42) {
+    let v43 = a41[a42];
+    v43++;
+}
+o = ["42"];
+inc3(o, 0);
+o[0];
+var s = max_smi - 10;
+o[0] = s;
+for (let i55 = 0; i55 < 20; i55++) {
+    inc3(o, 0);
+    if (i55 == 4) {
+    }
+}
+max_smi + 10;
+o[0];
+inc3(o, "0");
+max_smi + 11;
+o[0];
+o[0] = 0;
+for (let i75 = 0; i75 < 5; i75++) {
+    inc3(o, 0);
+}
+inc3(o, 0);
+inc3(o, 1);
+function inc4(a88, a89) {
+    return a88++ + a89;
+}
+for (let i93 = 0; i93 < 5; ++i93) {
+    inc4(2, 1);
+}
+inc4(2, 1);
+inc4(2, 1.1);
+function inc5(a111, a112) {
+    return ++a111 + a112;
+}
+for (let i116 = 0; i116 < 5; ++i116) {
+    inc5(2, 1);
+}
+inc5(2, 1);
+inc5(2, 1.1);
+inc5(2.1, 1);
+function inc6(a139, a140) {
+    let v141 = a139.x;
+    return v141++ + a140;
+}
+o = { x: 0 };
+for (let i147 = 0; i147 < 5; ++i147) {
+    o.x = 42;
+    inc6(o, 1);
+}
+o.x = 42;
+inc6(o, 1);
+o.x = 42;
+inc6(o, 1.1);
+o.x = 42.1;
+inc6(o, 1);
+function inc7(a170, a171) {
+    let v172 = a170.x;
+    return ++v172 + a171;
+}
+o = { x: 0 };
+for (let i178 = 0; i178 < 5; ++i178) {
+    o.x = 42;
+    inc7(o, 1);
+}
+o.x = 42;
+inc7(o, 1);
+o.x = 42;
+inc7(o, 1.1);
+o.x = 42.1;
+inc7(o, 1);
+function inc8(a201, a202) {
+    let v203 = a201[0];
+    return v203++ + a202;
+}
+var q = [0];
+for (let i210 = 0; i210 < 5; ++i210) {
+    q[0] = 42;
+    inc8(q, 1);
+}
+q[0] = 42;
+inc8(q, 1);
+q[0] = 42;
+inc8(q, 1.1);
+q[0] = 42.1;
+inc8(q, 1);
+function inc9(a233, a234) {
+    let v235 = a233[0];
+    return ++v235 + a234;
+}
+q = [0];
+for (let i241 = 0; i241 < 5; ++i241) {
+    q[0] = 42;
+    inc9(q, 1);
+}
+q[0] = 42;
+inc9(q, 1);
+q[0] = 42;
+inc9(q, 1.1);
+q[0] = 42.1;
+inc9(q, 1);
+function inc10(a264) {
+    let v265 = a264.x;
+    return v265++;
+}
+var g1 = { x: 0 };
+var g2 = { y: 0, x: 42 };
+for (let i275 = 0; i275 < 5; ++i275) {
+    g1.x = 42;
+    inc10(g1);
+    g1.x;
+}
+g1.x = 42;
+inc10(g1);
+g1.x;
+inc10(g2);
+g2.x;
+function inc11(a296) {
+    let v298 = this.x;
+    return a296[v298++];
+}
+var g3 = { x: null, f: inc11 };
+var g4 = [42];
+g3.f(g4);
+
+FuzzIL program written to corpus/count-deopt.fzil

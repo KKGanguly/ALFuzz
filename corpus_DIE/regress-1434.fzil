@@ -1,0 +1,19 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- Compare v1, '===', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadFloat '1.5'
+v5 <- LoadFloat '2.5'
+v6 <- CallFunction v0, [v4, v5]
+v7 <- LoadUndefined
+v8 <- LoadUndefined
+v9 <- CallFunction v0, [v7, v8]
+
+
+function compare(a1, a2) {
+    return a1 === a2;
+}
+compare(1.5, 2.5);
+compare(undefined, undefined);
+
+FuzzIL program written to corpus/regress-1434.fzil

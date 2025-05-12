@@ -1,0 +1,21 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'abc'
+    v3 <- GetComputedProperty v2, v1
+    Return v3
+EndPlainFunction
+v4 <- LoadString 'length'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadString 'length'
+v7 <- CallFunction v0, [v6]
+v8 <- LoadString 'length'
+v9 <- CallFunction v0, [v8]
+
+
+function f(a1) {
+    return ("abc")[a1];
+}
+f("length");
+f("length");
+f("length");
+
+FuzzIL program written to corpus/regress-keyed-access-string-length.fzil

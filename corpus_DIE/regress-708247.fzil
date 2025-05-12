@@ -1,0 +1,61 @@
+v0 <- LoadString '2016-01-02'
+v1 <- CreateNamedVariable 'str', 'const', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadUndefined
+    v4 <- CreateNamedVariable 're', 'var', v3
+    v5 <- BeginPlainFunction -> 
+        BeginForLoopInitializer
+            v6 <- LoadInteger '0'
+        BeginForLoopCondition -> v7
+            v8 <- LoadInteger '100'
+            v9 <- Compare v7, '<', v8
+        BeginForLoopAfterthought v9 -> v10
+            v11 <- UnaryOperation v10, '++'
+        BeginForLoopBody -> v12
+            v13 <- LoadInteger '42'
+            SetProperty v4, 'x', v13
+            v14 <- DeleteProperty v4, 'x'
+        EndForLoop
+        v15 <- LoadInteger '0'
+        Return v15
+    EndPlainFunction
+    v16 <- LoadRegExp '-' 'g'
+    Reassign v4, v16
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v5
+    v17 <- EndObjectLiteral
+    SetProperty v4, 'lastIndex', v17
+    v18 <- CallMethod v4, 'exec', [v1]
+    Return v18
+EndPlainFunction
+BeginForLoopInitializer
+    v19 <- LoadInteger '0'
+BeginForLoopCondition -> v20
+    v21 <- LoadInteger '10000'
+    v22 <- Compare v20, '<', v21
+BeginForLoopAfterthought v22 -> v23
+    v24 <- UnaryOperation v23, '++'
+BeginForLoopBody -> v25
+    v26 <- CallFunction v2, []
+EndForLoop
+
+
+const str = "2016-01-02";
+function t() {
+    var re;
+    function toDictMode() {
+        for (let i7 = 0; i7 < 100; i7++) {
+            re.x = 42;
+            delete re.x;
+        }
+        return 0;
+    }
+    re = /-/g;
+    re.lastIndex = { valueOf: toDictMode };
+    return re.exec(str);
+}
+for (let i20 = 0; i20 < 10000; i20++) {
+    t();
+}
+
+FuzzIL program written to corpus/regress-708247.fzil

@@ -1,0 +1,159 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'Object', 'none'
+v2 <- TestInstanceOf v0, v1
+v3 <- CreateArray []
+v4 <- TestInstanceOf v3, v1
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Array', 'none'
+v7 <- TestInstanceOf v5, v6
+v8 <- CreateArray []
+v9 <- TestInstanceOf v8, v6
+v10 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'A', 'var', v11
+    BeginObjectLiteral
+    v13 <- EndObjectLiteral
+    v14 <- CreateNamedVariable 'B', 'var', v13
+    BeginObjectLiteral
+    v15 <- EndObjectLiteral
+    v16 <- CreateNamedVariable 'C', 'var', v15
+    SetProperty v14, '__proto__', v12
+    SetProperty v16, '__proto__', v14
+    v17 <- BeginPlainFunction -> 
+    EndPlainFunction
+    SetProperty v17, 'prototype', v12
+    v18 <- TestInstanceOf v16, v17
+    v19 <- TestInstanceOf v14, v17
+    v20 <- TestInstanceOf v12, v17
+    SetProperty v17, 'prototype', v14
+    v21 <- TestInstanceOf v16, v17
+    v22 <- TestInstanceOf v14, v17
+    v23 <- TestInstanceOf v12, v17
+    SetProperty v17, 'prototype', v16
+    v24 <- TestInstanceOf v16, v17
+    v25 <- TestInstanceOf v14, v17
+    v26 <- TestInstanceOf v12, v17
+EndPlainFunction
+v27 <- CallFunction v10, []
+v28 <- BeginPlainFunction -> 
+    v29 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v30 <- LoadInteger '1'
+    v31 <- CreateNamedVariable 'Number', 'none'
+    v32 <- LoadInteger '42'
+    v33 <- Construct v31, [v32]
+    v34 <- LoadBoolean 'true'
+    v35 <- LoadString 'string'
+    v36 <- CreateNamedVariable 'String', 'none'
+    v37 <- LoadString 'hest'
+    v38 <- Construct v36, [v37]
+    BeginObjectLiteral
+    v39 <- EndObjectLiteral
+    v40 <- CreateArray []
+    v41 <- Construct v29, []
+    v42 <- CreateArray [v30, v33, v34, v35, v38, v39, v40, v29, v41, v1, v36]
+    v43 <- CreateNamedVariable 'items', 'var', v42
+    v44 <- LoadInteger '0'
+    v45 <- CreateNamedVariable 'exceptions', 'var', v44
+    v46 <- LoadInteger '0'
+    v47 <- CreateNamedVariable 'instanceofs', 'var', v46
+    BeginForLoopInitializer
+        v48 <- LoadInteger '0'
+    BeginForLoopCondition -> v49
+        v50 <- GetProperty v43, 'length'
+        v51 <- Compare v49, '<', v50
+    BeginForLoopAfterthought v51 -> v52
+        v53 <- UnaryOperation v52, '++'
+    BeginForLoopBody -> v54
+        BeginForLoopInitializer
+            v55 <- LoadInteger '0'
+        BeginForLoopCondition -> v56
+            v57 <- GetProperty v43, 'length'
+            v58 <- Compare v56, '<', v57
+        BeginForLoopAfterthought v58 -> v59
+            v60 <- UnaryOperation v59, '++'
+        BeginForLoopBody -> v61
+            BeginTry
+                v62 <- GetComputedProperty v43, v54
+                v63 <- GetComputedProperty v43, v61
+                v64 <- TestInstanceOf v62, v63
+                BeginIf v64
+                    v65 <- UnaryOperation v47, '++'
+                EndIf
+            BeginCatch -> v66
+                v67 <- CreateNamedVariable 'TypeError', 'none'
+                v68 <- TestInstanceOf v66, v67
+                v69 <- UnaryOperation v45, '++'
+            EndTryCatch
+        EndForLoop
+    EndForLoop
+    v70 <- LoadInteger '10'
+    v71 <- LoadInteger '88'
+    v72 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v73 <- LoadUndefined
+    SetProperty v72, 'prototype', v73
+    v74 <- LoadString '({} instanceof G)'
+EndPlainFunction
+v75 <- CallFunction v28, []
+
+
+{} instanceof Object;
+[] instanceof Object;
+{} instanceof Array;
+[] instanceof Array;
+function TestChains() {
+    var A = {};
+    var B = {};
+    var C = {};
+    B.__proto__ = A;
+    C.__proto__ = B;
+    function F() {
+    }
+    F.prototype = A;
+    C instanceof F;
+    B instanceof F;
+    A instanceof F;
+    F.prototype = B;
+    C instanceof F;
+    B instanceof F;
+    A instanceof F;
+    F.prototype = C;
+    C instanceof F;
+    B instanceof F;
+    A instanceof F;
+}
+TestChains();
+function TestExceptions() {
+    function F() {
+    }
+    const v33 = new Number(42);
+    const v38 = new String("hest");
+    const v39 = {};
+    const v40 = [];
+    const v41 = new F();
+    var items = [1,v33,true,"string",v38,v39,v40,F,v41,Object,String];
+    var exceptions = 0;
+    var instanceofs = 0;
+    for (let i49 = 0; i49 < items.length; i49++) {
+        for (let i56 = 0; i56 < items.length; i56++) {
+            try {
+                if (items[i49] instanceof items[i56]) {
+                    instanceofs++;
+                }
+            } catch(e66) {
+                e66 instanceof TypeError;
+                exceptions++;
+            }
+        }
+    }
+    function G() {
+    }
+    G.prototype = undefined;
+}
+TestExceptions();
+
+FuzzIL program written to corpus/instanceof.fzil

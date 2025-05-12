@@ -1,0 +1,32 @@
+v0 <- LoadInteger '130000'
+v1 <- CreateNamedVariable 'n', 'const', v0
+BeginBlockStatement
+    v2 <- CreateNamedVariable 'Set', 'none'
+    v3 <- Construct v2, []
+    v4 <- CreateNamedVariable 'x', 'let', v3
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- Compare v6, '<', v1
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation '++', v8
+    BeginForLoopBody -> v10
+        v11 <- CallMethod v4, 'add', [v10]
+    EndForLoop
+    v12 <- CreateNamedVariable 'Array', 'none'
+    v13 <- CallMethod v12, 'from', [v4]
+    v14 <- CreateNamedVariable 'a', 'let', v13
+EndBlockStatement
+
+
+const n = 130000;
+{
+    const v3 = new Set();
+    let x = v3;
+    for (let i6 = 0; i6 < n; ++i6) {
+        x.add(i6);
+    }
+    let a = Array.from(x);
+}
+
+FuzzIL program written to corpus/array-from-large-set.fzil

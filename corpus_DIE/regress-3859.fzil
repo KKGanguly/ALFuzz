@@ -1,0 +1,21 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'Set', 'none'
+v2 <- CreateNamedVariable 'NaN', 'none'
+v3 <- CreateArray [v2, v2, v2]
+v4 <- Construct v1, [v3]
+v5 <- GetProperty v4, 'size'
+v6 <- LoadInteger '42'
+v7 <- CreateNamedVariable 'Map', 'none'
+v8 <- LoadInteger '42'
+v9 <- CreateArray [v2, v8]
+v10 <- CreateArray [v9]
+v11 <- Construct v7, [v10]
+v12 <- CallMethod v11, 'get', [v2]
+
+
+const v4 = new Set([NaN,NaN,NaN]);
+v4.size;
+const v11 = new Map([[NaN,42]]);
+v11.get(NaN);
+
+FuzzIL program written to corpus/regress-3859.fzil

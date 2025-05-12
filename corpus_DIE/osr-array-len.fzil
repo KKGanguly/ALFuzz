@@ -1,0 +1,55 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CreateNamedVariable 'Array', 'none'
+    v4 <- LoadInteger '5'
+    v5 <- Construct v3, [v4]
+    v6 <- CreateNamedVariable 'line', 'var', v5
+    BeginWhileLoopHeader
+        v7 <- LoadInteger '0'
+        v8 <- Compare v1, '>', v7
+    BeginWhileLoopBody v8
+        v9 <- GetProperty v6, 'length'
+        v10 <- Compare v1, '<', v9
+        BeginIf v10
+            v11 <- Construct v3, [v1]
+            Reassign v6, v11
+        EndIf
+        SetElement v6, '0', v1
+        v12 <- UnaryOperation v1, '--'
+    EndWhileLoop
+EndPlainFunction
+v13 <- LoadString '---BEGIN 1'
+v14 <- CreateNamedVariable 'print', 'none'
+v15 <- CallFunction v14, [v13]
+v16 <- LoadUndefined
+v17 <- LoadInteger '6'
+v18 <- LoadNull
+v19 <- CallFunction v0, [v17, v18]
+v20 <- LoadString '---BEGIN 2'
+v21 <- CallFunction v14, [v20]
+v22 <- LoadUndefined
+v23 <- LoadInteger '6'
+v24 <- LoadNull
+v25 <- CallFunction v0, [v23, v24]
+v26 <- LoadString '---END'
+v27 <- CallFunction v14, [v26]
+
+
+function fastaRandom(a1, a2) {
+    const v5 = new Array(5);
+    var line = v5;
+    while (a1 > 0) {
+        if (a1 < line.length) {
+            const v11 = new Array(a1);
+            line = v11;
+        }
+        line[0] = a1;
+        a1--;
+    }
+}
+print("---BEGIN 1");
+fastaRandom(6, null);
+print("---BEGIN 2");
+fastaRandom(6, null);
+print("---END");
+
+FuzzIL program written to corpus/osr-array-len.fzil

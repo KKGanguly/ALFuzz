@@ -1,0 +1,188 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v2
+        v3 <- EndObjectLiteral
+        v4 <- GetProperty v3, 'x'
+        v5 <- CreateNamedVariable 'ArrayBuffer', 'none'
+        v6 <- CallMethod v5, 'isView', [v4]
+        Return v6
+    EndPlainFunction
+    v7 <- CreateNamedVariable 'Symbol', 'none'
+    v8 <- CallFunction v7, []
+    v9 <- CallFunction v1, [v8]
+    v10 <- LoadString 'some string'
+    v11 <- CallFunction v1, [v10]
+    v12 <- CreateNamedVariable 'Object', 'none'
+    v13 <- Construct v12, []
+    v14 <- CallFunction v1, [v13]
+    v15 <- CreateNamedVariable 'Array', 'none'
+    v16 <- Construct v15, []
+    v17 <- CallFunction v1, [v16]
+    v18 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v19 <- LoadInteger '1'
+    v20 <- Construct v18, [v19]
+    v21 <- CallFunction v1, [v20]
+    v22 <- CreateNamedVariable 'Int32Array', 'none'
+    v23 <- LoadInteger '1'
+    v24 <- Construct v22, [v23]
+    v25 <- CallFunction v1, [v24]
+    v26 <- CreateNamedVariable 'DataView', 'none'
+    v27 <- LoadInteger '1'
+    v28 <- Construct v18, [v27]
+    v29 <- Construct v26, [v28]
+    v30 <- CallFunction v1, [v29]
+    v31 <- CallFunction v7, []
+    v32 <- CallFunction v1, [v31]
+    v33 <- LoadString 'some string'
+    v34 <- CallFunction v1, [v33]
+    v35 <- Construct v12, []
+    v36 <- CallFunction v1, [v35]
+    v37 <- Construct v15, []
+    v38 <- CallFunction v1, [v37]
+    v39 <- LoadInteger '1'
+    v40 <- Construct v18, [v39]
+    v41 <- CallFunction v1, [v40]
+    v42 <- LoadInteger '1'
+    v43 <- Construct v22, [v42]
+    v44 <- CallFunction v1, [v43]
+    v45 <- LoadInteger '1'
+    v46 <- Construct v18, [v45]
+    v47 <- Construct v26, [v46]
+    v48 <- CallFunction v1, [v47]
+    v49 <- CallFunction v1, []
+EndPlainFunction
+v50 <- CallFunction v0, []
+v51 <- BeginPlainFunction -> 
+    v52 <- BeginPlainFunction -> v53
+        v54 <- CreateNamedVariable 'ArrayBuffer', 'none'
+        v55 <- CallMethod v54, 'isView', [v53]
+        Return v55
+    EndPlainFunction
+    v56 <- LoadInteger '1'
+    v57 <- CallFunction v52, [v56]
+    v58 <- LoadFloat '1.1'
+    v59 <- CallFunction v52, [v58]
+    v60 <- CreateNamedVariable 'Symbol', 'none'
+    v61 <- CallFunction v60, []
+    v62 <- CallFunction v52, [v61]
+    v63 <- LoadString 'some string'
+    v64 <- CallFunction v52, [v63]
+    v65 <- CreateNamedVariable 'Object', 'none'
+    v66 <- Construct v65, []
+    v67 <- CallFunction v52, [v66]
+    v68 <- CreateNamedVariable 'Array', 'none'
+    v69 <- Construct v68, []
+    v70 <- CallFunction v52, [v69]
+    v71 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v72 <- LoadInteger '1'
+    v73 <- Construct v71, [v72]
+    v74 <- CallFunction v52, [v73]
+    v75 <- CreateNamedVariable 'Int32Array', 'none'
+    v76 <- LoadInteger '1'
+    v77 <- Construct v75, [v76]
+    v78 <- CallFunction v52, [v77]
+    v79 <- CreateNamedVariable 'DataView', 'none'
+    v80 <- LoadInteger '1'
+    v81 <- Construct v71, [v80]
+    v82 <- Construct v79, [v81]
+    v83 <- CallFunction v52, [v82]
+    v84 <- LoadInteger '1'
+    v85 <- CallFunction v52, [v84]
+    v86 <- LoadFloat '1.1'
+    v87 <- CallFunction v52, [v86]
+    v88 <- CallFunction v60, []
+    v89 <- CallFunction v52, [v88]
+    v90 <- LoadString 'some string'
+    v91 <- CallFunction v52, [v90]
+    v92 <- Construct v65, []
+    v93 <- CallFunction v52, [v92]
+    v94 <- Construct v68, []
+    v95 <- CallFunction v52, [v94]
+    v96 <- LoadInteger '1'
+    v97 <- Construct v71, [v96]
+    v98 <- CallFunction v52, [v97]
+    v99 <- LoadInteger '1'
+    v100 <- Construct v75, [v99]
+    v101 <- CallFunction v52, [v100]
+    v102 <- LoadInteger '1'
+    v103 <- Construct v71, [v102]
+    v104 <- Construct v79, [v103]
+    v105 <- CallFunction v52, [v104]
+    v106 <- CallFunction v52, []
+EndPlainFunction
+v107 <- CallFunction v51, []
+
+
+function f0() {
+    function foo(a2) {
+        return ArrayBuffer.isView(({ x: a2 }).x);
+    }
+    foo(Symbol());
+    foo("some string");
+    const v13 = new Object();
+    foo(v13);
+    const v16 = new Array();
+    foo(v16);
+    const v20 = new ArrayBuffer(1);
+    foo(v20);
+    const v24 = new Int32Array(1);
+    foo(v24);
+    const v28 = new ArrayBuffer(1);
+    const v29 = new DataView(v28);
+    foo(v29);
+    foo(Symbol());
+    foo("some string");
+    const v35 = new Object();
+    foo(v35);
+    const v37 = new Array();
+    foo(v37);
+    const v40 = new ArrayBuffer(1);
+    foo(v40);
+    const v43 = new Int32Array(1);
+    foo(v43);
+    const v46 = new ArrayBuffer(1);
+    const v47 = new DataView(v46);
+    foo(v47);
+    foo();
+}
+f0();
+function f51() {
+    function foo(a53) {
+        return ArrayBuffer.isView(a53);
+    }
+    foo(1);
+    foo(1.1);
+    foo(Symbol());
+    foo("some string");
+    const v66 = new Object();
+    foo(v66);
+    const v69 = new Array();
+    foo(v69);
+    const v73 = new ArrayBuffer(1);
+    foo(v73);
+    const v77 = new Int32Array(1);
+    foo(v77);
+    const v81 = new ArrayBuffer(1);
+    const v82 = new DataView(v81);
+    foo(v82);
+    foo(1);
+    foo(1.1);
+    foo(Symbol());
+    foo("some string");
+    const v92 = new Object();
+    foo(v92);
+    const v94 = new Array();
+    foo(v94);
+    const v97 = new ArrayBuffer(1);
+    foo(v97);
+    const v100 = new Int32Array(1);
+    foo(v100);
+    const v103 = new ArrayBuffer(1);
+    const v104 = new DataView(v103);
+    foo(v104);
+    foo();
+}
+f51();
+
+FuzzIL program written to corpus/array-buffer-is-view.fzil

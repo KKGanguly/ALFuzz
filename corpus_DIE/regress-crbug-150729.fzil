@@ -1,0 +1,41 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 't', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '1'
+    v4 <- CreateArray [v1, v3]
+    v5 <- CreateNamedVariable 'i', 'none'
+    Reassign v5, v4
+    v6 <- CreateNamedVariable 'i', 'none'
+    v7 <- GetElement v6, '0'
+    v8 <- CreateNamedVariable 'Math', 'none'
+    v9 <- CallMethod v8, 'cos', [v1]
+    v10 <- GetElement v6, '7074959'
+    v11 <- BinaryOperation v9, '+', v10
+    v12 <- CreateArray [v7, v11]
+    v13 <- CreateNamedVariable 'M', 'var', v12
+    v14 <- LoadFloat '0.05'
+    Update v1, '+', v14
+EndPlainFunction
+BeginForLoopInitializer
+    v15 <- LoadInteger '0'
+BeginForLoopCondition -> v16
+    v17 <- LoadInteger '5'
+    v18 <- Compare v16, '<', v17
+BeginForLoopAfterthought v18 -> v19
+    v20 <- UnaryOperation v19, '++'
+BeginForLoopBody -> v21
+    v22 <- CallFunction v2, []
+EndForLoop
+
+
+var t = 0;
+function burn() {
+    i = [t,1];
+    var M = [i[0],Math.cos(t) + i[7074959]];
+    t += 0.05;
+}
+for (let i16 = 0; i16 < 5; i16++) {
+    burn();
+}
+
+FuzzIL program written to corpus/regress-crbug-150729.fzil

@@ -1,0 +1,46 @@
+v0 <- LoadString 'Now is the time for all good men to come to the aid of the party. '
+v1 <- LoadString 'Now is the time for all good men to come to the aid of the party.'
+v2 <- BinaryOperation v0, '+', v1
+v3 <- CreateNamedVariable 'base', 'var', v2
+v4 <- LoadInteger '0'
+v5 <- LoadInteger '64'
+v6 <- CallMethod v3, 'substring', [v4, v5]
+v7 <- CreateNamedVariable 's1', 'var', v6
+v8 <- LoadInteger '66'
+v9 <- LoadInteger '130'
+v10 <- CallMethod v3, 'substring', [v8, v9]
+v11 <- CreateNamedVariable 's2', 'var', v10
+v12 <- CreateNamedVariable 'Object', 'none'
+v13 <- Construct v12, []
+v14 <- CreateNamedVariable 'o', 'var', v13
+v15 <- LoadInteger '1'
+SetComputedProperty v14, v7, v15
+v16 <- LoadInteger '2'
+SetComputedProperty v14, v11, v16
+v17 <- LoadBoolean 'true'
+v18 <- CreateNamedVariable 'first_time', 'var', v17
+BeginForInLoop v14 -> v19
+    v20 <- GetComputedProperty v14, v19
+    v21 <- LoadInteger '2'
+    v22 <- Compare v20, '==', v21
+    v23 <- LoadString 'expect 2'
+    v24 <- LoadString 'once only'
+    v25 <- LoadBoolean 'false'
+    Reassign v18, v25
+EndForInLoop
+
+
+var base = "Now is the time for all good men to come to the aid of the party. " + "Now is the time for all good men to come to the aid of the party.";
+var s1 = base.substring(0, 64);
+var s2 = base.substring(66, 130);
+const v13 = new Object();
+var o = v13;
+o[s1] = 1;
+o[s2] = 2;
+var first_time = true;
+for (const v19 in o) {
+    o[v19] == 2;
+    first_time = false;
+}
+
+FuzzIL program written to corpus/string-compare-alignment.fzil

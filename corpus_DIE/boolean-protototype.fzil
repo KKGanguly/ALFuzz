@@ -1,0 +1,132 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'toString'
+    Return v2
+EndPlainFunction
+v3 <- LoadBoolean 'false'
+v4 <- CallFunction v0, [v3]
+v5 <- CreateNamedVariable 'Boolean', 'none'
+v6 <- GetProperty v5, 'prototype'
+v7 <- CallMethod v6, 'toString', []
+v8 <- LoadBoolean 'true'
+v9 <- CallFunction v0, [v8]
+v10 <- GetProperty v5, 'prototype'
+v11 <- CallMethod v10, 'toString', []
+v12 <- LoadBoolean 'false'
+v13 <- CallFunction v0, [v12]
+v14 <- GetProperty v5, 'prototype'
+v15 <- CallMethod v14, 'toString', []
+v16 <- LoadBoolean 'true'
+v17 <- CallFunction v0, [v16]
+v18 <- GetProperty v5, 'prototype'
+v19 <- CallMethod v18, 'toString', []
+v20 <- BeginPlainFunction -> v21
+    v22 <- GetProperty v21, 'valueOf'
+    Return v22
+EndPlainFunction
+v23 <- LoadBoolean 'false'
+v24 <- CallFunction v20, [v23]
+v25 <- GetProperty v5, 'prototype'
+v26 <- CallMethod v25, 'valueOf', []
+v27 <- LoadBoolean 'true'
+v28 <- CallFunction v20, [v27]
+v29 <- GetProperty v5, 'prototype'
+v30 <- CallMethod v29, 'valueOf', []
+v31 <- LoadBoolean 'false'
+v32 <- CallFunction v20, [v31]
+v33 <- GetProperty v5, 'prototype'
+v34 <- CallMethod v33, 'valueOf', []
+v35 <- LoadBoolean 'true'
+v36 <- CallFunction v20, [v35]
+v37 <- GetProperty v5, 'prototype'
+v38 <- CallMethod v37, 'valueOf', []
+v39 <- LoadInteger '42'
+v40 <- GetProperty v5, 'prototype'
+SetProperty v40, 'foo', v39
+v41 <- BeginPlainFunction -> v42
+    v43 <- LoadString 'foo'
+    v44 <- GetComputedProperty v42, v43
+    Return v44
+EndPlainFunction
+v45 <- LoadBoolean 'false'
+v46 <- CallFunction v41, [v45]
+v47 <- LoadInteger '42'
+v48 <- LoadBoolean 'true'
+v49 <- CallFunction v41, [v48]
+v50 <- LoadInteger '42'
+v51 <- LoadBoolean 'false'
+v52 <- CallFunction v41, [v51]
+v53 <- LoadInteger '42'
+v54 <- LoadBoolean 'true'
+v55 <- CallFunction v41, [v54]
+v56 <- LoadInteger '42'
+v57 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v58 <- LoadThis
+    Return v58
+EndPlainFunction
+v59 <- GetProperty v5, 'prototype'
+SetProperty v59, 'bar', v57
+v60 <- BeginPlainFunction -> v61
+    v62 <- CallMethod v61, 'bar', []
+    Return v62
+EndPlainFunction
+v63 <- LoadBoolean 'false'
+v64 <- CallFunction v60, [v63]
+v65 <- LoadBoolean 'false'
+v66 <- LoadBoolean 'true'
+v67 <- CallFunction v60, [v66]
+v68 <- LoadBoolean 'true'
+v69 <- LoadBoolean 'false'
+v70 <- CallFunction v60, [v69]
+v71 <- LoadBoolean 'false'
+v72 <- LoadBoolean 'true'
+v73 <- CallFunction v60, [v72]
+v74 <- LoadBoolean 'true'
+
+
+function test1(a1) {
+    return a1.toString;
+}
+test1(false);
+Boolean.prototype.toString();
+test1(true);
+Boolean.prototype.toString();
+test1(false);
+Boolean.prototype.toString();
+test1(true);
+Boolean.prototype.toString();
+function test2(a21) {
+    return a21.valueOf;
+}
+test2(false);
+Boolean.prototype.valueOf();
+test2(true);
+Boolean.prototype.valueOf();
+test2(false);
+Boolean.prototype.valueOf();
+test2(true);
+Boolean.prototype.valueOf();
+const t14 = Boolean.prototype;
+t14.foo = 42;
+function test3(a42) {
+    return a42["foo"];
+}
+test3(false);
+test3(true);
+test3(false);
+test3(true);
+function bar() {
+    'use strict';
+    return this;
+}
+const t35 = Boolean.prototype;
+t35.bar = bar;
+function test4(a61) {
+    return a61.bar();
+}
+test4(false);
+test4(true);
+test4(false);
+test4(true);
+
+FuzzIL program written to corpus/boolean-protototype.fzil

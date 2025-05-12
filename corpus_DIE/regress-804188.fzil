@@ -1,0 +1,103 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- CreateNamedVariable 'Symbol', 'none'
+v3 <- GetProperty v2, 'iterator'
+v4 <- BeginGeneratorFunction -> 
+EndGeneratorFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v1, v3, v5]
+v8 <- CreateArray []
+v9 <- GetProperty v2, 'iterator'
+v10 <- CallComputedMethod v8, v9, []
+v11 <- CallMethod v6, 'getPrototypeOf', [v10]
+v12 <- CreateNamedVariable 'arrayIteratorProto', 'const', v11
+v13 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v12, 'next', v13
+v14 <- BeginArrowFunction -> 
+    v15 <- CreateNamedVariable 'Map', 'none'
+    BeginObjectLiteral
+    v16 <- EndObjectLiteral
+    v17 <- LoadInteger '1'
+    v18 <- CreateArray [v16, v17]
+    BeginObjectLiteral
+    v19 <- EndObjectLiteral
+    v20 <- LoadInteger '2'
+    v21 <- CreateArray [v19, v20]
+    v22 <- CreateArray [v18, v21]
+    v23 <- Construct v15, [v22]
+    Return v23
+EndArrowFunction
+v24 <- CallFunction v14, []
+v25 <- CreateNamedVariable 'TypeError', 'none'
+v26 <- BeginArrowFunction -> 
+    v27 <- CreateNamedVariable 'WeakMap', 'none'
+    BeginObjectLiteral
+    v28 <- EndObjectLiteral
+    v29 <- LoadInteger '1'
+    v30 <- CreateArray [v28, v29]
+    BeginObjectLiteral
+    v31 <- EndObjectLiteral
+    v32 <- LoadInteger '2'
+    v33 <- CreateArray [v31, v32]
+    v34 <- CreateArray [v30, v33]
+    v35 <- Construct v27, [v34]
+    Return v35
+EndArrowFunction
+v36 <- CallFunction v26, []
+v37 <- BeginArrowFunction -> 
+    v38 <- CreateNamedVariable 'Set', 'none'
+    BeginObjectLiteral
+    v39 <- EndObjectLiteral
+    v40 <- CreateArray [v39]
+    v41 <- Construct v38, [v40]
+    Return v41
+EndArrowFunction
+v42 <- CallFunction v37, []
+v43 <- BeginArrowFunction -> 
+    v44 <- CreateNamedVariable 'WeakSet', 'none'
+    BeginObjectLiteral
+    v45 <- EndObjectLiteral
+    v46 <- CreateArray [v45]
+    v47 <- Construct v44, [v46]
+    Return v47
+EndArrowFunction
+v48 <- CallFunction v43, []
+
+
+const v1 = Array.prototype;
+const v3 = Symbol.iterator;
+function* f4() {
+}
+Object.defineProperty(v1, v3, { value: f4 });
+const arrayIteratorProto = Object.getPrototypeOf(([])[Symbol.iterator]());
+function f13() {
+}
+arrayIteratorProto.next = f13;
+const v14 = () => {
+    const v18 = [{},1];
+    const v23 = new Map([v18,[{},2]]);
+    return v23;
+};
+v14();
+const v26 = () => {
+    const v30 = [{},1];
+    const v35 = new WeakMap([v30,[{},2]]);
+    return v35;
+};
+v26();
+const v37 = () => {
+    const v41 = new Set([{}]);
+    return v41;
+};
+v37();
+const v43 = () => {
+    const v47 = new WeakSet([{}]);
+    return v47;
+};
+v43();
+
+FuzzIL program written to corpus/regress-804188.fzil

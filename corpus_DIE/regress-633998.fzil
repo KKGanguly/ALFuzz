@@ -1,0 +1,100 @@
+v0 <- LoadString 'apply was called on , which is a object and not a function'
+v1 <- CreateNamedVariable 'err_str_1', 'var', v0
+v2 <- LoadString 'apply was called on Error, which is a object and not a function'
+v3 <- CreateNamedVariable 'err_str_2', 'var', v2
+v4 <- LoadBoolean 'false'
+v5 <- CreateNamedVariable 'reached', 'var', v4
+v6 <- CreateNamedVariable 'Error', 'none'
+v7 <- Construct v6, []
+v8 <- CreateNamedVariable 'error', 'var', v7
+SetProperty v8, 'name', v8
+BeginTry
+    v9 <- CreateNamedVariable 'Reflect', 'none'
+    v10 <- CallMethod v9, 'apply', [v8]
+    v11 <- LoadBoolean 'true'
+    Reassign v5, v11
+BeginCatch -> v12
+    v13 <- GetProperty v12, 'stack'
+    v14 <- CallMethod v13, 'indexOf', [v1]
+    v15 <- LoadInteger '1'
+    v16 <- UnaryOperation '-', v15
+    v17 <- Compare v14, '!=', v16
+BeginFinally
+EndTryCatch
+v18 <- LoadBoolean 'false'
+Reassign v5, v18
+v19 <- Construct v6, []
+Reassign v8, v19
+SetProperty v8, 'msg', v8
+BeginTry
+    v20 <- CreateNamedVariable 'Reflect', 'none'
+    v21 <- CallMethod v20, 'apply', [v8]
+    v22 <- LoadBoolean 'true'
+    Reassign v5, v22
+BeginCatch -> v23
+    v24 <- GetProperty v23, 'stack'
+    v25 <- CallMethod v24, 'indexOf', [v3]
+    v26 <- LoadInteger '1'
+    v27 <- UnaryOperation '-', v26
+    v28 <- Compare v25, '!=', v27
+BeginFinally
+EndTryCatch
+v29 <- LoadBoolean 'false'
+Reassign v5, v29
+v30 <- Construct v6, []
+Reassign v8, v30
+SetProperty v8, 'name', v8
+SetProperty v8, 'msg', v8
+BeginTry
+    v31 <- CreateNamedVariable 'Reflect', 'none'
+    v32 <- CallMethod v31, 'apply', [v8]
+    v33 <- LoadBoolean 'true'
+    Reassign v5, v33
+BeginCatch -> v34
+    v35 <- GetProperty v34, 'stack'
+    v36 <- CallMethod v35, 'indexOf', [v1]
+    v37 <- LoadInteger '1'
+    v38 <- UnaryOperation '-', v37
+    v39 <- Compare v36, '!=', v38
+BeginFinally
+EndTryCatch
+
+
+var err_str_1 = "apply was called on , which is a object and not a function";
+var err_str_2 = "apply was called on Error, which is a object and not a function";
+var reached = false;
+const v7 = new Error();
+var error = v7;
+error.name = error;
+try {
+    Reflect.apply(error);
+    reached = true;
+} catch(e12) {
+    e12.stack.indexOf(err_str_1) != -1;
+} finally {
+}
+reached = false;
+const v19 = new Error();
+error = v19;
+error.msg = error;
+try {
+    Reflect.apply(error);
+    reached = true;
+} catch(e23) {
+    e23.stack.indexOf(err_str_2) != -1;
+} finally {
+}
+reached = false;
+const v30 = new Error();
+error = v30;
+error.name = error;
+error.msg = error;
+try {
+    Reflect.apply(error);
+    reached = true;
+} catch(e34) {
+    e34.stack.indexOf(err_str_1) != -1;
+} finally {
+}
+
+FuzzIL program written to corpus/regress-633998.fzil

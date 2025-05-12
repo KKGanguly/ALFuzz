@@ -1,0 +1,39 @@
+v0 <- LoadInteger '42'
+v1 <- CreateNamedVariable 'G', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'v', 'var', v1
+    v4 <- LoadInteger '0'
+    v5 <- BinaryOperation v3, '>>', v4
+    v6 <- CreateNamedVariable 'w', 'var', v5
+    Return v6
+EndPlainFunction
+BeginForLoopInitializer
+    v7 <- LoadInteger '0'
+BeginForLoopCondition -> v8
+    v9 <- LoadInteger '10000'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10 -> v11
+    v12 <- UnaryOperation v11, '++'
+BeginForLoopBody -> v13
+    v14 <- CallFunction v2, []
+EndForLoop
+v15 <- CallFunction v2, []
+v16 <- LoadInteger '2000000000'
+Reassign v1, v16
+v17 <- CallFunction v2, []
+
+
+var G = 42;
+function f() {
+    var v = G;
+    var w = v >> 0;
+    return w;
+}
+for (let i8 = 0; i8 < 10000; i8++) {
+    f();
+}
+f();
+G = 2000000000;
+f();
+
+FuzzIL program written to corpus/regress-7.fzil

@@ -1,0 +1,704 @@
+v0 <- BeginPlainFunction -> v1, v2, v3, v4, v5, v6
+    v7 <- CreateNamedVariable 'Object', 'none'
+    v8 <- CallMethod v7, 'getOwnPropertyDescriptor', [v1, v2]
+    v9 <- CreateNamedVariable 'desc', 'var', v8
+    v10 <- LoadUndefined
+    v11 <- Compare v9, '===', v10
+    v12 <- LoadString 'value'
+    v13 <- TestIn v12, v9
+    v14 <- GetProperty v9, 'value'
+    v15 <- GetProperty v9, 'writable'
+    v16 <- GetProperty v9, 'enumerable'
+    v17 <- GetProperty v9, 'configurable'
+EndPlainFunction
+v18 <- CreateNamedVariable 'Object', 'none'
+v19 <- GetProperty v18, 'assign'
+v20 <- GetProperty v19, 'length'
+v21 <- LoadInteger '2'
+v22 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v23 <- EndObjectLiteral
+    v24 <- CreateNamedVariable 'a', 'var', v23
+    v25 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `bProp`, v25
+    v26 <- EndObjectLiteral
+    v27 <- CreateNamedVariable 'b', 'var', v26
+    v28 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `cProp`, v28
+    v29 <- EndObjectLiteral
+    v30 <- CreateNamedVariable 'c', 'var', v29
+    v31 <- CallMethod v18, 'assign', [v24, v27, v30]
+    v32 <- LoadInteger '1'
+    v33 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `bProp`, v32
+        ObjectLiteralAddProperty `cProp`, v33
+    v34 <- EndObjectLiteral
+EndPlainFunction
+v35 <- CallFunction v22, []
+v36 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v37 <- EndObjectLiteral
+    v38 <- CreateNamedVariable 'a', 'var', v37
+    v39 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `bProp`, v39
+    v40 <- EndObjectLiteral
+    v41 <- CreateNamedVariable 'b', 'var', v40
+    v42 <- LoadString 'aSymbol'
+    v43 <- CreateNamedVariable 'Symbol', 'none'
+    v44 <- CallFunction v43, [v42]
+    v45 <- CreateNamedVariable 'aSymbol', 'var', v44
+    v46 <- LoadInteger '2'
+    SetComputedProperty v41, v45, v46
+    v47 <- CallMethod v18, 'assign', [v38, v41]
+    v48 <- LoadInteger '1'
+    v49 <- GetProperty v38, 'bProp'
+    v50 <- LoadInteger '2'
+    v51 <- GetComputedProperty v38, v45
+EndPlainFunction
+v52 <- CallFunction v36, []
+v53 <- BeginPlainFunction -> 
+    v54 <- LoadNull
+    v55 <- LoadNull
+    v56 <- CallMethod v18, 'assign', [v54, v55]
+    Return v56
+EndPlainFunction
+v57 <- CallFunction v53, []
+v58 <- CreateNamedVariable 'TypeError', 'none'
+v59 <- BeginPlainFunction -> 
+    v60 <- LoadNull
+    BeginObjectLiteral
+    v61 <- EndObjectLiteral
+    v62 <- CallMethod v18, 'assign', [v60, v61]
+    Return v62
+EndPlainFunction
+v63 <- CallFunction v59, []
+v64 <- BeginPlainFunction -> 
+    v65 <- LoadUndefined
+    v66 <- CallMethod v18, 'assign', [v65]
+    Return v66
+EndPlainFunction
+v67 <- CallFunction v64, []
+v68 <- BeginPlainFunction -> 
+    v69 <- CallMethod v18, 'assign', []
+    Return v69
+EndPlainFunction
+v70 <- CallFunction v68, []
+v71 <- LoadBoolean 'true'
+BeginObjectLiteral
+v72 <- EndObjectLiteral
+v73 <- CallMethod v18, 'assign', [v71, v72]
+v74 <- CreateNamedVariable 'Boolean', 'none'
+v75 <- TestInstanceOf v73, v74
+v76 <- LoadInteger '1'
+BeginObjectLiteral
+v77 <- EndObjectLiteral
+v78 <- CallMethod v18, 'assign', [v76, v77]
+v79 <- CreateNamedVariable 'Number', 'none'
+v80 <- TestInstanceOf v78, v79
+v81 <- LoadString 'string'
+BeginObjectLiteral
+v82 <- EndObjectLiteral
+v83 <- CallMethod v18, 'assign', [v81, v82]
+v84 <- CreateNamedVariable 'String', 'none'
+v85 <- TestInstanceOf v83, v84
+BeginObjectLiteral
+v86 <- EndObjectLiteral
+v87 <- CreateNamedVariable 'o', 'var', v86
+BeginObjectLiteral
+v88 <- EndObjectLiteral
+v89 <- CallMethod v18, 'assign', [v87, v88]
+v90 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v91 <- EndObjectLiteral
+    v92 <- LoadInteger '1'
+    v93 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v92
+        ObjectLiteralAddProperty `enumerable`, v93
+    v94 <- EndObjectLiteral
+    v95 <- LoadInteger '2'
+    v96 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v95
+        ObjectLiteralAddProperty `enumerable`, v96
+    v97 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v94
+        ObjectLiteralAddProperty `b`, v97
+    v98 <- EndObjectLiteral
+    v99 <- CallMethod v18, 'defineProperties', [v91, v98]
+    v100 <- CreateNamedVariable 'source', 'var', v99
+    BeginObjectLiteral
+    v101 <- EndObjectLiteral
+    v102 <- CallMethod v18, 'assign', [v101, v100]
+    v103 <- CreateNamedVariable 'target', 'var', v102
+    v104 <- LoadString 'a'
+    v105 <- TestIn v104, v103
+    v106 <- LoadString 'b'
+    v107 <- TestIn v106, v103
+EndPlainFunction
+v108 <- CallFunction v90, []
+v109 <- BeginPlainFunction -> 
+    v110 <- LoadBoolean 'false'
+    v111 <- CreateNamedVariable 'setterCalled', 'var', v110
+    BeginObjectLiteral
+        BeginObjectLiteralSetter `a` -> v112, v113
+            Reassign v111, v113
+        EndObjectLiteralSetter
+    v114 <- EndObjectLiteral
+    v115 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v115
+    v116 <- EndObjectLiteral
+    v117 <- CallMethod v18, 'assign', [v114, v116]
+EndPlainFunction
+v118 <- CallFunction v109, []
+v119 <- BeginPlainFunction -> 
+    v120 <- LoadInteger '1'
+    v121 <- LoadInteger '2'
+    v122 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v120
+        ObjectLiteralAddProperty `b`, v121
+        ObjectLiteralAddProperty `c`, v122
+    v123 <- EndObjectLiteral
+    v124 <- CreateNamedVariable 'source', 'var', v123
+    v125 <- LoadInteger '0'
+    v126 <- LoadInteger '0'
+    v127 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v125
+        ObjectLiteralAddProperty `b`, v126
+        ObjectLiteralAddProperty `c`, v127
+    v128 <- EndObjectLiteral
+    v129 <- CreateNamedVariable 'target', 'var', v128
+    v130 <- LoadString 'a'
+    v131 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v131
+    v132 <- EndObjectLiteral
+    v133 <- CallMethod v18, 'defineProperty', [v129, v130, v132]
+    v134 <- LoadString 'b'
+    v135 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `configurable`, v135
+    v136 <- EndObjectLiteral
+    v137 <- CallMethod v18, 'defineProperty', [v129, v134, v136]
+    v138 <- LoadString 'c'
+    v139 <- LoadBoolean 'false'
+    v140 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v139
+        ObjectLiteralAddProperty `configurable`, v140
+    v141 <- EndObjectLiteral
+    v142 <- CallMethod v18, 'defineProperty', [v129, v138, v141]
+    v143 <- CallMethod v18, 'assign', [v129, v124]
+    v144 <- LoadString 'a'
+    v145 <- LoadInteger '1'
+    v146 <- LoadBoolean 'true'
+    v147 <- LoadBoolean 'false'
+    v148 <- LoadBoolean 'true'
+    v149 <- CallFunction v0, [v129, v144, v145, v146, v147, v148]
+    v150 <- LoadString 'b'
+    v151 <- LoadInteger '2'
+    v152 <- LoadBoolean 'true'
+    v153 <- LoadBoolean 'true'
+    v154 <- LoadBoolean 'false'
+    v155 <- CallFunction v0, [v129, v150, v151, v152, v153, v154]
+    v156 <- LoadString 'c'
+    v157 <- LoadInteger '3'
+    v158 <- LoadBoolean 'true'
+    v159 <- LoadBoolean 'false'
+    v160 <- LoadBoolean 'false'
+    v161 <- CallFunction v0, [v129, v156, v157, v158, v159, v160]
+EndPlainFunction
+v162 <- CallFunction v119, []
+v163 <- BeginPlainFunction -> 
+    v164 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v164
+    v165 <- EndObjectLiteral
+    v166 <- CreateNamedVariable 'source', 'var', v165
+    v167 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v167
+    v168 <- EndObjectLiteral
+    v169 <- CreateNamedVariable 'target', 'var', v168
+    v170 <- LoadString 'a'
+    v171 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `writable`, v171
+    v172 <- EndObjectLiteral
+    v173 <- CallMethod v18, 'defineProperty', [v169, v170, v172]
+    v174 <- BeginPlainFunction -> 
+        v175 <- CallMethod v18, 'assign', [v169, v166]
+        Return v175
+    EndPlainFunction
+    v176 <- CallFunction v174, []
+    v177 <- LoadString 'a'
+    v178 <- LoadInteger '0'
+    v179 <- LoadBoolean 'false'
+    v180 <- LoadBoolean 'true'
+    v181 <- LoadBoolean 'true'
+    v182 <- CallFunction v0, [v169, v177, v178, v179, v180, v181]
+EndPlainFunction
+v183 <- CallFunction v163, []
+v184 <- BeginPlainFunction -> 
+    v185 <- LoadInteger '1'
+    v186 <- LoadInteger '2'
+    v187 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v185
+        ObjectLiteralAddProperty `b`, v186
+        ObjectLiteralAddProperty `c`, v187
+        BeginObjectLiteralGetter `d` -> v188
+            v189 <- LoadInteger '4'
+            Return v189
+        EndObjectLiteralGetter
+    v190 <- EndObjectLiteral
+    v191 <- CreateNamedVariable 'source', 'var', v190
+    v192 <- LoadString 'b'
+    v193 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `writable`, v193
+    v194 <- EndObjectLiteral
+    v195 <- CallMethod v18, 'defineProperty', [v191, v192, v194]
+    v196 <- LoadString 'c'
+    v197 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `configurable`, v197
+    v198 <- EndObjectLiteral
+    v199 <- CallMethod v18, 'defineProperty', [v191, v196, v198]
+    BeginObjectLiteral
+    v200 <- EndObjectLiteral
+    v201 <- CallMethod v18, 'assign', [v200, v191]
+    v202 <- CreateNamedVariable 'target', 'var', v201
+    v203 <- LoadString 'a'
+    v204 <- LoadInteger '1'
+    v205 <- LoadBoolean 'true'
+    v206 <- LoadBoolean 'true'
+    v207 <- LoadBoolean 'true'
+    v208 <- CallFunction v0, [v202, v203, v204, v205, v206, v207]
+    v209 <- LoadString 'b'
+    v210 <- LoadInteger '2'
+    v211 <- LoadBoolean 'true'
+    v212 <- LoadBoolean 'true'
+    v213 <- LoadBoolean 'true'
+    v214 <- CallFunction v0, [v202, v209, v210, v211, v212, v213]
+    v215 <- LoadString 'c'
+    v216 <- LoadInteger '3'
+    v217 <- LoadBoolean 'true'
+    v218 <- LoadBoolean 'true'
+    v219 <- LoadBoolean 'true'
+    v220 <- CallFunction v0, [v202, v215, v216, v217, v218, v219]
+    v221 <- LoadString 'd'
+    v222 <- LoadInteger '4'
+    v223 <- LoadBoolean 'true'
+    v224 <- LoadBoolean 'true'
+    v225 <- LoadBoolean 'true'
+    v226 <- CallFunction v0, [v202, v221, v222, v223, v224, v225]
+EndPlainFunction
+v227 <- CallFunction v184, []
+v228 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `a` -> v229
+            v230 <- LoadInteger '2'
+            SetProperty v229, 'b', v230
+        EndObjectLiteralGetter
+    v231 <- EndObjectLiteral
+    v232 <- CreateNamedVariable 'source', 'var', v231
+    BeginObjectLiteral
+    v233 <- EndObjectLiteral
+    v234 <- CallMethod v18, 'assign', [v233, v232]
+    v235 <- CreateNamedVariable 'target', 'var', v234
+    v236 <- LoadString 'a'
+    v237 <- TestIn v236, v235
+    v238 <- LoadString 'b'
+    v239 <- TestIn v238, v235
+EndPlainFunction
+v240 <- CallFunction v228, []
+v241 <- BeginPlainFunction -> 
+    v242 <- LoadString 'str-prop'
+    v243 <- CreateNamedVariable 'keyA', 'var', v242
+    v244 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `str-prop`, v244
+    v245 <- EndObjectLiteral
+    v246 <- CreateNamedVariable 'source', 'var', v245
+    BeginObjectLiteral
+    v247 <- EndObjectLiteral
+    v248 <- CallMethod v18, 'assign', [v247, v246]
+    v249 <- CreateNamedVariable 'target', 'var', v248
+    v250 <- LoadInteger '1'
+    v251 <- LoadBoolean 'true'
+    v252 <- LoadBoolean 'true'
+    v253 <- LoadBoolean 'true'
+    v254 <- CallFunction v0, [v249, v243, v250, v251, v252, v253]
+EndPlainFunction
+v255 <- CallFunction v241, []
+v256 <- BeginPlainFunction -> 
+    v257 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v258 <- CreateNamedVariable 'ErrorA', 'var', v257
+    v259 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v260 <- CreateNamedVariable 'ErrorB', 'var', v259
+    v261 <- LoadString ''
+    v262 <- CreateNamedVariable 'log', 'var', v261
+    v263 <- LoadInteger '1'
+    v264 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `b`, v263
+        ObjectLiteralAddProperty `a`, v264
+    v265 <- EndObjectLiteral
+    v266 <- CreateNamedVariable 'source', 'var', v265
+    BeginObjectLiteral
+        BeginObjectLiteralSetter `a` -> v267, v268
+            v269 <- LoadString 'a'
+            Update v262, '+', v269
+            v270 <- Construct v258, []
+            ThrowException v270
+        EndObjectLiteralSetter
+        BeginObjectLiteralSetter `b` -> v271, v272
+            v273 <- LoadString 'b'
+            Update v262, '+', v273
+            v274 <- Construct v260, []
+            ThrowException v274
+        EndObjectLiteralSetter
+    v275 <- EndObjectLiteral
+    v276 <- CreateNamedVariable 'target', 'var', v275
+    v277 <- BeginPlainFunction -> 
+        v278 <- CallMethod v18, 'assign', [v276, v266]
+        Return v278
+    EndPlainFunction
+    v279 <- CallFunction v277, []
+    v280 <- CallFunction v260, []
+    v281 <- LoadString 'b'
+EndPlainFunction
+v282 <- CallFunction v256, []
+v283 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralSetter `k1` -> v284, v285
+            v286 <- LoadInteger '100'
+            v287 <- CreateNamedVariable 'source', 'none'
+            SetProperty v287, 'k3', v286
+        EndObjectLiteralSetter
+    v288 <- EndObjectLiteral
+    v289 <- CreateNamedVariable 'target', 'var', v288
+    v290 <- LoadInteger '10'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `k1`, v290
+    v291 <- EndObjectLiteral
+    v292 <- CreateNamedVariable 'source', 'var', v291
+    v293 <- LoadString 'k2'
+    v294 <- LoadInteger '20'
+    v295 <- LoadBoolean 'false'
+    v296 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v294
+        ObjectLiteralAddProperty `enumerable`, v295
+        ObjectLiteralAddProperty `configurable`, v296
+    v297 <- EndObjectLiteral
+    v298 <- CallMethod v18, 'defineProperty', [v292, v293, v297]
+    v299 <- CallMethod v18, 'assign', [v289, v292]
+    v300 <- LoadUndefined
+    v301 <- GetProperty v289, 'k2'
+    v302 <- LoadUndefined
+    v303 <- GetProperty v289, 'k3'
+EndPlainFunction
+v304 <- CallFunction v283, []
+v305 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralSetter `k1` -> v306, v307
+            v308 <- CreateNamedVariable 'source', 'none'
+            v309 <- LoadString 'k2'
+            v310 <- LoadInteger '20'
+            v311 <- LoadBoolean 'true'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `value`, v310
+                ObjectLiteralAddProperty `enumerable`, v311
+            v312 <- EndObjectLiteral
+            v313 <- CallMethod v18, 'defineProperty', [v308, v309, v312]
+        EndObjectLiteralSetter
+    v314 <- EndObjectLiteral
+    v315 <- CreateNamedVariable 'target', 'var', v314
+    v316 <- LoadInteger '10'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `k1`, v316
+    v317 <- EndObjectLiteral
+    v318 <- CreateNamedVariable 'source', 'var', v317
+    v319 <- LoadString 'k2'
+    v320 <- LoadInteger '20'
+    v321 <- LoadBoolean 'false'
+    v322 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v320
+        ObjectLiteralAddProperty `enumerable`, v321
+        ObjectLiteralAddProperty `configurable`, v322
+    v323 <- EndObjectLiteral
+    v324 <- CallMethod v18, 'defineProperty', [v318, v319, v323]
+    v325 <- CallMethod v18, 'assign', [v315, v318]
+    v326 <- LoadInteger '20'
+    v327 <- GetProperty v315, 'k2'
+EndPlainFunction
+v328 <- CallFunction v305, []
+v329 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralSetter `k1` -> v330, v331
+            v332 <- LoadString 'fail'
+            ThrowException v332
+        EndObjectLiteralSetter
+    v333 <- EndObjectLiteral
+    v334 <- CreateNamedVariable 'target', 'var', v333
+    v335 <- LoadInteger '10'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `k1`, v335
+    v336 <- EndObjectLiteral
+    v337 <- CreateNamedVariable 'source', 'var', v336
+    v338 <- BeginArrowFunction -> 
+        v339 <- CallMethod v18, 'assign', [v334, v337]
+        Return v339
+    EndArrowFunction
+    v340 <- CallFunction v338, []
+EndPlainFunction
+v341 <- CallFunction v329, []
+v342 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v343 <- EndObjectLiteral
+    v344 <- CreateNamedVariable 'target', 'var', v343
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `k1` -> v345
+            v346 <- LoadString 'fail'
+            ThrowException v346
+        EndObjectLiteralGetter
+    v347 <- EndObjectLiteral
+    v348 <- CreateNamedVariable 'source', 'var', v347
+    v349 <- BeginArrowFunction -> 
+        v350 <- CallMethod v18, 'assign', [v344, v348]
+        Return v350
+    EndArrowFunction
+    v351 <- CallFunction v349, []
+EndPlainFunction
+v352 <- CallFunction v342, []
+
+
+function checkDataProperty(a1, a2, a3, a4, a5, a6) {
+    var desc = Object.getOwnPropertyDescriptor(a1, a2);
+    desc === undefined;
+    "value" in desc;
+    desc.value;
+    desc.writable;
+    desc.enumerable;
+    desc.configurable;
+}
+Object.assign.length;
+function basicMultipleSources() {
+    var a = {};
+    var b = { bProp: 1 };
+    var c = { cProp: 2 };
+    Object.assign(a, b, c);
+    const v34 = { bProp: 1, cProp: 2 };
+}
+basicMultipleSources();
+function basicSymbols() {
+    var a = {};
+    var b = { bProp: 1 };
+    var aSymbol = Symbol("aSymbol");
+    b[aSymbol] = 2;
+    Object.assign(a, b);
+    a.bProp;
+    a[aSymbol];
+}
+basicSymbols();
+function f53() {
+    return Object.assign(null, null);
+}
+f53();
+function f59() {
+    return Object.assign(null, {});
+}
+f59();
+function f64() {
+    return Object.assign(undefined);
+}
+f64();
+function f68() {
+    return Object.assign();
+}
+f68();
+Object.assign(true, {}) instanceof Boolean;
+Object.assign(1, {}) instanceof Number;
+Object.assign("string", {}) instanceof String;
+var o = {};
+Object.assign(o, {});
+function onlyEnumerablePropertiesAssigned() {
+    const v91 = {};
+    const v94 = { value: 1, enumerable: true };
+    const v97 = { value: 2, enumerable: false };
+    var source = Object.defineProperties(v91, { a: v94, b: v97 });
+    var target = Object.assign({}, source);
+    "a" in target;
+    "b" in target;
+}
+onlyEnumerablePropertiesAssigned();
+function testPropertiesAssignedThroughPut() {
+    var setterCalled = false;
+    const v114 = {
+        set a(a113) {
+            setterCalled = a113;
+        },
+    };
+    Object.assign(v114, { a: true });
+}
+testPropertiesAssignedThroughPut();
+function propertiesAssignedExistingNotAltered() {
+    var source = { a: 1, b: 2, c: 3 };
+    var target = { a: 0, b: 0, c: 0 };
+    Object.defineProperty(target, "a", { enumerable: false });
+    Object.defineProperty(target, "b", { configurable: false });
+    Object.defineProperty(target, "c", { enumerable: false, configurable: false });
+    Object.assign(target, source);
+    checkDataProperty(target, "a", 1, true, false, true);
+    checkDataProperty(target, "b", 2, true, true, false);
+    checkDataProperty(target, "c", 3, true, false, false);
+}
+propertiesAssignedExistingNotAltered();
+function propertiesAssignedTypeErrorNonWritable() {
+    var source = { a: 1 };
+    var target = { a: 0 };
+    Object.defineProperty(target, "a", { writable: false });
+    function f174() {
+        return Object.assign(target, source);
+    }
+    f174();
+    checkDataProperty(target, "a", 0, false, true, true);
+}
+propertiesAssignedTypeErrorNonWritable();
+function createsStandardProperties() {
+    const v190 = {
+        a: 1,
+        b: 2,
+        c: 3,
+        get d() {
+            return 4;
+        },
+    };
+    var source = v190;
+    Object.defineProperty(source, "b", { writable: false });
+    Object.defineProperty(source, "c", { configurable: false });
+    var target = Object.assign({}, source);
+    checkDataProperty(target, "a", 1, true, true, true);
+    checkDataProperty(target, "b", 2, true, true, true);
+    checkDataProperty(target, "c", 3, true, true, true);
+    checkDataProperty(target, "d", 4, true, true, true);
+}
+createsStandardProperties();
+function propertiesCreatedDuringTraversalNotCopied() {
+    const v231 = {
+        get a() {
+            this.b = 2;
+        },
+    };
+    var source = v231;
+    var target = Object.assign({}, source);
+    "a" in target;
+    "b" in target;
+}
+propertiesCreatedDuringTraversalNotCopied();
+function testStringAndSymbolPropertiesCopied() {
+    var keyA = "str-prop";
+    var source = { str-prop: 1 };
+    var target = Object.assign({}, source);
+    checkDataProperty(target, keyA, 1, true, true, true);
+}
+testStringAndSymbolPropertiesCopied();
+function testExceptionsStopFirstException() {
+    function ErrorA() {
+    }
+    var ErrorA = ErrorA;
+    function ErrorB() {
+    }
+    var ErrorB = ErrorB;
+    var log = "";
+    var source = { b: 1, a: 1 };
+    const v275 = {
+        set a(a268) {
+            log += "a";
+            const v270 = new ErrorA();
+            throw v270;
+        },
+        set b(a272) {
+            log += "b";
+            const v274 = new ErrorB();
+            throw v274;
+        },
+    };
+    var target = v275;
+    function f277() {
+        return Object.assign(target, source);
+    }
+    f277();
+    ErrorB();
+}
+testExceptionsStopFirstException();
+function add_to_source() {
+    const v288 = {
+        set k1(a285) {
+            source.k3 = 100;
+        },
+    };
+    var target = v288;
+    var source = { k1: 10 };
+    Object.defineProperty(source, "k2", { value: 20, enumerable: false, configurable: true });
+    Object.assign(target, source);
+    target.k2;
+    target.k3;
+}
+add_to_source();
+function reconfigure_enumerable_source() {
+    const v314 = {
+        set k1(a307) {
+            Object.defineProperty(source, "k2", { value: 20, enumerable: true });
+        },
+    };
+    var target = v314;
+    var source = { k1: 10 };
+    Object.defineProperty(source, "k2", { value: 20, enumerable: false, configurable: true });
+    Object.assign(target, source);
+    target.k2;
+}
+reconfigure_enumerable_source();
+function propagate_assign_failure() {
+    const v333 = {
+        set k1(a331) {
+            throw "fail";
+        },
+    };
+    var target = v333;
+    var source = { k1: 10 };
+    const v338 = () => {
+        return Object.assign(target, source);
+    };
+    v338();
+}
+propagate_assign_failure();
+function propagate_read_failure() {
+    var target = {};
+    const v347 = {
+        get k1() {
+            throw "fail";
+        },
+    };
+    var source = v347;
+    const v349 = () => {
+        return Object.assign(target, source);
+    };
+    v349();
+}
+propagate_read_failure();
+
+FuzzIL program written to corpus/object-assign.fzil

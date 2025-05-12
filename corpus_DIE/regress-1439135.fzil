@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    v2 <- CreateNamedVariable 'left', 'var', v1
+    v3 <- LoadString 'YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY'
+    v4 <- CreateNamedVariable 'right', 'var', v3
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- LoadInteger '100000'
+        v8 <- Compare v6, '<', v7
+    BeginForLoopAfterthought v8 -> v9
+        v10 <- UnaryOperation v9, '++'
+    BeginForLoopBody -> v11
+        v12 <- BinaryOperation v2, '+', v4
+        v13 <- CreateNamedVariable 'cons', 'var', v12
+        v14 <- LoadInteger '20'
+        v15 <- LoadInteger '80'
+        v16 <- CallMethod v13, 'substring', [v14, v15]
+        v17 <- CreateNamedVariable 'substring', 'var', v16
+        v18 <- LoadString 'Y'
+        v19 <- CallMethod v17, 'indexOf', [v18]
+        v20 <- CreateNamedVariable 'index', 'var', v19
+        v21 <- LoadInteger '34'
+    EndForLoop
+EndPlainFunction
+v22 <- CallFunction v0, []
+
+
+function Test() {
+    var left = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+    var right = "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY";
+    for (let i6 = 0; i6 < 100000; i6++) {
+        var cons = left + right;
+        var substring = cons.substring(20, 80);
+        var index = substring.indexOf("Y");
+    }
+}
+Test();
+
+FuzzIL program written to corpus/regress-1439135.fzil

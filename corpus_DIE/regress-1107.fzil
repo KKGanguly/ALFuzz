@@ -1,0 +1,14 @@
+v0 <- LoadInteger '0'
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- GetProperty v2, 'prototype'
+v4 <- CallMethod v3, '__defineGetter__', [v0, v1]
+v5 <- LoadString 'x'
+
+
+function f1() {
+}
+Object.prototype.__defineGetter__(0, f1);
+
+FuzzIL program written to corpus/regress-1107.fzil

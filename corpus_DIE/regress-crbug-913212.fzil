@@ -1,0 +1,28 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'globalThis', 'const', v0
+v2 <- LoadThis
+v3 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v5, v6, v7, v8
+        v9 <- Compare v8, '===', v1
+    EndObjectLiteralMethod
+v10 <- EndObjectLiteral
+v11 <- Construct v3, [v4, v10]
+v12 <- CreateNamedVariable 'Object', 'none'
+v13 <- CallMethod v12, 'setPrototypeOf', [v2, v11]
+v14 <- CreateNamedVariable 'undefined_name_access', 'none'
+
+
+const globalThis = this;
+const v4 = {};
+const v10 = {
+    get(a6, a7, a8) {
+        a8 === globalThis;
+    },
+};
+const v11 = new Proxy(v4, v10);
+Object.setPrototypeOf(this, v11);
+
+FuzzIL program written to corpus/regress-crbug-913212.fzil

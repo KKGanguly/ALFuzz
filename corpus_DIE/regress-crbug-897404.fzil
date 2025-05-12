@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- LoadInteger '2'
+v3 <- LoadInteger '32'
+v4 <- BinaryOperation v2, '**', v3
+v5 <- LoadInteger '1'
+v6 <- BinaryOperation v4, '-', v5
+v7 <- Construct v1, [v6]
+v8 <- CreateNamedVariable 'a', 'const', v7
+BeginObjectLiteral
+    BeginObjectLiteralMethod `toString` -> v9
+        v10 <- Construct v0, []
+        ThrowException v10
+    EndObjectLiteralMethod
+v11 <- EndObjectLiteral
+SetElement v8, '0', v11
+v12 <- BeginArrowFunction -> 
+    v13 <- CallMethod v8, 'join', []
+    Return v13
+EndArrowFunction
+v14 <- CallFunction v12, []
+v15 <- CallFunction v0, []
+
+
+function TestError() {
+}
+const v7 = new Array((2 ** 32) - 1);
+const a = v7;
+const v11 = {
+    toString() {
+        const v10 = new TestError();
+        throw v10;
+    },
+};
+a[0] = v11;
+const v12 = () => {
+    return a.join();
+};
+v12();
+TestError();
+
+FuzzIL program written to corpus/regress-crbug-897404.fzil

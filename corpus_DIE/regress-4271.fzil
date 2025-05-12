@@ -1,0 +1,61 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Worker'
+BeginIf v1
+    v2 <- BeginPlainFunction -> 
+        v3 <- CreateNamedVariable 'Worker', 'none'
+        v4 <- GetProperty v3, 'prototype'
+        v5 <- CallMethod v4, 'terminate', []
+    EndPlainFunction
+    v6 <- CallFunction v2, []
+    v7 <- BeginPlainFunction -> 
+        v8 <- CreateNamedVariable 'Worker', 'none'
+        v9 <- GetProperty v8, 'prototype'
+        v10 <- CallMethod v9, 'getMessage', []
+    EndPlainFunction
+    v11 <- CallFunction v7, []
+    v12 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v13 <- EndObjectLiteral
+        v14 <- CreateNamedVariable 'Worker', 'none'
+        v15 <- GetProperty v14, 'prototype'
+        v16 <- CallMethod v15, 'postMessage', [v13]
+    EndPlainFunction
+    v17 <- CallFunction v12, []
+    v18 <- CreateNamedVariable 'Worker', 'none'
+    v19 <- LoadString ''
+    v20 <- LoadString 'string'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `type`, v20
+    v21 <- EndObjectLiteral
+    v22 <- Construct v18, [v19, v21]
+    v23 <- CreateNamedVariable 'worker', 'var', v22
+    v24 <- CallMethod v23, 'getMessage', []
+    BeginObjectLiteral
+    v25 <- EndObjectLiteral
+    v26 <- CallMethod v23, 'postMessage', [v25]
+    v27 <- CallMethod v23, 'terminate', []
+EndIf
+
+
+if (this.Worker) {
+    function f2() {
+        Worker.prototype.terminate();
+    }
+    f2();
+    function f7() {
+        Worker.prototype.getMessage();
+    }
+    f7();
+    function f12() {
+        const v13 = {};
+        Worker.prototype.postMessage(v13);
+    }
+    f12();
+    const v22 = new Worker("", { type: "string" });
+    var worker = v22;
+    worker.getMessage();
+    worker.postMessage({});
+    worker.terminate();
+}
+
+FuzzIL program written to corpus/regress-4271.fzil

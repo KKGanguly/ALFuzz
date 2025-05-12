@@ -1,0 +1,33 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'sum', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '10000'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- LoadInteger '2'
+    v10 <- BinaryOperation v8, '+', v9
+    v11 <- CreateNamedVariable 'x', 'var', v10
+    v12 <- LoadInteger '5'
+    v13 <- BinaryOperation v11, '+', v12
+    v14 <- CreateNamedVariable 'y', 'var', v13
+    v15 <- LoadInteger '3'
+    v16 <- BinaryOperation v14, '+', v15
+    v17 <- CreateNamedVariable 'z', 'var', v16
+    Update v1, '+', v17
+EndForLoop
+v18 <- LoadInteger '50095000'
+
+
+var sum = 0;
+for (let i3 = 0; i3 < 10000; i3++) {
+    var x = i3 + 2;
+    var y = x + 5;
+    var z = y + 3;
+    sum += z;
+}
+
+FuzzIL program written to corpus/osr-top1.fzil

@@ -1,0 +1,20 @@
+BeginTry
+    v0 <- BeginPlainFunction -> v1, v2
+        v3 <- CallMethod v2, 'some', []
+    EndPlainFunction
+    v4 <- CreateNamedVariable 'Error', 'none'
+    SetProperty v4, 'prepareStackTrace', v0
+    v5 <- CreateNamedVariable 'x', 'none'
+BeginCatch -> v6
+EndTryCatch
+
+
+try {
+    function f0(a1, a2) {
+        a2.some();
+    }
+    Error.prepareStackTrace = f0;
+} catch(e6) {
+}
+
+FuzzIL program written to corpus/regress-1529.fzil

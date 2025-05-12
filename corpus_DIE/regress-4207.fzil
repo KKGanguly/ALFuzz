@@ -1,0 +1,37 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadInteger '0'
+    v3 <- BinaryOperation v1, '/', v2
+    v4 <- LoadInteger '1'
+    v5 <- BinaryOperation v3, '&&', v4
+    Return v5
+EndPlainFunction
+v6 <- CreateNamedVariable 'NaN', 'none'
+v7 <- CallFunction v0, []
+v8 <- CallFunction v0, []
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadInteger '0'
+    v11 <- LoadInteger '0'
+    v12 <- BinaryOperation v10, '/', v11
+    v13 <- LoadInteger '1'
+    v14 <- BinaryOperation v12, '||', v13
+    Return v14
+EndPlainFunction
+v15 <- LoadInteger '1'
+v16 <- CallFunction v9, []
+v17 <- LoadInteger '1'
+v18 <- CallFunction v9, []
+
+
+function bar() {
+    return (0 / 0) && 1;
+}
+bar();
+bar();
+function foo() {
+    return (0 / 0) || 1;
+}
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-4207.fzil

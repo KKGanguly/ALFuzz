@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadThis
+    UpdateElement v2, '0', '>>', v1
+    v3 <- LoadInteger '1'
+    v4 <- LoadThis
+    UpdateElement v4, '1', '^', v3
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- Construct v0, []
+    v7 <- CreateNamedVariable 'regular', 'var', v6
+EndPlainFunction
+v8 <- CallFunction v5, []
+
+
+function Regular() {
+    this[0] >>= 0;
+    this[1] ^= 1;
+}
+function foo() {
+    const v6 = new Regular();
+    var regular = v6;
+}
+foo();
+
+FuzzIL program written to corpus/regress-1174.fzil

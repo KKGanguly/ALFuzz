@@ -1,0 +1,278 @@
+v0 <- LoadInteger '97'
+v1 <- LoadInteger '220'
+v2 <- LoadInteger '256'
+v3 <- CreateNamedVariable 'String', 'none'
+v4 <- CallMethod v3, 'fromCharCode', [v0, v1, v2]
+v5 <- LoadString 'a'
+v6 <- LoadString 'Ü'
+v7 <- BinaryOperation v5, '+', v6
+v8 <- LoadString 'Ā'
+v9 <- BinaryOperation v7, '+', v8
+v10 <- LoadInteger '97'
+v11 <- LoadInteger '220'
+v12 <- LoadInteger '256'
+v13 <- CallMethod v3, 'fromCharCode', [v10, v11, v12]
+v14 <- LoadString 'aÜĀ'
+v15 <- LoadInteger '128'
+v16 <- LoadInteger '1'
+v17 <- LoadString ''
+v18 <- CreateNamedVariable 'JSON', 'none'
+v19 <- CallMethod v18, 'stringify', [v17]
+v20 <- CallMethod v19, 'charCodeAt', [v16]
+v21 <- LoadInteger '128'
+v22 <- LoadInteger '1'
+v23 <- LoadString ''
+v24 <- LoadInteger '0'
+v25 <- LoadNull
+v26 <- CallMethod v18, 'stringify', [v23, v24, v25]
+v27 <- CallMethod v26, 'charCodeAt', [v22]
+v28 <- LoadString 'a'
+v29 <- LoadString 'b'
+v30 <- LoadString 'Ü'
+v31 <- CreateArray [v28, v29, v30]
+v32 <- LoadString 'b'
+v33 <- LoadString 'Ü'
+v34 <- LoadString 'a'
+v35 <- CreateArray [v32, v33, v34]
+v36 <- CallMethod v35, 'sort', []
+v37 <- LoadString 'üÜ'
+v38 <- LoadString 'ü'
+v39 <- CreateArray [v37, v38]
+v40 <- LoadString 'üÜ'
+v41 <- CreateNamedVariable 'RegExp', 'none'
+v42 <- LoadString '(Ü)\1'
+v43 <- LoadString 'i'
+v44 <- Construct v41, [v42, v43]
+v45 <- CallMethod v44, 'exec', [v40]
+v46 <- LoadInteger '0'
+v47 <- CreateNamedVariable 'total_lo', 'var', v46
+BeginForLoopInitializer
+    v48 <- LoadInteger '0'
+BeginForLoopCondition -> v49
+    v50 <- LoadInteger '255'
+    v51 <- Compare v49, '<', v50
+BeginForLoopAfterthought v51 -> v52
+    v53 <- UnaryOperation v52, '++'
+BeginForLoopBody -> v54
+    v55 <- CallMethod v3, 'fromCharCode', [v54]
+    v56 <- CreateNamedVariable 'base', 'var', v55
+    v57 <- CreateNamedVariable 'escaped', 'var', v56
+    v58 <- LoadString '('
+    v59 <- Compare v56, '==', v58
+    v60 <- LoadString ')'
+    v61 <- Compare v56, '==', v60
+    v62 <- BinaryOperation v59, '||', v61
+    v63 <- LoadString '*'
+    v64 <- Compare v56, '==', v63
+    v65 <- BinaryOperation v62, '||', v64
+    v66 <- LoadString '+'
+    v67 <- Compare v56, '==', v66
+    v68 <- BinaryOperation v65, '||', v67
+    v69 <- LoadString '?'
+    v70 <- Compare v56, '==', v69
+    v71 <- BinaryOperation v68, '||', v70
+    v72 <- LoadString '['
+    v73 <- Compare v56, '==', v72
+    v74 <- BinaryOperation v71, '||', v73
+    v75 <- LoadString ']'
+    v76 <- Compare v56, '==', v75
+    v77 <- BinaryOperation v74, '||', v76
+    v78 <- LoadString '\'
+    v79 <- Compare v56, '==', v78
+    v80 <- BinaryOperation v77, '||', v79
+    v81 <- LoadString '$'
+    v82 <- Compare v56, '==', v81
+    v83 <- BinaryOperation v80, '||', v82
+    v84 <- LoadString '^'
+    v85 <- Compare v56, '==', v84
+    v86 <- BinaryOperation v83, '||', v85
+    v87 <- LoadString '|'
+    v88 <- Compare v56, '==', v87
+    v89 <- BinaryOperation v86, '||', v88
+    BeginIf v89
+        v90 <- LoadString '\'
+        v91 <- BinaryOperation v90, '+', v56
+        Reassign v57, v91
+    EndIf
+    v92 <- LoadInteger '32'
+    v93 <- BinaryOperation v54, '+', v92
+    v94 <- CallMethod v3, 'fromCharCode', [v93]
+    v95 <- CreateNamedVariable 'lo', 'var', v94
+    v96 <- BinaryOperation v56, '+', v56
+    v97 <- LoadString '('
+    v98 <- BinaryOperation v97, '+', v57
+    v99 <- LoadString ')\1'
+    v100 <- BinaryOperation v98, '+', v99
+    v101 <- LoadString 'i'
+    v102 <- Construct v41, [v100, v101]
+    v103 <- CallMethod v102, 'exec', [v96]
+    v104 <- CreateNamedVariable 'base_result', 'none'
+    Reassign v104, v103
+    v105 <- CreateNamedVariable 'base_result', 'none'
+    v106 <- BinaryOperation v56, '+', v56
+    v107 <- CreateArray [v106, v56]
+    v108 <- BinaryOperation v56, '+', v95
+    v109 <- LoadString '('
+    v110 <- BinaryOperation v109, '+', v57
+    v111 <- LoadString ')\1'
+    v112 <- BinaryOperation v110, '+', v111
+    v113 <- LoadString 'i'
+    v114 <- Construct v41, [v112, v113]
+    v115 <- CallMethod v114, 'exec', [v108]
+    v116 <- CreateNamedVariable 'lo_result', 'none'
+    Reassign v116, v115
+    v117 <- CallMethod v56, 'toLowerCase', []
+    v118 <- Compare v117, '==', v95
+    BeginIf v118
+        v119 <- BinaryOperation v56, '+', v95
+        v120 <- CreateArray [v119, v56]
+        v121 <- CreateNamedVariable 'lo_result', 'none'
+        v122 <- UnaryOperation v47, '++'
+    BeginElse
+        v123 <- LoadNull
+        v124 <- CreateNamedVariable 'lo_result', 'none'
+    EndIf
+EndForLoop
+v125 <- LoadInteger '90'
+v126 <- LoadInteger '65'
+v127 <- BinaryOperation v125, '-', v126
+v128 <- LoadInteger '1'
+v129 <- BinaryOperation v127, '+', v128
+v130 <- LoadInteger '222'
+v131 <- LoadInteger '192'
+v132 <- BinaryOperation v130, '-', v131
+v133 <- LoadInteger '1'
+v134 <- BinaryOperation v132, '-', v133
+v135 <- LoadInteger '1'
+v136 <- BinaryOperation v134, '+', v135
+v137 <- BinaryOperation v129, '+', v136
+v138 <- LoadInteger '1'
+v139 <- LoadInteger '160'
+v140 <- CallMethod v3, 'fromCharCode', [v139]
+v141 <- LoadString '1'
+v142 <- BinaryOperation v140, '+', v141
+v143 <- UnaryOperation '+', v142
+v144 <- LoadString '+£'
+v145 <- LoadString '=='
+v146 <- CreateArray [v144, v145]
+v147 <- LoadRegExp '\W\W' 'g'
+v148 <- LoadString '+£=='
+v149 <- CallMethod v148, 'match', [v147]
+v150 <- LoadString 'ÿ'
+v151 <- LoadRegExp '\u0178' 'i'
+v152 <- CallMethod v151, 'test', [v150]
+v153 <- LoadString 'µ'
+v154 <- LoadRegExp '\u039c' 'i'
+v155 <- CallMethod v154, 'test', [v153]
+v156 <- LoadString 'μ'
+v157 <- LoadRegExp '\u039c' 'i'
+v158 <- CallMethod v157, 'test', [v156]
+v159 <- LoadString 'μ'
+v160 <- LoadRegExp '\u00b5' 'i'
+v161 <- CallMethod v160, 'test', [v159]
+v162 <- LoadString 'µ'
+v163 <- LoadRegExp '[\u039b-\u039d]' 'i'
+v164 <- CallMethod v163, 'test', [v162]
+v165 <- LoadString 'µ'
+v166 <- LoadRegExp '[^\u039b-\u039d]' 'i'
+v167 <- CallMethod v166, 'test', [v165]
+v168 <- LoadString 'µ'
+v169 <- LoadRegExp '[\u039b-\u039d]' ''
+v170 <- CallMethod v169, 'test', [v168]
+v171 <- LoadString 'µ'
+v172 <- LoadRegExp '[^\u039b-\u039d]' ''
+v173 <- CallMethod v172, 'test', [v171]
+BeginForLoopInitializer
+    v174 <- LoadInteger '0'
+BeginForLoopCondition -> v175
+    v176 <- LoadInteger '2'
+    v177 <- Compare v175, '<', v176
+BeginForLoopAfterthought v177 -> v178
+    v179 <- UnaryOperation v178, '++'
+BeginForLoopBody -> v180
+    v181 <- LoadString 'Ü'
+    v182 <- CreateNamedVariable 'testString', 'var', v181
+    v183 <- LoadInteger '0'
+    v184 <- Compare v180, '==', v183
+    v185 <- LoadInteger '0'
+    v186 <- LoadInteger '20'
+    v187 <- TernaryOperation v184, v185, v186
+    v188 <- CreateNamedVariable 'loopLength', 'var', v187
+    BeginForLoopInitializer
+        v189 <- LoadInteger '0'
+    BeginForLoopCondition -> v190
+        v191 <- Compare v190, '<', v188
+    BeginForLoopAfterthought v191 -> v192
+        v193 <- UnaryOperation v192, '++'
+    BeginForLoopBody -> v194
+        Update v182, '+', v182
+    EndForLoop
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `test`, v182
+    v195 <- EndObjectLiteral
+    v196 <- LoadNull
+    v197 <- LoadInteger '0'
+    v198 <- CallMethod v18, 'stringify', [v195, v196, v197]
+    v199 <- CreateNamedVariable 'stringified', 'var', v198
+    v200 <- LoadString '{"test":"'
+    v201 <- BinaryOperation v200, '+', v182
+    v202 <- LoadString '"}'
+    v203 <- BinaryOperation v201, '+', v202
+    v204 <- CreateNamedVariable 'stringifiedExpected', 'var', v203
+EndForLoop
+
+
+String.fromCharCode(97, 220, 256);
+("a" + "Ü") + "Ā";
+String.fromCharCode(97, 220, 256);
+JSON.stringify("").charCodeAt(1);
+JSON.stringify("", 0, null).charCodeAt(1);
+["a","b","Ü"];
+(["b","Ü","a"]).sort();
+["üÜ","ü"];
+const v44 = new RegExp("(Ü)\1", "i");
+v44.exec("üÜ");
+var total_lo = 0;
+for (let i49 = 0; i49 < 255; i49++) {
+    var base = String.fromCharCode(i49);
+    var escaped = base;
+    if (((((((((((base == "(") || (base == ")")) || (base == "*")) || (base == "+")) || (base == "?")) || (base == "[")) || (base == "]")) || (base == "\")) || (base == "$")) || (base == "^")) || (base == "|")) {
+        escaped = "\" + base;
+    }
+    var lo = String.fromCharCode(i49 + 32);
+    const v96 = base + base;
+    const v102 = new RegExp(("(" + escaped) + ")\1", "i");
+    base_result = v102.exec(v96);
+    [base + base,base];
+    const v108 = base + lo;
+    const v114 = new RegExp(("(" + escaped) + ")\1", "i");
+    lo_result = v114.exec(v108);
+    if (base.toLowerCase() == lo) {
+        [base + lo,base];
+        total_lo++;
+    } else {
+    }
+}
+((90 - 65) + 1) + (((222 - 192) - 1) + 1);
++(String.fromCharCode(160) + "1");
+["+£","=="];
+("+£==").match(/\W\W/g);
+/\u0178/i.test("ÿ");
+/\u039c/i.test("µ");
+/\u039c/i.test("μ");
+/\u00b5/i.test("μ");
+/[\u039b-\u039d]/i.test("µ");
+/[^\u039b-\u039d]/i.test("µ");
+/[\u039b-\u039d]/.test("µ");
+/[^\u039b-\u039d]/.test("µ");
+for (let i175 = 0; i175 < 2; i175++) {
+    var testString = "Ü";
+    var loopLength = i175 == 0 ? 0 : 20;
+    for (let i190 = 0; i190 < loopLength; i190++) {
+        testString += testString;
+    }
+    var stringified = JSON.stringify({ test: testString }, null, 0);
+    var stringifiedExpected = ("{"test":"" + testString) + ""}";
+}
+
+FuzzIL program written to corpus/regress-latin-1.fzil

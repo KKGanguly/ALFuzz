@@ -1,0 +1,144 @@
+v0 <- LoadFloat '1.1'
+v1 <- CreateNamedVariable 'X', 'var', v0
+v2 <- LoadFloat '0.5'
+v3 <- CreateNamedVariable 'K', 'var', v2
+v4 <- LoadInteger '0'
+v5 <- CreateNamedVariable 'O', 'var', v4
+v6 <- CreateNamedVariable 'Float64Array', 'none'
+v7 <- LoadInteger '2'
+v8 <- Construct v6, [v7]
+v9 <- CreateNamedVariable 'result', 'var', v8
+v10 <- BeginPlainFunction -> 
+EndPlainFunction
+v11 <- BeginPlainFunction -> 
+    v12 <- CreateNamedVariable 'v', 'var', v1
+    v13 <- BinaryOperation v12, '+', v3
+    v14 <- CreateNamedVariable 'phi1', 'var', v13
+    v15 <- BinaryOperation v12, '-', v3
+    v16 <- CreateNamedVariable 'phi2', 'var', v15
+    v17 <- CallFunction v10, []
+    v18 <- CreateNamedVariable 'xmm1', 'var', v12
+    v19 <- BinaryOperation v12, '*', v12
+    v20 <- BinaryOperation v19, '*', v12
+    v21 <- CreateNamedVariable 'xmm2', 'var', v20
+    v22 <- BinaryOperation v12, '*', v12
+    v23 <- BinaryOperation v22, '*', v12
+    v24 <- BinaryOperation v23, '*', v12
+    v25 <- CreateNamedVariable 'xmm3', 'var', v24
+    v26 <- BinaryOperation v12, '*', v12
+    v27 <- BinaryOperation v26, '*', v12
+    v28 <- BinaryOperation v27, '*', v12
+    v29 <- BinaryOperation v28, '*', v12
+    v30 <- CreateNamedVariable 'xmm4', 'var', v29
+    v31 <- BinaryOperation v12, '*', v12
+    v32 <- BinaryOperation v31, '*', v12
+    v33 <- BinaryOperation v32, '*', v12
+    v34 <- BinaryOperation v33, '*', v12
+    v35 <- BinaryOperation v34, '*', v12
+    v36 <- CreateNamedVariable 'xmm5', 'var', v35
+    v37 <- BinaryOperation v12, '*', v12
+    v38 <- BinaryOperation v37, '*', v12
+    v39 <- BinaryOperation v38, '*', v12
+    v40 <- BinaryOperation v39, '*', v12
+    v41 <- BinaryOperation v40, '*', v12
+    v42 <- BinaryOperation v41, '*', v12
+    v43 <- CreateNamedVariable 'xmm6', 'var', v42
+    v44 <- BinaryOperation v12, '*', v12
+    v45 <- BinaryOperation v44, '*', v12
+    v46 <- BinaryOperation v45, '*', v12
+    v47 <- BinaryOperation v46, '*', v12
+    v48 <- BinaryOperation v47, '*', v12
+    v49 <- BinaryOperation v48, '*', v12
+    v50 <- BinaryOperation v49, '*', v12
+    v51 <- CreateNamedVariable 'xmm7', 'var', v50
+    v52 <- BinaryOperation v12, '*', v12
+    v53 <- BinaryOperation v52, '*', v12
+    v54 <- BinaryOperation v53, '*', v12
+    v55 <- BinaryOperation v54, '*', v12
+    v56 <- BinaryOperation v55, '*', v12
+    v57 <- BinaryOperation v56, '*', v12
+    v58 <- BinaryOperation v57, '*', v12
+    v59 <- BinaryOperation v58, '*', v12
+    v60 <- CreateNamedVariable 'xmm8', 'var', v59
+    BeginForLoopInitializer
+        v61 <- LoadInteger '0'
+    BeginForLoopCondition -> v62
+        v63 <- LoadInteger '2'
+        v64 <- Compare v62, '<', v63
+    BeginForLoopAfterthought v64 -> v65
+        v66 <- UnaryOperation v65, '++'
+    BeginForLoopBody -> v67
+        v68 <- BinaryOperation v18, '*', v43
+        Update v18, '+', v68
+        v69 <- BinaryOperation v18, '*', v36
+        Update v21, '+', v69
+        v70 <- BinaryOperation v18, '*', v30
+        Update v25, '+', v70
+        v71 <- BinaryOperation v18, '*', v25
+        Update v30, '+', v71
+        v72 <- BinaryOperation v18, '*', v21
+        Update v36, '+', v72
+        v73 <- CreateNamedVariable 't', 'var', v14
+        Reassign v14, v16
+        Reassign v16, v73
+    EndForLoop
+    v74 <- LoadInteger '0'
+    v75 <- Compare v5, '===', v74
+    v76 <- TernaryOperation v75, v14, v16
+    SetElement v9, '0', v76
+    v77 <- LoadInteger '0'
+    v78 <- Compare v5, '!==', v77
+    v79 <- TernaryOperation v78, v14, v16
+    SetElement v9, '1', v79
+EndPlainFunction
+v80 <- BeginPlainFunction -> 
+    v81 <- CallFunction v11, []
+    v82 <- BinaryOperation v1, '+', v3
+    v83 <- BinaryOperation v1, '-', v3
+    v84 <- CreateArray [v82, v83]
+EndPlainFunction
+v85 <- CallFunction v80, []
+v86 <- CallFunction v80, []
+v87 <- CallFunction v80, []
+
+
+var X = 1.1;
+var K = 0.5;
+var O = 0;
+const v8 = new Float64Array(2);
+var result = v8;
+function spill() {
+}
+function buggy() {
+    var v = X;
+    var phi1 = v + K;
+    var phi2 = v - K;
+    spill();
+    var xmm1 = v;
+    var xmm2 = (v * v) * v;
+    var xmm3 = ((v * v) * v) * v;
+    var xmm4 = (((v * v) * v) * v) * v;
+    var xmm5 = ((((v * v) * v) * v) * v) * v;
+    var xmm6 = (((((v * v) * v) * v) * v) * v) * v;
+    var xmm7 = ((((((v * v) * v) * v) * v) * v) * v) * v;
+    var xmm8 = (((((((v * v) * v) * v) * v) * v) * v) * v) * v;
+    for (let i62 = 0; i62 < 2; i62++) {
+        xmm2 += (xmm1 += xmm1 * xmm6) * xmm5;
+        xmm4 += xmm1 * (xmm3 += xmm1 * xmm4);
+        xmm5 += xmm1 * xmm2;
+        var t = phi1;
+        phi1 = phi2;
+        phi2 = t;
+    }
+    result[0] = O === 0 ? phi1 : phi2;
+    result[1] = O !== 0 ? phi1 : phi2;
+}
+function test() {
+    buggy();
+    [X + K,X - K];
+}
+test();
+test();
+test();
+
+FuzzIL program written to corpus/regress-crbug-173907b.fzil

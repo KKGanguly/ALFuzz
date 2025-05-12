@@ -1,0 +1,342 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'x', 'let', v0
+v2 <- LoadInteger '2'
+v3 <- CreateNamedVariable 'y', 'let', v2
+v4 <- LoadInteger '4'
+v5 <- CreateNamedVariable 'z', 'const', v4
+v6 <- BeginClassDefinition
+    BeginClassStaticMethod 'foo' -> v7
+        v8 <- LoadInteger '1'
+        Return v8
+    EndClassStaticMethod
+EndClassDefinition
+BeginBlockStatement
+    v9 <- LoadUndefined
+    v10 <- CreateNamedVariable 'y', 'let', v9
+    v11 <- LoadInteger '3'
+    v12 <- CreateNamedVariable 'x', 'let', v11
+    v13 <- LoadInteger '5'
+    v14 <- CreateNamedVariable 'z', 'const', v13
+    v15 <- BeginClassDefinition
+        BeginClassStaticMethod 'foo' -> v16
+            v17 <- LoadInteger '2'
+            Return v17
+        EndClassStaticMethod
+    EndClassDefinition
+EndBlockStatement
+v18 <- LoadUndefined
+v19 <- LoadInteger '2'
+v20 <- LoadInteger '4'
+v21 <- LoadInteger '1'
+v22 <- CallMethod v6, 'foo', []
+v23 <- LoadBoolean 'true'
+BeginIf v23
+    v24 <- LoadUndefined
+    v25 <- CreateNamedVariable 'y', 'let', v24
+    v26 <- LoadUndefined
+EndIf
+v27 <- BeginPlainFunction -> v28, v29
+    v30 <- LoadString '(function(arg){ 'use strict'; '
+    v31 <- BinaryOperation v30, '+', v28
+    v32 <- LoadString '})'
+    v33 <- BinaryOperation v31, '+', v32
+EndPlainFunction
+v34 <- BeginPlainFunction -> v35
+    v36 <- LoadString '(function(arg){ 'use strict'; '
+    v37 <- BinaryOperation v36, '+', v35
+    v38 <- LoadString '})()'
+    v39 <- BinaryOperation v37, '+', v38
+EndPlainFunction
+v40 <- LoadString 'if (true) let x;'
+v41 <- CreateNamedVariable 'SyntaxError', 'none'
+v42 <- CallFunction v27, [v40, v41]
+v43 <- LoadString 'if (true) {} else let x;'
+v44 <- CallFunction v27, [v43, v41]
+v45 <- LoadString 'do let x; while (false)'
+v46 <- CallFunction v27, [v45, v41]
+v47 <- LoadString 'while (false) let x;'
+v48 <- CallFunction v27, [v47, v41]
+v49 <- LoadString 'label: let x;'
+v50 <- CallFunction v27, [v49, v41]
+v51 <- LoadString 'for (;false;) let x;'
+v52 <- CallFunction v27, [v51, v41]
+v53 <- LoadString 'switch (true) { case true: let x; }'
+v54 <- CallFunction v34, [v53]
+v55 <- LoadString 'switch (true) { default: let x; }'
+v56 <- CallFunction v34, [v55]
+v57 <- LoadString 'if (true) const x = 1;'
+v58 <- CallFunction v27, [v57, v41]
+v59 <- LoadString 'if (true) {} else const x = 1;'
+v60 <- CallFunction v27, [v59, v41]
+v61 <- LoadString 'do const x = 1; while (false)'
+v62 <- CallFunction v27, [v61, v41]
+v63 <- LoadString 'while (false) const x = 1;'
+v64 <- CallFunction v27, [v63, v41]
+v65 <- LoadString 'label: const x = 1;'
+v66 <- CallFunction v27, [v65, v41]
+v67 <- LoadString 'for (;false;) const x = 1;'
+v68 <- CallFunction v27, [v67, v41]
+v69 <- LoadString 'switch (true) { case true: const x = 1; }'
+v70 <- CallFunction v34, [v69]
+v71 <- LoadString 'switch (true) { default: const x = 1; }'
+v72 <- CallFunction v34, [v71]
+v73 <- LoadString 'const x;'
+v74 <- CallFunction v27, [v73, v41]
+v75 <- LoadString 'const x = 1, y;'
+v76 <- CallFunction v27, [v75, v41]
+v77 <- LoadString 'const x, y = 1;'
+v78 <- CallFunction v27, [v77, v41]
+v79 <- LoadString 'if (true) const x;'
+v80 <- CallFunction v27, [v79, v41]
+v81 <- LoadString 'if (true) {} else const x;'
+v82 <- CallFunction v27, [v81, v41]
+v83 <- LoadString 'do const x; while (false)'
+v84 <- CallFunction v27, [v83, v41]
+v85 <- LoadString 'while (false) const x;'
+v86 <- CallFunction v27, [v85, v41]
+v87 <- LoadString 'label: const x;'
+v88 <- CallFunction v27, [v87, v41]
+v89 <- LoadString 'for (;false;) const x;'
+v90 <- CallFunction v27, [v89, v41]
+v91 <- LoadString 'switch (true) { case true: const x; }'
+v92 <- CallFunction v27, [v91, v41]
+v93 <- LoadString 'switch (true) { default: const x; }'
+v94 <- CallFunction v27, [v93, v41]
+v95 <- LoadString 'if (true) var x;'
+v96 <- CallFunction v34, [v95]
+v97 <- LoadString 'if (true) {} else var x;'
+v98 <- CallFunction v34, [v97]
+v99 <- LoadString 'do var x; while (false)'
+v100 <- CallFunction v34, [v99]
+v101 <- LoadString 'while (false) var x;'
+v102 <- CallFunction v34, [v101]
+v103 <- LoadString 'label: var x;'
+v104 <- CallFunction v34, [v103]
+v105 <- LoadString 'for (;false;) var x;'
+v106 <- CallFunction v34, [v105]
+v107 <- LoadString 'switch (true) { case true: var x; }'
+v108 <- CallFunction v34, [v107]
+v109 <- LoadString 'switch (true) { default: var x; }'
+v110 <- CallFunction v34, [v109]
+v111 <- LoadString 'if (true) class x { };'
+v112 <- CallFunction v27, [v111, v41]
+v113 <- LoadString 'if (true) {} else class x { };'
+v114 <- CallFunction v27, [v113, v41]
+v115 <- LoadString 'do class x { }; while (false)'
+v116 <- CallFunction v27, [v115, v41]
+v117 <- LoadString 'while (false) class x { };'
+v118 <- CallFunction v27, [v117, v41]
+v119 <- LoadString 'label: class x { };'
+v120 <- CallFunction v27, [v119, v41]
+v121 <- LoadString 'for (;false;) class x { };'
+v122 <- CallFunction v27, [v121, v41]
+v123 <- LoadString 'switch (true) { case true: class x { }; }'
+v124 <- CallFunction v34, [v123]
+v125 <- LoadString 'switch (true) { default: class x { }; }'
+v126 <- CallFunction v34, [v125]
+v127 <- LoadString '{ let f; var f; }'
+v128 <- CallFunction v27, [v127]
+v129 <- LoadString '{ var f; let f; }'
+v130 <- CallFunction v27, [v129]
+v131 <- LoadString '{ function f() {} let f; }'
+v132 <- CallFunction v27, [v131]
+v133 <- LoadString '{ let f; function f() {} }'
+v134 <- CallFunction v27, [v133]
+v135 <- LoadString '{ function f() {} var f; }'
+v136 <- CallFunction v27, [v135]
+v137 <- LoadString '{ var f; function f() {} }'
+v138 <- CallFunction v27, [v137]
+v139 <- LoadString '{ function f() {} class f {} }'
+v140 <- CallFunction v27, [v139]
+v141 <- LoadString '{ class f {}; function f() {} }'
+v142 <- CallFunction v27, [v141]
+v143 <- LoadString '{ function f() {} function f() {} }'
+v144 <- CallFunction v27, [v143]
+v145 <- LoadString 'function f() {} let f;'
+v146 <- CallFunction v27, [v145]
+v147 <- LoadString 'let f; function f() {}'
+v148 <- CallFunction v27, [v147]
+v149 <- LoadString 'function f() {} class f {}'
+v150 <- CallFunction v27, [v149]
+v151 <- LoadString 'class f {}; function f() {}'
+v152 <- CallFunction v27, [v151]
+v153 <- LoadString 'function arg() {}'
+v154 <- CallFunction v34, [v153]
+v155 <- LoadString 'function f() {} var f;'
+v156 <- CallFunction v34, [v155]
+v157 <- LoadString 'var f; function f() {}'
+v158 <- CallFunction v34, [v157]
+v159 <- LoadString 'function f() {} function f() {}'
+v160 <- CallFunction v34, [v159]
+v161 <- BeginPlainFunction -> v162
+    v163 <- BeginPlainFunction -> 
+        v164 <- LoadInteger '1'
+        Return v164
+    EndPlainFunction
+    v165 <- CallFunction v163, []
+    Return v165
+EndPlainFunction
+v166 <- LoadInteger '1'
+v167 <- BeginPlainFunction -> 
+    v168 <- LoadInteger '2'
+    Return v168
+EndPlainFunction
+v169 <- CallFunction v161, [v167]
+v170 <- BeginPlainFunction -> 
+    v171 <- BeginPlainFunction -> 
+        Directive 'use strict'
+        v172 <- BeginPlainFunction -> 
+        EndPlainFunction
+        BeginBlockStatement
+            v173 <- BeginPlainFunction -> 
+            EndPlainFunction
+        EndBlockStatement
+    EndPlainFunction
+    BeginBlockStatement
+        v174 <- BeginPlainFunction -> 
+        EndPlainFunction
+    EndBlockStatement
+EndPlainFunction
+v175 <- CallFunction v170, []
+v176 <- LoadString 'function f() { if (true) function g() {} }'
+v177 <- CallFunction v27, [v176, v41]
+v178 <- LoadString 'function f() { if (true) {} else function g() {} }'
+v179 <- CallFunction v27, [v178, v41]
+v180 <- LoadString 'function f() { do function g() {} while (false) }'
+v181 <- CallFunction v27, [v180, v41]
+v182 <- LoadString 'function f() { while (false) function g() {} }'
+v183 <- CallFunction v27, [v182, v41]
+v184 <- LoadString 'function f() { label: function g() {} }'
+v185 <- CallFunction v27, [v184, v41]
+v186 <- LoadString 'function f() { for (;false;) function g() {} }'
+v187 <- CallFunction v27, [v186, v41]
+v188 <- LoadString 'function f() { switch (true) { case true: function g() {} } }'
+v189 <- CallFunction v34, [v188]
+v190 <- LoadString 'function f() { switch (true) { default: function g() {} } }'
+v191 <- CallFunction v34, [v190]
+
+
+let x;
+let y = 2;
+const z = 4;
+class C6 {
+    static foo() {
+        return 1;
+    }
+}
+{
+    let y;
+    let x = 3;
+    const z = 5;
+    class C15 {
+        static foo() {
+            return 2;
+        }
+    }
+}
+C6.foo();
+if (true) {
+    let y;
+}
+function TestLocalThrows(a28, a29) {
+    ("(function(arg){ 'use strict'; " + a28) + "})";
+}
+function TestLocalDoesNotThrow(a35) {
+    ("(function(arg){ 'use strict'; " + a35) + "})()";
+}
+TestLocalThrows("if (true) let x;", SyntaxError);
+TestLocalThrows("if (true) {} else let x;", SyntaxError);
+TestLocalThrows("do let x; while (false)", SyntaxError);
+TestLocalThrows("while (false) let x;", SyntaxError);
+TestLocalThrows("label: let x;", SyntaxError);
+TestLocalThrows("for (;false;) let x;", SyntaxError);
+TestLocalDoesNotThrow("switch (true) { case true: let x; }");
+TestLocalDoesNotThrow("switch (true) { default: let x; }");
+TestLocalThrows("if (true) const x = 1;", SyntaxError);
+TestLocalThrows("if (true) {} else const x = 1;", SyntaxError);
+TestLocalThrows("do const x = 1; while (false)", SyntaxError);
+TestLocalThrows("while (false) const x = 1;", SyntaxError);
+TestLocalThrows("label: const x = 1;", SyntaxError);
+TestLocalThrows("for (;false;) const x = 1;", SyntaxError);
+TestLocalDoesNotThrow("switch (true) { case true: const x = 1; }");
+TestLocalDoesNotThrow("switch (true) { default: const x = 1; }");
+TestLocalThrows("const x;", SyntaxError);
+TestLocalThrows("const x = 1, y;", SyntaxError);
+TestLocalThrows("const x, y = 1;", SyntaxError);
+TestLocalThrows("if (true) const x;", SyntaxError);
+TestLocalThrows("if (true) {} else const x;", SyntaxError);
+TestLocalThrows("do const x; while (false)", SyntaxError);
+TestLocalThrows("while (false) const x;", SyntaxError);
+TestLocalThrows("label: const x;", SyntaxError);
+TestLocalThrows("for (;false;) const x;", SyntaxError);
+TestLocalThrows("switch (true) { case true: const x; }", SyntaxError);
+TestLocalThrows("switch (true) { default: const x; }", SyntaxError);
+TestLocalDoesNotThrow("if (true) var x;");
+TestLocalDoesNotThrow("if (true) {} else var x;");
+TestLocalDoesNotThrow("do var x; while (false)");
+TestLocalDoesNotThrow("while (false) var x;");
+TestLocalDoesNotThrow("label: var x;");
+TestLocalDoesNotThrow("for (;false;) var x;");
+TestLocalDoesNotThrow("switch (true) { case true: var x; }");
+TestLocalDoesNotThrow("switch (true) { default: var x; }");
+TestLocalThrows("if (true) class x { };", SyntaxError);
+TestLocalThrows("if (true) {} else class x { };", SyntaxError);
+TestLocalThrows("do class x { }; while (false)", SyntaxError);
+TestLocalThrows("while (false) class x { };", SyntaxError);
+TestLocalThrows("label: class x { };", SyntaxError);
+TestLocalThrows("for (;false;) class x { };", SyntaxError);
+TestLocalDoesNotThrow("switch (true) { case true: class x { }; }");
+TestLocalDoesNotThrow("switch (true) { default: class x { }; }");
+TestLocalThrows("{ let f; var f; }");
+TestLocalThrows("{ var f; let f; }");
+TestLocalThrows("{ function f() {} let f; }");
+TestLocalThrows("{ let f; function f() {} }");
+TestLocalThrows("{ function f() {} var f; }");
+TestLocalThrows("{ var f; function f() {} }");
+TestLocalThrows("{ function f() {} class f {} }");
+TestLocalThrows("{ class f {}; function f() {} }");
+TestLocalThrows("{ function f() {} function f() {} }");
+TestLocalThrows("function f() {} let f;");
+TestLocalThrows("let f; function f() {}");
+TestLocalThrows("function f() {} class f {}");
+TestLocalThrows("class f {}; function f() {}");
+TestLocalDoesNotThrow("function arg() {}");
+TestLocalDoesNotThrow("function f() {} var f;");
+TestLocalDoesNotThrow("var f; function f() {}");
+TestLocalDoesNotThrow("function f() {} function f() {}");
+function g(a162) {
+    function f() {
+        return 1;
+    }
+    return f();
+}
+function f167() {
+    return 2;
+}
+g(f167);
+function f() {
+    function g0() {
+        'use strict';
+        function h() {
+        }
+        {
+            function h1() {
+            }
+        }
+    }
+    {
+        function g1() {
+        }
+    }
+}
+f();
+TestLocalThrows("function f() { if (true) function g() {} }", SyntaxError);
+TestLocalThrows("function f() { if (true) {} else function g() {} }", SyntaxError);
+TestLocalThrows("function f() { do function g() {} while (false) }", SyntaxError);
+TestLocalThrows("function f() { while (false) function g() {} }", SyntaxError);
+TestLocalThrows("function f() { label: function g() {} }", SyntaxError);
+TestLocalThrows("function f() { for (;false;) function g() {} }", SyntaxError);
+TestLocalDoesNotThrow("function f() { switch (true) { case true: function g() {} } }");
+TestLocalDoesNotThrow("function f() { switch (true) { default: function g() {} } }");
+
+FuzzIL program written to corpus/block-let-declaration-sloppy.fzil

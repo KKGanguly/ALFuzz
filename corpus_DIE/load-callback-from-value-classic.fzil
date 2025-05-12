@@ -1,0 +1,48 @@
+v0 <- CreateNamedVariable 'Boolean', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString 'v'
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadThis
+    Return v4
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v1, v2, v5]
+v8 <- BeginPlainFunction -> v9
+    v10 <- GetProperty v9, 'v'
+    Return v10
+EndPlainFunction
+v11 <- LoadString 'object'
+v12 <- LoadBoolean 'true'
+v13 <- CallFunction v8, [v12]
+v14 <- TypeOf v13
+v15 <- LoadString 'object'
+v16 <- LoadBoolean 'true'
+v17 <- CallFunction v8, [v16]
+v18 <- TypeOf v17
+v19 <- LoadString 'object'
+v20 <- LoadBoolean 'true'
+v21 <- CallFunction v8, [v20]
+v22 <- TypeOf v21
+v23 <- LoadString 'object'
+v24 <- LoadBoolean 'true'
+v25 <- CallFunction v8, [v24]
+v26 <- TypeOf v25
+
+
+const v1 = Boolean.prototype;
+function f3() {
+    return this;
+}
+Object.defineProperty(v1, "v", { get: f3 });
+function f(a9) {
+    return a9.v;
+}
+typeof f(true);
+typeof f(true);
+typeof f(true);
+typeof f(true);
+
+FuzzIL program written to corpus/load-callback-from-value-classic.fzil

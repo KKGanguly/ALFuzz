@@ -1,0 +1,148 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CreateNamedVariable 'Object', 'none'
+    v4 <- CallMethod v3, 'getPrototypeOf', [v1]
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadUndefined
+    v7 <- CreateNamedVariable 'Object', 'none'
+    v8 <- CallMethod v7, 'getPrototypeOf', [v6]
+EndPlainFunction
+v9 <- CallFunction v5, []
+v10 <- CreateNamedVariable 'TypeError', 'none'
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadNull
+    v13 <- CreateNamedVariable 'Object', 'none'
+    v14 <- CallMethod v13, 'getPrototypeOf', [v12]
+EndPlainFunction
+v15 <- CallFunction v11, []
+v16 <- BeginPlainFunction -> 
+EndPlainFunction
+v17 <- Construct v16, []
+v18 <- CreateNamedVariable 'y', 'var', v17
+v19 <- GetProperty v16, 'prototype'
+v20 <- CallFunction v16, []
+v21 <- CreateNamedVariable 'Function', 'none'
+v22 <- GetProperty v21, 'prototype'
+v23 <- LoadInteger '5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v23
+v24 <- EndObjectLiteral
+v25 <- CreateNamedVariable 'Object', 'none'
+v26 <- GetProperty v25, 'prototype'
+v27 <- LoadInteger '5'
+v28 <- LoadNull
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v27
+    ObjectLiteralAddProperty `__proto__`, v28
+v29 <- EndObjectLiteral
+v30 <- LoadNull
+v31 <- LoadInteger '1'
+v32 <- LoadInteger '2'
+v33 <- CreateArray [v31, v32]
+v34 <- CreateNamedVariable 'Array', 'none'
+v35 <- GetProperty v34, 'prototype'
+v36 <- LoadInteger '1'
+v37 <- CreateNamedVariable 'Number', 'none'
+v38 <- GetProperty v37, 'prototype'
+v39 <- LoadBoolean 'true'
+v40 <- CreateNamedVariable 'Boolean', 'none'
+v41 <- GetProperty v40, 'prototype'
+v42 <- LoadBoolean 'false'
+v43 <- GetProperty v40, 'prototype'
+v44 <- LoadString 'str'
+v45 <- CreateNamedVariable 'String', 'none'
+v46 <- GetProperty v45, 'prototype'
+v47 <- CreateNamedVariable 'Symbol', 'none'
+v48 <- CallFunction v47, []
+v49 <- GetProperty v47, 'prototype'
+v50 <- CreateNamedVariable 'EvalError', 'none'
+v51 <- CreateNamedVariable 'RangeError', 'none'
+v52 <- CreateNamedVariable 'ReferenceError', 'none'
+v53 <- CreateNamedVariable 'SyntaxError', 'none'
+v54 <- CreateNamedVariable 'URIError', 'none'
+v55 <- CreateArray [v50, v51, v52, v53, v10, v54]
+v56 <- CreateNamedVariable 'errorFunctions', 'var', v55
+BeginForOfLoop v56 -> v57
+    v58 <- CreateNamedVariable 'Error', 'none'
+    v59 <- Construct v57, []
+    v60 <- GetProperty v57, 'prototype'
+EndForOfLoop
+v61 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v62 <- CreateNamedVariable 'Date', 'none'
+v63 <- CreateNamedVariable 'Error', 'none'
+v64 <- CreateNamedVariable 'Map', 'none'
+v65 <- CreateNamedVariable 'RegExp', 'none'
+v66 <- CreateNamedVariable 'Set', 'none'
+v67 <- CreateNamedVariable 'WeakMap', 'none'
+v68 <- CreateNamedVariable 'WeakSet', 'none'
+v69 <- CreateArray [v34, v61, v40, v62, v63, v21, v64, v37, v25, v65, v66, v45, v67, v68]
+v70 <- CreateNamedVariable 'functions', 'var', v69
+BeginForOfLoop v70 -> v71
+    v72 <- GetProperty v21, 'prototype'
+    v73 <- Construct v71, []
+    v74 <- GetProperty v71, 'prototype'
+EndForOfLoop
+v75 <- CreateNamedVariable 'Promise', 'none'
+v76 <- BeginPlainFunction -> 
+EndPlainFunction
+v77 <- Construct v75, [v76]
+v78 <- CreateNamedVariable 'p', 'var', v77
+v79 <- GetProperty v75, 'prototype'
+v80 <- CreateNamedVariable 'DataView', 'none'
+v81 <- Construct v61, []
+v82 <- Construct v80, [v81]
+v83 <- CreateNamedVariable 'dv', 'var', v82
+v84 <- GetProperty v80, 'prototype'
+
+
+function assertPrototypeOf(a1, a2) {
+    Object.getPrototypeOf(a1);
+}
+function f5() {
+    Object.getPrototypeOf(undefined);
+}
+f5();
+function f11() {
+    Object.getPrototypeOf(null);
+}
+f11();
+function F() {
+}
+const v17 = new F();
+var y = v17;
+F.prototype;
+F();
+Function.prototype;
+const v24 = { x: 5 };
+Object.prototype;
+const v29 = { x: 5, __proto__: null };
+[1,2];
+Array.prototype;
+Number.prototype;
+Boolean.prototype;
+Boolean.prototype;
+String.prototype;
+Symbol();
+Symbol.prototype;
+var errorFunctions = [EvalError,RangeError,ReferenceError,SyntaxError,TypeError,URIError];
+for (const v57 of errorFunctions) {
+    new v57();
+    v57.prototype;
+}
+var functions = [Array,ArrayBuffer,Boolean,Date,Error,Function,Map,Number,Object,RegExp,Set,String,WeakMap,WeakSet];
+for (const v71 of functions) {
+    Function.prototype;
+    new v71();
+    v71.prototype;
+}
+function f76() {
+}
+const v77 = new Promise(f76);
+var p = v77;
+Promise.prototype;
+const v81 = new ArrayBuffer();
+const v82 = new DataView(v81);
+var dv = v82;
+DataView.prototype;
+
+FuzzIL program written to corpus/get-prototype-of.fzil

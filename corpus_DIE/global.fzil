@@ -1,0 +1,48 @@
+v0 <- CreateNamedVariable 'globalThis', 'none'
+v1 <- LoadThis
+v2 <- LoadThis
+v3 <- GetProperty v2, 'globalThis'
+v4 <- LoadThis
+v5 <- GetProperty v0, 'globalThis'
+v6 <- LoadThis
+v7 <- GetProperty v0, 'globalThis'
+v8 <- GetProperty v7, 'globalThis'
+v9 <- LoadThis
+v10 <- GetProperty v0, 'globalThis'
+v11 <- GetProperty v10, 'globalThis'
+v12 <- GetProperty v11, 'globalThis'
+v13 <- LoadThis
+BeginBlockStatement
+EndBlockStatement
+BeginBlockStatement
+    v14 <- LoadThis
+    v15 <- LoadString 'globalThis'
+    v16 <- CreateNamedVariable 'Object', 'none'
+    v17 <- CallMethod v16, 'getOwnPropertyDescriptor', [v14, v15]
+    v18 <- CreateNamedVariable 'descriptor', 'const', v17
+    v19 <- GetProperty v18, 'value'
+    v20 <- LoadThis
+    v21 <- GetProperty v18, 'writable'
+    v22 <- LoadBoolean 'true'
+    v23 <- GetProperty v18, 'enumerable'
+    v24 <- LoadBoolean 'false'
+    v25 <- GetProperty v18, 'configurable'
+    v26 <- LoadBoolean 'true'
+EndBlockStatement
+
+
+this.globalThis;
+globalThis.globalThis;
+globalThis.globalThis.globalThis;
+globalThis.globalThis.globalThis.globalThis;
+{
+}
+{
+    const descriptor = Object.getOwnPropertyDescriptor(this, "globalThis");
+    descriptor.value;
+    descriptor.writable;
+    descriptor.enumerable;
+    descriptor.configurable;
+}
+
+FuzzIL program written to corpus/global.fzil

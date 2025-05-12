@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'foo'
+    v2 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v3 <- EndObjectLiteral
+    v4 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `has`, v4
+    v5 <- EndObjectLiteral
+    v6 <- Construct v2, [v3, v5]
+    v7 <- TestIn v1, v6
+EndPlainFunction
+v8 <- CallFunction v0, []
+v9 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function f0() {
+    const v3 = {};
+    const v6 = new Proxy(v3, { has: 0 });
+    "foo" in v6;
+}
+f0();
+
+FuzzIL program written to corpus/regress-756608.fzil

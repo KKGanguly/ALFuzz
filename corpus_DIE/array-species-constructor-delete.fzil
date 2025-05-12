@@ -1,0 +1,83 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'x', 'let', v0
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- BeginArrowFunction -> 
+EndArrowFunction
+v4 <- CallMethod v1, 'map', [v3]
+v5 <- GetProperty v4, 'constructor'
+v6 <- BeginArrowFunction -> 
+EndArrowFunction
+v7 <- CallMethod v1, 'filter', [v6]
+v8 <- GetProperty v7, 'constructor'
+v9 <- CallMethod v1, 'slice', []
+v10 <- GetProperty v9, 'constructor'
+v11 <- CallMethod v1, 'splice', []
+v12 <- GetProperty v11, 'constructor'
+v13 <- LoadInteger '1'
+v14 <- CreateArray [v13]
+v15 <- CallMethod v1, 'concat', [v14]
+v16 <- GetProperty v15, 'constructor'
+v17 <- LoadInteger '1'
+v18 <- LoadInteger '1'
+v19 <- CreateArray [v18]
+v20 <- CallMethod v1, 'concat', [v19]
+v21 <- GetElement v20, '0'
+v22 <- BeginClassDefinition v2
+EndClassDefinition
+v23 <- CreateNamedVariable 'Object', 'none'
+v24 <- GetProperty v23, 'prototype'
+SetProperty v24, 'constructor', v22
+v25 <- GetProperty v2, 'prototype'
+v26 <- DeleteProperty v25, 'constructor'
+v27 <- BeginArrowFunction -> 
+EndArrowFunction
+v28 <- CallMethod v1, 'map', [v27]
+v29 <- GetProperty v28, 'constructor'
+v30 <- BeginArrowFunction -> 
+EndArrowFunction
+v31 <- CallMethod v1, 'filter', [v30]
+v32 <- GetProperty v31, 'constructor'
+v33 <- CallMethod v1, 'slice', []
+v34 <- GetProperty v33, 'constructor'
+v35 <- CallMethod v1, 'splice', []
+v36 <- GetProperty v35, 'constructor'
+v37 <- LoadInteger '1'
+v38 <- CreateArray [v37]
+v39 <- CallMethod v1, 'concat', [v38]
+v40 <- GetProperty v39, 'constructor'
+v41 <- LoadInteger '1'
+v42 <- LoadInteger '1'
+v43 <- CreateArray [v42]
+v44 <- CallMethod v1, 'concat', [v43]
+v45 <- GetElement v44, '0'
+
+
+let x = [];
+const v3 = () => {
+};
+x.map(v3).constructor;
+const v6 = () => {
+};
+x.filter(v6).constructor;
+x.slice().constructor;
+x.splice().constructor;
+x.concat([1]).constructor;
+x.concat([1])[0];
+class C22 extends Array {
+}
+const t13 = Object.prototype;
+t13.constructor = C22;
+const t15 = Array.prototype;
+delete t15.constructor;
+const v27 = () => {
+};
+x.map(v27).constructor;
+const v30 = () => {
+};
+x.filter(v30).constructor;
+x.slice().constructor;
+x.splice().constructor;
+x.concat([1]).constructor;
+x.concat([1])[0];
+
+FuzzIL program written to corpus/array-species-constructor-delete.fzil

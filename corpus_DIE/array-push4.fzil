@@ -1,0 +1,131 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'v', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'my_array_proto', 'var', v2
+v4 <- CreateArray []
+v5 <- GetProperty v4, '__proto__'
+SetProperty v3, '__proto__', v5
+v6 <- LoadString '0'
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadString 'get '
+    v9 <- BinaryOperation v8, '+', v1
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> v11
+    Update v1, '+', v11
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v7
+    ObjectLiteralAddProperty `set`, v10
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'Object', 'none'
+v14 <- CallMethod v13, 'defineProperty', [v3, v6, v12]
+v15 <- CreateArray []
+v16 <- CreateNamedVariable 'array', 'none'
+Reassign v16, v15
+v17 <- CreateNamedVariable 'array', 'none'
+SetProperty v17, '__proto__', v3
+v18 <- LoadInteger '10'
+SetElement v17, '0', v18
+v19 <- LoadInteger '0'
+v20 <- GetProperty v17, 'length'
+v21 <- LoadInteger '10'
+v22 <- LoadString 'get 10'
+v23 <- GetElement v17, '0'
+v24 <- LoadInteger '100'
+v25 <- CreateNamedVariable 'Array', 'none'
+v26 <- GetProperty v25, 'prototype'
+v27 <- GetProperty v26, 'push'
+v28 <- CallMethod v27, 'call', [v17, v24]
+v29 <- LoadInteger '1'
+v30 <- GetProperty v17, 'length'
+v31 <- LoadInteger '110'
+v32 <- LoadString 'get 110'
+v33 <- GetElement v17, '0'
+v34 <- CreateArray []
+Reassign v17, v34
+SetProperty v17, '__proto__', v3
+v35 <- LoadInteger '0'
+v36 <- GetProperty v17, 'length'
+v37 <- LoadInteger '110'
+v38 <- CallMethod v17, 'push', [v37]
+v39 <- LoadInteger '1'
+v40 <- GetProperty v17, 'length'
+v41 <- LoadInteger '220'
+v42 <- LoadString 'get 220'
+v43 <- GetElement v17, '0'
+v44 <- LoadInteger '0'
+Reassign v1, v44
+v45 <- BeginPlainFunction -> v46, v47
+    v48 <- CallMethod v46, 'push', [v47]
+EndPlainFunction
+v49 <- CreateArray []
+Reassign v17, v49
+SetProperty v17, '__proto__', v3
+v50 <- LoadInteger '100'
+v51 <- CallFunction v45, [v17, v50]
+v52 <- LoadInteger '1'
+v53 <- GetProperty v17, 'length'
+v54 <- LoadInteger '100'
+v55 <- LoadInteger '100'
+v56 <- CallFunction v45, [v17, v55]
+v57 <- LoadInteger '2'
+v58 <- GetProperty v17, 'length'
+v59 <- LoadInteger '100'
+v60 <- LoadString 'get 100'
+v61 <- GetElement v17, '0'
+v62 <- CreateArray []
+Reassign v17, v62
+SetProperty v17, '__proto__', v3
+v63 <- LoadInteger '100'
+v64 <- CallFunction v45, [v17, v63]
+v65 <- LoadInteger '1'
+v66 <- GetProperty v17, 'length'
+v67 <- LoadInteger '200'
+v68 <- LoadString 'get 200'
+v69 <- GetElement v17, '0'
+
+
+var v = 0;
+var my_array_proto = {};
+my_array_proto.__proto__ = ([]).__proto__;
+function f7() {
+    return "get " + v;
+}
+function f10(a11) {
+    v += a11;
+}
+Object.defineProperty(my_array_proto, "0", { get: f7, set: f10 });
+array = [];
+array.__proto__ = my_array_proto;
+array[0] = 10;
+array.length;
+array[0];
+Array.prototype.push.call(array, 100);
+array.length;
+array[0];
+array = [];
+array.__proto__ = my_array_proto;
+array.length;
+array.push(110);
+array.length;
+array[0];
+v = 0;
+function push_wrapper_1(a46, a47) {
+    a46.push(a47);
+}
+array = [];
+array.__proto__ = my_array_proto;
+push_wrapper_1(array, 100);
+array.length;
+push_wrapper_1(array, 100);
+array.length;
+array[0];
+array = [];
+array.__proto__ = my_array_proto;
+push_wrapper_1(array, 100);
+array.length;
+array[0];
+
+FuzzIL program written to corpus/array-push4.fzil

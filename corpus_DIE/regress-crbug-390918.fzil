@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadFloat '1.1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v2
+    v3 <- EndObjectLiteral
+    v4 <- CreateNamedVariable 'arr', 'var', v3
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- LoadInteger '2'
+        v8 <- Compare v6, '<', v7
+    BeginForLoopAfterthought v8 -> v9
+        v10 <- UnaryOperation v9, '++'
+    BeginForLoopBody -> v11
+        v12 <- LoadInteger '0'
+        v13 <- LoadInteger '2'
+        v14 <- BinaryOperation v13, '*', v1
+        SetComputedProperty v4, v14, v12
+    EndForLoop
+EndPlainFunction
+BeginObjectLiteral
+v15 <- EndObjectLiteral
+v16 <- CallFunction v0, [v15]
+BeginObjectLiteral
+v17 <- EndObjectLiteral
+v18 <- CallFunction v0, [v17]
+v19 <- LoadInteger '1004'
+v20 <- CallFunction v0, [v19]
+
+
+function f(a1) {
+    var arr = { a: 1.1 };
+    for (let i6 = 0; i6 < 2; i6++) {
+        arr[2 * a1] = 0;
+    }
+}
+f({});
+f({});
+f(1004);
+
+FuzzIL program written to corpus/regress-crbug-390918.fzil

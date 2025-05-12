@@ -1,0 +1,41 @@
+v0 <- CreateNamedVariable 'Int32Array', 'none'
+v1 <- LoadInteger '100'
+v2 <- Construct v0, [v1]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'o', 'var', v3
+v5 <- LoadInteger '10'
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- GetProperty v6, 'prototype'
+v8 <- LoadFloat '1.3'
+SetComputedProperty v7, v8, v5
+v9 <- LoadUndefined
+v10 <- LoadFloat '1.3'
+v11 <- GetComputedProperty v4, v10
+v12 <- LoadInteger '100'
+v13 <- Construct v0, [v12]
+v14 <- CreateNamedVariable 'o', 'var', v13
+v15 <- LoadInteger '200'
+v16 <- Construct v0, [v15]
+v17 <- CreateNamedVariable 'o2', 'var', v16
+SetProperty v14, '__proto__', v17
+v18 <- LoadUndefined
+v19 <- LoadFloat '1.3'
+v20 <- CreateNamedVariable 'Reflect', 'none'
+v21 <- CallMethod v20, 'get', [v14, v19, v17]
+
+
+const v2 = new Int32Array(100);
+var o = { __proto__: v2 };
+const t2 = Object.prototype;
+t2[1.3] = 10;
+o[1.3];
+const v13 = new Int32Array(100);
+var o = v13;
+const v16 = new Int32Array(200);
+var o2 = v16;
+o.__proto__ = o2;
+Reflect.get(o, 1.3, o2);
+
+FuzzIL program written to corpus/regress-integer-indexed-element.fzil

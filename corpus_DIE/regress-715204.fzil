@@ -1,0 +1,22 @@
+v0 <- LoadBoolean 'true'
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- LoadBoolean 'false'
+Reassign v1, v2
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '1'
+    Reassign v1, v4
+    v5 <- UnaryOperation '!', v1
+    Return v5
+EndPlainFunction
+v6 <- CallFunction v3, []
+
+
+var global = true;
+global = false;
+function f() {
+    global = 1;
+    return !global;
+}
+f();
+
+FuzzIL program written to corpus/regress-715204.fzil

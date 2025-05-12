@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'property'
+    v3 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v4 <- CallMethod v1, '__defineSetter__', [v2, v3]
+EndPlainFunction
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- GetProperty v5, 'prototype'
+v7 <- CallFunction v0, [v6]
+v8 <- LoadInteger '0'
+v9 <- CreateNamedVariable 'property', 'none'
+Reassign v9, v8
+v10 <- LoadThis
+v11 <- CallFunction v0, [v10]
+v12 <- LoadThis
+v13 <- CallMethod v5, 'keys', [v12]
+v14 <- CreateNamedVariable 'keys', 'var', v13
+
+
+function defineSetter(a1) {
+    function f3() {
+    }
+    a1.__defineSetter__("property", f3);
+}
+defineSetter(Object.prototype);
+property = 0;
+defineSetter(this);
+var keys = Object.keys(this);
+
+FuzzIL program written to corpus/regress-crbug-148376.fzil

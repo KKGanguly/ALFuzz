@@ -1,0 +1,29 @@
+v0 <- LoadRegExp 'x' 'g'
+v1 <- CreateNamedVariable 'regexp', 'let', v0
+v2 <- LoadInteger '1'
+v3 <- UnaryOperation '-', v2
+SetProperty v1, 'lastIndex', v3
+v4 <- LoadString 'axb'
+v5 <- CallMethod v1, 'test', [v4]
+v6 <- LoadInteger '2'
+v7 <- GetProperty v1, 'lastIndex'
+v8 <- LoadInteger '1'
+v9 <- UnaryOperation '-', v8
+SetProperty v1, 'lastIndex', v9
+v10 <- LoadString 'x'
+v11 <- LoadString 'axb'
+v12 <- CallMethod v1, 'exec', [v11]
+v13 <- GetElement v12, '0'
+v14 <- LoadInteger '2'
+v15 <- GetProperty v1, 'lastIndex'
+
+
+let regexp = /x/g;
+regexp.lastIndex = -1;
+regexp.test("axb");
+regexp.lastIndex;
+regexp.lastIndex = -1;
+regexp.exec("axb")[0];
+regexp.lastIndex;
+
+FuzzIL program written to corpus/regexp-tolength.fzil

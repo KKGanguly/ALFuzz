@@ -1,0 +1,66 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetElement v1, '1'
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- CreateArray [v5, v5, v5]
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v6
+    v7 <- EndObjectLiteral
+    v8 <- CreateNamedVariable 'o', 'var', v7
+    v9 <- LoadInteger '1'
+    v10 <- GetProperty v8, 'a'
+    SetProperty v10, 'some_property', v9
+    v11 <- GetProperty v8, 'a'
+    v12 <- CallFunction v0, [v11]
+    Return v12
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14
+    BeginObjectLiteral
+    v15 <- EndObjectLiteral
+    v16 <- CreateArray [v15, v14, v14]
+    v17 <- CreateNamedVariable 'l', 'var', v16
+    v18 <- CallFunction v0, [v17]
+    Return v18
+EndPlainFunction
+v19 <- LoadFloat '0.5'
+v20 <- CallFunction v4, [v19]
+BeginObjectLiteral
+v21 <- EndObjectLiteral
+v22 <- CallFunction v13, [v21]
+v23 <- LoadFloat '0.6'
+v24 <- CallFunction v4, [v23]
+v25 <- LoadNull
+v26 <- CallFunction v13, [v25]
+v27 <- LoadFloat '0.5'
+v28 <- CallFunction v4, [v27]
+BeginObjectLiteral
+v29 <- EndObjectLiteral
+v30 <- CallFunction v13, [v29]
+v31 <- LoadFloat '0.7'
+v32 <- CallFunction v4, [v31]
+
+
+function get1(a1, a2) {
+    return a1[1];
+}
+function with_double(a5) {
+    const v6 = [a5,a5,a5];
+    var o = { a: v6 };
+    const t6 = o.a;
+    t6.some_property = 1;
+    return get1(o.a);
+}
+function with_tagged(a14) {
+    var l = [{},a14,a14];
+    return get1(l);
+}
+with_double(0.5);
+with_tagged({});
+with_double(0.6);
+with_tagged(null);
+with_double(0.5);
+with_tagged({});
+with_double(0.7);
+
+FuzzIL program written to corpus/regress-780658.fzil

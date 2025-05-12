@@ -1,0 +1,30 @@
+v0 <- LoadRegExp '.' 'g'
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v2
+v3 <- EndObjectLiteral
+SetProperty v1, 'lastIndex', v3
+v4 <- LoadString 'X'
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadString 'X'
+    Return v7
+EndPlainFunction
+v8 <- LoadString 'x'
+v9 <- CallMethod v8, 'replace', [v1, v5]
+v10 <- LoadInteger '0'
+v11 <- GetProperty v1, 'lastIndex'
+
+
+var global = /./g;
+function f2() {
+}
+global.lastIndex = { valueOf: f2 };
+function f5(a6) {
+    return "X";
+}
+("x").replace(global, f5);
+global.lastIndex;
+
+FuzzIL program written to corpus/regexp-replace-lastindex.fzil

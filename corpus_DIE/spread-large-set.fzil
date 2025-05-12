@@ -1,0 +1,81 @@
+v0 <- LoadInteger '130000'
+v1 <- CreateNamedVariable 'n', 'const', v0
+BeginBlockStatement
+    v2 <- CreateNamedVariable 'Set', 'none'
+    v3 <- Construct v2, []
+    v4 <- CreateNamedVariable 'x', 'let', v3
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- Compare v6, '<', v1
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation '++', v8
+    BeginForLoopBody -> v10
+        v11 <- CallMethod v4, 'add', [v10]
+    EndForLoop
+    v12 <- CreateArrayWithSpread [...v4]
+    v13 <- CreateNamedVariable 'a', 'let', v12
+EndBlockStatement
+BeginBlockStatement
+    v14 <- CreateNamedVariable 'Set', 'none'
+    v15 <- Construct v14, []
+    v16 <- CreateNamedVariable 'x', 'let', v15
+    BeginForLoopInitializer
+        v17 <- LoadInteger '0'
+    BeginForLoopCondition -> v18
+        v19 <- Compare v18, '<', v1
+    BeginForLoopAfterthought v19 -> v20
+        v21 <- UnaryOperation '++', v20
+    BeginForLoopBody -> v22
+        v23 <- CallMethod v16, 'add', [v22]
+    EndForLoop
+    v24 <- CallMethod v16, 'values', []
+    v25 <- CreateArrayWithSpread [...v24]
+    v26 <- CreateNamedVariable 'a', 'let', v25
+EndBlockStatement
+BeginBlockStatement
+    v27 <- CreateNamedVariable 'Set', 'none'
+    v28 <- Construct v27, []
+    v29 <- CreateNamedVariable 'x', 'let', v28
+    BeginForLoopInitializer
+        v30 <- LoadInteger '0'
+    BeginForLoopCondition -> v31
+        v32 <- Compare v31, '<', v1
+    BeginForLoopAfterthought v32 -> v33
+        v34 <- UnaryOperation '++', v33
+    BeginForLoopBody -> v35
+        v36 <- CallMethod v29, 'add', [v35]
+    EndForLoop
+    v37 <- CallMethod v29, 'keys', []
+    v38 <- CreateArrayWithSpread [...v37]
+    v39 <- CreateNamedVariable 'a', 'let', v38
+EndBlockStatement
+
+
+const n = 130000;
+{
+    const v3 = new Set();
+    let x = v3;
+    for (let i6 = 0; i6 < n; ++i6) {
+        x.add(i6);
+    }
+    let a = [...x];
+}
+{
+    const v15 = new Set();
+    let x = v15;
+    for (let i18 = 0; i18 < n; ++i18) {
+        x.add(i18);
+    }
+    let a = [...x.values()];
+}
+{
+    const v28 = new Set();
+    let x = v28;
+    for (let i31 = 0; i31 < n; ++i31) {
+        x.add(i31);
+    }
+    let a = [...x.keys()];
+}
+
+FuzzIL program written to corpus/spread-large-set.fzil

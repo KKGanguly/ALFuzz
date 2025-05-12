@@ -1,0 +1,75 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallMethod v1, 'f', []
+    v3 <- CallMethod v1, 'f', []
+    v4 <- CreateNamedVariable 'x', 'var', v3
+    v5 <- LoadInteger '87'
+    v6 <- LoadInteger '87'
+    v7 <- CallMethod v1, 'f', []
+    v8 <- CallMethod v1, 'f', []
+    v9 <- UnaryOperation '!', v8
+    BeginIf v9
+        v10 <- LoadBoolean 'false'
+    EndIf
+EndPlainFunction
+v11 <- LoadBoolean 'false'
+v12 <- LoadInteger '42'
+v13 <- LoadInteger '87'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v11
+    ObjectLiteralAddProperty `y`, v12
+    ObjectLiteralAddProperty `z`, v13
+v14 <- EndObjectLiteral
+v15 <- CreateNamedVariable 'o', 'var', v14
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadThis
+    v18 <- GetProperty v17, 'x'
+    v19 <- LoadThis
+    v20 <- GetProperty v19, 'y'
+    v21 <- LoadThis
+    v22 <- GetProperty v21, 'z'
+    v23 <- TernaryOperation v18, v20, v22
+    Return v23
+EndPlainFunction
+SetProperty v15, 'f', v16
+BeginForLoopInitializer
+    v24 <- LoadInteger '0'
+BeginForLoopCondition -> v25
+    v26 <- LoadInteger '10000'
+    v27 <- Compare v25, '<', v26
+BeginForLoopAfterthought v27 -> v28
+    v29 <- UnaryOperation v28, '++'
+BeginForLoopBody -> v30
+    v31 <- CallFunction v0, [v15]
+EndForLoop
+v32 <- LoadBoolean 'true'
+v33 <- LoadInteger '87'
+v34 <- LoadInteger '42'
+v35 <- GetProperty v15, 'f'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v32
+    ObjectLiteralAddProperty `y`, v33
+    ObjectLiteralAddProperty `z`, v34
+    ObjectLiteralAddProperty `f`, v35
+v36 <- EndObjectLiteral
+v37 <- CallFunction v0, [v36]
+
+
+function TestInlineConditional(a1) {
+    a1.f();
+    var x = a1.f();
+    a1.f();
+    if (!a1.f()) {
+    }
+}
+var o = { x: false, y: 42, z: 87 };
+function f16() {
+    return this.x ? this.y : this.z;
+}
+o.f = f16;
+for (let i25 = 0; i25 < 10000; i25++) {
+    TestInlineConditional(o);
+}
+const v35 = o.f;
+TestInlineConditional({ x: true, y: 87, z: 42, f: v35 });
+
+FuzzIL program written to corpus/inline-conditional.fzil

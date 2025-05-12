@@ -1,0 +1,52 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetElement v1, '0'
+    v3 <- GetElement v1, '0'
+    v4 <- BinaryOperation v2, '+', v3
+    v5 <- CreateNamedVariable 'res', 'var', v4
+    v6 <- LoadInteger '0'
+    v7 <- Compare v5, '==', v6
+    BeginIf v7
+        v8 <- LoadInteger '1'
+        SetElement v1, '0', v8
+    EndIf
+    v9 <- GetElement v1, '0'
+    Return v9
+EndPlainFunction
+v10 <- CreateNamedVariable 'Array', 'none'
+v11 <- Construct v10, []
+v12 <- CreateNamedVariable 'a', 'var', v11
+v13 <- LoadInteger '100'
+v14 <- CreateNamedVariable 'n', 'var', v13
+v15 <- LoadInteger '0'
+v16 <- CreateNamedVariable 'result', 'var', v15
+BeginForLoopInitializer
+    v17 <- LoadInteger '0'
+BeginForLoopCondition -> v18
+    v19 <- Compare v18, '<', v14
+BeginForLoopAfterthought v19 -> v20
+    v21 <- UnaryOperation '++', v20
+BeginForLoopBody -> v22
+    v23 <- LoadInteger '0'
+    SetElement v12, '0', v23
+    v24 <- CallFunction v0, [v12]
+    Update v16, '+', v24
+EndForLoop
+
+
+function test(a1) {
+    var res = a1[0] + a1[0];
+    if (res == 0) {
+        a1[0] = 1;
+    }
+    return a1[0];
+}
+const v11 = new Array();
+var a = v11;
+var n = 100;
+var result = 0;
+for (let i18 = 0; i18 < n; ++i18) {
+    a[0] = 0;
+    result += test(a);
+}
+
+FuzzIL program written to corpus/regress-gvn.fzil

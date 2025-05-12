@@ -1,0 +1,25 @@
+v0 <- LoadNull
+v1 <- CreateNamedVariable 'Object', 'none'
+v2 <- CallMethod v1, 'create', [v0]
+v3 <- CreateNamedVariable 'prototype', 'var', v2
+v4 <- CallMethod v1, 'create', [v3]
+v5 <- CreateNamedVariable 'object', 'var', v4
+v6 <- BeginPlainFunction -> 
+    v7 <- CallMethod v1, 'getPrototypeOf', [v5]
+    Return v7
+EndPlainFunction
+v8 <- CallFunction v6, []
+v9 <- CallFunction v6, []
+v10 <- CallFunction v6, []
+
+
+var prototype = Object.create(null);
+var object = Object.create(prototype);
+function foo() {
+    return Object.getPrototypeOf(object);
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/object-getprototypeof.fzil

@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- UnaryOperation '!', v1
+    BeginIf v2
+        v3 <- LoadBoolean 'false'
+        Return v3
+    EndIf
+    v4 <- CreateNamedVariable 'print', 'none'
+    v5 <- CallFunction v4, []
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- GetProperty v7, 'length'
+    Return v8
+EndPlainFunction
+v9 <- LoadString '0'
+v10 <- CallFunction v6, [v9]
+v11 <- LoadString '1'
+v12 <- CallFunction v6, [v11]
+v13 <- BeginPlainFunction -> 
+    v14 <- CreateArray []
+    v15 <- CallFunction v6, [v14]
+    v16 <- CallFunction v0, [v15]
+EndPlainFunction
+v17 <- CallFunction v13, []
+v18 <- CallFunction v13, []
+
+
+function h(a1) {
+    if (!a1) {
+        return false;
+    }
+    print();
+}
+function g(a7) {
+    return a7.length;
+}
+g("0");
+g("1");
+function f() {
+    h(g([]));
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-599412.fzil

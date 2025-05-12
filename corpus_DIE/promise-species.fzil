@@ -1,0 +1,62 @@
+v0 <- CreateNamedVariable 'Promise', 'none'
+v1 <- BeginClassDefinition v0
+EndClassDefinition
+v2 <- BeginPlainFunction -> 
+    v3 <- BeginArrowFunction -> v4
+        v5 <- LoadInteger '88'
+        Return v5
+    EndArrowFunction
+    v6 <- BeginArrowFunction -> v7
+        v8 <- LoadInteger '88'
+        Return v8
+    EndArrowFunction
+    v9 <- Construct v0, [v6]
+    v10 <- CallMethod v9, 'then', [v3]
+    Return v10
+EndPlainFunction
+v11 <- LoadUndefined
+v12 <- CreateNamedVariable 'y', 'let', v11
+v13 <- CallFunction v2, []
+Reassign v12, v13
+v14 <- TestInstanceOf v12, v1
+v15 <- CallFunction v2, []
+Reassign v12, v15
+v16 <- TestInstanceOf v12, v1
+v17 <- CallFunction v2, []
+Reassign v12, v17
+v18 <- TestInstanceOf v12, v1
+v19 <- CreateNamedVariable 'Symbol', 'none'
+v20 <- GetProperty v19, 'species'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v1
+v21 <- EndObjectLiteral
+v22 <- CreateNamedVariable 'Reflect', 'none'
+v23 <- CallMethod v22, 'defineProperty', [v0, v20, v21]
+v24 <- CallFunction v2, []
+Reassign v12, v24
+
+
+class C1 extends Promise {
+}
+function f() {
+    const v3 = (a4) => {
+        return 88;
+    };
+    const v6 = (a7) => {
+        return 88;
+    };
+    const v9 = new Promise(v6);
+    return v9.then(v3);
+}
+let y;
+y = f();
+y instanceof C1;
+y = f();
+y instanceof C1;
+y = f();
+y instanceof C1;
+const v20 = Symbol.species;
+Reflect.defineProperty(Promise, v20, { value: C1 });
+y = f();
+
+FuzzIL program written to corpus/promise-species.fzil

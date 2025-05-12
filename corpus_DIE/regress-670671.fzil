@@ -1,0 +1,50 @@
+v0 <- LoadInteger '4'
+v1 <- CreateNamedVariable 'min_ptr_size', 'const', v0
+v2 <- LoadInteger '507136'
+v3 <- CreateNamedVariable 'max_regular_heap_object_size', 'const', v2
+v4 <- BinaryOperation v3, '/', v1
+v5 <- CreateNamedVariable 'num_iterations', 'const', v4
+v6 <- LoadInteger '0'
+v7 <- CreateNamedVariable 'i', 'let', v6
+v8 <- LoadRegExp 'foo.bar' ''
+v9 <- CreateNamedVariable 're', 'const', v8
+v10 <- CreateNamedVariable 'RegExp', 'none'
+v11 <- GetProperty v10, 'prototype'
+v12 <- GetProperty v11, 'exec'
+v13 <- CreateNamedVariable 'RegExpPrototypeExec', 'const', v12
+v14 <- BeginArrowFunction -> v15
+    v16 <- UnaryOperation v7, '++'
+    v17 <- Compare v16, '<', v5
+    v18 <- CallMethod v13, 'call', [v9, v15]
+    v19 <- LoadNull
+    v20 <- TernaryOperation v17, v18, v19
+    Return v20
+EndArrowFunction
+SetProperty v9, 'exec', v14
+v21 <- LoadString 'global'
+v22 <- BeginArrowFunction -> 
+    v23 <- LoadBoolean 'true'
+    Return v23
+EndArrowFunction
+v24 <- CallMethod v9, '__defineGetter__', [v21, v22]
+v25 <- LoadString 'foo*bar'
+v26 <- CallMethod v25, 'match', [v9]
+
+
+const min_ptr_size = 4;
+const max_regular_heap_object_size = 507136;
+const num_iterations = max_regular_heap_object_size / min_ptr_size;
+let i = 0;
+const re = /foo.bar/;
+const RegExpPrototypeExec = RegExp.prototype.exec;
+const v14 = (a15) => {
+    return i++ < num_iterations ? RegExpPrototypeExec.call(re, a15) : null;
+};
+re.exec = v14;
+const v22 = () => {
+    return true;
+};
+re.__defineGetter__("global", v22);
+("foo*bar").match(re);
+
+FuzzIL program written to corpus/regress-670671.fzil

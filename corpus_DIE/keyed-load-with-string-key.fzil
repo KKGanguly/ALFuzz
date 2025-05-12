@@ -1,0 +1,31 @@
+v0 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'o', 'var', v1
+v3 <- BeginPlainFunction -> v4, v5
+    v6 <- GetComputedProperty v4, v5
+    Return v6
+EndPlainFunction
+v7 <- LoadString 'foo'
+v8 <- CallFunction v3, [v2, v7]
+v9 <- LoadString 'foo'
+v10 <- CallFunction v3, [v2, v9]
+v11 <- LoadString 'foo'
+v12 <- CallFunction v3, [v2, v11]
+v13 <- LoadString 'foo'
+v14 <- CallFunction v3, [v2, v13]
+v15 <- CallFunction v3, []
+
+
+var o = { foo: "bar" };
+function get(a4, a5) {
+    return a4[a5];
+}
+get(o, "foo");
+get(o, "foo");
+get(o, "foo");
+get(o, "foo");
+get();
+
+FuzzIL program written to corpus/keyed-load-with-string-key.fzil

@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'deopt'
+    Return v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v0
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'x', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadString 'result'
+    Return v6
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadString ''
+    v10 <- Compare v8, '==', v9
+    v11 <- Void_ v10
+    v12 <- CallFunction v4, [v11]
+    Return v12
+EndPlainFunction
+v13 <- CallFunction v7, [v3]
+v14 <- LoadString 'result'
+v15 <- CallFunction v7, [v3]
+
+
+function lazyDeopt() {
+    return "deopt";
+}
+var x = { toString: lazyDeopt };
+function g(a5) {
+    return "result";
+}
+function test(a8) {
+    return g(void (a8 == ""));
+}
+test(x);
+test(x);
+
+FuzzIL program written to corpus/comparison-in-effect-context-deopt.fzil

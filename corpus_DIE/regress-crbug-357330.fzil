@@ -1,0 +1,37 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadUndefined
+    v3 <- CreateNamedVariable 'g', 'var', v2
+    v4 <- LoadBoolean 'true'
+    v5 <- LoadInteger '0'
+    v6 <- BinaryOperation v1, '+', v5
+    Reassign v3, v6
+    v7 <- LoadNull
+    Reassign v3, v7
+    v8 <- TernaryOperation v4, v6, v7
+    v9 <- LoadNull
+    v10 <- Compare v9, '!=', v3
+    BeginIf v10
+    EndIf
+EndPlainFunction
+v11 <- LoadFloat '1.4'
+v12 <- CallFunction v0, [v11]
+v13 <- LoadFloat '1.4'
+v14 <- CallFunction v0, [v13]
+v15 <- LoadFloat '1.4'
+v16 <- CallFunction v0, [v15]
+
+
+function f(a1) {
+    var g;
+    const v6 = a1 + 0;
+    g = v6;
+    g = null;
+    true ? v6 : null;
+    if (null != g) {
+    }
+}
+f(1.4);
+f(1.4);
+f(1.4);
+
+FuzzIL program written to corpus/regress-crbug-357330.fzil

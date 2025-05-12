@@ -1,0 +1,141 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- BeginClassDefinition
+        BeginClassInstanceMethod 's' -> v2
+            v3 <- LoadInteger '10'
+            SetSuperProperty 'bla', v3
+        EndClassInstanceMethod
+    EndClassDefinition
+    v4 <- Construct v1, []
+    v5 <- CreateNamedVariable 'a', 'let', v4
+    v6 <- Construct v1, []
+    v7 <- GetProperty v6, 's'
+    v8 <- CallMethod v7, 'call', [v5]
+    v9 <- LoadInteger '10'
+    v10 <- GetProperty v5, 'bla'
+    v11 <- BeginPlainFunction -> 
+        v12 <- LoadUndefined
+        v13 <- Construct v1, []
+        v14 <- GetProperty v13, 's'
+        v15 <- CallMethod v14, 'call', [v12]
+    EndPlainFunction
+    v16 <- CallFunction v11, []
+    v17 <- CreateNamedVariable 'TypeError', 'none'
+    v18 <- BeginPlainFunction -> 
+        v19 <- LoadInteger '42'
+        v20 <- Construct v1, []
+        v21 <- GetProperty v20, 's'
+        v22 <- CallMethod v21, 'call', [v19]
+    EndPlainFunction
+    v23 <- CallFunction v18, []
+    v24 <- BeginPlainFunction -> 
+        v25 <- LoadNull
+        v26 <- Construct v1, []
+        v27 <- GetProperty v26, 's'
+        v28 <- CallMethod v27, 'call', [v25]
+    EndPlainFunction
+    v29 <- CallFunction v24, []
+    v30 <- BeginPlainFunction -> 
+        v31 <- LoadString 'abc'
+        v32 <- Construct v1, []
+        v33 <- GetProperty v32, 's'
+        v34 <- CallMethod v33, 'call', [v31]
+    EndPlainFunction
+    v35 <- CallFunction v30, []
+EndPlainFunction
+v36 <- CallFunction v0, []
+v37 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v38 <- BeginClassDefinition
+        BeginClassInstanceMethod 's' -> v39
+            v40 <- GetSuperProperty 'bla'
+            Return v40
+        EndClassInstanceMethod
+    EndClassDefinition
+    v41 <- Construct v38, []
+    v42 <- CreateNamedVariable 'a', 'let', v41
+    v43 <- LoadUndefined
+    v44 <- Construct v38, []
+    v45 <- GetProperty v44, 's'
+    v46 <- CallMethod v45, 'call', [v42]
+    v47 <- LoadUndefined
+    v48 <- LoadUndefined
+    v49 <- Construct v38, []
+    v50 <- GetProperty v49, 's'
+    v51 <- CallMethod v50, 'call', [v48]
+    v52 <- LoadUndefined
+    v53 <- LoadInteger '42'
+    v54 <- Construct v38, []
+    v55 <- GetProperty v54, 's'
+    v56 <- CallMethod v55, 'call', [v53]
+    v57 <- LoadUndefined
+    v58 <- LoadNull
+    v59 <- Construct v38, []
+    v60 <- GetProperty v59, 's'
+    v61 <- CallMethod v60, 'call', [v58]
+    v62 <- LoadUndefined
+    v63 <- LoadString 'abc'
+    v64 <- Construct v38, []
+    v65 <- GetProperty v64, 's'
+    v66 <- CallMethod v65, 'call', [v63]
+EndPlainFunction
+v67 <- CallFunction v37, []
+
+
+function StoreToSuper() {
+    'use strict';
+    class C1 {
+        s() {
+            super.bla = 10;
+        }
+    }
+    const v4 = new C1();
+    let a = v4;
+    const v6 = new C1();
+    v6.s.call(a);
+    a.bla;
+    function f11() {
+        const v13 = new C1();
+        v13.s.call(undefined);
+    }
+    f11();
+    function f18() {
+        const v20 = new C1();
+        v20.s.call(42);
+    }
+    f18();
+    function f24() {
+        const v26 = new C1();
+        v26.s.call(null);
+    }
+    f24();
+    function f30() {
+        const v32 = new C1();
+        v32.s.call("abc");
+    }
+    f30();
+}
+StoreToSuper();
+function LoadFromSuper() {
+    'use strict';
+    class C38 {
+        s() {
+            return super.bla;
+        }
+    }
+    const v41 = new C38();
+    let a = v41;
+    const v44 = new C38();
+    v44.s.call(a);
+    const v49 = new C38();
+    v49.s.call(undefined);
+    const v54 = new C38();
+    v54.s.call(42);
+    const v59 = new C38();
+    v59.s.call(null);
+    const v64 = new C38();
+    v64.s.call("abc");
+}
+LoadFromSuper();
+
+FuzzIL program written to corpus/regress-4097.fzil

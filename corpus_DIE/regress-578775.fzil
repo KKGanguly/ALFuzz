@@ -1,0 +1,67 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable '__v_9', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '1000'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+EndForLoop
+v9 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__v_2`, v9
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable '__v_2', 'none'
+Reassign v11, v10
+v12 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+BeginObjectLiteral
+v14 <- EndObjectLiteral
+v15 <- Construct v12, [v13, v14]
+v16 <- CreateNamedVariable '__v_12', 'none'
+Reassign v16, v15
+v17 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v18 <- EndObjectLiteral
+    v19 <- CreateNamedVariable '__v_2', 'none'
+    v20 <- Construct v12, [v18, v19]
+    v21 <- CreateNamedVariable '__v_10', 'var', v20
+    SetProperty v1, '__proto__', v21
+    v22 <- BeginPlainFunction -> 
+        Return v1
+    EndPlainFunction
+    SetProperty v19, 'getPrototypeOf', v22
+    v23 <- CreateNamedVariable '__v_0', 'none'
+    v24 <- CreateNamedVariable 'Object', 'none'
+    v25 <- GetProperty v24, 'prototype'
+    v26 <- GetProperty v25, 'isPrototypeOf'
+    v27 <- CallMethod v26, 'call', [v23, v21]
+EndPlainFunction
+v28 <- CallFunction v17, []
+v29 <- CreateNamedVariable 'RangeError', 'none'
+
+
+var __v_9 = {};
+for (let i3 = 0; i3 < 1000; i3++) {
+}
+__v_2 = { __v_2: 1 };
+const v13 = {};
+const v15 = new Proxy(v13, {});
+__v_12 = v15;
+function f() {
+    const v20 = new Proxy({}, __v_2);
+    var __v_10 = v20;
+    __v_9.__proto__ = __v_10;
+    function f22() {
+        return __v_9;
+    }
+    __v_2.getPrototypeOf = f22;
+    Object.prototype.isPrototypeOf.call(__v_0, __v_10);
+}
+f();
+
+FuzzIL program written to corpus/regress-578775.fzil

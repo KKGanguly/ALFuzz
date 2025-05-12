@@ -1,0 +1,163 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadUndefined
+    v4 <- CreateNamedVariable 'result', 'var', v3
+    v5 <- LoadString 'nonstrict'
+    v6 <- BeginPlainFunction -> 
+        v7 <- LoadThis
+        Reassign v4, v7
+    EndPlainFunction
+    v8 <- BeginPlainFunction -> v9
+        v10 <- LoadThis
+        Reassign v4, v10
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v6
+        ObjectLiteralAddProperty `set`, v8
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'Object', 'none'
+    v13 <- CallMethod v12, 'defineProperty', [v2, v5, v11]
+    v14 <- LoadString 'strict'
+    v15 <- BeginPlainFunction -> 
+        Directive 'use strict'
+        v16 <- LoadThis
+        Reassign v4, v16
+    EndPlainFunction
+    v17 <- BeginPlainFunction -> v18
+        Directive 'use strict'
+        v19 <- LoadThis
+        Reassign v4, v19
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v15
+        ObjectLiteralAddProperty `set`, v17
+    v20 <- EndObjectLiteral
+    v21 <- CallMethod v12, 'defineProperty', [v2, v14, v20]
+    v22 <- BeginPlainFunction -> 
+        v23 <- BeginPlainFunction -> v24
+            v25 <- GetProperty v24, 'nonstrict'
+            Return v25
+        EndPlainFunction
+        v26 <- BeginPlainFunction -> v27
+            v28 <- GetProperty v27, 'strict'
+            Return v28
+        EndPlainFunction
+        v29 <- CallFunction v23, [v1]
+        v30 <- CallFunction v23, [v1]
+        v31 <- LoadUndefined
+        Reassign v4, v31
+        v32 <- CallFunction v23, [v1]
+        v33 <- LoadString 'object'
+        v34 <- TypeOf v4
+        v35 <- CallFunction v26, [v1]
+        v36 <- CallFunction v26, [v1]
+        v37 <- LoadUndefined
+        Reassign v4, v37
+        v38 <- CallFunction v26, [v1]
+        v39 <- TypeOf v1
+        v40 <- TypeOf v4
+    EndPlainFunction
+    v41 <- CallFunction v22, []
+    v42 <- BeginPlainFunction -> 
+        v43 <- BeginPlainFunction -> v44
+            v45 <- LoadInteger '10'
+            SetProperty v44, 'nonstrict', v45
+            Return v45
+        EndPlainFunction
+        v46 <- BeginPlainFunction -> v47
+            v48 <- LoadInteger '10'
+            SetProperty v47, 'strict', v48
+            Return v48
+        EndPlainFunction
+        v49 <- CallFunction v43, [v1]
+        v50 <- CallFunction v43, [v1]
+        v51 <- LoadUndefined
+        Reassign v4, v51
+        v52 <- CallFunction v43, [v1]
+        v53 <- LoadString 'object'
+        v54 <- TypeOf v4
+        v55 <- CallFunction v46, [v1]
+        v56 <- CallFunction v46, [v1]
+        v57 <- LoadUndefined
+        Reassign v4, v57
+        v58 <- CallFunction v46, [v1]
+    EndPlainFunction
+    v59 <- CallFunction v42, []
+EndPlainFunction
+v60 <- LoadInteger '1'
+v61 <- CreateNamedVariable 'Number', 'none'
+v62 <- GetProperty v61, 'prototype'
+v63 <- CallFunction v0, [v60, v62]
+v64 <- LoadString 'string'
+v65 <- CreateNamedVariable 'String', 'none'
+v66 <- GetProperty v65, 'prototype'
+v67 <- CallFunction v0, [v64, v66]
+v68 <- LoadBoolean 'true'
+v69 <- CreateNamedVariable 'Boolean', 'none'
+v70 <- GetProperty v69, 'prototype'
+v71 <- CallFunction v0, [v68, v70]
+
+
+function test(a1, a2) {
+    var result;
+    function f6() {
+        result = this;
+    }
+    function f8(a9) {
+        result = this;
+    }
+    Object.defineProperty(a2, "nonstrict", { get: f6, set: f8 });
+    function f15() {
+        'use strict';
+        result = this;
+    }
+    function f17(a18) {
+        'use strict';
+        result = this;
+    }
+    Object.defineProperty(a2, "strict", { get: f15, set: f17 });
+    function f22() {
+        function nonstrict(a24) {
+            return a24.nonstrict;
+        }
+        function strict(a27) {
+            return a27.strict;
+        }
+        nonstrict(a1);
+        nonstrict(a1);
+        result = undefined;
+        nonstrict(a1);
+        typeof result;
+        strict(a1);
+        strict(a1);
+        result = undefined;
+        strict(a1);
+        typeof a1;
+        typeof result;
+    }
+    f22();
+    function f42() {
+        function nonstrict(a44) {
+            a44.nonstrict = 10;
+            return 10;
+        }
+        function strict(a47) {
+            a47.strict = 10;
+            return 10;
+        }
+        nonstrict(a1);
+        nonstrict(a1);
+        result = undefined;
+        nonstrict(a1);
+        typeof result;
+        strict(a1);
+        strict(a1);
+        result = undefined;
+        strict(a1);
+    }
+    f42();
+}
+test(1, Number.prototype);
+test("string", String.prototype);
+test(true, Boolean.prototype);
+
+FuzzIL program written to corpus/value-wrapper-accessor.fzil

@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Math', 'none'
+    v3 <- CallMethod v2, 'round', [v1]
+EndPlainFunction
+v4 <- LoadInteger '1'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadInteger '2'
+v7 <- CallFunction v0, [v6]
+v8 <- BeginPlainFunction -> 
+    v9 <- CreateNamedVariable 'Symbol', 'none'
+    v10 <- CallFunction v9, []
+    v11 <- CallFunction v0, [v10]
+EndPlainFunction
+v12 <- CallFunction v8, []
+v13 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function foo(a1) {
+    Math.round(a1);
+}
+foo(1);
+foo(2);
+function f8() {
+    foo(Symbol());
+}
+f8();
+
+FuzzIL program written to corpus/regress-4389-4.fzil

@@ -1,0 +1,33 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- GetElement v1, '0'
+    v4 <- UnaryOperation '+', v3
+    SetElement v1, '0', v4
+    v5 <- LoadRegExp '\u23a1|__v_4' ''
+    Reassign v1, v5
+EndPlainFunction
+v6 <- CallFunction v2, []
+v7 <- CallFunction v2, []
+v8 <- CallFunction v2, []
+v9 <- BeginPlainFunction -> 
+    v10 <- CallFunction v2, []
+EndPlainFunction
+v11 <- CallFunction v9, []
+
+
+var o = {};
+function bar() {
+    o[0] = +o[0];
+    o = /\u23a1|__v_4/;
+}
+bar();
+bar();
+bar();
+function foo() {
+    bar();
+}
+foo();
+
+FuzzIL program written to corpus/regress-crbug-629823.fzil

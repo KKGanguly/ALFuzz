@@ -1,0 +1,157 @@
+v0 <- CreateNamedVariable 'isNeverOptimizeLiteMode', 'none'
+v1 <- CallFunction v0, []
+BeginIf v1
+    v2 <- LoadString 'Warning: skipping test that requires optimization in Lite mode.'
+    v3 <- CreateNamedVariable 'print', 'none'
+    v4 <- CallFunction v3, [v2]
+    v5 <- LoadInteger '0'
+    v6 <- CreateNamedVariable 'quit', 'none'
+    v7 <- CallFunction v6, [v5]
+EndIf
+v8 <- CreateNamedVariable 'isAlwaysOptimize', 'none'
+v9 <- CallFunction v8, []
+v10 <- BeginPlainFunction -> 
+    BeginDoWhileLoopBody
+        BeginDoWhileLoopBody
+            v11 <- CreateNamedVariable 'f0', 'none'
+            v12 <- CallFunction v11, [v10]
+            v13 <- CreateNamedVariable 'opt_status', 'var', v12
+            v14 <- CreateNamedVariable 'V8OptimizationStatus', 'none'
+            v15 <- GetProperty v14, 'kMaybeDeopted'
+            v16 <- BinaryOperation v13, '&', v15
+            v17 <- LoadInteger '0'
+            v18 <- Compare v16, '!==', v17
+            v19 <- GetProperty v14, 'kTopmostFrameIsTurboFanned'
+            v20 <- BinaryOperation v13, '&', v19
+            v21 <- LoadInteger '0'
+            v22 <- Compare v20, '!==', v21
+            v23 <- BinaryOperation v18, '||', v22
+        BeginDoWhileLoopHeader
+            v24 <- LoadBoolean 'false'
+        EndDoWhileLoop v24
+    BeginDoWhileLoopHeader
+        v25 <- LoadBoolean 'false'
+    EndDoWhileLoop v25
+EndPlainFunction
+v26 <- CallFunction v10, []
+v27 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v28 <- LoadInteger '0'
+    BeginForLoopCondition -> v29
+        v30 <- LoadInteger '1'
+        v31 <- Compare v29, '<', v30
+    BeginForLoopAfterthought v31 -> v32
+        v33 <- UnaryOperation v32, '++'
+    BeginForLoopBody -> v34
+    EndForLoop
+    BeginDoWhileLoopBody
+        BeginDoWhileLoopBody
+            BeginForLoopInitializer
+                v35 <- LoadInteger '0'
+            BeginForLoopCondition -> v36
+                v37 <- LoadInteger '1'
+                v38 <- Compare v36, '<', v37
+            BeginForLoopAfterthought v38 -> v39
+                v40 <- UnaryOperation v39, '++'
+            BeginForLoopBody -> v41
+            EndForLoop
+        BeginDoWhileLoopHeader
+            v42 <- LoadBoolean 'false'
+        EndDoWhileLoop v42
+    BeginDoWhileLoopHeader
+        v43 <- LoadBoolean 'false'
+    EndDoWhileLoop v43
+    BeginDoWhileLoopBody
+        BeginDoWhileLoopBody
+            BeginDoWhileLoopBody
+                BeginDoWhileLoopBody
+                    BeginDoWhileLoopBody
+                        BeginDoWhileLoopBody
+                            BeginDoWhileLoopBody
+                                BeginDoWhileLoopBody
+                                    v44 <- CreateNamedVariable 'f0', 'none'
+                                    v45 <- CallFunction v44, [v27]
+                                    v46 <- CreateNamedVariable 'opt_status', 'var', v45
+                                    v47 <- CreateNamedVariable 'V8OptimizationStatus', 'none'
+                                    v48 <- GetProperty v47, 'kMaybeDeopted'
+                                    v49 <- BinaryOperation v46, '&', v48
+                                    v50 <- LoadInteger '0'
+                                    v51 <- Compare v49, '!==', v50
+                                    v52 <- GetProperty v47, 'kTopmostFrameIsTurboFanned'
+                                    v53 <- BinaryOperation v46, '&', v52
+                                    v54 <- LoadInteger '0'
+                                    v55 <- Compare v53, '!==', v54
+                                    v56 <- BinaryOperation v51, '||', v55
+                                BeginDoWhileLoopHeader
+                                    v57 <- LoadBoolean 'false'
+                                EndDoWhileLoop v57
+                            BeginDoWhileLoopHeader
+                                v58 <- LoadBoolean 'false'
+                            EndDoWhileLoop v58
+                        BeginDoWhileLoopHeader
+                            v59 <- LoadBoolean 'false'
+                        EndDoWhileLoop v59
+                    BeginDoWhileLoopHeader
+                        v60 <- LoadBoolean 'false'
+                    EndDoWhileLoop v60
+                BeginDoWhileLoopHeader
+                    v61 <- LoadBoolean 'false'
+                EndDoWhileLoop v61
+            BeginDoWhileLoopHeader
+                v62 <- LoadBoolean 'false'
+            EndDoWhileLoop v62
+        BeginDoWhileLoopHeader
+            v63 <- LoadBoolean 'false'
+        EndDoWhileLoop v63
+    BeginDoWhileLoopHeader
+        v64 <- LoadBoolean 'false'
+    EndDoWhileLoop v64
+EndPlainFunction
+v65 <- CallFunction v27, []
+
+
+if (isNeverOptimizeLiteMode()) {
+    print("Warning: skipping test that requires optimization in Lite mode.");
+    quit(0);
+}
+isAlwaysOptimize();
+function f() {
+    do {
+        do {
+            var opt_status = f0(f);
+            ((opt_status & V8OptimizationStatus.kMaybeDeopted) !== 0) || ((opt_status & V8OptimizationStatus.kTopmostFrameIsTurboFanned) !== 0);
+        } while (false)
+    } while (false)
+}
+f();
+function g() {
+    for (let i29 = 0; i29 < 1; i29++) {
+    }
+    do {
+        do {
+            for (let i36 = 0; i36 < 1; i36++) {
+            }
+        } while (false)
+    } while (false)
+    do {
+        do {
+            do {
+                do {
+                    do {
+                        do {
+                            do {
+                                do {
+                                    var opt_status = f0(g);
+                                    ((opt_status & V8OptimizationStatus.kMaybeDeopted) !== 0) || ((opt_status & V8OptimizationStatus.kTopmostFrameIsTurboFanned) !== 0);
+                                } while (false)
+                            } while (false)
+                        } while (false)
+                    } while (false)
+                } while (false)
+            } while (false)
+        } while (false)
+    } while (false)
+}
+g();
+
+FuzzIL program written to corpus/regress-2618.fzil

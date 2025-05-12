@@ -1,0 +1,217 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'offset.toPrimitive'
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'expected', 'var', v2
+    v4 <- CreateArray []
+    v5 <- CreateNamedVariable 'actual', 'var', v4
+    BeginObjectLiteral
+    v6 <- EndObjectLiteral
+    v7 <- CreateNamedVariable 'offset', 'var', v6
+    v8 <- BeginPlainFunction -> 
+        v9 <- LoadString 'offset.toPrimitive'
+        v10 <- CallMethod v5, 'push', [v9]
+        v11 <- LoadInteger '1'
+        Return v11
+    EndPlainFunction
+    v12 <- CreateNamedVariable 'Symbol', 'none'
+    v13 <- GetProperty v12, 'toPrimitive'
+    SetComputedProperty v7, v13, v8
+    BeginObjectLiteral
+    v14 <- EndObjectLiteral
+    v15 <- CreateNamedVariable 'length', 'var', v14
+    v16 <- BeginPlainFunction -> 
+        v17 <- LoadString 'length.toPrimitive'
+        v18 <- CallMethod v5, 'push', [v17]
+        v19 <- LoadInteger '1'
+        Return v19
+    EndPlainFunction
+    v20 <- GetProperty v12, 'toPrimitive'
+    SetComputedProperty v15, v20, v16
+    v21 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v22 <- LoadInteger '16'
+    v23 <- Construct v21, [v22]
+    v24 <- CreateNamedVariable 'buffer', 'var', v23
+    v25 <- BeginPlainFunction -> 
+        v26 <- CreateNamedVariable 'Uint32Array', 'none'
+        v27 <- Construct v26, [v24, v7, v15]
+    EndPlainFunction
+    v28 <- CallFunction v25, []
+    v29 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v30 <- CallFunction v0, []
+v31 <- BeginPlainFunction -> 
+    v32 <- LoadString 'offset.toPrimitive'
+    v33 <- LoadString 'length.toPrimitive'
+    v34 <- CreateArray [v32, v33]
+    v35 <- CreateNamedVariable 'expected', 'var', v34
+    v36 <- CreateArray []
+    v37 <- CreateNamedVariable 'actual', 'var', v36
+    BeginObjectLiteral
+    v38 <- EndObjectLiteral
+    v39 <- CreateNamedVariable 'offset', 'var', v38
+    v40 <- BeginPlainFunction -> 
+        v41 <- LoadString 'offset.toPrimitive'
+        v42 <- CallMethod v37, 'push', [v41]
+        v43 <- LoadInteger '1'
+        Return v43
+    EndPlainFunction
+    v44 <- CreateNamedVariable 'Symbol', 'none'
+    v45 <- GetProperty v44, 'toPrimitive'
+    SetComputedProperty v39, v45, v40
+    BeginObjectLiteral
+    v46 <- EndObjectLiteral
+    v47 <- CreateNamedVariable 'length', 'var', v46
+    v48 <- BeginPlainFunction -> 
+        v49 <- LoadString 'length.toPrimitive'
+        v50 <- CallMethod v37, 'push', [v49]
+        v51 <- LoadInteger '1'
+        Return v51
+    EndPlainFunction
+    v52 <- GetProperty v44, 'toPrimitive'
+    SetComputedProperty v47, v52, v48
+    v53 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v54 <- LoadInteger '16'
+    v55 <- Construct v53, [v54]
+    v56 <- CreateNamedVariable 'buffer', 'var', v55
+    v57 <- CreateNamedVariable 'Uint8Array', 'none'
+    v58 <- Construct v57, [v56, v39, v47]
+    v59 <- CreateNamedVariable 'arr', 'var', v58
+    v60 <- LoadInteger '1'
+    v61 <- GetProperty v59, 'length'
+EndPlainFunction
+v62 <- CallFunction v31, []
+v63 <- BeginPlainFunction -> 
+    v64 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v65 <- LoadInteger '16'
+    v66 <- Construct v64, [v65]
+    v67 <- CreateNamedVariable 'buffer', 'var', v66
+    v68 <- BeginPlainFunction -> 
+        v69 <- CreateNamedVariable 'Uint8Array', 'none'
+        v70 <- LoadInteger '1'
+        v71 <- UnaryOperation '-', v70
+        v72 <- Construct v69, [v67, v71]
+    EndPlainFunction
+    v73 <- CallFunction v68, []
+    v74 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v75 <- CallFunction v63, []
+v76 <- BeginPlainFunction -> 
+    v77 <- LoadString 'proxy.Symbol(Symbol.iterator)'
+    v78 <- LoadString 'proxy.length'
+    v79 <- LoadString 'proxy.0'
+    v80 <- LoadString 'proxy.1'
+    v81 <- LoadString 'proxy.2'
+    v82 <- CreateArray [v77, v78, v79, v80, v81]
+    v83 <- CreateNamedVariable 'expected', 'var', v82
+    v84 <- CreateArray []
+    v85 <- CreateNamedVariable 'actual', 'var', v84
+    v86 <- LoadInteger '1'
+    v87 <- LoadInteger '2'
+    v88 <- LoadInteger '3'
+    v89 <- CreateArray [v86, v87, v88]
+    v90 <- CreateNamedVariable 'a', 'var', v89
+    v91 <- CreateNamedVariable 'Proxy', 'none'
+    v92 <- BeginPlainFunction -> v93, v94
+        v95 <- LoadString 'proxy.'
+        v96 <- CallMethod v94, 'toString', []
+        v97 <- BinaryOperation v95, '+', v96
+        v98 <- CallMethod v85, 'push', [v97]
+        v99 <- CreateNamedVariable 'Symbol', 'none'
+        v100 <- GetProperty v99, 'iterator'
+        v101 <- Compare v94, '===', v100
+        BeginIf v101
+            v102 <- LoadUndefined
+            Return v102
+        EndIf
+        v103 <- GetComputedProperty v93, v94
+        Return v103
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v92
+    v104 <- EndObjectLiteral
+    v105 <- Construct v91, [v90, v104]
+    v106 <- CreateNamedVariable 'proxy', 'var', v105
+    v107 <- CreateNamedVariable 'Uint8Array', 'none'
+    v108 <- Construct v107, [v106]
+    v109 <- CreateNamedVariable 'arr', 'var', v108
+    v110 <- GetProperty v90, 'length'
+    v111 <- GetProperty v109, 'length'
+EndPlainFunction
+v112 <- CallFunction v76, []
+
+
+function TestThrowBeforeLengthToPrimitive() {
+    var expected = ["offset.toPrimitive"];
+    var actual = [];
+    var offset = {};
+    function f8() {
+        actual.push("offset.toPrimitive");
+        return 1;
+    }
+    offset[Symbol.toPrimitive] = f8;
+    var length = {};
+    function f16() {
+        actual.push("length.toPrimitive");
+        return 1;
+    }
+    length[Symbol.toPrimitive] = f16;
+    const v23 = new ArrayBuffer(16);
+    var buffer = v23;
+    function f25() {
+        new Uint32Array(buffer, offset, length);
+    }
+    f25();
+}
+TestThrowBeforeLengthToPrimitive();
+function TestConstructByBufferToPrimitiveOrdering() {
+    var expected = ["offset.toPrimitive","length.toPrimitive"];
+    var actual = [];
+    var offset = {};
+    function f40() {
+        actual.push("offset.toPrimitive");
+        return 1;
+    }
+    offset[Symbol.toPrimitive] = f40;
+    var length = {};
+    function f48() {
+        actual.push("length.toPrimitive");
+        return 1;
+    }
+    length[Symbol.toPrimitive] = f48;
+    const v55 = new ArrayBuffer(16);
+    var buffer = v55;
+    const v58 = new Uint8Array(buffer, offset, length);
+    var arr = v58;
+    arr.length;
+}
+TestConstructByBufferToPrimitiveOrdering();
+function TestByteOffsetToIndexThrowsForNegative() {
+    const v66 = new ArrayBuffer(16);
+    var buffer = v66;
+    function f68() {
+        new Uint8Array(buffer, -1);
+    }
+    f68();
+}
+TestByteOffsetToIndexThrowsForNegative();
+function TestByArrayLikeObservableOrdering() {
+    var expected = ["proxy.Symbol(Symbol.iterator)","proxy.length","proxy.0","proxy.1","proxy.2"];
+    var actual = [];
+    var a = [1,2,3];
+    function f92(a93, a94) {
+        actual.push("proxy." + a94.toString());
+        if (a94 === Symbol.iterator) {
+            return undefined;
+        }
+        return a93[a94];
+    }
+    const v105 = new Proxy(a, { get: f92 });
+    var proxy = v105;
+    const v108 = new Uint8Array(proxy);
+    var arr = v108;
+    a.length;
+    arr.length;
+}
+TestByArrayLikeObservableOrdering();
+
+FuzzIL program written to corpus/typedarray-construct-by-buffer-ordering.fzil

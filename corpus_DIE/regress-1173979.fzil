@@ -1,0 +1,48 @@
+v0 <- LoadNull
+v1 <- CreateNamedVariable 'null_var', 'var', v0
+v2 <- CreateArray []
+v3 <- GetElement v2, '0'
+v4 <- CreateNamedVariable 'undef_var', 'var', v3
+v5 <- LoadBoolean 'false'
+v6 <- CreateNamedVariable 'boolean_var', 'var', v5
+v7 <- LoadInteger '0'
+v8 <- CreateNamedVariable 'number_var', 'var', v7
+v9 <- LoadString ''
+v10 <- CreateNamedVariable 'string_var', 'var', v9
+v11 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v11
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'object_var', 'var', v12
+v14 <- Compare v1, '==', v1
+v15 <- Compare v1, '==', v4
+v16 <- Compare v1, '!=', v6
+v17 <- Compare v1, '!=', v8
+v18 <- Compare v1, '!=', v10
+v19 <- Compare v1, '!=', v13
+v20 <- Compare v4, '==', v1
+v21 <- Compare v6, '!=', v1
+v22 <- Compare v8, '!=', v1
+v23 <- Compare v10, '!=', v1
+v24 <- Compare v13, '!=', v1
+
+
+var null_var = null;
+var undef_var = ([])[0];
+var boolean_var = false;
+var number_var = 0;
+var string_var = "";
+var object_var = { foo: 0 };
+null_var == null_var;
+null_var == undef_var;
+null_var != boolean_var;
+null_var != number_var;
+null_var != string_var;
+null_var != object_var;
+undef_var == null_var;
+boolean_var != null_var;
+number_var != null_var;
+string_var != null_var;
+object_var != null_var;
+
+FuzzIL program written to corpus/regress-1173979.fzil

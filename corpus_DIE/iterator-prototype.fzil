@@ -1,0 +1,137 @@
+v0 <- CreateArray []
+v1 <- CallMethod v0, 'entries', []
+v2 <- GetProperty v1, '__proto__'
+v3 <- CreateNamedVariable 'arrayIteratorPrototype', 'var', v2
+v4 <- GetProperty v3, '__proto__'
+v5 <- CreateNamedVariable 'iteratorPrototype', 'var', v4
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- GetProperty v6, 'prototype'
+v8 <- CallMethod v6, 'getPrototypeOf', [v5]
+v9 <- CallMethod v6, 'isExtensible', [v5]
+v10 <- LoadInteger '0'
+v11 <- CallMethod v6, 'getOwnPropertyNames', [v5]
+v12 <- GetProperty v11, 'length'
+v13 <- LoadInteger '1'
+v14 <- CallMethod v6, 'getOwnPropertySymbols', [v5]
+v15 <- GetProperty v14, 'length'
+v16 <- CreateNamedVariable 'Symbol', 'none'
+v17 <- GetProperty v16, 'iterator'
+v18 <- CallMethod v6, 'getOwnPropertySymbols', [v5]
+v19 <- GetElement v18, '0'
+v20 <- GetProperty v16, 'iterator'
+v21 <- CallMethod v6, 'getOwnPropertyDescriptor', [v5, v20]
+v22 <- CreateNamedVariable 'descr', 'var', v21
+v23 <- GetProperty v22, 'configurable'
+v24 <- GetProperty v22, 'enumerable'
+v25 <- GetProperty v22, 'writable'
+v26 <- GetProperty v22, 'value'
+v27 <- CreateNamedVariable 'iteratorFunction', 'var', v26
+v28 <- LoadString 'function'
+v29 <- TypeOf v27
+v30 <- LoadInteger '0'
+v31 <- GetProperty v27, 'length'
+v32 <- LoadString '[Symbol.iterator]'
+v33 <- GetProperty v27, 'name'
+BeginObjectLiteral
+v34 <- EndObjectLiteral
+v35 <- CreateNamedVariable 'obj', 'var', v34
+v36 <- CallMethod v27, 'call', [v35]
+v37 <- GetProperty v16, 'iterator'
+v38 <- CallComputedMethod v5, v37, []
+v39 <- CreateNamedVariable 'Map', 'none'
+v40 <- Construct v39, []
+v41 <- CallMethod v40, 'entries', []
+v42 <- GetProperty v41, '__proto__'
+v43 <- CreateNamedVariable 'mapIteratorPrototype', 'var', v42
+v44 <- CreateNamedVariable 'Set', 'none'
+v45 <- Construct v44, []
+v46 <- CallMethod v45, 'values', []
+v47 <- GetProperty v46, '__proto__'
+v48 <- CreateNamedVariable 'setIteratorPrototype', 'var', v47
+v49 <- LoadString 'abc'
+v50 <- GetProperty v16, 'iterator'
+v51 <- CallComputedMethod v49, v50, []
+v52 <- GetProperty v51, '__proto__'
+v53 <- CreateNamedVariable 'stringIteratorPrototype', 'var', v52
+v54 <- GetProperty v43, '__proto__'
+v55 <- GetProperty v48, '__proto__'
+v56 <- GetProperty v53, '__proto__'
+v57 <- CreateNamedVariable 'Float32Array', 'none'
+v58 <- CreateNamedVariable 'Float64Array', 'none'
+v59 <- CreateNamedVariable 'Int16Array', 'none'
+v60 <- CreateNamedVariable 'Int32Array', 'none'
+v61 <- CreateNamedVariable 'Int8Array', 'none'
+v62 <- CreateNamedVariable 'Uint16Array', 'none'
+v63 <- CreateNamedVariable 'Uint32Array', 'none'
+v64 <- CreateNamedVariable 'Uint8Array', 'none'
+v65 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v66 <- CreateArray [v57, v58, v59, v60, v61, v62, v63, v64, v65]
+v67 <- CreateNamedVariable 'typedArrays', 'var', v66
+BeginForOfLoop v67 -> v68
+    v69 <- Construct v68, []
+    v70 <- CreateNamedVariable 'array', 'var', v69
+    v71 <- GetProperty v16, 'iterator'
+    v72 <- CallComputedMethod v70, v71, []
+    v73 <- CreateNamedVariable 'iterator', 'var', v72
+    v74 <- GetProperty v73, '__proto__'
+    v75 <- GetProperty v74, '__proto__'
+EndForOfLoop
+v76 <- BeginGeneratorFunction -> 
+EndGeneratorFunction
+v77 <- CreateNamedVariable 'gen', 'none'
+v78 <- GetProperty v77, 'prototype'
+v79 <- GetProperty v78, '__proto__'
+v80 <- GetProperty v79, '__proto__'
+v81 <- CallFunction v77, []
+v82 <- CreateNamedVariable 'g', 'var', v81
+v83 <- GetProperty v77, 'prototype'
+v84 <- GetProperty v82, '__proto__'
+v85 <- GetProperty v82, '__proto__'
+v86 <- GetProperty v85, '__proto__'
+v87 <- GetProperty v86, '__proto__'
+
+
+var arrayIteratorPrototype = ([]).entries().__proto__;
+var iteratorPrototype = arrayIteratorPrototype.__proto__;
+Object.prototype;
+Object.getPrototypeOf(iteratorPrototype);
+Object.isExtensible(iteratorPrototype);
+Object.getOwnPropertyNames(iteratorPrototype).length;
+Object.getOwnPropertySymbols(iteratorPrototype).length;
+Symbol.iterator;
+Object.getOwnPropertySymbols(iteratorPrototype)[0];
+var descr = Object.getOwnPropertyDescriptor(iteratorPrototype, Symbol.iterator);
+descr.configurable;
+descr.enumerable;
+descr.writable;
+var iteratorFunction = descr.value;
+typeof iteratorFunction;
+iteratorFunction.length;
+iteratorFunction.name;
+var obj = {};
+iteratorFunction.call(obj);
+iteratorPrototype[Symbol.iterator]();
+const v40 = new Map();
+var mapIteratorPrototype = v40.entries().__proto__;
+const v45 = new Set();
+var setIteratorPrototype = v45.values().__proto__;
+var stringIteratorPrototype = ("abc")[Symbol.iterator]().__proto__;
+mapIteratorPrototype.__proto__;
+setIteratorPrototype.__proto__;
+stringIteratorPrototype.__proto__;
+var typedArrays = [Float32Array,Float64Array,Int16Array,Int32Array,Int8Array,Uint16Array,Uint32Array,Uint8Array,Uint8ClampedArray];
+for (const v68 of typedArrays) {
+    const v69 = new v68();
+    var array = v69;
+    var iterator = array[Symbol.iterator]();
+    iterator.__proto__.__proto__;
+}
+function* gen1() {
+}
+gen.prototype.__proto__.__proto__;
+var g = gen();
+gen.prototype;
+g.__proto__;
+g.__proto__.__proto__.__proto__;
+
+FuzzIL program written to corpus/iterator-prototype.fzil

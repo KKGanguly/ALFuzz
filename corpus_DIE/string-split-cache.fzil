@@ -1,0 +1,29 @@
+v0 <- LoadString 'abcdef'
+v1 <- CreateNamedVariable 'str', 'var', v0
+v2 <- LoadString 'a'
+v3 <- GetElement v1, '0'
+v4 <- LoadString 'b'
+v5 <- GetElement v1, '1'
+v6 <- LoadString 'c'
+v7 <- GetElement v1, '2'
+v8 <- LoadString ''
+v9 <- CallMethod v1, 'split', [v8]
+v10 <- CreateNamedVariable 'array', 'var', v9
+v11 <- LoadString 'a'
+v12 <- LoadString 'b'
+v13 <- LoadString 'c'
+v14 <- LoadString 'd'
+v15 <- LoadString 'e'
+v16 <- LoadString 'f'
+v17 <- CreateArray [v11, v12, v13, v14, v15, v16]
+v18 <- CreateNamedVariable 'expected', 'var', v17
+
+
+var str = "abcdef";
+str[0];
+str[1];
+str[2];
+var array = str.split("");
+var expected = ["a","b","c","d","e","f"];
+
+FuzzIL program written to corpus/string-split-cache.fzil

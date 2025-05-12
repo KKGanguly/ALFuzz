@@ -1,0 +1,61 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'b', 'var', v0
+v2 <- LoadInteger '1'
+v3 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v2
+    ObjectLiteralAddProperty `g`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'obj', 'var', v4
+v6 <- BeginPlainFunction -> 
+    BeginIf v1
+        v7 <- CreateNamedVariable 'Object', 'none'
+        v8 <- CallMethod v7, 'freeze', [v5]
+    EndIf
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- CallFunction v6, [v5]
+    v11 <- CreateNamedVariable 'Object', 'none'
+    v12 <- CallMethod v11, 'isFrozen', [v5]
+    v13 <- UnaryOperation '!', v12
+    BeginIf v13
+        v14 <- GetProperty v5, 'f'
+        v15 <- CreateNamedVariable 't', 'var', v14
+        v16 <- LoadInteger '2'
+        v17 <- BinaryOperation v15, '*', v16
+        SetProperty v5, 'f', v17
+    EndIf
+    v18 <- GetProperty v5, 'f'
+    Return v18
+EndPlainFunction
+v19 <- CallFunction v9, []
+v20 <- LoadInteger '2'
+v21 <- CallFunction v9, []
+v22 <- LoadInteger '4'
+v23 <- LoadBoolean 'true'
+Reassign v1, v23
+v24 <- CallFunction v9, []
+v25 <- LoadInteger '4'
+
+
+var b = false;
+var obj = { f: 1, g: 2 };
+function setMutability() {
+    if (b) {
+        Object.freeze(obj);
+    }
+}
+function setAndUseObject() {
+    setMutability(obj);
+    if (!Object.isFrozen(obj)) {
+        var t = obj.f;
+        obj.f = t * 2;
+    }
+    return obj.f;
+}
+setAndUseObject();
+setAndUseObject();
+b = true;
+setAndUseObject();
+
+FuzzIL program written to corpus/deopt-lazy-freeze.fzil

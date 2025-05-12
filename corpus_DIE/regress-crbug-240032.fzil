@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+    EndPlainFunction
+    Return v1
+EndPlainFunction
+v2 <- CallFunction v0, []
+v3 <- CallFunction v2, []
+v4 <- CreateNamedVariable 'Function', 'none'
+v5 <- CallFunction v0, []
+v6 <- CallFunction v5, []
+BeginObjectLiteral
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'o', 'var', v7
+v9 <- CallFunction v0, []
+SetProperty v8, 'func', v9
+v10 <- BeginPlainFunction -> v11, v12
+    v13 <- GetProperty v11, 'func'
+    v14 <- Compare v12, '===', v13
+    Return v14
+EndPlainFunction
+v15 <- GetProperty v8, 'func'
+v16 <- CallFunction v10, [v8, v15]
+v17 <- GetProperty v8, 'func'
+v18 <- CallFunction v10, [v8, v17]
+v19 <- GetProperty v8, 'func'
+v20 <- CallFunction v10, [v8, v19]
+
+
+function mk() {
+    function f1() {
+    }
+    return f1;
+}
+const t5 = mk();
+t5();
+const t6 = mk();
+t6();
+var o = {};
+o.func = mk();
+function cmp(a11, a12) {
+    return a12 === a11.func;
+}
+cmp(o, o.func);
+cmp(o, o.func);
+cmp(o, o.func);
+
+FuzzIL program written to corpus/regress-crbug-240032.fzil

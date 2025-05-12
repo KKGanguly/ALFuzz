@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'array', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- CreateNamedVariable 'Symbol', 'none'
+        v6 <- GetProperty v5, 'iterator'
+        v7 <- CallComputedMethod v3, v6, []
+        v8 <- CallMethod v7, 'next', []
+        Return v8
+    EndPlainFunction
+    v9 <- CallFunction v4, []
+    v10 <- GetProperty v9, 'value'
+    v11 <- LoadUndefined
+    v12 <- CallFunction v4, []
+    v13 <- GetProperty v12, 'value'
+    v14 <- LoadUndefined
+    v15 <- CallFunction v4, []
+    v16 <- GetProperty v15, 'value'
+    v17 <- LoadUndefined
+    v18 <- LoadInteger '5'
+    v19 <- GetProperty v3, '__proto__'
+    v20 <- CallMethod v19, 'push', [v18]
+    v21 <- CallFunction v4, []
+    v22 <- GetProperty v21, 'value'
+    v23 <- LoadInteger '5'
+EndPlainFunction
+v24 <- CallFunction v0, []
+
+
+function f0() {
+    var array = [,];
+    function next() {
+        return array[Symbol.iterator]().next();
+    }
+    next().value;
+    next().value;
+    next().value;
+    array.__proto__.push(5);
+    next().value;
+}
+f0();
+
+FuzzIL program written to corpus/deopt-array-iterator-prototype-next.fzil

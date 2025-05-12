@@ -1,0 +1,141 @@
+v0 <- LoadInteger '41'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+    BeginObjectLiteralGetter `bar` -> v1
+        v2 <- LoadInteger '42'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v2
+        v3 <- EndObjectLiteral
+        Return v3
+    EndObjectLiteralGetter
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'o', 'var', v4
+v6 <- LoadInteger '41'
+v7 <- GetProperty v5, 'x'
+v8 <- LoadInteger '42'
+v9 <- GetProperty v5, 'bar'
+v10 <- GetProperty v9, 'x'
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadInteger '41'
+    Return v12
+EndPlainFunction
+v13 <- LoadInteger '0'
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadInteger '43'
+    Return v15
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v11
+    BeginObjectLiteralGetter `bar` -> v16
+        v17 <- GetProperty v16, 'x'
+        Return v17
+    EndObjectLiteralGetter
+    ObjectLiteralAddProperty `x`, v13
+    BeginObjectLiteralSetter `bar` -> v18, v19
+        SetProperty v18, 'x', v19
+    EndObjectLiteralSetter
+    ObjectLiteralAddProperty `g`, v14
+v20 <- EndObjectLiteral
+Reassign v5, v20
+v21 <- LoadInteger '7'
+SetProperty v5, 'bar', v21
+v22 <- LoadInteger '7'
+v23 <- GetProperty v5, 'bar'
+v24 <- LoadInteger '7'
+v25 <- GetProperty v5, 'x'
+v26 <- LoadInteger '41'
+v27 <- CallMethod v5, 'f', []
+v28 <- LoadInteger '43'
+v29 <- CallMethod v5, 'g', []
+v30 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v30
+v31 <- EndObjectLiteral
+v32 <- CreateNamedVariable 'p', 'none'
+Reassign v32, v31
+v33 <- BeginPlainFunction -> 
+    v34 <- LoadThis
+    v35 <- GetProperty v34, 'foo'
+    v36 <- LoadInteger '1'
+    v37 <- BinaryOperation v35, '+', v36
+    Return v37
+EndPlainFunction
+v38 <- CreateNamedVariable 'p', 'none'
+BeginObjectLiteral
+    BeginObjectLiteralGetter `foo` -> v39
+        v40 <- GetProperty v39, 'x'
+        Return v40
+    EndObjectLiteralGetter
+    ObjectLiteralAddProperty `f`, v33
+    BeginObjectLiteralSetter `bar` -> v41, v42
+        SetProperty v41, 'x', v42
+    EndObjectLiteralSetter
+    ObjectLiteralAddProperty `__proto__`, v38
+v43 <- EndObjectLiteral
+Reassign v5, v43
+v44 <- LoadInteger '42'
+v45 <- GetProperty v5, 'x'
+v46 <- LoadInteger '42'
+v47 <- GetProperty v5, 'foo'
+v48 <- LoadInteger '43'
+v49 <- CallMethod v5, 'f', []
+v50 <- LoadInteger '44'
+SetProperty v5, 'bar', v50
+v51 <- LoadInteger '44'
+v52 <- GetProperty v5, 'foo'
+
+
+const v4 = {
+    x: 41,
+    get bar() {
+        return { x: 42 };
+    },
+};
+var o = v4;
+o.x;
+o.bar.x;
+function f11() {
+    return 41;
+}
+function f14() {
+    return 43;
+}
+const v20 = {
+    f: f11,
+    get bar() {
+        return this.x;
+    },
+    x: 0,
+    set bar(a19) {
+        this.x = a19;
+    },
+    g: f14,
+};
+o = v20;
+o.bar = 7;
+o.bar;
+o.x;
+o.f();
+o.g();
+p = { x: 42 };
+function f33() {
+    return this.foo + 1;
+}
+const v43 = {
+    get foo() {
+        return this.x;
+    },
+    f: f33,
+    set bar(a42) {
+        this.x = a42;
+    },
+    __proto__: p,
+};
+o = v43;
+o.x;
+o.foo;
+o.f();
+o.bar = 44;
+o.foo;
+
+FuzzIL program written to corpus/objectliterals.fzil

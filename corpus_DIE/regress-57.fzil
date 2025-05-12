@@ -1,0 +1,19 @@
+BeginTry
+    v0 <- LoadInteger '0'
+    v1 <- Void_ v0
+    v2 <- DeleteProperty v1, 'x'
+BeginCatch -> v3
+    v4 <- CallMethod v3, 'toString', []
+    v5 <- CreateNamedVariable 'print', 'none'
+    v6 <- CallFunction v5, [v4]
+EndTryCatch
+
+
+try {
+    const t1 = void 0;
+    delete t1.x;
+} catch(e3) {
+    print(e3.toString());
+}
+
+FuzzIL program written to corpus/regress-57.fzil

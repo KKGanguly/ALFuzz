@@ -1,0 +1,77 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'indices', 'let', v0
+v2 <- LoadInteger '126782'
+v3 <- LoadInteger '100'
+v4 <- BinaryOperation v2, '+', v3
+v5 <- CreateNamedVariable 'max', 'const', v4
+BeginForLoopInitializer
+    v6 <- LoadInteger '0'
+BeginForLoopCondition -> v7
+    v8 <- Compare v7, '<', v5
+BeginForLoopAfterthought v8 -> v9
+    v10 <- UnaryOperation v9, '++'
+BeginForLoopBody -> v11
+    v12 <- LoadString ''
+    v13 <- BinaryOperation v12, '+', v11
+    v14 <- CallMethod v1, 'push', [v13]
+EndForLoop
+v15 <- LoadString 'return {'
+v16 <- LoadString ':0,'
+v17 <- CallMethod v1, 'join', [v16]
+v18 <- BinaryOperation v15, '+', v17
+v19 <- LoadString ':0};'
+v20 <- BinaryOperation v18, '+', v19
+v21 <- CreateNamedVariable 'source', 'let', v20
+v22 <- CreateNamedVariable 'Function', 'none'
+v23 <- Construct v22, [v21]
+v24 <- CreateNamedVariable 'largeElementsLiteral', 'let', v23
+v25 <- BeginPlainFunction -> 
+    v26 <- CallFunction v24, []
+    v27 <- CreateNamedVariable 'object', 'let', v26
+    BeginForLoopInitializer
+        v28 <- LoadInteger '0'
+    BeginForLoopCondition -> v29
+        v30 <- Compare v29, '<', v5
+    BeginForLoopAfterthought v30 -> v31
+        v32 <- UnaryOperation v31, '++'
+    BeginForLoopBody -> v33
+        v34 <- LoadInteger '0'
+        v35 <- GetComputedProperty v27, v33
+    EndForLoop
+    v36 <- LoadInteger '255'
+    SetElement v27, '0', v36
+    v37 <- LoadInteger '255'
+    v38 <- GetElement v27, '0'
+    v39 <- LoadFloat '1.23'
+    SetElement v27, '1', v39
+    v40 <- LoadFloat '1.23'
+    v41 <- GetElement v27, '1'
+EndPlainFunction
+v42 <- CallFunction v25, []
+v43 <- CallFunction v25, []
+v44 <- CallFunction v25, []
+
+
+let indices = [];
+const max = 126782 + 100;
+for (let i7 = 0; i7 < max; i7++) {
+    indices.push("" + i7);
+}
+let source = ("return {" + indices.join(":0,")) + ":0};";
+const v23 = new Function(source);
+let largeElementsLiteral = v23;
+function TestLargeObjectElements() {
+    let object = largeElementsLiteral();
+    for (let i29 = 0; i29 < max; i29++) {
+        object[i29];
+    }
+    object[0] = 255;
+    object[0];
+    object[1] = 1.23;
+    object[1];
+}
+TestLargeObjectElements();
+TestLargeObjectElements();
+TestLargeObjectElements();
+
+FuzzIL program written to corpus/large-object-literal-slow-elements.fzil

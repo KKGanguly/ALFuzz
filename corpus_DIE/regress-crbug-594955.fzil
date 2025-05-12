@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    Return v3
+EndPlainFunction
+v4 <- CreateNamedVariable 'String', 'none'
+v5 <- LoadString 'a'
+v6 <- Construct v4, [v5]
+v7 <- LoadString 'length'
+v8 <- CallFunction v0, [v6, v7]
+v9 <- LoadInteger '1'
+v10 <- LoadString 'a'
+v11 <- Construct v4, [v10]
+v12 <- LoadString 'length'
+v13 <- CallFunction v0, [v11, v12]
+v14 <- LoadInteger '1'
+v15 <- LoadString 'a'
+v16 <- LoadInteger '32'
+v17 <- CallFunction v0, [v15, v16]
+v18 <- LoadUndefined
+v19 <- LoadString 'a'
+v20 <- LoadString 'length'
+v21 <- CallFunction v0, [v19, v20]
+v22 <- LoadInteger '1'
+v23 <- LoadString 'a'
+v24 <- Construct v4, [v23]
+v25 <- LoadString 'length'
+v26 <- CallFunction v0, [v24, v25]
+v27 <- LoadInteger '1'
+
+
+function g(a1, a2) {
+    return a1[a2];
+}
+const v6 = new String("a");
+g(v6, "length");
+const v11 = new String("a");
+g(v11, "length");
+g("a", 32);
+g("a", "length");
+const v24 = new String("a");
+g(v24, "length");
+
+FuzzIL program written to corpus/regress-crbug-594955.fzil

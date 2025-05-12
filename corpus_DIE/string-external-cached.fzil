@@ -1,0 +1,309 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- LoadInteger '5'
+    v3 <- Construct v1, [v2]
+    v4 <- CreateNamedVariable 'charat_str', 'var', v3
+    v5 <- LoadString '0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF'
+    SetElement v4, '0', v5
+    v6 <- LoadString '0123456789ABCDEF'
+    SetElement v4, '1', v6
+    BeginForLoopInitializer
+        v7 <- LoadInteger '0'
+    BeginForLoopCondition -> v8
+        v9 <- LoadInteger '6'
+        v10 <- Compare v8, '<', v9
+    BeginForLoopAfterthought v10 -> v11
+        v12 <- UnaryOperation v11, '++'
+    BeginForLoopBody -> v13
+        v14 <- GetElement v4, '1'
+        UpdateElement v4, '1', '+', v14
+    EndForLoop
+    BeginTry
+    BeginCatch -> v15
+    EndTryCatch
+    v16 <- LoadInteger '0'
+    v17 <- LoadInteger '1'
+    v18 <- UnaryOperation '-', v17
+    v19 <- GetElement v4, '0'
+    v20 <- CallMethod v19, 'slice', [v16, v18]
+    SetElement v4, '2', v20
+    v21 <- LoadInteger '0'
+    v22 <- LoadInteger '1'
+    v23 <- UnaryOperation '-', v22
+    v24 <- GetElement v4, '1'
+    v25 <- CallMethod v24, 'slice', [v21, v23]
+    SetElement v4, '3', v25
+    v26 <- GetElement v4, '0'
+    v27 <- GetElement v4, '0'
+    v28 <- BinaryOperation v26, '+', v27
+    SetElement v4, '4', v28
+    BeginForLoopInitializer
+        v29 <- LoadInteger '0'
+    BeginForLoopCondition -> v30
+        v31 <- LoadInteger '5'
+        v32 <- Compare v30, '<', v31
+    BeginForLoopAfterthought v32 -> v33
+        v34 <- UnaryOperation v33, '++'
+    BeginForLoopBody -> v35
+        v36 <- LoadString 'B'
+        v37 <- LoadInteger '6'
+        v38 <- LoadInteger '16'
+        v39 <- BinaryOperation v37, '*', v38
+        v40 <- LoadInteger '11'
+        v41 <- BinaryOperation v39, '+', v40
+        v42 <- GetComputedProperty v4, v35
+        v43 <- CallMethod v42, 'charAt', [v41]
+        v44 <- LoadString 'C'
+        v45 <- LoadInteger '6'
+        v46 <- LoadInteger '16'
+        v47 <- BinaryOperation v45, '*', v46
+        v48 <- LoadInteger '12'
+        v49 <- BinaryOperation v47, '+', v48
+        v50 <- GetComputedProperty v4, v35
+        v51 <- CallMethod v50, 'charAt', [v49]
+        v52 <- LoadString 'A'
+        v53 <- LoadInteger '3'
+        v54 <- LoadInteger '16'
+        v55 <- BinaryOperation v53, '*', v54
+        v56 <- LoadInteger '10'
+        v57 <- BinaryOperation v55, '+', v56
+        v58 <- GetComputedProperty v4, v35
+        v59 <- CallMethod v58, 'charAt', [v57]
+        v60 <- LoadString 'B'
+        v61 <- LoadInteger '3'
+        v62 <- LoadInteger '16'
+        v63 <- BinaryOperation v61, '*', v62
+        v64 <- LoadInteger '11'
+        v65 <- BinaryOperation v63, '+', v64
+        v66 <- GetComputedProperty v4, v35
+        v67 <- CallMethod v66, 'charAt', [v65]
+    EndForLoop
+    v68 <- LoadString '012'
+    v69 <- CreateNamedVariable 'charat_short', 'none'
+    Reassign v69, v68
+    BeginTry
+    BeginCatch -> v70
+    EndTryCatch
+    v71 <- LoadString '1'
+    v72 <- LoadInteger '1'
+    v73 <- CreateNamedVariable 'charat_short', 'none'
+    v74 <- CallMethod v73, 'charAt', [v72]
+    v75 <- LoadRegExp '(A|B)' ''
+    v76 <- CreateNamedVariable 're', 'var', v75
+    v77 <- LoadRegExp '(T.{1,2}B)' ''
+    v78 <- CreateNamedVariable 'rere', 'var', v77
+    v79 <- LoadString 'ABCDEFGHIJKLMNOPQRST'
+    v80 <- CreateNamedVariable 'ascii', 'var', v79
+    v81 <- LoadString '_ABCDEFGHIJKLMNOPQRST'
+    v82 <- CreateNamedVariable 'twobyte', 'var', v81
+    BeginTry
+    BeginCatch -> v83
+    EndTryCatch
+    v84 <- CreateNamedVariable 'isOneByteString', 'none'
+    v85 <- CallFunction v84, [v80]
+    v86 <- CallFunction v84, [v82]
+    v87 <- LoadInteger '1'
+    v88 <- LoadInteger '1'
+    v89 <- UnaryOperation '-', v88
+    v90 <- CallMethod v80, 'slice', [v87, v89]
+    v91 <- CreateNamedVariable 'ascii_slice', 'var', v90
+    v92 <- LoadInteger '2'
+    v93 <- LoadInteger '1'
+    v94 <- UnaryOperation '-', v93
+    v95 <- CallMethod v82, 'slice', [v92, v94]
+    v96 <- CreateNamedVariable 'twobyte_slice', 'var', v95
+    v97 <- BinaryOperation v80, '+', v80
+    v98 <- CreateNamedVariable 'ascii_cons', 'var', v97
+    v99 <- BinaryOperation v82, '+', v82
+    v100 <- CreateNamedVariable 'twobyte_cons', 'var', v99
+    BeginForLoopInitializer
+        v101 <- LoadInteger '0'
+    BeginForLoopCondition -> v102
+        v103 <- LoadInteger '2'
+        v104 <- Compare v102, '<', v103
+    BeginForLoopAfterthought v104 -> v105
+        v106 <- UnaryOperation v105, '++'
+    BeginForLoopBody -> v107
+        v108 <- LoadString 'A'
+        v109 <- LoadString 'A'
+        v110 <- CreateArray [v108, v109]
+        v111 <- CallMethod v76, 'exec', [v80]
+        v112 <- LoadString 'B'
+        v113 <- LoadString 'B'
+        v114 <- CreateArray [v112, v113]
+        v115 <- CallMethod v76, 'exec', [v91]
+        v116 <- LoadString 'TAB'
+        v117 <- LoadString 'TAB'
+        v118 <- CreateArray [v116, v117]
+        v119 <- CallMethod v78, 'exec', [v98]
+        v120 <- LoadString 'A'
+        v121 <- LoadString 'A'
+        v122 <- CreateArray [v120, v121]
+        v123 <- CallMethod v76, 'exec', [v82]
+        v124 <- LoadString 'B'
+        v125 <- LoadString 'B'
+        v126 <- CreateArray [v124, v125]
+        v127 <- CallMethod v76, 'exec', [v96]
+        v128 <- LoadString 'T_AB'
+        v129 <- LoadString 'T_AB'
+        v130 <- CreateArray [v128, v129]
+        v131 <- CallMethod v78, 'exec', [v100]
+        v132 <- LoadString 'DEFG'
+        v133 <- LoadInteger '2'
+        v134 <- LoadInteger '4'
+        v135 <- CallMethod v91, 'substr', [v133, v134]
+        v136 <- LoadString 'DEFG'
+        v137 <- LoadInteger '2'
+        v138 <- LoadInteger '4'
+        v139 <- CallMethod v96, 'substr', [v137, v138]
+        v140 <- LoadString 'DEFG'
+        v141 <- LoadInteger '3'
+        v142 <- LoadInteger '4'
+        v143 <- CallMethod v98, 'substr', [v141, v142]
+        v144 <- LoadString 'DEFG'
+        v145 <- LoadInteger '4'
+        v146 <- LoadInteger '4'
+        v147 <- CallMethod v100, 'substr', [v145, v146]
+    EndForLoop
+    v148 <- LoadString 'E='
+    v149 <- CreateNamedVariable 'short_ascii', 'var', v148
+    v150 <- LoadString 'MCsquared'
+    v151 <- CreateNamedVariable 'long_ascii', 'var', v150
+    v152 <- LoadString 'Eሴ'
+    v153 <- CreateNamedVariable 'short_twobyte', 'var', v152
+    v154 <- LoadString 'MCsquareሴ'
+    v155 <- CreateNamedVariable 'long_twobyte', 'var', v154
+    BeginTry
+        v156 <- CreateNamedVariable 'short_asii', 'none'
+        v157 <- CallFunction v84, [v156]
+        v158 <- CallFunction v84, [v151]
+        v159 <- BinaryOperation v157, '&&', v158
+        v160 <- CallFunction v84, [v153]
+        v161 <- CallFunction v84, [v155]
+        v162 <- BinaryOperation v160, '||', v161
+    BeginCatch -> v163
+    EndTryCatch
+    v164 <- LoadString 'E=MCsquared'
+    v165 <- BinaryOperation v149, '+', v151
+    v166 <- BinaryOperation v149, '+', v151
+    v167 <- CallFunction v84, [v166]
+    v168 <- LoadString 'MCsquaredE='
+    v169 <- BinaryOperation v151, '+', v149
+    v170 <- LoadString 'EሴMCsquareሴ'
+    v171 <- BinaryOperation v153, '+', v155
+    v172 <- BinaryOperation v153, '+', v155
+    v173 <- CallFunction v84, [v172]
+    v174 <- LoadString 'E=MCsquared'
+    v175 <- LoadString 'E='
+    v176 <- BinaryOperation v175, '+', v151
+    v177 <- LoadString 'EሴMCsquared'
+    v178 <- LoadString 'MCsquared'
+    v179 <- BinaryOperation v153, '+', v178
+    v180 <- LoadString 'EሴMCsquared'
+    v181 <- BinaryOperation v153, '+', v151
+    v182 <- BinaryOperation v153, '+', v151
+    v183 <- CallFunction v84, [v182]
+EndPlainFunction
+BeginForLoopInitializer
+    v184 <- LoadInteger '0'
+BeginForLoopCondition -> v185
+    v186 <- LoadInteger '10'
+    v187 <- Compare v185, '<', v186
+BeginForLoopAfterthought v187 -> v188
+    v189 <- UnaryOperation v188, '++'
+BeginForLoopBody -> v190
+    v191 <- CallFunction v0, []
+EndForLoop
+v192 <- CreateNamedVariable 'gc', 'none'
+v193 <- CallFunction v192, []
+v194 <- CallFunction v192, []
+
+
+function test() {
+    const v3 = new Array(5);
+    var charat_str = v3;
+    charat_str[0] = "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF";
+    charat_str[1] = "0123456789ABCDEF";
+    for (let i8 = 0; i8 < 6; i8++) {
+        charat_str[1] += charat_str[1];
+    }
+    try {
+    } catch(e15) {
+    }
+    const v18 = -1;
+    charat_str[2] = charat_str[0].slice(0, v18);
+    const v23 = -1;
+    charat_str[3] = charat_str[1].slice(0, v23);
+    charat_str[4] = charat_str[0] + charat_str[0];
+    for (let i30 = 0; i30 < 5; i30++) {
+        const v41 = (6 * 16) + 11;
+        charat_str[i30].charAt(v41);
+        const v49 = (6 * 16) + 12;
+        charat_str[i30].charAt(v49);
+        const v57 = (3 * 16) + 10;
+        charat_str[i30].charAt(v57);
+        const v65 = (3 * 16) + 11;
+        charat_str[i30].charAt(v65);
+    }
+    charat_short = "012";
+    try {
+    } catch(e70) {
+    }
+    charat_short.charAt(1);
+    var re = /(A|B)/;
+    var rere = /(T.{1,2}B)/;
+    var ascii = "ABCDEFGHIJKLMNOPQRST";
+    var twobyte = "_ABCDEFGHIJKLMNOPQRST";
+    try {
+    } catch(e83) {
+    }
+    isOneByteString(ascii);
+    isOneByteString(twobyte);
+    var ascii_slice = ascii.slice(1, -1);
+    var twobyte_slice = twobyte.slice(2, -1);
+    var ascii_cons = ascii + ascii;
+    var twobyte_cons = twobyte + twobyte;
+    for (let i102 = 0; i102 < 2; i102++) {
+        ["A","A"];
+        re.exec(ascii);
+        ["B","B"];
+        re.exec(ascii_slice);
+        ["TAB","TAB"];
+        rere.exec(ascii_cons);
+        ["A","A"];
+        re.exec(twobyte);
+        ["B","B"];
+        re.exec(twobyte_slice);
+        ["T_AB","T_AB"];
+        rere.exec(twobyte_cons);
+        ascii_slice.substr(2, 4);
+        twobyte_slice.substr(2, 4);
+        ascii_cons.substr(3, 4);
+        twobyte_cons.substr(4, 4);
+    }
+    var short_ascii = "E=";
+    var long_ascii = "MCsquared";
+    var short_twobyte = "Eሴ";
+    var long_twobyte = "MCsquareሴ";
+    try {
+        isOneByteString(short_asii) && isOneByteString(long_ascii);
+        isOneByteString(short_twobyte) || isOneByteString(long_twobyte);
+    } catch(e163) {
+    }
+    short_ascii + long_ascii;
+    isOneByteString(short_ascii + long_ascii);
+    long_ascii + short_ascii;
+    short_twobyte + long_twobyte;
+    isOneByteString(short_twobyte + long_twobyte);
+    "E=" + long_ascii;
+    short_twobyte + "MCsquared";
+    short_twobyte + long_ascii;
+    isOneByteString(short_twobyte + long_ascii);
+}
+for (let i185 = 0; i185 < 10; i185++) {
+    test();
+}
+gc();
+gc();
+
+FuzzIL program written to corpus/string-external-cached.fzil

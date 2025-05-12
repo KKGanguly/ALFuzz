@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- BinaryOperation v2, '*', v1
+    Reassign v1, v3
+    v4 <- CreateNamedVariable 'Array', 'none'
+    v5 <- Construct v4, [v1]
+    v6 <- CreateNamedVariable 'numbers', 'var', v5
+    BeginForLoopInitializer
+        v7 <- LoadInteger '0'
+    BeginForLoopCondition -> v8
+        v9 <- Compare v8, '<', v1
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation v10, '++'
+    BeginForLoopBody -> v12
+        SetComputedProperty v6, v12, v12
+    EndForLoop
+    v13 <- CallMethod v6, 'sort', []
+EndPlainFunction
+v14 <- LoadString '5001'
+v15 <- CallFunction v0, [v14]
+
+
+function testsort(a1) {
+    const v5 = new Array(a1 = 1 * a1);
+    var numbers = v5;
+    for (let i8 = 0; i8 < a1; i8++) {
+        numbers[i8] = i8;
+    }
+    numbers.sort();
+}
+testsort("5001");
+
+FuzzIL program written to corpus/regress-201.fzil

@@ -1,0 +1,36 @@
+BeginTry
+    v0 <- CreateNamedVariable 'f', 'none'
+    v1 <- CallFunction v0, []
+    v2 <- CreateNamedVariable 'a', 'none'
+    Reassign v2, v1
+BeginCatch -> v3
+EndTryCatch
+v4 <- LoadInteger '0'
+v5 <- CreateNamedVariable 'i', 'var', v4
+v6 <- BeginPlainFunction -> 
+    BeginTry
+        v7 <- CallFunction v6, []
+    BeginCatch -> v8
+        v9 <- UnaryOperation v5, '++'
+        v10 <- CreateArray []
+    EndTryCatch
+EndPlainFunction
+v11 <- CallFunction v6, []
+
+
+try {
+    a = f();
+} catch(e3) {
+}
+var i = 0;
+function f() {
+    try {
+        f();
+    } catch(e8) {
+        i++;
+        [];
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-543994.fzil

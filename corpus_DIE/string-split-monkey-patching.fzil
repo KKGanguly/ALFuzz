@@ -1,0 +1,36 @@
+v0 <- CreateNamedVariable 'assertUnreachable', 'none'
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetProperty v2, 'push', v0
+v3 <- GetProperty v1, 'prototype'
+v4 <- LoadString '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v0
+    ObjectLiteralAddProperty `set`, v0
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v3, v4, v5]
+v8 <- LoadRegExp '-' ''
+v9 <- LoadString '-'
+v10 <- CallMethod v9, 'split', [v8]
+v11 <- LoadRegExp '-' ''
+v12 <- LoadString 'I-must-not-use-push!'
+v13 <- CallMethod v12, 'split', [v11]
+v14 <- LoadRegExp '(-)' ''
+v15 <- LoadString 'Oh-no!'
+v16 <- CallMethod v15, 'split', [v14]
+v17 <- LoadRegExp '(a)|(b)' ''
+v18 <- LoadString 'a'
+v19 <- CallMethod v18, 'split', [v17]
+
+
+const t0 = Array.prototype;
+t0.push = assertUnreachable;
+const v3 = Array.prototype;
+Object.defineProperty(v3, "0", { get: assertUnreachable, set: assertUnreachable });
+("-").split(/-/);
+("I-must-not-use-push!").split(/-/);
+("Oh-no!").split(/(-)/);
+("a").split(/(a)|(b)/);
+
+FuzzIL program written to corpus/string-split-monkey-patching.fzil

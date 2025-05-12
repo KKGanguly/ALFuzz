@@ -1,0 +1,27 @@
+BeginTry
+    BeginObjectLiteral
+    v0 <- EndObjectLiteral
+    v1 <- CreateNamedVariable 'o', 'var', v0
+    v2 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v3 <- EndObjectLiteral
+    v4 <- Construct v2, [v3, v1]
+    v5 <- CreateNamedVariable 'p', 'var', v4
+    v6 <- CreateNamedVariable 'Error', 'none'
+    v7 <- CallMethod v6, 'captureStackTrace', [v5]
+BeginCatch -> v8
+    v9 <- LoadString 'invalid_argument'
+    v10 <- GetProperty v8, 'message'
+EndTryCatch
+
+
+try {
+    var o = {};
+    const v4 = new Proxy({}, o);
+    var p = v4;
+    Error.captureStackTrace(p);
+} catch(e8) {
+    e8.message;
+}
+
+FuzzIL program written to corpus/regress-crbug-599067.fzil

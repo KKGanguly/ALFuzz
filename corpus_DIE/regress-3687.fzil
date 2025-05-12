@@ -1,0 +1,42 @@
+v0 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f1`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 't1', 'var', v1
+v3 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f2`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 't2', 'var', v4
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+v7 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v5
+    ObjectLiteralAddProperty `y`, v7
+v8 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v6
+    ObjectLiteralAddProperty `z1`, v8
+v9 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v2
+    ObjectLiteralAddProperty `y`, v9
+v10 <- EndObjectLiteral
+v11 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v10
+    ObjectLiteralAddProperty `z2`, v11
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'z', 'var', v12
+
+
+var t1 = { f1: 0 };
+var t2 = { f2: 0 };
+const v6 = {};
+const v8 = { x: t2, y: 1 };
+const v9 = { x: v6, z1: v8 };
+const v10 = { x: t1, y: v9 };
+var z = { x: v10, z2: 0 };
+
+FuzzIL program written to corpus/regress-3687.fzil

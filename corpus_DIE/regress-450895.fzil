@@ -1,0 +1,16 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'v', 'var', v1
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- CallMethod v3, 'freeze', [v2]
+v5 <- LoadFloat '0.5'
+v6 <- CallMethod v2, 'concat', [v5]
+Reassign v2, v6
+
+
+const v1 = new Array();
+var v = v1;
+Object.freeze(v);
+v = v.concat(0.5);
+
+FuzzIL program written to corpus/regress-450895.fzil

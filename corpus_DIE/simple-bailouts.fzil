@@ -1,0 +1,314 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadThis
+    SetProperty v2, 'result', v1
+    v3 <- LoadInteger '0'
+    v4 <- LoadThis
+    SetProperty v4, 'x', v3
+    v5 <- LoadInteger '0'
+    v6 <- LoadThis
+    SetProperty v6, 'y', v5
+    v7 <- LoadInteger '0'
+    v8 <- LoadThis
+    SetProperty v8, 'z', v7
+EndPlainFunction
+v9 <- LoadInteger '1'
+v10 <- CreateNamedVariable 'a', 'var', v9
+v11 <- LoadInteger '2'
+v12 <- CreateNamedVariable 'b', 'var', v11
+v13 <- LoadInteger '4'
+v14 <- CreateNamedVariable 'c', 'var', v13
+v15 <- LoadInteger '8'
+v16 <- CreateNamedVariable 'd', 'var', v15
+v17 <- BeginPlainFunction -> 
+    v18 <- BinaryOperation v10, '|', v12
+    v19 <- LoadThis
+    SetProperty v19, 'result', v18
+EndPlainFunction
+v20 <- GetProperty v0, 'prototype'
+SetProperty v20, 'test0', v17
+v21 <- BeginPlainFunction -> 
+    v22 <- BinaryOperation v10, '|', v12
+    v23 <- BinaryOperation v22, '|', v14
+    v24 <- LoadThis
+    SetProperty v24, 'result', v23
+EndPlainFunction
+v25 <- GetProperty v0, 'prototype'
+SetProperty v25, 'test1', v21
+v26 <- BeginPlainFunction -> 
+    v27 <- BinaryOperation v12, '|', v14
+    v28 <- BinaryOperation v10, '|', v27
+    v29 <- LoadThis
+    SetProperty v29, 'result', v28
+EndPlainFunction
+v30 <- GetProperty v0, 'prototype'
+SetProperty v30, 'test2', v26
+v31 <- BeginPlainFunction -> 
+    v32 <- BinaryOperation v10, '|', v12
+    v33 <- BinaryOperation v32, '|', v14
+    v34 <- BinaryOperation v33, '|', v16
+    v35 <- LoadThis
+    SetProperty v35, 'result', v34
+EndPlainFunction
+v36 <- GetProperty v0, 'prototype'
+SetProperty v36, 'test3', v31
+v37 <- BeginPlainFunction -> 
+    v38 <- BinaryOperation v12, '|', v14
+    v39 <- BinaryOperation v10, '|', v38
+    v40 <- BinaryOperation v39, '|', v16
+    v41 <- LoadThis
+    SetProperty v41, 'result', v40
+EndPlainFunction
+v42 <- GetProperty v0, 'prototype'
+SetProperty v42, 'test4', v37
+v43 <- BeginPlainFunction -> 
+    v44 <- BinaryOperation v10, '|', v12
+    v45 <- BinaryOperation v14, '|', v16
+    v46 <- BinaryOperation v44, '|', v45
+    v47 <- LoadThis
+    SetProperty v47, 'result', v46
+EndPlainFunction
+v48 <- GetProperty v0, 'prototype'
+SetProperty v48, 'test5', v43
+v49 <- BeginPlainFunction -> 
+    v50 <- BinaryOperation v12, '|', v14
+    v51 <- BinaryOperation v50, '|', v16
+    v52 <- BinaryOperation v10, '|', v51
+    v53 <- LoadThis
+    SetProperty v53, 'result', v52
+EndPlainFunction
+v54 <- GetProperty v0, 'prototype'
+SetProperty v54, 'test6', v49
+v55 <- BeginPlainFunction -> 
+    v56 <- BinaryOperation v14, '|', v16
+    v57 <- BinaryOperation v12, '|', v56
+    v58 <- BinaryOperation v10, '|', v57
+    v59 <- LoadThis
+    SetProperty v59, 'result', v58
+EndPlainFunction
+v60 <- GetProperty v0, 'prototype'
+SetProperty v60, 'test7', v55
+v61 <- BeginPlainFunction -> 
+    v62 <- LoadThis
+    v63 <- GetProperty v62, 'x'
+    v64 <- BinaryOperation v63, '|', v12
+    v65 <- LoadThis
+    SetProperty v65, 'y', v64
+    v66 <- LoadThis
+    SetProperty v66, 'x', v14
+    v67 <- LoadThis
+    v68 <- GetProperty v67, 'x'
+    v69 <- BinaryOperation v68, '|', v10
+    v70 <- LoadThis
+    SetProperty v70, 'z', v69
+EndPlainFunction
+v71 <- GetProperty v0, 'prototype'
+SetProperty v71, 'test8', v61
+v72 <- BeginPlainFunction -> 
+    v73 <- LoadThis
+    v74 <- GetProperty v73, 'x'
+    v75 <- BinaryOperation v74, '|', v14
+    v76 <- LoadThis
+    SetProperty v76, 'y', v75
+    v77 <- BinaryOperation v75, '|', v16
+    v78 <- LoadThis
+    SetProperty v78, 'x', v77
+    v79 <- BinaryOperation v77, '|', v10
+    v80 <- LoadThis
+    SetProperty v80, 'z', v79
+EndPlainFunction
+v81 <- GetProperty v0, 'prototype'
+SetProperty v81, 'test9', v72
+v82 <- BeginPlainFunction -> 
+    v83 <- BinaryOperation v10, '>>', v12
+    v84 <- BinaryOperation v14, '>>', v14
+    v85 <- BinaryOperation v83, '|', v84
+    v86 <- LoadThis
+    SetProperty v86, 'z', v85
+EndPlainFunction
+v87 <- GetProperty v0, 'prototype'
+SetProperty v87, 'test10', v82
+v88 <- BeginPlainFunction -> v89
+    v90 <- BinaryOperation v89, '>>', v89
+    v91 <- LoadThis
+    SetProperty v91, 'z', v90
+EndPlainFunction
+v92 <- GetProperty v0, 'prototype'
+SetProperty v92, 'test11', v88
+v93 <- Construct v0, []
+v94 <- CreateNamedVariable 't', 'var', v93
+v95 <- CallMethod v94, 'test0', []
+v96 <- LoadInteger '3'
+v97 <- GetProperty v94, 'result'
+v98 <- CallMethod v94, 'test1', []
+v99 <- LoadInteger '7'
+v100 <- GetProperty v94, 'result'
+v101 <- CallMethod v94, 'test2', []
+v102 <- LoadInteger '7'
+v103 <- GetProperty v94, 'result'
+v104 <- CallMethod v94, 'test3', []
+v105 <- LoadInteger '15'
+v106 <- GetProperty v94, 'result'
+v107 <- CallMethod v94, 'test4', []
+v108 <- LoadInteger '15'
+v109 <- GetProperty v94, 'result'
+v110 <- CallMethod v94, 'test5', []
+v111 <- LoadInteger '15'
+v112 <- GetProperty v94, 'result'
+v113 <- CallMethod v94, 'test6', []
+v114 <- LoadInteger '15'
+v115 <- GetProperty v94, 'result'
+v116 <- CallMethod v94, 'test7', []
+v117 <- LoadInteger '15'
+v118 <- GetProperty v94, 'result'
+v119 <- LoadFloat '1.1'
+Reassign v10, v119
+v120 <- LoadInteger '1'
+SetProperty v94, 'x', v120
+v121 <- CallMethod v94, 'test8', []
+v122 <- LoadInteger '4'
+v123 <- GetProperty v94, 'x'
+v124 <- LoadInteger '3'
+v125 <- GetProperty v94, 'y'
+v126 <- LoadInteger '5'
+v127 <- GetProperty v94, 'z'
+v128 <- LoadInteger '2'
+SetProperty v94, 'x', v128
+v129 <- CallMethod v94, 'test9', []
+v130 <- LoadInteger '14'
+v131 <- GetProperty v94, 'x'
+v132 <- LoadInteger '6'
+v133 <- GetProperty v94, 'y'
+v134 <- LoadInteger '15'
+v135 <- GetProperty v94, 'z'
+v136 <- LoadString '2'
+Reassign v10, v136
+v137 <- CallMethod v94, 'test11', [v10]
+v138 <- LoadInteger '0'
+v139 <- GetProperty v94, 'z'
+v140 <- LoadInteger '4'
+Reassign v10, v140
+v141 <- LoadString '1'
+Reassign v12, v141
+v142 <- LoadInteger '2'
+Reassign v14, v142
+v143 <- CallMethod v94, 'test10', []
+v144 <- LoadInteger '2'
+v145 <- GetProperty v94, 'z'
+
+
+function Test() {
+    this.result = 0;
+    this.x = 0;
+    this.y = 0;
+    this.z = 0;
+}
+var a = 1;
+var b = 2;
+var c = 4;
+var d = 8;
+function f17() {
+    this.result = a | b;
+}
+const t13 = Test.prototype;
+t13.test0 = f17;
+function f21() {
+    this.result = (a | b) | c;
+}
+const t18 = Test.prototype;
+t18.test1 = f21;
+function f26() {
+    this.result = a | (b | c);
+}
+const t23 = Test.prototype;
+t23.test2 = f26;
+function f31() {
+    this.result = ((a | b) | c) | d;
+}
+const t28 = Test.prototype;
+t28.test3 = f31;
+function f37() {
+    this.result = (a | (b | c)) | d;
+}
+const t33 = Test.prototype;
+t33.test4 = f37;
+function f43() {
+    this.result = (a | b) | (c | d);
+}
+const t38 = Test.prototype;
+t38.test5 = f43;
+function f49() {
+    this.result = a | ((b | c) | d);
+}
+const t43 = Test.prototype;
+t43.test6 = f49;
+function f55() {
+    this.result = a | (b | (c | d));
+}
+const t48 = Test.prototype;
+t48.test7 = f55;
+function f61() {
+    this.y = this.x | b;
+    this.x = c;
+    this.z = this.x | a;
+}
+const t55 = Test.prototype;
+t55.test8 = f61;
+function f72() {
+    const v75 = this.x | c;
+    this.y = v75;
+    const v77 = v75 | d;
+    this.x = v77;
+    this.z = v77 | a;
+}
+const t64 = Test.prototype;
+t64.test9 = f72;
+function f82() {
+    this.z = (a >> b) | (c >> c);
+}
+const t69 = Test.prototype;
+t69.test10 = f82;
+function f88(a89) {
+    this.z = a89 >> a89;
+}
+const t74 = Test.prototype;
+t74.test11 = f88;
+const v93 = new Test();
+var t = v93;
+t.test0();
+t.result;
+t.test1();
+t.result;
+t.test2();
+t.result;
+t.test3();
+t.result;
+t.test4();
+t.result;
+t.test5();
+t.result;
+t.test6();
+t.result;
+t.test7();
+t.result;
+a = 1.1;
+t.x = 1;
+t.test8();
+t.x;
+t.y;
+t.z;
+t.x = 2;
+t.test9();
+t.x;
+t.y;
+t.z;
+a = "2";
+t.test11(a);
+t.z;
+a = 4;
+b = "1";
+c = 2;
+t.test10();
+t.z;
+
+FuzzIL program written to corpus/simple-bailouts.fzil

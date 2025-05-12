@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Math', 'none'
+    v3 <- GetProperty v2, 'E'
+    SetElement v1, '0', v3
+EndPlainFunction
+v4 <- LoadFloat '1.2'
+v5 <- CreateArray [v4]
+v6 <- CreateNamedVariable 'literal', 'var', v5
+v7 <- CallFunction v0, [v6]
+v8 <- CallFunction v0, [v6]
+v9 <- LoadInteger '0'
+SetProperty v6, 'length', v9
+v10 <- CreateNamedVariable 'Math', 'none'
+v11 <- GetProperty v10, 'E'
+v12 <- GetProperty v10, 'E'
+v13 <- CallMethod v6, 'push', [v11, v12]
+v14 <- CallFunction v0, [v6]
+v15 <- CreateNamedVariable 'gc', 'none'
+v16 <- CallFunction v15, []
+
+
+function KeyedStoreIC(a1) {
+    a1[0] = Math.E;
+}
+var literal = [1.2];
+KeyedStoreIC(literal);
+KeyedStoreIC(literal);
+literal.length = 0;
+literal.push(Math.E, Math.E);
+KeyedStoreIC(literal);
+gc();
+
+FuzzIL program written to corpus/regress-117409.fzil

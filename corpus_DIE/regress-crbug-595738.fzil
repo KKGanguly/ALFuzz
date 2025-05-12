@@ -1,0 +1,22 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    Return v1
+EndPlainFunction
+v2 <- CallMethod v0, 'bind', []
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toJSON`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'x', 'var', v3
+v5 <- LoadString '1'
+v6 <- CreateNamedVariable 'JSON', 'none'
+v7 <- CallMethod v6, 'stringify', [v4]
+
+
+function foo() {
+    return 1;
+}
+const v2 = foo.bind();
+var x = { toJSON: v2 };
+JSON.stringify(x);
+
+FuzzIL program written to corpus/regress-crbug-595738.fzil

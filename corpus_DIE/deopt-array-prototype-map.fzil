@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'array', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- BeginArrowFunction -> v6
+            v7 <- LoadInteger '1'
+            v8 <- BinaryOperation v6, '+', v7
+            Return v8
+        EndArrowFunction
+        v9 <- CallMethod v3, 'map', [v5]
+        Return v9
+    EndPlainFunction
+    v10 <- CallFunction v4, []
+    v11 <- CallFunction v4, []
+    v12 <- CallFunction v4, []
+    v13 <- LoadUndefined
+    v14 <- CreateArray [v13]
+    v15 <- LoadInteger '5'
+    v16 <- GetProperty v3, '__proto__'
+    v17 <- CallMethod v16, 'push', [v15]
+    v18 <- CallFunction v4, []
+    v19 <- CreateNamedVariable 'narr', 'var', v18
+    v20 <- LoadInteger '0'
+    v21 <- CreateNamedVariable 'Object', 'none'
+    v22 <- CallMethod v21, 'getOwnPropertyDescriptor', [v19, v20]
+    v23 <- LoadUndefined
+    v24 <- GetElement v19, '0'
+    v25 <- LoadInteger '6'
+EndPlainFunction
+v26 <- CallFunction v0, []
+
+
+function f0() {
+    var array = [,];
+    function map() {
+        const v5 = (a6) => {
+            return a6 + 1;
+        };
+        return array.map(v5);
+    }
+    map();
+    map();
+    map();
+    [,];
+    array.__proto__.push(5);
+    var narr = map();
+    Object.getOwnPropertyDescriptor(narr, 0);
+    narr[0];
+}
+f0();
+
+FuzzIL program written to corpus/deopt-array-prototype-map.fzil

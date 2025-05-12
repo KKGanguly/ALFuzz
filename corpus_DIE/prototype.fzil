@@ -1,0 +1,171 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    SetProperty v0, 'prototype', v4
+    v5 <- Construct v0, []
+    SetProperty v1, 'prototype', v5
+    v6 <- Construct v1, []
+    SetProperty v2, 'prototype', v6
+    v7 <- Construct v2, []
+    v8 <- CreateNamedVariable 'result', 'var', v7
+    v9 <- GetProperty v0, 'prototype'
+    SetProperty v8, 'A', v9
+    v10 <- GetProperty v1, 'prototype'
+    SetProperty v8, 'B', v10
+    v11 <- GetProperty v2, 'prototype'
+    SetProperty v8, 'C', v11
+    Return v8
+EndPlainFunction
+v12 <- CallFunction v3, []
+v13 <- CreateNamedVariable 'c', 'var', v12
+v14 <- LoadInteger '1'
+v15 <- GetProperty v13, 'A'
+SetProperty v15, 'x', v14
+v16 <- LoadInteger '2'
+v17 <- GetProperty v13, 'B'
+SetProperty v17, 'y', v16
+v18 <- LoadInteger '3'
+v19 <- GetProperty v13, 'C'
+SetProperty v19, 'z', v18
+v20 <- LoadInteger '1'
+v21 <- GetProperty v13, 'x'
+v22 <- LoadInteger '2'
+v23 <- GetProperty v13, 'y'
+v24 <- LoadInteger '3'
+v25 <- GetProperty v13, 'z'
+v26 <- CallFunction v3, []
+v27 <- CreateNamedVariable 'c', 'var', v26
+v28 <- LoadInteger '0'
+v29 <- GetProperty v27, 'A'
+SetProperty v29, 'x', v28
+BeginForLoopInitializer
+    v30 <- LoadInteger '0'
+BeginForLoopCondition -> v31
+    v32 <- LoadInteger '2'
+    v33 <- Compare v31, '<', v32
+BeginForLoopAfterthought v33 -> v34
+    v35 <- UnaryOperation v34, '++'
+BeginForLoopBody -> v36
+    v37 <- GetProperty v27, 'x'
+    v38 <- LoadInteger '1'
+    v39 <- GetProperty v27, 'B'
+    SetProperty v39, 'x', v38
+EndForLoop
+v40 <- BeginPlainFunction -> 
+    v41 <- LoadInteger '1'
+    v42 <- LoadThis
+    SetProperty v42, 'd', v41
+EndPlainFunction
+v43 <- CreateNamedVariable 'Object', 'none'
+v44 <- Construct v43, []
+v45 <- CreateNamedVariable 'p', 'var', v44
+v46 <- LoadInteger '1'
+SetProperty v45, 'y', v46
+v47 <- Construct v40, []
+SetProperty v40, 'prototype', v45
+v48 <- LoadInteger '1'
+v49 <- Construct v40, []
+v50 <- GetProperty v49, 'y'
+v51 <- BeginPlainFunction -> 
+EndPlainFunction
+v52 <- BeginPlainFunction -> 
+EndPlainFunction
+v53 <- BeginPlainFunction -> v54, v55
+EndPlainFunction
+SetProperty v51, 'prototype', v53
+v56 <- LoadInteger '1'
+v57 <- LoadInteger '2'
+v58 <- LoadInteger '3'
+v59 <- CreateArray [v56, v57, v58]
+SetProperty v52, 'prototype', v59
+v60 <- LoadInteger '2'
+v61 <- Construct v51, []
+v62 <- GetProperty v61, 'length'
+v63 <- LoadInteger '3'
+v64 <- Construct v52, []
+v65 <- GetProperty v64, 'length'
+v66 <- Construct v43, []
+v67 <- CreateNamedVariable 'test', 'var', v66
+v68 <- CreateNamedVariable 'Array', 'none'
+v69 <- Construct v68, []
+v70 <- GetProperty v69, '__proto__'
+SetProperty v67, '__proto__', v70
+v71 <- LoadInteger '14'
+SetProperty v67, 'length', v71
+v72 <- LoadInteger '14'
+v73 <- GetProperty v67, 'length'
+
+
+function A() {
+}
+function B() {
+}
+function C() {
+}
+function NewC() {
+    A.prototype = {};
+    const v5 = new A();
+    B.prototype = v5;
+    const v6 = new B();
+    C.prototype = v6;
+    const v7 = new C();
+    var result = v7;
+    result.A = A.prototype;
+    result.B = B.prototype;
+    result.C = C.prototype;
+    return result;
+}
+var c = NewC();
+const t20 = c.A;
+t20.x = 1;
+const t22 = c.B;
+t22.y = 2;
+const t24 = c.C;
+t24.z = 3;
+c.x;
+c.y;
+c.z;
+var c = NewC();
+const t30 = c.A;
+t30.x = 0;
+for (let i31 = 0; i31 < 2; i31++) {
+    c.x;
+    const t33 = c.B;
+    t33.x = 1;
+}
+function D() {
+    this.d = 1;
+}
+const v44 = new Object();
+var p = v44;
+p.y = 1;
+new D();
+D.prototype = p;
+const v49 = new D();
+v49.y;
+function X() {
+}
+function Y() {
+}
+function f53(a54, a55) {
+}
+X.prototype = f53;
+Y.prototype = [1,2,3];
+const v61 = new X();
+v61.length;
+const v64 = new Y();
+v64.length;
+const v66 = new Object();
+var test = v66;
+const v69 = new Array();
+test.__proto__ = v69.__proto__;
+test.length = 14;
+test.length;
+
+FuzzIL program written to corpus/prototype.fzil

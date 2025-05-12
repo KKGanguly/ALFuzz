@@ -1,0 +1,73 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    SetProperty v1, 'p1', v2
+    v3 <- LoadInteger '2'
+    SetProperty v1, 'p2', v3
+    v4 <- LoadInteger '3'
+    SetProperty v1, 'p3', v4
+    v5 <- LoadInteger '4'
+    SetProperty v1, 'p4', v5
+    v6 <- LoadInteger '5'
+    SetProperty v1, 'p5', v6
+    v7 <- LoadInteger '6'
+    SetProperty v1, 'p6', v7
+    v8 <- LoadInteger '7'
+    SetProperty v1, 'p7', v8
+    v9 <- LoadInteger '8'
+    SetProperty v1, 'p8', v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> v11
+    v12 <- DeleteProperty v11, 'p8'
+    v13 <- DeleteProperty v11, 'p7'
+    v14 <- DeleteProperty v11, 'p6'
+    v15 <- DeleteProperty v11, 'p5'
+EndPlainFunction
+v16 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v17 <- EndObjectLiteral
+    v18 <- CreateNamedVariable 'o', 'var', v17
+    v19 <- CallFunction v0, [v18]
+    v20 <- CallFunction v10, [v18]
+    v21 <- CallFunction v0, [v18]
+EndPlainFunction
+BeginForLoopInitializer
+    v22 <- LoadInteger '0'
+BeginForLoopCondition -> v23
+    v24 <- LoadInteger '3'
+    v25 <- Compare v23, '<', v24
+BeginForLoopAfterthought v25 -> v26
+    v27 <- UnaryOperation '++', v26
+BeginForLoopBody -> v28
+    v29 <- CallFunction v16, []
+    v30 <- CreateNamedVariable 'o', 'none'
+    Reassign v30, v29
+EndForLoop
+
+
+function addProperties(a1) {
+    a1.p1 = 1;
+    a1.p2 = 2;
+    a1.p3 = 3;
+    a1.p4 = 4;
+    a1.p5 = 5;
+    a1.p6 = 6;
+    a1.p7 = 7;
+    a1.p8 = 8;
+}
+function removeProperties(a11) {
+    delete a11.p8;
+    delete a11.p7;
+    delete a11.p6;
+    delete a11.p5;
+}
+function makeO() {
+    var o = {};
+    addProperties(o);
+    removeProperties(o);
+    addProperties(o);
+}
+for (let i23 = 0; i23 < 3; ++i23) {
+    o = makeO();
+}
+
+FuzzIL program written to corpus/regress-crbug-714981.fzil

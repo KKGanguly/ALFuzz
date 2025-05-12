@@ -1,0 +1,31 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 's'
+    v2 <- CreateNamedVariable 'key', 'var', v1
+    v3 <- BeginPlainFunction -> v4
+        v5 <- GetComputedProperty v4, v2
+        Return v5
+    EndPlainFunction
+    v6 <- LoadString ''
+    v7 <- CallFunction v3, [v6]
+    v8 <- LoadString ''
+    v9 <- CallFunction v3, [v8]
+    v10 <- LoadString ''
+    v11 <- CallFunction v3, [v10]
+    v12 <- CallFunction v3, []
+EndPlainFunction
+v13 <- CallFunction v0, []
+
+
+function f0() {
+    var key = "s";
+    function f(a4) {
+        return a4[key];
+    }
+    f("");
+    f("");
+    f("");
+    f();
+}
+f0();
+
+FuzzIL program written to corpus/regress-crbug-554831.fzil

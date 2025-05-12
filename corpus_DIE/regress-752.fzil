@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '42'
+    v4 <- Compare v2, '===', v3
+    v5 <- CreateNamedVariable 'Boolean', 'none'
+    v6 <- LoadBoolean 'false'
+    v7 <- Construct v5, [v6]
+    v8 <- TernaryOperation v4, v7, v2
+    Return v8
+EndPlainFunction
+v9 <- LoadString '[false]'
+v10 <- LoadInteger '42'
+v11 <- CreateArray [v10]
+v12 <- CreateNamedVariable 'JSON', 'none'
+v13 <- CallMethod v12, 'stringify', [v11, v0]
+
+
+function replacer(a1, a2) {
+    const v4 = a2 === 42;
+    const v7 = new Boolean(false);
+    return v4 ? v7 : a2;
+}
+JSON.stringify([42], replacer);
+
+FuzzIL program written to corpus/regress-752.fzil

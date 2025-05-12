@@ -1,0 +1,70 @@
+v0 <- CreateNamedVariable 'Map', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'm', 'var', v1
+v3 <- BeginPlainFunction -> 
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadBoolean 'true'
+    SetProperty v5, 'x', v6
+EndPlainFunction
+v7 <- Construct v3, []
+v8 <- CallFunction v4, [v7]
+v9 <- Construct v3, []
+v10 <- CallFunction v4, [v9]
+v11 <- Construct v3, []
+v12 <- CreateNamedVariable 'o', 'var', v11
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- LoadInteger '3'
+v15 <- CallMethod v2, 'set', [v13, v14]
+v16 <- LoadInteger '1'
+v17 <- CallMethod v2, 'set', [v12, v16]
+v18 <- LoadBoolean 'true'
+SetProperty v12, 'x', v18
+v19 <- DeleteProperty v12, 'x'
+v20 <- CallFunction v4, [v12]
+v21 <- LoadInteger '1'
+v22 <- CallMethod v2, 'get', [v12]
+BeginForLoopInitializer
+    v23 <- LoadInteger '0'
+BeginForLoopCondition -> v24
+    v25 <- LoadInteger '1000'
+    v26 <- Compare v24, '<', v25
+BeginForLoopAfterthought v26 -> v27
+    v28 <- UnaryOperation v27, '++'
+BeginForLoopBody -> v29
+    BeginObjectLiteral
+    v30 <- EndObjectLiteral
+    v31 <- CreateNamedVariable 'object', 'let', v30
+    v32 <- CallMethod v2, 'set', [v31, v31]
+    v33 <- LoadInteger '1'
+    v34 <- CallMethod v2, 'get', [v12]
+EndForLoop
+
+
+const v1 = new Map();
+var m = v1;
+function C() {
+}
+function f(a5) {
+    a5.x = true;
+}
+const v7 = new C();
+f(v7);
+const v9 = new C();
+f(v9);
+const v11 = new C();
+var o = v11;
+m.set({}, 3);
+m.set(o, 1);
+o.x = true;
+delete o.x;
+f(o);
+m.get(o);
+for (let i24 = 0; i24 < 1000; i24++) {
+    let object = {};
+    m.set(object, object);
+    m.get(o);
+}
+
+FuzzIL program written to corpus/regress-781218.fzil

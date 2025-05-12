@@ -1,0 +1,23 @@
+v0 <- LoadString 'ÿ'
+v1 <- CallMethod v0, 'toUpperCase', []
+v2 <- LoadString 'abcdefghijklmnÿopq'
+v3 <- LoadString 'ABCDEFGHIJKL'
+v4 <- LoadString 'MNŸOPQ'
+v5 <- BinaryOperation v3, '+', v4
+v6 <- CallMethod v5, 'toLowerCase', []
+v7 <- LoadString 'ÿ'
+v8 <- LoadString 'Ÿ'
+v9 <- CallMethod v8, 'toLowerCase', []
+v10 <- LoadString 'ABCDEFGHIJKLMNŸOPQ'
+v11 <- LoadString 'abcdefghijk'
+v12 <- LoadString 'lmnÿopq'
+v13 <- BinaryOperation v11, '+', v12
+v14 <- CallMethod v13, 'toUpperCase', []
+
+
+("ÿ").toUpperCase();
+("ABCDEFGHIJKL" + "MNŸOPQ").toLowerCase();
+("Ÿ").toLowerCase();
+("abcdefghijk" + "lmnÿopq").toUpperCase();
+
+FuzzIL program written to corpus/regress-2984.fzil

@@ -1,0 +1,57 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'result', 'var', v1
+    BeginBlockStatement
+        v3 <- LoadInteger '0'
+        v4 <- CreateNamedVariable 'sum', 'let', v3
+        BeginForLoopInitializer
+            v5 <- LoadInteger '0'
+        BeginForLoopCondition -> v6
+            v7 <- LoadInteger '100'
+            v8 <- Compare v6, '<', v7
+        BeginForLoopAfterthought v8 -> v9
+            v10 <- UnaryOperation v9, '++'
+        BeginForLoopBody -> v11
+            Update v4, '+', v11
+        EndForLoop
+        v12 <- CreateNamedVariable 'ret', 'none'
+        Reassign v2, v12
+        v13 <- BeginPlainFunction -> 
+            Return v4
+        EndPlainFunction
+    EndBlockStatement
+    Return v2
+EndPlainFunction
+v14 <- LoadInteger '4950'
+v15 <- CallFunction v0, []
+v16 <- CallFunction v15, []
+v17 <- LoadInteger '4950'
+v18 <- CallFunction v0, []
+v19 <- CallFunction v18, []
+v20 <- LoadInteger '4950'
+v21 <- CallFunction v0, []
+v22 <- CallFunction v21, []
+
+
+function foo() {
+    var result;
+    {
+        let sum = 0;
+        for (let i6 = 0; i6 < 100; i6++) {
+            sum += i6;
+        }
+        result = ret;
+        function ret() {
+            return sum;
+        }
+    }
+    return result;
+}
+const t14 = foo();
+t14();
+const t15 = foo();
+t15();
+const t17 = foo();
+t17();
+
+FuzzIL program written to corpus/osr-block-scope-func.fzil

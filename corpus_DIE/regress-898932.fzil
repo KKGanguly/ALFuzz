@@ -1,0 +1,33 @@
+v0 <- CreateNamedVariable 'WebAssembly', 'none'
+v1 <- GetProperty v0, 'Memory'
+v2 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `initial`, v2
+v3 <- EndObjectLiteral
+v4 <- Construct v1, [v3]
+v5 <- CreateNamedVariable 'mem', 'let', v4
+BeginTry
+    v6 <- LoadInteger '49151'
+    v7 <- CallMethod v5, 'grow', [v6]
+BeginCatch -> v8
+    v9 <- CreateNamedVariable 'RangeError', 'none'
+    v10 <- TestInstanceOf v8, v9
+    v11 <- UnaryOperation '!', v10
+    BeginIf v11
+        ThrowException v8
+    EndIf
+EndTryCatch
+
+
+const v1 = WebAssembly.Memory;
+const v4 = new v1({ initial: 1 });
+let mem = v4;
+try {
+    mem.grow(49151);
+} catch(e8) {
+    if (!(e8 instanceof RangeError)) {
+        throw e8;
+    }
+}
+
+FuzzIL program written to corpus/regress-898932.fzil

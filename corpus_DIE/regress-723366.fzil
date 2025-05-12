@@ -1,0 +1,62 @@
+v0 <- LoadInteger '0'
+v1 <- LoadInteger '0'
+v2 <- LoadInteger '2'
+v3 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v0
+    ObjectLiteralAddElement `0`, v1
+    ObjectLiteralAddElement `2`, v2
+    ObjectLiteralAddElement `3`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'o', 'var', v4
+v6 <- LoadString '1'
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadFloat '0.1'
+    v10 <- LoadThis
+    SetProperty v10, 'foo', v9
+EndPlainFunction
+v11 <- CallMethod v5, '__defineSetter__', [v6, v7]
+BeginForLoopInitializer
+    v12 <- LoadInteger '0'
+BeginForLoopCondition -> v13
+    v14 <- LoadInteger '4'
+    v15 <- Compare v13, '<', v14
+BeginForLoopAfterthought v15 -> v16
+    v17 <- UnaryOperation v16, '++'
+BeginForLoopBody -> v18
+    v19 <- LoadInteger '0'
+    v20 <- LoadInteger '1'
+    BeginSwitch v18
+        BeginSwitchCase v19
+            v21 <- LoadInteger '0'
+            SetProperty v5, 'p1', v21
+            Break
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v20
+            v22 <- LoadInteger '0'
+            SetProperty v5, 'p2', v22
+            Break
+        EndSwitchCase fallsThrough
+    EndSwitch
+    SetComputedProperty v5, v18, v18
+EndForLoop
+
+
+var o = { foo: 0, 0: 0, 2: 2, 3: 3 };
+function f7(a8) {
+    this.foo = 0.1;
+}
+o.__defineSetter__("1", f7);
+for (let i13 = 0; i13 < 4; i13++) {
+    switch (i13) {
+        case 0:
+            o.p1 = 0;
+            break;
+        case 1:
+            o.p2 = 0;
+            break;
+    }
+    o[i13] = i13;
+}
+
+FuzzIL program written to corpus/regress-723366.fzil

@@ -1,0 +1,1865 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- LoadString 'gaga'
+v3 <- CreateNamedVariable 'Symbol', 'none'
+v4 <- CallFunction v3, [v2]
+v5 <- CreateNamedVariable 'sym', 'var', v4
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+v7 <- CreateArray []
+v8 <- BeginPlainFunction -> 
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadArguments
+    Return v10
+EndPlainFunction
+v11 <- CallFunction v9, []
+v12 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v13 <- LoadArguments
+    Return v13
+EndPlainFunction
+v14 <- CallFunction v12, []
+v15 <- LoadInteger '1'
+v16 <- CreateNamedVariable 'Object', 'none'
+v17 <- CallFunction v16, [v15]
+v18 <- LoadBoolean 'true'
+v19 <- CallFunction v16, [v18]
+v20 <- LoadString 'bla'
+v21 <- CallFunction v16, [v20]
+v22 <- CreateNamedVariable 'Date', 'none'
+v23 <- Construct v22, []
+v24 <- CreateNamedVariable 'RegExp', 'none'
+v25 <- Construct v24, []
+v26 <- CreateNamedVariable 'Set', 'none'
+v27 <- Construct v26, []
+v28 <- CreateNamedVariable 'Map', 'none'
+v29 <- Construct v28, []
+v30 <- CreateNamedVariable 'WeakMap', 'none'
+v31 <- Construct v30, []
+v32 <- CreateNamedVariable 'WeakSet', 'none'
+v33 <- Construct v32, []
+v34 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v35 <- LoadInteger '10'
+v36 <- Construct v34, [v35]
+v37 <- CreateNamedVariable 'Int32Array', 'none'
+v38 <- LoadInteger '5'
+v39 <- Construct v37, [v38]
+v40 <- CreateNamedVariable 'Function', 'none'
+v41 <- CreateArray [v6, v7, v8, v11, v14, v17, v19, v21, v23, v25, v27, v29, v31, v33, v36, v39, v16, v40, v22, v24, v1]
+v42 <- CreateNamedVariable 'objects', 'var', v41
+v43 <- BeginPlainFunction -> v44
+    v45 <- LoadBoolean 'true'
+    v46 <- LoadString 'bla'
+    SetComputedProperty v44, v46, v45
+    v47 <- LoadInteger '42'
+    SetElement v44, '4', v47
+    v48 <- LoadString 'foo'
+    SetComputedProperty v44, v5, v48
+    v49 <- LoadInteger '43'
+    v50 <- LoadString 'noconf'
+    SetComputedProperty v44, v50, v49
+    v51 <- LoadString 'noconf'
+    v52 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `configurable`, v52
+    v53 <- EndObjectLiteral
+    v54 <- CallMethod v16, 'defineProperty', [v44, v51, v53]
+    v55 <- LoadString 'nowrite'
+    v56 <- LoadBoolean 'false'
+    v57 <- LoadBoolean 'true'
+    v58 <- LoadInteger '44'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `writable`, v56
+        ObjectLiteralAddProperty `configurable`, v57
+        ObjectLiteralAddProperty `value`, v58
+    v59 <- EndObjectLiteral
+    v60 <- CallMethod v16, 'defineProperty', [v44, v55, v59]
+    v61 <- LoadString 'getter'
+    v62 <- BeginPlainFunction -> 
+        v63 <- LoadThis
+        v64 <- GetProperty v63, 'bla'
+        Return v64
+    EndPlainFunction
+    v65 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v62
+        ObjectLiteralAddProperty `configurable`, v65
+    v66 <- EndObjectLiteral
+    v67 <- CallMethod v16, 'defineProperty', [v44, v61, v66]
+    v68 <- LoadString 'setter'
+    v69 <- BeginPlainFunction -> v70
+        v71 <- LoadThis
+        SetProperty v71, 'gaga', v70
+    EndPlainFunction
+    v72 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `set`, v69
+        ObjectLiteralAddProperty `configurable`, v72
+    v73 <- EndObjectLiteral
+    v74 <- CallMethod v16, 'defineProperty', [v44, v68, v73]
+    v75 <- LoadString 'setter2'
+    v76 <- BeginPlainFunction -> v77
+    EndPlainFunction
+    v78 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `set`, v76
+        ObjectLiteralAddProperty `configurable`, v78
+    v79 <- EndObjectLiteral
+    v80 <- CallMethod v16, 'defineProperty', [v44, v75, v79]
+EndPlainFunction
+v81 <- BeginPlainFunction -> 
+    v82 <- LoadInteger '2'
+    v83 <- CreateNamedVariable 'Reflect', 'none'
+    v84 <- GetProperty v83, 'get'
+    v85 <- GetProperty v84, 'length'
+EndPlainFunction
+v86 <- CallFunction v81, []
+v87 <- BeginPlainFunction -> 
+    v88 <- BeginPlainFunction -> 
+        v89 <- CreateNamedVariable 'Reflect', 'none'
+        v90 <- CallMethod v89, 'get', []
+    EndPlainFunction
+    v91 <- CallFunction v88, []
+    v92 <- CreateNamedVariable 'TypeError', 'none'
+    v93 <- BeginPlainFunction -> 
+        v94 <- LoadInteger '42'
+        v95 <- LoadString 'bla'
+        v96 <- CreateNamedVariable 'Reflect', 'none'
+        v97 <- CallMethod v96, 'get', [v94, v95]
+    EndPlainFunction
+    v98 <- CallFunction v93, []
+    v99 <- BeginPlainFunction -> 
+        v100 <- LoadNull
+        v101 <- LoadString 'bla'
+        v102 <- CreateNamedVariable 'Reflect', 'none'
+        v103 <- CallMethod v102, 'get', [v100, v101]
+    EndPlainFunction
+    v104 <- CallFunction v99, []
+EndPlainFunction
+v105 <- CallFunction v87, []
+v106 <- BeginPlainFunction -> 
+    v107 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `bla`, v107
+    v108 <- EndObjectLiteral
+    v109 <- CreateNamedVariable 'target', 'var', v108
+    v110 <- BeginPlainFunction -> 
+        v111 <- LoadString 'bla'
+        Return v111
+    EndPlainFunction
+    v112 <- GetProperty v3, 'toPrimitive'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v112, v110
+    v113 <- EndObjectLiteral
+    v114 <- CreateNamedVariable 'a', 'var', v113
+    v115 <- BeginPlainFunction -> 
+        v116 <- LoadString 'gaga'
+        ThrowException v116
+    EndPlainFunction
+    v117 <- GetProperty v3, 'toPrimitive'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v117, v115
+    v118 <- EndObjectLiteral
+    v119 <- CreateNamedVariable 'b', 'var', v118
+    v120 <- LoadInteger '42'
+    v121 <- CreateNamedVariable 'Reflect', 'none'
+    v122 <- CallMethod v121, 'get', [v109, v114]
+    v123 <- BeginPlainFunction -> 
+        v124 <- CallMethod v121, 'get', [v109, v119]
+    EndPlainFunction
+    v125 <- CallFunction v123, []
+    v126 <- LoadString 'gaga'
+EndPlainFunction
+v127 <- CallFunction v106, []
+v128 <- BeginPlainFunction -> 
+    v129 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `bla`, v129
+    v130 <- EndObjectLiteral
+    v131 <- CreateNamedVariable 'receiver', 'var', v130
+    BeginForOfLoop v42 -> v132
+        v133 <- CallFunction v43, [v132]
+        v134 <- LoadBoolean 'true'
+        v135 <- LoadString 'bla'
+        v136 <- CreateNamedVariable 'Reflect', 'none'
+        v137 <- CallMethod v136, 'get', [v132, v135]
+        v138 <- LoadBoolean 'true'
+        v139 <- LoadString 'bla'
+        v140 <- CallMethod v136, 'get', [v132, v139, v132]
+        v141 <- LoadBoolean 'true'
+        v142 <- LoadString 'bla'
+        v143 <- CallMethod v136, 'get', [v132, v142, v131]
+        v144 <- LoadInteger '42'
+        v145 <- LoadInteger '4'
+        v146 <- CallMethod v136, 'get', [v132, v145]
+        v147 <- LoadInteger '42'
+        v148 <- LoadInteger '4'
+        v149 <- CallMethod v136, 'get', [v132, v148, v132]
+        v150 <- LoadInteger '42'
+        v151 <- LoadInteger '4'
+        v152 <- CallMethod v136, 'get', [v132, v151, v131]
+        v153 <- LoadInteger '42'
+        v154 <- LoadString '4'
+        v155 <- CallMethod v136, 'get', [v132, v154]
+        v156 <- LoadInteger '42'
+        v157 <- LoadString '4'
+        v158 <- CallMethod v136, 'get', [v132, v157, v132]
+        v159 <- LoadInteger '42'
+        v160 <- LoadString '4'
+        v161 <- CallMethod v136, 'get', [v132, v160, v131]
+        v162 <- LoadString 'foo'
+        v163 <- CallMethod v136, 'get', [v132, v5]
+        v164 <- LoadString 'foo'
+        v165 <- CallMethod v136, 'get', [v132, v5, v132]
+        v166 <- LoadString 'foo'
+        v167 <- CallMethod v136, 'get', [v132, v5, v131]
+        v168 <- LoadInteger '43'
+        v169 <- LoadString 'noconf'
+        v170 <- CallMethod v136, 'get', [v132, v169]
+        v171 <- LoadInteger '43'
+        v172 <- LoadString 'noconf'
+        v173 <- CallMethod v136, 'get', [v132, v172, v132]
+        v174 <- LoadInteger '43'
+        v175 <- LoadString 'noconf'
+        v176 <- CallMethod v136, 'get', [v132, v175, v131]
+        v177 <- LoadBoolean 'true'
+        v178 <- LoadString 'getter'
+        v179 <- CallMethod v136, 'get', [v132, v178]
+        v180 <- LoadBoolean 'true'
+        v181 <- LoadString 'getter'
+        v182 <- CallMethod v136, 'get', [v132, v181, v132]
+        v183 <- LoadBoolean 'false'
+        v184 <- LoadString 'getter'
+        v185 <- CallMethod v136, 'get', [v132, v184, v131]
+        v186 <- LoadUndefined
+        v187 <- LoadString 'setter'
+        v188 <- CallMethod v136, 'get', [v132, v187]
+        v189 <- LoadUndefined
+        v190 <- LoadString 'setter'
+        v191 <- CallMethod v136, 'get', [v132, v190, v132]
+        v192 <- LoadUndefined
+        v193 <- LoadString 'setter'
+        v194 <- CallMethod v136, 'get', [v132, v193, v131]
+        v195 <- LoadUndefined
+        v196 <- LoadString 'foo'
+        v197 <- CallMethod v136, 'get', [v132, v196]
+        v198 <- LoadUndefined
+        v199 <- LoadString 'foo'
+        v200 <- CallMethod v136, 'get', [v132, v199, v132]
+        v201 <- LoadUndefined
+        v202 <- LoadString 'foo'
+        v203 <- CallMethod v136, 'get', [v132, v202, v131]
+        v204 <- LoadUndefined
+        v205 <- LoadInteger '666'
+        v206 <- CallMethod v136, 'get', [v132, v205]
+        v207 <- LoadUndefined
+        v208 <- LoadInteger '666'
+        v209 <- CallMethod v136, 'get', [v132, v208, v132]
+        v210 <- LoadUndefined
+        v211 <- LoadInteger '666'
+        v212 <- CallMethod v136, 'get', [v132, v211, v131]
+        v213 <- GetProperty v132, '__proto__'
+        v214 <- CreateNamedVariable 'proto', 'let', v213
+        BeginObjectLiteral
+            BeginObjectLiteralGetter `foo` -> v215
+                v216 <- GetProperty v215, 'bla'
+                Return v216
+            EndObjectLiteralGetter
+        v217 <- EndObjectLiteral
+        SetProperty v132, '__proto__', v217
+        v218 <- LoadBoolean 'true'
+        v219 <- LoadString 'foo'
+        v220 <- CallMethod v136, 'get', [v132, v219]
+        v221 <- LoadBoolean 'true'
+        v222 <- LoadString 'foo'
+        v223 <- CallMethod v136, 'get', [v132, v222, v132]
+        v224 <- LoadBoolean 'false'
+        v225 <- LoadString 'foo'
+        v226 <- CallMethod v136, 'get', [v132, v225, v131]
+        SetProperty v132, '__proto__', v214
+    EndForOfLoop
+EndPlainFunction
+v227 <- CallFunction v128, []
+v228 <- BeginPlainFunction -> 
+    v229 <- LoadInteger '3'
+    v230 <- CreateNamedVariable 'Reflect', 'none'
+    v231 <- GetProperty v230, 'set'
+    v232 <- GetProperty v231, 'length'
+EndPlainFunction
+v233 <- CallFunction v228, []
+v234 <- BeginPlainFunction -> 
+    v235 <- BeginPlainFunction -> 
+        v236 <- CreateNamedVariable 'Reflect', 'none'
+        v237 <- CallMethod v236, 'set', []
+    EndPlainFunction
+    v238 <- CallFunction v235, []
+    v239 <- CreateNamedVariable 'TypeError', 'none'
+    v240 <- BeginPlainFunction -> 
+        v241 <- LoadInteger '42'
+        v242 <- LoadString 'bla'
+        v243 <- CreateNamedVariable 'Reflect', 'none'
+        v244 <- CallMethod v243, 'set', [v241, v242]
+    EndPlainFunction
+    v245 <- CallFunction v240, []
+    v246 <- BeginPlainFunction -> 
+        v247 <- LoadNull
+        v248 <- LoadString 'bla'
+        v249 <- CreateNamedVariable 'Reflect', 'none'
+        v250 <- CallMethod v249, 'set', [v247, v248]
+    EndPlainFunction
+    v251 <- CallFunction v246, []
+EndPlainFunction
+v252 <- CallFunction v234, []
+v253 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v254 <- EndObjectLiteral
+    v255 <- CreateNamedVariable 'target', 'var', v254
+    v256 <- BeginPlainFunction -> 
+        v257 <- LoadString 'bla'
+        Return v257
+    EndPlainFunction
+    v258 <- GetProperty v3, 'toPrimitive'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v258, v256
+    v259 <- EndObjectLiteral
+    v260 <- CreateNamedVariable 'a', 'var', v259
+    v261 <- BeginPlainFunction -> 
+        v262 <- LoadString 'gaga'
+        ThrowException v262
+    EndPlainFunction
+    v263 <- GetProperty v3, 'toPrimitive'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v263, v261
+    v264 <- EndObjectLiteral
+    v265 <- CreateNamedVariable 'b', 'var', v264
+    v266 <- LoadInteger '42'
+    v267 <- CreateNamedVariable 'Reflect', 'none'
+    v268 <- CallMethod v267, 'set', [v255, v260, v266]
+    v269 <- LoadInteger '42'
+    v270 <- GetProperty v255, 'bla'
+    v271 <- BeginPlainFunction -> 
+        v272 <- LoadInteger '42'
+        v273 <- CallMethod v267, 'set', [v255, v265, v272]
+    EndPlainFunction
+    v274 <- CallFunction v271, []
+    v275 <- LoadString 'gaga'
+EndPlainFunction
+v276 <- CallFunction v253, []
+v277 <- BeginPlainFunction -> 
+    v278 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `bla`, v278
+    v279 <- EndObjectLiteral
+    v280 <- CreateNamedVariable 'receiver', 'var', v279
+    v281 <- LoadInteger '34234'
+    v282 <- CreateNamedVariable 'value', 'var', v281
+    BeginForOfLoop v42 -> v283
+        v284 <- CallFunction v43, [v283]
+        v285 <- LoadString 'bla'
+        v286 <- CreateNamedVariable 'Reflect', 'none'
+        v287 <- CallMethod v286, 'set', [v283, v285, v282]
+        v288 <- GetProperty v283, 'bla'
+        v289 <- CallFunction v43, [v283]
+        v290 <- LoadString 'bla'
+        v291 <- CallMethod v286, 'set', [v283, v290, v282, v283]
+        v292 <- GetProperty v283, 'bla'
+        v293 <- CallFunction v43, [v283]
+        v294 <- LoadString 'bla'
+        v295 <- CallMethod v286, 'set', [v283, v294, v282, v280]
+        v296 <- LoadBoolean 'true'
+        v297 <- GetProperty v283, 'bla'
+        v298 <- GetProperty v280, 'bla'
+        v299 <- LoadBoolean 'false'
+        SetProperty v280, 'bla', v299
+        v300 <- CallFunction v43, [v283]
+        v301 <- LoadInteger '4'
+        v302 <- CallMethod v286, 'set', [v283, v301, v282]
+        v303 <- GetElement v283, '4'
+        v304 <- CallFunction v43, [v283]
+        v305 <- LoadInteger '4'
+        v306 <- CallMethod v286, 'set', [v283, v305, v282, v283]
+        v307 <- GetElement v283, '4'
+        v308 <- CallFunction v43, [v283]
+        v309 <- LoadInteger '4'
+        v310 <- CallMethod v286, 'set', [v283, v309, v282, v280]
+        v311 <- LoadInteger '42'
+        v312 <- GetElement v283, '4'
+        v313 <- GetElement v280, '4'
+        v314 <- LoadInteger '4'
+        v315 <- DeleteElement v280, '4'
+        v316 <- CallFunction v43, [v283]
+        v317 <- CallMethod v286, 'set', [v283, v5, v282]
+        v318 <- GetComputedProperty v283, v5
+        v319 <- CallFunction v43, [v283]
+        v320 <- CallMethod v286, 'set', [v283, v5, v282, v283]
+        v321 <- GetComputedProperty v283, v5
+        v322 <- CallFunction v43, [v283]
+        v323 <- CallMethod v286, 'set', [v283, v5, v282, v280]
+        v324 <- LoadString 'foo'
+        v325 <- GetComputedProperty v283, v5
+        v326 <- GetComputedProperty v280, v5
+        v327 <- DeleteComputedProperty v280, v5
+        v328 <- CallFunction v43, [v283]
+        v329 <- LoadString 'noconf'
+        v330 <- CallMethod v286, 'set', [v283, v329, v282]
+        v331 <- GetProperty v283, 'noconf'
+        v332 <- CallFunction v43, [v283]
+        v333 <- LoadString 'noconf'
+        v334 <- CallMethod v286, 'set', [v283, v333, v282, v283]
+        v335 <- GetProperty v283, 'noconf'
+        v336 <- CallFunction v43, [v283]
+        v337 <- LoadString 'noconf'
+        v338 <- CallMethod v286, 'set', [v283, v337, v282, v280]
+        v339 <- LoadInteger '43'
+        v340 <- GetProperty v283, 'noconf'
+        v341 <- GetProperty v280, 'noconf'
+        v342 <- DeleteProperty v280, 'noconf'
+        v343 <- LoadString 'setter'
+        v344 <- CallMethod v286, 'set', [v283, v343, v282]
+        v345 <- GetProperty v283, 'gaga'
+        v346 <- DeleteProperty v283, 'gaga'
+        v347 <- LoadString 'setter'
+        v348 <- CallMethod v286, 'set', [v283, v347, v282, v283]
+        v349 <- GetProperty v283, 'gaga'
+        v350 <- DeleteProperty v283, 'gaga'
+        v351 <- LoadString 'setter'
+        v352 <- CallMethod v286, 'set', [v283, v351, v282, v280]
+        v353 <- LoadString 'gaga'
+        v354 <- TestIn v353, v283
+        v355 <- GetProperty v280, 'gaga'
+        v356 <- DeleteProperty v280, 'gaga'
+        v357 <- LoadString 'nowrite'
+        v358 <- CallMethod v286, 'set', [v283, v357, v282]
+        v359 <- LoadInteger '44'
+        v360 <- GetProperty v283, 'nowrite'
+        v361 <- LoadString 'nowrite'
+        v362 <- CallMethod v286, 'set', [v283, v361, v282, v283]
+        v363 <- LoadInteger '44'
+        v364 <- GetProperty v283, 'nowrite'
+        v365 <- LoadString 'nowrite'
+        v366 <- CallMethod v286, 'set', [v283, v365, v282, v280]
+        v367 <- LoadInteger '44'
+        v368 <- GetProperty v283, 'nowrite'
+        v369 <- LoadString 'nowrite'
+        v370 <- TestIn v369, v280
+        BeginObjectLiteral
+        v371 <- EndObjectLiteral
+        v372 <- LoadString 'nowrite'
+        v373 <- CallMethod v286, 'set', [v371, v372, v282, v283]
+        BeginObjectLiteral
+        v374 <- EndObjectLiteral
+        v375 <- LoadString 'unknown'
+        v376 <- LoadInteger '0'
+        BeginObjectLiteral
+            BeginObjectLiteralSetter `unknown` -> v377, v378
+            EndObjectLiteralSetter
+        v379 <- EndObjectLiteral
+        v380 <- CallMethod v286, 'set', [v374, v375, v376, v379]
+        v381 <- LoadString 'unknown'
+        BeginObjectLiteral
+            BeginObjectLiteralSetter `unknown` -> v382, v383
+            EndObjectLiteralSetter
+        v384 <- EndObjectLiteral
+        v385 <- CallMethod v286, 'set', [v283, v381, v282, v384]
+        v386 <- LoadString 'bla'
+        BeginObjectLiteral
+            BeginObjectLiteralSetter `bla` -> v387, v388
+            EndObjectLiteralSetter
+        v389 <- EndObjectLiteral
+        v390 <- CallMethod v286, 'set', [v283, v386, v282, v389]
+        v391 <- LoadString 'bla'
+        BeginObjectLiteral
+            BeginObjectLiteralGetter `bla` -> v392
+            EndObjectLiteralGetter
+        v393 <- EndObjectLiteral
+        v394 <- CallMethod v286, 'set', [v283, v391, v282, v393]
+        BeginObjectLiteral
+            BeginObjectLiteralSetter `bla` -> v395, v396
+            EndObjectLiteralSetter
+        v397 <- EndObjectLiteral
+        v398 <- CallMethod v286, 'set', [v397]
+        v399 <- LoadString 'bla'
+        BeginObjectLiteral
+            BeginObjectLiteralGetter `bla` -> v400
+            EndObjectLiteralGetter
+        v401 <- EndObjectLiteral
+        v402 <- LoadString 'bla'
+        v403 <- CallMethod v286, 'set', [v401, v402, v282, v283]
+        BeginObjectLiteral
+        v404 <- EndObjectLiteral
+        v405 <- LoadString 'bla'
+        v406 <- LoadNull
+        v407 <- CallMethod v286, 'set', [v404, v405, v282, v406]
+        v408 <- LoadInteger '42'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `bla`, v408
+        v409 <- EndObjectLiteral
+        v410 <- LoadString 'bla'
+        v411 <- LoadNull
+        v412 <- CallMethod v286, 'set', [v409, v410, v282, v411]
+        v413 <- LoadString 'setter2'
+        v414 <- LoadNull
+        v415 <- CallMethod v286, 'set', [v283, v413, v282, v414]
+        v416 <- LoadString 'getter'
+        v417 <- LoadNull
+        v418 <- CallMethod v286, 'set', [v283, v416, v282, v417]
+        BeginObjectLiteral
+        v419 <- EndObjectLiteral
+        v420 <- CreateNamedVariable 'receiver2', 'let', v419
+        v421 <- LoadString 'bla'
+        v422 <- LoadBoolean 'false'
+        v423 <- LoadBoolean 'true'
+        v424 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `configurable`, v422
+            ObjectLiteralAddProperty `writable`, v423
+            ObjectLiteralAddProperty `value`, v424
+        v425 <- EndObjectLiteral
+        v426 <- CallMethod v16, 'defineProperty', [v420, v421, v425]
+        v427 <- LoadString 'not_in_target'
+        v428 <- LoadBoolean 'false'
+        v429 <- LoadBoolean 'true'
+        v430 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `configurable`, v428
+            ObjectLiteralAddProperty `writable`, v429
+            ObjectLiteralAddProperty `value`, v430
+        v431 <- EndObjectLiteral
+        v432 <- CallMethod v16, 'defineProperty', [v420, v427, v431]
+        v433 <- LoadString 'bla'
+        v434 <- CallMethod v286, 'set', [v283, v433, v282, v420]
+        v435 <- LoadString 'not_in_target'
+        v436 <- CallMethod v286, 'set', [v283, v435, v282, v420]
+    EndForOfLoop
+EndPlainFunction
+v437 <- CallFunction v277, []
+v438 <- BeginPlainFunction -> 
+    v439 <- CreateArray []
+    v440 <- CreateNamedVariable 'y', 'var', v439
+    v441 <- LoadInteger '0'
+    v442 <- LoadInteger '42'
+    v443 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v442
+        ObjectLiteralAddProperty `configurable`, v443
+    v444 <- EndObjectLiteral
+    v445 <- CallMethod v16, 'defineProperty', [v440, v441, v444]
+    v446 <- LoadString 'length'
+    v447 <- LoadInteger '0'
+    v448 <- CreateNamedVariable 'Reflect', 'none'
+    v449 <- CallMethod v448, 'set', [v440, v446, v447]
+    v450 <- LoadString 'length'
+    v451 <- LoadInteger '2'
+    v452 <- CallMethod v448, 'set', [v440, v450, v451]
+EndPlainFunction
+v453 <- CallFunction v438, []
+v454 <- BeginPlainFunction -> 
+    v455 <- LoadInteger '2'
+    v456 <- CreateNamedVariable 'Reflect', 'none'
+    v457 <- GetProperty v456, 'has'
+    v458 <- GetProperty v457, 'length'
+EndPlainFunction
+v459 <- CallFunction v454, []
+v460 <- BeginPlainFunction -> 
+    v461 <- BeginPlainFunction -> 
+        v462 <- CreateNamedVariable 'Reflect', 'none'
+        v463 <- CallMethod v462, 'has', []
+    EndPlainFunction
+    v464 <- CallFunction v461, []
+    v465 <- CreateNamedVariable 'TypeError', 'none'
+    v466 <- BeginPlainFunction -> 
+        v467 <- LoadInteger '42'
+        v468 <- LoadString 'bla'
+        v469 <- CreateNamedVariable 'Reflect', 'none'
+        v470 <- CallMethod v469, 'has', [v467, v468]
+    EndPlainFunction
+    v471 <- CallFunction v466, []
+    v472 <- BeginPlainFunction -> 
+        v473 <- LoadNull
+        v474 <- LoadString 'bla'
+        v475 <- CreateNamedVariable 'Reflect', 'none'
+        v476 <- CallMethod v475, 'has', [v473, v474]
+    EndPlainFunction
+    v477 <- CallFunction v472, []
+EndPlainFunction
+v478 <- CallFunction v460, []
+v479 <- BeginPlainFunction -> 
+    v480 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `bla`, v480
+    v481 <- EndObjectLiteral
+    v482 <- CreateNamedVariable 'target', 'var', v481
+    v483 <- BeginPlainFunction -> 
+        v484 <- LoadString 'bla'
+        Return v484
+    EndPlainFunction
+    v485 <- GetProperty v3, 'toPrimitive'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v485, v483
+    v486 <- EndObjectLiteral
+    v487 <- CreateNamedVariable 'a', 'var', v486
+    v488 <- BeginPlainFunction -> 
+        v489 <- LoadString 'gaga'
+        ThrowException v489
+    EndPlainFunction
+    v490 <- GetProperty v3, 'toPrimitive'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v490, v488
+    v491 <- EndObjectLiteral
+    v492 <- CreateNamedVariable 'b', 'var', v491
+    v493 <- CreateNamedVariable 'Reflect', 'none'
+    v494 <- CallMethod v493, 'has', [v482, v487]
+    v495 <- BeginPlainFunction -> 
+        v496 <- CallMethod v493, 'has', [v482, v492]
+    EndPlainFunction
+    v497 <- CallFunction v495, []
+    v498 <- LoadString 'gaga'
+EndPlainFunction
+v499 <- CallFunction v479, []
+v500 <- BeginPlainFunction -> 
+    BeginForOfLoop v42 -> v501
+        v502 <- CallFunction v43, [v501]
+        v503 <- LoadString 'bla'
+        v504 <- CreateNamedVariable 'Reflect', 'none'
+        v505 <- CallMethod v504, 'has', [v501, v503]
+        v506 <- LoadInteger '4'
+        v507 <- CallMethod v504, 'has', [v501, v506]
+        v508 <- LoadString '4'
+        v509 <- CallMethod v504, 'has', [v501, v508]
+        v510 <- CallMethod v504, 'has', [v501, v5]
+        v511 <- LoadString 'noconf'
+        v512 <- CallMethod v504, 'has', [v501, v511]
+        v513 <- LoadString 'getter'
+        v514 <- CallMethod v504, 'has', [v501, v513]
+        v515 <- LoadString 'setter'
+        v516 <- CallMethod v504, 'has', [v501, v515]
+        v517 <- LoadString 'foo'
+        v518 <- CallMethod v504, 'has', [v501, v517]
+        v519 <- LoadInteger '666'
+        v520 <- CallMethod v504, 'has', [v501, v519]
+        v521 <- GetProperty v501, '__proto__'
+        v522 <- CreateNamedVariable 'proto', 'let', v521
+        BeginObjectLiteral
+            BeginObjectLiteralGetter `foo` -> v523
+                v524 <- GetProperty v523, 'bla'
+                Return v524
+            EndObjectLiteralGetter
+        v525 <- EndObjectLiteral
+        SetProperty v501, '__proto__', v525
+        v526 <- LoadBoolean 'true'
+        v527 <- LoadString 'foo'
+        v528 <- CallMethod v504, 'has', [v501, v527]
+        SetProperty v501, '__proto__', v522
+    EndForOfLoop
+EndPlainFunction
+v529 <- CallFunction v500, []
+v530 <- BeginPlainFunction -> 
+    v531 <- LoadInteger '3'
+    v532 <- CreateNamedVariable 'Reflect', 'none'
+    v533 <- GetProperty v532, 'defineProperty'
+    v534 <- GetProperty v533, 'length'
+EndPlainFunction
+v535 <- CallFunction v530, []
+v536 <- BeginPlainFunction -> 
+    v537 <- BeginPlainFunction -> 
+        v538 <- CreateNamedVariable 'Reflect', 'none'
+        v539 <- CallMethod v538, 'defineProperty', []
+    EndPlainFunction
+    v540 <- CallFunction v537, []
+    v541 <- CreateNamedVariable 'TypeError', 'none'
+    v542 <- BeginPlainFunction -> 
+        v543 <- LoadInteger '42'
+        v544 <- LoadString 'bla'
+        v545 <- CreateNamedVariable 'Reflect', 'none'
+        v546 <- CallMethod v545, 'defineProperty', [v543, v544]
+    EndPlainFunction
+    v547 <- CallFunction v542, []
+    v548 <- BeginPlainFunction -> 
+        v549 <- LoadNull
+        v550 <- LoadString 'bla'
+        v551 <- CreateNamedVariable 'Reflect', 'none'
+        v552 <- CallMethod v551, 'defineProperty', [v549, v550]
+    EndPlainFunction
+    v553 <- CallFunction v548, []
+    v554 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v555 <- EndObjectLiteral
+        v556 <- LoadString 'bla'
+        v557 <- CreateNamedVariable 'Reflect', 'none'
+        v558 <- CallMethod v557, 'defineProperty', [v555, v556]
+    EndPlainFunction
+    v559 <- CallFunction v554, []
+    v560 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v561 <- EndObjectLiteral
+        v562 <- LoadString 'bla'
+        v563 <- LoadInteger '42'
+        v564 <- CreateNamedVariable 'Reflect', 'none'
+        v565 <- CallMethod v564, 'defineProperty', [v561, v562, v563]
+    EndPlainFunction
+    v566 <- CallFunction v560, []
+    v567 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v568 <- EndObjectLiteral
+        v569 <- LoadString 'bla'
+        v570 <- LoadNull
+        v571 <- CreateNamedVariable 'Reflect', 'none'
+        v572 <- CallMethod v571, 'defineProperty', [v568, v569, v570]
+    EndPlainFunction
+    v573 <- CallFunction v567, []
+EndPlainFunction
+v574 <- CallFunction v536, []
+v575 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v576 <- EndObjectLiteral
+    v577 <- CreateNamedVariable 'target', 'var', v576
+    v578 <- BeginPlainFunction -> 
+        v579 <- LoadString 'bla'
+        Return v579
+    EndPlainFunction
+    v580 <- GetProperty v3, 'toPrimitive'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v580, v578
+    v581 <- EndObjectLiteral
+    v582 <- CreateNamedVariable 'a', 'var', v581
+    v583 <- BeginPlainFunction -> 
+        v584 <- LoadString 'gaga'
+        ThrowException v584
+    EndPlainFunction
+    v585 <- GetProperty v3, 'toPrimitive'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v585, v583
+    v586 <- EndObjectLiteral
+    v587 <- CreateNamedVariable 'b', 'var', v586
+    v588 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v588
+    v589 <- EndObjectLiteral
+    v590 <- CreateNamedVariable 'Reflect', 'none'
+    v591 <- CallMethod v590, 'defineProperty', [v577, v582, v589]
+    v592 <- GetProperty v577, 'bla'
+    v593 <- LoadInteger '42'
+    v594 <- BeginPlainFunction -> 
+        v595 <- CallMethod v590, 'defineProperty', [v577, v587]
+    EndPlainFunction
+    v596 <- CallFunction v594, []
+    v597 <- LoadString 'gaga'
+EndPlainFunction
+v598 <- CallFunction v575, []
+v599 <- BeginPlainFunction -> 
+    v600 <- CreateArray []
+    v601 <- CreateNamedVariable 'y', 'var', v600
+    v602 <- LoadInteger '0'
+    v603 <- LoadInteger '42'
+    v604 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v603
+        ObjectLiteralAddProperty `configurable`, v604
+    v605 <- EndObjectLiteral
+    v606 <- CallMethod v16, 'defineProperty', [v601, v602, v605]
+    v607 <- LoadString 'length'
+    v608 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v608
+    v609 <- EndObjectLiteral
+    v610 <- CreateNamedVariable 'Reflect', 'none'
+    v611 <- CallMethod v610, 'defineProperty', [v601, v607, v609]
+    v612 <- LoadString 'length'
+    v613 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v613
+    v614 <- EndObjectLiteral
+    v615 <- CallMethod v610, 'defineProperty', [v601, v612, v614]
+EndPlainFunction
+v616 <- CallFunction v599, []
+v617 <- BeginPlainFunction -> 
+    v618 <- LoadInteger '2'
+    v619 <- CreateNamedVariable 'Reflect', 'none'
+    v620 <- GetProperty v619, 'deleteProperty'
+    v621 <- GetProperty v620, 'length'
+EndPlainFunction
+v622 <- CallFunction v617, []
+v623 <- BeginPlainFunction -> 
+    v624 <- BeginPlainFunction -> 
+        v625 <- CreateNamedVariable 'Reflect', 'none'
+        v626 <- CallMethod v625, 'deleteProperty', []
+    EndPlainFunction
+    v627 <- CallFunction v624, []
+    v628 <- CreateNamedVariable 'TypeError', 'none'
+    v629 <- BeginPlainFunction -> 
+        v630 <- LoadInteger '42'
+        v631 <- LoadString 'bla'
+        v632 <- CreateNamedVariable 'Reflect', 'none'
+        v633 <- CallMethod v632, 'deleteProperty', [v630, v631]
+    EndPlainFunction
+    v634 <- CallFunction v629, []
+    v635 <- BeginPlainFunction -> 
+        v636 <- LoadNull
+        v637 <- LoadString 'bla'
+        v638 <- CreateNamedVariable 'Reflect', 'none'
+        v639 <- CallMethod v638, 'deleteProperty', [v636, v637]
+    EndPlainFunction
+    v640 <- CallFunction v635, []
+EndPlainFunction
+v641 <- CallFunction v623, []
+v642 <- BeginPlainFunction -> 
+    v643 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `bla`, v643
+    v644 <- EndObjectLiteral
+    v645 <- CreateNamedVariable 'target', 'var', v644
+    v646 <- BeginPlainFunction -> 
+        v647 <- LoadString 'bla'
+        Return v647
+    EndPlainFunction
+    v648 <- GetProperty v3, 'toPrimitive'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v648, v646
+    v649 <- EndObjectLiteral
+    v650 <- CreateNamedVariable 'a', 'var', v649
+    v651 <- BeginPlainFunction -> 
+        v652 <- LoadString 'gaga'
+        ThrowException v652
+    EndPlainFunction
+    v653 <- GetProperty v3, 'toPrimitive'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v653, v651
+    v654 <- EndObjectLiteral
+    v655 <- CreateNamedVariable 'b', 'var', v654
+    v656 <- CreateNamedVariable 'Reflect', 'none'
+    v657 <- CallMethod v656, 'deleteProperty', [v645, v650]
+    v658 <- BeginPlainFunction -> 
+        v659 <- CallMethod v656, 'deleteProperty', [v645, v655]
+    EndPlainFunction
+    v660 <- CallFunction v658, []
+    v661 <- LoadString 'gaga'
+EndPlainFunction
+v662 <- CallFunction v642, []
+v663 <- BeginPlainFunction -> 
+    BeginForOfLoop v42 -> v664
+        v665 <- CallFunction v43, [v664]
+        v666 <- LoadString 'bla'
+        v667 <- CreateNamedVariable 'Reflect', 'none'
+        v668 <- CallMethod v667, 'deleteProperty', [v664, v666]
+        v669 <- LoadUndefined
+        v670 <- LoadString 'bla'
+        v671 <- CallMethod v16, 'getOwnPropertyDescriptor', [v664, v670]
+        v672 <- TestInstanceOf v664, v37
+        BeginIf v672
+            v673 <- LoadInteger '4'
+            v674 <- CallMethod v667, 'deleteProperty', [v664, v673]
+        BeginElse
+            v675 <- LoadInteger '4'
+            v676 <- CallMethod v667, 'deleteProperty', [v664, v675]
+            v677 <- LoadUndefined
+            v678 <- LoadInteger '4'
+            v679 <- CallMethod v16, 'getOwnPropertyDescriptor', [v664, v678]
+        EndIf
+        v680 <- CallMethod v667, 'deleteProperty', [v664, v5]
+        v681 <- LoadUndefined
+        v682 <- CallMethod v16, 'getOwnPropertyDescriptor', [v664, v5]
+        v683 <- LoadString 'noconf'
+        v684 <- CallMethod v667, 'deleteProperty', [v664, v683]
+        v685 <- LoadInteger '43'
+        v686 <- GetProperty v664, 'noconf'
+        v687 <- LoadString 'getter'
+        v688 <- CallMethod v667, 'deleteProperty', [v664, v687]
+        v689 <- LoadString 'setter'
+        v690 <- CallMethod v667, 'deleteProperty', [v664, v689]
+        v691 <- LoadString 'foo'
+        v692 <- CallMethod v667, 'deleteProperty', [v664, v691]
+        v693 <- LoadInteger '666'
+        v694 <- CallMethod v667, 'deleteProperty', [v664, v693]
+        v695 <- GetProperty v664, '__proto__'
+        v696 <- CreateNamedVariable 'proto', 'let', v695
+        BeginObjectLiteral
+            BeginObjectLiteralGetter `foo` -> v697
+                v698 <- GetProperty v697, 'bla'
+                Return v698
+            EndObjectLiteralGetter
+        v699 <- EndObjectLiteral
+        SetProperty v664, '__proto__', v699
+        v700 <- LoadBoolean 'true'
+        v701 <- LoadString 'foo'
+        v702 <- CallMethod v667, 'deleteProperty', [v664, v701]
+        SetProperty v664, '__proto__', v696
+    EndForOfLoop
+EndPlainFunction
+v703 <- CallFunction v663, []
+v704 <- BeginPlainFunction -> 
+    v705 <- LoadInteger '1'
+    v706 <- CreateNamedVariable 'Reflect', 'none'
+    v707 <- GetProperty v706, 'getPrototypeOf'
+    v708 <- GetProperty v707, 'length'
+EndPlainFunction
+v709 <- CallFunction v704, []
+v710 <- BeginPlainFunction -> 
+    v711 <- BeginPlainFunction -> 
+        v712 <- CreateNamedVariable 'Reflect', 'none'
+        v713 <- CallMethod v712, 'getPrototypeOf', []
+    EndPlainFunction
+    v714 <- CallFunction v711, []
+    v715 <- CreateNamedVariable 'TypeError', 'none'
+    v716 <- BeginPlainFunction -> 
+        v717 <- LoadInteger '42'
+        v718 <- CreateNamedVariable 'Reflect', 'none'
+        v719 <- CallMethod v718, 'getPrototypeOf', [v717]
+    EndPlainFunction
+    v720 <- CallFunction v716, []
+    v721 <- BeginPlainFunction -> 
+        v722 <- LoadNull
+        v723 <- CreateNamedVariable 'Reflect', 'none'
+        v724 <- CallMethod v723, 'getPrototypeOf', [v722]
+    EndPlainFunction
+    v725 <- CallFunction v721, []
+EndPlainFunction
+v726 <- CallFunction v710, []
+v727 <- BeginPlainFunction -> 
+    v728 <- LoadInteger '2'
+    v729 <- CreateNamedVariable 'Reflect', 'none'
+    v730 <- GetProperty v729, 'setPrototypeOf'
+    v731 <- GetProperty v730, 'length'
+EndPlainFunction
+v732 <- CallFunction v727, []
+v733 <- BeginPlainFunction -> 
+    v734 <- BeginPlainFunction -> 
+        v735 <- LoadUndefined
+        BeginObjectLiteral
+        v736 <- EndObjectLiteral
+        v737 <- CreateNamedVariable 'Reflect', 'none'
+        v738 <- CallMethod v737, 'setPrototypeOf', [v735, v736]
+    EndPlainFunction
+    v739 <- CallFunction v734, []
+    v740 <- CreateNamedVariable 'TypeError', 'none'
+    v741 <- BeginPlainFunction -> 
+        v742 <- LoadInteger '42'
+        BeginObjectLiteral
+        v743 <- EndObjectLiteral
+        v744 <- CreateNamedVariable 'Reflect', 'none'
+        v745 <- CallMethod v744, 'setPrototypeOf', [v742, v743]
+    EndPlainFunction
+    v746 <- CallFunction v741, []
+    v747 <- BeginPlainFunction -> 
+        v748 <- LoadNull
+        BeginObjectLiteral
+        v749 <- EndObjectLiteral
+        v750 <- CreateNamedVariable 'Reflect', 'none'
+        v751 <- CallMethod v750, 'setPrototypeOf', [v748, v749]
+    EndPlainFunction
+    v752 <- CallFunction v747, []
+    v753 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v754 <- EndObjectLiteral
+        v755 <- LoadUndefined
+        v756 <- CreateNamedVariable 'Reflect', 'none'
+        v757 <- CallMethod v756, 'setPrototypeOf', [v754, v755]
+    EndPlainFunction
+    v758 <- CallFunction v753, []
+    v759 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v760 <- EndObjectLiteral
+        v761 <- LoadInteger '42'
+        v762 <- CreateNamedVariable 'Reflect', 'none'
+        v763 <- CallMethod v762, 'setPrototypeOf', [v760, v761]
+    EndPlainFunction
+    v764 <- CallFunction v759, []
+    BeginObjectLiteral
+    v765 <- EndObjectLiteral
+    v766 <- LoadNull
+    v767 <- CreateNamedVariable 'Reflect', 'none'
+    v768 <- CallMethod v767, 'setPrototypeOf', [v765, v766]
+EndPlainFunction
+v769 <- CallFunction v733, []
+v770 <- BeginPlainFunction -> 
+    v771 <- LoadInteger '1'
+    v772 <- CreateNamedVariable 'Reflect', 'none'
+    v773 <- GetProperty v772, 'isExtensible'
+    v774 <- GetProperty v773, 'length'
+EndPlainFunction
+v775 <- CallFunction v770, []
+v776 <- BeginPlainFunction -> 
+    v777 <- BeginPlainFunction -> 
+        v778 <- CreateNamedVariable 'Reflect', 'none'
+        v779 <- CallMethod v778, 'isExtensible', []
+    EndPlainFunction
+    v780 <- CallFunction v777, []
+    v781 <- CreateNamedVariable 'TypeError', 'none'
+    v782 <- BeginPlainFunction -> 
+        v783 <- LoadInteger '42'
+        v784 <- CreateNamedVariable 'Reflect', 'none'
+        v785 <- CallMethod v784, 'isExtensible', [v783]
+    EndPlainFunction
+    v786 <- CallFunction v782, []
+    v787 <- BeginPlainFunction -> 
+        v788 <- LoadNull
+        v789 <- CreateNamedVariable 'Reflect', 'none'
+        v790 <- CallMethod v789, 'isExtensible', [v788]
+    EndPlainFunction
+    v791 <- CallFunction v787, []
+EndPlainFunction
+v792 <- CallFunction v776, []
+v793 <- BeginPlainFunction -> 
+    BeginForOfLoop v42 -> v794
+        v795 <- CallFunction v43, [v794]
+        v796 <- TestInstanceOf v794, v37
+        BeginIf v796
+            Continue
+        EndIf
+        v797 <- CreateNamedVariable 'Reflect', 'none'
+        v798 <- CallMethod v797, 'isExtensible', [v794]
+        v799 <- CallMethod v16, 'preventExtensions', [v794]
+        v800 <- CallMethod v797, 'isExtensible', [v794]
+    EndForOfLoop
+EndPlainFunction
+v801 <- CallFunction v793, []
+v802 <- BeginPlainFunction -> 
+    v803 <- LoadInteger '2'
+    v804 <- CreateNamedVariable 'Reflect', 'none'
+    v805 <- GetProperty v804, 'getOwnPropertyDescriptor'
+    v806 <- GetProperty v805, 'length'
+EndPlainFunction
+v807 <- CallFunction v802, []
+v808 <- BeginPlainFunction -> 
+    v809 <- BeginPlainFunction -> 
+        v810 <- CreateNamedVariable 'Reflect', 'none'
+        v811 <- CallMethod v810, 'getOwnPropertyDescriptor', []
+    EndPlainFunction
+    v812 <- CallFunction v809, []
+    v813 <- CreateNamedVariable 'TypeError', 'none'
+    v814 <- BeginPlainFunction -> 
+        v815 <- LoadInteger '42'
+        v816 <- CreateNamedVariable 'Reflect', 'none'
+        v817 <- CallMethod v816, 'getOwnPropertyDescriptor', [v815]
+    EndPlainFunction
+    v818 <- CallFunction v814, []
+    v819 <- BeginPlainFunction -> 
+        v820 <- LoadNull
+        v821 <- CreateNamedVariable 'Reflect', 'none'
+        v822 <- CallMethod v821, 'getOwnPropertyDescriptor', [v820]
+    EndPlainFunction
+    v823 <- CallFunction v819, []
+EndPlainFunction
+v824 <- CallFunction v808, []
+v825 <- BeginPlainFunction -> 
+    v826 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `bla`, v826
+    v827 <- EndObjectLiteral
+    v828 <- CreateNamedVariable 'target', 'var', v827
+    v829 <- BeginPlainFunction -> 
+        v830 <- LoadString 'bla'
+        Return v830
+    EndPlainFunction
+    v831 <- GetProperty v3, 'toPrimitive'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v831, v829
+    v832 <- EndObjectLiteral
+    v833 <- CreateNamedVariable 'a', 'var', v832
+    v834 <- BeginPlainFunction -> 
+        v835 <- LoadString 'gaga'
+        ThrowException v835
+    EndPlainFunction
+    v836 <- GetProperty v3, 'toPrimitive'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v836, v834
+    v837 <- EndObjectLiteral
+    v838 <- CreateNamedVariable 'b', 'var', v837
+    v839 <- LoadInteger '42'
+    v840 <- CreateNamedVariable 'Reflect', 'none'
+    v841 <- CallMethod v840, 'getOwnPropertyDescriptor', [v828, v833]
+    v842 <- GetProperty v841, 'value'
+    v843 <- BeginArrowFunction -> 
+        v844 <- CallMethod v840, 'getOwnPropertyDescriptor', [v828, v838]
+        Return v844
+    EndArrowFunction
+    v845 <- CallFunction v843, []
+    v846 <- LoadString 'gaga'
+EndPlainFunction
+v847 <- CallFunction v825, []
+v848 <- BeginPlainFunction -> 
+    v849 <- LoadInteger '1'
+    v850 <- CreateNamedVariable 'Reflect', 'none'
+    v851 <- GetProperty v850, 'ownKeys'
+    v852 <- GetProperty v851, 'length'
+EndPlainFunction
+v853 <- CallFunction v848, []
+v854 <- BeginPlainFunction -> 
+    v855 <- BeginPlainFunction -> 
+        v856 <- CreateNamedVariable 'Reflect', 'none'
+        v857 <- CallMethod v856, 'ownKeys', []
+    EndPlainFunction
+    v858 <- CallFunction v855, []
+    v859 <- CreateNamedVariable 'TypeError', 'none'
+    v860 <- BeginPlainFunction -> 
+        v861 <- LoadInteger '42'
+        v862 <- CreateNamedVariable 'Reflect', 'none'
+        v863 <- CallMethod v862, 'ownKeys', [v861]
+    EndPlainFunction
+    v864 <- CallFunction v860, []
+    v865 <- BeginPlainFunction -> 
+        v866 <- LoadNull
+        v867 <- CreateNamedVariable 'Reflect', 'none'
+        v868 <- CallMethod v867, 'ownKeys', [v866]
+    EndPlainFunction
+    v869 <- CallFunction v865, []
+EndPlainFunction
+v870 <- CallFunction v854, []
+v871 <- BeginPlainFunction -> 
+    v872 <- LoadString 'z'
+    v873 <- LoadString 'y'
+    v874 <- LoadString 'x'
+    v875 <- CreateArray [v872, v873, v874]
+    v876 <- LoadInteger '3'
+    v877 <- LoadInteger '2'
+    v878 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `z`, v876
+        ObjectLiteralAddProperty `y`, v877
+        ObjectLiteralAddProperty `x`, v878
+    v879 <- EndObjectLiteral
+    v880 <- CreateNamedVariable 'Reflect', 'none'
+    v881 <- CallMethod v880, 'ownKeys', [v879]
+    v882 <- LoadString 'length'
+    v883 <- CreateArray [v882]
+    v884 <- CreateArray []
+    v885 <- CallMethod v880, 'ownKeys', [v884]
+    v886 <- LoadString 'foo'
+    v887 <- CallFunction v3, [v886]
+    v888 <- CreateNamedVariable 's1', 'var', v887
+    v889 <- LoadString 'bar'
+    v890 <- CallFunction v3, [v889]
+    v891 <- CreateNamedVariable 's2', 'var', v890
+    v892 <- LoadInteger '0'
+    v893 <- LoadInteger '0'
+    v894 <- LoadInteger '0'
+    v895 <- LoadInteger '0'
+    v896 <- LoadInteger '0'
+    v897 <- LoadInteger '0'
+    v898 <- LoadInteger '0'
+    v899 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v888, v892
+        ObjectLiteralAddProperty `bla`, v893
+        ObjectLiteralAddElement `42`, v894
+        ObjectLiteralAddProperty `0`, v895
+        ObjectLiteralAddComputedProperty v891, v896
+        ObjectLiteralAddProperty `-1`, v897
+        ObjectLiteralAddProperty `88`, v898
+        ObjectLiteralAddProperty `aaa`, v899
+    v900 <- EndObjectLiteral
+    v901 <- CreateNamedVariable 'obj', 'var', v900
+    v902 <- LoadString '0'
+    v903 <- LoadString '42'
+    v904 <- LoadString '88'
+    v905 <- LoadString 'bla'
+    v906 <- LoadString '-1'
+    v907 <- LoadString 'aaa'
+    v908 <- CreateArray [v902, v903, v904, v905, v906, v907, v888, v891]
+    v909 <- CallMethod v880, 'ownKeys', [v901]
+    v910 <- LoadInteger '0'
+    v911 <- DeleteElement v901, '0'
+    v912 <- LoadString '42'
+    v913 <- LoadString '88'
+    v914 <- LoadString 'bla'
+    v915 <- LoadString '-1'
+    v916 <- LoadString 'aaa'
+    v917 <- CreateArray [v912, v913, v914, v915, v916, v888, v891]
+    v918 <- CallMethod v880, 'ownKeys', [v901]
+    v919 <- LoadString 'bla'
+    v920 <- DeleteComputedProperty v901, v919
+    v921 <- LoadString '42'
+    v922 <- LoadString '88'
+    v923 <- LoadString '-1'
+    v924 <- LoadString 'aaa'
+    v925 <- CreateArray [v921, v922, v923, v924, v888, v891]
+    v926 <- CallMethod v880, 'ownKeys', [v901]
+EndPlainFunction
+v927 <- CallFunction v871, []
+v928 <- BeginPlainFunction -> 
+    v929 <- LoadInteger '1'
+    v930 <- CreateNamedVariable 'Reflect', 'none'
+    v931 <- GetProperty v930, 'preventExtensions'
+    v932 <- GetProperty v931, 'length'
+EndPlainFunction
+v933 <- CallFunction v928, []
+v934 <- BeginPlainFunction -> 
+    v935 <- BeginPlainFunction -> 
+        v936 <- CreateNamedVariable 'Reflect', 'none'
+        v937 <- CallMethod v936, 'preventExtensions', []
+    EndPlainFunction
+    v938 <- CallFunction v935, []
+    v939 <- CreateNamedVariable 'TypeError', 'none'
+    v940 <- BeginPlainFunction -> 
+        v941 <- LoadInteger '42'
+        v942 <- CreateNamedVariable 'Reflect', 'none'
+        v943 <- CallMethod v942, 'preventExtensions', [v941]
+    EndPlainFunction
+    v944 <- CallFunction v940, []
+    v945 <- BeginPlainFunction -> 
+        v946 <- LoadNull
+        v947 <- CreateNamedVariable 'Reflect', 'none'
+        v948 <- CallMethod v947, 'preventExtensions', [v946]
+    EndPlainFunction
+    v949 <- CallFunction v945, []
+EndPlainFunction
+v950 <- CallFunction v934, []
+
+
+var global = this;
+var sym = Symbol("gaga");
+const v6 = {};
+const v7 = [];
+function f8() {
+}
+function f9() {
+    return arguments;
+}
+const v11 = f9();
+function f12() {
+    'use strict';
+    return arguments;
+}
+const v14 = f12();
+const v17 = Object(1);
+const v19 = Object(true);
+const v21 = Object("bla");
+const v23 = new Date();
+const v25 = new RegExp();
+const v27 = new Set();
+const v29 = new Map();
+const v31 = new WeakMap();
+const v33 = new WeakSet();
+const v36 = new ArrayBuffer(10);
+const v39 = new Int32Array(5);
+var objects = [v6,v7,f8,v11,v14,v17,v19,v21,v23,v25,v27,v29,v31,v33,v36,v39,Object,Function,Date,RegExp,global];
+function prepare(a44) {
+    a44["bla"] = true;
+    a44[4] = 42;
+    a44[sym] = "foo";
+    a44["noconf"] = 43;
+    Object.defineProperty(a44, "noconf", { configurable: false });
+    Object.defineProperty(a44, "nowrite", { writable: false, configurable: true, value: 44 });
+    function f62() {
+        return this.bla;
+    }
+    Object.defineProperty(a44, "getter", { get: f62, configurable: true });
+    function f69(a70) {
+        this.gaga = a70;
+    }
+    Object.defineProperty(a44, "setter", { set: f69, configurable: true });
+    function f76(a77) {
+    }
+    Object.defineProperty(a44, "setter2", { set: f76, configurable: true });
+}
+function testReflectGetArity() {
+    Reflect.get.length;
+}
+testReflectGetArity();
+function testReflectGetOnNonObject() {
+    function f88() {
+        Reflect.get();
+    }
+    f88();
+    function f93() {
+        Reflect.get(42, "bla");
+    }
+    f93();
+    function f99() {
+        Reflect.get(null, "bla");
+    }
+    f99();
+}
+testReflectGetOnNonObject();
+function testReflectGetKeyConversion() {
+    var target = { bla: 42 };
+    function f110() {
+        return "bla";
+    }
+    const v112 = Symbol.toPrimitive;
+    var a = { [v112]: f110 };
+    function f115() {
+        throw "gaga";
+    }
+    const v117 = Symbol.toPrimitive;
+    var b = { [v117]: f115 };
+    Reflect.get(target, a);
+    function f123() {
+        Reflect.get(target, b);
+    }
+    f123();
+}
+testReflectGetKeyConversion();
+function testReflectGetOnObject() {
+    var receiver = { bla: false };
+    for (const v132 of objects) {
+        prepare(v132);
+        Reflect.get(v132, "bla");
+        Reflect.get(v132, "bla", v132);
+        Reflect.get(v132, "bla", receiver);
+        Reflect.get(v132, 4);
+        Reflect.get(v132, 4, v132);
+        Reflect.get(v132, 4, receiver);
+        Reflect.get(v132, "4");
+        Reflect.get(v132, "4", v132);
+        Reflect.get(v132, "4", receiver);
+        Reflect.get(v132, sym);
+        Reflect.get(v132, sym, v132);
+        Reflect.get(v132, sym, receiver);
+        Reflect.get(v132, "noconf");
+        Reflect.get(v132, "noconf", v132);
+        Reflect.get(v132, "noconf", receiver);
+        Reflect.get(v132, "getter");
+        Reflect.get(v132, "getter", v132);
+        Reflect.get(v132, "getter", receiver);
+        Reflect.get(v132, "setter");
+        Reflect.get(v132, "setter", v132);
+        Reflect.get(v132, "setter", receiver);
+        Reflect.get(v132, "foo");
+        Reflect.get(v132, "foo", v132);
+        Reflect.get(v132, "foo", receiver);
+        Reflect.get(v132, 666);
+        Reflect.get(v132, 666, v132);
+        Reflect.get(v132, 666, receiver);
+        let proto = v132.__proto__;
+        const v217 = {
+            get foo() {
+                return this.bla;
+            },
+        };
+        v132.__proto__ = v217;
+        Reflect.get(v132, "foo");
+        Reflect.get(v132, "foo", v132);
+        Reflect.get(v132, "foo", receiver);
+        v132.__proto__ = proto;
+    }
+}
+testReflectGetOnObject();
+function testReflectSetArity() {
+    Reflect.set.length;
+}
+testReflectSetArity();
+function testReflectSetOnNonObject() {
+    function f235() {
+        Reflect.set();
+    }
+    f235();
+    function f240() {
+        Reflect.set(42, "bla");
+    }
+    f240();
+    function f246() {
+        Reflect.set(null, "bla");
+    }
+    f246();
+}
+testReflectSetOnNonObject();
+function testReflectSetKeyConversion() {
+    var target = {};
+    function f256() {
+        return "bla";
+    }
+    const v258 = Symbol.toPrimitive;
+    var a = { [v258]: f256 };
+    function f261() {
+        throw "gaga";
+    }
+    const v263 = Symbol.toPrimitive;
+    var b = { [v263]: f261 };
+    Reflect.set(target, a, 42);
+    target.bla;
+    function f271() {
+        Reflect.set(target, b, 42);
+    }
+    f271();
+}
+testReflectSetKeyConversion();
+function testReflectSetOnObject() {
+    var receiver = { bla: false };
+    var value = 34234;
+    for (const v283 of objects) {
+        prepare(v283);
+        Reflect.set(v283, "bla", value);
+        v283.bla;
+        prepare(v283);
+        Reflect.set(v283, "bla", value, v283);
+        v283.bla;
+        prepare(v283);
+        Reflect.set(v283, "bla", value, receiver);
+        v283.bla;
+        receiver.bla;
+        receiver.bla = false;
+        prepare(v283);
+        Reflect.set(v283, 4, value);
+        v283[4];
+        prepare(v283);
+        Reflect.set(v283, 4, value, v283);
+        v283[4];
+        prepare(v283);
+        Reflect.set(v283, 4, value, receiver);
+        v283[4];
+        receiver[4];
+        delete receiver[4];
+        prepare(v283);
+        Reflect.set(v283, sym, value);
+        v283[sym];
+        prepare(v283);
+        Reflect.set(v283, sym, value, v283);
+        v283[sym];
+        prepare(v283);
+        Reflect.set(v283, sym, value, receiver);
+        v283[sym];
+        receiver[sym];
+        delete receiver[sym];
+        prepare(v283);
+        Reflect.set(v283, "noconf", value);
+        v283.noconf;
+        prepare(v283);
+        Reflect.set(v283, "noconf", value, v283);
+        v283.noconf;
+        prepare(v283);
+        Reflect.set(v283, "noconf", value, receiver);
+        v283.noconf;
+        receiver.noconf;
+        delete receiver.noconf;
+        Reflect.set(v283, "setter", value);
+        v283.gaga;
+        delete v283.gaga;
+        Reflect.set(v283, "setter", value, v283);
+        v283.gaga;
+        delete v283.gaga;
+        Reflect.set(v283, "setter", value, receiver);
+        "gaga" in v283;
+        receiver.gaga;
+        delete receiver.gaga;
+        Reflect.set(v283, "nowrite", value);
+        v283.nowrite;
+        Reflect.set(v283, "nowrite", value, v283);
+        v283.nowrite;
+        Reflect.set(v283, "nowrite", value, receiver);
+        v283.nowrite;
+        "nowrite" in receiver;
+        Reflect.set({}, "nowrite", value, v283);
+        const v374 = {};
+        const v379 = {
+            set unknown(a378) {
+            },
+        };
+        Reflect.set(v374, "unknown", 0, v379);
+        const v384 = {
+            set unknown(a383) {
+            },
+        };
+        Reflect.set(v283, "unknown", value, v384);
+        const v389 = {
+            set bla(a388) {
+            },
+        };
+        Reflect.set(v283, "bla", value, v389);
+        const v393 = {
+            get bla() {
+            },
+        };
+        Reflect.set(v283, "bla", value, v393);
+        const v397 = {
+            set bla(a396) {
+            },
+        };
+        Reflect.set(v397);
+        const v401 = {
+            get bla() {
+            },
+        };
+        Reflect.set(v401, "bla", value, v283);
+        Reflect.set({}, "bla", value, null);
+        Reflect.set({ bla: 42 }, "bla", value, null);
+        Reflect.set(v283, "setter2", value, null);
+        Reflect.set(v283, "getter", value, null);
+        let receiver2 = {};
+        Object.defineProperty(receiver2, "bla", { configurable: false, writable: true, value: true });
+        Object.defineProperty(receiver2, "not_in_target", { configurable: false, writable: true, value: true });
+        Reflect.set(v283, "bla", value, receiver2);
+        Reflect.set(v283, "not_in_target", value, receiver2);
+    }
+}
+testReflectSetOnObject();
+function testReflectSetArrayLength() {
+    var y = [];
+    Object.defineProperty(y, 0, { value: 42, configurable: false });
+    Reflect.set(y, "length", 0);
+    Reflect.set(y, "length", 2);
+}
+testReflectSetArrayLength();
+function testReflectHasArity() {
+    Reflect.has.length;
+}
+testReflectHasArity();
+function testReflectHasOnNonObject() {
+    function f461() {
+        Reflect.has();
+    }
+    f461();
+    function f466() {
+        Reflect.has(42, "bla");
+    }
+    f466();
+    function f472() {
+        Reflect.has(null, "bla");
+    }
+    f472();
+}
+testReflectHasOnNonObject();
+function testReflectHasKeyConversion() {
+    var target = { bla: 42 };
+    function f483() {
+        return "bla";
+    }
+    const v485 = Symbol.toPrimitive;
+    var a = { [v485]: f483 };
+    function f488() {
+        throw "gaga";
+    }
+    const v490 = Symbol.toPrimitive;
+    var b = { [v490]: f488 };
+    Reflect.has(target, a);
+    function f495() {
+        Reflect.has(target, b);
+    }
+    f495();
+}
+testReflectHasKeyConversion();
+function testReflectHasOnObject() {
+    for (const v501 of objects) {
+        prepare(v501);
+        Reflect.has(v501, "bla");
+        Reflect.has(v501, 4);
+        Reflect.has(v501, "4");
+        Reflect.has(v501, sym);
+        Reflect.has(v501, "noconf");
+        Reflect.has(v501, "getter");
+        Reflect.has(v501, "setter");
+        Reflect.has(v501, "foo");
+        Reflect.has(v501, 666);
+        let proto = v501.__proto__;
+        const v525 = {
+            get foo() {
+                return this.bla;
+            },
+        };
+        v501.__proto__ = v525;
+        Reflect.has(v501, "foo");
+        v501.__proto__ = proto;
+    }
+}
+testReflectHasOnObject();
+function testReflectDefinePropertyArity() {
+    Reflect.defineProperty.length;
+}
+testReflectDefinePropertyArity();
+function testReflectDefinePropertyOnNonObject() {
+    function f537() {
+        Reflect.defineProperty();
+    }
+    f537();
+    function f542() {
+        Reflect.defineProperty(42, "bla");
+    }
+    f542();
+    function f548() {
+        Reflect.defineProperty(null, "bla");
+    }
+    f548();
+    function f554() {
+        Reflect.defineProperty({}, "bla");
+    }
+    f554();
+    function f560() {
+        Reflect.defineProperty({}, "bla", 42);
+    }
+    f560();
+    function f567() {
+        Reflect.defineProperty({}, "bla", null);
+    }
+    f567();
+}
+testReflectDefinePropertyOnNonObject();
+function testReflectDefinePropertyKeyConversion() {
+    var target = {};
+    function f578() {
+        return "bla";
+    }
+    const v580 = Symbol.toPrimitive;
+    var a = { [v580]: f578 };
+    function f583() {
+        throw "gaga";
+    }
+    const v585 = Symbol.toPrimitive;
+    var b = { [v585]: f583 };
+    Reflect.defineProperty(target, a, { value: 42 });
+    target.bla;
+    function f594() {
+        Reflect.defineProperty(target, b);
+    }
+    f594();
+}
+testReflectDefinePropertyKeyConversion();
+function testReflectDefinePropertyArrayLength() {
+    var y = [];
+    Object.defineProperty(y, 0, { value: 42, configurable: false });
+    Reflect.defineProperty(y, "length", { value: 0 });
+    Reflect.defineProperty(y, "length", { value: 2 });
+}
+testReflectDefinePropertyArrayLength();
+function testReflectDeletePropertyArity() {
+    Reflect.deleteProperty.length;
+}
+testReflectDeletePropertyArity();
+function testReflectDeletePropertyOnNonObject() {
+    function f624() {
+        Reflect.deleteProperty();
+    }
+    f624();
+    function f629() {
+        Reflect.deleteProperty(42, "bla");
+    }
+    f629();
+    function f635() {
+        Reflect.deleteProperty(null, "bla");
+    }
+    f635();
+}
+testReflectDeletePropertyOnNonObject();
+function testReflectDeletePropertyKeyConversion() {
+    var target = { bla: 42 };
+    function f646() {
+        return "bla";
+    }
+    const v648 = Symbol.toPrimitive;
+    var a = { [v648]: f646 };
+    function f651() {
+        throw "gaga";
+    }
+    const v653 = Symbol.toPrimitive;
+    var b = { [v653]: f651 };
+    Reflect.deleteProperty(target, a);
+    function f658() {
+        Reflect.deleteProperty(target, b);
+    }
+    f658();
+}
+testReflectDeletePropertyKeyConversion();
+function testReflectDeletePropertyOnObject() {
+    for (const v664 of objects) {
+        prepare(v664);
+        Reflect.deleteProperty(v664, "bla");
+        Object.getOwnPropertyDescriptor(v664, "bla");
+        if (v664 instanceof Int32Array) {
+            Reflect.deleteProperty(v664, 4);
+        } else {
+            Reflect.deleteProperty(v664, 4);
+            Object.getOwnPropertyDescriptor(v664, 4);
+        }
+        Reflect.deleteProperty(v664, sym);
+        Object.getOwnPropertyDescriptor(v664, sym);
+        Reflect.deleteProperty(v664, "noconf");
+        v664.noconf;
+        Reflect.deleteProperty(v664, "getter");
+        Reflect.deleteProperty(v664, "setter");
+        Reflect.deleteProperty(v664, "foo");
+        Reflect.deleteProperty(v664, 666);
+        let proto = v664.__proto__;
+        const v699 = {
+            get foo() {
+                return this.bla;
+            },
+        };
+        v664.__proto__ = v699;
+        Reflect.deleteProperty(v664, "foo");
+        v664.__proto__ = proto;
+    }
+}
+testReflectDeletePropertyOnObject();
+function testReflectGetPrototypeOfArity() {
+    Reflect.getPrototypeOf.length;
+}
+testReflectGetPrototypeOfArity();
+function testReflectGetPrototypeOnNonObject() {
+    function f711() {
+        Reflect.getPrototypeOf();
+    }
+    f711();
+    function f716() {
+        Reflect.getPrototypeOf(42);
+    }
+    f716();
+    function f721() {
+        Reflect.getPrototypeOf(null);
+    }
+    f721();
+}
+testReflectGetPrototypeOnNonObject();
+function testReflectSetPrototypeOfArity() {
+    Reflect.setPrototypeOf.length;
+}
+testReflectSetPrototypeOfArity();
+function testReflectSetPrototypeOfOnNonObject() {
+    function f734() {
+        Reflect.setPrototypeOf(undefined, {});
+    }
+    f734();
+    function f741() {
+        Reflect.setPrototypeOf(42, {});
+    }
+    f741();
+    function f747() {
+        Reflect.setPrototypeOf(null, {});
+    }
+    f747();
+    function f753() {
+        Reflect.setPrototypeOf({}, undefined);
+    }
+    f753();
+    function f759() {
+        Reflect.setPrototypeOf({}, 42);
+    }
+    f759();
+    Reflect.setPrototypeOf({}, null);
+}
+testReflectSetPrototypeOfOnNonObject();
+function testReflectIsExtensibleArity() {
+    Reflect.isExtensible.length;
+}
+testReflectIsExtensibleArity();
+function testReflectIsExtensibleOnNonObject() {
+    function f777() {
+        Reflect.isExtensible();
+    }
+    f777();
+    function f782() {
+        Reflect.isExtensible(42);
+    }
+    f782();
+    function f787() {
+        Reflect.isExtensible(null);
+    }
+    f787();
+}
+testReflectIsExtensibleOnNonObject();
+function testReflectIsExtensibleOnObject() {
+    for (const v794 of objects) {
+        prepare(v794);
+        if (v794 instanceof Int32Array) {
+            continue;
+        }
+        Reflect.isExtensible(v794);
+        Object.preventExtensions(v794);
+        Reflect.isExtensible(v794);
+    }
+}
+testReflectIsExtensibleOnObject();
+function testReflectGetOwnPropertyDescriptorArity() {
+    Reflect.getOwnPropertyDescriptor.length;
+}
+testReflectGetOwnPropertyDescriptorArity();
+function testReflectGetOwnPropertyDescriptorOnNonObject() {
+    function f809() {
+        Reflect.getOwnPropertyDescriptor();
+    }
+    f809();
+    function f814() {
+        Reflect.getOwnPropertyDescriptor(42);
+    }
+    f814();
+    function f819() {
+        Reflect.getOwnPropertyDescriptor(null);
+    }
+    f819();
+}
+testReflectGetOwnPropertyDescriptorOnNonObject();
+function testReflectGetOwnPropertyDescriptorKeyConversion() {
+    var target = { bla: 42 };
+    function f829() {
+        return "bla";
+    }
+    const v831 = Symbol.toPrimitive;
+    var a = { [v831]: f829 };
+    function f834() {
+        throw "gaga";
+    }
+    const v836 = Symbol.toPrimitive;
+    var b = { [v836]: f834 };
+    Reflect.getOwnPropertyDescriptor(target, a).value;
+    const v843 = () => {
+        return Reflect.getOwnPropertyDescriptor(target, b);
+    };
+    v843();
+}
+testReflectGetOwnPropertyDescriptorKeyConversion();
+function testReflectOwnKeysArity() {
+    Reflect.ownKeys.length;
+}
+testReflectOwnKeysArity();
+function testReflectOwnKeysOnNonObject() {
+    function f855() {
+        Reflect.ownKeys();
+    }
+    f855();
+    function f860() {
+        Reflect.ownKeys(42);
+    }
+    f860();
+    function f865() {
+        Reflect.ownKeys(null);
+    }
+    f865();
+}
+testReflectOwnKeysOnNonObject();
+function testReflectOwnKeysOnObject() {
+    ["z","y","x"];
+    Reflect.ownKeys({ z: 3, y: 2, x: 1 });
+    ["length"];
+    Reflect.ownKeys([]);
+    var s1 = Symbol("foo");
+    var s2 = Symbol("bar");
+    const v900 = {
+        [s1]: 0,
+        bla: 0,
+        42: 0,
+        0: 0,
+        [s2]: 0,
+        -1: 0,
+        88: 0,
+        aaa: 0,
+    };
+    var obj = v900;
+    ["0","42","88","bla","-1","aaa",s1,s2];
+    Reflect.ownKeys(obj);
+    delete obj[0];
+    ["42","88","bla","-1","aaa",s1,s2];
+    Reflect.ownKeys(obj);
+    delete obj["bla"];
+    ["42","88","-1","aaa",s1,s2];
+    Reflect.ownKeys(obj);
+}
+testReflectOwnKeysOnObject();
+function testReflectPreventExtensionsArity() {
+    Reflect.preventExtensions.length;
+}
+testReflectPreventExtensionsArity();
+function testReflectPreventExtensionsOnNonObject() {
+    function f935() {
+        Reflect.preventExtensions();
+    }
+    f935();
+    function f940() {
+        Reflect.preventExtensions(42);
+    }
+    f940();
+    function f945() {
+        Reflect.preventExtensions(null);
+    }
+    f945();
+}
+testReflectPreventExtensionsOnNonObject();
+
+FuzzIL program written to corpus/reflect.fzil

@@ -1,0 +1,124 @@
+v0 <- BeginPlainFunction -> v1
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadRegExp '\0' ''
+    v5 <- CreateNamedVariable 'r', 'var', v4
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- LoadInteger '10'
+        v9 <- Compare v7, '<', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation v10, '++'
+    BeginForLoopBody -> v12
+    EndForLoop
+    Return v5
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14
+    BeginForLoopInitializer
+        v15 <- LoadInteger '0'
+    BeginForLoopCondition -> v16
+        v17 <- LoadInteger '10'
+        v18 <- Compare v16, '<', v17
+    BeginForLoopAfterthought v18 -> v19
+        v20 <- UnaryOperation v19, '++'
+    BeginForLoopBody -> v21
+        v22 <- LoadRegExp '\0' ''
+        v23 <- CreateNamedVariable 'r', 'var', v22
+    EndForLoop
+    v24 <- CreateNamedVariable 'r', 'none'
+    Return v24
+EndPlainFunction
+v25 <- BeginPlainFunction -> v26
+    BeginForLoopInitializer
+        v27 <- LoadInteger '0'
+    BeginForLoopCondition -> v28
+        v29 <- LoadInteger '10'
+        v30 <- Compare v28, '<', v29
+    BeginForLoopAfterthought v30 -> v31
+        v32 <- UnaryOperation v31, '++'
+    BeginForLoopBody -> v33
+    EndForLoop
+    v34 <- LoadRegExp '\0' ''
+    Return v34
+EndPlainFunction
+v35 <- BeginPlainFunction -> v36
+    BeginForLoopInitializer
+        v37 <- LoadInteger '0'
+    BeginForLoopCondition -> v38
+        v39 <- LoadInteger '10'
+        v40 <- Compare v38, '<', v39
+    BeginForLoopAfterthought v40 -> v41
+        v42 <- UnaryOperation v41, '++'
+    BeginForLoopBody -> v43
+        v44 <- LoadInteger '5'
+        v45 <- Compare v43, '>', v44
+        v46 <- BinaryOperation v45, '&&', v36
+        BeginIf v46
+        BeginElse
+            v47 <- LoadRegExp '\0' ''
+            v48 <- CreateNamedVariable 'r', 'var', v47
+        EndIf
+    EndForLoop
+    v49 <- CreateNamedVariable 'r', 'none'
+    Return v49
+EndPlainFunction
+v50 <- BeginPlainFunction -> v51
+    v52 <- LoadBoolean 'false'
+    v53 <- CallFunction v51, [v52]
+    v54 <- CreateNamedVariable 'x', 'var', v53
+    v55 <- LoadBoolean 'true'
+    v56 <- CallFunction v51, [v55]
+    v57 <- LoadBoolean 'true'
+    v58 <- CallFunction v51, [v57]
+    v59 <- LoadBoolean 'true'
+    v60 <- CallFunction v51, [v59]
+EndPlainFunction
+v61 <- CallFunction v50, [v2]
+v62 <- CallFunction v50, [v13]
+v63 <- CallFunction v50, [v25]
+v64 <- CallFunction v50, [v35]
+
+
+function id(a1) {
+    return a1;
+}
+function foo(a3) {
+    var r = /\0/;
+    for (let i7 = 0; i7 < 10; i7++) {
+    }
+    return r;
+}
+function bar(a14) {
+    for (let i16 = 0; i16 < 10; i16++) {
+        var r = /\0/;
+    }
+    return r;
+}
+function baz(a26) {
+    for (let i28 = 0; i28 < 10; i28++) {
+    }
+    return /\0/;
+}
+function qux(a36) {
+    for (let i38 = 0; i38 < 10; i38++) {
+        if ((i38 > 5) && a36) {
+        } else {
+            var r = /\0/;
+        }
+    }
+    return r;
+}
+function test(a51) {
+    var x = a51(false);
+    a51(true);
+    a51(true);
+    a51(true);
+}
+test(foo);
+test(bar);
+test(baz);
+test(qux);
+
+FuzzIL program written to corpus/osr-regex-id.fzil

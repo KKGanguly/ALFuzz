@@ -1,0 +1,74 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '3'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable 'arr', 'var', v3
+v5 <- LoadInteger '1'
+v6 <- LoadInteger '2'
+v7 <- LoadInteger '3'
+v8 <- CreateArray [v5, v6, v7]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `arr`, v8
+v9 <- EndObjectLiteral
+v10 <- CreateArrayWithSpread [...v4]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `arr`, v10
+v11 <- EndObjectLiteral
+v12 <- LoadInteger '1'
+v13 <- LoadInteger '2'
+v14 <- LoadInteger '3'
+v15 <- CreateArray [v12, v13, v14]
+v16 <- CreateArray [v15]
+v17 <- CreateArrayWithSpread [...v4]
+v18 <- CreateArray [v17]
+v19 <- LoadInteger '6'
+v20 <- LoadInteger '5'
+v21 <- LoadInteger '1'
+v22 <- LoadInteger '2'
+v23 <- LoadInteger '3'
+v24 <- CreateArray [v21, v22, v23]
+v25 <- CreateArray [v19, v20, v24]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `arr`, v25
+v26 <- EndObjectLiteral
+v27 <- LoadInteger '6'
+v28 <- LoadInteger '5'
+v29 <- CreateArrayWithSpread [...v4]
+v30 <- CreateArray [v27, v28, v29]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `arr`, v30
+v31 <- EndObjectLiteral
+v32 <- LoadInteger '8'
+v33 <- LoadInteger '7'
+v34 <- LoadInteger '6'
+v35 <- LoadInteger '5'
+v36 <- LoadInteger '1'
+v37 <- LoadInteger '2'
+v38 <- LoadInteger '3'
+v39 <- CreateArray [v36, v37, v38]
+v40 <- CreateArray [v34, v35, v39]
+v41 <- CreateArray [v32, v33, v40]
+v42 <- LoadInteger '8'
+v43 <- LoadInteger '7'
+v44 <- LoadInteger '6'
+v45 <- LoadInteger '5'
+v46 <- CreateArrayWithSpread [...v4]
+v47 <- CreateArray [v44, v45, v46]
+v48 <- CreateArray [v42, v43, v47]
+
+
+var arr = [1,2,3];
+const v8 = [1,2,3];
+const v9 = { arr: v8 };
+const v10 = [...arr];
+const v11 = { arr: v10 };
+[[1,2,3]];
+[[...arr]];
+const v25 = [6,5,[1,2,3]];
+const v26 = { arr: v25 };
+const v30 = [6,5,[...arr]];
+const v31 = { arr: v30 };
+[8,7,[6,5,[1,2,3]]];
+[8,7,[6,5,[...arr]]];
+
+FuzzIL program written to corpus/regress-4417.fzil

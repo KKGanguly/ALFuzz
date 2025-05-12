@@ -1,0 +1,84 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        BeginDoWhileLoopBody
+            v2 <- LoadInteger '23'
+            Return v2
+        BeginDoWhileLoopHeader
+            v3 <- LoadBoolean 'false'
+        EndDoWhileLoop v3
+    EndPlainFunction
+    v4 <- LoadInteger '23'
+    v5 <- CallFunction v1, []
+    v6 <- LoadInteger '23'
+    v7 <- CallFunction v1, []
+EndPlainFunction
+v8 <- CallFunction v0, []
+v9 <- BeginPlainFunction -> 
+    v10 <- BeginGeneratorFunction -> 
+        BeginDoWhileLoopBody
+            v11 <- LoadInteger '23'
+            v12 <- Yield v11
+            v13 <- LoadInteger '42'
+            v14 <- Yield v13
+        BeginDoWhileLoopHeader
+            v15 <- LoadBoolean 'false'
+        EndDoWhileLoop v15
+        v16 <- LoadInteger '999'
+        Return v16
+    EndGeneratorFunction
+    v17 <- CallFunction v10, []
+    v18 <- CreateNamedVariable 'gen', 'var', v17
+    v19 <- LoadInteger '23'
+    v20 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v19
+        ObjectLiteralAddProperty `done`, v20
+    v21 <- EndObjectLiteral
+    v22 <- CallMethod v18, 'next', []
+    v23 <- LoadInteger '42'
+    v24 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v23
+        ObjectLiteralAddProperty `done`, v24
+    v25 <- EndObjectLiteral
+    v26 <- CallMethod v18, 'next', []
+    v27 <- LoadInteger '999'
+    v28 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v27
+        ObjectLiteralAddProperty `done`, v28
+    v29 <- EndObjectLiteral
+    v30 <- CallMethod v18, 'next', []
+EndPlainFunction
+v31 <- CallFunction v9, []
+
+
+function TestNonLoopyLoop() {
+    function f() {
+        do {
+            return 23;
+        } while (false)
+    }
+    f();
+    f();
+}
+TestNonLoopyLoop();
+function TestNonLoopyGenerator() {
+    function* g() {
+        do {
+            yield 23;
+            yield 42;
+        } while (false)
+        return 999;
+    }
+    var gen = g();
+    const v21 = { value: 23, done: false };
+    gen.next();
+    const v25 = { value: 42, done: false };
+    gen.next();
+    const v29 = { value: 999, done: true };
+    gen.next();
+}
+TestNonLoopyGenerator();
+
+FuzzIL program written to corpus/regress-5252.fzil

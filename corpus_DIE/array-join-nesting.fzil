@@ -1,0 +1,35 @@
+v0 <- LoadInteger '128'
+v1 <- CreateNamedVariable 'DEPTH', 'const', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- LoadInteger '0'
+    v6 <- Compare v3, '>', v5
+    v7 <- LoadInteger '1'
+    v8 <- BinaryOperation v3, '-', v7
+    v9 <- CallFunction v2, [v8, v4]
+    v10 <- CreateArray [v4, v9]
+    v11 <- CreateArray [v4]
+    v12 <- TernaryOperation v6, v10, v11
+    Return v12
+EndPlainFunction
+v13 <- LoadString 'a'
+v14 <- CallFunction v2, [v1, v13]
+v15 <- CreateNamedVariable 'array', 'const', v14
+v16 <- LoadString 'a'
+v17 <- LoadString ',a'
+v18 <- CallMethod v17, 'repeat', [v1]
+v19 <- BinaryOperation v16, '+', v18
+v20 <- CreateNamedVariable 'expected', 'const', v19
+v21 <- CallMethod v15, 'join', []
+v22 <- CallMethod v15, 'join', []
+
+
+const DEPTH = 128;
+function makeNestedArray(a3, a4) {
+    return a3 > 0 ? [a4,makeNestedArray(a3 - 1, a4)] : [a4];
+}
+const array = makeNestedArray(DEPTH, "a");
+const expected = "a" + (",a").repeat(DEPTH);
+array.join();
+array.join();
+
+FuzzIL program written to corpus/array-join-nesting.fzil

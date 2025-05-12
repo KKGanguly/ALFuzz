@@ -1,0 +1,29 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateArray [v0]
+v2 <- CreateNamedVariable 'a', 'var', v1
+v3 <- BeginPlainFunction -> v4
+    v5 <- CreateNamedVariable 'Infinity', 'none'
+    v6 <- CallMethod v4, 'push', [v5]
+EndPlainFunction
+v7 <- CallFunction v3, [v2]
+v8 <- CallFunction v3, [v2]
+v9 <- CallFunction v3, [v2]
+v10 <- CallFunction v3, [v2]
+BeginObjectLiteral
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable 'Infinity', 'none'
+v13 <- CreateArray [v11, v12, v12, v12, v12]
+
+
+var a = [{}];
+function f(a4) {
+    a4.push(Infinity);
+}
+f(a);
+f(a);
+f(a);
+f(a);
+[{},Infinity,Infinity,Infinity,Infinity];
+
+FuzzIL program written to corpus/regress-force-constant-representation.fzil

@@ -1,0 +1,28 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'v', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- UnaryOperation '-', v1
+    v4 <- LoadInteger '125'
+    v5 <- BinaryOperation v3, '/', v4
+    v6 <- CreateNamedVariable 'Math', 'none'
+    v7 <- CallMethod v6, 'floor', [v5]
+    Return v7
+EndPlainFunction
+v8 <- LoadInteger '1'
+v9 <- UnaryOperation '-', v8
+v10 <- CallFunction v2, []
+v11 <- LoadInteger '1'
+v12 <- UnaryOperation '-', v11
+v13 <- CallFunction v2, []
+
+
+var v = 1;
+function foo() {
+    return Math.floor(-v / 125);
+}
+-1;
+foo();
+-1;
+foo();
+
+FuzzIL program written to corpus/regress-crbug-699282.fzil

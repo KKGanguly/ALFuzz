@@ -1,0 +1,31 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'custom_toString', 'none'
+    v2 <- GetProperty v1, 'caller'
+    v3 <- CreateNamedVariable 'boom', 'var', v2
+    Return v3
+EndPlainFunction
+v4 <- CreateNamedVariable 'custom_toString', 'var', v0
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'object', 'var', v5
+SetProperty v6, 'toString', v4
+BeginTry
+    v7 <- CreateNamedVariable 'Object', 'none'
+    v8 <- CallMethod v7, 'hasOwnProperty', [v6]
+BeginCatch -> v9
+EndTryCatch
+
+
+function f0() {
+    var boom = custom_toString.caller;
+    return boom;
+}
+var custom_toString = f0;
+var object = {};
+object.toString = custom_toString;
+try {
+    Object.hasOwnProperty(object);
+} catch(e9) {
+}
+
+FuzzIL program written to corpus/regress-crbug-599714.fzil

@@ -1,0 +1,40 @@
+v0 <- LoadInteger '1'
+v1 <- LoadUndefined
+v2 <- LoadInteger '3'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable 'arr', 'const', v3
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadInteger '2'
+    v8 <- CreateNamedVariable 'Array', 'none'
+    v9 <- GetProperty v8, 'prototype'
+    SetElement v9, '1', v7
+    v10 <- LoadInteger '1'
+    v11 <- BinaryOperation v6, '+', v10
+    Return v11
+EndPlainFunction
+v12 <- LoadUndefined
+v13 <- CreateNamedVariable 'Array', 'none'
+v14 <- GetProperty v13, 'prototype'
+v15 <- CreateNamedVariable 'Symbol', 'none'
+v16 <- GetProperty v15, 'iterator'
+SetComputedProperty v14, v16, v12
+v17 <- LoadInteger '2'
+v18 <- LoadInteger '3'
+v19 <- LoadInteger '4'
+v20 <- CreateArray [v17, v18, v19]
+v21 <- CreateNamedVariable 'Uint16Array', 'none'
+v22 <- CallMethod v21, 'from', [v4, v5]
+
+
+const arr = [1,,3];
+function mapper(a6) {
+    const t2 = Array.prototype;
+    t2[1] = 2;
+    return a6 + 1;
+}
+const t6 = Array.prototype;
+t6[Symbol.iterator] = undefined;
+[2,3,4];
+Uint16Array.from(arr, mapper);
+
+FuzzIL program written to corpus/regress-8133-2.fzil

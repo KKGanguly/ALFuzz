@@ -1,0 +1,39 @@
+v0 <- CreateNamedVariable 'Int16Array', 'none'
+v1 <- LoadInteger '23'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'array', 'var', v2
+v4 <- LoadInteger '7'
+SetElement v3, '7', v4
+v5 <- LoadInteger '9'
+SetElement v3, '9', v5
+v6 <- LoadInteger '23'
+v7 <- GetProperty v3, 'length'
+v8 <- LoadInteger '7'
+v9 <- GetElement v3, '7'
+v10 <- LoadInteger '9'
+v11 <- GetElement v3, '9'
+v12 <- CreateNamedVariable 'Array', 'none'
+v13 <- GetProperty v12, 'prototype'
+v14 <- GetProperty v13, 'sort'
+v15 <- CallMethod v14, 'call', [v3]
+v16 <- LoadInteger '23'
+v17 <- GetProperty v3, 'length'
+v18 <- LoadInteger '7'
+v19 <- GetElement v3, '21'
+v20 <- LoadInteger '9'
+v21 <- GetElement v3, '22'
+
+
+const v2 = new Int16Array(23);
+var array = v2;
+array[7] = 7;
+array[9] = 9;
+array.length;
+array[7];
+array[9];
+Array.prototype.sort.call(array);
+array.length;
+array[21];
+array[22];
+
+FuzzIL program written to corpus/regress-98773.fzil

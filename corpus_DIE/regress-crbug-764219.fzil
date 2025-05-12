@@ -1,0 +1,102 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadInteger '42'
+        SetProperty v2, 'x', v3
+    EndPlainFunction
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- CallFunction v1, [v4]
+    v6 <- LoadThis
+    v7 <- CallFunction v1, [v6]
+    v8 <- LoadThis
+    v9 <- CallFunction v1, [v8]
+EndPlainFunction
+v10 <- CallFunction v0, []
+v11 <- BeginPlainFunction -> 
+    v12 <- BeginPlainFunction -> v13
+        v14 <- LoadInteger '153'
+        SetProperty v13, 'y', v14
+    EndPlainFunction
+    v15 <- LoadThis
+    v16 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v17 <- EndObjectLiteral
+    BeginObjectLiteral
+    v18 <- EndObjectLiteral
+    v19 <- Construct v16, [v17, v18]
+    v20 <- CreateNamedVariable 'Object', 'none'
+    v21 <- CallMethod v20, 'setPrototypeOf', [v15, v19]
+    BeginObjectLiteral
+    v22 <- EndObjectLiteral
+    v23 <- CallFunction v12, [v22]
+    v24 <- LoadThis
+    v25 <- CallFunction v12, [v24]
+    v26 <- LoadThis
+    v27 <- CallFunction v12, [v26]
+EndPlainFunction
+v28 <- CallFunction v11, []
+v29 <- BeginPlainFunction -> 
+    v30 <- BeginPlainFunction -> v31
+        v32 <- LoadInteger '153'
+        SetProperty v31, 'z', v32
+    EndPlainFunction
+    v33 <- LoadThis
+    v34 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `z` -> v35
+        EndObjectLiteralGetter
+    v36 <- EndObjectLiteral
+    BeginObjectLiteral
+    v37 <- EndObjectLiteral
+    v38 <- Construct v34, [v36, v37]
+    v39 <- CreateNamedVariable 'Object', 'none'
+    v40 <- CallMethod v39, 'setPrototypeOf', [v33, v38]
+    BeginObjectLiteral
+    v41 <- EndObjectLiteral
+    v42 <- CallFunction v30, [v41]
+    v43 <- LoadThis
+    v44 <- CallFunction v30, [v43]
+    v45 <- LoadThis
+    v46 <- CallFunction v30, [v45]
+EndPlainFunction
+v47 <- CallFunction v29, []
+
+
+function f0() {
+    function f(a2) {
+        a2.x = 42;
+    }
+    f({});
+    f(this);
+    f(this);
+}
+f0();
+function f11() {
+    function f(a13) {
+        a13.y = 153;
+    }
+    const v17 = {};
+    const v19 = new Proxy(v17, {});
+    Object.setPrototypeOf(this, v19);
+    f({});
+    f(this);
+    f(this);
+}
+f11();
+function f29() {
+    function f(a31) {
+        a31.z = 153;
+    }
+    const v36 = {
+        get z() {
+        },
+    };
+    const v38 = new Proxy(v36, {});
+    Object.setPrototypeOf(this, v38);
+    f({});
+    f(this);
+    f(this);
+}
+f29();
+
+FuzzIL program written to corpus/regress-crbug-764219.fzil

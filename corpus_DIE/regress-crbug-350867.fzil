@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5, v6, v7, v8
+    v9 <- LoadArguments
+    v10 <- CallFunction v0, [v9, v8]
+    Return v10
+EndPlainFunction
+v11 <- LoadInteger '2'
+v12 <- LoadInteger '3'
+v13 <- LoadInteger '4'
+v14 <- LoadString 'foo'
+v15 <- CallFunction v4, [v11, v12, v13, v14]
+v16 <- LoadInteger '2'
+v17 <- LoadInteger '3'
+v18 <- LoadInteger '4'
+v19 <- LoadString 'foo'
+v20 <- CallFunction v4, [v16, v17, v18, v19]
+v21 <- LoadInteger '11'
+v22 <- LoadInteger '11'
+v23 <- LoadInteger '22'
+v24 <- LoadInteger '33'
+v25 <- CreateArray [v22, v23, v24]
+v26 <- LoadInteger '0'
+v27 <- CallFunction v0, [v25, v26]
+v28 <- LoadInteger '22'
+v29 <- LoadInteger '22'
+v30 <- LoadInteger '33'
+v31 <- LoadInteger '44'
+v32 <- LoadInteger '0'
+v33 <- CallFunction v4, [v29, v30, v31, v32]
+
+
+function f1(a1, a2) {
+    return a1[a2];
+}
+function f2(a5, a6, a7, a8) {
+    return f1(arguments, a8);
+}
+f2(2, 3, 4, "foo");
+f2(2, 3, 4, "foo");
+f1([11,22,33], 0);
+f2(22, 33, 44, 0);
+
+FuzzIL program written to corpus/regress-crbug-350867.fzil

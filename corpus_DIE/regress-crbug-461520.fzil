@@ -1,0 +1,77 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'fuse', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- BeginPlainFunction -> 
+    EndPlainFunction
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- UnaryOperation v1, '--'
+    v6 <- LoadInteger '0'
+    v7 <- Compare v5, '==', v6
+    BeginIf v7
+        v8 <- LoadString 'please die'
+        ThrowException v8
+    EndIf
+    v9 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v10 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v9
+        ObjectLiteralAddProperty `configurable`, v10
+    v11 <- EndObjectLiteral
+    Return v11
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v2
+    BeginObjectLiteralMethod `has` -> v12
+        v13 <- LoadBoolean 'true'
+        Return v13
+    EndObjectLiteralMethod
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v4
+v14 <- EndObjectLiteral
+v15 <- CreateNamedVariable 'handler', 'var', v14
+v16 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v17 <- EndObjectLiteral
+v18 <- Construct v16, [v17, v15]
+v19 <- CreateNamedVariable 'p', 'var', v18
+v20 <- CreateNamedVariable 'Object', 'none'
+v21 <- CallMethod v20, 'create', [v19]
+v22 <- CreateNamedVariable 'o', 'var', v21
+BeginWith v22
+    v23 <- CreateNamedVariable 'f', 'none'
+    v24 <- CallFunction v23, []
+EndWith
+
+
+var fuse = 1;
+function f2() {
+    function f3() {
+    }
+    return f3;
+}
+function f4() {
+    if (fuse-- == 0) {
+        throw "please die";
+    }
+    function f9() {
+    }
+    return { value: f9, configurable: true };
+}
+const v14 = {
+    get: f2,
+    has() {
+        return true;
+    },
+    getOwnPropertyDescriptor: f4,
+};
+var handler = v14;
+const v18 = new Proxy({}, handler);
+var p = v18;
+var o = Object.create(p);
+with (o) {
+    f();
+}
+
+FuzzIL program written to corpus/regress-crbug-461520.fzil

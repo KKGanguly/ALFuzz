@@ -1,0 +1,68 @@
+v0 <- CreateNamedVariable 'Float64Array', 'none'
+v1 <- LoadInteger '1'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'doubles', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    SetElement v3, '0', v5
+    v6 <- GetElement v3, '0'
+    Return v6
+EndPlainFunction
+BeginForLoopInitializer
+    v7 <- LoadInteger '0'
+BeginForLoopCondition -> v8
+    v9 <- LoadInteger '3'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10 -> v11
+    v12 <- UnaryOperation v11, '++'
+BeginForLoopBody -> v13
+    v14 <- CallFunction v4, [v13]
+EndForLoop
+v15 <- LoadInteger '1'
+v16 <- CallFunction v4, [v15]
+v17 <- BeginPlainFunction -> v18, v19, v20
+    SetComputedProperty v18, v19, v20
+EndPlainFunction
+BeginForLoopInitializer
+    v21 <- LoadInteger '0'
+BeginForLoopCondition -> v22
+    v23 <- LoadInteger '3'
+    v24 <- Compare v22, '<', v23
+BeginForLoopAfterthought v24 -> v25
+    v26 <- UnaryOperation v25, '++'
+BeginForLoopBody -> v27
+    v28 <- CreateNamedVariable 'Array', 'none'
+    v29 <- LoadInteger '1'
+    v30 <- Construct v28, [v29]
+    v31 <- LoadInteger '1'
+    v32 <- CallFunction v17, [v30, v31, v27]
+EndForLoop
+v33 <- CreateNamedVariable 'Array', 'none'
+v34 <- LoadInteger '1'
+v35 <- Construct v33, [v34]
+v36 <- LoadInteger '1050'
+v37 <- CallFunction v4, [v36]
+v38 <- LoadInteger '3'
+v39 <- CallFunction v17, [v35, v37, v38]
+
+
+const v2 = new Float64Array(1);
+var doubles = v2;
+function ToHeapNumber(a5) {
+    doubles[0] = a5;
+    return doubles[0];
+}
+for (let i8 = 0; i8 < 3; i8++) {
+    ToHeapNumber(i8);
+}
+ToHeapNumber(1);
+function Fail(a18, a19, a20) {
+    a18[a19] = a20;
+}
+for (let i22 = 0; i22 < 3; i22++) {
+    const v30 = new Array(1);
+    Fail(v30, 1, i22);
+}
+const v35 = new Array(1);
+Fail(v35, ToHeapNumber(1050), 3);
+
+FuzzIL program written to corpus/regress-crbug-485410.fzil

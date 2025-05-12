@@ -1,0 +1,50 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- LoadInteger '1'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'uint8', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '2147483818'
+    SetElement v3, '0', v5
+    v6 <- LoadInteger '170'
+    v7 <- GetElement v3, '0'
+EndPlainFunction
+v8 <- CallFunction v4, []
+v9 <- CallFunction v4, []
+v10 <- CallFunction v4, []
+v11 <- CallFunction v4, []
+v12 <- CreateNamedVariable 'Uint32Array', 'none'
+v13 <- LoadInteger '1'
+v14 <- Construct v12, [v13]
+v15 <- CreateNamedVariable 'uint32', 'var', v14
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadFloat '9.228496132430807e+18'
+    SetElement v15, '0', v17
+    v18 <- LoadInteger '2023407616'
+    v19 <- GetElement v15, '0'
+EndPlainFunction
+v20 <- CallFunction v16, []
+v21 <- CallFunction v16, []
+v22 <- CallFunction v16, []
+
+
+const v2 = new Uint8Array(1);
+var uint8 = v2;
+function test() {
+    uint8[0] = 2147483818;
+    uint8[0];
+}
+test();
+test();
+test();
+test();
+const v14 = new Uint32Array(1);
+var uint32 = v14;
+function test2() {
+    uint32[0] = 9.228496132430807e+18;
+    uint32[0];
+}
+test2();
+test2();
+test2();
+
+FuzzIL program written to corpus/regress-2110.fzil

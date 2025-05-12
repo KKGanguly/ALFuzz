@@ -1,0 +1,60 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v2 <- LoadThis
+    SetProperty v2, 'constant_function', v1
+    v3 <- LoadInteger '1'
+    v4 <- LoadThis
+    SetProperty v4, 'one', v3
+    v5 <- LoadInteger '2'
+    v6 <- LoadThis
+    SetProperty v6, 'two', v5
+EndPlainFunction
+v7 <- Construct v0, []
+v8 <- CreateNamedVariable 'b1', 'var', v7
+v9 <- Construct v0, []
+v10 <- CreateNamedVariable 'b2', 'var', v9
+v11 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v11, 'prototype', v8
+v12 <- Construct v11, []
+v13 <- CreateNamedVariable 'a', 'var', v12
+v14 <- BeginPlainFunction -> v15
+    v16 <- GetProperty v15, 'two'
+    Return v16
+EndPlainFunction
+v17 <- LoadInteger '2'
+v18 <- CallFunction v14, [v13]
+v19 <- LoadInteger '2'
+v20 <- CallFunction v14, [v13]
+v21 <- LoadString 'no longer constant!'
+SetProperty v10, 'constant_function', v21
+v22 <- LoadInteger '2'
+v23 <- CallFunction v14, [v13]
+
+
+function BadProto() {
+    function f1() {
+    }
+    this.constant_function = f1;
+    this.one = 1;
+    this.two = 2;
+}
+const v7 = new BadProto();
+var b1 = v7;
+const v9 = new BadProto();
+var b2 = v9;
+function Ctor() {
+}
+Ctor.prototype = b1;
+const v12 = new Ctor();
+var a = v12;
+function Two(a15) {
+    return a15.two;
+}
+Two(a);
+Two(a);
+b2.constant_function = "no longer constant!";
+Two(a);
+
+FuzzIL program written to corpus/regress-crbug-305309.fzil

@@ -1,0 +1,28 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Worker'
+BeginIf v1
+    v2 <- CreateNamedVariable 'Worker', 'none'
+    v3 <- LoadString 'onmessage = function(){}'
+    v4 <- LoadString 'string'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `type`, v4
+    v5 <- EndObjectLiteral
+    v6 <- Construct v2, [v3, v5]
+    v7 <- CreateNamedVariable 'worker', 'var', v6
+    v8 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v9 <- Construct v8, []
+    v10 <- CreateNamedVariable 'buf', 'var', v9
+    v11 <- CreateArray [v10]
+    v12 <- CallMethod v7, 'postMessage', [v10, v11]
+EndIf
+
+
+if (this.Worker) {
+    const v6 = new Worker("onmessage = function(){}", { type: "string" });
+    var worker = v6;
+    const v9 = new ArrayBuffer();
+    var buf = v9;
+    worker.postMessage(buf, [buf]);
+}
+
+FuzzIL program written to corpus/regress-crbug-522496.fzil

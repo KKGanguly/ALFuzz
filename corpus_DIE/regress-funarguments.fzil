@@ -1,0 +1,254 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- LoadInteger '1'
+    v6 <- Compare v3, '==', v5
+    BeginIf v6
+        v7 <- LoadString 'arg'
+        v8 <- LoadString 'uments'
+        v9 <- BinaryOperation v7, '+', v8
+        v10 <- GetComputedProperty v2, v9
+        Return v10
+    EndIf
+    v11 <- LoadInteger '2'
+    v12 <- Compare v3, '==', v11
+    BeginIf v12
+        v13 <- CreateNamedVariable 'gee', 'none'
+        v14 <- LoadString 'arg'
+        v15 <- LoadString 'uments'
+        v16 <- BinaryOperation v14, '+', v15
+        v17 <- GetComputedProperty v13, v16
+        Return v17
+    EndIf
+    v18 <- LoadInteger '42'
+    Return v18
+EndPlainFunction
+v19 <- BeginPlainFunction -> v20
+    v21 <- LoadInteger '2'
+    v22 <- BinaryOperation v21, '-', v20
+    v23 <- LoadString 'f'
+    v24 <- LoadThis
+    v25 <- CallMethod v24, 'f', [v22, v23]
+    Return v25
+EndPlainFunction
+v26 <- BeginPlainFunction -> v27, v28
+    v29 <- LoadInteger '0'
+    v30 <- Compare v27, '==', v29
+    BeginIf v30
+        v31 <- LoadString 'arg'
+        v32 <- LoadString 'uments'
+        v33 <- BinaryOperation v31, '+', v32
+        v34 <- GetComputedProperty v26, v33
+        Return v34
+    EndIf
+    v35 <- LoadInteger '1'
+    v36 <- Compare v27, '==', v35
+    BeginIf v36
+        v37 <- CreateNamedVariable 'goo', 'none'
+        v38 <- LoadString 'arg'
+        v39 <- LoadString 'uments'
+        v40 <- BinaryOperation v38, '+', v39
+        v41 <- GetComputedProperty v37, v40
+        Return v41
+    EndIf
+    v42 <- LoadInteger '42'
+    Return v42
+EndPlainFunction
+v43 <- BeginPlainFunction -> v44
+    v45 <- LoadString 'f'
+    v46 <- LoadThis
+    v47 <- CallMethod v46, 'f', [v44, v45]
+    Return v47
+EndPlainFunction
+v48 <- GetProperty v0, 'prototype'
+SetProperty v48, 'f', v2
+v49 <- GetProperty v0, 'prototype'
+SetProperty v49, 'g', v19
+v50 <- GetProperty v1, 'prototype'
+SetProperty v50, 'f', v26
+v51 <- GetProperty v1, 'prototype'
+SetProperty v51, 'g', v43
+v52 <- Construct v0, []
+v53 <- CreateNamedVariable 'o', 'var', v52
+v54 <- BeginPlainFunction -> v55
+    v56 <- LoadInteger '0'
+    v57 <- Compare v55, '==', v56
+    BeginIf v57
+        v58 <- LoadString 'h'
+        v59 <- CallMethod v53, 'g', [v55, v58]
+        Return v59
+    EndIf
+    v60 <- LoadInteger '1'
+    v61 <- Compare v55, '==', v60
+    BeginIf v61
+        v62 <- LoadString 'h'
+        v63 <- CallMethod v53, 'g', [v55, v62]
+        Return v63
+    EndIf
+    v64 <- LoadString 'z'
+    v65 <- CallMethod v53, 'g', [v55, v64]
+    Return v65
+EndPlainFunction
+v66 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v67 <- LoadInteger '0'
+    BeginForLoopCondition -> v68
+        v69 <- LoadInteger '2'
+        v70 <- Compare v68, '<', v69
+    BeginForLoopAfterthought v70 -> v71
+        v72 <- UnaryOperation v71, '++'
+    BeginForLoopBody -> v73
+        BeginForLoopInitializer
+            v74 <- LoadInteger '0'
+        BeginForLoopCondition -> v75
+            v76 <- LoadInteger '5'
+            v77 <- Compare v75, '<', v76
+        BeginForLoopAfterthought v77 -> v78
+            v79 <- UnaryOperation v78, '++'
+        BeginForLoopBody -> v80
+            v81 <- LoadString 'g'
+            v82 <- CallMethod v53, 'g', [v80, v81]
+        EndForLoop
+        BeginForLoopInitializer
+            v83 <- LoadInteger '0'
+        BeginForLoopCondition -> v84
+            v85 <- LoadInteger '5'
+            v86 <- Compare v84, '<', v85
+        BeginForLoopAfterthought v86 -> v87
+            v88 <- UnaryOperation v87, '++'
+        BeginForLoopBody -> v89
+            v90 <- CallFunction v54, [v89]
+        EndForLoop
+    EndForLoop
+EndPlainFunction
+v91 <- CallFunction v66, []
+v92 <- LoadInteger '0'
+v93 <- LoadString 'g'
+v94 <- CreateArray [v92, v93]
+v95 <- LoadInteger '0'
+v96 <- LoadString 'g'
+v97 <- CallMethod v53, 'g', [v95, v96]
+v98 <- LoadInteger '1'
+v99 <- LoadString 'f'
+v100 <- CreateArray [v98, v99]
+v101 <- LoadInteger '1'
+v102 <- LoadString 'g'
+v103 <- CallMethod v53, 'g', [v101, v102]
+v104 <- LoadInteger '0'
+v105 <- LoadString 'h'
+v106 <- CreateArray [v104, v105]
+v107 <- LoadInteger '0'
+v108 <- CallFunction v54, [v107]
+v109 <- LoadInteger '1'
+v110 <- LoadString 'f'
+v111 <- CreateArray [v109, v110]
+v112 <- LoadInteger '1'
+v113 <- CallFunction v54, [v112]
+v114 <- Construct v1, []
+Reassign v53, v114
+v115 <- CallFunction v66, []
+v116 <- LoadInteger '0'
+v117 <- LoadString 'f'
+v118 <- CreateArray [v116, v117]
+v119 <- LoadInteger '0'
+v120 <- LoadString 'g'
+v121 <- CallMethod v53, 'g', [v119, v120]
+v122 <- LoadInteger '1'
+v123 <- LoadString 'g'
+v124 <- CreateArray [v122, v123]
+v125 <- LoadInteger '1'
+v126 <- LoadString 'g'
+v127 <- CallMethod v53, 'g', [v125, v126]
+v128 <- LoadInteger '0'
+v129 <- LoadString 'f'
+v130 <- CreateArray [v128, v129]
+v131 <- LoadInteger '0'
+v132 <- CallFunction v54, [v131]
+v133 <- LoadInteger '1'
+v134 <- LoadString 'h'
+v135 <- CreateArray [v133, v134]
+v136 <- LoadInteger '1'
+v137 <- CallFunction v54, [v136]
+
+
+function A() {
+}
+function B() {
+}
+function fee(a3, a4) {
+    if (a3 == 1) {
+        return fee["arg" + "uments"];
+    }
+    if (a3 == 2) {
+        return gee["arg" + "uments"];
+    }
+    return 42;
+}
+function gee(a20) {
+    return this.f(2 - a20, "f");
+}
+function foo(a27, a28) {
+    if (a27 == 0) {
+        return foo["arg" + "uments"];
+    }
+    if (a27 == 1) {
+        return goo["arg" + "uments"];
+    }
+    return 42;
+}
+function goo(a44) {
+    return this.f(a44, "f");
+}
+const t28 = A.prototype;
+t28.f = fee;
+const t30 = A.prototype;
+t30.g = gee;
+const t32 = B.prototype;
+t32.f = foo;
+const t34 = B.prototype;
+t34.g = goo;
+const v52 = new A();
+var o = v52;
+function hej(a55) {
+    if (a55 == 0) {
+        return o.g(a55, "h");
+    }
+    if (a55 == 1) {
+        return o.g(a55, "h");
+    }
+    return o.g(a55, "z");
+}
+function opt() {
+    for (let i68 = 0; i68 < 2; i68++) {
+        for (let i75 = 0; i75 < 5; i75++) {
+            o.g(i75, "g");
+        }
+        for (let i84 = 0; i84 < 5; i84++) {
+            hej(i84);
+        }
+    }
+}
+opt();
+[0,"g"];
+o.g(0, "g");
+[1,"f"];
+o.g(1, "g");
+[0,"h"];
+hej(0);
+[1,"f"];
+hej(1);
+const v114 = new B();
+o = v114;
+opt();
+[0,"f"];
+o.g(0, "g");
+[1,"g"];
+o.g(1, "g");
+[0,"f"];
+hej(0);
+[1,"h"];
+hej(1);
+
+FuzzIL program written to corpus/regress-funarguments.fzil

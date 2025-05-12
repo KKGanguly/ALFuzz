@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallMethod v1, 'shift', []
+    v3 <- CreateNamedVariable 'a', 'let', v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '1'
+    v6 <- LoadInteger '15'
+    v7 <- LoadInteger '16'
+    v8 <- CreateArray [v5, v6, v7]
+    v9 <- CreateNamedVariable '__v_27536', 'var', v8
+    v10 <- CallFunction v0, [v9]
+    v11 <- CallMethod v9, 'unshift', [v9]
+EndPlainFunction
+v12 <- CallFunction v4, []
+v13 <- CallFunction v4, []
+v14 <- CallFunction v4, []
+
+
+function __f_7586(a1) {
+    let a = a1.shift();
+    return a;
+}
+function __f_7587() {
+    var __v_27536 = [1,15,16];
+    __f_7586(__v_27536);
+    __v_27536.unshift(__v_27536);
+}
+__f_7587();
+__f_7587();
+__f_7587();
+
+FuzzIL program written to corpus/regress-775888.fzil

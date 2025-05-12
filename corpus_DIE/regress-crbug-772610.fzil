@@ -1,0 +1,37 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Symbol', 'none'
+    v2 <- GetProperty v1, 'toPrimitive'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v2 -> v3
+        EndObjectLiteralComputedMethod
+    v4 <- EndObjectLiteral
+    v5 <- CreateArray [v4]
+    v6 <- CreateNamedVariable 'o', 'var', v5
+    v7 <- GetProperty v6, 'length'
+    Return v7
+EndPlainFunction
+v8 <- LoadInteger '1'
+v9 <- CallFunction v0, []
+v10 <- LoadInteger '1'
+v11 <- CallFunction v0, []
+v12 <- LoadInteger '1'
+v13 <- CallFunction v0, []
+v14 <- CreateNamedVariable 'gc', 'none'
+v15 <- CallFunction v14, []
+
+
+function f() {
+    const v2 = Symbol.toPrimitive;
+    const v4 = {
+        [v2]() {
+        },
+    };
+    var o = [v4];
+    return o.length;
+}
+f();
+f();
+f();
+gc();
+
+FuzzIL program written to corpus/regress-crbug-772610.fzil

@@ -1,0 +1,28 @@
+v0 <- LoadString ''
+v1 <- CreateNamedVariable 'x', 'none'
+Reassign v1, v0
+v2 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v3 <- LoadInteger '4'
+    v4 <- CreateNamedVariable 'wxemsx', 'var', v3
+    v5 <- CreateNamedVariable 'Float32Array', 'none'
+    v6 <- Construct v5, [v4]
+    v7 <- CreateNamedVariable 'wxemsx_0', 'var', v6
+    BeginObjectLiteral
+    v8 <- EndObjectLiteral
+    SetElement v7, '0', v8
+EndPlainFunction
+v9 <- CallFunction v2, []
+
+
+x = "";
+function foo() {
+    'use strict';
+    var wxemsx = 4;
+    const v6 = new Float32Array(wxemsx);
+    var wxemsx_0 = v6;
+    wxemsx_0[0] = {};
+}
+foo();
+
+FuzzIL program written to corpus/regress-1383.fzil

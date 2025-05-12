@@ -1,0 +1,135 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '23'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadString ''
+    v5 <- CallComputedMethod v3, v4, []
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `foo`, v7
+    v8 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v0
+    v9 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty ``, v9
+    v10 <- EndObjectLiteral
+    v11 <- CreateNamedVariable 'Object', 'none'
+    v12 <- CallMethod v11, 'create', [v8, v10]
+    v13 <- CallFunction v0, [v12]
+    v14 <- CreateNamedVariable 'o1', 'var', v13
+    v15 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `bar`, v15
+    v16 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v0
+    v17 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty ``, v17
+    v18 <- EndObjectLiteral
+    v19 <- CallMethod v11, 'create', [v16, v18]
+    v20 <- CallFunction v0, [v19]
+    v21 <- CreateNamedVariable 'o2', 'var', v20
+    v22 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `baz`, v22
+    v23 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v0
+    v24 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty ``, v24
+    v25 <- EndObjectLiteral
+    v26 <- CallMethod v11, 'create', [v23, v25]
+    v27 <- CallFunction v0, [v26]
+    v28 <- CreateNamedVariable 'o3', 'var', v27
+    v29 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `qux`, v29
+    v30 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v0
+    v31 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty ``, v31
+    v32 <- EndObjectLiteral
+    v33 <- CallMethod v11, 'create', [v30, v32]
+    v34 <- CallFunction v0, [v33]
+    v35 <- CreateNamedVariable 'o4', 'var', v34
+    v36 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `loo`, v36
+    v37 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v0
+    v38 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty ``, v38
+    v39 <- EndObjectLiteral
+    v40 <- CallMethod v11, 'create', [v37, v39]
+    v41 <- CallFunction v0, [v40]
+    v42 <- CreateNamedVariable 'o5', 'var', v41
+    v43 <- LoadInteger '23'
+    v44 <- CallFunction v2, [v14]
+    v45 <- LoadInteger '23'
+    v46 <- CallFunction v2, [v14]
+    v47 <- LoadInteger '23'
+    v48 <- CallFunction v2, [v21]
+    v49 <- LoadInteger '23'
+    v50 <- CallFunction v2, [v28]
+    v51 <- LoadInteger '23'
+    v52 <- CallFunction v2, [v35]
+    v53 <- LoadInteger '23'
+    v54 <- CallFunction v2, [v42]
+    Return v14
+EndPlainFunction
+v55 <- CallFunction v6, []
+v56 <- CreateNamedVariable 'gc', 'none'
+v57 <- CallFunction v56, []
+v58 <- CallFunction v6, []
+v59 <- CreateNamedVariable 'oboom', 'var', v58
+v60 <- LoadInteger '23'
+v61 <- CallFunction v2, [v59]
+
+
+function f() {
+    return 23;
+}
+function call(a3) {
+    return a3[""]();
+}
+function test() {
+    const v8 = { foo: 1 };
+    const v9 = { value: f };
+    var o1 = f(Object.create(v8, { : v9 }));
+    const v16 = { bar: 1 };
+    const v17 = { value: f };
+    var o2 = f(Object.create(v16, { : v17 }));
+    const v23 = { baz: 1 };
+    const v24 = { value: f };
+    var o3 = f(Object.create(v23, { : v24 }));
+    const v30 = { qux: 1 };
+    const v31 = { value: f };
+    var o4 = f(Object.create(v30, { : v31 }));
+    const v37 = { loo: 1 };
+    const v38 = { value: f };
+    var o5 = f(Object.create(v37, { : v38 }));
+    call(o1);
+    call(o1);
+    call(o2);
+    call(o3);
+    call(o4);
+    call(o5);
+    return o1;
+}
+test();
+gc();
+var oboom = test();
+call(oboom);
+
+FuzzIL program written to corpus/regress-crbug-242502.fzil

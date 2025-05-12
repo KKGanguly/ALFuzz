@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    v2 <- LoadThis
+    SetProperty v2, 'x', v1
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- Construct v0, []
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6
+EndPlainFunction
+v7 <- CallFunction v3, []
+v8 <- CallFunction v3, []
+v9 <- LoadString 'x'
+v10 <- CreateNamedVariable 'Object', 'none'
+v11 <- GetProperty v10, 'prototype'
+v12 <- CallMethod v11, '__defineSetter__', [v9, v5]
+v13 <- CallFunction v3, []
+
+
+function g() {
+    this.x = {};
+}
+function f() {
+    new g();
+}
+function deopt(a6) {
+}
+f();
+f();
+Object.prototype.__defineSetter__("x", deopt);
+f();
+
+FuzzIL program written to corpus/regress-359441.fzil

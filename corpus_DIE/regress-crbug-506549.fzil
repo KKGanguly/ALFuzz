@@ -1,0 +1,42 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Worker'
+BeginIf v1
+    BeginObjectLiteral
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable '__v_5', 'var', v2
+    v4 <- LoadString 'byteLength'
+    v5 <- BeginPlainFunction -> 
+        v6 <- CreateNamedVariable 'foo', 'none'
+        v7 <- CallFunction v6, []
+    EndPlainFunction
+    v8 <- CallMethod v3, '__defineGetter__', [v4, v5]
+    v9 <- CreateNamedVariable 'Worker', 'none'
+    v10 <- LoadString 'onmessage = function() {};'
+    v11 <- LoadString 'string'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `type`, v11
+    v12 <- EndObjectLiteral
+    v13 <- Construct v9, [v10, v12]
+    v14 <- CreateNamedVariable '__v_8', 'var', v13
+    v15 <- BeginPlainFunction -> 
+        v16 <- CallMethod v14, 'postMessage', [v3]
+    EndPlainFunction
+    v17 <- CallFunction v15, []
+EndIf
+
+
+if (this.Worker) {
+    var __v_5 = {};
+    function f5() {
+        foo();
+    }
+    __v_5.__defineGetter__("byteLength", f5);
+    const v13 = new Worker("onmessage = function() {};", { type: "string" });
+    var __v_8 = v13;
+    function f15() {
+        __v_8.postMessage(__v_5);
+    }
+    f15();
+}
+
+FuzzIL program written to corpus/regress-crbug-506549.fzil

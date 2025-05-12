@@ -1,0 +1,50 @@
+v0 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v1 <- EndObjectLiteral
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v3
+        v4 <- LoadString 'No trap should fire'
+        ThrowException v4
+    EndObjectLiteralMethod
+v5 <- EndObjectLiteral
+v6 <- Construct v0, [v2, v5]
+v7 <- Construct v0, [v1, v6]
+v8 <- CreateNamedVariable 'failing_proxy', 'var', v7
+v9 <- BeginArrowFunction -> 
+    v10 <- CreateNamedVariable 'Object', 'none'
+    v11 <- GetProperty v10, 'prototype'
+    v12 <- CallMethod v10, 'setPrototypeOf', [v11, v8]
+    Return v12
+EndArrowFunction
+v13 <- CallFunction v9, []
+v14 <- CreateNamedVariable 'TypeError', 'none'
+v15 <- BeginArrowFunction -> 
+    v16 <- CreateNamedVariable 'a', 'none'
+    Return v16
+EndArrowFunction
+v17 <- CallFunction v15, []
+v18 <- CreateNamedVariable 'ReferenceError', 'none'
+
+
+const v1 = {};
+const v2 = {};
+const v5 = {
+    get() {
+        throw "No trap should fire";
+    },
+};
+const v6 = new Proxy(v2, v5);
+const v7 = new Proxy(v1, v6);
+var failing_proxy = v7;
+const v9 = () => {
+    return Object.setPrototypeOf(Object.prototype, failing_proxy);
+};
+v9();
+const v15 = () => {
+    return a;
+};
+v15();
+
+FuzzIL program written to corpus/proxies-global-reference.fzil

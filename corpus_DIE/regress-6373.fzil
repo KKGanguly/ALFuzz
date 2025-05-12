@@ -1,0 +1,42 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'A', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadInteger '1'
+    Return v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'Symbol', 'none'
+v6 <- GetProperty v5, 'hasInstance'
+SetComputedProperty v1, v6, v2
+BeginObjectLiteral
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'a', 'var', v7
+v9 <- BeginPlainFunction -> v10
+    v11 <- TestInstanceOf v10, v1
+    Return v11
+EndPlainFunction
+v12 <- CallFunction v9, [v8]
+v13 <- CallFunction v9, [v8]
+v14 <- CallFunction v9, [v8]
+v15 <- LoadInteger '1'
+v16 <- Compare v14, '!==', v15
+v17 <- CallFunction v9, [v8]
+v18 <- LoadInteger '1'
+v19 <- Compare v17, '!==', v18
+
+
+var A = {};
+function f2(a3) {
+    return 1;
+}
+A[Symbol.hasInstance] = f2;
+var a = {};
+function foo(a10) {
+    return a10 instanceof A;
+}
+foo(a);
+foo(a);
+foo(a) !== 1;
+foo(a) !== 1;
+
+FuzzIL program written to corpus/regress-6373.fzil

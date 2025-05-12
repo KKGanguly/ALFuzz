@@ -1,0 +1,155 @@
+v0 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v1 <- LoadInteger '8'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'ab1', 'var', v2
+v4 <- LoadString 'byteLength'
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '1000000'
+    Return v6
+EndPlainFunction
+v7 <- CallMethod v3, '__defineGetter__', [v4, v5]
+v8 <- LoadInteger '800000'
+v9 <- LoadInteger '900000'
+v10 <- CallMethod v3, 'slice', [v8, v9]
+v11 <- CreateNamedVariable 'ab2', 'var', v10
+v12 <- CreateNamedVariable 'Uint8Array', 'none'
+v13 <- Construct v12, [v11]
+v14 <- CreateNamedVariable 'array', 'var', v13
+BeginForLoopInitializer
+    v15 <- LoadInteger '0'
+BeginForLoopCondition -> v16
+    v17 <- GetProperty v14, 'length'
+    v18 <- Compare v16, '<', v17
+BeginForLoopAfterthought v18 -> v19
+    v20 <- UnaryOperation v19, '++'
+BeginForLoopBody -> v21
+    v22 <- LoadInteger '0'
+    v23 <- GetComputedProperty v14, v21
+EndForLoop
+v24 <- LoadInteger '0'
+v25 <- GetProperty v14, 'length'
+v26 <- LoadInteger '8'
+v27 <- Construct v0, [v26]
+v28 <- CreateNamedVariable 'ab3', 'var', v27
+v29 <- LoadString 'byteLength'
+v30 <- BeginPlainFunction -> 
+    v31 <- LoadInteger '4294967292'
+    Return v31
+EndPlainFunction
+v32 <- CallMethod v28, '__defineGetter__', [v29, v30]
+v33 <- CreateNamedVariable 'DataView', 'none'
+v34 <- Construct v33, [v28]
+v35 <- CreateNamedVariable 'aaa', 'var', v34
+BeginForLoopInitializer
+    v36 <- LoadInteger '10'
+BeginForLoopCondition -> v37
+    v38 <- GetProperty v35, 'length'
+    v39 <- Compare v37, '<', v38
+BeginForLoopAfterthought v39 -> v40
+    v41 <- UnaryOperation v40, '++'
+BeginForLoopBody -> v42
+    v43 <- LoadInteger '204'
+    v44 <- CallMethod v35, 'setInt8', [v42, v43]
+EndForLoop
+v45 <- LoadInteger '8'
+v46 <- GetProperty v35, 'byteLength'
+v47 <- CreateNamedVariable 'Int8Array', 'none'
+v48 <- LoadInteger '4'
+v49 <- Construct v47, [v48]
+v50 <- CreateNamedVariable 'a', 'var', v49
+v51 <- LoadString 'length'
+v52 <- BeginPlainFunction -> 
+    v53 <- LoadInteger '65535'
+    Return v53
+EndPlainFunction
+v54 <- CallMethod v50, '__defineGetter__', [v51, v52]
+v55 <- Construct v47, [v50]
+v56 <- CreateNamedVariable 'b', 'var', v55
+BeginForLoopInitializer
+    v57 <- LoadInteger '0'
+BeginForLoopCondition -> v58
+    v59 <- GetProperty v56, 'length'
+    v60 <- Compare v58, '<', v59
+BeginForLoopAfterthought v60 -> v61
+    v62 <- UnaryOperation v61, '++'
+BeginForLoopBody -> v63
+    v64 <- LoadInteger '0'
+    v65 <- GetComputedProperty v56, v63
+EndForLoop
+v66 <- LoadInteger '8'
+v67 <- Construct v0, [v66]
+v68 <- CreateNamedVariable 'ab4', 'var', v67
+v69 <- LoadString 'byteLength'
+v70 <- BeginPlainFunction -> 
+    v71 <- LoadInteger '4294967292'
+    Return v71
+EndPlainFunction
+v72 <- CallMethod v68, '__defineGetter__', [v69, v70]
+v73 <- CreateNamedVariable 'Uint32Array', 'none'
+v74 <- Construct v73, [v68]
+v75 <- CreateNamedVariable 'aaaa', 'var', v74
+BeginForLoopInitializer
+    v76 <- LoadInteger '10'
+BeginForLoopCondition -> v77
+    v78 <- GetProperty v75, 'length'
+    v79 <- Compare v77, '<', v78
+BeginForLoopAfterthought v79 -> v80
+    v81 <- UnaryOperation v80, '++'
+BeginForLoopBody -> v82
+    v83 <- LoadInteger '3435973836'
+    SetComputedProperty v75, v82, v83
+EndForLoop
+v84 <- LoadInteger '2'
+v85 <- GetProperty v75, 'length'
+
+
+const v2 = new ArrayBuffer(8);
+var ab1 = v2;
+function f5() {
+    return 1000000;
+}
+ab1.__defineGetter__("byteLength", f5);
+var ab2 = ab1.slice(800000, 900000);
+const v13 = new Uint8Array(ab2);
+var array = v13;
+for (let i16 = 0; i16 < array.length; i16++) {
+    array[i16];
+}
+array.length;
+const v27 = new ArrayBuffer(8);
+var ab3 = v27;
+function f30() {
+    return 4294967292;
+}
+ab3.__defineGetter__("byteLength", f30);
+const v34 = new DataView(ab3);
+var aaa = v34;
+for (let i37 = 10; i37 < aaa.length; i37++) {
+    aaa.setInt8(i37, 204);
+}
+aaa.byteLength;
+const v49 = new Int8Array(4);
+var a = v49;
+function f52() {
+    return 65535;
+}
+a.__defineGetter__("length", f52);
+const v55 = new Int8Array(a);
+var b = v55;
+for (let i58 = 0; i58 < b.length; i58++) {
+    b[i58];
+}
+const v67 = new ArrayBuffer(8);
+var ab4 = v67;
+function f70() {
+    return 4294967292;
+}
+ab4.__defineGetter__("byteLength", f70);
+const v74 = new Uint32Array(ab4);
+var aaaa = v74;
+for (let i77 = 10; i77 < aaaa.length; i77++) {
+    aaaa[i77] = 3435973836;
+}
+aaaa.length;
+
+FuzzIL program written to corpus/regress-crbug-351787.fzil

@@ -1,0 +1,524 @@
+v0 <- LoadString 'class with no fields'
+v1 <- CreateTemplateString ['class X {                                 // 000\n};                                         // 050\n'], []
+v2 <- LoadInteger '0'
+v3 <- LoadInteger '98'
+v4 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v2
+    ObjectLiteralAddProperty `end`, v3
+    ObjectLiteralAddProperty `count`, v4
+v5 <- EndObjectLiteral
+v6 <- LoadInteger '0'
+v7 <- LoadInteger '0'
+v8 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v6
+    ObjectLiteralAddProperty `end`, v7
+    ObjectLiteralAddProperty `count`, v8
+v9 <- EndObjectLiteral
+v10 <- CreateArray [v5, v9]
+v11 <- CreateNamedVariable 'TestCoverage', 'none'
+v12 <- CallFunction v11, [v0, v1, v10]
+v13 <- LoadString 'class that's not created'
+v14 <- CreateTemplateString ['class X {                                 // 000\n  x = function() { }                       // 050\n};                                         // 100\n'], []
+v15 <- LoadInteger '0'
+v16 <- LoadInteger '148'
+v17 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v15
+    ObjectLiteralAddProperty `end`, v16
+    ObjectLiteralAddProperty `count`, v17
+v18 <- EndObjectLiteral
+v19 <- LoadInteger '0'
+v20 <- LoadInteger '0'
+v21 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v19
+    ObjectLiteralAddProperty `end`, v20
+    ObjectLiteralAddProperty `count`, v21
+v22 <- EndObjectLiteral
+v23 <- LoadInteger '51'
+v24 <- LoadInteger '69'
+v25 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v23
+    ObjectLiteralAddProperty `end`, v24
+    ObjectLiteralAddProperty `count`, v25
+v26 <- EndObjectLiteral
+v27 <- CreateArray [v18, v22, v26]
+v28 <- CallFunction v11, [v13, v14, v27]
+v29 <- LoadString 'class with field thats not called'
+v30 <- CreateTemplateString ['class X {                                 // 000\n  x = function() { }                       // 050\n};                                         // 100\nlet x = new X();                           // 150\n'], []
+v31 <- LoadInteger '0'
+v32 <- LoadInteger '198'
+v33 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v31
+    ObjectLiteralAddProperty `end`, v32
+    ObjectLiteralAddProperty `count`, v33
+v34 <- EndObjectLiteral
+v35 <- LoadInteger '0'
+v36 <- LoadInteger '0'
+v37 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v35
+    ObjectLiteralAddProperty `end`, v36
+    ObjectLiteralAddProperty `count`, v37
+v38 <- EndObjectLiteral
+v39 <- LoadInteger '51'
+v40 <- LoadInteger '69'
+v41 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v39
+    ObjectLiteralAddProperty `end`, v40
+    ObjectLiteralAddProperty `count`, v41
+v42 <- EndObjectLiteral
+v43 <- LoadInteger '55'
+v44 <- LoadInteger '69'
+v45 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v43
+    ObjectLiteralAddProperty `end`, v44
+    ObjectLiteralAddProperty `count`, v45
+v46 <- EndObjectLiteral
+v47 <- CreateArray [v34, v38, v42, v46]
+v48 <- CallFunction v11, [v29, v30, v47]
+v49 <- LoadString 'class field'
+v50 <- CreateTemplateString ['class X {                                 // 000\n  x = function() { }                       // 050\n};                                         // 100\nlet x = new X();                           // 150\nx.x();                                     // 200\n'], []
+v51 <- LoadInteger '0'
+v52 <- LoadInteger '248'
+v53 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v51
+    ObjectLiteralAddProperty `end`, v52
+    ObjectLiteralAddProperty `count`, v53
+v54 <- EndObjectLiteral
+v55 <- LoadInteger '0'
+v56 <- LoadInteger '0'
+v57 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v55
+    ObjectLiteralAddProperty `end`, v56
+    ObjectLiteralAddProperty `count`, v57
+v58 <- EndObjectLiteral
+v59 <- LoadInteger '51'
+v60 <- LoadInteger '69'
+v61 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v59
+    ObjectLiteralAddProperty `end`, v60
+    ObjectLiteralAddProperty `count`, v61
+v62 <- EndObjectLiteral
+v63 <- LoadInteger '55'
+v64 <- LoadInteger '69'
+v65 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v63
+    ObjectLiteralAddProperty `end`, v64
+    ObjectLiteralAddProperty `count`, v65
+v66 <- EndObjectLiteral
+v67 <- CreateArray [v54, v58, v62, v66]
+v68 <- CallFunction v11, [v49, v50, v67]
+v69 <- LoadString 'non contiguous class field'
+v70 <- CreateTemplateString ['class X {                                 // 000\n  x = function() { }                       // 050\n  foo() { }                                // 100\n  y = function() {}                        // 150\n};                                         // 200\nlet x = new X();                           // 250\nx.x();                                     // 300\nx.y();                                     // 350\n'], []
+v71 <- LoadInteger '0'
+v72 <- LoadInteger '398'
+v73 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v71
+    ObjectLiteralAddProperty `end`, v72
+    ObjectLiteralAddProperty `count`, v73
+v74 <- EndObjectLiteral
+v75 <- LoadInteger '0'
+v76 <- LoadInteger '0'
+v77 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v75
+    ObjectLiteralAddProperty `end`, v76
+    ObjectLiteralAddProperty `count`, v77
+v78 <- EndObjectLiteral
+v79 <- LoadInteger '51'
+v80 <- LoadInteger '168'
+v81 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v79
+    ObjectLiteralAddProperty `end`, v80
+    ObjectLiteralAddProperty `count`, v81
+v82 <- EndObjectLiteral
+v83 <- LoadInteger '55'
+v84 <- LoadInteger '69'
+v85 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v83
+    ObjectLiteralAddProperty `end`, v84
+    ObjectLiteralAddProperty `count`, v85
+v86 <- EndObjectLiteral
+v87 <- LoadInteger '101'
+v88 <- LoadInteger '110'
+v89 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v87
+    ObjectLiteralAddProperty `end`, v88
+    ObjectLiteralAddProperty `count`, v89
+v90 <- EndObjectLiteral
+v91 <- LoadInteger '155'
+v92 <- LoadInteger '168'
+v93 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v91
+    ObjectLiteralAddProperty `end`, v92
+    ObjectLiteralAddProperty `count`, v93
+v94 <- EndObjectLiteral
+v95 <- CreateArray [v74, v78, v82, v86, v90, v94]
+v96 <- CallFunction v11, [v69, v70, v95]
+v97 <- LoadString 'non contiguous class field thats called'
+v98 <- CreateTemplateString ['class X {                                 // 000\n  x = function() { }                       // 050\n  foo() { }                                // 100\n  y = function() {}                        // 150\n};                                         // 200\nlet x = new X();                           // 250\nx.x();                                     // 300\nx.y();                                     // 350\nx.foo();                                   // 400\n'], []
+v99 <- LoadInteger '0'
+v100 <- LoadInteger '448'
+v101 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v99
+    ObjectLiteralAddProperty `end`, v100
+    ObjectLiteralAddProperty `count`, v101
+v102 <- EndObjectLiteral
+v103 <- LoadInteger '0'
+v104 <- LoadInteger '0'
+v105 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v103
+    ObjectLiteralAddProperty `end`, v104
+    ObjectLiteralAddProperty `count`, v105
+v106 <- EndObjectLiteral
+v107 <- LoadInteger '51'
+v108 <- LoadInteger '168'
+v109 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v107
+    ObjectLiteralAddProperty `end`, v108
+    ObjectLiteralAddProperty `count`, v109
+v110 <- EndObjectLiteral
+v111 <- LoadInteger '55'
+v112 <- LoadInteger '69'
+v113 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v111
+    ObjectLiteralAddProperty `end`, v112
+    ObjectLiteralAddProperty `count`, v113
+v114 <- EndObjectLiteral
+v115 <- LoadInteger '101'
+v116 <- LoadInteger '110'
+v117 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v115
+    ObjectLiteralAddProperty `end`, v116
+    ObjectLiteralAddProperty `count`, v117
+v118 <- EndObjectLiteral
+v119 <- LoadInteger '155'
+v120 <- LoadInteger '168'
+v121 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v119
+    ObjectLiteralAddProperty `end`, v120
+    ObjectLiteralAddProperty `count`, v121
+v122 <- EndObjectLiteral
+v123 <- CreateArray [v102, v106, v110, v114, v118, v122]
+v124 <- CallFunction v11, [v97, v98, v123]
+v125 <- LoadString 'class with initializer iife'
+v126 <- CreateTemplateString ['class X {                                 // 000\n  x = (function() { })()                   // 050\n};                                         // 100\nlet x = new X();                           // 150\n'], []
+v127 <- LoadInteger '0'
+v128 <- LoadInteger '198'
+v129 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v127
+    ObjectLiteralAddProperty `end`, v128
+    ObjectLiteralAddProperty `count`, v129
+v130 <- EndObjectLiteral
+v131 <- LoadInteger '0'
+v132 <- LoadInteger '0'
+v133 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v131
+    ObjectLiteralAddProperty `end`, v132
+    ObjectLiteralAddProperty `count`, v133
+v134 <- EndObjectLiteral
+v135 <- LoadInteger '51'
+v136 <- LoadInteger '73'
+v137 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v135
+    ObjectLiteralAddProperty `end`, v136
+    ObjectLiteralAddProperty `count`, v137
+v138 <- EndObjectLiteral
+v139 <- LoadInteger '56'
+v140 <- LoadInteger '70'
+v141 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v139
+    ObjectLiteralAddProperty `end`, v140
+    ObjectLiteralAddProperty `count`, v141
+v142 <- EndObjectLiteral
+v143 <- CreateArray [v130, v134, v138, v142]
+v144 <- CallFunction v11, [v125, v126, v143]
+v145 <- LoadString 'class with computed field'
+v146 <- CreateTemplateString ['\nfunction f() {};                           // 000\nclass X {                                  // 050\n  [f()] = (function() { })()               // 100\n};                                         // 150\nlet x = new X();                           // 200\n'], []
+v147 <- LoadInteger '0'
+v148 <- LoadInteger '249'
+v149 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v147
+    ObjectLiteralAddProperty `end`, v148
+    ObjectLiteralAddProperty `count`, v149
+v150 <- EndObjectLiteral
+v151 <- LoadInteger '0'
+v152 <- LoadInteger '15'
+v153 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v151
+    ObjectLiteralAddProperty `end`, v152
+    ObjectLiteralAddProperty `count`, v153
+v154 <- EndObjectLiteral
+v155 <- LoadInteger '50'
+v156 <- LoadInteger '50'
+v157 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v155
+    ObjectLiteralAddProperty `end`, v156
+    ObjectLiteralAddProperty `count`, v157
+v158 <- EndObjectLiteral
+v159 <- LoadInteger '102'
+v160 <- LoadInteger '128'
+v161 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v159
+    ObjectLiteralAddProperty `end`, v160
+    ObjectLiteralAddProperty `count`, v161
+v162 <- EndObjectLiteral
+v163 <- LoadInteger '111'
+v164 <- LoadInteger '125'
+v165 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v163
+    ObjectLiteralAddProperty `end`, v164
+    ObjectLiteralAddProperty `count`, v165
+v166 <- EndObjectLiteral
+v167 <- CreateArray [v150, v154, v158, v162, v166]
+v168 <- CallFunction v11, [v145, v146, v167]
+v169 <- LoadString 'static class field that's not called'
+v170 <- CreateTemplateString ['class X {                                 // 000\n  static x = function() { }                // 050\n};                                         // 100\n'], []
+v171 <- LoadInteger '0'
+v172 <- LoadInteger '148'
+v173 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v171
+    ObjectLiteralAddProperty `end`, v172
+    ObjectLiteralAddProperty `count`, v173
+v174 <- EndObjectLiteral
+v175 <- LoadInteger '0'
+v176 <- LoadInteger '0'
+v177 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v175
+    ObjectLiteralAddProperty `end`, v176
+    ObjectLiteralAddProperty `count`, v177
+v178 <- EndObjectLiteral
+v179 <- LoadInteger '51'
+v180 <- LoadInteger '76'
+v181 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v179
+    ObjectLiteralAddProperty `end`, v180
+    ObjectLiteralAddProperty `count`, v181
+v182 <- EndObjectLiteral
+v183 <- LoadInteger '62'
+v184 <- LoadInteger '76'
+v185 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v183
+    ObjectLiteralAddProperty `end`, v184
+    ObjectLiteralAddProperty `count`, v185
+v186 <- EndObjectLiteral
+v187 <- CreateArray [v174, v178, v182, v186]
+v188 <- CallFunction v11, [v169, v170, v187]
+v189 <- LoadString 'static class field'
+v190 <- CreateTemplateString ['class X {                                 // 000\n  static x = function() { }                // 050\n};                                         // 100\nX.x();                                     // 150\n'], []
+v191 <- LoadInteger '0'
+v192 <- LoadInteger '198'
+v193 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v191
+    ObjectLiteralAddProperty `end`, v192
+    ObjectLiteralAddProperty `count`, v193
+v194 <- EndObjectLiteral
+v195 <- LoadInteger '0'
+v196 <- LoadInteger '0'
+v197 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v195
+    ObjectLiteralAddProperty `end`, v196
+    ObjectLiteralAddProperty `count`, v197
+v198 <- EndObjectLiteral
+v199 <- LoadInteger '51'
+v200 <- LoadInteger '76'
+v201 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v199
+    ObjectLiteralAddProperty `end`, v200
+    ObjectLiteralAddProperty `count`, v201
+v202 <- EndObjectLiteral
+v203 <- LoadInteger '62'
+v204 <- LoadInteger '76'
+v205 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v203
+    ObjectLiteralAddProperty `end`, v204
+    ObjectLiteralAddProperty `count`, v205
+v206 <- EndObjectLiteral
+v207 <- CreateArray [v194, v198, v202, v206]
+v208 <- CallFunction v11, [v189, v190, v207]
+v209 <- LoadString 'static class field with iife'
+v210 <- CreateTemplateString ['class X {                                 // 000\n  static x = (function() { })()            // 050\n};                                         // 100\n'], []
+v211 <- LoadInteger '0'
+v212 <- LoadInteger '148'
+v213 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v211
+    ObjectLiteralAddProperty `end`, v212
+    ObjectLiteralAddProperty `count`, v213
+v214 <- EndObjectLiteral
+v215 <- LoadInteger '0'
+v216 <- LoadInteger '0'
+v217 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v215
+    ObjectLiteralAddProperty `end`, v216
+    ObjectLiteralAddProperty `count`, v217
+v218 <- EndObjectLiteral
+v219 <- LoadInteger '51'
+v220 <- LoadInteger '80'
+v221 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v219
+    ObjectLiteralAddProperty `end`, v220
+    ObjectLiteralAddProperty `count`, v221
+v222 <- EndObjectLiteral
+v223 <- LoadInteger '63'
+v224 <- LoadInteger '77'
+v225 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v223
+    ObjectLiteralAddProperty `end`, v224
+    ObjectLiteralAddProperty `count`, v225
+v226 <- EndObjectLiteral
+v227 <- CreateArray [v214, v218, v222, v226]
+v228 <- CallFunction v11, [v209, v210, v227]
+v229 <- LoadString 'computed static class field'
+v230 <- CreateTemplateString ['\nfunction f() {}                            // 000\nclass X {                                  // 050\n  static [f()] = (function() { })()        // 100\n};                                         // 150\n'], []
+v231 <- LoadInteger '0'
+v232 <- LoadInteger '199'
+v233 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v231
+    ObjectLiteralAddProperty `end`, v232
+    ObjectLiteralAddProperty `count`, v233
+v234 <- EndObjectLiteral
+v235 <- LoadInteger '0'
+v236 <- LoadInteger '15'
+v237 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v235
+    ObjectLiteralAddProperty `end`, v236
+    ObjectLiteralAddProperty `count`, v237
+v238 <- EndObjectLiteral
+v239 <- LoadInteger '50'
+v240 <- LoadInteger '50'
+v241 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v239
+    ObjectLiteralAddProperty `end`, v240
+    ObjectLiteralAddProperty `count`, v241
+v242 <- EndObjectLiteral
+v243 <- LoadInteger '102'
+v244 <- LoadInteger '135'
+v245 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v243
+    ObjectLiteralAddProperty `end`, v244
+    ObjectLiteralAddProperty `count`, v245
+v246 <- EndObjectLiteral
+v247 <- LoadInteger '118'
+v248 <- LoadInteger '132'
+v249 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v247
+    ObjectLiteralAddProperty `end`, v248
+    ObjectLiteralAddProperty `count`, v249
+v250 <- EndObjectLiteral
+v251 <- CreateArray [v234, v238, v242, v246, v250]
+v252 <- CallFunction v11, [v229, v230, v251]
+
+
+const v1 = `class X {                                 // 000\n};                                         // 050\n`;
+const v5 = { start: 0, end: 98, count: 1 };
+TestCoverage("class with no fields", v1, [v5,{ start: 0, end: 0, count: 0 }]);
+const v14 = `class X {                                 // 000\n  x = function() { }                       // 050\n};                                         // 100\n`;
+const v18 = { start: 0, end: 148, count: 1 };
+const v22 = { start: 0, end: 0, count: 0 };
+TestCoverage("class that's not created", v14, [v18,v22,{ start: 51, end: 69, count: 0 }]);
+const v30 = `class X {                                 // 000\n  x = function() { }                       // 050\n};                                         // 100\nlet x = new X();                           // 150\n`;
+const v34 = { start: 0, end: 198, count: 1 };
+const v38 = { start: 0, end: 0, count: 1 };
+const v42 = { start: 51, end: 69, count: 1 };
+TestCoverage("class with field thats not called", v30, [v34,v38,v42,{ start: 55, end: 69, count: 0 }]);
+const v50 = `class X {                                 // 000\n  x = function() { }                       // 050\n};                                         // 100\nlet x = new X();                           // 150\nx.x();                                     // 200\n`;
+const v54 = { start: 0, end: 248, count: 1 };
+const v58 = { start: 0, end: 0, count: 1 };
+const v62 = { start: 51, end: 69, count: 1 };
+TestCoverage("class field", v50, [v54,v58,v62,{ start: 55, end: 69, count: 1 }]);
+const v70 = `class X {                                 // 000\n  x = function() { }                       // 050\n  foo() { }                                // 100\n  y = function() {}                        // 150\n};                                         // 200\nlet x = new X();                           // 250\nx.x();                                     // 300\nx.y();                                     // 350\n`;
+const v74 = { start: 0, end: 398, count: 1 };
+const v78 = { start: 0, end: 0, count: 1 };
+const v82 = { start: 51, end: 168, count: 1 };
+const v86 = { start: 55, end: 69, count: 1 };
+const v90 = { start: 101, end: 110, count: 0 };
+TestCoverage("non contiguous class field", v70, [v74,v78,v82,v86,v90,{ start: 155, end: 168, count: 1 }]);
+const v98 = `class X {                                 // 000\n  x = function() { }                       // 050\n  foo() { }                                // 100\n  y = function() {}                        // 150\n};                                         // 200\nlet x = new X();                           // 250\nx.x();                                     // 300\nx.y();                                     // 350\nx.foo();                                   // 400\n`;
+const v102 = { start: 0, end: 448, count: 1 };
+const v106 = { start: 0, end: 0, count: 1 };
+const v110 = { start: 51, end: 168, count: 1 };
+const v114 = { start: 55, end: 69, count: 1 };
+const v118 = { start: 101, end: 110, count: 1 };
+TestCoverage("non contiguous class field thats called", v98, [v102,v106,v110,v114,v118,{ start: 155, end: 168, count: 1 }]);
+const v126 = `class X {                                 // 000\n  x = (function() { })()                   // 050\n};                                         // 100\nlet x = new X();                           // 150\n`;
+const v130 = { start: 0, end: 198, count: 1 };
+const v134 = { start: 0, end: 0, count: 1 };
+const v138 = { start: 51, end: 73, count: 1 };
+TestCoverage("class with initializer iife", v126, [v130,v134,v138,{ start: 56, end: 70, count: 1 }]);
+const v146 = `\nfunction f() {};                           // 000\nclass X {                                  // 050\n  [f()] = (function() { })()               // 100\n};                                         // 150\nlet x = new X();                           // 200\n`;
+const v150 = { start: 0, end: 249, count: 1 };
+const v154 = { start: 0, end: 15, count: 1 };
+const v158 = { start: 50, end: 50, count: 1 };
+const v162 = { start: 102, end: 128, count: 1 };
+TestCoverage("class with computed field", v146, [v150,v154,v158,v162,{ start: 111, end: 125, count: 1 }]);
+const v170 = `class X {                                 // 000\n  static x = function() { }                // 050\n};                                         // 100\n`;
+const v174 = { start: 0, end: 148, count: 1 };
+const v178 = { start: 0, end: 0, count: 0 };
+const v182 = { start: 51, end: 76, count: 1 };
+TestCoverage("static class field that's not called", v170, [v174,v178,v182,{ start: 62, end: 76, count: 0 }]);
+const v190 = `class X {                                 // 000\n  static x = function() { }                // 050\n};                                         // 100\nX.x();                                     // 150\n`;
+const v194 = { start: 0, end: 198, count: 1 };
+const v198 = { start: 0, end: 0, count: 0 };
+const v202 = { start: 51, end: 76, count: 1 };
+TestCoverage("static class field", v190, [v194,v198,v202,{ start: 62, end: 76, count: 1 }]);
+const v210 = `class X {                                 // 000\n  static x = (function() { })()            // 050\n};                                         // 100\n`;
+const v214 = { start: 0, end: 148, count: 1 };
+const v218 = { start: 0, end: 0, count: 0 };
+const v222 = { start: 51, end: 80, count: 1 };
+TestCoverage("static class field with iife", v210, [v214,v218,v222,{ start: 63, end: 77, count: 1 }]);
+const v230 = `\nfunction f() {}                            // 000\nclass X {                                  // 050\n  static [f()] = (function() { })()        // 100\n};                                         // 150\n`;
+const v234 = { start: 0, end: 199, count: 1 };
+const v238 = { start: 0, end: 15, count: 1 };
+const v242 = { start: 50, end: 50, count: 0 };
+const v246 = { start: 102, end: 135, count: 1 };
+TestCoverage("computed static class field", v230, [v234,v238,v242,v246,{ start: 118, end: 132, count: 1 }]);
+
+FuzzIL program written to corpus/code-coverage-class-fields.fzil

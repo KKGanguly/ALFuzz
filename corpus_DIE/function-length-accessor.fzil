@@ -1,0 +1,17 @@
+v0 <- BeginPlainFunction -> v1, v2, v3, v4
+    Directive 'use strict'
+    v5 <- LoadInteger '10'
+    v6 <- CreateNamedVariable 'x', 'const', v5
+    v7 <- LoadInteger '20'
+    Reassign v6, v7
+EndPlainFunction
+v8 <- LoadString 'foo.length()'
+
+
+function foo(a1, a2, a3, a4) {
+    'use strict';
+    const x = 10;
+    x = 20;
+}
+
+FuzzIL program written to corpus/function-length-accessor.fzil

@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    SetElement v1, '0', v2
+    v3 <- LoadInteger '0'
+    SetElement v1, '1', v3
+EndPlainFunction
+v4 <- CreateNamedVariable 'Int32Array', 'none'
+v5 <- LoadInteger '2'
+v6 <- Construct v4, [v5]
+v7 <- CreateNamedVariable 'a', 'var', v6
+v8 <- LoadInteger '1'
+v9 <- LoadInteger '2'
+v10 <- LoadInteger '3'
+v11 <- CreateArray [v8, v9, v10]
+v12 <- CallFunction v0, [v11]
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadInteger '1'
+    v15 <- LoadInteger '2'
+    v16 <- LoadInteger '3'
+    v17 <- CreateArray [v14, v15, v16]
+    v18 <- CallFunction v0, [v17]
+    v19 <- CallFunction v0, [v7]
+EndPlainFunction
+v20 <- CallFunction v13, []
+
+
+function bar(a1) {
+    a1[0] = 0;
+    a1[1] = 0;
+}
+const v6 = new Int32Array(2);
+var a = v6;
+bar([1,2,3]);
+function foo() {
+    bar([1,2,3]);
+    bar(a);
+}
+foo();
+
+FuzzIL program written to corpus/regress-crbug-685050.fzil

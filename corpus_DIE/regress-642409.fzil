@@ -1,0 +1,30 @@
+v0 <- BeginClassDefinition
+EndClassDefinition
+v1 <- BeginClassDefinition v0
+    BeginClassConstructor -> v2
+        CallSuperConstructor []
+        v3 <- CallMethod v2, 'doSomething', []
+    EndClassConstructor
+    BeginClassInstanceMethod 'doSomething' -> v4
+    EndClassInstanceMethod
+EndClassDefinition
+v5 <- Construct v1, []
+v6 <- Construct v1, []
+v7 <- Construct v1, []
+
+
+class C0 {
+}
+class C1 extends C0 {
+    constructor() {
+        super();
+        this.doSomething();
+    }
+    doSomething() {
+    }
+}
+new C1();
+new C1();
+new C1();
+
+FuzzIL program written to corpus/regress-642409.fzil

@@ -1,0 +1,36 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        v1 <- CreateNamedVariable 'ArrayBuffer', 'none'
+        v2 <- LoadInteger '1073741824'
+        v3 <- Construct v1, [v2]
+        v4 <- CreateNamedVariable 'a', 'var', v3
+        v5 <- CreateNamedVariable 'DataView', 'none'
+        v6 <- Construct v5, [v4]
+        v7 <- CreateNamedVariable 'd', 'var', v6
+        v8 <- CallMethod v7, 'getUint8', []
+        v9 <- LoadInteger '0'
+        v10 <- Compare v8, '===', v9
+        Return v10
+    BeginCatch -> v11
+        v12 <- LoadBoolean 'true'
+        Return v12
+    EndTryCatch
+EndPlainFunction
+v13 <- CallFunction v0, []
+v14 <- UnaryOperation '!', v13
+
+
+function f() {
+    try {
+        const v3 = new ArrayBuffer(1073741824);
+        var a = v3;
+        const v6 = new DataView(a);
+        var d = v6;
+        return d.getUint8() === 0;
+    } catch(e11) {
+        return true;
+    }
+}
+!f();
+
+FuzzIL program written to corpus/regress-crbug-869313.fzil

@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadNull
+    v3 <- Compare v1, '==', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadBoolean 'true'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadBoolean 'true'
+v7 <- CallFunction v0, [v6]
+v8 <- LoadNull
+v9 <- CallFunction v0, [v8]
+v10 <- LoadNull
+v11 <- CallFunction v0, [v10]
+
+
+function test(a1) {
+    return a1 == null;
+}
+test(true);
+test(true);
+test(null);
+test(null);
+
+FuzzIL program written to corpus/compare-nil.fzil

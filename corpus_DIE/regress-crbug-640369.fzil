@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadThis
+    SetProperty v2, 'x', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- CreateNamedVariable 'max', 'none'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+    BeginForLoopBody -> v8
+    EndForLoop
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- Construct v0, []
+    Return v10
+EndPlainFunction
+BeginTry
+    v11 <- CallFunction v9, []
+BeginCatch -> v12
+EndTryCatch
+
+
+function A() {
+    this.x = 0;
+    for (let i4 = 0; i4 < max;) {
+    }
+}
+function foo() {
+    const v10 = new A();
+    return v10;
+}
+try {
+    foo();
+} catch(e12) {
+}
+
+FuzzIL program written to corpus/regress-crbug-640369.fzil

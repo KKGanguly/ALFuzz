@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- CreateArray [v2]
+    v4 <- CallMethod v3, 'forEach', [v1]
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    BeginTry
+        v6 <- LoadString 'a teapot'
+        v7 <- CallFunction v0, [v6]
+    BeginCatch -> v8
+        v9 <- CreateNamedVariable 'String', 'none'
+        v10 <- CallFunction v9, [v8]
+        Return v10
+    EndTryCatch
+EndPlainFunction
+v11 <- LoadString 'TypeError: a teapot is not a function'
+v12 <- CallFunction v5, []
+v13 <- LoadString 'TypeError: a teapot is not a function'
+v14 <- CallFunction v5, []
+v15 <- LoadString 'TypeError: a teapot is not a function'
+v16 <- CallFunction v5, []
+
+
+function f(a1) {
+    ([Object]).forEach(a1);
+}
+function message_of_f() {
+    try {
+        f("a teapot");
+    } catch(e8) {
+        return String(e8);
+    }
+}
+message_of_f();
+message_of_f();
+message_of_f();
+
+FuzzIL program written to corpus/regress-crbug-770581.fzil

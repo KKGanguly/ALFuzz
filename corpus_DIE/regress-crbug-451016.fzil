@@ -1,0 +1,28 @@
+v0 <- CreateNamedVariable 'NaN', 'none'
+v1 <- CreateNamedVariable 'value', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'i', 'none'
+    Reassign v3, v2
+BeginForLoopCondition
+    v4 <- CreateNamedVariable 'i', 'none'
+    v5 <- LoadInteger '256'
+    v6 <- Compare v4, '<', v5
+BeginForLoopAfterthought v6
+    v7 <- CreateNamedVariable 'i', 'none'
+    v8 <- UnaryOperation v7, '++'
+BeginForLoopBody
+    v9 <- LoadString 'A'
+    v10 <- Compare v1, '===', v9
+    v11 <- LoadString 'B'
+    v12 <- Compare v1, '===', v11
+    v13 <- BinaryOperation v10, '||', v12
+EndForLoop
+
+
+var value = NaN;
+for (i = 0; i < 256; i++) {
+    (value === "A") || (value === "B");
+}
+
+FuzzIL program written to corpus/regress-crbug-451016.fzil

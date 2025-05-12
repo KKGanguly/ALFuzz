@@ -1,0 +1,73 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '3'
+    v3 <- BinaryOperation v1, '%', v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- LoadInteger '40000'
+        v8 <- Compare v6, '<', v7
+    BeginForLoopAfterthought v8 -> v9
+        v10 <- UnaryOperation v9, '++'
+    BeginForLoopBody -> v11
+        v12 <- LoadInteger '1'
+        v13 <- UnaryOperation '-', v12
+        v14 <- LoadInteger '0'
+        v15 <- BinaryOperation v13, '/', v14
+        v16 <- LoadInteger '1'
+        v17 <- LoadInteger '3'
+        v18 <- UnaryOperation '-', v17
+        v19 <- CallFunction v0, [v18]
+        v20 <- BinaryOperation v16, '/', v19
+    EndForLoop
+EndPlainFunction
+v21 <- CallFunction v4, []
+v22 <- BeginPlainFunction -> v23, v24
+    v25 <- BinaryOperation v23, '+', v24
+    Return v25
+EndPlainFunction
+v26 <- BeginPlainFunction -> 
+    v27 <- LoadFloat '17.42'
+    v28 <- CreateNamedVariable 'lhs', 'var', v27
+    v29 <- LoadFloat '42.17'
+    v30 <- CreateNamedVariable 'rhs', 'var', v29
+    BeginForLoopInitializer
+        v31 <- LoadInteger '0'
+    BeginForLoopCondition -> v32
+        v33 <- LoadInteger '40000'
+        v34 <- Compare v32, '<', v33
+    BeginForLoopAfterthought v34 -> v35
+        v36 <- UnaryOperation v35, '++'
+    BeginForLoopBody -> v37
+        v38 <- LoadFloat '59.59'
+        v39 <- CallFunction v22, [v28, v30]
+    EndForLoop
+EndPlainFunction
+v40 <- CallFunction v26, []
+
+
+function f(a1) {
+    return a1 % 3;
+}
+function testMod() {
+    for (let i6 = 0; i6 < 40000; i6++) {
+        -1 / 0;
+        1 / f(-3);
+    }
+}
+testMod();
+function g(a23, a24) {
+    return a23 + a24;
+}
+function testAdd() {
+    var lhs = 17.42;
+    var rhs = 42.17;
+    for (let i32 = 0; i32 < 40000; i32++) {
+        g(lhs, rhs);
+    }
+}
+testAdd();
+
+FuzzIL program written to corpus/binary-op-newspace.fzil

@@ -1,0 +1,15 @@
+v0 <- BeginAsyncFunction -> 
+    v1 <- LoadInteger '42'
+    v2 <- CreateNamedVariable 'Promise', 'none'
+    v3 <- CallMethod v2, 'resolve', [v1]
+    v4 <- Await v3
+EndAsyncFunction
+v5 <- CallFunction v0, []
+
+
+async function foo() {
+    await Promise.resolve(42);
+}
+foo();
+
+FuzzIL program written to corpus/regress-892858.fzil

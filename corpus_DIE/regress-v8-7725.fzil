@@ -1,0 +1,41 @@
+v0 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v1 <- EndObjectLiteral
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- Construct v0, [v1, v2]
+v4 <- CreateNamedVariable 'proxy', 'var', v3
+v5 <- LoadString 'boom'
+v6 <- LoadString 'ah'
+v7 <- LoadString 'ouch'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `b`, v5
+    ObjectLiteralAddProperty `a`, v6
+    ObjectLiteralAddProperty `o`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'assign', [v4, v8]
+v11 <- LoadString 'b'
+v12 <- LoadString 'a'
+v13 <- LoadString 'o'
+v14 <- CreateArray [v11, v12, v13]
+v15 <- CallMethod v9, 'getOwnPropertyNames', [v4]
+v16 <- LoadString 'boom'
+v17 <- GetProperty v4, 'b'
+v18 <- LoadString 'ah'
+v19 <- GetProperty v4, 'a'
+v20 <- LoadString 'ouch'
+v21 <- GetProperty v4, 'o'
+
+
+const v1 = {};
+const v3 = new Proxy(v1, {});
+var proxy = v3;
+Object.assign(proxy, { b: "boom", a: "ah", o: "ouch" });
+["b","a","o"];
+Object.getOwnPropertyNames(proxy);
+proxy.b;
+proxy.a;
+proxy.o;
+
+FuzzIL program written to corpus/regress-v8-7725.fzil

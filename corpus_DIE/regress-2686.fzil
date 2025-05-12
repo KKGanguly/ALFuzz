@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString '){ function foo('
+    v2 <- LoadString '}'
+    v3 <- CreateNamedVariable 'Function', 'none'
+    v4 <- CallFunction v3, [v1, v2]
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- CreateNamedVariable 'SyntaxError', 'none'
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadInteger '1'
+    v9 <- UnaryOperation '-', v8
+    Return v9
+EndPlainFunction
+v10 <- CreateNamedVariable 'String', 'none'
+v11 <- GetProperty v10, 'prototype'
+SetProperty v11, 'indexOf', v7
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadString '){ function foo('
+    v14 <- LoadString '}'
+    v15 <- CreateNamedVariable 'Function', 'none'
+    v16 <- CallFunction v15, [v13, v14]
+EndPlainFunction
+v17 <- CallFunction v12, []
+
+
+function f0() {
+    Function("){ function foo(", "}");
+}
+f0();
+function f7() {
+    return -1;
+}
+const t7 = String.prototype;
+t7.indexOf = f7;
+function f12() {
+    Function("){ function foo(", "}");
+}
+f12();
+
+FuzzIL program written to corpus/regress-2686.fzil

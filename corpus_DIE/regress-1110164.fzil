@@ -1,0 +1,61 @@
+v0 <- LoadInteger '0'
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadInteger '42'
+    Return v2
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+    ObjectLiteralAddProperty `f`, v1
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'o', 'var', v3
+v5 <- DeleteProperty v4, 'x'
+v6 <- BeginPlainFunction -> v7
+    v8 <- CallMethod v7, 'f', []
+    Return v8
+EndPlainFunction
+BeginForLoopInitializer
+    v9 <- LoadInteger '0'
+BeginForLoopCondition -> v10
+    v11 <- LoadInteger '10'
+    v12 <- Compare v10, '<', v11
+BeginForLoopAfterthought v12 -> v13
+    v14 <- UnaryOperation v13, '++'
+BeginForLoopBody -> v15
+    v16 <- LoadInteger '42'
+    v17 <- CallFunction v6, [v4]
+EndForLoop
+v18 <- LoadBoolean 'false'
+v19 <- CreateNamedVariable 'caught', 'var', v18
+v20 <- LoadInteger '87'
+SetProperty v4, 'f', v20
+BeginTry
+    v21 <- CallFunction v6, [v4]
+BeginCatch -> v22
+    v23 <- LoadBoolean 'true'
+    Reassign v19, v23
+    v24 <- CreateNamedVariable 'TypeError', 'none'
+    v25 <- TestInstanceOf v22, v24
+EndTryCatch
+
+
+function f1() {
+    return 42;
+}
+var o = { x: 0, f: f1 };
+delete o.x;
+function CallF(a7) {
+    return a7.f();
+}
+for (let i10 = 0; i10 < 10; i10++) {
+    CallF(o);
+}
+var caught = false;
+o.f = 87;
+try {
+    CallF(o);
+} catch(e22) {
+    caught = true;
+    e22 instanceof TypeError;
+}
+
+FuzzIL program written to corpus/regress-1110164.fzil

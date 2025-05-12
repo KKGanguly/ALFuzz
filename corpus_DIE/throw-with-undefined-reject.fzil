@@ -1,0 +1,60 @@
+v0 <- CreateNamedVariable 'Promise', 'none'
+v1 <- BeginPlainFunction -> v2, v3
+    v4 <- LoadString 'resolve'
+    v5 <- CreateNamedVariable 'log', 'none'
+    v6 <- CallMethod v5, 'push', [v4]
+    v7 <- CallFunction v2, []
+EndPlainFunction
+v8 <- Construct v0, [v1]
+v9 <- CreateNamedVariable 'p', 'var', v8
+v10 <- BeginPlainFunction -> v11
+    v12 <- LoadUndefined
+    v13 <- CreateNamedVariable 'reject', 'var', v12
+    v14 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v15 <- CreateNamedVariable 'resolve', 'var', v14
+    v16 <- CallFunction v11, [v15, v13]
+EndPlainFunction
+v17 <- BeginPlainFunction -> 
+EndPlainFunction
+v18 <- Construct v0, [v17]
+SetProperty v10, 'prototype', v18
+SetProperty v10, '__proto__', v0
+SetProperty v9, 'constructor', v10
+v19 <- BeginArrowFunction -> 
+    v20 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v21 <- CallMethod v9, 'then', [v20]
+    Return v21
+EndArrowFunction
+v22 <- CallFunction v19, []
+v23 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function f1(a2, a3) {
+    log.push("resolve");
+    a2();
+}
+const v8 = new Promise(f1);
+var p = v8;
+function MyPromise(a11) {
+    var reject;
+    function f14() {
+    }
+    var resolve = f14;
+    a11(resolve, reject);
+}
+function f17() {
+}
+const v18 = new Promise(f17);
+MyPromise.prototype = v18;
+MyPromise.__proto__ = Promise;
+p.constructor = MyPromise;
+const v19 = () => {
+    function f20() {
+    }
+    return p.then(f20);
+};
+v19();
+
+FuzzIL program written to corpus/throw-with-undefined-reject.fzil

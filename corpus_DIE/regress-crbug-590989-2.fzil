@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- UnaryOperation '+', v1
+    v3 <- Compare v1, '===', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadBoolean 'false'
+v5 <- LoadUndefined
+v6 <- CallFunction v0, [v5]
+v7 <- LoadBoolean 'false'
+v8 <- LoadUndefined
+v9 <- CallFunction v0, [v8]
+v10 <- LoadBoolean 'false'
+v11 <- LoadUndefined
+v12 <- CallFunction v0, [v11]
+
+
+function f(a1) {
+    return a1 === +a1;
+}
+f(undefined);
+f(undefined);
+f(undefined);
+
+FuzzIL program written to corpus/regress-crbug-590989-2.fzil

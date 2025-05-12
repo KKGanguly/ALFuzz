@@ -1,0 +1,66 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable '__v_0', 'var', v0
+v2 <- LoadThis
+v3 <- CreateNamedVariable '__v_8', 'var', v2
+v4 <- LoadInteger '1073741825'
+v5 <- UnaryOperation '-', v4
+v6 <- CreateNamedVariable '__v_11', 'var', v5
+v7 <- LoadThis
+v8 <- CreateNamedVariable '__v_1', 'none'
+Reassign v8, v7
+BeginTry
+BeginCatch -> v9
+EndTryCatch
+v10 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v10, 'prototype', v1
+v11 <- BeginPlainFunction -> 
+    v12 <- Construct v10, []
+    v13 <- GetProperty v12, 'v'
+    Return v13
+EndPlainFunction
+v14 <- CallFunction v11, []
+v15 <- CallFunction v11, []
+BeginTry
+    v16 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v17 <- CallFunction v16, []
+BeginCatch -> v18
+EndTryCatch
+v19 <- CreateNamedVariable '__v_1', 'none'
+v20 <- CreateNamedVariable 'Object', 'none'
+v21 <- CallMethod v20, 'assign', [v1, v19, v1]
+v22 <- BeginPlainFunction -> 
+EndPlainFunction
+v23 <- CallFunction v22, []
+
+
+var __v_0 = {};
+var __v_8 = this;
+var __v_11 = -1073741825;
+__v_1 = this;
+try {
+} catch(e9) {
+}
+function __f_4() {
+}
+__f_4.prototype = __v_0;
+function __f_9() {
+    const v12 = new __f_4();
+    return v12.v;
+}
+__f_9();
+__f_9();
+try {
+    function f16() {
+    }
+    f16();
+} catch(e18) {
+}
+Object.assign(__v_0, __v_1, __v_0);
+function f22() {
+}
+f22();
+
+FuzzIL program written to corpus/regress-crbug-716520.fzil

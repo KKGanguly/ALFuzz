@@ -1,0 +1,209 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- LoadInteger '1'
+    v5 <- UnaryOperation '-', v4
+    v6 <- CallFunction v1, [v5]
+    v7 <- LoadInteger '1'
+    v8 <- UnaryOperation '-', v7
+    v9 <- CallFunction v1, [v8]
+    v10 <- CallFunction v1, [v2]
+EndPlainFunction
+v11 <- BeginPlainFunction -> v12
+    v13 <- LoadInteger '1'
+    v14 <- UnaryOperation '-', v13
+    v15 <- BinaryOperation v12, '*', v14
+    Return v15
+EndPlainFunction
+v16 <- BeginPlainFunction -> v17
+    v18 <- LoadInteger '0'
+    v19 <- BinaryOperation v17, '*', v18
+    Return v19
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21
+    v22 <- LoadInteger '1'
+    v23 <- BinaryOperation v21, '*', v22
+    Return v23
+EndPlainFunction
+v24 <- BeginPlainFunction -> v25
+    v26 <- LoadInteger '2'
+    v27 <- BinaryOperation v25, '*', v26
+    Return v27
+EndPlainFunction
+v28 <- LoadInteger '2'
+v29 <- LoadInteger '2'
+v30 <- UnaryOperation '-', v29
+v31 <- CallFunction v0, [v11, v28, v30]
+v32 <- LoadInteger '2'
+v33 <- LoadInteger '0'
+v34 <- CallFunction v0, [v16, v32, v33]
+v35 <- LoadInteger '2'
+v36 <- LoadInteger '2'
+v37 <- CallFunction v0, [v20, v35, v36]
+v38 <- LoadInteger '2'
+v39 <- LoadInteger '4'
+v40 <- CallFunction v0, [v24, v38, v39]
+v41 <- BeginPlainFunction -> v42
+    v43 <- LoadInteger '0'
+    v44 <- BinaryOperation v42, '|', v43
+    v45 <- LoadInteger '10'
+    v46 <- CreateNamedVariable 'Math', 'none'
+    v47 <- CallMethod v46, 'min', [v44, v45]
+    v48 <- LoadInteger '10'
+    v49 <- UnaryOperation '-', v48
+    v50 <- CallMethod v46, 'max', [v47, v49]
+    Return v50
+EndPlainFunction
+v51 <- BeginPlainFunction -> v52
+    v53 <- CallFunction v41, [v52]
+    v54 <- LoadInteger '127'
+    v55 <- UnaryOperation '-', v54
+    v56 <- BinaryOperation v53, '*', v55
+    Return v56
+EndPlainFunction
+v57 <- BeginPlainFunction -> v58
+    v59 <- CallFunction v41, [v58]
+    v60 <- LoadInteger '128'
+    v61 <- UnaryOperation '-', v60
+    v62 <- BinaryOperation v59, '*', v61
+    Return v62
+EndPlainFunction
+v63 <- BeginPlainFunction -> v64
+    v65 <- CallFunction v41, [v64]
+    v66 <- LoadInteger '129'
+    v67 <- UnaryOperation '-', v66
+    v68 <- BinaryOperation v65, '*', v67
+    Return v68
+EndPlainFunction
+v69 <- BeginPlainFunction -> v70
+    v71 <- CallFunction v41, [v70]
+    v72 <- LoadInteger '1023'
+    v73 <- BinaryOperation v71, '*', v72
+    Return v73
+EndPlainFunction
+v74 <- BeginPlainFunction -> v75
+    v76 <- CallFunction v41, [v75]
+    v77 <- LoadInteger '1024'
+    v78 <- BinaryOperation v76, '*', v77
+    Return v78
+EndPlainFunction
+v79 <- BeginPlainFunction -> v80
+    v81 <- CallFunction v41, [v80]
+    v82 <- LoadInteger '1025'
+    v83 <- BinaryOperation v81, '*', v82
+    Return v83
+EndPlainFunction
+v84 <- LoadInteger '2'
+v85 <- LoadInteger '254'
+v86 <- UnaryOperation '-', v85
+v87 <- CallFunction v0, [v51, v84, v86]
+v88 <- LoadInteger '2'
+v89 <- LoadInteger '256'
+v90 <- UnaryOperation '-', v89
+v91 <- CallFunction v0, [v57, v88, v90]
+v92 <- LoadInteger '2'
+v93 <- LoadInteger '258'
+v94 <- UnaryOperation '-', v93
+v95 <- CallFunction v0, [v63, v92, v94]
+v96 <- LoadInteger '2'
+v97 <- LoadInteger '2046'
+v98 <- CallFunction v0, [v69, v96, v97]
+v99 <- LoadInteger '2'
+v100 <- LoadInteger '2048'
+v101 <- CallFunction v0, [v74, v99, v100]
+v102 <- LoadInteger '2'
+v103 <- LoadInteger '2050'
+v104 <- CallFunction v0, [v79, v102, v103]
+v105 <- LoadInteger '0'
+v106 <- UnaryOperation '-', v105
+v107 <- LoadInteger '0'
+v108 <- CallFunction v57, [v107]
+v109 <- CallFunction v57, []
+v110 <- LoadInteger '0'
+v111 <- UnaryOperation '-', v110
+v112 <- LoadInteger '0'
+v113 <- UnaryOperation '-', v112
+v114 <- CallFunction v24, [v113]
+v115 <- CallFunction v24, []
+v116 <- LoadInteger '1'
+v117 <- LoadInteger '30'
+v118 <- BinaryOperation v116, '<<', v117
+v119 <- CreateNamedVariable 'two_30', 'var', v118
+v120 <- LoadInteger '2'
+v121 <- BinaryOperation v120, '*', v119
+v122 <- CreateNamedVariable 'two_31', 'var', v121
+v123 <- LoadBoolean 'true'
+BeginIf v123
+    v124 <- UnaryOperation '-', v122
+    v125 <- CallFunction v11, [v124]
+    v126 <- CallFunction v11, []
+BeginElse
+    v127 <- UnaryOperation '-', v119
+    v128 <- CallFunction v11, [v127]
+    v129 <- CallFunction v11, []
+EndIf
+
+
+function check(a1, a2, a3) {
+    a1(-1);
+    a1(-1);
+    a1(a2);
+}
+function mul_by_neg_1(a12) {
+    return a12 * -1;
+}
+function mul_by_0(a17) {
+    return a17 * 0;
+}
+function mul_by_1(a21) {
+    return a21 * 1;
+}
+function mul_by_2(a25) {
+    return a25 * 2;
+}
+check(mul_by_neg_1, 2, -2);
+check(mul_by_0, 2, 0);
+check(mul_by_1, 2, 2);
+check(mul_by_2, 2, 4);
+function limit_range(a42) {
+    return Math.max(Math.min(a42 | 0, 10), -10);
+}
+function mul_by_neg_127(a52) {
+    return limit_range(a52) * -127;
+}
+function mul_by_neg_128(a58) {
+    return limit_range(a58) * -128;
+}
+function mul_by_neg_129(a64) {
+    return limit_range(a64) * -129;
+}
+function mul_by_1023(a70) {
+    return limit_range(a70) * 1023;
+}
+function mul_by_1024(a75) {
+    return limit_range(a75) * 1024;
+}
+function mul_by_1025(a80) {
+    return limit_range(a80) * 1025;
+}
+check(mul_by_neg_127, 2, -254);
+check(mul_by_neg_128, 2, -256);
+check(mul_by_neg_129, 2, -258);
+check(mul_by_1023, 2, 2046);
+check(mul_by_1024, 2, 2048);
+check(mul_by_1025, 2, 2050);
+-0;
+mul_by_neg_128(0);
+mul_by_neg_128();
+-0;
+mul_by_2(-0);
+mul_by_2();
+var two_30 = 1 << 30;
+var two_31 = 2 * two_30;
+if (true) {
+    mul_by_neg_1(-two_31);
+    mul_by_neg_1();
+} else {
+    mul_by_neg_1(-two_30);
+    mul_by_neg_1();
+}
+
+FuzzIL program written to corpus/smi-mul-const.fzil

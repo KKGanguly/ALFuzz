@@ -1,0 +1,177 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '23'
+    v2 <- LoadThis
+    SetProperty v2, 'x', v1
+EndPlainFunction
+v3 <- Construct v0, []
+v4 <- CreateNamedVariable 'c1', 'var', v3
+v5 <- LoadInteger '23'
+v6 <- GetProperty v4, 'x'
+v7 <- LoadString 'undefined'
+v8 <- GetProperty v4, 'y'
+v9 <- TypeOf v8
+BeginObjectLiteral
+    BeginObjectLiteralSetter `x` -> v10, v11
+        v12 <- LoadInteger '23'
+        SetProperty v10, 'y', v12
+    EndObjectLiteralSetter
+v13 <- EndObjectLiteral
+SetProperty v0, 'prototype', v13
+v14 <- Construct v0, []
+v15 <- CreateNamedVariable 'c1', 'var', v14
+v16 <- LoadString 'undefined'
+v17 <- GetProperty v15, 'x'
+v18 <- TypeOf v17
+v19 <- LoadInteger '23'
+v20 <- GetProperty v15, 'y'
+v21 <- BeginPlainFunction -> 
+    v22 <- LoadInteger '23'
+    v23 <- LoadThis
+    SetProperty v23, 'x', v22
+EndPlainFunction
+v24 <- Construct v21, []
+v25 <- CreateNamedVariable 'c2', 'var', v24
+v26 <- LoadInteger '23'
+v27 <- GetProperty v25, 'x'
+v28 <- LoadString 'undefined'
+v29 <- GetProperty v25, 'y'
+v30 <- TypeOf v29
+BeginObjectLiteral
+    BeginObjectLiteralSetter `x` -> v31, v32
+        v33 <- LoadInteger '23'
+        SetProperty v31, 'y', v33
+    EndObjectLiteralSetter
+v34 <- EndObjectLiteral
+v35 <- GetProperty v21, 'prototype'
+SetProperty v35, '__proto__', v34
+v36 <- Construct v21, []
+v37 <- CreateNamedVariable 'c2', 'var', v36
+v38 <- LoadString 'undefined'
+v39 <- GetProperty v37, 'x'
+v40 <- TypeOf v39
+v41 <- LoadInteger '23'
+v42 <- GetProperty v37, 'y'
+v43 <- BeginPlainFunction -> 
+    v44 <- LoadInteger '23'
+    v45 <- LoadThis
+    SetProperty v45, 'x', v44
+EndPlainFunction
+v46 <- Construct v43, []
+v47 <- CreateNamedVariable 'c3', 'var', v46
+v48 <- LoadInteger '23'
+v49 <- GetProperty v47, 'x'
+v50 <- LoadString 'undefined'
+v51 <- GetProperty v47, 'y'
+v52 <- TypeOf v51
+v53 <- LoadString 'x'
+v54 <- BeginPlainFunction -> v55
+    v56 <- LoadInteger '23'
+    v57 <- LoadThis
+    SetProperty v57, 'y', v56
+EndPlainFunction
+v58 <- GetProperty v43, 'prototype'
+v59 <- CallMethod v58, '__defineSetter__', [v53, v54]
+v60 <- Construct v43, []
+v61 <- CreateNamedVariable 'c3', 'var', v60
+v62 <- LoadString 'undefined'
+v63 <- GetProperty v61, 'x'
+v64 <- TypeOf v63
+v65 <- LoadInteger '23'
+v66 <- GetProperty v61, 'y'
+v67 <- BeginPlainFunction -> 
+    v68 <- LoadInteger '23'
+    v69 <- LoadThis
+    SetProperty v69, 'x', v68
+EndPlainFunction
+v70 <- Construct v67, []
+v71 <- CreateNamedVariable 'c4', 'var', v70
+v72 <- LoadInteger '23'
+v73 <- GetProperty v71, 'x'
+v74 <- LoadString 'undefined'
+v75 <- GetProperty v71, 'y'
+v76 <- TypeOf v75
+v77 <- LoadString 'x'
+v78 <- BeginPlainFunction -> v79
+    v80 <- LoadInteger '23'
+    v81 <- LoadThis
+    SetProperty v81, 'y', v80
+EndPlainFunction
+v82 <- GetProperty v67, 'prototype'
+v83 <- GetProperty v82, '__proto__'
+v84 <- CallMethod v83, '__defineSetter__', [v77, v78]
+v85 <- Construct v67, []
+v86 <- CreateNamedVariable 'c4', 'var', v85
+v87 <- LoadString 'undefined'
+v88 <- GetProperty v86, 'x'
+v89 <- TypeOf v88
+v90 <- LoadInteger '23'
+v91 <- GetProperty v86, 'y'
+
+
+function C1() {
+    this.x = 23;
+}
+const v3 = new C1();
+var c1 = v3;
+c1.x;
+typeof c1.y;
+const v13 = {
+    set x(a11) {
+        this.y = 23;
+    },
+};
+C1.prototype = v13;
+const v14 = new C1();
+var c1 = v14;
+typeof c1.x;
+c1.y;
+function C2() {
+    this.x = 23;
+}
+const v24 = new C2();
+var c2 = v24;
+c2.x;
+typeof c2.y;
+const v34 = {
+    set x(a32) {
+        this.y = 23;
+    },
+};
+const t29 = C2.prototype;
+t29.__proto__ = v34;
+const v36 = new C2();
+var c2 = v36;
+typeof c2.x;
+c2.y;
+function C3() {
+    this.x = 23;
+}
+const v46 = new C3();
+var c3 = v46;
+c3.x;
+typeof c3.y;
+function f54(a55) {
+    this.y = 23;
+}
+C3.prototype.__defineSetter__("x", f54);
+const v60 = new C3();
+var c3 = v60;
+typeof c3.x;
+c3.y;
+function C4() {
+    this.x = 23;
+}
+const v70 = new C4();
+var c4 = v70;
+c4.x;
+typeof c4.y;
+function f78(a79) {
+    this.y = 23;
+}
+C4.prototype.__proto__.__defineSetter__("x", f78);
+const v85 = new C4();
+var c4 = v85;
+typeof c4.x;
+c4.y;
+
+FuzzIL program written to corpus/regress-618.fzil

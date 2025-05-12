@@ -1,0 +1,31 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'obj', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadBoolean 'false'
+    Return v3
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `has`, v2
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'handler', 'var', v4
+v6 <- CreateNamedVariable 'Proxy', 'none'
+v7 <- Construct v6, [v1, v5]
+v8 <- CreateNamedVariable 'proxy', 'var', v7
+v9 <- LoadString 'nonconf'
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'Object', 'none'
+v12 <- CallMethod v11, 'defineProperty', [v1, v9, v10]
+v13 <- LoadString ''nonconf' in proxy'
+
+
+var obj = this;
+function f2() {
+    return false;
+}
+var handler = { has: f2 };
+const v7 = new Proxy(obj, handler);
+var proxy = v7;
+Object.defineProperty(obj, "nonconf", {});
+
+FuzzIL program written to corpus/regress-760268.fzil

@@ -1,0 +1,33 @@
+v0 <- LoadInteger '500000'
+v1 <- CreateNamedVariable 'i', 'var', v0
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- Construct v2, [v1]
+v4 <- CreateNamedVariable 'a', 'var', v3
+BeginForLoopInitializer
+    v5 <- LoadInteger '0'
+BeginForLoopCondition -> v6
+    v7 <- Compare v6, '<', v1
+BeginForLoopAfterthought v7 -> v8
+    v9 <- UnaryOperation v8, '++'
+BeginForLoopBody -> v10
+    BeginObjectLiteral
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'o', 'var', v11
+    v13 <- LoadInteger '42'
+    SetProperty v12, 'x', v13
+    v14 <- DeleteProperty v12, 'x'
+    SetComputedProperty v4, v10, v12
+EndForLoop
+
+
+var i = 500000;
+const v3 = new Array(i);
+var a = v3;
+for (let i6 = 0; i6 < i; i6++) {
+    var o = {};
+    o.x = 42;
+    delete o.x;
+    a[i6] = o;
+}
+
+FuzzIL program written to corpus/regress-524.fzil

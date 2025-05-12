@@ -1,0 +1,38 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '3'
+v3 <- LoadInteger '4'
+v4 <- LoadInteger '5'
+v5 <- LoadUndefined
+v6 <- CreateArray [v0, v1, v2, v3, v4, v5, v5, v5, v5, v5]
+v7 <- CreateNamedVariable 'holey_array', 'var', v6
+v8 <- LoadUndefined
+v9 <- CreateArray [v8]
+v10 <- LoadInteger '6'
+v11 <- LoadInteger '7'
+v12 <- CallMethod v7, 'slice', [v10, v11]
+v13 <- LoadUndefined
+v14 <- LoadInteger '6'
+v15 <- LoadInteger '7'
+v16 <- CallMethod v7, 'slice', [v14, v15]
+v17 <- GetElement v16, '0'
+v18 <- CreateArray []
+v19 <- LoadInteger '2'
+v20 <- LoadInteger '1'
+v21 <- CallMethod v7, 'slice', [v19, v20]
+v22 <- LoadInteger '3'
+v23 <- LoadInteger '2'
+v24 <- LoadInteger '3'
+v25 <- CallMethod v7, 'slice', [v23, v24]
+v26 <- GetElement v25, '0'
+
+
+var holey_array = [1,2,3,4,5,,,,,,];
+[,];
+holey_array.slice(6, 7);
+holey_array.slice(6, 7)[0];
+[];
+holey_array.slice(2, 1);
+holey_array.slice(2, 3)[0];
+
+FuzzIL program written to corpus/regress-165637.fzil

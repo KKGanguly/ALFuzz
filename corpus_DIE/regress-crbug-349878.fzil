@@ -1,0 +1,70 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- Compare v1, '==', v2
+EndPlainFunction
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- CallFunction v0, [v4, v5]
+v7 <- LoadFloat '1.5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'a', 'var', v8
+v10 <- LoadInteger '777'
+SetProperty v9, 'y', v10
+v11 <- GetProperty v9, 'y'
+v12 <- CreateNamedVariable 'b', 'var', v11
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadInteger '1'
+    v15 <- CreateNamedVariable 'd', 'var', v14
+    v16 <- LoadInteger '777'
+    v17 <- CreateNamedVariable 'e', 'var', v16
+    BeginWhileLoopHeader
+        v18 <- UnaryOperation v15, '--'
+        v19 <- LoadInteger '0'
+        v20 <- Compare v18, '>', v19
+    BeginWhileLoopBody v20
+        v21 <- UnaryOperation v17, '++'
+    EndWhileLoop
+    v22 <- LoadInteger '1'
+    v23 <- CallFunction v0, [v22, v17]
+EndPlainFunction
+v24 <- LoadUndefined
+v25 <- CreateNamedVariable 'global', 'var', v24
+v26 <- BeginPlainFunction -> 
+    Reassign v25, v12
+    v27 <- CallFunction v13, [v12]
+    Return v27
+EndPlainFunction
+v28 <- CallFunction v26, []
+v29 <- CallFunction v26, []
+v30 <- CallFunction v26, []
+
+
+function f(a1, a2) {
+    a1 == a2;
+}
+const v4 = {};
+f(v4, {});
+var a = { y: 1.5 };
+a.y = 777;
+var b = a.y;
+function h() {
+    var d = 1;
+    var e = 777;
+    while (d-- > 0) {
+        e++;
+    }
+    f(1, e);
+}
+var global;
+function g() {
+    global = b;
+    return h(b);
+}
+g();
+g();
+g();
+
+FuzzIL program written to corpus/regress-crbug-349878.fzil

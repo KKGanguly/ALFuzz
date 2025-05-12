@@ -1,0 +1,88 @@
+v0 <- LoadString 'a'
+v1 <- LoadRegExp '.' 'g'
+v2 <- CallMethod v1, 'exec', [v0]
+v3 <- CreateNamedVariable 'fast_regexp_result', 'const', v2
+v4 <- LoadInteger '0'
+SetProperty v3, 'length', v4
+v5 <- CreateNamedVariable 'RegExp', 'none'
+v6 <- BeginClassDefinition v5
+    BeginClassConstructor -> v7
+        v8 <- LoadString '.'
+        v9 <- LoadString 'g'
+        CallSuperConstructor [v8, v9]
+        v10 <- LoadInteger '0'
+        SetProperty v7, 'number_of_runs', v10
+    EndClassConstructor
+    BeginClassInstanceMethod 'exec' -> v11, v12
+        v13 <- GetProperty v11, 'number_of_runs'
+        v14 <- UnaryOperation v13, '++'
+        v15 <- LoadInteger '0'
+        v16 <- Compare v14, '==', v15
+        v17 <- LoadNull
+        v18 <- TernaryOperation v16, v3, v17
+        Return v18
+    EndClassInstanceMethod
+EndClassDefinition
+v19 <- CreateArray []
+v20 <- CreateNamedVariable 'slow_regexp_result', 'const', v19
+v21 <- BeginClassDefinition v5
+    BeginClassConstructor -> v22
+        v23 <- LoadString '.'
+        v24 <- LoadString 'g'
+        CallSuperConstructor [v23, v24]
+        v25 <- LoadInteger '0'
+        SetProperty v22, 'number_of_runs', v25
+    EndClassConstructor
+    BeginClassInstanceMethod 'exec' -> v26, v27
+        v28 <- GetProperty v26, 'number_of_runs'
+        v29 <- UnaryOperation v28, '++'
+        v30 <- LoadInteger '0'
+        v31 <- Compare v29, '==', v30
+        v32 <- LoadNull
+        v33 <- TernaryOperation v31, v20, v32
+        Return v33
+    EndClassInstanceMethod
+EndClassDefinition
+v34 <- LoadString 'undefined'
+v35 <- CreateArray [v34]
+v36 <- Construct v6, []
+v37 <- LoadString 'a'
+v38 <- CallMethod v37, 'match', [v36]
+v39 <- LoadString 'undefined'
+v40 <- CreateArray [v39]
+v41 <- Construct v21, []
+v42 <- LoadString 'a'
+v43 <- CallMethod v42, 'match', [v41]
+
+
+const fast_regexp_result = /./g.exec("a");
+fast_regexp_result.length = 0;
+class C6 extends RegExp {
+    constructor() {
+        super(".", "g");
+        this.number_of_runs = 0;
+    }
+    exec(a12) {
+        let v13 = this.number_of_runs;
+        return v13++ == 0 ? fast_regexp_result : null;
+    }
+}
+const slow_regexp_result = [];
+class C21 extends RegExp {
+    constructor() {
+        super(".", "g");
+        this.number_of_runs = 0;
+    }
+    exec(a27) {
+        let v28 = this.number_of_runs;
+        return v28++ == 0 ? slow_regexp_result : null;
+    }
+}
+["undefined"];
+const v36 = new C6();
+("a").match(v36);
+["undefined"];
+const v41 = new C21();
+("a").match(v41);
+
+FuzzIL program written to corpus/regress-crbug-843022.fzil

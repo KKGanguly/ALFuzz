@@ -1,0 +1,198 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadInteger '2'
+    v3 <- LoadInteger '3'
+    v4 <- CreateArray [v1, v2, v3]
+    v5 <- CreateNamedVariable 'elem1', 'var', v4
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- LoadInteger '100000'
+        v9 <- Compare v7, '<', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation v10, '++'
+    BeginForLoopBody -> v12
+        v13 <- LoadInteger '1'
+        v14 <- CreateArray [v13]
+        v15 <- CreateNamedVariable 'bar', 'var', v14
+    EndForLoop
+    v16 <- LoadInteger '1'
+    v17 <- LoadInteger '2'
+    v18 <- LoadInteger '3'
+    v19 <- CreateArray [v16, v17, v18]
+    v20 <- CreateNamedVariable 'elem2', 'var', v19
+    Return v20
+EndPlainFunction
+v21 <- CallFunction v0, []
+v22 <- CallFunction v0, []
+v23 <- CallFunction v0, []
+v24 <- CallFunction v0, []
+v25 <- CreateNamedVariable 'result', 'var', v24
+v26 <- CreateNamedVariable 'gc', 'none'
+v27 <- CallFunction v26, []
+v28 <- GetElement v25, '2'
+v29 <- LoadInteger '3'
+v30 <- BeginPlainFunction -> 
+    v31 <- LoadFloat '1.1'
+    v32 <- LoadFloat '1.2'
+    v33 <- CreateArray [v31, v32]
+    v34 <- CreateNamedVariable 'elem1', 'var', v33
+    v35 <- LoadFloat '2.1'
+    v36 <- LoadFloat '2.2'
+    v37 <- CreateArray [v35, v36]
+    v38 <- CreateNamedVariable 'elem2', 'var', v37
+    Return v38
+EndPlainFunction
+v39 <- CallFunction v30, []
+v40 <- CallFunction v30, []
+v41 <- CallFunction v30, []
+v42 <- CallFunction v30, []
+Reassign v25, v42
+v43 <- CallFunction v26, []
+v44 <- GetElement v25, '1'
+v45 <- LoadFloat '2.2'
+v46 <- BeginPlainFunction -> 
+    v47 <- LoadInteger '2'
+    v48 <- LoadInteger '3'
+    v49 <- CreateArray [v47, v48]
+    v50 <- CreateNamedVariable 'elem1', 'var', v49
+    v51 <- LoadFloat '2.1'
+    v52 <- LoadFloat '3.1'
+    v53 <- CreateArray [v51, v52]
+    v54 <- CreateNamedVariable 'elem2', 'var', v53
+    Return v54
+EndPlainFunction
+v55 <- CallFunction v46, []
+v56 <- CallFunction v46, []
+v57 <- CallFunction v46, []
+v58 <- CallFunction v46, []
+Reassign v25, v58
+v59 <- CallFunction v26, []
+v60 <- GetElement v25, '1'
+v61 <- LoadFloat '3.1'
+v62 <- BeginPlainFunction -> v63
+    v64 <- LoadInteger '1'
+    v65 <- LoadInteger '2'
+    v66 <- CreateArray [v64, v65]
+    v67 <- CreateNamedVariable 'elem1', 'var', v66
+    v68 <- LoadUndefined
+    v69 <- CreateNamedVariable 'elem2', 'var', v68
+    BeginIf v63
+        v70 <- LoadInteger '3'
+        v71 <- LoadInteger '4'
+        v72 <- CreateArray [v70, v71]
+        Reassign v69, v72
+    BeginElse
+        v73 <- LoadInteger '5'
+        v74 <- LoadInteger '6'
+        v75 <- CreateArray [v73, v74]
+        Reassign v69, v75
+    EndIf
+    Return v69
+EndPlainFunction
+v76 <- LoadInteger '1'
+v77 <- CallFunction v62, [v76]
+v78 <- LoadInteger '1'
+v79 <- CallFunction v62, [v78]
+v80 <- LoadInteger '1'
+v81 <- CallFunction v62, [v80]
+v82 <- LoadInteger '1'
+v83 <- CallFunction v62, [v82]
+Reassign v25, v83
+v84 <- LoadInteger '0'
+v85 <- CallFunction v62, [v84]
+v86 <- CreateNamedVariable 'result2', 'var', v85
+v87 <- CallFunction v26, []
+v88 <- GetElement v25, '1'
+v89 <- LoadInteger '4'
+v90 <- GetElement v86, '1'
+v91 <- LoadInteger '6'
+v92 <- BeginPlainFunction -> 
+    v93 <- CreateNamedVariable 'Array', 'none'
+    v94 <- LoadInteger '84632'
+    v95 <- Construct v93, [v94]
+    v96 <- CreateNamedVariable 'a1', 'var', v95
+    v97 <- LoadInteger '84632'
+    v98 <- Construct v93, [v97]
+    v99 <- CreateNamedVariable 'a2', 'var', v98
+    v100 <- LoadInteger '84632'
+    v101 <- Construct v93, [v100]
+    v102 <- CreateNamedVariable 'a3', 'var', v101
+    v103 <- CreateArray [v96, v99, v102]
+    Return v103
+EndPlainFunction
+v104 <- CallFunction v92, []
+v105 <- CallFunction v92, []
+v106 <- CallFunction v92, []
+v107 <- CallFunction v92, []
+
+
+function f() {
+    var elem1 = [1,2,3];
+    for (let i7 = 0; i7 < 100000; i7++) {
+        var bar = [1];
+    }
+    var elem2 = [1,2,3];
+    return elem2;
+}
+f();
+f();
+f();
+var result = f();
+gc();
+result[2];
+function doubles() {
+    var elem1 = [1.1,1.2];
+    var elem2 = [2.1,2.2];
+    return elem2;
+}
+doubles();
+doubles();
+doubles();
+result = doubles();
+gc();
+result[1];
+function doubles_int() {
+    var elem1 = [2,3];
+    var elem2 = [2.1,3.1];
+    return elem2;
+}
+doubles_int();
+doubles_int();
+doubles_int();
+result = doubles_int();
+gc();
+result[1];
+function branch_int(a63) {
+    var elem1 = [1,2];
+    var elem2;
+    if (a63) {
+        elem2 = [3,4];
+    } else {
+        elem2 = [5,6];
+    }
+    return elem2;
+}
+branch_int(1);
+branch_int(1);
+branch_int(1);
+result = branch_int(1);
+var result2 = branch_int(0);
+gc();
+result[1];
+result2[1];
+function boom() {
+    const v95 = new Array(84632);
+    var a1 = v95;
+    const v98 = new Array(84632);
+    var a2 = v98;
+    const v101 = new Array(84632);
+    var a3 = v101;
+    return [a1,a2,a3];
+}
+boom();
+boom();
+boom();
+boom();
+
+FuzzIL program written to corpus/allocation-folding.fzil

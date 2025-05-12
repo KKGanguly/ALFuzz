@@ -1,0 +1,200 @@
+v0 <- LoadString '0123456789ABCDEF'
+v1 <- CreateNamedVariable 'prefix1024', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '6'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    Update v1, '+', v1
+EndForLoop
+v9 <- BeginPlainFunction -> v10, v11, v12, v13
+    v14 <- CallMethod v10, 'replace', [v12, v13]
+EndPlainFunction
+v15 <- LoadString 'abcdefghijklmnopqrstuvwxyz'
+v16 <- BinaryOperation v1, '+', v15
+v17 <- LoadString 'abcdefghijk#l#mnopqrstuvwxyz'
+v18 <- BinaryOperation v1, '+', v17
+v19 <- LoadString 'l'
+v20 <- LoadString '#$&#'
+v21 <- CallFunction v9, [v16, v18, v19, v20]
+v22 <- LoadString 'abcdefghijklmnopqrstuvwxyzሴ'
+v23 <- BinaryOperation v1, '+', v22
+v24 <- LoadString 'abcdefghijk‒l‒mnopqrstuvwxyzሴ'
+v25 <- BinaryOperation v1, '+', v24
+v26 <- LoadString 'l'
+v27 <- LoadString '‒$&‒'
+v28 <- CallFunction v9, [v23, v25, v26, v27]
+v29 <- LoadString 'abcdefghijklmnopqrstuvwxyz'
+v30 <- BinaryOperation v1, '+', v29
+v31 <- LoadString 'abcdefghijk$mnopqrstuvwxyz'
+v32 <- BinaryOperation v1, '+', v31
+v33 <- LoadString 'l'
+v34 <- LoadString '$$'
+v35 <- CallFunction v9, [v30, v32, v33, v34]
+v36 <- LoadString 'abcdefghijklmnopqrstuvwxyzሴ'
+v37 <- BinaryOperation v1, '+', v36
+v38 <- LoadString 'abcdefghijk$mnopqrstuvwxyzሴ'
+v39 <- BinaryOperation v1, '+', v38
+v40 <- LoadString 'l'
+v41 <- LoadString '$$'
+v42 <- CallFunction v9, [v37, v39, v40, v41]
+v43 <- LoadString 'abcdefghijklmnopqrstuvwxyz'
+v44 <- BinaryOperation v1, '+', v43
+v45 <- LoadString 'abcdefghijklmnopqstuvwxyz'
+v46 <- BinaryOperation v1, '+', v45
+v47 <- LoadString 'r'
+v48 <- LoadString ''
+v49 <- CallFunction v9, [v44, v46, v47, v48]
+v50 <- LoadString 'abcdefghijklmnopqሴstuvwxyz'
+v51 <- BinaryOperation v1, '+', v50
+v52 <- LoadString 'abcdefghijklmnopqstuvwxyz'
+v53 <- BinaryOperation v1, '+', v52
+v54 <- LoadString 'ሴ'
+v55 <- LoadString ''
+v56 <- CallFunction v9, [v51, v53, v54, v55]
+v57 <- LoadString 'abcdefghijklmnopqrstuvwxyz'
+v58 <- BinaryOperation v1, '+', v57
+v59 <- CreateNamedVariable 'not_found_1', 'var', v58
+v60 <- LoadString '+'
+v61 <- LoadString '-'
+v62 <- CallFunction v9, [v59, v59, v60, v61]
+v63 <- LoadString 'abcdefghijklmሴnopqrstuvwxyz'
+v64 <- BinaryOperation v1, '+', v63
+v65 <- CreateNamedVariable 'not_found_2', 'var', v64
+v66 <- LoadString '+'
+v67 <- LoadString '---'
+v68 <- CallFunction v9, [v65, v65, v66, v67]
+v69 <- LoadString 'abcdefghijklmnopqrstuvwxyz'
+v70 <- BinaryOperation v1, '+', v69
+v71 <- CreateNamedVariable 'not_found_3', 'var', v70
+v72 <- LoadString 'ሴ'
+v73 <- LoadString 'ZZZ'
+v74 <- CallFunction v9, [v71, v71, v72, v73]
+v75 <- LoadString ''
+v76 <- CreateNamedVariable 'nested_1', 'var', v75
+BeginForLoopInitializer
+    v77 <- LoadInteger '0'
+BeginForLoopCondition -> v78
+    v79 <- LoadInteger '100000'
+    v80 <- Compare v78, '<', v79
+BeginForLoopAfterthought v80 -> v81
+    v82 <- UnaryOperation v81, '++'
+BeginForLoopBody -> v83
+    v84 <- LoadString 'y'
+    Update v76, '+', v84
+EndForLoop
+v85 <- BinaryOperation v1, '+', v76
+v86 <- LoadString 'aa'
+v87 <- BinaryOperation v85, '+', v86
+v88 <- CreateNamedVariable 'nested_1_result', 'var', v87
+v89 <- BinaryOperation v1, '+', v76
+v90 <- LoadString 'z'
+v91 <- BinaryOperation v89, '+', v90
+Reassign v76, v91
+v92 <- LoadString 'z'
+v93 <- LoadString 'aa'
+v94 <- CallFunction v9, [v76, v88, v92, v93]
+v95 <- LoadString '≄'
+v96 <- CreateNamedVariable 'nested_2', 'var', v95
+BeginForLoopInitializer
+    v97 <- LoadInteger '0'
+BeginForLoopCondition -> v98
+    v99 <- LoadInteger '100000'
+    v100 <- Compare v98, '<', v99
+BeginForLoopAfterthought v100 -> v101
+    v102 <- UnaryOperation v101, '++'
+BeginForLoopBody -> v103
+    v104 <- LoadString 'y'
+    Update v96, '+', v104
+EndForLoop
+v105 <- BinaryOperation v1, '+', v96
+v106 <- LoadString 'aa'
+v107 <- BinaryOperation v105, '+', v106
+v108 <- CreateNamedVariable 'nested_2_result', 'var', v107
+v109 <- BinaryOperation v1, '+', v96
+v110 <- LoadString '‒'
+v111 <- BinaryOperation v109, '+', v110
+Reassign v96, v111
+v112 <- LoadString '‒'
+v113 <- LoadString 'aa'
+v114 <- CallFunction v9, [v96, v108, v112, v113]
+v115 <- LoadInteger '1'
+v116 <- LoadInteger '1'
+v117 <- UnaryOperation '-', v116
+v118 <- LoadString 'ab'
+v119 <- BinaryOperation v118, '+', v1
+v120 <- LoadString 'cdefghijklmnopqrstuvwxyz'
+v121 <- BinaryOperation v119, '+', v120
+v122 <- CallMethod v121, 'slice', [v115, v117]
+v123 <- CreateNamedVariable 'slice_1', 'var', v122
+v124 <- LoadString 'b'
+v125 <- BinaryOperation v124, '+', v1
+v126 <- LoadString 'cdefghijklmnopqrstuvwxQ'
+v127 <- BinaryOperation v125, '+', v126
+v128 <- CreateNamedVariable 'slice_1_result', 'var', v127
+v129 <- LoadString 'y'
+v130 <- LoadString 'Q'
+v131 <- CallFunction v9, [v123, v128, v129, v130]
+v132 <- LoadInteger '1'
+v133 <- LoadInteger '1'
+v134 <- UnaryOperation '-', v133
+v135 <- LoadString 'abcdefghijklmnoሴሴp'
+v136 <- BinaryOperation v1, '+', v135
+v137 <- CallMethod v136, 'slice', [v132, v134]
+v138 <- CreateNamedVariable 'slice_2', 'var', v137
+v139 <- LoadInteger '1'
+v140 <- CallMethod v1, 'substr', [v139]
+v141 <- LoadString 'abcdefghijklmnoQሴ'
+v142 <- BinaryOperation v140, '+', v141
+v143 <- CreateNamedVariable 'slice_2_result', 'var', v142
+v144 <- LoadString 'ሴ'
+v145 <- LoadString 'Q'
+v146 <- CallFunction v9, [v138, v143, v144, v145]
+
+
+var prefix1024 = "0123456789ABCDEF";
+for (let i3 = 0; i3 < 6; i3++) {
+    prefix1024 += prefix1024;
+}
+function test_replace(a10, a11, a12, a13) {
+    a10.replace(a12, a13);
+}
+test_replace(prefix1024 + "abcdefghijklmnopqrstuvwxyz", prefix1024 + "abcdefghijk#l#mnopqrstuvwxyz", "l", "#$&#");
+test_replace(prefix1024 + "abcdefghijklmnopqrstuvwxyzሴ", prefix1024 + "abcdefghijk‒l‒mnopqrstuvwxyzሴ", "l", "‒$&‒");
+test_replace(prefix1024 + "abcdefghijklmnopqrstuvwxyz", prefix1024 + "abcdefghijk$mnopqrstuvwxyz", "l", "$$");
+test_replace(prefix1024 + "abcdefghijklmnopqrstuvwxyzሴ", prefix1024 + "abcdefghijk$mnopqrstuvwxyzሴ", "l", "$$");
+test_replace(prefix1024 + "abcdefghijklmnopqrstuvwxyz", prefix1024 + "abcdefghijklmnopqstuvwxyz", "r", "");
+test_replace(prefix1024 + "abcdefghijklmnopqሴstuvwxyz", prefix1024 + "abcdefghijklmnopqstuvwxyz", "ሴ", "");
+var not_found_1 = prefix1024 + "abcdefghijklmnopqrstuvwxyz";
+test_replace(not_found_1, not_found_1, "+", "-");
+var not_found_2 = prefix1024 + "abcdefghijklmሴnopqrstuvwxyz";
+test_replace(not_found_2, not_found_2, "+", "---");
+var not_found_3 = prefix1024 + "abcdefghijklmnopqrstuvwxyz";
+test_replace(not_found_3, not_found_3, "ሴ", "ZZZ");
+var nested_1 = "";
+for (let i78 = 0; i78 < 100000; i78++) {
+    nested_1 += "y";
+}
+var nested_1_result = (prefix1024 + nested_1) + "aa";
+nested_1 = (prefix1024 + nested_1) + "z";
+test_replace(nested_1, nested_1_result, "z", "aa");
+var nested_2 = "≄";
+for (let i98 = 0; i98 < 100000; i98++) {
+    nested_2 += "y";
+}
+var nested_2_result = (prefix1024 + nested_2) + "aa";
+nested_2 = (prefix1024 + nested_2) + "‒";
+test_replace(nested_2, nested_2_result, "‒", "aa");
+const v117 = -1;
+var slice_1 = (("ab" + prefix1024) + "cdefghijklmnopqrstuvwxyz").slice(1, v117);
+var slice_1_result = ("b" + prefix1024) + "cdefghijklmnopqrstuvwxQ";
+test_replace(slice_1, slice_1_result, "y", "Q");
+const v134 = -1;
+var slice_2 = (prefix1024 + "abcdefghijklmnoሴሴp").slice(1, v134);
+var slice_2_result = prefix1024.substr(1) + "abcdefghijklmnoQሴ";
+test_replace(slice_2, slice_2_result, "ሴ", "Q");
+
+FuzzIL program written to corpus/string-replace-one-char.fzil

@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- BinaryOperation v1, '|', v2
+    v4 <- LoadInteger '1'
+    v5 <- BinaryOperation v4, '>>', v1
+    BeginObjectLiteral
+    v6 <- EndObjectLiteral
+    v7 <- Compare v5, '==', v6
+    v8 <- BinaryOperation v3, '&&', v7
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadInteger '1'
+    v11 <- CallFunction v0, [v10]
+    Return v11
+EndPlainFunction
+v12 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v13 <- EndObjectLiteral
+    v14 <- CallFunction v0, [v13]
+    v15 <- CallFunction v9, [v14]
+    Return v15
+EndPlainFunction
+v16 <- CallFunction v12, []
+v17 <- CallFunction v12, []
+v18 <- CallFunction v12, []
+
+
+function h(a1) {
+    const v3 = a1 | 0;
+    const v5 = 1 >> a1;
+    return v3 && (v5 == {});
+}
+function g() {
+    return h(1);
+}
+function f() {
+    return g(h({}));
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-v8-6631.fzil

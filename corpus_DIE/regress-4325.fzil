@@ -1,0 +1,83 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadThis
+    SetProperty v2, 'p1', v1
+    v3 <- LoadInteger '3'
+    v4 <- LoadThis
+    SetProperty v4, 'p2', v3
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '0'
+    v7 <- LoadThis
+    SetProperty v7, 'p3', v6
+EndPlainFunction
+v8 <- Construct v0, []
+v9 <- CreateNamedVariable 'i1', 'var', v8
+v10 <- Construct v0, []
+v11 <- CreateNamedVariable 'i2', 'var', v10
+v12 <- Construct v5, []
+v13 <- CreateNamedVariable 'o1', 'var', v12
+SetProperty v13, 'inner', v9
+v14 <- LoadFloat '0.5'
+SetProperty v9, 'p1', v14
+v15 <- GetProperty v11, 'p1'
+v16 <- CreateNamedVariable 'print', 'none'
+v17 <- CallFunction v16, [v15]
+v18 <- CreateNamedVariable 'gc', 'none'
+v19 <- CallFunction v18, []
+v20 <- LoadFloat '0.5'
+SetProperty v11, 'p2', v20
+v21 <- Construct v5, []
+v22 <- CreateNamedVariable 'o2', 'var', v21
+v23 <- LoadFloat '0.5'
+SetProperty v22, 'p3', v23
+SetProperty v22, 'inner', v11
+v24 <- GetProperty v13, 'p3'
+v25 <- CallFunction v16, [v24]
+v26 <- BeginPlainFunction -> v27
+    v28 <- GetProperty v27, 'inner'
+    v29 <- GetProperty v28, 'p2'
+    Return v29
+EndPlainFunction
+v30 <- CallFunction v26, [v22]
+v31 <- CallFunction v26, [v22]
+v32 <- LoadFloat '0.5'
+v33 <- CallFunction v26, [v22]
+v34 <- LoadInteger '3'
+v35 <- CallFunction v26, [v13]
+v36 <- CallFunction v18, []
+
+
+function Inner() {
+    this.p1 = 0;
+    this.p2 = 3;
+}
+function Outer() {
+    this.p3 = 0;
+}
+const v8 = new Inner();
+var i1 = v8;
+const v10 = new Inner();
+var i2 = v10;
+const v12 = new Outer();
+var o1 = v12;
+o1.inner = i1;
+i1.p1 = 0.5;
+print(i2.p1);
+gc();
+i2.p2 = 0.5;
+const v21 = new Outer();
+var o2 = v21;
+o2.p3 = 0.5;
+o2.inner = i2;
+print(o1.p3);
+function loader(a27) {
+    return a27.inner.p2;
+}
+loader(o2);
+loader(o2);
+loader(o2);
+loader(o1);
+gc();
+
+FuzzIL program written to corpus/regress-4325.fzil

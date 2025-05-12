@@ -1,0 +1,68 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- UnaryOperation '--', v1
+    v3 <- LoadInteger '0'
+    v4 <- Compare v2, '<', v3
+    BeginIf v4
+        v5 <- CreateArray []
+        Return v5
+    BeginElse
+        v6 <- LoadInteger '0'
+        v7 <- CallFunction v0, [v1]
+        v8 <- CreateArray [v6, v7]
+        Return v8
+    EndIf
+EndPlainFunction
+v9 <- LoadInteger '0'
+v10 <- LoadInteger '0'
+v11 <- CreateArray []
+v12 <- CreateArray [v10, v11]
+v13 <- CreateArray [v9, v12]
+v14 <- LoadInteger '2'
+v15 <- CallFunction v0, [v14]
+v16 <- BeginPlainFunction -> v17
+    v18 <- UnaryOperation '--', v17
+    v19 <- LoadInteger '0'
+    v20 <- Compare v18, '<', v19
+    BeginIf v20
+        v21 <- CreateArray []
+        Return v21
+    BeginElse
+        v22 <- LoadInteger '0'
+        v23 <- CallFunction v16, [v17]
+        v24 <- CreateArray [v22, v23]
+        v25 <- CreateNamedVariable 'o', 'var', v24
+        v26 <- LoadInteger '0'
+        v27 <- Compare v17, '==', v26
+        v28 <- LoadFloat '0.5'
+        v29 <- TernaryOperation v27, v28, v25
+        Return v29
+    EndIf
+EndPlainFunction
+v30 <- LoadInteger '0'
+v31 <- LoadFloat '0.5'
+v32 <- CreateArray [v30, v31]
+v33 <- LoadInteger '2'
+v34 <- CallFunction v16, [v33]
+
+
+function test1(a1) {
+    if (--a1 < 0) {
+        return [];
+    } else {
+        return [0,test1(a1)];
+    }
+}
+[0,[0,[]]];
+test1(2);
+function test2(a17) {
+    if (--a17 < 0) {
+        return [];
+    } else {
+        var o = [0,test2(a17)];
+        return a17 == 0 ? 0.5 : o;
+    }
+}
+[0,0.5];
+test2(2);
+
+FuzzIL program written to corpus/regress-2055.fzil

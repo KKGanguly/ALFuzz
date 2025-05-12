@@ -1,0 +1,70 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable '__v_3', 'none'
+    v3 <- GetComputedProperty v2, v1
+    v4 <- GetElement v2, '0'
+    v5 <- BinaryOperation v3, '*', v4
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- CallFunction v0, [v7]
+    v9 <- LoadInteger '16'
+    v10 <- BinaryOperation v7, '+', v9
+    v11 <- CallFunction v0, [v10]
+    v12 <- LoadInteger '32'
+    v13 <- BinaryOperation v7, '+', v12
+    v14 <- CallFunction v0, [v13]
+    v15 <- LoadInteger '993'
+    v16 <- BinaryOperation v7, '+', v15
+    v17 <- CallFunction v0, [v16]
+    v18 <- CreateNamedVariable 'x', 'var', v17
+    Return v18
+EndPlainFunction
+v19 <- BeginPlainFunction -> 
+    v20 <- CreateNamedVariable '__v_3', 'none'
+    v21 <- GetElement v20, '0'
+    v22 <- UnaryOperation '+', v21
+    SetElement v20, '0', v22
+    v23 <- CreateNamedVariable 'gc', 'none'
+    v24 <- CallFunction v23, []
+    v25 <- LoadInteger '0'
+    v26 <- CallFunction v6, [v25]
+    v27 <- LoadInteger '0'
+    v28 <- BinaryOperation v26, '|', v27
+    v29 <- LoadRegExp '\u23a1|x' ''
+    Reassign v20, v29
+    v30 <- LoadInteger '0'
+    Return v30
+EndPlainFunction
+v31 <- CreateNamedVariable 'Float32Array', 'none'
+v32 <- LoadInteger '1000'
+v33 <- Construct v31, [v32]
+v34 <- CreateNamedVariable '__v_3', 'var', v33
+v35 <- CallFunction v19, []
+v36 <- CallFunction v19, []
+v37 <- CallFunction v19, []
+
+
+function __f_4(a1) {
+    return __v_3[a1] * __v_3[0];
+}
+function __f_3(a7) {
+    __f_4(a7);
+    __f_4(a7 + 16);
+    __f_4(a7 + 32);
+    var x = __f_4(a7 + 993);
+    return x;
+}
+function __f_5() {
+    __v_3[0] = +__v_3[0];
+    gc();
+    __f_3(0) | 0;
+    __v_3 = /\u23a1|x/;
+    return 0;
+}
+const v33 = new Float32Array(1000);
+var __v_3 = v33;
+__f_5();
+__f_5();
+__f_5();
+
+FuzzIL program written to corpus/regress-352982.fzil

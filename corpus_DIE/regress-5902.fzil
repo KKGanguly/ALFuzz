@@ -1,0 +1,74 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'log', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- UnaryOperation '!', v3
+    BeginIf v5
+        v6 <- CallMethod v1, 'push', [v4]
+    EndIf
+EndPlainFunction
+v7 <- LoadThis
+v8 <- CreateNamedVariable 'global', 'var', v7
+v9 <- BeginPlainFunction -> v10
+    v11 <- GetElement v10, '0'
+    v12 <- GetElement v10, '0'
+    v13 <- CallMethod v12, 'toUpperCase', []
+    v14 <- Compare v11, '!=', v13
+    BeginIf v14
+        Return
+    EndIf
+    v15 <- GetComputedProperty v8, v10
+    v16 <- CreateNamedVariable 'obj', 'var', v15
+    v17 <- LoadString 'native'
+    v18 <- CallMethod v16, 'toString', []
+    v19 <- CallMethod v18, 'includes', [v17]
+    v20 <- UnaryOperation '!', v19
+    BeginIf v20
+        Return
+    EndIf
+    BeginTry
+        v21 <- Construct v16, []
+    BeginCatch -> v22
+    EndTryCatch
+    v23 <- GetProperty v16, 'constructor'
+    v24 <- CreateNamedVariable 'constructor', 'var', v23
+    v25 <- GetProperty v16, 'prototype'
+    v26 <- CreateNamedVariable 'prototype', 'var', v25
+    v27 <- GetProperty v26, 'constructor'
+    v28 <- CreateNamedVariable 'prototype_constructor', 'var', v27
+    v29 <- CreateTemplateString ['', '.prototype.constructor'], [v10]
+    v30 <- CallFunction v2, [v29]
+EndPlainFunction
+v31 <- CreateNamedVariable 'Object', 'none'
+v32 <- CallMethod v31, 'getOwnPropertyNames', [v8]
+v33 <- CallMethod v32, 'forEach', [v9]
+v34 <- CreateArray []
+
+
+var log = [];
+function check(a3, a4) {
+    if (!a3) {
+        log.push(a4);
+    }
+}
+var global = this;
+function f9(a10) {
+    if (a10[0] != a10[0].toUpperCase()) {
+        return;
+    }
+    var obj = global[a10];
+    if (!obj.toString().includes("native")) {
+        return;
+    }
+    try {
+        new obj();
+    } catch(e22) {
+    }
+    var constructor = obj.constructor;
+    var prototype = obj.prototype;
+    var prototype_constructor = prototype.constructor;
+    check(`${a10}.prototype.constructor`);
+}
+Object.getOwnPropertyNames(global).forEach(f9);
+[];
+
+FuzzIL program written to corpus/regress-5902.fzil

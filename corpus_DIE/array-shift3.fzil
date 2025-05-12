@@ -1,0 +1,50 @@
+v0 <- LoadString 'element 1'
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetElement v2, '1', v0
+v3 <- BeginPlainFunction -> v4
+    v5 <- CallMethod v4, 'shift', []
+    Return v4
+EndPlainFunction
+v6 <- LoadString 'element 1'
+BeginObjectLiteral
+v7 <- EndObjectLiteral
+v8 <- CreateArray [v6, v7]
+v9 <- LoadInteger '0'
+v10 <- LoadUndefined
+BeginObjectLiteral
+v11 <- EndObjectLiteral
+v12 <- CreateArray [v9, v10, v11]
+v13 <- CallFunction v3, [v12]
+v14 <- LoadString 'element 1'
+v15 <- LoadInteger '10'
+v16 <- CreateArray [v14, v15]
+v17 <- LoadInteger '9'
+v18 <- LoadUndefined
+v19 <- LoadInteger '10'
+v20 <- CreateArray [v17, v18, v19]
+v21 <- CallFunction v3, [v20]
+v22 <- LoadString 'element 1'
+v23 <- LoadInteger '10'
+v24 <- CreateArray [v22, v23]
+v25 <- LoadInteger '9'
+v26 <- LoadUndefined
+v27 <- LoadInteger '10'
+v28 <- CreateArray [v25, v26, v27]
+v29 <- CallFunction v3, [v28]
+
+
+const t0 = Array.prototype;
+t0[1] = "element 1";
+function test(a4) {
+    a4.shift();
+    return a4;
+}
+["element 1",{}];
+test([0,,{}]);
+["element 1",10];
+test([9,,10]);
+["element 1",10];
+test([9,,10]);
+
+FuzzIL program written to corpus/array-shift3.fzil

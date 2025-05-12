@@ -1,0 +1,90 @@
+v0 <- LoadString 'a-b-c'
+v1 <- CreateNamedVariable 'str', 'const', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadString 'a'
+    v5 <- LoadString 'b'
+    v6 <- LoadString 'c'
+    v7 <- CreateArray [v4, v5, v6]
+    v8 <- CreateNamedVariable 'Symbol', 'none'
+    v9 <- GetProperty v8, 'split'
+    v10 <- CallComputedMethod v3, v9, [v1]
+EndPlainFunction
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadRegExp '-' 'y'
+    v13 <- CreateNamedVariable 're', 'const', v12
+    v14 <- LoadInteger '1'
+    SetProperty v13, 'lastIndex', v14
+    v15 <- CallFunction v2, [v13]
+EndPlainFunction
+v16 <- CallFunction v11, []
+v17 <- UnaryOperation '!', v16
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadRegExp '-' 'y'
+    v20 <- CreateNamedVariable 're', 'const', v19
+    v21 <- LoadInteger '3'
+    SetProperty v20, 'lastIndex', v21
+    v22 <- CallFunction v2, [v20]
+EndPlainFunction
+v23 <- CallFunction v18, []
+v24 <- UnaryOperation '!', v23
+v25 <- BeginPlainFunction -> 
+    v26 <- LoadRegExp '-' 'y'
+    v27 <- CreateNamedVariable 're', 'const', v26
+    v28 <- LoadInteger '1'
+    v29 <- UnaryOperation '-', v28
+    SetProperty v27, 'lastIndex', v29
+    v30 <- CallFunction v2, [v27]
+EndPlainFunction
+v31 <- CallFunction v25, []
+v32 <- UnaryOperation '!', v31
+v33 <- BeginPlainFunction -> 
+    v34 <- LoadRegExp '-' 'y'
+    v35 <- CreateNamedVariable 're', 'const', v34
+    v36 <- CallFunction v2, [v35]
+EndPlainFunction
+v37 <- CallFunction v33, []
+v38 <- UnaryOperation '!', v37
+v39 <- BeginPlainFunction -> 
+    v40 <- LoadRegExp '-' 'g'
+    v41 <- CreateNamedVariable 're', 'const', v40
+    v42 <- CallFunction v2, [v41]
+EndPlainFunction
+v43 <- CallFunction v39, []
+v44 <- UnaryOperation '!', v43
+
+
+const str = "a-b-c";
+function test(a3) {
+    ["a","b","c"];
+    a3[Symbol.split](str);
+}
+function f11() {
+    const re = /-/y;
+    re.lastIndex = 1;
+    test(re);
+}
+!f11();
+function f18() {
+    const re = /-/y;
+    re.lastIndex = 3;
+    test(re);
+}
+!f18();
+function f25() {
+    const re = /-/y;
+    re.lastIndex = -1;
+    test(re);
+}
+!f25();
+function f33() {
+    const re = /-/y;
+    test(re);
+}
+!f33();
+function f39() {
+    const re = /-/g;
+    test(re);
+}
+!f39();
+
+FuzzIL program written to corpus/regress-v8-6706.fzil

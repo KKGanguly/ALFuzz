@@ -1,0 +1,18 @@
+v0 <- LoadString ''
+v1 <- CreateNamedVariable 'Symbol', 'none'
+v2 <- GetProperty v1, 'iterator'
+v3 <- CallComputedMethod v0, v2, []
+v4 <- GetProperty v3, '__proto__'
+v5 <- CreateNamedVariable 'p', 'const', v4
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'create', [v5]
+v8 <- CreateNamedVariable 'x', 'let', v7
+v9 <- LoadInteger '42'
+SetProperty v8, 'next', v9
+
+
+const p = ("")[Symbol.iterator]().__proto__;
+let x = Object.create(p);
+x.next = 42;
+
+FuzzIL program written to corpus/string-iterator7.fzil

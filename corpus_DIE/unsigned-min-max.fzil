@@ -1,0 +1,114 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '0'
+    v4 <- BinaryOperation v1, '>>>', v3
+    Reassign v1, v4
+    v5 <- LoadInteger '0'
+    v6 <- BinaryOperation v2, '>>>', v5
+    Reassign v2, v6
+    v7 <- CreateNamedVariable 'Math', 'none'
+    v8 <- CallMethod v7, 'min', [v1, v2]
+    Return v8
+EndPlainFunction
+v9 <- LoadInteger '1'
+v10 <- LoadInteger '1'
+v11 <- CallFunction v0, [v9, v10]
+v12 <- LoadInteger '2'
+v13 <- LoadInteger '2'
+v14 <- CallFunction v0, [v12, v13]
+v15 <- LoadInteger '1'
+v16 <- LoadInteger '1'
+v17 <- LoadInteger '2'
+v18 <- CallFunction v0, [v16, v17]
+v19 <- LoadInteger '1'
+v20 <- LoadInteger '2'
+v21 <- LoadInteger '1'
+v22 <- CallFunction v0, [v20, v21]
+v23 <- LoadInteger '0'
+v24 <- LoadInteger '0'
+v25 <- LoadInteger '4294967295'
+v26 <- CallFunction v0, [v24, v25]
+v27 <- LoadInteger '0'
+v28 <- LoadInteger '4294967295'
+v29 <- LoadInteger '0'
+v30 <- CallFunction v0, [v28, v29]
+v31 <- LoadInteger '4294967294'
+v32 <- LoadInteger '1'
+v33 <- UnaryOperation '-', v32
+v34 <- LoadInteger '2'
+v35 <- UnaryOperation '-', v34
+v36 <- CallFunction v0, [v33, v35]
+v37 <- LoadInteger '1234'
+v38 <- LoadInteger '2'
+v39 <- UnaryOperation '-', v38
+v40 <- LoadInteger '1234'
+v41 <- CallFunction v0, [v39, v40]
+v42 <- BeginPlainFunction -> v43, v44
+    v45 <- LoadInteger '0'
+    v46 <- BinaryOperation v43, '>>>', v45
+    Reassign v43, v46
+    v47 <- LoadInteger '0'
+    v48 <- BinaryOperation v44, '>>>', v47
+    Reassign v44, v48
+    v49 <- CreateNamedVariable 'Math', 'none'
+    v50 <- CallMethod v49, 'max', [v43, v44]
+    Return v50
+EndPlainFunction
+v51 <- LoadInteger '1'
+v52 <- LoadInteger '1'
+v53 <- CallFunction v42, [v51, v52]
+v54 <- LoadInteger '2'
+v55 <- LoadInteger '2'
+v56 <- CallFunction v42, [v54, v55]
+v57 <- LoadInteger '2'
+v58 <- LoadInteger '1'
+v59 <- LoadInteger '2'
+v60 <- CallFunction v42, [v58, v59]
+v61 <- LoadInteger '2'
+v62 <- LoadInteger '2'
+v63 <- LoadInteger '1'
+v64 <- CallFunction v42, [v62, v63]
+v65 <- LoadInteger '4294967295'
+v66 <- LoadInteger '0'
+v67 <- LoadInteger '4294967295'
+v68 <- CallFunction v42, [v66, v67]
+v69 <- LoadInteger '4294967295'
+v70 <- LoadInteger '4294967295'
+v71 <- LoadInteger '0'
+v72 <- CallFunction v42, [v70, v71]
+v73 <- LoadInteger '4294967295'
+v74 <- LoadInteger '1'
+v75 <- UnaryOperation '-', v74
+v76 <- LoadInteger '2'
+v77 <- UnaryOperation '-', v76
+v78 <- CallFunction v42, [v75, v77]
+v79 <- LoadInteger '4294967294'
+v80 <- LoadInteger '2'
+v81 <- UnaryOperation '-', v80
+v82 <- LoadInteger '1234'
+v83 <- CallFunction v42, [v81, v82]
+
+
+function umin(a1, a2) {
+    return Math.min(a1 = a1 >>> 0, a2 = a2 >>> 0);
+}
+umin(1, 1);
+umin(2, 2);
+umin(1, 2);
+umin(2, 1);
+umin(0, 4294967295);
+umin(4294967295, 0);
+umin(-1, -2);
+umin(-2, 1234);
+function umax(a43, a44) {
+    return Math.max(a43 = a43 >>> 0, a44 = a44 >>> 0);
+}
+umax(1, 1);
+umax(2, 2);
+umax(1, 2);
+umax(2, 1);
+umax(0, 4294967295);
+umax(4294967295, 0);
+umax(-1, -2);
+umax(-2, 1234);
+
+FuzzIL program written to corpus/unsigned-min-max.fzil

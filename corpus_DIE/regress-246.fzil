@@ -1,0 +1,15 @@
+v0 <- LoadString 'text'
+v1 <- LoadRegExp '(?:text)' ''
+v2 <- CallMethod v1, 'test', [v0]
+v3 <- LoadString 'text'
+v4 <- CreateArray [v3]
+v5 <- LoadString 'text'
+v6 <- LoadRegExp '(?:text)' ''
+v7 <- CallMethod v6, 'exec', [v5]
+
+
+/(?:text)/.test("text");
+["text"];
+/(?:text)/.exec("text");
+
+FuzzIL program written to corpus/regress-246.fzil

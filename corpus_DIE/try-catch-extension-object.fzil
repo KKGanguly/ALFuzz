@@ -1,0 +1,60 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'setterCalled', 'var', v0
+v2 <- LoadString 'x'
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadBoolean 'true'
+    Reassign v1, v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- GetProperty v5, 'prototype'
+v7 <- CallMethod v6, '__defineSetter__', [v2, v3]
+v8 <- BeginPlainFunction -> v9
+    v10 <- LoadBoolean 'false'
+    Reassign v1, v10
+    v11 <- CallFunction v9, []
+EndPlainFunction
+v12 <- BeginPlainFunction -> 
+    BeginTry
+        v13 <- LoadInteger '42'
+        ThrowException v13
+    BeginCatch -> v14
+        v15 <- LoadInteger '42'
+    EndTryCatch
+EndPlainFunction
+v16 <- BeginPlainFunction -> 
+    BeginTry
+        v17 <- LoadInteger '42'
+        ThrowException v17
+    BeginCatch -> v18
+        v19 <- LoadInteger '42'
+    EndTryCatch
+EndPlainFunction
+v20 <- CallFunction v8, [v12]
+v21 <- CallFunction v8, [v16]
+
+
+var setterCalled = false;
+function f3() {
+    setterCalled = true;
+}
+Object.prototype.__defineSetter__("x", f3);
+function runTest(a9) {
+    setterCalled = false;
+    a9();
+}
+function testProto() {
+    try {
+        throw 42;
+    } catch(e14) {
+    }
+}
+function testAccessorSetter() {
+    try {
+        throw 42;
+    } catch(e18) {
+    }
+}
+runTest(testProto);
+runTest(testAccessorSetter);
+
+FuzzIL program written to corpus/try-catch-extension-object.fzil

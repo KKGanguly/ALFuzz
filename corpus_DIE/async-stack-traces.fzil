@@ -1,0 +1,609 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginAsyncFunction -> v2
+        v3 <- CreateNamedVariable 'two', 'none'
+        v4 <- CallFunction v3, [v2]
+        v5 <- Await v4
+    EndAsyncFunction
+    v6 <- BeginAsyncFunction -> v7
+        v8 <- Await v7
+        v9 <- CreateNamedVariable 'Error', 'none'
+        v10 <- Construct v9, []
+        ThrowException v10
+    EndAsyncFunction
+    v11 <- BeginAsyncFunction -> v12
+        BeginTry
+            v13 <- LoadInteger '1'
+            v14 <- CallFunction v12, [v13]
+            v15 <- Await v14
+        BeginCatch -> v16
+            v17 <- CreateNamedVariable 'Error', 'none'
+            v18 <- LoadRegExp 'Error.+at two.+at async one.+at async test' 'sm'
+            v19 <- GetProperty v16, 'stack'
+        EndTryCatch
+    EndAsyncFunction
+    v20 <- BeginAsyncArrowFunction -> 
+        v21 <- CallFunction v11, [v1]
+        v22 <- Await v21
+        v23 <- CallFunction v11, [v1]
+        v24 <- Await v23
+        v25 <- CallFunction v11, [v1]
+        v26 <- Await v25
+        v27 <- CallFunction v11, [v1]
+        v28 <- Await v27
+    EndAsyncArrowFunction
+    v29 <- CallFunction v20, []
+EndPlainFunction
+v30 <- CallFunction v0, []
+v31 <- BeginPlainFunction -> 
+    v32 <- BeginAsyncFunction -> v33
+        v34 <- CreateNamedVariable 'two', 'none'
+        v35 <- CallFunction v34, [v33]
+        v36 <- Await v35
+        Return v36
+    EndAsyncFunction
+    v37 <- BeginAsyncFunction -> v38
+        v39 <- Await v38
+        v40 <- UnaryOperation '+', v38
+        Return v40
+    EndAsyncFunction
+    v41 <- BeginAsyncFunction -> v42
+        BeginTry
+            v43 <- CreateNamedVariable 'Symbol', 'none'
+            v44 <- CallFunction v43, []
+            v45 <- CallFunction v42, [v44]
+            v46 <- Await v45
+        BeginCatch -> v47
+            v48 <- CreateNamedVariable 'TypeError', 'none'
+            v49 <- LoadRegExp 'TypeError.+at two.+at async one.+at async test' 'sm'
+            v50 <- GetProperty v47, 'stack'
+        EndTryCatch
+    EndAsyncFunction
+    v51 <- BeginAsyncArrowFunction -> 
+        v52 <- CallFunction v41, [v32]
+        v53 <- Await v52
+        v54 <- CallFunction v41, [v32]
+        v55 <- Await v54
+        v56 <- CallFunction v41, [v32]
+        v57 <- Await v56
+        v58 <- CallFunction v41, [v32]
+        v59 <- Await v58
+    EndAsyncArrowFunction
+    v60 <- CallFunction v51, []
+EndPlainFunction
+v61 <- CallFunction v31, []
+v62 <- BeginPlainFunction -> 
+    v63 <- BeginPlainFunction -> 
+        v64 <- CreateNamedVariable 'Error', 'none'
+        v65 <- Construct v64, []
+        ThrowException v65
+    EndPlainFunction
+    v66 <- BeginAsyncFunction -> v67
+        v68 <- CreateNamedVariable 'two', 'none'
+        v69 <- CallFunction v68, [v67]
+        v70 <- Await v69
+        Return v70
+    EndAsyncFunction
+    v71 <- BeginAsyncFunction -> v72
+        v73 <- Await v72
+        v74 <- CallFunction v63, []
+        Return v74
+    EndAsyncFunction
+    v75 <- BeginAsyncFunction -> v76
+        BeginTry
+            v77 <- LoadInteger '1'
+            v78 <- CallFunction v76, [v77]
+            v79 <- Await v78
+        BeginCatch -> v80
+            v81 <- CreateNamedVariable 'Error', 'none'
+            v82 <- LoadRegExp 'Error.+at two.+at async one.+at async test' 'sm'
+            v83 <- GetProperty v80, 'stack'
+        EndTryCatch
+    EndAsyncFunction
+    v84 <- BeginAsyncArrowFunction -> 
+        v85 <- CallFunction v75, [v66]
+        v86 <- Await v85
+        v87 <- CallFunction v75, [v66]
+        v88 <- Await v87
+        v89 <- CallFunction v75, [v66]
+        v90 <- Await v89
+        v91 <- CallFunction v75, [v66]
+        v92 <- Await v91
+    EndAsyncArrowFunction
+    v93 <- CallFunction v84, []
+EndPlainFunction
+v94 <- CallFunction v62, []
+v95 <- BeginPlainFunction -> 
+    v96 <- BeginPlainFunction -> v97
+        v98 <- CreateNamedVariable 'one', 'none'
+        v99 <- CallFunction v98, [v97]
+        Return v99
+    EndPlainFunction
+    v100 <- BeginPlainFunction -> v101
+        v102 <- CreateNamedVariable 'two', 'none'
+        v103 <- CallFunction v102, [v101]
+        Return v103
+    EndPlainFunction
+    v104 <- BeginAsyncFunction -> v105
+        v106 <- CallFunction v100, [v105]
+        v107 <- Await v106
+        Return v107
+    EndAsyncFunction
+    v108 <- BeginAsyncFunction -> v109
+        v110 <- Await v109
+        v111 <- CreateNamedVariable 'Error', 'none'
+        v112 <- Construct v111, []
+        ThrowException v112
+    EndAsyncFunction
+    v113 <- BeginAsyncFunction -> v114
+        BeginTry
+            v115 <- LoadInteger '1'
+            v116 <- CallFunction v114, [v115]
+            v117 <- Await v116
+        BeginCatch -> v118
+            v119 <- CreateNamedVariable 'Error', 'none'
+            v120 <- LoadRegExp 'Error.+at two.+at async one.+at async test' 'sm'
+            v121 <- GetProperty v118, 'stack'
+        EndTryCatch
+    EndAsyncFunction
+    v122 <- BeginAsyncArrowFunction -> 
+        v123 <- CallFunction v113, [v96]
+        v124 <- Await v123
+        v125 <- CallFunction v113, [v96]
+        v126 <- Await v125
+        v127 <- CallFunction v113, [v96]
+        v128 <- Await v127
+        v129 <- CallFunction v113, [v96]
+        v130 <- Await v129
+    EndAsyncArrowFunction
+    v131 <- CallFunction v122, []
+EndPlainFunction
+v132 <- CallFunction v95, []
+v133 <- BeginPlainFunction -> 
+    v134 <- BeginAsyncFunction -> v135
+        v136 <- BeginArrowFunction -> v137
+            Return v137
+        EndArrowFunction
+        v138 <- CreateNamedVariable 'two', 'none'
+        v139 <- CallFunction v138, [v135]
+        v140 <- CallMethod v139, 'then', [v136]
+        v141 <- Await v140
+        Return v141
+    EndAsyncFunction
+    v142 <- BeginAsyncFunction -> v143
+        v144 <- BeginArrowFunction -> v145
+            Return v145
+        EndArrowFunction
+        v146 <- CallMethod v143, 'then', [v144]
+        v147 <- Await v146
+        v148 <- CreateNamedVariable 'Error', 'none'
+        v149 <- Construct v148, []
+        ThrowException v149
+    EndAsyncFunction
+    v150 <- BeginAsyncFunction -> v151
+        BeginTry
+            v152 <- LoadInteger '1'
+            v153 <- CreateNamedVariable 'Promise', 'none'
+            v154 <- CallMethod v153, 'resolve', [v152]
+            v155 <- CallFunction v151, [v154]
+            v156 <- Await v155
+        BeginCatch -> v157
+            v158 <- CreateNamedVariable 'Error', 'none'
+            v159 <- LoadRegExp 'Error.+at two.+at async one.+at async test' 'sm'
+            v160 <- GetProperty v157, 'stack'
+        EndTryCatch
+    EndAsyncFunction
+    v161 <- BeginAsyncArrowFunction -> 
+        v162 <- CallFunction v150, [v134]
+        v163 <- Await v162
+        v164 <- CallFunction v150, [v134]
+        v165 <- Await v164
+        v166 <- CallFunction v150, [v134]
+        v167 <- Await v166
+        v168 <- CallFunction v150, [v134]
+        v169 <- Await v168
+    EndAsyncArrowFunction
+    v170 <- CallFunction v161, []
+EndPlainFunction
+v171 <- CallFunction v133, []
+v172 <- BeginPlainFunction -> 
+    v173 <- BeginAsyncFunction -> v174
+        v175 <- CreateNamedVariable 'two', 'none'
+        v176 <- CallFunction v175, [v174]
+        BeginForOfLoop v176 -> v177
+        EndForOfLoop
+    EndAsyncFunction
+    v178 <- BeginAsyncGeneratorFunction -> v179
+        v180 <- Await v179
+        v181 <- CreateNamedVariable 'Error', 'none'
+        v182 <- Construct v181, []
+        ThrowException v182
+    EndAsyncGeneratorFunction
+    v183 <- BeginAsyncFunction -> v184
+        BeginTry
+            v185 <- LoadInteger '1'
+            v186 <- CallFunction v184, [v185]
+            v187 <- Await v186
+        BeginCatch -> v188
+            v189 <- CreateNamedVariable 'Error', 'none'
+            v190 <- LoadRegExp 'Error.+at two.+at async one.+at async test' 'sm'
+            v191 <- GetProperty v188, 'stack'
+        EndTryCatch
+    EndAsyncFunction
+    v192 <- BeginAsyncArrowFunction -> 
+        v193 <- CallFunction v183, [v173]
+        v194 <- Await v193
+        v195 <- CallFunction v183, [v173]
+        v196 <- Await v195
+        v197 <- CallFunction v183, [v173]
+        v198 <- Await v197
+        v199 <- CallFunction v183, [v173]
+        v200 <- Await v199
+    EndAsyncArrowFunction
+    v201 <- CallFunction v192, []
+EndPlainFunction
+v202 <- CallFunction v172, []
+v203 <- BeginPlainFunction -> 
+    v204 <- BeginAsyncGeneratorFunction -> v205
+        v206 <- CreateNamedVariable 'two', 'none'
+        v207 <- CallFunction v206, [v205]
+        v208 <- Await v207
+    EndAsyncGeneratorFunction
+    v209 <- BeginAsyncFunction -> v210
+        v211 <- Await v210
+        v212 <- CreateNamedVariable 'Error', 'none'
+        v213 <- Construct v212, []
+        ThrowException v213
+    EndAsyncFunction
+    v214 <- BeginAsyncFunction -> v215
+        BeginTry
+            v216 <- LoadInteger '1'
+            v217 <- CallFunction v215, [v216]
+            BeginForOfLoop v217 -> v218
+            EndForOfLoop
+        BeginCatch -> v219
+            v220 <- CreateNamedVariable 'Error', 'none'
+            v221 <- LoadRegExp 'Error.+at two.+at async one.+at async test' 'sm'
+            v222 <- GetProperty v219, 'stack'
+        EndTryCatch
+    EndAsyncFunction
+    v223 <- BeginAsyncArrowFunction -> 
+        v224 <- CallFunction v214, [v204]
+        v225 <- Await v224
+        v226 <- CallFunction v214, [v204]
+        v227 <- Await v226
+        v228 <- CallFunction v214, [v204]
+        v229 <- Await v228
+        v230 <- CallFunction v214, [v204]
+        v231 <- Await v230
+    EndAsyncArrowFunction
+    v232 <- CallFunction v223, []
+EndPlainFunction
+v233 <- CallFunction v203, []
+v234 <- BeginPlainFunction -> 
+    v235 <- BeginAsyncGeneratorFunction -> v236
+        v237 <- CreateNamedVariable 'two', 'none'
+        v238 <- CallFunction v237, [v236]
+        v239 <- Yield v238
+    EndAsyncGeneratorFunction
+    v240 <- BeginAsyncFunction -> v241
+        v242 <- Await v241
+        v243 <- CreateNamedVariable 'Error', 'none'
+        v244 <- Construct v243, []
+        ThrowException v244
+    EndAsyncFunction
+    v245 <- BeginAsyncFunction -> v246
+        BeginTry
+            v247 <- LoadInteger '1'
+            v248 <- CallFunction v246, [v247]
+            BeginForOfLoop v248 -> v249
+            EndForOfLoop
+        BeginCatch -> v250
+            v251 <- CreateNamedVariable 'Error', 'none'
+            v252 <- LoadRegExp 'Error.+at two.+at async one.+at async test' 'sm'
+            v253 <- GetProperty v250, 'stack'
+        EndTryCatch
+    EndAsyncFunction
+    v254 <- BeginAsyncArrowFunction -> 
+        v255 <- CallFunction v245, [v235]
+        v256 <- Await v255
+        v257 <- CallFunction v245, [v235]
+        v258 <- Await v257
+        v259 <- CallFunction v245, [v235]
+        v260 <- Await v259
+        v261 <- CallFunction v245, [v235]
+        v262 <- Await v261
+    EndAsyncArrowFunction
+    v263 <- CallFunction v254, []
+EndPlainFunction
+v264 <- CallFunction v234, []
+v265 <- BeginPlainFunction -> 
+    v266 <- BeginAsyncFunction -> v267
+        v268 <- CreateNamedVariable 'two', 'none'
+        v269 <- CallMethod v267, 'then', [v268]
+        v270 <- Await v269
+        Return v270
+    EndAsyncFunction
+    v271 <- BeginPlainFunction -> 
+        v272 <- CreateNamedVariable 'Error', 'none'
+        v273 <- Construct v272, []
+        ThrowException v273
+    EndPlainFunction
+    v274 <- BeginAsyncFunction -> v275
+        BeginTry
+            v276 <- CreateNamedVariable 'Promise', 'none'
+            v277 <- CallMethod v276, 'resolve', []
+            v278 <- CallFunction v275, [v277]
+            v279 <- Await v278
+        BeginCatch -> v280
+            v281 <- CreateNamedVariable 'Error', 'none'
+            v282 <- LoadRegExp 'Error.+at two.+at async one.+at async test' 'sm'
+            v283 <- GetProperty v280, 'stack'
+        EndTryCatch
+    EndAsyncFunction
+    v284 <- BeginAsyncArrowFunction -> 
+        v285 <- CallFunction v274, [v266]
+        v286 <- Await v285
+        v287 <- CallFunction v274, [v266]
+        v288 <- Await v287
+        v289 <- CallFunction v274, [v266]
+        v290 <- Await v289
+        v291 <- CallFunction v274, [v266]
+        v292 <- Await v291
+    EndAsyncArrowFunction
+    v293 <- CallFunction v284, []
+EndPlainFunction
+v294 <- CallFunction v265, []
+
+
+function f0() {
+    async function one(a2) {
+        await two(a2);
+    }
+    async function two(a7) {
+        await a7;
+        const v10 = new Error();
+        throw v10;
+    }
+    async function test(a12) {
+        try {
+            await a12(1);
+        } catch(e16) {
+            /Error.+at two.+at async one.+at async test/sm;
+            e16.stack;
+        }
+    }
+    const v20 = async () => {
+        await test(one);
+        await test(one);
+        await test(one);
+        await test(one);
+    };
+    v20();
+}
+f0();
+function f31() {
+    async function one(a33) {
+        return await two(a33);
+    }
+    async function two(a38) {
+        await a38;
+        return +a38;
+    }
+    async function test(a42) {
+        try {
+            await a42(Symbol());
+        } catch(e47) {
+            /TypeError.+at two.+at async one.+at async test/sm;
+            e47.stack;
+        }
+    }
+    const v51 = async () => {
+        await test(one);
+        await test(one);
+        await test(one);
+        await test(one);
+    };
+    v51();
+}
+f31();
+function f62() {
+    function throwError() {
+        const v65 = new Error();
+        throw v65;
+    }
+    async function one(a67) {
+        return await two(a67);
+    }
+    async function two(a72) {
+        await a72;
+        return throwError();
+    }
+    async function test(a76) {
+        try {
+            await a76(1);
+        } catch(e80) {
+            /Error.+at two.+at async one.+at async test/sm;
+            e80.stack;
+        }
+    }
+    const v84 = async () => {
+        await test(one);
+        await test(one);
+        await test(one);
+        await test(one);
+    };
+    v84();
+}
+f62();
+function f95() {
+    function callOne(a97) {
+        return one(a97);
+    }
+    function callTwo(a101) {
+        return two(a101);
+    }
+    async function one(a105) {
+        return await callTwo(a105);
+    }
+    async function two(a109) {
+        await a109;
+        const v112 = new Error();
+        throw v112;
+    }
+    async function test(a114) {
+        try {
+            await a114(1);
+        } catch(e118) {
+            /Error.+at two.+at async one.+at async test/sm;
+            e118.stack;
+        }
+    }
+    const v122 = async () => {
+        await test(callOne);
+        await test(callOne);
+        await test(callOne);
+        await test(callOne);
+    };
+    v122();
+}
+f95();
+function f133() {
+    async function one(a135) {
+        const v136 = (a137) => {
+            return a137;
+        };
+        return await two(a135).then(v136);
+    }
+    async function two(a143) {
+        const v144 = (a145) => {
+            return a145;
+        };
+        await a143.then(v144);
+        const v149 = new Error();
+        throw v149;
+    }
+    async function test(a151) {
+        try {
+            await a151(Promise.resolve(1));
+        } catch(e157) {
+            /Error.+at two.+at async one.+at async test/sm;
+            e157.stack;
+        }
+    }
+    const v161 = async () => {
+        await test(one);
+        await test(one);
+        await test(one);
+        await test(one);
+    };
+    v161();
+}
+f133();
+function f172() {
+    async function one(a174) {
+        for (const v177 of two(a174)) {
+        }
+    }
+    async function* two(a179) {
+        await a179;
+        const v182 = new Error();
+        throw v182;
+    }
+    async function test(a184) {
+        try {
+            await a184(1);
+        } catch(e188) {
+            /Error.+at two.+at async one.+at async test/sm;
+            e188.stack;
+        }
+    }
+    const v192 = async () => {
+        await test(one);
+        await test(one);
+        await test(one);
+        await test(one);
+    };
+    v192();
+}
+f172();
+function f203() {
+    async function* one(a205) {
+        await two(a205);
+    }
+    async function two(a210) {
+        await a210;
+        const v213 = new Error();
+        throw v213;
+    }
+    async function test(a215) {
+        try {
+            for (const v218 of a215(1)) {
+            }
+        } catch(e219) {
+            /Error.+at two.+at async one.+at async test/sm;
+            e219.stack;
+        }
+    }
+    const v223 = async () => {
+        await test(one);
+        await test(one);
+        await test(one);
+        await test(one);
+    };
+    v223();
+}
+f203();
+function f234() {
+    async function* one(a236) {
+        yield two(a236);
+    }
+    async function two(a241) {
+        await a241;
+        const v244 = new Error();
+        throw v244;
+    }
+    async function test(a246) {
+        try {
+            for (const v249 of a246(1)) {
+            }
+        } catch(e250) {
+            /Error.+at two.+at async one.+at async test/sm;
+            e250.stack;
+        }
+    }
+    const v254 = async () => {
+        await test(one);
+        await test(one);
+        await test(one);
+        await test(one);
+    };
+    v254();
+}
+f234();
+function f265() {
+    async function one(a267) {
+        return await a267.then(two);
+    }
+    function two() {
+        const v273 = new Error();
+        throw v273;
+    }
+    async function test(a275) {
+        try {
+            await a275(Promise.resolve());
+        } catch(e280) {
+            /Error.+at two.+at async one.+at async test/sm;
+            e280.stack;
+        }
+    }
+    const v284 = async () => {
+        await test(one);
+        await test(one);
+        await test(one);
+        await test(one);
+    };
+    v284();
+}
+f265();
+
+FuzzIL program written to corpus/async-stack-traces.fzil

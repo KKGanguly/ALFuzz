@@ -1,0 +1,10 @@
+v0 <- LoadString 'prototype'
+v1 <- CreateNamedVariable 'Error', 'none'
+v2 <- GetProperty v1, 'prototype'
+v3 <- GetProperty v2, 'toString'
+v4 <- CallMethod v3, 'hasOwnProperty', [v0]
+
+
+Error.prototype.toString.hasOwnProperty("prototype");
+
+FuzzIL program written to corpus/regress-1218.fzil

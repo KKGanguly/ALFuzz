@@ -1,0 +1,57 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- CreateNamedVariable 'x', 'var', v2
+    BeginIf v1
+        v4 <- LoadString 'foo'
+        v5 <- BinaryOperation v3, '+', v4
+        Reassign v3, v5
+        v6 <- CreateNamedVariable 'gc', 'none'
+        v7 <- CallFunction v6, []
+    EndIf
+    v8 <- LoadThis
+    SetProperty v8, 'x', v3
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    v11 <- Construct v0, [v10]
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v12
+v13 <- EndObjectLiteral
+v14 <- LoadBoolean 'false'
+v15 <- CallFunction v9, [v14]
+v16 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v16
+v17 <- EndObjectLiteral
+v18 <- LoadBoolean 'false'
+v19 <- CallFunction v9, [v18]
+v20 <- LoadString '1foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v20
+v21 <- EndObjectLiteral
+v22 <- LoadBoolean 'true'
+v23 <- CallFunction v9, [v22]
+
+
+function f(a1) {
+    var x = 1;
+    if (a1) {
+        x = x + "foo";
+        gc();
+    }
+    this.x = x;
+}
+function g(a10) {
+    const v11 = new f(a10);
+    return v11;
+}
+const v13 = { x: 1 };
+g(false);
+const v17 = { x: 1 };
+g(false);
+const v21 = { x: "1foo" };
+g(true);
+
+FuzzIL program written to corpus/regress-124594.fzil

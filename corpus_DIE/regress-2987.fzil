@@ -1,0 +1,68 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadThis
+    SetProperty v2, 'x', v1
+EndPlainFunction
+v3 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `deopt`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'deopt', 'var', v4
+v6 <- BeginPlainFunction -> v7, v8
+    v9 <- Construct v0, []
+    v10 <- CreateNamedVariable 'object', 'var', v9
+    BeginIf v7
+        v11 <- LoadInteger '1'
+        SetProperty v10, 'x', v11
+    BeginElse
+        v12 <- LoadInteger '2'
+        SetProperty v10, 'x', v12
+    EndIf
+    v13 <- GetProperty v5, 'deopt'
+    v14 <- GetProperty v10, 'x'
+EndPlainFunction
+v15 <- LoadBoolean 'true'
+v16 <- LoadInteger '1'
+v17 <- CallFunction v6, [v15, v16]
+v18 <- LoadBoolean 'true'
+v19 <- LoadInteger '1'
+v20 <- CallFunction v6, [v18, v19]
+v21 <- LoadBoolean 'false'
+v22 <- LoadInteger '2'
+v23 <- CallFunction v6, [v21, v22]
+v24 <- LoadBoolean 'false'
+v25 <- LoadInteger '2'
+v26 <- CallFunction v6, [v24, v25]
+v27 <- LoadBoolean 'false'
+v28 <- LoadInteger '2'
+v29 <- CallFunction v6, [v27, v28]
+v30 <- DeleteProperty v5, 'deopt'
+v31 <- LoadBoolean 'false'
+v32 <- LoadInteger '2'
+v33 <- CallFunction v6, [v31, v32]
+
+
+function constructor() {
+    this.x = 0;
+}
+var deopt = { deopt: false };
+function boogeyman(a7, a8) {
+    const v9 = new constructor();
+    var object = v9;
+    if (a7) {
+        object.x = 1;
+    } else {
+        object.x = 2;
+    }
+    deopt.deopt;
+    object.x;
+}
+boogeyman(true, 1);
+boogeyman(true, 1);
+boogeyman(false, 2);
+boogeyman(false, 2);
+boogeyman(false, 2);
+delete deopt.deopt;
+boogeyman(false, 2);
+
+FuzzIL program written to corpus/regress-2987.fzil

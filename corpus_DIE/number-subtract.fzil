@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v2
+        v3 <- EndObjectLiteral
+        v4 <- GetProperty v3, 'x'
+        v5 <- BinaryOperation v4, '-', v2
+        Return v5
+    EndPlainFunction
+    v6 <- LoadNull
+    v7 <- CallFunction v1, [v6]
+    v8 <- LoadUndefined
+    v9 <- CallFunction v1, [v8]
+    v10 <- BeginPlainFunction -> v11
+        v12 <- LoadInteger '42'
+        v13 <- CallFunction v1, [v12]
+        v14 <- LoadInteger '0'
+        v15 <- BinaryOperation v13, '|', v14
+        Return v15
+    EndPlainFunction
+    v16 <- LoadInteger '0'
+    v17 <- CallFunction v10, []
+    v18 <- LoadInteger '0'
+    v19 <- CallFunction v10, []
+    v20 <- LoadInteger '0'
+    v21 <- CallFunction v10, []
+EndPlainFunction
+v22 <- CallFunction v0, []
+
+
+function f0() {
+    function baz(a2) {
+        return ({ x: a2 }).x - a2;
+    }
+    baz(null);
+    baz(undefined);
+    function foo(a11) {
+        return baz(42) | 0;
+    }
+    foo();
+    foo();
+    foo();
+}
+f0();
+
+FuzzIL program written to corpus/number-subtract.fzil

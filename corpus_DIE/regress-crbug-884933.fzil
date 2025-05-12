@@ -1,0 +1,204 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        v4 <- BinaryOperation v2, '+', v3
+        Return v4
+    EndPlainFunction
+    v5 <- LoadFloat '0.1'
+    v6 <- LoadFloat '0.2'
+    v7 <- CallFunction v1, [v5, v6]
+    v8 <- LoadFloat '0.1'
+    v9 <- LoadFloat '0.2'
+    v10 <- CallFunction v1, [v8, v9]
+    v11 <- BeginPlainFunction -> v12
+        v13 <- LoadInteger '0'
+        v14 <- LoadBoolean 'true'
+        v15 <- CallMethod v12, 'getUint8', [v13, v14]
+        v16 <- LoadInteger '4294967295'
+        v17 <- CallFunction v1, [v15, v16]
+        Return v17
+    EndPlainFunction
+    v18 <- CreateNamedVariable 'DataView', 'none'
+    v19 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v20 <- LoadInteger '8'
+    v21 <- Construct v19, [v20]
+    v22 <- Construct v18, [v21]
+    v23 <- CreateNamedVariable 'dv', 'const', v22
+    v24 <- LoadInteger '4294967295'
+    v25 <- CallFunction v11, [v23]
+    v26 <- LoadInteger '4294967295'
+    v27 <- CallFunction v11, [v23]
+    v28 <- LoadInteger '4294967295'
+    v29 <- CallFunction v11, [v23]
+EndPlainFunction
+v30 <- CallFunction v0, []
+v31 <- BeginPlainFunction -> 
+    v32 <- BeginPlainFunction -> v33, v34
+        v35 <- BinaryOperation v33, '+', v34
+        Return v35
+    EndPlainFunction
+    v36 <- LoadFloat '0.1'
+    v37 <- LoadFloat '0.2'
+    v38 <- CallFunction v32, [v36, v37]
+    v39 <- LoadFloat '0.1'
+    v40 <- LoadFloat '0.2'
+    v41 <- CallFunction v32, [v39, v40]
+    v42 <- BeginPlainFunction -> v43
+        v44 <- LoadInteger '0'
+        v45 <- LoadBoolean 'true'
+        v46 <- CallMethod v43, 'getInt8', [v44, v45]
+        v47 <- LoadInteger '4294967295'
+        v48 <- CallFunction v32, [v46, v47]
+        Return v48
+    EndPlainFunction
+    v49 <- CreateNamedVariable 'DataView', 'none'
+    v50 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v51 <- LoadInteger '8'
+    v52 <- Construct v50, [v51]
+    v53 <- Construct v49, [v52]
+    v54 <- CreateNamedVariable 'dv', 'const', v53
+    v55 <- LoadInteger '4294967295'
+    v56 <- CallFunction v42, [v54]
+    v57 <- LoadInteger '4294967295'
+    v58 <- CallFunction v42, [v54]
+    v59 <- LoadInteger '4294967295'
+    v60 <- CallFunction v42, [v54]
+EndPlainFunction
+v61 <- CallFunction v31, []
+v62 <- BeginPlainFunction -> 
+    v63 <- BeginPlainFunction -> v64, v65
+        v66 <- BinaryOperation v64, '+', v65
+        Return v66
+    EndPlainFunction
+    v67 <- LoadFloat '0.1'
+    v68 <- LoadFloat '0.2'
+    v69 <- CallFunction v63, [v67, v68]
+    v70 <- LoadFloat '0.1'
+    v71 <- LoadFloat '0.2'
+    v72 <- CallFunction v63, [v70, v71]
+    v73 <- BeginPlainFunction -> v74
+        v75 <- LoadInteger '0'
+        v76 <- LoadBoolean 'true'
+        v77 <- CallMethod v74, 'getUint16', [v75, v76]
+        v78 <- LoadInteger '4294967295'
+        v79 <- CallFunction v63, [v77, v78]
+        Return v79
+    EndPlainFunction
+    v80 <- CreateNamedVariable 'DataView', 'none'
+    v81 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v82 <- LoadInteger '8'
+    v83 <- Construct v81, [v82]
+    v84 <- Construct v80, [v83]
+    v85 <- CreateNamedVariable 'dv', 'const', v84
+    v86 <- LoadInteger '4294967295'
+    v87 <- CallFunction v73, [v85]
+    v88 <- LoadInteger '4294967295'
+    v89 <- CallFunction v73, [v85]
+    v90 <- LoadInteger '4294967295'
+    v91 <- CallFunction v73, [v85]
+EndPlainFunction
+v92 <- CallFunction v62, []
+v93 <- BeginPlainFunction -> 
+    v94 <- BeginPlainFunction -> v95, v96
+        v97 <- BinaryOperation v95, '+', v96
+        Return v97
+    EndPlainFunction
+    v98 <- LoadFloat '0.1'
+    v99 <- LoadFloat '0.2'
+    v100 <- CallFunction v94, [v98, v99]
+    v101 <- LoadFloat '0.1'
+    v102 <- LoadFloat '0.2'
+    v103 <- CallFunction v94, [v101, v102]
+    v104 <- BeginPlainFunction -> v105
+        v106 <- LoadInteger '0'
+        v107 <- LoadBoolean 'true'
+        v108 <- CallMethod v105, 'getInt16', [v106, v107]
+        v109 <- LoadInteger '4294967295'
+        v110 <- CallFunction v94, [v108, v109]
+        Return v110
+    EndPlainFunction
+    v111 <- CreateNamedVariable 'DataView', 'none'
+    v112 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v113 <- LoadInteger '8'
+    v114 <- Construct v112, [v113]
+    v115 <- Construct v111, [v114]
+    v116 <- CreateNamedVariable 'dv', 'const', v115
+    v117 <- LoadInteger '4294967295'
+    v118 <- CallFunction v104, [v116]
+    v119 <- LoadInteger '4294967295'
+    v120 <- CallFunction v104, [v116]
+    v121 <- LoadInteger '4294967295'
+    v122 <- CallFunction v104, [v116]
+EndPlainFunction
+v123 <- CallFunction v93, []
+
+
+function f0() {
+    function bar(a2, a3) {
+        return a2 + a3;
+    }
+    bar(0.1, 0.2);
+    bar(0.1, 0.2);
+    function foo(a12) {
+        return bar(a12.getUint8(0, true), 4294967295);
+    }
+    const v21 = new ArrayBuffer(8);
+    const v22 = new DataView(v21);
+    const dv = v22;
+    foo(dv);
+    foo(dv);
+    foo(dv);
+}
+f0();
+function f31() {
+    function bar(a33, a34) {
+        return a33 + a34;
+    }
+    bar(0.1, 0.2);
+    bar(0.1, 0.2);
+    function foo(a43) {
+        return bar(a43.getInt8(0, true), 4294967295);
+    }
+    const v52 = new ArrayBuffer(8);
+    const v53 = new DataView(v52);
+    const dv = v53;
+    foo(dv);
+    foo(dv);
+    foo(dv);
+}
+f31();
+function f62() {
+    function bar(a64, a65) {
+        return a64 + a65;
+    }
+    bar(0.1, 0.2);
+    bar(0.1, 0.2);
+    function foo(a74) {
+        return bar(a74.getUint16(0, true), 4294967295);
+    }
+    const v83 = new ArrayBuffer(8);
+    const v84 = new DataView(v83);
+    const dv = v84;
+    foo(dv);
+    foo(dv);
+    foo(dv);
+}
+f62();
+function f93() {
+    function bar(a95, a96) {
+        return a95 + a96;
+    }
+    bar(0.1, 0.2);
+    bar(0.1, 0.2);
+    function foo(a105) {
+        return bar(a105.getInt16(0, true), 4294967295);
+    }
+    const v114 = new ArrayBuffer(8);
+    const v115 = new DataView(v114);
+    const dv = v115;
+    foo(dv);
+    foo(dv);
+    foo(dv);
+}
+f93();
+
+FuzzIL program written to corpus/regress-crbug-884933.fzil

@@ -1,0 +1,49 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    SetElement v1, '1', v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+EndPlainFunction
+v4 <- LoadInteger '0'
+v5 <- CreateArray [v4]
+v6 <- CreateNamedVariable 'arr1', 'var', v5
+v7 <- LoadInteger '0'
+v8 <- CreateArray [v7]
+v9 <- CreateNamedVariable 'arr2', 'var', v8
+v10 <- LoadInteger '0'
+v11 <- CreateArray [v10]
+v12 <- CreateNamedVariable 'arr3', 'var', v11
+SetProperty v6, 'f', v3
+v13 <- LoadFloat '4.2'
+SetElement v6, '0', v13
+SetProperty v9, 'f', v3
+SetProperty v12, 'f', v3
+v14 <- LoadFloat '4.2'
+SetElement v12, '0', v14
+SetProperty v12, 'f', v0
+v15 <- CallFunction v0, [v6]
+v16 <- CallFunction v0, [v9]
+v17 <- CallFunction v0, [v12]
+v18 <- CallFunction v0, [v12]
+
+
+function f(a1) {
+    a1[1] = 0;
+}
+function foo() {
+}
+var arr1 = [0];
+var arr2 = [0];
+var arr3 = [0];
+arr1.f = foo;
+arr1[0] = 4.2;
+arr2.f = foo;
+arr3.f = foo;
+arr3[0] = 4.2;
+arr3.f = f;
+f(arr1);
+f(arr2);
+f(arr3);
+f(arr3);
+
+FuzzIL program written to corpus/regress-crbug-747979.fzil

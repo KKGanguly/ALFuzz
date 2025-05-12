@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '2'
+    v3 <- LoadInteger '2'
+    v4 <- BinaryOperation v1, '/', v3
+    v5 <- BinaryOperation v2, '*', v4
+    Return v5
+EndPlainFunction
+v6 <- LoadInteger '1'
+v7 <- CallFunction v0, [v6]
+v8 <- LoadInteger '1'
+v9 <- CreateNamedVariable 'ONE', 'var', v8
+v10 <- CallFunction v0, [v9]
+v11 <- CreateNamedVariable 'ANOTHER_ONE', 'var', v10
+v12 <- LoadString 'number'
+v13 <- TypeOf v9
+v14 <- LoadString 'number'
+v15 <- TypeOf v11
+v16 <- CreateNamedVariable 'Set', 'none'
+v17 <- Construct v16, []
+v18 <- CreateNamedVariable 'set', 'var', v17
+v19 <- CallMethod v18, 'add', [v9]
+v20 <- CallMethod v18, 'has', [v9]
+v21 <- CallMethod v18, 'has', [v11]
+v22 <- CreateNamedVariable 'Map', 'none'
+v23 <- Construct v22, []
+v24 <- CreateNamedVariable 'map', 'var', v23
+v25 <- LoadInteger '23'
+v26 <- CallMethod v24, 'set', [v9, v25]
+v27 <- LoadInteger '23'
+v28 <- CallMethod v24, 'get', [v9]
+v29 <- LoadInteger '23'
+v30 <- CallMethod v24, 'get', [v11]
+
+
+function heapify(a1) {
+    return 2 * (a1 / 2);
+}
+heapify(1);
+var ONE = 1;
+var ANOTHER_ONE = heapify(ONE);
+typeof ONE;
+typeof ANOTHER_ONE;
+const v17 = new Set();
+var set = v17;
+set.add(ONE);
+set.has(ONE);
+set.has(ANOTHER_ONE);
+const v23 = new Map();
+var map = v23;
+map.set(ONE, 23);
+map.get(ONE);
+map.get(ANOTHER_ONE);
+
+FuzzIL program written to corpus/regress-2186.fzil

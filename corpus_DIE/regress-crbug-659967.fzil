@@ -1,0 +1,16 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadNull
+    v2 <- LoadArguments
+    v3 <- BinaryOperation v1, '>>', v2
+EndPlainFunction
+v4 <- CallFunction v0, []
+v5 <- CallFunction v0, []
+
+
+function f() {
+    null >> arguments;
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-659967.fzil

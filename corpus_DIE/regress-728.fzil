@@ -1,0 +1,52 @@
+v0 <- LoadString 'obj0'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'obj', 'var', v1
+v3 <- LoadInteger '16777217'
+v4 <- CreateNamedVariable 'k', 'var', v3
+v5 <- LoadString ''
+v6 <- BinaryOperation v5, '+', v4
+v7 <- CreateNamedVariable 'h', 'var', v6
+v8 <- LoadString 'obj'
+v9 <- BinaryOperation v8, '+', v4
+SetComputedProperty v2, v4, v9
+BeginForLoopInitializer
+    v10 <- LoadInteger '0'
+BeginForLoopCondition -> v11
+    v12 <- LoadInteger '10'
+    v13 <- Compare v11, '<', v12
+BeginForLoopAfterthought v13 -> v14
+    v15 <- UnaryOperation v14, '++'
+BeginForLoopBody -> v16
+    BeginObjectLiteral
+    v17 <- EndObjectLiteral
+    v18 <- GetComputedProperty v17, v7
+EndForLoop
+v19 <- BeginPlainFunction -> v20
+    v21 <- GetComputedProperty v2, v20
+    Return v21
+EndPlainFunction
+v22 <- LoadInteger '0'
+v23 <- CallFunction v19, [v22]
+v24 <- LoadString 'obj0'
+v25 <- CallFunction v19, [v7]
+v26 <- LoadString 'obj'
+v27 <- BinaryOperation v26, '+', v7
+
+
+var obj = { 0: "obj0" };
+var k = 16777217;
+var h = "" + k;
+obj[k] = "obj" + k;
+for (let i11 = 0; i11 < 10; i11++) {
+    ({})[h];
+}
+function get(a20) {
+    return obj[a20];
+}
+get(0);
+get(h);
+"obj" + h;
+
+FuzzIL program written to corpus/regress-728.fzil

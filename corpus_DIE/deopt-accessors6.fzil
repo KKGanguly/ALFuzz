@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '153'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'o', 'var', v4
+    v6 <- LoadString 'q'
+    v7 <- CreateNamedVariable 'q', 'var', v6
+    v8 <- CallMethod v5, '__defineSetter__', [v7, v0]
+    v9 <- LoadInteger '1'
+    v10 <- LoadInteger '1'
+    SetComputedProperty v5, v7, v10
+EndPlainFunction
+v11 <- CallFunction v3, []
+v12 <- CallFunction v3, []
+v13 <- CallFunction v3, []
+
+
+function f(a1) {
+    return 153;
+}
+function test() {
+    var o = {};
+    var q = "q";
+    o.__defineSetter__(q, f);
+    o[q] = 1;
+}
+test();
+test();
+test();
+
+FuzzIL program written to corpus/deopt-accessors6.fzil

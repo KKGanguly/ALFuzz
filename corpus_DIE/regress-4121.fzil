@@ -1,0 +1,73 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BeginPlainFunction -> 
+        v4 <- LoadInteger '1'
+        v5 <- LoadInteger '2'
+        v6 <- LoadInteger '3'
+        v7 <- CreateArray [v4, v5, v6]
+        v8 <- CreateNamedVariable 'a', 'var', v7
+        BeginIf v1
+            v9 <- LoadInteger '4'
+            v10 <- LoadFloat '1.3'
+            v11 <- CallMethod v8, 'push', [v10]
+        EndIf
+    EndPlainFunction
+    v12 <- CallFunction v3, []
+EndPlainFunction
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadBoolean 'true'
+    v15 <- CreateNamedVariable 'warmup', 'var', v14
+    BeginForLoopInitializer
+        v16 <- LoadInteger '0'
+    BeginForLoopCondition -> v17
+        v18 <- LoadInteger '3'
+        v19 <- Compare v17, '<', v18
+    BeginForLoopAfterthought v19 -> v20
+        v21 <- UnaryOperation v20, '++'
+    BeginForLoopBody -> v22
+        v23 <- LoadString 'iter: '
+        v24 <- BinaryOperation v23, '+', v22
+        v25 <- LoadString ', warmup: '
+        v26 <- BinaryOperation v24, '+', v25
+        v27 <- BinaryOperation v26, '+', v15
+        v28 <- CreateNamedVariable 'print', 'none'
+        v29 <- CallFunction v28, [v27]
+        v30 <- LoadBoolean 'false'
+        v31 <- CallFunction v0, [v15, v30]
+        v32 <- LoadBoolean 'false'
+        Reassign v15, v32
+    EndForLoop
+    v33 <- LoadString 'iter: '
+    v34 <- CreateNamedVariable 'i', 'none'
+    v35 <- BinaryOperation v33, '+', v34
+    v36 <- LoadString ', opt: true'
+    v37 <- BinaryOperation v35, '+', v36
+    v38 <- CreateNamedVariable 'print', 'none'
+    v39 <- CallFunction v38, [v37]
+    v40 <- LoadBoolean 'true'
+    v41 <- CallFunction v0, [v15, v40]
+EndPlainFunction
+v42 <- CallFunction v13, []
+
+
+function literals_sharing_test(a1, a2) {
+    function closure() {
+        var a = [1,2,3];
+        if (a1) {
+            a.push(1.3);
+        }
+    }
+    closure();
+}
+function test() {
+    var warmup = true;
+    for (let i17 = 0; i17 < 3; i17++) {
+        print((("iter: " + i17) + ", warmup: ") + warmup);
+        literals_sharing_test(warmup, false);
+        warmup = false;
+    }
+    print(("iter: " + i) + ", opt: true");
+    literals_sharing_test(warmup, true);
+}
+test();
+
+FuzzIL program written to corpus/regress-4121.fzil

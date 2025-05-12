@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '50'
+    SetComputedProperty v1, v2, v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- CreateNamedVariable 'Array', 'none'
+    v7 <- LoadInteger '10'
+    v8 <- Construct v6, [v7]
+    v9 <- CreateNamedVariable 'arr', 'var', v8
+    v10 <- LoadInteger '10'
+    v11 <- CallFunction v0, [v9, v10]
+    BeginIf v5
+        v12 <- LoadInteger '2147483648'
+        v13 <- UnaryOperation '-', v12
+        v14 <- CallFunction v0, [v9, v13]
+    EndIf
+EndPlainFunction
+v15 <- LoadBoolean 'false'
+v16 <- CallFunction v4, [v15]
+v17 <- LoadBoolean 'false'
+v18 <- CallFunction v4, [v17]
+
+
+function f(a1, a2) {
+    a1[a2] = 50;
+}
+function boom(a5) {
+    const v8 = new Array(10);
+    var arr = v8;
+    f(arr, 10);
+    if (a5) {
+        f(arr, -2147483648);
+    }
+}
+boom(false);
+boom(false);
+
+FuzzIL program written to corpus/regress-585041.fzil

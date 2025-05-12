@@ -1,0 +1,27 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'array', 'const', v1
+v3 <- LoadInteger '1'
+SetElement v2, '524288', v3
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CallMethod v2, 'unshift', [v4]
+v6 <- BeginArrowFunction -> 
+    v7 <- CreateNamedVariable 'WeakMap', 'none'
+    v8 <- Construct v7, [v2]
+    Return v8
+EndArrowFunction
+v9 <- CallFunction v6, []
+
+
+const v1 = new Array();
+const array = v1;
+array[524288] = 1;
+array.unshift({});
+const v6 = () => {
+    const v8 = new WeakMap(array);
+    return v8;
+};
+v6();
+
+FuzzIL program written to corpus/regress-784862.fzil

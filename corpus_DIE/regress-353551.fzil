@@ -1,0 +1,43 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'depth', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadArguments
+    v5 <- CreateNamedVariable '__v_1', 'var', v4
+    v6 <- LoadInteger '123'
+    SetElement v5, '1000', v6
+    v7 <- UnaryOperation v1, '++'
+    v8 <- LoadInteger '2200'
+    v9 <- Compare v1, '>', v8
+    BeginIf v9
+        Return
+    EndIf
+    v10 <- BeginPlainFunction -> 
+        v11 <- GetElement v5, '0'
+        v12 <- UnaryOperation '++', v11
+        v13 <- LoadFloat '0.5'
+        v14 <- CallFunction v2, [v13]
+    EndPlainFunction
+    v15 <- CallFunction v10, []
+EndPlainFunction
+v16 <- LoadFloat '0.5'
+v17 <- CallFunction v2, [v16]
+
+
+var depth = 0;
+function __f_3(a3) {
+    var __v_1 = arguments;
+    __v_1[1000] = 123;
+    depth++;
+    if (depth > 2200) {
+        return;
+    }
+    function __f_4() {
+        let v11 = __v_1[0];
+        ++v11;
+        __f_3(0.5);
+    }
+    __f_4();
+}
+__f_3(0.5);
+
+FuzzIL program written to corpus/regress-353551.fzil

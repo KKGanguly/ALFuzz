@@ -1,0 +1,49 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '0'
+    v4 <- CreateNamedVariable 'counter', 'var', v3
+    v5 <- BeginPlainFunction -> 
+        v6 <- UnaryOperation v4, '++'
+        Return v6
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v5
+    v7 <- EndObjectLiteral
+    v8 <- CreateNamedVariable 'side_effect_object', 'var', v7
+    SetProperty v2, 'lastIndex', v8
+    v9 <- CallMethod v2, 'exec', [v1]
+    v10 <- LoadInteger '1'
+    SetProperty v2, 'lastIndex', v8
+    v11 <- CallMethod v2, 'test', [v1]
+    v12 <- LoadInteger '2'
+EndPlainFunction
+v13 <- LoadString 'zzzz'
+v14 <- LoadRegExp 'a' ''
+v15 <- CallFunction v0, [v13, v14]
+v16 <- LoadString 'zzzz'
+v17 <- LoadRegExp 'a' 'g'
+v18 <- CallFunction v0, [v16, v17]
+v19 <- LoadString 'xaxa'
+v20 <- LoadRegExp 'a' ''
+v21 <- CallFunction v0, [v19, v20]
+v22 <- LoadString 'xaxa'
+v23 <- LoadRegExp 'a' 'g'
+v24 <- CallFunction v0, [v22, v23]
+
+
+function testSideEffects(a1, a2) {
+    var counter = 0;
+    function f5() {
+        return counter++;
+    }
+    var side_effect_object = { valueOf: f5 };
+    a2.lastIndex = side_effect_object;
+    a2.exec(a1);
+    a2.lastIndex = side_effect_object;
+    a2.test(a1);
+}
+testSideEffects("zzzz", /a/);
+testSideEffects("zzzz", /a/g);
+testSideEffects("xaxa", /a/);
+testSideEffects("xaxa", /a/g);
+
+FuzzIL program written to corpus/regress-2438.fzil

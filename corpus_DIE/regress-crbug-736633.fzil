@@ -1,0 +1,55 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- LoadInteger '1'
+    v4 <- LoadInteger '2'
+    v5 <- LoadInteger '2147483644'
+    v6 <- UnaryOperation '-', v5
+    v7 <- LoadInteger '2147483647'
+    v8 <- LoadInteger '0'
+    v9 <- BinaryOperation v1, '|', v8
+    BeginSwitch v9
+        BeginSwitchCase v2
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v3
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v4
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v6
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v7
+            v10 <- LoadInteger '1'
+            v11 <- BinaryOperation v1, '+', v10
+            Return v11
+        EndSwitchCase fallsThrough
+    EndSwitch
+    v12 <- LoadInteger '0'
+    Return v12
+EndPlainFunction
+v13 <- LoadInteger '1'
+v14 <- LoadInteger '0'
+v15 <- CallFunction v0, [v14]
+v16 <- LoadInteger '2'
+v17 <- LoadInteger '1'
+v18 <- CallFunction v0, [v17]
+v19 <- LoadInteger '3'
+v20 <- LoadInteger '2'
+v21 <- CallFunction v0, [v20]
+
+
+function f(a1) {
+    const v6 = -2147483644;
+    switch (a1 | 0) {
+        case 0:
+        case 1:
+        case 2:
+        case v6:
+        case 2147483647:
+            return a1 + 1;
+    }
+    return 0;
+}
+f(0);
+f(1);
+f(2);
+
+FuzzIL program written to corpus/regress-crbug-736633.fzil

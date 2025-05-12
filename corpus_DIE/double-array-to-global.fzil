@@ -1,0 +1,37 @@
+v0 <- LoadInteger '0'
+v1 <- UnaryOperation '-', v0
+v2 <- LoadInteger '0'
+v3 <- CreateArray [v1, v2]
+v4 <- CreateNamedVariable 'a', 'var', v3
+v5 <- LoadUndefined
+v6 <- CreateNamedVariable 'b', 'var', v5
+v7 <- BeginPlainFunction -> v8
+    BeginForLoopInitializer
+        v9 <- LoadInteger '0'
+    BeginForLoopCondition -> v10
+        v11 <- LoadInteger '2'
+        v12 <- Compare v10, '<', v11
+    BeginForLoopAfterthought v12 -> v13
+        v14 <- UnaryOperation '++', v13
+    BeginForLoopBody -> v15
+        v16 <- GetComputedProperty v8, v15
+        Reassign v6, v16
+    EndForLoop
+EndPlainFunction
+v17 <- CallFunction v7, [v4]
+v18 <- CallFunction v7, [v4]
+v19 <- CallFunction v7, [v4]
+
+
+var a = [-0,0];
+var b;
+function foo(a8) {
+    for (let i10 = 0; i10 < 2; ++i10) {
+        b = a8[i10];
+    }
+}
+foo(a);
+foo(a);
+foo(a);
+
+FuzzIL program written to corpus/double-array-to-global.fzil

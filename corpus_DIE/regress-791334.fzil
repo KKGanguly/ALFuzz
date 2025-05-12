@@ -1,0 +1,16 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- LoadThis
+    Return v1
+EndArrowFunction
+v2 <- CreateNamedVariable 'foo', 'let', v0
+v3 <- LoadUndefined
+v4 <- CallFunction v2, []
+
+
+const v0 = () => {
+    return this;
+};
+let foo = v0;
+foo();
+
+FuzzIL program written to corpus/regress-791334.fzil

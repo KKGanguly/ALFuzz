@@ -1,0 +1,33 @@
+v0 <- BeginClassDefinition
+    BeginClassConstructor -> v1
+        v2 <- LoadInteger '1'
+        SetProperty v1, 'x', v2
+    EndClassConstructor
+EndClassDefinition
+v3 <- BeginClassDefinition v0
+    BeginClassConstructor -> v4
+        CallSuperConstructor []
+    EndClassConstructor
+EndClassDefinition
+v5 <- CreateArray []
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'bind', []
+v8 <- CreateNamedVariable 'Reflect', 'none'
+v9 <- CallMethod v8, 'construct', [v3, v5, v7]
+v10 <- Construct v3, []
+
+
+class C0 {
+    constructor() {
+        this.x = 1;
+    }
+}
+class C3 extends C0 {
+    constructor() {
+        super();
+    }
+}
+Reflect.construct(C3, [], Object.bind());
+new C3();
+
+FuzzIL program written to corpus/regress-crbug-801627.fzil

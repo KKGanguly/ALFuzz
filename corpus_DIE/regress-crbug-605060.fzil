@@ -1,0 +1,29 @@
+v0 <- LoadString 'map'
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- GetProperty v2, 'prototype'
+v4 <- CallMethod v3, '__defineGetter__', [v0, v1]
+v5 <- LoadString 'map'
+v6 <- BeginPlainFunction -> 
+EndPlainFunction
+v7 <- GetProperty v2, 'prototype'
+v8 <- CallMethod v7, '__defineGetter__', [v5, v6]
+v9 <- LoadString 'map'
+v10 <- BeginPlainFunction -> 
+EndPlainFunction
+v11 <- GetProperty v2, 'prototype'
+v12 <- CallMethod v11, '__defineGetter__', [v9, v10]
+
+
+function f1() {
+}
+Array.prototype.__defineGetter__("map", f1);
+function f6() {
+}
+Array.prototype.__defineGetter__("map", f6);
+function f10() {
+}
+Array.prototype.__defineGetter__("map", f10);
+
+FuzzIL program written to corpus/regress-crbug-605060.fzil

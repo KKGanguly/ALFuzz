@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadBoolean 'true'
+    v3 <- LoadInteger '0'
+    v4 <- CallComputedMethod v1, v3, [v2]
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadInteger '1'
+    v8 <- CallFunction v0, [v7]
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- CreateArray [v5]
+    v11 <- CallFunction v0, [v10]
+EndPlainFunction
+v12 <- CallFunction v9, []
+v13 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function bar(a1) {
+    a1[0](true);
+}
+function foo(a6) {
+    return bar(1);
+}
+function f9() {
+    bar([foo]);
+}
+f9();
+
+FuzzIL program written to corpus/dont-constant-fold-deopting-checks.fzil

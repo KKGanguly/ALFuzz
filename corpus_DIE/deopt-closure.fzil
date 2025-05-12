@@ -1,0 +1,117 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- BeginPlainFunction -> 
+            v4 <- LoadInteger '1'
+            v5 <- BinaryOperation v2, '+', v4
+            Return v5
+        EndPlainFunction
+        v6 <- CallFunction v3, []
+        Return v6
+    EndPlainFunction
+    v7 <- LoadInteger '24'
+    v8 <- LoadInteger '23'
+    v9 <- CallFunction v1, [v8]
+    v10 <- LoadInteger '43'
+    v11 <- LoadInteger '42'
+    v12 <- CallFunction v1, [v11]
+    v13 <- LoadInteger '66'
+    v14 <- LoadInteger '65'
+    v15 <- CallFunction v1, [v14]
+EndPlainFunction
+v16 <- CallFunction v0, []
+v17 <- BeginPlainFunction -> 
+    v18 <- BeginPlainFunction -> v19
+        v20 <- BeginPlainFunction -> v21, v22, v23
+            v24 <- LoadInteger '1'
+            v25 <- BinaryOperation v19, '+', v24
+            Return v25
+        EndPlainFunction
+        v26 <- CallFunction v20, []
+        Return v26
+    EndPlainFunction
+    v27 <- LoadInteger '24'
+    v28 <- LoadInteger '23'
+    v29 <- CallFunction v18, [v28]
+    v30 <- LoadInteger '43'
+    v31 <- LoadInteger '42'
+    v32 <- CallFunction v18, [v31]
+    v33 <- LoadInteger '66'
+    v34 <- LoadInteger '65'
+    v35 <- CallFunction v18, [v34]
+EndPlainFunction
+v36 <- CallFunction v17, []
+v37 <- BeginPlainFunction -> 
+    v38 <- BeginPlainFunction -> v39
+        v40 <- BeginPlainFunction -> 
+            v41 <- LoadInteger '1'
+            v42 <- BinaryOperation v39, '+', v41
+            v43 <- LoadThis
+            SetProperty v43, 'val', v42
+        EndPlainFunction
+        v44 <- Construct v40, []
+        Return v44
+    EndPlainFunction
+    v45 <- LoadInteger '24'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `val`, v45
+    v46 <- EndObjectLiteral
+    v47 <- LoadInteger '23'
+    v48 <- CallFunction v38, [v47]
+    v49 <- LoadInteger '43'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `val`, v49
+    v50 <- EndObjectLiteral
+    v51 <- LoadInteger '42'
+    v52 <- CallFunction v38, [v51]
+    v53 <- LoadInteger '66'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `val`, v53
+    v54 <- EndObjectLiteral
+    v55 <- LoadInteger '65'
+    v56 <- CallFunction v38, [v55]
+EndPlainFunction
+v57 <- CallFunction v37, []
+
+
+function TestMaterializeTargetOfInterpretedFrame() {
+    function f(a2) {
+        function g() {
+            return a2 + 1;
+        }
+        return g();
+    }
+    f(23);
+    f(42);
+    f(65);
+}
+TestMaterializeTargetOfInterpretedFrame();
+function TestMaterializeTargetOfArgumentsAdaptorFrame() {
+    function f(a19) {
+        function g(a21, a22, a23) {
+            return a19 + 1;
+        }
+        return g();
+    }
+    f(23);
+    f(42);
+    f(65);
+}
+TestMaterializeTargetOfArgumentsAdaptorFrame();
+function TestMaterializeTargetOfConstructStubFrame() {
+    function f(a39) {
+        function g() {
+            this.val = a39 + 1;
+        }
+        const v44 = new g();
+        return v44;
+    }
+    const v46 = { val: 24 };
+    f(23);
+    const v50 = { val: 43 };
+    f(42);
+    const v54 = { val: 66 };
+    f(65);
+}
+TestMaterializeTargetOfConstructStubFrame();
+
+FuzzIL program written to corpus/deopt-closure.fzil

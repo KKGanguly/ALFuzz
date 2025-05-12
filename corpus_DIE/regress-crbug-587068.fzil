@@ -1,0 +1,23 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'String', 'none'
+    v3 <- CallMethod v2, 'fromCharCode', [v1]
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '33'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadInteger '33'
+v7 <- CallFunction v0, [v6]
+v8 <- LoadFloat '33.3'
+v9 <- CallFunction v0, [v8]
+v10 <- CallFunction v0, []
+
+
+function foo(a1) {
+    return String.fromCharCode(a1);
+}
+foo(33);
+foo(33);
+foo(33.3);
+foo();
+
+FuzzIL program written to corpus/regress-crbug-587068.fzil

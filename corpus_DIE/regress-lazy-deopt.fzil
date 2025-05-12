@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- LoadInteger '0'
+    v6 <- CreateArray [v5]
+    v7 <- CreateNamedVariable 'a', 'var', v6
+    v8 <- LoadInteger '0'
+    v9 <- Compare v3, '==', v8
+    BeginIf v9
+        v10 <- LoadInteger '1'
+        Return v10
+    EndIf
+    v11 <- GetElement v7, '0'
+    v12 <- BinaryOperation v3, '>>', v11
+    Return v12
+EndPlainFunction
+v13 <- LoadInteger '42'
+v14 <- CallFunction v2, [v13]
+v15 <- LoadInteger '42'
+v16 <- CallFunction v2, [v15]
+v17 <- LoadInteger '42'
+v18 <- LoadInteger '42'
+v19 <- CallFunction v2, [v18]
+v20 <- LoadInteger '42'
+v21 <- LoadInteger '42'
+v22 <- CallFunction v2, [v21]
+
+
+function foo() {
+    return 1;
+}
+function f(a3, a4) {
+    var a = [0];
+    if (a3 == 0) {
+        return 1;
+    }
+    return a3 >> a[0];
+}
+f(42);
+f(42);
+f(42);
+f(42);
+
+FuzzIL program written to corpus/regress-lazy-deopt.fzil

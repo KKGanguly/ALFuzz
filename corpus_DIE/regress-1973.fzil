@@ -1,0 +1,85 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- CallFunction v2, [v1]
+    v4 <- CallMethod v2, 'getPrototypeOf', [v3]
+    v5 <- CreateNamedVariable 'prototype', 'var', v4
+    v6 <- TypeOf v1
+    v7 <- CreateNamedVariable 'strict_type', 'var', v6
+    v8 <- LoadString 'strict'
+    v9 <- BeginPlainFunction -> 
+        Directive 'use strict'
+        v10 <- LoadThis
+        v11 <- TypeOf v10
+    EndPlainFunction
+    v12 <- BeginPlainFunction -> 
+        Directive 'use strict'
+        v13 <- LoadThis
+        v14 <- TypeOf v13
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v9
+        ObjectLiteralAddProperty `set`, v12
+    v15 <- EndObjectLiteral
+    v16 <- CallMethod v2, 'defineProperty', [v5, v8, v15]
+    v17 <- GetProperty v1, 'strict'
+    SetProperty v1, 'strict', v17
+    v18 <- CallFunction v2, [v1]
+    v19 <- TypeOf v18
+    v20 <- CreateNamedVariable 'sloppy_type', 'var', v19
+    v21 <- LoadString 'sloppy'
+    v22 <- BeginPlainFunction -> 
+        v23 <- LoadThis
+        v24 <- TypeOf v23
+    EndPlainFunction
+    v25 <- BeginPlainFunction -> 
+        v26 <- LoadThis
+        v27 <- TypeOf v26
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v22
+        ObjectLiteralAddProperty `set`, v25
+    v28 <- EndObjectLiteral
+    v29 <- CallMethod v2, 'defineProperty', [v5, v21, v28]
+    v30 <- GetProperty v1, 'sloppy'
+    SetProperty v1, 'sloppy', v30
+EndPlainFunction
+v31 <- LoadBoolean 'true'
+v32 <- CallFunction v0, [v31]
+v33 <- LoadInteger '0'
+v34 <- CallFunction v0, [v33]
+BeginObjectLiteral
+v35 <- EndObjectLiteral
+v36 <- CallFunction v0, [v35]
+v37 <- LoadString ''
+v38 <- CallFunction v0, [v37]
+
+
+function TestAccessorWrapping(a1) {
+    var prototype = Object.getPrototypeOf(Object(a1));
+    var strict_type = typeof a1;
+    function f9() {
+        'use strict';
+        typeof this;
+    }
+    function f12() {
+        'use strict';
+        typeof this;
+    }
+    Object.defineProperty(prototype, "strict", { get: f9, set: f12 });
+    a1.strict = a1.strict;
+    var sloppy_type = typeof Object(a1);
+    function f22() {
+        typeof this;
+    }
+    function f25() {
+        typeof this;
+    }
+    Object.defineProperty(prototype, "sloppy", { get: f22, set: f25 });
+    a1.sloppy = a1.sloppy;
+}
+TestAccessorWrapping(true);
+TestAccessorWrapping(0);
+TestAccessorWrapping({});
+TestAccessorWrapping("");
+
+FuzzIL program written to corpus/regress-1973.fzil

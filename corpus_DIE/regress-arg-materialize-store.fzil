@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- GetProperty v0, 'arguments'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v4
+    v5 <- EndObjectLiteral
+    v6 <- CreateNamedVariable 'o', 'var', v5
+    v7 <- CallFunction v0, []
+    v8 <- LoadInteger '1'
+    SetProperty v6, 'x', v8
+    v9 <- LoadInteger '0'
+    v10 <- BinaryOperation v3, '+', v9
+    v11 <- GetProperty v6, 'x'
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '0'
+v13 <- CallFunction v2, [v12]
+v14 <- LoadInteger '0'
+v15 <- CallFunction v2, [v14]
+v16 <- LoadInteger '1'
+BeginObjectLiteral
+v17 <- EndObjectLiteral
+v18 <- CallFunction v2, [v17]
+
+
+function f() {
+    return f.arguments;
+}
+function g(a3) {
+    var o = { x: 2 };
+    f();
+    o.x = 1;
+    a3 + 0;
+    return o.x;
+}
+g(0);
+g(0);
+g({});
+
+FuzzIL program written to corpus/regress-arg-materialize-store.fzil

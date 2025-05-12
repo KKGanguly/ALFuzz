@@ -1,0 +1,16 @@
+v0 <- CreateNamedVariable 'String', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- CreateNamedVariable 'Number', 'none'
+v3 <- GetProperty v2, 'prototype'
+SetProperty v3, '__proto__', v1
+v4 <- LoadInteger '1'
+v5 <- CreateNamedVariable 'Uint8Array', 'none'
+v6 <- CallMethod v5, 'from', [v4]
+
+
+const v1 = String.prototype;
+const t1 = Number.prototype;
+t1.__proto__ = v1;
+Uint8Array.from(1);
+
+FuzzIL program written to corpus/regress-814643.fzil

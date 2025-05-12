@@ -1,0 +1,39 @@
+v0 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'o', 'var', v1
+v3 <- BeginPlainFunction -> v4
+    v5 <- GetProperty v2, 'a'
+    v6 <- UnaryOperation '-', v5
+    v7 <- LoadInteger '0'
+    v8 <- BinaryOperation v6, '+', v7
+    Return v8
+EndPlainFunction
+v9 <- LoadString 'Infinity'
+v10 <- LoadInteger '1'
+v11 <- CallFunction v3, []
+v12 <- BinaryOperation v10, '/', v11
+v13 <- CreateNamedVariable 'String', 'none'
+v14 <- CallFunction v13, [v12]
+v15 <- LoadString 'Infinity'
+v16 <- LoadInteger '1'
+v17 <- CallFunction v3, []
+v18 <- BinaryOperation v16, '/', v17
+v19 <- CallFunction v13, [v18]
+v20 <- LoadString 'Infinity'
+v21 <- LoadInteger '1'
+v22 <- CallFunction v3, []
+v23 <- BinaryOperation v21, '/', v22
+v24 <- CallFunction v13, [v23]
+
+
+var o = { a: 0 };
+function f(a4) {
+    return -o.a + 0;
+}
+String(1 / f());
+String(1 / f());
+String(1 / f());
+
+FuzzIL program written to corpus/regress-add-minus-zero.fzil

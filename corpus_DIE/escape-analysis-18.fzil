@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'x', 'var', v2
+    v4 <- BeginPlainFunction -> v5
+        Reassign v3, v5
+    EndPlainFunction
+    v6 <- CallMethod v1, 'forEach', [v4]
+    Return v3
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    v9 <- CallFunction v0, [v8]
+    Return v9
+EndPlainFunction
+v10 <- LoadUndefined
+v11 <- LoadFloat '0.5'
+v12 <- CreateArray [v10, v11]
+v13 <- CreateNamedVariable 'array', 'let', v12
+v14 <- CallFunction v7, [v13]
+v15 <- CallFunction v7, [v13]
+v16 <- CallFunction v7, [v13]
+
+
+function bar(a1) {
+    var x = 0;
+    function f4(a5) {
+        x = a5;
+    }
+    a1.forEach(f4);
+    return x;
+}
+function foo(a8) {
+    return bar(a8);
+}
+let array = [,0.5];
+foo(array);
+foo(array);
+foo(array);
+
+FuzzIL program written to corpus/escape-analysis-18.fzil

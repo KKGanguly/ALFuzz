@@ -1,0 +1,86 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'foo1'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadThis
+    v5 <- GetProperty v4, 'x'
+    v6 <- LoadThis
+    v7 <- GetProperty v6, 'z'
+    v8 <- BinaryOperation v5, '+', v7
+    v9 <- LoadThis
+    v10 <- CreateNamedVariable 'foo2', 'none'
+    v11 <- CallFunction v10, [v9]
+    v12 <- BinaryOperation v8, '+', v11
+    Return v12
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14
+    v15 <- GetProperty v14, 'a'
+    Return v15
+EndPlainFunction
+v16 <- LoadInteger '0'
+v17 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `z`, v16
+    ObjectLiteralAddProperty `x`, v17
+v18 <- EndObjectLiteral
+v19 <- CreateNamedVariable 'o1', 'var', v18
+v20 <- LoadInteger '0'
+v21 <- LoadFloat '1.5'
+v22 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `z`, v20
+    ObjectLiteralAddProperty `a`, v21
+    ObjectLiteralAddProperty `x`, v22
+v23 <- EndObjectLiteral
+v24 <- CreateNamedVariable 'o2', 'var', v23
+v25 <- LoadInteger '0'
+v26 <- LoadFloat '1.5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `z`, v25
+    ObjectLiteralAddProperty `a`, v26
+v27 <- EndObjectLiteral
+v28 <- CreateNamedVariable 'o3', 'var', v27
+v29 <- LoadString 'foo1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+v30 <- EndObjectLiteral
+v31 <- CreateNamedVariable 'Object', 'none'
+v32 <- CallMethod v31, 'defineProperty', [v19, v29, v30]
+v33 <- LoadString 'foo1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+v34 <- EndObjectLiteral
+v35 <- CallMethod v31, 'defineProperty', [v24, v33, v34]
+v36 <- CallFunction v0, [v19]
+v37 <- CallFunction v0, [v19]
+v38 <- CallFunction v0, [v24]
+v39 <- CallFunction v13, [v24]
+v40 <- CallFunction v13, [v24]
+v41 <- CallFunction v13, [v28]
+v42 <- CallFunction v0, [v19]
+
+
+function foo(a1) {
+    return a1.foo1;
+}
+function getter() {
+    return (this.x + this.z) + foo2(this);
+}
+function foo2(a14) {
+    return a14.a;
+}
+var o1 = { z: 0, x: 1 };
+var o2 = { z: 0, a: 1.5, x: 1 };
+var o3 = { z: 0, a: 1.5 };
+Object.defineProperty(o1, "foo1", { get: getter });
+Object.defineProperty(o2, "foo1", { get: getter });
+foo(o1);
+foo(o1);
+foo(o2);
+foo2(o2);
+foo2(o2);
+foo2(o3);
+foo(o1);
+
+FuzzIL program written to corpus/compare-map-elim1.fzil

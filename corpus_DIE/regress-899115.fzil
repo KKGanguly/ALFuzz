@@ -1,0 +1,17 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- CallMethod v2, 'getPrototypeOf', [v1]
+    v4 <- CallMethod v3, 'includes', []
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+
+
+function foo() {
+    Object.getPrototypeOf([]).includes();
+}
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-899115.fzil

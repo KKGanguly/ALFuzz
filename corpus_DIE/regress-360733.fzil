@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- BinaryOperation v1, '+', v2
+    v4 <- CallFunction v0, [v3]
+EndPlainFunction
+v5 <- LoadString 'stackTraceLimit'
+v6 <- BeginPlainFunction -> 
+EndPlainFunction
+v7 <- CreateNamedVariable 'Error', 'none'
+v8 <- CallMethod v7, '__defineGetter__', [v5, v6]
+BeginTry
+    v9 <- LoadInteger '0'
+    v10 <- CallFunction v0, [v9]
+BeginCatch -> v11
+EndTryCatch
+
+
+function f(a1) {
+    f(a1 + 1);
+}
+function f6() {
+}
+Error.__defineGetter__("stackTraceLimit", f6);
+try {
+    f(0);
+} catch(e11) {
+}
+
+FuzzIL program written to corpus/regress-360733.fzil

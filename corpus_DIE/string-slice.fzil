@@ -1,0 +1,99 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadInteger '1'
+        v4 <- UnaryOperation '-', v3
+        v5 <- CallMethod v2, 'slice', [v4]
+        Return v5
+    EndPlainFunction
+    v6 <- LoadString ''
+    v7 <- LoadString ''
+    v8 <- CallFunction v1, [v7]
+    v9 <- LoadString 'a'
+    v10 <- LoadString 'a'
+    v11 <- CallFunction v1, [v10]
+    v12 <- LoadString 'b'
+    v13 <- LoadString 'ab'
+    v14 <- CallFunction v1, [v13]
+    v15 <- LoadString 'c'
+    v16 <- LoadString 'abc'
+    v17 <- CallFunction v1, [v16]
+    v18 <- LoadString ''
+    v19 <- LoadString ''
+    v20 <- CallFunction v1, [v19]
+    v21 <- LoadString 'a'
+    v22 <- LoadString 'a'
+    v23 <- CallFunction v1, [v22]
+    v24 <- LoadString 'b'
+    v25 <- LoadString 'ab'
+    v26 <- CallFunction v1, [v25]
+    v27 <- LoadString 'c'
+    v28 <- LoadString 'abc'
+    v29 <- CallFunction v1, [v28]
+EndPlainFunction
+v30 <- CallFunction v0, []
+v31 <- BeginPlainFunction -> 
+    v32 <- BeginPlainFunction -> v33
+        v34 <- LoadInteger '1'
+        v35 <- UnaryOperation '-', v34
+        v36 <- LoadUndefined
+        v37 <- CallMethod v33, 'slice', [v35, v36]
+        Return v37
+    EndPlainFunction
+    v38 <- LoadString ''
+    v39 <- LoadString ''
+    v40 <- CallFunction v32, [v39]
+    v41 <- LoadString 'a'
+    v42 <- LoadString 'a'
+    v43 <- CallFunction v32, [v42]
+    v44 <- LoadString 'b'
+    v45 <- LoadString 'ab'
+    v46 <- CallFunction v32, [v45]
+    v47 <- LoadString 'c'
+    v48 <- LoadString 'abc'
+    v49 <- CallFunction v32, [v48]
+    v50 <- LoadString ''
+    v51 <- LoadString ''
+    v52 <- CallFunction v32, [v51]
+    v53 <- LoadString 'a'
+    v54 <- LoadString 'a'
+    v55 <- CallFunction v32, [v54]
+    v56 <- LoadString 'b'
+    v57 <- LoadString 'ab'
+    v58 <- CallFunction v32, [v57]
+    v59 <- LoadString 'c'
+    v60 <- LoadString 'abc'
+    v61 <- CallFunction v32, [v60]
+EndPlainFunction
+v62 <- CallFunction v31, []
+
+
+function f0() {
+    function foo(a2) {
+        return a2.slice(-1);
+    }
+    foo("");
+    foo("a");
+    foo("ab");
+    foo("abc");
+    foo("");
+    foo("a");
+    foo("ab");
+    foo("abc");
+}
+f0();
+function f31() {
+    function foo(a33) {
+        return a33.slice(-1, undefined);
+    }
+    foo("");
+    foo("a");
+    foo("ab");
+    foo("abc");
+    foo("");
+    foo("a");
+    foo("ab");
+    foo("abc");
+}
+f31();
+
+FuzzIL program written to corpus/string-slice.fzil

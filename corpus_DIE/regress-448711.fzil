@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'Hello!'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `text`, v1
+    v2 <- EndObjectLiteral
+    v3 <- LoadThis
+    SetProperty v3, 'a', v2
+EndPlainFunction
+v4 <- Construct v0, []
+v5 <- CreateNamedVariable 'v4', 'var', v4
+v6 <- Construct v0, []
+v7 <- CreateNamedVariable 'v7', 'var', v6
+BeginObjectLiteral
+v8 <- EndObjectLiteral
+SetProperty v7, 'b', v8
+v9 <- LoadString '2'
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'Object', 'none'
+v12 <- CallMethod v11, 'defineProperty', [v5, v9, v10]
+v13 <- Construct v0, []
+v14 <- CreateNamedVariable 'v6', 'var', v13
+BeginObjectLiteral
+v15 <- EndObjectLiteral
+SetProperty v14, 'a', v15
+
+
+function f() {
+    this.a = { text: "Hello!" };
+}
+const v4 = new f();
+var v4 = v4;
+const v6 = new f();
+var v7 = v6;
+v7.b = {};
+Object.defineProperty(v4, "2", {});
+const v13 = new f();
+var v6 = v13;
+v6.a = {};
+
+FuzzIL program written to corpus/regress-448711.fzil

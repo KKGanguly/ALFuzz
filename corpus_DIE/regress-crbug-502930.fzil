@@ -1,0 +1,98 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    v2 <- CreateNamedVariable 'v', 'var', v1
+    v3 <- LoadString 'foo'
+    v4 <- BeginPlainFunction -> 
+        v5 <- LoadInteger '42'
+        Return v5
+    EndPlainFunction
+    v6 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v4
+        ObjectLiteralAddProperty `configurable`, v6
+    v7 <- EndObjectLiteral
+    v8 <- CreateNamedVariable 'Object', 'none'
+    v9 <- CallMethod v8, 'defineProperty', [v2, v3, v7]
+    BeginObjectLiteral
+    v10 <- EndObjectLiteral
+    v11 <- CreateNamedVariable 'obj', 'var', v10
+    v12 <- LoadString 'boom'
+    SetComputedProperty v11, v12, v2
+    v13 <- LoadString 'foo'
+    v14 <- LoadInteger '0'
+    v15 <- LoadBoolean 'true'
+    v16 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v14
+        ObjectLiteralAddProperty `writable`, v15
+        ObjectLiteralAddProperty `configurable`, v16
+    v17 <- EndObjectLiteral
+    v18 <- CallMethod v8, 'defineProperty', [v2, v13, v17]
+    Return v11
+EndPlainFunction
+v19 <- CallFunction v0, []
+v20 <- CreateNamedVariable 'accessor_to_data_case', 'var', v19
+v21 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v22 <- EndObjectLiteral
+    v23 <- CreateNamedVariable 'v', 'var', v22
+    v24 <- LoadString 'bar'
+    v25 <- LoadInteger '0'
+    v26 <- LoadBoolean 'true'
+    v27 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v25
+        ObjectLiteralAddProperty `writable`, v26
+        ObjectLiteralAddProperty `configurable`, v27
+    v28 <- EndObjectLiteral
+    v29 <- CreateNamedVariable 'Object', 'none'
+    v30 <- CallMethod v29, 'defineProperty', [v23, v24, v28]
+    BeginObjectLiteral
+    v31 <- EndObjectLiteral
+    v32 <- CreateNamedVariable 'obj', 'var', v31
+    v33 <- LoadString 'bam'
+    SetComputedProperty v32, v33, v23
+    v34 <- LoadString 'bar'
+    v35 <- BeginPlainFunction -> 
+        v36 <- LoadInteger '42'
+        Return v36
+    EndPlainFunction
+    v37 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v35
+        ObjectLiteralAddProperty `configurable`, v37
+    v38 <- EndObjectLiteral
+    v39 <- CallMethod v29, 'defineProperty', [v23, v34, v38]
+    Return v32
+EndPlainFunction
+v40 <- CallFunction v21, []
+v41 <- CreateNamedVariable 'data_to_accessor_case', 'var', v40
+
+
+function f0() {
+    var v = {};
+    function f4() {
+        return 42;
+    }
+    Object.defineProperty(v, "foo", { get: f4, configurable: true });
+    var obj = {};
+    obj["boom"] = v;
+    Object.defineProperty(v, "foo", { value: 0, writable: true, configurable: true });
+    return obj;
+}
+var accessor_to_data_case = f0();
+function f21() {
+    var v = {};
+    Object.defineProperty(v, "bar", { value: 0, writable: true, configurable: true });
+    var obj = {};
+    obj["bam"] = v;
+    function f35() {
+        return 42;
+    }
+    Object.defineProperty(v, "bar", { get: f35, configurable: true });
+    return obj;
+}
+var data_to_accessor_case = f21();
+
+FuzzIL program written to corpus/regress-crbug-502930.fzil

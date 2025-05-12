@@ -1,0 +1,82 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString '(?:'
+    v3 <- CreateNamedVariable 'src', 'var', v2
+    BeginForLoopInitializer
+        v4 <- LoadInteger '128'
+    BeginForLoopCondition -> v5
+        v6 <- LoadInteger '4096'
+        v7 <- Compare v5, '<', v6
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation v8, '++'
+    BeginForLoopBody -> v10
+        v11 <- LoadInteger '96'
+        v12 <- LoadInteger '26'
+        v13 <- BinaryOperation v10, '%', v12
+        v14 <- BinaryOperation v11, '+', v13
+        v15 <- CreateNamedVariable 'String', 'none'
+        v16 <- CallMethod v15, 'fromCharCode', [v14]
+        v17 <- CallMethod v15, 'fromCharCode', [v10]
+        v18 <- BinaryOperation v16, '+', v17
+        v19 <- LoadString '|'
+        v20 <- BinaryOperation v18, '+', v19
+        Update v3, '+', v20
+    EndForLoop
+    v21 <- LoadString 'aa)'
+    Update v3, '+', v21
+    v22 <- CreateNamedVariable 'RegExp', 'none'
+    v23 <- Construct v22, [v3, v1]
+    v24 <- CreateNamedVariable 'collapsible', 'var', v23
+    v25 <- LoadString 'zzzzzzz'
+    v26 <- LoadInteger '3000'
+    v27 <- CreateNamedVariable 'String', 'none'
+    v28 <- CallMethod v27, 'fromCharCode', [v26]
+    v29 <- BinaryOperation v25, '+', v28
+    v30 <- CreateNamedVariable 'subject', 'var', v29
+    BeginForLoopInitializer
+        v31 <- LoadInteger '0'
+    BeginForLoopCondition -> v32
+        v33 <- LoadInteger '1000'
+        v34 <- Compare v32, '<', v33
+    BeginForLoopAfterthought v34 -> v35
+        v36 <- UnaryOperation v35, '++'
+    BeginForLoopBody -> v37
+        v38 <- LoadString 'xxxxxxx'
+        Update v30, '+', v38
+    EndForLoop
+    BeginForLoopInitializer
+        v39 <- LoadInteger '0'
+    BeginForLoopCondition -> v40
+        v41 <- LoadInteger '2000'
+        v42 <- Compare v40, '<', v41
+    BeginForLoopAfterthought v42 -> v43
+        v44 <- UnaryOperation v43, '++'
+    BeginForLoopBody -> v45
+        v46 <- CallMethod v24, 'test', [v30]
+    EndForLoop
+EndPlainFunction
+v47 <- LoadString 'i'
+v48 <- CallFunction v0, [v47]
+v49 <- LoadString ''
+v50 <- CallFunction v0, [v49]
+
+
+function collapse(a1) {
+    var src = "(?:";
+    for (let i5 = 128; i5 < 4096; i5++) {
+        src += (String.fromCharCode(96 + (i5 % 26)) + String.fromCharCode(i5)) + "|";
+    }
+    src += "aa)";
+    const v23 = new RegExp(src, a1);
+    var collapsible = v23;
+    var subject = "zzzzzzz" + String.fromCharCode(3000);
+    for (let i32 = 0; i32 < 1000; i32++) {
+        subject += "xxxxxxx";
+    }
+    for (let i40 = 0; i40 < 2000; i40++) {
+        collapsible.test(subject);
+    }
+}
+collapse("i");
+collapse("");
+
+FuzzIL program written to corpus/regress-crbug-482998.fzil

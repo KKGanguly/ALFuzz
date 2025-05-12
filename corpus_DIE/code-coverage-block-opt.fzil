@@ -1,0 +1,83 @@
+v0 <- CreateNamedVariable 'isNeverOptimizeLiteMode', 'none'
+v1 <- CallFunction v0, []
+BeginIf v1
+    v2 <- LoadString 'Warning: skipping test that requires optimization in Lite mode.'
+    v3 <- CreateNamedVariable 'print', 'none'
+    v4 <- CallFunction v3, [v2]
+    v5 <- LoadInteger '0'
+    v6 <- CreateNamedVariable 'quit', 'none'
+    v7 <- CallFunction v6, [v5]
+EndIf
+v8 <- LoadString 'optimized and inlined functions'
+v9 <- CreateTemplateString ['\nfunction g() { if (true) nop(); }         // 0000\nfunction f() { g(); g(); }                // 0050\nf(); f(); f(); f(); f(); f();             // 0150\n'], []
+v10 <- LoadInteger '0'
+v11 <- LoadInteger '199'
+v12 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v10
+    ObjectLiteralAddProperty `end`, v11
+    ObjectLiteralAddProperty `count`, v12
+v13 <- EndObjectLiteral
+v14 <- LoadInteger '0'
+v15 <- LoadInteger '33'
+v16 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v14
+    ObjectLiteralAddProperty `end`, v15
+    ObjectLiteralAddProperty `count`, v16
+v17 <- EndObjectLiteral
+v18 <- LoadInteger '25'
+v19 <- LoadInteger '31'
+v20 <- LoadInteger '16'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v18
+    ObjectLiteralAddProperty `end`, v19
+    ObjectLiteralAddProperty `count`, v20
+v21 <- EndObjectLiteral
+v22 <- LoadInteger '50'
+v23 <- LoadInteger '76'
+v24 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v22
+    ObjectLiteralAddProperty `end`, v23
+    ObjectLiteralAddProperty `count`, v24
+v25 <- EndObjectLiteral
+v26 <- CreateArray [v13, v17, v21, v25]
+v27 <- CreateNamedVariable 'TestCoverage', 'none'
+v28 <- CallFunction v27, [v8, v9, v26]
+v29 <- LoadString 'Partial coverage collection'
+v30 <- CreateTemplateString ['\n!function() {                             // 0000\n  function f(x) {                         // 0050\n    if (x) { nop(); } else { nop(); }     // 0100\n  }                                       // 0150\n  f(true); f(true);                       // 0200\n  f(false);                               // 0350\n}();                                      // 0400\n'], []
+v31 <- LoadInteger '52'
+v32 <- LoadInteger '153'
+v33 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v31
+    ObjectLiteralAddProperty `end`, v32
+    ObjectLiteralAddProperty `count`, v33
+v34 <- EndObjectLiteral
+v35 <- LoadInteger '121'
+v36 <- LoadInteger '137'
+v37 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v35
+    ObjectLiteralAddProperty `end`, v36
+    ObjectLiteralAddProperty `count`, v37
+v38 <- EndObjectLiteral
+v39 <- CreateArray [v34, v38]
+v40 <- CallFunction v27, [v29, v30, v39]
+
+
+if (isNeverOptimizeLiteMode()) {
+    print("Warning: skipping test that requires optimization in Lite mode.");
+    quit(0);
+}
+const v9 = `\nfunction g() { if (true) nop(); }         // 0000\nfunction f() { g(); g(); }                // 0050\nf(); f(); f(); f(); f(); f();             // 0150\n`;
+const v13 = { start: 0, end: 199, count: 1 };
+const v17 = { start: 0, end: 33, count: 4 };
+const v21 = { start: 25, end: 31, count: 16 };
+TestCoverage("optimized and inlined functions", v9, [v13,v17,v21,{ start: 50, end: 76, count: 2 }]);
+const v30 = `\n!function() {                             // 0000\n  function f(x) {                         // 0050\n    if (x) { nop(); } else { nop(); }     // 0100\n  }                                       // 0150\n  f(true); f(true);                       // 0200\n  f(false);                               // 0350\n}();                                      // 0400\n`;
+const v34 = { start: 52, end: 153, count: 0 };
+TestCoverage("Partial coverage collection", v30, [v34,{ start: 121, end: 137, count: 1 }]);
+
+FuzzIL program written to corpus/code-coverage-block-opt.fzil

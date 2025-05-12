@@ -1,0 +1,40 @@
+v0 <- LoadInteger '1290722550521'
+v1 <- LoadString '2010-11-25T22:02:30.521Z'
+v2 <- CreateNamedVariable 'Date', 'none'
+v3 <- CallMethod v2, 'parse', [v1]
+v4 <- LoadInteger '1290722550500'
+v5 <- LoadString '2010-11-25T22:02:30.5Z'
+v6 <- CallMethod v2, 'parse', [v5]
+v7 <- LoadInteger '1290722550520'
+v8 <- LoadString '2010-11-25T22:02:30.52Z'
+v9 <- CallMethod v2, 'parse', [v8]
+v10 <- LoadString '2010-11-25T22:02:30.5Z'
+v11 <- CallMethod v2, 'parse', [v10]
+v12 <- LoadString '2010-11-25T22:02:30.005Z'
+v13 <- CallMethod v2, 'parse', [v12]
+v14 <- Compare v11, '===', v13
+v15 <- LoadString '2010-11-25T22:02:30.1005Z'
+v16 <- CallMethod v2, 'parse', [v15]
+v17 <- LoadString '2010-11-25T22:02:30.100Z'
+v18 <- CallMethod v2, 'parse', [v17]
+v19 <- LoadString '2010-11-25T22:02:30.999Z'
+v20 <- CallMethod v2, 'parse', [v19]
+v21 <- LoadString '2010-11-25T22:02:30.99999999999999999999999999999999999999999999999999999999999999999999999999999999999999Z'
+v22 <- CallMethod v2, 'parse', [v21]
+v23 <- LoadString '2010-11-25T22:02:30.Z'
+v24 <- CallMethod v2, 'parse', [v23]
+v25 <- CreateNamedVariable 'isNaN', 'none'
+v26 <- CallFunction v25, [v24]
+
+
+Date.parse("2010-11-25T22:02:30.521Z");
+Date.parse("2010-11-25T22:02:30.5Z");
+Date.parse("2010-11-25T22:02:30.52Z");
+Date.parse("2010-11-25T22:02:30.5Z") === Date.parse("2010-11-25T22:02:30.005Z");
+Date.parse("2010-11-25T22:02:30.1005Z");
+Date.parse("2010-11-25T22:02:30.100Z");
+Date.parse("2010-11-25T22:02:30.999Z");
+Date.parse("2010-11-25T22:02:30.99999999999999999999999999999999999999999999999999999999999999999999999999999999999999Z");
+isNaN(Date.parse("2010-11-25T22:02:30.Z"));
+
+FuzzIL program written to corpus/regress-944.fzil

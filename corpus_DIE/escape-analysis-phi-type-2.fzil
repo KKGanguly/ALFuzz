@@ -1,0 +1,113 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v2
+        ObjectLiteralAddProperty `b`, v3
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'o', 'var', v4
+    v6 <- LoadInteger '0'
+    v7 <- Compare v1, '==', v6
+    BeginIf v7
+        v8 <- LoadInteger '1'
+        SetProperty v5, 'a', v8
+    BeginElse
+        v9 <- LoadInteger '1'
+        v10 <- Compare v1, '<=', v9
+        BeginIf v10
+            v11 <- LoadInteger '2'
+            v12 <- Compare v1, '==', v11
+            BeginIf v12
+                v13 <- LoadInteger '2'
+                SetProperty v5, 'a', v13
+            BeginElse
+                v14 <- LoadInteger '1'
+                SetProperty v5, 'a', v14
+            EndIf
+            v15 <- LoadInteger '2'
+            SetProperty v5, 'a', v15
+        BeginElse
+            v16 <- LoadInteger '2'
+            v17 <- Compare v1, '==', v16
+            BeginIf v17
+                v18 <- LoadString 'x'
+                SetProperty v5, 'a', v18
+            BeginElse
+                v19 <- LoadString 'x'
+                SetProperty v5, 'a', v19
+            EndIf
+            v20 <- LoadInteger '22'
+            SetProperty v5, 'b', v20
+        EndIf
+        v21 <- LoadInteger '22'
+        SetProperty v5, 'b', v21
+    EndIf
+    v22 <- GetProperty v5, 'a'
+    v23 <- LoadInteger '1'
+    v24 <- BinaryOperation v22, '+', v23
+    Return v24
+EndPlainFunction
+v25 <- LoadInteger '0'
+v26 <- LoadInteger '0'
+v27 <- CallFunction v0, [v25, v26]
+v28 <- LoadInteger '1'
+v29 <- LoadInteger '0'
+v30 <- CallFunction v0, [v28, v29]
+v31 <- LoadInteger '2'
+v32 <- LoadInteger '0'
+v33 <- CallFunction v0, [v31, v32]
+v34 <- LoadInteger '3'
+v35 <- LoadInteger '0'
+v36 <- CallFunction v0, [v34, v35]
+v37 <- LoadInteger '0'
+v38 <- LoadInteger '1'
+v39 <- CallFunction v0, [v37, v38]
+v40 <- LoadInteger '1'
+v41 <- LoadInteger '1'
+v42 <- CallFunction v0, [v40, v41]
+v43 <- LoadInteger '2'
+v44 <- LoadInteger '1'
+v45 <- CallFunction v0, [v43, v44]
+v46 <- LoadInteger '3'
+v47 <- LoadInteger '1'
+v48 <- CallFunction v0, [v46, v47]
+v49 <- LoadInteger '2'
+v50 <- CallFunction v0, [v49]
+v51 <- LoadString 'x1'
+
+
+function f(a1) {
+    var o = { a: 0, b: 0 };
+    if (a1 == 0) {
+        o.a = 1;
+    } else {
+        if (a1 <= 1) {
+            if (a1 == 2) {
+                o.a = 2;
+            } else {
+                o.a = 1;
+            }
+            o.a = 2;
+        } else {
+            if (a1 == 2) {
+                o.a = "x";
+            } else {
+                o.a = "x";
+            }
+            o.b = 22;
+        }
+        o.b = 22;
+    }
+    return o.a + 1;
+}
+f(0, 0);
+f(1, 0);
+f(2, 0);
+f(3, 0);
+f(0, 1);
+f(1, 1);
+f(2, 1);
+f(3, 1);
+f(2);
+
+FuzzIL program written to corpus/escape-analysis-phi-type-2.fzil

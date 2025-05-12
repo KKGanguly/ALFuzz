@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1
+    BeginForLoopInitializer
+        v2 <- LoadInteger '1073741820'
+    BeginForLoopCondition -> v3
+        v4 <- LoadInteger '1073741822'
+        v5 <- Compare v3, '<', v4
+    BeginForLoopAfterthought v5 -> v6
+        v7 <- UnaryOperation v6, '++'
+    BeginForLoopBody -> v8
+        v9 <- Compare v1, '<', v8
+        BeginIf v9
+            Update v1, '+', v8
+        EndIf
+    EndForLoop
+EndPlainFunction
+v10 <- LoadInteger '5'
+v11 <- CallFunction v0, [v10]
+
+
+function f(a1) {
+    for (let i3 = 1073741820; i3 < 1073741822; i3++) {
+        if (a1 < i3) {
+            a1 += i3;
+        }
+    }
+}
+f(5);
+
+FuzzIL program written to corpus/regress-crbug-39160.fzil

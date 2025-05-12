@@ -1,0 +1,50 @@
+v0 <- LoadUndefined
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'o', 'var', v1
+v3 <- BeginPlainFunction -> v4, v5
+    SetProperty v4, 'a', v5
+EndPlainFunction
+v6 <- LoadUndefined
+v7 <- CallFunction v3, [v2, v6]
+v8 <- LoadUndefined
+v9 <- CallFunction v3, [v2, v8]
+v10 <- BeginPlainFunction -> v11
+    v12 <- LoadUndefined
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v12
+    v13 <- EndObjectLiteral
+    v14 <- CreateNamedVariable 'o', 'var', v13
+    BeginIf v11
+        v15 <- LoadInteger '1'
+        v16 <- CallFunction v3, [v14, v15]
+    EndIf
+    Return v14
+EndPlainFunction
+v17 <- LoadBoolean 'false'
+v18 <- CallFunction v10, [v17]
+v19 <- LoadBoolean 'false'
+v20 <- CallFunction v10, [v19]
+v21 <- LoadBoolean 'true'
+v22 <- CallFunction v10, [v21]
+
+
+var o = { a: undefined };
+function store(a4, a5) {
+    a4.a = a5;
+}
+store(o, undefined);
+store(o, undefined);
+function f(a11) {
+    var o = { a: undefined };
+    if (a11) {
+        store(o, 1);
+    }
+    return o;
+}
+f(false);
+f(false);
+f(true);
+
+FuzzIL program written to corpus/regress-store-heapobject.fzil

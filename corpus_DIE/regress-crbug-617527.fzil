@@ -1,0 +1,28 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString '1'
+v3 <- CreateNamedVariable 'toLocaleString', 'none'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- CallMethod v5, 'defineProperty', [v1, v2, v4]
+v7 <- BeginArrowFunction -> v8
+    v9 <- CreateNamedVariable 'RegExp', 'none'
+    v10 <- LoadInteger '0'
+    v11 <- LoadInteger '0'
+    v12 <- Construct v9, [v10, v11]
+    Return v12
+EndArrowFunction
+v13 <- CallFunction v7, []
+
+
+const v1 = Array.prototype;
+Object.defineProperty(v1, "1", { get: toLocaleString });
+const v7 = (a8) => {
+    const v12 = new RegExp(0, 0);
+    return v12;
+};
+v7();
+
+FuzzIL program written to corpus/regress-crbug-617527.fzil

@@ -1,0 +1,55 @@
+v0 <- BeginPlainFunction -> v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- GetProperty v2, 'arguments'
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadInteger '0'
+    v7 <- CreateNamedVariable 'i', 'var', v6
+    BeginObjectLiteral
+    v8 <- EndObjectLiteral
+    v9 <- CreateNamedVariable 'o', 'var', v8
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v10 <- Compare v7, '<', v5
+    BeginForLoopAfterthought v10
+        v11 <- UnaryOperation v7, '++'
+    BeginForLoopBody
+        v12 <- GetProperty v9, 'y'
+        v13 <- UnaryOperation '+', v12
+        SetProperty v9, 'y', v13
+        v14 <- CallFunction v2, []
+    EndForLoop
+EndPlainFunction
+v15 <- LoadInteger '1'
+v16 <- CallFunction v4, [v15]
+v17 <- LoadInteger '1'
+v18 <- CallFunction v4, [v17]
+v19 <- LoadInteger '1'
+v20 <- CallFunction v4, [v19]
+v21 <- CallFunction v0, [v20]
+v22 <- LoadInteger '2'
+v23 <- CallFunction v4, [v22]
+v24 <- CallFunction v0, [v23]
+
+
+function dummy(a1) {
+}
+function g() {
+    return g.arguments;
+}
+function f(a5) {
+    var i = 0;
+    var o = {};
+    for (; i < a5; i++) {
+        o.y = +o.y;
+        g();
+    }
+}
+f(1);
+f(1);
+dummy(f(1));
+dummy(f(2));
+
+FuzzIL program written to corpus/regress-457935.fzil

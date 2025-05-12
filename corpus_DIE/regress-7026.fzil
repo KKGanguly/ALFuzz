@@ -1,0 +1,50 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    Return v3
+EndPlainFunction
+v4 <- LoadString 'a'
+v5 <- CreateNamedVariable 'a', 'const', v4
+v6 <- LoadInteger '1'
+v7 <- CreateArray [v6]
+v8 <- LoadInteger '0'
+v9 <- CallFunction v0, [v7, v8]
+v10 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v10
+v11 <- EndObjectLiteral
+v12 <- CallFunction v0, [v11, v5]
+v13 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v14 <- EndObjectLiteral
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v15, v16, v17
+        Return v17
+    EndObjectLiteralMethod
+v18 <- EndObjectLiteral
+v19 <- Construct v13, [v14, v18]
+v20 <- CreateNamedVariable 'p', 'const', v19
+v21 <- LoadString 'b'
+v22 <- BinaryOperation v5, '+', v21
+v23 <- LoadString 'b'
+v24 <- BinaryOperation v5, '+', v23
+v25 <- CallFunction v0, [v20, v24]
+
+
+function foo(a1, a2) {
+    return a1[a2];
+}
+const a = "a";
+foo([1], 0);
+foo({ a: 1 }, a);
+const v14 = {};
+const v18 = {
+    get(a16, a17) {
+        return a17;
+    },
+};
+const v19 = new Proxy(v14, v18);
+const p = v19;
+a + "b";
+foo(p, a + "b");
+
+FuzzIL program written to corpus/regress-7026.fzil

@@ -1,0 +1,484 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadInteger '42'
+        ThrowException v3
+    EndPlainFunction
+    v4 <- BeginPlainFunction -> 
+        v5 <- LoadInteger '1'
+        v6 <- CreateNamedVariable 'a', 'var', v5
+        BeginTry
+            v7 <- LoadInteger '2'
+            v8 <- CreateNamedVariable 'dummy', 'var', v7
+            v9 <- CallFunction v1, [v8]
+        BeginCatch -> v10
+            v11 <- BinaryOperation v10, '+', v6
+            Return v11
+        EndTryCatch
+    EndPlainFunction
+    v12 <- LoadInteger '43'
+    v13 <- CallFunction v4, []
+    v14 <- LoadInteger '43'
+    v15 <- CallFunction v4, []
+    v16 <- LoadInteger '43'
+    v17 <- CallFunction v4, []
+EndPlainFunction
+v18 <- CallFunction v0, []
+v19 <- BeginPlainFunction -> 
+    v20 <- BeginPlainFunction -> v21
+        v22 <- LoadInteger '42'
+        ThrowException v22
+    EndPlainFunction
+    v23 <- BeginPlainFunction -> 
+        v24 <- LoadUndefined
+        v25 <- CreateNamedVariable 'b', 'var', v24
+        BeginTry
+            v26 <- LoadInteger '1'
+            v27 <- CreateNamedVariable 'a', 'var', v26
+            BeginTry
+                v28 <- LoadInteger '2'
+                v29 <- CreateNamedVariable 'dummy', 'var', v28
+                v30 <- CallFunction v20, [v29]
+            BeginCatch -> v31
+                v32 <- BinaryOperation v31, '+', v27
+                Reassign v25, v32
+            EndTryCatch
+        BeginCatch -> v33
+            v34 <- LoadInteger '0'
+            Return v34
+        EndTryCatch
+        Return v25
+    EndPlainFunction
+    v35 <- LoadInteger '43'
+    v36 <- CallFunction v23, []
+    v37 <- LoadInteger '43'
+    v38 <- CallFunction v23, []
+    v39 <- LoadInteger '43'
+    v40 <- CallFunction v23, []
+EndPlainFunction
+v41 <- CallFunction v19, []
+v42 <- BeginPlainFunction -> 
+    v43 <- BeginPlainFunction -> v44
+        v45 <- LoadInteger '42'
+        ThrowException v45
+    EndPlainFunction
+    v46 <- BeginPlainFunction -> 
+        v47 <- LoadInteger '1'
+        v48 <- CreateNamedVariable 'a', 'var', v47
+        BeginTry
+            v49 <- LoadInteger '2'
+            v50 <- CreateNamedVariable 'dummy', 'var', v49
+            v51 <- CallFunction v43, [v50]
+        BeginCatch -> v52
+            v53 <- BinaryOperation v52, '+', v48
+            v54 <- CreateNamedVariable 'b', 'none'
+            Reassign v54, v53
+        EndTryCatch
+        v55 <- CreateNamedVariable 'b', 'none'
+        Return v55
+    EndPlainFunction
+    v56 <- BeginPlainFunction -> 
+        v57 <- LoadInteger '1'
+        v58 <- CreateNamedVariable 'c', 'var', v57
+        v59 <- CallFunction v46, []
+        v60 <- LoadInteger '1'
+        v61 <- BinaryOperation v59, '+', v60
+        Return v61
+    EndPlainFunction
+    v62 <- LoadInteger '44'
+    v63 <- CallFunction v56, []
+    v64 <- LoadInteger '44'
+    v65 <- CallFunction v56, []
+    v66 <- LoadInteger '44'
+    v67 <- CallFunction v56, []
+EndPlainFunction
+v68 <- CallFunction v42, []
+v69 <- BeginPlainFunction -> 
+    v70 <- BeginPlainFunction -> v71
+        ThrowException v71
+    EndPlainFunction
+    v72 <- BeginPlainFunction -> v73
+        v74 <- CallFunction v70, [v73]
+        Return v74
+    EndPlainFunction
+    v75 <- BeginPlainFunction -> 
+        v76 <- LoadInteger '1'
+        v77 <- CreateNamedVariable 'a', 'var', v76
+        BeginTry
+            v78 <- LoadInteger '42'
+            v79 <- CreateNamedVariable 'c', 'var', v78
+            v80 <- CallFunction v72, [v79]
+        BeginCatch -> v81
+            Update v77, '+', v81
+        EndTryCatch
+        Return v77
+    EndPlainFunction
+    v82 <- LoadInteger '43'
+    v83 <- CallFunction v75, []
+    v84 <- LoadInteger '43'
+    v85 <- CallFunction v75, []
+    v86 <- LoadInteger '43'
+    v87 <- CallFunction v75, []
+EndPlainFunction
+v88 <- CallFunction v69, []
+v89 <- BeginPlainFunction -> 
+    v90 <- LoadInteger '0'
+    v91 <- CreateNamedVariable 'global', 'var', v90
+    v92 <- BeginPlainFunction -> 
+        v93 <- LoadString 'boom!'
+        ThrowException v93
+    EndPlainFunction
+    v94 <- BeginPlainFunction -> v95
+        v96 <- LoadInteger '23'
+        v97 <- BinaryOperation v95, '+', v96
+        v98 <- CreateNamedVariable 'x', 'var', v97
+        BeginTry
+            v99 <- LoadInteger '42'
+            v100 <- BinaryOperation v95, '+', v99
+            v101 <- CreateNamedVariable 'y', 'let', v100
+            v102 <- BeginPlainFunction -> 
+                v103 <- BinaryOperation v98, '+', v101
+                Return v103
+            EndPlainFunction
+            v104 <- CallFunction v92, []
+        BeginCatch -> v105
+            Reassign v91, v98
+        EndTryCatch
+        Return v98
+    EndPlainFunction
+    v106 <- LoadInteger '23'
+    v107 <- LoadInteger '0'
+    v108 <- CallFunction v94, [v107]
+    v109 <- LoadInteger '24'
+    v110 <- LoadInteger '1'
+    v111 <- CallFunction v94, [v110]
+    v112 <- LoadInteger '25'
+    v113 <- LoadInteger '2'
+    v114 <- CallFunction v94, [v113]
+    v115 <- LoadInteger '25'
+EndPlainFunction
+v116 <- CallFunction v89, []
+v117 <- BeginPlainFunction -> 
+    v118 <- LoadInteger '0'
+    v119 <- CreateNamedVariable 'global', 'var', v118
+    v120 <- BeginPlainFunction -> 
+        v121 <- LoadString 'boom!'
+        ThrowException v121
+    EndPlainFunction
+    v122 <- BeginPlainFunction -> v123
+        v124 <- LoadInteger '23'
+        v125 <- BinaryOperation v123, '+', v124
+        v126 <- CreateNamedVariable 'x', 'var', v125
+        BeginTry
+            v127 <- LoadInteger '42'
+            v128 <- BinaryOperation v123, '+', v127
+            v129 <- CreateNamedVariable 'y', 'let', v128
+            v130 <- BeginPlainFunction -> 
+                v131 <- BinaryOperation v126, '+', v129
+                Return v131
+            EndPlainFunction
+            v132 <- CallFunction v120, []
+        BeginFinally
+            Reassign v119, v126
+        EndTryCatch
+        Return v126
+    EndPlainFunction
+    v133 <- BeginPlainFunction -> 
+        v134 <- LoadInteger '0'
+        v135 <- CallFunction v122, [v134]
+    EndPlainFunction
+    v136 <- CallFunction v133, []
+    v137 <- BeginPlainFunction -> 
+        v138 <- LoadInteger '1'
+        v139 <- CallFunction v122, [v138]
+    EndPlainFunction
+    v140 <- CallFunction v137, []
+    v141 <- BeginPlainFunction -> 
+        v142 <- LoadInteger '2'
+        v143 <- CallFunction v122, [v142]
+    EndPlainFunction
+    v144 <- CallFunction v141, []
+    v145 <- LoadString 'boom!'
+    v146 <- LoadInteger '25'
+EndPlainFunction
+v147 <- CallFunction v117, []
+v148 <- BeginPlainFunction -> 
+    v149 <- LoadInteger '0'
+    v150 <- CreateNamedVariable 'global', 'var', v149
+    v151 <- BeginPlainFunction -> 
+        v152 <- LoadInteger '5'
+        ThrowException v152
+    EndPlainFunction
+    v153 <- BeginPlainFunction -> v154
+        v155 <- LoadInteger '23'
+        v156 <- BinaryOperation v154, '+', v155
+        v157 <- CreateNamedVariable 'x', 'var', v156
+        BeginTry
+            BeginTry
+                v158 <- LoadInteger '1'
+                ThrowException v158
+            BeginCatch -> v159
+                v160 <- BeginPlainFunction -> 
+                    v161 <- CreateNamedVariable 'y', 'none'
+                    v162 <- BinaryOperation v157, '+', v161
+                    Return v162
+                EndPlainFunction
+                v163 <- CallFunction v151, []
+            EndTryCatch
+        BeginCatch -> v164
+            v165 <- BinaryOperation v157, '+', v164
+            Reassign v150, v165
+        EndTryCatch
+        Return v157
+    EndPlainFunction
+    v166 <- LoadInteger '23'
+    v167 <- LoadInteger '0'
+    v168 <- CallFunction v153, [v167]
+    v169 <- LoadInteger '24'
+    v170 <- LoadInteger '1'
+    v171 <- CallFunction v153, [v170]
+    v172 <- LoadInteger '25'
+    v173 <- LoadInteger '2'
+    v174 <- CallFunction v153, [v173]
+    v175 <- LoadInteger '30'
+EndPlainFunction
+v176 <- CallFunction v148, []
+v177 <- BeginPlainFunction -> 
+    v178 <- LoadInteger '0'
+    v179 <- CreateNamedVariable 'global', 'var', v178
+    v180 <- BeginPlainFunction -> 
+        v181 <- LoadInteger '5'
+        ThrowException v181
+    EndPlainFunction
+    v182 <- BeginPlainFunction -> v183
+        v184 <- LoadInteger '23'
+        v185 <- BinaryOperation v183, '+', v184
+        v186 <- CreateNamedVariable 'x', 'var', v185
+        BeginTry
+            v187 <- LoadInteger '42'
+            v188 <- BinaryOperation v183, '+', v187
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `y`, v188
+            v189 <- EndObjectLiteral
+            BeginWith v189
+                v190 <- BeginPlainFunction -> 
+                    v191 <- CreateNamedVariable 'y', 'none'
+                    v192 <- BinaryOperation v186, '+', v191
+                    Return v192
+                EndPlainFunction
+                v193 <- CallFunction v180, []
+            EndWith
+        BeginCatch -> v194
+            v195 <- BinaryOperation v186, '+', v194
+            Reassign v179, v195
+        EndTryCatch
+        Return v186
+    EndPlainFunction
+    v196 <- LoadInteger '23'
+    v197 <- LoadInteger '0'
+    v198 <- CallFunction v182, [v197]
+    v199 <- LoadInteger '24'
+    v200 <- LoadInteger '1'
+    v201 <- CallFunction v182, [v200]
+    v202 <- LoadInteger '25'
+    v203 <- LoadInteger '2'
+    v204 <- CallFunction v182, [v203]
+    v205 <- LoadInteger '30'
+EndPlainFunction
+v206 <- CallFunction v177, []
+
+
+function LazyDeoptFromTryBlock() {
+    function g(a2) {
+        throw 42;
+    }
+    function f() {
+        var a = 1;
+        try {
+            var dummy = 2;
+            g(dummy);
+        } catch(e10) {
+            return e10 + a;
+        }
+    }
+    f();
+    f();
+    f();
+}
+LazyDeoptFromTryBlock();
+function LazyDeoptDoublyNestedTryBlock() {
+    function g(a21) {
+        throw 42;
+    }
+    function f() {
+        var b;
+        try {
+            var a = 1;
+            try {
+                var dummy = 2;
+                g(dummy);
+            } catch(e31) {
+                b = e31 + a;
+            }
+        } catch(e33) {
+            return 0;
+        }
+        return b;
+    }
+    f();
+    f();
+    f();
+}
+LazyDeoptDoublyNestedTryBlock();
+function LazyDeoptInlinedTry() {
+    function g(a44) {
+        throw 42;
+    }
+    function h() {
+        var a = 1;
+        try {
+            var dummy = 2;
+            g(dummy);
+        } catch(e52) {
+            b = e52 + a;
+        }
+        return b;
+    }
+    function f() {
+        var c = 1;
+        return h() + 1;
+    }
+    f();
+    f();
+    f();
+}
+LazyDeoptInlinedTry();
+function LazyDeoptInlinedIntoTry() {
+    function g(a71) {
+        throw a71;
+    }
+    function h(a73) {
+        return g(a73);
+    }
+    function f() {
+        var a = 1;
+        try {
+            var c = 42;
+            h(c);
+        } catch(e81) {
+            a += e81;
+        }
+        return a;
+    }
+    f();
+    f();
+    f();
+}
+LazyDeoptInlinedIntoTry();
+function LazyDeoptTryBlockContextCatch() {
+    var global = 0;
+    function g() {
+        throw "boom!";
+    }
+    function f(a95) {
+        var x = a95 + 23;
+        try {
+            let y = a95 + 42;
+            function capture() {
+                return x + y;
+            }
+            g();
+        } catch(e105) {
+            global = x;
+        }
+        return x;
+    }
+    f(0);
+    f(1);
+    f(2);
+}
+LazyDeoptTryBlockContextCatch();
+function LazyDeoptTryBlockFinally() {
+    var global = 0;
+    function g() {
+        throw "boom!";
+    }
+    function f(a123) {
+        var x = a123 + 23;
+        try {
+            let y = a123 + 42;
+            function capture() {
+                return x + y;
+            }
+            g();
+        } finally {
+            global = x;
+        }
+        return x;
+    }
+    function f133() {
+        f(0);
+    }
+    f133();
+    function f137() {
+        f(1);
+    }
+    f137();
+    function f141() {
+        f(2);
+    }
+    f141();
+}
+LazyDeoptTryBlockFinally();
+function LazyDeoptTryCatchContextCatch() {
+    var global = 0;
+    function g() {
+        throw 5;
+    }
+    function f(a154) {
+        var x = a154 + 23;
+        try {
+            try {
+                throw 1;
+            } catch(e159) {
+                function capture() {
+                    return x + y;
+                }
+                g();
+            }
+        } catch(e164) {
+            global = x + e164;
+        }
+        return x;
+    }
+    f(0);
+    f(1);
+    f(2);
+}
+LazyDeoptTryCatchContextCatch();
+function LazyDeoptTryWithContextCatch() {
+    var global = 0;
+    function g() {
+        throw 5;
+    }
+    function f(a183) {
+        var x = a183 + 23;
+        try {
+            const v188 = a183 + 42;
+            with ({ y: v188 }) {
+                function capture() {
+                    return x + y;
+                }
+                g();
+            }
+        } catch(e194) {
+            global = x + e194;
+        }
+        return x;
+    }
+    f(0);
+    f(1);
+    f(2);
+}
+LazyDeoptTryWithContextCatch();
+
+FuzzIL program written to corpus/try-catch-deopt.fzil

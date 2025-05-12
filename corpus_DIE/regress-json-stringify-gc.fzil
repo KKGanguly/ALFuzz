@@ -1,0 +1,98 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadString 'a'
+v3 <- CreateNamedVariable 'new_space_string', 'var', v2
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+BeginForLoopCondition -> v5
+    v6 <- LoadInteger '8'
+    v7 <- Compare v5, '<', v6
+BeginForLoopAfterthought v7 -> v8
+    v9 <- UnaryOperation v8, '++'
+BeginForLoopBody -> v10
+    Update v3, '+', v3
+EndForLoop
+BeginForLoopInitializer
+    v11 <- LoadInteger '0'
+BeginForLoopCondition -> v12
+    v13 <- LoadInteger '10000'
+    v14 <- Compare v12, '<', v13
+BeginForLoopAfterthought v14 -> v15
+    v16 <- UnaryOperation v15, '++'
+BeginForLoopBody -> v17
+    v18 <- CallMethod v1, 'push', [v3]
+EndForLoop
+v19 <- CreateNamedVariable 'JSON', 'none'
+v20 <- CallMethod v19, 'stringify', [v1]
+v21 <- CreateNamedVariable 'json1', 'none'
+Reassign v21, v20
+v22 <- CallMethod v19, 'stringify', [v1]
+v23 <- CreateNamedVariable 'json2', 'none'
+Reassign v23, v22
+v24 <- CreateNamedVariable 'json1', 'none'
+v25 <- CreateNamedVariable 'json2', 'none'
+v26 <- Compare v24, '==', v25
+v27 <- LoadString 'GC caused JSON.stringify to fail.'
+BeginForLoopInitializer
+    v28 <- LoadInteger '0'
+BeginForLoopCondition -> v29
+    v30 <- LoadInteger '10000'
+    v31 <- Compare v29, '<', v30
+BeginForLoopAfterthought v31 -> v32
+    v33 <- UnaryOperation v32, '++'
+BeginForLoopBody -> v34
+    v35 <- CallMethod v34, 'toString', []
+    v36 <- CreateNamedVariable 's', 'var', v35
+    v37 <- LoadString '"'
+    v38 <- BinaryOperation v37, '+', v36
+    v39 <- LoadString '"'
+    v40 <- BinaryOperation v38, '+', v39
+    v41 <- LoadNull
+    v42 <- LoadInteger '0'
+    v43 <- CallMethod v19, 'stringify', [v36, v41, v42]
+EndForLoop
+BeginForLoopInitializer
+    v44 <- LoadInteger '0'
+BeginForLoopCondition -> v45
+    v46 <- LoadInteger '10000'
+    v47 <- Compare v45, '<', v46
+BeginForLoopAfterthought v47 -> v48
+    v49 <- UnaryOperation v48, '++'
+BeginForLoopBody -> v50
+    v51 <- CallMethod v50, 'toString', []
+    v52 <- LoadString '☃'
+    v53 <- BinaryOperation v51, '+', v52
+    v54 <- CreateNamedVariable 's', 'var', v53
+    v55 <- LoadString '"'
+    v56 <- BinaryOperation v55, '+', v54
+    v57 <- LoadString '"'
+    v58 <- BinaryOperation v56, '+', v57
+    v59 <- LoadNull
+    v60 <- LoadInteger '0'
+    v61 <- CallMethod v19, 'stringify', [v54, v59, v60]
+EndForLoop
+
+
+var a = [];
+var new_space_string = "a";
+for (let i5 = 0; i5 < 8; i5++) {
+    new_space_string += new_space_string;
+}
+for (let i12 = 0; i12 < 10000; i12++) {
+    a.push(new_space_string);
+}
+json1 = JSON.stringify(a);
+json2 = JSON.stringify(a);
+json1 == json2;
+for (let i29 = 0; i29 < 10000; i29++) {
+    var s = i29.toString();
+    (""" + s) + """;
+    JSON.stringify(s, null, 0);
+}
+for (let i45 = 0; i45 < 10000; i45++) {
+    var s = i45.toString() + "☃";
+    (""" + s) + """;
+    JSON.stringify(s, null, 0);
+}
+
+FuzzIL program written to corpus/regress-json-stringify-gc.fzil

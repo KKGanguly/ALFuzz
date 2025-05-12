@@ -1,0 +1,21 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadInteger '0'
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'defineProperty', [v1, v2, v3]
+v6 <- BeginPlainFunction -> 
+    v7 <- CallMethod v1, 'pop', []
+EndPlainFunction
+v8 <- CallFunction v6, []
+
+
+var a = [];
+Object.defineProperty(a, 0, {});
+function f6() {
+    a.pop();
+}
+f6();
+
+FuzzIL program written to corpus/regress-array-pop-nonconfigurable.fzil

@@ -1,0 +1,87 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- UnaryOperation '-', v2
+    v4 <- CreateNamedVariable 'ret', 'var', v3
+    v5 <- LoadInteger '0'
+    v6 <- LoadInteger '1'
+    v7 <- LoadInteger '2'
+    v8 <- LoadInteger '3'
+    v9 <- LoadInteger '4'
+    BeginSwitch v1
+        BeginSwitchDefaultCase
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v5
+            v10 <- LoadInteger '0'
+            Reassign v4, v10
+            Break
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v6
+            v11 <- LoadInteger '1'
+            Reassign v4, v11
+            Break
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v7
+            v12 <- LoadInteger '2'
+            Reassign v4, v12
+            Break
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v8
+            v13 <- LoadInteger '3'
+            Reassign v4, v13
+            Break
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v9
+            v14 <- LoadInteger '4'
+            Reassign v4, v14
+            Break
+        EndSwitchCase fallsThrough
+    EndSwitch
+    Return v4
+EndPlainFunction
+BeginForLoopInitializer
+    v15 <- LoadInteger '0'
+BeginForLoopCondition -> v16
+    v17 <- LoadInteger '3'
+    v18 <- Compare v16, '<', v17
+BeginForLoopAfterthought v18 -> v19
+    v20 <- UnaryOperation v19, '++'
+BeginForLoopBody -> v21
+    v22 <- CallFunction v0, [v21]
+EndForLoop
+v23 <- LoadInteger '0'
+v24 <- LoadInteger '0'
+v25 <- CallFunction v0, [v24]
+v26 <- LoadInteger '1'
+v27 <- LoadInteger '1'
+v28 <- CallFunction v0, [v27]
+
+
+function f(a1) {
+    var ret = -1;
+    switch (a1) {
+        default:
+        case 0:
+            ret = 0;
+            break;
+        case 1:
+            ret = 1;
+            break;
+        case 2:
+            ret = 2;
+            break;
+        case 3:
+            ret = 3;
+            break;
+        case 4:
+            ret = 4;
+            break;
+    }
+    return ret;
+}
+for (let i16 = 0; i16 < 3; i16++) {
+    f(i16);
+}
+f(0);
+f(1);
+
+FuzzIL program written to corpus/regress-1394.fzil

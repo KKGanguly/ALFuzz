@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadUndefined
+    SetProperty v0, 'prototype', v2
+    v3 <- CallFunction v0, []
+    v4 <- Construct v0, []
+EndPlainFunction
+BeginForLoopInitializer
+    v5 <- LoadInteger '0'
+BeginForLoopCondition -> v6
+    v7 <- LoadInteger '10000'
+    v8 <- Compare v6, '<', v7
+BeginForLoopAfterthought v8 -> v9
+    v10 <- UnaryOperation v9, '++'
+BeginForLoopBody -> v11
+    v12 <- CallFunction v1, []
+EndForLoop
+
+
+function f() {
+}
+function g() {
+    f.prototype = undefined;
+    f();
+    new f();
+}
+for (let i6 = 0; i6 < 10000; i6++) {
+    g();
+}
+
+FuzzIL program written to corpus/regress-890057.fzil

@@ -1,0 +1,19 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- LoadString 'x'
+v3 <- BeginPlainFunction -> v4
+    v5 <- CreateNamedVariable 'x', 'none'
+    Reassign v5, v4
+EndPlainFunction
+v6 <- CallMethod v1, '__defineSetter__', [v2, v3]
+v7 <- LoadString 'global.x = 0'
+v8 <- CreateNamedVariable 'RangeError', 'none'
+
+
+var global = this;
+function f3(a4) {
+    x = a4;
+}
+global.__defineSetter__("x", f3);
+
+FuzzIL program written to corpus/regress-crbug-522380.fzil

@@ -1,0 +1,48 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'a', 'none'
+    v2 <- GetProperty v1, 'length'
+    v3 <- CreateNamedVariable 'n', 'var', v2
+    BeginForLoopInitializer
+        v4 <- LoadInteger '0'
+    BeginForLoopCondition -> v5
+        v6 <- Compare v5, '<', v3
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+    EndForLoop
+    BeginForLoopInitializer
+        v10 <- LoadInteger '0'
+    BeginForLoopCondition -> v11
+        v12 <- Compare v11, '<', v3
+    BeginForLoopAfterthought v12 -> v13
+        v14 <- UnaryOperation v13, '++'
+    BeginForLoopBody -> v15
+    EndForLoop
+EndPlainFunction
+v16 <- LoadString 'xxxxxxxxxxxxxxxxxxxxxxxxx'
+v17 <- CreateNamedVariable 'a', 'var', v16
+BeginWhileLoopHeader
+    v18 <- GetProperty v17, 'length'
+    v19 <- LoadInteger '100000'
+    v20 <- Compare v18, '<', v19
+BeginWhileLoopBody v20
+    v21 <- BinaryOperation v17, '+', v17
+    Reassign v17, v21
+EndWhileLoop
+v22 <- CallFunction v0, []
+
+
+function f() {
+    var n = a.length;
+    for (let i5 = 0; i5 < n; i5++) {
+    }
+    for (let i11 = 0; i11 < n; i11++) {
+    }
+}
+var a = "xxxxxxxxxxxxxxxxxxxxxxxxx";
+while (a.length < 100000) {
+    a = a + a;
+}
+f();
+
+FuzzIL program written to corpus/regress-725743.fzil

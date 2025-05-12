@@ -1,0 +1,35 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '8'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'sab', 'var', v2
+v4 <- CreateNamedVariable 'Int32Array', 'none'
+v5 <- Construct v4, [v3]
+v6 <- CreateNamedVariable 'ta', 'var', v5
+v7 <- LoadString 'length'
+v8 <- BeginPlainFunction -> 
+EndPlainFunction
+v9 <- CallMethod v6, '__defineSetter__', [v7, v8]
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadInteger '4294967295'
+    v12 <- LoadInteger '0'
+    v13 <- LoadInteger '0'
+    v14 <- CreateNamedVariable 'Atomics', 'none'
+    v15 <- CallMethod v14, 'compareExchange', [v6, v11, v12, v13]
+EndPlainFunction
+v16 <- CallFunction v10, []
+v17 <- CreateNamedVariable 'RangeError', 'none'
+
+
+const v2 = new Array(8);
+var sab = v2;
+const v5 = new Int32Array(sab);
+var ta = v5;
+function f8() {
+}
+ta.__defineSetter__("length", f8);
+function f10() {
+    Atomics.compareExchange(ta, 4294967295, 0, 0);
+}
+f10();
+
+FuzzIL program written to corpus/regress-crbug-501809.fzil

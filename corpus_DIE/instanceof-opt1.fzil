@@ -1,0 +1,34 @@
+v0 <- CreateNamedVariable 'Function', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- CreateNamedVariable 'Symbol', 'none'
+v3 <- GetProperty v2, 'hasInstance'
+v4 <- GetComputedProperty v1, v3
+v5 <- GetProperty v2, 'hasInstance'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v5, v4
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'Foo', 'var', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '1'
+    v10 <- TestInstanceOf v9, v7
+    Return v10
+EndPlainFunction
+v11 <- LoadBoolean 'false'
+v12 <- CallFunction v8, []
+v13 <- LoadBoolean 'false'
+v14 <- CallFunction v8, []
+v15 <- LoadBoolean 'false'
+v16 <- CallFunction v8, []
+
+
+const v4 = Function.prototype[Symbol.hasInstance];
+const v5 = Symbol.hasInstance;
+var Foo = { [v5]: v4 };
+function foo() {
+    return 1 instanceof Foo;
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/instanceof-opt1.fzil

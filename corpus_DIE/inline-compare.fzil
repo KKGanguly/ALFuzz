@@ -1,0 +1,58 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallMethod v1, 'f', []
+    v3 <- CallMethod v1, 'f', []
+    v4 <- CreateNamedVariable 'x', 'var', v3
+    v5 <- CallMethod v1, 'f', []
+    v6 <- CallMethod v1, 'f', []
+    BeginIf v6
+        v7 <- LoadBoolean 'false'
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'o', 'var', v8
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadInteger '0'
+    v12 <- LoadInteger '1'
+    v13 <- Compare v11, '===', v12
+    Return v13
+EndPlainFunction
+SetProperty v9, 'f', v10
+BeginForLoopInitializer
+    v14 <- LoadInteger '0'
+BeginForLoopCondition -> v15
+    v16 <- LoadInteger '5'
+    v17 <- Compare v15, '<', v16
+BeginForLoopAfterthought v17 -> v18
+    v19 <- UnaryOperation v18, '++'
+BeginForLoopBody -> v20
+    v21 <- CallFunction v0, [v9]
+EndForLoop
+v22 <- CallFunction v0, [v9]
+v23 <- GetProperty v9, 'f'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v23
+v24 <- EndObjectLiteral
+v25 <- CallFunction v0, [v24]
+
+
+function TestInlineCompare(a1) {
+    a1.f();
+    var x = a1.f();
+    a1.f();
+    if (a1.f()) {
+    }
+}
+var o = {};
+function f10() {
+    return 0 === 1;
+}
+o.f = f10;
+for (let i15 = 0; i15 < 5; i15++) {
+    TestInlineCompare(o);
+}
+TestInlineCompare(o);
+const v23 = o.f;
+TestInlineCompare({ f: v23 });
+
+FuzzIL program written to corpus/inline-compare.fzil

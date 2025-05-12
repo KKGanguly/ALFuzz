@@ -1,0 +1,19 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'foo', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '2'
+    Reassign v1, v3
+    v4 <- LoadInteger '4'
+    v5 <- BinaryOperation v4, '%', v1
+    Return v5
+EndPlainFunction
+v6 <- CallFunction v2, []
+
+
+var foo = false;
+function bar() {
+    return 4 % (foo = 2);
+}
+bar();
+
+FuzzIL program written to corpus/regress-352059.fzil

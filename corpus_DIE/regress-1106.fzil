@@ -1,0 +1,87 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- CreateNamedVariable 'x', 'none'
+Reassign v2, v1
+v3 <- LoadInteger '3'
+v4 <- CreateNamedVariable 'x', 'none'
+SetProperty v4, 'foo', v3
+v5 <- LoadInteger '4'
+SetProperty v4, 'bar', v5
+v6 <- DeleteProperty v4, 'foo'
+v7 <- LoadInteger '5'
+SetProperty v4, 'foo', v7
+v8 <- BeginPlainFunction -> 
+    v9 <- CreateNamedVariable 'foo', 'none'
+    Return v9
+EndPlainFunction
+BeginForLoopInitializer
+    v10 <- LoadInteger '0'
+    v11 <- CreateNamedVariable 'i', 'none'
+    Reassign v11, v10
+BeginForLoopCondition
+    v12 <- CreateNamedVariable 'i', 'none'
+    v13 <- LoadInteger '5'
+    v14 <- Compare v12, '<', v13
+BeginForLoopAfterthought v14
+    v15 <- CreateNamedVariable 'i', 'none'
+    v16 <- UnaryOperation '++', v15
+BeginForLoopBody
+    v17 <- LoadInteger '5'
+    v18 <- CallFunction v8, []
+EndForLoop
+v19 <- LoadInteger '5'
+v20 <- CallFunction v8, []
+v21 <- BeginPlainFunction -> 
+    v22 <- LoadInteger '42'
+    Return v22
+EndPlainFunction
+SetProperty v4, 'gee', v21
+v23 <- BeginPlainFunction -> 
+    v24 <- CreateNamedVariable 'gee', 'none'
+    v25 <- CallFunction v24, []
+    Return v25
+EndPlainFunction
+BeginForLoopInitializer
+    v26 <- LoadInteger '0'
+    v27 <- CreateNamedVariable 'i', 'none'
+    Reassign v27, v26
+BeginForLoopCondition
+    v28 <- CreateNamedVariable 'i', 'none'
+    v29 <- LoadInteger '5'
+    v30 <- Compare v28, '<', v29
+BeginForLoopAfterthought v30
+    v31 <- CreateNamedVariable 'i', 'none'
+    v32 <- UnaryOperation '++', v31
+BeginForLoopBody
+    v33 <- LoadInteger '42'
+    v34 <- CallFunction v23, []
+EndForLoop
+v35 <- LoadInteger '42'
+v36 <- CallFunction v23, []
+
+
+x = Object.prototype;
+x.foo = 3;
+x.bar = 4;
+delete x.foo;
+x.foo = 5;
+function f() {
+    return foo;
+}
+for (i = 0; i < 5; ++i) {
+    f();
+}
+f();
+function f21() {
+    return 42;
+}
+x.gee = f21;
+function g() {
+    return gee();
+}
+for (i = 0; i < 5; ++i) {
+    g();
+}
+g();
+
+FuzzIL program written to corpus/regress-1106.fzil

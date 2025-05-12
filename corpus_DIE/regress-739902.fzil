@@ -1,0 +1,59 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadInteger '24'
+        v4 <- BinaryOperation v2, '>>>', v3
+        v5 <- CreateNamedVariable 'String', 'none'
+        v6 <- CallMethod v5, 'fromCharCode', [v4]
+        Return v6
+    EndPlainFunction
+    v7 <- LoadInteger '1090519041'
+    v8 <- CreateNamedVariable 'e', 'var', v7
+    v9 <- CallFunction v1, [v8]
+    v10 <- LoadString 'A'
+    v11 <- CallFunction v1, [v8]
+EndPlainFunction
+v12 <- CallFunction v0, []
+v13 <- BeginPlainFunction -> 
+    v14 <- BeginPlainFunction -> v15
+        v16 <- LoadInteger '24'
+        v17 <- BinaryOperation v15, '>>>', v16
+        v18 <- LoadInteger '65535'
+        v19 <- BinaryOperation v17, '&', v18
+        Return v19
+    EndPlainFunction
+    v20 <- LoadInteger '1'
+    v21 <- CallFunction v14, [v20]
+    v22 <- LoadInteger '0'
+    v23 <- LoadInteger '1'
+    v24 <- CallFunction v14, [v23]
+    v25 <- LoadInteger '100'
+    v26 <- LoadInteger '100'
+    v27 <- LoadInteger '24'
+    v28 <- BinaryOperation v26, '<<', v27
+    v29 <- LoadInteger '42'
+    v30 <- BinaryOperation v28, '+', v29
+    v31 <- CallFunction v14, [v30]
+EndPlainFunction
+v32 <- CallFunction v13, []
+
+
+function f0() {
+    function f(a2) {
+        return String.fromCharCode(a2 >>> 24);
+    }
+    var e = 1090519041;
+    f(e);
+    f(e);
+}
+f0();
+function f13() {
+    function f(a15) {
+        return (a15 >>> 24) & 65535;
+    }
+    f(1);
+    f(1);
+    f((100 << 24) + 42);
+}
+f13();
+
+FuzzIL program written to corpus/regress-739902.fzil

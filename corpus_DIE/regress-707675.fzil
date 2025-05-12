@@ -1,0 +1,14 @@
+v0 <- LoadNull
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetProperty v2, '__proto__', v0
+v3 <- CreateNamedVariable 'Uint8Array', 'none'
+v4 <- GetProperty v1, 'prototype'
+v5 <- Construct v3, [v4]
+
+
+const t0 = Array.prototype;
+t0.__proto__ = null;
+new Uint8Array(Array.prototype);
+
+FuzzIL program written to corpus/regress-707675.fzil

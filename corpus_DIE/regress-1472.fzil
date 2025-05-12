@@ -1,0 +1,28 @@
+v0 <- LoadRegExp '(?:a(?:b(?:c(?:d(?:e(?:f(?:g(?:h(?:i(?:j(?:k(?:l(?:m(?:n(?:o(?:p(?:q(?:r(?:s(?:t(?:u(?:v(?:w(?:x(?:y(?:z(?:FooBar)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)' ''
+v1 <- CreateNamedVariable 'r1', 'var', v0
+v2 <- LoadString 'xxx'
+v3 <- CallMethod v2, 'match', [v1]
+v4 <- LoadRegExp '(?:a(?:b(?:c(?:d(?:e(?:f(?:g(?:h(?:i(?:j(?:k(?:l(?:FooBar){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}' ''
+v5 <- CreateNamedVariable 'r2', 'var', v4
+v6 <- LoadString 'xxx'
+v7 <- CallMethod v6, 'match', [v5]
+v8 <- LoadRegExp '(?:a(?:b(?:c(?:d(?:e(?:f(?:g(?:h(?:i(?:j(?:k(?:l(?:FooBar){2}){2}){2}){2}){2}){2}){2}){2}){2}){2}){2}){2}){2}' ''
+v9 <- CreateNamedVariable 'r3', 'var', v8
+v10 <- LoadString 'xxx'
+v11 <- CallMethod v10, 'match', [v9]
+v12 <- LoadRegExp '(?:a(?:b(?:c(?:d(?:e(?:f(?:g(?:h(?:i(?:FooBar){3,6}){3,6}){3,6}){3,6}){3,6}){3,6}){3,6}){3,6}){3,6}){3,6}' ''
+v13 <- CreateNamedVariable 'r4', 'var', v12
+v14 <- LoadString 'xxx'
+v15 <- CallMethod v14, 'match', [v13]
+
+
+var r1 = /(?:a(?:b(?:c(?:d(?:e(?:f(?:g(?:h(?:i(?:j(?:k(?:l(?:m(?:n(?:o(?:p(?:q(?:r(?:s(?:t(?:u(?:v(?:w(?:x(?:y(?:z(?:FooBar)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)+)/;
+("xxx").match(r1);
+var r2 = /(?:a(?:b(?:c(?:d(?:e(?:f(?:g(?:h(?:i(?:j(?:k(?:l(?:FooBar){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}){0,2}/;
+("xxx").match(r2);
+var r3 = /(?:a(?:b(?:c(?:d(?:e(?:f(?:g(?:h(?:i(?:j(?:k(?:l(?:FooBar){2}){2}){2}){2}){2}){2}){2}){2}){2}){2}){2}){2}){2}/;
+("xxx").match(r3);
+var r4 = /(?:a(?:b(?:c(?:d(?:e(?:f(?:g(?:h(?:i(?:FooBar){3,6}){3,6}){3,6}){3,6}){3,6}){3,6}){3,6}){3,6}){3,6}){3,6}/;
+("xxx").match(r4);
+
+FuzzIL program written to corpus/regress-1472.fzil

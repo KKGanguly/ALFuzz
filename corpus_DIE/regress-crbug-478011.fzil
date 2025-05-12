@@ -1,0 +1,20 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'e', 'var', v0
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- CallMethod v2, 'preventExtensions', [v1]
+v4 <- BeginPlainFunction -> 
+    v5 <- CreateNamedVariable 'Error', 'none'
+    v6 <- CallMethod v5, 'captureStackTrace', [v1]
+EndPlainFunction
+v7 <- CallFunction v4, []
+
+
+var e = {};
+Object.preventExtensions(e);
+function f4() {
+    Error.captureStackTrace(e);
+}
+f4();
+
+FuzzIL program written to corpus/regress-crbug-478011.fzil

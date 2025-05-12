@@ -1,0 +1,83 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadInteger '0'
+        Return v2
+    EndPlainFunction
+    v3 <- CallFunction v1, []
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- BeginPlainFunction -> 
+        v6 <- BeginPlainFunction -> 
+            v7 <- LoadInteger '0'
+            Return v7
+        EndPlainFunction
+        v8 <- CallFunction v6, []
+        Return v8
+    EndPlainFunction
+    v9 <- CallFunction v5, []
+    Return v9
+EndPlainFunction
+v10 <- CallFunction v0, []
+v11 <- CallFunction v4, []
+v12 <- LoadInteger '0'
+v13 <- BeginPlainFunction -> 
+EndPlainFunction
+v14 <- CallFunction v13, []
+v15 <- BeginPlainFunction -> 
+    v16 <- LoadInteger '0'
+    v17 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v18 <- CallFunction v17, []
+EndPlainFunction
+v19 <- CallFunction v15, []
+v20 <- LoadInteger '0'
+v21 <- BeginPlainFunction -> 
+    v22 <- BeginPlainFunction -> 
+        v23 <- LoadInteger '0'
+        v24 <- BeginPlainFunction -> 
+        EndPlainFunction
+        v25 <- CallFunction v24, []
+    EndPlainFunction
+    v26 <- CallFunction v22, []
+EndPlainFunction
+v27 <- CallFunction v21, []
+
+
+function f() {
+    function f1() {
+        return 0;
+    }
+    return f1();
+}
+function g() {
+    function h() {
+        function f6() {
+            return 0;
+        }
+        return f6();
+    }
+    return h();
+}
+f();
+g();
+function f13() {
+}
+f13();
+function f15() {
+    function f17() {
+    }
+    f17();
+}
+f15();
+function f21() {
+    function f22() {
+        function f24() {
+        }
+        f24();
+    }
+    f22();
+}
+f21();
+
+FuzzIL program written to corpus/lazy-iife-no-parens.fzil

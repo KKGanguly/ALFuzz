@@ -1,0 +1,36 @@
+v0 <- LoadRegExp '[bc]' ''
+v1 <- CreateNamedVariable 're', 'var', v0
+v2 <- LoadString 'baba'
+v3 <- CreateNamedVariable 'str', 'var', v2
+v4 <- LoadString ''
+v5 <- LoadString 'a'
+v6 <- LoadString 'a'
+v7 <- CreateArray [v4, v5, v6]
+v8 <- CallMethod v3, 'split', [v1]
+v9 <- BeginArrowFunction -> v10
+    v11 <- CreateNamedVariable 'RegExp', 'none'
+    v12 <- GetProperty v11, 'prototype'
+    v13 <- GetProperty v12, 'exec'
+    v14 <- CallMethod v13, 'call', [v1, v10]
+    Return v14
+EndArrowFunction
+SetProperty v1, 'exec', v9
+v15 <- LoadString ''
+v16 <- LoadString 'a'
+v17 <- LoadString 'a'
+v18 <- CreateArray [v15, v16, v17]
+v19 <- CallMethod v3, 'split', [v1]
+
+
+var re = /[bc]/;
+var str = "baba";
+["","a","a"];
+str.split(re);
+const v9 = (a10) => {
+    return RegExp.prototype.exec.call(re, a10);
+};
+re.exec = v9;
+["","a","a"];
+str.split(re);
+
+FuzzIL program written to corpus/regress-5351.fzil

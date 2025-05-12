@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    BeginWith v1
+        v2 <- BeginArrowFunction -> 
+            v3 <- LoadThis
+            Return v3
+        EndArrowFunction
+        v4 <- CallFunction v2, []
+        Return v4
+    EndWith
+EndPlainFunction
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'o', 'var', v5
+v7 <- CallMethod v0, 'call', [v6]
+
+
+function f() {
+    with ({}) {
+        const v2 = () => {
+            return this;
+        };
+        return v2();
+    }
+}
+var o = {};
+f.call(o);
+
+FuzzIL program written to corpus/arrow-with.fzil

@@ -1,0 +1,31 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    ThrowException v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- CallFunction v0, []
+    BeginWhileLoopHeader
+        v4 <- LoadInteger '1'
+    BeginWhileLoopBody v4
+    EndWhileLoop
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- CallFunction v2, []
+EndPlainFunction
+v7 <- CallFunction v5, []
+
+
+function g() {
+    throw 0;
+}
+function f() {
+    g();
+    while (1) {
+    }
+}
+function f5() {
+    f();
+}
+f5();
+
+FuzzIL program written to corpus/regress-ntl-effect.fzil

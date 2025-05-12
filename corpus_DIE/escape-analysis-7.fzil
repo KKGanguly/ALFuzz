@@ -1,0 +1,56 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadThis
+    SetProperty v2, 'x', v1
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    Directive 'use strict'
+    v5 <- Construct v0, []
+    v6 <- CreateNamedVariable 'o', 'var', v5
+    BeginIf v4
+        v7 <- LoadInteger '5'
+        SetProperty v6, 'x', v7
+    BeginElse
+        v8 <- LoadInteger '7'
+        SetProperty v6, 'x', v8
+    EndIf
+    v9 <- GetProperty v6, 'x'
+    Return v9
+EndPlainFunction
+v10 <- LoadInteger '5'
+v11 <- LoadBoolean 'true'
+v12 <- CallFunction v3, [v11]
+v13 <- LoadInteger '7'
+v14 <- LoadBoolean 'false'
+v15 <- CallFunction v3, [v14]
+v16 <- LoadInteger '5'
+v17 <- LoadBoolean 'true'
+v18 <- CallFunction v3, [v17]
+v19 <- LoadInteger '7'
+v20 <- LoadBoolean 'false'
+v21 <- CallFunction v3, [v20]
+v22 <- LoadInteger '7'
+v23 <- CallFunction v3, []
+
+
+function f() {
+    this.x = 0;
+}
+function g(a4) {
+    'use strict';
+    const v5 = new f();
+    var o = v5;
+    if (a4) {
+        o.x = 5;
+    } else {
+        o.x = 7;
+    }
+    return o.x;
+}
+g(true);
+g(false);
+g(true);
+g(false);
+g();
+
+FuzzIL program written to corpus/escape-analysis-7.fzil

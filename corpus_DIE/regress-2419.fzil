@@ -1,0 +1,97 @@
+v0 <- LoadInteger '5'
+v1 <- LoadInteger '4'
+v2 <- LoadInteger '3'
+v3 <- LoadInteger '2'
+v4 <- LoadInteger '1'
+v5 <- LoadInteger '0'
+v6 <- CreateArray [v0, v1, v2, v3, v4, v5]
+v7 <- CreateNamedVariable 'a', 'var', v6
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'freeze', [v7]
+v10 <- BeginPlainFunction -> 
+    v11 <- CallMethod v7, 'sort', []
+EndPlainFunction
+v12 <- CallFunction v10, []
+v13 <- LoadInteger '5'
+v14 <- LoadInteger '4'
+v15 <- LoadInteger '3'
+v16 <- LoadInteger '2'
+v17 <- LoadInteger '1'
+v18 <- LoadInteger '0'
+v19 <- CreateArray [v13, v14, v15, v16, v17, v18]
+v20 <- LoadInteger '5'
+v21 <- LoadInteger '4'
+v22 <- LoadInteger '3'
+v23 <- LoadInteger '2'
+v24 <- LoadInteger '1'
+v25 <- LoadInteger '0'
+v26 <- LoadInteger '6'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v20
+    ObjectLiteralAddElement `1`, v21
+    ObjectLiteralAddElement `2`, v22
+    ObjectLiteralAddElement `3`, v23
+    ObjectLiteralAddElement `4`, v24
+    ObjectLiteralAddElement `5`, v25
+    ObjectLiteralAddProperty `length`, v26
+v27 <- EndObjectLiteral
+v28 <- CreateNamedVariable 'b', 'var', v27
+v29 <- CallMethod v8, 'freeze', [v28]
+v30 <- BeginPlainFunction -> 
+    v31 <- CreateNamedVariable 'Array', 'none'
+    v32 <- GetProperty v31, 'prototype'
+    v33 <- GetProperty v32, 'sort'
+    v34 <- CallMethod v33, 'call', [v28]
+EndPlainFunction
+v35 <- CallFunction v30, []
+v36 <- LoadInteger '5'
+v37 <- LoadInteger '4'
+v38 <- LoadInteger '3'
+v39 <- LoadInteger '2'
+v40 <- LoadInteger '1'
+v41 <- LoadInteger '0'
+v42 <- LoadInteger '6'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v36
+    ObjectLiteralAddElement `1`, v37
+    ObjectLiteralAddElement `2`, v38
+    ObjectLiteralAddElement `3`, v39
+    ObjectLiteralAddElement `4`, v40
+    ObjectLiteralAddElement `5`, v41
+    ObjectLiteralAddProperty `length`, v42
+v43 <- EndObjectLiteral
+
+
+var a = [5,4,3,2,1,0];
+Object.freeze(a);
+function f10() {
+    a.sort();
+}
+f10();
+[5,4,3,2,1,0];
+const v27 = {
+    0: 5,
+    1: 4,
+    2: 3,
+    3: 2,
+    4: 1,
+    5: 0,
+    length: 6,
+};
+var b = v27;
+Object.freeze(b);
+function f30() {
+    Array.prototype.sort.call(b);
+}
+f30();
+const v43 = {
+    0: 5,
+    1: 4,
+    2: 3,
+    3: 2,
+    4: 1,
+    5: 0,
+    length: 6,
+};
+
+FuzzIL program written to corpus/regress-2419.fzil

@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- UnaryOperation '!', v1
+    BeginIf v4
+        v5 <- LoadUndefined
+        v6 <- BinaryOperation v2, '*', v5
+        v7 <- TernaryOperation v3, v1, v6
+        v8 <- LoadInteger '1'
+        v9 <- LoadInteger '42'
+        v10 <- TernaryOperation v7, v8, v9
+        Return v10
+    EndIf
+EndPlainFunction
+v11 <- BeginPlainFunction -> v12, v13
+    v14 <- LoadString 'abc'
+    v15 <- CallFunction v0, [v12, v14, v13]
+    Return v15
+EndPlainFunction
+v16 <- LoadBoolean 'false'
+v17 <- LoadInteger '0'
+v18 <- LoadInteger '0'
+v19 <- CallFunction v0, [v16, v17, v18]
+v20 <- LoadBoolean 'true'
+v21 <- LoadInteger '0'
+v22 <- CallFunction v11, [v20, v21]
+v23 <- LoadInteger '42'
+v24 <- LoadBoolean 'false'
+v25 <- LoadInteger '0'
+v26 <- CallFunction v11, [v24, v25]
+
+
+function f(a1, a2, a3) {
+    if (!a1) {
+        return (a3 ? a1 : a2 * undefined) ? 1 : 42;
+    }
+}
+function g(a12, a13) {
+    return f(a12, "abc", a13);
+}
+f(false, 0, 0);
+g(true, 0);
+g(false, 0);
+
+FuzzIL program written to corpus/regress-910838.fzil

@@ -1,0 +1,54 @@
+v0 <- CreateNamedVariable 'Date', 'none'
+v1 <- LoadFloat '1e+81'
+v2 <- Construct v0, [v1]
+v3 <- CallMethod v2, 'getTime', []
+v4 <- CreateNamedVariable 'isNaN', 'none'
+v5 <- CallFunction v4, [v3]
+v6 <- LoadString 'new Date(1e81)'
+v7 <- LoadFloat '1e+81'
+v8 <- UnaryOperation '-', v7
+v9 <- Construct v0, [v8]
+v10 <- CallMethod v9, 'getTime', []
+v11 <- CallFunction v4, [v10]
+v12 <- LoadString 'new Date(-1e81)'
+v13 <- LoadFloat '1e+81'
+v14 <- LoadString ''
+v15 <- Construct v0, [v13, v14]
+v16 <- CallMethod v15, 'getTime', []
+v17 <- CallFunction v4, [v16]
+v18 <- LoadString 'new Date(1e81, "")'
+v19 <- LoadFloat '1e+81'
+v20 <- UnaryOperation '-', v19
+v21 <- LoadString ''
+v22 <- Construct v0, [v20, v21]
+v23 <- CallMethod v22, 'getTime', []
+v24 <- CallFunction v4, [v23]
+v25 <- LoadString 'new Date(-1e81, "")'
+v26 <- CreateNamedVariable 'Number', 'none'
+v27 <- GetProperty v26, 'NaN'
+v28 <- Construct v0, [v27]
+v29 <- CallMethod v28, 'getTime', []
+v30 <- CallFunction v4, [v29]
+v31 <- LoadString 'new Date(Number.NaN)'
+v32 <- GetProperty v26, 'NaN'
+v33 <- LoadString ''
+v34 <- Construct v0, [v32, v33]
+v35 <- CallMethod v34, 'getTime', []
+v36 <- CallFunction v4, [v35]
+v37 <- LoadString 'new Date(Number.NaN, "")'
+
+
+const v2 = new Date(1e+81);
+isNaN(v2.getTime());
+const v9 = new Date(-1e+81);
+isNaN(v9.getTime());
+const v15 = new Date(1e+81, "");
+isNaN(v15.getTime());
+const v22 = new Date(-1e+81, "");
+isNaN(v22.getTime());
+const v28 = new Date(Number.NaN);
+isNaN(v28.getTime());
+const v34 = new Date(Number.NaN, "");
+isNaN(v34.getTime());
+
+FuzzIL program written to corpus/regress-416.fzil

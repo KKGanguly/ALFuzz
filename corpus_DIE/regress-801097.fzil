@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'return ((dividend | 0) / (('
+    v2 <- CreateNamedVariable 'source', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '32768'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- LoadString 'a,'
+        Update v2, '+', v10
+    EndForLoop
+    v11 <- LoadString 'a) | 0)) | 0'
+    Update v2, '+', v11
+    v12 <- LoadString 'dividend'
+    v13 <- CreateNamedVariable 'Function', 'none'
+    v14 <- CallFunction v13, [v12, v2]
+    Return v14
+EndPlainFunction
+v15 <- CallFunction v0, []
+v16 <- CreateNamedVariable 'func', 'var', v15
+v17 <- LoadString 'func();'
+v18 <- LoadString 'func()'
+
+
+function GetFunction() {
+    var source = "return ((dividend | 0) / ((";
+    for (let i4 = 0; i4 < 32768; i4++) {
+        source += "a,";
+    }
+    source += "a) | 0)) | 0";
+    return Function("dividend", source);
+}
+var func = GetFunction();
+
+FuzzIL program written to corpus/regress-801097.fzil

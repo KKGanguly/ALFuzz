@@ -1,0 +1,38 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '3'
+v3 <- LoadInteger '4'
+v4 <- CreateArray [v0, v1, v2, v3]
+v5 <- LoadInteger '1'
+v6 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `c1`, v5
+    ObjectLiteralAddProperty `c2`, v6
+v7 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `b1`, v4
+    ObjectLiteralAddProperty `b2`, v7
+v8 <- EndObjectLiteral
+v9 <- LoadString 'a2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a1`, v8
+    ObjectLiteralAddProperty `a2`, v9
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'obj', 'var', v10
+v12 <- LoadNull
+v13 <- LoadFloat '5.99999'
+v14 <- CreateNamedVariable 'JSON', 'none'
+v15 <- CallMethod v14, 'stringify', [v11, v12, v13]
+v16 <- LoadNull
+v17 <- LoadInteger '5'
+v18 <- CallMethod v14, 'stringify', [v11, v16, v17]
+
+
+const v4 = [1,2,3,4];
+const v7 = { c1: 1, c2: 2 };
+const v8 = { b1: v4, b2: v7 };
+var obj = { a1: v8, a2: "a2" };
+JSON.stringify(obj, null, 5.99999);
+JSON.stringify(obj, null, 5);
+
+FuzzIL program written to corpus/regress-753.fzil

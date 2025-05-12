@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 't', 'var', v1
+v3 <- BeginPlainFunction -> 
+    v4 <- CallMethod v2, 'foo', []
+    v5 <- LoadString 'function'
+    v6 <- CreateNamedVariable 'bar', 'none'
+    v7 <- TypeOf v6
+EndPlainFunction
+v8 <- CreateNamedVariable 'f', 'var', v3
+BeginForLoopInitializer
+    v9 <- LoadInteger '0'
+BeginForLoopCondition -> v10
+    v11 <- LoadInteger '10'
+    v12 <- Compare v10, '<', v11
+BeginForLoopAfterthought v12 -> v13
+    v14 <- UnaryOperation v13, '++'
+BeginForLoopBody -> v15
+    v16 <- CallFunction v8, []
+EndForLoop
+v17 <- LoadInteger '2'
+SetProperty v2, 'number', v17
+v18 <- CallFunction v8, []
+
+
+function f0() {
+}
+var t = { foo: f0 };
+function bar() {
+    t.foo();
+    typeof bar;
+}
+var f = bar;
+for (let i10 = 0; i10 < 10; i10++) {
+    f();
+}
+t.number = 2;
+f();
+
+FuzzIL program written to corpus/regress-1647.fzil

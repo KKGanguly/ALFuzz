@@ -1,0 +1,41 @@
+v0 <- CreateNamedVariable 'f0', 'none'
+v1 <- CallFunction v0, []
+v2 <- UnaryOperation '!', v1
+BeginIf v2
+    v3 <- LoadString 'Concurrent recompilation is disabled. Skipping this test.'
+    v4 <- CreateNamedVariable 'print', 'none'
+    v5 <- CallFunction v4, [v3]
+    v6 <- CreateNamedVariable 'quit', 'none'
+    v7 <- CallFunction v6, []
+EndIf
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '1'
+    v10 <- CreateNamedVariable 'x', 'const', v9
+EndPlainFunction
+v11 <- BeginPlainFunction -> v12
+    v13 <- CallFunction v8, []
+EndPlainFunction
+v14 <- CallFunction v11, []
+v15 <- CallFunction v11, []
+v16 <- LoadInteger '0'
+v17 <- CallFunction v11, [v16]
+v18 <- CallFunction v8, []
+v19 <- LoadString 'sync'
+
+
+if (!f0()) {
+    print("Concurrent recompilation is disabled. Skipping this test.");
+    quit();
+}
+function g() {
+    const x = 1;
+}
+function f(a12) {
+    g();
+}
+f();
+f();
+f(0);
+g();
+
+FuzzIL program written to corpus/parallel-optimize-disabled.fzil

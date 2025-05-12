@@ -1,0 +1,219 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '42'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadString '37'
+    Return v3
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v0
+    ObjectLiteralAddProperty `valueOf`, v2
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'o1', 'var', v4
+v6 <- CreateNamedVariable 'Number', 'none'
+v7 <- CallFunction v6, [v5]
+v8 <- CreateNamedVariable 'n1', 'var', v7
+v9 <- CreateNamedVariable 'String', 'none'
+v10 <- CallFunction v9, [v5]
+v11 <- CreateNamedVariable 's1', 'var', v10
+v12 <- TypeOf v8
+v13 <- LoadString 'number'
+v14 <- Compare v12, '==', v13
+v15 <- TypeOf v11
+v16 <- LoadString 'string'
+v17 <- Compare v15, '==', v16
+v18 <- CreateArray []
+v19 <- CreateNamedVariable 'trace', 'var', v18
+v20 <- LoadInteger '42'
+v21 <- CreateNamedVariable 'valueOfValue', 'var', v20
+v22 <- LoadString 'foo'
+v23 <- CreateNamedVariable 'toStringValue', 'var', v22
+v24 <- BeginPlainFunction -> 
+    v25 <- LoadString 'vo'
+    v26 <- CallMethod v19, 'push', [v25]
+    Return v21
+EndPlainFunction
+v27 <- BeginPlainFunction -> 
+    v28 <- LoadString 'ts'
+    v29 <- CallMethod v19, 'push', [v28]
+    Return v23
+EndPlainFunction
+v30 <- CreateNamedVariable 'valueOfFunc', 'var', v24
+v31 <- CreateNamedVariable 'toStringFunc', 'var', v27
+BeginObjectLiteral
+    BeginObjectLiteralGetter `toString` -> v32
+        v33 <- LoadString 'gts'
+        v34 <- CallMethod v19, 'push', [v33]
+        Return v31
+    EndObjectLiteralGetter
+    BeginObjectLiteralGetter `valueOf` -> v35
+        v36 <- LoadString 'gvo'
+        v37 <- CallMethod v19, 'push', [v36]
+        Return v30
+    EndObjectLiteralGetter
+v38 <- EndObjectLiteral
+v39 <- CreateNamedVariable 'ot', 'var', v38
+v40 <- CallFunction v6, [v39]
+v41 <- CreateNamedVariable 'nt', 'var', v40
+v42 <- LoadInteger '42'
+v43 <- LoadString 'gvo'
+v44 <- LoadString 'vo'
+v45 <- CreateArray [v43, v44]
+v46 <- CreateArray []
+Reassign v19, v46
+v47 <- CallFunction v9, [v39]
+v48 <- CreateNamedVariable 'st', 'var', v47
+v49 <- LoadString 'foo'
+v50 <- LoadString 'gts'
+v51 <- LoadString 'ts'
+v52 <- CreateArray [v50, v51]
+v53 <- CreateArray []
+Reassign v19, v53
+v54 <- LoadString 'not primitive'
+v55 <- CreateArray [v54]
+Reassign v21, v55
+v56 <- CallFunction v6, [v39]
+v57 <- CreateNamedVariable 'nt', 'var', v56
+v58 <- LoadString 'foo'
+v59 <- CallFunction v6, [v58]
+v60 <- LoadString 'gvo'
+v61 <- LoadString 'vo'
+v62 <- LoadString 'gts'
+v63 <- LoadString 'ts'
+v64 <- CreateArray [v60, v61, v62, v63]
+v65 <- CreateArray []
+Reassign v19, v65
+v66 <- LoadInteger '42'
+Reassign v21, v66
+v67 <- LoadString 'not primitive'
+v68 <- CreateArray [v67]
+Reassign v23, v68
+v69 <- CallFunction v9, [v39]
+v70 <- CreateNamedVariable 'st', 'var', v69
+v71 <- LoadInteger '42'
+v72 <- CallFunction v9, [v71]
+v73 <- LoadString 'gts'
+v74 <- LoadString 'ts'
+v75 <- LoadString 'gvo'
+v76 <- LoadString 'vo'
+v77 <- CreateArray [v73, v74, v75, v76]
+v78 <- CreateArray []
+Reassign v19, v78
+v79 <- LoadString 'not primitive'
+v80 <- CreateArray [v79]
+Reassign v21, v80
+v81 <- LoadString 'Number(ot)'
+v82 <- CreateNamedVariable 'TypeError', 'none'
+v83 <- LoadString 'gvo'
+v84 <- LoadString 'vo'
+v85 <- LoadString 'gts'
+v86 <- LoadString 'ts'
+v87 <- CreateArray [v83, v84, v85, v86]
+v88 <- LoadString 'not callable'
+Reassign v31, v88
+v89 <- CreateArray []
+Reassign v19, v89
+v90 <- LoadInteger '42'
+Reassign v21, v90
+v91 <- CallFunction v9, [v39]
+v92 <- CreateNamedVariable 'st', 'var', v91
+v93 <- LoadInteger '42'
+v94 <- CallFunction v9, [v93]
+v95 <- LoadString 'gts'
+v96 <- LoadString 'gvo'
+v97 <- LoadString 'vo'
+v98 <- CreateArray [v95, v96, v97]
+v99 <- LoadString 'not callable'
+Reassign v30, v99
+v100 <- CreateArray []
+Reassign v19, v100
+v101 <- LoadString 'String(ot)'
+v102 <- LoadString 'gts'
+v103 <- LoadString 'gvo'
+v104 <- CreateArray [v102, v103]
+Reassign v31, v27
+v105 <- LoadString '87'
+Reassign v23, v105
+v106 <- CreateArray []
+Reassign v19, v106
+v107 <- CallFunction v6, [v39]
+v108 <- CreateNamedVariable 'nt', 'var', v107
+v109 <- LoadInteger '87'
+v110 <- LoadString 'gvo'
+v111 <- LoadString 'gts'
+v112 <- LoadString 'ts'
+v113 <- CreateArray [v110, v111, v112]
+v114 <- LoadString 'Number(Symbol())'
+
+
+function f0() {
+    return 42;
+}
+function f2() {
+    return "37";
+}
+var o1 = { toString: f0, valueOf: f2 };
+var n1 = Number(o1);
+var s1 = String(o1);
+typeof n1 == "number";
+typeof s1 == "string";
+var trace = [];
+var valueOfValue = 42;
+var toStringValue = "foo";
+function traceValueOf() {
+    trace.push("vo");
+    return valueOfValue;
+}
+function traceToString() {
+    trace.push("ts");
+    return toStringValue;
+}
+var valueOfFunc = traceValueOf;
+var toStringFunc = traceToString;
+const v38 = {
+    get toString() {
+        trace.push("gts");
+        return toStringFunc;
+    },
+    get valueOf() {
+        trace.push("gvo");
+        return valueOfFunc;
+    },
+};
+var ot = v38;
+var nt = Number(ot);
+["gvo","vo"];
+trace = [];
+var st = String(ot);
+["gts","ts"];
+trace = [];
+valueOfValue = ["not primitive"];
+var nt = Number(ot);
+Number("foo");
+["gvo","vo","gts","ts"];
+trace = [];
+valueOfValue = 42;
+toStringValue = ["not primitive"];
+var st = String(ot);
+String(42);
+["gts","ts","gvo","vo"];
+trace = [];
+valueOfValue = ["not primitive"];
+["gvo","vo","gts","ts"];
+toStringFunc = "not callable";
+trace = [];
+valueOfValue = 42;
+var st = String(ot);
+String(42);
+["gts","gvo","vo"];
+valueOfFunc = "not callable";
+trace = [];
+["gts","gvo"];
+toStringFunc = traceToString;
+toStringValue = "87";
+trace = [];
+var nt = Number(ot);
+["gvo","gts","ts"];
+
+FuzzIL program written to corpus/object-toprimitive.fzil

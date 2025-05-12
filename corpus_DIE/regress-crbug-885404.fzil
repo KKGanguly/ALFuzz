@@ -1,0 +1,28 @@
+v0 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v1 <- LoadInteger '2'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'ab', 'var', v2
+BeginTry
+    v4 <- CreateNamedVariable 'Int32Array', 'none'
+    v5 <- Construct v4, [v3]
+BeginCatch -> v6
+EndTryCatch
+v7 <- LoadInteger '2'
+v8 <- GetProperty v3, 'byteLength'
+v9 <- CreateNamedVariable 'gc', 'none'
+v10 <- CallFunction v9, []
+v11 <- LoadInteger '2'
+v12 <- GetProperty v3, 'byteLength'
+
+
+const v2 = new ArrayBuffer(2);
+var ab = v2;
+try {
+    new Int32Array(ab);
+} catch(e6) {
+}
+ab.byteLength;
+gc();
+ab.byteLength;
+
+FuzzIL program written to corpus/regress-crbug-885404.fzil

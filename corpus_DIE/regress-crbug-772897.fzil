@@ -1,0 +1,64 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '0'
+    SetComputedProperty v1, v2, v3
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `toString` -> v6
+            v7 <- CreateNamedVariable 'Error', 'none'
+            v8 <- LoadString 'boom'
+            v9 <- Construct v7, [v8]
+            ThrowException v9
+        EndObjectLiteralMethod
+    v10 <- EndObjectLiteral
+    v11 <- CreateNamedVariable 'key', 'var', v10
+    v12 <- CallFunction v0, [v5, v11]
+EndPlainFunction
+v13 <- BeginPlainFunction -> 
+    v14 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v15 <- EndObjectLiteral
+    BeginObjectLiteral
+    v16 <- EndObjectLiteral
+    v17 <- Construct v14, [v15, v16]
+    v18 <- CreateNamedVariable 'proxy', 'var', v17
+    v19 <- LoadInteger '0'
+    v20 <- CallFunction v0, [v18, v19]
+    v21 <- BeginArrowFunction -> 
+        v22 <- CallFunction v4, [v18]
+        Return v22
+    EndArrowFunction
+    v23 <- CallFunction v21, []
+    v24 <- CreateNamedVariable 'Error', 'none'
+EndPlainFunction
+v25 <- CallFunction v13, []
+
+
+function store(a1, a2) {
+    a1[a2] = 0;
+    return 0;
+}
+function f(a5) {
+    const v10 = {
+        toString() {
+            const v9 = new Error("boom");
+            throw v9;
+        },
+    };
+    var key = v10;
+    store(a5, key);
+}
+function f13() {
+    const v15 = {};
+    const v17 = new Proxy(v15, {});
+    var proxy = v17;
+    store(proxy, 0);
+    const v21 = () => {
+        return f(proxy);
+    };
+    v21();
+}
+f13();
+
+FuzzIL program written to corpus/regress-crbug-772897.fzil

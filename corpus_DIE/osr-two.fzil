@@ -1,0 +1,49 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'sum', 'var', v2
+    v4 <- LoadInteger '10'
+    v5 <- CreateNamedVariable 'outer', 'var', v4
+    BeginWhileLoopHeader
+        v6 <- LoadInteger '0'
+        v7 <- Compare v5, '>', v6
+    BeginWhileLoopBody v7
+        v8 <- LoadInteger '10'
+        v9 <- CreateNamedVariable 'inner', 'var', v8
+        BeginWhileLoopHeader
+            v10 <- LoadInteger '0'
+            v11 <- Compare v9, '>', v10
+        BeginWhileLoopBody v11
+            Update v3, '+', v1
+            v12 <- UnaryOperation v9, '--'
+            v13 <- LoadInteger '5'
+            v14 <- Compare v9, '==', v13
+            BeginIf v14
+            EndIf
+        EndWhileLoop
+        v15 <- UnaryOperation v5, '--'
+    EndWhileLoop
+    Return v3
+EndPlainFunction
+v16 <- LoadInteger '500'
+v17 <- LoadInteger '5'
+v18 <- CallFunction v0, [v17]
+
+
+function f(a1) {
+    var sum = 0;
+    var outer = 10;
+    while (outer > 0) {
+        var inner = 10;
+        while (inner > 0) {
+            sum += a1;
+            inner--;
+            if (inner == 5) {
+            }
+        }
+        outer--;
+    }
+    return sum;
+}
+f(5);
+
+FuzzIL program written to corpus/osr-two.fzil

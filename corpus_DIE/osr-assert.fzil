@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- LoadInteger '10'
+    v5 <- CreateNamedVariable 'outer', 'var', v4
+    v6 <- LoadInteger '1'
+    v7 <- CreateNamedVariable 'a', 'var', v6
+    BeginWhileLoopHeader
+        v8 <- LoadInteger '0'
+        v9 <- Compare v5, '>', v8
+    BeginWhileLoopBody v9
+        v10 <- LoadInteger '5'
+        v11 <- BinaryOperation v7, '+', v10
+        Reassign v7, v11
+        v12 <- LoadInteger '1'
+        v13 <- BinaryOperation v2, '+', v12
+        v14 <- UnaryOperation v5, '--'
+        v15 <- LoadInteger '5'
+        v16 <- Compare v5, '===', v15
+        BeginIf v16
+        EndIf
+    EndWhileLoop
+    v17 <- LoadInteger '4'
+    v18 <- BinaryOperation v7, '+', v17
+    Return v18
+EndPlainFunction
+v19 <- LoadInteger '55'
+v20 <- LoadInteger '5'
+v21 <- LoadString '122'
+v22 <- LoadString '1221'
+v23 <- CallFunction v0, [v20, v21, v22]
+
+
+function f(a1, a2, a3) {
+    var outer = 10;
+    var a = 1;
+    while (outer > 0) {
+        a = a + 5;
+        a2 + 1;
+        outer--;
+        if (outer === 5) {
+        }
+    }
+    return a + 4;
+}
+f(5, "122", "1221");
+
+FuzzIL program written to corpus/osr-assert.fzil

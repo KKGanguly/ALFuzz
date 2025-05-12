@@ -1,0 +1,183 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Error', 'none'
+    v2 <- Construct v1, []
+    ThrowException v2
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v0
+    BeginObjectLiteralGetter `j` -> v3
+        v4 <- CreateNamedVariable 'o', 'none'
+        v5 <- CallMethod v4, 'h', []
+    EndObjectLiteralGetter
+    BeginObjectLiteralSetter `k` -> v6, v7
+        v8 <- CreateNamedVariable 'o', 'none'
+        v9 <- GetProperty v8, 'j'
+    EndObjectLiteralSetter
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'o', 'var', v10
+v12 <- BeginPlainFunction -> 
+    v13 <- CallMethod v11, 'f', []
+EndPlainFunction
+SetProperty v11, 'g1', v12
+v14 <- GetProperty v11, 'g1'
+SetProperty v11, 'g2', v14
+v15 <- BeginPlainFunction -> 
+    v16 <- CallMethod v11, 'g1', []
+EndPlainFunction
+SetProperty v11, 'h', v15
+BeginTry
+    v17 <- LoadInteger '42'
+    SetProperty v11, 'k', v17
+BeginCatch -> v18
+    v19 <- BeginPlainFunction -> v20, v21
+        Return v21
+    EndPlainFunction
+    v22 <- CreateNamedVariable 'Error', 'none'
+    SetProperty v22, 'prepareStackTrace', v19
+    v23 <- GetProperty v18, 'stack'
+    v24 <- CreateNamedVariable 'frames', 'var', v23
+    v25 <- LoadUndefined
+    SetProperty v22, 'prepareStackTrace', v25
+    v26 <- LoadString 'f'
+    v27 <- GetElement v24, '0'
+    v28 <- CallMethod v27, 'getMethodName', []
+    v29 <- LoadNull
+    v30 <- GetElement v24, '1'
+    v31 <- CallMethod v30, 'getMethodName', []
+    v32 <- LoadString 'h'
+    v33 <- GetElement v24, '2'
+    v34 <- CallMethod v33, 'getMethodName', []
+    v35 <- LoadString 'j'
+    v36 <- GetElement v24, '3'
+    v37 <- CallMethod v36, 'getMethodName', []
+    v38 <- LoadString 'k'
+    v39 <- GetElement v24, '4'
+    v40 <- CallMethod v39, 'getMethodName', []
+    v41 <- LoadNull
+    v42 <- GetElement v24, '5'
+    v43 <- CallMethod v42, 'getMethodName', []
+EndTryCatch
+v44 <- BeginPlainFunction -> v45, v46, v47
+    BeginTry
+        v48 <- BeginPlainFunction -> v49, v50
+            Return v50
+        EndPlainFunction
+        v51 <- CreateNamedVariable 'Error', 'none'
+        SetProperty v51, 'prepareStackTrace', v48
+        v52 <- CallFunction v45, []
+    BeginCatch -> v53
+        v54 <- GetProperty v53, 'stack'
+        v55 <- GetComputedProperty v54, v46
+        v56 <- CreateNamedVariable 'frame', 'const', v55
+        v57 <- CallMethod v56, 'getMethodName', []
+    BeginFinally
+        v58 <- LoadUndefined
+        v59 <- CreateNamedVariable 'Error', 'none'
+        SetProperty v59, 'prepareStackTrace', v58
+    EndTryCatch
+EndPlainFunction
+v60 <- BeginArrowFunction -> 
+    v61 <- CreateNamedVariable 'Error', 'none'
+    v62 <- Construct v61, []
+    ThrowException v62
+EndArrowFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v60
+v63 <- EndObjectLiteral
+v64 <- CreateNamedVariable 'thrower', 'const', v63
+BeginBlockStatement
+    v65 <- LoadString ''
+    v66 <- CreateNamedVariable 'str', 'const', v65
+    v67 <- BeginArrowFunction -> 
+        v68 <- CallMethod v66, 'indexOf', [v66, v64]
+    EndArrowFunction
+    v69 <- LoadInteger '1'
+    v70 <- LoadString 'indexOf'
+    v71 <- CallFunction v44, [v67, v69, v70]
+EndBlockStatement
+BeginBlockStatement
+    v72 <- LoadInteger '42'
+    v73 <- CreateNamedVariable 'nr', 'const', v72
+    v74 <- BeginArrowFunction -> 
+        v75 <- CallMethod v73, 'toString', [v64]
+    EndArrowFunction
+    v76 <- LoadInteger '1'
+    v77 <- LoadString 'toString'
+    v78 <- CallFunction v44, [v74, v76, v77]
+EndBlockStatement
+
+
+function f0() {
+    const v2 = new Error();
+    throw v2;
+}
+const v10 = {
+    f: f0,
+    get j() {
+        o.h();
+    },
+    set k(a7) {
+        o.j;
+    },
+};
+var o = v10;
+function f12() {
+    o.f();
+}
+o.g1 = f12;
+o.g2 = o.g1;
+function f15() {
+    o.g1();
+}
+o.h = f15;
+try {
+    o.k = 42;
+} catch(e18) {
+    function f19(a20, a21) {
+        return a21;
+    }
+    Error.prepareStackTrace = f19;
+    var frames = e18.stack;
+    Error.prepareStackTrace = undefined;
+    frames[0].getMethodName();
+    frames[1].getMethodName();
+    frames[2].getMethodName();
+    frames[3].getMethodName();
+    frames[4].getMethodName();
+    frames[5].getMethodName();
+}
+function testMethodName(a45, a46, a47) {
+    try {
+        function f48(a49, a50) {
+            return a50;
+        }
+        Error.prepareStackTrace = f48;
+        a45();
+    } catch(e53) {
+        const frame = e53.stack[a46];
+        frame.getMethodName();
+    } finally {
+        Error.prepareStackTrace = undefined;
+    }
+}
+const v60 = () => {
+    const v62 = new Error();
+    throw v62;
+};
+const thrower = { valueOf: v60 };
+{
+    const str = "";
+    const v67 = () => {
+        str.indexOf(str, thrower);
+    };
+    testMethodName(v67, 1, "indexOf");
+}
+{
+    const nr = 42;
+    const v74 = () => {
+        nr.toString(thrower);
+    };
+    testMethodName(v74, 1, "toString");
+}
+
+FuzzIL program written to corpus/stack-traces-custom.fzil

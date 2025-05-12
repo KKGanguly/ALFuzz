@@ -1,0 +1,73 @@
+v0 <- LoadString ''
+v1 <- CreateNamedVariable 'body', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '100'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- CreateTemplateString ['this.a', ' = 0;\n'], [v8]
+    Update v1, '+', v9
+EndForLoop
+v10 <- CreateNamedVariable 'Function', 'none'
+v11 <- Construct v10, [v1]
+v12 <- CreateNamedVariable 'Proto', 'var', v11
+v13 <- BeginPlainFunction -> 
+EndPlainFunction
+v14 <- Construct v12, []
+SetProperty v13, 'prototype', v14
+v15 <- Construct v13, []
+v16 <- CreateNamedVariable 'o', 'var', v15
+BeginForLoopInitializer
+    v17 <- LoadInteger '0'
+BeginForLoopCondition -> v18
+    v19 <- LoadInteger '100'
+    v20 <- Compare v18, '<', v19
+BeginForLoopAfterthought v20 -> v21
+    v22 <- UnaryOperation v21, '++'
+BeginForLoopBody -> v23
+    v24 <- LoadString 'a'
+    v25 <- BinaryOperation v24, '+', v23
+    SetComputedProperty v16, v25, v23
+EndForLoop
+v26 <- CreateNamedVariable 'Object', 'none'
+v27 <- CallMethod v26, 'getOwnPropertyNames', [v16]
+v28 <- CreateNamedVariable 'names', 'var', v27
+BeginForLoopInitializer
+    v29 <- LoadInteger '0'
+BeginForLoopCondition -> v30
+    v31 <- LoadInteger '100'
+    v32 <- Compare v30, '<', v31
+BeginForLoopAfterthought v32 -> v33
+    v34 <- UnaryOperation v33, '++'
+BeginForLoopBody -> v35
+    v36 <- LoadString 'a'
+    v37 <- BinaryOperation v36, '+', v35
+    v38 <- GetComputedProperty v28, v35
+EndForLoop
+
+
+var body = "";
+for (let i3 = 0; i3 < 100; i3++) {
+    body += `this.a${i3} = 0;\n`;
+}
+const v11 = new Function(body);
+var Proto = v11;
+function A() {
+}
+const v14 = new Proto();
+A.prototype = v14;
+const v15 = new A();
+var o = v15;
+for (let i18 = 0; i18 < 100; i18++) {
+    o["a" + i18] = i18;
+}
+var names = Object.getOwnPropertyNames(o);
+for (let i30 = 0; i30 < 100; i30++) {
+    "a" + i30;
+    names[i30];
+}
+
+FuzzIL program written to corpus/regress-crbug-626715.fzil

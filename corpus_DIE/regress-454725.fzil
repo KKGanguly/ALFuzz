@@ -1,0 +1,112 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable '__v_9', 'var', v0
+v2 <- LoadInteger '15'
+v3 <- CreateNamedVariable 'depth', 'var', v2
+v4 <- LoadInteger '0'
+v5 <- CreateNamedVariable 'current', 'var', v4
+v6 <- BeginPlainFunction -> v7
+    v8 <- LoadInteger '50'
+    v9 <- BinaryOperation v7, '%', v8
+    v10 <- LoadInteger '0'
+    v11 <- Compare v9, '!=', v10
+    BeginIf v11
+        Return v7
+    BeginElse
+        v12 <- LoadFloat '0.5'
+        v13 <- BinaryOperation v1, '+', v12
+        Return v13
+    EndIf
+EndPlainFunction
+v14 <- BeginPlainFunction -> v15
+    v16 <- LoadInteger '1'
+    v17 <- LoadInteger '100000'
+    v18 <- LoadInteger '2'
+    v19 <- BinaryOperation v17, '-', v18
+    SetComputedProperty v15, v19, v16
+    BeginForLoopInitializer
+        v20 <- LoadInteger '0'
+    BeginForLoopCondition -> v21
+        v22 <- LoadInteger '70000'
+        v23 <- Compare v21, '<', v22
+    BeginForLoopAfterthought v23 -> v24
+        v25 <- UnaryOperation '++', v24
+    BeginForLoopBody -> v26
+        v27 <- CallFunction v6, [v26]
+        SetComputedProperty v15, v26, v27
+    EndForLoop
+EndPlainFunction
+v28 <- BeginPlainFunction -> v29
+EndPlainFunction
+v30 <- LoadUndefined
+v31 <- CreateNamedVariable 'tmp', 'var', v30
+v32 <- BeginPlainFunction -> v33
+    v34 <- UnaryOperation v5, '++'
+    v35 <- Compare v5, '==', v3
+    BeginIf v35
+        Return
+    EndIf
+    v36 <- LoadInteger '100000'
+    v37 <- Construct v33, [v36]
+    v38 <- CreateNamedVariable '__v_7', 'var', v37
+    v39 <- CallFunction v14, [v38]
+    v40 <- LoadInteger '6'
+    v41 <- CreateNamedVariable '__v_4', 'var', v40
+    BeginForLoopInitializer
+        v42 <- LoadInteger '0'
+    BeginForLoopCondition -> v43
+        v44 <- LoadInteger '70000'
+        v45 <- Compare v43, '<', v44
+    BeginForLoopAfterthought v45 -> v46
+        v47 <- LoadInteger '501'
+        Update v46, '+', v47
+    BeginForLoopBody -> v48
+        Update v31, '+', v48
+    EndForLoop
+    v49 <- CreateNamedVariable 'Array', 'none'
+    v50 <- CallFunction v32, [v49]
+    v51 <- UnaryOperation v5, '--'
+EndPlainFunction
+v52 <- CreateNamedVariable 'gc', 'none'
+v53 <- CallFunction v52, []
+v54 <- CallFunction v32, [v28]
+
+
+var __v_9 = {};
+var depth = 15;
+var current = 0;
+function __f_15(a7) {
+    if ((a7 % 50) != 0) {
+        return a7;
+    } else {
+        return __v_9 + 0.5;
+    }
+}
+function __f_13(a15) {
+    a15[100000 - 2] = 1;
+    for (let i21 = 0; i21 < 70000; ++i21) {
+        a15[i21] = __f_15(i21);
+    }
+}
+function __f_2(a29) {
+}
+var tmp;
+function __f_18(a33) {
+    current++;
+    if (current == depth) {
+        return;
+    }
+    const v37 = new a33(100000);
+    var __v_7 = v37;
+    __f_13(__v_7);
+    var __v_4 = 6;
+    for (let i43 = 0; i43 < 70000; i43 += 501) {
+        tmp += i43;
+    }
+    __f_18(Array);
+    current--;
+}
+gc();
+__f_18(__f_2);
+
+FuzzIL program written to corpus/regress-454725.fzil

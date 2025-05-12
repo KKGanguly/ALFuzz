@@ -1,0 +1,105 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'obj', 'var', v0
+v2 <- LoadInteger '42'
+SetElement v1, '1', v2
+v3 <- LoadInteger '42'
+v4 <- GetElement v1, '1'
+v5 <- LoadString '1'
+v6 <- LoadInteger '10'
+v7 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v6
+    ObjectLiteralAddProperty `writable`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'defineProperty', [v1, v5, v8]
+v11 <- LoadInteger '10'
+v12 <- GetElement v1, '1'
+v13 <- LoadInteger '5'
+SetElement v1, '1', v13
+v14 <- LoadInteger '10'
+v15 <- GetElement v1, '1'
+BeginForLoopInitializer
+    v16 <- LoadInteger '0'
+BeginForLoopCondition -> v17
+    v18 <- LoadInteger '1024'
+    v19 <- Compare v17, '<', v18
+BeginForLoopAfterthought v19 -> v20
+    v21 <- UnaryOperation v20, '++'
+BeginForLoopBody -> v22
+    v23 <- LoadInteger '42'
+    SetComputedProperty v1, v22, v23
+EndForLoop
+BeginForLoopInitializer
+    v24 <- LoadInteger '0'
+BeginForLoopCondition -> v25
+    v26 <- LoadInteger '1024'
+    v27 <- Compare v25, '<', v26
+BeginForLoopAfterthought v27 -> v28
+    v29 <- UnaryOperation v28, '++'
+BeginForLoopBody -> v30
+    v31 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v30
+        ObjectLiteralAddProperty `writable`, v31
+    v32 <- EndObjectLiteral
+    v33 <- CallMethod v9, 'defineProperty', [v1, v30, v32]
+EndForLoop
+BeginForLoopInitializer
+    v34 <- LoadInteger '0'
+BeginForLoopCondition -> v35
+    v36 <- LoadInteger '1024'
+    v37 <- Compare v35, '<', v36
+BeginForLoopAfterthought v37 -> v38
+    v39 <- UnaryOperation v38, '++'
+BeginForLoopBody -> v40
+    v41 <- GetComputedProperty v1, v40
+EndForLoop
+BeginForLoopInitializer
+    v42 <- LoadInteger '0'
+BeginForLoopCondition -> v43
+    v44 <- LoadInteger '1024'
+    v45 <- Compare v43, '<', v44
+BeginForLoopAfterthought v45 -> v46
+    v47 <- UnaryOperation v46, '++'
+BeginForLoopBody -> v48
+    v49 <- LoadInteger '5'
+    SetElement v1, '1', v49
+EndForLoop
+BeginForLoopInitializer
+    v50 <- LoadInteger '0'
+BeginForLoopCondition -> v51
+    v52 <- LoadInteger '1024'
+    v53 <- Compare v51, '<', v52
+BeginForLoopAfterthought v53 -> v54
+    v55 <- UnaryOperation v54, '++'
+BeginForLoopBody -> v56
+    v57 <- GetComputedProperty v1, v56
+EndForLoop
+
+
+var obj = {};
+obj[1] = 42;
+obj[1];
+Object.defineProperty(obj, "1", { value: 10, writable: false });
+obj[1];
+obj[1] = 5;
+obj[1];
+for (let i17 = 0; i17 < 1024; i17++) {
+    obj[i17] = 42;
+}
+for (let i25 = 0; i25 < 1024; i25++) {
+    Object.defineProperty(obj, i25, { value: i25, writable: false });
+}
+for (let i35 = 0; i35 < 1024; i35++) {
+    obj[i35];
+}
+for (let i43 = 0; i43 < 1024; i43++) {
+    obj[1] = 5;
+}
+for (let i51 = 0; i51 < 1024; i51++) {
+    obj[i51];
+}
+
+FuzzIL program written to corpus/regress-619.fzil

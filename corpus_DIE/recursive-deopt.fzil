@@ -1,0 +1,73 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- Compare v1, '==', v2
+    BeginIf v3
+        v4 <- LoadInteger '1'
+        v5 <- CreateNamedVariable 'one', 'none'
+        v6 <- BinaryOperation v4, '<<', v5
+        Return v6
+    EndIf
+    v7 <- LoadInteger '1'
+    v8 <- BinaryOperation v1, '-', v7
+    v9 <- CallFunction v0, [v8]
+    v10 <- CreateNamedVariable 'one', 'none'
+    v11 <- BinaryOperation v9, '<<', v10
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '1'
+v13 <- CreateNamedVariable 'one', 'var', v12
+BeginForLoopInitializer
+    v14 <- LoadInteger '0'
+BeginForLoopCondition -> v15
+    v16 <- LoadInteger '5'
+    v17 <- Compare v15, '<', v16
+BeginForLoopAfterthought v17 -> v18
+    v19 <- UnaryOperation v18, '++'
+BeginForLoopBody -> v20
+    v21 <- LoadInteger '1'
+    v22 <- LoadInteger '5'
+    v23 <- BinaryOperation v21, '<<', v22
+    v24 <- LoadInteger '4'
+    v25 <- CallFunction v0, [v24]
+EndForLoop
+v26 <- LoadInteger '1'
+v27 <- LoadInteger '5'
+v28 <- BinaryOperation v26, '<<', v27
+v29 <- LoadInteger '4'
+v30 <- CallFunction v0, [v29]
+v31 <- BeginPlainFunction -> 
+    v32 <- LoadInteger '1'
+    Return v32
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v31
+v33 <- EndObjectLiteral
+v34 <- CreateNamedVariable 'one', 'var', v33
+v35 <- LoadInteger '1'
+v36 <- LoadInteger '5'
+v37 <- BinaryOperation v35, '<<', v36
+v38 <- LoadInteger '4'
+v39 <- CallFunction v0, [v38]
+
+
+function f(a1) {
+    if (a1 == 0) {
+        return 1 << one;
+    }
+    return f(a1 - 1) << one;
+}
+var one = 1;
+for (let i15 = 0; i15 < 5; i15++) {
+    1 << 5;
+    f(4);
+}
+1 << 5;
+f(4);
+function f31() {
+    return 1;
+}
+var one = { valueOf: f31 };
+1 << 5;
+f(4);
+
+FuzzIL program written to corpus/recursive-deopt.fzil

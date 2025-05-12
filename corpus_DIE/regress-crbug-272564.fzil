@@ -1,0 +1,67 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadThis
+    SetProperty v2, 'width', v1
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4, v5
+    v6 <- LoadString 'number'
+    v7 <- TypeOf v4
+    v8 <- Compare v6, '==', v7
+    v9 <- CreateNamedVariable 'Math', 'none'
+    v10 <- CallMethod v9, 'round', [v4]
+    v11 <- TernaryOperation v5, v10, v4
+    v12 <- LoadString 'px'
+    v13 <- BinaryOperation v11, '+', v12
+    Reassign v4, v13
+    v14 <- BinaryOperation v8, '&&', v13
+    Return v4
+EndPlainFunction
+v15 <- BeginPlainFunction -> v16, v17, v18
+    v19 <- TestInstanceOf v17, v0
+    BeginIf v19
+        v20 <- GetProperty v17, 'width'
+        Reassign v17, v20
+    EndIf
+    v21 <- LoadInteger '0'
+    v22 <- UnaryOperation '!', v21
+    v23 <- CallFunction v3, [v17, v22]
+    SetProperty v16, 'width', v23
+EndPlainFunction
+v24 <- LoadInteger '1'
+v25 <- Construct v0, [v24]
+v26 <- CreateNamedVariable 'a', 'var', v25
+v27 <- LoadInteger '5'
+v28 <- Construct v0, [v27]
+v29 <- CreateNamedVariable 'b', 'var', v28
+v30 <- LoadInteger '0'
+v31 <- CallFunction v15, [v26, v29, v30]
+v32 <- LoadInteger '0'
+v33 <- CallFunction v15, [v26, v29, v32]
+v34 <- LoadInteger '0'
+v35 <- CallFunction v15, [v26, v29, v34]
+
+
+function Bb(a1) {
+    this.width = a1;
+}
+function ce(a4, a5) {
+    const v8 = "number" == typeof a4;
+    const v13 = (a5 ? Math.round(a4) : a4) + "px";
+    a4 = v13;
+    v8 && v13;
+    return a4;
+}
+function pe(a16, a17, a18) {
+    if (a17 instanceof Bb) {
+        a17 = a17.width;
+    }
+    a16.width = ce(a17, !0);
+}
+const v25 = new Bb(1);
+var a = v25;
+const v28 = new Bb(5);
+var b = v28;
+pe(a, b, 0);
+pe(a, b, 0);
+pe(a, b, 0);
+
+FuzzIL program written to corpus/regress-crbug-272564.fzil

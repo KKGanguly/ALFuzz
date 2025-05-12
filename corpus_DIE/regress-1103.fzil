@@ -1,0 +1,11 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'obj', 'var', v0
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- CallMethod v2, 'freeze', [v1]
+Reassign v1, v3
+
+
+var obj = this;
+obj = Object.freeze(obj);
+
+FuzzIL program written to corpus/regress-1103.fzil

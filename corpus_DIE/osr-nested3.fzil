@@ -1,0 +1,69 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'sum', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '99'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '100'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        BeginForLoopInitializer
+            v10 <- LoadInteger '5'
+        BeginForLoopCondition -> v11
+            v12 <- LoadInteger '6'
+            v13 <- Compare v11, '<', v12
+        BeginForLoopAfterthought v13 -> v14
+            v15 <- UnaryOperation v14, '++'
+        BeginForLoopBody -> v16
+            BeginForLoopInitializer
+                v17 <- LoadInteger '0'
+            BeginForLoopCondition -> v18
+                v19 <- LoadInteger '1000'
+                v20 <- Compare v18, '<', v19
+            BeginForLoopAfterthought v20 -> v21
+                v22 <- UnaryOperation v21, '++'
+            BeginForLoopBody -> v23
+                v24 <- LoadInteger '2'
+                v25 <- BinaryOperation v16, '+', v24
+                v26 <- CreateNamedVariable 'x', 'var', v25
+                v27 <- LoadInteger '5'
+                v28 <- BinaryOperation v26, '+', v27
+                v29 <- CreateNamedVariable 'y', 'var', v28
+                v30 <- LoadInteger '3'
+                v31 <- BinaryOperation v29, '+', v30
+                v32 <- CreateNamedVariable 'z', 'var', v31
+                Update v2, '+', v32
+            EndForLoop
+        EndForLoop
+    EndForLoop
+    Return v2
+EndPlainFunction
+v33 <- LoadInteger '15000'
+v34 <- CallFunction v0, []
+v35 <- LoadInteger '15000'
+v36 <- CallFunction v0, []
+v37 <- LoadInteger '15000'
+v38 <- CallFunction v0, []
+
+
+function f() {
+    var sum = 0;
+    for (let i4 = 99; i4 < 100; i4++) {
+        for (let i11 = 5; i11 < 6; i11++) {
+            for (let i18 = 0; i18 < 1000; i18++) {
+                var x = i11 + 2;
+                var y = x + 5;
+                var z = y + 3;
+                sum += z;
+            }
+        }
+    }
+    return sum;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/osr-nested3.fzil

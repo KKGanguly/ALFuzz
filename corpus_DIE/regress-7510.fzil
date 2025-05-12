@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> v1
+    BeginForOfLoop v1 -> v2
+        v3 <- LoadInteger '1'
+        SetElement v1, '100', v3
+    EndForOfLoop
+EndPlainFunction
+v4 <- LoadInteger '1'
+v5 <- CreateArray [v4]
+v6 <- CallFunction v0, [v5]
+v7 <- LoadInteger '1'
+v8 <- CreateArray [v7]
+v9 <- CallFunction v0, [v8]
+v10 <- LoadInteger '1'
+v11 <- CreateArray [v10]
+v12 <- CallFunction v0, [v11]
+v13 <- LoadInteger '1'
+v14 <- CreateArray [v13]
+v15 <- CallFunction v0, [v14]
+v16 <- CallFunction v0, []
+
+
+function foo(a1) {
+    for (const v2 of a1) {
+        a1[100] = 1;
+    }
+}
+foo([1]);
+foo([1]);
+foo([1]);
+foo([1]);
+foo();
+
+FuzzIL program written to corpus/regress-7510.fzil

@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadInteger '0'
+v2 <- CreateNamedVariable 'count', 'var', v1
+v3 <- BeginPlainFunction -> 
+    BeginTry
+        v4 <- CallFunction v3, []
+    BeginCatch -> v5
+        v6 <- GetProperty v5, 'stack'
+        v7 <- CreateNamedVariable 'print', 'none'
+        v8 <- CallFunction v7, [v6]
+    EndTryCatch
+    v9 <- LoadInteger '100'
+    v10 <- Compare v2, '<', v9
+    BeginIf v10
+        v11 <- UnaryOperation v2, '++'
+    EndIf
+EndPlainFunction
+v12 <- CallFunction v3, []
+v13 <- CallFunction v0, []
+
+
+function g() {
+}
+var count = 0;
+function f() {
+    try {
+        f();
+    } catch(e5) {
+        print(e5.stack);
+    }
+    if (count < 100) {
+        count++;
+    }
+}
+f();
+g();
+
+FuzzIL program written to corpus/regress-crbug-491062.fzil

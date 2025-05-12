@@ -1,0 +1,64 @@
+v0 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v1 <- CreateNamedVariable 'DataView', 'none'
+v2 <- CreateNamedVariable 'Float32Array', 'none'
+v3 <- CreateNamedVariable 'Float64Array', 'none'
+v4 <- CreateNamedVariable 'Int16Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Int8Array', 'none'
+v7 <- CreateNamedVariable 'Map', 'none'
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CreateNamedVariable 'Promise', 'none'
+v10 <- CreateNamedVariable 'Set', 'none'
+v11 <- CreateNamedVariable 'Symbol', 'none'
+v12 <- CreateNamedVariable 'Uint16Array', 'none'
+v13 <- CreateNamedVariable 'Uint32Array', 'none'
+v14 <- CreateNamedVariable 'Uint8Array', 'none'
+v15 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v16 <- CreateNamedVariable 'WeakMap', 'none'
+v17 <- CreateNamedVariable 'WeakSet', 'none'
+v18 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17]
+v19 <- CreateNamedVariable 'funcs', 'var', v18
+BeginForOfLoop v19 -> v20
+    v21 <- GetProperty v20, 'prototype'
+    v22 <- CreateNamedVariable 'p', 'var', v21
+    v23 <- GetProperty v11, 'toStringTag'
+    BeginIf v23
+        v24 <- GetProperty v11, 'toStringTag'
+        v25 <- DeleteComputedProperty v22, v24
+    EndIf
+    v26 <- LoadString '[object Object]'
+    v27 <- GetProperty v8, 'prototype'
+    v28 <- GetProperty v27, 'toString'
+    v29 <- CallMethod v28, 'call', [v22]
+EndForOfLoop
+v30 <- CreateNamedVariable 'Array', 'none'
+v31 <- CreateNamedVariable 'Function', 'none'
+v32 <- CreateArray [v30, v31]
+v33 <- CreateNamedVariable 'funcs', 'var', v32
+BeginForOfLoop v33 -> v34
+    v35 <- GetProperty v34, 'prototype'
+    v36 <- CreateNamedVariable 'p', 'var', v35
+    v37 <- GetProperty v34, 'name'
+    v38 <- CreateTemplateString ['[object ', ']'], [v37]
+    v39 <- GetProperty v8, 'prototype'
+    v40 <- GetProperty v39, 'toString'
+    v41 <- CallMethod v40, 'call', [v36]
+EndForOfLoop
+
+
+var funcs = [ArrayBuffer,DataView,Float32Array,Float64Array,Int16Array,Int32Array,Int8Array,Map,Object,Promise,Set,Symbol,Uint16Array,Uint32Array,Uint8Array,Uint8ClampedArray,WeakMap,WeakSet];
+for (const v20 of funcs) {
+    var p = v20.prototype;
+    if (Symbol.toStringTag) {
+        delete p[Symbol.toStringTag];
+    }
+    Object.prototype.toString.call(p);
+}
+var funcs = [Array,Function];
+for (const v34 of funcs) {
+    var p = v34.prototype;
+    `[object ${v34.name}]`;
+    Object.prototype.toString.call(p);
+}
+
+FuzzIL program written to corpus/prototype-ordinary-objects.fzil

@@ -1,0 +1,78 @@
+v0 <- LoadFloat '1.5'
+v1 <- CreateNamedVariable 'left', 'var', v0
+v2 <- LoadUndefined
+v3 <- CreateNamedVariable 'right', 'var', v2
+v4 <- LoadUndefined
+v5 <- CreateNamedVariable 'keepalive', 'var', v4
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '1'
+    v8 <- CreateNamedVariable 'Math', 'none'
+    v9 <- CallMethod v8, 'sin', [v7]
+    v10 <- LoadInteger '10'
+    v11 <- BinaryOperation v9, '+', v10
+    v12 <- CreateNamedVariable 'a1', 'var', v11
+    v13 <- LoadInteger '1'
+    v14 <- BinaryOperation v12, '+', v13
+    v15 <- CreateNamedVariable 'a2', 'var', v14
+    v16 <- LoadInteger '1'
+    v17 <- BinaryOperation v15, '+', v16
+    v18 <- CreateNamedVariable 'a3', 'var', v17
+    v19 <- LoadInteger '1'
+    v20 <- BinaryOperation v18, '+', v19
+    v21 <- CreateNamedVariable 'a4', 'var', v20
+    v22 <- LoadInteger '1'
+    v23 <- BinaryOperation v21, '+', v22
+    v24 <- CreateNamedVariable 'a5', 'var', v23
+    v25 <- LoadInteger '1'
+    v26 <- BinaryOperation v24, '+', v25
+    v27 <- CreateNamedVariable 'a6', 'var', v26
+    v28 <- CreateArray [v12, v15, v18, v21, v24, v27]
+    Reassign v5, v28
+    v29 <- Compare v1, '<', v3
+    BeginIf v29
+        v30 <- LoadString 'ok'
+        Return v30
+    EndIf
+    v31 <- LoadString 'bad'
+    Return v31
+EndPlainFunction
+v32 <- BeginPlainFunction -> v33
+    v34 <- LoadFloat '0.5'
+    v35 <- BinaryOperation v34, '*', v33
+    Reassign v3, v35
+EndPlainFunction
+v36 <- LoadInteger '21'
+v37 <- CallFunction v32, [v36]
+v38 <- LoadString 'ok'
+v39 <- CallFunction v6, []
+v40 <- LoadString 'ok'
+v41 <- CallFunction v6, []
+v42 <- LoadString 'ok'
+v43 <- CallFunction v6, []
+
+
+var left = 1.5;
+var right;
+var keepalive;
+function foo() {
+    var a1 = Math.sin(1) + 10;
+    var a2 = a1 + 1;
+    var a3 = a2 + 1;
+    var a4 = a3 + 1;
+    var a5 = a4 + 1;
+    var a6 = a5 + 1;
+    keepalive = [a1,a2,a3,a4,a5,a6];
+    if (left < right) {
+        return "ok";
+    }
+    return "bad";
+}
+function prepare(a33) {
+    right = 0.5 * a33;
+}
+prepare(21);
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-compare-constant-doubles.fzil

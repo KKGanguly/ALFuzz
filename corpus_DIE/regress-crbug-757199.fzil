@@ -1,0 +1,49 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'obj1', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'obj2', 'var', v2
+v4 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v4, 'prototype', v3
+v5 <- BeginPlainFunction -> v6
+    v7 <- GetProperty v6, 'constructor'
+EndPlainFunction
+v8 <- BeginPlainFunction -> 
+    v9 <- CallFunction v5, [v1]
+EndPlainFunction
+v10 <- LoadInteger '0'
+SetProperty v1, 'x', v10
+v11 <- CallFunction v8, []
+v12 <- LoadString 'x'
+v13 <- BeginPlainFunction -> 
+EndPlainFunction
+v14 <- CallMethod v1, '__defineGetter__', [v12, v13]
+v15 <- CallFunction v5, [v3]
+v16 <- LoadInteger '0'
+SetProperty v3, 'y', v16
+v17 <- CallFunction v8, []
+
+
+var obj1 = {};
+var obj2 = {};
+function h() {
+}
+h.prototype = obj2;
+function g(a6) {
+    a6.constructor;
+}
+function f() {
+    g(obj1);
+}
+obj1.x = 0;
+f();
+function f13() {
+}
+obj1.__defineGetter__("x", f13);
+g(obj2);
+obj2.y = 0;
+f();
+
+FuzzIL program written to corpus/regress-crbug-757199.fzil

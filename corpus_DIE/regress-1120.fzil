@@ -1,0 +1,12 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'obj', 'var', v0
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- CallMethod v2, 'freeze', [v1]
+v4 <- CallMethod v2, 'isExtensible', [v1]
+
+
+var obj = this;
+Object.freeze(obj);
+Object.isExtensible(obj);
+
+FuzzIL program written to corpus/regress-1120.fzil

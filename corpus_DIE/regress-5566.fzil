@@ -1,0 +1,57 @@
+v0 <- LoadString 'input'
+v1 <- LoadString '$_'
+v2 <- LoadString 'lastMatch'
+v3 <- LoadString '$&'
+v4 <- LoadString 'lastParen'
+v5 <- LoadString '$+'
+v6 <- LoadString 'leftContext'
+v7 <- LoadString '$`'
+v8 <- LoadString 'rightContext'
+v9 <- LoadString '$''
+v10 <- LoadString '$1'
+v11 <- LoadString '$2'
+v12 <- LoadString '$3'
+v13 <- LoadString '$4'
+v14 <- LoadString '$5'
+v15 <- LoadString '$6'
+v16 <- LoadString '$7'
+v17 <- LoadString '$8'
+v18 <- LoadString '$9'
+v19 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18]
+v20 <- CreateNamedVariable 'props', 'const', v19
+BeginForLoopInitializer
+    v21 <- LoadInteger '0'
+BeginForLoopCondition -> v22
+    v23 <- GetProperty v20, 'length'
+    v24 <- Compare v22, '<', v23
+BeginForLoopAfterthought v24 -> v25
+    v26 <- UnaryOperation v25, '++'
+BeginForLoopBody -> v27
+    v28 <- GetComputedProperty v20, v27
+    v29 <- CreateNamedVariable 'prop', 'const', v28
+    v30 <- CreateNamedVariable 'RegExp', 'none'
+    v31 <- CreateNamedVariable 'Object', 'none'
+    v32 <- CallMethod v31, 'getOwnPropertyDescriptor', [v30, v29]
+    v33 <- CreateNamedVariable 'desc', 'const', v32
+    v34 <- GetProperty v33, 'configurable'
+    v35 <- GetProperty v33, 'enumerable'
+    v36 <- GetProperty v33, 'get'
+    v37 <- LoadUndefined
+    v38 <- Compare v36, '!==', v37
+    v39 <- GetProperty v33, 'set'
+    v40 <- LoadUndefined
+    v41 <- Compare v39, '!==', v40
+EndForLoop
+
+
+const props = ["input","$_","lastMatch","$&","lastParen","$+","leftContext","$`","rightContext","$'","$1","$2","$3","$4","$5","$6","$7","$8","$9"];
+for (let i22 = 0; i22 < props.length; i22++) {
+    const prop = props[i22];
+    const desc = Object.getOwnPropertyDescriptor(RegExp, prop);
+    desc.configurable;
+    desc.enumerable;
+    desc.get !== undefined;
+    desc.set !== undefined;
+}
+
+FuzzIL program written to corpus/regress-5566.fzil

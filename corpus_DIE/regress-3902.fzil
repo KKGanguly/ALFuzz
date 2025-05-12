@@ -1,0 +1,56 @@
+v0 <- BeginGeneratorFunction -> 
+EndGeneratorFunction
+v1 <- GetProperty v0, '__proto__'
+v2 <- LoadString 'constructor'
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- CallMethod v3, 'getOwnPropertyDescriptor', [v1, v2]
+v5 <- GetProperty v4, 'configurable'
+v6 <- GetProperty v0, 'prototype'
+v7 <- GetProperty v6, '__proto__'
+v8 <- LoadString 'constructor'
+v9 <- CallMethod v3, 'getOwnPropertyDescriptor', [v7, v8]
+v10 <- GetProperty v9, 'configurable'
+v11 <- BeginPlainFunction -> 
+EndPlainFunction
+v12 <- GetProperty v0, '__proto__'
+v13 <- LoadString 'constructor'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v11
+v14 <- EndObjectLiteral
+v15 <- CallMethod v3, 'defineProperty', [v12, v13, v14]
+v16 <- GetProperty v0, '__proto__'
+v17 <- GetProperty v16, 'constructor'
+v18 <- CallFunction v11, []
+v19 <- BeginPlainFunction -> 
+EndPlainFunction
+v20 <- GetProperty v0, 'prototype'
+v21 <- GetProperty v20, '__proto__'
+v22 <- LoadString 'constructor'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v19
+v23 <- EndObjectLiteral
+v24 <- CallMethod v3, 'defineProperty', [v21, v22, v23]
+v25 <- GetProperty v0, 'prototype'
+v26 <- GetProperty v25, '__proto__'
+v27 <- GetProperty v26, 'constructor'
+v28 <- CallFunction v19, []
+
+
+function* g() {
+}
+Object.getOwnPropertyDescriptor(g.__proto__, "constructor").configurable;
+Object.getOwnPropertyDescriptor(g.prototype.__proto__, "constructor").configurable;
+function FakeGeneratorFunctionConstructor() {
+}
+const v12 = g.__proto__;
+Object.defineProperty(v12, "constructor", { value: FakeGeneratorFunctionConstructor });
+g.__proto__.constructor;
+FakeGeneratorFunctionConstructor();
+function FakeGeneratorObjectConstructor() {
+}
+const v21 = g.prototype.__proto__;
+Object.defineProperty(v21, "constructor", { value: FakeGeneratorObjectConstructor });
+g.prototype.__proto__.constructor;
+FakeGeneratorObjectConstructor();
+
+FuzzIL program written to corpus/regress-3902.fzil

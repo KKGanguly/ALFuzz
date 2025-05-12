@@ -1,0 +1,47 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'array_1', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '10000'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- LoadInteger '0'
+    v10 <- LoadInteger '100'
+    v11 <- BinaryOperation v8, '*', v10
+    SetComputedProperty v1, v11, v9
+EndForLoop
+v12 <- CreateNamedVariable 'gc', 'none'
+v13 <- CallFunction v12, []
+v14 <- CallFunction v12, []
+v15 <- CreateArray []
+v16 <- CreateNamedVariable 'array_2', 'var', v15
+BeginForLoopInitializer
+    v17 <- LoadInteger '0'
+BeginForLoopCondition -> v18
+    v19 <- LoadInteger '321361'
+    v20 <- Compare v18, '<', v19
+BeginForLoopAfterthought v20 -> v21
+    v22 <- UnaryOperation v21, '++'
+BeginForLoopBody -> v23
+    v24 <- CreateNamedVariable 'String', 'none'
+    v25 <- CallMethod v24, 'fromCharCode', [v23]
+    v26 <- GetElement v25, '0'
+    SetComputedProperty v16, v23, v26
+EndForLoop
+
+
+var array_1 = [];
+for (let i3 = 0; i3 < 10000; i3++) {
+    array_1[i3 * 100] = 0;
+}
+gc();
+gc();
+var array_2 = [];
+for (let i18 = 0; i18 < 321361; i18++) {
+    array_2[i18] = String.fromCharCode(i18)[0];
+}
+
+FuzzIL program written to corpus/regress-430201.fzil

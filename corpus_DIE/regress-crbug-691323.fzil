@@ -1,0 +1,103 @@
+v0 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v1 <- LoadInteger '256'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'buffer', 'var', v2
+v4 <- LoadInteger '55'
+v5 <- CreateNamedVariable 'Uint8Array', 'none'
+v6 <- Construct v5, [v3]
+v7 <- CallMethod v6, 'fill', [v4]
+v8 <- CreateNamedVariable 'array', 'var', v7
+BeginObjectLiteral
+v9 <- EndObjectLiteral
+v10 <- CreateNamedVariable 'tmp', 'var', v9
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadInteger '0'
+    Return v12
+EndPlainFunction
+v13 <- CreateNamedVariable 'Symbol', 'none'
+v14 <- GetProperty v13, 'toPrimitive'
+SetComputedProperty v10, v14, v11
+v15 <- LoadInteger '1'
+v16 <- UnaryOperation '-', v15
+v17 <- LoadInteger '0'
+v18 <- CreateNamedVariable 'Array', 'none'
+v19 <- GetProperty v18, 'prototype'
+v20 <- GetProperty v19, 'indexOf'
+v21 <- CallMethod v20, 'call', [v8, v17, v10]
+v22 <- LoadInteger '256'
+v23 <- Construct v0, [v22]
+Reassign v3, v23
+v24 <- LoadInteger '55'
+v25 <- Construct v5, [v3]
+v26 <- CallMethod v25, 'fill', [v24]
+Reassign v8, v26
+BeginObjectLiteral
+v27 <- EndObjectLiteral
+Reassign v10, v27
+v28 <- BeginPlainFunction -> 
+    v29 <- LoadInteger '0'
+    Return v29
+EndPlainFunction
+v30 <- GetProperty v13, 'toPrimitive'
+SetComputedProperty v10, v30, v28
+v31 <- LoadBoolean 'false'
+v32 <- LoadInteger '0'
+v33 <- GetProperty v18, 'prototype'
+v34 <- GetProperty v33, 'includes'
+v35 <- CallMethod v34, 'call', [v8, v32, v10]
+v36 <- LoadInteger '256'
+v37 <- Construct v0, [v36]
+Reassign v3, v37
+v38 <- LoadInteger '55'
+v39 <- Construct v5, [v3]
+v40 <- CallMethod v39, 'fill', [v38]
+Reassign v8, v40
+BeginObjectLiteral
+v41 <- EndObjectLiteral
+Reassign v10, v41
+v42 <- BeginPlainFunction -> 
+    v43 <- LoadInteger '0'
+    Return v43
+EndPlainFunction
+v44 <- GetProperty v13, 'toPrimitive'
+SetComputedProperty v10, v44, v42
+v45 <- LoadBoolean 'true'
+v46 <- LoadUndefined
+v47 <- GetProperty v18, 'prototype'
+v48 <- GetProperty v47, 'includes'
+v49 <- CallMethod v48, 'call', [v8, v46, v10]
+
+
+const v2 = new ArrayBuffer(256);
+var buffer = v2;
+const v6 = new Uint8Array(buffer);
+var array = v6.fill(55);
+var tmp = {};
+function f11() {
+    return 0;
+}
+tmp[Symbol.toPrimitive] = f11;
+-1;
+Array.prototype.indexOf.call(array, 0, tmp);
+const v23 = new ArrayBuffer(256);
+buffer = v23;
+const v25 = new Uint8Array(buffer);
+array = v25.fill(55);
+tmp = {};
+function f28() {
+    return 0;
+}
+tmp[Symbol.toPrimitive] = f28;
+Array.prototype.includes.call(array, 0, tmp);
+const v37 = new ArrayBuffer(256);
+buffer = v37;
+const v39 = new Uint8Array(buffer);
+array = v39.fill(55);
+tmp = {};
+function f42() {
+    return 0;
+}
+tmp[Symbol.toPrimitive] = f42;
+Array.prototype.includes.call(array, undefined, tmp);
+
+FuzzIL program written to corpus/regress-crbug-691323.fzil

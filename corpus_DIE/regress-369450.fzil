@@ -1,0 +1,38 @@
+v0 <- LoadFloat '1.3'
+v1 <- CreateArray [v0]
+v2 <- CreateNamedVariable 'v', 'var', v1
+v3 <- LoadInteger '0'
+SetProperty v2, 'length', v3
+v4 <- CreateNamedVariable 'JSON', 'none'
+v5 <- CallMethod v4, 'stringify', [v2]
+v6 <- CreateNamedVariable 'json', 'var', v5
+v7 <- LoadString '[]'
+v8 <- LoadFloat '5.5'
+v9 <- CreateNamedVariable 'Array', 'none'
+v10 <- GetProperty v9, 'prototype'
+SetElement v10, '0', v8
+BeginObjectLiteral
+v11 <- EndObjectLiteral
+v12 <- CreateArray [v11]
+v13 <- LoadFloat '2.3'
+v14 <- CreateArray [v13]
+v15 <- CreateArray []
+v16 <- CallMethod v15, 'concat', [v2, v12, v14]
+v17 <- CreateNamedVariable 'arr', 'var', v16
+BeginObjectLiteral
+v18 <- EndObjectLiteral
+v19 <- LoadFloat '2.3'
+v20 <- CreateArray [v18, v19]
+
+
+var v = [1.3];
+v.length = 0;
+var json = JSON.stringify(v);
+const t3 = Array.prototype;
+t3[0] = 5.5;
+const v12 = [{}];
+const v14 = [2.3];
+var arr = ([]).concat(v, v12, v14);
+[{},2.3];
+
+FuzzIL program written to corpus/regress-369450.fzil

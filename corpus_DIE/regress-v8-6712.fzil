@@ -1,0 +1,49 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'log', 'var', v0
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+v3 <- CreateNamedVariable 'Function', 'none'
+v4 <- GetProperty v3, 'prototype'
+v5 <- LoadString 'name'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v6
+        v7 <- LoadString 'getter'
+        v8 <- CallMethod v1, 'push', [v7]
+        v9 <- LoadString 'ok'
+        Return v9
+    EndObjectLiteralMethod
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'Object', 'none'
+v12 <- CallMethod v11, 'defineProperty', [v4, v5, v10]
+v13 <- DeleteProperty v2, 'name'
+v14 <- CallMethod v2, 'bind', []
+v15 <- CreateNamedVariable 'b', 'var', v14
+v16 <- LoadString 'bound ok'
+v17 <- GetProperty v15, 'name'
+v18 <- LoadString 'bound ok'
+v19 <- GetProperty v15, 'name'
+v20 <- LoadString 'bound ok'
+v21 <- GetProperty v15, 'name'
+v22 <- LoadString 'getter'
+v23 <- CreateArray [v22]
+
+
+var log = [];
+function f() {
+}
+const v4 = Function.prototype;
+const v10 = {
+    get() {
+        log.push("getter");
+        return "ok";
+    },
+};
+Object.defineProperty(v4, "name", v10);
+delete f.name;
+var b = f.bind();
+b.name;
+b.name;
+b.name;
+["getter"];
+
+FuzzIL program written to corpus/regress-v8-6712.fzil

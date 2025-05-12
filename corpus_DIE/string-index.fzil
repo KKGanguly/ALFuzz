@@ -1,0 +1,831 @@
+v0 <- LoadString 'Foo'
+v1 <- CreateNamedVariable 'foo', 'var', v0
+v2 <- LoadString 'Foo'
+v3 <- LoadString 'F'
+v4 <- GetElement v1, '0'
+v5 <- LoadString 'o'
+v6 <- GetElement v1, '1'
+v7 <- LoadString 'o'
+v8 <- GetElement v1, '2'
+BeginForLoopInitializer
+    v9 <- LoadInteger '0'
+BeginForLoopCondition -> v10
+    v11 <- LoadInteger '10'
+    v12 <- Compare v10, '<', v11
+BeginForLoopAfterthought v12 -> v13
+    v14 <- UnaryOperation v13, '++'
+BeginForLoopBody -> v15
+    v16 <- LoadString 'F'
+    v17 <- GetElement v1, '0'
+    v18 <- LoadString 'o'
+    v19 <- GetElement v1, '1'
+    v20 <- LoadString 'o'
+    v21 <- GetElement v1, '2'
+    v22 <- LoadString 'F'
+    v23 <- GetElement v1, '0'
+    v24 <- LoadString 'BarBazQuuxFooBarQuux'
+    v25 <- BinaryOperation v23, '+', v24
+    v26 <- GetElement v25, '0'
+EndForLoop
+v27 <- LoadString 'F'
+v28 <- LoadString '0'
+v29 <- LoadString ''
+v30 <- BinaryOperation v28, '+', v29
+v31 <- GetComputedProperty v1, v30
+v32 <- LoadString 'string index'
+v33 <- LoadString 'o'
+v34 <- LoadString '1'
+v35 <- GetComputedProperty v1, v34
+v36 <- LoadString 'string index'
+v37 <- LoadString 'o'
+v38 <- LoadString '2'
+v39 <- GetComputedProperty v1, v38
+v40 <- LoadString 'string index'
+v41 <- LoadString 'undefined'
+v42 <- GetElement v1, '3'
+v43 <- TypeOf v42
+v44 <- LoadString 'out of range'
+v45 <- LoadString 'undefined'
+v46 <- LoadInteger '1'
+v47 <- UnaryOperation '-', v46
+v48 <- GetComputedProperty v1, v47
+v49 <- TypeOf v48
+v50 <- LoadString 'known failure in SpiderMonkey 1.5'
+v51 <- LoadString 'undefined'
+v52 <- LoadInteger '2'
+v53 <- UnaryOperation '-', v52
+v54 <- GetComputedProperty v1, v53
+v55 <- TypeOf v54
+v56 <- LoadString 'negative index'
+v57 <- LoadString 'f'
+SetElement v1, '0', v57
+v58 <- LoadString 'Foo'
+v59 <- LoadString 't'
+SetElement v1, '3', v59
+v60 <- LoadString 'Foo'
+v61 <- LoadString 'undefined'
+v62 <- GetElement v1, '3'
+v63 <- TypeOf v62
+v64 <- LoadString 'out of range'
+v65 <- LoadString 'undefined'
+v66 <- LoadInteger '2'
+v67 <- UnaryOperation '-', v66
+v68 <- GetComputedProperty v1, v67
+v69 <- TypeOf v68
+v70 <- LoadString 'negative index'
+v71 <- CreateNamedVariable 'String', 'none'
+v72 <- LoadString 'foo'
+v73 <- Construct v71, [v72]
+v74 <- CreateNamedVariable 'S', 'var', v73
+v75 <- LoadString 'foo'
+v76 <- CreateNamedVariable 'Object', 'none'
+v77 <- CallFunction v76, [v75]
+v78 <- LoadString 'f'
+v79 <- GetElement v74, '0'
+v80 <- LoadString 'string object'
+v81 <- LoadString 'f'
+v82 <- LoadString '0'
+v83 <- GetComputedProperty v74, v82
+v84 <- LoadString 'string object'
+v85 <- LoadString 'bente'
+SetElement v74, '0', v85
+v86 <- LoadString 'f'
+v87 <- GetElement v74, '0'
+v88 <- LoadString 'string object'
+v89 <- LoadString 'f'
+v90 <- LoadString '0'
+v91 <- GetComputedProperty v74, v90
+v92 <- LoadString 'string object'
+v93 <- LoadString 'spider'
+v94 <- LoadInteger '2'
+v95 <- UnaryOperation '-', v94
+SetComputedProperty v74, v95, v93
+v96 <- LoadString 'spider'
+v97 <- LoadInteger '2'
+v98 <- UnaryOperation '-', v97
+v99 <- GetComputedProperty v74, v98
+v100 <- LoadString 'monkey'
+SetElement v74, '3', v100
+v101 <- LoadString 'monkey'
+v102 <- GetElement v74, '3'
+v103 <- LoadString 'Fu'
+v104 <- LoadString 'foo'
+SetComputedProperty v74, v104, v103
+v105 <- LoadString 'Fu'
+v106 <- GetProperty v74, 'foo'
+v107 <- LoadString 'bente'
+v108 <- LoadString '0'
+SetComputedProperty v74, v108, v107
+v109 <- LoadString 'f'
+v110 <- GetElement v74, '0'
+v111 <- LoadString 'string object'
+v112 <- LoadString 'f'
+v113 <- LoadString '0'
+v114 <- GetComputedProperty v74, v113
+v115 <- LoadString 'string object'
+v116 <- LoadBoolean 'true'
+v117 <- LoadInteger '0'
+v118 <- TestIn v117, v74
+v119 <- LoadString '0 in'
+v120 <- LoadBoolean 'false'
+v121 <- LoadInteger '1'
+v122 <- UnaryOperation '-', v121
+v123 <- TestIn v122, v74
+v124 <- LoadString '-1 in'
+v125 <- LoadBoolean 'true'
+v126 <- LoadInteger '2'
+v127 <- TestIn v126, v74
+v128 <- LoadString '2 in'
+v129 <- LoadBoolean 'true'
+v130 <- LoadInteger '3'
+v131 <- TestIn v130, v74
+v132 <- LoadString '3 in'
+v133 <- LoadBoolean 'false'
+v134 <- LoadInteger '4'
+v135 <- TestIn v134, v74
+v136 <- LoadString '3 in'
+v137 <- LoadBoolean 'true'
+v138 <- LoadString '0'
+v139 <- TestIn v138, v74
+v140 <- LoadString '"0" in'
+v141 <- LoadBoolean 'false'
+v142 <- LoadString '-1'
+v143 <- TestIn v142, v74
+v144 <- LoadString '"-1" in'
+v145 <- LoadBoolean 'true'
+v146 <- LoadString '2'
+v147 <- TestIn v146, v74
+v148 <- LoadString '"2" in'
+v149 <- LoadBoolean 'true'
+v150 <- LoadString '3'
+v151 <- TestIn v150, v74
+v152 <- LoadString '"3" in'
+v153 <- LoadBoolean 'false'
+v154 <- LoadString '4'
+v155 <- TestIn v154, v74
+v156 <- LoadString '"3" in'
+v157 <- LoadBoolean 'true'
+v158 <- LoadInteger '0'
+v159 <- CallMethod v74, 'hasOwnProperty', [v158]
+v160 <- LoadString '0 hasOwnProperty'
+v161 <- LoadBoolean 'false'
+v162 <- LoadInteger '1'
+v163 <- UnaryOperation '-', v162
+v164 <- CallMethod v74, 'hasOwnProperty', [v163]
+v165 <- LoadString '-1 hasOwnProperty'
+v166 <- LoadBoolean 'true'
+v167 <- LoadInteger '2'
+v168 <- CallMethod v74, 'hasOwnProperty', [v167]
+v169 <- LoadString '2 hasOwnProperty'
+v170 <- LoadBoolean 'true'
+v171 <- LoadInteger '3'
+v172 <- CallMethod v74, 'hasOwnProperty', [v171]
+v173 <- LoadString '3 hasOwnProperty'
+v174 <- LoadBoolean 'false'
+v175 <- LoadInteger '4'
+v176 <- CallMethod v74, 'hasOwnProperty', [v175]
+v177 <- LoadString '3 hasOwnProperty'
+v178 <- LoadBoolean 'true'
+v179 <- LoadString '0'
+v180 <- CallMethod v74, 'hasOwnProperty', [v179]
+v181 <- LoadString '"0" hasOwnProperty'
+v182 <- LoadBoolean 'false'
+v183 <- LoadString '-1'
+v184 <- CallMethod v74, 'hasOwnProperty', [v183]
+v185 <- LoadString '"-1" hasOwnProperty'
+v186 <- LoadBoolean 'true'
+v187 <- LoadString '2'
+v188 <- CallMethod v74, 'hasOwnProperty', [v187]
+v189 <- LoadString '"2" hasOwnProperty'
+v190 <- LoadBoolean 'true'
+v191 <- LoadString '3'
+v192 <- CallMethod v74, 'hasOwnProperty', [v191]
+v193 <- LoadString '"3" hasOwnProperty'
+v194 <- LoadBoolean 'false'
+v195 <- LoadString '4'
+v196 <- CallMethod v74, 'hasOwnProperty', [v195]
+v197 <- LoadString '"3" hasOwnProperty'
+v198 <- LoadBoolean 'true'
+v199 <- LoadInteger '0'
+v200 <- LoadString 'foo'
+v201 <- CallMethod v200, 'hasOwnProperty', [v199]
+v202 <- LoadString 'foo 0 hasOwnProperty'
+v203 <- LoadBoolean 'false'
+v204 <- LoadInteger '1'
+v205 <- UnaryOperation '-', v204
+v206 <- LoadString 'foo'
+v207 <- CallMethod v206, 'hasOwnProperty', [v205]
+v208 <- LoadString 'foo -1 hasOwnProperty'
+v209 <- LoadBoolean 'true'
+v210 <- LoadInteger '2'
+v211 <- LoadString 'foo'
+v212 <- CallMethod v211, 'hasOwnProperty', [v210]
+v213 <- LoadString 'foo 2 hasOwnProperty'
+v214 <- LoadBoolean 'false'
+v215 <- LoadInteger '4'
+v216 <- LoadString 'foo'
+v217 <- CallMethod v216, 'hasOwnProperty', [v215]
+v218 <- LoadString 'foo 3 hasOwnProperty'
+v219 <- LoadBoolean 'true'
+v220 <- LoadString '0'
+v221 <- LoadString 'foo'
+v222 <- CallMethod v221, 'hasOwnProperty', [v220]
+v223 <- LoadString 'foo "0" hasOwnProperty'
+v224 <- LoadBoolean 'false'
+v225 <- LoadString '-1'
+v226 <- LoadString 'foo'
+v227 <- CallMethod v226, 'hasOwnProperty', [v225]
+v228 <- LoadString 'foo "-1" hasOwnProperty'
+v229 <- LoadBoolean 'true'
+v230 <- LoadString '2'
+v231 <- LoadString 'foo'
+v232 <- CallMethod v231, 'hasOwnProperty', [v230]
+v233 <- LoadString 'foo "2" hasOwnProperty'
+v234 <- LoadBoolean 'false'
+v235 <- LoadString '4'
+v236 <- LoadString 'foo'
+v237 <- CallMethod v236, 'hasOwnProperty', [v235]
+v238 <- LoadString 'foo "3" hasOwnProperty'
+v239 <- LoadInteger '3'
+v240 <- DeleteElement v74, '3'
+v241 <- LoadString 'undefined'
+v242 <- GetElement v74, '3'
+v243 <- TypeOf v242
+v244 <- LoadBoolean 'false'
+v245 <- LoadInteger '3'
+v246 <- TestIn v245, v74
+v247 <- LoadBoolean 'false'
+v248 <- LoadString '3'
+v249 <- TestIn v248, v74
+v250 <- CreateNamedVariable 'Number', 'none'
+v251 <- LoadInteger '43'
+v252 <- Construct v250, [v251]
+v253 <- CreateNamedVariable 'N', 'var', v252
+v254 <- LoadInteger '43'
+v255 <- CallFunction v76, [v254]
+v256 <- LoadString 'Alpha'
+v257 <- LoadInteger '2'
+v258 <- UnaryOperation '-', v257
+SetComputedProperty v253, v258, v256
+v259 <- LoadString 'Alpha'
+v260 <- LoadInteger '2'
+v261 <- UnaryOperation '-', v260
+v262 <- GetComputedProperty v253, v261
+v263 <- LoadString 'Zappa'
+SetElement v253, '0', v263
+v264 <- LoadString 'Zappa'
+v265 <- GetElement v253, '0'
+v266 <- LoadString 'Zappa'
+v267 <- LoadString '0'
+v268 <- GetComputedProperty v253, v267
+v269 <- LoadString 'V'
+v270 <- LoadString 'e'
+v271 <- LoadString 't'
+v272 <- LoadString 't'
+v273 <- LoadString 'e'
+v274 <- LoadString 'r'
+v275 <- CreateArray [v269, v270, v271, v272, v273, v274]
+v276 <- CreateNamedVariable 'A', 'var', v275
+v277 <- LoadString 'v'
+SetElement v276, '0', v277
+v278 <- CreateNamedVariable 'A2', 'var', v277
+v279 <- LoadString 'v'
+v280 <- GetElement v276, '0'
+v281 <- LoadString 'v'
+v282 <- LoadString 'Onkel'
+v283 <- Construct v71, [v282]
+v284 <- CreateNamedVariable 'S', 'var', v283
+v285 <- LoadString 'o'
+SetElement v284, '0', v285
+v286 <- CreateNamedVariable 'S2', 'var', v285
+v287 <- LoadString 'O'
+v288 <- GetElement v284, '0'
+v289 <- LoadString 'o'
+v290 <- LoadString 'Tante'
+v291 <- CreateNamedVariable 's', 'var', v290
+v292 <- LoadString 't'
+SetElement v291, '0', v292
+v293 <- CreateNamedVariable 's2', 'var', v292
+v294 <- LoadString 'T'
+v295 <- GetElement v291, '0'
+v296 <- LoadString 't'
+v297 <- LoadString 'o'
+v298 <- LoadInteger '2'
+v299 <- UnaryOperation '-', v298
+SetComputedProperty v284, v299, v297
+v300 <- CreateNamedVariable 'S2', 'var', v297
+v301 <- LoadString 'o'
+v302 <- LoadInteger '2'
+v303 <- UnaryOperation '-', v302
+v304 <- GetComputedProperty v284, v303
+v305 <- LoadString 'o'
+v306 <- LoadString 't'
+v307 <- LoadInteger '2'
+v308 <- UnaryOperation '-', v307
+SetComputedProperty v291, v308, v306
+v309 <- CreateNamedVariable 's2', 'var', v306
+v310 <- LoadString 'undefined'
+v311 <- LoadInteger '2'
+v312 <- UnaryOperation '-', v311
+v313 <- GetComputedProperty v291, v312
+v314 <- TypeOf v313
+v315 <- LoadString 't'
+v316 <- LoadString '@'
+v317 <- CreateArray [v316]
+v318 <- CreateNamedVariable 'alpha', 'var', v317
+BeginForLoopInitializer
+    v319 <- LoadInteger '1'
+BeginForLoopCondition -> v320
+    v321 <- LoadInteger '128'
+    v322 <- Compare v320, '<', v321
+BeginForLoopAfterthought v322 -> v323
+    v324 <- UnaryOperation v323, '++'
+BeginForLoopBody -> v325
+    v326 <- CallMethod v71, 'fromCharCode', [v325]
+    v327 <- CreateNamedVariable 'c', 'var', v326
+    v328 <- GetElement v327, '0'
+    SetComputedProperty v318, v325, v328
+EndForLoop
+v329 <- LoadString ''
+v330 <- CallMethod v318, 'join', [v329]
+v331 <- CreateNamedVariable 'alphaStr', 'var', v330
+BeginForLoopInitializer
+    v332 <- LoadInteger '1'
+BeginForLoopCondition -> v333
+    v334 <- LoadInteger '128'
+    v335 <- Compare v333, '<', v334
+BeginForLoopAfterthought v335 -> v336
+    v337 <- UnaryOperation v336, '++'
+BeginForLoopBody -> v338
+    v339 <- GetComputedProperty v318, v338
+    v340 <- GetComputedProperty v331, v338
+    v341 <- CallMethod v71, 'fromCharCode', [v338]
+    v342 <- GetComputedProperty v331, v338
+EndForLoop
+v343 <- LoadString 'a12'
+v344 <- LoadString 'a'
+v345 <- LoadInteger '2'
+v346 <- LoadString 'c'
+v347 <- CreateArray [v344, v345, v346]
+v348 <- LoadString 'a31'
+v349 <- LoadInteger '42'
+v350 <- CreateArray [v343, v347, v348, v349]
+v351 <- CreateNamedVariable 'foo', 'var', v350
+v352 <- LoadInteger '1'
+v353 <- LoadInteger '2'
+v354 <- LoadInteger '3'
+v355 <- CreateNamedVariable 'NaN', 'none'
+v356 <- CreateArray [v352, v353, v354, v355]
+v357 <- CreateNamedVariable 'results', 'var', v356
+BeginForLoopInitializer
+    v358 <- LoadInteger '0'
+BeginForLoopCondition -> v359
+    v360 <- LoadInteger '200'
+    v361 <- Compare v359, '<', v360
+BeginForLoopAfterthought v361 -> v362
+    v363 <- UnaryOperation '++', v362
+BeginForLoopBody -> v364
+    v365 <- LoadInteger '50'
+    v366 <- BinaryOperation v364, '/', v365
+    v367 <- CreateNamedVariable 'Math', 'none'
+    v368 <- CallMethod v367, 'floor', [v366]
+    v369 <- CreateNamedVariable 'index', 'var', v368
+    v370 <- GetComputedProperty v351, v369
+    v371 <- CreateNamedVariable 'receiver', 'var', v370
+    v372 <- GetComputedProperty v357, v369
+    v373 <- CreateNamedVariable 'expected', 'var', v372
+    v374 <- GetElement v371, '1'
+    v375 <- UnaryOperation '+', v374
+    v376 <- CreateNamedVariable 'actual', 'var', v375
+EndForLoop
+v377 <- LoadInteger '0'
+v378 <- LoadString '1'
+v379 <- LoadInteger '2'
+v380 <- LoadInteger '3'
+v381 <- LoadInteger '1'
+v382 <- UnaryOperation '-', v381
+v383 <- LoadInteger '10'
+v384 <- CreateArray [v377, v378, v379, v380, v382, v383]
+v385 <- CreateNamedVariable 'keys', 'var', v384
+v386 <- LoadString 'abcd'
+v387 <- CreateNamedVariable 'str', 'var', v386
+v388 <- LoadString 'a'
+v389 <- LoadString 'b'
+v390 <- LoadString 'c'
+v391 <- LoadString 'd'
+v392 <- LoadUndefined
+v393 <- LoadUndefined
+v394 <- CreateArray [v388, v389, v390, v391, v392, v393]
+v395 <- CreateNamedVariable 'arr', 'var', v394
+BeginForLoopInitializer
+    v396 <- LoadInteger '0'
+BeginForLoopCondition -> v397
+    v398 <- LoadInteger '300'
+    v399 <- Compare v397, '<', v398
+BeginForLoopAfterthought v399 -> v400
+    v401 <- UnaryOperation '++', v400
+BeginForLoopBody -> v402
+    v403 <- LoadInteger '50'
+    v404 <- BinaryOperation v402, '/', v403
+    v405 <- CreateNamedVariable 'Math', 'none'
+    v406 <- CallMethod v405, 'floor', [v404]
+    v407 <- CreateNamedVariable 'index', 'var', v406
+    v408 <- GetComputedProperty v385, v407
+    v409 <- CreateNamedVariable 'key', 'var', v408
+    v410 <- GetComputedProperty v395, v407
+    v411 <- CreateNamedVariable 'expected', 'var', v410
+    v412 <- GetComputedProperty v387, v409
+    v413 <- CreateNamedVariable 'actual', 'var', v412
+EndForLoop
+v414 <- LoadInteger '0'
+v415 <- LoadInteger '2'
+v416 <- CreateNamedVariable 'Math', 'none'
+v417 <- CallMethod v416, 'floor', [v415]
+v418 <- LoadFloat '0.5'
+v419 <- BinaryOperation v417, '*', v418
+v420 <- CreateArray [v414, v419]
+v421 <- CreateNamedVariable 'keys', 'var', v420
+v422 <- LoadString 'ab'
+v423 <- CreateNamedVariable 'str', 'var', v422
+v424 <- LoadString 'a'
+v425 <- LoadString 'b'
+v426 <- CreateArray [v424, v425]
+v427 <- CreateNamedVariable 'arr', 'var', v426
+BeginForLoopInitializer
+    v428 <- LoadInteger '0'
+BeginForLoopCondition -> v429
+    v430 <- LoadInteger '100'
+    v431 <- Compare v429, '<', v430
+BeginForLoopAfterthought v431 -> v432
+    v433 <- UnaryOperation '++', v432
+BeginForLoopBody -> v434
+    v435 <- LoadInteger '50'
+    v436 <- BinaryOperation v434, '/', v435
+    v437 <- CallMethod v416, 'floor', [v436]
+    v438 <- CreateNamedVariable 'index', 'var', v437
+    v439 <- GetComputedProperty v421, v438
+    v440 <- CreateNamedVariable 'key', 'var', v439
+    v441 <- GetComputedProperty v427, v438
+    v442 <- CreateNamedVariable 'expected', 'var', v441
+    v443 <- GetComputedProperty v423, v440
+    v444 <- CreateNamedVariable 'actual', 'var', v443
+EndForLoop
+v445 <- LoadInteger '0'
+v446 <- LoadInteger '0'
+v447 <- UnaryOperation '-', v446
+v448 <- CreateArray [v445, v447]
+v449 <- CreateNamedVariable 'keys', 'var', v448
+v450 <- LoadString 'ab'
+v451 <- CreateNamedVariable 'str', 'var', v450
+v452 <- LoadString 'a'
+v453 <- LoadString 'a'
+v454 <- CreateArray [v452, v453]
+v455 <- CreateNamedVariable 'arr', 'var', v454
+BeginForLoopInitializer
+    v456 <- LoadInteger '0'
+BeginForLoopCondition -> v457
+    v458 <- LoadInteger '100'
+    v459 <- Compare v457, '<', v458
+BeginForLoopAfterthought v459 -> v460
+    v461 <- UnaryOperation '++', v460
+BeginForLoopBody -> v462
+    v463 <- LoadInteger '50'
+    v464 <- BinaryOperation v462, '/', v463
+    v465 <- CallMethod v416, 'floor', [v464]
+    v466 <- CreateNamedVariable 'index', 'var', v465
+    v467 <- GetComputedProperty v449, v466
+    v468 <- CreateNamedVariable 'key', 'var', v467
+    v469 <- GetComputedProperty v455, v466
+    v470 <- CreateNamedVariable 'expected', 'var', v469
+    v471 <- GetComputedProperty v451, v468
+    v472 <- CreateNamedVariable 'actual', 'var', v471
+EndForLoop
+v473 <- LoadInteger '0'
+v474 <- LoadFloat '0.5'
+v475 <- CreateArray [v473, v474]
+v476 <- CreateNamedVariable 'keys', 'var', v475
+v477 <- LoadString 'ab'
+v478 <- CreateNamedVariable 'str', 'var', v477
+v479 <- LoadString 'a'
+v480 <- LoadUndefined
+v481 <- CreateArray [v479, v480]
+v482 <- CreateNamedVariable 'arr', 'var', v481
+BeginForLoopInitializer
+    v483 <- LoadInteger '0'
+BeginForLoopCondition -> v484
+    v485 <- LoadInteger '100'
+    v486 <- Compare v484, '<', v485
+BeginForLoopAfterthought v486 -> v487
+    v488 <- UnaryOperation '++', v487
+BeginForLoopBody -> v489
+    v490 <- LoadInteger '50'
+    v491 <- BinaryOperation v489, '/', v490
+    v492 <- CallMethod v416, 'floor', [v491]
+    v493 <- CreateNamedVariable 'index', 'var', v492
+    v494 <- GetComputedProperty v476, v493
+    v495 <- CreateNamedVariable 'key', 'var', v494
+    v496 <- GetComputedProperty v482, v493
+    v497 <- CreateNamedVariable 'expected', 'var', v496
+    v498 <- GetComputedProperty v478, v495
+    v499 <- CreateNamedVariable 'actual', 'var', v498
+EndForLoop
+v500 <- LoadInteger '0'
+v501 <- LoadInteger '1'
+v502 <- UnaryOperation '-', v501
+v503 <- CreateArray [v500, v502]
+v504 <- CreateNamedVariable 'keys', 'var', v503
+v505 <- LoadString 'ab'
+v506 <- CreateNamedVariable 'str', 'var', v505
+v507 <- LoadString 'a'
+v508 <- LoadUndefined
+v509 <- CreateArray [v507, v508]
+v510 <- CreateNamedVariable 'arr', 'var', v509
+BeginForLoopInitializer
+    v511 <- LoadInteger '0'
+BeginForLoopCondition -> v512
+    v513 <- LoadInteger '100'
+    v514 <- Compare v512, '<', v513
+BeginForLoopAfterthought v514 -> v515
+    v516 <- UnaryOperation '++', v515
+BeginForLoopBody -> v517
+    v518 <- LoadInteger '50'
+    v519 <- BinaryOperation v517, '/', v518
+    v520 <- CallMethod v416, 'floor', [v519]
+    v521 <- CreateNamedVariable 'index', 'var', v520
+    v522 <- GetComputedProperty v504, v521
+    v523 <- CreateNamedVariable 'key', 'var', v522
+    v524 <- GetComputedProperty v510, v521
+    v525 <- CreateNamedVariable 'expected', 'var', v524
+    v526 <- GetComputedProperty v506, v523
+    v527 <- CreateNamedVariable 'actual', 'var', v526
+EndForLoop
+v528 <- LoadInteger '0'
+v529 <- LoadInteger '10'
+v530 <- CreateArray [v528, v529]
+v531 <- CreateNamedVariable 'keys', 'var', v530
+v532 <- LoadString 'ab'
+v533 <- CreateNamedVariable 'str', 'var', v532
+v534 <- LoadString 'a'
+v535 <- LoadUndefined
+v536 <- CreateArray [v534, v535]
+v537 <- CreateNamedVariable 'arr', 'var', v536
+BeginForLoopInitializer
+    v538 <- LoadInteger '0'
+BeginForLoopCondition -> v539
+    v540 <- LoadInteger '100'
+    v541 <- Compare v539, '<', v540
+BeginForLoopAfterthought v541 -> v542
+    v543 <- UnaryOperation '++', v542
+BeginForLoopBody -> v544
+    v545 <- LoadInteger '50'
+    v546 <- BinaryOperation v544, '/', v545
+    v547 <- CallMethod v416, 'floor', [v546]
+    v548 <- CreateNamedVariable 'index', 'var', v547
+    v549 <- GetComputedProperty v531, v548
+    v550 <- CreateNamedVariable 'key', 'var', v549
+    v551 <- GetComputedProperty v537, v548
+    v552 <- CreateNamedVariable 'expected', 'var', v551
+    v553 <- GetComputedProperty v533, v550
+    v554 <- CreateNamedVariable 'actual', 'var', v553
+EndForLoop
+v555 <- LoadInteger '4'
+v556 <- CallMethod v416, 'floor', [v555]
+v557 <- LoadFloat '0.5'
+v558 <- BinaryOperation v556, '*', v557
+v559 <- CreateNamedVariable 'num', 'var', v558
+v560 <- LoadInteger '0'
+v561 <- CreateArray [v560, v559]
+v562 <- CreateNamedVariable 'keys', 'var', v561
+v563 <- LoadString 'ab'
+v564 <- CreateNamedVariable 'str', 'var', v563
+v565 <- LoadString 'a'
+v566 <- LoadUndefined
+v567 <- CreateArray [v565, v566]
+v568 <- CreateNamedVariable 'arr', 'var', v567
+BeginForLoopInitializer
+    v569 <- LoadInteger '0'
+BeginForLoopCondition -> v570
+    v571 <- LoadInteger '100'
+    v572 <- Compare v570, '<', v571
+BeginForLoopAfterthought v572 -> v573
+    v574 <- UnaryOperation '++', v573
+BeginForLoopBody -> v575
+    v576 <- LoadInteger '50'
+    v577 <- BinaryOperation v575, '/', v576
+    v578 <- CallMethod v416, 'floor', [v577]
+    v579 <- CreateNamedVariable 'index', 'var', v578
+    v580 <- GetComputedProperty v562, v579
+    v581 <- CreateNamedVariable 'key', 'var', v580
+    v582 <- GetComputedProperty v568, v579
+    v583 <- CreateNamedVariable 'expected', 'var', v582
+    v584 <- GetComputedProperty v564, v581
+    v585 <- CreateNamedVariable 'actual', 'var', v584
+EndForLoop
+v586 <- LoadString 'Ч'
+v587 <- CreateNamedVariable 'str', 'var', v586
+v588 <- LoadString 'Ч'
+v589 <- CreateArray [v588]
+v590 <- CreateNamedVariable 'arr', 'var', v589
+BeginForLoopInitializer
+    v591 <- LoadInteger '0'
+BeginForLoopCondition -> v592
+    v593 <- LoadInteger '50'
+    v594 <- Compare v592, '<', v593
+BeginForLoopAfterthought v594 -> v595
+    v596 <- UnaryOperation '++', v595
+BeginForLoopBody -> v597
+    v598 <- GetElement v590, '0'
+    v599 <- CreateNamedVariable 'expected', 'var', v598
+    v600 <- GetElement v587, '0'
+    v601 <- CreateNamedVariable 'actual', 'var', v600
+EndForLoop
+
+
+var foo = "Foo";
+foo[0];
+foo[1];
+foo[2];
+for (let i10 = 0; i10 < 10; i10++) {
+    foo[0];
+    foo[1];
+    foo[2];
+    (foo[0] + "BarBazQuuxFooBarQuux")[0];
+}
+foo["0" + ""];
+foo["1"];
+foo["2"];
+typeof foo[3];
+typeof foo[-1];
+typeof foo[-2];
+foo[0] = "f";
+foo[3] = "t";
+typeof foo[3];
+typeof foo[-2];
+const v73 = new String("foo");
+var S = v73;
+Object("foo");
+S[0];
+S["0"];
+S[0] = "bente";
+S[0];
+S["0"];
+S[-2] = "spider";
+S[-2];
+S[3] = "monkey";
+S[3];
+S["foo"] = "Fu";
+S.foo;
+S["0"] = "bente";
+S[0];
+S["0"];
+0 in S;
+-1 in S;
+2 in S;
+3 in S;
+4 in S;
+"0" in S;
+"-1" in S;
+"2" in S;
+"3" in S;
+"4" in S;
+S.hasOwnProperty(0);
+S.hasOwnProperty(-1);
+S.hasOwnProperty(2);
+S.hasOwnProperty(3);
+S.hasOwnProperty(4);
+S.hasOwnProperty("0");
+S.hasOwnProperty("-1");
+S.hasOwnProperty("2");
+S.hasOwnProperty("3");
+S.hasOwnProperty("4");
+("foo").hasOwnProperty(0);
+("foo").hasOwnProperty(-1);
+("foo").hasOwnProperty(2);
+("foo").hasOwnProperty(4);
+("foo").hasOwnProperty("0");
+("foo").hasOwnProperty("-1");
+("foo").hasOwnProperty("2");
+("foo").hasOwnProperty("4");
+delete S[3];
+typeof S[3];
+3 in S;
+"3" in S;
+const v252 = new Number(43);
+var N = v252;
+Object(43);
+N[-2] = "Alpha";
+N[-2];
+N[0] = "Zappa";
+N[0];
+N["0"];
+var A = ["V","e","t","t","e","r"];
+A[0] = "v";
+var A2 = "v";
+A[0];
+const v283 = new String("Onkel");
+var S = v283;
+S[0] = "o";
+var S2 = "o";
+S[0];
+var s = "Tante";
+s[0] = "t";
+var s2 = "t";
+s[0];
+S[-2] = "o";
+var S2 = "o";
+S[-2];
+s[-2] = "t";
+var s2 = "t";
+typeof s[-2];
+var alpha = ["@"];
+for (let i320 = 1; i320 < 128; i320++) {
+    var c = String.fromCharCode(i320);
+    alpha[i320] = c[0];
+}
+var alphaStr = alpha.join("");
+for (let i333 = 1; i333 < 128; i333++) {
+    alpha[i333];
+    alphaStr[i333];
+    String.fromCharCode(i333);
+    alphaStr[i333];
+}
+var foo = ["a12",["a",2,"c"],"a31",42];
+var results = [1,2,3,NaN];
+for (let i359 = 0; i359 < 200; ++i359) {
+    var index = Math.floor(i359 / 50);
+    var receiver = foo[index];
+    var expected = results[index];
+    var actual = +receiver[1];
+}
+var keys = [0,"1",2,3,-1,10];
+var str = "abcd";
+var arr = ["a","b","c","d",,,];
+for (let i397 = 0; i397 < 300; ++i397) {
+    var index = Math.floor(i397 / 50);
+    var key = keys[index];
+    var expected = arr[index];
+    var actual = str[key];
+}
+var keys = [0,Math.floor(2) * 0.5];
+var str = "ab";
+var arr = ["a","b"];
+for (let i429 = 0; i429 < 100; ++i429) {
+    var index = Math.floor(i429 / 50);
+    var key = keys[index];
+    var expected = arr[index];
+    var actual = str[key];
+}
+var keys = [0,-0];
+var str = "ab";
+var arr = ["a","a"];
+for (let i457 = 0; i457 < 100; ++i457) {
+    var index = Math.floor(i457 / 50);
+    var key = keys[index];
+    var expected = arr[index];
+    var actual = str[key];
+}
+var keys = [0,0.5];
+var str = "ab";
+var arr = ["a",,];
+for (let i484 = 0; i484 < 100; ++i484) {
+    var index = Math.floor(i484 / 50);
+    var key = keys[index];
+    var expected = arr[index];
+    var actual = str[key];
+}
+var keys = [0,-1];
+var str = "ab";
+var arr = ["a",,];
+for (let i512 = 0; i512 < 100; ++i512) {
+    var index = Math.floor(i512 / 50);
+    var key = keys[index];
+    var expected = arr[index];
+    var actual = str[key];
+}
+var keys = [0,10];
+var str = "ab";
+var arr = ["a",,];
+for (let i539 = 0; i539 < 100; ++i539) {
+    var index = Math.floor(i539 / 50);
+    var key = keys[index];
+    var expected = arr[index];
+    var actual = str[key];
+}
+var num = Math.floor(4) * 0.5;
+var keys = [0,num];
+var str = "ab";
+var arr = ["a",,];
+for (let i570 = 0; i570 < 100; ++i570) {
+    var index = Math.floor(i570 / 50);
+    var key = keys[index];
+    var expected = arr[index];
+    var actual = str[key];
+}
+var str = "Ч";
+var arr = ["Ч"];
+for (let i592 = 0; i592 < 50; ++i592) {
+    var expected = arr[0];
+    var actual = str[0];
+}
+
+FuzzIL program written to corpus/string-index.fzil

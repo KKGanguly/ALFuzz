@@ -1,0 +1,17 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Promise', 'none'
+    v2 <- CallMethod v1, 'resolve', []
+    v3 <- CallMethod v2, 'then', []
+    v4 <- CreateNamedVariable 'val', 'let', v3
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+
+
+function foo() {
+    let val = Promise.resolve().then();
+}
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-900674.fzil

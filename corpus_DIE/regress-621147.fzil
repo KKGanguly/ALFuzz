@@ -1,0 +1,49 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Array', 'none'
+    v3 <- CallFunction v2, [v1]
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '2'
+    v6 <- CallFunction v0, [v5]
+    Return v6
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadInteger '1'
+    SetElement v8, '0', v9
+EndPlainFunction
+v10 <- LoadInteger '0'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadInteger '1'
+v13 <- LoadInteger '2'
+v14 <- CreateArray [v12, v13]
+v15 <- CreateNamedVariable 'smi_array', 'var', v14
+v16 <- LoadInteger '3'
+SetElement v15, '2', v16
+v17 <- CallFunction v7, [v15]
+v18 <- CallFunction v4, []
+v19 <- CreateNamedVariable 'broken_array', 'var', v18
+v20 <- CallFunction v7, [v19]
+v21 <- LoadInteger '1'
+v22 <- GetElement v19, '0'
+v23 <- BinaryOperation v21, '+', v22
+
+
+function test(a1) {
+    return Array(a1);
+}
+function test2() {
+    return test(2);
+}
+function test3(a8) {
+    a8[0] = 1;
+}
+test(0);
+var smi_array = [1,2];
+smi_array[2] = 3;
+test3(smi_array);
+var broken_array = test2();
+test3(broken_array);
+1 + broken_array[0];
+
+FuzzIL program written to corpus/regress-621147.fzil

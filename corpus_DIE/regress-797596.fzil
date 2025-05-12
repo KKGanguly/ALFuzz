@@ -1,0 +1,98 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'notCallable', 'var', v0
+v2 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `func` -> v3
+        EndObjectLiteralMethod
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'obj', 'var', v4
+    v6 <- CreateNamedVariable 'gc', 'none'
+    v7 <- CallFunction v6, []
+    v8 <- BeginPlainFunction -> 
+        BeginTry
+            v9 <- CreateNamedVariable 'code', 'none'
+            v10 <- CallFunction v9, []
+        BeginCatch -> v11
+        EndTryCatch
+    EndPlainFunction
+    v12 <- BeginPlainFunction -> 
+        v13 <- GetProperty v5, 'a'
+        BeginTry
+            v14 <- LoadString 'func'
+            BeginObjectLiteral
+                BeginObjectLiteralMethod `get` -> v15
+                EndObjectLiteralMethod
+            v16 <- EndObjectLiteral
+            v17 <- CreateNamedVariable 'Object', 'none'
+            v18 <- CallMethod v17, 'defineProperty', [v5, v14, v16]
+        BeginCatch -> v19
+        EndTryCatch
+        BeginForLoopInitializer
+            v20 <- LoadInteger '0'
+        BeginForLoopCondition -> v21
+            v22 <- LoadInteger '1'
+            v23 <- Compare v21, '<', v22
+        BeginForLoopAfterthought v23 -> v24
+            v25 <- UnaryOperation v24, '++'
+        BeginForLoopBody -> v26
+            BeginTry
+                v27 <- LoadArguments
+                v28 <- GetComputedProperty v27, v26
+                v29 <- CallFunction v1, [v28]
+            BeginCatch -> v30
+            EndTryCatch
+        EndForLoop
+    EndPlainFunction
+    v31 <- CallFunction v8, []
+    BeginTry
+        v32 <- CallFunction v8, []
+    BeginCatch -> v33
+    EndTryCatch
+EndPlainFunction
+v34 <- CallFunction v2, []
+v35 <- CallFunction v2, []
+v36 <- CallFunction v2, []
+
+
+var notCallable;
+function inferReceiverMapsInDeadCode() {
+    const v4 = {
+        func() {
+        },
+    };
+    var obj = v4;
+    gc();
+    function wrappedCode() {
+        try {
+            code();
+        } catch(e11) {
+        }
+    }
+    function code() {
+        obj.a;
+        try {
+            const v16 = {
+                get() {
+                },
+            };
+            Object.defineProperty(obj, "func", v16);
+        } catch(e19) {
+        }
+        for (let i21 = 0; i21 < 1; i21++) {
+            try {
+                notCallable(arguments[i21]);
+            } catch(e30) {
+            }
+        }
+    }
+    wrappedCode();
+    try {
+        wrappedCode();
+    } catch(e33) {
+    }
+}
+inferReceiverMapsInDeadCode();
+inferReceiverMapsInDeadCode();
+inferReceiverMapsInDeadCode();
+
+FuzzIL program written to corpus/regress-797596.fzil

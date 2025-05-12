@@ -1,0 +1,169 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginGeneratorFunction -> 
+        Directive 'use strict'
+    EndGeneratorFunction
+    v2 <- LoadString 'arguments'
+    v3 <- CallMethod v1, 'hasOwnProperty', [v2]
+    v4 <- BeginPlainFunction -> 
+        v5 <- GetProperty v1, 'arguments'
+        Return v5
+    EndPlainFunction
+    v6 <- CallFunction v4, []
+    v7 <- CreateNamedVariable 'TypeError', 'none'
+    v8 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v9 <- EndObjectLiteral
+        SetProperty v1, 'arguments', v9
+        Return v9
+    EndPlainFunction
+    v10 <- CallFunction v8, []
+    v11 <- LoadString 'caller'
+    v12 <- CallMethod v1, 'hasOwnProperty', [v11]
+    v13 <- BeginPlainFunction -> 
+        v14 <- GetProperty v1, 'caller'
+        Return v14
+    EndPlainFunction
+    v15 <- CallFunction v13, []
+    v16 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v17 <- EndObjectLiteral
+        SetProperty v1, 'caller', v17
+        Return v17
+    EndPlainFunction
+    v18 <- CallFunction v16, []
+EndPlainFunction
+v19 <- CallFunction v0, []
+v20 <- BeginPlainFunction -> 
+    v21 <- BeginGeneratorFunction -> 
+    EndGeneratorFunction
+    v22 <- LoadString 'arguments'
+    v23 <- CallMethod v21, 'hasOwnProperty', [v22]
+    v24 <- BeginPlainFunction -> 
+        v25 <- GetProperty v21, 'arguments'
+        Return v25
+    EndPlainFunction
+    v26 <- CallFunction v24, []
+    v27 <- CreateNamedVariable 'TypeError', 'none'
+    v28 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v29 <- EndObjectLiteral
+        SetProperty v21, 'arguments', v29
+        Return v29
+    EndPlainFunction
+    v30 <- CallFunction v28, []
+    v31 <- LoadString 'caller'
+    v32 <- CallMethod v21, 'hasOwnProperty', [v31]
+    v33 <- BeginPlainFunction -> 
+        v34 <- GetProperty v21, 'caller'
+        Return v34
+    EndPlainFunction
+    v35 <- CallFunction v33, []
+    v36 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v37 <- EndObjectLiteral
+        SetProperty v21, 'caller', v37
+        Return v37
+    EndPlainFunction
+    v38 <- CallFunction v36, []
+EndPlainFunction
+v39 <- CallFunction v20, []
+v40 <- BeginPlainFunction -> v41, v42, v43
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v41
+        ObjectLiteralAddProperty `done`, v42
+    v44 <- EndObjectLiteral
+EndPlainFunction
+v45 <- BeginPlainFunction -> 
+    v46 <- BeginGeneratorFunction -> 
+        Directive 'use strict'
+    EndGeneratorFunction
+    v47 <- LoadUndefined
+    v48 <- LoadBoolean 'true'
+    v49 <- CallFunction v46, []
+    v50 <- CallMethod v49, 'next', []
+EndPlainFunction
+v51 <- CallFunction v45, []
+v52 <- BeginPlainFunction -> 
+    v53 <- BeginGeneratorFunction -> 
+    EndGeneratorFunction
+    v54 <- LoadUndefined
+    v55 <- LoadBoolean 'true'
+    v56 <- CallFunction v53, []
+    v57 <- CallMethod v56, 'next', []
+EndPlainFunction
+v58 <- CallFunction v52, []
+
+
+function testRestrictedPropertiesStrict() {
+    function* generator() {
+        'use strict';
+    }
+    generator.hasOwnProperty("arguments");
+    function f4() {
+        return generator.arguments;
+    }
+    f4();
+    function f8() {
+        const v9 = {};
+        generator.arguments = v9;
+        return v9;
+    }
+    f8();
+    generator.hasOwnProperty("caller");
+    function f13() {
+        return generator.caller;
+    }
+    f13();
+    function f16() {
+        const v17 = {};
+        generator.caller = v17;
+        return v17;
+    }
+    f16();
+}
+testRestrictedPropertiesStrict();
+function testRestrictedPropertiesSloppy() {
+    function* generator() {
+    }
+    generator.hasOwnProperty("arguments");
+    function f24() {
+        return generator.arguments;
+    }
+    f24();
+    function f28() {
+        const v29 = {};
+        generator.arguments = v29;
+        return v29;
+    }
+    f28();
+    generator.hasOwnProperty("caller");
+    function f33() {
+        return generator.caller;
+    }
+    f33();
+    function f36() {
+        const v37 = {};
+        generator.caller = v37;
+        return v37;
+    }
+    f36();
+}
+testRestrictedPropertiesSloppy();
+function assertIteratorResult(a41, a42, a43) {
+    const v44 = { value: a41, done: a42 };
+}
+function testIteratorResultStrict() {
+    function* generator() {
+        'use strict';
+    }
+    generator().next();
+}
+testIteratorResultStrict();
+function testIteratorResultSloppy() {
+    function* generator() {
+    }
+    generator().next();
+}
+testIteratorResultSloppy();
+
+FuzzIL program written to corpus/generators-poisoned-properties.fzil

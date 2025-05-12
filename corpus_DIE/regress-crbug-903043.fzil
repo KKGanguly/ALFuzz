@@ -1,0 +1,94 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadFloat '0.1'
+        v3 <- CreateNamedVariable 'x', 'const', v2
+        v4 <- LoadInteger '0'
+        v5 <- UnaryOperation '-', v4
+        v6 <- LoadFloat '1e-308'
+        v7 <- UnaryOperation '-', v6
+        v8 <- BinaryOperation v3, '*', v7
+        v9 <- CreateNamedVariable 'Object', 'none'
+        v10 <- CallMethod v9, 'is', [v5, v8]
+        Return v10
+    EndPlainFunction
+    v11 <- CallFunction v1, []
+    v12 <- CallFunction v1, []
+    v13 <- CallFunction v1, []
+EndPlainFunction
+v14 <- CallFunction v0, []
+v15 <- BeginPlainFunction -> 
+    v16 <- BeginPlainFunction -> v17
+        v18 <- LoadInteger '0'
+        v19 <- UnaryOperation '-', v18
+        v20 <- LoadFloat '1e-308'
+        v21 <- UnaryOperation '-', v20
+        v22 <- BinaryOperation v17, '*', v21
+        v23 <- CreateNamedVariable 'Object', 'none'
+        v24 <- CallMethod v23, 'is', [v19, v22]
+        Return v24
+    EndPlainFunction
+    v25 <- LoadFloat '0.1'
+    v26 <- CallFunction v16, [v25]
+    v27 <- LoadFloat '0.1'
+    v28 <- CallFunction v16, [v27]
+    v29 <- LoadFloat '0.1'
+    v30 <- CallFunction v16, [v29]
+EndPlainFunction
+v31 <- CallFunction v15, []
+v32 <- BeginPlainFunction -> 
+    v33 <- BeginPlainFunction -> v34
+        v35 <- LoadInteger '0'
+        v36 <- UnaryOperation '-', v35
+        v37 <- CreateNamedVariable 'Object', 'none'
+        v38 <- CallMethod v37, 'is', [v36, v34]
+        Return v38
+    EndPlainFunction
+    v39 <- LoadFloat '0.1'
+    v40 <- LoadFloat '1e-308'
+    v41 <- UnaryOperation '-', v40
+    v42 <- BinaryOperation v39, '*', v41
+    v43 <- CallFunction v33, [v42]
+    v44 <- LoadFloat '0.1'
+    v45 <- LoadFloat '1e-308'
+    v46 <- UnaryOperation '-', v45
+    v47 <- BinaryOperation v44, '*', v46
+    v48 <- CallFunction v33, [v47]
+    v49 <- LoadFloat '0.1'
+    v50 <- LoadFloat '1e-308'
+    v51 <- UnaryOperation '-', v50
+    v52 <- BinaryOperation v49, '*', v51
+    v53 <- CallFunction v33, [v52]
+EndPlainFunction
+v54 <- CallFunction v32, []
+
+
+function f0() {
+    function foo() {
+        const x = 0.1;
+        return Object.is(-0, x * -1e-308);
+    }
+    foo();
+    foo();
+    foo();
+}
+f0();
+function f15() {
+    function foo(a17) {
+        return Object.is(-0, a17 * -1e-308);
+    }
+    foo(0.1);
+    foo(0.1);
+    foo(0.1);
+}
+f15();
+function f32() {
+    function foo(a34) {
+        return Object.is(-0, a34);
+    }
+    foo(0.1 * -1e-308);
+    foo(0.1 * -1e-308);
+    foo(0.1 * -1e-308);
+}
+f32();
+
+FuzzIL program written to corpus/regress-crbug-903043.fzil

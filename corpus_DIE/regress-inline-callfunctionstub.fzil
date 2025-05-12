@@ -1,0 +1,61 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '42'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- CallFunction v0, []
+    Return v3
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `g`, v2
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'o', 'var', v4
+v6 <- BeginPlainFunction -> v7
+    v8 <- LoadInteger '0'
+    v9 <- CreateNamedVariable 'v', 'var', v8
+    BeginForLoopInitializer
+        v10 <- LoadInteger '0'
+    BeginForLoopCondition -> v11
+        v12 <- LoadInteger '1'
+        v13 <- Compare v11, '<', v12
+    BeginForLoopAfterthought v13 -> v14
+        v15 <- UnaryOperation v14, '++'
+    BeginForLoopBody -> v16
+        v17 <- CallFunction v7, []
+        BeginIf v17
+            v18 <- LoadInteger '42'
+            Reassign v9, v18
+        EndIf
+    EndForLoop
+EndPlainFunction
+v19 <- GetProperty v5, 'g'
+v20 <- CallFunction v6, [v19]
+v21 <- GetProperty v5, 'g'
+v22 <- CallFunction v6, [v21]
+v23 <- GetProperty v5, 'g'
+v24 <- CallFunction v6, [v23]
+v25 <- GetProperty v5, 'g'
+v26 <- CallFunction v6, [v25]
+
+
+function f() {
+    return 42;
+}
+function f2() {
+    return f();
+}
+var o = { g: f2 };
+function main(a7) {
+    var v = 0;
+    for (let i11 = 0; i11 < 1; i11++) {
+        if (a7()) {
+            v = 42;
+        }
+    }
+}
+main(o.g);
+main(o.g);
+main(o.g);
+main(o.g);
+
+FuzzIL program written to corpus/regress-inline-callfunctionstub.fzil

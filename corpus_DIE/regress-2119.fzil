@@ -1,0 +1,16 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- LoadInteger '1'
+    v2 <- CreateNamedVariable 'undeclared', 'none'
+    Reassign v2, v1
+EndPlainFunction
+v3 <- CallFunction v0, []
+
+
+function strict_function() {
+    'use strict';
+    undeclared = 1;
+}
+strict_function();
+
+FuzzIL program written to corpus/regress-2119.fzil

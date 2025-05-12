@@ -1,0 +1,62 @@
+BeginBlockStatement
+    v0 <- LoadInteger '42'
+    v1 <- CreateArray [v0]
+    v2 <- CreateNamedVariable 'x', 'const', v1
+    v3 <- LoadInteger '0'
+    v4 <- LoadInteger '0'
+    v5 <- LoadInteger '23'
+    v6 <- CallMethod v2, 'splice', [v3, v4, v5]
+    v7 <- LoadInteger '23'
+    v8 <- LoadInteger '42'
+    v9 <- CreateArray [v7, v8]
+    v10 <- GetProperty v2, 'length'
+    v11 <- UnaryOperation v10, '++'
+    v12 <- LoadInteger '23'
+    v13 <- LoadInteger '42'
+    v14 <- LoadUndefined
+    v15 <- CreateArray [v12, v13, v14]
+    v16 <- LoadInteger '2'
+    v17 <- CallMethod v2, 'hasOwnProperty', [v16]
+EndBlockStatement
+BeginBlockStatement
+    v18 <- LoadFloat '4.2'
+    v19 <- CreateArray [v18]
+    v20 <- CreateNamedVariable 'x', 'const', v19
+    v21 <- LoadInteger '0'
+    v22 <- LoadInteger '0'
+    v23 <- LoadInteger '23'
+    v24 <- CallMethod v20, 'splice', [v21, v22, v23]
+    v25 <- LoadInteger '23'
+    v26 <- LoadFloat '4.2'
+    v27 <- CreateArray [v25, v26]
+    v28 <- GetProperty v20, 'length'
+    v29 <- UnaryOperation v28, '++'
+    v30 <- LoadInteger '23'
+    v31 <- LoadFloat '4.2'
+    v32 <- LoadUndefined
+    v33 <- CreateArray [v30, v31, v32]
+    v34 <- LoadInteger '2'
+    v35 <- CallMethod v20, 'hasOwnProperty', [v34]
+EndBlockStatement
+
+
+{
+    const x = [42];
+    x.splice(0, 0, 23);
+    [23,42];
+    let v10 = x.length;
+    v10++;
+    [23,42,,];
+    x.hasOwnProperty(2);
+}
+{
+    const x = [4.2];
+    x.splice(0, 0, 23);
+    [23,4.2];
+    let v28 = x.length;
+    v28++;
+    [23,4.2,,];
+    x.hasOwnProperty(2);
+}
+
+FuzzIL program written to corpus/regress-907479.fzil

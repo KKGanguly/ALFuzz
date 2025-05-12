@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Date', 'none'
+    v2 <- CallMethod v1, 'now', []
+    v3 <- CreateNamedVariable 't', 'var', v2
+    v4 <- LoadInteger '1'
+    v5 <- LoadString 'p'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v5, v4
+        ObjectLiteralAddProperty `t`, v3
+    v6 <- EndObjectLiteral
+    v7 <- CreateNamedVariable 'o', 'var', v6
+EndPlainFunction
+v8 <- CreateNamedVariable 'test', 'var', v0
+v9 <- BeginPlainFunction -> 
+    v10 <- CallFunction v8, []
+EndPlainFunction
+v11 <- CallFunction v9, []
+v12 <- CallFunction v9, []
+v13 <- CallFunction v9, []
+
+
+function f0() {
+    var t = Date.now();
+    var o = { ["p"]: 1, t: t };
+}
+var test = f0;
+function caller() {
+    test();
+}
+caller();
+caller();
+caller();
+
+FuzzIL program written to corpus/regress-5033.fzil

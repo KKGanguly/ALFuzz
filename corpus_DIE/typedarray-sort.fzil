@@ -1,0 +1,510 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- CreateNamedVariable 'Int8Array', 'none'
+v2 <- CreateNamedVariable 'Uint16Array', 'none'
+v3 <- CreateNamedVariable 'Int16Array', 'none'
+v4 <- CreateNamedVariable 'Uint32Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v7 <- CreateNamedVariable 'Float32Array', 'none'
+v8 <- CreateNamedVariable 'Float64Array', 'none'
+v9 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8]
+v10 <- CreateNamedVariable 'typedArrayConstructors', 'var', v9
+v11 <- BeginPlainFunction -> v12, v13, v14
+    v15 <- GetProperty v12, '__proto__'
+    v16 <- GetProperty v14, 'prototype'
+    BeginForLoopInitializer
+        v17 <- LoadInteger '0'
+    BeginForLoopCondition -> v18
+        v19 <- GetProperty v13, 'length'
+        v20 <- Compare v18, '<', v19
+    BeginForLoopAfterthought v20 -> v21
+        v22 <- UnaryOperation '++', v21
+    BeginForLoopBody -> v23
+        v24 <- GetComputedProperty v13, v23
+        v25 <- GetComputedProperty v12, v23
+    EndForLoop
+EndPlainFunction
+BeginForOfLoop v10 -> v26
+    v27 <- LoadInteger '100'
+    v28 <- LoadInteger '7'
+    v29 <- LoadInteger '45'
+    v30 <- CreateArray [v27, v28, v29]
+    v31 <- Construct v26, [v30]
+    v32 <- CreateNamedVariable 'a', 'var', v31
+    v33 <- CallMethod v32, 'sort', []
+    v34 <- LoadInteger '7'
+    v35 <- LoadInteger '45'
+    v36 <- LoadInteger '100'
+    v37 <- CreateArray [v34, v35, v36]
+    v38 <- GetProperty v32, 'length'
+    v39 <- LoadInteger '3'
+    v40 <- Compare v26, '===', v7
+    v41 <- Compare v26, '===', v8
+    v42 <- BinaryOperation v40, '||', v41
+    BeginIf v42
+        v43 <- LoadInteger '0'
+        v44 <- UnaryOperation '+', v43
+        v45 <- LoadInteger '0'
+        v46 <- UnaryOperation '-', v45
+        v47 <- CreateNamedVariable 'NaN', 'none'
+        v48 <- LoadInteger '0'
+        v49 <- UnaryOperation '-', v48
+        v50 <- LoadInteger '0'
+        v51 <- UnaryOperation '+', v50
+        v52 <- CreateArray [v44, v46, v47, v49, v47, v51]
+        v53 <- Construct v26, [v52]
+        v54 <- CreateNamedVariable 'b', 'var', v53
+        v55 <- CallMethod v54, 'sort', []
+        v56 <- LoadInteger '0'
+        v57 <- UnaryOperation '-', v56
+        v58 <- LoadInteger '0'
+        v59 <- UnaryOperation '-', v58
+        v60 <- LoadInteger '0'
+        v61 <- UnaryOperation '+', v60
+        v62 <- LoadInteger '0'
+        v63 <- UnaryOperation '+', v62
+        v64 <- CreateArray [v57, v59, v61, v63, v47, v47]
+        v65 <- GetProperty v54, 'length'
+        v66 <- LoadInteger '6'
+    EndIf
+    v67 <- BeginPlainFunction -> v68, v69
+        v70 <- BinaryOperation v69, '-', v68
+        Return v70
+    EndPlainFunction
+    v71 <- CallMethod v32, 'sort', [v67]
+    v72 <- LoadInteger '100'
+    v73 <- LoadInteger '45'
+    v74 <- LoadInteger '7'
+    v75 <- CreateArray [v72, v73, v74]
+    v76 <- LoadString 'length'
+    v77 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v77
+    v78 <- EndObjectLiteral
+    v79 <- CreateNamedVariable 'Object', 'none'
+    v80 <- CallMethod v79, 'defineProperty', [v32, v76, v78]
+    v81 <- CallMethod v32, 'sort', []
+    v82 <- LoadInteger '7'
+    v83 <- LoadInteger '45'
+    v84 <- LoadInteger '100'
+    v85 <- CreateArray [v82, v83, v84]
+    v86 <- GetProperty v32, 'length'
+    v87 <- LoadInteger '1'
+    v88 <- BeginPlainFunction -> 
+        v89 <- CreateArray []
+        v90 <- GetProperty v32, 'sort'
+        v91 <- CallMethod v90, 'call', [v89]
+    EndPlainFunction
+    v92 <- CallFunction v88, []
+    v93 <- CreateNamedVariable 'TypeError', 'none'
+    v94 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v95 <- GetProperty v26, 'BYTES_PER_ELEMENT'
+    v96 <- LoadInteger '3'
+    v97 <- BinaryOperation v95, '*', v96
+    v98 <- Construct v94, [v97]
+    v99 <- CreateNamedVariable 'buf', 'var', v98
+    v100 <- GetProperty v26, 'BYTES_PER_ELEMENT'
+    v101 <- Construct v26, [v99, v100]
+    v102 <- CreateNamedVariable 'a', 'var', v101
+    v103 <- Construct v26, [v99]
+    v104 <- CreateNamedVariable 'b', 'var', v103
+    v105 <- LoadInteger '3'
+    SetElement v104, '0', v105
+    v106 <- LoadInteger '2'
+    SetElement v104, '1', v106
+    v107 <- LoadInteger '1'
+    SetElement v104, '2', v107
+    v108 <- CallMethod v102, 'sort', []
+    v109 <- LoadInteger '1'
+    v110 <- LoadInteger '2'
+    v111 <- CreateArray [v109, v110]
+    v112 <- LoadInteger '1'
+    v113 <- LoadInteger '2'
+    v114 <- LoadInteger '3'
+    v115 <- LoadInteger '4'
+    v116 <- LoadInteger '5'
+    v117 <- LoadInteger '6'
+    v118 <- LoadInteger '7'
+    v119 <- LoadInteger '8'
+    v120 <- LoadInteger '9'
+    v121 <- LoadInteger '10'
+    v122 <- CreateArray [v112, v113, v114, v115, v116, v117, v118, v119, v120, v121]
+    v123 <- Construct v26, [v122]
+    v124 <- CreateNamedVariable 'array', 'var', v123
+    v125 <- BeginArrowFunction -> 
+        v126 <- CallMethod v124, 'sort', []
+        Return v126
+    EndArrowFunction
+    v127 <- CallFunction v125, []
+EndForOfLoop
+v128 <- LoadInteger '255'
+v129 <- LoadInteger '254'
+v130 <- LoadInteger '4'
+v131 <- LoadInteger '3'
+v132 <- LoadInteger '2'
+v133 <- LoadInteger '1'
+v134 <- LoadInteger '0'
+v135 <- CreateArray [v128, v129, v130, v131, v132, v133, v134]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v0
+    ObjectLiteralAddProperty `array`, v135
+v136 <- EndObjectLiteral
+v137 <- LoadInteger '127'
+v138 <- LoadInteger '126'
+v139 <- LoadInteger '1'
+v140 <- LoadInteger '0'
+v141 <- LoadInteger '1'
+v142 <- UnaryOperation '-', v141
+v143 <- LoadInteger '127'
+v144 <- UnaryOperation '-', v143
+v145 <- LoadInteger '128'
+v146 <- UnaryOperation '-', v145
+v147 <- CreateArray [v137, v138, v139, v140, v142, v144, v146]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v1
+    ObjectLiteralAddProperty `array`, v147
+v148 <- EndObjectLiteral
+v149 <- LoadInteger '2'
+v150 <- LoadInteger '16'
+v151 <- BinaryOperation v149, '**', v150
+v152 <- LoadInteger '1'
+v153 <- BinaryOperation v151, '-', v152
+v154 <- LoadInteger '2'
+v155 <- LoadInteger '16'
+v156 <- BinaryOperation v154, '**', v155
+v157 <- LoadInteger '2'
+v158 <- BinaryOperation v156, '-', v157
+v159 <- LoadInteger '4'
+v160 <- LoadInteger '3'
+v161 <- LoadInteger '2'
+v162 <- LoadInteger '1'
+v163 <- LoadInteger '0'
+v164 <- CreateArray [v153, v158, v159, v160, v161, v162, v163]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v2
+    ObjectLiteralAddProperty `array`, v164
+v165 <- EndObjectLiteral
+v166 <- LoadInteger '2'
+v167 <- LoadInteger '15'
+v168 <- BinaryOperation v166, '**', v167
+v169 <- LoadInteger '1'
+v170 <- BinaryOperation v168, '-', v169
+v171 <- LoadInteger '2'
+v172 <- LoadInteger '15'
+v173 <- BinaryOperation v171, '**', v172
+v174 <- LoadInteger '2'
+v175 <- BinaryOperation v173, '-', v174
+v176 <- LoadInteger '1'
+v177 <- LoadInteger '0'
+v178 <- LoadInteger '1'
+v179 <- UnaryOperation '-', v178
+v180 <- LoadInteger '2'
+v181 <- LoadInteger '15'
+v182 <- BinaryOperation v180, '**', v181
+v183 <- LoadInteger '1'
+v184 <- BinaryOperation v182, '-', v183
+v185 <- UnaryOperation '-', v184
+v186 <- LoadInteger '2'
+v187 <- LoadInteger '15'
+v188 <- BinaryOperation v186, '**', v187
+v189 <- UnaryOperation '-', v188
+v190 <- CreateArray [v170, v175, v176, v177, v179, v185, v189]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v3
+    ObjectLiteralAddProperty `array`, v190
+v191 <- EndObjectLiteral
+v192 <- LoadInteger '2'
+v193 <- LoadInteger '32'
+v194 <- BinaryOperation v192, '**', v193
+v195 <- LoadInteger '1'
+v196 <- BinaryOperation v194, '-', v195
+v197 <- LoadInteger '2'
+v198 <- LoadInteger '32'
+v199 <- BinaryOperation v197, '**', v198
+v200 <- LoadInteger '2'
+v201 <- BinaryOperation v199, '-', v200
+v202 <- LoadInteger '4'
+v203 <- LoadInteger '3'
+v204 <- LoadInteger '2'
+v205 <- LoadInteger '1'
+v206 <- LoadInteger '0'
+v207 <- CreateArray [v196, v201, v202, v203, v204, v205, v206]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v4
+    ObjectLiteralAddProperty `array`, v207
+v208 <- EndObjectLiteral
+v209 <- LoadInteger '2'
+v210 <- LoadInteger '31'
+v211 <- BinaryOperation v209, '**', v210
+v212 <- LoadInteger '1'
+v213 <- BinaryOperation v211, '-', v212
+v214 <- LoadInteger '2'
+v215 <- LoadInteger '31'
+v216 <- BinaryOperation v214, '**', v215
+v217 <- LoadInteger '2'
+v218 <- BinaryOperation v216, '-', v217
+v219 <- LoadInteger '1'
+v220 <- LoadInteger '0'
+v221 <- LoadInteger '1'
+v222 <- UnaryOperation '-', v221
+v223 <- LoadInteger '2'
+v224 <- LoadInteger '31'
+v225 <- BinaryOperation v223, '**', v224
+v226 <- LoadInteger '1'
+v227 <- BinaryOperation v225, '-', v226
+v228 <- UnaryOperation '-', v227
+v229 <- LoadInteger '2'
+v230 <- LoadInteger '31'
+v231 <- BinaryOperation v229, '**', v230
+v232 <- UnaryOperation '-', v231
+v233 <- CreateArray [v213, v218, v219, v220, v222, v228, v232]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v5
+    ObjectLiteralAddProperty `array`, v233
+v234 <- EndObjectLiteral
+v235 <- LoadInteger '2'
+v236 <- LoadInteger '24'
+v237 <- BinaryOperation v235, '**', v236
+v238 <- LoadInteger '2'
+v239 <- LoadInteger '24'
+v240 <- BinaryOperation v238, '**', v239
+v241 <- LoadInteger '1'
+v242 <- BinaryOperation v240, '-', v241
+v243 <- LoadInteger '1'
+v244 <- LoadInteger '0'
+v245 <- LoadInteger '1'
+v246 <- UnaryOperation '-', v245
+v247 <- LoadInteger '2'
+v248 <- LoadInteger '24'
+v249 <- BinaryOperation v247, '**', v248
+v250 <- LoadInteger '1'
+v251 <- BinaryOperation v249, '-', v250
+v252 <- UnaryOperation '-', v251
+v253 <- LoadInteger '2'
+v254 <- LoadInteger '24'
+v255 <- BinaryOperation v253, '**', v254
+v256 <- UnaryOperation '-', v255
+v257 <- CreateArray [v237, v242, v243, v244, v246, v252, v256]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v7
+    ObjectLiteralAddProperty `array`, v257
+v258 <- EndObjectLiteral
+v259 <- LoadInteger '2'
+v260 <- LoadInteger '53'
+v261 <- BinaryOperation v259, '**', v260
+v262 <- LoadInteger '2'
+v263 <- LoadInteger '53'
+v264 <- BinaryOperation v262, '**', v263
+v265 <- LoadInteger '1'
+v266 <- BinaryOperation v264, '-', v265
+v267 <- LoadInteger '1'
+v268 <- LoadInteger '0'
+v269 <- LoadInteger '1'
+v270 <- UnaryOperation '-', v269
+v271 <- LoadInteger '2'
+v272 <- LoadInteger '53'
+v273 <- BinaryOperation v271, '**', v272
+v274 <- LoadInteger '1'
+v275 <- BinaryOperation v273, '-', v274
+v276 <- UnaryOperation '-', v275
+v277 <- LoadInteger '2'
+v278 <- LoadInteger '53'
+v279 <- BinaryOperation v277, '**', v278
+v280 <- UnaryOperation '-', v279
+v281 <- CreateArray [v261, v266, v267, v268, v270, v276, v280]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v8
+    ObjectLiteralAddProperty `array`, v281
+v282 <- EndObjectLiteral
+v283 <- LoadInteger '255'
+v284 <- LoadInteger '254'
+v285 <- LoadInteger '4'
+v286 <- LoadInteger '3'
+v287 <- LoadInteger '2'
+v288 <- LoadInteger '1'
+v289 <- LoadInteger '0'
+v290 <- CreateArray [v283, v284, v285, v286, v287, v288, v289]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v6
+    ObjectLiteralAddProperty `array`, v290
+v291 <- EndObjectLiteral
+v292 <- CreateNamedVariable 'BigUint64Array', 'none'
+v293 <- LoadInteger '2'
+v294 <- LoadInteger '64'
+v295 <- BinaryOperation v293, '**', v294
+v296 <- LoadInteger '1'
+v297 <- BinaryOperation v295, '-', v296
+v298 <- LoadInteger '2'
+v299 <- LoadInteger '64'
+v300 <- BinaryOperation v298, '**', v299
+v301 <- LoadInteger '2'
+v302 <- BinaryOperation v300, '-', v301
+v303 <- LoadInteger '4'
+v304 <- LoadInteger '3'
+v305 <- LoadInteger '2'
+v306 <- LoadInteger '1'
+v307 <- LoadInteger '0'
+v308 <- CreateArray [v297, v302, v303, v304, v305, v306, v307]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v292
+    ObjectLiteralAddProperty `array`, v308
+v309 <- EndObjectLiteral
+v310 <- CreateNamedVariable 'BigInt64Array', 'none'
+v311 <- LoadInteger '2'
+v312 <- LoadInteger '63'
+v313 <- BinaryOperation v311, '**', v312
+v314 <- LoadInteger '1'
+v315 <- BinaryOperation v313, '-', v314
+v316 <- LoadInteger '2'
+v317 <- LoadInteger '63'
+v318 <- BinaryOperation v316, '**', v317
+v319 <- LoadInteger '2'
+v320 <- BinaryOperation v318, '-', v319
+v321 <- LoadInteger '1'
+v322 <- LoadInteger '0'
+v323 <- LoadInteger '1'
+v324 <- UnaryOperation '-', v323
+v325 <- LoadInteger '2'
+v326 <- LoadInteger '63'
+v327 <- BinaryOperation v325, '**', v326
+v328 <- LoadInteger '1'
+v329 <- BinaryOperation v327, '-', v328
+v330 <- UnaryOperation '-', v329
+v331 <- LoadInteger '2'
+v332 <- LoadInteger '63'
+v333 <- BinaryOperation v331, '**', v332
+v334 <- UnaryOperation '-', v333
+v335 <- CreateArray [v315, v320, v321, v322, v324, v330, v334]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ctor`, v310
+    ObjectLiteralAddProperty `array`, v335
+v336 <- EndObjectLiteral
+v337 <- CreateArray [v136, v148, v165, v191, v208, v234, v258, v282, v291, v309, v336]
+v338 <- CreateNamedVariable 'constructorsWithArrays', 'let', v337
+v339 <- BeginPlainFunction -> v340, v341
+    v342 <- Compare v340, '<', v341
+    BeginIf v342
+        v343 <- LoadInteger '1'
+        v344 <- UnaryOperation '-', v343
+        Return v344
+    EndIf
+    v345 <- Compare v341, '<', v340
+    BeginIf v345
+        v346 <- LoadInteger '1'
+        Return v346
+    EndIf
+    v347 <- LoadInteger '0'
+    Return v347
+EndPlainFunction
+BeginForOfLoop v338 -> v348
+    v349 <- GetProperty v348, 'ctor'
+    v350 <- GetProperty v348, 'array'
+    v351 <- Construct v349, [v350]
+    v352 <- CreateNamedVariable 'array', 'let', v351
+    v353 <- CallMethod v352, 'sort', [v339]
+    v354 <- GetProperty v348, 'array'
+    v355 <- CallMethod v354, 'reverse', []
+    v356 <- GetProperty v348, 'ctor'
+    v357 <- GetProperty v352, 'length'
+    v358 <- GetProperty v348, 'array'
+    v359 <- GetProperty v358, 'length'
+EndForOfLoop
+
+
+var typedArrayConstructors = [Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,Uint8ClampedArray,Float32Array,Float64Array];
+function assertArrayLikeEquals(a12, a13, a14) {
+    a12.__proto__;
+    a14.prototype;
+    for (let i18 = 0; i18 < a13.length; ++i18) {
+        a13[i18];
+        a12[i18];
+    }
+}
+for (const v26 of typedArrayConstructors) {
+    const v31 = new v26([100,7,45]);
+    var a = v31;
+    a.sort();
+    [7,45,100];
+    a.length;
+    if ((v26 === Float32Array) || (v26 === Float64Array)) {
+        const v53 = new v26([+0,-0,NaN,-0,NaN,+0]);
+        var b = v53;
+        b.sort();
+        [-0,-0,+0,+0,NaN,NaN];
+        b.length;
+    }
+    function f67(a68, a69) {
+        return a69 - a68;
+    }
+    a.sort(f67);
+    [100,45,7];
+    Object.defineProperty(a, "length", { value: 1 });
+    a.sort();
+    [7,45,100];
+    a.length;
+    function f88() {
+        const v89 = [];
+        a.sort.call(v89);
+    }
+    f88();
+    const v98 = new ArrayBuffer(v26.BYTES_PER_ELEMENT * 3);
+    var buf = v98;
+    const v101 = new v26(buf, v26.BYTES_PER_ELEMENT);
+    var a = v101;
+    const v103 = new v26(buf);
+    var b = v103;
+    b[0] = 3;
+    b[1] = 2;
+    b[2] = 1;
+    a.sort();
+    [1,2];
+    const v123 = new v26([1,2,3,4,5,6,7,8,9,10]);
+    var array = v123;
+    const v125 = () => {
+        return array.sort();
+    };
+    v125();
+}
+const v135 = [255,254,4,3,2,1,0];
+const v136 = { ctor: Uint8Array, array: v135 };
+const v147 = [127,126,1,0,-1,-127,-128];
+const v148 = { ctor: Int8Array, array: v147 };
+const v164 = [(2 ** 16) - 1,(2 ** 16) - 2,4,3,2,1,0];
+const v165 = { ctor: Uint16Array, array: v164 };
+const v190 = [(2 ** 15) - 1,(2 ** 15) - 2,1,0,-1,-((2 ** 15) - 1),-(2 ** 15)];
+const v191 = { ctor: Int16Array, array: v190 };
+const v207 = [(2 ** 32) - 1,(2 ** 32) - 2,4,3,2,1,0];
+const v208 = { ctor: Uint32Array, array: v207 };
+const v233 = [(2 ** 31) - 1,(2 ** 31) - 2,1,0,-1,-((2 ** 31) - 1),-(2 ** 31)];
+const v234 = { ctor: Int32Array, array: v233 };
+const v257 = [2 ** 24,(2 ** 24) - 1,1,0,-1,-((2 ** 24) - 1),-(2 ** 24)];
+const v258 = { ctor: Float32Array, array: v257 };
+const v281 = [2 ** 53,(2 ** 53) - 1,1,0,-1,-((2 ** 53) - 1),-(2 ** 53)];
+const v282 = { ctor: Float64Array, array: v281 };
+const v290 = [255,254,4,3,2,1,0];
+const v291 = { ctor: Uint8ClampedArray, array: v290 };
+const v308 = [(2 ** 64) - 1,(2 ** 64) - 2,4,3,2,1,0];
+const v309 = { ctor: BigUint64Array, array: v308 };
+const v335 = [(2 ** 63) - 1,(2 ** 63) - 2,1,0,-1,-((2 ** 63) - 1),-(2 ** 63)];
+let constructorsWithArrays = [v136,v148,v165,v191,v208,v234,v258,v282,v291,v309,{ ctor: BigInt64Array, array: v335 }];
+function cmpfn(a340, a341) {
+    if (a340 < a341) {
+        return -1;
+    }
+    if (a341 < a340) {
+        return 1;
+    }
+    return 0;
+}
+for (const v348 of constructorsWithArrays) {
+    const t86 = v348.ctor;
+    const v351 = new t86(v348.array);
+    let array = v351;
+    array.sort(cmpfn);
+    v348.array.reverse();
+    v348.ctor;
+    array.length;
+    v348.array.length;
+}
+
+FuzzIL program written to corpus/typedarray-sort.fzil

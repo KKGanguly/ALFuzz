@@ -1,0 +1,61 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateNamedVariable 'y', 'var', v1
+    v3 <- LoadUndefined
+    v4 <- CreateNamedVariable 'q1', 'var', v3
+    v5 <- LoadUndefined
+    v6 <- CreateNamedVariable 'q', 'var', v5
+    v7 <- CreateNamedVariable 'Error', 'none'
+    v8 <- Construct v7, []
+    v9 <- CreateNamedVariable 'z', 'var', v8
+    BeginTry
+        ThrowException v9
+    BeginCatch -> v10
+        v11 <- Compare v9, '===', v10
+        v12 <- BeginPlainFunction -> 
+            Return v10
+        EndPlainFunction
+        Reassign v4, v12
+        v13 <- LoadInteger '15'
+        v14 <- CreateNamedVariable 'y', 'var', v13
+        v15 <- BeginPlainFunction -> 
+            Return v14
+        EndPlainFunction
+        Reassign v6, v15
+        v16 <- LoadInteger '15'
+    EndTryCatch
+    v17 <- LoadInteger '1'
+    v18 <- LoadInteger '15'
+    v19 <- CallFunction v4, []
+    v20 <- LoadInteger '15'
+    v21 <- CallFunction v6, []
+EndPlainFunction
+v22 <- CallFunction v0, []
+
+
+function f() {
+    var y = 1;
+    var q1;
+    var q;
+    const v8 = new Error();
+    var z = v8;
+    try {
+        throw z;
+    } catch(e10) {
+        z === e10;
+        function f12() {
+            return e10;
+        }
+        q1 = f12;
+        var y = 15;
+        function f15() {
+            return y;
+        }
+        q = f15;
+    }
+    q1();
+    q();
+}
+f();
+
+FuzzIL program written to corpus/regress-2858.fzil

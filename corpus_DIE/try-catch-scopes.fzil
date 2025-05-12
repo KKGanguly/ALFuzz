@@ -1,0 +1,30 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'e', 'var', v0
+BeginTry
+    v2 <- LoadInteger '1'
+    v3 <- BinaryOperation v1, '+', v2
+    ThrowException v3
+BeginCatch -> v4
+    BeginTry
+        v5 <- LoadInteger '1'
+        v6 <- BinaryOperation v4, '+', v5
+        ThrowException v6
+    BeginCatch -> v7
+        v8 <- LoadInteger '2'
+    EndTryCatch
+    v9 <- LoadInteger '1'
+EndTryCatch
+v10 <- LoadInteger '0'
+
+
+var e = 0;
+try {
+    throw e + 1;
+} catch(e4) {
+    try {
+        throw e4 + 1;
+    } catch(e7) {
+    }
+}
+
+FuzzIL program written to corpus/try-catch-scopes.fzil

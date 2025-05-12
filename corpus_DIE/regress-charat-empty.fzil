@@ -1,0 +1,26 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- CallMethod v2, 'charAt', []
+        Return v3
+    EndPlainFunction
+    v4 <- LoadString ''
+    v5 <- CallFunction v1, [v4]
+    v6 <- LoadString ''
+    v7 <- CallFunction v1, [v6]
+    v8 <- LoadString ''
+    v9 <- CallFunction v1, [v8]
+EndArrowFunction
+v10 <- CallFunction v0, []
+
+
+const v0 = () => {
+    function f(a2) {
+        return a2.charAt();
+    }
+    f("");
+    f("");
+    f("");
+};
+v0();
+
+FuzzIL program written to corpus/regress-charat-empty.fzil

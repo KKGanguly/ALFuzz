@@ -1,0 +1,40 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'i', 'var', v0
+v2 <- LoadString ''
+v3 <- CreateNamedVariable 's', 'var', v2
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+    Reassign v1, v4
+BeginForLoopCondition
+    v5 <- LoadInteger '1024'
+    v6 <- Compare v1, '<', v5
+BeginForLoopAfterthought v6
+    v7 <- UnaryOperation v1, '++'
+BeginForLoopBody
+    v8 <- LoadInteger '1'
+    v9 <- BinaryOperation v1, '+', v8
+    v10 <- BinaryOperation v1, '+', v9
+    v11 <- BinaryOperation v3, '+', v10
+    Reassign v3, v11
+    v12 <- LoadInteger '1'
+    v13 <- CallMethod v3, 'substring', [v12]
+    Reassign v3, v13
+EndForLoop
+v14 <- LoadInteger '57'
+v15 <- LoadInteger '0'
+v16 <- CallMethod v3, 'charCodeAt', [v15]
+
+
+var i;
+var s = "";
+for ((() => {
+        i = 0;
+    })();
+    i < 1024;
+    i++) {
+    s = s + (i + (i + 1));
+    s = s.substring(1);
+}
+s.charCodeAt(0);
+
+FuzzIL program written to corpus/string-flatten.fzil

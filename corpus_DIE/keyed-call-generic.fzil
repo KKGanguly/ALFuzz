@@ -1,0 +1,295 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    BeginForLoopInitializer
+        v4 <- LoadInteger '0'
+    BeginForLoopCondition -> v5
+        v6 <- LoadInteger '10'
+        v7 <- Compare v5, '!=', v6
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation v8, '++'
+    BeginForLoopBody -> v10
+        v11 <- CallComputedMethod v1, v2, []
+    EndForLoop
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13, v14, v15
+    BeginForLoopInitializer
+        v16 <- LoadInteger '0'
+    BeginForLoopCondition -> v17
+        v18 <- LoadInteger '10'
+        v19 <- Compare v17, '!=', v18
+    BeginForLoopAfterthought v19 -> v20
+        v21 <- UnaryOperation v20, '++'
+    BeginForLoopBody -> v22
+        BeginForLoopInitializer
+            v23 <- LoadInteger '0'
+        BeginForLoopCondition -> v24
+            v25 <- GetProperty v14, 'length'
+            v26 <- Compare v24, '!=', v25
+        BeginForLoopAfterthought v26 -> v27
+            v28 <- UnaryOperation v27, '++'
+        BeginForLoopBody -> v29
+            v30 <- GetComputedProperty v15, v29
+            v31 <- GetComputedProperty v14, v29
+            v32 <- CallComputedMethod v13, v31, []
+        EndForLoop
+    EndForLoop
+EndPlainFunction
+v33 <- LoadString 'to'
+v34 <- CreateNamedVariable 'toStringNonSymbol', 'var', v33
+v35 <- LoadString 'String'
+Update v34, '+', v35
+v36 <- BeginPlainFunction -> 
+    v37 <- LoadThis
+    v38 <- TypeOf v37
+    Return v38
+EndPlainFunction
+v39 <- BeginPlainFunction -> 
+    v40 <- LoadThis
+    v41 <- LoadThis
+    v42 <- BinaryOperation v40, '*', v41
+    Return v42
+EndPlainFunction
+v43 <- CreateNamedVariable 'Number', 'none'
+v44 <- GetProperty v43, 'prototype'
+SetProperty v44, 'square', v39
+v45 <- BeginPlainFunction -> 
+    v46 <- LoadThis
+    v47 <- CallMethod v46, 'square', []
+    v48 <- CallMethod v47, 'square', []
+    Return v48
+EndPlainFunction
+v49 <- GetProperty v43, 'prototype'
+SetProperty v49, 'power4', v45
+v50 <- GetProperty v43, 'prototype'
+SetProperty v50, 'type', v36
+v51 <- CreateNamedVariable 'String', 'none'
+v52 <- GetProperty v51, 'prototype'
+SetProperty v52, 'type', v36
+v53 <- CreateNamedVariable 'Boolean', 'none'
+v54 <- GetProperty v53, 'prototype'
+SetProperty v54, 'type', v36
+v55 <- LoadInteger '0'
+v56 <- LoadString '0'
+v57 <- CallFunction v0, [v55, v34, v56]
+v58 <- LoadInteger '1'
+v59 <- LoadString 'toString'
+v60 <- LoadString '1'
+v61 <- CallFunction v0, [v58, v59, v60]
+v62 <- LoadString '1'
+v63 <- LoadString 'toString'
+v64 <- LoadString '1'
+v65 <- CallFunction v0, [v62, v63, v64]
+v66 <- LoadInteger '1'
+v67 <- LoadString 'toString'
+v68 <- LoadString '1'
+v69 <- CallFunction v0, [v66, v67, v68]
+v70 <- LoadInteger '1'
+v71 <- LoadString 'type'
+v72 <- LoadString 'object'
+v73 <- CallFunction v0, [v70, v71, v72]
+v74 <- LoadFloat '2.3'
+v75 <- LoadString 'type'
+v76 <- LoadString 'object'
+v77 <- CallFunction v0, [v74, v75, v76]
+v78 <- LoadString 'x'
+v79 <- LoadString 'type'
+v80 <- LoadString 'object'
+v81 <- CallFunction v0, [v78, v79, v80]
+v82 <- LoadBoolean 'true'
+v83 <- LoadString 'type'
+v84 <- LoadString 'object'
+v85 <- CallFunction v0, [v82, v83, v84]
+v86 <- LoadBoolean 'false'
+v87 <- LoadString 'type'
+v88 <- LoadString 'object'
+v89 <- CallFunction v0, [v86, v87, v88]
+v90 <- LoadInteger '2'
+v91 <- LoadString 'square'
+v92 <- LoadInteger '4'
+v93 <- CallFunction v0, [v90, v91, v92]
+v94 <- LoadInteger '2'
+v95 <- LoadString 'power4'
+v96 <- LoadInteger '16'
+v97 <- CallFunction v0, [v94, v95, v96]
+v98 <- BeginPlainFunction -> 
+    v99 <- LoadInteger '0'
+    Return v99
+EndPlainFunction
+v100 <- BeginPlainFunction -> 
+    v101 <- LoadInteger '1'
+    Return v101
+EndPlainFunction
+v102 <- BeginPlainFunction -> 
+    v103 <- LoadInteger '2'
+    Return v103
+EndPlainFunction
+v104 <- CreateArray [v98, v100, v102]
+v105 <- CreateNamedVariable 'fixed_array', 'var', v104
+v106 <- CreateArray [v98, v100, v102]
+v107 <- CreateNamedVariable 'dict_array', 'var', v106
+v108 <- LoadInteger '1'
+SetElement v107, '100000', v108
+BeginObjectLiteral
+    ObjectLiteralAddProperty `zero`, v98
+    ObjectLiteralAddProperty `one`, v100
+    ObjectLiteralAddProperty `two`, v102
+v109 <- EndObjectLiteral
+v110 <- CreateNamedVariable 'fast_prop', 'var', v109
+BeginObjectLiteral
+    ObjectLiteralAddProperty `zero`, v98
+    ObjectLiteralAddProperty `one`, v100
+    ObjectLiteralAddProperty `two`, v102
+v111 <- EndObjectLiteral
+v112 <- CreateNamedVariable 'normal_prop', 'var', v111
+v113 <- LoadInteger '0'
+SetProperty v112, 'x', v113
+v114 <- DeleteProperty v112, 'x'
+v115 <- LoadInteger '0'
+v116 <- LoadInteger '1'
+v117 <- LoadInteger '2'
+v118 <- CreateArray [v115, v116, v117]
+v119 <- CreateNamedVariable 'first3num', 'var', v118
+v120 <- LoadString 'zero'
+v121 <- LoadString 'one'
+v122 <- LoadString 'two'
+v123 <- CreateArray [v120, v121, v122]
+v124 <- CreateNamedVariable 'first3str', 'var', v123
+v125 <- LoadString '123'
+v126 <- LoadString 'charAt'
+v127 <- LoadString 'charCodeAt'
+v128 <- CreateArray [v34, v126, v127]
+v129 <- LoadString '123'
+v130 <- LoadString '1'
+v131 <- LoadInteger '49'
+v132 <- CreateArray [v129, v130, v131]
+v133 <- CallFunction v12, [v125, v128, v132]
+v134 <- CallFunction v12, [v105, v119, v119]
+v135 <- CallFunction v12, [v107, v119, v119]
+v136 <- CallFunction v12, [v110, v124, v119]
+v137 <- CallFunction v12, [v112, v124, v119]
+v138 <- BeginPlainFunction -> v139, v140, v141
+    BeginForLoopInitializer
+        v142 <- LoadInteger '0'
+    BeginForLoopCondition -> v143
+        v144 <- LoadInteger '10'
+        v145 <- Compare v143, '!=', v144
+    BeginForLoopAfterthought v145 -> v146
+        v147 <- UnaryOperation v146, '++'
+    BeginForLoopBody -> v148
+        BeginForLoopInitializer
+            v149 <- LoadInteger '0'
+        BeginForLoopCondition -> v150
+            v151 <- GetProperty v140, 'length'
+            v152 <- Compare v150, '!=', v151
+        BeginForLoopAfterthought v152 -> v153
+            v154 <- UnaryOperation v153, '++'
+        BeginForLoopBody -> v155
+            v156 <- LoadBoolean 'false'
+            v157 <- CreateNamedVariable 'thrown', 'var', v156
+            BeginTry
+                v158 <- GetComputedProperty v140, v155
+                v159 <- CallComputedMethod v139, v158, []
+                v160 <- CreateNamedVariable 'result', 'var', v159
+            BeginCatch -> v161
+                v162 <- LoadBoolean 'true'
+                Reassign v157, v162
+            EndTryCatch
+            v163 <- GetComputedProperty v141, v155
+        EndForLoop
+    EndForLoop
+EndPlainFunction
+v164 <- CreateArray [v98, v100]
+v165 <- LoadInteger '0'
+v166 <- LoadInteger '1'
+v167 <- LoadInteger '2'
+v168 <- CreateArray [v165, v166, v167]
+v169 <- LoadBoolean 'false'
+v170 <- LoadBoolean 'false'
+v171 <- LoadBoolean 'true'
+v172 <- CreateArray [v169, v170, v171]
+v173 <- CallFunction v138, [v164, v168, v172]
+
+
+function testOne(a1, a2, a3) {
+    for (let i5 = 0; i5 != 10; i5++) {
+        a1[a2]();
+    }
+}
+function testMany(a13, a14, a15) {
+    for (let i17 = 0; i17 != 10; i17++) {
+        for (let i24 = 0; i24 != a14.length; i24++) {
+            a15[i24];
+            a13[a14[i24]]();
+        }
+    }
+}
+var toStringNonSymbol = "to";
+toStringNonSymbol += "String";
+function TypeOfThis() {
+    return typeof this;
+}
+function f39() {
+    return this * this;
+}
+const t21 = Number.prototype;
+t21.square = f39;
+function f45() {
+    return this.square().square();
+}
+const t26 = Number.prototype;
+t26.power4 = f45;
+const t28 = Number.prototype;
+t28.type = TypeOfThis;
+const t30 = String.prototype;
+t30.type = TypeOfThis;
+const t32 = Boolean.prototype;
+t32.type = TypeOfThis;
+testOne(0, toStringNonSymbol, "0");
+testOne(1, "toString", "1");
+testOne("1", "toString", "1");
+testOne(1, "toString", "1");
+testOne(1, "type", "object");
+testOne(2.3, "type", "object");
+testOne("x", "type", "object");
+testOne(true, "type", "object");
+testOne(false, "type", "object");
+testOne(2, "square", 4);
+testOne(2, "power4", 16);
+function zero() {
+    return 0;
+}
+function one() {
+    return 1;
+}
+function two() {
+    return 2;
+}
+var fixed_array = [zero,one,two];
+var dict_array = [zero,one,two];
+dict_array[100000] = 1;
+var fast_prop = { zero: zero, one: one, two: two };
+var normal_prop = { zero: zero, one: one, two: two };
+normal_prop.x = 0;
+delete normal_prop.x;
+var first3num = [0,1,2];
+var first3str = ["zero","one","two"];
+testMany("123", [toStringNonSymbol,"charAt","charCodeAt"], ["123","1",49]);
+testMany(fixed_array, first3num, first3num);
+testMany(dict_array, first3num, first3num);
+testMany(fast_prop, first3str, first3num);
+testMany(normal_prop, first3str, first3num);
+function testException(a139, a140, a141) {
+    for (let i143 = 0; i143 != 10; i143++) {
+        for (let i150 = 0; i150 != a140.length; i150++) {
+            var thrown = false;
+            try {
+                var result = a139[a140[i150]]();
+            } catch(e161) {
+                thrown = true;
+            }
+            a141[i150];
+        }
+    }
+}
+testException([zero,one], [0,1,2], [false,false,true]);
+
+FuzzIL program written to corpus/keyed-call-generic.fzil

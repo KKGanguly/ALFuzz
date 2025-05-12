@@ -1,0 +1,32 @@
+v0 <- CreateNamedVariable 'TEST_FILE_NAME', 'none'
+v1 <- TypeOf v0
+v2 <- CreateNamedVariable 'Uint8Array', 'none'
+v3 <- CreateNamedVariable 'readbuffer', 'none'
+v4 <- CallFunction v3, [v0]
+v5 <- Construct v2, [v4]
+v6 <- CreateNamedVariable 'a', 'var', v5
+v7 <- LoadString '// Copyright 2014 the V8 project authors. All rights reserved.'
+v8 <- CreateNamedVariable 'expected', 'var', v7
+BeginForLoopInitializer
+    v9 <- LoadInteger '0'
+BeginForLoopCondition -> v10
+    v11 <- GetProperty v8, 'length'
+    v12 <- Compare v10, '<', v11
+BeginForLoopAfterthought v12 -> v13
+    v14 <- UnaryOperation v13, '++'
+BeginForLoopBody -> v15
+    v16 <- CallMethod v8, 'charCodeAt', [v15]
+    v17 <- GetComputedProperty v6, v15
+EndForLoop
+
+
+typeof TEST_FILE_NAME;
+const v5 = new Uint8Array(readbuffer(TEST_FILE_NAME));
+var a = v5;
+var expected = "// Copyright 2014 the V8 project authors. All rights reserved.";
+for (let i10 = 0; i10 < expected.length; i10++) {
+    expected.charCodeAt(i10);
+    a[i10];
+}
+
+FuzzIL program written to corpus/d8-readbuffer.fzil

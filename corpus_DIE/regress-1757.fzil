@@ -1,0 +1,17 @@
+v0 <- LoadString 'internalized dummy'
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadString 'abcdefghijklmnopqrstuvqxy'
+v3 <- LoadString 'z'
+v4 <- BinaryOperation v2, '+', v3
+Reassign v1, v4
+v5 <- LoadString 'b'
+v6 <- LoadInteger '0'
+v7 <- LoadInteger '1'
+v8 <- CallMethod v1, 'substring', [v7]
+v9 <- CallMethod v8, 'charAt', [v6]
+
+
+var a = "internalized dummy";
+(a = "abcdefghijklmnopqrstuvqxy" + "z").substring(1).charAt(0);
+
+FuzzIL program written to corpus/regress-1757.fzil

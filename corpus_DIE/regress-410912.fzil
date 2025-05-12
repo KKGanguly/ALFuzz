@@ -1,0 +1,1261 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'assertDoesNotThrow', 'var', v0
+v2 <- LoadUndefined
+v3 <- CreateNamedVariable 'assertInstanceof', 'var', v2
+v4 <- LoadUndefined
+v5 <- CreateNamedVariable 'assertUnreachable', 'var', v4
+v6 <- LoadUndefined
+v7 <- CreateNamedVariable 'assertOptimized', 'var', v6
+v8 <- LoadUndefined
+v9 <- CreateNamedVariable 'assertUnoptimized', 'var', v8
+v10 <- BeginPlainFunction -> v11
+    v12 <- CreateNamedVariable 'Object', 'none'
+    v13 <- GetProperty v12, 'prototype'
+    v14 <- GetProperty v13, 'toString'
+    v15 <- CallMethod v14, 'call', [v11]
+    v16 <- CreateNamedVariable 'string', 'var', v15
+    v17 <- LoadInteger '8'
+    v18 <- GetProperty v16, 'length'
+    v19 <- LoadInteger '1'
+    v20 <- BinaryOperation v18, '-', v19
+    v21 <- CallMethod v16, 'substring', [v17, v20]
+    Return v21
+EndPlainFunction
+v22 <- BeginPlainFunction -> v23
+    v24 <- LoadString ''
+    Return v24
+EndPlainFunction
+v25 <- BeginPlainFunction -> v26, v27, v28
+    v29 <- LoadString ''
+    Return v29
+EndPlainFunction
+v30 <- BeginPlainFunction -> v31, v32, v33
+EndPlainFunction
+v34 <- BeginPlainFunction -> v35, v36
+    v37 <- CreateNamedVariable 'Object', 'none'
+    v38 <- CallMethod v37, 'keys', [v35]
+    v39 <- CreateNamedVariable 'aProps', 'var', v38
+    v40 <- CallMethod v39, 'sort', []
+    v41 <- CallMethod v37, 'keys', [v36]
+    v42 <- CreateNamedVariable 'bProps', 'var', v41
+    v43 <- CallMethod v42, 'sort', []
+    v44 <- CreateNamedVariable 'deepEquals', 'none'
+    v45 <- CallFunction v44, [v39, v42]
+    v46 <- UnaryOperation '!', v45
+    BeginIf v46
+        v47 <- LoadBoolean 'false'
+        Return v47
+    EndIf
+    BeginForLoopInitializer
+        v48 <- LoadInteger '0'
+    BeginForLoopCondition -> v49
+        v50 <- GetProperty v39, 'length'
+        v51 <- Compare v49, '<', v50
+    BeginForLoopAfterthought v51 -> v52
+        v53 <- UnaryOperation v52, '++'
+    BeginForLoopBody -> v54
+        v55 <- GetComputedProperty v39, v54
+        v56 <- GetComputedProperty v35, v55
+        v57 <- GetComputedProperty v39, v54
+        v58 <- GetComputedProperty v36, v57
+        v59 <- CallFunction v44, [v56, v58]
+        v60 <- UnaryOperation '!', v59
+        BeginIf v60
+            v61 <- LoadBoolean 'false'
+            Return v61
+        EndIf
+    EndForLoop
+    v62 <- LoadBoolean 'true'
+    Return v62
+EndPlainFunction
+v63 <- BeginPlainFunction -> v64, v65
+    v66 <- Compare v64, '===', v65
+    BeginIf v66
+        v67 <- LoadInteger '0'
+        v68 <- Compare v64, '===', v67
+        BeginIf v68
+            v69 <- LoadInteger '1'
+            v70 <- BinaryOperation v69, '/', v64
+            v71 <- LoadInteger '1'
+            v72 <- BinaryOperation v71, '/', v65
+            v73 <- Compare v70, '===', v72
+            Return v73
+        EndIf
+        v74 <- LoadBoolean 'true'
+        Return v74
+    EndIf
+    v75 <- TypeOf v64
+    v76 <- TypeOf v65
+    v77 <- Compare v75, '!=', v76
+    BeginIf v77
+        v78 <- LoadBoolean 'false'
+        Return v78
+    EndIf
+    v79 <- TypeOf v64
+    v80 <- LoadString 'number'
+    v81 <- Compare v79, '==', v80
+    BeginIf v81
+        v82 <- CreateNamedVariable 'isNaN', 'none'
+        v83 <- CallFunction v82, [v64]
+        v84 <- CallFunction v82, [v65]
+        v85 <- BinaryOperation v83, '&&', v84
+        Return v85
+    EndIf
+    v86 <- TypeOf v64
+    v87 <- LoadString 'object'
+    v88 <- Compare v86, '!==', v87
+    v89 <- TypeOf v64
+    v90 <- LoadString 'function'
+    v91 <- Compare v89, '!==', v90
+    v92 <- BinaryOperation v88, '&&', v91
+    BeginIf v92
+        v93 <- LoadBoolean 'false'
+        Return v93
+    EndIf
+    v94 <- CallFunction v10, [v64]
+    v95 <- CreateNamedVariable 'objectClass', 'var', v94
+    v96 <- CallFunction v10, [v65]
+    v97 <- Compare v95, '!==', v96
+    BeginIf v97
+        v98 <- LoadBoolean 'false'
+        Return v98
+    EndIf
+    v99 <- LoadString 'RegExp'
+    v100 <- Compare v95, '===', v99
+    BeginIf v100
+        v101 <- CallMethod v64, 'toString', []
+        v102 <- CallMethod v65, 'toString', []
+        v103 <- Compare v101, '===', v102
+        Return v103
+    EndIf
+    v104 <- LoadString 'Function'
+    v105 <- Compare v95, '===', v104
+    BeginIf v105
+        v106 <- LoadBoolean 'false'
+        Return v106
+    EndIf
+    v107 <- LoadString 'Array'
+    v108 <- Compare v95, '===', v107
+    BeginIf v108
+        v109 <- LoadInteger '0'
+        v110 <- CreateNamedVariable 'elementCount', 'var', v109
+        v111 <- GetProperty v64, 'length'
+        v112 <- GetProperty v65, 'length'
+        v113 <- Compare v111, '!=', v112
+        BeginIf v113
+            v114 <- LoadBoolean 'false'
+            Return v114
+        EndIf
+        BeginForLoopInitializer
+            v115 <- LoadInteger '0'
+        BeginForLoopCondition -> v116
+            v117 <- GetProperty v64, 'length'
+            v118 <- Compare v116, '<', v117
+        BeginForLoopAfterthought v118 -> v119
+            v120 <- UnaryOperation v119, '++'
+        BeginForLoopBody -> v121
+            v122 <- GetComputedProperty v64, v121
+            v123 <- GetComputedProperty v65, v121
+            v124 <- CallFunction v63, [v122, v123]
+            v125 <- UnaryOperation '!', v124
+            BeginIf v125
+                v126 <- LoadBoolean 'false'
+                Return v126
+            EndIf
+        EndForLoop
+        v127 <- LoadBoolean 'true'
+        Return v127
+    EndIf
+    v128 <- LoadString 'String'
+    v129 <- Compare v95, '==', v128
+    v130 <- LoadString 'Number'
+    v131 <- Compare v95, '==', v130
+    v132 <- BinaryOperation v129, '||', v131
+    v133 <- LoadString 'Boolean'
+    v134 <- Compare v95, '==', v133
+    v135 <- BinaryOperation v132, '||', v134
+    v136 <- LoadString 'Date'
+    v137 <- Compare v95, '==', v136
+    v138 <- BinaryOperation v135, '||', v137
+    BeginIf v138
+        v139 <- CallMethod v64, 'valueOf', []
+        v140 <- CallMethod v65, 'valueOf', []
+        v141 <- Compare v139, '!==', v140
+        BeginIf v141
+            v142 <- LoadBoolean 'false'
+            Return v142
+        EndIf
+    EndIf
+    v143 <- CallFunction v34, [v64, v65]
+    Return v143
+EndPlainFunction
+v144 <- BeginPlainFunction -> v145, v146, v147
+    v148 <- Compare v146, '===', v145
+    BeginIf v148
+        v149 <- LoadInteger '0'
+        v150 <- Compare v145, '!==', v149
+        v151 <- LoadInteger '1'
+        v152 <- BinaryOperation v151, '/', v145
+        v153 <- LoadInteger '1'
+        v154 <- BinaryOperation v153, '/', v146
+        v155 <- Compare v152, '==', v154
+        v156 <- BinaryOperation v150, '||', v155
+        BeginIf v156
+            Return
+        EndIf
+    BeginElse
+        v157 <- Compare v145, '!==', v145
+        v158 <- Compare v146, '!==', v146
+        v159 <- BinaryOperation v157, '&&', v158
+        BeginIf v159
+            Return
+        EndIf
+    EndIf
+    v160 <- CallFunction v22, [v145]
+    v161 <- CallFunction v30, [v160, v146, v147]
+EndPlainFunction
+v162 <- CreateNamedVariable 'assertSame', 'none'
+Reassign v162, v144
+v163 <- BeginPlainFunction -> v164, v165, v166
+    v167 <- CallFunction v63, [v165, v164]
+    v168 <- UnaryOperation '!', v167
+    BeginIf v168
+        v169 <- CallFunction v22, [v164]
+        v170 <- CallFunction v30, [v169, v165, v166]
+    EndIf
+EndPlainFunction
+v171 <- CreateNamedVariable 'assertEquals', 'none'
+Reassign v171, v163
+v172 <- BeginPlainFunction -> v173, v174, v175, v176
+    v177 <- BinaryOperation v173, '-', v174
+    v178 <- CreateNamedVariable 'Math', 'none'
+    v179 <- CallMethod v178, 'abs', [v177]
+    v180 <- Compare v179, '<=', v175
+EndPlainFunction
+v181 <- CreateNamedVariable 'assertEqualsDelta', 'none'
+Reassign v181, v172
+v182 <- BeginPlainFunction -> v183, v184, v185
+    v186 <- LoadString ''
+    v187 <- CreateNamedVariable 'start', 'var', v186
+    BeginIf v185
+        v188 <- LoadString ' - '
+        v189 <- BinaryOperation v185, '+', v188
+        Reassign v187, v189
+    EndIf
+    v190 <- GetProperty v183, 'length'
+    v191 <- GetProperty v184, 'length'
+    v192 <- LoadString 'array length'
+    v193 <- BinaryOperation v187, '+', v192
+    v194 <- GetProperty v183, 'length'
+    v195 <- GetProperty v184, 'length'
+    v196 <- Compare v194, '==', v195
+    BeginIf v196
+        BeginForLoopInitializer
+            v197 <- LoadInteger '0'
+        BeginForLoopCondition -> v198
+            v199 <- GetProperty v183, 'length'
+            v200 <- Compare v198, '<', v199
+        BeginForLoopAfterthought v200 -> v201
+            v202 <- UnaryOperation '++', v201
+        BeginForLoopBody -> v203
+            v204 <- GetComputedProperty v183, v203
+            v205 <- GetComputedProperty v184, v203
+            v206 <- LoadString 'array element at index '
+            v207 <- BinaryOperation v187, '+', v206
+            v208 <- BinaryOperation v207, '+', v203
+        EndForLoop
+    EndIf
+EndPlainFunction
+v209 <- CreateNamedVariable 'assertArrayEquals', 'none'
+Reassign v209, v182
+v210 <- BeginPlainFunction -> v211, v212, v213
+    v214 <- CallFunction v34, [v211, v212]
+    v215 <- UnaryOperation '!', v214
+    BeginIf v215
+        v216 <- CallFunction v30, [v211, v212, v213]
+    EndIf
+EndPlainFunction
+v217 <- CreateNamedVariable 'assertPropertiesEqual', 'none'
+Reassign v217, v210
+v218 <- BeginPlainFunction -> v219, v220, v221
+    v222 <- CreateNamedVariable 'String', 'none'
+    v223 <- CallFunction v222, [v220]
+    v224 <- Compare v219, '!=', v223
+    BeginIf v224
+        v225 <- CallFunction v30, [v219, v220, v221]
+    EndIf
+EndPlainFunction
+v226 <- CreateNamedVariable 'assertToStringEquals', 'none'
+Reassign v226, v218
+v227 <- BeginPlainFunction -> v228, v229
+    v230 <- LoadBoolean 'true'
+EndPlainFunction
+v231 <- CreateNamedVariable 'assertTrue', 'none'
+Reassign v231, v227
+v232 <- BeginPlainFunction -> v233, v234
+    v235 <- LoadBoolean 'false'
+EndPlainFunction
+v236 <- CreateNamedVariable 'assertFalse', 'none'
+Reassign v236, v232
+v237 <- BeginPlainFunction -> v238, v239
+    v240 <- LoadNull
+    v241 <- Compare v238, '!==', v240
+    BeginIf v241
+        v242 <- LoadString 'null'
+        v243 <- CallFunction v30, [v242, v238, v239]
+    EndIf
+EndPlainFunction
+v244 <- CreateNamedVariable 'assertNull', 'none'
+Reassign v244, v237
+v245 <- BeginPlainFunction -> v246, v247
+    v248 <- LoadNull
+    v249 <- Compare v246, '===', v248
+    BeginIf v249
+        v250 <- LoadString 'not null'
+        v251 <- CallFunction v30, [v250, v246, v247]
+    EndIf
+EndPlainFunction
+v252 <- CreateNamedVariable 'assertNotNull', 'none'
+Reassign v252, v245
+BeginObjectLiteral
+v253 <- EndObjectLiteral
+v254 <- CreateNamedVariable '__v_39', 'var', v253
+BeginObjectLiteral
+v255 <- EndObjectLiteral
+v256 <- CreateNamedVariable '__v_40', 'var', v255
+BeginObjectLiteral
+v257 <- EndObjectLiteral
+v258 <- CreateNamedVariable '__v_41', 'var', v257
+BeginObjectLiteral
+v259 <- EndObjectLiteral
+v260 <- CreateNamedVariable '__v_42', 'var', v259
+BeginObjectLiteral
+v261 <- EndObjectLiteral
+v262 <- CreateNamedVariable '__v_43', 'var', v261
+BeginObjectLiteral
+v263 <- EndObjectLiteral
+v264 <- CreateNamedVariable '__v_44', 'var', v263
+BeginTry
+    v265 <- LoadFloat '1.5'
+    v266 <- LoadUndefined
+    v267 <- LoadFloat '1.7'
+    v268 <- CreateArray [v265, v266, v267]
+    v269 <- CreateNamedVariable '__v_0', 'none'
+    Reassign v269, v268
+    v270 <- LoadFloat '1.8'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__v_0`, v270
+    v271 <- EndObjectLiteral
+    v272 <- CreateNamedVariable '__v_1', 'none'
+    Reassign v272, v271
+BeginCatch -> v273
+    v274 <- LoadString 'Caught: '
+    v275 <- BinaryOperation v274, '+', v273
+    v276 <- CreateNamedVariable 'print', 'none'
+    v277 <- CallFunction v276, [v275]
+EndTryCatch
+v278 <- BeginPlainFunction -> v279, v280, v281
+    v282 <- GetComputedProperty v280, v281
+    SetProperty v279, 'a', v282
+    v283 <- CreateNamedVariable 'gc', 'none'
+    v284 <- CallFunction v283, []
+EndPlainFunction
+BeginTry
+    v285 <- CreateNamedVariable '__v_1', 'none'
+    v286 <- CreateNamedVariable '__v_0', 'none'
+    v287 <- LoadInteger '0'
+    v288 <- CallFunction v278, [v285, v286, v287]
+    v289 <- LoadInteger '0'
+    v290 <- CallFunction v278, [v285, v286, v289]
+    v291 <- LoadInteger '1'
+    v292 <- CallFunction v278, [v285, v286, v291]
+    v293 <- LoadUndefined
+    v294 <- GetProperty v285, 'a'
+    v295 <- LoadInteger '1'
+    v296 <- LoadUndefined
+    v297 <- LoadInteger '3'
+    v298 <- CreateArray [v295, v296, v297]
+    Reassign v286, v298
+    v299 <- LoadInteger '5'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `ab`, v299
+    v300 <- EndObjectLiteral
+    Reassign v285, v300
+BeginCatch -> v301
+    v302 <- LoadString 'Caught: '
+    v303 <- BinaryOperation v302, '+', v301
+    v304 <- CreateNamedVariable 'print', 'none'
+    v305 <- CallFunction v304, [v303]
+EndTryCatch
+v306 <- BeginPlainFunction -> v307, v308, v309
+    v310 <- GetComputedProperty v308, v309
+    SetProperty v307, 'ab', v310
+EndPlainFunction
+BeginTry
+    v311 <- CreateNamedVariable '__v_1', 'none'
+    v312 <- CreateNamedVariable '__v_0', 'none'
+    v313 <- LoadInteger '1'
+    v314 <- CallFunction v306, [v311, v312, v313]
+BeginCatch -> v315
+    v316 <- LoadString 'Caught: '
+    v317 <- BinaryOperation v316, '+', v315
+    v318 <- CreateNamedVariable 'print', 'none'
+    v319 <- CallFunction v318, [v317]
+EndTryCatch
+v320 <- BeginPlainFunction -> v321
+    v322 <- UnaryOperation '~', v321
+    Return v322
+EndPlainFunction
+BeginTry
+    v323 <- LoadInteger '42'
+    v324 <- CallFunction v320, [v323]
+    v325 <- LoadInteger '12'
+    v326 <- UnaryOperation '~', v325
+    v327 <- LoadFloat '12.45'
+    v328 <- CallFunction v320, [v327]
+    v329 <- LoadInteger '46'
+    v330 <- UnaryOperation '~', v329
+    v331 <- LoadFloat '42.87'
+    v332 <- CallFunction v320, [v331]
+    v333 <- LoadInteger '1'
+    v334 <- CreateNamedVariable '__v_2', 'none'
+    Reassign v334, v333
+    v335 <- LoadInteger '2'
+    v336 <- CreateNamedVariable '__v_4', 'none'
+    Reassign v336, v335
+    v337 <- LoadInteger '4'
+    v338 <- CreateNamedVariable '__v_3', 'none'
+    Reassign v338, v337
+    v339 <- LoadInteger '8'
+    v340 <- CreateNamedVariable '__v_6', 'none'
+    Reassign v340, v339
+BeginCatch -> v341
+    v342 <- LoadString 'Caught: '
+    v343 <- BinaryOperation v342, '+', v341
+    v344 <- CreateNamedVariable 'print', 'none'
+    v345 <- CallFunction v344, [v343]
+EndTryCatch
+v346 <- BeginPlainFunction -> 
+    v347 <- CreateNamedVariable '__v_2', 'none'
+    v348 <- CreateNamedVariable '__v_4', 'none'
+    v349 <- CreateNamedVariable '__v_3', 'none'
+    v350 <- CreateNamedVariable '__v_6', 'none'
+    v351 <- BinaryOperation v349, '|', v350
+    v352 <- BinaryOperation v348, '|', v351
+    v353 <- BinaryOperation v347, '|', v352
+    Return v353
+EndPlainFunction
+BeginTry
+    v354 <- CallFunction v346, []
+    v355 <- LoadString '16'
+    v356 <- CreateNamedVariable '__v_3', 'none'
+    Reassign v356, v355
+    v357 <- LoadInteger '17'
+    v358 <- LoadInteger '13'
+    v359 <- UnaryOperation '-', v358
+    v360 <- BinaryOperation v357, '|', v359
+    v361 <- LoadInteger '0'
+    v362 <- BinaryOperation v360, '|', v361
+    v363 <- LoadInteger '5'
+    v364 <- UnaryOperation '-', v363
+    v365 <- BinaryOperation v362, '|', v364
+    v366 <- CallFunction v346, []
+BeginCatch -> v367
+    v368 <- LoadString 'Caught: '
+    v369 <- BinaryOperation v368, '+', v367
+    v370 <- CreateNamedVariable 'print', 'none'
+    v371 <- CallFunction v370, [v369]
+EndTryCatch
+v372 <- BeginPlainFunction -> 
+    v373 <- CallFunction v346, []
+    Return v373
+EndPlainFunction
+BeginTry
+    v374 <- LoadInteger '1'
+    v375 <- LoadInteger '2'
+    v376 <- BinaryOperation v374, '|', v375
+    v377 <- LoadInteger '16'
+    v378 <- BinaryOperation v376, '|', v377
+    v379 <- LoadInteger '8'
+    v380 <- BinaryOperation v378, '|', v379
+    v381 <- CallFunction v372, []
+    v382 <- BeginPlainFunction -> 
+        v383 <- LoadInteger '42'
+        Return v383
+    EndPlainFunction
+    Reassign v346, v382
+    v384 <- LoadInteger '42'
+    v385 <- CallFunction v372, []
+    BeginObjectLiteral
+    v386 <- EndObjectLiteral
+    v387 <- CreateNamedVariable '__v_5', 'none'
+    Reassign v387, v386
+    v388 <- CreateNamedVariable '__v_5', 'none'
+    SetProperty v388, '__f_4', v346
+BeginCatch -> v389
+    v390 <- LoadString 'Caught: '
+    v391 <- BinaryOperation v390, '+', v389
+    v392 <- CreateNamedVariable 'print', 'none'
+    v393 <- CallFunction v392, [v391]
+EndTryCatch
+v394 <- BeginPlainFunction -> v395
+    v396 <- CallMethod v395, '__f_4', []
+    Return v396
+EndPlainFunction
+BeginTry
+    BeginForLoopInitializer
+        v397 <- LoadInteger '0'
+    BeginForLoopCondition -> v398
+        v399 <- LoadInteger '5'
+        v400 <- Compare v398, '<', v399
+    BeginForLoopAfterthought v400 -> v401
+        v402 <- UnaryOperation v401, '++'
+    BeginForLoopBody -> v403
+        v404 <- CreateNamedVariable '__v_5', 'none'
+        v405 <- CallFunction v394, [v404]
+    EndForLoop
+    v406 <- CreateNamedVariable '__v_5', 'none'
+    v407 <- CallFunction v394, [v406]
+    v408 <- LoadInteger '42'
+    v409 <- CallFunction v394, [v406]
+    v410 <- LoadInteger '87'
+    v411 <- BeginPlainFunction -> 
+        v412 <- LoadInteger '87'
+        Return v412
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__f_4`, v411
+    v413 <- EndObjectLiteral
+    v414 <- CallFunction v394, [v413]
+BeginCatch -> v415
+    v416 <- LoadString 'Caught: '
+    v417 <- BinaryOperation v416, '+', v415
+    v418 <- CreateNamedVariable 'print', 'none'
+    v419 <- CallFunction v418, [v417]
+EndTryCatch
+v420 <- BeginPlainFunction -> v421, v422
+    v423 <- LoadInteger '42'
+    Reassign v421, v423
+    v424 <- LoadInteger '1'
+    Reassign v422, v424
+    v425 <- LoadString '0'
+    v426 <- BinaryOperation v422, '<<', v425
+    Reassign v422, v426
+    v427 <- BinaryOperation v421, '|', v422
+    Return v427
+EndPlainFunction
+BeginTry
+    v428 <- LoadInteger '43'
+    v429 <- LoadInteger '0'
+    v430 <- LoadInteger '0'
+    v431 <- CallFunction v420, [v429, v430]
+BeginCatch -> v432
+    v433 <- LoadString 'Caught: '
+    v434 <- BinaryOperation v433, '+', v432
+    v435 <- CreateNamedVariable 'print', 'none'
+    v436 <- CallFunction v435, [v434]
+EndTryCatch
+v437 <- BeginPlainFunction -> v438
+    v439 <- LoadString 'lit['
+    v440 <- LoadString ']'
+    v441 <- BinaryOperation v438, '+', v440
+    v442 <- BinaryOperation v439, '+', v441
+    Return v442
+EndPlainFunction
+BeginTry
+    v443 <- LoadString 'lit[-87]'
+    v444 <- LoadInteger '87'
+    v445 <- UnaryOperation '-', v444
+    v446 <- CallFunction v437, [v445]
+    v447 <- LoadString 'lit[0]'
+    v448 <- LoadInteger '0'
+    v449 <- CallFunction v437, [v448]
+    v450 <- LoadString 'lit[42]'
+    v451 <- LoadInteger '42'
+    v452 <- CallFunction v437, [v451]
+    v453 <- LoadString 'abc'
+    v454 <- CreateNamedVariable '__v_9', 'none'
+    Reassign v454, v453
+    v455 <- CreateNamedVariable 'gc', 'none'
+    v456 <- CallFunction v455, []
+    v457 <- LoadUndefined
+    v458 <- CreateNamedVariable '__v_8', 'var', v457
+BeginCatch -> v459
+    v460 <- LoadString 'Caught: '
+    v461 <- BinaryOperation v460, '+', v459
+    v462 <- CreateNamedVariable 'print', 'none'
+    v463 <- CallFunction v462, [v461]
+EndTryCatch
+v464 <- BeginPlainFunction -> v465
+    v466 <- CreateNamedVariable '__v_9', 'none'
+    v467 <- CallMethod v466, 'charAt', [v465]
+    Return v467
+EndPlainFunction
+BeginTry
+    BeginForLoopInitializer
+        v468 <- LoadInteger '0'
+    BeginForLoopCondition -> v469
+        v470 <- LoadInteger '5'
+        v471 <- Compare v469, '<', v470
+    BeginForLoopAfterthought v471 -> v472
+        v473 <- UnaryOperation v472, '++'
+    BeginForLoopBody -> v474
+        v475 <- LoadInteger '0'
+        v476 <- CallFunction v464, [v475]
+        v477 <- CreateNamedVariable '__v_8', 'none'
+        Reassign v477, v476
+    EndForLoop
+    v478 <- LoadInteger '0'
+    v479 <- CallFunction v464, [v478]
+    v480 <- CreateNamedVariable '__v_8', 'none'
+    Reassign v480, v479
+BeginCatch -> v481
+    v482 <- LoadString 'Caught: '
+    v483 <- BinaryOperation v482, '+', v481
+    v484 <- CreateNamedVariable 'print', 'none'
+    v485 <- CallFunction v484, [v483]
+EndTryCatch
+v486 <- BeginPlainFunction -> v487, v488, v489, v490
+    v491 <- BinaryOperation v487, '+', v488
+    v492 <- BinaryOperation v491, '+', v489
+    v493 <- BinaryOperation v492, '+', v490
+    Return v493
+EndPlainFunction
+BeginTry
+    v494 <- LoadInteger '1073741827'
+    v495 <- LoadInteger '1'
+    v496 <- LoadInteger '1'
+    v497 <- LoadInteger '2'
+    v498 <- LoadInteger '1073741823'
+    v499 <- CallFunction v486, [v495, v496, v497, v498]
+BeginCatch -> v500
+    v501 <- LoadString 'Caught: '
+    v502 <- BinaryOperation v501, '+', v500
+    v503 <- CreateNamedVariable 'print', 'none'
+    v504 <- CallFunction v503, [v502]
+EndTryCatch
+BeginTry
+    v505 <- LoadString 'fast smi only elements'
+    v506 <- LoadString 'fast elements'
+    v507 <- LoadString 'fast double elements'
+    v508 <- LoadString 'dictionary elements'
+    v509 <- LoadString 'external int8 elements'
+    v510 <- LoadString 'external uint8 elements'
+    v511 <- LoadString 'external int16 elements'
+    v512 <- LoadString 'external uint16 elements'
+    v513 <- LoadString 'external int32 elements'
+    v514 <- LoadString 'external uint32 elements'
+    v515 <- LoadString 'external float32 elements'
+    v516 <- LoadString 'external float64 elements'
+    v517 <- LoadString 'external uint8_clamped elements'
+    v518 <- LoadString 'fixed int8 elements'
+    v519 <- LoadString 'fixed uint8 elements'
+    v520 <- LoadString 'fixed int16 elements'
+    v521 <- LoadString 'fixed uint16 elements'
+    v522 <- LoadString 'fixed int32 elements'
+    v523 <- LoadString 'fixed uint32 elements'
+    v524 <- LoadString 'fixed float32 elements'
+    v525 <- LoadString 'fixed float64 elements'
+    v526 <- LoadString 'fixed uint8_clamped elements'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `fast_smi_only`, v505
+        ObjectLiteralAddProperty `fast`, v506
+        ObjectLiteralAddProperty `fast_double`, v507
+        ObjectLiteralAddProperty `dictionary`, v508
+        ObjectLiteralAddProperty `external_int32`, v509
+        ObjectLiteralAddProperty `external_uint8`, v510
+        ObjectLiteralAddProperty `external_int16`, v511
+        ObjectLiteralAddProperty `external_uint16`, v512
+        ObjectLiteralAddProperty `external_int32`, v513
+        ObjectLiteralAddProperty `external_uint32`, v514
+        ObjectLiteralAddProperty `external_float32`, v515
+        ObjectLiteralAddProperty `external_float64`, v516
+        ObjectLiteralAddProperty `external_uint8_clamped`, v517
+        ObjectLiteralAddProperty `fixed_int32`, v518
+        ObjectLiteralAddProperty `fixed_uint8`, v519
+        ObjectLiteralAddProperty `fixed_int16`, v520
+        ObjectLiteralAddProperty `fixed_uint16`, v521
+        ObjectLiteralAddProperty `fixed_int32`, v522
+        ObjectLiteralAddProperty `fixed_uint32`, v523
+        ObjectLiteralAddProperty `fixed_float32`, v524
+        ObjectLiteralAddProperty `fixed_float64`, v525
+        ObjectLiteralAddProperty `fixed_uint8_clamped`, v526
+    v527 <- EndObjectLiteral
+    v528 <- CreateNamedVariable '__v_19', 'none'
+    Reassign v528, v527
+BeginCatch -> v529
+    v530 <- LoadString 'Caught: '
+    v531 <- BinaryOperation v530, '+', v529
+    v532 <- CreateNamedVariable 'print', 'none'
+    v533 <- CallFunction v532, [v531]
+EndTryCatch
+v534 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+v535 <- EndObjectLiteral
+v536 <- CreateNamedVariable '__v_10', 'none'
+Reassign v536, v535
+v537 <- LoadInteger '857536'
+v538 <- CreateNamedVariable '__v_10', 'none'
+SetProperty v538, 'dance', v537
+v539 <- LoadInteger '789514'
+SetProperty v538, 'drink', v539
+v540 <- CreateNamedVariable '__v_19', 'none'
+v541 <- GetProperty v540, 'fast'
+v542 <- CallFunction v534, [v541, v538]
+v543 <- LoadInteger '1'
+v544 <- LoadInteger '2'
+v545 <- LoadInteger '3'
+v546 <- CreateArray [v543, v544, v545]
+v547 <- CreateNamedVariable '__v_24', 'none'
+Reassign v547, v546
+v548 <- GetProperty v540, 'fast_smi_only'
+v549 <- CreateNamedVariable '__v_24', 'none'
+v550 <- CallFunction v534, [v548, v549]
+v551 <- LoadInteger '857536'
+SetProperty v549, 'dance', v551
+v552 <- LoadInteger '789514'
+SetProperty v549, 'drink', v552
+v553 <- GetProperty v540, 'fast_smi_only'
+v554 <- CallFunction v534, [v553, v549]
+v555 <- BeginPlainFunction -> 
+    v556 <- CreateNamedVariable 'Array', 'none'
+    v557 <- Construct v556, []
+    v558 <- CreateNamedVariable '__v_27', 'var', v557
+    v559 <- GetProperty v540, 'fast_smi_only'
+    v560 <- CallFunction v534, [v559, v558]
+    BeginForLoopInitializer
+        v561 <- LoadInteger '0'
+    BeginForLoopCondition -> v562
+        v563 <- LoadInteger '1337'
+        v564 <- Compare v562, '<', v563
+    BeginForLoopAfterthought v564 -> v565
+        v566 <- UnaryOperation v565, '++'
+    BeginForLoopBody -> v567
+        v568 <- CreateNamedVariable '__v_16', 'var', v567
+        v569 <- LoadInteger '1336'
+        v570 <- Compare v567, '==', v569
+        BeginIf v570
+            v571 <- GetProperty v540, 'fast_smi_only'
+            v572 <- CallFunction v534, [v571, v558]
+            v573 <- CreateNamedVariable 'Object', 'none'
+            v574 <- Construct v573, []
+            Reassign v568, v574
+        EndIf
+        SetComputedProperty v558, v567, v568
+    EndForLoop
+    v575 <- GetProperty v540, 'fast'
+    v576 <- CallFunction v534, [v575, v558]
+    v577 <- CreateArray []
+    v578 <- CreateNamedVariable '__v_15', 'var', v577
+    v579 <- LoadInteger '7'
+    SetElement v578, '912570', v579
+    v580 <- GetProperty v540, 'dictionary'
+    v581 <- CallFunction v534, [v580, v578]
+    v582 <- LoadInteger '912561'
+    v583 <- Construct v556, [v582]
+    v584 <- CreateNamedVariable '__v_26', 'var', v583
+    BeginForLoopInitializer
+        v585 <- LoadInteger '0'
+    BeginForLoopCondition -> v586
+        v587 <- LoadInteger '131072'
+        v588 <- Compare v586, '<', v587
+    BeginForLoopAfterthought v588 -> v589
+        v590 <- UnaryOperation v589, '++'
+    BeginForLoopBody -> v591
+        v592 <- LoadInteger '2'
+        v593 <- BinaryOperation v591, '/', v592
+        SetElement v584, '0', v593
+    EndForLoop
+    v594 <- GetProperty v540, 'fixed_int8'
+    v595 <- CreateNamedVariable 'Int8Array', 'none'
+    v596 <- LoadInteger '7'
+    v597 <- Construct v595, [v596]
+    v598 <- CallFunction v534, [v594, v597]
+    v599 <- GetProperty v540, 'fixed_uint8'
+    v600 <- CreateNamedVariable 'Uint8Array', 'none'
+    v601 <- LoadInteger '7'
+    v602 <- Construct v600, [v601]
+    v603 <- CallFunction v534, [v599, v602]
+    v604 <- GetProperty v540, 'fixed_int16'
+    v605 <- CreateNamedVariable 'Int16Array', 'none'
+    v606 <- LoadInteger '666'
+    v607 <- Construct v605, [v606]
+    v608 <- CallFunction v534, [v604, v607]
+    v609 <- GetProperty v540, 'fixed_uint16'
+    v610 <- CreateNamedVariable 'Uint16Array', 'none'
+    v611 <- LoadInteger '42'
+    v612 <- Construct v610, [v611]
+    v613 <- CallFunction v534, [v609, v612]
+    v614 <- GetProperty v540, 'fixed_int32'
+    v615 <- CreateNamedVariable 'Int32Array', 'none'
+    v616 <- LoadInteger '15'
+    v617 <- Construct v615, [v616]
+    v618 <- CallFunction v534, [v614, v617]
+    v619 <- GetProperty v540, 'fixed_uint32'
+    v620 <- CreateNamedVariable 'Uint32Array', 'none'
+    v621 <- LoadInteger '23'
+    v622 <- Construct v620, [v621]
+    v623 <- CallFunction v534, [v619, v622]
+    v624 <- GetProperty v540, 'fixed_float32'
+    v625 <- CreateNamedVariable 'Float32Array', 'none'
+    v626 <- LoadInteger '7'
+    v627 <- Construct v625, [v626]
+    v628 <- CallFunction v534, [v624, v627]
+    v629 <- GetProperty v540, 'fixed_float64'
+    v630 <- CreateNamedVariable 'Float64Array', 'none'
+    v631 <- LoadInteger '0'
+    v632 <- Construct v630, [v631]
+    v633 <- CallFunction v534, [v629, v632]
+    v634 <- GetProperty v540, 'fixed_uint8_clamped'
+    v635 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+    v636 <- LoadInteger '512'
+    v637 <- Construct v635, [v636]
+    v638 <- CallFunction v534, [v634, v637]
+    v639 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v640 <- LoadInteger '128'
+    v641 <- Construct v639, [v640]
+    v642 <- CreateNamedVariable '__v_13', 'var', v641
+    v643 <- GetProperty v540, 'external_int8'
+    v644 <- Construct v595, [v642]
+    v645 <- CallFunction v534, [v643, v644]
+    v646 <- CreateNamedVariable '__v_37', 'none'
+    v647 <- GetProperty v646, 'external_uint8'
+    v648 <- Construct v600, [v642]
+    v649 <- CallFunction v534, [v647, v648]
+    v650 <- GetProperty v540, 'external_int16'
+    v651 <- Construct v605, [v642]
+    v652 <- CallFunction v534, [v650, v651]
+    v653 <- GetProperty v540, 'external_uint16'
+    v654 <- Construct v610, [v642]
+    v655 <- CallFunction v534, [v653, v654]
+    v656 <- GetProperty v540, 'external_int32'
+    v657 <- Construct v615, [v642]
+    v658 <- CallFunction v534, [v656, v657]
+    v659 <- GetProperty v540, 'external_uint32'
+    v660 <- Construct v620, [v642]
+    v661 <- CallFunction v534, [v659, v660]
+    v662 <- GetProperty v540, 'external_float32'
+    v663 <- Construct v625, [v642]
+    v664 <- CallFunction v534, [v662, v663]
+    v665 <- GetProperty v540, 'external_float64'
+    v666 <- Construct v630, [v642]
+    v667 <- CallFunction v534, [v665, v666]
+    v668 <- GetProperty v540, 'external_uint8_clamped'
+    v669 <- Construct v635, [v642]
+    v670 <- CallFunction v534, [v668, v669]
+EndPlainFunction
+BeginTry
+    v671 <- CallFunction v555, []
+BeginCatch -> v672
+EndTryCatch
+
+
+var assertDoesNotThrow;
+var assertInstanceof;
+var assertUnreachable;
+var assertOptimized;
+var assertUnoptimized;
+function classOf(a11) {
+    var string = Object.prototype.toString.call(a11);
+    return string.substring(8, string.length - 1);
+}
+function PrettyPrint(a23) {
+    return "";
+}
+function PrettyPrintArrayElement(a26, a27, a28) {
+    return "";
+}
+function fail(a31, a32, a33) {
+}
+function deepObjectEquals(a35, a36) {
+    var aProps = Object.keys(a35);
+    aProps.sort();
+    var bProps = Object.keys(a36);
+    bProps.sort();
+    if (!deepEquals(aProps, bProps)) {
+        return false;
+    }
+    for (let i49 = 0; i49 < aProps.length; i49++) {
+        if (!deepEquals(a35[aProps[i49]], a36[aProps[i49]])) {
+            return false;
+        }
+    }
+    return true;
+}
+function deepEquals(a64, a65) {
+    if (a64 === a65) {
+        if (a64 === 0) {
+            return (1 / a64) === (1 / a65);
+        }
+        return true;
+    }
+    if (typeof a64 != typeof a65) {
+        return false;
+    }
+    if (typeof a64 == "number") {
+        return isNaN(a64) && isNaN(a65);
+    }
+    if ((typeof a64 !== "object") && (typeof a64 !== "function")) {
+        return false;
+    }
+    var objectClass = classOf(a64);
+    if (objectClass !== classOf(a65)) {
+        return false;
+    }
+    if (objectClass === "RegExp") {
+        return a64.toString() === a65.toString();
+    }
+    if (objectClass === "Function") {
+        return false;
+    }
+    if (objectClass === "Array") {
+        var elementCount = 0;
+        if (a64.length != a65.length) {
+            return false;
+        }
+        for (let i116 = 0; i116 < a64.length; i116++) {
+            if (!deepEquals(a64[i116], a65[i116])) {
+                return false;
+            }
+        }
+        return true;
+    }
+    if ((((objectClass == "String") || (objectClass == "Number")) || (objectClass == "Boolean")) || (objectClass == "Date")) {
+        if (a64.valueOf() !== a65.valueOf()) {
+            return false;
+        }
+    }
+    return deepObjectEquals(a64, a65);
+}
+function assertSame(a145, a146, a147) {
+    if (a146 === a145) {
+        if ((a145 !== 0) || ((1 / a145) == (1 / a146))) {
+            return;
+        }
+    } else {
+        if ((a145 !== a145) && (a146 !== a146)) {
+            return;
+        }
+    }
+    fail(PrettyPrint(a145), a146, a147);
+}
+assertSame = assertSame;
+function assertEquals(a164, a165, a166) {
+    if (!deepEquals(a165, a164)) {
+        fail(PrettyPrint(a164), a165, a166);
+    }
+}
+assertEquals = assertEquals;
+function assertEqualsDelta(a173, a174, a175, a176) {
+    Math.abs(a173 - a174) <= a175;
+}
+assertEqualsDelta = assertEqualsDelta;
+function assertArrayEquals(a183, a184, a185) {
+    var start = "";
+    if (a185) {
+        start = a185 + " - ";
+    }
+    a183.length;
+    a184.length;
+    start + "array length";
+    if (a183.length == a184.length) {
+        for (let i198 = 0; i198 < a183.length; ++i198) {
+            a183[i198];
+            a184[i198];
+            (start + "array element at index ") + i198;
+        }
+    }
+}
+assertArrayEquals = assertArrayEquals;
+function assertPropertiesEqual(a211, a212, a213) {
+    if (!deepObjectEquals(a211, a212)) {
+        fail(a211, a212, a213);
+    }
+}
+assertPropertiesEqual = assertPropertiesEqual;
+function assertToStringEquals(a219, a220, a221) {
+    if (a219 != String(a220)) {
+        fail(a219, a220, a221);
+    }
+}
+assertToStringEquals = assertToStringEquals;
+function assertTrue(a228, a229) {
+}
+assertTrue = assertTrue;
+function assertFalse(a233, a234) {
+}
+assertFalse = assertFalse;
+function assertNull(a238, a239) {
+    if (a238 !== null) {
+        fail("null", a238, a239);
+    }
+}
+assertNull = assertNull;
+function assertNotNull(a246, a247) {
+    if (a246 === null) {
+        fail("not null", a246, a247);
+    }
+}
+assertNotNull = assertNotNull;
+var __v_39 = {};
+var __v_40 = {};
+var __v_41 = {};
+var __v_42 = {};
+var __v_43 = {};
+var __v_44 = {};
+try {
+    __v_0 = [1.5,,1.7];
+    __v_1 = { __v_0: 1.8 };
+} catch(e273) {
+    print("Caught: " + e273);
+}
+function __f_0(a279, a280, a281) {
+    a279.a = a280[a281];
+    gc();
+}
+try {
+    __f_0(__v_1, __v_0, 0);
+    __f_0(__v_1, __v_0, 0);
+    __f_0(__v_1, __v_0, 1);
+    __v_1.a;
+    __v_0 = [1,,3];
+    __v_1 = { ab: 5 };
+} catch(e301) {
+    print("Caught: " + e301);
+}
+function __f_1(a307, a308, a309) {
+    a307.ab = a308[a309];
+}
+try {
+    __f_1(__v_1, __v_0, 1);
+} catch(e315) {
+    print("Caught: " + e315);
+}
+function __f_5(a321) {
+    return ~a321;
+}
+try {
+    __f_5(42);
+    ~12;
+    __f_5(12.45);
+    ~46;
+    __f_5(42.87);
+    __v_2 = 1;
+    __v_4 = 2;
+    __v_3 = 4;
+    __v_6 = 8;
+} catch(e341) {
+    print("Caught: " + e341);
+}
+function __f_4() {
+    return __v_2 | (__v_4 | (__v_3 | __v_6));
+}
+try {
+    __f_4();
+    __v_3 = "16";
+    ((17 | -13) | 0) | -5;
+    __f_4();
+} catch(e367) {
+    print("Caught: " + e367);
+}
+function __f_6() {
+    return __f_4();
+}
+try {
+    ((1 | 2) | 16) | 8;
+    __f_6();
+    function f382() {
+        return 42;
+    }
+    __f_4 = f382;
+    __f_6();
+    __v_5 = {};
+    __v_5.__f_4 = __f_4;
+} catch(e389) {
+    print("Caught: " + e389);
+}
+function __f_7(a395) {
+    return a395.__f_4();
+}
+try {
+    for (let i398 = 0; i398 < 5; i398++) {
+        __f_7(__v_5);
+    }
+    __f_7(__v_5);
+    __f_7(__v_5);
+    function f411() {
+        return 87;
+    }
+    __f_7({ __f_4: f411 });
+} catch(e415) {
+    print("Caught: " + e415);
+}
+function __f_8(a421, a422) {
+    a421 = 42;
+    a422 = 1;
+    a422 = a422 << "0";
+    return a421 | a422;
+}
+try {
+    __f_8(0, 0);
+} catch(e432) {
+    print("Caught: " + e432);
+}
+function __f_2(a438) {
+    return "lit[" + (a438 + "]");
+}
+try {
+    __f_2(-87);
+    __f_2(0);
+    __f_2(42);
+    __v_9 = "abc";
+    gc();
+    var __v_8;
+} catch(e459) {
+    print("Caught: " + e459);
+}
+function __f_9(a465) {
+    return __v_9.charAt(a465);
+}
+try {
+    for (let i469 = 0; i469 < 5; i469++) {
+        __v_8 = __f_9(0);
+    }
+    __v_8 = __f_9(0);
+} catch(e481) {
+    print("Caught: " + e481);
+}
+function __f_3(a487, a488, a489, a490) {
+    return ((a487 + a488) + a489) + a490;
+}
+try {
+    __f_3(1, 1, 2, 1073741823);
+} catch(e500) {
+    print("Caught: " + e500);
+}
+try {
+    const v527 = {
+        fast_smi_only: "fast smi only elements",
+        fast: "fast elements",
+        fast_double: "fast double elements",
+        dictionary: "dictionary elements",
+        external_int32: "external int8 elements",
+        external_uint8: "external uint8 elements",
+        external_int16: "external int16 elements",
+        external_uint16: "external uint16 elements",
+        external_int32: "external int32 elements",
+        external_uint32: "external uint32 elements",
+        external_float32: "external float32 elements",
+        external_float64: "external float64 elements",
+        external_uint8_clamped: "external uint8_clamped elements",
+        fixed_int32: "fixed int8 elements",
+        fixed_uint8: "fixed uint8 elements",
+        fixed_int16: "fixed int16 elements",
+        fixed_uint16: "fixed uint16 elements",
+        fixed_int32: "fixed int32 elements",
+        fixed_uint32: "fixed uint32 elements",
+        fixed_float32: "fixed float32 elements",
+        fixed_float64: "fixed float64 elements",
+        fixed_uint8_clamped: "fixed uint8_clamped elements",
+    };
+    __v_19 = v527;
+} catch(e529) {
+    print("Caught: " + e529);
+}
+function __f_12() {
+}
+__v_10 = {};
+__v_10.dance = 857536;
+__v_10.drink = 789514;
+__f_12(__v_19.fast, __v_10);
+__v_24 = [1,2,3];
+__f_12(__v_19.fast_smi_only, __v_24);
+__v_24.dance = 857536;
+__v_24.drink = 789514;
+__f_12(__v_19.fast_smi_only, __v_24);
+function __f_18() {
+    const v557 = new Array();
+    var __v_27 = v557;
+    __f_12(__v_19.fast_smi_only, __v_27);
+    for (let i562 = 0; i562 < 1337; i562++) {
+        var __v_16 = i562;
+        if (i562 == 1336) {
+            __f_12(__v_19.fast_smi_only, __v_27);
+            const v574 = new Object();
+            __v_16 = v574;
+        }
+        __v_27[i562] = __v_16;
+    }
+    __f_12(__v_19.fast, __v_27);
+    var __v_15 = [];
+    __v_15[912570] = 7;
+    __f_12(__v_19.dictionary, __v_15);
+    const v583 = new Array(912561);
+    var __v_26 = v583;
+    for (let i586 = 0; i586 < 131072; i586++) {
+        __v_26[0] = i586 / 2;
+    }
+    const v594 = __v_19.fixed_int8;
+    const v597 = new Int8Array(7);
+    __f_12(v594, v597);
+    const v599 = __v_19.fixed_uint8;
+    const v602 = new Uint8Array(7);
+    __f_12(v599, v602);
+    const v604 = __v_19.fixed_int16;
+    const v607 = new Int16Array(666);
+    __f_12(v604, v607);
+    const v609 = __v_19.fixed_uint16;
+    const v612 = new Uint16Array(42);
+    __f_12(v609, v612);
+    const v614 = __v_19.fixed_int32;
+    const v617 = new Int32Array(15);
+    __f_12(v614, v617);
+    const v619 = __v_19.fixed_uint32;
+    const v622 = new Uint32Array(23);
+    __f_12(v619, v622);
+    const v624 = __v_19.fixed_float32;
+    const v627 = new Float32Array(7);
+    __f_12(v624, v627);
+    const v629 = __v_19.fixed_float64;
+    const v632 = new Float64Array(0);
+    __f_12(v629, v632);
+    const v634 = __v_19.fixed_uint8_clamped;
+    const v637 = new Uint8ClampedArray(512);
+    __f_12(v634, v637);
+    const v641 = new ArrayBuffer(128);
+    var __v_13 = v641;
+    const v643 = __v_19.external_int8;
+    const v644 = new Int8Array(__v_13);
+    __f_12(v643, v644);
+    const v647 = __v_37.external_uint8;
+    const v648 = new Uint8Array(__v_13);
+    __f_12(v647, v648);
+    const v650 = __v_19.external_int16;
+    const v651 = new Int16Array(__v_13);
+    __f_12(v650, v651);
+    const v653 = __v_19.external_uint16;
+    const v654 = new Uint16Array(__v_13);
+    __f_12(v653, v654);
+    const v656 = __v_19.external_int32;
+    const v657 = new Int32Array(__v_13);
+    __f_12(v656, v657);
+    const v659 = __v_19.external_uint32;
+    const v660 = new Uint32Array(__v_13);
+    __f_12(v659, v660);
+    const v662 = __v_19.external_float32;
+    const v663 = new Float32Array(__v_13);
+    __f_12(v662, v663);
+    const v665 = __v_19.external_float64;
+    const v666 = new Float64Array(__v_13);
+    __f_12(v665, v666);
+    const v668 = __v_19.external_uint8_clamped;
+    const v669 = new Uint8ClampedArray(__v_13);
+    __f_12(v668, v669);
+}
+try {
+    __f_18();
+} catch(e672) {
+}
+
+FuzzIL program written to corpus/regress-410912.fzil

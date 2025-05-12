@@ -1,0 +1,2385 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'exception', 'var', v0
+BeginTry
+    v2 <- LoadNull
+    v3 <- LoadNull
+    v4 <- LoadNull
+    v5 <- CreateNamedVariable 'Reflect', 'none'
+    v6 <- CallMethod v5, 'defineProperty', [v2, v3, v4]
+BeginCatch -> v7
+    v8 <- LoadBoolean 'true'
+    Reassign v1, v8
+    v9 <- LoadRegExp 'called on non-object' ''
+    v10 <- CallMethod v9, 'test', [v7]
+EndTryCatch
+v11 <- LoadBoolean 'false'
+Reassign v1, v11
+BeginTry
+    v12 <- LoadUndefined
+    v13 <- LoadUndefined
+    v14 <- LoadUndefined
+    v15 <- CreateNamedVariable 'Reflect', 'none'
+    v16 <- CallMethod v15, 'defineProperty', [v12, v13, v14]
+BeginCatch -> v17
+    v18 <- LoadBoolean 'true'
+    Reassign v1, v18
+    v19 <- LoadRegExp 'called on non-object' ''
+    v20 <- CallMethod v19, 'test', [v17]
+EndTryCatch
+v21 <- LoadBoolean 'false'
+Reassign v1, v21
+BeginTry
+    v22 <- LoadInteger '0'
+    v23 <- LoadString 'foo'
+    v24 <- LoadUndefined
+    v25 <- CreateNamedVariable 'Reflect', 'none'
+    v26 <- CallMethod v25, 'defineProperty', [v22, v23, v24]
+BeginCatch -> v27
+    v28 <- LoadBoolean 'true'
+    Reassign v1, v28
+    v29 <- LoadRegExp 'called on non-object' ''
+    v30 <- CallMethod v29, 'test', [v27]
+EndTryCatch
+BeginObjectLiteral
+v31 <- EndObjectLiteral
+v32 <- CreateNamedVariable 'obj1', 'var', v31
+v33 <- LoadInteger '0'
+v34 <- CreateNamedVariable 'val1', 'var', v33
+v35 <- LoadInteger '0'
+v36 <- CreateNamedVariable 'val2', 'var', v35
+v37 <- LoadInteger '0'
+v38 <- CreateNamedVariable 'val3', 'var', v37
+v39 <- BeginPlainFunction -> 
+    v40 <- UnaryOperation v34, '++'
+EndPlainFunction
+v41 <- BeginPlainFunction -> 
+    Return v34
+EndPlainFunction
+v42 <- BeginPlainFunction -> 
+    v43 <- UnaryOperation v36, '++'
+EndPlainFunction
+v44 <- BeginPlainFunction -> 
+    Return v36
+EndPlainFunction
+v45 <- BeginPlainFunction -> 
+    v46 <- UnaryOperation v38, '++'
+EndPlainFunction
+v47 <- BeginPlainFunction -> 
+    Return v38
+EndPlainFunction
+BeginObjectLiteral
+v48 <- EndObjectLiteral
+v49 <- CreateNamedVariable 'emptyDesc', 'var', v48
+v50 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v39
+    ObjectLiteralAddProperty `get`, v41
+    ObjectLiteralAddProperty `configurable`, v50
+v51 <- EndObjectLiteral
+v52 <- CreateNamedVariable 'accessorConfigurable', 'var', v51
+v53 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v42
+    ObjectLiteralAddProperty `get`, v44
+    ObjectLiteralAddProperty `configurable`, v53
+v54 <- EndObjectLiteral
+v55 <- CreateNamedVariable 'accessorNoConfigurable', 'var', v54
+v56 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v45
+    ObjectLiteralAddProperty `configurable`, v56
+v57 <- EndObjectLiteral
+v58 <- CreateNamedVariable 'accessorOnlySet', 'var', v57
+v59 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v47
+    ObjectLiteralAddProperty `configurable`, v59
+v60 <- EndObjectLiteral
+v61 <- CreateNamedVariable 'accessorOnlyGet', 'var', v60
+v62 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v62
+v63 <- EndObjectLiteral
+v64 <- CreateNamedVariable 'accessorDefault', 'var', v63
+v65 <- LoadInteger '1000'
+v66 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v65
+    ObjectLiteralAddProperty `configurable`, v66
+v67 <- EndObjectLiteral
+v68 <- CreateNamedVariable 'dataConfigurable', 'var', v67
+v69 <- LoadInteger '2000'
+v70 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v69
+    ObjectLiteralAddProperty `configurable`, v70
+v71 <- EndObjectLiteral
+v72 <- CreateNamedVariable 'dataNoConfigurable', 'var', v71
+v73 <- LoadInteger '3000'
+v74 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v73
+    ObjectLiteralAddProperty `writable`, v74
+v75 <- EndObjectLiteral
+v76 <- CreateNamedVariable 'dataWritable', 'var', v75
+v77 <- BeginPlainFunction -> 
+    v78 <- LoadString 'foo'
+    v79 <- LoadUndefined
+    v80 <- CreateNamedVariable 'Reflect', 'none'
+    v81 <- CallMethod v80, 'defineProperty', [v32, v78, v79]
+EndPlainFunction
+v82 <- CallFunction v77, []
+v83 <- CreateNamedVariable 'TypeError', 'none'
+v84 <- LoadString 'foo'
+v85 <- CreateNamedVariable 'Reflect', 'none'
+v86 <- CallMethod v85, 'defineProperty', [v32, v84, v49]
+v87 <- LoadUndefined
+v88 <- GetProperty v32, 'foo'
+v89 <- LoadString 'foo'
+v90 <- CreateNamedVariable 'Object', 'none'
+v91 <- CallMethod v90, 'getOwnPropertyDescriptor', [v32, v89]
+v92 <- CreateNamedVariable 'desc', 'var', v91
+v93 <- GetProperty v92, 'configurable'
+v94 <- GetProperty v92, 'enumerable'
+v95 <- GetProperty v92, 'writable'
+v96 <- GetProperty v92, 'get'
+v97 <- LoadUndefined
+v98 <- GetProperty v92, 'set'
+v99 <- LoadUndefined
+v100 <- GetProperty v92, 'value'
+v101 <- LoadUndefined
+v102 <- LoadString 'bar'
+v103 <- CallMethod v90, 'getOwnPropertyDescriptor', [v32, v102]
+Reassign v92, v103
+v104 <- LoadUndefined
+v105 <- LoadString 'foo'
+v106 <- CallMethod v85, 'defineProperty', [v32, v105, v52]
+v107 <- LoadString 'bar'
+v108 <- CallMethod v85, 'defineProperty', [v32, v107, v52]
+v109 <- LoadString 'bar'
+v110 <- CallMethod v90, 'getOwnPropertyDescriptor', [v32, v109]
+Reassign v92, v110
+v111 <- GetProperty v92, 'configurable'
+v112 <- GetProperty v92, 'enumerable'
+v113 <- GetProperty v92, 'writable'
+v114 <- LoadUndefined
+v115 <- GetProperty v92, 'get'
+v116 <- GetProperty v52, 'get'
+v117 <- GetProperty v92, 'set'
+v118 <- GetProperty v52, 'set'
+v119 <- GetProperty v92, 'value'
+v120 <- LoadUndefined
+v121 <- LoadInteger '1'
+v122 <- LoadInteger '1'
+SetProperty v32, 'bar', v122
+v123 <- LoadInteger '1'
+v124 <- LoadInteger '1'
+v125 <- LoadInteger '1'
+SetProperty v32, 'bar', v125
+v126 <- LoadInteger '2'
+v127 <- LoadInteger '2'
+v128 <- GetProperty v32, 'bar'
+v129 <- LoadString 'bar'
+v130 <- CallMethod v85, 'defineProperty', [v32, v129, v55]
+v131 <- LoadString 'bar'
+v132 <- CallMethod v90, 'getOwnPropertyDescriptor', [v32, v131]
+Reassign v92, v132
+v133 <- GetProperty v92, 'configurable'
+v134 <- GetProperty v92, 'enumerable'
+v135 <- GetProperty v92, 'writable'
+v136 <- LoadUndefined
+v137 <- GetProperty v92, 'get'
+v138 <- GetProperty v55, 'get'
+v139 <- GetProperty v92, 'set'
+v140 <- GetProperty v55, 'set'
+v141 <- GetProperty v92, 'value'
+v142 <- LoadUndefined
+v143 <- LoadInteger '1'
+v144 <- LoadInteger '1'
+SetProperty v32, 'bar', v144
+v145 <- LoadInteger '2'
+v146 <- LoadInteger '1'
+v147 <- LoadInteger '1'
+v148 <- LoadInteger '1'
+SetProperty v32, 'bar', v148
+v149 <- LoadInteger '2'
+v150 <- LoadInteger '2'
+v151 <- LoadInteger '2'
+v152 <- GetProperty v32, 'bar'
+v153 <- LoadString 'bar'
+v154 <- CallMethod v85, 'defineProperty', [v32, v153, v52]
+v155 <- LoadString 'bar'
+v156 <- CallMethod v85, 'defineProperty', [v32, v155, v68]
+v157 <- LoadString 'bar'
+v158 <- CallMethod v85, 'defineProperty', [v32, v157, v55]
+v159 <- LoadString 'bar'
+v160 <- CallMethod v90, 'getOwnPropertyDescriptor', [v32, v159]
+Reassign v92, v160
+v161 <- GetProperty v92, 'configurable'
+v162 <- GetProperty v92, 'enumerable'
+v163 <- GetProperty v92, 'writable'
+v164 <- LoadUndefined
+v165 <- GetProperty v92, 'get'
+v166 <- GetProperty v55, 'get'
+v167 <- GetProperty v92, 'set'
+v168 <- GetProperty v55, 'set'
+v169 <- GetProperty v92, 'value'
+v170 <- LoadUndefined
+v171 <- LoadInteger '1'
+v172 <- LoadInteger '1'
+SetProperty v32, 'bar', v172
+v173 <- LoadInteger '2'
+v174 <- LoadInteger '3'
+v175 <- LoadInteger '1'
+v176 <- LoadInteger '1'
+SetProperty v32, 'bar', v176
+v177 <- LoadInteger '2'
+v178 <- LoadInteger '4'
+v179 <- LoadInteger '4'
+v180 <- GetProperty v32, 'bar'
+v181 <- LoadString 'setOnly'
+v182 <- CallMethod v85, 'defineProperty', [v32, v181, v58]
+v183 <- LoadString 'setOnly'
+v184 <- CallMethod v90, 'getOwnPropertyDescriptor', [v32, v183]
+Reassign v92, v184
+v185 <- GetProperty v92, 'configurable'
+v186 <- GetProperty v92, 'enumerable'
+v187 <- GetProperty v92, 'set'
+v188 <- GetProperty v58, 'set'
+v189 <- GetProperty v92, 'writable'
+v190 <- LoadUndefined
+v191 <- GetProperty v92, 'value'
+v192 <- LoadUndefined
+v193 <- GetProperty v92, 'get'
+v194 <- LoadUndefined
+v195 <- LoadInteger '1'
+v196 <- LoadInteger '1'
+SetProperty v32, 'setOnly', v196
+v197 <- LoadInteger '1'
+v198 <- LoadString 'setOnly'
+v199 <- CallMethod v85, 'defineProperty', [v32, v198, v61]
+v200 <- LoadString 'setOnly'
+v201 <- CallMethod v90, 'getOwnPropertyDescriptor', [v32, v200]
+Reassign v92, v201
+v202 <- GetProperty v92, 'configurable'
+v203 <- GetProperty v92, 'enumerable'
+v204 <- GetProperty v92, 'get'
+v205 <- GetProperty v61, 'get'
+v206 <- GetProperty v92, 'set'
+v207 <- GetProperty v58, 'set'
+v208 <- GetProperty v92, 'writable'
+v209 <- LoadUndefined
+v210 <- GetProperty v92, 'value'
+v211 <- LoadUndefined
+v212 <- LoadInteger '1'
+v213 <- LoadInteger '1'
+SetProperty v32, 'setOnly', v213
+v214 <- LoadInteger '2'
+v215 <- LoadString 'both'
+v216 <- CallMethod v85, 'defineProperty', [v32, v215, v52]
+v217 <- LoadString 'both'
+v218 <- CallMethod v85, 'defineProperty', [v32, v217, v58]
+v219 <- LoadString 'both'
+v220 <- CallMethod v90, 'getOwnPropertyDescriptor', [v32, v219]
+Reassign v92, v220
+v221 <- GetProperty v92, 'configurable'
+v222 <- GetProperty v92, 'enumerable'
+v223 <- GetProperty v92, 'set'
+v224 <- GetProperty v58, 'set'
+v225 <- GetProperty v92, 'get'
+v226 <- GetProperty v52, 'get'
+v227 <- GetProperty v92, 'writable'
+v228 <- LoadUndefined
+v229 <- GetProperty v92, 'value'
+v230 <- LoadUndefined
+v231 <- LoadInteger '1'
+v232 <- LoadInteger '1'
+SetProperty v32, 'both', v232
+v233 <- LoadInteger '3'
+v234 <- LoadString 'foobar'
+v235 <- CallMethod v85, 'defineProperty', [v32, v234, v68]
+v236 <- LoadString 'foobar'
+v237 <- CallMethod v90, 'getOwnPropertyDescriptor', [v32, v236]
+Reassign v92, v237
+v238 <- GetProperty v32, 'foobar'
+v239 <- LoadInteger '1000'
+v240 <- GetProperty v92, 'value'
+v241 <- LoadInteger '1000'
+v242 <- GetProperty v92, 'configurable'
+v243 <- GetProperty v92, 'writable'
+v244 <- GetProperty v92, 'enumerable'
+v245 <- GetProperty v92, 'get'
+v246 <- LoadUndefined
+v247 <- GetProperty v92, 'set'
+v248 <- LoadUndefined
+v249 <- LoadInteger '1001'
+SetProperty v32, 'foobar', v249
+v250 <- GetProperty v32, 'foobar'
+v251 <- LoadInteger '1000'
+v252 <- LoadString 'foobar'
+v253 <- CallMethod v85, 'defineProperty', [v32, v252, v76]
+v254 <- LoadString 'foobar'
+v255 <- CallMethod v90, 'getOwnPropertyDescriptor', [v32, v254]
+Reassign v92, v255
+v256 <- GetProperty v32, 'foobar'
+v257 <- LoadInteger '3000'
+v258 <- GetProperty v92, 'value'
+v259 <- LoadInteger '3000'
+v260 <- GetProperty v92, 'configurable'
+v261 <- GetProperty v92, 'writable'
+v262 <- GetProperty v92, 'enumerable'
+v263 <- GetProperty v92, 'get'
+v264 <- LoadUndefined
+v265 <- GetProperty v92, 'set'
+v266 <- LoadUndefined
+v267 <- LoadInteger '1001'
+SetProperty v32, 'foobar', v267
+v268 <- GetProperty v32, 'foobar'
+v269 <- LoadInteger '1001'
+v270 <- LoadString 'foobar'
+v271 <- CallMethod v85, 'defineProperty', [v32, v270, v72]
+v272 <- LoadString 'foobar'
+v273 <- CallMethod v90, 'getOwnPropertyDescriptor', [v32, v272]
+Reassign v92, v273
+v274 <- GetProperty v32, 'foobar'
+v275 <- LoadInteger '2000'
+v276 <- GetProperty v92, 'value'
+v277 <- LoadInteger '2000'
+v278 <- GetProperty v92, 'configurable'
+v279 <- GetProperty v92, 'writable'
+v280 <- GetProperty v92, 'enumerable'
+v281 <- GetProperty v92, 'get'
+v282 <- LoadUndefined
+v283 <- GetProperty v92, 'set'
+v284 <- LoadUndefined
+v285 <- LoadString 'foobar'
+v286 <- CallMethod v85, 'defineProperty', [v32, v285, v68]
+v287 <- LoadString 'foobar'
+v288 <- CallMethod v85, 'defineProperty', [v32, v287, v68]
+v289 <- LoadString 'foobar'
+v290 <- CallMethod v85, 'defineProperty', [v32, v289, v72]
+v291 <- LoadString 'foobar'
+v292 <- CallMethod v90, 'getOwnPropertyDescriptor', [v32, v291]
+Reassign v92, v292
+v293 <- GetProperty v32, 'foobar'
+v294 <- LoadInteger '2000'
+v295 <- GetProperty v92, 'value'
+v296 <- LoadInteger '2000'
+v297 <- GetProperty v92, 'configurable'
+v298 <- GetProperty v92, 'writable'
+v299 <- GetProperty v92, 'enumerable'
+v300 <- GetProperty v92, 'get'
+v301 <- LoadUndefined
+v302 <- GetProperty v92, 'set'
+v303 <- LoadUndefined
+BeginObjectLiteral
+v304 <- EndObjectLiteral
+v305 <- CreateNamedVariable 'obj2', 'var', v304
+v306 <- LoadString 'foo'
+v307 <- CallMethod v85, 'defineProperty', [v305, v306, v52]
+v308 <- LoadString 'foo'
+v309 <- CallMethod v85, 'defineProperty', [v305, v308, v68]
+v310 <- LoadString 'foo'
+v311 <- CallMethod v90, 'getOwnPropertyDescriptor', [v305, v310]
+Reassign v92, v311
+v312 <- GetProperty v305, 'foo'
+v313 <- LoadInteger '1000'
+v314 <- GetProperty v92, 'value'
+v315 <- LoadInteger '1000'
+v316 <- GetProperty v92, 'configurable'
+v317 <- GetProperty v92, 'writable'
+v318 <- GetProperty v92, 'enumerable'
+v319 <- GetProperty v92, 'get'
+v320 <- LoadUndefined
+v321 <- GetProperty v92, 'set'
+v322 <- LoadUndefined
+v323 <- LoadString 'foo'
+v324 <- CallMethod v85, 'defineProperty', [v305, v323, v52]
+v325 <- LoadString 'foo'
+v326 <- CallMethod v90, 'getOwnPropertyDescriptor', [v305, v325]
+Reassign v92, v326
+v327 <- GetProperty v92, 'configurable'
+v328 <- GetProperty v92, 'enumerable'
+v329 <- GetProperty v92, 'writable'
+v330 <- LoadUndefined
+v331 <- GetProperty v92, 'get'
+v332 <- GetProperty v52, 'get'
+v333 <- GetProperty v92, 'set'
+v334 <- GetProperty v52, 'set'
+v335 <- GetProperty v92, 'value'
+v336 <- LoadUndefined
+v337 <- LoadInteger '1'
+v338 <- LoadInteger '1'
+SetProperty v305, 'foo', v338
+v339 <- LoadInteger '3'
+v340 <- LoadInteger '4'
+v341 <- LoadInteger '3'
+v342 <- GetProperty v305, 'foo'
+v343 <- LoadString 'bar'
+v344 <- CallMethod v85, 'defineProperty', [v305, v343, v68]
+v345 <- LoadString 'bar'
+v346 <- CallMethod v85, 'defineProperty', [v305, v345, v52]
+v347 <- LoadString 'bar'
+v348 <- CallMethod v90, 'getOwnPropertyDescriptor', [v305, v347]
+Reassign v92, v348
+v349 <- GetProperty v92, 'configurable'
+v350 <- GetProperty v92, 'enumerable'
+v351 <- GetProperty v92, 'writable'
+v352 <- LoadUndefined
+v353 <- GetProperty v92, 'get'
+v354 <- GetProperty v52, 'get'
+v355 <- GetProperty v92, 'set'
+v356 <- GetProperty v52, 'set'
+v357 <- GetProperty v92, 'value'
+v358 <- LoadUndefined
+v359 <- LoadInteger '1'
+v360 <- LoadInteger '1'
+SetProperty v305, 'bar', v360
+v361 <- LoadInteger '4'
+v362 <- LoadInteger '4'
+v363 <- LoadInteger '4'
+v364 <- GetProperty v305, 'foo'
+v365 <- LoadString 'bar'
+v366 <- CallMethod v85, 'defineProperty', [v305, v365, v68]
+v367 <- LoadString 'bar'
+v368 <- CallMethod v90, 'getOwnPropertyDescriptor', [v305, v367]
+Reassign v92, v368
+v369 <- GetProperty v305, 'bar'
+v370 <- LoadInteger '1000'
+v371 <- GetProperty v92, 'value'
+v372 <- LoadInteger '1000'
+v373 <- GetProperty v92, 'configurable'
+v374 <- GetProperty v92, 'writable'
+v375 <- GetProperty v92, 'enumerable'
+v376 <- GetProperty v92, 'get'
+v377 <- LoadUndefined
+v378 <- GetProperty v92, 'set'
+v379 <- LoadUndefined
+v380 <- BeginPlainFunction -> 
+    v381 <- LoadThis
+    v382 <- GetProperty v381, 'x'
+    Return v382
+EndPlainFunction
+v383 <- BeginPlainFunction -> v384
+    v385 <- LoadThis
+    SetProperty v385, 'x', v384
+EndPlainFunction
+v386 <- LoadInteger '1000'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v386
+v387 <- EndObjectLiteral
+v388 <- CreateNamedVariable 'obj3', 'var', v387
+v389 <- LoadString 'foo'
+v390 <- CallMethod v388, '__defineGetter__', [v389, v380]
+v391 <- LoadString 'foo'
+v392 <- CallMethod v388, '__defineSetter__', [v391, v383]
+v393 <- LoadString 'foo'
+v394 <- CallMethod v90, 'getOwnPropertyDescriptor', [v388, v393]
+Reassign v92, v394
+v395 <- GetProperty v92, 'configurable'
+v396 <- GetProperty v92, 'enumerable'
+v397 <- GetProperty v92, 'writable'
+v398 <- LoadUndefined
+v399 <- GetProperty v92, 'get'
+v400 <- CallFunction v380, []
+v401 <- GetProperty v92, 'set'
+v402 <- CallFunction v383, []
+v403 <- GetProperty v92, 'value'
+v404 <- LoadUndefined
+v405 <- LoadInteger '1'
+v406 <- LoadInteger '1'
+SetProperty v388, 'foo', v406
+v407 <- LoadInteger '1'
+v408 <- GetProperty v388, 'x'
+v409 <- LoadInteger '1'
+v410 <- GetProperty v388, 'foo'
+v411 <- LoadString 'foo'
+v412 <- CallMethod v85, 'defineProperty', [v388, v411, v55]
+v413 <- LoadString 'foo'
+v414 <- CallMethod v90, 'getOwnPropertyDescriptor', [v388, v413]
+Reassign v92, v414
+v415 <- GetProperty v92, 'configurable'
+v416 <- GetProperty v92, 'enumerable'
+v417 <- GetProperty v92, 'writable'
+v418 <- LoadUndefined
+v419 <- GetProperty v92, 'get'
+v420 <- GetProperty v55, 'get'
+v421 <- GetProperty v92, 'set'
+v422 <- GetProperty v55, 'set'
+v423 <- GetProperty v92, 'value'
+v424 <- LoadUndefined
+v425 <- LoadInteger '1'
+v426 <- LoadInteger '1'
+SetProperty v388, 'foo', v426
+v427 <- LoadInteger '5'
+v428 <- LoadInteger '5'
+v429 <- GetProperty v388, 'foo'
+v430 <- LoadString 'bar'
+v431 <- CallMethod v388, '__defineGetter__', [v430, v380]
+v432 <- LoadString 'bar'
+v433 <- CallMethod v388, '__defineSetter__', [v432, v383]
+v434 <- LoadString 'bar'
+v435 <- CallMethod v85, 'defineProperty', [v388, v434, v68]
+v436 <- LoadString 'bar'
+v437 <- CallMethod v90, 'getOwnPropertyDescriptor', [v388, v436]
+Reassign v92, v437
+v438 <- GetProperty v388, 'bar'
+v439 <- LoadInteger '1000'
+v440 <- GetProperty v92, 'value'
+v441 <- LoadInteger '1000'
+v442 <- GetProperty v92, 'configurable'
+v443 <- GetProperty v92, 'writable'
+v444 <- GetProperty v92, 'enumerable'
+v445 <- GetProperty v92, 'get'
+v446 <- LoadUndefined
+v447 <- GetProperty v92, 'set'
+v448 <- LoadUndefined
+BeginObjectLiteral
+v449 <- EndObjectLiteral
+v450 <- CreateNamedVariable 'obj4', 'var', v449
+v451 <- BeginPlainFunction -> 
+    v452 <- LoadInteger '42'
+    Return v452
+EndPlainFunction
+v453 <- CreateNamedVariable 'func', 'var', v451
+SetProperty v450, 'bar', v453
+v454 <- LoadInteger '42'
+v455 <- CallMethod v450, 'bar', []
+v456 <- LoadString 'bar'
+v457 <- CallMethod v85, 'defineProperty', [v450, v456, v52]
+v458 <- LoadString 'bar'
+v459 <- CallMethod v90, 'getOwnPropertyDescriptor', [v450, v458]
+Reassign v92, v459
+v460 <- GetProperty v92, 'configurable'
+v461 <- GetProperty v92, 'enumerable'
+v462 <- GetProperty v92, 'writable'
+v463 <- LoadUndefined
+v464 <- GetProperty v92, 'get'
+v465 <- GetProperty v52, 'get'
+v466 <- GetProperty v92, 'set'
+v467 <- GetProperty v52, 'set'
+v468 <- GetProperty v92, 'value'
+v469 <- LoadUndefined
+v470 <- LoadInteger '1'
+v471 <- LoadInteger '1'
+SetProperty v450, 'bar', v471
+v472 <- LoadInteger '5'
+v473 <- LoadInteger '5'
+v474 <- GetProperty v450, 'bar'
+BeginTry
+    v475 <- CallMethod v450, 'bar', []
+    v476 <- LoadBoolean 'false'
+BeginCatch -> v477
+    v478 <- LoadRegExp 'is not a function' ''
+    v479 <- CallMethod v478, 'test', [v477]
+EndTryCatch
+BeginObjectLiteral
+v480 <- EndObjectLiteral
+v481 <- CreateNamedVariable 'obj5', 'var', v480
+v482 <- LoadString 'foo'
+v483 <- CallMethod v85, 'defineProperty', [v481, v482, v55]
+v484 <- LoadString 'foo'
+v485 <- CallMethod v90, 'getOwnPropertyDescriptor', [v481, v484]
+Reassign v92, v485
+v486 <- LoadString 'foo'
+v487 <- CallMethod v85, 'defineProperty', [v481, v486, v55]
+v488 <- LoadBoolean 'false'
+v489 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v488
+    ObjectLiteralAddProperty `enumerable`, v489
+    ObjectLiteralAddProperty `set`, v39
+    ObjectLiteralAddProperty `get`, v44
+v490 <- EndObjectLiteral
+v491 <- CreateNamedVariable 'descDifferent', 'var', v490
+v492 <- LoadString 'foo'
+v493 <- CallMethod v85, 'defineProperty', [v481, v492, v491]
+v494 <- LoadBoolean 'false'
+v495 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v494
+    ObjectLiteralAddProperty `enumerable`, v495
+    ObjectLiteralAddProperty `set`, v42
+    ObjectLiteralAddProperty `get`, v41
+v496 <- EndObjectLiteral
+Reassign v491, v496
+v497 <- LoadString 'foo'
+v498 <- CallMethod v85, 'defineProperty', [v481, v497, v491]
+v499 <- LoadBoolean 'false'
+v500 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v499
+    ObjectLiteralAddProperty `enumerable`, v500
+    ObjectLiteralAddProperty `set`, v42
+    ObjectLiteralAddProperty `get`, v44
+v501 <- EndObjectLiteral
+Reassign v491, v501
+v502 <- LoadString 'foo'
+v503 <- CallMethod v85, 'defineProperty', [v481, v502, v491]
+v504 <- LoadBoolean 'false'
+v505 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v504
+    ObjectLiteralAddProperty `enumerable`, v505
+    ObjectLiteralAddProperty `set`, v42
+    ObjectLiteralAddProperty `get`, v44
+v506 <- EndObjectLiteral
+Reassign v491, v506
+v507 <- LoadString 'foo'
+v508 <- CallMethod v85, 'defineProperty', [v481, v507, v491]
+v509 <- LoadBoolean 'false'
+v510 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v509
+    ObjectLiteralAddProperty `enumerable`, v510
+    ObjectLiteralAddProperty `set`, v42
+    ObjectLiteralAddProperty `get`, v44
+v511 <- EndObjectLiteral
+Reassign v491, v511
+v512 <- LoadString 'foo'
+v513 <- CallMethod v85, 'defineProperty', [v481, v512, v491]
+v514 <- LoadString 'foo'
+v515 <- CallMethod v90, 'getOwnPropertyDescriptor', [v481, v514]
+Reassign v92, v515
+v516 <- GetProperty v92, 'get'
+v517 <- CallFunction v44, []
+v518 <- GetProperty v92, 'set'
+v519 <- CallFunction v42, []
+v520 <- GetProperty v92, 'enumerable'
+v521 <- GetProperty v92, 'configurable'
+v522 <- LoadString 'bar'
+v523 <- CallMethod v85, 'defineProperty', [v481, v522, v72]
+v524 <- LoadString 'bar'
+v525 <- CallMethod v85, 'defineProperty', [v481, v524, v72]
+v526 <- LoadBoolean 'false'
+v527 <- LoadBoolean 'false'
+v528 <- LoadBoolean 'false'
+v529 <- LoadInteger '1999'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v526
+    ObjectLiteralAddProperty `enumerable`, v527
+    ObjectLiteralAddProperty `writable`, v528
+    ObjectLiteralAddProperty `value`, v529
+v530 <- EndObjectLiteral
+Reassign v491, v530
+v531 <- LoadString 'bar'
+v532 <- CallMethod v85, 'defineProperty', [v481, v531, v491]
+v533 <- LoadBoolean 'false'
+v534 <- LoadBoolean 'false'
+v535 <- LoadBoolean 'true'
+v536 <- LoadInteger '2000'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v533
+    ObjectLiteralAddProperty `enumerable`, v534
+    ObjectLiteralAddProperty `writable`, v535
+    ObjectLiteralAddProperty `value`, v536
+v537 <- EndObjectLiteral
+Reassign v491, v537
+v538 <- LoadString 'bar'
+v539 <- CallMethod v85, 'defineProperty', [v481, v538, v491]
+v540 <- LoadBoolean 'false'
+v541 <- LoadBoolean 'true'
+v542 <- LoadBoolean 'false'
+v543 <- LoadInteger '2000'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v540
+    ObjectLiteralAddProperty `enumerable`, v541
+    ObjectLiteralAddProperty `writable`, v542
+    ObjectLiteralAddProperty `value`, v543
+v544 <- EndObjectLiteral
+Reassign v491, v544
+v545 <- LoadString 'bar'
+v546 <- CallMethod v85, 'defineProperty', [v481, v545, v491]
+v547 <- LoadBoolean 'true'
+v548 <- LoadBoolean 'false'
+v549 <- LoadBoolean 'false'
+v550 <- LoadInteger '2000'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v547
+    ObjectLiteralAddProperty `enumerable`, v548
+    ObjectLiteralAddProperty `writable`, v549
+    ObjectLiteralAddProperty `value`, v550
+v551 <- EndObjectLiteral
+Reassign v491, v551
+v552 <- LoadString 'bar'
+v553 <- CallMethod v85, 'defineProperty', [v481, v552, v491]
+v554 <- LoadBoolean 'false'
+v555 <- LoadBoolean 'false'
+v556 <- LoadBoolean 'false'
+v557 <- LoadInteger '2000'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v554
+    ObjectLiteralAddProperty `enumerable`, v555
+    ObjectLiteralAddProperty `writable`, v556
+    ObjectLiteralAddProperty `value`, v557
+v558 <- EndObjectLiteral
+Reassign v491, v558
+v559 <- LoadString 'bar'
+v560 <- CallMethod v85, 'defineProperty', [v481, v559, v491]
+v561 <- LoadString 'bar'
+v562 <- CallMethod v90, 'getOwnPropertyDescriptor', [v481, v561]
+Reassign v92, v562
+v563 <- GetProperty v92, 'value'
+v564 <- LoadInteger '2000'
+v565 <- GetProperty v92, 'writable'
+v566 <- GetProperty v92, 'enumerable'
+v567 <- GetProperty v92, 'configurable'
+v568 <- LoadInteger '0'
+v569 <- UnaryOperation '-', v568
+v570 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v569
+    ObjectLiteralAddProperty `configurable`, v570
+v571 <- EndObjectLiteral
+v572 <- CreateNamedVariable 'descMinusZero', 'var', v571
+v573 <- LoadInteger '0'
+v574 <- UnaryOperation '+', v573
+v575 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v574
+    ObjectLiteralAddProperty `configurable`, v575
+v576 <- EndObjectLiteral
+v577 <- CreateNamedVariable 'descPlusZero', 'var', v576
+v578 <- LoadString 'minuszero'
+v579 <- CallMethod v85, 'defineProperty', [v481, v578, v572]
+v580 <- LoadString 'minuszero'
+v581 <- CallMethod v85, 'defineProperty', [v481, v580, v572]
+v582 <- LoadString 'minuszero'
+v583 <- CallMethod v85, 'defineProperty', [v481, v582, v577]
+v584 <- LoadString 'pluszero'
+v585 <- CallMethod v85, 'defineProperty', [v481, v584, v577]
+v586 <- LoadString 'pluszero'
+v587 <- CallMethod v85, 'defineProperty', [v481, v586, v577]
+v588 <- LoadString 'pluszero'
+v589 <- CallMethod v85, 'defineProperty', [v481, v588, v572]
+BeginObjectLiteral
+v590 <- EndObjectLiteral
+v591 <- CreateNamedVariable 'obj6', 'var', v590
+v592 <- LoadString 'foo'
+SetElement v591, '1', v592
+v593 <- LoadString 'bar'
+SetElement v591, '2', v593
+v594 <- LoadString '42'
+SetElement v591, '3', v594
+v595 <- LoadString '43'
+SetElement v591, '4', v595
+v596 <- LoadString '44'
+SetElement v591, '5', v596
+v597 <- LoadString 'foobar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v597
+v598 <- EndObjectLiteral
+v599 <- CreateNamedVariable 'descElement', 'var', v598
+v600 <- LoadString 'barfoo'
+v601 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v600
+    ObjectLiteralAddProperty `configurable`, v601
+v602 <- EndObjectLiteral
+v603 <- CreateNamedVariable 'descElementNonConfigurable', 'var', v602
+v604 <- LoadString 'foofoo'
+v605 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v604
+    ObjectLiteralAddProperty `writable`, v605
+v606 <- EndObjectLiteral
+v607 <- CreateNamedVariable 'descElementNonWritable', 'var', v606
+v608 <- LoadString 'barbar'
+v609 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v608
+    ObjectLiteralAddProperty `enumerable`, v609
+v610 <- EndObjectLiteral
+v611 <- CreateNamedVariable 'descElementNonEnumerable', 'var', v610
+v612 <- LoadString 'foofalse'
+v613 <- LoadBoolean 'false'
+v614 <- LoadBoolean 'false'
+v615 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v612
+    ObjectLiteralAddProperty `configurable`, v613
+    ObjectLiteralAddProperty `writable`, v614
+    ObjectLiteralAddProperty `enumerable`, v615
+v616 <- EndObjectLiteral
+v617 <- CreateNamedVariable 'descElementAllFalse', 'var', v616
+v618 <- LoadString '1'
+v619 <- CallMethod v85, 'defineProperty', [v591, v618, v599]
+v620 <- LoadString '1'
+v621 <- CallMethod v90, 'getOwnPropertyDescriptor', [v591, v620]
+Reassign v92, v621
+v622 <- GetProperty v92, 'value'
+v623 <- LoadString 'foobar'
+v624 <- GetProperty v92, 'writable'
+v625 <- GetProperty v92, 'enumerable'
+v626 <- GetProperty v92, 'configurable'
+v627 <- LoadString '2'
+v628 <- CallMethod v85, 'defineProperty', [v591, v627, v603]
+v629 <- LoadString '2'
+v630 <- CallMethod v90, 'getOwnPropertyDescriptor', [v591, v629]
+Reassign v92, v630
+v631 <- GetProperty v92, 'value'
+v632 <- LoadString 'barfoo'
+v633 <- GetProperty v92, 'writable'
+v634 <- GetProperty v92, 'enumerable'
+v635 <- GetProperty v92, 'configurable'
+BeginTry
+    v636 <- LoadString '2'
+    v637 <- CallMethod v85, 'defineProperty', [v591, v636, v599]
+    v638 <- LoadString '2'
+    v639 <- CallMethod v90, 'getOwnPropertyDescriptor', [v591, v638]
+    Reassign v92, v639
+    v640 <- GetProperty v92, 'value'
+    v641 <- LoadString 'foobar'
+BeginCatch -> v642
+EndTryCatch
+v643 <- BeginPlainFunction -> 
+    v644 <- LoadInteger '0'
+    Return v644
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v643
+v645 <- EndObjectLiteral
+v646 <- CreateNamedVariable 'descAccessor', 'var', v645
+v647 <- LoadString '2'
+v648 <- CallMethod v85, 'defineProperty', [v591, v647, v646]
+v649 <- LoadString '2'
+v650 <- CallMethod v85, 'defineProperty', [v591, v649, v607]
+v651 <- LoadString '2'
+v652 <- CallMethod v90, 'getOwnPropertyDescriptor', [v591, v651]
+Reassign v92, v652
+v653 <- GetProperty v92, 'value'
+v654 <- LoadString 'foofoo'
+v655 <- GetProperty v92, 'writable'
+v656 <- GetProperty v92, 'enumerable'
+v657 <- GetProperty v92, 'configurable'
+v658 <- LoadString '3'
+v659 <- CallMethod v85, 'defineProperty', [v591, v658, v607]
+v660 <- LoadString '3'
+v661 <- CallMethod v90, 'getOwnPropertyDescriptor', [v591, v660]
+Reassign v92, v661
+v662 <- GetProperty v92, 'value'
+v663 <- LoadString 'foofoo'
+v664 <- GetProperty v92, 'writable'
+v665 <- GetProperty v92, 'enumerable'
+v666 <- GetProperty v92, 'configurable'
+v667 <- LoadString '4'
+v668 <- CallMethod v85, 'defineProperty', [v591, v667, v611]
+v669 <- LoadString '4'
+v670 <- CallMethod v90, 'getOwnPropertyDescriptor', [v591, v669]
+Reassign v92, v670
+v671 <- GetProperty v92, 'value'
+v672 <- LoadString 'barbar'
+v673 <- GetProperty v92, 'writable'
+v674 <- GetProperty v92, 'enumerable'
+v675 <- GetProperty v92, 'configurable'
+v676 <- LoadString '5'
+v677 <- CallMethod v85, 'defineProperty', [v591, v676, v617]
+v678 <- LoadString '5'
+v679 <- CallMethod v90, 'getOwnPropertyDescriptor', [v591, v678]
+Reassign v92, v679
+v680 <- GetProperty v92, 'value'
+v681 <- LoadString 'foofalse'
+v682 <- GetProperty v92, 'writable'
+v683 <- GetProperty v92, 'enumerable'
+v684 <- GetProperty v92, 'configurable'
+v685 <- LoadString '15'
+v686 <- CallMethod v85, 'defineProperty', [v591, v685, v599]
+v687 <- LoadString '15'
+v688 <- CallMethod v90, 'getOwnPropertyDescriptor', [v591, v687]
+Reassign v92, v688
+v689 <- GetProperty v92, 'value'
+v690 <- LoadString 'foobar'
+v691 <- GetProperty v92, 'writable'
+v692 <- GetProperty v92, 'enumerable'
+v693 <- GetProperty v92, 'configurable'
+v694 <- LoadString 'overwrite'
+SetElement v591, '15', v694
+v695 <- GetElement v591, '15'
+v696 <- LoadString 'foobar'
+v697 <- CreateNamedVariable 'Array', 'none'
+v698 <- Construct v697, []
+v699 <- CreateNamedVariable 'arr', 'var', v698
+v700 <- LoadString 'foo'
+SetElement v699, '1', v700
+v701 <- LoadString 'bar'
+SetElement v699, '2', v701
+v702 <- LoadString '42'
+SetElement v699, '3', v702
+v703 <- LoadString '43'
+SetElement v699, '4', v703
+v704 <- LoadString '44'
+SetElement v699, '5', v704
+v705 <- LoadString 'foobar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v705
+v706 <- EndObjectLiteral
+v707 <- CreateNamedVariable 'descElement', 'var', v706
+v708 <- LoadString 'barfoo'
+v709 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v708
+    ObjectLiteralAddProperty `configurable`, v709
+v710 <- EndObjectLiteral
+v711 <- CreateNamedVariable 'descElementNonConfigurable', 'var', v710
+v712 <- LoadString 'foofoo'
+v713 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v712
+    ObjectLiteralAddProperty `writable`, v713
+v714 <- EndObjectLiteral
+v715 <- CreateNamedVariable 'descElementNonWritable', 'var', v714
+v716 <- LoadString 'barbar'
+v717 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v716
+    ObjectLiteralAddProperty `enumerable`, v717
+v718 <- EndObjectLiteral
+v719 <- CreateNamedVariable 'descElementNonEnumerable', 'var', v718
+v720 <- LoadString 'foofalse'
+v721 <- LoadBoolean 'false'
+v722 <- LoadBoolean 'false'
+v723 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v720
+    ObjectLiteralAddProperty `configurable`, v721
+    ObjectLiteralAddProperty `writable`, v722
+    ObjectLiteralAddProperty `enumerable`, v723
+v724 <- EndObjectLiteral
+v725 <- CreateNamedVariable 'descElementAllFalse', 'var', v724
+v726 <- LoadString '1'
+v727 <- CallMethod v85, 'defineProperty', [v699, v726, v707]
+v728 <- LoadString '1'
+v729 <- CallMethod v90, 'getOwnPropertyDescriptor', [v699, v728]
+Reassign v92, v729
+v730 <- GetProperty v92, 'value'
+v731 <- LoadString 'foobar'
+v732 <- GetProperty v92, 'writable'
+v733 <- GetProperty v92, 'enumerable'
+v734 <- GetProperty v92, 'configurable'
+v735 <- LoadString '2'
+v736 <- CallMethod v85, 'defineProperty', [v699, v735, v711]
+v737 <- LoadString '2'
+v738 <- CallMethod v90, 'getOwnPropertyDescriptor', [v699, v737]
+Reassign v92, v738
+v739 <- GetProperty v92, 'value'
+v740 <- LoadString 'barfoo'
+v741 <- GetProperty v92, 'writable'
+v742 <- GetProperty v92, 'enumerable'
+v743 <- GetProperty v92, 'configurable'
+BeginTry
+    v744 <- LoadString '2'
+    v745 <- CallMethod v85, 'defineProperty', [v699, v744, v707]
+    v746 <- LoadString '2'
+    v747 <- CallMethod v90, 'getOwnPropertyDescriptor', [v699, v746]
+    Reassign v92, v747
+    v748 <- GetProperty v92, 'value'
+    v749 <- LoadString 'foobar'
+BeginCatch -> v750
+EndTryCatch
+v751 <- BeginPlainFunction -> 
+    v752 <- LoadInteger '0'
+    Return v752
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v751
+v753 <- EndObjectLiteral
+v754 <- CreateNamedVariable 'descAccessor', 'var', v753
+v755 <- LoadString '2'
+v756 <- CallMethod v85, 'defineProperty', [v699, v755, v754]
+v757 <- LoadString '2'
+v758 <- CallMethod v85, 'defineProperty', [v699, v757, v715]
+v759 <- LoadString '2'
+v760 <- CallMethod v90, 'getOwnPropertyDescriptor', [v699, v759]
+Reassign v92, v760
+v761 <- GetProperty v92, 'value'
+v762 <- LoadString 'foofoo'
+v763 <- GetProperty v92, 'writable'
+v764 <- GetProperty v92, 'enumerable'
+v765 <- GetProperty v92, 'configurable'
+v766 <- LoadString '3'
+v767 <- CallMethod v85, 'defineProperty', [v699, v766, v715]
+v768 <- LoadString '3'
+v769 <- CallMethod v90, 'getOwnPropertyDescriptor', [v699, v768]
+Reassign v92, v769
+v770 <- GetProperty v92, 'value'
+v771 <- LoadString 'foofoo'
+v772 <- GetProperty v92, 'writable'
+v773 <- GetProperty v92, 'enumerable'
+v774 <- GetProperty v92, 'configurable'
+v775 <- LoadString '4'
+v776 <- CallMethod v85, 'defineProperty', [v699, v775, v719]
+v777 <- LoadString '4'
+v778 <- CallMethod v90, 'getOwnPropertyDescriptor', [v699, v777]
+Reassign v92, v778
+v779 <- GetProperty v92, 'value'
+v780 <- LoadString 'barbar'
+v781 <- GetProperty v92, 'writable'
+v782 <- GetProperty v92, 'enumerable'
+v783 <- GetProperty v92, 'configurable'
+v784 <- LoadString '5'
+v785 <- CallMethod v85, 'defineProperty', [v699, v784, v725]
+v786 <- LoadString '5'
+v787 <- CallMethod v90, 'getOwnPropertyDescriptor', [v699, v786]
+Reassign v92, v787
+v788 <- GetProperty v92, 'value'
+v789 <- LoadString 'foofalse'
+v790 <- GetProperty v92, 'writable'
+v791 <- GetProperty v92, 'enumerable'
+v792 <- GetProperty v92, 'configurable'
+v793 <- LoadString '15'
+v794 <- CallMethod v85, 'defineProperty', [v699, v793, v707]
+v795 <- LoadString '15'
+v796 <- CallMethod v90, 'getOwnPropertyDescriptor', [v699, v795]
+Reassign v92, v796
+v797 <- GetProperty v92, 'value'
+v798 <- LoadString 'foobar'
+v799 <- GetProperty v92, 'writable'
+v800 <- GetProperty v92, 'enumerable'
+v801 <- GetProperty v92, 'configurable'
+v802 <- LoadInteger '16'
+v803 <- GetProperty v699, 'length'
+v804 <- LoadString '0x20'
+v805 <- CallMethod v85, 'defineProperty', [v699, v804, v707]
+v806 <- LoadInteger '16'
+v807 <- GetProperty v699, 'length'
+v808 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v808
+v809 <- EndObjectLiteral
+v810 <- CreateNamedVariable 'o', 'var', v809
+v811 <- LoadString 'x'
+v812 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v812
+v813 <- EndObjectLiteral
+v814 <- CallMethod v85, 'defineProperty', [v810, v811, v813]
+v815 <- LoadInteger '42'
+v816 <- GetProperty v810, 'x'
+v817 <- LoadInteger '37'
+SetProperty v810, 'x', v817
+v818 <- LoadInteger '42'
+v819 <- GetProperty v810, 'x'
+v820 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v820
+v821 <- EndObjectLiteral
+Reassign v810, v821
+v822 <- LoadString 'x'
+BeginObjectLiteral
+v823 <- EndObjectLiteral
+v824 <- CallMethod v85, 'defineProperty', [v810, v822, v823]
+v825 <- LoadInteger '42'
+v826 <- GetProperty v810, 'x'
+v827 <- LoadInteger '37'
+SetProperty v810, 'x', v827
+v828 <- LoadInteger '37'
+v829 <- GetProperty v810, 'x'
+BeginObjectLiteral
+v830 <- EndObjectLiteral
+v831 <- CreateNamedVariable 'o', 'var', v830
+v832 <- LoadString 'x'
+v833 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v833
+v834 <- EndObjectLiteral
+v835 <- CallMethod v85, 'defineProperty', [v831, v832, v834]
+v836 <- LoadUndefined
+v837 <- GetProperty v831, 'x'
+v838 <- LoadInteger '37'
+SetProperty v831, 'x', v838
+v839 <- LoadUndefined
+v840 <- GetProperty v831, 'x'
+BeginObjectLiteral
+    BeginObjectLiteralGetter `x` -> v841
+        v842 <- LoadInteger '87'
+        Return v842
+    EndObjectLiteralGetter
+v843 <- EndObjectLiteral
+Reassign v831, v843
+v844 <- LoadString 'x'
+v845 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v845
+v846 <- EndObjectLiteral
+v847 <- CallMethod v85, 'defineProperty', [v831, v844, v846]
+v848 <- LoadUndefined
+v849 <- GetProperty v831, 'x'
+v850 <- LoadInteger '37'
+SetProperty v831, 'x', v850
+v851 <- LoadUndefined
+v852 <- GetProperty v831, 'x'
+v853 <- LoadInteger '87'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v853
+v854 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v854
+v855 <- EndObjectLiteral
+Reassign v831, v855
+v856 <- LoadString 'x'
+v857 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v857
+v858 <- EndObjectLiteral
+v859 <- CallMethod v85, 'defineProperty', [v831, v856, v858]
+v860 <- LoadUndefined
+v861 <- GetProperty v831, 'x'
+v862 <- LoadInteger '37'
+SetProperty v831, 'x', v862
+v863 <- LoadUndefined
+v864 <- GetProperty v831, 'x'
+v865 <- BeginPlainFunction -> v866, v867, v868, v869
+    v870 <- CallMethod v85, 'defineProperty', [v866, v867, v868]
+    v871 <- CallMethod v90, 'getOwnPropertyDescriptor', [v866, v867]
+    v872 <- CreateNamedVariable 'actualDesc', 'var', v871
+    v873 <- GetProperty v869, 'enumerable'
+    v874 <- GetProperty v872, 'enumerable'
+    v875 <- GetProperty v869, 'configurable'
+    v876 <- GetProperty v872, 'configurable'
+    v877 <- LoadString 'value'
+    v878 <- CallMethod v869, 'hasOwnProperty', [v877]
+    BeginIf v878
+        v879 <- GetProperty v869, 'value'
+        v880 <- GetProperty v872, 'value'
+        v881 <- GetProperty v869, 'writable'
+        v882 <- GetProperty v872, 'writable'
+        v883 <- LoadString 'get'
+        v884 <- CallMethod v869, 'hasOwnProperty', [v883]
+        v885 <- LoadString 'set'
+        v886 <- CallMethod v869, 'hasOwnProperty', [v885]
+    BeginElse
+        v887 <- GetProperty v869, 'get'
+        v888 <- GetProperty v872, 'get'
+        v889 <- GetProperty v869, 'set'
+        v890 <- GetProperty v872, 'set'
+        v891 <- LoadString 'value'
+        v892 <- CallMethod v869, 'hasOwnProperty', [v891]
+        v893 <- LoadString 'writable'
+        v894 <- CallMethod v869, 'hasOwnProperty', [v893]
+    EndIf
+EndPlainFunction
+v895 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `p`, v895
+v896 <- EndObjectLiteral
+Reassign v831, v896
+v897 <- LoadString 'p'
+BeginObjectLiteral
+v898 <- EndObjectLiteral
+v899 <- LoadInteger '42'
+v900 <- LoadBoolean 'true'
+v901 <- LoadBoolean 'true'
+v902 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v899
+    ObjectLiteralAddProperty `writable`, v900
+    ObjectLiteralAddProperty `enumerable`, v901
+    ObjectLiteralAddProperty `configurable`, v902
+v903 <- EndObjectLiteral
+v904 <- CallFunction v865, [v831, v897, v898, v903]
+v905 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `p`, v905
+v906 <- EndObjectLiteral
+Reassign v831, v906
+v907 <- LoadString 'p'
+v908 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v908
+v909 <- EndObjectLiteral
+v910 <- LoadInteger '42'
+v911 <- LoadBoolean 'true'
+v912 <- LoadBoolean 'true'
+v913 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v910
+    ObjectLiteralAddProperty `writable`, v911
+    ObjectLiteralAddProperty `enumerable`, v912
+    ObjectLiteralAddProperty `configurable`, v913
+v914 <- EndObjectLiteral
+v915 <- CallFunction v865, [v831, v907, v909, v914]
+v916 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `p`, v916
+v917 <- EndObjectLiteral
+Reassign v831, v917
+v918 <- LoadString 'p'
+v919 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v919
+v920 <- EndObjectLiteral
+v921 <- LoadInteger '42'
+v922 <- LoadBoolean 'true'
+v923 <- LoadBoolean 'true'
+v924 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v921
+    ObjectLiteralAddProperty `writable`, v922
+    ObjectLiteralAddProperty `enumerable`, v923
+    ObjectLiteralAddProperty `configurable`, v924
+v925 <- EndObjectLiteral
+v926 <- CallFunction v865, [v831, v918, v920, v925]
+v927 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `p`, v927
+v928 <- EndObjectLiteral
+Reassign v831, v928
+v929 <- LoadString 'p'
+v930 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v930
+v931 <- EndObjectLiteral
+v932 <- LoadInteger '42'
+v933 <- LoadBoolean 'true'
+v934 <- LoadBoolean 'false'
+v935 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v932
+    ObjectLiteralAddProperty `writable`, v933
+    ObjectLiteralAddProperty `enumerable`, v934
+    ObjectLiteralAddProperty `configurable`, v935
+v936 <- EndObjectLiteral
+v937 <- CallFunction v865, [v831, v929, v931, v936]
+v938 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `p`, v938
+v939 <- EndObjectLiteral
+Reassign v831, v939
+v940 <- LoadString 'p'
+v941 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v941
+v942 <- EndObjectLiteral
+v943 <- LoadInteger '42'
+v944 <- LoadBoolean 'true'
+v945 <- LoadBoolean 'true'
+v946 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v943
+    ObjectLiteralAddProperty `writable`, v944
+    ObjectLiteralAddProperty `enumerable`, v945
+    ObjectLiteralAddProperty `configurable`, v946
+v947 <- EndObjectLiteral
+v948 <- CallFunction v865, [v831, v940, v942, v947]
+v949 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `p`, v949
+v950 <- EndObjectLiteral
+Reassign v831, v950
+v951 <- LoadString 'p'
+v952 <- LoadBoolean 'true'
+v953 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v952
+    ObjectLiteralAddProperty `configurable`, v953
+v954 <- EndObjectLiteral
+v955 <- LoadInteger '42'
+v956 <- LoadBoolean 'true'
+v957 <- LoadBoolean 'true'
+v958 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v955
+    ObjectLiteralAddProperty `writable`, v956
+    ObjectLiteralAddProperty `enumerable`, v957
+    ObjectLiteralAddProperty `configurable`, v958
+v959 <- EndObjectLiteral
+v960 <- CallFunction v865, [v831, v951, v954, v959]
+v961 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `p`, v961
+v962 <- EndObjectLiteral
+Reassign v831, v962
+v963 <- LoadString 'p'
+v964 <- LoadBoolean 'false'
+v965 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v964
+    ObjectLiteralAddProperty `configurable`, v965
+v966 <- EndObjectLiteral
+v967 <- LoadInteger '42'
+v968 <- LoadBoolean 'true'
+v969 <- LoadBoolean 'false'
+v970 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v967
+    ObjectLiteralAddProperty `writable`, v968
+    ObjectLiteralAddProperty `enumerable`, v969
+    ObjectLiteralAddProperty `configurable`, v970
+v971 <- EndObjectLiteral
+v972 <- CallFunction v865, [v831, v963, v966, v971]
+v973 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `p`, v973
+v974 <- EndObjectLiteral
+Reassign v831, v974
+v975 <- LoadString 'p'
+v976 <- LoadBoolean 'true'
+v977 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v976
+    ObjectLiteralAddProperty `configurable`, v977
+v978 <- EndObjectLiteral
+v979 <- LoadInteger '42'
+v980 <- LoadBoolean 'true'
+v981 <- LoadBoolean 'true'
+v982 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v979
+    ObjectLiteralAddProperty `writable`, v980
+    ObjectLiteralAddProperty `enumerable`, v981
+    ObjectLiteralAddProperty `configurable`, v982
+v983 <- EndObjectLiteral
+v984 <- CallFunction v865, [v831, v975, v978, v983]
+v985 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `p`, v985
+v986 <- EndObjectLiteral
+Reassign v831, v986
+v987 <- LoadString 'p'
+v988 <- LoadBoolean 'false'
+v989 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v988
+    ObjectLiteralAddProperty `configurable`, v989
+v990 <- EndObjectLiteral
+v991 <- LoadInteger '42'
+v992 <- LoadBoolean 'true'
+v993 <- LoadBoolean 'false'
+v994 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v991
+    ObjectLiteralAddProperty `writable`, v992
+    ObjectLiteralAddProperty `enumerable`, v993
+    ObjectLiteralAddProperty `configurable`, v994
+v995 <- EndObjectLiteral
+v996 <- CallFunction v865, [v831, v987, v990, v995]
+v997 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `p`, v997
+v998 <- EndObjectLiteral
+Reassign v831, v998
+v999 <- LoadString 'p'
+v1000 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v1000
+v1001 <- EndObjectLiteral
+v1002 <- CallMethod v85, 'defineProperty', [v831, v999, v1001]
+v1003 <- LoadString 'p'
+v1004 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v1004
+v1005 <- EndObjectLiteral
+v1006 <- LoadInteger '42'
+v1007 <- LoadBoolean 'false'
+v1008 <- LoadBoolean 'true'
+v1009 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v1006
+    ObjectLiteralAddProperty `writable`, v1007
+    ObjectLiteralAddProperty `enumerable`, v1008
+    ObjectLiteralAddProperty `configurable`, v1009
+v1010 <- EndObjectLiteral
+v1011 <- CallFunction v865, [v831, v1003, v1005, v1010]
+BeginObjectLiteral
+v1012 <- EndObjectLiteral
+Reassign v831, v1012
+v1013 <- LoadString 'p'
+v1014 <- LoadBoolean 'true'
+v1015 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v41
+    ObjectLiteralAddProperty `enumerable`, v1014
+    ObjectLiteralAddProperty `configurable`, v1015
+v1016 <- EndObjectLiteral
+v1017 <- CallMethod v85, 'defineProperty', [v831, v1013, v1016]
+v1018 <- LoadString 'p'
+v1019 <- LoadBoolean 'false'
+v1020 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v1019
+    ObjectLiteralAddProperty `configurable`, v1020
+v1021 <- EndObjectLiteral
+v1022 <- LoadUndefined
+v1023 <- LoadBoolean 'false'
+v1024 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v41
+    ObjectLiteralAddProperty `set`, v1022
+    ObjectLiteralAddProperty `enumerable`, v1023
+    ObjectLiteralAddProperty `configurable`, v1024
+v1025 <- EndObjectLiteral
+v1026 <- CallFunction v865, [v831, v1018, v1021, v1025]
+BeginObjectLiteral
+v1027 <- EndObjectLiteral
+Reassign v831, v1027
+v1028 <- LoadString 'p'
+v1029 <- LoadBoolean 'true'
+v1030 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v41
+    ObjectLiteralAddProperty `set`, v39
+    ObjectLiteralAddProperty `enumerable`, v1029
+    ObjectLiteralAddProperty `configurable`, v1030
+v1031 <- EndObjectLiteral
+v1032 <- CallMethod v85, 'defineProperty', [v831, v1028, v1031]
+v1033 <- LoadString 'p'
+v1034 <- LoadBoolean 'false'
+v1035 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v1034
+    ObjectLiteralAddProperty `configurable`, v1035
+v1036 <- EndObjectLiteral
+v1037 <- LoadBoolean 'false'
+v1038 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v41
+    ObjectLiteralAddProperty `set`, v39
+    ObjectLiteralAddProperty `enumerable`, v1037
+    ObjectLiteralAddProperty `configurable`, v1038
+v1039 <- EndObjectLiteral
+v1040 <- CallFunction v865, [v831, v1033, v1036, v1039]
+BeginObjectLiteral
+v1041 <- EndObjectLiteral
+Reassign v831, v1041
+v1042 <- LoadString 'p'
+v1043 <- LoadBoolean 'true'
+v1044 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v39
+    ObjectLiteralAddProperty `enumerable`, v1043
+    ObjectLiteralAddProperty `configurable`, v1044
+v1045 <- EndObjectLiteral
+v1046 <- CallMethod v85, 'defineProperty', [v831, v1042, v1045]
+v1047 <- LoadString 'p'
+v1048 <- LoadBoolean 'false'
+v1049 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v1048
+    ObjectLiteralAddProperty `configurable`, v1049
+v1050 <- EndObjectLiteral
+v1051 <- LoadUndefined
+v1052 <- LoadBoolean 'false'
+v1053 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v1051
+    ObjectLiteralAddProperty `set`, v39
+    ObjectLiteralAddProperty `enumerable`, v1052
+    ObjectLiteralAddProperty `configurable`, v1053
+v1054 <- EndObjectLiteral
+v1055 <- CallFunction v865, [v831, v1047, v1050, v1054]
+BeginObjectLiteral
+v1056 <- EndObjectLiteral
+Reassign v831, v1056
+BeginForLoopInitializer
+    v1057 <- LoadInteger '0'
+BeginForLoopCondition -> v1058
+    v1059 <- LoadInteger '1000'
+    v1060 <- Compare v1058, '<', v1059
+BeginForLoopAfterthought v1060 -> v1061
+    v1062 <- UnaryOperation v1061, '++'
+BeginForLoopBody -> v1063
+    v1064 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v1063
+        ObjectLiteralAddProperty `enumerable`, v1064
+    v1065 <- EndObjectLiteral
+    v1066 <- CallMethod v85, 'defineProperty', [v831, v1063, v1065]
+EndForLoop
+v1067 <- LoadInteger '999'
+v1068 <- GetElement v831, '999'
+BeginObjectLiteral
+v1069 <- EndObjectLiteral
+v1070 <- CreateNamedVariable 'objectWithGetter', 'var', v1069
+v1071 <- LoadString 'foo'
+v1072 <- BeginPlainFunction -> 
+EndPlainFunction
+v1073 <- CallMethod v1070, '__defineGetter__', [v1071, v1072]
+v1074 <- LoadUndefined
+v1075 <- LoadString 'foo'
+v1076 <- CallMethod v1070, '__lookupSetter__', [v1075]
+BeginObjectLiteral
+v1077 <- EndObjectLiteral
+v1078 <- CreateNamedVariable 'objectWithSetter', 'var', v1077
+v1079 <- LoadString 'foo'
+v1080 <- BeginPlainFunction -> v1081
+EndPlainFunction
+v1082 <- CallMethod v1078, '__defineSetter__', [v1079, v1080]
+v1083 <- LoadUndefined
+v1084 <- LoadString 'foo'
+v1085 <- CallMethod v1078, '__lookupGetter__', [v1084]
+v1086 <- BeginPlainFunction -> 
+    v1087 <- LoadInteger '111'
+    Return v1087
+EndPlainFunction
+v1088 <- BeginPlainFunction -> 
+    v1089 <- LoadInteger '222'
+    Return v1089
+EndPlainFunction
+v1090 <- BeginPlainFunction -> v1091, v1092
+    v1093 <- GetProperty v1092, 'quebec'
+EndPlainFunction
+BeginObjectLiteral
+v1094 <- EndObjectLiteral
+Reassign v32, v1094
+v1095 <- LoadString 'quebec'
+v1096 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v1086
+    ObjectLiteralAddProperty `configurable`, v1096
+v1097 <- EndObjectLiteral
+v1098 <- CallMethod v85, 'defineProperty', [v32, v1095, v1097]
+v1099 <- CallMethod v90, 'create', [v32]
+Reassign v305, v1099
+v1100 <- CallMethod v90, 'create', [v305]
+Reassign v388, v1100
+v1101 <- LoadInteger '111'
+v1102 <- CallFunction v1090, [v1101, v388]
+v1103 <- LoadInteger '111'
+v1104 <- CallFunction v1090, [v1103, v388]
+v1105 <- LoadInteger '111'
+v1106 <- CallFunction v1090, [v1105, v388]
+v1107 <- LoadInteger '111'
+v1108 <- CallFunction v1090, [v1107, v388]
+v1109 <- LoadString 'quebec'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v1088
+v1110 <- EndObjectLiteral
+v1111 <- CallMethod v85, 'defineProperty', [v32, v1109, v1110]
+v1112 <- LoadInteger '222'
+v1113 <- CallFunction v1090, [v1112, v388]
+v1114 <- LoadInteger '222'
+v1115 <- CallFunction v1090, [v1114, v388]
+v1116 <- LoadInteger '222'
+v1117 <- CallFunction v1090, [v1116, v388]
+v1118 <- LoadInteger '222'
+v1119 <- CallFunction v1090, [v1118, v388]
+v1120 <- LoadUndefined
+v1121 <- CreateNamedVariable 'modifyMe', 'var', v1120
+v1122 <- BeginPlainFunction -> v1123
+    v1124 <- LoadInteger '1'
+    v1125 <- BinaryOperation v1123, '+', v1124
+    Reassign v1121, v1125
+EndPlainFunction
+v1126 <- BeginPlainFunction -> v1127
+    v1128 <- LoadInteger '2'
+    v1129 <- BinaryOperation v1127, '+', v1128
+    Reassign v1121, v1129
+EndPlainFunction
+v1130 <- BeginPlainFunction -> v1131, v1132
+    v1133 <- LoadInteger '333'
+    Reassign v1121, v1133
+    v1134 <- LoadInteger '444'
+    SetProperty v1132, 'romeo', v1134
+EndPlainFunction
+BeginObjectLiteral
+v1135 <- EndObjectLiteral
+Reassign v32, v1135
+v1136 <- LoadString 'romeo'
+v1137 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v1122
+    ObjectLiteralAddProperty `configurable`, v1137
+v1138 <- EndObjectLiteral
+v1139 <- CallMethod v85, 'defineProperty', [v32, v1136, v1138]
+v1140 <- CallMethod v90, 'create', [v32]
+Reassign v305, v1140
+v1141 <- CallMethod v90, 'create', [v305]
+Reassign v388, v1141
+v1142 <- LoadInteger '445'
+v1143 <- CallFunction v1130, [v1142, v388]
+v1144 <- LoadInteger '445'
+v1145 <- CallFunction v1130, [v1144, v388]
+v1146 <- LoadInteger '445'
+v1147 <- CallFunction v1130, [v1146, v388]
+v1148 <- LoadInteger '445'
+v1149 <- CallFunction v1130, [v1148, v388]
+v1150 <- LoadString 'romeo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v1126
+v1151 <- EndObjectLiteral
+v1152 <- CallMethod v85, 'defineProperty', [v32, v1150, v1151]
+v1153 <- LoadInteger '446'
+v1154 <- CallFunction v1130, [v1153, v388]
+v1155 <- LoadInteger '446'
+v1156 <- CallFunction v1130, [v1155, v388]
+v1157 <- LoadInteger '446'
+v1158 <- CallFunction v1130, [v1157, v388]
+v1159 <- LoadInteger '446'
+v1160 <- CallFunction v1130, [v1159, v388]
+v1161 <- BeginPlainFunction -> v1162
+    Directive 'use strict'
+    v1163 <- LoadInteger '12345'
+    SetProperty v1162, 'sierra', v1163
+EndPlainFunction
+BeginObjectLiteral
+v1164 <- EndObjectLiteral
+Reassign v32, v1164
+v1165 <- LoadString 'sierra'
+v1166 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v1086
+    ObjectLiteralAddProperty `set`, v1122
+    ObjectLiteralAddProperty `configurable`, v1166
+v1167 <- EndObjectLiteral
+v1168 <- CallMethod v85, 'defineProperty', [v32, v1165, v1167]
+v1169 <- CallMethod v90, 'create', [v32]
+Reassign v305, v1169
+v1170 <- CallMethod v90, 'create', [v305]
+Reassign v388, v1170
+v1171 <- CallFunction v1161, [v388]
+v1172 <- CallFunction v1161, [v388]
+v1173 <- CallFunction v1161, [v388]
+v1174 <- CallFunction v1161, [v388]
+v1175 <- LoadString 'sierra'
+v1176 <- LoadUndefined
+v1177 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v1086
+    ObjectLiteralAddProperty `set`, v1176
+    ObjectLiteralAddProperty `configurable`, v1177
+v1178 <- EndObjectLiteral
+v1179 <- CallMethod v85, 'defineProperty', [v32, v1175, v1178]
+v1180 <- LoadBoolean 'false'
+Reassign v1, v1180
+BeginTry
+    v1181 <- CallFunction v1161, [v388]
+BeginCatch -> v1182
+    v1183 <- LoadBoolean 'true'
+    Reassign v1, v1183
+    v1184 <- LoadRegExp 'which has only a getter' ''
+    v1185 <- CallMethod v1184, 'test', [v1182]
+EndTryCatch
+v1186 <- BeginPlainFunction -> v1187
+    v1188 <- LoadInteger '123'
+    SetProperty v1187, 'blubb', v1188
+EndPlainFunction
+v1189 <- BeginPlainFunction -> 
+EndPlainFunction
+v1190 <- Construct v1189, []
+v1191 <- CallFunction v1186, [v1190]
+v1192 <- Construct v1189, []
+v1193 <- CallFunction v1186, [v1192]
+v1194 <- GetProperty v1189, 'prototype'
+v1195 <- LoadString 'blubb'
+v1196 <- BeginPlainFunction -> 
+    v1197 <- LoadInteger '42'
+    v1198 <- UnaryOperation '-', v1197
+    Return v1198
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v1196
+v1199 <- EndObjectLiteral
+v1200 <- CallMethod v85, 'defineProperty', [v1194, v1195, v1199]
+v1201 <- Construct v1189, []
+v1202 <- CallFunction v1186, [v1201]
+v1203 <- BeginPlainFunction -> 
+    v1204 <- LoadInteger '23'
+    v1205 <- LoadThis
+    SetProperty v1205, 'x', v1204
+EndPlainFunction
+v1206 <- LoadInteger '23'
+v1207 <- Construct v1203, []
+v1208 <- GetProperty v1207, 'x'
+v1209 <- LoadString 'x'
+v1210 <- BeginPlainFunction -> v1211
+    v1212 <- LoadInteger '23'
+    v1213 <- LoadThis
+    SetProperty v1213, 'y', v1212
+EndPlainFunction
+v1214 <- GetProperty v1203, 'prototype'
+v1215 <- CallMethod v1214, '__defineSetter__', [v1209, v1210]
+v1216 <- LoadInteger '0'
+v1217 <- Void_ v1216
+v1218 <- Construct v1203, []
+v1219 <- GetProperty v1218, 'x'
+
+
+var exception = false;
+try {
+    Reflect.defineProperty(null, null, null);
+} catch(e7) {
+    exception = true;
+    /called on non-object/.test(e7);
+}
+exception = false;
+try {
+    Reflect.defineProperty(undefined, undefined, undefined);
+} catch(e17) {
+    exception = true;
+    /called on non-object/.test(e17);
+}
+exception = false;
+try {
+    Reflect.defineProperty(0, "foo", undefined);
+} catch(e27) {
+    exception = true;
+    /called on non-object/.test(e27);
+}
+var obj1 = {};
+var val1 = 0;
+var val2 = 0;
+var val3 = 0;
+function setter1() {
+    val1++;
+}
+function getter1() {
+    return val1;
+}
+function setter2() {
+    val2++;
+}
+function getter2() {
+    return val2;
+}
+function setter3() {
+    val3++;
+}
+function getter3() {
+    return val3;
+}
+var emptyDesc = {};
+var accessorConfigurable = { set: setter1, get: getter1, configurable: true };
+var accessorNoConfigurable = { set: setter2, get: getter2, configurable: false };
+var accessorOnlySet = { set: setter3, configurable: true };
+var accessorOnlyGet = { get: getter3, configurable: true };
+function f62() {
+}
+var accessorDefault = { set: f62 };
+var dataConfigurable = { value: 1000, configurable: true };
+var dataNoConfigurable = { value: 2000, configurable: false };
+var dataWritable = { value: 3000, writable: true };
+function f77() {
+    Reflect.defineProperty(obj1, "foo", undefined);
+}
+f77();
+Reflect.defineProperty(obj1, "foo", emptyDesc);
+obj1.foo;
+var desc = Object.getOwnPropertyDescriptor(obj1, "foo");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+desc.get;
+desc.set;
+desc.value;
+desc = Object.getOwnPropertyDescriptor(obj1, "bar");
+Reflect.defineProperty(obj1, "foo", accessorConfigurable);
+Reflect.defineProperty(obj1, "bar", accessorConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj1, "bar");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+desc.get;
+accessorConfigurable.get;
+desc.set;
+accessorConfigurable.set;
+desc.value;
+obj1.bar = 1;
+obj1.bar = 1;
+obj1.bar;
+Reflect.defineProperty(obj1, "bar", accessorNoConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj1, "bar");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+desc.get;
+accessorNoConfigurable.get;
+desc.set;
+accessorNoConfigurable.set;
+desc.value;
+obj1.bar = 1;
+obj1.bar = 1;
+obj1.bar;
+Reflect.defineProperty(obj1, "bar", accessorConfigurable);
+Reflect.defineProperty(obj1, "bar", dataConfigurable);
+Reflect.defineProperty(obj1, "bar", accessorNoConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj1, "bar");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+desc.get;
+accessorNoConfigurable.get;
+desc.set;
+accessorNoConfigurable.set;
+desc.value;
+obj1.bar = 1;
+obj1.bar = 1;
+obj1.bar;
+Reflect.defineProperty(obj1, "setOnly", accessorOnlySet);
+desc = Object.getOwnPropertyDescriptor(obj1, "setOnly");
+desc.configurable;
+desc.enumerable;
+desc.set;
+accessorOnlySet.set;
+desc.writable;
+desc.value;
+desc.get;
+obj1.setOnly = 1;
+Reflect.defineProperty(obj1, "setOnly", accessorOnlyGet);
+desc = Object.getOwnPropertyDescriptor(obj1, "setOnly");
+desc.configurable;
+desc.enumerable;
+desc.get;
+accessorOnlyGet.get;
+desc.set;
+accessorOnlySet.set;
+desc.writable;
+desc.value;
+obj1.setOnly = 1;
+Reflect.defineProperty(obj1, "both", accessorConfigurable);
+Reflect.defineProperty(obj1, "both", accessorOnlySet);
+desc = Object.getOwnPropertyDescriptor(obj1, "both");
+desc.configurable;
+desc.enumerable;
+desc.set;
+accessorOnlySet.set;
+desc.get;
+accessorConfigurable.get;
+desc.writable;
+desc.value;
+obj1.both = 1;
+Reflect.defineProperty(obj1, "foobar", dataConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj1, "foobar");
+obj1.foobar;
+desc.value;
+desc.configurable;
+desc.writable;
+desc.enumerable;
+desc.get;
+desc.set;
+obj1.foobar = 1001;
+obj1.foobar;
+Reflect.defineProperty(obj1, "foobar", dataWritable);
+desc = Object.getOwnPropertyDescriptor(obj1, "foobar");
+obj1.foobar;
+desc.value;
+desc.configurable;
+desc.writable;
+desc.enumerable;
+desc.get;
+desc.set;
+obj1.foobar = 1001;
+obj1.foobar;
+Reflect.defineProperty(obj1, "foobar", dataNoConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj1, "foobar");
+obj1.foobar;
+desc.value;
+desc.configurable;
+desc.writable;
+desc.enumerable;
+desc.get;
+desc.set;
+Reflect.defineProperty(obj1, "foobar", dataConfigurable);
+Reflect.defineProperty(obj1, "foobar", dataConfigurable);
+Reflect.defineProperty(obj1, "foobar", dataNoConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj1, "foobar");
+obj1.foobar;
+desc.value;
+desc.configurable;
+desc.writable;
+desc.enumerable;
+desc.get;
+desc.set;
+var obj2 = {};
+Reflect.defineProperty(obj2, "foo", accessorConfigurable);
+Reflect.defineProperty(obj2, "foo", dataConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj2, "foo");
+obj2.foo;
+desc.value;
+desc.configurable;
+desc.writable;
+desc.enumerable;
+desc.get;
+desc.set;
+Reflect.defineProperty(obj2, "foo", accessorConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj2, "foo");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+desc.get;
+accessorConfigurable.get;
+desc.set;
+accessorConfigurable.set;
+desc.value;
+obj2.foo = 1;
+obj2.foo;
+Reflect.defineProperty(obj2, "bar", dataConfigurable);
+Reflect.defineProperty(obj2, "bar", accessorConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj2, "bar");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+desc.get;
+accessorConfigurable.get;
+desc.set;
+accessorConfigurable.set;
+desc.value;
+obj2.bar = 1;
+obj2.foo;
+Reflect.defineProperty(obj2, "bar", dataConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj2, "bar");
+obj2.bar;
+desc.value;
+desc.configurable;
+desc.writable;
+desc.enumerable;
+desc.get;
+desc.set;
+function get() {
+    return this.x;
+}
+function set(a384) {
+    this.x = a384;
+}
+var obj3 = { x: 1000 };
+obj3.__defineGetter__("foo", get);
+obj3.__defineSetter__("foo", set);
+desc = Object.getOwnPropertyDescriptor(obj3, "foo");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+desc.get;
+get();
+desc.set;
+set();
+desc.value;
+obj3.foo = 1;
+obj3.x;
+obj3.foo;
+Reflect.defineProperty(obj3, "foo", accessorNoConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj3, "foo");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+desc.get;
+accessorNoConfigurable.get;
+desc.set;
+accessorNoConfigurable.set;
+desc.value;
+obj3.foo = 1;
+obj3.foo;
+obj3.__defineGetter__("bar", get);
+obj3.__defineSetter__("bar", set);
+Reflect.defineProperty(obj3, "bar", dataConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj3, "bar");
+obj3.bar;
+desc.value;
+desc.configurable;
+desc.writable;
+desc.enumerable;
+desc.get;
+desc.set;
+var obj4 = {};
+function f451() {
+    return 42;
+}
+var func = f451;
+obj4.bar = func;
+obj4.bar();
+Reflect.defineProperty(obj4, "bar", accessorConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj4, "bar");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+desc.get;
+accessorConfigurable.get;
+desc.set;
+accessorConfigurable.set;
+desc.value;
+obj4.bar = 1;
+obj4.bar;
+try {
+    obj4.bar();
+} catch(e477) {
+    /is not a function/.test(e477);
+}
+var obj5 = {};
+Reflect.defineProperty(obj5, "foo", accessorNoConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj5, "foo");
+Reflect.defineProperty(obj5, "foo", accessorNoConfigurable);
+var descDifferent = { configurable: false, enumerable: false, set: setter1, get: getter2 };
+Reflect.defineProperty(obj5, "foo", descDifferent);
+descDifferent = { configurable: false, enumerable: false, set: setter2, get: getter1 };
+Reflect.defineProperty(obj5, "foo", descDifferent);
+descDifferent = { configurable: false, enumerable: true, set: setter2, get: getter2 };
+Reflect.defineProperty(obj5, "foo", descDifferent);
+descDifferent = { configurable: false, enumerable: true, set: setter2, get: getter2 };
+Reflect.defineProperty(obj5, "foo", descDifferent);
+descDifferent = { configurable: false, enumerable: false, set: setter2, get: getter2 };
+Reflect.defineProperty(obj5, "foo", descDifferent);
+desc = Object.getOwnPropertyDescriptor(obj5, "foo");
+desc.get;
+getter2();
+desc.set;
+setter2();
+desc.enumerable;
+desc.configurable;
+Reflect.defineProperty(obj5, "bar", dataNoConfigurable);
+Reflect.defineProperty(obj5, "bar", dataNoConfigurable);
+descDifferent = { configurable: false, enumerable: false, writable: false, value: 1999 };
+Reflect.defineProperty(obj5, "bar", descDifferent);
+descDifferent = { configurable: false, enumerable: false, writable: true, value: 2000 };
+Reflect.defineProperty(obj5, "bar", descDifferent);
+descDifferent = { configurable: false, enumerable: true, writable: false, value: 2000 };
+Reflect.defineProperty(obj5, "bar", descDifferent);
+descDifferent = { configurable: true, enumerable: false, writable: false, value: 2000 };
+Reflect.defineProperty(obj5, "bar", descDifferent);
+descDifferent = { configurable: false, enumerable: false, writable: false, value: 2000 };
+Reflect.defineProperty(obj5, "bar", descDifferent);
+desc = Object.getOwnPropertyDescriptor(obj5, "bar");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+const v569 = -0;
+var descMinusZero = { value: v569, configurable: false };
+const v574 = +0;
+var descPlusZero = { value: v574, configurable: false };
+Reflect.defineProperty(obj5, "minuszero", descMinusZero);
+Reflect.defineProperty(obj5, "minuszero", descMinusZero);
+Reflect.defineProperty(obj5, "minuszero", descPlusZero);
+Reflect.defineProperty(obj5, "pluszero", descPlusZero);
+Reflect.defineProperty(obj5, "pluszero", descPlusZero);
+Reflect.defineProperty(obj5, "pluszero", descMinusZero);
+var obj6 = {};
+obj6[1] = "foo";
+obj6[2] = "bar";
+obj6[3] = "42";
+obj6[4] = "43";
+obj6[5] = "44";
+var descElement = { value: "foobar" };
+var descElementNonConfigurable = { value: "barfoo", configurable: false };
+var descElementNonWritable = { value: "foofoo", writable: false };
+var descElementNonEnumerable = { value: "barbar", enumerable: false };
+var descElementAllFalse = { value: "foofalse", configurable: false, writable: false, enumerable: false };
+Reflect.defineProperty(obj6, "1", descElement);
+desc = Object.getOwnPropertyDescriptor(obj6, "1");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+Reflect.defineProperty(obj6, "2", descElementNonConfigurable);
+desc = Object.getOwnPropertyDescriptor(obj6, "2");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+try {
+    Reflect.defineProperty(obj6, "2", descElement);
+    desc = Object.getOwnPropertyDescriptor(obj6, "2");
+    desc.value;
+} catch(e642) {
+}
+function f643() {
+    return 0;
+}
+var descAccessor = { get: f643 };
+Reflect.defineProperty(obj6, "2", descAccessor);
+Reflect.defineProperty(obj6, "2", descElementNonWritable);
+desc = Object.getOwnPropertyDescriptor(obj6, "2");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+Reflect.defineProperty(obj6, "3", descElementNonWritable);
+desc = Object.getOwnPropertyDescriptor(obj6, "3");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+Reflect.defineProperty(obj6, "4", descElementNonEnumerable);
+desc = Object.getOwnPropertyDescriptor(obj6, "4");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+Reflect.defineProperty(obj6, "5", descElementAllFalse);
+desc = Object.getOwnPropertyDescriptor(obj6, "5");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+Reflect.defineProperty(obj6, "15", descElement);
+desc = Object.getOwnPropertyDescriptor(obj6, "15");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+obj6[15] = "overwrite";
+obj6[15];
+const v698 = new Array();
+var arr = v698;
+arr[1] = "foo";
+arr[2] = "bar";
+arr[3] = "42";
+arr[4] = "43";
+arr[5] = "44";
+var descElement = { value: "foobar" };
+var descElementNonConfigurable = { value: "barfoo", configurable: false };
+var descElementNonWritable = { value: "foofoo", writable: false };
+var descElementNonEnumerable = { value: "barbar", enumerable: false };
+var descElementAllFalse = { value: "foofalse", configurable: false, writable: false, enumerable: false };
+Reflect.defineProperty(arr, "1", descElement);
+desc = Object.getOwnPropertyDescriptor(arr, "1");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+Reflect.defineProperty(arr, "2", descElementNonConfigurable);
+desc = Object.getOwnPropertyDescriptor(arr, "2");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+try {
+    Reflect.defineProperty(arr, "2", descElement);
+    desc = Object.getOwnPropertyDescriptor(arr, "2");
+    desc.value;
+} catch(e750) {
+}
+function f751() {
+    return 0;
+}
+var descAccessor = { get: f751 };
+Reflect.defineProperty(arr, "2", descAccessor);
+Reflect.defineProperty(arr, "2", descElementNonWritable);
+desc = Object.getOwnPropertyDescriptor(arr, "2");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+Reflect.defineProperty(arr, "3", descElementNonWritable);
+desc = Object.getOwnPropertyDescriptor(arr, "3");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+Reflect.defineProperty(arr, "4", descElementNonEnumerable);
+desc = Object.getOwnPropertyDescriptor(arr, "4");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+Reflect.defineProperty(arr, "5", descElementAllFalse);
+desc = Object.getOwnPropertyDescriptor(arr, "5");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+Reflect.defineProperty(arr, "15", descElement);
+desc = Object.getOwnPropertyDescriptor(arr, "15");
+desc.value;
+desc.writable;
+desc.enumerable;
+desc.configurable;
+arr.length;
+Reflect.defineProperty(arr, "0x20", descElement);
+arr.length;
+var o = { x: 42 };
+Reflect.defineProperty(o, "x", { writable: false });
+o.x;
+o.x = 37;
+o.x;
+o = { x: 42 };
+Reflect.defineProperty(o, "x", {});
+o.x;
+o.x = 37;
+o.x;
+var o = {};
+Reflect.defineProperty(o, "x", { writable: false });
+o.x;
+o.x = 37;
+o.x;
+const v843 = {
+    get x() {
+        return 87;
+    },
+};
+o = v843;
+Reflect.defineProperty(o, "x", { writable: false });
+o.x;
+o.x = 37;
+o.x;
+const v854 = { x: 87 };
+o = { __proto__: v854 };
+Reflect.defineProperty(o, "x", { writable: false });
+o.x;
+o.x = 37;
+o.x;
+function testDefineProperty(a866, a867, a868, a869) {
+    Reflect.defineProperty(a866, a867, a868);
+    var actualDesc = Object.getOwnPropertyDescriptor(a866, a867);
+    a869.enumerable;
+    actualDesc.enumerable;
+    a869.configurable;
+    actualDesc.configurable;
+    if (a869.hasOwnProperty("value")) {
+        a869.value;
+        actualDesc.value;
+        a869.writable;
+        actualDesc.writable;
+        a869.hasOwnProperty("get");
+        a869.hasOwnProperty("set");
+    } else {
+        a869.get;
+        actualDesc.get;
+        a869.set;
+        actualDesc.set;
+        a869.hasOwnProperty("value");
+        a869.hasOwnProperty("writable");
+    }
+}
+o = { p: 42 };
+const v898 = {};
+testDefineProperty(o, "p", v898, { value: 42, writable: true, enumerable: true, configurable: true });
+o = { p: 42 };
+const v909 = { enumerable: true };
+testDefineProperty(o, "p", v909, { value: 42, writable: true, enumerable: true, configurable: true });
+o = { p: 42 };
+const v920 = { configurable: true };
+testDefineProperty(o, "p", v920, { value: 42, writable: true, enumerable: true, configurable: true });
+o = { p: 42 };
+const v931 = { enumerable: false };
+testDefineProperty(o, "p", v931, { value: 42, writable: true, enumerable: false, configurable: true });
+o = { p: 42 };
+const v942 = { configurable: false };
+testDefineProperty(o, "p", v942, { value: 42, writable: true, enumerable: true, configurable: false });
+o = { p: 42 };
+const v954 = { enumerable: true, configurable: true };
+testDefineProperty(o, "p", v954, { value: 42, writable: true, enumerable: true, configurable: true });
+o = { p: 42 };
+const v966 = { enumerable: false, configurable: true };
+testDefineProperty(o, "p", v966, { value: 42, writable: true, enumerable: false, configurable: true });
+o = { p: 42 };
+const v978 = { enumerable: true, configurable: false };
+testDefineProperty(o, "p", v978, { value: 42, writable: true, enumerable: true, configurable: false });
+o = { p: 42 };
+const v990 = { enumerable: false, configurable: false };
+testDefineProperty(o, "p", v990, { value: 42, writable: true, enumerable: false, configurable: false });
+o = { p: 42 };
+Reflect.defineProperty(o, "p", { configurable: false });
+const v1005 = { writable: false };
+testDefineProperty(o, "p", v1005, { value: 42, writable: false, enumerable: true, configurable: false });
+o = {};
+Reflect.defineProperty(o, "p", { get: getter1, enumerable: true, configurable: true });
+const v1021 = { enumerable: false, configurable: false };
+testDefineProperty(o, "p", v1021, { get: getter1, set: undefined, enumerable: false, configurable: false });
+o = {};
+Reflect.defineProperty(o, "p", { get: getter1, set: setter1, enumerable: true, configurable: true });
+const v1036 = { enumerable: false, configurable: false };
+testDefineProperty(o, "p", v1036, { get: getter1, set: setter1, enumerable: false, configurable: false });
+o = {};
+Reflect.defineProperty(o, "p", { set: setter1, enumerable: true, configurable: true });
+const v1050 = { enumerable: false, configurable: false };
+testDefineProperty(o, "p", v1050, { get: undefined, set: setter1, enumerable: false, configurable: false });
+o = {};
+for (let i1058 = 0; i1058 < 1000; i1058++) {
+    Reflect.defineProperty(o, i1058, { value: i1058, enumerable: false });
+}
+o[999];
+var objectWithGetter = {};
+function f1072() {
+}
+objectWithGetter.__defineGetter__("foo", f1072);
+objectWithGetter.__lookupSetter__("foo");
+var objectWithSetter = {};
+function f1080(a1081) {
+}
+objectWithSetter.__defineSetter__("foo", f1080);
+objectWithSetter.__lookupGetter__("foo");
+function getter() {
+    return 111;
+}
+function anotherGetter() {
+    return 222;
+}
+function testGetterOnProto(a1091, a1092) {
+    a1092.quebec;
+}
+obj1 = {};
+Reflect.defineProperty(obj1, "quebec", { get: getter, configurable: true });
+obj2 = Object.create(obj1);
+obj3 = Object.create(obj2);
+testGetterOnProto(111, obj3);
+testGetterOnProto(111, obj3);
+testGetterOnProto(111, obj3);
+testGetterOnProto(111, obj3);
+Reflect.defineProperty(obj1, "quebec", { get: anotherGetter });
+testGetterOnProto(222, obj3);
+testGetterOnProto(222, obj3);
+testGetterOnProto(222, obj3);
+testGetterOnProto(222, obj3);
+var modifyMe;
+function setter(a1123) {
+    modifyMe = a1123 + 1;
+}
+function anotherSetter(a1127) {
+    modifyMe = a1127 + 2;
+}
+function testSetterOnProto(a1131, a1132) {
+    modifyMe = 333;
+    a1132.romeo = 444;
+}
+obj1 = {};
+Reflect.defineProperty(obj1, "romeo", { set: setter, configurable: true });
+obj2 = Object.create(obj1);
+obj3 = Object.create(obj2);
+testSetterOnProto(445, obj3);
+testSetterOnProto(445, obj3);
+testSetterOnProto(445, obj3);
+testSetterOnProto(445, obj3);
+Reflect.defineProperty(obj1, "romeo", { set: anotherSetter });
+testSetterOnProto(446, obj3);
+testSetterOnProto(446, obj3);
+testSetterOnProto(446, obj3);
+testSetterOnProto(446, obj3);
+function testSetterOnProtoStrict(a1162) {
+    'use strict';
+    a1162.sierra = 12345;
+}
+obj1 = {};
+Reflect.defineProperty(obj1, "sierra", { get: getter, set: setter, configurable: true });
+obj2 = Object.create(obj1);
+obj3 = Object.create(obj2);
+testSetterOnProtoStrict(obj3);
+testSetterOnProtoStrict(obj3);
+testSetterOnProtoStrict(obj3);
+testSetterOnProtoStrict(obj3);
+Reflect.defineProperty(obj1, "sierra", { get: getter, set: undefined, configurable: true });
+exception = false;
+try {
+    testSetterOnProtoStrict(obj3);
+} catch(e1182) {
+    exception = true;
+    /which has only a getter/.test(e1182);
+}
+function Assign(a1187) {
+    a1187.blubb = 123;
+}
+function C() {
+}
+const v1190 = new C();
+Assign(v1190);
+const v1192 = new C();
+Assign(v1192);
+const v1194 = C.prototype;
+function f1196() {
+    return -42;
+}
+Reflect.defineProperty(v1194, "blubb", { get: f1196 });
+const v1201 = new C();
+Assign(v1201);
+function C() {
+    this.x = 23;
+}
+const v1207 = new C();
+v1207.x;
+function f1210(a1211) {
+    this.y = 23;
+}
+C.prototype.__defineSetter__("x", f1210);
+void 0;
+const v1218 = new C();
+v1218.x;
+
+FuzzIL program written to corpus/reflect-define-property.fzil

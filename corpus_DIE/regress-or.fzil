@@ -1,0 +1,123 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'fail'
+    v3 <- CreateNamedVariable 'c', 'var', v2
+    v4 <- UnaryOperation '!', v1
+    v5 <- CreateNamedVariable 'g1', 'none'
+    v6 <- CallFunction v5, []
+    v7 <- BinaryOperation v4, '||', v6
+    BeginIf v7
+        v8 <- UnaryOperation '~', v1
+        Reassign v3, v8
+    EndIf
+    Return v3
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    BeginTry
+        v10 <- LoadInteger '1'
+        Return v10
+    BeginFinally
+    EndTryCatch
+EndPlainFunction
+BeginForLoopInitializer
+    v11 <- LoadInteger '0'
+BeginForLoopCondition -> v12
+    v13 <- LoadInteger '5'
+    v14 <- Compare v12, '<', v13
+BeginForLoopAfterthought v14 -> v15
+    v16 <- UnaryOperation v15, '++'
+BeginForLoopBody -> v17
+    v18 <- LoadInteger '42'
+    v19 <- CallFunction v0, [v18]
+EndForLoop
+v20 <- LoadInteger '1'
+v21 <- UnaryOperation '-', v20
+v22 <- LoadInteger '0'
+v23 <- CallFunction v0, [v22]
+v24 <- LoadInteger '43'
+v25 <- UnaryOperation '-', v24
+v26 <- LoadInteger '42'
+v27 <- CallFunction v0, [v26]
+v28 <- LoadInteger '1'
+v29 <- UnaryOperation '-', v28
+v30 <- LoadString ''
+v31 <- CallFunction v0, [v30]
+v32 <- BeginPlainFunction -> v33
+    v34 <- LoadString 'fail'
+    v35 <- CreateNamedVariable 'c', 'var', v34
+    v36 <- UnaryOperation '!', v33
+    v37 <- CreateNamedVariable 'g2', 'none'
+    v38 <- CallFunction v37, []
+    v39 <- UnaryOperation '!', v38
+    v40 <- BinaryOperation v36, '||', v39
+    BeginIf v40
+        v41 <- UnaryOperation '~', v33
+        Reassign v35, v41
+    EndIf
+    Return v35
+EndPlainFunction
+v42 <- BeginPlainFunction -> 
+    BeginTry
+        v43 <- LoadInteger '0'
+        Return v43
+    BeginFinally
+    EndTryCatch
+EndPlainFunction
+BeginForLoopInitializer
+    v44 <- LoadInteger '0'
+BeginForLoopCondition -> v45
+    v46 <- LoadInteger '5'
+    v47 <- Compare v45, '<', v46
+BeginForLoopAfterthought v47 -> v48
+    v49 <- UnaryOperation v48, '++'
+BeginForLoopBody -> v50
+    v51 <- LoadInteger '42'
+    v52 <- CallFunction v32, [v51]
+EndForLoop
+v53 <- LoadInteger '1'
+v54 <- UnaryOperation '-', v53
+v55 <- LoadString ''
+v56 <- CallFunction v32, [v55]
+
+
+function f1(a1) {
+    var c = "fail";
+    if (!a1 || g1()) {
+        c = ~a1;
+    }
+    return c;
+}
+function g1() {
+    try {
+        return 1;
+    } finally {
+    }
+}
+for (let i12 = 0; i12 < 5; i12++) {
+    f1(42);
+}
+-1;
+f1(0);
+-43;
+f1(42);
+-1;
+f1("");
+function f2(a33) {
+    var c = "fail";
+    if (!a33 || !g2()) {
+        c = ~a33;
+    }
+    return c;
+}
+function g2() {
+    try {
+        return 0;
+    } finally {
+    }
+}
+for (let i45 = 0; i45 < 5; i45++) {
+    f2(42);
+}
+-1;
+f2("");
+
+FuzzIL program written to corpus/regress-or.fzil

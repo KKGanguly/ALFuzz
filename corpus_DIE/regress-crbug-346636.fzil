@@ -1,0 +1,77 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- Compare v2, '===', v1
+    BeginIf v3
+        v4 <- LoadInteger '0'
+        v5 <- Compare v1, '!==', v4
+        v6 <- LoadInteger '1'
+        v7 <- BinaryOperation v6, '/', v1
+        v8 <- LoadInteger '1'
+        v9 <- BinaryOperation v8, '/', v2
+        v10 <- Compare v7, '==', v9
+        v11 <- BinaryOperation v5, '||', v10
+        BeginIf v11
+            Return
+        EndIf
+    EndIf
+    Return
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13
+    v14 <- GetProperty v13, 'bar'
+    Return v14
+EndPlainFunction
+v15 <- BeginPlainFunction -> 
+    v16 <- LoadThis
+    v17 <- LoadThis
+EndPlainFunction
+BeginObjectLiteral
+v18 <- EndObjectLiteral
+v19 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v15
+v20 <- EndObjectLiteral
+v21 <- CreateNamedVariable 'Object', 'none'
+v22 <- CallMethod v21, 'defineProperty', [v18, v19, v20]
+v23 <- CreateNamedVariable 'o1', 'var', v22
+v24 <- CallFunction v12, [v23]
+v25 <- CallFunction v12, [v23]
+v26 <- BeginPlainFunction -> 
+    v27 <- LoadThis
+    v28 <- LoadThis
+EndPlainFunction
+BeginObjectLiteral
+v29 <- EndObjectLiteral
+v30 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v26
+v31 <- EndObjectLiteral
+v32 <- CallMethod v21, 'defineProperty', [v29, v30, v31]
+v33 <- CreateNamedVariable 'o2', 'var', v32
+v34 <- CallFunction v12, [v33]
+v35 <- CallFunction v12, [v33]
+
+
+function assertSame(a1, a2) {
+    if (a2 === a1) {
+        if ((a1 !== 0) || ((1 / a1) == (1 / a2))) {
+            return;
+        }
+    }
+    return;
+}
+function foo(a13) {
+    return a13.bar;
+}
+function getter1() {
+}
+const v18 = {};
+var o1 = Object.defineProperty(v18, "bar", { get: getter1 });
+foo(o1);
+foo(o1);
+function getter2() {
+}
+const v29 = {};
+var o2 = Object.defineProperty(v29, "bar", { get: getter2 });
+foo(o2);
+foo(o2);
+
+FuzzIL program written to corpus/regress-crbug-346636.fzil

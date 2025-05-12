@@ -1,0 +1,70 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'OK'
+    v2 <- LoadThis
+    SetProperty v2, 'property', v1
+    v3 <- LoadInteger '1'
+    v4 <- LoadThis
+    SetProperty v4, 'o2', v3
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadThis
+    SetProperty v7, 'inner', v6
+EndPlainFunction
+v8 <- Construct v0, []
+v9 <- CreateNamedVariable 'inner', 'var', v8
+v10 <- Construct v5, [v9]
+v11 <- CreateNamedVariable 'outer', 'var', v10
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadThis
+    v14 <- GetProperty v13, 'inner'
+    v15 <- GetProperty v14, 'property'
+    Return v15
+EndPlainFunction
+v16 <- GetProperty v5, 'prototype'
+SetProperty v16, 'boom', v12
+v17 <- LoadString 'OK'
+v18 <- CallMethod v11, 'boom', []
+v19 <- LoadString 'OK'
+v20 <- CallMethod v11, 'boom', []
+v21 <- LoadString 'OK'
+v22 <- CallMethod v11, 'boom', []
+v23 <- LoadUndefined
+Reassign v9, v23
+v24 <- DeleteProperty v11, 'inner'
+v25 <- LoadFloat '1.51'
+v26 <- LoadString 'OK'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `field`, v25
+    ObjectLiteralAddProperty `property`, v26
+v27 <- EndObjectLiteral
+v28 <- Construct v5, [v27]
+Reassign v11, v28
+v29 <- LoadString 'OK'
+v30 <- CallMethod v11, 'boom', []
+
+
+function Inner() {
+    this.property = "OK";
+    this.o2 = 1;
+}
+function Outer(a6) {
+    this.inner = a6;
+}
+const v8 = new Inner();
+var inner = v8;
+const v10 = new Outer(inner);
+var outer = v10;
+function f12() {
+    return this.inner.property;
+}
+const t14 = Outer.prototype;
+t14.boom = f12;
+outer.boom();
+outer.boom();
+outer.boom();
+inner = undefined;
+delete outer.inner;
+const v28 = new Outer({ field: 1.51, property: "OK" });
+(outer = v28).boom();
+
+FuzzIL program written to corpus/regress-3969.fzil

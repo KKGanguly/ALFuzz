@@ -1,0 +1,64 @@
+v0 <- BeginPlainFunction -> v1, v2, v3, v4
+    BeginIf v1
+        Return
+    EndIf
+    v5 <- LoadBoolean 'true'
+    v6 <- LoadString ''
+    v7 <- BinaryOperation v6, '+', v3
+    v8 <- TernaryOperation v3, v5, v7
+    v9 <- CreateNamedVariable 'x', 'var', v8
+    v10 <- UnaryOperation '!', v3
+    BeginIf v10
+        v11 <- CreateNamedVariable 'y', 'none'
+        v12 <- BinaryOperation v2, '+', v11
+        v13 <- LoadInteger '10'
+        v14 <- BinaryOperation v12, '+', v13
+        v15 <- CreateNamedVariable 'y', 'var', v14
+        v16 <- UnaryOperation '!', v4
+        BeginIf v16
+            Reassign v9, v15
+        EndIf
+        BeginIf v9
+            v17 <- LoadBoolean 'false'
+            Reassign v9, v17
+        EndIf
+    EndIf
+    v18 <- LoadInteger '1'
+    v19 <- BinaryOperation v9, '+', v18
+    Return v19
+EndPlainFunction
+v20 <- CallFunction v0, []
+v21 <- BeginPlainFunction -> v22, v23, v24
+    v25 <- LoadString 'abc'
+    v26 <- CallFunction v0, [v22, v25, v23, v24]
+    Return v26
+EndPlainFunction
+v27 <- LoadBoolean 'true'
+v28 <- CallFunction v21, [v27]
+v29 <- CallFunction v21, []
+
+
+function inlined(a1, a2, a3, a4) {
+    if (a1) {
+        return;
+    }
+    var x = a3 ? true : "" + a3;
+    if (!a3) {
+        var y = (a2 + y) + 10;
+        if (!a4) {
+            x = y;
+        }
+        if (x) {
+            x = false;
+        }
+    }
+    return x + 1;
+}
+inlined();
+function optimized(a22, a23, a24) {
+    return inlined(a22, "abc", a23, a24);
+}
+optimized(true);
+optimized();
+
+FuzzIL program written to corpus/regress-817225.fzil

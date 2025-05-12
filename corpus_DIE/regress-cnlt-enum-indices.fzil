@@ -1,0 +1,55 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'o2', 'var', v2
+v4 <- LoadInteger '1'
+SetProperty v1, 'a', v4
+v5 <- LoadInteger '1'
+SetProperty v3, 'a', v5
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '10'
+    Return v7
+EndPlainFunction
+v8 <- LoadString 'b'
+v9 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v6
+    ObjectLiteralAddProperty `enumerable`, v9
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'Object', 'none'
+v12 <- CallMethod v11, 'defineProperty', [v1, v8, v10]
+v13 <- LoadString 'b'
+v14 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v6
+    ObjectLiteralAddProperty `enumerable`, v14
+v15 <- EndObjectLiteral
+v16 <- CallMethod v11, 'defineProperty', [v3, v13, v15]
+v17 <- LoadInteger '2'
+SetProperty v1, 'c', v17
+BeginForInLoop v1 -> v18
+EndForInLoop
+v19 <- LoadNull
+Reassign v1, v19
+v20 <- CreateNamedVariable 'gc', 'none'
+v21 <- CallFunction v20, []
+
+
+var o = {};
+var o2 = {};
+o.a = 1;
+o2.a = 1;
+function f() {
+    return 10;
+}
+Object.defineProperty(o, "b", { get: f, enumerable: true });
+Object.defineProperty(o2, "b", { get: f, enumerable: true });
+o.c = 2;
+for (const v18 in o) {
+}
+o = null;
+gc();
+
+FuzzIL program written to corpus/regress-cnlt-enum-indices.fzil

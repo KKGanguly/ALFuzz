@@ -1,0 +1,83 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '35'
+    v4 <- BinaryOperation v1, '/', v3
+    v5 <- CreateNamedVariable 'result', 'var', v4
+    v6 <- LoadInteger '50'
+    v7 <- BinaryOperation v6, '/', v2
+    Update v5, '+', v7
+    v8 <- BinaryOperation v1, '/', v2
+    Update v5, '+', v8
+    v9 <- LoadInteger '1'
+    v10 <- UnaryOperation '-', v9
+    v11 <- BinaryOperation v1, '/', v10
+    Update v5, '+', v11
+    v12 <- LoadInteger '1'
+    v13 <- BinaryOperation v1, '/', v12
+    Update v5, '+', v13
+    v14 <- LoadInteger '4'
+    v15 <- BinaryOperation v1, '/', v14
+    Update v5, '+', v15
+    v16 <- LoadInteger '4'
+    v17 <- UnaryOperation '-', v16
+    v18 <- BinaryOperation v1, '/', v17
+    Update v5, '+', v18
+    v19 <- BinaryOperation v5, '/', v2
+    Return v19
+EndPlainFunction
+v20 <- LoadInteger '700'
+v21 <- LoadInteger '5'
+v22 <- CallFunction v0, [v20, v21]
+v23 <- LoadInteger '700'
+v24 <- LoadInteger '5'
+v25 <- CallFunction v0, [v23, v24]
+v26 <- CreateNamedVariable 'r1', 'var', v25
+v27 <- LoadInteger '700'
+v28 <- LoadInteger '5'
+v29 <- CallFunction v0, [v27, v28]
+v30 <- CreateNamedVariable 'r2', 'var', v29
+v31 <- BeginPlainFunction -> v32
+    v33 <- LoadInteger '1'
+    v34 <- UnaryOperation '-', v33
+    v35 <- BinaryOperation v32, '/', v34
+    Return v35
+EndPlainFunction
+v36 <- LoadInteger '2147483600'
+v37 <- LoadInteger '2147483600'
+v38 <- UnaryOperation '-', v37
+v39 <- CallFunction v31, [v38]
+v40 <- LoadInteger '2147483600'
+v41 <- LoadInteger '2147483600'
+v42 <- UnaryOperation '-', v41
+v43 <- CallFunction v31, [v42]
+v44 <- LoadInteger '2147483600'
+v45 <- LoadInteger '2147483600'
+v46 <- UnaryOperation '-', v45
+v47 <- CallFunction v31, [v46]
+v48 <- LoadInteger '2147483648'
+v49 <- LoadInteger '2147483648'
+v50 <- UnaryOperation '-', v49
+v51 <- CallFunction v31, [v50]
+
+
+function foo(a1, a2) {
+    var result = a1 / 35;
+    result += 50 / a2;
+    result += a1 / a2;
+    result += a1 / -1;
+    result += a1 / 1;
+    result += a1 / 4;
+    result += a1 / -4;
+    return result / a2;
+}
+foo(700, 5);
+var r1 = foo(700, 5);
+var r2 = foo(700, 5);
+function boo(a32) {
+    return a32 / -1;
+}
+boo(-2147483600);
+boo(-2147483600);
+boo(-2147483600);
+boo(-2147483648);
+
+FuzzIL program written to corpus/DivI.fzil

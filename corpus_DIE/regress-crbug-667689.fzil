@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadUndefined
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+v3 <- CallMethod v0, '__defineGetter__', [v1, v2]
+v4 <- BeginPlainFunction -> 
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6
+    v7 <- TestInstanceOf v6, v4
+    Return v7
+EndPlainFunction
+v8 <- CallFunction v5, []
+v9 <- LoadNull
+v10 <- CreateNamedVariable 'Object', 'none'
+v11 <- CallMethod v10, 'setPrototypeOf', [v4, v9]
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadBoolean 'true'
+    Return v13
+EndPlainFunction
+v14 <- CreateNamedVariable 'Symbol', 'none'
+v15 <- GetProperty v14, 'hasInstance'
+SetComputedProperty v4, v15, v12
+v16 <- CallFunction v5, []
+
+
+function foo() {
+}
+function f2() {
+}
+foo.__defineGetter__(undefined, f2);
+function bar() {
+}
+function baz(a6) {
+    return a6 instanceof bar;
+}
+baz();
+Object.setPrototypeOf(bar, null);
+function f12() {
+    return true;
+}
+bar[Symbol.hasInstance] = f12;
+baz();
+
+FuzzIL program written to corpus/regress-crbug-667689.fzil

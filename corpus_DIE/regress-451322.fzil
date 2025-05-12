@@ -1,0 +1,33 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'foo', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '0'
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- BinaryOperation v3, '-', v4
+    v6 <- CreateNamedVariable 'baz', 'var', v5
+    v7 <- LoadInteger '24'
+    v8 <- Compare v1, '>', v7
+    BeginIf v8
+        v9 <- LoadInteger '0'
+        v10 <- BinaryOperation v6, '*', v9
+        Return v10
+    EndIf
+EndPlainFunction
+v11 <- CallFunction v2, []
+v12 <- CallFunction v2, []
+v13 <- CallFunction v2, []
+
+
+var foo = 0;
+function bar() {
+    var baz = 0 - {};
+    if (foo > 24) {
+        return baz * 0;
+    }
+}
+bar();
+bar();
+bar();
+
+FuzzIL program written to corpus/regress-451322.fzil

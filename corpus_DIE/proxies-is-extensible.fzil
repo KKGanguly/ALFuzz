@@ -1,0 +1,182 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    v2 <- CreateNamedVariable 'target', 'var', v1
+    BeginObjectLiteral
+    v3 <- EndObjectLiteral
+    v4 <- CreateNamedVariable 'handler', 'var', v3
+    v5 <- CreateNamedVariable 'Proxy', 'none'
+    v6 <- Construct v5, [v2, v4]
+    v7 <- CreateNamedVariable 'proxy', 'var', v6
+    v8 <- CreateNamedVariable 'Reflect', 'none'
+    v9 <- CallMethod v8, 'isExtensible', [v2]
+    v10 <- CallMethod v8, 'isExtensible', [v7]
+    v11 <- CallMethod v8, 'preventExtensions', [v7]
+    v12 <- CallMethod v8, 'isExtensible', [v2]
+    v13 <- CallMethod v8, 'isExtensible', [v7]
+EndPlainFunction
+v14 <- CallFunction v0, []
+v15 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v16 <- EndObjectLiteral
+    v17 <- CreateNamedVariable 'target', 'var', v16
+    v18 <- LoadNull
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `isExtensible`, v18
+    v19 <- EndObjectLiteral
+    v20 <- CreateNamedVariable 'handler', 'var', v19
+    v21 <- CreateNamedVariable 'Proxy', 'none'
+    v22 <- Construct v21, [v17, v20]
+    v23 <- CreateNamedVariable 'proxy', 'var', v22
+    v24 <- CreateNamedVariable 'Reflect', 'none'
+    v25 <- CallMethod v24, 'isExtensible', [v17]
+    v26 <- CallMethod v24, 'isExtensible', [v23]
+    v27 <- CallMethod v24, 'preventExtensions', [v23]
+    v28 <- CallMethod v24, 'isExtensible', [v17]
+    v29 <- CallMethod v24, 'isExtensible', [v23]
+EndPlainFunction
+v30 <- CallFunction v15, []
+v31 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v32 <- EndObjectLiteral
+    v33 <- CreateNamedVariable 'target', 'var', v32
+    v34 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `isExtensible`, v34
+    v35 <- EndObjectLiteral
+    v36 <- CreateNamedVariable 'handler', 'var', v35
+    v37 <- CreateNamedVariable 'Proxy', 'none'
+    v38 <- Construct v37, [v33, v36]
+    v39 <- CreateNamedVariable 'proxy', 'var', v38
+    v40 <- BeginArrowFunction -> 
+        v41 <- CreateNamedVariable 'Reflect', 'none'
+        v42 <- CallMethod v41, 'isExtensible', [v39]
+    EndArrowFunction
+    v43 <- CallFunction v40, []
+    v44 <- CreateNamedVariable 'TypeError', 'none'
+EndPlainFunction
+v45 <- CallFunction v31, []
+v46 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v47 <- EndObjectLiteral
+    v48 <- CreateNamedVariable 'target', 'var', v47
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `isExtensible` -> v49
+            v50 <- LoadString 'bla'
+            Return v50
+        EndObjectLiteralMethod
+    v51 <- EndObjectLiteral
+    v52 <- CreateNamedVariable 'handler', 'var', v51
+    v53 <- CreateNamedVariable 'Proxy', 'none'
+    v54 <- Construct v53, [v48, v52]
+    v55 <- CreateNamedVariable 'proxy', 'var', v54
+    v56 <- CreateNamedVariable 'Reflect', 'none'
+    v57 <- CallMethod v56, 'isExtensible', [v55]
+    v58 <- CallMethod v56, 'preventExtensions', [v48]
+    v59 <- BeginArrowFunction -> 
+        v60 <- CallMethod v56, 'isExtensible', [v55]
+    EndArrowFunction
+    v61 <- CallFunction v59, []
+    v62 <- CreateNamedVariable 'TypeError', 'none'
+EndPlainFunction
+v63 <- CallFunction v46, []
+v64 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v65 <- EndObjectLiteral
+    v66 <- CreateNamedVariable 'target', 'var', v65
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `isExtensible` -> v67
+            v68 <- LoadInteger '0'
+            Return v68
+        EndObjectLiteralMethod
+    v69 <- EndObjectLiteral
+    v70 <- CreateNamedVariable 'handler', 'var', v69
+    v71 <- CreateNamedVariable 'Proxy', 'none'
+    v72 <- Construct v71, [v66, v70]
+    v73 <- CreateNamedVariable 'proxy', 'var', v72
+    v74 <- BeginArrowFunction -> 
+        v75 <- CreateNamedVariable 'Reflect', 'none'
+        v76 <- CallMethod v75, 'isExtensible', [v73]
+    EndArrowFunction
+    v77 <- CallFunction v74, []
+    v78 <- CreateNamedVariable 'TypeError', 'none'
+    v79 <- CreateNamedVariable 'Reflect', 'none'
+    v80 <- CallMethod v79, 'preventExtensions', [v66]
+    v81 <- CallMethod v79, 'isExtensible', [v73]
+EndPlainFunction
+v82 <- CallFunction v64, []
+
+
+function f0() {
+    var target = {};
+    var handler = {};
+    const v6 = new Proxy(target, handler);
+    var proxy = v6;
+    Reflect.isExtensible(target);
+    Reflect.isExtensible(proxy);
+    Reflect.preventExtensions(proxy);
+    Reflect.isExtensible(target);
+    Reflect.isExtensible(proxy);
+}
+f0();
+function f15() {
+    var target = {};
+    var handler = { isExtensible: null };
+    const v22 = new Proxy(target, handler);
+    var proxy = v22;
+    Reflect.isExtensible(target);
+    Reflect.isExtensible(proxy);
+    Reflect.preventExtensions(proxy);
+    Reflect.isExtensible(target);
+    Reflect.isExtensible(proxy);
+}
+f15();
+function f31() {
+    var target = {};
+    var handler = { isExtensible: true };
+    const v38 = new Proxy(target, handler);
+    var proxy = v38;
+    const v40 = () => {
+        Reflect.isExtensible(proxy);
+    };
+    v40();
+}
+f31();
+function f46() {
+    var target = {};
+    const v51 = {
+        isExtensible() {
+            return "bla";
+        },
+    };
+    var handler = v51;
+    const v54 = new Proxy(target, handler);
+    var proxy = v54;
+    Reflect.isExtensible(proxy);
+    Reflect.preventExtensions(target);
+    const v59 = () => {
+        Reflect.isExtensible(proxy);
+    };
+    v59();
+}
+f46();
+function f64() {
+    var target = {};
+    const v69 = {
+        isExtensible() {
+            return 0;
+        },
+    };
+    var handler = v69;
+    const v72 = new Proxy(target, handler);
+    var proxy = v72;
+    const v74 = () => {
+        Reflect.isExtensible(proxy);
+    };
+    v74();
+    Reflect.preventExtensions(target);
+    Reflect.isExtensible(proxy);
+}
+f64();
+
+FuzzIL program written to corpus/proxies-is-extensible.fzil

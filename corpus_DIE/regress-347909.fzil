@@ -1,0 +1,41 @@
+v0 <- LoadFloat '1.5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'a', 'var', v1
+v3 <- LoadInteger '0'
+SetProperty v2, 'y', v3
+v4 <- GetProperty v2, 'y'
+v5 <- CreateNamedVariable 'b', 'var', v4
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+SetProperty v2, 'y', v6
+v7 <- LoadInteger '1'
+v8 <- CreateNamedVariable 'd', 'var', v7
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadInteger '0'
+    Reassign v8, v10
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v5
+    v11 <- EndObjectLiteral
+    Return v11
+EndPlainFunction
+v12 <- CallFunction v9, []
+v13 <- CallFunction v9, []
+v14 <- CallFunction v9, []
+
+
+var a = { y: 1.5 };
+a.y = 0;
+var b = a.y;
+a.y = {};
+var d = 1;
+function f() {
+    d = 0;
+    return { y: b };
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-347909.fzil

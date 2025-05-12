@@ -1,0 +1,99 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'OK'
+    v2 <- LoadThis
+    SetProperty v2, 'property', v1
+    v3 <- LoadInteger '1'
+    v4 <- LoadThis
+    SetProperty v4, 'prop2', v3
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadString 'u'
+    v7 <- LoadThis
+    SetProperty v7, 'o', v6
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9
+    v10 <- GetProperty v9, 'o'
+    Return v10
+EndPlainFunction
+v11 <- BeginPlainFunction -> v12, v13
+    SetProperty v12, 'inner_field', v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> v15
+    v16 <- GetProperty v15, 'inner_field'
+    v17 <- GetProperty v16, 'property'
+    Return v17
+EndPlainFunction
+v18 <- Construct v0, []
+v19 <- CreateNamedVariable 'inner', 'var', v18
+v20 <- Construct v5, []
+v21 <- CreateNamedVariable 'outer', 'var', v20
+v22 <- Construct v5, []
+v23 <- CallFunction v11, [v22, v19]
+v24 <- CallFunction v11, [v21, v19]
+v25 <- CallFunction v8, [v21]
+v26 <- CallFunction v8, [v21]
+v27 <- CallFunction v8, [v21]
+v28 <- CallFunction v14, [v21]
+v29 <- CreateNamedVariable 'print', 'none'
+v30 <- CallFunction v29, [v28]
+v31 <- CallFunction v14, [v21]
+v32 <- CallFunction v29, [v31]
+v33 <- CallFunction v14, [v21]
+v34 <- CallFunction v29, [v33]
+v35 <- LoadUndefined
+Reassign v19, v35
+v36 <- LoadUndefined
+Reassign v21, v36
+v37 <- CreateNamedVariable 'gc', 'none'
+v38 <- CallFunction v37, []
+v39 <- Construct v5, []
+v40 <- CreateNamedVariable 'o2', 'var', v39
+v41 <- LoadFloat '1.51'
+v42 <- LoadString 'OK'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `invalid`, v41
+    ObjectLiteralAddProperty `property`, v42
+v43 <- EndObjectLiteral
+v44 <- CallFunction v11, [v40, v43]
+v45 <- CallFunction v14, [v40]
+v46 <- CallFunction v29, [v45]
+
+
+function Inner() {
+    this.property = "OK";
+    this.prop2 = 1;
+}
+function Outer() {
+    this.o = "u";
+}
+function KeepMapAlive(a9) {
+    return a9.o;
+}
+function SetInner(a12, a13) {
+    a12.inner_field = a13;
+}
+function Crash(a15) {
+    return a15.inner_field.property;
+}
+const v18 = new Inner();
+var inner = v18;
+const v20 = new Outer();
+var outer = v20;
+const v22 = new Outer();
+SetInner(v22, inner);
+SetInner(outer, inner);
+KeepMapAlive(outer);
+KeepMapAlive(outer);
+KeepMapAlive(outer);
+print(Crash(outer));
+print(Crash(outer));
+print(Crash(outer));
+inner = undefined;
+outer = undefined;
+gc();
+const v39 = new Outer();
+var o2 = v39;
+SetInner(o2, { invalid: 1.51, property: "OK" });
+print(Crash(o2));
+
+FuzzIL program written to corpus/regress-4023.fzil

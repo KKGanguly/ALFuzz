@@ -1,0 +1,242 @@
+v0 <- CreateNamedVariable 'Error', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'e', 'var', v1
+v3 <- LoadString 'Error'
+v4 <- CallMethod v2, 'toString', []
+v5 <- Construct v0, []
+Reassign v2, v5
+SetProperty v2, 'name', v2
+SetProperty v2, 'message', v2
+v6 <- LoadString 'Does not occur in output'
+SetProperty v2, 'stack', v6
+v7 <- LoadString 'Does not occur in output'
+SetProperty v2, 'arguments', v7
+v8 <- LoadString 'Does not occur in output'
+SetProperty v2, 'type', v8
+v9 <- BeginArrowFunction -> 
+    v10 <- CallMethod v2, 'toString', []
+    Return v10
+EndArrowFunction
+v11 <- CallFunction v9, []
+v12 <- CreateNamedVariable 'RangeError', 'none'
+v13 <- Construct v0, []
+Reassign v2, v13
+v14 <- CreateArray [v2]
+SetProperty v2, 'name', v14
+v15 <- CreateArray [v2]
+SetProperty v2, 'message', v15
+v16 <- LoadString 'Does not occur in output'
+SetProperty v2, 'stack', v16
+v17 <- LoadString 'Does not occur in output'
+SetProperty v2, 'arguments', v17
+v18 <- LoadString 'Does not occur in output'
+SetProperty v2, 'type', v18
+v19 <- LoadString ''
+v20 <- CallMethod v2, 'toString', []
+v21 <- BeginPlainFunction -> v22, v23
+    v24 <- CreateArray []
+    v25 <- CreateNamedVariable 'seq', 'var', v24
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `name` -> v26
+            v27 <- LoadInteger '1'
+            v28 <- CallMethod v25, 'push', [v27]
+            v29 <- LoadUndefined
+            v30 <- Compare v22, '===', v29
+            v31 <- BeginPlainFunction -> 
+                v32 <- LoadInteger '2'
+                v33 <- CallMethod v25, 'push', [v32]
+                Return v22
+            EndPlainFunction
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `toString`, v31
+            v34 <- EndObjectLiteral
+            v35 <- TernaryOperation v30, v22, v34
+            Return v35
+        EndObjectLiteralGetter
+        BeginObjectLiteralGetter `message` -> v36
+            v37 <- LoadInteger '3'
+            v38 <- CallMethod v25, 'push', [v37]
+            v39 <- LoadUndefined
+            v40 <- Compare v23, '===', v39
+            v41 <- BeginPlainFunction -> 
+                v42 <- LoadInteger '4'
+                v43 <- CallMethod v25, 'push', [v42]
+                Return v23
+            EndPlainFunction
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `toString`, v41
+            v44 <- EndObjectLiteral
+            v45 <- TernaryOperation v40, v23, v44
+            Return v45
+        EndObjectLiteralGetter
+    v46 <- EndObjectLiteral
+    v47 <- CreateNamedVariable 'e', 'var', v46
+    v48 <- GetProperty v0, 'prototype'
+    v49 <- GetProperty v48, 'toString'
+    v50 <- CallMethod v49, 'call', [v47]
+    v51 <- CreateNamedVariable 'string', 'var', v50
+    v52 <- CreateArray [v51, v25]
+    Return v52
+EndPlainFunction
+v53 <- LoadString 'Error'
+v54 <- LoadInteger '1'
+v55 <- LoadInteger '3'
+v56 <- CreateArray [v54, v55]
+v57 <- CreateArray [v53, v56]
+v58 <- LoadUndefined
+v59 <- LoadUndefined
+v60 <- CallFunction v21, [v58, v59]
+v61 <- LoadString 'e1'
+v62 <- LoadInteger '1'
+v63 <- LoadInteger '2'
+v64 <- LoadInteger '3'
+v65 <- CreateArray [v62, v63, v64]
+v66 <- CreateArray [v61, v65]
+v67 <- LoadString 'e1'
+v68 <- LoadUndefined
+v69 <- CallFunction v21, [v67, v68]
+v70 <- LoadString 'e1: null'
+v71 <- LoadInteger '1'
+v72 <- LoadInteger '2'
+v73 <- LoadInteger '3'
+v74 <- LoadInteger '4'
+v75 <- CreateArray [v71, v72, v73, v74]
+v76 <- CreateArray [v70, v75]
+v77 <- LoadString 'e1'
+v78 <- LoadNull
+v79 <- CallFunction v21, [v77, v78]
+v80 <- LoadString 'e1'
+v81 <- LoadInteger '1'
+v82 <- LoadInteger '2'
+v83 <- LoadInteger '3'
+v84 <- LoadInteger '4'
+v85 <- CreateArray [v81, v82, v83, v84]
+v86 <- CreateArray [v80, v85]
+v87 <- LoadString 'e1'
+v88 <- LoadString ''
+v89 <- CallFunction v21, [v87, v88]
+v90 <- LoadString 'Error: e2'
+v91 <- LoadInteger '1'
+v92 <- LoadInteger '3'
+v93 <- LoadInteger '4'
+v94 <- CreateArray [v91, v92, v93]
+v95 <- CreateArray [v90, v94]
+v96 <- LoadUndefined
+v97 <- LoadString 'e2'
+v98 <- CallFunction v21, [v96, v97]
+v99 <- LoadString 'null: e2'
+v100 <- LoadInteger '1'
+v101 <- LoadInteger '2'
+v102 <- LoadInteger '3'
+v103 <- LoadInteger '4'
+v104 <- CreateArray [v100, v101, v102, v103]
+v105 <- CreateArray [v99, v104]
+v106 <- LoadNull
+v107 <- LoadString 'e2'
+v108 <- CallFunction v21, [v106, v107]
+v109 <- LoadString 'e2'
+v110 <- LoadInteger '1'
+v111 <- LoadInteger '2'
+v112 <- LoadInteger '3'
+v113 <- LoadInteger '4'
+v114 <- CreateArray [v110, v111, v112, v113]
+v115 <- CreateArray [v109, v114]
+v116 <- LoadString ''
+v117 <- LoadString 'e2'
+v118 <- CallFunction v21, [v116, v117]
+v119 <- LoadString 'e1: e2'
+v120 <- LoadInteger '1'
+v121 <- LoadInteger '2'
+v122 <- LoadInteger '3'
+v123 <- LoadInteger '4'
+v124 <- CreateArray [v120, v121, v122, v123]
+v125 <- CreateArray [v119, v124]
+v126 <- LoadString 'e1'
+v127 <- LoadString 'e2'
+v128 <- CallFunction v21, [v126, v127]
+BeginObjectLiteral
+    BeginObjectLiteralGetter `constructor` -> v129
+    EndObjectLiteralGetter
+v130 <- EndObjectLiteral
+v131 <- CreateNamedVariable 'obj', 'var', v130
+v132 <- BeginPlainFunction -> 
+    v133 <- CallMethod v131, 'x', []
+EndPlainFunction
+v134 <- CallFunction v132, []
+
+
+const v1 = new Error();
+var e = v1;
+e.toString();
+const v5 = new Error();
+e = v5;
+e.name = e;
+e.message = e;
+e.stack = "Does not occur in output";
+e.arguments = "Does not occur in output";
+e.type = "Does not occur in output";
+const v9 = () => {
+    return e.toString();
+};
+v9();
+const v13 = new Error();
+e = v13;
+e.name = [e];
+e.message = [e];
+e.stack = "Does not occur in output";
+e.arguments = "Does not occur in output";
+e.type = "Does not occur in output";
+e.toString();
+function testErrorToString(a22, a23) {
+    var seq = [];
+    const v46 = {
+        get name() {
+            seq.push(1);
+            const v30 = a22 === undefined;
+            function f31() {
+                seq.push(2);
+                return a22;
+            }
+            return v30 ? a22 : { toString: f31 };
+        },
+        get message() {
+            seq.push(3);
+            const v40 = a23 === undefined;
+            function f41() {
+                seq.push(4);
+                return a23;
+            }
+            return v40 ? a23 : { toString: f41 };
+        },
+    };
+    var e = v46;
+    var string = Error.prototype.toString.call(e);
+    return [string,seq];
+}
+["Error",[1,3]];
+testErrorToString(undefined, undefined);
+["e1",[1,2,3]];
+testErrorToString("e1", undefined);
+["e1: null",[1,2,3,4]];
+testErrorToString("e1", null);
+["e1",[1,2,3,4]];
+testErrorToString("e1", "");
+["Error: e2",[1,3,4]];
+testErrorToString(undefined, "e2");
+["null: e2",[1,2,3,4]];
+testErrorToString(null, "e2");
+["e2",[1,2,3,4]];
+testErrorToString("", "e2");
+["e1: e2",[1,2,3,4]];
+testErrorToString("e1", "e2");
+const v130 = {
+    get constructor() {
+    },
+};
+var obj = v130;
+function f132() {
+    obj.x();
+}
+f132();
+
+FuzzIL program written to corpus/error-tostring.fzil

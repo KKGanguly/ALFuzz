@@ -1,0 +1,61 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- LoadInteger '1'
+SetProperty v1, 'a', v2
+v3 <- LoadInteger '2'
+SetProperty v1, 'c', v3
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'o1', 'var', v4
+v6 <- LoadInteger '1'
+SetProperty v5, 'a', v6
+BeginForInLoop v5 -> v7
+EndForInLoop
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '1'
+    Return v9
+EndPlainFunction
+SetProperty v5, 'b', v8
+v10 <- LoadNull
+Reassign v1, v10
+v11 <- CreateNamedVariable 'gc', 'none'
+v12 <- CallFunction v11, []
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'o2', 'var', v13
+v15 <- LoadInteger '1'
+SetProperty v14, 'a', v15
+v16 <- LoadInteger '10'
+SetProperty v14, 'b', v16
+BeginObjectLiteral
+v17 <- EndObjectLiteral
+v18 <- CreateNamedVariable 'o3', 'var', v17
+v19 <- LoadInteger '1'
+SetProperty v18, 'a', v19
+BeginForInLoop v18 -> v20
+EndForInLoop
+
+
+var o = {};
+o.a = 1;
+o.c = 2;
+var o1 = {};
+o1.a = 1;
+for (const v7 in o1) {
+}
+function f8() {
+    return 1;
+}
+o1.b = f8;
+o = null;
+gc();
+var o2 = {};
+o2.a = 1;
+o2.b = 10;
+var o3 = {};
+o3.a = 1;
+for (const v20 in o3) {
+}
+
+FuzzIL program written to corpus/regress-convert-enum.fzil

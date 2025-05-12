@@ -1,0 +1,200 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadThis
+    v2 <- GetProperty v1, 'property'
+    Return v2
+EndPlainFunction
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- GetProperty v3, 'prototype'
+SetProperty v4, 'load', v0
+v5 <- LoadInteger '0'
+v6 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `A`, v5
+    ObjectLiteralAddProperty `property`, v6
+v7 <- EndObjectLiteral
+v8 <- GetProperty v3, 'prototype'
+v9 <- GetProperty v8, 'load'
+v10 <- CallMethod v9, 'call', [v7]
+v11 <- LoadInteger '0'
+v12 <- LoadInteger '0'
+v13 <- LoadInteger '11'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `A`, v11
+    ObjectLiteralAddProperty `B`, v12
+    ObjectLiteralAddProperty `property`, v13
+v14 <- EndObjectLiteral
+v15 <- GetProperty v3, 'prototype'
+v16 <- GetProperty v15, 'load'
+v17 <- CallMethod v16, 'call', [v14]
+v18 <- LoadInteger '0'
+v19 <- LoadInteger '0'
+v20 <- LoadInteger '0'
+v21 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `A`, v18
+    ObjectLiteralAddProperty `B`, v19
+    ObjectLiteralAddProperty `C`, v20
+    ObjectLiteralAddProperty `property`, v21
+v22 <- EndObjectLiteral
+v23 <- GetProperty v3, 'prototype'
+v24 <- GetProperty v23, 'load'
+v25 <- CallMethod v24, 'call', [v22]
+v26 <- LoadInteger '0'
+v27 <- LoadInteger '0'
+v28 <- LoadInteger '0'
+v29 <- LoadInteger '0'
+v30 <- LoadInteger '13'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `A`, v26
+    ObjectLiteralAddProperty `B`, v27
+    ObjectLiteralAddProperty `C`, v28
+    ObjectLiteralAddProperty `D`, v29
+    ObjectLiteralAddProperty `property`, v30
+v31 <- EndObjectLiteral
+v32 <- GetProperty v3, 'prototype'
+v33 <- GetProperty v32, 'load'
+v34 <- CallMethod v33, 'call', [v31]
+v35 <- LoadInteger '0'
+v36 <- LoadInteger '0'
+v37 <- LoadInteger '0'
+v38 <- LoadInteger '0'
+v39 <- LoadInteger '0'
+v40 <- LoadInteger '14'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `A`, v35
+    ObjectLiteralAddProperty `B`, v36
+    ObjectLiteralAddProperty `C`, v37
+    ObjectLiteralAddProperty `D`, v38
+    ObjectLiteralAddProperty `E`, v39
+    ObjectLiteralAddProperty `property`, v40
+v41 <- EndObjectLiteral
+v42 <- GetProperty v3, 'prototype'
+v43 <- GetProperty v42, 'load'
+v44 <- CallMethod v43, 'call', [v41]
+v45 <- LoadInteger '0'
+v46 <- LoadInteger '0'
+v47 <- LoadInteger '0'
+v48 <- LoadInteger '0'
+v49 <- LoadInteger '0'
+v50 <- LoadInteger '0'
+v51 <- LoadInteger '15'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `A`, v45
+    ObjectLiteralAddProperty `B`, v46
+    ObjectLiteralAddProperty `C`, v47
+    ObjectLiteralAddProperty `D`, v48
+    ObjectLiteralAddProperty `E`, v49
+    ObjectLiteralAddProperty `F`, v50
+    ObjectLiteralAddProperty `property`, v51
+v52 <- EndObjectLiteral
+v53 <- GetProperty v3, 'prototype'
+v54 <- GetProperty v53, 'load'
+v55 <- CallMethod v54, 'call', [v52]
+v56 <- BeginPlainFunction -> 
+    v57 <- BeginPlainFunction -> v58
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `property`, v58
+        v59 <- EndObjectLiteral
+        v60 <- CreateNamedVariable 'object', 'var', v59
+        v61 <- CallMethod v60, 'load', []
+        Return v61
+    EndPlainFunction
+    v62 <- LoadInteger '1'
+    v63 <- LoadInteger '1'
+    v64 <- CallFunction v57, [v63]
+    v65 <- LoadInteger '2'
+    v66 <- LoadInteger '2'
+    v67 <- CallFunction v57, [v66]
+    v68 <- LoadInteger '3'
+    v69 <- LoadInteger '3'
+    v70 <- CallFunction v57, [v69]
+EndPlainFunction
+v71 <- CallFunction v56, []
+v72 <- BeginPlainFunction -> 
+    v73 <- BeginPlainFunction -> v74
+        v75 <- LoadThis
+        SetProperty v75, 'property', v74
+    EndPlainFunction
+    v76 <- BeginPlainFunction -> v77
+        v78 <- Construct v73, [v77]
+        v79 <- CreateNamedVariable 'object', 'var', v78
+        v80 <- CallMethod v79, 'load', []
+        Return v80
+    EndPlainFunction
+    v81 <- LoadInteger '1'
+    v82 <- LoadInteger '1'
+    v83 <- CallFunction v76, [v82]
+    v84 <- LoadInteger '2'
+    v85 <- LoadInteger '2'
+    v86 <- CallFunction v76, [v85]
+    v87 <- LoadInteger '3'
+    v88 <- LoadInteger '3'
+    v89 <- CallFunction v76, [v88]
+EndPlainFunction
+v90 <- CallFunction v72, []
+
+
+function f0() {
+    return this.property;
+}
+const t3 = Object.prototype;
+t3.load = f0;
+const v7 = { A: 0, property: 10 };
+Object.prototype.load.call(v7);
+const v14 = { A: 0, B: 0, property: 11 };
+Object.prototype.load.call(v14);
+const v22 = { A: 0, B: 0, C: 0, property: 12 };
+Object.prototype.load.call(v22);
+const v31 = {
+    A: 0,
+    B: 0,
+    C: 0,
+    D: 0,
+    property: 13,
+};
+Object.prototype.load.call(v31);
+const v41 = {
+    A: 0,
+    B: 0,
+    C: 0,
+    D: 0,
+    E: 0,
+    property: 14,
+};
+Object.prototype.load.call(v41);
+const v52 = {
+    A: 0,
+    B: 0,
+    C: 0,
+    D: 0,
+    E: 0,
+    F: 0,
+    property: 15,
+};
+Object.prototype.load.call(v52);
+function f56() {
+    function f(a58) {
+        var object = { property: a58 };
+        return object.load();
+    }
+    f(1);
+    f(2);
+    f(3);
+}
+f56();
+function f72() {
+    function c(a74) {
+        this.property = a74;
+    }
+    function f(a77) {
+        const v78 = new c(a77);
+        var object = v78;
+        return object.load();
+    }
+    f(1);
+    f(2);
+    f(3);
+}
+f72();
+
+FuzzIL program written to corpus/property-static.fzil

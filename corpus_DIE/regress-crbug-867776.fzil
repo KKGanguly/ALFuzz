@@ -1,0 +1,58 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '3'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    v7 <- CreateNamedVariable 'BigInt64Array', 'none'
+    v8 <- LoadInteger '200'
+    v9 <- Construct v7, [v8]
+    v10 <- CreateNamedVariable 'array', 'var', v9
+    v11 <- BeginPlainFunction -> 
+        v12 <- CreateNamedVariable 'gc', 'none'
+        v13 <- CallFunction v12, []
+        v14 <- LoadInteger '1094795585'
+        Return v14
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v11
+    v15 <- EndObjectLiteral
+    v16 <- CreateNamedVariable 'evil_object', 'var', v15
+    v17 <- LoadUndefined
+    v18 <- CreateNamedVariable 'root', 'var', v17
+    BeginTry
+        v19 <- BeginPlainFunction -> 
+            Return v10
+        EndPlainFunction
+        v20 <- GetProperty v7, 'of'
+        v21 <- CallMethod v20, 'call', [v19, v16]
+        Reassign v18, v21
+    BeginCatch -> v22
+    EndTryCatch
+    v23 <- CreateNamedVariable 'gc', 'none'
+    v24 <- CallFunction v23, []
+EndForLoop
+
+
+for (let i1 = 0; i1 < 3; i1++) {
+    const v9 = new BigInt64Array(200);
+    var array = v9;
+    function evil_callback() {
+        gc();
+        return 1094795585;
+    }
+    var evil_object = { valueOf: evil_callback };
+    var root;
+    try {
+        function f19() {
+            return array;
+        }
+        root = BigInt64Array.of.call(f19, evil_object);
+    } catch(e22) {
+    }
+    gc();
+}
+
+FuzzIL program written to corpus/regress-crbug-867776.fzil

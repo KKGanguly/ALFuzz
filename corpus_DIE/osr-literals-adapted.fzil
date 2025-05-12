@@ -1,0 +1,165 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        BeginForLoopInitializer
+            v2 <- LoadInteger '0'
+        BeginForLoopCondition -> v3
+            v4 <- LoadInteger '3'
+            v5 <- Compare v3, '<', v4
+        BeginForLoopAfterthought v5 -> v6
+            v7 <- LoadInteger '1'
+            v8 <- BinaryOperation v6, '+', v7
+            v9 <- LoadInteger '0'
+            v10 <- BinaryOperation v8, '|', v9
+            Reassign v6, v10
+        BeginForLoopBody -> v11
+        EndForLoop
+        v12 <- CreateNamedVariable 'i', 'none'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `blah`, v12
+        v13 <- EndObjectLiteral
+        Return v13
+    EndPlainFunction
+    v14 <- BeginPlainFunction -> v15
+        BeginForLoopInitializer
+            v16 <- LoadInteger '0'
+        BeginForLoopCondition -> v17
+            v18 <- LoadInteger '3'
+            v19 <- Compare v17, '<', v18
+        BeginForLoopAfterthought v19 -> v20
+            v21 <- LoadInteger '1'
+            v22 <- BinaryOperation v20, '+', v21
+            v23 <- LoadInteger '0'
+            v24 <- BinaryOperation v22, '|', v23
+            Reassign v20, v24
+        BeginForLoopBody -> v25
+        EndForLoop
+        v26 <- CreateNamedVariable 'i', 'none'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `blah`, v26
+        v27 <- EndObjectLiteral
+        Return v27
+    EndPlainFunction
+    v28 <- BeginPlainFunction -> v29, v30
+        BeginForLoopInitializer
+            v31 <- LoadInteger '0'
+        BeginForLoopCondition -> v32
+            v33 <- LoadInteger '3'
+            v34 <- Compare v32, '<', v33
+        BeginForLoopAfterthought v34 -> v35
+            v36 <- LoadInteger '1'
+            v37 <- BinaryOperation v35, '+', v36
+            v38 <- LoadInteger '0'
+            v39 <- BinaryOperation v37, '|', v38
+            Reassign v35, v39
+        BeginForLoopBody -> v40
+        EndForLoop
+        v41 <- CreateNamedVariable 'i', 'none'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `blah`, v41
+        v42 <- EndObjectLiteral
+        Return v42
+    EndPlainFunction
+    v43 <- BeginPlainFunction -> v44, v45, v46
+        BeginForLoopInitializer
+            v47 <- LoadInteger '0'
+        BeginForLoopCondition -> v48
+            v49 <- LoadInteger '3'
+            v50 <- Compare v48, '<', v49
+        BeginForLoopAfterthought v50 -> v51
+            v52 <- LoadInteger '1'
+            v53 <- BinaryOperation v51, '+', v52
+            v54 <- LoadInteger '0'
+            v55 <- BinaryOperation v53, '|', v54
+            Reassign v51, v55
+        BeginForLoopBody -> v56
+        EndForLoop
+        v57 <- CreateNamedVariable 'i', 'none'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `blah`, v57
+        v58 <- EndObjectLiteral
+        Return v58
+    EndPlainFunction
+    v59 <- BeginPlainFunction -> v60, v61, v62, v63
+        BeginForLoopInitializer
+            v64 <- LoadInteger '0'
+        BeginForLoopCondition -> v65
+            v66 <- LoadInteger '3'
+            v67 <- Compare v65, '<', v66
+        BeginForLoopAfterthought v67 -> v68
+            v69 <- LoadInteger '1'
+            v70 <- BinaryOperation v68, '+', v69
+            v71 <- LoadInteger '0'
+            v72 <- BinaryOperation v70, '|', v71
+            Reassign v68, v72
+        BeginForLoopBody -> v73
+        EndForLoop
+        v74 <- CreateNamedVariable 'i', 'none'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `blah`, v74
+        v75 <- EndObjectLiteral
+        Return v75
+    EndPlainFunction
+    v76 <- BeginPlainFunction -> 
+        v77 <- LoadInteger '3'
+        v78 <- CallFunction v1, []
+        v79 <- GetProperty v78, 'blah'
+        v80 <- LoadInteger '3'
+        v81 <- CallFunction v14, []
+        v82 <- GetProperty v81, 'blah'
+        v83 <- LoadInteger '3'
+        v84 <- CallFunction v28, []
+        v85 <- GetProperty v84, 'blah'
+        v86 <- LoadInteger '3'
+        v87 <- CallFunction v43, []
+        v88 <- GetProperty v87, 'blah'
+        v89 <- LoadInteger '3'
+        v90 <- CallFunction v59, []
+        v91 <- GetProperty v90, 'blah'
+    EndPlainFunction
+    v92 <- CallFunction v76, []
+EndPlainFunction
+v93 <- CallFunction v0, []
+v94 <- CallFunction v0, []
+v95 <- CallFunction v0, []
+
+
+function mod() {
+    function f0() {
+        for (let i3 = 0; i3 < 3; i3 = (i3 + 1) | 0) {
+        }
+        return { blah: i };
+    }
+    function f1(a15) {
+        for (let i17 = 0; i17 < 3; i17 = (i17 + 1) | 0) {
+        }
+        return { blah: i };
+    }
+    function f2(a29, a30) {
+        for (let i32 = 0; i32 < 3; i32 = (i32 + 1) | 0) {
+        }
+        return { blah: i };
+    }
+    function f3(a44, a45, a46) {
+        for (let i48 = 0; i48 < 3; i48 = (i48 + 1) | 0) {
+        }
+        return { blah: i };
+    }
+    function f4(a60, a61, a62, a63) {
+        for (let i65 = 0; i65 < 3; i65 = (i65 + 1) | 0) {
+        }
+        return { blah: i };
+    }
+    function bar() {
+        f0().blah;
+        f1().blah;
+        f2().blah;
+        f3().blah;
+        f4().blah;
+    }
+    bar();
+}
+mod();
+mod();
+mod();
+
+FuzzIL program written to corpus/osr-literals-adapted.fzil

@@ -1,0 +1,57 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadThis
+    SetProperty v2, 'x', v1
+EndPlainFunction
+v3 <- Construct v0, []
+v4 <- CreateNamedVariable 'aa', 'var', v3
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '23'
+    v7 <- LoadThis
+    SetProperty v7, 'z', v6
+    v8 <- LoadInteger '2'
+    v9 <- LoadThis
+    SetProperty v9, 'x', v8
+EndPlainFunction
+v10 <- Construct v5, []
+v11 <- CreateNamedVariable 'bb', 'var', v10
+v12 <- BeginPlainFunction -> v13
+    v14 <- GetProperty v13, 'x'
+    Return v14
+EndPlainFunction
+v15 <- LoadInteger '1'
+v16 <- CallFunction v12, [v4]
+v17 <- LoadInteger '1'
+v18 <- CallFunction v12, [v4]
+v19 <- LoadInteger '2'
+v20 <- CallFunction v12, [v11]
+v21 <- LoadInteger '2'
+v22 <- CallFunction v12, [v11]
+v23 <- LoadInteger '1'
+v24 <- CallFunction v12, [v4]
+v25 <- LoadInteger '2'
+v26 <- CallFunction v12, [v11]
+
+
+function a() {
+    this.x = 1;
+}
+const v3 = new a();
+var aa = v3;
+function b() {
+    this.z = 23;
+    this.x = 2;
+}
+const v10 = new b();
+var bb = v10;
+function f(a13) {
+    return a13.x;
+}
+f(aa);
+f(aa);
+f(bb);
+f(bb);
+f(aa);
+f(bb);
+
+FuzzIL program written to corpus/regress-2030.fzil

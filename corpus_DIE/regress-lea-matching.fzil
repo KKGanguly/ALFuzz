@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- LoadInteger '0'
+    v5 <- BinaryOperation v1, '|', v4
+    Reassign v1, v5
+    v6 <- LoadInteger '0'
+    v7 <- BinaryOperation v2, '|', v6
+    Reassign v2, v7
+    v8 <- LoadInteger '0'
+    v9 <- BinaryOperation v3, '|', v8
+    Reassign v3, v9
+    v10 <- LoadInteger '0'
+    v11 <- CreateNamedVariable 'r', 'var', v10
+    v12 <- LoadInteger '1'
+    v13 <- BinaryOperation v2, '<<', v12
+    v14 <- BinaryOperation v13, '+', v3
+    v15 <- BinaryOperation v1, '+', v14
+    v16 <- LoadInteger '0'
+    v17 <- BinaryOperation v15, '|', v16
+    Reassign v11, v17
+    v18 <- LoadInteger '0'
+    v19 <- BinaryOperation v11, '|', v18
+    Return v19
+EndPlainFunction
+v20 <- LoadInteger '8'
+v21 <- LoadInteger '1'
+v22 <- LoadInteger '2'
+v23 <- LoadInteger '3'
+v24 <- CallFunction v0, [v21, v22, v23]
+
+
+function f(a1, a2, a3) {
+    a1 = a1 | 0;
+    a2 = a2 | 0;
+    a3 = a3 | 0;
+    var r = 0;
+    return (r = (a1 + ((a2 << 1) + a3)) | 0) | 0;
+}
+f(1, 2, 3);
+
+FuzzIL program written to corpus/regress-lea-matching.fzil

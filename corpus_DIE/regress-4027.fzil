@@ -1,0 +1,104 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'inner'
+    v2 <- LoadThis
+    SetProperty v2, 'inner_name', v1
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadString 'boom'
+    v5 <- LoadThis
+    SetProperty v5, 'boom', v4
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadString 'outer'
+    v8 <- LoadThis
+    SetProperty v8, 'outer_name', v7
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10, v11
+    SetProperty v10, 'prop', v11
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13, v14
+    SetProperty v13, 'inner', v14
+EndPlainFunction
+v15 <- Construct v0, []
+v16 <- CreateNamedVariable 'inner1', 'var', v15
+v17 <- Construct v0, []
+v18 <- CreateNamedVariable 'inner2', 'var', v17
+v19 <- LoadInteger '10'
+v20 <- CallFunction v9, [v16, v19]
+v21 <- LoadInteger '10'
+v22 <- CallFunction v9, [v18, v21]
+v23 <- Construct v6, []
+v24 <- CreateNamedVariable 'outer1', 'var', v23
+v25 <- Construct v6, []
+v26 <- CreateNamedVariable 'outer2', 'var', v25
+v27 <- Construct v6, []
+v28 <- CreateNamedVariable 'outer3', 'var', v27
+v29 <- CallFunction v12, [v24, v16]
+v30 <- CallFunction v12, [v24, v16]
+v31 <- CallFunction v12, [v24, v16]
+v32 <- CallFunction v12, [v26, v18]
+v33 <- CallFunction v12, [v26, v18]
+v34 <- CallFunction v12, [v26, v18]
+v35 <- CallFunction v12, [v28, v18]
+v36 <- CallFunction v12, [v28, v18]
+v37 <- CallFunction v12, [v28, v18]
+v38 <- LoadFloat '6.5'
+v39 <- CallFunction v9, [v18, v38]
+v40 <- LoadNull
+Reassign v24, v40
+v41 <- LoadNull
+Reassign v16, v41
+v42 <- CreateNamedVariable 'gc', 'none'
+v43 <- CallFunction v42, []
+v44 <- Construct v3, []
+v45 <- CreateNamedVariable 'boom', 'var', v44
+v46 <- CallFunction v12, [v26, v45]
+v47 <- CallFunction v42, []
+
+
+function Inner() {
+    this.inner_name = "inner";
+}
+function Boom() {
+    this.boom = "boom";
+}
+function Outer() {
+    this.outer_name = "outer";
+}
+function SetInner(a10, a11) {
+    a10.prop = a11;
+}
+function SetOuter(a13, a14) {
+    a13.inner = a14;
+}
+const v15 = new Inner();
+var inner1 = v15;
+const v17 = new Inner();
+var inner2 = v17;
+SetInner(inner1, 10);
+SetInner(inner2, 10);
+const v23 = new Outer();
+var outer1 = v23;
+const v25 = new Outer();
+var outer2 = v25;
+const v27 = new Outer();
+var outer3 = v27;
+SetOuter(outer1, inner1);
+SetOuter(outer1, inner1);
+SetOuter(outer1, inner1);
+SetOuter(outer2, inner2);
+SetOuter(outer2, inner2);
+SetOuter(outer2, inner2);
+SetOuter(outer3, inner2);
+SetOuter(outer3, inner2);
+SetOuter(outer3, inner2);
+SetInner(inner2, 6.5);
+outer1 = null;
+inner1 = null;
+gc();
+const v44 = new Boom();
+var boom = v44;
+SetOuter(outer2, boom);
+gc();
+
+FuzzIL program written to corpus/regress-4027.fzil

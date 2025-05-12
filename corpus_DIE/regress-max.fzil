@@ -1,0 +1,38 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '5'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    v7 <- LoadInteger '0'
+    v8 <- LoadInteger '0'
+    v9 <- CreateNamedVariable 'Math', 'none'
+    v10 <- CallMethod v9, 'max', [v7, v8]
+EndForLoop
+v11 <- LoadInteger '0'
+v12 <- LoadInteger '0'
+v13 <- CreateNamedVariable 'Math', 'none'
+v14 <- CallMethod v13, 'max', [v11, v12]
+v15 <- LoadInteger '0'
+v16 <- UnaryOperation '-', v15
+v17 <- LoadInteger '0'
+v18 <- UnaryOperation '-', v17
+v19 <- CallMethod v13, 'max', [v16, v18]
+v20 <- CreateNamedVariable 'r', 'var', v19
+v21 <- CreateNamedVariable 'Infinity', 'none'
+v22 <- UnaryOperation '-', v21
+v23 <- LoadInteger '1'
+v24 <- BinaryOperation v23, '/', v20
+
+
+for (let i1 = 0; i1 < 5; i1++) {
+    Math.max(0, 0);
+}
+Math.max(0, 0);
+var r = Math.max(-0, -0);
+-Infinity;
+1 / r;
+
+FuzzIL program written to corpus/regress-max.fzil

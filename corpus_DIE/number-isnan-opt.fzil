@@ -1,0 +1,144 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- CreateNamedVariable 'Number', 'none'
+        v4 <- CallMethod v3, 'isNaN', [v2]
+        Return v4
+    EndPlainFunction
+    v5 <- LoadUndefined
+    v6 <- UnaryOperation '+', v5
+    v7 <- CallFunction v1, [v6]
+    v8 <- LoadUndefined
+    v9 <- CallFunction v1, [v8]
+    v10 <- LoadUndefined
+    v11 <- UnaryOperation '+', v10
+    v12 <- CallFunction v1, [v11]
+    v13 <- LoadUndefined
+    v14 <- CallFunction v1, [v13]
+EndPlainFunction
+v15 <- CallFunction v0, []
+v16 <- BeginPlainFunction -> 
+    v17 <- BeginPlainFunction -> v18
+        v19 <- UnaryOperation '+', v18
+        v20 <- CreateNamedVariable 'Number', 'none'
+        v21 <- CallMethod v20, 'isNaN', [v19]
+        Return v21
+    EndPlainFunction
+    v22 <- LoadUndefined
+    v23 <- UnaryOperation '+', v22
+    v24 <- CallFunction v17, [v23]
+    v25 <- LoadInteger '0'
+    v26 <- CallFunction v17, [v25]
+    v27 <- LoadUndefined
+    v28 <- UnaryOperation '+', v27
+    v29 <- CallFunction v17, [v28]
+    v30 <- LoadInteger '0'
+    v31 <- CallFunction v17, [v30]
+EndPlainFunction
+v32 <- CallFunction v16, []
+v33 <- BeginPlainFunction -> 
+    v34 <- BeginPlainFunction -> v35
+        v36 <- LoadInteger '0'
+        v37 <- BinaryOperation v35, '|', v36
+        v38 <- CreateNamedVariable 'Number', 'none'
+        v39 <- CallMethod v38, 'isNaN', [v37]
+        Return v39
+    EndPlainFunction
+    v40 <- LoadUndefined
+    v41 <- UnaryOperation '+', v40
+    v42 <- CallFunction v34, [v41]
+    v43 <- LoadInteger '0'
+    v44 <- CallFunction v34, [v43]
+    v45 <- LoadUndefined
+    v46 <- UnaryOperation '+', v45
+    v47 <- CallFunction v34, [v46]
+    v48 <- LoadInteger '0'
+    v49 <- CallFunction v34, [v48]
+EndPlainFunction
+v50 <- CallFunction v33, []
+v51 <- BeginPlainFunction -> 
+    v52 <- BeginPlainFunction -> v53
+        v54 <- LoadString ''
+        v55 <- BinaryOperation v54, '+', v53
+        v56 <- CreateNamedVariable 'Number', 'none'
+        v57 <- CallMethod v56, 'isNaN', [v55]
+        Return v57
+    EndPlainFunction
+    v58 <- LoadUndefined
+    v59 <- CallFunction v52, [v58]
+    v60 <- LoadInteger '0'
+    v61 <- CallFunction v52, [v60]
+    v62 <- LoadUndefined
+    v63 <- CallFunction v52, [v62]
+    v64 <- LoadInteger '0'
+    v65 <- CallFunction v52, [v64]
+EndPlainFunction
+v66 <- CallFunction v51, []
+v67 <- BeginPlainFunction -> 
+    v68 <- BeginPlainFunction -> v69
+        v70 <- LoadInteger '0'
+        v71 <- LoadInteger '0'
+        v72 <- BinaryOperation v70, '/', v71
+        v73 <- CreateNamedVariable 'Number', 'none'
+        v74 <- CallMethod v73, 'isNaN', [v72]
+        Return v74
+    EndPlainFunction
+    v75 <- CallFunction v68, []
+    v76 <- CallFunction v68, []
+    v77 <- CallFunction v68, []
+    v78 <- CallFunction v68, []
+EndPlainFunction
+v79 <- CallFunction v67, []
+
+
+function f0() {
+    function foo(a2) {
+        return Number.isNaN(a2);
+    }
+    foo(+undefined);
+    foo(undefined);
+    foo(+undefined);
+    foo(undefined);
+}
+f0();
+function f16() {
+    function foo(a18) {
+        return Number.isNaN(+a18);
+    }
+    foo(+undefined);
+    foo(0);
+    foo(+undefined);
+    foo(0);
+}
+f16();
+function f33() {
+    function foo(a35) {
+        return Number.isNaN(a35 | 0);
+    }
+    foo(+undefined);
+    foo(0);
+    foo(+undefined);
+    foo(0);
+}
+f33();
+function f51() {
+    function foo(a53) {
+        return Number.isNaN("" + a53);
+    }
+    foo(undefined);
+    foo(0);
+    foo(undefined);
+    foo(0);
+}
+f51();
+function f67() {
+    function foo(a69) {
+        return Number.isNaN(0 / 0);
+    }
+    foo();
+    foo();
+    foo();
+    foo();
+}
+f67();
+
+FuzzIL program written to corpus/number-isnan-opt.fzil

@@ -1,0 +1,59 @@
+v0 <- LoadInteger '0'
+v1 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+    ObjectLiteralAddProperty `y`, v1
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'foo', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- CreateNamedVariable 'h', 'none'
+    v7 <- CallFunction v6, [v5]
+    v8 <- GetProperty v3, 'x'
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    v11 <- CreateNamedVariable 'g', 'none'
+    v12 <- CallFunction v11, [v10]
+    v13 <- GetProperty v3, 'x'
+    Return v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> v15
+    BeginIf v15
+        v16 <- LoadInteger '536'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v16
+        v17 <- EndObjectLiteral
+        Reassign v3, v17
+    EndIf
+EndPlainFunction
+v18 <- LoadBoolean 'false'
+v19 <- CallFunction v4, [v18]
+v20 <- LoadBoolean 'false'
+v21 <- CallFunction v4, [v20]
+v22 <- LoadBoolean 'false'
+v23 <- CallFunction v4, [v22]
+v24 <- LoadBoolean 'true'
+v25 <- CallFunction v4, [v24]
+v26 <- LoadInteger '536'
+
+
+var foo = { x: 0, y: 1 };
+function f(a5) {
+    h(a5);
+    return foo.x;
+}
+function h(a10) {
+    g(a10);
+    return foo.x;
+}
+function g(a15) {
+    if (a15) {
+        foo = { x: 536 };
+    }
+}
+f(false);
+f(false);
+f(false);
+f(true);
+
+FuzzIL program written to corpus/deopt-eager-var-mutation-ite.fzil

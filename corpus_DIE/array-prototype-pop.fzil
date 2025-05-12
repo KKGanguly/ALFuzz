@@ -1,0 +1,48 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'array', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- CallMethod v3, 'pop', []
+        Return v5
+    EndPlainFunction
+    v6 <- CallFunction v4, []
+    v7 <- LoadUndefined
+EndPlainFunction
+v8 <- CallFunction v0, []
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadUndefined
+    v11 <- CreateArray [v10]
+    v12 <- CreateNamedVariable 'array', 'var', v11
+    v13 <- BeginPlainFunction -> 
+        v14 <- CallMethod v12, 'pop', []
+        Return v14
+    EndPlainFunction
+    v15 <- LoadInteger '6'
+    v16 <- GetProperty v12, '__proto__'
+    v17 <- CallMethod v16, 'push', [v15]
+    v18 <- CallFunction v13, []
+    v19 <- LoadInteger '6'
+EndPlainFunction
+v20 <- CallFunction v9, []
+
+
+function f0() {
+    var array = [,];
+    function pop() {
+        return array.pop();
+    }
+    pop();
+}
+f0();
+function f9() {
+    var array = [,];
+    function pop() {
+        return array.pop();
+    }
+    array.__proto__.push(6);
+    pop();
+}
+f9();
+
+FuzzIL program written to corpus/array-prototype-pop.fzil

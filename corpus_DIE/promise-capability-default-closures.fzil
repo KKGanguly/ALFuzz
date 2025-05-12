@@ -1,0 +1,182 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'resolve', 'var', v1
+    v3 <- LoadUndefined
+    v4 <- CreateNamedVariable 'value', 'var', v3
+    v5 <- BeginArrowFunction -> v6
+        Reassign v4, v6
+        Return v6
+    EndArrowFunction
+    v7 <- CreateNamedVariable 'Promise', 'none'
+    v8 <- BeginArrowFunction -> v9
+        Reassign v2, v9
+        Return v9
+    EndArrowFunction
+    v10 <- Construct v7, [v8]
+    v11 <- CallMethod v10, 'then', [v5]
+    v12 <- BeginPlainFunction -> 
+        v13 <- LoadInteger '1'
+        v14 <- CallFunction v2, [v13]
+    EndPlainFunction
+    v15 <- CallFunction v12, []
+    v16 <- CallFunction v12, []
+    v17 <- CallFunction v12, []
+EndPlainFunction
+v18 <- CallFunction v0, []
+v19 <- BeginPlainFunction -> 
+    v20 <- LoadUndefined
+    v21 <- CreateNamedVariable 'reject', 'var', v20
+    v22 <- LoadUndefined
+    v23 <- CreateNamedVariable 'value', 'var', v22
+    v24 <- BeginArrowFunction -> v25
+        Reassign v23, v25
+        Return v25
+    EndArrowFunction
+    v26 <- CreateNamedVariable 'Promise', 'none'
+    v27 <- BeginArrowFunction -> v28, v29
+        Reassign v21, v29
+        Return v29
+    EndArrowFunction
+    v30 <- Construct v26, [v27]
+    v31 <- CallMethod v30, 'catch', [v24]
+    v32 <- BeginPlainFunction -> 
+        v33 <- LoadInteger '1'
+        v34 <- CallFunction v21, [v33]
+    EndPlainFunction
+    v35 <- CallFunction v32, []
+    v36 <- CallFunction v32, []
+    v37 <- CallFunction v32, []
+EndPlainFunction
+v38 <- CallFunction v19, []
+v39 <- BeginPlainFunction -> 
+    v40 <- LoadUndefined
+    v41 <- CreateNamedVariable 'value', 'var', v40
+    v42 <- BeginPlainFunction -> v43
+        v44 <- CreateNamedVariable 'Promise', 'none'
+        v45 <- BeginArrowFunction -> v46, v47
+            v48 <- CallFunction v46, [v43]
+            Return v48
+        EndArrowFunction
+        v49 <- Construct v44, [v45]
+        Return v49
+    EndPlainFunction
+    v50 <- LoadInteger '1'
+    v51 <- CallFunction v42, [v50]
+    v52 <- LoadInteger '1'
+    v53 <- CallFunction v42, [v52]
+    v54 <- BeginArrowFunction -> v55
+        Reassign v41, v55
+        Return v55
+    EndArrowFunction
+    v56 <- LoadInteger '1'
+    v57 <- CallFunction v42, [v56]
+    v58 <- CallMethod v57, 'then', [v54]
+EndPlainFunction
+v59 <- CallFunction v39, []
+v60 <- BeginPlainFunction -> 
+    v61 <- LoadUndefined
+    v62 <- CreateNamedVariable 'value', 'var', v61
+    v63 <- BeginPlainFunction -> v64
+        v65 <- CreateNamedVariable 'Promise', 'none'
+        v66 <- BeginArrowFunction -> v67, v68
+            v69 <- CallFunction v68, [v64]
+            Return v69
+        EndArrowFunction
+        v70 <- Construct v65, [v66]
+        Return v70
+    EndPlainFunction
+    v71 <- LoadInteger '1'
+    v72 <- CallFunction v63, [v71]
+    v73 <- LoadInteger '1'
+    v74 <- CallFunction v63, [v73]
+    v75 <- BeginArrowFunction -> v76
+        Reassign v62, v76
+        Return v76
+    EndArrowFunction
+    v77 <- LoadInteger '1'
+    v78 <- CallFunction v63, [v77]
+    v79 <- CallMethod v78, 'catch', [v75]
+EndPlainFunction
+v80 <- CallFunction v60, []
+
+
+function f0() {
+    var resolve;
+    var value;
+    const v5 = (a6) => {
+        value = a6;
+        return a6;
+    };
+    const v8 = (a9) => {
+        resolve = a9;
+        return a9;
+    };
+    const v10 = new Promise(v8);
+    v10.then(v5);
+    function foo() {
+        resolve(1);
+    }
+    foo();
+    foo();
+    foo();
+}
+f0();
+function f19() {
+    var reject;
+    var value;
+    const v24 = (a25) => {
+        value = a25;
+        return a25;
+    };
+    const v27 = (a28, a29) => {
+        reject = a29;
+        return a29;
+    };
+    const v30 = new Promise(v27);
+    v30.catch(v24);
+    function foo() {
+        reject(1);
+    }
+    foo();
+    foo();
+    foo();
+}
+f19();
+function f39() {
+    var value;
+    function foo(a43) {
+        const v45 = (a46, a47) => {
+            return a46(a43);
+        };
+        const v49 = new Promise(v45);
+        return v49;
+    }
+    foo(1);
+    foo(1);
+    const v54 = (a55) => {
+        value = a55;
+        return a55;
+    };
+    foo(1).then(v54);
+}
+f39();
+function f60() {
+    var value;
+    function foo(a64) {
+        const v66 = (a67, a68) => {
+            return a68(a64);
+        };
+        const v70 = new Promise(v66);
+        return v70;
+    }
+    foo(1);
+    foo(1);
+    const v75 = (a76) => {
+        value = a76;
+        return a76;
+    };
+    foo(1).catch(v75);
+}
+f60();
+
+FuzzIL program written to corpus/promise-capability-default-closures.fzil

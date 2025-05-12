@@ -1,0 +1,92 @@
+v0 <- LoadInteger '65535'
+v1 <- LoadInteger '1'
+v2 <- BinaryOperation v0, '+', v1
+v3 <- CreateNamedVariable 'maxSize', 'var', v2
+v4 <- LoadUndefined
+v5 <- CreateNamedVariable 'ab', 'var', v4
+BeginForLoopInitializer
+    v6 <- LoadInteger '8'
+    v7 <- CreateNamedVariable 'k', 'none'
+    Reassign v7, v6
+BeginForLoopCondition
+    v8 <- CreateNamedVariable 'k', 'none'
+    v9 <- LoadInteger '1'
+    v10 <- Compare v8, '>=', v9
+    v11 <- LoadNull
+    v12 <- Compare v5, '==', v11
+    v13 <- BinaryOperation v10, '&&', v12
+BeginForLoopAfterthought v13
+    v14 <- CreateNamedVariable 'k', 'none'
+    v15 <- LoadInteger '2'
+    v16 <- BinaryOperation v14, '/', v15
+    Reassign v14, v16
+BeginForLoopBody
+    BeginTry
+        v17 <- CreateNamedVariable 'ArrayBuffer', 'none'
+        v18 <- CreateNamedVariable 'k', 'none'
+        v19 <- BinaryOperation v3, '*', v18
+        v20 <- Construct v17, [v19]
+        Reassign v5, v20
+    BeginCatch -> v21
+        v22 <- LoadNull
+        Reassign v5, v22
+    EndTryCatch
+EndForLoop
+v23 <- LoadNull
+v24 <- Compare v5, '!=', v23
+v25 <- BeginPlainFunction -> v26
+    v27 <- BeginPlainFunction -> 
+        v28 <- LoadInteger '0'
+        v29 <- Construct v26, [v5, v28, v3]
+    EndPlainFunction
+    v30 <- CallFunction v27, []
+    v31 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v32 <- CreateNamedVariable 'Uint8Array', 'none'
+v33 <- CallFunction v25, [v32]
+v34 <- CreateNamedVariable 'Int8Array', 'none'
+v35 <- CallFunction v25, [v34]
+v36 <- CreateNamedVariable 'Uint16Array', 'none'
+v37 <- CallFunction v25, [v36]
+v38 <- CreateNamedVariable 'Int16Array', 'none'
+v39 <- CallFunction v25, [v38]
+v40 <- CreateNamedVariable 'Uint32Array', 'none'
+v41 <- CallFunction v25, [v40]
+v42 <- CreateNamedVariable 'Int32Array', 'none'
+v43 <- CallFunction v25, [v42]
+v44 <- CreateNamedVariable 'Float32Array', 'none'
+v45 <- CallFunction v25, [v44]
+v46 <- CreateNamedVariable 'Float64Array', 'none'
+v47 <- CallFunction v25, [v46]
+v48 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v49 <- CallFunction v25, [v48]
+
+
+var maxSize = 65535 + 1;
+var ab;
+for (k = 8; (k >= 1) && (ab == null); k = k / 2) {
+    try {
+        const v20 = new ArrayBuffer(maxSize * k);
+        ab = v20;
+    } catch(e21) {
+        ab = null;
+    }
+}
+ab != null;
+function TestArray(a26) {
+    function f27() {
+        new a26(ab, 0, maxSize);
+    }
+    f27();
+}
+TestArray(Uint8Array);
+TestArray(Int8Array);
+TestArray(Uint16Array);
+TestArray(Int16Array);
+TestArray(Uint32Array);
+TestArray(Int32Array);
+TestArray(Float32Array);
+TestArray(Float64Array);
+TestArray(Uint8ClampedArray);
+
+FuzzIL program written to corpus/regress-319722-ArrayBuffer.fzil

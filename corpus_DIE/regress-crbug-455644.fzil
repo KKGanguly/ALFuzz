@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> 
+    BeginDoWhileLoopBody
+        v1 <- LoadInteger '23'
+        Return v1
+    BeginDoWhileLoopHeader
+        v2 <- LoadBoolean 'false'
+    EndDoWhileLoop v2
+    v3 <- LoadInteger '0'
+    BeginWith v3
+        BeginTry
+            v4 <- LoadInteger '42'
+            Return v4
+        BeginFinally
+        EndTryCatch
+    EndWith
+EndPlainFunction
+v5 <- CallFunction v0, []
+
+
+function f() {
+    do {
+        return 23;
+    } while (false)
+    with (0) {
+        try {
+            return 42;
+        } finally {
+        }
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-crbug-455644.fzil

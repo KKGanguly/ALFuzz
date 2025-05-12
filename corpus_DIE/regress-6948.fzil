@@ -1,0 +1,46 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- GetComputedProperty v1, v3
+    Return v4
+EndPlainFunction
+v5 <- LoadString 'c'
+v6 <- LoadString 'c'
+v7 <- BinaryOperation v5, '+', v6
+v8 <- CreateNamedVariable 's', 'var', v7
+v9 <- CallFunction v2, [v8]
+v10 <- CallFunction v2, [v8]
+v11 <- LoadUndefined
+v12 <- CallFunction v2, [v8]
+v13 <- CallFunction v2, []
+v14 <- LoadUndefined
+v15 <- LoadString 'c'
+v16 <- LoadString 'c'
+v17 <- BinaryOperation v15, '+', v16
+v18 <- CallFunction v2, [v17]
+v19 <- CallFunction v2, []
+v20 <- LoadUndefined
+v21 <- LoadInteger '0'
+v22 <- LoadInteger '2'
+v23 <- LoadString 'ccddeeffgg'
+v24 <- CallMethod v23, 'slice', [v21, v22]
+v25 <- CallFunction v2, [v24]
+v26 <- CallFunction v2, []
+
+
+var o = {};
+function foo(a3) {
+    return o[a3];
+}
+var s = "c" + "c";
+foo(s);
+foo(s);
+foo(s);
+foo();
+foo("c" + "c");
+foo();
+foo(("ccddeeffgg").slice(0, 2));
+foo();
+
+FuzzIL program written to corpus/regress-6948.fzil

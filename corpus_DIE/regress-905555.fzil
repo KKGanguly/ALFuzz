@@ -1,0 +1,41 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'global', 'none'
+Reassign v1, v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- CreateNamedVariable 'global', 'none'
+    Return v4
+EndPlainFunction
+v5 <- LoadInteger '1'
+v6 <- CallFunction v2, []
+v7 <- LoadInteger '1'
+v8 <- CallFunction v2, []
+v9 <- LoadInteger '1'
+v10 <- CallFunction v2, []
+v11 <- LoadString 'global'
+v12 <- BeginArrowFunction -> 
+    v13 <- LoadInteger '42'
+    Return v13
+EndArrowFunction
+v14 <- LoadThis
+v15 <- CallMethod v14, '__defineGetter__', [v11, v12]
+v16 <- CallFunction v2, []
+v17 <- LoadString 'sync'
+v18 <- LoadInteger '42'
+v19 <- CallFunction v2, []
+
+
+global = 1;
+function boom(a3) {
+    return global;
+}
+boom();
+boom();
+boom();
+const v12 = () => {
+    return 42;
+};
+this.__defineGetter__("global", v12);
+boom();
+boom();
+
+FuzzIL program written to corpus/regress-905555.fzil

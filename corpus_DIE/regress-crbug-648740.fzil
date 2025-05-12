@@ -1,0 +1,17 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadInteger '42'
+        v3 <- CreateNamedVariable 'arguments', 'const', v2
+    EndPlainFunction
+EndPlainFunction
+v4 <- CallFunction v0, []
+
+
+function f0() {
+    function foo() {
+        const arguments = 42;
+    }
+}
+f0();
+
+FuzzIL program written to corpus/regress-crbug-648740.fzil

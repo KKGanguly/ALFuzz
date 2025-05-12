@@ -1,0 +1,44 @@
+v0 <- LoadInteger '2'
+v1 <- UnaryOperation '-', v0
+BeginObjectLiteral
+    ObjectLiteralAddProperty `bar`, v1
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'foo', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- GetProperty v3, 'bar'
+    v6 <- UnaryOperation v5, '++'
+    v7 <- UnaryOperation '!', v6
+    Return v7
+EndPlainFunction
+v8 <- CallFunction v4, []
+v9 <- LoadInteger '1'
+v10 <- UnaryOperation '-', v9
+v11 <- GetProperty v3, 'bar'
+v12 <- CallFunction v4, []
+v13 <- LoadInteger '0'
+v14 <- GetProperty v3, 'bar'
+v15 <- CallFunction v4, []
+v16 <- LoadInteger '1'
+v17 <- GetProperty v3, 'bar'
+v18 <- CallFunction v4, []
+v19 <- LoadInteger '2'
+v20 <- GetProperty v3, 'bar'
+
+
+const v1 = -2;
+var foo = { bar: v1 };
+function crash() {
+    let v5 = foo.bar;
+    return !(v5++);
+}
+crash();
+-1;
+foo.bar;
+crash();
+foo.bar;
+crash();
+foo.bar;
+crash();
+foo.bar;
+
+FuzzIL program written to corpus/post-increment-close-context.fzil

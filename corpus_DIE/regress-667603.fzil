@@ -1,0 +1,19 @@
+BeginTry
+    v0 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v1 <- LoadInteger '2147483647'
+    v2 <- Construct v0, [v1]
+    v3 <- CreateNamedVariable 'v65', 'var', v2
+BeginCatch -> v4
+    v5 <- CreateNamedVariable 'RangeError', 'none'
+    v6 <- TestInstanceOf v4, v5
+EndTryCatch
+
+
+try {
+    const v2 = new ArrayBuffer(2147483647);
+    var v65 = v2;
+} catch(e4) {
+    e4 instanceof RangeError;
+}
+
+FuzzIL program written to corpus/regress-667603.fzil

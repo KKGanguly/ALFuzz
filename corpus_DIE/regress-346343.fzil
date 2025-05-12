@@ -1,0 +1,52 @@
+v0 <- BeginPlainFunction -> v1
+    BeginForLoopInitializer
+        v2 <- LoadInteger '1'
+    BeginForLoopCondition -> v3
+        v4 <- LoadInteger '2'
+        v5 <- Compare v3, '<', v4
+    BeginForLoopAfterthought v5 -> v6
+        v7 <- UnaryOperation '++', v6
+    BeginForLoopBody -> v8
+        v9 <- GetProperty v1, 'y'
+        v10 <- CreateNamedVariable 'y', 'var', v9
+    EndForLoop
+EndPlainFunction
+v11 <- LoadFloat '1.1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v11
+v12 <- EndObjectLiteral
+v13 <- CallFunction v0, [v12]
+v14 <- LoadFloat '1.1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v14
+v15 <- EndObjectLiteral
+v16 <- CallFunction v0, [v15]
+v17 <- BeginPlainFunction -> v18
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `z`, v18
+    v19 <- EndObjectLiteral
+    v20 <- CallFunction v0, [v19]
+EndPlainFunction
+v21 <- LoadInteger '1'
+v22 <- CallFunction v17, [v21]
+v23 <- LoadInteger '2'
+v24 <- CallFunction v17, [v23]
+v25 <- LoadInteger '1'
+v26 <- CallFunction v17, [v25]
+
+
+function f(a1) {
+    for (let i3 = 1; i3 < 2; ++i3) {
+        var y = a1.y;
+    }
+}
+f({ y: 1.1 });
+f({ y: 1.1 });
+function g(a18) {
+    f({ z: a18 });
+}
+g(1);
+g(2);
+g(1);
+
+FuzzIL program written to corpus/regress-346343.fzil

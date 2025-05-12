@@ -1,0 +1,95 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    BeginForLoopInitializer
+        v4 <- LoadInteger '0'
+    BeginForLoopCondition -> v5
+        v6 <- LoadInteger '10'
+        v7 <- Compare v5, '<', v6
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation v8, '++'
+    BeginForLoopBody -> v10
+        v11 <- LoadInteger '0'
+        v12 <- GetElement v3, '0'
+        v13 <- LoadInteger '0'
+        v14 <- LoadString '0'
+        v15 <- GetComputedProperty v3, v14
+        v16 <- CallFunction v0, []
+        v17 <- GetElement v3, '1'
+        v18 <- CallFunction v0, []
+        v19 <- LoadString '1'
+        v20 <- GetComputedProperty v3, v19
+        v21 <- LoadInteger '1'
+        v22 <- LoadInteger '1'
+        v23 <- CallComputedMethod v3, v22, []
+        v24 <- LoadInteger '1'
+        v25 <- LoadString '1'
+        v26 <- CallComputedMethod v3, v25, []
+    EndForLoop
+EndPlainFunction
+v27 <- LoadInteger '0'
+v28 <- CreateNamedVariable 'Number', 'none'
+v29 <- GetProperty v28, 'prototype'
+SetElement v29, '0', v27
+v30 <- GetProperty v28, 'prototype'
+SetElement v30, '1', v0
+v31 <- LoadInteger '0'
+v32 <- CallFunction v2, [v31]
+v33 <- LoadFloat '0.1'
+v34 <- CallFunction v2, [v33]
+v35 <- LoadInteger '0'
+v36 <- CreateNamedVariable 'String', 'none'
+v37 <- GetProperty v36, 'prototype'
+SetElement v37, '0', v35
+v38 <- GetProperty v36, 'prototype'
+SetElement v38, '1', v0
+v39 <- LoadString ''
+v40 <- CallFunction v2, [v39]
+v41 <- LoadInteger '0'
+v42 <- CreateNamedVariable 'Boolean', 'none'
+v43 <- GetProperty v42, 'prototype'
+SetElement v43, '0', v41
+v44 <- GetProperty v42, 'prototype'
+SetElement v44, '1', v0
+v45 <- LoadBoolean 'true'
+v46 <- CallFunction v2, [v45]
+v47 <- LoadBoolean 'false'
+v48 <- CallFunction v2, [v47]
+
+
+function return_one() {
+    return 1;
+}
+function test(a3) {
+    for (let i5 = 0; i5 < 10; i5++) {
+        a3[0];
+        a3["0"];
+        return_one();
+        a3[1];
+        return_one();
+        a3["1"];
+        a3[1]();
+        a3["1"]();
+    }
+}
+const t15 = Number.prototype;
+t15[0] = 0;
+const t17 = Number.prototype;
+t17[1] = return_one;
+test(0);
+test(0.1);
+const t19 = String.prototype;
+t19[0] = 0;
+const t23 = String.prototype;
+t23[1] = return_one;
+test("");
+const t25 = Boolean.prototype;
+t25[0] = 0;
+const t28 = Boolean.prototype;
+t28[1] = return_one;
+test(true);
+test(false);
+
+FuzzIL program written to corpus/indexed-value-properties.fzil

@@ -1,0 +1,18 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Symbol', 'none'
+    v2 <- GetProperty v1, 'toPrimitive'
+    v3 <- UnaryOperation v2, '++'
+    Return v3
+EndPlainFunction
+v4 <- CallFunction v0, []
+v5 <- CallFunction v0, []
+
+
+function foo() {
+    let v2 = Symbol.toPrimitive;
+    return v2++;
+}
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-879898.fzil

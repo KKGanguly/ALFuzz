@@ -1,0 +1,74 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'x'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4, v5
+    v6 <- GetProperty v4, 'x'
+    Return v6
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8, v9
+    v10 <- CallFunction v0, [v8, v8]
+    v11 <- CallFunction v3, [v9]
+    v12 <- BinaryOperation v10, '*', v11
+    Return v12
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14, v15
+    v16 <- CallFunction v0, [v14, v14]
+    v17 <- CallFunction v3, [v15]
+    v18 <- BinaryOperation v16, '*', v17
+    Return v18
+EndPlainFunction
+v19 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v19
+v20 <- EndObjectLiteral
+v21 <- CreateNamedVariable 'o', 'var', v20
+v22 <- LoadInteger '4'
+v23 <- CallFunction v7, [v21, v21]
+v24 <- LoadInteger '4'
+v25 <- CallFunction v7, [v21, v21]
+v26 <- LoadInteger '4'
+v27 <- CallFunction v13, [v21, v21]
+v28 <- LoadInteger '4'
+v29 <- CallFunction v13, [v21, v21]
+v30 <- LoadInteger '4'
+v31 <- CallFunction v7, [v21, v21]
+v32 <- LoadInteger '4'
+v33 <- CallFunction v13, [v21, v21]
+v34 <- LoadInteger '0'
+v35 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v34
+    ObjectLiteralAddProperty `x`, v35
+v36 <- EndObjectLiteral
+v37 <- CreateNamedVariable 'u', 'var', v36
+v38 <- LoadInteger '2'
+v39 <- CallFunction v7, [v37, v21]
+v40 <- LoadInteger '2'
+v41 <- CallFunction v13, [v21, v37]
+
+
+function f(a1) {
+    return a1.x;
+}
+function g(a4, a5) {
+    return a4.x;
+}
+function h1(a8, a9) {
+    return f(a8, a8) * g(a9);
+}
+function h2(a14, a15) {
+    return f(a14, a14) * g(a15);
+}
+var o = { x: 2 };
+h1(o, o);
+h1(o, o);
+h2(o, o);
+h2(o, o);
+h1(o, o);
+h2(o, o);
+var u = { y: 0, x: 1 };
+h1(u, o);
+h2(o, u);
+
+FuzzIL program written to corpus/inline-arity-mismatch.fzil

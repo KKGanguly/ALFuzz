@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '1'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- CreateNamedVariable 'Math', 'none'
+        v11 <- CallMethod v10, 'min', [v2, v9]
+        Reassign v2, v11
+    EndForLoop
+    v12 <- LoadInteger '0'
+    v13 <- BinaryOperation v1, '|', v12
+    v14 <- BinaryOperation v13, '/', v2
+    v15 <- CreateNamedVariable 'Math', 'none'
+    v16 <- CallMethod v15, 'floor', [v14]
+    v17 <- CreateNamedVariable 'm', 'none'
+    Reassign v17, v16
+EndPlainFunction
+v18 <- LoadInteger '0'
+v19 <- LoadInteger '1'
+v20 <- CallFunction v0, [v18, v19]
+v21 <- LoadInteger '0'
+v22 <- LoadInteger '1'
+v23 <- CallFunction v0, [v21, v22]
+v24 <- LoadInteger '0'
+v25 <- LoadInteger '1'
+v26 <- CallFunction v0, [v24, v25]
+
+
+function foo(a1, a2) {
+    for (let i4 = 0; i4 < 1; i4++) {
+        a2 = Math.min(a2, i4);
+    }
+    m = Math.floor((a1 | 0) / a2);
+}
+foo(0, 1);
+foo(0, 1);
+foo(0, 1);
+
+FuzzIL program written to corpus/regress-171641.fzil

@@ -1,0 +1,70 @@
+v0 <- BeginPlainFunction -> v1
+    Directive 'use strict'
+    BeginBlockStatement
+        v2 <- LoadInteger '0'
+        v3 <- LoadInteger '1'
+        BeginSwitch v1
+            BeginSwitchCase v2
+                v4 <- LoadUndefined
+                v5 <- CreateNamedVariable 'x', 'let', v4
+            EndSwitchCase fallsThrough
+            BeginSwitchCase v3
+                v6 <- LoadInteger '9'
+                v7 <- CreateNamedVariable 'x', 'none'
+                Reassign v7, v6
+            EndSwitchCase fallsThrough
+        EndSwitch
+    EndBlockStatement
+EndPlainFunction
+v8 <- LoadString 'test_hole_check_for_let(0)'
+v9 <- LoadString 'test_hole_check_for_let(1)'
+v10 <- CreateNamedVariable 'ReferenceError', 'none'
+v11 <- LoadString 'test_hole_check_for_let(1)'
+v12 <- BeginPlainFunction -> v13
+    Directive 'use strict'
+    BeginBlockStatement
+        v14 <- LoadInteger '0'
+        v15 <- LoadInteger '1'
+        BeginSwitch v13
+            BeginSwitchCase v14
+                v16 <- LoadInteger '3'
+                v17 <- CreateNamedVariable 'x', 'const', v16
+            EndSwitchCase fallsThrough
+            BeginSwitchCase v15
+                v18 <- LoadInteger '2'
+                v19 <- CreateNamedVariable 'x', 'none'
+                Reassign v19, v18
+            EndSwitchCase fallsThrough
+        EndSwitch
+    EndBlockStatement
+EndPlainFunction
+v20 <- LoadString 'test_hole_check_for_const(0)'
+v21 <- CreateNamedVariable 'TypeError', 'none'
+v22 <- LoadString 'test_hole_check_for_const(1)'
+v23 <- LoadString 'test_hole_check_for_const(1)'
+
+
+function test_hole_check_for_let(a1) {
+    'use strict';
+    {
+        switch (a1) {
+            case 0:
+                let x;
+            case 1:
+                x = 9;
+        }
+    }
+}
+function test_hole_check_for_const(a13) {
+    'use strict';
+    {
+        switch (a13) {
+            case 0:
+                const x = 3;
+            case 1:
+                x = 2;
+        }
+    }
+}
+
+FuzzIL program written to corpus/regress-4388.fzil

@@ -1,0 +1,22 @@
+v0 <- CreateArray []
+v1 <- GetProperty v0, 'filter'
+v2 <- CreateNamedVariable 'functionWithoutProto', 'var', v1
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- CallMethod v3, 'create', [v2]
+v5 <- CreateNamedVariable 'obj', 'var', v4
+v6 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v2, '__proto__', v6
+v7 <- GetProperty v2, 'prototype'
+v8 <- GetProperty v5, 'prototype'
+
+
+var functionWithoutProto = ([]).filter;
+var obj = Object.create(functionWithoutProto);
+function f6() {
+}
+functionWithoutProto.__proto__ = f6;
+functionWithoutProto.prototype;
+obj.prototype;
+
+FuzzIL program written to corpus/regress-143967.fzil

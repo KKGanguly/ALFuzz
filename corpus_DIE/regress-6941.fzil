@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Symbol', 'none'
+    v3 <- GetProperty v2, 'iterator'
+    v4 <- Compare v3, '==', v1
+    Return v4
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- CreateNamedVariable 'Symbol', 'none'
+    v7 <- CallFunction v6, []
+    v8 <- CallFunction v0, [v7]
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `valueOf` -> v9
+            v10 <- GetProperty v6, 'toPrimitive'
+            Return v10
+        EndObjectLiteralMethod
+    v11 <- EndObjectLiteral
+    v12 <- CallFunction v0, [v11]
+EndPlainFunction
+v13 <- CallFunction v5, []
+v14 <- CallFunction v5, []
+v15 <- CallFunction v0, []
+
+
+function foo(a1) {
+    return Symbol.iterator == a1;
+}
+function main() {
+    foo(Symbol());
+    const v11 = {
+        valueOf() {
+            return Symbol.toPrimitive;
+        },
+    };
+    foo(v11);
+}
+main();
+main();
+foo();
+
+FuzzIL program written to corpus/regress-6941.fzil

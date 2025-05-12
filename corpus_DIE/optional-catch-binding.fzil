@@ -1,0 +1,67 @@
+v0 <- LoadString 'initial'
+v1 <- CreateNamedVariable 'state', 'let', v0
+BeginTry
+    v2 <- CreateNamedVariable 'Error', 'none'
+    v3 <- LoadString 'caught'
+    v4 <- Construct v2, [v3]
+    ThrowException v4
+    v5 <- LoadString 'unreachable'
+    Reassign v1, v5
+BeginCatch -> v6
+    v7 <- LoadString 'initial'
+    v8 <- LoadString 'caught'
+    Reassign v1, v8
+EndTryCatch
+v9 <- LoadString 'caught'
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'sigil1', 'let', v10
+BeginTry
+    ThrowException v11
+BeginCatch -> v12
+EndTryCatch
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'sigil2', 'let', v13
+v15 <- LoadBoolean 'false'
+v16 <- CreateNamedVariable 'reached', 'let', v15
+BeginTry
+    BeginTry
+        ThrowException v11
+    BeginCatch -> v17
+        v18 <- LoadBoolean 'true'
+        Reassign v16, v18
+    BeginFinally
+        ThrowException v14
+    EndTryCatch
+BeginCatch -> v19
+EndTryCatch
+
+
+let state = "initial";
+try {
+    const v4 = new Error("caught");
+    throw v4;
+    state = "unreachable";
+} catch(e6) {
+    state = "caught";
+}
+let sigil1 = {};
+try {
+    throw sigil1;
+} catch(e12) {
+}
+let sigil2 = {};
+let reached = false;
+try {
+    try {
+        throw sigil1;
+    } catch(e17) {
+        reached = true;
+    } finally {
+        throw sigil2;
+    }
+} catch(e19) {
+}
+
+FuzzIL program written to corpus/optional-catch-binding.fzil

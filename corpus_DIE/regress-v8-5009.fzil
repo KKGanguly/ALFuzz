@@ -1,0 +1,95 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- CreateNamedVariable 'version', 'none'
+    v6 <- Construct v5, []
+    v7 <- CreateNamedVariable 'o', 'var', v6
+    SetProperty v7, 'id', v4
+    v8 <- LoadNull
+    SetElement v7, '0', v8
+    Return v7
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    SetProperty v10, 'm1', v0
+EndPlainFunction
+v11 <- BeginPlainFunction -> v12
+    SetProperty v12, 'm2', v1
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14
+    SetProperty v14, 'm2', v2
+EndPlainFunction
+v15 <- BeginPlainFunction -> v16
+    v17 <- LoadNull
+    SetProperty v16, 'm1', v17
+EndPlainFunction
+v18 <- BeginPlainFunction -> v19
+    v20 <- CallMethod v19, 'm2', []
+    v21 <- CallMethod v19, 'm1', []
+EndPlainFunction
+v22 <- LoadInteger '0'
+v23 <- CallFunction v3, [v22]
+v24 <- CreateNamedVariable 'p0', 'var', v23
+v25 <- LoadInteger '1'
+v26 <- CallFunction v3, [v25]
+v27 <- CreateNamedVariable 'p1', 'var', v26
+v28 <- LoadInteger '2'
+v29 <- CallFunction v3, [v28]
+v30 <- CreateNamedVariable 'p2', 'var', v29
+v31 <- CallFunction v9, [v24]
+v32 <- CallFunction v9, [v27]
+v33 <- CallFunction v9, [v30]
+v34 <- CallFunction v11, [v24]
+v35 <- CallFunction v13, [v24]
+v36 <- CallFunction v15, [v24]
+v37 <- CallFunction v13, [v27]
+v38 <- CallFunction v13, [v30]
+v39 <- CallFunction v18, [v30]
+
+
+function fn1() {
+}
+function fn2() {
+}
+function fn3() {
+}
+function create(a4) {
+    const v6 = new version();
+    var o = v6;
+    o.id = a4;
+    o[0] = null;
+    return o;
+}
+function setM1(a10) {
+    a10.m1 = fn1;
+}
+function setM2(a12) {
+    a12.m2 = fn2;
+}
+function setAltM2(a14) {
+    a14.m2 = fn3;
+}
+function setAltM1(a16) {
+    a16.m1 = null;
+}
+function test(a19) {
+    a19.m2();
+    a19.m1();
+}
+var p0 = create(0);
+var p1 = create(1);
+var p2 = create(2);
+setM1(p0);
+setM1(p1);
+setM1(p2);
+setM2(p0);
+setAltM2(p0);
+setAltM1(p0);
+setAltM2(p1);
+setAltM2(p2);
+test(p2);
+
+FuzzIL program written to corpus/regress-v8-5009.fzil

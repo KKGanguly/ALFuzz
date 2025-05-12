@@ -1,0 +1,18 @@
+v0 <- BeginPlainFunction -> 
+    Return
+EndPlainFunction
+v1 <- LoadString 'abc'
+v2 <- LoadInteger '65534'
+v3 <- CreateNamedVariable 'String', 'none'
+v4 <- CallMethod v3, 'fromCharCode', [v2]
+v5 <- BinaryOperation v1, '+', v4
+v6 <- LoadString '(1)'
+v7 <- BinaryOperation v5, '+', v6
+
+
+function abc() {
+    return;
+}
+("abc" + String.fromCharCode(65534)) + "(1)";
+
+FuzzIL program written to corpus/regress-726625.fzil

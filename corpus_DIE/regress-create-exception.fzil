@@ -1,0 +1,75 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '3'
+v3 <- LoadInteger '4'
+v4 <- CreateArray [v0, v1, v2, v3]
+v5 <- CreateNamedVariable 'v', 'var', v4
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'preventExtensions', [v5]
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadRegExp '2147483647' ''
+    v10 <- CreateNamedVariable 're', 'var', v9
+    BeginForLoopInitializer
+        v11 <- LoadInteger '0'
+    BeginForLoopCondition -> v12
+        v13 <- LoadInteger '10000'
+        v14 <- Compare v12, '<', v13
+    BeginForLoopAfterthought v14 -> v15
+        v16 <- UnaryOperation v15, '++'
+    BeginForLoopBody -> v17
+        v18 <- LoadBoolean 'false'
+        v19 <- CreateNamedVariable 'ok', 'var', v18
+        BeginTry
+            v20 <- LoadInteger '1'
+            v21 <- CreateNamedVariable 'j', 'var', v20
+            BeginForLoopInitializer
+                v22 <- LoadInteger '0'
+            BeginForLoopCondition -> v23
+                v24 <- LoadInteger '93'
+                v25 <- BinaryOperation v17, '%', v24
+                v26 <- Compare v23, '<', v25
+            BeginForLoopAfterthought v26 -> v27
+                v28 <- UnaryOperation v27, '++'
+            BeginForLoopBody -> v29
+                v30 <- LoadFloat '1.123567'
+                Update v29, '*', v30
+            EndForLoop
+            v31 <- LoadInteger '0'
+            SetElement v5, '2147483647', v31
+            v32 <- LoadBoolean 'false'
+            Return v21
+        BeginCatch -> v33
+            v34 <- LoadBoolean 'true'
+            Reassign v19, v34
+            v35 <- CallMethod v10, 'test', [v33]
+            v36 <- LoadString 'e: '
+            v37 <- BinaryOperation v36, '+', v33
+        EndTryCatch
+    EndForLoop
+EndPlainFunction
+v38 <- CallFunction v8, []
+
+
+var v = [1,2,3,4];
+Object.preventExtensions(v);
+function foo() {
+    var re = /2147483647/;
+    for (let i12 = 0; i12 < 10000; i12++) {
+        var ok = false;
+        try {
+            var j = 1;
+            for (let i23 = 0; i23 < (i12 % 93); i23++) {
+                i23 *= 1.123567;
+            }
+            v[2147483647] = 0;
+            return j;
+        } catch(e33) {
+            ok = true;
+            re.test(e33);
+            "e: " + e33;
+        }
+    }
+}
+foo();
+
+FuzzIL program written to corpus/regress-create-exception.fzil

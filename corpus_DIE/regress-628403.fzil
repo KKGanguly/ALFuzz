@@ -1,0 +1,57 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'dothrow', 'var', v0
+v2 <- BeginPlainFunction -> 
+    BeginIf v1
+        v3 <- LoadInteger '1'
+        ThrowException v3
+    EndIf
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    BeginTry
+        v6 <- CallFunction v2, []
+    BeginCatch -> v7
+        v8 <- TypeOf v7
+        v9 <- LoadString 'number'
+        v10 <- Compare v8, '!==', v9
+        v11 <- LoadInteger '1'
+        v12 <- Compare v7, '!==', v11
+        v13 <- BinaryOperation v10, '&&', v12
+        BeginIf v13
+            ThrowException v7
+        EndIf
+        v14 <- GetElement v5, '0'
+        Return v14
+    EndTryCatch
+EndPlainFunction
+v15 <- CallFunction v4, []
+v16 <- CallFunction v4, []
+v17 <- LoadBoolean 'true'
+Reassign v1, v17
+v18 <- LoadInteger '42'
+v19 <- LoadInteger '42'
+v20 <- CreateArray [v19]
+v21 <- CallFunction v4, [v20]
+
+
+var dothrow = false;
+function g() {
+    if (dothrow) {
+        throw 1;
+    }
+}
+function f(a5) {
+    try {
+        g();
+    } catch(e7) {
+        if ((typeof e7 !== "number") && (e7 !== 1)) {
+            throw e7;
+        }
+        return a5[0];
+    }
+}
+f();
+f();
+dothrow = true;
+f([42]);
+
+FuzzIL program written to corpus/regress-628403.fzil

@@ -1,0 +1,105 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '*', v2
+    v4 <- CreateNamedVariable 'size', 'var', v3
+    v5 <- LoadInteger '0'
+    v6 <- Compare v4, '<', v5
+    BeginIf v6
+        v7 <- LoadInteger '0'
+        Reassign v4, v7
+    EndIf
+    v8 <- CreateNamedVariable 'Uint32Array', 'none'
+    v9 <- Construct v8, [v4]
+    Return v9
+EndPlainFunction
+BeginForLoopInitializer
+    v10 <- LoadInteger '0'
+BeginForLoopCondition -> v11
+    v12 <- LoadInteger '3'
+    v13 <- Compare v11, '<', v12
+BeginForLoopAfterthought v13 -> v14
+    v15 <- UnaryOperation v14, '++'
+BeginForLoopBody -> v16
+    v17 <- LoadInteger '0'
+    v18 <- LoadInteger '1'
+    v19 <- UnaryOperation '-', v18
+    v20 <- CallFunction v0, [v17, v19]
+EndForLoop
+BeginForLoopInitializer
+    v21 <- LoadInteger '0'
+BeginForLoopCondition -> v22
+    v23 <- LoadInteger '1000'
+    v24 <- Compare v22, '<', v23
+BeginForLoopAfterthought v24 -> v25
+    v26 <- UnaryOperation v25, '++'
+BeginForLoopBody -> v27
+    v28 <- LoadInteger '2'
+    v29 <- LoadInteger '2'
+    v30 <- CallFunction v0, [v28, v29]
+EndForLoop
+v31 <- LoadInteger '2'
+v32 <- LoadInteger '2'
+v33 <- CallFunction v0, [v31, v32]
+v34 <- CreateNamedVariable 'bomb', 'var', v33
+v35 <- BeginPlainFunction -> v36, v37
+    BeginTry
+    BeginCatch -> v38
+    EndTryCatch
+    v39 <- GetComputedProperty v36, v37
+    Return v39
+EndPlainFunction
+BeginForLoopInitializer
+    v40 <- LoadInteger '0'
+BeginForLoopCondition -> v41
+    v42 <- LoadInteger '3'
+    v43 <- Compare v41, '<', v42
+BeginForLoopAfterthought v43 -> v44
+    v45 <- UnaryOperation v44, '++'
+BeginForLoopBody -> v46
+    v47 <- LoadInteger '0'
+    v48 <- CallFunction v35, [v34, v47]
+EndForLoop
+v49 <- LoadInteger '0'
+v50 <- CallFunction v35, [v34, v49]
+BeginForLoopInitializer
+    v51 <- GetProperty v34, 'length'
+BeginForLoopCondition -> v52
+    v53 <- LoadInteger '100'
+    v54 <- Compare v52, '<', v53
+BeginForLoopAfterthought v54 -> v55
+    v56 <- UnaryOperation v55, '++'
+BeginForLoopBody -> v57
+    v58 <- LoadUndefined
+    v59 <- CallFunction v35, [v34, v57]
+EndForLoop
+
+
+function c4(a1, a2) {
+    var size = a1 * a2;
+    if (size < 0) {
+        size = 0;
+    }
+    const v9 = new Uint32Array(size);
+    return v9;
+}
+for (let i11 = 0; i11 < 3; i11++) {
+    c4(0, -1);
+}
+for (let i22 = 0; i22 < 1000; i22++) {
+    c4(2, 2);
+}
+var bomb = c4(2, 2);
+function reader(a36, a37) {
+    try {
+    } catch(e38) {
+    }
+    return a36[a37];
+}
+for (let i41 = 0; i41 < 3; i41++) {
+    reader(bomb, 0);
+}
+reader(bomb, 0);
+for (let i52 = bomb.length; i52 < 100; i52++) {
+    reader(bomb, i52);
+}
+
+FuzzIL program written to corpus/regress-crbug-650404.fzil

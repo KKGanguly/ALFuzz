@@ -1,0 +1,115 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'b', 'var', v1
+v3 <- LoadString 'bar'
+SetProperty v2, 'bar', v3
+v4 <- BeginPlainFunction -> v5
+    v6 <- CreateNamedVariable 'Array', 'none'
+    v7 <- LoadInteger '10'
+    v8 <- Construct v6, [v7]
+    v9 <- CreateNamedVariable 'b', 'var', v8
+    BeginForLoopInitializer
+        v10 <- LoadInteger '0'
+    BeginForLoopCondition -> v11
+        v12 <- LoadInteger '10'
+        v13 <- Compare v11, '<', v12
+    BeginForLoopAfterthought v13 -> v14
+        v15 <- UnaryOperation v14, '++'
+    BeginForLoopBody -> v16
+        v17 <- Construct v0, []
+        SetComputedProperty v9, v16, v17
+    EndForLoop
+    BeginForLoopInitializer
+        v18 <- LoadInteger '0'
+    BeginForLoopCondition -> v19
+        v20 <- LoadInteger '10'
+        v21 <- Compare v19, '<', v20
+    BeginForLoopAfterthought v21 -> v22
+        v23 <- UnaryOperation v22, '++'
+    BeginForLoopBody -> v24
+        v25 <- GetProperty v5, 'foo'
+        v26 <- GetComputedProperty v9, v24
+        SetProperty v26, 'bar', v25
+    EndForLoop
+EndPlainFunction
+BeginObjectLiteral
+v27 <- EndObjectLiteral
+v28 <- CreateNamedVariable 'a', 'var', v27
+v29 <- LoadString ''
+SetProperty v28, 'p1', v29
+v30 <- LoadString ''
+SetProperty v28, 'p2', v30
+v31 <- LoadString ''
+SetProperty v28, 'p3', v31
+v32 <- LoadString ''
+SetProperty v28, 'p4', v32
+v33 <- LoadString ''
+SetProperty v28, 'p5', v33
+v34 <- LoadString ''
+SetProperty v28, 'p6', v34
+v35 <- LoadString ''
+SetProperty v28, 'p7', v35
+v36 <- LoadString ''
+SetProperty v28, 'p8', v36
+v37 <- LoadString ''
+SetProperty v28, 'p9', v37
+v38 <- LoadString ''
+SetProperty v28, 'p10', v38
+v39 <- LoadString ''
+SetProperty v28, 'p11', v39
+v40 <- LoadString 'foo'
+SetProperty v28, 'foo', v40
+BeginForLoopInitializer
+    v41 <- LoadInteger '0'
+BeginForLoopCondition -> v42
+    v43 <- LoadInteger '5'
+    v44 <- Compare v42, '<', v43
+BeginForLoopAfterthought v44 -> v45
+    v46 <- UnaryOperation v45, '++'
+BeginForLoopBody -> v47
+    v48 <- CallFunction v4, [v28]
+EndForLoop
+v49 <- CallFunction v4, [v28]
+v50 <- LoadString ''
+v51 <- CallFunction v4, [v50]
+
+
+function bar() {
+}
+const v1 = new bar();
+var b = v1;
+b.bar = "bar";
+function test(a5) {
+    const v8 = new Array(10);
+    var b = v8;
+    for (let i11 = 0; i11 < 10; i11++) {
+        const v17 = new bar();
+        b[i11] = v17;
+    }
+    for (let i19 = 0; i19 < 10; i19++) {
+        const v25 = a5.foo;
+        const t14 = b[i19];
+        t14.bar = v25;
+    }
+}
+var a = {};
+a.p1 = "";
+a.p2 = "";
+a.p3 = "";
+a.p4 = "";
+a.p5 = "";
+a.p6 = "";
+a.p7 = "";
+a.p8 = "";
+a.p9 = "";
+a.p10 = "";
+a.p11 = "";
+a.foo = "foo";
+for (let i42 = 0; i42 < 5; i42++) {
+    test(a);
+}
+test(a);
+test("");
+
+FuzzIL program written to corpus/regress-loadfield.fzil

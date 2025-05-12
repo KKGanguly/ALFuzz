@@ -1,0 +1,121 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        v4 <- BeginPlainFunction -> 
+            v5 <- LoadThis
+            v6 <- CallFunction v3, [v5]
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `fffffff`, v6
+            v7 <- EndObjectLiteral
+            v8 <- LoadArguments
+            v9 <- CallMethod v2, 'apply', [v7, v8]
+            v10 <- CreateNamedVariable 'res', 'var', v9
+            Return v10
+        EndPlainFunction
+        Return v4
+    EndPlainFunction
+    v11 <- CreateNamedVariable 'm', 'none'
+    v12 <- CreateNamedVariable 'selfOf', 'none'
+    v13 <- CallFunction v1, [v11, v12]
+    v14 <- CreateNamedVariable 'y', 'var', v13
+    v15 <- BeginPlainFunction -> v16
+        v17 <- GetProperty v16, 'self_'
+        v18 <- CreateNamedVariable 'sssss', 'var', v17
+        Return v18
+    EndPlainFunction
+    v19 <- BeginPlainFunction -> 
+        v20 <- LoadThis
+        v21 <- GetProperty v20, 'fffffff'
+        Return v21
+    EndPlainFunction
+    v22 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `self_`, v22
+    v23 <- EndObjectLiteral
+    v24 <- CallMethod v14, 'apply', [v23]
+    v25 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `self_`, v25
+    v26 <- EndObjectLiteral
+    v27 <- CallMethod v14, 'apply', [v26]
+    v28 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `self_`, v28
+    v29 <- EndObjectLiteral
+    v30 <- CallMethod v14, 'apply', [v29]
+    v31 <- LoadInteger '3'
+    v32 <- LoadInteger '4'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `self_`, v31
+        ObjectLiteralAddProperty `uuu`, v32
+    v33 <- EndObjectLiteral
+    v34 <- CallMethod v14, 'apply', [v33]
+    v35 <- LoadInteger '3'
+EndPlainFunction
+v36 <- CallFunction v0, []
+v37 <- BeginPlainFunction -> 
+    v38 <- BeginPlainFunction -> 
+        v39 <- LoadThis
+        v40 <- LoadInteger '21'
+        v41 <- BinaryOperation v39, '+', v40
+        Return v41
+    EndPlainFunction
+    v42 <- BeginPlainFunction -> 
+        v43 <- LoadInteger '21'
+        Return v43
+    EndPlainFunction
+    v44 <- BeginPlainFunction -> 
+        v45 <- CallFunction v42, []
+        v46 <- LoadArguments
+        v47 <- CallMethod v38, 'apply', [v45, v46]
+        Return v47
+    EndPlainFunction
+    v48 <- CallFunction v44, []
+    v49 <- CallFunction v44, []
+    v50 <- CallFunction v44, []
+    v51 <- LoadInteger '42'
+    v52 <- CallFunction v44, []
+EndPlainFunction
+v53 <- CallFunction v37, []
+
+
+function ApplyArgumentsDeoptInReceiverMapCheck() {
+    function invoker(a2, a3) {
+        function XXXXX() {
+            const v6 = a3(this);
+            var res = a2.apply({ fffffff: v6 }, arguments);
+            return res;
+        }
+        return XXXXX;
+    }
+    var y = invoker(m, selfOf);
+    function selfOf(a16) {
+        var sssss = a16.self_;
+        return sssss;
+    }
+    function m() {
+        return this.fffffff;
+    }
+    y.apply({ self_: 3 });
+    y.apply({ self_: 3 });
+    y.apply({ self_: 3 });
+    y.apply({ self_: 3, uuu: 4 });
+}
+ApplyArgumentsDeoptInReceiverMapCheck();
+function ApplyArgumentsDeoptInReceiverExplicit() {
+    function f() {
+        return this + 21;
+    }
+    function deopt() {
+        return 21;
+    }
+    function XXXXX() {
+        return f.apply(deopt(), arguments);
+    }
+    XXXXX();
+    XXXXX();
+    XXXXX();
+    XXXXX();
+}
+ApplyArgumentsDeoptInReceiverExplicit();
+
+FuzzIL program written to corpus/arguments-apply-deopt.fzil

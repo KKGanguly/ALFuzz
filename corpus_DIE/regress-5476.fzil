@@ -1,0 +1,61 @@
+v0 <- CreateNamedVariable 'Promise', 'none'
+v1 <- BeginClassDefinition v0
+    BeginClassConstructor -> v2, v3
+        v4 <- BeginArrowFunction -> v5, v6
+            v7 <- CallFunction v5, []
+        EndArrowFunction
+        CallSuperConstructor [v4]
+        v8 <- BeginPlainFunction -> 
+            v9 <- LoadUndefined
+        EndPlainFunction
+        SetProperty v2, 'resolve', v8
+        v10 <- BeginPlainFunction -> 
+            v11 <- LoadUndefined
+        EndPlainFunction
+        SetProperty v2, 'reject', v10
+        v12 <- GetProperty v2, 'resolve'
+        v13 <- GetProperty v2, 'reject'
+        v14 <- CallFunction v3, [v12, v13]
+    EndClassConstructor
+EndClassDefinition
+v15 <- BeginArrowFunction -> v16
+    v17 <- CallFunction v16, []
+    Return v17
+EndArrowFunction
+v18 <- Construct v1, [v15]
+v19 <- CreateNamedVariable 'p1', 'const', v18
+v20 <- BeginArrowFunction -> v21, v22
+    v23 <- CallFunction v22, []
+    Return v23
+EndArrowFunction
+v24 <- Construct v1, [v20]
+v25 <- CreateNamedVariable 'p2', 'const', v24
+
+
+class C1 extends Promise {
+    constructor(a3) {
+        const v4 = (a5, a6) => {
+            a5();
+        };
+        super(v4);
+        function f8() {
+        }
+        this.resolve = f8;
+        function f10() {
+        }
+        this.reject = f10;
+        a3(this.resolve, this.reject);
+    }
+}
+const v15 = (a16) => {
+    return a16();
+};
+const v18 = new C1(v15);
+const p1 = v18;
+const v20 = (a21, a22) => {
+    return a22();
+};
+const v24 = new C1(v20);
+const p2 = v24;
+
+FuzzIL program written to corpus/regress-5476.fzil

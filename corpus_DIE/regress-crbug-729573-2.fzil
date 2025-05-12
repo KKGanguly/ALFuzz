@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> v1
+    Directive 'use strict'
+    v2 <- LoadThis
+    v3 <- BinaryOperation v2, '+', v1
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadInteger '42'
+    v7 <- LoadInteger '1'
+    v8 <- CallMethod v0, 'bind', [v6, v7]
+    v9 <- CreateNamedVariable 'a', 'var', v8
+    v10 <- CallFunction v5, []
+    v11 <- LoadInteger '0'
+    v12 <- TernaryOperation v10, v11, v9
+    Return v12
+EndPlainFunction
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadBoolean 'true'
+    Return v14
+EndPlainFunction
+v15 <- LoadInteger '0'
+v16 <- CallFunction v4, [v13]
+v17 <- LoadInteger '0'
+v18 <- CallFunction v4, [v13]
+v19 <- BeginArrowFunction -> v20
+    v21 <- LoadBoolean 'false'
+    Return v21
+EndArrowFunction
+v22 <- CallFunction v4, [v19]
+v23 <- CreateNamedVariable 'a', 'var', v22
+v24 <- LoadInteger '43'
+v25 <- CallFunction v23, []
+
+
+function bar(a1) {
+    'use strict';
+    return this + a1;
+}
+function foo(a5) {
+    var a = bar.bind(42, 1);
+    return a5() ? 0 : a;
+}
+function t() {
+    return true;
+}
+foo(t);
+foo(t);
+const v19 = (a20) => {
+    return false;
+};
+var a = foo(v19);
+a();
+
+FuzzIL program written to corpus/regress-crbug-729573-2.fzil

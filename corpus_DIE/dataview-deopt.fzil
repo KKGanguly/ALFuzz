@@ -1,0 +1,104 @@
+v0 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v1 <- LoadInteger '64'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'buffer', 'var', v2
+v4 <- CreateNamedVariable 'DataView', 'none'
+v5 <- LoadInteger '8'
+v6 <- LoadInteger '24'
+v7 <- Construct v4, [v3, v5, v6]
+v8 <- CreateNamedVariable 'dataview', 'var', v7
+v9 <- BeginPlainFunction -> v10
+    v11 <- CallMethod v8, 'getUint8', [v10]
+    Return v11
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13
+    v14 <- LoadInteger '0'
+    v15 <- CallFunction v13, [v14]
+    v16 <- LoadInteger '1'
+    v17 <- CallFunction v13, [v16]
+    v18 <- LoadInteger '2'
+    v19 <- CallFunction v13, [v18]
+    v20 <- LoadInteger '3'
+    v21 <- CallFunction v13, [v20]
+EndPlainFunction
+v22 <- CallFunction v12, [v9]
+v23 <- CallFunction v9, []
+v24 <- LoadFloat '0.5'
+v25 <- CallFunction v9, [v24]
+v26 <- CallFunction v9, []
+v27 <- CallFunction v12, [v9]
+v28 <- CallFunction v9, []
+v29 <- LoadFloat '1.5'
+v30 <- CallFunction v9, [v29]
+v31 <- CallFunction v9, []
+v32 <- BeginPlainFunction -> v33, v34
+    v35 <- CallMethod v8, 'setUint8', [v33, v34]
+EndPlainFunction
+v36 <- BeginPlainFunction -> v37
+    v38 <- LoadInteger '0'
+    v39 <- LoadInteger '0'
+    v40 <- CallFunction v37, [v38, v39]
+    v41 <- LoadInteger '0'
+    v42 <- LoadInteger '1'
+    v43 <- CallFunction v37, [v41, v42]
+    v44 <- LoadInteger '0'
+    v45 <- LoadInteger '2'
+    v46 <- CallFunction v37, [v44, v45]
+    v47 <- LoadInteger '0'
+    v48 <- LoadInteger '3'
+    v49 <- CallFunction v37, [v47, v48]
+EndPlainFunction
+v50 <- CallFunction v36, [v32]
+v51 <- CallFunction v32, []
+v52 <- LoadFloat '0.5'
+v53 <- LoadInteger '0'
+v54 <- CallFunction v32, [v52, v53]
+v55 <- CallFunction v32, []
+v56 <- CallFunction v36, [v32]
+v57 <- CallFunction v32, []
+v58 <- LoadFloat '1.5'
+v59 <- LoadInteger '0'
+v60 <- CallFunction v32, [v58, v59]
+v61 <- CallFunction v32, []
+
+
+const v2 = new ArrayBuffer(64);
+var buffer = v2;
+const v7 = new DataView(buffer, 8, 24);
+var dataview = v7;
+function readUint8(a10) {
+    return dataview.getUint8(a10);
+}
+function warmupRead(a13) {
+    a13(0);
+    a13(1);
+    a13(2);
+    a13(3);
+}
+warmupRead(readUint8);
+readUint8();
+readUint8(0.5);
+readUint8();
+warmupRead(readUint8);
+readUint8();
+readUint8(1.5);
+readUint8();
+function writeUint8(a33, a34) {
+    dataview.setUint8(a33, a34);
+}
+function warmupWrite(a37) {
+    a37(0, 0);
+    a37(0, 1);
+    a37(0, 2);
+    a37(0, 3);
+}
+warmupWrite(writeUint8);
+writeUint8();
+writeUint8(0.5, 0);
+writeUint8();
+warmupWrite(writeUint8);
+writeUint8();
+writeUint8(1.5, 0);
+writeUint8();
+
+FuzzIL program written to corpus/dataview-deopt.fzil

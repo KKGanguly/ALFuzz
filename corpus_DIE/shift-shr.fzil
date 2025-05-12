@@ -1,0 +1,156 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'errors', 'var', v2
+    BeginForLoopInitializer
+        v4 <- LoadInteger '1'
+    BeginForLoopCondition -> v5
+        v6 <- LoadInteger '1024'
+        v7 <- Compare v5, '<', v6
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation v8, '++'
+    BeginForLoopBody -> v10
+        v11 <- BinaryOperation v1, '>>>', v10
+        v12 <- CreateNamedVariable 'temp', 'var', v11
+        v13 <- LoadInteger '0'
+        v14 <- Compare v12, '<', v13
+        BeginIf v14
+            v15 <- UnaryOperation v3, '++'
+        EndIf
+    EndForLoop
+    Return v3
+EndPlainFunction
+v16 <- LoadInteger '0'
+v17 <- LoadInteger '1'
+v18 <- CallFunction v0, [v17]
+BeginForLoopInitializer
+    v19 <- LoadInteger '5'
+BeginForLoopCondition -> v20
+    v21 <- LoadInteger '5'
+    v22 <- UnaryOperation '-', v21
+    v23 <- Compare v20, '>=', v22
+BeginForLoopAfterthought v23 -> v24
+    v25 <- UnaryOperation v24, '--'
+BeginForLoopBody -> v26
+    v27 <- LoadInteger '0'
+    v28 <- CallFunction v0, [v26]
+EndForLoop
+v29 <- BeginPlainFunction -> 
+    v30 <- BeginPlainFunction -> v31, v32, v33
+        v34 <- LoadUndefined
+        v35 <- CreateNamedVariable 'y', 'var', v34
+        v36 <- LoadInteger '0'
+        v37 <- BinaryOperation v31, '>>>', v36
+        Reassign v31, v37
+        v38 <- LoadInteger '0'
+        v39 <- BinaryOperation v31, '|', v38
+        Reassign v35, v39
+        Reassign v35, v31
+        v40 <- TernaryOperation v32, v39, v31
+        v41 <- GetComputedProperty v33, v35
+        Return v41
+    EndPlainFunction
+    v42 <- LoadInteger '111'
+    v43 <- LoadBoolean 'true'
+    v44 <- CreateNamedVariable 'Array', 'none'
+    v45 <- LoadInteger '42'
+    v46 <- Construct v44, [v45]
+    v47 <- CallFunction v30, [v42, v43, v46]
+    v48 <- LoadInteger '111'
+    v49 <- LoadBoolean 'true'
+    v50 <- LoadInteger '42'
+    v51 <- Construct v44, [v50]
+    v52 <- CallFunction v30, [v48, v49, v51]
+    v53 <- LoadInteger '111'
+    v54 <- UnaryOperation '-', v53
+    v55 <- LoadBoolean 'true'
+    v56 <- LoadInteger '42'
+    v57 <- Construct v44, [v56]
+    v58 <- CallFunction v30, [v54, v55, v57]
+EndPlainFunction
+v59 <- CallFunction v29, []
+v60 <- BeginPlainFunction -> 
+    v61 <- BeginPlainFunction -> v62, v63, v64
+        v65 <- LoadUndefined
+        v66 <- CreateNamedVariable 'y', 'var', v65
+        v67 <- LoadInteger '0'
+        v68 <- BinaryOperation v62, '>>>', v67
+        Reassign v62, v68
+        v69 <- LoadInteger '0'
+        v70 <- BinaryOperation v62, '|', v69
+        Reassign v66, v70
+        Reassign v66, v62
+        v71 <- TernaryOperation v63, v70, v62
+        v72 <- GetComputedProperty v64, v66
+        Return v72
+    EndPlainFunction
+    v73 <- LoadInteger '111'
+    v74 <- LoadBoolean 'true'
+    v75 <- CreateNamedVariable 'Array', 'none'
+    v76 <- LoadInteger '42'
+    v77 <- Construct v75, [v76]
+    v78 <- CallFunction v61, [v73, v74, v77]
+    v79 <- LoadInteger '111'
+    v80 <- LoadBoolean 'true'
+    v81 <- LoadInteger '42'
+    v82 <- Construct v75, [v81]
+    v83 <- CallFunction v61, [v79, v80, v82]
+    v84 <- LoadInteger '111'
+    v85 <- LoadBoolean 'true'
+    v86 <- LoadInteger '42'
+    v87 <- Construct v75, [v86]
+    v88 <- CallFunction v61, [v84, v85, v87]
+EndPlainFunction
+v89 <- CallFunction v60, []
+
+
+function test_shr(a1) {
+    var errors = 0;
+    for (let i5 = 1; i5 < 1024; i5++) {
+        var temp = a1 >>> i5;
+        if (temp < 0) {
+            errors++;
+        }
+    }
+    return errors;
+}
+test_shr(1);
+for (let i20 = 5; i20 >= -5; i20--) {
+    test_shr(i20);
+}
+function f29() {
+    function foo(a31, a32, a33) {
+        var y;
+        const v39 = (a31 = a31 >>> 0) | 0;
+        y = v39;
+        y = a31;
+        a32 ? v39 : a31;
+        return a33[y];
+    }
+    const v46 = new Array(42);
+    foo(111, true, v46);
+    const v51 = new Array(42);
+    foo(111, true, v51);
+    const v54 = -111;
+    const v57 = new Array(42);
+    foo(v54, true, v57);
+}
+f29();
+function f60() {
+    function foo(a62, a63, a64) {
+        var y;
+        const v70 = (a62 = a62 >>> 0) | 0;
+        y = v70;
+        y = a62;
+        a63 ? v70 : a62;
+        return a64[y];
+    }
+    const v77 = new Array(42);
+    foo(111, true, v77);
+    const v82 = new Array(42);
+    foo(111, true, v82);
+    const v87 = new Array(42);
+    foo(111, true, v87);
+}
+f60();
+
+FuzzIL program written to corpus/shift-shr.fzil

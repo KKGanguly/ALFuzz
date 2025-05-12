@@ -1,0 +1,195 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- BeginPlainFunction -> v2
+        BeginObjectLiteral
+        v3 <- EndObjectLiteral
+        v4 <- CreateNamedVariable 'dispatcher', 'var', v3
+        v5 <- LoadBoolean 'false'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `deopt`, v5
+        v6 <- EndObjectLiteral
+        v7 <- CreateNamedVariable 'deoptimize', 'var', v6
+        v8 <- LoadInteger '0'
+        v9 <- LoadString 'const'
+        v10 <- BinaryOperation v9, '+', v2
+        SetComputedProperty v4, v10, v8
+        v11 <- CreateNamedVariable 'C', 'none'
+        SetProperty v4, 'func', v11
+        v12 <- BeginPlainFunction -> v13, v14
+            v15 <- LoadString 'A'
+            v16 <- CreateNamedVariable 'r', 'var', v15
+            v17 <- LoadInteger '1'
+            v18 <- Compare v2, '==', v17
+            BeginIf v18
+                v19 <- LoadInteger '10'
+                v20 <- CreateNamedVariable 'B', 'none'
+                v21 <- CallFunction v20, [v19]
+                Update v16, '+', v21
+            EndIf
+            v22 <- LoadInteger '2'
+            v23 <- Compare v2, '==', v22
+            BeginIf v23
+                v24 <- LoadInteger '10'
+                v25 <- LoadInteger '11'
+                v26 <- CreateNamedVariable 'B', 'none'
+                v27 <- CallFunction v26, [v24, v25]
+                Update v16, '+', v27
+            EndIf
+            v28 <- LoadInteger '3'
+            v29 <- Compare v2, '==', v28
+            BeginIf v29
+                v30 <- LoadInteger '10'
+                v31 <- LoadInteger '11'
+                v32 <- LoadInteger '12'
+                v33 <- CreateNamedVariable 'B', 'none'
+                v34 <- CallFunction v33, [v30, v31, v32]
+                Update v16, '+', v34
+            EndIf
+            v35 <- LoadInteger '1'
+            v36 <- LoadInteger '2'
+            Return v16
+        EndPlainFunction
+        v37 <- BeginPlainFunction -> v38, v39
+            v40 <- LoadInteger '0'
+            Reassign v38, v40
+            v41 <- LoadInteger '0'
+            Reassign v39, v41
+            v42 <- LoadString 'B'
+            v43 <- LoadThis
+            v44 <- LoadArguments
+            v45 <- GetProperty v4, 'func'
+            v46 <- CallMethod v45, 'apply', [v43, v44]
+            v47 <- BinaryOperation v42, '+', v46
+            v48 <- CreateNamedVariable 'r', 'var', v47
+            v49 <- LoadArguments
+            v50 <- GetProperty v49, 'length'
+            BeginForLoopInitializer
+                v51 <- LoadInteger '0'
+            BeginForLoopCondition -> v52
+                v53 <- LoadArguments
+                v54 <- GetProperty v53, 'length'
+                v55 <- Compare v52, '<', v54
+            BeginForLoopAfterthought v55 -> v56
+                v57 <- UnaryOperation v56, '++'
+            BeginForLoopBody -> v58
+                v59 <- LoadInteger '10'
+                v60 <- BinaryOperation v59, '+', v58
+                v61 <- LoadArguments
+                v62 <- GetComputedProperty v61, v58
+            EndForLoop
+            Return v48
+        EndPlainFunction
+        v63 <- BeginPlainFunction -> v64, v65
+            v66 <- LoadInteger '0'
+            Reassign v64, v66
+            v67 <- LoadInteger '0'
+            Reassign v65, v67
+            v68 <- LoadString 'C'
+            v69 <- CreateNamedVariable 'r', 'var', v68
+            v70 <- GetProperty v7, 'deopt'
+            v71 <- LoadArguments
+            v72 <- GetProperty v71, 'length'
+            BeginForLoopInitializer
+                v73 <- LoadInteger '0'
+            BeginForLoopCondition -> v74
+                v75 <- LoadArguments
+                v76 <- GetProperty v75, 'length'
+                v77 <- Compare v74, '<', v76
+            BeginForLoopAfterthought v77 -> v78
+                v79 <- UnaryOperation v78, '++'
+            BeginForLoopBody -> v80
+                v81 <- LoadInteger '10'
+                v82 <- BinaryOperation v81, '+', v80
+                v83 <- LoadArguments
+                v84 <- GetComputedProperty v83, v80
+            EndForLoop
+            Return v69
+        EndPlainFunction
+        v85 <- LoadString 'ABC'
+        v86 <- LoadInteger '1'
+        v87 <- LoadInteger '2'
+        v88 <- CallFunction v12, [v86, v87]
+        v89 <- LoadString 'ABC'
+        v90 <- LoadInteger '1'
+        v91 <- LoadInteger '2'
+        v92 <- CallFunction v12, [v90, v91]
+        v93 <- LoadString 'ABC'
+        v94 <- LoadInteger '1'
+        v95 <- LoadInteger '2'
+        v96 <- CallFunction v12, [v94, v95]
+        v97 <- DeleteProperty v7, 'deopt'
+        v98 <- LoadString 'ABC'
+        v99 <- LoadInteger '1'
+        v100 <- LoadInteger '2'
+        v101 <- CallFunction v12, [v99, v100]
+    EndPlainFunction
+    BeginForLoopInitializer
+        v102 <- LoadInteger '1'
+    BeginForLoopCondition -> v103
+        v104 <- LoadInteger '3'
+        v105 <- Compare v103, '<=', v104
+    BeginForLoopAfterthought v105 -> v106
+        v107 <- UnaryOperation v106, '++'
+    BeginForLoopBody -> v108
+        v109 <- CallFunction v1, [v108]
+    EndForLoop
+EndPlainFunction
+v110 <- CallFunction v0, []
+
+
+function f0() {
+    'use strict';
+    function test(a2) {
+        var dispatcher = {};
+        var deoptimize = { deopt: false };
+        dispatcher["const" + a2] = 0;
+        dispatcher.func = C;
+        function A(a13, a14) {
+            var r = "A";
+            if (a2 == 1) {
+                r += B(10);
+            }
+            if (a2 == 2) {
+                r += B(10, 11);
+            }
+            if (a2 == 3) {
+                r += B(10, 11, 12);
+            }
+            return r;
+        }
+        function B(a38, a39) {
+            a38 = 0;
+            a39 = 0;
+            var r = "B" + dispatcher.func.apply(this, arguments);
+            arguments.length;
+            for (let i52 = 0; i52 < arguments.length; i52++) {
+                10 + i52;
+                arguments[i52];
+            }
+            return r;
+        }
+        function C(a64, a65) {
+            a64 = 0;
+            a65 = 0;
+            var r = "C";
+            deoptimize.deopt;
+            arguments.length;
+            for (let i74 = 0; i74 < arguments.length; i74++) {
+                10 + i74;
+                arguments[i74];
+            }
+            return r;
+        }
+        A(1, 2);
+        A(1, 2);
+        A(1, 2);
+        delete deoptimize.deopt;
+        A(1, 2);
+    }
+    for (let i103 = 1; i103 <= 3; i103++) {
+        test(i103);
+    }
+}
+f0();
+
+FuzzIL program written to corpus/inline-function-apply.fzil

@@ -1,0 +1,384 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadThis
+        Return v2
+    EndPlainFunction
+    v3 <- BeginPlainFunction -> 
+        v4 <- LoadThis
+        v5 <- LoadNull
+        v6 <- CallMethod v1, 'apply', [v4, v5]
+        Return v6
+    EndPlainFunction
+    v7 <- LoadInteger '42'
+    v8 <- LoadInteger '42'
+    v9 <- CallMethod v3, 'call', [v8]
+    v10 <- LoadInteger '42'
+    v11 <- LoadInteger '42'
+    v12 <- CallMethod v3, 'call', [v11]
+    v13 <- LoadInteger '42'
+    v14 <- LoadInteger '42'
+    v15 <- CallMethod v3, 'call', [v14]
+EndPlainFunction
+v16 <- CallFunction v0, []
+v17 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v18 <- BeginPlainFunction -> 
+        v19 <- LoadThis
+        Return v19
+    EndPlainFunction
+    v20 <- BeginPlainFunction -> 
+        v21 <- LoadThis
+        v22 <- LoadUndefined
+        v23 <- CallMethod v18, 'apply', [v21, v22]
+        Return v23
+    EndPlainFunction
+    v24 <- LoadInteger '42'
+    v25 <- LoadInteger '42'
+    v26 <- CallMethod v20, 'call', [v25]
+    v27 <- LoadInteger '42'
+    v28 <- LoadInteger '42'
+    v29 <- CallMethod v20, 'call', [v28]
+    v30 <- LoadInteger '42'
+    v31 <- LoadInteger '42'
+    v32 <- CallMethod v20, 'call', [v31]
+EndPlainFunction
+v33 <- CallFunction v17, []
+v34 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v35 <- BeginPlainFunction -> v36
+        BeginTry
+            v37 <- LoadArguments
+            v38 <- CreateNamedVariable 'Function', 'none'
+            v39 <- GetProperty v38, 'prototype'
+            v40 <- GetProperty v39, 'apply'
+            v41 <- CallMethod v40, 'call', [v36, v36, v37]
+            Return v41
+        BeginCatch -> v42
+            v43 <- LoadInteger '1'
+            Return v43
+        EndTryCatch
+    EndPlainFunction
+    v44 <- LoadInteger '1'
+    v45 <- CallFunction v35, []
+    v46 <- LoadInteger '1'
+    v47 <- CallFunction v35, []
+    v48 <- LoadInteger '1'
+    v49 <- CallFunction v35, []
+EndPlainFunction
+v50 <- CallFunction v34, []
+v51 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v52 <- BeginPlainFunction -> v53
+        BeginTry
+            v54 <- CreateNamedVariable 'Function', 'none'
+            v55 <- GetProperty v54, 'prototype'
+            v56 <- GetProperty v55, 'apply'
+            v57 <- CallMethod v56, 'call', [v53, v53, v53]
+            Return v57
+        BeginCatch -> v58
+            v59 <- LoadInteger '1'
+            Return v59
+        EndTryCatch
+    EndPlainFunction
+    v60 <- LoadInteger '1'
+    v61 <- CallFunction v52, []
+    v62 <- LoadInteger '1'
+    v63 <- CallFunction v52, []
+    v64 <- LoadInteger '1'
+    v65 <- CallFunction v52, []
+EndPlainFunction
+v66 <- CallFunction v51, []
+v67 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v68 <- BeginPlainFunction -> 
+        v69 <- LoadThis
+        Return v69
+    EndPlainFunction
+    v70 <- BeginPlainFunction -> 
+        v71 <- CallMethod v68, 'apply', []
+        Return v71
+    EndPlainFunction
+    v72 <- LoadUndefined
+    v73 <- CallFunction v70, []
+    v74 <- LoadUndefined
+    v75 <- CallFunction v70, []
+    v76 <- LoadUndefined
+    v77 <- CallFunction v70, []
+EndPlainFunction
+v78 <- CallFunction v67, []
+v79 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v80 <- BeginPlainFunction -> 
+        v81 <- LoadThis
+        Return v81
+    EndPlainFunction
+    v82 <- BeginPlainFunction -> 
+        v83 <- LoadThis
+        v84 <- CallMethod v80, 'apply', [v83]
+        Return v84
+    EndPlainFunction
+    v85 <- LoadInteger '42'
+    v86 <- LoadInteger '42'
+    v87 <- CallMethod v82, 'call', [v86]
+    v88 <- LoadInteger '42'
+    v89 <- LoadInteger '42'
+    v90 <- CallMethod v82, 'call', [v89]
+    v91 <- LoadInteger '42'
+    v92 <- LoadInteger '42'
+    v93 <- CallMethod v82, 'call', [v92]
+EndPlainFunction
+v94 <- CallFunction v79, []
+v95 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v96 <- BeginPlainFunction -> 
+        v97 <- LoadThis
+        Return v97
+    EndPlainFunction
+    v98 <- BeginPlainFunction -> 
+        v99 <- LoadThis
+        v100 <- LoadArguments
+        v101 <- LoadThis
+        v102 <- CallMethod v96, 'apply', [v99, v100, v101]
+        Return v102
+    EndPlainFunction
+    v103 <- LoadInteger '42'
+    v104 <- LoadInteger '42'
+    v105 <- CallMethod v98, 'call', [v104]
+    v106 <- LoadInteger '42'
+    v107 <- LoadInteger '42'
+    v108 <- CallMethod v98, 'call', [v107]
+    v109 <- LoadInteger '42'
+    v110 <- LoadInteger '42'
+    v111 <- CallMethod v98, 'call', [v110]
+EndPlainFunction
+v112 <- CallFunction v95, []
+v113 <- BeginPlainFunction -> 
+    v114 <- LoadInteger '0'
+    v115 <- CreateNamedVariable 'dummy_length_counter', 'var', v114
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `length` -> v116
+            v117 <- UnaryOperation '++', v115
+            v118 <- LoadInteger '0'
+            Return v118
+        EndObjectLiteralGetter
+    v119 <- EndObjectLiteral
+    v120 <- CreateNamedVariable 'dummy', 'var', v119
+    v121 <- BeginPlainFunction -> 
+        v122 <- LoadUndefined
+        v123 <- LoadThis
+        v124 <- CreateNamedVariable 'Function', 'none'
+        v125 <- GetProperty v124, 'prototype'
+        v126 <- GetProperty v125, 'apply'
+        v127 <- CallMethod v126, 'call', [v122, v123, v120]
+        Return v127
+    EndPlainFunction
+    v128 <- CallFunction v121, []
+    v129 <- CreateNamedVariable 'TypeError', 'none'
+    v130 <- CallFunction v121, []
+    v131 <- CallFunction v121, []
+    v132 <- LoadInteger '0'
+EndPlainFunction
+v133 <- CallFunction v113, []
+v134 <- BeginPlainFunction -> 
+    v135 <- LoadInteger '0'
+    v136 <- CreateNamedVariable 'dummy_length_counter', 'var', v135
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `length` -> v137
+            v138 <- UnaryOperation '++', v136
+            v139 <- LoadInteger '0'
+            Return v139
+        EndObjectLiteralGetter
+    v140 <- EndObjectLiteral
+    v141 <- CreateNamedVariable 'dummy', 'var', v140
+    v142 <- BeginPlainFunction -> 
+        v143 <- LoadNull
+        v144 <- LoadThis
+        v145 <- CreateNamedVariable 'Function', 'none'
+        v146 <- GetProperty v145, 'prototype'
+        v147 <- GetProperty v146, 'apply'
+        v148 <- CallMethod v147, 'call', [v143, v144, v141]
+        Return v148
+    EndPlainFunction
+    v149 <- CallFunction v142, []
+    v150 <- CreateNamedVariable 'TypeError', 'none'
+    v151 <- CallFunction v142, []
+    v152 <- CallFunction v142, []
+    v153 <- LoadInteger '0'
+EndPlainFunction
+v154 <- CallFunction v134, []
+v155 <- BeginPlainFunction -> 
+    v156 <- LoadInteger '0'
+    v157 <- CreateNamedVariable 'dummy_length_counter', 'var', v156
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `length` -> v158
+            v159 <- UnaryOperation '++', v157
+            v160 <- LoadInteger '0'
+            Return v160
+        EndObjectLiteralGetter
+    v161 <- EndObjectLiteral
+    v162 <- CreateNamedVariable 'dummy', 'var', v161
+    v163 <- BeginPlainFunction -> 
+        v164 <- LoadNull
+        v165 <- LoadThis
+        v166 <- CreateNamedVariable 'Function', 'none'
+        v167 <- GetProperty v166, 'prototype'
+        v168 <- GetProperty v167, 'apply'
+        v169 <- CallMethod v168, 'call', [v164, v165, v162]
+        Return v169
+    EndPlainFunction
+    v170 <- CallFunction v163, []
+    v171 <- CreateNamedVariable 'TypeError', 'none'
+    v172 <- CallFunction v163, []
+    v173 <- CallFunction v163, []
+    v174 <- LoadInteger '0'
+EndPlainFunction
+v175 <- CallFunction v155, []
+
+
+function f0() {
+    'use strict';
+    function bar() {
+        return this;
+    }
+    function foo() {
+        return bar.apply(this, null);
+    }
+    foo.call(42);
+    foo.call(42);
+    foo.call(42);
+}
+f0();
+function f17() {
+    'use strict';
+    function bar() {
+        return this;
+    }
+    function foo() {
+        return bar.apply(this, undefined);
+    }
+    foo.call(42);
+    foo.call(42);
+    foo.call(42);
+}
+f17();
+function f34() {
+    'use strict';
+    function foo(a36) {
+        try {
+            return Function.prototype.apply.call(a36, a36, arguments);
+        } catch(e42) {
+            return 1;
+        }
+    }
+    foo();
+    foo();
+    foo();
+}
+f34();
+function f51() {
+    'use strict';
+    function foo(a53) {
+        try {
+            return Function.prototype.apply.call(a53, a53, a53);
+        } catch(e58) {
+            return 1;
+        }
+    }
+    foo();
+    foo();
+    foo();
+}
+f51();
+function f67() {
+    'use strict';
+    function bar() {
+        return this;
+    }
+    function foo() {
+        return bar.apply();
+    }
+    foo();
+    foo();
+    foo();
+}
+f67();
+function f79() {
+    'use strict';
+    function bar() {
+        return this;
+    }
+    function foo() {
+        return bar.apply(this);
+    }
+    foo.call(42);
+    foo.call(42);
+    foo.call(42);
+}
+f79();
+function f95() {
+    'use strict';
+    function bar() {
+        return this;
+    }
+    function foo() {
+        return bar.apply(this, arguments, this);
+    }
+    foo.call(42);
+    foo.call(42);
+    foo.call(42);
+}
+f95();
+function f113() {
+    var dummy_length_counter = 0;
+    const v119 = {
+        get length() {
+            ++dummy_length_counter;
+            return 0;
+        },
+    };
+    var dummy = v119;
+    function foo() {
+        return Function.prototype.apply.call(undefined, this, dummy);
+    }
+    foo();
+    foo();
+    foo();
+}
+f113();
+function f134() {
+    var dummy_length_counter = 0;
+    const v140 = {
+        get length() {
+            ++dummy_length_counter;
+            return 0;
+        },
+    };
+    var dummy = v140;
+    function foo() {
+        return Function.prototype.apply.call(null, this, dummy);
+    }
+    foo();
+    foo();
+    foo();
+}
+f134();
+function f155() {
+    var dummy_length_counter = 0;
+    const v161 = {
+        get length() {
+            ++dummy_length_counter;
+            return 0;
+        },
+    };
+    var dummy = v161;
+    function foo() {
+        return Function.prototype.apply.call(null, this, dummy);
+    }
+    foo();
+    foo();
+    foo();
+}
+f155();
+
+FuzzIL program written to corpus/function-apply.fzil

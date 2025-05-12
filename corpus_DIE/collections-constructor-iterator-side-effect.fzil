@@ -1,0 +1,174 @@
+v0 <- BeginPlainFunction -> v1
+    BeginObjectLiteral
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable 'k1', 'const', v2
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'k2', 'const', v4
+    v6 <- CreateArray [v3, v5]
+    v7 <- CreateNamedVariable 'entries', 'const', v6
+    v8 <- CreateNamedVariable 'Symbol', 'none'
+    v9 <- GetProperty v8, 'iterator'
+    v10 <- CallComputedMethod v7, v9, []
+    v11 <- CreateNamedVariable 'Object', 'none'
+    v12 <- CallMethod v11, 'getPrototypeOf', [v10]
+    v13 <- CreateNamedVariable 'arrayIteratorProto', 'const', v12
+    v14 <- GetProperty v13, 'next'
+    v15 <- CreateNamedVariable 'originalNext', 'const', v14
+    v16 <- LoadInteger '0'
+    v17 <- CreateNamedVariable 'callCount', 'let', v16
+    v18 <- BeginPlainFunction -> 
+        v19 <- UnaryOperation v17, '++'
+        v20 <- LoadThis
+        v21 <- CallMethod v15, 'call', [v20]
+        Return v21
+    EndPlainFunction
+    SetProperty v13, 'next', v18
+    v22 <- Construct v1, [v7]
+    v23 <- CreateNamedVariable 'set', 'const', v22
+    v24 <- LoadInteger '3'
+    v25 <- LoadString 'size'
+    v26 <- TestIn v25, v23
+    BeginIf v26
+        v27 <- LoadInteger '2'
+        v28 <- GetProperty v23, 'size'
+    EndIf
+    v29 <- CallMethod v23, 'has', [v3]
+    v30 <- CallMethod v23, 'has', [v5]
+    SetProperty v13, 'next', v15
+EndPlainFunction
+v31 <- CreateNamedVariable 'Set', 'none'
+v32 <- CallFunction v0, [v31]
+v33 <- CallFunction v0, [v31]
+v34 <- CallFunction v0, [v31]
+v35 <- CallFunction v0, [v31]
+v36 <- CallFunction v0, []
+v37 <- CreateNamedVariable 'WeakSet', 'none'
+v38 <- CallFunction v0, [v37]
+v39 <- CallFunction v0, [v37]
+v40 <- CallFunction v0, [v37]
+v41 <- CallFunction v0, [v37]
+v42 <- CallFunction v0, []
+v43 <- BeginPlainFunction -> v44
+    BeginObjectLiteral
+    v45 <- EndObjectLiteral
+    v46 <- CreateNamedVariable 'k1', 'const', v45
+    BeginObjectLiteral
+    v47 <- EndObjectLiteral
+    v48 <- CreateNamedVariable 'k2', 'const', v47
+    v49 <- LoadInteger '1'
+    v50 <- CreateArray [v46, v49]
+    v51 <- LoadInteger '2'
+    v52 <- CreateArray [v48, v51]
+    v53 <- CreateArray [v50, v52]
+    v54 <- CreateNamedVariable 'entries', 'const', v53
+    v55 <- CreateNamedVariable 'Symbol', 'none'
+    v56 <- GetProperty v55, 'iterator'
+    v57 <- CallComputedMethod v54, v56, []
+    v58 <- CreateNamedVariable 'Object', 'none'
+    v59 <- CallMethod v58, 'getPrototypeOf', [v57]
+    v60 <- CreateNamedVariable 'arrayIteratorProto', 'const', v59
+    v61 <- GetProperty v60, 'next'
+    v62 <- CreateNamedVariable 'originalNext', 'const', v61
+    v63 <- LoadInteger '0'
+    v64 <- CreateNamedVariable 'callCount', 'let', v63
+    v65 <- BeginPlainFunction -> 
+        v66 <- UnaryOperation v64, '++'
+        v67 <- LoadThis
+        v68 <- CallMethod v62, 'call', [v67]
+        Return v68
+    EndPlainFunction
+    SetProperty v60, 'next', v65
+    v69 <- Construct v44, [v54]
+    v70 <- CreateNamedVariable 'set', 'const', v69
+    v71 <- LoadInteger '3'
+    v72 <- LoadString 'size'
+    v73 <- TestIn v72, v70
+    BeginIf v73
+        v74 <- LoadInteger '2'
+        v75 <- GetProperty v70, 'size'
+    EndIf
+    v76 <- LoadInteger '1'
+    v77 <- CallMethod v70, 'get', [v46]
+    v78 <- LoadInteger '2'
+    v79 <- CallMethod v70, 'get', [v48]
+    SetProperty v60, 'next', v62
+EndPlainFunction
+v80 <- CreateNamedVariable 'Map', 'none'
+v81 <- CallFunction v43, [v80]
+v82 <- CallFunction v43, [v80]
+v83 <- CallFunction v43, [v80]
+v84 <- CallFunction v43, [v80]
+v85 <- CallFunction v43, []
+v86 <- CreateNamedVariable 'WeakMap', 'none'
+v87 <- CallFunction v43, [v86]
+v88 <- CallFunction v43, [v86]
+v89 <- CallFunction v43, [v86]
+v90 <- CallFunction v43, [v86]
+v91 <- CallFunction v43, []
+
+
+function TestSetWithModifiedIterator(a1) {
+    const k1 = {};
+    const k2 = {};
+    const entries = [k1,k2];
+    const arrayIteratorProto = Object.getPrototypeOf(entries[Symbol.iterator]());
+    const originalNext = arrayIteratorProto.next;
+    let callCount = 0;
+    function f18() {
+        callCount++;
+        return originalNext.call(this);
+    }
+    arrayIteratorProto.next = f18;
+    const v22 = new a1(entries);
+    const set = v22;
+    if ("size" in set) {
+        set.size;
+    }
+    set.has(k1);
+    set.has(k2);
+    arrayIteratorProto.next = originalNext;
+}
+TestSetWithModifiedIterator(Set);
+TestSetWithModifiedIterator(Set);
+TestSetWithModifiedIterator(Set);
+TestSetWithModifiedIterator(Set);
+TestSetWithModifiedIterator();
+TestSetWithModifiedIterator(WeakSet);
+TestSetWithModifiedIterator(WeakSet);
+TestSetWithModifiedIterator(WeakSet);
+TestSetWithModifiedIterator(WeakSet);
+TestSetWithModifiedIterator();
+function TestMapWithModifiedIterator(a44) {
+    const k1 = {};
+    const k2 = {};
+    const entries = [[k1,1],[k2,2]];
+    const arrayIteratorProto = Object.getPrototypeOf(entries[Symbol.iterator]());
+    const originalNext = arrayIteratorProto.next;
+    let callCount = 0;
+    function f65() {
+        callCount++;
+        return originalNext.call(this);
+    }
+    arrayIteratorProto.next = f65;
+    const v69 = new a44(entries);
+    const set = v69;
+    if ("size" in set) {
+        set.size;
+    }
+    set.get(k1);
+    set.get(k2);
+    arrayIteratorProto.next = originalNext;
+}
+TestMapWithModifiedIterator(Map);
+TestMapWithModifiedIterator(Map);
+TestMapWithModifiedIterator(Map);
+TestMapWithModifiedIterator(Map);
+TestMapWithModifiedIterator();
+TestMapWithModifiedIterator(WeakMap);
+TestMapWithModifiedIterator(WeakMap);
+TestMapWithModifiedIterator(WeakMap);
+TestMapWithModifiedIterator(WeakMap);
+TestMapWithModifiedIterator();
+
+FuzzIL program written to corpus/collections-constructor-iterator-side-effect.fzil

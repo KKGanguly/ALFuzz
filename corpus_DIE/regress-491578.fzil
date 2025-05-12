@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadUndefined
+    v3 <- Compare v1, '===', v2
+    BeginIf v3
+        Return
+    EndIf
+    BeginWhileLoopHeader
+        v4 <- LoadBoolean 'true'
+    BeginWhileLoopBody v4
+        BeginWhileLoopHeader
+            v5 <- LoadInteger '1'
+            v6 <- LoadInteger '2'
+            v7 <- BinaryOperation v5, '||', v6
+        BeginWhileLoopBody v7
+        EndWhileLoop
+        v8 <- CreateNamedVariable 'f', 'none'
+        v9 <- CallFunction v8, []
+    EndWhileLoop
+EndPlainFunction
+v10 <- CallFunction v0, []
+
+
+function foo(a1) {
+    if (a1 === undefined) {
+        return;
+    }
+    while (true) {
+        while (1 || 2) {
+        }
+        f();
+    }
+}
+foo();
+
+FuzzIL program written to corpus/regress-491578.fzil

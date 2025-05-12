@@ -1,0 +1,16 @@
+v0 <- LoadInteger '7'
+v1 <- CreateNamedVariable 'x', 'const', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '8'
+    v4 <- CreateNamedVariable 'y', 'const', v3
+EndPlainFunction
+v5 <- CallFunction v2, []
+
+
+const x = 7;
+function f() {
+    const y = 8;
+}
+f();
+
+FuzzIL program written to corpus/regress-173361.fzil

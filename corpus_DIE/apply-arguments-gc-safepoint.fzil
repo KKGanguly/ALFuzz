@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '149999'
+    v4 <- Compare v1, '==', v3
+    BeginIf v4
+        v5 <- CreateNamedVariable 'gc', 'none'
+        v6 <- CallFunction v5, []
+    EndIf
+    v7 <- BinaryOperation v1, '+', v2
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadThis
+    v10 <- LoadArguments
+    v11 <- CallMethod v0, 'apply', [v9, v10]
+EndPlainFunction
+BeginForLoopInitializer
+    v12 <- LoadInteger '0'
+BeginForLoopCondition -> v13
+    v14 <- LoadInteger '150000'
+    v15 <- Compare v13, '<', v14
+BeginForLoopAfterthought v15 -> v16
+    v17 <- UnaryOperation v16, '++'
+BeginForLoopBody -> v18
+    v19 <- CallFunction v8, [v18]
+EndForLoop
+
+
+function f(a1, a2) {
+    if (a1 == 149999) {
+        gc();
+    }
+    return a1 + a2;
+}
+function g() {
+    f.apply(this, arguments);
+}
+for (let i13 = 0; i13 < 150000; i13++) {
+    g(i13);
+}
+
+FuzzIL program written to corpus/apply-arguments-gc-safepoint.fzil

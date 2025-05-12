@@ -1,0 +1,166 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- CreateNamedVariable 'Int8Array', 'none'
+v2 <- CreateNamedVariable 'Uint8Array', 'none'
+v3 <- CreateNamedVariable 'Int16Array', 'none'
+v4 <- CreateNamedVariable 'Uint16Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Uint32Array', 'none'
+v7 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v8 <- CreateNamedVariable 'Float32Array', 'none'
+v9 <- CreateNamedVariable 'Float64Array', 'none'
+v10 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9]
+v11 <- CreateNamedVariable 'types', 'const', v10
+BeginForOfLoop v11 -> v12
+    v13 <- Construct v12, []
+    v14 <- CreateNamedVariable 'array', 'const', v13
+    v15 <- LoadInteger '1'
+    SetElement v14, '0', v15
+    v16 <- LoadInteger '2'
+    SetElement v14, '1', v16
+    v17 <- LoadInteger '3'
+    SetElement v14, '2', v17
+    v18 <- CallMethod v14, 'sort', []
+    v19 <- LoadUndefined
+    v20 <- CallMethod v14, 'sort', [v19]
+    v21 <- BeginArrowFunction -> 
+    EndArrowFunction
+    v22 <- CallMethod v14, 'sort', [v21]
+    v23 <- BeginArrowFunction -> 
+        v24 <- LoadNull
+        v25 <- CallMethod v14, 'sort', [v24]
+    EndArrowFunction
+    v26 <- CallFunction v23, []
+    v27 <- CreateNamedVariable 'TypeError', 'none'
+    v28 <- BeginArrowFunction -> 
+        v29 <- LoadBoolean 'true'
+        v30 <- CallMethod v14, 'sort', [v29]
+    EndArrowFunction
+    v31 <- CallFunction v28, []
+    v32 <- BeginArrowFunction -> 
+        v33 <- LoadBoolean 'false'
+        v34 <- CallMethod v14, 'sort', [v33]
+    EndArrowFunction
+    v35 <- CallFunction v32, []
+    v36 <- BeginArrowFunction -> 
+        v37 <- LoadString ''
+        v38 <- CallMethod v14, 'sort', [v37]
+    EndArrowFunction
+    v39 <- CallFunction v36, []
+    v40 <- BeginArrowFunction -> 
+        v41 <- LoadInteger '0'
+        v42 <- CallMethod v14, 'sort', [v41]
+    EndArrowFunction
+    v43 <- CallFunction v40, []
+    v44 <- BeginArrowFunction -> 
+        v45 <- LoadInteger '42'
+        v46 <- CallMethod v14, 'sort', [v45]
+    EndArrowFunction
+    v47 <- CallFunction v44, []
+    v48 <- BeginArrowFunction -> 
+        v49 <- CreateArray []
+        v50 <- CallMethod v14, 'sort', [v49]
+    EndArrowFunction
+    v51 <- CallFunction v48, []
+    v52 <- BeginArrowFunction -> 
+        v53 <- LoadRegExp '.' ''
+        v54 <- CallMethod v14, 'sort', [v53]
+    EndArrowFunction
+    v55 <- CallFunction v52, []
+    v56 <- BeginArrowFunction -> 
+        BeginObjectLiteral
+        v57 <- EndObjectLiteral
+        v58 <- CallMethod v14, 'sort', [v57]
+    EndArrowFunction
+    v59 <- CallFunction v56, []
+    v60 <- BeginArrowFunction -> 
+        v61 <- CreateNamedVariable 'Symbol', 'none'
+        v62 <- CallFunction v61, []
+        v63 <- CallMethod v14, 'sort', [v62]
+    EndArrowFunction
+    v64 <- CallFunction v60, []
+EndForOfLoop
+v65 <- BeginArrowFunction -> 
+    v66 <- LoadNull
+    v67 <- LoadInteger '42'
+    v68 <- GetProperty v0, 'prototype'
+    v69 <- GetProperty v68, 'sort'
+    v70 <- CallMethod v69, 'call', [v66, v67]
+EndArrowFunction
+v71 <- CallFunction v65, []
+v72 <- CreateNamedVariable 'TypeError', 'none'
+BeginTry
+    v73 <- LoadNull
+    v74 <- LoadInteger '42'
+    v75 <- GetProperty v0, 'prototype'
+    v76 <- GetProperty v75, 'sort'
+    v77 <- CallMethod v76, 'call', [v73, v74]
+BeginCatch -> v78
+    v79 <- LoadString 'The comparison function must be either a function or undefined'
+    v80 <- GetProperty v78, 'message'
+EndTryCatch
+
+
+const types = [Array,Int8Array,Uint8Array,Int16Array,Uint16Array,Int32Array,Uint32Array,Uint8ClampedArray,Float32Array,Float64Array];
+for (const v12 of types) {
+    const v13 = new v12();
+    const array = v13;
+    array[0] = 1;
+    array[1] = 2;
+    array[2] = 3;
+    array.sort();
+    array.sort(undefined);
+    const v21 = () => {
+    };
+    array.sort(v21);
+    const v23 = () => {
+        array.sort(null);
+    };
+    v23();
+    const v28 = () => {
+        array.sort(true);
+    };
+    v28();
+    const v32 = () => {
+        array.sort(false);
+    };
+    v32();
+    const v36 = () => {
+        array.sort("");
+    };
+    v36();
+    const v40 = () => {
+        array.sort(0);
+    };
+    v40();
+    const v44 = () => {
+        array.sort(42);
+    };
+    v44();
+    const v48 = () => {
+        array.sort([]);
+    };
+    v48();
+    const v52 = () => {
+        array.sort(/./);
+    };
+    v52();
+    const v56 = () => {
+        array.sort({});
+    };
+    v56();
+    const v60 = () => {
+        array.sort(Symbol());
+    };
+    v60();
+}
+const v65 = () => {
+    Array.prototype.sort.call(null, 42);
+};
+v65();
+try {
+    Array.prototype.sort.call(null, 42);
+} catch(e78) {
+    e78.message;
+}
+
+FuzzIL program written to corpus/array-sort-comparefn.fzil

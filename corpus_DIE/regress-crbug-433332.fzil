@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadUndefined
+    v3 <- CreateNamedVariable 'g', 'var', v2
+    v4 <- LoadBoolean 'true'
+    v5 <- LoadFloat '0.1'
+    Reassign v3, v5
+    v6 <- LoadNull
+    Update v3, '|', v6
+    v7 <- TernaryOperation v4, v5, v6
+    v8 <- LoadNull
+    v9 <- Compare v8, '!=', v3
+    BeginIf v9
+    EndIf
+EndPlainFunction
+v10 <- LoadFloat '1.4'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadFloat '1.4'
+v13 <- CallFunction v0, [v12]
+v14 <- LoadFloat '1.4'
+v15 <- CallFunction v0, [v14]
+
+
+function f(a1) {
+    var g;
+    g = 0.1;
+    g |= null;
+    true ? 0.1 : null;
+    if (null != g) {
+    }
+}
+f(1.4);
+f(1.4);
+f(1.4);
+
+FuzzIL program written to corpus/regress-crbug-433332.fzil

@@ -1,0 +1,150 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'key1', 'const', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'key2', 'const', v2
+v4 <- CreateNamedVariable 'Set', 'none'
+v5 <- LoadUndefined
+v6 <- LoadInteger '1'
+v7 <- CreateArray [v5, v6]
+v8 <- Construct v4, [v7]
+v9 <- CreateNamedVariable 'set', 'const', v8
+v10 <- LoadUndefined
+v11 <- CallMethod v9, 'has', [v10]
+v12 <- LoadBoolean 'true'
+v13 <- LoadInteger '1'
+v14 <- CallMethod v9, 'has', [v13]
+v15 <- LoadBoolean 'true'
+v16 <- LoadUndefined
+v17 <- LoadFloat '1.234'
+v18 <- CreateArray [v16, v17]
+v19 <- Construct v4, [v18]
+v20 <- CreateNamedVariable 'doubleSet', 'const', v19
+v21 <- LoadUndefined
+v22 <- CallMethod v20, 'has', [v21]
+v23 <- LoadBoolean 'true'
+v24 <- LoadFloat '1.234'
+v25 <- CallMethod v20, 'has', [v24]
+v26 <- LoadBoolean 'true'
+v27 <- CreateNamedVariable 'Map', 'none'
+v28 <- LoadUndefined
+v29 <- CreateArray [v28, v1]
+v30 <- CreateArray [v3]
+v31 <- CreateArray [v29, v30]
+v32 <- Construct v27, [v31]
+v33 <- CreateNamedVariable 'map', 'const', v32
+v34 <- LoadUndefined
+v35 <- CallMethod v33, 'get', [v34]
+v36 <- CallMethod v33, 'get', [v3]
+v37 <- LoadUndefined
+v38 <- LoadUndefined
+v39 <- LoadFloat '1.234'
+v40 <- CreateArray [v38, v39]
+v41 <- CreateArray [v40]
+v42 <- Construct v27, [v41]
+v43 <- CreateNamedVariable 'doublesMap', 'const', v42
+v44 <- LoadUndefined
+v45 <- CallMethod v43, 'get', [v44]
+v46 <- LoadFloat '1.234'
+v47 <- CreateNamedVariable 'WeakMap', 'none'
+v48 <- CreateArray [v1]
+v49 <- CreateArray [v48]
+v50 <- Construct v47, [v49]
+v51 <- CreateNamedVariable 'weakmap', 'const', v50
+v52 <- CallMethod v51, 'get', [v1]
+v53 <- LoadUndefined
+v54 <- BeginArrowFunction -> 
+    v55 <- CreateNamedVariable 'WeakSet', 'none'
+    v56 <- LoadUndefined
+    BeginObjectLiteral
+    v57 <- EndObjectLiteral
+    v58 <- CreateArray [v56, v57]
+    v59 <- Construct v55, [v58]
+    Return v59
+EndArrowFunction
+v60 <- CallFunction v54, []
+v61 <- BeginArrowFunction -> 
+    v62 <- CreateNamedVariable 'WeakSet', 'none'
+    v63 <- LoadUndefined
+    v64 <- LoadFloat '1.234'
+    v65 <- CreateArray [v63, v64]
+    v66 <- Construct v62, [v65]
+    Return v66
+EndArrowFunction
+v67 <- CallFunction v61, []
+v68 <- BeginArrowFunction -> 
+    v69 <- LoadUndefined
+    v70 <- LoadUndefined
+    v71 <- CreateArray [v70, v1]
+    v72 <- CreateArray [v69, v71]
+    v73 <- Construct v27, [v72]
+    Return v73
+EndArrowFunction
+v74 <- CallFunction v68, []
+v75 <- BeginArrowFunction -> 
+    v76 <- LoadUndefined
+    v77 <- CreateArray [v76, v1]
+    v78 <- CreateArray [v77]
+    v79 <- Construct v47, [v78]
+    Return v79
+EndArrowFunction
+v80 <- CallFunction v75, []
+v81 <- BeginArrowFunction -> 
+    v82 <- LoadUndefined
+    v83 <- LoadUndefined
+    v84 <- CreateArray [v83, v1]
+    v85 <- CreateArray [v82, v84]
+    v86 <- Construct v47, [v85]
+    Return v86
+EndArrowFunction
+v87 <- CallFunction v81, []
+
+
+const key1 = {};
+const key2 = {};
+const v8 = new Set([,1]);
+const set = v8;
+set.has(undefined);
+set.has(1);
+const v19 = new Set([,1.234]);
+const doubleSet = v19;
+doubleSet.has(undefined);
+doubleSet.has(1.234);
+const v32 = new Map([[,key1],[key2]]);
+const map = v32;
+map.get(undefined);
+map.get(key2);
+const v42 = new Map([[,1.234]]);
+const doublesMap = v42;
+doublesMap.get(undefined);
+const v50 = new WeakMap([[key1]]);
+const weakmap = v50;
+weakmap.get(key1);
+const v54 = () => {
+    const v59 = new WeakSet([,{}]);
+    return v59;
+};
+v54();
+const v61 = () => {
+    const v66 = new WeakSet([,1.234]);
+    return v66;
+};
+v61();
+const v68 = () => {
+    const v73 = new Map([,[,key1]]);
+    return v73;
+};
+v68();
+const v75 = () => {
+    const v79 = new WeakMap([[,key1]]);
+    return v79;
+};
+v75();
+const v81 = () => {
+    const v86 = new WeakMap([,[,key1]]);
+    return v86;
+};
+v81();
+
+FuzzIL program written to corpus/regress-784990.fzil

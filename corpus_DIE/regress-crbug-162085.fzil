@@ -1,0 +1,110 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '3'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable 'a', 'var', v3
+v5 <- LoadInteger '0'
+SetProperty v4, 'length', v5
+v6 <- LoadFloat '1.4'
+SetElement v4, '0', v6
+v7 <- LoadFloat '1.4'
+v8 <- GetElement v4, '0'
+v9 <- LoadUndefined
+v10 <- GetElement v4, '1'
+v11 <- LoadUndefined
+v12 <- GetElement v4, '2'
+v13 <- LoadUndefined
+v14 <- GetElement v4, '3'
+v15 <- BeginPlainFunction -> v16, v17, v18
+    SetComputedProperty v16, v17, v18
+EndPlainFunction
+v19 <- LoadFloat '1.3'
+v20 <- CreateArray [v19]
+v21 <- CreateNamedVariable 'a2', 'var', v20
+v22 <- LoadInteger '1'
+v23 <- LoadFloat '1.4'
+v24 <- CallFunction v15, [v21, v22, v23]
+v25 <- LoadInteger '0'
+SetProperty v21, 'length', v25
+v26 <- LoadInteger '0'
+v27 <- LoadFloat '1.5'
+v28 <- CallFunction v15, [v21, v26, v27]
+v29 <- LoadFloat '1.5'
+v30 <- GetElement v21, '0'
+v31 <- LoadUndefined
+v32 <- GetElement v21, '1'
+v33 <- LoadUndefined
+v34 <- GetElement v21, '2'
+v35 <- LoadUndefined
+v36 <- GetElement v21, '3'
+v37 <- LoadFloat '1.3'
+v38 <- CreateArray [v37]
+v39 <- CreateNamedVariable 'a3', 'var', v38
+BeginObjectLiteral
+v40 <- EndObjectLiteral
+v41 <- CreateNamedVariable 'o', 'var', v40
+v42 <- LoadInteger '1'
+v43 <- CallFunction v15, [v39, v42, v41]
+v44 <- LoadFloat '1.3'
+v45 <- GetElement v39, '0'
+v46 <- GetElement v39, '1'
+v47 <- BeginPlainFunction -> v48, v49, v50
+    SetComputedProperty v48, v49, v50
+EndPlainFunction
+v51 <- LoadFloat '1.3'
+v52 <- CreateArray [v51]
+v53 <- CreateNamedVariable 'a4', 'var', v52
+v54 <- LoadInteger '1'
+v55 <- LoadFloat '1.4'
+v56 <- CallFunction v47, [v53, v54, v55]
+v57 <- LoadInteger '0'
+SetProperty v53, 'length', v57
+v58 <- LoadInteger '0'
+v59 <- LoadInteger '1'
+v60 <- CallFunction v47, [v53, v58, v59]
+v61 <- LoadInteger '1'
+v62 <- GetElement v53, '0'
+v63 <- LoadUndefined
+v64 <- GetElement v53, '1'
+v65 <- LoadUndefined
+v66 <- GetElement v53, '2'
+v67 <- LoadUndefined
+v68 <- GetElement v53, '3'
+
+
+var a = [1,2,3];
+a.length = 0;
+a[0] = 1.4;
+a[0];
+a[1];
+a[2];
+a[3];
+function grow_store(a16, a17, a18) {
+    a16[a17] = a18;
+}
+var a2 = [1.3];
+grow_store(a2, 1, 1.4);
+a2.length = 0;
+grow_store(a2, 0, 1.5);
+a2[0];
+a2[1];
+a2[2];
+a2[3];
+var a3 = [1.3];
+var o = {};
+grow_store(a3, 1, o);
+a3[0];
+a3[1];
+function grow_store2(a48, a49, a50) {
+    a48[a49] = a50;
+}
+var a4 = [1.3];
+grow_store2(a4, 1, 1.4);
+a4.length = 0;
+grow_store2(a4, 0, 1);
+a4[0];
+a4[1];
+a4[2];
+a4[3];
+
+FuzzIL program written to corpus/regress-crbug-162085.fzil

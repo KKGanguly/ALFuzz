@@ -1,0 +1,259 @@
+v0 <- LoadString 'private'
+v1 <- CreateNamedVariable 'f', 'none'
+v2 <- CallFunction v1, [v0]
+v3 <- CreateNamedVariable 'symbol', 'var', v2
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'object', 'var', v4
+v6 <- LoadInteger '42'
+SetComputedProperty v5, v3, v6
+v7 <- CreateNamedVariable 'Object', 'none'
+v8 <- CallMethod v7, 'keys', [v5]
+BeginForOfLoop v8 -> v9
+EndForOfLoop
+v10 <- CallMethod v7, 'getOwnPropertySymbols', [v5]
+BeginForOfLoop v10 -> v11
+EndForOfLoop
+v12 <- CallMethod v7, 'getOwnPropertyNames', [v5]
+BeginForOfLoop v12 -> v13
+EndForOfLoop
+v14 <- CreateNamedVariable 'Reflect', 'none'
+v15 <- CallMethod v14, 'ownKeys', [v5]
+BeginForOfLoop v15 -> v16
+EndForOfLoop
+BeginForInLoop v5 -> v17
+EndForInLoop
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v5
+v18 <- EndObjectLiteral
+v19 <- CreateNamedVariable 'object2', 'var', v18
+v20 <- CallMethod v7, 'keys', [v19]
+BeginForOfLoop v20 -> v21
+EndForOfLoop
+v22 <- CallMethod v7, 'getOwnPropertySymbols', [v19]
+BeginForOfLoop v22 -> v23
+EndForOfLoop
+v24 <- CallMethod v7, 'getOwnPropertyNames', [v19]
+BeginForOfLoop v24 -> v25
+EndForOfLoop
+v26 <- CallMethod v14, 'ownKeys', [v19]
+BeginForOfLoop v26 -> v27
+EndForOfLoop
+BeginForInLoop v19 -> v28
+EndForInLoop
+v29 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v30 <- EndObjectLiteral
+BeginObjectLiteral
+v31 <- EndObjectLiteral
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v32
+        v33 <- BeginArrowFunction -> 
+            v34 <- CreateNamedVariable 'Error', 'none'
+            v35 <- Construct v34, []
+            ThrowException v35
+        EndArrowFunction
+        Return v33
+    EndObjectLiteralMethod
+v36 <- EndObjectLiteral
+v37 <- Construct v29, [v31, v36]
+v38 <- Construct v29, [v30, v37]
+v39 <- CreateNamedVariable 'proxy', 'var', v38
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v39
+v40 <- EndObjectLiteral
+v41 <- CreateNamedVariable 'object', 'var', v40
+v42 <- LoadInteger '42'
+v43 <- LoadInteger '42'
+SetComputedProperty v39, v3, v43
+v44 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v45 <- LoadInteger '42'
+    SetComputedProperty v39, v3, v45
+EndPlainFunction
+v46 <- CallFunction v44, []
+v47 <- CreateNamedVariable 'TypeError', 'none'
+v48 <- LoadBoolean 'false'
+v49 <- LoadInteger '42'
+v50 <- CallMethod v14, 'set', [v39, v3, v49]
+v51 <- LoadInteger '42'
+v52 <- LoadInteger '42'
+SetComputedProperty v41, v3, v52
+v53 <- LoadInteger '43'
+v54 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v55 <- LoadInteger '43'
+    SetComputedProperty v41, v3, v55
+    Return v55
+EndPlainFunction
+v56 <- CallFunction v54, []
+v57 <- LoadBoolean 'true'
+v58 <- LoadInteger '44'
+v59 <- CallMethod v14, 'set', [v41, v3, v58]
+v60 <- LoadBoolean 'false'
+BeginObjectLiteral
+v61 <- EndObjectLiteral
+v62 <- CallMethod v14, 'defineProperty', [v39, v3, v61]
+v63 <- BeginArrowFunction -> 
+    BeginObjectLiteral
+    v64 <- EndObjectLiteral
+    v65 <- CallMethod v7, 'defineProperty', [v39, v3, v64]
+    Return v65
+EndArrowFunction
+v66 <- CallFunction v63, []
+v67 <- LoadBoolean 'true'
+BeginObjectLiteral
+v68 <- EndObjectLiteral
+v69 <- CallMethod v14, 'defineProperty', [v41, v3, v68]
+BeginObjectLiteral
+v70 <- EndObjectLiteral
+v71 <- CallMethod v7, 'defineProperty', [v41, v3, v70]
+v72 <- LoadBoolean 'true'
+v73 <- DeleteComputedProperty v39, v3
+v74 <- LoadBoolean 'true'
+v75 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v76 <- DeleteComputedProperty v39, v3
+    Return v76
+EndPlainFunction
+v77 <- CallFunction v75, []
+v78 <- LoadBoolean 'true'
+v79 <- CallMethod v14, 'deleteProperty', [v39, v3]
+v80 <- LoadBoolean 'true'
+v81 <- DeleteComputedProperty v41, v3
+v82 <- LoadBoolean 'true'
+v83 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v84 <- DeleteComputedProperty v41, v3
+    Return v84
+EndPlainFunction
+v85 <- CallFunction v83, []
+v86 <- LoadBoolean 'true'
+v87 <- CallMethod v14, 'deleteProperty', [v41, v3]
+v88 <- LoadUndefined
+v89 <- CallMethod v7, 'getOwnPropertyDescriptor', [v39, v3]
+v90 <- LoadUndefined
+v91 <- CallMethod v14, 'getOwnPropertyDescriptor', [v39, v3]
+v92 <- GetProperty v7, 'prototype'
+v93 <- GetProperty v92, 'hasOwnProperty'
+v94 <- CallMethod v93, 'call', [v39, v3]
+v95 <- LoadUndefined
+v96 <- CallMethod v7, 'getOwnPropertyDescriptor', [v41, v3]
+v97 <- LoadUndefined
+v98 <- CallMethod v14, 'getOwnPropertyDescriptor', [v41, v3]
+v99 <- GetProperty v7, 'prototype'
+v100 <- GetProperty v99, 'hasOwnProperty'
+v101 <- CallMethod v100, 'call', [v41, v3]
+v102 <- TestIn v3, v39
+v103 <- CallMethod v14, 'has', [v39, v3]
+v104 <- TestIn v3, v41
+v105 <- CallMethod v14, 'has', [v41, v3]
+v106 <- LoadUndefined
+v107 <- GetComputedProperty v39, v3
+v108 <- LoadUndefined
+v109 <- CallMethod v14, 'get', [v39, v3]
+v110 <- LoadUndefined
+v111 <- LoadInteger '42'
+v112 <- CallMethod v14, 'get', [v39, v3, v111]
+v113 <- LoadUndefined
+v114 <- GetComputedProperty v41, v3
+v115 <- LoadUndefined
+v116 <- CallMethod v14, 'get', [v41, v3]
+v117 <- LoadUndefined
+v118 <- LoadInteger '42'
+v119 <- CallMethod v14, 'get', [v41, v3, v118]
+
+
+var symbol = f("private");
+var object = {};
+object[symbol] = 42;
+for (const v9 of Object.keys(object)) {
+}
+for (const v11 of Object.getOwnPropertySymbols(object)) {
+}
+for (const v13 of Object.getOwnPropertyNames(object)) {
+}
+for (const v16 of Reflect.ownKeys(object)) {
+}
+for (const v17 in object) {
+}
+var object2 = { __proto__: object };
+for (const v21 of Object.keys(object2)) {
+}
+for (const v23 of Object.getOwnPropertySymbols(object2)) {
+}
+for (const v25 of Object.getOwnPropertyNames(object2)) {
+}
+for (const v27 of Reflect.ownKeys(object2)) {
+}
+for (const v28 in object2) {
+}
+const v30 = {};
+const v31 = {};
+const v36 = {
+    get() {
+        const v33 = () => {
+            const v35 = new Error();
+            throw v35;
+        };
+        return v33;
+    },
+};
+const v37 = new Proxy(v31, v36);
+const v38 = new Proxy(v30, v37);
+var proxy = v38;
+var object = { __proto__: proxy };
+proxy[symbol] = 42;
+function f44() {
+    'use strict';
+    proxy[symbol] = 42;
+}
+f44();
+Reflect.set(proxy, symbol, 42);
+object[symbol] = 42;
+function f54() {
+    'use strict';
+    object[symbol] = 43;
+    return 43;
+}
+f54();
+Reflect.set(object, symbol, 44);
+Reflect.defineProperty(proxy, symbol, {});
+const v63 = () => {
+    return Object.defineProperty(proxy, symbol, {});
+};
+v63();
+Reflect.defineProperty(object, symbol, {});
+Object.defineProperty(object, symbol, {});
+delete proxy[symbol];
+function f75() {
+    'use strict';
+    return delete proxy[symbol];
+}
+f75();
+Reflect.deleteProperty(proxy, symbol);
+delete object[symbol];
+function f83() {
+    'use strict';
+    return delete object[symbol];
+}
+f83();
+Reflect.deleteProperty(object, symbol);
+Object.getOwnPropertyDescriptor(proxy, symbol);
+Reflect.getOwnPropertyDescriptor(proxy, symbol);
+Object.prototype.hasOwnProperty.call(proxy, symbol);
+Object.getOwnPropertyDescriptor(object, symbol);
+Reflect.getOwnPropertyDescriptor(object, symbol);
+Object.prototype.hasOwnProperty.call(object, symbol);
+symbol in proxy;
+Reflect.has(proxy, symbol);
+symbol in object;
+Reflect.has(object, symbol);
+proxy[symbol];
+Reflect.get(proxy, symbol);
+Reflect.get(proxy, symbol, 42);
+object[symbol];
+Reflect.get(object, symbol);
+Reflect.get(object, symbol, 42);
+
+FuzzIL program written to corpus/private-symbols.fzil

@@ -1,0 +1,29 @@
+BeginBlockStatement
+    v0 <- BeginArrowFunction -> 
+        v1 <- LoadString 'example.com'
+        Return v1
+    EndArrowFunction
+    v2 <- CreateNamedVariable 'one', 'let', v0
+    v3 <- BeginArrowFunction -> 
+        v4 <- CallFunction v2, []
+        Return v4
+    EndArrowFunction
+    v5 <- CreateNamedVariable 'two', 'let', v3
+    v6 <- LoadString 'example.com'
+    v7 <- CallFunction v5, []
+EndBlockStatement
+
+
+{
+    const v0 = () => {
+        return "example.com";
+    };
+    let one = v0;
+    const v3 = () => {
+        return one();
+    };
+    let two = v3;
+    two();
+}
+
+FuzzIL program written to corpus/regress-crbug-580934.fzil

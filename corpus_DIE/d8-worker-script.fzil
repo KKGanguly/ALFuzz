@@ -1,0 +1,27 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Worker'
+BeginIf v1
+    v2 <- CreateNamedVariable 'Worker', 'none'
+    v3 <- LoadString 'test/mjsunit/d8/d8-worker-script.txt'
+    v4 <- Construct v2, [v3]
+    v5 <- CreateNamedVariable 'w', 'var', v4
+    v6 <- LoadString 'Starting worker'
+    v7 <- CallMethod v5, 'getMessage', []
+    v8 <- LoadString ''
+    v9 <- CallMethod v5, 'postMessage', [v8]
+    v10 <- LoadString 'DONE'
+    v11 <- CallMethod v5, 'getMessage', []
+    v12 <- CallMethod v5, 'terminate', []
+EndIf
+
+
+if (this.Worker) {
+    const v4 = new Worker("test/mjsunit/d8/d8-worker-script.txt");
+    var w = v4;
+    w.getMessage();
+    w.postMessage("");
+    w.getMessage();
+    w.terminate();
+}
+
+FuzzIL program written to corpus/d8-worker-script.fzil

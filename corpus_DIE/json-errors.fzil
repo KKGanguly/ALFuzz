@@ -1,0 +1,55 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginTry
+        v3 <- CreateNamedVariable 'JSON', 'none'
+        v4 <- CallMethod v3, 'parse', [v1]
+    BeginCatch -> v5
+        v6 <- GetProperty v5, 'message'
+    EndTryCatch
+EndPlainFunction
+v7 <- CreateTemplateString ['{"a\\\\b '], []
+v8 <- CreateNamedVariable 's', 'var', v7
+v9 <- LoadString 'Unexpected end of JSON input'
+v10 <- CallFunction v0, [v8, v9]
+v11 <- CreateTemplateString ['{"a\\\\\u03A9 '], []
+v12 <- CreateNamedVariable 's', 'var', v11
+v13 <- LoadString 'Unexpected end of JSON input'
+v14 <- CallFunction v0, [v12, v13]
+v15 <- CreateTemplateString ['{"ab '], []
+v16 <- CreateNamedVariable 's', 'var', v15
+v17 <- LoadString 'Unexpected end of JSON input'
+v18 <- CallFunction v0, [v16, v17]
+v19 <- CreateTemplateString ['{"a\u03A9 '], []
+v20 <- CreateNamedVariable 's', 'var', v19
+v21 <- LoadString 'Unexpected end of JSON input'
+v22 <- CallFunction v0, [v20, v21]
+v23 <- CreateTemplateString ['{"a\nb":"b"}'], []
+v24 <- CreateNamedVariable 's', 'var', v23
+v25 <- LoadString 'Unexpected token \n in JSON at position 3'
+v26 <- CallFunction v0, [v24, v25]
+v27 <- CreateTemplateString ['{"a\nb":"b\u03A9"}'], []
+v28 <- CreateNamedVariable 's', 'var', v27
+v29 <- LoadString 'Unexpected token \n in JSON at position 3'
+v30 <- CallFunction v0, [v28, v29]
+
+
+function TryParse(a1, a2) {
+    try {
+        JSON.parse(a1);
+    } catch(e5) {
+        e5.message;
+    }
+}
+var s = `{"a\\\\b `;
+TryParse(s, "Unexpected end of JSON input");
+var s = `{"a\\\\\u03A9 `;
+TryParse(s, "Unexpected end of JSON input");
+var s = `{"ab `;
+TryParse(s, "Unexpected end of JSON input");
+var s = `{"a\u03A9 `;
+TryParse(s, "Unexpected end of JSON input");
+var s = `{"a\nb":"b"}`;
+TryParse(s, "Unexpected token \n in JSON at position 3");
+var s = `{"a\nb":"b\u03A9"}`;
+TryParse(s, "Unexpected token \n in JSON at position 3");
+
+FuzzIL program written to corpus/json-errors.fzil

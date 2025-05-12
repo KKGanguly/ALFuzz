@@ -1,0 +1,81 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- GetComputedProperty v2, v3
+    SetComputedProperty v1, v3, v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v6 <- LoadInteger '8'
+v7 <- Construct v5, [v6]
+v8 <- CreateNamedVariable 'ab', 'var', v7
+v9 <- CreateNamedVariable 'Int32Array', 'none'
+v10 <- Construct v9, [v8]
+v11 <- CreateNamedVariable 'i_view', 'var', v10
+v12 <- LoadInteger '0'
+SetElement v11, '0', v12
+v13 <- LoadInteger '0'
+SetElement v11, '1', v13
+v14 <- CreateNamedVariable 'Float64Array', 'none'
+v15 <- Construct v14, [v8]
+v16 <- CreateNamedVariable 'f_view', 'var', v15
+v17 <- LoadInteger '1'
+v18 <- Construct v14, [v17]
+v19 <- CreateNamedVariable 'fixed_double_elements', 'var', v18
+v20 <- BeginPlainFunction -> 
+    v21 <- GetElement v16, '0'
+    SetElement v19, '0', v21
+EndPlainFunction
+v22 <- CallFunction v20, []
+v23 <- CallFunction v20, []
+v24 <- CallFunction v20, []
+v25 <- GetProperty v19, 'buffer'
+v26 <- Construct v9, [v25]
+v27 <- CreateNamedVariable 'i32', 'var', v26
+v28 <- GetElement v11, '0'
+v29 <- GetElement v27, '0'
+v30 <- GetElement v11, '1'
+v31 <- GetElement v27, '1'
+v32 <- LoadFloat '0.5'
+v33 <- CreateArray [v32]
+v34 <- CreateNamedVariable 'doubles', 'var', v33
+v35 <- LoadInteger '0'
+v36 <- CallFunction v0, [v34, v19, v35]
+v37 <- LoadInteger '0'
+v38 <- CallFunction v0, [v34, v19, v37]
+v39 <- LoadInteger '0'
+v40 <- CallFunction v0, [v34, v19, v39]
+v41 <- GetElement v34, '0'
+v42 <- LoadUndefined
+v43 <- Compare v41, '!==', v42
+
+
+function loader(a1, a2, a3) {
+    a1[a3] = a2[a3];
+}
+const v7 = new ArrayBuffer(8);
+var ab = v7;
+const v10 = new Int32Array(ab);
+var i_view = v10;
+i_view[0] = 0;
+i_view[1] = 0;
+const v15 = new Float64Array(ab);
+var f_view = v15;
+const v18 = new Float64Array(1);
+var fixed_double_elements = v18;
+function opt_store() {
+    fixed_double_elements[0] = f_view[0];
+}
+opt_store();
+opt_store();
+opt_store();
+const v26 = new Int32Array(fixed_double_elements.buffer);
+var i32 = v26;
+i_view[0];
+i32[0];
+i_view[1];
+i32[1];
+var doubles = [0.5];
+loader(doubles, fixed_double_elements, 0);
+loader(doubles, fixed_double_elements, 0);
+loader(doubles, fixed_double_elements, 0);
+doubles[0] !== undefined;
+
+FuzzIL program written to corpus/regress-undefined-nan.fzil

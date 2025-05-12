@@ -1,0 +1,81 @@
+BeginTry
+BeginCatch -> v0
+EndTryCatch
+v1 <- LoadInteger '131072'
+v2 <- CreateNamedVariable 'size', 'var', v1
+v3 <- CreateNamedVariable 'Float64Array', 'none'
+v4 <- Construct v3, [v2]
+v5 <- CreateNamedVariable 'a', 'var', v4
+v6 <- LoadInteger '10'
+v7 <- Construct v3, [v6]
+v8 <- CreateNamedVariable 'training', 'var', v7
+v9 <- BeginPlainFunction -> v10, v11
+    v12 <- LoadInteger '536870912'
+    v13 <- CreateNamedVariable 'offset', 'var', v12
+    BeginForLoopInitializer
+        v14 <- LoadInteger '0'
+    BeginForLoopCondition -> v15
+        v16 <- LoadInteger '1'
+        v17 <- Compare v15, '<', v16
+    BeginForLoopAfterthought v17 -> v18
+        v19 <- UnaryOperation v18, '++'
+    BeginForLoopBody -> v20
+        v21 <- LoadInteger '204'
+        v22 <- BinaryOperation v11, '+', v13
+        SetComputedProperty v10, v22, v21
+    EndForLoop
+EndPlainFunction
+v23 <- LoadInteger '536870912'
+v24 <- UnaryOperation '-', v23
+v25 <- CallFunction v9, [v8, v24]
+v26 <- LoadInteger '536870912'
+v27 <- UnaryOperation '-', v26
+v28 <- LoadInteger '1'
+v29 <- BinaryOperation v27, '+', v28
+v30 <- CallFunction v9, [v8, v29]
+v31 <- LoadInteger '536870912'
+v32 <- UnaryOperation '-', v31
+v33 <- CallFunction v9, [v8, v32]
+v34 <- LoadInteger '536870912'
+v35 <- UnaryOperation '-', v34
+v36 <- LoadInteger '1'
+v37 <- BinaryOperation v35, '+', v36
+v38 <- CallFunction v9, [v8, v37]
+BeginForLoopInitializer
+    v39 <- LoadInteger '536870912'
+    v40 <- UnaryOperation '-', v39
+BeginForLoopCondition -> v41
+    v42 <- LoadInteger '536870912'
+    v43 <- UnaryOperation '-', v42
+    v44 <- BinaryOperation v43, '+', v2
+    v45 <- Compare v41, '<', v44
+BeginForLoopAfterthought v45 -> v46
+    v47 <- UnaryOperation v46, '++'
+BeginForLoopBody -> v48
+    v49 <- CallFunction v9, [v5, v48]
+EndForLoop
+
+
+try {
+} catch(e0) {
+}
+var size = 131072;
+const v4 = new Float64Array(size);
+var a = v4;
+const v7 = new Float64Array(10);
+var training = v7;
+function store(a10, a11) {
+    var offset = 536870912;
+    for (let i15 = 0; i15 < 1; i15++) {
+        a10[a11 + offset] = 204;
+    }
+}
+store(training, -536870912);
+store(training, -536870912 + 1);
+store(training, -536870912);
+store(training, -536870912 + 1);
+for (let i41 = -536870912; i41 < (-536870912 + size); i41++) {
+    store(a, i41);
+}
+
+FuzzIL program written to corpus/regress-crbug-319835.fzil

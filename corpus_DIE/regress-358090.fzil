@@ -1,0 +1,19 @@
+v0 <- LoadInteger '100000'
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- CallFunction v1, [v0]
+v3 <- CreateNamedVariable 'x', 'var', v2
+v4 <- CallMethod v1, 'apply', [v1, v3]
+v5 <- CreateNamedVariable 'y', 'none'
+Reassign v5, v4
+v6 <- LoadInteger '4'
+v7 <- CreateNamedVariable 'y', 'none'
+v8 <- CallMethod v7, 'unshift', [v6]
+v9 <- CallMethod v7, 'shift', []
+
+
+var x = Array(100000);
+y = Array.apply(Array, x);
+y.unshift(4);
+y.shift();
+
+FuzzIL program written to corpus/regress-358090.fzil

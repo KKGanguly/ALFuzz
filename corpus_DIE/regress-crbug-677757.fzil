@@ -1,0 +1,21 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '50000'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    v7 <- LoadString 'Foo'
+    v8 <- GetElement v7, '0'
+    v9 <- LoadString 'barbarbarbarbarbar'
+    v10 <- BinaryOperation v8, '+', v9
+    v11 <- GetElement v10, '0'
+EndForLoop
+
+
+for (let i1 = 0; i1 < 50000; i1++) {
+    (("Foo")[0] + "barbarbarbarbarbar")[0];
+}
+
+FuzzIL program written to corpus/regress-crbug-677757.fzil

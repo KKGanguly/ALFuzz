@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1073741823'
+    v2 <- CreateNamedVariable 'end', 'var', v1
+    v3 <- LoadInteger '100000'
+    v4 <- BinaryOperation v2, '-', v3
+    v5 <- CreateNamedVariable 'start', 'var', v4
+    BeginForLoopInitializer
+    BeginForLoopCondition -> v6
+        v7 <- Compare v6, '<=', v2
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation '++', v8
+    BeginForLoopBody -> v10
+        v11 <- Compare v10, '>=', v5
+    EndForLoop
+EndPlainFunction
+v12 <- CallFunction v0, []
+
+
+function f() {
+    var end = 1073741823;
+    var start = end - 100000;
+    for (let i6 = start; i6 <= end; ++i6) {
+        i6 >= start;
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-2836.fzil

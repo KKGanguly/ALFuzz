@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        v1 <- LoadInteger '42'
+        Return v1
+    BeginFinally
+        v2 <- LoadBoolean 'false'
+        v3 <- CreateNamedVariable 'executed', 'var', v2
+        BeginWhileLoopHeader
+            v4 <- UnaryOperation '!', v3
+        BeginWhileLoopBody v4
+            BeginTry
+                Break
+            BeginFinally
+                v5 <- LoadBoolean 'true'
+                Reassign v3, v5
+            EndTryCatch
+            v6 <- LoadBoolean 'false'
+            v7 <- LoadString 'should not reach here'
+        EndWhileLoop
+        v8 <- LoadString 'finally block executed'
+    EndTryCatch
+    v9 <- LoadInteger '87'
+    Return v9
+EndPlainFunction
+v10 <- LoadInteger '42'
+v11 <- CallFunction v0, []
+
+
+function f() {
+    try {
+        return 42;
+    } finally {
+        var executed = false;
+        while (!executed) {
+            try {
+                break;
+            } finally {
+                executed = true;
+            }
+        }
+    }
+    return 87;
+}
+f();
+
+FuzzIL program written to corpus/try-finally-nested.fzil

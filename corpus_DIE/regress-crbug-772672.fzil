@@ -1,0 +1,23 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- LoadInteger '120'
+    v3 <- LoadInteger '1024'
+    v4 <- BinaryOperation v2, '*', v3
+    v5 <- Construct v1, [v4]
+    Return v5
+EndPlainFunction
+v6 <- LoadFloat '0.1'
+v7 <- CallFunction v0, []
+SetElement v7, '0', v6
+v8 <- CallFunction v0, []
+
+
+function foo() {
+    const v5 = new Array(120 * 1024);
+    return v5;
+}
+const t4 = foo();
+t4[0] = 0.1;
+foo();
+
+FuzzIL program written to corpus/regress-crbug-772672.fzil

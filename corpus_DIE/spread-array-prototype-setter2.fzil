@@ -1,0 +1,89 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- GetProperty v1, 'prototype'
+    v3 <- GetProperty v2, '__proto__'
+    v4 <- LoadInteger '3'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `set` -> v5
+            v6 <- LoadInteger '666'
+            ThrowException v6
+        EndObjectLiteralMethod
+    v7 <- EndObjectLiteral
+    v8 <- CreateNamedVariable 'Object', 'none'
+    v9 <- CallMethod v8, 'defineProperty', [v3, v4, v7]
+    v10 <- GetProperty v1, 'prototype'
+    v11 <- GetProperty v10, '__proto__'
+    v12 <- LoadInteger '4'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `set` -> v13
+            v14 <- LoadInteger '666'
+            ThrowException v14
+        EndObjectLiteralMethod
+    v15 <- EndObjectLiteral
+    v16 <- CallMethod v8, 'defineProperty', [v11, v12, v15]
+    v17 <- BeginPlainFunction -> 
+        v18 <- LoadString 'a'
+        v19 <- LoadString 'b'
+        v20 <- LoadString 'c'
+        v21 <- LoadString 'd'
+        v22 <- CreateArray [v19, v20, v21]
+        v23 <- LoadString 'e'
+        v24 <- CreateArrayWithSpread [v18, ...v22, v23]
+        Return v24
+    EndPlainFunction
+    v25 <- LoadString 'a'
+    v26 <- LoadString 'b'
+    v27 <- LoadString 'c'
+    v28 <- LoadString 'd'
+    v29 <- LoadString 'e'
+    v30 <- CreateArray [v25, v26, v27, v28, v29]
+    v31 <- CallFunction v17, []
+    v32 <- LoadString 'a'
+    v33 <- LoadString 'b'
+    v34 <- LoadString 'c'
+    v35 <- LoadString 'd'
+    v36 <- LoadString 'e'
+    v37 <- CreateArray [v32, v33, v34, v35, v36]
+    v38 <- CallFunction v17, []
+    v39 <- GetProperty v1, 'prototype'
+    v40 <- GetProperty v39, '__proto__'
+    v41 <- LoadInteger '3'
+    v42 <- DeleteElement v40, '3'
+    v43 <- GetProperty v1, 'prototype'
+    v44 <- GetProperty v43, '__proto__'
+    v45 <- LoadInteger '4'
+    v46 <- DeleteElement v44, '4'
+EndPlainFunction
+v47 <- CallFunction v0, []
+
+
+function TestPrototypeSetter2() {
+    const v3 = Array.prototype.__proto__;
+    const v7 = {
+        set() {
+            throw 666;
+        },
+    };
+    Object.defineProperty(v3, 3, v7);
+    const v11 = Array.prototype.__proto__;
+    const v15 = {
+        set() {
+            throw 666;
+        },
+    };
+    Object.defineProperty(v11, 4, v15);
+    function f() {
+        return ["a",...["b","c","d"],"e"];
+    }
+    ["a","b","c","d","e"];
+    f();
+    ["a","b","c","d","e"];
+    f();
+    const t18 = Array.prototype.__proto__;
+    delete t18[3];
+    const t23 = Array.prototype.__proto__;
+    delete t23[4];
+}
+TestPrototypeSetter2();
+
+FuzzIL program written to corpus/spread-array-prototype-setter2.fzil

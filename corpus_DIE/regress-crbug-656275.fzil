@@ -1,0 +1,26 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadInteger '1'
+    v5 <- BinaryOperation v3, '+', v4
+    v6 <- CreateNamedVariable 'Math', 'none'
+    v7 <- CallMethod v6, 'fround', [v5]
+    Reassign v1, v7
+EndPlainFunction
+v8 <- LoadInteger '1'
+v9 <- CallFunction v2, [v8]
+v10 <- LoadInteger '1'
+v11 <- CallFunction v2, [v10]
+v12 <- LoadFloat '1.3'
+v13 <- CallFunction v2, [v12]
+
+
+var a = 1;
+function foo(a3) {
+    a = Math.fround(a3 + 1);
+}
+foo(1);
+foo(1);
+foo(1.3);
+
+FuzzIL program written to corpus/regress-crbug-656275.fzil

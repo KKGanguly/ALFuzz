@@ -1,0 +1,50 @@
+v0 <- LoadInteger '4294967295'
+v1 <- LoadString 'a'
+v2 <- CallMethod v1, 'repeat', [v0]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- BeginPlainFunction -> v6
+        BeginTry
+            v7 <- LoadString 'longer than ConsString:kMinLength'
+            v8 <- BinaryOperation v7, '+', v6
+            v9 <- LoadString '0123456789012'
+            v10 <- BinaryOperation v8, '+', v9
+            Return v10
+        BeginCatch -> v11
+            Return v11
+        EndTryCatch
+    EndPlainFunction
+    v12 <- LoadString 'a'
+    v13 <- CallFunction v5, [v12]
+    v14 <- LoadString 'a'
+    v15 <- CallFunction v5, [v14]
+    v16 <- LoadString 'a'
+    v17 <- CallFunction v5, [v16]
+    v18 <- CallFunction v5, [v3]
+    v19 <- CreateNamedVariable 'RangeError', 'none'
+    v20 <- LoadString 'a'
+    v21 <- CallFunction v5, [v20]
+    v22 <- CallFunction v5, [v3]
+EndPlainFunction
+v23 <- CallFunction v4, []
+
+
+var a = ("a").repeat(4294967295);
+function f4() {
+    function foo(a6) {
+        try {
+            return ("longer than ConsString:kMinLength" + a6) + "0123456789012";
+        } catch(e11) {
+            return e11;
+        }
+    }
+    foo("a");
+    foo("a");
+    foo("a");
+    foo(a);
+    foo("a");
+    foo(a);
+}
+f4();
+
+FuzzIL program written to corpus/string-concat-try-catch.fzil

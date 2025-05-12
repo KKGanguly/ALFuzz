@@ -1,0 +1,147 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'o', 'none'
+    v4 <- CallMethod v3, 'three', []
+EndPlainFunction
+v5 <- GetProperty v1, 'prototype'
+SetProperty v5, 'two', v2
+v6 <- BeginPlainFunction -> v7
+    v8 <- CallMethod v7, 'two', []
+EndPlainFunction
+v9 <- GetProperty v0, 'prototype'
+SetProperty v9, 'one', v6
+v10 <- BeginPlainFunction -> 
+    v11 <- CreateNamedVariable 'v', 'none'
+    v12 <- LoadInteger '42'
+    v13 <- Compare v11, '==', v12
+    BeginIf v13
+        v14 <- CreateNamedVariable 'Error', 'none'
+        v15 <- LoadString 'urg'
+        v16 <- Construct v14, [v15]
+        ThrowException v16
+    EndIf
+EndPlainFunction
+v17 <- GetProperty v0, 'prototype'
+SetProperty v17, 'three', v10
+v18 <- Construct v0, []
+v19 <- CreateNamedVariable 'o', 'var', v18
+v20 <- Construct v1, []
+v21 <- CreateNamedVariable 's', 'var', v20
+v22 <- LoadInteger '0'
+v23 <- CreateNamedVariable 'v', 'var', v22
+BeginForLoopInitializer
+    v24 <- LoadInteger '0'
+BeginForLoopCondition -> v25
+    v26 <- LoadInteger '5'
+    v27 <- Compare v25, '<', v26
+BeginForLoopAfterthought v27 -> v28
+    v29 <- UnaryOperation v28, '++'
+BeginForLoopBody -> v30
+    v31 <- CallMethod v19, 'one', [v21]
+EndForLoop
+v32 <- CallMethod v19, 'one', [v21]
+v33 <- LoadInteger '42'
+Reassign v23, v33
+BeginTry
+    v34 <- CallMethod v19, 'one', [v21]
+BeginCatch -> v35
+    v36 <- GetProperty v35, 'stack'
+    v37 <- CallMethod v36, 'toString', []
+    v38 <- CreateNamedVariable 'stack', 'var', v37
+    v39 <- LoadString 'at Hest.three'
+    v40 <- CallMethod v38, 'indexOf', [v39]
+    v41 <- CreateNamedVariable 'p3', 'var', v40
+    v42 <- LoadString 'at Svin.two'
+    v43 <- CallMethod v38, 'indexOf', [v42]
+    v44 <- CreateNamedVariable 'p2', 'var', v43
+    v45 <- LoadString 'at Hest.one'
+    v46 <- CallMethod v38, 'indexOf', [v45]
+    v47 <- CreateNamedVariable 'p1', 'var', v46
+    v48 <- LoadInteger '1'
+    v49 <- UnaryOperation '-', v48
+    v50 <- Compare v41, '!=', v49
+    v51 <- LoadInteger '1'
+    v52 <- UnaryOperation '-', v51
+    v53 <- Compare v44, '!=', v52
+    v54 <- LoadInteger '1'
+    v55 <- UnaryOperation '-', v54
+    v56 <- Compare v47, '!=', v55
+    v57 <- Compare v41, '<', v44
+    v58 <- Compare v44, '<', v47
+    v59 <- LoadString '38:56'
+    v60 <- CallMethod v38, 'indexOf', [v59]
+    v61 <- LoadInteger '1'
+    v62 <- UnaryOperation '-', v61
+    v63 <- Compare v60, '!=', v62
+    v64 <- LoadString '34:51'
+    v65 <- CallMethod v38, 'indexOf', [v64]
+    v66 <- LoadInteger '1'
+    v67 <- UnaryOperation '-', v66
+    v68 <- Compare v65, '!=', v67
+    v69 <- LoadString '36:38'
+    v70 <- CallMethod v38, 'indexOf', [v69]
+    v71 <- LoadInteger '1'
+    v72 <- UnaryOperation '-', v71
+    v73 <- Compare v70, '!=', v72
+    v74 <- LoadString '54:5'
+    v75 <- CallMethod v38, 'indexOf', [v74]
+    v76 <- LoadInteger '1'
+    v77 <- UnaryOperation '-', v76
+    v78 <- Compare v75, '!=', v77
+EndTryCatch
+
+
+function Hest() {
+}
+function Svin() {
+}
+function f2() {
+    o.three();
+}
+const t7 = Svin.prototype;
+t7.two = f2;
+function f6(a7) {
+    a7.two();
+}
+const t12 = Hest.prototype;
+t12.one = f6;
+function f10() {
+    if (v == 42) {
+        const v16 = new Error("urg");
+        throw v16;
+    }
+}
+const t20 = Hest.prototype;
+t20.three = f10;
+const v18 = new Hest();
+var o = v18;
+const v20 = new Svin();
+var s = v20;
+var v = 0;
+for (let i25 = 0; i25 < 5; i25++) {
+    o.one(s);
+}
+o.one(s);
+v = 42;
+try {
+    o.one(s);
+} catch(e35) {
+    var stack = e35.stack.toString();
+    var p3 = stack.indexOf("at Hest.three");
+    var p2 = stack.indexOf("at Svin.two");
+    var p1 = stack.indexOf("at Hest.one");
+    p3 != -1;
+    p2 != -1;
+    p1 != -1;
+    p3 < p2;
+    p2 < p1;
+    stack.indexOf("38:56") != -1;
+    stack.indexOf("34:51") != -1;
+    stack.indexOf("36:38") != -1;
+    stack.indexOf("54:5") != -1;
+}
+
+FuzzIL program written to corpus/regress-stacktrace-methods.fzil

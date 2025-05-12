@@ -1,0 +1,97 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v3 <- EndObjectLiteral
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    BeginObjectLiteral
+    v5 <- EndObjectLiteral
+    BeginObjectLiteral
+    v6 <- EndObjectLiteral
+    BeginObjectLiteral
+    v7 <- EndObjectLiteral
+    BeginObjectLiteral
+    v8 <- EndObjectLiteral
+    BeginObjectLiteral
+    v9 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v3
+        ObjectLiteralAddProperty `b`, v4
+        ObjectLiteralAddProperty `c`, v5
+        ObjectLiteralAddProperty `d`, v6
+        ObjectLiteralAddProperty `e`, v7
+        ObjectLiteralAddProperty `f`, v8
+        ObjectLiteralAddProperty `g`, v9
+    v10 <- EndObjectLiteral
+    v11 <- CreateNamedVariable 'result', 'var', v10
+    Return v11
+EndPlainFunction
+v12 <- CreateNamedVariable 'gc', 'none'
+v13 <- CallFunction v12, []
+BeginForLoopInitializer
+    v14 <- LoadInteger '0'
+BeginForLoopCondition -> v15
+    v16 <- LoadInteger '120'
+    v17 <- Compare v15, '<', v16
+BeginForLoopAfterthought v17 -> v18
+    v19 <- UnaryOperation v18, '++'
+BeginForLoopBody -> v20
+    v21 <- CallFunction v2, []
+    v22 <- GetProperty v21, 'a'
+    v23 <- CallMethod v1, 'push', [v22]
+    v24 <- BeginPlainFunction -> 
+        v25 <- CreateNamedVariable 'Array', 'none'
+        v26 <- LoadInteger '10000'
+        v27 <- Construct v25, [v26]
+    EndPlainFunction
+    v28 <- CallFunction v24, []
+EndForLoop
+v29 <- CallFunction v2, []
+BeginForLoopInitializer
+    v30 <- LoadInteger '0'
+BeginForLoopCondition -> v31
+    v32 <- LoadInteger '10000'
+    v33 <- Compare v31, '<', v32
+BeginForLoopAfterthought v33 -> v34
+    v35 <- UnaryOperation v34, '++'
+BeginForLoopBody -> v36
+    v37 <- CallFunction v2, []
+EndForLoop
+
+
+var global = [];
+function Ctor() {
+    const v3 = {};
+    const v4 = {};
+    const v5 = {};
+    const v6 = {};
+    const v7 = {};
+    const v8 = {};
+    const v9 = {};
+    const v10 = {
+        a: v3,
+        b: v4,
+        c: v5,
+        d: v6,
+        e: v7,
+        f: v8,
+        g: v9,
+    };
+    var result = v10;
+    return result;
+}
+gc();
+for (let i15 = 0; i15 < 120; i15++) {
+    global.push(Ctor().a);
+    function FillNewSpace() {
+        new Array(10000);
+    }
+    FillNewSpace();
+}
+Ctor();
+for (let i31 = 0; i31 < 10000; i31++) {
+    Ctor();
+}
+
+FuzzIL program written to corpus/regress-crbug-500497.fzil

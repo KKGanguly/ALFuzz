@@ -1,0 +1,23 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Math', 'none'
+    v3 <- CallMethod v2, 'exp', [v1]
+    Return v3
+EndPlainFunction
+v4 <- LoadFloat '12.3'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadFloat '12.3'
+v7 <- CallFunction v0, [v6]
+v8 <- CreateNamedVariable 'r1', 'var', v7
+v9 <- LoadFloat '12.3'
+v10 <- CallFunction v0, [v9]
+v11 <- CreateNamedVariable 'r2', 'var', v10
+
+
+function foo(a1) {
+    return Math.exp(a1);
+}
+foo(12.3);
+var r1 = foo(12.3);
+var r2 = foo(12.3);
+
+FuzzIL program written to corpus/MathExp.fzil

@@ -1,0 +1,291 @@
+v0 <- BeginArrowFunction -> 
+EndArrowFunction
+v1 <- CreateNamedVariable 'get', 'let', v0
+v2 <- BeginArrowFunction -> 
+EndArrowFunction
+v3 <- CreateNamedVariable 'set', 'let', v2
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'target', 'let', v4
+BeginObjectLiteral
+    BeginObjectLiteralMethod `getOwnPropertyDescriptor` -> v6, v7, v8
+        v9 <- LoadBoolean 'true'
+        v10 <- CreateNamedVariable 'configurable', 'let', v9
+        v11 <- LoadString 'both'
+        v12 <- Compare v8, '==', v11
+        BeginIf v12
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `get`, v1
+                ObjectLiteralAddProperty `set`, v3
+                ObjectLiteralAddProperty `configurable`, v10
+            v13 <- EndObjectLiteral
+            Return v13
+        BeginElse
+            v14 <- LoadString 'get'
+            v15 <- Compare v8, '==', v14
+            BeginIf v15
+                BeginObjectLiteral
+                    ObjectLiteralAddProperty `get`, v1
+                    ObjectLiteralAddProperty `configurable`, v10
+                v16 <- EndObjectLiteral
+                Return v16
+            BeginElse
+                v17 <- LoadString 'set'
+                v18 <- Compare v8, '==', v17
+                BeginIf v18
+                    BeginObjectLiteral
+                        ObjectLiteralAddProperty `set`, v3
+                        ObjectLiteralAddProperty `configurable`, v10
+                    v19 <- EndObjectLiteral
+                    Return v19
+                BeginElse
+                    v20 <- LoadString 'data'
+                    v21 <- Compare v8, '==', v20
+                    BeginIf v21
+                        v22 <- LoadInteger '42'
+                        BeginObjectLiteral
+                            ObjectLiteralAddProperty `value`, v22
+                            ObjectLiteralAddProperty `configurable`, v10
+                        v23 <- EndObjectLiteral
+                        Return v23
+                    BeginElse
+                        v24 <- CreateNamedVariable 'Reflect', 'none'
+                        v25 <- CallMethod v24, 'getOwnPropertyDescriptor', [v7, v8]
+                        Return v25
+                    EndIf
+                EndIf
+            EndIf
+        EndIf
+    EndObjectLiteralMethod
+v26 <- EndObjectLiteral
+v27 <- CreateNamedVariable 'handler', 'let', v26
+v28 <- CreateNamedVariable 'Proxy', 'none'
+v29 <- Construct v28, [v5, v27]
+v30 <- CreateNamedVariable 'proxy', 'let', v29
+v31 <- LoadString 'both'
+v32 <- CallMethod v30, '__lookupGetter__', [v31]
+v33 <- LoadString 'get'
+v34 <- CallMethod v30, '__lookupGetter__', [v33]
+v35 <- LoadUndefined
+v36 <- LoadString 'set'
+v37 <- CallMethod v30, '__lookupGetter__', [v36]
+v38 <- LoadUndefined
+v39 <- LoadString 'data'
+v40 <- CallMethod v30, '__lookupGetter__', [v39]
+v41 <- LoadString 'both'
+v42 <- CallMethod v30, '__lookupSetter__', [v41]
+v43 <- LoadUndefined
+v44 <- LoadString 'get'
+v45 <- CallMethod v30, '__lookupSetter__', [v44]
+v46 <- LoadString 'set'
+v47 <- CallMethod v30, '__lookupSetter__', [v46]
+v48 <- LoadUndefined
+v49 <- LoadString 'data'
+v50 <- CallMethod v30, '__lookupSetter__', [v49]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v30
+v51 <- EndObjectLiteral
+v52 <- CreateNamedVariable 'object', 'let', v51
+v53 <- LoadString 'both'
+v54 <- CallMethod v52, '__lookupGetter__', [v53]
+v55 <- LoadString 'get'
+v56 <- CallMethod v52, '__lookupGetter__', [v55]
+v57 <- LoadUndefined
+v58 <- LoadString 'set'
+v59 <- CallMethod v52, '__lookupGetter__', [v58]
+v60 <- LoadUndefined
+v61 <- LoadString 'data'
+v62 <- CallMethod v52, '__lookupGetter__', [v61]
+v63 <- LoadString 'both'
+v64 <- CallMethod v52, '__lookupSetter__', [v63]
+v65 <- LoadUndefined
+v66 <- LoadString 'get'
+v67 <- CallMethod v52, '__lookupSetter__', [v66]
+v68 <- LoadString 'set'
+v69 <- CallMethod v52, '__lookupSetter__', [v68]
+v70 <- LoadUndefined
+v71 <- LoadString 'data'
+v72 <- CallMethod v52, '__lookupSetter__', [v71]
+v73 <- LoadInteger '1'
+v74 <- LoadInteger '2'
+v75 <- LoadInteger '3'
+v76 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v30
+    ObjectLiteralAddProperty `both`, v73
+    ObjectLiteralAddProperty `get`, v74
+    ObjectLiteralAddProperty `set`, v75
+    ObjectLiteralAddProperty `data`, v76
+v77 <- EndObjectLiteral
+v78 <- CreateNamedVariable 'shadower', 'let', v77
+v79 <- LoadUndefined
+v80 <- LoadString 'both'
+v81 <- CallMethod v78, '__lookupGetter__', [v80]
+v82 <- LoadUndefined
+v83 <- LoadString 'get'
+v84 <- CallMethod v78, '__lookupGetter__', [v83]
+v85 <- LoadUndefined
+v86 <- LoadString 'set'
+v87 <- CallMethod v78, '__lookupGetter__', [v86]
+v88 <- LoadUndefined
+v89 <- LoadString 'data'
+v90 <- CallMethod v78, '__lookupGetter__', [v89]
+v91 <- LoadUndefined
+v92 <- LoadString 'both'
+v93 <- CallMethod v78, '__lookupSetter__', [v92]
+v94 <- LoadUndefined
+v95 <- LoadString 'get'
+v96 <- CallMethod v78, '__lookupSetter__', [v95]
+v97 <- LoadUndefined
+v98 <- LoadString 'set'
+v99 <- CallMethod v78, '__lookupSetter__', [v98]
+v100 <- LoadUndefined
+v101 <- LoadString 'data'
+v102 <- CallMethod v78, '__lookupSetter__', [v101]
+v103 <- BeginArrowFunction -> 
+EndArrowFunction
+v104 <- CreateNamedVariable 'getFoo', 'let', v103
+v105 <- BeginArrowFunction -> 
+EndArrowFunction
+v106 <- CreateNamedVariable 'setFoo', 'let', v105
+BeginObjectLiteral
+v107 <- EndObjectLiteral
+v108 <- CreateNamedVariable 'proto', 'let', v107
+v109 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v104
+    ObjectLiteralAddProperty `set`, v106
+v110 <- EndObjectLiteral
+v111 <- CreateNamedVariable 'Reflect', 'none'
+v112 <- CallMethod v111, 'defineProperty', [v108, v109, v110]
+v113 <- CallMethod v111, 'setPrototypeOf', [v5, v108]
+v114 <- LoadString 'foo'
+v115 <- CallMethod v30, '__lookupGetter__', [v114]
+v116 <- LoadString 'foo'
+v117 <- CallMethod v30, '__lookupSetter__', [v116]
+v118 <- BeginArrowFunction -> 
+    v119 <- LoadNull
+    Return v119
+EndArrowFunction
+SetProperty v27, 'getPrototypeOf', v118
+v120 <- LoadUndefined
+v121 <- LoadString 'foo'
+v122 <- CallMethod v30, '__lookupGetter__', [v121]
+v123 <- LoadUndefined
+v124 <- LoadString 'foo'
+v125 <- CallMethod v30, '__lookupSetter__', [v124]
+v126 <- BeginArrowFunction -> 
+    Return v108
+EndArrowFunction
+SetProperty v27, 'getPrototypeOf', v126
+v127 <- LoadString 'foo'
+v128 <- CallMethod v30, '__lookupGetter__', [v127]
+v129 <- LoadString 'foo'
+v130 <- CallMethod v30, '__lookupSetter__', [v129]
+v131 <- LoadString 'data'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v104
+    ObjectLiteralAddProperty `set`, v106
+v132 <- EndObjectLiteral
+v133 <- CallMethod v111, 'defineProperty', [v108, v131, v132]
+v134 <- LoadUndefined
+v135 <- LoadString 'data'
+v136 <- CallMethod v30, '__lookupGetter__', [v135]
+v137 <- LoadUndefined
+v138 <- LoadString 'data'
+v139 <- CallMethod v30, '__lookupSetter__', [v138]
+
+
+const v0 = () => {
+};
+let get = v0;
+const v2 = () => {
+};
+let set = v2;
+let target = {};
+const v26 = {
+    getOwnPropertyDescriptor(a7, a8) {
+        let configurable = true;
+        if (a8 == "both") {
+            return { get: get, set: set, configurable: configurable };
+        } else {
+            if (a8 == "get") {
+                return { get: get, configurable: configurable };
+            } else {
+                if (a8 == "set") {
+                    return { set: set, configurable: configurable };
+                } else {
+                    if (a8 == "data") {
+                        return { value: 42, configurable: configurable };
+                    } else {
+                        return Reflect.getOwnPropertyDescriptor(a7, a8);
+                    }
+                }
+            }
+        }
+    },
+};
+let handler = v26;
+const v29 = new Proxy(target, handler);
+let proxy = v29;
+proxy.__lookupGetter__("both");
+proxy.__lookupGetter__("get");
+proxy.__lookupGetter__("set");
+proxy.__lookupGetter__("data");
+proxy.__lookupSetter__("both");
+proxy.__lookupSetter__("get");
+proxy.__lookupSetter__("set");
+proxy.__lookupSetter__("data");
+let object = { __proto__: proxy };
+object.__lookupGetter__("both");
+object.__lookupGetter__("get");
+object.__lookupGetter__("set");
+object.__lookupGetter__("data");
+object.__lookupSetter__("both");
+object.__lookupSetter__("get");
+object.__lookupSetter__("set");
+object.__lookupSetter__("data");
+const v77 = {
+    __proto__: proxy,
+    both: 1,
+    get: 2,
+    set: 3,
+    data: 4,
+};
+let shadower = v77;
+shadower.__lookupGetter__("both");
+shadower.__lookupGetter__("get");
+shadower.__lookupGetter__("set");
+shadower.__lookupGetter__("data");
+shadower.__lookupSetter__("both");
+shadower.__lookupSetter__("get");
+shadower.__lookupSetter__("set");
+shadower.__lookupSetter__("data");
+const v103 = () => {
+};
+let getFoo = v103;
+const v105 = () => {
+};
+let setFoo = v105;
+let proto = {};
+Reflect.defineProperty(proto, "foo", { get: getFoo, set: setFoo });
+Reflect.setPrototypeOf(target, proto);
+proxy.__lookupGetter__("foo");
+proxy.__lookupSetter__("foo");
+const v118 = () => {
+    return null;
+};
+handler.getPrototypeOf = v118;
+proxy.__lookupGetter__("foo");
+proxy.__lookupSetter__("foo");
+const v126 = () => {
+    return proto;
+};
+handler.getPrototypeOf = v126;
+proxy.__lookupGetter__("foo");
+proxy.__lookupSetter__("foo");
+Reflect.defineProperty(proto, "data", { get: getFoo, set: setFoo });
+proxy.__lookupGetter__("data");
+proxy.__lookupSetter__("data");
+
+FuzzIL program written to corpus/promise-lookup-getter-setter.fzil

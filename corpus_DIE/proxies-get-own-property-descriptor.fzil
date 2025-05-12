@@ -1,0 +1,247 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'target', 'var', v0
+v2 <- LoadInteger '123'
+v3 <- LoadBoolean 'true'
+v4 <- LoadBoolean 'true'
+v5 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v2
+    ObjectLiteralAddProperty `configurable`, v3
+    ObjectLiteralAddProperty `writable`, v4
+    ObjectLiteralAddProperty `enumerable`, v5
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'configurable_desc', 'var', v6
+v8 <- LoadString 'configurable'
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'defineProperty', [v1, v8, v7]
+v11 <- LoadInteger '234'
+v12 <- LoadBoolean 'false'
+v13 <- LoadBoolean 'false'
+v14 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v11
+    ObjectLiteralAddProperty `configurable`, v12
+    ObjectLiteralAddProperty `writable`, v13
+    ObjectLiteralAddProperty `enumerable`, v14
+v15 <- EndObjectLiteral
+v16 <- CreateNamedVariable 'nonconfigurable_desc', 'var', v15
+v17 <- LoadString 'nonconfigurable'
+v18 <- CallMethod v9, 'defineProperty', [v1, v17, v16]
+v19 <- LoadInteger '345'
+v20 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v19
+    ObjectLiteralAddProperty `configurable`, v20
+v21 <- EndObjectLiteral
+v22 <- CreateNamedVariable 'proxied_desc', 'var', v21
+v23 <- BeginPlainFunction -> v24, v25
+    v26 <- LoadString 'proxied'
+    v27 <- Compare v25, '===', v26
+    BeginIf v27
+        Return v22
+    EndIf
+    v28 <- LoadString 'return_null'
+    v29 <- Compare v25, '===', v28
+    BeginIf v29
+        v30 <- LoadNull
+        Return v30
+    EndIf
+    v31 <- CallMethod v9, 'getOwnPropertyDescriptor', [v24, v25]
+    Return v31
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v23
+v32 <- EndObjectLiteral
+v33 <- CreateNamedVariable 'handler', 'var', v32
+v34 <- CreateNamedVariable 'Proxy', 'none'
+v35 <- Construct v34, [v1, v33]
+v36 <- CreateNamedVariable 'proxy', 'var', v35
+BeginObjectLiteral
+v37 <- EndObjectLiteral
+v38 <- Construct v34, [v1, v37]
+v39 <- CreateNamedVariable 'proxy_without_handler', 'var', v38
+v40 <- LoadString 'configurable'
+v41 <- CallMethod v9, 'getOwnPropertyDescriptor', [v36, v40]
+v42 <- LoadString 'nonconfigurable'
+v43 <- CallMethod v9, 'getOwnPropertyDescriptor', [v36, v42]
+v44 <- GetProperty v22, 'value'
+v45 <- GetProperty v22, 'configurable'
+v46 <- LoadBoolean 'false'
+v47 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v44
+    ObjectLiteralAddProperty `configurable`, v45
+    ObjectLiteralAddProperty `enumerable`, v46
+    ObjectLiteralAddProperty `writable`, v47
+v48 <- EndObjectLiteral
+v49 <- LoadString 'proxied'
+v50 <- CallMethod v9, 'getOwnPropertyDescriptor', [v36, v49]
+v51 <- LoadString 'configurable'
+v52 <- CallMethod v9, 'getOwnPropertyDescriptor', [v39, v51]
+v53 <- LoadString 'nonconfigurable'
+v54 <- CallMethod v9, 'getOwnPropertyDescriptor', [v39, v53]
+v55 <- LoadString 'Object.getOwnPropertyDescriptor(proxy, "return_null")'
+v56 <- LoadUndefined
+SetProperty v33, 'getOwnPropertyDescriptor', v56
+v57 <- LoadString 'configurable'
+v58 <- CallMethod v9, 'getOwnPropertyDescriptor', [v36, v57]
+v59 <- BeginPlainFunction -> v60, v61
+    v62 <- LoadUndefined
+    Return v62
+EndPlainFunction
+SetProperty v33, 'getOwnPropertyDescriptor', v59
+v63 <- LoadString 'Object.getOwnPropertyDescriptor(proxy, "nonconfigurable")'
+v64 <- LoadUndefined
+v65 <- LoadString 'configurable'
+v66 <- CallMethod v9, 'getOwnPropertyDescriptor', [v36, v65]
+v67 <- BeginPlainFunction -> v68, v69
+    v70 <- LoadInteger '234'
+    v71 <- LoadBoolean 'false'
+    v72 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v70
+        ObjectLiteralAddProperty `configurable`, v71
+        ObjectLiteralAddProperty `enumerable`, v72
+    v73 <- EndObjectLiteral
+    Return v73
+EndPlainFunction
+SetProperty v33, 'getOwnPropertyDescriptor', v67
+v74 <- LoadString 'Object.getOwnPropertyDescriptor(proxy, "nonexistent")'
+v75 <- LoadString 'Object.getOwnPropertyDescriptor(proxy, "configurable")'
+v76 <- LoadBoolean 'false'
+v77 <- LoadString 'nonconfigurable'
+v78 <- CallMethod v9, 'getOwnPropertyDescriptor', [v36, v77]
+v79 <- GetProperty v78, 'configurable'
+v80 <- CallMethod v9, 'seal', [v1]
+v81 <- BeginPlainFunction -> v82, v83
+    v84 <- LoadUndefined
+    Return v84
+EndPlainFunction
+SetProperty v33, 'getOwnPropertyDescriptor', v81
+v85 <- LoadString 'Object.getOwnPropertyDescriptor(proxy, "configurable")'
+v86 <- LoadString 'Object.getOwnPropertyDescriptor(proxy, "nonconfigurable")'
+v87 <- LoadUndefined
+v88 <- LoadString 'nonexistent'
+v89 <- CallMethod v9, 'getOwnPropertyDescriptor', [v36, v88]
+v90 <- LoadString 'yes'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v90
+v91 <- EndObjectLiteral
+v92 <- CreateNamedVariable 'existent_desc', 'var', v91
+v93 <- BeginPlainFunction -> 
+    Return v92
+EndPlainFunction
+SetProperty v33, 'getOwnPropertyDescriptor', v93
+v94 <- LoadString 'Object.getOwnPropertyDescriptor(proxy, "nonexistent")'
+v95 <- LoadString 'yes'
+v96 <- LoadBoolean 'false'
+v97 <- LoadBoolean 'false'
+v98 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v95
+    ObjectLiteralAddProperty `writable`, v96
+    ObjectLiteralAddProperty `enumerable`, v97
+    ObjectLiteralAddProperty `configurable`, v98
+v99 <- EndObjectLiteral
+v100 <- LoadString 'configurable'
+v101 <- CallMethod v9, 'getOwnPropertyDescriptor', [v36, v100]
+BeginObjectLiteral
+v102 <- EndObjectLiteral
+SetProperty v33, 'getOwnPropertyDescriptor', v102
+v103 <- LoadString 'Object.getOwnPropertyDescriptor(proxy, "configurable")'
+v104 <- BeginPlainFunction -> 
+    v105 <- LoadString 'ball'
+    ThrowException v105
+EndPlainFunction
+SetProperty v33, 'getOwnPropertyDescriptor', v104
+v106 <- LoadString 'Object.getOwnPropertyDescriptor(proxy, "configurable")'
+v107 <- BeginPlainFunction -> 
+    v108 <- LoadInteger '1'
+    Return v108
+EndPlainFunction
+SetProperty v33, 'getOwnPropertyDescriptor', v107
+v109 <- LoadString 'Object.getOwnPropertyDescriptor(proxy, "configurable")'
+v110 <- BeginPlainFunction -> v111, v112
+    v113 <- LoadInteger '456'
+    v114 <- LoadBoolean 'true'
+    v115 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v113
+        ObjectLiteralAddProperty `configurable`, v114
+        ObjectLiteralAddProperty `writable`, v115
+    v116 <- EndObjectLiteral
+    Return v116
+EndPlainFunction
+SetProperty v33, 'getOwnPropertyDescriptor', v110
+v117 <- LoadString 'Object.getOwnPropertyDescriptor(proxy, "nonconfigurable")'
+
+
+var target = {};
+var configurable_desc = { value: 123, configurable: true, writable: true, enumerable: false };
+Object.defineProperty(target, "configurable", configurable_desc);
+var nonconfigurable_desc = { value: 234, configurable: false, writable: false, enumerable: true };
+Object.defineProperty(target, "nonconfigurable", nonconfigurable_desc);
+var proxied_desc = { value: 345, configurable: true };
+function f23(a24, a25) {
+    if (a25 === "proxied") {
+        return proxied_desc;
+    }
+    if (a25 === "return_null") {
+        return null;
+    }
+    return Object.getOwnPropertyDescriptor(a24, a25);
+}
+var handler = { getOwnPropertyDescriptor: f23 };
+const v35 = new Proxy(target, handler);
+var proxy = v35;
+const v38 = new Proxy(target, {});
+var proxy_without_handler = v38;
+Object.getOwnPropertyDescriptor(proxy, "configurable");
+Object.getOwnPropertyDescriptor(proxy, "nonconfigurable");
+const v44 = proxied_desc.value;
+const v45 = proxied_desc.configurable;
+const v48 = { value: v44, configurable: v45, enumerable: false, writable: false };
+Object.getOwnPropertyDescriptor(proxy, "proxied");
+Object.getOwnPropertyDescriptor(proxy_without_handler, "configurable");
+Object.getOwnPropertyDescriptor(proxy_without_handler, "nonconfigurable");
+handler.getOwnPropertyDescriptor = undefined;
+Object.getOwnPropertyDescriptor(proxy, "configurable");
+function f59(a60, a61) {
+    return undefined;
+}
+handler.getOwnPropertyDescriptor = f59;
+Object.getOwnPropertyDescriptor(proxy, "configurable");
+function f67(a68, a69) {
+    return { value: 234, configurable: false, enumerable: true };
+}
+handler.getOwnPropertyDescriptor = f67;
+Object.getOwnPropertyDescriptor(proxy, "nonconfigurable").configurable;
+Object.seal(target);
+function f81(a82, a83) {
+    return undefined;
+}
+handler.getOwnPropertyDescriptor = f81;
+Object.getOwnPropertyDescriptor(proxy, "nonexistent");
+var existent_desc = { value: "yes" };
+function f93() {
+    return existent_desc;
+}
+handler.getOwnPropertyDescriptor = f93;
+const v99 = { value: "yes", writable: false, enumerable: false, configurable: false };
+Object.getOwnPropertyDescriptor(proxy, "configurable");
+handler.getOwnPropertyDescriptor = {};
+function f104() {
+    throw "ball";
+}
+handler.getOwnPropertyDescriptor = f104;
+function f107() {
+    return 1;
+}
+handler.getOwnPropertyDescriptor = f107;
+function f110(a111, a112) {
+    return { value: 456, configurable: true, writable: true };
+}
+handler.getOwnPropertyDescriptor = f110;
+
+FuzzIL program written to corpus/proxies-get-own-property-descriptor.fzil

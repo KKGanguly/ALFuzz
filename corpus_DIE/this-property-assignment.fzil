@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadThis
+    SetProperty v2, 'a', v1
+    v3 <- LoadInteger '2'
+    v4 <- LoadThis
+    SetProperty v4, 'a', v3
+    v5 <- LoadInteger '3'
+    v6 <- LoadThis
+    SetProperty v6, 'a', v5
+EndPlainFunction
+v7 <- Construct v0, []
+v8 <- CreateNamedVariable 'n1', 'var', v7
+v9 <- LoadInteger '3'
+v10 <- GetProperty v8, 'a'
+v11 <- Construct v0, []
+v12 <- CreateNamedVariable 'n2', 'var', v11
+v13 <- LoadInteger '3'
+v14 <- GetProperty v12, 'a'
+
+
+function Node() {
+    this.a = 1;
+    this.a = 2;
+    this.a = 3;
+}
+const v7 = new Node();
+var n1 = v7;
+n1.a;
+const v11 = new Node();
+var n2 = v11;
+n2.a;
+
+FuzzIL program written to corpus/this-property-assignment.fzil

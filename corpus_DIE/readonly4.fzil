@@ -1,0 +1,100 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'slow', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'p', 'var', v2
+SetProperty v1, '__proto__', v3
+v4 <- LoadInteger '10'
+SetProperty v1, 'x', v4
+v5 <- LoadInteger '10'
+SetProperty v1, 'y', v5
+v6 <- LoadString 'x'
+v7 <- LoadBoolean 'false'
+v8 <- LoadInteger '5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v7
+    ObjectLiteralAddProperty `value`, v8
+v9 <- EndObjectLiteral
+v10 <- CreateNamedVariable 'Object', 'none'
+v11 <- CallMethod v10, 'defineProperty', [v3, v6, v9]
+v12 <- BeginPlainFunction -> v13
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v13
+    v14 <- EndObjectLiteral
+    Return v14
+EndPlainFunction
+v15 <- BeginPlainFunction -> v16
+    v17 <- LoadInteger '1'
+    SetProperty v16, 'x', v17
+    Return v17
+EndPlainFunction
+v18 <- BeginPlainFunction -> v19
+    Directive 'use strict'
+    v20 <- LoadInteger '1'
+    SetProperty v19, 'x', v20
+EndPlainFunction
+v21 <- CallFunction v12, [v1]
+v22 <- CreateNamedVariable 'o1', 'var', v21
+v23 <- CallFunction v12, [v1]
+v24 <- CreateNamedVariable 'o2', 'var', v23
+v25 <- CallFunction v12, [v1]
+v26 <- CreateNamedVariable 'o1_strict', 'var', v25
+v27 <- CallFunction v12, [v1]
+v28 <- CreateNamedVariable 'o2_strict', 'var', v27
+v29 <- CallFunction v12, [v1]
+v30 <- CreateNamedVariable 'o3', 'var', v29
+v31 <- CallFunction v12, [v1]
+v32 <- CreateNamedVariable 'o4', 'var', v31
+v33 <- DeleteProperty v1, 'y'
+v34 <- CallFunction v15, [v22]
+v35 <- CallFunction v15, [v24]
+v36 <- CallFunction v18, [v26]
+v37 <- CallFunction v18, [v28]
+v38 <- DeleteProperty v1, 'x'
+v39 <- LoadInteger '20'
+SetProperty v30, 'x', v39
+v40 <- LoadInteger '5'
+v41 <- GetProperty v30, 'x'
+v42 <- CallFunction v15, [v32]
+v43 <- LoadInteger '5'
+v44 <- GetProperty v32, 'x'
+v45 <- LoadString 's_strict(o4);'
+v46 <- CreateNamedVariable 'TypeError', 'none'
+
+
+var slow = {};
+var p = {};
+slow.__proto__ = p;
+slow.x = 10;
+slow.y = 10;
+Object.defineProperty(p, "x", { writable: false, value: 5 });
+function c(a13) {
+    return { __proto__: a13 };
+}
+function s(a16) {
+    a16.x = 1;
+    return 1;
+}
+function s_strict(a19) {
+    'use strict';
+    a19.x = 1;
+}
+var o1 = c(slow);
+var o2 = c(slow);
+var o1_strict = c(slow);
+var o2_strict = c(slow);
+var o3 = c(slow);
+var o4 = c(slow);
+delete slow.y;
+s(o1);
+s(o2);
+s_strict(o1_strict);
+s_strict(o2_strict);
+delete slow.x;
+o3.x = 20;
+o3.x;
+s(o4);
+o4.x;
+
+FuzzIL program written to corpus/readonly4.fzil

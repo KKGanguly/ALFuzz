@@ -1,0 +1,39 @@
+v0 <- LoadString 'foo'
+v1 <- CreateNamedVariable 'Symbol', 'none'
+v2 <- CallFunction v1, [v0]
+v3 <- CreateNamedVariable 's', 'var', v2
+v4 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v3, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'o', 'var', v5
+v7 <- BeginPlainFunction -> v8, v9
+    v10 <- GetComputedProperty v8, v9
+    Return v10
+EndPlainFunction
+v11 <- LoadString 'bar'
+v12 <- CallFunction v7, [v6, v3]
+v13 <- CallFunction v7, [v6, v3]
+v14 <- CallFunction v7, [v6, v3]
+v15 <- LoadString 'bar'
+v16 <- CallFunction v7, [v6, v3]
+v17 <- CallFunction v7, []
+v18 <- LoadString 'funny'
+v19 <- CallFunction v7, [v6, v18]
+v20 <- CallFunction v7, []
+
+
+var s = Symbol("foo");
+var o = { [s]: "bar" };
+function get(a8, a9) {
+    return a8[a9];
+}
+get(o, s);
+get(o, s);
+get(o, s);
+get(o, s);
+get();
+get(o, "funny");
+get();
+
+FuzzIL program written to corpus/keyed-load-with-symbol-key.fzil

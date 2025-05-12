@@ -1,0 +1,37 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'key', 'var', v0
+v2 <- CreateNamedVariable 'WeakMap', 'none'
+v3 <- Construct v2, []
+v4 <- CreateNamedVariable 'map', 'var', v3
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- CallMethod v5, 'preventExtensions', [v1]
+v7 <- CallMethod v4, 'has', [v1]
+v8 <- LoadUndefined
+v9 <- CallMethod v4, 'get', [v1]
+v10 <- LoadInteger '1'
+v11 <- CallMethod v4, 'set', [v1, v10]
+v12 <- CallMethod v4, 'has', [v1]
+v13 <- LoadInteger '1'
+v14 <- CallMethod v4, 'get', [v1]
+v15 <- LoadInteger '1'
+v16 <- CallMethod v4, 'delete', [v1, v15]
+v17 <- CallMethod v4, 'has', [v1]
+v18 <- LoadUndefined
+v19 <- CallMethod v4, 'get', [v1]
+
+
+var key = {};
+const v3 = new WeakMap();
+var map = v3;
+Object.preventExtensions(key);
+map.has(key);
+map.get(key);
+map.set(key, 1);
+map.has(key);
+map.get(key);
+map.delete(key, 1);
+map.has(key);
+map.get(key);
+
+FuzzIL program written to corpus/regress-2034.fzil

@@ -1,0 +1,57 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '0'
+    BeginForLoopCondition -> v2
+        v3 <- CreateNamedVariable '__v_5', 'none'
+        v4 <- Compare v2, '<', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- UnaryOperation '++', v5
+    BeginForLoopBody -> v7
+        BeginForLoopInitializer
+            v8 <- LoadInteger '0'
+        BeginForLoopCondition -> v9
+            v10 <- CreateNamedVariable '__v_3', 'none'
+            v11 <- LoadInteger '1'
+            v12 <- Compare v10, '<', v11
+        BeginForLoopAfterthought v12 -> v13
+            v14 <- CreateNamedVariable '__v_8', 'none'
+            v15 <- UnaryOperation '++', v14
+        BeginForLoopBody -> v16
+            v17 <- LoadBoolean 'true'
+            v18 <- LoadInteger '0'
+            v19 <- LoadInteger '6'
+            v20 <- UnaryOperation '-', v19
+            v21 <- Compare v18, '>', v20
+            v22 <- BinaryOperation v17, '||', v21
+            BeginIf v22
+                Continue
+            EndIf
+            BeginForLoopInitializer
+                v23 <- LoadInteger '0'
+            BeginForLoopCondition -> v24
+                v25 <- LoadInteger '1'
+                v26 <- Compare v24, '<', v25
+            BeginForLoopAfterthought v26 -> v27
+                v28 <- UnaryOperation '++', v27
+            BeginForLoopBody -> v29
+            EndForLoop
+        EndForLoop
+    EndForLoop
+EndPlainFunction
+v30 <- CallFunction v0, []
+
+
+function f() {
+    for (let i2 = 0; i2 < __v_5; ++i2) {
+        for (let i9 = 0; __v_3 < 1; ++__v_8) {
+            if (true || (0 > -6)) {
+                continue;
+            }
+            for (let i24 = 0; i24 < 1; ++i24) {
+            }
+        }
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-556543.fzil

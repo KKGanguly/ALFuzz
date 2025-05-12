@@ -1,0 +1,95 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginArrowFunction -> 
+        v3 <- LoadInteger '42'
+        SetProperty v1, 'x', v3
+        v4 <- LoadString ''
+        Return v4
+    EndArrowFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toString`, v2
+    v5 <- EndObjectLiteral
+    Return v5
+EndPlainFunction
+BeginBlockStatement
+    v6 <- LoadRegExp '.' ''
+    v7 <- CreateNamedVariable 're', 'const', v6
+    v8 <- CallFunction v0, [v7]
+    v9 <- CallMethod v7, 'exec', [v8]
+EndBlockStatement
+BeginBlockStatement
+    v10 <- LoadRegExp '.' ''
+    v11 <- CreateNamedVariable 're', 'const', v10
+    v12 <- CallFunction v0, [v11]
+    v13 <- CallMethod v11, 'test', [v12]
+EndBlockStatement
+BeginBlockStatement
+    v14 <- LoadRegExp '.' ''
+    v15 <- CreateNamedVariable 're', 'const', v14
+    v16 <- CallFunction v0, [v15]
+    v17 <- CreateNamedVariable 'Symbol', 'none'
+    v18 <- GetProperty v17, 'match'
+    v19 <- CallComputedMethod v15, v18, [v16]
+EndBlockStatement
+BeginBlockStatement
+    v20 <- LoadRegExp '.' ''
+    v21 <- CreateNamedVariable 're', 'const', v20
+    v22 <- CallFunction v0, [v21]
+    v23 <- CreateNamedVariable 'Symbol', 'none'
+    v24 <- GetProperty v23, 'search'
+    v25 <- CallComputedMethod v21, v24, [v22]
+EndBlockStatement
+BeginBlockStatement
+    v26 <- LoadRegExp '.' ''
+    v27 <- CreateNamedVariable 're', 'const', v26
+    v28 <- CallFunction v0, [v27]
+    v29 <- CreateNamedVariable 'Symbol', 'none'
+    v30 <- GetProperty v29, 'split'
+    v31 <- CallComputedMethod v27, v30, [v28]
+EndBlockStatement
+BeginBlockStatement
+    v32 <- LoadRegExp '.' ''
+    v33 <- CreateNamedVariable 're', 'const', v32
+    v34 <- CallFunction v0, [v33]
+    v35 <- CreateNamedVariable 'Symbol', 'none'
+    v36 <- GetProperty v35, 'replace'
+    v37 <- CallComputedMethod v33, v36, [v34]
+EndBlockStatement
+
+
+function mutateObjectOnStringConversion(a1) {
+    const v2 = () => {
+        a1.x = 42;
+        return "";
+    };
+    return { toString: v2 };
+}
+{
+    const re = /./;
+    re.exec(mutateObjectOnStringConversion(re));
+}
+{
+    const re = /./;
+    re.test(mutateObjectOnStringConversion(re));
+}
+{
+    const re = /./;
+    const v16 = mutateObjectOnStringConversion(re);
+    re[Symbol.match](v16);
+}
+{
+    const re = /./;
+    const v22 = mutateObjectOnStringConversion(re);
+    re[Symbol.search](v22);
+}
+{
+    const re = /./;
+    const v28 = mutateObjectOnStringConversion(re);
+    re[Symbol.split](v28);
+}
+{
+    const re = /./;
+    const v34 = mutateObjectOnStringConversion(re);
+    re[Symbol.replace](v34);
+}
+
+FuzzIL program written to corpus/regress-709029.fzil

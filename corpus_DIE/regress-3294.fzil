@@ -1,0 +1,18 @@
+v0 <- CreateNamedVariable 'Error', 'none'
+v1 <- LoadString 'message'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'e', 'var', v2
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'keys', [v3]
+v6 <- CreateNamedVariable 'keys', 'var', v5
+v7 <- GetProperty v3, 'stack'
+v8 <- CallMethod v4, 'keys', [v3]
+
+
+const v2 = new Error("message");
+var e = v2;
+var keys = Object.keys(e);
+e.stack;
+Object.keys(e);
+
+FuzzIL program written to corpus/regress-3294.fzil

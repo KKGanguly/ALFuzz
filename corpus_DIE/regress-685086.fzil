@@ -1,0 +1,14 @@
+BeginTry
+    v0 <- LoadInteger '0'
+    v1 <- CreateNamedVariable 'Math', 'none'
+    v2 <- CallMethodWithSpread v1, 'max', [...v0]
+BeginCatch -> v3
+EndTryCatch
+
+
+try {
+    Math.max(...0);
+} catch(e3) {
+}
+
+FuzzIL program written to corpus/regress-685086.fzil

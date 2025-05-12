@@ -1,0 +1,49 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'obj', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '100'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- LoadString 'x'
+    v10 <- BinaryOperation v9, '+', v8
+    v11 <- LoadInteger '31415'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v11
+    v12 <- EndObjectLiteral
+    v13 <- CreateNamedVariable 'Object', 'none'
+    v14 <- CallMethod v13, 'defineProperty', [v1, v10, v12]
+    v15 <- LoadString 'y'
+    v16 <- BinaryOperation v15, '+', v8
+    v17 <- BeginPlainFunction -> 
+        v18 <- LoadInteger '42'
+        Return v18
+    EndPlainFunction
+    v19 <- BeginPlainFunction -> v20
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v17
+        ObjectLiteralAddProperty `set`, v19
+    v21 <- EndObjectLiteral
+    v22 <- CallMethod v13, 'defineProperty', [v1, v16, v21]
+EndForLoop
+
+
+var obj = {};
+for (let i3 = 0; i3 < 100; i3++) {
+    const v10 = "x" + i3;
+    Object.defineProperty(obj, v10, { value: 31415 });
+    const v16 = "y" + i3;
+    function f17() {
+        return 42;
+    }
+    function f19(a20) {
+    }
+    Object.defineProperty(obj, v16, { get: f17, set: f19 });
+}
+
+FuzzIL program written to corpus/regress-362870.fzil

@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '3600'
+    v3 <- BinaryOperation v1, '/', v2
+    v4 <- CreateNamedVariable 'Math', 'none'
+    v5 <- CallMethod v4, 'floor', [v3]
+    v6 <- CreateNamedVariable 's', 'var', v5
+    v7 <- CallMethod v4, 'floor', [v6]
+    v8 <- LoadInteger '24'
+    v9 <- BinaryOperation v6, '%', v8
+    Return v9
+EndPlainFunction
+v10 <- LoadInteger '12345678'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadInteger '12345678'
+v13 <- CallFunction v0, [v12]
+v14 <- LoadInteger '12345678'
+v15 <- CallFunction v0, [v14]
+
+
+function foo(a1) {
+    var s = Math.floor(a1 / 3600);
+    Math.floor(s);
+    return s % 24;
+}
+foo(12345678);
+foo(12345678);
+foo(12345678);
+
+FuzzIL program written to corpus/regress-crbug-476477-2.fzil

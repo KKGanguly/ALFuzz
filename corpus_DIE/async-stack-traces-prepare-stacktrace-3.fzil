@@ -1,0 +1,70 @@
+v0 <- BeginArrowFunction -> v1, v2
+    v3 <- CreateNamedVariable 'two', 'none'
+    v4 <- CallFunction v3, []
+    v5 <- GetElement v2, '0'
+    v6 <- CallMethod v5, 'getFunction', []
+    v7 <- GetProperty v3, 'name'
+    v8 <- GetElement v2, '0'
+    v9 <- CallMethod v8, 'getFunctionName', []
+    v10 <- GetElement v2, '0'
+    v11 <- CallMethod v10, 'isAsync', []
+    v12 <- CallFunction v3, []
+    v13 <- GetElement v2, '1'
+    v14 <- CallMethod v13, 'getFunction', []
+    v15 <- CreateNamedVariable 'one', 'none'
+    v16 <- GetProperty v15, 'name'
+    v17 <- GetElement v2, '1'
+    v18 <- CallMethod v17, 'getFunctionName', []
+    v19 <- GetElement v2, '1'
+    v20 <- CallMethod v19, 'isAsync', []
+    Return v2
+EndArrowFunction
+v21 <- CreateNamedVariable 'Error', 'none'
+SetProperty v21, 'prepareStackTrace', v0
+v22 <- BeginAsyncFunction -> v23
+    v24 <- CreateNamedVariable 'two', 'none'
+    v25 <- CallFunction v24, [v23]
+    v26 <- Await v25
+    Return v26
+EndAsyncFunction
+v27 <- BeginAsyncFunction -> v28
+    BeginTry
+        v29 <- Await v28
+        Reassign v28, v29
+        v30 <- Construct v21, []
+        ThrowException v30
+    BeginCatch -> v31
+        v32 <- GetProperty v31, 'stack'
+        Return v32
+    EndTryCatch
+EndAsyncFunction
+
+
+const v0 = (a1, a2) => {
+    two();
+    a2[0].getFunction();
+    two.name;
+    a2[0].getFunctionName();
+    a2[0].isAsync();
+    two();
+    a2[1].getFunction();
+    one.name;
+    a2[1].getFunctionName();
+    a2[1].isAsync();
+    return a2;
+};
+Error.prepareStackTrace = v0;
+async function one(a23) {
+    return await two(a23);
+}
+async function two(a28) {
+    try {
+        a28 = await a28;
+        const v30 = new Error();
+        throw v30;
+    } catch(e31) {
+        return e31.stack;
+    }
+}
+
+FuzzIL program written to corpus/async-stack-traces-prepare-stacktrace-3.fzil

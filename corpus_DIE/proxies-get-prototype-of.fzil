@@ -1,0 +1,336 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `target`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'target', 'var', v1
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+SetProperty v2, '__proto__', v3
+v4 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `handler`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'handler', 'var', v5
+v7 <- CreateNamedVariable 'Proxy', 'none'
+v8 <- Construct v7, [v2, v6]
+v9 <- CreateNamedVariable 'proxy', 'var', v8
+v10 <- CreateNamedVariable 'Object', 'none'
+v11 <- CallMethod v10, 'getPrototypeOf', [v9]
+v12 <- GetProperty v2, '__proto__'
+v13 <- CreateArray []
+SetProperty v2, '__proto__', v13
+v14 <- CallMethod v10, 'getPrototypeOf', [v9]
+v15 <- GetProperty v2, '__proto__'
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadInteger '1'
+    Return v17
+EndPlainFunction
+SetProperty v6, 'getPrototypeOf', v16
+v18 <- BeginPlainFunction -> 
+    v19 <- CallMethod v10, 'getPrototypeOf', [v9]
+EndPlainFunction
+v20 <- CallFunction v18, []
+v21 <- CreateNamedVariable 'TypeError', 'none'
+v22 <- LoadInteger '1'
+v23 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v22
+    ObjectLiteralAddProperty `b`, v23
+v24 <- EndObjectLiteral
+v25 <- CreateNamedVariable 'target_prototype', 'var', v24
+v26 <- BeginPlainFunction -> 
+    Return v25
+EndPlainFunction
+SetProperty v6, 'getPrototypeOf', v26
+v27 <- CallMethod v10, 'getPrototypeOf', [v9]
+v28 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `handler`, v28
+v29 <- EndObjectLiteral
+v30 <- Construct v7, [v9, v29]
+v31 <- CreateNamedVariable 'proxy2', 'var', v30
+v32 <- CallMethod v10, 'getPrototypeOf', [v31]
+v33 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `proto3`, v33
+v34 <- EndObjectLiteral
+v35 <- CreateNamedVariable 'proxy3_prototype', 'var', v34
+v36 <- BeginPlainFunction -> 
+    Return v35
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `getPrototypeOf`, v36
+v37 <- EndObjectLiteral
+BeginObjectLiteral
+v38 <- EndObjectLiteral
+v39 <- Construct v7, [v37, v38]
+v40 <- CreateNamedVariable 'handler_proxy', 'var', v39
+v41 <- Construct v7, [v2, v40]
+v42 <- CreateNamedVariable 'proxy3', 'var', v41
+v43 <- CallMethod v10, 'getPrototypeOf', [v42]
+v44 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v45 <- EndObjectLiteral
+    v46 <- CreateNamedVariable 'object', 'var', v45
+    BeginObjectLiteral
+    v47 <- EndObjectLiteral
+    v48 <- CreateNamedVariable 'handler', 'var', v47
+    BeginObjectLiteral
+    v49 <- EndObjectLiteral
+    v50 <- Construct v7, [v49, v48]
+    v51 <- CreateNamedVariable 'proto', 'var', v50
+    SetProperty v46, '__proto__', v51
+    v52 <- CallMethod v51, 'isPrototypeOf', [v46]
+    v53 <- GetProperty v10, 'prototype'
+    v54 <- GetProperty v53, 'isPrototypeOf'
+    v55 <- CallMethod v54, 'call', [v51, v46]
+    v56 <- BeginPlainFunction -> 
+        v57 <- GetProperty v10, 'prototype'
+        Return v57
+    EndPlainFunction
+    SetProperty v48, 'getPrototypeOf', v56
+    v58 <- CallMethod v51, 'isPrototypeOf', [v46]
+    v59 <- GetProperty v10, 'prototype'
+    v60 <- GetProperty v59, 'isPrototypeOf'
+    v61 <- CallMethod v60, 'call', [v51, v46]
+    v62 <- GetProperty v10, 'prototype'
+    v63 <- CallMethod v62, 'isPrototypeOf', [v46]
+    v64 <- CreateNamedVariable 'Array', 'none'
+    v65 <- GetProperty v64, 'prototype'
+    v66 <- GetProperty v10, 'prototype'
+    v67 <- GetProperty v66, 'isPrototypeOf'
+    v68 <- CallMethod v67, 'call', [v65, v46]
+    v69 <- GetProperty v64, 'prototype'
+    v70 <- CallMethod v69, 'isPrototypeOf', [v46]
+    v71 <- BeginPlainFunction -> 
+        Return v46
+    EndPlainFunction
+    SetProperty v48, 'getPrototypeOf', v71
+    v72 <- GetProperty v10, 'prototype'
+    v73 <- GetProperty v72, 'isPrototypeOf'
+    v74 <- CallMethod v73, 'call', [v51, v46]
+    v75 <- CallMethod v51, 'isPrototypeOf', [v46]
+    v76 <- GetProperty v10, 'prototype'
+    v77 <- GetProperty v76, 'isPrototypeOf'
+    v78 <- CallMethod v77, 'call', [v46, v46]
+    v79 <- CallMethod v46, 'isPrototypeOf', [v46]
+    v80 <- BeginPlainFunction -> 
+        v81 <- LoadString 'foo'
+        ThrowException v81
+    EndPlainFunction
+    SetProperty v48, 'getPrototypeOf', v80
+    v82 <- CallMethod v51, 'isPrototypeOf', [v46]
+    v83 <- GetProperty v10, 'prototype'
+    v84 <- GetProperty v83, 'isPrototypeOf'
+    v85 <- CallMethod v84, 'call', [v51, v46]
+    v86 <- BeginArrowFunction -> 
+        v87 <- GetProperty v10, 'prototype'
+        v88 <- CallMethod v87, 'isPrototypeOf', [v46]
+        Return v88
+    EndArrowFunction
+    v89 <- CallFunction v86, []
+    v90 <- BeginArrowFunction -> 
+        v91 <- GetProperty v64, 'prototype'
+        v92 <- GetProperty v10, 'prototype'
+        v93 <- GetProperty v92, 'isPrototypeOf'
+        v94 <- CallMethod v93, 'call', [v91, v46]
+        Return v94
+    EndArrowFunction
+    v95 <- CallFunction v90, []
+    v96 <- BeginArrowFunction -> 
+        v97 <- GetProperty v64, 'prototype'
+        v98 <- CallMethod v97, 'isPrototypeOf', [v46]
+        Return v98
+    EndArrowFunction
+    v99 <- CallFunction v96, []
+EndPlainFunction
+v100 <- CallFunction v44, []
+v101 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v102 <- EndObjectLiteral
+    v103 <- CreateNamedVariable 'handler', 'var', v102
+    BeginObjectLiteral
+    v104 <- EndObjectLiteral
+    v105 <- Construct v7, [v104, v103]
+    v106 <- CreateNamedVariable 'object', 'var', v105
+    BeginObjectLiteral
+    v107 <- EndObjectLiteral
+    v108 <- CreateNamedVariable 'proto', 'var', v107
+    v109 <- GetProperty v10, 'prototype'
+    v110 <- GetProperty v109, 'isPrototypeOf'
+    v111 <- CallMethod v110, 'call', [v106, v106]
+    v112 <- GetProperty v10, 'prototype'
+    v113 <- GetProperty v112, 'isPrototypeOf'
+    v114 <- CallMethod v113, 'call', [v108, v106]
+    v115 <- GetProperty v10, 'prototype'
+    v116 <- GetProperty v10, 'prototype'
+    v117 <- GetProperty v116, 'isPrototypeOf'
+    v118 <- CallMethod v117, 'call', [v115, v106]
+    v119 <- BeginPlainFunction -> 
+        Return v108
+    EndPlainFunction
+    SetProperty v103, 'getPrototypeOf', v119
+    v120 <- GetProperty v10, 'prototype'
+    v121 <- GetProperty v120, 'isPrototypeOf'
+    v122 <- CallMethod v121, 'call', [v108, v106]
+    BeginObjectLiteral
+    v123 <- EndObjectLiteral
+    v124 <- GetProperty v10, 'prototype'
+    v125 <- GetProperty v124, 'isPrototypeOf'
+    v126 <- CallMethod v125, 'call', [v123, v106]
+    v127 <- GetProperty v10, 'prototype'
+    v128 <- GetProperty v10, 'prototype'
+    v129 <- GetProperty v128, 'isPrototypeOf'
+    v130 <- CallMethod v129, 'call', [v127, v106]
+    v131 <- BeginPlainFunction -> 
+        Return v106
+    EndPlainFunction
+    SetProperty v103, 'getPrototypeOf', v131
+    v132 <- GetProperty v10, 'prototype'
+    v133 <- GetProperty v132, 'isPrototypeOf'
+    v134 <- CallMethod v133, 'call', [v106, v106]
+    v135 <- BeginPlainFunction -> 
+        v136 <- LoadString 'foo'
+        ThrowException v136
+    EndPlainFunction
+    SetProperty v103, 'getPrototypeOf', v135
+    v137 <- BeginArrowFunction -> 
+        v138 <- GetProperty v10, 'prototype'
+        v139 <- GetProperty v138, 'isPrototypeOf'
+        v140 <- CallMethod v139, 'call', [v106, v106]
+        Return v140
+    EndArrowFunction
+    v141 <- CallFunction v137, []
+    v142 <- BeginArrowFunction -> 
+        v143 <- GetProperty v10, 'prototype'
+        v144 <- CallMethod v143, 'isPrototypeOf', [v106]
+        Return v144
+    EndArrowFunction
+    v145 <- CallFunction v142, []
+EndPlainFunction
+v146 <- CallFunction v101, []
+
+
+var target = { target: 1 };
+target.__proto__ = {};
+var handler = { handler: 1 };
+const v8 = new Proxy(target, handler);
+var proxy = v8;
+Object.getPrototypeOf(proxy);
+target.__proto__;
+target.__proto__ = [];
+Object.getPrototypeOf(proxy);
+target.__proto__;
+function f16() {
+    return 1;
+}
+handler.getPrototypeOf = f16;
+function f18() {
+    Object.getPrototypeOf(proxy);
+}
+f18();
+var target_prototype = { a: 1, b: 2 };
+function f26() {
+    return target_prototype;
+}
+handler.getPrototypeOf = f26;
+Object.getPrototypeOf(proxy);
+const v30 = new Proxy(proxy, { handler: 1 });
+var proxy2 = v30;
+Object.getPrototypeOf(proxy2);
+var proxy3_prototype = { proto3: true };
+function f36() {
+    return proxy3_prototype;
+}
+const v37 = { getPrototypeOf: f36 };
+const v39 = new Proxy(v37, {});
+var handler_proxy = v39;
+const v41 = new Proxy(target, handler_proxy);
+var proxy3 = v41;
+Object.getPrototypeOf(proxy3);
+function f44() {
+    var object = {};
+    var handler = {};
+    const v50 = new Proxy({}, handler);
+    var proto = v50;
+    object.__proto__ = proto;
+    proto.isPrototypeOf(object);
+    Object.prototype.isPrototypeOf.call(proto, object);
+    function f56() {
+        return Object.prototype;
+    }
+    handler.getPrototypeOf = f56;
+    proto.isPrototypeOf(object);
+    Object.prototype.isPrototypeOf.call(proto, object);
+    Object.prototype.isPrototypeOf(object);
+    const v65 = Array.prototype;
+    Object.prototype.isPrototypeOf.call(v65, object);
+    Array.prototype.isPrototypeOf(object);
+    function f71() {
+        return object;
+    }
+    handler.getPrototypeOf = f71;
+    Object.prototype.isPrototypeOf.call(proto, object);
+    proto.isPrototypeOf(object);
+    Object.prototype.isPrototypeOf.call(object, object);
+    object.isPrototypeOf(object);
+    function f80() {
+        throw "foo";
+    }
+    handler.getPrototypeOf = f80;
+    proto.isPrototypeOf(object);
+    Object.prototype.isPrototypeOf.call(proto, object);
+    const v86 = () => {
+        return Object.prototype.isPrototypeOf(object);
+    };
+    v86();
+    const v90 = () => {
+        const v91 = Array.prototype;
+        return Object.prototype.isPrototypeOf.call(v91, object);
+    };
+    v90();
+    const v96 = () => {
+        return Array.prototype.isPrototypeOf(object);
+    };
+    v96();
+}
+f44();
+function f101() {
+    var handler = {};
+    const v105 = new Proxy({}, handler);
+    var object = v105;
+    var proto = {};
+    Object.prototype.isPrototypeOf.call(object, object);
+    Object.prototype.isPrototypeOf.call(proto, object);
+    const v115 = Object.prototype;
+    Object.prototype.isPrototypeOf.call(v115, object);
+    function f119() {
+        return proto;
+    }
+    handler.getPrototypeOf = f119;
+    Object.prototype.isPrototypeOf.call(proto, object);
+    const v123 = {};
+    Object.prototype.isPrototypeOf.call(v123, object);
+    const v127 = Object.prototype;
+    Object.prototype.isPrototypeOf.call(v127, object);
+    function f131() {
+        return object;
+    }
+    handler.getPrototypeOf = f131;
+    Object.prototype.isPrototypeOf.call(object, object);
+    function f135() {
+        throw "foo";
+    }
+    handler.getPrototypeOf = f135;
+    const v137 = () => {
+        return Object.prototype.isPrototypeOf.call(object, object);
+    };
+    v137();
+    const v142 = () => {
+        return Object.prototype.isPrototypeOf(object);
+    };
+    v142();
+}
+f101();
+
+FuzzIL program written to corpus/proxies-get-prototype-of.fzil

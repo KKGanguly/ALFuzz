@@ -1,0 +1,26 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- CallMethod v2, 'freeze', [v1]
+v4 <- BeginPlainFunction -> 
+    v5 <- GetProperty v1, 'length'
+    Return v5
+EndPlainFunction
+v6 <- LoadInteger '0'
+v7 <- CallFunction v4, []
+v8 <- LoadInteger '0'
+v9 <- CallFunction v4, []
+v10 <- LoadInteger '0'
+v11 <- CallFunction v4, []
+
+
+var a = [];
+Object.freeze(a);
+function foo() {
+    return a.length;
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-686102.fzil

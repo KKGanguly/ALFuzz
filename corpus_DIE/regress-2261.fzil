@@ -1,0 +1,170 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'forceDeopt', 'var', v1
+    v3 <- BeginPlainFunction -> v4
+        Directive 'use strict'
+        v5 <- LoadInteger '2'
+        Reassign v4, v5
+        v6 <- LoadInteger '1'
+        v7 <- BinaryOperation v2, '+', v6
+        v8 <- LoadArguments
+        v9 <- GetElement v8, '0'
+        Return v9
+    EndPlainFunction
+    v10 <- LoadInteger '1'
+    v11 <- LoadInteger '1'
+    v12 <- CallFunction v3, [v11]
+    v13 <- LoadInteger '1'
+    v14 <- LoadInteger '1'
+    v15 <- CallFunction v3, [v14]
+    v16 <- LoadInteger '1'
+    v17 <- LoadInteger '1'
+    v18 <- CallFunction v3, [v17]
+    v19 <- LoadString 'not a number'
+    Reassign v2, v19
+    v20 <- LoadInteger '1'
+    v21 <- LoadInteger '1'
+    v22 <- CallFunction v3, [v21]
+EndPlainFunction
+v23 <- CallFunction v0, []
+v24 <- BeginPlainFunction -> 
+    v25 <- LoadInteger '0'
+    v26 <- CreateNamedVariable 'forceDeopt', 'var', v25
+    v27 <- BeginPlainFunction -> v28
+        Directive 'use strict'
+        v29 <- LoadInteger '2'
+        Reassign v28, v29
+        v30 <- LoadInteger '1'
+        v31 <- BinaryOperation v26, '+', v30
+        v32 <- LoadArguments
+        v33 <- GetElement v32, '0'
+        Return v33
+    EndPlainFunction
+    v34 <- BeginPlainFunction -> v35
+        v36 <- CallFunction v27, [v35]
+        Return v36
+    EndPlainFunction
+    v37 <- LoadInteger '1'
+    v38 <- LoadInteger '1'
+    v39 <- CallFunction v34, [v38]
+    v40 <- LoadInteger '1'
+    v41 <- LoadInteger '1'
+    v42 <- CallFunction v34, [v41]
+    v43 <- LoadInteger '1'
+    v44 <- LoadInteger '1'
+    v45 <- CallFunction v34, [v44]
+    v46 <- LoadString 'not a number'
+    Reassign v26, v46
+    v47 <- LoadInteger '1'
+    v48 <- LoadInteger '1'
+    v49 <- CallFunction v34, [v48]
+EndPlainFunction
+v50 <- CallFunction v24, []
+v51 <- BeginPlainFunction -> 
+    v52 <- LoadInteger '0'
+    v53 <- CreateNamedVariable 'forceDeopt', 'var', v52
+    v54 <- BeginPlainFunction -> v55, v56, v57
+        Directive 'use strict'
+        v58 <- LoadInteger '3'
+        Reassign v55, v58
+        v59 <- LoadInteger '1'
+        v60 <- BinaryOperation v53, '+', v59
+        v61 <- LoadArguments
+        v62 <- GetElement v61, '0'
+        Return v62
+    EndPlainFunction
+    v63 <- BeginPlainFunction -> v64
+        Directive 'use strict'
+        v65 <- LoadInteger '2'
+        Reassign v64, v65
+        v66 <- LoadInteger '10'
+        v67 <- BinaryOperation v66, '*', v64
+        v68 <- LoadInteger '20'
+        v69 <- BinaryOperation v68, '*', v64
+        v70 <- LoadInteger '30'
+        v71 <- BinaryOperation v70, '*', v64
+        v72 <- CallFunction v54, [v67, v69, v71]
+        v73 <- LoadArguments
+        v74 <- GetElement v73, '0'
+        v75 <- BinaryOperation v72, '+', v74
+        Return v75
+    EndPlainFunction
+    v76 <- BeginPlainFunction -> v77
+        v78 <- CallFunction v63, [v77]
+        Return v78
+    EndPlainFunction
+    v79 <- LoadInteger '21'
+    v80 <- LoadInteger '1'
+    v81 <- CallFunction v76, [v80]
+    v82 <- LoadInteger '21'
+    v83 <- LoadInteger '1'
+    v84 <- CallFunction v76, [v83]
+    v85 <- LoadInteger '21'
+    v86 <- LoadInteger '1'
+    v87 <- CallFunction v76, [v86]
+    v88 <- LoadString 'not a number'
+    Reassign v53, v88
+    v89 <- LoadInteger '21'
+    v90 <- LoadInteger '1'
+    v91 <- CallFunction v76, [v90]
+EndPlainFunction
+v92 <- CallFunction v51, []
+
+
+function f0() {
+    var forceDeopt = 0;
+    function inner(a4) {
+        'use strict';
+        a4 = 2;
+        forceDeopt + 1;
+        return arguments[0];
+    }
+    inner(1);
+    inner(1);
+    inner(1);
+    forceDeopt = "not a number";
+    inner(1);
+}
+f0();
+function f24() {
+    var forceDeopt = 0;
+    function inner(a28) {
+        'use strict';
+        a28 = 2;
+        forceDeopt + 1;
+        return arguments[0];
+    }
+    function outer(a35) {
+        return inner(a35);
+    }
+    outer(1);
+    outer(1);
+    outer(1);
+    forceDeopt = "not a number";
+    outer(1);
+}
+f24();
+function f51() {
+    var forceDeopt = 0;
+    function inner(a55, a56, a57) {
+        'use strict';
+        a55 = 3;
+        forceDeopt + 1;
+        return arguments[0];
+    }
+    function middle(a64) {
+        'use strict';
+        return inner(10 * (a64 = 2), 20 * a64, 30 * a64) + arguments[0];
+    }
+    function outer(a77) {
+        return middle(a77);
+    }
+    outer(1);
+    outer(1);
+    outer(1);
+    forceDeopt = "not a number";
+    outer(1);
+}
+f51();
+
+FuzzIL program written to corpus/regress-2261.fzil

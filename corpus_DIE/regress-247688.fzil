@@ -1,0 +1,115 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadInteger '1'
+SetProperty v1, 'x', v2
+v3 <- LoadFloat '1.5'
+SetProperty v1, 'y', v3
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'b', 'var', v4
+v6 <- LoadFloat '1.5'
+SetProperty v5, 'x', v6
+v7 <- LoadInteger '1'
+SetProperty v5, 'y', v7
+BeginObjectLiteral
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'c', 'var', v8
+v10 <- LoadFloat '1.5'
+SetProperty v9, 'x', v10
+BeginObjectLiteral
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable 'd', 'var', v11
+v13 <- LoadFloat '1.5'
+SetProperty v12, 'x', v13
+BeginObjectLiteral
+v14 <- EndObjectLiteral
+v15 <- CreateNamedVariable 'e', 'var', v14
+v16 <- LoadFloat '1.5'
+SetProperty v15, 'x', v16
+BeginObjectLiteral
+v17 <- EndObjectLiteral
+v18 <- CreateNamedVariable 'f', 'var', v17
+v19 <- LoadFloat '1.5'
+SetProperty v18, 'x', v19
+BeginObjectLiteral
+v20 <- EndObjectLiteral
+v21 <- CreateNamedVariable 'g', 'var', v20
+v22 <- LoadFloat '1.5'
+SetProperty v21, 'x', v22
+BeginObjectLiteral
+v23 <- EndObjectLiteral
+v24 <- CreateNamedVariable 'h', 'var', v23
+v25 <- LoadFloat '1.5'
+SetProperty v24, 'x', v25
+BeginObjectLiteral
+v26 <- EndObjectLiteral
+v27 <- CreateNamedVariable 'i', 'var', v26
+v28 <- LoadFloat '1.5'
+SetProperty v27, 'x', v28
+BeginObjectLiteral
+v29 <- EndObjectLiteral
+v30 <- CreateNamedVariable 'o', 'var', v29
+v31 <- LoadInteger '10'
+v32 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v31
+    ObjectLiteralAddProperty `z`, v32
+v33 <- EndObjectLiteral
+v34 <- CreateNamedVariable 'p', 'var', v33
+SetProperty v30, '__proto__', v34
+v35 <- DeleteProperty v34, 'z'
+v36 <- BeginPlainFunction -> v37, v38
+    v39 <- GetProperty v37, 'y'
+    v40 <- LoadInteger '1'
+    SetProperty v38, 'y', v40
+    v41 <- GetProperty v5, 'y'
+    Return v41
+EndPlainFunction
+v42 <- CallFunction v36, [v30, v9]
+v43 <- CallFunction v36, [v30, v12]
+v44 <- CallFunction v36, [v30, v15]
+v45 <- CallFunction v36, [v5, v18]
+v46 <- CallFunction v36, [v5, v21]
+v47 <- CallFunction v36, [v5, v24]
+v48 <- CallFunction v36, [v1, v27]
+
+
+var a = {};
+a.x = 1;
+a.y = 1.5;
+var b = {};
+b.x = 1.5;
+b.y = 1;
+var c = {};
+c.x = 1.5;
+var d = {};
+d.x = 1.5;
+var e = {};
+e.x = 1.5;
+var f = {};
+f.x = 1.5;
+var g = {};
+g.x = 1.5;
+var h = {};
+h.x = 1.5;
+var i = {};
+i.x = 1.5;
+var o = {};
+var p = { y: 10, z: 1 };
+o.__proto__ = p;
+delete p.z;
+function foo(a37, a38) {
+    a37.y;
+    a38.y = 1;
+    return b.y;
+}
+foo(o, c);
+foo(o, d);
+foo(o, e);
+foo(b, f);
+foo(b, g);
+foo(b, h);
+foo(a, i);
+
+FuzzIL program written to corpus/regress-247688.fzil

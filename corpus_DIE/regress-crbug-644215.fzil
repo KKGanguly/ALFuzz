@@ -1,0 +1,29 @@
+v0 <- CreateArray []
+v1 <- LoadUndefined
+v2 <- CreateArrayWithSpread [...v0, v1]
+v3 <- CreateNamedVariable 'arr', 'var', v2
+v4 <- LoadInteger '1'
+v5 <- GetProperty v3, 'length'
+v6 <- LoadInteger '0'
+v7 <- CallMethod v3, 'hasOwnProperty', [v6]
+v8 <- LoadUndefined
+v9 <- GetElement v3, '0'
+v10 <- BeginArrowFunction -> 
+    v11 <- GetElement v3, '0'
+    v12 <- GetElement v11, '0'
+    Return v12
+EndArrowFunction
+v13 <- CallFunction v10, []
+v14 <- CreateNamedVariable 'TypeError', 'none'
+
+
+var arr = [...[],,];
+arr.length;
+arr.hasOwnProperty(0);
+arr[0];
+const v10 = () => {
+    return arr[0][0];
+};
+v10();
+
+FuzzIL program written to corpus/regress-crbug-644215.fzil

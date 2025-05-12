@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- CreateNamedVariable 'counter', 'var', v2
+    Update v3, '+', v1
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '1'
+    v6 <- LoadInteger '2'
+    v7 <- LoadInteger '3'
+    v8 <- LoadInteger '4'
+    v9 <- LoadInteger '5'
+    v10 <- LoadInteger '6'
+    v11 <- LoadInteger '7'
+    v12 <- LoadInteger '8'
+    v13 <- LoadInteger '9'
+    v14 <- LoadInteger '10'
+    v15 <- LoadInteger '11'
+    v16 <- LoadInteger '12'
+    v17 <- CreateArray [v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16]
+    v18 <- CreateNamedVariable 'a', 'var', v17
+    BeginForLoopInitializer
+        v19 <- LoadInteger '0'
+    BeginForLoopCondition -> v20
+        v21 <- LoadInteger '100'
+        v22 <- Compare v20, '<', v21
+    BeginForLoopAfterthought v22 -> v23
+        v24 <- UnaryOperation v23, '++'
+    BeginForLoopBody -> v25
+        v26 <- CallFunction v0, [v18]
+    EndForLoop
+EndPlainFunction
+BeginTry
+    v27 <- CallFunction v4, []
+BeginCatch -> v28
+EndTryCatch
+
+
+function foo(a1) {
+    var counter = 1;
+    return counter += a1;
+}
+function bar() {
+    var a = [1,2,3,4,5,6,7,8,9,10,11,12];
+    for (let i20 = 0; i20 < 100; i20++) {
+        foo(a);
+    }
+}
+try {
+    bar();
+} catch(e28) {
+}
+
+FuzzIL program written to corpus/regress-379770.fzil

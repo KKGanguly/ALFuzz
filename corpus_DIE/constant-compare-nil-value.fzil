@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- CallFunction v0, []
+    v4 <- LoadFloat '0.5'
+    v5 <- BinaryOperation v3, '+', v4
+    v6 <- LoadNull
+    v7 <- Compare v5, '==', v6
+    BeginIf v7
+        v8 <- LoadString 'null'
+        Return v8
+    EndIf
+    v9 <- LoadString 'non-null'
+    Return v9
+EndPlainFunction
+v10 <- LoadString 'non-null'
+v11 <- CallFunction v2, []
+v12 <- LoadString 'non-null'
+v13 <- CallFunction v2, []
+v14 <- LoadString 'non-null'
+v15 <- CallFunction v2, []
+
+
+function inlined() {
+    return 1;
+}
+function foo() {
+    if ((inlined() + 0.5) == null) {
+        return "null";
+    }
+    return "non-null";
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/constant-compare-nil-value.fzil

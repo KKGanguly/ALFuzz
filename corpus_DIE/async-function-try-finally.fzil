@@ -1,0 +1,486 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- LoadUndefined
+    v5 <- CreateNamedVariable 'actual', 'var', v4
+    v6 <- LoadBoolean 'false'
+    v7 <- CreateNamedVariable 'hadValue', 'var', v6
+    v8 <- LoadBoolean 'false'
+    v9 <- CreateNamedVariable 'hadError', 'var', v8
+    v10 <- CallFunction v1, []
+    v11 <- CreateNamedVariable 'promise', 'var', v10
+    v12 <- TypeOf v11
+    v13 <- LoadString 'object'
+    v14 <- Compare v12, '!==', v13
+    v15 <- GetProperty v11, 'then'
+    v16 <- TypeOf v15
+    v17 <- LoadString 'function'
+    v18 <- Compare v16, '!==', v17
+    v19 <- BinaryOperation v14, '||', v18
+    BeginIf v19
+        v20 <- CreateNamedVariable 'MjsUnitAssertionError', 'none'
+        v21 <- LoadString 'Expected '
+        v22 <- CallMethod v1, 'toString', []
+        v23 <- BinaryOperation v21, '+', v22
+        v24 <- LoadString ' to return a Promise, but it returned '
+        v25 <- BinaryOperation v23, '+', v24
+        v26 <- CreateNamedVariable 'PrettyPrint', 'none'
+        v27 <- CallFunction v26, [v11]
+        v28 <- BinaryOperation v25, '+', v27
+        v29 <- Construct v20, [v28]
+        ThrowException v29
+    EndIf
+    v30 <- BeginPlainFunction -> v31
+        v32 <- LoadBoolean 'true'
+        Reassign v7, v32
+        Reassign v5, v31
+    EndPlainFunction
+    v33 <- BeginPlainFunction -> v34
+        v35 <- LoadBoolean 'true'
+        Reassign v9, v35
+        Reassign v5, v34
+    EndPlainFunction
+    v36 <- CallMethod v11, 'then', [v30, v33]
+    v37 <- BinaryOperation v7, '||', v9
+    v38 <- UnaryOperation '!', v9
+    BeginIf v38
+        v39 <- CreateNamedVariable 'MjsUnitAssertionError', 'none'
+        v40 <- LoadString 'Expected '
+        v41 <- BinaryOperation v40, '+', v1
+        v42 <- LoadString '() to throw '
+        v43 <- BinaryOperation v41, '+', v42
+        v44 <- GetProperty v2, 'name'
+        v45 <- BinaryOperation v43, '+', v44
+        v46 <- LoadString ', but did not throw.'
+        v47 <- BinaryOperation v45, '+', v46
+        v48 <- Construct v39, [v47]
+        ThrowException v48
+    EndIf
+    v49 <- TestInstanceOf v5, v2
+    v50 <- UnaryOperation '!', v49
+    BeginIf v50
+        v51 <- CreateNamedVariable 'MjsUnitAssertionError', 'none'
+        v52 <- LoadString 'Expected '
+        v53 <- BinaryOperation v52, '+', v1
+        v54 <- LoadString '() to throw '
+        v55 <- BinaryOperation v53, '+', v54
+        v56 <- GetProperty v2, 'name'
+        v57 <- BinaryOperation v55, '+', v56
+        v58 <- LoadString ', but threw ''
+        v59 <- BinaryOperation v57, '+', v58
+        v60 <- BinaryOperation v59, '+', v5
+        v61 <- LoadString '''
+        v62 <- BinaryOperation v60, '+', v61
+        v63 <- Construct v51, [v62]
+        ThrowException v63
+    EndIf
+    v64 <- LoadInteger '0'
+    v65 <- Void_ v64
+    v66 <- Compare v3, '!==', v65
+    v67 <- GetProperty v5, 'message'
+    v68 <- Compare v67, '!==', v3
+    v69 <- BinaryOperation v66, '&&', v68
+    BeginIf v69
+        v70 <- CreateNamedVariable 'MjsUnitAssertionError', 'none'
+        v71 <- LoadString 'Expected '
+        v72 <- BinaryOperation v71, '+', v1
+        v73 <- LoadString '() to throw ''
+        v74 <- BinaryOperation v72, '+', v73
+        v75 <- BinaryOperation v74, '+', v3
+        v76 <- LoadString '', but threw ''
+        v77 <- BinaryOperation v75, '+', v76
+        v78 <- GetProperty v5, 'message'
+        v79 <- BinaryOperation v77, '+', v78
+        v80 <- LoadString '''
+        v81 <- BinaryOperation v79, '+', v80
+        v82 <- Construct v70, [v81]
+        ThrowException v82
+    EndIf
+EndPlainFunction
+v83 <- BeginPlainFunction -> v84, v85, v86
+    v87 <- LoadUndefined
+    v88 <- CreateNamedVariable 'actual', 'var', v87
+    v89 <- LoadBoolean 'false'
+    v90 <- CreateNamedVariable 'hadValue', 'var', v89
+    v91 <- LoadBoolean 'false'
+    v92 <- CreateNamedVariable 'hadError', 'var', v91
+    v93 <- CallFunction v85, []
+    v94 <- CreateNamedVariable 'promise', 'var', v93
+    v95 <- TypeOf v94
+    v96 <- LoadString 'object'
+    v97 <- Compare v95, '!==', v96
+    v98 <- GetProperty v94, 'then'
+    v99 <- TypeOf v98
+    v100 <- LoadString 'function'
+    v101 <- Compare v99, '!==', v100
+    v102 <- BinaryOperation v97, '||', v101
+    BeginIf v102
+        v103 <- CreateNamedVariable 'MjsUnitAssertionError', 'none'
+        v104 <- LoadString 'Expected '
+        v105 <- CallMethod v85, 'toString', []
+        v106 <- BinaryOperation v104, '+', v105
+        v107 <- LoadString ' to return a Promise, but it returned '
+        v108 <- BinaryOperation v106, '+', v107
+        v109 <- CreateNamedVariable 'PrettyPrint', 'none'
+        v110 <- CallFunction v109, [v94]
+        v111 <- BinaryOperation v108, '+', v110
+        v112 <- Construct v103, [v111]
+        ThrowException v112
+    EndIf
+    v113 <- BeginPlainFunction -> v114
+        v115 <- LoadBoolean 'true'
+        Reassign v90, v115
+        Reassign v88, v114
+    EndPlainFunction
+    v116 <- BeginPlainFunction -> v117
+        v118 <- LoadBoolean 'true'
+        Reassign v92, v118
+        Reassign v88, v117
+    EndPlainFunction
+    v119 <- CallMethod v94, 'then', [v113, v116]
+    v120 <- BinaryOperation v90, '||', v92
+    BeginIf v92
+        ThrowException v88
+    EndIf
+    v121 <- LoadString 'Expected ''
+    v122 <- CallMethod v85, 'toString', []
+    v123 <- BinaryOperation v121, '+', v122
+    v124 <- LoadString '' to produce a value'
+    v125 <- BinaryOperation v123, '+', v124
+EndPlainFunction
+v126 <- BeginPlainFunction -> v127
+    v128 <- CreateNamedVariable 'Promise', 'none'
+    v129 <- BeginPlainFunction -> v130
+        v131 <- CallFunction v130, [v127]
+    EndPlainFunction
+    v132 <- Construct v128, [v129]
+    Return v132
+EndPlainFunction
+v133 <- BeginPlainFunction -> v134
+    v135 <- CreateNamedVariable 'Promise', 'none'
+    v136 <- BeginPlainFunction -> v137, v138
+        v139 <- CallFunction v138, [v134]
+    EndPlainFunction
+    v140 <- Construct v135, [v136]
+    Return v140
+EndPlainFunction
+v141 <- CreateNamedVariable 'Error', 'none'
+v142 <- BeginClassDefinition v141
+EndClassDefinition
+v143 <- BeginAsyncFunction -> 
+EndAsyncFunction
+v144 <- GetProperty v143, 'constructor'
+v145 <- CreateNamedVariable 'AsyncFunction', 'var', v144
+v146 <- LoadString 'finally-return (func-expr)'
+v147 <- BeginAsyncFunction -> 
+    BeginTry
+        v148 <- LoadString 'early-return (func-expr)'
+        Return v148
+    BeginFinally
+        v149 <- LoadString 'finally-return (func-expr)'
+        Return v149
+    EndTryCatch
+EndAsyncFunction
+v150 <- CallFunction v147, []
+v151 <- LoadString 'finally-return (arrow)'
+v152 <- BeginAsyncArrowFunction -> 
+    BeginTry
+        v153 <- LoadString 'early-return (arrow)'
+        Return v153
+    BeginFinally
+        v154 <- LoadString 'finally-return (arrow)'
+        Return v154
+    EndTryCatch
+EndAsyncArrowFunction
+v155 <- CallFunction v152, []
+v156 <- LoadString 'finally-return (eval)'
+v157 <- CreateTemplateString ['\n  try {\n    return "early-return (eval)";\n  } finally {\n    return "finally-return (eval)";\n  }\n'], []
+v158 <- CallFunction v145, [v157]
+v159 <- LoadString 'promise-finally-return (func-expr)'
+v160 <- BeginAsyncFunction -> 
+    BeginTry
+        v161 <- CreateNamedVariable 'Promise', 'none'
+        v162 <- BeginPlainFunction -> 
+        EndPlainFunction
+        v163 <- Construct v161, [v162]
+        Return v163
+    BeginFinally
+        v164 <- LoadString 'promise-finally-return (func-expr)'
+        Return v164
+    EndTryCatch
+EndAsyncFunction
+v165 <- CallFunction v160, []
+v166 <- LoadString 'promise-finally-return (arrow)'
+v167 <- BeginAsyncArrowFunction -> 
+    BeginTry
+        v168 <- CreateNamedVariable 'Promise', 'none'
+        v169 <- BeginPlainFunction -> 
+        EndPlainFunction
+        v170 <- Construct v168, [v169]
+        Return v170
+    BeginFinally
+        v171 <- LoadString 'promise-finally-return (arrow)'
+        Return v171
+    EndTryCatch
+EndAsyncArrowFunction
+v172 <- CallFunction v167, []
+v173 <- LoadString 'promise-finally-return (eval)'
+v174 <- CreateTemplateString ['\n  try {\n    return new Promise(function() {});\n  } finally {\n    return "promise-finally-return (eval)";\n  }\n'], []
+v175 <- CallFunction v145, [v174]
+v176 <- LoadString 'await-finally-return (func-expr)'
+v177 <- BeginAsyncFunction -> 
+    BeginTry
+        v178 <- LoadString 'early-return (func-expr)'
+        Return v178
+    BeginFinally
+        v179 <- LoadString 'await-finally-return (func-expr)'
+        v180 <- CallFunction v126, [v179]
+        v181 <- Await v180
+        Return v181
+    EndTryCatch
+EndAsyncFunction
+v182 <- CallFunction v177, []
+v183 <- LoadString 'await-finally-return (arrow)'
+v184 <- BeginAsyncArrowFunction -> 
+    BeginTry
+        v185 <- LoadString 'early-return (arrow)'
+        Return v185
+    BeginFinally
+        v186 <- LoadString 'await-finally-return (arrow)'
+        v187 <- CallFunction v126, [v186]
+        v188 <- Await v187
+        Return v188
+    EndTryCatch
+EndAsyncArrowFunction
+v189 <- CallFunction v184, []
+v190 <- LoadString 'await-finally-return (eval)'
+v191 <- CreateTemplateString ['\n  try {\n    return "early-return (eval)";\n  } finally {\n    return await resolveLater("await-finally-return (eval)");\n  }\n'], []
+v192 <- CallFunction v145, [v191]
+v193 <- BeginAsyncFunction -> 
+    BeginTry
+        v194 <- LoadString 'early-return (func-expr)'
+        Return v194
+    BeginFinally
+        v195 <- LoadString 'finally-throw (func-expr)'
+        v196 <- Construct v142, [v195]
+        ThrowException v196
+    EndTryCatch
+EndAsyncFunction
+v197 <- CallFunction v193, []
+v198 <- LoadString 'finally-throw (func-expr)'
+v199 <- BeginAsyncArrowFunction -> 
+    BeginTry
+        v200 <- LoadString 'early-return (arrow)'
+        Return v200
+    BeginFinally
+        v201 <- LoadString 'finally-throw (arrow)'
+        v202 <- Construct v142, [v201]
+        ThrowException v202
+    EndTryCatch
+EndAsyncArrowFunction
+v203 <- CallFunction v199, []
+v204 <- LoadString 'finally-throw (arrow)'
+v205 <- CreateTemplateString ['\n  try {\n    return "early-return (eval)";\n  } finally {\n    throw new MyError("finally-throw (eval)");\n  }\n'], []
+v206 <- CallFunction v145, [v205]
+v207 <- LoadString 'finally-throw (eval)'
+v208 <- BeginAsyncFunction -> 
+    BeginTry
+        v209 <- LoadString 'early-return (func-expr)'
+        Return v209
+    BeginFinally
+        v210 <- LoadString 'await-finally-throw (func-expr)'
+        v211 <- Construct v142, [v210]
+        v212 <- CallFunction v133, [v211]
+        v213 <- Await v212
+    EndTryCatch
+EndAsyncFunction
+v214 <- CallFunction v208, []
+v215 <- LoadString 'await-finally-throw (func-expr)'
+v216 <- BeginAsyncArrowFunction -> 
+    BeginTry
+        v217 <- LoadString 'early-return (arrow)'
+        Return v217
+    BeginFinally
+        v218 <- LoadString 'await-finally-throw (arrow)'
+        v219 <- Construct v142, [v218]
+        v220 <- CallFunction v133, [v219]
+        v221 <- Await v220
+    EndTryCatch
+EndAsyncArrowFunction
+v222 <- CallFunction v216, []
+v223 <- LoadString 'await-finally-throw (arrow)'
+v224 <- CreateTemplateString ['\n  try {\n    return "early-return (eval)";\n  } finally {\n    await rejectLater(new MyError("await-finally-throw (eval)"));\n  }\n'], []
+v225 <- CallFunction v145, [v224]
+v226 <- LoadString 'await-finally-throw (eval)'
+
+
+function assertThrowsAsync(a1, a2, a3) {
+    var actual;
+    var hadValue = false;
+    var hadError = false;
+    var promise = a1();
+    if ((typeof promise !== "object") || (typeof promise.then !== "function")) {
+        const v29 = new MjsUnitAssertionError((("Expected " + a1.toString()) + " to return a Promise, but it returned ") + PrettyPrint(promise));
+        throw v29;
+    }
+    function f30(a31) {
+        hadValue = true;
+        actual = a31;
+    }
+    function f33(a34) {
+        hadError = true;
+        actual = a34;
+    }
+    promise.then(f30, f33);
+    hadValue || hadError;
+    if (!hadError) {
+        const v48 = new MjsUnitAssertionError(((("Expected " + a1) + "() to throw ") + a2.name) + ", but did not throw.");
+        throw v48;
+    }
+    if (!(actual instanceof a2)) {
+        const v63 = new MjsUnitAssertionError(((((("Expected " + a1) + "() to throw ") + a2.name) + ", but threw '") + actual) + "'");
+        throw v63;
+    }
+    if ((a3 !== void 0) && (actual.message !== a3)) {
+        const v82 = new MjsUnitAssertionError(((((("Expected " + a1) + "() to throw '") + a3) + "', but threw '") + actual.message) + "'");
+        throw v82;
+    }
+}
+function assertEqualsAsync(a84, a85, a86) {
+    var actual;
+    var hadValue = false;
+    var hadError = false;
+    var promise = a85();
+    if ((typeof promise !== "object") || (typeof promise.then !== "function")) {
+        const v112 = new MjsUnitAssertionError((("Expected " + a85.toString()) + " to return a Promise, but it returned ") + PrettyPrint(promise));
+        throw v112;
+    }
+    function f113(a114) {
+        hadValue = true;
+        actual = a114;
+    }
+    function f116(a117) {
+        hadError = true;
+        actual = a117;
+    }
+    promise.then(f113, f116);
+    hadValue || hadError;
+    if (hadError) {
+        throw actual;
+    }
+    ("Expected '" + a85.toString()) + "' to produce a value";
+}
+function resolveLater(a127) {
+    function f129(a130) {
+        a130(a127);
+    }
+    const v132 = new Promise(f129);
+    return v132;
+}
+function rejectLater(a134) {
+    function f136(a137, a138) {
+        a138(a134);
+    }
+    const v140 = new Promise(f136);
+    return v140;
+}
+class C142 extends Error {
+}
+async function f143() {
+}
+var AsyncFunction = f143.constructor;
+async function f147() {
+    try {
+        return "early-return (func-expr)";
+    } finally {
+        return "finally-return (func-expr)";
+    }
+}
+f147();
+const v152 = async () => {
+    try {
+        return "early-return (arrow)";
+    } finally {
+        return "finally-return (arrow)";
+    }
+};
+v152();
+AsyncFunction(`\n  try {\n    return "early-return (eval)";\n  } finally {\n    return "finally-return (eval)";\n  }\n`);
+async function f160() {
+    try {
+        function f162() {
+        }
+        const v163 = new Promise(f162);
+        return v163;
+    } finally {
+        return "promise-finally-return (func-expr)";
+    }
+}
+f160();
+const v167 = async () => {
+    try {
+        function f169() {
+        }
+        const v170 = new Promise(f169);
+        return v170;
+    } finally {
+        return "promise-finally-return (arrow)";
+    }
+};
+v167();
+AsyncFunction(`\n  try {\n    return new Promise(function() {});\n  } finally {\n    return "promise-finally-return (eval)";\n  }\n`);
+async function f177() {
+    try {
+        return "early-return (func-expr)";
+    } finally {
+        return await resolveLater("await-finally-return (func-expr)");
+    }
+}
+f177();
+const v184 = async () => {
+    try {
+        return "early-return (arrow)";
+    } finally {
+        return await resolveLater("await-finally-return (arrow)");
+    }
+};
+v184();
+AsyncFunction(`\n  try {\n    return "early-return (eval)";\n  } finally {\n    return await resolveLater("await-finally-return (eval)");\n  }\n`);
+async function f193() {
+    try {
+        return "early-return (func-expr)";
+    } finally {
+        const v196 = new C142("finally-throw (func-expr)");
+        throw v196;
+    }
+}
+f193();
+const v199 = async () => {
+    try {
+        return "early-return (arrow)";
+    } finally {
+        const v202 = new C142("finally-throw (arrow)");
+        throw v202;
+    }
+};
+v199();
+AsyncFunction(`\n  try {\n    return "early-return (eval)";\n  } finally {\n    throw new MyError("finally-throw (eval)");\n  }\n`);
+async function f208() {
+    try {
+        return "early-return (func-expr)";
+    } finally {
+        const v211 = new C142("await-finally-throw (func-expr)");
+        await rejectLater(v211);
+    }
+}
+f208();
+const v216 = async () => {
+    try {
+        return "early-return (arrow)";
+    } finally {
+        const v219 = new C142("await-finally-throw (arrow)");
+        await rejectLater(v219);
+    }
+};
+v216();
+AsyncFunction(`\n  try {\n    return "early-return (eval)";\n  } finally {\n    await rejectLater(new MyError("await-finally-throw (eval)"));\n  }\n`);
+
+FuzzIL program written to corpus/async-function-try-finally.fzil

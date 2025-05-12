@@ -1,0 +1,23 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadThis
+SetProperty v2, '__proto__', v1
+v3 <- LoadThis
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'freeze', [v3]
+v6 <- LoadInteger '1'
+v7 <- LoadThis
+SetProperty v7, 'length', v6
+v8 <- LoadString 'this.__proto__ = {}'
+v9 <- GetProperty v0, 'prototype'
+v10 <- LoadThis
+v11 <- GetProperty v10, '__proto__'
+
+
+this.__proto__ = Array.prototype;
+Object.freeze(this);
+this.length = 1;
+Array.prototype;
+this.__proto__;
+
+FuzzIL program written to corpus/regress-crbug-454091.fzil

@@ -1,0 +1,95 @@
+v0 <- BeginPlainFunction -> v1, v2, v3, v4
+    BeginIf v1
+        Return
+    EndIf
+    v5 <- LoadBoolean 'true'
+    v6 <- LoadString ''
+    v7 <- BinaryOperation v6, '+', v3
+    v8 <- TernaryOperation v3, v5, v7
+    v9 <- CreateNamedVariable 'x', 'var', v8
+    v10 <- UnaryOperation '!', v3
+    BeginIf v10
+        v11 <- LoadInteger '1'
+        v12 <- BinaryOperation v2, '+', v11
+        v13 <- LoadInteger '1'
+        v14 <- BinaryOperation v12, '+', v13
+        v15 <- CreateNamedVariable 'dead', 'var', v14
+        v16 <- UnaryOperation '!', v4
+        BeginIf v16
+            Reassign v9, v15
+        EndIf
+        BeginIf v9
+            v17 <- LoadBoolean 'false'
+            Reassign v9, v17
+        EndIf
+        BeginIf v4
+            v18 <- LoadBoolean 'false'
+            Reassign v9, v18
+        EndIf
+    EndIf
+    v19 <- LoadInteger '1'
+    v20 <- BinaryOperation v9, '+', v19
+    Return v20
+EndPlainFunction
+v21 <- LoadBoolean 'false'
+v22 <- LoadInteger '5'
+v23 <- CallFunction v0, [v21, v22]
+v24 <- LoadBoolean 'false'
+v25 <- LoadInteger '6'
+v26 <- CallFunction v0, [v24, v25]
+v27 <- LoadBoolean 'false'
+v28 <- LoadInteger '7'
+v29 <- CallFunction v0, [v27, v28]
+v30 <- LoadBoolean 'false'
+v31 <- LoadInteger '8'
+v32 <- CallFunction v0, [v30, v31]
+v33 <- BeginPlainFunction -> v34, v35, v36
+    v37 <- LoadString 'abc'
+    v38 <- CallFunction v0, [v34, v37, v35, v36]
+    Return v38
+EndPlainFunction
+v39 <- LoadBoolean 'true'
+v40 <- CallFunction v33, [v39]
+v41 <- LoadBoolean 'true'
+v42 <- CallFunction v33, [v41]
+v43 <- LoadBoolean 'true'
+v44 <- CallFunction v33, [v43]
+v45 <- LoadBoolean 'true'
+v46 <- CallFunction v33, [v45]
+v47 <- LoadBoolean 'false'
+v48 <- CallFunction v33, [v47]
+
+
+function f(a1, a2, a3, a4) {
+    if (a1) {
+        return;
+    }
+    var x = a3 ? true : "" + a3;
+    if (!a3) {
+        var dead = (a2 + 1) + 1;
+        if (!a4) {
+            x = dead;
+        }
+        if (x) {
+            x = false;
+        }
+        if (a4) {
+            x = false;
+        }
+    }
+    return x + 1;
+}
+f(false, 5);
+f(false, 6);
+f(false, 7);
+f(false, 8);
+function g(a34, a35, a36) {
+    return f(a34, "abc", a35, a36);
+}
+g(true);
+g(true);
+g(true);
+g(true);
+g(false);
+
+FuzzIL program written to corpus/regress-796041.fzil

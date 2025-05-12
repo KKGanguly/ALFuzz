@@ -1,0 +1,52 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'i', 'var', v1
+    v3 <- LoadString ''
+    v4 <- CreateNamedVariable 'result', 'var', v3
+    v5 <- LoadFloat '5.5'
+    v6 <- CreateNamedVariable 'parseFloat', 'none'
+    v7 <- CallFunction v6, [v5]
+    v8 <- CreateNamedVariable 'value', 'var', v7
+    v9 <- LoadInteger '1025'
+    v10 <- CreateNamedVariable 'Math', 'none'
+    v11 <- CallMethod v10, 'abs', [v9]
+    Reassign v8, v11
+    BeginForLoopInitializer
+        v12 <- LoadInteger '12'
+        Reassign v2, v12
+    BeginForLoopCondition
+        v13 <- UnaryOperation '--', v2
+    BeginForLoopAfterthought v13
+        v14 <- LoadInteger '2'
+        v15 <- BinaryOperation v8, '%', v14
+        v16 <- BinaryOperation v15, '+', v4
+        Reassign v4, v16
+        v17 <- LoadInteger '1'
+        Update v8, '>>', v17
+    BeginForLoopBody
+    EndForLoop
+    Return v4
+EndPlainFunction
+v18 <- LoadString '10000000001'
+v19 <- CallFunction v0, []
+
+
+function test() {
+    var i;
+    var result = "";
+    var value = parseFloat(5.5);
+    value = Math.abs(1025);
+    for ((() => {
+            i = 12;
+        })();
+        --i;
+        (() => {
+            result = (value % 2) + result;
+            value >>= 1;
+        })()) {
+    }
+    return result;
+}
+test();
+
+FuzzIL program written to corpus/regress-636.fzil

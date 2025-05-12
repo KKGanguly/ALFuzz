@@ -1,0 +1,22 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- UnaryOperation '+', v1
+    v3 <- CreateNamedVariable 'Math', 'none'
+    v4 <- CallMethod v3, 'sign', [v2]
+    v5 <- LoadInteger '2'
+    v6 <- Compare v4, '<', v5
+    Return v6
+EndPlainFunction
+v7 <- CreateNamedVariable 'NaN', 'none'
+v8 <- CallFunction v0, [v7]
+v9 <- CallFunction v0, [v7]
+v10 <- CallFunction v0, [v7]
+
+
+function f(a1) {
+    return Math.sign(+a1) < 2;
+}
+f(NaN);
+f(NaN);
+f(NaN);
+
+FuzzIL program written to corpus/regress-math-sign-nan-type.fzil

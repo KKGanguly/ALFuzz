@@ -1,0 +1,67 @@
+v0 <- BeginPlainFunction -> v1
+    BeginObjectLiteral
+    v2 <- EndObjectLiteral
+    BeginWith v2
+    EndWith
+    BeginObjectLiteral
+    v3 <- EndObjectLiteral
+    v4 <- CreateNamedVariable 'x', 'none'
+    Reassign v4, v3
+    v5 <- LoadFloat '0.23'
+    v6 <- CreateNamedVariable 'x', 'none'
+    SetProperty v6, 'a', v5
+    v7 <- LoadFloat '0.3'
+    SetProperty v6, 'b', v7
+    Return v6
+EndPlainFunction
+v8 <- CreateArray []
+v9 <- CreateNamedVariable 'all', 'var', v8
+v10 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v11 <- LoadInteger '0'
+    BeginForLoopCondition -> v12
+        v13 <- LoadInteger '100'
+        v14 <- Compare v12, '<', v13
+    BeginForLoopAfterthought v14 -> v15
+        v16 <- UnaryOperation v15, '++'
+    BeginForLoopBody -> v17
+        v18 <- CallFunction v0, [v17]
+        v19 <- CreateNamedVariable 'z', 'var', v18
+        v20 <- LoadFloat '0.1'
+        v21 <- GetProperty v19, 'b'
+        v22 <- BinaryOperation v20, '+', v21
+        SetProperty v19, 'c', v22
+        v23 <- CallMethod v9, 'push', [v19]
+    EndForLoop
+    v24 <- LoadInteger '1'
+    v25 <- CreateNamedVariable 'gc', 'none'
+    v26 <- CallFunction v25, [v24]
+    v27 <- LoadInteger '1'
+    v28 <- CallFunction v25, [v27]
+EndPlainFunction
+v29 <- CallFunction v10, []
+v30 <- CallFunction v10, []
+
+
+function foo(a1) {
+    with ({}) {
+    }
+    x = {};
+    x.a = 0.23;
+    x.b = 0.3;
+    return x;
+}
+var all = [];
+function step() {
+    for (let i12 = 0; i12 < 100; i12++) {
+        var z = foo(i12);
+        z.c = 0.1 + z.b;
+        all.push(z);
+    }
+    gc(1);
+    gc(1);
+}
+step();
+step();
+
+FuzzIL program written to corpus/regress-587004.fzil

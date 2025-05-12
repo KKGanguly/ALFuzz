@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- LoadInteger '23'
+    v2 <- CreateNamedVariable 'a', 'var', v1
+    v3 <- BeginPlainFunction -> 
+        BeginForLoopInitializer
+            v4 <- LoadInteger '0'
+        BeginForLoopCondition -> v5
+            v6 <- LoadInteger '5'
+            v7 <- Compare v5, '<', v6
+        BeginForLoopAfterthought v7 -> v8
+            v9 <- UnaryOperation '++', v8
+        BeginForLoopBody -> v10
+            v11 <- UnaryOperation v2, '--'
+            v12 <- BeginPlainFunction -> 
+                Return v10
+            EndPlainFunction
+        EndForLoop
+        Return v2
+    EndPlainFunction
+    v13 <- LoadInteger '18'
+    v14 <- CallFunction v3, []
+EndPlainFunction
+v15 <- CallFunction v0, []
+
+
+function f0() {
+    'use strict';
+    var a = 23;
+    function f() {
+        for (let i5 = 0; i5 < 5; ++i5) {
+            a--;
+            function g() {
+                return i5;
+            }
+        }
+        return a;
+    }
+    f();
+}
+f0();
+
+FuzzIL program written to corpus/regress-osr-context.fzil

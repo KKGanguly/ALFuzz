@@ -1,0 +1,18 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadThis
+    v3 <- LoadArguments
+    v4 <- CallMethod v0, 'apply', [v2, v3]
+EndPlainFunction
+v5 <- CallFunction v1, []
+
+
+function b() {
+}
+function f() {
+    b.apply(this, arguments);
+}
+f();
+
+FuzzIL program written to corpus/regress-411262.fzil

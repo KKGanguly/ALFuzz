@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginForLoopInitializer
+        v3 <- LoadInteger '10000'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '0'
+        v6 <- Compare v4, '>', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '--'
+    BeginForLoopBody -> v9
+        v10 <- LoadInteger '0'
+        v11 <- LoadArguments
+        SetComputedProperty v11, v9, v10
+    EndForLoop
+EndPlainFunction
+v12 <- LoadFloat '1.5'
+v13 <- LoadFloat '2.5'
+v14 <- CallFunction v0, [v12, v13]
+
+
+function f(a1, a2) {
+    for (let i4 = 10000; i4 > 0; i4--) {
+        arguments[i4] = 0;
+    }
+}
+f(1.5, 2.5);
+
+FuzzIL program written to corpus/regress-dictionary-to-fast-arguments.fzil

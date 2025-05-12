@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '10'
+    v2 <- CreateNamedVariable 'radix', 'var', v1
+    v3 <- LoadInteger '21'
+    v4 <- BinaryOperation v3, '/', v2
+    v5 <- LoadInteger '0'
+    v6 <- BinaryOperation v4, '|', v5
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '2'
+v8 <- CallFunction v0, []
+v9 <- LoadInteger '2'
+v10 <- CallFunction v0, []
+v11 <- LoadInteger '2'
+v12 <- CallFunction v0, []
+
+
+function bar() {
+    var radix = 10;
+    return (21 / radix) | 0;
+}
+bar();
+bar();
+bar();
+
+FuzzIL program written to corpus/regress-3865.fzil

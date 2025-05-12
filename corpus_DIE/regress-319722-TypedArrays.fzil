@@ -1,0 +1,49 @@
+v0 <- LoadInteger '65535'
+v1 <- LoadInteger '1'
+v2 <- BinaryOperation v0, '+', v1
+v3 <- CreateNamedVariable 'maxSize', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- BeginPlainFunction -> 
+        v7 <- Construct v5, [v3]
+    EndPlainFunction
+    v8 <- CallFunction v6, []
+    v9 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v10 <- CreateNamedVariable 'Uint8Array', 'none'
+v11 <- CallFunction v4, [v10]
+v12 <- CreateNamedVariable 'Int8Array', 'none'
+v13 <- CallFunction v4, [v12]
+v14 <- CreateNamedVariable 'Uint16Array', 'none'
+v15 <- CallFunction v4, [v14]
+v16 <- CreateNamedVariable 'Int16Array', 'none'
+v17 <- CallFunction v4, [v16]
+v18 <- CreateNamedVariable 'Uint32Array', 'none'
+v19 <- CallFunction v4, [v18]
+v20 <- CreateNamedVariable 'Int32Array', 'none'
+v21 <- CallFunction v4, [v20]
+v22 <- CreateNamedVariable 'Float32Array', 'none'
+v23 <- CallFunction v4, [v22]
+v24 <- CreateNamedVariable 'Float64Array', 'none'
+v25 <- CallFunction v4, [v24]
+v26 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v27 <- CallFunction v4, [v26]
+
+
+var maxSize = 65535 + 1;
+function TestArray(a5) {
+    function f6() {
+        new a5(maxSize);
+    }
+    f6();
+}
+TestArray(Uint8Array);
+TestArray(Int8Array);
+TestArray(Uint16Array);
+TestArray(Int16Array);
+TestArray(Uint32Array);
+TestArray(Int32Array);
+TestArray(Float32Array);
+TestArray(Float64Array);
+TestArray(Uint8ClampedArray);
+
+FuzzIL program written to corpus/regress-319722-TypedArrays.fzil

@@ -1,0 +1,67 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    v4 <- LoadFloat '0.5'
+    v5 <- BinaryOperation v3, '+', v4
+    Return v5
+EndPlainFunction
+v6 <- LoadUndefined
+v7 <- LoadInteger '0'
+v8 <- LoadFloat '2.5'
+v9 <- CreateArray [v6, v7, v8]
+v10 <- CreateNamedVariable 'arr', 'var', v9
+v11 <- LoadFloat '0.5'
+v12 <- LoadInteger '1'
+v13 <- CallFunction v0, [v10, v12]
+v14 <- LoadFloat '0.5'
+v15 <- LoadInteger '1'
+v16 <- CallFunction v0, [v10, v15]
+v17 <- LoadFloat '0.5'
+v18 <- LoadInteger '1'
+v19 <- CallFunction v0, [v10, v18]
+v20 <- CreateNamedVariable 'Array', 'none'
+v21 <- GetProperty v20, 'prototype'
+v22 <- GetProperty v21, 'push'
+v23 <- CreateNamedVariable 'push', 'var', v22
+v24 <- GetProperty v20, 'prototype'
+v25 <- CreateNamedVariable 'array_prototype', 'var', v24
+v26 <- BeginPlainFunction -> v27
+    v28 <- LoadInteger '1'
+    v29 <- CallMethod v23, 'call', [v27, v28]
+EndPlainFunction
+v30 <- BeginPlainFunction -> 
+    v31 <- CallFunction v26, [v25]
+EndPlainFunction
+v32 <- CreateArray []
+v33 <- CallFunction v26, [v32]
+v34 <- CreateArray []
+v35 <- CallFunction v26, [v34]
+v36 <- CreateArray []
+v37 <- CallFunction v26, [v36]
+v38 <- CallFunction v30, []
+v39 <- LoadFloat '1.5'
+v40 <- LoadInteger '0'
+v41 <- CallFunction v0, [v10, v40]
+
+
+function f1(a1, a2) {
+    return a1[a2] + 0.5;
+}
+var arr = [,0,2.5];
+f1(arr, 1);
+f1(arr, 1);
+f1(arr, 1);
+var push = Array.prototype.push;
+var array_prototype = Array.prototype;
+function optopush(a27) {
+    push.call(a27, 1);
+}
+function foo() {
+    optopush(array_prototype);
+}
+optopush([]);
+optopush([]);
+optopush([]);
+foo();
+f1(arr, 0);
+
+FuzzIL program written to corpus/elide-double-hole-check-10.fzil

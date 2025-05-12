@@ -1,0 +1,15 @@
+v0 <- CreateNamedVariable 'String', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- CreateNamedVariable 'Symbol', 'none'
+v3 <- GetProperty v2, 'iterator'
+v4 <- DeleteComputedProperty v1, v3
+v5 <- LoadString 'anything'
+v6 <- CreateNamedVariable 'Int8Array', 'none'
+v7 <- CallMethod v6, 'from', [v5]
+
+
+const t0 = String.prototype;
+delete t0[Symbol.iterator];
+Int8Array.from("anything");
+
+FuzzIL program written to corpus/regress-816289.fzil

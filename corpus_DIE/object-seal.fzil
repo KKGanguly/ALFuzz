@@ -1,0 +1,1047 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadUndefined
+v2 <- LoadNull
+v3 <- LoadInteger '1'
+v4 <- LoadInteger '1'
+v5 <- UnaryOperation '-', v4
+v6 <- LoadInteger '0'
+v7 <- LoadFloat '42.43'
+v8 <- LoadString 'test'
+v9 <- CreateNamedVariable 'Symbol', 'none'
+v10 <- CallFunction v9, [v8]
+v11 <- Construct v0, [v1, v2, v3, v5, v6, v7, v10]
+v12 <- CreateNamedVariable 'non_objects', 'var', v11
+BeginForInLoop v12 -> v13
+    v14 <- GetComputedProperty v12, v13
+    v15 <- GetComputedProperty v12, v13
+    v16 <- CreateNamedVariable 'Object', 'none'
+    v17 <- CallMethod v16, 'seal', [v15]
+EndForInLoop
+BeginForInLoop v12 -> v18
+    v19 <- GetComputedProperty v12, v18
+    v20 <- CreateNamedVariable 'Object', 'none'
+    v21 <- CallMethod v20, 'isSealed', [v19]
+EndForInLoop
+v22 <- LoadInteger '42'
+v23 <- LoadString 'foobar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v22
+    ObjectLiteralAddProperty `z`, v23
+v24 <- EndObjectLiteral
+v25 <- CreateNamedVariable 'obj', 'var', v24
+v26 <- LoadString 'x'
+v27 <- CreateNamedVariable 'Object', 'none'
+v28 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v26]
+v29 <- CreateNamedVariable 'desc', 'var', v28
+v30 <- GetProperty v29, 'writable'
+v31 <- GetProperty v29, 'configurable'
+v32 <- LoadInteger '42'
+v33 <- GetProperty v29, 'value'
+v34 <- LoadString 'z'
+v35 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v34]
+Reassign v29, v35
+v36 <- GetProperty v29, 'writable'
+v37 <- GetProperty v29, 'configurable'
+v38 <- LoadString 'foobar'
+v39 <- GetProperty v29, 'value'
+v40 <- CallMethod v27, 'isExtensible', [v25]
+v41 <- CallMethod v27, 'isSealed', [v25]
+v42 <- CallMethod v27, 'seal', [v25]
+v43 <- CallMethod v27, 'isExtensible', [v25]
+v44 <- CallMethod v27, 'isSealed', [v25]
+v45 <- CallMethod v27, 'isFrozen', [v25]
+v46 <- LoadInteger '42'
+SetProperty v25, 'foo', v46
+v47 <- GetProperty v25, 'foo'
+v48 <- LoadUndefined
+v49 <- LoadString 'x'
+v50 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v49]
+Reassign v29, v50
+v51 <- GetProperty v29, 'writable'
+v52 <- GetProperty v29, 'configurable'
+v53 <- LoadInteger '42'
+v54 <- GetProperty v29, 'value'
+v55 <- LoadString 'z'
+v56 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v55]
+Reassign v29, v56
+v57 <- GetProperty v29, 'writable'
+v58 <- GetProperty v29, 'configurable'
+v59 <- LoadString 'foobar'
+v60 <- GetProperty v29, 'value'
+v61 <- LoadString '43'
+SetProperty v25, 'x', v61
+v62 <- LoadString '43'
+v63 <- GetProperty v25, 'x'
+BeginObjectLiteral
+v64 <- EndObjectLiteral
+v65 <- CreateNamedVariable 'obj2', 'var', v64
+v66 <- BeginPlainFunction -> 
+    v67 <- LoadInteger '43'
+    Return v67
+EndPlainFunction
+v68 <- BeginPlainFunction -> 
+EndPlainFunction
+v69 <- LoadString 'x'
+v70 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v66
+    ObjectLiteralAddProperty `set`, v68
+    ObjectLiteralAddProperty `configurable`, v70
+v71 <- EndObjectLiteral
+v72 <- CallMethod v27, 'defineProperty', [v65, v69, v71]
+v73 <- LoadString 'x'
+v74 <- CallMethod v27, 'getOwnPropertyDescriptor', [v65, v73]
+Reassign v29, v74
+v75 <- GetProperty v29, 'configurable'
+v76 <- LoadUndefined
+v77 <- GetProperty v29, 'value'
+v78 <- CallFunction v68, []
+v79 <- GetProperty v29, 'set'
+v80 <- CallFunction v66, []
+v81 <- GetProperty v29, 'get'
+v82 <- CallMethod v27, 'isExtensible', [v65]
+v83 <- CallMethod v27, 'isSealed', [v65]
+v84 <- CallMethod v27, 'seal', [v65]
+v85 <- CallMethod v27, 'isFrozen', [v65]
+v86 <- CallMethod v27, 'isExtensible', [v65]
+v87 <- CallMethod v27, 'isSealed', [v65]
+v88 <- LoadString 'x'
+v89 <- CallMethod v27, 'getOwnPropertyDescriptor', [v65, v88]
+Reassign v29, v89
+v90 <- GetProperty v29, 'configurable'
+v91 <- LoadUndefined
+v92 <- GetProperty v29, 'value'
+v93 <- CallFunction v68, []
+v94 <- GetProperty v29, 'set'
+v95 <- CallFunction v66, []
+v96 <- GetProperty v29, 'get'
+v97 <- LoadInteger '42'
+SetProperty v65, 'foo', v97
+v98 <- GetProperty v65, 'foo'
+v99 <- LoadUndefined
+v100 <- LoadInteger '42'
+v101 <- LoadInteger '43'
+v102 <- Construct v0, [v100, v101]
+v103 <- CreateNamedVariable 'arr', 'var', v102
+v104 <- LoadString '0'
+v105 <- CallMethod v27, 'getOwnPropertyDescriptor', [v103, v104]
+Reassign v29, v105
+v106 <- GetProperty v29, 'configurable'
+v107 <- GetProperty v29, 'writable'
+v108 <- LoadInteger '42'
+v109 <- GetProperty v29, 'value'
+v110 <- LoadString '1'
+v111 <- CallMethod v27, 'getOwnPropertyDescriptor', [v103, v110]
+Reassign v29, v111
+v112 <- GetProperty v29, 'configurable'
+v113 <- GetProperty v29, 'writable'
+v114 <- LoadInteger '43'
+v115 <- GetProperty v29, 'value'
+v116 <- CallMethod v27, 'isExtensible', [v103]
+v117 <- CallMethod v27, 'isSealed', [v103]
+v118 <- CallMethod v27, 'seal', [v103]
+v119 <- CallMethod v27, 'isSealed', [v103]
+v120 <- CallMethod v27, 'isExtensible', [v103]
+v121 <- CallMethod v27, 'isFrozen', [v103]
+v122 <- LoadString '0'
+v123 <- CallMethod v27, 'getOwnPropertyDescriptor', [v103, v122]
+Reassign v29, v123
+v124 <- GetProperty v29, 'configurable'
+v125 <- GetProperty v29, 'writable'
+v126 <- LoadInteger '42'
+v127 <- GetProperty v29, 'value'
+v128 <- LoadString '1'
+v129 <- CallMethod v27, 'getOwnPropertyDescriptor', [v103, v128]
+Reassign v29, v129
+v130 <- GetProperty v29, 'configurable'
+v131 <- GetProperty v29, 'writable'
+v132 <- LoadInteger '43'
+v133 <- GetProperty v29, 'value'
+v134 <- LoadString 'foo'
+SetElement v103, '0', v134
+v135 <- LoadString 'foo'
+v136 <- GetElement v103, '0'
+v137 <- LoadInteger '42'
+v138 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v137
+    ObjectLiteralAddProperty `y`, v138
+v139 <- EndObjectLiteral
+v140 <- CreateNamedVariable 'obj3', 'var', v139
+v141 <- CallMethod v27, 'isFrozen', [v140]
+v142 <- LoadString 'x'
+v143 <- LoadBoolean 'false'
+v144 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v143
+    ObjectLiteralAddProperty `writable`, v144
+v145 <- EndObjectLiteral
+v146 <- CallMethod v27, 'defineProperty', [v140, v142, v145]
+v147 <- LoadString 'y'
+v148 <- LoadBoolean 'false'
+v149 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v148
+    ObjectLiteralAddProperty `writable`, v149
+v150 <- EndObjectLiteral
+v151 <- CallMethod v27, 'defineProperty', [v140, v147, v150]
+v152 <- CallMethod v27, 'preventExtensions', [v140]
+v153 <- CallMethod v27, 'isSealed', [v140]
+BeginObjectLiteral
+v154 <- EndObjectLiteral
+v155 <- CreateNamedVariable 'obj4', 'var', v154
+v156 <- LoadString 'x'
+v157 <- LoadBoolean 'true'
+v158 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v157
+    ObjectLiteralAddProperty `writable`, v158
+v159 <- EndObjectLiteral
+v160 <- CallMethod v27, 'defineProperty', [v155, v156, v159]
+v161 <- LoadString 'y'
+v162 <- LoadBoolean 'false'
+v163 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v162
+    ObjectLiteralAddProperty `writable`, v163
+v164 <- EndObjectLiteral
+v165 <- CallMethod v27, 'defineProperty', [v155, v161, v164]
+v166 <- CallMethod v27, 'preventExtensions', [v155]
+v167 <- CallMethod v27, 'isSealed', [v155]
+BeginObjectLiteral
+v168 <- EndObjectLiteral
+v169 <- CreateNamedVariable 'obj4', 'var', v168
+v170 <- CallMethod v27, 'seal', [v169]
+v171 <- Compare v169, '===', v170
+v172 <- LoadInteger '1'
+v173 <- LoadInteger '2'
+v174 <- LoadInteger '3'
+v175 <- CreateArray [v172, v173, v174]
+Reassign v25, v175
+v176 <- LoadInteger '4'
+v177 <- LoadInteger '5'
+v178 <- LoadInteger '6'
+v179 <- CreateArray [v176, v177, v178]
+v180 <- CreateNamedVariable 'objControl', 'var', v179
+v181 <- BeginPlainFunction -> v182
+    v183 <- LoadInteger '10'
+    v184 <- CallMethod v182, 'push', [v183]
+    Return v182
+EndPlainFunction
+v185 <- CreateNamedVariable 'push_call', 'var', v181
+v186 <- BeginPlainFunction -> v187
+    v188 <- CallMethod v187, 'pop', []
+    Return v188
+EndPlainFunction
+v189 <- CreateNamedVariable 'pop_call', 'var', v186
+BeginForLoopInitializer
+    v190 <- LoadInteger '0'
+BeginForLoopCondition -> v191
+    v192 <- LoadInteger '3'
+    v193 <- Compare v191, '<', v192
+BeginForLoopAfterthought v193 -> v194
+    v195 <- UnaryOperation v194, '++'
+BeginForLoopBody -> v196
+    v197 <- CallFunction v185, [v25]
+    v198 <- CallFunction v189, [v25]
+EndForLoop
+v199 <- CallMethod v27, 'seal', [v25]
+v200 <- BeginPlainFunction -> 
+    v201 <- CallFunction v185, [v25]
+EndPlainFunction
+v202 <- CallFunction v200, []
+v203 <- CreateNamedVariable 'TypeError', 'none'
+v204 <- BeginPlainFunction -> 
+    v205 <- CallFunction v189, [v25]
+EndPlainFunction
+v206 <- CallFunction v204, []
+v207 <- BeginPlainFunction -> 
+    v208 <- CallFunction v185, [v180]
+EndPlainFunction
+v209 <- CallFunction v207, []
+v210 <- BeginPlainFunction -> 
+    v211 <- CallFunction v189, [v180]
+EndPlainFunction
+v212 <- CallFunction v210, []
+v213 <- BeginPlainFunction -> 
+    v214 <- CallMethod v25, 'push', []
+EndPlainFunction
+v215 <- CallFunction v213, []
+v216 <- BeginPlainFunction -> 
+    v217 <- LoadInteger '3'
+    v218 <- CallMethod v25, 'push', [v217]
+EndPlainFunction
+v219 <- CallFunction v216, []
+v220 <- BeginPlainFunction -> 
+    v221 <- CallMethod v25, 'pop', []
+EndPlainFunction
+v222 <- CallFunction v220, []
+v223 <- BeginPlainFunction -> 
+    v224 <- LoadInteger '3'
+    v225 <- CallMethod v25, 'shift', [v224]
+EndPlainFunction
+v226 <- CallFunction v223, []
+v227 <- BeginPlainFunction -> 
+    v228 <- CallMethod v25, 'unshift', []
+EndPlainFunction
+v229 <- CallFunction v227, []
+v230 <- BeginPlainFunction -> 
+    v231 <- LoadInteger '1'
+    v232 <- CallMethod v25, 'unshift', [v231]
+EndPlainFunction
+v233 <- CallFunction v230, []
+v234 <- BeginPlainFunction -> 
+    v235 <- LoadInteger '0'
+    v236 <- LoadInteger '0'
+    v237 <- LoadInteger '100'
+    v238 <- LoadInteger '101'
+    v239 <- LoadInteger '102'
+    v240 <- CallMethod v25, 'splice', [v235, v236, v237, v238, v239]
+EndPlainFunction
+v241 <- CallFunction v234, []
+v242 <- BeginPlainFunction -> 
+    v243 <- LoadInteger '0'
+    v244 <- LoadInteger '0'
+    v245 <- CallMethod v25, 'splice', [v243, v244]
+EndPlainFunction
+v246 <- CallFunction v242, []
+v247 <- BeginPlainFunction -> 
+    v248 <- LoadInteger '3'
+    v249 <- CallMethod v180, 'push', [v248]
+EndPlainFunction
+v250 <- CallFunction v247, []
+v251 <- BeginPlainFunction -> 
+    v252 <- CallMethod v180, 'pop', []
+EndPlainFunction
+v253 <- CallFunction v251, []
+v254 <- BeginPlainFunction -> 
+    v255 <- LoadInteger '3'
+    v256 <- CallMethod v180, 'shift', [v255]
+EndPlainFunction
+v257 <- CallFunction v254, []
+v258 <- BeginPlainFunction -> 
+    v259 <- CallMethod v180, 'unshift', []
+EndPlainFunction
+v260 <- CallFunction v258, []
+v261 <- BeginPlainFunction -> 
+    v262 <- LoadInteger '0'
+    v263 <- LoadInteger '0'
+    v264 <- LoadInteger '100'
+    v265 <- LoadInteger '101'
+    v266 <- LoadInteger '102'
+    v267 <- CallMethod v180, 'splice', [v262, v263, v264, v265, v266]
+EndPlainFunction
+v268 <- CallFunction v261, []
+v269 <- LoadInteger '1'
+v270 <- LoadInteger '2'
+v271 <- LoadInteger '3'
+v272 <- CreateArray [v269, v270, v271]
+Reassign v25, v272
+v273 <- BeginPlainFunction -> v274
+    v275 <- LoadInteger '1000'
+    v276 <- CallMethod v274, 'push', [v275]
+    Return v274
+EndPlainFunction
+Reassign v185, v273
+v277 <- BeginPlainFunction -> v278
+    v279 <- LoadInteger '1000'
+    v280 <- CallMethod v278, 'shift', [v279]
+    Return v278
+EndPlainFunction
+v281 <- CreateNamedVariable 'shift_call', 'var', v277
+BeginForLoopInitializer
+    v282 <- LoadInteger '0'
+BeginForLoopCondition -> v283
+    v284 <- LoadInteger '3'
+    v285 <- Compare v283, '<', v284
+BeginForLoopAfterthought v285 -> v286
+    v287 <- UnaryOperation v286, '++'
+BeginForLoopBody -> v288
+    v289 <- CallFunction v185, [v25]
+    v290 <- CallFunction v281, [v25]
+EndForLoop
+v291 <- CallFunction v185, [v25]
+v292 <- CallFunction v281, [v25]
+v293 <- CallMethod v27, 'seal', [v25]
+v294 <- BeginPlainFunction -> 
+    v295 <- CallFunction v185, [v25]
+EndPlainFunction
+v296 <- CallFunction v294, []
+v297 <- BeginPlainFunction -> 
+    v298 <- CallFunction v281, [v25]
+EndPlainFunction
+v299 <- CallFunction v297, []
+v300 <- BeginPlainFunction -> 
+    v301 <- CallFunction v185, [v180]
+EndPlainFunction
+v302 <- CallFunction v300, []
+v303 <- BeginPlainFunction -> 
+    v304 <- CallFunction v281, [v180]
+EndPlainFunction
+v305 <- CallFunction v303, []
+v306 <- LoadInteger '1'
+v307 <- LoadInteger '2'
+v308 <- LoadInteger '3'
+v309 <- CreateArray [v306, v307, v308]
+Reassign v25, v309
+v310 <- CallMethod v27, 'seal', [v25]
+v311 <- BeginPlainFunction -> 
+    v312 <- LoadInteger '0'
+    v313 <- LoadInteger '1'
+    v314 <- LoadInteger '100'
+    v315 <- CallMethod v25, 'splice', [v312, v313, v314]
+EndPlainFunction
+v316 <- CallFunction v311, []
+v317 <- LoadInteger '100'
+v318 <- GetElement v25, '0'
+v319 <- BeginPlainFunction -> 
+    v320 <- LoadInteger '0'
+    v321 <- LoadInteger '2'
+    v322 <- LoadInteger '1'
+    v323 <- LoadInteger '2'
+    v324 <- CallMethod v25, 'splice', [v320, v321, v322, v323]
+EndPlainFunction
+v325 <- CallFunction v319, []
+v326 <- BeginPlainFunction -> 
+    v327 <- LoadInteger '1'
+    v328 <- LoadInteger '2'
+    v329 <- LoadInteger '1'
+    v330 <- LoadInteger '2'
+    v331 <- CallMethod v25, 'splice', [v327, v328, v329, v330]
+EndPlainFunction
+v332 <- CallFunction v326, []
+v333 <- BeginPlainFunction -> 
+    v334 <- LoadInteger '1'
+    v335 <- LoadInteger '2000'
+    v336 <- LoadInteger '1'
+    v337 <- LoadInteger '2'
+    v338 <- CallMethod v25, 'splice', [v334, v335, v336, v337]
+EndPlainFunction
+v339 <- CallFunction v333, []
+v340 <- BeginPlainFunction -> 
+    v341 <- LoadInteger '0'
+    v342 <- LoadInteger '0'
+    v343 <- LoadInteger '1'
+    v344 <- CallMethod v25, 'splice', [v341, v342, v343]
+EndPlainFunction
+v345 <- CallFunction v340, []
+v346 <- BeginPlainFunction -> 
+    v347 <- LoadInteger '1'
+    v348 <- LoadInteger '2000'
+    v349 <- LoadInteger '1'
+    v350 <- LoadInteger '2'
+    v351 <- LoadInteger '3'
+    v352 <- CallMethod v25, 'splice', [v347, v348, v349, v350, v351]
+EndPlainFunction
+v353 <- CallFunction v346, []
+v354 <- LoadInteger '42'
+v355 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v354
+    ObjectLiteralAddProperty `y`, v355
+v356 <- EndObjectLiteral
+Reassign v25, v356
+v357 <- LoadString 'y'
+v358 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v358
+v359 <- EndObjectLiteral
+v360 <- CallMethod v27, 'defineProperty', [v25, v357, v359]
+v361 <- CallMethod v27, 'seal', [v25]
+v362 <- CallMethod v27, 'isSealed', [v25]
+v363 <- CallMethod v27, 'isFrozen', [v25]
+v364 <- LoadString 'x'
+v365 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v364]
+Reassign v29, v365
+v366 <- GetProperty v29, 'enumerable'
+v367 <- LoadString 'y'
+v368 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v367]
+Reassign v29, v368
+v369 <- GetProperty v29, 'enumerable'
+v370 <- LoadInteger '42'
+v371 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v370
+    ObjectLiteralAddProperty `y`, v371
+v372 <- EndObjectLiteral
+Reassign v25, v372
+v373 <- CallMethod v27, 'seal', [v25]
+v374 <- CallMethod v27, 'isSealed', [v25]
+v375 <- CallMethod v27, 'isFrozen', [v25]
+v376 <- LoadInteger '1'
+v377 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop1`, v376
+    ObjectLiteralAddProperty `prop2`, v377
+v378 <- EndObjectLiteral
+Reassign v25, v378
+v379 <- LoadInteger '3'
+v380 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop1`, v379
+    ObjectLiteralAddProperty `prop2`, v380
+v381 <- EndObjectLiteral
+Reassign v65, v381
+v382 <- CallMethod v27, 'seal', [v25]
+v383 <- CallMethod v27, 'seal', [v65]
+v384 <- CallMethod v27, 'isSealed', [v25]
+v385 <- CallMethod v27, 'isSealed', [v65]
+v386 <- CallMethod v27, 'isFrozen', [v25]
+v387 <- CallMethod v27, 'isFrozen', [v65]
+v388 <- LoadInteger '1'
+v389 <- LoadInteger '2'
+v390 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop1`, v388
+    ObjectLiteralAddProperty `prop2`, v389
+    ObjectLiteralAddElement `75`, v390
+v391 <- EndObjectLiteral
+Reassign v25, v391
+v392 <- LoadInteger '3'
+v393 <- LoadInteger '4'
+v394 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop1`, v392
+    ObjectLiteralAddProperty `prop2`, v393
+    ObjectLiteralAddElement `150`, v394
+v395 <- EndObjectLiteral
+Reassign v65, v395
+v396 <- CallMethod v27, 'seal', [v25]
+v397 <- CallMethod v27, 'seal', [v65]
+v398 <- CallMethod v27, 'isSealed', [v25]
+v399 <- CallMethod v27, 'isSealed', [v65]
+v400 <- CallMethod v27, 'isFrozen', [v25]
+v401 <- CallMethod v27, 'isFrozen', [v25]
+v402 <- LoadString 'thing'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prop`, v402
+v403 <- EndObjectLiteral
+Reassign v25, v403
+v404 <- CallMethod v27, 'seal', [v25]
+v405 <- CallMethod v27, 'isSealed', [v25]
+v406 <- CallMethod v27, 'isFrozen', [v25]
+v407 <- LoadString 'hello'
+SetElement v25, '0', v407
+v408 <- LoadInteger '0'
+v409 <- CallMethod v25, 'hasOwnProperty', [v408]
+BeginObjectLiteral
+v410 <- EndObjectLiteral
+Reassign v25, v410
+BeginForLoopInitializer
+    v411 <- LoadInteger '0'
+BeginForLoopCondition -> v412
+    v413 <- LoadInteger '100'
+    v414 <- Compare v412, '<', v413
+BeginForLoopAfterthought v414 -> v415
+    v416 <- UnaryOperation '++', v415
+BeginForLoopBody -> v417
+    v418 <- LoadString 'x'
+    v419 <- BinaryOperation v418, '+', v417
+    SetComputedProperty v25, v419, v417
+EndForLoop
+v420 <- LoadBoolean 'false'
+v421 <- CreateNamedVariable 'accessorDidRun', 'var', v420
+v422 <- LoadString 'accessor'
+v423 <- BeginPlainFunction -> 
+    v424 <- LoadInteger '42'
+    Return v424
+EndPlainFunction
+v425 <- BeginPlainFunction -> 
+    v426 <- LoadBoolean 'true'
+    Reassign v421, v426
+EndPlainFunction
+v427 <- LoadBoolean 'true'
+v428 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v423
+    ObjectLiteralAddProperty `set`, v425
+    ObjectLiteralAddProperty `configurable`, v427
+    ObjectLiteralAddProperty `enumerable`, v428
+v429 <- EndObjectLiteral
+v430 <- CallMethod v27, 'defineProperty', [v25, v422, v429]
+v431 <- CallMethod v27, 'seal', [v25]
+v432 <- CallMethod v27, 'isSealed', [v25]
+v433 <- CallMethod v27, 'isFrozen', [v25]
+v434 <- CallMethod v27, 'isExtensible', [v25]
+BeginForLoopInitializer
+    v435 <- LoadInteger '0'
+BeginForLoopCondition -> v436
+    v437 <- LoadInteger '100'
+    v438 <- Compare v436, '<', v437
+BeginForLoopAfterthought v438 -> v439
+    v440 <- UnaryOperation '++', v439
+BeginForLoopBody -> v441
+    v442 <- LoadString 'x'
+    v443 <- BinaryOperation v442, '+', v441
+    v444 <- CallMethod v27, 'getOwnPropertyDescriptor', [v25, v443]
+    Reassign v29, v444
+    v445 <- GetProperty v29, 'configurable'
+EndForLoop
+v446 <- LoadInteger '42'
+v447 <- GetProperty v25, 'accessor'
+v448 <- LoadString 'ignored value'
+SetProperty v25, 'accessor', v448
+v449 <- BeginPlainFunction -> v450
+    v451 <- LoadArguments
+    v452 <- CallMethod v27, 'seal', [v451]
+    v453 <- LoadArguments
+    v454 <- CallMethod v27, 'isSealed', [v453]
+EndPlainFunction
+v455 <- CreateNamedVariable 'func', 'var', v449
+v456 <- LoadString 'hello'
+v457 <- LoadString 'world'
+v458 <- CallFunction v455, [v456, v457]
+v459 <- LoadString 'goodbye'
+v460 <- LoadString 'world'
+v461 <- CallFunction v455, [v459, v460]
+v462 <- LoadInteger '0'
+v463 <- LoadInteger '1'
+v464 <- CreateArray [v462, v463]
+v465 <- CreateNamedVariable 'sparseArr', 'var', v464
+v466 <- LoadInteger '10000'
+SetElement v465, '10000', v466
+v467 <- CallMethod v27, 'seal', [v465]
+v468 <- CallMethod v27, 'isSealed', [v465]
+BeginObjectLiteral
+v469 <- EndObjectLiteral
+Reassign v25, v469
+v470 <- LoadString 'accessor'
+v471 <- BeginPlainFunction -> 
+    v472 <- LoadInteger '42'
+    Return v472
+EndPlainFunction
+v473 <- BeginPlainFunction -> 
+    v474 <- LoadBoolean 'true'
+    Reassign v421, v474
+EndPlainFunction
+v475 <- LoadBoolean 'true'
+v476 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v471
+    ObjectLiteralAddProperty `set`, v473
+    ObjectLiteralAddProperty `configurable`, v475
+    ObjectLiteralAddProperty `enumerable`, v476
+v477 <- EndObjectLiteral
+v478 <- CallMethod v27, 'defineProperty', [v25, v470, v477]
+v479 <- CallMethod v27, 'seal', [v25]
+v480 <- CallMethod v27, 'isSealed', [v25]
+v481 <- LoadInteger '42'
+v482 <- GetProperty v25, 'accessor'
+v483 <- LoadBoolean 'false'
+Reassign v421, v483
+v484 <- LoadString 'ignored value'
+SetProperty v25, 'accessor', v484
+v485 <- BeginPlainFunction -> 
+    Directive 'use strict'
+EndPlainFunction
+v486 <- CallMethod v27, 'seal', [v485]
+v487 <- CallMethod v27, 'isSealed', [v486]
+BeginObjectLiteral
+v488 <- EndObjectLiteral
+Reassign v25, v488
+v489 <- LoadString 'accessor2'
+v490 <- BeginPlainFunction -> 
+    v491 <- LoadInteger '42'
+    Return v491
+EndPlainFunction
+v492 <- BeginPlainFunction -> 
+    v493 <- LoadBoolean 'true'
+    Reassign v421, v493
+EndPlainFunction
+v494 <- LoadBoolean 'true'
+v495 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v490
+    ObjectLiteralAddProperty `set`, v492
+    ObjectLiteralAddProperty `configurable`, v494
+    ObjectLiteralAddProperty `enumerable`, v495
+v496 <- EndObjectLiteral
+v497 <- CallMethod v27, 'defineProperty', [v25, v489, v496]
+v498 <- LoadString 'foo'
+SetProperty v25, 'data', v498
+v499 <- CallMethod v27, 'seal', [v25]
+v500 <- CallMethod v27, 'isSealed', [v25]
+v501 <- BeginPlainFunction -> 
+EndPlainFunction
+v502 <- CallMethod v27, 'seal', [v501]
+v503 <- BeginPlainFunction -> 
+    v504 <- Construct v501, []
+    Return v504
+EndPlainFunction
+v505 <- CallFunction v503, []
+v506 <- LoadBoolean 'true'
+v507 <- GetProperty v501, 'prototype'
+SetProperty v507, 'prototypeExists', v506
+v508 <- Construct v501, []
+v509 <- GetProperty v508, 'prototypeExists'
+v510 <- CreateNamedVariable 'Int32Array', 'none'
+v511 <- LoadInteger '10'
+v512 <- Construct v510, [v511]
+Reassign v25, v512
+v513 <- CallMethod v27, 'seal', [v25]
+v514 <- CallMethod v27, 'isSealed', [v25]
+
+
+const v11 = new Array(undefined, null, 1, -1, 0, 42.43, Symbol("test"));
+var non_objects = v11;
+for (const v13 in non_objects) {
+    non_objects[v13];
+    Object.seal(non_objects[v13]);
+}
+for (const v18 in non_objects) {
+    Object.isSealed(non_objects[v18]);
+}
+var obj = { x: 42, z: "foobar" };
+var desc = Object.getOwnPropertyDescriptor(obj, "x");
+desc.writable;
+desc.configurable;
+desc.value;
+desc = Object.getOwnPropertyDescriptor(obj, "z");
+desc.writable;
+desc.configurable;
+desc.value;
+Object.isExtensible(obj);
+Object.isSealed(obj);
+Object.seal(obj);
+Object.isExtensible(obj);
+Object.isSealed(obj);
+Object.isFrozen(obj);
+obj.foo = 42;
+obj.foo;
+desc = Object.getOwnPropertyDescriptor(obj, "x");
+desc.writable;
+desc.configurable;
+desc.value;
+desc = Object.getOwnPropertyDescriptor(obj, "z");
+desc.writable;
+desc.configurable;
+desc.value;
+obj.x = "43";
+obj.x;
+var obj2 = {};
+function get() {
+    return 43;
+}
+function set() {
+}
+Object.defineProperty(obj2, "x", { get: get, set: set, configurable: true });
+desc = Object.getOwnPropertyDescriptor(obj2, "x");
+desc.configurable;
+desc.value;
+set();
+desc.set;
+get();
+desc.get;
+Object.isExtensible(obj2);
+Object.isSealed(obj2);
+Object.seal(obj2);
+Object.isFrozen(obj2);
+Object.isExtensible(obj2);
+Object.isSealed(obj2);
+desc = Object.getOwnPropertyDescriptor(obj2, "x");
+desc.configurable;
+desc.value;
+set();
+desc.set;
+get();
+desc.get;
+obj2.foo = 42;
+obj2.foo;
+const v102 = new Array(42, 43);
+var arr = v102;
+desc = Object.getOwnPropertyDescriptor(arr, "0");
+desc.configurable;
+desc.writable;
+desc.value;
+desc = Object.getOwnPropertyDescriptor(arr, "1");
+desc.configurable;
+desc.writable;
+desc.value;
+Object.isExtensible(arr);
+Object.isSealed(arr);
+Object.seal(arr);
+Object.isSealed(arr);
+Object.isExtensible(arr);
+Object.isFrozen(arr);
+desc = Object.getOwnPropertyDescriptor(arr, "0");
+desc.configurable;
+desc.writable;
+desc.value;
+desc = Object.getOwnPropertyDescriptor(arr, "1");
+desc.configurable;
+desc.writable;
+desc.value;
+arr[0] = "foo";
+arr[0];
+var obj3 = { x: 42, y: "foo" };
+Object.isFrozen(obj3);
+Object.defineProperty(obj3, "x", { configurable: false, writable: true });
+Object.defineProperty(obj3, "y", { configurable: false, writable: false });
+Object.preventExtensions(obj3);
+Object.isSealed(obj3);
+var obj4 = {};
+Object.defineProperty(obj4, "x", { configurable: true, writable: false });
+Object.defineProperty(obj4, "y", { configurable: false, writable: false });
+Object.preventExtensions(obj4);
+Object.isSealed(obj4);
+var obj4 = {};
+obj4 === Object.seal(obj4);
+obj = [1,2,3];
+var objControl = [4,5,6];
+function f181(a182) {
+    a182.push(10);
+    return a182;
+}
+var push_call = f181;
+function f186(a187) {
+    return a187.pop();
+}
+var pop_call = f186;
+for (let i191 = 0; i191 < 3; i191++) {
+    push_call(obj);
+    pop_call(obj);
+}
+Object.seal(obj);
+function f200() {
+    push_call(obj);
+}
+f200();
+function f204() {
+    pop_call(obj);
+}
+f204();
+function f207() {
+    push_call(objControl);
+}
+f207();
+function f210() {
+    pop_call(objControl);
+}
+f210();
+function f213() {
+    obj.push();
+}
+f213();
+function f216() {
+    obj.push(3);
+}
+f216();
+function f220() {
+    obj.pop();
+}
+f220();
+function f223() {
+    obj.shift(3);
+}
+f223();
+function f227() {
+    obj.unshift();
+}
+f227();
+function f230() {
+    obj.unshift(1);
+}
+f230();
+function f234() {
+    obj.splice(0, 0, 100, 101, 102);
+}
+f234();
+function f242() {
+    obj.splice(0, 0);
+}
+f242();
+function f247() {
+    objControl.push(3);
+}
+f247();
+function f251() {
+    objControl.pop();
+}
+f251();
+function f254() {
+    objControl.shift(3);
+}
+f254();
+function f258() {
+    objControl.unshift();
+}
+f258();
+function f261() {
+    objControl.splice(0, 0, 100, 101, 102);
+}
+f261();
+obj = [1,2,3];
+function f273(a274) {
+    a274.push(1000);
+    return a274;
+}
+push_call = f273;
+function f277(a278) {
+    a278.shift(1000);
+    return a278;
+}
+var shift_call = f277;
+for (let i283 = 0; i283 < 3; i283++) {
+    push_call(obj);
+    shift_call(obj);
+}
+push_call(obj);
+shift_call(obj);
+Object.seal(obj);
+function f294() {
+    push_call(obj);
+}
+f294();
+function f297() {
+    shift_call(obj);
+}
+f297();
+function f300() {
+    push_call(objControl);
+}
+f300();
+function f303() {
+    shift_call(objControl);
+}
+f303();
+obj = [1,2,3];
+Object.seal(obj);
+function f311() {
+    obj.splice(0, 1, 100);
+}
+f311();
+obj[0];
+function f319() {
+    obj.splice(0, 2, 1, 2);
+}
+f319();
+function f326() {
+    obj.splice(1, 2, 1, 2);
+}
+f326();
+function f333() {
+    obj.splice(1, 2000, 1, 2);
+}
+f333();
+function f340() {
+    obj.splice(0, 0, 1);
+}
+f340();
+function f346() {
+    obj.splice(1, 2000, 1, 2, 3);
+}
+f346();
+obj = { x: 42, y: "foo" };
+Object.defineProperty(obj, "y", { enumerable: false });
+Object.seal(obj);
+Object.isSealed(obj);
+Object.isFrozen(obj);
+desc = Object.getOwnPropertyDescriptor(obj, "x");
+desc.enumerable;
+desc = Object.getOwnPropertyDescriptor(obj, "y");
+desc.enumerable;
+obj = { x: 42, y: "foo" };
+Object.seal(obj);
+Object.isSealed(obj);
+Object.isFrozen(obj);
+obj = { prop1: 1, prop2: 2 };
+obj2 = { prop1: 3, prop2: 4 };
+Object.seal(obj);
+Object.seal(obj2);
+Object.isSealed(obj);
+Object.isSealed(obj2);
+Object.isFrozen(obj);
+Object.isFrozen(obj2);
+obj = { prop1: 1, prop2: 2, 75: "foo" };
+obj2 = { prop1: 3, prop2: 4, 150: "bar" };
+Object.seal(obj);
+Object.seal(obj2);
+Object.isSealed(obj);
+Object.isSealed(obj2);
+Object.isFrozen(obj);
+Object.isFrozen(obj);
+obj = { prop: "thing" };
+Object.seal(obj);
+Object.isSealed(obj);
+Object.isFrozen(obj);
+obj[0] = "hello";
+obj.hasOwnProperty(0);
+obj = {};
+for (let i412 = 0; i412 < 100; ++i412) {
+    obj["x" + i412] = i412;
+}
+var accessorDidRun = false;
+function f423() {
+    return 42;
+}
+function f425() {
+    accessorDidRun = true;
+}
+Object.defineProperty(obj, "accessor", { get: f423, set: f425, configurable: true, enumerable: true });
+Object.seal(obj);
+Object.isSealed(obj);
+Object.isFrozen(obj);
+Object.isExtensible(obj);
+for (let i436 = 0; i436 < 100; ++i436) {
+    desc = Object.getOwnPropertyDescriptor(obj, "x" + i436);
+    desc.configurable;
+}
+obj.accessor;
+obj.accessor = "ignored value";
+function f449(a450) {
+    Object.seal(arguments);
+    Object.isSealed(arguments);
+}
+var func = f449;
+func("hello", "world");
+func("goodbye", "world");
+var sparseArr = [0,1];
+sparseArr[10000] = 10000;
+Object.seal(sparseArr);
+Object.isSealed(sparseArr);
+obj = {};
+function f471() {
+    return 42;
+}
+function f473() {
+    accessorDidRun = true;
+}
+Object.defineProperty(obj, "accessor", { get: f471, set: f473, configurable: true, enumerable: true });
+Object.seal(obj);
+Object.isSealed(obj);
+obj.accessor;
+accessorDidRun = false;
+obj.accessor = "ignored value";
+function f485() {
+    'use strict';
+}
+Object.isSealed(Object.seal(f485));
+obj = {};
+function f490() {
+    return 42;
+}
+function f492() {
+    accessorDidRun = true;
+}
+Object.defineProperty(obj, "accessor2", { get: f490, set: f492, configurable: true, enumerable: true });
+obj.data = "foo";
+Object.seal(obj);
+Object.isSealed(obj);
+function Sealed() {
+}
+Object.seal(Sealed);
+function f503() {
+    const v504 = new Sealed();
+    return v504;
+}
+f503();
+const t352 = Sealed.prototype;
+t352.prototypeExists = true;
+const v508 = new Sealed();
+v508.prototypeExists;
+const v512 = new Int32Array(10);
+obj = v512;
+Object.seal(obj);
+Object.isSealed(obj);
+
+FuzzIL program written to corpus/object-seal.fzil

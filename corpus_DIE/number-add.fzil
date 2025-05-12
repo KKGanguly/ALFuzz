@@ -1,0 +1,95 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        v4 <- BinaryOperation v2, '+', v3
+        Return v4
+    EndPlainFunction
+    v5 <- LoadFloat '0.1'
+    v6 <- LoadFloat '0.2'
+    v7 <- CallFunction v1, [v5, v6]
+    v8 <- LoadFloat '0.1'
+    v9 <- LoadFloat '0.2'
+    v10 <- CallFunction v1, [v8, v9]
+    v11 <- BeginPlainFunction -> v12
+        v13 <- LoadInteger '1'
+        v14 <- BinaryOperation v12, '-', v13
+        v15 <- LoadInteger '1'
+        v16 <- CallFunction v1, [v14, v15]
+        v17 <- CreateNamedVariable 'Math', 'none'
+        v18 <- CallMethod v17, 'trunc', [v16]
+        Reassign v12, v18
+        v19 <- LoadInteger '1'
+        v20 <- UnaryOperation '-', v19
+        v21 <- CallFunction v1, [v12, v20]
+        Return v21
+    EndPlainFunction
+    v22 <- LoadInteger '0'
+    v23 <- LoadInteger '1'
+    v24 <- CallFunction v11, [v23]
+    v25 <- LoadInteger '1'
+    v26 <- LoadInteger '2'
+    v27 <- CallFunction v11, [v26]
+    v28 <- LoadInteger '2'
+    v29 <- LoadInteger '3'
+    v30 <- CallFunction v11, [v29]
+EndPlainFunction
+v31 <- CallFunction v0, []
+v32 <- BeginPlainFunction -> 
+    v33 <- BeginPlainFunction -> v34
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v34
+        v35 <- EndObjectLiteral
+        v36 <- GetProperty v35, 'x'
+        v37 <- BinaryOperation v36, '+', v34
+        Return v37
+    EndPlainFunction
+    v38 <- LoadNull
+    v39 <- CallFunction v33, [v38]
+    v40 <- LoadUndefined
+    v41 <- CallFunction v33, [v40]
+    v42 <- BeginPlainFunction -> v43
+        v44 <- LoadInteger '1'
+        v45 <- CallFunction v33, [v44]
+        v46 <- LoadInteger '0'
+        v47 <- BinaryOperation v45, '|', v46
+        Return v47
+    EndPlainFunction
+    v48 <- LoadInteger '2'
+    v49 <- CallFunction v42, []
+    v50 <- LoadInteger '2'
+    v51 <- CallFunction v42, []
+    v52 <- LoadInteger '2'
+    v53 <- CallFunction v42, []
+EndPlainFunction
+v54 <- CallFunction v32, []
+
+
+function f0() {
+    function foo(a2, a3) {
+        return a2 + a3;
+    }
+    foo(0.1, 0.2);
+    foo(0.1, 0.2);
+    function bar(a12) {
+        return foo(a12 = Math.trunc(foo(a12 - 1, 1)), -1);
+    }
+    bar(1);
+    bar(2);
+    bar(3);
+}
+f0();
+function f32() {
+    function baz(a34) {
+        return ({ x: a34 }).x + a34;
+    }
+    baz(null);
+    baz(undefined);
+    function foo(a43) {
+        return baz(1) | 0;
+    }
+    foo();
+    foo();
+    foo();
+}
+f32();
+
+FuzzIL program written to corpus/number-add.fzil

@@ -1,0 +1,87 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CreateNamedVariable 'Object', 'none'
+    v4 <- CallMethod v3, 'getOwnPropertyNames', [v1]
+    v5 <- CreateNamedVariable 'properties', 'var', v4
+    v6 <- CallMethod v3, 'getPrototypeOf', [v1]
+    v7 <- CreateNamedVariable 'proto', 'var', v6
+    BeginIf v7
+    EndIf
+    v8 <- LoadString 'constructor'
+    v9 <- GetProperty v1, 'constructor'
+    v10 <- CallMethod v9, 'hasOwnProperty', []
+    v11 <- BinaryOperation v8, '&&', v10
+    BeginIf v11
+    EndIf
+    v12 <- GetProperty v5, 'length'
+    v13 <- LoadInteger '0'
+    v14 <- Compare v12, '==', v13
+    BeginIf v14
+        v15 <- LoadString '0'
+        Return v15
+    EndIf
+    v16 <- GetProperty v5, 'length'
+    v17 <- BinaryOperation v2, '%', v16
+    v18 <- GetComputedProperty v5, v17
+    Return v18
+EndPlainFunction
+v19 <- BeginPlainFunction -> 
+    v20 <- CreateNamedVariable 'Array', 'none'
+    v21 <- Construct v20, []
+    v22 <- CreateNamedVariable '__v_8', 'var', v21
+    v23 <- CallMethod v22, 'entries', []
+    v24 <- CreateNamedVariable '__v_9', 'var', v23
+    v25 <- GetElement v24, '118574531'
+    SetProperty v24, '__p_118574531', v25
+    v26 <- LoadInteger '1442724132'
+    v27 <- CallFunction v0, [v24, v26]
+    v28 <- BeginPlainFunction -> 
+        v29 <- CreateNamedVariable '__v_1', 'none'
+        v30 <- CallFunction v0, []
+        v31 <- GetComputedProperty v29, v30
+        v32 <- CreateNamedVariable '__v_0', 'none'
+        v33 <- CallFunction v0, []
+        SetComputedProperty v32, v33, v31
+        v34 <- GetProperty v24, '__p_118574531'
+        Return v34
+    EndPlainFunction
+    v35 <- CallMethod v24, '__defineGetter__', [v27, v28]
+EndPlainFunction
+v36 <- BeginPlainFunction -> 
+    v37 <- CallFunction v19, []
+EndPlainFunction
+v38 <- CallFunction v36, []
+v39 <- CallFunction v36, []
+
+
+function getRandomProperty(a1, a2) {
+    var properties = Object.getOwnPropertyNames(a1);
+    var proto = Object.getPrototypeOf(a1);
+    if (proto) {
+    }
+    if ("constructor" && a1.constructor.hasOwnProperty()) {
+    }
+    if (properties.length == 0) {
+        return "0";
+    }
+    return properties[a2 % properties.length];
+}
+function __f_11() {
+    const v21 = new Array();
+    var __v_8 = v21;
+    var __v_9 = __v_8.entries();
+    __v_9.__p_118574531 = __v_9[118574531];
+    const v27 = getRandomProperty(__v_9, 1442724132);
+    function f28() {
+        const v31 = __v_1[getRandomProperty()];
+        __v_0[getRandomProperty()] = v31;
+        return __v_9.__p_118574531;
+    }
+    __v_9.__defineGetter__(v27, f28);
+}
+function __f_10() {
+    __f_11();
+}
+__f_10();
+__f_10();
+
+FuzzIL program written to corpus/regress-674232.fzil

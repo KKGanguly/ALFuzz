@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString '-'
+    v3 <- BinaryOperation v2, '+', v1
+    v4 <- LoadString '-'
+    v5 <- BinaryOperation v3, '+', v4
+    v6 <- CreateNamedVariable 'valueOf', 'var', v5
+    v7 <- BeginPlainFunction -> 
+        Return v1
+    EndPlainFunction
+    v8 <- BeginPlainFunction -> 
+        Return v6
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toString`, v7
+        ObjectLiteralAddProperty `valueOf`, v8
+    v9 <- EndObjectLiteral
+    Return v9
+EndPlainFunction
+v10 <- LoadString 'a.b.'
+v11 <- LoadString 'b.'
+v12 <- CallFunction v0, [v11]
+v13 <- LoadString 'a.'
+v14 <- CallMethod v13, 'concat', [v12]
+v15 <- LoadString 'a.b.c.'
+v16 <- LoadString 'b.'
+v17 <- CallFunction v0, [v16]
+v18 <- LoadString 'c.'
+v19 <- CallFunction v0, [v18]
+v20 <- LoadString 'a.'
+v21 <- CallMethod v20, 'concat', [v17, v19]
+
+
+function Stringified(a1) {
+    var valueOf = ("-" + a1) + "-";
+    function f7() {
+        return a1;
+    }
+    function f8() {
+        return valueOf;
+    }
+    return { toString: f7, valueOf: f8 };
+}
+("a.").concat(Stringified("b."));
+("a.").concat(Stringified("b."), Stringified("c."));
+
+FuzzIL program written to corpus/string-concat.fzil

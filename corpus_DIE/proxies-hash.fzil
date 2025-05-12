@@ -1,0 +1,206 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- BeginPlainFunction -> v5
+        v6 <- CreateNamedVariable 'Proxy', 'none'
+        BeginObjectLiteral
+        v7 <- EndObjectLiteral
+        v8 <- Construct v6, [v7, v5]
+        Return v8
+    EndPlainFunction
+    v9 <- CallFunction v1, [v2, v3, v4]
+EndPlainFunction
+v10 <- BeginPlainFunction -> v11, v12
+    v13 <- CreateNamedVariable 'TestSet2', 'none'
+    v14 <- CallFunction v0, [v13, v11, v12]
+EndPlainFunction
+v15 <- BeginPlainFunction -> v16, v17, v18
+    v19 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v20 <- EndObjectLiteral
+        Return v20
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `fix`, v19
+    v21 <- EndObjectLiteral
+    v22 <- CreateNamedVariable 'handler', 'var', v21
+    v23 <- CallFunction v18, [v22]
+    v24 <- CreateNamedVariable 'p1', 'var', v23
+    v25 <- CallFunction v18, [v22]
+    v26 <- CreateNamedVariable 'p2', 'var', v25
+    v27 <- CallFunction v18, [v22]
+    v28 <- CreateNamedVariable 'p3', 'var', v27
+    v29 <- CallFunction v17, [v28]
+    v30 <- Construct v16, []
+    v31 <- CreateNamedVariable 's', 'var', v30
+    v32 <- CallMethod v31, 'add', [v24]
+    v33 <- CallMethod v31, 'add', [v26]
+    v34 <- CallMethod v31, 'has', [v24]
+    v35 <- CallMethod v31, 'has', [v26]
+    v36 <- CallMethod v31, 'has', [v28]
+    v37 <- CallFunction v17, [v24]
+    v38 <- CallFunction v17, [v26]
+    v39 <- CallMethod v31, 'has', [v24]
+    v40 <- CallMethod v31, 'has', [v26]
+    v41 <- CallMethod v31, 'has', [v28]
+    v42 <- CallMethod v31, 'delete', [v26]
+    v43 <- CallMethod v31, 'has', [v24]
+    v44 <- CallMethod v31, 'has', [v26]
+    v45 <- CallMethod v31, 'has', [v28]
+EndPlainFunction
+v46 <- CreateNamedVariable 'Set', 'none'
+v47 <- CreateNamedVariable 'Object', 'none'
+v48 <- GetProperty v47, 'seal'
+v49 <- CallFunction v10, [v46, v48]
+v50 <- GetProperty v47, 'freeze'
+v51 <- CallFunction v10, [v46, v50]
+v52 <- GetProperty v47, 'preventExtensions'
+v53 <- CallFunction v10, [v46, v52]
+v54 <- BeginPlainFunction -> v55, v56
+    v57 <- CreateNamedVariable 'TestMap2', 'none'
+    v58 <- CallFunction v0, [v57, v55, v56]
+EndPlainFunction
+v59 <- BeginPlainFunction -> v60, v61, v62
+    v63 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v64 <- EndObjectLiteral
+        Return v64
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `fix`, v63
+    v65 <- EndObjectLiteral
+    v66 <- CreateNamedVariable 'handler', 'var', v65
+    v67 <- CallFunction v62, [v66]
+    v68 <- CreateNamedVariable 'p1', 'var', v67
+    v69 <- CallFunction v62, [v66]
+    v70 <- CreateNamedVariable 'p2', 'var', v69
+    v71 <- CallFunction v62, [v66]
+    v72 <- CreateNamedVariable 'p3', 'var', v71
+    v73 <- CallFunction v61, [v72]
+    v74 <- Construct v60, []
+    v75 <- CreateNamedVariable 'm', 'var', v74
+    v76 <- LoadInteger '123'
+    v77 <- CallMethod v75, 'set', [v68, v76]
+    v78 <- LoadInteger '321'
+    v79 <- CallMethod v75, 'set', [v70, v78]
+    v80 <- CallMethod v75, 'has', [v68]
+    v81 <- CallMethod v75, 'has', [v70]
+    v82 <- CallMethod v75, 'has', [v72]
+    v83 <- LoadInteger '123'
+    v84 <- CallMethod v75, 'get', [v68]
+    v85 <- LoadInteger '321'
+    v86 <- CallMethod v75, 'get', [v70]
+    v87 <- CallFunction v61, [v68]
+    v88 <- CallFunction v61, [v70]
+    v89 <- CallMethod v75, 'has', [v68]
+    v90 <- CallMethod v75, 'has', [v70]
+    v91 <- CallMethod v75, 'has', [v72]
+    v92 <- LoadInteger '123'
+    v93 <- CallMethod v75, 'get', [v68]
+    v94 <- LoadInteger '321'
+    v95 <- CallMethod v75, 'get', [v70]
+    v96 <- CallMethod v75, 'delete', [v70]
+    v97 <- CallMethod v75, 'has', [v68]
+    v98 <- CallMethod v75, 'has', [v70]
+    v99 <- CallMethod v75, 'has', [v72]
+    v100 <- LoadInteger '123'
+    v101 <- CallMethod v75, 'get', [v68]
+    v102 <- LoadUndefined
+    v103 <- CallMethod v75, 'get', [v70]
+EndPlainFunction
+v104 <- CreateNamedVariable 'Map', 'none'
+v105 <- GetProperty v47, 'seal'
+v106 <- CallFunction v54, [v104, v105]
+v107 <- GetProperty v47, 'freeze'
+v108 <- CallFunction v54, [v104, v107]
+v109 <- GetProperty v47, 'preventExtensions'
+v110 <- CallFunction v54, [v104, v109]
+v111 <- CreateNamedVariable 'WeakMap', 'none'
+v112 <- GetProperty v47, 'seal'
+v113 <- CallFunction v54, [v111, v112]
+v114 <- GetProperty v47, 'freeze'
+v115 <- CallFunction v54, [v111, v114]
+v116 <- GetProperty v47, 'preventExtensions'
+v117 <- CallFunction v54, [v111, v116]
+
+
+function TestWithProxies(a1, a2, a3) {
+    function f4(a5) {
+        const v8 = new Proxy({}, a5);
+        return v8;
+    }
+    a1(a2, a3, f4);
+}
+function TestSet(a11, a12) {
+    TestWithProxies(TestSet2, a11, a12);
+}
+function TestSet2(a16, a17, a18) {
+    function f19() {
+        return {};
+    }
+    var handler = { fix: f19 };
+    var p1 = a18(handler);
+    var p2 = a18(handler);
+    var p3 = a18(handler);
+    a17(p3);
+    const v30 = new a16();
+    var s = v30;
+    s.add(p1);
+    s.add(p2);
+    s.has(p1);
+    s.has(p2);
+    s.has(p3);
+    a17(p1);
+    a17(p2);
+    s.has(p1);
+    s.has(p2);
+    s.has(p3);
+    s.delete(p2);
+    s.has(p1);
+    s.has(p2);
+    s.has(p3);
+}
+TestSet(Set, Object.seal);
+TestSet(Set, Object.freeze);
+TestSet(Set, Object.preventExtensions);
+function TestMap(a55, a56) {
+    TestWithProxies(TestMap2, a55, a56);
+}
+function TestMap2(a60, a61, a62) {
+    function f63() {
+        return {};
+    }
+    var handler = { fix: f63 };
+    var p1 = a62(handler);
+    var p2 = a62(handler);
+    var p3 = a62(handler);
+    a61(p3);
+    const v74 = new a60();
+    var m = v74;
+    m.set(p1, 123);
+    m.set(p2, 321);
+    m.has(p1);
+    m.has(p2);
+    m.has(p3);
+    m.get(p1);
+    m.get(p2);
+    a61(p1);
+    a61(p2);
+    m.has(p1);
+    m.has(p2);
+    m.has(p3);
+    m.get(p1);
+    m.get(p2);
+    m.delete(p2);
+    m.has(p1);
+    m.has(p2);
+    m.has(p3);
+    m.get(p1);
+    m.get(p2);
+}
+TestMap(Map, Object.seal);
+TestMap(Map, Object.freeze);
+TestMap(Map, Object.preventExtensions);
+TestMap(WeakMap, Object.seal);
+TestMap(WeakMap, Object.freeze);
+TestMap(WeakMap, Object.preventExtensions);
+
+FuzzIL program written to corpus/proxies-hash.fzil

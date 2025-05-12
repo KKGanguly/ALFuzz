@@ -1,0 +1,39 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- LoadFloat '1.5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'p', 'var', v3
+v5 <- BeginPlainFunction -> v6
+    v7 <- GetProperty v6, 'foo'
+    v8 <- GetProperty v6, 'foo'
+    v9 <- UnaryOperation '+', v8
+    v10 <- Compare v7, '===', v9
+    Return v10
+EndPlainFunction
+v11 <- LoadBoolean 'false'
+v12 <- CallFunction v5, [v1]
+v13 <- LoadBoolean 'false'
+v14 <- CallFunction v5, [v1]
+v15 <- LoadBoolean 'false'
+v16 <- CallFunction v5, [v1]
+v17 <- LoadBoolean 'true'
+v18 <- CallFunction v5, [v4]
+v19 <- LoadBoolean 'false'
+v20 <- CallFunction v5, [v1]
+
+
+var o = {};
+var p = { foo: 1.5 };
+function g(a6) {
+    return a6.foo === +a6.foo;
+}
+g(o);
+g(o);
+g(o);
+g(p);
+g(o);
+
+FuzzIL program written to corpus/regress-crbug-590989-1.fzil

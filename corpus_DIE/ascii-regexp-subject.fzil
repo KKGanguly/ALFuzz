@@ -1,0 +1,63 @@
+v0 <- LoadString 'foo'
+v1 <- CreateNamedVariable 's', 'var', v0
+v2 <- LoadUndefined
+v3 <- CreateNamedVariable 'i', 'var', v2
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+    Reassign v3, v4
+BeginForLoopCondition
+    v5 <- LoadInteger '18'
+    v6 <- Compare v3, '<', v5
+BeginForLoopAfterthought v6
+    v7 <- UnaryOperation v3, '++'
+BeginForLoopBody
+    v8 <- BinaryOperation v1, '+', v1
+    Reassign v1, v8
+EndForLoop
+v9 <- BeginPlainFunction -> v10
+    BeginForLoopInitializer
+        v11 <- LoadInteger '0'
+        Reassign v3, v11
+    BeginForLoopCondition
+        v12 <- LoadInteger '1000'
+        v13 <- Compare v3, '<', v12
+    BeginForLoopAfterthought v13
+        v14 <- UnaryOperation v3, '++'
+    BeginForLoopBody
+        v15 <- CallMethod v10, 'test', [v1]
+    EndForLoop
+EndPlainFunction
+v16 <- LoadRegExp '^bar' ''
+v17 <- CallFunction v9, [v16]
+v18 <- LoadRegExp '^foo|^bar|^baz' ''
+v19 <- CallFunction v9, [v18]
+v20 <- LoadRegExp '(^bar)' ''
+v21 <- CallFunction v9, [v20]
+v22 <- LoadRegExp '(?=^bar)\w+' ''
+v23 <- CallFunction v9, [v22]
+
+
+var s = "foo";
+var i;
+for ((() => {
+        i = 0;
+    })();
+    i < 18;
+    i++) {
+    s = s + s;
+}
+function repeatRegexp(a10) {
+    for ((() => {
+            i = 0;
+        })();
+        i < 1000;
+        i++) {
+        a10.test(s);
+    }
+}
+repeatRegexp(/^bar/);
+repeatRegexp(/^foo|^bar|^baz/);
+repeatRegexp(/(^bar)/);
+repeatRegexp(/(?=^bar)\w+/);
+
+FuzzIL program written to corpus/ascii-regexp-subject.fzil

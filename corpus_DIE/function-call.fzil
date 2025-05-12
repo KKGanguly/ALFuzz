@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> v1
+    Return v1
+EndPlainFunction
+v2 <- LoadUndefined
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- LoadInteger '8'
+v5 <- CallFunction v0, [v4]
+Reassign v3, v5
+v6 <- LoadInteger '8'
+v7 <- LoadUndefined
+v8 <- CreateNamedVariable 'b', 'var', v7
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+v9 <- EndObjectLiteral
+Reassign v8, v9
+v10 <- LoadInteger '9'
+v11 <- CallMethod v8, 'x', [v10]
+Reassign v3, v11
+v12 <- LoadInteger '9'
+v13 <- LoadString 'x'
+v14 <- CreateNamedVariable 'c', 'none'
+Reassign v14, v13
+v15 <- LoadInteger '10'
+v16 <- CreateNamedVariable 'c', 'none'
+v17 <- CallComputedMethod v8, v16, [v15]
+Reassign v3, v17
+v18 <- LoadInteger '10'
+v19 <- BeginPlainFunction -> 
+    Return v0
+EndPlainFunction
+v20 <- LoadInteger '8'
+v21 <- CallFunction v19, []
+v22 <- CallFunction v21, [v20]
+Reassign v3, v22
+v23 <- LoadInteger '8'
+
+
+function f(a1) {
+    return a1;
+}
+var a;
+a = f(8);
+var b;
+a = (b = { x: f }).x(9);
+c = "x";
+a = b[c](10);
+function g() {
+    return f;
+}
+const t12 = g();
+a = t12(8);
+
+FuzzIL program written to corpus/function-call.fzil

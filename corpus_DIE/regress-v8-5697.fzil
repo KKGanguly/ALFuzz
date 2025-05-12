@@ -1,0 +1,81 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'x'
+    Return v2
+EndPlainFunction
+BeginForLoopInitializer
+    v3 <- LoadInteger '0'
+BeginForLoopCondition -> v4
+    v5 <- LoadInteger '1000'
+    v6 <- Compare v4, '<', v5
+BeginForLoopAfterthought v6 -> v7
+    v8 <- UnaryOperation '++', v7
+BeginForLoopBody -> v9
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v9
+    v10 <- EndObjectLiteral
+    v11 <- CallFunction v0, [v10]
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v9
+    v12 <- EndObjectLiteral
+    v13 <- CallFunction v0, [v12]
+    BeginTry
+        v14 <- CallFunction v0, []
+    BeginCatch -> v15
+    EndTryCatch
+EndForLoop
+v16 <- CallFunction v0, []
+v17 <- BeginPlainFunction -> v18
+    v19 <- LoadInteger '1'
+    v20 <- UnaryOperation '-', v19
+    SetProperty v18, 'x', v20
+EndPlainFunction
+BeginForLoopInitializer
+    v21 <- LoadInteger '0'
+BeginForLoopCondition -> v22
+    v23 <- LoadInteger '1000'
+    v24 <- Compare v22, '<', v23
+BeginForLoopAfterthought v24 -> v25
+    v26 <- UnaryOperation '++', v25
+BeginForLoopBody -> v27
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v27
+    v28 <- EndObjectLiteral
+    v29 <- CallFunction v17, [v28]
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v27
+    v30 <- EndObjectLiteral
+    v31 <- CallFunction v17, [v30]
+    BeginTry
+        v32 <- CallFunction v17, []
+    BeginCatch -> v33
+    EndTryCatch
+EndForLoop
+v34 <- CallFunction v17, []
+
+
+function load(a1) {
+    return a1.x;
+}
+for (let i4 = 0; i4 < 1000; ++i4) {
+    load({ x: i4 });
+    load({ x: i4 });
+    try {
+        load();
+    } catch(e15) {
+    }
+}
+load();
+function store(a18) {
+    a18.x = -1;
+}
+for (let i22 = 0; i22 < 1000; ++i22) {
+    store({ x: i22 });
+    store({ x: i22 });
+    try {
+        store();
+    } catch(e33) {
+    }
+}
+store();
+
+FuzzIL program written to corpus/regress-v8-5697.fzil

@@ -1,0 +1,117 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'value'
+    v3 <- CreateNamedVariable 'k', 'var', v2
+    v4 <- LoadInteger '1'
+    SetComputedProperty v1, v3, v4
+    Return v4
+EndPlainFunction
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'obj', 'var', v5
+v7 <- LoadString 'value'
+v8 <- BeginPlainFunction -> v9
+    v10 <- LoadString 'nope'
+    ThrowException v10
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v8
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable 'Object', 'none'
+v13 <- CallMethod v12, 'defineProperty', [v6, v7, v11]
+BeginTry
+    v14 <- CallFunction v0, [v6]
+BeginCatch -> v15
+EndTryCatch
+BeginTry
+    v16 <- CallFunction v0, [v6]
+BeginCatch -> v17
+EndTryCatch
+BeginTry
+    v18 <- CallFunction v0, [v6]
+BeginCatch -> v19
+EndTryCatch
+v20 <- BeginPlainFunction -> v21
+    v22 <- LoadString 'value'
+    v23 <- CreateNamedVariable 'k', 'var', v22
+    v24 <- LoadInteger '1'
+    SetComputedProperty v21, v23, v24
+    v25 <- LoadString 'ok'
+    v26 <- LoadString 'nope'
+    v27 <- TernaryOperation v24, v25, v26
+    Return v27
+EndPlainFunction
+BeginObjectLiteral
+v28 <- EndObjectLiteral
+v29 <- CreateNamedVariable 'obj2', 'var', v28
+v30 <- LoadString 'value'
+v31 <- BeginPlainFunction -> v32
+    v33 <- LoadString 'nope'
+    ThrowException v33
+    v34 <- LoadBoolean 'true'
+    Return v34
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v31
+v35 <- EndObjectLiteral
+v36 <- CallMethod v12, 'defineProperty', [v29, v30, v35]
+BeginTry
+    v37 <- CallFunction v20, [v29]
+BeginCatch -> v38
+EndTryCatch
+BeginTry
+    v39 <- CallFunction v20, [v29]
+BeginCatch -> v40
+EndTryCatch
+BeginTry
+    v41 <- CallFunction v20, [v29]
+BeginCatch -> v42
+EndTryCatch
+
+
+function foo(a1) {
+    var k = "value";
+    a1[k] = 1;
+    return 1;
+}
+var obj = {};
+function f8(a9) {
+    throw "nope";
+}
+Object.defineProperty(obj, "value", { set: f8 });
+try {
+    foo(obj);
+} catch(e15) {
+}
+try {
+    foo(obj);
+} catch(e17) {
+}
+try {
+    foo(obj);
+} catch(e19) {
+}
+function bar(a21) {
+    var k = "value";
+    a21[k] = 1;
+    return 1 ? "ok" : "nope";
+}
+var obj2 = {};
+function f31(a32) {
+    throw "nope";
+    return true;
+}
+Object.defineProperty(obj2, "value", { set: f31 });
+try {
+    bar(obj2);
+} catch(e38) {
+}
+try {
+    bar(obj2);
+} catch(e40) {
+}
+try {
+    bar(obj2);
+} catch(e42) {
+}
+
+FuzzIL program written to corpus/regress-crbug-417508.fzil

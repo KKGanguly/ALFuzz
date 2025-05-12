@@ -1,0 +1,48 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        v4 <- LoadString 'ac'
+        v5 <- LoadString 'abcd'
+        v6 <- TernaryOperation v3, v4, v5
+        v7 <- CreateNamedVariable 's', 'var', v6
+        v8 <- LoadInteger '0'
+        v9 <- BinaryOperation v2, '>>>', v8
+        Reassign v2, v9
+        v10 <- GetProperty v7, 'length'
+        v11 <- Compare v2, '<', v10
+        BeginIf v11
+            v12 <- CallMethod v7, 'charCodeAt', [v2]
+            v13 <- CreateNamedVariable 'c', 'var', v12
+            v14 <- CreateNamedVariable 'gc', 'none'
+            v15 <- CallFunction v14, []
+            Return v13
+        EndIf
+    EndPlainFunction
+    v16 <- LoadInteger '0'
+    v17 <- LoadBoolean 'true'
+    v18 <- CallFunction v1, [v16, v17]
+    v19 <- LoadInteger '0'
+    v20 <- LoadBoolean 'true'
+    v21 <- CallFunction v1, [v19, v20]
+    v22 <- LoadInteger '0'
+    v23 <- LoadBoolean 'true'
+    v24 <- CallFunction v1, [v22, v23]
+EndPlainFunction
+v25 <- CallFunction v0, []
+
+
+function f0() {
+    function thingo(a2, a3) {
+        var s = a3 ? "ac" : "abcd";
+        if ((a2 = a2 >>> 0) < s.length) {
+            var c = s.charCodeAt(a2);
+            gc();
+            return c;
+        }
+    }
+    thingo(0, true);
+    thingo(0, true);
+    thingo(0, true);
+}
+f0();
+
+FuzzIL program written to corpus/regress-727662.fzil

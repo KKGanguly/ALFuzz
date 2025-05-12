@@ -1,0 +1,51 @@
+v0 <- LoadString 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+v1 <- CreateNamedVariable 's1', 'none'
+Reassign v1, v0
+v2 <- CreateNamedVariable 's1', 'none'
+Update v2, '+', v2
+Update v2, '+', v2
+Update v2, '+', v2
+Update v2, '+', v2
+v3 <- LoadString 'a'
+v4 <- CreateNamedVariable 's0', 'none'
+Reassign v4, v3
+v5 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- LoadInteger '1000000'
+        v9 <- Compare v7, '<', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation v10, '++'
+    BeginForLoopBody -> v12
+        v13 <- CreateNamedVariable 's0', 'none'
+        Update v13, '+', v2
+    EndForLoop
+EndPlainFunction
+BeginTry
+    v14 <- CallFunction v5, []
+BeginCatch -> v15
+EndTryCatch
+v16 <- LoadString 'x'
+v17 <- CreateNamedVariable 's0', 'none'
+v18 <- GetElement v17, '10'
+
+
+s1 = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+s1 += s1;
+s1 += s1;
+s1 += s1;
+s1 += s1;
+s0 = "a";
+function g() {
+    for (let i7 = 0; i7 < 1000000; i7++) {
+        s0 += s1;
+    }
+}
+try {
+    g();
+} catch(e15) {
+}
+s0[10];
+
+FuzzIL program written to corpus/regress-678917.fzil

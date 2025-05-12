@@ -1,0 +1,57 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v1
+        ObjectLiteralAddProperty `b`, v2
+        ObjectLiteralAddProperty `c`, v1
+    v3 <- EndObjectLiteral
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v5 <- EndObjectLiteral
+    v6 <- LoadInteger '43'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v5
+        ObjectLiteralAddProperty `b`, v6
+    v7 <- EndObjectLiteral
+    v8 <- CreateNamedVariable 'o', 'var', v7
+    v9 <- CallFunction v0, [v8]
+    v10 <- CallFunction v0, [v9]
+    SetProperty v8, 'a', v10
+    v11 <- GetProperty v8, 'a'
+    v12 <- GetProperty v11, 'c'
+    SetProperty v8, 'c', v12
+    v13 <- GetProperty v8, 'c'
+    v14 <- GetProperty v13, 'a'
+    v15 <- GetProperty v14, 'c'
+    v16 <- GetProperty v15, 'a'
+    v17 <- GetProperty v16, 'c'
+    v18 <- GetProperty v17, 'a'
+    v19 <- GetProperty v18, 'c'
+    v20 <- GetProperty v19, 'b'
+    Return v20
+EndPlainFunction
+v21 <- LoadInteger '42'
+v22 <- CallFunction v4, []
+v23 <- LoadInteger '42'
+v24 <- CallFunction v4, []
+v25 <- LoadInteger '42'
+v26 <- CallFunction v4, []
+
+
+function g(a1) {
+    return { a: a1, b: 42, c: a1 };
+}
+function f() {
+    const v5 = {};
+    var o = { a: v5, b: 43 };
+    o.a = g(g(o));
+    o.c = o.a.c;
+    return o.c.a.c.a.c.a.c.b;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/escape-analysis-cycle.fzil

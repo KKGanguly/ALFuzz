@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadThis
+    v3 <- CreateNamedVariable 'String', 'none'
+    v4 <- GetProperty v3, 'fromCharCode'
+    v5 <- CallMethod v4, 'apply', [v2, v1]
+    Return v5
+EndPlainFunction
+v6 <- CreateNamedVariable 'Int8Array', 'none'
+v7 <- CreateNamedVariable 'Uint8Array', 'none'
+v8 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v9 <- CreateNamedVariable 'Int16Array', 'none'
+v10 <- CreateNamedVariable 'Uint16Array', 'none'
+v11 <- CreateNamedVariable 'Int32Array', 'none'
+v12 <- CreateNamedVariable 'Uint32Array', 'none'
+v13 <- CreateNamedVariable 'Float32Array', 'none'
+v14 <- CreateNamedVariable 'Float64Array', 'none'
+v15 <- CreateArray [v6, v7, v8, v9, v10, v11, v12, v13, v14]
+v16 <- CreateNamedVariable 'klasses', 'const', v15
+v17 <- LoadString 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+v18 <- CreateNamedVariable 'string', 'const', v17
+BeginForOfLoop v16 -> v19
+    v20 <- BeginArrowFunction -> v21
+        v22 <- LoadInteger '0'
+        v23 <- CallMethod v21, 'charCodeAt', [v22]
+        Return v23
+    EndArrowFunction
+    v24 <- CallMethod v19, 'from', [v18, v20]
+    v25 <- CreateNamedVariable 'array', 'const', v24
+    v26 <- CallFunction v0, [v25]
+EndForOfLoop
+
+
+function arrayLikeToString(a1) {
+    return String.fromCharCode.apply(this, a1);
+}
+const klasses = [Int8Array,Uint8Array,Uint8ClampedArray,Int16Array,Uint16Array,Int32Array,Uint32Array,Float32Array,Float64Array];
+const string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+for (const v19 of klasses) {
+    const v20 = (a21) => {
+        return a21.charCodeAt(0);
+    };
+    const array = v19.from(string, v20);
+    arrayLikeToString(array);
+}
+
+FuzzIL program written to corpus/regress-2435.fzil

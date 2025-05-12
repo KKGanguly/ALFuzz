@@ -1,0 +1,106 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CreateNamedVariable 'd', 'var', v1
+    BeginForLoopInitializer
+        v4 <- LoadInteger '0'
+    BeginForLoopCondition -> v5
+        v6 <- Compare v5, '<', v2
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- LoadString 'f'
+        v11 <- BinaryOperation v3, '+', v10
+        Reassign v3, v11
+    EndForLoop
+    Return v3
+EndPlainFunction
+v12 <- LoadInteger '110000'
+v13 <- CreateNamedVariable 'default_depth', 'var', v12
+v14 <- LoadString 'foo'
+v15 <- CallFunction v0, [v14, v13]
+v16 <- CreateNamedVariable 'deep', 'var', v15
+v17 <- LoadString 'f'
+v18 <- GetElement v16, '0'
+v19 <- LoadString 'a'
+v20 <- CallFunction v0, [v19, v13]
+v21 <- CreateNamedVariable 'cmp1', 'var', v20
+v22 <- LoadString 'b'
+v23 <- CallFunction v0, [v22, v13]
+v24 <- CreateNamedVariable 'cmp2', 'var', v23
+v25 <- LoadInteger '1'
+v26 <- UnaryOperation '-', v25
+v27 <- CallMethod v21, 'localeCompare', [v24]
+v28 <- LoadString 'ab'
+v29 <- LoadString 'c'
+v30 <- CallFunction v0, [v29, v13]
+v31 <- CreateNamedVariable 'cmp2empty', 'var', v30
+v32 <- LoadString ''
+v33 <- CallMethod v31, 'localeCompare', [v32]
+v34 <- LoadInteger '0'
+v35 <- Compare v33, '>', v34
+v36 <- LoadString 'c'
+v37 <- LoadString 'd'
+v38 <- CallFunction v0, [v37, v13]
+v39 <- CreateNamedVariable 'cmp3empty', 'var', v38
+v40 <- LoadString ''
+v41 <- CallMethod v40, 'localeCompare', [v39]
+v42 <- LoadInteger '0'
+v43 <- Compare v41, '<', v42
+v44 <- LoadString 'd'
+v45 <- LoadInteger '1100'
+v46 <- CreateNamedVariable 'slicer_depth', 'var', v45
+v47 <- LoadString 'slice'
+v48 <- CallFunction v0, [v47, v46]
+v49 <- CreateNamedVariable 'slicer', 'var', v48
+BeginForLoopInitializer
+    v50 <- LoadInteger '0'
+    v51 <- CreateNamedVariable 'i', 'none'
+    Reassign v51, v50
+BeginForLoopCondition
+    v52 <- CreateNamedVariable 'i', 'none'
+    v53 <- LoadInteger '4'
+    v54 <- BinaryOperation v46, '+', v53
+    v55 <- Compare v52, '<', v54
+BeginForLoopAfterthought v55
+    v56 <- LoadInteger '2'
+    v57 <- CreateNamedVariable 'i', 'none'
+    Update v57, '+', v56
+BeginForLoopBody
+    v58 <- LoadInteger '1'
+    v59 <- LoadInteger '1'
+    v60 <- UnaryOperation '-', v59
+    v61 <- CallMethod v49, 'slice', [v58, v60]
+    Reassign v49, v61
+EndForLoop
+v62 <- LoadString 'f'
+v63 <- GetElement v49, '0'
+v64 <- LoadInteger '1'
+v65 <- GetProperty v49, 'length'
+
+
+function newdeep(a1, a2) {
+    var d = a1;
+    for (let i5 = 0; i5 < a2; i5++) {
+        d = d + "f";
+    }
+    return d;
+}
+var default_depth = 110000;
+var deep = newdeep("foo", default_depth);
+deep[0];
+var cmp1 = newdeep("a", default_depth);
+var cmp2 = newdeep("b", default_depth);
+-1;
+cmp1.localeCompare(cmp2);
+var cmp2empty = newdeep("c", default_depth);
+cmp2empty.localeCompare("") > 0;
+var cmp3empty = newdeep("d", default_depth);
+("").localeCompare(cmp3empty) < 0;
+var slicer_depth = 1100;
+var slicer = newdeep("slice", slicer_depth);
+for (i = 0; i < (slicer_depth + 4); i += 2) {
+    slicer = slicer.slice(1, -1);
+}
+slicer[0];
+slicer.length;
+
+FuzzIL program written to corpus/deep-recursion.fzil

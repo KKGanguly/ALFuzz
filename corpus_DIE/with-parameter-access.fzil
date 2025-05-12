@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> v1
+    BeginObjectLiteral
+    v2 <- EndObjectLiteral
+    BeginWith v2
+        Return v1
+    EndWith
+EndPlainFunction
+v3 <- LoadInteger '5'
+v4 <- LoadInteger '5'
+v5 <- CallFunction v0, [v4]
+v6 <- BeginPlainFunction -> v7
+    v8 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+        v9 <- EndObjectLiteral
+        BeginWith v9
+            Return v7
+        EndWith
+    EndPlainFunction
+    v10 <- CallFunction v8, []
+    Return v10
+EndPlainFunction
+v11 <- LoadInteger '7'
+v12 <- LoadInteger '7'
+v13 <- CallFunction v6, [v12]
+
+
+function f(a1) {
+    with ({}) {
+        return a1;
+    }
+}
+f(5);
+function g(a7) {
+    function h() {
+        with ({}) {
+            return a7;
+        }
+    }
+    return h();
+}
+g(7);
+
+FuzzIL program written to corpus/with-parameter-access.fzil

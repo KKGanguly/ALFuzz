@@ -1,0 +1,56 @@
+v0 <- BeginPlainFunction -> 
+    Return
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    Return
+    v2 <- LoadInteger '4'
+EndPlainFunction
+v3 <- CallFunction v0, []
+v4 <- LoadInteger '0'
+v5 <- Void_ v4
+v6 <- Compare v3, '===', v5
+v7 <- CallFunction v1, []
+v8 <- LoadInteger '0'
+v9 <- Void_ v8
+v10 <- Compare v7, '===', v9
+BeginForLoopInitializer
+    v11 <- LoadInteger '0'
+BeginForLoopCondition -> v12
+    v13 <- LoadInteger '10'
+    v14 <- Compare v12, '<', v13
+BeginForLoopAfterthought v14 -> v15
+    v16 <- UnaryOperation v15, '++'
+BeginForLoopBody -> v17
+    Break
+EndForLoop
+v18 <- LoadInteger '0'
+v19 <- CreateNamedVariable 'i', 'none'
+BeginForLoopInitializer
+    v20 <- LoadInteger '0'
+BeginForLoopCondition -> v21
+    v22 <- LoadInteger '10'
+    v23 <- Compare v21, '<', v22
+BeginForLoopAfterthought v23 -> v24
+    v25 <- UnaryOperation v24, '++'
+BeginForLoopBody -> v26
+    Continue
+EndForLoop
+v27 <- LoadInteger '10'
+
+
+function f() {
+    return;
+}
+function g() {
+    return;
+}
+f() === void 0;
+g() === void 0;
+for (let i12 = 0; i12 < 10; i12++) {
+    break;
+}
+for (let i21 = 0; i21 < 10; i21++) {
+    continue;
+}
+
+FuzzIL program written to corpus/no-semicolon.fzil

@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'g', 'var', v1
+    BeginBlockStatement
+        v3 <- LoadInteger '0'
+        v4 <- CreateNamedVariable 'x', 'var', v3
+        v5 <- BeginPlainFunction -> 
+            v6 <- LoadInteger '1'
+            v7 <- BinaryOperation v4, '+', v6
+            Reassign v4, v7
+            Return v4
+        EndPlainFunction
+        Reassign v2, v5
+    EndBlockStatement
+    Return v2
+EndPlainFunction
+v8 <- CallFunction v0, []
+v9 <- CreateNamedVariable 'o', 'var', v8
+v10 <- LoadInteger '1'
+v11 <- CallFunction v9, []
+v12 <- LoadInteger '2'
+v13 <- CallFunction v9, []
+v14 <- LoadInteger '3'
+v15 <- CallFunction v9, []
+v16 <- LoadInteger '4'
+v17 <- CallFunction v9, []
+
+
+function f() {
+    var g;
+    {
+        var x = 0;
+        function f5() {
+            return x = x + 1;
+        }
+        g = f5;
+    }
+    return g;
+}
+var o = f();
+o();
+o();
+o();
+o();
+
+FuzzIL program written to corpus/block-lazy-compile.fzil

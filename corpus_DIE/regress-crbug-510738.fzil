@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CallFunction v1, []
+EndPlainFunction
+v4 <- LoadInteger '17'
+v5 <- CreateNamedVariable 'x', 'var', v4
+v6 <- BeginPlainFunction -> 
+    Return v5
+EndPlainFunction
+v7 <- LoadInteger '17'
+v8 <- CallFunction v0, [v6, v7]
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadInteger '13'
+    Reassign v5, v10
+    Return v5
+EndPlainFunction
+v11 <- LoadInteger '13'
+v12 <- CallFunction v0, [v9, v11]
+
+
+function check(a1, a2) {
+    a1();
+}
+var x = 17;
+function generic_load() {
+    return x;
+}
+check(generic_load, 17);
+function generic_store() {
+    return x = 13;
+}
+check(generic_store, 13);
+
+FuzzIL program written to corpus/regress-crbug-510738.fzil

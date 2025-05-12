@@ -1,0 +1,167 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v3 <- CreateNamedVariable 'f', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- LoadString 'hey'
+        v6 <- CreateNamedVariable 's', 'var', v5
+        v7 <- CallFunction v0, []
+        v8 <- CallFunction v3, []
+        BeginIf v8
+            Return v6
+        EndIf
+    EndPlainFunction
+    v9 <- CallFunction v4, []
+    v10 <- CallFunction v4, []
+    v11 <- CallFunction v4, []
+    v12 <- BeginPlainFunction -> 
+        v13 <- LoadBoolean 'true'
+        Return v13
+    EndPlainFunction
+    Reassign v3, v12
+    v14 <- LoadString 'hey'
+    v15 <- CallFunction v4, []
+EndPlainFunction
+v16 <- CallFunction v1, []
+v17 <- BeginPlainFunction -> 
+    v18 <- BeginPlainFunction -> 
+        v19 <- LoadInteger '1'
+        Return v19
+    EndPlainFunction
+    v20 <- BeginPlainFunction -> 
+        v21 <- Construct v18, []
+        v22 <- UnaryOperation '!', v21
+        Return v22
+    EndPlainFunction
+    v23 <- CreateNamedVariable 'f', 'var', v20
+    v24 <- BeginPlainFunction -> 
+        v25 <- LoadString 'hey'
+        v26 <- CreateNamedVariable 's', 'var', v25
+        v27 <- CallFunction v0, []
+        v28 <- CallFunction v23, []
+        BeginIf v28
+            Return v26
+        EndIf
+    EndPlainFunction
+    v29 <- CallFunction v24, []
+    v30 <- CallFunction v24, []
+    v31 <- CallFunction v24, []
+    v32 <- BeginPlainFunction -> 
+        v33 <- LoadBoolean 'true'
+        Return v33
+    EndPlainFunction
+    Reassign v23, v32
+    v34 <- LoadString 'hey'
+    v35 <- CallFunction v24, []
+EndPlainFunction
+v36 <- CallFunction v17, []
+v37 <- BeginPlainFunction -> 
+    v38 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v39 <- BeginPlainFunction -> 
+        v40 <- Construct v38, []
+        v41 <- UnaryOperation '!', v40
+        Return v41
+    EndPlainFunction
+    v42 <- CreateNamedVariable 'f', 'var', v39
+    v43 <- BeginPlainFunction -> 
+        v44 <- LoadString 'hey'
+        v45 <- CreateNamedVariable 's', 'var', v44
+        v46 <- CallFunction v0, []
+        v47 <- CallFunction v42, []
+        BeginIf v47
+            Return v45
+        EndIf
+    EndPlainFunction
+    v48 <- CallFunction v43, []
+    v49 <- CallFunction v43, []
+    v50 <- CallFunction v43, []
+    v51 <- BeginPlainFunction -> 
+        v52 <- LoadBoolean 'true'
+        Return v52
+    EndPlainFunction
+    Reassign v42, v51
+    v53 <- LoadString 'hey'
+    v54 <- CallFunction v43, []
+EndPlainFunction
+v55 <- CallFunction v37, []
+
+
+function dummy() {
+}
+function InlinedFunctionTestContext() {
+    function f2() {
+    }
+    var f = f2;
+    function g() {
+        var s = "hey";
+        dummy();
+        if (f()) {
+            return s;
+        }
+    }
+    g();
+    g();
+    g();
+    function f12() {
+        return true;
+    }
+    f = f12;
+    g();
+}
+InlinedFunctionTestContext();
+function InlinedConstructorReturnTestContext() {
+    function c() {
+        return 1;
+    }
+    function f20() {
+        const v21 = new c();
+        return !v21;
+    }
+    var f = f20;
+    function g() {
+        var s = "hey";
+        dummy();
+        if (f()) {
+            return s;
+        }
+    }
+    g();
+    g();
+    g();
+    function f32() {
+        return true;
+    }
+    f = f32;
+    g();
+}
+InlinedConstructorReturnTestContext();
+function InlinedConstructorNoReturnTestContext() {
+    function c() {
+    }
+    function f39() {
+        const v40 = new c();
+        return !v40;
+    }
+    var f = f39;
+    function g() {
+        var s = "hey";
+        dummy();
+        if (f()) {
+            return s;
+        }
+    }
+    g();
+    g();
+    g();
+    function f51() {
+        return true;
+    }
+    f = f51;
+    g();
+}
+InlinedConstructorNoReturnTestContext();
+
+FuzzIL program written to corpus/regress-v8-4839.fzil

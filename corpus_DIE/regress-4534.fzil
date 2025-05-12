@@ -1,0 +1,70 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'defineProperty'
+v2 <- CreateNamedVariable 'dp', 'var', v1
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '111'
+    Return v4
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadInteger '222'
+    v8 <- CreateNamedVariable 'print', 'none'
+    v9 <- CallFunction v8, [v7]
+EndPlainFunction
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'obj1', 'none'
+Reassign v11, v10
+v12 <- CreateNamedVariable 'obj1', 'none'
+v13 <- LoadString 'golf'
+v14 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+    ObjectLiteralAddProperty `configurable`, v14
+v15 <- EndObjectLiteral
+v16 <- CallFunction v2, [v12, v13, v15]
+v17 <- LoadString 'golf'
+v18 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v5
+    ObjectLiteralAddProperty `configurable`, v18
+v19 <- EndObjectLiteral
+v20 <- CallFunction v2, [v12, v17, v19]
+v21 <- CreateNamedVariable 'gc', 'none'
+v22 <- CallFunction v21, []
+BeginObjectLiteral
+v23 <- EndObjectLiteral
+v24 <- CreateNamedVariable 'obj2', 'none'
+Reassign v24, v23
+v25 <- CreateNamedVariable 'obj2', 'none'
+v26 <- LoadString 'golf'
+v27 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+    ObjectLiteralAddProperty `configurable`, v27
+v28 <- EndObjectLiteral
+v29 <- CallFunction v2, [v25, v26, v28]
+v30 <- LoadString 'golf'
+v31 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v5
+    ObjectLiteralAddProperty `configurable`, v31
+v32 <- EndObjectLiteral
+v33 <- CallFunction v2, [v25, v30, v32]
+
+
+var dp = Object.defineProperty;
+function getter() {
+    return 111;
+}
+function setter(a6) {
+    print(222);
+}
+obj1 = {};
+dp(obj1, "golf", { get: getter, configurable: true });
+dp(obj1, "golf", { set: setter, configurable: true });
+gc();
+obj2 = {};
+dp(obj2, "golf", { get: getter, configurable: true });
+dp(obj2, "golf", { set: setter, configurable: true });
+
+FuzzIL program written to corpus/regress-4534.fzil

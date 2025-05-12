@@ -1,0 +1,184 @@
+v0 <- CreateNamedVariable 'Number', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString '0'
+v3 <- BeginPlainFunction -> v4
+    v5 <- CreateNamedVariable 'set', 'none'
+    Reassign v5, v4
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v3
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'Object', 'none'
+v8 <- CallMethod v7, 'defineProperty', [v1, v2, v6]
+v9 <- CreateNamedVariable 'String', 'none'
+v10 <- GetProperty v9, 'prototype'
+v11 <- LoadString '0'
+v12 <- BeginPlainFunction -> v13
+    v14 <- CreateNamedVariable 'set', 'none'
+    Reassign v14, v13
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v12
+v15 <- EndObjectLiteral
+v16 <- CallMethod v7, 'defineProperty', [v10, v11, v15]
+v17 <- GetProperty v9, 'prototype'
+v18 <- LoadString '3'
+v19 <- BeginPlainFunction -> v20
+    v21 <- CreateNamedVariable 'set', 'none'
+    Reassign v21, v20
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v19
+v22 <- EndObjectLiteral
+v23 <- CallMethod v7, 'defineProperty', [v17, v18, v22]
+v24 <- LoadUndefined
+v25 <- CreateNamedVariable 'set', 'var', v24
+v26 <- LoadInteger '1'
+v27 <- CreateNamedVariable 'n', 'var', v26
+v28 <- LoadInteger '0'
+Reassign v25, v28
+v29 <- LoadInteger '100'
+SetElement v27, '0', v29
+v30 <- LoadInteger '100'
+v31 <- LoadString 'bla'
+v32 <- CreateNamedVariable 's', 'var', v31
+v33 <- LoadInteger '200'
+SetElement v32, '0', v33
+v34 <- LoadInteger '100'
+v35 <- LoadInteger '300'
+SetElement v32, '3', v35
+v36 <- LoadInteger '300'
+v37 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v38 <- LoadString '123'
+    v39 <- CreateNamedVariable 'o', 'var', v38
+    v40 <- LoadInteger '10'
+    SetElement v39, '1', v40
+EndPlainFunction
+v41 <- CallFunction v37, []
+v42 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v43 <- LoadString ''
+    v44 <- CreateNamedVariable 'o', 'var', v43
+    v45 <- LoadInteger '10'
+    SetElement v44, '1', v45
+EndPlainFunction
+v46 <- CallFunction v42, []
+v47 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v48 <- LoadInteger '1'
+    v49 <- CreateNamedVariable 'o', 'var', v48
+    v50 <- LoadInteger '10'
+    SetElement v49, '1', v50
+EndPlainFunction
+v51 <- CallFunction v47, []
+v52 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v53 <- LoadString '66'
+    v54 <- CreateNamedVariable 'Symbol', 'none'
+    v55 <- CallFunction v54, [v53]
+    v56 <- CreateNamedVariable 'sym', 'var', v55
+    v57 <- LoadInteger '0'
+    SetProperty v56, 'a', v57
+EndPlainFunction
+v58 <- CallFunction v52, []
+v59 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v60 <- LoadString '66'
+    v61 <- CreateNamedVariable 'Symbol', 'none'
+    v62 <- CallFunction v61, [v60]
+    v63 <- CreateNamedVariable 'sym', 'var', v62
+    v64 <- LoadInteger '0'
+    v65 <- LoadString 'a'
+    v66 <- LoadString 'b'
+    v67 <- BinaryOperation v65, '+', v66
+    SetComputedProperty v63, v67, v64
+EndPlainFunction
+v68 <- CallFunction v59, []
+v69 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v70 <- LoadString '66'
+    v71 <- CreateNamedVariable 'Symbol', 'none'
+    v72 <- CallFunction v71, [v70]
+    v73 <- CreateNamedVariable 'sym', 'var', v72
+    v74 <- LoadInteger '0'
+    SetElement v73, '62', v74
+EndPlainFunction
+v75 <- CallFunction v69, []
+v76 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v77 <- LoadString 'bla'
+    v78 <- CreateNamedVariable 'o', 'var', v77
+    v79 <- LoadInteger '1'
+    v80 <- LoadString '0'
+    SetComputedProperty v78, v80, v79
+EndPlainFunction
+v81 <- CallFunction v76, []
+
+
+const v1 = Number.prototype;
+function f3(a4) {
+    set = a4;
+}
+Object.defineProperty(v1, "0", { set: f3 });
+const v10 = String.prototype;
+function f12(a13) {
+    set = a13;
+}
+Object.defineProperty(v10, "0", { set: f12 });
+const v17 = String.prototype;
+function f19(a20) {
+    set = a20;
+}
+Object.defineProperty(v17, "3", { set: f19 });
+var set;
+var n = 1;
+set = 0;
+n[0] = 100;
+var s = "bla";
+s[0] = 200;
+s[3] = 300;
+function f37() {
+    'use strict';
+    var o = "123";
+    o[1] = 10;
+}
+f37();
+function f42() {
+    'use strict';
+    var o = "";
+    o[1] = 10;
+}
+f42();
+function f47() {
+    'use strict';
+    var o = 1;
+    o[1] = 10;
+}
+f47();
+function f52() {
+    'use strict';
+    var sym = Symbol("66");
+    sym.a = 0;
+}
+f52();
+function f59() {
+    'use strict';
+    var sym = Symbol("66");
+    sym["a" + "b"] = 0;
+}
+f59();
+function f69() {
+    'use strict';
+    var sym = Symbol("66");
+    sym[62] = 0;
+}
+f69();
+function f76() {
+    'use strict';
+    var o = "bla";
+    o["0"] = 1;
+}
+f76();
+
+FuzzIL program written to corpus/primitive-keyed-access.fzil

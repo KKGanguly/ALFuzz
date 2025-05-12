@@ -1,0 +1,22 @@
+v0 <- BeginAsyncFunction -> 
+EndAsyncFunction
+v1 <- GetProperty v0, 'constructor'
+v2 <- CreateNamedVariable 'AsyncFunction', 'const', v1
+v3 <- BeginClassDefinition v2
+EndClassDefinition
+v4 <- Construct v3, []
+v5 <- CreateNamedVariable 'af', 'var', v4
+v6 <- CreateNamedVariable 'gc', 'none'
+v7 <- CallFunction v6, []
+
+
+async function f0() {
+}
+const AsyncFunction = f0.constructor;
+class C3 extends AsyncFunction {
+}
+const v4 = new C3();
+var af = v4;
+gc();
+
+FuzzIL program written to corpus/regress-crbug-725537.fzil

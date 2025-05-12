@@ -1,0 +1,899 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginClassDefinition
+        BeginClassConstructor -> v2
+            v3 <- LoadInteger '2'
+            v4 <- LoadArguments
+            v5 <- GetProperty v4, 'length'
+            v6 <- LoadInteger '1'
+            v7 <- LoadArguments
+            v8 <- GetElement v7, '0'
+            v9 <- LoadInteger '2'
+            v10 <- LoadArguments
+            v11 <- GetElement v10, '1'
+        EndClassConstructor
+    EndClassDefinition
+    v12 <- LoadInteger '1'
+    v13 <- LoadInteger '2'
+    v14 <- Construct v1, [v12, v13]
+    v15 <- CreateNamedVariable 'b', 'let', v14
+    v16 <- BeginClassDefinition v1
+        BeginClassConstructor -> v17
+            v18 <- LoadInteger '2'
+            v19 <- LoadArguments
+            v20 <- GetProperty v19, 'length'
+            v21 <- LoadInteger '3'
+            v22 <- LoadArguments
+            v23 <- GetElement v22, '0'
+            v24 <- LoadInteger '4'
+            v25 <- LoadArguments
+            v26 <- GetElement v25, '1'
+            v27 <- LoadInteger '1'
+            v28 <- LoadInteger '2'
+            CallSuperConstructor [v27, v28]
+        EndClassConstructor
+    EndClassDefinition
+    v29 <- LoadInteger '3'
+    v30 <- LoadInteger '4'
+    v31 <- Construct v16, [v29, v30]
+    v32 <- CreateNamedVariable 's', 'let', v31
+    v33 <- LoadInteger '0'
+    v34 <- GetProperty v16, 'length'
+    v35 <- BeginClassDefinition v1
+        BeginClassConstructor -> v36, v37, v38
+            v39 <- LoadInteger '2'
+            v40 <- LoadArguments
+            v41 <- GetProperty v40, 'length'
+            v42 <- LoadInteger '3'
+            v43 <- LoadArguments
+            v44 <- GetElement v43, '0'
+            v45 <- LoadInteger '4'
+            v46 <- LoadArguments
+            v47 <- GetElement v46, '1'
+            v48 <- LoadInteger '1'
+            v49 <- LoadInteger '2'
+            CallSuperConstructor [v48, v49]
+        EndClassConstructor
+    EndClassDefinition
+    v50 <- LoadInteger '3'
+    v51 <- LoadInteger '4'
+    v52 <- Construct v35, [v50, v51]
+    v53 <- CreateNamedVariable 's2', 'let', v52
+    v54 <- LoadInteger '2'
+    v55 <- GetProperty v35, 'length'
+EndPlainFunction
+v56 <- CallFunction v0, []
+v57 <- BeginPlainFunction -> 
+    v58 <- BeginClassDefinition
+        BeginClassConstructor -> v59, v60, v61
+            v62 <- CreateNamedVariable 'Object', 'none'
+            v63 <- Construct v62, []
+            v64 <- CreateNamedVariable 'o', 'let', v63
+            v65 <- BinaryOperation v60, '+', v61
+            SetProperty v64, 'prp', v65
+            Return v64
+        EndClassConstructor
+    EndClassDefinition
+    v66 <- BeginClassDefinition v58
+        BeginClassConstructor -> v67, v68, v69
+            v70 <- LoadUndefined
+            v71 <- CreateNamedVariable 'exn', 'var', v70
+            BeginTry
+                v72 <- LoadInteger '3'
+                SetProperty v67, 'prp1', v72
+            BeginCatch -> v73
+                Reassign v71, v73
+            EndTryCatch
+            v74 <- CreateNamedVariable 'ReferenceError', 'none'
+            v75 <- TestInstanceOf v71, v74
+            CallSuperConstructor [v68, v69]
+            v76 <- BinaryOperation v68, '+', v69
+            v77 <- GetProperty v67, 'prp'
+            v78 <- LoadUndefined
+            v79 <- GetProperty v67, 'prp1'
+            v80 <- LoadString 'prp1'
+            v81 <- CallMethod v67, 'hasOwnProperty', [v80]
+            Return v67
+        EndClassConstructor
+    EndClassDefinition
+    v82 <- LoadInteger '1'
+    v83 <- LoadInteger '2'
+    v84 <- Construct v58, [v82, v83]
+    v85 <- CreateNamedVariable 'b', 'let', v84
+    v86 <- LoadInteger '3'
+    v87 <- GetProperty v85, 'prp'
+    v88 <- LoadInteger '2'
+    v89 <- LoadInteger '1'
+    v90 <- UnaryOperation '-', v89
+    v91 <- Construct v66, [v88, v90]
+    v92 <- CreateNamedVariable 's', 'let', v91
+    v93 <- LoadInteger '1'
+    v94 <- GetProperty v92, 'prp'
+    v95 <- LoadUndefined
+    v96 <- GetProperty v92, 'prp1'
+    v97 <- LoadString 'prp1'
+    v98 <- CallMethod v92, 'hasOwnProperty', [v97]
+    v99 <- BeginClassDefinition v58
+        BeginClassConstructor -> v100, v101
+            v102 <- LoadInteger '1'
+            v103 <- LoadInteger '2'
+            CallSuperConstructor [v102, v103]
+            v104 <- LoadInteger '0'
+            v105 <- Compare v101, '<', v104
+            BeginIf v105
+                Return
+            EndIf
+            v106 <- LoadBoolean 'false'
+            v107 <- CreateNamedVariable 'called', 'let', v106
+            v108 <- BeginPlainFunction -> 
+                v109 <- LoadBoolean 'true'
+                Reassign v107, v109
+                v110 <- LoadInteger '3'
+                Return v110
+            EndPlainFunction
+            v111 <- LoadNull
+            v112 <- CreateNamedVariable 'exn', 'var', v111
+            BeginTry
+                v113 <- CallFunction v108, []
+                v114 <- LoadInteger '4'
+                CallSuperConstructor [v113, v114]
+            BeginCatch -> v115
+                Reassign v112, v115
+            EndTryCatch
+            v116 <- CreateNamedVariable 'ReferenceError', 'none'
+            v117 <- TestInstanceOf v112, v116
+        EndClassConstructor
+    EndClassDefinition
+    v118 <- LoadInteger '1'
+    v119 <- Construct v99, [v118]
+    v120 <- CreateNamedVariable 's2', 'var', v119
+    v121 <- LoadInteger '3'
+    v122 <- GetProperty v120, 'prp'
+    v123 <- LoadInteger '1'
+    v124 <- UnaryOperation '-', v123
+    v125 <- Construct v99, [v124]
+    v126 <- CreateNamedVariable 's3', 'var', v125
+    v127 <- LoadInteger '3'
+    v128 <- GetProperty v126, 'prp'
+    v129 <- BeginPlainFunction -> 
+        v130 <- CreateNamedVariable 'Object', 'none'
+        v131 <- Construct v130, []
+        v132 <- LoadInteger '1'
+        v133 <- LoadInteger '2'
+        v134 <- CallMethod v66, 'call', [v131, v132, v133]
+    EndPlainFunction
+    v135 <- CallFunction v129, []
+    v136 <- CreateNamedVariable 'TypeError', 'none'
+    v137 <- BeginPlainFunction -> 
+        v138 <- CreateNamedVariable 'Object', 'none'
+        v139 <- Construct v138, []
+        v140 <- LoadInteger '1'
+        v141 <- LoadInteger '2'
+        v142 <- CallMethod v58, 'call', [v139, v140, v141]
+    EndPlainFunction
+    v143 <- CallFunction v137, []
+    v144 <- BeginClassDefinition v58
+        BeginClassConstructor -> v145
+        EndClassConstructor
+    EndClassDefinition
+    v146 <- BeginPlainFunction -> 
+        v147 <- Construct v144, []
+    EndPlainFunction
+    v148 <- CallFunction v146, []
+    v149 <- CreateNamedVariable 'ReferenceError', 'none'
+EndPlainFunction
+v150 <- CallFunction v57, []
+v151 <- BeginPlainFunction -> 
+    v152 <- LoadInteger '0'
+    v153 <- CreateNamedVariable 'baseCalled', 'let', v152
+    v154 <- BeginClassDefinition
+        BeginClassConstructor -> v155
+            v156 <- UnaryOperation v153, '++'
+        EndClassConstructor
+    EndClassDefinition
+    v157 <- LoadInteger '0'
+    v158 <- CreateNamedVariable 'fCalled', 'let', v157
+    v159 <- BeginPlainFunction -> 
+        v160 <- UnaryOperation v158, '++'
+        v161 <- LoadInteger '3'
+        Return v161
+    EndPlainFunction
+    v162 <- BeginClassDefinition v154
+        BeginClassConstructor -> v163
+            v164 <- LoadInteger '0'
+            Reassign v153, v164
+            CallSuperConstructor []
+            v165 <- LoadInteger '1'
+            v166 <- CreateNamedVariable 'obj', 'let', v163
+            v167 <- LoadNull
+            v168 <- CreateNamedVariable 'exn', 'let', v167
+            v169 <- LoadInteger '0'
+            Reassign v153, v169
+            v170 <- LoadInteger '0'
+            Reassign v158, v170
+            BeginTry
+                v171 <- CallFunction v159, []
+                CallSuperConstructor [v171]
+            BeginCatch -> v172
+                Reassign v168, v172
+            EndTryCatch
+            v173 <- CreateNamedVariable 'ReferenceError', 'none'
+            v174 <- TestInstanceOf v168, v173
+            v175 <- LoadInteger '1'
+            v176 <- LoadInteger '1'
+            v177 <- LoadNull
+            Reassign v168, v177
+            v178 <- LoadInteger '0'
+            Reassign v153, v178
+            v179 <- LoadInteger '0'
+            Reassign v158, v179
+            BeginTry
+                CallSuperConstructor []
+                v180 <- CallFunction v159, []
+                CallSuperConstructor [v163, v180]
+            BeginCatch -> v181
+                Reassign v168, v181
+            EndTryCatch
+            v182 <- TestInstanceOf v168, v173
+            v183 <- LoadInteger '0'
+            v184 <- LoadInteger '1'
+            v185 <- LoadNull
+            Reassign v168, v185
+            v186 <- LoadInteger '0'
+            Reassign v153, v186
+            v187 <- LoadInteger '0'
+            Reassign v158, v187
+            BeginTry
+                v188 <- CallFunction v159, []
+                CallSuperConstructor []
+                CallSuperConstructor [v188, v163]
+            BeginCatch -> v189
+                Reassign v168, v189
+            EndTryCatch
+            v190 <- TestInstanceOf v168, v173
+            v191 <- LoadInteger '1'
+            v192 <- LoadInteger '1'
+        EndClassConstructor
+    EndClassDefinition
+    v193 <- Construct v162, []
+EndPlainFunction
+v194 <- CallFunction v151, []
+v195 <- BeginPlainFunction -> 
+    v196 <- BeginClassDefinition
+        BeginClassConstructor -> v197, v198
+            SetProperty v197, 'foobar', v198
+        EndClassConstructor
+    EndClassDefinition
+    v199 <- BeginClassDefinition v196
+        BeginClassConstructor -> v200, v201
+            CallSuperConstructor [v201]
+        EndClassConstructor
+    EndClassDefinition
+    v202 <- LoadInteger '1'
+    v203 <- Construct v199, [v202]
+    v204 <- CreateNamedVariable 's', 'let', v203
+    v205 <- LoadInteger '1'
+    v206 <- GetProperty v204, 'foobar'
+    v207 <- GetProperty v199, 'prototype'
+    v208 <- GetProperty v204, '__proto__'
+    v209 <- LoadInteger '1'
+    v210 <- LoadInteger '2'
+    v211 <- Construct v199, [v209, v210]
+    v212 <- CreateNamedVariable 's1', 'let', v211
+    v213 <- LoadInteger '1'
+    v214 <- GetProperty v212, 'foobar'
+    v215 <- GetProperty v212, '__proto__'
+    v216 <- GetProperty v199, 'prototype'
+    v217 <- Compare v215, '===', v216
+    v218 <- Construct v199, []
+    v219 <- CreateNamedVariable 's2', 'let', v218
+    v220 <- LoadUndefined
+    v221 <- GetProperty v219, 'foobar'
+    v222 <- GetProperty v199, 'prototype'
+    v223 <- GetProperty v219, '__proto__'
+    v224 <- BeginPlainFunction -> 
+        v225 <- LoadInteger '1'
+        v226 <- CallFunction v199, [v225]
+    EndPlainFunction
+    v227 <- CallFunction v224, []
+    v228 <- CreateNamedVariable 'TypeError', 'none'
+    v229 <- BeginPlainFunction -> 
+        v230 <- LoadInteger '1'
+        v231 <- LoadInteger '2'
+        v232 <- LoadInteger '3'
+        v233 <- LoadInteger '4'
+        v234 <- CallFunction v199, [v230, v231, v232, v233]
+    EndPlainFunction
+    v235 <- CallFunction v229, []
+    v236 <- BeginClassDefinition v199
+        BeginClassConstructor -> v237
+            v238 <- LoadInteger '5'
+            v239 <- LoadInteger '6'
+            v240 <- LoadInteger '7'
+            CallSuperConstructor [v238, v239, v240]
+        EndClassConstructor
+    EndClassDefinition
+    v241 <- Construct v236, []
+    v242 <- CreateNamedVariable 'ss2', 'let', v241
+    v243 <- LoadInteger '5'
+    v244 <- GetProperty v242, 'foobar'
+    v245 <- GetProperty v236, 'prototype'
+    v246 <- GetProperty v242, '__proto__'
+    v247 <- BeginClassDefinition v196
+        BeginClassConstructor -> v248, v249, v250
+            v251 <- BinaryOperation v249, '+', v250
+            CallSuperConstructor [v251]
+        EndClassConstructor
+    EndClassDefinition
+    v252 <- LoadInteger '27'
+    v253 <- LoadInteger '42'
+    v254 <- LoadInteger '27'
+    v255 <- BinaryOperation v253, '-', v254
+    v256 <- Construct v247, [v252, v255]
+    v257 <- CreateNamedVariable 'ss3', 'let', v256
+    v258 <- LoadInteger '42'
+    v259 <- GetProperty v257, 'foobar'
+    v260 <- GetProperty v247, 'prototype'
+    v261 <- GetProperty v257, '__proto__'
+EndPlainFunction
+v262 <- CallFunction v195, []
+v263 <- BeginPlainFunction -> 
+    v264 <- CreateNamedVariable 'Uint8Array', 'none'
+    v265 <- BeginClassDefinition v264
+        BeginClassConstructor -> v266
+            v267 <- LoadInteger '10'
+            CallSuperConstructor [v267]
+            v268 <- LoadInteger '255'
+            SetElement v266, '0', v268
+            v269 <- LoadInteger '4090'
+            SetElement v266, '1', v269
+        EndClassConstructor
+    EndClassDefinition
+    v270 <- Construct v265, []
+    v271 <- CreateNamedVariable 'eua', 'var', v270
+    v272 <- LoadInteger '10'
+    v273 <- GetProperty v271, 'length'
+    v274 <- LoadInteger '10'
+    v275 <- GetProperty v271, 'byteLength'
+    v276 <- LoadInteger '255'
+    v277 <- GetElement v271, '0'
+    v278 <- LoadInteger '250'
+    v279 <- GetElement v271, '1'
+    v280 <- GetProperty v265, 'prototype'
+    v281 <- GetProperty v271, '__proto__'
+    v282 <- LoadString '[object Uint8Array]'
+    v283 <- CreateNamedVariable 'Object', 'none'
+    v284 <- GetProperty v283, 'prototype'
+    v285 <- GetProperty v284, 'toString'
+    v286 <- CallMethod v285, 'call', [v271]
+EndPlainFunction
+v287 <- CallFunction v263, []
+v288 <- BeginPlainFunction -> 
+    v289 <- LoadNull
+    v290 <- CreateNamedVariable 'N', 'let', v289
+    v291 <- BeginClassDefinition v290
+        BeginClassConstructor -> v292, v293, v294
+            v295 <- LoadInteger '1'
+            v296 <- LoadInteger '2'
+            BeginObjectLiteral
+            v297 <- EndObjectLiteral
+            Return v297
+        EndClassConstructor
+    EndClassDefinition
+    v298 <- LoadInteger '1'
+    v299 <- LoadInteger '2'
+    v300 <- Construct v291, [v298, v299]
+EndPlainFunction
+v301 <- CallFunction v288, []
+v302 <- BeginPlainFunction -> 
+    v303 <- BeginClassDefinition
+        BeginClassConstructor -> v304, v305, v306
+            SetProperty v304, 'x', v305
+            SetProperty v304, 'y', v306
+        EndClassConstructor
+    EndClassDefinition
+    BeginObjectLiteral
+    v307 <- EndObjectLiteral
+    v308 <- CreateNamedVariable 'obj', 'let', v307
+    v309 <- BeginClassDefinition v303
+        BeginClassConstructor -> v310, v311, v312
+            CallSuperConstructor [v311, v312]
+            v313 <- Compare v310, '!==', v308
+        EndClassConstructor
+    EndClassDefinition
+    v314 <- CallMethod v309, 'bind', [v308]
+    v315 <- CreateNamedVariable 'f', 'let', v314
+    v316 <- BeginPlainFunction -> 
+        v317 <- LoadInteger '1'
+        v318 <- LoadInteger '2'
+        v319 <- CallFunction v315, [v317, v318]
+    EndPlainFunction
+    v320 <- CallFunction v316, []
+    v321 <- CreateNamedVariable 'TypeError', 'none'
+    v322 <- LoadInteger '1'
+    v323 <- LoadInteger '2'
+    v324 <- Construct v315, [v322, v323]
+    v325 <- CreateNamedVariable 's', 'let', v324
+    v326 <- LoadInteger '1'
+    v327 <- GetProperty v325, 'x'
+    v328 <- LoadInteger '2'
+    v329 <- GetProperty v325, 'y'
+    v330 <- GetProperty v309, 'prototype'
+    v331 <- GetProperty v325, '__proto__'
+    v332 <- LoadInteger '1'
+    v333 <- Construct v315, [v332]
+    v334 <- CreateNamedVariable 's1', 'let', v333
+    v335 <- LoadInteger '1'
+    v336 <- GetProperty v334, 'x'
+    v337 <- LoadUndefined
+    v338 <- GetProperty v334, 'y'
+    v339 <- GetProperty v309, 'prototype'
+    v340 <- GetProperty v334, '__proto__'
+    v341 <- LoadInteger '1'
+    v342 <- CallMethod v309, 'bind', [v308, v341]
+    v343 <- CreateNamedVariable 'g', 'let', v342
+    v344 <- BeginPlainFunction -> 
+        v345 <- LoadInteger '8'
+        v346 <- CallFunction v343, [v345]
+    EndPlainFunction
+    v347 <- CallFunction v344, []
+    v348 <- LoadInteger '8'
+    v349 <- Construct v343, [v348]
+    v350 <- CreateNamedVariable 's2', 'let', v349
+    v351 <- LoadInteger '1'
+    v352 <- GetProperty v350, 'x'
+    v353 <- LoadInteger '8'
+    v354 <- GetProperty v350, 'y'
+    v355 <- GetProperty v309, 'prototype'
+    v356 <- GetProperty v325, '__proto__'
+EndPlainFunction
+v357 <- CallFunction v302, []
+v358 <- BeginPlainFunction -> 
+    v359 <- BeginClassDefinition
+    EndClassDefinition
+    v360 <- BeginPlainFunction -> 
+        v361 <- CallFunction v359, []
+    EndPlainFunction
+    v362 <- CallFunction v360, []
+    v363 <- CreateNamedVariable 'TypeError', 'none'
+    v364 <- BeginClassDefinition v359
+    EndClassDefinition
+    v365 <- BeginPlainFunction -> 
+        v366 <- CallFunction v364, []
+    EndPlainFunction
+    v367 <- CallFunction v365, []
+    v368 <- Construct v364, []
+    v369 <- CreateNamedVariable 's1', 'let', v368
+    v370 <- GetProperty v369, '__proto__'
+    v371 <- GetProperty v364, 'prototype'
+    v372 <- BeginClassDefinition
+        BeginClassConstructor -> v373, v374, v375
+            SetProperty v373, 'x', v374
+            SetProperty v373, 'y', v375
+        EndClassConstructor
+    EndClassDefinition
+    v376 <- BeginClassDefinition v372
+    EndClassDefinition
+    v377 <- LoadInteger '1'
+    v378 <- LoadInteger '2'
+    v379 <- Construct v376, [v377, v378]
+    v380 <- CreateNamedVariable 's2', 'let', v379
+    v381 <- GetProperty v380, '__proto__'
+    v382 <- GetProperty v376, 'prototype'
+    v383 <- LoadInteger '1'
+    v384 <- GetProperty v380, 'x'
+    v385 <- LoadInteger '2'
+    v386 <- GetProperty v380, 'y'
+    BeginObjectLiteral
+    v387 <- EndObjectLiteral
+    v388 <- LoadInteger '3'
+    v389 <- LoadInteger '4'
+    v390 <- CallMethod v376, 'bind', [v387, v388, v389]
+    v391 <- CreateNamedVariable 'f', 'let', v390
+    v392 <- Construct v391, []
+    v393 <- CreateNamedVariable 's2prime', 'let', v392
+    v394 <- GetProperty v393, '__proto__'
+    v395 <- GetProperty v376, 'prototype'
+    v396 <- LoadInteger '3'
+    v397 <- GetProperty v393, 'x'
+    v398 <- LoadInteger '4'
+    v399 <- GetProperty v393, 'y'
+    BeginObjectLiteral
+    v400 <- EndObjectLiteral
+    v401 <- CreateNamedVariable 'obj', 'let', v400
+    v402 <- BeginClassDefinition
+        BeginClassConstructor -> v403
+            Return v401
+        EndClassConstructor
+    EndClassDefinition
+    v404 <- BeginClassDefinition v402
+    EndClassDefinition
+    v405 <- Construct v404, []
+    v406 <- CreateNamedVariable 's3', 'let', v405
+    v407 <- CreateNamedVariable 'Uint8Array', 'none'
+    v408 <- BeginClassDefinition v407
+    EndClassDefinition
+    v409 <- LoadInteger '10'
+    v410 <- Construct v408, [v409]
+    v411 <- CreateNamedVariable 'eua', 'var', v410
+    v412 <- LoadInteger '10'
+    v413 <- GetProperty v411, 'length'
+    v414 <- LoadInteger '10'
+    v415 <- GetProperty v411, 'byteLength'
+    v416 <- LoadInteger '255'
+    SetElement v411, '0', v416
+    v417 <- LoadInteger '4090'
+    SetElement v411, '1', v417
+    v418 <- LoadInteger '255'
+    v419 <- GetElement v411, '0'
+    v420 <- LoadInteger '250'
+    v421 <- GetElement v411, '1'
+    v422 <- GetProperty v408, 'prototype'
+    v423 <- GetProperty v411, '__proto__'
+    v424 <- LoadString '[object Uint8Array]'
+    v425 <- CreateNamedVariable 'Object', 'none'
+    v426 <- GetProperty v425, 'prototype'
+    v427 <- GetProperty v426, 'toString'
+    v428 <- CallMethod v427, 'call', [v411]
+EndPlainFunction
+v429 <- CallFunction v358, []
+
+
+function TestArgumentsAccess() {
+    class C1 {
+        constructor() {
+            arguments.length;
+            arguments[0];
+            arguments[1];
+        }
+    }
+    const v14 = new C1(1, 2);
+    let b = v14;
+    class C16 extends C1 {
+        constructor() {
+            arguments.length;
+            arguments[0];
+            arguments[1];
+            super(1, 2);
+        }
+    }
+    const v31 = new C16(3, 4);
+    let s = v31;
+    C16.length;
+    class C35 extends C1 {
+        constructor(a37, a38) {
+            arguments.length;
+            arguments[0];
+            arguments[1];
+            super(1, 2);
+        }
+    }
+    const v52 = new C35(3, 4);
+    let s2 = v52;
+    C35.length;
+}
+TestArgumentsAccess();
+function TestThisAccessRestriction() {
+    class C58 {
+        constructor(a60, a61) {
+            const v63 = new Object();
+            let o = v63;
+            o.prp = a60 + a61;
+            return o;
+        }
+    }
+    class C66 extends C58 {
+        constructor(a68, a69) {
+            var exn;
+            try {
+                this.prp1 = 3;
+            } catch(e73) {
+                exn = e73;
+            }
+            exn instanceof ReferenceError;
+            super(a68, a69);
+            a68 + a69;
+            this.prp;
+            this.prp1;
+            this.hasOwnProperty("prp1");
+            return this;
+        }
+    }
+    const v84 = new C58(1, 2);
+    let b = v84;
+    b.prp;
+    const v91 = new C66(2, -1);
+    let s = v91;
+    s.prp;
+    s.prp1;
+    s.hasOwnProperty("prp1");
+    class C99 extends C58 {
+        constructor(a101) {
+            super(1, 2);
+            if (a101 < 0) {
+                return;
+            }
+            let called = false;
+            function tmp() {
+                called = true;
+                return 3;
+            }
+            var exn = null;
+            try {
+                super(tmp(), 4);
+            } catch(e115) {
+                exn = e115;
+            }
+            exn instanceof ReferenceError;
+        }
+    }
+    const v119 = new C99(1);
+    var s2 = v119;
+    s2.prp;
+    const v125 = new C99(-1);
+    var s3 = v125;
+    s3.prp;
+    function f129() {
+        const v131 = new Object();
+        C66.call(v131, 1, 2);
+    }
+    f129();
+    function f137() {
+        const v139 = new Object();
+        C58.call(v139, 1, 2);
+    }
+    f137();
+    class C144 extends C58 {
+        constructor() {
+        }
+    }
+    function f146() {
+        new C144();
+    }
+    f146();
+}
+TestThisAccessRestriction();
+function TestThisCheckOrdering() {
+    let baseCalled = 0;
+    class C154 {
+        constructor() {
+            baseCalled++;
+        }
+    }
+    let fCalled = 0;
+    function f() {
+        fCalled++;
+        return 3;
+    }
+    class C162 extends C154 {
+        constructor() {
+            baseCalled = 0;
+            super();
+            let obj = this;
+            let exn = null;
+            baseCalled = 0;
+            fCalled = 0;
+            try {
+                super(f());
+            } catch(e172) {
+                exn = e172;
+            }
+            exn instanceof ReferenceError;
+            exn = null;
+            baseCalled = 0;
+            fCalled = 0;
+            try {
+                super();
+                super(this, f());
+            } catch(e181) {
+                exn = e181;
+            }
+            exn instanceof ReferenceError;
+            exn = null;
+            baseCalled = 0;
+            fCalled = 0;
+            try {
+                const v188 = f();
+                super();
+                super(v188, this);
+            } catch(e189) {
+                exn = e189;
+            }
+            exn instanceof ReferenceError;
+        }
+    }
+    new C162();
+}
+TestThisCheckOrdering();
+function TestPrototypeWiring() {
+    class C196 {
+        constructor(a198) {
+            this.foobar = a198;
+        }
+    }
+    class C199 extends C196 {
+        constructor(a201) {
+            super(a201);
+        }
+    }
+    const v203 = new C199(1);
+    let s = v203;
+    s.foobar;
+    C199.prototype;
+    s.__proto__;
+    const v211 = new C199(1, 2);
+    let s1 = v211;
+    s1.foobar;
+    s1.__proto__ === C199.prototype;
+    const v218 = new C199();
+    let s2 = v218;
+    s2.foobar;
+    C199.prototype;
+    s2.__proto__;
+    function f224() {
+        C199(1);
+    }
+    f224();
+    function f229() {
+        C199(1, 2, 3, 4);
+    }
+    f229();
+    class C236 extends C199 {
+        constructor() {
+            super(5, 6, 7);
+        }
+    }
+    const v241 = new C236();
+    let ss2 = v241;
+    ss2.foobar;
+    C236.prototype;
+    ss2.__proto__;
+    class C247 extends C196 {
+        constructor(a249, a250) {
+            super(a249 + a250);
+        }
+    }
+    const v256 = new C247(27, 42 - 27);
+    let ss3 = v256;
+    ss3.foobar;
+    C247.prototype;
+    ss3.__proto__;
+}
+TestPrototypeWiring();
+function TestSublclassingBuiltins() {
+    class C265 extends Uint8Array {
+        constructor() {
+            super(10);
+            this[0] = 255;
+            this[1] = 4090;
+        }
+    }
+    const v270 = new C265();
+    var eua = v270;
+    eua.length;
+    eua.byteLength;
+    eua[0];
+    eua[1];
+    C265.prototype;
+    eua.__proto__;
+    Object.prototype.toString.call(eua);
+}
+TestSublclassingBuiltins();
+function TestSubclassingNull() {
+    let N = null;
+    class C291 extends N {
+        constructor(a293, a294) {
+            return {};
+        }
+    }
+    new C291(1, 2);
+}
+TestSubclassingNull();
+function TestSubclassBinding() {
+    class C303 {
+        constructor(a305, a306) {
+            this.x = a305;
+            this.y = a306;
+        }
+    }
+    let obj = {};
+    class C309 extends C303 {
+        constructor(a311, a312) {
+            super(a311, a312);
+            this !== obj;
+        }
+    }
+    let f = C309.bind(obj);
+    function f316() {
+        f(1, 2);
+    }
+    f316();
+    const v324 = new f(1, 2);
+    let s = v324;
+    s.x;
+    s.y;
+    C309.prototype;
+    s.__proto__;
+    const v333 = new f(1);
+    let s1 = v333;
+    s1.x;
+    s1.y;
+    C309.prototype;
+    s1.__proto__;
+    let g = C309.bind(obj, 1);
+    function f344() {
+        g(8);
+    }
+    f344();
+    const v349 = new g(8);
+    let s2 = v349;
+    s2.x;
+    s2.y;
+    C309.prototype;
+    s.__proto__;
+}
+TestSubclassBinding();
+function TestDefaultConstructor() {
+    class C359 {
+    }
+    function f360() {
+        C359();
+    }
+    f360();
+    class C364 extends C359 {
+    }
+    function f365() {
+        C364();
+    }
+    f365();
+    const v368 = new C364();
+    let s1 = v368;
+    s1.__proto__;
+    C364.prototype;
+    class C372 {
+        constructor(a374, a375) {
+            this.x = a374;
+            this.y = a375;
+        }
+    }
+    class C376 extends C372 {
+    }
+    const v379 = new C376(1, 2);
+    let s2 = v379;
+    s2.__proto__;
+    C376.prototype;
+    s2.x;
+    s2.y;
+    let f = C376.bind({}, 3, 4);
+    const v392 = new f();
+    let s2prime = v392;
+    s2prime.__proto__;
+    C376.prototype;
+    s2prime.x;
+    s2prime.y;
+    let obj = {};
+    class C402 {
+        constructor() {
+            return obj;
+        }
+    }
+    class C404 extends C402 {
+    }
+    const v405 = new C404();
+    let s3 = v405;
+    class C408 extends Uint8Array {
+    }
+    const v410 = new C408(10);
+    var eua = v410;
+    eua.length;
+    eua.byteLength;
+    eua[0] = 255;
+    eua[1] = 4090;
+    eua[0];
+    eua[1];
+    C408.prototype;
+    eua.__proto__;
+    Object.prototype.toString.call(eua);
+}
+TestDefaultConstructor();
+
+FuzzIL program written to corpus/classes-experimental.fzil

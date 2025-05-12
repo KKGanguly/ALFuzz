@@ -1,0 +1,36 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'p', 'var', v3
+SetProperty v1, '__proto__', v4
+v5 <- BeginPlainFunction -> 
+    BeginWith v1
+        v6 <- LoadInteger '123'
+        v7 <- CreateNamedVariable 'x', 'none'
+        Reassign v7, v6
+    EndWith
+EndPlainFunction
+v8 <- CallFunction v5, []
+v9 <- LoadInteger '42'
+v10 <- GetProperty v4, 'x'
+v11 <- LoadInteger '123'
+v12 <- GetProperty v1, 'x'
+
+
+var o = {};
+var p = { x: 42 };
+o.__proto__ = p;
+function f() {
+    with (o) {
+        x = 123;
+    }
+}
+f();
+p.x;
+o.x;
+
+FuzzIL program written to corpus/with-prototype.fzil

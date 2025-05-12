@@ -1,0 +1,61 @@
+v0 <- CreateNamedVariable 'Map', 'none'
+v1 <- LoadInteger '1'
+v2 <- LoadInteger '2'
+v3 <- CreateArray [v1, v2]
+v4 <- LoadInteger '2'
+v5 <- LoadInteger '3'
+v6 <- CreateArray [v4, v5]
+v7 <- LoadInteger '3'
+v8 <- LoadInteger '4'
+v9 <- CreateArray [v7, v8]
+v10 <- CreateArray [v3, v6, v9]
+v11 <- Construct v0, [v10]
+v12 <- CreateNamedVariable 'map', 'var', v11
+v13 <- CreateNamedVariable 'Symbol', 'none'
+v14 <- GetProperty v13, 'iterator'
+v15 <- CallComputedMethod v12, v14, []
+v16 <- CreateNamedVariable 'iterator', 'var', v15
+v17 <- BeginArrowFunction -> 
+    v18 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `done`, v18
+    v19 <- EndObjectLiteral
+    Return v19
+EndArrowFunction
+v20 <- GetProperty v16, '__proto__'
+SetProperty v20, 'next', v17
+v21 <- CreateArray []
+v22 <- CreateArrayWithSpread [...v12]
+v23 <- CreateArray []
+v24 <- CallMethod v12, 'entries', []
+v25 <- CreateArrayWithSpread [...v24]
+v26 <- CreateArray []
+v27 <- CallMethod v12, 'keys', []
+v28 <- CreateArrayWithSpread [...v27]
+v29 <- CreateArray []
+v30 <- CallMethod v12, 'values', []
+v31 <- CreateArrayWithSpread [...v30]
+v32 <- CreateArray []
+v33 <- CreateArrayWithSpread [...v16]
+
+
+const v11 = new Map([[1,2],[2,3],[3,4]]);
+var map = v11;
+var iterator = map[Symbol.iterator]();
+const v17 = () => {
+    return { done: true };
+};
+const t6 = iterator.__proto__;
+t6.next = v17;
+[];
+[...map];
+[];
+[...map.entries()];
+[];
+[...map.keys()];
+[];
+[...map.values()];
+[];
+[...iterator];
+
+FuzzIL program written to corpus/map-iterator-3.fzil

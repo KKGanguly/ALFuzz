@@ -1,0 +1,496 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateNamedVariable 'result', 'var', v1
+    v3 <- LoadInteger '0'
+    v4 <- CreateNamedVariable 'x', 'var', v3
+    v5 <- BeginPlainFunction -> v6
+        v7 <- LoadString 'deopt'
+        v8 <- Compare v6, '==', v7
+        BeginIf v8
+            v9 <- LoadString 'c'
+            Return v9
+        EndIf
+        v10 <- LoadString 'a'
+        v11 <- LoadString 'b'
+        v12 <- TernaryOperation v6, v10, v11
+        Return v12
+    EndPlainFunction
+    v13 <- BeginPlainFunction -> v14, v15, v16, v17
+        v18 <- LoadString 'string'
+        v19 <- CallFunction v5, [v15]
+        v20 <- CallFunction v5, [v16]
+        v21 <- BinaryOperation v19, '+', v20
+        v22 <- LoadInteger '10'
+        v23 <- UnaryOperation v4, '++'
+        BeginSwitch v14
+            BeginSwitchCase v18
+                v24 <- LoadInteger '1'
+                v25 <- CallMethod v2, 'push', [v24]
+                Break
+            EndSwitchCase fallsThrough
+            BeginSwitchCase v21
+                v26 <- LoadInteger '2'
+                v27 <- CallMethod v2, 'push', [v26]
+                Break
+            EndSwitchCase fallsThrough
+            BeginSwitchCase v22
+                v28 <- LoadInteger '3'
+                v29 <- CallMethod v2, 'push', [v28]
+                Break
+            EndSwitchCase fallsThrough
+            BeginSwitchDefaultCase
+                v30 <- CallFunction v5, [v17]
+                v31 <- LoadInteger '4'
+                v32 <- CallMethod v2, 'push', [v31]
+                Break
+            EndSwitchCase fallsThrough
+            BeginSwitchCase v23
+                v33 <- CallFunction v5, [v17]
+                v34 <- LoadInteger '5'
+                v35 <- CallMethod v2, 'push', [v34]
+                Break
+            EndSwitchCase fallsThrough
+        EndSwitch
+    EndPlainFunction
+    v36 <- BeginPlainFunction -> v37, v38, v39, v40, v41
+        v42 <- CallFunction v13, [v38, v39, v40, v41]
+        v43 <- CreateArray []
+        Reassign v2, v43
+    EndPlainFunction
+    v44 <- LoadInteger '2'
+    v45 <- CreateArray [v44]
+    v46 <- LoadString 'aa'
+    v47 <- LoadBoolean 'true'
+    v48 <- LoadBoolean 'true'
+    v49 <- LoadInteger '2'
+    v50 <- CreateArray [v49]
+    v51 <- LoadString 'ab'
+    v52 <- LoadBoolean 'true'
+    v53 <- LoadBoolean 'false'
+    v54 <- LoadInteger '2'
+    v55 <- CreateArray [v54]
+    v56 <- LoadString 'ba'
+    v57 <- LoadBoolean 'false'
+    v58 <- LoadBoolean 'true'
+    v59 <- LoadInteger '2'
+    v60 <- CreateArray [v59]
+    v61 <- LoadString 'bb'
+    v62 <- LoadBoolean 'false'
+    v63 <- LoadBoolean 'false'
+    v64 <- LoadInteger '0'
+    v65 <- LoadInteger '4'
+    v66 <- CreateArray [v65]
+    v67 <- LoadString 'other'
+    v68 <- LoadInteger '1'
+    v69 <- LoadInteger '5'
+    v70 <- CreateArray [v69]
+    v71 <- LoadInteger '1'
+    v72 <- LoadBoolean 'true'
+    v73 <- LoadBoolean 'true'
+    v74 <- LoadInteger '4'
+    v75 <- CreateArray [v74]
+    v76 <- LoadInteger '1'
+    v77 <- LoadBoolean 'true'
+    v78 <- LoadBoolean 'true'
+    v79 <- LoadInteger '5'
+    v80 <- CreateArray [v79]
+    v81 <- LoadInteger '3'
+    v82 <- LoadBoolean 'true'
+    v83 <- LoadBoolean 'true'
+    v84 <- LoadInteger '4'
+    v85 <- CreateArray [v84]
+    v86 <- LoadInteger '3'
+    v87 <- LoadBoolean 'true'
+    v88 <- LoadBoolean 'true'
+    v89 <- LoadInteger '5'
+    v90 <- CreateArray [v89]
+    v91 <- LoadInteger '5'
+    v92 <- LoadBoolean 'true'
+    v93 <- LoadBoolean 'true'
+    v94 <- LoadInteger '4'
+    v95 <- CreateArray [v94]
+    v96 <- LoadInteger '5'
+    v97 <- LoadBoolean 'true'
+    v98 <- LoadBoolean 'true'
+    v99 <- LoadInteger '7'
+    v100 <- LoadInteger '2'
+    v101 <- CreateArray [v100]
+    v102 <- LoadString 'aa'
+    v103 <- LoadBoolean 'true'
+    v104 <- LoadBoolean 'true'
+    v105 <- LoadInteger '1'
+    v106 <- CreateArray [v105]
+    v107 <- LoadString 'string'
+    v108 <- LoadInteger '4'
+    v109 <- CreateArray [v108]
+    v110 <- LoadString 'other'
+    v111 <- LoadInteger '8'
+    v112 <- LoadInteger '5'
+    v113 <- CreateArray [v112]
+    v114 <- LoadInteger '8'
+    v115 <- LoadInteger '9'
+    v116 <- LoadInteger '2'
+    v117 <- CreateArray [v116]
+    v118 <- LoadString 'ca'
+    v119 <- LoadString 'deopt'
+    v120 <- LoadBoolean 'true'
+    v121 <- LoadInteger '4'
+    v122 <- CreateArray [v121]
+    v123 <- LoadString 'ca'
+    v124 <- LoadString 'deopt'
+    v125 <- LoadBoolean 'false'
+    v126 <- LoadInteger '10'
+    v127 <- LoadInteger '2'
+    v128 <- CreateArray [v127]
+    v129 <- LoadString 'ac'
+    v130 <- LoadBoolean 'true'
+    v131 <- LoadString 'deopt'
+    v132 <- LoadInteger '4'
+    v133 <- CreateArray [v132]
+    v134 <- LoadString 'ac'
+    v135 <- LoadBoolean 'false'
+    v136 <- LoadString 'deopt'
+    v137 <- LoadInteger '11'
+    v138 <- LoadString 'here'
+    v139 <- CreateNamedVariable 'print', 'none'
+    v140 <- CallFunction v139, [v138]
+    v141 <- LoadInteger '4'
+    v142 <- CreateArray [v141]
+    v143 <- LoadInteger '10000'
+    v144 <- LoadBoolean 'false'
+    v145 <- LoadBoolean 'false'
+    v146 <- LoadString 'deopt'
+    v147 <- LoadInteger '12'
+    v148 <- LoadInteger '4'
+    v149 <- CreateArray [v148]
+    v150 <- LoadInteger '10000'
+    v151 <- LoadBoolean 'false'
+    v152 <- LoadBoolean 'false'
+    v153 <- LoadString 'deopt'
+    v154 <- LoadInteger '13'
+    v155 <- LoadInteger '5'
+    v156 <- CreateArray [v155]
+    v157 <- LoadInteger '13'
+    v158 <- LoadBoolean 'false'
+    v159 <- LoadBoolean 'false'
+    v160 <- LoadString 'deopt'
+    v161 <- LoadInteger '14'
+EndPlainFunction
+v162 <- CallFunction v0, []
+v163 <- BeginPlainFunction -> 
+    v164 <- CreateArray []
+    v165 <- CreateNamedVariable 'result', 'var', v164
+    v166 <- LoadInteger '0'
+    v167 <- CreateNamedVariable 'x', 'var', v166
+    v168 <- BeginPlainFunction -> v169
+        v170 <- LoadString 'deopt'
+        v171 <- Compare v169, '==', v170
+        BeginIf v171
+            v172 <- LoadString 'c'
+            Return v172
+        EndIf
+        v173 <- LoadString 'a'
+        v174 <- LoadString 'b'
+        v175 <- TernaryOperation v169, v173, v174
+        Return v175
+    EndPlainFunction
+    v176 <- BeginPlainFunction -> v177, v178, v179, v180
+        v181 <- LoadString 'string'
+        v182 <- CallFunction v168, [v178]
+        v183 <- CallFunction v168, [v179]
+        v184 <- BinaryOperation v182, '+', v183
+        v185 <- LoadInteger '10'
+        v186 <- UnaryOperation v167, '++'
+        BeginSwitch v177
+            BeginSwitchCase v181
+                v187 <- LoadInteger '1'
+                v188 <- CallMethod v165, 'push', [v187]
+                Break
+            EndSwitchCase fallsThrough
+            BeginSwitchCase v184
+                v189 <- LoadInteger '2'
+                v190 <- CallMethod v165, 'push', [v189]
+            EndSwitchCase fallsThrough
+            BeginSwitchCase v185
+                v191 <- LoadInteger '3'
+                v192 <- CallMethod v165, 'push', [v191]
+                Break
+            EndSwitchCase fallsThrough
+            BeginSwitchDefaultCase
+                v193 <- CallFunction v168, [v180]
+                v194 <- LoadInteger '4'
+                v195 <- CallMethod v165, 'push', [v194]
+            EndSwitchCase fallsThrough
+            BeginSwitchCase v186
+                v196 <- CallFunction v168, [v180]
+                v197 <- LoadInteger '5'
+                v198 <- CallMethod v165, 'push', [v197]
+                Break
+            EndSwitchCase fallsThrough
+        EndSwitch
+    EndPlainFunction
+    v199 <- BeginPlainFunction -> v200, v201, v202, v203, v204
+        v205 <- CallFunction v176, [v201, v202, v203, v204]
+        v206 <- CreateArray []
+        Reassign v165, v206
+    EndPlainFunction
+    v207 <- LoadInteger '2'
+    v208 <- LoadInteger '3'
+    v209 <- CreateArray [v207, v208]
+    v210 <- LoadString 'aa'
+    v211 <- LoadBoolean 'true'
+    v212 <- LoadBoolean 'true'
+    v213 <- LoadInteger '2'
+    v214 <- LoadInteger '3'
+    v215 <- CreateArray [v213, v214]
+    v216 <- LoadString 'ab'
+    v217 <- LoadBoolean 'true'
+    v218 <- LoadBoolean 'false'
+    v219 <- LoadInteger '2'
+    v220 <- LoadInteger '3'
+    v221 <- CreateArray [v219, v220]
+    v222 <- LoadString 'ba'
+    v223 <- LoadBoolean 'false'
+    v224 <- LoadBoolean 'true'
+    v225 <- LoadInteger '2'
+    v226 <- LoadInteger '3'
+    v227 <- CreateArray [v225, v226]
+    v228 <- LoadString 'bb'
+    v229 <- LoadBoolean 'false'
+    v230 <- LoadBoolean 'false'
+    v231 <- LoadInteger '0'
+    v232 <- LoadInteger '4'
+    v233 <- LoadInteger '5'
+    v234 <- CreateArray [v232, v233]
+    v235 <- LoadString 'other'
+    v236 <- LoadInteger '1'
+    v237 <- LoadInteger '5'
+    v238 <- CreateArray [v237]
+    v239 <- LoadInteger '1'
+    v240 <- LoadBoolean 'true'
+    v241 <- LoadBoolean 'true'
+    v242 <- LoadInteger '4'
+    v243 <- LoadInteger '5'
+    v244 <- CreateArray [v242, v243]
+    v245 <- LoadInteger '1'
+    v246 <- LoadBoolean 'true'
+    v247 <- LoadBoolean 'true'
+    v248 <- LoadInteger '5'
+    v249 <- CreateArray [v248]
+    v250 <- LoadInteger '3'
+    v251 <- LoadBoolean 'true'
+    v252 <- LoadBoolean 'true'
+    v253 <- LoadInteger '4'
+    v254 <- LoadInteger '5'
+    v255 <- CreateArray [v253, v254]
+    v256 <- LoadInteger '3'
+    v257 <- LoadBoolean 'true'
+    v258 <- LoadBoolean 'true'
+    v259 <- LoadInteger '5'
+    v260 <- CreateArray [v259]
+    v261 <- LoadInteger '5'
+    v262 <- LoadBoolean 'true'
+    v263 <- LoadBoolean 'true'
+    v264 <- LoadInteger '4'
+    v265 <- LoadInteger '5'
+    v266 <- CreateArray [v264, v265]
+    v267 <- LoadInteger '5'
+    v268 <- LoadBoolean 'true'
+    v269 <- LoadBoolean 'true'
+    v270 <- LoadInteger '7'
+    v271 <- LoadInteger '2'
+    v272 <- LoadInteger '3'
+    v273 <- CreateArray [v271, v272]
+    v274 <- LoadString 'aa'
+    v275 <- LoadBoolean 'true'
+    v276 <- LoadBoolean 'true'
+    v277 <- LoadInteger '1'
+    v278 <- CreateArray [v277]
+    v279 <- LoadString 'string'
+    v280 <- LoadInteger '4'
+    v281 <- LoadInteger '5'
+    v282 <- CreateArray [v280, v281]
+    v283 <- LoadString 'other'
+    v284 <- LoadInteger '8'
+    v285 <- LoadInteger '5'
+    v286 <- CreateArray [v285]
+    v287 <- LoadInteger '8'
+    v288 <- LoadInteger '9'
+    v289 <- LoadInteger '2'
+    v290 <- LoadInteger '3'
+    v291 <- CreateArray [v289, v290]
+    v292 <- LoadString 'ca'
+    v293 <- LoadString 'deopt'
+    v294 <- LoadBoolean 'true'
+    v295 <- LoadInteger '4'
+    v296 <- LoadInteger '5'
+    v297 <- CreateArray [v295, v296]
+    v298 <- LoadString 'ca'
+    v299 <- LoadString 'deopt'
+    v300 <- LoadBoolean 'false'
+    v301 <- LoadInteger '10'
+    v302 <- LoadInteger '2'
+    v303 <- LoadInteger '3'
+    v304 <- CreateArray [v302, v303]
+    v305 <- LoadString 'ac'
+    v306 <- LoadBoolean 'true'
+    v307 <- LoadString 'deopt'
+    v308 <- LoadInteger '4'
+    v309 <- LoadInteger '5'
+    v310 <- CreateArray [v308, v309]
+    v311 <- LoadString 'ac'
+    v312 <- LoadBoolean 'false'
+    v313 <- LoadString 'deopt'
+    v314 <- LoadInteger '11'
+    v315 <- LoadString 'here'
+    v316 <- CreateNamedVariable 'print', 'none'
+    v317 <- CallFunction v316, [v315]
+    v318 <- LoadInteger '4'
+    v319 <- LoadInteger '5'
+    v320 <- CreateArray [v318, v319]
+    v321 <- LoadInteger '10000'
+    v322 <- LoadBoolean 'false'
+    v323 <- LoadBoolean 'false'
+    v324 <- LoadString 'deopt'
+    v325 <- LoadInteger '12'
+    v326 <- LoadInteger '4'
+    v327 <- LoadInteger '5'
+    v328 <- CreateArray [v326, v327]
+    v329 <- LoadInteger '10000'
+    v330 <- LoadBoolean 'false'
+    v331 <- LoadBoolean 'false'
+    v332 <- LoadString 'deopt'
+    v333 <- LoadInteger '13'
+    v334 <- LoadInteger '5'
+    v335 <- CreateArray [v334]
+    v336 <- LoadInteger '13'
+    v337 <- LoadBoolean 'false'
+    v338 <- LoadBoolean 'false'
+    v339 <- LoadString 'deopt'
+    v340 <- LoadInteger '14'
+EndPlainFunction
+v341 <- CallFunction v163, []
+
+
+function f0() {
+    var result = [];
+    var x = 0;
+    function branch(a6) {
+        if (a6 == "deopt") {
+            return "c";
+        }
+        return a6 ? "a" : "b";
+    }
+    function f(a14, a15, a16, a17) {
+        const v21 = branch(a15) + branch(a16);
+        const v23 = x++;
+        switch (a14) {
+            case "string":
+                result.push(1);
+                break;
+            case v21:
+                result.push(2);
+                break;
+            case 10:
+                result.push(3);
+                break;
+            default:
+                branch(a17);
+                result.push(4);
+                break;
+            case v23:
+                branch(a17);
+                result.push(5);
+                break;
+        }
+    }
+    function assertResult(a37, a38, a39, a40, a41) {
+        f(a38, a39, a40, a41);
+        result = [];
+    }
+    [2];
+    [2];
+    [2];
+    [2];
+    [4];
+    [5];
+    [4];
+    [5];
+    [4];
+    [5];
+    [4];
+    [2];
+    [1];
+    [4];
+    [5];
+    [2];
+    [4];
+    [2];
+    [4];
+    print("here");
+    [4];
+    [4];
+    [5];
+}
+f0();
+function f163() {
+    var result = [];
+    var x = 0;
+    function branch(a169) {
+        if (a169 == "deopt") {
+            return "c";
+        }
+        return a169 ? "a" : "b";
+    }
+    function f(a177, a178, a179, a180) {
+        const v184 = branch(a178) + branch(a179);
+        const v186 = x++;
+        switch (a177) {
+            case "string":
+                result.push(1);
+                break;
+            case v184:
+                result.push(2);
+            case 10:
+                result.push(3);
+                break;
+            default:
+                branch(a180);
+                result.push(4);
+            case v186:
+                branch(a180);
+                result.push(5);
+                break;
+        }
+    }
+    function assertResult(a200, a201, a202, a203, a204) {
+        f(a201, a202, a203, a204);
+        result = [];
+    }
+    [2,3];
+    [2,3];
+    [2,3];
+    [2,3];
+    [4,5];
+    [5];
+    [4,5];
+    [5];
+    [4,5];
+    [5];
+    [4,5];
+    [2,3];
+    [1];
+    [4,5];
+    [5];
+    [2,3];
+    [4,5];
+    [2,3];
+    [4,5];
+    print("here");
+    [4,5];
+    [4,5];
+    [5];
+}
+f163();
+
+FuzzIL program written to corpus/switch-opt.fzil

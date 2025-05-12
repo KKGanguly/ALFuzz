@@ -1,0 +1,40 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'called_custom_unicode_getter', 'let', v0
+v2 <- LoadRegExp '.' ''
+v3 <- CreateNamedVariable 're', 'const', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadString 'unicode'
+    v6 <- BeginPlainFunction -> 
+        v7 <- LoadBoolean 'true'
+        Reassign v1, v7
+    EndPlainFunction
+    v8 <- CallMethod v3, '__defineGetter__', [v5, v6]
+    v9 <- LoadInteger '2'
+    Return v9
+EndPlainFunction
+v10 <- LoadString ''
+v11 <- LoadString ''
+v12 <- CreateArray [v10, v11]
+v13 <- LoadString 'abc'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v4
+v14 <- EndObjectLiteral
+v15 <- CreateNamedVariable 'Symbol', 'none'
+v16 <- GetProperty v15, 'split'
+v17 <- CallComputedMethod v3, v16, [v13, v14]
+
+
+let called_custom_unicode_getter = false;
+const re = /./;
+function f() {
+    function f6() {
+        called_custom_unicode_getter = true;
+    }
+    re.__defineGetter__("unicode", f6);
+    return 2;
+}
+["",""];
+const v14 = { valueOf: f };
+re[Symbol.split]("abc", v14);
+
+FuzzIL program written to corpus/regress-801171.fzil

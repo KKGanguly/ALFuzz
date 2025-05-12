@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetElement v2, '0'
+    v4 <- CreateNamedVariable 'v7', 'var', v3
+    v5 <- GetElement v1, '0'
+    v6 <- CreateNamedVariable 'v8', 'var', v5
+    v7 <- LoadFloat '0.3'
+    SetElement v2, '0', v7
+EndPlainFunction
+v8 <- CreateNamedVariable 'Array', 'none'
+v9 <- LoadInteger '1'
+v10 <- Construct v8, [v9]
+v11 <- CreateNamedVariable 'v6', 'none'
+Reassign v11, v10
+v12 <- LoadString 'tagged'
+v13 <- CreateNamedVariable 'v6', 'none'
+SetElement v13, '0', v12
+v14 <- LoadInteger '1'
+v15 <- CreateArray [v14]
+v16 <- CallFunction v0, [v13, v15]
+v17 <- LoadInteger '1'
+v18 <- Construct v8, [v17]
+v19 <- CreateNamedVariable 'v5', 'none'
+Reassign v19, v18
+v20 <- LoadFloat '0.1'
+v21 <- CreateNamedVariable 'v5', 'none'
+SetElement v21, '0', v20
+v22 <- CallFunction v0, [v21, v21]
+v23 <- LoadInteger '10'
+v24 <- Construct v8, [v23]
+Reassign v21, v24
+v25 <- CallFunction v0, [v21, v21]
+v26 <- CallFunction v0, [v21, v21]
+v27 <- GetElement v21, '0'
+
+
+function f(a1, a2) {
+    var v7 = a2[0];
+    var v8 = a1[0];
+    a2[0] = 0.3;
+}
+const v10 = new Array(1);
+v6 = v10;
+v6[0] = "tagged";
+f(v6, [1]);
+const v18 = new Array(1);
+v5 = v18;
+v5[0] = 0.1;
+f(v5, v5);
+const v24 = new Array(10);
+f(v5 = v24, v5);
+f(v5, v5);
+v5[0];
+
+FuzzIL program written to corpus/regress-467481.fzil

@@ -1,0 +1,21 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        v1 <- CreateNamedVariable 'rec', 'none'
+        v2 <- CallFunction v1, []
+    BeginCatch -> v3
+        v4 <- LoadRegExp '{' ''
+    EndTryCatch
+EndPlainFunction
+v5 <- CallFunction v0, []
+
+
+function rec() {
+    try {
+        rec();
+    } catch(e3) {
+        /{/;
+    }
+}
+rec();
+
+FuzzIL program written to corpus/regress-crbug-600257.fzil

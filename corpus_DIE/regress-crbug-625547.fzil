@@ -1,0 +1,47 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'v1', 'var', v0
+v2 <- LoadInteger '0'
+Reassign v1, v2
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'v2', 'var', v3
+v5 <- LoadInteger '0'
+Reassign v4, v5
+v6 <- CreateNamedVariable 'gc', 'none'
+v7 <- CallFunction v6, []
+v8 <- LoadInteger '0'
+v9 <- UnaryOperation '-', v8
+BeginObjectLiteral
+    ObjectLiteralAddProperty `z`, v9
+v10 <- EndObjectLiteral
+v11 <- GetProperty v10, 'z'
+v12 <- CreateNamedVariable 'minus_zero', 'var', v11
+v13 <- LoadUndefined
+v14 <- LoadInteger '1'
+v15 <- BinaryOperation v13, '+', v14
+v16 <- CreateNamedVariable 'nan', 'var', v15
+v17 <- BeginPlainFunction -> 
+    Reassign v1, v12
+    Reassign v4, v16
+EndPlainFunction
+v18 <- CallFunction v17, []
+v19 <- CallFunction v6, []
+
+
+var v1 = {};
+v1 = 0;
+var v2 = {};
+v2 = 0;
+gc();
+const v9 = -0;
+var minus_zero = ({ z: v9 }).z;
+var nan = undefined + 1;
+function f() {
+    v1 = minus_zero;
+    v2 = nan;
+}
+f();
+gc();
+
+FuzzIL program written to corpus/regress-crbug-625547.fzil

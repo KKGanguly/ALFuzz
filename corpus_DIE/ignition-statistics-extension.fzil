@@ -1,0 +1,124 @@
+v0 <- CreateNamedVariable 'getIgnitionDispatchCounters', 'none'
+v1 <- TypeOf v0
+v2 <- LoadString 'function'
+v3 <- CallFunction v0, []
+v4 <- CreateNamedVariable 'old_dispatch_counters', 'var', v3
+v5 <- TypeOf v4
+v6 <- LoadString 'object'
+v7 <- CreateNamedVariable 'Object', 'none'
+v8 <- CallMethod v7, 'getOwnPropertyNames', [v4]
+v9 <- GetProperty v8, 'length'
+v10 <- LoadInteger '0'
+v11 <- Compare v9, '>', v10
+BeginForInLoop v4 -> v12
+    v13 <- GetComputedProperty v4, v12
+    v14 <- CreateNamedVariable 'counters_row', 'var', v13
+    v15 <- TypeOf v14
+    v16 <- LoadString 'object'
+    BeginForInLoop v14 -> v17
+        v18 <- GetComputedProperty v14, v17
+        v19 <- TypeOf v18
+        v20 <- LoadString 'number'
+    EndForInLoop
+EndForInLoop
+v21 <- BeginPlainFunction -> v22
+    v23 <- BinaryOperation v22, '*', v22
+    Return v23
+EndPlainFunction
+v24 <- LoadInteger '42'
+v25 <- CallFunction v21, [v24]
+v26 <- CallFunction v0, []
+v27 <- CreateNamedVariable 'new_dispatch_counters', 'var', v26
+v28 <- CallMethod v7, 'getOwnPropertyNames', [v4]
+v29 <- CreateNamedVariable 'old_source_bytecodes', 'var', v28
+v30 <- CallMethod v7, 'getOwnPropertyNames', [v27]
+v31 <- CreateNamedVariable 'new_source_bytecodes', 'var', v30
+v32 <- BeginPlainFunction -> v33
+    v34 <- CallMethod v29, 'indexOf', [v33]
+    v35 <- LoadInteger '1'
+    v36 <- UnaryOperation '-', v35
+    v37 <- Compare v34, '>', v36
+    Return v37
+EndPlainFunction
+v38 <- CallMethod v31, 'filter', [v32]
+v39 <- CreateNamedVariable 'common_source_bytecodes', 'var', v38
+v40 <- BeginPlainFunction -> v41
+    v42 <- GetComputedProperty v27, v41
+    v43 <- CreateNamedVariable 'new_counters_row', 'var', v42
+    v44 <- GetComputedProperty v4, v41
+    v45 <- CreateNamedVariable 'old_counters_row', 'var', v44
+    v46 <- CallMethod v7, 'getOwnPropertyNames', [v45]
+    v47 <- CreateNamedVariable 'old_destination_bytecodes', 'var', v46
+    v48 <- CallMethod v7, 'getOwnPropertyNames', [v43]
+    v49 <- CreateNamedVariable 'new_destination_bytecodes', 'var', v48
+    v50 <- BeginPlainFunction -> v51
+        v52 <- CallMethod v49, 'indexOf', [v51]
+        v53 <- LoadInteger '1'
+        v54 <- UnaryOperation '-', v53
+        v55 <- Compare v52, '>', v54
+    EndPlainFunction
+    v56 <- CallMethod v47, 'forEach', [v50]
+    v57 <- BeginPlainFunction -> v58
+        v59 <- GetComputedProperty v43, v58
+        v60 <- CreateNamedVariable 'new_counter', 'var', v59
+        v61 <- GetComputedProperty v45, v58
+        v62 <- CreateNamedVariable 'old_counter', 'var', v61
+        v63 <- TypeOf v60
+        v64 <- LoadString 'number'
+        v65 <- Compare v63, '===', v64
+        v66 <- TypeOf v62
+        v67 <- LoadString 'number'
+        v68 <- Compare v66, '===', v67
+        BeginIf v68
+            v69 <- Compare v60, '>=', v62
+        EndIf
+    EndPlainFunction
+    v70 <- CallMethod v49, 'forEach', [v57]
+EndPlainFunction
+v71 <- CallMethod v39, 'forEach', [v40]
+
+
+typeof getIgnitionDispatchCounters;
+var old_dispatch_counters = getIgnitionDispatchCounters();
+typeof old_dispatch_counters;
+Object.getOwnPropertyNames(old_dispatch_counters).length > 0;
+for (const v12 in old_dispatch_counters) {
+    var counters_row = old_dispatch_counters[v12];
+    typeof counters_row;
+    for (const v17 in counters_row) {
+        typeof counters_row[v17];
+    }
+}
+function f(a22) {
+    return a22 * a22;
+}
+f(42);
+var new_dispatch_counters = getIgnitionDispatchCounters();
+var old_source_bytecodes = Object.getOwnPropertyNames(old_dispatch_counters);
+var new_source_bytecodes = Object.getOwnPropertyNames(new_dispatch_counters);
+function f32(a33) {
+    return old_source_bytecodes.indexOf(a33) > -1;
+}
+var common_source_bytecodes = new_source_bytecodes.filter(f32);
+function f40(a41) {
+    var new_counters_row = new_dispatch_counters[a41];
+    var old_counters_row = old_dispatch_counters[a41];
+    var old_destination_bytecodes = Object.getOwnPropertyNames(old_counters_row);
+    var new_destination_bytecodes = Object.getOwnPropertyNames(new_counters_row);
+    function f50(a51) {
+        new_destination_bytecodes.indexOf(a51) > -1;
+    }
+    old_destination_bytecodes.forEach(f50);
+    function f57(a58) {
+        var new_counter = new_counters_row[a58];
+        var old_counter = old_counters_row[a58];
+        typeof new_counter === "number";
+        if (typeof old_counter === "number") {
+            new_counter >= old_counter;
+        }
+    }
+    new_destination_bytecodes.forEach(f57);
+}
+common_source_bytecodes.forEach(f40);
+
+FuzzIL program written to corpus/ignition-statistics-extension.fzil

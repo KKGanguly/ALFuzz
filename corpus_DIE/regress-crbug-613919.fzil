@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> v1
+    BeginIf v1
+        v2 <- LoadArguments
+        Return v2
+    EndIf
+    v3 <- LoadInteger '23'
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadBoolean 'false'
+    v6 <- CallFunction v0, [v5]
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '23'
+v8 <- CallFunction v4, []
+v9 <- LoadInteger '23'
+v10 <- CallFunction v4, []
+v11 <- LoadInteger '23'
+v12 <- CallFunction v4, []
+
+
+function g(a1) {
+    if (a1) {
+        return arguments;
+    }
+    return 23;
+}
+function f() {
+    return g(false);
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-613919.fzil

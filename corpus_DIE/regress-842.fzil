@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetProperty v2, 'myfunc', v0
+v3 <- LoadInteger '42'
+v4 <- GetProperty v1, 'prototype'
+SetElement v4, '10', v3
+v5 <- LoadInteger '3000'
+v6 <- GetProperty v1, 'prototype'
+SetProperty v6, 'length', v5
+v7 <- LoadString 'n1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'obj', 'var', v8
+BeginTry
+    v10 <- CreateNamedVariable 'Object', 'none'
+    v11 <- CallMethod v10, 'freeze', [v9]
+    Reassign v9, v11
+BeginCatch -> v12
+EndTryCatch
+
+
+function f0() {
+}
+const t2 = Array.prototype;
+t2.myfunc = f0;
+const t4 = Array.prototype;
+t4[10] = 42;
+const t6 = Array.prototype;
+t6.length = 3000;
+var obj = { name: "n1" };
+try {
+    obj = Object.freeze(obj);
+} catch(e12) {
+}
+
+FuzzIL program written to corpus/regress-842.fzil

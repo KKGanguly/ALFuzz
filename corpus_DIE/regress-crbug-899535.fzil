@@ -1,0 +1,25 @@
+v0 <- LoadFloat '1.1'
+v1 <- LoadFloat '2.2'
+v2 <- LoadFloat '3.3'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable 'a', 'let', v3
+v5 <- LoadFloat '4.4'
+v6 <- BeginArrowFunction -> 
+    v7 <- LoadInteger '0'
+    SetProperty v4, 'length', v7
+    Return v7
+EndArrowFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v6
+v8 <- EndObjectLiteral
+v9 <- CallMethod v4, 'includes', [v5, v8]
+
+
+let a = [1.1,2.2,3.3];
+const v6 = () => {
+    a.length = 0;
+    return 0;
+};
+a.includes(4.4, { toString: v6 });
+
+FuzzIL program written to corpus/regress-crbug-899535.fzil

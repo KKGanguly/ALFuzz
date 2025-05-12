@@ -1,0 +1,209 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'test_id', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- CreateNamedVariable 'Function', 'none'
+    v6 <- LoadString 'n'
+    v7 <- LoadString '"'
+    v8 <- UnaryOperation v1, '++'
+    v9 <- BinaryOperation v7, '+', v8
+    v10 <- LoadString '";return Math.floor(n)'
+    v11 <- BinaryOperation v9, '+', v10
+    v12 <- Construct v5, [v6, v11]
+    v13 <- CreateNamedVariable 'test', 'var', v12
+    v14 <- CallFunction v13, [v4]
+    v15 <- CallFunction v13, [v4]
+    v16 <- CallFunction v13, [v4]
+    v17 <- CallFunction v13, [v4]
+    v18 <- LoadString 'n'
+    v19 <- LoadString '"'
+    v20 <- UnaryOperation v1, '++'
+    v21 <- BinaryOperation v19, '+', v20
+    v22 <- LoadString '";return Math.floor(+n)'
+    v23 <- BinaryOperation v21, '+', v22
+    v24 <- Construct v5, [v18, v23]
+    v25 <- CreateNamedVariable 'test_double_input', 'var', v24
+    v26 <- CallFunction v25, [v4]
+    v27 <- CallFunction v25, [v4]
+    v28 <- CallFunction v25, [v4]
+    v29 <- CallFunction v25, [v4]
+    v30 <- LoadString 'n'
+    v31 <- LoadString '"'
+    v32 <- UnaryOperation v1, '++'
+    v33 <- BinaryOperation v31, '+', v32
+    v34 <- LoadString '";return Math.floor(n) + -0.0'
+    v35 <- BinaryOperation v33, '+', v34
+    v36 <- Construct v5, [v30, v35]
+    v37 <- CreateNamedVariable 'test_double_output', 'var', v36
+    v38 <- CallFunction v37, [v4]
+    v39 <- CallFunction v37, [v4]
+    v40 <- CallFunction v37, [v4]
+    v41 <- CallFunction v37, [v4]
+    v42 <- LoadString 'n'
+    v43 <- LoadString '"'
+    v44 <- UnaryOperation v1, '++'
+    v45 <- BinaryOperation v43, '+', v44
+    v46 <- LoadString '";return -Math.ceil(-n)'
+    v47 <- BinaryOperation v45, '+', v46
+    v48 <- Construct v5, [v42, v47]
+    v49 <- CreateNamedVariable 'test_via_ceil', 'var', v48
+    v50 <- CallFunction v49, [v4]
+    v51 <- CallFunction v49, [v4]
+    v52 <- CallFunction v49, [v4]
+    v53 <- CallFunction v49, [v4]
+    v54 <- LoadInteger '0'
+    v55 <- Compare v4, '>=', v54
+    BeginIf v55
+        v56 <- LoadString 'n'
+        v57 <- LoadString '"'
+        v58 <- UnaryOperation v1, '++'
+        v59 <- BinaryOperation v57, '+', v58
+        v60 <- LoadString '";return Math.trunc(n)'
+        v61 <- BinaryOperation v59, '+', v60
+        v62 <- Construct v5, [v56, v61]
+        v63 <- CreateNamedVariable 'test_via_trunc', 'var', v62
+        v64 <- CallFunction v63, [v4]
+        v65 <- CallFunction v63, [v4]
+        v66 <- CallFunction v63, [v4]
+        v67 <- CallFunction v63, [v4]
+    EndIf
+EndPlainFunction
+v68 <- BeginPlainFunction -> 
+    v69 <- LoadFloat '0.5'
+    v70 <- CreateNamedVariable 'x', 'var', v69
+    v71 <- BeginPlainFunction -> 
+        v72 <- LoadFloat '0.5'
+        v73 <- BinaryOperation v70, '-', v72
+        Return v73
+    EndPlainFunction
+    v74 <- CallFunction v71, []
+    Return v74
+EndPlainFunction
+v75 <- BeginPlainFunction -> 
+    v76 <- LoadInteger '0'
+    v77 <- LoadInteger '0'
+    v78 <- CallFunction v2, [v76, v77]
+    v79 <- LoadInteger '0'
+    v80 <- CallFunction v68, []
+    v81 <- CallFunction v2, [v79, v80]
+    v82 <- LoadInteger '0'
+    v83 <- UnaryOperation '-', v82
+    v84 <- LoadInteger '0'
+    v85 <- UnaryOperation '-', v84
+    v86 <- CallFunction v2, [v83, v85]
+    v87 <- CreateNamedVariable 'Infinity', 'none'
+    v88 <- CallFunction v2, [v87, v87]
+    v89 <- UnaryOperation '-', v87
+    v90 <- UnaryOperation '-', v87
+    v91 <- CallFunction v2, [v89, v90]
+    v92 <- CreateNamedVariable 'NaN', 'none'
+    v93 <- CallFunction v2, [v92, v92]
+EndPlainFunction
+BeginForLoopInitializer
+    v94 <- LoadInteger '0'
+BeginForLoopCondition -> v95
+    v96 <- LoadInteger '10'
+    v97 <- Compare v95, '<', v96
+BeginForLoopAfterthought v97 -> v98
+    v99 <- UnaryOperation v98, '++'
+BeginForLoopBody -> v100
+    v101 <- CallFunction v75, []
+    v102 <- CreateNamedVariable 'Array', 'none'
+    v103 <- LoadInteger '10000'
+    v104 <- BinaryOperation v100, '*', v103
+    v105 <- Construct v102, [v104]
+EndForLoop
+v106 <- BeginPlainFunction -> v107, v108
+    v109 <- CreateNamedVariable 'Math', 'none'
+    v110 <- CallMethod v109, 'floor', [v108]
+    v111 <- CreateNamedVariable 'ret', 'var', v110
+    BeginWhileLoopHeader
+        v112 <- UnaryOperation '--', v107
+        v113 <- LoadInteger '0'
+        v114 <- Compare v112, '>', v113
+    BeginWhileLoopBody v114
+        v115 <- CallMethod v109, 'floor', [v108]
+        Update v111, '+', v115
+    EndWhileLoop
+    Return v111
+EndPlainFunction
+v116 <- LoadInteger '0'
+v117 <- UnaryOperation '-', v116
+v118 <- LoadInteger '1'
+v119 <- LoadInteger '0'
+v120 <- UnaryOperation '-', v119
+v121 <- CallFunction v106, [v118, v120]
+v122 <- LoadInteger '0'
+v123 <- UnaryOperation '-', v122
+v124 <- LoadInteger '100000'
+v125 <- LoadInteger '0'
+v126 <- UnaryOperation '-', v125
+v127 <- CallFunction v106, [v124, v126]
+
+
+var test_id = 0;
+function testFloor(a3, a4) {
+    const v12 = new Function("n", (""" + test_id++) + "";return Math.floor(n)");
+    var test = v12;
+    test(a4);
+    test(a4);
+    test(a4);
+    test(a4);
+    const v24 = new Function("n", (""" + test_id++) + "";return Math.floor(+n)");
+    var test_double_input = v24;
+    test_double_input(a4);
+    test_double_input(a4);
+    test_double_input(a4);
+    test_double_input(a4);
+    const v36 = new Function("n", (""" + test_id++) + "";return Math.floor(n) + -0.0");
+    var test_double_output = v36;
+    test_double_output(a4);
+    test_double_output(a4);
+    test_double_output(a4);
+    test_double_output(a4);
+    const v48 = new Function("n", (""" + test_id++) + "";return -Math.ceil(-n)");
+    var test_via_ceil = v48;
+    test_via_ceil(a4);
+    test_via_ceil(a4);
+    test_via_ceil(a4);
+    test_via_ceil(a4);
+    if (a4 >= 0) {
+        const v62 = new Function("n", (""" + test_id++) + "";return Math.trunc(n)");
+        var test_via_trunc = v62;
+        test_via_trunc(a4);
+        test_via_trunc(a4);
+        test_via_trunc(a4);
+        test_via_trunc(a4);
+    }
+}
+function zero() {
+    var x = 0.5;
+    function f71() {
+        return x - 0.5;
+    }
+    return f71();
+}
+function test() {
+    testFloor(0, 0);
+    testFloor(0, zero());
+    testFloor(-0, -0);
+    testFloor(Infinity, Infinity);
+    testFloor(-Infinity, -Infinity);
+    testFloor(NaN, NaN);
+}
+for (let i95 = 0; i95 < 10; i95++) {
+    test();
+    new Array(i95 * 10000);
+}
+function floorsum(a107, a108) {
+    var ret = Math.floor(a108);
+    while (--a107 > 0) {
+        ret += Math.floor(a108);
+    }
+    return ret;
+}
+-0;
+floorsum(1, -0);
+-0;
+floorsum(100000, -0);
+
+FuzzIL program written to corpus/math-floor-part4.fzil

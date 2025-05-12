@@ -1,0 +1,136 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    v3 <- BeginPlainFunction -> 
+        v4 <- LoadInteger '1'
+        Return v4
+    EndPlainFunction
+    v5 <- GetProperty v2, '__proto__'
+    SetProperty v5, 'f', v3
+    v6 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v7 <- BeginPlainFunction -> 
+        v8 <- LoadInteger '3'
+        Return v8
+    EndPlainFunction
+    v9 <- GetProperty v6, 'prototype'
+    SetProperty v9, 'f', v7
+    v10 <- Construct v6, []
+    v11 <- CreateNamedVariable 'y', 'var', v10
+    v12 <- BeginPlainFunction -> v13
+        v14 <- CallMethod v13, 'f', []
+        Return v14
+    EndPlainFunction
+    v15 <- CallFunction v12, [v2]
+    v16 <- CallFunction v12, [v11]
+    v17 <- CallFunction v12, [v2]
+    v18 <- CallFunction v12, [v11]
+    v19 <- LoadInteger '1'
+    v20 <- CallFunction v12, [v2]
+    v21 <- LoadInteger '3'
+    v22 <- CallFunction v12, [v11]
+EndPlainFunction
+v23 <- CallFunction v0, []
+v24 <- BeginPlainFunction -> 
+    v25 <- BeginPlainFunction -> 
+        v26 <- LoadInteger '1'
+        Return v26
+    EndPlainFunction
+    v27 <- BeginPlainFunction -> 
+        v28 <- LoadInteger '2'
+        Return v28
+    EndPlainFunction
+    v29 <- LoadUndefined
+    v30 <- CreateNamedVariable 'global', 'var', v29
+    v31 <- BeginPlainFunction -> v32
+        v33 <- LoadUndefined
+        v34 <- CreateNamedVariable 'fg', 'var', v33
+        v35 <- LoadInteger '0'
+        v36 <- CreateNamedVariable 'a', 'var', v35
+        BeginIf v32
+            v37 <- LoadInteger '0'
+            Reassign v30, v37
+            v38 <- LoadInteger '1'
+            Reassign v36, v38
+            Reassign v34, v25
+        BeginElse
+            v39 <- LoadInteger '1'
+            Reassign v30, v39
+            Reassign v34, v27
+        EndIf
+        v40 <- CallFunction v34, []
+        v41 <- BinaryOperation v40, '+', v36
+        Return v41
+    EndPlainFunction
+    v42 <- LoadInteger '0'
+    v43 <- CallFunction v31, [v42]
+    v44 <- LoadInteger '0'
+    v45 <- CallFunction v31, [v44]
+    v46 <- LoadInteger '1'
+    v47 <- CallFunction v31, [v46]
+    v48 <- LoadInteger '1'
+    v49 <- CallFunction v31, [v48]
+    v50 <- LoadInteger '2'
+    v51 <- LoadInteger '0'
+    v52 <- CallFunction v31, [v51]
+EndPlainFunction
+v53 <- CallFunction v24, []
+
+
+function f0() {
+    var x = 1;
+    function f3() {
+        return 1;
+    }
+    const t5 = x.__proto__;
+    t5.f = f3;
+    function g() {
+    }
+    function f7() {
+        return 3;
+    }
+    const t12 = g.prototype;
+    t12.f = f7;
+    const v10 = new g();
+    var y = v10;
+    function f(a13) {
+        return a13.f();
+    }
+    f(x);
+    f(y);
+    f(x);
+    f(y);
+    f(x);
+    f(y);
+}
+f0();
+function f24() {
+    function f() {
+        return 1;
+    }
+    function g() {
+        return 2;
+    }
+    var global;
+    function h(a32) {
+        var fg;
+        var a = 0;
+        if (a32) {
+            global = 0;
+            a = 1;
+            fg = f;
+        } else {
+            global = 1;
+            fg = g;
+        }
+        return fg() + a;
+    }
+    h(0);
+    h(0);
+    h(1);
+    h(1);
+    h(0);
+}
+f24();
+
+FuzzIL program written to corpus/regress-758096.fzil

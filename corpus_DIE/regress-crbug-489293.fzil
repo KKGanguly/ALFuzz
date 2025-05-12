@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '0'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation '++', v7
+    BeginForLoopBody -> v9
+        v10 <- BinaryOperation v2, '+', v9
+        v11 <- LoadInteger '0'
+        v12 <- BinaryOperation v10, '|', v11
+        Reassign v2, v12
+    EndForLoop
+    v13 <- CreateNamedVariable 'unbound', 'none'
+    Return v13
+EndPlainFunction
+v14 <- CallFunction v0, []
+v15 <- CreateNamedVariable 'ReferenceError', 'none'
+
+
+function f() {
+    var x = 0;
+    for (let i4 = 0; i4 < 0; ++i4) {
+        x = (x + i4) | 0;
+    }
+    return unbound;
+}
+f();
+
+FuzzIL program written to corpus/regress-crbug-489293.fzil

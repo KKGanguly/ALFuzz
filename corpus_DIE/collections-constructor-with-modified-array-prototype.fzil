@@ -1,0 +1,182 @@
+v0 <- BeginPlainFunction -> v1
+    BeginObjectLiteral
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable 'k1', 'const', v2
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'k2', 'const', v4
+    v6 <- LoadInteger '0'
+    v7 <- CreateNamedVariable 'callCount', 'let', v6
+    v8 <- BeginArrowFunction -> 
+        v9 <- BeginArrowFunction -> 
+            v10 <- UnaryOperation v7, '++'
+            v11 <- LoadInteger '0'
+            v12 <- Compare v10, '===', v11
+            v13 <- LoadBoolean 'false'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `value`, v5
+                ObjectLiteralAddProperty `done`, v13
+            v14 <- EndObjectLiteral
+            v15 <- LoadBoolean 'true'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `done`, v15
+            v16 <- EndObjectLiteral
+            v17 <- TernaryOperation v12, v14, v16
+            Return v17
+        EndArrowFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `next`, v9
+        v18 <- EndObjectLiteral
+        Return v18
+    EndArrowFunction
+    v19 <- CreateNamedVariable 'Array', 'none'
+    v20 <- GetProperty v19, 'prototype'
+    v21 <- CreateNamedVariable 'Symbol', 'none'
+    v22 <- GetProperty v21, 'iterator'
+    SetComputedProperty v20, v22, v8
+    v23 <- CreateArray [v3]
+    v24 <- CreateNamedVariable 'entries', 'const', v23
+    v25 <- Construct v1, [v24]
+    v26 <- CreateNamedVariable 'set', 'const', v25
+    v27 <- CallMethod v26, 'has', [v3]
+    v28 <- CallMethod v26, 'has', [v5]
+    v29 <- LoadInteger '2'
+EndPlainFunction
+v30 <- CreateNamedVariable 'Set', 'none'
+v31 <- CallFunction v0, [v30]
+v32 <- CallFunction v0, [v30]
+v33 <- CallFunction v0, [v30]
+v34 <- CallFunction v0, [v30]
+v35 <- CallFunction v0, []
+v36 <- CreateNamedVariable 'WeakSet', 'none'
+v37 <- CallFunction v0, [v36]
+v38 <- CallFunction v0, [v36]
+v39 <- CallFunction v0, [v36]
+v40 <- CallFunction v0, [v36]
+v41 <- CallFunction v0, []
+v42 <- BeginPlainFunction -> v43
+    BeginObjectLiteral
+    v44 <- EndObjectLiteral
+    v45 <- CreateNamedVariable 'k1', 'const', v44
+    BeginObjectLiteral
+    v46 <- EndObjectLiteral
+    v47 <- CreateNamedVariable 'k2', 'const', v46
+    v48 <- LoadInteger '0'
+    v49 <- CreateNamedVariable 'callCount', 'let', v48
+    v50 <- BeginArrowFunction -> 
+        v51 <- BeginArrowFunction -> 
+            v52 <- UnaryOperation v49, '++'
+            v53 <- LoadInteger '0'
+            v54 <- Compare v52, '===', v53
+            v55 <- LoadInteger '2'
+            v56 <- CreateArray [v47, v55]
+            v57 <- LoadBoolean 'false'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `value`, v56
+                ObjectLiteralAddProperty `done`, v57
+            v58 <- EndObjectLiteral
+            v59 <- LoadBoolean 'true'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `done`, v59
+            v60 <- EndObjectLiteral
+            v61 <- TernaryOperation v54, v58, v60
+            Return v61
+        EndArrowFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `next`, v51
+        v62 <- EndObjectLiteral
+        Return v62
+    EndArrowFunction
+    v63 <- CreateNamedVariable 'Array', 'none'
+    v64 <- GetProperty v63, 'prototype'
+    v65 <- CreateNamedVariable 'Symbol', 'none'
+    v66 <- GetProperty v65, 'iterator'
+    SetComputedProperty v64, v66, v50
+    v67 <- LoadInteger '1'
+    v68 <- CreateArray [v45, v67]
+    v69 <- CreateArray [v68]
+    v70 <- CreateNamedVariable 'entries', 'const', v69
+    v71 <- Construct v43, [v70]
+    v72 <- CreateNamedVariable 'map', 'const', v71
+    v73 <- CallMethod v72, 'has', [v45]
+    v74 <- LoadInteger '2'
+    v75 <- CallMethod v72, 'get', [v47]
+    v76 <- LoadInteger '2'
+EndPlainFunction
+v77 <- CreateNamedVariable 'Map', 'none'
+v78 <- CallFunction v42, [v77]
+v79 <- CallFunction v42, [v77]
+v80 <- CallFunction v42, [v77]
+v81 <- CallFunction v42, [v77]
+v82 <- CallFunction v42, []
+v83 <- CreateNamedVariable 'WeakMap', 'none'
+v84 <- CallFunction v42, [v83]
+v85 <- CallFunction v42, [v83]
+v86 <- CallFunction v42, [v83]
+v87 <- CallFunction v42, [v83]
+v88 <- CallFunction v42, []
+
+
+function TestSetWithCustomIterator(a1) {
+    const k1 = {};
+    const k2 = {};
+    let callCount = 0;
+    const v8 = () => {
+        const v9 = () => {
+            const v12 = callCount++ === 0;
+            const v14 = { value: k2, done: false };
+            return v12 ? v14 : { done: true };
+        };
+        return { next: v9 };
+    };
+    const t12 = Array.prototype;
+    t12[Symbol.iterator] = v8;
+    const entries = [k1];
+    const v25 = new a1(entries);
+    const set = v25;
+    set.has(k1);
+    set.has(k2);
+}
+TestSetWithCustomIterator(Set);
+TestSetWithCustomIterator(Set);
+TestSetWithCustomIterator(Set);
+TestSetWithCustomIterator(Set);
+TestSetWithCustomIterator();
+TestSetWithCustomIterator(WeakSet);
+TestSetWithCustomIterator(WeakSet);
+TestSetWithCustomIterator(WeakSet);
+TestSetWithCustomIterator(WeakSet);
+TestSetWithCustomIterator();
+function TestMapWithCustomIterator(a43) {
+    const k1 = {};
+    const k2 = {};
+    let callCount = 0;
+    const v50 = () => {
+        const v51 = () => {
+            const v54 = callCount++ === 0;
+            const v56 = [k2,2];
+            const v58 = { value: v56, done: false };
+            return v54 ? v58 : { done: true };
+        };
+        return { next: v51 };
+    };
+    const t43 = Array.prototype;
+    t43[Symbol.iterator] = v50;
+    const entries = [[k1,1]];
+    const v71 = new a43(entries);
+    const map = v71;
+    map.has(k1);
+    map.get(k2);
+}
+TestMapWithCustomIterator(Map);
+TestMapWithCustomIterator(Map);
+TestMapWithCustomIterator(Map);
+TestMapWithCustomIterator(Map);
+TestMapWithCustomIterator();
+TestMapWithCustomIterator(WeakMap);
+TestMapWithCustomIterator(WeakMap);
+TestMapWithCustomIterator(WeakMap);
+TestMapWithCustomIterator(WeakMap);
+TestMapWithCustomIterator();
+
+FuzzIL program written to corpus/collections-constructor-with-modified-array-prototype.fzil

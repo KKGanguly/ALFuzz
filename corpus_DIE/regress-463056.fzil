@@ -1,0 +1,23 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadInteger '0'
+    v3 <- BinaryOperation v1, '%', v2
+    v4 <- LoadInteger '1'
+    v5 <- BinaryOperation v3, '&', v4
+    v6 <- LoadInteger '1'
+    v7 <- LoadInteger '0'
+    v8 <- LoadInteger '0'
+    v9 <- BinaryOperation v7, '%', v8
+    v10 <- BinaryOperation v6, '>>>', v9
+    v11 <- BinaryOperation v5, '+', v10
+    Return v11
+EndPlainFunction
+v12 <- CallFunction v0, []
+
+
+function f() {
+    return ((0 % 0) & 1) + (1 >>> (0 % 0));
+}
+f();
+
+FuzzIL program written to corpus/regress-463056.fzil

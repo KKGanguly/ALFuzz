@@ -1,0 +1,71 @@
+v0 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v1 <- LoadInteger '8'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'ab', 'var', v2
+v4 <- CreateNamedVariable 'Int32Array', 'none'
+v5 <- Construct v4, [v3]
+v6 <- CreateNamedVariable 'i_view', 'var', v5
+v7 <- LoadInteger '0'
+SetElement v6, '0', v7
+v8 <- LoadInteger '0'
+SetElement v6, '1', v8
+v9 <- CreateNamedVariable 'Float64Array', 'none'
+v10 <- Construct v9, [v3]
+v11 <- CreateNamedVariable 'f_view', 'var', v10
+v12 <- LoadInteger '1'
+v13 <- Construct v9, [v12]
+v14 <- CreateNamedVariable 'fixed_double_elements', 'var', v13
+v15 <- GetElement v11, '0'
+SetElement v14, '0', v15
+v16 <- BeginPlainFunction -> v17
+    v18 <- GetElement v17, '0'
+    v19 <- LoadThis
+    SetProperty v19, 'x', v18
+EndPlainFunction
+v20 <- Construct v16, [v14]
+v21 <- Construct v16, [v14]
+v22 <- Construct v16, [v14]
+v23 <- CreateNamedVariable 'obj', 'var', v22
+v24 <- BeginPlainFunction -> v25, v26
+    v27 <- GetProperty v26, 'x'
+    SetElement v25, '0', v27
+EndPlainFunction
+v28 <- LoadFloat '0.5'
+v29 <- CreateArray [v28]
+v30 <- CreateNamedVariable 'doubles', 'var', v29
+v31 <- CallFunction v24, [v30, v23]
+v32 <- CallFunction v24, [v30, v23]
+v33 <- CallFunction v24, [v30, v23]
+v34 <- GetElement v30, '0'
+v35 <- LoadUndefined
+v36 <- Compare v34, '!==', v35
+
+
+const v2 = new ArrayBuffer(8);
+var ab = v2;
+const v5 = new Int32Array(ab);
+var i_view = v5;
+i_view[0] = 0;
+i_view[1] = 0;
+const v10 = new Float64Array(ab);
+var f_view = v10;
+const v13 = new Float64Array(1);
+var fixed_double_elements = v13;
+fixed_double_elements[0] = f_view[0];
+function A(a17) {
+    this.x = a17[0];
+}
+new A(fixed_double_elements);
+new A(fixed_double_elements);
+const v22 = new A(fixed_double_elements);
+var obj = v22;
+function move_x(a25, a26) {
+    a25[0] = a26.x;
+}
+var doubles = [0.5];
+move_x(doubles, obj);
+move_x(doubles, obj);
+move_x(doubles, obj);
+doubles[0] !== undefined;
+
+FuzzIL program written to corpus/regress-undefined-nan3.fzil

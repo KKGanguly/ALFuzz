@@ -1,0 +1,107 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'seed', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '171'
+    v4 <- BinaryOperation v1, '*', v3
+    v5 <- LoadInteger '1337'
+    v6 <- BinaryOperation v4, '%', v5
+    v7 <- LoadInteger '17'
+    v8 <- BinaryOperation v6, '+', v7
+    Reassign v1, v8
+    v9 <- LoadInteger '1000'
+    v10 <- BinaryOperation v1, '%', v9
+    v11 <- LoadInteger '1000'
+    v12 <- BinaryOperation v10, '/', v11
+    Return v12
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14
+    v15 <- LoadInteger '131'
+    v16 <- BinaryOperation v1, '*', v15
+    v17 <- LoadInteger '1773'
+    v18 <- BinaryOperation v16, '%', v17
+    v19 <- LoadInteger '13'
+    v20 <- BinaryOperation v18, '+', v19
+    Reassign v1, v20
+    v21 <- BinaryOperation v1, '%', v14
+    Return v21
+EndPlainFunction
+v22 <- BeginPlainFunction -> v23
+    v24 <- LoadString '_'
+    v25 <- BinaryOperation v24, '+', v23
+    Return v25
+EndPlainFunction
+v26 <- LoadString 'var '
+v27 <- CreateNamedVariable 'source', 'var', v26
+BeginForLoopInitializer
+    v28 <- LoadInteger '0'
+BeginForLoopCondition -> v29
+    v30 <- LoadInteger '750'
+    v31 <- Compare v29, '<', v30
+BeginForLoopAfterthought v31 -> v32
+    v33 <- UnaryOperation v32, '++'
+BeginForLoopBody -> v34
+    v35 <- LoadString ''
+    v36 <- CallFunction v22, [v34]
+    v37 <- LoadString '='
+    v38 <- CallFunction v2, []
+    v39 <- LoadString ','
+    v40 <- CreateArray [v36, v37, v38, v39]
+    v41 <- CallMethod v40, 'join', [v35]
+    Update v27, '+', v41
+EndForLoop
+BeginForLoopInitializer
+    v42 <- LoadInteger '750'
+BeginForLoopCondition -> v43
+    v44 <- LoadInteger '3000'
+    v45 <- Compare v43, '<', v44
+BeginForLoopAfterthought v45 -> v46
+    v47 <- UnaryOperation v46, '++'
+BeginForLoopBody -> v48
+    v49 <- LoadString ''
+    v50 <- CallFunction v22, [v48]
+    v51 <- LoadString '='
+    v52 <- CallFunction v13, [v48]
+    v53 <- CallFunction v22, [v52]
+    v54 <- LoadString '+'
+    v55 <- CallFunction v13, [v48]
+    v56 <- CallFunction v22, [v55]
+    v57 <- LoadString ','
+    v58 <- CreateArray [v50, v51, v53, v54, v56, v57]
+    v59 <- CallMethod v58, 'join', [v49]
+    Update v27, '+', v59
+EndForLoop
+v60 <- LoadString 'x=1; return _0;'
+Update v27, '+', v60
+v61 <- CreateNamedVariable 'Function', 'none'
+v62 <- Construct v61, [v27]
+v63 <- CreateNamedVariable 'f', 'var', v62
+v64 <- CallFunction v63, []
+v65 <- CallFunction v63, []
+
+
+var seed = 1;
+function rand() {
+    seed = ((seed * 171) % 1337) + 17;
+    return (seed % 1000) / 1000;
+}
+function randi(a14) {
+    seed = ((seed * 131) % 1773) + 13;
+    return seed % a14;
+}
+function varname(a23) {
+    return "_" + a23;
+}
+var source = "var ";
+for (let i29 = 0; i29 < 750; i29++) {
+    source += ([varname(i29),"=",rand(),","]).join("");
+}
+for (let i43 = 750; i43 < 3000; i43++) {
+    source += ([varname(i43),"=",varname(randi(i43)),"+",varname(randi(i43)),","]).join("");
+}
+source += "x=1; return _0;";
+const v62 = new Function(source);
+var f = v62;
+f();
+f();
+
+FuzzIL program written to corpus/regress-2612.fzil

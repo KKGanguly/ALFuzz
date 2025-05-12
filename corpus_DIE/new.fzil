@@ -1,0 +1,143 @@
+v0 <- BeginPlainFunction -> v1
+    Return v1
+EndPlainFunction
+v2 <- LoadNull
+v3 <- LoadNull
+v4 <- Construct v0, [v3]
+v5 <- Compare v2, '==', v4
+v6 <- LoadInteger '0'
+v7 <- Void_ v6
+v8 <- LoadInteger '0'
+v9 <- Void_ v8
+v10 <- Construct v0, [v9]
+v11 <- Compare v7, '==', v10
+v12 <- LoadInteger '0'
+v13 <- LoadInteger '0'
+v14 <- Construct v0, [v13]
+v15 <- Compare v12, '==', v14
+v16 <- LoadInteger '1'
+v17 <- LoadInteger '1'
+v18 <- Construct v0, [v17]
+v19 <- Compare v16, '==', v18
+v20 <- LoadFloat '4.2'
+v21 <- LoadFloat '4.2'
+v22 <- Construct v0, [v21]
+v23 <- Compare v20, '==', v22
+v24 <- LoadString 'foo'
+v25 <- LoadString 'foo'
+v26 <- Construct v0, [v25]
+v27 <- Compare v24, '==', v26
+v28 <- LoadBoolean 'true'
+v29 <- LoadBoolean 'true'
+v30 <- Construct v0, [v29]
+v31 <- Compare v28, '==', v30
+BeginObjectLiteral
+v32 <- EndObjectLiteral
+v33 <- CreateNamedVariable 'x', 'none'
+Reassign v33, v32
+v34 <- CreateNamedVariable 'x', 'none'
+v35 <- Construct v0, [v34]
+v36 <- Compare v34, '===', v35
+v37 <- LoadNull
+v38 <- Construct v0, [v37]
+v39 <- Compare v34, '===', v38
+v40 <- LoadInteger '0'
+v41 <- Void_ v40
+v42 <- Construct v0, [v41]
+v43 <- Compare v34, '===', v42
+v44 <- LoadInteger '1'
+v45 <- Construct v0, [v44]
+v46 <- Compare v34, '===', v45
+v47 <- LoadFloat '3.2'
+v48 <- Construct v0, [v47]
+v49 <- Compare v34, '===', v48
+v50 <- LoadBoolean 'false'
+v51 <- Construct v0, [v50]
+v52 <- Compare v34, '===', v51
+v53 <- LoadString 'bar'
+v54 <- Construct v0, [v53]
+v55 <- Compare v34, '===', v54
+v56 <- CreateArray []
+Reassign v34, v56
+v57 <- Construct v0, [v34]
+v58 <- Compare v34, '===', v57
+v59 <- CreateNamedVariable 'Boolean', 'none'
+v60 <- LoadBoolean 'true'
+v61 <- Construct v59, [v60]
+Reassign v34, v61
+v62 <- Construct v0, [v34]
+v63 <- Compare v34, '===', v62
+v64 <- CreateNamedVariable 'Number', 'none'
+v65 <- LoadInteger '42'
+v66 <- Construct v64, [v65]
+Reassign v34, v66
+v67 <- Construct v0, [v34]
+v68 <- Compare v34, '===', v67
+v69 <- CreateNamedVariable 'String', 'none'
+v70 <- LoadString 'foo'
+v71 <- Construct v69, [v70]
+Reassign v34, v71
+v72 <- Construct v0, [v34]
+v73 <- Compare v34, '===', v72
+v74 <- BeginPlainFunction -> 
+EndPlainFunction
+Reassign v34, v74
+v75 <- Construct v0, [v34]
+v76 <- Compare v34, '===', v75
+
+
+function Construct(a1) {
+    return a1;
+}
+const v4 = new Construct(null);
+null == v4;
+const v7 = void 0;
+const v10 = new Construct(void 0);
+v7 == v10;
+const v14 = new Construct(0);
+0 == v14;
+const v18 = new Construct(1);
+1 == v18;
+const v22 = new Construct(4.2);
+4.2 == v22;
+const v26 = new Construct("foo");
+"foo" == v26;
+const v30 = new Construct(true);
+true == v30;
+x = {};
+const v35 = new Construct(x);
+x === v35;
+const v38 = new Construct(null);
+x === v38;
+const v42 = new Construct(void 0);
+x === v42;
+const v45 = new Construct(1);
+x === v45;
+const v48 = new Construct(3.2);
+x === v48;
+const v51 = new Construct(false);
+x === v51;
+const v54 = new Construct("bar");
+x === v54;
+x = [];
+const v57 = new Construct(x);
+x === v57;
+const v61 = new Boolean(true);
+x = v61;
+const v62 = new Construct(x);
+x === v62;
+const v66 = new Number(42);
+x = v66;
+const v67 = new Construct(x);
+x === v67;
+const v71 = new String("foo");
+x = v71;
+const v72 = new Construct(x);
+x === v72;
+function f74() {
+}
+x = f74;
+const v75 = new Construct(x);
+x === v75;
+
+FuzzIL program written to corpus/new.fzil

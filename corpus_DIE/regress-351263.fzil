@@ -1,0 +1,30 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable '__v_12', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- BinaryOperation v3, '>>>', v4
+    v6 <- BinaryOperation v1, '-', v4
+    v7 <- BinaryOperation v3, '<<', v6
+    v8 <- BinaryOperation v5, '|', v7
+    Return v8
+EndPlainFunction
+v9 <- LoadFloat '1.4'
+v10 <- LoadInteger '1'
+v11 <- CallFunction v2, [v9, v10]
+v12 <- LoadFloat '1.4'
+v13 <- LoadInteger '1'
+v14 <- CallFunction v2, [v12, v13]
+v15 <- LoadFloat '1.4'
+v16 <- LoadInteger '1'
+v17 <- CallFunction v2, [v15, v16]
+
+
+var __v_12 = {};
+function __f_30(a3, a4) {
+    return (a3 >>> a4) | (a3 << (__v_12 - a4));
+}
+__f_30(1.4, 1);
+__f_30(1.4, 1);
+__f_30(1.4, 1);
+
+FuzzIL program written to corpus/regress-351263.fzil

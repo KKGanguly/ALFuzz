@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '42'
+    v2 <- CreateNamedVariable 'f', 'none'
+    Reassign v2, v1
+    v3 <- CreateNamedVariable 'f', 'none'
+    v4 <- TypeOf v3
+    Return v4
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- LoadString 'function'
+v7 <- BeginGeneratorFunction -> 
+    v8 <- LoadInteger '42'
+    v9 <- CreateNamedVariable 'g', 'none'
+    Reassign v9, v8
+    v10 <- CreateNamedVariable 'g', 'none'
+    v11 <- TypeOf v10
+    v12 <- Yield v11
+EndGeneratorFunction
+v13 <- CallFunction v7, []
+v14 <- CallMethod v13, 'next', []
+v15 <- GetProperty v14, 'value'
+
+
+function f() {
+    f = 42;
+    return typeof f;
+}
+f();
+function* g() {
+    g = 42;
+    yield typeof g;
+}
+g().next().value;
+
+FuzzIL program written to corpus/regress-4482.fzil

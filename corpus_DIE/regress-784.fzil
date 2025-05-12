@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> v1
+    Return v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v0
+v2 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'A', 'none'
+Reassign v4, v3
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadInteger '17'
+    Return v7
+EndPlainFunction
+v8 <- CreateNamedVariable 'B', 'none'
+Reassign v8, v5
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadThis
+    v11 <- LoadArguments
+    v12 <- CreateNamedVariable 'B', 'none'
+    v13 <- CallMethod v12, 'apply', [v10, v11]
+    v14 <- CreateNamedVariable 'A', 'none'
+    v15 <- GetProperty v14, 'x'
+    v16 <- CallMethod v15, 'y', [v13]
+EndPlainFunction
+v17 <- CreateNamedVariable 'foo', 'none'
+Reassign v17, v9
+v18 <- CreateNamedVariable 'foo', 'none'
+v19 <- CallFunction v18, []
+v20 <- LoadString 'Hello'
+v21 <- LoadString 'There'
+v22 <- CallFunction v18, [v20, v21]
+
+
+function f0(a1) {
+    return a1;
+}
+const v2 = { y: f0 };
+A = { x: v2 };
+function f5(a6) {
+    return 17;
+}
+B = f5;
+function f9() {
+    const v13 = B.apply(this, arguments);
+    A.x.y(v13);
+}
+foo = f9;
+foo();
+foo("Hello", "There");
+
+FuzzIL program written to corpus/regress-784.fzil

@@ -1,0 +1,36 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadInteger '0'
+v2 <- GetProperty v0, 'prototype'
+SetProperty v2, 'x', v1
+v3 <- BeginPlainFunction -> v4
+    v5 <- LoadInteger '1'
+    SetProperty v4, 'x', v5
+EndPlainFunction
+v6 <- Construct v0, []
+v7 <- CallFunction v3, [v6]
+v8 <- Construct v0, []
+v9 <- CallFunction v3, [v8]
+v10 <- Construct v0, []
+v11 <- CallFunction v3, [v10]
+v12 <- GetProperty v0, 'prototype'
+v13 <- GetProperty v12, 'x'
+v14 <- LoadInteger '0'
+
+
+function Foo() {
+}
+const t2 = Foo.prototype;
+t2.x = 0;
+function foo(a4) {
+    a4.x = 1;
+}
+const v6 = new Foo();
+foo(v6);
+const v8 = new Foo();
+foo(v8);
+const v10 = new Foo();
+foo(v10);
+Foo.prototype.x;
+
+FuzzIL program written to corpus/regress-4470-1.fzil

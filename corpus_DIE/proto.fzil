@@ -1,0 +1,24 @@
+v0 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'o1', 'var', v1
+v3 <- LoadInteger '12'
+v4 <- LoadInteger '13'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v3
+    ObjectLiteralAddProperty `y`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'o2', 'var', v5
+v7 <- DeleteProperty v6, 'x'
+v8 <- GetProperty v2, '__proto__'
+v9 <- GetProperty v6, '__proto__'
+v10 <- Compare v8, '===', v9
+
+
+var o1 = { x: 12 };
+var o2 = { x: 12, y: 13 };
+delete o2.x;
+o1.__proto__ === o2.__proto__;
+
+FuzzIL program written to corpus/proto.fzil

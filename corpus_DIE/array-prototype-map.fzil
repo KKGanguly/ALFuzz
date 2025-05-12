@@ -1,0 +1,49 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'array', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- BeginArrowFunction -> v6
+            v7 <- LoadInteger '1'
+            v8 <- BinaryOperation v6, '+', v7
+            Return v8
+        EndArrowFunction
+        v9 <- CallMethod v3, 'map', [v5]
+        Return v9
+    EndPlainFunction
+    v10 <- CallFunction v4, []
+    v11 <- LoadUndefined
+    v12 <- CreateArray [v11]
+    v13 <- LoadInteger '5'
+    v14 <- GetProperty v3, '__proto__'
+    v15 <- CallMethod v14, 'push', [v13]
+    v16 <- CallFunction v4, []
+    v17 <- CreateNamedVariable 'narr', 'var', v16
+    v18 <- LoadInteger '0'
+    v19 <- CreateNamedVariable 'Object', 'none'
+    v20 <- CallMethod v19, 'getOwnPropertyDescriptor', [v17, v18]
+    v21 <- LoadUndefined
+    v22 <- GetElement v17, '0'
+    v23 <- LoadInteger '6'
+EndPlainFunction
+v24 <- CallFunction v0, []
+
+
+function f0() {
+    var array = [,];
+    function map() {
+        const v5 = (a6) => {
+            return a6 + 1;
+        };
+        return array.map(v5);
+    }
+    map();
+    [,];
+    array.__proto__.push(5);
+    var narr = map();
+    Object.getOwnPropertyDescriptor(narr, 0);
+    narr[0];
+}
+f0();
+
+FuzzIL program written to corpus/array-prototype-map.fzil

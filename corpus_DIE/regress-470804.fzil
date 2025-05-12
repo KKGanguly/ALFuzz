@@ -1,0 +1,172 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadThis
+    SetProperty v2, 'foo00', v1
+    v3 <- LoadInteger '0'
+    v4 <- LoadThis
+    SetProperty v4, 'foo01', v3
+    v5 <- LoadInteger '0'
+    v6 <- LoadThis
+    SetProperty v6, 'foo02', v5
+    v7 <- LoadInteger '0'
+    v8 <- LoadThis
+    SetProperty v8, 'foo03', v7
+    v9 <- LoadInteger '0'
+    v10 <- LoadThis
+    SetProperty v10, 'foo04', v9
+    v11 <- LoadInteger '0'
+    v12 <- LoadThis
+    SetProperty v12, 'foo05', v11
+    v13 <- LoadInteger '0'
+    v14 <- LoadThis
+    SetProperty v14, 'foo06', v13
+    v15 <- LoadInteger '0'
+    v16 <- LoadThis
+    SetProperty v16, 'foo07', v15
+    v17 <- LoadInteger '0'
+    v18 <- LoadThis
+    SetProperty v18, 'foo08', v17
+    v19 <- LoadInteger '0'
+    v20 <- LoadThis
+    SetProperty v20, 'foo09', v19
+    v21 <- LoadInteger '0'
+    v22 <- LoadThis
+    SetProperty v22, 'foo0a', v21
+    v23 <- LoadInteger '0'
+    v24 <- LoadThis
+    SetProperty v24, 'foo0b', v23
+    v25 <- LoadInteger '0'
+    v26 <- LoadThis
+    SetProperty v26, 'foo0c', v25
+    v27 <- LoadInteger '0'
+    v28 <- LoadThis
+    SetProperty v28, 'foo0d', v27
+    v29 <- LoadInteger '0'
+    v30 <- LoadThis
+    SetProperty v30, 'foo0e', v29
+    v31 <- LoadInteger '0'
+    v32 <- LoadThis
+    SetProperty v32, 'foo0f', v31
+    v33 <- LoadInteger '0'
+    v34 <- LoadThis
+    SetProperty v34, 'foo10', v33
+    v35 <- LoadInteger '0'
+    v36 <- LoadThis
+    SetProperty v36, 'foo11', v35
+    v37 <- LoadInteger '0'
+    v38 <- LoadThis
+    SetProperty v38, 'foo12', v37
+    v39 <- LoadInteger '0'
+    v40 <- LoadThis
+    SetProperty v40, 'foo13', v39
+    v41 <- LoadInteger '0'
+    v42 <- LoadThis
+    SetProperty v42, 'foo14', v41
+    v43 <- LoadInteger '0'
+    v44 <- LoadThis
+    SetProperty v44, 'foo15', v43
+    v45 <- LoadInteger '0'
+    v46 <- LoadThis
+    SetProperty v46, 'foo16', v45
+    v47 <- LoadInteger '0'
+    v48 <- LoadThis
+    SetProperty v48, 'foo17', v47
+    v49 <- LoadInteger '0'
+    v50 <- LoadThis
+    SetProperty v50, 'foo18', v49
+    v51 <- LoadInteger '0'
+    v52 <- LoadThis
+    SetProperty v52, 'foo19', v51
+    v53 <- LoadInteger '0'
+    v54 <- LoadThis
+    SetProperty v54, 'foo1a', v53
+    v55 <- LoadInteger '0'
+    v56 <- LoadThis
+    SetProperty v56, 'foo1b', v55
+    v57 <- LoadInteger '0'
+    v58 <- LoadThis
+    SetProperty v58, 'foo1c', v57
+    v59 <- LoadInteger '0'
+    v60 <- LoadThis
+    SetProperty v60, 'foo1d', v59
+    v61 <- LoadInteger '0'
+    v62 <- LoadThis
+    SetProperty v62, 'foo1e', v61
+    v63 <- LoadInteger '0'
+    v64 <- LoadThis
+    SetProperty v64, 'foo1f', v63
+    v65 <- LoadFloat '1.3'
+    v66 <- LoadThis
+    SetProperty v66, 'd', v65
+    v67 <- CreateNamedVariable 'gc', 'none'
+    v68 <- CallFunction v67, []
+    v69 <- LoadInteger '230'
+    v70 <- LoadThis
+    SetProperty v70, 'boom', v69
+    v71 <- LoadFloat '1.4'
+    v72 <- LoadThis
+    SetProperty v72, 'boom', v71
+EndPlainFunction
+v73 <- BeginPlainFunction -> 
+    v74 <- Construct v0, []
+    Return v74
+EndPlainFunction
+v75 <- CallFunction v73, []
+v76 <- CallFunction v73, []
+v77 <- CallFunction v73, []
+v78 <- CreateNamedVariable 'o', 'var', v77
+v79 <- LoadInteger '0'
+v80 <- GetProperty v78, 'foo00'
+v81 <- LoadFloat '1.4'
+v82 <- GetProperty v78, 'boom'
+
+
+function f() {
+    this.foo00 = 0;
+    this.foo01 = 0;
+    this.foo02 = 0;
+    this.foo03 = 0;
+    this.foo04 = 0;
+    this.foo05 = 0;
+    this.foo06 = 0;
+    this.foo07 = 0;
+    this.foo08 = 0;
+    this.foo09 = 0;
+    this.foo0a = 0;
+    this.foo0b = 0;
+    this.foo0c = 0;
+    this.foo0d = 0;
+    this.foo0e = 0;
+    this.foo0f = 0;
+    this.foo10 = 0;
+    this.foo11 = 0;
+    this.foo12 = 0;
+    this.foo13 = 0;
+    this.foo14 = 0;
+    this.foo15 = 0;
+    this.foo16 = 0;
+    this.foo17 = 0;
+    this.foo18 = 0;
+    this.foo19 = 0;
+    this.foo1a = 0;
+    this.foo1b = 0;
+    this.foo1c = 0;
+    this.foo1d = 0;
+    this.foo1e = 0;
+    this.foo1f = 0;
+    this.d = 1.3;
+    gc();
+    this.boom = 230;
+    this.boom = 1.4;
+}
+function g() {
+    const v74 = new f();
+    return v74;
+}
+g();
+g();
+var o = g();
+o.foo00;
+o.boom;
+
+FuzzIL program written to corpus/regress-470804.fzil

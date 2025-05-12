@@ -1,0 +1,94 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'v', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'my_array_proto', 'var', v2
+v4 <- CreateArray []
+v5 <- GetProperty v4, '__proto__'
+SetProperty v3, '__proto__', v5
+v6 <- BeginPlainFunction -> v7, v8
+    v9 <- CallMethod v7, 'push', [v8]
+EndPlainFunction
+v10 <- CreateArray []
+v11 <- CreateNamedVariable 'array', 'none'
+Reassign v11, v10
+v12 <- CreateNamedVariable 'array', 'none'
+SetProperty v12, '__proto__', v3
+v13 <- LoadInteger '66'
+v14 <- CallFunction v6, [v12, v13]
+v15 <- LoadInteger '1'
+v16 <- GetProperty v12, 'length'
+v17 <- LoadInteger '0'
+v18 <- LoadInteger '66'
+v19 <- GetElement v12, '0'
+v20 <- LoadInteger '77'
+v21 <- CallFunction v6, [v12, v20]
+v22 <- LoadInteger '2'
+v23 <- GetProperty v12, 'length'
+v24 <- LoadInteger '0'
+v25 <- LoadInteger '77'
+v26 <- GetElement v12, '1'
+v27 <- LoadInteger '88'
+v28 <- CallFunction v6, [v12, v27]
+v29 <- LoadInteger '3'
+v30 <- GetProperty v12, 'length'
+v31 <- LoadInteger '0'
+v32 <- LoadInteger '88'
+v33 <- GetElement v12, '2'
+v34 <- CallFunction v6, []
+v35 <- LoadString '3'
+v36 <- BeginPlainFunction -> 
+    v37 <- LoadString 'get '
+    v38 <- BinaryOperation v37, '+', v1
+    Return v38
+EndPlainFunction
+v39 <- BeginPlainFunction -> v40
+    Update v1, '+', v40
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v36
+    ObjectLiteralAddProperty `set`, v39
+v41 <- EndObjectLiteral
+v42 <- CreateNamedVariable 'Object', 'none'
+v43 <- CallMethod v42, 'defineProperty', [v3, v35, v41]
+v44 <- CallFunction v6, []
+v45 <- LoadInteger '99'
+v46 <- CallFunction v6, [v12, v45]
+v47 <- LoadInteger '4'
+v48 <- GetProperty v12, 'length'
+v49 <- LoadInteger '99'
+v50 <- LoadString 'get 99'
+v51 <- GetElement v12, '3'
+
+
+var v = 0;
+var my_array_proto = {};
+my_array_proto.__proto__ = ([]).__proto__;
+function push_wrapper_2(a7, a8) {
+    a7.push(a8);
+}
+array = [];
+array.__proto__ = my_array_proto;
+push_wrapper_2(array, 66);
+array.length;
+array[0];
+push_wrapper_2(array, 77);
+array.length;
+array[1];
+push_wrapper_2(array, 88);
+array.length;
+array[2];
+push_wrapper_2();
+function f36() {
+    return "get " + v;
+}
+function f39(a40) {
+    v += a40;
+}
+Object.defineProperty(my_array_proto, "3", { get: f36, set: f39 });
+push_wrapper_2();
+push_wrapper_2(array, 99);
+array.length;
+array[3];
+
+FuzzIL program written to corpus/array-push5.fzil

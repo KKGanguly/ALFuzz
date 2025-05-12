@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v1
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable 'o', 'var', v2
+    BeginForLoopInitializer
+        v4 <- LoadInteger '0'
+    BeginForLoopCondition -> v5
+        v6 <- GetProperty v3, 'x'
+        v7 <- LoadInteger '1'
+        v8 <- Compare v6, '<', v7
+    BeginForLoopAfterthought v8 -> v9
+    BeginForLoopBody -> v10
+        v11 <- GetProperty v3, 'x'
+        v12 <- UnaryOperation v11, '++'
+        v13 <- LoadInteger '1'
+        Update v10, '+', v13
+    EndForLoop
+    v14 <- BeginPlainFunction -> 
+        v15 <- CreateNamedVariable 'i', 'none'
+    EndPlainFunction
+    v16 <- GetProperty v3, 'x'
+    Return v16
+EndPlainFunction
+v17 <- CallFunction v0, []
+v18 <- CallFunction v0, []
+v19 <- CallFunction v0, []
+
+
+function foo() {
+    var o = { x: 0 };
+    for (let i5 = 0; o.x < 1;) {
+        let v11 = o.x;
+        v11++;
+        i5 += 1;
+    }
+    function bar() {
+    }
+    return o.x;
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/escape-analysis-framestate-use-at-branchpoint.fzil

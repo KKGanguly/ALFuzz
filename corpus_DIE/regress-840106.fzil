@@ -1,0 +1,62 @@
+v0 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v1 <- LoadInteger '1024'
+v2 <- LoadInteger '1024'
+v3 <- BinaryOperation v1, '*', v2
+v4 <- Construct v0, [v3]
+v5 <- CreateNamedVariable 'buffer', 'var', v4
+v6 <- CreateNamedVariable 'Proxy', 'none'
+v7 <- BeginPlainFunction -> 
+EndPlainFunction
+v8 <- BeginArrowFunction -> v9
+EndArrowFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v8
+v10 <- EndObjectLiteral
+v11 <- Construct v6, [v7, v10]
+v12 <- CreateNamedVariable 'Symbol', 'none'
+v13 <- GetProperty v12, 'species'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v13, v11
+v14 <- EndObjectLiteral
+SetProperty v5, 'constructor', v14
+v15 <- CreateNamedVariable 'Uint8Array', 'none'
+v16 <- LoadInteger '0'
+v17 <- LoadInteger '1024'
+v18 <- Construct v15, [v5, v16, v17]
+v19 <- CreateNamedVariable 'array1', 'var', v18
+v20 <- BeginArrowFunction -> 
+    v21 <- Construct v15, [v19]
+    Return v21
+EndArrowFunction
+v22 <- CallFunction v20, []
+v23 <- BeginArrowFunction -> 
+    v24 <- CreateNamedVariable 'Int8Array', 'none'
+    v25 <- Construct v24, [v19]
+    Return v25
+EndArrowFunction
+v26 <- CallFunction v23, []
+
+
+const v4 = new ArrayBuffer(1024 * 1024);
+var buffer = v4;
+function f7() {
+}
+const v8 = (a9) => {
+};
+const v11 = new Proxy(f7, { get: v8 });
+const v13 = Symbol.species;
+buffer.constructor = { [v13]: v11 };
+const v18 = new Uint8Array(buffer, 0, 1024);
+var array1 = v18;
+const v20 = () => {
+    const v21 = new Uint8Array(array1);
+    return v21;
+};
+v20();
+const v23 = () => {
+    const v25 = new Int8Array(array1);
+    return v25;
+};
+v23();
+
+FuzzIL program written to corpus/regress-840106.fzil

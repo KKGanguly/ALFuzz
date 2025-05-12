@@ -1,0 +1,37 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '1'
+    SetComputedProperty v1, v2, v3
+    v4 <- LoadInteger '1749557862'
+    v5 <- UnaryOperation '-', v4
+    SetComputedProperty v1, v2, v5
+EndPlainFunction
+v6 <- CreateNamedVariable 'Array', 'none'
+v7 <- LoadInteger '1024'
+v8 <- Construct v6, [v7]
+v9 <- CreateNamedVariable '__v_0', 'var', v8
+v10 <- LoadInteger '128'
+v11 <- Construct v6, [v10]
+v12 <- CreateNamedVariable '__v_1', 'var', v11
+v13 <- LoadInteger '1'
+v14 <- CallFunction v0, [v9, v13]
+v15 <- LoadInteger '2'
+v16 <- UnaryOperation '-', v15
+v17 <- CallFunction v0, [v12, v16]
+v18 <- LoadInteger '2'
+v19 <- UnaryOperation '-', v18
+v20 <- CallFunction v0, [v9, v19]
+
+
+function __f_0(a1, a2) {
+    a1[a2] = 1;
+    a1[a2] = -1749557862;
+}
+const v8 = new Array(1024);
+var __v_0 = v8;
+const v11 = new Array(128);
+var __v_1 = v11;
+__f_0(__v_0, 1);
+__f_0(__v_1, -2);
+__f_0(__v_0, -2);
+
+FuzzIL program written to corpus/regress-351319.fzil

@@ -1,0 +1,179 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- BinaryOperation v1, '>>>', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '0'
+v5 <- LoadInteger '0'
+v6 <- CallFunction v0, [v5]
+v7 <- LoadString '0'
+v8 <- LoadInteger '0'
+v9 <- LoadInteger '0'
+v10 <- UnaryOperation '-', v9
+v11 <- CallFunction v0, [v10]
+v12 <- LoadString '-0'
+v13 <- LoadInteger '0'
+v14 <- CreateNamedVariable 'Infinity', 'none'
+v15 <- CallFunction v0, [v14]
+v16 <- LoadString 'Infinity'
+v17 <- LoadInteger '0'
+v18 <- UnaryOperation '-', v14
+v19 <- CallFunction v0, [v18]
+v20 <- LoadString '-Infinity'
+v21 <- LoadInteger '0'
+v22 <- CreateNamedVariable 'NaN', 'none'
+v23 <- CallFunction v0, [v22]
+v24 <- LoadString 'NaN'
+v25 <- LoadInteger '0'
+v26 <- CreateNamedVariable 'Number', 'none'
+v27 <- GetProperty v26, 'MIN_VALUE'
+v28 <- CallFunction v0, [v27]
+v29 <- LoadString 'MIN'
+v30 <- LoadInteger '0'
+v31 <- GetProperty v26, 'MIN_VALUE'
+v32 <- UnaryOperation '-', v31
+v33 <- CallFunction v0, [v32]
+v34 <- LoadString '-MIN'
+v35 <- LoadInteger '0'
+v36 <- LoadFloat '0.1'
+v37 <- CallFunction v0, [v36]
+v38 <- LoadString '0.1'
+v39 <- LoadInteger '0'
+v40 <- LoadFloat '0.1'
+v41 <- UnaryOperation '-', v40
+v42 <- CallFunction v0, [v41]
+v43 <- LoadString '-0.1'
+v44 <- LoadInteger '1'
+v45 <- LoadInteger '1'
+v46 <- CallFunction v0, [v45]
+v47 <- LoadString '1'
+v48 <- LoadInteger '1'
+v49 <- LoadFloat '1.1'
+v50 <- CallFunction v0, [v49]
+v51 <- LoadString '1.1'
+v52 <- LoadInteger '4294967295'
+v53 <- LoadInteger '1'
+v54 <- UnaryOperation '-', v53
+v55 <- CallFunction v0, [v54]
+v56 <- LoadString '-1'
+v57 <- LoadInteger '4294967295'
+v58 <- LoadFloat '1.1'
+v59 <- UnaryOperation '-', v58
+v60 <- CallFunction v0, [v59]
+v61 <- LoadString '-1.1'
+v62 <- LoadInteger '2147483647'
+v63 <- LoadInteger '2147483647'
+v64 <- CallFunction v0, [v63]
+v65 <- LoadString '2147483647'
+v66 <- LoadInteger '2147483648'
+v67 <- LoadInteger '2147483648'
+v68 <- CallFunction v0, [v67]
+v69 <- LoadString '2147483648'
+v70 <- LoadInteger '2147483649'
+v71 <- LoadInteger '2147483649'
+v72 <- CallFunction v0, [v71]
+v73 <- LoadString '2147483649'
+v74 <- LoadInteger '4294967295'
+v75 <- LoadInteger '4294967295'
+v76 <- CallFunction v0, [v75]
+v77 <- LoadString '4294967295'
+v78 <- LoadInteger '0'
+v79 <- LoadInteger '4294967296'
+v80 <- CallFunction v0, [v79]
+v81 <- LoadString '4294967296'
+v82 <- LoadInteger '1'
+v83 <- LoadInteger '4294967297'
+v84 <- CallFunction v0, [v83]
+v85 <- LoadString '4294967297'
+v86 <- LoadInteger '2147483649'
+v87 <- LoadInteger '2147483647'
+v88 <- UnaryOperation '-', v87
+v89 <- CallFunction v0, [v88]
+v90 <- LoadString '-2147483647'
+v91 <- LoadInteger '2147483648'
+v92 <- LoadInteger '2147483648'
+v93 <- UnaryOperation '-', v92
+v94 <- CallFunction v0, [v93]
+v95 <- LoadString '-2147483648'
+v96 <- LoadInteger '2147483647'
+v97 <- LoadInteger '2147483649'
+v98 <- UnaryOperation '-', v97
+v99 <- CallFunction v0, [v98]
+v100 <- LoadString '-2147483649'
+v101 <- LoadInteger '1'
+v102 <- LoadInteger '4294967295'
+v103 <- UnaryOperation '-', v102
+v104 <- CallFunction v0, [v103]
+v105 <- LoadString '-4294967295'
+v106 <- LoadInteger '0'
+v107 <- LoadInteger '4294967296'
+v108 <- UnaryOperation '-', v107
+v109 <- CallFunction v0, [v108]
+v110 <- LoadString '-4294967296'
+v111 <- LoadInteger '4294967295'
+v112 <- LoadInteger '4294967297'
+v113 <- UnaryOperation '-', v112
+v114 <- CallFunction v0, [v113]
+v115 <- LoadString '-4294967297'
+v116 <- LoadInteger '2147483647'
+v117 <- LoadString '2147483647'
+v118 <- CallFunction v0, [v117]
+v119 <- LoadString ''2147483647''
+v120 <- LoadInteger '2147483648'
+v121 <- LoadString '2147483648'
+v122 <- CallFunction v0, [v121]
+v123 <- LoadString ''2147483648''
+v124 <- LoadInteger '2147483649'
+v125 <- LoadString '2147483649'
+v126 <- CallFunction v0, [v125]
+v127 <- LoadString ''2147483649''
+v128 <- LoadInteger '4294967295'
+v129 <- LoadString '4294967295'
+v130 <- CallFunction v0, [v129]
+v131 <- LoadString ''4294967295''
+v132 <- LoadInteger '0'
+v133 <- LoadString '4294967296'
+v134 <- CallFunction v0, [v133]
+v135 <- LoadString ''4294967296''
+v136 <- LoadInteger '1'
+v137 <- LoadString '4294967297'
+v138 <- CallFunction v0, [v137]
+v139 <- LoadString ''4294967297''
+
+
+function ToUInt32(a1) {
+    return a1 >>> 0;
+}
+ToUInt32(0);
+ToUInt32(-0);
+ToUInt32(Infinity);
+ToUInt32(-Infinity);
+ToUInt32(NaN);
+ToUInt32(Number.MIN_VALUE);
+ToUInt32(-Number.MIN_VALUE);
+ToUInt32(0.1);
+ToUInt32(-0.1);
+ToUInt32(1);
+ToUInt32(1.1);
+ToUInt32(-1);
+ToUInt32(-1.1);
+ToUInt32(2147483647);
+ToUInt32(2147483648);
+ToUInt32(2147483649);
+ToUInt32(4294967295);
+ToUInt32(4294967296);
+ToUInt32(4294967297);
+ToUInt32(-2147483647);
+ToUInt32(-2147483648);
+ToUInt32(-2147483649);
+ToUInt32(-4294967295);
+ToUInt32(-4294967296);
+ToUInt32(-4294967297);
+ToUInt32("2147483647");
+ToUInt32("2147483648");
+ToUInt32("2147483649");
+ToUInt32("4294967295");
+ToUInt32("4294967296");
+ToUInt32("4294967297");
+
+FuzzIL program written to corpus/touint32.fzil

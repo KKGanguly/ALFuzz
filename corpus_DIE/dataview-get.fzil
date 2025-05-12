@@ -1,0 +1,456 @@
+v0 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v1 <- LoadInteger '64'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'buffer', 'var', v2
+v4 <- CreateNamedVariable 'DataView', 'none'
+v5 <- LoadInteger '8'
+v6 <- LoadInteger '24'
+v7 <- Construct v4, [v3, v5, v6]
+v8 <- CreateNamedVariable 'dataview', 'var', v7
+v9 <- LoadInteger '1'
+v10 <- UnaryOperation '-', v9
+v11 <- LoadInteger '2'
+v12 <- LoadInteger '3'
+v13 <- UnaryOperation '-', v12
+v14 <- LoadInteger '42'
+v15 <- CreateArray [v10, v11, v13, v14]
+v16 <- CreateNamedVariable 'values', 'var', v15
+v17 <- BeginPlainFunction -> v18
+    v19 <- CallMethod v8, 'getUint8', [v18]
+    Return v19
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21
+    BeginTry
+        v22 <- CallMethod v8, 'getInt8', [v21]
+        Return v22
+    BeginCatch -> v23
+        Return v23
+    EndTryCatch
+EndPlainFunction
+v24 <- BeginPlainFunction -> v25, v26
+    v27 <- CallMethod v8, 'getUint16', [v25, v26]
+    Return v27
+EndPlainFunction
+v28 <- BeginPlainFunction -> v29, v30
+    BeginTry
+        v31 <- CallMethod v8, 'getInt16', [v29, v30]
+        Return v31
+    BeginCatch -> v32
+        Return v32
+    EndTryCatch
+EndPlainFunction
+v33 <- BeginPlainFunction -> v34, v35
+    v36 <- CallMethod v8, 'getUint32', [v34, v35]
+    Return v36
+EndPlainFunction
+v37 <- BeginPlainFunction -> v38, v39
+    BeginTry
+        v40 <- CallMethod v8, 'getInt32', [v38, v39]
+        Return v40
+    BeginCatch -> v41
+        Return v41
+    EndTryCatch
+EndPlainFunction
+v42 <- BeginPlainFunction -> v43, v44
+    v45 <- CallMethod v8, 'getFloat32', [v43, v44]
+    Return v45
+EndPlainFunction
+v46 <- BeginPlainFunction -> v47, v48
+    v49 <- CallMethod v8, 'getFloat64', [v47, v48]
+    Return v49
+EndPlainFunction
+v50 <- BeginPlainFunction -> v51
+    v52 <- LoadInteger '0'
+    v53 <- CallFunction v51, [v52]
+    v54 <- LoadInteger '1'
+    v55 <- CallFunction v51, [v54]
+    v56 <- LoadInteger '2'
+    v57 <- CallFunction v51, [v56]
+    v58 <- LoadInteger '3'
+    v59 <- CallFunction v51, [v58]
+EndPlainFunction
+BeginForLoopInitializer
+    v60 <- LoadInteger '0'
+BeginForLoopCondition -> v61
+    v62 <- GetProperty v16, 'length'
+    v63 <- Compare v61, '<', v62
+BeginForLoopAfterthought v63 -> v64
+    v65 <- UnaryOperation v64, '++'
+BeginForLoopBody -> v66
+    v67 <- GetComputedProperty v16, v66
+    v68 <- CallMethod v8, 'setInt8', [v66, v67]
+EndForLoop
+v69 <- CallFunction v50, [v20]
+v70 <- CallFunction v20, []
+v71 <- GetElement v16, '0'
+v72 <- LoadInteger '0'
+v73 <- CallFunction v20, [v72]
+v74 <- GetElement v16, '1'
+v75 <- LoadInteger '1'
+v76 <- CallFunction v20, [v75]
+v77 <- GetElement v16, '2'
+v78 <- LoadInteger '2'
+v79 <- CallFunction v20, [v78]
+v80 <- GetElement v16, '3'
+v81 <- LoadInteger '3'
+v82 <- CallFunction v20, [v81]
+v83 <- LoadInteger '4'
+v84 <- LoadInteger '3735928559'
+v85 <- CallMethod v8, 'setUint32', [v83, v84]
+v86 <- CallFunction v50, [v17]
+v87 <- CallFunction v17, []
+v88 <- LoadInteger '222'
+v89 <- LoadInteger '4'
+v90 <- CallFunction v17, [v89]
+v91 <- LoadInteger '173'
+v92 <- LoadInteger '5'
+v93 <- CallFunction v17, [v92]
+v94 <- LoadInteger '190'
+v95 <- LoadInteger '6'
+v96 <- CallFunction v17, [v95]
+v97 <- LoadInteger '239'
+v98 <- LoadInteger '7'
+v99 <- CallFunction v17, [v98]
+v100 <- LoadInteger '8'
+v101 <- LoadInteger '43981'
+v102 <- CallMethod v8, 'setUint16', [v100, v101]
+v103 <- CallFunction v50, [v24]
+v104 <- CallFunction v24, []
+v105 <- LoadInteger '43981'
+v106 <- LoadInteger '8'
+v107 <- CallFunction v24, [v106]
+v108 <- LoadInteger '52651'
+v109 <- LoadInteger '8'
+v110 <- LoadBoolean 'true'
+v111 <- CallFunction v24, [v109, v110]
+v112 <- LoadInteger '4660'
+v113 <- UnaryOperation '-', v112
+v114 <- CreateNamedVariable 'b1', 'let', v113
+v115 <- LoadInteger '10'
+v116 <- CallMethod v8, 'setInt16', [v115, v114]
+v117 <- CallFunction v50, [v28]
+v118 <- CallFunction v28, []
+v119 <- LoadInteger '10'
+v120 <- CallFunction v28, [v119]
+v121 <- LoadInteger '10'
+v122 <- LoadBoolean 'true'
+v123 <- CallMethod v8, 'setInt16', [v121, v114, v122]
+v124 <- LoadInteger '10'
+v125 <- LoadBoolean 'true'
+v126 <- CallFunction v28, [v124, v125]
+v127 <- LoadInteger '12'
+v128 <- LoadInteger '2882400018'
+v129 <- CallMethod v8, 'setUint32', [v127, v128]
+v130 <- CallFunction v50, [v33]
+v131 <- CallFunction v33, []
+v132 <- LoadInteger '2882400018'
+v133 <- LoadInteger '12'
+v134 <- CallFunction v33, [v133]
+v135 <- LoadInteger '317705643'
+v136 <- LoadInteger '12'
+v137 <- LoadBoolean 'true'
+v138 <- CallFunction v33, [v136, v137]
+v139 <- LoadInteger '305419896'
+v140 <- UnaryOperation '-', v139
+v141 <- CreateNamedVariable 'b2', 'let', v140
+v142 <- LoadInteger '16'
+v143 <- CallMethod v8, 'setInt32', [v142, v141]
+v144 <- CallFunction v50, [v37]
+v145 <- CallFunction v37, []
+v146 <- LoadInteger '16'
+v147 <- CallFunction v37, [v146]
+v148 <- LoadInteger '16'
+v149 <- LoadBoolean 'true'
+v150 <- CallMethod v8, 'setInt32', [v148, v141, v149]
+v151 <- LoadInteger '16'
+v152 <- LoadBoolean 'true'
+v153 <- CallFunction v37, [v151, v152]
+v154 <- CreateNamedVariable 'Math', 'none'
+v155 <- GetProperty v154, 'E'
+v156 <- CallMethod v154, 'fround', [v155]
+v157 <- CreateNamedVariable 'b3', 'let', v156
+v158 <- LoadInteger '16'
+v159 <- CallMethod v8, 'setFloat32', [v158, v157]
+v160 <- CallFunction v50, [v42]
+v161 <- CallFunction v42, []
+v162 <- LoadInteger '16'
+v163 <- CallFunction v42, [v162]
+v164 <- LoadInteger '16'
+v165 <- LoadBoolean 'true'
+v166 <- CallMethod v8, 'setFloat32', [v164, v157, v165]
+v167 <- LoadInteger '16'
+v168 <- LoadBoolean 'true'
+v169 <- CallFunction v42, [v167, v168]
+v170 <- GetProperty v154, 'PI'
+v171 <- CreateNamedVariable 'b4', 'let', v170
+v172 <- LoadInteger '16'
+v173 <- CallMethod v8, 'setFloat64', [v172, v171]
+v174 <- CallFunction v50, [v46]
+v175 <- CallFunction v46, []
+v176 <- LoadInteger '16'
+v177 <- CallFunction v46, [v176]
+v178 <- LoadInteger '16'
+v179 <- LoadBoolean 'true'
+v180 <- CallMethod v8, 'setFloat64', [v178, v171, v179]
+v181 <- LoadInteger '16'
+v182 <- LoadBoolean 'true'
+v183 <- CallFunction v46, [v181, v182]
+v184 <- CallFunction v20, []
+v185 <- LoadInteger '24'
+v186 <- CallFunction v20, [v185]
+v187 <- CreateNamedVariable 'RangeError', 'none'
+v188 <- CallFunction v20, []
+v189 <- CallFunction v28, []
+v190 <- LoadInteger '23'
+v191 <- CallFunction v28, [v190]
+v192 <- CallFunction v28, []
+v193 <- CallFunction v37, []
+v194 <- LoadInteger '21'
+v195 <- CallFunction v37, [v194]
+v196 <- CallFunction v37, []
+v197 <- CallFunction v17, []
+v198 <- BeginArrowFunction -> 
+    v199 <- LoadInteger '24'
+    v200 <- CallFunction v17, [v199]
+    Return v200
+EndArrowFunction
+v201 <- CallFunction v198, []
+v202 <- CallFunction v17, []
+v203 <- CallFunction v42, []
+v204 <- BeginArrowFunction -> 
+    v205 <- LoadInteger '21'
+    v206 <- CallFunction v42, [v205]
+    Return v206
+EndArrowFunction
+v207 <- CallFunction v204, []
+v208 <- CallFunction v42, []
+v209 <- CallFunction v46, []
+v210 <- BeginArrowFunction -> 
+    v211 <- LoadInteger '17'
+    v212 <- CallFunction v46, [v211]
+    Return v212
+EndArrowFunction
+v213 <- CallFunction v210, []
+v214 <- CallFunction v46, []
+v215 <- BeginPlainFunction -> 
+    v216 <- BeginPlainFunction -> v217
+        BeginTry
+            v218 <- CallMethod v8, 'getInt8', [v217]
+            Return v218
+        BeginCatch -> v219
+            Return v219
+        EndTryCatch
+    EndPlainFunction
+    v220 <- CallFunction v50, [v216]
+    v221 <- CallFunction v216, []
+    v222 <- LoadInteger '1'
+    v223 <- UnaryOperation '-', v222
+    v224 <- CallFunction v216, [v223]
+    v225 <- CallFunction v216, []
+EndPlainFunction
+v226 <- CallFunction v215, []
+v227 <- BeginPlainFunction -> 
+    v228 <- BeginPlainFunction -> v229
+        v230 <- CallMethod v8, 'getUint8', [v229]
+        Return v230
+    EndPlainFunction
+    v231 <- CallFunction v50, [v228]
+    v232 <- CallFunction v228, []
+    v233 <- GetElement v16, '3'
+    v234 <- LoadFloat '3.14'
+    v235 <- CallFunction v228, [v234]
+    v236 <- CallFunction v228, []
+EndPlainFunction
+v237 <- CallFunction v227, []
+v238 <- BeginPlainFunction -> 
+    v239 <- BeginPlainFunction -> v240
+        BeginTry
+            v241 <- CallMethod v8, 'getInt8', [v240]
+            Return v241
+        BeginCatch -> v242
+            Return v242
+        EndTryCatch
+    EndPlainFunction
+    v243 <- CallFunction v50, [v239]
+    v244 <- CallFunction v239, []
+    v245 <- LoadInteger '0'
+    v246 <- CallFunction v239, [v245]
+    v247 <- CreateNamedVariable 'TypeError', 'none'
+    v248 <- CallFunction v239, []
+EndPlainFunction
+v249 <- CallFunction v238, []
+
+
+const v2 = new ArrayBuffer(64);
+var buffer = v2;
+const v7 = new DataView(buffer, 8, 24);
+var dataview = v7;
+var values = [-1,2,-3,42];
+function readUint8(a18) {
+    return dataview.getUint8(a18);
+}
+function readInt8Handled(a21) {
+    try {
+        return dataview.getInt8(a21);
+    } catch(e23) {
+        return e23;
+    }
+}
+function readUint16(a25, a26) {
+    return dataview.getUint16(a25, a26);
+}
+function readInt16Handled(a29, a30) {
+    try {
+        return dataview.getInt16(a29, a30);
+    } catch(e32) {
+        return e32;
+    }
+}
+function readUint32(a34, a35) {
+    return dataview.getUint32(a34, a35);
+}
+function readInt32Handled(a38, a39) {
+    try {
+        return dataview.getInt32(a38, a39);
+    } catch(e41) {
+        return e41;
+    }
+}
+function readFloat32(a43, a44) {
+    return dataview.getFloat32(a43, a44);
+}
+function readFloat64(a47, a48) {
+    return dataview.getFloat64(a47, a48);
+}
+function warmup(a51) {
+    a51(0);
+    a51(1);
+    a51(2);
+    a51(3);
+}
+for (let i61 = 0; i61 < values.length; i61++) {
+    dataview.setInt8(i61, values[i61]);
+}
+warmup(readInt8Handled);
+readInt8Handled();
+values[0];
+readInt8Handled(0);
+values[1];
+readInt8Handled(1);
+values[2];
+readInt8Handled(2);
+values[3];
+readInt8Handled(3);
+dataview.setUint32(4, 3735928559);
+warmup(readUint8);
+readUint8();
+readUint8(4);
+readUint8(5);
+readUint8(6);
+readUint8(7);
+dataview.setUint16(8, 43981);
+warmup(readUint16);
+readUint16();
+readUint16(8);
+readUint16(8, true);
+let b1 = -4660;
+dataview.setInt16(10, b1);
+warmup(readInt16Handled);
+readInt16Handled();
+readInt16Handled(10);
+dataview.setInt16(10, b1, true);
+readInt16Handled(10, true);
+dataview.setUint32(12, 2882400018);
+warmup(readUint32);
+readUint32();
+readUint32(12);
+readUint32(12, true);
+let b2 = -305419896;
+dataview.setInt32(16, b2);
+warmup(readInt32Handled);
+readInt32Handled();
+readInt32Handled(16);
+dataview.setInt32(16, b2, true);
+readInt32Handled(16, true);
+let b3 = Math.fround(Math.E);
+dataview.setFloat32(16, b3);
+warmup(readFloat32);
+readFloat32();
+readFloat32(16);
+dataview.setFloat32(16, b3, true);
+readFloat32(16, true);
+let b4 = Math.PI;
+dataview.setFloat64(16, b4);
+warmup(readFloat64);
+readFloat64();
+readFloat64(16);
+dataview.setFloat64(16, b4, true);
+readFloat64(16, true);
+readInt8Handled();
+readInt8Handled(24);
+readInt8Handled();
+readInt16Handled();
+readInt16Handled(23);
+readInt16Handled();
+readInt32Handled();
+readInt32Handled(21);
+readInt32Handled();
+readUint8();
+const v198 = () => {
+    return readUint8(24);
+};
+v198();
+readUint8();
+readFloat32();
+const v204 = () => {
+    return readFloat32(21);
+};
+v204();
+readFloat32();
+readFloat64();
+const v210 = () => {
+    return readFloat64(17);
+};
+v210();
+readFloat64();
+function f215() {
+    function readInt8Handled(a217) {
+        try {
+            return dataview.getInt8(a217);
+        } catch(e219) {
+            return e219;
+        }
+    }
+    warmup(readInt8Handled);
+    readInt8Handled();
+    readInt8Handled(-1);
+    readInt8Handled();
+}
+f215();
+function f227() {
+    function readUint8(a229) {
+        return dataview.getUint8(a229);
+    }
+    warmup(readUint8);
+    readUint8();
+    values[3];
+    readUint8(3.14);
+    readUint8();
+}
+f227();
+function f238() {
+    function readInt8Handled(a240) {
+        try {
+            return dataview.getInt8(a240);
+        } catch(e242) {
+            return e242;
+        }
+    }
+    warmup(readInt8Handled);
+    readInt8Handled();
+    readInt8Handled(0);
+    readInt8Handled();
+}
+f238();
+
+FuzzIL program written to corpus/dataview-get.fzil

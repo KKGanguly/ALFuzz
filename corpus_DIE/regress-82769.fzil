@@ -1,0 +1,30 @@
+v0 <- LoadInteger '1'
+v1 <- UnaryOperation '-', v0
+v2 <- CreateNamedVariable 'x', 'none'
+Reassign v2, v1
+v3 <- LoadInteger '0'
+v4 <- UnaryOperation '-', v3
+v5 <- CreateNamedVariable 'y', 'none'
+Reassign v5, v4
+BeginForLoopInitializer
+    v6 <- LoadInteger '0'
+BeginForLoopCondition -> v7
+    v8 <- LoadInteger '5'
+    v9 <- Compare v7, '<', v8
+BeginForLoopAfterthought v9 -> v10
+    v11 <- UnaryOperation v10, '++'
+BeginForLoopBody -> v12
+    v13 <- LoadInteger '4294967295'
+    v14 <- CreateNamedVariable 'x', 'none'
+    v15 <- CreateNamedVariable 'y', 'none'
+    v16 <- BinaryOperation v14, '>>>', v15
+EndForLoop
+
+
+x = -1;
+y = -0;
+for (let i7 = 0; i7 < 5; i7++) {
+    x >>> y;
+}
+
+FuzzIL program written to corpus/regress-82769.fzil

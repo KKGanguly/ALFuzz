@@ -1,0 +1,127 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '32'
+    v3 <- CreateNamedVariable 'Math', 'none'
+    v4 <- CallMethod v3, 'clz32', [v1]
+EndPlainFunction
+v5 <- CreateNamedVariable 'NaN', 'none'
+v6 <- CreateNamedVariable 'Infinity', 'none'
+v7 <- UnaryOperation '-', v6
+v8 <- LoadInteger '0'
+v9 <- LoadInteger '0'
+v10 <- UnaryOperation '-', v9
+v11 <- LoadString 'abc'
+v12 <- LoadString 'Infinity'
+v13 <- LoadString '-Infinity'
+BeginObjectLiteral
+v14 <- EndObjectLiteral
+v15 <- CreateArray [v5, v6, v7, v8, v10, v11, v12, v13, v14]
+v16 <- CallMethod v15, 'forEach', [v0]
+v17 <- BeginPlainFunction -> v18
+    BeginForLoopInitializer
+        v19 <- LoadInteger '0'
+    BeginForLoopCondition -> v20
+        v21 <- LoadInteger '33'
+        v22 <- Compare v20, '<', v21
+    BeginForLoopAfterthought v22 -> v23
+        v24 <- UnaryOperation v23, '++'
+    BeginForLoopBody -> v25
+        v26 <- LoadInteger '2147483648'
+        v27 <- BinaryOperation v18, '&', v26
+        BeginIf v27
+            Return v25
+        EndIf
+        v28 <- LoadInteger '1'
+        Update v18, '<<', v28
+    EndForLoop
+    v29 <- LoadInteger '32'
+    Return v29
+EndPlainFunction
+v30 <- BeginPlainFunction -> v31
+    v32 <- LoadInteger '2'
+    v33 <- CreateNamedVariable 'Math', 'none'
+    v34 <- CallMethod v33, 'pow', [v32, v31]
+    v35 <- CreateNamedVariable 'max', 'var', v34
+    BeginForLoopInitializer
+        v36 <- LoadInteger '0'
+    BeginForLoopCondition -> v37
+        v38 <- Compare v37, '<', v35
+    BeginForLoopAfterthought v38 -> v39
+        v40 <- LoadFloat '1.01'
+        v41 <- BinaryOperation v39, '*', v40
+        v42 <- LoadInteger '1'
+        v43 <- BinaryOperation v41, '+', v42
+        Reassign v39, v43
+    BeginForLoopBody -> v44
+        v45 <- CallFunction v17, [v44]
+        v46 <- CallMethod v33, 'clz32', [v44]
+        v47 <- UnaryOperation '-', v44
+        v48 <- CallFunction v17, [v47]
+        v49 <- UnaryOperation '-', v44
+        v50 <- CallMethod v33, 'clz32', [v49]
+        v51 <- CallFunction v17, [v44]
+        v52 <- BeginPlainFunction -> 
+            Return v44
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `valueOf`, v52
+        v53 <- EndObjectLiteral
+        v54 <- CallMethod v33, 'clz32', [v53]
+        v55 <- UnaryOperation '-', v44
+        v56 <- CallFunction v17, [v55]
+        v57 <- BeginPlainFunction -> 
+            v58 <- UnaryOperation '-', v44
+            Return v58
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `toString`, v57
+        v59 <- EndObjectLiteral
+        v60 <- CallMethod v33, 'clz32', [v59]
+    EndForLoop
+EndPlainFunction
+v61 <- LoadInteger '5'
+v62 <- CallFunction v30, [v61]
+v63 <- LoadInteger '5'
+v64 <- CallFunction v30, [v63]
+v65 <- LoadInteger '40'
+v66 <- CallFunction v30, [v65]
+
+
+function f0(a1) {
+    Math.clz32(a1);
+}
+const v7 = -Infinity;
+const v10 = -0;
+([NaN,Infinity,v7,0,v10,"abc","Infinity","-Infinity",{}]).forEach(f0);
+function testclz(a18) {
+    for (let i20 = 0; i20 < 33; i20++) {
+        if (a18 & 2147483648) {
+            return i20;
+        }
+        a18 <<= 1;
+    }
+    return 32;
+}
+function f(a31) {
+    var max = Math.pow(2, a31);
+    for (let i37 = 0; i37 < max; i37 = (i37 * 1.01) + 1) {
+        testclz(i37);
+        Math.clz32(i37);
+        testclz(-i37);
+        Math.clz32(-i37);
+        testclz(i37);
+        function f52() {
+            return i37;
+        }
+        Math.clz32({ valueOf: f52 });
+        testclz(-i37);
+        function f57() {
+            return -i37;
+        }
+        Math.clz32({ toString: f57 });
+    }
+}
+f(5);
+f(5);
+f(40);
+
+FuzzIL program written to corpus/math-clz32.fzil

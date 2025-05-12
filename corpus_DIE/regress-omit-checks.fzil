@@ -1,0 +1,83 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'a', 'var', v1
+v3 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'a_deprecate', 'var', v4
+v6 <- LoadFloat '1.5'
+SetProperty v5, 'x', v6
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v2
+        ObjectLiteralAddProperty `y`, v8
+    v9 <- EndObjectLiteral
+    Return v9
+EndPlainFunction
+v10 <- CallFunction v7, []
+v11 <- CreateNamedVariable 'b1', 'var', v10
+v12 <- CallFunction v7, []
+v13 <- CreateNamedVariable 'b2', 'var', v12
+v14 <- CallFunction v7, []
+v15 <- CreateNamedVariable 'b3', 'var', v14
+v16 <- CallFunction v7, []
+v17 <- CreateNamedVariable 'b4', 'var', v16
+v18 <- BeginPlainFunction -> v19
+    v20 <- LoadInteger '5'
+    SetProperty v19, 'x', v20
+    v21 <- LoadInteger '10'
+    SetProperty v19, 'z', v21
+EndPlainFunction
+v22 <- CallFunction v18, [v11]
+v23 <- CallFunction v18, [v13]
+v24 <- CallFunction v18, [v15]
+v25 <- LoadBoolean 'false'
+v26 <- CreateNamedVariable 'called', 'var', v25
+v27 <- LoadFloat '1.5'
+SetProperty v2, 'x', v27
+v28 <- LoadString 'z'
+v29 <- BeginPlainFunction -> v30
+    v31 <- LoadBoolean 'true'
+    Reassign v26, v31
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v29
+v32 <- EndObjectLiteral
+v33 <- CreateNamedVariable 'Object', 'none'
+v34 <- CallMethod v33, 'defineProperty', [v2, v28, v32]
+v35 <- CallFunction v18, [v17]
+v36 <- LoadUndefined
+v37 <- GetProperty v17, 'z'
+
+
+var a = { x: 1 };
+var a_deprecate = { x: 1 };
+a_deprecate.x = 1.5;
+function create() {
+    return { __proto__: a, y: 1 };
+}
+var b1 = create();
+var b2 = create();
+var b3 = create();
+var b4 = create();
+function set(a19) {
+    a19.x = 5;
+    a19.z = 10;
+}
+set(b1);
+set(b2);
+set(b3);
+var called = false;
+a.x = 1.5;
+function f29(a30) {
+    called = true;
+}
+Object.defineProperty(a, "z", { set: f29 });
+set(b4);
+b4.z;
+
+FuzzIL program written to corpus/regress-omit-checks.fzil

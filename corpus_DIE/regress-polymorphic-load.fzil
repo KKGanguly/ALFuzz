@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'x'
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'o1', 'var', v4
+v6 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v6
+v7 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'o2', 'var', v8
+v10 <- CallFunction v0, [v9]
+v11 <- CallFunction v0, [v9]
+v12 <- CallFunction v0, [v9]
+v13 <- CallFunction v0, [v5]
+v14 <- LoadInteger '1'
+v15 <- CallFunction v0, [v5]
+v16 <- LoadInteger '2'
+v17 <- CallFunction v0, [v9]
+
+
+function f(a1) {
+    return a1.x;
+}
+var o1 = { x: 1 };
+const v7 = { x: 2 };
+var o2 = { __proto__: v7 };
+f(o2);
+f(o2);
+f(o2);
+f(o1);
+f(o1);
+f(o2);
+
+FuzzIL program written to corpus/regress-polymorphic-load.fzil

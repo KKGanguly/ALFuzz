@@ -1,0 +1,43 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- LoadString 'foo'
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+v3 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v2
+    ObjectLiteralAddProperty `configurable`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- CallMethod v5, 'defineProperty', [v0, v1, v4]
+BeginObjectLiteral
+v7 <- EndObjectLiteral
+v8 <- LoadString 'foo'
+v9 <- BeginPlainFunction -> 
+EndPlainFunction
+v10 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v9
+    ObjectLiteralAddProperty `configurable`, v10
+v11 <- EndObjectLiteral
+v12 <- CallMethod v5, 'defineProperty', [v7, v8, v11]
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- LoadString 'foo'
+BeginObjectLiteral
+v15 <- EndObjectLiteral
+v16 <- CallMethod v5, 'defineProperty', [v13, v14, v15]
+
+
+const v0 = {};
+function f2() {
+}
+Object.defineProperty(v0, "foo", { set: f2, configurable: false });
+const v7 = {};
+function f9() {
+}
+Object.defineProperty(v7, "foo", { get: f9, configurable: false });
+const v13 = {};
+Object.defineProperty(v13, "foo", {});
+
+FuzzIL program written to corpus/regress-128146.fzil

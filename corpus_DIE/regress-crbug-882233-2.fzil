@@ -1,0 +1,59 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateNamedVariable 'array', 'let', v1
+    v3 <- LoadString 'length'
+    v4 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `writable`, v4
+    v5 <- EndObjectLiteral
+    v6 <- CreateNamedVariable 'Object', 'none'
+    v7 <- CallMethod v6, 'defineProperty', [v2, v3, v5]
+    v8 <- CallMethod v2, 'shift', []
+    Return v8
+EndPlainFunction
+v9 <- CallFunction v0, []
+v10 <- CallFunction v0, []
+v11 <- CallFunction v0, []
+v12 <- CallFunction v0, []
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v14
+    v15 <- EndObjectLiteral
+    v16 <- CreateNamedVariable 'object', 'let', v15
+    v17 <- LoadString 'length'
+    v18 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `writable`, v18
+    v19 <- EndObjectLiteral
+    v20 <- CreateNamedVariable 'Object', 'none'
+    v21 <- CallMethod v20, 'defineProperty', [v16, v17, v19]
+    v22 <- CallMethod v16, 'shift', []
+    Return v22
+EndPlainFunction
+v23 <- CallFunction v13, []
+v24 <- CallFunction v13, []
+v25 <- CallFunction v13, []
+v26 <- CallFunction v13, []
+
+
+function shift_array() {
+    let array = [];
+    Object.defineProperty(array, "length", { writable: false });
+    return array.shift();
+}
+shift_array();
+shift_array();
+shift_array();
+shift_array();
+function shift_object() {
+    let object = { length: 0 };
+    Object.defineProperty(object, "length", { writable: false });
+    return object.shift();
+}
+shift_object();
+shift_object();
+shift_object();
+shift_object();
+
+FuzzIL program written to corpus/regress-crbug-882233-2.fzil

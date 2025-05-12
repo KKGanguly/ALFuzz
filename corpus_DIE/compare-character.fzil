@@ -1,0 +1,136 @@
+v0 <- LoadString ''
+v1 <- LoadInteger '0'
+v2 <- CreateNamedVariable 'String', 'none'
+v3 <- CallMethod v2, 'fromCharCode', [v1]
+v4 <- LoadString ' '
+v5 <- LoadString 'e'
+v6 <- LoadString 'erik'
+v7 <- LoadString 'f'
+v8 <- LoadString 'foo'
+v9 <- LoadString 'g'
+v10 <- LoadString 'goo'
+v11 <- LoadInteger '1'
+v12 <- UnaryOperation '-', v11
+v13 <- LoadInteger '0'
+v14 <- LoadInteger '1'
+v15 <- LoadFloat '1.2'
+v16 <- LoadFloat '7.9'
+v17 <- UnaryOperation '-', v16
+v18 <- LoadBoolean 'true'
+v19 <- LoadBoolean 'false'
+v20 <- LoadString 'foo'
+v21 <- LoadString '0'
+v22 <- LoadString 'NaN'
+v23 <- CreateArray [v0, v3, v4, v5, v6, v7, v8, v9, v10, v12, v13, v14, v15, v17, v18, v19, v20, v21, v22]
+v24 <- CreateNamedVariable 'a', 'var', v23
+BeginForInLoop v24 -> v25
+    v26 <- GetComputedProperty v24, v25
+    v27 <- CreateNamedVariable 'x', 'var', v26
+    v28 <- LoadString 'f'
+    v29 <- CreateNamedVariable 'f', 'var', v28
+    v30 <- Compare v27, '==', v29
+    v31 <- LoadString 'f'
+    v32 <- Compare v27, '==', v31
+    v33 <- LoadString '=='
+    v34 <- BinaryOperation v33, '+', v27
+    v35 <- Compare v27, '===', v29
+    v36 <- LoadString 'f'
+    v37 <- Compare v27, '===', v36
+    v38 <- LoadString '==='
+    v39 <- BinaryOperation v38, '+', v27
+    v40 <- Compare v27, '<', v29
+    v41 <- LoadString 'f'
+    v42 <- Compare v27, '<', v41
+    v43 <- LoadString '<'
+    v44 <- BinaryOperation v43, '+', v27
+    v45 <- Compare v27, '<=', v29
+    v46 <- LoadString 'f'
+    v47 <- Compare v27, '<=', v46
+    v48 <- LoadString '<='
+    v49 <- BinaryOperation v48, '+', v27
+    v50 <- Compare v27, '>', v29
+    v51 <- LoadString 'f'
+    v52 <- Compare v27, '>', v51
+    v53 <- LoadString '>'
+    v54 <- BinaryOperation v53, '+', v27
+    v55 <- Compare v27, '>=', v29
+    v56 <- LoadString 'f'
+    v57 <- Compare v27, '>=', v56
+    v58 <- LoadString '>='
+    v59 <- BinaryOperation v58, '+', v27
+    v60 <- Compare v29, '==', v27
+    v61 <- LoadString 'f'
+    v62 <- Compare v61, '==', v27
+    v63 <- LoadString '==r'
+    v64 <- BinaryOperation v63, '+', v27
+    v65 <- Compare v29, '===', v27
+    v66 <- LoadString 'f'
+    v67 <- Compare v66, '===', v27
+    v68 <- LoadString '===r'
+    v69 <- BinaryOperation v68, '+', v27
+    v70 <- Compare v29, '>', v27
+    v71 <- LoadString 'f'
+    v72 <- Compare v71, '>', v27
+    v73 <- LoadString '<r'
+    v74 <- BinaryOperation v73, '+', v27
+    v75 <- Compare v29, '>=', v27
+    v76 <- LoadString 'f'
+    v77 <- Compare v76, '>=', v27
+    v78 <- LoadString '<=r'
+    v79 <- BinaryOperation v78, '+', v27
+    v80 <- Compare v29, '<', v27
+    v81 <- LoadString 'f'
+    v82 <- Compare v81, '<', v27
+    v83 <- LoadString '>r'
+    v84 <- BinaryOperation v83, '+', v27
+    v85 <- Compare v29, '<=', v27
+    v86 <- LoadString 'f'
+    v87 <- Compare v86, '<=', v27
+    v88 <- LoadString '>=r'
+    v89 <- BinaryOperation v88, '+', v27
+EndForInLoop
+
+
+var a = ["",String.fromCharCode(0)," ","e","erik","f","foo","g","goo",-1,0,1,1.2,-7.9,true,false,"foo","0","NaN"];
+for (const v25 in a) {
+    var x = a[v25];
+    var f = "f";
+    x == f;
+    x == "f";
+    "==" + x;
+    x === f;
+    x === "f";
+    "===" + x;
+    x < f;
+    x < "f";
+    "<" + x;
+    x <= f;
+    x <= "f";
+    "<=" + x;
+    x > f;
+    x > "f";
+    ">" + x;
+    x >= f;
+    x >= "f";
+    ">=" + x;
+    f == x;
+    "f" == x;
+    "==r" + x;
+    f === x;
+    "f" === x;
+    "===r" + x;
+    f > x;
+    "f" > x;
+    "<r" + x;
+    f >= x;
+    "f" >= x;
+    "<=r" + x;
+    f < x;
+    "f" < x;
+    ">r" + x;
+    f <= x;
+    "f" <= x;
+    ">=r" + x;
+}
+
+FuzzIL program written to corpus/compare-character.fzil

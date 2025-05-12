@@ -1,0 +1,32 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadInteger '1'
+SetElement v1, '10000', v2
+v3 <- LoadInteger '0'
+SetProperty v1, 'length', v3
+v4 <- LoadInteger '1'
+SetElement v1, '1', v4
+v5 <- LoadInteger '0'
+SetProperty v1, 'length', v5
+v6 <- LoadUndefined
+v7 <- GetElement v1, '1'
+BeginObjectLiteral
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'o', 'var', v8
+v10 <- CreateNamedVariable 'Object', 'none'
+v11 <- CallMethod v10, 'freeze', [v9]
+v12 <- LoadUndefined
+v13 <- GetElement v9, '1'
+
+
+var a = [];
+a[10000] = 1;
+a.length = 0;
+a[1] = 1;
+a.length = 0;
+a[1];
+var o = {};
+Object.freeze(o);
+o[1];
+
+FuzzIL program written to corpus/regress-reset-dictionary-elements.fzil

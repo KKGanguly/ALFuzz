@@ -1,0 +1,29 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '256'
+    v3 <- Compare v1, '<=', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+EndForLoop
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadString 'luft'
+    v9 <- CreateNamedVariable 'global', 'none'
+    Reassign v9, v8
+    v10 <- CreateNamedVariable 'global', 'none'
+    v11 <- UnaryOperation '++', v10
+    Update v10, '+', v11
+EndPlainFunction
+v12 <- CallFunction v7, []
+
+
+for (let i1 = 0; i1 <= 256; i1++) {
+}
+function f() {
+    global = "luft";
+    global += ++global;
+}
+f();
+
+FuzzIL program written to corpus/regress-625558.fzil

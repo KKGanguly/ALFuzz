@@ -1,0 +1,65 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginForInLoop v2 -> v3
+        v4 <- LoadString 'object'
+        v5 <- GetComputedProperty v2, v3
+        v6 <- TypeOf v5
+        v7 <- Compare v4, '===', v6
+        BeginIf v7
+            v8 <- GetComputedProperty v2, v3
+            SetComputedProperty v1, v3, v8
+            v9 <- GetComputedProperty v1, v3
+            v10 <- GetComputedProperty v2, v3
+            v11 <- CallFunction v0, [v9, v10]
+        EndIf
+    EndForInLoop
+EndPlainFunction
+v12 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v12
+v13 <- EndObjectLiteral
+v14 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v14
+v15 <- EndObjectLiteral
+v16 <- LoadInteger '3'
+v17 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v16
+    ObjectLiteralAddProperty `z`, v17
+v18 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `one`, v13
+    ObjectLiteralAddProperty `two`, v15
+    ObjectLiteralAddProperty `thr`, v18
+v19 <- EndObjectLiteral
+v20 <- CreateNamedVariable 'c', 'none'
+Reassign v20, v19
+BeginObjectLiteral
+v21 <- EndObjectLiteral
+v22 <- CreateNamedVariable 'c', 'none'
+v23 <- CallFunction v0, [v21, v22]
+BeginObjectLiteral
+v24 <- EndObjectLiteral
+v25 <- CallFunction v0, [v24, v22]
+BeginObjectLiteral
+v26 <- EndObjectLiteral
+v27 <- CallFunction v0, [v26, v22]
+
+
+function foo(a1, a2) {
+    for (const v3 in a2) {
+        if ("object" === typeof a2[v3]) {
+            a1[v3] = a2[v3];
+            foo(a1[v3], a2[v3]);
+        }
+    }
+}
+const v13 = { x: 1 };
+const v15 = { x: 2 };
+const v18 = { x: 3, z: 4 };
+c = { one: v13, two: v15, thr: v18 };
+foo({}, c);
+foo({}, c);
+foo({}, c);
+
+FuzzIL program written to corpus/regress-368243.fzil

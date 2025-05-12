@@ -1,0 +1,117 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadThis
+    SetProperty v2, 'foo', v1
+    v3 <- LoadInteger '2'
+    v4 <- LoadThis
+    SetProperty v4, 'bar', v3
+    v5 <- LoadInteger '3'
+    v6 <- LoadThis
+    SetProperty v6, 'qux', v5
+    v7 <- LoadInteger '4'
+    v8 <- LoadThis
+    SetProperty v8, 'z', v7
+    v9 <- LoadThis
+    v10 <- DeleteProperty v9, 'qux'
+EndPlainFunction
+v11 <- BeginPlainFunction -> 
+    v12 <- Construct v0, []
+    v13 <- CreateNamedVariable 'o', 'var', v12
+    v14 <- LoadInteger '4'
+    SetProperty v13, 'baz', v14
+    Return v13
+EndPlainFunction
+v15 <- BeginPlainFunction -> v16
+    v17 <- GetProperty v16, 'baz'
+    Return v17
+EndPlainFunction
+BeginForLoopInitializer
+    v18 <- LoadInteger '0'
+BeginForLoopCondition -> v19
+    v20 <- LoadInteger '10'
+    v21 <- Compare v19, '<', v20
+BeginForLoopAfterthought v21 -> v22
+    v23 <- UnaryOperation v22, '++'
+BeginForLoopBody -> v24
+    v25 <- Construct v0, []
+    v26 <- CreateNamedVariable 'o1', 'var', v25
+    v27 <- CallFunction v11, []
+    v28 <- CreateNamedVariable 'o2', 'var', v27
+    v29 <- LoadUndefined
+    v30 <- CallFunction v15, [v26]
+    v31 <- LoadInteger '4'
+    v32 <- CallFunction v15, [v28]
+EndForLoop
+v33 <- BeginPlainFunction -> 
+    v34 <- LoadInteger '1'
+    v35 <- LoadThis
+    SetProperty v35, 'foo', v34
+EndPlainFunction
+v36 <- LoadInteger '2'
+v37 <- GetProperty v33, 'prototype'
+SetProperty v37, 'bar', v36
+v38 <- LoadInteger '3'
+v39 <- GetProperty v33, 'prototype'
+SetProperty v39, 'baz', v38
+v40 <- LoadInteger '4'
+v41 <- GetProperty v33, 'prototype'
+SetProperty v41, 'z', v40
+v42 <- GetProperty v33, 'prototype'
+v43 <- DeleteProperty v42, 'baz'
+v44 <- Construct v33, []
+v45 <- CreateNamedVariable 'slow_proto', 'var', v44
+v46 <- BeginPlainFunction -> 
+    v47 <- GetProperty v45, 'bar'
+    Return v47
+EndPlainFunction
+v48 <- CallFunction v46, []
+v49 <- CallFunction v46, []
+v50 <- Construct v33, []
+v51 <- CreateNamedVariable 'fast_proto', 'var', v50
+
+
+function SlowObject() {
+    this.foo = 1;
+    this.bar = 2;
+    this.qux = 3;
+    this.z = 4;
+    delete this.qux;
+}
+function SlowObjectWithBaz() {
+    const v12 = new SlowObject();
+    var o = v12;
+    o.baz = 4;
+    return o;
+}
+function Load(a16) {
+    return a16.baz;
+}
+for (let i19 = 0; i19 < 10; i19++) {
+    const v25 = new SlowObject();
+    var o1 = v25;
+    var o2 = SlowObjectWithBaz();
+    Load(o1);
+    Load(o2);
+}
+function SlowPrototype() {
+    this.foo = 1;
+}
+const t26 = SlowPrototype.prototype;
+t26.bar = 2;
+const t28 = SlowPrototype.prototype;
+t28.baz = 3;
+const t30 = SlowPrototype.prototype;
+t30.z = 4;
+const t32 = SlowPrototype.prototype;
+delete t32.baz;
+const v44 = new SlowPrototype();
+var slow_proto = v44;
+function ic() {
+    return slow_proto.bar;
+}
+ic();
+ic();
+const v50 = new SlowPrototype();
+var fast_proto = v50;
+
+FuzzIL program written to corpus/dictionary-properties.fzil

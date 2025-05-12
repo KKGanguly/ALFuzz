@@ -1,0 +1,76 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'p'
+    Return v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v0
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'p', 'var', v2
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'create', [v3]
+v6 <- CreateNamedVariable 'o', 'var', v5
+v7 <- LoadBoolean 'true'
+SetProperty v6, 'x', v7
+v8 <- DeleteProperty v6, 'x'
+v9 <- LoadInteger '0'
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadString 'u'
+    Return v11
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v9
+    ObjectLiteralAddProperty `f`, v10
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'u', 'var', v12
+v14 <- BeginPlainFunction -> v15
+    v16 <- CallMethod v15, 'f', []
+    Return v16
+EndPlainFunction
+v17 <- LoadString 'p'
+v18 <- CallFunction v14, [v6]
+v19 <- LoadString 'p'
+v20 <- CallFunction v14, [v6]
+v21 <- LoadString 'u'
+v22 <- CallFunction v14, [v13]
+v23 <- LoadString 'p'
+v24 <- CallFunction v14, [v6]
+v25 <- LoadString 'u'
+v26 <- CallFunction v14, [v13]
+v27 <- LoadString 'p'
+v28 <- CallFunction v14, [v6]
+v29 <- BeginPlainFunction -> 
+    v30 <- LoadString 'o'
+    Return v30
+EndPlainFunction
+SetProperty v6, 'f', v29
+v31 <- LoadString 'o'
+v32 <- CallFunction v14, [v6]
+
+
+function f0() {
+    return "p";
+}
+var p = { f: f0 };
+var o = Object.create(p);
+o.x = true;
+delete o.x;
+function f10() {
+    return "u";
+}
+var u = { x: 0, f: f10 };
+function F(a15) {
+    return a15.f();
+}
+F(o);
+F(o);
+F(u);
+F(o);
+F(u);
+F(o);
+function f29() {
+    return "o";
+}
+o.f = f29;
+F(o);
+
+FuzzIL program written to corpus/regress-2595.fzil

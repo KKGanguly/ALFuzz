@@ -1,0 +1,31 @@
+BeginForLoopInitializer
+    v0 <- BeginPlainFunction -> 
+    EndPlainFunction
+BeginForLoopCondition -> v1
+    v2 <- UnaryOperation '!', v1
+BeginForLoopAfterthought v2 -> v3
+BeginForLoopBody -> v4
+EndForLoop
+BeginForLoopInitializer
+    v5 <- LoadInteger '0'
+BeginForLoopCondition -> v6
+    v7 <- LoadInteger '1000000'
+    v8 <- Compare v6, '<', v7
+BeginForLoopAfterthought v8 -> v9
+    v10 <- UnaryOperation v9, '++'
+BeginForLoopBody -> v11
+EndForLoop
+
+
+for (let i1 = (() => {
+        function f() {
+        }
+        return f;
+    })();
+    !i1;
+    ) {
+}
+for (let i6 = 0; i6 < 1000000; i6++) {
+}
+
+FuzzIL program written to corpus/regress-4255-2.fzil

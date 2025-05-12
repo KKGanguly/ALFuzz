@@ -1,0 +1,65 @@
+v0 <- LoadString 'abc'
+v1 <- GetElement v0, '10'
+v2 <- LoadUndefined
+v3 <- Compare v1, '===', v2
+v4 <- LoadString 'x'
+v5 <- CreateNamedVariable 'String', 'none'
+v6 <- GetProperty v5, 'prototype'
+SetElement v6, '10', v4
+v7 <- LoadString 'abc'
+v8 <- GetElement v7, '10'
+v9 <- LoadString 'x'
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadString 'abc'
+    v12 <- GetElement v11, '10'
+    v13 <- LoadString 'x'
+EndPlainFunction
+v14 <- CallFunction v10, []
+v15 <- CallFunction v10, []
+v16 <- CallFunction v10, []
+v17 <- CallFunction v10, []
+v18 <- LoadInteger '2'
+v19 <- GetElement v18, '11'
+v20 <- LoadUndefined
+v21 <- Compare v19, '===', v20
+v22 <- LoadString 'y'
+v23 <- CreateNamedVariable 'Number', 'none'
+v24 <- GetProperty v23, 'prototype'
+SetElement v24, '11', v22
+v25 <- LoadInteger '2'
+v26 <- GetElement v25, '11'
+v27 <- LoadString 'y'
+v28 <- LoadBoolean 'true'
+v29 <- GetElement v28, '12'
+v30 <- LoadUndefined
+v31 <- Compare v29, '===', v30
+v32 <- LoadString 'z'
+v33 <- CreateNamedVariable 'Boolean', 'none'
+v34 <- GetProperty v33, 'prototype'
+SetElement v34, '12', v32
+v35 <- LoadBoolean 'true'
+v36 <- GetElement v35, '12'
+v37 <- LoadString 'z'
+
+
+("abc")[10] === undefined;
+const t0 = String.prototype;
+t0[10] = "x";
+("abc")[10];
+function f() {
+    ("abc")[10];
+}
+f();
+f();
+f();
+f();
+(2)[11] === undefined;
+const t7 = Number.prototype;
+t7[11] = "y";
+(2)[11];
+true[12] === undefined;
+const t14 = Boolean.prototype;
+t14[12] = "z";
+true[12];
+
+FuzzIL program written to corpus/regress-900966.fzil

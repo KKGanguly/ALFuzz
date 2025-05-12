@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BinaryOperation v1, '*', v1
+    v3 <- LoadInteger '366'
+    v4 <- BinaryOperation v2, '<<', v3
+    v5 <- CreateNamedVariable 'c', 'var', v4
+    v6 <- BinaryOperation v5, '+', v5
+    v7 <- CreateNamedVariable 'a', 'var', v6
+    Return v7
+EndPlainFunction
+v8 <- LoadInteger '1'
+v9 <- CallFunction v0, [v8]
+v10 <- LoadInteger '1'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadInteger '1'
+v13 <- CallFunction v0, [v12]
+
+
+function f(a1) {
+    var c = (a1 * a1) << 366;
+    var a = c + c;
+    return a;
+}
+f(1);
+f(1);
+f(1);
+
+FuzzIL program written to corpus/regress-crbug-523307.fzil

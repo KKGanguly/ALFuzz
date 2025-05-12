@@ -1,0 +1,14 @@
+v0 <- CreateNamedVariable 'RegExp', 'none'
+v1 <- GetProperty v0, 'lastMatch'
+v2 <- CreateNamedVariable 'previous', 'var', v1
+v3 <- LoadString '"hi"'
+v4 <- LoadString 'hello world'
+v5 <- CallMethod v4, 'anchor', [v3]
+v6 <- GetProperty v0, 'lastMatch'
+
+
+var previous = RegExp.lastMatch;
+("hello world").anchor(""hi"");
+RegExp.lastMatch;
+
+FuzzIL program written to corpus/regress-5836.fzil

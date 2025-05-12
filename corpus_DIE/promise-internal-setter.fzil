@@ -1,0 +1,42 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- CreateNamedVariable 'assertUnreachable', 'none'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v2
+v3 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v2
+v4 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v2
+v5 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `promise`, v3
+    ObjectLiteralAddProperty `reject`, v4
+    ObjectLiteralAddProperty `resolve`, v5
+v6 <- EndObjectLiteral
+v7 <- CallMethod v0, 'defineProperties', [v1, v6]
+v8 <- CreateNamedVariable 'Promise', 'none'
+v9 <- BeginClassDefinition v8
+EndClassDefinition
+v10 <- LoadString 'ok'
+v11 <- CallMethod v8, 'resolve', [v10]
+v12 <- CreateArray [v11]
+v13 <- CallMethod v9, 'all', [v12]
+v14 <- LoadString 'ok'
+v15 <- CallMethod v8, 'resolve', [v14]
+v16 <- CreateArray [v15]
+v17 <- CallMethod v9, 'race', [v16]
+
+
+const v1 = Object.prototype;
+const v3 = { set: assertUnreachable };
+const v4 = { set: assertUnreachable };
+const v5 = { set: assertUnreachable };
+Object.defineProperties(v1, { promise: v3, reject: v4, resolve: v5 });
+class C9 extends Promise {
+}
+C9.all([Promise.resolve("ok")]);
+C9.race([Promise.resolve("ok")]);
+
+FuzzIL program written to corpus/promise-internal-setter.fzil

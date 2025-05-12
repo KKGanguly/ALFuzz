@@ -1,0 +1,20 @@
+v0 <- BeginAsyncArrowFunction -> 
+    v1 <- CreateNamedVariable 'JSON', 'none'
+    v2 <- CallMethod v1, 'stringify', []
+    Return v2
+EndAsyncArrowFunction
+v3 <- CreateNamedVariable 'g', 'var', v0
+v4 <- CallFunction v3, []
+v5 <- CallFunction v3, []
+v6 <- CallFunction v3, []
+
+
+const v0 = async () => {
+    return JSON.stringify();
+};
+var g = v0;
+g();
+g();
+g();
+
+FuzzIL program written to corpus/regress-639270.fzil

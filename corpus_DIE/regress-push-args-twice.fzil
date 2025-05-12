@@ -1,0 +1,30 @@
+BeginTry
+    BeginForLoopInitializer
+        v0 <- LoadInteger '0'
+    BeginForLoopCondition -> v1
+        v2 <- LoadInteger '10'
+        v3 <- Compare v1, '!=', v2
+    BeginForLoopAfterthought v3 -> v4
+        v5 <- UnaryOperation v4, '++'
+    BeginForLoopBody -> v6
+        v7 <- LoadInteger '1'
+        v8 <- LoadUndefined
+        v9 <- BinaryOperation v7, '+', v8
+        v10 <- CreateNamedVariable 'x', 'var', v9
+    EndForLoop
+BeginCatch -> v11
+    v12 <- LoadString 'no exception'
+    v13 <- CreateNamedVariable 'fail', 'none'
+    v14 <- CallFunction v13, [v12, v11]
+EndTryCatch
+
+
+try {
+    for (let i1 = 0; i1 != 10; i1++) {
+        var x = 1 + undefined;
+    }
+} catch(e11) {
+    fail("no exception", e11);
+}
+
+FuzzIL program written to corpus/regress-push-args-twice.fzil

@@ -1,0 +1,83 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    BeginObjectLiteral
+    v2 <- EndObjectLiteral
+    v3 <- CreateArray [v1, v2]
+    Return v3
+EndPlainFunction
+v4 <- LoadUndefined
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- CreateArray [v4, v5]
+v7 <- CallFunction v0, []
+v8 <- LoadUndefined
+BeginObjectLiteral
+v9 <- EndObjectLiteral
+v10 <- CreateArray [v8, v9]
+v11 <- CallFunction v0, []
+v12 <- LoadUndefined
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- CreateArray [v12, v13]
+v15 <- CallFunction v0, []
+v16 <- CreateNamedVariable 'gc', 'none'
+v17 <- CallFunction v16, []
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadUndefined
+    v20 <- LoadFloat '1.5'
+    v21 <- CreateArray [v19, v20]
+    BeginObjectLiteral
+    v22 <- EndObjectLiteral
+    v23 <- CreateArray [v21, v22]
+    Return v23
+EndPlainFunction
+v24 <- LoadUndefined
+v25 <- LoadFloat '1.5'
+v26 <- CreateArray [v24, v25]
+BeginObjectLiteral
+v27 <- EndObjectLiteral
+v28 <- CreateArray [v26, v27]
+v29 <- CallFunction v18, []
+v30 <- LoadUndefined
+v31 <- LoadFloat '1.5'
+v32 <- CreateArray [v30, v31]
+BeginObjectLiteral
+v33 <- EndObjectLiteral
+v34 <- CreateArray [v32, v33]
+v35 <- CallFunction v18, []
+v36 <- LoadUndefined
+v37 <- LoadFloat '1.5'
+v38 <- CreateArray [v36, v37]
+BeginObjectLiteral
+v39 <- EndObjectLiteral
+v40 <- CreateArray [v38, v39]
+v41 <- CallFunction v18, []
+v42 <- CallFunction v16, []
+
+
+function f() {
+    return [,{}];
+}
+[,{}];
+f();
+[,{}];
+f();
+[,{}];
+f();
+gc();
+function g() {
+    const v21 = [,1.5];
+    return [v21,{}];
+}
+const v26 = [,1.5];
+[v26,{}];
+g();
+const v32 = [,1.5];
+[v32,{}];
+g();
+const v38 = [,1.5];
+[v38,{}];
+g();
+gc();
+
+FuzzIL program written to corpus/regress-crbug-242924.fzil

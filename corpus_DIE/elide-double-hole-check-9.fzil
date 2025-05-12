@@ -1,0 +1,57 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'do_set', 'var', v0
+v2 <- BeginPlainFunction -> 
+    BeginIf v1
+        v3 <- LoadFloat '1.5'
+        v4 <- CreateNamedVariable 'Array', 'none'
+        v5 <- GetProperty v4, 'prototype'
+        SetElement v5, '1', v3
+    EndIf
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7, v8
+    v9 <- CallFunction v2, []
+    v10 <- GetComputedProperty v7, v8
+    v11 <- LoadFloat '0.5'
+    v12 <- BinaryOperation v10, '+', v11
+    Return v12
+EndPlainFunction
+v13 <- LoadInteger '0'
+v14 <- LoadUndefined
+v15 <- LoadFloat '2.5'
+v16 <- CreateArray [v13, v14, v15]
+v17 <- CreateNamedVariable 'arr', 'var', v16
+v18 <- LoadFloat '0.5'
+v19 <- LoadInteger '0'
+v20 <- CallFunction v6, [v17, v19]
+v21 <- LoadFloat '0.5'
+v22 <- LoadInteger '0'
+v23 <- CallFunction v6, [v17, v22]
+v24 <- LoadFloat '0.5'
+v25 <- LoadInteger '0'
+v26 <- CallFunction v6, [v17, v25]
+v27 <- LoadBoolean 'true'
+Reassign v1, v27
+v28 <- LoadInteger '2'
+v29 <- LoadInteger '1'
+v30 <- CallFunction v6, [v17, v29]
+
+
+var do_set = false;
+function set_proto_elements() {
+    if (do_set) {
+        const t3 = Array.prototype;
+        t3[1] = 1.5;
+    }
+}
+function f(a7, a8) {
+    set_proto_elements();
+    return a7[a8] + 0.5;
+}
+var arr = [0,,2.5];
+f(arr, 0);
+f(arr, 0);
+f(arr, 0);
+do_set = true;
+f(arr, 1);
+
+FuzzIL program written to corpus/elide-double-hole-check-9.fzil

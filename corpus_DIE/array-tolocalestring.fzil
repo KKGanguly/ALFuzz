@@ -1,0 +1,188 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `toLocaleString` -> v1
+            v2 <- LoadInteger '1'
+            v3 <- CreateNamedVariable 'arr', 'none'
+            v4 <- CreateArray [v2, v3]
+            Return v4
+        EndObjectLiteralMethod
+    v5 <- EndObjectLiteral
+    v6 <- CreateArray [v5]
+    v7 <- CreateNamedVariable 'arr', 'const', v6
+    v8 <- LoadString '1,'
+    v9 <- CallMethod v7, 'toLocaleString', []
+    v10 <- LoadString '1,'
+    v11 <- CallMethod v7, 'toLocaleString', []
+EndPlainFunction
+v12 <- CallFunction v0, []
+v13 <- BeginPlainFunction -> 
+    v14 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v15 <- CreateArray []
+    v16 <- CreateNamedVariable 'arr', 'const', v15
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `toLocaleString` -> v17
+            v18 <- Construct v14, []
+            ThrowException v18
+        EndObjectLiteralMethod
+    v19 <- EndObjectLiteral
+    v20 <- CreateNamedVariable 'obj', 'const', v19
+    SetElement v16, '0', v20
+    v21 <- BeginArrowFunction -> 
+        v22 <- CallMethod v16, 'toLocaleString', []
+        Return v22
+    EndArrowFunction
+    v23 <- CallFunction v21, []
+    v24 <- CallFunction v14, []
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `toLocaleString` -> v25
+            v26 <- LoadInteger '1'
+            Return v26
+        EndObjectLiteralMethod
+    v27 <- EndObjectLiteral
+    SetElement v16, '0', v27
+    v28 <- LoadString '1'
+    v29 <- CallMethod v16, 'toLocaleString', []
+EndPlainFunction
+v30 <- CallFunction v13, []
+v31 <- BeginPlainFunction -> 
+    v32 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v33 <- CreateArray []
+    v34 <- CreateNamedVariable 'arr', 'const', v33
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `toLocaleString` -> v35
+            v36 <- Construct v32, []
+            ThrowException v36
+        EndObjectLiteralGetter
+    v37 <- EndObjectLiteral
+    v38 <- CreateNamedVariable 'obj', 'const', v37
+    SetElement v34, '0', v38
+    v39 <- BeginArrowFunction -> 
+        v40 <- CallMethod v34, 'toLocaleString', []
+        Return v40
+    EndArrowFunction
+    v41 <- CallFunction v39, []
+    v42 <- CallFunction v32, []
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `toLocaleString` -> v43
+            v44 <- LoadInteger '1'
+            Return v44
+        EndObjectLiteralMethod
+    v45 <- EndObjectLiteral
+    SetElement v34, '0', v45
+    v46 <- LoadString '1'
+    v47 <- CallMethod v34, 'toLocaleString', []
+EndPlainFunction
+v48 <- CallFunction v31, []
+v49 <- BeginPlainFunction -> 
+    v50 <- CreateArray []
+    v51 <- CreateNamedVariable 'arr', 'const', v50
+    v52 <- LoadInteger '7'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toLocaleString`, v52
+    v53 <- EndObjectLiteral
+    v54 <- CreateNamedVariable 'obj', 'const', v53
+    SetElement v51, '0', v54
+    v55 <- BeginArrowFunction -> 
+        v56 <- CallMethod v51, 'toLocaleString', []
+        Return v56
+    EndArrowFunction
+    v57 <- CallFunction v55, []
+    v58 <- CreateNamedVariable 'TypeError', 'none'
+    v59 <- LoadString '7 is not a function'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `toLocaleString` -> v60
+            v61 <- LoadInteger '1'
+            Return v61
+        EndObjectLiteralMethod
+    v62 <- EndObjectLiteral
+    SetElement v51, '0', v62
+    v63 <- LoadString '1'
+    v64 <- CallMethod v51, 'toLocaleString', []
+EndPlainFunction
+v65 <- CallFunction v49, []
+
+
+function CycleDetection() {
+    const v5 = {
+        toLocaleString() {
+            return [1,arr];
+        },
+    };
+    const arr = [v5];
+    arr.toLocaleString();
+    arr.toLocaleString();
+}
+CycleDetection();
+function ThrowsError() {
+    function TestError() {
+    }
+    const arr = [];
+    const v19 = {
+        toLocaleString() {
+            const v18 = new TestError();
+            throw v18;
+        },
+    };
+    const obj = v19;
+    arr[0] = obj;
+    const v21 = () => {
+        return arr.toLocaleString();
+    };
+    v21();
+    TestError();
+    const v27 = {
+        toLocaleString() {
+            return 1;
+        },
+    };
+    arr[0] = v27;
+    arr.toLocaleString();
+}
+ThrowsError();
+function AccessThrowsError() {
+    function TestError() {
+    }
+    const arr = [];
+    const v37 = {
+        get toLocaleString() {
+            const v36 = new TestError();
+            throw v36;
+        },
+    };
+    const obj = v37;
+    arr[0] = obj;
+    const v39 = () => {
+        return arr.toLocaleString();
+    };
+    v39();
+    TestError();
+    const v45 = {
+        toLocaleString() {
+            return 1;
+        },
+    };
+    arr[0] = v45;
+    arr.toLocaleString();
+}
+AccessThrowsError();
+function NotCallable() {
+    const arr = [];
+    const obj = { toLocaleString: 7 };
+    arr[0] = obj;
+    const v55 = () => {
+        return arr.toLocaleString();
+    };
+    v55();
+    const v62 = {
+        toLocaleString() {
+            return 1;
+        },
+    };
+    arr[0] = v62;
+    arr.toLocaleString();
+}
+NotCallable();
+
+FuzzIL program written to corpus/array-tolocalestring.fzil

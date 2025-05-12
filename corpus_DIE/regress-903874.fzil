@@ -1,0 +1,12 @@
+v0 <- LoadString 'function f('
+v1 <- LoadInteger '10000'
+v2 <- LoadString '{o('
+v3 <- CallMethod v2, 'repeat', [v1]
+v4 <- BinaryOperation v0, '+', v3
+v5 <- CreateNamedVariable 'code', 'var', v4
+v6 <- CreateNamedVariable 'SyntaxError', 'none'
+
+
+var code = "function f(" + ("{o(").repeat(10000);
+
+FuzzIL program written to corpus/regress-903874.fzil

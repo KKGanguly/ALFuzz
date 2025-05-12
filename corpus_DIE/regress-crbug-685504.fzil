@@ -1,0 +1,50 @@
+v0 <- LoadInteger '1073741823'
+v1 <- CreateNamedVariable 'v2', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'v13', 'var', v2
+v4 <- BeginPlainFunction -> v5, v6
+    v7 <- BinaryOperation v5, '+', v6
+    v8 <- CreateNamedVariable 'v4', 'var', v7
+    v9 <- LoadInteger '20'
+    v10 <- CallMethod v8, 'substring', [v9]
+    v11 <- CreateNamedVariable 'v1', 'var', v10
+    v12 <- GetComputedProperty v1, v8
+    Return v11
+EndPlainFunction
+v13 <- LoadString 'abcdefghijklmnopqrstuvwxyz'
+v14 <- LoadString 'abcdefghijklmnopqrstuvwxyz'
+v15 <- CallFunction v4, [v13, v14]
+v16 <- CreateNamedVariable 'v5', 'none'
+Reassign v16, v15
+v17 <- BeginPlainFunction -> v18, v19, v20
+    v21 <- CallMethod v19, 'match', [v20]
+    v22 <- CreateNamedVariable 'v14', 'var', v21
+    v23 <- CreateNamedVariable 'RegExp', 'none'
+    v24 <- LoadString '$''
+    v25 <- GetComputedProperty v23, v24
+EndPlainFunction
+v26 <- LoadString 'CaptureGlobal'
+v27 <- CreateNamedVariable 'v5', 'none'
+v28 <- CreateArray []
+v29 <- LoadString 'anama'
+v30 <- GetComputedProperty v28, v29
+v31 <- CallFunction v17, [v26, v27, v3, v30]
+
+
+var v2 = 1073741823;
+var v13 = {};
+function f1(a5, a6) {
+    var v4 = a5 + a6;
+    var v1 = v4.substring(20);
+    v2[v4];
+    return v1;
+}
+v5 = f1("abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz");
+function f8(a18, a19, a20) {
+    var v14 = a19.match(a20);
+    RegExp["$'"];
+}
+f8("CaptureGlobal", v5, v13, ([])["anama"]);
+
+FuzzIL program written to corpus/regress-crbug-685504.fzil

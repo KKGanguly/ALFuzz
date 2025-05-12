@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallFunction v1, []
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+EndPlainFunction
+v4 <- CallFunction v0, [v3]
+v5 <- CallFunction v0, [v3]
+v6 <- BeginPlainFunction -> v7
+    v8 <- LoadInteger '0'
+    v9 <- Compare v7, '==', v8
+    BeginIf v9
+        v10 <- LoadInteger '1'
+        v11 <- CallFunction v0, [v10]
+    EndIf
+EndPlainFunction
+v12 <- LoadInteger '1'
+v13 <- CallFunction v6, [v12]
+v14 <- LoadInteger '1'
+v15 <- CallFunction v6, [v14]
+v16 <- LoadInteger '1'
+v17 <- CallFunction v6, [v16]
+
+
+function baz(a1) {
+    a1();
+}
+function goo() {
+}
+baz(goo);
+baz(goo);
+function bar(a7) {
+    if (a7 == 0) {
+        baz(1);
+    }
+}
+bar(1);
+bar(1);
+bar(1);
+
+FuzzIL program written to corpus/regress-348280.fzil

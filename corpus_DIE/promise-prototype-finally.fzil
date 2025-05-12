@@ -1,0 +1,143 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateNamedVariable 'Promise', 'none'
+    v3 <- CallMethod v2, 'resolve', [v1]
+    v4 <- CreateNamedVariable 'p', 'const', v3
+    v5 <- BeginPlainFunction -> v6
+        v7 <- CallMethod v6, 'finally', []
+        Return v7
+    EndPlainFunction
+    v8 <- CallFunction v5, [v4]
+    v9 <- CallFunction v5, [v4]
+    v10 <- CallFunction v5, [v4]
+EndPlainFunction
+v11 <- CallFunction v0, []
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '1'
+    v14 <- CreateNamedVariable 'Promise', 'none'
+    v15 <- CallMethod v14, 'resolve', [v13]
+    v16 <- CreateNamedVariable 'p', 'const', v15
+    v17 <- BeginPlainFunction -> v18
+        v19 <- BeginArrowFunction -> v20
+            Return v20
+        EndArrowFunction
+        v21 <- CallMethod v18, 'finally', [v19]
+        Return v21
+    EndPlainFunction
+    v22 <- CallFunction v17, [v16]
+    v23 <- CallFunction v17, [v16]
+    v24 <- CallFunction v17, [v16]
+EndPlainFunction
+v25 <- CallFunction v12, []
+v26 <- BeginPlainFunction -> 
+    v27 <- LoadInteger '1'
+    v28 <- CreateNamedVariable 'Promise', 'none'
+    v29 <- CallMethod v28, 'resolve', [v27]
+    v30 <- CreateNamedVariable 'p', 'const', v29
+    v31 <- BeginPlainFunction -> v32, v33
+        v34 <- CallMethod v32, 'finally', [v33]
+        Return v34
+    EndPlainFunction
+    v35 <- BeginArrowFunction -> v36
+        Return v36
+    EndArrowFunction
+    v37 <- CallFunction v31, [v30, v35]
+    v38 <- BeginArrowFunction -> v39
+        Return v39
+    EndArrowFunction
+    v40 <- CallFunction v31, [v30, v38]
+    v41 <- BeginArrowFunction -> v42
+        Return v42
+    EndArrowFunction
+    v43 <- CallFunction v31, [v30, v41]
+EndPlainFunction
+v44 <- CallFunction v26, []
+v45 <- BeginPlainFunction -> 
+    v46 <- LoadInteger '1'
+    v47 <- CreateNamedVariable 'Promise', 'none'
+    v48 <- CallMethod v47, 'resolve', [v46]
+    v49 <- CreateNamedVariable 'p', 'const', v48
+    v50 <- BeginPlainFunction -> v51, v52
+        v53 <- CallMethod v51, 'finally', [v52]
+        v54 <- CallMethod v53, 'finally', [v52]
+        Return v54
+    EndPlainFunction
+    v55 <- BeginArrowFunction -> v56
+        Return v56
+    EndArrowFunction
+    v57 <- CallFunction v50, [v49, v55]
+    v58 <- BeginArrowFunction -> v59
+        Return v59
+    EndArrowFunction
+    v60 <- CallFunction v50, [v49, v58]
+    v61 <- BeginArrowFunction -> v62
+        Return v62
+    EndArrowFunction
+    v63 <- CallFunction v50, [v49, v61]
+EndPlainFunction
+v64 <- CallFunction v45, []
+
+
+function f0() {
+    const p = Promise.resolve(1);
+    function foo(a6) {
+        return a6.finally();
+    }
+    foo(p);
+    foo(p);
+    foo(p);
+}
+f0();
+function f12() {
+    const p = Promise.resolve(1);
+    function foo(a18) {
+        const v19 = (a20) => {
+            return a20;
+        };
+        return a18.finally(v19);
+    }
+    foo(p);
+    foo(p);
+    foo(p);
+}
+f12();
+function f26() {
+    const p = Promise.resolve(1);
+    function foo(a32, a33) {
+        return a32.finally(a33);
+    }
+    const v35 = (a36) => {
+        return a36;
+    };
+    foo(p, v35);
+    const v38 = (a39) => {
+        return a39;
+    };
+    foo(p, v38);
+    const v41 = (a42) => {
+        return a42;
+    };
+    foo(p, v41);
+}
+f26();
+function f45() {
+    const p = Promise.resolve(1);
+    function foo(a51, a52) {
+        return a51.finally(a52).finally(a52);
+    }
+    const v55 = (a56) => {
+        return a56;
+    };
+    foo(p, v55);
+    const v58 = (a59) => {
+        return a59;
+    };
+    foo(p, v58);
+    const v61 = (a62) => {
+        return a62;
+    };
+    foo(p, v61);
+}
+f45();
+
+FuzzIL program written to corpus/promise-prototype-finally.fzil

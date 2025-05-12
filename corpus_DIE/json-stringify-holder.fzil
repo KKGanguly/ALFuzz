@@ -1,0 +1,350 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateNamedVariable 'stack', 'var', v1
+    v3 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v3
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'object', 'var', v4
+    v6 <- LoadBoolean 'false'
+    v7 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v6
+        ObjectLiteralAddProperty `replaced`, v7
+    v8 <- EndObjectLiteral
+    v9 <- CreateNamedVariable 'replaced', 'var', v8
+    v10 <- BeginPlainFunction -> v11, v12
+        v13 <- LoadThis
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `holder`, v13
+            ObjectLiteralAddProperty `key`, v11
+            ObjectLiteralAddProperty `value`, v12
+        v14 <- EndObjectLiteral
+        v15 <- CallMethod v2, 'push', [v14]
+        v16 <- GetProperty v2, 'length'
+        v17 <- LoadInteger '1'
+        v18 <- Compare v16, '===', v17
+        BeginIf v18
+            Return v9
+        EndIf
+        v19 <- LoadString 'a'
+        v20 <- Compare v11, '===', v19
+        BeginIf v20
+            v21 <- LoadBoolean 'true'
+            Return v21
+        EndIf
+        Return v12
+    EndPlainFunction
+    v22 <- CreateTemplateString ['{"a":true,"replaced":true}'], []
+    v23 <- CreateNamedVariable 'JSON', 'none'
+    v24 <- CallMethod v23, 'stringify', [v5, v10]
+    v25 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v25
+    v26 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty ``, v26
+    v27 <- EndObjectLiteral
+    v28 <- LoadString ''
+    v29 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v29
+    v30 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `holder`, v27
+        ObjectLiteralAddProperty `key`, v28
+        ObjectLiteralAddProperty `value`, v30
+    v31 <- EndObjectLiteral
+    v32 <- LoadBoolean 'false'
+    v33 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v32
+        ObjectLiteralAddProperty `replaced`, v33
+    v34 <- EndObjectLiteral
+    v35 <- LoadString 'a'
+    v36 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `holder`, v34
+        ObjectLiteralAddProperty `key`, v35
+        ObjectLiteralAddProperty `value`, v36
+    v37 <- EndObjectLiteral
+    v38 <- LoadBoolean 'false'
+    v39 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v38
+        ObjectLiteralAddProperty `replaced`, v39
+    v40 <- EndObjectLiteral
+    v41 <- LoadString 'replaced'
+    v42 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `holder`, v40
+        ObjectLiteralAddProperty `key`, v41
+        ObjectLiteralAddProperty `value`, v42
+    v43 <- EndObjectLiteral
+    v44 <- CreateArray [v31, v37, v43]
+    v45 <- GetElement v2, '0'
+    v46 <- GetProperty v45, 'holder'
+    v47 <- LoadString ''
+    v48 <- GetComputedProperty v46, v47
+    v49 <- GetElement v2, '0'
+    v50 <- GetProperty v49, 'value'
+    v51 <- GetElement v2, '1'
+    v52 <- GetProperty v51, 'holder'
+    v53 <- GetElement v2, '2'
+    v54 <- GetProperty v53, 'holder'
+EndPlainFunction
+v55 <- CallFunction v0, []
+v56 <- BeginPlainFunction -> 
+    v57 <- CreateArray []
+    v58 <- CreateNamedVariable 'stack', 'var', v57
+    v59 <- LoadBoolean 'false'
+    v60 <- CreateNamedVariable 'toJSON', 'none'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v59
+        ObjectLiteralAddProperty `toJSON`, v60
+    v61 <- EndObjectLiteral
+    v62 <- CreateNamedVariable 'object', 'var', v61
+    v63 <- CreateNamedVariable 'nestedToJSON', 'none'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toJSON`, v63
+    v64 <- EndObjectLiteral
+    v65 <- CreateNamedVariable 'nested', 'var', v64
+    v66 <- LoadBoolean 'false'
+    v67 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v66
+        ObjectLiteralAddProperty `replaced`, v67
+        ObjectLiteralAddProperty `nested`, v65
+    v68 <- EndObjectLiteral
+    v69 <- CreateNamedVariable 'replaced', 'var', v68
+    v70 <- LoadBoolean 'false'
+    v71 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v70
+        ObjectLiteralAddProperty `toJSONd`, v71
+    v72 <- EndObjectLiteral
+    v73 <- CreateNamedVariable 'toJSONd', 'var', v72
+    v74 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `nestedToJSONd`, v74
+    v75 <- EndObjectLiteral
+    v76 <- CreateNamedVariable 'nestedToJSONd', 'var', v75
+    v77 <- BeginPlainFunction -> v78, v79
+        Return v73
+    EndPlainFunction
+    v80 <- BeginPlainFunction -> v81, v82
+        Return v76
+    EndPlainFunction
+    v83 <- BeginPlainFunction -> v84, v85
+        v86 <- LoadThis
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `holder`, v86
+            ObjectLiteralAddProperty `key`, v84
+            ObjectLiteralAddProperty `value`, v85
+        v87 <- EndObjectLiteral
+        v88 <- CallMethod v58, 'push', [v87]
+        v89 <- GetProperty v58, 'length'
+        v90 <- LoadInteger '1'
+        v91 <- Compare v89, '===', v90
+        BeginIf v91
+            Return v69
+        EndIf
+        v92 <- LoadString 'a'
+        v93 <- Compare v84, '===', v92
+        BeginIf v93
+            v94 <- LoadBoolean 'true'
+            Return v94
+        EndIf
+        Return v85
+    EndPlainFunction
+    v95 <- CreateTemplateString ['{"a":true,"replaced":true,"nested":{"nestedToJSONd":true}}'], []
+    v96 <- CreateNamedVariable 'JSON', 'none'
+    v97 <- CallMethod v96, 'stringify', [v62, v83]
+    v98 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v98
+        ObjectLiteralAddProperty `toJSON`, v77
+    v99 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty ``, v99
+    v100 <- EndObjectLiteral
+    v101 <- LoadString ''
+    v102 <- LoadBoolean 'false'
+    v103 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v102
+        ObjectLiteralAddProperty `toJSONd`, v103
+    v104 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `holder`, v100
+        ObjectLiteralAddProperty `key`, v101
+        ObjectLiteralAddProperty `value`, v104
+    v105 <- EndObjectLiteral
+    v106 <- LoadBoolean 'false'
+    v107 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toJSON`, v80
+    v108 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v106
+        ObjectLiteralAddProperty `replaced`, v107
+        ObjectLiteralAddProperty `nested`, v108
+    v109 <- EndObjectLiteral
+    v110 <- LoadString 'a'
+    v111 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `holder`, v109
+        ObjectLiteralAddProperty `key`, v110
+        ObjectLiteralAddProperty `value`, v111
+    v112 <- EndObjectLiteral
+    v113 <- LoadBoolean 'false'
+    v114 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toJSON`, v80
+    v115 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v113
+        ObjectLiteralAddProperty `replaced`, v114
+        ObjectLiteralAddProperty `nested`, v115
+    v116 <- EndObjectLiteral
+    v117 <- LoadString 'replaced'
+    v118 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `holder`, v116
+        ObjectLiteralAddProperty `key`, v117
+        ObjectLiteralAddProperty `value`, v118
+    v119 <- EndObjectLiteral
+    v120 <- LoadBoolean 'false'
+    v121 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toJSON`, v80
+    v122 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v120
+        ObjectLiteralAddProperty `replaced`, v121
+        ObjectLiteralAddProperty `nested`, v122
+    v123 <- EndObjectLiteral
+    v124 <- LoadString 'nested'
+    v125 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `nestedToJSONd`, v125
+    v126 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `holder`, v123
+        ObjectLiteralAddProperty `key`, v124
+        ObjectLiteralAddProperty `value`, v126
+    v127 <- EndObjectLiteral
+    v128 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `nestedToJSONd`, v128
+    v129 <- EndObjectLiteral
+    v130 <- LoadString 'nestedToJSONd'
+    v131 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `holder`, v129
+        ObjectLiteralAddProperty `key`, v130
+        ObjectLiteralAddProperty `value`, v131
+    v132 <- EndObjectLiteral
+    v133 <- CreateArray [v105, v112, v119, v127, v132]
+    v134 <- GetElement v58, '0'
+    v135 <- GetProperty v134, 'holder'
+    v136 <- LoadString ''
+    v137 <- GetComputedProperty v135, v136
+    v138 <- GetElement v58, '0'
+    v139 <- GetProperty v138, 'value'
+    v140 <- GetElement v58, '1'
+    v141 <- GetProperty v140, 'holder'
+    v142 <- GetElement v58, '2'
+    v143 <- GetProperty v142, 'holder'
+    v144 <- GetElement v58, '3'
+    v145 <- GetProperty v144, 'holder'
+    v146 <- GetElement v58, '3'
+    v147 <- GetProperty v146, 'value'
+    v148 <- GetElement v58, '4'
+    v149 <- GetProperty v148, 'holder'
+EndPlainFunction
+v150 <- CallFunction v56, []
+
+
+function testBasic() {
+    var stack = [];
+    var object = { a: false };
+    var replaced = { a: false, replaced: true };
+    function replacer(a11, a12) {
+        stack.push({ holder: this, key: a11, value: a12 });
+        if (stack.length === 1) {
+            return replaced;
+        }
+        if (a11 === "a") {
+            return true;
+        }
+        return a12;
+    }
+    `{"a":true,"replaced":true}`;
+    JSON.stringify(object, replacer);
+    const v26 = { a: false };
+    const v27 = { : v26 };
+    const v30 = { a: false };
+    const v31 = { holder: v27, key: "", value: v30 };
+    const v34 = { a: false, replaced: true };
+    const v37 = { holder: v34, key: "a", value: false };
+    const v40 = { a: false, replaced: true };
+    [v31,v37,{ holder: v40, key: "replaced", value: true }];
+    stack[0].holder[""];
+    stack[0].value;
+    stack[1].holder;
+    stack[2].holder;
+}
+testBasic();
+function testToJSON() {
+    var stack = [];
+    var object = { a: false, toJSON: toJSON };
+    var nested = { toJSON: nestedToJSON };
+    var replaced = { a: false, replaced: true, nested: nested };
+    var toJSONd = { a: false, toJSONd: true };
+    var nestedToJSONd = { nestedToJSONd: true };
+    function toJSON(a78, a79) {
+        return toJSONd;
+    }
+    function nestedToJSON(a81, a82) {
+        return nestedToJSONd;
+    }
+    function replacer(a84, a85) {
+        stack.push({ holder: this, key: a84, value: a85 });
+        if (stack.length === 1) {
+            return replaced;
+        }
+        if (a84 === "a") {
+            return true;
+        }
+        return a85;
+    }
+    `{"a":true,"replaced":true,"nested":{"nestedToJSONd":true}}`;
+    JSON.stringify(object, replacer);
+    const v99 = { a: false, toJSON: toJSON };
+    const v100 = { : v99 };
+    const v104 = { a: false, toJSONd: true };
+    const v105 = { holder: v100, key: "", value: v104 };
+    const v108 = { toJSON: nestedToJSON };
+    const v109 = { a: false, replaced: true, nested: v108 };
+    const v112 = { holder: v109, key: "a", value: false };
+    const v115 = { toJSON: nestedToJSON };
+    const v116 = { a: false, replaced: true, nested: v115 };
+    const v119 = { holder: v116, key: "replaced", value: true };
+    const v122 = { toJSON: nestedToJSON };
+    const v123 = { a: false, replaced: true, nested: v122 };
+    const v126 = { nestedToJSONd: true };
+    const v127 = { holder: v123, key: "nested", value: v126 };
+    const v129 = { nestedToJSONd: true };
+    [v105,v112,v119,v127,{ holder: v129, key: "nestedToJSONd", value: true }];
+    stack[0].holder[""];
+    stack[0].value;
+    stack[1].holder;
+    stack[2].holder;
+    stack[3].holder;
+    stack[3].value;
+    stack[4].holder;
+}
+testToJSON();
+
+FuzzIL program written to corpus/json-stringify-holder.fzil

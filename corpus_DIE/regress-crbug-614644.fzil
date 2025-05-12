@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '2'
+    v4 <- LoadInteger '2'
+    SetProperty v1, 'length', v4
+    v5 <- CallMethod v1, 'shift', [v3, v4]
+    SetElement v1, '0', v2
+EndPlainFunction
+v6 <- CreateArray []
+v7 <- LoadFloat '1.1'
+v8 <- CallFunction v0, [v6, v7]
+v9 <- LoadInteger '1'
+v10 <- CreateArray [v9]
+v11 <- LoadFloat '1.1'
+v12 <- CallFunction v0, [v10, v11]
+v13 <- LoadInteger '1'
+v14 <- CreateArray [v13]
+v15 <- LoadFloat '1.1'
+v16 <- CallFunction v0, [v14, v15]
+
+
+function f(a1, a2) {
+    a1.length = 2;
+    a1.shift(2, 2);
+    a1[0] = a2;
+}
+f([], 1.1);
+f([1], 1.1);
+f([1], 1.1);
+
+FuzzIL program written to corpus/regress-crbug-614644.fzil

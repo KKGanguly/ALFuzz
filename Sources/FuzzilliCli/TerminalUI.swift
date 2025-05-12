@@ -98,6 +98,139 @@ class TerminalUI {
                 }
             }
         }
+        fuzzer.registerEventListener(for: fuzzer.events.mutationComplete) { fuzzEngineParams in
+            print("--------------------writing to file-------------------")
+            if let stats = Statistics.instance(for: fuzzer) {  // Get the stats instance for this fuzzer
+                let stateInfo = self.getStats(stats.compute(), of: fuzzer)
+                //print(stateInfo)
+                for (key, value) in stateInfo {
+                    switch key {
+                        case "state": fuzzEngineParams.fuzzState = value as? String
+                        case "uptime": fuzzEngineParams.uptime = value as? String
+                        case "currentTime": fuzzEngineParams.currentTime = value as? String
+                        case "totalSamples": fuzzEngineParams.totalSamples = Int(value as? String ?? "0") ?? 0
+                        case "interestingSamplesFound": fuzzEngineParams.interestingSamples = Int(value as? String ?? "0") ?? 0
+                        case "lastInterestingSample": fuzzEngineParams.lastInterestingSample = value as? String
+                        case "validSamplesFound": fuzzEngineParams.validSamples = Int(value as? String ?? "0") ?? 0
+                        case "corpusSize": fuzzEngineParams.corpusSize = Int(value as? String ?? "0") ?? 0
+                        case "correctnessRate": fuzzEngineParams.correctnessRate = Double((value as? String)?.dropLast() ?? "0") ?? 0.0
+                        case "overallCorrectnessRate": fuzzEngineParams.overallCorrectnessRate = Double((value as? String)?.dropLast() ?? "0") ?? 0.0
+                        case "timeoutRate": fuzzEngineParams.timeoutRate = Double((value as? String)?.dropLast() ?? "0") ?? 0.0
+                        case "overallTimeoutRate": fuzzEngineParams.overallTimeoutRate = Double((value as? String)?.dropLast() ?? "0") ?? 0.0
+                        case "crashesFound": fuzzEngineParams.crashesFound = Int(value as? String ?? "0") ?? 0
+                        case "differentialsFound": fuzzEngineParams.differentialsFound = Int(value as? String ?? "0") ?? 0
+                        case "sparkplugExecutions": fuzzEngineParams.sparkplugExecutions = Int(value as? String ?? "0") ?? 0
+                        case "maglevExecutions": fuzzEngineParams.maglevExecutions = Int(value as? String ?? "0") ?? 0
+                        case "turboFanExecutions": fuzzEngineParams.turbofanExecutions = Int(value as? String ?? "0") ?? 0
+                        case "relationsPerformed": fuzzEngineParams.relationsPerformed = Int(value as? String ?? "0") ?? 0
+                        case "bugOracleUsage": fuzzEngineParams.bugOracleUsageRate = Double((value as? String)?.dropLast() ?? "0") ?? 0.0
+                        case "jitUsageRate": fuzzEngineParams.jitUsageRate = Double((value as? String)?.dropLast() ?? "0") ?? 0.0
+                        case "timeoutsHit": fuzzEngineParams.timeoutsHit = Int(value as? String ?? "0") ?? 0
+                        case "coverage": fuzzEngineParams.coverage = Double((value as? String)?.dropLast() ?? "0") ?? 0.0
+                        case "avgProgramSize": fuzzEngineParams.avgProgramSize = Double(value as? String ?? "0") ?? 0.0
+                        case "avgCorpusProgramSize": fuzzEngineParams.avgCorpusProgramSize = Double(value as? String ?? "0") ?? 0.0
+                        case "avgProgramExecutionTime": fuzzEngineParams.avgProgramExecutionTime = Int(value as? String ?? "0") ?? 0
+                        case "avgBugOracleExecutionTime": fuzzEngineParams.avgBugOracleExecutionTime = Int(value as? String ?? "0") ?? 0
+                        case "avgDumpSizeOpt": fuzzEngineParams.avgDumpSizeOpt = Double(value as? String ?? "0") ?? 0.0
+                        case "avgDumpSizeUnOpt": fuzzEngineParams.avgDumpSizeUnOpt = Double(value as? String ?? "0") ?? 0.0
+                        case "connectedNodes": fuzzEngineParams.connectedNodes = Int(value as? String ?? "0") ?? 0
+                        case "execsPerSecond": fuzzEngineParams.execsPerSecond = Double(value as? String ?? "0") ?? 0.0
+                        case "fuzzerOverhead": fuzzEngineParams.fuzzerOverhead = Double(value as? String ?? "0") ?? 0.0
+                        case "minimizationOverhead": fuzzEngineParams.minimizationOverhead = Double(value as? String ?? "0") ?? 0.0
+                        case "totalExecs": fuzzEngineParams.totalExecs = Int(value as? String ?? "0") ?? 0
+                        default: break
+                    }
+                }
+              
+                // Print headers first
+                // let headers = [
+                //     "minVisibleVariables", "maxSimultaneousCodeGenerations", "codeGenerationAmount", 
+                //     "weight", "maxSimultaneousMutations", "maxSimultaneousMutation", "aggressiveness", 
+                //     "mutator", "fuzzState", "uptime", "currentTime", "totalSamples", "interestingSamples", 
+                //     "lastInterestingSample", "validSamples", "corpusSize", "avgCorpusSize", 
+                //     "correctnessRate", "overallCorrectnessRate", "timeoutRate", "overallTimeoutRate", 
+                //     "crashesFound", "differentialsFound", "sparkplugExecutions", "maglevExecutions", 
+                //     "turbofanExecutions", "relationsPerformed", "bugOracleUsageRate", "jitUsageRate", 
+                //     "timeoutsHit", "coverage", "avgProgramSize", "avgCorpusProgramSize", 
+                //     "avgProgramExecutionTime", "avgBugOracleExecutionTime", "avgDumpSizeOpt", 
+                //     "avgDumpSizeUnOpt", "connectedNodes", "execsPerSecond", "fuzzerOverhead", 
+                //     "minimizationOverhead", "totalExecs", "outcomeSucceeded", "outcomeCrashed", 
+                //     "outcomeFailed", "outcomeTimedOut", "outcomeDifferential"
+                // ]
+                
+                //print(headers.joined(separator: ","))
+
+                let csvLine = fuzzEngineParams.toCSV() + "\n"
+                let filePath = "fuzzparams.csv"
+                if let fileHandle = FileHandle(forWritingAtPath: filePath) {
+                    fileHandle.seekToEndOfFile()
+                    if let data = csvLine.data(using: .utf8) {
+                        fileHandle.write(data)
+                    }
+                    fileHandle.closeFile()
+                } else {
+                    do {
+                        try csvLine.write(toFile: filePath, atomically: true, encoding: .utf8)
+                    } catch {
+                        print("Failed to write to file: \(error)")
+                    }
+                }
+                
+            } 
+        }
+    }
+
+    func getStats(_ stats: Fuzzilli_Protobuf_Statistics, of fuzzer: Fuzzer) -> [String: Any] {
+        let state: String
+        switch fuzzer.state {
+        case .uninitialized:
+            fatalError("This state should never be observed here")
+        case .waiting:
+            state = "Waiting for corpus from manager"
+        case .corpusImport:
+            let progress = String(format: "%.2f%", fuzzer.corpusImportProgress() * 100)
+            state = "Corpus import (\(progress)% completed)"
+        case .corpusGeneration:
+            state = "Initial corpus generation (with \(fuzzer.corpusGenerationEngine.name))"
+        case .fuzzing:
+            state = "Fuzzing (with \(fuzzer.engine.name))"
+        }
+
+        let timeSinceLastInterestingProgram = -lastInterestingProgramFound.timeIntervalSinceNow
+
+        let maybeAvgCorpusSize = stats.numChildNodes > 0 ? " (global average: \(Int(stats.avgCorpusSize)))" : ""
+
+
+        let cestDateFormatter = DateFormatter()
+        cestDateFormatter.dateFormat = "HH:mm:ss - dd.MM.yyyy"
+        cestDateFormatter.timeZone = TimeZone(abbreviation: "CEST")
+        let date = Date()
+
+        return [
+            "state": state,
+            "uptime": formatTimeInterval(fuzzer.uptime()),
+            "currentTime": cestDateFormatter.string(from: date),
+            "totalSamples": stats.totalSamples,
+            "interestingSamplesFound": stats.interestingSamples,
+            "lastInterestingSample": formatTimeInterval(timeSinceLastInterestingProgram),
+            "validSamplesFound": stats.validSamples,
+            "corpusSize": "\(fuzzer.corpus.size)\(maybeAvgCorpusSize)",
+            "correctnessRate": String(format: "%.2f%%", stats.correctnessRate * 100),
+            "overallCorrectnessRate": String(format: "%.2f%%", stats.overallCorrectnessRate * 100),
+            "timeoutRate": String(format: "%.2f%%", stats.timeoutRate * 100),
+            "overallTimeoutRate": String(format: "%.2f%%", stats.overallTimeoutRate * 100),
+            "crashesFound": stats.crashingSamples,
+            "timeoutsHit": stats.timedOutSamples,
+            "coverage": String(format: "%.2f%%", stats.coverage * 100),
+            "avgProgramSize": String(format: "%.2f", stats.avgProgramSize),
+            "avgCorpusProgramSize": String(format: "%.2f", stats.avgCorpusProgramSize),
+            "avgProgramExecutionTime": Int(stats.avgExecutionTime * 1000),
+            "connectedNodes": stats.numChildNodes,
+            "execsPerSecond": String(format: "%.2f", stats.execsPerSecond),
+            "fuzzerOverhead": String(format: "%.2f", stats.fuzzerOverhead * 100),
+            "minimizationOverhead": String(format: "%.2f", stats.minimizationOverhead * 100),
+            "totalExecs": stats.totalExecs
+        ]
     }
 
     func printStats(_ stats: Fuzzilli_Protobuf_Statistics, of fuzzer: Fuzzer) {

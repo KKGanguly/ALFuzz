@@ -1,0 +1,78 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- UnaryOperation '+', v2
+        Reassign v2, v3
+        v4 <- CreateNamedVariable 'Math', 'none'
+        v5 <- CallMethod v4, 'abs', [v2]
+        v6 <- LoadInteger '1'
+        v7 <- BinaryOperation v5, '-', v6
+        Reassign v2, v7
+        v8 <- LoadInteger '0'
+        v9 <- UnaryOperation '-', v8
+        v10 <- CallMethod v4, 'trunc', [v2]
+        v11 <- CreateNamedVariable 'Object', 'none'
+        v12 <- CallMethod v11, 'is', [v9, v10]
+        Return v12
+    EndPlainFunction
+    v13 <- LoadFloat '1.5'
+    v14 <- CallFunction v1, [v13]
+    v15 <- LoadFloat '0.5'
+    v16 <- CallFunction v1, [v15]
+    v17 <- LoadFloat '1.5'
+    v18 <- CallFunction v1, [v17]
+    v19 <- LoadFloat '0.5'
+    v20 <- CallFunction v1, [v19]
+EndPlainFunction
+v21 <- CallFunction v0, []
+v22 <- BeginPlainFunction -> 
+    v23 <- BeginPlainFunction -> v24
+        v25 <- UnaryOperation '+', v24
+        Reassign v24, v25
+        v26 <- CreateNamedVariable 'Math', 'none'
+        v27 <- CallMethod v26, 'abs', [v24]
+        v28 <- LoadInteger '1'
+        v29 <- BinaryOperation v27, '-', v28
+        Reassign v24, v29
+        v30 <- CreateNamedVariable 'NaN', 'none'
+        v31 <- CallMethod v26, 'trunc', [v24]
+        v32 <- CreateNamedVariable 'Object', 'none'
+        v33 <- CallMethod v32, 'is', [v30, v31]
+        Return v33
+    EndPlainFunction
+    v34 <- LoadFloat '1.5'
+    v35 <- CallFunction v23, [v34]
+    v36 <- CreateNamedVariable 'NaN', 'none'
+    v37 <- CallFunction v23, [v36]
+    v38 <- LoadFloat '1.5'
+    v39 <- CallFunction v23, [v38]
+    v40 <- CallFunction v23, [v36]
+EndPlainFunction
+v41 <- CallFunction v22, []
+
+
+function f0() {
+    function foo(a2) {
+        a2 = +a2;
+        a2 = Math.abs(a2) - 1;
+        return Object.is(-0, Math.trunc(a2));
+    }
+    foo(1.5);
+    foo(0.5);
+    foo(1.5);
+    foo(0.5);
+}
+f0();
+function f22() {
+    function foo(a24) {
+        a24 = +a24;
+        a24 = Math.abs(a24) - 1;
+        return Object.is(NaN, Math.trunc(a24));
+    }
+    foo(1.5);
+    foo(NaN);
+    foo(1.5);
+    foo(NaN);
+}
+f22();
+
+FuzzIL program written to corpus/math-trunc.fzil

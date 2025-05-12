@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '3'
+    SetElement v1, '0', v2
+EndPlainFunction
+v3 <- LoadUndefined
+v4 <- LoadInteger '6'
+v5 <- CreateArray [v3, v4]
+v6 <- CreateNamedVariable 'v', 'var', v5
+v7 <- CreateArray []
+SetProperty v6, '__proto__', v7
+v8 <- CallFunction v0, [v6]
+v9 <- LoadInteger '0'
+v10 <- DeleteElement v6, '0'
+v11 <- LoadInteger '0'
+v12 <- CreateNamedVariable 'count', 'var', v11
+v13 <- LoadInteger '0'
+v14 <- BeginPlainFunction -> 
+    v15 <- UnaryOperation v12, '++'
+EndPlainFunction
+v16 <- GetProperty v6, '__proto__'
+v17 <- CallMethod v16, '__defineSetter__', [v13, v14]
+v18 <- LoadInteger '1'
+v19 <- LoadUndefined
+v20 <- LoadInteger '2'
+v21 <- CreateArray [v18, v19, v19, v20]
+v22 <- CallFunction v0, [v21]
+v23 <- CallFunction v0, [v6]
+v24 <- LoadInteger '1'
+
+
+function foo(a1) {
+    a1[0] = 3;
+}
+var v = [,6];
+v.__proto__ = [];
+foo(v);
+delete v[0];
+var count = 0;
+function f14() {
+    count++;
+}
+v.__proto__.__defineSetter__(0, f14);
+foo([1,,,2]);
+foo(v);
+
+FuzzIL program written to corpus/regress-crbug-688734.fzil

@@ -1,0 +1,57 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    v3 <- LoadInteger '0'
+    v4 <- CreateNamedVariable 'y', 'var', v3
+    v5 <- LoadUndefined
+    Update v2, '^', v5
+    v6 <- LoadInteger '1'
+    Update v2, '/', v6
+    v7 <- CreateNamedVariable 'NaN', 'none'
+    v8 <- LoadInteger '1'
+    Update v4, '%', v8
+    v9 <- LoadInteger '1'
+    Reassign v4, v9
+    v10 <- CallFunction v0, []
+    v11 <- LoadInteger '2'
+    v12 <- UnaryOperation '-', v11
+    Reassign v4, v12
+    v13 <- LoadInteger '1'
+    Update v2, '>>', v13
+    v14 <- LoadInteger '0'
+    v15 <- LoadInteger '5'
+    v16 <- BinaryOperation v2, '%', v15
+    v17 <- BinaryOperation v4, '^', v16
+    v18 <- BinaryOperation v17, '+', v4
+    v19 <- BinaryOperation v4, '+', v18
+    v20 <- BinaryOperation v4, '+', v19
+    v21 <- BinaryOperation v4, '+', v20
+    v22 <- BinaryOperation v4, '+', v4
+    v23 <- BinaryOperation v21, '+', v22
+    v24 <- BinaryOperation v23, '>>', v4
+    v25 <- BinaryOperation v24, '+', v4
+EndPlainFunction
+BeginTry
+    v26 <- CallFunction v0, []
+BeginCatch -> v27
+EndTryCatch
+
+
+function f() {
+    var x = 0;
+    var y = 0;
+    x ^= undefined;
+    x /= 1;
+    y %= 1;
+    y = 1;
+    f();
+    y = -2;
+    x >>= 1;
+    (((y + (y + (y + ((y ^ (x % 5)) + y)))) + (y + y)) >> y) + y;
+}
+try {
+    f();
+} catch(e27) {
+}
+
+FuzzIL program written to corpus/regress-register-allocator2.fzil

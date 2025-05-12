@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> 
+    BeginTry
+        v1 <- CreateNamedVariable 'unref', 'none'
+    BeginCatch -> v2
+        v3 <- LoadInteger '1'
+        v4 <- CreateNamedVariable 'TypeError', 'none'
+        v5 <- TestInstanceOf v3, v4
+        v6 <- CreateNamedVariable 'unref', 'none'
+        v7 <- CallFunction v6, []
+        v8 <- BinaryOperation v5, '&&', v7
+        Return v8
+    EndTryCatch
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- CallFunction v0, []
+    Return v10
+EndPlainFunction
+v11 <- CallFunction v9, []
+
+
+function bar() {
+    try {
+    } catch(e2) {
+        return (1 instanceof TypeError) && unref();
+    }
+}
+function foo() {
+    return bar();
+}
+foo();
+
+FuzzIL program written to corpus/regress-crbug-624747.fzil

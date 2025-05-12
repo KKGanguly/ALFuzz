@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BinaryOperation v1, '%', v1
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '1'
+v4 <- CallFunction v0, [v3]
+v5 <- LoadInteger '2'
+v6 <- CallFunction v0, [v5]
+v7 <- BeginPlainFunction -> v8
+    v9 <- CallFunction v0, [v8]
+EndPlainFunction
+v10 <- BeginArrowFunction -> 
+    v11 <- CreateNamedVariable 'Symbol', 'none'
+    v12 <- GetProperty v11, 'toPrimitive'
+    v13 <- CallFunction v7, [v12]
+    Return v13
+EndArrowFunction
+v14 <- CallFunction v10, []
+
+
+function foo(a1) {
+    return a1 % a1;
+}
+foo(1);
+foo(2);
+function bar(a8) {
+    foo(a8);
+}
+const v10 = () => {
+    return bar(Symbol.toPrimitive);
+};
+v10();
+
+FuzzIL program written to corpus/regress-crbug-631318-8.fzil

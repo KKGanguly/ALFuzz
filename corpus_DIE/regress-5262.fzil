@@ -1,0 +1,69 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '23'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '42'
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5
+    SetProperty v5, 'g', v2
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    BeginIf v7
+        BeginForLoopInitializer
+            v8 <- LoadInteger '0'
+        BeginForLoopCondition -> v9
+            v10 <- LoadInteger '3'
+            v11 <- Compare v9, '<', v10
+        BeginForLoopAfterthought v11 -> v12
+            v13 <- UnaryOperation '++', v12
+        BeginForLoopBody -> v14
+        EndForLoop
+        v15 <- LoadBoolean 'false'
+        v16 <- CallFunction v6, [v15]
+        v17 <- LoadThis
+        v18 <- CallFunction v4, [v17]
+        v19 <- CallFunction v0, []
+        v20 <- CreateNamedVariable 'x', 'var', v19
+        Return v20
+    EndIf
+    v21 <- LoadInteger '65'
+    Return v21
+EndPlainFunction
+v22 <- LoadInteger '65'
+v23 <- LoadBoolean 'false'
+v24 <- CallFunction v6, [v23]
+v25 <- LoadInteger '65'
+v26 <- LoadBoolean 'false'
+v27 <- CallFunction v6, [v26]
+v28 <- LoadInteger '42'
+v29 <- LoadBoolean 'true'
+v30 <- CallFunction v6, [v29]
+
+
+function g() {
+    return 23;
+}
+function h() {
+    return 42;
+}
+function boom(a5) {
+    a5.g = h;
+}
+function f(a7) {
+    if (a7) {
+        for (let i9 = 0; i9 < 3; ++i9) {
+        }
+        f(false);
+        boom(this);
+        var x = g();
+        return x;
+    }
+    return 65;
+}
+f(false);
+f(false);
+f(true);
+
+FuzzIL program written to corpus/regress-5262.fzil

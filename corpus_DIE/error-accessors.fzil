@@ -1,0 +1,68 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- CreateNamedVariable 'Error', 'none'
+v3 <- LoadString 'custom message'
+v4 <- Construct v2, [v3]
+v5 <- CreateNamedVariable 'error1', 'var', v4
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+Reassign v1, v6
+SetProperty v1, '__proto__', v5
+v7 <- LoadString 'custom message'
+v8 <- LoadString 'message'
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'getOwnPropertyDescriptor', [v5, v8]
+v11 <- GetProperty v10, 'value'
+v12 <- LoadString 'another message'
+SetProperty v1, 'message', v12
+v13 <- LoadString 'another message'
+v14 <- GetProperty v1, 'message'
+v15 <- LoadString 'custom message'
+v16 <- GetProperty v5, 'message'
+v17 <- LoadUndefined
+v18 <- CreateNamedVariable 'error2', 'var', v17
+BeginTry
+    v19 <- CreateNamedVariable 'x', 'none'
+    v20 <- GetProperty v19, 'x'
+BeginCatch -> v21
+    Reassign v18, v21
+EndTryCatch
+BeginObjectLiteral
+v22 <- EndObjectLiteral
+Reassign v1, v22
+SetProperty v1, '__proto__', v18
+v23 <- LoadString 'x is not defined'
+v24 <- LoadString 'message'
+v25 <- CallMethod v9, 'getOwnPropertyDescriptor', [v18, v24]
+v26 <- GetProperty v25, 'value'
+v27 <- LoadString 'another message'
+SetProperty v1, 'message', v27
+v28 <- LoadString 'another message'
+v29 <- GetProperty v1, 'message'
+v30 <- LoadString 'x is not defined'
+v31 <- GetProperty v18, 'message'
+
+
+var o;
+const v4 = new Error("custom message");
+var error1 = v4;
+o = {};
+o.__proto__ = error1;
+Object.getOwnPropertyDescriptor(error1, "message").value;
+o.message = "another message";
+o.message;
+error1.message;
+var error2;
+try {
+    x.x;
+} catch(e21) {
+    error2 = e21;
+}
+o = {};
+o.__proto__ = error2;
+Object.getOwnPropertyDescriptor(error2, "message").value;
+o.message = "another message";
+o.message;
+error2.message;
+
+FuzzIL program written to corpus/error-accessors.fzil

@@ -1,0 +1,163 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadInteger '0'
+        v4 <- BinaryOperation v2, '|', v3
+        Reassign v2, v4
+        v5 <- LoadInteger '1'
+        v6 <- BinaryOperation v2, '+', v5
+        v7 <- CreateNamedVariable 'Number', 'none'
+        v8 <- CallMethod v7, 'parseInt', [v6]
+        Return v8
+    EndPlainFunction
+    v9 <- LoadInteger '1'
+    v10 <- LoadInteger '0'
+    v11 <- CallFunction v1, [v10]
+    v12 <- LoadInteger '2'
+    v13 <- LoadInteger '1'
+    v14 <- CallFunction v1, [v13]
+    v15 <- LoadInteger '2'
+    v16 <- LoadInteger '31'
+    v17 <- CreateNamedVariable 'Math', 'none'
+    v18 <- CallMethod v17, 'pow', [v15, v16]
+    v19 <- LoadInteger '2'
+    v20 <- LoadInteger '31'
+    v21 <- CallMethod v17, 'pow', [v19, v20]
+    v22 <- LoadInteger '1'
+    v23 <- BinaryOperation v21, '-', v22
+    v24 <- CallFunction v1, [v23]
+EndPlainFunction
+v25 <- CallFunction v0, []
+v26 <- BeginPlainFunction -> 
+    v27 <- BeginPlainFunction -> v28
+        v29 <- LoadInteger '0'
+        v30 <- BinaryOperation v28, '|', v29
+        Reassign v28, v30
+        v31 <- LoadInteger '1'
+        v32 <- BinaryOperation v28, '+', v31
+        v33 <- LoadInteger '0'
+        v34 <- CreateNamedVariable 'Number', 'none'
+        v35 <- CallMethod v34, 'parseInt', [v32, v33]
+        Return v35
+    EndPlainFunction
+    v36 <- LoadInteger '1'
+    v37 <- LoadInteger '0'
+    v38 <- CallFunction v27, [v37]
+    v39 <- LoadInteger '2'
+    v40 <- LoadInteger '1'
+    v41 <- CallFunction v27, [v40]
+    v42 <- LoadInteger '2'
+    v43 <- LoadInteger '31'
+    v44 <- CreateNamedVariable 'Math', 'none'
+    v45 <- CallMethod v44, 'pow', [v42, v43]
+    v46 <- LoadInteger '2'
+    v47 <- LoadInteger '31'
+    v48 <- CallMethod v44, 'pow', [v46, v47]
+    v49 <- LoadInteger '1'
+    v50 <- BinaryOperation v48, '-', v49
+    v51 <- CallFunction v27, [v50]
+EndPlainFunction
+v52 <- CallFunction v26, []
+v53 <- BeginPlainFunction -> 
+    v54 <- BeginPlainFunction -> v55
+        v56 <- LoadInteger '0'
+        v57 <- BinaryOperation v55, '|', v56
+        Reassign v55, v57
+        v58 <- LoadInteger '1'
+        v59 <- BinaryOperation v55, '+', v58
+        v60 <- LoadInteger '10'
+        v61 <- CreateNamedVariable 'Number', 'none'
+        v62 <- CallMethod v61, 'parseInt', [v59, v60]
+        Return v62
+    EndPlainFunction
+    v63 <- LoadInteger '1'
+    v64 <- LoadInteger '0'
+    v65 <- CallFunction v54, [v64]
+    v66 <- LoadInteger '2'
+    v67 <- LoadInteger '1'
+    v68 <- CallFunction v54, [v67]
+    v69 <- LoadInteger '2'
+    v70 <- LoadInteger '31'
+    v71 <- CreateNamedVariable 'Math', 'none'
+    v72 <- CallMethod v71, 'pow', [v69, v70]
+    v73 <- LoadInteger '2'
+    v74 <- LoadInteger '31'
+    v75 <- CallMethod v71, 'pow', [v73, v74]
+    v76 <- LoadInteger '1'
+    v77 <- BinaryOperation v75, '-', v76
+    v78 <- CallFunction v54, [v77]
+EndPlainFunction
+v79 <- CallFunction v53, []
+v80 <- BeginPlainFunction -> 
+    v81 <- BeginPlainFunction -> v82
+        v83 <- LoadInteger '0'
+        v84 <- BinaryOperation v82, '|', v83
+        Reassign v82, v84
+        v85 <- LoadInteger '1'
+        v86 <- BinaryOperation v82, '+', v85
+        v87 <- LoadUndefined
+        v88 <- CreateNamedVariable 'Number', 'none'
+        v89 <- CallMethod v88, 'parseInt', [v86, v87]
+        Return v89
+    EndPlainFunction
+    v90 <- LoadInteger '1'
+    v91 <- LoadInteger '0'
+    v92 <- CallFunction v81, [v91]
+    v93 <- LoadInteger '2'
+    v94 <- LoadInteger '1'
+    v95 <- CallFunction v81, [v94]
+    v96 <- LoadInteger '2'
+    v97 <- LoadInteger '31'
+    v98 <- CreateNamedVariable 'Math', 'none'
+    v99 <- CallMethod v98, 'pow', [v96, v97]
+    v100 <- LoadInteger '2'
+    v101 <- LoadInteger '31'
+    v102 <- CallMethod v98, 'pow', [v100, v101]
+    v103 <- LoadInteger '1'
+    v104 <- BinaryOperation v102, '-', v103
+    v105 <- CallFunction v81, [v104]
+EndPlainFunction
+v106 <- CallFunction v80, []
+
+
+function f0() {
+    function foo(a2) {
+        return Number.parseInt((a2 = a2 | 0) + 1);
+    }
+    foo(0);
+    foo(1);
+    Math.pow(2, 31);
+    foo(Math.pow(2, 31) - 1);
+}
+f0();
+function f26() {
+    function foo(a28) {
+        return Number.parseInt((a28 = a28 | 0) + 1, 0);
+    }
+    foo(0);
+    foo(1);
+    Math.pow(2, 31);
+    foo(Math.pow(2, 31) - 1);
+}
+f26();
+function f53() {
+    function foo(a55) {
+        return Number.parseInt((a55 = a55 | 0) + 1, 10);
+    }
+    foo(0);
+    foo(1);
+    Math.pow(2, 31);
+    foo(Math.pow(2, 31) - 1);
+}
+f53();
+function f80() {
+    function foo(a82) {
+        return Number.parseInt((a82 = a82 | 0) + 1, undefined);
+    }
+    foo(0);
+    foo(1);
+    Math.pow(2, 31);
+    foo(Math.pow(2, 31) - 1);
+}
+f80();
+
+FuzzIL program written to corpus/regress-5538.fzil

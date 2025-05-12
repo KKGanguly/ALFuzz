@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'a', 'var', v2
+    v4 <- LoadInteger '0'
+    v5 <- CreateNamedVariable 'result', 'none'
+    Reassign v5, v4
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- LoadInteger '4'
+        v9 <- Compare v7, '<', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation v10, '++'
+    BeginForLoopBody -> v12
+        v13 <- GetProperty v3, 'length'
+        v14 <- CreateNamedVariable 'result', 'none'
+        Update v14, '+', v13
+        v15 <- CallMethod v3, 'shift', []
+    EndForLoop
+    v16 <- CreateNamedVariable 'result', 'none'
+    Return v16
+EndPlainFunction
+v17 <- LoadInteger '1'
+v18 <- CallFunction v0, []
+v19 <- LoadInteger '1'
+v20 <- CallFunction v0, []
+v21 <- LoadInteger '1'
+v22 <- CallFunction v0, []
+
+
+function foo() {
+    var a = [0];
+    result = 0;
+    for (let i7 = 0; i7 < 4; i7++) {
+        result += a.length;
+        a.shift();
+    }
+    return result;
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-374838.fzil

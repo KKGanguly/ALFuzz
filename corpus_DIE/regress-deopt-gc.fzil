@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '10'
+    v2 <- CreateNamedVariable 'a', 'var', v1
+    v3 <- UnaryOperation v2, '++'
+EndPlainFunction
+v4 <- CallFunction v0, []
+v5 <- BeginPlainFunction -> 
+    v6 <- CreateNamedVariable 'deopt', 'none'
+    v7 <- CallFunction v6, []
+EndPlainFunction
+v8 <- BeginPlainFunction -> 
+    BeginTry
+        v9 <- LoadInteger '42'
+        v10 <- CreateNamedVariable 'a', 'var', v9
+    BeginCatch -> v11
+    EndTryCatch
+    v12 <- CreateNamedVariable 'gc', 'none'
+    v13 <- CallFunction v12, []
+EndPlainFunction
+v14 <- CallFunction v5, []
+
+
+function f0() {
+    var a = 10;
+    a++;
+}
+f0();
+function opt_me() {
+    deopt();
+}
+function deopt() {
+    try {
+        var a = 42;
+    } catch(e11) {
+    }
+    gc();
+}
+opt_me();
+
+FuzzIL program written to corpus/regress-deopt-gc.fzil

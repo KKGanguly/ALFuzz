@@ -1,0 +1,131 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'String', 'none'
+    v2 <- LoadString 'ab'
+    v3 <- Construct v1, [v2]
+    v4 <- CreateNamedVariable 'o', 'var', v3
+    v5 <- BeginPlainFunction -> v6, v7, v8
+        SetComputedProperty v6, v7, v8
+    EndPlainFunction
+    v9 <- BeginPlainFunction -> v10, v11
+        v12 <- GetComputedProperty v10, v11
+        Return v12
+    EndPlainFunction
+    v13 <- LoadInteger '2'
+    v14 <- LoadInteger '10'
+    v15 <- CallFunction v5, [v4, v13, v14]
+    v16 <- LoadInteger '2'
+    v17 <- CallFunction v9, [v4, v16]
+    v18 <- LoadInteger '0'
+    v19 <- LoadInteger '100'
+    v20 <- CallFunction v5, [v4, v18, v19]
+    v21 <- LoadString 'a'
+    v22 <- LoadInteger '0'
+    v23 <- CallFunction v9, [v4, v22]
+EndPlainFunction
+v24 <- CallFunction v0, []
+v25 <- BeginPlainFunction -> 
+    v26 <- CreateNamedVariable 'String', 'none'
+    v27 <- LoadString 'ab'
+    v28 <- Construct v26, [v27]
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v28
+    v29 <- EndObjectLiteral
+    v30 <- CreateNamedVariable 'o', 'var', v29
+    v31 <- BeginPlainFunction -> v32, v33, v34
+        SetComputedProperty v32, v33, v34
+    EndPlainFunction
+    v35 <- BeginPlainFunction -> v36, v37
+        v38 <- GetComputedProperty v36, v37
+        Return v38
+    EndPlainFunction
+    v39 <- LoadInteger '2'
+    v40 <- LoadInteger '10'
+    v41 <- CallFunction v31, [v30, v39, v40]
+    v42 <- LoadInteger '2'
+    v43 <- CallFunction v35, [v30, v42]
+    v44 <- LoadInteger '0'
+    v45 <- LoadInteger '100'
+    v46 <- CallFunction v31, [v30, v44, v45]
+    v47 <- LoadString 'a'
+    v48 <- LoadInteger '0'
+    v49 <- CallFunction v35, [v30, v48]
+EndPlainFunction
+v50 <- CallFunction v25, []
+v51 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    BeginObjectLiteral
+    v52 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v52
+    v53 <- EndObjectLiteral
+    v54 <- CreateNamedVariable 'o', 'var', v53
+    v55 <- BeginPlainFunction -> v56, v57, v58
+        SetComputedProperty v56, v57, v58
+    EndPlainFunction
+    v59 <- LoadInteger '0'
+    v60 <- LoadInteger '100'
+    v61 <- CallFunction v55, [v54, v59, v60]
+    v62 <- CreateNamedVariable 'String', 'none'
+    v63 <- LoadString 'bla'
+    v64 <- Construct v62, [v63]
+    v65 <- GetProperty v54, '__proto__'
+    SetProperty v65, '__proto__', v64
+    v66 <- BeginPlainFunction -> 
+        v67 <- LoadInteger '1'
+        v68 <- LoadInteger '100'
+        v69 <- CallFunction v55, [v54, v67, v68]
+    EndPlainFunction
+    v70 <- CallFunction v66, []
+EndPlainFunction
+v71 <- CallFunction v51, []
+
+
+function f0() {
+    const v3 = new String("ab");
+    var o = v3;
+    function store(a6, a7, a8) {
+        a6[a7] = a8;
+    }
+    function load(a10, a11) {
+        return a10[a11];
+    }
+    store(o, 2, 10);
+    load(o, 2);
+    store(o, 0, 100);
+    load(o, 0);
+}
+f0();
+function f25() {
+    const v28 = new String("ab");
+    var o = { __proto__: v28 };
+    function store(a32, a33, a34) {
+        a32[a33] = a34;
+    }
+    function load(a36, a37) {
+        return a36[a37];
+    }
+    store(o, 2, 10);
+    load(o, 2);
+    store(o, 0, 100);
+    load(o, 0);
+}
+f25();
+function f51() {
+    'use strict';
+    const v52 = {};
+    var o = { __proto__: v52 };
+    function store(a56, a57, a58) {
+        a56[a57] = a58;
+    }
+    store(o, 0, 100);
+    const v64 = new String("bla");
+    const t39 = o.__proto__;
+    t39.__proto__ = v64;
+    function f66() {
+        store(o, 1, 100);
+    }
+    f66();
+}
+f51();
+
+FuzzIL program written to corpus/regress-4296.fzil

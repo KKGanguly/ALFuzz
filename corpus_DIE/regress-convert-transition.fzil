@@ -1,0 +1,35 @@
+v0 <- LoadString '{ "a1":1, "a2":1, "a3":1, "a4":1, "a5":1, "a6":1, "a7":1,               "a8":1, "a9":1, "a10":1, "a11":1, "a12":1, "a13":1}'
+v1 <- CreateNamedVariable 'input', 'var', v0
+v2 <- CreateNamedVariable 'JSON', 'none'
+v3 <- CallMethod v2, 'parse', [v1]
+v4 <- CreateNamedVariable 'a', 'var', v3
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '10'
+    Return v6
+EndPlainFunction
+SetProperty v4, 'a', v5
+v7 <- CallMethod v2, 'parse', [v1]
+v8 <- CreateNamedVariable 'b', 'var', v7
+v9 <- LoadInteger '10'
+SetProperty v8, 'a', v9
+v10 <- CallMethod v2, 'parse', [v1]
+v11 <- CreateNamedVariable 'c', 'var', v10
+v12 <- LoadInteger '10'
+SetProperty v11, 'x', v12
+v13 <- LoadUndefined
+v14 <- GetProperty v11, 'a'
+
+
+var input = "{ "a1":1, "a2":1, "a3":1, "a4":1, "a5":1, "a6":1, "a7":1,               "a8":1, "a9":1, "a10":1, "a11":1, "a12":1, "a13":1}";
+var a = JSON.parse(input);
+function f5() {
+    return 10;
+}
+a.a = f5;
+var b = JSON.parse(input);
+b.a = 10;
+var c = JSON.parse(input);
+c.x = 10;
+c.a;
+
+FuzzIL program written to corpus/regress-convert-transition.fzil

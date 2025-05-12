@@ -1,0 +1,27 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Intl'
+BeginIf v1
+    v2 <- LoadString 'Intl.DateTimeFormat('en-US', {timeZone: 0})'
+    v3 <- CreateNamedVariable 'RangeError', 'none'
+    v4 <- LoadString 'Intl.DateTimeFormat('en-US', {timeZone: true})'
+    v5 <- LoadString 'Intl.DateTimeFormat('en-US', {timeZone: null})'
+    v6 <- BeginPlainFunction -> 
+        v7 <- LoadString 'UTC'
+        Return v7
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toString`, v6
+    v8 <- EndObjectLiteral
+    v9 <- CreateNamedVariable 'object', 'var', v8
+    v10 <- LoadString 'Intl.DateTimeFormat('en-US', {timeZone: object})'
+EndIf
+
+
+if (this.Intl) {
+    function f6() {
+        return "UTC";
+    }
+    var object = { toString: f6 };
+}
+
+FuzzIL program written to corpus/regress-crbug-627935.fzil

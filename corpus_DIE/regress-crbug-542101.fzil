@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `name` -> v1
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `__proto__`, v1
+            v2 <- EndObjectLiteral
+            Return v2
+        EndObjectLiteralGetter
+        BeginObjectLiteralGetter `message` -> v3
+        EndObjectLiteralGetter
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'Error', 'none'
+    v6 <- GetProperty v5, 'prototype'
+    v7 <- GetProperty v6, 'toString'
+    v8 <- CallMethod v7, 'call', [v4]
+EndPlainFunction
+v9 <- CallFunction v0, []
+
+
+function f0() {
+    const v4 = {
+        get name() {
+            return { __proto__: this };
+        },
+        get message() {
+        },
+    };
+    Error.prototype.toString.call(v4);
+}
+f0();
+
+FuzzIL program written to corpus/regress-crbug-542101.fzil

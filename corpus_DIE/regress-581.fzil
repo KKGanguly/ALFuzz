@@ -1,0 +1,84 @@
+v0 <- LoadInteger '2'
+v1 <- LoadInteger '30'
+v2 <- CreateNamedVariable 'Math', 'none'
+v3 <- CallMethod v2, 'pow', [v0, v1]
+v4 <- CreateNamedVariable 'pow30', 'var', v3
+v5 <- LoadInteger '2'
+v6 <- LoadInteger '31'
+v7 <- CallMethod v2, 'pow', [v5, v6]
+v8 <- CreateNamedVariable 'pow31', 'var', v7
+v9 <- CreateArray []
+v10 <- CreateNamedVariable 'a', 'var', v9
+v11 <- LoadInteger '31'
+SetComputedProperty v10, v8, v11
+v12 <- LoadInteger '1'
+v13 <- BinaryOperation v8, '+', v12
+v14 <- GetProperty v10, 'length'
+v15 <- BeginPlainFunction -> 
+    v16 <- CallMethod v10, 'concat', [v10]
+EndPlainFunction
+v17 <- CallFunction v15, []
+v18 <- CreateNamedVariable 'RangeError', 'none'
+v19 <- CreateArray []
+v20 <- CreateNamedVariable 'b', 'var', v19
+v21 <- LoadInteger '32'
+v22 <- LoadInteger '3'
+v23 <- BinaryOperation v8, '-', v22
+SetComputedProperty v20, v23, v21
+v24 <- CallMethod v10, 'concat', [v20]
+v25 <- CreateNamedVariable 'ab', 'var', v24
+v26 <- LoadInteger '2'
+v27 <- BinaryOperation v26, '*', v8
+v28 <- LoadInteger '1'
+v29 <- BinaryOperation v27, '-', v28
+v30 <- GetProperty v25, 'length'
+v31 <- LoadInteger '31'
+v32 <- GetComputedProperty v25, v8
+v33 <- LoadInteger '32'
+v34 <- LoadInteger '2'
+v35 <- BinaryOperation v34, '*', v8
+v36 <- LoadInteger '2'
+v37 <- BinaryOperation v35, '-', v36
+v38 <- GetComputedProperty v25, v37
+v39 <- LoadUndefined
+v40 <- LoadInteger '2'
+v41 <- BinaryOperation v40, '*', v8
+v42 <- LoadInteger '1'
+v43 <- BinaryOperation v41, '-', v42
+v44 <- GetComputedProperty v25, v43
+v45 <- CreateArray []
+v46 <- CreateNamedVariable 'c', 'var', v45
+v47 <- LoadInteger '30'
+SetComputedProperty v46, v4, v47
+v48 <- BeginPlainFunction -> 
+    v49 <- CallMethod v46, 'concat', [v46, v10]
+EndPlainFunction
+v50 <- CallFunction v48, []
+
+
+var pow30 = Math.pow(2, 30);
+var pow31 = Math.pow(2, 31);
+var a = [];
+a[pow31] = 31;
+pow31 + 1;
+a.length;
+function f15() {
+    a.concat(a);
+}
+f15();
+var b = [];
+b[pow31 - 3] = 32;
+var ab = a.concat(b);
+(2 * pow31) - 1;
+ab.length;
+ab[pow31];
+ab[(2 * pow31) - 2];
+ab[(2 * pow31) - 1];
+var c = [];
+c[pow30] = 30;
+function f48() {
+    c.concat(c, a);
+}
+f48();
+
+FuzzIL program written to corpus/regress-581.fzil

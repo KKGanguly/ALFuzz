@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'bailout'
+    ThrowException v1
+EndPlainFunction
+v2 <- LoadUndefined
+v3 <- CreateNamedVariable 'global', 'var', v2
+v4 <- BeginPlainFunction -> v5, v6
+    v7 <- LoadInteger '1'
+    v8 <- BinaryOperation v5, '+', v7
+    v9 <- CreateNamedVariable 'a', 'var', v8
+    v10 <- LoadInteger '2'
+    v11 <- BinaryOperation v5, '+', v10
+    v12 <- CreateNamedVariable 'b', 'var', v11
+    v13 <- LoadBoolean 'true'
+    Reassign v3, v13
+    v14 <- CallFunction v6, []
+    Return v9
+EndPlainFunction
+v15 <- LoadString 'foo(1, bailout)'
+v16 <- LoadString 'foo(1, bailout)'
+v17 <- LoadString 'foo(1, bailout)'
+v18 <- LoadInteger '2'
+v19 <- LoadInteger '1'
+v20 <- BeginPlainFunction -> 
+EndPlainFunction
+v21 <- CallFunction v4, [v19, v20]
+
+
+function bailout() {
+    throw "bailout";
+}
+var global;
+function foo(a5, a6) {
+    var a = a5 + 1;
+    var b = a5 + 2;
+    global = true;
+    a6();
+    return a;
+}
+function f20() {
+}
+foo(1, f20);
+
+FuzzIL program written to corpus/regress-2843.fzil

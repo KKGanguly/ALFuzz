@@ -1,0 +1,95 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'b', 'var', v0
+v2 <- LoadInteger '1'
+SetElement v1, '10000', v2
+v3 <- LoadFloat '1.5'
+v4 <- CreateArray [v3]
+v5 <- CreateNamedVariable 'a1', 'var', v4
+SetProperty v1, '__proto__', v5
+v6 <- LoadFloat '1.5'
+v7 <- CreateArray []
+v8 <- CallMethod v7, 'concat', [v1]
+v9 <- GetElement v8, '0'
+v10 <- CreateNamedVariable 'Int32Array', 'none'
+v11 <- LoadInteger '2'
+v12 <- Construct v10, [v11]
+v13 <- CreateNamedVariable 'a2', 'var', v12
+v14 <- LoadInteger '3'
+SetElement v13, '0', v14
+SetProperty v1, '__proto__', v13
+v15 <- LoadInteger '3'
+v16 <- CreateArray []
+v17 <- CallMethod v16, 'concat', [v1]
+v18 <- GetElement v17, '0'
+v19 <- BeginPlainFunction -> v20, v21
+    v22 <- CreateArray []
+    v23 <- CreateNamedVariable 'a', 'var', v22
+    v24 <- LoadInteger '1'
+    SetElement v23, '10000', v24
+    v25 <- LoadArguments
+    SetProperty v23, '__proto__', v25
+    v26 <- CreateArray []
+    v27 <- CallMethod v26, 'concat', [v23]
+    v28 <- CreateNamedVariable 'c', 'var', v27
+    BeginForLoopInitializer
+        v29 <- LoadInteger '0'
+    BeginForLoopCondition -> v30
+        v31 <- LoadArguments
+        v32 <- GetProperty v31, 'length'
+        v33 <- Compare v30, '<', v32
+    BeginForLoopAfterthought v33 -> v34
+        v35 <- UnaryOperation v34, '++'
+    BeginForLoopBody -> v36
+        v37 <- LoadInteger '2'
+        v38 <- BinaryOperation v36, '+', v37
+        v39 <- GetComputedProperty v28, v36
+    EndForLoop
+    v40 <- LoadUndefined
+    v41 <- LoadArguments
+    v42 <- GetProperty v41, 'length'
+    v43 <- GetComputedProperty v28, v42
+    v44 <- LoadUndefined
+    v45 <- LoadArguments
+    v46 <- GetProperty v45, 'length'
+    v47 <- LoadInteger '1'
+    v48 <- BinaryOperation v46, '+', v47
+    v49 <- GetComputedProperty v28, v48
+EndPlainFunction
+v50 <- LoadInteger '2'
+v51 <- CallFunction v19, [v50]
+v52 <- LoadInteger '2'
+v53 <- LoadInteger '3'
+v54 <- CallFunction v19, [v52, v53]
+v55 <- LoadInteger '2'
+v56 <- LoadInteger '3'
+v57 <- LoadInteger '4'
+v58 <- CallFunction v19, [v55, v56, v57]
+
+
+var b = [];
+b[10000] = 1;
+var a1 = [1.5];
+b.__proto__ = a1;
+([]).concat(b)[0];
+const v12 = new Int32Array(2);
+var a2 = v12;
+a2[0] = 3;
+b.__proto__ = a2;
+([]).concat(b)[0];
+function foo(a20, a21) {
+    var a = [];
+    a[10000] = 1;
+    a.__proto__ = arguments;
+    var c = ([]).concat(a);
+    for (let i30 = 0; i30 < arguments.length; i30++) {
+        i30 + 2;
+        c[i30];
+    }
+    c[arguments.length];
+    c[arguments.length + 1];
+}
+foo(2);
+foo(2, 3);
+foo(2, 3, 4);
+
+FuzzIL program written to corpus/regress-crbug-412203.fzil

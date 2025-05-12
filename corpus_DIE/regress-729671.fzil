@@ -1,0 +1,31 @@
+v0 <- LoadInteger '11'
+v1 <- LoadInteger '9'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v0
+    ObjectLiteralAddElement `1`, v1
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'o', 'var', v2
+v4 <- BeginArrowFunction -> 
+    v5 <- LoadString '[0,0]'
+    v6 <- BeginPlainFunction -> 
+        v7 <- LoadThis
+        SetElement v7, '1', v3
+    EndPlainFunction
+    v8 <- CreateNamedVariable 'JSON', 'none'
+    v9 <- CallMethod v8, 'parse', [v5, v6]
+    Return v9
+EndArrowFunction
+v10 <- CallFunction v4, []
+v11 <- CreateNamedVariable 'RangeError', 'none'
+
+
+var o = { 0: 11, 1: 9 };
+const v4 = () => {
+    function f6() {
+        this[1] = o;
+    }
+    return JSON.parse("[0,0]", f6);
+};
+v4();
+
+FuzzIL program written to corpus/regress-729671.fzil

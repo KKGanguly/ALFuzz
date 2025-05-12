@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '3'
+    Return v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v0
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'z', 'var', v2
+v4 <- BeginPlainFunction -> 
+    BeginTry
+        v5 <- LoadInteger '12'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `x`, v5
+        v6 <- EndObjectLiteral
+        v7 <- CreateNamedVariable 'tmp', 'var', v6
+        BeginWith v7
+            v8 <- UnaryOperation v3, '++'
+        EndWith
+        v9 <- CreateNamedVariable 'Error', 'none'
+        v10 <- LoadString 'boom'
+        v11 <- Construct v9, [v10]
+        ThrowException v11
+    BeginCatch -> v12
+    EndTryCatch
+EndPlainFunction
+v13 <- CallFunction v4, []
+
+
+function f0() {
+    return 3;
+}
+var z = { valueOf: f0 };
+function f4() {
+    try {
+        var tmp = { x: 12 };
+        with (tmp) {
+            z++;
+        }
+        const v11 = new Error("boom");
+        throw v11;
+    } catch(e12) {
+    }
+}
+f4();
+
+FuzzIL program written to corpus/regress-crbug-628573.fzil

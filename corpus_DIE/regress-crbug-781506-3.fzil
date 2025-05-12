@@ -1,0 +1,36 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    v4 <- LoadFloat '0.5'
+    v5 <- BinaryOperation v3, '+', v4
+    Return v5
+EndPlainFunction
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+v7 <- LoadInteger '1'
+v8 <- CallFunction v0, [v6, v7]
+v9 <- LoadFloat '1.5'
+v10 <- CreateNamedVariable 'Array', 'none'
+v11 <- GetProperty v10, 'prototype'
+v12 <- CallMethod v11, 'unshift', [v9]
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- LoadInteger '1'
+v15 <- CallFunction v0, [v13, v14]
+v16 <- CreateNamedVariable 'Number', 'none'
+v17 <- CallMethod v16, 'isNaN', [v15]
+BeginObjectLiteral
+v18 <- EndObjectLiteral
+v19 <- LoadInteger '1'
+v20 <- CallFunction v0, [v18, v19]
+v21 <- CallMethod v16, 'isNaN', [v20]
+
+
+function foo(a1, a2) {
+    return a1[a2] + 0.5;
+}
+foo({}, 1);
+Array.prototype.unshift(1.5);
+Number.isNaN(foo({}, 1));
+Number.isNaN(foo({}, 1));
+
+FuzzIL program written to corpus/regress-crbug-781506-3.fzil

@@ -1,0 +1,68 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadUndefined
+    v3 <- CreateNamedVariable 'x', 'var', v2
+    v4 <- LoadInteger '0'
+    v5 <- BinaryOperation v1, '|', v4
+    Reassign v1, v5
+    v6 <- LoadUndefined
+    v7 <- CreateNamedVariable 'dummy', 'var', v6
+    v8 <- LoadInteger '1'
+    v9 <- Compare v1, '===', v8
+    BeginIf v9
+        v10 <- LoadFloat '277.5'
+        Reassign v3, v10
+    BeginElse
+        v11 <- LoadInteger '2'
+        v12 <- Compare v1, '===', v11
+        BeginIf v12
+            v13 <- LoadInteger '0'
+            Reassign v3, v13
+        BeginElse
+            v14 <- LoadFloat '527.5'
+            Reassign v7, v14
+            v15 <- LoadFloat '958.5'
+            Reassign v7, v15
+            v16 <- LoadFloat '1143.5'
+            Reassign v7, v16
+            v17 <- LoadFloat '1368.5'
+            Reassign v7, v17
+            v18 <- LoadFloat '1558.5'
+            Reassign v7, v18
+            v19 <- LoadFloat '277.5'
+            Reassign v3, v19
+        EndIf
+    EndIf
+    v20 <- UnaryOperation '+', v3
+    Return v20
+EndPlainFunction
+v21 <- CallFunction v0, []
+v22 <- CallFunction v0, []
+v23 <- LoadFloat '277.5'
+v24 <- CallFunction v0, []
+
+
+function f(a1) {
+    var x;
+    a1 = a1 | 0;
+    var dummy;
+    if (a1 === 1) {
+        x = 277.5;
+    } else {
+        if (a1 === 2) {
+            x = 0;
+        } else {
+            dummy = 527.5;
+            dummy = 958.5;
+            dummy = 1143.5;
+            dummy = 1368.5;
+            dummy = 1558.5;
+            x = 277.5;
+        }
+    }
+    return +x;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-633497.fzil

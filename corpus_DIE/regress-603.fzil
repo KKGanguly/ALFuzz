@@ -1,0 +1,114 @@
+v0 <- LoadRegExp 'b..' ''
+v1 <- CreateNamedVariable 're', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadString 'abcdefghijklm'
+    v4 <- CallFunction v1, [v3]
+    v5 <- LoadString 'z'
+    v6 <- BinaryOperation v4, '+', v5
+    Return v6
+EndPlainFunction
+v7 <- CallFunction v2, []
+v8 <- LoadRegExp 'c..' ''
+v9 <- CreateNamedVariable 're1', 'var', v8
+v10 <- CreateNamedVariable 'Function', 'none'
+v11 <- GetProperty v10, 'prototype'
+v12 <- GetProperty v11, 'call'
+SetProperty v9, 'call', v12
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadNull
+    v15 <- LoadString 'abcdefghijklm'
+    v16 <- CallMethod v9, 'call', [v14, v15]
+    v17 <- LoadString 'z'
+    v18 <- BinaryOperation v16, '+', v17
+EndPlainFunction
+v19 <- CallFunction v13, []
+v20 <- LoadRegExp 'd..' ''
+v21 <- CreateNamedVariable 're2', 'var', v20
+v22 <- BeginPlainFunction -> 
+    v23 <- LoadNull
+    v24 <- LoadString 'abcdefghijklm'
+    v25 <- GetProperty v10, 'prototype'
+    v26 <- GetProperty v25, 'call'
+    v27 <- CallMethod v26, 'call', [v21, v23, v24]
+    v28 <- LoadString 'z'
+    v29 <- BinaryOperation v27, '+', v28
+EndPlainFunction
+v30 <- CallFunction v22, []
+v31 <- LoadRegExp 'e..' ''
+v32 <- CreateNamedVariable 're3', 'var', v31
+v33 <- BeginPlainFunction -> 
+    v34 <- LoadNull
+    v35 <- LoadString 'abcdefghijklm'
+    v36 <- CreateArray [v34, v35]
+    v37 <- GetProperty v10, 'prototype'
+    v38 <- GetProperty v37, 'call'
+    v39 <- CallMethod v38, 'apply', [v32, v36]
+    v40 <- LoadString 'z'
+    v41 <- BinaryOperation v39, '+', v40
+EndPlainFunction
+v42 <- CallFunction v33, []
+v43 <- LoadRegExp 'f..' ''
+v44 <- CreateNamedVariable 're4', 'var', v43
+v45 <- BeginPlainFunction -> 
+    v46 <- LoadNull
+    v47 <- LoadString 'abcdefghijklm'
+    v48 <- CreateArray [v47]
+    v49 <- GetProperty v10, 'prototype'
+    v50 <- GetProperty v49, 'apply'
+    v51 <- CallMethod v50, 'call', [v44, v46, v48]
+    v52 <- LoadString 'z'
+    v53 <- BinaryOperation v51, '+', v52
+EndPlainFunction
+v54 <- CallFunction v45, []
+v55 <- LoadRegExp 'g..' ''
+v56 <- CreateNamedVariable 're5', 'var', v55
+v57 <- BeginPlainFunction -> 
+    v58 <- LoadNull
+    v59 <- LoadString 'abcdefghijklm'
+    v60 <- CreateArray [v59]
+    v61 <- CreateArray [v58, v60]
+    v62 <- GetProperty v10, 'prototype'
+    v63 <- GetProperty v62, 'apply'
+    v64 <- CallMethod v63, 'apply', [v44, v61]
+    v65 <- LoadString 'z'
+    v66 <- BinaryOperation v64, '+', v65
+EndPlainFunction
+v67 <- CallFunction v57, []
+
+
+var re = /b../;
+function f2() {
+    return re("abcdefghijklm") + "z";
+}
+f2();
+var re1 = /c../;
+re1.call = Function.prototype.call;
+function f13() {
+    re1.call(null, "abcdefghijklm") + "z";
+}
+f13();
+var re2 = /d../;
+function f22() {
+    Function.prototype.call.call(re2, null, "abcdefghijklm") + "z";
+}
+f22();
+var re3 = /e../;
+function f33() {
+    const v36 = [null,"abcdefghijklm"];
+    Function.prototype.call.apply(re3, v36) + "z";
+}
+f33();
+var re4 = /f../;
+function f45() {
+    const v48 = ["abcdefghijklm"];
+    Function.prototype.apply.call(re4, null, v48) + "z";
+}
+f45();
+var re5 = /g../;
+function f57() {
+    const v61 = [null,["abcdefghijklm"]];
+    Function.prototype.apply.apply(re4, v61) + "z";
+}
+f57();
+
+FuzzIL program written to corpus/regress-603.fzil

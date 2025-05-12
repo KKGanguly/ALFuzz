@@ -1,0 +1,25 @@
+v0 <- LoadThis
+v1 <- LoadInteger '1'
+v2 <- LoadBoolean 'true'
+v3 <- LoadBoolean 'true'
+v4 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v2
+    ObjectLiteralAddProperty `enumerable`, v3
+    ObjectLiteralAddProperty `value`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v0, v1, v5]
+v8 <- LoadInteger '3'
+v9 <- LoadThis
+v10 <- GetElement v9, '1'
+v11 <- LoadString '1'
+v12 <- LoadThis
+v13 <- CallMethod v12, 'hasOwnProperty', [v11]
+
+
+Object.defineProperty(this, 1, { configurable: true, enumerable: true, value: 3 });
+this[1];
+this.hasOwnProperty("1");
+
+FuzzIL program written to corpus/regress-1112.fzil

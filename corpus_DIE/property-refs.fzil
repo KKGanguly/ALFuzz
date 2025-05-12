@@ -1,0 +1,95 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'outer'
+    v3 <- GetProperty v2, 'x'
+    v4 <- GetProperty v1, 'outer'
+    v5 <- GetProperty v4, 'inner'
+    v6 <- GetProperty v5, 'y'
+    v7 <- BinaryOperation v3, '|', v6
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9, v10, v11
+    v12 <- GetProperty v9, 'outer'
+    SetProperty v12, 'x', v10
+    v13 <- GetProperty v9, 'outer'
+    v14 <- GetProperty v13, 'inner'
+    SetProperty v14, 'y', v11
+EndPlainFunction
+v15 <- BeginPlainFunction -> v16, v17
+    v18 <- LoadInteger '0'
+    v19 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v19
+    v20 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v18
+        ObjectLiteralAddProperty `inner`, v20
+    v21 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `outer`, v21
+    v22 <- EndObjectLiteral
+    v23 <- CreateNamedVariable 'object', 'var', v22
+    v24 <- CallFunction v8, [v23, v16, v17]
+    v25 <- CallFunction v0, [v23]
+    Return v25
+EndPlainFunction
+BeginForLoopInitializer
+    v26 <- LoadInteger '0'
+BeginForLoopCondition -> v27
+    v28 <- LoadInteger '5'
+    v29 <- Compare v27, '<', v28
+BeginForLoopAfterthought v29 -> v30
+    v31 <- UnaryOperation v30, '++'
+BeginForLoopBody -> v32
+    v33 <- CallFunction v15, [v32, v32]
+EndForLoop
+v34 <- LoadInteger '6'
+v35 <- LoadInteger '6'
+v36 <- CallFunction v15, [v34, v35]
+v37 <- LoadInteger '42'
+v38 <- LoadInteger '87'
+v39 <- BinaryOperation v37, '|', v38
+v40 <- LoadInteger '42'
+v41 <- LoadInteger '87'
+v42 <- CallFunction v15, [v40, v41]
+v43 <- LoadInteger '42'
+v44 <- LoadInteger '87'
+v45 <- BinaryOperation v43, '|', v44
+v46 <- LoadInteger '42'
+v47 <- LoadInteger '87'
+v48 <- CallFunction v15, [v46, v47]
+v49 <- LoadInteger '42'
+v50 <- LoadInteger '99'
+v51 <- BinaryOperation v49, '|', v50
+v52 <- LoadInteger '42'
+v53 <- LoadString '99'
+v54 <- CallFunction v15, [v52, v53]
+
+
+function Load(a1) {
+    return a1.outer.x | a1.outer.inner.y;
+}
+function StoreXY(a9, a10, a11) {
+    const t4 = a9.outer;
+    t4.x = a10;
+    const t6 = a9.outer.inner;
+    t6.y = a11;
+}
+function LoadXY(a16, a17) {
+    const v20 = { y: 0 };
+    const v21 = { x: 0, inner: v20 };
+    var object = { outer: v21 };
+    StoreXY(object, a16, a17);
+    return Load(object);
+}
+for (let i27 = 0; i27 < 5; i27++) {
+    LoadXY(i27, i27);
+}
+LoadXY(6, 6);
+42 | 87;
+LoadXY(42, 87);
+42 | 87;
+LoadXY(42, 87);
+42 | 99;
+LoadXY(42, "99");
+
+FuzzIL program written to corpus/property-refs.fzil

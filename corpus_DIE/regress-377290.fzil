@@ -1,0 +1,59 @@
+v0 <- LoadString 'constructor'
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadInteger '42'
+    ThrowException v2
+EndPlainFunction
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- GetProperty v3, 'prototype'
+v5 <- CallMethod v4, '__defineGetter__', [v0, v1]
+v6 <- BeginPlainFunction -> 
+    v7 <- CreateArray []
+    v8 <- CallMethod v7, 'push', []
+EndPlainFunction
+v9 <- CreateArray [v6]
+v10 <- CreateNamedVariable '__v_7', 'none'
+Reassign v10, v9
+BeginForLoopInitializer
+    v11 <- LoadInteger '0'
+BeginForLoopCondition -> v12
+    v13 <- LoadInteger '5'
+    v14 <- Compare v12, '<', v13
+BeginForLoopAfterthought v14 -> v15
+    v16 <- UnaryOperation '++', v15
+BeginForLoopBody -> v17
+    v18 <- CreateNamedVariable '__v_7', 'none'
+    BeginForInLoop v18 -> v19
+        v20 <- LoadString ' -> '
+        v21 <- GetComputedProperty v18, v19
+        v22 <- CreateNamedVariable 'print', 'none'
+        v23 <- CallFunction v22, [v19, v20, v21]
+        v24 <- CreateNamedVariable 'gc', 'none'
+        v25 <- CallFunction v24, []
+        BeginTry
+            v26 <- CallComputedMethod v18, v19, []
+        BeginCatch -> v27
+        EndTryCatch
+    EndForInLoop
+EndForLoop
+
+
+function f1() {
+    throw 42;
+}
+Object.prototype.__defineGetter__("constructor", f1);
+function f6() {
+    ([]).push();
+}
+__v_7 = [f6];
+for (let i12 = 0; i12 < 5; ++i12) {
+    for (const v19 in __v_7) {
+        print(v19, " -> ", __v_7[v19]);
+        gc();
+        try {
+            __v_7[v19]();
+        } catch(e27) {
+        }
+    }
+}
+
+FuzzIL program written to corpus/regress-377290.fzil

@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- CallFunction v2, [v1]
+    v4 <- Compare v1, '===', v3
+    Return v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- Construct v5, []
+v7 <- CreateNamedVariable 'obj', 'var', v6
+v8 <- Construct v5, []
+v9 <- CreateNamedVariable 'obj2', 'var', v8
+v10 <- Compare v7, '==', v7
+v11 <- CallFunction v0, [v7]
+v12 <- LoadString 'foo'
+v13 <- CallFunction v0, [v12]
+
+
+function StrictCompare(a1) {
+    return a1 === Object(a1);
+}
+const v6 = new Object();
+var obj = v6;
+const v8 = new Object();
+var obj2 = v8;
+obj == obj;
+StrictCompare(obj);
+StrictCompare("foo");
+
+FuzzIL program written to corpus/regress-2291.fzil

@@ -1,0 +1,139 @@
+v0 <- CreateNamedVariable 'BigUint64Array', 'none'
+v1 <- CreateNamedVariable 'BigInt64Array', 'none'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'TypedArrayConstructors', 'let', v2
+BeginForOfLoop v3 -> v4
+    v5 <- BeginPlainFunction -> v6
+        v7 <- LoadBoolean 'false'
+        v8 <- CreateNamedVariable 'didRun', 'var', v7
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `valueOf` -> v9
+                v10 <- LoadBoolean 'true'
+                Reassign v8, v10
+                v11 <- LoadInteger '42'
+                Return v11
+            EndObjectLiteralMethod
+        v12 <- EndObjectLiteral
+        SetElement v6, '0', v12
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `didRun`, v8
+            ObjectLiteralAddProperty `array`, v6
+        v13 <- EndObjectLiteral
+        Return v13
+    EndPlainFunction
+    v14 <- CreateNamedVariable 'keyedSta', 'let', v5
+    BeginForLoopInitializer
+        v15 <- LoadInteger '0'
+    BeginForLoopCondition -> v16
+        v17 <- LoadInteger '3'
+        v18 <- Compare v16, '<', v17
+    BeginForLoopAfterthought v18 -> v19
+        v20 <- UnaryOperation '++', v19
+    BeginForLoopBody -> v21
+        v22 <- LoadInteger '1'
+        v23 <- Construct v4, [v22]
+        v24 <- CallFunction v14, [v23]
+        v25 <- CreateNamedVariable '', 'var', v24
+        v26 <- CreateNamedVariable 'didRun', 'none'
+        v27 <- CreateNamedVariable 'array', 'none'
+        v28 <- GetElement v27, '0'
+        v29 <- LoadInteger '42'
+        v30 <- Construct v4, []
+        v31 <- CallFunction v14, [v30]
+        v32 <- CreateNamedVariable '', 'var', v31
+    EndForLoop
+EndForOfLoop
+BeginDoWhileLoopBody
+    v33 <- BeginPlainFunction -> v34
+        v35 <- LoadBoolean 'false'
+        v36 <- CreateNamedVariable 'didRun', 'var', v35
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `valueOf` -> v37
+                v38 <- LoadBoolean 'true'
+                Reassign v36, v38
+                v39 <- LoadInteger '42'
+                Return v39
+            EndObjectLiteralMethod
+        v40 <- EndObjectLiteral
+        SetElement v34, '0', v40
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `didRun`, v36
+            ObjectLiteralAddProperty `array`, v34
+        v41 <- EndObjectLiteral
+        Return v41
+    EndPlainFunction
+    v42 <- CreateNamedVariable 'keyedSta', 'let', v33
+    BeginForLoopInitializer
+        v43 <- LoadInteger '0'
+    BeginForLoopCondition -> v44
+        v45 <- LoadInteger '3'
+        v46 <- Compare v44, '<', v45
+    BeginForLoopAfterthought v46 -> v47
+        v48 <- UnaryOperation '++', v47
+    BeginForLoopBody -> v49
+        BeginForOfLoop v3 -> v50
+            v51 <- LoadInteger '1'
+            v52 <- Construct v50, [v51]
+            v53 <- CallFunction v42, [v52]
+            v54 <- CreateNamedVariable '', 'var', v53
+            v55 <- CreateNamedVariable 'didRun', 'none'
+            v56 <- CreateNamedVariable 'array', 'none'
+            v57 <- GetElement v56, '0'
+            v58 <- LoadInteger '42'
+            v59 <- Construct v50, []
+            v60 <- CallFunction v42, [v59]
+            v61 <- CreateNamedVariable '', 'var', v60
+        EndForOfLoop
+    EndForLoop
+BeginDoWhileLoopHeader
+    v62 <- LoadBoolean 'false'
+EndDoWhileLoop v62
+
+
+let TypedArrayConstructors = [BigUint64Array,BigInt64Array];
+for (const v4 of TypedArrayConstructors) {
+    function f5(a6) {
+        var didRun = false;
+        const v12 = {
+            valueOf() {
+                didRun = true;
+                return 42;
+            },
+        };
+        a6[0] = v12;
+        return { didRun: didRun, array: a6 };
+    }
+    let keyedSta = f5;
+    for (let i16 = 0; i16 < 3; ++i16) {
+        const v23 = new v4(1);
+        var  = keyedSta(v23);
+        array[0];
+        const v30 = new v4();
+        var  = keyedSta(v30);
+    }
+}
+do {
+    function f33(a34) {
+        var didRun = false;
+        const v40 = {
+            valueOf() {
+                didRun = true;
+                return 42;
+            },
+        };
+        a34[0] = v40;
+        return { didRun: didRun, array: a34 };
+    }
+    let keyedSta = f33;
+    for (let i44 = 0; i44 < 3; ++i44) {
+        for (const v50 of TypedArrayConstructors) {
+            const v52 = new v50(1);
+            var  = keyedSta(v52);
+            array[0];
+            const v59 = new v50();
+            var  = keyedSta(v59);
+        }
+    }
+} while (false)
+
+FuzzIL program written to corpus/bigintarray-keyedstore-tobigint.fzil

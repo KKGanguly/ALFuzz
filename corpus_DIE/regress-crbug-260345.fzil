@@ -1,0 +1,95 @@
+v0 <- LoadInteger '100000'
+v1 <- CreateNamedVariable 'steps', 'var', v0
+v2 <- LoadUndefined
+v3 <- LoadString 'go on'
+v4 <- CreateArray [v2, v3]
+v5 <- CreateNamedVariable 'undefined_values', 'var', v4
+v6 <- LoadNull
+v7 <- LoadString 'go on'
+v8 <- CreateArray [v6, v7]
+v9 <- CreateNamedVariable 'null_values', 'var', v8
+v10 <- BeginPlainFunction -> v11
+    v12 <- BinaryOperation v11, '/', v1
+    v13 <- LoadInteger '0'
+    v14 <- BinaryOperation v12, '|', v13
+    v15 <- GetComputedProperty v5, v14
+    Return v15
+EndPlainFunction
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadInteger '0'
+    v18 <- CreateNamedVariable 'objects', 'var', v17
+    BeginForLoopInitializer
+        v19 <- LoadInteger '0'
+    BeginForLoopCondition -> v20
+        v21 <- LoadInteger '2'
+        v22 <- BinaryOperation v21, '*', v1
+        v23 <- Compare v20, '<', v22
+    BeginForLoopAfterthought v23 -> v24
+        v25 <- UnaryOperation v24, '++'
+    BeginForLoopBody -> v26
+        v27 <- LoadUndefined
+        v28 <- CallFunction v10, [v26]
+        v29 <- Compare v27, '==', v28
+        v30 <- UnaryOperation v18, '++'
+        v31 <- BinaryOperation v29, '&&', v30
+    EndForLoop
+    Return v18
+EndPlainFunction
+v32 <- CallFunction v16, []
+v33 <- BeginPlainFunction -> v34
+    v35 <- BinaryOperation v34, '/', v1
+    v36 <- LoadInteger '0'
+    v37 <- BinaryOperation v35, '|', v36
+    v38 <- GetComputedProperty v9, v37
+    Return v38
+EndPlainFunction
+v39 <- BeginPlainFunction -> 
+    v40 <- LoadInteger '0'
+    v41 <- CreateNamedVariable 'objects', 'var', v40
+    BeginForLoopInitializer
+        v42 <- LoadInteger '0'
+    BeginForLoopCondition -> v43
+        v44 <- LoadInteger '2'
+        v45 <- BinaryOperation v44, '*', v1
+        v46 <- Compare v43, '<', v45
+    BeginForLoopAfterthought v46 -> v47
+        v48 <- UnaryOperation v47, '++'
+    BeginForLoopBody -> v49
+        v50 <- LoadNull
+        v51 <- CallFunction v33, [v49]
+        v52 <- Compare v50, '==', v51
+        v53 <- UnaryOperation v41, '++'
+        v54 <- BinaryOperation v52, '&&', v53
+    EndForLoop
+    Return v41
+EndPlainFunction
+v55 <- CallFunction v39, []
+
+
+var steps = 100000;
+var undefined_values = [,"go on"];
+var null_values = [null,"go on"];
+function get_undefined_object(a11) {
+    return undefined_values[(a11 / steps) | 0];
+}
+function test_undefined() {
+    var objects = 0;
+    for (let i20 = 0; i20 < (2 * steps); i20++) {
+        (undefined == get_undefined_object(i20)) && objects++;
+    }
+    return objects;
+}
+test_undefined();
+function get_null_object(a34) {
+    return null_values[(a34 / steps) | 0];
+}
+function test_null() {
+    var objects = 0;
+    for (let i43 = 0; i43 < (2 * steps); i43++) {
+        (null == get_null_object(i43)) && objects++;
+    }
+    return objects;
+}
+test_null();
+
+FuzzIL program written to corpus/regress-crbug-260345.fzil

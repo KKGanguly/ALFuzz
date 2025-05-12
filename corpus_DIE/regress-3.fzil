@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'f0', 'var', v2
+    v4 <- LoadInteger '1'
+    v5 <- CreateNamedVariable 'f1', 'var', v4
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v6 <- LoadInteger '0'
+        v7 <- Compare v1, '>', v6
+    BeginForLoopAfterthought v7
+        v8 <- LoadInteger '1'
+        v9 <- BinaryOperation v1, '-', v8
+        Reassign v1, v9
+    BeginForLoopBody
+        v10 <- BinaryOperation v3, '+', v5
+        v11 <- CreateNamedVariable 'f2', 'var', v10
+        Reassign v3, v5
+        Reassign v5, v11
+    EndForLoop
+    Return v3
+EndPlainFunction
+v12 <- LoadInteger '2111485077978050'
+v13 <- LoadInteger '75'
+v14 <- CallFunction v0, [v13]
+
+
+function fib(a1) {
+    var f0 = 0;
+    var f1 = 1;
+    for (; a1 > 0; a1 = a1 - 1) {
+        var f2 = f0 + f1;
+        f0 = f1;
+        f1 = f2;
+    }
+    return f0;
+}
+fib(75);
+
+FuzzIL program written to corpus/regress-3.fzil

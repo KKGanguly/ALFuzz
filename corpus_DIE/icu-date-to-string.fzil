@@ -1,0 +1,20 @@
+v0 <- CreateNamedVariable 'Date', 'none'
+v1 <- LoadInteger '1990'
+v2 <- LoadInteger '0'
+v3 <- LoadInteger '0'
+v4 <- Construct v0, [v1, v2, v3]
+v5 <- CallMethod v4, 'toString', []
+v6 <- LoadString 'Sat Jun 30 1990 00:00:00 GMT+0200 (Mitteleuropäische Sommerzeit)'
+v7 <- LoadInteger '1990'
+v8 <- LoadInteger '6'
+v9 <- LoadInteger '0'
+v10 <- Construct v0, [v7, v8, v9]
+v11 <- CallMethod v10, 'toString', []
+
+
+const v4 = new Date(1990, 0, 0);
+v4.toString();
+const v10 = new Date(1990, 6, 0);
+v10.toString();
+
+FuzzIL program written to corpus/icu-date-to-string.fzil

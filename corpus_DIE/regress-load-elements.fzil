@@ -1,0 +1,51 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '1'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation '++', v7
+    BeginForLoopBody -> v9
+        v10 <- LoadInteger '0'
+        SetProperty v1, 'prop', v10
+        v11 <- GetElement v2, '0'
+        v12 <- CreateNamedVariable 'x', 'var', v11
+    EndForLoop
+EndPlainFunction
+v13 <- CreateNamedVariable 'Object', 'none'
+v14 <- Construct v13, []
+v15 <- CreateNamedVariable 'o', 'none'
+Reassign v15, v14
+BeginObjectLiteral
+v16 <- EndObjectLiteral
+v17 <- CreateNamedVariable 'a', 'none'
+Reassign v17, v16
+v18 <- LoadInteger '1'
+v19 <- CreateNamedVariable 'a', 'none'
+SetElement v19, '0', v18
+v20 <- CreateNamedVariable 'o', 'none'
+v21 <- CallFunction v0, [v20, v19]
+v22 <- Construct v13, []
+Reassign v20, v22
+v23 <- CallFunction v0, [v20, v19]
+v24 <- LoadString ''
+v25 <- CallFunction v0, [v20, v24]
+
+
+function bad_func(a1, a2) {
+    for (let i4 = 0; i4 < 1; ++i4) {
+        a1.prop = 0;
+        var x = a2[0];
+    }
+}
+const v14 = new Object();
+o = v14;
+a = {};
+a[0] = 1;
+bad_func(o, a);
+const v22 = new Object();
+bad_func(o = v22, a);
+bad_func(o, "");
+
+FuzzIL program written to corpus/regress-load-elements.fzil

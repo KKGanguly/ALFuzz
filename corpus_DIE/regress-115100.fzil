@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    SetProperty v1, 'prop', v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadNull
+    v5 <- CreateNamedVariable 'Object', 'none'
+    v6 <- CallMethod v5, 'create', [v4]
+    Return v6
+EndPlainFunction
+v7 <- CallFunction v3, []
+v8 <- CallFunction v0, [v7]
+v9 <- CallFunction v3, []
+v10 <- CallFunction v0, [v9]
+v11 <- CallFunction v3, []
+v12 <- CallFunction v0, [v11]
+
+
+function foo(a1) {
+    a1.prop = 0;
+}
+function mk() {
+    return Object.create(null);
+}
+foo(mk());
+foo(mk());
+foo(mk());
+
+FuzzIL program written to corpus/regress-115100.fzil

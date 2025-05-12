@@ -1,0 +1,24 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'const', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- GetElement v1, '4294967295'
+    Return v3
+EndPlainFunction
+v4 <- LoadUndefined
+v5 <- CallFunction v2, []
+v6 <- LoadUndefined
+v7 <- CallFunction v2, []
+v8 <- LoadUndefined
+v9 <- CallFunction v2, []
+
+
+const o = {};
+function foo() {
+    return o[4294967295];
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-768367.fzil

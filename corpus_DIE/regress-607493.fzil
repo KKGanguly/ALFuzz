@@ -1,0 +1,60 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'a', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        BeginForInLoop v3 -> v5
+            BeginTry
+                Return
+            BeginCatch -> v6
+                Continue
+            EndTryCatch
+        EndForInLoop
+    EndPlainFunction
+    v7 <- CallFunction v4, []
+EndPlainFunction
+v8 <- CallFunction v0, []
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadInteger '1'
+    v11 <- CreateArray [v10]
+    v12 <- CreateNamedVariable 'a', 'var', v11
+    v13 <- BeginPlainFunction -> 
+        BeginForInLoop v12 -> v14
+            BeginIf v14
+            EndIf
+            Continue
+        EndForInLoop
+    EndPlainFunction
+    v15 <- CallFunction v13, []
+EndPlainFunction
+v16 <- CallFunction v9, []
+
+
+function ForInTryCatchContrinueOsr() {
+    var a = [1];
+    function g() {
+        for (const v5 in a) {
+            try {
+                return;
+            } catch(e6) {
+                continue;
+            }
+        }
+    }
+    g();
+}
+ForInTryCatchContrinueOsr();
+function ForInContinueNestedOsr() {
+    var a = [1];
+    function g() {
+        for (const v14 in a) {
+            if (v14) {
+            }
+            continue;
+        }
+    }
+    g();
+}
+ForInContinueNestedOsr();
+
+FuzzIL program written to corpus/regress-607493.fzil

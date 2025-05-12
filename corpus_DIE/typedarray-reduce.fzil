@@ -1,0 +1,870 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- CreateNamedVariable 'Int8Array', 'none'
+v2 <- CreateNamedVariable 'Uint16Array', 'none'
+v3 <- CreateNamedVariable 'Int16Array', 'none'
+v4 <- CreateNamedVariable 'Uint32Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v7 <- CreateNamedVariable 'Float32Array', 'none'
+v8 <- CreateNamedVariable 'Float64Array', 'none'
+v9 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8]
+v10 <- CreateNamedVariable 'typedArrayConstructors', 'var', v9
+v11 <- BeginPlainFunction -> v12
+    v13 <- CreateNamedVariable 'Array', 'none'
+    v14 <- TestInstanceOf v12, v13
+    BeginIf v14
+        v15 <- GetProperty v12, 'length'
+        v16 <- Construct v13, [v15]
+        v17 <- CreateNamedVariable 'newArray', 'var', v16
+        BeginForInLoop v12 -> v18
+            v19 <- GetComputedProperty v12, v18
+            SetComputedProperty v17, v18, v19
+        EndForInLoop
+        Return v17
+    EndIf
+    Return v12
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21, v22
+    v23 <- CreateArray []
+    v24 <- CreateNamedVariable 'record', 'var', v23
+    v25 <- BeginPlainFunction -> v26, v27, v28, v29
+        v30 <- LoadInteger '4'
+        v31 <- LoadArguments
+        v32 <- GetProperty v31, 'length'
+        v33 <- LoadString '(number of arguments: '
+        v34 <- BinaryOperation v22, '+', v33
+        v35 <- LoadArguments
+        v36 <- GetProperty v35, 'length'
+        v37 <- BinaryOperation v34, '+', v36
+        v38 <- LoadString ')'
+        v39 <- BinaryOperation v37, '+', v38
+        v40 <- LoadString 'number'
+        v41 <- TypeOf v28
+        v42 <- LoadString '(index must be number)'
+        v43 <- BinaryOperation v22, '+', v42
+        v44 <- GetComputedProperty v29, v28
+        v45 <- LoadString '(current argument is at index)'
+        v46 <- BinaryOperation v22, '+', v45
+        v47 <- GetProperty v24, 'length'
+        v48 <- LoadInteger '0'
+        v49 <- Compare v47, '>', v48
+        BeginIf v49
+            v50 <- GetProperty v24, 'length'
+            v51 <- LoadInteger '1'
+            v52 <- BinaryOperation v50, '-', v51
+            v53 <- GetComputedProperty v24, v52
+            v54 <- CreateNamedVariable 'prevRecord', 'var', v53
+            v55 <- GetProperty v54, 'length'
+            v56 <- LoadInteger '1'
+            v57 <- BinaryOperation v55, '-', v56
+            v58 <- GetComputedProperty v54, v57
+            v59 <- CreateNamedVariable 'prevResult', 'var', v58
+            v60 <- LoadString '(prev result -> current input)'
+            v61 <- BinaryOperation v22, '+', v60
+        EndIf
+        v62 <- CallFunction v11, [v26]
+        v63 <- CallFunction v11, [v27]
+        v64 <- CallFunction v11, [v29]
+        v65 <- CreateArray [v62, v63, v28, v64]
+        v66 <- CreateNamedVariable 'args', 'var', v65
+        v67 <- LoadThis
+        v68 <- LoadArguments
+        v69 <- CallMethod v21, 'apply', [v67, v68]
+        v70 <- CreateNamedVariable 'result', 'var', v69
+        v71 <- CallFunction v11, [v70]
+        v72 <- CallMethod v66, 'push', [v71]
+        v73 <- CallMethod v24, 'push', [v66]
+        Return v70
+    EndPlainFunction
+    v74 <- CreateNamedVariable 'f', 'var', v25
+    SetProperty v74, 'record', v24
+    Return v74
+EndPlainFunction
+v75 <- BeginPlainFunction -> v76, v77, v78, v79, v80, v81, v82
+    v83 <- CallFunction v20, [v81]
+    v84 <- CreateNamedVariable 'rec', 'var', v83
+    v85 <- LoadUndefined
+    v86 <- CreateNamedVariable 'result', 'var', v85
+    v87 <- LoadUndefined
+    v88 <- CreateNamedVariable 'performsCall', 'var', v87
+    v89 <- LoadArguments
+    v90 <- GetProperty v89, 'length'
+    v91 <- LoadInteger '6'
+    v92 <- Compare v90, '>', v91
+    BeginIf v92
+        v93 <- CallComputedMethod v80, v76, [v84, v82]
+        Reassign v86, v93
+    BeginElse
+        v94 <- CallComputedMethod v80, v76, [v84]
+        Reassign v86, v94
+    EndIf
+    v95 <- GetProperty v84, 'record'
+    v96 <- CreateNamedVariable 'calls', 'var', v95
+    v97 <- GetProperty v79, 'length'
+    v98 <- GetProperty v96, 'length'
+    v99 <- LoadString ' (number of calls)'
+    v100 <- BinaryOperation v77, '+', v99
+    BeginForLoopInitializer
+        v101 <- LoadInteger '0'
+    BeginForLoopCondition -> v102
+        v103 <- GetProperty v79, 'length'
+        v104 <- Compare v102, '<', v103
+    BeginForLoopAfterthought v104 -> v105
+        v106 <- UnaryOperation v105, '++'
+    BeginForLoopBody -> v107
+        v108 <- GetComputedProperty v79, v107
+        v109 <- GetComputedProperty v96, v107
+        v110 <- LoadString ' (call '
+        v111 <- BinaryOperation v77, '+', v110
+        v112 <- LoadInteger '1'
+        v113 <- BinaryOperation v107, '+', v112
+        v114 <- BinaryOperation v111, '+', v113
+        v115 <- LoadString ')'
+        v116 <- BinaryOperation v114, '+', v115
+    EndForLoop
+    v117 <- LoadString ' (result)'
+    v118 <- BinaryOperation v77, '+', v117
+EndPlainFunction
+v119 <- BeginPlainFunction -> v120, v121
+    v122 <- BinaryOperation v120, '+', v121
+    Return v122
+EndPlainFunction
+v123 <- BeginPlainFunction -> v124, v125
+    v126 <- BinaryOperation v124, '*', v125
+    Return v126
+EndPlainFunction
+v127 <- BeginPlainFunction -> v128, v129, v130, v131
+    v132 <- LoadInteger '10'
+    v133 <- GetProperty v131, 'length'
+    v134 <- BinaryOperation v133, '-', v130
+    v135 <- LoadInteger '1'
+    v136 <- BinaryOperation v134, '-', v135
+    v137 <- CreateNamedVariable 'Math', 'none'
+    v138 <- CallMethod v137, 'pow', [v132, v136]
+    v139 <- BinaryOperation v129, '*', v138
+    v140 <- BinaryOperation v128, '+', v139
+    Return v140
+EndPlainFunction
+v141 <- BeginPlainFunction -> v142, v143, v144
+    SetComputedProperty v142, v144, v143
+    Return v142
+EndPlainFunction
+BeginForOfLoop v10 -> v145
+    v146 <- LoadInteger '2'
+    v147 <- LoadInteger '4'
+    v148 <- LoadInteger '6'
+    v149 <- CreateArray [v146, v147, v148]
+    v150 <- Construct v145, [v149]
+    v151 <- CreateNamedVariable 'simpleArray', 'var', v150
+    v152 <- LoadString 'reduce'
+    v153 <- LoadString 'SimpleReduceSum'
+    v154 <- LoadInteger '12'
+    v155 <- LoadInteger '0'
+    v156 <- LoadInteger '2'
+    v157 <- LoadInteger '0'
+    v158 <- LoadInteger '2'
+    v159 <- CreateArray [v155, v156, v157, v151, v158]
+    v160 <- LoadInteger '2'
+    v161 <- LoadInteger '4'
+    v162 <- LoadInteger '1'
+    v163 <- LoadInteger '6'
+    v164 <- CreateArray [v160, v161, v162, v151, v163]
+    v165 <- LoadInteger '6'
+    v166 <- LoadInteger '6'
+    v167 <- LoadInteger '2'
+    v168 <- LoadInteger '12'
+    v169 <- CreateArray [v165, v166, v167, v151, v168]
+    v170 <- CreateArray [v159, v164, v169]
+    v171 <- LoadInteger '0'
+    v172 <- CallFunction v75, [v152, v153, v154, v170, v151, v119, v171]
+    v173 <- LoadString 'reduce'
+    v174 <- LoadString 'SimpleReduceProd'
+    v175 <- LoadInteger '48'
+    v176 <- LoadInteger '1'
+    v177 <- LoadInteger '2'
+    v178 <- LoadInteger '0'
+    v179 <- LoadInteger '2'
+    v180 <- CreateArray [v176, v177, v178, v151, v179]
+    v181 <- LoadInteger '2'
+    v182 <- LoadInteger '4'
+    v183 <- LoadInteger '1'
+    v184 <- LoadInteger '8'
+    v185 <- CreateArray [v181, v182, v183, v151, v184]
+    v186 <- LoadInteger '8'
+    v187 <- LoadInteger '6'
+    v188 <- LoadInteger '2'
+    v189 <- LoadInteger '48'
+    v190 <- CreateArray [v186, v187, v188, v151, v189]
+    v191 <- CreateArray [v180, v185, v190]
+    v192 <- LoadInteger '1'
+    v193 <- CallFunction v75, [v173, v174, v175, v191, v151, v123, v192]
+    v194 <- LoadString 'reduce'
+    v195 <- LoadString 'SimpleReduceDec'
+    v196 <- LoadInteger '246'
+    v197 <- LoadInteger '0'
+    v198 <- LoadInteger '2'
+    v199 <- LoadInteger '0'
+    v200 <- LoadInteger '200'
+    v201 <- CreateArray [v197, v198, v199, v151, v200]
+    v202 <- LoadInteger '200'
+    v203 <- LoadInteger '4'
+    v204 <- LoadInteger '1'
+    v205 <- LoadInteger '240'
+    v206 <- CreateArray [v202, v203, v204, v151, v205]
+    v207 <- LoadInteger '240'
+    v208 <- LoadInteger '6'
+    v209 <- LoadInteger '2'
+    v210 <- LoadInteger '246'
+    v211 <- CreateArray [v207, v208, v209, v151, v210]
+    v212 <- CreateArray [v201, v206, v211]
+    v213 <- LoadInteger '0'
+    v214 <- CallFunction v75, [v194, v195, v196, v212, v151, v127, v213]
+    v215 <- LoadString 'reduce'
+    v216 <- LoadString 'SimpleReduceAccumulate'
+    v217 <- LoadInteger '2'
+    v218 <- LoadInteger '4'
+    v219 <- LoadInteger '6'
+    v220 <- CreateArray [v217, v218, v219]
+    v221 <- CreateArray []
+    v222 <- LoadInteger '2'
+    v223 <- LoadInteger '0'
+    v224 <- LoadInteger '2'
+    v225 <- CreateArray [v224]
+    v226 <- CreateArray [v221, v222, v223, v151, v225]
+    v227 <- LoadInteger '2'
+    v228 <- CreateArray [v227]
+    v229 <- LoadInteger '4'
+    v230 <- LoadInteger '1'
+    v231 <- LoadInteger '2'
+    v232 <- LoadInteger '4'
+    v233 <- CreateArray [v231, v232]
+    v234 <- CreateArray [v228, v229, v230, v151, v233]
+    v235 <- LoadInteger '2'
+    v236 <- LoadInteger '4'
+    v237 <- CreateArray [v235, v236]
+    v238 <- LoadInteger '6'
+    v239 <- LoadInteger '2'
+    v240 <- LoadInteger '2'
+    v241 <- LoadInteger '4'
+    v242 <- LoadInteger '6'
+    v243 <- CreateArray [v240, v241, v242]
+    v244 <- CreateArray [v237, v238, v239, v151, v243]
+    v245 <- CreateArray [v226, v234, v244]
+    v246 <- CreateArray []
+    v247 <- CallFunction v75, [v215, v216, v220, v245, v151, v141, v246]
+    v248 <- LoadString 'reduce'
+    v249 <- LoadString 'EmptyReduceSum'
+    v250 <- LoadInteger '0'
+    v251 <- CreateArray []
+    v252 <- CreateArray []
+    v253 <- Construct v145, [v252]
+    v254 <- LoadInteger '0'
+    v255 <- CallFunction v75, [v248, v249, v250, v251, v253, v119, v254]
+    v256 <- LoadString 'reduce'
+    v257 <- LoadString 'EmptyReduceProd'
+    v258 <- LoadInteger '1'
+    v259 <- CreateArray []
+    v260 <- CreateArray []
+    v261 <- Construct v145, [v260]
+    v262 <- LoadInteger '1'
+    v263 <- CallFunction v75, [v256, v257, v258, v259, v261, v123, v262]
+    v264 <- LoadString 'reduce'
+    v265 <- LoadString 'EmptyReduceDec'
+    v266 <- LoadInteger '0'
+    v267 <- CreateArray []
+    v268 <- CreateArray []
+    v269 <- Construct v145, [v268]
+    v270 <- LoadInteger '0'
+    v271 <- CallFunction v75, [v264, v265, v266, v267, v269, v127, v270]
+    v272 <- LoadString 'reduce'
+    v273 <- LoadString 'EmptyReduceAccumulate'
+    v274 <- CreateArray []
+    v275 <- CreateArray []
+    v276 <- CreateArray []
+    v277 <- Construct v145, [v276]
+    v278 <- CreateArray []
+    v279 <- CallFunction v75, [v272, v273, v274, v275, v277, v141, v278]
+    v280 <- LoadString 'reduce'
+    v281 <- LoadString 'EmptyReduceSumNoInit'
+    v282 <- LoadInteger '0'
+    v283 <- CreateArray []
+    v284 <- LoadInteger '0'
+    v285 <- CreateArray [v284]
+    v286 <- Construct v145, [v285]
+    v287 <- CallFunction v75, [v280, v281, v282, v283, v286, v119]
+    v288 <- LoadString 'reduce'
+    v289 <- LoadString 'EmptyReduceProdNoInit'
+    v290 <- LoadInteger '1'
+    v291 <- CreateArray []
+    v292 <- LoadInteger '1'
+    v293 <- CreateArray [v292]
+    v294 <- Construct v145, [v293]
+    v295 <- CallFunction v75, [v288, v289, v290, v291, v294, v123]
+    v296 <- LoadString 'reduce'
+    v297 <- LoadString 'EmptyReduceDecNoInit'
+    v298 <- LoadInteger '0'
+    v299 <- CreateArray []
+    v300 <- LoadInteger '0'
+    v301 <- CreateArray [v300]
+    v302 <- Construct v145, [v301]
+    v303 <- CallFunction v75, [v296, v297, v298, v299, v302, v127]
+    v304 <- LoadString 'reduceRight'
+    v305 <- LoadString 'SimpleReduceRightSum'
+    v306 <- LoadInteger '12'
+    v307 <- LoadInteger '0'
+    v308 <- LoadInteger '6'
+    v309 <- LoadInteger '2'
+    v310 <- LoadInteger '6'
+    v311 <- CreateArray [v307, v308, v309, v151, v310]
+    v312 <- LoadInteger '6'
+    v313 <- LoadInteger '4'
+    v314 <- LoadInteger '1'
+    v315 <- LoadInteger '10'
+    v316 <- CreateArray [v312, v313, v314, v151, v315]
+    v317 <- LoadInteger '10'
+    v318 <- LoadInteger '2'
+    v319 <- LoadInteger '0'
+    v320 <- LoadInteger '12'
+    v321 <- CreateArray [v317, v318, v319, v151, v320]
+    v322 <- CreateArray [v311, v316, v321]
+    v323 <- LoadInteger '0'
+    v324 <- CallFunction v75, [v304, v305, v306, v322, v151, v119, v323]
+    v325 <- LoadString 'reduceRight'
+    v326 <- LoadString 'SimpleReduceRightProd'
+    v327 <- LoadInteger '48'
+    v328 <- LoadInteger '1'
+    v329 <- LoadInteger '6'
+    v330 <- LoadInteger '2'
+    v331 <- LoadInteger '6'
+    v332 <- CreateArray [v328, v329, v330, v151, v331]
+    v333 <- LoadInteger '6'
+    v334 <- LoadInteger '4'
+    v335 <- LoadInteger '1'
+    v336 <- LoadInteger '24'
+    v337 <- CreateArray [v333, v334, v335, v151, v336]
+    v338 <- LoadInteger '24'
+    v339 <- LoadInteger '2'
+    v340 <- LoadInteger '0'
+    v341 <- LoadInteger '48'
+    v342 <- CreateArray [v338, v339, v340, v151, v341]
+    v343 <- CreateArray [v332, v337, v342]
+    v344 <- LoadInteger '1'
+    v345 <- CallFunction v75, [v325, v326, v327, v343, v151, v123, v344]
+    v346 <- LoadString 'reduceRight'
+    v347 <- LoadString 'SimpleReduceRightDec'
+    v348 <- LoadInteger '246'
+    v349 <- LoadInteger '0'
+    v350 <- LoadInteger '6'
+    v351 <- LoadInteger '2'
+    v352 <- LoadInteger '6'
+    v353 <- CreateArray [v349, v350, v351, v151, v352]
+    v354 <- LoadInteger '6'
+    v355 <- LoadInteger '4'
+    v356 <- LoadInteger '1'
+    v357 <- LoadInteger '46'
+    v358 <- CreateArray [v354, v355, v356, v151, v357]
+    v359 <- LoadInteger '46'
+    v360 <- LoadInteger '2'
+    v361 <- LoadInteger '0'
+    v362 <- LoadInteger '246'
+    v363 <- CreateArray [v359, v360, v361, v151, v362]
+    v364 <- CreateArray [v353, v358, v363]
+    v365 <- LoadInteger '0'
+    v366 <- CallFunction v75, [v346, v347, v348, v364, v151, v127, v365]
+    v367 <- LoadString 'reduceRight'
+    v368 <- LoadString 'EmptyReduceRightSum'
+    v369 <- LoadInteger '0'
+    v370 <- CreateArray []
+    v371 <- CreateArray []
+    v372 <- Construct v145, [v371]
+    v373 <- LoadInteger '0'
+    v374 <- CallFunction v75, [v367, v368, v369, v370, v372, v119, v373]
+    v375 <- LoadString 'reduceRight'
+    v376 <- LoadString 'EmptyReduceRightProd'
+    v377 <- LoadInteger '1'
+    v378 <- CreateArray []
+    v379 <- CreateArray []
+    v380 <- Construct v145, [v379]
+    v381 <- LoadInteger '1'
+    v382 <- CallFunction v75, [v375, v376, v377, v378, v380, v123, v381]
+    v383 <- LoadString 'reduceRight'
+    v384 <- LoadString 'EmptyReduceRightDec'
+    v385 <- LoadInteger '0'
+    v386 <- CreateArray []
+    v387 <- CreateArray []
+    v388 <- Construct v145, [v387]
+    v389 <- LoadInteger '0'
+    v390 <- CallFunction v75, [v383, v384, v385, v386, v388, v127, v389]
+    v391 <- LoadString 'reduceRight'
+    v392 <- LoadString 'EmptyReduceRightAccumulate'
+    v393 <- CreateArray []
+    v394 <- CreateArray []
+    v395 <- CreateArray []
+    v396 <- Construct v145, [v395]
+    v397 <- CreateArray []
+    v398 <- CallFunction v75, [v391, v392, v393, v394, v396, v141, v397]
+    v399 <- LoadString 'reduceRight'
+    v400 <- LoadString 'EmptyReduceRightSumNoInit'
+    v401 <- LoadInteger '0'
+    v402 <- CreateArray []
+    v403 <- LoadInteger '0'
+    v404 <- CreateArray [v403]
+    v405 <- Construct v145, [v404]
+    v406 <- CallFunction v75, [v399, v400, v401, v402, v405, v119]
+    v407 <- LoadString 'reduceRight'
+    v408 <- LoadString 'EmptyReduceRightProdNoInit'
+    v409 <- LoadInteger '1'
+    v410 <- CreateArray []
+    v411 <- LoadInteger '1'
+    v412 <- CreateArray [v411]
+    v413 <- Construct v145, [v412]
+    v414 <- CallFunction v75, [v407, v408, v409, v410, v413, v123]
+    v415 <- LoadString 'reduceRight'
+    v416 <- LoadString 'EmptyReduceRightDecNoInit'
+    v417 <- LoadInteger '0'
+    v418 <- CreateArray []
+    v419 <- LoadInteger '0'
+    v420 <- CreateArray [v419]
+    v421 <- Construct v145, [v420]
+    v422 <- CallFunction v75, [v415, v416, v417, v418, v421, v127]
+    v423 <- LoadInteger '1'
+    v424 <- LoadInteger '2'
+    v425 <- LoadInteger '3'
+    v426 <- CreateArray [v423, v424, v425]
+    v427 <- Construct v145, [v426]
+    v428 <- CreateNamedVariable 'arrayPlus', 'var', v427
+    v429 <- CreateNamedVariable 'NaN', 'none'
+    v430 <- LoadInteger '1'
+    v431 <- UnaryOperation '-', v430
+    SetComputedProperty v428, v431, v429
+    v432 <- LoadString '00'
+    SetComputedProperty v428, v432, v429
+    v433 <- LoadString '02'
+    SetComputedProperty v428, v433, v429
+    v434 <- LoadString '-0'
+    SetComputedProperty v428, v434, v429
+    SetProperty v428, 'x', v429
+    v435 <- LoadString 'reduce'
+    v436 <- LoadString 'ArrayWithNonElementPropertiesReduce'
+    v437 <- LoadInteger '6'
+    v438 <- LoadInteger '0'
+    v439 <- LoadInteger '1'
+    v440 <- LoadInteger '0'
+    v441 <- LoadInteger '1'
+    v442 <- CreateArray [v438, v439, v440, v428, v441]
+    v443 <- LoadInteger '1'
+    v444 <- LoadInteger '2'
+    v445 <- LoadInteger '1'
+    v446 <- LoadInteger '3'
+    v447 <- CreateArray [v443, v444, v445, v428, v446]
+    v448 <- LoadInteger '3'
+    v449 <- LoadInteger '3'
+    v450 <- LoadInteger '2'
+    v451 <- LoadInteger '6'
+    v452 <- CreateArray [v448, v449, v450, v428, v451]
+    v453 <- CreateArray [v442, v447, v452]
+    v454 <- LoadInteger '0'
+    v455 <- CallFunction v75, [v435, v436, v437, v453, v428, v119, v454]
+    v456 <- LoadString 'reduceRight'
+    v457 <- LoadString 'ArrayWithNonElementPropertiesReduceRight'
+    v458 <- LoadInteger '6'
+    v459 <- LoadInteger '0'
+    v460 <- LoadInteger '3'
+    v461 <- LoadInteger '2'
+    v462 <- LoadInteger '3'
+    v463 <- CreateArray [v459, v460, v461, v428, v462]
+    v464 <- LoadInteger '3'
+    v465 <- LoadInteger '2'
+    v466 <- LoadInteger '1'
+    v467 <- LoadInteger '5'
+    v468 <- CreateArray [v464, v465, v466, v428, v467]
+    v469 <- LoadInteger '5'
+    v470 <- LoadInteger '1'
+    v471 <- LoadInteger '0'
+    v472 <- LoadInteger '6'
+    v473 <- CreateArray [v469, v470, v471, v428, v472]
+    v474 <- CreateArray [v463, v468, v473]
+    v475 <- LoadInteger '0'
+    v476 <- CallFunction v75, [v456, v457, v458, v474, v428, v119, v475]
+    v477 <- LoadBoolean 'false'
+    v478 <- CreateNamedVariable 'exception', 'var', v477
+    BeginTry
+        v479 <- LoadString 'not a function'
+        v480 <- LoadInteger '1'
+        v481 <- CreateArray [v480]
+        v482 <- Construct v145, [v481]
+        v483 <- CallMethod v482, 'reduce', [v479]
+    BeginCatch -> v484
+        v485 <- LoadBoolean 'true'
+        Reassign v478, v485
+        v486 <- CreateNamedVariable 'TypeError', 'none'
+        v487 <- TestInstanceOf v484, v486
+        v488 <- LoadString 'reduce callback not a function not throwing TypeError'
+        v489 <- LoadString ' is not a function'
+        v490 <- GetProperty v484, 'message'
+        v491 <- CallMethod v490, 'indexOf', [v489]
+        v492 <- LoadInteger '0'
+        v493 <- Compare v491, '>=', v492
+        v494 <- LoadString 'reduce non function TypeError type'
+    EndTryCatch
+    v495 <- LoadBoolean 'false'
+    Reassign v478, v495
+    BeginTry
+        v496 <- LoadString 'not a function'
+        v497 <- LoadInteger '1'
+        v498 <- CreateArray [v497]
+        v499 <- Construct v145, [v498]
+        v500 <- CallMethod v499, 'reduceRight', [v496]
+    BeginCatch -> v501
+        v502 <- LoadBoolean 'true'
+        Reassign v478, v502
+        v503 <- CreateNamedVariable 'TypeError', 'none'
+        v504 <- TestInstanceOf v501, v503
+        v505 <- LoadString 'reduceRight callback not a function not throwing TypeError'
+        v506 <- LoadString ' is not a function'
+        v507 <- GetProperty v501, 'message'
+        v508 <- CallMethod v507, 'indexOf', [v506]
+        v509 <- LoadInteger '0'
+        v510 <- Compare v508, '>=', v509
+        v511 <- LoadString 'reduceRight non function TypeError type'
+    EndTryCatch
+    v512 <- LoadBoolean 'false'
+    Reassign v478, v512
+    BeginTry
+        v513 <- CreateArray []
+        v514 <- Construct v145, [v513]
+        v515 <- CallMethod v514, 'reduce', [v119]
+    BeginCatch -> v516
+        v517 <- LoadBoolean 'true'
+        Reassign v478, v517
+        v518 <- CreateNamedVariable 'TypeError', 'none'
+        v519 <- TestInstanceOf v516, v518
+        v520 <- LoadString 'reduce no initial value not throwing TypeError'
+        v521 <- LoadString 'Reduce of empty array with no initial value'
+        v522 <- GetProperty v516, 'message'
+        v523 <- LoadString 'reduce no initial TypeError type'
+    EndTryCatch
+    v524 <- LoadBoolean 'false'
+    Reassign v478, v524
+    BeginTry
+        v525 <- CreateArray []
+        v526 <- Construct v145, [v525]
+        v527 <- CallMethod v526, 'reduceRight', [v119]
+    BeginCatch -> v528
+        v529 <- LoadBoolean 'true'
+        Reassign v478, v529
+        v530 <- CreateNamedVariable 'TypeError', 'none'
+        v531 <- TestInstanceOf v528, v530
+        v532 <- LoadString 'reduceRight no initial value not throwing TypeError'
+        v533 <- LoadString 'Reduce of empty array with no initial value'
+        v534 <- GetProperty v528, 'message'
+        v535 <- LoadString 'reduceRight no initial TypeError type'
+    EndTryCatch
+    v536 <- BeginPlainFunction -> 
+        v537 <- CreateArray []
+        v538 <- BeginPlainFunction -> 
+        EndPlainFunction
+        v539 <- LoadNull
+        v540 <- GetProperty v145, 'prototype'
+        v541 <- GetProperty v540, 'reduce'
+        v542 <- CallMethod v541, 'call', [v537, v538, v539]
+    EndPlainFunction
+    v543 <- CallFunction v536, []
+    v544 <- CreateNamedVariable 'TypeError', 'none'
+    v545 <- BeginPlainFunction -> 
+        v546 <- CreateArray []
+        v547 <- BeginPlainFunction -> 
+        EndPlainFunction
+        v548 <- LoadNull
+        v549 <- GetProperty v145, 'prototype'
+        v550 <- GetProperty v549, 'reduceRight'
+        v551 <- CallMethod v550, 'call', [v546, v547, v548]
+    EndPlainFunction
+    v552 <- CallFunction v545, []
+    v553 <- LoadInteger '1'
+    v554 <- LoadInteger '2'
+    v555 <- CreateArray [v553, v554]
+    v556 <- Construct v145, [v555]
+    v557 <- CreateNamedVariable 'a', 'var', v556
+    v558 <- LoadString 'length'
+    v559 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v559
+    v560 <- EndObjectLiteral
+    v561 <- CreateNamedVariable 'Object', 'none'
+    v562 <- CallMethod v561, 'defineProperty', [v557, v558, v560]
+    v563 <- LoadInteger '0'
+    v564 <- CallMethod v557, 'reduce', [v119, v563]
+    v565 <- LoadInteger '3'
+    v566 <- LoadInteger '0'
+    v567 <- CreateNamedVariable 'Array', 'none'
+    v568 <- GetProperty v567, 'prototype'
+    v569 <- GetProperty v568, 'reduce'
+    v570 <- CallMethod v569, 'call', [v557, v119, v566]
+    v571 <- LoadInteger '1'
+    v572 <- LoadInteger '0'
+    v573 <- CallMethod v557, 'reduceRight', [v119, v572]
+    v574 <- LoadInteger '3'
+    v575 <- LoadInteger '0'
+    v576 <- GetProperty v567, 'prototype'
+    v577 <- GetProperty v576, 'reduceRight'
+    v578 <- CallMethod v577, 'call', [v557, v119, v575]
+    v579 <- LoadInteger '1'
+    v580 <- LoadInteger '1'
+    v581 <- GetProperty v145, 'prototype'
+    v582 <- GetProperty v581, 'reduce'
+    v583 <- GetProperty v582, 'length'
+    v584 <- LoadInteger '1'
+    v585 <- GetProperty v145, 'prototype'
+    v586 <- GetProperty v585, 'reduceRight'
+    v587 <- GetProperty v586, 'length'
+    v588 <- CreateNamedVariable 'Symbol', 'none'
+    v589 <- GetProperty v588, 'toPrimitive'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v589 -> v590
+            v591 <- LoadString 'Parameter should not be processed when '
+            v592 <- LoadString 'array.[[ViewedArrayBuffer]] is detached.'
+            v593 <- BinaryOperation v591, '+', v592
+            v594 <- LoadInteger '0'
+            Return v594
+        EndObjectLiteralComputedMethod
+    v595 <- EndObjectLiteral
+    v596 <- CreateNamedVariable 'tmp', 'var', v595
+    v597 <- LoadInteger '1'
+    v598 <- LoadInteger '2'
+    v599 <- LoadInteger '3'
+    v600 <- LoadInteger '4'
+    v601 <- LoadInteger '5'
+    v602 <- LoadInteger '6'
+    v603 <- LoadInteger '7'
+    v604 <- LoadInteger '8'
+    v605 <- LoadInteger '9'
+    v606 <- LoadInteger '10'
+    v607 <- CreateArray [v597, v598, v599, v600, v601, v602, v603, v604, v605, v606]
+    v608 <- Construct v145, [v607]
+    v609 <- CreateNamedVariable 'array', 'var', v608
+    v610 <- BeginArrowFunction -> 
+        v611 <- CallMethod v609, 'reduce', [v119, v596]
+        Return v611
+    EndArrowFunction
+    v612 <- CallFunction v610, []
+    v613 <- BeginArrowFunction -> 
+        v614 <- CallMethod v609, 'reduceRight', [v119, v596]
+        Return v614
+    EndArrowFunction
+    v615 <- CallFunction v613, []
+EndForOfLoop
+
+
+var typedArrayConstructors = [Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,Uint8ClampedArray,Float32Array,Float64Array];
+function clone(a12) {
+    if (a12 instanceof Array) {
+        const v16 = new Array(a12.length);
+        var newArray = v16;
+        for (const v18 in a12) {
+            newArray[v18] = a12[v18];
+        }
+        return newArray;
+    }
+    return a12;
+}
+function makeRecorder(a21, a22) {
+    var record = [];
+    function recorder(a26, a27, a28, a29) {
+        arguments.length;
+        ((a22 + "(number of arguments: ") + arguments.length) + ")";
+        typeof a28;
+        a22 + "(index must be number)";
+        a29[a28];
+        a22 + "(current argument is at index)";
+        if (record.length > 0) {
+            var prevRecord = record[record.length - 1];
+            var prevResult = prevRecord[prevRecord.length - 1];
+            a22 + "(prev result -> current input)";
+        }
+        var args = [clone(a26),clone(a27),a28,clone(a29)];
+        var result = a21.apply(this, arguments);
+        args.push(clone(result));
+        record.push(args);
+        return result;
+    }
+    var f = recorder;
+    f.record = record;
+    return f;
+}
+function testReduce(a76, a77, a78, a79, a80, a81, a82) {
+    var rec = makeRecorder(a81);
+    var result;
+    var performsCall;
+    if (arguments.length > 6) {
+        result = a80[a76](rec, a82);
+    } else {
+        result = a80[a76](rec);
+    }
+    var calls = rec.record;
+    a79.length;
+    calls.length;
+    a77 + " (number of calls)";
+    for (let i102 = 0; i102 < a79.length; i102++) {
+        a79[i102];
+        calls[i102];
+        ((a77 + " (call ") + (i102 + 1)) + ")";
+    }
+    a77 + " (result)";
+}
+function sum(a120, a121) {
+    return a120 + a121;
+}
+function prod(a124, a125) {
+    return a124 * a125;
+}
+function dec(a128, a129, a130, a131) {
+    return a128 + (a129 * Math.pow(10, (a131.length - a130) - 1));
+}
+function accumulate(a142, a143, a144) {
+    a142[a144] = a143;
+    return a142;
+}
+for (const v145 of typedArrayConstructors) {
+    const v150 = new v145([2,4,6]);
+    var simpleArray = v150;
+    testReduce("reduce", "SimpleReduceSum", 12, [[0,2,0,simpleArray,2],[2,4,1,simpleArray,6],[6,6,2,simpleArray,12]], simpleArray, sum, 0);
+    testReduce("reduce", "SimpleReduceProd", 48, [[1,2,0,simpleArray,2],[2,4,1,simpleArray,8],[8,6,2,simpleArray,48]], simpleArray, prod, 1);
+    testReduce("reduce", "SimpleReduceDec", 246, [[0,2,0,simpleArray,200],[200,4,1,simpleArray,240],[240,6,2,simpleArray,246]], simpleArray, dec, 0);
+    testReduce("reduce", "SimpleReduceAccumulate", [2,4,6], [[[],2,0,simpleArray,[2]],[[2],4,1,simpleArray,[2,4]],[[2,4],6,2,simpleArray,[2,4,6]]], simpleArray, accumulate, []);
+    const v251 = [];
+    const v253 = new v145([]);
+    testReduce("reduce", "EmptyReduceSum", 0, v251, v253, sum, 0);
+    const v259 = [];
+    const v261 = new v145([]);
+    testReduce("reduce", "EmptyReduceProd", 1, v259, v261, prod, 1);
+    const v267 = [];
+    const v269 = new v145([]);
+    testReduce("reduce", "EmptyReduceDec", 0, v267, v269, dec, 0);
+    const v274 = [];
+    const v275 = [];
+    const v277 = new v145([]);
+    testReduce("reduce", "EmptyReduceAccumulate", v274, v275, v277, accumulate, []);
+    const v283 = [];
+    const v286 = new v145([0]);
+    testReduce("reduce", "EmptyReduceSumNoInit", 0, v283, v286, sum);
+    const v291 = [];
+    const v294 = new v145([1]);
+    testReduce("reduce", "EmptyReduceProdNoInit", 1, v291, v294, prod);
+    const v299 = [];
+    const v302 = new v145([0]);
+    testReduce("reduce", "EmptyReduceDecNoInit", 0, v299, v302, dec);
+    testReduce("reduceRight", "SimpleReduceRightSum", 12, [[0,6,2,simpleArray,6],[6,4,1,simpleArray,10],[10,2,0,simpleArray,12]], simpleArray, sum, 0);
+    testReduce("reduceRight", "SimpleReduceRightProd", 48, [[1,6,2,simpleArray,6],[6,4,1,simpleArray,24],[24,2,0,simpleArray,48]], simpleArray, prod, 1);
+    testReduce("reduceRight", "SimpleReduceRightDec", 246, [[0,6,2,simpleArray,6],[6,4,1,simpleArray,46],[46,2,0,simpleArray,246]], simpleArray, dec, 0);
+    const v370 = [];
+    const v372 = new v145([]);
+    testReduce("reduceRight", "EmptyReduceRightSum", 0, v370, v372, sum, 0);
+    const v378 = [];
+    const v380 = new v145([]);
+    testReduce("reduceRight", "EmptyReduceRightProd", 1, v378, v380, prod, 1);
+    const v386 = [];
+    const v388 = new v145([]);
+    testReduce("reduceRight", "EmptyReduceRightDec", 0, v386, v388, dec, 0);
+    const v393 = [];
+    const v394 = [];
+    const v396 = new v145([]);
+    testReduce("reduceRight", "EmptyReduceRightAccumulate", v393, v394, v396, accumulate, []);
+    const v402 = [];
+    const v405 = new v145([0]);
+    testReduce("reduceRight", "EmptyReduceRightSumNoInit", 0, v402, v405, sum);
+    const v410 = [];
+    const v413 = new v145([1]);
+    testReduce("reduceRight", "EmptyReduceRightProdNoInit", 1, v410, v413, prod);
+    const v418 = [];
+    const v421 = new v145([0]);
+    testReduce("reduceRight", "EmptyReduceRightDecNoInit", 0, v418, v421, dec);
+    const v427 = new v145([1,2,3]);
+    var arrayPlus = v427;
+    arrayPlus[-1] = NaN;
+    arrayPlus["00"] = NaN;
+    arrayPlus["02"] = NaN;
+    arrayPlus["-0"] = NaN;
+    arrayPlus.x = NaN;
+    testReduce("reduce", "ArrayWithNonElementPropertiesReduce", 6, [[0,1,0,arrayPlus,1],[1,2,1,arrayPlus,3],[3,3,2,arrayPlus,6]], arrayPlus, sum, 0);
+    testReduce("reduceRight", "ArrayWithNonElementPropertiesReduceRight", 6, [[0,3,2,arrayPlus,3],[3,2,1,arrayPlus,5],[5,1,0,arrayPlus,6]], arrayPlus, sum, 0);
+    var exception = false;
+    try {
+        const v482 = new v145([1]);
+        v482.reduce("not a function");
+    } catch(e484) {
+        exception = true;
+        e484 instanceof TypeError;
+        e484.message.indexOf(" is not a function") >= 0;
+    }
+    exception = false;
+    try {
+        const v499 = new v145([1]);
+        v499.reduceRight("not a function");
+    } catch(e501) {
+        exception = true;
+        e501 instanceof TypeError;
+        e501.message.indexOf(" is not a function") >= 0;
+    }
+    exception = false;
+    try {
+        const v514 = new v145([]);
+        v514.reduce(sum);
+    } catch(e516) {
+        exception = true;
+        e516 instanceof TypeError;
+        e516.message;
+    }
+    exception = false;
+    try {
+        const v526 = new v145([]);
+        v526.reduceRight(sum);
+    } catch(e528) {
+        exception = true;
+        e528 instanceof TypeError;
+        e528.message;
+    }
+    function f536() {
+        const v537 = [];
+        function f538() {
+        }
+        v145.prototype.reduce.call(v537, f538, null);
+    }
+    f536();
+    function f545() {
+        const v546 = [];
+        function f547() {
+        }
+        v145.prototype.reduceRight.call(v546, f547, null);
+    }
+    f545();
+    const v556 = new v145([1,2]);
+    var a = v556;
+    Object.defineProperty(a, "length", { value: 1 });
+    a.reduce(sum, 0);
+    Array.prototype.reduce.call(a, sum, 0);
+    a.reduceRight(sum, 0);
+    Array.prototype.reduceRight.call(a, sum, 0);
+    v145.prototype.reduce.length;
+    v145.prototype.reduceRight.length;
+    const v589 = Symbol.toPrimitive;
+    const v595 = {
+        [v589]() {
+            "Parameter should not be processed when " + "array.[[ViewedArrayBuffer]] is detached.";
+            return 0;
+        },
+    };
+    var tmp = v595;
+    const v608 = new v145([1,2,3,4,5,6,7,8,9,10]);
+    var array = v608;
+    const v610 = () => {
+        return array.reduce(sum, tmp);
+    };
+    v610();
+    const v613 = () => {
+        return array.reduceRight(sum, tmp);
+    };
+    v613();
+}
+
+FuzzIL program written to corpus/typedarray-reduce.fzil

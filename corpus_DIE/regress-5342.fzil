@@ -1,0 +1,18 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- CreateNamedVariable 'Error', 'none'
+v3 <- CallMethod v2, 'captureStackTrace', [v1]
+v4 <- LoadInteger '1'
+v5 <- UnaryOperation '-', v4
+v6 <- LoadString 'captureStackTrace'
+v7 <- GetProperty v1, 'stack'
+v8 <- CallMethod v7, 'indexOf', [v6]
+
+
+var o = {};
+Error.captureStackTrace(o);
+-1;
+o.stack.indexOf("captureStackTrace");
+
+FuzzIL program written to corpus/regress-5342.fzil

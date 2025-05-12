@@ -1,0 +1,420 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- BeginClassDefinition v1
+    EndClassDefinition
+    BeginBlockStatement
+        v3 <- Construct v2, []
+        v4 <- CreateNamedVariable 's1', 'let', v3
+        v5 <- GetProperty v2, 'prototype'
+        v6 <- GetProperty v4, '__proto__'
+        v7 <- CallMethod v1, 'isArray', [v4]
+        v8 <- LoadInteger '0'
+        v9 <- GetProperty v4, 'length'
+        v10 <- LoadString 'xyz'
+        SetElement v4, '0', v10
+        v11 <- LoadInteger '1'
+        v12 <- GetProperty v4, 'length'
+        v13 <- LoadString 'xyz'
+        v14 <- GetElement v4, '0'
+        v15 <- LoadInteger '42'
+        v16 <- CallMethod v4, 'push', [v15]
+        v17 <- LoadInteger '2'
+        v18 <- GetProperty v4, 'length'
+        v19 <- LoadString 'xyz'
+        v20 <- GetElement v4, '0'
+        v21 <- LoadInteger '42'
+        v22 <- GetElement v4, '1'
+    EndBlockStatement
+    BeginBlockStatement
+        v23 <- LoadInteger '10'
+        v24 <- Construct v2, [v23]
+        v25 <- CreateNamedVariable 's2', 'let', v24
+        v26 <- GetProperty v2, 'prototype'
+        v27 <- GetProperty v25, '__proto__'
+        v28 <- CallMethod v1, 'isArray', [v25]
+        v29 <- LoadInteger '10'
+        v30 <- GetProperty v25, 'length'
+        v31 <- LoadUndefined
+        v32 <- GetElement v25, '0'
+    EndBlockStatement
+    BeginBlockStatement
+        v33 <- LoadInteger '1'
+        v34 <- LoadInteger '2'
+        v35 <- LoadInteger '3'
+        v36 <- CreateArray [v33, v34, v35]
+        v37 <- CreateNamedVariable 'a', 'let', v36
+        v38 <- Construct v2, [v37]
+        v39 <- CreateNamedVariable 's3', 'let', v38
+        v40 <- GetProperty v2, 'prototype'
+        v41 <- GetProperty v39, '__proto__'
+        v42 <- CallMethod v1, 'isArray', [v39]
+        v43 <- LoadInteger '1'
+        v44 <- GetProperty v39, 'length'
+        v45 <- GetElement v39, '0'
+    EndBlockStatement
+    BeginBlockStatement
+        v46 <- LoadInteger '1'
+        v47 <- LoadInteger '2'
+        v48 <- LoadInteger '3'
+        v49 <- Construct v2, [v46, v47, v48]
+        v50 <- CreateNamedVariable 's4', 'let', v49
+        v51 <- GetProperty v2, 'prototype'
+        v52 <- GetProperty v50, '__proto__'
+        v53 <- CallMethod v1, 'isArray', [v50]
+        v54 <- LoadInteger '3'
+        v55 <- GetProperty v50, 'length'
+        v56 <- LoadInteger '1'
+        v57 <- GetElement v50, '0'
+        v58 <- LoadInteger '2'
+        v59 <- GetElement v50, '1'
+        v60 <- LoadInteger '3'
+        v61 <- GetElement v50, '2'
+    EndBlockStatement
+    BeginBlockStatement
+        v62 <- LoadUndefined
+        v63 <- LoadUndefined
+        v64 <- LoadUndefined
+        v65 <- Construct v2, [v62, v63, v64]
+        v66 <- CreateNamedVariable 's5', 'let', v65
+        v67 <- GetProperty v2, 'prototype'
+        v68 <- GetProperty v66, '__proto__'
+        v69 <- CallMethod v1, 'isArray', [v66]
+        v70 <- LoadInteger '3'
+        v71 <- GetProperty v66, 'length'
+        v72 <- LoadUndefined
+        v73 <- GetElement v66, '0'
+        v74 <- LoadUndefined
+        v75 <- GetElement v66, '1'
+        v76 <- LoadUndefined
+        v77 <- GetElement v66, '2'
+    EndBlockStatement
+EndPlainFunction
+v78 <- CallFunction v0, []
+v79 <- BeginPlainFunction -> 
+    v80 <- CreateNamedVariable 'Array', 'none'
+    v81 <- BeginClassDefinition v80
+        BeginClassConstructor -> v82
+            CallSuperConstructor []
+        EndClassConstructor
+    EndClassDefinition
+    v83 <- Construct v81, []
+    v84 <- CreateNamedVariable 's1', 'let', v83
+    v85 <- GetProperty v81, 'prototype'
+    v86 <- GetProperty v84, '__proto__'
+    v87 <- CallMethod v80, 'isArray', [v84]
+    v88 <- LoadInteger '0'
+    v89 <- GetProperty v84, 'length'
+    v90 <- LoadString 'xyz'
+    SetElement v84, '0', v90
+    v91 <- LoadInteger '1'
+    v92 <- GetProperty v84, 'length'
+    v93 <- LoadString 'xyz'
+    v94 <- GetElement v84, '0'
+    v95 <- LoadInteger '42'
+    v96 <- CallMethod v84, 'push', [v95]
+    v97 <- LoadInteger '2'
+    v98 <- GetProperty v84, 'length'
+    v99 <- LoadString 'xyz'
+    v100 <- GetElement v84, '0'
+    v101 <- LoadInteger '42'
+    v102 <- GetElement v84, '1'
+EndPlainFunction
+v103 <- CallFunction v79, []
+v104 <- BeginPlainFunction -> 
+    v105 <- CreateNamedVariable 'Array', 'none'
+    v106 <- BeginClassDefinition v105
+        BeginClassConstructor -> v107, v108
+            CallSuperConstructor [v108]
+        EndClassConstructor
+    EndClassDefinition
+    BeginBlockStatement
+        v109 <- LoadInteger '10'
+        v110 <- LoadString 'ignored arg'
+        v111 <- Construct v106, [v109, v110]
+        v112 <- CreateNamedVariable 's2', 'let', v111
+        v113 <- GetProperty v106, 'prototype'
+        v114 <- GetProperty v112, '__proto__'
+        v115 <- CallMethod v105, 'isArray', [v112]
+        v116 <- LoadInteger '10'
+        v117 <- GetProperty v112, 'length'
+        v118 <- LoadUndefined
+        v119 <- GetElement v112, '0'
+    EndBlockStatement
+    BeginBlockStatement
+        v120 <- LoadInteger '1'
+        v121 <- LoadInteger '2'
+        v122 <- LoadInteger '3'
+        v123 <- CreateArray [v120, v121, v122]
+        v124 <- CreateNamedVariable 'a', 'let', v123
+        v125 <- LoadString 'ignored arg'
+        v126 <- Construct v106, [v124, v125]
+        v127 <- CreateNamedVariable 's3', 'let', v126
+        v128 <- GetProperty v106, 'prototype'
+        v129 <- GetProperty v127, '__proto__'
+        v130 <- CallMethod v105, 'isArray', [v127]
+        v131 <- LoadInteger '1'
+        v132 <- GetProperty v127, 'length'
+        v133 <- GetElement v127, '0'
+    EndBlockStatement
+EndPlainFunction
+v134 <- CallFunction v104, []
+v135 <- BeginPlainFunction -> 
+    v136 <- CreateNamedVariable 'Array', 'none'
+    v137 <- BeginClassDefinition v136
+        BeginClassConstructor -> v138, v139, v140, v141
+            CallSuperConstructor [v139, v140, v141]
+        EndClassConstructor
+    EndClassDefinition
+    BeginBlockStatement
+        v142 <- LoadInteger '1'
+        v143 <- LoadInteger '2'
+        v144 <- LoadInteger '3'
+        v145 <- LoadInteger '4'
+        v146 <- LoadInteger '5'
+        v147 <- Construct v137, [v142, v143, v144, v145, v146]
+        v148 <- CreateNamedVariable 's4', 'let', v147
+        v149 <- GetProperty v137, 'prototype'
+        v150 <- GetProperty v148, '__proto__'
+        v151 <- CallMethod v136, 'isArray', [v148]
+        v152 <- LoadInteger '3'
+        v153 <- GetProperty v148, 'length'
+        v154 <- LoadInteger '1'
+        v155 <- GetElement v148, '0'
+        v156 <- LoadInteger '2'
+        v157 <- GetElement v148, '1'
+        v158 <- LoadInteger '3'
+        v159 <- GetElement v148, '2'
+    EndBlockStatement
+    BeginBlockStatement
+        v160 <- LoadUndefined
+        v161 <- Construct v137, [v160]
+        v162 <- CreateNamedVariable 's5', 'let', v161
+        v163 <- GetProperty v137, 'prototype'
+        v164 <- GetProperty v162, '__proto__'
+        v165 <- CallMethod v136, 'isArray', [v162]
+        v166 <- GetProperty v162, '__proto__'
+        v167 <- GetProperty v137, 'prototype'
+        v168 <- Compare v166, '==', v167
+        v169 <- LoadInteger '3'
+        v170 <- GetProperty v162, 'length'
+        v171 <- LoadUndefined
+        v172 <- GetElement v162, '0'
+        v173 <- LoadUndefined
+        v174 <- GetElement v162, '1'
+        v175 <- LoadUndefined
+        v176 <- GetElement v162, '2'
+    EndBlockStatement
+EndPlainFunction
+v177 <- CallFunction v135, []
+v178 <- BeginPlainFunction -> 
+    v179 <- CreateNamedVariable 'Array', 'none'
+    v180 <- BeginClassDefinition v179
+    EndClassDefinition
+    v181 <- LoadInteger '1'
+    v182 <- LoadInteger '2'
+    v183 <- LoadInteger '3'
+    v184 <- Construct v180, [v181, v182, v183]
+    v185 <- CreateNamedVariable 's1', 'let', v184
+    v186 <- LoadInteger '1'
+    v187 <- LoadInteger '2'
+    v188 <- LoadInteger '3'
+    v189 <- LoadInteger '4'
+    v190 <- LoadInteger '5'
+    v191 <- LoadInteger '6'
+    v192 <- CreateArray [v186, v187, v188, v189, v190, v191]
+    v193 <- LoadInteger '4'
+    v194 <- LoadInteger '5'
+    v195 <- LoadInteger '6'
+    v196 <- CreateArray [v193, v194, v195]
+    v197 <- CallMethod v185, 'concat', [v196]
+    v198 <- LoadInteger '4'
+    v199 <- LoadInteger '5'
+    v200 <- LoadInteger '6'
+    v201 <- LoadInteger '1'
+    v202 <- LoadInteger '2'
+    v203 <- LoadInteger '3'
+    v204 <- CreateArray [v198, v199, v200, v201, v202, v203]
+    v205 <- LoadInteger '4'
+    v206 <- LoadInteger '5'
+    v207 <- LoadInteger '6'
+    v208 <- CreateArray [v205, v206, v207]
+    v209 <- CallMethod v208, 'concat', [v185]
+EndPlainFunction
+v210 <- CallFunction v178, []
+v211 <- BeginPlainFunction -> 
+    v212 <- CreateNamedVariable 'Array', 'none'
+    v213 <- BeginClassDefinition v212
+    EndClassDefinition
+    v214 <- LoadInteger '1'
+    v215 <- LoadInteger '2'
+    v216 <- LoadInteger '3'
+    v217 <- Construct v213, [v214, v215, v216]
+    v218 <- CreateNamedVariable 's1', 'let', v217
+    v219 <- LoadString '[1,2,3]'
+    v220 <- CreateNamedVariable 'JSON', 'none'
+    v221 <- CallMethod v220, 'stringify', [v218]
+EndPlainFunction
+v222 <- CallFunction v211, []
+
+
+function TestDefaultConstructor() {
+    class C2 extends Array {
+    }
+    {
+        const v3 = new C2();
+        let s1 = v3;
+        C2.prototype;
+        s1.__proto__;
+        Array.isArray(s1);
+        s1.length;
+        s1[0] = "xyz";
+        s1.length;
+        s1[0];
+        s1.push(42);
+        s1.length;
+        s1[0];
+        s1[1];
+    }
+    {
+        const v24 = new C2(10);
+        let s2 = v24;
+        C2.prototype;
+        s2.__proto__;
+        Array.isArray(s2);
+        s2.length;
+        s2[0];
+    }
+    {
+        let a = [1,2,3];
+        const v38 = new C2(a);
+        let s3 = v38;
+        C2.prototype;
+        s3.__proto__;
+        Array.isArray(s3);
+        s3.length;
+        s3[0];
+    }
+    {
+        const v49 = new C2(1, 2, 3);
+        let s4 = v49;
+        C2.prototype;
+        s4.__proto__;
+        Array.isArray(s4);
+        s4.length;
+        s4[0];
+        s4[1];
+        s4[2];
+    }
+    {
+        const v65 = new C2(undefined, undefined, undefined);
+        let s5 = v65;
+        C2.prototype;
+        s5.__proto__;
+        Array.isArray(s5);
+        s5.length;
+        s5[0];
+        s5[1];
+        s5[2];
+    }
+}
+TestDefaultConstructor();
+function TestEmptyArgsSuper() {
+    class C81 extends Array {
+        constructor() {
+            super();
+        }
+    }
+    const v83 = new C81();
+    let s1 = v83;
+    C81.prototype;
+    s1.__proto__;
+    Array.isArray(s1);
+    s1.length;
+    s1[0] = "xyz";
+    s1.length;
+    s1[0];
+    s1.push(42);
+    s1.length;
+    s1[0];
+    s1[1];
+}
+TestEmptyArgsSuper();
+function TestOneArgSuper() {
+    class C106 extends Array {
+        constructor(a108) {
+            super(a108);
+        }
+    }
+    {
+        const v111 = new C106(10, "ignored arg");
+        let s2 = v111;
+        C106.prototype;
+        s2.__proto__;
+        Array.isArray(s2);
+        s2.length;
+        s2[0];
+    }
+    {
+        let a = [1,2,3];
+        const v126 = new C106(a, "ignored arg");
+        let s3 = v126;
+        C106.prototype;
+        s3.__proto__;
+        Array.isArray(s3);
+        s3.length;
+        s3[0];
+    }
+}
+TestOneArgSuper();
+function TestMultipleArgsSuper() {
+    class C137 extends Array {
+        constructor(a139, a140, a141) {
+            super(a139, a140, a141);
+        }
+    }
+    {
+        const v147 = new C137(1, 2, 3, 4, 5);
+        let s4 = v147;
+        C137.prototype;
+        s4.__proto__;
+        Array.isArray(s4);
+        s4.length;
+        s4[0];
+        s4[1];
+        s4[2];
+    }
+    {
+        const v161 = new C137(undefined);
+        let s5 = v161;
+        C137.prototype;
+        s5.__proto__;
+        Array.isArray(s5);
+        s5.__proto__ == C137.prototype;
+        s5.length;
+        s5[0];
+        s5[1];
+        s5[2];
+    }
+}
+TestMultipleArgsSuper();
+function TestArrayConcat() {
+    class C180 extends Array {
+    }
+    const v184 = new C180(1, 2, 3);
+    let s1 = v184;
+    [1,2,3,4,5,6];
+    s1.concat([4,5,6]);
+    [4,5,6,1,2,3];
+    ([4,5,6]).concat(s1);
+}
+TestArrayConcat();
+function TestJSONStringify() {
+    class C213 extends Array {
+    }
+    const v217 = new C213(1, 2, 3);
+    let s1 = v217;
+    JSON.stringify(s1);
+}
+TestJSONStringify();
+
+FuzzIL program written to corpus/classes-subclass-arrays.fzil

@@ -1,0 +1,154 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadUndefined
+        v3 <- CreateArray []
+        v4 <- CallMethod v3, 'forEach', [v2]
+    EndPlainFunction
+    v5 <- CallFunction v1, []
+    v6 <- CreateNamedVariable 'TypeError', 'none'
+    v7 <- CallFunction v1, []
+    v8 <- CallFunction v1, []
+EndPlainFunction
+v9 <- CallFunction v0, []
+v10 <- BeginPlainFunction -> 
+    v11 <- BeginPlainFunction -> 
+        BeginTry
+            v12 <- LoadUndefined
+            v13 <- CreateArray []
+            v14 <- CallMethod v13, 'forEach', [v12]
+        BeginCatch -> v15
+            Return v15
+        EndTryCatch
+    EndPlainFunction
+    v16 <- CallFunction v11, []
+    v17 <- CreateNamedVariable 'TypeError', 'none'
+    v18 <- CallFunction v11, []
+    v19 <- CallFunction v11, []
+EndPlainFunction
+v20 <- CallFunction v10, []
+v21 <- BeginPlainFunction -> 
+    v22 <- BeginPlainFunction -> 
+        v23 <- LoadUndefined
+        v24 <- CreateArray []
+        v25 <- CallMethod v24, 'map', [v23]
+    EndPlainFunction
+    v26 <- CallFunction v22, []
+    v27 <- CreateNamedVariable 'TypeError', 'none'
+    v28 <- CallFunction v22, []
+    v29 <- CallFunction v22, []
+EndPlainFunction
+v30 <- CallFunction v21, []
+v31 <- BeginPlainFunction -> 
+    v32 <- BeginPlainFunction -> 
+        BeginTry
+            v33 <- LoadUndefined
+            v34 <- CreateArray []
+            v35 <- CallMethod v34, 'map', [v33]
+        BeginCatch -> v36
+            Return v36
+        EndTryCatch
+    EndPlainFunction
+    v37 <- CallFunction v32, []
+    v38 <- CreateNamedVariable 'TypeError', 'none'
+    v39 <- CallFunction v32, []
+    v40 <- CallFunction v32, []
+EndPlainFunction
+v41 <- CallFunction v31, []
+v42 <- BeginPlainFunction -> 
+    v43 <- BeginPlainFunction -> 
+        v44 <- LoadUndefined
+        v45 <- CreateArray []
+        v46 <- CallMethod v45, 'filter', [v44]
+    EndPlainFunction
+    v47 <- CallFunction v43, []
+    v48 <- CreateNamedVariable 'TypeError', 'none'
+    v49 <- CallFunction v43, []
+    v50 <- CallFunction v43, []
+EndPlainFunction
+v51 <- CallFunction v42, []
+v52 <- BeginPlainFunction -> 
+    v53 <- BeginPlainFunction -> 
+        BeginTry
+            v54 <- LoadUndefined
+            v55 <- CreateArray []
+            v56 <- CallMethod v55, 'filter', [v54]
+        BeginCatch -> v57
+            Return v57
+        EndTryCatch
+    EndPlainFunction
+    v58 <- CallFunction v53, []
+    v59 <- CreateNamedVariable 'TypeError', 'none'
+    v60 <- CallFunction v53, []
+    v61 <- CallFunction v53, []
+EndPlainFunction
+v62 <- CallFunction v52, []
+
+
+function TestNonCallableForEach() {
+    function foo() {
+        ([]).forEach(undefined);
+    }
+    foo();
+    foo();
+    foo();
+}
+TestNonCallableForEach();
+function TestNonCallableForEachCaught() {
+    function foo() {
+        try {
+            ([]).forEach(undefined);
+        } catch(e15) {
+            return e15;
+        }
+    }
+    foo();
+    foo();
+    foo();
+}
+TestNonCallableForEachCaught();
+function TestNonCallableMap() {
+    function foo() {
+        ([]).map(undefined);
+    }
+    foo();
+    foo();
+    foo();
+}
+TestNonCallableMap();
+function TestNonCallableMapCaught() {
+    function foo() {
+        try {
+            ([]).map(undefined);
+        } catch(e36) {
+            return e36;
+        }
+    }
+    foo();
+    foo();
+    foo();
+}
+TestNonCallableMapCaught();
+function TestNonCallableFilter() {
+    function foo() {
+        ([]).filter(undefined);
+    }
+    foo();
+    foo();
+    foo();
+}
+TestNonCallableFilter();
+function TestNonCallableFilterCaught() {
+    function foo() {
+        try {
+            ([]).filter(undefined);
+        } catch(e57) {
+            return e57;
+        }
+    }
+    foo();
+    foo();
+    foo();
+}
+TestNonCallableFilterCaught();
+
+FuzzIL program written to corpus/regress-crbug-747062.fzil

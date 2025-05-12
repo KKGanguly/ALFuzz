@@ -1,0 +1,49 @@
+v0 <- LoadString 'name'
+v1 <- BeginArrowFunction -> 
+    v2 <- LoadInteger '42'
+    ThrowException v2
+EndArrowFunction
+v3 <- CreateNamedVariable 'TypeError', 'none'
+v4 <- GetProperty v3, 'prototype'
+v5 <- CallMethod v4, '__defineGetter__', [v0, v1]
+BeginTry
+    v6 <- BeginArrowFunction -> 
+        v7 <- Construct v3, []
+        ThrowException v7
+    EndArrowFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toString`, v6
+    v8 <- EndObjectLiteral
+    v9 <- CreateNamedVariable 'console', 'none'
+    v10 <- CallMethod v9, 'log', [v8]
+BeginCatch -> v11
+EndTryCatch
+BeginTry
+    v12 <- CreateNamedVariable 'WebAssembly', 'none'
+    v13 <- GetProperty v12, 'Table'
+    BeginObjectLiteral
+    v14 <- EndObjectLiteral
+    v15 <- Construct v13, [v14]
+BeginCatch -> v16
+EndTryCatch
+
+
+const v1 = () => {
+    throw 42;
+};
+TypeError.prototype.__defineGetter__("name", v1);
+try {
+    const v6 = () => {
+        const v7 = new TypeError();
+        throw v7;
+    };
+    console.log({ toString: v6 });
+} catch(e11) {
+}
+try {
+    const v13 = WebAssembly.Table;
+    new v13({});
+} catch(e16) {
+}
+
+FuzzIL program written to corpus/regress-719380.fzil

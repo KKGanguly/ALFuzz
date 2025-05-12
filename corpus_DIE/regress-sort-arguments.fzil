@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadArguments
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '1'
+v4 <- LoadInteger '2'
+v5 <- LoadInteger '3'
+v6 <- CallFunction v0, [v3, v4, v5]
+v7 <- CreateNamedVariable 'a', 'var', v6
+v8 <- LoadInteger '1'
+v9 <- DeleteElement v7, '1'
+v10 <- CreateNamedVariable 'Array', 'none'
+v11 <- GetProperty v10, 'prototype'
+v12 <- GetProperty v11, 'sort'
+v13 <- CallMethod v12, 'apply', [v7]
+v14 <- LoadInteger '4'
+SetElement v7, '10000000', v14
+v15 <- GetProperty v10, 'prototype'
+v16 <- GetProperty v15, 'sort'
+v17 <- CallMethod v16, 'apply', [v7]
+
+
+function f(a1) {
+    return arguments;
+}
+var a = f(1, 2, 3);
+delete a[1];
+Array.prototype.sort.apply(a);
+a[10000000] = 4;
+Array.prototype.sort.apply(a);
+
+FuzzIL program written to corpus/regress-sort-arguments.fzil

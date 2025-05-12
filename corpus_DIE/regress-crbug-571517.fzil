@@ -1,0 +1,66 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'receiver'
+    v2 <- LoadThis
+    SetProperty v2, 'receiver', v1
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadString 'proto'
+    v5 <- LoadThis
+    SetProperty v5, 'proto', v4
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- GetProperty v7, 'foo'
+    Return v8
+EndPlainFunction
+v9 <- Construct v0, []
+v10 <- CreateNamedVariable 'rec', 'var', v9
+v11 <- GetProperty v10, '__proto__'
+v12 <- CreateNamedVariable 'proto', 'var', v11
+v13 <- LoadUndefined
+v14 <- CallFunction v6, [v10]
+v15 <- LoadUndefined
+v16 <- CallFunction v6, [v10]
+v17 <- Construct v3, []
+v18 <- CreateNamedVariable 'p2', 'var', v17
+v19 <- LoadNull
+SetProperty v18, '__proto__', v19
+SetProperty v12, '__proto__', v18
+v20 <- LoadUndefined
+v21 <- CallFunction v6, [v10]
+v22 <- LoadString 'bar'
+SetProperty v18, 'foo', v22
+v23 <- LoadString 'bar'
+v24 <- CallFunction v6, [v10]
+v25 <- DeleteProperty v18, 'foo'
+v26 <- LoadString 'GAME OVER'
+SetProperty v18, 'secret', v26
+v27 <- LoadUndefined
+v28 <- CallFunction v6, [v10]
+
+
+function Receiver() {
+    this.receiver = "receiver";
+}
+function Proto() {
+    this.proto = "proto";
+}
+function f(a7) {
+    return a7.foo;
+}
+const v9 = new Receiver();
+var rec = v9;
+var proto = rec.__proto__;
+f(rec);
+f(rec);
+const v17 = new Proto();
+var p2 = v17;
+p2.__proto__ = null;
+proto.__proto__ = p2;
+f(rec);
+p2.foo = "bar";
+f(rec);
+delete p2.foo;
+p2.secret = "GAME OVER";
+f(rec);
+
+FuzzIL program written to corpus/regress-crbug-571517.fzil

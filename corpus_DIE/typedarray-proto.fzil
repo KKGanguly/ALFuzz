@@ -1,0 +1,138 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- CreateNamedVariable 'Int8Array', 'none'
+v2 <- CreateNamedVariable 'Uint16Array', 'none'
+v3 <- CreateNamedVariable 'Int16Array', 'none'
+v4 <- CreateNamedVariable 'Uint32Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v7 <- CreateNamedVariable 'Float32Array', 'none'
+v8 <- CreateNamedVariable 'Float64Array', 'none'
+v9 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8]
+v10 <- CreateNamedVariable 'typedArrayConstructors', 'let', v9
+v11 <- GetProperty v0, '__proto__'
+v12 <- CreateNamedVariable 'TypedArray', 'let', v11
+v13 <- GetProperty v12, 'prototype'
+v14 <- CreateNamedVariable 'TypedArrayPrototype', 'let', v13
+v15 <- GetProperty v12, '__proto__'
+v16 <- CreateNamedVariable 'Function', 'none'
+v17 <- GetProperty v16, 'prototype'
+v18 <- GetProperty v14, '__proto__'
+v19 <- CreateNamedVariable 'Object', 'none'
+v20 <- GetProperty v19, 'prototype'
+v21 <- CreateNamedVariable 'Set', 'none'
+v22 <- LoadString 'length'
+v23 <- LoadString 'name'
+v24 <- LoadString 'arguments'
+v25 <- LoadString 'caller'
+v26 <- LoadString 'prototype'
+v27 <- LoadString 'BYTES_PER_ELEMENT'
+v28 <- CreateArray [v22, v23, v24, v25, v26, v27]
+v29 <- Construct v21, [v28]
+v30 <- CreateNamedVariable 'classProperties', 'let', v29
+v31 <- LoadString 'BYTES_PER_ELEMENT'
+v32 <- LoadString 'constructor'
+v33 <- LoadString 'prototype'
+v34 <- CreateArray [v31, v32, v33]
+v35 <- Construct v21, [v34]
+v36 <- CreateNamedVariable 'instanceProperties', 'let', v35
+v37 <- BeginPlainFunction -> v38
+    v39 <- BeginPlainFunction -> v40
+        v41 <- CallMethod v19, 'getOwnPropertyDescriptor', [v38, v40]
+        v42 <- GetProperty v41, 'value'
+        v43 <- TypeOf v42
+        v44 <- LoadString 'function'
+        v45 <- Compare v43, '==', v44
+        v46 <- LoadString 'constructor'
+        v47 <- Compare v40, '!=', v46
+        v48 <- BinaryOperation v45, '&&', v47
+        v49 <- LoadString 'subarray'
+        v50 <- Compare v40, '!=', v49
+        v51 <- BinaryOperation v48, '&&', v50
+        Return v51
+    EndPlainFunction
+    v52 <- CallMethod v19, 'getOwnPropertyNames', [v38]
+    v53 <- CallMethod v52, 'filter', [v39]
+    Return v53
+EndPlainFunction
+v54 <- GetProperty v0, 'prototype'
+v55 <- CallFunction v37, [v54]
+v56 <- CreateNamedVariable 'typedArrayMethods', 'let', v55
+v57 <- CallFunction v37, [v0]
+v58 <- CreateNamedVariable 'typedArrayClassMethods', 'let', v57
+BeginForOfLoop v10 -> v59
+    v60 <- GetProperty v59, 'prototype'
+    v61 <- CallMethod v19, 'getOwnPropertyNames', [v60]
+    BeginForOfLoop v61 -> v62
+        v63 <- CallMethod v36, 'has', [v62]
+    EndForOfLoop
+    v64 <- CallMethod v19, 'getOwnPropertyNames', [v59]
+    BeginForOfLoop v64 -> v65
+        v66 <- CallMethod v30, 'has', [v65]
+    EndForOfLoop
+EndForOfLoop
+v67 <- BeginArrowFunction -> 
+    v68 <- Construct v12, []
+    Return v68
+EndArrowFunction
+v69 <- CallFunction v67, []
+v70 <- CreateNamedVariable 'TypeError', 'none'
+v71 <- LoadString 'prototype'
+v72 <- CallMethod v19, 'getOwnPropertyDescriptor', [v12, v71]
+v73 <- CreateNamedVariable 'desc', 'let', v72
+v74 <- GetProperty v73, 'writable'
+v75 <- GetProperty v73, 'configurable'
+v76 <- GetProperty v73, 'enumerable'
+BeginForOfLoop v10 -> v77
+    v78 <- LoadString 'prototype'
+    v79 <- CallMethod v19, 'getOwnPropertyDescriptor', [v77, v78]
+    v80 <- CreateNamedVariable 'desc', 'let', v79
+    v81 <- GetProperty v80, 'writable'
+    v82 <- GetProperty v80, 'configurable'
+    v83 <- GetProperty v80, 'enumerable'
+EndForOfLoop
+
+
+let typedArrayConstructors = [Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,Uint8ClampedArray,Float32Array,Float64Array];
+let TypedArray = Uint8Array.__proto__;
+let TypedArrayPrototype = TypedArray.prototype;
+TypedArray.__proto__;
+Function.prototype;
+TypedArrayPrototype.__proto__;
+Object.prototype;
+const v29 = new Set(["length","name","arguments","caller","prototype","BYTES_PER_ELEMENT"]);
+let classProperties = v29;
+const v35 = new Set(["BYTES_PER_ELEMENT","constructor","prototype"]);
+let instanceProperties = v35;
+function functionProperties(a38) {
+    function f39(a40) {
+        return ((typeof Object.getOwnPropertyDescriptor(a38, a40).value == "function") && (a40 != "constructor")) && (a40 != "subarray");
+    }
+    return Object.getOwnPropertyNames(a38).filter(f39);
+}
+let typedArrayMethods = functionProperties(Uint8Array.prototype);
+let typedArrayClassMethods = functionProperties(Uint8Array);
+for (const v59 of typedArrayConstructors) {
+    for (const v62 of Object.getOwnPropertyNames(v59.prototype)) {
+        instanceProperties.has(v62);
+    }
+    for (const v65 of Object.getOwnPropertyNames(v59)) {
+        classProperties.has(v65);
+    }
+}
+const v67 = () => {
+    const v68 = new TypedArray();
+    return v68;
+};
+v67();
+let desc = Object.getOwnPropertyDescriptor(TypedArray, "prototype");
+desc.writable;
+desc.configurable;
+desc.enumerable;
+for (const v77 of typedArrayConstructors) {
+    let desc = Object.getOwnPropertyDescriptor(v77, "prototype");
+    desc.writable;
+    desc.configurable;
+    desc.enumerable;
+}
+
+FuzzIL program written to corpus/typedarray-proto.fzil

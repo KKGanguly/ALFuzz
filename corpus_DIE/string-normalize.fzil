@@ -1,0 +1,102 @@
+v0 <- LoadString ''
+v1 <- CallMethod v0, 'normalize', []
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- GetProperty v2, 'prototype'
+v4 <- DeleteProperty v3, 'indexOf'
+v5 <- LoadString ''
+v6 <- LoadString ''
+v7 <- CallMethod v6, 'normalize', []
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadString 'invalid'
+    v10 <- LoadString ''
+    v11 <- CallMethod v10, 'normalize', [v9]
+EndPlainFunction
+v12 <- CallFunction v8, []
+v13 <- CreateNamedVariable 'RangeError', 'none'
+v14 <- GetProperty v2, 'prototype'
+v15 <- DeleteProperty v14, 'join'
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadString 'invalid'
+    v18 <- LoadString ''
+    v19 <- CallMethod v18, 'normalize', [v17]
+EndPlainFunction
+v20 <- CallFunction v16, []
+v21 <- BeginPlainFunction -> 
+    v22 <- LoadNull
+    v23 <- LoadString ''
+    v24 <- CallMethod v23, 'normalize', [v22]
+EndPlainFunction
+v25 <- CallFunction v21, []
+v26 <- BeginPlainFunction -> 
+    v27 <- LoadBoolean 'true'
+    v28 <- LoadString ''
+    v29 <- CallMethod v28, 'normalize', [v27]
+EndPlainFunction
+v30 <- CallFunction v26, []
+v31 <- BeginPlainFunction -> 
+    v32 <- LoadBoolean 'false'
+    v33 <- LoadString ''
+    v34 <- CallMethod v33, 'normalize', [v32]
+EndPlainFunction
+v35 <- CallFunction v31, []
+v36 <- BeginPlainFunction -> 
+    v37 <- LoadInteger '42'
+    v38 <- LoadString ''
+    v39 <- CallMethod v38, 'normalize', [v37]
+EndPlainFunction
+v40 <- CallFunction v36, []
+v41 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v42 <- EndObjectLiteral
+    v43 <- LoadString ''
+    v44 <- CallMethod v43, 'normalize', [v42]
+EndPlainFunction
+v45 <- CallFunction v41, []
+v46 <- BeginPlainFunction -> 
+    v47 <- CreateArray []
+    v48 <- LoadString ''
+    v49 <- CallMethod v48, 'normalize', [v47]
+EndPlainFunction
+v50 <- CallFunction v46, []
+
+
+("").normalize();
+const t0 = Array.prototype;
+delete t0.indexOf;
+("").normalize();
+function f8() {
+    ("").normalize("invalid");
+}
+f8();
+const t7 = Array.prototype;
+delete t7.join;
+function f16() {
+    ("").normalize("invalid");
+}
+f16();
+function f21() {
+    ("").normalize(null);
+}
+f21();
+function f26() {
+    ("").normalize(true);
+}
+f26();
+function f31() {
+    ("").normalize(false);
+}
+f31();
+function f36() {
+    ("").normalize(42);
+}
+f36();
+function f41() {
+    ("").normalize({});
+}
+f41();
+function f46() {
+    ("").normalize([]);
+}
+f46();
+
+FuzzIL program written to corpus/string-normalize.fzil

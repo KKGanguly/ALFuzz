@@ -1,0 +1,55 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v2 <- EndObjectLiteral
+    BeginObjectLiteral
+    v3 <- EndObjectLiteral
+    v4 <- Construct v1, [v2, v3]
+    v5 <- CreateNamedVariable 'proxy', 'var', v4
+    v6 <- LoadInteger '0'
+    v7 <- CreateNamedVariable 'key_or_proxy', 'var', v6
+    v8 <- BeginPlainFunction -> 
+        v9 <- GetComputedProperty v5, v7
+        Return v9
+    EndPlainFunction
+    v10 <- CallFunction v8, []
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `toString` -> v11
+            v12 <- CreateNamedVariable 'TypeError', 'none'
+            v13 <- LoadString 'error'
+            v14 <- Construct v12, [v13]
+            ThrowException v14
+        EndObjectLiteralMethod
+    v15 <- EndObjectLiteral
+    BeginObjectLiteral
+    v16 <- EndObjectLiteral
+    v17 <- Construct v1, [v15, v16]
+    Reassign v7, v17
+    v18 <- CallFunction v8, []
+EndPlainFunction
+v19 <- CallFunction v0, []
+v20 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function test() {
+    const v2 = {};
+    const v4 = new Proxy(v2, {});
+    var proxy = v4;
+    var key_or_proxy = 0;
+    function failing_get() {
+        return proxy[key_or_proxy];
+    }
+    failing_get();
+    const v15 = {
+        toString() {
+            const v14 = new TypeError("error");
+            throw v14;
+        },
+    };
+    const v17 = new Proxy(v15, {});
+    key_or_proxy = v17;
+    failing_get();
+}
+test();
+
+FuzzIL program written to corpus/regress-crbug-763683.fzil

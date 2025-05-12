@@ -1,0 +1,31 @@
+BeginTry
+    BeginTry
+        v0 <- CreateNamedVariable 'f2', 'none'
+        v1 <- CallFunction v0, []
+    BeginCatch -> v2
+        v3 <- CreateNamedVariable 'print', 'none'
+        v4 <- CallFunction v3, [v2]
+    EndTryCatch
+    BeginTry
+        v5 <- CreateNamedVariable 'f2', 'none'
+        v6 <- CallFunction v5, []
+    BeginCatch -> v7
+    EndTryCatch
+BeginCatch -> v8
+EndTryCatch
+
+
+try {
+    try {
+        f2();
+    } catch(e2) {
+        print(e2);
+    }
+    try {
+        f2();
+    } catch(e7) {
+    }
+} catch(e8) {
+}
+
+FuzzIL program written to corpus/regress-491481.fzil

@@ -1,0 +1,20 @@
+v0 <- CreateNamedVariable 'Error', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString 'message'
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- CallMethod v3, 'getOwnPropertyDescriptor', [v1, v2]
+v5 <- CreateNamedVariable 'desc', 'var', v4
+v6 <- GetProperty v5, 'writable'
+v7 <- LoadBoolean 'true'
+v8 <- GetProperty v5, 'enumerable'
+v9 <- LoadBoolean 'false'
+v10 <- GetProperty v5, 'configurable'
+v11 <- LoadBoolean 'true'
+
+
+var desc = Object.getOwnPropertyDescriptor(Error.prototype, "message");
+desc.writable;
+desc.enumerable;
+desc.configurable;
+
+FuzzIL program written to corpus/regress-1215.fzil

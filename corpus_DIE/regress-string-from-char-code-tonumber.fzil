@@ -1,0 +1,56 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'FAIL', 'none'
+EndPlainFunction
+v2 <- CreateNamedVariable 'Symbol', 'none'
+v3 <- GetProperty v2, 'toPrimitive'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v3, v0
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'thrower', 'var', v4
+v6 <- BeginPlainFunction -> v7
+    BeginTry
+        v8 <- CallFunction v7, [v5]
+    BeginCatch -> v9
+        v10 <- LoadString 'fromCharCode'
+        v11 <- GetProperty v9, 'stack'
+        v12 <- CallMethod v11, 'indexOf', [v10]
+        v13 <- LoadInteger '0'
+        v14 <- Compare v12, '>=', v13
+    EndTryCatch
+EndPlainFunction
+v15 <- CreateNamedVariable 'String', 'none'
+v16 <- GetProperty v15, 'fromCharCode'
+v17 <- CallFunction v6, [v16]
+v18 <- BeginPlainFunction -> v19
+    v20 <- CallMethod v15, 'fromCharCode', [v19]
+    Return v20
+EndPlainFunction
+v21 <- LoadInteger '1'
+v22 <- CallFunction v18, [v21]
+v23 <- LoadInteger '2'
+v24 <- CallFunction v18, [v23]
+v25 <- CallFunction v6, [v18]
+v26 <- CallFunction v6, [v18]
+
+
+function f0() {
+}
+const v3 = Symbol.toPrimitive;
+var thrower = { [v3]: f0 };
+function testTrace(a7) {
+    try {
+        a7(thrower);
+    } catch(e9) {
+        e9.stack.indexOf("fromCharCode") >= 0;
+    }
+}
+testTrace(String.fromCharCode);
+function foo(a19) {
+    return String.fromCharCode(a19);
+}
+foo(1);
+foo(2);
+testTrace(foo);
+testTrace(foo);
+
+FuzzIL program written to corpus/regress-string-from-char-code-tonumber.fzil

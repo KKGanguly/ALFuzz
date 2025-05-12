@@ -1,0 +1,56 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5, v6, v7, v8, v9
+    v10 <- LoadArguments
+    v11 <- CallFunction v0, [v10, v9]
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '1'
+v13 <- LoadInteger '2'
+v14 <- LoadInteger '3'
+v15 <- LoadInteger '4'
+v16 <- LoadString 'foo'
+v17 <- CallFunction v4, [v12, v13, v14, v15, v16]
+v18 <- LoadInteger '1'
+v19 <- LoadInteger '2'
+v20 <- LoadInteger '3'
+v21 <- LoadInteger '4'
+v22 <- LoadString 'foo'
+v23 <- CallFunction v4, [v18, v19, v20, v21, v22]
+v24 <- LoadInteger '11'
+v25 <- LoadInteger '22'
+v26 <- LoadInteger '33'
+v27 <- CreateArray [v24, v25, v26]
+v28 <- LoadInteger '0'
+v29 <- CallFunction v0, [v27, v28]
+v30 <- LoadInteger '11'
+v31 <- LoadInteger '11'
+v32 <- LoadInteger '22'
+v33 <- LoadInteger '33'
+v34 <- LoadInteger '44'
+v35 <- LoadInteger '0'
+v36 <- CallFunction v4, [v31, v32, v33, v34, v35]
+v37 <- LoadInteger '11'
+v38 <- LoadInteger '11'
+v39 <- LoadInteger '22'
+v40 <- LoadInteger '33'
+v41 <- LoadInteger '44'
+v42 <- LoadInteger '0'
+v43 <- CallFunction v4, [v38, v39, v40, v41, v42]
+
+
+function load(a1, a2) {
+    return a1[a2];
+}
+function f2(a5, a6, a7, a8, a9) {
+    return load(arguments, a9);
+}
+f2(1, 2, 3, 4, "foo");
+f2(1, 2, 3, 4, "foo");
+load([11,22,33], 0);
+f2(11, 22, 33, 44, 0);
+f2(11, 22, 33, 44, 0);
+
+FuzzIL program written to corpus/regress-crbug-354391.fzil

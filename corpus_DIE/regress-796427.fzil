@@ -1,0 +1,22 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- LoadString ''
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- GetProperty v2, 'prototype'
+    v4 <- GetProperty v3, 'toLocaleString'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toString`, v4
+    v5 <- EndObjectLiteral
+    v6 <- BinaryOperation v1, '+', v5
+    Return v6
+EndArrowFunction
+v7 <- CallFunction v0, []
+v8 <- CreateNamedVariable 'RangeError', 'none'
+
+
+const v0 = () => {
+    const v4 = Object.prototype.toLocaleString;
+    return "" + { toString: v4 };
+};
+v0();
+
+FuzzIL program written to corpus/regress-796427.fzil

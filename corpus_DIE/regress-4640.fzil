@@ -1,0 +1,65 @@
+v0 <- CreateNamedVariable 'Date', 'none'
+v1 <- LoadString '275760-10-14'
+v2 <- Construct v0, [v1]
+v3 <- LoadString 'Invalid Date'
+v4 <- Compare v2, '==', v3
+v5 <- LoadString '275760-09-23'
+v6 <- Construct v0, [v5]
+v7 <- LoadString 'Invalid Date'
+v8 <- Compare v6, '==', v7
+v9 <- LoadString '+275760-09-24'
+v10 <- Construct v0, [v9]
+v11 <- LoadString 'Invalid Date'
+v12 <- Compare v10, '==', v11
+v13 <- LoadString '+275760-10-13'
+v14 <- Construct v0, [v13]
+v15 <- LoadString 'Invalid Date'
+v16 <- Compare v14, '==', v15
+v17 <- LoadString '275760-09-24'
+v18 <- Construct v0, [v17]
+v19 <- LoadString 'Invalid Date'
+v20 <- Compare v18, '==', v19
+v21 <- LoadString '275760-10-13'
+v22 <- Construct v0, [v21]
+v23 <- LoadString 'Invalid Date'
+v24 <- Compare v22, '==', v23
+v25 <- LoadString '+275760-10-13 '
+v26 <- Construct v0, [v25]
+v27 <- LoadString 'Invalid Date'
+v28 <- Compare v26, '==', v27
+v29 <- LoadString '100000-10-13'
+v30 <- Construct v0, [v29]
+v31 <- LoadString 'Invalid Date'
+v32 <- Compare v30, '!=', v31
+v33 <- LoadString '+100000-10-13'
+v34 <- Construct v0, [v33]
+v35 <- LoadString 'Invalid Date'
+v36 <- Compare v34, '!=', v35
+v37 <- LoadString '+100000-10-13 '
+v38 <- Construct v0, [v37]
+v39 <- LoadString 'Invalid Date'
+v40 <- Compare v38, '!=', v39
+
+
+const v2 = new Date("275760-10-14");
+v2 == "Invalid Date";
+const v6 = new Date("275760-09-23");
+v6 == "Invalid Date";
+const v10 = new Date("+275760-09-24");
+v10 == "Invalid Date";
+const v14 = new Date("+275760-10-13");
+v14 == "Invalid Date";
+const v18 = new Date("275760-09-24");
+v18 == "Invalid Date";
+const v22 = new Date("275760-10-13");
+v22 == "Invalid Date";
+const v26 = new Date("+275760-10-13 ");
+v26 == "Invalid Date";
+const v30 = new Date("100000-10-13");
+v30 != "Invalid Date";
+const v34 = new Date("+100000-10-13");
+v34 != "Invalid Date";
+const v38 = new Date("+100000-10-13 ");
+v38 != "Invalid Date";
+
+FuzzIL program written to corpus/regress-4640.fzil

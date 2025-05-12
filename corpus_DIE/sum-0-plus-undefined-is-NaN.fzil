@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '+', v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5, v6, v7
+    BeginForLoopInitializer
+        v8 <- LoadInteger '0'
+    BeginForLoopCondition -> v9
+        v10 <- LoadInteger '5'
+        v11 <- Compare v9, '<', v10
+    BeginForLoopAfterthought v11 -> v12
+        v13 <- UnaryOperation v12, '++'
+    BeginForLoopBody -> v14
+        v15 <- CallFunction v0, [v5, v6]
+        v16 <- CreateNamedVariable 'isNaN', 'none'
+        v17 <- CallFunction v16, [v15]
+    EndForLoop
+    v18 <- CallFunction v0, [v5, v6]
+    v19 <- CreateNamedVariable 'isNaN', 'none'
+    v20 <- CallFunction v19, [v18]
+EndPlainFunction
+v21 <- LoadInteger '0'
+v22 <- LoadInteger '1'
+v23 <- LoadBoolean 'false'
+v24 <- CallFunction v4, [v21, v22, v23]
+v25 <- LoadInteger '0'
+v26 <- LoadUndefined
+v27 <- LoadBoolean 'true'
+v28 <- CallFunction v4, [v25, v26, v27]
+
+
+function sum(a1, a2) {
+    return a1 + a2;
+}
+function test(a5, a6, a7) {
+    for (let i9 = 0; i9 < 5; i9++) {
+        isNaN(sum(a5, a6));
+    }
+    isNaN(sum(a5, a6));
+}
+test(0, 1, false);
+test(0, undefined, true);
+
+FuzzIL program written to corpus/sum-0-plus-undefined-is-NaN.fzil

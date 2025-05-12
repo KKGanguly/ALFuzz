@@ -1,0 +1,30 @@
+v0 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v1 <- EndObjectLiteral
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'gc', 'none'
+    v4 <- CallFunction v3, []
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v2
+v5 <- EndObjectLiteral
+v6 <- Construct v0, [v1, v5]
+v7 <- CreateNamedVariable 'p', 'var', v6
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'create', [v7]
+v10 <- CreateNamedVariable 'o', 'var', v9
+v11 <- LoadInteger '23'
+v12 <- LoadInteger '23'
+SetProperty v10, 'x', v12
+
+
+const v1 = {};
+function f2() {
+    gc();
+}
+const v6 = new Proxy(v1, { getOwnPropertyDescriptor: f2 });
+var p = v6;
+var o = Object.create(p);
+o.x = 23;
+
+FuzzIL program written to corpus/regress-2219.fzil

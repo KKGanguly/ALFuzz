@@ -1,0 +1,51 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        BeginForLoopInitializer
+            v3 <- LoadInteger '0'
+        BeginForLoopCondition -> v4
+            v5 <- LoadInteger '3'
+            v6 <- Compare v4, '<', v5
+        BeginForLoopAfterthought v6 -> v7
+            v8 <- UnaryOperation '++', v7
+        BeginForLoopBody -> v9
+        EndForLoop
+        BeginForLoopInitializer
+            v10 <- LoadInteger '3'
+        BeginForLoopCondition -> v11
+            v12 <- LoadInteger '6'
+            v13 <- Compare v11, '<', v12
+        BeginForLoopAfterthought v13 -> v14
+            v15 <- UnaryOperation '++', v14
+        BeginForLoopBody -> v16
+        EndForLoop
+    EndPlainFunction
+    Return v1
+EndPlainFunction
+v17 <- LoadInteger '7'
+v18 <- CallFunction v0, []
+v19 <- CallFunction v18, [v17]
+v20 <- LoadInteger '4'
+v21 <- CallFunction v0, []
+v22 <- CallFunction v21, [v20]
+v23 <- LoadInteger '1'
+v24 <- CallFunction v0, []
+v25 <- CallFunction v24, [v23]
+
+
+function makeFun() {
+    function fun(a2) {
+        for (let i4 = 0; i4 < 3; ++i4) {
+        }
+        for (let i11 = 3; i11 < 6; ++i11) {
+        }
+    }
+    return fun;
+}
+const t9 = makeFun();
+t9(7);
+const t10 = makeFun();
+t10(4);
+const t12 = makeFun();
+t12(1);
+
+FuzzIL program written to corpus/regress-crbug-513507.fzil

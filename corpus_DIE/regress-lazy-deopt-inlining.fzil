@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- CreateNamedVariable 'f3', 'none'
+    v4 <- CallFunction v3, [v1]
+    v5 <- CreateNamedVariable 'f2', 'none'
+    v6 <- CallFunction v5, [v4]
+    v7 <- BinaryOperation v2, '+', v6
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> v11
+    v12 <- LoadInteger '2'
+    Return v12
+EndPlainFunction
+v13 <- LoadBoolean 'false'
+v14 <- CallFunction v0, [v13]
+v15 <- LoadBoolean 'false'
+v16 <- CallFunction v0, [v15]
+v17 <- LoadInteger '3'
+v18 <- LoadBoolean 'true'
+v19 <- CallFunction v0, [v18]
+
+
+function f1(a1) {
+    return 1 + f2(f3(a1));
+}
+function f2(a9) {
+    return a9;
+}
+function f3(a11) {
+    return 2;
+}
+f1(false);
+f1(false);
+f1(true);
+
+FuzzIL program written to corpus/regress-lazy-deopt-inlining.fzil

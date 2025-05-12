@@ -1,0 +1,31 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'array', 'var', v0
+v2 <- LoadInteger '506519'
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'defineProperty', [v1, v2, v3]
+v6 <- LoadInteger '3'
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadUndefined
+    BeginObjectLiteral
+    v9 <- EndObjectLiteral
+    v10 <- CallMethod v4, 'defineProperty', [v1, v8, v9]
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v7
+v11 <- EndObjectLiteral
+v12 <- CallMethod v4, 'defineProperty', [v1, v6, v11]
+v13 <- LoadInteger '61301'
+v14 <- CallMethod v1, 'includes', [v13]
+
+
+var array = [];
+Object.defineProperty(array, 506519, {});
+function f7() {
+    Object.defineProperty(array, undefined, {});
+}
+Object.defineProperty(array, 3, { get: f7 });
+array.includes(61301);
+
+FuzzIL program written to corpus/regress-crbug-800810.fzil

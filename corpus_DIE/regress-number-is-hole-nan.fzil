@@ -1,0 +1,25 @@
+v0 <- LoadUndefined
+v1 <- LoadFloat '2.121736758e-314'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- GetElement v3, '1'
+    Return v5
+EndPlainFunction
+v6 <- LoadFloat '2.121736758e-314'
+v7 <- CallFunction v4, []
+v8 <- LoadFloat '2.121736758e-314'
+v9 <- CallFunction v4, []
+v10 <- LoadFloat '2.121736758e-314'
+v11 <- CallFunction v4, []
+
+
+var a = [,2.121736758e-314];
+function foo() {
+    return a[1];
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-number-is-hole-nan.fzil

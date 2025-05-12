@@ -1,0 +1,150 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '0'
+    v4 <- Compare v1, '==', v3
+    v5 <- LoadInteger '0'
+    v6 <- Compare v2, '==', v5
+    v7 <- BinaryOperation v4, '&&', v6
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9, v10
+    v11 <- LoadInteger '0'
+    v12 <- Compare v9, '==', v11
+    v13 <- BinaryOperation v12, '&&', v10
+    Return v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> v15, v16
+    v17 <- LoadInteger '0'
+    v18 <- Compare v16, '==', v17
+    v19 <- BinaryOperation v15, '&&', v18
+    Return v19
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21, v22
+    v23 <- BinaryOperation v21, '&&', v22
+    Return v23
+EndPlainFunction
+v24 <- LoadInteger '0'
+v25 <- LoadInteger '0'
+v26 <- CallFunction v0, [v24, v25]
+v27 <- LoadInteger '1'
+v28 <- LoadInteger '0'
+v29 <- CallFunction v0, [v27, v28]
+v30 <- LoadInteger '0'
+v31 <- LoadInteger '1'
+v32 <- CallFunction v0, [v30, v31]
+v33 <- LoadInteger '1'
+v34 <- LoadInteger '1'
+v35 <- CallFunction v0, [v33, v34]
+v36 <- LoadInteger '0'
+v37 <- LoadInteger '0'
+v38 <- LoadInteger '0'
+v39 <- CallFunction v8, [v37, v38]
+v40 <- LoadInteger '1'
+v41 <- LoadInteger '0'
+v42 <- LoadInteger '1'
+v43 <- CallFunction v8, [v41, v42]
+v44 <- LoadInteger '1'
+v45 <- LoadInteger '0'
+v46 <- CallFunction v8, [v44, v45]
+v47 <- LoadInteger '1'
+v48 <- LoadInteger '0'
+v49 <- LoadInteger '1'
+v50 <- CallFunction v8, [v48, v49]
+v51 <- LoadInteger '2'
+v52 <- LoadInteger '0'
+v53 <- LoadInteger '2'
+v54 <- CallFunction v8, [v52, v53]
+v55 <- LoadInteger '1'
+v56 <- LoadInteger '1'
+v57 <- CallFunction v8, [v55, v56]
+v58 <- LoadInteger '1'
+v59 <- LoadInteger '2'
+v60 <- CallFunction v8, [v58, v59]
+v61 <- LoadInteger '0'
+v62 <- LoadInteger '0'
+v63 <- LoadInteger '0'
+v64 <- CallFunction v14, [v62, v63]
+v65 <- LoadInteger '1'
+v66 <- LoadInteger '0'
+v67 <- CallFunction v14, [v65, v66]
+v68 <- LoadInteger '0'
+v69 <- LoadInteger '0'
+v70 <- LoadInteger '1'
+v71 <- CallFunction v14, [v69, v70]
+v72 <- LoadString ''
+v73 <- LoadString ''
+v74 <- LoadInteger '1'
+v75 <- CallFunction v14, [v73, v74]
+v76 <- LoadInteger '1'
+v77 <- LoadInteger '1'
+v78 <- CallFunction v14, [v76, v77]
+v79 <- LoadInteger '2'
+v80 <- LoadInteger '0'
+v81 <- CallFunction v14, [v79, v80]
+v82 <- LoadInteger '0'
+v83 <- LoadInteger '0'
+v84 <- LoadInteger '0'
+v85 <- CallFunction v20, [v83, v84]
+v86 <- LoadInteger '0'
+v87 <- LoadInteger '1'
+v88 <- LoadInteger '0'
+v89 <- CallFunction v20, [v87, v88]
+v90 <- LoadInteger '0'
+v91 <- LoadInteger '2'
+v92 <- LoadInteger '0'
+v93 <- CallFunction v20, [v91, v92]
+v94 <- LoadInteger '0'
+v95 <- LoadInteger '0'
+v96 <- LoadInteger '1'
+v97 <- CallFunction v20, [v95, v96]
+v98 <- LoadInteger '0'
+v99 <- LoadInteger '0'
+v100 <- LoadInteger '2'
+v101 <- CallFunction v20, [v99, v100]
+v102 <- LoadInteger '1'
+v103 <- LoadInteger '1'
+v104 <- LoadInteger '1'
+v105 <- CallFunction v20, [v103, v104]
+v106 <- LoadInteger '2'
+v107 <- LoadInteger '3'
+v108 <- LoadInteger '2'
+v109 <- CallFunction v20, [v107, v108]
+
+
+function AndBB(a1, a2) {
+    return (a1 == 0) && (a2 == 0);
+}
+function AndBN(a9, a10) {
+    return (a9 == 0) && a10;
+}
+function AndNB(a15, a16) {
+    return a15 && (a16 == 0);
+}
+function AndNN(a21, a22) {
+    return a21 && a22;
+}
+AndBB(0, 0);
+AndBB(1, 0);
+AndBB(0, 1);
+AndBB(1, 1);
+AndBN(0, 0);
+AndBN(0, 1);
+AndBN(1, 0);
+AndBN(0, 1);
+AndBN(0, 2);
+AndBN(1, 1);
+AndBN(1, 2);
+AndNB(0, 0);
+AndNB(1, 0);
+AndNB(0, 1);
+AndNB("", 1);
+AndNB(1, 1);
+AndNB(2, 0);
+AndNN(0, 0);
+AndNN(1, 0);
+AndNN(2, 0);
+AndNN(0, 1);
+AndNN(0, 2);
+AndNN(1, 1);
+AndNN(3, 2);
+
+FuzzIL program written to corpus/logical-and.fzil

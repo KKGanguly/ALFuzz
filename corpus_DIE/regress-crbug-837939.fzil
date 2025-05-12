@@ -1,0 +1,22 @@
+v0 <- LoadFloat '123.123'
+v1 <- CreateArray [v0]
+v2 <- CreateNamedVariable 'iterable', 'const', v1
+v3 <- LoadInteger '0'
+SetProperty v2, 'length', v3
+v4 <- CreateNamedVariable 'Map', 'none'
+v5 <- Construct v4, [v2]
+v6 <- CreateNamedVariable 'map', 'let', v5
+v7 <- LoadInteger '0'
+v8 <- GetProperty v6, 'size'
+v9 <- CreateNamedVariable 'WeakMap', 'none'
+v10 <- Construct v9, [v2]
+
+
+const iterable = [123.123];
+iterable.length = 0;
+const v5 = new Map(iterable);
+let map = v5;
+map.size;
+new WeakMap(iterable);
+
+FuzzIL program written to corpus/regress-crbug-837939.fzil

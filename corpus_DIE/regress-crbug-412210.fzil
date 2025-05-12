@@ -1,0 +1,19 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString ''
+    v3 <- LoadInteger '0'
+    v4 <- BinaryOperation v2, '>>', v3
+    v5 <- LoadString ''
+    v6 <- TernaryOperation v1, v4, v5
+    v7 <- LoadRegExp 'a' ''
+    v8 <- BinaryOperation v6, '+', v7
+    Return v8
+EndPlainFunction
+v9 <- CallFunction v0, []
+
+
+function f(a1) {
+    return (a1 ? "" >> 0 : "") + /a/;
+}
+f();
+
+FuzzIL program written to corpus/regress-crbug-412210.fzil

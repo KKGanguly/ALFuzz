@@ -1,0 +1,37 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '23'
+    v3 <- CreateNamedVariable 'value', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- LoadInteger '42'
+        Reassign v3, v5
+    EndPlainFunction
+    v6 <- CallFunction v1, [v4]
+    Return v3
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    v9 <- CallFunction v8, []
+EndPlainFunction
+v10 <- LoadInteger '42'
+v11 <- CallFunction v0, [v7]
+v12 <- LoadInteger '42'
+v13 <- CallFunction v0, [v7]
+v14 <- LoadInteger '42'
+v15 <- CallFunction v0, [v7]
+
+
+function f(a1) {
+    var value = 23;
+    function bogeyman() {
+        value = 42;
+    }
+    a1(bogeyman);
+    return value;
+}
+function apply(a8) {
+    a8();
+}
+f(apply);
+f(apply);
+f(apply);
+
+FuzzIL program written to corpus/regress-escape-analysis-indirect.fzil

@@ -1,0 +1,34 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- LoadString 'object'
+v3 <- TypeOf v1
+v4 <- CreateNamedVariable 'Set', 'none'
+v5 <- Construct v4, []
+v6 <- CreateNamedVariable 's', 'var', v5
+v7 <- CallMethod v6, 'add', [v1]
+v8 <- CallMethod v6, 'has', [v1]
+BeginForLoopInitializer
+    v9 <- LoadInteger '0'
+BeginForLoopCondition -> v10
+    v11 <- LoadInteger '100'
+    v12 <- Compare v10, '<', v11
+BeginForLoopAfterthought v12 -> v13
+    v14 <- UnaryOperation v13, '++'
+BeginForLoopBody -> v15
+    v16 <- CallMethod v6, 'add', [v15]
+EndForLoop
+v17 <- CallMethod v6, 'has', [v1]
+
+
+var global = this;
+typeof global;
+const v5 = new Set();
+var s = v5;
+s.add(global);
+s.has(global);
+for (let i10 = 0; i10 < 100; i10++) {
+    s.add(i10);
+}
+s.has(global);
+
+FuzzIL program written to corpus/global-hash.fzil

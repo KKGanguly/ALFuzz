@@ -1,0 +1,91 @@
+v0 <- BeginArrowFunction -> v1
+    v2 <- CreateNamedVariable 'Math', 'none'
+    v3 <- CallMethod v2, 'random', []
+    v4 <- BinaryOperation v3, '*', v1
+    v5 <- CallMethod v2, 'floor', [v4]
+    Return v5
+EndArrowFunction
+v6 <- CreateNamedVariable 'rand', 'let', v0
+BeginForLoopInitializer
+    v7 <- LoadInteger '0'
+BeginForLoopCondition -> v8
+    v9 <- LoadInteger '1000'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10 -> v11
+    v12 <- UnaryOperation '++', v11
+BeginForLoopBody -> v13
+    v14 <- CreateArray []
+    v15 <- CreateNamedVariable 'array', 'none'
+    Reassign v15, v14
+    v16 <- LoadInteger '30'
+    v17 <- CallFunction v6, [v16]
+    v18 <- CreateNamedVariable 'len', 'let', v17
+    BeginForLoopInitializer
+        v19 <- LoadInteger '0'
+    BeginForLoopCondition -> v20
+        v21 <- Compare v20, '<', v18
+    BeginForLoopAfterthought v21 -> v22
+        v23 <- UnaryOperation '++', v22
+    BeginForLoopBody -> v24
+        v25 <- LoadFloat '0.1'
+        v26 <- BinaryOperation v24, '+', v25
+        v27 <- CreateArray [v26]
+        v28 <- CreateNamedVariable 'array', 'none'
+        SetComputedProperty v28, v24, v27
+    EndForLoop
+    v29 <- LoadInteger '0'
+    v30 <- CreateNamedVariable 'counter', 'let', v29
+    v31 <- BeginArrowFunction -> v32, v33
+        v34 <- LoadInteger '0'
+        v35 <- CreateArray [v34]
+        v36 <- BinaryOperation v32, '||', v35
+        Reassign v32, v36
+        v37 <- LoadInteger '0'
+        v38 <- CreateArray [v37]
+        v39 <- BinaryOperation v33, '||', v38
+        Reassign v33, v39
+        v40 <- UnaryOperation v30, '++'
+        v41 <- LoadInteger '30'
+        v42 <- CallFunction v6, [v41]
+        v43 <- Compare v40, '==', v42
+        BeginIf v43
+            v44 <- LoadInteger '1'
+            v45 <- CreateNamedVariable 'array', 'none'
+            SetProperty v45, 'length', v44
+            v46 <- CreateNamedVariable 'gc', 'none'
+            v47 <- CallFunction v46, []
+        EndIf
+        v48 <- GetElement v32, '0'
+        v49 <- GetElement v33, '0'
+        v50 <- BinaryOperation v48, '-', v49
+        Return v50
+    EndArrowFunction
+    v51 <- CreateNamedVariable 'array', 'none'
+    v52 <- CallMethod v51, 'sort', [v31]
+EndForLoop
+
+
+const v0 = (a1) => {
+    return Math.floor(Math.random() * a1);
+};
+let rand = v0;
+for (let i8 = 0; i8 < 1000; ++i8) {
+    array = [];
+    let len = rand(30);
+    for (let i20 = 0; i20 < len; ++i20) {
+        array[i20] = [i20 + 0.1];
+    }
+    let counter = 0;
+    const v31 = (a32, a33) => {
+        a32 = a32 || [0];
+        a33 = a33 || [0];
+        if (counter++ == rand(30)) {
+            array.length = 1;
+            gc();
+        }
+        return a32[0] - a33[0];
+    };
+    array.sort(v31);
+}
+
+FuzzIL program written to corpus/regress-crbug-854299.fzil

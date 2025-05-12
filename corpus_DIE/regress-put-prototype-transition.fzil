@@ -1,0 +1,423 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- Compare v1, '===', v2
+    BeginIf v3
+        v4 <- LoadInteger '0'
+        v5 <- Compare v1, '===', v4
+        BeginIf v5
+            v6 <- LoadInteger '1'
+            v7 <- BinaryOperation v6, '/', v1
+            v8 <- LoadInteger '1'
+            v9 <- BinaryOperation v8, '/', v2
+            v10 <- Compare v7, '===', v9
+            Return v10
+        EndIf
+        v11 <- LoadBoolean 'true'
+        Return v11
+    EndIf
+    v12 <- TypeOf v1
+    v13 <- TypeOf v2
+    v14 <- Compare v12, '!=', v13
+    BeginIf v14
+        v15 <- LoadBoolean 'false'
+        Return v15
+    EndIf
+    v16 <- TypeOf v1
+    v17 <- LoadString 'number'
+    v18 <- Compare v16, '==', v17
+    BeginIf v18
+        v19 <- CreateNamedVariable 'isNaN', 'none'
+        v20 <- CallFunction v19, [v1]
+        v21 <- CallFunction v19, [v2]
+        v22 <- BinaryOperation v20, '&&', v21
+        Return v22
+    EndIf
+    v23 <- TypeOf v1
+    v24 <- LoadString 'object'
+    v25 <- Compare v23, '!==', v24
+    v26 <- TypeOf v1
+    v27 <- LoadString 'function'
+    v28 <- Compare v26, '!==', v27
+    v29 <- BinaryOperation v25, '&&', v28
+    BeginIf v29
+        v30 <- LoadBoolean 'false'
+        Return v30
+    EndIf
+    v31 <- CreateNamedVariable 'classOf', 'none'
+    v32 <- CallFunction v31, [v1]
+    v33 <- CreateNamedVariable 'objectClass', 'var', v32
+    v34 <- CallFunction v31, [v2]
+    v35 <- Compare v33, '!==', v34
+    BeginIf v35
+        v36 <- LoadBoolean 'false'
+        Return v36
+    EndIf
+    v37 <- LoadString 'RegExp'
+    v38 <- Compare v33, '===', v37
+    BeginIf v38
+        v39 <- CallMethod v1, 'toString', []
+        v40 <- CallMethod v2, 'toString', []
+        v41 <- Compare v39, '===', v40
+        Return v41
+    EndIf
+    v42 <- LoadString 'Function'
+    v43 <- Compare v33, '===', v42
+    BeginIf v43
+        v44 <- LoadBoolean 'false'
+        Return v44
+    EndIf
+    v45 <- LoadString 'Array'
+    v46 <- Compare v33, '===', v45
+    BeginIf v46
+        v47 <- LoadInteger '0'
+        v48 <- CreateNamedVariable 'elementCount', 'var', v47
+        v49 <- GetProperty v1, 'length'
+        v50 <- GetProperty v2, 'length'
+        v51 <- Compare v49, '!=', v50
+        BeginIf v51
+            v52 <- LoadBoolean 'false'
+            Return v52
+        EndIf
+        BeginForLoopInitializer
+            v53 <- LoadInteger '0'
+        BeginForLoopCondition -> v54
+            v55 <- GetProperty v1, 'length'
+            v56 <- Compare v54, '<', v55
+        BeginForLoopAfterthought v56 -> v57
+            v58 <- UnaryOperation v57, '++'
+        BeginForLoopBody -> v59
+            v60 <- GetComputedProperty v1, v59
+            v61 <- GetComputedProperty v2, v59
+            v62 <- CallFunction v0, [v60, v61]
+            v63 <- UnaryOperation '!', v62
+            BeginIf v63
+                v64 <- LoadBoolean 'false'
+                Return v64
+            EndIf
+        EndForLoop
+        v65 <- LoadBoolean 'true'
+        Return v65
+    EndIf
+    v66 <- LoadString 'String'
+    v67 <- Compare v33, '==', v66
+    v68 <- LoadString 'Number'
+    v69 <- Compare v33, '==', v68
+    v70 <- BinaryOperation v67, '||', v69
+    v71 <- LoadString 'Boolean'
+    v72 <- Compare v33, '==', v71
+    v73 <- BinaryOperation v70, '||', v72
+    v74 <- LoadString 'Date'
+    v75 <- Compare v33, '==', v74
+    v76 <- BinaryOperation v73, '||', v75
+    BeginIf v76
+        v77 <- CallMethod v1, 'valueOf', []
+        v78 <- CallMethod v2, 'valueOf', []
+        v79 <- Compare v77, '!==', v78
+        BeginIf v79
+            v80 <- LoadBoolean 'false'
+            Return v80
+        EndIf
+    EndIf
+    v81 <- CreateNamedVariable 'deepObjectEquals', 'none'
+    v82 <- CallFunction v81, [v1, v2]
+    Return v82
+EndPlainFunction
+v83 <- BeginPlainFunction -> v84, v85, v86
+    v87 <- Compare v85, '===', v84
+    BeginIf v87
+        v88 <- LoadInteger '0'
+        v89 <- Compare v84, '!==', v88
+        v90 <- LoadInteger '1'
+        v91 <- BinaryOperation v90, '/', v84
+        v92 <- LoadInteger '1'
+        v93 <- BinaryOperation v92, '/', v85
+        v94 <- Compare v91, '==', v93
+        v95 <- BinaryOperation v89, '||', v94
+        BeginIf v95
+            Return
+        EndIf
+    BeginElse
+        v96 <- Compare v84, '!==', v84
+        v97 <- Compare v85, '!==', v85
+        v98 <- BinaryOperation v96, '&&', v97
+        BeginIf v98
+            Return
+        EndIf
+    EndIf
+    v99 <- CreateNamedVariable 'PrettyPrint', 'none'
+    v100 <- CallFunction v99, [v84]
+    v101 <- CreateNamedVariable 'fail', 'none'
+    v102 <- CallFunction v101, [v100, v85, v86]
+EndPlainFunction
+v103 <- CreateNamedVariable 'assertSame', 'none'
+Reassign v103, v83
+v104 <- BeginPlainFunction -> v105, v106, v107
+    v108 <- CallFunction v0, [v106, v105]
+    v109 <- UnaryOperation '!', v108
+    BeginIf v109
+        v110 <- CreateNamedVariable 'PrettyPrint', 'none'
+        v111 <- CallFunction v110, [v105]
+        v112 <- CreateNamedVariable 'fail', 'none'
+        v113 <- CallFunction v112, [v111, v106, v107]
+    EndIf
+EndPlainFunction
+v114 <- CreateNamedVariable 'assertEquals', 'none'
+Reassign v114, v104
+v115 <- BeginPlainFunction -> v116, v117, v118, v119
+    v120 <- BinaryOperation v116, '-', v117
+    v121 <- CreateNamedVariable 'Math', 'none'
+    v122 <- CallMethod v121, 'abs', [v120]
+    v123 <- Compare v122, '<=', v118
+EndPlainFunction
+v124 <- CreateNamedVariable 'assertEqualsDelta', 'none'
+Reassign v124, v115
+v125 <- BeginPlainFunction -> v126, v127, v128
+    v129 <- LoadString ''
+    v130 <- CreateNamedVariable 'start', 'var', v129
+    BeginIf v128
+        v131 <- LoadString ' - '
+        v132 <- BinaryOperation v128, '+', v131
+        Reassign v130, v132
+    EndIf
+    v133 <- GetProperty v126, 'length'
+    v134 <- GetProperty v127, 'length'
+    v135 <- LoadString 'array length'
+    v136 <- BinaryOperation v130, '+', v135
+    v137 <- GetProperty v126, 'length'
+    v138 <- GetProperty v127, 'length'
+    v139 <- Compare v137, '==', v138
+    BeginIf v139
+        BeginForLoopInitializer
+            v140 <- LoadInteger '0'
+        BeginForLoopCondition -> v141
+            v142 <- GetProperty v126, 'length'
+            v143 <- Compare v141, '<', v142
+        BeginForLoopAfterthought v143 -> v144
+            v145 <- UnaryOperation '++', v144
+        BeginForLoopBody -> v146
+            v147 <- GetComputedProperty v126, v146
+            v148 <- GetComputedProperty v127, v146
+            v149 <- LoadString 'array element at index '
+            v150 <- BinaryOperation v130, '+', v149
+            v151 <- BinaryOperation v150, '+', v146
+        EndForLoop
+    EndIf
+EndPlainFunction
+v152 <- CreateNamedVariable 'assertArrayEquals', 'none'
+Reassign v152, v125
+v153 <- BeginPlainFunction -> v154, v155
+    v156 <- LoadBoolean 'true'
+EndPlainFunction
+v157 <- CreateNamedVariable 'assertTrue', 'none'
+Reassign v157, v153
+v158 <- BeginPlainFunction -> v159, v160
+    v161 <- LoadBoolean 'false'
+EndPlainFunction
+v162 <- CreateNamedVariable 'assertFalse', 'none'
+Reassign v162, v158
+BeginObjectLiteral
+v163 <- EndObjectLiteral
+v164 <- CreateNamedVariable '__v_0', 'var', v163
+BeginObjectLiteral
+v165 <- EndObjectLiteral
+v166 <- CreateNamedVariable '__v_1', 'var', v165
+v167 <- BeginPlainFunction -> 
+EndPlainFunction
+v168 <- BeginPlainFunction -> v169
+    BeginForLoopInitializer
+        v170 <- LoadInteger '0'
+    BeginForLoopCondition -> v171
+        v172 <- LoadInteger '26'
+        v173 <- Compare v171, '<', v172
+    BeginForLoopAfterthought v173 -> v174
+        v175 <- UnaryOperation v174, '++'
+    BeginForLoopBody -> v176
+        v177 <- LoadInteger '0'
+        v178 <- LoadString '__v_5'
+        v179 <- BinaryOperation v178, '+', v176
+        SetComputedProperty v169, v179, v177
+    EndForLoop
+EndPlainFunction
+v180 <- BeginPlainFunction -> v181, v182
+    v183 <- Construct v167, []
+    SetProperty v183, '__proto__', v181
+EndPlainFunction
+v184 <- BeginPlainFunction -> v185, v186, v187, v188
+    v189 <- Construct v167, []
+    BeginObjectLiteral
+    v190 <- EndObjectLiteral
+    v191 <- TernaryOperation v185, v189, v190
+    v192 <- CreateNamedVariable '__v_1', 'var', v191
+    BeginIf v186
+        v193 <- CallFunction v168, [v192]
+        v194 <- CallFunction v180, [v192, v187]
+    BeginElse
+        v195 <- CallFunction v180, [v192, v187]
+        v196 <- CallFunction v168, [v192]
+    EndIf
+EndPlainFunction
+v197 <- CreateNamedVariable 'gc', 'none'
+v198 <- CallFunction v197, []
+BeginForLoopInitializer
+    v199 <- LoadInteger '0'
+BeginForLoopCondition -> v200
+    v201 <- LoadInteger '4'
+    v202 <- Compare v200, '<', v201
+BeginForLoopAfterthought v202 -> v203
+    v204 <- UnaryOperation v203, '++'
+BeginForLoopBody -> v205
+    v206 <- LoadInteger '2'
+    v207 <- BinaryOperation v205, '&', v206
+    v208 <- LoadInteger '7'
+    v209 <- Compare v207, '!=', v208
+    v210 <- CreateNamedVariable '__v_6', 'var', v209
+    v211 <- LoadInteger '2'
+    v212 <- BinaryOperation v205, '&', v211
+    v213 <- LoadInteger '0'
+    v214 <- Compare v212, '!=', v213
+    v215 <- CreateNamedVariable '__v_4', 'var', v214
+    v216 <- LoadBoolean 'true'
+    v217 <- CallFunction v184, [v215, v216, v210]
+    v218 <- LoadBoolean 'false'
+    v219 <- CallFunction v184, [v215, v218, v210]
+    v220 <- CreateNamedVariable '__v_0', 'var', v219
+    v221 <- LoadBoolean 'false'
+    v222 <- CallFunction v184, [v215, v221, v210, v220]
+EndForLoop
+v223 <- LoadInteger '1'
+v224 <- LoadInteger '2'
+v225 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v223
+    ObjectLiteralAddProperty `b`, v224
+    ObjectLiteralAddProperty `c`, v225
+v226 <- EndObjectLiteral
+v227 <- CreateNamedVariable '__v_5', 'none'
+Reassign v227, v226
+
+
+function deepEquals(a1, a2) {
+    if (a1 === a2) {
+        if (a1 === 0) {
+            return (1 / a1) === (1 / a2);
+        }
+        return true;
+    }
+    if (typeof a1 != typeof a2) {
+        return false;
+    }
+    if (typeof a1 == "number") {
+        return isNaN(a1) && isNaN(a2);
+    }
+    if ((typeof a1 !== "object") && (typeof a1 !== "function")) {
+        return false;
+    }
+    var objectClass = classOf(a1);
+    if (objectClass !== classOf(a2)) {
+        return false;
+    }
+    if (objectClass === "RegExp") {
+        return a1.toString() === a2.toString();
+    }
+    if (objectClass === "Function") {
+        return false;
+    }
+    if (objectClass === "Array") {
+        var elementCount = 0;
+        if (a1.length != a2.length) {
+            return false;
+        }
+        for (let i54 = 0; i54 < a1.length; i54++) {
+            if (!deepEquals(a1[i54], a2[i54])) {
+                return false;
+            }
+        }
+        return true;
+    }
+    if ((((objectClass == "String") || (objectClass == "Number")) || (objectClass == "Boolean")) || (objectClass == "Date")) {
+        if (a1.valueOf() !== a2.valueOf()) {
+            return false;
+        }
+    }
+    return deepObjectEquals(a1, a2);
+}
+function assertSame(a84, a85, a86) {
+    if (a85 === a84) {
+        if ((a84 !== 0) || ((1 / a84) == (1 / a85))) {
+            return;
+        }
+    } else {
+        if ((a84 !== a84) && (a85 !== a85)) {
+            return;
+        }
+    }
+    fail(PrettyPrint(a84), a85, a86);
+}
+assertSame = assertSame;
+function assertEquals(a105, a106, a107) {
+    if (!deepEquals(a106, a105)) {
+        fail(PrettyPrint(a105), a106, a107);
+    }
+}
+assertEquals = assertEquals;
+function assertEqualsDelta(a116, a117, a118, a119) {
+    Math.abs(a116 - a117) <= a118;
+}
+assertEqualsDelta = assertEqualsDelta;
+function assertArrayEquals(a126, a127, a128) {
+    var start = "";
+    if (a128) {
+        start = a128 + " - ";
+    }
+    a126.length;
+    a127.length;
+    start + "array length";
+    if (a126.length == a127.length) {
+        for (let i141 = 0; i141 < a126.length; ++i141) {
+            a126[i141];
+            a127[i141];
+            (start + "array element at index ") + i141;
+        }
+    }
+}
+assertArrayEquals = assertArrayEquals;
+function assertTrue(a154, a155) {
+}
+assertTrue = assertTrue;
+function assertFalse(a159, a160) {
+}
+assertFalse = assertFalse;
+var __v_0 = {};
+var __v_1 = {};
+function __f_3() {
+}
+function __f_4(a169) {
+    for (let i171 = 0; i171 < 26; i171++) {
+        a169["__v_5" + i171] = 0;
+    }
+}
+function __f_0(a181, a182) {
+    const v183 = new __f_3();
+    v183.__proto__ = a181;
+}
+function __f_1(a185, a186, a187, a188) {
+    const v189 = new __f_3();
+    var __v_1 = a185 ? v189 : {};
+    if (a186) {
+        __f_4(__v_1);
+        __f_0(__v_1, a187);
+    } else {
+        __f_0(__v_1, a187);
+        __f_4(__v_1);
+    }
+}
+gc();
+for (let i200 = 0; i200 < 4; i200++) {
+    var __v_6 = (i200 & 2) != 7;
+    var __v_4 = (i200 & 2) != 0;
+    __f_1(__v_4, true, __v_6);
+    var __v_0 = __f_1(__v_4, false, __v_6);
+    __f_1(__v_4, false, __v_6, __v_0);
+}
+__v_5 = { a: 1, b: 2, c: 3 };
+
+FuzzIL program written to corpus/regress-put-prototype-transition.fzil

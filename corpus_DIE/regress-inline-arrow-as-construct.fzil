@@ -1,0 +1,24 @@
+v0 <- BeginArrowFunction -> 
+EndArrowFunction
+v1 <- CreateNamedVariable 'g', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- Construct v1, []
+    Return v3
+EndPlainFunction
+v4 <- CallFunction v2, []
+v5 <- CallFunction v2, []
+v6 <- CallFunction v2, []
+
+
+const v0 = () => {
+};
+var g = v0;
+function f() {
+    const v3 = new g();
+    return v3;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-inline-arrow-as-construct.fzil

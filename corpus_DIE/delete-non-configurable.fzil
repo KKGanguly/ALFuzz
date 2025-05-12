@@ -1,0 +1,115 @@
+v0 <- LoadString 'tipli'
+v1 <- CreateNamedVariable 'TIPLI', 'var', v0
+v2 <- CreateNamedVariable 'String', 'none'
+v3 <- Construct v2, [v1]
+v4 <- CreateNamedVariable 'so', 'var', v3
+v5 <- GetProperty v4, 'length'
+v6 <- CreateNamedVariable 'length', 'var', v5
+BeginForLoopInitializer
+    v7 <- LoadInteger '0'
+BeginForLoopCondition -> v8
+    v9 <- Compare v8, '<', v6
+BeginForLoopAfterthought v9 -> v10
+    v11 <- UnaryOperation v10, '++'
+BeginForLoopBody -> v12
+    v13 <- DeleteComputedProperty v4, v12
+    v14 <- LoadString ''use strict'; delete so[i];'
+    v15 <- CreateNamedVariable 'TypeError', 'none'
+    v16 <- CallMethod v12, 'toString', []
+    v17 <- DeleteComputedProperty v4, v16
+    v18 <- LoadString ''use strict'; delete so[i.toString()];'
+EndForLoop
+v19 <- GetProperty v4, 'length'
+v20 <- Construct v2, [v1]
+v21 <- CreateNamedVariable 'Array', 'none'
+v22 <- Construct v21, [v6]
+v23 <- CreateNamedVariable 'arr', 'var', v22
+BeginForLoopInitializer
+    v24 <- LoadInteger '0'
+BeginForLoopCondition -> v25
+    v26 <- Compare v25, '<', v6
+BeginForLoopAfterthought v26 -> v27
+    v28 <- UnaryOperation v27, '++'
+BeginForLoopBody -> v29
+    SetComputedProperty v23, v29, v29
+    v30 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `configurable`, v30
+    v31 <- EndObjectLiteral
+    v32 <- CreateNamedVariable 'Object', 'none'
+    v33 <- CallMethod v32, 'defineProperty', [v23, v29, v31]
+EndForLoop
+BeginForLoopInitializer
+    v34 <- LoadInteger '0'
+BeginForLoopCondition -> v35
+    v36 <- Compare v35, '<', v6
+BeginForLoopAfterthought v36 -> v37
+    v38 <- UnaryOperation v37, '++'
+BeginForLoopBody -> v39
+    v40 <- DeleteComputedProperty v23, v39
+    v41 <- LoadString ''use strict'; delete arr[i];'
+    v42 <- CreateNamedVariable 'TypeError', 'none'
+    v43 <- CallMethod v39, 'toString', []
+    v44 <- DeleteComputedProperty v23, v43
+    v45 <- LoadString ''use strict'; delete arr[i.toString()];'
+    v46 <- GetComputedProperty v23, v39
+EndForLoop
+v47 <- GetProperty v23, 'length'
+v48 <- DeleteComputedProperty v23, v6
+v49 <- LoadInteger '28'
+v50 <- CreateNamedVariable 'INDEX', 'var', v49
+v51 <- CreateNamedVariable 'Object', 'none'
+v52 <- Construct v51, []
+v53 <- CreateNamedVariable 'obj', 'var', v52
+SetComputedProperty v53, v50, v1
+v54 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v54
+v55 <- EndObjectLiteral
+v56 <- CallMethod v51, 'defineProperty', [v53, v50, v55]
+v57 <- DeleteComputedProperty v53, v50
+v58 <- LoadString ''use strict'; delete obj[INDEX];'
+v59 <- CreateNamedVariable 'TypeError', 'none'
+v60 <- CallMethod v50, 'toString', []
+v61 <- DeleteComputedProperty v53, v60
+v62 <- LoadString ''use strict'; delete obj[INDEX.toString()];'
+v63 <- GetComputedProperty v53, v50
+v64 <- LoadInteger '1'
+v65 <- BinaryOperation v50, '+', v64
+v66 <- DeleteComputedProperty v23, v65
+
+
+var TIPLI = "tipli";
+const v3 = new String(TIPLI);
+var so = v3;
+var length = so.length;
+for (let i8 = 0; i8 < length; i8++) {
+    delete so[i8];
+    delete so[i8.toString()];
+}
+so.length;
+new String(TIPLI);
+const v22 = new Array(length);
+var arr = v22;
+for (let i25 = 0; i25 < length; i25++) {
+    arr[i25] = i25;
+    Object.defineProperty(arr, i25, { configurable: false });
+}
+for (let i35 = 0; i35 < length; i35++) {
+    delete arr[i35];
+    delete arr[i35.toString()];
+    arr[i35];
+}
+arr.length;
+delete arr[length];
+var INDEX = 28;
+const v52 = new Object();
+var obj = v52;
+obj[INDEX] = TIPLI;
+Object.defineProperty(obj, INDEX, { configurable: false });
+delete obj[INDEX];
+delete obj[INDEX.toString()];
+obj[INDEX];
+delete arr[INDEX + 1];
+
+FuzzIL program written to corpus/delete-non-configurable.fzil

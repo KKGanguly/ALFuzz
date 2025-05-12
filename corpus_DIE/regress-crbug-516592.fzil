@@ -1,0 +1,46 @@
+v0 <- LoadInteger '2'
+v1 <- LoadInteger '31'
+v2 <- CreateNamedVariable 'Math', 'none'
+v3 <- CallMethod v2, 'pow', [v0, v1]
+v4 <- CreateNamedVariable 'i', 'var', v3
+v5 <- CreateArray []
+v6 <- CreateNamedVariable 'a', 'var', v5
+v7 <- LoadInteger '31'
+SetComputedProperty v6, v4, v7
+v8 <- CreateArray []
+v9 <- CreateNamedVariable 'b', 'var', v8
+v10 <- LoadInteger '33'
+v11 <- LoadInteger '2'
+v12 <- BinaryOperation v4, '-', v11
+SetComputedProperty v9, v12, v10
+BeginTry
+    v13 <- CallMethod v6, 'concat', [v9]
+    v14 <- CreateNamedVariable 'c', 'var', v13
+    v15 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v16 <- CreateNamedVariable 'Object', 'none'
+    v17 <- CallMethod v16, 'observe', [v14, v15]
+    v18 <- LoadInteger '1'
+    SetProperty v14, 'length', v18
+BeginCatch -> v19
+    v20 <- CreateNamedVariable 'RangeError', 'none'
+    v21 <- TestInstanceOf v19, v20
+EndTryCatch
+
+
+var i = Math.pow(2, 31);
+var a = [];
+a[i] = 31;
+var b = [];
+b[i - 2] = 33;
+try {
+    var c = a.concat(b);
+    function f15() {
+    }
+    Object.observe(c, f15);
+    c.length = 1;
+} catch(e19) {
+    e19 instanceof RangeError;
+}
+
+FuzzIL program written to corpus/regress-crbug-516592.fzil

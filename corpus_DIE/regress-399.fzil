@@ -1,0 +1,22 @@
+v0 <- CreateNamedVariable 'Date', 'none'
+v1 <- LoadInteger '1009804000000'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'date', 'var', v2
+v4 <- LoadRegExp '.*(200\d)' ''
+v5 <- CreateNamedVariable 'String', 'none'
+v6 <- CallFunction v5, [v3]
+v7 <- CallMethod v6, 'match', [v4]
+v8 <- GetElement v7, '1'
+v9 <- CreateNamedVariable 'Number', 'none'
+v10 <- CallFunction v9, [v8]
+v11 <- CreateNamedVariable 'year', 'var', v10
+v12 <- CallMethod v3, 'getFullYear', []
+
+
+const v2 = new Date(1009804000000);
+var date = v2;
+const v4 = /.*(200\d)/;
+var year = Number(String(date).match(v4)[1]);
+date.getFullYear();
+
+FuzzIL program written to corpus/regress-399.fzil

@@ -1,0 +1,25 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'x', 'var', v0
+BeginTry
+    v2 <- LoadString '}), x = this, (function() {'
+    v3 <- CreateNamedVariable 'Function', 'none'
+    v4 <- CallFunction v3, [v2]
+BeginCatch -> v5
+    v6 <- LoadString 'Caught '
+    v7 <- BinaryOperation v6, '+', v5
+    v8 <- CreateNamedVariable 'print', 'none'
+    v9 <- CallFunction v8, [v7]
+EndTryCatch
+v10 <- LoadInteger '0'
+v11 <- Compare v1, '===', v10
+
+
+var x = 0;
+try {
+    Function("}), x = this, (function() {");
+} catch(e5) {
+    print("Caught " + e5);
+}
+x === 0;
+
+FuzzIL program written to corpus/new-function.fzil

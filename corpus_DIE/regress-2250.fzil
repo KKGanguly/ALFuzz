@@ -1,0 +1,80 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- TypeOf v2
+    v4 <- LoadString 'object'
+    v5 <- Compare v3, '===', v4
+    BeginIf v5
+        v6 <- CallMethod v2, 'equals', [v1]
+        Return v6
+    EndIf
+    v7 <- Compare v1, '===', v2
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9
+    v10 <- LoadThis
+    v11 <- Compare v10, '===', v9
+    Return v11
+EndPlainFunction
+v12 <- CreateNamedVariable 'Object', 'none'
+v13 <- GetProperty v12, 'prototype'
+SetProperty v13, 'equals', v8
+v14 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v15 <- LoadInteger '0'
+    BeginForLoopCondition -> v16
+        v17 <- LoadInteger '10'
+        v18 <- CallFunction v0, [v16, v17]
+        v19 <- UnaryOperation '!', v18
+    BeginForLoopAfterthought v19 -> v20
+        v21 <- UnaryOperation v20, '++'
+    BeginForLoopBody -> v22
+    EndForLoop
+EndPlainFunction
+BeginObjectLiteral
+v23 <- EndObjectLiteral
+BeginObjectLiteral
+v24 <- EndObjectLiteral
+v25 <- CallFunction v0, [v23, v24]
+BeginObjectLiteral
+v26 <- EndObjectLiteral
+BeginObjectLiteral
+v27 <- EndObjectLiteral
+v28 <- CallFunction v0, [v26, v27]
+v29 <- LoadInteger '1'
+v30 <- LoadInteger '1'
+v31 <- CallFunction v0, [v29, v30]
+v32 <- LoadInteger '1'
+v33 <- LoadInteger '1'
+v34 <- CallFunction v0, [v32, v33]
+v35 <- CallFunction v14, []
+v36 <- CallFunction v14, []
+v37 <- CallFunction v14, []
+v38 <- CallFunction v14, []
+
+
+function eq(a1, a2) {
+    if (typeof a2 === "object") {
+        return a2.equals(a1);
+    }
+    return a1 === a2;
+}
+function f8(a9) {
+    return this === a9;
+}
+const t9 = Object.prototype;
+t9.equals = f8;
+function test() {
+    for (let i16 = 0; !eq(i16, 10); i16++) {
+    }
+}
+const v23 = {};
+eq(v23, {});
+const v26 = {};
+eq(v26, {});
+eq(1, 1);
+eq(1, 1);
+test();
+test();
+test();
+test();
+
+FuzzIL program written to corpus/regress-2250.fzil

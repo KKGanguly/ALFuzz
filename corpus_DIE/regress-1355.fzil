@@ -1,0 +1,33 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- LoadString 'bar'
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '10'
+    Return v3
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v2
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- CallMethod v5, 'defineProperty', [v0, v1, v4]
+v7 <- CreateNamedVariable 'foo', 'var', v6
+v8 <- LoadString 'foo.bar = 20'
+v9 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v10 <- LoadInteger '20'
+    SetProperty v7, 'bar', v10
+EndPlainFunction
+v11 <- LoadString 'shouldThrow()'
+
+
+const v0 = {};
+function f2() {
+    return 10;
+}
+var foo = Object.defineProperty(v0, "bar", { get: f2 });
+function shouldThrow() {
+    'use strict';
+    foo.bar = 20;
+}
+
+FuzzIL program written to corpus/regress-1355.fzil

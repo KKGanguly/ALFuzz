@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '%', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '0'
+v5 <- LoadInteger '4'
+v6 <- LoadInteger '2'
+v7 <- CallFunction v0, [v5, v6]
+v8 <- LoadInteger '1'
+v9 <- LoadInteger '3'
+v10 <- LoadInteger '2'
+v11 <- CallFunction v0, [v9, v10]
+v12 <- CreateNamedVariable 'Infinity', 'none'
+v13 <- UnaryOperation '-', v12
+v14 <- LoadInteger '1'
+v15 <- LoadInteger '2147483648'
+v16 <- UnaryOperation '-', v15
+v17 <- LoadInteger '1'
+v18 <- UnaryOperation '-', v17
+v19 <- CallFunction v0, [v16, v18]
+v20 <- BinaryOperation v14, '/', v19
+
+
+function mod(a1, a2) {
+    return a1 % a2;
+}
+mod(4, 2);
+mod(3, 2);
+-Infinity;
+1 / mod(-2147483648, -1);
+
+FuzzIL program written to corpus/regress-166379.fzil

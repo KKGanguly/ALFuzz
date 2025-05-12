@@ -1,0 +1,14 @@
+v0 <- CreateNamedVariable 'String', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- CreateNamedVariable 'proto', 'var', v1
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+SetProperty v0, 'prototype', v3
+v4 <- GetProperty v0, 'prototype'
+
+
+var proto = String.prototype;
+String.prototype = {};
+String.prototype;
+
+FuzzIL program written to corpus/string-iterator8.fzil

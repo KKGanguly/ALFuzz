@@ -1,0 +1,24 @@
+BeginTry
+    v0 <- CreateNamedVariable 'Int16Array', 'none'
+    v1 <- LoadInteger '613566757'
+    v2 <- Construct v0, [v1]
+    v3 <- CreateNamedVariable 'ta0', 'let', v2
+    v4 <- LoadInteger '1'
+    v5 <- CallMethod v3, 'slice', [v4]
+    v6 <- CreateNamedVariable 'ta2', 'let', v5
+    v7 <- LoadInteger '613566756'
+    v8 <- CallMethod v3, 'slice', [v7]
+    v9 <- CreateNamedVariable 'ta1', 'let', v8
+BeginCatch -> v10
+EndTryCatch
+
+
+try {
+    const v2 = new Int16Array(613566757);
+    let ta0 = v2;
+    let ta2 = ta0.slice(1);
+    let ta1 = ta0.slice(613566756);
+} catch(e10) {
+}
+
+FuzzIL program written to corpus/regress-852258.fzil

@@ -1,0 +1,109 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '0'
+    BeginForLoopCondition -> v2
+        v3 <- LoadInteger '2'
+        v4 <- Compare v2, '<', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- UnaryOperation v5, '++'
+    BeginForLoopBody -> v7
+        v8 <- LoadFloat '1.1'
+        v9 <- LoadFloat '1.2'
+        v10 <- LoadFloat '1.3'
+        v11 <- LoadFloat '1.4'
+        v12 <- LoadFloat '1.5'
+        v13 <- LoadFloat '1.6'
+        v14 <- LoadFloat '1.7'
+        v15 <- LoadFloat '1.8'
+        v16 <- CreateArray [v8, v9, v10, v11, v12, v13, v14, v15]
+        v17 <- CreateNamedVariable 'a', 'var', v16
+        v18 <- CreateNamedVariable 'Array', 'none'
+        v19 <- Construct v18, []
+        v20 <- CreateNamedVariable 'x', 'var', v19
+        v21 <- LoadBoolean 'true'
+        SetProperty v20, 'fixed$length', v21
+        BeginForLoopInitializer
+            v22 <- LoadInteger '0'
+        BeginForLoopCondition -> v23
+            v24 <- GetProperty v17, 'length'
+            v25 <- Compare v23, '<', v24
+        BeginForLoopAfterthought v25 -> v26
+            v27 <- UnaryOperation v26, '++'
+        BeginForLoopBody -> v28
+            v29 <- GetComputedProperty v17, v28
+            v30 <- CallMethod v20, 'push', [v29]
+        EndForLoop
+        BeginForLoopInitializer
+            v31 <- LoadInteger '0'
+        BeginForLoopCondition -> v32
+            v33 <- GetProperty v20, 'length'
+            v34 <- Compare v32, '<', v33
+        BeginForLoopAfterthought v34 -> v35
+            v36 <- UnaryOperation v35, '++'
+        BeginForLoopBody -> v37
+            v38 <- GetComputedProperty v20, v37
+            v39 <- TypeOf v38
+            v40 <- LoadString 'number'
+            v41 <- Compare v39, '!=', v40
+            BeginIf v41
+                v42 <- LoadString 'foo'
+                ThrowException v42
+            EndIf
+            v43 <- GetComputedProperty v20, v37
+            SetComputedProperty v20, v37, v43
+        EndForLoop
+    EndForLoop
+EndPlainFunction
+BeginTry
+    BeginForLoopInitializer
+        v44 <- LoadInteger '0'
+    BeginForLoopCondition -> v45
+        v46 <- LoadInteger '10'
+        v47 <- Compare v45, '<', v46
+    BeginForLoopAfterthought v47 -> v48
+        v49 <- UnaryOperation '++', v48
+    BeginForLoopBody -> v50
+        v51 <- CallFunction v0, []
+    EndForLoop
+    BeginForLoopInitializer
+        v52 <- LoadInteger '0'
+    BeginForLoopCondition -> v53
+        v54 <- LoadInteger '10'
+        v55 <- Compare v53, '<', v54
+    BeginForLoopAfterthought v55 -> v56
+        v57 <- UnaryOperation '++', v56
+    BeginForLoopBody -> v58
+        v59 <- CallFunction v0, []
+    EndForLoop
+BeginCatch -> v60
+EndTryCatch
+
+
+function array_fun() {
+    for (let i2 = 0; i2 < 2; i2++) {
+        var a = [1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8];
+        const v19 = new Array();
+        var x = v19;
+        x.fixed$length = true;
+        for (let i23 = 0; i23 < a.length; i23++) {
+            x.push(a[i23]);
+        }
+        for (let i32 = 0; i32 < x.length; i32++) {
+            if (typeof x[i32] != "number") {
+                throw "foo";
+            }
+            x[i32] = x[i32];
+        }
+    }
+}
+try {
+    for (let i45 = 0; i45 < 10; ++i45) {
+        array_fun();
+    }
+    for (let i53 = 0; i53 < 10; ++i53) {
+        array_fun();
+    }
+} catch(e60) {
+}
+
+FuzzIL program written to corpus/regress-2170.fzil

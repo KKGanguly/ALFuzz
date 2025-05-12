@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'done'
+    ThrowException v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadUndefined
+    v4 <- CreateNamedVariable 'i', 'var', v3
+    BeginWhileLoopHeader
+    BeginWhileLoopBody v4
+        BeginWhileLoopHeader
+        BeginWhileLoopBody v4
+        EndWhileLoop
+        v5 <- UnaryOperation v4, '++'
+    EndWhileLoop
+    BeginWhileLoopHeader
+        v6 <- LoadBoolean 'true'
+    BeginWhileLoopBody v6
+        v7 <- CallFunction v0, []
+    EndWhileLoop
+EndPlainFunction
+v8 <- CallFunction v2, []
+
+
+function bar() {
+    throw "done";
+}
+function foo() {
+    var i;
+    while (i) {
+        while (i) {
+        }
+        i++;
+    }
+    while (true) {
+        bar();
+    }
+}
+foo();
+
+FuzzIL program written to corpus/regress-447526.fzil

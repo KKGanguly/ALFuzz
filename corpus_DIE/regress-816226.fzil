@@ -1,0 +1,19 @@
+v0 <- CreateNamedVariable 'Int8Array', 'none'
+v1 <- CreateNamedVariable 'WebAssembly', 'none'
+v2 <- GetProperty v1, 'Memory'
+v3 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `initial`, v3
+v4 <- EndObjectLiteral
+v5 <- Construct v2, [v4]
+v6 <- GetProperty v5, 'buffer'
+v7 <- Construct v0, [v6]
+v8 <- GetProperty v7, 'buffer'
+
+
+const v2 = WebAssembly.Memory;
+const v5 = new v2({ initial: 0 });
+const v7 = new Int8Array(v5.buffer);
+v7.buffer;
+
+FuzzIL program written to corpus/regress-816226.fzil

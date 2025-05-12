@@ -1,0 +1,67 @@
+v0 <- LoadString 'f'
+v1 <- LoadUndefined
+v2 <- CreateArray [v0, v1]
+v3 <- LoadRegExp '(?:(?=(f)o))?f' ''
+v4 <- LoadString 'foo'
+v5 <- CallMethod v4, 'match', [v3]
+v6 <- LoadString 'zero length match in (?:) with capture in lookahead'
+v7 <- LoadString 'f'
+v8 <- LoadUndefined
+v9 <- CreateArray [v7, v8]
+v10 <- LoadRegExp '(?=(f)o)?f' ''
+v11 <- LoadString 'foo'
+v12 <- CallMethod v11, 'match', [v10]
+v13 <- LoadString 'zero length match in (?=) with capture in lookahead'
+v14 <- LoadString 'fo'
+v15 <- LoadString 'f'
+v16 <- CreateArray [v14, v15]
+v17 <- LoadRegExp '(?:(?=(f)o)f)?o' ''
+v18 <- LoadString 'foo'
+v19 <- CallMethod v18, 'match', [v17]
+v20 <- LoadString 'non-zero length match with capture in lookahead'
+v21 <- LoadString 'fo'
+v22 <- LoadString 'f'
+v23 <- CreateArray [v21, v22]
+v24 <- LoadRegExp '(?:(?=(f)o)f?)?o' ''
+v25 <- LoadString 'foo'
+v26 <- CallMethod v25, 'match', [v24]
+v27 <- LoadString 'non-zero length match with greedy ? in (?:)'
+v28 <- LoadString 'fo'
+v29 <- LoadString 'f'
+v30 <- CreateArray [v28, v29]
+v31 <- LoadRegExp '(?:(?=(f)o)f??)?o' ''
+v32 <- LoadString 'foo'
+v33 <- CallMethod v32, 'match', [v31]
+v34 <- LoadString 'non-zero length match with non-greedy ? in (?:), o forces backtrack'
+v35 <- LoadString 'fo'
+v36 <- LoadString 'f'
+v37 <- CreateArray [v35, v36]
+v38 <- LoadRegExp '(?:(?=(f)o)f??)?.' ''
+v39 <- LoadString 'foo'
+v40 <- CallMethod v39, 'match', [v38]
+v41 <- LoadString 'non-zero length match with non-greedy ? in (?:), zero length match causes backtrack'
+v42 <- LoadString 'f'
+v43 <- LoadUndefined
+v44 <- CreateArray [v42, v43]
+v45 <- LoadRegExp '(?:(?=(f)o)fx)?.' ''
+v46 <- LoadString 'foo'
+v47 <- CallMethod v46, 'match', [v45]
+v48 <- LoadString 'x causes backtrack inside (?:)'
+
+
+["f",,];
+("foo").match(/(?:(?=(f)o))?f/);
+["f",,];
+("foo").match(/(?=(f)o)?f/);
+["fo","f"];
+("foo").match(/(?:(?=(f)o)f)?o/);
+["fo","f"];
+("foo").match(/(?:(?=(f)o)f?)?o/);
+["fo","f"];
+("foo").match(/(?:(?=(f)o)f??)?o/);
+["fo","f"];
+("foo").match(/(?:(?=(f)o)f??)?./);
+["f",,];
+("foo").match(/(?:(?=(f)o)fx)?./);
+
+FuzzIL program written to corpus/regress-176.fzil

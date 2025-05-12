@@ -1,0 +1,23 @@
+v0 <- CreateNamedVariable 'Function', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- GetProperty v1, 'name'
+v3 <- GetProperty v0, 'prototype'
+v4 <- LoadString 'name'
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- CallMethod v5, 'getOwnPropertyDescriptor', [v3, v4]
+v7 <- CreateNamedVariable 'descr', 'var', v6
+v8 <- GetProperty v7, 'enumerable'
+v9 <- GetProperty v7, 'configurable'
+v10 <- GetProperty v7, 'writable'
+v11 <- LoadString ''
+v12 <- GetProperty v7, 'value'
+
+
+Function.prototype.name;
+var descr = Object.getOwnPropertyDescriptor(Function.prototype, "name");
+descr.enumerable;
+descr.configurable;
+descr.writable;
+descr.value;
+
+FuzzIL program written to corpus/function-prototype-name.fzil

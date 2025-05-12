@@ -1,0 +1,28 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Worker'
+BeginIf v1
+    v2 <- CreateTemplateString ['var w = new Worker('postMessage(42)', {type: 'string'});\n     onmessage = function(parentMsg) {\n       w.postMessage(parentMsg);\n       var childMsg = w.getMessage();\n       postMessage(childMsg);\n     };'], []
+    v3 <- CreateNamedVariable 'workerScript', 'var', v2
+    v4 <- CreateNamedVariable 'Worker', 'none'
+    v5 <- LoadString 'string'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `type`, v5
+    v6 <- EndObjectLiteral
+    v7 <- Construct v4, [v3, v6]
+    v8 <- CreateNamedVariable 'w', 'var', v7
+    v9 <- LoadInteger '9'
+    v10 <- CallMethod v8, 'postMessage', [v9]
+    v11 <- LoadInteger '42'
+    v12 <- CallMethod v8, 'getMessage', []
+EndIf
+
+
+if (this.Worker) {
+    var workerScript = `var w = new Worker('postMessage(42)', {type: 'string'});\n     onmessage = function(parentMsg) {\n       w.postMessage(parentMsg);\n       var childMsg = w.getMessage();\n       postMessage(childMsg);\n     };`;
+    const v7 = new Worker(workerScript, { type: "string" });
+    var w = v7;
+    w.postMessage(9);
+    w.getMessage();
+}
+
+FuzzIL program written to corpus/d8-worker-spawn-worker.fzil

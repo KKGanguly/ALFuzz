@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadBoolean 'false'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    v4 <- CreateNamedVariable 'y', 'var', v3
+    v5 <- LoadString 'kat'
+    v6 <- Compare v3, '==', v5
+    BeginIf v6
+        v7 <- LoadString 'kat'
+        Reassign v3, v7
+    BeginElse
+        v8 <- LoadString 'hund'
+        Reassign v3, v8
+        v9 <- CallFunction v0, []
+        v10 <- CreateNamedVariable 'z', 'var', v9
+        v11 <- UnaryOperation '!', v10
+        BeginIf v11
+            v12 <- LoadString 'kat'
+            Reassign v3, v12
+        EndIf
+    EndIf
+EndPlainFunction
+v13 <- LoadString 'hund'
+v14 <- CallFunction v2, [v13]
+
+
+function f() {
+    return false;
+}
+function test(a3) {
+    var y = a3;
+    if (a3 == "kat") {
+        a3 = "kat";
+    } else {
+        a3 = "hund";
+        var z = f();
+        if (!z) {
+            a3 = "kat";
+        }
+    }
+}
+test("hund");
+
+FuzzIL program written to corpus/regress-294.fzil

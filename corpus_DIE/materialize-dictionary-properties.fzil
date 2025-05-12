@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadNull
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- CallMethod v2, 'create', [v1]
+    v4 <- CreateNamedVariable 'o', 'var', v3
+    v5 <- LoadInteger '1'
+    v6 <- LoadInteger '0'
+    v7 <- TernaryOperation v4, v5, v6
+    Return v7
+EndPlainFunction
+v8 <- CallFunction v0, []
+v9 <- CallFunction v0, []
+v10 <- LoadInteger '1'
+v11 <- CallFunction v0, []
+
+
+function f() {
+    var o = Object.create(null);
+    return o ? 1 : 0;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/materialize-dictionary-properties.fzil

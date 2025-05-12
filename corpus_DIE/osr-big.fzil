@@ -1,0 +1,68 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'sum', 'var', v2
+    v4 <- LoadInteger '1000000'
+    v5 <- CreateNamedVariable 'outer', 'var', v4
+    v6 <- LoadInteger '1'
+    v7 <- CreateNamedVariable 'a', 'var', v6
+    v8 <- LoadInteger '2'
+    v9 <- CreateNamedVariable 'b', 'var', v8
+    v10 <- LoadInteger '3'
+    v11 <- CreateNamedVariable 'c', 'var', v10
+    v12 <- LoadInteger '4'
+    v13 <- CreateNamedVariable 'd', 'var', v12
+    v14 <- LoadInteger '5'
+    v15 <- CreateNamedVariable 'e', 'var', v14
+    BeginWhileLoopHeader
+        v16 <- LoadInteger '0'
+        v17 <- Compare v5, '>', v16
+    BeginWhileLoopBody v17
+        v18 <- LoadInteger '5'
+        v19 <- BinaryOperation v7, '+', v18
+        Reassign v7, v19
+        v20 <- LoadInteger '4'
+        v21 <- BinaryOperation v9, '+', v20
+        Reassign v9, v21
+        v22 <- LoadInteger '3'
+        v23 <- BinaryOperation v11, '+', v22
+        Reassign v11, v23
+        v24 <- LoadInteger '2'
+        v25 <- BinaryOperation v13, '+', v24
+        Reassign v13, v25
+        v26 <- LoadInteger '1'
+        v27 <- BinaryOperation v15, '+', v26
+        Reassign v15, v27
+        v28 <- UnaryOperation v5, '--'
+    EndWhileLoop
+    v29 <- BinaryOperation v7, '+', v9
+    v30 <- BinaryOperation v29, '+', v11
+    v31 <- BinaryOperation v30, '+', v13
+    v32 <- BinaryOperation v31, '+', v15
+    Return v32
+EndPlainFunction
+v33 <- LoadInteger '15000015'
+v34 <- LoadInteger '5'
+v35 <- CallFunction v0, [v34]
+
+
+function f(a1) {
+    var sum = 0;
+    var outer = 1000000;
+    var a = 1;
+    var b = 2;
+    var c = 3;
+    var d = 4;
+    var e = 5;
+    while (outer > 0) {
+        a = a + 5;
+        b = b + 4;
+        c = c + 3;
+        d = d + 2;
+        e = e + 1;
+        outer--;
+    }
+    return (((a + b) + c) + d) + e;
+}
+f(5);
+
+FuzzIL program written to corpus/osr-big.fzil

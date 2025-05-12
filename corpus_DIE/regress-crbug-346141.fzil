@@ -1,0 +1,22 @@
+v0 <- CreateNamedVariable 'Symbol', 'none'
+v1 <- CallFunction v0, []
+v2 <- CreateNamedVariable 's', 'var', v1
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'o', 'var', v3
+v5 <- LoadInteger '2'
+SetComputedProperty v4, v2, v5
+v6 <- LoadInteger '3'
+v7 <- LoadString ''
+SetComputedProperty v4, v7, v6
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'getOwnPropertySymbols', [v4]
+
+
+var s = Symbol();
+var o = {};
+o[s] = 2;
+o[""] = 3;
+Object.getOwnPropertySymbols(o);
+
+FuzzIL program written to corpus/regress-crbug-346141.fzil

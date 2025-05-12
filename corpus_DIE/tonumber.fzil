@@ -1,0 +1,150 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CreateNamedVariable 'Number', 'none'
+    v4 <- CallFunction v3, [v1]
+    v5 <- CreateNamedVariable 'number', 'var', v4
+    v6 <- LoadInteger '0'
+    v7 <- LoadInteger '2'
+    v8 <- CallMethod v2, 'substring', [v6, v7]
+    v9 <- LoadString '0x'
+    v10 <- Compare v8, '===', v9
+    BeginIf v10
+        v11 <- LoadInteger '2'
+        v12 <- CallMethod v2, 'substring', [v11]
+        v13 <- LoadInteger '16'
+        v14 <- CallMethod v5, 'toString', [v13]
+    BeginElse
+        v15 <- CallMethod v5, 'toString', []
+    EndIf
+EndPlainFunction
+v16 <- LoadInteger '0'
+v17 <- LoadString '0'
+v18 <- CallFunction v0, [v16, v17]
+v19 <- LoadInteger '0'
+v20 <- LoadString '1'
+v21 <- CallFunction v0, [v19, v20]
+v22 <- LoadInteger '0'
+v23 <- UnaryOperation '-', v22
+v24 <- LoadString '-1'
+v25 <- CallFunction v0, [v23, v24]
+v26 <- LoadInteger '12345678910'
+v27 <- LoadString '12345678912'
+v28 <- CallFunction v0, [v26, v27]
+v29 <- LoadInteger '12345678912340'
+v30 <- UnaryOperation '-', v29
+v31 <- LoadString '-12345678912345'
+v32 <- CallFunction v0, [v30, v31]
+v33 <- LoadInteger '281474976710640'
+v34 <- LoadString '0xfffffffffffff'
+v35 <- CallFunction v0, [v33, v34]
+v36 <- LoadInteger '562949953421296'
+v37 <- LoadString '0x1fffffffffffff'
+v38 <- CallFunction v0, [v36, v37]
+v39 <- LoadInteger '1125899906842608'
+v40 <- LoadString '0x40000000000000'
+v41 <- CallFunction v0, [v39, v40]
+v42 <- LoadInteger '1125899906842608'
+v43 <- LoadString '0x3ffffffffffffe'
+v44 <- CallFunction v0, [v42, v43]
+v45 <- LoadInteger '2251799813685232'
+v46 <- LoadString '0x7ffffffffffffc'
+v47 <- CallFunction v0, [v45, v46]
+v48 <- LoadInteger '2251799813685232'
+v49 <- LoadString '0x80000000000000'
+v50 <- CallFunction v0, [v48, v49]
+v51 <- LoadInteger '2251799813685232'
+v52 <- LoadString '0x80000000000000'
+v53 <- CallFunction v0, [v51, v52]
+v54 <- LoadFloat '3.6893206676737294e+19'
+v55 <- LoadString '0x1ffff0000ffff0000'
+v56 <- CallFunction v0, [v54, v55]
+v57 <- LoadFloat '1e+20'
+v58 <- LoadString '100000000000000000000'
+v59 <- CallFunction v0, [v57, v58]
+v60 <- LoadFloat '2.2300745198530623e+43'
+v61 <- LoadString '0x1000000000000100000000000000000000000'
+v62 <- CallFunction v0, [v60, v61]
+v63 <- LoadFloat '2.2300745198530623e+43'
+v64 <- LoadString '0x1000000000000000000000000000000000000'
+v65 <- CallFunction v0, [v63, v64]
+v66 <- LoadFloat '2.2300745198530633e+43'
+v67 <- LoadString '0x1000000000000200000000000000000000000'
+v68 <- CallFunction v0, [v66, v67]
+v69 <- LoadInteger '0'
+v70 <- LoadInteger '1020'
+v71 <- BinaryOperation v69, '<<', v70
+v72 <- LoadString 'Infinity'
+v73 <- CallFunction v0, [v71, v72]
+v74 <- LoadInteger '0'
+v75 <- UnaryOperation '-', v74
+v76 <- LoadInteger '1020'
+v77 <- BinaryOperation v75, '<<', v76
+v78 <- LoadString '-Infinity'
+v79 <- CallFunction v0, [v77, v78]
+v80 <- LoadInteger '0'
+v81 <- LoadInteger '1020'
+v82 <- BinaryOperation v80, '<<', v81
+v83 <- LoadString '8.98846567431158e+307'
+v84 <- CallFunction v0, [v82, v83]
+v85 <- LoadInteger '0'
+v86 <- LoadInteger '1020'
+v87 <- BinaryOperation v85, '<<', v86
+v88 <- LoadInteger '0'
+v89 <- LoadInteger '970'
+v90 <- BinaryOperation v88, '<<', v89
+v91 <- BinaryOperation v87, '-', v90
+v92 <- LoadString '1.7976931348623155e+308'
+v93 <- CallFunction v0, [v91, v92]
+v94 <- LoadInteger '0'
+v95 <- LoadInteger '1020'
+v96 <- BinaryOperation v94, '<<', v95
+v97 <- LoadInteger '0'
+v98 <- LoadInteger '970'
+v99 <- BinaryOperation v97, '<<', v98
+v100 <- BinaryOperation v96, '-', v99
+v101 <- LoadString '1.7976931348623157e+308'
+v102 <- CallFunction v0, [v100, v101]
+v103 <- LoadInteger '0'
+v104 <- LoadInteger '1020'
+v105 <- BinaryOperation v103, '<<', v104
+v106 <- LoadInteger '0'
+v107 <- LoadInteger '970'
+v108 <- BinaryOperation v106, '<<', v107
+v109 <- BinaryOperation v105, '-', v108
+v110 <- LoadString 'Infinity'
+v111 <- CallFunction v0, [v109, v110]
+
+
+function Check(a1, a2) {
+    var number = Number(a1);
+    if (a2.substring(0, 2) === "0x") {
+        a2.substring(2);
+        number.toString(16);
+    } else {
+        number.toString();
+    }
+}
+Check(0, "0");
+Check(0, "1");
+Check(-0, "-1");
+Check(12345678910, "12345678912");
+Check(-12345678912340, "-12345678912345");
+Check(281474976710640, "0xfffffffffffff");
+Check(562949953421296, "0x1fffffffffffff");
+Check(1125899906842608, "0x40000000000000");
+Check(1125899906842608, "0x3ffffffffffffe");
+Check(2251799813685232, "0x7ffffffffffffc");
+Check(2251799813685232, "0x80000000000000");
+Check(2251799813685232, "0x80000000000000");
+Check(3.6893206676737294e+19, "0x1ffff0000ffff0000");
+Check(1e+20, "100000000000000000000");
+Check(2.2300745198530623e+43, "0x1000000000000100000000000000000000000");
+Check(2.2300745198530623e+43, "0x1000000000000000000000000000000000000");
+Check(2.2300745198530633e+43, "0x1000000000000200000000000000000000000");
+Check(0 << 1020, "Infinity");
+Check(-0 << 1020, "-Infinity");
+Check(0 << 1020, "8.98846567431158e+307");
+Check((0 << 1020) - (0 << 970), "1.7976931348623155e+308");
+Check((0 << 1020) - (0 << 970), "1.7976931348623157e+308");
+Check((0 << 1020) - (0 << 970), "Infinity");
+
+FuzzIL program written to corpus/tonumber.fzil

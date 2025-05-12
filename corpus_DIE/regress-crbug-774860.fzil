@@ -1,0 +1,36 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Function', 'none'
+    v2 <- BeginClassDefinition v1
+    EndClassDefinition
+    v3 <- LoadString ''use strict';'
+    v4 <- Construct v2, [v3]
+    v5 <- CreateNamedVariable 'f', 'let', v4
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- LoadInteger '20'
+        v9 <- Compare v7, '<', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation v10, '++'
+    BeginForLoopBody -> v12
+        v13 <- Construct v2, []
+    EndForLoop
+    v14 <- CreateNamedVariable 'gc', 'none'
+    v15 <- CallFunction v14, []
+EndPlainFunction
+v16 <- CallFunction v0, []
+
+
+function f0() {
+    class C2 extends Function {
+    }
+    const v4 = new C2("'use strict';");
+    let f = v4;
+    for (let i7 = 0; i7 < 20; i7++) {
+        new C2();
+    }
+    gc();
+}
+f0();
+
+FuzzIL program written to corpus/regress-crbug-774860.fzil

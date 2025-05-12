@@ -1,0 +1,73 @@
+BeginBlockStatement
+    v0 <- LoadUndefined
+    v1 <- LoadInteger '1'
+    v2 <- CreateArray [v0, v1]
+    v3 <- CreateNamedVariable 'x', 'const', v2
+    v4 <- LoadInteger '42'
+    v5 <- CreateArray [v4]
+    SetProperty v3, '__proto__', v5
+    v6 <- CreateArrayWithSpread [...v3]
+    v7 <- CreateNamedVariable 'y', 'const', v6
+    v8 <- LoadInteger '42'
+    v9 <- LoadInteger '1'
+    v10 <- CreateArray [v8, v9]
+    v11 <- LoadInteger '0'
+    v12 <- CallMethod v7, 'hasOwnProperty', [v11]
+EndBlockStatement
+BeginBlockStatement
+    v13 <- LoadUndefined
+    v14 <- LoadInteger '1'
+    v15 <- CreateArray [v13, v14]
+    v16 <- CreateNamedVariable 'x', 'const', v15
+    v17 <- LoadInteger '42'
+    v18 <- CreateArray [v17]
+    SetProperty v16, '__proto__', v18
+    v19 <- LoadInteger '42'
+    v20 <- CreateNamedVariable 'Symbol', 'none'
+    v21 <- GetProperty v20, 'iterator'
+    v22 <- CallComputedMethod v16, v21, []
+    v23 <- CallMethod v22, 'next', []
+    v24 <- GetProperty v23, 'value'
+EndBlockStatement
+BeginBlockStatement
+    v25 <- CreateArray []
+    v26 <- GetProperty v25, '__proto__'
+    v27 <- CreateNamedVariable 'array_prototype', 'const', v26
+    v28 <- LoadInteger '42'
+    SetElement v27, '0', v28
+    v29 <- LoadUndefined
+    v30 <- LoadInteger '1'
+    v31 <- CreateArray [v29, v30]
+    v32 <- CreateNamedVariable 'x', 'const', v31
+    v33 <- LoadInteger '42'
+    v34 <- CreateNamedVariable 'Symbol', 'none'
+    v35 <- GetProperty v34, 'iterator'
+    v36 <- CallComputedMethod v32, v35, []
+    v37 <- CallMethod v36, 'next', []
+    v38 <- GetProperty v37, 'value'
+    v39 <- LoadInteger '0'
+    v40 <- DeleteElement v27, '0'
+EndBlockStatement
+
+
+{
+    const x = [,1];
+    x.__proto__ = [42];
+    const y = [...x];
+    [42,1];
+    y.hasOwnProperty(0);
+}
+{
+    const x = [,1];
+    x.__proto__ = [42];
+    x[Symbol.iterator]().next().value;
+}
+{
+    const array_prototype = ([]).__proto__;
+    array_prototype[0] = 42;
+    const x = [,1];
+    x[Symbol.iterator]().next().value;
+    delete array_prototype[0];
+}
+
+FuzzIL program written to corpus/regress-8449.fzil

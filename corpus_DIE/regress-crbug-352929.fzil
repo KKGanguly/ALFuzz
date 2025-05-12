@@ -1,0 +1,107 @@
+v0 <- CreateNamedVariable 'Int32Array', 'none'
+v1 <- LoadInteger '100'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'dummy', 'var', v2
+v4 <- LoadInteger '100'
+v5 <- Construct v0, [v4]
+v6 <- CreateNamedVariable 'array', 'none'
+Reassign v6, v5
+v7 <- LoadInteger '100'
+v8 <- Construct v0, [v7]
+v9 <- CreateNamedVariable 'dummy2', 'var', v8
+v10 <- LoadInteger '0'
+v11 <- CreateNamedVariable 'array', 'none'
+v12 <- LoadInteger '17'
+v13 <- UnaryOperation '-', v12
+SetComputedProperty v11, v13, v10
+v14 <- BeginPlainFunction -> v15, v16
+    v17 <- LoadInteger '1'
+    v18 <- LoadInteger '1'
+    v19 <- BinaryOperation v15, '-', v18
+    SetComputedProperty v11, v19, v17
+    v20 <- LoadInteger '2'
+    v21 <- LoadInteger '2'
+    v22 <- BinaryOperation v15, '-', v21
+    SetComputedProperty v11, v22, v20
+    BeginIf v16
+        v23 <- LoadInteger '3'
+        v24 <- LoadInteger '4'
+        v25 <- BinaryOperation v15, '-', v24
+        SetComputedProperty v11, v25, v23
+        v26 <- LoadInteger '4'
+        v27 <- LoadInteger '5'
+        v28 <- BinaryOperation v15, '-', v27
+        SetComputedProperty v11, v28, v26
+    BeginElse
+        v29 <- LoadInteger '5'
+        v30 <- LoadInteger '6'
+        v31 <- BinaryOperation v15, '-', v30
+        SetComputedProperty v11, v31, v29
+        v32 <- LoadInteger '777'
+        v33 <- LoadInteger '100'
+        v34 <- BinaryOperation v15, '-', v33
+        SetComputedProperty v11, v34, v32
+    EndIf
+EndPlainFunction
+v35 <- LoadInteger '5'
+v36 <- LoadBoolean 'true'
+v37 <- CallFunction v14, [v35, v36]
+v38 <- LoadInteger '7'
+v39 <- LoadBoolean 'false'
+v40 <- CallFunction v14, [v38, v39]
+v41 <- LoadInteger '7'
+v42 <- LoadBoolean 'false'
+v43 <- CallFunction v14, [v41, v42]
+BeginForLoopInitializer
+    v44 <- LoadInteger '0'
+BeginForLoopCondition -> v45
+    v46 <- GetProperty v3, 'length'
+    v47 <- Compare v45, '<', v46
+BeginForLoopAfterthought v47 -> v48
+    v49 <- UnaryOperation v48, '++'
+BeginForLoopBody -> v50
+    v51 <- LoadInteger '0'
+    v52 <- GetComputedProperty v3, v50
+EndForLoop
+BeginForLoopInitializer
+    v53 <- LoadInteger '0'
+BeginForLoopCondition -> v54
+    v55 <- GetProperty v9, 'length'
+    v56 <- Compare v54, '<', v55
+BeginForLoopAfterthought v56 -> v57
+    v58 <- UnaryOperation v57, '++'
+BeginForLoopBody -> v59
+    v60 <- LoadInteger '0'
+    v61 <- GetComputedProperty v9, v59
+EndForLoop
+
+
+const v2 = new Int32Array(100);
+var dummy = v2;
+const v5 = new Int32Array(100);
+array = v5;
+const v8 = new Int32Array(100);
+var dummy2 = v8;
+array[-17] = 0;
+function fun(a15, a16) {
+    array[a15 - 1] = 1;
+    array[a15 - 2] = 2;
+    if (a16) {
+        array[a15 - 4] = 3;
+        array[a15 - 5] = 4;
+    } else {
+        array[a15 - 6] = 5;
+        array[a15 - 100] = 777;
+    }
+}
+fun(5, true);
+fun(7, false);
+fun(7, false);
+for (let i45 = 0; i45 < dummy.length; i45++) {
+    dummy[i45];
+}
+for (let i54 = 0; i54 < dummy2.length; i54++) {
+    dummy2[i54];
+}
+
+FuzzIL program written to corpus/regress-crbug-352929.fzil

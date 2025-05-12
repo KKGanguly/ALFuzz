@@ -1,0 +1,105 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '23'
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadFloat '4.2'
+    Return v5
+EndPlainFunction
+v6 <- CreateArray [v0, v2, v4]
+v7 <- CreateNamedVariable 'values', 'var', v6
+v8 <- BeginPlainFunction -> v9
+    v10 <- CallFunction v9, []
+    v11 <- LoadThis
+    SetProperty v11, 'x', v10
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13, v14, v15
+    v16 <- Construct v8, [v13]
+    v17 <- CreateNamedVariable 'o', 'var', v16
+    SetProperty v17, 'x', v14
+    v18 <- GetProperty v15, 'deopt'
+    v19 <- GetProperty v17, 'x'
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21, v22
+    v23 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `deopt`, v23
+    v24 <- EndObjectLiteral
+    v25 <- CreateNamedVariable 'deopt', 'var', v24
+    v26 <- CallFunction v21, []
+    v27 <- CallFunction v12, [v21, v26, v25]
+    v28 <- CallFunction v21, []
+    v29 <- CallFunction v12, [v21, v28, v25]
+    v30 <- CallFunction v21, []
+    v31 <- CallFunction v12, [v21, v30, v25]
+    v32 <- DeleteProperty v25, 'deopt'
+    v33 <- CallFunction v22, []
+    v34 <- CallFunction v12, [v21, v33, v25]
+    BeginObjectLiteral
+    v35 <- EndObjectLiteral
+    SetProperty v8, 'prototype', v35
+EndPlainFunction
+BeginForLoopInitializer
+    v36 <- LoadInteger '0'
+BeginForLoopCondition -> v37
+    v38 <- GetProperty v7, 'length'
+    v39 <- Compare v37, '<', v38
+BeginForLoopAfterthought v39 -> v40
+    v41 <- UnaryOperation v40, '++'
+BeginForLoopBody -> v42
+    BeginForLoopInitializer
+        v43 <- LoadInteger '0'
+    BeginForLoopCondition -> v44
+        v45 <- GetProperty v7, 'length'
+        v46 <- Compare v44, '<', v45
+    BeginForLoopAfterthought v46 -> v47
+        v48 <- UnaryOperation v47, '++'
+    BeginForLoopBody -> v49
+        v50 <- GetComputedProperty v7, v42
+        v51 <- GetComputedProperty v7, v49
+        v52 <- CallFunction v20, [v50, v51]
+    EndForLoop
+EndForLoop
+
+
+function f0() {
+    return {};
+}
+function f2() {
+    return 23;
+}
+function f4() {
+    return 4.2;
+}
+var values = [f0,f2,f4];
+function constructor(a9) {
+    this.x = a9();
+}
+function access(a13, a14, a15) {
+    const v16 = new constructor(a13);
+    var o = v16;
+    o.x = a14;
+    a15.deopt;
+    o.x;
+}
+function test(a21, a22) {
+    var deopt = { deopt: false };
+    access(a21, a21(), deopt);
+    access(a21, a21(), deopt);
+    access(a21, a21(), deopt);
+    delete deopt.deopt;
+    access(a21, a22(), deopt);
+    constructor.prototype = {};
+}
+for (let i37 = 0; i37 < values.length; i37++) {
+    for (let i44 = 0; i44 < values.length; i44++) {
+        test(values[i37], values[i44]);
+    }
+}
+
+FuzzIL program written to corpus/escape-analysis-representation.fzil

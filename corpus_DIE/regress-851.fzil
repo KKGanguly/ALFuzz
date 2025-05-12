@@ -1,0 +1,33 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'i', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '10000'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    BeginObjectLiteral
+    v9 <- EndObjectLiteral
+    v10 <- CreateNamedVariable 'Object', 'none'
+    v11 <- CallMethod v10, 'freeze', [v9]
+    v12 <- LoadRegExp '\0' ''
+    v13 <- LoadNull
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v13
+    v14 <- EndObjectLiteral
+    v15 <- CreateNamedVariable 'JSON', 'none'
+    v16 <- CallMethod v15, 'stringify', [v14]
+    v17 <- CallMethod v16, 'match', [v12]
+EndForLoop
+
+
+var i = 0;
+for (let i3 = 0; i3 < 10000; i3++) {
+    Object.freeze({});
+    const v12 = /\0/;
+    JSON.stringify({ x: null }).match(v12);
+}
+
+FuzzIL program written to corpus/regress-851.fzil

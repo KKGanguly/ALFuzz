@@ -1,0 +1,42 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '1'
+v5 <- LoadUndefined
+v6 <- LoadInteger '3'
+v7 <- CreateArray [v4, v5, v6]
+v8 <- LoadInteger '0'
+v9 <- CallFunction v0, [v7, v8]
+v10 <- LoadInteger '1'
+v11 <- LoadUndefined
+v12 <- LoadInteger '3'
+v13 <- CreateArray [v10, v11, v12]
+v14 <- LoadInteger '2'
+v15 <- CallFunction v0, [v13, v14]
+v16 <- LoadInteger '1'
+v17 <- LoadUndefined
+v18 <- LoadInteger '3'
+v19 <- CreateArray [v16, v17, v18]
+v20 <- LoadInteger '0'
+v21 <- CallFunction v0, [v19, v20]
+v22 <- CallFunction v0, []
+v23 <- LoadInteger '1'
+v24 <- CreateNamedVariable 'Array', 'none'
+v25 <- GetProperty v24, 'prototype'
+SetProperty v25, 'unrelated', v23
+v26 <- CallFunction v0, []
+
+
+function get(a1, a2) {
+    return a1[a2];
+}
+get([1,,3], 0);
+get([1,,3], 2);
+get([1,,3], 0);
+get();
+const t3 = Array.prototype;
+t3.unrelated = 1;
+get();
+
+FuzzIL program written to corpus/regress-6607-1.fzil

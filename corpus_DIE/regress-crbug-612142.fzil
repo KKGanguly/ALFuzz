@@ -1,0 +1,65 @@
+v0 <- BeginPlainFunction -> v1
+    ThrowException v1
+EndPlainFunction
+v2 <- CreateNamedVariable 'Symbol', 'none'
+v3 <- GetProperty v2, 'toPrimitive'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v3, v0
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'thrower', 'var', v4
+BeginTry
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- LoadInteger '10'
+        v9 <- Compare v7, '<', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation v10, '++'
+    BeginForLoopBody -> v12
+    EndForLoop
+    BeginForLoopInitializer
+        v13 <- LoadFloat '0.5'
+    BeginForLoopCondition -> v14
+        v15 <- LoadInteger '100000'
+        v16 <- Compare v14, '<', v15
+    BeginForLoopAfterthought v16 -> v17
+        v18 <- UnaryOperation '++', v17
+    BeginForLoopBody -> v19
+    EndForLoop
+    BeginForLoopInitializer
+        v20 <- LoadInteger '16'
+        v21 <- LoadInteger '0'
+        v22 <- BinaryOperation v20, '|', v21
+        v23 <- LoadInteger '0'
+        v24 <- BinaryOperation v22, '||', v23
+        v25 <- LoadThis
+        v26 <- BinaryOperation v24, '||', v25
+        v27 <- LoadInteger '1'
+        v28 <- BinaryOperation v26, '||', v27
+    BeginForLoopCondition -> v29
+    BeginForLoopAfterthought v29 -> v30
+    BeginForLoopBody -> v31
+        v32 <- CreateNamedVariable 'String', 'none'
+        v33 <- CallMethod v32, 'fromCharCode', [v5]
+    EndForLoop
+BeginCatch -> v34
+EndTryCatch
+
+
+function f0(a1) {
+    throw a1;
+}
+const v3 = Symbol.toPrimitive;
+var thrower = { [v3]: f0 };
+try {
+    for (let i7 = 0; i7 < 10; i7++) {
+    }
+    for (let i14 = 0.5; i14 < 100000; ++i14) {
+    }
+    for (let i29 = (((16 | 0) || 0) || this) || 1; i29;) {
+        String.fromCharCode(thrower);
+    }
+} catch(e34) {
+}
+
+FuzzIL program written to corpus/regress-crbug-612142.fzil

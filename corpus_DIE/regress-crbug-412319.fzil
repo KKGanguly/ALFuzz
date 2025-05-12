@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable '__v_7', 'var', v2
+    v4 <- CreateNamedVariable 'Object', 'none'
+    v5 <- CallMethod v4, 'preventExtensions', [v3]
+    BeginForLoopInitializer
+        v6 <- LoadInteger '2'
+        v7 <- UnaryOperation '-', v6
+    BeginForLoopCondition -> v8
+        v9 <- LoadInteger '19'
+        v10 <- Compare v8, '<', v9
+    BeginForLoopAfterthought v10 -> v11
+        v12 <- UnaryOperation v11, '++'
+    BeginForLoopBody -> v13
+        v14 <- CallMethod v3, 'shift', []
+    EndForLoop
+    v15 <- CreateNamedVariable '__f_7', 'none'
+    v16 <- CallFunction v15, [v3]
+EndPlainFunction
+v17 <- CallFunction v0, []
+v18 <- CallFunction v0, []
+v19 <- CallFunction v0, []
+v20 <- BeginPlainFunction -> v21
+    v22 <- CallMethod v21, 'pop', []
+EndPlainFunction
+
+
+function __f_6() {
+    var __v_7 = [0];
+    Object.preventExtensions(__v_7);
+    for (let i8 = -2; i8 < 19; i8++) {
+        __v_7.shift();
+    }
+    __f_7(__v_7);
+}
+__f_6();
+__f_6();
+__f_6();
+function __f_7(a21) {
+    a21.pop();
+}
+
+FuzzIL program written to corpus/regress-crbug-412319.fzil

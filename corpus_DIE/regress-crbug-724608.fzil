@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- LoadString 'p'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v3, v2
+        ObjectLiteralAddProperty `x`, v1
+    v4 <- EndObjectLiteral
+    Return v4
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- LoadString ''
+v7 <- LoadString 'p'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v7, v6
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'a', 'var', v8
+v10 <- CallFunction v0, []
+
+
+function foo(a1) {
+    return { ["p"]: 0, x: a1 };
+}
+foo();
+var a = { ["p"]: "" };
+foo();
+
+FuzzIL program written to corpus/regress-crbug-724608.fzil

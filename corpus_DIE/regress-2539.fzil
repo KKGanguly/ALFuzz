@@ -1,0 +1,69 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'dispatcher', 'var', v0
+v2 <- CreateNamedVariable 'C', 'none'
+SetProperty v1, 'func', v2
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '10'
+    v5 <- LoadInteger '11'
+    v6 <- CreateNamedVariable 'B', 'none'
+    v7 <- CallFunction v6, [v4, v5]
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9, v10
+    v11 <- LoadInteger '0'
+    Reassign v9, v11
+    v12 <- LoadInteger '0'
+    Reassign v10, v12
+    v13 <- LoadThis
+    v14 <- LoadArguments
+    v15 <- GetProperty v1, 'func'
+    v16 <- CallMethod v15, 'apply', [v13, v14]
+    v17 <- LoadInteger '2'
+    v18 <- LoadArguments
+    v19 <- GetProperty v18, 'length'
+    v20 <- LoadInteger '10'
+    v21 <- LoadArguments
+    v22 <- GetElement v21, '0'
+    v23 <- LoadInteger '11'
+    v24 <- LoadArguments
+    v25 <- GetElement v24, '1'
+EndPlainFunction
+v26 <- BeginPlainFunction -> v27, v28
+    v29 <- LoadInteger '2'
+    v30 <- LoadArguments
+    v31 <- GetProperty v30, 'length'
+    v32 <- LoadInteger '10'
+    v33 <- LoadArguments
+    v34 <- GetElement v33, '0'
+    v35 <- LoadInteger '11'
+    v36 <- LoadArguments
+    v37 <- GetElement v36, '1'
+EndPlainFunction
+v38 <- CallFunction v3, []
+v39 <- CallFunction v3, []
+v40 <- CallFunction v3, []
+
+
+var dispatcher = {};
+dispatcher.func = C;
+function A() {
+    B(10, 11);
+}
+function B(a9, a10) {
+    a9 = 0;
+    a10 = 0;
+    dispatcher.func.apply(this, arguments);
+    arguments.length;
+    arguments[0];
+    arguments[1];
+}
+function C(a27, a28) {
+    arguments.length;
+    arguments[0];
+    arguments[1];
+}
+A();
+A();
+A();
+
+FuzzIL program written to corpus/regress-2539.fzil

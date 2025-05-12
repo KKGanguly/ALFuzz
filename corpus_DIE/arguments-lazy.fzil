@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadArguments
+    v2 <- LoadArguments
+    v3 <- Compare v1, '===', v2
+    Return v3
+EndPlainFunction
+v4 <- CallFunction v0, []
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadInteger '42'
+    v8 <- CreateNamedVariable 'arguments', 'var', v7
+    v9 <- LoadInteger '0'
+    v10 <- TernaryOperation v6, v6, v9
+    Reassign v6, v10
+    v11 <- BinaryOperation v6, '+', v8
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '42'
+v13 <- CallFunction v5, []
+v14 <- LoadInteger '43'
+v15 <- LoadInteger '1'
+v16 <- CallFunction v5, [v15]
+v17 <- LoadInteger '44'
+v18 <- LoadInteger '2'
+v19 <- LoadInteger '3'
+v20 <- CallFunction v5, [v18, v19]
+
+
+function SharedLazyArguments() {
+    return arguments === arguments;
+}
+SharedLazyArguments();
+function ArgumentsOverride(a6) {
+    var arguments = 42;
+    return (a6 = a6 ? a6 : 0) + arguments;
+}
+ArgumentsOverride();
+ArgumentsOverride(1);
+ArgumentsOverride(2, 3);
+
+FuzzIL program written to corpus/arguments-lazy.fzil

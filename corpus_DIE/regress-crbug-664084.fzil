@@ -1,0 +1,22 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    v2 <- LoadInteger '1'
+    v3 <- BinaryOperation v1, '+', v2
+    v4 <- UnaryOperation '+', v3
+    Return v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'NaN', 'none'
+v6 <- CallFunction v0, []
+v7 <- CallFunction v0, []
+v8 <- CallFunction v0, []
+
+
+function foo() {
+    return +({} + 1);
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-664084.fzil

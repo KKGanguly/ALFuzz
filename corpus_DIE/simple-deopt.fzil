@@ -1,0 +1,229 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- UnaryOperation '~', v1
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '42'
+v4 <- CallFunction v0, [v3]
+v5 <- LoadInteger '12'
+v6 <- UnaryOperation '~', v5
+v7 <- LoadFloat '12.45'
+v8 <- CallFunction v0, [v7]
+v9 <- LoadInteger '42'
+v10 <- UnaryOperation '~', v9
+v11 <- LoadFloat '42.87'
+v12 <- CallFunction v0, [v11]
+v13 <- LoadInteger '1'
+v14 <- CreateNamedVariable 'a', 'var', v13
+v15 <- LoadInteger '2'
+v16 <- CreateNamedVariable 'b', 'var', v15
+v17 <- LoadInteger '4'
+v18 <- CreateNamedVariable 'c', 'var', v17
+v19 <- LoadInteger '8'
+v20 <- CreateNamedVariable 'd', 'var', v19
+v21 <- BeginPlainFunction -> 
+    v22 <- BinaryOperation v18, '|', v20
+    v23 <- BinaryOperation v16, '|', v22
+    v24 <- BinaryOperation v14, '|', v23
+    Return v24
+EndPlainFunction
+v25 <- CallFunction v21, []
+v26 <- LoadString '16'
+Reassign v18, v26
+v27 <- LoadInteger '1'
+v28 <- LoadInteger '2'
+v29 <- BinaryOperation v27, '|', v28
+v30 <- LoadInteger '16'
+v31 <- BinaryOperation v29, '|', v30
+v32 <- LoadInteger '8'
+v33 <- BinaryOperation v31, '|', v32
+v34 <- CallFunction v21, []
+v35 <- BeginPlainFunction -> 
+    v36 <- CallFunction v21, []
+    Return v36
+EndPlainFunction
+v37 <- LoadInteger '1'
+v38 <- LoadInteger '2'
+v39 <- BinaryOperation v37, '|', v38
+v40 <- LoadInteger '16'
+v41 <- BinaryOperation v39, '|', v40
+v42 <- LoadInteger '8'
+v43 <- BinaryOperation v41, '|', v42
+v44 <- CallFunction v35, []
+v45 <- BeginPlainFunction -> 
+    v46 <- LoadInteger '42'
+    Return v46
+EndPlainFunction
+Reassign v21, v45
+v47 <- LoadInteger '42'
+v48 <- CallFunction v35, []
+BeginObjectLiteral
+v49 <- EndObjectLiteral
+v50 <- CreateNamedVariable 'obj', 'var', v49
+SetProperty v50, 'g', v21
+v51 <- BeginPlainFunction -> v52
+    v53 <- CallMethod v52, 'g', []
+    Return v53
+EndPlainFunction
+BeginForLoopInitializer
+    v54 <- LoadInteger '0'
+BeginForLoopCondition -> v55
+    v56 <- LoadInteger '5'
+    v57 <- Compare v55, '<', v56
+BeginForLoopAfterthought v57 -> v58
+    v59 <- UnaryOperation v58, '++'
+BeginForLoopBody -> v60
+    v61 <- CallFunction v51, [v50]
+EndForLoop
+v62 <- CallFunction v51, [v50]
+v63 <- LoadInteger '42'
+v64 <- CallFunction v51, [v50]
+v65 <- LoadInteger '87'
+v66 <- BeginPlainFunction -> 
+    v67 <- LoadInteger '87'
+    Return v67
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `g`, v66
+v68 <- EndObjectLiteral
+v69 <- CallFunction v51, [v68]
+v70 <- BeginPlainFunction -> v71, v72
+    v73 <- LoadInteger '42'
+    Reassign v71, v73
+    v74 <- LoadInteger '1'
+    Reassign v72, v74
+    v75 <- LoadString '0'
+    v76 <- BinaryOperation v72, '<<', v75
+    Reassign v72, v76
+    v77 <- BinaryOperation v71, '|', v72
+    Return v77
+EndPlainFunction
+v78 <- LoadInteger '43'
+v79 <- LoadInteger '0'
+v80 <- LoadInteger '0'
+v81 <- CallFunction v70, [v79, v80]
+v82 <- BeginPlainFunction -> v83
+    v84 <- LoadString 'lit['
+    v85 <- LoadString ']'
+    v86 <- BinaryOperation v83, '+', v85
+    v87 <- BinaryOperation v84, '+', v86
+    Return v87
+EndPlainFunction
+v88 <- LoadString 'lit[-87]'
+v89 <- LoadInteger '87'
+v90 <- UnaryOperation '-', v89
+v91 <- CallFunction v82, [v90]
+v92 <- LoadString 'lit[0]'
+v93 <- LoadInteger '0'
+v94 <- CallFunction v82, [v93]
+v95 <- LoadString 'lit[42]'
+v96 <- LoadInteger '42'
+v97 <- CallFunction v82, [v96]
+v98 <- LoadString 'abc'
+v99 <- CreateNamedVariable 'str', 'var', v98
+v100 <- LoadUndefined
+v101 <- CreateNamedVariable 'r', 'var', v100
+v102 <- BeginPlainFunction -> v103
+    v104 <- CallMethod v99, 'charAt', [v103]
+    Return v104
+EndPlainFunction
+BeginForLoopInitializer
+    v105 <- LoadInteger '0'
+BeginForLoopCondition -> v106
+    v107 <- LoadInteger '5'
+    v108 <- Compare v106, '<', v107
+BeginForLoopAfterthought v108 -> v109
+    v110 <- UnaryOperation v109, '++'
+BeginForLoopBody -> v111
+    v112 <- LoadInteger '0'
+    v113 <- CallFunction v102, [v112]
+    Reassign v101, v113
+EndForLoop
+v114 <- LoadInteger '0'
+v115 <- CallFunction v102, [v114]
+Reassign v101, v115
+v116 <- LoadString 'a'
+v117 <- BeginPlainFunction -> v118, v119, v120, v121
+    v122 <- BinaryOperation v118, '+', v119
+    v123 <- BinaryOperation v122, '+', v120
+    v124 <- BinaryOperation v123, '+', v121
+    Return v124
+EndPlainFunction
+v125 <- LoadInteger '1073741827'
+v126 <- LoadInteger '1'
+v127 <- LoadInteger '1'
+v128 <- LoadInteger '2'
+v129 <- LoadInteger '1073741823'
+v130 <- CallFunction v117, [v126, v127, v128, v129]
+
+
+function f(a1) {
+    return ~a1;
+}
+f(42);
+~12;
+f(12.45);
+~42;
+f(42.87);
+var a = 1;
+var b = 2;
+var c = 4;
+var d = 8;
+function g() {
+    return a | (b | (c | d));
+}
+g();
+c = "16";
+((1 | 2) | 16) | 8;
+g();
+function h() {
+    return g();
+}
+((1 | 2) | 16) | 8;
+h();
+function f45() {
+    return 42;
+}
+g = f45;
+h();
+var obj = {};
+obj.g = g;
+function k(a52) {
+    return a52.g();
+}
+for (let i55 = 0; i55 < 5; i55++) {
+    k(obj);
+}
+k(obj);
+k(obj);
+function f66() {
+    return 87;
+}
+k({ g: f66 });
+function p(a71, a72) {
+    a71 = 42;
+    a72 = 1;
+    a72 = a72 << "0";
+    return a71 | a72;
+}
+p(0, 0);
+function LiteralToStack(a83) {
+    return "lit[" + (a83 + "]");
+}
+LiteralToStack(-87);
+LiteralToStack(0);
+LiteralToStack(42);
+var str = "abc";
+var r;
+function CallCharAt(a103) {
+    return str.charAt(a103);
+}
+for (let i106 = 0; i106 < 5; i106++) {
+    r = CallCharAt(0);
+}
+r = CallCharAt(0);
+function add4(a118, a119, a120, a121) {
+    return ((a118 + a119) + a120) + a121;
+}
+add4(1, 1, 2, 1073741823);
+
+FuzzIL program written to corpus/simple-deopt.fzil

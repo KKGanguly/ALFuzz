@@ -1,0 +1,191 @@
+v0 <- BeginClassDefinition
+EndClassDefinition
+v1 <- BeginClassDefinition v0
+    BeginClassConstructor -> v2, v3
+        CallSuperConstructor []
+        Return v3
+    EndClassConstructor
+EndClassDefinition
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadNull
+    v6 <- Construct v1, [v5]
+EndPlainFunction
+v7 <- CallFunction v4, []
+v8 <- CreateNamedVariable 'TypeError', 'none'
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadInteger '42'
+    v11 <- Construct v1, [v10]
+EndPlainFunction
+v12 <- CallFunction v9, []
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadBoolean 'true'
+    v15 <- Construct v1, [v14]
+EndPlainFunction
+v16 <- CallFunction v13, []
+v17 <- BeginPlainFunction -> 
+    v18 <- LoadString 'hi'
+    v19 <- Construct v1, [v18]
+EndPlainFunction
+v20 <- CallFunction v17, []
+v21 <- BeginPlainFunction -> 
+    v22 <- CreateNamedVariable 'Symbol', 'none'
+    v23 <- CallFunction v22, []
+    v24 <- Construct v1, [v23]
+EndPlainFunction
+v25 <- CallFunction v21, []
+v26 <- LoadUndefined
+v27 <- Construct v1, [v26]
+v28 <- BeginPlainFunction -> 
+EndPlainFunction
+v29 <- Construct v28, []
+v30 <- Construct v1, [v29]
+v31 <- CallFunction v28, []
+v32 <- LoadRegExp 're' ''
+v33 <- Construct v1, [v32]
+v34 <- CreateNamedVariable 'RegExp', 'none'
+v35 <- BeginClassDefinition v0
+    BeginClassConstructor -> v36, v37
+        Return v37
+    EndClassConstructor
+EndClassDefinition
+v38 <- BeginPlainFunction -> 
+    v39 <- LoadNull
+    v40 <- Construct v35, [v39]
+EndPlainFunction
+v41 <- CallFunction v38, []
+v42 <- BeginPlainFunction -> 
+    v43 <- LoadInteger '42'
+    v44 <- Construct v35, [v43]
+EndPlainFunction
+v45 <- CallFunction v42, []
+v46 <- BeginPlainFunction -> 
+    v47 <- LoadBoolean 'true'
+    v48 <- Construct v35, [v47]
+EndPlainFunction
+v49 <- CallFunction v46, []
+v50 <- BeginPlainFunction -> 
+    v51 <- LoadString 'hi'
+    v52 <- Construct v35, [v51]
+EndPlainFunction
+v53 <- CallFunction v50, []
+v54 <- BeginPlainFunction -> 
+    v55 <- CreateNamedVariable 'Symbol', 'none'
+    v56 <- CallFunction v55, []
+    v57 <- Construct v35, [v56]
+EndPlainFunction
+v58 <- CallFunction v54, []
+v59 <- BeginPlainFunction -> 
+    v60 <- LoadUndefined
+    v61 <- Construct v35, [v60]
+EndPlainFunction
+v62 <- CallFunction v59, []
+v63 <- CreateNamedVariable 'ReferenceError', 'none'
+v64 <- BeginPlainFunction -> 
+EndPlainFunction
+v65 <- Construct v64, []
+v66 <- Construct v35, [v65]
+v67 <- CallFunction v64, []
+v68 <- LoadRegExp 're' ''
+v69 <- Construct v35, [v68]
+v70 <- BeginClassDefinition v0
+    BeginClassConstructor -> v71
+        CallSuperConstructor []
+        Return
+    EndClassConstructor
+EndClassDefinition
+v72 <- Construct v70, []
+v73 <- BeginClassDefinition v0
+    BeginClassConstructor -> v74
+        CallSuperConstructor []
+        Return v74
+    EndClassConstructor
+EndClassDefinition
+v75 <- Construct v73, []
+
+
+class C0 {
+}
+class C1 extends C0 {
+    constructor(a3) {
+        super();
+        return a3;
+    }
+}
+function f4() {
+    new C1(null);
+}
+f4();
+function f9() {
+    new C1(42);
+}
+f9();
+function f13() {
+    new C1(true);
+}
+f13();
+function f17() {
+    new C1("hi");
+}
+f17();
+function f21() {
+    new C1(Symbol());
+}
+f21();
+new C1(undefined);
+function f() {
+}
+const v29 = new f();
+new C1(v29);
+f();
+new C1(/re/);
+class C35 extends C0 {
+    constructor(a37) {
+        return a37;
+    }
+}
+function f38() {
+    new C35(null);
+}
+f38();
+function f42() {
+    new C35(42);
+}
+f42();
+function f46() {
+    new C35(true);
+}
+f46();
+function f50() {
+    new C35("hi");
+}
+f50();
+function f54() {
+    new C35(Symbol());
+}
+f54();
+function f59() {
+    new C35(undefined);
+}
+f59();
+function f2() {
+}
+const v65 = new f2();
+new C35(v65);
+f2();
+new C35(/re/);
+class C70 extends C0 {
+    constructor() {
+        super();
+        return;
+    }
+}
+new C70();
+class C73 extends C0 {
+    constructor() {
+        super();
+        return this;
+    }
+}
+new C73();
+
+FuzzIL program written to corpus/classes-derived-return-type.fzil

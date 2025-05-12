@@ -1,0 +1,962 @@
+v0 <- LoadString 'test test test'
+v1 <- CreateNamedVariable 's', 'var', v0
+v2 <- LoadInteger '0'
+v3 <- LoadString 't'
+v4 <- CallMethod v1, 'indexOf', [v3]
+v5 <- LoadInteger '3'
+v6 <- LoadString 't'
+v7 <- LoadInteger '1'
+v8 <- CallMethod v1, 'indexOf', [v6, v7]
+v9 <- LoadInteger '5'
+v10 <- LoadString 't'
+v11 <- LoadInteger '4'
+v12 <- CallMethod v1, 'indexOf', [v10, v11]
+v13 <- LoadInteger '5'
+v14 <- LoadString 't'
+v15 <- LoadFloat '4.1'
+v16 <- CallMethod v1, 'indexOf', [v14, v15]
+v17 <- LoadInteger '0'
+v18 <- LoadString 't'
+v19 <- LoadInteger '0'
+v20 <- CallMethod v1, 'indexOf', [v18, v19]
+v21 <- LoadInteger '0'
+v22 <- LoadString 't'
+v23 <- LoadInteger '1'
+v24 <- UnaryOperation '-', v23
+v25 <- CallMethod v1, 'indexOf', [v22, v24]
+v26 <- LoadInteger '0'
+v27 <- LoadString 't'
+v28 <- LoadInteger '1'
+v29 <- UnaryOperation '-', v28
+v30 <- CallMethod v1, 'indexOf', [v27, v29]
+v31 <- LoadInteger '0'
+v32 <- LoadString 't'
+v33 <- LoadFloat '1.1'
+v34 <- UnaryOperation '-', v33
+v35 <- CallMethod v1, 'indexOf', [v32, v34]
+v36 <- LoadInteger '0'
+v37 <- LoadString 't'
+v38 <- LoadInteger '1073741825'
+v39 <- UnaryOperation '-', v38
+v40 <- CallMethod v1, 'indexOf', [v37, v39]
+v41 <- LoadInteger '1'
+v42 <- LoadString 'e'
+v43 <- CallMethod v1, 'indexOf', [v42]
+v44 <- LoadInteger '2'
+v45 <- LoadString 's'
+v46 <- CallMethod v1, 'indexOf', [v45]
+v47 <- LoadInteger '5'
+v48 <- LoadString 'test'
+v49 <- LoadInteger '4'
+v50 <- CallMethod v1, 'indexOf', [v48, v49]
+v51 <- LoadInteger '5'
+v52 <- LoadString 'test'
+v53 <- LoadInteger '5'
+v54 <- CallMethod v1, 'indexOf', [v52, v53]
+v55 <- LoadInteger '10'
+v56 <- LoadString 'test'
+v57 <- LoadInteger '6'
+v58 <- CallMethod v1, 'indexOf', [v56, v57]
+v59 <- LoadInteger '10'
+v60 <- LoadString 'test'
+v61 <- LoadInteger '6'
+v62 <- CallMethod v1, 'indexOf', [v60, v61]
+v63 <- LoadInteger '0'
+v64 <- LoadString 'test'
+v65 <- LoadInteger '0'
+v66 <- CallMethod v1, 'indexOf', [v64, v65]
+v67 <- LoadInteger '0'
+v68 <- LoadString 'test'
+v69 <- LoadInteger '0'
+v70 <- CallMethod v1, 'indexOf', [v68, v69]
+v71 <- LoadInteger '0'
+v72 <- LoadString 'test'
+v73 <- LoadInteger '1'
+v74 <- UnaryOperation '-', v73
+v75 <- CallMethod v1, 'indexOf', [v72, v74]
+v76 <- LoadInteger '1'
+v77 <- UnaryOperation '-', v76
+v78 <- LoadString 'not found'
+v79 <- LoadInteger '1'
+v80 <- UnaryOperation '-', v79
+v81 <- CallMethod v1, 'indexOf', [v78, v80]
+v82 <- LoadInteger '0'
+v83 <- LoadString 'test'
+v84 <- LoadInteger '1'
+v85 <- UnaryOperation '-', v84
+v86 <- CallMethod v1, 'indexOf', [v83, v85]
+v87 <- LoadInteger '0'
+v88 <- LoadString 'test'
+v89 <- LoadInteger '1073741825'
+v90 <- UnaryOperation '-', v89
+v91 <- CallMethod v1, 'indexOf', [v88, v90]
+v92 <- LoadInteger '0'
+v93 <- LoadString 'test'
+v94 <- CallMethod v1, 'indexOf', [v93]
+v95 <- LoadInteger '1'
+v96 <- UnaryOperation '-', v95
+v97 <- LoadString 'notpresent'
+v98 <- CallMethod v1, 'indexOf', [v97]
+v99 <- LoadInteger '1'
+v100 <- UnaryOperation '-', v99
+v101 <- CallMethod v1, 'indexOf', []
+BeginForLoopInitializer
+    v102 <- LoadInteger '0'
+BeginForLoopCondition -> v103
+    v104 <- GetProperty v1, 'length'
+    v105 <- LoadInteger '10'
+    v106 <- BinaryOperation v104, '+', v105
+    v107 <- Compare v103, '<', v106
+BeginForLoopAfterthought v107 -> v108
+    v109 <- UnaryOperation v108, '++'
+BeginForLoopBody -> v110
+    v111 <- GetProperty v1, 'length'
+    v112 <- Compare v110, '<', v111
+    v113 <- GetProperty v1, 'length'
+    v114 <- TernaryOperation v112, v110, v113
+    v115 <- CreateNamedVariable 'expected', 'var', v114
+    v116 <- LoadString ''
+    v117 <- CallMethod v1, 'indexOf', [v116, v110]
+EndForLoop
+v118 <- LoadString 'asdf[a-z]+(asdf)?'
+v119 <- CreateNamedVariable 'reString', 'var', v118
+v120 <- LoadInteger '4'
+v121 <- LoadString '[a-z]+'
+v122 <- CallMethod v119, 'indexOf', [v121]
+v123 <- LoadInteger '10'
+v124 <- LoadString '(asdf)?'
+v125 <- CallMethod v119, 'indexOf', [v124]
+v126 <- LoadInteger '1'
+v127 <- CreateNamedVariable 'String', 'none'
+v128 <- GetProperty v127, 'prototype'
+v129 <- GetProperty v128, 'indexOf'
+v130 <- GetProperty v129, 'length'
+v131 <- LoadString 'ΚΑΣΣΕ'
+v132 <- CreateNamedVariable 'twoByteString', 'var', v131
+v133 <- LoadInteger '0'
+v134 <- LoadString 'Κ'
+v135 <- CallMethod v132, 'indexOf', [v134]
+v136 <- LoadString 'Lamda'
+v137 <- LoadInteger '1'
+v138 <- LoadString 'Α'
+v139 <- CallMethod v132, 'indexOf', [v138]
+v140 <- LoadString 'Alpha'
+v141 <- LoadInteger '2'
+v142 <- LoadString 'Σ'
+v143 <- CallMethod v132, 'indexOf', [v142]
+v144 <- LoadString 'First Sigma'
+v145 <- LoadInteger '3'
+v146 <- LoadString 'Σ'
+v147 <- LoadInteger '3'
+v148 <- CallMethod v132, 'indexOf', [v146, v147]
+v149 <- LoadString 'Second Sigma'
+v150 <- LoadInteger '4'
+v151 <- LoadString 'Ε'
+v152 <- CallMethod v132, 'indexOf', [v151]
+v153 <- LoadString 'Epsilon'
+v154 <- LoadInteger '1'
+v155 <- UnaryOperation '-', v154
+v156 <- LoadString 'Β'
+v157 <- CallMethod v132, 'indexOf', [v156]
+v158 <- LoadString 'Not beta'
+v159 <- LoadInteger '0'
+v160 <- LoadString 'ΚΑ'
+v161 <- CallMethod v132, 'indexOf', [v160]
+v162 <- LoadString 'lambda Alpha'
+v163 <- LoadInteger '1'
+v164 <- LoadString 'ΑΣ'
+v165 <- CallMethod v132, 'indexOf', [v164]
+v166 <- LoadString 'Alpha Sigma'
+v167 <- LoadInteger '2'
+v168 <- LoadString 'ΣΣ'
+v169 <- CallMethod v132, 'indexOf', [v168]
+v170 <- LoadString 'Sigma Sigma'
+v171 <- LoadInteger '3'
+v172 <- LoadString 'ΣΕ'
+v173 <- CallMethod v132, 'indexOf', [v172]
+v174 <- LoadString 'Sigma Epsilon'
+v175 <- LoadInteger '1'
+v176 <- UnaryOperation '-', v175
+v177 <- LoadString 'ΑΣΕ'
+v178 <- CallMethod v132, 'indexOf', [v177]
+v179 <- LoadString 'Not Alpha Sigma Epsilon'
+v180 <- LoadInteger '4'
+v181 <- LoadString 'Ε'
+v182 <- CallMethod v132, 'indexOf', [v181]
+v183 <- LoadString 'ᄢ∑∢＀ÿÿ'
+v184 <- CreateNamedVariable 'alignmentString', 'var', v183
+v185 <- LoadInteger '2'
+v186 <- LoadString '∢'
+v187 <- CallMethod v184, 'indexOf', [v186]
+v188 <- LoadInteger '4'
+v189 <- LoadString 'ÿÿ'
+v190 <- CallMethod v184, 'indexOf', [v189]
+v191 <- LoadString '＀'
+v192 <- LoadInteger '10'
+v193 <- LoadString 'ÿ'
+v194 <- CallMethod v193, 'repeat', [v192]
+v195 <- BinaryOperation v191, '+', v194
+v196 <- CreateNamedVariable 'longAlignmentString', 'var', v195
+v197 <- LoadInteger '1'
+v198 <- LoadInteger '10'
+v199 <- LoadString 'ÿ'
+v200 <- CallMethod v199, 'repeat', [v198]
+v201 <- CallMethod v196, 'indexOf', [v200]
+v202 <- LoadString '112233'
+v203 <- CreateNamedVariable 'boundsString', 'var', v202
+v204 <- LoadInteger '1'
+v205 <- UnaryOperation '-', v204
+v206 <- LoadString '334455'
+v207 <- CallMethod v203, 'indexOf', [v206]
+v208 <- LoadInteger '1'
+v209 <- UnaryOperation '-', v208
+v210 <- LoadInteger '10'
+v211 <- LoadString '334455'
+v212 <- CallMethod v211, 'repeat', [v210]
+v213 <- CallMethod v203, 'indexOf', [v212]
+v214 <- LoadString 'A'
+v215 <- CreateNamedVariable 'long', 'var', v214
+BeginForLoopInitializer
+    v216 <- LoadInteger '66'
+BeginForLoopCondition -> v217
+    v218 <- LoadInteger '76'
+    v219 <- Compare v217, '<', v218
+BeginForLoopAfterthought v219 -> v220
+    v221 <- UnaryOperation v220, '++'
+BeginForLoopBody -> v222
+    v223 <- CallMethod v127, 'fromCharCode', [v222]
+    v224 <- BinaryOperation v215, '+', v223
+    v225 <- BinaryOperation v224, '+', v215
+    Reassign v215, v225
+EndForLoop
+v226 <- LoadString 'ABACABADABACABA'
+v227 <- CreateNamedVariable 'pattern', 'var', v226
+BeginForLoopInitializer
+    v228 <- LoadInteger '0'
+BeginForLoopCondition -> v229
+    v230 <- GetProperty v215, 'length'
+    v231 <- GetProperty v227, 'length'
+    v232 <- BinaryOperation v230, '-', v231
+    v233 <- Compare v229, '<', v232
+BeginForLoopAfterthought v233 -> v234
+    v235 <- LoadInteger '7'
+    Update v234, '+', v235
+BeginForLoopBody -> v236
+    v237 <- CallMethod v215, 'indexOf', [v227, v236]
+    v238 <- CreateNamedVariable 'index', 'var', v237
+    v239 <- LoadInteger '15'
+    v240 <- BinaryOperation v236, '+', v239
+    v241 <- LoadInteger '15'
+    v242 <- UnaryOperation '~', v241
+    v243 <- BinaryOperation v240, '&', v242
+    v244 <- LoadString 'Long ABACABA...-string at index '
+    v245 <- BinaryOperation v244, '+', v236
+EndForLoop
+v246 <- LoadInteger '510'
+v247 <- LoadString 'AJABACA'
+v248 <- CallMethod v215, 'indexOf', [v247]
+v249 <- LoadString 'Long AJABACA, First J'
+v250 <- LoadInteger '1534'
+v251 <- LoadString 'AJABACA'
+v252 <- LoadInteger '511'
+v253 <- CallMethod v215, 'indexOf', [v251, v252]
+v254 <- LoadString 'Long AJABACA, Second J'
+v255 <- LoadString 'JABACABADABACABA'
+Reassign v227, v255
+v256 <- LoadInteger '511'
+v257 <- CallMethod v215, 'indexOf', [v227]
+v258 <- LoadString 'Long JABACABA..., First J'
+v259 <- LoadInteger '1535'
+v260 <- LoadInteger '512'
+v261 <- CallMethod v215, 'indexOf', [v227, v260]
+v262 <- LoadString 'Long JABACABA..., Second J'
+v263 <- LoadString 'arglebargleglopglyfarglebargleglopglyfarglebargleglopglyf'
+v264 <- CreateNamedVariable 'asciiString', 'var', v263
+v265 <- LoadInteger '1'
+v266 <- UnaryOperation '-', v265
+v267 <- LoadString ' 61'
+v268 <- CallMethod v264, 'indexOf', [v267]
+v269 <- CreateArray []
+v270 <- CreateNamedVariable 'allCodePoints', 'var', v269
+BeginForLoopInitializer
+    v271 <- LoadInteger '0'
+BeginForLoopCondition -> v272
+    v273 <- LoadInteger '65536'
+    v274 <- Compare v272, '<', v273
+BeginForLoopAfterthought v274 -> v275
+    v276 <- UnaryOperation v275, '++'
+BeginForLoopBody -> v277
+    SetComputedProperty v270, v277, v277
+EndForLoop
+v278 <- GetProperty v127, 'fromCharCode'
+v279 <- CallMethod v278, 'apply', [v127, v270]
+v280 <- CreateNamedVariable 'allCharsString', 'var', v279
+v281 <- LoadInteger '1'
+v282 <- UnaryOperation '-', v281
+v283 <- LoadString 'notfound'
+v284 <- CallMethod v280, 'indexOf', [v283]
+v285 <- LoadInteger '1'
+v286 <- LoadInteger '4'
+v287 <- LoadInteger '15'
+v288 <- CreateArray [v285, v286, v287]
+v289 <- CreateNamedVariable 'lengths', 'var', v288
+v290 <- LoadInteger '5'
+v291 <- LoadInteger '101'
+v292 <- LoadInteger '133'
+v293 <- LoadInteger '261'
+v294 <- LoadInteger '517'
+v295 <- LoadInteger '645'
+v296 <- LoadInteger '8197'
+v297 <- LoadInteger '8325'
+v298 <- LoadInteger '65520'
+v299 <- CreateArray [v290, v291, v292, v293, v294, v295, v296, v297, v298]
+v300 <- CreateNamedVariable 'indices', 'var', v299
+BeginForLoopInitializer
+    v301 <- LoadInteger '0'
+BeginForLoopCondition -> v302
+    v303 <- GetProperty v289, 'length'
+    v304 <- Compare v302, '<', v303
+BeginForLoopAfterthought v304 -> v305
+    v306 <- UnaryOperation v305, '++'
+BeginForLoopBody -> v307
+    v308 <- GetComputedProperty v289, v307
+    v309 <- CreateNamedVariable 'length', 'var', v308
+    BeginForLoopInitializer
+        v310 <- LoadInteger '0'
+    BeginForLoopCondition -> v311
+        v312 <- GetProperty v300, 'length'
+        v313 <- Compare v311, '<', v312
+    BeginForLoopAfterthought v313 -> v314
+        v315 <- UnaryOperation v314, '++'
+    BeginForLoopBody -> v316
+        v317 <- GetComputedProperty v300, v316
+        v318 <- CreateNamedVariable 'index', 'var', v317
+        v319 <- BinaryOperation v318, '+', v309
+        v320 <- CallMethod v280, 'substring', [v318, v319]
+        v321 <- CreateNamedVariable 'pattern', 'var', v320
+        v322 <- CallMethod v280, 'indexOf', [v321]
+    EndForLoop
+EndForLoop
+v323 <- BeginPlainFunction -> 
+    v324 <- GetProperty v127, 'prototype'
+    v325 <- GetProperty v324, 'indexOf'
+    v326 <- CreateNamedVariable 'indexOf', 'let', v325
+    v327 <- BeginArrowFunction -> 
+        v328 <- LoadNull
+        v329 <- CallMethod v326, 'call', [v328]
+        Return v329
+    EndArrowFunction
+    v330 <- CallFunction v327, []
+    v331 <- CreateNamedVariable 'TypeError', 'none'
+    v332 <- BeginArrowFunction -> 
+        v333 <- LoadUndefined
+        v334 <- CallMethod v326, 'call', [v333]
+        Return v334
+    EndArrowFunction
+    v335 <- CallFunction v332, []
+    v336 <- LoadInteger '1'
+    v337 <- UnaryOperation '-', v336
+    v338 <- LoadInteger '1'
+    v339 <- CallMethod v326, 'call', [v338]
+    v340 <- LoadInteger '0'
+    v341 <- LoadInteger '1'
+    v342 <- LoadString '1'
+    v343 <- CallMethod v326, 'call', [v341, v342]
+    v344 <- LoadInteger '1'
+    v345 <- UnaryOperation '-', v344
+    v346 <- LoadFloat '1.2'
+    v347 <- CallMethod v326, 'call', [v346]
+    v348 <- LoadInteger '0'
+    v349 <- LoadFloat '1.2'
+    v350 <- LoadString '1'
+    v351 <- CallMethod v326, 'call', [v349, v350]
+    v352 <- LoadInteger '1'
+    v353 <- LoadFloat '1.2'
+    v354 <- LoadString '.'
+    v355 <- CallMethod v326, 'call', [v353, v354]
+    v356 <- LoadInteger '2'
+    v357 <- LoadFloat '1.2'
+    v358 <- LoadString '2'
+    v359 <- CallMethod v326, 'call', [v357, v358]
+    v360 <- LoadInteger '1'
+    v361 <- UnaryOperation '-', v360
+    v362 <- LoadFloat '1.2'
+    v363 <- LoadString '1'
+    v364 <- LoadInteger '2'
+    v365 <- CallMethod v326, 'call', [v362, v363, v364]
+    v366 <- LoadInteger '1'
+    v367 <- UnaryOperation '-', v366
+    BeginObjectLiteral
+    v368 <- EndObjectLiteral
+    v369 <- CallMethod v326, 'call', [v368]
+    v370 <- LoadInteger '0'
+    BeginObjectLiteral
+    v371 <- EndObjectLiteral
+    v372 <- LoadString '[object Object]'
+    v373 <- CallMethod v326, 'call', [v371, v372]
+    v374 <- LoadInteger '1'
+    v375 <- UnaryOperation '-', v374
+    BeginObjectLiteral
+    v376 <- EndObjectLiteral
+    v377 <- LoadString '[object'
+    v378 <- LoadInteger '1'
+    v379 <- CallMethod v326, 'call', [v376, v377, v378]
+    v380 <- LoadInteger '1'
+    v381 <- UnaryOperation '-', v380
+    v382 <- CreateArray []
+    v383 <- CallMethod v326, 'call', [v382]
+    v384 <- LoadInteger '0'
+    v385 <- LoadInteger '1'
+    v386 <- LoadInteger '2'
+    v387 <- CreateArray [v385, v386]
+    v388 <- LoadString '1,2'
+    v389 <- CallMethod v326, 'call', [v387, v388]
+    v390 <- LoadInteger '1'
+    v391 <- UnaryOperation '-', v390
+    v392 <- LoadThis
+    v393 <- CallMethod v326, 'call', [v392]
+EndPlainFunction
+v394 <- CallFunction v323, []
+v395 <- BeginPlainFunction -> 
+    v396 <- LoadInteger '1'
+    v397 <- UnaryOperation '-', v396
+    v398 <- LoadInteger '1'
+    v399 <- LoadString ''
+    v400 <- CallMethod v399, 'indexOf', [v398]
+    v401 <- LoadInteger '2'
+    v402 <- LoadInteger '1'
+    v403 <- LoadString '_0123'
+    v404 <- CallMethod v403, 'indexOf', [v402]
+    v405 <- LoadInteger '1'
+    v406 <- UnaryOperation '-', v405
+    v407 <- LoadFloat '1.2'
+    v408 <- LoadString ''
+    v409 <- CallMethod v408, 'indexOf', [v407]
+    v410 <- LoadInteger '1'
+    v411 <- LoadFloat '1.2'
+    v412 <- LoadString '01.2'
+    v413 <- CallMethod v412, 'indexOf', [v411]
+    v414 <- LoadInteger '1'
+    v415 <- LoadFloat '1.2'
+    v416 <- LoadInteger '1'
+    v417 <- LoadString '01.2'
+    v418 <- CallMethod v417, 'indexOf', [v415, v416]
+    v419 <- LoadInteger '1'
+    v420 <- UnaryOperation '-', v419
+    v421 <- LoadFloat '1.2'
+    v422 <- LoadInteger '2'
+    v423 <- LoadString '01.2'
+    v424 <- CallMethod v423, 'indexOf', [v421, v422]
+    v425 <- LoadInteger '1'
+    v426 <- UnaryOperation '-', v425
+    v427 <- LoadNull
+    v428 <- LoadString ''
+    v429 <- CallMethod v428, 'indexOf', [v427]
+    v430 <- LoadInteger '0'
+    v431 <- LoadNull
+    v432 <- LoadString 'null'
+    v433 <- CallMethod v432, 'indexOf', [v431]
+    v434 <- LoadInteger '1'
+    v435 <- UnaryOperation '-', v434
+    v436 <- LoadUndefined
+    v437 <- LoadString ''
+    v438 <- CallMethod v437, 'indexOf', [v436]
+    v439 <- LoadInteger '1'
+    v440 <- LoadUndefined
+    v441 <- LoadString '_undefined_'
+    v442 <- CallMethod v441, 'indexOf', [v440]
+    v443 <- LoadInteger '0'
+    v444 <- CreateArray []
+    v445 <- LoadString ''
+    v446 <- CallMethod v445, 'indexOf', [v444]
+    v447 <- LoadInteger '0'
+    v448 <- CreateArray []
+    v449 <- LoadString '123'
+    v450 <- CallMethod v449, 'indexOf', [v448]
+    v451 <- LoadInteger '2'
+    v452 <- LoadInteger '2'
+    v453 <- LoadInteger '3'
+    v454 <- CreateArray [v452, v453]
+    v455 <- LoadString '1,2,3'
+    v456 <- CallMethod v455, 'indexOf', [v454]
+    v457 <- LoadInteger '1'
+    v458 <- UnaryOperation '-', v457
+    BeginObjectLiteral
+    v459 <- EndObjectLiteral
+    v460 <- LoadString ''
+    v461 <- CallMethod v460, 'indexOf', [v459]
+    v462 <- LoadInteger '1'
+    v463 <- UnaryOperation '-', v462
+    v464 <- LoadThis
+    v465 <- LoadString ''
+    v466 <- CallMethod v465, 'indexOf', [v464]
+EndPlainFunction
+v467 <- CallFunction v395, []
+v468 <- BeginPlainFunction -> 
+    v469 <- LoadInteger '0'
+    v470 <- LoadString 'a'
+    v471 <- LoadBoolean 'false'
+    v472 <- LoadString 'aba'
+    v473 <- CallMethod v472, 'indexOf', [v470, v471]
+    v474 <- LoadInteger '2'
+    v475 <- LoadString 'a'
+    v476 <- LoadBoolean 'true'
+    v477 <- LoadString 'aba'
+    v478 <- CallMethod v477, 'indexOf', [v475, v476]
+    v479 <- LoadInteger '2'
+    v480 <- LoadString 'a'
+    v481 <- LoadString '1'
+    v482 <- LoadString 'aba'
+    v483 <- CallMethod v482, 'indexOf', [v480, v481]
+    v484 <- LoadInteger '2'
+    v485 <- LoadString 'a'
+    v486 <- LoadString '1.00000'
+    v487 <- LoadString 'aba'
+    v488 <- CallMethod v487, 'indexOf', [v485, v486]
+    v489 <- LoadInteger '2'
+    v490 <- LoadString 'a'
+    v491 <- LoadString '2.00000'
+    v492 <- LoadString 'aba'
+    v493 <- CallMethod v492, 'indexOf', [v490, v491]
+    v494 <- LoadInteger '1'
+    v495 <- UnaryOperation '-', v494
+    v496 <- LoadString 'a'
+    v497 <- LoadString '3.00000'
+    v498 <- LoadString 'aba'
+    v499 <- CallMethod v498, 'indexOf', [v496, v497]
+EndPlainFunction
+v500 <- CallFunction v468, []
+v501 <- BeginPlainFunction -> 
+    v502 <- BeginPlainFunction -> 
+        v503 <- LoadString 'a'
+        v504 <- LoadString 'abc'
+        v505 <- CallMethod v504, 'indexOf', [v503]
+        Return v505
+    EndPlainFunction
+    v506 <- LoadInteger '0'
+    v507 <- CallFunction v502, []
+    v508 <- LoadInteger '0'
+    v509 <- CallFunction v502, []
+    v510 <- LoadInteger '0'
+    v511 <- CallFunction v502, []
+    v512 <- LoadInteger '0'
+    v513 <- CallFunction v502, []
+    v514 <- BeginPlainFunction -> 
+        v515 <- LoadString 'a'
+        v516 <- LoadInteger '1'
+        v517 <- LoadString 'abc'
+        v518 <- CallMethod v517, 'indexOf', [v515, v516]
+        Return v518
+    EndPlainFunction
+    v519 <- LoadInteger '1'
+    v520 <- UnaryOperation '-', v519
+    v521 <- CallFunction v514, []
+    v522 <- LoadInteger '1'
+    v523 <- UnaryOperation '-', v522
+    v524 <- CallFunction v514, []
+    v525 <- LoadInteger '1'
+    v526 <- UnaryOperation '-', v525
+    v527 <- CallFunction v514, []
+    v528 <- LoadInteger '1'
+    v529 <- UnaryOperation '-', v528
+    v530 <- CallFunction v514, []
+    v531 <- BeginPlainFunction -> 
+        v532 <- LoadString 'a'
+        v533 <- LoadString 'abc'
+        v534 <- CallMethod v533, 'indexOf', [v532]
+        Return v534
+    EndPlainFunction
+    v535 <- LoadInteger '0'
+    v536 <- CallFunction v531, []
+    v537 <- LoadInteger '0'
+    v538 <- CallFunction v531, []
+    v539 <- LoadInteger '0'
+    v540 <- CallFunction v531, []
+    v541 <- LoadInteger '0'
+    v542 <- CallFunction v531, []
+    v543 <- BeginPlainFunction -> 
+        v544 <- LoadString 'bc'
+        v545 <- LoadInteger '2'
+        v546 <- LoadString 'abcbc'
+        v547 <- CallMethod v546, 'indexOf', [v544, v545]
+        Return v547
+    EndPlainFunction
+    v548 <- LoadInteger '3'
+    v549 <- CallFunction v543, []
+    v550 <- LoadInteger '3'
+    v551 <- CallFunction v543, []
+    v552 <- LoadInteger '3'
+    v553 <- CallFunction v543, []
+    v554 <- LoadInteger '3'
+    v555 <- CallFunction v543, []
+    v556 <- BeginPlainFunction -> 
+        v557 <- LoadString 'b'
+        v558 <- LoadInteger '1'
+        v559 <- UnaryOperation '-', v558
+        v560 <- LoadString 'abcbc'
+        v561 <- CallMethod v560, 'indexOf', [v557, v559]
+        Return v561
+    EndPlainFunction
+    v562 <- LoadInteger '1'
+    v563 <- CallFunction v556, []
+    v564 <- LoadInteger '1'
+    v565 <- CallFunction v556, []
+    v566 <- LoadInteger '1'
+    v567 <- CallFunction v556, []
+    v568 <- LoadInteger '1'
+    v569 <- CallFunction v556, []
+    v570 <- BeginPlainFunction -> 
+        v571 <- LoadString 'b'
+        v572 <- LoadInteger '10737418'
+        v573 <- UnaryOperation '-', v572
+        v574 <- LoadString 'abcbc'
+        v575 <- CallMethod v574, 'indexOf', [v571, v573]
+        Return v575
+    EndPlainFunction
+    v576 <- LoadInteger '1'
+    v577 <- CallFunction v570, []
+    v578 <- LoadInteger '1'
+    v579 <- CallFunction v570, []
+    v580 <- LoadInteger '1'
+    v581 <- CallFunction v570, []
+    v582 <- LoadInteger '1'
+    v583 <- CallFunction v570, []
+EndPlainFunction
+v584 <- CallFunction v501, []
+v585 <- BeginPlainFunction -> 
+    v586 <- BeginPlainFunction -> 
+        v587 <- LoadUndefined
+        v588 <- CreateNamedVariable 'result', 'var', v587
+        BeginForLoopInitializer
+            v589 <- LoadInteger '0'
+        BeginForLoopCondition -> v590
+            v591 <- LoadInteger '100000'
+            v592 <- Compare v590, '<', v591
+        BeginForLoopAfterthought v592 -> v593
+            v594 <- UnaryOperation v593, '++'
+        BeginForLoopBody -> v595
+            v596 <- LoadString 'a'
+            v597 <- LoadString 'abc'
+            v598 <- CallMethod v597, 'indexOf', [v596]
+            Reassign v588, v598
+        EndForLoop
+        Return v588
+    EndPlainFunction
+    v599 <- LoadInteger '0'
+    v600 <- CallFunction v586, []
+    v601 <- BeginPlainFunction -> 
+        v602 <- LoadUndefined
+        v603 <- CreateNamedVariable 'result', 'var', v602
+        BeginForLoopInitializer
+            v604 <- LoadInteger '0'
+        BeginForLoopCondition -> v605
+            v606 <- LoadInteger '100000'
+            v607 <- Compare v605, '<', v606
+        BeginForLoopAfterthought v607 -> v608
+            v609 <- UnaryOperation v608, '++'
+        BeginForLoopBody -> v610
+            v611 <- LoadString 'a'
+            v612 <- LoadInteger '1'
+            v613 <- LoadString 'abc'
+            v614 <- CallMethod v613, 'indexOf', [v611, v612]
+            Reassign v603, v614
+        EndForLoop
+        Return v603
+    EndPlainFunction
+    v615 <- LoadInteger '1'
+    v616 <- UnaryOperation '-', v615
+    v617 <- CallFunction v601, []
+    v618 <- BeginPlainFunction -> 
+        v619 <- LoadUndefined
+        v620 <- CreateNamedVariable 'result', 'var', v619
+        BeginForLoopInitializer
+            v621 <- LoadInteger '0'
+        BeginForLoopCondition -> v622
+            v623 <- LoadInteger '100000'
+            v624 <- Compare v622, '<', v623
+        BeginForLoopAfterthought v624 -> v625
+            v626 <- UnaryOperation v625, '++'
+        BeginForLoopBody -> v627
+            v628 <- LoadString 'a'
+            v629 <- LoadString 'abc'
+            v630 <- CallMethod v629, 'indexOf', [v628]
+            Reassign v620, v630
+        EndForLoop
+        Return v620
+    EndPlainFunction
+    v631 <- LoadInteger '0'
+    v632 <- CallFunction v618, []
+    v633 <- BeginPlainFunction -> 
+        v634 <- LoadUndefined
+        v635 <- CreateNamedVariable 'result', 'var', v634
+        BeginForLoopInitializer
+            v636 <- LoadInteger '0'
+        BeginForLoopCondition -> v637
+            v638 <- LoadInteger '100000'
+            v639 <- Compare v637, '<', v638
+        BeginForLoopAfterthought v639 -> v640
+            v641 <- UnaryOperation v640, '++'
+        BeginForLoopBody -> v642
+            v643 <- LoadString 'bc'
+            v644 <- LoadInteger '2'
+            v645 <- LoadString 'abcbc'
+            v646 <- CallMethod v645, 'indexOf', [v643, v644]
+            Reassign v635, v646
+        EndForLoop
+        Return v635
+    EndPlainFunction
+    v647 <- LoadInteger '3'
+    v648 <- CallFunction v633, []
+EndPlainFunction
+v649 <- CallFunction v585, []
+
+
+var s = "test test test";
+s.indexOf("t");
+s.indexOf("t", 1);
+s.indexOf("t", 4);
+s.indexOf("t", 4.1);
+s.indexOf("t", 0);
+s.indexOf("t", -1);
+s.indexOf("t", -1);
+s.indexOf("t", -1.1);
+s.indexOf("t", -1073741825);
+s.indexOf("e");
+s.indexOf("s");
+s.indexOf("test", 4);
+s.indexOf("test", 5);
+s.indexOf("test", 6);
+s.indexOf("test", 6);
+s.indexOf("test", 0);
+s.indexOf("test", 0);
+s.indexOf("test", -1);
+-1;
+s.indexOf("not found", -1);
+s.indexOf("test", -1);
+s.indexOf("test", -1073741825);
+s.indexOf("test");
+-1;
+s.indexOf("notpresent");
+-1;
+s.indexOf();
+for (let i103 = 0; i103 < (s.length + 10); i103++) {
+    var expected = i103 < s.length ? i103 : s.length;
+    s.indexOf("", i103);
+}
+var reString = "asdf[a-z]+(asdf)?";
+reString.indexOf("[a-z]+");
+reString.indexOf("(asdf)?");
+String.prototype.indexOf.length;
+var twoByteString = "ΚΑΣΣΕ";
+twoByteString.indexOf("Κ");
+twoByteString.indexOf("Α");
+twoByteString.indexOf("Σ");
+twoByteString.indexOf("Σ", 3);
+twoByteString.indexOf("Ε");
+-1;
+twoByteString.indexOf("Β");
+twoByteString.indexOf("ΚΑ");
+twoByteString.indexOf("ΑΣ");
+twoByteString.indexOf("ΣΣ");
+twoByteString.indexOf("ΣΕ");
+-1;
+twoByteString.indexOf("ΑΣΕ");
+twoByteString.indexOf("Ε");
+var alignmentString = "ᄢ∑∢＀ÿÿ";
+alignmentString.indexOf("∢");
+alignmentString.indexOf("ÿÿ");
+var longAlignmentString = "＀" + ("ÿ").repeat(10);
+longAlignmentString.indexOf(("ÿ").repeat(10));
+var boundsString = "112233";
+-1;
+boundsString.indexOf("334455");
+-1;
+boundsString.indexOf(("334455").repeat(10));
+var long = "A";
+for (let i217 = 66; i217 < 76; i217++) {
+    long = (long + String.fromCharCode(i217)) + long;
+}
+var pattern = "ABACABADABACABA";
+for (let i229 = 0; i229 < (long.length - pattern.length); i229 += 7) {
+    var index = long.indexOf(pattern, i229);
+    (i229 + 15) & ~15;
+    "Long ABACABA...-string at index " + i229;
+}
+long.indexOf("AJABACA");
+long.indexOf("AJABACA", 511);
+long.indexOf(pattern = "JABACABADABACABA");
+long.indexOf(pattern, 512);
+var asciiString = "arglebargleglopglyfarglebargleglopglyfarglebargleglopglyf";
+-1;
+asciiString.indexOf(" 61");
+var allCodePoints = [];
+for (let i272 = 0; i272 < 65536; i272++) {
+    allCodePoints[i272] = i272;
+}
+var allCharsString = String.fromCharCode.apply(String, allCodePoints);
+-1;
+allCharsString.indexOf("notfound");
+var lengths = [1,4,15];
+var indices = [5,101,133,261,517,645,8197,8325,65520];
+for (let i302 = 0; i302 < lengths.length; i302++) {
+    var length = lengths[i302];
+    for (let i311 = 0; i311 < indices.length; i311++) {
+        var index = indices[i311];
+        var pattern = allCharsString.substring(index, index + length);
+        allCharsString.indexOf(pattern);
+    }
+}
+function nonStringReceivers() {
+    let indexOf = String.prototype.indexOf;
+    const v327 = () => {
+        return indexOf.call(null);
+    };
+    v327();
+    const v332 = () => {
+        return indexOf.call(undefined);
+    };
+    v332();
+    -1;
+    indexOf.call(1);
+    indexOf.call(1, "1");
+    -1;
+    indexOf.call(1.2);
+    indexOf.call(1.2, "1");
+    indexOf.call(1.2, ".");
+    indexOf.call(1.2, "2");
+    -1;
+    indexOf.call(1.2, "1", 2);
+    -1;
+    indexOf.call({});
+    indexOf.call({}, "[object Object]");
+    -1;
+    indexOf.call({}, "[object", 1);
+    -1;
+    indexOf.call([]);
+    indexOf.call([1,2], "1,2");
+    -1;
+    indexOf.call(this);
+}
+nonStringReceivers();
+function nonStringSearchString() {
+    -1;
+    ("").indexOf(1);
+    ("_0123").indexOf(1);
+    -1;
+    ("").indexOf(1.2);
+    ("01.2").indexOf(1.2);
+    ("01.2").indexOf(1.2, 1);
+    -1;
+    ("01.2").indexOf(1.2, 2);
+    -1;
+    ("").indexOf(null);
+    ("null").indexOf(null);
+    -1;
+    ("").indexOf(undefined);
+    ("_undefined_").indexOf(undefined);
+    ("").indexOf([]);
+    ("123").indexOf([]);
+    ("1,2,3").indexOf([2,3]);
+    -1;
+    ("").indexOf({});
+    -1;
+    ("").indexOf(this);
+}
+nonStringSearchString();
+function nonStringPosition() {
+    ("aba").indexOf("a", false);
+    ("aba").indexOf("a", true);
+    ("aba").indexOf("a", "1");
+    ("aba").indexOf("a", "1.00000");
+    ("aba").indexOf("a", "2.00000");
+    -1;
+    ("aba").indexOf("a", "3.00000");
+}
+nonStringPosition();
+function optimize() {
+    function f() {
+        return ("abc").indexOf("a");
+    }
+    f();
+    f();
+    f();
+    f();
+    function f2() {
+        return ("abc").indexOf("a", 1);
+    }
+    -1;
+    f2();
+    -1;
+    f2();
+    -1;
+    f2();
+    -1;
+    f2();
+    function f3() {
+        return ("abc").indexOf("a");
+    }
+    f3();
+    f3();
+    f3();
+    f3();
+    function f4() {
+        return ("abcbc").indexOf("bc", 2);
+    }
+    f4();
+    f4();
+    f4();
+    f4();
+    function f5() {
+        return ("abcbc").indexOf("b", -1);
+    }
+    f5();
+    f5();
+    f5();
+    f5();
+    function f6() {
+        return ("abcbc").indexOf("b", -10737418);
+    }
+    f6();
+    f6();
+    f6();
+    f6();
+}
+optimize();
+function optimizeOSR() {
+    function f() {
+        var result;
+        for (let i590 = 0; i590 < 100000; i590++) {
+            result = ("abc").indexOf("a");
+        }
+        return result;
+    }
+    f();
+    function f2() {
+        var result;
+        for (let i605 = 0; i605 < 100000; i605++) {
+            result = ("abc").indexOf("a", 1);
+        }
+        return result;
+    }
+    -1;
+    f2();
+    function f3() {
+        var result;
+        for (let i622 = 0; i622 < 100000; i622++) {
+            result = ("abc").indexOf("a");
+        }
+        return result;
+    }
+    f3();
+    function f4() {
+        var result;
+        for (let i637 = 0; i637 < 100000; i637++) {
+            result = ("abcbc").indexOf("bc", 2);
+        }
+        return result;
+    }
+    f4();
+}
+optimizeOSR();
+
+FuzzIL program written to corpus/string-indexof-1.fzil

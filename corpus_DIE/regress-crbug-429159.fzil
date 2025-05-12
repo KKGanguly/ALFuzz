@@ -1,0 +1,28 @@
+BeginTry
+    v0 <- LoadString 'return '
+    v1 <- LoadString 'src,'
+    v2 <- LoadInteger '12000'
+    v3 <- CreateNamedVariable 'Array', 'none'
+    v4 <- CallFunction v3, [v2]
+    v5 <- CallMethod v4, 'join', [v1]
+    v6 <- BinaryOperation v0, '+', v5
+    v7 <- LoadString 'src'
+    v8 <- BinaryOperation v6, '+', v7
+    v9 <- CreateNamedVariable 'src', 'var', v8
+    v10 <- CreateNamedVariable 'Function', 'none'
+    v11 <- CallFunction v10, [v9]
+    v12 <- CreateNamedVariable 'fun', 'var', v11
+    v13 <- CallFunction v12, []
+BeginCatch -> v14
+    v15 <- CreateNamedVariable 'RangeError', 'none'
+EndTryCatch
+
+
+try {
+    var src = ("return " + Array(12000).join("src,")) + "src";
+    var fun = Function(src);
+    fun();
+} catch(e14) {
+}
+
+FuzzIL program written to corpus/regress-crbug-429159.fzil

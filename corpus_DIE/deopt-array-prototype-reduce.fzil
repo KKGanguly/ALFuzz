@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- LoadInteger '3'
+    v3 <- CreateArray [v1, v2]
+    v4 <- CreateNamedVariable 'array', 'var', v3
+    v5 <- BeginPlainFunction -> v6, v7, v8, v9
+        v10 <- BinaryOperation v7, '+', v6
+        SetComputedProperty v9, v8, v10
+    EndPlainFunction
+    v11 <- BeginPlainFunction -> 
+        v12 <- CallMethod v4, 'reduce', [v5]
+    EndPlainFunction
+    v13 <- CallFunction v11, []
+    v14 <- CallFunction v11, []
+    v15 <- CallFunction v11, []
+    v16 <- LoadUndefined
+    v17 <- LoadInteger '3'
+    v18 <- CreateArray [v16, v17]
+    v19 <- LoadInteger '3'
+    v20 <- GetProperty v4, '__proto__'
+    v21 <- CallMethod v20, 'push', [v19]
+    v22 <- CallFunction v11, []
+    v23 <- LoadUndefined
+    v24 <- LoadInteger '6'
+    v25 <- CreateArray [v23, v24]
+    v26 <- LoadInteger '0'
+    v27 <- CreateNamedVariable 'Object', 'none'
+    v28 <- CallMethod v27, 'getOwnPropertyDescriptor', [v4, v26]
+    v29 <- LoadUndefined
+EndPlainFunction
+v30 <- CallFunction v0, []
+
+
+function f0() {
+    var array = [,3];
+    function accumulate(a6, a7, a8, a9) {
+        a9[a8] = a7 + a6;
+    }
+    function reduce() {
+        array.reduce(accumulate);
+    }
+    reduce();
+    reduce();
+    reduce();
+    [,3];
+    array.__proto__.push(3);
+    reduce();
+    [,6];
+    Object.getOwnPropertyDescriptor(array, 0);
+}
+f0();
+
+FuzzIL program written to corpus/deopt-array-prototype-reduce.fzil

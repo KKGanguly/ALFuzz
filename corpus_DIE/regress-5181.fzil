@@ -1,0 +1,29 @@
+v0 <- LoadNull
+v1 <- CreateNamedVariable 'Object', 'none'
+v2 <- CallMethod v1, 'create', [v0]
+v3 <- CreateNamedVariable 'target', 'var', v2
+v4 <- CreateNamedVariable 'Proxy', 'none'
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadString 'a'
+    v7 <- CreateArray [v6]
+    Return v7
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ownKeys`, v5
+v8 <- EndObjectLiteral
+v9 <- Construct v4, [v3, v8]
+v10 <- CreateNamedVariable 'proxy', 'var', v9
+BeginForInLoop v10 -> v11
+EndForInLoop
+
+
+var target = Object.create(null);
+function f5() {
+    return ["a"];
+}
+const v9 = new Proxy(target, { ownKeys: f5 });
+var proxy = v9;
+for (const v11 in proxy) {
+}
+
+FuzzIL program written to corpus/regress-5181.fzil

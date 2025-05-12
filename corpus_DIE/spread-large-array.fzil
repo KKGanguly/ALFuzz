@@ -1,0 +1,31 @@
+v0 <- LoadInteger '130000'
+v1 <- CreateNamedVariable 'n', 'const', v0
+BeginBlockStatement
+    v2 <- CreateNamedVariable 'Array', 'none'
+    v3 <- Construct v2, [v1]
+    v4 <- CreateNamedVariable 'x', 'let', v3
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- Compare v6, '<', v1
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation '++', v8
+    BeginForLoopBody -> v10
+        SetComputedProperty v4, v10, v10
+    EndForLoop
+    v11 <- CreateArrayWithSpread [...v4]
+    v12 <- CreateNamedVariable 'a', 'let', v11
+EndBlockStatement
+
+
+const n = 130000;
+{
+    const v3 = new Array(n);
+    let x = v3;
+    for (let i6 = 0; i6 < n; ++i6) {
+        x[i6] = i6;
+    }
+    let a = [...x];
+}
+
+FuzzIL program written to corpus/spread-large-array.fzil

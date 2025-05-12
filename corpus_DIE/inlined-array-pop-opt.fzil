@@ -1,0 +1,179 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- CallMethod v2, 'pop', []
+        Return v3
+    EndPlainFunction
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'x', 'var', v4
+    v6 <- CreateArray [v5, v5]
+    v7 <- CreateNamedVariable 'a', 'var', v6
+    v8 <- CallFunction v1, [v7]
+    v9 <- CallFunction v1, [v7]
+    v10 <- LoadUndefined
+    v11 <- CallFunction v1, [v7]
+    v12 <- CallFunction v1, []
+EndPlainFunction
+v13 <- CallFunction v0, []
+v14 <- BeginPlainFunction -> 
+    v15 <- BeginPlainFunction -> v16
+        v17 <- CallMethod v16, 'pop', []
+        Return v17
+    EndPlainFunction
+    v18 <- LoadInteger '0'
+    v19 <- CreateNamedVariable 'x', 'var', v18
+    v20 <- CreateArray [v19, v19]
+    v21 <- CreateNamedVariable 'a', 'var', v20
+    v22 <- CallFunction v15, [v21]
+    v23 <- CallFunction v15, [v21]
+    v24 <- LoadUndefined
+    v25 <- CallFunction v15, [v21]
+    v26 <- CallFunction v15, []
+EndPlainFunction
+v27 <- CallFunction v14, []
+v28 <- BeginPlainFunction -> 
+    v29 <- BeginPlainFunction -> v30
+        v31 <- CallMethod v30, 'pop', []
+        Return v31
+    EndPlainFunction
+    v32 <- LoadInteger '0'
+    v33 <- CreateNamedVariable 'x', 'var', v32
+    v34 <- CreateArray [v33, v33, v33]
+    v35 <- CreateNamedVariable 'a', 'var', v34
+    v36 <- CallFunction v29, [v35]
+    v37 <- CallFunction v29, [v35]
+    v38 <- CallFunction v29, [v35]
+    v39 <- CallFunction v29, []
+EndPlainFunction
+v40 <- CallFunction v28, []
+v41 <- BeginPlainFunction -> 
+    v42 <- BeginPlainFunction -> v43
+        v44 <- CallMethod v43, 'pop', []
+        Return v44
+    EndPlainFunction
+    BeginObjectLiteral
+    v45 <- EndObjectLiteral
+    v46 <- CreateNamedVariable 'x', 'var', v45
+    v47 <- CreateArray [v46, v46, v46]
+    v48 <- CreateNamedVariable 'a', 'var', v47
+    v49 <- CallFunction v42, [v48]
+    v50 <- CallFunction v42, [v48]
+    v51 <- CallFunction v42, [v48]
+    v52 <- CallFunction v42, []
+EndPlainFunction
+v53 <- CallFunction v41, []
+v54 <- BeginPlainFunction -> 
+    v55 <- BeginPlainFunction -> v56
+        v57 <- CallMethod v56, 'pop', []
+        Return v57
+    EndPlainFunction
+    v58 <- LoadUndefined
+    v59 <- CreateArray [v58, v58]
+    v60 <- CreateNamedVariable 'a', 'var', v59
+    v61 <- LoadUndefined
+    v62 <- CallFunction v55, [v60]
+    v63 <- LoadUndefined
+    v64 <- CallFunction v55, [v60]
+    v65 <- LoadUndefined
+    v66 <- CallFunction v55, [v60]
+    v67 <- CallFunction v55, []
+EndPlainFunction
+v68 <- CallFunction v54, []
+v69 <- BeginPlainFunction -> 
+    v70 <- CreateNamedVariable 'Array', 'none'
+    v71 <- GetProperty v70, 'prototype'
+    v72 <- GetProperty v71, 'pop'
+    v73 <- CreateNamedVariable 'pop', 'var', v72
+    v74 <- BeginPlainFunction -> v75
+        v76 <- CallMethod v75, 'pop', []
+        Return v76
+    EndPlainFunction
+    v77 <- LoadInteger '1'
+    v78 <- LoadInteger '2'
+    v79 <- LoadInteger '3'
+    v80 <- CreateArray [v77, v78, v79]
+    v81 <- CreateNamedVariable 'a', 'var', v80
+    v82 <- LoadInteger '3'
+    v83 <- CallFunction v74, [v81]
+    v84 <- LoadInteger '2'
+    v85 <- CallFunction v74, [v81]
+    v86 <- LoadInteger '1'
+    v87 <- CallFunction v74, [v81]
+    v88 <- CallFunction v74, []
+EndPlainFunction
+v89 <- CallFunction v69, []
+
+
+function f0() {
+    function foo(a2) {
+        return a2.pop();
+    }
+    var x = {};
+    var a = [x,x];
+    foo(a);
+    foo(a);
+    foo(a);
+    foo();
+}
+f0();
+function f14() {
+    function foo(a16) {
+        return a16.pop();
+    }
+    var x = 0;
+    var a = [x,x];
+    foo(a);
+    foo(a);
+    foo(a);
+    foo();
+}
+f14();
+function f28() {
+    function foo(a30) {
+        return a30.pop();
+    }
+    var x = 0;
+    var a = [x,x,x];
+    foo(a);
+    foo(a);
+    foo(a);
+    foo();
+}
+f28();
+function f41() {
+    function foo(a43) {
+        return a43.pop();
+    }
+    var x = {};
+    var a = [x,x,x];
+    foo(a);
+    foo(a);
+    foo(a);
+    foo();
+}
+f41();
+function f54() {
+    function foo(a56) {
+        return a56.pop();
+    }
+    var a = [,,];
+    foo(a);
+    foo(a);
+    foo(a);
+    foo();
+}
+f54();
+function f69() {
+    var pop = Array.prototype.pop;
+    function foo(a75) {
+        return a75.pop();
+    }
+    var a = [1,2,3];
+    foo(a);
+    foo(a);
+    foo(a);
+    foo();
+}
+f69();
+
+FuzzIL program written to corpus/inlined-array-pop-opt.fzil

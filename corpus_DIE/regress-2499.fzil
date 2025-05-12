@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetElement v1, '1'
+    v4 <- BinaryOperation v3, '>>>', v2
+    v5 <- GetElement v1, '0'
+    v6 <- LoadInteger '32'
+    v7 <- BinaryOperation v6, '-', v2
+    v8 <- BinaryOperation v5, '<<', v7
+    v9 <- BinaryOperation v4, '|', v8
+    Return v9
+EndPlainFunction
+v10 <- LoadInteger '4097'
+v11 <- LoadInteger '0'
+v12 <- CreateArray [v10, v11]
+v13 <- CreateNamedVariable 'word', 'none'
+Reassign v13, v12
+v14 <- CreateNamedVariable 'word', 'none'
+v15 <- LoadInteger '1'
+v16 <- CallFunction v0, [v14, v15]
+v17 <- CreateNamedVariable 'expected', 'var', v16
+v18 <- LoadInteger '1'
+v19 <- CallFunction v0, [v14, v18]
+v20 <- LoadInteger '1'
+v21 <- CallFunction v0, [v14, v20]
+v22 <- CreateNamedVariable 'optimized', 'var', v21
+
+
+function foo(a1, a2) {
+    return (a1[1] >>> a2) | (a1[0] << (32 - a2));
+}
+word = [4097,0];
+var expected = foo(word, 1);
+foo(word, 1);
+var optimized = foo(word, 1);
+
+FuzzIL program written to corpus/regress-2499.fzil

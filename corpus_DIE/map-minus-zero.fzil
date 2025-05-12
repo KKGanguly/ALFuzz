@@ -1,0 +1,141 @@
+v0 <- CreateNamedVariable 'Map', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'map', 'var', v1
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'objectKey', 'var', v3
+v5 <- LoadString 'keykeykey'
+v6 <- CreateNamedVariable 'stringKey', 'var', v5
+v7 <- LoadFloat '42.24'
+v8 <- CreateNamedVariable 'numberKey', 'var', v7
+v9 <- LoadBoolean 'true'
+v10 <- CreateNamedVariable 'booleanKey', 'var', v9
+v11 <- LoadUndefined
+v12 <- CreateNamedVariable 'undefinedKey', 'var', v11
+v13 <- LoadNull
+v14 <- CreateNamedVariable 'nullKey', 'var', v13
+v15 <- CreateNamedVariable 'NaN', 'none'
+v16 <- CreateNamedVariable 'nanKey', 'var', v15
+v17 <- LoadInteger '0'
+v18 <- CreateNamedVariable 'zeroKey', 'var', v17
+v19 <- LoadInteger '0'
+v20 <- UnaryOperation '-', v19
+v21 <- CreateNamedVariable 'minusZeroKey', 'var', v20
+v22 <- GetProperty v2, 'size'
+v23 <- LoadInteger '0'
+v24 <- LoadString 'aaa'
+v25 <- CallMethod v2, 'set', [v4, v24]
+v26 <- LoadString 'bbb'
+v27 <- CallMethod v2, 'set', [v6, v26]
+v28 <- LoadString 'ccc'
+v29 <- CallMethod v2, 'set', [v8, v28]
+v30 <- LoadString 'ddd'
+v31 <- CallMethod v2, 'set', [v10, v30]
+v32 <- LoadString 'eee'
+v33 <- CallMethod v2, 'set', [v12, v32]
+v34 <- LoadString 'fff'
+v35 <- CallMethod v2, 'set', [v14, v34]
+v36 <- LoadString 'ggg'
+v37 <- CallMethod v2, 'set', [v16, v36]
+v38 <- LoadString 'hhh'
+v39 <- CallMethod v2, 'set', [v18, v38]
+v40 <- LoadInteger '8'
+v41 <- GetProperty v2, 'size'
+v42 <- LoadString 'aaa'
+v43 <- CallMethod v2, 'get', [v4]
+v44 <- LoadString 'bbb'
+v45 <- CallMethod v2, 'get', [v6]
+v46 <- LoadString 'ccc'
+v47 <- CallMethod v2, 'get', [v8]
+v48 <- LoadString 'ddd'
+v49 <- CallMethod v2, 'get', [v10]
+v50 <- LoadString 'eee'
+v51 <- CallMethod v2, 'get', [v12]
+v52 <- LoadString 'fff'
+v53 <- CallMethod v2, 'get', [v14]
+v54 <- LoadString 'ggg'
+v55 <- CallMethod v2, 'get', [v16]
+v56 <- LoadString 'hhh'
+v57 <- CallMethod v2, 'get', [v18]
+v58 <- LoadUndefined
+BeginObjectLiteral
+v59 <- EndObjectLiteral
+v60 <- CallMethod v2, 'get', [v59]
+v61 <- LoadString 'bbb'
+v62 <- LoadString 'keykeykey'
+v63 <- CallMethod v2, 'get', [v62]
+v64 <- LoadString 'ccc'
+v65 <- LoadFloat '42.24'
+v66 <- CallMethod v2, 'get', [v65]
+v67 <- LoadString 'ddd'
+v68 <- LoadBoolean 'true'
+v69 <- CallMethod v2, 'get', [v68]
+v70 <- LoadString 'eee'
+v71 <- LoadUndefined
+v72 <- CallMethod v2, 'get', [v71]
+v73 <- LoadString 'fff'
+v74 <- LoadNull
+v75 <- CallMethod v2, 'get', [v74]
+v76 <- LoadString 'ggg'
+v77 <- CallMethod v2, 'get', [v15]
+v78 <- LoadString 'hhh'
+v79 <- LoadInteger '0'
+v80 <- CallMethod v2, 'get', [v79]
+v81 <- LoadString 'hhh'
+v82 <- LoadInteger '0'
+v83 <- UnaryOperation '-', v82
+v84 <- CallMethod v2, 'get', [v83]
+v85 <- LoadString 'hhh'
+v86 <- LoadInteger '1'
+v87 <- CreateNamedVariable 'Infinity', 'none'
+v88 <- BinaryOperation v86, '/', v87
+v89 <- CallMethod v2, 'get', [v88]
+v90 <- LoadString 'hhh'
+v91 <- LoadInteger '1'
+v92 <- UnaryOperation '-', v91
+v93 <- BinaryOperation v92, '/', v87
+v94 <- CallMethod v2, 'get', [v93]
+
+
+const v1 = new Map();
+var map = v1;
+var objectKey = {};
+var stringKey = "keykeykey";
+var numberKey = 42.24;
+var booleanKey = true;
+var undefinedKey;
+var nullKey = null;
+var nanKey = NaN;
+var zeroKey = 0;
+var minusZeroKey = -0;
+map.size;
+map.set(objectKey, "aaa");
+map.set(stringKey, "bbb");
+map.set(numberKey, "ccc");
+map.set(booleanKey, "ddd");
+map.set(undefinedKey, "eee");
+map.set(nullKey, "fff");
+map.set(nanKey, "ggg");
+map.set(zeroKey, "hhh");
+map.size;
+map.get(objectKey);
+map.get(stringKey);
+map.get(numberKey);
+map.get(booleanKey);
+map.get(undefinedKey);
+map.get(nullKey);
+map.get(nanKey);
+map.get(zeroKey);
+map.get({});
+map.get("keykeykey");
+map.get(42.24);
+map.get(true);
+map.get(undefined);
+map.get(null);
+map.get(NaN);
+map.get(0);
+map.get(-0);
+map.get(1 / Infinity);
+map.get(-1 / Infinity);
+
+FuzzIL program written to corpus/map-minus-zero.fzil

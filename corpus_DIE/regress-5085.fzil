@@ -1,0 +1,189 @@
+v0 <- BeginAsyncFunction -> 
+    v1 <- LoadInteger '10'
+    v2 <- Await v1
+EndAsyncFunction
+v3 <- CreateNamedVariable 'g', 'none'
+Reassign v3, v0
+v4 <- LoadUndefined
+v5 <- CreateNamedVariable 'g', 'none'
+v6 <- GetProperty v5, 'prototype'
+v7 <- CallFunction v5, []
+v8 <- LoadUndefined
+v9 <- GetProperty v5, 'prototype'
+v10 <- BeginGeneratorFunction -> 
+    v11 <- LoadInteger '10'
+    v12 <- Yield v11
+EndGeneratorFunction
+v13 <- CreateNamedVariable 'gen', 'none'
+Reassign v13, v10
+v14 <- CreateNamedVariable 'gen', 'none'
+v15 <- GetProperty v14, 'prototype'
+v16 <- LoadUndefined
+v17 <- Compare v15, '!=', v16
+v18 <- GetProperty v14, 'prototype'
+v19 <- LoadNull
+v20 <- Compare v18, '!=', v19
+v21 <- BinaryOperation v17, '&&', v20
+v22 <- CallFunction v14, []
+v23 <- GetProperty v14, 'prototype'
+v24 <- LoadUndefined
+v25 <- Compare v23, '!=', v24
+v26 <- GetProperty v14, 'prototype'
+v27 <- LoadNull
+v28 <- Compare v26, '!=', v27
+v29 <- BinaryOperation v25, '&&', v28
+v30 <- BeginAsyncGeneratorFunction -> 
+    v31 <- LoadInteger '10'
+    v32 <- Yield v31
+EndAsyncGeneratorFunction
+v33 <- CreateNamedVariable 'async_gen', 'none'
+Reassign v33, v30
+v34 <- CreateNamedVariable 'async_gen', 'none'
+v35 <- GetProperty v34, 'prototype'
+v36 <- LoadUndefined
+v37 <- Compare v35, '!=', v36
+v38 <- GetProperty v34, 'prototype'
+v39 <- LoadNull
+v40 <- Compare v38, '!=', v39
+v41 <- BinaryOperation v37, '&&', v40
+v42 <- CallFunction v34, []
+v43 <- GetProperty v34, 'prototype'
+v44 <- LoadUndefined
+v45 <- Compare v43, '!=', v44
+v46 <- GetProperty v34, 'prototype'
+v47 <- LoadNull
+v48 <- Compare v46, '!=', v47
+v49 <- BinaryOperation v45, '&&', v48
+v50 <- BeginPlainFunction -> v51
+    v52 <- CreateNamedVariable 'Proxy', 'none'
+    v53 <- TestInstanceOf v51, v52
+    Return v53
+EndPlainFunction
+v54 <- BeginPlainFunction -> 
+    v55 <- LoadBoolean 'false'
+    v56 <- CreateNamedVariable 'caught_exception', 'none'
+    Reassign v56, v55
+    BeginTry
+        BeginObjectLiteral
+        v57 <- EndObjectLiteral
+        v58 <- CallFunction v50, [v57]
+    BeginCatch -> v59
+        v60 <- LoadBoolean 'true'
+        v61 <- CreateNamedVariable 'caught_exception', 'none'
+        Reassign v61, v60
+        v62 <- LoadString 'Function has non-object prototype 'undefined' in instanceof check'
+        v63 <- GetProperty v59, 'message'
+    BeginFinally
+        v64 <- CreateNamedVariable 'caught_exception', 'none'
+    EndTryCatch
+EndPlainFunction
+v65 <- CallFunction v54, []
+v66 <- CallFunction v54, []
+v67 <- CallFunction v54, []
+v68 <- CreateNamedVariable 'Function', 'none'
+v69 <- GetProperty v68, 'prototype'
+v70 <- CreateNamedVariable 'Proxy', 'none'
+v71 <- GetProperty v70, '__proto__'
+SetProperty v71, 'prototype', v69
+v72 <- BeginArrowFunction -> 
+EndArrowFunction
+v73 <- TestInstanceOf v72, v70
+BeginObjectLiteral
+v74 <- EndObjectLiteral
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v75, v76, v77
+        Return v77
+    EndObjectLiteralMethod
+v78 <- EndObjectLiteral
+v79 <- Construct v70, [v74, v78]
+v80 <- GetProperty v79, 'test'
+v81 <- LoadString 'test'
+v82 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `b`, v82
+v83 <- EndObjectLiteral
+v84 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prototype`, v83
+    ObjectLiteralAddProperty `a`, v84
+v85 <- EndObjectLiteral
+SetProperty v70, '__proto__', v85
+v86 <- GetProperty v70, 'prototype'
+v87 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `b`, v87
+v88 <- EndObjectLiteral
+v89 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v90 <- EndObjectLiteral
+    BeginObjectLiteral
+    v91 <- EndObjectLiteral
+    v92 <- Construct v70, [v90, v91]
+    v93 <- CreateNamedVariable 'p1', 'let', v92
+EndPlainFunction
+v94 <- CallFunction v89, []
+
+
+async function f0() {
+    await 10;
+}
+g = f0;
+g.prototype;
+g();
+g.prototype;
+function* f10() {
+    yield 10;
+}
+gen = f10;
+(gen.prototype != undefined) && (gen.prototype != null);
+gen();
+(gen.prototype != undefined) && (gen.prototype != null);
+async function* f30() {
+    yield 10;
+}
+async_gen = f30;
+(async_gen.prototype != undefined) && (async_gen.prototype != null);
+async_gen();
+(async_gen.prototype != undefined) && (async_gen.prototype != null);
+function foo(a51) {
+    return a51 instanceof Proxy;
+}
+function test_for_exception() {
+    caught_exception = false;
+    try {
+        foo({});
+    } catch(e59) {
+        caught_exception = true;
+        e59.message;
+    } finally {
+    }
+}
+test_for_exception();
+test_for_exception();
+test_for_exception();
+const v69 = Function.prototype;
+const t38 = Proxy.__proto__;
+t38.prototype = v69;
+const v72 = () => {
+};
+v72 instanceof Proxy;
+const v74 = {};
+const v78 = {
+    get(a76, a77) {
+        return a77;
+    },
+};
+const v79 = new Proxy(v74, v78);
+v79.test;
+const v83 = { b: 2 };
+Proxy.__proto__ = { prototype: v83, a: 1 };
+Proxy.prototype;
+const v88 = { b: 2 };
+function testProxyCreationContext() {
+    const v90 = {};
+    const v92 = new Proxy(v90, {});
+    let p1 = v92;
+}
+testProxyCreationContext();
+
+FuzzIL program written to corpus/regress-5085.fzil

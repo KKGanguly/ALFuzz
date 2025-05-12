@@ -1,0 +1,125 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateNamedVariable 'a', 'var', v1
+    v3 <- BeginPlainFunction -> v4, v5
+        v6 <- LoadFloat '5.3'
+        SetComputedProperty v4, v5, v6
+    EndPlainFunction
+    v7 <- LoadInteger '1'
+    v8 <- CallFunction v3, [v2, v7]
+    v9 <- LoadInteger '2'
+    v10 <- CallFunction v3, [v2, v9]
+    v11 <- LoadInteger '3'
+    v12 <- CallFunction v3, [v2, v11]
+    v13 <- LoadInteger '0'
+    SetElement v2, '3', v13
+    v14 <- LoadInteger '3'
+    v15 <- CallFunction v3, [v2, v14]
+    v16 <- GetElement v2, '3'
+    v17 <- LoadFloat '5.3'
+    v18 <- LoadInteger '50000'
+    v19 <- CallFunction v3, [v2, v18]
+    v20 <- CallFunction v3, []
+    v21 <- CreateArray []
+    v22 <- CreateNamedVariable 'b', 'var', v21
+    v23 <- LoadInteger '1'
+    v24 <- CallFunction v3, [v22, v23]
+    v25 <- LoadInteger '2'
+    v26 <- CallFunction v3, [v22, v25]
+    v27 <- LoadInteger '5'
+    SetElement v22, '10000', v27
+    v28 <- LoadInteger '3'
+    v29 <- CallFunction v3, [v22, v28]
+    v30 <- LoadInteger '50000'
+    v31 <- CallFunction v3, [v22, v30]
+    v32 <- CallFunction v3, []
+EndPlainFunction
+v33 <- CallFunction v0, []
+v34 <- BeginPlainFunction -> 
+    v35 <- CreateNamedVariable 'Array', 'none'
+    v36 <- LoadInteger '10'
+    v37 <- Construct v35, [v36]
+    v38 <- CreateNamedVariable 'a', 'var', v37
+    v39 <- BeginPlainFunction -> v40, v41
+        v42 <- LoadInteger '50'
+        SetComputedProperty v40, v41, v42
+    EndPlainFunction
+    v43 <- LoadInteger '10'
+    v44 <- CallFunction v39, [v38, v43]
+    v45 <- LoadInteger '12'
+    v46 <- CallFunction v39, [v38, v45]
+    v47 <- LoadInteger '31'
+    v48 <- CallFunction v39, [v38, v47]
+    v49 <- LoadInteger '40'
+    v50 <- CallFunction v39, [v38, v49]
+    v51 <- CallFunction v39, []
+    v52 <- LoadInteger '99999'
+    v53 <- Construct v35, [v52]
+    Reassign v38, v53
+    BeginForLoopInitializer
+        v54 <- LoadInteger '0'
+    BeginForLoopCondition -> v55
+        v56 <- LoadInteger '263000'
+        v57 <- Compare v55, '<', v56
+    BeginForLoopAfterthought v57 -> v58
+        v59 <- LoadInteger '9'
+        Update v58, '+', v59
+    BeginForLoopBody -> v60
+        v61 <- CallFunction v39, [v38, v60]
+    EndForLoop
+    v62 <- GetProperty v38, 'length'
+    v63 <- LoadInteger '4'
+    v64 <- BinaryOperation v62, '*', v63
+    v65 <- LoadInteger '1024'
+    v66 <- LoadInteger '1024'
+    v67 <- BinaryOperation v65, '*', v66
+    v68 <- Compare v64, '>', v67
+    v69 <- CallFunction v39, []
+EndPlainFunction
+v70 <- CallFunction v34, []
+
+
+function f0() {
+    var a = [];
+    function foo(a4, a5) {
+        a4[a5] = 5.3;
+    }
+    foo(a, 1);
+    foo(a, 2);
+    foo(a, 3);
+    a[3] = 0;
+    foo(a, 3);
+    a[3];
+    foo(a, 50000);
+    foo();
+    var b = [];
+    foo(b, 1);
+    foo(b, 2);
+    b[10000] = 5;
+    foo(b, 3);
+    foo(b, 50000);
+    foo();
+}
+f0();
+function f34() {
+    const v37 = new Array(10);
+    var a = v37;
+    function foo2(a40, a41) {
+        a40[a41] = 50;
+    }
+    foo2(a, 10);
+    foo2(a, 12);
+    foo2(a, 31);
+    foo2(a, 40);
+    foo2();
+    const v53 = new Array(99999);
+    a = v53;
+    for (let i55 = 0; i55 < 263000; i55 += 9) {
+        foo2(a, i55);
+    }
+    (a.length * 4) > (1024 * 1024);
+    foo2();
+}
+f34();
+
+FuzzIL program written to corpus/ensure-growing-store-learns.fzil

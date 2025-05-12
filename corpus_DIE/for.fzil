@@ -1,0 +1,24 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadBoolean 'true'
+BeginForLoopAfterthought v2 -> v3
+    v4 <- UnaryOperation v3, '++'
+BeginForLoopBody -> v5
+    v6 <- LoadInteger '100'
+    v7 <- Compare v5, '>', v6
+    BeginIf v7
+        Break
+    EndIf
+EndForLoop
+v8 <- LoadInteger '101'
+v9 <- CreateNamedVariable 'i', 'none'
+
+
+for (let i1 = 0;; i1++) {
+    if (i1 > 100) {
+        break;
+    }
+}
+
+FuzzIL program written to corpus/for.fzil

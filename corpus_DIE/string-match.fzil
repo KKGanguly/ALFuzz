@@ -1,0 +1,82 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'pattern', 'const', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- GetProperty v3, 'length'
+    Return v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'Symbol', 'none'
+v6 <- GetProperty v5, 'match'
+SetComputedProperty v1, v6, v2
+v7 <- BeginArrowFunction -> 
+    v8 <- LoadNull
+    v9 <- CreateNamedVariable 'String', 'none'
+    v10 <- GetProperty v9, 'prototype'
+    v11 <- GetProperty v10, 'match'
+    v12 <- CallMethod v11, 'call', [v8, v1]
+    Return v12
+EndArrowFunction
+v13 <- CallFunction v7, []
+v14 <- CreateNamedVariable 'TypeError', 'none'
+v15 <- LoadInteger '5'
+v16 <- LoadString 'abcde'
+v17 <- CallMethod v16, 'match', [v1]
+v18 <- LoadInteger '6'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `toString` -> v19
+        v20 <- CreateNamedVariable 'Error', 'none'
+        v21 <- Construct v20, []
+        ThrowException v21
+    EndObjectLiteralMethod
+    ObjectLiteralAddProperty `length`, v18
+v22 <- EndObjectLiteral
+v23 <- CreateNamedVariable 'receiver', 'const', v22
+v24 <- LoadInteger '6'
+v25 <- CreateNamedVariable 'String', 'none'
+v26 <- GetProperty v25, 'prototype'
+v27 <- GetProperty v26, 'match'
+v28 <- CallMethod v27, 'call', [v23, v1]
+v29 <- LoadString 'dumdidum'
+v30 <- GetProperty v5, 'match'
+SetComputedProperty v1, v30, v29
+v31 <- BeginArrowFunction -> 
+    v32 <- LoadString 'abcde'
+    v33 <- CallMethod v32, 'match', [v1]
+    Return v33
+EndArrowFunction
+v34 <- CallFunction v31, []
+v35 <- LoadString '[Symbol.match]'
+v36 <- CreateNamedVariable 'RegExp', 'none'
+v37 <- GetProperty v36, 'prototype'
+v38 <- GetProperty v5, 'match'
+v39 <- GetComputedProperty v37, v38
+v40 <- GetProperty v39, 'name'
+
+
+const pattern = {};
+function f2(a3) {
+    return a3.length;
+}
+pattern[Symbol.match] = f2;
+const v7 = () => {
+    return String.prototype.match.call(null, pattern);
+};
+v7();
+("abcde").match(pattern);
+const v22 = {
+    toString() {
+        const v21 = new Error();
+        throw v21;
+    },
+    length: 6,
+};
+const receiver = v22;
+String.prototype.match.call(receiver, pattern);
+pattern[Symbol.match] = "dumdidum";
+const v31 = () => {
+    return ("abcde").match(pattern);
+};
+v31();
+RegExp.prototype[Symbol.match].name;
+
+FuzzIL program written to corpus/string-match.fzil

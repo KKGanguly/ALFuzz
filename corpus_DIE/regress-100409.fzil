@@ -1,0 +1,63 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'val', 'var', v1
+    v3 <- BeginPlainFunction -> 
+        v4 <- LoadInteger '0'
+        Reassign v2, v4
+        v5 <- LoadBoolean 'false'
+        v6 <- CreateNamedVariable 'z', 'var', v5
+        v7 <- LoadBoolean 'true'
+        v8 <- CreateNamedVariable 'y', 'var', v7
+        v9 <- UnaryOperation '!', v6
+        BeginIf v9
+            BeginWhileLoopHeader
+                v10 <- UnaryOperation '!', v6
+                Reassign v6, v10
+            BeginWhileLoopBody v10
+                BeginIf v8
+                    v11 <- UnaryOperation v2, '++'
+                EndIf
+            EndWhileLoop
+        EndIf
+        v12 <- UnaryOperation v2, '++'
+        Return v12
+    EndPlainFunction
+    Return v3
+EndPlainFunction
+v13 <- CallFunction v0, []
+v14 <- CreateNamedVariable 'foo', 'var', v13
+v15 <- LoadInteger '1'
+v16 <- CallFunction v14, []
+v17 <- LoadInteger '1'
+v18 <- CallFunction v14, []
+v19 <- LoadInteger '1'
+v20 <- CallFunction v14, []
+
+
+function outer() {
+    var val = 0;
+    function foo() {
+        val = 0;
+        var z = false;
+        var y = true;
+        if (!z) {
+            while ((() => {
+                    const v10 = !z;
+                    z = v10;
+                    return v10;
+                })()) {
+                if (y) {
+                    val++;
+                }
+            }
+        }
+        return val++;
+    }
+    return foo;
+}
+var foo = outer();
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-100409.fzil

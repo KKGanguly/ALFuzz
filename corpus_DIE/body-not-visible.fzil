@@ -1,0 +1,26 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'caught', 'var', v0
+BeginTry
+    v2 <- CreateNamedVariable 'Function', 'none'
+    v3 <- LoadString 'return body;'
+    v4 <- Construct v2, [v3]
+    v5 <- CallFunction v4, []
+    v6 <- LoadBoolean 'false'
+BeginCatch -> v7
+    v8 <- LoadBoolean 'true'
+    Reassign v1, v8
+    v9 <- CreateNamedVariable 'ReferenceError', 'none'
+    v10 <- TestInstanceOf v7, v9
+EndTryCatch
+
+
+var caught = false;
+try {
+    const v4 = new Function("return body;");
+    v4();
+} catch(e7) {
+    caught = true;
+    e7 instanceof ReferenceError;
+}
+
+FuzzIL program written to corpus/body-not-visible.fzil

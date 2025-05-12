@@ -1,0 +1,76 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'WeakMap', 'none'
+    v2 <- Construct v1, []
+    v3 <- CreateNamedVariable 'wm1', 'var', v2
+    v4 <- CreateNamedVariable 'Object', 'none'
+    v5 <- GetProperty v4, 'prototype'
+    v6 <- LoadInteger '23'
+    v7 <- CallMethod v3, 'set', [v5, v6]
+    v8 <- GetProperty v4, 'prototype'
+    v9 <- CallMethod v3, 'has', [v8]
+    v10 <- GetProperty v4, 'prototype'
+    v11 <- CallMethod v4, 'freeze', [v10]
+    v12 <- Construct v1, []
+    v13 <- CreateNamedVariable 'wm2', 'var', v12
+    BeginObjectLiteral
+    v14 <- EndObjectLiteral
+    v15 <- CreateNamedVariable 'o', 'var', v14
+    v16 <- LoadInteger '42'
+    v17 <- CallMethod v13, 'set', [v15, v16]
+    v18 <- LoadInteger '42'
+    v19 <- CallMethod v13, 'get', [v15]
+EndPlainFunction
+v20 <- CallFunction v0, []
+v21 <- BeginPlainFunction -> 
+    v22 <- CreateNamedVariable 'WeakMap', 'none'
+    v23 <- Construct v22, []
+    v24 <- CreateNamedVariable 'wm1', 'var', v23
+    BeginObjectLiteral
+    v25 <- EndObjectLiteral
+    v26 <- CreateNamedVariable 'o1', 'var', v25
+    v27 <- LoadInteger '23'
+    v28 <- CallMethod v24, 'set', [v26, v27]
+    v29 <- CallMethod v24, 'has', [v26]
+    v30 <- CreateNamedVariable 'Object', 'none'
+    v31 <- CallMethod v30, 'freeze', [v26]
+    v32 <- Construct v22, []
+    v33 <- CreateNamedVariable 'wm2', 'var', v32
+    v34 <- CallMethod v30, 'create', [v26]
+    v35 <- CreateNamedVariable 'o2', 'var', v34
+    v36 <- LoadInteger '42'
+    v37 <- CallMethod v33, 'set', [v35, v36]
+    v38 <- LoadInteger '42'
+    v39 <- CallMethod v33, 'get', [v35]
+EndPlainFunction
+v40 <- CallFunction v21, []
+
+
+function test1() {
+    const v2 = new WeakMap();
+    var wm1 = v2;
+    wm1.set(Object.prototype, 23);
+    wm1.has(Object.prototype);
+    Object.freeze(Object.prototype);
+    const v12 = new WeakMap();
+    var wm2 = v12;
+    var o = {};
+    wm2.set(o, 42);
+    wm2.get(o);
+}
+test1();
+function test2() {
+    const v23 = new WeakMap();
+    var wm1 = v23;
+    var o1 = {};
+    wm1.set(o1, 23);
+    wm1.has(o1);
+    Object.freeze(o1);
+    const v32 = new WeakMap();
+    var wm2 = v32;
+    var o2 = Object.create(o1);
+    wm2.set(o2, 42);
+    wm2.get(o2);
+}
+test2();
+
+FuzzIL program written to corpus/regress-2829.fzil

@@ -1,0 +1,90 @@
+v0 <- LoadInteger '0'
+v1 <- LoadThis
+SetProperty v1, 'x', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'p', 'var', v2
+v4 <- LoadString 'x'
+v5 <- LoadBoolean 'false'
+v6 <- LoadInteger '5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v5
+    ObjectLiteralAddProperty `value`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'defineProperty', [v3, v4, v7]
+v10 <- LoadThis
+SetProperty v10, '__proto__', v3
+v11 <- BeginPlainFunction -> v12
+    v13 <- LoadInteger '1'
+    SetProperty v12, 'x', v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> v15
+    Directive 'use strict'
+    v16 <- LoadInteger '1'
+    SetProperty v15, 'x', v16
+EndPlainFunction
+v17 <- BeginPlainFunction -> v18
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v18
+    v19 <- EndObjectLiteral
+    Return v19
+EndPlainFunction
+v20 <- LoadThis
+v21 <- CallFunction v17, [v20]
+v22 <- CreateNamedVariable 'o1', 'var', v21
+v23 <- LoadThis
+v24 <- CallFunction v17, [v23]
+v25 <- CreateNamedVariable 'o2', 'var', v24
+v26 <- LoadThis
+v27 <- CallFunction v17, [v26]
+v28 <- CallFunction v11, [v27]
+v29 <- LoadThis
+v30 <- CallFunction v17, [v29]
+v31 <- CallFunction v11, [v30]
+v32 <- LoadThis
+v33 <- CallFunction v17, [v32]
+v34 <- CallFunction v14, [v33]
+v35 <- LoadThis
+v36 <- CallFunction v17, [v35]
+v37 <- CallFunction v14, [v36]
+v38 <- LoadThis
+v39 <- DeleteProperty v38, 'x'
+v40 <- LoadInteger '20'
+SetProperty v22, 'x', v40
+v41 <- LoadInteger '5'
+v42 <- GetProperty v22, 'x'
+v43 <- CallFunction v11, [v25]
+v44 <- LoadInteger '5'
+v45 <- GetProperty v25, 'x'
+v46 <- LoadString 's_strict(o2);'
+v47 <- CreateNamedVariable 'TypeError', 'none'
+
+
+this.x = 0;
+var p = {};
+Object.defineProperty(p, "x", { writable: false, value: 5 });
+this.__proto__ = p;
+function s(a12) {
+    a12.x = 1;
+}
+function s_strict(a15) {
+    'use strict';
+    a15.x = 1;
+}
+function c(a18) {
+    return { __proto__: a18 };
+}
+var o1 = c(this);
+var o2 = c(this);
+s(c(this));
+s(c(this));
+s_strict(c(this));
+s_strict(c(this));
+delete this.x;
+o1.x = 20;
+o1.x;
+s(o2);
+o2.x;
+
+FuzzIL program written to corpus/readonly3.fzil

@@ -1,0 +1,49 @@
+v0 <- LoadString '{"b":1,"c":2,"d":3,"e":4}'
+v1 <- CreateNamedVariable 'JSON', 'none'
+v2 <- CallMethod v1, 'parse', [v0]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- LoadString '{"12040200":1, "a":2, "b":2}'
+v5 <- CallMethod v1, 'parse', [v4]
+v6 <- CreateNamedVariable 'b', 'var', v5
+v7 <- LoadString '{"24050300":1}'
+v8 <- CallMethod v1, 'parse', [v7]
+v9 <- CreateNamedVariable 'c', 'var', v8
+v10 <- LoadNull
+Reassign v6, v10
+v11 <- CreateNamedVariable 'gc', 'none'
+v12 <- CallFunction v11, []
+v13 <- CallFunction v11, []
+v14 <- LoadInteger '2'
+SetProperty v9, 'a1', v14
+v15 <- LoadInteger '2'
+SetProperty v9, 'a2', v15
+v16 <- LoadInteger '2'
+SetProperty v9, 'a3', v16
+v17 <- LoadInteger '2'
+SetProperty v9, 'a4', v17
+v18 <- LoadInteger '2'
+SetProperty v9, 'a5', v18
+v19 <- LoadInteger '2'
+SetProperty v9, 'a6', v19
+v20 <- LoadInteger '2'
+SetProperty v9, 'a7', v20
+v21 <- LoadInteger '2'
+SetProperty v9, 'a8', v21
+
+
+var a = JSON.parse("{"b":1,"c":2,"d":3,"e":4}");
+var b = JSON.parse("{"12040200":1, "a":2, "b":2}");
+var c = JSON.parse("{"24050300":1}");
+b = null;
+gc();
+gc();
+c.a1 = 2;
+c.a2 = 2;
+c.a3 = 2;
+c.a4 = 2;
+c.a5 = 2;
+c.a6 = 2;
+c.a7 = 2;
+c.a8 = 2;
+
+FuzzIL program written to corpus/regress-cnlt-elements.fzil

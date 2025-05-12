@@ -1,0 +1,22 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    BeginWith v3
+    EndWith
+    v4 <- LoadInteger '100'
+    Return v4
+EndPlainFunction
+v5 <- LoadInteger '100'
+v6 <- LoadString 'str'
+v7 <- CallFunction v2, [v6]
+
+
+var x = 1;
+function foo(a3) {
+    with (a3) {
+    }
+    return 100;
+}
+foo("str");
+
+FuzzIL program written to corpus/unused-context-in-with.fzil

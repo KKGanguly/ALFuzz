@@ -1,0 +1,140 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'e'
+    ThrowException v1
+EndPlainFunction
+v2 <- LoadBoolean 'true'
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- LoadBoolean 'false'
+v5 <- CreateNamedVariable 'a', 'var', v4
+v6 <- BeginPlainFunction -> v7
+    v8 <- LoadUndefined
+    v9 <- CreateNamedVariable 'i', 'var', v8
+    v10 <- LoadUndefined
+    v11 <- CreateNamedVariable 'j', 'var', v10
+    BeginIf v7
+        BeginForLoopInitializer
+            v12 <- LoadInteger '0'
+            Reassign v9, v12
+        BeginForLoopCondition
+            v13 <- LoadInteger '1'
+            v14 <- Compare v9, '<', v13
+        BeginForLoopAfterthought v14
+            v15 <- UnaryOperation v11, '++'
+        BeginForLoopBody
+        EndForLoop
+        BeginForLoopInitializer
+            v16 <- LoadInteger '0'
+            Reassign v9, v16
+        BeginForLoopCondition
+            v17 <- LoadInteger '1'
+            v18 <- Compare v9, '<', v17
+        BeginForLoopAfterthought v18
+            v19 <- CallFunction v0, []
+        BeginForLoopBody
+        EndForLoop
+        BeginForLoopInitializer
+            v20 <- LoadInteger '0'
+            Reassign v9, v20
+        BeginForLoopCondition
+            v21 <- LoadInteger '1'
+            v22 <- Compare v9, '<', v21
+        BeginForLoopAfterthought v22
+            v23 <- UnaryOperation v9, '++'
+        BeginForLoopBody
+        EndForLoop
+    EndIf
+EndPlainFunction
+v24 <- CallFunction v6, []
+v25 <- BeginPlainFunction -> 
+    v26 <- LoadUndefined
+    v27 <- CreateNamedVariable '__v_45', 'var', v26
+    BeginForLoopInitializer
+        v28 <- LoadInteger '0'
+        Reassign v27, v28
+    BeginForLoopCondition
+        v29 <- LoadInteger '64'
+        v30 <- Compare v27, '<', v29
+    BeginForLoopAfterthought v30
+        v31 <- CreateNamedVariable '__v_63', 'none'
+        v32 <- UnaryOperation v31, '++'
+    BeginForLoopBody
+    EndForLoop
+    BeginForLoopInitializer
+        v33 <- LoadInteger '0'
+        Reassign v27, v33
+    BeginForLoopCondition
+        v34 <- LoadInteger '128'
+        v35 <- Compare v27, '<', v34
+    BeginForLoopAfterthought v35
+        v36 <- CreateNamedVariable '__v_36', 'none'
+        v37 <- UnaryOperation v36, '++'
+    BeginForLoopBody
+    EndForLoop
+    BeginForLoopInitializer
+        v38 <- LoadInteger '128'
+        Reassign v27, v38
+    BeginForLoopCondition
+        v39 <- LoadInteger '256'
+        v40 <- Compare v27, '<', v39
+    BeginForLoopAfterthought v40
+        v41 <- UnaryOperation v27, '++'
+    BeginForLoopBody
+    EndForLoop
+EndPlainFunction
+v42 <- CallFunction v25, []
+
+
+function k() {
+    throw "e";
+}
+var a = true;
+var a = false;
+function foo(a7) {
+    var i;
+    var j;
+    if (a7) {
+        for ((() => {
+                i = 0;
+            })();
+            i < 1;
+            j++) {
+        }
+        for ((() => {
+                i = 0;
+            })();
+            i < 1;
+            k()) {
+        }
+        for ((() => {
+                i = 0;
+            })();
+            i < 1;
+            i++) {
+        }
+    }
+}
+foo();
+function bar() {
+    var __v_45;
+    for ((() => {
+            __v_45 = 0;
+        })();
+        __v_45 < 64;
+        __v_63++) {
+    }
+    for ((() => {
+            __v_45 = 0;
+        })();
+        __v_45 < 128;
+        __v_36++) {
+    }
+    for ((() => {
+            __v_45 = 128;
+        })();
+        __v_45 < 256;
+        __v_45++) {
+    }
+}
+bar();
+
+FuzzIL program written to corpus/regress-451958.fzil

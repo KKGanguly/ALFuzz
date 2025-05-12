@@ -1,0 +1,2547 @@
+v0 <- LoadString 'call an IIFE'
+v1 <- CreateTemplateString ['\n(function f() {})();\n'], []
+v2 <- LoadInteger '0'
+v3 <- LoadInteger '20'
+v4 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v2
+    ObjectLiteralAddProperty `end`, v3
+    ObjectLiteralAddProperty `count`, v4
+v5 <- EndObjectLiteral
+v6 <- LoadInteger '1'
+v7 <- LoadInteger '16'
+v8 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v6
+    ObjectLiteralAddProperty `end`, v7
+    ObjectLiteralAddProperty `count`, v8
+v9 <- EndObjectLiteral
+v10 <- CreateArray [v5, v9]
+v11 <- CreateNamedVariable 'TestCoverage', 'none'
+v12 <- CallFunction v11, [v0, v1, v10]
+v13 <- LoadString 'call locally allocated function'
+v14 <- CreateTemplateString ['let f = () => 1; f();'], []
+v15 <- LoadInteger '0'
+v16 <- LoadInteger '21'
+v17 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v15
+    ObjectLiteralAddProperty `end`, v16
+    ObjectLiteralAddProperty `count`, v17
+v18 <- EndObjectLiteral
+v19 <- LoadInteger '8'
+v20 <- LoadInteger '15'
+v21 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v19
+    ObjectLiteralAddProperty `end`, v20
+    ObjectLiteralAddProperty `count`, v21
+v22 <- EndObjectLiteral
+v23 <- CreateArray [v18, v22]
+v24 <- CallFunction v11, [v13, v14, v23]
+v25 <- LoadString 'if statements'
+v26 <- CreateTemplateString ['\nfunction g() {}                           // 0000\nfunction f(x) {                           // 0050\n  if (x == 42) {                          // 0100\n    if (x == 43) g(); else g();           // 0150\n  }                                       // 0200\n  if (x == 42) { g(); } else { g(); }     // 0250\n  if (x == 42) g(); else g();             // 0300\n  if (false) g(); else g();               // 0350\n  if (false) g();                         // 0400\n  if (true) g(); else g();                // 0450\n  if (true) g();                          // 0500\n}                                         // 0550\nf(42);                                    // 0600\nf(43);                                    // 0650\nif (true) {                               // 0700\n  const foo = 'bar';                      // 0750\n} else {                                  // 0800\n  const bar = 'foo';                      // 0850\n}                                         // 0900\n'], []
+v27 <- LoadInteger '0'
+v28 <- LoadInteger '949'
+v29 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v27
+    ObjectLiteralAddProperty `end`, v28
+    ObjectLiteralAddProperty `count`, v29
+v30 <- EndObjectLiteral
+v31 <- LoadInteger '801'
+v32 <- LoadInteger '901'
+v33 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v31
+    ObjectLiteralAddProperty `end`, v32
+    ObjectLiteralAddProperty `count`, v33
+v34 <- EndObjectLiteral
+v35 <- LoadInteger '0'
+v36 <- LoadInteger '15'
+v37 <- LoadInteger '11'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v35
+    ObjectLiteralAddProperty `end`, v36
+    ObjectLiteralAddProperty `count`, v37
+v38 <- EndObjectLiteral
+v39 <- LoadInteger '50'
+v40 <- LoadInteger '551'
+v41 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v39
+    ObjectLiteralAddProperty `end`, v40
+    ObjectLiteralAddProperty `count`, v41
+v42 <- EndObjectLiteral
+v43 <- LoadInteger '115'
+v44 <- LoadInteger '203'
+v45 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v43
+    ObjectLiteralAddProperty `end`, v44
+    ObjectLiteralAddProperty `count`, v45
+v46 <- EndObjectLiteral
+v47 <- LoadInteger '167'
+v48 <- LoadInteger '171'
+v49 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v47
+    ObjectLiteralAddProperty `end`, v48
+    ObjectLiteralAddProperty `count`, v49
+v50 <- EndObjectLiteral
+v51 <- LoadInteger '265'
+v52 <- LoadInteger '287'
+v53 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v51
+    ObjectLiteralAddProperty `end`, v52
+    ObjectLiteralAddProperty `count`, v53
+v54 <- EndObjectLiteral
+v55 <- LoadInteger '315'
+v56 <- LoadInteger '329'
+v57 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v55
+    ObjectLiteralAddProperty `end`, v56
+    ObjectLiteralAddProperty `count`, v57
+v58 <- EndObjectLiteral
+v59 <- LoadInteger '363'
+v60 <- LoadInteger '367'
+v61 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v59
+    ObjectLiteralAddProperty `end`, v60
+    ObjectLiteralAddProperty `count`, v61
+v62 <- EndObjectLiteral
+v63 <- LoadInteger '413'
+v64 <- LoadInteger '417'
+v65 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v63
+    ObjectLiteralAddProperty `end`, v64
+    ObjectLiteralAddProperty `count`, v65
+v66 <- EndObjectLiteral
+v67 <- LoadInteger '466'
+v68 <- LoadInteger '476'
+v69 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v67
+    ObjectLiteralAddProperty `end`, v68
+    ObjectLiteralAddProperty `count`, v69
+v70 <- EndObjectLiteral
+v71 <- CreateArray [v30, v34, v38, v42, v46, v50, v54, v58, v62, v66, v70]
+v72 <- CallFunction v11, [v25, v26, v71]
+v73 <- LoadString 'if statement (early return)'
+v74 <- CreateTemplateString ['\n!function() {                             // 0000\n  if (true) {                             // 0050\n    nop();                                // 0100\n    return;                               // 0150\n    nop();                                // 0200\n  }                                       // 0250\n  nop();                                  // 0300\n}()                                       // 0350\n'], []
+v75 <- LoadInteger '0'
+v76 <- LoadInteger '399'
+v77 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v75
+    ObjectLiteralAddProperty `end`, v76
+    ObjectLiteralAddProperty `count`, v77
+v78 <- EndObjectLiteral
+v79 <- LoadInteger '1'
+v80 <- LoadInteger '351'
+v81 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v79
+    ObjectLiteralAddProperty `end`, v80
+    ObjectLiteralAddProperty `count`, v81
+v82 <- EndObjectLiteral
+v83 <- LoadInteger '161'
+v84 <- LoadInteger '350'
+v85 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v83
+    ObjectLiteralAddProperty `end`, v84
+    ObjectLiteralAddProperty `count`, v85
+v86 <- EndObjectLiteral
+v87 <- CreateArray [v78, v82, v86]
+v88 <- CallFunction v11, [v73, v74, v87]
+v89 <- LoadString 'if statement (no semi-colon)'
+v90 <- CreateTemplateString ['\n!function() {                             // 0000\n  if (true) nop()                         // 0050\n  if (true) nop(); else nop()             // 0100\n  nop();                                  // 0150\n}()                                       // 0200\n'], []
+v91 <- LoadInteger '0'
+v92 <- LoadInteger '249'
+v93 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v91
+    ObjectLiteralAddProperty `end`, v92
+    ObjectLiteralAddProperty `count`, v93
+v94 <- EndObjectLiteral
+v95 <- LoadInteger '1'
+v96 <- LoadInteger '201'
+v97 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v95
+    ObjectLiteralAddProperty `end`, v96
+    ObjectLiteralAddProperty `count`, v97
+v98 <- EndObjectLiteral
+v99 <- LoadInteger '118'
+v100 <- LoadInteger '129'
+v101 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v99
+    ObjectLiteralAddProperty `end`, v100
+    ObjectLiteralAddProperty `count`, v101
+v102 <- EndObjectLiteral
+v103 <- CreateArray [v94, v98, v102]
+v104 <- CallFunction v11, [v89, v90, v103]
+v105 <- LoadString 'for statements'
+v106 <- CreateTemplateString ['\nfunction g() {}                           // 0000\n!function() {                             // 0050\n  for (var i = 0; i < 12; i++) g();       // 0100\n  for (var i = 0; i < 12; i++) {          // 0150\n    g();                                  // 0200\n  }                                       // 0250\n  for (var i = 0; false; i++) g();        // 0300\n  for (var i = 0; true; i++) break;       // 0350\n  for (var i = 0; i < 12; i++) {          // 0400\n    if (i % 3 == 0) g(); else g();        // 0450\n  }                                       // 0500\n}();                                      // 0550\n'], []
+v107 <- LoadInteger '0'
+v108 <- LoadInteger '599'
+v109 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v107
+    ObjectLiteralAddProperty `end`, v108
+    ObjectLiteralAddProperty `count`, v109
+v110 <- EndObjectLiteral
+v111 <- LoadInteger '0'
+v112 <- LoadInteger '15'
+v113 <- LoadInteger '36'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v111
+    ObjectLiteralAddProperty `end`, v112
+    ObjectLiteralAddProperty `count`, v113
+v114 <- EndObjectLiteral
+v115 <- LoadInteger '51'
+v116 <- LoadInteger '551'
+v117 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v115
+    ObjectLiteralAddProperty `end`, v116
+    ObjectLiteralAddProperty `count`, v117
+v118 <- EndObjectLiteral
+v119 <- LoadInteger '131'
+v120 <- LoadInteger '135'
+v121 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v119
+    ObjectLiteralAddProperty `end`, v120
+    ObjectLiteralAddProperty `count`, v121
+v122 <- EndObjectLiteral
+v123 <- LoadInteger '181'
+v124 <- LoadInteger '253'
+v125 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v123
+    ObjectLiteralAddProperty `end`, v124
+    ObjectLiteralAddProperty `count`, v125
+v126 <- EndObjectLiteral
+v127 <- LoadInteger '330'
+v128 <- LoadInteger '334'
+v129 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v127
+    ObjectLiteralAddProperty `end`, v128
+    ObjectLiteralAddProperty `count`, v129
+v130 <- EndObjectLiteral
+v131 <- LoadInteger '431'
+v132 <- LoadInteger '503'
+v133 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v131
+    ObjectLiteralAddProperty `end`, v132
+    ObjectLiteralAddProperty `count`, v133
+v134 <- EndObjectLiteral
+v135 <- LoadInteger '470'
+v136 <- LoadInteger '474'
+v137 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v135
+    ObjectLiteralAddProperty `end`, v136
+    ObjectLiteralAddProperty `count`, v137
+v138 <- EndObjectLiteral
+v139 <- LoadInteger '474'
+v140 <- LoadInteger '484'
+v141 <- LoadInteger '8'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v139
+    ObjectLiteralAddProperty `end`, v140
+    ObjectLiteralAddProperty `count`, v141
+v142 <- EndObjectLiteral
+v143 <- CreateArray [v110, v114, v118, v122, v126, v130, v134, v138, v142]
+v144 <- CallFunction v11, [v105, v106, v143]
+v145 <- LoadString 'for statements pt. 2'
+v146 <- CreateTemplateString ['\nfunction g() {}                           // 0000\n!function() {                             // 0050\n  let j = 0;                              // 0100\n  for (let i = 0; i < 12; i++) g();       // 0150\n  for (const i = 0; j < 12; j++) g();     // 0200\n  for (j = 0; j < 12; j++) g();           // 0250\n  for (;;) break;                         // 0300\n}();                                      // 0350\n'], []
+v147 <- LoadInteger '0'
+v148 <- LoadInteger '399'
+v149 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v147
+    ObjectLiteralAddProperty `end`, v148
+    ObjectLiteralAddProperty `count`, v149
+v150 <- EndObjectLiteral
+v151 <- LoadInteger '0'
+v152 <- LoadInteger '15'
+v153 <- LoadInteger '36'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v151
+    ObjectLiteralAddProperty `end`, v152
+    ObjectLiteralAddProperty `count`, v153
+v154 <- EndObjectLiteral
+v155 <- LoadInteger '51'
+v156 <- LoadInteger '351'
+v157 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v155
+    ObjectLiteralAddProperty `end`, v156
+    ObjectLiteralAddProperty `count`, v157
+v158 <- EndObjectLiteral
+v159 <- LoadInteger '181'
+v160 <- LoadInteger '185'
+v161 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v159
+    ObjectLiteralAddProperty `end`, v160
+    ObjectLiteralAddProperty `count`, v161
+v162 <- EndObjectLiteral
+v163 <- LoadInteger '233'
+v164 <- LoadInteger '237'
+v165 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v163
+    ObjectLiteralAddProperty `end`, v164
+    ObjectLiteralAddProperty `count`, v165
+v166 <- EndObjectLiteral
+v167 <- LoadInteger '277'
+v168 <- LoadInteger '281'
+v169 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v167
+    ObjectLiteralAddProperty `end`, v168
+    ObjectLiteralAddProperty `count`, v169
+v170 <- EndObjectLiteral
+v171 <- CreateArray [v150, v154, v158, v162, v166, v170]
+v172 <- CallFunction v11, [v145, v146, v171]
+v173 <- LoadString 'for statements (no semicolon)'
+v174 <- CreateTemplateString ['\nfunction g() {}                           // 0000\n!function() {                             // 0050\n  for (let i = 0; i < 12; i++) g()        // 0100\n  for (let i = 0; i < 12; i++) break      // 0150\n  for (let i = 0; i < 12; i++) break; g() // 0200\n}();                                      // 0250\n'], []
+v175 <- LoadInteger '0'
+v176 <- LoadInteger '299'
+v177 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v175
+    ObjectLiteralAddProperty `end`, v176
+    ObjectLiteralAddProperty `count`, v177
+v178 <- EndObjectLiteral
+v179 <- LoadInteger '0'
+v180 <- LoadInteger '15'
+v181 <- LoadInteger '13'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v179
+    ObjectLiteralAddProperty `end`, v180
+    ObjectLiteralAddProperty `count`, v181
+v182 <- EndObjectLiteral
+v183 <- LoadInteger '51'
+v184 <- LoadInteger '251'
+v185 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v183
+    ObjectLiteralAddProperty `end`, v184
+    ObjectLiteralAddProperty `count`, v185
+v186 <- EndObjectLiteral
+v187 <- LoadInteger '131'
+v188 <- LoadInteger '134'
+v189 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v187
+    ObjectLiteralAddProperty `end`, v188
+    ObjectLiteralAddProperty `count`, v189
+v190 <- EndObjectLiteral
+v191 <- CreateArray [v178, v182, v186, v190]
+v192 <- CallFunction v11, [v173, v174, v191]
+v193 <- LoadString 'for statement (early return)'
+v194 <- CreateTemplateString ['\n!function() {                             // 0000\n  for (var i = 0; i < 10; i++) {          // 0050\n    nop();                                // 0100\n    continue;                             // 0150\n    nop();                                // 0200\n  }                                       // 0250\n  nop();                                  // 0300\n  for (;;) {                              // 0350\n    nop();                                // 0400\n    break;                                // 0450\n    nop();                                // 0500\n  }                                       // 0550\n  nop();                                  // 0600\n  for (;;) {                              // 0650\n    nop();                                // 0700\n    return;                               // 0750\n    nop();                                // 0800\n  }                                       // 0850\n  nop();                                  // 0900\n}()                                       // 0950\n'], []
+v195 <- LoadInteger '0'
+v196 <- LoadInteger '999'
+v197 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v195
+    ObjectLiteralAddProperty `end`, v196
+    ObjectLiteralAddProperty `count`, v197
+v198 <- EndObjectLiteral
+v199 <- LoadInteger '1'
+v200 <- LoadInteger '951'
+v201 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v199
+    ObjectLiteralAddProperty `end`, v200
+    ObjectLiteralAddProperty `count`, v201
+v202 <- EndObjectLiteral
+v203 <- LoadInteger '81'
+v204 <- LoadInteger '253'
+v205 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v203
+    ObjectLiteralAddProperty `end`, v204
+    ObjectLiteralAddProperty `count`, v205
+v206 <- EndObjectLiteral
+v207 <- LoadInteger '163'
+v208 <- LoadInteger '253'
+v209 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v207
+    ObjectLiteralAddProperty `end`, v208
+    ObjectLiteralAddProperty `count`, v209
+v210 <- EndObjectLiteral
+v211 <- LoadInteger '460'
+v212 <- LoadInteger '553'
+v213 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v211
+    ObjectLiteralAddProperty `end`, v212
+    ObjectLiteralAddProperty `count`, v213
+v214 <- EndObjectLiteral
+v215 <- LoadInteger '761'
+v216 <- LoadInteger '950'
+v217 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v215
+    ObjectLiteralAddProperty `end`, v216
+    ObjectLiteralAddProperty `count`, v217
+v218 <- EndObjectLiteral
+v219 <- CreateArray [v198, v202, v206, v210, v214, v218]
+v220 <- CallFunction v11, [v193, v194, v219]
+v221 <- LoadString 'for-of and for-in statements'
+v222 <- CreateTemplateString ['\n!function() {                             // 0000\n  var i;                                  // 0050\n  for (i of [0,1,2,3]) { nop(); }         // 0100\n  for (let j of [0,1,2,3]) { nop(); }     // 0150\n  for (i in [0,1,2,3]) { nop(); }         // 0200\n  for (let j in [0,1,2,3]) { nop(); }     // 0250\n  var xs = [{a:0, b:1}, {a:1,b:0}];       // 0300\n  for (var {a: x, b: y} of xs) { nop(); } // 0350\n}();                                      // 0400\n'], []
+v223 <- LoadInteger '0'
+v224 <- LoadInteger '449'
+v225 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v223
+    ObjectLiteralAddProperty `end`, v224
+    ObjectLiteralAddProperty `count`, v225
+v226 <- EndObjectLiteral
+v227 <- LoadInteger '1'
+v228 <- LoadInteger '401'
+v229 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v227
+    ObjectLiteralAddProperty `end`, v228
+    ObjectLiteralAddProperty `count`, v229
+v230 <- EndObjectLiteral
+v231 <- LoadInteger '123'
+v232 <- LoadInteger '133'
+v233 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v231
+    ObjectLiteralAddProperty `end`, v232
+    ObjectLiteralAddProperty `count`, v233
+v234 <- EndObjectLiteral
+v235 <- LoadInteger '177'
+v236 <- LoadInteger '187'
+v237 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v235
+    ObjectLiteralAddProperty `end`, v236
+    ObjectLiteralAddProperty `count`, v237
+v238 <- EndObjectLiteral
+v239 <- LoadInteger '223'
+v240 <- LoadInteger '233'
+v241 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v239
+    ObjectLiteralAddProperty `end`, v240
+    ObjectLiteralAddProperty `count`, v241
+v242 <- EndObjectLiteral
+v243 <- LoadInteger '277'
+v244 <- LoadInteger '287'
+v245 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v243
+    ObjectLiteralAddProperty `end`, v244
+    ObjectLiteralAddProperty `count`, v245
+v246 <- EndObjectLiteral
+v247 <- LoadInteger '381'
+v248 <- LoadInteger '391'
+v249 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v247
+    ObjectLiteralAddProperty `end`, v248
+    ObjectLiteralAddProperty `count`, v249
+v250 <- EndObjectLiteral
+v251 <- CreateArray [v226, v230, v234, v238, v242, v246, v250]
+v252 <- CallFunction v11, [v221, v222, v251]
+v253 <- LoadString 'for-await-of statements'
+v254 <- CreateTemplateString ['\n!async function() {                       // 0000\n  for await (var x of [0,1,2,3]) {        // 0050\n    nop();                                // 0100\n  }                                       // 0150\n}();                                      // 0200\n'], []
+v255 <- LoadInteger '0'
+v256 <- LoadInteger '299'
+v257 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v255
+    ObjectLiteralAddProperty `end`, v256
+    ObjectLiteralAddProperty `count`, v257
+v258 <- EndObjectLiteral
+v259 <- LoadInteger '1'
+v260 <- LoadInteger '201'
+v261 <- LoadInteger '6'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v259
+    ObjectLiteralAddProperty `end`, v260
+    ObjectLiteralAddProperty `count`, v261
+v262 <- EndObjectLiteral
+v263 <- LoadInteger '83'
+v264 <- LoadInteger '153'
+v265 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v263
+    ObjectLiteralAddProperty `end`, v264
+    ObjectLiteralAddProperty `count`, v265
+v266 <- EndObjectLiteral
+v267 <- LoadInteger '153'
+v268 <- LoadInteger '200'
+v269 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v267
+    ObjectLiteralAddProperty `end`, v268
+    ObjectLiteralAddProperty `count`, v269
+v270 <- EndObjectLiteral
+v271 <- CreateArray [v258, v262, v266, v270]
+v272 <- CallFunction v11, [v253, v254, v271]
+v273 <- LoadString 'while and do-while statements'
+v274 <- CreateTemplateString ['\nfunction g() {}                           // 0000\n!function() {                             // 0050\n  var i;                                  // 0100\n  i = 0; while (i < 12) i++;              // 0150\n  i = 0; while (i < 12) { g(); i++; }     // 0200\n  i = 0; while (false) g();               // 0250\n  i = 0; while (true) break;              // 0300\n                                          // 0350\n  i = 0; do i++; while (i < 12);          // 0400\n  i = 0; do { g(); i++; }                 // 0450\n         while (i < 12);                  // 0500\n  i = 0; do { g(); } while (false);       // 0550\n  i = 0; do { break; } while (true);      // 0600\n}();                                      // 0650\n'], []
+v275 <- LoadInteger '0'
+v276 <- LoadInteger '699'
+v277 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v275
+    ObjectLiteralAddProperty `end`, v276
+    ObjectLiteralAddProperty `count`, v277
+v278 <- EndObjectLiteral
+v279 <- LoadInteger '0'
+v280 <- LoadInteger '15'
+v281 <- LoadInteger '25'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v279
+    ObjectLiteralAddProperty `end`, v280
+    ObjectLiteralAddProperty `count`, v281
+v282 <- EndObjectLiteral
+v283 <- LoadInteger '51'
+v284 <- LoadInteger '651'
+v285 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v283
+    ObjectLiteralAddProperty `end`, v284
+    ObjectLiteralAddProperty `count`, v285
+v286 <- EndObjectLiteral
+v287 <- LoadInteger '174'
+v288 <- LoadInteger '178'
+v289 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v287
+    ObjectLiteralAddProperty `end`, v288
+    ObjectLiteralAddProperty `count`, v289
+v290 <- EndObjectLiteral
+v291 <- LoadInteger '224'
+v292 <- LoadInteger '237'
+v293 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v291
+    ObjectLiteralAddProperty `end`, v292
+    ObjectLiteralAddProperty `count`, v293
+v294 <- EndObjectLiteral
+v295 <- LoadInteger '273'
+v296 <- LoadInteger '277'
+v297 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v295
+    ObjectLiteralAddProperty `end`, v296
+    ObjectLiteralAddProperty `count`, v297
+v298 <- EndObjectLiteral
+v299 <- LoadInteger '412'
+v300 <- LoadInteger '416'
+v301 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v299
+    ObjectLiteralAddProperty `end`, v300
+    ObjectLiteralAddProperty `count`, v301
+v302 <- EndObjectLiteral
+v303 <- LoadInteger '462'
+v304 <- LoadInteger '475'
+v305 <- LoadInteger '12'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v303
+    ObjectLiteralAddProperty `end`, v304
+    ObjectLiteralAddProperty `count`, v305
+v306 <- EndObjectLiteral
+v307 <- CreateArray [v278, v282, v286, v290, v294, v298, v302, v306]
+v308 <- CallFunction v11, [v273, v274, v307]
+v309 <- LoadString 'while statement (early return)'
+v310 <- CreateTemplateString ['\n!function() {                             // 0000\n  let i = 0;                              // 0050\n  while (i < 10) {                        // 0100\n    i++;                                  // 0150\n    continue;                             // 0200\n    nop();                                // 0250\n  }                                       // 0300\n  nop();                                  // 0350\n  while (true) {                          // 0400\n    nop();                                // 0450\n    break;                                // 0500\n    nop();                                // 0550\n  }                                       // 0600\n  nop();                                  // 0650\n  while (true) {                          // 0700\n    nop();                                // 0750\n    return;                               // 0800\n    nop();                                // 0850\n  }                                       // 0900\n  nop();                                  // 0950\n}()                                       // 1000\n'], []
+v311 <- LoadInteger '0'
+v312 <- LoadInteger '1049'
+v313 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v311
+    ObjectLiteralAddProperty `end`, v312
+    ObjectLiteralAddProperty `count`, v313
+v314 <- EndObjectLiteral
+v315 <- LoadInteger '1'
+v316 <- LoadInteger '1001'
+v317 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v315
+    ObjectLiteralAddProperty `end`, v316
+    ObjectLiteralAddProperty `count`, v317
+v318 <- EndObjectLiteral
+v319 <- LoadInteger '117'
+v320 <- LoadInteger '303'
+v321 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v319
+    ObjectLiteralAddProperty `end`, v320
+    ObjectLiteralAddProperty `count`, v321
+v322 <- EndObjectLiteral
+v323 <- LoadInteger '213'
+v324 <- LoadInteger '303'
+v325 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v323
+    ObjectLiteralAddProperty `end`, v324
+    ObjectLiteralAddProperty `count`, v325
+v326 <- EndObjectLiteral
+v327 <- LoadInteger '510'
+v328 <- LoadInteger '603'
+v329 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v327
+    ObjectLiteralAddProperty `end`, v328
+    ObjectLiteralAddProperty `count`, v329
+v330 <- EndObjectLiteral
+v331 <- LoadInteger '811'
+v332 <- LoadInteger '1000'
+v333 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v331
+    ObjectLiteralAddProperty `end`, v332
+    ObjectLiteralAddProperty `count`, v333
+v334 <- EndObjectLiteral
+v335 <- CreateArray [v314, v318, v322, v326, v330, v334]
+v336 <- CallFunction v11, [v309, v310, v335]
+v337 <- LoadString 'do-while statement (early return)'
+v338 <- CreateTemplateString ['\n!function() {                             // 0000\n  let i = 0;                              // 0050\n  do {                                    // 0100\n    i++;                                  // 0150\n    continue;                             // 0200\n    nop();                                // 0250\n  } while (i < 10);                       // 0300\n  nop();                                  // 0350\n  do {                                    // 0400\n    nop();                                // 0450\n    break;                                // 0500\n    nop();                                // 0550\n  } while (true);                         // 0600\n  nop();                                  // 0650\n  do {                                    // 0700\n    nop();                                // 0750\n    return;                               // 0800\n    nop();                                // 0850\n  } while (true);                         // 0900\n  nop();                                  // 0950\n}()                                       // 1000\n'], []
+v339 <- LoadInteger '0'
+v340 <- LoadInteger '1049'
+v341 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v339
+    ObjectLiteralAddProperty `end`, v340
+    ObjectLiteralAddProperty `count`, v341
+v342 <- EndObjectLiteral
+v343 <- LoadInteger '1'
+v344 <- LoadInteger '1001'
+v345 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v343
+    ObjectLiteralAddProperty `end`, v344
+    ObjectLiteralAddProperty `count`, v345
+v346 <- EndObjectLiteral
+v347 <- LoadInteger '105'
+v348 <- LoadInteger '303'
+v349 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v347
+    ObjectLiteralAddProperty `end`, v348
+    ObjectLiteralAddProperty `count`, v349
+v350 <- EndObjectLiteral
+v351 <- LoadInteger '213'
+v352 <- LoadInteger '303'
+v353 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v351
+    ObjectLiteralAddProperty `end`, v352
+    ObjectLiteralAddProperty `count`, v353
+v354 <- EndObjectLiteral
+v355 <- LoadInteger '510'
+v356 <- LoadInteger '603'
+v357 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v355
+    ObjectLiteralAddProperty `end`, v356
+    ObjectLiteralAddProperty `count`, v357
+v358 <- EndObjectLiteral
+v359 <- LoadInteger '811'
+v360 <- LoadInteger '1000'
+v361 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v359
+    ObjectLiteralAddProperty `end`, v360
+    ObjectLiteralAddProperty `count`, v361
+v362 <- EndObjectLiteral
+v363 <- CreateArray [v342, v346, v350, v354, v358, v362]
+v364 <- CallFunction v11, [v337, v338, v363]
+v365 <- LoadString 'return statements'
+v366 <- CreateTemplateString ['\n!function() { nop(); return; nop(); }();  // 0000\n!function() { nop(); return 42;           // 0050\n              nop(); }();                 // 0100\n'], []
+v367 <- LoadInteger '0'
+v368 <- LoadInteger '149'
+v369 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v367
+    ObjectLiteralAddProperty `end`, v368
+    ObjectLiteralAddProperty `count`, v369
+v370 <- EndObjectLiteral
+v371 <- LoadInteger '1'
+v372 <- LoadInteger '37'
+v373 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v371
+    ObjectLiteralAddProperty `end`, v372
+    ObjectLiteralAddProperty `count`, v373
+v374 <- EndObjectLiteral
+v375 <- LoadInteger '28'
+v376 <- LoadInteger '36'
+v377 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v375
+    ObjectLiteralAddProperty `end`, v376
+    ObjectLiteralAddProperty `count`, v377
+v378 <- EndObjectLiteral
+v379 <- LoadInteger '51'
+v380 <- LoadInteger '122'
+v381 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v379
+    ObjectLiteralAddProperty `end`, v380
+    ObjectLiteralAddProperty `count`, v381
+v382 <- EndObjectLiteral
+v383 <- LoadInteger '81'
+v384 <- LoadInteger '121'
+v385 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v383
+    ObjectLiteralAddProperty `end`, v384
+    ObjectLiteralAddProperty `count`, v385
+v386 <- EndObjectLiteral
+v387 <- CreateArray [v370, v374, v378, v382, v386]
+v388 <- CallFunction v11, [v365, v366, v387]
+v389 <- LoadString 'try/catch/finally statements'
+v390 <- CreateTemplateString ['\n!function() {                             // 0000\n  try { nop(); } catch (e) { nop(); }     // 0050\n  try { nop(); } finally { nop(); }       // 0100\n  try {                                   // 0150\n    try { throw 42; } catch (e) { nop(); }// 0200\n  } catch (e) { nop(); }                  // 0250\n  try {                                   // 0300\n    try { throw 42; } finally { nop(); }  // 0350\n  } catch (e) { nop(); }                  // 0400\n  try {                                   // 0450\n    throw 42;                             // 0500\n  } catch (e) {                           // 0550\n    nop();                                // 0600\n  } finally {                             // 0650\n    nop();                                // 0700\n  }                                       // 0750\n}();                                      // 0800\n'], []
+v391 <- LoadInteger '0'
+v392 <- LoadInteger '849'
+v393 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v391
+    ObjectLiteralAddProperty `end`, v392
+    ObjectLiteralAddProperty `count`, v393
+v394 <- EndObjectLiteral
+v395 <- LoadInteger '1'
+v396 <- LoadInteger '801'
+v397 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v395
+    ObjectLiteralAddProperty `end`, v396
+    ObjectLiteralAddProperty `count`, v397
+v398 <- EndObjectLiteral
+v399 <- LoadInteger '67'
+v400 <- LoadInteger '87'
+v401 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v399
+    ObjectLiteralAddProperty `end`, v400
+    ObjectLiteralAddProperty `count`, v401
+v402 <- EndObjectLiteral
+v403 <- LoadInteger '219'
+v404 <- LoadInteger '222'
+v405 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v403
+    ObjectLiteralAddProperty `end`, v404
+    ObjectLiteralAddProperty `count`, v405
+v406 <- EndObjectLiteral
+v407 <- LoadInteger '254'
+v408 <- LoadInteger '274'
+v409 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v407
+    ObjectLiteralAddProperty `end`, v408
+    ObjectLiteralAddProperty `count`, v409
+v410 <- EndObjectLiteral
+v411 <- LoadInteger '369'
+v412 <- LoadInteger '372'
+v413 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v411
+    ObjectLiteralAddProperty `end`, v412
+    ObjectLiteralAddProperty `count`, v413
+v414 <- EndObjectLiteral
+v415 <- LoadInteger '403'
+v416 <- LoadInteger '404'
+v417 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v415
+    ObjectLiteralAddProperty `end`, v416
+    ObjectLiteralAddProperty `count`, v417
+v418 <- EndObjectLiteral
+v419 <- LoadInteger '513'
+v420 <- LoadInteger '554'
+v421 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v419
+    ObjectLiteralAddProperty `end`, v420
+    ObjectLiteralAddProperty `count`, v421
+v422 <- EndObjectLiteral
+v423 <- CreateArray [v394, v398, v402, v406, v410, v414, v418, v422]
+v424 <- CallFunction v11, [v389, v390, v423]
+v425 <- LoadString 'try/catch/finally statements with early return'
+v426 <- CreateTemplateString ['\n!function() {                             // 0000\n  try { throw 42; } catch (e) { return; } // 0050\n  nop();                                  // 0100\n}();                                      // 0150\n!function() {                             // 0200\n  try { throw 42; } catch (e) {}          // 0250\n  finally { return; }                     // 0300\n  nop();                                  // 0350\n}();                                      // 0400\n'], []
+v427 <- LoadInteger '0'
+v428 <- LoadInteger '449'
+v429 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v427
+    ObjectLiteralAddProperty `end`, v428
+    ObjectLiteralAddProperty `count`, v429
+v430 <- EndObjectLiteral
+v431 <- LoadInteger '1'
+v432 <- LoadInteger '151'
+v433 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v431
+    ObjectLiteralAddProperty `end`, v432
+    ObjectLiteralAddProperty `count`, v433
+v434 <- EndObjectLiteral
+v435 <- LoadInteger '67'
+v436 <- LoadInteger '70'
+v437 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v435
+    ObjectLiteralAddProperty `end`, v436
+    ObjectLiteralAddProperty `count`, v437
+v438 <- EndObjectLiteral
+v439 <- LoadInteger '91'
+v440 <- LoadInteger '150'
+v441 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v439
+    ObjectLiteralAddProperty `end`, v440
+    ObjectLiteralAddProperty `count`, v441
+v442 <- EndObjectLiteral
+v443 <- LoadInteger '201'
+v444 <- LoadInteger '401'
+v445 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v443
+    ObjectLiteralAddProperty `end`, v444
+    ObjectLiteralAddProperty `count`, v445
+v446 <- EndObjectLiteral
+v447 <- LoadInteger '267'
+v448 <- LoadInteger '270'
+v449 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v447
+    ObjectLiteralAddProperty `end`, v448
+    ObjectLiteralAddProperty `count`, v449
+v450 <- EndObjectLiteral
+v451 <- LoadInteger '321'
+v452 <- LoadInteger '400'
+v453 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v451
+    ObjectLiteralAddProperty `end`, v452
+    ObjectLiteralAddProperty `count`, v453
+v454 <- EndObjectLiteral
+v455 <- CreateArray [v430, v434, v438, v442, v446, v450, v454]
+v456 <- CallFunction v11, [v425, v426, v455]
+v457 <- LoadString 'early return in blocks'
+v458 <- CreateTemplateString ['\n!function() {                             // 0000\n  try { throw 42; } catch (e) { return; } // 0050\n  nop();                                  // 0100\n}();                                      // 0150\n!function() {                             // 0200\n  try { nop(); } finally { return; }      // 0250\n  nop();                                  // 0300\n}();                                      // 0350\n!function() {                             // 0400\n  {                                       // 0450\n    let x = 42;                           // 0500\n    return () => x;                       // 0550\n  }                                       // 0600\n  nop();                                  // 0650\n}();                                      // 0700\n!function() {                             // 0750\n  try { throw 42; } catch (e) {           // 0800\n    return;                               // 0850\n    nop();                                // 0900\n  }                                       // 0950\n  nop();                                  // 1000\n}();                                      // 1050\n'], []
+v459 <- LoadInteger '0'
+v460 <- LoadInteger '1099'
+v461 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v459
+    ObjectLiteralAddProperty `end`, v460
+    ObjectLiteralAddProperty `count`, v461
+v462 <- EndObjectLiteral
+v463 <- LoadInteger '1'
+v464 <- LoadInteger '151'
+v465 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v463
+    ObjectLiteralAddProperty `end`, v464
+    ObjectLiteralAddProperty `count`, v465
+v466 <- EndObjectLiteral
+v467 <- LoadInteger '67'
+v468 <- LoadInteger '70'
+v469 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v467
+    ObjectLiteralAddProperty `end`, v468
+    ObjectLiteralAddProperty `count`, v469
+v470 <- EndObjectLiteral
+v471 <- LoadInteger '91'
+v472 <- LoadInteger '150'
+v473 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v471
+    ObjectLiteralAddProperty `end`, v472
+    ObjectLiteralAddProperty `count`, v473
+v474 <- EndObjectLiteral
+v475 <- LoadInteger '201'
+v476 <- LoadInteger '351'
+v477 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v475
+    ObjectLiteralAddProperty `end`, v476
+    ObjectLiteralAddProperty `count`, v477
+v478 <- EndObjectLiteral
+v479 <- LoadInteger '286'
+v480 <- LoadInteger '350'
+v481 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v479
+    ObjectLiteralAddProperty `end`, v480
+    ObjectLiteralAddProperty `count`, v481
+v482 <- EndObjectLiteral
+v483 <- LoadInteger '401'
+v484 <- LoadInteger '701'
+v485 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v483
+    ObjectLiteralAddProperty `end`, v484
+    ObjectLiteralAddProperty `count`, v485
+v486 <- EndObjectLiteral
+v487 <- LoadInteger '603'
+v488 <- LoadInteger '700'
+v489 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v487
+    ObjectLiteralAddProperty `end`, v488
+    ObjectLiteralAddProperty `count`, v489
+v490 <- EndObjectLiteral
+v491 <- LoadInteger '561'
+v492 <- LoadInteger '568'
+v493 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v491
+    ObjectLiteralAddProperty `end`, v492
+    ObjectLiteralAddProperty `count`, v493
+v494 <- EndObjectLiteral
+v495 <- LoadInteger '751'
+v496 <- LoadInteger '1051'
+v497 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v495
+    ObjectLiteralAddProperty `end`, v496
+    ObjectLiteralAddProperty `count`, v497
+v498 <- EndObjectLiteral
+v499 <- LoadInteger '817'
+v500 <- LoadInteger '820'
+v501 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v499
+    ObjectLiteralAddProperty `end`, v500
+    ObjectLiteralAddProperty `count`, v501
+v502 <- EndObjectLiteral
+v503 <- LoadInteger '861'
+v504 <- LoadInteger '1050'
+v505 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v503
+    ObjectLiteralAddProperty `end`, v504
+    ObjectLiteralAddProperty `count`, v505
+v506 <- EndObjectLiteral
+v507 <- CreateArray [v462, v466, v470, v474, v478, v482, v486, v490, v494, v498, v502, v506]
+v508 <- CallFunction v11, [v457, v458, v507]
+v509 <- LoadString 'switch statements'
+v510 <- CreateTemplateString ['\n!function() {                             // 0000\n  var x = 42;                             // 0050\n  switch (x) {                            // 0100\n    case 41: nop(); break;                // 0150\n    case 42: nop(); break;                // 0200\n    default: nop(); break;                // 0250\n  }                                       // 0300\n}();                                      // 0350\n'], []
+v511 <- LoadInteger '0'
+v512 <- LoadInteger '399'
+v513 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v511
+    ObjectLiteralAddProperty `end`, v512
+    ObjectLiteralAddProperty `count`, v513
+v514 <- EndObjectLiteral
+v515 <- LoadInteger '1'
+v516 <- LoadInteger '351'
+v517 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v515
+    ObjectLiteralAddProperty `end`, v516
+    ObjectLiteralAddProperty `count`, v517
+v518 <- EndObjectLiteral
+v519 <- LoadInteger '154'
+v520 <- LoadInteger '204'
+v521 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v519
+    ObjectLiteralAddProperty `end`, v520
+    ObjectLiteralAddProperty `count`, v521
+v522 <- EndObjectLiteral
+v523 <- LoadInteger '226'
+v524 <- LoadInteger '350'
+v525 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v523
+    ObjectLiteralAddProperty `end`, v524
+    ObjectLiteralAddProperty `count`, v525
+v526 <- EndObjectLiteral
+v527 <- CreateArray [v514, v518, v522, v526]
+v528 <- CallFunction v11, [v509, v510, v527]
+v529 <- LoadString 'labeled break statements'
+v530 <- CreateTemplateString ['\n!function() {                             // 0000\n  var x = 42;                             // 0050\n  l0: switch (x) {                        // 0100\n  case 41: return;                        // 0150\n  case 42:                                // 0200\n    switch (x) { case 42: break l0; }     // 0250\n    break;                                // 0300\n  }                                       // 0350\n  l1: for (;;) {                          // 0400\n    for (;;) break l1;                    // 0450\n  }                                       // 0500\n  l2: while (true) {                      // 0550\n    while (true) break l2;                // 0600\n  }                                       // 0650\n  l3: do {                                // 0700\n    do { break l3; } while (true);        // 0750\n  } while (true);                         // 0800\n  l4: { break l4; }                       // 0850\n  l5: for (;;) for (;;) break l5;         // 0900\n}();                                      // 0950\n'], []
+v531 <- LoadInteger '0'
+v532 <- LoadInteger '999'
+v533 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v531
+    ObjectLiteralAddProperty `end`, v532
+    ObjectLiteralAddProperty `count`, v533
+v534 <- EndObjectLiteral
+v535 <- LoadInteger '1'
+v536 <- LoadInteger '951'
+v537 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v535
+    ObjectLiteralAddProperty `end`, v536
+    ObjectLiteralAddProperty `count`, v537
+v538 <- EndObjectLiteral
+v539 <- LoadInteger '152'
+v540 <- LoadInteger '202'
+v541 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v539
+    ObjectLiteralAddProperty `end`, v540
+    ObjectLiteralAddProperty `count`, v541
+v542 <- EndObjectLiteral
+v543 <- LoadInteger '285'
+v544 <- LoadInteger '353'
+v545 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v543
+    ObjectLiteralAddProperty `end`, v544
+    ObjectLiteralAddProperty `count`, v545
+v546 <- EndObjectLiteral
+v547 <- CreateArray [v534, v538, v542, v546]
+v548 <- CallFunction v11, [v529, v530, v547]
+v549 <- LoadString 'labeled continue statements'
+v550 <- CreateTemplateString ['\n!function() {                             // 0000\n  l0: for (var i0 = 0; i0 < 2; i0++) {    // 0050\n    for (;;) continue l0;                 // 0100\n  }                                       // 0150\n  var i1 = 0;                             // 0200\n  l1: while (i1 < 2) {                    // 0250\n    i1++;                                 // 0300\n    while (true) continue l1;             // 0350\n  }                                       // 0400\n  var i2 = 0;                             // 0450\n  l2: do {                                // 0500\n    i2++;                                 // 0550\n    do { continue l2; } while (true);     // 0600\n  } while (i2 < 2);                       // 0650\n}();                                      // 0700\n'], []
+v551 <- LoadInteger '0'
+v552 <- LoadInteger '749'
+v553 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v551
+    ObjectLiteralAddProperty `end`, v552
+    ObjectLiteralAddProperty `count`, v553
+v554 <- EndObjectLiteral
+v555 <- LoadInteger '1'
+v556 <- LoadInteger '701'
+v557 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v555
+    ObjectLiteralAddProperty `end`, v556
+    ObjectLiteralAddProperty `count`, v557
+v558 <- EndObjectLiteral
+v559 <- LoadInteger '87'
+v560 <- LoadInteger '153'
+v561 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v559
+    ObjectLiteralAddProperty `end`, v560
+    ObjectLiteralAddProperty `count`, v561
+v562 <- EndObjectLiteral
+v563 <- LoadInteger '271'
+v564 <- LoadInteger '403'
+v565 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v563
+    ObjectLiteralAddProperty `end`, v564
+    ObjectLiteralAddProperty `count`, v565
+v566 <- EndObjectLiteral
+v567 <- LoadInteger '509'
+v568 <- LoadInteger '653'
+v569 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v567
+    ObjectLiteralAddProperty `end`, v568
+    ObjectLiteralAddProperty `count`, v569
+v570 <- EndObjectLiteral
+v571 <- CreateArray [v554, v558, v562, v566, v570]
+v572 <- CallFunction v11, [v549, v550, v571]
+v573 <- LoadString 'conditional expressions'
+v574 <- CreateTemplateString ['\nvar TRUE = true;                          // 0000\nvar FALSE = false;                        // 0050\n!function() {                             // 0100\n  TRUE ? nop() : nop();                   // 0150\n  true ? nop() : nop();                   // 0200\n  false ? nop() : nop();                  // 0250\n  FALSE ? TRUE ? nop()                    // 0300\n               : nop()                    // 0350\n        : nop();                          // 0400\n  TRUE ? FALSE ? nop()                    // 0450\n               : nop()                    // 0500\n       : nop();                           // 0550\n  TRUE ? nop() : FALSE ? nop()            // 0600\n                       : nop();           // 0650\n  FALSE ? nop() : TRUE ? nop()            // 0700\n                       : nop();           // 0750\n}();                                      // 0800\n'], []
+v575 <- LoadInteger '0'
+v576 <- LoadInteger '849'
+v577 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v575
+    ObjectLiteralAddProperty `end`, v576
+    ObjectLiteralAddProperty `count`, v577
+v578 <- EndObjectLiteral
+v579 <- LoadInteger '101'
+v580 <- LoadInteger '801'
+v581 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v579
+    ObjectLiteralAddProperty `end`, v580
+    ObjectLiteralAddProperty `count`, v581
+v582 <- EndObjectLiteral
+v583 <- LoadInteger '165'
+v584 <- LoadInteger '172'
+v585 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v583
+    ObjectLiteralAddProperty `end`, v584
+    ObjectLiteralAddProperty `count`, v585
+v586 <- EndObjectLiteral
+v587 <- LoadInteger '215'
+v588 <- LoadInteger '222'
+v589 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v587
+    ObjectLiteralAddProperty `end`, v588
+    ObjectLiteralAddProperty `count`, v589
+v590 <- EndObjectLiteral
+v591 <- LoadInteger '258'
+v592 <- LoadInteger '265'
+v593 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v591
+    ObjectLiteralAddProperty `end`, v592
+    ObjectLiteralAddProperty `count`, v593
+v594 <- EndObjectLiteral
+v595 <- LoadInteger '308'
+v596 <- LoadInteger '372'
+v597 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v595
+    ObjectLiteralAddProperty `end`, v596
+    ObjectLiteralAddProperty `count`, v597
+v598 <- EndObjectLiteral
+v599 <- LoadInteger '465'
+v600 <- LoadInteger '472'
+v601 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v599
+    ObjectLiteralAddProperty `end`, v600
+    ObjectLiteralAddProperty `count`, v601
+v602 <- EndObjectLiteral
+v603 <- LoadInteger '557'
+v604 <- LoadInteger '564'
+v605 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v603
+    ObjectLiteralAddProperty `end`, v604
+    ObjectLiteralAddProperty `count`, v605
+v606 <- EndObjectLiteral
+v607 <- LoadInteger '615'
+v608 <- LoadInteger '680'
+v609 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v607
+    ObjectLiteralAddProperty `end`, v608
+    ObjectLiteralAddProperty `count`, v609
+v610 <- EndObjectLiteral
+v611 <- LoadInteger '708'
+v612 <- LoadInteger '715'
+v613 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v611
+    ObjectLiteralAddProperty `end`, v612
+    ObjectLiteralAddProperty `count`, v613
+v614 <- EndObjectLiteral
+v615 <- LoadInteger '773'
+v616 <- LoadInteger '780'
+v617 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v615
+    ObjectLiteralAddProperty `end`, v616
+    ObjectLiteralAddProperty `count`, v617
+v618 <- EndObjectLiteral
+v619 <- CreateArray [v578, v582, v586, v590, v594, v598, v602, v606, v610, v614, v618]
+v620 <- CallFunction v11, [v573, v574, v619]
+v621 <- LoadString 'yield expressions'
+v622 <- CreateTemplateString ['\nconst it = function*() {                  // 0000\n  yield nop();                            // 0050\n  yield nop() ? nop() : nop()             // 0100\n  return nop();                           // 0150\n}();                                      // 0200\nit.next(); it.next();                     // 0250\n'], []
+v623 <- LoadInteger '0'
+v624 <- LoadInteger '299'
+v625 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v623
+    ObjectLiteralAddProperty `end`, v624
+    ObjectLiteralAddProperty `count`, v625
+v626 <- EndObjectLiteral
+v627 <- LoadInteger '11'
+v628 <- LoadInteger '201'
+v629 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v627
+    ObjectLiteralAddProperty `end`, v628
+    ObjectLiteralAddProperty `count`, v629
+v630 <- EndObjectLiteral
+v631 <- LoadInteger '64'
+v632 <- LoadInteger '114'
+v633 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v631
+    ObjectLiteralAddProperty `end`, v632
+    ObjectLiteralAddProperty `count`, v633
+v634 <- EndObjectLiteral
+v635 <- LoadInteger '114'
+v636 <- LoadInteger '121'
+v637 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v635
+    ObjectLiteralAddProperty `end`, v636
+    ObjectLiteralAddProperty `count`, v637
+v638 <- EndObjectLiteral
+v639 <- LoadInteger '122'
+v640 <- LoadInteger '129'
+v641 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v639
+    ObjectLiteralAddProperty `end`, v640
+    ObjectLiteralAddProperty `count`, v641
+v642 <- EndObjectLiteral
+v643 <- LoadInteger '129'
+v644 <- LoadInteger '200'
+v645 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v643
+    ObjectLiteralAddProperty `end`, v644
+    ObjectLiteralAddProperty `count`, v645
+v646 <- EndObjectLiteral
+v647 <- CreateArray [v626, v630, v634, v638, v642, v646]
+v648 <- CallFunction v11, [v621, v622, v647]
+v649 <- LoadString 'yield expressions (.return and .throw)'
+v650 <- CreateTemplateString ['\nconst it0 = function*() {                 // 0000\n  yield 1; yield 2; yield 3;              // 0050\n}();                                      // 0100\nit0.next(); it0.return();                 // 0150\ntry {                                     // 0200\n  const it1 = function*() {               // 0250\n    yield 1; yield 2; yield 3;            // 0300\n  }();                                    // 0350\n  it1.next(); it1.throw();                // 0400\n} catch (e) {}                            // 0450\n'], []
+v651 <- LoadInteger '0'
+v652 <- LoadInteger '499'
+v653 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v651
+    ObjectLiteralAddProperty `end`, v652
+    ObjectLiteralAddProperty `count`, v653
+v654 <- EndObjectLiteral
+v655 <- LoadInteger '451'
+v656 <- LoadInteger '452'
+v657 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v655
+    ObjectLiteralAddProperty `end`, v656
+    ObjectLiteralAddProperty `count`, v657
+v658 <- EndObjectLiteral
+v659 <- LoadInteger '12'
+v660 <- LoadInteger '101'
+v661 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v659
+    ObjectLiteralAddProperty `end`, v660
+    ObjectLiteralAddProperty `count`, v661
+v662 <- EndObjectLiteral
+v663 <- LoadInteger '60'
+v664 <- LoadInteger '100'
+v665 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v663
+    ObjectLiteralAddProperty `end`, v664
+    ObjectLiteralAddProperty `count`, v665
+v666 <- EndObjectLiteral
+v667 <- LoadInteger '264'
+v668 <- LoadInteger '353'
+v669 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v667
+    ObjectLiteralAddProperty `end`, v668
+    ObjectLiteralAddProperty `count`, v669
+v670 <- EndObjectLiteral
+v671 <- LoadInteger '312'
+v672 <- LoadInteger '352'
+v673 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v671
+    ObjectLiteralAddProperty `end`, v672
+    ObjectLiteralAddProperty `count`, v673
+v674 <- EndObjectLiteral
+v675 <- CreateArray [v654, v658, v662, v666, v670, v674]
+v676 <- CallFunction v11, [v649, v650, v675]
+v677 <- LoadString 'yield expressions (.return and try/catch/finally)'
+v678 <- CreateTemplateString ['\nconst it = function*() {                  // 0000\n  try {                                   // 0050\n    yield 1; yield 2; yield 3;            // 0100\n  } catch (e) {                           // 0150\n    nop();                                // 0200\n  } finally { nop(); }                    // 0250\n  yield 4;                                // 0300\n}();                                      // 0350\nit.next(); it.return();                   // 0450\n'], []
+v679 <- LoadInteger '0'
+v680 <- LoadInteger '449'
+v681 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v679
+    ObjectLiteralAddProperty `end`, v680
+    ObjectLiteralAddProperty `count`, v681
+v682 <- EndObjectLiteral
+v683 <- LoadInteger '11'
+v684 <- LoadInteger '351'
+v685 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v683
+    ObjectLiteralAddProperty `end`, v684
+    ObjectLiteralAddProperty `count`, v685
+v686 <- EndObjectLiteral
+v687 <- LoadInteger '112'
+v688 <- LoadInteger '254'
+v689 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v687
+    ObjectLiteralAddProperty `end`, v688
+    ObjectLiteralAddProperty `count`, v689
+v690 <- EndObjectLiteral
+v691 <- LoadInteger '254'
+v692 <- LoadInteger '272'
+v693 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v691
+    ObjectLiteralAddProperty `end`, v692
+    ObjectLiteralAddProperty `count`, v693
+v694 <- EndObjectLiteral
+v695 <- LoadInteger '272'
+v696 <- LoadInteger '350'
+v697 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v695
+    ObjectLiteralAddProperty `end`, v696
+    ObjectLiteralAddProperty `count`, v697
+v698 <- EndObjectLiteral
+v699 <- CreateArray [v682, v686, v690, v694, v698]
+v700 <- CallFunction v11, [v677, v678, v699]
+v701 <- LoadString 'yield expressions (.throw and try/catch/finally)'
+v702 <- CreateTemplateString ['\nconst it = function*() {                  // 0000\n  try {                                   // 0050\n    yield 1; yield 2; yield 3;            // 0100\n  } catch (e) {                           // 0150\n    nop();                                // 0200\n  } finally { nop(); }                    // 0250\n  yield 4;                                // 0300\n}();                                      // 0350\nit.next(); it.throw(42);                  // 0550\n'], []
+v703 <- LoadInteger '0'
+v704 <- LoadInteger '449'
+v705 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v703
+    ObjectLiteralAddProperty `end`, v704
+    ObjectLiteralAddProperty `count`, v705
+v706 <- EndObjectLiteral
+v707 <- LoadInteger '11'
+v708 <- LoadInteger '351'
+v709 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v707
+    ObjectLiteralAddProperty `end`, v708
+    ObjectLiteralAddProperty `count`, v709
+v710 <- EndObjectLiteral
+v711 <- LoadInteger '112'
+v712 <- LoadInteger '154'
+v713 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v711
+    ObjectLiteralAddProperty `end`, v712
+    ObjectLiteralAddProperty `count`, v713
+v714 <- EndObjectLiteral
+v715 <- LoadInteger '154'
+v716 <- LoadInteger '310'
+v717 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v715
+    ObjectLiteralAddProperty `end`, v716
+    ObjectLiteralAddProperty `count`, v717
+v718 <- EndObjectLiteral
+v719 <- LoadInteger '310'
+v720 <- LoadInteger '350'
+v721 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v719
+    ObjectLiteralAddProperty `end`, v720
+    ObjectLiteralAddProperty `count`, v721
+v722 <- EndObjectLiteral
+v723 <- CreateArray [v706, v710, v714, v718, v722]
+v724 <- CallFunction v11, [v701, v702, v723]
+v725 <- LoadString 'yield* expressions'
+v726 <- CreateTemplateString ['\nconst it = function*() {                  // 0000\n  yield* gen();                           // 0050\n  yield* nop() ? gen() : gen()            // 0100\n  return gen();                           // 0150\n}();                                      // 0200\nit.next(); it.next(); it.next();          // 0250\nit.next(); it.next(); it.next();          // 0300\n'], []
+v727 <- LoadInteger '0'
+v728 <- LoadInteger '349'
+v729 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v727
+    ObjectLiteralAddProperty `end`, v728
+    ObjectLiteralAddProperty `count`, v729
+v730 <- EndObjectLiteral
+v731 <- LoadInteger '11'
+v732 <- LoadInteger '201'
+v733 <- LoadInteger '7'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v731
+    ObjectLiteralAddProperty `end`, v732
+    ObjectLiteralAddProperty `count`, v733
+v734 <- EndObjectLiteral
+v735 <- LoadInteger '65'
+v736 <- LoadInteger '115'
+v737 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v735
+    ObjectLiteralAddProperty `end`, v736
+    ObjectLiteralAddProperty `count`, v737
+v738 <- EndObjectLiteral
+v739 <- LoadInteger '115'
+v740 <- LoadInteger '122'
+v741 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v739
+    ObjectLiteralAddProperty `end`, v740
+    ObjectLiteralAddProperty `count`, v741
+v742 <- EndObjectLiteral
+v743 <- LoadInteger '123'
+v744 <- LoadInteger '130'
+v745 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v743
+    ObjectLiteralAddProperty `end`, v744
+    ObjectLiteralAddProperty `count`, v745
+v746 <- EndObjectLiteral
+v747 <- LoadInteger '130'
+v748 <- LoadInteger '200'
+v749 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v747
+    ObjectLiteralAddProperty `end`, v748
+    ObjectLiteralAddProperty `count`, v749
+v750 <- EndObjectLiteral
+v751 <- CreateArray [v730, v734, v738, v742, v746, v750]
+v752 <- CallFunction v11, [v725, v726, v751]
+v753 <- LoadString 'yield* expressions (.return and .throw)'
+v754 <- CreateTemplateString ['\nconst it0 = function*() {                 // 0000\n  yield* gen(); yield* gen(); yield 3;    // 0050\n}();                                      // 0100\nit0.next(); it0.return();                 // 0150\ntry {                                     // 0200\n  const it1 = function*() {               // 0250\n    yield* gen(); yield* gen(); yield 3;  // 0300\n  }();                                    // 0350\n  it1.next(); it1.throw();                // 0400\n} catch (e) {}                            // 0450\n'], []
+v755 <- LoadInteger '0'
+v756 <- LoadInteger '499'
+v757 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v755
+    ObjectLiteralAddProperty `end`, v756
+    ObjectLiteralAddProperty `count`, v757
+v758 <- EndObjectLiteral
+v759 <- LoadInteger '451'
+v760 <- LoadInteger '452'
+v761 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v759
+    ObjectLiteralAddProperty `end`, v760
+    ObjectLiteralAddProperty `count`, v761
+v762 <- EndObjectLiteral
+v763 <- LoadInteger '12'
+v764 <- LoadInteger '101'
+v765 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v763
+    ObjectLiteralAddProperty `end`, v764
+    ObjectLiteralAddProperty `count`, v765
+v766 <- EndObjectLiteral
+v767 <- LoadInteger '65'
+v768 <- LoadInteger '100'
+v769 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v767
+    ObjectLiteralAddProperty `end`, v768
+    ObjectLiteralAddProperty `count`, v769
+v770 <- EndObjectLiteral
+v771 <- LoadInteger '264'
+v772 <- LoadInteger '353'
+v773 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v771
+    ObjectLiteralAddProperty `end`, v772
+    ObjectLiteralAddProperty `count`, v773
+v774 <- EndObjectLiteral
+v775 <- LoadInteger '317'
+v776 <- LoadInteger '352'
+v777 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v775
+    ObjectLiteralAddProperty `end`, v776
+    ObjectLiteralAddProperty `count`, v777
+v778 <- EndObjectLiteral
+v779 <- CreateArray [v758, v762, v766, v770, v774, v778]
+v780 <- CallFunction v11, [v753, v754, v779]
+v781 <- LoadString 'await expressions'
+v782 <- CreateTemplateString ['\nasync function f() {                      // 0000\n  await 42;                               // 0050\n  await 42;                               // 0100\n};                                        // 0150\nf();                                      // 0200\n'], []
+v783 <- LoadInteger '0'
+v784 <- LoadInteger '299'
+v785 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v783
+    ObjectLiteralAddProperty `end`, v784
+    ObjectLiteralAddProperty `count`, v785
+v786 <- EndObjectLiteral
+v787 <- LoadInteger '0'
+v788 <- LoadInteger '151'
+v789 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v787
+    ObjectLiteralAddProperty `end`, v788
+    ObjectLiteralAddProperty `count`, v789
+v790 <- EndObjectLiteral
+v791 <- LoadInteger '61'
+v792 <- LoadInteger '150'
+v793 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v791
+    ObjectLiteralAddProperty `end`, v792
+    ObjectLiteralAddProperty `count`, v793
+v794 <- EndObjectLiteral
+v795 <- CreateArray [v786, v790, v794]
+v796 <- CallFunction v11, [v781, v782, v795]
+v797 <- LoadString 'LogicalOrExpression assignment'
+v798 <- CreateTemplateString ['\nconst a = true || 99                      // 0000\nfunction b () {                           // 0050\n  const b = a || 2                        // 0100\n}                                         // 0150\nb()                                       // 0200\nb()                                       // 0250\n'], []
+v799 <- LoadInteger '0'
+v800 <- LoadInteger '299'
+v801 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v799
+    ObjectLiteralAddProperty `end`, v800
+    ObjectLiteralAddProperty `count`, v801
+v802 <- EndObjectLiteral
+v803 <- LoadInteger '15'
+v804 <- LoadInteger '20'
+v805 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v803
+    ObjectLiteralAddProperty `end`, v804
+    ObjectLiteralAddProperty `count`, v805
+v806 <- EndObjectLiteral
+v807 <- LoadInteger '50'
+v808 <- LoadInteger '151'
+v809 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v807
+    ObjectLiteralAddProperty `end`, v808
+    ObjectLiteralAddProperty `count`, v809
+v810 <- EndObjectLiteral
+v811 <- LoadInteger '114'
+v812 <- LoadInteger '118'
+v813 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v811
+    ObjectLiteralAddProperty `end`, v812
+    ObjectLiteralAddProperty `count`, v813
+v814 <- EndObjectLiteral
+v815 <- CreateArray [v802, v806, v810, v814]
+v816 <- CallFunction v11, [v797, v798, v815]
+v817 <- LoadString 'LogicalOrExpression IsTest()'
+v818 <- CreateTemplateString ['\ntrue || false                             // 0000\nconst a = 99                              // 0050\na || 50                                   // 0100\nconst b = false                           // 0150\nif (b || true) {}                         // 0200\n'], []
+v819 <- LoadInteger '0'
+v820 <- LoadInteger '249'
+v821 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v819
+    ObjectLiteralAddProperty `end`, v820
+    ObjectLiteralAddProperty `count`, v821
+v822 <- EndObjectLiteral
+v823 <- LoadInteger '5'
+v824 <- LoadInteger '13'
+v825 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v823
+    ObjectLiteralAddProperty `end`, v824
+    ObjectLiteralAddProperty `count`, v825
+v826 <- EndObjectLiteral
+v827 <- LoadInteger '102'
+v828 <- LoadInteger '107'
+v829 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v827
+    ObjectLiteralAddProperty `end`, v828
+    ObjectLiteralAddProperty `count`, v829
+v830 <- EndObjectLiteral
+v831 <- CreateArray [v822, v826, v830]
+v832 <- CallFunction v11, [v817, v818, v831]
+v833 <- LoadString 'LogicalAndExpression assignment'
+v834 <- CreateTemplateString ['\nconst a = false && 99                     // 0000\nfunction b () {                           // 0050\n  const b = a && 2                        // 0100\n}                                         // 0150\nb()                                       // 0200\nb()                                       // 0250\nconst c = true && 50                      // 0300\n'], []
+v835 <- LoadInteger '0'
+v836 <- LoadInteger '349'
+v837 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v835
+    ObjectLiteralAddProperty `end`, v836
+    ObjectLiteralAddProperty `count`, v837
+v838 <- EndObjectLiteral
+v839 <- LoadInteger '16'
+v840 <- LoadInteger '21'
+v841 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v839
+    ObjectLiteralAddProperty `end`, v840
+    ObjectLiteralAddProperty `count`, v841
+v842 <- EndObjectLiteral
+v843 <- LoadInteger '50'
+v844 <- LoadInteger '151'
+v845 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v843
+    ObjectLiteralAddProperty `end`, v844
+    ObjectLiteralAddProperty `count`, v845
+v846 <- EndObjectLiteral
+v847 <- LoadInteger '114'
+v848 <- LoadInteger '118'
+v849 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v847
+    ObjectLiteralAddProperty `end`, v848
+    ObjectLiteralAddProperty `count`, v849
+v850 <- EndObjectLiteral
+v851 <- CreateArray [v838, v842, v846, v850]
+v852 <- CallFunction v11, [v833, v834, v851]
+v853 <- LoadString 'LogicalAndExpression IsTest()'
+v854 <- CreateTemplateString ['\nfalse && true                             // 0000\nconst a = 0                               // 0050\na && 50                                   // 0100\nconst b = true                            // 0150\nif (b && true) {}                         // 0200\ntrue && true                              // 0250\n'], []
+v855 <- LoadInteger '0'
+v856 <- LoadInteger '299'
+v857 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v855
+    ObjectLiteralAddProperty `end`, v856
+    ObjectLiteralAddProperty `count`, v857
+v858 <- EndObjectLiteral
+v859 <- LoadInteger '6'
+v860 <- LoadInteger '13'
+v861 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v859
+    ObjectLiteralAddProperty `end`, v860
+    ObjectLiteralAddProperty `count`, v861
+v862 <- EndObjectLiteral
+v863 <- LoadInteger '102'
+v864 <- LoadInteger '107'
+v865 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v863
+    ObjectLiteralAddProperty `end`, v864
+    ObjectLiteralAddProperty `count`, v865
+v866 <- EndObjectLiteral
+v867 <- CreateArray [v858, v862, v866]
+v868 <- CallFunction v11, [v853, v854, v867]
+v869 <- LoadString 'NaryLogicalOr assignment'
+v870 <- CreateTemplateString ['\nconst a = true                            // 0000\nconst b = false                           // 0050\nconst c = false || false || 99            // 0100\nconst d = false || true || 99             // 0150\nconst e = true || true || 99              // 0200\nconst f = b || b || 99                    // 0250\nconst g = b || a || 99                    // 0300\nconst h = a || a || 99                    // 0350\nconst i = a || (b || c) || d              // 0400\n'], []
+v871 <- LoadInteger '0'
+v872 <- LoadInteger '449'
+v873 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v871
+    ObjectLiteralAddProperty `end`, v872
+    ObjectLiteralAddProperty `count`, v873
+v874 <- EndObjectLiteral
+v875 <- LoadInteger '174'
+v876 <- LoadInteger '179'
+v877 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v875
+    ObjectLiteralAddProperty `end`, v876
+    ObjectLiteralAddProperty `count`, v877
+v878 <- EndObjectLiteral
+v879 <- LoadInteger '215'
+v880 <- LoadInteger '222'
+v881 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v879
+    ObjectLiteralAddProperty `end`, v880
+    ObjectLiteralAddProperty `count`, v881
+v882 <- EndObjectLiteral
+v883 <- LoadInteger '223'
+v884 <- LoadInteger '228'
+v885 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v883
+    ObjectLiteralAddProperty `end`, v884
+    ObjectLiteralAddProperty `count`, v885
+v886 <- EndObjectLiteral
+v887 <- LoadInteger '317'
+v888 <- LoadInteger '322'
+v889 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v887
+    ObjectLiteralAddProperty `end`, v888
+    ObjectLiteralAddProperty `count`, v889
+v890 <- EndObjectLiteral
+v891 <- LoadInteger '362'
+v892 <- LoadInteger '366'
+v893 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v891
+    ObjectLiteralAddProperty `end`, v892
+    ObjectLiteralAddProperty `count`, v893
+v894 <- EndObjectLiteral
+v895 <- LoadInteger '367'
+v896 <- LoadInteger '372'
+v897 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v895
+    ObjectLiteralAddProperty `end`, v896
+    ObjectLiteralAddProperty `count`, v897
+v898 <- EndObjectLiteral
+v899 <- LoadInteger '412'
+v900 <- LoadInteger '423'
+v901 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v899
+    ObjectLiteralAddProperty `end`, v900
+    ObjectLiteralAddProperty `count`, v901
+v902 <- EndObjectLiteral
+v903 <- LoadInteger '424'
+v904 <- LoadInteger '428'
+v905 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v903
+    ObjectLiteralAddProperty `end`, v904
+    ObjectLiteralAddProperty `count`, v905
+v906 <- EndObjectLiteral
+v907 <- CreateArray [v874, v878, v882, v886, v890, v894, v898, v902, v906]
+v908 <- CallFunction v11, [v869, v870, v907]
+v909 <- LoadString 'NaryLogicalOr IsTest()'
+v910 <- CreateTemplateString ['\nconst a = true                            // 0000\nconst b = false                           // 0050\nfalse || false || 99                      // 0100\nfalse || true || 99                       // 0150\ntrue || true || 99                        // 0200\nb || b || 99                              // 0250\nb || a || 99                              // 0300\na || a || 99                              // 0350\n'], []
+v911 <- LoadInteger '0'
+v912 <- LoadInteger '399'
+v913 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v911
+    ObjectLiteralAddProperty `end`, v912
+    ObjectLiteralAddProperty `count`, v913
+v914 <- EndObjectLiteral
+v915 <- LoadInteger '164'
+v916 <- LoadInteger '169'
+v917 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v915
+    ObjectLiteralAddProperty `end`, v916
+    ObjectLiteralAddProperty `count`, v917
+v918 <- EndObjectLiteral
+v919 <- LoadInteger '205'
+v920 <- LoadInteger '212'
+v921 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v919
+    ObjectLiteralAddProperty `end`, v920
+    ObjectLiteralAddProperty `count`, v921
+v922 <- EndObjectLiteral
+v923 <- LoadInteger '213'
+v924 <- LoadInteger '218'
+v925 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v923
+    ObjectLiteralAddProperty `end`, v924
+    ObjectLiteralAddProperty `count`, v925
+v926 <- EndObjectLiteral
+v927 <- LoadInteger '307'
+v928 <- LoadInteger '312'
+v929 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v927
+    ObjectLiteralAddProperty `end`, v928
+    ObjectLiteralAddProperty `count`, v929
+v930 <- EndObjectLiteral
+v931 <- LoadInteger '352'
+v932 <- LoadInteger '356'
+v933 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v931
+    ObjectLiteralAddProperty `end`, v932
+    ObjectLiteralAddProperty `count`, v933
+v934 <- EndObjectLiteral
+v935 <- LoadInteger '357'
+v936 <- LoadInteger '362'
+v937 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v935
+    ObjectLiteralAddProperty `end`, v936
+    ObjectLiteralAddProperty `count`, v937
+v938 <- EndObjectLiteral
+v939 <- CreateArray [v914, v918, v922, v926, v930, v934, v938]
+v940 <- CallFunction v11, [v909, v910, v939]
+v941 <- LoadString 'NaryLogicalAnd assignment'
+v942 <- CreateTemplateString ['\nconst a = true                            // 0000\nconst b = false                           // 0050\nconst c = false && false && 99            // 0100\nconst d = false && true && 99             // 0150\nconst e = true && true && 99              // 0200\nconst f = true && false || true           // 0250\nconst g = true || false && true           // 0300\n'], []
+v943 <- LoadInteger '0'
+v944 <- LoadInteger '349'
+v945 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v943
+    ObjectLiteralAddProperty `end`, v944
+    ObjectLiteralAddProperty `count`, v945
+v946 <- EndObjectLiteral
+v947 <- LoadInteger '116'
+v948 <- LoadInteger '124'
+v949 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v947
+    ObjectLiteralAddProperty `end`, v948
+    ObjectLiteralAddProperty `count`, v949
+v950 <- EndObjectLiteral
+v951 <- LoadInteger '125'
+v952 <- LoadInteger '130'
+v953 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v951
+    ObjectLiteralAddProperty `end`, v952
+    ObjectLiteralAddProperty `count`, v953
+v954 <- EndObjectLiteral
+v955 <- LoadInteger '166'
+v956 <- LoadInteger '173'
+v957 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v955
+    ObjectLiteralAddProperty `end`, v956
+    ObjectLiteralAddProperty `count`, v957
+v958 <- EndObjectLiteral
+v959 <- LoadInteger '174'
+v960 <- LoadInteger '179'
+v961 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v959
+    ObjectLiteralAddProperty `end`, v960
+    ObjectLiteralAddProperty `count`, v961
+v962 <- EndObjectLiteral
+v963 <- LoadInteger '315'
+v964 <- LoadInteger '331'
+v965 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v963
+    ObjectLiteralAddProperty `end`, v964
+    ObjectLiteralAddProperty `count`, v965
+v966 <- EndObjectLiteral
+v967 <- CreateArray [v946, v950, v954, v958, v962, v966]
+v968 <- CallFunction v11, [v941, v942, v967]
+v969 <- LoadString 'NaryLogicalAnd IsTest()'
+v970 <- CreateTemplateString ['\nconst a = true                            // 0000\nconst b = false                           // 0050\nfalse && false && 99                      // 0100\nfalse && true && 99                       // 0150\ntrue && true && 99                        // 0200\ntrue && false || true                     // 0250\ntrue || false && true                     // 0300\nfalse || false || 99 || 55                // 0350\n'], []
+v971 <- LoadInteger '0'
+v972 <- LoadInteger '399'
+v973 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v971
+    ObjectLiteralAddProperty `end`, v972
+    ObjectLiteralAddProperty `count`, v973
+v974 <- EndObjectLiteral
+v975 <- LoadInteger '106'
+v976 <- LoadInteger '114'
+v977 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v975
+    ObjectLiteralAddProperty `end`, v976
+    ObjectLiteralAddProperty `count`, v977
+v978 <- EndObjectLiteral
+v979 <- LoadInteger '115'
+v980 <- LoadInteger '120'
+v981 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v979
+    ObjectLiteralAddProperty `end`, v980
+    ObjectLiteralAddProperty `count`, v981
+v982 <- EndObjectLiteral
+v983 <- LoadInteger '156'
+v984 <- LoadInteger '163'
+v985 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v983
+    ObjectLiteralAddProperty `end`, v984
+    ObjectLiteralAddProperty `count`, v985
+v986 <- EndObjectLiteral
+v987 <- LoadInteger '164'
+v988 <- LoadInteger '169'
+v989 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v987
+    ObjectLiteralAddProperty `end`, v988
+    ObjectLiteralAddProperty `count`, v989
+v990 <- EndObjectLiteral
+v991 <- LoadInteger '305'
+v992 <- LoadInteger '321'
+v993 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v991
+    ObjectLiteralAddProperty `end`, v992
+    ObjectLiteralAddProperty `count`, v993
+v994 <- EndObjectLiteral
+v995 <- LoadInteger '371'
+v996 <- LoadInteger '376'
+v997 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v995
+    ObjectLiteralAddProperty `end`, v996
+    ObjectLiteralAddProperty `count`, v997
+v998 <- EndObjectLiteral
+v999 <- CreateArray [v974, v978, v982, v986, v990, v994, v998]
+v1000 <- CallFunction v11, [v969, v970, v999]
+v1001 <- LoadString 'logical expressions + conditional expressions'
+v1002 <- CreateTemplateString ['\nconst a = true                            // 0000\nconst b = 99                              // 0050\nconst c = false                           // 0100\nconst d = ''                              // 0150\nconst e = a && (b ? 'left' : 'right')     // 0200\nconst f = a || (b ? 'left' : 'right')     // 0250\nconst g = c || d ? 'left' : 'right'       // 0300\nconst h = a && b && (b ? 'left' : 'right')// 0350\nconst i = d || c || (c ? 'left' : 'right')// 0400\n'], []
+v1003 <- LoadInteger '0'
+v1004 <- LoadInteger '449'
+v1005 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1003
+    ObjectLiteralAddProperty `end`, v1004
+    ObjectLiteralAddProperty `count`, v1005
+v1006 <- EndObjectLiteral
+v1007 <- LoadInteger '227'
+v1008 <- LoadInteger '236'
+v1009 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1007
+    ObjectLiteralAddProperty `end`, v1008
+    ObjectLiteralAddProperty `count`, v1009
+v1010 <- EndObjectLiteral
+v1011 <- LoadInteger '262'
+v1012 <- LoadInteger '287'
+v1013 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1011
+    ObjectLiteralAddProperty `end`, v1012
+    ObjectLiteralAddProperty `count`, v1013
+v1014 <- EndObjectLiteral
+v1015 <- LoadInteger '317'
+v1016 <- LoadInteger '325'
+v1017 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1015
+    ObjectLiteralAddProperty `end`, v1016
+    ObjectLiteralAddProperty `count`, v1017
+v1018 <- EndObjectLiteral
+v1019 <- LoadInteger '382'
+v1020 <- LoadInteger '391'
+v1021 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1019
+    ObjectLiteralAddProperty `end`, v1020
+    ObjectLiteralAddProperty `count`, v1021
+v1022 <- EndObjectLiteral
+v1023 <- LoadInteger '423'
+v1024 <- LoadInteger '431'
+v1025 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1023
+    ObjectLiteralAddProperty `end`, v1024
+    ObjectLiteralAddProperty `count`, v1025
+v1026 <- EndObjectLiteral
+v1027 <- CreateArray [v1006, v1010, v1014, v1018, v1022, v1026]
+v1028 <- CallFunction v11, [v1001, v1002, v1027]
+v1029 <- LoadString 'https://crbug.com/827530'
+v1030 <- CreateTemplateString ['\nUtil = {};                                // 0000\nUtil.escape = function UtilEscape(str) {  // 0050\n  if (!str) {                             // 0100\n    return 'if';                          // 0150\n  } else {                                // 0200\n    return 'else';                        // 0250\n  }                                       // 0300\n};                                        // 0350\nUtil.escape("foo.bar");                   // 0400\n'], []
+v1031 <- LoadInteger '0'
+v1032 <- LoadInteger '449'
+v1033 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1031
+    ObjectLiteralAddProperty `end`, v1032
+    ObjectLiteralAddProperty `count`, v1033
+v1034 <- EndObjectLiteral
+v1035 <- LoadInteger '64'
+v1036 <- LoadInteger '351'
+v1037 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1035
+    ObjectLiteralAddProperty `end`, v1036
+    ObjectLiteralAddProperty `count`, v1037
+v1038 <- EndObjectLiteral
+v1039 <- LoadInteger '112'
+v1040 <- LoadInteger '203'
+v1041 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1039
+    ObjectLiteralAddProperty `end`, v1040
+    ObjectLiteralAddProperty `count`, v1041
+v1042 <- EndObjectLiteral
+v1043 <- CreateArray [v1034, v1038, v1042]
+v1044 <- CallFunction v11, [v1029, v1030, v1043]
+v1045 <- LoadString 'https://crbug.com/v8/8237'
+v1046 <- CreateTemplateString ['\n!function() {                             // 0000\n  if (true)                               // 0050\n    while (false) return; else nop();     // 0100\n}();                                      // 0150\n!function() {                             // 0200\n  if (true) l0: { break l0; } else        // 0250\n    if (nop()) { }                        // 0300\n}();                                      // 0350\n!function() {                             // 0400\n  if (true) { if (false) { return; }      // 0450\n  } else if (nop()) { } }();              // 0500\n!function(){                              // 0550\n  if(true)while(false)return;else nop()   // 0600\n}();                                      // 0650\n!function(){                              // 0700\n  if(true) l0:{break l0}else if (nop()){} // 0750\n}();                                      // 0800\n!function(){                              // 0850\n  if(true){if(false){return}}else         // 0900\n    if(nop()){}                           // 0950\n}();                                      // 1000\n'], []
+v1047 <- LoadInteger '0'
+v1048 <- LoadInteger '1049'
+v1049 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1047
+    ObjectLiteralAddProperty `end`, v1048
+    ObjectLiteralAddProperty `count`, v1049
+v1050 <- EndObjectLiteral
+v1051 <- LoadInteger '1'
+v1052 <- LoadInteger '151'
+v1053 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1051
+    ObjectLiteralAddProperty `end`, v1052
+    ObjectLiteralAddProperty `count`, v1053
+v1054 <- EndObjectLiteral
+v1055 <- LoadInteger '118'
+v1056 <- LoadInteger '137'
+v1057 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1055
+    ObjectLiteralAddProperty `end`, v1056
+    ObjectLiteralAddProperty `count`, v1057
+v1058 <- EndObjectLiteral
+v1059 <- LoadInteger '201'
+v1060 <- LoadInteger '351'
+v1061 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1059
+    ObjectLiteralAddProperty `end`, v1060
+    ObjectLiteralAddProperty `count`, v1061
+v1062 <- EndObjectLiteral
+v1063 <- LoadInteger '279'
+v1064 <- LoadInteger '318'
+v1065 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1063
+    ObjectLiteralAddProperty `end`, v1064
+    ObjectLiteralAddProperty `count`, v1065
+v1066 <- EndObjectLiteral
+v1067 <- LoadInteger '401'
+v1068 <- LoadInteger '525'
+v1069 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1067
+    ObjectLiteralAddProperty `end`, v1068
+    ObjectLiteralAddProperty `count`, v1069
+v1070 <- EndObjectLiteral
+v1071 <- LoadInteger '475'
+v1072 <- LoadInteger '486'
+v1073 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1071
+    ObjectLiteralAddProperty `end`, v1072
+    ObjectLiteralAddProperty `count`, v1073
+v1074 <- EndObjectLiteral
+v1075 <- LoadInteger '503'
+v1076 <- LoadInteger '523'
+v1077 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1075
+    ObjectLiteralAddProperty `end`, v1076
+    ObjectLiteralAddProperty `count`, v1077
+v1078 <- EndObjectLiteral
+v1079 <- LoadInteger '551'
+v1080 <- LoadInteger '651'
+v1081 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1079
+    ObjectLiteralAddProperty `end`, v1080
+    ObjectLiteralAddProperty `count`, v1081
+v1082 <- EndObjectLiteral
+v1083 <- LoadInteger '622'
+v1084 <- LoadInteger '639'
+v1085 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1083
+    ObjectLiteralAddProperty `end`, v1084
+    ObjectLiteralAddProperty `count`, v1085
+v1086 <- EndObjectLiteral
+v1087 <- LoadInteger '701'
+v1088 <- LoadInteger '801'
+v1089 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1087
+    ObjectLiteralAddProperty `end`, v1088
+    ObjectLiteralAddProperty `count`, v1089
+v1090 <- EndObjectLiteral
+v1091 <- LoadInteger '774'
+v1092 <- LoadInteger '791'
+v1093 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1091
+    ObjectLiteralAddProperty `end`, v1092
+    ObjectLiteralAddProperty `count`, v1093
+v1094 <- EndObjectLiteral
+v1095 <- LoadInteger '851'
+v1096 <- LoadInteger '1001'
+v1097 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1095
+    ObjectLiteralAddProperty `end`, v1096
+    ObjectLiteralAddProperty `count`, v1097
+v1098 <- EndObjectLiteral
+v1099 <- LoadInteger '920'
+v1100 <- LoadInteger '928'
+v1101 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1099
+    ObjectLiteralAddProperty `end`, v1100
+    ObjectLiteralAddProperty `count`, v1101
+v1102 <- EndObjectLiteral
+v1103 <- LoadInteger '929'
+v1104 <- LoadInteger '965'
+v1105 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1103
+    ObjectLiteralAddProperty `end`, v1104
+    ObjectLiteralAddProperty `count`, v1105
+v1106 <- EndObjectLiteral
+v1107 <- CreateArray [v1050, v1054, v1058, v1062, v1066, v1070, v1074, v1078, v1082, v1086, v1090, v1094, v1098, v1102, v1106]
+v1108 <- CallFunction v11, [v1045, v1046, v1107]
+v1109 <- LoadString 'terminal break statement'
+v1110 <- CreateTemplateString ['\nwhile (true) {                            // 0000\n  const b = false                         // 0050\n  break                                   // 0100\n}                                         // 0150\nlet stop = false                          // 0200\nwhile (true) {                            // 0250\n  if (stop) {                             // 0300\n    break                                 // 0350\n  }                                       // 0400\n  stop = true                             // 0450\n}                                         // 0500\n'], []
+v1111 <- LoadInteger '0'
+v1112 <- LoadInteger '549'
+v1113 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1111
+    ObjectLiteralAddProperty `end`, v1112
+    ObjectLiteralAddProperty `count`, v1113
+v1114 <- EndObjectLiteral
+v1115 <- LoadInteger '263'
+v1116 <- LoadInteger '501'
+v1117 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1115
+    ObjectLiteralAddProperty `end`, v1116
+    ObjectLiteralAddProperty `count`, v1117
+v1118 <- EndObjectLiteral
+v1119 <- LoadInteger '312'
+v1120 <- LoadInteger '501'
+v1121 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1119
+    ObjectLiteralAddProperty `end`, v1120
+    ObjectLiteralAddProperty `count`, v1121
+v1122 <- EndObjectLiteral
+v1123 <- CreateArray [v1114, v1118, v1122]
+v1124 <- CallFunction v11, [v1109, v1110, v1123]
+v1125 <- LoadString 'terminal return statement'
+v1126 <- CreateTemplateString ['\nfunction a () {                           // 0000\n  const b = false                         // 0050\n  return 1                                // 0100\n}                                         // 0150\nconst b = (early) => {                    // 0200\n  if (early) {                            // 0250\n    return 2                              // 0300\n  }                                       // 0350\n  return 3                                // 0400\n}                                         // 0450\nconst c = () => {                         // 0500\n  if (true) {                             // 0550\n    return                                // 0600\n  }                                       // 0650\n}                                         // 0700\na(); b(false); b(true); c()               // 0750\n'], []
+v1127 <- LoadInteger '0'
+v1128 <- LoadInteger '799'
+v1129 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1127
+    ObjectLiteralAddProperty `end`, v1128
+    ObjectLiteralAddProperty `count`, v1129
+v1130 <- EndObjectLiteral
+v1131 <- LoadInteger '0'
+v1132 <- LoadInteger '151'
+v1133 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1131
+    ObjectLiteralAddProperty `end`, v1132
+    ObjectLiteralAddProperty `count`, v1133
+v1134 <- EndObjectLiteral
+v1135 <- LoadInteger '210'
+v1136 <- LoadInteger '451'
+v1137 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1135
+    ObjectLiteralAddProperty `end`, v1136
+    ObjectLiteralAddProperty `count`, v1137
+v1138 <- EndObjectLiteral
+v1139 <- LoadInteger '263'
+v1140 <- LoadInteger '450'
+v1141 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1139
+    ObjectLiteralAddProperty `end`, v1140
+    ObjectLiteralAddProperty `count`, v1141
+v1142 <- EndObjectLiteral
+v1143 <- LoadInteger '510'
+v1144 <- LoadInteger '701'
+v1145 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1143
+    ObjectLiteralAddProperty `end`, v1144
+    ObjectLiteralAddProperty `count`, v1145
+v1146 <- EndObjectLiteral
+v1147 <- CreateArray [v1130, v1134, v1138, v1142, v1146]
+v1148 <- CallFunction v11, [v1125, v1126, v1147]
+v1149 <- LoadString 'terminal blocks'
+v1150 <- CreateTemplateString ['\nfunction a () {                           // 0000\n  {                                       // 0050\n    return 'a'                            // 0100\n  }                                       // 0150\n}                                         // 0200\nfunction b () {                           // 0250\n  {                                       // 0300\n    {                                     // 0350\n      return 'b'                          // 0400\n    }                                     // 0450\n  }                                       // 0500\n}                                         // 0550\na(); b()                                  // 0600\n'], []
+v1151 <- LoadInteger '0'
+v1152 <- LoadInteger '649'
+v1153 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1151
+    ObjectLiteralAddProperty `end`, v1152
+    ObjectLiteralAddProperty `count`, v1153
+v1154 <- EndObjectLiteral
+v1155 <- LoadInteger '0'
+v1156 <- LoadInteger '201'
+v1157 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1155
+    ObjectLiteralAddProperty `end`, v1156
+    ObjectLiteralAddProperty `count`, v1157
+v1158 <- EndObjectLiteral
+v1159 <- LoadInteger '250'
+v1160 <- LoadInteger '551'
+v1161 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1159
+    ObjectLiteralAddProperty `end`, v1160
+    ObjectLiteralAddProperty `count`, v1161
+v1162 <- EndObjectLiteral
+v1163 <- CreateArray [v1154, v1158, v1162]
+v1164 <- CallFunction v11, [v1149, v1150, v1163]
+v1165 <- LoadString 'terminal if statements'
+v1166 <- CreateTemplateString ['\nfunction a (branch) {                     // 0000\n  if (branch) {                           // 0050\n    return 'a'                            // 0100\n  } else {                                // 0150\n    return 'b'                            // 0200\n  }                                       // 0250\n}                                         // 0300\nfunction b (branch) {                     // 0350\n  if (branch) {                           // 0400\n    if (branch) {                         // 0450\n      return 'c'                          // 0500\n    }                                     // 0550\n  }                                       // 0600\n}                                         // 0650\nfunction c (branch) {                     // 0700\n  if (branch) {                           // 0750\n    return 'c'                            // 0800\n  } else {                                // 0850\n    return 'd'                            // 0900\n  }                                       // 0950\n}                                         // 1000\nfunction d (branch) {                     // 1050\n  if (branch) {                           // 1100\n    if (!branch) {                        // 1150\n      return 'e'                          // 1200\n    } else {                              // 1250\n      return 'f'                          // 1300\n    }                                     // 1350\n  } else {                                // 1400\n    // noop                               // 1450\n  }                                       // 1500\n}                                         // 1550\na(true); a(false); b(true); b(false)      // 1600\nc(true); d(true);                         // 1650\n'], []
+v1167 <- LoadInteger '0'
+v1168 <- LoadInteger '1699'
+v1169 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1167
+    ObjectLiteralAddProperty `end`, v1168
+    ObjectLiteralAddProperty `count`, v1169
+v1170 <- EndObjectLiteral
+v1171 <- LoadInteger '0'
+v1172 <- LoadInteger '301'
+v1173 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1171
+    ObjectLiteralAddProperty `end`, v1172
+    ObjectLiteralAddProperty `count`, v1173
+v1174 <- EndObjectLiteral
+v1175 <- LoadInteger '64'
+v1176 <- LoadInteger '253'
+v1177 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1175
+    ObjectLiteralAddProperty `end`, v1176
+    ObjectLiteralAddProperty `count`, v1177
+v1178 <- EndObjectLiteral
+v1179 <- LoadInteger '350'
+v1180 <- LoadInteger '651'
+v1181 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1179
+    ObjectLiteralAddProperty `end`, v1180
+    ObjectLiteralAddProperty `count`, v1181
+v1182 <- EndObjectLiteral
+v1183 <- LoadInteger '414'
+v1184 <- LoadInteger '603'
+v1185 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1183
+    ObjectLiteralAddProperty `end`, v1184
+    ObjectLiteralAddProperty `count`, v1185
+v1186 <- EndObjectLiteral
+v1187 <- LoadInteger '700'
+v1188 <- LoadInteger '1001'
+v1189 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1187
+    ObjectLiteralAddProperty `end`, v1188
+    ObjectLiteralAddProperty `count`, v1189
+v1190 <- EndObjectLiteral
+v1191 <- LoadInteger '853'
+v1192 <- LoadInteger '953'
+v1193 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1191
+    ObjectLiteralAddProperty `end`, v1192
+    ObjectLiteralAddProperty `count`, v1193
+v1194 <- EndObjectLiteral
+v1195 <- LoadInteger '1050'
+v1196 <- LoadInteger '1551'
+v1197 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1195
+    ObjectLiteralAddProperty `end`, v1196
+    ObjectLiteralAddProperty `count`, v1197
+v1198 <- EndObjectLiteral
+v1199 <- LoadInteger '1167'
+v1200 <- LoadInteger '1255'
+v1201 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1199
+    ObjectLiteralAddProperty `end`, v1200
+    ObjectLiteralAddProperty `count`, v1201
+v1202 <- EndObjectLiteral
+v1203 <- LoadInteger '1403'
+v1204 <- LoadInteger '1503'
+v1205 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v1203
+    ObjectLiteralAddProperty `end`, v1204
+    ObjectLiteralAddProperty `count`, v1205
+v1206 <- EndObjectLiteral
+v1207 <- CreateArray [v1170, v1174, v1178, v1182, v1186, v1190, v1194, v1198, v1202, v1206]
+v1208 <- CallFunction v11, [v1165, v1166, v1207]
+
+
+const v1 = `\n(function f() {})();\n`;
+const v5 = { start: 0, end: 20, count: 1 };
+TestCoverage("call an IIFE", v1, [v5,{ start: 1, end: 16, count: 1 }]);
+const v14 = `let f = () => 1; f();`;
+const v18 = { start: 0, end: 21, count: 1 };
+TestCoverage("call locally allocated function", v14, [v18,{ start: 8, end: 15, count: 1 }]);
+const v26 = `\nfunction g() {}                           // 0000\nfunction f(x) {                           // 0050\n  if (x == 42) {                          // 0100\n    if (x == 43) g(); else g();           // 0150\n  }                                       // 0200\n  if (x == 42) { g(); } else { g(); }     // 0250\n  if (x == 42) g(); else g();             // 0300\n  if (false) g(); else g();               // 0350\n  if (false) g();                         // 0400\n  if (true) g(); else g();                // 0450\n  if (true) g();                          // 0500\n}                                         // 0550\nf(42);                                    // 0600\nf(43);                                    // 0650\nif (true) {                               // 0700\n  const foo = 'bar';                      // 0750\n} else {                                  // 0800\n  const bar = 'foo';                      // 0850\n}                                         // 0900\n`;
+const v30 = { start: 0, end: 949, count: 1 };
+const v34 = { start: 801, end: 901, count: 0 };
+const v38 = { start: 0, end: 15, count: 11 };
+const v42 = { start: 50, end: 551, count: 2 };
+const v46 = { start: 115, end: 203, count: 1 };
+const v50 = { start: 167, end: 171, count: 0 };
+const v54 = { start: 265, end: 287, count: 1 };
+const v58 = { start: 315, end: 329, count: 1 };
+const v62 = { start: 363, end: 367, count: 0 };
+const v66 = { start: 413, end: 417, count: 0 };
+TestCoverage("if statements", v26, [v30,v34,v38,v42,v46,v50,v54,v58,v62,v66,{ start: 466, end: 476, count: 0 }]);
+const v74 = `\n!function() {                             // 0000\n  if (true) {                             // 0050\n    nop();                                // 0100\n    return;                               // 0150\n    nop();                                // 0200\n  }                                       // 0250\n  nop();                                  // 0300\n}()                                       // 0350\n`;
+const v78 = { start: 0, end: 399, count: 1 };
+const v82 = { start: 1, end: 351, count: 1 };
+TestCoverage("if statement (early return)", v74, [v78,v82,{ start: 161, end: 350, count: 0 }]);
+const v90 = `\n!function() {                             // 0000\n  if (true) nop()                         // 0050\n  if (true) nop(); else nop()             // 0100\n  nop();                                  // 0150\n}()                                       // 0200\n`;
+const v94 = { start: 0, end: 249, count: 1 };
+const v98 = { start: 1, end: 201, count: 1 };
+TestCoverage("if statement (no semi-colon)", v90, [v94,v98,{ start: 118, end: 129, count: 0 }]);
+const v106 = `\nfunction g() {}                           // 0000\n!function() {                             // 0050\n  for (var i = 0; i < 12; i++) g();       // 0100\n  for (var i = 0; i < 12; i++) {          // 0150\n    g();                                  // 0200\n  }                                       // 0250\n  for (var i = 0; false; i++) g();        // 0300\n  for (var i = 0; true; i++) break;       // 0350\n  for (var i = 0; i < 12; i++) {          // 0400\n    if (i % 3 == 0) g(); else g();        // 0450\n  }                                       // 0500\n}();                                      // 0550\n`;
+const v110 = { start: 0, end: 599, count: 1 };
+const v114 = { start: 0, end: 15, count: 36 };
+const v118 = { start: 51, end: 551, count: 1 };
+const v122 = { start: 131, end: 135, count: 12 };
+const v126 = { start: 181, end: 253, count: 12 };
+const v130 = { start: 330, end: 334, count: 0 };
+const v134 = { start: 431, end: 503, count: 12 };
+const v138 = { start: 470, end: 474, count: 4 };
+TestCoverage("for statements", v106, [v110,v114,v118,v122,v126,v130,v134,v138,{ start: 474, end: 484, count: 8 }]);
+const v146 = `\nfunction g() {}                           // 0000\n!function() {                             // 0050\n  let j = 0;                              // 0100\n  for (let i = 0; i < 12; i++) g();       // 0150\n  for (const i = 0; j < 12; j++) g();     // 0200\n  for (j = 0; j < 12; j++) g();           // 0250\n  for (;;) break;                         // 0300\n}();                                      // 0350\n`;
+const v150 = { start: 0, end: 399, count: 1 };
+const v154 = { start: 0, end: 15, count: 36 };
+const v158 = { start: 51, end: 351, count: 1 };
+const v162 = { start: 181, end: 185, count: 12 };
+const v166 = { start: 233, end: 237, count: 12 };
+TestCoverage("for statements pt. 2", v146, [v150,v154,v158,v162,v166,{ start: 277, end: 281, count: 12 }]);
+const v174 = `\nfunction g() {}                           // 0000\n!function() {                             // 0050\n  for (let i = 0; i < 12; i++) g()        // 0100\n  for (let i = 0; i < 12; i++) break      // 0150\n  for (let i = 0; i < 12; i++) break; g() // 0200\n}();                                      // 0250\n`;
+const v178 = { start: 0, end: 299, count: 1 };
+const v182 = { start: 0, end: 15, count: 13 };
+const v186 = { start: 51, end: 251, count: 1 };
+TestCoverage("for statements (no semicolon)", v174, [v178,v182,v186,{ start: 131, end: 134, count: 12 }]);
+const v194 = `\n!function() {                             // 0000\n  for (var i = 0; i < 10; i++) {          // 0050\n    nop();                                // 0100\n    continue;                             // 0150\n    nop();                                // 0200\n  }                                       // 0250\n  nop();                                  // 0300\n  for (;;) {                              // 0350\n    nop();                                // 0400\n    break;                                // 0450\n    nop();                                // 0500\n  }                                       // 0550\n  nop();                                  // 0600\n  for (;;) {                              // 0650\n    nop();                                // 0700\n    return;                               // 0750\n    nop();                                // 0800\n  }                                       // 0850\n  nop();                                  // 0900\n}()                                       // 0950\n`;
+const v198 = { start: 0, end: 999, count: 1 };
+const v202 = { start: 1, end: 951, count: 1 };
+const v206 = { start: 81, end: 253, count: 10 };
+const v210 = { start: 163, end: 253, count: 0 };
+const v214 = { start: 460, end: 553, count: 0 };
+TestCoverage("for statement (early return)", v194, [v198,v202,v206,v210,v214,{ start: 761, end: 950, count: 0 }]);
+const v222 = `\n!function() {                             // 0000\n  var i;                                  // 0050\n  for (i of [0,1,2,3]) { nop(); }         // 0100\n  for (let j of [0,1,2,3]) { nop(); }     // 0150\n  for (i in [0,1,2,3]) { nop(); }         // 0200\n  for (let j in [0,1,2,3]) { nop(); }     // 0250\n  var xs = [{a:0, b:1}, {a:1,b:0}];       // 0300\n  for (var {a: x, b: y} of xs) { nop(); } // 0350\n}();                                      // 0400\n`;
+const v226 = { start: 0, end: 449, count: 1 };
+const v230 = { start: 1, end: 401, count: 1 };
+const v234 = { start: 123, end: 133, count: 4 };
+const v238 = { start: 177, end: 187, count: 4 };
+const v242 = { start: 223, end: 233, count: 4 };
+const v246 = { start: 277, end: 287, count: 4 };
+TestCoverage("for-of and for-in statements", v222, [v226,v230,v234,v238,v242,v246,{ start: 381, end: 391, count: 2 }]);
+const v254 = `\n!async function() {                       // 0000\n  for await (var x of [0,1,2,3]) {        // 0050\n    nop();                                // 0100\n  }                                       // 0150\n}();                                      // 0200\n`;
+const v258 = { start: 0, end: 299, count: 1 };
+const v262 = { start: 1, end: 201, count: 6 };
+const v266 = { start: 83, end: 153, count: 4 };
+TestCoverage("for-await-of statements", v254, [v258,v262,v266,{ start: 153, end: 200, count: 1 }]);
+const v274 = `\nfunction g() {}                           // 0000\n!function() {                             // 0050\n  var i;                                  // 0100\n  i = 0; while (i < 12) i++;              // 0150\n  i = 0; while (i < 12) { g(); i++; }     // 0200\n  i = 0; while (false) g();               // 0250\n  i = 0; while (true) break;              // 0300\n                                          // 0350\n  i = 0; do i++; while (i < 12);          // 0400\n  i = 0; do { g(); i++; }                 // 0450\n         while (i < 12);                  // 0500\n  i = 0; do { g(); } while (false);       // 0550\n  i = 0; do { break; } while (true);      // 0600\n}();                                      // 0650\n`;
+const v278 = { start: 0, end: 699, count: 1 };
+const v282 = { start: 0, end: 15, count: 25 };
+const v286 = { start: 51, end: 651, count: 1 };
+const v290 = { start: 174, end: 178, count: 12 };
+const v294 = { start: 224, end: 237, count: 12 };
+const v298 = { start: 273, end: 277, count: 0 };
+const v302 = { start: 412, end: 416, count: 12 };
+TestCoverage("while and do-while statements", v274, [v278,v282,v286,v290,v294,v298,v302,{ start: 462, end: 475, count: 12 }]);
+const v310 = `\n!function() {                             // 0000\n  let i = 0;                              // 0050\n  while (i < 10) {                        // 0100\n    i++;                                  // 0150\n    continue;                             // 0200\n    nop();                                // 0250\n  }                                       // 0300\n  nop();                                  // 0350\n  while (true) {                          // 0400\n    nop();                                // 0450\n    break;                                // 0500\n    nop();                                // 0550\n  }                                       // 0600\n  nop();                                  // 0650\n  while (true) {                          // 0700\n    nop();                                // 0750\n    return;                               // 0800\n    nop();                                // 0850\n  }                                       // 0900\n  nop();                                  // 0950\n}()                                       // 1000\n`;
+const v314 = { start: 0, end: 1049, count: 1 };
+const v318 = { start: 1, end: 1001, count: 1 };
+const v322 = { start: 117, end: 303, count: 10 };
+const v326 = { start: 213, end: 303, count: 0 };
+const v330 = { start: 510, end: 603, count: 0 };
+TestCoverage("while statement (early return)", v310, [v314,v318,v322,v326,v330,{ start: 811, end: 1000, count: 0 }]);
+const v338 = `\n!function() {                             // 0000\n  let i = 0;                              // 0050\n  do {                                    // 0100\n    i++;                                  // 0150\n    continue;                             // 0200\n    nop();                                // 0250\n  } while (i < 10);                       // 0300\n  nop();                                  // 0350\n  do {                                    // 0400\n    nop();                                // 0450\n    break;                                // 0500\n    nop();                                // 0550\n  } while (true);                         // 0600\n  nop();                                  // 0650\n  do {                                    // 0700\n    nop();                                // 0750\n    return;                               // 0800\n    nop();                                // 0850\n  } while (true);                         // 0900\n  nop();                                  // 0950\n}()                                       // 1000\n`;
+const v342 = { start: 0, end: 1049, count: 1 };
+const v346 = { start: 1, end: 1001, count: 1 };
+const v350 = { start: 105, end: 303, count: 10 };
+const v354 = { start: 213, end: 303, count: 0 };
+const v358 = { start: 510, end: 603, count: 0 };
+TestCoverage("do-while statement (early return)", v338, [v342,v346,v350,v354,v358,{ start: 811, end: 1000, count: 0 }]);
+const v366 = `\n!function() { nop(); return; nop(); }();  // 0000\n!function() { nop(); return 42;           // 0050\n              nop(); }();                 // 0100\n`;
+const v370 = { start: 0, end: 149, count: 1 };
+const v374 = { start: 1, end: 37, count: 1 };
+const v378 = { start: 28, end: 36, count: 0 };
+const v382 = { start: 51, end: 122, count: 1 };
+TestCoverage("return statements", v366, [v370,v374,v378,v382,{ start: 81, end: 121, count: 0 }]);
+const v390 = `\n!function() {                             // 0000\n  try { nop(); } catch (e) { nop(); }     // 0050\n  try { nop(); } finally { nop(); }       // 0100\n  try {                                   // 0150\n    try { throw 42; } catch (e) { nop(); }// 0200\n  } catch (e) { nop(); }                  // 0250\n  try {                                   // 0300\n    try { throw 42; } finally { nop(); }  // 0350\n  } catch (e) { nop(); }                  // 0400\n  try {                                   // 0450\n    throw 42;                             // 0500\n  } catch (e) {                           // 0550\n    nop();                                // 0600\n  } finally {                             // 0650\n    nop();                                // 0700\n  }                                       // 0750\n}();                                      // 0800\n`;
+const v394 = { start: 0, end: 849, count: 1 };
+const v398 = { start: 1, end: 801, count: 1 };
+const v402 = { start: 67, end: 87, count: 0 };
+const v406 = { start: 219, end: 222, count: 0 };
+const v410 = { start: 254, end: 274, count: 0 };
+const v414 = { start: 369, end: 372, count: 0 };
+const v418 = { start: 403, end: 404, count: 0 };
+TestCoverage("try/catch/finally statements", v390, [v394,v398,v402,v406,v410,v414,v418,{ start: 513, end: 554, count: 0 }]);
+const v426 = `\n!function() {                             // 0000\n  try { throw 42; } catch (e) { return; } // 0050\n  nop();                                  // 0100\n}();                                      // 0150\n!function() {                             // 0200\n  try { throw 42; } catch (e) {}          // 0250\n  finally { return; }                     // 0300\n  nop();                                  // 0350\n}();                                      // 0400\n`;
+const v430 = { start: 0, end: 449, count: 1 };
+const v434 = { start: 1, end: 151, count: 1 };
+const v438 = { start: 67, end: 70, count: 0 };
+const v442 = { start: 91, end: 150, count: 0 };
+const v446 = { start: 201, end: 401, count: 1 };
+const v450 = { start: 267, end: 270, count: 0 };
+TestCoverage("try/catch/finally statements with early return", v426, [v430,v434,v438,v442,v446,v450,{ start: 321, end: 400, count: 0 }]);
+const v458 = `\n!function() {                             // 0000\n  try { throw 42; } catch (e) { return; } // 0050\n  nop();                                  // 0100\n}();                                      // 0150\n!function() {                             // 0200\n  try { nop(); } finally { return; }      // 0250\n  nop();                                  // 0300\n}();                                      // 0350\n!function() {                             // 0400\n  {                                       // 0450\n    let x = 42;                           // 0500\n    return () => x;                       // 0550\n  }                                       // 0600\n  nop();                                  // 0650\n}();                                      // 0700\n!function() {                             // 0750\n  try { throw 42; } catch (e) {           // 0800\n    return;                               // 0850\n    nop();                                // 0900\n  }                                       // 0950\n  nop();                                  // 1000\n}();                                      // 1050\n`;
+const v462 = { start: 0, end: 1099, count: 1 };
+const v466 = { start: 1, end: 151, count: 1 };
+const v470 = { start: 67, end: 70, count: 0 };
+const v474 = { start: 91, end: 150, count: 0 };
+const v478 = { start: 201, end: 351, count: 1 };
+const v482 = { start: 286, end: 350, count: 0 };
+const v486 = { start: 401, end: 701, count: 1 };
+const v490 = { start: 603, end: 700, count: 0 };
+const v494 = { start: 561, end: 568, count: 0 };
+const v498 = { start: 751, end: 1051, count: 1 };
+const v502 = { start: 817, end: 820, count: 0 };
+TestCoverage("early return in blocks", v458, [v462,v466,v470,v474,v478,v482,v486,v490,v494,v498,v502,{ start: 861, end: 1050, count: 0 }]);
+const v510 = `\n!function() {                             // 0000\n  var x = 42;                             // 0050\n  switch (x) {                            // 0100\n    case 41: nop(); break;                // 0150\n    case 42: nop(); break;                // 0200\n    default: nop(); break;                // 0250\n  }                                       // 0300\n}();                                      // 0350\n`;
+const v514 = { start: 0, end: 399, count: 1 };
+const v518 = { start: 1, end: 351, count: 1 };
+const v522 = { start: 154, end: 204, count: 0 };
+TestCoverage("switch statements", v510, [v514,v518,v522,{ start: 226, end: 350, count: 0 }]);
+const v530 = `\n!function() {                             // 0000\n  var x = 42;                             // 0050\n  l0: switch (x) {                        // 0100\n  case 41: return;                        // 0150\n  case 42:                                // 0200\n    switch (x) { case 42: break l0; }     // 0250\n    break;                                // 0300\n  }                                       // 0350\n  l1: for (;;) {                          // 0400\n    for (;;) break l1;                    // 0450\n  }                                       // 0500\n  l2: while (true) {                      // 0550\n    while (true) break l2;                // 0600\n  }                                       // 0650\n  l3: do {                                // 0700\n    do { break l3; } while (true);        // 0750\n  } while (true);                         // 0800\n  l4: { break l4; }                       // 0850\n  l5: for (;;) for (;;) break l5;         // 0900\n}();                                      // 0950\n`;
+const v534 = { start: 0, end: 999, count: 1 };
+const v538 = { start: 1, end: 951, count: 1 };
+const v542 = { start: 152, end: 202, count: 0 };
+TestCoverage("labeled break statements", v530, [v534,v538,v542,{ start: 285, end: 353, count: 0 }]);
+const v550 = `\n!function() {                             // 0000\n  l0: for (var i0 = 0; i0 < 2; i0++) {    // 0050\n    for (;;) continue l0;                 // 0100\n  }                                       // 0150\n  var i1 = 0;                             // 0200\n  l1: while (i1 < 2) {                    // 0250\n    i1++;                                 // 0300\n    while (true) continue l1;             // 0350\n  }                                       // 0400\n  var i2 = 0;                             // 0450\n  l2: do {                                // 0500\n    i2++;                                 // 0550\n    do { continue l2; } while (true);     // 0600\n  } while (i2 < 2);                       // 0650\n}();                                      // 0700\n`;
+const v554 = { start: 0, end: 749, count: 1 };
+const v558 = { start: 1, end: 701, count: 1 };
+const v562 = { start: 87, end: 153, count: 2 };
+const v566 = { start: 271, end: 403, count: 2 };
+TestCoverage("labeled continue statements", v550, [v554,v558,v562,v566,{ start: 509, end: 653, count: 2 }]);
+const v574 = `\nvar TRUE = true;                          // 0000\nvar FALSE = false;                        // 0050\n!function() {                             // 0100\n  TRUE ? nop() : nop();                   // 0150\n  true ? nop() : nop();                   // 0200\n  false ? nop() : nop();                  // 0250\n  FALSE ? TRUE ? nop()                    // 0300\n               : nop()                    // 0350\n        : nop();                          // 0400\n  TRUE ? FALSE ? nop()                    // 0450\n               : nop()                    // 0500\n       : nop();                           // 0550\n  TRUE ? nop() : FALSE ? nop()            // 0600\n                       : nop();           // 0650\n  FALSE ? nop() : TRUE ? nop()            // 0700\n                       : nop();           // 0750\n}();                                      // 0800\n`;
+const v578 = { start: 0, end: 849, count: 1 };
+const v582 = { start: 101, end: 801, count: 1 };
+const v586 = { start: 165, end: 172, count: 0 };
+const v590 = { start: 215, end: 222, count: 0 };
+const v594 = { start: 258, end: 265, count: 0 };
+const v598 = { start: 308, end: 372, count: 0 };
+const v602 = { start: 465, end: 472, count: 0 };
+const v606 = { start: 557, end: 564, count: 0 };
+const v610 = { start: 615, end: 680, count: 0 };
+const v614 = { start: 708, end: 715, count: 0 };
+TestCoverage("conditional expressions", v574, [v578,v582,v586,v590,v594,v598,v602,v606,v610,v614,{ start: 773, end: 780, count: 0 }]);
+const v622 = `\nconst it = function*() {                  // 0000\n  yield nop();                            // 0050\n  yield nop() ? nop() : nop()             // 0100\n  return nop();                           // 0150\n}();                                      // 0200\nit.next(); it.next();                     // 0250\n`;
+const v626 = { start: 0, end: 299, count: 1 };
+const v630 = { start: 11, end: 201, count: 3 };
+const v634 = { start: 64, end: 114, count: 1 };
+const v638 = { start: 114, end: 121, count: 0 };
+const v642 = { start: 122, end: 129, count: 1 };
+TestCoverage("yield expressions", v622, [v626,v630,v634,v638,v642,{ start: 129, end: 200, count: 0 }]);
+const v650 = `\nconst it0 = function*() {                 // 0000\n  yield 1; yield 2; yield 3;              // 0050\n}();                                      // 0100\nit0.next(); it0.return();                 // 0150\ntry {                                     // 0200\n  const it1 = function*() {               // 0250\n    yield 1; yield 2; yield 3;            // 0300\n  }();                                    // 0350\n  it1.next(); it1.throw();                // 0400\n} catch (e) {}                            // 0450\n`;
+const v654 = { start: 0, end: 499, count: 1 };
+const v658 = { start: 451, end: 452, count: 0 };
+const v662 = { start: 12, end: 101, count: 3 };
+const v666 = { start: 60, end: 100, count: 0 };
+const v670 = { start: 264, end: 353, count: 3 };
+TestCoverage("yield expressions (.return and .throw)", v650, [v654,v658,v662,v666,v670,{ start: 312, end: 352, count: 0 }]);
+const v678 = `\nconst it = function*() {                  // 0000\n  try {                                   // 0050\n    yield 1; yield 2; yield 3;            // 0100\n  } catch (e) {                           // 0150\n    nop();                                // 0200\n  } finally { nop(); }                    // 0250\n  yield 4;                                // 0300\n}();                                      // 0350\nit.next(); it.return();                   // 0450\n`;
+const v682 = { start: 0, end: 449, count: 1 };
+const v686 = { start: 11, end: 351, count: 3 };
+const v690 = { start: 112, end: 254, count: 0 };
+const v694 = { start: 254, end: 272, count: 1 };
+TestCoverage("yield expressions (.return and try/catch/finally)", v678, [v682,v686,v690,v694,{ start: 272, end: 350, count: 0 }]);
+const v702 = `\nconst it = function*() {                  // 0000\n  try {                                   // 0050\n    yield 1; yield 2; yield 3;            // 0100\n  } catch (e) {                           // 0150\n    nop();                                // 0200\n  } finally { nop(); }                    // 0250\n  yield 4;                                // 0300\n}();                                      // 0350\nit.next(); it.throw(42);                  // 0550\n`;
+const v706 = { start: 0, end: 449, count: 1 };
+const v710 = { start: 11, end: 351, count: 3 };
+const v714 = { start: 112, end: 154, count: 0 };
+const v718 = { start: 154, end: 310, count: 1 };
+TestCoverage("yield expressions (.throw and try/catch/finally)", v702, [v706,v710,v714,v718,{ start: 310, end: 350, count: 0 }]);
+const v726 = `\nconst it = function*() {                  // 0000\n  yield* gen();                           // 0050\n  yield* nop() ? gen() : gen()            // 0100\n  return gen();                           // 0150\n}();                                      // 0200\nit.next(); it.next(); it.next();          // 0250\nit.next(); it.next(); it.next();          // 0300\n`;
+const v730 = { start: 0, end: 349, count: 1 };
+const v734 = { start: 11, end: 201, count: 7 };
+const v738 = { start: 65, end: 115, count: 1 };
+const v742 = { start: 115, end: 122, count: 0 };
+const v746 = { start: 123, end: 130, count: 1 };
+TestCoverage("yield* expressions", v726, [v730,v734,v738,v742,v746,{ start: 130, end: 200, count: 0 }]);
+const v754 = `\nconst it0 = function*() {                 // 0000\n  yield* gen(); yield* gen(); yield 3;    // 0050\n}();                                      // 0100\nit0.next(); it0.return();                 // 0150\ntry {                                     // 0200\n  const it1 = function*() {               // 0250\n    yield* gen(); yield* gen(); yield 3;  // 0300\n  }();                                    // 0350\n  it1.next(); it1.throw();                // 0400\n} catch (e) {}                            // 0450\n`;
+const v758 = { start: 0, end: 499, count: 1 };
+const v762 = { start: 451, end: 452, count: 0 };
+const v766 = { start: 12, end: 101, count: 3 };
+const v770 = { start: 65, end: 100, count: 0 };
+const v774 = { start: 264, end: 353, count: 3 };
+TestCoverage("yield* expressions (.return and .throw)", v754, [v758,v762,v766,v770,v774,{ start: 317, end: 352, count: 0 }]);
+const v782 = `\nasync function f() {                      // 0000\n  await 42;                               // 0050\n  await 42;                               // 0100\n};                                        // 0150\nf();                                      // 0200\n`;
+const v786 = { start: 0, end: 299, count: 1 };
+const v790 = { start: 0, end: 151, count: 3 };
+TestCoverage("await expressions", v782, [v786,v790,{ start: 61, end: 150, count: 1 }]);
+const v798 = `\nconst a = true || 99                      // 0000\nfunction b () {                           // 0050\n  const b = a || 2                        // 0100\n}                                         // 0150\nb()                                       // 0200\nb()                                       // 0250\n`;
+const v802 = { start: 0, end: 299, count: 1 };
+const v806 = { start: 15, end: 20, count: 0 };
+const v810 = { start: 50, end: 151, count: 2 };
+TestCoverage("LogicalOrExpression assignment", v798, [v802,v806,v810,{ start: 114, end: 118, count: 0 }]);
+const v818 = `\ntrue || false                             // 0000\nconst a = 99                              // 0050\na || 50                                   // 0100\nconst b = false                           // 0150\nif (b || true) {}                         // 0200\n`;
+const v822 = { start: 0, end: 249, count: 1 };
+const v826 = { start: 5, end: 13, count: 0 };
+TestCoverage("LogicalOrExpression IsTest()", v818, [v822,v826,{ start: 102, end: 107, count: 0 }]);
+const v834 = `\nconst a = false && 99                     // 0000\nfunction b () {                           // 0050\n  const b = a && 2                        // 0100\n}                                         // 0150\nb()                                       // 0200\nb()                                       // 0250\nconst c = true && 50                      // 0300\n`;
+const v838 = { start: 0, end: 349, count: 1 };
+const v842 = { start: 16, end: 21, count: 0 };
+const v846 = { start: 50, end: 151, count: 2 };
+TestCoverage("LogicalAndExpression assignment", v834, [v838,v842,v846,{ start: 114, end: 118, count: 0 }]);
+const v854 = `\nfalse && true                             // 0000\nconst a = 0                               // 0050\na && 50                                   // 0100\nconst b = true                            // 0150\nif (b && true) {}                         // 0200\ntrue && true                              // 0250\n`;
+const v858 = { start: 0, end: 299, count: 1 };
+const v862 = { start: 6, end: 13, count: 0 };
+TestCoverage("LogicalAndExpression IsTest()", v854, [v858,v862,{ start: 102, end: 107, count: 0 }]);
+const v870 = `\nconst a = true                            // 0000\nconst b = false                           // 0050\nconst c = false || false || 99            // 0100\nconst d = false || true || 99             // 0150\nconst e = true || true || 99              // 0200\nconst f = b || b || 99                    // 0250\nconst g = b || a || 99                    // 0300\nconst h = a || a || 99                    // 0350\nconst i = a || (b || c) || d              // 0400\n`;
+const v874 = { start: 0, end: 449, count: 1 };
+const v878 = { start: 174, end: 179, count: 0 };
+const v882 = { start: 215, end: 222, count: 0 };
+const v886 = { start: 223, end: 228, count: 0 };
+const v890 = { start: 317, end: 322, count: 0 };
+const v894 = { start: 362, end: 366, count: 0 };
+const v898 = { start: 367, end: 372, count: 0 };
+const v902 = { start: 412, end: 423, count: 0 };
+TestCoverage("NaryLogicalOr assignment", v870, [v874,v878,v882,v886,v890,v894,v898,v902,{ start: 424, end: 428, count: 0 }]);
+const v910 = `\nconst a = true                            // 0000\nconst b = false                           // 0050\nfalse || false || 99                      // 0100\nfalse || true || 99                       // 0150\ntrue || true || 99                        // 0200\nb || b || 99                              // 0250\nb || a || 99                              // 0300\na || a || 99                              // 0350\n`;
+const v914 = { start: 0, end: 399, count: 1 };
+const v918 = { start: 164, end: 169, count: 0 };
+const v922 = { start: 205, end: 212, count: 0 };
+const v926 = { start: 213, end: 218, count: 0 };
+const v930 = { start: 307, end: 312, count: 0 };
+const v934 = { start: 352, end: 356, count: 0 };
+TestCoverage("NaryLogicalOr IsTest()", v910, [v914,v918,v922,v926,v930,v934,{ start: 357, end: 362, count: 0 }]);
+const v942 = `\nconst a = true                            // 0000\nconst b = false                           // 0050\nconst c = false && false && 99            // 0100\nconst d = false && true && 99             // 0150\nconst e = true && true && 99              // 0200\nconst f = true && false || true           // 0250\nconst g = true || false && true           // 0300\n`;
+const v946 = { start: 0, end: 349, count: 1 };
+const v950 = { start: 116, end: 124, count: 0 };
+const v954 = { start: 125, end: 130, count: 0 };
+const v958 = { start: 166, end: 173, count: 0 };
+const v962 = { start: 174, end: 179, count: 0 };
+TestCoverage("NaryLogicalAnd assignment", v942, [v946,v950,v954,v958,v962,{ start: 315, end: 331, count: 0 }]);
+const v970 = `\nconst a = true                            // 0000\nconst b = false                           // 0050\nfalse && false && 99                      // 0100\nfalse && true && 99                       // 0150\ntrue && true && 99                        // 0200\ntrue && false || true                     // 0250\ntrue || false && true                     // 0300\nfalse || false || 99 || 55                // 0350\n`;
+const v974 = { start: 0, end: 399, count: 1 };
+const v978 = { start: 106, end: 114, count: 0 };
+const v982 = { start: 115, end: 120, count: 0 };
+const v986 = { start: 156, end: 163, count: 0 };
+const v990 = { start: 164, end: 169, count: 0 };
+const v994 = { start: 305, end: 321, count: 0 };
+TestCoverage("NaryLogicalAnd IsTest()", v970, [v974,v978,v982,v986,v990,v994,{ start: 371, end: 376, count: 0 }]);
+const v1002 = `\nconst a = true                            // 0000\nconst b = 99                              // 0050\nconst c = false                           // 0100\nconst d = ''                              // 0150\nconst e = a && (b ? 'left' : 'right')     // 0200\nconst f = a || (b ? 'left' : 'right')     // 0250\nconst g = c || d ? 'left' : 'right'       // 0300\nconst h = a && b && (b ? 'left' : 'right')// 0350\nconst i = d || c || (c ? 'left' : 'right')// 0400\n`;
+const v1006 = { start: 0, end: 449, count: 1 };
+const v1010 = { start: 227, end: 236, count: 0 };
+const v1014 = { start: 262, end: 287, count: 0 };
+const v1018 = { start: 317, end: 325, count: 0 };
+const v1022 = { start: 382, end: 391, count: 0 };
+TestCoverage("logical expressions + conditional expressions", v1002, [v1006,v1010,v1014,v1018,v1022,{ start: 423, end: 431, count: 0 }]);
+const v1030 = `\nUtil = {};                                // 0000\nUtil.escape = function UtilEscape(str) {  // 0050\n  if (!str) {                             // 0100\n    return 'if';                          // 0150\n  } else {                                // 0200\n    return 'else';                        // 0250\n  }                                       // 0300\n};                                        // 0350\nUtil.escape("foo.bar");                   // 0400\n`;
+const v1034 = { start: 0, end: 449, count: 1 };
+const v1038 = { start: 64, end: 351, count: 1 };
+TestCoverage("https://crbug.com/827530", v1030, [v1034,v1038,{ start: 112, end: 203, count: 0 }]);
+const v1046 = `\n!function() {                             // 0000\n  if (true)                               // 0050\n    while (false) return; else nop();     // 0100\n}();                                      // 0150\n!function() {                             // 0200\n  if (true) l0: { break l0; } else        // 0250\n    if (nop()) { }                        // 0300\n}();                                      // 0350\n!function() {                             // 0400\n  if (true) { if (false) { return; }      // 0450\n  } else if (nop()) { } }();              // 0500\n!function(){                              // 0550\n  if(true)while(false)return;else nop()   // 0600\n}();                                      // 0650\n!function(){                              // 0700\n  if(true) l0:{break l0}else if (nop()){} // 0750\n}();                                      // 0800\n!function(){                              // 0850\n  if(true){if(false){return}}else         // 0900\n    if(nop()){}                           // 0950\n}();                                      // 1000\n`;
+const v1050 = { start: 0, end: 1049, count: 1 };
+const v1054 = { start: 1, end: 151, count: 1 };
+const v1058 = { start: 118, end: 137, count: 0 };
+const v1062 = { start: 201, end: 351, count: 1 };
+const v1066 = { start: 279, end: 318, count: 0 };
+const v1070 = { start: 401, end: 525, count: 1 };
+const v1074 = { start: 475, end: 486, count: 0 };
+const v1078 = { start: 503, end: 523, count: 0 };
+const v1082 = { start: 551, end: 651, count: 1 };
+const v1086 = { start: 622, end: 639, count: 0 };
+const v1090 = { start: 701, end: 801, count: 1 };
+const v1094 = { start: 774, end: 791, count: 0 };
+const v1098 = { start: 851, end: 1001, count: 1 };
+const v1102 = { start: 920, end: 928, count: 0 };
+TestCoverage("https://crbug.com/v8/8237", v1046, [v1050,v1054,v1058,v1062,v1066,v1070,v1074,v1078,v1082,v1086,v1090,v1094,v1098,v1102,{ start: 929, end: 965, count: 0 }]);
+const v1110 = `\nwhile (true) {                            // 0000\n  const b = false                         // 0050\n  break                                   // 0100\n}                                         // 0150\nlet stop = false                          // 0200\nwhile (true) {                            // 0250\n  if (stop) {                             // 0300\n    break                                 // 0350\n  }                                       // 0400\n  stop = true                             // 0450\n}                                         // 0500\n`;
+const v1114 = { start: 0, end: 549, count: 1 };
+const v1118 = { start: 263, end: 501, count: 2 };
+TestCoverage("terminal break statement", v1110, [v1114,v1118,{ start: 312, end: 501, count: 1 }]);
+const v1126 = `\nfunction a () {                           // 0000\n  const b = false                         // 0050\n  return 1                                // 0100\n}                                         // 0150\nconst b = (early) => {                    // 0200\n  if (early) {                            // 0250\n    return 2                              // 0300\n  }                                       // 0350\n  return 3                                // 0400\n}                                         // 0450\nconst c = () => {                         // 0500\n  if (true) {                             // 0550\n    return                                // 0600\n  }                                       // 0650\n}                                         // 0700\na(); b(false); b(true); c()               // 0750\n`;
+const v1130 = { start: 0, end: 799, count: 1 };
+const v1134 = { start: 0, end: 151, count: 1 };
+const v1138 = { start: 210, end: 451, count: 2 };
+const v1142 = { start: 263, end: 450, count: 1 };
+TestCoverage("terminal return statement", v1126, [v1130,v1134,v1138,v1142,{ start: 510, end: 701, count: 1 }]);
+const v1150 = `\nfunction a () {                           // 0000\n  {                                       // 0050\n    return 'a'                            // 0100\n  }                                       // 0150\n}                                         // 0200\nfunction b () {                           // 0250\n  {                                       // 0300\n    {                                     // 0350\n      return 'b'                          // 0400\n    }                                     // 0450\n  }                                       // 0500\n}                                         // 0550\na(); b()                                  // 0600\n`;
+const v1154 = { start: 0, end: 649, count: 1 };
+const v1158 = { start: 0, end: 201, count: 1 };
+TestCoverage("terminal blocks", v1150, [v1154,v1158,{ start: 250, end: 551, count: 1 }]);
+const v1166 = `\nfunction a (branch) {                     // 0000\n  if (branch) {                           // 0050\n    return 'a'                            // 0100\n  } else {                                // 0150\n    return 'b'                            // 0200\n  }                                       // 0250\n}                                         // 0300\nfunction b (branch) {                     // 0350\n  if (branch) {                           // 0400\n    if (branch) {                         // 0450\n      return 'c'                          // 0500\n    }                                     // 0550\n  }                                       // 0600\n}                                         // 0650\nfunction c (branch) {                     // 0700\n  if (branch) {                           // 0750\n    return 'c'                            // 0800\n  } else {                                // 0850\n    return 'd'                            // 0900\n  }                                       // 0950\n}                                         // 1000\nfunction d (branch) {                     // 1050\n  if (branch) {                           // 1100\n    if (!branch) {                        // 1150\n      return 'e'                          // 1200\n    } else {                              // 1250\n      return 'f'                          // 1300\n    }                                     // 1350\n  } else {                                // 1400\n    // noop                               // 1450\n  }                                       // 1500\n}                                         // 1550\na(true); a(false); b(true); b(false)      // 1600\nc(true); d(true);                         // 1650\n`;
+const v1170 = { start: 0, end: 1699, count: 1 };
+const v1174 = { start: 0, end: 301, count: 2 };
+const v1178 = { start: 64, end: 253, count: 1 };
+const v1182 = { start: 350, end: 651, count: 2 };
+const v1186 = { start: 414, end: 603, count: 1 };
+const v1190 = { start: 700, end: 1001, count: 1 };
+const v1194 = { start: 853, end: 953, count: 0 };
+const v1198 = { start: 1050, end: 1551, count: 1 };
+const v1202 = { start: 1167, end: 1255, count: 0 };
+TestCoverage("terminal if statements", v1166, [v1170,v1174,v1178,v1182,v1186,v1190,v1194,v1198,v1202,{ start: 1403, end: 1503, count: 0 }]);
+
+FuzzIL program written to corpus/code-coverage-block.fzil

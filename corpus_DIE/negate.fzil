@@ -1,0 +1,148 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '30'
+v2 <- BinaryOperation v0, '<<', v1
+v3 <- LoadInteger '1'
+v4 <- BinaryOperation v2, '-', v3
+v5 <- CreateNamedVariable 'SMI_MAX', 'const', v4
+v6 <- LoadInteger '1'
+v7 <- LoadInteger '30'
+v8 <- BinaryOperation v6, '<<', v7
+v9 <- UnaryOperation '-', v8
+v10 <- CreateNamedVariable 'SMI_MIN', 'const', v9
+v11 <- BeginPlainFunction -> v12, v13
+    v14 <- BinaryOperation v12, '*', v13
+    v15 <- CreateNamedVariable 'base', 'var', v14
+    v16 <- UnaryOperation '-', v15
+    v17 <- UnaryOperation '-', v13
+    v18 <- BinaryOperation v12, '*', v17
+    v19 <- LoadString 'a * -b where a = '
+    v20 <- BinaryOperation v19, '+', v12
+    v21 <- LoadString ', b = '
+    v22 <- BinaryOperation v20, '+', v21
+    v23 <- BinaryOperation v22, '+', v13
+    v24 <- UnaryOperation '-', v15
+    v25 <- UnaryOperation '-', v12
+    v26 <- BinaryOperation v25, '*', v13
+    v27 <- LoadString '-a * b where a = '
+    v28 <- BinaryOperation v27, '+', v12
+    v29 <- LoadString ', b = '
+    v30 <- BinaryOperation v28, '+', v29
+    v31 <- BinaryOperation v30, '+', v13
+    v32 <- UnaryOperation '-', v12
+    v33 <- UnaryOperation '-', v13
+    v34 <- BinaryOperation v32, '*', v33
+    v35 <- LoadString '*-a * -b where a = '
+    v36 <- BinaryOperation v35, '+', v12
+    v37 <- LoadString ', b = '
+    v38 <- BinaryOperation v36, '+', v37
+    v39 <- BinaryOperation v38, '+', v13
+EndPlainFunction
+v40 <- LoadInteger '2'
+v41 <- LoadInteger '3'
+v42 <- CallFunction v11, [v40, v41]
+v43 <- LoadInteger '3'
+v44 <- CallFunction v11, [v5, v43]
+v45 <- LoadInteger '3'
+v46 <- CallFunction v11, [v10, v45]
+v47 <- LoadFloat '3.2'
+v48 <- LoadFloat '2.3'
+v49 <- CallFunction v11, [v47, v48]
+v50 <- BeginPlainFunction -> 
+    v51 <- LoadInteger '2'
+    Return v51
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v50
+v52 <- EndObjectLiteral
+v53 <- CreateNamedVariable 'x', 'var', v52
+v54 <- BeginPlainFunction -> 
+    v55 <- LoadInteger '3'
+    Return v55
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v54
+v56 <- EndObjectLiteral
+v57 <- CreateNamedVariable 'y', 'var', v56
+v58 <- CallFunction v11, [v53, v57]
+v59 <- LoadUndefined
+v60 <- CreateNamedVariable 'z', 'var', v59
+v61 <- BeginPlainFunction -> 
+    v62 <- LoadInteger '2'
+    Update v60, '+', v62
+    Return v60
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v61
+v63 <- EndObjectLiteral
+v64 <- CreateNamedVariable 'v', 'var', v63
+v65 <- BeginPlainFunction -> 
+    v66 <- LoadInteger '3'
+    Update v60, '+', v66
+    Return v60
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v65
+v67 <- EndObjectLiteral
+v68 <- CreateNamedVariable 'w', 'var', v67
+v69 <- LoadInteger '0'
+Reassign v60, v69
+v70 <- BinaryOperation v64, '*', v68
+v71 <- CreateNamedVariable 'base', 'var', v70
+v72 <- LoadInteger '0'
+Reassign v60, v72
+v73 <- UnaryOperation '-', v71
+v74 <- UnaryOperation '-', v64
+v75 <- BinaryOperation v74, '*', v68
+v76 <- LoadInteger '0'
+Reassign v60, v76
+v77 <- UnaryOperation '-', v64
+v78 <- UnaryOperation '-', v68
+v79 <- BinaryOperation v77, '*', v78
+
+
+const SMI_MAX = (1 << 30) - 1;
+const SMI_MIN = -(1 << 30);
+function testmulneg(a12, a13) {
+    var base = a12 * a13;
+    -base;
+    a12 * -a13;
+    (("a * -b where a = " + a12) + ", b = ") + a13;
+    -base;
+    -a12 * a13;
+    (("-a * b where a = " + a12) + ", b = ") + a13;
+    -a12 * -a13;
+    (("*-a * -b where a = " + a12) + ", b = ") + a13;
+}
+testmulneg(2, 3);
+testmulneg(SMI_MAX, 3);
+testmulneg(SMI_MIN, 3);
+testmulneg(3.2, 2.3);
+function f50() {
+    return 2;
+}
+var x = { valueOf: f50 };
+function f54() {
+    return 3;
+}
+var y = { valueOf: f54 };
+testmulneg(x, y);
+var z;
+function f61() {
+    z += 2;
+    return z;
+}
+var v = { valueOf: f61 };
+function f65() {
+    z += 3;
+    return z;
+}
+var w = { valueOf: f65 };
+z = 0;
+var base = v * w;
+z = 0;
+-base;
+-v * w;
+z = 0;
+-v * -w;
+
+FuzzIL program written to corpus/negate.fzil

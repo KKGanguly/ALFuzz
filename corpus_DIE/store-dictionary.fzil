@@ -1,0 +1,140 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '42'
+    SetProperty v1, 'x', v2
+EndPlainFunction
+v3 <- LoadInteger '32'
+v4 <- LoadInteger '33'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v3
+    ObjectLiteralAddProperty `y`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'o', 'var', v5
+v7 <- DeleteProperty v6, 'y'
+BeginForLoopInitializer
+    v8 <- LoadInteger '0'
+BeginForLoopCondition -> v9
+    v10 <- LoadInteger '3'
+    v11 <- Compare v9, '<', v10
+BeginForLoopAfterthought v11 -> v12
+    v13 <- UnaryOperation v12, '++'
+BeginForLoopBody -> v14
+    v15 <- CallFunction v0, [v6]
+EndForLoop
+v16 <- LoadInteger '42'
+v17 <- GetProperty v6, 'x'
+v18 <- LoadString 'x'
+v19 <- LoadInteger '32'
+v20 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v19
+    ObjectLiteralAddProperty `writable`, v20
+v21 <- EndObjectLiteral
+v22 <- CreateNamedVariable 'Object', 'none'
+v23 <- CallMethod v22, 'defineProperty', [v6, v18, v21]
+v24 <- CallFunction v0, [v6]
+v25 <- LoadInteger '32'
+v26 <- GetProperty v6, 'x'
+v27 <- LoadInteger '1'
+v28 <- CallFunction v0, [v27]
+v29 <- Construct v22, []
+Reassign v6, v29
+v30 <- CallFunction v0, [v6]
+v31 <- LoadInteger '42'
+v32 <- GetProperty v6, 'x'
+v33 <- DeleteProperty v6, 'x'
+v34 <- CallFunction v0, [v6]
+v35 <- LoadInteger '42'
+v36 <- GetProperty v6, 'x'
+v37 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v38 <- EndObjectLiteral
+    v39 <- CreateNamedVariable 'o', 'var', v38
+    BeginForLoopInitializer
+        v40 <- LoadInteger '0'
+    BeginForLoopCondition -> v41
+        v42 <- LoadInteger '100'
+        v43 <- Compare v41, '<', v42
+    BeginForLoopAfterthought v43 -> v44
+        v45 <- UnaryOperation v44, '++'
+    BeginForLoopBody -> v46
+        v47 <- LoadString 'key'
+        v48 <- BinaryOperation v47, '+', v46
+        v49 <- CreateNamedVariable 'k', 'var', v48
+        v50 <- LoadString 'foo'
+        SetComputedProperty v39, v49, v50
+        v51 <- DeleteComputedProperty v39, v49
+    EndForLoop
+EndPlainFunction
+v52 <- CallFunction v37, []
+v53 <- BeginPlainFunction -> 
+    v54 <- BeginPlainFunction -> v55, v56, v57
+        SetComputedProperty v55, v56, v57
+    EndPlainFunction
+    v58 <- LoadString 'make it generic'
+    v59 <- LoadInteger '0'
+    v60 <- LoadInteger '0'
+    v61 <- CallFunction v54, [v58, v59, v60]
+    BeginObjectLiteral
+    v62 <- EndObjectLiteral
+    v63 <- CreateNamedVariable 'o', 'var', v62
+    BeginForLoopInitializer
+        v64 <- LoadInteger '0'
+    BeginForLoopCondition -> v65
+        v66 <- LoadInteger '100'
+        v67 <- Compare v65, '<', v66
+    BeginForLoopAfterthought v67 -> v68
+        v69 <- UnaryOperation v68, '++'
+    BeginForLoopBody -> v70
+        v71 <- LoadString ''
+        v72 <- CreateNamedVariable 'k', 'var', v71
+        v73 <- LoadString 'foo'
+        v74 <- CallFunction v54, [v63, v72, v73]
+        v75 <- DeleteComputedProperty v63, v72
+    EndForLoop
+EndPlainFunction
+v76 <- CallFunction v53, []
+
+
+function store(a1) {
+    a1.x = 42;
+}
+var o = { x: 32, y: 33 };
+delete o.y;
+for (let i9 = 0; i9 < 3; i9++) {
+    store(o);
+}
+o.x;
+Object.defineProperty(o, "x", { value: 32, writable: false });
+store(o);
+o.x;
+store(1);
+const v29 = new Object();
+store(o = v29);
+o.x;
+delete o.x;
+store(o);
+o.x;
+function f37() {
+    var o = {};
+    for (let i41 = 0; i41 < 100; i41++) {
+        var k = "key" + i41;
+        o[k] = "foo";
+        delete o[k];
+    }
+}
+f37();
+function f53() {
+    function f(a55, a56, a57) {
+        a55[a56] = a57;
+    }
+    f("make it generic", 0, 0);
+    var o = {};
+    for (let i65 = 0; i65 < 100; i65++) {
+        var k = "";
+        f(o, k, "foo");
+        delete o[k];
+    }
+}
+f53();
+
+FuzzIL program written to corpus/store-dictionary.fzil

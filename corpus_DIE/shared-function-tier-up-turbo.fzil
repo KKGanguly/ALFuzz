@@ -1,0 +1,80 @@
+v0 <- CreateNamedVariable 'isNeverOptimizeLiteMode', 'none'
+v1 <- CallFunction v0, []
+BeginIf v1
+    v2 <- LoadString 'Warning: skipping test that requires optimization in Lite mode.'
+    v3 <- CreateNamedVariable 'print', 'none'
+    v4 <- CallFunction v3, [v2]
+    v5 <- LoadInteger '0'
+    v6 <- CreateNamedVariable 'quit', 'none'
+    v7 <- CallFunction v6, [v5]
+EndIf
+v8 <- CreateNamedVariable 'isAlwaysOptimize', 'none'
+v9 <- CallFunction v8, []
+v10 <- CreateNamedVariable 'isNeverOptimize', 'none'
+v11 <- CallFunction v10, []
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '0'
+    v14 <- CreateNamedVariable 'sum', 'var', v13
+    v15 <- LoadInteger '0'
+    v16 <- CreateNamedVariable 'i', 'var', v15
+    BeginForLoopInitializer
+        v17 <- LoadInteger '0'
+    BeginForLoopCondition -> v18
+        v19 <- LoadInteger '3'
+        v20 <- Compare v18, '<', v19
+    BeginForLoopAfterthought v20 -> v21
+        v22 <- UnaryOperation '++', v21
+    BeginForLoopBody -> v23
+        v24 <- BeginPlainFunction -> v25
+            v26 <- LoadInteger '2'
+            v27 <- BinaryOperation v26, '*', v25
+            Return v27
+        EndPlainFunction
+        v28 <- CreateNamedVariable 'f', 'var', v24
+        v29 <- CallFunction v28, [v23]
+        Update v14, '+', v29
+        v30 <- LoadInteger '1'
+        v31 <- Compare v23, '==', v30
+        BeginIf v31
+            v32 <- CreateNamedVariable 'isInterpreted', 'none'
+            v33 <- CallFunction v32, [v28]
+        BeginElse
+            v34 <- LoadInteger '2'
+            v35 <- Compare v23, '==', v34
+            BeginIf v35
+                v36 <- CreateNamedVariable 'isTurboFanned', 'none'
+                v37 <- CallFunction v36, [v28]
+            EndIf
+        EndIf
+    EndForLoop
+EndPlainFunction
+v38 <- CallFunction v12, []
+
+
+if (isNeverOptimizeLiteMode()) {
+    print("Warning: skipping test that requires optimization in Lite mode.");
+    quit(0);
+}
+isAlwaysOptimize();
+isNeverOptimize();
+function f12() {
+    var sum = 0;
+    var i = 0;
+    for (let i18 = 0; i18 < 3; ++i18) {
+        function f24(a25) {
+            return 2 * a25;
+        }
+        var f = f24;
+        sum += f(i18);
+        if (i18 == 1) {
+            isInterpreted(f);
+        } else {
+            if (i18 == 2) {
+                isTurboFanned(f);
+            }
+        }
+    }
+}
+f12();
+
+FuzzIL program written to corpus/shared-function-tier-up-turbo.fzil

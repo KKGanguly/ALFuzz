@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadUndefined
+    v3 <- CreateNamedVariable 'v', 'var', v2
+    BeginIf v1
+        v4 <- LoadInteger '0'
+        Reassign v3, v4
+    EndIf
+    v5 <- LoadInteger '1'
+    v6 <- Compare v3, '<=', v5
+    Return v6
+EndPlainFunction
+v7 <- LoadBoolean 'false'
+v8 <- CallFunction v0, [v7]
+
+
+function f(a1) {
+    var v;
+    if (a1) {
+        v = 0;
+    }
+    return v <= 1;
+}
+f(false);
+
+FuzzIL program written to corpus/regress-459955.fzil

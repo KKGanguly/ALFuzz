@@ -1,0 +1,39 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '10000'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    BeginTry
+        BeginObjectLiteral
+        v7 <- EndObjectLiteral
+        v8 <- CreateNamedVariable 'object', 'var', v7
+        v9 <- BeginPlainFunction -> v10
+            v11 <- LoadString 'foo'
+            v12 <- CreateNamedVariable 'encodeURI', 'none'
+            v13 <- TestInstanceOf v8, v12
+            v14 <- CallFunction v13, [v11]
+            v15 <- CreateNamedVariable 'f0', 'var', v14
+        EndPlainFunction
+        v16 <- LoadInteger '75'
+        v17 <- CallFunction v9, [v16]
+    BeginCatch -> v18
+    EndTryCatch
+EndForLoop
+
+
+for (let i1 = 0; i1 < 10000; i1++) {
+    try {
+        var object = {};
+        function g(a10) {
+            const t4 = object instanceof encodeURI;
+            var f0 = t4("foo");
+        }
+        g(75);
+    } catch(e18) {
+    }
+}
+
+FuzzIL program written to corpus/regress-78270.fzil

@@ -1,0 +1,18 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CreateNamedVariable 'Function', 'none'
+v2 <- GetProperty v1, 'prototype'
+v3 <- CallMethod v2, 'isPrototypeOf', [v0]
+v4 <- LoadString 'hello'
+SetProperty v0, 'bar', v4
+v5 <- LoadString 'bar'
+v6 <- CallMethod v0, 'propertyIsEnumerable', [v5]
+
+
+function foo() {
+}
+Function.prototype.isPrototypeOf(foo);
+foo.bar = "hello";
+foo.propertyIsEnumerable("bar");
+
+FuzzIL program written to corpus/regress-874178.fzil

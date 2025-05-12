@@ -1,0 +1,171 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '4'
+    v3 <- BinaryOperation v1, '/', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '8'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadInteger '8'
+v7 <- CallFunction v0, [v6]
+v8 <- LoadInteger '2'
+v9 <- LoadInteger '8'
+v10 <- CallFunction v0, [v9]
+v11 <- LoadFloat '0.5'
+v12 <- LoadInteger '2'
+v13 <- CallFunction v0, [v12]
+v14 <- BeginPlainFunction -> v15
+    v16 <- LoadInteger '4'
+    v17 <- UnaryOperation '-', v16
+    v18 <- BinaryOperation v15, '/', v17
+    Return v18
+EndPlainFunction
+v19 <- LoadInteger '8'
+v20 <- CallFunction v14, [v19]
+v21 <- LoadInteger '8'
+v22 <- CallFunction v14, [v21]
+v23 <- LoadInteger '2'
+v24 <- UnaryOperation '-', v23
+v25 <- LoadInteger '8'
+v26 <- CallFunction v14, [v25]
+v27 <- LoadInteger '0'
+v28 <- UnaryOperation '-', v27
+v29 <- LoadInteger '0'
+v30 <- CallFunction v14, [v29]
+v31 <- BeginPlainFunction -> v32
+    v33 <- LoadInteger '1'
+    v34 <- UnaryOperation '-', v33
+    v35 <- BinaryOperation v32, '/', v34
+    Return v35
+EndPlainFunction
+v36 <- LoadInteger '1'
+v37 <- LoadInteger '31'
+v38 <- BinaryOperation v36, '<<', v37
+v39 <- CreateNamedVariable 'two_31', 'var', v38
+v40 <- LoadInteger '2'
+v41 <- CallFunction v31, [v40]
+v42 <- LoadInteger '2'
+v43 <- CallFunction v31, [v42]
+v44 <- LoadInteger '2'
+v45 <- UnaryOperation '-', v44
+v46 <- LoadInteger '2'
+v47 <- CallFunction v31, [v46]
+v48 <- UnaryOperation '-', v39
+v49 <- CallFunction v31, [v39]
+v50 <- BeginPlainFunction -> v51
+    v52 <- LoadInteger '4'
+    v53 <- BinaryOperation v51, '/', v52
+    v54 <- LoadInteger '0'
+    v55 <- BinaryOperation v53, '|', v54
+    Return v55
+EndPlainFunction
+v56 <- LoadInteger '8'
+v57 <- CallFunction v50, [v56]
+v58 <- LoadInteger '8'
+v59 <- CallFunction v50, [v58]
+v60 <- LoadInteger '1'
+v61 <- UnaryOperation '-', v60
+v62 <- LoadInteger '5'
+v63 <- UnaryOperation '-', v62
+v64 <- CallFunction v50, [v63]
+v65 <- LoadInteger '1'
+v66 <- LoadInteger '5'
+v67 <- CallFunction v50, [v66]
+v68 <- CallFunction v50, []
+v69 <- BeginPlainFunction -> v70
+    v71 <- LoadInteger '4'
+    v72 <- UnaryOperation '-', v71
+    v73 <- BinaryOperation v70, '/', v72
+    v74 <- LoadInteger '0'
+    v75 <- BinaryOperation v73, '|', v74
+    Return v75
+EndPlainFunction
+v76 <- LoadInteger '8'
+v77 <- CallFunction v69, [v76]
+v78 <- LoadInteger '8'
+v79 <- CallFunction v69, [v78]
+v80 <- LoadInteger '1'
+v81 <- LoadInteger '5'
+v82 <- UnaryOperation '-', v81
+v83 <- CallFunction v69, [v82]
+v84 <- LoadInteger '1'
+v85 <- UnaryOperation '-', v84
+v86 <- LoadInteger '5'
+v87 <- CallFunction v69, [v86]
+v88 <- CallFunction v69, []
+v89 <- BeginPlainFunction -> v90
+    v91 <- LoadInteger '2'
+    v92 <- BinaryOperation v90, '/', v91
+    v93 <- LoadInteger '0'
+    v94 <- BinaryOperation v92, '|', v93
+    Return v94
+EndPlainFunction
+v95 <- LoadInteger '12'
+v96 <- CallFunction v89, [v95]
+v97 <- LoadInteger '34'
+v98 <- CallFunction v89, [v97]
+v99 <- LoadInteger '56'
+v100 <- CallFunction v89, [v99]
+v101 <- LoadInteger '1'
+v102 <- LoadInteger '30'
+v103 <- BinaryOperation v101, '<<', v102
+v104 <- UnaryOperation '-', v103
+v105 <- LoadInteger '1'
+v106 <- LoadInteger '31'
+v107 <- BinaryOperation v105, '<<', v106
+v108 <- CallFunction v89, [v107]
+
+
+function divp4(a1) {
+    return a1 / 4;
+}
+divp4(8);
+divp4(8);
+divp4(8);
+divp4(2);
+function divn4(a15) {
+    return a15 / -4;
+}
+divn4(8);
+divn4(8);
+-2;
+divn4(8);
+-0;
+divn4(0);
+function divn1(a32) {
+    return a32 / -1;
+}
+var two_31 = 1 << 31;
+divn1(2);
+divn1(2);
+-2;
+divn1(2);
+-two_31;
+divn1(two_31);
+function divp4t(a51) {
+    return (a51 / 4) | 0;
+}
+divp4t(8);
+divp4t(8);
+-1;
+divp4t(-5);
+divp4t(5);
+divp4t();
+function divn4t(a70) {
+    return (a70 / -4) | 0;
+}
+divn4t(8);
+divn4t(8);
+divn4t(-5);
+-1;
+divn4t(5);
+divn4t();
+function div_by_two(a90) {
+    return (a90 / 2) | 0;
+}
+div_by_two(12);
+div_by_two(34);
+div_by_two(56);
+-(1 << 30);
+div_by_two(1 << 31);
+
+FuzzIL program written to corpus/shift-for-integer-div.fzil

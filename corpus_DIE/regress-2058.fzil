@@ -1,0 +1,21 @@
+v0 <- LoadRegExp 'Now (\w+) the' 'g'
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadRegExp '( )' ''
+    v3 <- LoadString 'foo bar'
+    v4 <- CallMethod v3, 'match', [v2]
+    v5 <- CreateNamedVariable 'RegExp', 'none'
+    v6 <- GetProperty v5, '$1'
+    v7 <- LoadString ' '
+EndPlainFunction
+v8 <- LoadString 'Now is the'
+v9 <- CallMethod v8, 'replace', [v0, v1]
+
+
+const v0 = /Now (\w+) the/g;
+function f1() {
+    ("foo bar").match(/( )/);
+    RegExp.$1;
+}
+("Now is the").replace(v0, f1);
+
+FuzzIL program written to corpus/regress-2058.fzil

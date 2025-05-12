@@ -1,0 +1,64 @@
+v0 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'o', 'var', v1
+v3 <- LoadBoolean 'true'
+v4 <- CreateNamedVariable 'shouldDeopt', 'var', v3
+v5 <- BeginPlainFunction -> 
+    BeginIf v4
+        v6 <- LoadInteger '2'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `f`, v6
+        v7 <- EndObjectLiteral
+        Reassign v2, v7
+        v8 <- CreateNamedVariable 'gc', 'none'
+        v9 <- CallFunction v8, []
+    EndIf
+EndPlainFunction
+v10 <- BeginPlainFunction -> 
+    v11 <- CallFunction v5, []
+EndPlainFunction
+v12 <- BeginPlainFunction -> 
+    v13 <- CallFunction v10, []
+EndPlainFunction
+v14 <- BeginPlainFunction -> 
+    v15 <- CallFunction v12, []
+    v16 <- GetProperty v2, 'f'
+    Return v16
+EndPlainFunction
+v17 <- LoadBoolean 'false'
+Reassign v4, v17
+v18 <- CallFunction v14, []
+v19 <- CallFunction v14, []
+v20 <- LoadBoolean 'true'
+Reassign v4, v20
+v21 <- LoadInteger '2'
+v22 <- CallFunction v14, []
+
+
+var o = { f: 0 };
+var shouldDeopt = true;
+function deopt() {
+    if (shouldDeopt) {
+        o = { f: 2 };
+        gc();
+    }
+}
+function dummy_opt() {
+    deopt();
+}
+function dummy() {
+    dummy_opt();
+}
+function f() {
+    dummy();
+    return o.f;
+}
+shouldDeopt = false;
+f();
+f();
+shouldDeopt = true;
+f();
+
+FuzzIL program written to corpus/deoptimize-lazy-weak.fzil

@@ -1,0 +1,278 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadUndefined
+    v4 <- CreateNamedVariable 'result', 'var', v3
+    v5 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v5
+    v6 <- EndObjectLiteral
+    v7 <- CreateNamedVariable 'counter', 'var', v6
+    v8 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `deopt`, v8
+    v9 <- EndObjectLiteral
+    v10 <- CreateNamedVariable 'noDeopt', 'var', v9
+    BeginObjectLiteral
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'forceDeopt', 'var', v11
+    v13 <- LoadInteger '11'
+    v14 <- CallFunction v2, [v1, v13, v10, v7]
+    Reassign v4, v14
+    v15 <- LoadInteger '11'
+    v16 <- LoadInteger '1'
+    v17 <- GetProperty v7, 'value'
+    v18 <- LoadInteger '23'
+    v19 <- CallFunction v2, [v1, v18, v10, v7]
+    Reassign v4, v19
+    v20 <- LoadInteger '23'
+    v21 <- LoadInteger '2'
+    v22 <- GetProperty v7, 'value'
+    v23 <- LoadInteger '42'
+    v24 <- CallFunction v2, [v1, v23, v10, v7]
+    Reassign v4, v24
+    v25 <- LoadInteger '42'
+    v26 <- LoadInteger '3'
+    v27 <- GetProperty v7, 'value'
+    v28 <- LoadInteger '127'
+    v29 <- CallFunction v2, [v1, v28, v12, v7]
+    Reassign v4, v29
+    v30 <- LoadInteger '127'
+    v31 <- LoadInteger '4'
+    v32 <- GetProperty v7, 'value'
+EndPlainFunction
+v33 <- BeginPlainFunction -> v34, v35, v36, v37
+    v38 <- Construct v34, [v35, v36, v37]
+    v39 <- CreateNamedVariable 'obj', 'var', v38
+    v40 <- GetProperty v39, 'x'
+    Return v40
+EndPlainFunction
+v41 <- BeginPlainFunction -> v42, v43, v44, v45
+    v46 <- Construct v42, [v43, v44, v45]
+    v47 <- UnaryOperation '!', v46
+    BeginIf v47
+        v48 <- LoadString 'should not happen'
+    EndIf
+    Return v43
+EndPlainFunction
+v49 <- BeginPlainFunction -> v50, v51, v52, v53
+    v54 <- Construct v50, [v51, v52, v53]
+    Return v51
+EndPlainFunction
+v55 <- BeginPlainFunction -> v56
+    v57 <- CallFunction v0, [v56, v33]
+    v58 <- CallFunction v0, [v56, v41]
+    v59 <- CallFunction v0, [v56, v49]
+EndPlainFunction
+v60 <- BeginPlainFunction -> v61, v62, v63
+    v64 <- GetProperty v62, 'deopt'
+    v65 <- LoadThis
+    SetProperty v65, 'x', v61
+    v66 <- GetProperty v63, 'value'
+    v67 <- UnaryOperation v66, '++'
+EndPlainFunction
+v68 <- CallFunction v55, [v60]
+v69 <- BeginPlainFunction -> v70, v71, v72
+    BeginObjectLiteral
+    v73 <- EndObjectLiteral
+    v74 <- CreateNamedVariable 'obj', 'var', v73
+    v75 <- GetProperty v71, 'deopt'
+    SetProperty v74, 'x', v70
+    v76 <- GetProperty v72, 'value'
+    v77 <- UnaryOperation v76, '++'
+    Return v74
+EndPlainFunction
+v78 <- CallFunction v55, [v69]
+v79 <- BeginPlainFunction -> v80, v81, v82
+    v83 <- GetProperty v81, 'deopt'
+    v84 <- LoadThis
+    SetProperty v84, 'x', v80
+    v85 <- GetProperty v82, 'value'
+    v86 <- UnaryOperation v85, '++'
+    v87 <- LoadString 'not an object'
+    Return v87
+EndPlainFunction
+v88 <- CallFunction v55, [v79]
+v89 <- BeginPlainFunction -> v90, v91
+    v92 <- BinaryOperation v90, '+', v91
+    v93 <- LoadThis
+    SetProperty v93, 'x', v92
+EndPlainFunction
+v94 <- BeginPlainFunction -> v95, v96, v97
+    v98 <- Construct v89, [v95, v96, v97]
+    v99 <- CreateNamedVariable 'obj', 'var', v98
+    v100 <- GetProperty v99, 'x'
+    Return v100
+EndPlainFunction
+v101 <- LoadInteger '23'
+v102 <- LoadInteger '11'
+v103 <- LoadInteger '12'
+v104 <- LoadInteger '1'
+v105 <- CallFunction v94, [v102, v103, v104]
+v106 <- LoadInteger '42'
+v107 <- LoadInteger '23'
+v108 <- LoadInteger '19'
+v109 <- LoadInteger '1'
+v110 <- CallFunction v94, [v107, v108, v109]
+v111 <- LoadInteger '43'
+v112 <- LoadInteger '1'
+v113 <- LoadInteger '42'
+v114 <- LoadInteger '1'
+v115 <- CallFunction v94, [v112, v113, v114]
+v116 <- LoadString 'foobar'
+v117 <- LoadString 'foo'
+v118 <- LoadString 'bar'
+v119 <- LoadString 'baz'
+v120 <- CallFunction v94, [v117, v118, v119]
+v121 <- BeginPlainFunction -> v122, v123
+    v124 <- LoadUndefined
+    v125 <- LoadInteger '1'
+    v126 <- BinaryOperation v122, '+', v125
+    v127 <- LoadThis
+    SetProperty v127, 'x', v126
+EndPlainFunction
+v128 <- BeginPlainFunction -> v129
+    v130 <- Construct v121, [v129]
+    v131 <- CreateNamedVariable 'obj', 'var', v130
+    v132 <- GetProperty v131, 'x'
+    Return v132
+EndPlainFunction
+v133 <- LoadInteger '12'
+v134 <- LoadInteger '11'
+v135 <- CallFunction v128, [v134]
+v136 <- LoadInteger '24'
+v137 <- LoadInteger '23'
+v138 <- CallFunction v128, [v137]
+v139 <- LoadInteger '2'
+v140 <- LoadInteger '1'
+v141 <- CallFunction v128, [v140]
+v142 <- LoadString 'foo1'
+v143 <- LoadString 'foo'
+v144 <- CallFunction v128, [v143]
+v145 <- BeginPlainFunction -> v146, v147, v148
+    BeginTry
+        v149 <- GetProperty v147, 'deopt'
+        v150 <- LoadThis
+        SetProperty v150, 'x', v146
+        v151 <- GetProperty v148, 'value'
+        v152 <- UnaryOperation v151, '++'
+    BeginCatch -> v153
+        v154 <- CreateNamedVariable 'Error', 'none'
+        v155 <- Construct v154, []
+        ThrowException v155
+    EndTryCatch
+EndPlainFunction
+v156 <- CallFunction v55, [v145]
+v157 <- BeginPlainFunction -> v158, v159, v160
+    Directive 'use strict'
+    v161 <- GetProperty v159, 'deopt'
+    v162 <- LoadThis
+    SetProperty v162, 'x', v158
+    v163 <- GetProperty v160, 'value'
+    v164 <- UnaryOperation v163, '++'
+EndPlainFunction
+v165 <- CallFunction v55, [v157]
+
+
+function TestInlinedConstructor(a1, a2) {
+    var result;
+    var counter = { value: 0 };
+    var noDeopt = { deopt: 0 };
+    var forceDeopt = {};
+    result = a2(a1, 11, noDeopt, counter);
+    counter.value;
+    result = a2(a1, 23, noDeopt, counter);
+    counter.value;
+    result = a2(a1, 42, noDeopt, counter);
+    counter.value;
+    result = a2(a1, 127, forceDeopt, counter);
+    counter.value;
+}
+function value_context(a34, a35, a36, a37) {
+    const v38 = new a34(a35, a36, a37);
+    var obj = v38;
+    return obj.x;
+}
+function test_context(a42, a43, a44, a45) {
+    const v46 = new a42(a43, a44, a45);
+    if (!v46) {
+    }
+    return a43;
+}
+function effect_context(a50, a51, a52, a53) {
+    new a50(a51, a52, a53);
+    return a51;
+}
+function TestInAllContexts(a56) {
+    TestInlinedConstructor(a56, value_context);
+    TestInlinedConstructor(a56, test_context);
+    TestInlinedConstructor(a56, effect_context);
+}
+function c1(a61, a62, a63) {
+    a62.deopt;
+    this.x = a61;
+    let v66 = a63.value;
+    v66++;
+}
+TestInAllContexts(c1);
+function c2(a70, a71, a72) {
+    var obj = {};
+    a71.deopt;
+    obj.x = a70;
+    let v76 = a72.value;
+    v76++;
+    return obj;
+}
+TestInAllContexts(c2);
+function c3(a80, a81, a82) {
+    a81.deopt;
+    this.x = a80;
+    let v85 = a82.value;
+    v85++;
+    return "not an object";
+}
+TestInAllContexts(c3);
+function c_too_many(a90, a91) {
+    this.x = a90 + a91;
+}
+function f_too_many(a95, a96, a97) {
+    const v98 = new c_too_many(a95, a96, a97);
+    var obj = v98;
+    return obj.x;
+}
+f_too_many(11, 12, 1);
+f_too_many(23, 19, 1);
+f_too_many(1, 42, 1);
+f_too_many("foo", "bar", "baz");
+function c_too_few(a122, a123) {
+    this.x = a122 + 1;
+}
+function f_too_few(a129) {
+    const v130 = new c_too_few(a129);
+    var obj = v130;
+    return obj.x;
+}
+f_too_few(11);
+f_too_few(23);
+f_too_few(1);
+f_too_few("foo");
+function c_unsupported_syntax(a146, a147, a148) {
+    try {
+        a147.deopt;
+        this.x = a146;
+        let v151 = a148.value;
+        v151++;
+    } catch(e153) {
+        const v155 = new Error();
+        throw v155;
+    }
+}
+TestInAllContexts(c_unsupported_syntax);
+function c_strict(a158, a159, a160) {
+    'use strict';
+    a159.deopt;
+    this.x = a158;
+    let v163 = a160.value;
+    v163++;
+}
+TestInAllContexts(c_strict);
+
+FuzzIL program written to corpus/inline-construct.fzil

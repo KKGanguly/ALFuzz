@@ -1,0 +1,18 @@
+v0 <- CreateNamedVariable 'Int8Array', 'none'
+v1 <- LoadInteger '10'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'array', 'var', v2
+v4 <- LoadFloat '1.499'
+v5 <- LoadRegExp '\u007d\u00fc\u0043' ''
+SetComputedProperty v3, v5, v4
+v6 <- LoadFloat '1.499'
+v7 <- LoadRegExp '\u007d\u00fc\u0043' ''
+v8 <- GetComputedProperty v3, v7
+
+
+const v2 = new Int8Array(10);
+var array = v2;
+array[/\u007d\u00fc\u0043/] = 1.499;
+array[/\u007d\u00fc\u0043/];
+
+FuzzIL program written to corpus/regress-425551.fzil

@@ -1,0 +1,23 @@
+v0 <- LoadRegExp 'x' ''
+v1 <- CreateNamedVariable 'a', 'const', v0
+v2 <- CreateNamedVariable 'RegExp', 'none'
+v3 <- GetProperty v2, 'prototype'
+v4 <- GetProperty v3, 'test'
+SetProperty v1, 'exec', v4
+v5 <- BeginArrowFunction -> 
+    v6 <- GetProperty v2, 'prototype'
+    v7 <- GetProperty v6, 'test'
+    v8 <- CallMethod v7, 'call', [v1]
+    Return v8
+EndArrowFunction
+v9 <- CallFunction v5, []
+
+
+const a = /x/;
+a.exec = RegExp.prototype.test;
+const v5 = () => {
+    return RegExp.prototype.test.call(a);
+};
+v5();
+
+FuzzIL program written to corpus/regress-crbug-892472-1.fzil

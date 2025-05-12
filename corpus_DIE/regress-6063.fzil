@@ -1,0 +1,28 @@
+v0 <- CreateNamedVariable 'Uint16Array', 'none'
+v1 <- LoadInteger '2'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'U16', 'var', v2
+v4 <- LoadInteger '65535'
+SetElement v3, '0', v4
+v5 <- BeginPlainFunction -> v6, v7
+    v8 <- GetElement v3, '0'
+    v9 <- LoadInteger '65535'
+    v10 <- Compare v8, '===', v9
+    Return v10
+EndPlainFunction
+v11 <- CallFunction v5, []
+v12 <- CallFunction v5, []
+v13 <- CallFunction v5, []
+
+
+const v2 = new Uint16Array(2);
+var U16 = v2;
+U16[0] = 65535;
+function foo(a6, a7) {
+    return U16[0] === 65535;
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-6063.fzil

@@ -1,0 +1,52 @@
+v0 <- BeginGeneratorFunction -> 
+    v1 <- LoadUndefined
+    v2 <- Yield v1
+EndGeneratorFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- CreateArray []
+    v6 <- CreateNamedVariable 'objects', 'const', v5
+    v7 <- CallFunction v0, []
+    BeginForOfLoop v7 -> v8
+    EndForOfLoop
+    v9 <- GetElement v6, '0'
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> 
+    BeginTry
+        v11 <- CallFunction v3, []
+        v12 <- LoadUndefined
+        SetElement v12, '0', v11
+    BeginCatch -> v13
+    EndTryCatch
+    v14 <- CallFunction v3, []
+    v15 <- CallFunction v3, []
+    v16 <- CallFunction v3, []
+    v17 <- CreateNamedVariable 'Math', 'none'
+    v18 <- CallMethod v17, 'min', [v14, v15, v16]
+EndPlainFunction
+v19 <- CallFunction v10, []
+v20 <- CallFunction v10, []
+v21 <- CallFunction v10, []
+
+
+function* generator() {
+    yield undefined;
+}
+function bar(a4) {
+    const objects = [];
+    for (const v8 of generator()) {
+    }
+    return objects[0];
+}
+function foo() {
+    try {
+        undefined[0] = bar();
+    } catch(e13) {
+    }
+    Math.min(bar(), bar(), bar());
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-820820.fzil

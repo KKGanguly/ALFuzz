@@ -1,0 +1,20 @@
+v0 <- CreateNamedVariable 'Infinity', 'none'
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '2147483648'
+v3 <- CreateNamedVariable 'Math', 'none'
+v4 <- CallMethod v3, 'pow', [v1, v2]
+v5 <- LoadInteger '2'
+v6 <- LoadInteger '3221225472'
+v7 <- CallMethod v3, 'pow', [v5, v6]
+v8 <- LoadInteger '0'
+v9 <- LoadInteger '2'
+v10 <- LoadInteger '2147483648'
+v11 <- UnaryOperation '-', v10
+v12 <- CallMethod v3, 'pow', [v9, v11]
+
+
+Math.pow(2, 2147483648);
+Math.pow(2, 3221225472);
+Math.pow(2, -2147483648);
+
+FuzzIL program written to corpus/regress-5214.fzil

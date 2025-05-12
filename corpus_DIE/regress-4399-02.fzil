@@ -1,0 +1,21 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Worker'
+BeginIf v1
+    v2 <- BeginPlainFunction -> 
+        v3 <- LoadString '55'
+        v4 <- CreateNamedVariable 'Worker', 'none'
+        v5 <- GetProperty v4, 'prototype'
+        v6 <- CallMethod v5, 'constructor', [v3]
+    EndPlainFunction
+    v7 <- CallFunction v2, []
+EndIf
+
+
+if (this.Worker) {
+    function f2() {
+        Worker.prototype.constructor("55");
+    }
+    f2();
+}
+
+FuzzIL program written to corpus/regress-4399-02.fzil

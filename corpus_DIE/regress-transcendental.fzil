@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- CreateNamedVariable 'gc', 'none'
+    v5 <- CallFunction v4, []
+    v6 <- CallFunction v1, [v2]
+    v7 <- CreateNamedVariable 'runtime_result', 'var', v6
+    BeginForLoopInitializer
+        v8 <- LoadInteger '0'
+    BeginForLoopCondition -> v9
+        v10 <- LoadInteger '100000'
+        v11 <- Compare v9, '<', v10
+    BeginForLoopAfterthought v11 -> v12
+        v13 <- UnaryOperation v12, '++'
+    BeginForLoopBody -> v14
+        v15 <- CallFunction v1, [v14]
+    EndForLoop
+    v16 <- CallFunction v1, [v2]
+    v17 <- CreateNamedVariable 'gencode_result', 'var', v16
+    v18 <- LoadString ' runtime function: '
+    v19 <- BinaryOperation v3, '+', v18
+    v20 <- BinaryOperation v19, '+', v7
+    v21 <- CreateNamedVariable 'print', 'none'
+    v22 <- CallFunction v21, [v20]
+    v23 <- LoadString ' generated code  : '
+    v24 <- BinaryOperation v3, '+', v23
+    v25 <- BinaryOperation v24, '+', v17
+    v26 <- CallFunction v21, [v25]
+EndPlainFunction
+v27 <- CreateNamedVariable 'Math', 'none'
+v28 <- GetProperty v27, 'tan'
+v29 <- LoadFloat '1.5707963267948966'
+v30 <- UnaryOperation '-', v29
+v31 <- LoadString 'Math.tan'
+v32 <- CallFunction v0, [v28, v30, v31]
+v33 <- GetProperty v27, 'sin'
+v34 <- LoadFloat '6.283185307179586'
+v35 <- LoadString 'Math.sin'
+v36 <- CallFunction v0, [v33, v34, v35]
+
+
+function test(a1, a2, a3) {
+    gc();
+    var runtime_result = a1(a2);
+    for (let i9 = 0; i9 < 100000; i9++) {
+        a1(i9);
+    }
+    var gencode_result = a1(a2);
+    print((a3 + " runtime function: ") + runtime_result);
+    print((a3 + " generated code  : ") + gencode_result);
+}
+test(Math.tan, -1.5707963267948966, "Math.tan");
+test(Math.sin, 6.283185307179586, "Math.sin");
+
+FuzzIL program written to corpus/regress-transcendental.fzil

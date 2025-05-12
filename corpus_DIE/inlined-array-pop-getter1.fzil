@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallMethod v1, 'pop', []
+    Return v2
+EndPlainFunction
+v3 <- CreateNamedVariable 'Array', 'none'
+v4 <- LoadInteger '4'
+v5 <- Construct v3, [v4]
+v6 <- CreateNamedVariable 'a', 'var', v5
+v7 <- LoadUndefined
+v8 <- CallFunction v0, [v6]
+v9 <- LoadUndefined
+v10 <- CallFunction v0, [v6]
+v11 <- LoadUndefined
+v12 <- CallFunction v0, [v6]
+v13 <- LoadInteger '0'
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadInteger '1'
+    Return v15
+EndPlainFunction
+v16 <- CreateNamedVariable 'Object', 'none'
+v17 <- GetProperty v16, 'prototype'
+v18 <- CallMethod v17, '__defineGetter__', [v13, v14]
+v19 <- LoadInteger '1'
+v20 <- CallFunction v0, [v6]
+
+
+function foo(a1) {
+    return a1.pop();
+}
+const v5 = new Array(4);
+var a = v5;
+foo(a);
+foo(a);
+foo(a);
+function f14() {
+    return 1;
+}
+Object.prototype.__defineGetter__(0, f14);
+foo(a);
+
+FuzzIL program written to corpus/inlined-array-pop-getter1.fzil

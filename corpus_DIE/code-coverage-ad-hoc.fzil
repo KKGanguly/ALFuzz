@@ -1,0 +1,106 @@
+v0 <- LoadString 'call simple function twice'
+v1 <- CreateTemplateString ['\nfunction f() {}\nf();\nf();\n'], []
+v2 <- LoadInteger '0'
+v3 <- LoadInteger '25'
+v4 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v2
+    ObjectLiteralAddProperty `end`, v3
+    ObjectLiteralAddProperty `count`, v4
+v5 <- EndObjectLiteral
+v6 <- LoadInteger '0'
+v7 <- LoadInteger '15'
+v8 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v6
+    ObjectLiteralAddProperty `end`, v7
+    ObjectLiteralAddProperty `count`, v8
+v9 <- EndObjectLiteral
+v10 <- CreateArray [v5, v9]
+v11 <- CreateNamedVariable 'TestCoverageNoGC', 'none'
+v12 <- CallFunction v11, [v0, v1, v10]
+v13 <- LoadString 'call arrow function twice'
+v14 <- CreateTemplateString ['\nvar f = () => 1;\nf();\nf();\n'], []
+v15 <- LoadInteger '0'
+v16 <- LoadInteger '26'
+v17 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v15
+    ObjectLiteralAddProperty `end`, v16
+    ObjectLiteralAddProperty `count`, v17
+v18 <- EndObjectLiteral
+v19 <- LoadInteger '8'
+v20 <- LoadInteger '15'
+v21 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v19
+    ObjectLiteralAddProperty `end`, v20
+    ObjectLiteralAddProperty `count`, v21
+v22 <- EndObjectLiteral
+v23 <- CreateArray [v18, v22]
+v24 <- CallFunction v11, [v13, v14, v23]
+v25 <- LoadString 'call nested function'
+v26 <- CreateTemplateString ['\nfunction f() {\n  function g() {}\n  g();\n  g();\n}\nf();\nf();\n'], []
+v27 <- LoadInteger '0'
+v28 <- LoadInteger '58'
+v29 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v27
+    ObjectLiteralAddProperty `end`, v28
+    ObjectLiteralAddProperty `count`, v29
+v30 <- EndObjectLiteral
+v31 <- LoadInteger '0'
+v32 <- LoadInteger '48'
+v33 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v31
+    ObjectLiteralAddProperty `end`, v32
+    ObjectLiteralAddProperty `count`, v33
+v34 <- EndObjectLiteral
+v35 <- LoadInteger '17'
+v36 <- LoadInteger '32'
+v37 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v35
+    ObjectLiteralAddProperty `end`, v36
+    ObjectLiteralAddProperty `count`, v37
+v38 <- EndObjectLiteral
+v39 <- CreateArray [v30, v34, v38]
+v40 <- CallFunction v11, [v25, v26, v39]
+v41 <- LoadString 'call recursive function'
+v42 <- CreateTemplateString ['\nfunction fib(x) {\n  if (x < 2) return 1;\n  return fib(x-1) + fib(x-2);\n}\nfib(5);\n'], []
+v43 <- LoadInteger '0'
+v44 <- LoadInteger '80'
+v45 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v43
+    ObjectLiteralAddProperty `end`, v44
+    ObjectLiteralAddProperty `count`, v45
+v46 <- EndObjectLiteral
+v47 <- LoadInteger '0'
+v48 <- LoadInteger '72'
+v49 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `start`, v47
+    ObjectLiteralAddProperty `end`, v48
+    ObjectLiteralAddProperty `count`, v49
+v50 <- EndObjectLiteral
+v51 <- CreateArray [v46, v50]
+v52 <- CallFunction v11, [v41, v42, v51]
+
+
+const v1 = `\nfunction f() {}\nf();\nf();\n`;
+const v5 = { start: 0, end: 25, count: 1 };
+TestCoverageNoGC("call simple function twice", v1, [v5,{ start: 0, end: 15, count: 1 }]);
+const v14 = `\nvar f = () => 1;\nf();\nf();\n`;
+const v18 = { start: 0, end: 26, count: 1 };
+TestCoverageNoGC("call arrow function twice", v14, [v18,{ start: 8, end: 15, count: 1 }]);
+const v26 = `\nfunction f() {\n  function g() {}\n  g();\n  g();\n}\nf();\nf();\n`;
+const v30 = { start: 0, end: 58, count: 1 };
+const v34 = { start: 0, end: 48, count: 1 };
+TestCoverageNoGC("call nested function", v26, [v30,v34,{ start: 17, end: 32, count: 1 }]);
+const v42 = `\nfunction fib(x) {\n  if (x < 2) return 1;\n  return fib(x-1) + fib(x-2);\n}\nfib(5);\n`;
+const v46 = { start: 0, end: 80, count: 1 };
+TestCoverageNoGC("call recursive function", v42, [v46,{ start: 0, end: 72, count: 1 }]);
+
+FuzzIL program written to corpus/code-coverage-ad-hoc.fzil

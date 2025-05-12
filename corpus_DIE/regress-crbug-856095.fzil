@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadUndefined
+    v6 <- CreateNamedVariable 'o1', 'let', v5
+    v7 <- CreateNamedVariable 'Array', 'none'
+    v8 <- Construct v7, []
+    Reassign v6, v8
+    v9 <- CallFunctionWithSpread v0, [...v6]
+    v10 <- CreateNamedVariable 'Infinity', 'none'
+    SetElement v6, '1000', v10
+EndPlainFunction
+v11 <- CallFunction v4, []
+v12 <- CallFunction v4, []
+
+
+function f(a1, a2, a3) {
+}
+function a() {
+    let o1;
+    const v8 = new Array();
+    f(...o1 = v8);
+    o1[1000] = Infinity;
+}
+a();
+a();
+
+FuzzIL program written to corpus/regress-crbug-856095.fzil

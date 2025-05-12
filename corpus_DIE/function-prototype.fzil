@@ -1,0 +1,202 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginPlainFunction -> 
+    EndPlainFunction
+    SetProperty v2, 'prototype', v1
+    v3 <- Construct v2, []
+    v4 <- CreateNamedVariable 'f', 'var', v3
+    v5 <- GetProperty v2, 'prototype'
+    v6 <- CreateNamedVariable 'Object', 'none'
+    v7 <- GetProperty v6, 'prototype'
+    v8 <- GetProperty v4, '__proto__'
+    v9 <- LoadString 'value'
+    SetProperty v2, 'property', v9
+    v10 <- GetProperty v2, 'prototype'
+EndPlainFunction
+v11 <- LoadInteger '123'
+v12 <- LoadString 'asdf'
+v13 <- LoadBoolean 'true'
+v14 <- CreateArray [v11, v12, v13]
+v15 <- CreateNamedVariable 'values', 'var', v14
+v16 <- CallMethod v15, 'forEach', [v0]
+v17 <- BeginPlainFunction -> 
+EndPlainFunction
+v18 <- Construct v17, []
+v19 <- CreateNamedVariable 'f', 'var', v18
+v20 <- GetProperty v19, '__proto__'
+v21 <- GetProperty v17, 'prototype'
+v22 <- LoadInteger '42'
+SetProperty v17, 'prototype', v22
+v23 <- Construct v17, []
+Reassign v19, v23
+v24 <- CreateNamedVariable 'Object', 'none'
+v25 <- GetProperty v24, 'prototype'
+v26 <- GetProperty v19, '__proto__'
+v27 <- LoadInteger '42'
+v28 <- GetProperty v17, 'prototype'
+v29 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v29
+v30 <- EndObjectLiteral
+SetProperty v17, 'prototype', v30
+v31 <- Construct v17, []
+Reassign v19, v31
+v32 <- LoadInteger '42'
+v33 <- GetProperty v17, 'prototype'
+v34 <- GetProperty v33, 'a'
+v35 <- GetProperty v19, '__proto__'
+v36 <- GetProperty v17, 'prototype'
+v37 <- BeginPlainFunction -> v38
+    v39 <- GetProperty v38, 'prototype'
+    Return v39
+EndPlainFunction
+v40 <- CallFunction v37, [v37]
+v41 <- CreateNamedVariable 'p', 'var', v40
+v42 <- LoadInteger '1'
+v43 <- CallFunction v37, [v42]
+v44 <- TypeOf v43
+v45 <- LoadString 'undefined'
+v46 <- Compare v44, '==', v45
+v47 <- BeginPlainFunction -> 
+EndPlainFunction
+v48 <- CallFunction v37, [v47]
+v49 <- CreateNamedVariable 'p', 'var', v48
+v50 <- GetProperty v47, 'prototype'
+v51 <- BeginPlainFunction -> 
+EndPlainFunction
+v52 <- LoadInteger '42'
+SetProperty v51, 'prototype', v52
+v53 <- LoadInteger '42'
+v54 <- CallFunction v37, [v51]
+v55 <- BeginPlainFunction -> 
+EndPlainFunction
+v56 <- GetProperty v55, 'prototype'
+v57 <- CreateNamedVariable 'p', 'var', v56
+v58 <- CallFunction v37, [v55]
+v59 <- GetProperty v17, 'prototype'
+v60 <- CallFunction v37, [v17]
+v61 <- LoadInteger '87'
+v62 <- LoadInteger '87'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `prototype`, v62
+v63 <- EndObjectLiteral
+v64 <- CallFunction v37, [v63]
+v65 <- CreateNamedVariable 'Function', 'none'
+v66 <- LoadString 'return x'
+v67 <- Construct v65, [v66]
+v68 <- CreateNamedVariable 'foo', 'var', v67
+v69 <- LoadString ''
+v70 <- CreateNamedVariable 'result', 'var', v69
+BeginForInLoop v68 -> v71
+    Update v70, '+', v71
+EndForInLoop
+v72 <- LoadString ''
+v73 <- LoadString 'return 1;'
+v74 <- Construct v65, [v73]
+Reassign v19, v74
+v75 <- LoadString 'prototype'
+v76 <- CallMethod v24, 'getOwnPropertyDescriptor', [v19, v75]
+v77 <- CreateNamedVariable 'desc', 'var', v76
+v78 <- GetProperty v77, 'configurable'
+v79 <- GetProperty v77, 'enumerable'
+v80 <- GetProperty v77, 'writable'
+v81 <- LoadString 'return 1;'
+v82 <- CallFunction v65, [v81]
+Reassign v19, v82
+v83 <- LoadString 'prototype'
+v84 <- CallMethod v24, 'getOwnPropertyDescriptor', [v19, v83]
+v85 <- CreateNamedVariable 'desc', 'var', v84
+v86 <- GetProperty v85, 'configurable'
+v87 <- GetProperty v85, 'enumerable'
+v88 <- GetProperty v85, 'writable'
+v89 <- BeginPlainFunction -> 
+    v90 <- LoadInteger '1'
+    Return v90
+EndPlainFunction
+Reassign v19, v89
+v91 <- LoadString 'prototype'
+v92 <- CallMethod v24, 'getOwnPropertyDescriptor', [v19, v91]
+v93 <- CreateNamedVariable 'desc', 'var', v92
+v94 <- GetProperty v93, 'configurable'
+v95 <- GetProperty v93, 'enumerable'
+v96 <- GetProperty v93, 'writable'
+
+
+function TestNonObjectPrototype(a1) {
+    function F() {
+    }
+    F.prototype = a1;
+    const v3 = new F();
+    var f = v3;
+    F.prototype;
+    Object.prototype;
+    f.__proto__;
+    F.property = "value";
+    F.prototype;
+}
+var values = [123,"asdf",true];
+values.forEach(TestNonObjectPrototype);
+function F() {
+}
+const v18 = new F();
+var f = v18;
+f.__proto__;
+F.prototype;
+F.prototype = 42;
+const v23 = new F();
+f = v23;
+Object.prototype;
+f.__proto__;
+F.prototype;
+F.prototype = { a: 42 };
+const v31 = new F();
+f = v31;
+F.prototype.a;
+f.__proto__;
+F.prototype;
+function GetPrototypeOf(a38) {
+    return a38.prototype;
+}
+var p = GetPrototypeOf(GetPrototypeOf);
+typeof GetPrototypeOf(1) == "undefined";
+function NoPrototypeYet() {
+}
+var p = GetPrototypeOf(NoPrototypeYet);
+NoPrototypeYet.prototype;
+function NonObjectPrototype() {
+}
+NonObjectPrototype.prototype = 42;
+GetPrototypeOf(NonObjectPrototype);
+function NoInitialMap() {
+}
+var p = NoInitialMap.prototype;
+GetPrototypeOf(NoInitialMap);
+F.prototype;
+GetPrototypeOf(F);
+GetPrototypeOf({ prototype: 87 });
+const v67 = new Function("return x");
+var foo = v67;
+var result = "";
+for (const v71 in foo) {
+    result += v71;
+}
+const v74 = new Function("return 1;");
+f = v74;
+var desc = Object.getOwnPropertyDescriptor(f, "prototype");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+f = Function("return 1;");
+var desc = Object.getOwnPropertyDescriptor(f, "prototype");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+function f89() {
+    return 1;
+}
+f = f89;
+var desc = Object.getOwnPropertyDescriptor(f, "prototype");
+desc.configurable;
+desc.enumerable;
+desc.writable;
+
+FuzzIL program written to corpus/function-prototype.fzil

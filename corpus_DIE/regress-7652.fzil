@@ -1,0 +1,139 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- GetProperty v1, 'splice'
+v3 <- CreateNamedVariable 'splice', 'const', v2
+v4 <- GetProperty v0, 'prototype'
+v5 <- GetProperty v4, 'unshift'
+v6 <- CreateNamedVariable 'unshift', 'const', v5
+BeginBlockStatement
+    v7 <- LoadInteger '2'
+    v8 <- LoadInteger '53'
+    v9 <- BinaryOperation v7, '**', v8
+    v10 <- LoadInteger '1'
+    v11 <- BinaryOperation v9, '-', v10
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v11
+    v12 <- EndObjectLiteral
+    v13 <- CreateNamedVariable 'a', 'let', v12
+    v14 <- BeginArrowFunction -> 
+        v15 <- LoadInteger '42'
+        v16 <- CallMethod v6, 'call', [v13, v15]
+        Return v16
+    EndArrowFunction
+    v17 <- CallFunction v14, []
+    v18 <- CreateNamedVariable 'TypeError', 'none'
+    v19 <- CallMethod v6, 'call', [v13]
+    v20 <- LoadInteger '2'
+    v21 <- LoadInteger '53'
+    v22 <- BinaryOperation v20, '**', v21
+    v23 <- LoadInteger '1'
+    v24 <- BinaryOperation v22, '-', v23
+EndBlockStatement
+BeginBlockStatement
+    v25 <- LoadInteger '2'
+    v26 <- LoadInteger '53'
+    v27 <- BinaryOperation v25, '**', v26
+    v28 <- LoadInteger '1'
+    v29 <- BinaryOperation v27, '-', v28
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v29
+    v30 <- EndObjectLiteral
+    v31 <- CreateNamedVariable 'a', 'let', v30
+    v32 <- BeginArrowFunction -> 
+        v33 <- LoadInteger '0'
+        v34 <- LoadInteger '0'
+        v35 <- LoadInteger '42'
+        v36 <- CallMethod v3, 'call', [v31, v33, v34, v35]
+        Return v36
+    EndArrowFunction
+    v37 <- CallFunction v32, []
+    v38 <- CreateNamedVariable 'TypeError', 'none'
+    v39 <- LoadInteger '0'
+    v40 <- LoadInteger '1'
+    v41 <- LoadInteger '42'
+    v42 <- CallMethod v3, 'call', [v31, v39, v40, v41]
+    v43 <- GetProperty v42, 'length'
+    v44 <- LoadInteger '1'
+    v45 <- GetElement v31, '0'
+    v46 <- LoadInteger '42'
+EndBlockStatement
+BeginBlockStatement
+    v47 <- LoadInteger '2'
+    v48 <- LoadInteger '53'
+    v49 <- BinaryOperation v47, '**', v48
+    v50 <- LoadInteger '1'
+    v51 <- BinaryOperation v49, '-', v50
+    v52 <- LoadBoolean 'true'
+    v53 <- CreateNamedVariable 'Symbol', 'none'
+    v54 <- GetProperty v53, 'isConcatSpreadable'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v51
+        ObjectLiteralAddComputedProperty v54, v52
+    v55 <- EndObjectLiteral
+    v56 <- CreateNamedVariable 'a', 'let', v55
+    v57 <- BeginArrowFunction -> 
+        v58 <- LoadInteger '42'
+        v59 <- CreateArray [v58]
+        v60 <- CallMethod v59, 'concat', [v56]
+        Return v60
+    EndArrowFunction
+    v61 <- CallFunction v57, []
+    v62 <- CreateNamedVariable 'TypeError', 'none'
+    v63 <- BeginArrowFunction -> 
+        v64 <- LoadUndefined
+        v65 <- CreateArray [v64]
+        v66 <- CallMethod v65, 'concat', [v56]
+        Return v66
+    EndArrowFunction
+    v67 <- CallFunction v63, []
+    v68 <- BeginArrowFunction -> 
+        v69 <- LoadInteger '42'
+        v70 <- CreateArray []
+        v71 <- CallMethod v70, 'concat', [v69, v56]
+        Return v71
+    EndArrowFunction
+    v72 <- CallFunction v68, []
+EndBlockStatement
+
+
+const splice = Array.prototype.splice;
+const unshift = Array.prototype.unshift;
+{
+    const v11 = (2 ** 53) - 1;
+    let a = { length: v11 };
+    const v14 = () => {
+        return unshift.call(a, 42);
+    };
+    v14();
+    unshift.call(a);
+    (2 ** 53) - 1;
+}
+{
+    const v29 = (2 ** 53) - 1;
+    let a = { length: v29 };
+    const v32 = () => {
+        return splice.call(a, 0, 0, 42);
+    };
+    v32();
+    splice.call(a, 0, 1, 42).length;
+    a[0];
+}
+{
+    const v51 = (2 ** 53) - 1;
+    const v54 = Symbol.isConcatSpreadable;
+    let a = { length: v51, [v54]: true };
+    const v57 = () => {
+        return ([42]).concat(a);
+    };
+    v57();
+    const v63 = () => {
+        return ([,]).concat(a);
+    };
+    v63();
+    const v68 = () => {
+        return ([]).concat(42, a);
+    };
+    v68();
+}
+
+FuzzIL program written to corpus/regress-7652.fzil

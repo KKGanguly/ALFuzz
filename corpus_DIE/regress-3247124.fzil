@@ -1,0 +1,111 @@
+v0 <- LoadString '%E0%E2%EA%F4%FB%E3%F5%E1%E9%ED%F3%FA%E7%FC%C0%C2%CA%D4%DB%C3%D5%C1%C9%CD%D3%DA%C7%DC'
+v1 <- CreateNamedVariable 'unescape', 'none'
+v2 <- CallFunction v1, [v0]
+v3 <- CreateNamedVariable 'foo', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- CreateNamedVariable 'String', 'none'
+    v7 <- Construct v6, [v5]
+    v8 <- CreateNamedVariable 's', 'var', v7
+    v9 <- Construct v6, [v3]
+    v10 <- CreateNamedVariable 'a', 'var', v9
+    v11 <- LoadString 'aaeouaoaeioucuAAEOUAOAEIOUCU'
+    v12 <- Construct v6, [v11]
+    v13 <- CreateNamedVariable 'b', 'var', v12
+    v14 <- CreateNamedVariable 'Number', 'none'
+    v15 <- Construct v14, []
+    v16 <- CreateNamedVariable 'i', 'var', v15
+    v17 <- Construct v14, []
+    v18 <- CreateNamedVariable 'j', 'var', v17
+    v19 <- Construct v6, []
+    v20 <- CreateNamedVariable 'c', 'var', v19
+    v21 <- LoadString ''
+    v22 <- CreateNamedVariable 'r', 'var', v21
+    BeginForLoopInitializer
+        v23 <- LoadInteger '0'
+        Reassign v16, v23
+    BeginForLoopCondition
+        v24 <- GetProperty v8, 'length'
+        v25 <- Compare v16, '<', v24
+    BeginForLoopAfterthought v25
+        v26 <- UnaryOperation v16, '++'
+    BeginForLoopBody
+        v27 <- LoadInteger '1'
+        v28 <- BinaryOperation v16, '+', v27
+        v29 <- CallMethod v8, 'substring', [v16, v28]
+        Reassign v20, v29
+        BeginForLoopInitializer
+            v30 <- LoadInteger '0'
+            Reassign v18, v30
+        BeginForLoopCondition
+            v31 <- GetProperty v10, 'length'
+            v32 <- Compare v18, '<', v31
+        BeginForLoopAfterthought v32
+            v33 <- UnaryOperation v18, '++'
+        BeginForLoopBody
+            v34 <- LoadInteger '1'
+            v35 <- BinaryOperation v18, '+', v34
+            v36 <- CallMethod v10, 'substring', [v18, v35]
+            v37 <- Compare v36, '==', v20
+            BeginIf v37
+                v38 <- LoadInteger '1'
+                v39 <- BinaryOperation v18, '+', v38
+                v40 <- CallMethod v13, 'substring', [v18, v39]
+                Reassign v20, v40
+            EndIf
+        EndForLoop
+        Update v22, '+', v20
+    EndForLoop
+    v41 <- CallMethod v22, 'toLowerCase', []
+    Return v41
+EndPlainFunction
+BeginForLoopInitializer
+    v42 <- LoadInteger '0'
+BeginForLoopCondition -> v43
+    v44 <- LoadInteger '100'
+    v45 <- Compare v43, '<', v44
+BeginForLoopAfterthought v45 -> v46
+    v47 <- UnaryOperation v46, '++'
+BeginForLoopBody -> v48
+    v49 <- CallFunction v4, [v3]
+EndForLoop
+
+
+var foo = unescape("%E0%E2%EA%F4%FB%E3%F5%E1%E9%ED%F3%FA%E7%FC%C0%C2%CA%D4%DB%C3%D5%C1%C9%CD%D3%DA%C7%DC");
+function bar(a5) {
+    const v7 = new String(a5);
+    var s = v7;
+    const v9 = new String(foo);
+    var a = v9;
+    const v12 = new String("aaeouaoaeioucuAAEOUAOAEIOUCU");
+    var b = v12;
+    const v15 = new Number();
+    var i = v15;
+    const v17 = new Number();
+    var j = v17;
+    const v19 = new String();
+    var c = v19;
+    var r = "";
+    for ((() => {
+            i = 0;
+        })();
+        i < s.length;
+        i++) {
+        c = s.substring(i, i + 1);
+        for ((() => {
+                j = 0;
+            })();
+            j < a.length;
+            j++) {
+            if (a.substring(j, j + 1) == c) {
+                c = b.substring(j, j + 1);
+            }
+        }
+        r += c;
+    }
+    return r.toLowerCase();
+}
+for (let i43 = 0; i43 < 100; i43++) {
+    bar(foo);
+}
+
+FuzzIL program written to corpus/regress-3247124.fzil

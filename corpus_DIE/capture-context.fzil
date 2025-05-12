@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '42'
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    v3 <- BeginPlainFunction -> v4
+        v5 <- BinaryOperation v2, '+', v4
+        Return v5
+    EndPlainFunction
+    v6 <- BeginPlainFunction -> v7
+        v8 <- CallFunction v3, [v7]
+        Return v8
+    EndPlainFunction
+    Return v6
+EndPlainFunction
+v9 <- CallFunction v0, []
+v10 <- CreateNamedVariable 'foo', 'var', v9
+v11 <- BeginPlainFunction -> v12
+    v13 <- CallFunction v10, [v12]
+    Return v13
+EndPlainFunction
+v14 <- CreateNamedVariable 'baz', 'var', v11
+v15 <- LoadInteger '42'
+v16 <- LoadInteger '12'
+v17 <- BinaryOperation v15, '+', v16
+v18 <- LoadInteger '12'
+v19 <- CallFunction v14, [v18]
+
+
+function f0() {
+    var x = 42;
+    function bar(a4) {
+        return x + a4;
+    }
+    function f6(a7) {
+        return bar(a7);
+    }
+    return f6;
+}
+var foo = f0();
+function f11(a12) {
+    return foo(a12);
+}
+var baz = f11;
+42 + 12;
+baz(12);
+
+FuzzIL program written to corpus/capture-context.fzil

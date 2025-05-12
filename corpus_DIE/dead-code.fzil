@@ -1,0 +1,187 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '+', v2
+    v4 <- CreateNamedVariable 'x', 'var', v3
+    Return v1
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6, v7
+    v8 <- LoadInteger '0'
+    v9 <- BinaryOperation v6, '|', v8
+    v10 <- CreateNamedVariable 'x', 'var', v9
+    v11 <- LoadInteger '0'
+    v12 <- BinaryOperation v7, '|', v11
+    v13 <- CreateNamedVariable 'y', 'var', v12
+    Return v6
+EndPlainFunction
+v14 <- BeginPlainFunction -> v15, v16
+    v17 <- LoadUndefined
+    v18 <- CreateNamedVariable 'z', 'var', v17
+    v19 <- LoadInteger '2'
+    v20 <- Compare v15, '==', v19
+    BeginIf v20
+        Reassign v18, v15
+    BeginElse
+        Reassign v18, v16
+    EndIf
+    Return v15
+EndPlainFunction
+v21 <- BeginPlainFunction -> v22
+    v23 <- LoadInteger '3'
+    v24 <- CreateNamedVariable 'z', 'var', v23
+    BeginForLoopInitializer
+        v25 <- LoadInteger '0'
+        v26 <- CreateNamedVariable 'i', 'none'
+        Reassign v26, v25
+    BeginForLoopCondition
+        v27 <- CreateNamedVariable 'i', 'none'
+        v28 <- LoadInteger '3'
+        v29 <- Compare v27, '<', v28
+    BeginForLoopAfterthought v29
+        v30 <- CreateNamedVariable 'i', 'none'
+        v31 <- UnaryOperation v30, '++'
+    BeginForLoopBody
+        v32 <- UnaryOperation v24, '++'
+    EndForLoop
+    Return v22
+EndPlainFunction
+v33 <- BeginPlainFunction -> v34
+    v35 <- LoadInteger '3'
+    v36 <- CreateNamedVariable 'z', 'var', v35
+    BeginForLoopInitializer
+        v37 <- LoadInteger '0'
+        v38 <- CreateNamedVariable 'i', 'none'
+        Reassign v38, v37
+    BeginForLoopCondition
+        v39 <- CreateNamedVariable 'i', 'none'
+        v40 <- LoadInteger '3'
+        v41 <- Compare v39, '<', v40
+    BeginForLoopAfterthought v41
+        v42 <- CreateNamedVariable 'i', 'none'
+        v43 <- UnaryOperation v42, '++'
+    BeginForLoopBody
+        v44 <- UnaryOperation v36, '++'
+    EndForLoop
+    v45 <- BinaryOperation v36, '+', v34
+    v46 <- CreateNamedVariable 'w', 'var', v45
+    Return v34
+EndPlainFunction
+v47 <- LoadInteger '33'
+v48 <- LoadInteger '32'
+v49 <- CallFunction v0, [v47, v48]
+v50 <- LoadInteger '33'
+v51 <- Compare v49, '==', v50
+v52 <- LoadInteger '33'
+v53 <- LoadInteger '32'
+v54 <- CallFunction v5, [v52, v53]
+v55 <- LoadInteger '33'
+v56 <- Compare v54, '==', v55
+v57 <- LoadInteger '33'
+v58 <- LoadInteger '32'
+v59 <- CallFunction v14, [v57, v58]
+v60 <- LoadInteger '33'
+v61 <- Compare v59, '==', v60
+v62 <- LoadInteger '33'
+v63 <- CallFunction v21, [v62]
+v64 <- LoadInteger '33'
+v65 <- Compare v63, '==', v64
+v66 <- LoadInteger '33'
+v67 <- CallFunction v33, [v66]
+v68 <- LoadInteger '33'
+v69 <- Compare v67, '==', v68
+v70 <- LoadInteger '34'
+v71 <- LoadInteger '7'
+v72 <- CallFunction v0, [v70, v71]
+v73 <- LoadInteger '34'
+v74 <- Compare v72, '==', v73
+v75 <- LoadInteger '34'
+v76 <- LoadInteger '7'
+v77 <- CallFunction v5, [v75, v76]
+v78 <- LoadInteger '34'
+v79 <- Compare v77, '==', v78
+v80 <- LoadInteger '34'
+v81 <- LoadInteger '7'
+v82 <- CallFunction v14, [v80, v81]
+v83 <- LoadInteger '34'
+v84 <- Compare v82, '==', v83
+v85 <- LoadInteger '34'
+v86 <- CallFunction v21, [v85]
+v87 <- LoadInteger '34'
+v88 <- Compare v86, '==', v87
+v89 <- LoadInteger '34'
+v90 <- CallFunction v33, [v89]
+v91 <- LoadInteger '34'
+v92 <- Compare v90, '==', v91
+v93 <- LoadFloat '3.4'
+v94 <- LoadFloat '0.1'
+v95 <- CallFunction v0, [v93, v94]
+v96 <- LoadFloat '3.4'
+v97 <- Compare v95, '==', v96
+v98 <- LoadFloat '3.4'
+v99 <- LoadFloat '0.1'
+v100 <- CallFunction v5, [v98, v99]
+v101 <- LoadFloat '3.4'
+v102 <- Compare v100, '==', v101
+v103 <- LoadFloat '3.4'
+v104 <- LoadFloat '0.1'
+v105 <- CallFunction v14, [v103, v104]
+v106 <- LoadFloat '3.4'
+v107 <- Compare v105, '==', v106
+v108 <- LoadFloat '3.4'
+v109 <- CallFunction v21, [v108]
+v110 <- LoadFloat '3.4'
+v111 <- Compare v109, '==', v110
+v112 <- LoadFloat '3.4'
+v113 <- CallFunction v33, [v112]
+v114 <- LoadFloat '3.4'
+v115 <- Compare v113, '==', v114
+
+
+function dead1(a1, a2) {
+    var x = a1 + a2;
+    return a1;
+}
+function dead2(a6, a7) {
+    var x = a6 | 0;
+    var y = a7 | 0;
+    return a6;
+}
+function dead3(a15, a16) {
+    var z;
+    if (a15 == 2) {
+        z = a15;
+    } else {
+        z = a16;
+    }
+    return a15;
+}
+function dead4(a22) {
+    var z = 3;
+    for (i = 0; i < 3; i++) {
+        z++;
+    }
+    return a22;
+}
+function dead5(a34) {
+    var z = 3;
+    for (i = 0; i < 3; i++) {
+        z++;
+    }
+    var w = z + a34;
+    return a34;
+}
+dead1(33, 32) == 33;
+dead2(33, 32) == 33;
+dead3(33, 32) == 33;
+dead4(33) == 33;
+dead5(33) == 33;
+dead1(34, 7) == 34;
+dead2(34, 7) == 34;
+dead3(34, 7) == 34;
+dead4(34) == 34;
+dead5(34) == 34;
+dead1(3.4, 0.1) == 3.4;
+dead2(3.4, 0.1) == 3.4;
+dead3(3.4, 0.1) == 3.4;
+dead4(3.4) == 3.4;
+dead5(3.4) == 3.4;
+
+FuzzIL program written to corpus/dead-code.fzil

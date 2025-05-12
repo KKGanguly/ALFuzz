@@ -1,0 +1,112 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadThis
+    SetProperty v3, 'a', v1
+    v4 <- LoadThis
+    SetProperty v4, 'b', v2
+    v5 <- LoadString 'b'
+    v6 <- CreateNamedVariable 'bname', 'var', v5
+    v7 <- LoadThis
+    v8 <- LoadString 'a'
+    v9 <- GetComputedProperty v7, v8
+    v10 <- LoadThis
+    v11 <- GetComputedProperty v10, v6
+    v12 <- BinaryOperation v9, '+', v11
+    v13 <- LoadThis
+    SetProperty v13, 'x', v12
+EndPlainFunction
+v14 <- LoadInteger '3'
+v15 <- LoadInteger '4'
+v16 <- Construct v0, [v14, v15]
+v17 <- CreateNamedVariable 'f1', 'var', v16
+v18 <- LoadInteger '7'
+v19 <- GetProperty v17, 'x'
+BeginForLoopInitializer
+    v20 <- LoadInteger '0'
+BeginForLoopCondition -> v21
+    v22 <- LoadInteger '6'
+    v23 <- Compare v21, '<', v22
+BeginForLoopAfterthought v23 -> v24
+    v25 <- UnaryOperation v24, '++'
+BeginForLoopBody -> v26
+    v27 <- LoadInteger '2'
+    v28 <- BinaryOperation v26, '+', v27
+    v29 <- Construct v0, [v26, v28]
+    v30 <- CreateNamedVariable 'f', 'var', v29
+    v31 <- BinaryOperation v26, '+', v26
+    v32 <- LoadInteger '2'
+    v33 <- BinaryOperation v31, '+', v32
+    v34 <- GetProperty v30, 'x'
+EndForLoop
+BeginForLoopInitializer
+    v35 <- LoadFloat '0.25'
+BeginForLoopCondition -> v36
+    v37 <- LoadFloat '6.25'
+    v38 <- Compare v36, '<', v37
+BeginForLoopAfterthought v38 -> v39
+    v40 <- UnaryOperation v39, '++'
+BeginForLoopBody -> v41
+    v42 <- LoadInteger '2'
+    v43 <- BinaryOperation v41, '+', v42
+    v44 <- Construct v0, [v41, v43]
+    v45 <- CreateNamedVariable 'f', 'var', v44
+    v46 <- BinaryOperation v41, '+', v41
+    v47 <- LoadInteger '2'
+    v48 <- BinaryOperation v46, '+', v47
+    v49 <- GetProperty v45, 'x'
+EndForLoop
+BeginForLoopInitializer
+    v50 <- LoadInteger '0'
+BeginForLoopCondition -> v51
+    v52 <- LoadInteger '6'
+    v53 <- Compare v51, '<', v52
+BeginForLoopAfterthought v53 -> v54
+    v55 <- UnaryOperation v54, '++'
+BeginForLoopBody -> v56
+    v57 <- LoadString ''
+    v58 <- BinaryOperation v56, '+', v57
+    v59 <- LoadInteger '2'
+    v60 <- BinaryOperation v56, '+', v59
+    v61 <- LoadString ''
+    v62 <- BinaryOperation v60, '+', v61
+    v63 <- Construct v0, [v58, v62]
+    v64 <- CreateNamedVariable 'f', 'var', v63
+    v65 <- LoadString ''
+    v66 <- BinaryOperation v56, '+', v65
+    v67 <- LoadInteger '2'
+    v68 <- BinaryOperation v56, '+', v67
+    v69 <- LoadString ''
+    v70 <- BinaryOperation v68, '+', v69
+    v71 <- BinaryOperation v66, '+', v70
+    v72 <- GetProperty v64, 'x'
+EndForLoop
+
+
+function Foo(a1, a2) {
+    this.a = a1;
+    this.b = a2;
+    var bname = "b";
+    this.x = this["a"] + this[bname];
+}
+const v16 = new Foo(3, 4);
+var f1 = v16;
+f1.x;
+for (let i21 = 0; i21 < 6; i21++) {
+    const v29 = new Foo(i21, i21 + 2);
+    var f = v29;
+    (i21 + i21) + 2;
+    f.x;
+}
+for (let i36 = 0.25; i36 < 6.25; i36++) {
+    const v44 = new Foo(i36, i36 + 2);
+    var f = v44;
+    (i36 + i36) + 2;
+    f.x;
+}
+for (let i51 = 0; i51 < 6; i51++) {
+    const v63 = new Foo(i51 + "", (i51 + 2) + "");
+    var f = v63;
+    (i51 + "") + ((i51 + 2) + "");
+    f.x;
+}
+
+FuzzIL program written to corpus/named-load.fzil

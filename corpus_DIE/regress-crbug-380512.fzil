@@ -1,0 +1,18 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '42'
+    v2 <- CreateArray []
+    v3 <- CallMethod v2, 'lastIndexOf', [v1]
+EndPlainFunction
+v4 <- CallFunction v0, []
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+
+
+function f() {
+    ([]).lastIndexOf(42);
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-380512.fzil

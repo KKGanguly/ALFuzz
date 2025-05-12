@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'array', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- CallMethod v3, 'slice', []
+        Return v5
+    EndPlainFunction
+    v6 <- CallFunction v4, []
+    v7 <- LoadUndefined
+    v8 <- CreateArray [v7]
+    v9 <- LoadInteger '5'
+    v10 <- GetProperty v3, '__proto__'
+    v11 <- CallMethod v10, 'push', [v9]
+    v12 <- CallFunction v4, []
+    v13 <- CreateNamedVariable 'narr', 'var', v12
+    v14 <- LoadInteger '0'
+    v15 <- CreateNamedVariable 'Object', 'none'
+    v16 <- CallMethod v15, 'getOwnPropertyDescriptor', [v13, v14]
+    v17 <- LoadUndefined
+    v18 <- GetElement v13, '0'
+    v19 <- LoadInteger '5'
+EndPlainFunction
+v20 <- CallFunction v0, []
+
+
+function f0() {
+    var array = [,];
+    function slice() {
+        return array.slice();
+    }
+    slice();
+    [,];
+    array.__proto__.push(5);
+    var narr = slice();
+    Object.getOwnPropertyDescriptor(narr, 0);
+    narr[0];
+}
+f0();
+
+FuzzIL program written to corpus/array-prototype-slice.fzil

@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'v', 'none'
+    v2 <- GetProperty v1, 'length'
+    v3 <- LoadInteger '1'
+    v4 <- BinaryOperation v2, '+', v3
+    Return v4
+EndPlainFunction
+v5 <- CreateArray []
+v6 <- CreateNamedVariable 'v', 'var', v5
+v7 <- CallFunction v0, []
+v8 <- LoadInteger '4294967295'
+SetProperty v6, 'length', v8
+v9 <- LoadInteger '4294967296'
+v10 <- CallFunction v0, []
+
+
+function foo() {
+    return v.length + 1;
+}
+var v = [];
+foo();
+v.length = 4294967295;
+foo();
+
+FuzzIL program written to corpus/regress-664117.fzil

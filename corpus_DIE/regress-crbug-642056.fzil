@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'x'
+    v3 <- CreateNamedVariable 'Array', 'none'
+    v4 <- TestInstanceOf v2, v3
+    Return v4
+EndPlainFunction
+v5 <- LoadFloat '1.5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v5
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'o', 'var', v6
+v8 <- LoadInteger '0'
+SetProperty v7, 'x', v8
+v9 <- CallFunction v0, [v7]
+v10 <- CallFunction v0, [v7]
+v11 <- CallFunction v0, [v7]
+
+
+function f(a1) {
+    return a1.x instanceof Array;
+}
+var o = { x: 1.5 };
+o.x = 0;
+f(o);
+f(o);
+f(o);
+
+FuzzIL program written to corpus/regress-crbug-642056.fzil

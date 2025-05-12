@@ -1,0 +1,64 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '5'
+    v2 <- CreateNamedVariable 'X', 'var', v1
+    v3 <- LoadInteger '10'
+    v4 <- CreateNamedVariable 'Y', 'var', v3
+    v5 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v6 <- BeginPlainFunction -> 
+        v7 <- Compare v2, '>', v4
+        v8 <- TernaryOperation v7, v2, v4
+        Return v8
+    EndPlainFunction
+    v9 <- GetProperty v5, 'prototype'
+    SetProperty v9, 'max', v6
+    v10 <- BeginPlainFunction -> 
+        v11 <- LoadThis
+        v12 <- CallMethod v11, 'max', []
+        Return v12
+    EndPlainFunction
+    v13 <- GetProperty v5, 'prototype'
+    SetProperty v13, 'run', v10
+    v14 <- Construct v5, []
+    v15 <- CreateNamedVariable 'f', 'var', v14
+    BeginForLoopInitializer
+        v16 <- LoadInteger '0'
+    BeginForLoopCondition -> v17
+        v18 <- LoadInteger '5'
+        v19 <- Compare v17, '<', v18
+    BeginForLoopAfterthought v19 -> v20
+        v21 <- UnaryOperation v20, '++'
+    BeginForLoopBody -> v22
+        v23 <- CallMethod v15, 'run', []
+    EndForLoop
+    v24 <- LoadInteger '10'
+    v25 <- CallMethod v15, 'run', []
+EndPlainFunction
+v26 <- CallFunction v0, []
+
+
+function f0() {
+    var X = 5;
+    var Y = 10;
+    function F() {
+    }
+    function f6() {
+        return X > Y ? X : Y;
+    }
+    const t8 = F.prototype;
+    t8.max = f6;
+    function f10() {
+        return this.max();
+    }
+    const t13 = F.prototype;
+    t13.run = f10;
+    const v14 = new F();
+    var f = v14;
+    for (let i17 = 0; i17 < 5; i17++) {
+        f.run();
+    }
+    f.run();
+}
+f0();
+
+FuzzIL program written to corpus/inline-context-slots.fzil

@@ -1,0 +1,19 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- CallMethod v0, 'freeze', [v1]
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'p', 'var', v3
+v5 <- CallMethod v0, 'create', [v4]
+v6 <- CreateNamedVariable 'o', 'var', v5
+v7 <- GetProperty v6, '__proto__'
+v8 <- CallMethod v0, 'getPrototypeOf', [v6]
+
+
+Object.freeze(Object.prototype);
+var p = {};
+var o = Object.create(p);
+o.__proto__;
+Object.getPrototypeOf(o);
+
+FuzzIL program written to corpus/regress-2565.fzil

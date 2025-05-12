@@ -1,0 +1,49 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'custom_then_called', 'let', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadBoolean 'false'
+    Reassign v1, v4
+    v5 <- BeginArrowFunction -> v6
+        Return v6
+    EndArrowFunction
+    v7 <- CallMethod v3, 'catch', [v5]
+    Return v1
+EndPlainFunction
+v8 <- CreateNamedVariable 'Promise', 'none'
+v9 <- BeginClassDefinition v8
+    BeginClassInstanceMethod 'then' -> v10, v11, v12
+        v13 <- LoadBoolean 'true'
+        Reassign v1, v13
+        v14 <- CallSuperMethod 'then', [v11, v12]
+        Return v14
+    EndClassInstanceMethod
+EndClassDefinition
+v15 <- LoadInteger '1'
+v16 <- CallMethod v9, 'resolve', [v15]
+v17 <- CreateNamedVariable 'a', 'const', v16
+v18 <- CallFunction v2, [v17]
+v19 <- CallFunction v2, [v17]
+v20 <- CallFunction v2, [v17]
+
+
+let custom_then_called = false;
+function foo(a3) {
+    custom_then_called = false;
+    const v5 = (a6) => {
+        return a6;
+    };
+    a3.catch(v5);
+    return custom_then_called;
+}
+class C9 extends Promise {
+    then(a11, a12) {
+        custom_then_called = true;
+        return super.then(a11, a12);
+    }
+}
+const a = C9.resolve(1);
+foo(a);
+foo(a);
+foo(a);
+
+FuzzIL program written to corpus/promise-prototype-catch-subclass.fzil

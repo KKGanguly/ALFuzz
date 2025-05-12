@@ -1,0 +1,56 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        BeginTry
+            BeginWith v2
+                v3 <- CreateNamedVariable 'x', 'none'
+                Return v3
+            EndWith
+        BeginCatch -> v4
+            Return v4
+        EndTryCatch
+    EndPlainFunction
+    v5 <- LoadInteger '23'
+    v6 <- LoadInteger '23'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v6
+    v7 <- EndObjectLiteral
+    v8 <- CallFunction v1, [v7]
+    v9 <- LoadInteger '42'
+    v10 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v10
+    v11 <- EndObjectLiteral
+    v12 <- CallFunction v1, [v11]
+    v13 <- LoadNull
+    v14 <- CallFunction v1, [v13]
+    v15 <- CreateNamedVariable 'TypeError', 'none'
+    v16 <- LoadUndefined
+    v17 <- CallFunction v1, [v16]
+    v18 <- LoadNull
+    v19 <- CallFunction v1, [v18]
+    v20 <- LoadUndefined
+    v21 <- CallFunction v1, [v20]
+EndArrowFunction
+v22 <- CallFunction v0, []
+
+
+const v0 = () => {
+    function f(a2) {
+        try {
+            with (a2) {
+                return x;
+            }
+        } catch(e4) {
+            return e4;
+        }
+    }
+    f({ x: 23 });
+    f({ x: 42 });
+    f(null);
+    f(undefined);
+    f(null);
+    f(undefined);
+};
+v0();
+
+FuzzIL program written to corpus/optimized-with.fzil

@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '4'
+    v2 <- LoadInteger '3'
+    v3 <- BinaryOperation v1, '/', v2
+    v4 <- UnaryOperation '-', v3
+    v5 <- LoadInteger '0'
+    v6 <- UnaryOperation '+', v5
+    v7 <- LoadBoolean 'false'
+    v8 <- CreateArray [v6, v7]
+    v9 <- CallMethod v8, 'indexOf', [v4]
+    Return v9
+EndPlainFunction
+v10 <- CallFunction v0, []
+v11 <- CallFunction v0, []
+v12 <- CallFunction v0, []
+
+
+function foo() {
+    const v4 = -(4 / 3);
+    return ([+0,false]).indexOf(v4);
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-382513.fzil

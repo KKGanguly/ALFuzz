@@ -1,0 +1,29 @@
+v0 <- LoadInteger '0'
+v1 <- BeginPlainFunction -> v2
+    v3 <- LoadInteger '1'
+    v4 <- Compare v2, '==', v3
+    BeginIf v4
+        v5 <- LoadInteger '42'
+        Return v5
+    BeginElse
+        v6 <- LoadInteger '1'
+        v7 <- CreateNamedVariable 'f', 'none'
+        v8 <- CallFunction v7, [v6]
+        Return v8
+    EndIf
+EndPlainFunction
+v9 <- CallFunction v1, [v0]
+v10 <- CreateNamedVariable 'g', 'var', v9
+v11 <- LoadInteger '42'
+
+
+function f(a2) {
+    if (a2 == 1) {
+        return 42;
+    } else {
+        return f(1);
+    }
+}
+var g = f(0);
+
+FuzzIL program written to corpus/thisfunction.fzil

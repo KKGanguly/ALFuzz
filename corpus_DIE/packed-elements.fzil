@@ -1,0 +1,189 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '8'
+    v2 <- CreateNamedVariable 'Array', 'none'
+    v3 <- CallFunction v2, [v1]
+    v4 <- CreateNamedVariable 'a', 'var', v3
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- CreateNamedVariable 'Array', 'none'
+    v7 <- CallFunction v6, []
+    v8 <- CreateNamedVariable 'a', 'var', v7
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadInteger '1'
+    v11 <- LoadInteger '2'
+    v12 <- LoadInteger '3'
+    v13 <- LoadInteger '4'
+    v14 <- LoadInteger '5'
+    v15 <- LoadInteger '6'
+    v16 <- LoadInteger '7'
+    v17 <- CreateNamedVariable 'Array', 'none'
+    v18 <- CallFunction v17, [v10, v11, v12, v13, v14, v15, v16]
+    v19 <- CreateNamedVariable 'a', 'var', v18
+EndPlainFunction
+v20 <- BeginPlainFunction -> 
+    v21 <- LoadInteger '1'
+    v22 <- LoadInteger '2'
+    v23 <- LoadInteger '3'
+    v24 <- LoadInteger '4'
+    v25 <- CreateArray [v21, v22, v23, v24]
+    v26 <- CreateNamedVariable 'a', 'var', v25
+    v27 <- LoadInteger '1'
+    v28 <- LoadInteger '2'
+    v29 <- LoadUndefined
+    v30 <- LoadInteger '4'
+    v31 <- CreateArray [v27, v28, v29, v30]
+    v32 <- CreateNamedVariable 'b', 'var', v31
+EndPlainFunction
+v33 <- BeginPlainFunction -> 
+    v34 <- LoadInteger '1'
+    v35 <- LoadInteger '2'
+    v36 <- LoadInteger '3'
+    v37 <- LoadFloat '4.5'
+    v38 <- CreateArray [v34, v35, v36, v37]
+    v39 <- CreateNamedVariable 'a', 'var', v38
+    v40 <- LoadInteger '1'
+    v41 <- LoadUndefined
+    v42 <- LoadFloat '3.5'
+    v43 <- LoadInteger '4'
+    v44 <- CreateArray [v40, v41, v42, v43]
+    v45 <- CreateNamedVariable 'b', 'var', v44
+    v46 <- LoadInteger '1'
+    v47 <- LoadFloat '3.5'
+    v48 <- LoadUndefined
+    v49 <- LoadInteger '4'
+    v50 <- CreateArray [v46, v47, v48, v49]
+    v51 <- CreateNamedVariable 'c', 'var', v50
+EndPlainFunction
+v52 <- BeginPlainFunction -> 
+    v53 <- CreateNamedVariable 'Object', 'none'
+    v54 <- Construct v53, []
+    v55 <- CreateNamedVariable 'x', 'var', v54
+    v56 <- LoadInteger '1'
+    v57 <- LoadInteger '2'
+    v58 <- LoadFloat '3.5'
+    v59 <- CreateArray [v56, v57, v58, v55]
+    v60 <- CreateNamedVariable 'a', 'var', v59
+    v61 <- LoadInteger '1'
+    v62 <- GetElement v60, '0'
+    v63 <- LoadInteger '2'
+    v64 <- GetElement v60, '1'
+    v65 <- LoadFloat '3.5'
+    v66 <- GetElement v60, '2'
+    v67 <- GetElement v60, '3'
+    v68 <- LoadInteger '1'
+    v69 <- LoadUndefined
+    v70 <- LoadFloat '3.5'
+    v71 <- CreateArray [v68, v69, v70, v55]
+    v72 <- CreateNamedVariable 'b', 'var', v71
+    v73 <- LoadInteger '1'
+    v74 <- GetElement v72, '0'
+    v75 <- LoadUndefined
+    v76 <- GetElement v72, '1'
+    v77 <- LoadFloat '3.5'
+    v78 <- GetElement v72, '2'
+    v79 <- GetElement v72, '3'
+    v80 <- LoadInteger '1'
+    v81 <- LoadFloat '3.5'
+    v82 <- LoadUndefined
+    v83 <- CreateArray [v80, v81, v55, v82]
+    v84 <- CreateNamedVariable 'c', 'var', v83
+    v85 <- LoadInteger '1'
+    v86 <- GetElement v84, '0'
+    v87 <- LoadFloat '3.5'
+    v88 <- GetElement v84, '1'
+    v89 <- GetElement v84, '2'
+    v90 <- LoadUndefined
+    v91 <- GetElement v84, '3'
+EndPlainFunction
+v92 <- BeginPlainFunction -> v93
+    BeginForLoopInitializer
+        v94 <- LoadInteger '0'
+        v95 <- CreateNamedVariable 'i', 'none'
+        Reassign v95, v94
+    BeginForLoopCondition
+        v96 <- CreateNamedVariable 'i', 'none'
+        v97 <- LoadInteger '25000'
+        v98 <- Compare v96, '<', v97
+    BeginForLoopAfterthought v98
+        v99 <- CreateNamedVariable 'i', 'none'
+        v100 <- UnaryOperation '++', v99
+    BeginForLoopBody
+        v101 <- CallFunction v93, []
+    EndForLoop
+    BeginForLoopInitializer
+        v102 <- LoadInteger '0'
+        v103 <- CreateNamedVariable 'i', 'none'
+        Reassign v103, v102
+    BeginForLoopCondition
+        v104 <- CreateNamedVariable 'i', 'none'
+        v105 <- LoadInteger '25000'
+        v106 <- Compare v104, '<', v105
+    BeginForLoopAfterthought v106
+        v107 <- CreateNamedVariable 'i', 'none'
+        v108 <- UnaryOperation '++', v107
+    BeginForLoopBody
+        v109 <- CallFunction v93, []
+    EndForLoop
+EndPlainFunction
+v110 <- CallFunction v92, [v0]
+v111 <- CallFunction v92, [v5]
+v112 <- CallFunction v92, [v9]
+v113 <- CallFunction v92, [v20]
+v114 <- CallFunction v92, [v33]
+v115 <- CallFunction v92, [v52]
+
+
+function test1() {
+    var a = Array(8);
+}
+function test2() {
+    var a = Array();
+}
+function test3() {
+    var a = Array(1, 2, 3, 4, 5, 6, 7);
+}
+function test4() {
+    var a = [1,2,3,4];
+    var b = [1,2,,4];
+}
+function test5() {
+    var a = [1,2,3,4.5];
+    var b = [1,,3.5,4];
+    var c = [1,3.5,,4];
+}
+function test6() {
+    const v54 = new Object();
+    var x = v54;
+    var a = [1,2,3.5,x];
+    a[0];
+    a[1];
+    a[2];
+    a[3];
+    var b = [1,,3.5,x];
+    b[0];
+    b[1];
+    b[2];
+    b[3];
+    var c = [1,3.5,x,,];
+    c[0];
+    c[1];
+    c[2];
+    c[3];
+}
+function test_with_optimization(a93) {
+    for (i = 0; i < 25000; ++i) {
+        a93();
+    }
+    for (i = 0; i < 25000; ++i) {
+        a93();
+    }
+}
+test_with_optimization(test1);
+test_with_optimization(test2);
+test_with_optimization(test3);
+test_with_optimization(test4);
+test_with_optimization(test5);
+test_with_optimization(test6);
+
+FuzzIL program written to corpus/packed-elements.fzil

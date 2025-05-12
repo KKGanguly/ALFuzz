@@ -1,0 +1,99 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateNamedVariable 'v_1', 'var', v1
+    v3 <- LoadInteger '1'
+    v4 <- CreateNamedVariable 'v_2', 'var', v3
+    v5 <- UnaryOperation v2, '++'
+    v6 <- BeginPlainFunction -> 
+        v7 <- LoadString 'gagh'
+        ThrowException v7
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v6
+    v8 <- EndObjectLiteral
+    Reassign v4, v8
+    v9 <- BeginPlainFunction -> 
+        BeginForLoopInitializer
+            v10 <- LoadInteger '0'
+        BeginForLoopCondition -> v11
+            v12 <- LoadInteger '1'
+            v13 <- Compare v11, '<', v12
+        BeginForLoopAfterthought v13 -> v14
+            v15 <- UnaryOperation v4, '++'
+        BeginForLoopBody -> v16
+            v17 <- LoadInteger '1'
+            v18 <- Compare v2, '==', v17
+            BeginIf v18
+            EndIf
+        EndForLoop
+    EndPlainFunction
+    Return v9
+EndPlainFunction
+v19 <- CallFunction v0, []
+v20 <- CreateNamedVariable 'f', 'var', v19
+v21 <- LoadInteger '1'
+v22 <- CreateNamedVariable 'v_3', 'var', v21
+v23 <- LoadInteger '1'
+v24 <- CreateNamedVariable 'v_4', 'var', v23
+v25 <- UnaryOperation v22, '++'
+v26 <- BeginPlainFunction -> 
+    v27 <- LoadString 'gagh'
+    ThrowException v27
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v26
+v28 <- EndObjectLiteral
+Reassign v24, v28
+v29 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v30 <- LoadInteger '0'
+    BeginForLoopCondition -> v31
+        v32 <- LoadInteger '1'
+        v33 <- Compare v31, '<', v32
+    BeginForLoopAfterthought v33 -> v34
+        v35 <- UnaryOperation v24, '++'
+    BeginForLoopBody -> v36
+        v37 <- LoadInteger '1'
+        v38 <- Compare v22, '==', v37
+        BeginIf v38
+        EndIf
+    EndForLoop
+EndPlainFunction
+v39 <- CallFunction v29, []
+v40 <- CallFunction v29, []
+
+
+function mod1() {
+    var v_1 = 1;
+    var v_2 = 1;
+    v_1++;
+    function f6() {
+        throw "gagh";
+    }
+    v_2 = { valueOf: f6 };
+    function bug1() {
+        for (let i11 = 0; i11 < 1; v_2++) {
+            if (v_1 == 1) {
+            }
+        }
+    }
+    return bug1;
+}
+var f = mod1();
+var v_3 = 1;
+var v_4 = 1;
+v_3++;
+function f26() {
+    throw "gagh";
+}
+v_4 = { valueOf: f26 };
+function bug2() {
+    for (let i31 = 0; i31 < 1; v_4++) {
+        if (v_3 == 1) {
+        }
+    }
+}
+bug2();
+bug2();
+
+FuzzIL program written to corpus/regress-ntl.fzil

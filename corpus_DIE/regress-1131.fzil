@@ -1,0 +1,30 @@
+v0 <- LoadInteger '4'
+v1 <- LoadInteger '42'
+v2 <- LoadInteger '37'
+v3 <- LoadUndefined
+v4 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v0
+    ObjectLiteralAddElement `0`, v1
+    ObjectLiteralAddElement `2`, v2
+    ObjectLiteralAddElement `4158279680`, v3
+    ObjectLiteralAddElement `4`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'nonArray', 'var', v5
+v7 <- CreateNamedVariable 'Array', 'none'
+v8 <- GetProperty v7, 'prototype'
+v9 <- GetProperty v8, 'sort'
+v10 <- CallMethod v9, 'call', [v6]
+
+
+const v5 = {
+    length: 4,
+    0: 42,
+    2: 37,
+    4158279680: undefined,
+    4: 0,
+};
+var nonArray = v5;
+Array.prototype.sort.call(nonArray);
+
+FuzzIL program written to corpus/regress-1131.fzil

@@ -1,0 +1,178 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CreateNamedVariable 'obj', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadString 'Undetectable branch should not be taken'
+    v4 <- LoadString 'branch was taken'
+    v5 <- CreateNamedVariable 'fail', 'none'
+    v6 <- CallFunction v5, [v3, v4]
+EndPlainFunction
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadString 'Inverted Undetectable branch should be taken'
+    v9 <- LoadString 'branch was not taken'
+    v10 <- CreateNamedVariable 'fail', 'none'
+    v11 <- CallFunction v10, [v8, v9]
+EndPlainFunction
+v12 <- BeginPlainFunction -> 
+    v13 <- UnaryOperation '!', v1
+    v14 <- UnaryOperation '!', v1
+    v15 <- UnaryOperation '!', v14
+    v16 <- LoadBoolean 'true'
+    v17 <- Compare v1, '==', v16
+    v18 <- LoadBoolean 'false'
+    v19 <- Compare v1, '==', v18
+    v20 <- LoadBoolean 'true'
+    v21 <- Compare v1, '===', v20
+    v22 <- LoadBoolean 'false'
+    v23 <- Compare v1, '===', v22
+    v24 <- LoadInteger '2'
+    v25 <- LoadInteger '1'
+    v26 <- LoadInteger '2'
+    v27 <- TernaryOperation v1, v25, v26
+    v28 <- LoadBoolean 'true'
+    v29 <- BinaryOperation v28, '&&', v1
+    v30 <- LoadBoolean 'false'
+    v31 <- BinaryOperation v30, '||', v1
+EndPlainFunction
+v32 <- BeginPlainFunction -> 
+    BeginIf v1
+        v33 <- CallFunction v2, []
+    EndIf
+    BeginIf v1
+        v34 <- CallFunction v2, []
+    BeginElse
+    EndIf
+    v35 <- UnaryOperation '!', v1
+    BeginIf v35
+    BeginElse
+        v36 <- CallFunction v7, []
+    EndIf
+EndPlainFunction
+v37 <- BeginPlainFunction -> 
+    BeginWhileLoopHeader
+    BeginWhileLoopBody v1
+        v38 <- CallFunction v2, []
+    EndWhileLoop
+    v39 <- LoadInteger '0'
+    v40 <- CreateNamedVariable 'i', 'var', v39
+    BeginWhileLoopHeader
+        v41 <- UnaryOperation '!', v1
+    BeginWhileLoopBody v41
+        v42 <- UnaryOperation v40, '++'
+        Break
+    EndWhileLoop
+    v43 <- LoadInteger '1'
+EndPlainFunction
+v44 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v45 <- LoadInteger '0'
+    BeginForLoopCondition -> v46
+    BeginForLoopAfterthought v1 -> v47
+        v48 <- UnaryOperation v47, '++'
+    BeginForLoopBody -> v49
+        v50 <- CallFunction v2, []
+    EndForLoop
+    v51 <- LoadInteger '0'
+    v52 <- CreateNamedVariable 'j', 'var', v51
+    BeginForLoopInitializer
+        v53 <- LoadInteger '0'
+    BeginForLoopCondition -> v54
+        v55 <- UnaryOperation '!', v1
+    BeginForLoopAfterthought v55 -> v56
+        v57 <- UnaryOperation v56, '++'
+    BeginForLoopBody -> v58
+        v59 <- UnaryOperation v52, '++'
+        Break
+    EndForLoop
+    v60 <- LoadInteger '1'
+EndPlainFunction
+v61 <- BeginPlainFunction -> 
+    v62 <- CallFunction v1, []
+EndPlainFunction
+BeginForLoopInitializer
+    v63 <- LoadInteger '0'
+BeginForLoopCondition -> v64
+    v65 <- LoadInteger '5'
+    v66 <- Compare v64, '<', v65
+BeginForLoopAfterthought v66 -> v67
+    v68 <- UnaryOperation v67, '++'
+BeginForLoopBody -> v69
+    v70 <- CallFunction v12, []
+    v71 <- CallFunction v32, []
+    v72 <- CallFunction v37, []
+    v73 <- CallFunction v44, []
+    v74 <- CallFunction v61, []
+    v75 <- LoadInteger '3'
+    v76 <- Compare v69, '==', v75
+    BeginIf v76
+    EndIf
+EndForLoop
+
+
+function f0() {
+}
+var obj = f0;
+function shouldNotBeTaken() {
+    fail("Undetectable branch should not be taken", "branch was taken");
+}
+function shouldBeTaken() {
+    fail("Inverted Undetectable branch should be taken", "branch was not taken");
+}
+function testCompares() {
+    !obj;
+    !(!obj);
+    obj == true;
+    obj == false;
+    obj === true;
+    obj === false;
+    obj ? 1 : 2;
+    true && obj;
+    false || obj;
+}
+function testIfs() {
+    if (obj) {
+        shouldNotBeTaken();
+    }
+    if (obj) {
+        shouldNotBeTaken();
+    } else {
+    }
+    if (!obj) {
+    } else {
+        shouldBeTaken();
+    }
+}
+function testWhiles() {
+    while (obj) {
+        shouldNotBeTaken();
+    }
+    var i = 0;
+    while (!obj) {
+        i++;
+        break;
+    }
+}
+function testFors() {
+    for (let i46 = 0; obj; i46++) {
+        shouldNotBeTaken();
+    }
+    var j = 0;
+    for (let i54 = 0; !obj; i54++) {
+        j++;
+        break;
+    }
+}
+function testCall() {
+    obj();
+}
+for (let i64 = 0; i64 < 5; i64++) {
+    testCompares();
+    testIfs();
+    testWhiles();
+    testFors();
+    testCall();
+    if (i64 == 3) {
+    }
+}
+
+FuzzIL program written to corpus/undetectable.fzil

@@ -1,0 +1,81 @@
+v0 <- CreateNamedVariable 'Map', 'none'
+v1 <- LoadInteger '1'
+v2 <- LoadInteger '2'
+v3 <- CreateArray [v1, v2]
+v4 <- LoadInteger '2'
+v5 <- LoadInteger '3'
+v6 <- CreateArray [v4, v5]
+v7 <- LoadInteger '3'
+v8 <- LoadInteger '4'
+v9 <- CreateArray [v7, v8]
+v10 <- CreateArray [v3, v6, v9]
+v11 <- Construct v0, [v10]
+v12 <- CreateNamedVariable 'map', 'var', v11
+v13 <- CallMethod v12, 'values', []
+v14 <- CreateNamedVariable 'iterator', 'var', v13
+v15 <- BeginArrowFunction -> 
+    v16 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `done`, v16
+    v17 <- EndObjectLiteral
+    Return v17
+EndArrowFunction
+SetProperty v14, 'next', v15
+v18 <- LoadInteger '1'
+v19 <- LoadInteger '2'
+v20 <- CreateArray [v18, v19]
+v21 <- LoadInteger '2'
+v22 <- LoadInteger '3'
+v23 <- CreateArray [v21, v22]
+v24 <- LoadInteger '3'
+v25 <- LoadInteger '4'
+v26 <- CreateArray [v24, v25]
+v27 <- CreateArray [v20, v23, v26]
+v28 <- CreateArrayWithSpread [...v12]
+v29 <- LoadInteger '1'
+v30 <- LoadInteger '2'
+v31 <- CreateArray [v29, v30]
+v32 <- LoadInteger '2'
+v33 <- LoadInteger '3'
+v34 <- CreateArray [v32, v33]
+v35 <- LoadInteger '3'
+v36 <- LoadInteger '4'
+v37 <- CreateArray [v35, v36]
+v38 <- CreateArray [v31, v34, v37]
+v39 <- CallMethod v12, 'entries', []
+v40 <- CreateArrayWithSpread [...v39]
+v41 <- LoadInteger '1'
+v42 <- LoadInteger '2'
+v43 <- LoadInteger '3'
+v44 <- CreateArray [v41, v42, v43]
+v45 <- CallMethod v12, 'keys', []
+v46 <- CreateArrayWithSpread [...v45]
+v47 <- LoadInteger '2'
+v48 <- LoadInteger '3'
+v49 <- LoadInteger '4'
+v50 <- CreateArray [v47, v48, v49]
+v51 <- CallMethod v12, 'values', []
+v52 <- CreateArrayWithSpread [...v51]
+v53 <- CreateArray []
+v54 <- CreateArrayWithSpread [...v14]
+
+
+const v11 = new Map([[1,2],[2,3],[3,4]]);
+var map = v11;
+var iterator = map.values();
+const v15 = () => {
+    return { done: true };
+};
+iterator.next = v15;
+[[1,2],[2,3],[3,4]];
+[...map];
+[[1,2],[2,3],[3,4]];
+[...map.entries()];
+[1,2,3];
+[...map.keys()];
+[2,3,4];
+[...map.values()];
+[];
+[...iterator];
+
+FuzzIL program written to corpus/map-iterator-6.fzil

@@ -1,0 +1,51 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> v2
+    v3 <- CallFunction v0, []
+    v4 <- CreateNamedVariable 'h', 'none'
+    v5 <- CallFunction v4, [v2]
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- GetProperty v7, 'x'
+    Return v8
+EndPlainFunction
+v9 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v9
+v10 <- EndObjectLiteral
+v11 <- CallFunction v1, [v10]
+v12 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v12
+v13 <- EndObjectLiteral
+v14 <- CallFunction v1, [v13]
+v15 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v15
+v16 <- EndObjectLiteral
+v17 <- CallFunction v1, [v16]
+v18 <- LoadInteger '1'
+v19 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v18
+    ObjectLiteralAddProperty `x`, v19
+v20 <- EndObjectLiteral
+v21 <- CallFunction v1, [v20]
+
+
+function f() {
+}
+function g(a2) {
+    f();
+    return h(a2);
+}
+function h(a7) {
+    return a7.x;
+}
+g({ x: 1 });
+g({ x: 2 });
+g({ x: 3 });
+g({ y: 1, x: 3 });
+
+FuzzIL program written to corpus/deopt-eager-and-lazy.fzil

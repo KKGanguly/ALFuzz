@@ -1,0 +1,23 @@
+v0 <- LoadInteger '1000000000'
+v1 <- CreateNamedVariable 'v', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '10'
+    v4 <- BinaryOperation v1, '/', v3
+    v5 <- CreateNamedVariable 'Math', 'none'
+    v6 <- CallMethod v5, 'floor', [v4]
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '100000000'
+v8 <- CallFunction v2, []
+v9 <- LoadInteger '100000000'
+v10 <- CallFunction v2, []
+
+
+var v = 1000000000;
+function f() {
+    return Math.floor(v / 10);
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-841117.fzil

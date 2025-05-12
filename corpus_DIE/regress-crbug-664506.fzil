@@ -1,0 +1,27 @@
+v0 <- CreateNamedVariable 'gc', 'none'
+v1 <- CallFunction v0, []
+v2 <- CallFunction v0, []
+v3 <- LoadString '[object Object]'
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- GetProperty v5, 'prototype'
+v7 <- GetProperty v6, 'toString'
+v8 <- CallMethod v7, 'call', [v4]
+v9 <- CallFunction v0, []
+v10 <- LoadString '[object Array]'
+v11 <- CreateArray []
+v12 <- GetProperty v5, 'prototype'
+v13 <- GetProperty v12, 'toString'
+v14 <- CallMethod v13, 'call', [v11]
+
+
+gc();
+gc();
+const v4 = {};
+Object.prototype.toString.call(v4);
+gc();
+const v11 = [];
+Object.prototype.toString.call(v11);
+
+FuzzIL program written to corpus/regress-crbug-664506.fzil

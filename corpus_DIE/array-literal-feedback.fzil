@@ -1,0 +1,369 @@
+v0 <- LoadString 'packed smi elements'
+v1 <- LoadString 'packed elements'
+v2 <- LoadString 'packed double elements'
+v3 <- LoadString 'dictionary elements'
+v4 <- LoadString 'external byte elements'
+v5 <- LoadString 'external unsigned byte elements'
+v6 <- LoadString 'external short elements'
+v7 <- LoadString 'external unsigned short elements'
+v8 <- LoadString 'external int elements'
+v9 <- LoadString 'external unsigned int elements'
+v10 <- LoadString 'external float elements'
+v11 <- LoadString 'external double elements'
+v12 <- LoadString 'external pixel elements'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `packed_smi`, v0
+    ObjectLiteralAddProperty `packed`, v1
+    ObjectLiteralAddProperty `packed_double`, v2
+    ObjectLiteralAddProperty `dictionary`, v3
+    ObjectLiteralAddProperty `external_byte`, v4
+    ObjectLiteralAddProperty `external_unsigned_byte`, v5
+    ObjectLiteralAddProperty `external_short`, v6
+    ObjectLiteralAddProperty `external_unsigned_short`, v7
+    ObjectLiteralAddProperty `external_int`, v8
+    ObjectLiteralAddProperty `external_unsigned_int`, v9
+    ObjectLiteralAddProperty `external_float`, v10
+    ObjectLiteralAddProperty `external_double`, v11
+    ObjectLiteralAddProperty `external_pixel`, v12
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'elements_kind', 'var', v13
+v15 <- BeginPlainFunction -> v16
+EndPlainFunction
+v17 <- BeginPlainFunction -> v18
+    v19 <- LoadBoolean 'false'
+    Return v19
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21, v22, v23
+    v24 <- CallFunction v15, [v22]
+EndPlainFunction
+v25 <- BeginPlainFunction -> v26
+    v27 <- LoadInteger '1'
+    v28 <- LoadInteger '2'
+    v29 <- CreateArray [v27, v28, v26]
+    v30 <- CreateNamedVariable 'literal', 'var', v29
+    Return v30
+EndPlainFunction
+v31 <- LoadInteger '3'
+v32 <- CallFunction v25, [v31]
+v33 <- LoadInteger '3'
+v34 <- CallFunction v25, [v33]
+v35 <- CreateNamedVariable 'a', 'none'
+Reassign v35, v34
+v36 <- LoadInteger '3'
+v37 <- CallFunction v25, [v36]
+v38 <- CallFunction v25, []
+v39 <- LoadFloat '3.5'
+v40 <- CreateNamedVariable 'a', 'none'
+SetElement v40, '0', v39
+v41 <- LoadInteger '3'
+v42 <- CallFunction v25, [v41]
+v43 <- CreateNamedVariable 'b', 'none'
+Reassign v43, v42
+v44 <- LoadInteger '1'
+v45 <- LoadInteger '2'
+v46 <- LoadInteger '3'
+v47 <- CreateArray [v44, v45, v46]
+v48 <- CreateNamedVariable 'b', 'none'
+v49 <- CallFunction v25, []
+v50 <- LoadInteger '3'
+v51 <- CallFunction v25, [v50]
+v52 <- LoadInteger '3'
+v53 <- CallFunction v25, [v52]
+Reassign v48, v53
+v54 <- CallFunction v25, []
+v55 <- BeginPlainFunction -> 
+    v56 <- BeginPlainFunction -> v57, v58, v59
+        v60 <- CreateArray [v57, v58, v59]
+        Return v60
+    EndPlainFunction
+    v61 <- LoadInteger '1'
+    v62 <- LoadInteger '2'
+    v63 <- LoadInteger '3'
+    v64 <- CallFunction v56, [v61, v62, v63]
+    Reassign v40, v64
+    v65 <- LoadFloat '3.5'
+    SetElement v40, '0', v65
+    v66 <- LoadString 'hi'
+    SetElement v40, '1', v66
+    v67 <- LoadInteger '1'
+    v68 <- LoadInteger '2'
+    v69 <- LoadInteger '3'
+    v70 <- CallFunction v56, [v67, v68, v69]
+    Reassign v48, v70
+    v71 <- GetProperty v14, 'packed'
+EndPlainFunction
+v72 <- CallFunction v55, []
+v73 <- BeginPlainFunction -> 
+    v74 <- BeginPlainFunction -> 
+        v75 <- CreateNamedVariable 'Array', 'none'
+        v76 <- Construct v75, []
+        Return v76
+    EndPlainFunction
+    v77 <- CallFunction v74, []
+    v78 <- CreateNamedVariable 'a', 'var', v77
+    v79 <- LoadString 'packed smi elements'
+    v80 <- CallFunction v74, []
+    Reassign v78, v80
+    v81 <- LoadString 'packed smi elements'
+    v82 <- CallFunction v74, []
+    Reassign v78, v82
+    v83 <- LoadFloat '0.5'
+    v84 <- CallMethod v78, 'push', [v83]
+    v85 <- LoadString 'packed double elements'
+    v86 <- CallFunction v74, []
+    Reassign v78, v86
+    v87 <- LoadString 'packed double elements'
+EndPlainFunction
+v88 <- CallFunction v73, []
+v89 <- BeginPlainFunction -> 
+    v90 <- BeginPlainFunction -> 
+        v91 <- LoadInteger '1'
+        v92 <- LoadInteger '2'
+        v93 <- CreateArray [v91, v92]
+        Return v93
+    EndPlainFunction
+    v94 <- CallFunction v90, []
+    v95 <- CreateNamedVariable 'a', 'var', v94
+    v96 <- LoadString 'packed smi elements'
+    v97 <- CallFunction v90, []
+    Reassign v95, v97
+    v98 <- LoadFloat '0.5'
+    v99 <- CallMethod v95, 'push', [v98]
+    v100 <- LoadString 'packed double elements'
+    v101 <- CallFunction v90, []
+    Reassign v95, v101
+    v102 <- LoadString 'packed double elements'
+    v103 <- CallFunction v17, [v95]
+    v104 <- CallFunction v90, []
+    Reassign v95, v104
+    v105 <- LoadUndefined
+    v106 <- CallMethod v95, 'push', [v105]
+    v107 <- LoadString 'packed elements'
+    v108 <- CallFunction v17, [v95]
+    v109 <- CallFunction v90, []
+    Reassign v95, v109
+    v110 <- LoadString 'packed elements'
+    v111 <- CallFunction v17, [v95]
+    v112 <- CallFunction v90, []
+    Reassign v95, v112
+    v113 <- LoadString 'packed elements'
+    v114 <- CallFunction v17, [v95]
+    v115 <- CallFunction v90, []
+    Reassign v95, v115
+    v116 <- LoadString 'packed elements'
+    v117 <- CallFunction v17, [v95]
+EndPlainFunction
+v118 <- CallFunction v89, []
+v119 <- BeginPlainFunction -> 
+    v120 <- BeginPlainFunction -> 
+        v121 <- CreateArray []
+        Return v121
+    EndPlainFunction
+    v122 <- CallFunction v120, []
+    v123 <- CreateNamedVariable 'a', 'var', v122
+    v124 <- LoadString 'packed smi elements'
+    v125 <- CallFunction v17, [v123]
+    v126 <- CallFunction v120, []
+    Reassign v123, v126
+    v127 <- LoadFloat '0.5'
+    v128 <- CallMethod v123, 'push', [v127]
+    v129 <- LoadString 'packed double elements'
+    v130 <- CallFunction v17, [v123]
+    v131 <- CallFunction v120, []
+    Reassign v123, v131
+    v132 <- LoadString 'packed double elements'
+    v133 <- CallFunction v17, [v123]
+    v134 <- CallFunction v120, []
+    Reassign v123, v134
+    v135 <- LoadString 'packed double elements'
+    v136 <- CallFunction v17, [v123]
+    v137 <- CallFunction v120, []
+    Reassign v123, v137
+    v138 <- LoadString 'packed double elements'
+    v139 <- CallFunction v17, [v123]
+EndPlainFunction
+v140 <- CallFunction v119, []
+v141 <- BeginPlainFunction -> 
+    v142 <- BeginPlainFunction -> 
+        v143 <- CreateArray []
+        v144 <- CreateNamedVariable 'literal', 'var', v143
+        Return v144
+    EndPlainFunction
+    v145 <- CallFunction v142, []
+    v146 <- CreateNamedVariable 'a', 'var', v145
+    v147 <- LoadString 'packed smi elements'
+    v148 <- CallFunction v17, [v146]
+    v149 <- CallFunction v142, []
+    Reassign v146, v149
+    v150 <- LoadFloat '0.5'
+    v151 <- CallMethod v146, 'push', [v150]
+    v152 <- LoadString 'packed double elements'
+    v153 <- CallFunction v17, [v146]
+    v154 <- CallFunction v142, []
+    Reassign v146, v154
+    v155 <- LoadString 'packed double elements'
+    v156 <- CallFunction v17, [v146]
+    v157 <- CallFunction v142, []
+    Reassign v146, v157
+    v158 <- LoadUndefined
+    v159 <- CallMethod v146, 'push', [v158]
+    v160 <- LoadString 'packed elements'
+    v161 <- CallFunction v17, [v146]
+    v162 <- CallFunction v142, []
+    Reassign v146, v162
+    v163 <- LoadString 'packed elements'
+    v164 <- CallFunction v17, [v146]
+    v165 <- CallFunction v142, []
+    Reassign v146, v165
+    v166 <- LoadInteger '1'
+    SetElement v146, '10', v166
+    v167 <- LoadString 'packed elements'
+    v168 <- CallFunction v17, [v146]
+    v169 <- CallFunction v142, []
+    Reassign v146, v169
+    v170 <- LoadString 'packed elements'
+    v171 <- CallFunction v17, [v146]
+    v172 <- CallFunction v142, []
+    Reassign v146, v172
+    v173 <- LoadInteger '1'
+    SetElement v146, '10000', v173
+    v174 <- LoadString 'dictionary elements'
+    v175 <- CallFunction v17, [v146]
+    v176 <- CallFunction v142, []
+    Reassign v146, v176
+    v177 <- LoadString 'packed elements'
+    v178 <- CallFunction v17, [v146]
+EndPlainFunction
+v179 <- CallFunction v141, []
+
+
+const v13 = {
+    packed_smi: "packed smi elements",
+    packed: "packed elements",
+    packed_double: "packed double elements",
+    dictionary: "dictionary elements",
+    external_byte: "external byte elements",
+    external_unsigned_byte: "external unsigned byte elements",
+    external_short: "external short elements",
+    external_unsigned_short: "external unsigned short elements",
+    external_int: "external int elements",
+    external_unsigned_int: "external unsigned int elements",
+    external_float: "external float elements",
+    external_double: "external double elements",
+    external_pixel: "external pixel elements",
+};
+var elements_kind = v13;
+function getKind(a16) {
+}
+function isHoley(a18) {
+    return false;
+}
+function assertKind(a21, a22, a23) {
+    getKind(a22);
+}
+function get_literal(a26) {
+    var literal = [1,2,a26];
+    return literal;
+}
+get_literal(3);
+a = get_literal(3);
+get_literal(3);
+get_literal();
+a[0] = 3.5;
+b = get_literal(3);
+[1,2,3];
+get_literal();
+get_literal(3);
+b = get_literal(3);
+get_literal();
+function f55() {
+    function bar(a57, a58, a59) {
+        return [a57,a58,a59];
+    }
+    a = bar(1, 2, 3);
+    a[0] = 3.5;
+    a[1] = "hi";
+    b = bar(1, 2, 3);
+    elements_kind.packed;
+}
+f55();
+function changeOptimizedEmptyArrayKind() {
+    function f() {
+        const v76 = new Array();
+        return v76;
+    }
+    var a = f();
+    a = f();
+    a = f();
+    a.push(0.5);
+    a = f();
+}
+changeOptimizedEmptyArrayKind();
+function changeOptimizedArrayLiteralKind() {
+    function f() {
+        return [1,2];
+    }
+    var a = f();
+    a = f();
+    a.push(0.5);
+    a = f();
+    isHoley(a);
+    a = f();
+    a.push(undefined);
+    isHoley(a);
+    a = f();
+    isHoley(a);
+    a = f();
+    isHoley(a);
+    a = f();
+    isHoley(a);
+}
+changeOptimizedArrayLiteralKind();
+function changeOptimizedEmptyArrayLiteralKind() {
+    function f() {
+        return [];
+    }
+    var a = f();
+    isHoley(a);
+    a = f();
+    a.push(0.5);
+    isHoley(a);
+    a = f();
+    isHoley(a);
+    a = f();
+    isHoley(a);
+    a = f();
+    isHoley(a);
+}
+changeOptimizedEmptyArrayLiteralKind();
+function changeEmptyArrayLiteralKind2() {
+    function f() {
+        var literal = [];
+        return literal;
+    }
+    var a = f();
+    isHoley(a);
+    a = f();
+    a.push(0.5);
+    isHoley(a);
+    a = f();
+    isHoley(a);
+    a = f();
+    a.push(undefined);
+    isHoley(a);
+    a = f();
+    isHoley(a);
+    a = f();
+    a[10] = 1;
+    isHoley(a);
+    a = f();
+    isHoley(a);
+    a = f();
+    a[10000] = 1;
+    isHoley(a);
+    a = f();
+    isHoley(a);
+}
+changeEmptyArrayLiteralKind2();
+
+FuzzIL program written to corpus/array-literal-feedback.fzil

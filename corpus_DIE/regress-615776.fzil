@@ -1,0 +1,40 @@
+v0 <- CreateNamedVariable 'Int32Array', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- GetProperty v1, '__proto__'
+v3 <- LoadString 'length'
+v4 <- BeginPlainFunction -> 
+    v5 <- CreateNamedVariable 'Error', 'none'
+    v6 <- LoadString 'Custom length property'
+    v7 <- Construct v5, [v6]
+    ThrowException v7
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v4
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'defineProperty', [v2, v3, v8]
+v11 <- CreateNamedVariable 'Math', 'none'
+v12 <- CallMethod v11, 'random', []
+v13 <- CreateNamedVariable 'a', 'var', v12
+v14 <- CreateNamedVariable 'Set', 'none'
+v15 <- Construct v14, []
+v16 <- CreateNamedVariable 'v0', 'var', v15
+v17 <- Construct v9, []
+v18 <- CreateNamedVariable 'v1', 'var', v17
+v19 <- CallMethod v16, 'add', [v18]
+
+
+const v2 = Int32Array.prototype.__proto__;
+function f4() {
+    const v7 = new Error("Custom length property");
+    throw v7;
+}
+Object.defineProperty(v2, "length", { get: f4 });
+var a = Math.random();
+const v15 = new Set();
+var v0 = v15;
+const v17 = new Object();
+var v1 = v17;
+v0.add(v1);
+
+FuzzIL program written to corpus/regress-615776.fzil

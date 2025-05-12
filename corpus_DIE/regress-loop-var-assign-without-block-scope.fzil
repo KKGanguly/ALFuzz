@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '0'
+        v2 <- CreateNamedVariable 'i', 'none'
+        Reassign v2, v1
+    BeginForLoopCondition
+        v3 <- CreateNamedVariable 'i', 'none'
+        v4 <- LoadInteger '2'
+        v5 <- Compare v3, '<', v4
+    BeginForLoopAfterthought v5
+        v6 <- CreateNamedVariable 'i', 'none'
+        v7 <- UnaryOperation v6, '++'
+    BeginForLoopBody
+        v8 <- CreateNamedVariable 'i', 'none'
+        v9 <- CreateNamedVariable 'x', 'var', v8
+        v10 <- CreateNamedVariable 'y', 'none'
+        v11 <- BeginArrowFunction -> 
+            Return v9
+        EndArrowFunction
+        v12 <- BinaryOperation v10, '||', v11
+        v13 <- CreateNamedVariable 'y', 'var', v12
+    EndForLoop
+    v14 <- CreateNamedVariable 'y', 'none'
+    v15 <- CallFunction v14, []
+    Return v15
+EndPlainFunction
+v16 <- LoadInteger '1'
+v17 <- CallFunction v0, []
+
+
+function f() {
+    for (i = 0; i < 2; i++) {
+        var x = i;
+        const v11 = () => {
+            return x;
+        };
+        var y = y || v11;
+    }
+    return y();
+}
+f();
+
+FuzzIL program written to corpus/regress-loop-var-assign-without-block-scope.fzil

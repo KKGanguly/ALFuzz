@@ -1,0 +1,31 @@
+v0 <- LoadInteger '0'
+v1 <- BeginPlainFunction -> v2
+EndPlainFunction
+v3 <- CreateNamedVariable 'Array', 'none'
+v4 <- GetProperty v3, 'prototype'
+v5 <- CallMethod v4, '__defineSetter__', [v0, v1]
+v6 <- LoadThis
+v7 <- GetProperty v6, 'Intl'
+BeginIf v7
+    v8 <- CreateNamedVariable 'Intl', 'none'
+    v9 <- GetProperty v8, 'DateTimeFormat'
+    v10 <- LoadString 'en-US'
+    v11 <- LoadString 'Asia/Katmandu'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `timeZone`, v11
+    v12 <- EndObjectLiteral
+    v13 <- Construct v9, [v10, v12]
+    v14 <- CreateNamedVariable 'o', 'var', v13
+EndIf
+
+
+function f1(a2) {
+}
+Array.prototype.__defineSetter__(0, f1);
+if (this.Intl) {
+    const v9 = Intl.DateTimeFormat;
+    const v13 = new v9("en-US", { timeZone: "Asia/Katmandu" });
+    var o = v13;
+}
+
+FuzzIL program written to corpus/regress-crbug-604299.fzil

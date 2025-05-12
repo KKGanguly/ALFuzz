@@ -1,0 +1,286 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `target`, v1
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable 'target', 'var', v2
+    v4 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `target_proto`, v4
+    v5 <- EndObjectLiteral
+    SetProperty v3, '__proto__', v5
+    v6 <- BeginPlainFunction -> v7
+        v8 <- LoadString 'foo'
+        v9 <- LoadString 'bar'
+        v10 <- LoadString 'baz'
+        v11 <- CreateNamedVariable 'Symbol', 'none'
+        v12 <- CallFunction v11, [v10]
+        v13 <- LoadString 'non-enum'
+        v14 <- LoadString 'not-found'
+        v15 <- CreateArray [v8, v9, v12, v13, v14]
+        Return v15
+    EndPlainFunction
+    v16 <- BeginPlainFunction -> v17, v18
+        v19 <- LoadString 'non-enum'
+        v20 <- Compare v18, '==', v19
+        BeginIf v20
+            v21 <- LoadBoolean 'true'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `configurable`, v21
+            v22 <- EndObjectLiteral
+            Return v22
+        EndIf
+        v23 <- LoadString 'not-found'
+        v24 <- Compare v18, '==', v23
+        BeginIf v24
+            v25 <- LoadUndefined
+            Return v25
+        EndIf
+        v26 <- LoadBoolean 'true'
+        v27 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `enumerable`, v26
+            ObjectLiteralAddProperty `configurable`, v27
+        v28 <- EndObjectLiteral
+        Return v28
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `ownKeys`, v6
+        ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v16
+    v29 <- EndObjectLiteral
+    v30 <- CreateNamedVariable 'handler', 'var', v29
+    v31 <- CreateNamedVariable 'Proxy', 'none'
+    v32 <- Construct v31, [v3, v30]
+    v33 <- CreateNamedVariable 'proxy', 'var', v32
+    v34 <- LoadString 'foo'
+    v35 <- LoadString 'bar'
+    v36 <- CreateArray [v34, v35]
+    v37 <- CreateNamedVariable 'Object', 'none'
+    v38 <- CallMethod v37, 'keys', [v33]
+    v39 <- LoadUndefined
+    SetProperty v30, 'getOwnPropertyDescriptor', v39
+    v40 <- CreateArray []
+    v41 <- CallMethod v37, 'keys', [v33]
+    v42 <- BeginPlainFunction -> 
+        v43 <- CreateNamedVariable 'Number', 'none'
+        v44 <- LoadInteger '1'
+        v45 <- Construct v43, [v44]
+        ThrowException v45
+    EndPlainFunction
+    SetProperty v30, 'getOwnPropertyDescriptor', v42
+    v46 <- BeginArrowFunction -> 
+        v47 <- CallMethod v37, 'keys', [v33]
+        Return v47
+    EndArrowFunction
+    v48 <- CallFunction v46, []
+    v49 <- CreateNamedVariable 'Number', 'none'
+    v50 <- LoadUndefined
+    SetProperty v30, 'ownKeys', v50
+    v51 <- BeginArrowFunction -> 
+        v52 <- CallMethod v37, 'keys', [v33]
+        Return v52
+    EndArrowFunction
+    v53 <- CallFunction v51, []
+    v54 <- LoadUndefined
+    SetProperty v30, 'getOwnPropertyDescriptor', v54
+    v55 <- LoadString 'target'
+    v56 <- CreateArray [v55]
+    v57 <- CallMethod v37, 'keys', [v33]
+    v58 <- LoadString 'target'
+    v59 <- CreateArray [v58]
+    v60 <- CallMethod v37, 'keys', [v3]
+    BeginObjectLiteral
+    v61 <- EndObjectLiteral
+    v62 <- Construct v31, [v33, v61]
+    v63 <- CreateNamedVariable 'proxy2', 'var', v62
+    v64 <- LoadString 'target'
+    v65 <- CreateArray [v64]
+    v66 <- CallMethod v37, 'keys', [v63]
+EndPlainFunction
+v67 <- CallFunction v0, []
+v68 <- BeginPlainFunction -> 
+    v69 <- CreateNamedVariable 'Symbol', 'none'
+    v70 <- CallFunction v69, []
+    v71 <- CreateNamedVariable 'symbol', 'var', v70
+    v72 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v73 <- EndObjectLiteral
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `ownKeys` -> v74
+            v75 <- LoadString '1'
+            v76 <- LoadString '2'
+            v77 <- CreateArray [v75, v71, v76]
+            Return v77
+        EndObjectLiteralMethod
+    v78 <- EndObjectLiteral
+    v79 <- Construct v72, [v73, v78]
+    v80 <- CreateNamedVariable 'p', 'var', v79
+    v81 <- LoadString '1'
+    v82 <- LoadString '2'
+    v83 <- CreateArray [v81, v82]
+    v84 <- CreateNamedVariable 'Object', 'none'
+    v85 <- CallMethod v84, 'getOwnPropertyNames', [v80]
+    v86 <- CreateArray [v71]
+    v87 <- CallMethod v84, 'getOwnPropertySymbols', [v80]
+EndPlainFunction
+v88 <- CallFunction v68, []
+v89 <- BeginPlainFunction -> 
+    v90 <- LoadString 'sym1'
+    v91 <- CreateNamedVariable 'Symbol', 'none'
+    v92 <- CallFunction v91, [v90]
+    v93 <- CreateNamedVariable 'test_sym', 'var', v92
+    v94 <- LoadString 'sym2'
+    v95 <- CallFunction v91, [v94]
+    v96 <- CreateNamedVariable 'test_sym2', 'var', v95
+    v97 <- LoadInteger '1'
+    v98 <- LoadInteger '2'
+    v99 <- LoadInteger '4'
+    v100 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `one`, v97
+        ObjectLiteralAddProperty `two`, v98
+        ObjectLiteralAddComputedProperty v93, v99
+        ObjectLiteralAddElement `0`, v100
+    v101 <- EndObjectLiteral
+    v102 <- CreateNamedVariable 'target', 'var', v101
+    v103 <- LoadString 'non-enum'
+    v104 <- LoadBoolean 'false'
+    v105 <- LoadString 'nope'
+    v106 <- LoadBoolean 'true'
+    v107 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v104
+        ObjectLiteralAddProperty `value`, v105
+        ObjectLiteralAddProperty `configurable`, v106
+        ObjectLiteralAddProperty `writable`, v107
+    v108 <- EndObjectLiteral
+    v109 <- CreateNamedVariable 'Object', 'none'
+    v110 <- CallMethod v109, 'defineProperty', [v102, v103, v108]
+    v111 <- LoadInteger '3'
+    v112 <- LoadInteger '1'
+    v113 <- LoadInteger '5'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `target_proto`, v111
+        ObjectLiteralAddElement `1`, v112
+        ObjectLiteralAddComputedProperty v96, v113
+    v114 <- EndObjectLiteral
+    SetProperty v102, '__proto__', v114
+    v115 <- GetProperty v102, '__proto__'
+    v116 <- LoadString 'non-enum2'
+    v117 <- LoadBoolean 'false'
+    v118 <- LoadString 'nope'
+    v119 <- LoadBoolean 'true'
+    v120 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v117
+        ObjectLiteralAddProperty `value`, v118
+        ObjectLiteralAddProperty `configurable`, v119
+        ObjectLiteralAddProperty `writable`, v120
+    v121 <- EndObjectLiteral
+    v122 <- CallMethod v109, 'defineProperty', [v115, v116, v121]
+    v123 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v124 <- EndObjectLiteral
+    v125 <- Construct v123, [v102, v124]
+    v126 <- CreateNamedVariable 'proxy', 'var', v125
+    v127 <- LoadString '0'
+    v128 <- LoadString 'one'
+    v129 <- LoadString 'two'
+    v130 <- CreateArray [v127, v128, v129]
+    v131 <- CallMethod v109, 'keys', [v126]
+    v132 <- LoadString '0'
+    v133 <- LoadString 'one'
+    v134 <- LoadString 'two'
+    v135 <- LoadString 'non-enum'
+    v136 <- CreateArray [v132, v133, v134, v135]
+    v137 <- CallMethod v109, 'getOwnPropertyNames', [v126]
+    v138 <- CreateArray [v93]
+    v139 <- CallMethod v109, 'getOwnPropertySymbols', [v126]
+EndPlainFunction
+v140 <- CallFunction v89, []
+
+
+function testObjectKeys() {
+    var target = { target: 1 };
+    target.__proto__ = { target_proto: 2 };
+    function f6(a7) {
+        return ["foo","bar",Symbol("baz"),"non-enum","not-found"];
+    }
+    function f16(a17, a18) {
+        if (a18 == "non-enum") {
+            return { configurable: true };
+        }
+        if (a18 == "not-found") {
+            return undefined;
+        }
+        return { enumerable: true, configurable: true };
+    }
+    var handler = { ownKeys: f6, getOwnPropertyDescriptor: f16 };
+    const v32 = new Proxy(target, handler);
+    var proxy = v32;
+    ["foo","bar"];
+    Object.keys(proxy);
+    handler.getOwnPropertyDescriptor = undefined;
+    [];
+    Object.keys(proxy);
+    function f42() {
+        const v45 = new Number(1);
+        throw v45;
+    }
+    handler.getOwnPropertyDescriptor = f42;
+    const v46 = () => {
+        return Object.keys(proxy);
+    };
+    v46();
+    handler.ownKeys = undefined;
+    const v51 = () => {
+        return Object.keys(proxy);
+    };
+    v51();
+    handler.getOwnPropertyDescriptor = undefined;
+    ["target"];
+    Object.keys(proxy);
+    ["target"];
+    Object.keys(target);
+    const v62 = new Proxy(proxy, {});
+    var proxy2 = v62;
+    ["target"];
+    Object.keys(proxy2);
+}
+testObjectKeys();
+function testForSymbols() {
+    var symbol = Symbol();
+    const v73 = {};
+    const v78 = {
+        ownKeys() {
+            return ["1",symbol,"2"];
+        },
+    };
+    const v79 = new Proxy(v73, v78);
+    var p = v79;
+    ["1","2"];
+    Object.getOwnPropertyNames(p);
+    [symbol];
+    Object.getOwnPropertySymbols(p);
+}
+testForSymbols();
+function testNoProxyTraps() {
+    var test_sym = Symbol("sym1");
+    var test_sym2 = Symbol("sym2");
+    var target = { one: 1, two: 2, [test_sym]: 4, 0: 0 };
+    Object.defineProperty(target, "non-enum", { enumerable: false, value: "nope", configurable: true, writable: true });
+    target.__proto__ = { target_proto: 3, 1: 1, [test_sym2]: 5 };
+    const v115 = target.__proto__;
+    Object.defineProperty(v115, "non-enum2", { enumerable: false, value: "nope", configurable: true, writable: true });
+    const v125 = new Proxy(target, {});
+    var proxy = v125;
+    ["0","one","two"];
+    Object.keys(proxy);
+    ["0","one","two","non-enum"];
+    Object.getOwnPropertyNames(proxy);
+    [test_sym];
+    Object.getOwnPropertySymbols(proxy);
+}
+testNoProxyTraps();
+
+FuzzIL program written to corpus/proxies-keys.fzil

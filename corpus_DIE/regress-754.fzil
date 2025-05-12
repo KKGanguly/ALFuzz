@@ -1,0 +1,44 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '1'
+v2 <- LoadInteger '2'
+v3 <- LoadInteger '1'
+v4 <- Construct v0, [v1, v2, v3]
+v5 <- CreateNamedVariable 'a', 'var', v4
+v6 <- LoadInteger '1'
+v7 <- LoadInteger '2'
+v8 <- CallMethod v5, 'lastIndexOf', [v7]
+v9 <- LoadInteger '2'
+v10 <- LoadInteger '1'
+v11 <- CallMethod v5, 'lastIndexOf', [v10]
+v12 <- LoadInteger '0'
+v13 <- LoadInteger '1'
+v14 <- LoadUndefined
+v15 <- CallMethod v5, 'lastIndexOf', [v13, v14]
+v16 <- LoadInteger '0'
+v17 <- LoadInteger '1'
+v18 <- LoadNull
+v19 <- CallMethod v5, 'lastIndexOf', [v17, v18]
+v20 <- LoadInteger '1'
+v21 <- UnaryOperation '-', v20
+v22 <- LoadInteger '2'
+v23 <- LoadUndefined
+v24 <- CallMethod v5, 'lastIndexOf', [v22, v23]
+v25 <- LoadInteger '1'
+v26 <- UnaryOperation '-', v25
+v27 <- LoadInteger '2'
+v28 <- LoadNull
+v29 <- CallMethod v5, 'lastIndexOf', [v27, v28]
+
+
+const v4 = new Array(1, 2, 1);
+var a = v4;
+a.lastIndexOf(2);
+a.lastIndexOf(1);
+a.lastIndexOf(1, undefined);
+a.lastIndexOf(1, null);
+-1;
+a.lastIndexOf(2, undefined);
+-1;
+a.lastIndexOf(2, null);
+
+FuzzIL program written to corpus/regress-754.fzil

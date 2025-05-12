@@ -1,0 +1,92 @@
+v0 <- BeginClassDefinition
+EndClassDefinition
+v1 <- BeginClassDefinition
+EndClassDefinition
+v2 <- BeginClassDefinition
+EndClassDefinition
+v3 <- BeginClassDefinition v2
+    BeginClassConstructor -> v4
+        BeginTry
+            CallSuperConstructor []
+        BeginCatch -> v5
+            v6 <- Construct v1, []
+            ThrowException v6
+        EndTryCatch
+    EndClassConstructor
+EndClassDefinition
+v7 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v8, v9, v10, v11
+        v12 <- LoadString 'prototype'
+        v13 <- Compare v10, '===', v12
+        BeginIf v13
+            v14 <- Construct v0, []
+            ThrowException v14
+        EndIf
+    EndObjectLiteralMethod
+v15 <- EndObjectLiteral
+v16 <- Construct v7, [v2, v15]
+v17 <- CreateNamedVariable 'thrower', 'var', v16
+v18 <- BeginArrowFunction -> 
+    v19 <- CreateArray []
+    v20 <- CreateNamedVariable 'Reflect', 'none'
+    v21 <- CallMethod v20, 'construct', [v3, v19, v17]
+    Return v21
+EndArrowFunction
+v22 <- CallFunction v18, []
+v23 <- BeginArrowFunction -> 
+    v24 <- CreateArray []
+    v25 <- CreateNamedVariable 'Reflect', 'none'
+    v26 <- CallMethod v25, 'construct', [v3, v24, v17]
+    Return v26
+EndArrowFunction
+v27 <- CallFunction v23, []
+v28 <- BeginArrowFunction -> 
+    v29 <- CreateArray []
+    v30 <- CreateNamedVariable 'Reflect', 'none'
+    v31 <- CallMethod v30, 'construct', [v3, v29, v17]
+    Return v31
+EndArrowFunction
+v32 <- CallFunction v28, []
+
+
+class C0 {
+}
+class C1 {
+}
+class C2 {
+}
+class C3 extends C2 {
+    constructor() {
+        try {
+            super();
+        } catch(e5) {
+            const v6 = new C1();
+            throw v6;
+        }
+    }
+}
+const v15 = {
+    get(a9, a10, a11) {
+        if (a10 === "prototype") {
+            const v14 = new C0();
+            throw v14;
+        }
+    },
+};
+const v16 = new Proxy(C2, v15);
+var thrower = v16;
+const v18 = () => {
+    return Reflect.construct(C3, [], thrower);
+};
+v18();
+const v23 = () => {
+    return Reflect.construct(C3, [], thrower);
+};
+v23();
+const v28 = () => {
+    return Reflect.construct(C3, [], thrower);
+};
+v28();
+
+FuzzIL program written to corpus/regress-5638.fzil

@@ -1,0 +1,48 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'aaaaaaaaaaaaaa'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadString 'bbbbbbbbbbbbbb'
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- CallFunction v0, []
+    v6 <- CallFunction v2, []
+    v7 <- BinaryOperation v5, '+', v6
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9
+    v10 <- CallFunction v4, []
+    v11 <- BinaryOperation v9, '+', v10
+    Return v11
+EndPlainFunction
+v12 <- LoadString ''
+v13 <- CallFunction v8, [v12]
+v14 <- LoadString ''
+v15 <- CallFunction v8, [v14]
+v16 <- LoadString ''
+v17 <- CallFunction v8, [v16]
+v18 <- CreateNamedVariable 's', 'var', v17
+v19 <- LoadString 'aaaaaaaaaaaaaabbbbbbbbbbbbbc'
+v20 <- Compare v18, '===', v19
+
+
+function get_a() {
+    return "aaaaaaaaaaaaaa";
+}
+function get_b() {
+    return "bbbbbbbbbbbbbb";
+}
+function get_string() {
+    return get_a() + get_b();
+}
+function prefix(a9) {
+    return a9 + get_string();
+}
+prefix("");
+prefix("");
+var s = prefix("");
+s === "aaaaaaaaaaaaaabbbbbbbbbbbbbc";
+
+FuzzIL program written to corpus/regress-696651.fzil

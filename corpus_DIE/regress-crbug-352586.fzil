@@ -1,0 +1,40 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- BeginPlainFunction -> 
+    BeginDoWhileLoopBody
+        v3 <- LoadInteger '1'
+        v4 <- BinaryOperation v1, '+', v3
+        Return v4
+    BeginDoWhileLoopHeader
+        v5 <- LoadBoolean 'false'
+    EndDoWhileLoop v5
+EndPlainFunction
+v6 <- LoadString ''
+v7 <- CreateNamedVariable 'Error', 'none'
+v8 <- CallFunction v7, [v6]
+SetProperty v1, '__proto__', v8
+v9 <- LoadString 'message'
+v10 <- CallMethod v1, '__defineGetter__', [v9, v2]
+v11 <- BeginArrowFunction -> 
+    v12 <- GetProperty v1, 'message'
+    Return v12
+EndArrowFunction
+v13 <- CallFunction v11, []
+v14 <- CreateNamedVariable 'RangeError', 'none'
+
+
+var a = {};
+function getter() {
+    do {
+        return a + 1;
+    } while (false)
+}
+a.__proto__ = Error("");
+a.__defineGetter__("message", getter);
+const v11 = () => {
+    return a.message;
+};
+v11();
+
+FuzzIL program written to corpus/regress-crbug-352586.fzil

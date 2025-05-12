@@ -1,0 +1,62 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '65535'
+    v2 <- LoadInteger '1'
+    v3 <- BinaryOperation v1, '+', v2
+    v4 <- CreateNamedVariable 'source_buffer_length', 'const', v3
+    v5 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v6 <- Construct v5, [v4]
+    v7 <- CreateNamedVariable 'source_buffer', 'const', v6
+    v8 <- CreateNamedVariable 'Uint16Array', 'none'
+    v9 <- Construct v8, [v7]
+    v10 <- CreateNamedVariable 'source', 'const', v9
+    v11 <- GetProperty v7, 'byteLength'
+    v12 <- LoadInteger '2'
+    v13 <- BinaryOperation v4, '/', v12
+    v14 <- GetProperty v10, 'length'
+    v15 <- LoadInteger '65535'
+    v16 <- LoadInteger '1'
+    v17 <- BinaryOperation v15, '-', v16
+    v18 <- CreateNamedVariable 'target_buffer_length', 'const', v17
+    v19 <- Construct v5, [v18]
+    v20 <- CreateNamedVariable 'target_buffer', 'const', v19
+    v21 <- Construct v8, [v20]
+    v22 <- CreateNamedVariable 'target', 'const', v21
+    v23 <- GetProperty v20, 'byteLength'
+    v24 <- LoadInteger '2'
+    v25 <- BinaryOperation v18, '/', v24
+    v26 <- GetProperty v22, 'length'
+    v27 <- BeginArrowFunction -> 
+        v28 <- CallMethod v22, 'set', [v10]
+        Return v28
+    EndArrowFunction
+    v29 <- CallFunction v27, []
+    v30 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v31 <- CallFunction v0, []
+
+
+function TestBufferByteLengthNonSmi() {
+    const source_buffer_length = 65535 + 1;
+    const v6 = new ArrayBuffer(source_buffer_length);
+    const source_buffer = v6;
+    const v9 = new Uint16Array(source_buffer);
+    const source = v9;
+    source_buffer.byteLength;
+    source_buffer_length / 2;
+    source.length;
+    const target_buffer_length = 65535 - 1;
+    const v19 = new ArrayBuffer(target_buffer_length);
+    const target_buffer = v19;
+    const v21 = new Uint16Array(target_buffer);
+    const target = v21;
+    target_buffer.byteLength;
+    target_buffer_length / 2;
+    target.length;
+    const v27 = () => {
+        return target.set(source);
+    };
+    v27();
+}
+TestBufferByteLengthNonSmi();
+
+FuzzIL program written to corpus/typedarray-set-bytelength-not-smi.fzil

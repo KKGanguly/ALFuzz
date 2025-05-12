@@ -1,0 +1,26 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '500'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+BeginForLoopCondition -> v5
+    v6 <- LoadInteger '100000'
+    v7 <- Compare v5, '<', v6
+BeginForLoopAfterthought v7 -> v8
+    v9 <- UnaryOperation v8, '++'
+BeginForLoopBody -> v10
+    v11 <- CreateNamedVariable 'Object', 'none'
+    v12 <- Construct v11, []
+    SetComputedProperty v3, v10, v12
+EndForLoop
+
+
+const v2 = new Array(500);
+var a = v2;
+for (let i5 = 0; i5 < 100000; i5++) {
+    const v12 = new Object();
+    a[i5] = v12;
+}
+
+FuzzIL program written to corpus/regress-crbug-119926.fzil

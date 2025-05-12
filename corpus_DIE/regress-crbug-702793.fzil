@@ -1,0 +1,31 @@
+v0 <- LoadString 'property'
+v1 <- CreateNamedVariable 'prop', 'none'
+Reassign v1, v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- GetProperty v3, 'prop'
+    Return v4
+EndPlainFunction
+v5 <- LoadThis
+v6 <- CallFunction v2, [v5]
+v7 <- LoadThis
+v8 <- CallFunction v2, [v7]
+v9 <- LoadThis
+v10 <- DeleteProperty v9, 'prop'
+v11 <- CreateNamedVariable 'gc', 'none'
+v12 <- CallFunction v11, []
+v13 <- LoadUndefined
+v14 <- LoadThis
+v15 <- CallFunction v2, [v14]
+
+
+prop = "property";
+function f(a3) {
+    return a3.prop;
+}
+f(this);
+f(this);
+delete this.prop;
+gc();
+f(this);
+
+FuzzIL program written to corpus/regress-crbug-702793.fzil

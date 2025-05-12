@@ -1,0 +1,104 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString '__proto__'
+v3 <- CallMethod v0, 'getOwnPropertyDescriptor', [v1, v2]
+v4 <- CreateNamedVariable 'desc', 'var', v3
+v5 <- GetProperty v4, 'enumerable'
+v6 <- GetProperty v4, 'configurable'
+v7 <- LoadString 'function'
+v8 <- GetProperty v4, 'get'
+v9 <- TypeOf v8
+v10 <- LoadString 'function'
+v11 <- GetProperty v4, 'set'
+v12 <- TypeOf v11
+v13 <- BeginPlainFunction -> 
+EndPlainFunction
+v14 <- GetProperty v0, 'prototype'
+v15 <- LoadString '__proto__'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v13
+v16 <- EndObjectLiteral
+v17 <- CallMethod v0, 'defineProperty', [v14, v15, v16]
+v18 <- GetProperty v0, 'prototype'
+v19 <- LoadString '__proto__'
+v20 <- CallMethod v0, 'getOwnPropertyDescriptor', [v18, v19]
+Reassign v4, v20
+v21 <- GetProperty v4, 'enumerable'
+v22 <- GetProperty v4, 'configurable'
+v23 <- CallFunction v13, []
+v24 <- GetProperty v4, 'get'
+v25 <- BeginPlainFunction -> v26
+EndPlainFunction
+v27 <- GetProperty v0, 'prototype'
+v28 <- LoadString '__proto__'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v25
+v29 <- EndObjectLiteral
+v30 <- CallMethod v0, 'defineProperty', [v27, v28, v29]
+v31 <- GetProperty v0, 'prototype'
+v32 <- LoadString '__proto__'
+v33 <- CallMethod v0, 'getOwnPropertyDescriptor', [v31, v32]
+Reassign v4, v33
+v34 <- GetProperty v4, 'enumerable'
+v35 <- GetProperty v4, 'configurable'
+v36 <- CallFunction v25, []
+v37 <- GetProperty v4, 'set'
+v38 <- GetProperty v0, 'prototype'
+v39 <- LoadString '__proto__'
+v40 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v40
+v41 <- EndObjectLiteral
+v42 <- CallMethod v0, 'defineProperty', [v38, v39, v41]
+v43 <- GetProperty v0, 'prototype'
+v44 <- LoadString '__proto__'
+v45 <- CallMethod v0, 'getOwnPropertyDescriptor', [v43, v44]
+Reassign v4, v45
+v46 <- GetProperty v4, 'enumerable'
+v47 <- GetProperty v4, 'configurable'
+v48 <- CallFunction v13, []
+v49 <- GetProperty v4, 'get'
+v50 <- CallFunction v25, []
+v51 <- GetProperty v4, 'set'
+v52 <- GetProperty v0, 'prototype'
+v53 <- CallMethod v0, 'freeze', [v52]
+v54 <- GetProperty v0, 'prototype'
+v55 <- CallMethod v0, 'isFrozen', [v54]
+
+
+var desc = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__");
+desc.enumerable;
+desc.configurable;
+typeof desc.get;
+typeof desc.set;
+function replaced_get() {
+}
+const v14 = Object.prototype;
+Object.defineProperty(v14, "__proto__", { get: replaced_get });
+desc = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__");
+desc.enumerable;
+desc.configurable;
+replaced_get();
+desc.get;
+function replaced_set(a26) {
+}
+const v27 = Object.prototype;
+Object.defineProperty(v27, "__proto__", { set: replaced_set });
+desc = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__");
+desc.enumerable;
+desc.configurable;
+replaced_set();
+desc.set;
+const v38 = Object.prototype;
+Object.defineProperty(v38, "__proto__", { configurable: false });
+desc = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__");
+desc.enumerable;
+desc.configurable;
+replaced_get();
+desc.get;
+replaced_set();
+desc.set;
+Object.freeze(Object.prototype);
+Object.isFrozen(Object.prototype);
+
+FuzzIL program written to corpus/regress-2606.fzil

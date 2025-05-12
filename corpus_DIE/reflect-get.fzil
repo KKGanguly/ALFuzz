@@ -1,0 +1,215 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- BeginPlainFunction -> 
+        v2 <- CreateNamedVariable 'Reflect', 'none'
+        v3 <- CallMethod v2, 'get', []
+        Return v3
+    EndPlainFunction
+    v4 <- CallFunction v1, []
+    v5 <- CallFunction v1, []
+    v6 <- CallFunction v1, []
+EndPlainFunction
+v7 <- CallFunction v0, []
+v8 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v9 <- BeginPlainFunction -> v10
+        v11 <- CreateNamedVariable 'Reflect', 'none'
+        v12 <- CallMethod v11, 'get', [v10]
+        Return v12
+    EndPlainFunction
+    v13 <- LoadUndefined
+    BeginObjectLiteral
+    v14 <- EndObjectLiteral
+    v15 <- CallFunction v9, [v14]
+    v16 <- LoadUndefined
+    BeginObjectLiteral
+    v17 <- EndObjectLiteral
+    v18 <- CallFunction v9, [v17]
+    v19 <- LoadUndefined
+    BeginObjectLiteral
+    v20 <- EndObjectLiteral
+    v21 <- CallFunction v9, [v20]
+EndPlainFunction
+v22 <- CallFunction v8, []
+v23 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v24 <- BeginPlainFunction -> v25
+        v26 <- CreateNamedVariable 'Reflect', 'none'
+        v27 <- CallMethod v26, 'get', [v25]
+        Return v27
+    EndPlainFunction
+    v28 <- LoadUndefined
+    v29 <- LoadInteger '1'
+    v30 <- CallMethod v24, 'bind', [v28, v29]
+    v31 <- CallFunction v30, []
+    v32 <- LoadUndefined
+    v33 <- LoadUndefined
+    v34 <- CallMethod v24, 'bind', [v32, v33]
+    v35 <- CallFunction v34, []
+    v36 <- LoadUndefined
+    v37 <- LoadString 'o'
+    v38 <- CallMethod v24, 'bind', [v36, v37]
+    v39 <- CallFunction v38, []
+EndPlainFunction
+v40 <- CallFunction v23, []
+v41 <- BeginPlainFunction -> 
+    v42 <- LoadInteger '10'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v42
+    v43 <- EndObjectLiteral
+    v44 <- CreateNamedVariable 'o', 'const', v43
+    v45 <- LoadString 'use strict'
+    v46 <- BeginPlainFunction -> 
+        BeginTry
+            v47 <- LoadString 'x'
+            v48 <- CreateNamedVariable 'Reflect', 'none'
+            v49 <- CallMethod v48, 'get', [v44, v47]
+            Return v49
+        BeginCatch -> v50
+            v51 <- LoadInteger '1'
+            Return v51
+        EndTryCatch
+    EndPlainFunction
+    v52 <- LoadInteger '10'
+    v53 <- CallFunction v46, []
+    v54 <- LoadInteger '10'
+    v55 <- CallFunction v46, []
+    v56 <- LoadInteger '10'
+    v57 <- CallFunction v46, []
+EndPlainFunction
+v58 <- CallFunction v41, []
+v59 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    BeginObjectLiteral
+    v60 <- EndObjectLiteral
+    v61 <- CreateNamedVariable 'o', 'const', v60
+    v62 <- BeginPlainFunction -> v63
+        BeginTry
+            v64 <- CreateNamedVariable 'Reflect', 'none'
+            v65 <- CallMethod v64, 'get', [v61, v63]
+            Return v65
+        BeginCatch -> v66
+            v67 <- LoadInteger '1'
+            Return v67
+        EndTryCatch
+    EndPlainFunction
+    v68 <- LoadInteger '1'
+    v69 <- CreateNamedVariable 'Symbol', 'none'
+    v70 <- GetProperty v69, 'toPrimitive'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v70 -> v71
+            v72 <- CreateNamedVariable 'Error', 'none'
+            v73 <- Construct v72, []
+            ThrowException v73
+        EndObjectLiteralComputedMethod
+    v74 <- EndObjectLiteral
+    v75 <- CallFunction v62, [v74]
+    v76 <- LoadInteger '1'
+    v77 <- GetProperty v69, 'toPrimitive'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v77 -> v78
+            v79 <- CreateNamedVariable 'Error', 'none'
+            v80 <- Construct v79, []
+            ThrowException v80
+        EndObjectLiteralComputedMethod
+    v81 <- EndObjectLiteral
+    v82 <- CallFunction v62, [v81]
+    v83 <- LoadInteger '1'
+    v84 <- GetProperty v69, 'toPrimitive'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v84 -> v85
+            v86 <- CreateNamedVariable 'Error', 'none'
+            v87 <- Construct v86, []
+            ThrowException v87
+        EndObjectLiteralComputedMethod
+    v88 <- EndObjectLiteral
+    v89 <- CallFunction v62, [v88]
+EndPlainFunction
+v90 <- CallFunction v59, []
+
+
+function f0() {
+    'use strict';
+    function foo() {
+        return Reflect.get();
+    }
+    foo();
+    foo();
+    foo();
+}
+f0();
+function f8() {
+    'use strict';
+    function foo(a10) {
+        return Reflect.get(a10);
+    }
+    foo({});
+    foo({});
+    foo({});
+}
+f8();
+function f23() {
+    'use strict';
+    function foo(a25) {
+        return Reflect.get(a25);
+    }
+    const t25 = foo.bind(undefined, 1);
+    t25();
+    const t26 = foo.bind(undefined, undefined);
+    t26();
+    const t28 = foo.bind(undefined, "o");
+    t28();
+}
+f23();
+function f41() {
+    const o = { x: 10 };
+    function foo() {
+        try {
+            return Reflect.get(o, "x");
+        } catch(e50) {
+            return 1;
+        }
+    }
+    foo();
+    foo();
+    foo();
+}
+f41();
+function f59() {
+    'use strict';
+    const o = {};
+    function foo(a63) {
+        try {
+            return Reflect.get(o, a63);
+        } catch(e66) {
+            return 1;
+        }
+    }
+    const v70 = Symbol.toPrimitive;
+    const v74 = {
+        [v70]() {
+            const v73 = new Error();
+            throw v73;
+        },
+    };
+    foo(v74);
+    const v77 = Symbol.toPrimitive;
+    const v81 = {
+        [v77]() {
+            const v80 = new Error();
+            throw v80;
+        },
+    };
+    foo(v81);
+    const v84 = Symbol.toPrimitive;
+    const v88 = {
+        [v84]() {
+            const v87 = new Error();
+            throw v87;
+        },
+    };
+    foo(v88);
+}
+f59();
+
+FuzzIL program written to corpus/reflect-get.fzil

@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- LoadInteger '84632'
+    v3 <- Construct v1, [v2]
+    v4 <- CreateNamedVariable 'a', 'var', v3
+    v5 <- LoadInteger '84632'
+    v6 <- Construct v1, [v5]
+    v7 <- CreateNamedVariable 'b', 'var', v6
+    v8 <- LoadInteger '84632'
+    v9 <- Construct v1, [v8]
+    v10 <- CreateNamedVariable 'c', 'var', v9
+    v11 <- CreateArray [v4, v7, v10]
+    Return v11
+EndPlainFunction
+v12 <- CallFunction v0, []
+v13 <- CallFunction v0, []
+BeginForLoopInitializer
+    v14 <- LoadInteger '0'
+BeginForLoopCondition -> v15
+    v16 <- LoadInteger '10'
+    v17 <- Compare v15, '<', v16
+BeginForLoopAfterthought v17 -> v18
+    v19 <- UnaryOperation v18, '++'
+BeginForLoopBody -> v20
+    v21 <- CallFunction v0, []
+EndForLoop
+
+
+function f() {
+    const v3 = new Array(84632);
+    var a = v3;
+    const v6 = new Array(84632);
+    var b = v6;
+    const v9 = new Array(84632);
+    var c = v9;
+    return [a,b,c];
+}
+f();
+f();
+for (let i15 = 0; i15 < 10; i15++) {
+    f();
+}
+
+FuzzIL program written to corpus/regress-crbug-347903.fzil

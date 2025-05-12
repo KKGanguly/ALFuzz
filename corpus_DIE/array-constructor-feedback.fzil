@@ -1,0 +1,381 @@
+v0 <- LoadString 'fast smi only elements'
+v1 <- LoadString 'fast elements'
+v2 <- LoadString 'fast double elements'
+v3 <- LoadString 'dictionary elements'
+v4 <- LoadString 'external byte elements'
+v5 <- LoadString 'external unsigned byte elements'
+v6 <- LoadString 'external short elements'
+v7 <- LoadString 'external unsigned short elements'
+v8 <- LoadString 'external int elements'
+v9 <- LoadString 'external unsigned int elements'
+v10 <- LoadString 'external float elements'
+v11 <- LoadString 'external double elements'
+v12 <- LoadString 'external pixel elements'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `fast_smi_only`, v0
+    ObjectLiteralAddProperty `fast`, v1
+    ObjectLiteralAddProperty `fast_double`, v2
+    ObjectLiteralAddProperty `dictionary`, v3
+    ObjectLiteralAddProperty `external_byte`, v4
+    ObjectLiteralAddProperty `external_unsigned_byte`, v5
+    ObjectLiteralAddProperty `external_short`, v6
+    ObjectLiteralAddProperty `external_unsigned_short`, v7
+    ObjectLiteralAddProperty `external_int`, v8
+    ObjectLiteralAddProperty `external_unsigned_int`, v9
+    ObjectLiteralAddProperty `external_float`, v10
+    ObjectLiteralAddProperty `external_double`, v11
+    ObjectLiteralAddProperty `external_pixel`, v12
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'elements_kind', 'var', v13
+v15 <- BeginPlainFunction -> v16
+EndPlainFunction
+v17 <- BeginPlainFunction -> v18
+    v19 <- LoadBoolean 'false'
+    Return v19
+EndPlainFunction
+v20 <- BeginPlainFunction -> v21, v22, v23
+    v24 <- CallFunction v15, [v22]
+EndPlainFunction
+v25 <- BeginPlainFunction -> 
+    v26 <- BeginPlainFunction -> v27
+        v28 <- Construct v27, []
+        Return v28
+    EndPlainFunction
+    v29 <- CreateNamedVariable 'Array', 'none'
+    v30 <- CallFunction v26, [v29]
+    v31 <- CreateNamedVariable 'a', 'none'
+    Reassign v31, v30
+    v32 <- LoadFloat '3.5'
+    v33 <- CreateNamedVariable 'a', 'none'
+    SetElement v33, '0', v32
+    v34 <- CallFunction v26, [v29]
+    v35 <- CreateNamedVariable 'b', 'none'
+    Reassign v35, v34
+    v36 <- GetProperty v14, 'fast_double'
+    v37 <- CreateNamedVariable 'b', 'none'
+    v38 <- CallFunction v26, [v29]
+    Reassign v37, v38
+    v39 <- GetProperty v14, 'fast_double'
+    v40 <- CallFunction v26, []
+    v41 <- CreateNamedVariable 'Object', 'none'
+    v42 <- CallFunction v26, [v41]
+    Reassign v37, v42
+    v43 <- CallFunction v26, []
+    v44 <- CallFunction v26, [v29]
+    v45 <- CallFunction v26, [v29]
+    Reassign v37, v45
+    v46 <- GetProperty v14, 'fast_smi_only'
+    v47 <- CallFunction v26, []
+    v48 <- LoadFloat '3.5'
+    SetElement v37, '0', v48
+    v49 <- CallFunction v26, [v29]
+    v50 <- CreateNamedVariable 'c', 'none'
+    Reassign v50, v49
+    v51 <- GetProperty v14, 'fast_smi_only'
+    v52 <- CreateNamedVariable 'c', 'none'
+EndPlainFunction
+v53 <- CallFunction v25, []
+v54 <- BeginPlainFunction -> 
+    v55 <- BeginPlainFunction -> v56
+        v57 <- CreateNamedVariable 'Array', 'none'
+        v58 <- Construct v57, [v56]
+        Return v58
+    EndPlainFunction
+    v59 <- LoadInteger '10'
+    v60 <- CallFunction v55, [v59]
+    v61 <- CreateNamedVariable 'a', 'none'
+    Reassign v61, v60
+    v62 <- LoadString 'a string'
+    v63 <- CreateNamedVariable 'a', 'none'
+    SetElement v63, '0', v62
+    v64 <- LoadInteger '10'
+    v65 <- CallFunction v55, [v64]
+    Reassign v63, v65
+    v66 <- GetProperty v14, 'fast'
+    v67 <- LoadInteger '10'
+    v68 <- CallFunction v55, [v67]
+    Reassign v63, v68
+    v69 <- GetProperty v14, 'fast'
+    v70 <- CallFunction v55, []
+    v71 <- LoadInteger '10000'
+    v72 <- CallFunction v55, [v71]
+    v73 <- CallFunction v55, []
+    v74 <- BeginPlainFunction -> v75, v76, v77
+        v78 <- CreateNamedVariable 'Array', 'none'
+        v79 <- Construct v78, [v75, v76, v77]
+        Return v79
+    EndPlainFunction
+    v80 <- LoadInteger '1'
+    v81 <- LoadInteger '2'
+    v82 <- LoadInteger '3'
+    v83 <- CallFunction v74, [v80, v81, v82]
+    Reassign v63, v83
+    v84 <- LoadString 'a string'
+    SetElement v63, '1', v84
+    v85 <- LoadInteger '1'
+    v86 <- LoadInteger '2'
+    v87 <- LoadInteger '3'
+    v88 <- CallFunction v74, [v85, v86, v87]
+    Reassign v63, v88
+    v89 <- GetProperty v14, 'fast'
+    v90 <- LoadInteger '1'
+    v91 <- LoadInteger '2'
+    v92 <- LoadInteger '3'
+    v93 <- CallFunction v74, [v90, v91, v92]
+    Reassign v63, v93
+    v94 <- GetProperty v14, 'fast'
+    v95 <- CallFunction v74, []
+    v96 <- LoadInteger '1'
+    v97 <- LoadString 'oops'
+    v98 <- LoadInteger '3'
+    v99 <- CallFunction v74, [v96, v97, v98]
+    Reassign v63, v99
+    v100 <- CallFunction v74, []
+EndPlainFunction
+v101 <- CallFunction v54, []
+v102 <- BeginPlainFunction -> 
+    v103 <- BeginPlainFunction -> 
+        v104 <- CreateNamedVariable 'Array', 'none'
+        v105 <- Construct v104, []
+        Return v105
+    EndPlainFunction
+    v106 <- CallFunction v103, []
+    v107 <- CreateNamedVariable 'a', 'none'
+    Reassign v107, v106
+    v108 <- CallFunction v103, []
+    v109 <- CallFunction v103, []
+    v110 <- CreateNamedVariable 'b', 'none'
+    Reassign v110, v109
+    v111 <- CallFunction v103, []
+    v112 <- LoadFloat '3.5'
+    v113 <- CreateNamedVariable 'b', 'none'
+    SetElement v113, '0', v112
+    v114 <- CallFunction v103, []
+    v115 <- CreateNamedVariable 'c', 'none'
+    Reassign v115, v114
+    v116 <- GetProperty v14, 'fast_smi_only'
+    v117 <- CreateNamedVariable 'c', 'none'
+    v118 <- CallFunction v103, []
+EndPlainFunction
+v119 <- CallFunction v102, []
+v120 <- BeginPlainFunction -> 
+    v121 <- BeginPlainFunction -> 
+        v122 <- CreateNamedVariable 'Array', 'none'
+        v123 <- Construct v122, []
+        Return v123
+    EndPlainFunction
+    v124 <- CallFunction v121, []
+    v125 <- CallFunction v121, []
+    v126 <- CallFunction v121, []
+    v127 <- CreateNamedVariable 'a', 'none'
+    Reassign v127, v126
+    v128 <- CreateNamedVariable 'a', 'none'
+    v129 <- CreateNamedVariable 'Array', 'none'
+    v130 <- TestInstanceOf v128, v129
+EndPlainFunction
+v131 <- CallFunction v120, []
+v132 <- BeginPlainFunction -> 
+    v133 <- BeginPlainFunction -> v134
+        v135 <- CreateNamedVariable 'Array', 'none'
+        v136 <- Construct v135, [v134]
+        Return v136
+    EndPlainFunction
+    v137 <- LoadInteger '0'
+    v138 <- CallFunction v133, [v137]
+    v139 <- LoadInteger '0'
+    v140 <- CallFunction v133, [v139]
+    v141 <- LoadInteger '0'
+    v142 <- CallFunction v133, [v141]
+    v143 <- CreateNamedVariable 'a', 'none'
+    Reassign v143, v142
+    v144 <- CallFunction v133, []
+    v145 <- CreateNamedVariable 'a', 'none'
+    v146 <- CallFunction v17, [v145]
+    v147 <- LoadInteger '1'
+    v148 <- CallFunction v133, [v147]
+    Reassign v145, v148
+    v149 <- CallFunction v133, []
+    v150 <- CallFunction v17, [v145]
+    v151 <- LoadInteger '100'
+    v152 <- CallFunction v133, [v151]
+    Reassign v145, v152
+    v153 <- CallFunction v17, [v145]
+    v154 <- LoadInteger '0'
+    v155 <- CallFunction v133, [v154]
+    Reassign v145, v155
+    v156 <- CallFunction v133, []
+    v157 <- CallFunction v17, [v145]
+EndPlainFunction
+v158 <- CallFunction v132, []
+v159 <- BeginPlainFunction -> 
+    v160 <- BeginPlainFunction -> v161
+        v162 <- CreateNamedVariable 'Array', 'none'
+        v163 <- Construct v162, [v161]
+        Return v163
+    EndPlainFunction
+    v164 <- LoadInteger '100001'
+    v165 <- CreateNamedVariable 'size', 'var', v164
+    v166 <- CreateNamedVariable 'gc', 'none'
+    v167 <- CallFunction v166, []
+    v168 <- LoadString 'string'
+    v169 <- CallFunction v160, [v165]
+    SetElement v169, '0', v168
+    v170 <- CallFunction v160, [v165]
+    v171 <- CreateNamedVariable 'res', 'var', v170
+    v172 <- GetProperty v14, 'fast'
+    v173 <- CallFunction v160, [v165]
+    v174 <- GetProperty v14, 'fast'
+    v175 <- CallFunction v160, [v165]
+    v176 <- LoadInteger '22937600'
+    v177 <- LoadInteger '2'
+    v178 <- BinaryOperation v176, '*', v177
+    v179 <- CreateNamedVariable 'large_size', 'var', v178
+    v180 <- GetProperty v14, 'dictionary'
+    v181 <- CallFunction v160, [v179]
+EndPlainFunction
+v182 <- CallFunction v159, []
+
+
+const v13 = {
+    fast_smi_only: "fast smi only elements",
+    fast: "fast elements",
+    fast_double: "fast double elements",
+    dictionary: "dictionary elements",
+    external_byte: "external byte elements",
+    external_unsigned_byte: "external unsigned byte elements",
+    external_short: "external short elements",
+    external_unsigned_short: "external unsigned short elements",
+    external_int: "external int elements",
+    external_unsigned_int: "external unsigned int elements",
+    external_float: "external float elements",
+    external_double: "external double elements",
+    external_pixel: "external pixel elements",
+};
+var elements_kind = v13;
+function getKind(a16) {
+}
+function isHoley(a18) {
+    return false;
+}
+function assertKind(a21, a22, a23) {
+    getKind(a22);
+}
+function f25() {
+    function bar0(a27) {
+        const v28 = new a27();
+        return v28;
+    }
+    a = bar0(Array);
+    a[0] = 3.5;
+    b = bar0(Array);
+    elements_kind.fast_double;
+    b = bar0(Array);
+    elements_kind.fast_double;
+    bar0();
+    b = bar0(Object);
+    bar0();
+    bar0(Array);
+    b = bar0(Array);
+    elements_kind.fast_smi_only;
+    bar0();
+    b[0] = 3.5;
+    c = bar0(Array);
+    elements_kind.fast_smi_only;
+}
+f25();
+function f54() {
+    function bar(a56) {
+        const v58 = new Array(a56);
+        return v58;
+    }
+    a = bar(10);
+    a[0] = "a string";
+    a = bar(10);
+    elements_kind.fast;
+    a = bar(10);
+    elements_kind.fast;
+    bar();
+    bar(10000);
+    bar();
+    function barn(a75, a76, a77) {
+        const v79 = new Array(a75, a76, a77);
+        return v79;
+    }
+    a = barn(1, 2, 3);
+    a[1] = "a string";
+    a = barn(1, 2, 3);
+    elements_kind.fast;
+    a = barn(1, 2, 3);
+    elements_kind.fast;
+    barn();
+    a = barn(1, "oops", 3);
+    barn();
+}
+f54();
+function f102() {
+    function bar() {
+        const v105 = new Array();
+        return v105;
+    }
+    a = bar();
+    bar();
+    b = bar();
+    bar();
+    b[0] = 3.5;
+    c = bar();
+    elements_kind.fast_smi_only;
+    bar();
+}
+f102();
+function f120() {
+    function bar() {
+        const v123 = new Array();
+        return v123;
+    }
+    bar();
+    bar();
+    a = bar();
+    a instanceof Array;
+}
+f120();
+function f132() {
+    function bar(a134) {
+        const v136 = new Array(a134);
+        return v136;
+    }
+    bar(0);
+    bar(0);
+    a = bar(0);
+    bar();
+    isHoley(a);
+    a = bar(1);
+    bar();
+    isHoley(a);
+    a = bar(100);
+    isHoley(a);
+    a = bar(0);
+    bar();
+    isHoley(a);
+}
+f132();
+function f159() {
+    function bar(a161) {
+        const v163 = new Array(a161);
+        return v163;
+    }
+    var size = 100001;
+    gc();
+    const t128 = bar(size);
+    t128[0] = "string";
+    var res = bar(size);
+    elements_kind.fast;
+    bar(size);
+    elements_kind.fast;
+    bar(size);
+    var large_size = 22937600 * 2;
+    elements_kind.dictionary;
+    bar(large_size);
+}
+f159();
+
+FuzzIL program written to corpus/array-constructor-feedback.fzil

@@ -1,0 +1,68 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- GetProperty v1, 'prototype'
+    v3 <- GetProperty v2, 'forEach'
+    v4 <- CreateNamedVariable 'Object', 'none'
+    v5 <- CallMethod v4, 'freeze', [v3]
+EndPlainFunction
+v6 <- LoadInteger '0'
+v7 <- CreateArray [v6]
+v8 <- CallMethod v7, 'forEach', [v0]
+v9 <- BeginPlainFunction -> 
+    v10 <- CreateNamedVariable 'Array', 'none'
+    v11 <- GetProperty v10, 'prototype'
+    v12 <- GetProperty v11, 'every'
+    v13 <- CreateNamedVariable 'Object', 'none'
+    v14 <- CallMethod v13, 'seal', [v12]
+EndPlainFunction
+v15 <- LoadInteger '0'
+v16 <- CreateArray [v15]
+v17 <- CallMethod v16, 'every', [v9]
+v18 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v19 <- BeginPlainFunction -> 
+        v20 <- CreateNamedVariable 'Array', 'none'
+        v21 <- GetProperty v20, 'prototype'
+        v22 <- GetProperty v21, 'forEach'
+        v23 <- CreateNamedVariable 'Object', 'none'
+        v24 <- CallMethod v23, 'freeze', [v22]
+    EndPlainFunction
+    v25 <- LoadInteger '0'
+    v26 <- CreateArray [v25]
+    v27 <- CallMethod v26, 'forEach', [v19]
+    v28 <- BeginPlainFunction -> 
+        v29 <- CreateNamedVariable 'Array', 'none'
+        v30 <- GetProperty v29, 'prototype'
+        v31 <- GetProperty v30, 'every'
+        v32 <- CreateNamedVariable 'Object', 'none'
+        v33 <- CallMethod v32, 'seal', [v31]
+    EndPlainFunction
+    v34 <- LoadInteger '0'
+    v35 <- CreateArray [v34]
+    v36 <- CallMethod v35, 'every', [v28]
+EndPlainFunction
+v37 <- CallFunction v18, []
+
+
+function f0() {
+    Object.freeze(Array.prototype.forEach);
+}
+([0]).forEach(f0);
+function f9() {
+    Object.seal(Array.prototype.every);
+}
+([0]).every(f9);
+function testStrict() {
+    'use strict';
+    function f19() {
+        Object.freeze(Array.prototype.forEach);
+    }
+    ([0]).forEach(f19);
+    function f28() {
+        Object.seal(Array.prototype.every);
+    }
+    ([0]).every(f28);
+}
+testStrict();
+
+FuzzIL program written to corpus/regress-1447.fzil

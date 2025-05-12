@@ -1,0 +1,163 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CallMethod v1, 'f', [v2]
+    v4 <- CallMethod v1, 'f', [v2]
+    v5 <- CreateNamedVariable 'x', 'var', v4
+    v6 <- LoadInteger '42'
+    v7 <- LoadInteger '42'
+    v8 <- CallMethod v1, 'f', [v2]
+    v9 <- CallMethod v1, 'f', [v2]
+    v10 <- UnaryOperation '!', v9
+    BeginIf v10
+        v11 <- LoadBoolean 'false'
+    EndIf
+EndPlainFunction
+v12 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v12
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'obj', 'var', v13
+BeginObjectLiteral
+v15 <- EndObjectLiteral
+v16 <- CreateNamedVariable 'o1', 'var', v15
+v17 <- BeginPlainFunction -> v18
+    v19 <- GetProperty v18, 'x'
+    Return v19
+EndPlainFunction
+SetProperty v16, 'f', v17
+BeginForLoopInitializer
+    v20 <- LoadInteger '0'
+BeginForLoopCondition -> v21
+    v22 <- LoadInteger '5'
+    v23 <- Compare v21, '<', v22
+BeginForLoopAfterthought v23 -> v24
+    v25 <- UnaryOperation v24, '++'
+BeginForLoopBody -> v26
+    v27 <- CallFunction v0, [v16, v14]
+EndForLoop
+v28 <- CallFunction v0, [v16, v14]
+v29 <- GetProperty v16, 'f'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v29
+v30 <- EndObjectLiteral
+v31 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v31
+v32 <- EndObjectLiteral
+v33 <- CallFunction v0, [v30, v32]
+v34 <- BeginPlainFunction -> v35, v36
+    v37 <- LoadInteger '43'
+    v38 <- CreateNamedVariable 'y', 'var', v37
+    v39 <- CallMethod v35, 'h', [v38, v38]
+    v40 <- CallMethod v35, 'h', [v36, v38]
+    v41 <- CreateNamedVariable 'x', 'var', v40
+    v42 <- LoadBoolean 'true'
+    v43 <- LoadBoolean 'false'
+    v44 <- CallMethod v35, 'h', [v38, v36]
+    v45 <- CallMethod v35, 'h', [v36, v38]
+    v46 <- UnaryOperation '!', v45
+    BeginIf v46
+        v47 <- LoadBoolean 'false'
+    EndIf
+    v48 <- LoadInteger '1'
+    v49 <- BinaryOperation v38, '+', v48
+    v50 <- LoadInteger '1'
+    v51 <- BinaryOperation v38, '+', v50
+    v52 <- CallMethod v35, 'h', [v49, v51]
+    v53 <- LoadInteger '1'
+    v54 <- BinaryOperation v36, '+', v53
+    v55 <- LoadInteger '1'
+    v56 <- BinaryOperation v38, '+', v55
+    v57 <- CallMethod v35, 'h', [v54, v56]
+    v58 <- CreateNamedVariable 'x', 'var', v57
+    v59 <- LoadBoolean 'true'
+    v60 <- LoadBoolean 'false'
+    v61 <- LoadInteger '1'
+    v62 <- BinaryOperation v38, '+', v61
+    v63 <- LoadInteger '1'
+    v64 <- BinaryOperation v36, '+', v63
+    v65 <- CallMethod v35, 'h', [v62, v64]
+    v66 <- LoadInteger '1'
+    v67 <- BinaryOperation v36, '+', v66
+    v68 <- LoadInteger '1'
+    v69 <- BinaryOperation v38, '+', v68
+    v70 <- CallMethod v35, 'h', [v67, v69]
+    v71 <- UnaryOperation '!', v70
+    BeginIf v71
+        v72 <- LoadBoolean 'false'
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+v73 <- EndObjectLiteral
+v74 <- CreateNamedVariable 'o2', 'var', v73
+v75 <- BeginPlainFunction -> v76, v77
+    v78 <- Compare v76, '<', v77
+    Return v78
+EndPlainFunction
+SetProperty v74, 'h', v75
+BeginForLoopInitializer
+    v79 <- LoadInteger '0'
+BeginForLoopCondition -> v80
+    v81 <- LoadInteger '5'
+    v82 <- Compare v80, '<', v81
+BeginForLoopAfterthought v82 -> v83
+    v84 <- UnaryOperation v83, '++'
+BeginForLoopBody -> v85
+    v86 <- LoadInteger '42'
+    v87 <- CallFunction v34, [v74, v86]
+EndForLoop
+v88 <- LoadInteger '42'
+v89 <- CallFunction v34, [v74, v88]
+v90 <- GetProperty v74, 'h'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `h`, v90
+v91 <- EndObjectLiteral
+v92 <- LoadInteger '42'
+v93 <- CallFunction v34, [v91, v92]
+
+
+function TestInlineOneParam(a1, a2) {
+    a1.f(a2);
+    var x = a1.f(a2);
+    a1.f(a2);
+    if (!a1.f(a2)) {
+    }
+}
+var obj = { x: 42 };
+var o1 = {};
+function f17(a18) {
+    return a18.x;
+}
+o1.f = f17;
+for (let i21 = 0; i21 < 5; i21++) {
+    TestInlineOneParam(o1, obj);
+}
+TestInlineOneParam(o1, obj);
+const v29 = o1.f;
+const v30 = { f: v29 };
+TestInlineOneParam(v30, { x: 42 });
+function TestInlineTwoParams(a35, a36) {
+    var y = 43;
+    a35.h(y, y);
+    var x = a35.h(a36, y);
+    a35.h(y, a36);
+    if (!a35.h(a36, y)) {
+    }
+    a35.h(y + 1, y + 1);
+    var x = a35.h(a36 + 1, y + 1);
+    a35.h(y + 1, a36 + 1);
+    if (!a35.h(a36 + 1, y + 1)) {
+    }
+}
+var o2 = {};
+function f75(a76, a77) {
+    return a76 < a77;
+}
+o2.h = f75;
+for (let i80 = 0; i80 < 5; i80++) {
+    TestInlineTwoParams(o2, 42);
+}
+TestInlineTwoParams(o2, 42);
+const v90 = o2.h;
+TestInlineTwoParams({ h: v90 }, 42);
+
+FuzzIL program written to corpus/inline-param.fzil

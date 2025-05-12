@@ -1,0 +1,440 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'String', 'none'
+v2 <- GetProperty v1, 'prototype'
+v3 <- GetProperty v2, 'includes'
+v4 <- GetProperty v3, 'length'
+v5 <- LoadString 'a'
+v6 <- CreateNamedVariable 's', 'var', v5
+v7 <- LoadNull
+v8 <- CallMethod v6, 'includes', [v7]
+v9 <- LoadUndefined
+v10 <- CallMethod v6, 'includes', [v9]
+v11 <- CallMethod v6, 'includes', []
+v12 <- LoadString 'asdf[a-z]+(asdf)?'
+v13 <- CreateNamedVariable 'reString', 'var', v12
+v14 <- LoadString '[a-z]+'
+v15 <- CallMethod v13, 'includes', [v14]
+v16 <- LoadString '(asdf)?'
+v17 <- CallMethod v13, 'includes', [v16]
+v18 <- LoadString 'ΚΑΣΣΕ'
+v19 <- CreateNamedVariable 'twoByteString', 'var', v18
+v20 <- LoadString 'Κ'
+v21 <- CallMethod v19, 'includes', [v20]
+v22 <- LoadString 'Lamda'
+v23 <- LoadString 'Α'
+v24 <- CallMethod v19, 'includes', [v23]
+v25 <- LoadString 'Alpha'
+v26 <- LoadString 'Σ'
+v27 <- CallMethod v19, 'includes', [v26]
+v28 <- LoadString 'First Sigma'
+v29 <- LoadString 'Σ'
+v30 <- LoadInteger '3'
+v31 <- CallMethod v19, 'includes', [v29, v30]
+v32 <- LoadString 'Second Sigma'
+v33 <- LoadString 'Ε'
+v34 <- CallMethod v19, 'includes', [v33]
+v35 <- LoadString 'Epsilon'
+v36 <- LoadString 'Β'
+v37 <- CallMethod v19, 'includes', [v36]
+v38 <- LoadString 'Not beta'
+v39 <- LoadString 'ΚΑ'
+v40 <- CallMethod v19, 'includes', [v39]
+v41 <- LoadString 'lambda Alpha'
+v42 <- LoadString 'ΑΣ'
+v43 <- CallMethod v19, 'includes', [v42]
+v44 <- LoadString 'Alpha Sigma'
+v45 <- LoadString 'ΣΣ'
+v46 <- CallMethod v19, 'includes', [v45]
+v47 <- LoadString 'Sigma Sigma'
+v48 <- LoadString 'ΣΕ'
+v49 <- CallMethod v19, 'includes', [v48]
+v50 <- LoadString 'Sigma Epsilon'
+v51 <- LoadString 'ΑΣΕ'
+v52 <- CallMethod v19, 'includes', [v51]
+v53 <- LoadString 'Not Alpha Sigma Epsilon'
+v54 <- LoadString 'Ε'
+v55 <- CallMethod v19, 'includes', [v54]
+v56 <- LoadString 'String.prototype.includes.call(null, 'test')'
+v57 <- CreateNamedVariable 'TypeError', 'none'
+v58 <- LoadString 'String.prototype.includes.call(null, null)'
+v59 <- LoadString 'String.prototype.includes.call(undefined, undefined)'
+v60 <- LoadString 'String.prototype.includes.apply(null, ['test'])'
+v61 <- LoadString 'String.prototype.includes.apply(null, [null])'
+v62 <- LoadString 'String.prototype.includes.apply(undefined, [undefined])'
+v63 <- LoadString 'Empty string'
+v64 <- LoadString ''
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v63
+    ObjectLiteralAddProperty `val`, v64
+v65 <- EndObjectLiteral
+v66 <- LoadString 'Number 1234.34'
+v67 <- LoadFloat '1234.34'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v66
+    ObjectLiteralAddProperty `val`, v67
+v68 <- EndObjectLiteral
+v69 <- LoadString 'Integer number 0'
+v70 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v69
+    ObjectLiteralAddProperty `val`, v70
+v71 <- EndObjectLiteral
+v72 <- LoadString 'Negative number -1'
+v73 <- LoadInteger '1'
+v74 <- UnaryOperation '-', v73
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v72
+    ObjectLiteralAddProperty `val`, v74
+v75 <- EndObjectLiteral
+v76 <- LoadString 'Boolean true'
+v77 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v76
+    ObjectLiteralAddProperty `val`, v77
+v78 <- EndObjectLiteral
+v79 <- LoadString 'Boolean false'
+v80 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v79
+    ObjectLiteralAddProperty `val`, v80
+v81 <- EndObjectLiteral
+v82 <- LoadString 'Empty array []'
+v83 <- CreateArray []
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v82
+    ObjectLiteralAddProperty `val`, v83
+v84 <- EndObjectLiteral
+v85 <- LoadString 'Empty object {}'
+BeginObjectLiteral
+v86 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v85
+    ObjectLiteralAddProperty `val`, v86
+v87 <- EndObjectLiteral
+v88 <- LoadString 'Array of size 3'
+v89 <- CreateNamedVariable 'Array', 'none'
+v90 <- LoadInteger '3'
+v91 <- Construct v89, [v90]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v88
+    ObjectLiteralAddProperty `val`, v91
+v92 <- EndObjectLiteral
+v93 <- CreateArray [v65, v68, v71, v75, v78, v81, v84, v87, v92]
+v94 <- CreateNamedVariable 'TEST_INPUT', 'var', v93
+v95 <- LoadInteger '0'
+v96 <- CreateNamedVariable 'i', 'var', v95
+v97 <- GetProperty v94, 'length'
+v98 <- CreateNamedVariable 'l', 'var', v97
+BeginForLoopInitializer
+BeginForLoopCondition
+    v99 <- Compare v96, '<', v98
+BeginForLoopAfterthought v99
+    v100 <- UnaryOperation v96, '++'
+BeginForLoopBody
+    v101 <- GetComputedProperty v94, v96
+    v102 <- CreateNamedVariable 'e', 'var', v101
+    v103 <- GetProperty v102, 'val'
+    v104 <- CreateNamedVariable 'v', 'var', v103
+    v105 <- CallFunction v1, [v104]
+    v106 <- CreateNamedVariable 's', 'var', v105
+    v107 <- CallMethod v106, 'includes', [v104]
+    v108 <- GetProperty v102, 'msg'
+    v109 <- GetProperty v1, 'prototype'
+    v110 <- GetProperty v109, 'includes'
+    v111 <- CallMethod v110, 'call', [v104, v104]
+    v112 <- GetProperty v102, 'msg'
+    v113 <- CreateArray [v104]
+    v114 <- GetProperty v1, 'prototype'
+    v115 <- GetProperty v114, 'includes'
+    v116 <- CallMethod v115, 'apply', [v104, v113]
+    v117 <- GetProperty v102, 'msg'
+EndForLoop
+v118 <- LoadString 'a'
+v119 <- LoadString 'abc'
+v120 <- CallMethod v119, 'includes', [v118]
+v121 <- LoadString 'b'
+v122 <- LoadString 'abc'
+v123 <- CallMethod v122, 'includes', [v121]
+v124 <- LoadString 'abc'
+v125 <- LoadString 'abc'
+v126 <- CallMethod v125, 'includes', [v124]
+v127 <- LoadString 'bc'
+v128 <- LoadString 'abc'
+v129 <- CallMethod v128, 'includes', [v127]
+v130 <- LoadString 'd'
+v131 <- LoadString 'abc'
+v132 <- CallMethod v131, 'includes', [v130]
+v133 <- LoadString 'abcd'
+v134 <- LoadString 'abc'
+v135 <- CallMethod v134, 'includes', [v133]
+v136 <- LoadString 'ac'
+v137 <- LoadString 'abc'
+v138 <- CallMethod v137, 'includes', [v136]
+v139 <- LoadString 'abc'
+v140 <- LoadInteger '0'
+v141 <- LoadString 'abc'
+v142 <- CallMethod v141, 'includes', [v139, v140]
+v143 <- LoadString 'bc'
+v144 <- LoadInteger '0'
+v145 <- LoadString 'abc'
+v146 <- CallMethod v145, 'includes', [v143, v144]
+v147 <- LoadString 'de'
+v148 <- LoadInteger '0'
+v149 <- LoadString 'abc'
+v150 <- CallMethod v149, 'includes', [v147, v148]
+v151 <- LoadString 'bc'
+v152 <- LoadInteger '1'
+v153 <- LoadString 'abc'
+v154 <- CallMethod v153, 'includes', [v151, v152]
+v155 <- LoadString 'c'
+v156 <- LoadInteger '1'
+v157 <- LoadString 'abc'
+v158 <- CallMethod v157, 'includes', [v155, v156]
+v159 <- LoadString 'a'
+v160 <- LoadInteger '1'
+v161 <- LoadString 'abc'
+v162 <- CallMethod v161, 'includes', [v159, v160]
+v163 <- LoadString 'abc'
+v164 <- LoadInteger '1'
+v165 <- LoadString 'abc'
+v166 <- CallMethod v165, 'includes', [v163, v164]
+v167 <- LoadString 'c'
+v168 <- LoadInteger '2'
+v169 <- LoadString 'abc'
+v170 <- CallMethod v169, 'includes', [v167, v168]
+v171 <- LoadString 'd'
+v172 <- LoadInteger '2'
+v173 <- LoadString 'abc'
+v174 <- CallMethod v173, 'includes', [v171, v172]
+v175 <- LoadString 'dcd'
+v176 <- LoadInteger '2'
+v177 <- LoadString 'abc'
+v178 <- CallMethod v177, 'includes', [v175, v176]
+v179 <- LoadString 'a'
+v180 <- LoadInteger '42'
+v181 <- LoadString 'abc'
+v182 <- CallMethod v181, 'includes', [v179, v180]
+v183 <- LoadString 'a'
+v184 <- CreateNamedVariable 'Infinity', 'none'
+v185 <- LoadString 'abc'
+v186 <- CallMethod v185, 'includes', [v183, v184]
+v187 <- LoadString 'ab'
+v188 <- LoadInteger '43'
+v189 <- UnaryOperation '-', v188
+v190 <- LoadString 'abc'
+v191 <- CallMethod v190, 'includes', [v187, v189]
+v192 <- LoadString 'cd'
+v193 <- LoadInteger '42'
+v194 <- UnaryOperation '-', v193
+v195 <- LoadString 'abc'
+v196 <- CallMethod v195, 'includes', [v192, v194]
+v197 <- LoadString 'ab'
+v198 <- UnaryOperation '-', v184
+v199 <- LoadString 'abc'
+v200 <- CallMethod v199, 'includes', [v197, v198]
+v201 <- LoadString 'cd'
+v202 <- UnaryOperation '-', v184
+v203 <- LoadString 'abc'
+v204 <- CallMethod v203, 'includes', [v201, v202]
+v205 <- LoadString 'ab'
+v206 <- CreateNamedVariable 'NaN', 'none'
+v207 <- LoadString 'abc'
+v208 <- CallMethod v207, 'includes', [v205, v206]
+v209 <- LoadString 'cd'
+v210 <- LoadString 'abc'
+v211 <- CallMethod v210, 'includes', [v209, v206]
+v212 <- LoadString 'zy '
+v213 <- LoadInteger '2'
+v214 <- LoadString 'xyzzy'
+v215 <- CallMethod v214, 'includes', [v212, v213]
+v216 <- LoadString '.'
+v217 <- LoadInteger '10000'
+v218 <- CallFunction v89, [v217]
+v219 <- CallMethod v218, 'join', [v216]
+v220 <- CreateNamedVariable 'dots', 'var', v219
+v221 <- LoadString ''
+v222 <- LoadInteger '10000'
+v223 <- CallMethod v220, 'includes', [v221, v222]
+v224 <- LoadString ' '
+v225 <- LoadInteger '10000'
+v226 <- CallMethod v220, 'includes', [v224, v225]
+v227 <- BeginPlainFunction -> 
+    v228 <- LoadString 'abc'
+    Return v228
+EndPlainFunction
+v229 <- GetProperty v1, 'prototype'
+v230 <- GetProperty v229, 'includes'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v227
+    ObjectLiteralAddProperty `includes`, v230
+v231 <- EndObjectLiteral
+v232 <- CreateNamedVariable 'myobj', 'var', v231
+v233 <- LoadString 'abc'
+v234 <- CallMethod v232, 'includes', [v233]
+v235 <- LoadString 'cd'
+v236 <- CallMethod v232, 'includes', [v235]
+v237 <- LoadBoolean 'false'
+v238 <- CreateNamedVariable 'gotStr', 'var', v237
+v239 <- LoadBoolean 'false'
+v240 <- CreateNamedVariable 'gotPos', 'var', v239
+v241 <- BeginPlainFunction -> 
+    v242 <- LoadBoolean 'true'
+    Reassign v238, v242
+    v243 <- LoadString 'xyz'
+    Return v243
+EndPlainFunction
+v244 <- GetProperty v1, 'prototype'
+v245 <- GetProperty v244, 'includes'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v241
+    ObjectLiteralAddProperty `includes`, v245
+v246 <- EndObjectLiteral
+Reassign v232, v246
+v247 <- LoadString '[a-z]+'
+v248 <- LoadString 'foo[a-z]+(bar)?'
+v249 <- CallMethod v248, 'includes', [v247]
+v250 <- LoadBoolean 'true'
+v251 <- LoadString ''foo[a-z]+(bar)?'.includes(/[a-z]+/)'
+v252 <- LoadString ''foo/[a-z]+/(bar)?'.includes(/[a-z]+/)'
+v253 <- LoadString '(bar)?'
+v254 <- LoadString 'foo[a-z]+(bar)?'
+v255 <- CallMethod v254, 'includes', [v253]
+v256 <- LoadBoolean 'true'
+v257 <- LoadString ''foo[a-z]+(bar)?'.includes(/(bar)?/)'
+v258 <- LoadString ''foo[a-z]+/(bar)?/'.includes(/(bar)?/)'
+v259 <- LoadString 'String.prototype.includes.call({ 'toString': function() { '
+v260 <- LoadString 'throw RangeError(); } }, /./)'
+v261 <- BinaryOperation v259, '+', v260
+v262 <- CreateNamedVariable 'RangeError', 'none'
+v263 <- LoadString 'String.prototype.includes.call({ 'toString': function() { '
+v264 <- LoadString 'return 'abc'; } }, /./)'
+v265 <- BinaryOperation v263, '+', v264
+v266 <- LoadString 'String.prototype.includes.apply({ 'toString': function() { '
+v267 <- LoadString 'throw RangeError(); } }, [/./])'
+v268 <- BinaryOperation v266, '+', v267
+v269 <- LoadString 'String.prototype.includes.apply({ 'toString': function() { '
+v270 <- LoadString 'return 'abc'; } }, [/./])'
+v271 <- BinaryOperation v269, '+', v270
+v272 <- LoadRegExp '.' ''
+v273 <- CreateNamedVariable 're', 'var', v272
+v274 <- BeginPlainFunction -> 
+    v275 <- LoadString ''
+    v276 <- CallMethod v275, 'includes', [v273]
+EndPlainFunction
+v277 <- CallFunction v274, []
+v278 <- LoadBoolean 'false'
+v279 <- CreateNamedVariable 'Symbol', 'none'
+v280 <- GetProperty v279, 'match'
+SetComputedProperty v273, v280, v278
+v281 <- LoadBoolean 'false'
+v282 <- LoadString ''
+v283 <- CallMethod v282, 'includes', [v273]
+
+
+String.prototype.includes.length;
+var s = "a";
+s.includes(null);
+s.includes(undefined);
+s.includes();
+var reString = "asdf[a-z]+(asdf)?";
+reString.includes("[a-z]+");
+reString.includes("(asdf)?");
+var twoByteString = "ΚΑΣΣΕ";
+twoByteString.includes("Κ");
+twoByteString.includes("Α");
+twoByteString.includes("Σ");
+twoByteString.includes("Σ", 3);
+twoByteString.includes("Ε");
+twoByteString.includes("Β");
+twoByteString.includes("ΚΑ");
+twoByteString.includes("ΑΣ");
+twoByteString.includes("ΣΣ");
+twoByteString.includes("ΣΕ");
+twoByteString.includes("ΑΣΕ");
+twoByteString.includes("Ε");
+const v65 = { msg: "Empty string", val: "" };
+const v68 = { msg: "Number 1234.34", val: 1234.34 };
+const v71 = { msg: "Integer number 0", val: 0 };
+const v74 = -1;
+const v75 = { msg: "Negative number -1", val: v74 };
+const v78 = { msg: "Boolean true", val: true };
+const v81 = { msg: "Boolean false", val: false };
+const v83 = [];
+const v84 = { msg: "Empty array []", val: v83 };
+const v86 = {};
+const v87 = { msg: "Empty object {}", val: v86 };
+const v91 = new Array(3);
+var TEST_INPUT = [v65,v68,v71,v75,v78,v81,v84,v87,{ msg: "Array of size 3", val: v91 }];
+var i = 0;
+var l = TEST_INPUT.length;
+for (; i < l; i++) {
+    var e = TEST_INPUT[i];
+    var v = e.val;
+    var s = String(v);
+    s.includes(v);
+    e.msg;
+    String.prototype.includes.call(v, v);
+    e.msg;
+    const v113 = [v];
+    String.prototype.includes.apply(v, v113);
+    e.msg;
+}
+("abc").includes("a");
+("abc").includes("b");
+("abc").includes("abc");
+("abc").includes("bc");
+("abc").includes("d");
+("abc").includes("abcd");
+("abc").includes("ac");
+("abc").includes("abc", 0);
+("abc").includes("bc", 0);
+("abc").includes("de", 0);
+("abc").includes("bc", 1);
+("abc").includes("c", 1);
+("abc").includes("a", 1);
+("abc").includes("abc", 1);
+("abc").includes("c", 2);
+("abc").includes("d", 2);
+("abc").includes("dcd", 2);
+("abc").includes("a", 42);
+("abc").includes("a", Infinity);
+("abc").includes("ab", -43);
+("abc").includes("cd", -42);
+("abc").includes("ab", -Infinity);
+("abc").includes("cd", -Infinity);
+("abc").includes("ab", NaN);
+("abc").includes("cd", NaN);
+("xyzzy").includes("zy ", 2);
+var dots = Array(10000).join(".");
+dots.includes("", 10000);
+dots.includes(" ", 10000);
+function f227() {
+    return "abc";
+}
+const v230 = String.prototype.includes;
+var myobj = { toString: f227, includes: v230 };
+myobj.includes("abc");
+myobj.includes("cd");
+var gotStr = false;
+var gotPos = false;
+function f241() {
+    gotStr = true;
+    return "xyz";
+}
+const v245 = String.prototype.includes;
+myobj = { toString: f241, includes: v245 };
+("foo[a-z]+(bar)?").includes("[a-z]+");
+("foo[a-z]+(bar)?").includes("(bar)?");
+"String.prototype.includes.call({ 'toString': function() { " + "throw RangeError(); } }, /./)";
+"String.prototype.includes.call({ 'toString': function() { " + "return 'abc'; } }, /./)";
+"String.prototype.includes.apply({ 'toString': function() { " + "throw RangeError(); } }, [/./])";
+"String.prototype.includes.apply({ 'toString': function() { " + "return 'abc'; } }, [/./])";
+var re = /./;
+function f274() {
+    ("").includes(re);
+}
+f274();
+re[Symbol.match] = false;
+("").includes(re);
+
+FuzzIL program written to corpus/string-includes.fzil

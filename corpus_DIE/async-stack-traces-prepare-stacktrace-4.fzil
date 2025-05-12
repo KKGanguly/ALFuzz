@@ -1,0 +1,100 @@
+v0 <- BeginArrowFunction -> v1, v2
+    v3 <- CreateNamedVariable 'two', 'none'
+    v4 <- CallFunction v3, []
+    v5 <- GetElement v2, '0'
+    v6 <- CallMethod v5, 'getFunction', []
+    v7 <- GetProperty v3, 'name'
+    v8 <- GetElement v2, '0'
+    v9 <- CallMethod v8, 'getFunctionName', []
+    v10 <- LoadNull
+    v11 <- GetElement v2, '0'
+    v12 <- CallMethod v11, 'getPromiseIndex', []
+    v13 <- GetElement v2, '0'
+    v14 <- CallMethod v13, 'isAsync', []
+    v15 <- CreateNamedVariable 'Promise', 'none'
+    v16 <- CallMethod v15, 'all', []
+    v17 <- GetElement v2, '1'
+    v18 <- CallMethod v17, 'getFunction', []
+    v19 <- LoadInteger '0'
+    v20 <- GetElement v2, '1'
+    v21 <- CallMethod v20, 'getPromiseIndex', []
+    v22 <- GetElement v2, '1'
+    v23 <- CallMethod v22, 'isAsync', []
+    v24 <- GetElement v2, '1'
+    v25 <- CallMethod v24, 'isPromiseAll', []
+    v26 <- CreateNamedVariable 'one', 'none'
+    v27 <- CallFunction v26, []
+    v28 <- GetElement v2, '2'
+    v29 <- CallMethod v28, 'getFunction', []
+    v30 <- GetProperty v26, 'name'
+    v31 <- GetElement v2, '2'
+    v32 <- CallMethod v31, 'getFunctionName', []
+    v33 <- LoadNull
+    v34 <- GetElement v2, '2'
+    v35 <- CallMethod v34, 'getPromiseIndex', []
+    v36 <- GetElement v2, '2'
+    v37 <- CallMethod v36, 'isAsync', []
+    v38 <- GetElement v2, '2'
+    v39 <- CallMethod v38, 'isPromiseAll', []
+    Return v2
+EndArrowFunction
+v40 <- CreateNamedVariable 'Error', 'none'
+SetProperty v40, 'prepareStackTrace', v0
+v41 <- BeginAsyncFunction -> v42
+    v43 <- CreateNamedVariable 'two', 'none'
+    v44 <- CallFunction v43, [v42]
+    v45 <- CreateArray [v44]
+    v46 <- CreateNamedVariable 'Promise', 'none'
+    v47 <- CallMethod v46, 'all', [v45]
+    v48 <- Await v47
+    Return v48
+EndAsyncFunction
+v49 <- BeginAsyncFunction -> v50
+    BeginTry
+        v51 <- Await v50
+        Reassign v50, v51
+        v52 <- Construct v40, []
+        ThrowException v52
+    BeginCatch -> v53
+        v54 <- GetProperty v53, 'stack'
+        Return v54
+    EndTryCatch
+EndAsyncFunction
+
+
+const v0 = (a1, a2) => {
+    two();
+    a2[0].getFunction();
+    two.name;
+    a2[0].getFunctionName();
+    a2[0].getPromiseIndex();
+    a2[0].isAsync();
+    Promise.all();
+    a2[1].getFunction();
+    a2[1].getPromiseIndex();
+    a2[1].isAsync();
+    a2[1].isPromiseAll();
+    one();
+    a2[2].getFunction();
+    one.name;
+    a2[2].getFunctionName();
+    a2[2].getPromiseIndex();
+    a2[2].isAsync();
+    a2[2].isPromiseAll();
+    return a2;
+};
+Error.prepareStackTrace = v0;
+async function one(a42) {
+    return await Promise.all([two(a42)]);
+}
+async function two(a50) {
+    try {
+        a50 = await a50;
+        const v52 = new Error();
+        throw v52;
+    } catch(e53) {
+        return e53.stack;
+    }
+}
+
+FuzzIL program written to corpus/async-stack-traces-prepare-stacktrace-4.fzil

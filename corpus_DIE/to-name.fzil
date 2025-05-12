@@ -1,0 +1,68 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'xyz'
+    Return v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v0
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '42'
+    Return v5
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v4
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'b', 'var', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadString 'x'
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadInteger '123'
+    Return v11
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v8
+    ObjectLiteralAddProperty `valueOf`, v10
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'c', 'var', v12
+v14 <- BeginPlainFunction -> v15
+    Return v15
+EndPlainFunction
+v16 <- CreateNamedVariable 'Symbol', 'none'
+v17 <- GetProperty v16, 'toPrimitive'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v17, v14
+v18 <- EndObjectLiteral
+v19 <- CreateNamedVariable 'd', 'var', v18
+v20 <- CreateNamedVariable 'Date', 'none'
+v21 <- LoadInteger '0'
+v22 <- Construct v20, [v21]
+v23 <- CreateNamedVariable 'e', 'var', v22
+
+
+function f0() {
+    return "xyz";
+}
+var a = { toString: f0 };
+function f4() {
+    return 42;
+}
+var b = { valueOf: f4 };
+function f8() {
+    return "x";
+}
+function f10() {
+    return 123;
+}
+var c = { toString: f8, valueOf: f10 };
+function f14(a15) {
+    return a15;
+}
+const v17 = Symbol.toPrimitive;
+var d = { [v17]: f14 };
+const v22 = new Date(0);
+var e = v22;
+
+FuzzIL program written to corpus/to-name.fzil

@@ -1,0 +1,20 @@
+v0 <- LoadString 'x'
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+v3 <- TernaryOperation v0, v1, v2
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'o', 'var', v4
+
+
+function f1() {
+}
+function f2() {
+}
+const v3 = "x" ? f1 : f2;
+var o = { f: v3 };
+
+FuzzIL program written to corpus/regress-312.fzil

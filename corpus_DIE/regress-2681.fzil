@@ -1,0 +1,64 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '0'
+    BeginForLoopCondition -> v2
+        v3 <- LoadInteger '10'
+        v4 <- Compare v2, '<', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- UnaryOperation v5, '++'
+    BeginForLoopBody -> v7
+        v8 <- CreateNamedVariable 'gc', 'none'
+        v9 <- CallFunction v8, []
+    EndForLoop
+EndPlainFunction
+v10 <- BeginGeneratorFunction -> 
+    v11 <- LoadInteger '1'
+    v12 <- Yield v11
+    v13 <- LoadInteger '2'
+    v14 <- Yield v13
+EndGeneratorFunction
+v15 <- CallFunction v10, []
+v16 <- CreateNamedVariable 'o', 'var', v15
+v17 <- LoadInteger '1'
+v18 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v17
+    ObjectLiteralAddProperty `done`, v18
+v19 <- EndObjectLiteral
+v20 <- CallMethod v16, 'next', []
+v21 <- CallFunction v0, []
+v22 <- LoadInteger '2'
+v23 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v22
+    ObjectLiteralAddProperty `done`, v23
+v24 <- EndObjectLiteral
+v25 <- CallMethod v16, 'next', []
+v26 <- LoadUndefined
+v27 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v26
+    ObjectLiteralAddProperty `done`, v27
+v28 <- EndObjectLiteral
+v29 <- CallMethod v16, 'next', []
+
+
+function flush_all_code() {
+    for (let i2 = 0; i2 < 10; i2++) {
+        gc();
+    }
+}
+function* g() {
+    yield 1;
+    yield 2;
+}
+var o = g();
+const v19 = { value: 1, done: false };
+o.next();
+flush_all_code();
+const v24 = { value: 2, done: false };
+o.next();
+const v28 = { value: undefined, done: true };
+o.next();
+
+FuzzIL program written to corpus/regress-2681.fzil

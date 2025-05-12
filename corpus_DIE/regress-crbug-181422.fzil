@@ -1,0 +1,38 @@
+v0 <- LoadString ' '
+v1 <- CreateArray [v0]
+v2 <- LoadRegExp '\s' ''
+v3 <- LoadString 'ab cd'
+v4 <- CallMethod v3, 'match', [v2]
+v5 <- LoadString 'a'
+v6 <- LoadString 'b'
+v7 <- LoadString 'c'
+v8 <- LoadString 'd'
+v9 <- CreateArray [v5, v6, v7, v8]
+v10 <- LoadRegExp '\S' 'g'
+v11 <- LoadString 'ab cd'
+v12 <- CallMethod v11, 'match', [v10]
+v13 <- LoadString ' '
+v14 <- CreateArray [v13]
+v15 <- LoadRegExp '\s' ''
+v16 <- LoadString '☄b cd'
+v17 <- CallMethod v16, 'match', [v15]
+v18 <- LoadString '☄'
+v19 <- LoadString 'b'
+v20 <- LoadString 'c'
+v21 <- LoadString 'd'
+v22 <- CreateArray [v18, v19, v20, v21]
+v23 <- LoadRegExp '\S' 'g'
+v24 <- LoadString '☄b cd'
+v25 <- CallMethod v24, 'match', [v23]
+
+
+[" "];
+("ab cd").match(/\s/);
+["a","b","c","d"];
+("ab cd").match(/\S/g);
+[" "];
+("☄b cd").match(/\s/);
+["☄","b","c","d"];
+("☄b cd").match(/\S/g);
+
+FuzzIL program written to corpus/regress-crbug-181422.fzil

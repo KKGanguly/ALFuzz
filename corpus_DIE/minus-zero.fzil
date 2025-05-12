@@ -1,0 +1,106 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '+', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '0'
+v5 <- LoadInteger '0'
+v6 <- LoadInteger '0'
+v7 <- CallFunction v0, [v5, v6]
+v8 <- LoadInteger '0'
+v9 <- LoadInteger '0'
+v10 <- LoadInteger '0'
+v11 <- CallFunction v0, [v9, v10]
+v12 <- LoadInteger '0'
+v13 <- UnaryOperation '-', v12
+v14 <- LoadInteger '0'
+v15 <- UnaryOperation '-', v14
+v16 <- LoadInteger '0'
+v17 <- UnaryOperation '-', v16
+v18 <- CallFunction v0, [v15, v17]
+v19 <- BeginPlainFunction -> 
+    v20 <- LoadInteger '0'
+    v21 <- UnaryOperation '-', v20
+    v22 <- LoadInteger '0'
+    v23 <- UnaryOperation '-', v22
+    v24 <- CreateNamedVariable 'Math', 'none'
+    v25 <- CallMethod v24, 'sin', [v23]
+EndPlainFunction
+v26 <- CallFunction v19, []
+v27 <- CallFunction v19, []
+v28 <- CallFunction v19, []
+v29 <- BeginPlainFunction -> 
+    v30 <- LoadInteger '0'
+    v31 <- UnaryOperation '-', v30
+    v32 <- LoadInteger '0'
+    v33 <- UnaryOperation '-', v32
+    v34 <- CreateNamedVariable 'Math', 'none'
+    v35 <- CallMethod v34, 'floor', [v33]
+EndPlainFunction
+v36 <- CallFunction v29, []
+v37 <- CallFunction v29, []
+v38 <- CallFunction v29, []
+v39 <- LoadInteger '0'
+v40 <- CreateNamedVariable 'Math', 'none'
+v41 <- CallMethod v40, 'cos', [v39]
+v42 <- CreateNamedVariable 'double_one', 'var', v41
+v43 <- BeginPlainFunction -> v44, v45
+    v46 <- BinaryOperation v44, '+', v45
+    Return v46
+EndPlainFunction
+v47 <- LoadInteger '1'
+v48 <- LoadInteger '1'
+v49 <- LoadInteger '0'
+v50 <- CallFunction v43, [v42, v49]
+v51 <- BinaryOperation v48, '/', v50
+v52 <- LoadInteger '1'
+v53 <- LoadInteger '1'
+v54 <- LoadInteger '0'
+v55 <- CallFunction v43, [v54, v42]
+v56 <- BinaryOperation v53, '/', v55
+v57 <- LoadInteger '1'
+v58 <- LoadInteger '0'
+v59 <- UnaryOperation '-', v58
+v60 <- LoadInteger '0'
+v61 <- UnaryOperation '-', v60
+v62 <- BinaryOperation v59, '+', v61
+v63 <- BinaryOperation v57, '/', v62
+v64 <- LoadInteger '1'
+v65 <- LoadInteger '0'
+v66 <- UnaryOperation '-', v65
+v67 <- LoadInteger '0'
+v68 <- UnaryOperation '-', v67
+v69 <- CallFunction v43, [v66, v68]
+v70 <- BinaryOperation v64, '/', v69
+
+
+function add(a1, a2) {
+    return a1 + a2;
+}
+add(0, 0);
+add(0, 0);
+-0;
+add(-0, -0);
+function testsin() {
+    -0;
+    Math.sin(-0);
+}
+testsin();
+testsin();
+testsin();
+function testfloor() {
+    -0;
+    Math.floor(-0);
+}
+testfloor();
+testfloor();
+testfloor();
+var double_one = Math.cos(0);
+function add(a44, a45) {
+    return a44 + a45;
+}
+1 / add(double_one, 0);
+1 / add(0, double_one);
+1 / (-0 + -0);
+1 / add(-0, -0);
+
+FuzzIL program written to corpus/minus-zero.fzil

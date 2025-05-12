@@ -1,0 +1,523 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- LoadInteger '10'
+    v3 <- Construct v1, [v2]
+    v4 <- CreateNamedVariable 'array', 'var', v3
+    v5 <- LoadInteger '13'
+    v6 <- LoadString '1st'
+    v7 <- LoadString '2ns'
+    v8 <- LoadString '3rd'
+    v9 <- CallMethod v4, 'unshift', [v6, v7, v8]
+    v10 <- LoadInteger '0'
+    v11 <- TestIn v10, v4
+    v12 <- LoadInteger '1'
+    v13 <- TestIn v12, v4
+    v14 <- LoadInteger '2'
+    v15 <- TestIn v14, v4
+    v16 <- LoadInteger '3'
+    v17 <- TestIn v16, v4
+EndPlainFunction
+v18 <- CallFunction v0, []
+v19 <- BeginPlainFunction -> 
+    v20 <- LoadInteger '3'
+    v21 <- CreateNamedVariable 'len', 'var', v20
+    v22 <- CreateNamedVariable 'Array', 'none'
+    v23 <- Construct v22, [v21]
+    v24 <- CreateNamedVariable 'array', 'var', v23
+    v25 <- LoadString '@0'
+    v26 <- CreateNamedVariable 'at0', 'var', v25
+    v27 <- LoadString '@2'
+    v28 <- CreateNamedVariable 'at2', 'var', v27
+    v29 <- GetProperty v22, 'prototype'
+    SetElement v29, '0', v26
+    v30 <- GetProperty v22, 'prototype'
+    SetElement v30, '2', v28
+    v31 <- LoadInteger '0'
+    v32 <- CallMethod v24, 'hasOwnProperty', [v31]
+    v33 <- LoadInteger '1'
+    v34 <- CallMethod v24, 'hasOwnProperty', [v33]
+    v35 <- LoadInteger '2'
+    v36 <- CallMethod v24, 'hasOwnProperty', [v35]
+    v37 <- GetElement v24, '0'
+    v38 <- GetElement v24, '1'
+    v39 <- LoadUndefined
+    v40 <- GetElement v24, '2'
+    v41 <- CallMethod v24, 'unshift', []
+    v42 <- GetProperty v22, 'prototype'
+    v43 <- LoadInteger '0'
+    v44 <- DeleteElement v42, '0'
+    v45 <- GetProperty v22, 'prototype'
+    v46 <- LoadInteger '2'
+    v47 <- DeleteElement v45, '2'
+    v48 <- LoadInteger '0'
+    v49 <- CallMethod v24, 'hasOwnProperty', [v48]
+    v50 <- LoadInteger '1'
+    v51 <- CallMethod v24, 'hasOwnProperty', [v50]
+    v52 <- LoadInteger '2'
+    v53 <- CallMethod v24, 'hasOwnProperty', [v52]
+    v54 <- GetElement v24, '0'
+    v55 <- LoadUndefined
+    v56 <- GetElement v24, '1'
+    v57 <- LoadUndefined
+    v58 <- GetElement v24, '2'
+    v59 <- LoadUndefined
+EndPlainFunction
+v60 <- CallFunction v19, []
+v61 <- BeginPlainFunction -> 
+    v62 <- LoadInteger '9'
+    v63 <- CreateNamedVariable 'len', 'var', v62
+    v64 <- CreateNamedVariable 'Array', 'none'
+    v65 <- Construct v64, [v63]
+    v66 <- CreateNamedVariable 'array', 'var', v65
+    v67 <- LoadString '@3'
+    v68 <- GetProperty v64, 'prototype'
+    SetElement v68, '3', v67
+    v69 <- LoadString '@7'
+    v70 <- GetProperty v64, 'prototype'
+    SetElement v70, '7', v69
+    v71 <- GetProperty v66, 'length'
+    BeginForLoopInitializer
+        v72 <- LoadInteger '0'
+    BeginForLoopCondition -> v73
+        v74 <- GetProperty v66, 'length'
+        v75 <- Compare v73, '<', v74
+    BeginForLoopAfterthought v75 -> v76
+        v77 <- UnaryOperation v76, '++'
+    BeginForLoopBody -> v78
+        v79 <- GetComputedProperty v66, v78
+        v80 <- GetProperty v64, 'prototype'
+        v81 <- GetComputedProperty v80, v78
+    EndForLoop
+    v82 <- LoadInteger '1'
+    v83 <- BinaryOperation v63, '+', v82
+    v84 <- LoadString 'head'
+    v85 <- CallMethod v66, 'unshift', [v84]
+    v86 <- LoadInteger '1'
+    v87 <- BinaryOperation v63, '+', v86
+    v88 <- GetProperty v66, 'length'
+    v89 <- GetElement v66, '4'
+    v90 <- GetProperty v64, 'prototype'
+    v91 <- GetElement v90, '3'
+    v92 <- LoadInteger '4'
+    v93 <- CallMethod v66, 'hasOwnProperty', [v92]
+    v94 <- GetElement v66, '8'
+    v95 <- GetProperty v64, 'prototype'
+    v96 <- GetElement v95, '7'
+    v97 <- LoadInteger '8'
+    v98 <- CallMethod v66, 'hasOwnProperty', [v97]
+    v99 <- LoadString '@5'
+    v100 <- GetProperty v64, 'prototype'
+    SetElement v100, '5', v99
+    v101 <- GetElement v66, '5'
+    v102 <- GetProperty v64, 'prototype'
+    v103 <- GetElement v102, '5'
+    v104 <- LoadInteger '5'
+    v105 <- CallMethod v66, 'hasOwnProperty', [v104]
+    v106 <- GetElement v66, '3'
+    v107 <- GetProperty v64, 'prototype'
+    v108 <- GetElement v107, '3'
+    v109 <- LoadInteger '3'
+    v110 <- CallMethod v66, 'hasOwnProperty', [v109]
+    v111 <- GetElement v66, '7'
+    v112 <- GetProperty v64, 'prototype'
+    v113 <- GetElement v112, '7'
+    v114 <- LoadInteger '7'
+    v115 <- CallMethod v66, 'hasOwnProperty', [v114]
+    v116 <- GetProperty v64, 'prototype'
+    v117 <- LoadInteger '3'
+    v118 <- DeleteElement v116, '3'
+    v119 <- GetProperty v64, 'prototype'
+    v120 <- LoadInteger '5'
+    v121 <- DeleteElement v119, '5'
+    v122 <- GetProperty v64, 'prototype'
+    v123 <- LoadInteger '7'
+    v124 <- DeleteElement v122, '7'
+EndPlainFunction
+v125 <- CallFunction v61, []
+v126 <- BeginPlainFunction -> 
+    v127 <- LoadInteger '3'
+    v128 <- CreateNamedVariable 'len', 'var', v127
+    v129 <- CreateNamedVariable 'Array', 'none'
+    v130 <- Construct v129, [v128]
+    v131 <- CreateNamedVariable 'array', 'var', v130
+    v132 <- LoadString '@0'
+    v133 <- CreateNamedVariable 'at0', 'var', v132
+    v134 <- LoadString '@2'
+    v135 <- CreateNamedVariable 'at2', 'var', v134
+    v136 <- CreateArray []
+    v137 <- CreateNamedVariable 'array_proto', 'var', v136
+    SetElement v137, '0', v133
+    SetElement v137, '2', v135
+    SetProperty v131, '__proto__', v137
+    v138 <- LoadInteger '0'
+    v139 <- CallMethod v131, 'hasOwnProperty', [v138]
+    v140 <- LoadInteger '1'
+    v141 <- CallMethod v131, 'hasOwnProperty', [v140]
+    v142 <- LoadInteger '2'
+    v143 <- CallMethod v131, 'hasOwnProperty', [v142]
+    v144 <- GetElement v131, '0'
+    v145 <- GetElement v131, '1'
+    v146 <- LoadUndefined
+    v147 <- GetElement v131, '2'
+    v148 <- CallMethod v131, 'unshift', []
+    v149 <- LoadInteger '0'
+    v150 <- CallMethod v131, 'hasOwnProperty', [v149]
+    v151 <- LoadInteger '1'
+    v152 <- CallMethod v131, 'hasOwnProperty', [v151]
+    v153 <- LoadInteger '2'
+    v154 <- CallMethod v131, 'hasOwnProperty', [v153]
+    v155 <- GetElement v131, '0'
+    v156 <- GetElement v131, '1'
+    v157 <- LoadUndefined
+    v158 <- GetElement v131, '2'
+EndPlainFunction
+v159 <- CallFunction v126, []
+v160 <- BeginPlainFunction -> 
+    v161 <- LoadInteger '9'
+    v162 <- CreateNamedVariable 'len', 'var', v161
+    v163 <- CreateNamedVariable 'Array', 'none'
+    v164 <- Construct v163, [v162]
+    v165 <- CreateNamedVariable 'array', 'var', v164
+    v166 <- CreateArray []
+    v167 <- CreateNamedVariable 'array_proto', 'var', v166
+    v168 <- LoadString '@3'
+    SetElement v167, '3', v168
+    v169 <- LoadString '@7'
+    SetElement v167, '7', v169
+    SetProperty v165, '__proto__', v167
+    v170 <- GetProperty v165, 'length'
+    BeginForLoopInitializer
+        v171 <- LoadInteger '0'
+    BeginForLoopCondition -> v172
+        v173 <- GetProperty v165, 'length'
+        v174 <- Compare v172, '<', v173
+    BeginForLoopAfterthought v174 -> v175
+        v176 <- UnaryOperation v175, '++'
+    BeginForLoopBody -> v177
+        v178 <- GetComputedProperty v165, v177
+        v179 <- GetComputedProperty v167, v177
+    EndForLoop
+    v180 <- LoadInteger '1'
+    v181 <- BinaryOperation v162, '+', v180
+    v182 <- LoadString 'head'
+    v183 <- CallMethod v165, 'unshift', [v182]
+    v184 <- LoadInteger '1'
+    v185 <- BinaryOperation v162, '+', v184
+    v186 <- GetProperty v165, 'length'
+    v187 <- GetElement v165, '4'
+    v188 <- GetElement v167, '3'
+    v189 <- LoadInteger '4'
+    v190 <- CallMethod v165, 'hasOwnProperty', [v189]
+    v191 <- GetElement v165, '8'
+    v192 <- GetElement v167, '7'
+    v193 <- LoadInteger '8'
+    v194 <- CallMethod v165, 'hasOwnProperty', [v193]
+    v195 <- LoadString '@5'
+    SetElement v167, '5', v195
+    v196 <- GetElement v165, '5'
+    v197 <- GetElement v167, '5'
+    v198 <- LoadInteger '5'
+    v199 <- CallMethod v165, 'hasOwnProperty', [v198]
+    v200 <- GetElement v165, '3'
+    v201 <- GetElement v167, '3'
+    v202 <- LoadInteger '3'
+    v203 <- CallMethod v165, 'hasOwnProperty', [v202]
+    v204 <- GetElement v165, '7'
+    v205 <- GetElement v167, '7'
+    v206 <- LoadInteger '7'
+    v207 <- CallMethod v165, 'hasOwnProperty', [v206]
+EndPlainFunction
+v208 <- CallFunction v160, []
+v209 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v210 <- LoadInteger '0'
+    BeginForLoopCondition -> v211
+        v212 <- LoadInteger '7'
+        v213 <- Compare v211, '<', v212
+    BeginForLoopAfterthought v213 -> v214
+        v215 <- UnaryOperation v214, '++'
+    BeginForLoopBody -> v216
+        BeginTry
+            v217 <- LoadInteger '2'
+            v218 <- LoadInteger '53'
+            v219 <- BinaryOperation v217, '**', v218
+            v220 <- LoadInteger '3'
+            v221 <- BinaryOperation v219, '-', v220
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `length`, v221
+            v222 <- EndObjectLiteral
+            v223 <- CreateNamedVariable 'obj', 'let', v222
+            v224 <- LoadInteger '1'
+            v225 <- LoadInteger '2'
+            v226 <- LoadInteger '3'
+            v227 <- LoadInteger '4'
+            v228 <- LoadInteger '5'
+            v229 <- CreateNamedVariable 'Array', 'none'
+            v230 <- GetProperty v229, 'prototype'
+            v231 <- GetProperty v230, 'unshift'
+            v232 <- CallMethod v231, 'call', [v223, v224, v225, v226, v227, v228]
+            v233 <- LoadString 'Should have thrown TypeError'
+            ThrowException v233
+        BeginCatch -> v234
+            v235 <- CreateNamedVariable 'TypeError', 'none'
+            v236 <- TestInstanceOf v234, v235
+        EndTryCatch
+    EndForLoop
+EndPlainFunction
+v237 <- CallFunction v209, []
+v238 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v239 <- LoadInteger '0'
+    BeginForLoopCondition -> v240
+        v241 <- LoadInteger '7'
+        v242 <- Compare v240, '<', v241
+    BeginForLoopAfterthought v242 -> v243
+        v244 <- UnaryOperation v243, '++'
+    BeginForLoopBody -> v245
+        v246 <- LoadInteger '6'
+        v247 <- LoadInteger '7'
+        v248 <- LoadInteger '8'
+        v249 <- LoadInteger '9'
+        v250 <- CreateArray [v246, v247, v248, v249]
+        v251 <- CreateNamedVariable 'a', 'var', v250
+        v252 <- LoadInteger '1'
+        v253 <- LoadInteger '2'
+        v254 <- LoadInteger '3'
+        v255 <- LoadInteger '4'
+        v256 <- LoadInteger '5'
+        v257 <- CallMethod v251, 'unshift', [v252, v253, v254, v255, v256]
+        v258 <- LoadInteger '1'
+        v259 <- LoadInteger '2'
+        v260 <- LoadInteger '3'
+        v261 <- LoadInteger '4'
+        v262 <- LoadInteger '5'
+        v263 <- LoadInteger '6'
+        v264 <- LoadInteger '7'
+        v265 <- LoadInteger '8'
+        v266 <- LoadInteger '9'
+        v267 <- CreateArray [v258, v259, v260, v261, v262, v263, v264, v265, v266]
+    EndForLoop
+EndPlainFunction
+v268 <- CallFunction v238, []
+v269 <- BeginPlainFunction -> 
+    v270 <- LoadInteger '2'
+    v271 <- LoadInteger '3'
+    v272 <- CreateArray [v270, v271]
+    v273 <- CreateNamedVariable 'array', 'var', v272
+    v274 <- LoadString '1'
+    v275 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v275
+    v276 <- EndObjectLiteral
+    v277 <- CreateNamedVariable 'Object', 'none'
+    v278 <- CallMethod v277, 'defineProperty', [v273, v274, v276]
+    v279 <- LoadInteger '1'
+    v280 <- CallMethod v273, 'unshift', [v279]
+    v281 <- LoadInteger '1'
+    v282 <- LoadInteger '2'
+    v283 <- LoadInteger '3'
+    v284 <- CreateArray [v281, v282, v283]
+    v285 <- LoadInteger '2'
+    v286 <- CreateArray [v285]
+    Reassign v273, v286
+    v287 <- LoadInteger '2'
+    SetProperty v273, 'length', v287
+    v288 <- LoadInteger '3'
+    v289 <- GetProperty v273, '__proto__'
+    SetElement v289, '1', v288
+    v290 <- GetProperty v273, '__proto__'
+    v291 <- LoadString '1'
+    v292 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v292
+    v293 <- EndObjectLiteral
+    v294 <- CallMethod v277, 'defineProperty', [v290, v291, v293]
+    v295 <- LoadInteger '1'
+    v296 <- CallMethod v273, 'unshift', [v295]
+    v297 <- LoadInteger '1'
+    v298 <- LoadInteger '2'
+    v299 <- LoadInteger '3'
+    v300 <- CreateArray [v297, v298, v299]
+EndPlainFunction
+v301 <- CallFunction v269, []
+
+
+function f0() {
+    const v3 = new Array(10);
+    var array = v3;
+    array.unshift("1st", "2ns", "3rd");
+    0 in array;
+    1 in array;
+    2 in array;
+    3 in array;
+}
+f0();
+function f19() {
+    var len = 3;
+    const v23 = new Array(len);
+    var array = v23;
+    var at0 = "@0";
+    var at2 = "@2";
+    const t16 = Array.prototype;
+    t16[0] = at0;
+    const t18 = Array.prototype;
+    t18[2] = at2;
+    array.hasOwnProperty(0);
+    array.hasOwnProperty(1);
+    array.hasOwnProperty(2);
+    array[0];
+    array[1];
+    array[2];
+    array.unshift();
+    const t20 = Array.prototype;
+    delete t20[0];
+    const t28 = Array.prototype;
+    delete t28[2];
+    array.hasOwnProperty(0);
+    array.hasOwnProperty(1);
+    array.hasOwnProperty(2);
+    array[0];
+    array[1];
+    array[2];
+}
+f19();
+function f61() {
+    var len = 9;
+    const v65 = new Array(len);
+    var array = v65;
+    const t43 = Array.prototype;
+    t43[3] = "@3";
+    const t45 = Array.prototype;
+    t45[7] = "@7";
+    array.length;
+    for (let i73 = 0; i73 < array.length; i73++) {
+        array[i73];
+        Array.prototype[i73];
+    }
+    len + 1;
+    array.unshift("head");
+    len + 1;
+    array.length;
+    array[4];
+    Array.prototype[3];
+    array.hasOwnProperty(4);
+    array[8];
+    Array.prototype[7];
+    array.hasOwnProperty(8);
+    const t52 = Array.prototype;
+    t52[5] = "@5";
+    array[5];
+    Array.prototype[5];
+    array.hasOwnProperty(5);
+    array[3];
+    Array.prototype[3];
+    array.hasOwnProperty(3);
+    array[7];
+    Array.prototype[7];
+    array.hasOwnProperty(7);
+    const t64 = Array.prototype;
+    delete t64[3];
+    const t74 = Array.prototype;
+    delete t74[5];
+    const t76 = Array.prototype;
+    delete t76[7];
+}
+f61();
+function f126() {
+    var len = 3;
+    const v130 = new Array(len);
+    var array = v130;
+    var at0 = "@0";
+    var at2 = "@2";
+    var array_proto = [];
+    array_proto[0] = at0;
+    array_proto[2] = at2;
+    array.__proto__ = array_proto;
+    array.hasOwnProperty(0);
+    array.hasOwnProperty(1);
+    array.hasOwnProperty(2);
+    array[0];
+    array[1];
+    array[2];
+    array.unshift();
+    array.hasOwnProperty(0);
+    array.hasOwnProperty(1);
+    array.hasOwnProperty(2);
+    array[0];
+    array[1];
+    array[2];
+}
+f126();
+function f160() {
+    var len = 9;
+    const v164 = new Array(len);
+    var array = v164;
+    var array_proto = [];
+    array_proto[3] = "@3";
+    array_proto[7] = "@7";
+    array.__proto__ = array_proto;
+    array.length;
+    for (let i172 = 0; i172 < array.length; i172++) {
+        array[i172];
+        array_proto[i172];
+    }
+    len + 1;
+    array.unshift("head");
+    len + 1;
+    array.length;
+    array[4];
+    array_proto[3];
+    array.hasOwnProperty(4);
+    array[8];
+    array_proto[7];
+    array.hasOwnProperty(8);
+    array_proto[5] = "@5";
+    array[5];
+    array_proto[5];
+    array.hasOwnProperty(5);
+    array[3];
+    array_proto[3];
+    array.hasOwnProperty(3);
+    array[7];
+    array_proto[7];
+    array.hasOwnProperty(7);
+}
+f160();
+function f209() {
+    for (let i211 = 0; i211 < 7; i211++) {
+        try {
+            const v221 = (2 ** 53) - 3;
+            let obj = { length: v221 };
+            Array.prototype.unshift.call(obj, 1, 2, 3, 4, 5);
+            throw "Should have thrown TypeError";
+        } catch(e234) {
+            e234 instanceof TypeError;
+        }
+    }
+}
+f209();
+function f238() {
+    for (let i240 = 0; i240 < 7; i240++) {
+        var a = [6,7,8,9];
+        a.unshift(1, 2, 3, 4, 5);
+        [1,2,3,4,5,6,7,8,9];
+    }
+}
+f238();
+function f269() {
+    var array = [2,3];
+    Object.defineProperty(array, "1", { enumerable: false });
+    array.unshift(1);
+    [1,2,3];
+    array = [2];
+    array.length = 2;
+    const t169 = array.__proto__;
+    t169[1] = 3;
+    const v290 = array.__proto__;
+    Object.defineProperty(v290, "1", { enumerable: false });
+    array.unshift(1);
+    [1,2,3];
+}
+f269();
+
+FuzzIL program written to corpus/array-unshift.fzil

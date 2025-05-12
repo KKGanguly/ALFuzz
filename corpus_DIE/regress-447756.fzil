@@ -1,0 +1,143 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- UnaryOperation '-', v2
+    v4 <- Construct v1, [v3]
+    v5 <- CreateNamedVariable 'a', 'var', v4
+    v6 <- CreateNamedVariable 'Infinity', 'none'
+    v7 <- LoadInteger '1'
+    v8 <- GetProperty v5, 'length'
+    v9 <- BinaryOperation v7, '/', v8
+    v10 <- LoadInteger '1'
+    v11 <- GetProperty v5, 'byteLength'
+    v12 <- BinaryOperation v10, '/', v11
+    v13 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v14 <- LoadInteger '0'
+    v15 <- UnaryOperation '-', v14
+    v16 <- Construct v13, [v15]
+    v17 <- CreateNamedVariable 'ab', 'var', v16
+    v18 <- LoadInteger '1'
+    v19 <- GetProperty v17, 'byteLength'
+    v20 <- BinaryOperation v18, '/', v19
+    v21 <- LoadInteger '0'
+    v22 <- UnaryOperation '-', v21
+    v23 <- LoadInteger '0'
+    v24 <- UnaryOperation '-', v23
+    v25 <- Construct v1, [v17, v22, v24]
+    v26 <- CreateNamedVariable 'a1', 'var', v25
+    v27 <- LoadInteger '1'
+    v28 <- GetProperty v26, 'length'
+    v29 <- BinaryOperation v27, '/', v28
+    v30 <- LoadInteger '1'
+    v31 <- GetProperty v26, 'byteLength'
+    v32 <- BinaryOperation v30, '/', v31
+    v33 <- LoadInteger '1'
+    v34 <- GetProperty v26, 'byteOffset'
+    v35 <- BinaryOperation v33, '/', v34
+EndPlainFunction
+v36 <- CreateNamedVariable 'Uint8Array', 'none'
+v37 <- CreateNamedVariable 'Int8Array', 'none'
+v38 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v39 <- CreateNamedVariable 'Uint16Array', 'none'
+v40 <- CreateNamedVariable 'Int16Array', 'none'
+v41 <- CreateNamedVariable 'Uint32Array', 'none'
+v42 <- CreateNamedVariable 'Int32Array', 'none'
+v43 <- CreateNamedVariable 'Float32Array', 'none'
+v44 <- CreateNamedVariable 'Float64Array', 'none'
+v45 <- CreateArray [v36, v37, v38, v39, v40, v41, v42, v43, v44]
+v46 <- CreateNamedVariable 'constructors', 'var', v45
+BeginForLoopInitializer
+    v47 <- LoadInteger '0'
+BeginForLoopCondition -> v48
+    v49 <- GetProperty v46, 'length'
+    v50 <- Compare v48, '<', v49
+BeginForLoopAfterthought v50 -> v51
+    v52 <- UnaryOperation v51, '++'
+BeginForLoopBody -> v53
+    v54 <- GetComputedProperty v46, v53
+    v55 <- CallFunction v0, [v54]
+EndForLoop
+v56 <- BeginPlainFunction -> 
+    v57 <- LoadInteger '0'
+    v58 <- UnaryOperation '-', v57
+    v59 <- Construct v36, [v58]
+    v60 <- CreateNamedVariable 'a', 'var', v59
+    v61 <- CreateNamedVariable 'Infinity', 'none'
+    v62 <- LoadInteger '1'
+    v63 <- GetProperty v60, 'length'
+    v64 <- BinaryOperation v62, '/', v63
+    v65 <- LoadInteger '1'
+    v66 <- GetProperty v60, 'byteLength'
+    v67 <- BinaryOperation v65, '/', v66
+    v68 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v69 <- LoadInteger '0'
+    v70 <- UnaryOperation '-', v69
+    v71 <- Construct v68, [v70]
+    v72 <- CreateNamedVariable 'ab', 'var', v71
+    v73 <- LoadInteger '1'
+    v74 <- GetProperty v72, 'byteLength'
+    v75 <- BinaryOperation v73, '/', v74
+    v76 <- LoadInteger '0'
+    v77 <- UnaryOperation '-', v76
+    v78 <- LoadInteger '0'
+    v79 <- UnaryOperation '-', v78
+    v80 <- Construct v36, [v72, v77, v79]
+    v81 <- CreateNamedVariable 'a1', 'var', v80
+    v82 <- LoadInteger '1'
+    v83 <- GetProperty v81, 'length'
+    v84 <- BinaryOperation v82, '/', v83
+    v85 <- LoadInteger '1'
+    v86 <- GetProperty v81, 'byteLength'
+    v87 <- BinaryOperation v85, '/', v86
+    v88 <- LoadInteger '1'
+    v89 <- GetProperty v81, 'byteOffset'
+    v90 <- BinaryOperation v88, '/', v89
+EndPlainFunction
+BeginForLoopInitializer
+    v91 <- LoadInteger '0'
+BeginForLoopCondition -> v92
+    v93 <- LoadInteger '1000'
+    v94 <- Compare v92, '<', v93
+BeginForLoopAfterthought v94 -> v95
+    v96 <- UnaryOperation v95, '++'
+BeginForLoopBody -> v97
+    v98 <- CallFunction v56, []
+EndForLoop
+
+
+function TestConstructor(a1) {
+    const v4 = new a1(-0);
+    var a = v4;
+    1 / a.length;
+    1 / a.byteLength;
+    const v16 = new ArrayBuffer(-0);
+    var ab = v16;
+    1 / ab.byteLength;
+    const v25 = new a1(ab, -0, -0);
+    var a1 = v25;
+    1 / a1.length;
+    1 / a1.byteLength;
+    1 / a1.byteOffset;
+}
+var constructors = [Uint8Array,Int8Array,Uint8ClampedArray,Uint16Array,Int16Array,Uint32Array,Int32Array,Float32Array,Float64Array];
+for (let i48 = 0; i48 < constructors.length; i48++) {
+    TestConstructor(constructors[i48]);
+}
+function TestOptimizedCode() {
+    const v59 = new Uint8Array(-0);
+    var a = v59;
+    1 / a.length;
+    1 / a.byteLength;
+    const v71 = new ArrayBuffer(-0);
+    var ab = v71;
+    1 / ab.byteLength;
+    const v80 = new Uint8Array(ab, -0, -0);
+    var a1 = v80;
+    1 / a1.length;
+    1 / a1.byteLength;
+    1 / a1.byteOffset;
+}
+for (let i92 = 0; i92 < 1000; i92++) {
+    TestOptimizedCode();
+}
+
+FuzzIL program written to corpus/regress-447756.fzil

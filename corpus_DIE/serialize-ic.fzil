@@ -1,0 +1,40 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'foo', 'var', v0
+v2 <- LoadString 'bar'
+SetElement v1, '0', v2
+v3 <- LoadString 'bar'
+v4 <- CreateArray [v3]
+v5 <- LoadUndefined
+v6 <- CreateNamedVariable 'a', 'var', v5
+v7 <- LoadInteger '1'
+v8 <- CreateNamedVariable 'b', 'var', v7
+v9 <- LoadInteger '2'
+v10 <- CreateArray [v9]
+Reassign v6, v10
+v11 <- GetElement v6, '0'
+v12 <- LoadInteger '1'
+v13 <- BinaryOperation v11, '+', v12
+SetElement v6, '0', v13
+v14 <- GetElement v6, '0'
+v15 <- Compare v14, '>', v8
+v16 <- LoadNull
+v17 <- Compare v8, '==', v16
+Reassign v8, v17
+v18 <- LoadString ''
+v19 <- CreateNamedVariable 'Boolean', 'none'
+v20 <- CallFunction v19, [v18]
+v21 <- BinaryOperation v8, '||', v20
+Reassign v8, v21
+
+
+var foo = [];
+foo[0] = "bar";
+["bar"];
+var a;
+var b = 1;
+a[0] = (a = [2])[0] + 1;
+a[0] > b;
+b = b == null;
+b = b || Boolean("");
+
+FuzzIL program written to corpus/serialize-ic.fzil

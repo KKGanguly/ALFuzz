@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadArguments
+    v2 <- UnaryOperation v1, '++'
+    Return v2
+EndPlainFunction
+v3 <- CallFunction v0, []
+v4 <- CreateNamedVariable 'isNaN', 'none'
+v5 <- CallFunction v4, [v3]
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadArguments
+    v8 <- UnaryOperation '++', v7
+    Return v8
+EndPlainFunction
+v9 <- CallFunction v6, []
+v10 <- CallFunction v4, [v9]
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadArguments
+    v13 <- UnaryOperation v12, '--'
+    Return v13
+EndPlainFunction
+v14 <- CallFunction v11, []
+v15 <- CallFunction v4, [v14]
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadArguments
+    v18 <- UnaryOperation '--', v17
+    Return v18
+EndPlainFunction
+v19 <- CallFunction v16, []
+v20 <- CallFunction v4, [v19]
+
+
+function f0() {
+    let v1 = arguments;
+    return v1++;
+}
+isNaN(f0());
+function f6() {
+    let v7 = arguments;
+    return ++v7;
+}
+isNaN(f6());
+function f11() {
+    let v12 = arguments;
+    return v12--;
+}
+isNaN(f11());
+function f16() {
+    let v17 = arguments;
+    return --v17;
+}
+isNaN(f16());
+
+FuzzIL program written to corpus/regress-392.fzil

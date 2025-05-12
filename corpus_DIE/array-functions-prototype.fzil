@@ -1,0 +1,268 @@
+v0 <- LoadInteger '3'
+v1 <- LoadString 'zero'
+v2 <- LoadString 'one'
+v3 <- LoadString 'two'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v0
+    ObjectLiteralAddElement `0`, v1
+    ObjectLiteralAddElement `1`, v2
+    ObjectLiteralAddElement `2`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'proto', 'var', v4
+v6 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v6, 'prototype', v5
+v7 <- LoadString 'zero'
+v8 <- CreateNamedVariable 'Array', 'none'
+v9 <- GetProperty v8, 'prototype'
+SetElement v9, '0', v7
+v10 <- LoadString 'one'
+v11 <- GetProperty v8, 'prototype'
+SetElement v11, '1', v10
+v12 <- LoadString 'two'
+v13 <- GetProperty v8, 'prototype'
+SetElement v13, '2', v12
+v14 <- BeginPlainFunction -> v15, v16
+    BeginForLoopInitializer
+        v17 <- LoadInteger '0'
+    BeginForLoopCondition -> v18
+        v19 <- Compare v18, '<', v16
+    BeginForLoopAfterthought v19 -> v20
+        v21 <- UnaryOperation v20, '++'
+    BeginForLoopBody -> v22
+        v23 <- CallMethod v15, 'hasOwnProperty', [v22]
+    EndForLoop
+EndPlainFunction
+v24 <- BeginPlainFunction -> 
+    v25 <- Construct v6, []
+    v26 <- CreateNamedVariable 'nonArray', 'var', v25
+    v27 <- LoadString 'zero'
+    v28 <- LoadUndefined
+    v29 <- LoadString 'two'
+    v30 <- CreateArray [v27, v28, v29]
+    v31 <- CreateNamedVariable 'array', 'var', v30
+    v32 <- LoadString 'zero'
+    v33 <- CallMethod v31, 'shift', []
+    v34 <- LoadString 'zero'
+    v35 <- GetProperty v8, 'prototype'
+    v36 <- GetProperty v35, 'shift'
+    v37 <- CallMethod v36, 'call', [v26]
+    v38 <- LoadInteger '2'
+    v39 <- GetProperty v31, 'length'
+    v40 <- LoadInteger '2'
+    v41 <- GetProperty v26, 'length'
+    v42 <- LoadInteger '2'
+    v43 <- LoadInteger '2'
+    v44 <- LoadString 'one'
+    v45 <- GetElement v31, '0'
+    v46 <- LoadString 'one'
+    v47 <- GetElement v26, '0'
+    v48 <- LoadString 'two'
+    v49 <- GetElement v31, '1'
+    v50 <- LoadString 'two'
+    v51 <- GetElement v26, '1'
+    v52 <- LoadString 'two'
+    v53 <- GetElement v31, '2'
+    v54 <- LoadString 'two'
+    v55 <- GetElement v26, '2'
+EndPlainFunction
+v56 <- CallFunction v24, []
+v57 <- BeginPlainFunction -> 
+    v58 <- Construct v6, []
+    v59 <- CreateNamedVariable 'nonArray', 'var', v58
+    v60 <- LoadString 'zero'
+    v61 <- LoadUndefined
+    v62 <- LoadString 'two'
+    v63 <- CreateArray [v60, v61, v62]
+    v64 <- CreateNamedVariable 'array', 'var', v63
+    v65 <- LoadInteger '4'
+    v66 <- LoadString 'zero'
+    v67 <- CallMethod v64, 'unshift', [v66]
+    v68 <- LoadInteger '4'
+    v69 <- LoadString 'zero'
+    v70 <- GetProperty v8, 'prototype'
+    v71 <- GetProperty v70, 'unshift'
+    v72 <- CallMethod v71, 'call', [v59, v69]
+    v73 <- LoadInteger '4'
+    v74 <- GetProperty v64, 'length'
+    v75 <- LoadInteger '4'
+    v76 <- GetProperty v59, 'length'
+    v77 <- LoadInteger '4'
+    v78 <- LoadInteger '4'
+    v79 <- LoadString 'zero'
+    v80 <- GetElement v64, '0'
+    v81 <- LoadString 'zero'
+    v82 <- GetElement v59, '0'
+    v83 <- LoadString 'zero'
+    v84 <- GetElement v64, '1'
+    v85 <- LoadString 'zero'
+    v86 <- GetElement v59, '1'
+    v87 <- LoadString 'one'
+    v88 <- GetElement v64, '2'
+    v89 <- LoadString 'one'
+    v90 <- GetElement v59, '2'
+    v91 <- LoadString 'two'
+    v92 <- GetElement v64, '3'
+    v93 <- LoadString 'two'
+    v94 <- GetElement v59, '3'
+EndPlainFunction
+v95 <- CreateNamedVariable 'runTest2', 'none'
+Reassign v95, v57
+v96 <- CreateNamedVariable 'runTest2', 'none'
+v97 <- CallFunction v96, []
+v98 <- BeginPlainFunction -> 
+    v99 <- Construct v6, []
+    v100 <- CreateNamedVariable 'nonArray', 'var', v99
+    v101 <- LoadString 'zero'
+    v102 <- LoadUndefined
+    v103 <- LoadString 'two'
+    v104 <- CreateArray [v101, v102, v103]
+    v105 <- CreateNamedVariable 'array', 'var', v104
+    v106 <- LoadString 'zero'
+    v107 <- CreateArray [v106]
+    v108 <- LoadInteger '0'
+    v109 <- LoadInteger '1'
+    v110 <- CallMethod v105, 'splice', [v108, v109]
+    v111 <- LoadString 'zero'
+    v112 <- CreateArray [v111]
+    v113 <- LoadInteger '0'
+    v114 <- LoadInteger '1'
+    v115 <- GetProperty v8, 'prototype'
+    v116 <- GetProperty v115, 'splice'
+    v117 <- CallMethod v116, 'call', [v100, v113, v114]
+    v118 <- LoadInteger '2'
+    v119 <- GetProperty v105, 'length'
+    v120 <- LoadInteger '2'
+    v121 <- GetProperty v100, 'length'
+    v122 <- LoadInteger '2'
+    v123 <- LoadInteger '2'
+    v124 <- LoadString 'one'
+    v125 <- GetElement v105, '0'
+    v126 <- LoadString 'one'
+    v127 <- GetElement v100, '0'
+    v128 <- LoadString 'two'
+    v129 <- GetElement v105, '1'
+    v130 <- LoadString 'two'
+    v131 <- GetElement v100, '1'
+    v132 <- LoadString 'two'
+    v133 <- GetElement v105, '2'
+    v134 <- LoadString 'two'
+    v135 <- GetElement v100, '2'
+EndPlainFunction
+v136 <- CreateNamedVariable 'runTest3', 'none'
+Reassign v136, v98
+v137 <- CreateNamedVariable 'runTest3', 'none'
+v138 <- CallFunction v137, []
+v139 <- BeginPlainFunction -> 
+    v140 <- Construct v6, []
+    v141 <- CreateNamedVariable 'nonArray', 'var', v140
+    v142 <- LoadString 'zero'
+    v143 <- LoadUndefined
+    v144 <- LoadString 'two'
+    v145 <- CreateArray [v142, v143, v144]
+    v146 <- CreateNamedVariable 'array', 'var', v145
+    v147 <- LoadString 'zero'
+    v148 <- LoadString 'one'
+    v149 <- LoadString 'two'
+    v150 <- CreateArray [v147, v148, v149]
+    v151 <- LoadInteger '0'
+    v152 <- LoadInteger '3'
+    v153 <- CallMethod v146, 'slice', [v151, v152]
+    v154 <- LoadString 'zero'
+    v155 <- LoadString 'one'
+    v156 <- LoadString 'two'
+    v157 <- CreateArray [v154, v155, v156]
+    v158 <- LoadInteger '0'
+    v159 <- LoadInteger '3'
+    v160 <- GetProperty v8, 'prototype'
+    v161 <- GetProperty v160, 'slice'
+    v162 <- CallMethod v161, 'call', [v141, v158, v159]
+EndPlainFunction
+v163 <- CreateNamedVariable 'runTest4', 'none'
+Reassign v163, v139
+v164 <- CreateNamedVariable 'runTest4', 'none'
+v165 <- CallFunction v164, []
+
+
+var proto = { length: 3, 0: "zero", 1: "one", 2: "two" };
+function constructor() {
+}
+constructor.prototype = proto;
+const t4 = Array.prototype;
+t4[0] = "zero";
+const t6 = Array.prototype;
+t6[1] = "one";
+const t8 = Array.prototype;
+t8[2] = "two";
+function assertHasOwnProperties(a15, a16) {
+    for (let i18 = 0; i18 < a16; i18++) {
+        a15.hasOwnProperty(i18);
+    }
+}
+function runTest1() {
+    const v25 = new constructor();
+    var nonArray = v25;
+    var array = ["zero",,"two"];
+    array.shift();
+    Array.prototype.shift.call(nonArray);
+    array.length;
+    nonArray.length;
+    array[0];
+    nonArray[0];
+    array[1];
+    nonArray[1];
+    array[2];
+    nonArray[2];
+}
+runTest1();
+function f57() {
+    const v58 = new constructor();
+    var nonArray = v58;
+    var array = ["zero",,"two"];
+    array.unshift("zero");
+    Array.prototype.unshift.call(nonArray, "zero");
+    array.length;
+    nonArray.length;
+    array[0];
+    nonArray[0];
+    array[1];
+    nonArray[1];
+    array[2];
+    nonArray[2];
+    array[3];
+    nonArray[3];
+}
+runTest2 = f57;
+runTest2();
+function f98() {
+    const v99 = new constructor();
+    var nonArray = v99;
+    var array = ["zero",,"two"];
+    ["zero"];
+    array.splice(0, 1);
+    ["zero"];
+    Array.prototype.splice.call(nonArray, 0, 1);
+    array.length;
+    nonArray.length;
+    array[0];
+    nonArray[0];
+    array[1];
+    nonArray[1];
+    array[2];
+    nonArray[2];
+}
+runTest3 = f98;
+runTest3();
+function f139() {
+    const v140 = new constructor();
+    var nonArray = v140;
+    var array = ["zero",,"two"];
+    ["zero","one","two"];
+    array.slice(0, 3);
+    ["zero","one","two"];
+    Array.prototype.slice.call(nonArray, 0, 3);
+}
+runTest4 = f139;
+runTest4();
+
+FuzzIL program written to corpus/array-functions-prototype.fzil

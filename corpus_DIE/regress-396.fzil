@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallMethod v1, 'getYear', []
+    v3 <- LoadString ''
+    v4 <- BinaryOperation v2, '+', v3
+    v5 <- CreateNamedVariable 'string', 'var', v4
+    v6 <- GetProperty v5, 'length'
+    v7 <- LoadInteger '4'
+    v8 <- Compare v6, '<', v7
+    BeginIf v8
+        v9 <- LoadString ''
+        v10 <- LoadInteger '0'
+        v11 <- BinaryOperation v5, '-', v10
+        v12 <- LoadInteger '1900'
+        v13 <- BinaryOperation v11, '+', v12
+        v14 <- BinaryOperation v9, '+', v13
+        Reassign v5, v14
+    EndIf
+    Return v5
+EndPlainFunction
+v15 <- LoadString '1995'
+v16 <- CreateNamedVariable 'Date', 'none'
+v17 <- LoadString 'Dec 25, 1995'
+v18 <- Construct v16, [v17]
+v19 <- CallFunction v0, [v18]
+v20 <- LoadString '2005'
+v21 <- LoadString 'Dec 25, 2005'
+v22 <- Construct v16, [v21]
+v23 <- CallFunction v0, [v22]
+
+
+function DateYear(a1) {
+    var string = a1.getYear() + "";
+    if (string.length < 4) {
+        string = "" + ((string - 0) + 1900);
+    }
+    return string;
+}
+const v18 = new Date("Dec 25, 1995");
+DateYear(v18);
+const v22 = new Date("Dec 25, 2005");
+DateYear(v22);
+
+FuzzIL program written to corpus/regress-396.fzil

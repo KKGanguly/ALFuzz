@@ -1,0 +1,74 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- LoadInteger '0'
+v3 <- CreateNamedVariable 'count', 'var', v2
+v4 <- LoadString 'x'
+v5 <- BeginPlainFunction -> 
+    v6 <- UnaryOperation v3, '++'
+    v7 <- LoadInteger '100'
+    Return v7
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'defineProperty', [v1, v4, v8]
+v11 <- BeginPlainFunction -> v12, v13
+    v14 <- LoadInteger '1'
+    v15 <- GetProperty v12, 'x'
+    v16 <- GetProperty v13, 'x_tagged'
+    v17 <- BinaryOperation v14, '+', v16
+    Return v17
+EndPlainFunction
+v18 <- LoadBoolean 'false'
+v19 <- CreateNamedVariable 'deopt', 'var', v18
+BeginObjectLiteral
+v20 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x_tagged`, v20
+v21 <- EndObjectLiteral
+v22 <- CreateNamedVariable 'o2', 'var', v21
+v23 <- LoadInteger '1'
+SetProperty v22, 'x_tagged', v23
+v24 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v24
+v25 <- EndObjectLiteral
+v26 <- CallFunction v11, [v25, v22]
+v27 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v27
+v28 <- EndObjectLiteral
+v29 <- CallFunction v11, [v28, v22]
+v30 <- CallFunction v11, [v1, v22]
+v31 <- CreateNamedVariable 'print', 'none'
+v32 <- CallFunction v31, [v30]
+v33 <- LoadBoolean 'true'
+SetProperty v22, 'x_tagged', v33
+v34 <- CallFunction v11, [v1, v22]
+v35 <- CallFunction v31, [v34]
+
+
+var o = {};
+var count = 0;
+function f5() {
+    count++;
+    return 100;
+}
+Object.defineProperty(o, "x", { get: f5 });
+function load(a12, a13) {
+    a12.x;
+    return 1 + a13.x_tagged;
+}
+var deopt = false;
+const v20 = {};
+var o2 = { x_tagged: v20 };
+o2.x_tagged = 1;
+load({ x: 1 }, o2);
+load({ x: 1 }, o2);
+print(load(o, o2));
+o2.x_tagged = true;
+print(load(o, o2));
+
+FuzzIL program written to corpus/load_poly_effect.fzil

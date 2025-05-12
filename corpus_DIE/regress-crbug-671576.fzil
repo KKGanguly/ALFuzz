@@ -1,0 +1,19 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'NaN', 'none'
+    v2 <- CreateArray [v1]
+    v3 <- CallMethod v2, 'keys', []
+    BeginForOfLoop v3 -> v4
+    EndForOfLoop
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+
+
+function f() {
+    for (const v4 of ([NaN]).keys()) {
+    }
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-671576.fzil

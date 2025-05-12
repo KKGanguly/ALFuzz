@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- LoadFloat '2.3'
+    v3 <- CreateArray [v1, v2]
+    v4 <- CreateArrayWithSpread [...v3]
+    Return v4
+EndPlainFunction
+v5 <- LoadUndefined
+v6 <- CallFunction v0, []
+v7 <- GetElement v6, '0'
+v8 <- LoadUndefined
+v9 <- CallFunction v0, []
+v10 <- GetElement v9, '0'
+v11 <- LoadUndefined
+v12 <- CallFunction v0, []
+v13 <- GetElement v12, '0'
+
+
+function f() {
+    return [...[,2.3]];
+}
+f()[0];
+f()[0];
+f()[0];
+
+FuzzIL program written to corpus/regress-crbug-736575.fzil

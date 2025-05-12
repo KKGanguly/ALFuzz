@@ -1,0 +1,36 @@
+v0 <- LoadFloat '2.2'
+v1 <- LoadUndefined
+v2 <- LoadString 'x'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable 'holey', 'var', v3
+v5 <- BeginPlainFunction -> v6
+    v7 <- LoadFloat '1.1'
+    SetElement v4, '0', v7
+    v8 <- GetElement v4, '0'
+    v9 <- CreateNamedVariable 'r', 'var', v8
+    v10 <- LoadInteger '0'
+    v11 <- TernaryOperation v6, v9, v10
+    Reassign v9, v11
+    v12 <- LoadInteger '0'
+    v13 <- Compare v9, '<', v12
+    Return v13
+EndPlainFunction
+v14 <- LoadBoolean 'true'
+v15 <- CallFunction v5, [v14]
+v16 <- LoadBoolean 'true'
+v17 <- CallFunction v5, [v16]
+v18 <- LoadBoolean 'true'
+v19 <- CallFunction v5, [v18]
+
+
+var holey = [2.2,,"x"];
+function f(a6) {
+    holey[0] = 1.1;
+    var r = holey[0];
+    return (r = a6 ? r : 0) < 0;
+}
+f(true);
+f(true);
+f(true);
+
+FuzzIL program written to corpus/regress-758983.fzil

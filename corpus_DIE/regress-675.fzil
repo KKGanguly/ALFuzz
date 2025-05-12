@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadThis
+    v2 <- GetProperty v1, 'x'
+    Return v2
+EndPlainFunction
+v3 <- CallFunction v0, []
+v4 <- CallFunction v0, []
+v5 <- LoadInteger '23'
+v6 <- LoadThis
+SetProperty v6, 'x', v5
+v7 <- LoadInteger '23'
+v8 <- CallFunction v0, []
+v9 <- LoadNull
+v10 <- LoadThis
+SetProperty v10, '__proto__', v9
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadThis
+    v13 <- GetProperty v12, 'y'
+    Return v13
+EndPlainFunction
+v14 <- CallFunction v11, []
+v15 <- CallFunction v11, []
+v16 <- LoadInteger '42'
+v17 <- LoadThis
+SetProperty v17, 'y', v16
+v18 <- LoadInteger '42'
+v19 <- CallFunction v11, []
+
+
+function f() {
+    return this.x;
+}
+f();
+f();
+this.x = 23;
+f();
+this.__proto__ = null;
+function g() {
+    return this.y;
+}
+g();
+g();
+this.y = 42;
+g();
+
+FuzzIL program written to corpus/regress-675.fzil

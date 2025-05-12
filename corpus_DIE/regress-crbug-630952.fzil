@@ -1,0 +1,83 @@
+BeginTry
+    v0 <- BeginPlainFunction -> v1, v2
+    EndPlainFunction
+    v3 <- BeginPlainFunction -> 
+        v4 <- LoadThis
+        v5 <- GetProperty v4, 'mantissa_29_bits'
+        v6 <- CreateNamedVariable 'mantissa_29_shift', 'none'
+        v7 <- BinaryOperation v5, '*', v6
+    EndPlainFunction
+    v8 <- GetProperty v0, 'prototype'
+    SetProperty v8, 'returnSpecial', v3
+    v9 <- BeginPlainFunction -> 
+        v10 <- LoadInteger '65535'
+        v11 <- UnaryOperation '-', v10
+        BeginIf v11
+            v12 <- LoadThis
+            v13 <- CallMethod v12, 'toSingleSubnormal', []
+            Return v13
+        EndIf
+    EndPlainFunction
+    v14 <- GetProperty v0, 'prototype'
+    SetProperty v14, 'toSingle', v9
+    v15 <- BeginPlainFunction -> 
+        v16 <- CreateNamedVariable '__v_15', 'none'
+        BeginIf v16
+            v17 <- LoadThis
+            v18 <- GetProperty v17, 'mantissa_29_bits'
+            v19 <- LoadInteger '1'
+            v20 <- UnaryOperation '-', v19
+            v21 <- Compare v18, '==', v20
+            v22 <- CreateNamedVariable '__v_13', 'none'
+            v23 <- CreateNamedVariable '__v_10', 'none'
+            v24 <- BinaryOperation v22, '&', v23
+            v25 <- LoadInteger '0'
+            v26 <- Compare v24, '==', v25
+            v27 <- BinaryOperation v21, '&&', v26
+            v28 <- CreateNamedVariable '__v_7', 'var', v27
+        EndIf
+        v29 <- CreateNamedVariable '__v_7', 'none'
+        v30 <- CreateNamedVariable '__v_8', 'none'
+        Update v30, '>>', v29
+    EndPlainFunction
+    v31 <- GetProperty v0, 'prototype'
+    SetProperty v31, 'toSingleSubnormal', v15
+    v32 <- Construct v0, []
+    v33 <- CreateNamedVariable '__v_14', 'none'
+    Reassign v33, v32
+    v34 <- CreateNamedVariable '__v_14', 'none'
+    v35 <- CallMethod v34, 'toSingle', []
+BeginCatch -> v36
+EndTryCatch
+
+
+try {
+    function __f_4(a1, a2) {
+    }
+    function f3() {
+        this.mantissa_29_bits * mantissa_29_shift;
+    }
+    const t6 = __f_4.prototype;
+    t6.returnSpecial = f3;
+    function f9() {
+        if (-65535) {
+            return this.toSingleSubnormal();
+        }
+    }
+    const t13 = __f_4.prototype;
+    t13.toSingle = f9;
+    function f15() {
+        if (__v_15) {
+            var __v_7 = (this.mantissa_29_bits == -1) && ((__v_13 & __v_10) == 0);
+        }
+        __v_8 >>= __v_7;
+    }
+    const t21 = __f_4.prototype;
+    t21.toSingleSubnormal = f15;
+    const v32 = new __f_4();
+    __v_14 = v32;
+    __v_14.toSingle();
+} catch(e36) {
+}
+
+FuzzIL program written to corpus/regress-crbug-630952.fzil

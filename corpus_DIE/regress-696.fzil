@@ -1,0 +1,22 @@
+v0 <- LoadString 'x'
+v1 <- CreateNamedVariable 'Date', 'none'
+v2 <- CallMethod v1, 'parse', [v0]
+v3 <- CreateNamedVariable 'isNaN', 'none'
+v4 <- CallFunction v3, [v2]
+v5 <- LoadString '1x'
+v6 <- CallMethod v1, 'parse', [v5]
+v7 <- CallFunction v3, [v6]
+v8 <- LoadString 'xT10:00:00'
+v9 <- CallMethod v1, 'parse', [v8]
+v10 <- CallFunction v3, [v9]
+v11 <- LoadString 'This is a relatively long string'
+v12 <- CallMethod v1, 'parse', [v11]
+v13 <- CallFunction v3, [v12]
+
+
+isNaN(Date.parse("x"));
+isNaN(Date.parse("1x"));
+isNaN(Date.parse("xT10:00:00"));
+isNaN(Date.parse("This is a relatively long string"));
+
+FuzzIL program written to corpus/regress-696.fzil

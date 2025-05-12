@@ -1,0 +1,90 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'foo'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- CreateNamedVariable 'Array', 'none'
+    v6 <- Construct v5, []
+    v7 <- CreateNamedVariable 'result', 'var', v6
+    BeginForLoopInitializer
+        v8 <- LoadInteger '0'
+    BeginForLoopCondition -> v9
+        v10 <- Compare v9, '<', v4
+    BeginForLoopAfterthought v10 -> v11
+        v12 <- UnaryOperation v11, '++'
+    BeginForLoopBody -> v13
+        v14 <- LoadString 'value'
+        v15 <- BinaryOperation v14, '+', v13
+        v16 <- LoadString 'property'
+        v17 <- BinaryOperation v16, '+', v13
+        SetComputedProperty v7, v17, v15
+    EndForLoop
+    SetProperty v7, 'foo', v4
+    Return v7
+EndPlainFunction
+v18 <- LoadInteger '12'
+v19 <- CallFunction v3, [v18]
+v20 <- CreateNamedVariable 'a', 'var', v19
+v21 <- LoadInteger '13'
+v22 <- CallFunction v3, [v21]
+v23 <- CreateNamedVariable 'b', 'var', v22
+v24 <- LoadInteger '14'
+v25 <- CallFunction v3, [v24]
+v26 <- CreateNamedVariable 'c', 'var', v25
+v27 <- LoadInteger '15'
+v28 <- CallFunction v3, [v27]
+v29 <- CreateNamedVariable 'd', 'var', v28
+v30 <- CallFunction v0, [v20]
+v31 <- CallFunction v0, [v20]
+v32 <- CallFunction v0, [v23]
+v33 <- CallFunction v0, [v26]
+v34 <- CallFunction v0, [v29]
+v35 <- LoadInteger '13'
+v36 <- CallFunction v3, [v35]
+v37 <- CreateNamedVariable 'x', 'var', v36
+v38 <- LoadString 'object'
+SetElement v37, '0', v38
+v39 <- LoadInteger '14'
+v40 <- CallFunction v3, [v39]
+Reassign v37, v40
+v41 <- LoadString 'object'
+SetElement v37, '0', v41
+v42 <- LoadInteger '15'
+v43 <- CallFunction v3, [v42]
+Reassign v37, v43
+v44 <- LoadString 'object'
+SetElement v37, '0', v44
+v45 <- CallFunction v0, [v20]
+
+
+function crash(a1) {
+    return a1.foo;
+}
+function base(a4) {
+    const v6 = new Array();
+    var result = v6;
+    for (let i9 = 0; i9 < a4; i9++) {
+        const v15 = "value" + i9;
+        result["property" + i9] = v15;
+    }
+    result.foo = a4;
+    return result;
+}
+var a = base(12);
+var b = base(13);
+var c = base(14);
+var d = base(15);
+crash(a);
+crash(a);
+crash(b);
+crash(c);
+crash(d);
+var x = base(13);
+x[0] = "object";
+x = base(14);
+x[0] = "object";
+x = base(15);
+x[0] = "object";
+crash(a);
+
+FuzzIL program written to corpus/regress-crbug-134055.fzil

@@ -1,0 +1,32 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'bar', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadThis
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '1'
+    Update v1, '+', v5
+    v6 <- LoadInteger '2'
+    v7 <- Compare v1, '===', v6
+    BeginIf v7
+        v8 <- Construct v2, []
+        ThrowException v8
+    EndIf
+EndPlainFunction
+v9 <- CallFunction v4, []
+
+
+var bar = 0;
+function baz() {
+    return this;
+}
+function foo() {
+    if ((bar += 1) === 2) {
+        const v8 = new baz();
+        throw v8;
+    }
+}
+foo();
+
+FuzzIL program written to corpus/inline-dead-jscreate.fzil

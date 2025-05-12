@@ -1,0 +1,36 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadThis
+    SetProperty v2, 'vvv', v0
+    v3 <- CreateNamedVariable 'z', 'var', v0
+    Return v3
+EndPlainFunction
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- GetProperty v4, 'prototype'
+SetProperty v5, 'findOrStore', v1
+v6 <- Construct v4, []
+v7 <- CreateNamedVariable 'a', 'var', v6
+v8 <- CallFunction v0, []
+v9 <- CallMethod v7, 'findOrStore', []
+v10 <- CallFunction v0, []
+v11 <- CallMethod v7, 'findOrStore', []
+
+
+function gee() {
+}
+function f1() {
+    this.vvv = gee;
+    var z = gee;
+    return z;
+}
+const t7 = Object.prototype;
+t7.findOrStore = f1;
+const v6 = new Object();
+var a = v6;
+gee();
+a.findOrStore();
+gee();
+a.findOrStore();
+
+FuzzIL program written to corpus/regress-1254366.fzil

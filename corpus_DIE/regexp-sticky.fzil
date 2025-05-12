@@ -1,0 +1,274 @@
+v0 <- LoadRegExp 'foo.bar' ''
+v1 <- CreateNamedVariable 're', 'var', v0
+v2 <- LoadString 'foo*bar'
+v3 <- CallMethod v2, 'match', [v1]
+v4 <- UnaryOperation '!', v3
+v5 <- UnaryOperation '!', v4
+v6 <- LoadString '..foo*bar'
+v7 <- CallMethod v6, 'match', [v1]
+v8 <- UnaryOperation '!', v7
+v9 <- UnaryOperation '!', v8
+v10 <- LoadRegExp 'foobar' ''
+v11 <- CreateNamedVariable 'plain', 'var', v10
+v12 <- LoadString 'foobar'
+v13 <- CallMethod v12, 'match', [v11]
+v14 <- UnaryOperation '!', v13
+v15 <- UnaryOperation '!', v14
+v16 <- LoadString '..foobar'
+v17 <- CallMethod v16, 'match', [v11]
+v18 <- UnaryOperation '!', v17
+v19 <- UnaryOperation '!', v18
+v20 <- LoadRegExp 'foo.bar' 'y'
+v21 <- CreateNamedVariable 'sticky', 'var', v20
+v22 <- LoadString 'foo*bar'
+v23 <- CallMethod v22, 'match', [v21]
+v24 <- UnaryOperation '!', v23
+v25 <- UnaryOperation '!', v24
+v26 <- LoadInteger '7'
+v27 <- GetProperty v21, 'lastIndex'
+v28 <- LoadString '..foo*bar'
+v29 <- CallMethod v28, 'match', [v21]
+v30 <- UnaryOperation '!', v29
+v31 <- UnaryOperation '!', v30
+v32 <- LoadRegExp 'foobar' 'y'
+v33 <- CreateNamedVariable 'stickyplain', 'var', v32
+v34 <- LoadString 'foobarfoobar'
+v35 <- CallMethod v34, 'match', [v33]
+v36 <- UnaryOperation '!', v35
+v37 <- UnaryOperation '!', v36
+v38 <- LoadInteger '6'
+v39 <- GetProperty v33, 'lastIndex'
+v40 <- LoadString 'foobarfoobar'
+v41 <- CallMethod v40, 'match', [v33]
+v42 <- UnaryOperation '!', v41
+v43 <- UnaryOperation '!', v42
+v44 <- LoadInteger '12'
+v45 <- GetProperty v33, 'lastIndex'
+v46 <- LoadString '..foobarfoobar'
+v47 <- CallMethod v46, 'match', [v33]
+v48 <- UnaryOperation '!', v47
+v49 <- UnaryOperation '!', v48
+v50 <- LoadRegExp 'foo.bar' 'g'
+v51 <- CreateNamedVariable 'global', 'var', v50
+v52 <- LoadString 'foo*bar'
+v53 <- CallMethod v51, 'test', [v52]
+v54 <- LoadString '..foo*bar'
+v55 <- CallMethod v51, 'test', [v54]
+v56 <- LoadInteger '0'
+SetProperty v51, 'lastIndex', v56
+v57 <- LoadString '..foo*bar'
+v58 <- CallMethod v51, 'test', [v57]
+v59 <- LoadRegExp 'foobar' 'g'
+v60 <- CreateNamedVariable 'plainglobal', 'var', v59
+v61 <- LoadString 'foobar'
+v62 <- CallMethod v60, 'test', [v61]
+v63 <- LoadString 'foobar'
+v64 <- CallMethod v60, 'test', [v63]
+v65 <- LoadInteger '0'
+SetProperty v60, 'lastIndex', v65
+v66 <- LoadString 'foobar'
+v67 <- CallMethod v60, 'test', [v66]
+v68 <- LoadRegExp 'foo.bar' 'yg'
+v69 <- CreateNamedVariable 'stickyglobal', 'var', v68
+v70 <- LoadString 'foo*bar'
+v71 <- CallMethod v69, 'test', [v70]
+v72 <- LoadInteger '7'
+v73 <- GetProperty v69, 'lastIndex'
+v74 <- LoadString '..foo*bar'
+v75 <- CallMethod v69, 'test', [v74]
+v76 <- LoadInteger '0'
+SetProperty v69, 'lastIndex', v76
+v77 <- LoadString '..foo*bar'
+v78 <- CallMethod v69, 'test', [v77]
+v79 <- LoadInteger '2'
+SetProperty v69, 'lastIndex', v79
+v80 <- LoadString '..foo*bar'
+v81 <- CallMethod v69, 'test', [v80]
+v82 <- LoadInteger '9'
+v83 <- GetProperty v69, 'lastIndex'
+v84 <- LoadRegExp 'foobar' 'yg'
+v85 <- CreateNamedVariable 'stickyplainglobal', 'var', v84
+v86 <- GetProperty v85, 'sticky'
+v87 <- LoadBoolean 'false'
+SetProperty v85, 'sticky', v87
+v88 <- LoadString 'foobar'
+v89 <- CallMethod v85, 'test', [v88]
+v90 <- LoadInteger '6'
+v91 <- GetProperty v85, 'lastIndex'
+v92 <- LoadString '..foobar'
+v93 <- CallMethod v85, 'test', [v92]
+v94 <- LoadInteger '0'
+SetProperty v85, 'lastIndex', v94
+v95 <- LoadString '..foobar'
+v96 <- CallMethod v85, 'test', [v95]
+v97 <- LoadInteger '2'
+SetProperty v85, 'lastIndex', v97
+v98 <- LoadString '..foobar'
+v99 <- CallMethod v85, 'test', [v98]
+v100 <- LoadInteger '8'
+v101 <- GetProperty v85, 'lastIndex'
+v102 <- LoadString '/foo.bar/gy'
+v103 <- LoadString ''
+v104 <- BinaryOperation v103, '+', v69
+v105 <- LoadString '/foo.bar/g'
+v106 <- LoadString ''
+v107 <- BinaryOperation v106, '+', v51
+v108 <- GetProperty v69, 'sticky'
+v109 <- LoadBoolean 'false'
+SetProperty v69, 'sticky', v109
+v110 <- GetProperty v69, 'sticky'
+v111 <- CreateNamedVariable 'RegExp', 'none'
+v112 <- LoadString 'foo.bar'
+v113 <- LoadString 'gy'
+v114 <- Construct v111, [v112, v113]
+v115 <- CreateNamedVariable 'stickyglobal2', 'var', v114
+v116 <- LoadString 'foo*bar'
+v117 <- CallMethod v115, 'test', [v116]
+v118 <- LoadInteger '7'
+v119 <- GetProperty v115, 'lastIndex'
+v120 <- LoadString '..foo*bar'
+v121 <- CallMethod v115, 'test', [v120]
+v122 <- LoadInteger '0'
+SetProperty v115, 'lastIndex', v122
+v123 <- LoadString '..foo*bar'
+v124 <- CallMethod v115, 'test', [v123]
+v125 <- LoadInteger '2'
+SetProperty v115, 'lastIndex', v125
+v126 <- LoadString '..foo*bar'
+v127 <- CallMethod v115, 'test', [v126]
+v128 <- LoadInteger '9'
+v129 <- GetProperty v115, 'lastIndex'
+v130 <- LoadString '/foo.bar/gy'
+v131 <- LoadString ''
+v132 <- BinaryOperation v131, '+', v115
+v133 <- GetProperty v115, 'sticky'
+v134 <- LoadBoolean 'false'
+SetProperty v115, 'sticky', v134
+v135 <- GetProperty v115, 'sticky'
+v136 <- LoadInteger '1'
+v137 <- UnaryOperation '-', v136
+SetProperty v21, 'lastIndex', v137
+v138 <- LoadString '..foo.bar'
+v139 <- CallMethod v21, 'test', [v138]
+v140 <- LoadInteger '0'
+v141 <- GetProperty v21, 'lastIndex'
+v142 <- LoadInteger '1'
+v143 <- UnaryOperation '-', v142
+SetProperty v21, 'lastIndex', v143
+v144 <- LoadString '..foo.bar'
+v145 <- CallMethod v21, 'exec', [v144]
+v146 <- UnaryOperation '!', v145
+v147 <- UnaryOperation '!', v146
+v148 <- LoadInteger '0'
+v149 <- GetProperty v21, 'lastIndex'
+v150 <- LoadRegExp '^foo' 'y'
+v151 <- CreateNamedVariable 'hat', 'var', v150
+v152 <- LoadInteger '2'
+SetProperty v151, 'lastIndex', v152
+v153 <- LoadString '..foo'
+v154 <- CallMethod v151, 'test', [v153]
+v155 <- LoadRegExp '^foo' 'ym'
+v156 <- CreateNamedVariable 'mhat', 'var', v155
+v157 <- LoadInteger '2'
+SetProperty v156, 'lastIndex', v157
+v158 <- LoadString '..foo'
+v159 <- CallMethod v156, 'test', [v158]
+v160 <- LoadInteger '2'
+SetProperty v156, 'lastIndex', v160
+v161 <- LoadString '.\nfoo'
+v162 <- CallMethod v156, 'test', [v161]
+v163 <- LoadRegExp 'bar$' 'y'
+v164 <- CreateNamedVariable 'stickyanchored', 'var', v163
+v165 <- LoadString 'foobar'
+v166 <- CallMethod v164, 'test', [v165]
+v167 <- LoadInteger '3'
+SetProperty v164, 'lastIndex', v167
+v168 <- LoadString 'foobar'
+v169 <- CallMethod v164, 'test', [v168]
+
+
+var re = /foo.bar/;
+!(!("foo*bar").match(re));
+!(!("..foo*bar").match(re));
+var plain = /foobar/;
+!(!("foobar").match(plain));
+!(!("..foobar").match(plain));
+var sticky = /foo.bar/y;
+!(!("foo*bar").match(sticky));
+sticky.lastIndex;
+!(!("..foo*bar").match(sticky));
+var stickyplain = /foobar/y;
+!(!("foobarfoobar").match(stickyplain));
+stickyplain.lastIndex;
+!(!("foobarfoobar").match(stickyplain));
+stickyplain.lastIndex;
+!(!("..foobarfoobar").match(stickyplain));
+var global = /foo.bar/g;
+global.test("foo*bar");
+global.test("..foo*bar");
+global.lastIndex = 0;
+global.test("..foo*bar");
+var plainglobal = /foobar/g;
+plainglobal.test("foobar");
+plainglobal.test("foobar");
+plainglobal.lastIndex = 0;
+plainglobal.test("foobar");
+var stickyglobal = /foo.bar/yg;
+stickyglobal.test("foo*bar");
+stickyglobal.lastIndex;
+stickyglobal.test("..foo*bar");
+stickyglobal.lastIndex = 0;
+stickyglobal.test("..foo*bar");
+stickyglobal.lastIndex = 2;
+stickyglobal.test("..foo*bar");
+stickyglobal.lastIndex;
+var stickyplainglobal = /foobar/yg;
+stickyplainglobal.sticky;
+stickyplainglobal.sticky = false;
+stickyplainglobal.test("foobar");
+stickyplainglobal.lastIndex;
+stickyplainglobal.test("..foobar");
+stickyplainglobal.lastIndex = 0;
+stickyplainglobal.test("..foobar");
+stickyplainglobal.lastIndex = 2;
+stickyplainglobal.test("..foobar");
+stickyplainglobal.lastIndex;
+"" + stickyglobal;
+"" + global;
+stickyglobal.sticky;
+stickyglobal.sticky = false;
+stickyglobal.sticky;
+const v114 = new RegExp("foo.bar", "gy");
+var stickyglobal2 = v114;
+stickyglobal2.test("foo*bar");
+stickyglobal2.lastIndex;
+stickyglobal2.test("..foo*bar");
+stickyglobal2.lastIndex = 0;
+stickyglobal2.test("..foo*bar");
+stickyglobal2.lastIndex = 2;
+stickyglobal2.test("..foo*bar");
+stickyglobal2.lastIndex;
+"" + stickyglobal2;
+stickyglobal2.sticky;
+stickyglobal2.sticky = false;
+stickyglobal2.sticky;
+sticky.lastIndex = -1;
+sticky.test("..foo.bar");
+sticky.lastIndex;
+sticky.lastIndex = -1;
+!(!sticky.exec("..foo.bar"));
+sticky.lastIndex;
+var hat = /^foo/y;
+hat.lastIndex = 2;
+hat.test("..foo");
+var mhat = /^foo/ym;
+mhat.lastIndex = 2;
+mhat.test("..foo");
+mhat.lastIndex = 2;
+mhat.test(".\nfoo");
+var stickyanchored = /bar$/y;
+stickyanchored.test("foobar");
+stickyanchored.lastIndex = 3;
+stickyanchored.test("foobar");
+
+FuzzIL program written to corpus/regexp-sticky.fzil

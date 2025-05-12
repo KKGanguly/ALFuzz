@@ -1,0 +1,160 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- Compare v1, '===', v2
+    BeginIf v3
+        v4 <- LoadInteger '0'
+        v5 <- Compare v1, '===', v4
+        BeginIf v5
+            v6 <- LoadInteger '1'
+            v7 <- BinaryOperation v6, '/', v1
+            v8 <- LoadInteger '1'
+            v9 <- BinaryOperation v8, '/', v2
+            v10 <- Compare v7, '===', v9
+            Return v10
+        EndIf
+        v11 <- LoadBoolean 'true'
+        Return v11
+    EndIf
+    v12 <- TypeOf v1
+    v13 <- TypeOf v2
+    v14 <- Compare v12, '!=', v13
+    BeginIf v14
+        v15 <- LoadBoolean 'false'
+        Return v15
+    EndIf
+    v16 <- TypeOf v1
+    v17 <- LoadString 'number'
+    v18 <- Compare v16, '==', v17
+    BeginIf v18
+        v19 <- CreateNamedVariable 'isNaN', 'none'
+        v20 <- CallFunction v19, [v1]
+        v21 <- CallFunction v19, [v2]
+        v22 <- BinaryOperation v20, '&&', v21
+        Return v22
+    EndIf
+    v23 <- TypeOf v1
+    v24 <- LoadString 'object'
+    v25 <- Compare v23, '!==', v24
+    v26 <- TypeOf v1
+    v27 <- LoadString 'function'
+    v28 <- Compare v26, '!==', v27
+    v29 <- BinaryOperation v25, '&&', v28
+    BeginIf v29
+        v30 <- LoadBoolean 'false'
+        Return v30
+    EndIf
+    v31 <- CreateNamedVariable 'objectClass', 'none'
+    v32 <- LoadString 'RegExp'
+    v33 <- Compare v31, '===', v32
+    BeginIf v33
+        v34 <- CallMethod v1, 'toString', []
+        v35 <- CallMethod v2, 'toString', []
+        v36 <- Compare v34, '===', v35
+        Return v36
+    EndIf
+    v37 <- LoadString 'Function'
+    v38 <- Compare v31, '===', v37
+    BeginIf v38
+        v39 <- LoadBoolean 'false'
+        Return v39
+    EndIf
+    v40 <- LoadString 'Array'
+    v41 <- Compare v31, '===', v40
+    BeginIf v41
+        v42 <- LoadInteger '0'
+        v43 <- CreateNamedVariable 'elementsCount', 'var', v42
+        v44 <- GetProperty v1, 'length'
+        v45 <- GetProperty v2, 'length'
+        v46 <- Compare v44, '!=', v45
+        BeginIf v46
+            v47 <- LoadBoolean 'false'
+            Return v47
+        EndIf
+        BeginForLoopInitializer
+            v48 <- LoadInteger '0'
+        BeginForLoopCondition -> v49
+            v50 <- GetProperty v1, 'length'
+            v51 <- Compare v49, '<', v50
+        BeginForLoopAfterthought v51 -> v52
+            v53 <- UnaryOperation v52, '++'
+        BeginForLoopBody -> v54
+            v55 <- GetComputedProperty v1, v54
+            v56 <- GetComputedProperty v2, v54
+            v57 <- CallFunction v0, [v55, v56]
+            v58 <- UnaryOperation '!', v57
+            BeginIf v58
+                v59 <- LoadBoolean 'false'
+                Return v59
+            EndIf
+        EndForLoop
+        v60 <- LoadBoolean 'true'
+        Return v60
+    EndIf
+EndPlainFunction
+v61 <- BeginPlainFunction -> 
+    v62 <- CreateArray []
+    v63 <- CreateNamedVariable '__v_0', 'var', v62
+    BeginForLoopInitializer
+        v64 <- LoadInteger '0'
+    BeginForLoopCondition -> v65
+        v66 <- LoadInteger '2'
+        v67 <- Compare v65, '<', v66
+    BeginForLoopAfterthought v67 -> v68
+        v69 <- UnaryOperation v68, '++'
+    BeginForLoopBody -> v70
+        v71 <- CreateArray []
+        v72 <- CallMethod v63, 'push', [v71]
+        v73 <- LoadInteger '2'
+        v74 <- GetProperty v63, 'length'
+        v75 <- CallFunction v0, [v73, v74]
+    EndForLoop
+EndPlainFunction
+v76 <- CallFunction v61, []
+v77 <- CallFunction v61, []
+
+
+function deepEquals(a1, a2) {
+    if (a1 === a2) {
+        if (a1 === 0) {
+            return (1 / a1) === (1 / a2);
+        }
+        return true;
+    }
+    if (typeof a1 != typeof a2) {
+        return false;
+    }
+    if (typeof a1 == "number") {
+        return isNaN(a1) && isNaN(a2);
+    }
+    if ((typeof a1 !== "object") && (typeof a1 !== "function")) {
+        return false;
+    }
+    if (objectClass === "RegExp") {
+        return a1.toString() === a2.toString();
+    }
+    if (objectClass === "Function") {
+        return false;
+    }
+    if (objectClass === "Array") {
+        var elementsCount = 0;
+        if (a1.length != a2.length) {
+            return false;
+        }
+        for (let i49 = 0; i49 < a1.length; i49++) {
+            if (!deepEquals(a1[i49], a2[i49])) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+function __f_1() {
+    var __v_0 = [];
+    for (let i65 = 0; i65 < 2; i65++) {
+        __v_0.push([]);
+        deepEquals(2, __v_0.length);
+    }
+}
+__f_1();
+__f_1();
+
+FuzzIL program written to corpus/regress-escape-preserve-smi-representation.fzil

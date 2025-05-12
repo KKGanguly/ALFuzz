@@ -1,0 +1,30 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'g', 'none'
+    v4 <- CallFunction v3, []
+    BeginIf v4
+    EndIf
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    BeginIf v1
+        v6 <- LoadBoolean 'true'
+        Return v6
+    EndIf
+EndPlainFunction
+v7 <- CallFunction v2, []
+
+
+var x;
+function f() {
+    if (g()) {
+    }
+}
+function g() {
+    if (x) {
+        return true;
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-3185901.fzil

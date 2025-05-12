@@ -1,0 +1,29 @@
+v0 <- CreateNamedVariable 'Math', 'none'
+v1 <- CreateNamedVariable 'm', 'var', v0
+v2 <- LoadString 'floor'
+v3 <- CreateNamedVariable 'p', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '31363200000'
+    v6 <- CreateNamedVariable 'bignumber', 'var', v5
+    v7 <- LoadInteger '86400000'
+    v8 <- BinaryOperation v6, '/', v7
+    v9 <- CallMethod v0, 'round', [v8]
+    v10 <- LoadInteger '7'
+    v11 <- BinaryOperation v9, '/', v10
+    v12 <- CallComputedMethod v1, v3, [v11]
+    v13 <- LoadInteger '1'
+    v14 <- BinaryOperation v12, '+', v13
+    v15 <- LoadInteger '52'
+EndPlainFunction
+v16 <- CallFunction v4, []
+
+
+var m = Math;
+var p = "floor";
+function test() {
+    var bignumber = 31363200000;
+    m[p](Math.round(bignumber / 86400000) / 7) + 1;
+}
+test();
+
+FuzzIL program written to corpus/regress-3218530.fzil

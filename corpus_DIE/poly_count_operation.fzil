@@ -1,0 +1,234 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'o1', 'var', v1
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'o2', 'var', v3
+v5 <- LoadBoolean 'false'
+v6 <- CreateNamedVariable 'deopt_getter', 'var', v5
+v7 <- LoadBoolean 'false'
+v8 <- CreateNamedVariable 'deopt_setter', 'var', v7
+v9 <- BeginPlainFunction -> v10
+    v11 <- LoadInteger '5'
+    v12 <- GetProperty v10, 'x'
+    v13 <- UnaryOperation v12, '++'
+    v14 <- BinaryOperation v11, '+', v13
+    Return v14
+EndPlainFunction
+v15 <- CreateNamedVariable 'to_deopt', 'var', v9
+v16 <- LoadInteger '1'
+v17 <- CreateNamedVariable 'v', 'var', v16
+v18 <- LoadInteger '0'
+v19 <- CreateNamedVariable 'g', 'var', v18
+v20 <- LoadInteger '0'
+v21 <- CreateNamedVariable 's', 'var', v20
+v22 <- LoadString 'x'
+v23 <- BeginPlainFunction -> 
+    v24 <- UnaryOperation v19, '++'
+    BeginIf v6
+        v25 <- LoadBoolean 'false'
+        Reassign v6, v25
+    EndIf
+    Return v17
+EndPlainFunction
+v26 <- BeginPlainFunction -> v27
+    Reassign v17, v27
+    v28 <- UnaryOperation v21, '++'
+    BeginIf v8
+        v29 <- LoadBoolean 'false'
+        Reassign v8, v29
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v23
+    ObjectLiteralAddProperty `set`, v26
+v30 <- EndObjectLiteral
+v31 <- CreateNamedVariable 'Object', 'none'
+v32 <- CallMethod v31, 'defineProperty', [v4, v22, v30]
+v33 <- LoadInteger '6'
+v34 <- CallFunction v9, [v4]
+v35 <- LoadInteger '1'
+v36 <- LoadInteger '1'
+v37 <- LoadInteger '7'
+v38 <- CallFunction v9, [v4]
+v39 <- LoadInteger '2'
+v40 <- LoadInteger '2'
+v41 <- LoadBoolean 'true'
+Reassign v8, v41
+v42 <- LoadInteger '8'
+v43 <- CallFunction v9, [v4]
+v44 <- LoadInteger '3'
+v45 <- LoadInteger '3'
+v46 <- BeginPlainFunction -> v47
+    v48 <- LoadInteger '5'
+    v49 <- GetProperty v47, 'x'
+    v50 <- UnaryOperation v49, '++'
+    v51 <- BinaryOperation v48, '+', v50
+    Return v51
+EndPlainFunction
+v52 <- LoadInteger '1'
+Reassign v17, v52
+Reassign v15, v46
+v53 <- CallFunction v46, [v2]
+v54 <- CallFunction v46, [v2]
+v55 <- LoadInteger '6'
+v56 <- CallFunction v46, [v4]
+v57 <- LoadInteger '4'
+v58 <- LoadInteger '4'
+v59 <- LoadInteger '7'
+v60 <- CallFunction v46, [v4]
+v61 <- LoadInteger '5'
+v62 <- LoadInteger '5'
+v63 <- LoadBoolean 'true'
+Reassign v8, v63
+v64 <- LoadInteger '8'
+v65 <- CallFunction v46, [v4]
+v66 <- LoadInteger '6'
+v67 <- LoadInteger '6'
+v68 <- LoadUndefined
+Reassign v17, v68
+v69 <- CreateNamedVariable 'NaN', 'none'
+v70 <- CallFunction v46, [v4]
+v71 <- LoadInteger '7'
+v72 <- LoadInteger '7'
+v73 <- BeginPlainFunction -> v74
+    v75 <- LoadInteger '5'
+    v76 <- GetProperty v74, 'x'
+    v77 <- UnaryOperation '++', v76
+    v78 <- BinaryOperation v75, '+', v77
+    Return v78
+EndPlainFunction
+v79 <- LoadInteger '1'
+Reassign v17, v79
+Reassign v15, v73
+v80 <- CallFunction v73, [v2]
+v81 <- CallFunction v73, [v2]
+v82 <- LoadInteger '7'
+v83 <- CallFunction v73, [v4]
+v84 <- LoadInteger '8'
+v85 <- LoadInteger '8'
+v86 <- LoadInteger '8'
+v87 <- CallFunction v73, [v4]
+v88 <- LoadInteger '9'
+v89 <- LoadInteger '9'
+v90 <- LoadBoolean 'true'
+Reassign v8, v90
+v91 <- LoadInteger '9'
+v92 <- CallFunction v73, [v4]
+v93 <- LoadInteger '10'
+v94 <- LoadInteger '10'
+v95 <- LoadUndefined
+Reassign v17, v95
+v96 <- CallFunction v73, [v4]
+v97 <- LoadInteger '11'
+v98 <- LoadInteger '11'
+v99 <- BeginPlainFunction -> v100
+    v101 <- LoadInteger '5'
+    v102 <- GetProperty v100, 'x'
+    v103 <- UnaryOperation v102, '++'
+    v104 <- BinaryOperation v101, '+', v103
+    Return v104
+EndPlainFunction
+v105 <- LoadInteger '1'
+Reassign v17, v105
+Reassign v15, v99
+v106 <- CallFunction v99, [v2]
+v107 <- CallFunction v99, [v2]
+v108 <- LoadInteger '6'
+v109 <- CallFunction v99, [v4]
+v110 <- LoadInteger '12'
+v111 <- LoadInteger '12'
+v112 <- LoadInteger '7'
+v113 <- CallFunction v99, [v4]
+v114 <- LoadInteger '13'
+v115 <- LoadInteger '13'
+v116 <- LoadBoolean 'true'
+Reassign v6, v116
+v117 <- LoadInteger '8'
+v118 <- CallFunction v99, [v4]
+v119 <- LoadInteger '14'
+v120 <- LoadInteger '14'
+v121 <- LoadUndefined
+Reassign v17, v121
+v122 <- CallFunction v99, [v4]
+v123 <- LoadInteger '15'
+v124 <- LoadInteger '15'
+
+
+var o1 = { x: 1 };
+var o2 = {};
+var deopt_getter = false;
+var deopt_setter = false;
+function f_mono(a10) {
+    let v12 = a10.x;
+    return 5 + v12++;
+}
+var to_deopt = f_mono;
+var v = 1;
+var g = 0;
+var s = 0;
+function f23() {
+    g++;
+    if (deopt_getter) {
+        deopt_getter = false;
+    }
+    return v;
+}
+function f26(a27) {
+    v = a27;
+    s++;
+    if (deopt_setter) {
+        deopt_setter = false;
+    }
+}
+Object.defineProperty(o2, "x", { get: f23, set: f26 });
+f_mono(o2);
+f_mono(o2);
+deopt_setter = true;
+f_mono(o2);
+function f_poly(a47) {
+    let v49 = a47.x;
+    return 5 + v49++;
+}
+v = 1;
+to_deopt = f_poly;
+f_poly(o1);
+f_poly(o1);
+f_poly(o2);
+f_poly(o2);
+deopt_setter = true;
+f_poly(o2);
+v = undefined;
+f_poly(o2);
+function f_pre(a74) {
+    let v76 = a74.x;
+    return 5 + ++v76;
+}
+v = 1;
+to_deopt = f_pre;
+f_pre(o1);
+f_pre(o1);
+f_pre(o2);
+f_pre(o2);
+deopt_setter = true;
+f_pre(o2);
+v = undefined;
+f_pre(o2);
+function f_get(a100) {
+    let v102 = a100.x;
+    return 5 + v102++;
+}
+v = 1;
+to_deopt = f_get;
+f_get(o1);
+f_get(o1);
+f_get(o2);
+f_get(o2);
+deopt_getter = true;
+f_get(o2);
+v = undefined;
+f_get(o2);
+
+FuzzIL program written to corpus/poly_count_operation.fzil

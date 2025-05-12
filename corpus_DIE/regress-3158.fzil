@@ -1,0 +1,52 @@
+v0 <- LoadString 'a'
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetElement v2, '0', v0
+v3 <- GetProperty v1, 'prototype'
+v4 <- LoadInteger '0'
+v5 <- DeleteElement v3, '0'
+v6 <- BeginPlainFunction -> v7, v8
+    v9 <- GetComputedProperty v7, v8
+    Return v9
+EndPlainFunction
+v10 <- LoadInteger '100000'
+v11 <- Construct v1, [v10]
+v12 <- CreateNamedVariable 'a', 'var', v11
+v13 <- LoadString 'x'
+SetElement v12, '3', v13
+v14 <- LoadInteger '3'
+v15 <- CallFunction v6, [v12, v14]
+v16 <- LoadInteger '3'
+v17 <- CallFunction v6, [v12, v16]
+v18 <- LoadInteger '3'
+v19 <- CallFunction v6, [v12, v18]
+v20 <- LoadInteger '3'
+v21 <- CallFunction v6, [v12, v20]
+v22 <- LoadString 'a'
+v23 <- GetProperty v1, 'prototype'
+SetElement v23, '0', v22
+v24 <- LoadInteger '0'
+v25 <- CallFunction v6, [v12, v24]
+v26 <- CreateNamedVariable 'z', 'var', v25
+v27 <- LoadString 'a'
+
+
+const t0 = Array.prototype;
+t0[0] = "a";
+const t2 = Array.prototype;
+delete t2[0];
+function foo(a7, a8) {
+    return a7[a8];
+}
+const v11 = new Array(100000);
+var a = v11;
+a[3] = "x";
+foo(a, 3);
+foo(a, 3);
+foo(a, 3);
+foo(a, 3);
+const t10 = Array.prototype;
+t10[0] = "a";
+var z = foo(a, 0);
+
+FuzzIL program written to corpus/regress-3158.fzil

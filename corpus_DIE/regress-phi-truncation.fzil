@@ -1,0 +1,201 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '1'
+    v4 <- LoadInteger '1'
+    v5 <- CallFunction v1, [v4]
+    v6 <- LoadInteger '0'
+    v7 <- CallFunction v1, [v6]
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9
+    v10 <- LoadBoolean 'true'
+    v11 <- LoadBoolean 'false'
+    v12 <- TernaryOperation v9, v10, v11
+    v13 <- CreateNamedVariable 'a', 'var', v12
+    v14 <- LoadInteger '0'
+    v15 <- BinaryOperation v13, '|', v14
+    Return v15
+EndPlainFunction
+v16 <- LoadInteger '0'
+v17 <- CallFunction v0, [v8, v16]
+v18 <- BeginPlainFunction -> v19
+    v20 <- LoadBoolean 'true'
+    v21 <- LoadBoolean 'true'
+    v22 <- TernaryOperation v19, v20, v21
+    v23 <- CreateNamedVariable 'a', 'var', v22
+    v24 <- LoadInteger '0'
+    v25 <- BinaryOperation v23, '|', v24
+    Return v25
+EndPlainFunction
+v26 <- LoadInteger '1'
+v27 <- CallFunction v0, [v18, v26]
+v28 <- BeginPlainFunction -> v29
+    v30 <- LoadBoolean 'true'
+    v31 <- LoadString '0'
+    v32 <- TernaryOperation v29, v30, v31
+    v33 <- CreateNamedVariable 'a', 'var', v32
+    v34 <- LoadInteger '0'
+    v35 <- BinaryOperation v33, '|', v34
+    Return v35
+EndPlainFunction
+v36 <- LoadInteger '0'
+v37 <- CallFunction v0, [v28, v36]
+v38 <- BeginPlainFunction -> v39
+    v40 <- LoadBoolean 'true'
+    v41 <- LoadString '1'
+    v42 <- TernaryOperation v39, v40, v41
+    v43 <- CreateNamedVariable 'a', 'var', v42
+    v44 <- LoadInteger '0'
+    v45 <- BinaryOperation v43, '|', v44
+    Return v45
+EndPlainFunction
+v46 <- LoadInteger '1'
+v47 <- CallFunction v0, [v38, v46]
+v48 <- BeginPlainFunction -> v49
+    v50 <- LoadBoolean 'true'
+    v51 <- LoadString '-1'
+    v52 <- TernaryOperation v49, v50, v51
+    v53 <- CreateNamedVariable 'a', 'var', v52
+    v54 <- LoadInteger '0'
+    v55 <- BinaryOperation v53, '|', v54
+    Return v55
+EndPlainFunction
+v56 <- LoadInteger '1'
+v57 <- UnaryOperation '-', v56
+v58 <- CallFunction v0, [v48, v57]
+v59 <- BeginPlainFunction -> v60
+    v61 <- LoadBoolean 'true'
+    v62 <- LoadString '-0'
+    v63 <- TernaryOperation v60, v61, v62
+    v64 <- CreateNamedVariable 'a', 'var', v63
+    v65 <- LoadInteger '0'
+    v66 <- BinaryOperation v64, '|', v65
+    Return v66
+EndPlainFunction
+v67 <- LoadInteger '0'
+v68 <- CallFunction v0, [v59, v67]
+v69 <- BeginPlainFunction -> v70
+    v71 <- LoadBoolean 'true'
+    v72 <- LoadString '0x1234'
+    v73 <- TernaryOperation v70, v71, v72
+    v74 <- CreateNamedVariable 'a', 'var', v73
+    v75 <- LoadInteger '0'
+    v76 <- BinaryOperation v74, '|', v75
+    Return v76
+EndPlainFunction
+v77 <- LoadInteger '4660'
+v78 <- CallFunction v0, [v69, v77]
+v79 <- BeginPlainFunction -> v80
+    v81 <- LoadBoolean 'true'
+    v82 <- BeginPlainFunction -> 
+        v83 <- LoadInteger '2'
+        Return v83
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v82
+    v84 <- EndObjectLiteral
+    v85 <- TernaryOperation v80, v81, v84
+    v86 <- CreateNamedVariable 'a', 'var', v85
+    v87 <- LoadInteger '0'
+    v88 <- BinaryOperation v86, '|', v87
+    Return v88
+EndPlainFunction
+v89 <- LoadInteger '2'
+v90 <- CallFunction v0, [v79, v89]
+v91 <- BeginPlainFunction -> v92
+    v93 <- LoadBoolean 'true'
+    v94 <- LoadUndefined
+    v95 <- TernaryOperation v92, v93, v94
+    v96 <- CreateNamedVariable 'a', 'var', v95
+    v97 <- LoadInteger '0'
+    v98 <- BinaryOperation v96, '|', v97
+    Return v98
+EndPlainFunction
+v99 <- LoadInteger '0'
+v100 <- CallFunction v0, [v91, v99]
+v101 <- BeginPlainFunction -> v102
+    v103 <- LoadBoolean 'true'
+    v104 <- LoadNull
+    v105 <- TernaryOperation v102, v103, v104
+    v106 <- CreateNamedVariable 'a', 'var', v105
+    v107 <- LoadInteger '0'
+    v108 <- BinaryOperation v106, '|', v107
+    Return v108
+EndPlainFunction
+v109 <- LoadInteger '0'
+v110 <- CallFunction v0, [v101, v109]
+v111 <- BeginPlainFunction -> v112
+    v113 <- LoadBoolean 'true'
+    v114 <- LoadString ''
+    v115 <- TernaryOperation v112, v113, v114
+    v116 <- CreateNamedVariable 'a', 'var', v115
+    v117 <- LoadInteger '0'
+    v118 <- BinaryOperation v116, '|', v117
+    Return v118
+EndPlainFunction
+v119 <- LoadInteger '0'
+v120 <- CallFunction v0, [v111, v119]
+
+
+function test(a1, a2) {
+    a1(1);
+    a1(0);
+}
+function f8(a9) {
+    var a = a9 ? true : false;
+    return a | 0;
+}
+test(f8, 0);
+function f18(a19) {
+    var a = a19 ? true : true;
+    return a | 0;
+}
+test(f18, 1);
+function f28(a29) {
+    var a = a29 ? true : "0";
+    return a | 0;
+}
+test(f28, 0);
+function f38(a39) {
+    var a = a39 ? true : "1";
+    return a | 0;
+}
+test(f38, 1);
+function f48(a49) {
+    var a = a49 ? true : "-1";
+    return a | 0;
+}
+test(f48, -1);
+function f59(a60) {
+    var a = a60 ? true : "-0";
+    return a | 0;
+}
+test(f59, 0);
+function f69(a70) {
+    var a = a70 ? true : "0x1234";
+    return a | 0;
+}
+test(f69, 4660);
+function f79(a80) {
+    function f82() {
+        return 2;
+    }
+    var a = a80 ? true : { valueOf: f82 };
+    return a | 0;
+}
+test(f79, 2);
+function f91(a92) {
+    var a = a92 ? true : undefined;
+    return a | 0;
+}
+test(f91, 0);
+function f101(a102) {
+    var a = a102 ? true : null;
+    return a | 0;
+}
+test(f101, 0);
+function f111(a112) {
+    var a = a112 ? true : "";
+    return a | 0;
+}
+test(f111, 0);
+
+FuzzIL program written to corpus/regress-phi-truncation.fzil

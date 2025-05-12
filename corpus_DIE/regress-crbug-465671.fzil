@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '10'
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'a', 'var', v2
+    BeginTry
+        v4 <- CallFunction v0, []
+    BeginCatch -> v5
+        v6 <- BeginArrowFunction -> v7
+            v8 <- LoadInteger '1'
+            v9 <- BinaryOperation v7, '+', v8
+            Return v9
+        EndArrowFunction
+        v10 <- CallMethod v3, 'map', [v6]
+    EndTryCatch
+EndPlainFunction
+v11 <- CallFunction v0, []
+
+
+function f() {
+    var a = [10];
+    try {
+        f();
+    } catch(e5) {
+        const v6 = (a7) => {
+            return a7 + 1;
+        };
+        a.map(v6);
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-crbug-465671.fzil

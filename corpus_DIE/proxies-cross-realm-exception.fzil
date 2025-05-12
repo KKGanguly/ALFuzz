@@ -1,0 +1,101 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable '__proto__', 'none'
+Reassign v1, v0
+v2 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+BeginObjectLiteral
+    BeginObjectLiteralMethod `getPrototypeOf` -> v4
+    EndObjectLiteralMethod
+v5 <- EndObjectLiteral
+v6 <- Construct v2, [v3, v5]
+v7 <- CreateNamedVariable '__proto__', 'none'
+Reassign v7, v6
+v8 <- CreateNamedVariable 'test', 'none'
+v9 <- CallFunction v8, []
+v10 <- CallFunction v8, []
+v11 <- CallFunction v8, []
+v12 <- CallFunction v8, []
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable '__proto__', 'none'
+Reassign v14, v13
+BeginObjectLiteral
+v15 <- EndObjectLiteral
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v16, v17, v18, v19
+    EndObjectLiteralMethod
+v20 <- EndObjectLiteral
+v21 <- Construct v2, [v15, v20]
+v22 <- CreateNamedVariable '__proto__', 'none'
+Reassign v22, v21
+BeginObjectLiteral
+v23 <- EndObjectLiteral
+v24 <- CreateNamedVariable '__proto__', 'none'
+Reassign v24, v23
+BeginObjectLiteral
+v25 <- EndObjectLiteral
+BeginObjectLiteral
+    BeginObjectLiteralMethod `getPrototypeOf` -> v26
+    EndObjectLiteralMethod
+v27 <- EndObjectLiteral
+v28 <- Construct v2, [v25, v27]
+v29 <- CreateNamedVariable '__proto__', 'none'
+SetProperty v29, '__proto__', v28
+BeginObjectLiteral
+v30 <- EndObjectLiteral
+Reassign v29, v30
+BeginObjectLiteral
+v31 <- EndObjectLiteral
+BeginObjectLiteral
+v32 <- EndObjectLiteral
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v33
+    EndObjectLiteralMethod
+v34 <- EndObjectLiteral
+v35 <- Construct v2, [v32, v34]
+v36 <- Construct v2, [v31, v35]
+Reassign v29, v36
+
+
+__proto__ = {};
+const v3 = {};
+const v5 = {
+    getPrototypeOf() {
+    },
+};
+const v6 = new Proxy(v3, v5);
+__proto__ = v6;
+test();
+test();
+test();
+test();
+__proto__ = {};
+const v15 = {};
+const v20 = {
+    get(a17, a18, a19) {
+    },
+};
+const v21 = new Proxy(v15, v20);
+__proto__ = v21;
+__proto__ = {};
+const v25 = {};
+const v27 = {
+    getPrototypeOf() {
+    },
+};
+const v28 = new Proxy(v25, v27);
+__proto__.__proto__ = v28;
+__proto__ = {};
+const v31 = {};
+const v32 = {};
+const v34 = {
+    get() {
+    },
+};
+const v35 = new Proxy(v32, v34);
+const v36 = new Proxy(v31, v35);
+__proto__ = v36;
+
+FuzzIL program written to corpus/proxies-cross-realm-exception.fzil

@@ -1,0 +1,22 @@
+v0 <- LoadString ''
+v1 <- LoadRegExp 'a' ''
+SetProperty v1, 'constructor', v0
+v2 <- LoadString 'b'
+v3 <- LoadRegExp 'a' ''
+v4 <- BeginArrowFunction -> 
+    v5 <- LoadString 'b'
+    Return v5
+EndArrowFunction
+v6 <- LoadString 'a'
+v7 <- CallMethod v6, 'replace', [v3, v4]
+
+
+const t0 = /a/;
+t0.constructor = "";
+const v3 = /a/;
+const v4 = () => {
+    return "b";
+};
+("a").replace(v3, v4);
+
+FuzzIL program written to corpus/regress-regexp-functional-replace-slow.fzil

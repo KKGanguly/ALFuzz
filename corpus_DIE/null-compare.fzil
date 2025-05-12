@@ -1,0 +1,108 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadNull
+    v3 <- Compare v1, '==', v2
+    BeginIf v3
+        v4 <- LoadBoolean 'true'
+        Return v4
+    BeginElse
+        v5 <- LoadBoolean 'false'
+        Return v5
+    EndIf
+EndPlainFunction
+v6 <- LoadNull
+v7 <- CallFunction v0, [v6]
+v8 <- LoadString 'null == null'
+v9 <- LoadInteger '0'
+v10 <- Void_ v9
+v11 <- CallFunction v0, [v10]
+v12 <- LoadString 'void 0 == null'
+v13 <- LoadInteger '42'
+v14 <- CallFunction v0, [v13]
+v15 <- LoadString '42 != null'
+v16 <- BeginPlainFunction -> v17
+    v18 <- LoadNull
+    v19 <- Compare v17, '===', v18
+    BeginIf v19
+        v20 <- LoadBoolean 'true'
+        Return v20
+    BeginElse
+        v21 <- LoadBoolean 'false'
+        Return v21
+    EndIf
+EndPlainFunction
+v22 <- LoadNull
+v23 <- CallFunction v16, [v22]
+v24 <- LoadString 'null === null'
+v25 <- LoadInteger '0'
+v26 <- Void_ v25
+v27 <- CallFunction v16, [v26]
+v28 <- LoadString 'void 0 != null'
+v29 <- LoadInteger '87'
+v30 <- CallFunction v16, [v29]
+v31 <- LoadString '87 !== null'
+v32 <- BeginPlainFunction -> v33
+    v34 <- LoadInteger '1'
+    v35 <- BinaryOperation v33, '&', v34
+    v36 <- LoadNull
+    v37 <- Compare v35, '==', v36
+    BeginIf v37
+        v38 <- LoadBoolean 'true'
+        Return v38
+    EndIf
+    v39 <- LoadInteger '3'
+    v40 <- BinaryOperation v33, '|', v39
+    v41 <- LoadNull
+    v42 <- Compare v40, '===', v41
+    BeginIf v42
+        v43 <- LoadBoolean 'true'
+        Return v43
+    EndIf
+    v44 <- LoadBoolean 'false'
+    Return v44
+EndPlainFunction
+v45 <- LoadInteger '1'
+v46 <- CallFunction v32, [v45]
+v47 <- LoadString 'GimmeFalse(1)'
+v48 <- LoadNull
+v49 <- CallFunction v32, [v48]
+v50 <- LoadString 'GimmeFalse(null)'
+BeginObjectLiteral
+v51 <- EndObjectLiteral
+v52 <- CallFunction v32, [v51]
+v53 <- LoadString 'GimmeFalse({})'
+
+
+function IsNull(a1) {
+    if (a1 == null) {
+        return true;
+    } else {
+        return false;
+    }
+}
+IsNull(null);
+IsNull(void 0);
+IsNull(42);
+function IsNullStrict(a17) {
+    if (a17 === null) {
+        return true;
+    } else {
+        return false;
+    }
+}
+IsNullStrict(null);
+IsNullStrict(void 0);
+IsNullStrict(87);
+function GimmeFalse(a33) {
+    if ((a33 & 1) == null) {
+        return true;
+    }
+    if ((a33 | 3) === null) {
+        return true;
+    }
+    return false;
+}
+GimmeFalse(1);
+GimmeFalse(null);
+GimmeFalse({});
+
+FuzzIL program written to corpus/null-compare.fzil

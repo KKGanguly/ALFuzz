@@ -1,0 +1,21 @@
+BeginTry
+    v0 <- LoadInteger '1'
+    v1 <- LoadInteger '28'
+    v2 <- BinaryOperation v0, '<<', v1
+    v3 <- LoadString 'a'
+    v4 <- CallMethod v3, 'repeat', [v2]
+    v5 <- CreateNamedVariable 'a', 'var', v4
+BeginCatch -> v6
+EndTryCatch
+v7 <- CreateNamedVariable 'a', 'none'
+v8 <- CreateNamedVariable 'JSON', 'none'
+v9 <- CallMethod v8, 'stringify', [v7]
+
+
+try {
+    var a = ("a").repeat(1 << 28);
+} catch(e6) {
+}
+JSON.stringify(a);
+
+FuzzIL program written to corpus/regress-748069.fzil

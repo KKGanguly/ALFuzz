@@ -1,0 +1,88 @@
+v0 <- LoadBoolean 'true'
+v1 <- CreateNamedVariable 'console', 'none'
+v2 <- CallMethod v1, 'assert', [v0]
+v3 <- LoadString 'yes'
+v4 <- CallMethod v1, 'assert', [v3]
+v5 <- BeginArrowFunction -> 
+    v6 <- LoadBoolean 'false'
+    v7 <- CallMethod v1, 'assert', [v6]
+    Return v7
+EndArrowFunction
+v8 <- CallFunction v5, []
+v9 <- CreateNamedVariable 'Error', 'none'
+v10 <- BeginArrowFunction -> 
+    v11 <- LoadString ''
+    v12 <- CallMethod v1, 'assert', [v11]
+    Return v12
+EndArrowFunction
+v13 <- CallFunction v10, []
+v14 <- BeginArrowFunction -> 
+    v15 <- LoadInteger '0'
+    v16 <- CallMethod v1, 'assert', [v15]
+    Return v16
+EndArrowFunction
+v17 <- CallFunction v14, []
+v18 <- LoadString ''
+BeginObjectLiteral
+v19 <- EndObjectLiteral
+v20 <- CreateArray []
+v21 <- LoadThis
+v22 <- CreateNamedVariable 'Array', 'none'
+v23 <- LoadInteger '1'
+v24 <- LoadFloat '1.4'
+v25 <- LoadBoolean 'true'
+v26 <- LoadBoolean 'false'
+v27 <- CreateArray [v18, v19, v20, v21, v22, v23, v24, v25, v26]
+v28 <- CreateNamedVariable 'args', 'let', v27
+v29 <- CallMethodWithSpread v1, 'log', [...v28]
+v30 <- CallMethodWithSpread v1, 'error', [...v28]
+v31 <- CallMethodWithSpread v1, 'warn', [...v28]
+v32 <- CallMethodWithSpread v1, 'info', [...v28]
+v33 <- CallMethodWithSpread v1, 'debug', [...v28]
+v34 <- CallMethod v1, 'time', []
+v35 <- CallMethod v1, 'timeEnd', []
+v36 <- LoadString 'a'
+v37 <- CallMethod v1, 'time', [v36]
+v38 <- LoadString 'a'
+v39 <- CallMethod v1, 'timeEnd', [v38]
+v40 <- CallMethod v1, 'timeStamp', []
+v41 <- BeginArrowFunction -> v42
+    v43 <- CallMethod v1, 'timeStamp', [v42]
+    Return v43
+EndArrowFunction
+v44 <- CallMethod v28, 'forEach', [v41]
+v45 <- CallMethod v1, 'trace', []
+
+
+console.assert(true);
+console.assert("yes");
+const v5 = () => {
+    return console.assert(false);
+};
+v5();
+const v10 = () => {
+    return console.assert("");
+};
+v10();
+const v14 = () => {
+    return console.assert(0);
+};
+v14();
+let args = ["",{},[],this,Array,1,1.4,true,false];
+console.log(...args);
+console.error(...args);
+console.warn(...args);
+console.info(...args);
+console.debug(...args);
+console.time();
+console.timeEnd();
+console.time("a");
+console.timeEnd("a");
+console.timeStamp();
+const v41 = (a42) => {
+    return console.timeStamp(a42);
+};
+args.forEach(v41);
+console.trace();
+
+FuzzIL program written to corpus/console.fzil

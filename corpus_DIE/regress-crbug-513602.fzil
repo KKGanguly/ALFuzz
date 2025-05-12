@@ -1,0 +1,64 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- Construct v0, []
+SetProperty v1, 'prototype', v2
+v3 <- Construct v1, []
+v4 <- CreateNamedVariable 'child', 'var', v3
+v5 <- BeginPlainFunction -> 
+    v6 <- GetProperty v4, '__proto__'
+    Return v6
+EndPlainFunction
+v7 <- CallFunction v5, []
+v8 <- CallFunction v5, []
+v9 <- LoadString 'foo'
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadString 'A'
+    v12 <- CreateNamedVariable 'print', 'none'
+    v13 <- CallFunction v12, [v11]
+EndPlainFunction
+v14 <- GetProperty v0, 'prototype'
+v15 <- CallMethod v14, '__defineSetter__', [v9, v10]
+v16 <- LoadString 'foo'
+v17 <- BeginPlainFunction -> 
+    v18 <- LoadString 'B'
+    v19 <- CreateNamedVariable 'print', 'none'
+    v20 <- CallFunction v19, [v18]
+EndPlainFunction
+v21 <- GetProperty v0, 'prototype'
+v22 <- CallMethod v21, '__defineSetter__', [v16, v17]
+v23 <- CallFunction v5, []
+v24 <- CreateNamedVariable 'Object', 'none'
+v25 <- GetProperty v24, 'prototype'
+v26 <- DeleteProperty v25, '__proto__'
+v27 <- CallFunction v5, []
+
+
+function Parent() {
+}
+function Child() {
+}
+const v2 = new Parent();
+Child.prototype = v2;
+const v3 = new Child();
+var child = v3;
+function crash() {
+    return child.__proto__;
+}
+crash();
+crash();
+function f10() {
+    print("A");
+}
+Parent.prototype.__defineSetter__("foo", f10);
+function f17() {
+    print("B");
+}
+Parent.prototype.__defineSetter__("foo", f17);
+crash();
+const t20 = Object.prototype;
+delete t20.__proto__;
+crash();
+
+FuzzIL program written to corpus/regress-crbug-513602.fzil

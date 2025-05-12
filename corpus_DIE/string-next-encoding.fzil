@@ -1,0 +1,42 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'äϠ�𝌆'
+    v2 <- CreateNamedVariable 's', 'var', v1
+    v3 <- CreateNamedVariable 'Symbol', 'none'
+    v4 <- GetProperty v3, 'iterator'
+    v5 <- CallComputedMethod v2, v4, []
+    v6 <- CreateNamedVariable 'i', 'var', v5
+    v7 <- LoadString 'ä'
+    v8 <- CallMethod v6, 'next', []
+    v9 <- GetProperty v8, 'value'
+    v10 <- LoadString 'Ϡ'
+    v11 <- CallMethod v6, 'next', []
+    v12 <- GetProperty v11, 'value'
+    v13 <- LoadString '�'
+    v14 <- CallMethod v6, 'next', []
+    v15 <- GetProperty v14, 'value'
+    v16 <- LoadString '𝌆'
+    v17 <- CallMethod v6, 'next', []
+    v18 <- GetProperty v17, 'value'
+    v19 <- LoadUndefined
+    v20 <- CallMethod v6, 'next', []
+    v21 <- GetProperty v20, 'value'
+EndPlainFunction
+v22 <- CallFunction v0, []
+v23 <- CallFunction v0, []
+v24 <- CallFunction v0, []
+
+
+function f() {
+    var s = "äϠ�𝌆";
+    var i = s[Symbol.iterator]();
+    i.next().value;
+    i.next().value;
+    i.next().value;
+    i.next().value;
+    i.next().value;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/string-next-encoding.fzil

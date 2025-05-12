@@ -1,0 +1,20 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'NaN', 'none'
+    v2 <- UnaryOperation '-', v1
+    v3 <- CreateNamedVariable 'Math', 'none'
+    v4 <- CallMethod v3, 'abs', [v2]
+    v5 <- CallMethod v4, 'toString', []
+EndPlainFunction
+v6 <- CallFunction v0, []
+v7 <- CallFunction v0, []
+v8 <- CallFunction v0, []
+
+
+function test() {
+    Math.abs(-NaN).toString();
+}
+test();
+test();
+test();
+
+FuzzIL program written to corpus/regress-412162.fzil

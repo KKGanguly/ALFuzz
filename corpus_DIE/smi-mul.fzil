@@ -1,0 +1,81 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '*', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '1'
+v5 <- UnaryOperation '-', v4
+v6 <- LoadInteger '2'
+v7 <- CallFunction v0, [v5, v6]
+v8 <- LoadInteger '1'
+v9 <- UnaryOperation '-', v8
+v10 <- LoadInteger '2'
+v11 <- CallFunction v0, [v9, v10]
+v12 <- LoadInteger '2'
+v13 <- UnaryOperation '-', v12
+v14 <- LoadInteger '1'
+v15 <- UnaryOperation '-', v14
+v16 <- LoadInteger '2'
+v17 <- CallFunction v0, [v15, v16]
+v18 <- CallFunction v0, []
+v19 <- LoadInteger '0'
+v20 <- UnaryOperation '-', v19
+v21 <- LoadInteger '1'
+v22 <- UnaryOperation '-', v21
+v23 <- LoadInteger '0'
+v24 <- CallFunction v0, [v22, v23]
+v25 <- CallFunction v0, []
+v26 <- BeginPlainFunction -> v27, v28
+    v29 <- BinaryOperation v27, '*', v28
+    Return v29
+EndPlainFunction
+v30 <- LoadInteger '1'
+v31 <- UnaryOperation '-', v30
+v32 <- LoadInteger '2'
+v33 <- CallFunction v26, [v31, v32]
+v34 <- LoadInteger '1'
+v35 <- UnaryOperation '-', v34
+v36 <- LoadInteger '2'
+v37 <- CallFunction v26, [v35, v36]
+v38 <- LoadInteger '1'
+v39 <- LoadInteger '30'
+v40 <- BinaryOperation v38, '<<', v39
+v41 <- CreateNamedVariable 'two_30', 'var', v40
+v42 <- LoadInteger '2'
+v43 <- BinaryOperation v42, '*', v41
+v44 <- CreateNamedVariable 'two_31', 'var', v43
+v45 <- UnaryOperation '-', v44
+v46 <- LoadInteger '1'
+v47 <- UnaryOperation '-', v46
+v48 <- CallFunction v26, [v45, v47]
+v49 <- CallFunction v26, []
+v50 <- UnaryOperation '-', v41
+v51 <- LoadInteger '1'
+v52 <- UnaryOperation '-', v51
+v53 <- CallFunction v26, [v50, v52]
+v54 <- CallFunction v26, []
+
+
+function mul(a1, a2) {
+    return a1 * a2;
+}
+mul(-1, 2);
+mul(-1, 2);
+-2;
+mul(-1, 2);
+mul();
+-0;
+mul(-1, 0);
+mul();
+function mul2(a27, a28) {
+    return a27 * a28;
+}
+mul2(-1, 2);
+mul2(-1, 2);
+var two_30 = 1 << 30;
+var two_31 = 2 * two_30;
+mul2(-two_31, -1);
+mul2();
+mul2(-two_30, -1);
+mul2();
+
+FuzzIL program written to corpus/smi-mul.fzil

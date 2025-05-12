@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    v4 <- LoadFloat '0.5'
+    v5 <- BinaryOperation v3, '+', v4
+    Return v5
+EndPlainFunction
+v6 <- LoadUndefined
+v7 <- LoadInteger '0'
+v8 <- LoadFloat '2.5'
+v9 <- CreateArray [v6, v7, v8]
+v10 <- CreateNamedVariable 'arr', 'var', v9
+v11 <- LoadFloat '0.5'
+v12 <- LoadInteger '1'
+v13 <- CallFunction v0, [v10, v12]
+v14 <- LoadFloat '0.5'
+v15 <- LoadInteger '1'
+v16 <- CallFunction v0, [v10, v15]
+v17 <- LoadFloat '0.5'
+v18 <- LoadInteger '1'
+v19 <- CallFunction v0, [v10, v18]
+v20 <- LoadFloat '1.5'
+v21 <- CreateNamedVariable 'Array', 'none'
+v22 <- GetProperty v21, 'prototype'
+v23 <- CallMethod v22, 'unshift', [v20]
+v24 <- LoadInteger '2'
+v25 <- LoadInteger '0'
+v26 <- CallFunction v0, [v10, v25]
+
+
+function f1(a1, a2) {
+    return a1[a2] + 0.5;
+}
+var arr = [,0,2.5];
+f1(arr, 1);
+f1(arr, 1);
+f1(arr, 1);
+Array.prototype.unshift(1.5);
+f1(arr, 0);
+
+FuzzIL program written to corpus/elide-double-hole-check-11.fzil

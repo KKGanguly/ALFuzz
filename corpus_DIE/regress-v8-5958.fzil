@@ -1,0 +1,48 @@
+v0 <- BeginClassDefinition
+EndClassDefinition
+v1 <- BeginClassDefinition
+EndClassDefinition
+v2 <- CreateNamedVariable 'Proxy', 'none'
+v3 <- GetProperty v0, '__proto__'
+v4 <- BeginPlainFunction -> v5, v6, v7
+    v8 <- CreateNamedVariable 'Symbol', 'none'
+    v9 <- GetProperty v8, 'hasInstance'
+    v10 <- Compare v6, '===', v9
+    BeginIf v10
+        v11 <- Construct v1, []
+        ThrowException v11
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v4
+v12 <- EndObjectLiteral
+v13 <- Construct v2, [v3, v12]
+SetProperty v0, '__proto__', v13
+v14 <- BeginArrowFunction -> 
+    v15 <- Construct v0, []
+    v16 <- TestInstanceOf v15, v0
+    Return v16
+EndArrowFunction
+v17 <- CallFunction v14, []
+
+
+class C0 {
+}
+class C1 {
+}
+const v3 = C0.__proto__;
+function f4(a5, a6, a7) {
+    if (a6 === Symbol.hasInstance) {
+        const v11 = new C1();
+        throw v11;
+    }
+}
+const v13 = new Proxy(v3, { get: f4 });
+C0.__proto__ = v13;
+const v14 = () => {
+    const v15 = new C0();
+    return v15 instanceof C0;
+};
+v14();
+
+FuzzIL program written to corpus/regress-v8-5958.fzil

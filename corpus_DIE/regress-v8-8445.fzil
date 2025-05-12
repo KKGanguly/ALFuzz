@@ -1,0 +1,63 @@
+v0 <- BeginClassDefinition
+    BeginClassInstanceMethod 'exec' -> v1
+        v2 <- LoadNull
+        Return v2
+    EndClassInstanceMethod
+EndClassDefinition
+v3 <- LoadString 'ab'
+v4 <- LoadString ''
+v5 <- CreateArray [v3, v4]
+v6 <- LoadRegExp 'c' ''
+v7 <- LoadString 'abc'
+v8 <- CallMethod v7, 'split', [v6]
+v9 <- LoadString 'a'
+v10 <- CreateArray [v9]
+v11 <- CreateArray [v10]
+v12 <- LoadRegExp 'a' ''
+v13 <- LoadString 'a'
+v14 <- CallMethod v13, 'matchAll', [v12]
+v15 <- CreateArrayWithSpread [...v14]
+v16 <- CreateNamedVariable 'RegExp', 'none'
+v17 <- CreateNamedVariable 'Symbol', 'none'
+v18 <- GetProperty v17, 'species'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v19
+        Return v0
+    EndObjectLiteralMethod
+v20 <- EndObjectLiteral
+v21 <- CreateNamedVariable 'Object', 'none'
+v22 <- CallMethod v21, 'defineProperty', [v16, v18, v20]
+v23 <- LoadString 'abc'
+v24 <- CreateArray [v23]
+v25 <- LoadRegExp 'c' ''
+v26 <- LoadString 'abc'
+v27 <- CallMethod v26, 'split', [v25]
+v28 <- CreateArray []
+v29 <- LoadRegExp 'a' ''
+v30 <- LoadString 'a'
+v31 <- CallMethod v30, 'matchAll', [v29]
+v32 <- CreateArrayWithSpread [...v31]
+
+
+class C0 {
+    exec() {
+        return null;
+    }
+}
+["ab",""];
+("abc").split(/c/);
+[["a"]];
+[...("a").matchAll(/a/)];
+const v18 = Symbol.species;
+const v20 = {
+    get() {
+        return C0;
+    },
+};
+Object.defineProperty(RegExp, v18, v20);
+["abc"];
+("abc").split(/c/);
+[];
+[...("a").matchAll(/a/)];
+
+FuzzIL program written to corpus/regress-v8-8445.fzil

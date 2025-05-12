@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadString ''
+    v4 <- CreateNamedVariable 'start', 'var', v3
+    BeginIf v2
+        v5 <- LoadString ' - '
+        v6 <- BinaryOperation v2, '+', v5
+        Reassign v4, v6
+    EndIf
+    v7 <- LoadString 'array length'
+    v8 <- BinaryOperation v4, '+', v7
+    Reassign v4, v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- CreateNamedVariable 'gc', 'none'
+    v11 <- CallFunction v10, []
+    v12 <- LoadFloat '0.1'
+    v13 <- CreateArray [v12]
+    v14 <- CallFunction v0, [v13]
+EndPlainFunction
+v15 <- CallFunction v9, []
+v16 <- CallFunction v9, []
+v17 <- CallFunction v9, []
+
+
+function g(a1, a2) {
+    var start = "";
+    if (a2) {
+        start = a2 + " - ";
+    }
+    start = start + "array length";
+}
+function f() {
+    gc();
+    g([0.1]);
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-370827.fzil

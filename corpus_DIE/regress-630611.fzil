@@ -1,0 +1,37 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- LoadInteger '2'
+Reassign v1, v2
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v4
+    v5 <- EndObjectLiteral
+    v6 <- CreateNamedVariable 'o', 'var', v5
+    v7 <- LoadString 'a'
+    Reassign v1, v7
+    BeginForLoopInitializer
+    BeginForLoopCondition -> v8
+        v9 <- LoadInteger '2'
+        v10 <- Compare v8, '<', v9
+    BeginForLoopAfterthought v10 -> v11
+        v12 <- UnaryOperation v11, '++'
+    BeginForLoopBody -> v13
+        v14 <- DeleteComputedProperty v6, v13
+    EndForLoop
+EndPlainFunction
+v15 <- CallFunction v3, []
+
+
+var global = 1;
+global = 2;
+function f() {
+    var o = { a: 1 };
+    global = "a";
+    for (let i8 = global; i8 < 2; i8++) {
+        delete o[i8];
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-630611.fzil

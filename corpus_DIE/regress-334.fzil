@@ -1,0 +1,206 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'READ_ONLY', 'var', v0
+v2 <- LoadInteger '2'
+v3 <- CreateNamedVariable 'DONT_ENUM', 'var', v2
+v4 <- LoadInteger '4'
+v5 <- CreateNamedVariable 'DONT_DELETE', 'var', v4
+v6 <- BeginPlainFunction -> v7, v8, v9, v10
+    v11 <- BinaryOperation v10, '&', v5
+    v12 <- LoadInteger '0'
+    v13 <- Compare v11, '===', v12
+    v14 <- BinaryOperation v10, '&', v3
+    v15 <- LoadInteger '0'
+    v16 <- Compare v14, '===', v15
+    v17 <- BinaryOperation v10, '&', v1
+    v18 <- LoadInteger '0'
+    v19 <- Compare v17, '===', v18
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v9
+        ObjectLiteralAddProperty `configurable`, v13
+        ObjectLiteralAddProperty `enumerable`, v16
+        ObjectLiteralAddProperty `writable`, v19
+    v20 <- EndObjectLiteral
+    v21 <- CreateNamedVariable 'Object', 'none'
+    v22 <- CallMethod v21, 'defineProperty', [v7, v8, v20]
+EndPlainFunction
+v23 <- BeginPlainFunction -> 
+EndPlainFunction
+v24 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+v25 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v25
+v26 <- EndObjectLiteral
+v27 <- CreateNamedVariable 'object', 'var', v26
+v28 <- LoadString 'foo'
+v29 <- BinaryOperation v3, '|', v5
+v30 <- CallFunction v6, [v27, v28, v23, v29]
+v31 <- LoadString 'bar'
+v32 <- BinaryOperation v3, '|', v1
+v33 <- CallFunction v6, [v27, v31, v23, v32]
+v34 <- LoadString 'baz'
+v35 <- BinaryOperation v5, '|', v1
+v36 <- CallFunction v6, [v27, v34, v23, v35]
+v37 <- GetProperty v27, '__proto__'
+v38 <- LoadString 'bif'
+v39 <- BinaryOperation v3, '|', v5
+v40 <- CallFunction v6, [v37, v38, v23, v39]
+SetProperty v27, 'bif', v24
+v41 <- BeginPlainFunction -> v42
+    v43 <- CreateArray []
+    v44 <- CreateNamedVariable 'res', 'var', v43
+    BeginForInLoop v42 -> v45
+        v46 <- CallMethod v44, 'push', [v45]
+    EndForInLoop
+    v47 <- CallMethod v44, 'sort', []
+    Return v44
+EndPlainFunction
+v48 <- LoadString 'baz'
+v49 <- LoadString 'bif'
+v50 <- CreateArray [v48, v49]
+v51 <- CallFunction v41, [v27]
+v52 <- LoadString 'enum0'
+v53 <- DeleteProperty v27, 'foo'
+v54 <- LoadString 'delete foo'
+v55 <- DeleteProperty v27, 'baz'
+v56 <- LoadString 'delete baz'
+v57 <- CallFunction v23, []
+v58 <- GetProperty v27, 'foo'
+v59 <- LoadString 'read foo'
+v60 <- CallFunction v23, []
+v61 <- GetProperty v27, 'bar'
+v62 <- LoadString 'read bar'
+v63 <- CallFunction v23, []
+v64 <- GetProperty v27, 'baz'
+v65 <- LoadString 'read baz'
+v66 <- CallFunction v24, []
+v67 <- GetProperty v27, 'bif'
+v68 <- LoadString 'read bif'
+v69 <- LoadString 'NO WAY'
+SetProperty v27, 'bar', v69
+v70 <- CallFunction v23, []
+v71 <- GetProperty v27, 'bar'
+v72 <- LoadString 'read bar 2'
+v73 <- LoadString 'baz'
+v74 <- LoadString 'bif'
+v75 <- CreateArray [v73, v74]
+v76 <- CallFunction v41, [v27]
+v77 <- LoadString 'enum1'
+SetProperty v27, 'foo', v24
+v78 <- LoadString 'baz'
+v79 <- LoadString 'bif'
+v80 <- CreateArray [v78, v79]
+v81 <- CallFunction v41, [v27]
+v82 <- LoadString 'enum2'
+v83 <- DeleteProperty v27, 'foo'
+v84 <- LoadString 'delete foo 2'
+v85 <- DeleteProperty v27, 'bar'
+v86 <- LoadString 'delete bar'
+v87 <- LoadString 'bar'
+v88 <- TestIn v87, v27
+v89 <- LoadString 'has bar'
+SetProperty v27, 'bar', v24
+v90 <- LoadString 'bar'
+v91 <- TestIn v90, v27
+v92 <- LoadString 'has bar 2'
+v93 <- CallFunction v24, []
+v94 <- GetProperty v27, 'bar'
+v95 <- LoadString 'read bar 3'
+v96 <- LoadString 'bar'
+v97 <- LoadString 'baz'
+v98 <- LoadString 'bif'
+v99 <- CreateArray [v96, v97, v98]
+v100 <- CallFunction v41, [v27]
+v101 <- LoadString 'enum3'
+v102 <- DeleteProperty v27, 'bif'
+v103 <- LoadString 'delete bif'
+v104 <- LoadString 'bar'
+v105 <- LoadString 'baz'
+v106 <- CreateArray [v104, v105]
+v107 <- CallFunction v41, [v27]
+v108 <- LoadString 'enum4'
+v109 <- CallFunction v23, []
+v110 <- GetProperty v27, 'bif'
+v111 <- LoadString 'read bif 2'
+v112 <- DeleteProperty v27, 'bif'
+v113 <- LoadString 'delete bif 2'
+v114 <- LoadString 'bar'
+v115 <- LoadString 'baz'
+v116 <- CreateArray [v114, v115]
+v117 <- CallFunction v41, [v27]
+v118 <- LoadString 'enum5'
+v119 <- CallFunction v23, []
+v120 <- GetProperty v27, 'bif'
+v121 <- LoadString 'read bif3'
+
+
+var READ_ONLY = 1;
+var DONT_ENUM = 2;
+var DONT_DELETE = 4;
+function AddNamedProperty(a7, a8, a9, a10) {
+    const v13 = (a10 & DONT_DELETE) === 0;
+    const v16 = (a10 & DONT_ENUM) === 0;
+    const v19 = (a10 & READ_ONLY) === 0;
+    Object.defineProperty(a7, a8, { value: a9, configurable: v13, enumerable: v16, writable: v19 });
+}
+function func1() {
+}
+function func2() {
+}
+const v25 = {};
+var object = { __proto__: v25 };
+AddNamedProperty(object, "foo", func1, DONT_ENUM | DONT_DELETE);
+AddNamedProperty(object, "bar", func1, DONT_ENUM | READ_ONLY);
+AddNamedProperty(object, "baz", func1, DONT_DELETE | READ_ONLY);
+AddNamedProperty(object.__proto__, "bif", func1, DONT_ENUM | DONT_DELETE);
+object.bif = func2;
+function enumerable(a42) {
+    var res = [];
+    for (const v45 in a42) {
+        res.push(v45);
+    }
+    res.sort();
+    return res;
+}
+["baz","bif"];
+enumerable(object);
+delete object.foo;
+delete object.baz;
+func1();
+object.foo;
+func1();
+object.bar;
+func1();
+object.baz;
+func2();
+object.bif;
+object.bar = "NO WAY";
+func1();
+object.bar;
+["baz","bif"];
+enumerable(object);
+object.foo = func2;
+["baz","bif"];
+enumerable(object);
+delete object.foo;
+delete object.bar;
+"bar" in object;
+object.bar = func2;
+"bar" in object;
+func2();
+object.bar;
+["bar","baz","bif"];
+enumerable(object);
+delete object.bif;
+["bar","baz"];
+enumerable(object);
+func1();
+object.bif;
+delete object.bif;
+["bar","baz"];
+enumerable(object);
+func1();
+object.bif;
+
+FuzzIL program written to corpus/regress-334.fzil

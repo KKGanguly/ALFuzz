@@ -1,0 +1,42 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CallMethod v0, 'bind', []
+v2 <- CreateNamedVariable 'boundFunction', 'var', v1
+v3 <- CreateNamedVariable 'Uint8Array', 'none'
+v4 <- Construct v3, []
+v5 <- CreateNamedVariable 'instance', 'var', v4
+v6 <- CreateNamedVariable 'Symbol', 'none'
+v7 <- GetProperty v6, 'species'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v7, v2
+v8 <- EndObjectLiteral
+SetProperty v5, 'constructor', v8
+v9 <- BeginArrowFunction -> 
+    v10 <- BeginArrowFunction -> v11
+        v12 <- LoadInteger '2'
+        v13 <- BinaryOperation v11, '*', v12
+        Return v13
+    EndArrowFunction
+    v14 <- CallMethod v5, 'map', [v10]
+    Return v14
+EndArrowFunction
+v15 <- CallFunction v9, []
+v16 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function f0() {
+}
+var boundFunction = f0.bind();
+const v4 = new Uint8Array();
+var instance = v4;
+const v7 = Symbol.species;
+instance.constructor = { [v7]: boundFunction };
+const v9 = () => {
+    const v10 = (a11) => {
+        return a11 * 2;
+    };
+    return instance.map(v10);
+};
+v9();
+
+FuzzIL program written to corpus/regress-crbug-840220.fzil

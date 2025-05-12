@@ -1,0 +1,74 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Date', 'none'
+    v2 <- Construct v1, []
+    v3 <- CreateNamedVariable 'date', 'var', v2
+    v4 <- LoadBoolean 'true'
+    v5 <- BinaryOperation v3, '+', v4
+    v6 <- CallMethod v3, 'toString', []
+    v7 <- LoadBoolean 'true'
+    v8 <- BinaryOperation v6, '+', v7
+    v9 <- Compare v5, '==', v8
+    Return v9
+EndPlainFunction
+v10 <- BeginPlainFunction -> 
+    v11 <- CreateNamedVariable 'Date', 'none'
+    v12 <- Construct v11, []
+    v13 <- CreateNamedVariable 'date', 'var', v12
+    v14 <- LoadBoolean 'true'
+    v15 <- BinaryOperation v14, '+', v13
+    v16 <- LoadBoolean 'true'
+    v17 <- CallMethod v13, 'toString', []
+    v18 <- BinaryOperation v16, '+', v17
+    v19 <- Compare v15, '==', v18
+    Return v19
+EndPlainFunction
+v20 <- BeginPlainFunction -> 
+    v21 <- CreateNamedVariable 'String', 'none'
+    v22 <- LoadInteger '1'
+    v23 <- Construct v21, [v22]
+    v24 <- LoadBoolean 'true'
+    v25 <- BinaryOperation v23, '+', v24
+    v26 <- LoadString '1true'
+    v27 <- Compare v25, '==', v26
+    Return v27
+EndPlainFunction
+v28 <- BeginPlainFunction -> 
+    v29 <- LoadBoolean 'true'
+    v30 <- CreateNamedVariable 'String', 'none'
+    v31 <- LoadInteger '1'
+    v32 <- Construct v30, [v31]
+    v33 <- BinaryOperation v29, '+', v32
+    v34 <- LoadString 'true1'
+    v35 <- Compare v33, '==', v34
+    Return v35
+EndPlainFunction
+v36 <- CallFunction v0, []
+v37 <- CallFunction v10, []
+v38 <- CallFunction v20, []
+v39 <- CallFunction v28, []
+
+
+function dateL() {
+    const v2 = new Date();
+    var date = v2;
+    return (date + true) == (date.toString() + true);
+}
+function dateR() {
+    const v12 = new Date();
+    var date = v12;
+    return (true + date) == (true + date.toString());
+}
+function strL() {
+    const v23 = new String(1);
+    return (v23 + true) == "1true";
+}
+function strR() {
+    const v32 = new String(1);
+    return (true + v32) == "true1";
+}
+dateL();
+dateR();
+strL();
+strR();
+
+FuzzIL program written to corpus/generic-add.fzil

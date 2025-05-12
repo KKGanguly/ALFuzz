@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadArguments
+    v2 <- GetProperty v1, 'length'
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '0'
+v4 <- CallMethod v0, 'apply', []
+v5 <- LoadString 'no receiver or args'
+v6 <- LoadInteger '0'
+v7 <- LoadThis
+v8 <- CallMethod v0, 'apply', [v7]
+v9 <- LoadString 'no args'
+v10 <- LoadInteger '0'
+v11 <- LoadThis
+v12 <- CreateArray []
+v13 <- CallMethod v0, 'apply', [v11, v12]
+v14 <- LoadString 'empty args'
+v15 <- LoadInteger '0'
+v16 <- LoadThis
+v17 <- CreateArray []
+v18 <- LoadInteger '0'
+v19 <- CallMethod v0, 'apply', [v16, v17, v18]
+v20 <- LoadString 'empty args, extra argument'
+
+
+function F() {
+    return arguments.length;
+}
+F.apply();
+F.apply(this);
+F.apply(this, []);
+F.apply(this, [], 0);
+
+FuzzIL program written to corpus/regress-1102760.fzil

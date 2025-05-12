@@ -1,0 +1,80 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '0'
+    v4 <- CreateNamedVariable 'a', 'var', v3
+    BeginIf v2
+        v5 <- LoadInteger '1'
+        v6 <- BinaryOperation v5, '<<', v1
+        v7 <- CreateNamedVariable 'c', 'var', v6
+        v8 <- BinaryOperation v7, '+', v7
+        Reassign v4, v8
+    EndIf
+    v9 <- LoadInteger '3'
+    v10 <- BinaryOperation v4, '>>', v9
+    v11 <- CreateNamedVariable 'x', 'var', v10
+    Return v4
+EndPlainFunction
+v12 <- LoadInteger '1'
+v13 <- LoadBoolean 'false'
+v14 <- CallFunction v0, [v12, v13]
+v15 <- LoadInteger '1'
+v16 <- LoadBoolean 'true'
+v17 <- CallFunction v0, [v15, v16]
+v18 <- LoadInteger '1'
+v19 <- LoadInteger '30'
+v20 <- BinaryOperation v18, '<<', v19
+v21 <- LoadInteger '2'
+v22 <- BinaryOperation v20, '*', v21
+v23 <- LoadInteger '30'
+v24 <- LoadBoolean 'true'
+v25 <- CallFunction v0, [v23, v24]
+v26 <- LoadInteger '1'
+v27 <- CreateNamedVariable 'global', 'var', v26
+v28 <- BeginPlainFunction -> v29
+    v30 <- LoadInteger '0'
+    v31 <- CreateNamedVariable 'a', 'var', v30
+    BeginIf v29
+        Reassign v31, v27
+    EndIf
+    v32 <- LoadInteger '3'
+    v33 <- BinaryOperation v31, '>>', v32
+    v34 <- CreateNamedVariable 'x', 'var', v33
+    Return v31
+EndPlainFunction
+v35 <- LoadBoolean 'false'
+v36 <- CallFunction v28, [v35]
+v37 <- LoadBoolean 'true'
+v38 <- CallFunction v28, [v37]
+v39 <- LoadFloat '2.5'
+Reassign v27, v39
+v40 <- LoadBoolean 'true'
+v41 <- CallFunction v28, [v40]
+
+
+function f(a1, a2) {
+    var a = 0;
+    if (a2) {
+        var c = 1 << a1;
+        a = c + c;
+    }
+    var x = a >> 3;
+    return a;
+}
+f(1, false);
+f(1, true);
+(1 << 30) * 2;
+f(30, true);
+var global = 1;
+function f2(a29) {
+    var a = 0;
+    if (a29) {
+        a = global;
+    }
+    var x = a >> 3;
+    return a;
+}
+f2(false);
+f2(true);
+global = 2.5;
+f2(true);
+
+FuzzIL program written to corpus/regress-int32-truncation.fzil

@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadBoolean 'false'
+    v2 <- LoadBoolean 'false'
+    v3 <- LoadBoolean 'false'
+    v4 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `1`, v1
+        ObjectLiteralAddProperty `2`, v2
+        ObjectLiteralAddProperty `3`, v3
+        ObjectLiteralAddProperty `4`, v4
+    v5 <- EndObjectLiteral
+    v6 <- CreateNamedVariable 'a', 'var', v5
+    v7 <- LoadBoolean 'false'
+    v8 <- GetElement v6, '1'
+    v9 <- LoadBoolean 'true'
+    SetElement v6, '1', v9
+EndPlainFunction
+v10 <- CreateNamedVariable 'test', 'var', v0
+v11 <- CallFunction v10, []
+v12 <- CallFunction v10, []
+v13 <- CallFunction v10, []
+v14 <- CallFunction v10, []
+v15 <- CallFunction v10, []
+v16 <- CallFunction v10, []
+
+
+function f0() {
+    var a = { 1: false, 2: false, 3: false, 4: false };
+    a[1];
+    a[1] = true;
+}
+var test = f0;
+test();
+test();
+test();
+test();
+test();
+test();
+
+FuzzIL program written to corpus/regress-466993.fzil

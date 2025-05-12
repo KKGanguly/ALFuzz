@@ -1,0 +1,25 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'v', 'var', v0
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v1, '__proto__', v2
+v3 <- GetProperty v1, 'prototype'
+v4 <- CreateArray []
+v5 <- CreateNamedVariable 'v', 'var', v4
+v6 <- CreateNamedVariable 'Error', 'none'
+v7 <- Construct v6, []
+SetProperty v5, '__proto__', v7
+v8 <- GetProperty v5, 'stack'
+
+
+var v = [];
+function f2() {
+}
+v.__proto__ = f2;
+v.prototype;
+var v = [];
+const v7 = new Error();
+v.__proto__ = v7;
+v.stack;
+
+FuzzIL program written to corpus/regress-crbug-716804.fzil

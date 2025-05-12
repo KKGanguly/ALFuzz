@@ -1,0 +1,106 @@
+v0 <- LoadInteger '0'
+v1 <- LoadString ''
+v2 <- GetProperty v1, 'length'
+v3 <- LoadInteger '1'
+v4 <- LoadString 'a'
+v5 <- GetProperty v4, 'length'
+v6 <- LoadInteger '2'
+v7 <- LoadString 'a'
+v8 <- LoadString 'b'
+v9 <- BinaryOperation v7, '+', v8
+v10 <- GetProperty v9, 'length'
+v11 <- BeginPlainFunction -> v12
+    Return v12
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14
+    v15 <- GetProperty v14, 'length'
+    Return v15
+EndPlainFunction
+v16 <- LoadInteger '0'
+v17 <- LoadString ''
+v18 <- CallFunction v13, [v17]
+v19 <- LoadInteger '1'
+v20 <- LoadString 'a'
+v21 <- CallFunction v13, [v20]
+v22 <- LoadInteger '2'
+v23 <- LoadString 'a'
+v24 <- LoadString 'b'
+v25 <- BinaryOperation v23, '+', v24
+v26 <- CallFunction v13, [v25]
+v27 <- LoadInteger '3'
+v28 <- LoadString 'a'
+v29 <- CallFunction v11, [v28]
+v30 <- LoadString 'b'
+v31 <- LoadString 'c'
+v32 <- CallFunction v11, [v31]
+v33 <- BinaryOperation v30, '+', v32
+v34 <- CallFunction v11, [v33]
+v35 <- BinaryOperation v29, '+', v34
+v36 <- CallFunction v13, [v35]
+v37 <- BeginPlainFunction -> v38, v39, v40
+    v41 <- LoadString ''
+    v42 <- BinaryOperation v41, '+', v39
+    v43 <- LoadString ''
+    v44 <- BinaryOperation v43, '+', v40
+    v45 <- TernaryOperation v38, v42, v44
+    Reassign v38, v45
+    v46 <- GetProperty v38, 'length'
+    Return v46
+EndPlainFunction
+v47 <- LoadInteger '0'
+v48 <- LoadBoolean 'true'
+v49 <- LoadString ''
+v50 <- LoadString 'a'
+v51 <- CallFunction v37, [v48, v49, v50]
+v52 <- LoadInteger '1'
+v53 <- LoadBoolean 'false'
+v54 <- LoadString ''
+v55 <- LoadString 'a'
+v56 <- CallFunction v37, [v53, v54, v55]
+v57 <- LoadInteger '0'
+v58 <- LoadBoolean 'true'
+v59 <- LoadString ''
+v60 <- LoadString 'a'
+v61 <- CallFunction v37, [v58, v59, v60]
+v62 <- LoadInteger '1'
+v63 <- LoadBoolean 'false'
+v64 <- LoadString ''
+v65 <- LoadString 'a'
+v66 <- CallFunction v37, [v63, v64, v65]
+v67 <- LoadInteger '3'
+v68 <- LoadBoolean 'true'
+v69 <- LoadString 'a'
+v70 <- CallFunction v11, [v69]
+v71 <- LoadString 'b'
+v72 <- LoadString 'c'
+v73 <- CallFunction v11, [v72]
+v74 <- BinaryOperation v71, '+', v73
+v75 <- CallFunction v11, [v74]
+v76 <- BinaryOperation v70, '+', v75
+v77 <- LoadString ''
+v78 <- CallFunction v37, [v68, v76, v77]
+
+
+("").length;
+("a").length;
+("a" + "b").length;
+function id(a12) {
+    return a12;
+}
+function f1(a14) {
+    return a14.length;
+}
+f1("");
+f1("a");
+f1("a" + "b");
+f1(id("a") + id("b" + id("c")));
+function f2(a38, a39, a40) {
+    return (a38 = a38 ? "" + a39 : "" + a40).length;
+}
+f2(true, "", "a");
+f2(false, "", "a");
+f2(true, "", "a");
+f2(false, "", "a");
+f2(true, id("a") + id("b" + id("c")), "");
+
+FuzzIL program written to corpus/string-length.fzil

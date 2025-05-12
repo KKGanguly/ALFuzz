@@ -1,0 +1,48 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'xs', 'let', v0
+v2 <- LoadInteger '200'
+v3 <- CreateNamedVariable 'kSize', 'const', v2
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+BeginForLoopCondition -> v5
+    v6 <- Compare v5, '<', v3
+BeginForLoopAfterthought v6 -> v7
+    v8 <- UnaryOperation '++', v7
+BeginForLoopBody -> v9
+    v10 <- CallMethod v1, 'push', [v9]
+EndForLoop
+v11 <- LoadInteger '0'
+v12 <- CreateNamedVariable 'counter', 'let', v11
+v13 <- BeginArrowFunction -> v14, v15
+    v16 <- UnaryOperation v12, '++'
+    v17 <- LoadInteger '10'
+    v18 <- BinaryOperation v16, '%', v17
+    v19 <- LoadInteger '0'
+    v20 <- Compare v18, '==', v19
+    BeginIf v20
+        v21 <- CallMethod v1, 'shift', []
+        v22 <- CreateNamedVariable 'gc', 'none'
+        v23 <- CallFunction v22, []
+    EndIf
+    v24 <- BinaryOperation v14, '-', v15
+    Return v24
+EndArrowFunction
+v25 <- CallMethod v1, 'sort', [v13]
+
+
+let xs = [];
+const kSize = 200;
+for (let i5 = 0; i5 < kSize; ++i5) {
+    xs.push(i5);
+}
+let counter = 0;
+const v13 = (a14, a15) => {
+    if ((counter++ % 10) == 0) {
+        xs.shift();
+        gc();
+    }
+    return a14 - a15;
+};
+xs.sort(v13);
+
+FuzzIL program written to corpus/regress-crbug-859809.fzil

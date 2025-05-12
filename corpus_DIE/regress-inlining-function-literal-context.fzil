@@ -1,0 +1,57 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginPlainFunction -> 
+        v3 <- BeginPlainFunction -> 
+            v4 <- CreateArray [v1]
+            Return v4
+        EndPlainFunction
+        Return v3
+    EndPlainFunction
+    Return v2
+EndPlainFunction
+v5 <- LoadInteger '1'
+v6 <- CallFunction v0, [v5]
+v7 <- CreateNamedVariable 'baz', 'var', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- CallFunction v7, []
+    v10 <- CreateNamedVariable 'f', 'var', v9
+    v11 <- CallFunction v10, []
+    Return v11
+EndPlainFunction
+v12 <- CreateNamedVariable 'gc', 'none'
+v13 <- CallFunction v12, []
+v14 <- CallFunction v12, []
+v15 <- LoadInteger '1'
+v16 <- CreateArray [v15]
+v17 <- CallFunction v8, []
+v18 <- LoadInteger '1'
+v19 <- CreateArray [v18]
+v20 <- CallFunction v8, []
+v21 <- LoadInteger '1'
+v22 <- CreateArray [v21]
+v23 <- CallFunction v8, []
+
+
+function mkbaz(a1) {
+    function baz() {
+        function f3() {
+            return [a1];
+        }
+        return f3;
+    }
+    return baz;
+}
+var baz = mkbaz(1);
+function foo() {
+    var f = baz();
+    return f();
+}
+gc();
+gc();
+[1];
+foo();
+[1];
+foo();
+[1];
+foo();
+
+FuzzIL program written to corpus/regress-inlining-function-literal-context.fzil

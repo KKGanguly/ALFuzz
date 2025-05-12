@@ -1,0 +1,33 @@
+v0 <- CreateNamedVariable 'Error', 'none'
+v1 <- BeginClassDefinition v0
+EndClassDefinition
+v2 <- BeginArrowFunction -> 
+    v3 <- Construct v1, []
+    ThrowException v3
+EndArrowFunction
+v4 <- CreateNamedVariable 'RegExp', 'none'
+v5 <- GetProperty v4, 'prototype'
+SetProperty v5, 'exec', v2
+v6 <- BeginArrowFunction -> 
+    v7 <- LoadRegExp 'bar' ''
+    v8 <- LoadString 'foo'
+    v9 <- CallMethod v8, 'match', [v7]
+    Return v9
+EndArrowFunction
+v10 <- CallFunction v6, []
+
+
+class C1 extends Error {
+}
+const v2 = () => {
+    const v3 = new C1();
+    throw v3;
+};
+const t6 = RegExp.prototype;
+t6.exec = v2;
+const v6 = () => {
+    return ("foo").match(/bar/);
+};
+v6();
+
+FuzzIL program written to corpus/regexp-change-exec.fzil

@@ -1,0 +1,189 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 's', 'let', v0
+v2 <- LoadUndefined
+v3 <- LoadUndefined
+v4 <- LoadUndefined
+v5 <- CreateArray [v2, v3, v4]
+v6 <- CreateNamedVariable 'ff', 'let', v5
+v7 <- LoadInteger '1'
+v8 <- LoadInteger '2'
+v9 <- LoadInteger '3'
+v10 <- CreateArray [v7, v8, v9]
+BeginForOfLoop v10 -> v11
+    Update v1, '+', v11
+    v12 <- BeginPlainFunction -> 
+        Return v11
+    EndPlainFunction
+    v13 <- LoadInteger '1'
+    v14 <- BinaryOperation v11, '-', v13
+    SetComputedProperty v6, v14, v12
+EndForOfLoop
+v15 <- LoadInteger '6'
+v16 <- LoadInteger '1'
+v17 <- LoadInteger '0'
+v18 <- CallComputedMethod v6, v17, []
+v19 <- LoadInteger '2'
+v20 <- LoadInteger '1'
+v21 <- CallComputedMethod v6, v20, []
+v22 <- LoadInteger '3'
+v23 <- LoadInteger '2'
+v24 <- CallComputedMethod v6, v23, []
+v25 <- LoadInteger '1'
+v26 <- CreateNamedVariable 'x', 'let', v25
+v27 <- LoadInteger '0'
+Reassign v1, v27
+v28 <- LoadInteger '1'
+v29 <- BinaryOperation v26, '+', v28
+v30 <- LoadInteger '2'
+v31 <- BinaryOperation v26, '+', v30
+v32 <- CreateArray [v26, v29, v31]
+BeginForOfLoop v32 -> v33
+    Update v1, '+', v33
+EndForOfLoop
+v34 <- LoadInteger '6'
+v35 <- LoadInteger '0'
+Reassign v1, v35
+v36 <- LoadInteger '1'
+v37 <- CreateNamedVariable 'q', 'var', v36
+v38 <- LoadInteger '1'
+v39 <- BinaryOperation v37, '+', v38
+v40 <- LoadInteger '2'
+v41 <- BinaryOperation v37, '+', v40
+v42 <- CreateArray [v37, v39, v41]
+BeginForOfLoop v42 -> v43
+    Update v1, '+', v43
+EndForOfLoop
+v44 <- LoadInteger '6'
+v45 <- LoadInteger '1'
+v46 <- CreateNamedVariable 'z', 'let', v45
+v47 <- LoadInteger '0'
+Reassign v1, v47
+BeginForLoopInitializer
+    v48 <- LoadInteger '1'
+BeginForLoopCondition -> v49
+    v50 <- LoadInteger '2'
+    v51 <- Compare v46, '<', v50
+BeginForLoopAfterthought v51 -> v52
+    v53 <- UnaryOperation v46, '++'
+BeginForLoopBody -> v54
+    v55 <- BinaryOperation v54, '+', v46
+    Update v1, '+', v55
+EndForLoop
+v56 <- LoadInteger '2'
+v57 <- LoadString ''
+Reassign v1, v57
+v58 <- LoadInteger '1'
+v59 <- LoadInteger '2'
+v60 <- LoadInteger '3'
+v61 <- CreateArray [v58, v59, v60]
+BeginForInLoop v61 -> v62
+    Update v1, '+', v62
+EndForInLoop
+v63 <- LoadString '012'
+v64 <- LoadString ''use strict'; for (const x in [1,2,3]) { x++ }'
+v65 <- CreateNamedVariable 'TypeError', 'none'
+v66 <- BeginPlainFunction -> 
+    v67 <- LoadInteger '0'
+    v68 <- CreateNamedVariable 's', 'let', v67
+    v69 <- LoadInteger '1'
+    v70 <- LoadInteger '2'
+    v71 <- LoadInteger '3'
+    v72 <- CreateArray [v69, v70, v71]
+    BeginForOfLoop v72 -> v73
+        Update v68, '+', v73
+    EndForOfLoop
+    v74 <- LoadInteger '6'
+    v75 <- LoadInteger '1'
+    v76 <- CreateNamedVariable 'x', 'let', v75
+    v77 <- LoadInteger '0'
+    Reassign v68, v77
+    v78 <- LoadInteger '1'
+    v79 <- BinaryOperation v76, '+', v78
+    v80 <- LoadInteger '2'
+    v81 <- BinaryOperation v76, '+', v80
+    v82 <- CreateArray [v76, v79, v81]
+    BeginForOfLoop v82 -> v83
+        Update v68, '+', v83
+    EndForOfLoop
+    v84 <- LoadInteger '6'
+    v85 <- LoadInteger '0'
+    Reassign v68, v85
+    v86 <- LoadInteger '1'
+    v87 <- CreateNamedVariable 'q', 'var', v86
+    v88 <- LoadInteger '1'
+    v89 <- BinaryOperation v87, '+', v88
+    v90 <- LoadInteger '2'
+    v91 <- BinaryOperation v87, '+', v90
+    v92 <- CreateArray [v87, v89, v91]
+    BeginForOfLoop v92 -> v93
+        Update v68, '+', v93
+    EndForOfLoop
+    v94 <- LoadInteger '6'
+    v95 <- LoadString ''
+    Reassign v68, v95
+    v96 <- LoadInteger '1'
+    v97 <- LoadInteger '2'
+    v98 <- LoadInteger '3'
+    v99 <- CreateArray [v96, v97, v98]
+    BeginForInLoop v99 -> v100
+        Update v68, '+', v100
+    EndForInLoop
+    v101 <- LoadString '012'
+EndPlainFunction
+v102 <- CallFunction v66, []
+
+
+let s = 0;
+let ff = [,,,];
+for (const v11 of [1,2,3]) {
+    s += v11;
+    function f12() {
+        return v11;
+    }
+    ff[v11 - 1] = f12;
+}
+ff[0]();
+ff[1]();
+ff[2]();
+let x = 1;
+s = 0;
+for (const v33 of [x,x + 1,x + 2]) {
+    s += v33;
+}
+s = 0;
+var q = 1;
+for (const v43 of [q,q + 1,q + 2]) {
+    s += v43;
+}
+let z = 1;
+s = 0;
+for (let i49 = 1; z < 2; z++) {
+    s += i49 + z;
+}
+s = "";
+for (const v62 in [1,2,3]) {
+    s += v62;
+}
+function f66() {
+    let s = 0;
+    for (const v73 of [1,2,3]) {
+        s += v73;
+    }
+    let x = 1;
+    s = 0;
+    for (const v83 of [x,x + 1,x + 2]) {
+        s += v83;
+    }
+    s = 0;
+    var q = 1;
+    for (const v93 of [q,q + 1,q + 2]) {
+        s += v93;
+    }
+    s = "";
+    for (const v100 in [1,2,3]) {
+        s += v100;
+    }
+}
+f66();
+
+FuzzIL program written to corpus/regress-2506.fzil

@@ -1,0 +1,25 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'arr', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '1'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '390000'
+    v5 <- Compare v3, '!=', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation '++', v6
+BeginForLoopBody -> v8
+    v9 <- LoadString 'f()'
+    v10 <- CallMethod v1, 'push', [v9]
+EndForLoop
+v11 <- CreateNamedVariable 'Function', 'none'
+v12 <- CallMethod v1, 'join', []
+v13 <- Construct v11, [v12]
+
+
+var arr = [];
+for (let i3 = 1; i3 != 390000; ++i3) {
+    arr.push("f()");
+}
+new Function(arr.join());
+
+FuzzIL program written to corpus/regress-862433.fzil

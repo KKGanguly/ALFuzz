@@ -1,0 +1,149 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadRegExp '\u' ''
+    v2 <- CreateNamedVariable 'r0', 'var', v1
+    v3 <- LoadString 'u'
+    v4 <- CallMethod v2, 'test', [v3]
+    v5 <- LoadString '\u'
+    v6 <- CreateNamedVariable 'RegExp', 'none'
+    v7 <- CallFunction v6, [v5]
+    Reassign v2, v7
+    v8 <- LoadString 'u'
+    v9 <- CallMethod v2, 'test', [v8]
+    v10 <- LoadRegExp '\usecond' ''
+    v11 <- CreateNamedVariable 'r1', 'var', v10
+    v12 <- LoadString 'usecond'
+    v13 <- CallMethod v11, 'test', [v12]
+    v14 <- LoadString '\usecond'
+    v15 <- CallFunction v6, [v14]
+    Reassign v11, v15
+    v16 <- LoadString 'usecond'
+    v17 <- CallMethod v11, 'test', [v16]
+    v18 <- LoadRegExp 'first\u' ''
+    v19 <- CreateNamedVariable 'r2', 'var', v18
+    v20 <- LoadString 'firstu'
+    v21 <- CallMethod v19, 'test', [v20]
+    v22 <- LoadString 'first\u'
+    v23 <- CallMethod v19, 'test', [v22]
+    v24 <- LoadString 'first\u'
+    v25 <- CallFunction v6, [v24]
+    Reassign v19, v25
+    v26 <- LoadString 'firstu'
+    v27 <- CallMethod v19, 'test', [v26]
+    v28 <- LoadString 'first\u'
+    v29 <- CallMethod v19, 'test', [v28]
+    v30 <- LoadRegExp 'first\usecond' ''
+    v31 <- CreateNamedVariable 'r3', 'var', v30
+    v32 <- LoadString 'firstusecond'
+    v33 <- CallMethod v31, 'test', [v32]
+    v34 <- LoadString 'first\usecond'
+    v35 <- CallMethod v31, 'test', [v34]
+    v36 <- LoadString 'first\usecond'
+    v37 <- CallFunction v6, [v36]
+    Reassign v31, v37
+    v38 <- LoadString 'firstusecond'
+    v39 <- CallMethod v31, 'test', [v38]
+    v40 <- LoadString 'first\usecond'
+    v41 <- CallMethod v31, 'test', [v40]
+    v42 <- LoadRegExp 'first\u123second' ''
+    v43 <- CreateNamedVariable 'r4', 'var', v42
+    v44 <- LoadString 'firstu123second'
+    v45 <- CallMethod v43, 'test', [v44]
+    v46 <- LoadString 'first\u123second'
+    v47 <- CallMethod v43, 'test', [v46]
+    v48 <- LoadString 'first\u123second'
+    v49 <- CallFunction v6, [v48]
+    Reassign v43, v49
+    v50 <- LoadString 'firstu123second'
+    v51 <- CallMethod v43, 'test', [v50]
+    v52 <- LoadString 'first\u123second'
+    v53 <- CallMethod v43, 'test', [v52]
+    v54 <- LoadRegExp '\a' ''
+    v55 <- CreateNamedVariable 'r5', 'var', v54
+    v56 <- LoadString 'a'
+    v57 <- CallMethod v55, 'test', [v56]
+    v58 <- LoadString '\a'
+    v59 <- CallFunction v6, [v58]
+    Reassign v55, v59
+    v60 <- LoadString 'a'
+    v61 <- CallMethod v55, 'test', [v60]
+    v62 <- LoadRegExp '\asecond' ''
+    v63 <- CreateNamedVariable 'r6', 'var', v62
+    v64 <- LoadString 'asecond'
+    v65 <- CallMethod v63, 'test', [v64]
+    v66 <- LoadString '\asecond'
+    v67 <- CallFunction v6, [v66]
+    Reassign v63, v67
+    v68 <- LoadString 'asecond'
+    v69 <- CallMethod v63, 'test', [v68]
+    v70 <- LoadRegExp 'first\a' ''
+    v71 <- CreateNamedVariable 'r7', 'var', v70
+    v72 <- LoadString 'firsta'
+    v73 <- CallMethod v71, 'test', [v72]
+    v74 <- LoadString 'first\a'
+    v75 <- CallMethod v71, 'test', [v74]
+    v76 <- LoadString 'first\a'
+    v77 <- CallFunction v6, [v76]
+    Reassign v71, v77
+    v78 <- LoadString 'firsta'
+    v79 <- CallMethod v71, 'test', [v78]
+    v80 <- LoadString 'first\a'
+    v81 <- CallMethod v71, 'test', [v80]
+    v82 <- LoadRegExp 'first\asecond' ''
+    v83 <- CreateNamedVariable 'r8', 'var', v82
+    v84 <- LoadString 'firstasecond'
+    v85 <- CallMethod v83, 'test', [v84]
+    v86 <- LoadString 'first\asecond'
+    v87 <- CallMethod v83, 'test', [v86]
+    v88 <- LoadString 'first\asecond'
+    v89 <- CallFunction v6, [v88]
+    Reassign v83, v89
+    v90 <- LoadString 'firstasecond'
+    v91 <- CallMethod v83, 'test', [v90]
+    v92 <- LoadString 'first\asecond'
+    v93 <- CallMethod v83, 'test', [v92]
+EndPlainFunction
+v94 <- CallFunction v0, []
+
+
+function TestIdentityEscapes() {
+    var r0 = /\u/;
+    r0.test("u");
+    (r0 = RegExp("\u")).test("u");
+    var r1 = /\usecond/;
+    r1.test("usecond");
+    (r1 = RegExp("\usecond")).test("usecond");
+    var r2 = /first\u/;
+    r2.test("firstu");
+    r2.test("first\u");
+    (r2 = RegExp("first\u")).test("firstu");
+    r2.test("first\u");
+    var r3 = /first\usecond/;
+    r3.test("firstusecond");
+    r3.test("first\usecond");
+    (r3 = RegExp("first\usecond")).test("firstusecond");
+    r3.test("first\usecond");
+    var r4 = /first\u123second/;
+    r4.test("firstu123second");
+    r4.test("first\u123second");
+    (r4 = RegExp("first\u123second")).test("firstu123second");
+    r4.test("first\u123second");
+    var r5 = /\a/;
+    r5.test("a");
+    (r5 = RegExp("\a")).test("a");
+    var r6 = /\asecond/;
+    r6.test("asecond");
+    (r6 = RegExp("\asecond")).test("asecond");
+    var r7 = /first\a/;
+    r7.test("firsta");
+    r7.test("first\a");
+    (r7 = RegExp("first\a")).test("firsta");
+    r7.test("first\a");
+    var r8 = /first\asecond/;
+    r8.test("firstasecond");
+    r8.test("first\asecond");
+    (r8 = RegExp("first\asecond")).test("firstasecond");
+    r8.test("first\asecond");
+}
+TestIdentityEscapes();
+
+FuzzIL program written to corpus/regress-3756.fzil

@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Int32Array', 'none'
+    v2 <- LoadInteger '2'
+    v3 <- Construct v1, [v2]
+    v4 <- CreateNamedVariable 'a', 'var', v3
+    v5 <- GetElement v4, '0'
+    v6 <- CreateNamedVariable 'x', 'var', v5
+    v7 <- CreateNamedVariable 'Math', 'none'
+    v8 <- CallMethod v7, 'min', [v6, v6]
+    Return v8
+EndPlainFunction
+v9 <- LoadInteger '0'
+v10 <- CallFunction v0, []
+v11 <- LoadInteger '0'
+v12 <- CallFunction v0, []
+v13 <- LoadInteger '0'
+v14 <- CallFunction v0, []
+
+
+function test() {
+    const v3 = new Int32Array(2);
+    var a = v3;
+    var x = a[0];
+    return Math.min(x, x);
+}
+test();
+test();
+test();
+
+FuzzIL program written to corpus/regress-crbug-145961.fzil

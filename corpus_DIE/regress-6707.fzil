@@ -1,0 +1,49 @@
+v0 <- LoadInteger '0'
+v1 <- LoadInteger '1'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v6
+    v7 <- EndObjectLiteral
+    v8 <- CreateNamedVariable 'arr', 'var', v7
+    v9 <- LoadString 'length'
+    v10 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `writable`, v10
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'Object', 'none'
+    v13 <- CallMethod v12, 'defineProperty', [v8, v9, v11]
+    Return v8
+EndPlainFunction
+v14 <- CreateNamedVariable 'Symbol', 'none'
+v15 <- GetProperty v14, 'species'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v15, v4
+v16 <- EndObjectLiteral
+SetProperty v3, 'constructor', v16
+v17 <- BeginArrowFunction -> 
+    v18 <- CreateNamedVariable 'Array', 'none'
+    v19 <- GetProperty v18, 'prototype'
+    v20 <- GetProperty v19, 'concat'
+    v21 <- CallMethod v20, 'call', [v3]
+EndArrowFunction
+v22 <- CallFunction v17, []
+v23 <- CreateNamedVariable 'TypeError', 'none'
+
+
+var a = [0,1];
+function f4(a5) {
+    var arr = { length: 0 };
+    Object.defineProperty(arr, "length", { writable: false });
+    return arr;
+}
+const v15 = Symbol.species;
+a.constructor = { [v15]: f4 };
+const v17 = () => {
+    Array.prototype.concat.call(a);
+};
+v17();
+
+FuzzIL program written to corpus/regress-6707.fzil

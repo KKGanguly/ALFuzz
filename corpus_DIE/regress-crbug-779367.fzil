@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'x'
+    Return v2
+EndPlainFunction
+v3 <- LoadString 'x'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `set` -> v4, v5
+    EndObjectLiteralMethod
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'Object', 'none'
+v8 <- CallMethod v7, 'defineProperty', [v0, v3, v6]
+v9 <- LoadInteger '1'
+SetProperty v0, 'prototype', v9
+v10 <- CallFunction v0, [v0]
+v11 <- CallFunction v0, [v0]
+v12 <- CallFunction v0, [v0]
+
+
+function g(a1) {
+    return a1.x;
+}
+const v6 = {
+    set(a5) {
+    },
+};
+Object.defineProperty(g, "x", v6);
+g.prototype = 1;
+g(g);
+g(g);
+g(g);
+
+FuzzIL program written to corpus/regress-crbug-779367.fzil

@@ -1,0 +1,98 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadInteger '5'
+        v3 <- UnaryOperation '-', v2
+        v4 <- LoadArguments
+        SetProperty v4, 'length', v3
+        v5 <- LoadArguments
+        v6 <- CreateNamedVariable 'Array', 'none'
+        v7 <- GetProperty v6, 'prototype'
+        v8 <- GetProperty v7, 'slice'
+        v9 <- CallMethod v8, 'call', [v5]
+    EndPlainFunction
+    v10 <- LoadString 'a'
+    v11 <- CallFunction v1, [v10]
+EndPlainFunction
+v12 <- CallFunction v0, []
+v13 <- BeginPlainFunction -> 
+    v14 <- BeginPlainFunction -> 
+        v15 <- LoadFloat '2.3'
+        v16 <- LoadArguments
+        SetProperty v16, 'length', v15
+        v17 <- LoadArguments
+        v18 <- CreateNamedVariable 'Array', 'none'
+        v19 <- GetProperty v18, 'prototype'
+        v20 <- GetProperty v19, 'slice'
+        v21 <- CallMethod v20, 'call', [v17]
+    EndPlainFunction
+    v22 <- LoadString 'a'
+    v23 <- CallFunction v14, [v22]
+EndPlainFunction
+v24 <- CallFunction v13, []
+v25 <- BeginPlainFunction -> 
+    v26 <- BeginPlainFunction -> v27
+        v28 <- LoadInteger '5'
+        v29 <- UnaryOperation '-', v28
+        v30 <- LoadArguments
+        SetProperty v30, 'length', v29
+        v31 <- LoadArguments
+        v32 <- CreateNamedVariable 'Array', 'none'
+        v33 <- GetProperty v32, 'prototype'
+        v34 <- GetProperty v33, 'slice'
+        v35 <- CallMethod v34, 'call', [v31]
+    EndPlainFunction
+    v36 <- LoadString 'a'
+    v37 <- CallFunction v26, [v36]
+EndPlainFunction
+v38 <- CallFunction v25, []
+v39 <- BeginPlainFunction -> 
+    v40 <- BeginPlainFunction -> v41
+        v42 <- LoadFloat '2.3'
+        v43 <- LoadArguments
+        SetProperty v43, 'length', v42
+        v44 <- LoadArguments
+        v45 <- CreateNamedVariable 'Array', 'none'
+        v46 <- GetProperty v45, 'prototype'
+        v47 <- GetProperty v46, 'slice'
+        v48 <- CallMethod v47, 'call', [v44]
+    EndPlainFunction
+    v49 <- LoadString 'a'
+    v50 <- CallFunction v40, [v49]
+EndPlainFunction
+v51 <- CallFunction v39, []
+
+
+function f0() {
+    function f() {
+        arguments.length = -5;
+        Array.prototype.slice.call(arguments);
+    }
+    f("a");
+}
+f0();
+function f13() {
+    function f() {
+        arguments.length = 2.3;
+        Array.prototype.slice.call(arguments);
+    }
+    f("a");
+}
+f13();
+function f25() {
+    function f(a27) {
+        arguments.length = -5;
+        Array.prototype.slice.call(arguments);
+    }
+    f("a");
+}
+f25();
+function f39() {
+    function f(a41) {
+        arguments.length = 2.3;
+        Array.prototype.slice.call(arguments);
+    }
+    f("a");
+}
+f39();
+
+FuzzIL program written to corpus/regress-778668.fzil

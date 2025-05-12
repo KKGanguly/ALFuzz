@@ -1,0 +1,50 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadInteger '1'
+v2 <- CreateArray [v1]
+v3 <- CreateNamedVariable 'int_array', 'none'
+Reassign v3, v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadUndefined
+    v6 <- CreateNamedVariable 'x', 'var', v5
+    BeginForLoopInitializer
+        v7 <- LoadInteger '1'
+        v8 <- UnaryOperation '-', v7
+    BeginForLoopCondition -> v9
+        v10 <- LoadInteger '0'
+        v11 <- Compare v9, '<', v10
+    BeginForLoopAfterthought v11 -> v12
+        v13 <- UnaryOperation v12, '++'
+    BeginForLoopBody -> v14
+        v15 <- CreateNamedVariable 'int_array', 'none'
+        v16 <- LoadInteger '1'
+        v17 <- BinaryOperation v14, '+', v16
+        v18 <- GetComputedProperty v15, v17
+        Reassign v6, v18
+        v19 <- BeginPlainFunction -> 
+            Reassign v6, v14
+        EndPlainFunction
+        v20 <- CallFunction v0, [v19]
+    EndForLoop
+EndPlainFunction
+v21 <- CallFunction v4, []
+v22 <- CallFunction v4, []
+
+
+function f() {
+}
+int_array = [1];
+function foo() {
+    var x;
+    for (let i9 = -1; i9 < 0; i9++) {
+        x = int_array[i9 + 1];
+        function f19() {
+            x = i9;
+        }
+        f(f19);
+    }
+}
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-361608.fzil

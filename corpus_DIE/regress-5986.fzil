@@ -1,0 +1,98 @@
+v0 <- LoadFloat '1.7'
+v1 <- LoadFloat '1.7'
+v2 <- LoadFloat '1.7'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable 'array', 'var', v3
+v5 <- CreateNamedVariable 'Symbol', 'none'
+v6 <- GetProperty v5, 'toPrimitive'
+BeginObjectLiteral
+    BeginObjectLiteralComputedMethod v6 -> v7
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `get` -> v8
+            EndObjectLiteralMethod
+        v9 <- EndObjectLiteral
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `get` -> v10
+            EndObjectLiteralMethod
+        v11 <- EndObjectLiteral
+        BeginObjectLiteral
+            BeginObjectLiteralMethod `get` -> v12
+            EndObjectLiteralMethod
+        v13 <- EndObjectLiteral
+        BeginObjectLiteral
+            ObjectLiteralAddElement `0`, v9
+            ObjectLiteralAddElement `1`, v11
+            ObjectLiteralAddElement `2`, v13
+        v14 <- EndObjectLiteral
+        v15 <- CreateNamedVariable 'Object', 'none'
+        v16 <- CallMethod v15, 'defineProperties', [v4, v14]
+        v17 <- LoadInteger '0'
+        Return v17
+    EndObjectLiteralComputedMethod
+v18 <- EndObjectLiteral
+v19 <- CreateNamedVariable 'mutator', 'var', v18
+v20 <- LoadUndefined
+v21 <- CallMethod v4, 'includes', [v20, v19]
+v22 <- BeginPlainFunction -> v23, v24, v25
+    v26 <- CallMethod v23, 'includes', [v24, v25]
+    Return v26
+EndPlainFunction
+v27 <- LoadFloat '1.7'
+v28 <- LoadFloat '1.7'
+v29 <- LoadFloat '1.7'
+v30 <- CreateArray [v27, v28, v29]
+Reassign v4, v30
+v31 <- GetProperty v5, 'toPrimitive'
+BeginObjectLiteral
+    BeginObjectLiteralComputedMethod v31 -> v32
+        v33 <- LoadInteger '0'
+        Return v33
+    EndObjectLiteralComputedMethod
+v34 <- EndObjectLiteral
+v35 <- CreateNamedVariable 'not_mutator', 'var', v34
+v36 <- LoadUndefined
+v37 <- CallFunction v22, [v4, v36, v35]
+v38 <- LoadUndefined
+v39 <- CallFunction v22, [v4, v38, v35]
+v40 <- LoadUndefined
+v41 <- CallFunction v22, [v4, v40, v19]
+
+
+var array = [1.7,1.7,1.7];
+const v6 = Symbol.toPrimitive;
+const v18 = {
+    [v6]() {
+        const v9 = {
+            get() {
+            },
+        };
+        const v11 = {
+            get() {
+            },
+        };
+        const v13 = {
+            get() {
+            },
+        };
+        Object.defineProperties(array, { 0: v9, 1: v11, 2: v13 });
+        return 0;
+    },
+};
+var mutator = v18;
+array.includes(undefined, mutator);
+function search(a23, a24, a25) {
+    return a23.includes(a24, a25);
+}
+array = [1.7,1.7,1.7];
+const v31 = Symbol.toPrimitive;
+const v34 = {
+    [v31]() {
+        return 0;
+    },
+};
+var not_mutator = v34;
+search(array, undefined, not_mutator);
+search(array, undefined, not_mutator);
+search(array, undefined, mutator);
+
+FuzzIL program written to corpus/regress-5986.fzil

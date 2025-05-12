@@ -1,0 +1,64 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'expected', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '0'
+    v4 <- LoadUndefined
+    BeginObjectLiteral
+    v5 <- EndObjectLiteral
+    v6 <- CreateArray [v3, v4, v5]
+    v7 <- CreateNamedVariable 'a', 'var', v6
+    v8 <- CallMethod v7, 'shift', []
+    v9 <- GetElement v7, '0'
+EndPlainFunction
+v10 <- CallFunction v2, []
+v11 <- CallFunction v2, []
+v12 <- CallFunction v2, []
+v13 <- LoadInteger '42'
+Reassign v1, v13
+v14 <- LoadInteger '153'
+v15 <- CreateNamedVariable 'Array', 'none'
+v16 <- GetProperty v15, 'prototype'
+SetElement v16, '0', v14
+v17 <- GetProperty v15, 'prototype'
+SetElement v17, '1', v1
+v18 <- CallFunction v2, []
+v19 <- BeginPlainFunction -> 
+    v20 <- LoadInteger '0'
+    v21 <- LoadUndefined
+    BeginObjectLiteral
+    v22 <- EndObjectLiteral
+    v23 <- CreateArray [v20, v21, v22]
+    v24 <- CreateNamedVariable 'a', 'var', v23
+    v25 <- CallMethod v24, 'shift', []
+    v26 <- GetElement v24, '0'
+EndPlainFunction
+v27 <- CallFunction v19, []
+v28 <- CallFunction v19, []
+v29 <- CallFunction v19, []
+
+
+var expected;
+function foo() {
+    var a = [0,,{}];
+    a.shift();
+    a[0];
+}
+foo();
+foo();
+foo();
+expected = 42;
+const t6 = Array.prototype;
+t6[0] = 153;
+const t12 = Array.prototype;
+t12[1] = expected;
+foo();
+function bar() {
+    var a = [0,,{}];
+    a.shift();
+    a[0];
+}
+bar();
+bar();
+bar();
+
+FuzzIL program written to corpus/regress-crbug-663340.fzil

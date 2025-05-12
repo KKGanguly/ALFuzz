@@ -1,0 +1,23 @@
+v0 <- BeginClassDefinition
+EndClassDefinition
+v1 <- BeginClassDefinition v0
+    BeginClassConstructor -> v2
+        v3 <- LoadInteger '3'
+        SetProperty v2, 'prp1', v3
+    EndClassConstructor
+EndClassDefinition
+v4 <- BeginPlainFunction -> 
+EndPlainFunction
+
+
+class C0 {
+}
+class C1 extends C0 {
+    constructor() {
+        this.prp1 = 3;
+    }
+}
+function __f_1() {
+}
+
+FuzzIL program written to corpus/regress-455141.fzil

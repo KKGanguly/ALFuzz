@@ -1,0 +1,151 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- BeginClassDefinition v1
+        BeginClassConstructor -> v3
+            v4 <- LoadInteger '1'
+            v5 <- LoadInteger '2'
+            v6 <- LoadInteger '3'
+            v7 <- CreateArray [v4, v5, v6]
+            Return v7
+        EndClassConstructor
+    EndClassDefinition
+    v8 <- LoadInteger '5'
+    v9 <- LoadInteger '4'
+    v10 <- CreateArray [v8, v9]
+    v11 <- CreateNamedVariable 'a', 'var', v10
+    v12 <- GetProperty v2, 'prototype'
+    SetProperty v11, '__proto__', v12
+    v13 <- BeginArrowFunction -> 
+        v14 <- LoadBoolean 'true'
+        Return v14
+    EndArrowFunction
+    v15 <- CallMethod v11, 'filter', [v13]
+    v16 <- CreateNamedVariable 'o', 'var', v15
+    v17 <- LoadInteger '5'
+    v18 <- LoadInteger '4'
+    v19 <- LoadInteger '3'
+    v20 <- CreateArray [v17, v18, v19]
+    v21 <- LoadInteger '3'
+    v22 <- GetProperty v16, 'length'
+EndPlainFunction
+v23 <- CallFunction v0, []
+v24 <- BeginPlainFunction -> 
+    v25 <- CreateArray []
+    v26 <- CreateNamedVariable 'my_array', 'var', v25
+    v27 <- CreateNamedVariable 'Array', 'none'
+    v28 <- BeginClassDefinition v27
+        BeginClassConstructor -> v29
+            Return v26
+        EndClassConstructor
+    EndClassDefinition
+    v30 <- LoadInteger '5'
+    v31 <- LoadInteger '4'
+    v32 <- CreateArray [v30, v31]
+    v33 <- CreateNamedVariable 'a', 'var', v32
+    v34 <- GetProperty v28, 'prototype'
+    SetProperty v33, '__proto__', v34
+    v35 <- BeginArrowFunction -> 
+        v36 <- LoadInteger '3'
+        SetElement v26, '2', v36
+        v37 <- LoadBoolean 'true'
+        Return v37
+    EndArrowFunction
+    v38 <- CallMethod v33, 'filter', [v35]
+    v39 <- CreateNamedVariable 'o', 'var', v38
+    v40 <- LoadInteger '5'
+    v41 <- LoadInteger '4'
+    v42 <- LoadInteger '3'
+    v43 <- CreateArray [v40, v41, v42]
+    v44 <- LoadInteger '3'
+    v45 <- GetProperty v39, 'length'
+EndPlainFunction
+v46 <- CallFunction v24, []
+v47 <- BeginPlainFunction -> 
+    v48 <- CreateArray []
+    v49 <- CreateNamedVariable 'my_array', 'var', v48
+    v50 <- CreateNamedVariable 'Array', 'none'
+    v51 <- BeginClassDefinition v50
+        BeginClassConstructor -> v52
+            Return v49
+        EndClassConstructor
+    EndClassDefinition
+    v53 <- LoadInteger '5'
+    v54 <- LoadInteger '4'
+    v55 <- LoadInteger '3'
+    v56 <- LoadInteger '2'
+    v57 <- LoadInteger '1'
+    v58 <- CreateArray [v53, v54, v55, v56, v57]
+    v59 <- CreateNamedVariable 'a', 'var', v58
+    v60 <- GetProperty v51, 'prototype'
+    SetProperty v59, '__proto__', v60
+    v61 <- BeginArrowFunction -> 
+        v62 <- LoadInteger '0'
+        SetProperty v49, 'length', v62
+        v63 <- LoadBoolean 'true'
+        Return v63
+    EndArrowFunction
+    v64 <- CallMethod v59, 'filter', [v61]
+    v65 <- CreateNamedVariable 'o', 'var', v64
+    v66 <- LoadUndefined
+    v67 <- LoadInteger '1'
+    v68 <- CreateArray [v66, v66, v66, v66, v67]
+    v69 <- LoadInteger '5'
+    v70 <- GetProperty v65, 'length'
+EndPlainFunction
+v71 <- CallFunction v47, []
+
+
+function TestArrayNonEmptySpecies() {
+    class C2 extends Array {
+        constructor() {
+            return [1,2,3];
+        }
+    }
+    var a = [5,4];
+    a.__proto__ = C2.prototype;
+    const v13 = () => {
+        return true;
+    };
+    var o = a.filter(v13);
+    [5,4,3];
+    o.length;
+}
+TestArrayNonEmptySpecies();
+function TestArrayLeakingSpeciesInsertInCallback() {
+    var my_array = [];
+    class C28 extends Array {
+        constructor() {
+            return my_array;
+        }
+    }
+    var a = [5,4];
+    a.__proto__ = C28.prototype;
+    const v35 = () => {
+        my_array[2] = 3;
+        return true;
+    };
+    var o = a.filter(v35);
+    [5,4,3];
+    o.length;
+}
+TestArrayLeakingSpeciesInsertInCallback();
+function TestArrayLeakingSpeciesRemoveInCallback() {
+    var my_array = [];
+    class C51 extends Array {
+        constructor() {
+            return my_array;
+        }
+    }
+    var a = [5,4,3,2,1];
+    a.__proto__ = C51.prototype;
+    const v61 = () => {
+        my_array.length = 0;
+        return true;
+    };
+    var o = a.filter(v61);
+    [,,,,1];
+    o.length;
+}
+TestArrayLeakingSpeciesRemoveInCallback();
+
+FuzzIL program written to corpus/regress-6657.fzil

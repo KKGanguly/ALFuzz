@@ -1,0 +1,34 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    Return
+    v3 <- LoadInteger '2'
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    Return
+    v5 <- LoadInteger '3'
+EndPlainFunction
+v6 <- LoadInteger '1'
+v7 <- CallFunction v0, []
+v8 <- LoadUndefined
+v9 <- CallFunction v2, []
+v10 <- LoadUndefined
+v11 <- CallFunction v4, []
+
+
+function f() {
+    return 1;
+}
+function g() {
+    return;
+}
+function h() {
+    return;
+}
+f();
+g();
+h();
+
+FuzzIL program written to corpus/regress-892742.fzil

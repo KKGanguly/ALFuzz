@@ -1,0 +1,20 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'unused_var', 'let', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'Array', 'none'
+    v4 <- Construct v3, []
+EndPlainFunction
+v5 <- CallFunction v2, []
+v6 <- CallFunction v2, []
+v7 <- CallFunction v2, []
+
+
+let unused_var = 1;
+function __f_12() {
+    new Array();
+}
+__f_12();
+__f_12();
+__f_12();
+
+FuzzIL program written to corpus/regress-crbug-347528.fzil

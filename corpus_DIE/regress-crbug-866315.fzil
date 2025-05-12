@@ -1,0 +1,16 @@
+v0 <- LoadInteger '42'
+v1 <- CreateNamedVariable 'num', 'let', v0
+v2 <- LoadInteger '0'
+v3 <- CreateNamedVariable 'ah', 'var', v2
+v4 <- GetProperty v1, '__proto__'
+SetProperty v4, '__proto__', v3
+v5 <- LoadString 'num.enable()'
+v6 <- LoadString 'num.disable()'
+
+
+let num = 42;
+var ah = 0;
+const t2 = num.__proto__;
+t2.__proto__ = ah;
+
+FuzzIL program written to corpus/regress-crbug-866315.fzil

@@ -1,0 +1,132 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- LoadInteger '3'
+    v3 <- Construct v1, [v2]
+    v4 <- CreateNamedVariable 'a', 'var', v3
+    v5 <- LoadInteger '10'
+    SetElement v4, '0', v5
+    v6 <- LoadFloat '15.5'
+    SetElement v4, '1', v6
+    v7 <- LoadInteger '20'
+    SetElement v4, '2', v7
+    Return v4
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9
+    v10 <- LoadInteger '10'
+    v11 <- GetElement v9, '0'
+    v12 <- LoadFloat '15.5'
+    v13 <- GetElement v9, '1'
+    v14 <- LoadInteger '20'
+    v15 <- GetElement v9, '2'
+EndPlainFunction
+v16 <- LoadUndefined
+v17 <- CreateNamedVariable 'b', 'var', v16
+BeginForLoopInitializer
+    v18 <- LoadInteger '0'
+BeginForLoopCondition -> v19
+    v20 <- LoadInteger '3'
+    v21 <- Compare v19, '<', v20
+BeginForLoopAfterthought v21 -> v22
+    v23 <- UnaryOperation '++', v22
+BeginForLoopBody -> v24
+    v25 <- CallFunction v0, []
+    Reassign v17, v25
+    v26 <- CallFunction v8, [v17]
+EndForLoop
+v27 <- CallFunction v0, []
+Reassign v17, v27
+v28 <- CallFunction v8, [v17]
+v29 <- BeginPlainFunction -> v30
+    BeginForLoopInitializer
+        v31 <- LoadInteger '0'
+        v32 <- CreateNamedVariable 'i', 'none'
+        Reassign v32, v31
+    BeginForLoopCondition
+        v33 <- CreateNamedVariable 'i', 'none'
+        v34 <- LoadInteger '3'
+        v35 <- Compare v33, '<', v34
+    BeginForLoopAfterthought v35
+        v36 <- CreateNamedVariable 'i', 'none'
+        v37 <- UnaryOperation v36, '++'
+    BeginForLoopBody
+        v38 <- CreateNamedVariable 'i', 'none'
+        v39 <- LoadInteger '1'
+        v40 <- BinaryOperation v38, '+', v39
+        v41 <- LoadFloat '0.5'
+        v42 <- BinaryOperation v40, '*', v41
+        SetComputedProperty v30, v38, v42
+    EndForLoop
+EndPlainFunction
+v43 <- BeginPlainFunction -> v44
+    v45 <- LoadFloat '0.5'
+    v46 <- GetElement v44, '0'
+    v47 <- LoadInteger '1'
+    v48 <- GetElement v44, '1'
+    v49 <- LoadFloat '1.5'
+    v50 <- GetElement v44, '2'
+EndPlainFunction
+BeginForLoopInitializer
+    v51 <- LoadInteger '0'
+BeginForLoopCondition -> v52
+    v53 <- LoadInteger '3'
+    v54 <- Compare v52, '<', v53
+BeginForLoopAfterthought v54 -> v55
+    v56 <- UnaryOperation '++', v55
+BeginForLoopBody -> v57
+    v58 <- LoadInteger '0'
+    v59 <- LoadInteger '1'
+    v60 <- LoadInteger '2'
+    v61 <- CreateArray [v58, v59, v60]
+    Reassign v17, v61
+    v62 <- CallFunction v29, [v17]
+    v63 <- CallFunction v43, [v17]
+EndForLoop
+v64 <- LoadInteger '0'
+v65 <- LoadInteger '1'
+v66 <- LoadInteger '2'
+v67 <- CreateArray [v64, v65, v66]
+Reassign v17, v67
+v68 <- CallFunction v29, [v17]
+v69 <- CallFunction v43, [v17]
+
+
+function burn() {
+    const v3 = new Array(3);
+    var a = v3;
+    a[0] = 10;
+    a[1] = 15.5;
+    a[2] = 20;
+    return a;
+}
+function check(a9) {
+    a9[0];
+    a9[1];
+    a9[2];
+}
+var b;
+for (let i19 = 0; i19 < 3; ++i19) {
+    b = burn();
+    check(b);
+}
+b = burn();
+check(b);
+function loop_test(a30) {
+    for (i = 0; i < 3; i++) {
+        a30[i] = (i + 1) * 0.5;
+    }
+}
+function check2(a44) {
+    a44[0];
+    a44[1];
+    a44[2];
+}
+for (let i52 = 0; i52 < 3; ++i52) {
+    b = [0,1,2];
+    loop_test(b);
+    check2(b);
+}
+b = [0,1,2];
+loop_test(b);
+check2(b);
+
+FuzzIL program written to corpus/elements-kind-depends.fzil

@@ -1,0 +1,27 @@
+v0 <- CreateNamedVariable 'goog', 'none'
+BeginObjectLiteral
+v1 <- EndObjectLiteral
+v2 <- BinaryOperation v0, '||', v1
+v3 <- CreateNamedVariable 'goog', 'var', v2
+v4 <- LoadThis
+SetProperty v3, 'global', v4
+v5 <- BeginPlainFunction -> v6
+    v7 <- GetProperty v3, 'global'
+    v8 <- CallMethod v7, 'eval', [v6]
+    Return v8
+EndPlainFunction
+SetProperty v3, 'globalEval', v5
+v9 <- LoadInteger '125'
+v10 <- LoadString 'var foofoofoo = 125; foofoofoo'
+v11 <- CallMethod v3, 'globalEval', [v10]
+
+
+var goog = goog || {};
+goog.global = this;
+function f5(a6) {
+    return goog.global.eval(a6);
+}
+goog.globalEval = f5;
+goog.globalEval("var foofoofoo = 125; foofoofoo");
+
+FuzzIL program written to corpus/regress-737588.fzil

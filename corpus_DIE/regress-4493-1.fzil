@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetProperty v1, 'length'
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5, v6
+    BeginIf v6
+    EndIf
+    v7 <- BeginPlainFunction -> 
+        Return v5
+    EndPlainFunction
+    v8 <- CallFunction v0, [v5, v7]
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    v11 <- LoadString ''
+    v12 <- CallFunction v4, [v10, v11]
+EndPlainFunction
+v13 <- LoadString 'a'
+v14 <- CreateArray [v13]
+v15 <- CallFunction v9, [v14]
+
+
+function baz(a1, a2) {
+    return a1.length;
+}
+function bar(a5, a6) {
+    if (a6) {
+    }
+    function f7() {
+        return a5;
+    }
+    baz(a5, f7);
+}
+function foo(a10) {
+    bar(a10, "");
+}
+foo(["a"]);
+
+FuzzIL program written to corpus/regress-4493-1.fzil

@@ -1,0 +1,31 @@
+v0 <- BeginArrowFunction -> v1, v2
+    Return v2
+EndArrowFunction
+v3 <- CreateNamedVariable 'Error', 'none'
+SetProperty v3, 'prepareStackTrace', v0
+v4 <- CallFunction v3, []
+v5 <- GetProperty v4, 'stack'
+v6 <- GetElement v5, '0'
+v7 <- GetProperty v6, 'constructor'
+v8 <- CreateNamedVariable 'CallSiteConstructor', 'var', v7
+BeginTry
+    v9 <- LoadInteger '3'
+    v10 <- LoadInteger '6'
+    v11 <- Construct v8, [v9, v10]
+    v12 <- CallMethod v11, 'toString', []
+BeginCatch -> v13
+EndTryCatch
+
+
+const v0 = (a1, a2) => {
+    return a2;
+};
+Error.prepareStackTrace = v0;
+var CallSiteConstructor = Error().stack[0].constructor;
+try {
+    const v11 = new CallSiteConstructor(3, 6);
+    v11.toString();
+} catch(e13) {
+}
+
+FuzzIL program written to corpus/regress-crbug-613905.fzil

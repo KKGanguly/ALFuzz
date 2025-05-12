@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v2 <- EndObjectLiteral
+    BeginObjectLiteral
+    v3 <- EndObjectLiteral
+    v4 <- Construct v1, [v2, v3]
+    v5 <- CreateNamedVariable 'p', 'const', v4
+    v6 <- CreateNamedVariable 'Set', 'none'
+    v7 <- Construct v6, []
+    v8 <- CallMethod v7, 'add', [v5]
+    v9 <- LoadInteger '0'
+    v10 <- LoadNull
+    SetComputedProperty v10, v5, v9
+EndPlainFunction
+v11 <- CallFunction v0, []
+
+
+function f0() {
+    const v2 = {};
+    const v4 = new Proxy(v2, {});
+    const p = v4;
+    const v7 = new Set();
+    v7.add(p);
+    const t5 = null;
+    t5[p] = 0;
+}
+f0();
+
+FuzzIL program written to corpus/regress-crbug-778952.fzil

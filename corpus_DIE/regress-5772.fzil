@@ -1,0 +1,98 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        BeginForLoopInitializer
+            v3 <- LoadInteger '0'
+        BeginForLoopCondition -> v4
+            v5 <- LoadInteger '2'
+            v6 <- Compare v4, '<', v5
+        BeginForLoopAfterthought v6 -> v7
+            v8 <- UnaryOperation v7, '++'
+        BeginForLoopBody -> v9
+            v10 <- LoadInteger '0'
+            SetComputedProperty v2, v9, v10
+        EndForLoop
+    EndPlainFunction
+    v11 <- LoadUndefined
+    v12 <- CreateNamedVariable 'boom', 'var', v11
+    v13 <- BeginPlainFunction -> 
+        v14 <- LoadArguments
+        v15 <- CreateNamedVariable 'a', 'var', v14
+        v16 <- CallFunction v1, [v15]
+        v17 <- GetElement v15, '5'
+        Reassign v12, v17
+        v18 <- LoadUndefined
+    EndPlainFunction
+    v19 <- CreateArray []
+    v20 <- CallFunction v1, [v19]
+    v21 <- LoadInteger '1'
+    v22 <- CallFunction v13, [v21]
+EndPlainFunction
+v23 <- CallFunction v0, []
+v24 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v25 <- BeginPlainFunction -> v26
+        BeginForLoopInitializer
+            v27 <- LoadInteger '0'
+        BeginForLoopCondition -> v28
+            v29 <- LoadInteger '2'
+            v30 <- Compare v28, '<', v29
+        BeginForLoopAfterthought v30 -> v31
+            v32 <- UnaryOperation v31, '++'
+        BeginForLoopBody -> v33
+            v34 <- LoadInteger '0'
+            SetComputedProperty v26, v33, v34
+        EndForLoop
+    EndPlainFunction
+    v35 <- LoadUndefined
+    v36 <- CreateNamedVariable 'boom', 'var', v35
+    v37 <- BeginPlainFunction -> 
+        v38 <- LoadArguments
+        v39 <- CreateNamedVariable 'a', 'var', v38
+        v40 <- CallFunction v25, [v39]
+        v41 <- GetElement v39, '5'
+        Reassign v36, v41
+        v42 <- LoadUndefined
+    EndPlainFunction
+    v43 <- CreateArray []
+    v44 <- CallFunction v25, [v43]
+    v45 <- LoadInteger '1'
+    v46 <- CallFunction v37, [v45]
+EndPlainFunction
+v47 <- CallFunction v24, []
+
+
+function sloppyPackedArguments() {
+    function f(a2) {
+        for (let i4 = 0; i4 < 2; i4++) {
+            a2[i4] = 0;
+        }
+    }
+    var boom;
+    function g() {
+        var a = arguments;
+        f(a);
+        boom = a[5];
+    }
+    f([]);
+    g(1);
+}
+sloppyPackedArguments();
+function strictPackedArguments() {
+    'use strict';
+    function f(a26) {
+        for (let i28 = 0; i28 < 2; i28++) {
+            a26[i28] = 0;
+        }
+    }
+    var boom;
+    function g() {
+        var a = arguments;
+        f(a);
+        boom = a[5];
+    }
+    f([]);
+    g(1);
+}
+strictPackedArguments();
+
+FuzzIL program written to corpus/regress-5772.fzil

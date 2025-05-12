@@ -1,0 +1,55 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateArray []
+    v3 <- CreateNamedVariable 'a', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- CreateNamedVariable 'x', 'none'
+        Return v5
+    EndPlainFunction
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- Compare v7, '<', v1
+    BeginForLoopAfterthought v8 -> v9
+        v10 <- UnaryOperation '++', v9
+    BeginForLoopBody -> v11
+        v12 <- CreateNamedVariable 'x', 'var', v11
+        SetComputedProperty v3, v11, v4
+        v13 <- CallFunction v4, []
+    EndForLoop
+    Return v3
+EndPlainFunction
+v14 <- LoadInteger '3'
+v15 <- CallFunction v0, [v14]
+v16 <- CreateNamedVariable 'a', 'var', v15
+v17 <- LoadInteger '3'
+v18 <- GetProperty v16, 'length'
+v19 <- LoadInteger '2'
+v20 <- LoadInteger '0'
+v21 <- CallComputedMethod v16, v20, []
+v22 <- LoadInteger '2'
+v23 <- LoadInteger '1'
+v24 <- CallComputedMethod v16, v23, []
+v25 <- LoadInteger '2'
+v26 <- LoadInteger '2'
+v27 <- CallComputedMethod v16, v26, []
+
+
+function f(a1) {
+    var a = [];
+    function g() {
+        return x;
+    }
+    for (let i7 = 0; i7 < a1; ++i7) {
+        var x = i7;
+        a[i7] = g;
+        g();
+    }
+    return a;
+}
+var a = f(3);
+a.length;
+a[0]();
+a[1]();
+a[2]();
+
+FuzzIL program written to corpus/regress-5636-1.fzil

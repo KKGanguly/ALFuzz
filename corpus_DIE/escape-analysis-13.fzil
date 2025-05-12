@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    v3 <- LoadString 'a'
+    SetProperty v2, 'a', v3
+    v4 <- LoadString 'b'
+    SetProperty v2, 'b', v4
+    v5 <- LoadString 'a'
+    v6 <- GetProperty v2, 'a'
+    v7 <- LoadString 'b'
+    v8 <- GetProperty v2, 'b'
+EndPlainFunction
+v9 <- CallFunction v0, []
+v10 <- CallFunction v0, []
+v11 <- CallFunction v0, []
+
+
+function f() {
+    var x = {};
+    x.a = "a";
+    x.b = "b";
+    x.a;
+    x.b;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/escape-analysis-13.fzil

@@ -1,0 +1,105 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- GetProperty v2, 'x'
+        v4 <- CreateNamedVariable 'Object', 'none'
+        v5 <- CallMethod v4, 'create', [v2]
+        v6 <- GetProperty v2, 'y'
+        v7 <- GetProperty v6, 'a'
+        Return v7
+    EndPlainFunction
+    v8 <- LoadInteger '0'
+    v9 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v9
+    v10 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v8
+        ObjectLiteralAddProperty `y`, v10
+    v11 <- EndObjectLiteral
+    v12 <- CallFunction v1, [v11]
+    v13 <- LoadInteger '0'
+    v14 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v14
+    v15 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v13
+        ObjectLiteralAddProperty `y`, v15
+    v16 <- EndObjectLiteral
+    v17 <- CallFunction v1, [v16]
+    v18 <- LoadInteger '3'
+    v19 <- LoadInteger '0'
+    v20 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v20
+    v21 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v19
+        ObjectLiteralAddProperty `y`, v21
+    v22 <- EndObjectLiteral
+    v23 <- CallFunction v1, [v22]
+EndPlainFunction
+v24 <- CallFunction v0, []
+v25 <- BeginPlainFunction -> 
+    v26 <- BeginPlainFunction -> v27
+        v28 <- GetProperty v27, 'y'
+        v29 <- CreateNamedVariable 'a', 'let', v28
+        v30 <- CreateNamedVariable 'Object', 'none'
+        v31 <- CallMethod v30, 'create', [v27]
+        v32 <- GetProperty v27, 'x'
+        v33 <- BinaryOperation v32, '+', v29
+        Return v33
+    EndPlainFunction
+    v34 <- LoadInteger '42'
+    v35 <- LoadInteger '21'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v34
+        ObjectLiteralAddProperty `y`, v35
+    v36 <- EndObjectLiteral
+    v37 <- CallFunction v26, [v36]
+    v38 <- LoadInteger '42'
+    v39 <- LoadInteger '21'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v38
+        ObjectLiteralAddProperty `y`, v39
+    v40 <- EndObjectLiteral
+    v41 <- CallFunction v26, [v40]
+    v42 <- LoadInteger '63'
+    v43 <- LoadInteger '42'
+    v44 <- LoadInteger '21'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v43
+        ObjectLiteralAddProperty `y`, v44
+    v45 <- EndObjectLiteral
+    v46 <- CallFunction v26, [v45]
+EndPlainFunction
+v47 <- CallFunction v25, []
+
+
+function f0() {
+    function f(a2) {
+        a2.x;
+        Object.create(a2);
+        return a2.y.a;
+    }
+    const v10 = { a: 1 };
+    f({ x: 0, y: v10 });
+    const v15 = { a: 2 };
+    f({ x: 0, y: v15 });
+    const v21 = { a: 3 };
+    f({ x: 0, y: v21 });
+}
+f0();
+function f25() {
+    function f(a27) {
+        let a = a27.y;
+        Object.create(a27);
+        return a27.x + a;
+    }
+    f({ x: 42, y: 21 });
+    f({ x: 42, y: 21 });
+    f({ x: 42, y: 21 });
+}
+f25();
+
+FuzzIL program written to corpus/regress-888923.fzil

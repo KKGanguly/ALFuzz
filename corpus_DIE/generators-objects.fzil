@@ -1,0 +1,304 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginGeneratorFunction -> v2, v3, v4
+        v5 <- LoadInteger '1'
+        v6 <- Yield v5
+        v7 <- CreateArray [v2, v3, v4]
+        Return v7
+    EndGeneratorFunction
+    v8 <- BeginGeneratorFunction -> 
+        v9 <- LoadInteger '1'
+        v10 <- Yield v9
+        v11 <- LoadArguments
+        Return v11
+    EndGeneratorFunction
+    v12 <- BeginGeneratorFunction -> 
+        v13 <- LoadInteger '1'
+        v14 <- Yield v13
+        v15 <- LoadThis
+        Return v15
+    EndGeneratorFunction
+    v16 <- BeginGeneratorFunction -> 
+        v17 <- LoadInteger '10'
+        v18 <- CreateNamedVariable 'x', 'var', v17
+        v19 <- LoadInteger '1'
+        v20 <- Yield v19
+        Return v18
+    EndGeneratorFunction
+    v21 <- BeginGeneratorFunction -> v22
+        Directive 'use strict'
+        v23 <- LoadInteger '1'
+        v24 <- Yield v23
+        BeginForInLoop v22 -> v25
+            v26 <- Yield v25
+        EndForInLoop
+    EndGeneratorFunction
+    v27 <- CallFunction v1, []
+    v28 <- CallFunction v8, []
+    v29 <- CallFunction v12, []
+    v30 <- CallFunction v16, []
+    v31 <- LoadString 'foo'
+    v32 <- CreateArray [v31]
+    v33 <- CallFunction v21, [v32]
+EndPlainFunction
+v34 <- CallFunction v0, []
+v35 <- BeginPlainFunction -> 
+    v36 <- BeginGeneratorFunction -> 
+        v37 <- LoadInteger '1'
+        v38 <- Yield v37
+    EndGeneratorFunction
+    v39 <- CallFunction v36, []
+    v40 <- CreateNamedVariable 'iter', 'var', v39
+    v41 <- GetProperty v36, 'prototype'
+    v42 <- CreateNamedVariable 'Object', 'none'
+    v43 <- CallMethod v42, 'getPrototypeOf', [v40]
+    v44 <- TestInstanceOf v40, v36
+    v45 <- LoadString '[object Generator]'
+    v46 <- CreateNamedVariable 'String', 'none'
+    v47 <- CallFunction v46, [v40]
+    v48 <- CreateArray []
+    v49 <- CallMethod v42, 'getOwnPropertyNames', [v40]
+    v50 <- CallFunction v36, []
+    v51 <- Compare v40, '!==', v50
+    v52 <- LoadString '[object Generator]'
+    v53 <- GetProperty v42, 'prototype'
+    v54 <- GetProperty v53, 'toString'
+    v55 <- CallMethod v54, 'call', [v40]
+    v56 <- GetProperty v40, '__proto__'
+    v57 <- GetProperty v56, 'constructor'
+    v58 <- CreateNamedVariable 'gf', 'var', v57
+    v59 <- LoadString '[object GeneratorFunction]'
+    v60 <- GetProperty v42, 'prototype'
+    v61 <- GetProperty v60, 'toString'
+    v62 <- CallMethod v61, 'call', [v58]
+    v63 <- BeginArrowFunction -> 
+        v64 <- Construct v36, []
+        Return v64
+    EndArrowFunction
+    v65 <- CallFunction v63, []
+EndPlainFunction
+v66 <- CallFunction v35, []
+v67 <- BeginPlainFunction -> 
+    v68 <- BeginGeneratorFunction -> 
+        v69 <- LoadInteger '1'
+        v70 <- Yield v69
+    EndGeneratorFunction
+    v71 <- CallFunction v68, []
+    v72 <- CreateNamedVariable 'iter', 'var', v71
+    v73 <- BeginPlainFunction -> v74
+        v75 <- BeginPlainFunction -> 
+            v76 <- GetProperty v72, 'next'
+            v77 <- CallMethod v76, 'call', [v74]
+        EndPlainFunction
+        v78 <- CallFunction v75, []
+        v79 <- CreateNamedVariable 'TypeError', 'none'
+        v80 <- BeginPlainFunction -> 
+            v81 <- LoadInteger '1'
+            v82 <- GetProperty v72, 'next'
+            v83 <- CallMethod v82, 'call', [v74, v81]
+        EndPlainFunction
+        v84 <- CallFunction v80, []
+        v85 <- BeginPlainFunction -> 
+            v86 <- LoadInteger '1'
+            v87 <- GetProperty v72, 'throw'
+            v88 <- CallMethod v87, 'call', [v74, v86]
+        EndPlainFunction
+        v89 <- CallFunction v85, []
+    EndPlainFunction
+    v90 <- LoadInteger '1'
+    v91 <- CallFunction v73, [v90]
+    BeginObjectLiteral
+    v92 <- EndObjectLiteral
+    v93 <- CallFunction v73, [v92]
+    v94 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v95 <- CallFunction v73, [v94]
+    v96 <- CallFunction v73, [v68]
+    v97 <- GetProperty v68, 'prototype'
+    v98 <- CallFunction v73, [v97]
+EndPlainFunction
+v99 <- CallFunction v67, []
+v100 <- BeginPlainFunction -> 
+    v101 <- BeginGeneratorFunction -> 
+    EndGeneratorFunction
+    v102 <- GetProperty v101, 'prototype'
+    v103 <- CreateNamedVariable 'g_prototype', 'let', v102
+    v104 <- CreateArray []
+    v105 <- CreateNamedVariable 'Reflect', 'none'
+    v106 <- CallMethod v105, 'ownKeys', [v103]
+    v107 <- CreateNamedVariable 'Object', 'none'
+    v108 <- CallMethod v107, 'getPrototypeOf', [v103]
+    v109 <- CreateNamedVariable 'generator_prototype', 'let', v108
+    v110 <- CallMethod v107, 'getPrototypeOf', [v101]
+    v111 <- GetProperty v110, 'prototype'
+    v112 <- CallFunction v101, []
+    v113 <- CallMethod v107, 'getPrototypeOf', [v112]
+    BeginBlockStatement
+        BeginObjectLiteral
+        v114 <- EndObjectLiteral
+        v115 <- CreateNamedVariable 'proto', 'let', v114
+        SetProperty v101, 'prototype', v115
+        v116 <- CallFunction v101, []
+        v117 <- CallMethod v107, 'getPrototypeOf', [v116]
+    EndBlockStatement
+    v118 <- LoadNull
+    SetProperty v101, 'prototype', v118
+    v119 <- CallFunction v101, []
+    v120 <- CallMethod v107, 'getPrototypeOf', [v119]
+EndPlainFunction
+v121 <- CallFunction v100, []
+v122 <- BeginPlainFunction -> 
+    v123 <- BeginGeneratorFunction -> 
+        v124 <- LoadInteger '42'
+        v125 <- Yield
+        BeginObjectLiteral
+            ObjectLiteralAddComputedProperty v125, v124
+        v126 <- EndObjectLiteral
+        Return v126
+    EndGeneratorFunction
+    v127 <- CallFunction v123, []
+    v128 <- CreateNamedVariable 'g1', 'var', v127
+    v129 <- CallMethod v128, 'next', []
+    v130 <- LoadInteger '42'
+    v131 <- LoadString 'a'
+    v132 <- CallMethod v128, 'next', [v131]
+    v133 <- GetProperty v132, 'value'
+    v134 <- GetProperty v133, 'a'
+    v135 <- BeginGeneratorFunction -> 
+        v136 <- Yield
+        v137 <- LoadString 'a'
+        BeginObjectLiteral
+            ObjectLiteralAddComputedProperty v137, v136
+        v138 <- EndObjectLiteral
+        Return v138
+    EndGeneratorFunction
+    v139 <- CallFunction v135, []
+    v140 <- CreateNamedVariable 'g2', 'var', v139
+    v141 <- CallMethod v140, 'next', []
+    v142 <- LoadInteger '42'
+    v143 <- LoadInteger '42'
+    v144 <- CallMethod v140, 'next', [v143]
+    v145 <- GetProperty v144, 'value'
+    v146 <- GetProperty v145, 'a'
+EndPlainFunction
+v147 <- CallFunction v122, []
+
+
+function TestContextAllocation() {
+    function* g1(a2, a3, a4) {
+        yield 1;
+        return [a2,a3,a4];
+    }
+    function* g2() {
+        yield 1;
+        return arguments;
+    }
+    function* g3() {
+        yield 1;
+        return this;
+    }
+    function* g4() {
+        var x = 10;
+        yield 1;
+        return x;
+    }
+    function* g5(a22) {
+        'use strict';
+        yield 1;
+        for (const v25 in a22) {
+            yield v25;
+        }
+    }
+    g1();
+    g2();
+    g3();
+    g4();
+    g5(["foo"]);
+}
+TestContextAllocation();
+function TestGeneratorObject() {
+    function* g() {
+        yield 1;
+    }
+    var iter = g();
+    g.prototype;
+    Object.getPrototypeOf(iter);
+    iter instanceof g;
+    String(iter);
+    [];
+    Object.getOwnPropertyNames(iter);
+    iter !== g();
+    Object.prototype.toString.call(iter);
+    var gf = iter.__proto__.constructor;
+    Object.prototype.toString.call(gf);
+    const v63 = () => {
+        const v64 = new g();
+        return v64;
+    };
+    v63();
+}
+TestGeneratorObject();
+function TestGeneratorObjectMethods() {
+    function* g() {
+        yield 1;
+    }
+    var iter = g();
+    function TestNonGenerator(a74) {
+        function f75() {
+            iter.next.call(a74);
+        }
+        f75();
+        function f80() {
+            iter.next.call(a74, 1);
+        }
+        f80();
+        function f85() {
+            iter.throw.call(a74, 1);
+        }
+        f85();
+    }
+    TestNonGenerator(1);
+    TestNonGenerator({});
+    function f94() {
+    }
+    TestNonGenerator(f94);
+    TestNonGenerator(g);
+    TestNonGenerator(g.prototype);
+}
+TestGeneratorObjectMethods();
+function TestPrototype() {
+    function* g() {
+    }
+    let g_prototype = g.prototype;
+    [];
+    Reflect.ownKeys(g_prototype);
+    let generator_prototype = Object.getPrototypeOf(g_prototype);
+    Object.getPrototypeOf(g).prototype;
+    Object.getPrototypeOf(g());
+    {
+        let proto = {};
+        g.prototype = proto;
+        Object.getPrototypeOf(g());
+    }
+    g.prototype = null;
+    Object.getPrototypeOf(g());
+}
+TestPrototype();
+function TestComputedPropertyNames() {
+    function* f1() {
+        const v125 = yield;
+        return { [v125]: 42 };
+    }
+    var g1 = f1();
+    g1.next();
+    g1.next("a").value.a;
+    function* f2() {
+        const v136 = yield;
+        return { ["a"]: v136 };
+    }
+    var g2 = f2();
+    g2.next();
+    g2.next(42).value.a;
+}
+TestComputedPropertyNames();
+
+FuzzIL program written to corpus/generators-objects.fzil

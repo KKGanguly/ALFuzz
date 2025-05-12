@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadArguments
+        v2 <- GetElement v1, '0'
+        v3 <- TypeOf v2
+        v4 <- LoadString 'object'
+        v5 <- Compare v3, '==', v4
+        v6 <- LoadInteger '0'
+        v7 <- LoadArguments
+        v8 <- TernaryOperation v5, v6, v7
+    BeginForLoopCondition -> v9
+        v10 <- LoadBoolean 'false'
+    BeginForLoopAfterthought v10 -> v11
+    BeginForLoopBody -> v12
+    EndForLoop
+EndPlainFunction
+v13 <- CallFunction v0, []
+
+
+function f() {
+    for (let i9 = typeof arguments[0] == "object" ? 0 : arguments; false;) {
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-3230771.fzil

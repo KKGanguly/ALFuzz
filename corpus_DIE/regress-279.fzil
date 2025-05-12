@@ -1,0 +1,108 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `foo`, v1
+    v2 <- EndObjectLiteral
+    Return v2
+EndPlainFunction
+v3 <- CallFunction v0, []
+v4 <- CreateNamedVariable 'a', 'var', v3
+v5 <- LoadInteger '5'
+v6 <- GetProperty v4, 'foo'
+v7 <- CallMethod v6, 'push', [v5]
+v8 <- CallFunction v0, []
+v9 <- CreateNamedVariable 'b', 'var', v8
+v10 <- LoadInteger '0'
+v11 <- GetProperty v9, 'foo'
+v12 <- GetProperty v11, 'length'
+v13 <- LoadString 'Array in object'
+v14 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v15 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `foo`, v15
+    v16 <- EndObjectLiteral
+    Return v16
+EndPlainFunction
+v17 <- CallFunction v14, []
+Reassign v4, v17
+v18 <- LoadInteger '1'
+v19 <- GetProperty v4, 'foo'
+SetProperty v19, 'bar', v18
+v20 <- CallFunction v14, []
+Reassign v9, v20
+v21 <- LoadString 'undefined'
+v22 <- GetProperty v9, 'foo'
+v23 <- GetProperty v22, 'bar'
+v24 <- TypeOf v23
+v25 <- LoadString 'Object in object'
+v26 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v27 <- EndObjectLiteral
+    v28 <- CreateArray [v27]
+    Return v28
+EndPlainFunction
+v29 <- CallFunction v26, []
+Reassign v4, v29
+v30 <- LoadInteger '1'
+v31 <- GetElement v4, '0'
+SetProperty v31, 'bar', v30
+v32 <- CallFunction v26, []
+Reassign v9, v32
+v33 <- LoadString 'undefined'
+v34 <- GetElement v9, '0'
+v35 <- GetProperty v34, 'bar'
+v36 <- TypeOf v35
+v37 <- LoadString 'Object in array'
+v38 <- BeginPlainFunction -> 
+    v39 <- CreateArray []
+    v40 <- CreateArray [v39]
+    Return v40
+EndPlainFunction
+v41 <- CallFunction v38, []
+Reassign v4, v41
+v42 <- LoadInteger '5'
+v43 <- GetElement v4, '0'
+v44 <- CallMethod v43, 'push', [v42]
+v45 <- CallFunction v38, []
+Reassign v9, v45
+v46 <- LoadInteger '0'
+v47 <- GetElement v9, '0'
+v48 <- GetProperty v47, 'length'
+v49 <- LoadString 'Array in array'
+
+
+function makeArrayInObject() {
+    const v1 = [];
+    return { foo: v1 };
+}
+var a = makeArrayInObject();
+a.foo.push(5);
+var b = makeArrayInObject();
+b.foo.length;
+function makeObjectInObject() {
+    const v15 = {};
+    return { foo: v15 };
+}
+a = makeObjectInObject();
+const t13 = a.foo;
+t13.bar = 1;
+b = makeObjectInObject();
+typeof b.foo.bar;
+function makeObjectInArray() {
+    return [{}];
+}
+a = makeObjectInArray();
+const t21 = a[0];
+t21.bar = 1;
+b = makeObjectInArray();
+typeof b[0].bar;
+function makeArrayInArray() {
+    return [[]];
+}
+a = makeArrayInArray();
+a[0].push(5);
+b = makeArrayInArray();
+b[0].length;
+
+FuzzIL program written to corpus/regress-279.fzil

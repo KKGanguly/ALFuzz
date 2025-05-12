@@ -1,0 +1,208 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CreateNamedVariable 'Reflect', 'none'
+    v4 <- CallMethod v3, 'getPrototypeOf', [v1]
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadUndefined
+    v7 <- CreateNamedVariable 'Reflect', 'none'
+    v8 <- CallMethod v7, 'getPrototypeOf', [v6]
+EndPlainFunction
+v9 <- CallFunction v5, []
+v10 <- CreateNamedVariable 'TypeError', 'none'
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadNull
+    v13 <- CreateNamedVariable 'Reflect', 'none'
+    v14 <- CallMethod v13, 'getPrototypeOf', [v12]
+EndPlainFunction
+v15 <- CallFunction v11, []
+v16 <- BeginPlainFunction -> 
+EndPlainFunction
+v17 <- Construct v16, []
+v18 <- CreateNamedVariable 'y', 'var', v17
+v19 <- GetProperty v16, 'prototype'
+v20 <- CallFunction v16, []
+v21 <- CreateNamedVariable 'Function', 'none'
+v22 <- GetProperty v21, 'prototype'
+v23 <- LoadInteger '5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v23
+v24 <- EndObjectLiteral
+v25 <- CreateNamedVariable 'Object', 'none'
+v26 <- GetProperty v25, 'prototype'
+v27 <- LoadInteger '5'
+v28 <- LoadNull
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v27
+    ObjectLiteralAddProperty `__proto__`, v28
+v29 <- EndObjectLiteral
+v30 <- LoadNull
+v31 <- LoadInteger '1'
+v32 <- LoadInteger '2'
+v33 <- CreateArray [v31, v32]
+v34 <- CreateNamedVariable 'Array', 'none'
+v35 <- GetProperty v34, 'prototype'
+v36 <- BeginPlainFunction -> 
+    v37 <- LoadInteger '1'
+    v38 <- CreateNamedVariable 'Reflect', 'none'
+    v39 <- CallMethod v38, 'getPrototypeOf', [v37]
+EndPlainFunction
+v40 <- CallFunction v36, []
+v41 <- BeginPlainFunction -> 
+    v42 <- LoadBoolean 'true'
+    v43 <- CreateNamedVariable 'Reflect', 'none'
+    v44 <- CallMethod v43, 'getPrototypeOf', [v42]
+EndPlainFunction
+v45 <- CallFunction v41, []
+v46 <- BeginPlainFunction -> 
+    v47 <- LoadBoolean 'false'
+    v48 <- CreateNamedVariable 'Reflect', 'none'
+    v49 <- CallMethod v48, 'getPrototypeOf', [v47]
+EndPlainFunction
+v50 <- CallFunction v46, []
+v51 <- BeginPlainFunction -> 
+    v52 <- LoadString 'str'
+    v53 <- CreateNamedVariable 'Reflect', 'none'
+    v54 <- CallMethod v53, 'getPrototypeOf', [v52]
+EndPlainFunction
+v55 <- CallFunction v51, []
+v56 <- BeginPlainFunction -> 
+    v57 <- CreateNamedVariable 'Symbol', 'none'
+    v58 <- CallFunction v57, []
+    v59 <- CreateNamedVariable 'Reflect', 'none'
+    v60 <- CallMethod v59, 'getPrototypeOf', [v58]
+EndPlainFunction
+v61 <- CallFunction v56, []
+v62 <- LoadInteger '1'
+v63 <- CallFunction v25, [v62]
+v64 <- CreateNamedVariable 'Number', 'none'
+v65 <- GetProperty v64, 'prototype'
+v66 <- LoadBoolean 'true'
+v67 <- CallFunction v25, [v66]
+v68 <- CreateNamedVariable 'Boolean', 'none'
+v69 <- GetProperty v68, 'prototype'
+v70 <- LoadBoolean 'false'
+v71 <- CallFunction v25, [v70]
+v72 <- GetProperty v68, 'prototype'
+v73 <- LoadString 'str'
+v74 <- CallFunction v25, [v73]
+v75 <- CreateNamedVariable 'String', 'none'
+v76 <- GetProperty v75, 'prototype'
+v77 <- CreateNamedVariable 'Symbol', 'none'
+v78 <- CallFunction v77, []
+v79 <- CallFunction v25, [v78]
+v80 <- GetProperty v77, 'prototype'
+v81 <- CreateNamedVariable 'EvalError', 'none'
+v82 <- CreateNamedVariable 'RangeError', 'none'
+v83 <- CreateNamedVariable 'ReferenceError', 'none'
+v84 <- CreateNamedVariable 'SyntaxError', 'none'
+v85 <- CreateNamedVariable 'URIError', 'none'
+v86 <- CreateArray [v81, v82, v83, v84, v10, v85]
+v87 <- CreateNamedVariable 'errorFunctions', 'var', v86
+BeginForOfLoop v87 -> v88
+    v89 <- CreateNamedVariable 'Error', 'none'
+    v90 <- Construct v88, []
+    v91 <- GetProperty v88, 'prototype'
+EndForOfLoop
+v92 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v93 <- CreateNamedVariable 'Date', 'none'
+v94 <- CreateNamedVariable 'Error', 'none'
+v95 <- CreateNamedVariable 'Map', 'none'
+v96 <- CreateNamedVariable 'RegExp', 'none'
+v97 <- CreateNamedVariable 'Set', 'none'
+v98 <- CreateNamedVariable 'WeakMap', 'none'
+v99 <- CreateNamedVariable 'WeakSet', 'none'
+v100 <- CreateArray [v34, v92, v68, v93, v94, v21, v95, v64, v25, v96, v97, v75, v98, v99]
+v101 <- CreateNamedVariable 'functions', 'var', v100
+BeginForOfLoop v101 -> v102
+    v103 <- GetProperty v21, 'prototype'
+    v104 <- Construct v102, []
+    v105 <- GetProperty v102, 'prototype'
+EndForOfLoop
+v106 <- CreateNamedVariable 'Promise', 'none'
+v107 <- BeginPlainFunction -> 
+EndPlainFunction
+v108 <- Construct v106, [v107]
+v109 <- CreateNamedVariable 'p', 'var', v108
+v110 <- GetProperty v106, 'prototype'
+v111 <- CreateNamedVariable 'DataView', 'none'
+v112 <- Construct v92, []
+v113 <- Construct v111, [v112]
+v114 <- CreateNamedVariable 'dv', 'var', v113
+v115 <- GetProperty v111, 'prototype'
+
+
+function assertPrototypeOf(a1, a2) {
+    Reflect.getPrototypeOf(a1);
+}
+function f5() {
+    Reflect.getPrototypeOf(undefined);
+}
+f5();
+function f11() {
+    Reflect.getPrototypeOf(null);
+}
+f11();
+function F() {
+}
+const v17 = new F();
+var y = v17;
+F.prototype;
+F();
+Function.prototype;
+const v24 = { x: 5 };
+Object.prototype;
+const v29 = { x: 5, __proto__: null };
+[1,2];
+Array.prototype;
+function f36() {
+    Reflect.getPrototypeOf(1);
+}
+f36();
+function f41() {
+    Reflect.getPrototypeOf(true);
+}
+f41();
+function f46() {
+    Reflect.getPrototypeOf(false);
+}
+f46();
+function f51() {
+    Reflect.getPrototypeOf("str");
+}
+f51();
+function f56() {
+    Reflect.getPrototypeOf(Symbol());
+}
+f56();
+Object(1);
+Number.prototype;
+Object(true);
+Boolean.prototype;
+Object(false);
+Boolean.prototype;
+Object("str");
+String.prototype;
+Object(Symbol());
+Symbol.prototype;
+var errorFunctions = [EvalError,RangeError,ReferenceError,SyntaxError,TypeError,URIError];
+for (const v88 of errorFunctions) {
+    new v88();
+    v88.prototype;
+}
+var functions = [Array,ArrayBuffer,Boolean,Date,Error,Function,Map,Number,Object,RegExp,Set,String,WeakMap,WeakSet];
+for (const v102 of functions) {
+    Function.prototype;
+    new v102();
+    v102.prototype;
+}
+function f107() {
+}
+const v108 = new Promise(f107);
+var p = v108;
+Promise.prototype;
+const v112 = new ArrayBuffer();
+const v113 = new DataView(v112);
+var dv = v113;
+DataView.prototype;
+
+FuzzIL program written to corpus/reflect-get-prototype-of.fzil

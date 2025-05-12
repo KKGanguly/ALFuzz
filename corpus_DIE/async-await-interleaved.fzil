@@ -1,0 +1,89 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '10'
+    v2 <- CreateNamedVariable 'iterations', 'const', v1
+    v3 <- CreateNamedVariable 'promiseCounter', 'let', v2
+    v4 <- LoadInteger '0'
+    v5 <- CreateNamedVariable 'awaitCounter', 'let', v4
+    v6 <- BeginAsyncFunction -> v7
+        Reassign v5, v7
+        v8 <- LoadInteger '0'
+        v9 <- Compare v5, '===', v8
+        BeginIf v9
+        BeginElse
+            v10 <- LoadInteger '3'
+            v11 <- BinaryOperation v2, '/', v10
+            v12 <- CreateNamedVariable 'Math', 'none'
+            v13 <- CallMethod v12, 'floor', [v11]
+            v14 <- Compare v5, '<=', v13
+            BeginIf v14
+                v15 <- LoadInteger '3'
+                v16 <- BinaryOperation v5, '*', v15
+                v17 <- BinaryOperation v2, '-', v16
+            BeginElse
+                v18 <- LoadInteger '0'
+            EndIf
+        EndIf
+    EndAsyncFunction
+    v19 <- BeginAsyncFunction -> 
+        BeginForLoopInitializer
+            v20 <- LoadInteger '0'
+        BeginForLoopCondition -> v21
+            v22 <- Compare v21, '<', v2
+        BeginForLoopAfterthought v22 -> v23
+            v24 <- UnaryOperation v23, '++'
+        BeginForLoopBody -> v25
+            v26 <- CallFunction v6, [v25]
+            v27 <- Await v26
+        EndForLoop
+        v28 <- LoadInteger '0'
+        Return v28
+    EndAsyncFunction
+    v29 <- BeginPlainFunction -> v30
+        Reassign v3, v30
+        v31 <- LoadInteger '0'
+        v32 <- Compare v30, '>', v31
+        BeginIf v32
+            v33 <- LoadInteger '1'
+            v34 <- BinaryOperation v30, '-', v33
+            v35 <- CreateNamedVariable 'Promise', 'none'
+            v36 <- CallMethod v35, 'resolve', [v34]
+            v37 <- CallMethod v36, 'then', [v29]
+        EndIf
+    EndPlainFunction
+    v38 <- CallFunction v29, [v2]
+    v39 <- CallFunction v19, []
+EndPlainFunction
+v40 <- CallFunction v0, []
+
+
+function f0() {
+    const iterations = 10;
+    let promiseCounter = iterations;
+    let awaitCounter = 0;
+    async function check(a7) {
+        if ((awaitCounter = a7) === 0) {
+        } else {
+            if (awaitCounter <= Math.floor(iterations / 3)) {
+                iterations - (awaitCounter * 3);
+            } else {
+            }
+        }
+    }
+    async function f() {
+        for (let i21 = 0; i21 < iterations; i21++) {
+            await check(i21);
+        }
+        return 0;
+    }
+    function countdown(a30) {
+        promiseCounter = a30;
+        if (a30 > 0) {
+            Promise.resolve(a30 - 1).then(countdown);
+        }
+    }
+    countdown(iterations);
+    f();
+}
+f0();
+
+FuzzIL program written to corpus/async-await-interleaved.fzil

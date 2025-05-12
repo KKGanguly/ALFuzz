@@ -1,0 +1,255 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- GetProperty v2, 'value'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `value`, v3
+        v4 <- EndObjectLiteral
+        Return v4
+    EndPlainFunction
+    v5 <- BeginPlainFunction -> 
+        v6 <- LoadInteger '5'
+        v7 <- LoadThis
+        SetProperty v7, 'v_', v6
+    EndPlainFunction
+    v8 <- LoadString 'value'
+    v9 <- BeginPlainFunction -> 
+        v10 <- LoadInteger '1'
+        Return v10
+    EndPlainFunction
+    v11 <- GetProperty v5, 'prototype'
+    v12 <- CallMethod v11, '__defineGetter__', [v8, v9]
+    v13 <- Construct v5, []
+    v14 <- CreateNamedVariable 'a', 'var', v13
+    v15 <- LoadInteger '1'
+    SetProperty v14, 'a', v15
+    v16 <- CallFunction v1, [v14]
+    v17 <- LoadString 'value'
+    v18 <- BeginPlainFunction -> 
+        v19 <- LoadThis
+        v20 <- GetProperty v19, 'v_'
+        Return v20
+    EndPlainFunction
+    v21 <- GetProperty v5, 'prototype'
+    v22 <- CallMethod v21, '__defineGetter__', [v17, v18]
+    v23 <- Construct v5, []
+    v24 <- CreateNamedVariable 'b', 'var', v23
+    v25 <- LoadInteger '1'
+    SetProperty v24, 'b', v25
+    v26 <- CallFunction v1, [v24]
+    v27 <- Construct v5, []
+    v28 <- CreateNamedVariable 'd', 'var', v27
+    v29 <- LoadInteger '1'
+    SetProperty v28, 'd', v29
+    v30 <- GetProperty v28, 'value'
+    v31 <- CallFunction v1, [v24]
+    v32 <- CreateNamedVariable 'o', 'var', v31
+EndPlainFunction
+v33 <- BeginPlainFunction -> 
+    v34 <- BeginPlainFunction -> v35
+        v36 <- GetProperty v35, 'value'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `value`, v36
+        v37 <- EndObjectLiteral
+        Return v37
+    EndPlainFunction
+    v38 <- BeginPlainFunction -> 
+        v39 <- LoadInteger '5'
+        v40 <- LoadThis
+        SetProperty v40, 'v_', v39
+    EndPlainFunction
+    v41 <- LoadString 'value'
+    v42 <- BeginPlainFunction -> 
+        v43 <- LoadInteger '1'
+        Return v43
+    EndPlainFunction
+    v44 <- GetProperty v38, 'prototype'
+    v45 <- CallMethod v44, '__defineGetter__', [v41, v42]
+    v46 <- Construct v38, []
+    v47 <- CreateNamedVariable 'a', 'var', v46
+    v48 <- LoadInteger '1'
+    SetProperty v47, 'a', v48
+    v49 <- CallFunction v34, [v47]
+    v50 <- LoadString 'value'
+    v51 <- BeginPlainFunction -> 
+        v52 <- LoadThis
+        v53 <- GetProperty v52, 'v_'
+        Return v53
+    EndPlainFunction
+    v54 <- GetProperty v38, 'prototype'
+    v55 <- CallMethod v54, '__defineGetter__', [v50, v51]
+    v56 <- Construct v38, []
+    v57 <- CreateNamedVariable 'b', 'var', v56
+    v58 <- LoadInteger '1'
+    SetProperty v57, 'b', v58
+    v59 <- CallFunction v34, [v57]
+    v60 <- Construct v38, []
+    v61 <- CreateNamedVariable 'c', 'var', v60
+    v62 <- LoadInteger '1'
+    SetProperty v61, 'c', v62
+    v63 <- CallFunction v34, [v61]
+    v64 <- Construct v38, []
+    v65 <- CreateNamedVariable 'd', 'var', v64
+    v66 <- LoadInteger '1'
+    SetProperty v65, 'd', v66
+    v67 <- GetProperty v65, 'value'
+    v68 <- CallFunction v34, [v57]
+    v69 <- CreateNamedVariable 'o', 'var', v68
+EndPlainFunction
+v70 <- BeginPlainFunction -> 
+    v71 <- BeginPlainFunction -> v72, v73
+        v74 <- CallMethod v72, 'value', [v73]
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `value`, v74
+        v75 <- EndObjectLiteral
+        Return v75
+    EndPlainFunction
+    v76 <- BeginPlainFunction -> 
+        v77 <- LoadInteger '5'
+        v78 <- LoadThis
+        SetProperty v78, 'v_', v77
+    EndPlainFunction
+    v79 <- BeginPlainFunction -> v80
+        v81 <- LoadThis
+        v82 <- GetProperty v81, 'v_'
+        v83 <- LoadThis
+        v84 <- GetProperty v83, 'v_'
+        v85 <- TernaryOperation v80, v82, v84
+        Return v85
+    EndPlainFunction
+    v86 <- GetProperty v76, 'prototype'
+    SetProperty v86, 'value', v79
+    v87 <- Construct v76, []
+    v88 <- CreateNamedVariable 'a', 'var', v87
+    v89 <- LoadInteger '1'
+    SetProperty v88, 'a', v89
+    v90 <- LoadBoolean 'false'
+    v91 <- CallFunction v71, [v88, v90]
+    v92 <- LoadBoolean 'false'
+    v93 <- CallFunction v71, [v88, v92]
+    v94 <- Construct v76, []
+    v95 <- CreateNamedVariable 'b', 'var', v94
+    v96 <- LoadInteger '1'
+    SetProperty v95, 'b', v96
+    v97 <- LoadBoolean 'true'
+    v98 <- CallFunction v71, [v95, v97]
+    v99 <- Construct v76, []
+    v100 <- CreateNamedVariable 'c', 'var', v99
+    v101 <- LoadInteger '1'
+    SetProperty v100, 'c', v101
+    v102 <- LoadBoolean 'true'
+    v103 <- CallFunction v71, [v100, v102]
+    v104 <- Construct v76, []
+    v105 <- CreateNamedVariable 'd', 'var', v104
+    v106 <- LoadInteger '1'
+    SetProperty v105, 'd', v106
+    v107 <- LoadBoolean 'true'
+    v108 <- CallMethod v105, 'value', [v107]
+    v109 <- CallFunction v71, [v95]
+    v110 <- CreateNamedVariable 'o', 'var', v109
+EndPlainFunction
+v111 <- CallFunction v0, []
+v112 <- CallFunction v33, []
+v113 <- CallFunction v70, []
+
+
+function test_empty() {
+    function foo(a2) {
+        const v3 = a2.value;
+        return { value: v3 };
+    }
+    function Base() {
+        this.v_ = 5;
+    }
+    function f9() {
+        return 1;
+    }
+    Base.prototype.__defineGetter__("value", f9);
+    const v13 = new Base();
+    var a = v13;
+    a.a = 1;
+    foo(a);
+    function f18() {
+        return this.v_;
+    }
+    Base.prototype.__defineGetter__("value", f18);
+    const v23 = new Base();
+    var b = v23;
+    b.b = 1;
+    foo(b);
+    const v27 = new Base();
+    var d = v27;
+    d.d = 1;
+    d.value;
+    var o = foo(b);
+}
+function test_narrow1() {
+    function foo(a35) {
+        const v36 = a35.value;
+        return { value: v36 };
+    }
+    function Base() {
+        this.v_ = 5;
+    }
+    function f42() {
+        return 1;
+    }
+    Base.prototype.__defineGetter__("value", f42);
+    const v46 = new Base();
+    var a = v46;
+    a.a = 1;
+    foo(a);
+    function f51() {
+        return this.v_;
+    }
+    Base.prototype.__defineGetter__("value", f51);
+    const v56 = new Base();
+    var b = v56;
+    b.b = 1;
+    foo(b);
+    const v60 = new Base();
+    var c = v60;
+    c.c = 1;
+    foo(c);
+    const v64 = new Base();
+    var d = v64;
+    d.d = 1;
+    d.value;
+    var o = foo(b);
+}
+function test_narrow2() {
+    function foo(a72, a73) {
+        const v74 = a72.value(a73);
+        return { value: v74 };
+    }
+    function Base() {
+        this.v_ = 5;
+    }
+    function f79(a80) {
+        return a80 ? this.v_ : this.v_;
+    }
+    const t75 = Base.prototype;
+    t75.value = f79;
+    const v87 = new Base();
+    var a = v87;
+    a.a = 1;
+    foo(a, false);
+    foo(a, false);
+    const v94 = new Base();
+    var b = v94;
+    b.b = 1;
+    foo(b, true);
+    const v99 = new Base();
+    var c = v99;
+    c.c = 1;
+    foo(c, true);
+    const v104 = new Base();
+    var d = v104;
+    d.d = 1;
+    d.value(true);
+    var o = foo(b);
+}
+test_empty();
+test_narrow1();
+test_narrow2();
+
+FuzzIL program written to corpus/compare-map-elim2.fzil

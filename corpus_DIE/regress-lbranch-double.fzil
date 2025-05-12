@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadFloat '2.6415'
+    v2 <- CreateNamedVariable 'Math', 'none'
+    v3 <- CallMethod v2, 'sqrt', [v1]
+    v4 <- LoadInteger '88'
+    v5 <- LoadInteger '99'
+    v6 <- TernaryOperation v3, v4, v5
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '88'
+v8 <- CallFunction v0, []
+v9 <- LoadInteger '88'
+v10 <- CallFunction v0, []
+v11 <- LoadInteger '88'
+v12 <- CallFunction v0, []
+
+
+function foo() {
+    return Math.sqrt(2.6415) ? 88 : 99;
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-lbranch-double.fzil

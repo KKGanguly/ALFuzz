@@ -1,0 +1,41 @@
+v0 <- CreateNamedVariable 'ReferenceError', 'none'
+v1 <- LoadString 'dummy'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'dummy', 'var', v2
+v4 <- CreateNamedVariable 'TypeError', 'none'
+v5 <- CreateArray [v0, v4]
+v6 <- CreateNamedVariable 'constructors', 'none'
+Reassign v6, v5
+v7 <- CreateNamedVariable 'constructors', 'none'
+BeginForInLoop v7 -> v8
+    v9 <- LoadString 'stack'
+    v10 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v11 <- GetComputedProperty v7, v8
+    v12 <- GetProperty v11, 'prototype'
+    v13 <- CallMethod v12, '__defineGetter__', [v9, v10]
+EndForInLoop
+BeginForInLoop v7 -> v14
+    v15 <- GetComputedProperty v7, v14
+    v16 <- Construct v15, []
+    v17 <- CreateNamedVariable 'obj', 'var', v16
+    v18 <- CallMethod v17, 'toString', []
+EndForInLoop
+
+
+const v2 = new ReferenceError("dummy");
+var dummy = v2;
+constructors = [ReferenceError,TypeError];
+for (const v8 in constructors) {
+    function f10() {
+    }
+    constructors[v8].prototype.__defineGetter__("stack", f10);
+}
+for (const v14 in constructors) {
+    const t9 = constructors[v14];
+    const v16 = new t9();
+    var obj = v16;
+    obj.toString();
+}
+
+FuzzIL program written to corpus/regress-crbug-477924.fzil

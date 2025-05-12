@@ -1,0 +1,17 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'foo', 'var', v0
+v2 <- CreateNamedVariable 'String', 'none'
+v3 <- LoadString 'bar'
+v4 <- Construct v2, [v3]
+SetProperty v1, '__proto__', v4
+v5 <- LoadInteger '20'
+SetProperty v1, 'length', v5
+
+
+var foo = {};
+const v4 = new String("bar");
+foo.__proto__ = v4;
+foo.length = 20;
+
+FuzzIL program written to corpus/readonly-accessor.fzil

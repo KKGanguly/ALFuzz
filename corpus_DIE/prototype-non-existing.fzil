@@ -1,0 +1,192 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadString 'a'
+        v3 <- LoadThis
+        SetProperty v3, 'z', v2
+    EndPlainFunction
+    v4 <- Construct v1, []
+    v5 <- CreateNamedVariable 'a', 'var', v4
+    v6 <- BeginPlainFunction -> 
+        v7 <- LoadString 'b'
+        v8 <- LoadThis
+        SetProperty v8, 'b', v7
+    EndPlainFunction
+    SetProperty v6, 'prototype', v5
+    v9 <- Construct v6, []
+    v10 <- CreateNamedVariable 'b', 'var', v9
+    BeginForLoopInitializer
+        v11 <- LoadInteger '0'
+    BeginForLoopCondition -> v12
+        v13 <- LoadInteger '1200'
+        v14 <- Compare v12, '<', v13
+    BeginForLoopAfterthought v14 -> v15
+        v16 <- UnaryOperation v15, '++'
+    BeginForLoopBody -> v17
+        v18 <- LoadInteger '0'
+        v19 <- LoadString 'b'
+        v20 <- BinaryOperation v19, '+', v17
+        SetComputedProperty v10, v20, v18
+    EndForLoop
+    v21 <- BeginPlainFunction -> 
+        v22 <- LoadString 'c'
+        v23 <- LoadThis
+        SetProperty v23, 'c', v22
+    EndPlainFunction
+    SetProperty v21, 'prototype', v10
+    v24 <- Construct v21, []
+    v25 <- CreateNamedVariable 'c', 'var', v24
+    v26 <- BeginPlainFunction -> v27
+        v28 <- GetProperty v25, 'z'
+        v29 <- CreateNamedVariable 'result', 'var', v28
+    EndPlainFunction
+    v30 <- LoadString 'a'
+    v31 <- CallFunction v26, [v30]
+    v32 <- LoadString 'a'
+    v33 <- CallFunction v26, [v32]
+    v34 <- LoadString 'a'
+    v35 <- CallFunction v26, [v34]
+    v36 <- LoadString 'a'
+    v37 <- CallFunction v26, [v36]
+    v38 <- LoadString 'z'
+    SetProperty v5, 'z', v38
+    v39 <- LoadString 'z'
+    v40 <- CallFunction v26, [v39]
+    v41 <- LoadString 'z'
+    v42 <- CallFunction v26, [v41]
+    v43 <- LoadString 'z'
+    v44 <- CallFunction v26, [v43]
+    v45 <- LoadString 'bz'
+    SetProperty v10, 'z', v45
+    v46 <- LoadString 'bz'
+    v47 <- CallFunction v26, [v46]
+    v48 <- LoadString 'bz'
+    v49 <- CallFunction v26, [v48]
+    v50 <- LoadString 'bz'
+    v51 <- CallFunction v26, [v50]
+EndPlainFunction
+v52 <- CallFunction v0, []
+v53 <- BeginPlainFunction -> 
+    v54 <- LoadThis
+    v55 <- CreateNamedVariable 'global', 'var', v54
+    v56 <- BeginPlainFunction -> 
+        v57 <- LoadString 'a'
+        v58 <- LoadThis
+        SetProperty v58, 'z', v57
+    EndPlainFunction
+    v59 <- GetProperty v55, '__proto__'
+    SetProperty v56, 'prototype', v59
+    v60 <- Construct v56, []
+    v61 <- CreateNamedVariable 'a', 'var', v60
+    SetProperty v55, '__proto__', v61
+    v62 <- BeginPlainFunction -> 
+        v63 <- LoadString 'c'
+        v64 <- LoadThis
+        SetProperty v64, 'c', v63
+    EndPlainFunction
+    SetProperty v62, 'prototype', v55
+    v65 <- Construct v62, []
+    v66 <- CreateNamedVariable 'c', 'var', v65
+    v67 <- BeginPlainFunction -> v68
+        v69 <- GetProperty v66, 'z'
+        v70 <- CreateNamedVariable 'result', 'var', v69
+    EndPlainFunction
+    v71 <- LoadString 'a'
+    v72 <- CallFunction v67, [v71]
+    v73 <- LoadString 'a'
+    v74 <- CallFunction v67, [v73]
+    v75 <- LoadString 'a'
+    v76 <- CallFunction v67, [v75]
+    v77 <- LoadString 'a'
+    v78 <- CallFunction v67, [v77]
+    v79 <- LoadString 'z'
+    SetProperty v61, 'z', v79
+    v80 <- LoadString 'z'
+    v81 <- CallFunction v67, [v80]
+    v82 <- LoadString 'z'
+    v83 <- CallFunction v67, [v82]
+    v84 <- LoadString 'z'
+    v85 <- CallFunction v67, [v84]
+    v86 <- LoadString 'bz'
+    SetProperty v55, 'z', v86
+    v87 <- LoadString 'bz'
+    v88 <- CallFunction v67, [v87]
+    v89 <- LoadString 'bz'
+    v90 <- CallFunction v67, [v89]
+    v91 <- LoadString 'bz'
+    v92 <- CallFunction v67, [v91]
+EndPlainFunction
+v93 <- CallFunction v53, []
+
+
+function f0() {
+    function A() {
+        this.z = "a";
+    }
+    const v4 = new A();
+    var a = v4;
+    function B() {
+        this.b = "b";
+    }
+    B.prototype = a;
+    const v9 = new B();
+    var b = v9;
+    for (let i12 = 0; i12 < 1200; i12++) {
+        b["b" + i12] = 0;
+    }
+    function C() {
+        this.c = "c";
+    }
+    C.prototype = b;
+    const v24 = new C();
+    var c = v24;
+    function f(a27) {
+        var result = c.z;
+    }
+    f("a");
+    f("a");
+    f("a");
+    f("a");
+    a.z = "z";
+    f("z");
+    f("z");
+    f("z");
+    b.z = "bz";
+    f("bz");
+    f("bz");
+    f("bz");
+}
+f0();
+function f53() {
+    var global = this;
+    function A() {
+        this.z = "a";
+    }
+    A.prototype = global.__proto__;
+    const v60 = new A();
+    var a = v60;
+    global.__proto__ = a;
+    function C() {
+        this.c = "c";
+    }
+    C.prototype = global;
+    const v65 = new C();
+    var c = v65;
+    function f(a68) {
+        var result = c.z;
+    }
+    f("a");
+    f("a");
+    f("a");
+    f("a");
+    a.z = "z";
+    f("z");
+    f("z");
+    f("z");
+    global.z = "bz";
+    f("bz");
+    f("bz");
+    f("bz");
+}
+f53();
+
+FuzzIL program written to corpus/prototype-non-existing.fzil

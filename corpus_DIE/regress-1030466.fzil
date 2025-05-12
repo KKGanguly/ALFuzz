@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    BeginWith v1
+    EndWith
+    v2 <- LoadInteger '10'
+    v3 <- CreateNamedVariable 'x', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        Return v3
+    EndPlainFunction
+    v5 <- CallFunction v4, []
+    Return v5
+EndPlainFunction
+v6 <- CallFunction v0, []
+v7 <- CreateNamedVariable 'result', 'var', v6
+v8 <- LoadInteger '10'
+
+
+function outer() {
+    with ({}) {
+    }
+    var x = 10;
+    function inner() {
+        return x;
+    }
+    return inner();
+}
+var result = outer();
+
+FuzzIL program written to corpus/regress-1030466.fzil

@@ -1,0 +1,70 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- GetProperty v1, 'length'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- GetComputedProperty v1, v9
+        v11 <- GetComputedProperty v2, v9
+        BeginIf v11
+            v12 <- LoadBoolean 'false'
+            Return v12
+        EndIf
+    EndForLoop
+EndPlainFunction
+v13 <- BeginPlainFunction -> v14, v15
+    v16 <- CallFunction v0, [v15, v14]
+    v17 <- UnaryOperation '!', v16
+    BeginIf v17
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+v18 <- EndObjectLiteral
+v19 <- LoadInteger '6'
+v20 <- CreateNamedVariable 'NaN', 'none'
+v21 <- CreateArray [v18, v19, v20]
+v22 <- LoadFloat '1.8'
+v23 <- LoadUndefined
+v24 <- CreateArray [v22, v23, v20]
+v25 <- CallFunction v13, [v21, v24]
+v26 <- BeginPlainFunction -> 
+    v27 <- LoadInteger '1'
+    v28 <- LoadInteger '2'
+    v29 <- LoadInteger '3'
+    v30 <- LoadInteger '4'
+    v31 <- CreateArray [v27, v28, v29, v30]
+    v32 <- CreateNamedVariable 'a', 'var', v31
+    v33 <- GetProperty v32, 'length'
+    v34 <- GetProperty v32, 'length'
+    v35 <- CallFunction v13, [v33, v34]
+EndPlainFunction
+v36 <- CallFunction v26, []
+v37 <- CallFunction v26, []
+v38 <- CallFunction v26, []
+
+
+function baz(a1, a2) {
+    for (let i4 = 0; i4 < a1.length; i4++) {
+        a1[i4];
+        if (a2[i4]) {
+            return false;
+        }
+    }
+}
+function bar(a14, a15) {
+    if (!baz(a15, a14)) {
+    }
+}
+bar([{},6,NaN], [1.8,,NaN]);
+function foo() {
+    var a = [1,2,3,4];
+    bar(a.length, a.length);
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-719479.fzil

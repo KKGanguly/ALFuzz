@@ -1,0 +1,45 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'none'
+Reassign v1, v0
+v2 <- LoadString 'foo'
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '42'
+    ThrowException v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'o', 'none'
+v6 <- CallMethod v5, '__defineGetter__', [v2, v3]
+v7 <- BeginPlainFunction -> 
+    BeginTry
+        v8 <- LoadInteger '42'
+        ThrowException v8
+    BeginFinally
+        BeginTry
+            v9 <- GetProperty v5, 'foo'
+        BeginCatch -> v10
+        EndTryCatch
+        Return
+    EndTryCatch
+EndPlainFunction
+v11 <- CallFunction v7, []
+
+
+o = {};
+function f3() {
+    throw 42;
+}
+o.__defineGetter__("foo", f3);
+function f() {
+    try {
+        throw 42;
+    } finally {
+        try {
+            o.foo;
+        } catch(e10) {
+        }
+        return;
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-1184.fzil

@@ -1,0 +1,36 @@
+v0 <- LoadInteger '2'
+v1 <- LoadInteger '30'
+v2 <- BinaryOperation v0, '**', v1
+v3 <- LoadInteger '1'
+v4 <- BinaryOperation v2, '-', v3
+v5 <- CreateNamedVariable 'just_under', 'let', v4
+v6 <- LoadInteger '2'
+v7 <- LoadInteger '30'
+v8 <- BinaryOperation v6, '**', v7
+v9 <- CreateNamedVariable 'just_above', 'let', v8
+v10 <- BeginArrowFunction -> 
+    v11 <- LoadInteger '2'
+    v12 <- BinaryOperation v11, '**', v5
+    v13 <- CreateNamedVariable 'dummy', 'var', v12
+EndArrowFunction
+v14 <- CallFunction v10, []
+v15 <- BeginArrowFunction -> 
+    v16 <- LoadInteger '2'
+    v17 <- BinaryOperation v16, '**', v9
+    v18 <- CreateNamedVariable 'dummy', 'var', v17
+EndArrowFunction
+v19 <- CallFunction v15, []
+
+
+let just_under = (2 ** 30) - 1;
+let just_above = 2 ** 30;
+const v10 = () => {
+    var dummy = 2 ** just_under;
+};
+v10();
+const v15 = () => {
+    var dummy = 2 ** just_above;
+};
+v15();
+
+FuzzIL program written to corpus/regress-crbug-909614.fzil

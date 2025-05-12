@@ -1,0 +1,37 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'arr', 'var', v2
+v4 <- LoadInteger '65534'
+v5 <- LoadInteger '3'
+v6 <- LoadBoolean 'true'
+v7 <- LoadBoolean 'true'
+v8 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v5
+    ObjectLiteralAddProperty `configurable`, v6
+    ObjectLiteralAddProperty `writable`, v7
+    ObjectLiteralAddProperty `enumerable`, v8
+v9 <- EndObjectLiteral
+v10 <- CreateNamedVariable 'Object', 'none'
+v11 <- CallMethod v10, 'defineProperty', [v3, v4, v9]
+v12 <- LoadInteger '4'
+SetElement v3, '65535', v12
+v13 <- CallMethod v3, 'shift', []
+v14 <- LoadInteger '65534'
+v15 <- CallMethod v10, 'getOwnPropertyDescriptor', [v3, v14]
+v16 <- CreateNamedVariable 'desc', 'var', v15
+v17 <- LoadInteger '4'
+v18 <- GetProperty v16, 'value'
+v19 <- GetProperty v16, 'enumerable'
+
+
+var arr = [1,2];
+Object.defineProperty(arr, 65534, { value: 3, configurable: true, writable: true, enumerable: false });
+arr[65535] = 4;
+arr.shift();
+var desc = Object.getOwnPropertyDescriptor(arr, 65534);
+desc.value;
+desc.enumerable;
+
+FuzzIL program written to corpus/regress-shift-enumerable.fzil

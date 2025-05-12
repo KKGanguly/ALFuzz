@@ -1,0 +1,76 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'x'
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- CallFunction v2, [v1]
+    v4 <- CreateNamedVariable 'o', 'var', v3
+    v5 <- BeginPlainFunction -> 
+        v6 <- LoadString 'y'
+        Return v6
+    EndPlainFunction
+    SetProperty v4, 'valueOf', v5
+    v7 <- LoadString 'y'
+    v8 <- LoadString ''
+    v9 <- BinaryOperation v4, '+', v8
+    v10 <- LoadString 'y'
+    v11 <- LoadString ''
+    v12 <- BinaryOperation v11, '+', v4
+EndPlainFunction
+BeginForLoopInitializer
+    v13 <- LoadInteger '0'
+BeginForLoopCondition -> v14
+    v15 <- LoadInteger '10'
+    v16 <- Compare v14, '<', v15
+BeginForLoopAfterthought v16 -> v17
+    v18 <- UnaryOperation v17, '++'
+BeginForLoopBody -> v19
+    v20 <- LoadString 'x'
+    v21 <- CreateNamedVariable 'Object', 'none'
+    v22 <- CallFunction v21, [v20]
+    v23 <- CreateNamedVariable 'o', 'var', v22
+    v24 <- BeginPlainFunction -> 
+        v25 <- LoadString 'y'
+        Return v25
+    EndPlainFunction
+    SetProperty v23, 'valueOf', v24
+    v26 <- LoadString 'y'
+    v27 <- LoadString ''
+    v28 <- BinaryOperation v23, '+', v27
+    v29 <- LoadString 'y'
+    v30 <- LoadString ''
+    v31 <- BinaryOperation v30, '+', v23
+EndForLoop
+BeginForLoopInitializer
+    v32 <- LoadInteger '0'
+BeginForLoopCondition -> v33
+    v34 <- LoadInteger '10'
+    v35 <- Compare v33, '<', v34
+BeginForLoopAfterthought v35 -> v36
+    v37 <- UnaryOperation v36, '++'
+BeginForLoopBody -> v38
+    v39 <- CallFunction v0, []
+EndForLoop
+
+
+function test() {
+    var o = Object("x");
+    function f5() {
+        return "y";
+    }
+    o.valueOf = f5;
+    o + "";
+    "" + o;
+}
+for (let i14 = 0; i14 < 10; i14++) {
+    var o = Object("x");
+    function f24() {
+        return "y";
+    }
+    o.valueOf = f24;
+    o + "";
+    "" + o;
+}
+for (let i33 = 0; i33 < 10; i33++) {
+    test();
+}
+
+FuzzIL program written to corpus/regress-760-2.fzil

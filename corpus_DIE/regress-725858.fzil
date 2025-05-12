@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadString 'f('
+v2 <- LoadInteger '8223'
+v3 <- LoadString '0,'
+v4 <- CallMethod v3, 'repeat', [v2]
+v5 <- BinaryOperation v1, '+', v4
+v6 <- LoadString ')'
+v7 <- BinaryOperation v5, '+', v6
+v8 <- CreateNamedVariable 'src', 'var', v7
+v9 <- CreateNamedVariable 'Function', 'none'
+v10 <- Construct v9, [v8]
+v11 <- CreateNamedVariable 'boom', 'var', v10
+v12 <- CallFunction v11, []
+
+
+function f() {
+}
+var src = ("f(" + ("0,").repeat(8223)) + ")";
+const v10 = new Function(src);
+var boom = v10;
+boom();
+
+FuzzIL program written to corpus/regress-725858.fzil

@@ -1,0 +1,21 @@
+v0 <- BeginArrowFunction -> v1
+    v2 <- LoadString ''
+    v3 <- CreateNamedVariable 'Object', 'none'
+    v4 <- GetProperty v3, 'prototype'
+    v5 <- GetProperty v4, 'toLocaleString'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toString`, v5
+    v6 <- EndObjectLiteral
+    v7 <- BinaryOperation v2, '+', v6
+    Return v7
+EndArrowFunction
+v8 <- CallFunction v0, []
+
+
+const v0 = (a1) => {
+    const v5 = Object.prototype.toLocaleString;
+    return "" + { toString: v5 };
+};
+v0();
+
+FuzzIL program written to corpus/regress-crbug-892472-2.fzil

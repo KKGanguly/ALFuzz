@@ -1,0 +1,49 @@
+v0 <- LoadInteger '20'
+v1 <- LoadInteger '21'
+v2 <- LoadInteger '22'
+v3 <- LoadInteger '23'
+v4 <- CreateArray [v0, v1, v2, v3]
+v5 <- CreateNamedVariable 'a', 'var', v4
+v6 <- LoadInteger '10'
+v7 <- LoadInteger '11'
+v8 <- LoadInteger '12'
+v9 <- LoadInteger '13'
+v10 <- CreateArray [v6, v7, v8, v9]
+SetProperty v5, '__proto__', v10
+v11 <- CreateArray []
+v12 <- CreateNamedVariable 'values', 'var', v11
+v13 <- CreateArray []
+v14 <- CreateNamedVariable 'indices', 'var', v13
+v15 <- BeginPlainFunction -> v16, v17, v18
+    v19 <- LoadInteger '2'
+    SetProperty v18, 'length', v19
+    v20 <- CallMethod v12, 'push', [v16]
+    v21 <- CallMethod v14, 'push', [v17]
+EndPlainFunction
+v22 <- CallMethod v5, 'forEach', [v15]
+v23 <- LoadInteger '20'
+v24 <- LoadInteger '21'
+v25 <- LoadInteger '12'
+v26 <- LoadInteger '13'
+v27 <- CreateArray [v23, v24, v25, v26]
+v28 <- LoadInteger '0'
+v29 <- LoadInteger '1'
+v30 <- LoadInteger '2'
+v31 <- LoadInteger '3'
+v32 <- CreateArray [v28, v29, v30, v31]
+
+
+var a = [20,21,22,23];
+a.__proto__ = [10,11,12,13];
+var values = [];
+var indices = [];
+function callback(a16, a17, a18) {
+    a18.length = 2;
+    values.push(a16);
+    indices.push(a17);
+}
+a.forEach(callback);
+[20,21,12,13];
+[0,1,2,3];
+
+FuzzIL program written to corpus/array-foreach.fzil

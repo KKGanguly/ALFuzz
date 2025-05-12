@@ -1,0 +1,169 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginClassDefinition
+        BeginClassInstanceMethod 'eval' -> v2
+            v3 <- LoadInteger '1'
+            Return v3
+        EndClassInstanceMethod
+        BeginClassInstanceMethod 'arguments' -> v4
+            v5 <- LoadInteger '2'
+            Return v5
+        EndClassInstanceMethod
+        BeginClassStaticMethod 'eval' -> v6
+            v7 <- LoadInteger '3'
+            Return v7
+        EndClassStaticMethod
+        BeginClassStaticMethod 'arguments' -> v8
+            v9 <- LoadInteger '4'
+            Return v9
+        EndClassStaticMethod
+    EndClassDefinition
+    v10 <- LoadInteger '1'
+    v11 <- Construct v1, []
+    v12 <- CallMethod v11, 'eval', []
+    v13 <- LoadInteger '2'
+    v14 <- Construct v1, []
+    v15 <- CallMethod v14, 'arguments', []
+    v16 <- LoadInteger '3'
+    v17 <- CallMethod v1, 'eval', []
+    v18 <- LoadInteger '4'
+    v19 <- CallMethod v1, 'arguments', []
+EndPlainFunction
+v20 <- CallFunction v0, []
+v21 <- BeginPlainFunction -> 
+    v22 <- BeginClassDefinition
+        BeginClassInstanceGetter `eval` -> v23
+            v24 <- LoadInteger '1'
+            Return v24
+        EndClassInstanceGetter
+        BeginClassInstanceGetter `arguments` -> v25
+            v26 <- LoadInteger '2'
+            Return v26
+        EndClassInstanceGetter
+        BeginClassStaticGetter `eval` -> v27
+            v28 <- LoadInteger '3'
+            Return v28
+        EndClassStaticGetter
+        BeginClassStaticGetter `arguments` -> v29
+            v30 <- LoadInteger '4'
+            Return v30
+        EndClassStaticGetter
+    EndClassDefinition
+    v31 <- LoadInteger '1'
+    v32 <- Construct v22, []
+    v33 <- GetProperty v32, 'eval'
+    v34 <- LoadInteger '2'
+    v35 <- Construct v22, []
+    v36 <- GetProperty v35, 'arguments'
+    v37 <- LoadInteger '3'
+    v38 <- GetProperty v22, 'eval'
+    v39 <- LoadInteger '4'
+    v40 <- GetProperty v22, 'arguments'
+EndPlainFunction
+v41 <- CallFunction v21, []
+v42 <- BeginPlainFunction -> 
+    v43 <- LoadInteger '0'
+    v44 <- CreateNamedVariable 'x', 'var', v43
+    v45 <- BeginClassDefinition
+        BeginClassInstanceSetter `eval` -> v46, v47
+            Reassign v44, v47
+        EndClassInstanceSetter
+        BeginClassInstanceSetter `arguments` -> v48, v49
+            Reassign v44, v49
+        EndClassInstanceSetter
+        BeginClassStaticSetter `eval` -> v50, v51
+            Reassign v44, v51
+        EndClassStaticSetter
+        BeginClassStaticSetter `arguments` -> v52, v53
+            Reassign v44, v53
+        EndClassStaticSetter
+    EndClassDefinition
+    v54 <- LoadInteger '1'
+    v55 <- Construct v45, []
+    SetProperty v55, 'eval', v54
+    v56 <- LoadInteger '1'
+    v57 <- LoadInteger '2'
+    v58 <- Construct v45, []
+    SetProperty v58, 'arguments', v57
+    v59 <- LoadInteger '2'
+    v60 <- LoadInteger '3'
+    SetProperty v45, 'eval', v60
+    v61 <- LoadInteger '3'
+    v62 <- LoadInteger '4'
+    SetProperty v45, 'arguments', v62
+    v63 <- LoadInteger '4'
+EndPlainFunction
+v64 <- CallFunction v42, []
+
+
+function Method() {
+    class C1 {
+        eval() {
+            return 1;
+        }
+        arguments() {
+            return 2;
+        }
+        static eval() {
+            return 3;
+        }
+        static arguments() {
+            return 4;
+        }
+    }
+    const v11 = new C1();
+    v11.eval();
+    const v14 = new C1();
+    v14.arguments();
+    C1.eval();
+    C1.arguments();
+}
+Method();
+function Getters() {
+    class C22 {
+        get eval() {
+            return 1;
+        }
+        get arguments() {
+            return 2;
+        }
+        static get eval() {
+            return 3;
+        }
+        static get arguments() {
+            return 4;
+        }
+    }
+    const v32 = new C22();
+    v32.eval;
+    const v35 = new C22();
+    v35.arguments;
+    C22.eval;
+    C22.arguments;
+}
+Getters();
+function Setters() {
+    var x = 0;
+    class C45 {
+        set eval(a47) {
+            x = a47;
+        }
+        set arguments(a49) {
+            x = a49;
+        }
+        static set eval(a51) {
+            x = a51;
+        }
+        static set arguments(a53) {
+            x = a53;
+        }
+    }
+    const v55 = new C45();
+    v55.eval = 1;
+    const v58 = new C45();
+    v58.arguments = 2;
+    C45.eval = 3;
+    C45.arguments = 4;
+}
+Setters();
+
+FuzzIL program written to corpus/class-property-name-eval-arguments.fzil

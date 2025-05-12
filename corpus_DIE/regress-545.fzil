@@ -1,0 +1,41 @@
+BeginTry
+    v0 <- CreateNamedVariable 'IsPrimitive', 'none'
+    v1 <- CreateNamedVariable 'load', 'none'
+    v2 <- CallFunction v1, []
+    v3 <- Construct v0, [v2]
+    v4 <- LoadThis
+    v5 <- CallMethod v4, 'join', []
+    v6 <- LoadThis
+    v7 <- UnaryOperation '!', v6
+    v8 <- CreateNamedVariable 'Math', 'none'
+    v9 <- Compare v7, '>', v8
+    v10 <- LoadString '&#10;'
+    v11 <- CreateNamedVariable 'String', 'none'
+    v12 <- CallFunction v11, [v10]
+    v13 <- CallMethod v12, 'charCodeAt', [v9]
+    v14 <- TernaryOperation v3, v5, v13
+BeginCatch -> v15
+EndTryCatch
+v16 <- LoadThis
+v17 <- LoadThis
+v18 <- UnaryOperation '!', v17
+v19 <- BinaryOperation v16, '+', v18
+v20 <- LoadThis
+v21 <- LoadThis
+v22 <- LoadInteger '1'
+v23 <- LoadInteger '2'
+v24 <- TernaryOperation v21, v22, v23
+v25 <- BinaryOperation v20, '+', v24
+
+
+try {
+    const v3 = new IsPrimitive(load());
+    const v5 = this.join();
+    const v9 = !this > Math;
+    v3 ? v5 : String("&#10;").charCodeAt(v9);
+} catch(e15) {
+}
+this + !this;
+this + (this ? 1 : 2);
+
+FuzzIL program written to corpus/regress-545.fzil

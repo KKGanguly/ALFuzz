@@ -1,0 +1,1800 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'String', 'none'
+v2 <- GetProperty v1, 'prototype'
+v3 <- GetProperty v2, 'endsWith'
+v4 <- GetProperty v3, 'length'
+v5 <- LoadString 'Hello World'
+v6 <- CreateNamedVariable 'testString', 'var', v5
+v7 <- LoadString ''
+v8 <- CallMethod v6, 'endsWith', [v7]
+v9 <- LoadString 'World'
+v10 <- CallMethod v6, 'endsWith', [v9]
+v11 <- LoadString 'world'
+v12 <- CallMethod v6, 'endsWith', [v11]
+v13 <- LoadString 'Hello World!'
+v14 <- CallMethod v6, 'endsWith', [v13]
+v15 <- LoadNull
+v16 <- CallMethod v6, 'endsWith', [v15]
+v17 <- LoadUndefined
+v18 <- CallMethod v6, 'endsWith', [v17]
+v19 <- CallMethod v6, 'endsWith', []
+v20 <- LoadNull
+v21 <- LoadString 'null'
+v22 <- CallMethod v21, 'endsWith', [v20]
+v23 <- LoadUndefined
+v24 <- LoadString 'undefined'
+v25 <- CallMethod v24, 'endsWith', [v23]
+v26 <- LoadString 'აბგდევზთ'
+v27 <- CreateNamedVariable 'georgianUnicodeString', 'var', v26
+v28 <- CallMethod v27, 'endsWith', [v27]
+v29 <- LoadString 'ევზთ'
+v30 <- CallMethod v27, 'endsWith', [v29]
+v31 <- LoadString 'ა'
+v32 <- CallMethod v27, 'endsWith', [v31]
+v33 <- LoadString 'String.prototype.endsWith.call(null, 'test')'
+v34 <- CreateNamedVariable 'TypeError', 'none'
+v35 <- LoadString 'String.prototype.endsWith.call(null, null)'
+v36 <- LoadString 'String.prototype.endsWith.call(undefined, undefined)'
+v37 <- LoadString 'String.prototype.endsWith.apply(null, ['test'])'
+v38 <- LoadString 'String.prototype.endsWith.apply(null, [null])'
+v39 <- LoadString 'String.prototype.endsWith.apply(undefined, [undefined])'
+v40 <- LoadString 'Empty string'
+v41 <- LoadString ''
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v40
+    ObjectLiteralAddProperty `val`, v41
+v42 <- EndObjectLiteral
+v43 <- LoadString 'Number 1234.34'
+v44 <- LoadFloat '1234.34'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v43
+    ObjectLiteralAddProperty `val`, v44
+v45 <- EndObjectLiteral
+v46 <- LoadString 'Integer number 0'
+v47 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v46
+    ObjectLiteralAddProperty `val`, v47
+v48 <- EndObjectLiteral
+v49 <- LoadString 'Negative number -1'
+v50 <- LoadInteger '1'
+v51 <- UnaryOperation '-', v50
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v49
+    ObjectLiteralAddProperty `val`, v51
+v52 <- EndObjectLiteral
+v53 <- LoadString 'Boolean true'
+v54 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v53
+    ObjectLiteralAddProperty `val`, v54
+v55 <- EndObjectLiteral
+v56 <- LoadString 'Boolean false'
+v57 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v56
+    ObjectLiteralAddProperty `val`, v57
+v58 <- EndObjectLiteral
+v59 <- LoadString 'Empty array []'
+v60 <- CreateArray []
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v59
+    ObjectLiteralAddProperty `val`, v60
+v61 <- EndObjectLiteral
+v62 <- LoadString 'Empty object {}'
+BeginObjectLiteral
+v63 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v62
+    ObjectLiteralAddProperty `val`, v63
+v64 <- EndObjectLiteral
+v65 <- LoadString 'Array of size 3'
+v66 <- CreateNamedVariable 'Array', 'none'
+v67 <- LoadInteger '3'
+v68 <- Construct v66, [v67]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `msg`, v65
+    ObjectLiteralAddProperty `val`, v68
+v69 <- EndObjectLiteral
+v70 <- CreateArray [v42, v45, v48, v52, v55, v58, v61, v64, v69]
+v71 <- CreateNamedVariable 'TEST_INPUT', 'var', v70
+v72 <- BeginPlainFunction -> 
+    v73 <- LoadInteger '0'
+    v74 <- CreateNamedVariable 'i', 'var', v73
+    v75 <- GetProperty v71, 'length'
+    v76 <- CreateNamedVariable 'l', 'var', v75
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v77 <- Compare v74, '<', v76
+    BeginForLoopAfterthought v77
+        v78 <- UnaryOperation v74, '++'
+    BeginForLoopBody
+        v79 <- GetComputedProperty v71, v74
+        v80 <- CreateNamedVariable 'e', 'var', v79
+        v81 <- GetProperty v80, 'val'
+        v82 <- CreateNamedVariable 'v', 'var', v81
+        v83 <- CallFunction v1, [v82]
+        v84 <- CreateNamedVariable 's', 'var', v83
+        v85 <- CallMethod v84, 'endsWith', [v82]
+        v86 <- GetProperty v80, 'msg'
+        v87 <- GetProperty v1, 'prototype'
+        v88 <- GetProperty v87, 'endsWith'
+        v89 <- CallMethod v88, 'call', [v82, v82]
+        v90 <- GetProperty v80, 'msg'
+        v91 <- CreateArray [v82]
+        v92 <- GetProperty v1, 'prototype'
+        v93 <- GetProperty v92, 'endsWith'
+        v94 <- CallMethod v93, 'apply', [v82, v91]
+        v95 <- GetProperty v80, 'msg'
+    EndForLoop
+EndPlainFunction
+v96 <- CallFunction v72, []
+v97 <- BeginPlainFunction -> v98
+    v99 <- GetProperty v1, 'prototype'
+    v100 <- GetProperty v99, 'endsWith'
+    v101 <- LoadThis
+    SetProperty v101, 'endsWith', v100
+    v102 <- BeginPlainFunction -> 
+        v103 <- CallFunction v1, [v98]
+        Return v103
+    EndPlainFunction
+    v104 <- LoadThis
+    SetProperty v104, 'toString', v102
+EndPlainFunction
+v105 <- CreateNamedVariable 'CustomType', 'var', v97
+v106 <- BeginPlainFunction -> 
+    v107 <- LoadInteger '0'
+    v108 <- CreateNamedVariable 'i', 'var', v107
+    v109 <- GetProperty v71, 'length'
+    v110 <- CreateNamedVariable 'l', 'var', v109
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v111 <- Compare v108, '<', v110
+    BeginForLoopAfterthought v111
+        v112 <- UnaryOperation v108, '++'
+    BeginForLoopBody
+        v113 <- GetComputedProperty v71, v108
+        v114 <- CreateNamedVariable 'e', 'var', v113
+        v115 <- GetProperty v114, 'val'
+        v116 <- CreateNamedVariable 'v', 'var', v115
+        v117 <- Construct v105, [v116]
+        v118 <- CreateNamedVariable 'o', 'var', v117
+        v119 <- CallMethod v118, 'endsWith', [v116]
+        v120 <- GetProperty v114, 'msg'
+    EndForLoop
+EndPlainFunction
+v121 <- CallFunction v106, []
+v122 <- LoadString 'abc'
+v123 <- LoadString 'abc'
+v124 <- CallMethod v123, 'endsWith', [v122]
+v125 <- LoadString 'bcd'
+v126 <- LoadString 'abcd'
+v127 <- CallMethod v126, 'endsWith', [v125]
+v128 <- LoadString 'c'
+v129 <- LoadString 'abc'
+v130 <- CallMethod v129, 'endsWith', [v128]
+v131 <- LoadString 'abcd'
+v132 <- LoadString 'abc'
+v133 <- CallMethod v132, 'endsWith', [v131]
+v134 <- LoadString 'bbc'
+v135 <- LoadString 'abc'
+v136 <- CallMethod v135, 'endsWith', [v134]
+v137 <- LoadString 'b'
+v138 <- LoadString 'abc'
+v139 <- CallMethod v138, 'endsWith', [v137]
+v140 <- LoadString 'abc'
+v141 <- LoadInteger '3'
+v142 <- LoadString 'abc'
+v143 <- CallMethod v142, 'endsWith', [v140, v141]
+v144 <- LoadString 'bc'
+v145 <- LoadInteger '3'
+v146 <- LoadString 'abc'
+v147 <- CallMethod v146, 'endsWith', [v144, v145]
+v148 <- LoadString 'a'
+v149 <- LoadInteger '3'
+v150 <- LoadString 'abc'
+v151 <- CallMethod v150, 'endsWith', [v148, v149]
+v152 <- LoadString 'bc'
+v153 <- LoadInteger '3'
+v154 <- LoadString 'abc'
+v155 <- CallMethod v154, 'endsWith', [v152, v153]
+v156 <- LoadString 'a'
+v157 <- LoadInteger '1'
+v158 <- LoadString 'abc'
+v159 <- CallMethod v158, 'endsWith', [v156, v157]
+v160 <- LoadString 'abc'
+v161 <- LoadInteger '1'
+v162 <- LoadString 'abc'
+v163 <- CallMethod v162, 'endsWith', [v160, v161]
+v164 <- LoadString 'b'
+v165 <- LoadInteger '2'
+v166 <- LoadString 'abc'
+v167 <- CallMethod v166, 'endsWith', [v164, v165]
+v168 <- LoadString 'd'
+v169 <- LoadInteger '2'
+v170 <- LoadString 'abc'
+v171 <- CallMethod v170, 'endsWith', [v168, v169]
+v172 <- LoadString 'dcd'
+v173 <- LoadInteger '2'
+v174 <- LoadString 'abc'
+v175 <- CallMethod v174, 'endsWith', [v172, v173]
+v176 <- LoadString 'a'
+v177 <- LoadInteger '42'
+v178 <- LoadString 'abc'
+v179 <- CallMethod v178, 'endsWith', [v176, v177]
+v180 <- LoadString 'bc'
+v181 <- CreateNamedVariable 'Infinity', 'none'
+v182 <- LoadString 'abc'
+v183 <- CallMethod v182, 'endsWith', [v180, v181]
+v184 <- LoadString 'a'
+v185 <- LoadString 'abc'
+v186 <- CallMethod v185, 'endsWith', [v184, v181]
+v187 <- LoadString 'bc'
+v188 <- LoadUndefined
+v189 <- LoadString 'abc'
+v190 <- CallMethod v189, 'endsWith', [v187, v188]
+v191 <- LoadString 'bc'
+v192 <- LoadInteger '43'
+v193 <- UnaryOperation '-', v192
+v194 <- LoadString 'abc'
+v195 <- CallMethod v194, 'endsWith', [v191, v193]
+v196 <- LoadString 'bc'
+v197 <- UnaryOperation '-', v181
+v198 <- LoadString 'abc'
+v199 <- CallMethod v198, 'endsWith', [v196, v197]
+v200 <- LoadString 'bc'
+v201 <- CreateNamedVariable 'NaN', 'none'
+v202 <- LoadString 'abc'
+v203 <- CallMethod v202, 'endsWith', [v200, v201]
+v204 <- LoadInteger '2'
+v205 <- CreateNamedVariable 'Object', 'none'
+v206 <- GetProperty v205, 'prototype'
+SetElement v206, '1', v204
+v207 <- GetProperty v1, 'prototype'
+v208 <- GetProperty v207, 'endsWith'
+v209 <- GetProperty v208, 'length'
+v210 <- LoadInteger '1'
+v211 <- LoadString 'endsWith'
+v212 <- GetProperty v1, 'prototype'
+v213 <- CallMethod v212, 'propertyIsEnumerable', [v211]
+v214 <- LoadBoolean 'false'
+v215 <- LoadString 'undefined'
+v216 <- CallMethod v215, 'endsWith', []
+v217 <- LoadBoolean 'true'
+v218 <- LoadUndefined
+v219 <- LoadString 'undefined'
+v220 <- CallMethod v219, 'endsWith', [v218]
+v221 <- LoadBoolean 'true'
+v222 <- LoadNull
+v223 <- LoadString 'undefined'
+v224 <- CallMethod v223, 'endsWith', [v222]
+v225 <- LoadBoolean 'false'
+v226 <- LoadString 'null'
+v227 <- CallMethod v226, 'endsWith', []
+v228 <- LoadBoolean 'false'
+v229 <- LoadUndefined
+v230 <- LoadString 'null'
+v231 <- CallMethod v230, 'endsWith', [v229]
+v232 <- LoadBoolean 'false'
+v233 <- LoadNull
+v234 <- LoadString 'null'
+v235 <- CallMethod v234, 'endsWith', [v233]
+v236 <- LoadBoolean 'true'
+v237 <- LoadString 'abc'
+v238 <- CallMethod v237, 'endsWith', []
+v239 <- LoadBoolean 'false'
+v240 <- LoadString ''
+v241 <- LoadString 'abc'
+v242 <- CallMethod v241, 'endsWith', [v240]
+v243 <- LoadBoolean 'true'
+v244 <- LoadString ' '
+v245 <- LoadString 'abc'
+v246 <- CallMethod v245, 'endsWith', [v244]
+v247 <- LoadBoolean 'false'
+v248 <- LoadString 'c'
+v249 <- LoadString 'abc'
+v250 <- CallMethod v249, 'endsWith', [v248]
+v251 <- LoadBoolean 'true'
+v252 <- LoadString 'b'
+v253 <- LoadString 'abc'
+v254 <- CallMethod v253, 'endsWith', [v252]
+v255 <- LoadBoolean 'false'
+v256 <- LoadString 'ab'
+v257 <- LoadString 'abc'
+v258 <- CallMethod v257, 'endsWith', [v256]
+v259 <- LoadBoolean 'false'
+v260 <- LoadString 'bc'
+v261 <- LoadString 'abc'
+v262 <- CallMethod v261, 'endsWith', [v260]
+v263 <- LoadBoolean 'true'
+v264 <- LoadString 'abc'
+v265 <- LoadString 'abc'
+v266 <- CallMethod v265, 'endsWith', [v264]
+v267 <- LoadBoolean 'true'
+v268 <- LoadString 'bcd'
+v269 <- LoadString 'abc'
+v270 <- CallMethod v269, 'endsWith', [v268]
+v271 <- LoadBoolean 'false'
+v272 <- LoadString 'abcd'
+v273 <- LoadString 'abc'
+v274 <- CallMethod v273, 'endsWith', [v272]
+v275 <- LoadBoolean 'false'
+v276 <- LoadString 'bcde'
+v277 <- LoadString 'abc'
+v278 <- CallMethod v277, 'endsWith', [v276]
+v279 <- LoadBoolean 'false'
+v280 <- LoadString ''
+v281 <- LoadString 'abc'
+v282 <- CallMethod v281, 'endsWith', [v280, v201]
+v283 <- LoadBoolean 'true'
+v284 <- LoadString ' '
+v285 <- LoadString 'abc'
+v286 <- CallMethod v285, 'endsWith', [v284, v201]
+v287 <- LoadBoolean 'false'
+v288 <- LoadString 'c'
+v289 <- LoadString 'abc'
+v290 <- CallMethod v289, 'endsWith', [v288, v201]
+v291 <- LoadBoolean 'false'
+v292 <- LoadString 'b'
+v293 <- LoadString 'abc'
+v294 <- CallMethod v293, 'endsWith', [v292, v201]
+v295 <- LoadBoolean 'false'
+v296 <- LoadString 'ab'
+v297 <- LoadString 'abc'
+v298 <- CallMethod v297, 'endsWith', [v296, v201]
+v299 <- LoadBoolean 'false'
+v300 <- LoadString 'bc'
+v301 <- LoadString 'abc'
+v302 <- CallMethod v301, 'endsWith', [v300, v201]
+v303 <- LoadBoolean 'false'
+v304 <- LoadString 'abc'
+v305 <- LoadString 'abc'
+v306 <- CallMethod v305, 'endsWith', [v304, v201]
+v307 <- LoadBoolean 'false'
+v308 <- LoadString 'bcd'
+v309 <- LoadString 'abc'
+v310 <- CallMethod v309, 'endsWith', [v308, v201]
+v311 <- LoadBoolean 'false'
+v312 <- LoadString 'abcd'
+v313 <- LoadString 'abc'
+v314 <- CallMethod v313, 'endsWith', [v312, v201]
+v315 <- LoadBoolean 'false'
+v316 <- LoadString 'bcde'
+v317 <- LoadString 'abc'
+v318 <- CallMethod v317, 'endsWith', [v316, v201]
+v319 <- LoadBoolean 'false'
+v320 <- LoadString ''
+v321 <- LoadBoolean 'false'
+v322 <- LoadString 'abc'
+v323 <- CallMethod v322, 'endsWith', [v320, v321]
+v324 <- LoadBoolean 'true'
+v325 <- LoadString ' '
+v326 <- LoadBoolean 'false'
+v327 <- LoadString 'abc'
+v328 <- CallMethod v327, 'endsWith', [v325, v326]
+v329 <- LoadBoolean 'false'
+v330 <- LoadString 'c'
+v331 <- LoadBoolean 'false'
+v332 <- LoadString 'abc'
+v333 <- CallMethod v332, 'endsWith', [v330, v331]
+v334 <- LoadBoolean 'false'
+v335 <- LoadString 'b'
+v336 <- LoadBoolean 'false'
+v337 <- LoadString 'abc'
+v338 <- CallMethod v337, 'endsWith', [v335, v336]
+v339 <- LoadBoolean 'false'
+v340 <- LoadString 'ab'
+v341 <- LoadBoolean 'false'
+v342 <- LoadString 'abc'
+v343 <- CallMethod v342, 'endsWith', [v340, v341]
+v344 <- LoadBoolean 'false'
+v345 <- LoadString 'bc'
+v346 <- LoadBoolean 'false'
+v347 <- LoadString 'abc'
+v348 <- CallMethod v347, 'endsWith', [v345, v346]
+v349 <- LoadBoolean 'false'
+v350 <- LoadString 'abc'
+v351 <- LoadBoolean 'false'
+v352 <- LoadString 'abc'
+v353 <- CallMethod v352, 'endsWith', [v350, v351]
+v354 <- LoadBoolean 'false'
+v355 <- LoadString 'bcd'
+v356 <- LoadBoolean 'false'
+v357 <- LoadString 'abc'
+v358 <- CallMethod v357, 'endsWith', [v355, v356]
+v359 <- LoadBoolean 'false'
+v360 <- LoadString 'abcd'
+v361 <- LoadBoolean 'false'
+v362 <- LoadString 'abc'
+v363 <- CallMethod v362, 'endsWith', [v360, v361]
+v364 <- LoadBoolean 'false'
+v365 <- LoadString 'bcde'
+v366 <- LoadBoolean 'false'
+v367 <- LoadString 'abc'
+v368 <- CallMethod v367, 'endsWith', [v365, v366]
+v369 <- LoadBoolean 'false'
+v370 <- LoadString ''
+v371 <- LoadUndefined
+v372 <- LoadString 'abc'
+v373 <- CallMethod v372, 'endsWith', [v370, v371]
+v374 <- LoadBoolean 'true'
+v375 <- LoadString ' '
+v376 <- LoadUndefined
+v377 <- LoadString 'abc'
+v378 <- CallMethod v377, 'endsWith', [v375, v376]
+v379 <- LoadBoolean 'false'
+v380 <- LoadString 'c'
+v381 <- LoadUndefined
+v382 <- LoadString 'abc'
+v383 <- CallMethod v382, 'endsWith', [v380, v381]
+v384 <- LoadBoolean 'true'
+v385 <- LoadString 'b'
+v386 <- LoadUndefined
+v387 <- LoadString 'abc'
+v388 <- CallMethod v387, 'endsWith', [v385, v386]
+v389 <- LoadBoolean 'false'
+v390 <- LoadString 'ab'
+v391 <- LoadUndefined
+v392 <- LoadString 'abc'
+v393 <- CallMethod v392, 'endsWith', [v390, v391]
+v394 <- LoadBoolean 'false'
+v395 <- LoadString 'bc'
+v396 <- LoadUndefined
+v397 <- LoadString 'abc'
+v398 <- CallMethod v397, 'endsWith', [v395, v396]
+v399 <- LoadBoolean 'true'
+v400 <- LoadString 'abc'
+v401 <- LoadUndefined
+v402 <- LoadString 'abc'
+v403 <- CallMethod v402, 'endsWith', [v400, v401]
+v404 <- LoadBoolean 'true'
+v405 <- LoadString 'bcd'
+v406 <- LoadUndefined
+v407 <- LoadString 'abc'
+v408 <- CallMethod v407, 'endsWith', [v405, v406]
+v409 <- LoadBoolean 'false'
+v410 <- LoadString 'abcd'
+v411 <- LoadUndefined
+v412 <- LoadString 'abc'
+v413 <- CallMethod v412, 'endsWith', [v410, v411]
+v414 <- LoadBoolean 'false'
+v415 <- LoadString 'bcde'
+v416 <- LoadUndefined
+v417 <- LoadString 'abc'
+v418 <- CallMethod v417, 'endsWith', [v415, v416]
+v419 <- LoadBoolean 'false'
+v420 <- LoadString ''
+v421 <- LoadNull
+v422 <- LoadString 'abc'
+v423 <- CallMethod v422, 'endsWith', [v420, v421]
+v424 <- LoadBoolean 'true'
+v425 <- LoadString ' '
+v426 <- LoadNull
+v427 <- LoadString 'abc'
+v428 <- CallMethod v427, 'endsWith', [v425, v426]
+v429 <- LoadBoolean 'false'
+v430 <- LoadString 'c'
+v431 <- LoadNull
+v432 <- LoadString 'abc'
+v433 <- CallMethod v432, 'endsWith', [v430, v431]
+v434 <- LoadBoolean 'false'
+v435 <- LoadString 'b'
+v436 <- LoadNull
+v437 <- LoadString 'abc'
+v438 <- CallMethod v437, 'endsWith', [v435, v436]
+v439 <- LoadBoolean 'false'
+v440 <- LoadString 'ab'
+v441 <- LoadNull
+v442 <- LoadString 'abc'
+v443 <- CallMethod v442, 'endsWith', [v440, v441]
+v444 <- LoadBoolean 'false'
+v445 <- LoadString 'bc'
+v446 <- LoadNull
+v447 <- LoadString 'abc'
+v448 <- CallMethod v447, 'endsWith', [v445, v446]
+v449 <- LoadBoolean 'false'
+v450 <- LoadString 'abc'
+v451 <- LoadNull
+v452 <- LoadString 'abc'
+v453 <- CallMethod v452, 'endsWith', [v450, v451]
+v454 <- LoadBoolean 'false'
+v455 <- LoadString 'bcd'
+v456 <- LoadNull
+v457 <- LoadString 'abc'
+v458 <- CallMethod v457, 'endsWith', [v455, v456]
+v459 <- LoadBoolean 'false'
+v460 <- LoadString 'abcd'
+v461 <- LoadNull
+v462 <- LoadString 'abc'
+v463 <- CallMethod v462, 'endsWith', [v460, v461]
+v464 <- LoadBoolean 'false'
+v465 <- LoadString 'bcde'
+v466 <- LoadNull
+v467 <- LoadString 'abc'
+v468 <- CallMethod v467, 'endsWith', [v465, v466]
+v469 <- LoadBoolean 'false'
+v470 <- LoadString ''
+v471 <- UnaryOperation '-', v181
+v472 <- LoadString 'abc'
+v473 <- CallMethod v472, 'endsWith', [v470, v471]
+v474 <- LoadBoolean 'true'
+v475 <- LoadString ' '
+v476 <- UnaryOperation '-', v181
+v477 <- LoadString 'abc'
+v478 <- CallMethod v477, 'endsWith', [v475, v476]
+v479 <- LoadBoolean 'false'
+v480 <- LoadString 'c'
+v481 <- UnaryOperation '-', v181
+v482 <- LoadString 'abc'
+v483 <- CallMethod v482, 'endsWith', [v480, v481]
+v484 <- LoadBoolean 'false'
+v485 <- LoadString 'b'
+v486 <- UnaryOperation '-', v181
+v487 <- LoadString 'abc'
+v488 <- CallMethod v487, 'endsWith', [v485, v486]
+v489 <- LoadBoolean 'false'
+v490 <- LoadString 'ab'
+v491 <- UnaryOperation '-', v181
+v492 <- LoadString 'abc'
+v493 <- CallMethod v492, 'endsWith', [v490, v491]
+v494 <- LoadBoolean 'false'
+v495 <- LoadString 'bc'
+v496 <- UnaryOperation '-', v181
+v497 <- LoadString 'abc'
+v498 <- CallMethod v497, 'endsWith', [v495, v496]
+v499 <- LoadBoolean 'false'
+v500 <- LoadString 'abc'
+v501 <- UnaryOperation '-', v181
+v502 <- LoadString 'abc'
+v503 <- CallMethod v502, 'endsWith', [v500, v501]
+v504 <- LoadBoolean 'false'
+v505 <- LoadString 'bcd'
+v506 <- UnaryOperation '-', v181
+v507 <- LoadString 'abc'
+v508 <- CallMethod v507, 'endsWith', [v505, v506]
+v509 <- LoadBoolean 'false'
+v510 <- LoadString 'abcd'
+v511 <- UnaryOperation '-', v181
+v512 <- LoadString 'abc'
+v513 <- CallMethod v512, 'endsWith', [v510, v511]
+v514 <- LoadBoolean 'false'
+v515 <- LoadString 'bcde'
+v516 <- UnaryOperation '-', v181
+v517 <- LoadString 'abc'
+v518 <- CallMethod v517, 'endsWith', [v515, v516]
+v519 <- LoadBoolean 'false'
+v520 <- LoadString ''
+v521 <- LoadInteger '1'
+v522 <- UnaryOperation '-', v521
+v523 <- LoadString 'abc'
+v524 <- CallMethod v523, 'endsWith', [v520, v522]
+v525 <- LoadBoolean 'true'
+v526 <- LoadString ' '
+v527 <- LoadInteger '1'
+v528 <- UnaryOperation '-', v527
+v529 <- LoadString 'abc'
+v530 <- CallMethod v529, 'endsWith', [v526, v528]
+v531 <- LoadBoolean 'false'
+v532 <- LoadString 'c'
+v533 <- LoadInteger '1'
+v534 <- UnaryOperation '-', v533
+v535 <- LoadString 'abc'
+v536 <- CallMethod v535, 'endsWith', [v532, v534]
+v537 <- LoadBoolean 'false'
+v538 <- LoadString 'b'
+v539 <- LoadInteger '1'
+v540 <- UnaryOperation '-', v539
+v541 <- LoadString 'abc'
+v542 <- CallMethod v541, 'endsWith', [v538, v540]
+v543 <- LoadBoolean 'false'
+v544 <- LoadString 'ab'
+v545 <- LoadInteger '1'
+v546 <- UnaryOperation '-', v545
+v547 <- LoadString 'abc'
+v548 <- CallMethod v547, 'endsWith', [v544, v546]
+v549 <- LoadBoolean 'false'
+v550 <- LoadString 'bc'
+v551 <- LoadInteger '1'
+v552 <- UnaryOperation '-', v551
+v553 <- LoadString 'abc'
+v554 <- CallMethod v553, 'endsWith', [v550, v552]
+v555 <- LoadBoolean 'false'
+v556 <- LoadString 'abc'
+v557 <- LoadInteger '1'
+v558 <- UnaryOperation '-', v557
+v559 <- LoadString 'abc'
+v560 <- CallMethod v559, 'endsWith', [v556, v558]
+v561 <- LoadBoolean 'false'
+v562 <- LoadString 'bcd'
+v563 <- LoadInteger '1'
+v564 <- UnaryOperation '-', v563
+v565 <- LoadString 'abc'
+v566 <- CallMethod v565, 'endsWith', [v562, v564]
+v567 <- LoadBoolean 'false'
+v568 <- LoadString 'abcd'
+v569 <- LoadInteger '1'
+v570 <- UnaryOperation '-', v569
+v571 <- LoadString 'abc'
+v572 <- CallMethod v571, 'endsWith', [v568, v570]
+v573 <- LoadBoolean 'false'
+v574 <- LoadString 'bcde'
+v575 <- LoadInteger '1'
+v576 <- UnaryOperation '-', v575
+v577 <- LoadString 'abc'
+v578 <- CallMethod v577, 'endsWith', [v574, v576]
+v579 <- LoadBoolean 'false'
+v580 <- LoadString ''
+v581 <- LoadInteger '0'
+v582 <- UnaryOperation '-', v581
+v583 <- LoadString 'abc'
+v584 <- CallMethod v583, 'endsWith', [v580, v582]
+v585 <- LoadBoolean 'true'
+v586 <- LoadString ' '
+v587 <- LoadInteger '0'
+v588 <- UnaryOperation '-', v587
+v589 <- LoadString 'abc'
+v590 <- CallMethod v589, 'endsWith', [v586, v588]
+v591 <- LoadBoolean 'false'
+v592 <- LoadString 'c'
+v593 <- LoadInteger '0'
+v594 <- UnaryOperation '-', v593
+v595 <- LoadString 'abc'
+v596 <- CallMethod v595, 'endsWith', [v592, v594]
+v597 <- LoadBoolean 'false'
+v598 <- LoadString 'b'
+v599 <- LoadInteger '0'
+v600 <- UnaryOperation '-', v599
+v601 <- LoadString 'abc'
+v602 <- CallMethod v601, 'endsWith', [v598, v600]
+v603 <- LoadBoolean 'false'
+v604 <- LoadString 'ab'
+v605 <- LoadInteger '0'
+v606 <- UnaryOperation '-', v605
+v607 <- LoadString 'abc'
+v608 <- CallMethod v607, 'endsWith', [v604, v606]
+v609 <- LoadBoolean 'false'
+v610 <- LoadString 'bc'
+v611 <- LoadInteger '0'
+v612 <- UnaryOperation '-', v611
+v613 <- LoadString 'abc'
+v614 <- CallMethod v613, 'endsWith', [v610, v612]
+v615 <- LoadBoolean 'false'
+v616 <- LoadString 'abc'
+v617 <- LoadInteger '0'
+v618 <- UnaryOperation '-', v617
+v619 <- LoadString 'abc'
+v620 <- CallMethod v619, 'endsWith', [v616, v618]
+v621 <- LoadBoolean 'false'
+v622 <- LoadString 'bcd'
+v623 <- LoadInteger '0'
+v624 <- UnaryOperation '-', v623
+v625 <- LoadString 'abc'
+v626 <- CallMethod v625, 'endsWith', [v622, v624]
+v627 <- LoadBoolean 'false'
+v628 <- LoadString 'abcd'
+v629 <- LoadInteger '0'
+v630 <- UnaryOperation '-', v629
+v631 <- LoadString 'abc'
+v632 <- CallMethod v631, 'endsWith', [v628, v630]
+v633 <- LoadBoolean 'false'
+v634 <- LoadString 'bcde'
+v635 <- LoadInteger '0'
+v636 <- UnaryOperation '-', v635
+v637 <- LoadString 'abc'
+v638 <- CallMethod v637, 'endsWith', [v634, v636]
+v639 <- LoadBoolean 'false'
+v640 <- LoadString ''
+v641 <- LoadInteger '0'
+v642 <- UnaryOperation '+', v641
+v643 <- LoadString 'abc'
+v644 <- CallMethod v643, 'endsWith', [v640, v642]
+v645 <- LoadBoolean 'true'
+v646 <- LoadString ' '
+v647 <- LoadInteger '0'
+v648 <- UnaryOperation '+', v647
+v649 <- LoadString 'abc'
+v650 <- CallMethod v649, 'endsWith', [v646, v648]
+v651 <- LoadBoolean 'false'
+v652 <- LoadString 'c'
+v653 <- LoadInteger '0'
+v654 <- UnaryOperation '+', v653
+v655 <- LoadString 'abc'
+v656 <- CallMethod v655, 'endsWith', [v652, v654]
+v657 <- LoadBoolean 'false'
+v658 <- LoadString 'b'
+v659 <- LoadInteger '0'
+v660 <- UnaryOperation '+', v659
+v661 <- LoadString 'abc'
+v662 <- CallMethod v661, 'endsWith', [v658, v660]
+v663 <- LoadBoolean 'false'
+v664 <- LoadString 'ab'
+v665 <- LoadInteger '0'
+v666 <- UnaryOperation '+', v665
+v667 <- LoadString 'abc'
+v668 <- CallMethod v667, 'endsWith', [v664, v666]
+v669 <- LoadBoolean 'false'
+v670 <- LoadString 'bc'
+v671 <- LoadInteger '0'
+v672 <- UnaryOperation '+', v671
+v673 <- LoadString 'abc'
+v674 <- CallMethod v673, 'endsWith', [v670, v672]
+v675 <- LoadBoolean 'false'
+v676 <- LoadString 'abc'
+v677 <- LoadInteger '0'
+v678 <- UnaryOperation '+', v677
+v679 <- LoadString 'abc'
+v680 <- CallMethod v679, 'endsWith', [v676, v678]
+v681 <- LoadBoolean 'false'
+v682 <- LoadString 'bcd'
+v683 <- LoadInteger '0'
+v684 <- UnaryOperation '+', v683
+v685 <- LoadString 'abc'
+v686 <- CallMethod v685, 'endsWith', [v682, v684]
+v687 <- LoadBoolean 'false'
+v688 <- LoadString 'abcd'
+v689 <- LoadInteger '0'
+v690 <- UnaryOperation '+', v689
+v691 <- LoadString 'abc'
+v692 <- CallMethod v691, 'endsWith', [v688, v690]
+v693 <- LoadBoolean 'false'
+v694 <- LoadString 'bcde'
+v695 <- LoadInteger '0'
+v696 <- UnaryOperation '+', v695
+v697 <- LoadString 'abc'
+v698 <- CallMethod v697, 'endsWith', [v694, v696]
+v699 <- LoadBoolean 'false'
+v700 <- LoadString ''
+v701 <- LoadInteger '1'
+v702 <- LoadString 'abc'
+v703 <- CallMethod v702, 'endsWith', [v700, v701]
+v704 <- LoadBoolean 'true'
+v705 <- LoadString ' '
+v706 <- LoadInteger '1'
+v707 <- LoadString 'abc'
+v708 <- CallMethod v707, 'endsWith', [v705, v706]
+v709 <- LoadBoolean 'false'
+v710 <- LoadString 'c'
+v711 <- LoadInteger '1'
+v712 <- LoadString 'abc'
+v713 <- CallMethod v712, 'endsWith', [v710, v711]
+v714 <- LoadBoolean 'false'
+v715 <- LoadString 'b'
+v716 <- LoadInteger '1'
+v717 <- LoadString 'abc'
+v718 <- CallMethod v717, 'endsWith', [v715, v716]
+v719 <- LoadBoolean 'false'
+v720 <- LoadString 'ab'
+v721 <- LoadInteger '1'
+v722 <- LoadString 'abc'
+v723 <- CallMethod v722, 'endsWith', [v720, v721]
+v724 <- LoadBoolean 'false'
+v725 <- LoadString 'bc'
+v726 <- LoadInteger '1'
+v727 <- LoadString 'abc'
+v728 <- CallMethod v727, 'endsWith', [v725, v726]
+v729 <- LoadBoolean 'false'
+v730 <- LoadString 'abc'
+v731 <- LoadInteger '1'
+v732 <- LoadString 'abc'
+v733 <- CallMethod v732, 'endsWith', [v730, v731]
+v734 <- LoadBoolean 'false'
+v735 <- LoadString 'bcd'
+v736 <- LoadInteger '1'
+v737 <- LoadString 'abc'
+v738 <- CallMethod v737, 'endsWith', [v735, v736]
+v739 <- LoadBoolean 'false'
+v740 <- LoadString 'abcd'
+v741 <- LoadInteger '1'
+v742 <- LoadString 'abc'
+v743 <- CallMethod v742, 'endsWith', [v740, v741]
+v744 <- LoadBoolean 'false'
+v745 <- LoadString 'bcde'
+v746 <- LoadInteger '1'
+v747 <- LoadString 'abc'
+v748 <- CallMethod v747, 'endsWith', [v745, v746]
+v749 <- LoadBoolean 'false'
+v750 <- LoadString ''
+v751 <- LoadInteger '2'
+v752 <- LoadString 'abc'
+v753 <- CallMethod v752, 'endsWith', [v750, v751]
+v754 <- LoadBoolean 'true'
+v755 <- LoadString ' '
+v756 <- LoadInteger '2'
+v757 <- LoadString 'abc'
+v758 <- CallMethod v757, 'endsWith', [v755, v756]
+v759 <- LoadBoolean 'false'
+v760 <- LoadString 'c'
+v761 <- LoadInteger '2'
+v762 <- LoadString 'abc'
+v763 <- CallMethod v762, 'endsWith', [v760, v761]
+v764 <- LoadBoolean 'false'
+v765 <- LoadString 'b'
+v766 <- LoadInteger '2'
+v767 <- LoadString 'abc'
+v768 <- CallMethod v767, 'endsWith', [v765, v766]
+v769 <- LoadBoolean 'true'
+v770 <- LoadString 'ab'
+v771 <- LoadInteger '2'
+v772 <- LoadString 'abc'
+v773 <- CallMethod v772, 'endsWith', [v770, v771]
+v774 <- LoadBoolean 'true'
+v775 <- LoadString 'bc'
+v776 <- LoadInteger '2'
+v777 <- LoadString 'abc'
+v778 <- CallMethod v777, 'endsWith', [v775, v776]
+v779 <- LoadBoolean 'false'
+v780 <- LoadString 'abc'
+v781 <- LoadInteger '2'
+v782 <- LoadString 'abc'
+v783 <- CallMethod v782, 'endsWith', [v780, v781]
+v784 <- LoadBoolean 'false'
+v785 <- LoadString 'bcd'
+v786 <- LoadInteger '2'
+v787 <- LoadString 'abc'
+v788 <- CallMethod v787, 'endsWith', [v785, v786]
+v789 <- LoadBoolean 'false'
+v790 <- LoadString 'abcd'
+v791 <- LoadInteger '2'
+v792 <- LoadString 'abc'
+v793 <- CallMethod v792, 'endsWith', [v790, v791]
+v794 <- LoadBoolean 'false'
+v795 <- LoadString 'bcde'
+v796 <- LoadInteger '2'
+v797 <- LoadString 'abc'
+v798 <- CallMethod v797, 'endsWith', [v795, v796]
+v799 <- LoadBoolean 'false'
+v800 <- LoadString ''
+v801 <- UnaryOperation '+', v181
+v802 <- LoadString 'abc'
+v803 <- CallMethod v802, 'endsWith', [v800, v801]
+v804 <- LoadBoolean 'true'
+v805 <- LoadString ' '
+v806 <- UnaryOperation '+', v181
+v807 <- LoadString 'abc'
+v808 <- CallMethod v807, 'endsWith', [v805, v806]
+v809 <- LoadBoolean 'false'
+v810 <- LoadString 'c'
+v811 <- UnaryOperation '+', v181
+v812 <- LoadString 'abc'
+v813 <- CallMethod v812, 'endsWith', [v810, v811]
+v814 <- LoadBoolean 'true'
+v815 <- LoadString 'b'
+v816 <- UnaryOperation '+', v181
+v817 <- LoadString 'abc'
+v818 <- CallMethod v817, 'endsWith', [v815, v816]
+v819 <- LoadBoolean 'false'
+v820 <- LoadString 'ab'
+v821 <- UnaryOperation '+', v181
+v822 <- LoadString 'abc'
+v823 <- CallMethod v822, 'endsWith', [v820, v821]
+v824 <- LoadBoolean 'false'
+v825 <- LoadString 'bc'
+v826 <- UnaryOperation '+', v181
+v827 <- LoadString 'abc'
+v828 <- CallMethod v827, 'endsWith', [v825, v826]
+v829 <- LoadBoolean 'true'
+v830 <- LoadString 'abc'
+v831 <- UnaryOperation '+', v181
+v832 <- LoadString 'abc'
+v833 <- CallMethod v832, 'endsWith', [v830, v831]
+v834 <- LoadBoolean 'true'
+v835 <- LoadString 'bcd'
+v836 <- UnaryOperation '+', v181
+v837 <- LoadString 'abc'
+v838 <- CallMethod v837, 'endsWith', [v835, v836]
+v839 <- LoadBoolean 'false'
+v840 <- LoadString 'abcd'
+v841 <- UnaryOperation '+', v181
+v842 <- LoadString 'abc'
+v843 <- CallMethod v842, 'endsWith', [v840, v841]
+v844 <- LoadBoolean 'false'
+v845 <- LoadString 'bcde'
+v846 <- UnaryOperation '+', v181
+v847 <- LoadString 'abc'
+v848 <- CallMethod v847, 'endsWith', [v845, v846]
+v849 <- LoadBoolean 'false'
+v850 <- LoadString ''
+v851 <- LoadBoolean 'true'
+v852 <- LoadString 'abc'
+v853 <- CallMethod v852, 'endsWith', [v850, v851]
+v854 <- LoadBoolean 'true'
+v855 <- LoadString ' '
+v856 <- LoadBoolean 'true'
+v857 <- LoadString 'abc'
+v858 <- CallMethod v857, 'endsWith', [v855, v856]
+v859 <- LoadBoolean 'false'
+v860 <- LoadString 'c'
+v861 <- LoadBoolean 'true'
+v862 <- LoadString 'abc'
+v863 <- CallMethod v862, 'endsWith', [v860, v861]
+v864 <- LoadBoolean 'false'
+v865 <- LoadString 'b'
+v866 <- LoadBoolean 'true'
+v867 <- LoadString 'abc'
+v868 <- CallMethod v867, 'endsWith', [v865, v866]
+v869 <- LoadBoolean 'false'
+v870 <- LoadString 'ab'
+v871 <- LoadBoolean 'true'
+v872 <- LoadString 'abc'
+v873 <- CallMethod v872, 'endsWith', [v870, v871]
+v874 <- LoadBoolean 'false'
+v875 <- LoadString 'bc'
+v876 <- LoadBoolean 'true'
+v877 <- LoadString 'abc'
+v878 <- CallMethod v877, 'endsWith', [v875, v876]
+v879 <- LoadBoolean 'false'
+v880 <- LoadString 'abc'
+v881 <- LoadBoolean 'true'
+v882 <- LoadString 'abc'
+v883 <- CallMethod v882, 'endsWith', [v880, v881]
+v884 <- LoadBoolean 'false'
+v885 <- LoadString 'bcd'
+v886 <- LoadBoolean 'true'
+v887 <- LoadString 'abc'
+v888 <- CallMethod v887, 'endsWith', [v885, v886]
+v889 <- LoadBoolean 'false'
+v890 <- LoadString 'abcd'
+v891 <- LoadBoolean 'true'
+v892 <- LoadString 'abc'
+v893 <- CallMethod v892, 'endsWith', [v890, v891]
+v894 <- LoadBoolean 'false'
+v895 <- LoadString 'bcde'
+v896 <- LoadBoolean 'true'
+v897 <- LoadString 'abc'
+v898 <- CallMethod v897, 'endsWith', [v895, v896]
+v899 <- LoadBoolean 'false'
+v900 <- LoadString ''
+v901 <- LoadString 'x'
+v902 <- LoadString 'abc'
+v903 <- CallMethod v902, 'endsWith', [v900, v901]
+v904 <- LoadBoolean 'true'
+v905 <- LoadString ' '
+v906 <- LoadString 'x'
+v907 <- LoadString 'abc'
+v908 <- CallMethod v907, 'endsWith', [v905, v906]
+v909 <- LoadBoolean 'false'
+v910 <- LoadString 'c'
+v911 <- LoadString 'x'
+v912 <- LoadString 'abc'
+v913 <- CallMethod v912, 'endsWith', [v910, v911]
+v914 <- LoadBoolean 'false'
+v915 <- LoadString 'b'
+v916 <- LoadString 'x'
+v917 <- LoadString 'abc'
+v918 <- CallMethod v917, 'endsWith', [v915, v916]
+v919 <- LoadBoolean 'false'
+v920 <- LoadString 'ab'
+v921 <- LoadString 'x'
+v922 <- LoadString 'abc'
+v923 <- CallMethod v922, 'endsWith', [v920, v921]
+v924 <- LoadBoolean 'false'
+v925 <- LoadString 'bc'
+v926 <- LoadString 'x'
+v927 <- LoadString 'abc'
+v928 <- CallMethod v927, 'endsWith', [v925, v926]
+v929 <- LoadBoolean 'false'
+v930 <- LoadString 'abc'
+v931 <- LoadString 'x'
+v932 <- LoadString 'abc'
+v933 <- CallMethod v932, 'endsWith', [v930, v931]
+v934 <- LoadBoolean 'false'
+v935 <- LoadString 'bcd'
+v936 <- LoadString 'x'
+v937 <- LoadString 'abc'
+v938 <- CallMethod v937, 'endsWith', [v935, v936]
+v939 <- LoadBoolean 'false'
+v940 <- LoadString 'abcd'
+v941 <- LoadString 'x'
+v942 <- LoadString 'abc'
+v943 <- CallMethod v942, 'endsWith', [v940, v941]
+v944 <- LoadBoolean 'false'
+v945 <- LoadString 'bcde'
+v946 <- LoadString 'x'
+v947 <- LoadString 'abc'
+v948 <- CallMethod v947, 'endsWith', [v945, v946]
+v949 <- LoadBoolean 'false'
+v950 <- LoadString '(bar)?'
+v951 <- LoadString '[a-z]+(bar)?'
+v952 <- CallMethod v951, 'endsWith', [v950]
+v953 <- LoadBoolean 'true'
+v954 <- BeginPlainFunction -> 
+    v955 <- LoadRegExp '(bar)?' ''
+    v956 <- LoadString '[a-z]+(bar)?'
+    v957 <- CallMethod v956, 'endsWith', [v955]
+EndPlainFunction
+v958 <- CallFunction v954, []
+v959 <- LoadString '[a-z]+'
+v960 <- LoadInteger '6'
+v961 <- LoadString '[a-z]+(bar)?'
+v962 <- CallMethod v961, 'endsWith', [v959, v960]
+v963 <- LoadBoolean 'true'
+v964 <- BeginPlainFunction -> 
+    v965 <- LoadRegExp '(bar)?' ''
+    v966 <- LoadString '[a-z]+(bar)?'
+    v967 <- CallMethod v966, 'endsWith', [v965]
+EndPlainFunction
+v968 <- CallFunction v964, []
+v969 <- BeginPlainFunction -> 
+    v970 <- LoadRegExp '(bar)?' ''
+    v971 <- LoadString '[a-z]+/(bar)?/'
+    v972 <- CallMethod v971, 'endsWith', [v970]
+EndPlainFunction
+v973 <- CallFunction v969, []
+v974 <- LoadString 'Iñtërnâtiônàlizætiøn☃💩'
+v975 <- CreateNamedVariable 'string', 'var', v974
+v976 <- LoadString ''
+v977 <- CallMethod v975, 'endsWith', [v976]
+v978 <- LoadBoolean 'true'
+v979 <- LoadString 'ñtër'
+v980 <- CallMethod v975, 'endsWith', [v979]
+v981 <- LoadBoolean 'false'
+v982 <- LoadString 'ñtër'
+v983 <- LoadInteger '5'
+v984 <- CallMethod v975, 'endsWith', [v982, v983]
+v985 <- LoadBoolean 'true'
+v986 <- LoadString 'àlizæ'
+v987 <- CallMethod v975, 'endsWith', [v986]
+v988 <- LoadBoolean 'false'
+v989 <- LoadString 'àlizæ'
+v990 <- LoadInteger '16'
+v991 <- CallMethod v975, 'endsWith', [v989, v990]
+v992 <- LoadBoolean 'true'
+v993 <- LoadString 'øn☃💩'
+v994 <- CallMethod v975, 'endsWith', [v993]
+v995 <- LoadBoolean 'true'
+v996 <- LoadString 'øn☃💩'
+v997 <- LoadInteger '23'
+v998 <- CallMethod v975, 'endsWith', [v996, v997]
+v999 <- LoadBoolean 'true'
+v1000 <- LoadString '☃'
+v1001 <- CallMethod v975, 'endsWith', [v1000]
+v1002 <- LoadBoolean 'false'
+v1003 <- LoadString '☃'
+v1004 <- LoadInteger '21'
+v1005 <- CallMethod v975, 'endsWith', [v1003, v1004]
+v1006 <- LoadBoolean 'true'
+v1007 <- LoadString '💩'
+v1008 <- CallMethod v975, 'endsWith', [v1007]
+v1009 <- LoadBoolean 'true'
+v1010 <- LoadString '💩'
+v1011 <- LoadInteger '23'
+v1012 <- CallMethod v975, 'endsWith', [v1010, v1011]
+v1013 <- LoadBoolean 'true'
+v1014 <- BeginPlainFunction -> 
+    v1015 <- LoadUndefined
+    v1016 <- GetProperty v1, 'prototype'
+    v1017 <- GetProperty v1016, 'endsWith'
+    v1018 <- CallMethod v1017, 'call', [v1015]
+EndPlainFunction
+v1019 <- CallFunction v1014, []
+v1020 <- BeginPlainFunction -> 
+    v1021 <- LoadUndefined
+    v1022 <- LoadString 'b'
+    v1023 <- GetProperty v1, 'prototype'
+    v1024 <- GetProperty v1023, 'endsWith'
+    v1025 <- CallMethod v1024, 'call', [v1021, v1022]
+EndPlainFunction
+v1026 <- CallFunction v1020, []
+v1027 <- BeginPlainFunction -> 
+    v1028 <- LoadUndefined
+    v1029 <- LoadString 'b'
+    v1030 <- LoadInteger '4'
+    v1031 <- GetProperty v1, 'prototype'
+    v1032 <- GetProperty v1031, 'endsWith'
+    v1033 <- CallMethod v1032, 'call', [v1028, v1029, v1030]
+EndPlainFunction
+v1034 <- CallFunction v1027, []
+v1035 <- BeginPlainFunction -> 
+    v1036 <- LoadNull
+    v1037 <- GetProperty v1, 'prototype'
+    v1038 <- GetProperty v1037, 'endsWith'
+    v1039 <- CallMethod v1038, 'call', [v1036]
+EndPlainFunction
+v1040 <- CallFunction v1035, []
+v1041 <- BeginPlainFunction -> 
+    v1042 <- LoadNull
+    v1043 <- LoadString 'b'
+    v1044 <- GetProperty v1, 'prototype'
+    v1045 <- GetProperty v1044, 'endsWith'
+    v1046 <- CallMethod v1045, 'call', [v1042, v1043]
+EndPlainFunction
+v1047 <- CallFunction v1041, []
+v1048 <- BeginPlainFunction -> 
+    v1049 <- LoadNull
+    v1050 <- LoadString 'b'
+    v1051 <- LoadInteger '4'
+    v1052 <- GetProperty v1, 'prototype'
+    v1053 <- GetProperty v1052, 'endsWith'
+    v1054 <- CallMethod v1053, 'call', [v1049, v1050, v1051]
+EndPlainFunction
+v1055 <- CallFunction v1048, []
+v1056 <- LoadInteger '42'
+v1057 <- LoadString '2'
+v1058 <- GetProperty v1, 'prototype'
+v1059 <- GetProperty v1058, 'endsWith'
+v1060 <- CallMethod v1059, 'call', [v1056, v1057]
+v1061 <- LoadBoolean 'true'
+v1062 <- LoadInteger '42'
+v1063 <- LoadString '4'
+v1064 <- GetProperty v1, 'prototype'
+v1065 <- GetProperty v1064, 'endsWith'
+v1066 <- CallMethod v1065, 'call', [v1062, v1063]
+v1067 <- LoadBoolean 'false'
+v1068 <- LoadInteger '42'
+v1069 <- LoadString 'b'
+v1070 <- LoadInteger '4'
+v1071 <- GetProperty v1, 'prototype'
+v1072 <- GetProperty v1071, 'endsWith'
+v1073 <- CallMethod v1072, 'call', [v1068, v1069, v1070]
+v1074 <- LoadBoolean 'false'
+v1075 <- LoadInteger '42'
+v1076 <- LoadString '2'
+v1077 <- LoadInteger '1'
+v1078 <- GetProperty v1, 'prototype'
+v1079 <- GetProperty v1078, 'endsWith'
+v1080 <- CallMethod v1079, 'call', [v1075, v1076, v1077]
+v1081 <- LoadBoolean 'false'
+v1082 <- LoadInteger '42'
+v1083 <- LoadString '2'
+v1084 <- LoadInteger '4'
+v1085 <- GetProperty v1, 'prototype'
+v1086 <- GetProperty v1085, 'endsWith'
+v1087 <- CallMethod v1086, 'call', [v1082, v1083, v1084]
+v1088 <- LoadBoolean 'true'
+v1089 <- BeginPlainFunction -> 
+    v1090 <- LoadString 'abc'
+    Return v1090
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v1089
+v1091 <- EndObjectLiteral
+v1092 <- LoadString 'b'
+v1093 <- LoadInteger '0'
+v1094 <- GetProperty v1, 'prototype'
+v1095 <- GetProperty v1094, 'endsWith'
+v1096 <- CallMethod v1095, 'call', [v1091, v1092, v1093]
+v1097 <- LoadBoolean 'false'
+v1098 <- BeginPlainFunction -> 
+    v1099 <- LoadString 'abc'
+    Return v1099
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v1098
+v1100 <- EndObjectLiteral
+v1101 <- LoadString 'b'
+v1102 <- LoadInteger '1'
+v1103 <- GetProperty v1, 'prototype'
+v1104 <- GetProperty v1103, 'endsWith'
+v1105 <- CallMethod v1104, 'call', [v1100, v1101, v1102]
+v1106 <- LoadBoolean 'false'
+v1107 <- BeginPlainFunction -> 
+    v1108 <- LoadString 'abc'
+    Return v1108
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v1107
+v1109 <- EndObjectLiteral
+v1110 <- LoadString 'b'
+v1111 <- LoadInteger '2'
+v1112 <- GetProperty v1, 'prototype'
+v1113 <- GetProperty v1112, 'endsWith'
+v1114 <- CallMethod v1113, 'call', [v1109, v1110, v1111]
+v1115 <- LoadBoolean 'true'
+v1116 <- BeginPlainFunction -> 
+    v1117 <- BeginPlainFunction -> 
+        v1118 <- CreateNamedVariable 'RangeError', 'none'
+        v1119 <- CallFunction v1118, []
+        ThrowException v1119
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toString`, v1117
+    v1120 <- EndObjectLiteral
+    v1121 <- LoadRegExp '.' ''
+    v1122 <- GetProperty v1, 'prototype'
+    v1123 <- GetProperty v1122, 'endsWith'
+    v1124 <- CallMethod v1123, 'call', [v1120, v1121]
+EndPlainFunction
+v1125 <- CallFunction v1116, []
+v1126 <- CreateNamedVariable 'RangeError', 'none'
+v1127 <- BeginPlainFunction -> 
+    v1128 <- BeginPlainFunction -> 
+        v1129 <- LoadString 'abc'
+        Return v1129
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toString`, v1128
+    v1130 <- EndObjectLiteral
+    v1131 <- LoadRegExp '.' ''
+    v1132 <- GetProperty v1, 'prototype'
+    v1133 <- GetProperty v1132, 'endsWith'
+    v1134 <- CallMethod v1133, 'call', [v1130, v1131]
+EndPlainFunction
+v1135 <- CallFunction v1127, []
+v1136 <- BeginPlainFunction -> 
+    v1137 <- LoadUndefined
+    v1138 <- GetProperty v1, 'prototype'
+    v1139 <- GetProperty v1138, 'endsWith'
+    v1140 <- CallMethod v1139, 'apply', [v1137]
+EndPlainFunction
+v1141 <- CallFunction v1136, []
+v1142 <- BeginPlainFunction -> 
+    v1143 <- LoadUndefined
+    v1144 <- LoadString 'b'
+    v1145 <- CreateArray [v1144]
+    v1146 <- GetProperty v1, 'prototype'
+    v1147 <- GetProperty v1146, 'endsWith'
+    v1148 <- CallMethod v1147, 'apply', [v1143, v1145]
+EndPlainFunction
+v1149 <- CallFunction v1142, []
+v1150 <- BeginPlainFunction -> 
+    v1151 <- LoadUndefined
+    v1152 <- LoadString 'b'
+    v1153 <- LoadInteger '4'
+    v1154 <- CreateArray [v1152, v1153]
+    v1155 <- GetProperty v1, 'prototype'
+    v1156 <- GetProperty v1155, 'endsWith'
+    v1157 <- CallMethod v1156, 'apply', [v1151, v1154]
+EndPlainFunction
+v1158 <- CallFunction v1150, []
+v1159 <- BeginPlainFunction -> 
+    v1160 <- LoadNull
+    v1161 <- GetProperty v1, 'prototype'
+    v1162 <- GetProperty v1161, 'endsWith'
+    v1163 <- CallMethod v1162, 'apply', [v1160]
+EndPlainFunction
+v1164 <- CallFunction v1159, []
+v1165 <- BeginPlainFunction -> 
+    v1166 <- LoadNull
+    v1167 <- LoadString 'b'
+    v1168 <- CreateArray [v1167]
+    v1169 <- GetProperty v1, 'prototype'
+    v1170 <- GetProperty v1169, 'endsWith'
+    v1171 <- CallMethod v1170, 'apply', [v1166, v1168]
+EndPlainFunction
+v1172 <- CallFunction v1165, []
+v1173 <- BeginPlainFunction -> 
+    v1174 <- LoadNull
+    v1175 <- LoadString 'b'
+    v1176 <- LoadInteger '4'
+    v1177 <- CreateArray [v1175, v1176]
+    v1178 <- GetProperty v1, 'prototype'
+    v1179 <- GetProperty v1178, 'endsWith'
+    v1180 <- CallMethod v1179, 'apply', [v1174, v1177]
+EndPlainFunction
+v1181 <- CallFunction v1173, []
+v1182 <- LoadInteger '42'
+v1183 <- LoadString '2'
+v1184 <- CreateArray [v1183]
+v1185 <- GetProperty v1, 'prototype'
+v1186 <- GetProperty v1185, 'endsWith'
+v1187 <- CallMethod v1186, 'apply', [v1182, v1184]
+v1188 <- LoadBoolean 'true'
+v1189 <- LoadInteger '42'
+v1190 <- LoadString '4'
+v1191 <- CreateArray [v1190]
+v1192 <- GetProperty v1, 'prototype'
+v1193 <- GetProperty v1192, 'endsWith'
+v1194 <- CallMethod v1193, 'apply', [v1189, v1191]
+v1195 <- LoadBoolean 'false'
+v1196 <- LoadInteger '42'
+v1197 <- LoadString 'b'
+v1198 <- LoadInteger '4'
+v1199 <- CreateArray [v1197, v1198]
+v1200 <- GetProperty v1, 'prototype'
+v1201 <- GetProperty v1200, 'endsWith'
+v1202 <- CallMethod v1201, 'apply', [v1196, v1199]
+v1203 <- LoadBoolean 'false'
+v1204 <- LoadInteger '42'
+v1205 <- LoadString '2'
+v1206 <- LoadInteger '1'
+v1207 <- CreateArray [v1205, v1206]
+v1208 <- GetProperty v1, 'prototype'
+v1209 <- GetProperty v1208, 'endsWith'
+v1210 <- CallMethod v1209, 'apply', [v1204, v1207]
+v1211 <- LoadBoolean 'false'
+v1212 <- LoadInteger '42'
+v1213 <- LoadString '2'
+v1214 <- LoadInteger '4'
+v1215 <- CreateArray [v1213, v1214]
+v1216 <- GetProperty v1, 'prototype'
+v1217 <- GetProperty v1216, 'endsWith'
+v1218 <- CallMethod v1217, 'apply', [v1212, v1215]
+v1219 <- LoadBoolean 'true'
+v1220 <- BeginPlainFunction -> 
+    v1221 <- LoadString 'abc'
+    Return v1221
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v1220
+v1222 <- EndObjectLiteral
+v1223 <- LoadString 'b'
+v1224 <- LoadInteger '0'
+v1225 <- CreateArray [v1223, v1224]
+v1226 <- GetProperty v1, 'prototype'
+v1227 <- GetProperty v1226, 'endsWith'
+v1228 <- CallMethod v1227, 'apply', [v1222, v1225]
+v1229 <- LoadBoolean 'false'
+v1230 <- BeginPlainFunction -> 
+    v1231 <- LoadString 'abc'
+    Return v1231
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v1230
+v1232 <- EndObjectLiteral
+v1233 <- LoadString 'b'
+v1234 <- LoadInteger '1'
+v1235 <- CreateArray [v1233, v1234]
+v1236 <- GetProperty v1, 'prototype'
+v1237 <- GetProperty v1236, 'endsWith'
+v1238 <- CallMethod v1237, 'apply', [v1232, v1235]
+v1239 <- LoadBoolean 'false'
+v1240 <- BeginPlainFunction -> 
+    v1241 <- LoadString 'abc'
+    Return v1241
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v1240
+v1242 <- EndObjectLiteral
+v1243 <- LoadString 'b'
+v1244 <- LoadInteger '2'
+v1245 <- CreateArray [v1243, v1244]
+v1246 <- GetProperty v1, 'prototype'
+v1247 <- GetProperty v1246, 'endsWith'
+v1248 <- CallMethod v1247, 'apply', [v1242, v1245]
+v1249 <- LoadBoolean 'true'
+v1250 <- BeginPlainFunction -> 
+    v1251 <- BeginPlainFunction -> 
+        v1252 <- CallFunction v1126, []
+        ThrowException v1252
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toString`, v1251
+    v1253 <- EndObjectLiteral
+    v1254 <- LoadRegExp '.' ''
+    v1255 <- CreateArray [v1254]
+    v1256 <- GetProperty v1, 'prototype'
+    v1257 <- GetProperty v1256, 'endsWith'
+    v1258 <- CallMethod v1257, 'apply', [v1253, v1255]
+EndPlainFunction
+v1259 <- CallFunction v1250, []
+v1260 <- BeginPlainFunction -> 
+    v1261 <- BeginPlainFunction -> 
+        v1262 <- LoadString 'abc'
+        Return v1262
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `toString`, v1261
+    v1263 <- EndObjectLiteral
+    v1264 <- LoadRegExp '.' ''
+    v1265 <- CreateArray [v1264]
+    v1266 <- GetProperty v1, 'prototype'
+    v1267 <- GetProperty v1266, 'endsWith'
+    v1268 <- CallMethod v1267, 'apply', [v1263, v1265]
+EndPlainFunction
+v1269 <- CallFunction v1260, []
+v1270 <- LoadRegExp '.' ''
+v1271 <- CreateNamedVariable 're', 'var', v1270
+v1272 <- BeginPlainFunction -> 
+    v1273 <- LoadString ''
+    v1274 <- CallMethod v1273, 'startsWith', [v1271]
+EndPlainFunction
+v1275 <- CallFunction v1272, []
+v1276 <- LoadBoolean 'false'
+v1277 <- CreateNamedVariable 'Symbol', 'none'
+v1278 <- GetProperty v1277, 'match'
+SetComputedProperty v1271, v1278, v1276
+v1279 <- LoadBoolean 'false'
+v1280 <- LoadString ''
+v1281 <- CallMethod v1280, 'startsWith', [v1271]
+
+
+String.prototype.endsWith.length;
+var testString = "Hello World";
+testString.endsWith("");
+testString.endsWith("World");
+testString.endsWith("world");
+testString.endsWith("Hello World!");
+testString.endsWith(null);
+testString.endsWith(undefined);
+testString.endsWith();
+("null").endsWith(null);
+("undefined").endsWith(undefined);
+var georgianUnicodeString = "აბგდევზთ";
+georgianUnicodeString.endsWith(georgianUnicodeString);
+georgianUnicodeString.endsWith("ევზთ");
+georgianUnicodeString.endsWith("ა");
+const v42 = { msg: "Empty string", val: "" };
+const v45 = { msg: "Number 1234.34", val: 1234.34 };
+const v48 = { msg: "Integer number 0", val: 0 };
+const v51 = -1;
+const v52 = { msg: "Negative number -1", val: v51 };
+const v55 = { msg: "Boolean true", val: true };
+const v58 = { msg: "Boolean false", val: false };
+const v60 = [];
+const v61 = { msg: "Empty array []", val: v60 };
+const v63 = {};
+const v64 = { msg: "Empty object {}", val: v63 };
+const v68 = new Array(3);
+var TEST_INPUT = [v42,v45,v48,v52,v55,v58,v61,v64,{ msg: "Array of size 3", val: v68 }];
+function testNonStringValues() {
+    var i = 0;
+    var l = TEST_INPUT.length;
+    for (; i < l; i++) {
+        var e = TEST_INPUT[i];
+        var v = e.val;
+        var s = String(v);
+        s.endsWith(v);
+        e.msg;
+        String.prototype.endsWith.call(v, v);
+        e.msg;
+        const v91 = [v];
+        String.prototype.endsWith.apply(v, v91);
+        e.msg;
+    }
+}
+testNonStringValues();
+function f97(a98) {
+    this.endsWith = String.prototype.endsWith;
+    function f102() {
+        return String(a98);
+    }
+    this.toString = f102;
+}
+var CustomType = f97;
+function testCutomType() {
+    var i = 0;
+    var l = TEST_INPUT.length;
+    for (; i < l; i++) {
+        var e = TEST_INPUT[i];
+        var v = e.val;
+        const v117 = new CustomType(v);
+        var o = v117;
+        o.endsWith(v);
+        e.msg;
+    }
+}
+testCutomType();
+("abc").endsWith("abc");
+("abcd").endsWith("bcd");
+("abc").endsWith("c");
+("abc").endsWith("abcd");
+("abc").endsWith("bbc");
+("abc").endsWith("b");
+("abc").endsWith("abc", 3);
+("abc").endsWith("bc", 3);
+("abc").endsWith("a", 3);
+("abc").endsWith("bc", 3);
+("abc").endsWith("a", 1);
+("abc").endsWith("abc", 1);
+("abc").endsWith("b", 2);
+("abc").endsWith("d", 2);
+("abc").endsWith("dcd", 2);
+("abc").endsWith("a", 42);
+("abc").endsWith("bc", Infinity);
+("abc").endsWith("a", Infinity);
+("abc").endsWith("bc", undefined);
+("abc").endsWith("bc", -43);
+("abc").endsWith("bc", -Infinity);
+("abc").endsWith("bc", NaN);
+const t65 = Object.prototype;
+t65[1] = 2;
+String.prototype.endsWith.length;
+String.prototype.propertyIsEnumerable("endsWith");
+("undefined").endsWith();
+("undefined").endsWith(undefined);
+("undefined").endsWith(null);
+("null").endsWith();
+("null").endsWith(undefined);
+("null").endsWith(null);
+("abc").endsWith();
+("abc").endsWith("");
+("abc").endsWith(" ");
+("abc").endsWith("c");
+("abc").endsWith("b");
+("abc").endsWith("ab");
+("abc").endsWith("bc");
+("abc").endsWith("abc");
+("abc").endsWith("bcd");
+("abc").endsWith("abcd");
+("abc").endsWith("bcde");
+("abc").endsWith("", NaN);
+("abc").endsWith(" ", NaN);
+("abc").endsWith("c", NaN);
+("abc").endsWith("b", NaN);
+("abc").endsWith("ab", NaN);
+("abc").endsWith("bc", NaN);
+("abc").endsWith("abc", NaN);
+("abc").endsWith("bcd", NaN);
+("abc").endsWith("abcd", NaN);
+("abc").endsWith("bcde", NaN);
+("abc").endsWith("", false);
+("abc").endsWith(" ", false);
+("abc").endsWith("c", false);
+("abc").endsWith("b", false);
+("abc").endsWith("ab", false);
+("abc").endsWith("bc", false);
+("abc").endsWith("abc", false);
+("abc").endsWith("bcd", false);
+("abc").endsWith("abcd", false);
+("abc").endsWith("bcde", false);
+("abc").endsWith("", undefined);
+("abc").endsWith(" ", undefined);
+("abc").endsWith("c", undefined);
+("abc").endsWith("b", undefined);
+("abc").endsWith("ab", undefined);
+("abc").endsWith("bc", undefined);
+("abc").endsWith("abc", undefined);
+("abc").endsWith("bcd", undefined);
+("abc").endsWith("abcd", undefined);
+("abc").endsWith("bcde", undefined);
+("abc").endsWith("", null);
+("abc").endsWith(" ", null);
+("abc").endsWith("c", null);
+("abc").endsWith("b", null);
+("abc").endsWith("ab", null);
+("abc").endsWith("bc", null);
+("abc").endsWith("abc", null);
+("abc").endsWith("bcd", null);
+("abc").endsWith("abcd", null);
+("abc").endsWith("bcde", null);
+("abc").endsWith("", -Infinity);
+("abc").endsWith(" ", -Infinity);
+("abc").endsWith("c", -Infinity);
+("abc").endsWith("b", -Infinity);
+("abc").endsWith("ab", -Infinity);
+("abc").endsWith("bc", -Infinity);
+("abc").endsWith("abc", -Infinity);
+("abc").endsWith("bcd", -Infinity);
+("abc").endsWith("abcd", -Infinity);
+("abc").endsWith("bcde", -Infinity);
+("abc").endsWith("", -1);
+("abc").endsWith(" ", -1);
+("abc").endsWith("c", -1);
+("abc").endsWith("b", -1);
+("abc").endsWith("ab", -1);
+("abc").endsWith("bc", -1);
+("abc").endsWith("abc", -1);
+("abc").endsWith("bcd", -1);
+("abc").endsWith("abcd", -1);
+("abc").endsWith("bcde", -1);
+("abc").endsWith("", -0);
+("abc").endsWith(" ", -0);
+("abc").endsWith("c", -0);
+("abc").endsWith("b", -0);
+("abc").endsWith("ab", -0);
+("abc").endsWith("bc", -0);
+("abc").endsWith("abc", -0);
+("abc").endsWith("bcd", -0);
+("abc").endsWith("abcd", -0);
+("abc").endsWith("bcde", -0);
+("abc").endsWith("", +0);
+("abc").endsWith(" ", +0);
+("abc").endsWith("c", +0);
+("abc").endsWith("b", +0);
+("abc").endsWith("ab", +0);
+("abc").endsWith("bc", +0);
+("abc").endsWith("abc", +0);
+("abc").endsWith("bcd", +0);
+("abc").endsWith("abcd", +0);
+("abc").endsWith("bcde", +0);
+("abc").endsWith("", 1);
+("abc").endsWith(" ", 1);
+("abc").endsWith("c", 1);
+("abc").endsWith("b", 1);
+("abc").endsWith("ab", 1);
+("abc").endsWith("bc", 1);
+("abc").endsWith("abc", 1);
+("abc").endsWith("bcd", 1);
+("abc").endsWith("abcd", 1);
+("abc").endsWith("bcde", 1);
+("abc").endsWith("", 2);
+("abc").endsWith(" ", 2);
+("abc").endsWith("c", 2);
+("abc").endsWith("b", 2);
+("abc").endsWith("ab", 2);
+("abc").endsWith("bc", 2);
+("abc").endsWith("abc", 2);
+("abc").endsWith("bcd", 2);
+("abc").endsWith("abcd", 2);
+("abc").endsWith("bcde", 2);
+("abc").endsWith("", +Infinity);
+("abc").endsWith(" ", +Infinity);
+("abc").endsWith("c", +Infinity);
+("abc").endsWith("b", +Infinity);
+("abc").endsWith("ab", +Infinity);
+("abc").endsWith("bc", +Infinity);
+("abc").endsWith("abc", +Infinity);
+("abc").endsWith("bcd", +Infinity);
+("abc").endsWith("abcd", +Infinity);
+("abc").endsWith("bcde", +Infinity);
+("abc").endsWith("", true);
+("abc").endsWith(" ", true);
+("abc").endsWith("c", true);
+("abc").endsWith("b", true);
+("abc").endsWith("ab", true);
+("abc").endsWith("bc", true);
+("abc").endsWith("abc", true);
+("abc").endsWith("bcd", true);
+("abc").endsWith("abcd", true);
+("abc").endsWith("bcde", true);
+("abc").endsWith("", "x");
+("abc").endsWith(" ", "x");
+("abc").endsWith("c", "x");
+("abc").endsWith("b", "x");
+("abc").endsWith("ab", "x");
+("abc").endsWith("bc", "x");
+("abc").endsWith("abc", "x");
+("abc").endsWith("bcd", "x");
+("abc").endsWith("abcd", "x");
+("abc").endsWith("bcde", "x");
+("[a-z]+(bar)?").endsWith("(bar)?");
+function f954() {
+    ("[a-z]+(bar)?").endsWith(/(bar)?/);
+}
+f954();
+("[a-z]+(bar)?").endsWith("[a-z]+", 6);
+function f964() {
+    ("[a-z]+(bar)?").endsWith(/(bar)?/);
+}
+f964();
+function f969() {
+    ("[a-z]+/(bar)?/").endsWith(/(bar)?/);
+}
+f969();
+var string = "Iñtërnâtiônàlizætiøn☃💩";
+string.endsWith("");
+string.endsWith("ñtër");
+string.endsWith("ñtër", 5);
+string.endsWith("àlizæ");
+string.endsWith("àlizæ", 16);
+string.endsWith("øn☃💩");
+string.endsWith("øn☃💩", 23);
+string.endsWith("☃");
+string.endsWith("☃", 21);
+string.endsWith("💩");
+string.endsWith("💩", 23);
+function f1014() {
+    String.prototype.endsWith.call(undefined);
+}
+f1014();
+function f1020() {
+    String.prototype.endsWith.call(undefined, "b");
+}
+f1020();
+function f1027() {
+    String.prototype.endsWith.call(undefined, "b", 4);
+}
+f1027();
+function f1035() {
+    String.prototype.endsWith.call(null);
+}
+f1035();
+function f1041() {
+    String.prototype.endsWith.call(null, "b");
+}
+f1041();
+function f1048() {
+    String.prototype.endsWith.call(null, "b", 4);
+}
+f1048();
+String.prototype.endsWith.call(42, "2");
+String.prototype.endsWith.call(42, "4");
+String.prototype.endsWith.call(42, "b", 4);
+String.prototype.endsWith.call(42, "2", 1);
+String.prototype.endsWith.call(42, "2", 4);
+function f1089() {
+    return "abc";
+}
+const v1091 = { toString: f1089 };
+String.prototype.endsWith.call(v1091, "b", 0);
+function f1098() {
+    return "abc";
+}
+const v1100 = { toString: f1098 };
+String.prototype.endsWith.call(v1100, "b", 1);
+function f1107() {
+    return "abc";
+}
+const v1109 = { toString: f1107 };
+String.prototype.endsWith.call(v1109, "b", 2);
+function f1116() {
+    function f1117() {
+        throw RangeError();
+    }
+    const v1120 = { toString: f1117 };
+    const v1121 = /./;
+    String.prototype.endsWith.call(v1120, v1121);
+}
+f1116();
+function f1127() {
+    function f1128() {
+        return "abc";
+    }
+    const v1130 = { toString: f1128 };
+    const v1131 = /./;
+    String.prototype.endsWith.call(v1130, v1131);
+}
+f1127();
+function f1136() {
+    String.prototype.endsWith.apply(undefined);
+}
+f1136();
+function f1142() {
+    const v1145 = ["b"];
+    String.prototype.endsWith.apply(undefined, v1145);
+}
+f1142();
+function f1150() {
+    const v1154 = ["b",4];
+    String.prototype.endsWith.apply(undefined, v1154);
+}
+f1150();
+function f1159() {
+    String.prototype.endsWith.apply(null);
+}
+f1159();
+function f1165() {
+    const v1168 = ["b"];
+    String.prototype.endsWith.apply(null, v1168);
+}
+f1165();
+function f1173() {
+    const v1177 = ["b",4];
+    String.prototype.endsWith.apply(null, v1177);
+}
+f1173();
+const v1184 = ["2"];
+String.prototype.endsWith.apply(42, v1184);
+const v1191 = ["4"];
+String.prototype.endsWith.apply(42, v1191);
+const v1199 = ["b",4];
+String.prototype.endsWith.apply(42, v1199);
+const v1207 = ["2",1];
+String.prototype.endsWith.apply(42, v1207);
+const v1215 = ["2",4];
+String.prototype.endsWith.apply(42, v1215);
+function f1220() {
+    return "abc";
+}
+const v1222 = { toString: f1220 };
+const v1225 = ["b",0];
+String.prototype.endsWith.apply(v1222, v1225);
+function f1230() {
+    return "abc";
+}
+const v1232 = { toString: f1230 };
+const v1235 = ["b",1];
+String.prototype.endsWith.apply(v1232, v1235);
+function f1240() {
+    return "abc";
+}
+const v1242 = { toString: f1240 };
+const v1245 = ["b",2];
+String.prototype.endsWith.apply(v1242, v1245);
+function f1250() {
+    function f1251() {
+        throw RangeError();
+    }
+    const v1253 = { toString: f1251 };
+    const v1255 = [/./];
+    String.prototype.endsWith.apply(v1253, v1255);
+}
+f1250();
+function f1260() {
+    function f1261() {
+        return "abc";
+    }
+    const v1263 = { toString: f1261 };
+    const v1265 = [/./];
+    String.prototype.endsWith.apply(v1263, v1265);
+}
+f1260();
+var re = /./;
+function f1272() {
+    ("").startsWith(re);
+}
+f1272();
+re[Symbol.match] = false;
+("").startsWith(re);
+
+FuzzIL program written to corpus/string-endswith.fzil

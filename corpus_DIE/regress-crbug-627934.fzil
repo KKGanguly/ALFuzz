@@ -1,0 +1,40 @@
+v0 <- LoadInteger '32'
+v1 <- LoadInteger '1024'
+v2 <- BinaryOperation v0, '*', v1
+v3 <- LoadInteger '1024'
+v4 <- BinaryOperation v2, '*', v3
+v5 <- LoadString '1'
+v6 <- CallMethod v5, 'repeat', [v4]
+v7 <- CreateNamedVariable 'x', 'var', v6
+BeginForLoopInitializer
+BeginForLoopCondition -> v8
+    v9 <- LoadBoolean 'true'
+BeginForLoopAfterthought v9 -> v10
+BeginForLoopBody -> v11
+    BeginTry
+        v12 <- BeginPlainFunction -> 
+            Return v7
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `toString`, v12
+        v13 <- EndObjectLiteral
+        Update v11, '+', v13
+    BeginCatch -> v14
+        Break
+    EndTryCatch
+EndForLoop
+
+
+var x = ("1").repeat((32 * 1024) * 1024);
+for (let i8 = x;;) {
+    try {
+        function f12() {
+            return x;
+        }
+        i8 += { toString: f12 };
+    } catch(e14) {
+        break;
+    }
+}
+
+FuzzIL program written to corpus/regress-crbug-627934.fzil

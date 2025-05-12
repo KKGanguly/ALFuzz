@@ -1,0 +1,40 @@
+BeginTry
+BeginCatch -> v0
+EndTryCatch
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- CallFunction v1, []
+v3 <- BeginPlainFunction -> 
+    v4 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v5 <- BeginPlainFunction -> 
+        BeginTry
+        BeginCatch -> v6
+        EndTryCatch
+    EndPlainFunction
+    v7 <- CallFunction v5, []
+    v8 <- CallFunction v5, []
+EndPlainFunction
+v9 <- CallFunction v3, []
+
+
+try {
+} catch(e0) {
+}
+function __f_12() {
+}
+__f_12();
+function __f_6() {
+    function __f_3() {
+    }
+    function __f_4() {
+        try {
+        } catch(e6) {
+        }
+    }
+    __f_4();
+    __f_4();
+}
+__f_6();
+
+FuzzIL program written to corpus/regress-632289.fzil

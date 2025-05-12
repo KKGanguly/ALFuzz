@@ -1,0 +1,88 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- LoadString ''
+    Return v1
+EndArrowFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v0
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'pattern', 'var', v2
+v4 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'limit', 'var', v5
+v7 <- BeginPlainFunction -> v8, v9
+    v10 <- GetProperty v8, 'length'
+    v11 <- GetProperty v9, 'value'
+    v12 <- BinaryOperation v10, '*', v11
+    Return v12
+EndPlainFunction
+v13 <- CreateNamedVariable 'Symbol', 'none'
+v14 <- GetProperty v13, 'split'
+SetComputedProperty v3, v14, v7
+v15 <- BeginArrowFunction -> 
+    v16 <- LoadNull
+    v17 <- CreateNamedVariable 'String', 'none'
+    v18 <- GetProperty v17, 'prototype'
+    v19 <- GetProperty v18, 'split'
+    v20 <- CallMethod v19, 'call', [v16, v3, v6]
+    Return v20
+EndArrowFunction
+v21 <- CallFunction v15, []
+v22 <- CreateNamedVariable 'TypeError', 'none'
+v23 <- LoadInteger '15'
+v24 <- LoadString 'abcde'
+v25 <- CallMethod v24, 'split', [v3, v6]
+v26 <- LoadString 'dumdidum'
+v27 <- GetProperty v13, 'split'
+SetComputedProperty v3, v27, v26
+v28 <- BeginArrowFunction -> 
+    v29 <- LoadString 'abcde'
+    v30 <- CallMethod v29, 'split', [v3, v6]
+    Return v30
+EndArrowFunction
+v31 <- CallFunction v28, []
+v32 <- LoadNull
+v33 <- GetProperty v13, 'split'
+SetComputedProperty v3, v33, v32
+v34 <- LoadString 'a'
+v35 <- LoadString 'b'
+v36 <- LoadString 'c'
+v37 <- LoadString 'd'
+v38 <- LoadString 'e'
+v39 <- CreateArray [v34, v35, v36, v37, v38]
+v40 <- LoadString 'abcde'
+v41 <- CallMethod v40, 'split', [v3]
+v42 <- LoadString '[Symbol.split]'
+v43 <- CreateNamedVariable 'RegExp', 'none'
+v44 <- GetProperty v43, 'prototype'
+v45 <- GetProperty v13, 'split'
+v46 <- GetComputedProperty v44, v45
+v47 <- GetProperty v46, 'name'
+
+
+const v0 = () => {
+    return "";
+};
+var pattern = { toString: v0 };
+var limit = { value: 3 };
+function f7(a8, a9) {
+    return a8.length * a9.value;
+}
+pattern[Symbol.split] = f7;
+const v15 = () => {
+    return String.prototype.split.call(null, pattern, limit);
+};
+v15();
+("abcde").split(pattern, limit);
+pattern[Symbol.split] = "dumdidum";
+const v28 = () => {
+    return ("abcde").split(pattern, limit);
+};
+v28();
+pattern[Symbol.split] = null;
+["a","b","c","d","e"];
+("abcde").split(pattern);
+RegExp.prototype[Symbol.split].name;
+
+FuzzIL program written to corpus/string-split.fzil

@@ -1,0 +1,21 @@
+v0 <- CreateArray []
+v1 <- CallMethod v0, 'entries', []
+v2 <- GetProperty v1, '__proto__'
+v3 <- GetProperty v2, '__proto__'
+v4 <- CreateNamedVariable 'Symbol', 'none'
+v5 <- GetProperty v4, 'iterator'
+v6 <- GetComputedProperty v3, v5
+v7 <- CreateNamedVariable 'iterator', 'var', v6
+v8 <- LoadInteger '1'
+v9 <- LoadFloat '1e-300'
+v10 <- UnaryOperation '-', v9
+v11 <- CallFunction v7, [v10]
+v12 <- BinaryOperation v8, '/', v11
+v13 <- CreateNamedVariable 'print', 'none'
+v14 <- CallFunction v13, [v12]
+
+
+var iterator = ([]).entries().__proto__.__proto__[Symbol.iterator];
+print(1 / iterator(-1e-300));
+
+FuzzIL program written to corpus/regress-650172.fzil

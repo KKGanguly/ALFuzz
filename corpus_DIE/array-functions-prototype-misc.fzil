@@ -1,0 +1,1064 @@
+v0 <- LoadInteger '40000'
+v1 <- CreateNamedVariable 'LARGE', 'var', v0
+v2 <- LoadInteger '40000'
+v3 <- CreateNamedVariable 'VERYLARGE', 'var', v2
+v4 <- LoadInteger '400'
+v5 <- BinaryOperation v1, '/', v4
+v6 <- CreateNamedVariable 'fourhundredth', 'var', v5
+v7 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginForLoopInitializer
+    v8 <- LoadInteger '0'
+BeginForLoopCondition -> v9
+    v10 <- LoadInteger '1'
+    v11 <- Compare v9, '<=', v10
+BeginForLoopAfterthought v11 -> v12
+    v13 <- UnaryOperation v12, '++'
+BeginForLoopBody -> v14
+    v15 <- LoadInteger '0'
+    v16 <- LoadInteger '140'
+    v17 <- LoadInteger '20000'
+    v18 <- CreateArray [v15, v16, v17]
+    v19 <- CreateNamedVariable 'poses', 'var', v18
+    v20 <- LoadUndefined
+    v21 <- CreateNamedVariable 'the_prototype', 'var', v20
+    v22 <- LoadUndefined
+    v23 <- CreateNamedVariable 'new_function', 'var', v22
+    v24 <- LoadUndefined
+    v25 <- CreateNamedVariable 'push_function', 'var', v24
+    v26 <- LoadUndefined
+    v27 <- CreateNamedVariable 'concat_function', 'var', v26
+    v28 <- LoadUndefined
+    v29 <- CreateNamedVariable 'slice_function', 'var', v28
+    v30 <- LoadUndefined
+    v31 <- CreateNamedVariable 'splice_function', 'var', v30
+    v32 <- LoadUndefined
+    v33 <- CreateNamedVariable 'splice_function_2', 'var', v32
+    v34 <- LoadUndefined
+    v35 <- CreateNamedVariable 'unshift_function', 'var', v34
+    v36 <- LoadUndefined
+    v37 <- CreateNamedVariable 'unshift_function_2', 'var', v36
+    v38 <- LoadUndefined
+    v39 <- CreateNamedVariable 'shift_function', 'var', v38
+    BeginIf v14
+        v40 <- BeginPlainFunction -> v41
+            v42 <- CreateNamedVariable 'Array', 'none'
+            v43 <- Construct v42, [v41]
+            Return v43
+        EndPlainFunction
+        Reassign v23, v40
+        v44 <- CreateNamedVariable 'Array', 'none'
+        v45 <- GetProperty v44, 'prototype'
+        Reassign v21, v45
+        v46 <- BeginPlainFunction -> v47, v48
+            v49 <- CallMethod v47, 'push', [v48]
+            Return v49
+        EndPlainFunction
+        Reassign v25, v46
+        v50 <- BeginPlainFunction -> v51, v52
+            v53 <- CallMethod v51, 'concat', [v52]
+            Return v53
+        EndPlainFunction
+        Reassign v27, v50
+        v54 <- BeginPlainFunction -> v55, v56, v57
+            v58 <- CallMethod v55, 'slice', [v56, v57]
+            Return v58
+        EndPlainFunction
+        Reassign v29, v54
+        v59 <- BeginPlainFunction -> v60, v61, v62
+            v63 <- CallMethod v60, 'splice', [v61, v62]
+            Return v63
+        EndPlainFunction
+        Reassign v31, v59
+        v64 <- BeginPlainFunction -> v65, v66, v67, v68
+            v69 <- CallMethod v65, 'splice', [v66, v67, v68]
+            Return v69
+        EndPlainFunction
+        Reassign v33, v64
+        v70 <- BeginPlainFunction -> v71, v72
+            v73 <- CallMethod v71, 'unshift', [v72]
+            Return v73
+        EndPlainFunction
+        Reassign v35, v70
+        v74 <- BeginPlainFunction -> v75, v76, v77
+            v78 <- CallMethod v75, 'unshift', [v76, v77]
+            Return v78
+        EndPlainFunction
+        Reassign v37, v74
+        v79 <- BeginPlainFunction -> v80
+            v81 <- CallMethod v80, 'shift', []
+            Return v81
+        EndPlainFunction
+        Reassign v39, v79
+    BeginElse
+        v82 <- CallMethod v19, 'pop', []
+        v83 <- BeginPlainFunction -> v84
+            v85 <- Construct v7, []
+            v86 <- CreateNamedVariable 'obj', 'var', v85
+            SetProperty v86, 'length', v84
+            Return v86
+        EndPlainFunction
+        Reassign v23, v83
+        v87 <- GetProperty v7, 'prototype'
+        Reassign v21, v87
+        v88 <- BeginPlainFunction -> v89, v90
+            v91 <- GetProperty v89, 'length'
+            SetComputedProperty v89, v91, v90
+            v92 <- GetProperty v89, 'length'
+            v93 <- UnaryOperation v92, '++'
+        EndPlainFunction
+        Reassign v25, v88
+        v94 <- BeginPlainFunction -> v95, v96
+            v97 <- CreateNamedVariable 'Array', 'none'
+            v98 <- GetProperty v97, 'prototype'
+            v99 <- GetProperty v98, 'concat'
+            v100 <- CallMethod v99, 'call', [v95, v96]
+            Return v100
+        EndPlainFunction
+        Reassign v27, v94
+        v101 <- BeginPlainFunction -> v102, v103, v104
+            v105 <- CreateNamedVariable 'Array', 'none'
+            v106 <- GetProperty v105, 'prototype'
+            v107 <- GetProperty v106, 'slice'
+            v108 <- CallMethod v107, 'call', [v102, v103, v104]
+            Return v108
+        EndPlainFunction
+        Reassign v29, v101
+        v109 <- BeginPlainFunction -> v110, v111, v112
+            v113 <- CreateNamedVariable 'Array', 'none'
+            v114 <- GetProperty v113, 'prototype'
+            v115 <- GetProperty v114, 'splice'
+            v116 <- CallMethod v115, 'call', [v110, v111, v112]
+            Return v116
+        EndPlainFunction
+        Reassign v31, v109
+        v117 <- BeginPlainFunction -> v118, v119, v120, v121
+            v122 <- CreateNamedVariable 'Array', 'none'
+            v123 <- GetProperty v122, 'prototype'
+            v124 <- GetProperty v123, 'splice'
+            v125 <- CallMethod v124, 'call', [v118, v119, v120, v121]
+            Return v125
+        EndPlainFunction
+        Reassign v33, v117
+        v126 <- BeginPlainFunction -> v127, v128
+            v129 <- CreateNamedVariable 'Array', 'none'
+            v130 <- GetProperty v129, 'prototype'
+            v131 <- GetProperty v130, 'unshift'
+            v132 <- CallMethod v131, 'call', [v127, v128]
+            Return v132
+        EndPlainFunction
+        Reassign v35, v126
+        v133 <- BeginPlainFunction -> v134, v135, v136
+            v137 <- CreateNamedVariable 'Array', 'none'
+            v138 <- GetProperty v137, 'prototype'
+            v139 <- GetProperty v138, 'unshift'
+            v140 <- CallMethod v139, 'call', [v134, v135, v136]
+            Return v140
+        EndPlainFunction
+        Reassign v37, v133
+        v141 <- BeginPlainFunction -> v142
+            v143 <- CreateNamedVariable 'Array', 'none'
+            v144 <- GetProperty v143, 'prototype'
+            v145 <- GetProperty v144, 'shift'
+            v146 <- CallMethod v145, 'call', [v142]
+            Return v146
+        EndPlainFunction
+        Reassign v39, v141
+    EndIf
+    BeginForLoopInitializer
+        v147 <- LoadInteger '0'
+    BeginForLoopCondition -> v148
+        v149 <- GetProperty v19, 'length'
+        v150 <- Compare v148, '<', v149
+    BeginForLoopAfterthought v150 -> v151
+        v152 <- UnaryOperation v151, '++'
+    BeginForLoopBody -> v153
+        v154 <- GetComputedProperty v19, v153
+        v155 <- CreateNamedVariable 'pos', 'var', v154
+        v156 <- LoadInteger '100'
+        v157 <- Compare v155, '>', v156
+        BeginIf v157
+            v158 <- CallFunction v23, [v155]
+            v159 <- CreateNamedVariable 'a', 'var', v158
+            v160 <- GetProperty v159, 'length'
+            v161 <- LoadString 'foo'
+            v162 <- CallFunction v25, [v159, v161]
+            v163 <- LoadInteger '1'
+            v164 <- BinaryOperation v155, '+', v163
+            v165 <- GetProperty v159, 'length'
+            v166 <- LoadString 'bar'
+            v167 <- CreateArray [v166]
+            v168 <- CreateNamedVariable 'b', 'var', v167
+            v169 <- LoadInteger '10'
+            v170 <- LoadInteger '20'
+            v171 <- BinaryOperation v155, '-', v170
+            v172 <- CallFunction v31, [v159, v169, v171]
+            v173 <- CreateNamedVariable 'c', 'var', v172
+            v174 <- LoadInteger '20'
+            v175 <- BinaryOperation v155, '-', v174
+            v176 <- GetProperty v173, 'length'
+            v177 <- LoadInteger '21'
+            v178 <- GetProperty v159, 'length'
+        EndIf
+        v179 <- LoadString 'baz'
+        v180 <- LoadString ''
+        v181 <- LoadInteger '1'
+        v182 <- BinaryOperation v155, '+', v181
+        v183 <- BinaryOperation v180, '+', v182
+        SetComputedProperty v21, v183, v179
+        BeginIf v14
+            v184 <- LoadString 'zero'
+            v185 <- LoadUndefined
+            v186 <- LoadString 'two'
+            v187 <- CreateArray [v184, v185, v186]
+            v188 <- CreateNamedVariable 'a', 'var', v187
+            v189 <- LoadInteger '0'
+            v190 <- Compare v155, '==', v189
+            BeginIf v190
+                v191 <- LoadString 'zero,baz,two'
+                v192 <- LoadString ','
+                v193 <- CallMethod v188, 'join', [v192]
+            EndIf
+            v194 <- CallFunction v23, [v155]
+            v195 <- CreateNamedVariable 'a', 'var', v194
+            v196 <- LoadString 'con'
+            v197 <- CallFunction v25, [v195, v196]
+            v198 <- LoadString 'con'
+            v199 <- GetComputedProperty v195, v155
+            v200 <- LoadInteger '1'
+            v201 <- BinaryOperation v155, '+', v200
+            v202 <- GetProperty v195, 'length'
+            v203 <- LoadInteger '0'
+            v204 <- CallFunction v23, [v203]
+            v205 <- CreateNamedVariable 'b', 'var', v204
+            v206 <- LoadString 'cat'
+            v207 <- CallFunction v25, [v205, v206]
+            v208 <- LoadString 'cat'
+            v209 <- GetElement v205, '0'
+            v210 <- CallFunction v27, [v195, v205]
+            v211 <- CreateNamedVariable 'ab', 'var', v210
+            v212 <- LoadString 'con'
+            v213 <- GetComputedProperty v211, v155
+            v214 <- LoadInteger '2'
+            v215 <- BinaryOperation v155, '+', v214
+            v216 <- GetProperty v211, 'length'
+            v217 <- LoadString 'cat'
+            v218 <- LoadInteger '1'
+            v219 <- BinaryOperation v155, '+', v218
+            v220 <- GetComputedProperty v211, v219
+            v221 <- CallFunction v27, [v205, v195]
+            v222 <- CreateNamedVariable 'ba', 'var', v221
+            v223 <- LoadString 'con'
+            v224 <- LoadInteger '1'
+            v225 <- BinaryOperation v155, '+', v224
+            v226 <- GetComputedProperty v222, v225
+            v227 <- LoadInteger '2'
+            v228 <- BinaryOperation v155, '+', v227
+            v229 <- GetProperty v222, 'length'
+            v230 <- LoadString 'cat'
+            v231 <- GetElement v222, '0'
+            v232 <- LoadString ''
+            v233 <- CallMethod v195, 'join', [v232]
+            v234 <- CreateNamedVariable 'join', 'var', v233
+            v235 <- LoadString 'con'
+            v236 <- LoadString ''
+            v237 <- CallMethod v205, 'join', [v236]
+            Reassign v234, v237
+            v238 <- LoadString 'cat'
+            v239 <- LoadString ''
+            v240 <- CallMethod v211, 'join', [v239]
+            Reassign v234, v240
+            v241 <- LoadString 'concat'
+            v242 <- LoadString ''
+            v243 <- CallMethod v222, 'join', [v242]
+            Reassign v234, v243
+            v244 <- LoadString 'catcon'
+        EndIf
+        v245 <- CallFunction v23, [v155]
+        v246 <- CreateNamedVariable 'a', 'none'
+        Reassign v246, v245
+        v247 <- CreateNamedVariable 'a', 'none'
+        v248 <- LoadString 'zero'
+        v249 <- CallFunction v25, [v247, v248]
+        v250 <- LoadInteger '0'
+        v251 <- Void_ v250
+        v252 <- CallFunction v25, [v247, v251]
+        v253 <- LoadString 'two'
+        v254 <- CallFunction v25, [v247, v253]
+        v255 <- LoadInteger '1'
+        v256 <- CallFunction v31, [v247, v155, v255]
+        v257 <- CreateNamedVariable 'zero', 'var', v256
+        v258 <- LoadString 'undefined'
+        v259 <- GetComputedProperty v247, v155
+        v260 <- TypeOf v259
+        v261 <- LoadString 'two'
+        v262 <- LoadInteger '1'
+        v263 <- BinaryOperation v155, '+', v262
+        v264 <- GetComputedProperty v247, v263
+        v265 <- LoadString 'pos1:'
+        v266 <- BinaryOperation v265, '+', v155
+        v267 <- LoadInteger '2'
+        v268 <- BinaryOperation v155, '+', v267
+        v269 <- GetProperty v247, 'length'
+        v270 <- LoadString 'a length'
+        v271 <- LoadInteger '1'
+        v272 <- GetProperty v257, 'length'
+        v273 <- LoadString 'zero length'
+        v274 <- LoadString 'zero'
+        v275 <- GetElement v257, '0'
+        v276 <- CallFunction v23, [v155]
+        Reassign v247, v276
+        v277 <- LoadString 'zero'
+        v278 <- CallFunction v25, [v247, v277]
+        v279 <- LoadInteger '0'
+        v280 <- Void_ v279
+        v281 <- CallFunction v25, [v247, v280]
+        v282 <- LoadString 'two'
+        v283 <- CallFunction v25, [v247, v282]
+        v284 <- LoadInteger '0'
+        v285 <- LoadString 'minus1'
+        v286 <- CallFunction v33, [v247, v155, v284, v285]
+        v287 <- CreateNamedVariable 'nothing', 'var', v286
+        v288 <- LoadString 'minus1'
+        v289 <- GetComputedProperty v247, v155
+        v290 <- LoadString 'zero'
+        v291 <- LoadInteger '1'
+        v292 <- BinaryOperation v155, '+', v291
+        v293 <- GetComputedProperty v247, v292
+        v294 <- LoadString 'undefined'
+        v295 <- LoadInteger '2'
+        v296 <- BinaryOperation v155, '+', v295
+        v297 <- GetComputedProperty v247, v296
+        v298 <- TypeOf v297
+        v299 <- LoadString 'toot!'
+        v300 <- LoadString 'two'
+        v301 <- LoadInteger '3'
+        v302 <- BinaryOperation v155, '+', v301
+        v303 <- GetComputedProperty v247, v302
+        v304 <- LoadString 'pos3'
+        v305 <- LoadInteger '4'
+        v306 <- BinaryOperation v155, '+', v305
+        v307 <- GetProperty v247, 'length'
+        v308 <- LoadInteger '1'
+        v309 <- GetProperty v257, 'length'
+        v310 <- LoadString 'zero'
+        v311 <- GetElement v257, '0'
+        v312 <- CallFunction v23, [v155]
+        Reassign v247, v312
+        v313 <- LoadString 'zero'
+        v314 <- CallFunction v25, [v247, v313]
+        v315 <- LoadInteger '0'
+        v316 <- Void_ v315
+        v317 <- CallFunction v25, [v247, v316]
+        v318 <- LoadString 'two'
+        v319 <- CallFunction v25, [v247, v318]
+        v320 <- LoadInteger '1'
+        v321 <- BinaryOperation v155, '+', v320
+        v322 <- LoadInteger '1'
+        v323 <- CallFunction v31, [v247, v321, v322]
+        v324 <- CreateNamedVariable 'one', 'var', v323
+        v325 <- LoadString ''
+        v326 <- LoadString ','
+        v327 <- CallMethod v324, 'join', [v326]
+        v328 <- LoadInteger '2'
+        v329 <- BinaryOperation v155, '+', v328
+        v330 <- GetProperty v247, 'length'
+        v331 <- LoadString 'zero'
+        v332 <- GetComputedProperty v247, v155
+        v333 <- LoadString 'two'
+        v334 <- LoadInteger '1'
+        v335 <- BinaryOperation v155, '+', v334
+        v336 <- GetComputedProperty v247, v335
+        v337 <- LoadUndefined
+        v338 <- LoadInteger '1'
+        v339 <- BinaryOperation v155, '+', v338
+        SetComputedProperty v21, v339, v337
+        v340 <- CallFunction v23, [v155]
+        v341 <- CreateNamedVariable 'a', 'var', v340
+        v342 <- LoadString 'foo'
+        v343 <- CallFunction v25, [v341, v342]
+        v344 <- LoadString 'foo'
+        v345 <- GetComputedProperty v341, v155
+        v346 <- LoadInteger '1'
+        v347 <- BinaryOperation v155, '+', v346
+        v348 <- GetProperty v341, 'length'
+        v349 <- LoadString 'bar'
+        v350 <- CallFunction v35, [v341, v349]
+        v351 <- LoadString 'foo'
+        v352 <- LoadInteger '1'
+        v353 <- BinaryOperation v155, '+', v352
+        v354 <- GetComputedProperty v341, v353
+        v355 <- LoadInteger '2'
+        v356 <- BinaryOperation v155, '+', v355
+        v357 <- GetProperty v341, 'length'
+        v358 <- LoadString 'bar'
+        v359 <- GetElement v341, '0'
+        v360 <- LoadString 'baz'
+        v361 <- LoadString 'boo'
+        v362 <- CallFunction v37, [v341, v360, v361]
+        v363 <- LoadString 'foo'
+        v364 <- LoadInteger '3'
+        v365 <- BinaryOperation v155, '+', v364
+        v366 <- GetComputedProperty v341, v365
+        v367 <- LoadInteger '4'
+        v368 <- BinaryOperation v155, '+', v367
+        v369 <- GetProperty v341, 'length'
+        v370 <- LoadString 'baz'
+        v371 <- GetElement v341, '0'
+        v372 <- LoadString 'boo'
+        v373 <- GetElement v341, '1'
+        v374 <- LoadString 'bar'
+        v375 <- GetElement v341, '2'
+        v376 <- Compare v155, '<', v3
+        BeginIf v376
+            v377 <- CallFunction v39, [v341]
+            v378 <- CreateNamedVariable 'baz', 'var', v377
+            v379 <- LoadString 'baz'
+            v380 <- LoadString 'boo'
+            v381 <- GetElement v341, '0'
+            v382 <- LoadInteger '3'
+            v383 <- BinaryOperation v155, '+', v382
+            v384 <- GetProperty v341, 'length'
+            v385 <- LoadString 'foo'
+            v386 <- LoadInteger '2'
+            v387 <- BinaryOperation v155, '+', v386
+            v388 <- GetComputedProperty v341, v387
+            v389 <- LoadInteger '1'
+            v390 <- LoadInteger '0'
+            v391 <- CallFunction v29, [v341, v389, v390]
+            v392 <- CreateNamedVariable 'bar', 'var', v391
+            v393 <- LoadInteger '1'
+            v394 <- LoadInteger '2'
+            v395 <- CallFunction v29, [v341, v393, v394]
+            Reassign v392, v395
+            v396 <- LoadString 'bar'
+            v397 <- GetElement v392, '0'
+            v398 <- LoadInteger '1'
+            v399 <- GetProperty v392, 'length'
+            v400 <- LoadString 'bar'
+            v401 <- GetElement v341, '1'
+        EndIf
+    EndForLoop
+EndForLoop
+v402 <- CreateNamedVariable 'Array', 'none'
+v403 <- LoadInteger '10'
+v404 <- BinaryOperation v1, '+', v403
+v405 <- Construct v402, [v404]
+v406 <- CreateNamedVariable 'a', 'var', v405
+BeginForLoopInitializer
+    v407 <- LoadInteger '0'
+BeginForLoopCondition -> v408
+    v409 <- GetProperty v406, 'length'
+    v410 <- Compare v408, '<', v409
+BeginForLoopAfterthought v410 -> v411
+    v412 <- LoadInteger '1000'
+    Update v411, '+', v412
+BeginForLoopBody -> v413
+    SetComputedProperty v406, v413, v413
+EndForLoop
+BeginForLoopInitializer
+    v414 <- LoadInteger '0'
+BeginForLoopCondition -> v415
+    v416 <- LoadInteger '10'
+    v417 <- Compare v415, '<', v416
+BeginForLoopAfterthought v417 -> v418
+    v419 <- UnaryOperation v418, '++'
+BeginForLoopBody -> v420
+    v421 <- LoadInteger '5'
+    v422 <- CallMethod v406, 'splice', [v1, v421]
+    v423 <- CreateNamedVariable 'top', 'var', v422
+    v424 <- LoadInteger '5'
+    v425 <- GetProperty v423, 'length'
+    v426 <- GetElement v423, '0'
+    v427 <- LoadString 'undefined'
+    v428 <- GetElement v423, '1'
+    v429 <- TypeOf v428
+    v430 <- LoadInteger '5'
+    v431 <- BinaryOperation v1, '+', v430
+    v432 <- GetProperty v406, 'length'
+    v433 <- LoadInteger '0'
+    v434 <- CallMethod v406, 'splice', [v1, v433, v1]
+    v435 <- LoadInteger '10'
+    v436 <- BinaryOperation v1, '+', v435
+    SetProperty v406, 'length', v436
+EndForLoop
+v437 <- LoadInteger '10'
+v438 <- BinaryOperation v1, '+', v437
+v439 <- Construct v402, [v438]
+v440 <- CreateNamedVariable 'a', 'var', v439
+BeginForLoopInitializer
+    v441 <- LoadInteger '0'
+BeginForLoopCondition -> v442
+    v443 <- GetProperty v440, 'length'
+    v444 <- Compare v442, '<', v443
+BeginForLoopAfterthought v444 -> v445
+    Update v445, '+', v6
+BeginForLoopBody -> v446
+    SetComputedProperty v440, v446, v446
+EndForLoop
+BeginForLoopInitializer
+    v447 <- LoadInteger '0'
+BeginForLoopCondition -> v448
+    v449 <- LoadInteger '10'
+    v450 <- Compare v448, '<', v449
+BeginForLoopAfterthought v450 -> v451
+    v452 <- UnaryOperation v451, '++'
+BeginForLoopBody -> v453
+    v454 <- LoadInteger '1'
+    v455 <- BinaryOperation v1, '>>', v454
+    v456 <- LoadInteger '5'
+    v457 <- CallMethod v440, 'splice', [v455, v456]
+    v458 <- CreateNamedVariable 'top', 'var', v457
+    v459 <- LoadInteger '5'
+    v460 <- GetProperty v458, 'length'
+    v461 <- LoadInteger '1'
+    v462 <- BinaryOperation v1, '>>', v461
+    v463 <- GetElement v458, '0'
+    v464 <- LoadString 'undefined'
+    v465 <- GetElement v458, '1'
+    v466 <- TypeOf v465
+    v467 <- LoadInteger '5'
+    v468 <- BinaryOperation v1, '+', v467
+    v469 <- GetProperty v440, 'length'
+    v470 <- LoadInteger '1'
+    v471 <- BinaryOperation v1, '>>', v470
+    v472 <- LoadInteger '0'
+    v473 <- LoadInteger '1'
+    v474 <- BinaryOperation v1, '>>', v473
+    v475 <- LoadInteger '0'
+    v476 <- Void_ v475
+    v477 <- LoadInteger '0'
+    v478 <- Void_ v477
+    v479 <- LoadInteger '0'
+    v480 <- Void_ v479
+    v481 <- LoadInteger '0'
+    v482 <- Void_ v481
+    v483 <- CallMethod v440, 'splice', [v471, v472, v474, v476, v478, v480, v482]
+EndForLoop
+v484 <- LoadInteger '0'
+v485 <- CreateArray [v484]
+v486 <- CreateNamedVariable 'arr', 'none'
+Reassign v486, v485
+v487 <- LoadInteger '2'
+v488 <- CreateNamedVariable 'arr', 'none'
+SetProperty v488, 'length', v487
+v489 <- LoadInteger '1'
+v490 <- GetProperty v402, 'prototype'
+SetElement v490, '1', v489
+v491 <- LoadInteger '1'
+v492 <- CallMethod v488, 'pop', []
+v493 <- LoadInteger '0'
+v494 <- CallMethod v488, 'pop', []
+v495 <- LoadUndefined
+v496 <- GetProperty v402, 'prototype'
+SetElement v496, '1', v495
+v497 <- CreateArray []
+v498 <- LoadInteger '0'
+v499 <- LoadInteger '1'
+v500 <- UnaryOperation '-', v499
+v501 <- LoadInteger '5'
+v502 <- BinaryOperation v500, '%', v501
+v503 <- UnaryOperation '-', v502
+v504 <- LoadInteger '1'
+v505 <- CreateArray [v504]
+v506 <- CallMethod v505, 'splice', [v498, v503]
+v507 <- GetProperty v402, 'prototype'
+v508 <- GetProperty v507, 'push'
+v509 <- CallMethod v508, 'apply', [v497, v506]
+v510 <- LoadUndefined
+v511 <- CreateNamedVariable 'receiver', 'var', v510
+v512 <- LoadString 'a string'
+Reassign v511, v512
+v513 <- BeginPlainFunction -> 
+    v514 <- GetProperty v402, 'prototype'
+    v515 <- GetProperty v514, 'push'
+    v516 <- CallMethod v515, 'call', [v511]
+EndPlainFunction
+v517 <- CallFunction v513, []
+v518 <- LoadInteger '0'
+Reassign v511, v518
+v519 <- LoadUndefined
+v520 <- GetProperty v511, 'length'
+v521 <- LoadInteger '0'
+v522 <- GetProperty v402, 'prototype'
+v523 <- GetProperty v522, 'push'
+v524 <- CallMethod v523, 'call', [v511]
+v525 <- LoadInteger '1'
+v526 <- LoadString 'first'
+v527 <- GetProperty v402, 'prototype'
+v528 <- GetProperty v527, 'push'
+v529 <- CallMethod v528, 'call', [v511, v526]
+v530 <- LoadUndefined
+v531 <- GetProperty v511, 'length'
+BeginObjectLiteral
+v532 <- EndObjectLiteral
+Reassign v511, v532
+v533 <- LoadUndefined
+v534 <- GetProperty v511, 'length'
+v535 <- LoadInteger '0'
+v536 <- GetProperty v402, 'prototype'
+v537 <- GetProperty v536, 'push'
+v538 <- CallMethod v537, 'call', [v511]
+v539 <- LoadInteger '0'
+v540 <- GetProperty v402, 'prototype'
+v541 <- GetProperty v540, 'push'
+v542 <- CallMethod v541, 'call', [v511]
+v543 <- LoadInteger '0'
+v544 <- GetProperty v511, 'length'
+v545 <- LoadInteger '1'
+v546 <- LoadString 'first'
+v547 <- GetProperty v402, 'prototype'
+v548 <- GetProperty v547, 'push'
+v549 <- CallMethod v548, 'call', [v511, v546]
+v550 <- LoadInteger '1'
+v551 <- GetProperty v511, 'length'
+v552 <- LoadString 'first'
+v553 <- GetElement v511, '0'
+v554 <- LoadInteger '2'
+v555 <- LoadString 'second'
+v556 <- GetProperty v402, 'prototype'
+v557 <- GetProperty v556, 'push'
+v558 <- CallMethod v557, 'call', [v511, v555]
+v559 <- LoadInteger '2'
+v560 <- GetProperty v511, 'length'
+v561 <- LoadString 'first'
+v562 <- GetElement v511, '0'
+v563 <- LoadString 'second'
+v564 <- GetElement v511, '1'
+v565 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v565
+v566 <- EndObjectLiteral
+Reassign v511, v566
+v567 <- LoadInteger '10'
+v568 <- GetProperty v402, 'prototype'
+v569 <- GetProperty v568, 'push'
+v570 <- CallMethod v569, 'call', [v511]
+v571 <- LoadInteger '10'
+v572 <- GetProperty v511, 'length'
+v573 <- LoadInteger '11'
+v574 <- LoadString 'first'
+v575 <- GetProperty v402, 'prototype'
+v576 <- GetProperty v575, 'push'
+v577 <- CallMethod v576, 'call', [v511, v574]
+v578 <- LoadInteger '11'
+v579 <- GetProperty v511, 'length'
+v580 <- LoadString 'first'
+v581 <- GetElement v511, '10'
+v582 <- LoadInteger '13'
+v583 <- LoadString 'second'
+v584 <- LoadString 'third'
+v585 <- GetProperty v402, 'prototype'
+v586 <- GetProperty v585, 'push'
+v587 <- CallMethod v586, 'call', [v511, v583, v584]
+v588 <- LoadInteger '13'
+v589 <- GetProperty v511, 'length'
+v590 <- LoadString 'first'
+v591 <- GetElement v511, '10'
+v592 <- LoadString 'second'
+v593 <- GetElement v511, '11'
+v594 <- LoadString 'third'
+v595 <- GetElement v511, '12'
+BeginObjectLiteral
+    BeginObjectLiteralGetter `length` -> v596
+        v597 <- LoadInteger '10'
+        Return v597
+    EndObjectLiteralGetter
+    BeginObjectLiteralSetter `length` -> v598, v599
+    EndObjectLiteralSetter
+v600 <- EndObjectLiteral
+Reassign v511, v600
+v601 <- LoadInteger '10'
+v602 <- GetProperty v402, 'prototype'
+v603 <- GetProperty v602, 'push'
+v604 <- CallMethod v603, 'call', [v511]
+v605 <- LoadInteger '10'
+v606 <- GetProperty v511, 'length'
+v607 <- LoadInteger '11'
+v608 <- LoadString 'first'
+v609 <- GetProperty v402, 'prototype'
+v610 <- GetProperty v609, 'push'
+v611 <- CallMethod v610, 'call', [v511, v608]
+v612 <- LoadInteger '10'
+v613 <- GetProperty v511, 'length'
+v614 <- LoadString 'first'
+v615 <- GetElement v511, '10'
+v616 <- LoadInteger '12'
+v617 <- LoadString 'second'
+v618 <- LoadString 'third'
+v619 <- GetProperty v402, 'prototype'
+v620 <- GetProperty v619, 'push'
+v621 <- CallMethod v620, 'call', [v511, v617, v618]
+v622 <- LoadInteger '10'
+v623 <- GetProperty v511, 'length'
+v624 <- LoadString 'second'
+v625 <- GetElement v511, '10'
+v626 <- LoadString 'third'
+v627 <- GetElement v511, '11'
+BeginObjectLiteral
+    BeginObjectLiteralGetter `length` -> v628
+        v629 <- LoadInteger '10'
+        Return v629
+    EndObjectLiteralGetter
+v630 <- EndObjectLiteral
+Reassign v511, v630
+v631 <- BeginPlainFunction -> 
+    v632 <- GetProperty v402, 'prototype'
+    v633 <- GetProperty v632, 'push'
+    v634 <- CallMethod v633, 'call', [v511]
+EndPlainFunction
+v635 <- CallFunction v631, []
+BeginObjectLiteral
+    BeginObjectLiteralSetter `length` -> v636, v637
+    EndObjectLiteralSetter
+v638 <- EndObjectLiteral
+Reassign v511, v638
+v639 <- LoadInteger '0'
+v640 <- GetProperty v402, 'prototype'
+v641 <- GetProperty v640, 'push'
+v642 <- CallMethod v641, 'call', [v511]
+v643 <- LoadUndefined
+v644 <- GetProperty v511, 'length'
+v645 <- LoadInteger '1'
+v646 <- LoadString 'first'
+v647 <- GetProperty v402, 'prototype'
+v648 <- GetProperty v647, 'push'
+v649 <- CallMethod v648, 'call', [v511, v646]
+v650 <- LoadUndefined
+v651 <- GetProperty v511, 'length'
+v652 <- LoadInteger '2'
+v653 <- LoadString 'third'
+v654 <- LoadString 'second'
+v655 <- GetProperty v402, 'prototype'
+v656 <- GetProperty v655, 'push'
+v657 <- CallMethod v656, 'call', [v511, v653, v654]
+v658 <- LoadUndefined
+v659 <- GetProperty v511, 'length'
+
+
+var LARGE = 40000;
+var VERYLARGE = 40000;
+var fourhundredth = LARGE / 400;
+function PseudoArray() {
+}
+for (let i9 = 0; i9 <= 1; i9++) {
+    var poses = [0,140,20000];
+    var the_prototype;
+    var new_function;
+    var push_function;
+    var concat_function;
+    var slice_function;
+    var splice_function;
+    var splice_function_2;
+    var unshift_function;
+    var unshift_function_2;
+    var shift_function;
+    if (i9) {
+        function f40(a41) {
+            const v43 = new Array(a41);
+            return v43;
+        }
+        new_function = f40;
+        the_prototype = Array.prototype;
+        function f46(a47, a48) {
+            return a47.push(a48);
+        }
+        push_function = f46;
+        function f50(a51, a52) {
+            return a51.concat(a52);
+        }
+        concat_function = f50;
+        function f54(a55, a56, a57) {
+            return a55.slice(a56, a57);
+        }
+        slice_function = f54;
+        function f59(a60, a61, a62) {
+            return a60.splice(a61, a62);
+        }
+        splice_function = f59;
+        function f64(a65, a66, a67, a68) {
+            return a65.splice(a66, a67, a68);
+        }
+        splice_function_2 = f64;
+        function f70(a71, a72) {
+            return a71.unshift(a72);
+        }
+        unshift_function = f70;
+        function f74(a75, a76, a77) {
+            return a75.unshift(a76, a77);
+        }
+        unshift_function_2 = f74;
+        function f79(a80) {
+            return a80.shift();
+        }
+        shift_function = f79;
+    } else {
+        poses.pop();
+        function f83(a84) {
+            const v85 = new PseudoArray();
+            var obj = v85;
+            obj.length = a84;
+            return obj;
+        }
+        new_function = f83;
+        the_prototype = PseudoArray.prototype;
+        function f88(a89, a90) {
+            a89[a89.length] = a90;
+            let v92 = a89.length;
+            v92++;
+        }
+        push_function = f88;
+        function f94(a95, a96) {
+            return Array.prototype.concat.call(a95, a96);
+        }
+        concat_function = f94;
+        function f101(a102, a103, a104) {
+            return Array.prototype.slice.call(a102, a103, a104);
+        }
+        slice_function = f101;
+        function f109(a110, a111, a112) {
+            return Array.prototype.splice.call(a110, a111, a112);
+        }
+        splice_function = f109;
+        function f117(a118, a119, a120, a121) {
+            return Array.prototype.splice.call(a118, a119, a120, a121);
+        }
+        splice_function_2 = f117;
+        function f126(a127, a128) {
+            return Array.prototype.unshift.call(a127, a128);
+        }
+        unshift_function = f126;
+        function f133(a134, a135, a136) {
+            return Array.prototype.unshift.call(a134, a135, a136);
+        }
+        unshift_function_2 = f133;
+        function f141(a142) {
+            return Array.prototype.shift.call(a142);
+        }
+        shift_function = f141;
+    }
+    for (let i148 = 0; i148 < poses.length; i148++) {
+        var pos = poses[i148];
+        if (pos > 100) {
+            var a = new_function(pos);
+            a.length;
+            push_function(a, "foo");
+            pos + 1;
+            a.length;
+            var b = ["bar"];
+            var c = splice_function(a, 10, pos - 20);
+            pos - 20;
+            c.length;
+            a.length;
+        }
+        the_prototype["" + (pos + 1)] = "baz";
+        if (i9) {
+            var a = ["zero",,"two"];
+            if (pos == 0) {
+                a.join(",");
+            }
+            var a = new_function(pos);
+            push_function(a, "con");
+            a[pos];
+            pos + 1;
+            a.length;
+            var b = new_function(0);
+            push_function(b, "cat");
+            b[0];
+            var ab = concat_function(a, b);
+            ab[pos];
+            pos + 2;
+            ab.length;
+            ab[pos + 1];
+            var ba = concat_function(b, a);
+            ba[pos + 1];
+            pos + 2;
+            ba.length;
+            ba[0];
+            var join = a.join("");
+            join = b.join("");
+            join = ab.join("");
+            join = ba.join("");
+        }
+        a = new_function(pos);
+        push_function(a, "zero");
+        push_function(a, void 0);
+        push_function(a, "two");
+        var zero = splice_function(a, pos, 1);
+        typeof a[pos];
+        a[pos + 1];
+        "pos1:" + pos;
+        pos + 2;
+        a.length;
+        zero.length;
+        zero[0];
+        a = new_function(pos);
+        push_function(a, "zero");
+        push_function(a, void 0);
+        push_function(a, "two");
+        var nothing = splice_function_2(a, pos, 0, "minus1");
+        a[pos];
+        a[pos + 1];
+        typeof a[pos + 2];
+        a[pos + 3];
+        pos + 4;
+        a.length;
+        zero.length;
+        zero[0];
+        a = new_function(pos);
+        push_function(a, "zero");
+        push_function(a, void 0);
+        push_function(a, "two");
+        var one = splice_function(a, pos + 1, 1);
+        one.join(",");
+        pos + 2;
+        a.length;
+        a[pos];
+        a[pos + 1];
+        the_prototype[pos + 1] = undefined;
+        var a = new_function(pos);
+        push_function(a, "foo");
+        a[pos];
+        pos + 1;
+        a.length;
+        unshift_function(a, "bar");
+        a[pos + 1];
+        pos + 2;
+        a.length;
+        a[0];
+        unshift_function_2(a, "baz", "boo");
+        a[pos + 3];
+        pos + 4;
+        a.length;
+        a[0];
+        a[1];
+        a[2];
+        if (pos < VERYLARGE) {
+            var baz = shift_function(a);
+            a[0];
+            pos + 3;
+            a.length;
+            a[pos + 2];
+            var bar = slice_function(a, 1, 0);
+            (bar = slice_function(a, 1, 2))[0];
+            bar.length;
+            a[1];
+        }
+    }
+}
+const v405 = new Array(LARGE + 10);
+var a = v405;
+for (let i408 = 0; i408 < a.length; i408 += 1000) {
+    a[i408] = i408;
+}
+for (let i415 = 0; i415 < 10; i415++) {
+    var top = a.splice(LARGE, 5);
+    top.length;
+    top[0];
+    typeof top[1];
+    LARGE + 5;
+    a.length;
+    a.splice(LARGE, 0, LARGE);
+    a.length = LARGE + 10;
+}
+const v439 = new Array(LARGE + 10);
+var a = v439;
+for (let i442 = 0; i442 < a.length; i442 += fourhundredth) {
+    a[i442] = i442;
+}
+for (let i448 = 0; i448 < 10; i448++) {
+    var top = a.splice(LARGE >> 1, 5);
+    top.length;
+    LARGE >> 1;
+    top[0];
+    typeof top[1];
+    LARGE + 5;
+    a.length;
+    a.splice(LARGE >> 1, 0, LARGE >> 1, void 0, void 0, void 0, void 0);
+}
+arr = [0];
+arr.length = 2;
+const t242 = Array.prototype;
+t242[1] = 1;
+arr.pop();
+arr.pop();
+const t244 = Array.prototype;
+t244[1] = undefined;
+const v497 = [];
+const v503 = -(-1 % 5);
+const v506 = ([1]).splice(0, v503);
+Array.prototype.push.apply(v497, v506);
+var receiver;
+receiver = "a string";
+function f513() {
+    Array.prototype.push.call(receiver);
+}
+f513();
+receiver = 0;
+receiver.length;
+Array.prototype.push.call(receiver);
+Array.prototype.push.call(receiver, "first");
+receiver.length;
+receiver = {};
+receiver.length;
+Array.prototype.push.call(receiver);
+Array.prototype.push.call(receiver);
+receiver.length;
+Array.prototype.push.call(receiver, "first");
+receiver.length;
+receiver[0];
+Array.prototype.push.call(receiver, "second");
+receiver.length;
+receiver[0];
+receiver[1];
+receiver = { length: 10 };
+Array.prototype.push.call(receiver);
+receiver.length;
+Array.prototype.push.call(receiver, "first");
+receiver.length;
+receiver[10];
+Array.prototype.push.call(receiver, "second", "third");
+receiver.length;
+receiver[10];
+receiver[11];
+receiver[12];
+const v600 = {
+    get length() {
+        return 10;
+    },
+    set length(a599) {
+    },
+};
+receiver = v600;
+Array.prototype.push.call(receiver);
+receiver.length;
+Array.prototype.push.call(receiver, "first");
+receiver.length;
+receiver[10];
+Array.prototype.push.call(receiver, "second", "third");
+receiver.length;
+receiver[10];
+receiver[11];
+const v630 = {
+    get length() {
+        return 10;
+    },
+};
+receiver = v630;
+function f631() {
+    Array.prototype.push.call(receiver);
+}
+f631();
+const v638 = {
+    set length(a637) {
+    },
+};
+receiver = v638;
+Array.prototype.push.call(receiver);
+receiver.length;
+Array.prototype.push.call(receiver, "first");
+receiver.length;
+Array.prototype.push.call(receiver, "third", "second");
+receiver.length;
+
+FuzzIL program written to corpus/array-functions-prototype-misc.fzil

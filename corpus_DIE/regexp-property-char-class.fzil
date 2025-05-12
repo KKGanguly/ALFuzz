@@ -1,0 +1,60 @@
+v0 <- LoadString 'ABCabc'
+v1 <- LoadRegExp '^[\p{Lu}\p{Ll}]+$' 'u'
+v2 <- CallMethod v1, 'test', [v0]
+v3 <- LoadString 'ABC-'
+v4 <- LoadRegExp '^[\p{Lu}-]+$' 'u'
+v5 <- CallMethod v4, 'test', [v3]
+v6 <- LoadString 'ABCabc'
+v7 <- LoadRegExp '^[\P{Lu}\p{Ll}]+$' 'u'
+v8 <- CallMethod v7, 'test', [v6]
+v9 <- LoadString 'abc'
+v10 <- LoadRegExp '^[\P{Lu}\p{Ll}]+$' 'u'
+v11 <- CallMethod v10, 'test', [v9]
+v12 <- LoadString 'abc123'
+v13 <- LoadRegExp '^[\P{Lu}]+$' 'u'
+v14 <- CallMethod v13, 'test', [v12]
+v15 <- LoadString 'XYZ'
+v16 <- LoadRegExp '^[\P{Lu}]+$' 'u'
+v17 <- CallMethod v16, 'test', [v15]
+v18 <- LoadString '+'
+v19 <- LoadRegExp '[\p{Math}]' 'u'
+v20 <- CallMethod v19, 'test', [v18]
+v21 <- LoadString ' '
+v22 <- LoadRegExp '[\P{Bidi_M}]' 'u'
+v23 <- CallMethod v22, 'test', [v21]
+v24 <- LoadString 'A'
+v25 <- LoadRegExp '[\p{Hex}]' 'u'
+v26 <- CallMethod v25, 'test', [v24]
+v27 <- LoadString 'XYZ'
+v28 <- LoadRegExp '^[^\P{Lu}]+$' 'u'
+v29 <- CallMethod v28, 'test', [v27]
+v30 <- LoadString 'abc'
+v31 <- LoadRegExp '^[^\p{Lu}\p{Ll}]+$' 'u'
+v32 <- CallMethod v31, 'test', [v30]
+v33 <- LoadString 'ABC'
+v34 <- LoadRegExp '^[^\p{Lu}\p{Ll}]+$' 'u'
+v35 <- CallMethod v34, 'test', [v33]
+v36 <- LoadString '123'
+v37 <- LoadRegExp '^[^\p{Lu}\p{Ll}]+$' 'u'
+v38 <- CallMethod v37, 'test', [v36]
+v39 <- LoadString 'abc'
+v40 <- LoadRegExp '^[^\p{Lu}\P{Ll}]+$' 'u'
+v41 <- CallMethod v40, 'test', [v39]
+
+
+/^[\p{Lu}\p{Ll}]+$/u.test("ABCabc");
+/^[\p{Lu}-]+$/u.test("ABC-");
+/^[\P{Lu}\p{Ll}]+$/u.test("ABCabc");
+/^[\P{Lu}\p{Ll}]+$/u.test("abc");
+/^[\P{Lu}]+$/u.test("abc123");
+/^[\P{Lu}]+$/u.test("XYZ");
+/[\p{Math}]/u.test("+");
+/[\P{Bidi_M}]/u.test(" ");
+/[\p{Hex}]/u.test("A");
+/^[^\P{Lu}]+$/u.test("XYZ");
+/^[^\p{Lu}\p{Ll}]+$/u.test("abc");
+/^[^\p{Lu}\p{Ll}]+$/u.test("ABC");
+/^[^\p{Lu}\p{Ll}]+$/u.test("123");
+/^[^\p{Lu}\P{Ll}]+$/u.test("abc");
+
+FuzzIL program written to corpus/regexp-property-char-class.fzil

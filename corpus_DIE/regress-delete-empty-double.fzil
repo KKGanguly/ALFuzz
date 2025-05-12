@@ -1,0 +1,21 @@
+v0 <- LoadFloat '1.1'
+v1 <- LoadFloat '2.2'
+v2 <- LoadFloat '3.3'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable 'a', 'none'
+Reassign v4, v3
+v5 <- LoadInteger '1'
+v6 <- CreateNamedVariable 'a', 'none'
+SetProperty v6, 'length', v5
+v7 <- LoadInteger '1'
+v8 <- DeleteElement v6, '1'
+v9 <- LoadInteger '0'
+v10 <- DeleteElement v6, '0'
+
+
+a = [1.1,2.2,3.3];
+a.length = 1;
+delete a[1];
+delete a[0];
+
+FuzzIL program written to corpus/regress-delete-empty-double.fzil

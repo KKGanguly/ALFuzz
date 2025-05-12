@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v1
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable 'test', 'var', v2
+    v4 <- CreateNamedVariable 'a', 'var', v3
+    v5 <- LoadInteger '42'
+    Reassign v4, v5
+    SetProperty v4, 'x', v5
+    v6 <- GetProperty v3, 'x'
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '42'
+v8 <- CallFunction v0, []
+
+
+function f() {
+    var test = { x: 1 };
+    var a = test;
+    a = 42;
+    a.x = 42;
+    return test.x;
+}
+f();
+
+FuzzIL program written to corpus/regress-643.fzil

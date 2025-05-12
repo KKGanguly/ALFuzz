@@ -1,0 +1,19 @@
+v0 <- LoadBoolean 'true'
+v1 <- CreateNamedVariable 'non_const_true', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- GetProperty v3, 'val'
+    v5 <- LoadNull
+    v6 <- Compare v4, '==', v5
+    v7 <- LoadBoolean 'false'
+    v8 <- BinaryOperation v6, '||', v7
+    v9 <- BinaryOperation v1, '&&', v8
+    Return v9
+EndPlainFunction
+
+
+var non_const_true = true;
+function f(a3) {
+    return non_const_true && ((a3.val == null) || false);
+}
+
+FuzzIL program written to corpus/regress-crbug-243868.fzil

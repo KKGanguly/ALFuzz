@@ -1,0 +1,15 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- LoadInteger '1000'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- LoadInteger '255'
+v5 <- CallMethod v3, 'fill', [v4]
+v6 <- CallMethod v3, 'sort', []
+
+
+const v2 = new Uint8Array(1000);
+var a = v2;
+a.fill(255);
+a.sort();
+
+FuzzIL program written to corpus/regress-696251.fzil

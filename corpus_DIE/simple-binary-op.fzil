@@ -1,0 +1,39 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadInteger '2'
+v3 <- CreateNamedVariable 'b', 'var', v2
+v4 <- LoadInteger '4'
+v5 <- CreateNamedVariable 'c', 'var', v4
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadThis
+    v8 <- GetProperty v7, 'x'
+    v9 <- BinaryOperation v8, '|', v1
+    v10 <- BinaryOperation v9, '|', v3
+    v11 <- BinaryOperation v10, '|', v5
+    v12 <- BinaryOperation v11, '|', v1
+    v13 <- BinaryOperation v12, '|', v5
+    v14 <- LoadThis
+    SetProperty v14, 'x', v13
+EndPlainFunction
+v15 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v15
+    ObjectLiteralAddProperty `g`, v6
+v16 <- EndObjectLiteral
+v17 <- CreateNamedVariable 'o', 'var', v16
+v18 <- CallMethod v17, 'g', []
+v19 <- LoadInteger '7'
+v20 <- GetProperty v17, 'x'
+
+
+var a = 1;
+var b = 2;
+var c = 4;
+function f() {
+    this.x = ((((this.x | a) | b) | c) | a) | c;
+}
+var o = { x: 0, g: f };
+o.g();
+o.x;
+
+FuzzIL program written to corpus/simple-binary-op.fzil

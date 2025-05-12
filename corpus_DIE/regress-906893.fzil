@@ -1,0 +1,34 @@
+v0 <- LoadRegExp 'x' ''
+v1 <- CreateNamedVariable 'r', 'const', v0
+v2 <- LoadInteger '0'
+v3 <- CreateNamedVariable 'counter', 'let', v2
+v4 <- BeginArrowFunction -> 
+    v5 <- UnaryOperation v3, '++'
+    v6 <- LoadNull
+    Return v6
+EndArrowFunction
+SetProperty v1, 'exec', v4
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadString 'ABcd'
+    v9 <- CallMethod v1, 'test', [v8]
+EndPlainFunction
+v10 <- CallFunction v7, []
+v11 <- LoadInteger '1'
+v12 <- CallFunction v7, []
+v13 <- LoadInteger '2'
+
+
+const r = /x/;
+let counter = 0;
+const v4 = () => {
+    counter++;
+    return null;
+};
+r.exec = v4;
+function f() {
+    r.test("ABcd");
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-906893.fzil

@@ -1,0 +1,82 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    SetProperty v1, 'x', v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    Directive 'use strict'
+    v5 <- LoadInteger '1'
+    SetProperty v4, 'x', v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v7
+    v8 <- EndObjectLiteral
+    Return v8
+EndPlainFunction
+BeginObjectLiteral
+v9 <- EndObjectLiteral
+v10 <- CreateNamedVariable 'p', 'var', v9
+v11 <- CallFunction v6, [v10]
+v12 <- CreateNamedVariable 'o1', 'var', v11
+v13 <- CallFunction v6, [v10]
+v14 <- CreateNamedVariable 'o2', 'var', v13
+v15 <- CallFunction v6, [v10]
+v16 <- CreateNamedVariable 'o3', 'var', v15
+v17 <- CallFunction v6, [v10]
+v18 <- CreateNamedVariable 'o4', 'var', v17
+v19 <- LoadInteger '1'
+SetProperty v10, 'y', v19
+v20 <- DeleteProperty v10, 'y'
+v21 <- LoadInteger '5'
+SetProperty v10, 'x', v21
+v22 <- CallFunction v0, [v12]
+v23 <- CallFunction v0, [v14]
+v24 <- CallFunction v3, [v12]
+v25 <- CallFunction v3, [v14]
+v26 <- LoadString 'x'
+v27 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v27
+v28 <- EndObjectLiteral
+v29 <- CreateNamedVariable 'Object', 'none'
+v30 <- CallMethod v29, 'defineProperty', [v10, v26, v28]
+v31 <- LoadInteger '20'
+SetProperty v16, 'x', v31
+v32 <- LoadInteger '5'
+v33 <- GetProperty v16, 'x'
+v34 <- CallFunction v0, [v18]
+v35 <- LoadInteger '5'
+v36 <- GetProperty v18, 'x'
+v37 <- LoadString 's_strict(o4);'
+v38 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function s(a1) {
+    a1.x = 1;
+}
+function s_strict(a4) {
+    'use strict';
+    a4.x = 1;
+}
+function c(a7) {
+    return { __proto__: a7 };
+}
+var p = {};
+var o1 = c(p);
+var o2 = c(p);
+var o3 = c(p);
+var o4 = c(p);
+p.y = 1;
+delete p.y;
+p.x = 5;
+s(o1);
+s(o2);
+s_strict(o1);
+s_strict(o2);
+Object.defineProperty(p, "x", { writable: false });
+o3.x = 20;
+o3.x;
+s(o4);
+o4.x;
+
+FuzzIL program written to corpus/readonly1.fzil

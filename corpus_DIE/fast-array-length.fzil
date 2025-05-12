@@ -1,0 +1,18 @@
+v0 <- LoadInteger '0'
+v1 <- LoadInteger '1'
+v2 <- LoadInteger '2'
+v3 <- LoadInteger '3'
+v4 <- LoadInteger '4'
+v5 <- LoadInteger '5'
+v6 <- CreateArray [v0, v1, v2, v3, v4, v5]
+v7 <- CreateNamedVariable 'a', 'var', v6
+v8 <- LoadInteger '1'
+v9 <- LoadInteger '30'
+v10 <- BinaryOperation v8, '<<', v9
+SetProperty v7, 'length', v10
+
+
+var a = [0,1,2,3,4,5];
+a.length = 1 << 30;
+
+FuzzIL program written to corpus/fast-array-length.fzil

@@ -1,0 +1,58 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadInteger '1'
+        v3 <- LoadInteger '2'
+        v4 <- LoadInteger '3'
+        v5 <- CreateArray [v2, v3, v4]
+        v6 <- CreateNamedVariable 'a', 'var', v5
+        v7 <- GetProperty v6, 'length'
+        Return v7
+    EndPlainFunction
+    v8 <- LoadInteger '3'
+    v9 <- CallFunction v1, []
+    v10 <- LoadInteger '3'
+    v11 <- CallFunction v1, []
+    v12 <- LoadInteger '3'
+    v13 <- CallFunction v1, []
+EndPlainFunction
+v14 <- CallFunction v0, []
+v15 <- BeginPlainFunction -> 
+    v16 <- BeginPlainFunction -> 
+        v17 <- BeginPlainFunction -> v18, v19
+        EndPlainFunction
+        v20 <- GetProperty v17, 'length'
+        Return v20
+    EndPlainFunction
+    v21 <- LoadInteger '2'
+    v22 <- CallFunction v16, []
+    v23 <- LoadInteger '2'
+    v24 <- CallFunction v16, []
+    v25 <- LoadInteger '2'
+    v26 <- CallFunction v16, []
+EndPlainFunction
+v27 <- CallFunction v15, []
+
+
+function TestMaterializeArray() {
+    function f() {
+        var a = [1,2,3];
+        return a.length;
+    }
+    f();
+    f();
+    f();
+}
+TestMaterializeArray();
+function TestMaterializeFunction() {
+    function g() {
+        function fun(a18, a19) {
+        }
+        return fun.length;
+    }
+    g();
+    g();
+    g();
+}
+TestMaterializeFunction();
+
+FuzzIL program written to corpus/escape-analysis-materialize.fzil

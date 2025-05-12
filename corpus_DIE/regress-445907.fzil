@@ -1,0 +1,22 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'v', 'none'
+Reassign v1, v0
+v2 <- LoadInteger '1'
+v3 <- LoadInteger '30'
+v4 <- BinaryOperation v2, '<<', v3
+v5 <- CreateNamedVariable 'v', 'none'
+SetProperty v5, 'length', v4
+v6 <- BeginPlainFunction -> 
+    v7 <- UnaryOperation v5, '++'
+EndPlainFunction
+v8 <- CallFunction v6, []
+
+
+v = [];
+v.length = 1 << 30;
+function f() {
+    v++;
+}
+f();
+
+FuzzIL program written to corpus/regress-445907.fzil

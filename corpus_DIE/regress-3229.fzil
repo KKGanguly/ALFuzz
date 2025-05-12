@@ -1,0 +1,80 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetProperty v2, 'source'
+    v4 <- LoadString '/'
+    v5 <- BinaryOperation v4, '+', v1
+    v6 <- LoadString '/'
+    v7 <- BinaryOperation v5, '+', v6
+    v8 <- CallMethod v2, 'toString', []
+EndPlainFunction
+v9 <- LoadString '\/'
+v10 <- LoadRegExp '\/' ''
+v11 <- CallFunction v0, [v9, v10]
+v12 <- LoadString '\/\/'
+v13 <- LoadRegExp '\/\/' ''
+v14 <- CallFunction v0, [v12, v13]
+v15 <- LoadString '\/'
+v16 <- CreateNamedVariable 'RegExp', 'none'
+v17 <- LoadString '/'
+v18 <- Construct v16, [v17]
+v19 <- CallFunction v0, [v15, v18]
+v20 <- LoadString '\/'
+v21 <- LoadString '\/'
+v22 <- Construct v16, [v21]
+v23 <- CallFunction v0, [v20, v22]
+v24 <- LoadString '\\\/'
+v25 <- LoadString '\\/'
+v26 <- Construct v16, [v25]
+v27 <- CallFunction v0, [v24, v26]
+v28 <- LoadString '\/\/'
+v29 <- LoadString '\/\/'
+v30 <- Construct v16, [v29]
+v31 <- CallFunction v0, [v28, v30]
+v32 <- LoadString '\/\/\/\/'
+v33 <- LoadString '////'
+v34 <- Construct v16, [v33]
+v35 <- CallFunction v0, [v32, v34]
+v36 <- LoadString '\/\/\/\/'
+v37 <- LoadString '\//\//'
+v38 <- Construct v16, [v37]
+v39 <- CallFunction v0, [v36, v38]
+v40 <- LoadString '(?:)'
+v41 <- LoadString ''
+v42 <- Construct v16, [v41]
+v43 <- CallFunction v0, [v40, v42]
+v44 <- LoadRegExp '\/\/' ''
+v45 <- CreateNamedVariable 'r', 'var', v44
+v46 <- LoadString '\/\/'
+v47 <- CallFunction v0, [v46, v45]
+v48 <- LoadString 'garbage'
+SetProperty v45, 'source', v48
+v49 <- LoadString '\/\/'
+v50 <- CallFunction v0, [v49, v45]
+
+
+function testEscapes(a1, a2) {
+    a2.source;
+    ("/" + a1) + "/";
+    a2.toString();
+}
+testEscapes("\/", /\//);
+testEscapes("\/\/", /\/\//);
+const v18 = new RegExp("/");
+testEscapes("\/", v18);
+const v22 = new RegExp("\/");
+testEscapes("\/", v22);
+const v26 = new RegExp("\\/");
+testEscapes("\\\/", v26);
+const v30 = new RegExp("\/\/");
+testEscapes("\/\/", v30);
+const v34 = new RegExp("////");
+testEscapes("\/\/\/\/", v34);
+const v38 = new RegExp("\//\//");
+testEscapes("\/\/\/\/", v38);
+const v42 = new RegExp("");
+testEscapes("(?:)", v42);
+var r = /\/\//;
+testEscapes("\/\/", r);
+r.source = "garbage";
+testEscapes("\/\/", r);
+
+FuzzIL program written to corpus/regress-3229.fzil

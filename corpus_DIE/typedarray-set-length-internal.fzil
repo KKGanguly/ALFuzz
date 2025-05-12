@@ -1,0 +1,78 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- CreateNamedVariable 'Int8Array', 'none'
+v2 <- CreateNamedVariable 'Uint16Array', 'none'
+v3 <- CreateNamedVariable 'Int16Array', 'none'
+v4 <- CreateNamedVariable 'Uint32Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v7 <- CreateNamedVariable 'Float32Array', 'none'
+v8 <- CreateNamedVariable 'Float64Array', 'none'
+v9 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8]
+v10 <- CreateNamedVariable 'typedArrayConstructors', 'var', v9
+v11 <- BeginPlainFunction -> 
+    v12 <- CreateNamedVariable 'Error', 'none'
+    v13 <- LoadString 'accessed length'
+    v14 <- Construct v12, [v13]
+    ThrowException v14
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v11
+v15 <- EndObjectLiteral
+v16 <- CreateNamedVariable 'descriptor', 'var', v15
+BeginForOfLoop v10 -> v17
+    v18 <- Compare v17, '===', v0
+    v19 <- TernaryOperation v18, v1, v0
+    v20 <- CreateNamedVariable 'differentConstructor', 'var', v19
+    v21 <- LoadInteger '16'
+    v22 <- Construct v17, [v21]
+    v23 <- CreateNamedVariable 'target', 'var', v22
+    v24 <- LoadString 'length'
+    v25 <- CreateNamedVariable 'Object', 'none'
+    v26 <- CallMethod v25, 'defineProperty', [v23, v24, v16]
+    v27 <- GetProperty v23, 'buffer'
+    v28 <- LoadInteger '0'
+    v29 <- LoadInteger '2'
+    v30 <- Construct v20, [v27, v28, v29]
+    v31 <- CreateNamedVariable 'sameBuffer', 'var', v30
+    v32 <- LoadString 'length'
+    v33 <- CallMethod v25, 'defineProperty', [v31, v32, v16]
+    v34 <- CallMethod v23, 'set', [v31]
+    v35 <- LoadInteger '16'
+    v36 <- Construct v20, [v35]
+    v37 <- CreateNamedVariable 'differentBuffer', 'var', v36
+    v38 <- LoadString 'length'
+    v39 <- CallMethod v25, 'defineProperty', [v37, v38, v16]
+    v40 <- CallMethod v23, 'set', [v37]
+    v41 <- LoadInteger '0'
+    v42 <- LoadInteger '1'
+    v43 <- LoadInteger '2'
+    v44 <- CreateArray [v41, v42, v43]
+    v45 <- CreateNamedVariable 'array', 'var', v44
+    v46 <- CallMethod v23, 'set', [v45]
+EndForOfLoop
+
+
+var typedArrayConstructors = [Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,Uint8ClampedArray,Float32Array,Float64Array];
+function f11() {
+    const v14 = new Error("accessed length");
+    throw v14;
+}
+var descriptor = { get: f11 };
+for (const v17 of typedArrayConstructors) {
+    var differentConstructor = v17 === Uint8Array ? Int8Array : Uint8Array;
+    const v22 = new v17(16);
+    var target = v22;
+    Object.defineProperty(target, "length", descriptor);
+    const v30 = new differentConstructor(target.buffer, 0, 2);
+    var sameBuffer = v30;
+    Object.defineProperty(sameBuffer, "length", descriptor);
+    target.set(sameBuffer);
+    const v36 = new differentConstructor(16);
+    var differentBuffer = v36;
+    Object.defineProperty(differentBuffer, "length", descriptor);
+    target.set(differentBuffer);
+    var array = [0,1,2];
+    target.set(array);
+}
+
+FuzzIL program written to corpus/typedarray-set-length-internal.fzil

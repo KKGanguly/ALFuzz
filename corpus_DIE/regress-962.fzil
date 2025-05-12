@@ -1,0 +1,113 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- Construct v2, []
+    v4 <- LoadThis
+    SetProperty v4, 's', v3
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadBoolean 'true'
+    Return v6
+EndPlainFunction
+v7 <- GetProperty v0, 'prototype'
+SetProperty v7, 'c', v5
+v8 <- BeginPlainFunction -> 
+    v9 <- Construct v0, []
+    v10 <- Construct v0, []
+    v11 <- CreateArray [v9, v10]
+    v12 <- LoadThis
+    SetProperty v12, 'l', v11
+EndPlainFunction
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadUndefined
+    v15 <- CreateNamedVariable 'f', 'var', v14
+    v16 <- LoadArguments
+    v17 <- CreateNamedVariable 'd', 'var', v16
+    v18 <- LoadUndefined
+    v19 <- CreateNamedVariable 'e', 'var', v18
+    v20 <- LoadThis
+    v21 <- GetProperty v20, 'l'
+    v22 <- CreateNamedVariable 'b', 'var', v21
+    v23 <- LoadUndefined
+    v24 <- CreateNamedVariable 'g', 'var', v23
+    BeginForLoopInitializer
+        v25 <- LoadInteger '0'
+        Reassign v19, v25
+    BeginForLoopCondition
+        v26 <- GetProperty v22, 'length'
+        v27 <- Compare v19, '<', v26
+    BeginForLoopAfterthought v27
+        v28 <- UnaryOperation v19, '++'
+    BeginForLoopBody
+        v29 <- GetComputedProperty v22, v19
+        Reassign v24, v29
+        v30 <- GetProperty v24, 's'
+        v31 <- GetProperty v24, 'c'
+        v32 <- CallMethod v31, 'apply', [v30, v17]
+        Reassign v15, v32
+        v33 <- LoadBoolean 'false'
+        v34 <- Compare v15, '===', v33
+        BeginIf v34
+            Break
+        EndIf
+    EndForLoop
+    Return v15
+EndPlainFunction
+v35 <- GetProperty v8, 'prototype'
+SetProperty v35, 'foo', v13
+v36 <- Construct v8, []
+v37 <- CreateNamedVariable 'ctx', 'var', v36
+BeginForLoopInitializer
+    v38 <- LoadInteger '0'
+BeginForLoopCondition -> v39
+    v40 <- LoadInteger '5'
+    v41 <- Compare v39, '<', v40
+BeginForLoopAfterthought v41 -> v42
+    v43 <- UnaryOperation v42, '++'
+BeginForLoopBody -> v44
+    v45 <- CallMethod v37, 'foo', []
+EndForLoop
+v46 <- CallMethod v37, 'foo', []
+
+
+function L(a1) {
+    const v3 = new Object();
+    this.s = v3;
+}
+function f5() {
+    return true;
+}
+const t7 = L.prototype;
+t7.c = f5;
+function F() {
+    const v9 = new L();
+    const v10 = new L();
+    this.l = [v9,v10];
+}
+function f13() {
+    var f;
+    var d = arguments;
+    var e;
+    var b = this.l;
+    var g;
+    for ((() => {
+            e = 0;
+        })();
+        e < b.length;
+        e++) {
+        const v30 = (g = b[e]).s;
+        if ((f = g.c.apply(v30, d)) === false) {
+            break;
+        }
+    }
+    return f;
+}
+const t32 = F.prototype;
+t32.foo = f13;
+const v36 = new F();
+var ctx = v36;
+for (let i39 = 0; i39 < 5; i39++) {
+    ctx.foo();
+}
+ctx.foo();
+
+FuzzIL program written to corpus/regress-962.fzil

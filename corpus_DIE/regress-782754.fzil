@@ -1,0 +1,49 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'a', 'let', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadUndefined
+    v7 <- CreateNamedVariable 'g', 'none'
+    v8 <- CallFunction v7, [v6, v5]
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10, v11
+    BeginIf v11
+        Return
+    EndIf
+    v12 <- LoadInteger '1'
+    v13 <- BinaryOperation v10, '+', v12
+    v14 <- GetComputedProperty v3, v13
+    Return v14
+EndPlainFunction
+v15 <- LoadInteger '0'
+v16 <- LoadBoolean 'false'
+v17 <- CallFunction v9, [v15, v16]
+v18 <- LoadInteger '0'
+v19 <- LoadBoolean 'false'
+v20 <- CallFunction v9, [v18, v19]
+v21 <- LoadBoolean 'true'
+v22 <- CallFunction v4, [v21]
+v23 <- LoadBoolean 'true'
+v24 <- CallFunction v4, [v23]
+v25 <- LoadBoolean 'false'
+v26 <- CallFunction v4, [v25]
+
+
+let a = [1,2];
+function f(a5) {
+    g(undefined, a5);
+}
+function g(a10, a11) {
+    if (a11) {
+        return;
+    }
+    return a[a10 + 1];
+}
+g(0, false);
+g(0, false);
+f(true);
+f(true);
+f(false);
+
+FuzzIL program written to corpus/regress-782754.fzil

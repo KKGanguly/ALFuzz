@@ -1,0 +1,68 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateArray []
+    Reassign v1, v3
+    BeginForLoopInitializer
+        v4 <- LoadInteger '0'
+    BeginForLoopCondition -> v5
+        v6 <- LoadInteger '10016'
+        v7 <- Compare v5, '<', v6
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation v8, '++'
+    BeginForLoopBody -> v10
+        BeginObjectLiteral
+        v11 <- EndObjectLiteral
+        v12 <- CallMethod v1, 'push', [v11]
+    EndForLoop
+    v13 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v14 <- CallMethod v1, 'map', [v13]
+    v15 <- LoadString ''
+    v16 <- BinaryOperation v14, '+', v15
+EndPlainFunction
+v17 <- CallFunction v2, []
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadString '!'
+    v20 <- BinaryOperation v1, '+', v19
+    v21 <- LoadInteger '23'
+    v22 <- CallMethod v1, 'push', [v21]
+    Return v1
+EndPlainFunction
+v23 <- LoadInteger '23'
+v24 <- CallFunction v18, []
+v25 <- GetElement v24, '10016'
+v26 <- LoadInteger '23'
+v27 <- CallFunction v18, []
+v28 <- GetElement v27, '10017'
+v29 <- LoadInteger '23'
+v30 <- CallFunction v18, []
+v31 <- GetElement v30, '10018'
+v32 <- LoadInteger '23'
+v33 <- CallFunction v18, []
+v34 <- GetElement v33, '10019'
+
+
+var a = {};
+function init() {
+    a = [];
+    for (let i5 = 0; i5 < 10016; i5++) {
+        a.push({});
+    }
+    function f13() {
+    }
+    a.map(f13) + "";
+}
+init();
+function foo() {
+    a + "!";
+    a.push(23);
+    return a;
+}
+foo()[10016];
+foo()[10017];
+foo()[10018];
+foo()[10019];
+
+FuzzIL program written to corpus/regress-crbug-685506.fzil

@@ -1,0 +1,126 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'length'
+    v3 <- LoadArguments
+    v4 <- CallMethod v3, '__defineGetter__', [v2, v1]
+    v5 <- LoadArguments
+    Return v5
+EndPlainFunction
+v6 <- LoadInteger '0'
+v7 <- CreateNamedVariable 'count', 'var', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- UnaryOperation v7, '++'
+    v10 <- LoadString 'boom'
+    Return v10
+EndPlainFunction
+v11 <- BeginPlainFunction -> 
+    v12 <- UnaryOperation v7, '++'
+    v13 <- LoadString 'boom'
+    ThrowException v13
+EndPlainFunction
+v14 <- CreateArray []
+v15 <- CreateNamedVariable 'a1', 'var', v14
+v16 <- CreateNamedVariable 'f', 'none'
+v17 <- CallFunction v16, [v15]
+v18 <- CallFunction v0, [v8]
+SetProperty v15, '__proto__', v18
+v19 <- CreateArray []
+v20 <- CallMethod v19, 'concat', [v15]
+v21 <- LoadInteger '0'
+v22 <- CreateArray []
+v23 <- CreateNamedVariable 'a2', 'var', v22
+v24 <- CallFunction v16, [v23]
+v25 <- CallFunction v0, [v11]
+SetProperty v23, '__proto__', v25
+v26 <- CreateArray []
+v27 <- CallMethod v26, 'concat', [v23]
+v28 <- LoadInteger '0'
+v29 <- CallFunction v0, [v8]
+v30 <- CreateNamedVariable 'a3', 'var', v29
+v31 <- LoadBoolean 'true'
+v32 <- CreateNamedVariable 'Symbol', 'none'
+v33 <- GetProperty v32, 'isConcatSpreadable'
+SetComputedProperty v30, v33, v31
+v34 <- CreateArray []
+v35 <- CallMethod v34, 'concat', [v30]
+v36 <- LoadInteger '1'
+v37 <- CallFunction v0, [v11]
+v38 <- CreateNamedVariable 'a4', 'var', v37
+v39 <- LoadBoolean 'true'
+v40 <- GetProperty v32, 'isConcatSpreadable'
+SetComputedProperty v38, v40, v39
+v41 <- BeginPlainFunction -> 
+    v42 <- CreateArray []
+    v43 <- CallMethod v42, 'concat', [v38]
+EndPlainFunction
+v44 <- CallFunction v41, []
+v45 <- LoadInteger '2'
+BeginObjectLiteral
+v46 <- EndObjectLiteral
+v47 <- CreateNamedVariable 'a5', 'var', v46
+v48 <- CallFunction v0, [v8]
+SetProperty v47, '__proto__', v48
+v49 <- LoadBoolean 'true'
+v50 <- GetProperty v32, 'isConcatSpreadable'
+SetComputedProperty v47, v50, v49
+v51 <- CreateArray []
+v52 <- CallMethod v51, 'concat', [v47]
+v53 <- LoadInteger '3'
+BeginObjectLiteral
+v54 <- EndObjectLiteral
+v55 <- CreateNamedVariable 'a6', 'var', v54
+v56 <- CallFunction v0, [v11]
+SetProperty v55, '__proto__', v56
+v57 <- LoadBoolean 'true'
+v58 <- GetProperty v32, 'isConcatSpreadable'
+SetComputedProperty v55, v58, v57
+v59 <- BeginPlainFunction -> 
+    v60 <- CreateArray []
+    v61 <- CallMethod v60, 'concat', [v55]
+EndPlainFunction
+v62 <- CallFunction v59, []
+v63 <- LoadInteger '4'
+
+
+function arguments_with_length_getter(a1) {
+    arguments.__defineGetter__("length", a1);
+    return arguments;
+}
+var count = 0;
+function increment_count_return() {
+    count++;
+    return "boom";
+}
+function increment_count_throw() {
+    count++;
+    throw "boom";
+}
+var a1 = [];
+f(a1);
+a1.__proto__ = arguments_with_length_getter(increment_count_return);
+([]).concat(a1);
+var a2 = [];
+f(a2);
+a2.__proto__ = arguments_with_length_getter(increment_count_throw);
+([]).concat(a2);
+var a3 = arguments_with_length_getter(increment_count_return);
+a3[Symbol.isConcatSpreadable] = true;
+([]).concat(a3);
+var a4 = arguments_with_length_getter(increment_count_throw);
+a4[Symbol.isConcatSpreadable] = true;
+function f41() {
+    ([]).concat(a4);
+}
+f41();
+var a5 = {};
+a5.__proto__ = arguments_with_length_getter(increment_count_return);
+a5[Symbol.isConcatSpreadable] = true;
+([]).concat(a5);
+var a6 = {};
+a6.__proto__ = arguments_with_length_getter(increment_count_throw);
+a6[Symbol.isConcatSpreadable] = true;
+function f59() {
+    ([]).concat(a6);
+}
+f59();
+
+FuzzIL program written to corpus/regress-crbug-516775.fzil

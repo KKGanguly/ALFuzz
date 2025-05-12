@@ -1,0 +1,50 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- LoadString 'x'
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '7'
+    ThrowException v4
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v1, v2, v5]
+v8 <- BeginPlainFunction -> v9
+    v10 <- LoadInteger '1'
+    v11 <- CreateNamedVariable 'x', 'var', v10
+    BeginTry
+        v12 <- GetProperty v9, 'x'
+    BeginCatch -> v13
+        Reassign v11, v13
+    EndTryCatch
+    Return v11
+EndPlainFunction
+v14 <- LoadInteger '7'
+v15 <- CallFunction v8, [v1]
+v16 <- LoadInteger '7'
+v17 <- CallFunction v8, [v1]
+v18 <- LoadInteger '7'
+v19 <- CallFunction v8, [v1]
+
+
+var o = {};
+function f3() {
+    throw 7;
+}
+Object.defineProperty(o, "x", { get: f3 });
+function foo(a9) {
+    var x = 1;
+    try {
+        a9.x;
+    } catch(e13) {
+        x = e13;
+    }
+    return x;
+}
+foo(o);
+foo(o);
+foo(o);
+
+FuzzIL program written to corpus/accessor-exceptions1.fzil

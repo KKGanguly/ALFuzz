@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '42'
+    v2 <- LoadThis
+    SetProperty v2, '__proto__', v1
+EndPlainFunction
+v3 <- LoadInteger '0'
+v4 <- CreateNamedVariable 'count', 'var', v3
+v5 <- Construct v0, []
+BeginForInLoop v5 -> v6
+    v7 <- UnaryOperation v4, '++'
+EndForInLoop
+v8 <- LoadInteger '0'
+
+
+function f() {
+    this.__proto__ = 42;
+}
+var count = 0;
+const v5 = new f();
+for (const v6 in v5) {
+    count++;
+}
+
+FuzzIL program written to corpus/regress-646.fzil

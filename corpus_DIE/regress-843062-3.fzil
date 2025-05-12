@@ -1,0 +1,19 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Array', 'none'
+    v3 <- Construct v2, [v1]
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '0'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadInteger '0'
+v7 <- CallFunction v0, [v6]
+
+
+function bar(a1) {
+    const v3 = new Array(a1);
+    return v3;
+}
+bar(0);
+bar(0);
+
+FuzzIL program written to corpus/regress-843062-3.fzil

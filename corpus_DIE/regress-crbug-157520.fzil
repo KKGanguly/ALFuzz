@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadInteger '2'
+        Reassign v2, v3
+        v4 <- LoadArguments
+        v5 <- GetElement v4, '0'
+        Return v5
+    EndPlainFunction
+    v6 <- CreateNamedVariable 'f', 'var', v1
+    BeginForLoopInitializer
+        v7 <- LoadInteger '0'
+    BeginForLoopCondition -> v8
+        v9 <- LoadInteger '50000'
+        v10 <- Compare v8, '<', v9
+    BeginForLoopAfterthought v10 -> v11
+        v12 <- UnaryOperation v11, '++'
+    BeginForLoopBody -> v13
+        v14 <- LoadInteger '2'
+        v15 <- LoadInteger '1'
+        v16 <- CallFunction v6, [v15]
+    EndForLoop
+EndPlainFunction
+v17 <- CallFunction v0, []
+
+
+function f0() {
+    function f1(a2) {
+        a2 = 2;
+        return arguments[0];
+    }
+    var f = f1;
+    for (let i8 = 0; i8 < 50000; i8++) {
+        f(1);
+    }
+}
+f0();
+
+FuzzIL program written to corpus/regress-crbug-157520.fzil

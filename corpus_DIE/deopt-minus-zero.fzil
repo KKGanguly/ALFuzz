@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '*', v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '1'
+v5 <- UnaryOperation '-', v4
+v6 <- LoadInteger '1'
+v7 <- UnaryOperation '-', v6
+v8 <- CallFunction v0, [v5, v7]
+v9 <- LoadInteger '2147483649'
+v10 <- LoadInteger '0'
+v11 <- BinaryOperation v9, '|', v10
+v12 <- LoadInteger '1'
+v13 <- UnaryOperation '-', v12
+v14 <- CallFunction v0, [v11, v13]
+v15 <- LoadInteger '2147483649'
+v16 <- LoadInteger '0'
+v17 <- BinaryOperation v15, '|', v16
+v18 <- LoadInteger '1'
+v19 <- UnaryOperation '-', v18
+v20 <- CallFunction v0, [v17, v19]
+v21 <- LoadInteger '0'
+v22 <- LoadInteger '1'
+v23 <- UnaryOperation '-', v22
+v24 <- CallFunction v0, [v21, v23]
+v25 <- LoadInteger '0'
+v26 <- LoadInteger '1'
+v27 <- UnaryOperation '-', v26
+v28 <- CallFunction v0, [v25, v27]
+v29 <- CallFunction v0, []
+v30 <- CreateNamedVariable 'gc', 'none'
+v31 <- CallFunction v30, []
+
+
+function mul(a1, a2) {
+    return a1 * a2;
+}
+mul(-1, -1);
+mul(2147483649 | 0, -1);
+mul(2147483649 | 0, -1);
+mul(0, -1);
+mul(0, -1);
+mul();
+gc();
+
+FuzzIL program written to corpus/deopt-minus-zero.fzil

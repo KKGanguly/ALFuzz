@@ -1,0 +1,88 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- LoadFloat '0.1'
+    v5 <- BinaryOperation v4, '*', v3
+    v6 <- CreateNamedVariable 'f1', 'var', v5
+    v7 <- LoadFloat '0.2'
+    v8 <- BinaryOperation v7, '*', v3
+    v9 <- CreateNamedVariable 'f2', 'var', v8
+    v10 <- LoadFloat '0.3'
+    v11 <- BinaryOperation v10, '*', v3
+    v12 <- CreateNamedVariable 'f3', 'var', v11
+    v13 <- LoadFloat '0.4'
+    v14 <- BinaryOperation v13, '*', v3
+    v15 <- CreateNamedVariable 'f4', 'var', v14
+    v16 <- LoadFloat '0.5'
+    v17 <- BinaryOperation v16, '*', v3
+    v18 <- CreateNamedVariable 'f5', 'var', v17
+    v19 <- LoadFloat '0.6'
+    v20 <- BinaryOperation v19, '*', v3
+    v21 <- CreateNamedVariable 'f6', 'var', v20
+    v22 <- LoadFloat '0.7'
+    v23 <- BinaryOperation v22, '*', v3
+    v24 <- CreateNamedVariable 'f7', 'var', v23
+    v25 <- LoadFloat '0.8'
+    v26 <- BinaryOperation v25, '*', v3
+    v27 <- CreateNamedVariable 'f8', 'var', v26
+    SetElement v1, '0', v2
+    v28 <- BinaryOperation v6, '+', v9
+    v29 <- BinaryOperation v28, '+', v12
+    v30 <- BinaryOperation v29, '+', v15
+    v31 <- BinaryOperation v30, '+', v18
+    v32 <- BinaryOperation v31, '+', v21
+    v33 <- BinaryOperation v32, '+', v24
+    v34 <- BinaryOperation v33, '+', v27
+    v35 <- CreateNamedVariable 'sum', 'var', v34
+    v36 <- LoadInteger '1'
+    v37 <- LoadFloat '3.6'
+    v38 <- CreateNamedVariable 'expected', 'var', v37
+    v39 <- BinaryOperation v38, '-', v35
+    v40 <- CreateNamedVariable 'Math', 'none'
+    v41 <- CallMethod v40, 'abs', [v39]
+    v42 <- LoadFloat '0.01'
+    v43 <- Compare v41, '>', v42
+    BeginIf v43
+    EndIf
+EndPlainFunction
+v44 <- LoadInteger '1'
+v45 <- CreateArray [v44]
+v46 <- LoadInteger '1'
+v47 <- LoadInteger '1'
+v48 <- CallFunction v0, [v45, v46, v47]
+v49 <- LoadInteger '1'
+v50 <- CreateArray [v49]
+v51 <- LoadFloat '1.1'
+v52 <- LoadInteger '1'
+v53 <- CallFunction v0, [v50, v51, v52]
+v54 <- LoadInteger '1'
+v55 <- CreateArray [v54]
+v56 <- LoadFloat '1.1'
+v57 <- LoadInteger '1'
+v58 <- CallFunction v0, [v55, v56, v57]
+v59 <- LoadInteger '1'
+v60 <- CreateArray [v59]
+v61 <- LoadInteger '1'
+v62 <- LoadInteger '1'
+v63 <- CallFunction v0, [v60, v61, v62]
+
+
+function store(a1, a2, a3) {
+    var f1 = 0.1 * a3;
+    var f2 = 0.2 * a3;
+    var f3 = 0.3 * a3;
+    var f4 = 0.4 * a3;
+    var f5 = 0.5 * a3;
+    var f6 = 0.6 * a3;
+    var f7 = 0.7 * a3;
+    var f8 = 0.8 * a3;
+    a1[0] = a2;
+    var sum = ((((((f1 + f2) + f3) + f4) + f5) + f6) + f7) + f8;
+    var expected = 3.6;
+    if (Math.abs(expected - sum) > 0.01) {
+    }
+}
+store([1], 1, 1);
+store([1], 1.1, 1);
+store([1], 1.1, 1);
+store([1], 1, 1);
+
+FuzzIL program written to corpus/regress-clobbered-fp-regs.fzil

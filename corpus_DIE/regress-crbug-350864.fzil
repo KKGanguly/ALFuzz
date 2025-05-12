@@ -1,0 +1,29 @@
+v0 <- CreateNamedVariable 'WeakMap', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'v0', 'var', v1
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'v1', 'var', v3
+v5 <- LoadInteger '1'
+v6 <- CallMethod v2, 'set', [v4, v5]
+v7 <- CreateNamedVariable 'Symbol', 'none'
+v8 <- CallFunction v7, []
+v9 <- CreateNamedVariable 'sym', 'var', v8
+v10 <- LoadInteger '1'
+SetComputedProperty v4, v9, v10
+v11 <- CreateNamedVariable 'Object', 'none'
+v12 <- CallMethod v11, 'getOwnPropertySymbols', [v4]
+v13 <- CreateNamedVariable 'symbols', 'var', v12
+v14 <- CreateArray [v9]
+
+
+const v1 = new WeakMap();
+var v0 = v1;
+var v1 = {};
+v0.set(v1, 1);
+var sym = Symbol();
+v1[sym] = 1;
+var symbols = Object.getOwnPropertySymbols(v1);
+[sym];
+
+FuzzIL program written to corpus/regress-crbug-350864.fzil

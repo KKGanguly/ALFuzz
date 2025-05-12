@@ -1,0 +1,21 @@
+v0 <- LoadRegExp '\u23a1|x' ''
+v1 <- CreateNamedVariable 're', 'var', v0
+v2 <- LoadString '!'
+v3 <- CallMethod v1, 'exec', [v2]
+v4 <- CreateNamedVariable 'res', 'var', v3
+v5 <- LoadNull
+v6 <- LoadString 'Throwing away high bits on ASCII string'
+v7 <- LoadString '!x'
+v8 <- CallMethod v1, 'exec', [v7]
+Reassign v4, v8
+v9 <- LoadString 'x'
+v10 <- CreateArray [v9]
+v11 <- LoadString 'Throwing away high bits on ASCII string'
+
+
+var re = /\u23a1|x/;
+var res = re.exec("!");
+res = re.exec("!x");
+["x"];
+
+FuzzIL program written to corpus/regress-227.fzil

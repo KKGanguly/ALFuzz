@@ -1,0 +1,145 @@
+v0 <- LoadString 'lorem ipsum per se esse fugiendum. itaque aiunt hanc quasi '
+v1 <- LoadString 'naturalem atque insitam in animis nostris inesse notionem, ut '
+v2 <- BinaryOperation v0, '+', v1
+v3 <- LoadString 'alterum esse appetendum, alterum aspernandum sentiamus. Alii autem,'
+v4 <- BinaryOperation v2, '+', v3
+v5 <- LoadString ' quibus ego assentior, cum a philosophis compluribus permulta '
+v6 <- BinaryOperation v4, '+', v5
+v7 <- LoadString 'dicantur, cur nec voluptas in bonis sit numeranda nec in malis '
+v8 <- BinaryOperation v6, '+', v7
+v9 <- LoadString 'dolor, non existimant oportere nimium nos causae confidere, sed et'
+v10 <- BinaryOperation v8, '+', v9
+v11 <- LoadString ' argumentandum et accurate disserendum et rationibus conquisitis de'
+v12 <- BinaryOperation v10, '+', v11
+v13 <- LoadString ' voluptate et dolore disputandum putant.\n'
+v14 <- BinaryOperation v12, '+', v13
+v15 <- LoadString 'Sed ut perspiciatis, unde omnis iste natus error sit voluptatem '
+v16 <- BinaryOperation v14, '+', v15
+v17 <- LoadString 'accusantium doloremque laudantium, totam rem aperiam eaque ipsa,'
+v18 <- BinaryOperation v16, '+', v17
+v19 <- LoadString 'quae ab illo inventore veritatis et quasi architecto beatae vitae '
+v20 <- BinaryOperation v18, '+', v19
+v21 <- LoadString 'dicta sunt, explicabo. nemo enim ipsam voluptatem, quia voluptas'
+v22 <- BinaryOperation v20, '+', v21
+v23 <- LoadString 'sit, aspernatur aut odit aut fugit, sed quia consequuntur magni'
+v24 <- BinaryOperation v22, '+', v23
+v25 <- LoadString ' dolores eos, qui ratione voluptatem sequi nesciunt, neque porro'
+v26 <- BinaryOperation v24, '+', v25
+v27 <- LoadString ' quisquam est, qui dolorem ipsum, quia dolor sit, amet, '
+v28 <- BinaryOperation v26, '+', v27
+v29 <- LoadString 'consectetur, adipisci velit, sed quia non numquam eius modi'
+v30 <- BinaryOperation v28, '+', v29
+v31 <- LoadString ' tempora incidunt, ut labore et dolore magnam aliquam quaerat '
+v32 <- BinaryOperation v30, '+', v31
+v33 <- LoadString 'voluptatem. ut enim ad minima veniam, quis nostrum exercitationem '
+v34 <- BinaryOperation v32, '+', v33
+v35 <- LoadString 'ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi '
+v36 <- BinaryOperation v34, '+', v35
+v37 <- LoadString 'consequatur? quis autem vel eum iure reprehenderit, qui in ea '
+v38 <- BinaryOperation v36, '+', v37
+v39 <- LoadString 'voluptate velit esse, quam nihil molestiae consequatur, vel illum, '
+v40 <- BinaryOperation v38, '+', v39
+v41 <- LoadString 'qui dolorem eum fugiat, quo voluptas nulla pariatur?\n'
+v42 <- BinaryOperation v40, '+', v41
+v43 <- CreateNamedVariable 'lipsum', 'var', v42
+v44 <- LoadInteger '893'
+v45 <- LoadString 'lorem ipsum, quia dolor sit, amet'
+v46 <- CallMethod v43, 'indexOf', [v45]
+v47 <- LoadString 'Lipsum'
+BeginForLoopInitializer
+    v48 <- LoadInteger '0'
+BeginForLoopCondition -> v49
+    v50 <- GetProperty v43, 'length'
+    v51 <- Compare v49, '<', v50
+BeginForLoopAfterthought v51 -> v52
+    v53 <- LoadInteger '3'
+    Update v52, '+', v53
+BeginForLoopBody -> v54
+    BeginForLoopInitializer
+        v55 <- LoadInteger '1'
+    BeginForLoopCondition -> v56
+        v57 <- BinaryOperation v54, '+', v56
+        v58 <- GetProperty v43, 'length'
+        v59 <- Compare v57, '<', v58
+    BeginForLoopAfterthought v59 -> v60
+        v61 <- LoadInteger '7'
+        Update v60, '+', v61
+    BeginForLoopBody -> v62
+        v63 <- BinaryOperation v54, '+', v62
+        v64 <- CallMethod v43, 'substring', [v54, v63]
+        v65 <- CreateNamedVariable 'substring', 'var', v64
+        v66 <- LoadInteger '1'
+        v67 <- UnaryOperation '-', v66
+        v68 <- CreateNamedVariable 'index', 'var', v67
+        BeginDoWhileLoopBody
+            v69 <- LoadInteger '1'
+            v70 <- BinaryOperation v68, '+', v69
+            v71 <- CallMethod v43, 'indexOf', [v65, v70]
+            Reassign v68, v71
+            v72 <- LoadInteger '1'
+            v73 <- UnaryOperation '-', v72
+            v74 <- Compare v68, '!=', v73
+            v75 <- LoadString 'Lipsum substring '
+            v76 <- BinaryOperation v75, '+', v54
+            v77 <- LoadString '..'
+            v78 <- BinaryOperation v76, '+', v77
+            v79 <- BinaryOperation v54, '+', v62
+            v80 <- LoadInteger '1'
+            v81 <- BinaryOperation v79, '-', v80
+            v82 <- BinaryOperation v78, '+', v81
+            v83 <- LoadString ' not found'
+            v84 <- BinaryOperation v82, '+', v83
+            v85 <- BinaryOperation v68, '+', v62
+            v86 <- CallMethod v43, 'substring', [v68, v85]
+            v87 <- LoadString 'Wrong lipsum substring found: '
+            v88 <- BinaryOperation v87, '+', v54
+            v89 <- LoadString '..'
+            v90 <- BinaryOperation v88, '+', v89
+            v91 <- BinaryOperation v54, '+', v62
+            v92 <- LoadInteger '1'
+            v93 <- BinaryOperation v91, '-', v92
+            v94 <- BinaryOperation v90, '+', v93
+            v95 <- LoadString '/'
+            v96 <- BinaryOperation v94, '+', v95
+            v97 <- BinaryOperation v96, '+', v68
+            v98 <- LoadString '..'
+            v99 <- BinaryOperation v97, '+', v98
+            v100 <- BinaryOperation v68, '+', v62
+            v101 <- LoadInteger '1'
+            v102 <- BinaryOperation v100, '-', v101
+            v103 <- BinaryOperation v99, '+', v102
+        BeginDoWhileLoopHeader
+            v104 <- LoadInteger '0'
+            v105 <- Compare v68, '>=', v104
+            v106 <- Compare v68, '<', v54
+            v107 <- BinaryOperation v105, '&&', v106
+        EndDoWhileLoop v107
+        v108 <- LoadString 'Lipsum match at '
+        v109 <- BinaryOperation v108, '+', v54
+        v110 <- LoadString '..'
+        v111 <- BinaryOperation v109, '+', v110
+        v112 <- BinaryOperation v54, '+', v62
+        v113 <- LoadInteger '1'
+        v114 <- BinaryOperation v112, '-', v113
+        v115 <- BinaryOperation v111, '+', v114
+    EndForLoop
+EndForLoop
+
+
+var lipsum = (((((((((((((((((((("lorem ipsum per se esse fugiendum. itaque aiunt hanc quasi " + "naturalem atque insitam in animis nostris inesse notionem, ut ") + "alterum esse appetendum, alterum aspernandum sentiamus. Alii autem,") + " quibus ego assentior, cum a philosophis compluribus permulta ") + "dicantur, cur nec voluptas in bonis sit numeranda nec in malis ") + "dolor, non existimant oportere nimium nos causae confidere, sed et") + " argumentandum et accurate disserendum et rationibus conquisitis de") + " voluptate et dolore disputandum putant.\n") + "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem ") + "accusantium doloremque laudantium, totam rem aperiam eaque ipsa,") + "quae ab illo inventore veritatis et quasi architecto beatae vitae ") + "dicta sunt, explicabo. nemo enim ipsam voluptatem, quia voluptas") + "sit, aspernatur aut odit aut fugit, sed quia consequuntur magni") + " dolores eos, qui ratione voluptatem sequi nesciunt, neque porro") + " quisquam est, qui dolorem ipsum, quia dolor sit, amet, ") + "consectetur, adipisci velit, sed quia non numquam eius modi") + " tempora incidunt, ut labore et dolore magnam aliquam quaerat ") + "voluptatem. ut enim ad minima veniam, quis nostrum exercitationem ") + "ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi ") + "consequatur? quis autem vel eum iure reprehenderit, qui in ea ") + "voluptate velit esse, quam nihil molestiae consequatur, vel illum, ") + "qui dolorem eum fugiat, quo voluptas nulla pariatur?\n";
+lipsum.indexOf("lorem ipsum, quia dolor sit, amet");
+for (let i49 = 0; i49 < lipsum.length; i49 += 3) {
+    for (let i56 = 1; (i49 + i56) < lipsum.length; i56 += 7) {
+        var substring = lipsum.substring(i49, i49 + i56);
+        var index = -1;
+        do {
+            (index = lipsum.indexOf(substring, index + 1)) != -1;
+            ((("Lipsum substring " + i49) + "..") + ((i49 + i56) - 1)) + " not found";
+            lipsum.substring(index, index + i56);
+            (((((("Wrong lipsum substring found: " + i49) + "..") + ((i49 + i56) - 1)) + "/") + index) + "..") + ((index + i56) - 1);
+        } while ((index >= 0) && (index < i49))
+        (("Lipsum match at " + i49) + "..") + ((i49 + i56) - 1);
+    }
+}
+
+FuzzIL program written to corpus/string-indexof-2.fzil

@@ -1,0 +1,71 @@
+v0 <- LoadString ''
+v1 <- CreateNamedVariable 'r1', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '1000'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- LoadString 'a?'
+    Update v1, '+', v9
+EndForLoop
+v10 <- CreateNamedVariable 'RegExp', 'none'
+v11 <- CallFunction v10, [v1]
+v12 <- LoadString 'test'
+v13 <- CallMethod v12, 'match', [v11]
+v14 <- LoadString ''
+v15 <- CreateNamedVariable 'r2', 'var', v14
+BeginForLoopInitializer
+    v16 <- LoadInteger '0'
+BeginForLoopCondition -> v17
+    v18 <- LoadInteger '100'
+    v19 <- Compare v17, '<', v18
+BeginForLoopAfterthought v19 -> v20
+    v21 <- UnaryOperation v20, '++'
+BeginForLoopBody -> v22
+    v23 <- LoadString '(a?|b?|c?|d?|e?|f?|g?)'
+    Update v15, '+', v23
+EndForLoop
+v24 <- CallFunction v10, [v15]
+v25 <- LoadString 'test'
+v26 <- CallMethod v25, 'match', [v24]
+v27 <- LoadString 'a'
+v28 <- CreateNamedVariable 'r3', 'var', v27
+BeginForLoopInitializer
+    v29 <- LoadInteger '0'
+BeginForLoopCondition -> v30
+    v31 <- LoadInteger '1000'
+    v32 <- Compare v30, '<', v31
+BeginForLoopAfterthought v32 -> v33
+    v34 <- UnaryOperation v33, '++'
+BeginForLoopBody -> v35
+    v36 <- LoadString '('
+    v37 <- BinaryOperation v36, '+', v28
+    v38 <- LoadString ')a'
+    v39 <- BinaryOperation v37, '+', v38
+    Reassign v28, v39
+EndForLoop
+v40 <- CallFunction v10, [v28]
+v41 <- LoadString 'test'
+v42 <- CallMethod v41, 'match', [v40]
+
+
+var r1 = "";
+for (let i3 = 0; i3 < 1000; i3++) {
+    r1 += "a?";
+}
+("test").match(RegExp(r1));
+var r2 = "";
+for (let i17 = 0; i17 < 100; i17++) {
+    r2 += "(a?|b?|c?|d?|e?|f?|g?)";
+}
+("test").match(RegExp(r2));
+var r3 = "a";
+for (let i30 = 0; i30 < 1000; i30++) {
+    r3 = ("(" + r3) + ")a";
+}
+("test").match(RegExp(r3));
+
+FuzzIL program written to corpus/regress-crbug-178790.fzil

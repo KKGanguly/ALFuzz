@@ -1,0 +1,26 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    SetElement v3, '200000000', v1
+EndPlainFunction
+v4 <- CreateNamedVariable 'Array', 'none'
+v5 <- LoadInteger '100000'
+v6 <- Construct v4, [v5]
+v7 <- CallFunction v2, [v6]
+v8 <- CreateArray []
+v9 <- CallFunction v2, [v8]
+v10 <- CreateArray []
+v11 <- CallFunction v2, [v10]
+
+
+var x = {};
+function f(a3) {
+    a3[200000000] = x;
+}
+const v6 = new Array(100000);
+f(v6);
+f([]);
+f([]);
+
+FuzzIL program written to corpus/regress-alloc-smi-check.fzil

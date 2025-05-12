@@ -1,0 +1,115 @@
+v0 <- BeginPlainFunction -> v1
+    BeginForLoopInitializer
+        v2 <- LoadInteger '0'
+    BeginForLoopCondition -> v3
+        v4 <- LoadInteger '100'
+        v5 <- Compare v3, '<', v4
+    BeginForLoopAfterthought v5 -> v6
+        v7 <- UnaryOperation '++', v6
+    BeginForLoopBody -> v8
+        v9 <- CreateNamedVariable 'String', 'none'
+        v10 <- Construct v9, [v1]
+        Reassign v1, v10
+    EndForLoop
+    Return v1
+EndPlainFunction
+v11 <- LoadString 'hello'
+v12 <- CreateNamedVariable 'expected', 'var', v11
+BeginForLoopInitializer
+    v13 <- LoadInteger '0'
+BeginForLoopCondition -> v14
+    v15 <- LoadInteger '4'
+    v16 <- Compare v14, '<', v15
+BeginForLoopAfterthought v16 -> v17
+    v18 <- UnaryOperation '++', v17
+BeginForLoopBody -> v19
+    v20 <- LoadInteger '2'
+    v21 <- Compare v19, '==', v20
+    BeginIf v21
+        v22 <- BeginPlainFunction -> 
+            v23 <- LoadInteger '42'
+            Return v23
+        EndPlainFunction
+        v24 <- CreateNamedVariable 'String', 'none'
+        v25 <- GetProperty v24, 'prototype'
+        SetProperty v25, 'valueOf', v22
+        v26 <- LoadString '42'
+        Reassign v12, v26
+    EndIf
+    v27 <- LoadString ''
+    v28 <- LoadString 'hello'
+    v29 <- CallFunction v0, [v28]
+    v30 <- BinaryOperation v27, '+', v29
+EndForLoop
+v31 <- LoadInteger '0'
+v32 <- CreateNamedVariable 'count', 'var', v31
+v33 <- CreateNamedVariable 'String', 'none'
+v34 <- LoadString 'foo'
+v35 <- Construct v33, [v34]
+v36 <- CreateNamedVariable 'x', 'var', v35
+v37 <- LoadString 'valueOf'
+v38 <- BeginPlainFunction -> 
+    v39 <- UnaryOperation v32, '++'
+    v40 <- BeginPlainFunction -> 
+        v41 <- LoadInteger '11'
+        Return v41
+    EndPlainFunction
+    Return v40
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v38
+v42 <- EndObjectLiteral
+v43 <- CreateNamedVariable 'Object', 'none'
+v44 <- CallMethod v43, 'defineProperty', [v36, v37, v42]
+BeginForLoopInitializer
+    v45 <- LoadInteger '0'
+BeginForLoopCondition -> v46
+    v47 <- LoadInteger '3'
+    v48 <- Compare v46, '<', v47
+BeginForLoopAfterthought v48 -> v49
+    v50 <- UnaryOperation v49, '++'
+BeginForLoopBody -> v51
+    v52 <- LoadString '11'
+    v53 <- LoadString ''
+    v54 <- BinaryOperation v53, '+', v36
+    v55 <- LoadInteger '1'
+    v56 <- BinaryOperation v51, '+', v55
+EndForLoop
+
+
+function foo(a1) {
+    for (let i3 = 0; i3 < 100; ++i3) {
+        const v10 = new String(a1);
+        a1 = v10;
+    }
+    return a1;
+}
+var expected = "hello";
+for (let i14 = 0; i14 < 4; ++i14) {
+    if (i14 == 2) {
+        function f22() {
+            return 42;
+        }
+        const t13 = String.prototype;
+        t13.valueOf = f22;
+        expected = "42";
+    }
+    "" + foo("hello");
+}
+var count = 0;
+const v35 = new String("foo");
+var x = v35;
+function f38() {
+    count++;
+    function f40() {
+        return 11;
+    }
+    return f40;
+}
+Object.defineProperty(x, "valueOf", { get: f38 });
+for (let i46 = 0; i46 < 3; i46++) {
+    "" + x;
+    i46 + 1;
+}
+
+FuzzIL program written to corpus/regress-2855.fzil

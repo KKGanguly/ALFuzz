@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> v2
+    v3 <- LoadInteger '0'
+    SetProperty v2, 'setterProperty', v3
+    BeginIf v3
+        v4 <- LoadInteger '1'
+        Return v4
+    EndIf
+    v5 <- LoadInteger '2'
+    Return v5
+EndPlainFunction
+
+
+function assertEquals() {
+}
+function f(a2) {
+    a2.setterProperty = 0;
+    if (0) {
+        return 1;
+    }
+    return 2;
+}
+
+FuzzIL program written to corpus/regress-assignment-in-test-context.fzil

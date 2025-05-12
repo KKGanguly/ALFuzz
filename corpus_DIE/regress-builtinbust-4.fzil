@@ -1,0 +1,61 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString 'x'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v1
+    ObjectLiteralAddElement `0`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'o', 'var', v3
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadInteger '0'
+    Return v6
+EndPlainFunction
+v7 <- LoadString 'length'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+    ObjectLiteralAddProperty `set`, v5
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'defineProperty', [v4, v7, v8]
+v11 <- CallMethod v9, 'seal', [v4]
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '1'
+    v14 <- CallMethod v4, 'push', [v13]
+EndPlainFunction
+v15 <- CallFunction v12, []
+v16 <- LoadInteger '0'
+v17 <- GetProperty v4, 'length'
+v18 <- LoadInteger '1'
+v19 <- GetElement v4, '0'
+v20 <- BeginPlainFunction -> 
+    v21 <- LoadInteger '2'
+    v22 <- CallMethod v4, 'unshift', [v21]
+EndPlainFunction
+v23 <- CallFunction v20, []
+v24 <- LoadInteger '0'
+v25 <- GetProperty v4, 'length'
+v26 <- LoadInteger '2'
+v27 <- GetElement v4, '0'
+
+
+const v1 = Array.prototype;
+var o = { __proto__: v1, 0: "x" };
+function boomer() {
+    return 0;
+}
+Object.defineProperty(o, "length", { get: boomer, set: boomer });
+Object.seal(o);
+function f12() {
+    o.push(1);
+}
+f12();
+o.length;
+o[0];
+function f20() {
+    o.unshift(2);
+}
+f20();
+o.length;
+o[0];
+
+FuzzIL program written to corpus/regress-builtinbust-4.fzil

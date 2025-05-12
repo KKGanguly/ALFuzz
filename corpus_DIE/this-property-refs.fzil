@@ -1,0 +1,105 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadThis
+    SetProperty v2, 'a', v1
+    v3 <- LoadInteger '1'
+    v4 <- LoadThis
+    SetProperty v4, 'b', v3
+    v5 <- LoadInteger '2'
+    v6 <- LoadThis
+    SetProperty v6, 'c', v5
+    v7 <- LoadInteger '3'
+    v8 <- LoadThis
+    SetProperty v8, 'd', v7
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadThis
+    v11 <- GetProperty v10, 'b'
+    v12 <- LoadThis
+    SetProperty v12, 'a', v11
+EndPlainFunction
+v13 <- GetProperty v0, 'prototype'
+SetProperty v13, 'test0', v9
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadThis
+    v16 <- GetProperty v15, 'c'
+    v17 <- LoadThis
+    SetProperty v17, 'b', v16
+    v18 <- LoadThis
+    SetProperty v18, 'a', v16
+EndPlainFunction
+v19 <- GetProperty v0, 'prototype'
+SetProperty v19, 'test1', v14
+v20 <- BeginPlainFunction -> 
+    v21 <- LoadThis
+    v22 <- GetProperty v21, 'd'
+    v23 <- LoadThis
+    SetProperty v23, 'c', v22
+    v24 <- LoadThis
+    v25 <- GetProperty v24, 'c'
+    v26 <- LoadThis
+    SetProperty v26, 'b', v25
+    v27 <- LoadThis
+    v28 <- GetProperty v27, 'b'
+    v29 <- LoadThis
+    SetProperty v29, 'a', v28
+EndPlainFunction
+v30 <- GetProperty v0, 'prototype'
+SetProperty v30, 'test2', v20
+v31 <- Construct v0, []
+v32 <- CreateNamedVariable 't', 'var', v31
+v33 <- CallMethod v32, 'test0', []
+v34 <- LoadInteger '1'
+v35 <- GetProperty v32, 'a'
+v36 <- CallMethod v32, 'test1', []
+v37 <- LoadInteger '2'
+v38 <- GetProperty v32, 'a'
+v39 <- LoadInteger '2'
+v40 <- GetProperty v32, 'b'
+v41 <- CallMethod v32, 'test2', []
+v42 <- LoadInteger '3'
+v43 <- GetProperty v32, 'a'
+v44 <- LoadInteger '3'
+v45 <- GetProperty v32, 'b'
+v46 <- LoadInteger '3'
+v47 <- GetProperty v32, 'c'
+
+
+function Test() {
+    this.a = 0;
+    this.b = 1;
+    this.c = 2;
+    this.d = 3;
+}
+function f9() {
+    this.a = this.b;
+}
+const t9 = Test.prototype;
+t9.test0 = f9;
+function f14() {
+    const v16 = this.c;
+    this.b = v16;
+    this.a = v16;
+}
+const t16 = Test.prototype;
+t16.test1 = f14;
+function f20() {
+    this.c = this.d;
+    this.b = this.c;
+    this.a = this.b;
+}
+const t23 = Test.prototype;
+t23.test2 = f20;
+const v31 = new Test();
+var t = v31;
+t.test0();
+t.a;
+t.test1();
+t.a;
+t.b;
+t.test2();
+t.a;
+t.b;
+t.c;
+
+FuzzIL program written to corpus/this-property-refs.fzil

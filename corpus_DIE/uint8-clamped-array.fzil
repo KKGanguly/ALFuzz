@@ -1,0 +1,171 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        v4 <- LoadInteger '255'
+        v5 <- BinaryOperation v3, '&', v4
+        SetElement v2, '0', v5
+    EndPlainFunction
+    v6 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+    v7 <- LoadInteger '4'
+    v8 <- Construct v6, [v7]
+    v9 <- CreateNamedVariable 'a', 'var', v8
+    v10 <- LoadInteger '1'
+    v11 <- CallFunction v1, [v9, v10]
+    v12 <- LoadInteger '2'
+    v13 <- CallFunction v1, [v9, v12]
+    v14 <- LoadInteger '256'
+    v15 <- CallFunction v1, [v9, v14]
+    v16 <- CallFunction v1, []
+    v17 <- LoadInteger '0'
+    v18 <- GetElement v9, '0'
+EndPlainFunction
+v19 <- CallFunction v0, []
+v20 <- BeginPlainFunction -> 
+    v21 <- BeginPlainFunction -> v22, v23
+        v24 <- LoadInteger '0'
+        v25 <- BinaryOperation v23, '>>>', v24
+        SetElement v22, '0', v25
+    EndPlainFunction
+    v26 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+    v27 <- LoadInteger '4'
+    v28 <- Construct v26, [v27]
+    v29 <- CreateNamedVariable 'a', 'var', v28
+    v30 <- LoadInteger '1'
+    v31 <- CallFunction v21, [v29, v30]
+    v32 <- LoadInteger '2'
+    v33 <- CallFunction v21, [v29, v32]
+    v34 <- LoadInteger '256'
+    v35 <- CallFunction v21, [v29, v34]
+    v36 <- CallFunction v21, []
+    v37 <- LoadInteger '255'
+    v38 <- GetElement v29, '0'
+EndPlainFunction
+v39 <- CallFunction v20, []
+v40 <- BeginPlainFunction -> 
+    v41 <- BeginPlainFunction -> v42, v43
+        v44 <- LoadInteger '0'
+        v45 <- BinaryOperation v43, '|', v44
+        SetElement v42, '0', v45
+    EndPlainFunction
+    v46 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+    v47 <- LoadInteger '4'
+    v48 <- Construct v46, [v47]
+    v49 <- CreateNamedVariable 'a', 'var', v48
+    v50 <- LoadInteger '1'
+    v51 <- CallFunction v41, [v49, v50]
+    v52 <- LoadInteger '2'
+    v53 <- CallFunction v41, [v49, v52]
+    v54 <- LoadInteger '256'
+    v55 <- CallFunction v41, [v49, v54]
+    v56 <- CallFunction v41, []
+    v57 <- LoadInteger '255'
+    v58 <- GetElement v49, '0'
+    v59 <- LoadInteger '1'
+    v60 <- UnaryOperation '-', v59
+    v61 <- CallFunction v41, [v49, v60]
+    v62 <- CallFunction v41, []
+    v63 <- LoadInteger '0'
+    v64 <- GetElement v49, '0'
+EndPlainFunction
+v65 <- CallFunction v40, []
+v66 <- BeginPlainFunction -> 
+    v67 <- BeginPlainFunction -> v68, v69
+        SetElement v68, '0', v69
+    EndPlainFunction
+    v70 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+    v71 <- LoadInteger '4'
+    v72 <- Construct v70, [v71]
+    v73 <- CreateNamedVariable 'a', 'var', v72
+    v74 <- LoadInteger '1'
+    v75 <- CallFunction v67, [v73, v74]
+    v76 <- LoadInteger '2'
+    v77 <- CallFunction v67, [v73, v76]
+    v78 <- CreateNamedVariable 'Infinity', 'none'
+    v79 <- CallFunction v67, [v73, v78]
+    v80 <- CallFunction v67, []
+    v81 <- LoadInteger '255'
+    v82 <- GetElement v73, '0'
+    v83 <- UnaryOperation '-', v78
+    v84 <- CallFunction v67, [v73, v83]
+    v85 <- CallFunction v67, []
+    v86 <- LoadInteger '0'
+    v87 <- GetElement v73, '0'
+    v88 <- LoadFloat '0.5'
+    v89 <- CallFunction v67, [v73, v88]
+    v90 <- CallFunction v67, []
+    v91 <- LoadInteger '0'
+    v92 <- GetElement v73, '0'
+    v93 <- LoadFloat '1.5'
+    v94 <- CallFunction v67, [v73, v93]
+    v95 <- CallFunction v67, []
+    v96 <- LoadInteger '2'
+    v97 <- GetElement v73, '0'
+EndPlainFunction
+v98 <- CallFunction v66, []
+
+
+function f0() {
+    function foo(a2, a3) {
+        a2[0] = a3 & 255;
+    }
+    const v8 = new Uint8ClampedArray(4);
+    var a = v8;
+    foo(a, 1);
+    foo(a, 2);
+    foo(a, 256);
+    foo();
+    a[0];
+}
+f0();
+function f20() {
+    function foo(a22, a23) {
+        a22[0] = a23 >>> 0;
+    }
+    const v28 = new Uint8ClampedArray(4);
+    var a = v28;
+    foo(a, 1);
+    foo(a, 2);
+    foo(a, 256);
+    foo();
+    a[0];
+}
+f20();
+function f40() {
+    function foo(a42, a43) {
+        a42[0] = a43 | 0;
+    }
+    const v48 = new Uint8ClampedArray(4);
+    var a = v48;
+    foo(a, 1);
+    foo(a, 2);
+    foo(a, 256);
+    foo();
+    a[0];
+    foo(a, -1);
+    foo();
+    a[0];
+}
+f40();
+function f66() {
+    function foo(a68, a69) {
+        a68[0] = a69;
+    }
+    const v72 = new Uint8ClampedArray(4);
+    var a = v72;
+    foo(a, 1);
+    foo(a, 2);
+    foo(a, Infinity);
+    foo();
+    a[0];
+    foo(a, -Infinity);
+    foo();
+    a[0];
+    foo(a, 0.5);
+    foo();
+    a[0];
+    foo(a, 1.5);
+    foo();
+    a[0];
+}
+f66();
+
+FuzzIL program written to corpus/uint8-clamped-array.fzil

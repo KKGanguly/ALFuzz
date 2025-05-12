@@ -1,0 +1,22 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadRegExp '\s' 'g'
+    v3 <- LoadString ''
+    v4 <- CallMethod v1, 'replace', [v2, v3]
+    v5 <- CallFunction v0, [v4]
+EndPlainFunction
+BeginTry
+    v6 <- LoadString 'No'
+    v7 <- CallFunction v0, [v6]
+BeginCatch -> v8
+EndTryCatch
+
+
+function loop(a1) {
+    loop(a1.replace(/\s/g, ""));
+}
+try {
+    loop("No");
+} catch(e8) {
+}
+
+FuzzIL program written to corpus/regress-233.fzil

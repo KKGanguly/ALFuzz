@@ -1,0 +1,76 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- LoadInteger '1'
+    v3 <- BinaryOperation v1, '|', v2
+    v4 <- LoadInteger '1'
+    v5 <- LoadUndefined
+    v6 <- LoadInteger '1'
+    v7 <- BinaryOperation v5, '&', v6
+    v8 <- LoadInteger '0'
+    v9 <- LoadUndefined
+    v10 <- LoadInteger '1'
+    v11 <- BinaryOperation v9, '^', v10
+    v12 <- LoadInteger '1'
+    v13 <- LoadUndefined
+    v14 <- LoadInteger '1'
+    v15 <- BinaryOperation v13, '<<', v14
+    v16 <- LoadInteger '0'
+    v17 <- LoadUndefined
+    v18 <- LoadInteger '1'
+    v19 <- BinaryOperation v17, '>>', v18
+    v20 <- LoadInteger '0'
+    v21 <- LoadUndefined
+    v22 <- LoadInteger '1'
+    v23 <- BinaryOperation v21, '>>>', v22
+    v24 <- LoadInteger '0'
+EndPlainFunction
+v25 <- BeginPlainFunction -> 
+    v26 <- LoadInteger '1'
+    v27 <- LoadUndefined
+    v28 <- BinaryOperation v26, '|', v27
+    v29 <- LoadInteger '1'
+    v30 <- LoadInteger '1'
+    v31 <- LoadUndefined
+    v32 <- BinaryOperation v30, '&', v31
+    v33 <- LoadInteger '0'
+    v34 <- LoadInteger '1'
+    v35 <- LoadUndefined
+    v36 <- BinaryOperation v34, '^', v35
+    v37 <- LoadInteger '1'
+    v38 <- LoadInteger '1'
+    v39 <- LoadUndefined
+    v40 <- BinaryOperation v38, '<<', v39
+    v41 <- LoadInteger '1'
+    v42 <- LoadInteger '1'
+    v43 <- LoadUndefined
+    v44 <- BinaryOperation v42, '>>', v43
+    v45 <- LoadInteger '1'
+    v46 <- LoadInteger '1'
+    v47 <- LoadUndefined
+    v48 <- BinaryOperation v46, '>>>', v47
+    v49 <- LoadInteger '1'
+EndPlainFunction
+v50 <- CallFunction v0, []
+v51 <- CallFunction v25, []
+
+
+function testUndefinedLeftHandSide() {
+    undefined | 1;
+    undefined & 1;
+    undefined ^ 1;
+    undefined << 1;
+    undefined >> 1;
+    undefined >>> 1;
+}
+function testUndefinedRightHandSide() {
+    1 | undefined;
+    1 & undefined;
+    1 ^ undefined;
+    1 << undefined;
+    1 >> undefined;
+    1 >>> undefined;
+}
+testUndefinedLeftHandSide();
+testUndefinedRightHandSide();
+
+FuzzIL program written to corpus/bitwise-operations-undefined.fzil

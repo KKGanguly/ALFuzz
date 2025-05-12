@@ -1,0 +1,44 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- CreateNamedVariable 'Array', 'none'
+    v6 <- LoadInteger '3'
+    v7 <- Construct v5, [v6]
+    v8 <- CreateNamedVariable 'x', 'var', v7
+    v9 <- LoadInteger '10'
+    SetElement v8, '0', v9
+    v10 <- CallFunction v4, []
+    v11 <- LoadFloat '15.5'
+    SetElement v1, '1', v11
+    Return v8
+EndPlainFunction
+v12 <- CreateNamedVariable 'gc', 'none'
+v13 <- CallFunction v12, []
+v14 <- CallFunction v3, [v12]
+Reassign v1, v14
+v15 <- CallFunction v3, [v2]
+Reassign v1, v15
+v16 <- CallFunction v3, [v2]
+Reassign v1, v16
+
+
+var global = {};
+function do_nothing() {
+}
+function f(a4) {
+    const v7 = new Array(3);
+    var x = v7;
+    x[0] = 10;
+    a4();
+    global[1] = 15.5;
+    return x;
+}
+gc();
+global = f(gc);
+global = f(do_nothing);
+global = f(do_nothing);
+
+FuzzIL program written to corpus/regress-357105.fzil

@@ -1,0 +1,149 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '0'
+    BeginForLoopCondition -> v2
+        v3 <- LoadInteger '100'
+        v4 <- Compare v2, '<', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- UnaryOperation v5, '++'
+    BeginForLoopBody -> v7
+        v8 <- LoadThis
+        v9 <- LoadString 'a'
+        v10 <- BinaryOperation v9, '+', v7
+        SetComputedProperty v8, v10, v7
+    EndForLoop
+    v11 <- LoadThis
+    v12 <- DeleteProperty v11, 'a50'
+EndPlainFunction
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadInteger '1'
+    Return v14
+EndPlainFunction
+v15 <- GetProperty v0, 'prototype'
+SetProperty v15, 'm', v13
+v16 <- Construct v0, []
+v17 <- CreateNamedVariable 'h', 'var', v16
+BeginForLoopInitializer
+    v18 <- LoadInteger '1'
+BeginForLoopCondition -> v19
+    v20 <- LoadInteger '100'
+    v21 <- Compare v19, '<', v20
+BeginForLoopAfterthought v21 -> v22
+    v23 <- UnaryOperation v22, '++'
+BeginForLoopBody -> v24
+    v25 <- LoadInteger '50'
+    v26 <- Compare v24, '==', v25
+    BeginIf v26
+        v27 <- BeginPlainFunction -> 
+            v28 <- LoadInteger '2'
+            Return v28
+        EndPlainFunction
+        SetProperty v17, 'm', v27
+    BeginElse
+        v29 <- LoadInteger '70'
+        v30 <- Compare v24, '==', v29
+        BeginIf v30
+            v31 <- DeleteProperty v17, 'm'
+        EndIf
+    EndIf
+    v32 <- LoadInteger '50'
+    v33 <- Compare v24, '<', v32
+    v34 <- LoadInteger '70'
+    v35 <- Compare v24, '>=', v34
+    v36 <- BinaryOperation v33, '||', v35
+    v37 <- LoadInteger '1'
+    v38 <- LoadInteger '2'
+    v39 <- TernaryOperation v36, v37, v38
+    v40 <- CallMethod v17, 'm', []
+EndForLoop
+v41 <- LoadString ' '
+v42 <- LoadString 'wwwww '
+v43 <- CallMethod v42, 'split', [v41]
+v44 <- GetElement v43, '0'
+v45 <- CreateNamedVariable 'nonsymbol', 'var', v44
+v46 <- GetProperty v0, 'prototype'
+v47 <- GetProperty v46, 'm'
+v48 <- GetProperty v0, 'prototype'
+SetProperty v48, 'wwwww', v47
+BeginForLoopInitializer
+    v49 <- LoadInteger '1'
+BeginForLoopCondition -> v50
+    v51 <- LoadInteger '100'
+    v52 <- Compare v50, '<', v51
+BeginForLoopAfterthought v52 -> v53
+    v54 <- UnaryOperation v53, '++'
+BeginForLoopBody -> v55
+    v56 <- LoadInteger '50'
+    v57 <- Compare v55, '==', v56
+    BeginIf v57
+        v58 <- BeginPlainFunction -> 
+            v59 <- LoadInteger '2'
+            Return v59
+        EndPlainFunction
+        SetComputedProperty v17, v45, v58
+    BeginElse
+        v60 <- LoadInteger '70'
+        v61 <- Compare v55, '==', v60
+        BeginIf v61
+            v62 <- DeleteComputedProperty v17, v45
+        EndIf
+    EndIf
+    v63 <- LoadInteger '50'
+    v64 <- Compare v55, '<', v63
+    v65 <- LoadInteger '70'
+    v66 <- Compare v55, '>=', v65
+    v67 <- BinaryOperation v64, '||', v66
+    v68 <- LoadInteger '1'
+    v69 <- LoadInteger '2'
+    v70 <- TernaryOperation v67, v68, v69
+    v71 <- CallMethod v17, 'wwwww', []
+EndForLoop
+
+
+function Hash() {
+    for (let i2 = 0; i2 < 100; i2++) {
+        this["a" + i2] = i2;
+    }
+    delete this.a50;
+}
+function f13() {
+    return 1;
+}
+const t9 = Hash.prototype;
+t9.m = f13;
+const v16 = new Hash();
+var h = v16;
+for (let i19 = 1; i19 < 100; i19++) {
+    if (i19 == 50) {
+        function f27() {
+            return 2;
+        }
+        h.m = f27;
+    } else {
+        if (i19 == 70) {
+            delete h.m;
+        }
+    }
+    (i19 < 50) || (i19 >= 70) ? 1 : 2;
+    h.m();
+}
+var nonsymbol = ("wwwww ").split(" ")[0];
+const v47 = Hash.prototype.m;
+const t29 = Hash.prototype;
+t29.wwwww = v47;
+for (let i50 = 1; i50 < 100; i50++) {
+    if (i50 == 50) {
+        function f58() {
+            return 2;
+        }
+        h[nonsymbol] = f58;
+    } else {
+        if (i50 == 70) {
+            delete h[nonsymbol];
+        }
+    }
+    (i50 < 50) || (i50 >= 70) ? 1 : 2;
+    h.wwwww();
+}
+
+FuzzIL program written to corpus/call-stub.fzil

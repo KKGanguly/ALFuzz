@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '10'
+    BeginForLoopCondition -> v2
+        v3 <- LoadInteger '5'
+        v4 <- Compare v2, '>', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- LoadInteger '16'
+        Update v5, '-', v6
+    BeginForLoopBody -> v7
+    EndForLoop
+EndPlainFunction
+v8 <- CallFunction v0, []
+v9 <- CallFunction v0, []
+v10 <- CallFunction v0, []
+
+
+function f() {
+    for (let i2 = 10; i2 > 5; i2 -= 16) {
+    }
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-772872.fzil

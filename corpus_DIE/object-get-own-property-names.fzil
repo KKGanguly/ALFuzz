@@ -1,0 +1,241 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v0
+    ObjectLiteralAddProperty `b`, v1
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'obj', 'var', v2
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'getOwnPropertyNames', [v3]
+v6 <- CreateNamedVariable 'propertyNames', 'var', v5
+v7 <- CallMethod v6, 'sort', []
+v8 <- LoadInteger '2'
+v9 <- GetProperty v6, 'length'
+v10 <- LoadString 'a'
+v11 <- GetElement v6, '0'
+v12 <- LoadString 'b'
+v13 <- GetElement v6, '1'
+v14 <- BeginPlainFunction -> 
+EndPlainFunction
+v15 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v14
+    ObjectLiteralAddProperty `b`, v15
+v16 <- EndObjectLiteral
+v17 <- CreateNamedVariable 'obj', 'var', v16
+v18 <- CallMethod v4, 'getOwnPropertyNames', [v17]
+v19 <- CreateNamedVariable 'propertyNames', 'var', v18
+v20 <- CallMethod v19, 'sort', []
+v21 <- LoadInteger '2'
+v22 <- GetProperty v19, 'length'
+v23 <- LoadString 'a'
+v24 <- GetElement v19, '0'
+v25 <- LoadString 'b'
+v26 <- GetElement v19, '1'
+v27 <- LoadInteger '1'
+v28 <- LoadInteger '2'
+v29 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v27
+    ObjectLiteralAddProperty `b`, v28
+    ObjectLiteralAddProperty `c`, v29
+v30 <- EndObjectLiteral
+v31 <- CreateNamedVariable 'obj', 'var', v30
+v32 <- DeleteProperty v31, 'b'
+v33 <- CallMethod v4, 'getOwnPropertyNames', [v31]
+v34 <- CreateNamedVariable 'propertyNames', 'var', v33
+v35 <- CallMethod v34, 'sort', []
+v36 <- LoadInteger '2'
+v37 <- GetProperty v34, 'length'
+v38 <- LoadString 'a'
+v39 <- GetElement v34, '0'
+v40 <- LoadString 'c'
+v41 <- GetElement v34, '1'
+v42 <- LoadInteger '1'
+v43 <- LoadInteger '2'
+v44 <- CreateArray [v42, v43]
+v45 <- CallMethod v4, 'getOwnPropertyNames', [v44]
+v46 <- CreateNamedVariable 'propertyNames', 'var', v45
+v47 <- CallMethod v46, 'sort', []
+v48 <- LoadInteger '3'
+v49 <- GetProperty v46, 'length'
+v50 <- LoadString '0'
+v51 <- GetElement v46, '0'
+v52 <- LoadString '1'
+v53 <- GetElement v46, '1'
+v54 <- LoadString 'string'
+v55 <- GetElement v46, '0'
+v56 <- TypeOf v55
+v57 <- LoadString 'string'
+v58 <- GetElement v46, '1'
+v59 <- TypeOf v58
+v60 <- LoadString 'length'
+v61 <- GetElement v46, '2'
+v62 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v62
+v63 <- EndObjectLiteral
+v64 <- CreateNamedVariable 'obj', 'var', v63
+v65 <- LoadString 'bar'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `bar`, v65
+v66 <- EndObjectLiteral
+SetProperty v64, '__proto__', v66
+v67 <- CallMethod v4, 'getOwnPropertyNames', [v64]
+Reassign v46, v67
+v68 <- CallMethod v46, 'sort', []
+v69 <- LoadInteger '1'
+v70 <- GetProperty v46, 'length'
+v71 <- LoadString 'foo'
+v72 <- GetElement v46, '0'
+BeginObjectLiteral
+v73 <- EndObjectLiteral
+v74 <- CreateNamedVariable 'obj', 'var', v73
+v75 <- LoadString 'getter'
+v76 <- BeginPlainFunction -> 
+EndPlainFunction
+v77 <- CallMethod v74, '__defineGetter__', [v75, v76]
+v78 <- CallMethod v4, 'getOwnPropertyNames', [v74]
+Reassign v46, v78
+v79 <- CallMethod v46, 'sort', []
+v80 <- LoadInteger '1'
+v81 <- GetProperty v46, 'length'
+v82 <- LoadString 'getter'
+v83 <- GetElement v46, '0'
+v84 <- CreateNamedVariable 'Array', 'none'
+v85 <- GetProperty v84, 'prototype'
+v86 <- GetProperty v85, 'concat'
+v87 <- CreateNamedVariable 'savedConcat', 'var', v86
+v88 <- BeginPlainFunction -> 
+    v89 <- CreateArray []
+    Return v89
+EndPlainFunction
+v90 <- GetProperty v84, 'prototype'
+SetProperty v90, 'concat', v88
+v91 <- LoadString 'foo'
+v92 <- LoadString 'baz'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v91
+    ObjectLiteralAddProperty `bar`, v92
+v93 <- EndObjectLiteral
+v94 <- CallMethod v4, 'getOwnPropertyNames', [v93]
+Reassign v46, v94
+v95 <- LoadInteger '2'
+v96 <- GetProperty v46, 'length'
+v97 <- LoadString '0'
+v98 <- GetElement v46, '0'
+v99 <- LoadString 'bar'
+v100 <- GetElement v46, '1'
+v101 <- GetProperty v84, 'prototype'
+v102 <- GetProperty v46, '__proto__'
+v103 <- GetProperty v84, 'prototype'
+SetProperty v103, 'concat', v87
+v104 <- LoadInteger '4'
+v105 <- CallMethod v4, 'getOwnPropertyNames', [v104]
+v106 <- CreateArray []
+v107 <- LoadString 'foo'
+v108 <- CallMethod v4, 'getOwnPropertyNames', [v107]
+v109 <- LoadString '0'
+v110 <- LoadString '1'
+v111 <- LoadString '2'
+v112 <- LoadString 'length'
+v113 <- CreateArray [v109, v110, v111, v112]
+v114 <- LoadBoolean 'true'
+v115 <- CallMethod v4, 'getOwnPropertyNames', [v114]
+v116 <- CreateArray []
+BeginTry
+    v117 <- LoadUndefined
+    v118 <- CallMethod v4, 'getOwnPropertyNames', [v117]
+    v119 <- LoadBoolean 'false'
+BeginCatch -> v120
+    v121 <- LoadRegExp 'Cannot convert undefined or null to object' ''
+    v122 <- CallMethod v121, 'test', [v120]
+EndTryCatch
+BeginTry
+    v123 <- LoadNull
+    v124 <- CallMethod v4, 'getOwnPropertyNames', [v123]
+    v125 <- LoadBoolean 'false'
+BeginCatch -> v126
+    v127 <- LoadRegExp 'Cannot convert undefined or null to object' ''
+    v128 <- CallMethod v127, 'test', [v126]
+EndTryCatch
+
+
+var obj = { a: 1, b: 2 };
+var propertyNames = Object.getOwnPropertyNames(obj);
+propertyNames.sort();
+propertyNames.length;
+propertyNames[0];
+propertyNames[1];
+function f14() {
+}
+function f15() {
+}
+var obj = { a: f14, b: f15 };
+var propertyNames = Object.getOwnPropertyNames(obj);
+propertyNames.sort();
+propertyNames.length;
+propertyNames[0];
+propertyNames[1];
+var obj = { a: 1, b: 2, c: 3 };
+delete obj.b;
+var propertyNames = Object.getOwnPropertyNames(obj);
+propertyNames.sort();
+propertyNames.length;
+propertyNames[0];
+propertyNames[1];
+var propertyNames = Object.getOwnPropertyNames([1,2]);
+propertyNames.sort();
+propertyNames.length;
+propertyNames[0];
+propertyNames[1];
+typeof propertyNames[0];
+typeof propertyNames[1];
+propertyNames[2];
+var obj = { foo: "foo" };
+obj.__proto__ = { bar: "bar" };
+propertyNames = Object.getOwnPropertyNames(obj);
+propertyNames.sort();
+propertyNames.length;
+propertyNames[0];
+var obj = {};
+function f76() {
+}
+obj.__defineGetter__("getter", f76);
+propertyNames = Object.getOwnPropertyNames(obj);
+propertyNames.sort();
+propertyNames.length;
+propertyNames[0];
+var savedConcat = Array.prototype.concat;
+function f88() {
+    return [];
+}
+const t49 = Array.prototype;
+t49.concat = f88;
+propertyNames = Object.getOwnPropertyNames({ 0: "foo", bar: "baz" });
+propertyNames.length;
+propertyNames[0];
+propertyNames[1];
+Array.prototype;
+propertyNames.__proto__;
+const t52 = Array.prototype;
+t52.concat = savedConcat;
+Object.getOwnPropertyNames(4);
+[];
+Object.getOwnPropertyNames("foo");
+["0","1","2","length"];
+Object.getOwnPropertyNames(true);
+[];
+try {
+    Object.getOwnPropertyNames(undefined);
+} catch(e120) {
+    /Cannot convert undefined or null to object/.test(e120);
+}
+try {
+    Object.getOwnPropertyNames(null);
+} catch(e126) {
+    /Cannot convert undefined or null to object/.test(e126);
+}
+
+FuzzIL program written to corpus/object-get-own-property-names.fzil

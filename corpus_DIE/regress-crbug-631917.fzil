@@ -1,0 +1,127 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'b'
+    Return v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v0
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'b', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadString 'c'
+    Return v5
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v4
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'c', 'var', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadUndefined
+    v10 <- CreateNamedVariable 'expected_receiver', 'var', v9
+    v11 <- LoadInteger '100'
+    v12 <- LoadInteger '200'
+    v13 <- LoadInteger '300'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v11
+        ObjectLiteralAddProperty `b_`, v12
+        BeginObjectLiteralGetter `b` -> v14
+            v15 <- GetProperty v14, 'b_'
+            Return v15
+        EndObjectLiteralGetter
+        BeginObjectLiteralSetter `b` -> v16, v17
+            SetProperty v16, 'b_', v17
+        EndObjectLiteralSetter
+        ObjectLiteralAddProperty `c_`, v13
+        BeginObjectLiteralGetter `c` -> v18
+            v19 <- GetProperty v18, 'c_'
+            Return v19
+        EndObjectLiteralGetter
+        BeginObjectLiteralSetter `c` -> v20, v21
+            SetProperty v20, 'c_', v21
+        EndObjectLiteralSetter
+    v22 <- EndObjectLiteral
+    v23 <- CreateNamedVariable 'obj1', 'var', v22
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `boom` -> v24
+            v25 <- GetSuperProperty 'a'
+            v26 <- UnaryOperation v25, '++'
+            v27 <- GetComputedSuperProperty v3
+            v28 <- UnaryOperation v27, '++'
+            v29 <- GetComputedSuperProperty v7
+            v30 <- UnaryOperation v29, '++'
+        EndObjectLiteralMethod
+    v31 <- EndObjectLiteral
+    v32 <- CreateNamedVariable 'obj2', 'var', v31
+    v33 <- CreateNamedVariable 'Object', 'none'
+    v34 <- CallMethod v33, 'setPrototypeOf', [v32, v23]
+    Reassign v10, v32
+    v35 <- CallMethod v32, 'boom', []
+    v36 <- LoadInteger '101'
+    v37 <- GetProperty v32, 'a'
+    v38 <- LoadInteger '201'
+    v39 <- GetComputedProperty v32, v3
+    v40 <- LoadInteger '301'
+    v41 <- GetComputedProperty v32, v7
+    Reassign v10, v23
+    v42 <- LoadInteger '100'
+    v43 <- GetProperty v23, 'a'
+    v44 <- LoadInteger '200'
+    v45 <- GetComputedProperty v23, v3
+    v46 <- LoadInteger '300'
+    v47 <- GetComputedProperty v23, v7
+EndPlainFunction
+v48 <- CallFunction v8, []
+
+
+function f0() {
+    return "b";
+}
+var b = { toString: f0 };
+function f4() {
+    return "c";
+}
+var c = { toString: f4 };
+function f8() {
+    var expected_receiver;
+    const v22 = {
+        a: 100,
+        b_: 200,
+        get b() {
+            return this.b_;
+        },
+        set b(a17) {
+            this.b_ = a17;
+        },
+        c_: 300,
+        get c() {
+            return this.c_;
+        },
+        set c(a21) {
+            this.c_ = a21;
+        },
+    };
+    var obj1 = v22;
+    const v31 = {
+        boom() {
+            let v25 = super.a;
+            v25++;
+            let v27 = super[b];
+            v27++;
+            let v29 = super[c];
+            v29++;
+        },
+    };
+    var obj2 = v31;
+    Object.setPrototypeOf(obj2, obj1);
+    expected_receiver = obj2;
+    obj2.boom();
+    obj2.a;
+    obj2[b];
+    obj2[c];
+    expected_receiver = obj1;
+    obj1.a;
+    obj1[b];
+    obj1[c];
+}
+f8();
+
+FuzzIL program written to corpus/regress-crbug-631917.fzil

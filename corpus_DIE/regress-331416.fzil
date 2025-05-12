@@ -1,0 +1,93 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '1'
+v5 <- LoadInteger '2'
+v6 <- LoadInteger '3'
+v7 <- CreateArray [v4, v5, v6]
+v8 <- LoadString 'length'
+v9 <- CallFunction v0, [v7, v8]
+v10 <- LoadInteger '3'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadInteger '1'
+v13 <- LoadInteger '2'
+v14 <- LoadInteger '3'
+v15 <- CreateArray [v12, v13, v14]
+v16 <- LoadInteger '3'
+v17 <- CallFunction v0, [v15, v16]
+v18 <- LoadInteger '0'
+v19 <- LoadInteger '0'
+v20 <- CallFunction v0, [v18, v19]
+v21 <- LoadInteger '2'
+v22 <- LoadInteger '1'
+v23 <- LoadInteger '2'
+v24 <- LoadInteger '3'
+v25 <- CreateArray [v22, v23, v24]
+v26 <- LoadInteger '1'
+v27 <- CallFunction v0, [v25, v26]
+v28 <- LoadUndefined
+v29 <- LoadInteger '0'
+v30 <- LoadInteger '0'
+v31 <- CallFunction v0, [v29, v30]
+v32 <- BeginPlainFunction -> v33, v34, v35
+    SetComputedProperty v33, v34, v35
+EndPlainFunction
+v36 <- LoadInteger '1'
+v37 <- LoadInteger '2'
+v38 <- LoadInteger '3'
+v39 <- CreateArray [v36, v37, v38]
+v40 <- LoadString 'length'
+v41 <- LoadInteger '3'
+v42 <- CallFunction v32, [v39, v40, v41]
+v43 <- LoadInteger '3'
+v44 <- CallFunction v32, [v43]
+v45 <- LoadInteger '1'
+v46 <- LoadInteger '2'
+v47 <- LoadInteger '3'
+v48 <- CreateArray [v45, v46, v47]
+v49 <- LoadInteger '3'
+v50 <- LoadInteger '3'
+v51 <- CallFunction v32, [v48, v49, v50]
+v52 <- LoadInteger '0'
+v53 <- LoadInteger '0'
+v54 <- LoadInteger '1'
+v55 <- CallFunction v32, [v52, v53, v54]
+v56 <- LoadInteger '1'
+v57 <- LoadInteger '2'
+v58 <- LoadInteger '3'
+v59 <- CreateArray [v56, v57, v58]
+v60 <- CreateNamedVariable 'a', 'var', v59
+v61 <- LoadInteger '1'
+v62 <- LoadInteger '1'
+v63 <- CallFunction v32, [v60, v61, v62]
+v64 <- LoadInteger '1'
+v65 <- GetElement v60, '1'
+v66 <- LoadInteger '0'
+v67 <- LoadInteger '0'
+v68 <- LoadInteger '1'
+v69 <- CallFunction v32, [v66, v67, v68]
+
+
+function load(a1, a2) {
+    return a1[a2];
+}
+load([1,2,3], "length");
+load(3);
+load([1,2,3], 3);
+load(0, 0);
+load([1,2,3], 1);
+load(0, 0);
+function store(a33, a34, a35) {
+    a33[a34] = a35;
+}
+store([1,2,3], "length", 3);
+store(3);
+store([1,2,3], 3, 3);
+store(0, 0, 1);
+var a = [1,2,3];
+store(a, 1, 1);
+a[1];
+store(0, 0, 1);
+
+FuzzIL program written to corpus/regress-331416.fzil

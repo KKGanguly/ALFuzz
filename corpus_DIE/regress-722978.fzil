@@ -1,0 +1,38 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable '__v_3', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '0'
+    v4 <- UnaryOperation '-', v3
+    v5 <- CreateNamedVariable '__v_30', 'var', v4
+    v6 <- LoadString '0'
+    v7 <- BeginPlainFunction -> 
+        v8 <- LoadUndefined
+        Return v8
+    EndPlainFunction
+    v9 <- CallMethod v5, '__defineGetter__', [v6, v7]
+    v10 <- LoadInteger '0'
+    Reassign v5, v10
+    v11 <- LoadInteger '0'
+    Reassign v1, v11
+    v12 <- LoadInteger '0'
+    v13 <- CreateNamedVariable 'Object', 'none'
+    v14 <- CallMethod v13, 'is', [v12, v5]
+EndPlainFunction
+v15 <- CallFunction v2, []
+
+
+var __v_3 = {};
+function __f_0() {
+    var __v_30 = -0;
+    function f7() {
+        return undefined;
+    }
+    __v_30.__defineGetter__("0", f7);
+    __v_30 = 0;
+    __v_3 = 0;
+    Object.is(0, __v_30);
+}
+__f_0();
+
+FuzzIL program written to corpus/regress-722978.fzil

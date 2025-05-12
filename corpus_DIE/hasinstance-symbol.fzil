@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- CallFunction v1, []
+    v3 <- CreateNamedVariable 'a', 'var', v2
+    v4 <- CreateNamedVariable 'Symbol', 'none'
+    v5 <- GetProperty v4, 'hasInstance'
+    v6 <- CallComputedMethod v1, v5, [v3]
+    v7 <- CreateNamedVariable 'Function', 'none'
+    v8 <- GetProperty v7, 'prototype'
+    v9 <- GetProperty v4, 'hasInstance'
+    v10 <- GetComputedProperty v8, v9
+    v11 <- CallMethod v10, 'call', []
+EndPlainFunction
+v12 <- CallFunction v0, []
+
+
+function TestHasInstance() {
+    var a = Array();
+    Array[Symbol.hasInstance](a);
+    Function.prototype[Symbol.hasInstance].call();
+}
+TestHasInstance();
+
+FuzzIL program written to corpus/hasinstance-symbol.fzil

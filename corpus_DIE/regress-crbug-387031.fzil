@@ -1,0 +1,45 @@
+v0 <- LoadInteger '1'
+v1 <- CreateArray [v0]
+v2 <- CreateNamedVariable 'a', 'none'
+Reassign v2, v1
+v3 <- CreateArray []
+v4 <- CreateNamedVariable 'b', 'none'
+Reassign v4, v3
+v5 <- LoadInteger '0'
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '4294967295'
+    v8 <- CreateNamedVariable 'b', 'none'
+    SetProperty v8, 'length', v7
+EndPlainFunction
+v9 <- CreateNamedVariable 'a', 'none'
+v10 <- CallMethod v9, '__defineGetter__', [v5, v6]
+v11 <- CreateNamedVariable 'b', 'none'
+v12 <- CallMethod v9, 'concat', [v11]
+v13 <- CreateNamedVariable 'c', 'none'
+Reassign v13, v12
+BeginForLoopInitializer
+    v14 <- LoadInteger '0'
+BeginForLoopCondition -> v15
+    v16 <- LoadInteger '20'
+    v17 <- Compare v15, '<', v16
+BeginForLoopAfterthought v17 -> v18
+    v19 <- UnaryOperation v18, '++'
+BeginForLoopBody -> v20
+    v21 <- LoadUndefined
+    v22 <- CreateNamedVariable 'c', 'none'
+    v23 <- GetComputedProperty v22, v20
+EndForLoop
+
+
+a = [1];
+b = [];
+function f6() {
+    b.length = 4294967295;
+}
+a.__defineGetter__(0, f6);
+c = a.concat(b);
+for (let i15 = 0; i15 < 20; i15++) {
+    c[i15];
+}
+
+FuzzIL program written to corpus/regress-crbug-387031.fzil

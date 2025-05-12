@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- BinaryOperation v1, '*', v2
+    v4 <- CreateNamedVariable 'l', 'var', v3
+    v5 <- LoadString 'r'
+    v6 <- CreateNamedVariable 'r', 'var', v5
+    BeginWhileLoopHeader
+        v7 <- GetProperty v6, 'length'
+        v8 <- Compare v7, '<', v1
+    BeginWhileLoopBody v8
+        v9 <- BinaryOperation v6, '+', v6
+        Reassign v6, v9
+    EndWhileLoop
+    Return v6
+EndPlainFunction
+v10 <- LoadString 'r'
+v11 <- LoadInteger '1'
+v12 <- CallFunction v0, [v11]
+v13 <- LoadString 'rr'
+v14 <- LoadInteger '2'
+v15 <- CallFunction v0, [v14]
+v16 <- LoadString 'rrrr'
+v17 <- LoadInteger '3'
+v18 <- CallFunction v0, [v17]
+v19 <- LoadString 'rrrrrrrr'
+v20 <- LoadInteger '6'
+v21 <- CallFunction v0, [v20]
+
+
+function TestCreateString(a1) {
+    var l = a1 * 1;
+    var r = "r";
+    while (r.length < a1) {
+        r = r + r;
+    }
+    return r;
+}
+TestCreateString(1);
+TestCreateString(2);
+TestCreateString(3);
+TestCreateString(6);
+
+FuzzIL program written to corpus/regress-2.fzil

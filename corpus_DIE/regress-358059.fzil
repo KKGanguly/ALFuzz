@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetProperty v1, 'x'
+    v4 <- UnaryOperation v3, '++'
+    v5 <- BinaryOperation v2, '+', v4
+    Return v5
+EndPlainFunction
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'o', 'var', v6
+v8 <- LoadString 'x'
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadInteger '1'
+    Return v10
+EndPlainFunction
+v11 <- CallMethod v7, '__defineGetter__', [v8, v9]
+v12 <- LoadInteger '4'
+v13 <- LoadInteger '3'
+v14 <- CallFunction v0, [v7, v13]
+v15 <- LoadInteger '4'
+v16 <- LoadInteger '3'
+v17 <- CallFunction v0, [v7, v16]
+v18 <- LoadInteger '4'
+v19 <- LoadInteger '3'
+v20 <- CallFunction v0, [v7, v19]
+
+
+function f(a1, a2) {
+    let v3 = a1.x;
+    return a2 + v3++;
+}
+var o = {};
+function f9() {
+    return 1;
+}
+o.__defineGetter__("x", f9);
+f(o, 3);
+f(o, 3);
+f(o, 3);
+
+FuzzIL program written to corpus/regress-358059.fzil

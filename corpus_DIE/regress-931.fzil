@@ -1,0 +1,100 @@
+v0 <- LoadString ''
+v1 <- CreateNamedVariable 'sequence', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- BinaryOperation v3, '+', v4
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7, v8
+    v9 <- BinaryOperation v7, '-', v8
+    Return v9
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v2
+    ObjectLiteralAddElement `2`, v6
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'o', 'var', v10
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadString '1'
+    Update v1, '+', v13
+    Return v11
+EndPlainFunction
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadString '2'
+    Update v1, '+', v15
+    v16 <- LoadString 'f'
+    Return v16
+EndPlainFunction
+v17 <- BeginPlainFunction -> 
+    v18 <- LoadString '3'
+    Update v1, '+', v18
+    v19 <- LoadInteger '3'
+    Return v19
+EndPlainFunction
+v20 <- BeginPlainFunction -> 
+    v21 <- LoadString '4'
+    Update v1, '+', v21
+    v22 <- LoadInteger '4'
+    Return v22
+EndPlainFunction
+v23 <- CallFunction v17, []
+v24 <- CallFunction v20, []
+v25 <- CallFunction v12, []
+v26 <- CallFunction v14, []
+v27 <- CallComputedMethod v25, v26, [v23, v24]
+v28 <- CreateNamedVariable 'result', 'var', v27
+v29 <- LoadInteger '7'
+v30 <- LoadString '1234'
+v31 <- BeginPlainFunction -> 
+    v32 <- LoadString '2''
+    Update v1, '+', v32
+    v33 <- LoadInteger '2'
+    Return v33
+EndPlainFunction
+v34 <- CallFunction v17, []
+v35 <- CallFunction v20, []
+v36 <- CallFunction v12, []
+v37 <- CallFunction v31, []
+v38 <- CallComputedMethod v36, v37, [v34, v35]
+v39 <- CreateNamedVariable 'result', 'var', v38
+v40 <- LoadInteger '1'
+v41 <- UnaryOperation '-', v40
+v42 <- LoadString '123412'34'
+
+
+var sequence = "";
+function f2(a3, a4) {
+    return a3 + a4;
+}
+function f6(a7, a8) {
+    return a7 - a8;
+}
+var o = { f: f2, 2: f6 };
+function first() {
+    sequence += "1";
+    return o;
+}
+function second() {
+    sequence += "2";
+    return "f";
+}
+function third() {
+    sequence += "3";
+    return 3;
+}
+function fourth() {
+    sequence += "4";
+    return 4;
+}
+const v23 = third();
+const v24 = fourth();
+var result = first()[second()](v23, v24);
+function second_prime() {
+    sequence += "2'";
+    return 2;
+}
+const v34 = third();
+const v35 = fourth();
+var result = first()[second_prime()](v34, v35);
+-1;
+
+FuzzIL program written to corpus/regress-931.fzil

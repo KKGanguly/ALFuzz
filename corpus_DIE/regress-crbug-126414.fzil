@@ -1,0 +1,19 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadArguments
+    v3 <- GetComputedProperty v2, v1
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '0'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadInteger '536870912'
+v7 <- UnaryOperation '-', v6
+v8 <- CallFunction v0, [v7]
+
+
+function foo(a1) {
+    return arguments[a1];
+}
+foo(0);
+foo(-536870912);
+
+FuzzIL program written to corpus/regress-crbug-126414.fzil

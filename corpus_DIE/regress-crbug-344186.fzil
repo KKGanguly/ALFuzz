@@ -1,0 +1,54 @@
+v0 <- CreateNamedVariable 'Int32Array', 'none'
+v1 <- LoadInteger '100'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'dummy', 'var', v2
+v4 <- LoadInteger '128'
+v5 <- Construct v0, [v4]
+v6 <- CreateNamedVariable 'array', 'var', v5
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadInteger '1'
+    v10 <- LoadInteger '95'
+    v11 <- BinaryOperation v8, '-', v10
+    SetComputedProperty v6, v11, v9
+    v12 <- LoadInteger '2'
+    v13 <- LoadInteger '99'
+    v14 <- BinaryOperation v8, '-', v13
+    SetComputedProperty v6, v14, v12
+    v15 <- LoadInteger '3'
+    v16 <- LoadInteger '4'
+    v17 <- BinaryOperation v8, '+', v16
+    SetComputedProperty v6, v17, v15
+EndPlainFunction
+v18 <- LoadInteger '100'
+v19 <- CallFunction v7, [v18]
+v20 <- LoadInteger '0'
+v21 <- CallFunction v7, [v20]
+BeginForLoopInitializer
+    v22 <- LoadInteger '0'
+BeginForLoopCondition -> v23
+    v24 <- GetProperty v3, 'length'
+    v25 <- Compare v23, '<', v24
+BeginForLoopAfterthought v25 -> v26
+    v27 <- UnaryOperation v26, '++'
+BeginForLoopBody -> v28
+    v29 <- LoadInteger '0'
+    v30 <- GetComputedProperty v3, v28
+EndForLoop
+
+
+const v2 = new Int32Array(100);
+var dummy = v2;
+const v5 = new Int32Array(128);
+var array = v5;
+function fun(a8) {
+    array[a8 - 95] = 1;
+    array[a8 - 99] = 2;
+    array[a8 + 4] = 3;
+}
+fun(100);
+fun(0);
+for (let i23 = 0; i23 < dummy.length; i23++) {
+    dummy[i23];
+}
+
+FuzzIL program written to corpus/regress-crbug-344186.fzil

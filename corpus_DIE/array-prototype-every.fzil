@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'array', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- BeginArrowFunction -> v6
+            v7 <- LoadInteger '0'
+            v8 <- Compare v6, '>', v7
+            Return v8
+        EndArrowFunction
+        v9 <- CallMethod v3, 'every', [v5]
+        Return v9
+    EndPlainFunction
+    v10 <- CallFunction v4, []
+    v11 <- LoadBoolean 'true'
+    v12 <- LoadInteger '6'
+    v13 <- UnaryOperation '-', v12
+    v14 <- GetProperty v3, '__proto__'
+    v15 <- CallMethod v14, 'push', [v13]
+    v16 <- CallFunction v4, []
+    v17 <- LoadBoolean 'false'
+EndPlainFunction
+v18 <- CallFunction v0, []
+
+
+function f0() {
+    var array = [,];
+    function every() {
+        const v5 = (a6) => {
+            return a6 > 0;
+        };
+        return array.every(v5);
+    }
+    every();
+    const v13 = -6;
+    array.__proto__.push(v13);
+    every();
+}
+f0();
+
+FuzzIL program written to corpus/array-prototype-every.fzil

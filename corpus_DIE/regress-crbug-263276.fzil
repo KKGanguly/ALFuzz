@@ -1,0 +1,37 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'array1', 'var', v0
+v2 <- LoadBoolean 'true'
+SetProperty v1, 'foo', v2
+v3 <- CreateArray []
+v4 <- CreateNamedVariable 'array2', 'var', v3
+v5 <- LoadBoolean 'true'
+SetProperty v4, 'bar', v5
+v6 <- BeginPlainFunction -> v7
+    v8 <- LoadInteger '1'
+    v9 <- GetProperty v7, 'length'
+    SetComputedProperty v7, v9, v8
+EndPlainFunction
+v10 <- CallFunction v6, [v1]
+v11 <- CallFunction v6, [v1]
+v12 <- CallFunction v6, [v4]
+v13 <- CallFunction v6, [v4]
+v14 <- CallFunction v6, [v4]
+v15 <- LoadInteger '3'
+v16 <- GetProperty v4, 'length'
+
+
+var array1 = [];
+array1.foo = true;
+var array2 = [];
+array2.bar = true;
+function bad(a7) {
+    a7[a7.length] = 1;
+}
+bad(array1);
+bad(array1);
+bad(array2);
+bad(array2);
+bad(array2);
+array2.length;
+
+FuzzIL program written to corpus/regress-crbug-263276.fzil

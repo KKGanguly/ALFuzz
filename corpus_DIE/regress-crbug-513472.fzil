@@ -1,0 +1,19 @@
+v0 <- CreateNamedVariable 'Error', 'none'
+v1 <- CallFunction v0, []
+v2 <- LoadThis
+SetProperty v2, '__proto__', v1
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '1'
+    v5 <- CreateNamedVariable 'NaN', 'none'
+    Reassign v5, v4
+EndPlainFunction
+v6 <- CallFunction v3, []
+
+
+this.__proto__ = Error();
+function f3() {
+    NaN = 1;
+}
+f3();
+
+FuzzIL program written to corpus/regress-crbug-513472.fzil

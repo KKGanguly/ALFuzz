@@ -1,0 +1,24 @@
+v0 <- LoadInteger '1'
+v1 <- CreateArray [v0]
+v2 <- CreateNamedVariable 'a', 'var', v1
+v3 <- LoadString 'bla'
+SetProperty v2, 'foo', v3
+v4 <- DeleteProperty v2, 'foo'
+v5 <- LoadFloat '1.5'
+SetElement v2, '0', v5
+v6 <- CreateArray []
+v7 <- CreateNamedVariable 'a2', 'var', v6
+v8 <- LoadString 'bla'
+SetProperty v7, 'foo', v8
+v9 <- DeleteProperty v7, 'foo'
+
+
+var a = [1];
+a.foo = "bla";
+delete a.foo;
+a[0] = 1.5;
+var a2 = [];
+a2.foo = "bla";
+delete a2.foo;
+
+FuzzIL program written to corpus/regress-499790.fzil

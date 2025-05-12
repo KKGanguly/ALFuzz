@@ -1,0 +1,272 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'test_id', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- CreateNamedVariable 'Function', 'none'
+    v6 <- LoadString 'n'
+    v7 <- LoadString '"'
+    v8 <- UnaryOperation v1, '++'
+    v9 <- BinaryOperation v7, '+', v8
+    v10 <- LoadString '";return Math.floor(n)'
+    v11 <- BinaryOperation v9, '+', v10
+    v12 <- Construct v5, [v6, v11]
+    v13 <- CreateNamedVariable 'test', 'var', v12
+    v14 <- CallFunction v13, [v4]
+    v15 <- CallFunction v13, [v4]
+    v16 <- CallFunction v13, [v4]
+    v17 <- CallFunction v13, [v4]
+    v18 <- LoadString 'n'
+    v19 <- LoadString '"'
+    v20 <- UnaryOperation v1, '++'
+    v21 <- BinaryOperation v19, '+', v20
+    v22 <- LoadString '";return Math.floor(+n)'
+    v23 <- BinaryOperation v21, '+', v22
+    v24 <- Construct v5, [v18, v23]
+    v25 <- CreateNamedVariable 'test_double_input', 'var', v24
+    v26 <- CallFunction v25, [v4]
+    v27 <- CallFunction v25, [v4]
+    v28 <- CallFunction v25, [v4]
+    v29 <- CallFunction v25, [v4]
+    v30 <- LoadString 'n'
+    v31 <- LoadString '"'
+    v32 <- UnaryOperation v1, '++'
+    v33 <- BinaryOperation v31, '+', v32
+    v34 <- LoadString '";return Math.floor(n) + -0.0'
+    v35 <- BinaryOperation v33, '+', v34
+    v36 <- Construct v5, [v30, v35]
+    v37 <- CreateNamedVariable 'test_double_output', 'var', v36
+    v38 <- CallFunction v37, [v4]
+    v39 <- CallFunction v37, [v4]
+    v40 <- CallFunction v37, [v4]
+    v41 <- CallFunction v37, [v4]
+    v42 <- LoadString 'n'
+    v43 <- LoadString '"'
+    v44 <- UnaryOperation v1, '++'
+    v45 <- BinaryOperation v43, '+', v44
+    v46 <- LoadString '";return -Math.ceil(-n)'
+    v47 <- BinaryOperation v45, '+', v46
+    v48 <- Construct v5, [v42, v47]
+    v49 <- CreateNamedVariable 'test_via_ceil', 'var', v48
+    v50 <- CallFunction v49, [v4]
+    v51 <- CallFunction v49, [v4]
+    v52 <- CallFunction v49, [v4]
+    v53 <- CallFunction v49, [v4]
+    v54 <- LoadInteger '0'
+    v55 <- Compare v4, '>=', v54
+    BeginIf v55
+        v56 <- LoadString 'n'
+        v57 <- LoadString '"'
+        v58 <- UnaryOperation v1, '++'
+        v59 <- BinaryOperation v57, '+', v58
+        v60 <- LoadString '";return Math.trunc(n)'
+        v61 <- BinaryOperation v59, '+', v60
+        v62 <- Construct v5, [v56, v61]
+        v63 <- CreateNamedVariable 'test_via_trunc', 'var', v62
+        v64 <- CallFunction v63, [v4]
+        v65 <- CallFunction v63, [v4]
+        v66 <- CallFunction v63, [v4]
+        v67 <- CallFunction v63, [v4]
+    EndIf
+EndPlainFunction
+v68 <- BeginPlainFunction -> 
+    v69 <- LoadFloat '0.5'
+    v70 <- CreateNamedVariable 'x', 'var', v69
+    v71 <- BeginPlainFunction -> 
+        v72 <- LoadFloat '0.5'
+        v73 <- BinaryOperation v70, '-', v72
+        Return v73
+    EndPlainFunction
+    v74 <- CallFunction v71, []
+    Return v74
+EndPlainFunction
+v75 <- BeginPlainFunction -> 
+    v76 <- LoadInteger '1'
+    v77 <- LoadInteger '30'
+    v78 <- BinaryOperation v76, '<<', v77
+    v79 <- LoadInteger '1'
+    v80 <- LoadInteger '22'
+    v81 <- BinaryOperation v79, '<<', v80
+    v82 <- BinaryOperation v78, '*', v81
+    v83 <- CreateNamedVariable 'two_52', 'var', v82
+    v84 <- CallFunction v2, [v83, v83]
+    v85 <- LoadFloat '0.1'
+    v86 <- BinaryOperation v83, '+', v85
+    v87 <- CallFunction v2, [v83, v86]
+    v88 <- LoadFloat '0.5'
+    v89 <- BinaryOperation v83, '+', v88
+    v90 <- LoadFloat '0.5'
+    v91 <- BinaryOperation v83, '+', v90
+    v92 <- CallFunction v2, [v83, v91]
+    v93 <- LoadInteger '1'
+    v94 <- BinaryOperation v83, '+', v93
+    v95 <- LoadFloat '0.7'
+    v96 <- BinaryOperation v83, '+', v95
+    v97 <- LoadInteger '1'
+    v98 <- BinaryOperation v83, '+', v97
+    v99 <- LoadFloat '0.7'
+    v100 <- BinaryOperation v83, '+', v99
+    v101 <- CallFunction v2, [v98, v100]
+    v102 <- LoadInteger '1'
+    v103 <- BinaryOperation v83, '-', v102
+    v104 <- LoadInteger '1'
+    v105 <- BinaryOperation v83, '-', v104
+    v106 <- CallFunction v2, [v103, v105]
+    v107 <- LoadInteger '1'
+    v108 <- BinaryOperation v83, '-', v107
+    v109 <- LoadInteger '1'
+    v110 <- BinaryOperation v83, '-', v109
+    v111 <- LoadFloat '0.1'
+    v112 <- BinaryOperation v110, '+', v111
+    v113 <- CallFunction v2, [v108, v112]
+    v114 <- LoadInteger '1'
+    v115 <- BinaryOperation v83, '-', v114
+    v116 <- LoadInteger '1'
+    v117 <- BinaryOperation v83, '-', v116
+    v118 <- LoadFloat '0.5'
+    v119 <- BinaryOperation v117, '+', v118
+    v120 <- CallFunction v2, [v115, v119]
+    v121 <- LoadInteger '1'
+    v122 <- BinaryOperation v83, '-', v121
+    v123 <- LoadInteger '1'
+    v124 <- BinaryOperation v83, '-', v123
+    v125 <- LoadFloat '0.7'
+    v126 <- BinaryOperation v124, '+', v125
+    v127 <- CallFunction v2, [v122, v126]
+    v128 <- UnaryOperation '-', v83
+    v129 <- UnaryOperation '-', v83
+    v130 <- CallFunction v2, [v128, v129]
+    v131 <- UnaryOperation '-', v83
+    v132 <- UnaryOperation '-', v83
+    v133 <- LoadFloat '0.1'
+    v134 <- BinaryOperation v132, '+', v133
+    v135 <- CallFunction v2, [v131, v134]
+    v136 <- UnaryOperation '-', v83
+    v137 <- UnaryOperation '-', v83
+    v138 <- LoadFloat '0.5'
+    v139 <- BinaryOperation v137, '+', v138
+    v140 <- CallFunction v2, [v136, v139]
+    v141 <- UnaryOperation '-', v83
+    v142 <- UnaryOperation '-', v83
+    v143 <- LoadFloat '0.7'
+    v144 <- BinaryOperation v142, '+', v143
+    v145 <- CallFunction v2, [v141, v144]
+    v146 <- UnaryOperation '-', v83
+    v147 <- LoadInteger '1'
+    v148 <- BinaryOperation v146, '+', v147
+    v149 <- UnaryOperation '-', v83
+    v150 <- LoadInteger '1'
+    v151 <- BinaryOperation v149, '+', v150
+    v152 <- CallFunction v2, [v148, v151]
+    v153 <- UnaryOperation '-', v83
+    v154 <- LoadInteger '1'
+    v155 <- BinaryOperation v153, '+', v154
+    v156 <- UnaryOperation '-', v83
+    v157 <- LoadInteger '1'
+    v158 <- BinaryOperation v156, '+', v157
+    v159 <- LoadFloat '0.1'
+    v160 <- BinaryOperation v158, '+', v159
+    v161 <- CallFunction v2, [v155, v160]
+    v162 <- UnaryOperation '-', v83
+    v163 <- LoadInteger '1'
+    v164 <- BinaryOperation v162, '+', v163
+    v165 <- UnaryOperation '-', v83
+    v166 <- LoadInteger '1'
+    v167 <- BinaryOperation v165, '+', v166
+    v168 <- LoadFloat '0.5'
+    v169 <- BinaryOperation v167, '+', v168
+    v170 <- CallFunction v2, [v164, v169]
+    v171 <- UnaryOperation '-', v83
+    v172 <- LoadInteger '1'
+    v173 <- BinaryOperation v171, '+', v172
+    v174 <- UnaryOperation '-', v83
+    v175 <- LoadInteger '1'
+    v176 <- BinaryOperation v174, '+', v175
+    v177 <- LoadFloat '0.7'
+    v178 <- BinaryOperation v176, '+', v177
+    v179 <- CallFunction v2, [v173, v178]
+EndPlainFunction
+BeginForLoopInitializer
+    v180 <- LoadInteger '0'
+BeginForLoopCondition -> v181
+    v182 <- LoadInteger '10'
+    v183 <- Compare v181, '<', v182
+BeginForLoopAfterthought v183 -> v184
+    v185 <- UnaryOperation v184, '++'
+BeginForLoopBody -> v186
+    v187 <- CallFunction v75, []
+    v188 <- CreateNamedVariable 'Array', 'none'
+    v189 <- LoadInteger '10000'
+    v190 <- BinaryOperation v186, '*', v189
+    v191 <- Construct v188, [v190]
+EndForLoop
+
+
+var test_id = 0;
+function testFloor(a3, a4) {
+    const v12 = new Function("n", (""" + test_id++) + "";return Math.floor(n)");
+    var test = v12;
+    test(a4);
+    test(a4);
+    test(a4);
+    test(a4);
+    const v24 = new Function("n", (""" + test_id++) + "";return Math.floor(+n)");
+    var test_double_input = v24;
+    test_double_input(a4);
+    test_double_input(a4);
+    test_double_input(a4);
+    test_double_input(a4);
+    const v36 = new Function("n", (""" + test_id++) + "";return Math.floor(n) + -0.0");
+    var test_double_output = v36;
+    test_double_output(a4);
+    test_double_output(a4);
+    test_double_output(a4);
+    test_double_output(a4);
+    const v48 = new Function("n", (""" + test_id++) + "";return -Math.ceil(-n)");
+    var test_via_ceil = v48;
+    test_via_ceil(a4);
+    test_via_ceil(a4);
+    test_via_ceil(a4);
+    test_via_ceil(a4);
+    if (a4 >= 0) {
+        const v62 = new Function("n", (""" + test_id++) + "";return Math.trunc(n)");
+        var test_via_trunc = v62;
+        test_via_trunc(a4);
+        test_via_trunc(a4);
+        test_via_trunc(a4);
+        test_via_trunc(a4);
+    }
+}
+function zero() {
+    var x = 0.5;
+    function f71() {
+        return x - 0.5;
+    }
+    return f71();
+}
+function test() {
+    var two_52 = (1 << 30) * (1 << 22);
+    testFloor(two_52, two_52);
+    testFloor(two_52, two_52 + 0.1);
+    two_52 + 0.5;
+    testFloor(two_52, two_52 + 0.5);
+    two_52 + 1;
+    two_52 + 0.7;
+    testFloor(two_52 + 1, two_52 + 0.7);
+    testFloor(two_52 - 1, two_52 - 1);
+    testFloor(two_52 - 1, (two_52 - 1) + 0.1);
+    testFloor(two_52 - 1, (two_52 - 1) + 0.5);
+    testFloor(two_52 - 1, (two_52 - 1) + 0.7);
+    testFloor(-two_52, -two_52);
+    testFloor(-two_52, -two_52 + 0.1);
+    testFloor(-two_52, -two_52 + 0.5);
+    testFloor(-two_52, -two_52 + 0.7);
+    testFloor(-two_52 + 1, -two_52 + 1);
+    testFloor(-two_52 + 1, (-two_52 + 1) + 0.1);
+    testFloor(-two_52 + 1, (-two_52 + 1) + 0.5);
+    testFloor(-two_52 + 1, (-two_52 + 1) + 0.7);
+}
+for (let i181 = 0; i181 < 10; i181++) {
+    test();
+    new Array(i181 * 10000);
+}
+
+FuzzIL program written to corpus/math-floor-part3.fzil

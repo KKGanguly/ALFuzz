@@ -1,0 +1,62 @@
+v0 <- BeginClassDefinition
+EndClassDefinition
+v1 <- BeginClassDefinition
+EndClassDefinition
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- CallMethod v2, 'assign', [v1, v0]
+v4 <- LoadString 'class B {}'
+v5 <- CallMethod v1, 'toString', []
+v6 <- BeginPlainFunction -> 
+    v7 <- BeginPlainFunction -> v8, v9, v10
+        SetComputedProperty v8, v9, v10
+    EndPlainFunction
+    v11 <- LoadString 'make it generic'
+    v12 <- LoadInteger '0'
+    v13 <- LoadInteger '0'
+    v14 <- CallFunction v7, [v11, v12, v13]
+    v15 <- LoadString 'foo'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `foo`, v15
+    v16 <- EndObjectLiteral
+    v17 <- CreateNamedVariable 'o', 'var', v16
+    v18 <- LoadString 'priv'
+    v19 <- CallFunction v7, [v18]
+    v20 <- CreateNamedVariable 's', 'var', v19
+    v21 <- LoadString 'private'
+    v22 <- CallFunction v7, [v17, v20, v21]
+    v23 <- CallFunction v7, [v17]
+    v24 <- CallMethod v2, 'getOwnPropertyDescriptor', [v17, v20]
+    v25 <- CreateNamedVariable 'desc', 'var', v24
+    v26 <- LoadString 'private'
+    v27 <- GetProperty v25, 'value'
+    v28 <- GetProperty v25, 'writable'
+    v29 <- GetProperty v25, 'enumerable'
+    v30 <- GetProperty v25, 'configurable'
+EndPlainFunction
+v31 <- CallFunction v6, []
+
+
+class C0 {
+}
+class C1 {
+}
+Object.assign(C1, C0);
+C1.toString();
+function f6() {
+    function f(a8, a9, a10) {
+        a8[a9] = a10;
+    }
+    f("make it generic", 0, 0);
+    var o = { foo: "foo" };
+    var s = f("priv");
+    f(o, s, "private");
+    f(o);
+    var desc = Object.getOwnPropertyDescriptor(o, s);
+    desc.value;
+    desc.writable;
+    desc.enumerable;
+    desc.configurable;
+}
+f6();
+
+FuzzIL program written to corpus/regress-private-enumerable.fzil

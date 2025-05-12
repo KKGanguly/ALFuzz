@@ -1,0 +1,21 @@
+v0 <- LoadInteger '1'
+v1 <- LoadBoolean 'true'
+v2 <- BinaryOperation v0, '&', v1
+BeginIf v2
+EndIf
+BeginTry
+    v3 <- LoadString 'error'
+    ThrowException v3
+BeginCatch -> v4
+    v5 <- LoadString 'error'
+EndTryCatch
+
+
+if (1 & true) {
+}
+try {
+    throw "error";
+} catch(e4) {
+}
+
+FuzzIL program written to corpus/no-branch-elimination.fzil

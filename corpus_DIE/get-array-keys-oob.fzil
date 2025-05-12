@@ -1,0 +1,14 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetElement v2, '10000000', v0
+v3 <- LoadInteger '1000'
+v4 <- CallFunction v1, [v3]
+v5 <- CallMethod v4, 'join', []
+
+
+const t0 = Array.prototype;
+t0[10000000] = 1;
+Array(1000).join();
+
+FuzzIL program written to corpus/get-array-keys-oob.fzil

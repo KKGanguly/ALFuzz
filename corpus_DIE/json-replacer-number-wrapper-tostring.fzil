@@ -1,0 +1,35 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'calls', 'var', v0
+v2 <- CreateNamedVariable 'Number', 'none'
+v3 <- Construct v2, []
+v4 <- CreateNamedVariable 'num', 'var', v3
+v5 <- BeginPlainFunction -> 
+    v6 <- UnaryOperation v1, '++'
+    v7 <- LoadString ''
+    Return v7
+EndPlainFunction
+SetProperty v4, 'toString', v5
+v8 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v4, 'valueOf', v8
+v9 <- LoadString ''
+v10 <- CreateArray [v4]
+v11 <- CreateNamedVariable 'JSON', 'none'
+v12 <- CallMethod v11, 'stringify', [v9, v10]
+v13 <- LoadInteger '1'
+
+
+var calls = 0;
+const v3 = new Number();
+var num = v3;
+function f5() {
+    calls++;
+    return "";
+}
+num.toString = f5;
+function f8() {
+}
+num.valueOf = f8;
+JSON.stringify("", [num]);
+
+FuzzIL program written to corpus/json-replacer-number-wrapper-tostring.fzil

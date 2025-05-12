@@ -1,0 +1,69 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    v2 <- LoadString 'Nam vulputate metus est. Maecenas quis pellentesque eros,'
+    v3 <- BinaryOperation v1, '+', v2
+    v4 <- LoadString 'ac mattis augue. Nam porta purus vitae tincidunt blandit.'
+    v5 <- BinaryOperation v3, '+', v4
+    v6 <- LoadString 'Aliquam lacus dui, blandit id consectetur id, hendrerit ut'
+    v7 <- BinaryOperation v5, '+', v6
+    v8 <- LoadString 'felis. Class aptent taciti sociosqu ad litora torquent per'
+    v9 <- BinaryOperation v7, '+', v8
+    v10 <- LoadString 'conubia nostra, per inceptos himenaeos. Ut posuere eros et'
+    v11 <- BinaryOperation v9, '+', v10
+    v12 <- LoadString 'tempus luctus. Nullam condimentum aliquam odio, at dignissim'
+    v13 <- BinaryOperation v11, '+', v12
+    v14 <- LoadString 'augue tincidunt in. Nam mattis vitae mauris eget dictum.'
+    v15 <- BinaryOperation v13, '+', v14
+    v16 <- LoadString 'Nam accumsan dignissim turpis a turpis duis.'
+    v17 <- BinaryOperation v15, '+', v16
+    Return v17
+EndPlainFunction
+v18 <- CallFunction v0, []
+v19 <- GetProperty v18, 'length'
+v20 <- LoadInteger '256'
+v21 <- Compare v19, '>', v20
+v22 <- LoadRegExp '...<omitted>...' ''
+v23 <- CreateNamedVariable 're', 'var', v22
+BeginTry
+    v24 <- CreateNamedVariable 'Date', 'none'
+    v25 <- GetProperty v24, 'prototype'
+    v26 <- GetProperty v25, 'setDate'
+    v27 <- CallMethod v26, 'call', [v0]
+BeginCatch -> v28
+    v29 <- GetProperty v28, 'message'
+    v30 <- GetProperty v29, 'length'
+    v31 <- LoadInteger '256'
+    v32 <- Compare v30, '<', v31
+    v33 <- GetProperty v28, 'message'
+    v34 <- CallMethod v23, 'test', [v33]
+EndTryCatch
+BeginTry
+    v35 <- CallFunction v0, []
+    v36 <- CreateNamedVariable 'Error', 'none'
+    v37 <- CallFunction v36, [v35]
+    ThrowException v37
+BeginCatch -> v38
+    v39 <- CallFunction v0, []
+    v40 <- GetProperty v38, 'message'
+EndTryCatch
+
+
+function veryLongString() {
+    return ((((((("Lorem ipsum dolor sit amet, consectetur adipiscing elit." + "Nam vulputate metus est. Maecenas quis pellentesque eros,") + "ac mattis augue. Nam porta purus vitae tincidunt blandit.") + "Aliquam lacus dui, blandit id consectetur id, hendrerit ut") + "felis. Class aptent taciti sociosqu ad litora torquent per") + "conubia nostra, per inceptos himenaeos. Ut posuere eros et") + "tempus luctus. Nullam condimentum aliquam odio, at dignissim") + "augue tincidunt in. Nam mattis vitae mauris eget dictum.") + "Nam accumsan dignissim turpis a turpis duis.";
+}
+veryLongString().length > 256;
+var re = /...<omitted>.../;
+try {
+    Date.prototype.setDate.call(veryLongString);
+} catch(e28) {
+    e28.message.length < 256;
+    re.test(e28.message);
+}
+try {
+    throw Error(veryLongString());
+} catch(e38) {
+    veryLongString();
+    e38.message;
+}
+
+FuzzIL program written to corpus/error-tostring-omit.fzil

@@ -1,0 +1,48 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'array', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- BeginArrowFunction -> v6
+            v7 <- LoadInteger '0'
+            v8 <- Compare v6, '>', v7
+            Return v8
+        EndArrowFunction
+        v9 <- CallMethod v3, 'filter', [v5]
+        Return v9
+    EndPlainFunction
+    v10 <- CallFunction v4, []
+    v11 <- CreateArray []
+    v12 <- LoadInteger '6'
+    v13 <- GetProperty v3, '__proto__'
+    v14 <- CallMethod v13, 'push', [v12]
+    v15 <- CallFunction v4, []
+    v16 <- CreateNamedVariable 'narr', 'var', v15
+    v17 <- LoadInteger '0'
+    v18 <- CreateNamedVariable 'Object', 'none'
+    v19 <- CallMethod v18, 'getOwnPropertyDescriptor', [v16, v17]
+    v20 <- LoadUndefined
+    v21 <- LoadInteger '6'
+    v22 <- CreateArray [v21]
+EndPlainFunction
+v23 <- CallFunction v0, []
+
+
+function f0() {
+    var array = [,];
+    function filter() {
+        const v5 = (a6) => {
+            return a6 > 0;
+        };
+        return array.filter(v5);
+    }
+    filter();
+    [];
+    array.__proto__.push(6);
+    var narr = filter();
+    Object.getOwnPropertyDescriptor(narr, 0);
+    [6];
+}
+f0();
+
+FuzzIL program written to corpus/array-prototype-filter.fzil

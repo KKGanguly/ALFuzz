@@ -1,0 +1,31 @@
+v0 <- LoadString 'a'
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- BeginPlainFunction -> 
+    BeginWhileLoopHeader
+        v3 <- LoadBoolean 'true'
+    BeginWhileLoopBody v3
+        Update v1, '+', v1
+    EndWhileLoop
+EndPlainFunction
+v4 <- CallFunction v2, []
+v5 <- CreateNamedVariable 'RangeError', 'none'
+v6 <- BeginPlainFunction -> 
+    v7 <- TestIn v1, v1
+EndPlainFunction
+v8 <- CallFunction v6, []
+v9 <- CreateNamedVariable 'TypeError', 'none'
+
+
+var a = "a";
+function f2() {
+    while (true) {
+        a += a;
+    }
+}
+f2();
+function f6() {
+    a in a;
+}
+f6();
+
+FuzzIL program written to corpus/regress-500980.fzil

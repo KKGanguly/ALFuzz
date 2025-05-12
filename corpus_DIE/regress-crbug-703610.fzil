@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadInteger '42'
+SetProperty v0, 'prototype', v1
+v2 <- Construct v0, []
+v3 <- BeginPlainFunction -> 
+    v4 <- GetProperty v0, 'prototype'
+    Return v4
+EndPlainFunction
+v5 <- LoadInteger '42'
+v6 <- CallFunction v3, []
+v7 <- LoadInteger '42'
+v8 <- CallFunction v3, []
+v9 <- LoadInteger '42'
+v10 <- CallFunction v3, []
+
+
+function fun() {
+}
+fun.prototype = 42;
+new fun();
+function f() {
+    return fun.prototype;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-703610.fzil

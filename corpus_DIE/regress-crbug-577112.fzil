@@ -1,0 +1,27 @@
+v0 <- LoadNull
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetProperty v2, '__proto__', v0
+v3 <- GetProperty v1, 'prototype'
+v4 <- CreateNamedVariable 'prototype', 'var', v3
+v5 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v6 <- EndObjectLiteral
+    v7 <- CallMethod v4, 'lastIndexOf', [v6]
+EndPlainFunction
+v8 <- CallFunction v5, []
+v9 <- CallFunction v5, []
+v10 <- CallFunction v5, []
+
+
+const t0 = Array.prototype;
+t0.__proto__ = null;
+var prototype = Array.prototype;
+function f() {
+    prototype.lastIndexOf({});
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-577112.fzil

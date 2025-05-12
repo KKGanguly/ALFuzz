@@ -1,0 +1,87 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Array', 'none'
+    v2 <- LoadInteger '1'
+    v3 <- Construct v1, [v2]
+    v4 <- CreateNamedVariable 'head', 'var', v3
+    v5 <- CreateNamedVariable 'tail', 'var', v4
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- LoadInteger '200'
+        v9 <- Compare v7, '<', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation v10, '++'
+    BeginForLoopBody -> v12
+        v13 <- LoadInteger '1000'
+        v14 <- Construct v1, [v13]
+        SetElement v5, '1', v14
+        v15 <- GetElement v5, '1'
+        Reassign v5, v15
+    EndForLoop
+    v16 <- LoadInteger '100'
+    v17 <- Construct v1, [v16]
+    v18 <- CreateNamedVariable 'array', 'none'
+    Reassign v18, v17
+    v19 <- CreateNamedVariable 'gc', 'none'
+    v20 <- CallFunction v19, []
+    v21 <- CallFunction v19, []
+    v22 <- LoadInteger '100'
+    v23 <- CreateNamedVariable 'array', 'none'
+    v24 <- GetProperty v23, 'length'
+    BeginForLoopInitializer
+        v25 <- LoadInteger '0'
+    BeginForLoopCondition -> v26
+        v27 <- LoadInteger '50'
+        v28 <- Compare v26, '<', v27
+    BeginForLoopAfterthought v28 -> v29
+        v30 <- UnaryOperation v29, '++'
+    BeginForLoopBody -> v31
+        v32 <- CallMethod v23, 'shift', []
+    EndForLoop
+    v33 <- LoadInteger '50'
+    v34 <- GetProperty v23, 'length'
+    BeginForLoopInitializer
+        v35 <- LoadInteger '0'
+    BeginForLoopCondition -> v36
+        v37 <- LoadInteger '200'
+        v38 <- Compare v36, '<', v37
+    BeginForLoopAfterthought v38 -> v39
+        v40 <- UnaryOperation v39, '++'
+    BeginForLoopBody -> v41
+        v42 <- LoadInteger '1000'
+        v43 <- Construct v1, [v42]
+        SetElement v5, '1', v43
+        v44 <- GetElement v5, '1'
+        Reassign v5, v44
+    EndForLoop
+EndPlainFunction
+v45 <- CallFunction v0, []
+
+
+function f0() {
+    const v3 = new Array(1);
+    var head = v3;
+    var tail = head;
+    for (let i7 = 0; i7 < 200; i7++) {
+        const v14 = new Array(1000);
+        tail[1] = v14;
+        tail = tail[1];
+    }
+    const v17 = new Array(100);
+    array = v17;
+    gc();
+    gc();
+    array.length;
+    for (let i26 = 0; i26 < 50; i26++) {
+        array.shift();
+    }
+    array.length;
+    for (let i36 = 0; i36 < 200; i36++) {
+        const v43 = new Array(1000);
+        tail[1] = v43;
+        tail = tail[1];
+    }
+}
+f0();
+
+FuzzIL program written to corpus/regress-1708.fzil

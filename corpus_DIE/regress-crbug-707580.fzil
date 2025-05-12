@@ -1,0 +1,43 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'I was called!'
+    ThrowException v1
+EndPlainFunction
+v2 <- CreateNamedVariable 'Symbol', 'none'
+v3 <- GetProperty v2, 'toPrimitive'
+BeginObjectLiteral
+    ObjectLiteralAddComputedProperty v3, v0
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'thrower', 'var', v4
+v6 <- LoadFloat '4.2'
+v7 <- CreateNamedVariable 'heap_number', 'var', v6
+v8 <- LoadInteger '23'
+v9 <- CreateNamedVariable 'smi_number', 'var', v8
+v10 <- BeginArrowFunction -> 
+    v11 <- CallMethod v7, 'hasOwnProperty', [v5]
+    Return v11
+EndArrowFunction
+v12 <- CallFunction v10, []
+v13 <- BeginArrowFunction -> 
+    v14 <- CallMethod v9, 'hasOwnProperty', [v5]
+    Return v14
+EndArrowFunction
+v15 <- CallFunction v13, []
+
+
+function f0() {
+    throw "I was called!";
+}
+const v3 = Symbol.toPrimitive;
+var thrower = { [v3]: f0 };
+var heap_number = 4.2;
+var smi_number = 23;
+const v10 = () => {
+    return heap_number.hasOwnProperty(thrower);
+};
+v10();
+const v13 = () => {
+    return smi_number.hasOwnProperty(thrower);
+};
+v13();
+
+FuzzIL program written to corpus/regress-crbug-707580.fzil

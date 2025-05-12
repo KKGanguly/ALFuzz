@@ -1,0 +1,49 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadThis
+    v2 <- CreateNamedVariable 'str', 'none'
+    v3 <- Compare v1, '===', v2
+EndPlainFunction
+v4 <- CreateNamedVariable 'String', 'none'
+v5 <- GetProperty v4, 'prototype'
+SetProperty v5, 'isThatMe', v0
+v6 <- LoadString 'abc'
+v7 <- CreateNamedVariable 'str', 'var', v6
+v8 <- CallMethod v7, 'isThatMe', []
+v9 <- GetProperty v7, 'isThatMe'
+v10 <- CallMethod v9, 'call', [v7]
+v11 <- LoadInteger '1'
+v12 <- CreateArray [v11]
+v13 <- CreateNamedVariable 'arr', 'var', v12
+v14 <- LoadString ''
+v15 <- GetProperty v14, 'isThatMe'
+v16 <- CallMethod v13, 'forEach', [v15, v7]
+v17 <- LoadString ''
+v18 <- GetProperty v17, 'isThatMe'
+v19 <- CallMethod v13, 'filter', [v18, v7]
+v20 <- LoadString ''
+v21 <- GetProperty v20, 'isThatMe'
+v22 <- CallMethod v13, 'some', [v21, v7]
+v23 <- LoadString ''
+v24 <- GetProperty v23, 'isThatMe'
+v25 <- CallMethod v13, 'every', [v24, v7]
+v26 <- LoadString ''
+v27 <- GetProperty v26, 'isThatMe'
+v28 <- CallMethod v13, 'map', [v27, v7]
+
+
+function f0() {
+    this === str;
+}
+const t3 = String.prototype;
+t3.isThatMe = f0;
+var str = "abc";
+str.isThatMe();
+str.isThatMe.call(str);
+var arr = [1];
+arr.forEach(("").isThatMe, str);
+arr.filter(("").isThatMe, str);
+arr.some(("").isThatMe, str);
+arr.every(("").isThatMe, str);
+arr.map(("").isThatMe, str);
+
+FuzzIL program written to corpus/regress-100702.fzil

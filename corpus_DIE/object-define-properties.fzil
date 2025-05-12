@@ -1,0 +1,111 @@
+BeginTry
+    BeginObjectLiteral
+    v0 <- EndObjectLiteral
+    v1 <- LoadNull
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- CallMethod v2, 'defineProperties', [v0, v1]
+BeginCatch -> v4
+    v5 <- LoadRegExp 'null to object' ''
+    v6 <- CallMethod v5, 'test', [v4]
+EndTryCatch
+BeginTry
+    v7 <- LoadNull
+    BeginObjectLiteral
+    v8 <- EndObjectLiteral
+    v9 <- CreateNamedVariable 'Object', 'none'
+    v10 <- CallMethod v9, 'defineProperties', [v7, v8]
+BeginCatch -> v11
+    v12 <- LoadRegExp 'called on non-object' ''
+    v13 <- CallMethod v12, 'test', [v11]
+EndTryCatch
+v14 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v14
+v15 <- EndObjectLiteral
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadInteger '42'
+    Return v17
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v16
+v18 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v15
+    ObjectLiteralAddProperty `bar`, v18
+v19 <- EndObjectLiteral
+v20 <- CreateNamedVariable 'desc', 'var', v19
+BeginObjectLiteral
+v21 <- EndObjectLiteral
+v22 <- CreateNamedVariable 'obj', 'var', v21
+v23 <- CreateNamedVariable 'Object', 'none'
+v24 <- CallMethod v23, 'defineProperties', [v22, v20]
+v25 <- CreateNamedVariable 'x', 'var', v24
+v26 <- GetProperty v25, 'foo'
+v27 <- LoadInteger '10'
+v28 <- GetProperty v25, 'bar'
+v29 <- LoadInteger '42'
+BeginObjectLiteral
+v30 <- EndObjectLiteral
+v31 <- CreateNamedVariable 'object', 'var', v30
+v32 <- BeginPlainFunction -> 
+    v33 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v33
+    v34 <- EndObjectLiteral
+    v35 <- LoadInteger '2'
+    v36 <- BeginPlainFunction -> 
+        v37 <- LoadInteger '3'
+        Return v37
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v35
+        ObjectLiteralAddProperty `get`, v36
+    v38 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `foo`, v34
+        ObjectLiteralAddProperty `bar`, v38
+    v39 <- EndObjectLiteral
+    v40 <- CallMethod v23, 'defineProperties', [v31, v39]
+EndPlainFunction
+v41 <- CallFunction v32, []
+v42 <- CreateNamedVariable 'TypeError', 'none'
+v43 <- LoadUndefined
+v44 <- GetProperty v31, 'foo'
+v45 <- LoadUndefined
+v46 <- GetProperty v31, 'bar'
+
+
+try {
+    Object.defineProperties({}, null);
+} catch(e4) {
+    /null to object/.test(e4);
+}
+try {
+    Object.defineProperties(null, {});
+} catch(e11) {
+    /called on non-object/.test(e11);
+}
+const v15 = { value: 10 };
+function f16() {
+    return 42;
+}
+const v18 = { get: f16 };
+var desc = { foo: v15, bar: v18 };
+var obj = {};
+var x = Object.defineProperties(obj, desc);
+x.foo;
+x.bar;
+var object = {};
+function f32() {
+    const v34 = { value: 1 };
+    function f36() {
+        return 3;
+    }
+    const v38 = { value: 2, get: f36 };
+    Object.defineProperties(object, { foo: v34, bar: v38 });
+}
+f32();
+object.foo;
+object.bar;
+
+FuzzIL program written to corpus/object-define-properties.fzil

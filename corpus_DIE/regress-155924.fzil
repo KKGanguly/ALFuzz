@@ -1,0 +1,59 @@
+v0 <- LoadInteger '0'
+v1 <- LoadInteger '1'
+v2 <- LoadInteger '2'
+v3 <- LoadInteger '3'
+v4 <- LoadInteger '4'
+v5 <- LoadInteger '5'
+v6 <- LoadInteger '6'
+v7 <- LoadInteger '7'
+v8 <- LoadInteger '8'
+v9 <- LoadInteger '9'
+v10 <- LoadInteger '10'
+v11 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10]
+v12 <- CreateNamedVariable 'A', 'none'
+Reassign v12, v11
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadInteger '1'
+    v15 <- LoadInteger '26'
+    v16 <- BinaryOperation v14, '<<', v15
+    v17 <- CreateNamedVariable 'x', 'none'
+    Reassign v17, v16
+    v18 <- CreateNamedVariable 'x', 'none'
+    v19 <- BinaryOperation v18, '*', v18
+    Reassign v18, v19
+    v20 <- LoadInteger '5'
+    v21 <- LoadInteger '2'
+    v22 <- BinaryOperation v20, '<<', v21
+    v23 <- BinaryOperation v18, '+', v22
+    v24 <- LoadInteger '1'
+    v25 <- LoadInteger '1'
+    v26 <- BinaryOperation v24, '<<', v25
+    v27 <- BinaryOperation v23, '+', v26
+    Reassign v18, v27
+    v28 <- CreateNamedVariable 'A', 'none'
+    v29 <- GetComputedProperty v28, v18
+    Return v29
+EndPlainFunction
+v30 <- LoadUndefined
+v31 <- CallFunction v13, []
+v32 <- LoadString 'First lookup A[bad_float]'
+v33 <- LoadUndefined
+v34 <- CallFunction v13, []
+v35 <- LoadString 'Second lookup A[bad_float]'
+v36 <- LoadUndefined
+v37 <- CallFunction v13, []
+v38 <- LoadString 'Third lookup A[bad_float]'
+
+
+A = [0,1,2,3,4,5,6,7,8,9,10];
+function foo() {
+    x = 1 << 26;
+    x = x * x;
+    x = (x + (5 << 2)) + (1 << 1);
+    return A[x];
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-155924.fzil

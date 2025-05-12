@@ -1,0 +1,125 @@
+v0 <- LoadInteger '0'
+v1 <- LoadInteger '0'
+v2 <- LoadInteger '0'
+v3 <- LoadInteger '0'
+v4 <- LoadInteger '0'
+v5 <- CreateArray [v0, v1, v2, v3, v4]
+v6 <- LoadUndefined
+v7 <- LoadInteger '0'
+v8 <- CreateNamedVariable 'NaN', 'none'
+v9 <- CreateArray [v6, v7, v8, v8]
+v10 <- LoadInteger '0'
+v11 <- LoadUndefined
+v12 <- CreateArray [v10, v11, v8, v8]
+v13 <- LoadInteger '0'
+v14 <- CreateArray [v8, v13, v8, v8]
+v15 <- LoadInteger '0'
+v16 <- CreateArray [v15, v8, v8, v8]
+v17 <- UnaryOperation '-', v8
+v18 <- LoadInteger '0'
+v19 <- CreateArray [v17, v18, v8, v8]
+v20 <- LoadInteger '0'
+v21 <- UnaryOperation '-', v8
+v22 <- CreateArray [v20, v21, v8, v8]
+v23 <- CreateNamedVariable 'Infinity', 'none'
+v24 <- LoadInteger '0'
+v25 <- LoadInteger '0'
+v26 <- CreateArray [v23, v24, v23, v25]
+v27 <- LoadInteger '0'
+v28 <- LoadInteger '0'
+v29 <- CreateArray [v27, v23, v23, v28]
+v30 <- UnaryOperation '-', v23
+v31 <- LoadInteger '0'
+v32 <- LoadInteger '0'
+v33 <- UnaryOperation '-', v23
+v34 <- CreateArray [v30, v31, v32, v33]
+v35 <- LoadInteger '0'
+v36 <- UnaryOperation '-', v23
+v37 <- LoadInteger '0'
+v38 <- UnaryOperation '-', v23
+v39 <- CreateArray [v35, v36, v37, v38]
+v40 <- CreateArray [v5, v9, v12, v14, v16, v19, v22, v26, v29, v34, v39]
+v41 <- CreateNamedVariable 'cases', 'var', v40
+v42 <- BeginPlainFunction -> v43, v44
+    v45 <- CreateNamedVariable 'Math', 'none'
+    v46 <- CallMethod v45, 'min', [v43, v44]
+    Return v46
+EndPlainFunction
+v47 <- BeginPlainFunction -> v48, v49
+    v50 <- CreateNamedVariable 'Math', 'none'
+    v51 <- CallMethod v50, 'max', [v48, v49]
+    Return v51
+EndPlainFunction
+BeginForLoopInitializer
+    v52 <- LoadInteger '0'
+    v53 <- CreateNamedVariable 'i', 'none'
+    Reassign v53, v52
+BeginForLoopCondition
+    v54 <- CreateNamedVariable 'i', 'none'
+    v55 <- GetProperty v41, 'length'
+    v56 <- Compare v54, '<', v55
+BeginForLoopAfterthought v56
+    v57 <- CreateNamedVariable 'i', 'none'
+    v58 <- UnaryOperation '++', v57
+BeginForLoopBody
+    v59 <- CreateNamedVariable 'i', 'none'
+    v60 <- GetComputedProperty v41, v59
+    v61 <- CreateNamedVariable 'c', 'var', v60
+    v62 <- GetElement v61, '3'
+    v63 <- GetElement v61, '0'
+    v64 <- GetElement v61, '1'
+    v65 <- CallFunction v42, [v63, v64]
+    v66 <- GetElement v61, '2'
+    v67 <- GetElement v61, '0'
+    v68 <- GetElement v61, '1'
+    v69 <- CallFunction v47, [v67, v68]
+EndForLoop
+BeginForLoopInitializer
+    v70 <- LoadInteger '0'
+    v71 <- CreateNamedVariable 'i', 'none'
+    Reassign v71, v70
+BeginForLoopCondition
+    v72 <- CreateNamedVariable 'i', 'none'
+    v73 <- GetProperty v41, 'length'
+    v74 <- Compare v72, '<', v73
+BeginForLoopAfterthought v74
+    v75 <- CreateNamedVariable 'i', 'none'
+    v76 <- UnaryOperation '++', v75
+BeginForLoopBody
+    v77 <- CreateNamedVariable 'i', 'none'
+    v78 <- GetComputedProperty v41, v77
+    v79 <- CreateNamedVariable 'c', 'var', v78
+    v80 <- GetElement v79, '3'
+    v81 <- GetElement v79, '0'
+    v82 <- GetElement v79, '1'
+    v83 <- CallFunction v42, [v81, v82]
+    v84 <- GetElement v79, '2'
+    v85 <- GetElement v79, '0'
+    v86 <- GetElement v79, '1'
+    v87 <- CallFunction v47, [v85, v86]
+EndForLoop
+
+
+var cases = [[0,0,0,0,0],[,0,NaN,NaN],[0,,NaN,NaN],[NaN,0,NaN,NaN],[0,NaN,NaN,NaN],[-NaN,0,NaN,NaN],[0,-NaN,NaN,NaN],[Infinity,0,Infinity,0],[0,Infinity,Infinity,0],[-Infinity,0,0,-Infinity],[0,-Infinity,0,-Infinity]];
+function do_min(a43, a44) {
+    return Math.min(a43, a44);
+}
+function do_max(a48, a49) {
+    return Math.max(a48, a49);
+}
+for (i = 0; i < cases.length; ++i) {
+    var c = cases[i];
+    c[3];
+    do_min(c[0], c[1]);
+    c[2];
+    do_max(c[0], c[1]);
+}
+for (i = 0; i < cases.length; ++i) {
+    var c = cases[i];
+    c[3];
+    do_min(c[0], c[1]);
+    c[2];
+    do_max(c[0], c[1]);
+}
+
+FuzzIL program written to corpus/regress-2056.fzil

@@ -1,0 +1,43 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'sentinelObject', 'var', v0
+v2 <- LoadBoolean 'false'
+v3 <- CreateNamedVariable 'evaluatedArg', 'var', v2
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- BeginClassDefinition v4
+    BeginClassConstructor -> v6
+        BeginTry
+            v7 <- LoadBoolean 'true'
+            Reassign v3, v7
+            CallSuperConstructor [v7]
+        BeginCatch -> v8
+            v9 <- CreateNamedVariable 'TypeError', 'none'
+            Return v1
+        EndTryCatch
+    EndClassConstructor
+EndClassDefinition
+v10 <- CreateNamedVariable 'parseInt', 'none'
+v11 <- CallMethod v4, 'setPrototypeOf', [v5, v10]
+v12 <- Construct v5, []
+v13 <- Construct v5, []
+v14 <- Construct v5, []
+
+
+var sentinelObject = {};
+var evaluatedArg = false;
+class C5 extends Object {
+    constructor() {
+        try {
+            evaluatedArg = true;
+            super(true);
+        } catch(e8) {
+            return sentinelObject;
+        }
+    }
+}
+Object.setPrototypeOf(C5, parseInt);
+new C5();
+new C5();
+new C5();
+
+FuzzIL program written to corpus/regress-6248.fzil

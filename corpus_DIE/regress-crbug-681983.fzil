@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- BinaryOperation v1, '>>>', v2
+    Reassign v1, v3
+    Return v1
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '1'
+    v6 <- UnaryOperation '-', v5
+    v7 <- CallFunction v0, [v6]
+    Return v7
+EndPlainFunction
+v8 <- LoadInteger '4294967295'
+v9 <- CallFunction v4, []
+
+
+function g(a1) {
+    return a1 = a1 >>> 0;
+}
+function f() {
+    return g(-1);
+}
+f();
+
+FuzzIL program written to corpus/regress-crbug-681983.fzil

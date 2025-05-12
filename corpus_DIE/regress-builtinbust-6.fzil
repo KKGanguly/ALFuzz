@@ -1,0 +1,163 @@
+v0 <- LoadInteger '23'
+v1 <- LoadFloat '4.2'
+v2 <- LoadBoolean 'true'
+v3 <- LoadBoolean 'false'
+v4 <- LoadInteger '0'
+v5 <- LoadInteger '0'
+v6 <- BinaryOperation v4, '/', v5
+v7 <- CreateArray [v0, v1, v2, v3, v6]
+v8 <- CreateNamedVariable 'values', 'var', v7
+BeginForLoopInitializer
+    v9 <- LoadInteger '0'
+BeginForLoopCondition -> v10
+    v11 <- GetProperty v8, 'length'
+    v12 <- Compare v10, '<', v11
+BeginForLoopAfterthought v12 -> v13
+    v14 <- UnaryOperation '++', v13
+BeginForLoopBody -> v15
+    v16 <- GetComputedProperty v8, v15
+    v17 <- CreateNamedVariable 'v', 'var', v16
+    v18 <- CreateNamedVariable 'Array', 'none'
+    v19 <- GetProperty v18, 'prototype'
+    v20 <- GetProperty v19, 'join'
+    v21 <- CallMethod v20, 'call', [v17]
+    v22 <- GetProperty v18, 'prototype'
+    v23 <- GetProperty v22, 'pop'
+    v24 <- CallMethod v23, 'call', [v17]
+    v25 <- GetProperty v18, 'prototype'
+    v26 <- GetProperty v25, 'push'
+    v27 <- CallMethod v26, 'call', [v17]
+    v28 <- GetProperty v18, 'prototype'
+    v29 <- GetProperty v28, 'reverse'
+    v30 <- CallMethod v29, 'call', [v17]
+    v31 <- GetProperty v18, 'prototype'
+    v32 <- GetProperty v31, 'shift'
+    v33 <- CallMethod v32, 'call', [v17]
+    v34 <- GetProperty v18, 'prototype'
+    v35 <- GetProperty v34, 'slice'
+    v36 <- CallMethod v35, 'call', [v17]
+    v37 <- GetProperty v18, 'prototype'
+    v38 <- GetProperty v37, 'splice'
+    v39 <- CallMethod v38, 'call', [v17]
+    v40 <- GetProperty v18, 'prototype'
+    v41 <- GetProperty v40, 'unshift'
+    v42 <- CallMethod v41, 'call', [v17]
+EndForLoop
+v43 <- LoadUndefined
+v44 <- CreateNamedVariable 'length_receiver', 'var', v43
+v45 <- LoadUndefined
+v46 <- CreateNamedVariable 'element_receiver', 'var', v45
+v47 <- BeginPlainFunction -> 
+    v48 <- LoadThis
+    Reassign v44, v48
+    v49 <- LoadInteger '2'
+    Return v49
+EndPlainFunction
+v50 <- BeginPlainFunction -> 
+    v51 <- LoadThis
+    Reassign v46, v51
+    v52 <- LoadString 'x'
+    Return v52
+EndPlainFunction
+v53 <- CreateNamedVariable 'Number', 'none'
+v54 <- GetProperty v53, 'prototype'
+v55 <- LoadString 'length'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v47
+    ObjectLiteralAddProperty `set`, v47
+v56 <- EndObjectLiteral
+v57 <- CreateNamedVariable 'Object', 'none'
+v58 <- CallMethod v57, 'defineProperty', [v54, v55, v56]
+v59 <- GetProperty v53, 'prototype'
+v60 <- LoadString '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v50
+    ObjectLiteralAddProperty `set`, v50
+v61 <- EndObjectLiteral
+v62 <- CallMethod v57, 'defineProperty', [v59, v60, v61]
+v63 <- GetProperty v53, 'prototype'
+v64 <- LoadString '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v50
+    ObjectLiteralAddProperty `set`, v50
+v65 <- EndObjectLiteral
+v66 <- CallMethod v57, 'defineProperty', [v63, v64, v65]
+v67 <- GetProperty v53, 'prototype'
+v68 <- LoadString '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v50
+    ObjectLiteralAddProperty `set`, v50
+v69 <- EndObjectLiteral
+v70 <- CallMethod v57, 'defineProperty', [v67, v68, v69]
+v71 <- BeginPlainFunction -> v72, v73
+    v74 <- Construct v53, [v72]
+EndPlainFunction
+v75 <- LoadInteger '11'
+v76 <- LoadString 'Array.prototype.join.call(11)'
+v77 <- CallFunction v71, [v75, v76]
+v78 <- LoadInteger '23'
+v79 <- LoadString 'Array.prototype.pop.call(23)'
+v80 <- CallFunction v71, [v78, v79]
+v81 <- LoadInteger '42'
+v82 <- LoadString 'Array.prototype.push.call(42, 'y')'
+v83 <- CallFunction v71, [v81, v82]
+v84 <- LoadInteger '49'
+v85 <- LoadString 'Array.prototype.reverse.call(49)'
+v86 <- CallFunction v71, [v84, v85]
+v87 <- LoadInteger '65'
+v88 <- LoadString 'Array.prototype.shift.call(65)'
+v89 <- CallFunction v71, [v87, v88]
+v90 <- LoadInteger '77'
+v91 <- LoadString 'Array.prototype.slice.call(77, 1)'
+v92 <- CallFunction v71, [v90, v91]
+v93 <- LoadInteger '88'
+v94 <- LoadString 'Array.prototype.splice.call(88, 1, 1)'
+v95 <- CallFunction v71, [v93, v94]
+v96 <- LoadInteger '99'
+v97 <- LoadString 'Array.prototype.unshift.call(99, 'z')'
+v98 <- CallFunction v71, [v96, v97]
+
+
+var values = [23,4.2,true,false,0 / 0];
+for (let i10 = 0; i10 < values.length; ++i10) {
+    var v = values[i10];
+    Array.prototype.join.call(v);
+    Array.prototype.pop.call(v);
+    Array.prototype.push.call(v);
+    Array.prototype.reverse.call(v);
+    Array.prototype.shift.call(v);
+    Array.prototype.slice.call(v);
+    Array.prototype.splice.call(v);
+    Array.prototype.unshift.call(v);
+}
+var length_receiver;
+var element_receiver;
+function length() {
+    length_receiver = this;
+    return 2;
+}
+function element() {
+    element_receiver = this;
+    return "x";
+}
+const v54 = Number.prototype;
+Object.defineProperty(v54, "length", { get: length, set: length });
+const v59 = Number.prototype;
+Object.defineProperty(v59, "0", { get: element, set: element });
+const v63 = Number.prototype;
+Object.defineProperty(v63, "1", { get: element, set: element });
+const v67 = Number.prototype;
+Object.defineProperty(v67, "2", { get: element, set: element });
+function test_receiver(a72, a73) {
+    new Number(a72);
+}
+test_receiver(11, "Array.prototype.join.call(11)");
+test_receiver(23, "Array.prototype.pop.call(23)");
+test_receiver(42, "Array.prototype.push.call(42, 'y')");
+test_receiver(49, "Array.prototype.reverse.call(49)");
+test_receiver(65, "Array.prototype.shift.call(65)");
+test_receiver(77, "Array.prototype.slice.call(77, 1)");
+test_receiver(88, "Array.prototype.splice.call(88, 1, 1)");
+test_receiver(99, "Array.prototype.unshift.call(99, 'z')");
+
+FuzzIL program written to corpus/regress-builtinbust-6.fzil

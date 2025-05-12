@@ -1,0 +1,39 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'array', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- BeginArrowFunction -> v6
+            v7 <- LoadInteger '0'
+            v8 <- Compare v6, '>', v7
+            Return v8
+        EndArrowFunction
+        v9 <- CallMethod v3, 'find', [v5]
+        Return v9
+    EndPlainFunction
+    v10 <- CallFunction v4, []
+    v11 <- LoadUndefined
+    v12 <- LoadInteger '6'
+    v13 <- GetProperty v3, '__proto__'
+    v14 <- CallMethod v13, 'push', [v12]
+    v15 <- CallFunction v4, []
+    v16 <- LoadInteger '6'
+EndPlainFunction
+v17 <- CallFunction v0, []
+
+
+function f0() {
+    var array = [,];
+    function find() {
+        const v5 = (a6) => {
+            return a6 > 0;
+        };
+        return array.find(v5);
+    }
+    find();
+    array.__proto__.push(6);
+    find();
+}
+f0();
+
+FuzzIL program written to corpus/array-prototype-find.fzil

@@ -1,0 +1,45 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'none'
+Reassign v1, v0
+v2 <- BeginArrowFunction -> 
+    v3 <- LoadNull
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v3
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'Object', 'none'
+    v6 <- GetProperty v5, 'prototype'
+    SetProperty v6, '__proto__', v4
+    Return v4
+EndArrowFunction
+v7 <- CallFunction v2, []
+v8 <- CreateNamedVariable 'TypeError', 'none'
+v9 <- CreateNamedVariable 'a', 'none'
+v10 <- CallMethod v9, 'shift', []
+v11 <- CreateArray []
+Reassign v9, v11
+v12 <- LoadNull
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v12
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'Array', 'none'
+v15 <- GetProperty v14, 'prototype'
+SetProperty v15, '__proto__', v13
+v16 <- CallMethod v9, 'shift', []
+
+
+a = [];
+const v2 = () => {
+    const v4 = { __proto__: null };
+    const t3 = Object.prototype;
+    t3.__proto__ = v4;
+    return v4;
+};
+v2();
+a.shift();
+a = [];
+const v13 = { __proto__: null };
+const t11 = Array.prototype;
+t11.__proto__ = v13;
+a.shift();
+
+FuzzIL program written to corpus/regress-1403.fzil

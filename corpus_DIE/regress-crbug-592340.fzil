@@ -1,0 +1,55 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- BeginClassDefinition v0
+EndClassDefinition
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- GetProperty v2, 'prototype'
+v4 <- CreateNamedVariable 'Symbol', 'none'
+v5 <- GetProperty v4, 'species'
+SetComputedProperty v3, v5, v1
+v6 <- GetProperty v4, 'species'
+v7 <- DeleteComputedProperty v0, v6
+v8 <- LoadInteger '2'
+v9 <- LoadInteger '31'
+v10 <- CreateNamedVariable 'Math', 'none'
+v11 <- CallMethod v10, 'pow', [v8, v9]
+v12 <- CreateNamedVariable '__v_1', 'none'
+Reassign v12, v11
+v13 <- CreateArray []
+v14 <- CreateNamedVariable '__v_2', 'none'
+Reassign v14, v13
+v15 <- LoadInteger '31'
+v16 <- CreateNamedVariable '__v_2', 'none'
+v17 <- CreateNamedVariable '__v_1', 'none'
+SetComputedProperty v16, v17, v15
+v18 <- CreateArray []
+v19 <- CreateNamedVariable '__v_4', 'none'
+Reassign v19, v18
+v20 <- LoadInteger '33'
+v21 <- CreateNamedVariable '__v_4', 'none'
+v22 <- LoadInteger '2'
+v23 <- BinaryOperation v17, '-', v22
+SetComputedProperty v21, v23, v20
+v24 <- BeginArrowFunction -> 
+    v25 <- CallMethod v16, 'concat', [v21]
+    Return v25
+EndArrowFunction
+v26 <- CallFunction v24, []
+v27 <- CreateNamedVariable 'RangeError', 'none'
+
+
+class C1 extends Array {
+}
+const t2 = Object.prototype;
+t2[Symbol.species] = C1;
+delete Array[Symbol.species];
+__v_1 = Math.pow(2, 31);
+__v_2 = [];
+__v_2[__v_1] = 31;
+__v_4 = [];
+__v_4[__v_1 - 2] = 33;
+const v24 = () => {
+    return __v_2.concat(__v_4);
+};
+v24();
+
+FuzzIL program written to corpus/regress-crbug-592340.fzil

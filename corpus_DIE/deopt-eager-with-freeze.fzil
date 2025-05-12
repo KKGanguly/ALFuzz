@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- CallMethod v2, 'isFrozen', [v1]
+    v4 <- UnaryOperation '!', v3
+    BeginIf v4
+        v5 <- GetProperty v1, 'f'
+        v6 <- CreateNamedVariable 't', 'var', v5
+        v7 <- LoadInteger '2'
+        v8 <- BinaryOperation v6, '*', v7
+        SetProperty v1, 'f', v8
+    EndIf
+    v9 <- GetProperty v1, 'f'
+    Return v9
+EndPlainFunction
+v10 <- LoadInteger '1'
+v11 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f`, v10
+    ObjectLiteralAddProperty `g`, v11
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'o', 'var', v12
+v14 <- CallFunction v0, [v13]
+v15 <- LoadInteger '2'
+v16 <- CallFunction v0, [v13]
+v17 <- LoadInteger '4'
+v18 <- CreateNamedVariable 'Object', 'none'
+v19 <- CallMethod v18, 'freeze', [v13]
+v20 <- CallFunction v0, [v13]
+v21 <- LoadInteger '4'
+
+
+function useObject(a1) {
+    if (!Object.isFrozen(a1)) {
+        var t = a1.f;
+        a1.f = t * 2;
+    }
+    return a1.f;
+}
+var o = { f: 1, g: 2 };
+useObject(o);
+useObject(o);
+Object.freeze(o);
+useObject(o);
+
+FuzzIL program written to corpus/deopt-eager-with-freeze.fzil

@@ -1,0 +1,42 @@
+v0 <- LoadRegExp 'a' 'g'
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadString 'c'
+    Return v2
+EndPlainFunction
+v3 <- LoadString 'a'
+v4 <- CallMethod v3, 'replace', [v0, v1]
+v5 <- BeginPlainFunction -> 
+    BeginTry
+        v6 <- CallFunction v5, []
+    BeginCatch -> v7
+        v8 <- LoadRegExp '(b)' 'g'
+        v9 <- BeginPlainFunction -> 
+            v10 <- LoadString 'c'
+            Return v10
+        EndPlainFunction
+        v11 <- LoadString 'b'
+        v12 <- CallMethod v11, 'replace', [v8, v9]
+    EndTryCatch
+EndPlainFunction
+v13 <- CallFunction v5, []
+
+
+const v0 = /a/g;
+function f1() {
+    return "c";
+}
+("a").replace(v0, f1);
+function test() {
+    try {
+        test();
+    } catch(e7) {
+        const v8 = /(b)/g;
+        function f9() {
+            return "c";
+        }
+        ("b").replace(v8, f9);
+    }
+}
+test();
+
+FuzzIL program written to corpus/regress-148378.fzil

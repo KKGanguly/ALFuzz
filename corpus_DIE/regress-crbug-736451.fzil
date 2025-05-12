@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'external string turned into two byte'
+    v2 <- CreateNamedVariable 's0', 'const', v1
+    v3 <- LoadInteger '1'
+    v4 <- CallMethod v2, 'substring', [v3]
+    v5 <- CreateNamedVariable 's1', 'const', v4
+    v6 <- LoadBoolean 'true'
+    v7 <- CreateNamedVariable 'f2', 'none'
+    v8 <- CallFunction v7, [v2, v6]
+    v9 <- CallMethod v5, 'toLowerCase', []
+EndPlainFunction
+v10 <- CallFunction v0, []
+v11 <- UnaryOperation '!', v10
+
+
+function f0() {
+    const s0 = "external string turned into two byte";
+    const s1 = s0.substring(1);
+    f2(s0, true);
+    s1.toLowerCase();
+}
+!f0();
+
+FuzzIL program written to corpus/regress-crbug-736451.fzil

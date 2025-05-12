@@ -1,0 +1,96 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateArray [v0]
+v2 <- LoadFloat '1.1'
+v3 <- CreateArray [v2]
+v4 <- CreateArray [v1, v3]
+v5 <- CreateNamedVariable 'array', 'var', v4
+v6 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v7 <- LoadInteger '0'
+    BeginForLoopCondition -> v8
+        v9 <- GetProperty v5, 'length'
+        v10 <- Compare v8, '<', v9
+    BeginForLoopAfterthought v10 -> v11
+        v12 <- UnaryOperation v11, '++'
+    BeginForLoopBody -> v13
+        v14 <- GetComputedProperty v5, v13
+        v15 <- CreateNamedVariable 'arr', 'var', v14
+        BeginObjectLiteral
+        v16 <- EndObjectLiteral
+        SetElement v15, '0', v16
+    EndForLoop
+EndPlainFunction
+v17 <- LoadFloat '1.1'
+v18 <- LoadFloat '2.2'
+v19 <- CreateArray [v17, v18]
+v20 <- CreateNamedVariable 'double_arr2', 'var', v19
+v21 <- LoadInteger '0'
+v22 <- CreateNamedVariable 'flag', 'var', v21
+v23 <- BeginPlainFunction -> 
+    BeginTry
+    BeginCatch -> v24
+    EndTryCatch
+    v25 <- LoadInteger '1'
+    v26 <- Compare v22, '==', v25
+    BeginIf v26
+        SetElement v5, '1', v20
+    EndIf
+EndPlainFunction
+v27 <- LoadFloat '6.176516726456e-312'
+v28 <- CreateNamedVariable 'expected', 'var', v27
+v29 <- BeginPlainFunction -> 
+    v30 <- CallFunction v23, []
+    v31 <- LoadInteger '1'
+    SetElement v20, '0', v31
+    v32 <- CallFunction v6, []
+    SetElement v20, '1', v28
+EndPlainFunction
+BeginForLoopInitializer
+    v33 <- LoadInteger '0'
+BeginForLoopCondition -> v34
+    v35 <- LoadInteger '3'
+    v36 <- Compare v34, '<', v35
+BeginForLoopAfterthought v36 -> v37
+    v38 <- UnaryOperation v37, '++'
+BeginForLoopBody -> v39
+    v40 <- CallFunction v29, []
+EndForLoop
+v41 <- LoadInteger '1'
+Reassign v22, v41
+v42 <- CallFunction v29, []
+v43 <- GetElement v20, '1'
+
+
+var array = [[{}],[1.1]];
+function transition() {
+    for (let i8 = 0; i8 < array.length; i8++) {
+        var arr = array[i8];
+        arr[0] = {};
+    }
+}
+var double_arr2 = [1.1,2.2];
+var flag = 0;
+function swap() {
+    try {
+    } catch(e24) {
+    }
+    if (flag == 1) {
+        array[1] = double_arr2;
+    }
+}
+var expected = 6.176516726456e-312;
+function f() {
+    swap();
+    double_arr2[0] = 1;
+    transition();
+    double_arr2[1] = expected;
+}
+for (let i34 = 0; i34 < 3; i34++) {
+    f();
+}
+flag = 1;
+f();
+double_arr2[1];
+
+FuzzIL program written to corpus/regress-crbug-722756.fzil

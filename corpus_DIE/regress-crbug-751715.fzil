@@ -1,0 +1,76 @@
+v0 <- BeginClassDefinition
+EndClassDefinition
+v1 <- BeginClassDefinition v0
+    BeginClassConstructor -> v2
+        CallSuperConstructor []
+    EndClassConstructor
+EndClassDefinition
+v3 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v4
+    EndObjectLiteralMethod
+v5 <- EndObjectLiteral
+v6 <- Construct v3, [v0, v5]
+v7 <- CreateNamedVariable 'proxy', 'var', v6
+v8 <- BeginArrowFunction -> 
+    v9 <- CreateArray []
+    v10 <- CreateNamedVariable 'Reflect', 'none'
+    v11 <- CallMethod v10, 'construct', [v1, v9]
+    Return v11
+EndArrowFunction
+v12 <- CallFunction v8, []
+v13 <- BeginArrowFunction -> 
+    v14 <- CreateArray []
+    v15 <- CreateNamedVariable 'Reflect', 'none'
+    v16 <- CallMethod v15, 'construct', [v1, v14, v7]
+    Return v16
+EndArrowFunction
+v17 <- CallFunction v13, []
+v18 <- CreateNamedVariable 'TypeError', 'none'
+v19 <- BeginArrowFunction -> 
+    v20 <- CreateArray []
+    v21 <- CreateNamedVariable 'Reflect', 'none'
+    v22 <- CallMethod v21, 'construct', [v1, v20, v7]
+    Return v22
+EndArrowFunction
+v23 <- CallFunction v19, []
+v24 <- BeginArrowFunction -> 
+    v25 <- CreateArray []
+    v26 <- CreateNamedVariable 'Reflect', 'none'
+    v27 <- CallMethod v26, 'construct', [v1, v25, v7]
+    Return v27
+EndArrowFunction
+v28 <- CallFunction v24, []
+
+
+class C0 {
+}
+class C1 extends C0 {
+    constructor() {
+        super();
+    }
+}
+const v5 = {
+    get() {
+    },
+};
+const v6 = new Proxy(C0, v5);
+var proxy = v6;
+const v8 = () => {
+    return Reflect.construct(C1, []);
+};
+v8();
+const v13 = () => {
+    return Reflect.construct(C1, [], proxy);
+};
+v13();
+const v19 = () => {
+    return Reflect.construct(C1, [], proxy);
+};
+v19();
+const v24 = () => {
+    return Reflect.construct(C1, [], proxy);
+};
+v24();
+
+FuzzIL program written to corpus/regress-crbug-751715.fzil

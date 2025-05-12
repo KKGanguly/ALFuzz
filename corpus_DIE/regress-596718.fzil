@@ -1,0 +1,79 @@
+v0 <- BeginPlainFunction -> v1, v2
+    Return v2
+EndPlainFunction
+v3 <- CreateNamedVariable 'Error', 'none'
+SetProperty v3, 'prepareStackTrace', v0
+v4 <- BeginArrowFunction -> 
+    BeginObjectLiteral
+    v5 <- EndObjectLiteral
+    v6 <- Construct v3, []
+    v7 <- GetProperty v6, 'stack'
+    v8 <- GetElement v7, '0'
+    v9 <- GetProperty v8, 'getMethodName'
+    v10 <- CallMethod v9, 'call', [v5]
+    Return v10
+EndArrowFunction
+v11 <- CallFunction v4, []
+v12 <- CreateNamedVariable 'TypeError', 'none'
+v13 <- BeginPlainFunction -> v14, v15
+    v16 <- BeginArrowFunction -> v17
+        v18 <- CreateNamedVariable 'Proxy', 'none'
+        BeginObjectLiteral
+        v19 <- EndObjectLiteral
+        v20 <- Construct v18, [v17, v19]
+        Return v20
+    EndArrowFunction
+    v21 <- CallMethod v15, 'map', [v16]
+    Return v21
+EndPlainFunction
+SetProperty v3, 'prepareStackTrace', v13
+v22 <- BeginArrowFunction -> 
+    v23 <- Construct v3, []
+    v24 <- GetProperty v23, 'stack'
+    v25 <- GetElement v24, '0'
+    v26 <- CallMethod v25, 'getMethodName', []
+    Return v26
+EndArrowFunction
+v27 <- CallFunction v22, []
+v28 <- BeginPlainFunction -> v29, v30
+    Return v30
+EndPlainFunction
+SetProperty v3, 'prepareStackTrace', v28
+v31 <- LoadNull
+v32 <- Construct v3, []
+v33 <- GetProperty v32, 'stack'
+v34 <- GetElement v33, '0'
+v35 <- CallMethod v34, 'getMethodName', []
+
+
+function f0(a1, a2) {
+    return a2;
+}
+Error.prepareStackTrace = f0;
+const v4 = () => {
+    const v5 = {};
+    const v6 = new Error();
+    return v6.stack[0].getMethodName.call(v5);
+};
+v4();
+function f13(a14, a15) {
+    const v16 = (a17) => {
+        const v20 = new Proxy(a17, {});
+        return v20;
+    };
+    return a15.map(v16);
+}
+Error.prepareStackTrace = f13;
+const v22 = () => {
+    const v23 = new Error();
+    return v23.stack[0].getMethodName();
+};
+v22();
+function f28(a29, a30) {
+    return a30;
+}
+Error.prepareStackTrace = f28;
+const v32 = new Error();
+v32.stack[0].getMethodName();
+
+FuzzIL program written to corpus/regress-596718.fzil

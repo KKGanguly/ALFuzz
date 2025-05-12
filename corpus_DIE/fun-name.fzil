@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadRegExp '\s' 'g'
+    v3 <- LoadString ''
+    v4 <- CallMethod v1, 'replace', [v2, v3]
+    Return v4
+EndPlainFunction
+v5 <- LoadString 'function(){}'
+v6 <- BeginPlainFunction -> 
+EndPlainFunction
+v7 <- CallMethod v6, 'toString', []
+v8 <- CallFunction v0, [v7]
+v9 <- LoadString 'functionanonymous(){}'
+v10 <- CreateNamedVariable 'Function', 'none'
+v11 <- Construct v10, []
+v12 <- CallMethod v11, 'toString', []
+v13 <- CallFunction v0, [v12]
+
+
+function strip(a1) {
+    return a1.replace(/\s/g, "");
+}
+function f6() {
+}
+strip(f6.toString());
+const v11 = new Function();
+strip(v11.toString());
+
+FuzzIL program written to corpus/fun-name.fzil

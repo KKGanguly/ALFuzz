@@ -1,0 +1,358 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- CreateNamedVariable 'Int8Array', 'none'
+v2 <- CreateNamedVariable 'Uint16Array', 'none'
+v3 <- CreateNamedVariable 'Int16Array', 'none'
+v4 <- CreateNamedVariable 'Uint32Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v7 <- CreateNamedVariable 'Float32Array', 'none'
+v8 <- CreateNamedVariable 'Float64Array', 'none'
+v9 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8]
+v10 <- CreateNamedVariable 'typedArrayConstructors', 'var', v9
+v11 <- BeginPlainFunction -> v12
+    v13 <- CallMethod v12, 'of', []
+    v14 <- CreateNamedVariable 'a', 'var', v13
+    v15 <- LoadInteger '0'
+    v16 <- GetProperty v14, 'length'
+    v17 <- GetProperty v12, 'prototype'
+    v18 <- CreateNamedVariable 'Object', 'none'
+    v19 <- CallMethod v18, 'getPrototypeOf', [v14]
+    v20 <- LoadBoolean 'false'
+    v21 <- CreateNamedVariable 'Array', 'none'
+    v22 <- CallMethod v21, 'isArray', [v14]
+    v23 <- LoadUndefined
+    v24 <- LoadNull
+    v25 <- CreateArray []
+    v26 <- LoadBoolean 'true'
+    v27 <- LoadBoolean 'false'
+    v28 <- LoadFloat '3.14'
+    v29 <- CallMethod v12, 'of', [v23, v24, v25, v26, v27, v28]
+    Reassign v14, v29
+    v30 <- Compare v12, '===', v7
+    v31 <- Compare v12, '===', v8
+    v32 <- BinaryOperation v30, '||', v31
+    BeginIf v32
+        v33 <- CreateNamedVariable 'NaN', 'none'
+        v34 <- GetElement v14, '0'
+        v35 <- LoadInteger '0'
+        v36 <- GetElement v14, '1'
+        v37 <- LoadInteger '0'
+        v38 <- GetElement v14, '2'
+        v39 <- LoadInteger '1'
+        v40 <- GetElement v14, '3'
+        v41 <- LoadInteger '0'
+        v42 <- GetElement v14, '4'
+        v43 <- LoadBoolean 'true'
+        v44 <- GetElement v14, '5'
+        v45 <- LoadFloat '3.14'
+        v46 <- BinaryOperation v44, '-', v45
+        v47 <- CreateNamedVariable 'Math', 'none'
+        v48 <- CallMethod v47, 'abs', [v46]
+        v49 <- LoadFloat '1e-06'
+        v50 <- Compare v48, '<', v49
+    BeginElse
+        v51 <- LoadInteger '0'
+        v52 <- GetElement v14, '0'
+        v53 <- LoadInteger '0'
+        v54 <- GetElement v14, '1'
+        v55 <- LoadInteger '0'
+        v56 <- GetElement v14, '2'
+        v57 <- LoadInteger '1'
+        v58 <- GetElement v14, '3'
+        v59 <- LoadInteger '0'
+        v60 <- GetElement v14, '4'
+        v61 <- LoadInteger '3'
+        v62 <- GetElement v14, '5'
+    EndIf
+    v63 <- CreateArray []
+    v64 <- CreateNamedVariable 'aux', 'var', v63
+    BeginForLoopInitializer
+        v65 <- LoadInteger '0'
+    BeginForLoopCondition -> v66
+        v67 <- LoadInteger '100'
+        v68 <- Compare v66, '<', v67
+    BeginForLoopAfterthought v68 -> v69
+        v70 <- UnaryOperation v69, '++'
+    BeginForLoopBody -> v71
+        SetComputedProperty v64, v71, v71
+    EndForLoop
+    v72 <- GetProperty v12, 'of'
+    v73 <- CallMethod v72, 'apply', [v12, v64]
+    Reassign v14, v73
+    v74 <- GetProperty v64, 'length'
+    v75 <- GetProperty v14, 'length'
+    v76 <- LoadInteger '0'
+    v77 <- CreateNamedVariable 'hits', 'var', v76
+    v78 <- BeginClassDefinition v12
+        BeginClassConstructor -> v79, v80
+            CallSuperConstructor [v80]
+            v81 <- LoadArguments
+            v82 <- GetProperty v81, 'length'
+            v83 <- LoadInteger '1'
+            v84 <- LoadInteger '2'
+            v85 <- UnaryOperation v77, '++'
+        EndClassConstructor
+    EndClassDefinition
+    v86 <- LoadInteger '0'
+    Reassign v77, v86
+    v87 <- LoadInteger '5'
+    v88 <- LoadInteger '6'
+    v89 <- CallMethod v78, 'of', [v87, v88]
+    Reassign v14, v89
+    v90 <- LoadInteger '1'
+    v91 <- LoadInteger '2'
+    v92 <- GetProperty v14, 'length'
+    v93 <- LoadInteger '5'
+    v94 <- LoadInteger '6'
+    v95 <- CreateArray [v93, v94]
+    v96 <- GetProperty v78, 'prototype'
+    v97 <- GetProperty v14, '__proto__'
+    v98 <- LoadInteger '0'
+    Reassign v77, v98
+    v99 <- LoadInteger '5'
+    v100 <- LoadInteger '6'
+    v101 <- GetProperty v12, 'of'
+    v102 <- CallMethod v101, 'call', [v78, v99, v100]
+    v103 <- CreateNamedVariable 'actual', 'var', v102
+    v104 <- LoadInteger '1'
+    v105 <- LoadInteger '2'
+    v106 <- GetProperty v14, 'length'
+    v107 <- LoadInteger '5'
+    v108 <- LoadInteger '6'
+    v109 <- CreateArray [v107, v108]
+    v110 <- GetProperty v78, 'prototype'
+    v111 <- GetProperty v14, '__proto__'
+    v112 <- LoadString 'pass'
+    v113 <- CreateNamedVariable 'status', 'var', v112
+    v114 <- GetProperty v12, 'prototype'
+    v115 <- LoadString '0'
+    v116 <- BeginPlainFunction -> v117
+        v118 <- LoadString 'fail'
+        Reassign v113, v118
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `set`, v116
+    v119 <- EndObjectLiteral
+    v120 <- CallMethod v18, 'defineProperty', [v114, v115, v119]
+    v121 <- LoadInteger '1'
+    v122 <- LoadInteger '1'
+    v123 <- CallMethod v12, 'of', [v122]
+    v124 <- GetElement v123, '0'
+    v125 <- LoadInteger '1'
+    v126 <- LoadString 'pass'
+    v127 <- BeginClassDefinition v12
+        BeginClassConstructor -> v128, v129
+            CallSuperConstructor [v129]
+            v130 <- LoadString 'length'
+            v131 <- BeginPlainFunction -> v132
+                v133 <- LoadString 'fail'
+                Reassign v113, v133
+            EndPlainFunction
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `set`, v131
+            v134 <- EndObjectLiteral
+            v135 <- CallMethod v18, 'defineProperty', [v128, v130, v134]
+        EndClassConstructor
+    EndClassDefinition
+    v136 <- LoadInteger '5'
+    v137 <- LoadInteger '6'
+    v138 <- LoadInteger '7'
+    v139 <- LoadInteger '8'
+    v140 <- CallMethod v127, 'of', [v136, v137, v138, v139]
+    v141 <- CreateNamedVariable 'pack', 'var', v140
+    v142 <- LoadString 'pass'
+    v143 <- BeginClassDefinition v12
+    EndClassDefinition
+    v144 <- GetProperty v143, 'prototype'
+    v145 <- LoadString 'length'
+    v146 <- BeginPlainFunction -> v147
+        v148 <- LoadString 'fail'
+        Reassign v113, v148
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `set`, v146
+    v149 <- EndObjectLiteral
+    v150 <- CallMethod v18, 'defineProperty', [v144, v145, v149]
+    v151 <- LoadInteger '3'
+    v152 <- CallMethod v143, 'of', [v151]
+    v153 <- CreateNamedVariable 'bevy', 'var', v152
+    v154 <- LoadString 'pass'
+    v155 <- GetProperty v12, '__proto__'
+    v156 <- LoadString 'of'
+    v157 <- CallMethod v18, 'getOwnPropertyDescriptor', [v155, v156]
+    v158 <- CreateNamedVariable 'desc', 'var', v157
+    v159 <- GetProperty v158, 'configurable'
+    v160 <- LoadBoolean 'true'
+    v161 <- GetProperty v158, 'enumerable'
+    v162 <- LoadBoolean 'false'
+    v163 <- GetProperty v158, 'writable'
+    v164 <- LoadBoolean 'true'
+    v165 <- GetProperty v12, 'of'
+    v166 <- GetProperty v165, 'length'
+    v167 <- LoadInteger '0'
+    v168 <- BeginPlainFunction -> 
+        v169 <- GetProperty v12, 'of'
+        v170 <- Construct v169, []
+    EndPlainFunction
+    v171 <- CallFunction v168, []
+    v172 <- CreateNamedVariable 'TypeError', 'none'
+    v173 <- LoadUndefined
+    v174 <- LoadNull
+    v175 <- LoadBoolean 'false'
+    v176 <- LoadBoolean 'true'
+    v177 <- LoadString 'cow'
+    v178 <- LoadInteger '42'
+    v179 <- LoadFloat '3.14'
+    v180 <- CreateArray [v173, v174, v175, v176, v177, v178, v179]
+    BeginForOfLoop v180 -> v181
+        v182 <- BeginPlainFunction -> 
+            v183 <- GetProperty v12, 'of'
+            v184 <- CallMethod v183, 'call', [v181]
+        EndPlainFunction
+        v185 <- CallFunction v182, []
+    EndForOfLoop
+    v186 <- CreateNamedVariable 'Symbol', 'none'
+    v187 <- GetProperty v186, 'toPrimitive'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v187 -> v188
+            v189 <- CreateNamedVariable 'gc', 'none'
+            v190 <- CallFunction v189, []
+            v191 <- LoadInteger '123'
+            Return v191
+        EndObjectLiteralComputedMethod
+    v192 <- EndObjectLiteral
+    v193 <- CreateNamedVariable 'not_number', 'var', v192
+    v194 <- LoadInteger '64'
+    v195 <- Construct v21, [v194]
+    v196 <- CallMethod v195, 'fill', [v193]
+    v197 <- CreateNamedVariable 'dangerous_array', 'var', v196
+    v198 <- CallMethodWithSpread v12, 'of', [...v197]
+    v199 <- CreateNamedVariable 'a', 'var', v198
+    BeginForLoopInitializer
+        v200 <- LoadInteger '0'
+    BeginForLoopCondition -> v201
+        v202 <- LoadInteger '64'
+        v203 <- Compare v201, '<', v202
+    BeginForLoopAfterthought v203 -> v204
+        v205 <- UnaryOperation v204, '++'
+    BeginForLoopBody -> v206
+        v207 <- LoadInteger '123'
+        v208 <- GetComputedProperty v199, v206
+    EndForLoop
+EndPlainFunction
+BeginForOfLoop v10 -> v209
+    v210 <- CallFunction v11, [v209]
+EndForOfLoop
+
+
+var typedArrayConstructors = [Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,Uint8ClampedArray,Float32Array,Float64Array];
+function TestTypedArrayOf(a12) {
+    var a = a12.of();
+    a.length;
+    a12.prototype;
+    Object.getPrototypeOf(a);
+    Array.isArray(a);
+    a = a12.of(undefined, null, [], true, false, 3.14);
+    if ((a12 === Float32Array) || (a12 === Float64Array)) {
+        a[0];
+        a[1];
+        a[2];
+        a[3];
+        a[4];
+        Math.abs(a[5] - 3.14) < 1e-06;
+    } else {
+        a[0];
+        a[1];
+        a[2];
+        a[3];
+        a[4];
+        a[5];
+    }
+    var aux = [];
+    for (let i66 = 0; i66 < 100; i66++) {
+        aux[i66] = i66;
+    }
+    a = a12.of.apply(a12, aux);
+    aux.length;
+    a.length;
+    var hits = 0;
+    class C78 extends a12 {
+        constructor(a80) {
+            super(a80);
+            arguments.length;
+            hits++;
+        }
+    }
+    hits = 0;
+    a = C78.of(5, 6);
+    a.length;
+    [5,6];
+    C78.prototype;
+    a.__proto__;
+    hits = 0;
+    var actual = a12.of.call(C78, 5, 6);
+    a.length;
+    [5,6];
+    C78.prototype;
+    a.__proto__;
+    var status = "pass";
+    const v114 = a12.prototype;
+    function f116(a117) {
+        status = "fail";
+    }
+    Object.defineProperty(v114, "0", { set: f116 });
+    a12.of(1)[0];
+    class C127 extends a12 {
+        constructor(a129) {
+            super(a129);
+            function f131(a132) {
+                status = "fail";
+            }
+            Object.defineProperty(this, "length", { set: f131 });
+        }
+    }
+    var pack = C127.of(5, 6, 7, 8);
+    class C143 extends a12 {
+    }
+    const v144 = C143.prototype;
+    function f146(a147) {
+        status = "fail";
+    }
+    Object.defineProperty(v144, "length", { set: f146 });
+    var bevy = C143.of(3);
+    var desc = Object.getOwnPropertyDescriptor(a12.__proto__, "of");
+    desc.configurable;
+    desc.enumerable;
+    desc.writable;
+    a12.of.length;
+    function f168() {
+        const t81 = a12.of;
+        new t81();
+    }
+    f168();
+    for (const v181 of [,null,false,true,"cow",42,3.14]) {
+        function f182() {
+            a12.of.call(v181);
+        }
+        f182();
+    }
+    const v187 = Symbol.toPrimitive;
+    const v192 = {
+        [v187]() {
+            gc();
+            return 123;
+        },
+    };
+    var not_number = v192;
+    const v195 = new Array(64);
+    var dangerous_array = v195.fill(not_number);
+    var a = a12.of(...dangerous_array);
+    for (let i201 = 0; i201 < 64; i201++) {
+        a[i201];
+    }
+}
+for (const v209 of typedArrayConstructors) {
+    TestTypedArrayOf(v209);
+}
+
+FuzzIL program written to corpus/typedarray-of.fzil

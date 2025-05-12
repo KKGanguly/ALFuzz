@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '0'
+    BeginForLoopCondition -> v2
+        v3 <- LoadInteger '50000'
+        v4 <- Compare v2, '<', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- UnaryOperation '++', v5
+    BeginForLoopBody -> v7
+        v8 <- CreateNamedVariable 'Math', 'none'
+        v9 <- CallMethod v8, 'random', []
+    EndForLoop
+EndPlainFunction
+v10 <- CallFunction v0, []
+
+
+function osr() {
+    for (let i2 = 0; i2 < 50000; ++i2) {
+        Math.random();
+    }
+}
+osr();
+
+FuzzIL program written to corpus/regress-crbug-632800.fzil

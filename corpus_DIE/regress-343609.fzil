@@ -1,0 +1,138 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadThis
+    SetProperty v2, 'a', v1
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- BeginPlainFunction -> v5
+        v6 <- LoadInteger '3'
+        SetProperty v5, 'c', v6
+        v7 <- GetProperty v5, 'a'
+        v8 <- GetProperty v5, 'c'
+        v9 <- BinaryOperation v7, '+', v8
+        SetProperty v5, 'a', v9
+        v10 <- GetProperty v5, 'a'
+        Return v10
+    EndPlainFunction
+    Return v4
+EndPlainFunction
+v11 <- BeginPlainFunction -> 
+    v12 <- BeginPlainFunction -> v13
+        v14 <- LoadInteger '3'
+        SetProperty v13, 'c', v14
+        v15 <- GetProperty v13, 'a'
+        v16 <- GetProperty v13, 'c'
+        v17 <- BinaryOperation v15, '+', v16
+        SetProperty v13, 'a', v17
+    EndPlainFunction
+    Return v12
+EndPlainFunction
+v18 <- BeginPlainFunction -> 
+    v19 <- BeginPlainFunction -> 
+        v20 <- LoadInteger '10'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `c`, v20
+        v21 <- EndObjectLiteral
+        v22 <- CreateNamedVariable 'o', 'var', v21
+        v23 <- CallFunction v11, []
+        v24 <- CreateNamedVariable 'f1', 'var', v23
+        v25 <- CallFunction v24, [v22]
+        v26 <- CallFunction v24, [v22]
+        v27 <- CallFunction v24, [v22]
+    EndPlainFunction
+    v28 <- CallFunction v19, []
+EndPlainFunction
+v29 <- Construct v0, []
+v30 <- CreateNamedVariable 'o', 'var', v29
+v31 <- BeginPlainFunction -> 
+    v32 <- BeginPlainFunction -> 
+        v33 <- CallFunction v3, []
+        v34 <- CreateNamedVariable 'f1', 'var', v33
+        v35 <- Construct v0, []
+        v36 <- CallFunction v34, [v35]
+        v37 <- Construct v0, []
+        v38 <- CallFunction v34, [v37]
+        v39 <- CallFunction v34, [v30]
+    EndPlainFunction
+    v40 <- CallFunction v32, []
+EndPlainFunction
+v41 <- CallFunction v31, []
+v42 <- CallFunction v31, []
+v43 <- CallFunction v31, []
+v44 <- CallFunction v18, []
+v45 <- CallFunction v18, []
+BeginForLoopInitializer
+    v46 <- LoadInteger '0'
+BeginForLoopCondition -> v47
+    v48 <- LoadInteger '3'
+    v49 <- Compare v47, '<', v48
+BeginForLoopAfterthought v49 -> v50
+    v51 <- UnaryOperation v50, '++'
+BeginForLoopBody -> v52
+    v53 <- LoadBoolean 'true'
+    v54 <- CreateNamedVariable 'gc', 'none'
+    v55 <- CallFunction v54, [v53]
+EndForLoop
+v56 <- LoadFloat '2.2'
+SetProperty v30, 'c', v56
+v57 <- CallFunction v3, []
+v58 <- CreateNamedVariable 'f2', 'var', v57
+v59 <- Construct v0, []
+v60 <- CallFunction v58, [v59]
+
+
+function Ctor() {
+    this.a = 1;
+}
+function get_closure() {
+    function add_field(a5) {
+        a5.c = 3;
+        a5.a = a5.a + a5.c;
+        return a5.a;
+    }
+    return add_field;
+}
+function get_closure2() {
+    function cc(a13) {
+        a13.c = 3;
+        a13.a = a13.a + a13.c;
+    }
+    return cc;
+}
+function dummy() {
+    function f19() {
+        var o = { c: 10 };
+        var f1 = get_closure2();
+        f1(o);
+        f1(o);
+        f1(o);
+    }
+    f19();
+}
+const v29 = new Ctor();
+var o = v29;
+function opt() {
+    function f32() {
+        var f1 = get_closure();
+        const v35 = new Ctor();
+        f1(v35);
+        const v37 = new Ctor();
+        f1(v37);
+        f1(o);
+    }
+    f32();
+}
+opt();
+opt();
+opt();
+dummy();
+dummy();
+for (let i47 = 0; i47 < 3; i47++) {
+    gc(true);
+}
+o.c = 2.2;
+var f2 = get_closure();
+const v59 = new Ctor();
+f2(v59);
+
+FuzzIL program written to corpus/regress-343609.fzil

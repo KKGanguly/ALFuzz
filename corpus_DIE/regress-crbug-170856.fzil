@@ -1,0 +1,35 @@
+v0 <- CreateNamedVariable 'RegExp', 'none'
+v1 <- LoadString 'a'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'r', 'none'
+Reassign v3, v2
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+BeginForLoopCondition -> v5
+    v6 <- LoadInteger '100'
+    v7 <- Compare v5, '<', v6
+BeginForLoopAfterthought v7 -> v8
+    v9 <- UnaryOperation v8, '++'
+BeginForLoopBody -> v10
+    v11 <- CreateNamedVariable 'r', 'none'
+    v12 <- LoadString 'abc'
+    v13 <- BinaryOperation v12, '+', v10
+    SetComputedProperty v11, v13, v10
+EndForLoop
+v14 <- CreateNamedVariable 'r', 'none'
+v15 <- LoadString ''
+v16 <- LoadString 'zzzz'
+v17 <- CallMethod v16, 'replace', [v14, v15]
+v18 <- LoadInteger '0'
+v19 <- GetProperty v14, 'lastIndex'
+
+
+const v2 = new RegExp("a");
+r = v2;
+for (let i5 = 0; i5 < 100; i5++) {
+    r["abc" + i5] = i5;
+}
+("zzzz").replace(r, "");
+r.lastIndex;
+
+FuzzIL program written to corpus/regress-crbug-170856.fzil

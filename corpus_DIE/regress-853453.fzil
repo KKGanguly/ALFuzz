@@ -1,0 +1,38 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- CreateNamedVariable 'WebAssembly', 'none'
+    v2 <- GetProperty v1, 'Module'
+    v3 <- CreateNamedVariable 'Uint8Array', 'none'
+    v4 <- LoadInteger '0'
+    v5 <- LoadInteger '97'
+    v6 <- LoadInteger '115'
+    v7 <- LoadInteger '109'
+    v8 <- LoadInteger '1'
+    v9 <- LoadInteger '0'
+    v10 <- LoadInteger '0'
+    v11 <- LoadInteger '0'
+    v12 <- LoadInteger '4'
+    v13 <- LoadInteger '4'
+    v14 <- LoadInteger '1'
+    v15 <- LoadInteger '112'
+    v16 <- LoadInteger '3'
+    v17 <- LoadInteger '0'
+    v18 <- CreateArray [v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17]
+    v19 <- Construct v3, [v18]
+    v20 <- Construct v2, [v19]
+    Return v20
+EndArrowFunction
+v21 <- CallFunction v0, []
+v22 <- CreateNamedVariable 'WebAssembly', 'none'
+v23 <- GetProperty v22, 'CompileError'
+
+
+const v0 = () => {
+    const v2 = WebAssembly.Module;
+    const v19 = new Uint8Array([0,97,115,109,1,0,0,0,4,4,1,112,3,0]);
+    const v20 = new v2(v19);
+    return v20;
+};
+v0();
+WebAssembly.CompileError;
+
+FuzzIL program written to corpus/regress-853453.fzil

@@ -1,0 +1,92 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'length'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- GetProperty v4, 'byteLength'
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- GetProperty v7, 'byteOffset'
+    Return v8
+EndPlainFunction
+v9 <- CreateNamedVariable 'Uint8Array', 'none'
+v10 <- LoadInteger '1'
+v11 <- LoadInteger '2'
+v12 <- LoadInteger '3'
+v13 <- CreateArray [v10, v11, v12]
+v14 <- Construct v9, [v13]
+v15 <- CreateNamedVariable 'a', 'var', v14
+v16 <- CallFunction v0, [v15]
+v17 <- CallFunction v0, [v15]
+v18 <- GetProperty v15, '__proto__'
+v19 <- LoadString 'length'
+v20 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v20
+v21 <- EndObjectLiteral
+v22 <- CreateNamedVariable 'Object', 'none'
+v23 <- CallMethod v22, 'defineProperty', [v18, v19, v21]
+v24 <- LoadInteger '42'
+v25 <- CallFunction v0, [v15]
+v26 <- LoadInteger '42'
+v27 <- GetProperty v15, 'length'
+v28 <- CallFunction v3, [v15]
+v29 <- CallFunction v3, [v15]
+v30 <- GetProperty v15, '__proto__'
+v31 <- LoadString 'byteLength'
+v32 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v32
+v33 <- EndObjectLiteral
+v34 <- CallMethod v22, 'defineProperty', [v30, v31, v33]
+v35 <- LoadInteger '42'
+v36 <- CallFunction v3, [v15]
+v37 <- LoadInteger '42'
+v38 <- GetProperty v15, 'byteLength'
+v39 <- CallFunction v6, [v15]
+v40 <- CallFunction v6, [v15]
+v41 <- GetProperty v15, '__proto__'
+v42 <- LoadString 'byteOffset'
+v43 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v43
+v44 <- EndObjectLiteral
+v45 <- CallMethod v22, 'defineProperty', [v41, v42, v44]
+v46 <- LoadInteger '42'
+v47 <- CallFunction v6, [v15]
+v48 <- LoadInteger '42'
+v49 <- GetProperty v15, 'byteOffset'
+
+
+function getLength(a1) {
+    return a1.length;
+}
+function getByteLength(a4) {
+    return a4.byteLength;
+}
+function getByteOffset(a7) {
+    return a7.byteOffset;
+}
+const v14 = new Uint8Array([1,2,3]);
+var a = v14;
+getLength(a);
+getLength(a);
+const v18 = a.__proto__;
+Object.defineProperty(v18, "length", { value: 42 });
+getLength(a);
+a.length;
+getByteLength(a);
+getByteLength(a);
+const v30 = a.__proto__;
+Object.defineProperty(v30, "byteLength", { value: 42 });
+getByteLength(a);
+a.byteLength;
+getByteOffset(a);
+getByteOffset(a);
+const v41 = a.__proto__;
+Object.defineProperty(v41, "byteOffset", { value: 42 });
+getByteOffset(a);
+a.byteOffset;
+
+FuzzIL program written to corpus/regress-610633.fzil

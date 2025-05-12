@@ -1,0 +1,45 @@
+v0 <- LoadString '{"0":0.1, "10000":0.4, '
+v1 <- CreateNamedVariable 'jsonstring', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '1'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '9999'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- LoadString '"'
+    v10 <- BinaryOperation v9, '+', v8
+    v11 <- LoadString '":0.2, '
+    v12 <- BinaryOperation v10, '+', v11
+    Update v1, '+', v12
+EndForLoop
+v13 <- LoadString '"9999":0.3}'
+Update v1, '+', v13
+v14 <- CreateNamedVariable 'JSON', 'none'
+v15 <- CallMethod v14, 'parse', [v1]
+v16 <- CreateNamedVariable 'jsonobject', 'var', v15
+BeginForLoopInitializer
+    v17 <- LoadInteger '1'
+BeginForLoopCondition -> v18
+    v19 <- LoadInteger '9999'
+    v20 <- Compare v18, '<', v19
+BeginForLoopAfterthought v20 -> v21
+    v22 <- UnaryOperation v21, '++'
+BeginForLoopBody -> v23
+    v24 <- LoadFloat '0.2'
+    v25 <- GetComputedProperty v16, v23
+EndForLoop
+
+
+var jsonstring = "{"0":0.1, "10000":0.4, ";
+for (let i3 = 1; i3 < 9999; i3++) {
+    jsonstring += (""" + i3) + "":0.2, ";
+}
+jsonstring += ""9999":0.3}";
+var jsonobject = JSON.parse(jsonstring);
+for (let i18 = 1; i18 < 9999; i18++) {
+    jsonobject[i18];
+}
+
+FuzzIL program written to corpus/regress-241344.fzil

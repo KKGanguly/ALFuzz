@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'g', 'none'
+    v2 <- CallFunction v1, []
+    v3 <- CreateNamedVariable 'h', 'none'
+    v4 <- CallFunction v3, []
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+EndPlainFunction
+v7 <- CallFunction v0, []
+v8 <- CallFunction v0, []
+v9 <- CallFunction v0, []
+
+
+function f() {
+    g();
+    h();
+}
+function g() {
+}
+function h() {
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/deopt-twice-on-call.fzil

@@ -1,0 +1,100 @@
+v0 <- BeginPlainFunction -> v1, v2
+    SetProperty v1, 'length', v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'l', 'var', v4
+    v6 <- CreateNamedVariable 'Array', 'none'
+    v7 <- CallFunction v6, [v5]
+    v8 <- CreateNamedVariable 'a', 'var', v7
+    v9 <- LoadInteger '3'
+    v10 <- CallFunction v0, [v8, v9]
+    v11 <- LoadInteger '3'
+    v12 <- CallFunction v0, [v8, v11]
+    v13 <- LoadInteger '3'
+    v14 <- GetProperty v8, 'length'
+EndPlainFunction
+v15 <- BeginPlainFunction -> 
+    v16 <- CreateArray []
+    v17 <- CreateNamedVariable 'a', 'var', v16
+    v18 <- LoadInteger '10'
+    v19 <- CallFunction v0, [v17, v18]
+    v20 <- LoadInteger '10'
+    v21 <- CallFunction v0, [v17, v20]
+    v22 <- CreateNamedVariable 'Object', 'none'
+    v23 <- CallMethod v22, 'freeze', [v17]
+    v24 <- LoadInteger '3'
+    v25 <- CallFunction v0, [v17, v24]
+    v26 <- LoadInteger '3'
+    v27 <- CallFunction v0, [v17, v26]
+    v28 <- LoadInteger '10'
+    v29 <- GetProperty v17, 'length'
+EndPlainFunction
+v30 <- BeginPlainFunction -> 
+    v31 <- LoadInteger '2'
+    v32 <- CreateArray [v31]
+    v33 <- CreateNamedVariable 'a', 'var', v32
+    v34 <- LoadString 'length'
+    v35 <- LoadInteger '2'
+    v36 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v35
+        ObjectLiteralAddProperty `writable`, v36
+    v37 <- EndObjectLiteral
+    v38 <- CreateNamedVariable 'Object', 'none'
+    v39 <- CallMethod v38, 'defineProperty', [v33, v34, v37]
+    v40 <- CreateNamedVariable 'f', 'none'
+    v41 <- CallFunction v40, [v33]
+    v42 <- CreateArray []
+    v43 <- LoadInteger '10'
+    v44 <- CallFunction v0, [v42, v43]
+    v45 <- CreateArray []
+    v46 <- LoadInteger '10'
+    v47 <- CallFunction v0, [v45, v46]
+    v48 <- LoadInteger '10'
+    v49 <- CallFunction v0, [v33, v48]
+    v50 <- LoadInteger '10'
+    v51 <- CallFunction v0, [v33, v50]
+    v52 <- LoadInteger '2'
+    v53 <- GetProperty v33, 'length'
+EndPlainFunction
+v54 <- CallFunction v3, []
+v55 <- CallFunction v15, []
+v56 <- CallFunction v30, []
+
+
+function set_length(a1, a2) {
+    a1.length = a2;
+}
+function test1() {
+    var l = {};
+    var a = Array(l);
+    set_length(a, 3);
+    set_length(a, 3);
+    a.length;
+}
+function test2() {
+    var a = [];
+    set_length(a, 10);
+    set_length(a, 10);
+    Object.freeze(a);
+    set_length(a, 3);
+    set_length(a, 3);
+    a.length;
+}
+function test3() {
+    var a = [2];
+    Object.defineProperty(a, "length", { value: 2, writable: false });
+    f(a);
+    set_length([], 10);
+    set_length([], 10);
+    set_length(a, 10);
+    set_length(a, 10);
+    a.length;
+}
+test1();
+test2();
+test3();
+
+FuzzIL program written to corpus/regress-crbug-350890.fzil

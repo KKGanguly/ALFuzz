@@ -1,0 +1,22 @@
+v0 <- LoadRegExp '.' 'g'
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v2
+v3 <- EndObjectLiteral
+SetProperty v1, 'lastIndex', v3
+v4 <- LoadString 'x'
+v5 <- CallMethod v4, 'match', [v1]
+v6 <- LoadInteger '0'
+v7 <- GetProperty v1, 'lastIndex'
+
+
+var global = /./g;
+function f2() {
+}
+global.lastIndex = { valueOf: f2 };
+("x").match(global);
+global.lastIndex;
+
+FuzzIL program written to corpus/regexp-match-lastindex.fzil

@@ -1,0 +1,73 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        v4 <- BeginArrowFunction -> v5
+            v6 <- GetProperty v3, 'x'
+            v7 <- Compare v5, '===', v6
+            Return v7
+        EndArrowFunction
+        v8 <- CallMethod v2, 'find', [v4]
+        Return v8
+    EndPlainFunction
+    v9 <- LoadInteger '3'
+    v10 <- LoadInteger '1'
+    v11 <- LoadInteger '2'
+    v12 <- LoadInteger '3'
+    v13 <- CreateArray [v10, v11, v12]
+    v14 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v14
+    v15 <- EndObjectLiteral
+    v16 <- CallFunction v1, [v13, v15]
+    v17 <- LoadUndefined
+    v18 <- LoadInteger '0'
+    v19 <- LoadInteger '1'
+    v20 <- LoadInteger '2'
+    v21 <- CreateArray [v18, v19, v20]
+    v22 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v22
+    v23 <- EndObjectLiteral
+    v24 <- CallFunction v1, [v21, v23]
+    v25 <- LoadInteger '3'
+    v26 <- LoadInteger '1'
+    v27 <- LoadInteger '2'
+    v28 <- LoadInteger '3'
+    v29 <- CreateArray [v26, v27, v28]
+    v30 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v30
+    v31 <- EndObjectLiteral
+    v32 <- CallFunction v1, [v29, v31]
+    v33 <- LoadUndefined
+    v34 <- LoadInteger '0'
+    v35 <- LoadInteger '1'
+    v36 <- LoadInteger '2'
+    v37 <- CreateArray [v34, v35, v36]
+    v38 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v38
+    v39 <- EndObjectLiteral
+    v40 <- CallFunction v1, [v37, v39]
+EndPlainFunction
+v41 <- CallFunction v0, []
+
+
+function f0() {
+    function foo(a2, a3) {
+        const v4 = (a5) => {
+            return a5 === a3.x;
+        };
+        return a2.find(v4);
+    }
+    const v13 = [1,2,3];
+    foo(v13, { x: 3 });
+    const v21 = [0,1,2];
+    foo(v21, { x: 3 });
+    const v29 = [1,2,3];
+    foo(v29, { x: 3 });
+    const v37 = [0,1,2];
+    foo(v37, { x: 3 });
+}
+f0();
+
+FuzzIL program written to corpus/array-find.fzil

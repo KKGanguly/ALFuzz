@@ -1,0 +1,77 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'performance'
+v2 <- CreateNamedVariable 'performance', 'none'
+v3 <- GetProperty v2, 'now'
+v4 <- BinaryOperation v1, '&&', v3
+BeginIf v4
+    v5 <- BeginPlainFunction -> 
+        v6 <- CallMethod v2, 'now', []
+        v7 <- CreateNamedVariable 'start_test', 'var', v6
+        BeginForLoopInitializer
+            v8 <- CallMethod v2, 'now', []
+        BeginForLoopCondition -> v9
+            v10 <- BinaryOperation v9, '-', v7
+            v11 <- LoadInteger '100'
+            v12 <- Compare v10, '<', v11
+        BeginForLoopAfterthought v12 -> v13
+            v14 <- CallMethod v2, 'now', []
+            Reassign v13, v14
+        BeginForLoopBody -> v15
+            v16 <- CallMethod v2, 'now', []
+            v17 <- CreateNamedVariable 'end', 'var', v16
+            v18 <- Compare v15, '>=', v7
+            v19 <- Compare v17, '>=', v15
+            BeginWhileLoopHeader
+                v20 <- BinaryOperation v17, '-', v15
+                v21 <- LoadInteger '0'
+                v22 <- Compare v20, '==', v21
+            BeginWhileLoopBody v22
+                v23 <- CallMethod v2, 'now', []
+                v24 <- CreateNamedVariable 'next', 'var', v23
+                v25 <- Compare v24, '>=', v17
+                Reassign v17, v24
+            EndWhileLoop
+            v26 <- BinaryOperation v17, '-', v15
+            v27 <- LoadInteger '1'
+            v28 <- Compare v26, '<=', v27
+            BeginIf v28
+                Return
+            BeginElse
+                v29 <- LoadString 'Timer difference too big: '
+                v30 <- BinaryOperation v17, '-', v15
+                v31 <- BinaryOperation v29, '+', v30
+                v32 <- LoadString 'ms'
+                v33 <- BinaryOperation v31, '+', v32
+                v34 <- CreateNamedVariable 'print', 'none'
+                v35 <- CallFunction v34, [v33]
+            EndIf
+        EndForLoop
+        v36 <- LoadBoolean 'false'
+    EndPlainFunction
+    v37 <- CallFunction v5, []
+EndIf
+
+
+if (this.performance && performance.now) {
+    function run() {
+        var start_test = performance.now();
+        for (let i9 = performance.now(); (i9 - start_test) < 100; i9 = performance.now()) {
+            var end = performance.now();
+            i9 >= start_test;
+            end >= i9;
+            while ((end - i9) == 0) {
+                var next = performance.now();
+                next >= end;
+                end = next;
+            }
+            if ((end - i9) <= 1) {
+                return;
+            } else {
+                print(("Timer difference too big: " + (end - i9)) + "ms");
+            }
+        }
+    }
+    run();
+}
+
+FuzzIL program written to corpus/d8-performance-now.fzil

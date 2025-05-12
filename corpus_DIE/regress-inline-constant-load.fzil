@@ -1,0 +1,62 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o1', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'o2', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- GetProperty v5, 'bar'
+    Return v6
+EndPlainFunction
+v7 <- LoadString 'bar'
+v8 <- LoadInteger '200'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v8
+v9 <- EndObjectLiteral
+v10 <- CreateNamedVariable 'Object', 'none'
+v11 <- CallMethod v10, 'defineProperty', [v1, v7, v9]
+v12 <- CallFunction v4, [v1]
+v13 <- CallFunction v4, [v1]
+v14 <- BeginPlainFunction -> v15
+    v16 <- CreateNamedVariable 'o', 'var', v3
+    BeginIf v15
+        v17 <- CallFunction v4, [v16]
+        Return v17
+    EndIf
+EndPlainFunction
+v18 <- LoadBoolean 'false'
+v19 <- CallFunction v14, [v18]
+v20 <- LoadUndefined
+v21 <- LoadBoolean 'false'
+v22 <- CallFunction v14, [v21]
+v23 <- LoadString 'bar'
+v24 <- LoadInteger '100'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v24
+v25 <- EndObjectLiteral
+v26 <- CallMethod v10, 'defineProperty', [v3, v23, v25]
+v27 <- LoadInteger '100'
+v28 <- LoadBoolean 'true'
+v29 <- CallFunction v14, [v28]
+
+
+var o1 = {};
+var o2 = {};
+function foo(a5) {
+    return a5.bar;
+}
+Object.defineProperty(o1, "bar", { value: 200 });
+foo(o1);
+foo(o1);
+function f(a15) {
+    var o = o2;
+    if (a15) {
+        return foo(o);
+    }
+}
+f(false);
+f(false);
+Object.defineProperty(o2, "bar", { value: 100 });
+f(true);
+
+FuzzIL program written to corpus/regress-inline-constant-load.fzil

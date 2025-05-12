@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadRegExp '(?=[d#.])' ''
+    v3 <- CreateNamedVariable 're', 'var', v2
+    SetProperty v3, 'a', v1
+    Return v3
+EndPlainFunction
+v4 <- LoadUndefined
+v5 <- CallFunction v0, [v4]
+v6 <- CreateNamedVariable 're1', 'var', v5
+v7 <- LoadInteger '42'
+v8 <- CallFunction v0, [v7]
+v9 <- CreateNamedVariable 're2', 'var', v8
+v10 <- GetProperty v6, 'a'
+v11 <- LoadUndefined
+v12 <- GetProperty v9, 'a'
+v13 <- LoadInteger '42'
+
+
+function store(a1) {
+    var re = /(?=[d#.])/;
+    re.a = a1;
+    return re;
+}
+var re1 = store(undefined);
+var re2 = store(42);
+re1.a;
+re2.a;
+
+FuzzIL program written to corpus/regress-crbug-548580.fzil

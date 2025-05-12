@@ -1,0 +1,31 @@
+v0 <- LoadInteger '3'
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- LoadString 'y'
+v3 <- LoadUndefined
+v4 <- LoadThis
+v5 <- GetProperty v4, 'y'
+v6 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'p', 'var', v7
+v9 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v8
+    ObjectLiteralAddProperty `b`, v9
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'o', 'var', v10
+v12 <- LoadInteger '1'
+v13 <- GetProperty v11, 'a'
+v14 <- LoadUndefined
+v15 <- GetProperty v11, 'c'
+
+
+var x = 3;
+this.y;
+var p = { a: 1 };
+var o = { __proto__: p, b: 2 };
+o.a;
+o.c;
+
+FuzzIL program written to corpus/bug-proto.fzil

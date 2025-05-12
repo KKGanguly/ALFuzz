@@ -1,0 +1,68 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        BeginForLoopInitializer
+            v2 <- LoadInteger '0'
+        BeginForLoopCondition -> v3
+            v4 <- LoadInteger '4294967295'
+            v5 <- Compare v3, '<', v4
+        BeginForLoopAfterthought v5 -> v6
+            v7 <- LoadInteger '2'
+            Update v6, '+', v7
+        BeginForLoopBody -> v8
+            v9 <- LoadInteger '10'
+            v10 <- Compare v8, '===', v9
+            BeginIf v10
+                Break
+            EndIf
+        EndForLoop
+    EndPlainFunction
+    v11 <- CallFunction v1, []
+EndPlainFunction
+v12 <- CallFunction v0, []
+v13 <- BeginPlainFunction -> 
+    v14 <- BeginPlainFunction -> 
+        BeginForLoopInitializer
+            v15 <- LoadInteger '0'
+        BeginForLoopCondition -> v16
+            v17 <- LoadInteger '4294967293'
+            v18 <- Compare v16, '<', v17
+        BeginForLoopAfterthought v18 -> v19
+            v20 <- LoadInteger '2'
+            Update v19, '+', v20
+        BeginForLoopBody -> v21
+            v22 <- LoadInteger '10'
+            v23 <- Compare v21, '===', v22
+            BeginIf v23
+                Break
+            EndIf
+        EndForLoop
+    EndPlainFunction
+    v24 <- CallFunction v14, []
+EndPlainFunction
+v25 <- CallFunction v13, []
+
+
+function f0() {
+    function f() {
+        for (let i3 = 0; i3 < 4294967295; i3 += 2) {
+            if (i3 === 10) {
+                break;
+            }
+        }
+    }
+    f();
+}
+f0();
+function f13() {
+    function f() {
+        for (let i16 = 0; i16 < 4294967293; i16 += 2) {
+            if (i16 === 10) {
+                break;
+            }
+        }
+    }
+    f();
+}
+f13();
+
+FuzzIL program written to corpus/regress-loop-variable-unsigned.fzil

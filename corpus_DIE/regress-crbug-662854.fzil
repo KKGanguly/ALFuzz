@@ -1,0 +1,20 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'boom', 'none'
+    v2 <- TypeOf v1
+EndPlainFunction
+v3 <- BeginArrowFunction -> 
+    v4 <- CallFunction v0, []
+    Return v4
+EndArrowFunction
+v5 <- CallFunction v3, []
+
+
+function f() {
+    typeof boom;
+}
+const v3 = () => {
+    return f();
+};
+v3();
+
+FuzzIL program written to corpus/regress-crbug-662854.fzil

@@ -1,0 +1,88 @@
+v0 <- CreateNamedVariable 'String', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString '0'
+v3 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__v_1`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- CallMethod v5, 'defineProperty', [v1, v2, v4]
+v7 <- GetProperty v0, 'prototype'
+v8 <- LoadString '3'
+v9 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__v_1`, v9
+v10 <- EndObjectLiteral
+v11 <- CallMethod v5, 'defineProperty', [v7, v8, v10]
+v12 <- BeginPlainFunction -> 
+    v13 <- Construct v0, []
+    v14 <- CreateNamedVariable 's', 'var', v13
+    v15 <- BeginPlainFunction -> v16, v17, v18
+        SetComputedProperty v16, v17, v18
+    EndPlainFunction
+    v19 <- LoadInteger '10'
+    v20 <- LoadString 'value'
+    v21 <- CallFunction v15, [v14, v19, v20]
+    v22 <- LoadInteger '1073741823'
+    v23 <- LoadString 'value'
+    v24 <- CallFunction v15, [v14, v22, v23]
+EndPlainFunction
+v25 <- CallFunction v12, []
+v26 <- BeginPlainFunction -> 
+    v27 <- Construct v0, []
+    v28 <- CallMethod v5, 'preventExtensions', [v27]
+EndPlainFunction
+v29 <- CallFunction v26, []
+v30 <- CallFunction v26, []
+v31 <- BeginPlainFunction -> 
+    v32 <- LoadInteger '10'
+    v33 <- CreateNamedVariable 'i', 'var', v32
+    v34 <- LoadString 'foo'
+    v35 <- Construct v0, [v34]
+    v36 <- CreateNamedVariable 'a', 'var', v35
+    BeginForLoopInitializer
+        v37 <- LoadInteger '0'
+    BeginForLoopCondition -> v38
+        v39 <- Compare v38, '<', v33
+    BeginForLoopAfterthought v39 -> v40
+        v41 <- UnaryOperation v40, '++'
+    BeginForLoopBody -> v42
+        BeginObjectLiteral
+        v43 <- EndObjectLiteral
+        SetComputedProperty v36, v42, v43
+    EndForLoop
+EndPlainFunction
+v44 <- CallFunction v31, []
+
+
+const v1 = String.prototype;
+Object.defineProperty(v1, "0", { __v_1: 1 });
+const v7 = String.prototype;
+Object.defineProperty(v7, "3", { __v_1: 1 });
+function f12() {
+    const v13 = new String();
+    var s = v13;
+    function set(a16, a17, a18) {
+        a16[a17] = a18;
+    }
+    set(s, 10, "value");
+    set(s, 1073741823, "value");
+}
+f12();
+function __f_11() {
+    const v27 = new String();
+    Object.preventExtensions(v27);
+}
+__f_11();
+__f_11();
+function f31() {
+    var i = 10;
+    const v35 = new String("foo");
+    var a = v35;
+    for (let i38 = 0; i38 < i; i38++) {
+        a[i38] = {};
+    }
+}
+f31();
+
+FuzzIL program written to corpus/regress-crbug-583257.fzil

@@ -1,0 +1,45 @@
+v0 <- CreateNamedVariable 'eval', 'none'
+v1 <- CreateNamedVariable 'alias', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- CallFunction v1, [v3]
+    Return v4
+EndPlainFunction
+v5 <- LoadInteger '42'
+v6 <- LoadString '42'
+v7 <- CallFunction v2, [v6]
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- LoadString 'Object'
+v10 <- CallFunction v2, [v9]
+v11 <- CallFunction v2, []
+v12 <- LoadString 'e'
+v13 <- CallFunction v2, [v12]
+v14 <- LoadBoolean 'false'
+v15 <- CreateNamedVariable 'caught', 'var', v14
+BeginTry
+    v16 <- LoadString 's'
+    v17 <- CallFunction v2, [v16]
+BeginCatch -> v18
+    v19 <- LoadBoolean 'true'
+    Reassign v15, v19
+    v20 <- CreateNamedVariable 'ReferenceError', 'none'
+    v21 <- TestInstanceOf v18, v20
+EndTryCatch
+
+
+var alias = eval;
+function e(a3) {
+    return alias(a3);
+}
+e("42");
+e("Object");
+e();
+e("e");
+var caught = false;
+try {
+    e("s");
+} catch(e18) {
+    caught = true;
+    e18 instanceof ReferenceError;
+}
+
+FuzzIL program written to corpus/regress-900055.fzil

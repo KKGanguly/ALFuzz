@@ -1,0 +1,720 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadString 'value'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `target_one`, v1
+        ObjectLiteralAddProperty `property`, v2
+    v3 <- EndObjectLiteral
+    v4 <- CreateNamedVariable 'target', 'var', v3
+    v5 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `handler`, v5
+    v6 <- EndObjectLiteral
+    v7 <- CreateNamedVariable 'handler', 'var', v6
+    v8 <- CreateNamedVariable 'Proxy', 'none'
+    v9 <- Construct v8, [v4, v7]
+    v10 <- CreateNamedVariable 'proxy', 'var', v9
+    v11 <- LoadString 'value'
+    v12 <- GetProperty v10, 'property'
+    v13 <- LoadUndefined
+    v14 <- GetProperty v10, 'nothing'
+    v15 <- LoadUndefined
+    v16 <- GetProperty v10, 'handler'
+    v17 <- BeginPlainFunction -> 
+        v18 <- LoadString 'value 2'
+        Return v18
+    EndPlainFunction
+    SetProperty v7, 'get', v17
+    v19 <- LoadString 'value 2'
+    v20 <- GetProperty v10, 'property'
+    v21 <- LoadString 'value 2'
+    v22 <- GetProperty v10, 'nothing'
+    v23 <- LoadString 'value 2'
+    v24 <- GetProperty v10, 'handler'
+    v25 <- BeginPlainFunction -> 
+        v26 <- LoadString 'value 3'
+        Return v26
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v25
+    v27 <- EndObjectLiteral
+    BeginObjectLiteral
+    v28 <- EndObjectLiteral
+    v29 <- Construct v8, [v27, v28]
+    v30 <- CreateNamedVariable 'handler2', 'var', v29
+    v31 <- Construct v8, [v4, v30]
+    v32 <- CreateNamedVariable 'proxy2', 'var', v31
+    v33 <- LoadString 'value 3'
+    v34 <- GetProperty v32, 'property'
+    v35 <- LoadString 'value 3'
+    v36 <- GetProperty v32, 'nothing'
+    v37 <- LoadString 'value 3'
+    v38 <- GetProperty v32, 'handler'
+EndPlainFunction
+v39 <- CallFunction v0, []
+v40 <- BeginPlainFunction -> 
+    v41 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v42 <- EndObjectLiteral
+    v43 <- BeginPlainFunction -> 
+        v44 <- CreateNamedVariable 'Error', 'none'
+        v45 <- CallFunction v44, []
+        ThrowException v45
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v43
+    v46 <- EndObjectLiteral
+    v47 <- Construct v41, [v42, v46]
+    v48 <- CreateNamedVariable 'handler', 'var', v47
+    BeginObjectLiteral
+    v49 <- EndObjectLiteral
+    v50 <- Construct v41, [v49, v48]
+    v51 <- CreateNamedVariable 'proxy', 'var', v50
+    v52 <- LoadString 'proxy.property'
+    v53 <- CreateNamedVariable 'Error', 'none'
+EndPlainFunction
+v54 <- CallFunction v40, []
+v55 <- BeginPlainFunction -> 
+    v56 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v57 <- EndObjectLiteral
+    v58 <- LoadString 'not_callable'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v58
+    v59 <- EndObjectLiteral
+    v60 <- Construct v56, [v57, v59]
+    v61 <- CreateNamedVariable 'handler', 'var', v60
+    BeginObjectLiteral
+    v62 <- EndObjectLiteral
+    v63 <- Construct v56, [v62, v61]
+    v64 <- CreateNamedVariable 'proxy', 'var', v63
+    v65 <- LoadString 'proxy.property'
+    v66 <- CreateNamedVariable 'Error', 'none'
+EndPlainFunction
+v67 <- CallFunction v55, []
+v68 <- BeginPlainFunction -> 
+    v69 <- LoadString 'value'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `property`, v69
+    v70 <- EndObjectLiteral
+    v71 <- CreateNamedVariable 'target', 'var', v70
+    v72 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v73 <- EndObjectLiteral
+    v74 <- Construct v72, [v71, v73]
+    v75 <- CreateNamedVariable 'proxy', 'var', v74
+    v76 <- LoadString 'value'
+    v77 <- GetProperty v75, 'property'
+    v78 <- LoadUndefined
+    v79 <- GetProperty v75, 'property2'
+EndPlainFunction
+v80 <- CallFunction v68, []
+v81 <- BeginPlainFunction -> 
+    v82 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v83 <- EndObjectLiteral
+    v84 <- BeginPlainFunction -> 
+        v85 <- LoadUndefined
+        Return v85
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v84
+    v86 <- EndObjectLiteral
+    v87 <- Construct v82, [v83, v86]
+    v88 <- CreateNamedVariable 'handler', 'var', v87
+    v89 <- LoadString 'value'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `property`, v89
+    v90 <- EndObjectLiteral
+    v91 <- CreateNamedVariable 'target', 'var', v90
+    v92 <- Construct v82, [v91, v88]
+    v93 <- CreateNamedVariable 'proxy', 'var', v92
+    v94 <- LoadString 'value'
+    v95 <- GetProperty v93, 'property'
+    v96 <- LoadUndefined
+    v97 <- GetProperty v93, 'property2'
+EndPlainFunction
+v98 <- CallFunction v81, []
+v99 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v100 <- EndObjectLiteral
+    v101 <- CreateNamedVariable 'target', 'var', v100
+    v102 <- BeginPlainFunction -> v103, v104
+        v105 <- LoadString 'key4'
+        v106 <- Compare v104, '!=', v105
+        BeginIf v106
+            v107 <- LoadString 'value'
+            Return v107
+        EndIf
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v102
+    v108 <- EndObjectLiteral
+    v109 <- CreateNamedVariable 'handler', 'var', v108
+    v110 <- CreateNamedVariable 'Proxy', 'none'
+    v111 <- Construct v110, [v101, v109]
+    v112 <- CreateNamedVariable 'proxy', 'var', v111
+    v113 <- LoadString 'value'
+    v114 <- GetProperty v112, 'property'
+    v115 <- LoadString 'value'
+    v116 <- GetProperty v112, 'key'
+    v117 <- LoadString 'value'
+    v118 <- GetProperty v112, 'key2'
+    v119 <- LoadString 'value'
+    v120 <- GetProperty v112, 'key3'
+    v121 <- LoadString 'key'
+    v122 <- LoadBoolean 'false'
+    v123 <- LoadBoolean 'false'
+    v124 <- LoadString 'different value'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `configurable`, v122
+        ObjectLiteralAddProperty `writable`, v123
+        ObjectLiteralAddProperty `value`, v124
+    v125 <- EndObjectLiteral
+    v126 <- CreateNamedVariable 'Object', 'none'
+    v127 <- CallMethod v126, 'defineProperty', [v101, v121, v125]
+    v128 <- LoadString 'value'
+    v129 <- GetProperty v112, 'property'
+    v130 <- BeginPlainFunction -> 
+        v131 <- GetProperty v112, 'key'
+    EndPlainFunction
+    v132 <- CallFunction v130, []
+    v133 <- CreateNamedVariable 'TypeError', 'none'
+    v134 <- LoadString 'value'
+    v135 <- GetProperty v112, 'key2'
+    v136 <- LoadString 'value'
+    v137 <- GetProperty v112, 'key3'
+    v138 <- LoadString 'key2'
+    v139 <- LoadBoolean 'false'
+    v140 <- BeginPlainFunction -> 
+        v141 <- LoadString 'different value'
+        Return v141
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `configurable`, v139
+        ObjectLiteralAddProperty `get`, v140
+    v142 <- EndObjectLiteral
+    v143 <- CallMethod v126, 'defineProperty', [v101, v138, v142]
+    v144 <- LoadString 'value'
+    v145 <- GetProperty v112, 'property'
+    v146 <- BeginPlainFunction -> 
+        v147 <- GetProperty v112, 'key'
+    EndPlainFunction
+    v148 <- CallFunction v146, []
+    v149 <- LoadString 'value'
+    v150 <- GetProperty v112, 'key2'
+    v151 <- LoadString 'value'
+    v152 <- GetProperty v112, 'key3'
+    v153 <- LoadString 'key3'
+    v154 <- LoadBoolean 'false'
+    v155 <- BeginPlainFunction -> 
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `configurable`, v154
+        ObjectLiteralAddProperty `set`, v155
+    v156 <- EndObjectLiteral
+    v157 <- CallMethod v126, 'defineProperty', [v101, v153, v156]
+    v158 <- LoadString 'value'
+    v159 <- GetProperty v112, 'property'
+    v160 <- BeginPlainFunction -> 
+        v161 <- GetProperty v112, 'key'
+    EndPlainFunction
+    v162 <- CallFunction v160, []
+    v163 <- LoadString 'value'
+    v164 <- GetProperty v112, 'key2'
+    v165 <- BeginPlainFunction -> 
+        v166 <- GetProperty v112, 'key3'
+    EndPlainFunction
+    v167 <- CallFunction v165, []
+    v168 <- LoadString 'key4'
+    v169 <- LoadBoolean 'false'
+    v170 <- BeginPlainFunction -> 
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `configurable`, v169
+        ObjectLiteralAddProperty `set`, v170
+    v171 <- EndObjectLiteral
+    v172 <- CallMethod v126, 'defineProperty', [v101, v168, v171]
+    v173 <- LoadUndefined
+    v174 <- GetProperty v112, 'key4'
+EndPlainFunction
+v175 <- CallFunction v99, []
+v176 <- BeginPlainFunction -> 
+    v177 <- CreateArray []
+    v178 <- CreateNamedVariable 'log', 'var', v177
+    v179 <- LoadInteger '1'
+    v180 <- LoadInteger '2'
+    v181 <- LoadInteger '3'
+    v182 <- LoadInteger '4'
+    v183 <- LoadInteger '5'
+    v184 <- CreateArray [v179, v180, v181, v182, v183]
+    v185 <- CreateNamedVariable 'array', 'var', v184
+    v186 <- CreateNamedVariable 'Symbol', 'none'
+    v187 <- GetProperty v186, 'iterator'
+    v188 <- CallComputedMethod v185, v187, []
+    v189 <- CreateNamedVariable 'origIt', 'var', v188
+    v190 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `get` -> v191, v192, v193
+            v194 <- CreateNamedVariable 'String', 'none'
+            v195 <- CallFunction v194, [v193]
+            v196 <- CreateTemplateString ['[[Get]](iterator, ', ')'], [v195]
+            v197 <- CallMethod v178, 'push', [v196]
+            v198 <- CreateNamedVariable 'Reflect', 'none'
+            v199 <- CallMethod v198, 'get', [v192, v193]
+            Return v199
+        EndObjectLiteralMethod
+        BeginObjectLiteralMethod `set` -> v200, v201, v202, v203
+            v204 <- CreateNamedVariable 'String', 'none'
+            v205 <- CallFunction v204, [v202]
+            v206 <- CallFunction v204, [v203]
+            v207 <- CreateTemplateString ['[[Set]](iterator, ', ', ', ')'], [v205, v206]
+            v208 <- CallMethod v178, 'push', [v207]
+            v209 <- CreateNamedVariable 'Reflect', 'none'
+            v210 <- CallMethod v209, 'set', [v201, v202, v203]
+            Return v210
+        EndObjectLiteralMethod
+    v211 <- EndObjectLiteral
+    v212 <- Construct v190, [v189, v211]
+    v213 <- CreateNamedVariable 'it', 'var', v212
+    v214 <- BeginPlainFunction -> 
+        BeginForOfLoop v213 -> v215
+            v216 <- CallMethod v178, 'push', [v215]
+        EndForOfLoop
+    EndPlainFunction
+    v217 <- CallFunction v214, []
+    v218 <- CreateNamedVariable 'TypeError', 'none'
+    v219 <- LoadString '[[Get]](iterator, Symbol(Symbol.iterator))'
+    v220 <- LoadString '[[Get]](iterator, next)'
+    v221 <- CreateArray [v219, v220]
+EndPlainFunction
+v222 <- CallFunction v176, []
+v223 <- BeginPlainFunction -> 
+    v224 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `key`, v224
+    v225 <- EndObjectLiteral
+    v226 <- CreateNamedVariable 'obj', 'var', v225
+    v227 <- GetProperty v226, 'key'
+    v228 <- LoadInteger '0'
+    v229 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v230 <- EndObjectLiteral
+    v231 <- Construct v229, [v226, v230]
+    v232 <- CreateNamedVariable 'p', 'var', v231
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `get` -> v233, v234, v235
+            v236 <- LoadString 'key'
+            v237 <- Compare v235, '!=', v236
+            BeginIf v237
+                v238 <- CreateNamedVariable 'Reflect', 'none'
+                v239 <- CallMethod v238, 'get', [v234, v235]
+                Return v239
+            EndIf
+            v240 <- GetProperty v234, 'key'
+            v241 <- UnaryOperation v240, '++'
+            v242 <- GetProperty v234, 'key'
+            Return v242
+        EndObjectLiteralMethod
+    v243 <- EndObjectLiteral
+    v244 <- Construct v229, [v232, v243]
+    v245 <- CreateNamedVariable 'q', 'var', v244
+    v246 <- LoadInteger '0'
+    v247 <- GetProperty v232, 'key'
+    v248 <- LoadInteger '1'
+    v249 <- GetProperty v245, 'key'
+EndPlainFunction
+v250 <- CallFunction v223, []
+v251 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v252 <- EndObjectLiteral
+    v253 <- CreateNamedVariable 'obj', 'var', v252
+    v254 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `get` -> v255, v256, v257, v258
+            v259 <- LoadString 'key'
+            v260 <- Compare v257, '!=', v259
+            BeginIf v260
+                v261 <- CreateNamedVariable 'Reflect', 'none'
+                v262 <- CallMethod v261, 'get', [v256, v257]
+                Return v262
+            EndIf
+            v263 <- CreateNamedVariable 'p', 'none'
+            v264 <- LoadInteger '42'
+            Return v264
+        EndObjectLiteralMethod
+    v265 <- EndObjectLiteral
+    v266 <- Construct v254, [v253, v265]
+    v267 <- CreateNamedVariable 'p', 'var', v266
+    v268 <- LoadInteger '42'
+    v269 <- GetProperty v267, 'key'
+EndPlainFunction
+v270 <- CallFunction v251, []
+v271 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        BeginObjectLiteralGetter `prop` -> v272
+            v273 <- CreateNamedVariable 'p', 'none'
+            v274 <- LoadInteger '42'
+            Return v274
+        EndObjectLiteralGetter
+    v275 <- EndObjectLiteral
+    v276 <- CreateNamedVariable 'obj', 'var', v275
+    v277 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v278 <- EndObjectLiteral
+    v279 <- Construct v277, [v276, v278]
+    v280 <- CreateNamedVariable 'p', 'var', v279
+    v281 <- LoadInteger '42'
+    v282 <- GetProperty v280, 'prop'
+EndPlainFunction
+v283 <- CallFunction v271, []
+v284 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v285 <- EndObjectLiteral
+    v286 <- CreateNamedVariable 'obj', 'var', v285
+    v287 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `getOwnPropertyDescriptor` -> v288
+            v289 <- CreateNamedVariable 'Error', 'none'
+            v290 <- LoadString 'Error from proxy getOwnPropertyDescriptor trap'
+            v291 <- Construct v289, [v290]
+            ThrowException v291
+        EndObjectLiteralMethod
+    v292 <- EndObjectLiteral
+    v293 <- Construct v287, [v286, v292]
+    v294 <- CreateNamedVariable 'p', 'var', v293
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `get` -> v295, v296, v297
+            v298 <- LoadInteger '42'
+            Return v298
+        EndObjectLiteralMethod
+    v299 <- EndObjectLiteral
+    v300 <- Construct v287, [v294, v299]
+    v301 <- CreateNamedVariable 'q', 'var', v300
+    v302 <- BeginPlainFunction -> 
+        v303 <- GetProperty v301, 'prop'
+    EndPlainFunction
+    v304 <- CallFunction v302, []
+    v305 <- CreateNamedVariable 'Error', 'none'
+    v306 <- LoadString 'Error from proxy getOwnPropertyDescriptor trap'
+EndPlainFunction
+v307 <- CallFunction v284, []
+v308 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v309 <- EndObjectLiteral
+    v310 <- CreateNamedVariable 'obj', 'var', v309
+    v311 <- LoadString 'prop'
+    v312 <- LoadInteger '53'
+    v313 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v312
+        ObjectLiteralAddProperty `configurable`, v313
+    v314 <- EndObjectLiteral
+    v315 <- CreateNamedVariable 'Object', 'none'
+    v316 <- CallMethod v315, 'defineProperty', [v310, v311, v314]
+    v317 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v318 <- EndObjectLiteral
+    v319 <- Construct v317, [v310, v318]
+    v320 <- CreateNamedVariable 'p', 'var', v319
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `get` -> v321, v322, v323
+            v324 <- LoadInteger '42'
+            Return v324
+        EndObjectLiteralMethod
+    v325 <- EndObjectLiteral
+    v326 <- Construct v317, [v320, v325]
+    v327 <- CreateNamedVariable 'q', 'var', v326
+    v328 <- BeginPlainFunction -> 
+        v329 <- GetProperty v327, 'prop'
+    EndPlainFunction
+    v330 <- CallFunction v328, []
+    v331 <- CreateNamedVariable 'TypeError', 'none'
+    v332 <- LoadString ''get' on proxy: property 'prop' is a read-only and non-configurable data'
+    v333 <- LoadString ' property on the proxy target but the proxy did not return its actual'
+    v334 <- BinaryOperation v332, '+', v333
+    v335 <- LoadString ' value (expected '53' but got '42')'
+    v336 <- BinaryOperation v334, '+', v335
+EndPlainFunction
+v337 <- CallFunction v308, []
+v338 <- BeginPlainFunction -> 
+    v339 <- LoadInteger '1'
+    v340 <- LoadInteger '31'
+    v341 <- BinaryOperation v339, '<<', v340
+    v342 <- LoadInteger '1'
+    v343 <- BinaryOperation v341, '+', v342
+    v344 <- CreateNamedVariable 'index', 'var', v343
+    BeginObjectLiteral
+    v345 <- EndObjectLiteral
+    v346 <- CreateNamedVariable 'obj', 'var', v345
+    v347 <- LoadInteger '42'
+    SetComputedProperty v346, v344, v347
+    v348 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v349 <- EndObjectLiteral
+    v350 <- Construct v348, [v346, v349]
+    v351 <- CreateNamedVariable 'p', 'var', v350
+    BeginForLoopInitializer
+        v352 <- LoadInteger '0'
+    BeginForLoopCondition -> v353
+        v354 <- LoadInteger '3'
+        v355 <- Compare v353, '<', v354
+    BeginForLoopAfterthought v355 -> v356
+        v357 <- UnaryOperation '++', v356
+    BeginForLoopBody -> v358
+        v359 <- LoadInteger '42'
+        v360 <- GetComputedProperty v351, v344
+    EndForLoop
+EndPlainFunction
+v361 <- CallFunction v338, []
+
+
+function testBasicFunctionality() {
+    var target = { target_one: 1, property: "value" };
+    var handler = { handler: 1 };
+    const v9 = new Proxy(target, handler);
+    var proxy = v9;
+    proxy.property;
+    proxy.nothing;
+    proxy.handler;
+    function f17() {
+        return "value 2";
+    }
+    handler.get = f17;
+    proxy.property;
+    proxy.nothing;
+    proxy.handler;
+    function f25() {
+        return "value 3";
+    }
+    const v27 = { get: f25 };
+    const v29 = new Proxy(v27, {});
+    var handler2 = v29;
+    const v31 = new Proxy(target, handler2);
+    var proxy2 = v31;
+    proxy2.property;
+    proxy2.nothing;
+    proxy2.handler;
+}
+testBasicFunctionality();
+function testThrowOnGettingTrap() {
+    const v42 = {};
+    function f43() {
+        throw Error();
+    }
+    const v47 = new Proxy(v42, { get: f43 });
+    var handler = v47;
+    const v50 = new Proxy({}, handler);
+    var proxy = v50;
+}
+testThrowOnGettingTrap();
+function testThrowOnTrapNotCallable() {
+    const v57 = {};
+    const v60 = new Proxy(v57, { get: "not_callable" });
+    var handler = v60;
+    const v63 = new Proxy({}, handler);
+    var proxy = v63;
+}
+testThrowOnTrapNotCallable();
+function testFallback() {
+    var target = { property: "value" };
+    const v74 = new Proxy(target, {});
+    var proxy = v74;
+    proxy.property;
+    proxy.property2;
+}
+testFallback();
+function testFallbackUndefinedTrap() {
+    const v83 = {};
+    function f84() {
+        return undefined;
+    }
+    const v87 = new Proxy(v83, { get: f84 });
+    var handler = v87;
+    var target = { property: "value" };
+    const v92 = new Proxy(target, handler);
+    var proxy = v92;
+    proxy.property;
+    proxy.property2;
+}
+testFallbackUndefinedTrap();
+function testFailingInvariant() {
+    var target = {};
+    function f102(a103, a104) {
+        if (a104 != "key4") {
+            return "value";
+        }
+    }
+    var handler = { get: f102 };
+    const v111 = new Proxy(target, handler);
+    var proxy = v111;
+    proxy.property;
+    proxy.key;
+    proxy.key2;
+    proxy.key3;
+    Object.defineProperty(target, "key", { configurable: false, writable: false, value: "different value" });
+    proxy.property;
+    function f130() {
+        proxy.key;
+    }
+    f130();
+    proxy.key2;
+    proxy.key3;
+    function f140() {
+        return "different value";
+    }
+    Object.defineProperty(target, "key2", { configurable: false, get: f140 });
+    proxy.property;
+    function f146() {
+        proxy.key;
+    }
+    f146();
+    proxy.key2;
+    proxy.key3;
+    function f155() {
+    }
+    Object.defineProperty(target, "key3", { configurable: false, set: f155 });
+    proxy.property;
+    function f160() {
+        proxy.key;
+    }
+    f160();
+    proxy.key2;
+    function f165() {
+        proxy.key3;
+    }
+    f165();
+    function f170() {
+    }
+    Object.defineProperty(target, "key4", { configurable: false, set: f170 });
+    proxy.key4;
+}
+testFailingInvariant();
+function testGetInternalIterators() {
+    var log = [];
+    var array = [1,2,3,4,5];
+    var origIt = array[Symbol.iterator]();
+    const v211 = {
+        get(a192, a193) {
+            log.push(`[[Get]](iterator, ${String(a193)})`);
+            return Reflect.get(a192, a193);
+        },
+        set(a201, a202, a203) {
+            log.push(`[[Set]](iterator, ${String(a202)}, ${String(a203)})`);
+            return Reflect.set(a201, a202, a203);
+        },
+    };
+    const v212 = new Proxy(origIt, v211);
+    var it = v212;
+    function f214() {
+        for (const v215 of it) {
+            log.push(v215);
+        }
+    }
+    f214();
+    ["[[Get]](iterator, Symbol(Symbol.iterator))","[[Get]](iterator, next)"];
+}
+testGetInternalIterators();
+function testGetterWithSideEffect() {
+    var obj = { key: 0 };
+    obj.key;
+    const v231 = new Proxy(obj, {});
+    var p = v231;
+    const v243 = {
+        get(a234, a235) {
+            if (a235 != "key") {
+                return Reflect.get(a234, a235);
+            }
+            let v240 = a234.key;
+            v240++;
+            return a234.key;
+        },
+    };
+    const v244 = new Proxy(p, v243);
+    var q = v244;
+    p.key;
+    q.key;
+}
+testGetterWithSideEffect();
+function testReceiverWithTrap() {
+    var obj = {};
+    const v265 = {
+        get(a256, a257, a258) {
+            if (a257 != "key") {
+                return Reflect.get(a256, a257);
+            }
+            return 42;
+        },
+    };
+    const v266 = new Proxy(obj, v265);
+    var p = v266;
+    p.key;
+}
+testReceiverWithTrap();
+function testReceiverWithoutTrap() {
+    const v275 = {
+        get prop() {
+            return 42;
+        },
+    };
+    var obj = v275;
+    const v279 = new Proxy(obj, {});
+    var p = v279;
+    p.prop;
+}
+testReceiverWithoutTrap();
+function testGetPropertyDetailsBailout() {
+    var obj = {};
+    const v292 = {
+        getOwnPropertyDescriptor() {
+            const v291 = new Error("Error from proxy getOwnPropertyDescriptor trap");
+            throw v291;
+        },
+    };
+    const v293 = new Proxy(obj, v292);
+    var p = v293;
+    const v299 = {
+        get(a296, a297) {
+            return 42;
+        },
+    };
+    const v300 = new Proxy(p, v299);
+    var q = v300;
+    function f302() {
+        q.prop;
+    }
+    f302();
+}
+testGetPropertyDetailsBailout();
+function testGetPropertyDetailsBailout2() {
+    var obj = {};
+    Object.defineProperty(obj, "prop", { value: 53, configurable: false });
+    const v319 = new Proxy(obj, {});
+    var p = v319;
+    const v325 = {
+        get(a322, a323) {
+            return 42;
+        },
+    };
+    const v326 = new Proxy(p, v325);
+    var q = v326;
+    function f328() {
+        q.prop;
+    }
+    f328();
+    ("'get' on proxy: property 'prop' is a read-only and non-configurable data" + " property on the proxy target but the proxy did not return its actual") + " value (expected '53' but got '42')";
+}
+testGetPropertyDetailsBailout2();
+function test32BitIndex() {
+    var index = (1 << 31) + 1;
+    var obj = {};
+    obj[index] = 42;
+    const v350 = new Proxy(obj, {});
+    var p = v350;
+    for (let i353 = 0; i353 < 3; ++i353) {
+        p[index];
+    }
+}
+test32BitIndex();
+
+FuzzIL program written to corpus/proxies-get.fzil

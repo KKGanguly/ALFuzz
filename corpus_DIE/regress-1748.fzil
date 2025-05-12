@@ -1,0 +1,31 @@
+v0 <- LoadString 'X'
+v1 <- LoadInteger '10000'
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- CallFunction v2, [v1]
+v4 <- CallMethod v3, 'join', [v0]
+v5 <- CreateNamedVariable 'str', 'var', v4
+v6 <- LoadRegExp '^|X' 'g'
+v7 <- BeginPlainFunction -> v8, v9, v10
+    v11 <- LoadInteger '0'
+    v12 <- Compare v9, '>', v11
+    BeginIf v12
+        v13 <- LoadString 'X'
+        v14 <- LoadString 'at position 0x'
+        v15 <- LoadInteger '16'
+        v16 <- CallMethod v9, 'toString', [v15]
+        v17 <- BinaryOperation v14, '+', v16
+    EndIf
+EndPlainFunction
+v18 <- CallMethod v5, 'replace', [v6, v7]
+
+
+var str = Array(10000).join("X");
+const v6 = /^|X/g;
+function f7(a8, a9, a10) {
+    if (a9 > 0) {
+        "at position 0x" + a9.toString(16);
+    }
+}
+str.replace(v6, f7);
+
+FuzzIL program written to corpus/regress-1748.fzil

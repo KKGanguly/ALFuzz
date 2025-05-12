@@ -1,0 +1,43 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '42'
+    Return v3
+EndPlainFunction
+v4 <- CreateNamedVariable 'getter', 'var', v2
+v5 <- BeginPlainFunction -> v6
+EndPlainFunction
+v7 <- CreateNamedVariable 'setter', 'var', v5
+v8 <- LoadInteger '0'
+v9 <- CallMethod v1, '__defineGetter__', [v8, v4]
+v10 <- LoadInteger '0'
+v11 <- CallMethod v1, '__defineSetter__', [v10, v7]
+v12 <- LoadUndefined
+v13 <- LoadInteger '0'
+v14 <- CreateNamedVariable 'Object', 'none'
+v15 <- CallMethod v14, 'getOwnPropertyDescriptor', [v1, v13]
+v16 <- GetProperty v15, 'value'
+v17 <- LoadInteger '0'
+v18 <- CallMethod v14, 'getOwnPropertyDescriptor', [v1, v17]
+v19 <- GetProperty v18, 'get'
+v20 <- LoadInteger '0'
+v21 <- CallMethod v14, 'getOwnPropertyDescriptor', [v1, v20]
+v22 <- GetProperty v21, 'set'
+
+
+var x = {};
+function f2() {
+    return 42;
+}
+var getter = f2;
+function f5(a6) {
+}
+var setter = f5;
+x.__defineGetter__(0, getter);
+x.__defineSetter__(0, setter);
+Object.getOwnPropertyDescriptor(x, 0).value;
+Object.getOwnPropertyDescriptor(x, 0).get;
+Object.getOwnPropertyDescriptor(x, 0).set;
+
+FuzzIL program written to corpus/regress-874.fzil

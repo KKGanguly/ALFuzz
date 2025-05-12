@@ -1,0 +1,76 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateArray [v0]
+v2 <- CreateNamedVariable 'set_entries', 'const', v1
+v3 <- BeginPlainFunction -> 
+EndPlainFunction
+v4 <- CreateNamedVariable 'Symbol', 'none'
+v5 <- GetProperty v4, 'iterator'
+SetComputedProperty v2, v5, v3
+v6 <- BeginArrowFunction -> 
+    v7 <- CreateNamedVariable 'Set', 'none'
+    v8 <- Construct v7, [v2]
+    Return v8
+EndArrowFunction
+v9 <- CallFunction v6, []
+v10 <- CreateNamedVariable 'TypeError', 'none'
+v11 <- BeginArrowFunction -> 
+    v12 <- CreateNamedVariable 'WeakSet', 'none'
+    v13 <- Construct v12, [v2]
+    Return v13
+EndArrowFunction
+v14 <- CallFunction v11, []
+BeginObjectLiteral
+v15 <- EndObjectLiteral
+v16 <- LoadInteger '1'
+v17 <- CreateArray [v15, v16]
+v18 <- CreateArray [v17]
+v19 <- CreateNamedVariable 'map_entries', 'const', v18
+v20 <- BeginPlainFunction -> 
+EndPlainFunction
+v21 <- GetProperty v4, 'iterator'
+SetComputedProperty v19, v21, v20
+v22 <- BeginArrowFunction -> 
+    v23 <- CreateNamedVariable 'Set', 'none'
+    v24 <- Construct v23, [v19]
+    Return v24
+EndArrowFunction
+v25 <- CallFunction v22, []
+v26 <- BeginArrowFunction -> 
+    v27 <- CreateNamedVariable 'WeakSet', 'none'
+    v28 <- Construct v27, [v19]
+    Return v28
+EndArrowFunction
+v29 <- CallFunction v26, []
+
+
+const set_entries = [{}];
+function f3() {
+}
+set_entries[Symbol.iterator] = f3;
+const v6 = () => {
+    const v8 = new Set(set_entries);
+    return v8;
+};
+v6();
+const v11 = () => {
+    const v13 = new WeakSet(set_entries);
+    return v13;
+};
+v11();
+const map_entries = [[{},1]];
+function f20() {
+}
+map_entries[Symbol.iterator] = f20;
+const v22 = () => {
+    const v24 = new Set(map_entries);
+    return v24;
+};
+v22();
+const v26 = () => {
+    const v28 = new WeakSet(map_entries);
+    return v28;
+};
+v26();
+
+FuzzIL program written to corpus/regress-804176.fzil

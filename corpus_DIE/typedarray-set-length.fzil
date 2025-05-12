@@ -1,0 +1,148 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- CreateNamedVariable 'Int8Array', 'none'
+v2 <- CreateNamedVariable 'Uint16Array', 'none'
+v3 <- CreateNamedVariable 'Int16Array', 'none'
+v4 <- CreateNamedVariable 'Uint32Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v7 <- CreateNamedVariable 'Float32Array', 'none'
+v8 <- CreateNamedVariable 'Float64Array', 'none'
+v9 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8]
+v10 <- CreateNamedVariable 'typedArrayConstructors', 'var', v9
+v11 <- LoadBoolean 'false'
+v12 <- CreateNamedVariable 'lengthCalled', 'var', v11
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadBoolean 'true'
+    Reassign v12, v14
+    v15 <- LoadInteger '5'
+    Return v15
+EndPlainFunction
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadFloat '4.6'
+    Return v17
+EndPlainFunction
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadInteger '5'
+    v20 <- UnaryOperation '-', v19
+    Return v20
+EndPlainFunction
+v21 <- BeginPlainFunction -> 
+    v22 <- CreateNamedVariable 'NaN', 'none'
+    Return v22
+EndPlainFunction
+v23 <- BeginPlainFunction -> 
+    v24 <- LoadString '5'
+    Return v24
+EndPlainFunction
+v25 <- BeginPlainFunction -> 
+    v26 <- LoadString 'abc'
+    Return v26
+EndPlainFunction
+v27 <- BeginPlainFunction -> 
+    v28 <- LoadBoolean 'true'
+    Return v28
+EndPlainFunction
+v29 <- BeginPlainFunction -> 
+    v30 <- LoadNull
+    Return v30
+EndPlainFunction
+v31 <- BeginPlainFunction -> 
+    v32 <- LoadUndefined
+    Return v32
+EndPlainFunction
+v33 <- CreateArray [v16, v18, v21, v23, v25, v27, v29, v31]
+v34 <- CreateNamedVariable 'goodNonIntegerLengths', 'var', v33
+v35 <- BeginPlainFunction -> 
+    v36 <- LoadString '5'
+    v37 <- CreateNamedVariable 'Symbol', 'none'
+    v38 <- CallFunction v37, [v36]
+    Return v38
+EndPlainFunction
+BeginForOfLoop v10 -> v39
+    v40 <- LoadBoolean 'false'
+    Reassign v12, v40
+    v41 <- LoadInteger '10'
+    v42 <- Construct v39, [v41]
+    v43 <- CreateNamedVariable 'a', 'var', v42
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v13
+    v44 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v44
+    v45 <- EndObjectLiteral
+    v46 <- CallMethod v43, 'set', [v45]
+    BeginForOfLoop v34 -> v47
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `valueOf`, v47
+        v48 <- EndObjectLiteral
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `length`, v48
+        v49 <- EndObjectLiteral
+        v50 <- CallMethod v43, 'set', [v49]
+    EndForOfLoop
+    v51 <- BeginPlainFunction -> 
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `valueOf`, v35
+        v52 <- EndObjectLiteral
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `length`, v52
+        v53 <- EndObjectLiteral
+        v54 <- CallMethod v43, 'set', [v53]
+    EndPlainFunction
+    v55 <- CallFunction v51, []
+    v56 <- CreateNamedVariable 'TypeError', 'none'
+EndForOfLoop
+
+
+var typedArrayConstructors = [Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,Uint8ClampedArray,Float32Array,Float64Array];
+var lengthCalled = false;
+function lengthValue() {
+    lengthCalled = true;
+    return 5;
+}
+function f16() {
+    return 4.6;
+}
+function f18() {
+    return -5;
+}
+function f21() {
+    return NaN;
+}
+function f23() {
+    return "5";
+}
+function f25() {
+    return "abc";
+}
+function f27() {
+    return true;
+}
+function f29() {
+    return null;
+}
+function f31() {
+    return undefined;
+}
+var goodNonIntegerLengths = [f16,f18,f21,f23,f25,f27,f29,f31];
+function badNonIntegerLength() {
+    return Symbol("5");
+}
+for (const v39 of typedArrayConstructors) {
+    lengthCalled = false;
+    const v42 = new v39(10);
+    var a = v42;
+    const v44 = { valueOf: lengthValue };
+    a.set({ length: v44 });
+    for (const v47 of goodNonIntegerLengths) {
+        const v48 = { valueOf: v47 };
+        a.set({ length: v48 });
+    }
+    function f51() {
+        const v52 = { valueOf: badNonIntegerLength };
+        a.set({ length: v52 });
+    }
+    f51();
+}
+
+FuzzIL program written to corpus/typedarray-set-length.fzil

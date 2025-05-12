@@ -1,0 +1,15 @@
+v0 <- LoadRegExp '\x60' 'g'
+v1 <- LoadString 'u'
+v2 <- LoadString '``'
+v3 <- CallMethod v2, 'replace', [v0, v1]
+v4 <- LoadString 'uu'
+v5 <- LoadRegExp '\xAB' 'g'
+v6 <- LoadString 'u'
+v7 <- LoadString '««'
+v8 <- CallMethod v7, 'replace', [v5, v6]
+
+
+("``").replace(/\x60/g, "u");
+("««").replace(/\xAB/g, "u");
+
+FuzzIL program written to corpus/non-ascii-replace.fzil

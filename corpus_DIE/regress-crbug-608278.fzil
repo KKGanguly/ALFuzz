@@ -1,0 +1,86 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Error', 'none'
+    v2 <- LoadString 'boom'
+    v3 <- Construct v1, [v2]
+    v4 <- GetProperty v3, 'stack'
+    v5 <- CreateNamedVariable 'stack', 'var', v4
+    v6 <- CreateNamedVariable 'print', 'none'
+    v7 <- CallFunction v6, [v5]
+    v8 <- LoadInteger '1'
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    v11 <- CallFunction v0, []
+    Return v11
+EndPlainFunction
+v12 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v13 <- EndObjectLiteral
+    v14 <- CreateNamedVariable 'o', 'var', v13
+    v15 <- LoadString 'p'
+    v16 <- CallMethod v14, '__defineGetter__', [v15, v9]
+    v17 <- GetProperty v14, 'p'
+EndPlainFunction
+v18 <- CallFunction v12, []
+v19 <- CallFunction v12, []
+v20 <- CallFunction v12, []
+v21 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v22 <- EndObjectLiteral
+    v23 <- CreateNamedVariable 'o', 'var', v22
+    v24 <- LoadString 'q'
+    v25 <- CallMethod v23, '__defineSetter__', [v24, v9]
+    v26 <- LoadInteger '1'
+    SetProperty v23, 'q', v26
+EndPlainFunction
+v27 <- CallFunction v21, []
+v28 <- CallFunction v21, []
+v29 <- CallFunction v21, []
+v30 <- BeginPlainFunction -> 
+    v31 <- CallFunction v0, []
+    Return v31
+EndPlainFunction
+v32 <- BeginPlainFunction -> 
+    v33 <- Construct v30, []
+EndPlainFunction
+v34 <- CallFunction v32, []
+v35 <- CallFunction v32, []
+v36 <- CallFunction v32, []
+
+
+function h() {
+    const v3 = new Error("boom");
+    var stack = v3.stack;
+    print(stack);
+    return 1;
+}
+function g(a10) {
+    return h();
+}
+function f1() {
+    var o = {};
+    o.__defineGetter__("p", g);
+    o.p;
+}
+f1();
+f1();
+f1();
+function f2() {
+    var o = {};
+    o.__defineSetter__("q", g);
+    o.q = 1;
+}
+f2();
+f2();
+f2();
+function A() {
+    return h();
+}
+function f3() {
+    new A();
+}
+f3();
+f3();
+f3();
+
+FuzzIL program written to corpus/regress-crbug-608278.fzil

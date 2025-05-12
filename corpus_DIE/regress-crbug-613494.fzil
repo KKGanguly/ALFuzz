@@ -1,0 +1,23 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'bound', 'var', v1
+    v3 <- BeginPlainFunction -> 
+        Return v2
+    EndPlainFunction
+EndPlainFunction
+v4 <- CallFunction v0, []
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+
+
+function f() {
+    var bound = 0;
+    function g() {
+        return bound;
+    }
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-613494.fzil

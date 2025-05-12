@@ -1,0 +1,48 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- LoadString '0'
+v3 <- BeginArrowFunction -> 
+    v4 <- LoadInteger '0'
+    Return v4
+EndArrowFunction
+v5 <- CallMethod v1, '__defineGetter__', [v2, v3]
+v6 <- LoadFloat '1.51'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `v`, v6
+v7 <- EndObjectLiteral
+SetProperty v1, 'a', v7
+BeginObjectLiteral
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'y', 'var', v8
+v10 <- LoadString 'OK'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `u`, v10
+v11 <- EndObjectLiteral
+SetProperty v9, 'a', v11
+v12 <- BeginPlainFunction -> v13
+    v14 <- GetProperty v13, 'a'
+    v15 <- GetProperty v14, 'u'
+    Return v15
+EndPlainFunction
+v16 <- CallFunction v12, [v9]
+v17 <- CallFunction v12, [v9]
+v18 <- CallFunction v12, [v1]
+
+
+var x = {};
+const v3 = () => {
+    return 0;
+};
+x.__defineGetter__("0", v3);
+x.a = { v: 1.51 };
+var y = {};
+y.a = { u: "OK" };
+function foo(a13) {
+    return a13.a.u;
+}
+foo(y);
+foo(y);
+foo(x);
+
+FuzzIL program written to corpus/regress-crbug-679378.fzil

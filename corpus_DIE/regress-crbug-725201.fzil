@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadNull
+        BeginObjectLiteral
+            ObjectLiteralAddElement `770000`, v2
+        v3 <- EndObjectLiteral
+        v4 <- CreateNamedVariable 'Array', 'none'
+        v5 <- GetProperty v4, 'prototype'
+        SetProperty v5, '__proto__', v3
+    EndPlainFunction
+    v6 <- CallFunction v1, []
+    v7 <- CallFunction v1, []
+EndPlainFunction
+BeginTry
+    v8 <- CallFunction v0, []
+BeginCatch -> v9
+EndTryCatch
+v10 <- LoadFloat '1.2'
+v11 <- CreateArray [v10]
+BeginForInLoop v11 -> v12
+EndForInLoop
+
+
+function __f_1() {
+    function __f_2() {
+        const v3 = { 770000: null };
+        const t3 = Array.prototype;
+        t3.__proto__ = v3;
+    }
+    __f_2();
+    __f_2();
+}
+try {
+    __f_1();
+} catch(e9) {
+}
+for (const v12 in [1.2]) {
+}
+
+FuzzIL program written to corpus/regress-crbug-725201.fzil

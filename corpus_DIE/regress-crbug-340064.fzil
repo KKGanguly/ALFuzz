@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'length'
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '4'
+v4 <- LoadString 'test'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadInteger '4'
+v7 <- LoadString 'test'
+v8 <- CallFunction v0, [v7]
+v9 <- LoadUndefined
+v10 <- LoadBoolean 'true'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadUndefined
+v13 <- LoadBoolean 'true'
+v14 <- CallFunction v0, [v13]
+
+
+function f(a1) {
+    return a1.length;
+}
+f("test");
+f("test");
+f(true);
+f(true);
+
+FuzzIL program written to corpus/regress-crbug-340064.fzil

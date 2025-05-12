@@ -1,0 +1,142 @@
+BeginBlockStatement
+    v0 <- CreateNamedVariable 'Symbol', 'none'
+    v1 <- GetProperty v0, 'prototype'
+    v2 <- LoadString 'description'
+    v3 <- CreateNamedVariable 'Object', 'none'
+    v4 <- CallMethod v3, 'getOwnPropertyDescriptor', [v1, v2]
+    v5 <- CreateNamedVariable 'desc', 'let', v4
+    v6 <- GetProperty v5, 'set'
+    v7 <- LoadUndefined
+    v8 <- GetProperty v5, 'writable'
+    v9 <- LoadUndefined
+    v10 <- GetProperty v5, 'enumerable'
+    v11 <- GetProperty v5, 'configurable'
+EndBlockStatement
+BeginBlockStatement
+    v12 <- CreateNamedVariable 'Symbol', 'none'
+    v13 <- CallFunction v12, []
+    v14 <- CreateNamedVariable 'empty', 'const', v13
+    v15 <- GetProperty v14, 'description'
+    v16 <- LoadUndefined
+    v17 <- LoadString 'test'
+    v18 <- CallFunction v12, [v17]
+    v19 <- CreateNamedVariable 'symbol', 'const', v18
+    v20 <- GetProperty v19, 'description'
+    v21 <- LoadString 'test'
+    v22 <- LoadString 'description'
+    v23 <- CallMethod v19, 'hasOwnProperty', [v22]
+EndBlockStatement
+BeginBlockStatement
+    v24 <- CreateNamedVariable 'Symbol', 'none'
+    v25 <- CallFunction v24, []
+    v26 <- CreateNamedVariable 'Object', 'none'
+    v27 <- CallFunction v26, [v25]
+    v28 <- CreateNamedVariable 'empty', 'const', v27
+    v29 <- GetProperty v28, 'description'
+    v30 <- LoadUndefined
+    v31 <- LoadString 'test'
+    v32 <- CallFunction v24, [v31]
+    v33 <- CallFunction v26, [v32]
+    v34 <- CreateNamedVariable 'symbol', 'const', v33
+    v35 <- GetProperty v34, 'description'
+    v36 <- LoadString 'test'
+    v37 <- LoadString 'description'
+    v38 <- CallMethod v34, 'hasOwnProperty', [v37]
+EndBlockStatement
+BeginBlockStatement
+    v39 <- BeginPlainFunction -> 
+        v40 <- CreateNamedVariable 'Proxy', 'none'
+        BeginObjectLiteral
+        v41 <- EndObjectLiteral
+        BeginObjectLiteral
+        v42 <- EndObjectLiteral
+        v43 <- Construct v40, [v41, v42]
+        v44 <- CreateNamedVariable 'proxy', 'const', v43
+        v45 <- CreateNamedVariable 'Symbol', 'none'
+        v46 <- GetProperty v45, 'prototype'
+        v47 <- GetProperty v46, 'description'
+        v48 <- CallMethod v47, 'call', [v44]
+    EndPlainFunction
+    v49 <- CallFunction v39, []
+    v50 <- CreateNamedVariable 'TypeError', 'none'
+    v51 <- BeginPlainFunction -> 
+        v52 <- LoadInteger '123'
+        v53 <- CreateNamedVariable 'smi', 'const', v52
+        v54 <- CreateNamedVariable 'Symbol', 'none'
+        v55 <- GetProperty v54, 'prototype'
+        v56 <- GetProperty v55, 'description'
+        v57 <- CallMethod v56, 'call', [v53]
+    EndPlainFunction
+    v58 <- CallFunction v51, []
+    v59 <- BeginPlainFunction -> 
+        v60 <- LoadString 'string'
+        v61 <- CreateNamedVariable 'str', 'const', v60
+        v62 <- CreateNamedVariable 'string', 'none'
+        v63 <- CreateNamedVariable 'Symbol', 'none'
+        v64 <- GetProperty v63, 'prototype'
+        v65 <- GetProperty v64, 'description'
+        v66 <- CallMethod v65, 'call', [v62]
+    EndPlainFunction
+    v67 <- CallFunction v59, []
+    v68 <- BeginPlainFunction -> 
+        v69 <- LoadString 'test'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `prop`, v69
+        v70 <- EndObjectLiteral
+        v71 <- CreateNamedVariable 'obj', 'const', v70
+        v72 <- CreateNamedVariable 'Symbol', 'none'
+        v73 <- GetProperty v72, 'prototype'
+        v74 <- GetProperty v73, 'description'
+        v75 <- CallMethod v74, 'call', [v71]
+    EndPlainFunction
+    v76 <- CallFunction v68, []
+EndBlockStatement
+
+
+{
+    let desc = Object.getOwnPropertyDescriptor(Symbol.prototype, "description");
+    desc.set;
+    desc.writable;
+    desc.enumerable;
+    desc.configurable;
+}
+{
+    const empty = Symbol();
+    empty.description;
+    const symbol = Symbol("test");
+    symbol.description;
+    symbol.hasOwnProperty("description");
+}
+{
+    const empty = Object(Symbol());
+    empty.description;
+    const symbol = Object(Symbol("test"));
+    symbol.description;
+    symbol.hasOwnProperty("description");
+}
+{
+    function f39() {
+        const v41 = {};
+        const v43 = new Proxy(v41, {});
+        const proxy = v43;
+        Symbol.prototype.description.call(proxy);
+    }
+    f39();
+    function f51() {
+        const smi = 123;
+        Symbol.prototype.description.call(smi);
+    }
+    f51();
+    function f59() {
+        const str = "string";
+        Symbol.prototype.description.call(string);
+    }
+    f59();
+    function f68() {
+        const obj = { prop: "test" };
+        Symbol.prototype.description.call(obj);
+    }
+    f68();
+}
+
+FuzzIL program written to corpus/symbol-description.fzil

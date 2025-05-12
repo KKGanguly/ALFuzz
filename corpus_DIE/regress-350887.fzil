@@ -1,0 +1,32 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'arr', 'var', v0
+v2 <- LoadInteger '0'
+v3 <- GetProperty v1, 'length'
+v4 <- LoadUndefined
+v5 <- GetElement v1, '0'
+v6 <- LoadString '2501866687'
+v7 <- LoadInteger '4'
+v8 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v7
+    ObjectLiteralAddProperty `configurable`, v8
+v9 <- EndObjectLiteral
+v10 <- CreateNamedVariable 'Object', 'none'
+v11 <- CallMethod v10, 'defineProperty', [v1, v6, v9]
+v12 <- LoadInteger '2501866688'
+v13 <- GetProperty v1, 'length'
+v14 <- LoadUndefined
+v15 <- GetElement v1, '0'
+v16 <- LoadInteger '0'
+SetProperty v1, 'length', v16
+
+
+var arr = [];
+arr.length;
+arr[0];
+Object.defineProperty(arr, "2501866687", { value: 4, configurable: false });
+arr.length;
+arr[0];
+arr.length = 0;
+
+FuzzIL program written to corpus/regress-350887.fzil

@@ -1,0 +1,77 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        v4 <- BeginArrowFunction -> v5
+            v6 <- GetProperty v3, 'x'
+            v7 <- Compare v5, '===', v6
+            Return v7
+        EndArrowFunction
+        v8 <- CallMethod v2, 'findIndex', [v4]
+        Return v8
+    EndPlainFunction
+    v9 <- LoadInteger '2'
+    v10 <- LoadInteger '1'
+    v11 <- LoadInteger '2'
+    v12 <- LoadInteger '3'
+    v13 <- CreateArray [v10, v11, v12]
+    v14 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v14
+    v15 <- EndObjectLiteral
+    v16 <- CallFunction v1, [v13, v15]
+    v17 <- LoadInteger '1'
+    v18 <- UnaryOperation '-', v17
+    v19 <- LoadInteger '0'
+    v20 <- LoadInteger '1'
+    v21 <- LoadInteger '2'
+    v22 <- CreateArray [v19, v20, v21]
+    v23 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v23
+    v24 <- EndObjectLiteral
+    v25 <- CallFunction v1, [v22, v24]
+    v26 <- LoadInteger '2'
+    v27 <- LoadInteger '1'
+    v28 <- LoadInteger '2'
+    v29 <- LoadInteger '3'
+    v30 <- CreateArray [v27, v28, v29]
+    v31 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v31
+    v32 <- EndObjectLiteral
+    v33 <- CallFunction v1, [v30, v32]
+    v34 <- LoadInteger '1'
+    v35 <- UnaryOperation '-', v34
+    v36 <- LoadInteger '0'
+    v37 <- LoadInteger '1'
+    v38 <- LoadInteger '2'
+    v39 <- CreateArray [v36, v37, v38]
+    v40 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v40
+    v41 <- EndObjectLiteral
+    v42 <- CallFunction v1, [v39, v41]
+EndPlainFunction
+v43 <- CallFunction v0, []
+
+
+function f0() {
+    function foo(a2, a3) {
+        const v4 = (a5) => {
+            return a5 === a3.x;
+        };
+        return a2.findIndex(v4);
+    }
+    const v13 = [1,2,3];
+    foo(v13, { x: 3 });
+    -1;
+    const v22 = [0,1,2];
+    foo(v22, { x: 3 });
+    const v30 = [1,2,3];
+    foo(v30, { x: 3 });
+    -1;
+    const v39 = [0,1,2];
+    foo(v39, { x: 3 });
+}
+f0();
+
+FuzzIL program written to corpus/array-findindex.fzil

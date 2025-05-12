@@ -1,0 +1,64 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    v2 <- CreateNamedVariable 'proto', 'var', v1
+    v3 <- BeginPlainFunction -> 
+        Return v2
+    EndPlainFunction
+    v4 <- BeginPlainFunction -> v5, v6, v7
+        v8 <- CreateNamedVariable 'Object', 'none'
+        v9 <- CallMethod v8, 'getPrototypeOf', [v7]
+        v10 <- CallMethod v7, 'hasOwnProperty', [v5]
+        v11 <- GetComputedProperty v7, v5
+    EndPlainFunction
+    v12 <- BeginPlainFunction -> v13, v14
+        v15 <- CallFunction v3, []
+        BeginObjectLiteral
+            ObjectLiteralAddComputedProperty v13, v14
+            ObjectLiteralAddProperty `__proto__`, v15
+        v16 <- EndObjectLiteral
+        Return v16
+    EndPlainFunction
+    v17 <- LoadString 'a'
+    v18 <- LoadInteger '1'
+    v19 <- LoadString 'a'
+    v20 <- LoadInteger '1'
+    v21 <- CallFunction v12, [v19, v20]
+    v22 <- CallFunction v4, [v17, v18, v21]
+    v23 <- LoadString 'b'
+    v24 <- LoadInteger '2'
+    v25 <- LoadString 'b'
+    v26 <- LoadInteger '2'
+    v27 <- CallFunction v12, [v25, v26]
+    v28 <- CallFunction v4, [v23, v24, v27]
+    v29 <- LoadString 'c'
+    v30 <- LoadInteger '3'
+    v31 <- LoadString 'c'
+    v32 <- LoadInteger '3'
+    v33 <- CallFunction v12, [v31, v32]
+    v34 <- CallFunction v4, [v29, v30, v33]
+EndPlainFunction
+v35 <- CallFunction v0, []
+
+
+function TestProtoDeopt() {
+    var proto = {};
+    function deoptMe() {
+        return proto;
+    }
+    function checkObject(a5, a6, a7) {
+        Object.getPrototypeOf(a7);
+        a7.hasOwnProperty(a5);
+        a7[a5];
+    }
+    function f(a13, a14) {
+        const v15 = deoptMe();
+        return { [a13]: a14, __proto__: v15 };
+    }
+    checkObject("a", 1, f("a", 1));
+    checkObject("b", 2, f("b", 2));
+    checkObject("c", 3, f("c", 3));
+}
+TestProtoDeopt();
+
+FuzzIL program written to corpus/computed-property-names-deopt.fzil

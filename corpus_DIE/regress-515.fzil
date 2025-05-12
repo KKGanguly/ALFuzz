@@ -1,0 +1,36 @@
+v0 <- LoadInteger '2048'
+v1 <- CreateNamedVariable 'length', 'var', v0
+v2 <- LoadString ''
+v3 <- CreateNamedVariable 's', 'var', v2
+BeginForLoopInitializer
+    v4 <- LoadInteger '0'
+BeginForLoopCondition -> v5
+    v6 <- LoadInteger '2048'
+    v7 <- Compare v5, '<', v6
+BeginForLoopAfterthought v7 -> v8
+    v9 <- UnaryOperation v8, '++'
+BeginForLoopBody -> v10
+    v11 <- LoadString '.'
+    Update v3, '+', v11
+EndForLoop
+v12 <- LoadString 'x'
+v13 <- BinaryOperation v3, '+', v12
+v14 <- BinaryOperation v13, '+', v3
+v15 <- LoadString 'x'
+v16 <- BinaryOperation v14, '+', v15
+v17 <- BinaryOperation v16, '+', v3
+v18 <- CreateNamedVariable 'string', 'var', v17
+v19 <- LoadRegExp 'x' 'g'
+v20 <- LoadString ''
+v21 <- CallMethod v18, 'replace', [v19, v20]
+
+
+var length = 2048;
+var s = "";
+for (let i5 = 0; i5 < 2048; i5++) {
+    s += ".";
+}
+var string = (((s + "x") + s) + "x") + s;
+string.replace(/x/g, "");
+
+FuzzIL program written to corpus/regress-515.fzil

@@ -1,0 +1,36 @@
+v0 <- CreateNamedVariable 'Float64Array', 'none'
+v1 <- LoadInteger '1'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable '__v_1', 'none'
+Reassign v3, v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadString 'bar'
+    v6 <- CreateNamedVariable '__v_13', 'none'
+    SetProperty v6, 'y', v5
+    v7 <- LoadInteger '42'
+    Return v7
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v4
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable '__v_8', 'none'
+Reassign v9, v8
+v10 <- CreateNamedVariable '__v_1', 'none'
+v11 <- CreateNamedVariable '__v_13', 'none'
+Reassign v11, v10
+v12 <- CreateNamedVariable '__v_8', 'none'
+v13 <- CreateNamedVariable '__v_13', 'none'
+SetElement v13, '0', v12
+
+
+const v2 = new Float64Array(1);
+__v_1 = v2;
+function f4() {
+    __v_13.y = "bar";
+    return 42;
+}
+__v_8 = { valueOf: f4 };
+__v_13 = __v_1;
+__v_13[0] = __v_8;
+
+FuzzIL program written to corpus/regress-507980.fzil

@@ -1,0 +1,35 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Intl'
+BeginIf v1
+    v2 <- BeginArrowFunction -> 
+        v3 <- LoadString 'a'
+        v4 <- LoadString 'b'
+        v5 <- CreateNamedVariable 'Intl', 'none'
+        v6 <- GetProperty v5, 'DateTimeFormat'
+        v7 <- Construct v6, []
+        v8 <- GetProperty v5, 'Collator'
+        v9 <- GetProperty v8, 'prototype'
+        v10 <- LoadString 'compare'
+        v11 <- CreateNamedVariable 'Object', 'none'
+        v12 <- CallMethod v11, 'getOwnPropertyDescriptor', [v9, v10]
+        v13 <- GetProperty v12, 'get'
+        v14 <- CallMethod v13, 'call', [v7]
+        v15 <- CallFunction v14, [v3, v4]
+        Return v15
+    EndArrowFunction
+    v16 <- CallFunction v2, []
+    v17 <- CreateNamedVariable 'TypeError', 'none'
+EndIf
+
+
+if (this.Intl) {
+    const v2 = () => {
+        const t2 = Intl.DateTimeFormat;
+        const v7 = new t2();
+        const t4 = Object.getOwnPropertyDescriptor(Intl.Collator.prototype, "compare").get.call(v7);
+        return t4("a", "b");
+    };
+    v2();
+}
+
+FuzzIL program written to corpus/regress-4870.fzil

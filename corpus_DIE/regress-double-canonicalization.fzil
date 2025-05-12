@@ -1,0 +1,51 @@
+v0 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v1 <- LoadInteger '8'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'ab', 'var', v2
+v4 <- CreateNamedVariable 'Int32Array', 'none'
+v5 <- Construct v4, [v3]
+v6 <- CreateNamedVariable 'i_view', 'var', v5
+v7 <- LoadInteger '0'
+SetElement v6, '0', v7
+v8 <- LoadInteger '0'
+SetElement v6, '1', v8
+v9 <- CreateNamedVariable 'Float64Array', 'none'
+v10 <- Construct v9, [v3]
+v11 <- GetElement v10, '0'
+v12 <- CreateNamedVariable 'hole_nan', 'var', v11
+v13 <- CreateArray []
+v14 <- CreateNamedVariable 'array', 'var', v13
+v15 <- BeginPlainFunction -> 
+    SetElement v14, '0', v12
+EndPlainFunction
+v16 <- CallFunction v15, []
+v17 <- CallFunction v15, []
+v18 <- LoadUndefined
+SetElement v14, '1', v18
+v19 <- GetElement v14, '0'
+v20 <- CreateNamedVariable 'isNaN', 'none'
+v21 <- CallFunction v20, [v19]
+v22 <- LoadString 'number'
+v23 <- GetElement v14, '0'
+v24 <- TypeOf v23
+
+
+const v2 = new ArrayBuffer(8);
+var ab = v2;
+const v5 = new Int32Array(ab);
+var i_view = v5;
+i_view[0] = 0;
+i_view[1] = 0;
+const v10 = new Float64Array(ab);
+var hole_nan = v10[0];
+var array = [];
+function write() {
+    array[0] = hole_nan;
+}
+write();
+write();
+array[1] = undefined;
+isNaN(array[0]);
+typeof array[0];
+
+FuzzIL program written to corpus/regress-double-canonicalization.fzil

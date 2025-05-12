@@ -1,0 +1,58 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'sum', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '5'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '6'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        BeginForLoopInitializer
+            v10 <- LoadInteger '0'
+        BeginForLoopCondition -> v11
+            v12 <- LoadInteger '1000'
+            v13 <- Compare v11, '<', v12
+        BeginForLoopAfterthought v13 -> v14
+            v15 <- UnaryOperation v14, '++'
+        BeginForLoopBody -> v16
+            v17 <- LoadInteger '2'
+            v18 <- BinaryOperation v9, '+', v17
+            v19 <- CreateNamedVariable 'x', 'var', v18
+            v20 <- LoadInteger '5'
+            v21 <- BinaryOperation v19, '+', v20
+            v22 <- CreateNamedVariable 'y', 'var', v21
+            v23 <- LoadInteger '3'
+            v24 <- BinaryOperation v22, '+', v23
+            v25 <- CreateNamedVariable 'z', 'var', v24
+            Update v2, '+', v25
+        EndForLoop
+    EndForLoop
+    Return v2
+EndPlainFunction
+v26 <- LoadInteger '15000'
+v27 <- CallFunction v0, []
+v28 <- LoadInteger '15000'
+v29 <- CallFunction v0, []
+v30 <- LoadInteger '15000'
+v31 <- CallFunction v0, []
+
+
+function f() {
+    var sum = 0;
+    for (let i4 = 5; i4 < 6; i4++) {
+        for (let i11 = 0; i11 < 1000; i11++) {
+            var x = i4 + 2;
+            var y = x + 5;
+            var z = y + 3;
+            sum += z;
+        }
+    }
+    return sum;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/osr-nested2.fzil

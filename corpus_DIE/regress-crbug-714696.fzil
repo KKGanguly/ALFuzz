@@ -1,0 +1,42 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Intl'
+BeginIf v1
+    v2 <- CreateNamedVariable 'Intl', 'none'
+    v3 <- GetProperty v2, 'v8BreakIterator'
+    v4 <- Construct v3, []
+    v5 <- GetProperty v2, 'DateTimeFormat'
+    v6 <- Construct v5, []
+    BeginTry
+        v7 <- BeginPlainFunction -> 
+            v8 <- LoadInteger '1'
+            ThrowException v8
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `toString`, v7
+        v9 <- EndObjectLiteral
+        v10 <- CreateNamedVariable 'console', 'none'
+        v11 <- CallMethod v10, 'log', [v9]
+    BeginCatch -> v12
+    EndTryCatch
+    v13 <- GetProperty v2, 'v8BreakIterator'
+    v14 <- Construct v13, []
+EndIf
+
+
+if (this.Intl) {
+    const t1 = Intl.v8BreakIterator;
+    new t1();
+    const t3 = Intl.DateTimeFormat;
+    new t3();
+    try {
+        function f7() {
+            throw 1;
+        }
+        console.log({ toString: f7 });
+    } catch(e12) {
+    }
+    const t12 = Intl.v8BreakIterator;
+    new t12();
+}
+
+FuzzIL program written to corpus/regress-crbug-714696.fzil

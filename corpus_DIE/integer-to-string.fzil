@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '1000'
+        v2 <- UnaryOperation '-', v1
+    BeginForLoopCondition -> v3
+        v4 <- LoadInteger '1000'
+        v5 <- Compare v3, '<', v4
+    BeginForLoopAfterthought v5 -> v6
+        v7 <- UnaryOperation v6, '++'
+    BeginForLoopBody -> v8
+        v9 <- LoadString ''
+        v10 <- BinaryOperation v9, '+', v8
+        v11 <- CreateNamedVariable 'parseInt', 'none'
+        v12 <- CallFunction v11, [v10]
+    EndForLoop
+    BeginForLoopInitializer
+        v13 <- LoadInteger '5000000000'
+        v14 <- UnaryOperation '-', v13
+    BeginForLoopCondition -> v15
+        v16 <- LoadInteger '5000000000'
+        v17 <- Compare v15, '<', v16
+    BeginForLoopAfterthought v17 -> v18
+        v19 <- LoadInteger '1000000'
+        v20 <- LoadInteger '1'
+        v21 <- BinaryOperation v19, '-', v20
+        Update v18, '+', v21
+    BeginForLoopBody -> v22
+        v23 <- LoadString ''
+        v24 <- BinaryOperation v23, '+', v22
+        v25 <- CreateNamedVariable 'parseInt', 'none'
+        v26 <- CallFunction v25, [v24]
+    EndForLoop
+EndPlainFunction
+v27 <- CallFunction v0, []
+
+
+function TestIntToString() {
+    for (let i3 = -1000; i3 < 1000; i3++) {
+        parseInt("" + i3);
+    }
+    for (let i15 = -5000000000; i15 < 5000000000; i15 += 1000000 - 1) {
+        parseInt("" + i15);
+    }
+}
+TestIntToString();
+
+FuzzIL program written to corpus/integer-to-string.fzil

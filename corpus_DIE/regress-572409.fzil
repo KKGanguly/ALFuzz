@@ -1,0 +1,24 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v1
+    v3 <- EndObjectLiteral
+    v4 <- CreateNamedVariable 'lit', 'var', v3
+    v5 <- CreateNamedVariable 'RegExp', 'none'
+    v6 <- TestInstanceOf v1, v5
+EndPlainFunction
+v7 <- CallFunction v2, []
+
+
+function f0() {
+}
+var o = f0;
+function f() {
+    var lit = { __proto__: o };
+    o instanceof RegExp;
+}
+f();
+
+FuzzIL program written to corpus/regress-572409.fzil

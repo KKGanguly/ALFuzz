@@ -1,0 +1,67 @@
+v0 <- CreateNamedVariable 'String', 'none'
+v1 <- LoadString 'ott'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'str', 'var', v2
+v4 <- LoadString 'o'
+v5 <- LoadString 't'
+v6 <- LoadString 't'
+v7 <- CreateArray [v4, v5, v6]
+v8 <- CreateArrayWithSpread [...v3]
+v9 <- BeginPlainFunction -> 
+    v10 <- BeginArrowFunction -> 
+        v11 <- LoadUndefined
+        v12 <- LoadBoolean 'true'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `value`, v11
+            ObjectLiteralAddProperty `done`, v12
+        v13 <- EndObjectLiteral
+        Return v13
+    EndArrowFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `next`, v10
+    v14 <- EndObjectLiteral
+    Return v14
+EndPlainFunction
+v15 <- CreateNamedVariable 'Symbol', 'none'
+v16 <- GetProperty v15, 'iterator'
+SetComputedProperty v3, v16, v9
+v17 <- CreateArray []
+v18 <- CreateArrayWithSpread [...v3]
+v19 <- LoadString 'ott'
+v20 <- Construct v0, [v19]
+v21 <- CreateNamedVariable 'str2', 'var', v20
+v22 <- LoadString 'o'
+v23 <- LoadString 't'
+v24 <- LoadString 't'
+v25 <- CreateArray [v22, v23, v24]
+v26 <- CreateArrayWithSpread [...v21]
+v27 <- GetProperty v21, '__proto__'
+v28 <- GetProperty v15, 'iterator'
+SetComputedProperty v27, v28, v9
+v29 <- CreateArray []
+v30 <- CreateArrayWithSpread [...v21]
+
+
+const v2 = new String("ott");
+var str = v2;
+["o","t","t"];
+[...str];
+function iterator_fn() {
+    const v10 = () => {
+        return { value: undefined, done: true };
+    };
+    return { next: v10 };
+}
+str[Symbol.iterator] = iterator_fn;
+[];
+[...str];
+const v20 = new String("ott");
+var str2 = v20;
+["o","t","t"];
+[...str2];
+const t15 = str2.__proto__;
+t15[Symbol.iterator] = iterator_fn;
+[];
+[...str2];
+
+FuzzIL program written to corpus/string-iterator4.fzil

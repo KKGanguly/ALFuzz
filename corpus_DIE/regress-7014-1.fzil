@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetElement v1, '5'
+    Return v2
+EndPlainFunction
+v3 <- LoadString 'f'
+v4 <- LoadString 'abcdef'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadUndefined
+v7 <- LoadString 'a'
+v8 <- CallFunction v0, [v7]
+v9 <- LoadString 'f'
+v10 <- LoadString 'abcdef'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadUndefined
+v13 <- LoadString 'a'
+v14 <- CallFunction v0, [v13]
+v15 <- CallFunction v0, []
+v16 <- LoadString '5'
+v17 <- CreateNamedVariable 'String', 'none'
+v18 <- GetProperty v17, 'prototype'
+SetElement v18, '5', v16
+v19 <- LoadString 'f'
+v20 <- LoadString 'abcdef'
+v21 <- CallFunction v0, [v20]
+v22 <- LoadString '5'
+v23 <- LoadString 'a'
+v24 <- CallFunction v0, [v23]
+v25 <- LoadString 'f'
+v26 <- LoadString 'abcdef'
+v27 <- CallFunction v0, [v26]
+v28 <- LoadString '5'
+v29 <- LoadString 'a'
+v30 <- CallFunction v0, [v29]
+v31 <- CallFunction v0, []
+
+
+function foo(a1) {
+    return a1[5];
+}
+foo("abcdef");
+foo("a");
+foo("abcdef");
+foo("a");
+foo();
+const t3 = String.prototype;
+t3[5] = "5";
+foo("abcdef");
+foo("a");
+foo("abcdef");
+foo("a");
+foo();
+
+FuzzIL program written to corpus/regress-7014-1.fzil

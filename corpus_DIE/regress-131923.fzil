@@ -1,0 +1,16 @@
+v0 <- LoadString ''
+v1 <- LoadRegExp '\u9999{4}' ''
+v2 <- CallMethod v1, 'test', [v0]
+v3 <- LoadString ''
+v4 <- LoadRegExp '\u9999{0,4}' ''
+v5 <- CallMethod v4, 'test', [v3]
+v6 <- LoadString ''
+v7 <- LoadRegExp '\u9999{4,}' ''
+v8 <- CallMethod v7, 'test', [v6]
+
+
+/\u9999{4}/.test("");
+/\u9999{0,4}/.test("");
+/\u9999{4,}/.test("");
+
+FuzzIL program written to corpus/regress-131923.fzil

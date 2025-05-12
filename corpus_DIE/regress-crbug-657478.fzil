@@ -1,0 +1,33 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '4'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'f2', 'none'
+v4 <- CallFunction v3, [v2]
+v5 <- LoadInteger '2'
+v6 <- LoadInteger '32'
+v7 <- CreateNamedVariable 'Math', 'none'
+v8 <- CallMethod v7, 'pow', [v5, v6]
+v9 <- LoadInteger '1'
+v10 <- BinaryOperation v8, '-', v9
+v11 <- Construct v0, [v10]
+v12 <- CallFunction v3, [v11]
+v13 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v13
+v14 <- EndObjectLiteral
+v15 <- CallFunction v3, [v14]
+v16 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v16
+v17 <- EndObjectLiteral
+v18 <- CallFunction v3, [v17]
+
+
+const v2 = new Array(4);
+f2(v2);
+const v11 = new Array(Math.pow(2, 32) - 1);
+f2(v11);
+f2({ length: 10 });
+f2({ length: 10 });
+
+FuzzIL program written to corpus/regress-crbug-657478.fzil

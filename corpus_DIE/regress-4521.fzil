@@ -1,0 +1,34 @@
+v0 <- BeginClassDefinition
+    BeginClassInstanceMethod 'foo' -> v1
+        v2 <- LoadInteger '23'
+        Return v2
+    EndClassInstanceMethod
+EndClassDefinition
+v3 <- BeginClassDefinition v0
+EndClassDefinition
+v4 <- LoadInteger '23'
+v5 <- Construct v3, []
+v6 <- CallMethod v5, 'bar', []
+v7 <- LoadInteger '23'
+v8 <- Construct v3, []
+v9 <- CallMethod v8, 'bar', []
+v10 <- LoadInteger '23'
+v11 <- Construct v3, []
+v12 <- CallMethod v11, 'bar', []
+
+
+class C0 {
+    foo() {
+        return 23;
+    }
+}
+class C3 extends C0 {
+}
+const v5 = new C3();
+v5.bar();
+const v8 = new C3();
+v8.bar();
+const v11 = new C3();
+v11.bar();
+
+FuzzIL program written to corpus/regress-4521.fzil

@@ -1,0 +1,36 @@
+v0 <- LoadInteger '10'
+v1 <- CreateNamedVariable 'PAGES', 'none'
+Reassign v1, v0
+v2 <- CreateNamedVariable 'WebAssembly', 'none'
+v3 <- GetProperty v2, 'Memory'
+v4 <- CreateNamedVariable 'PAGES', 'none'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `initial`, v4
+v5 <- EndObjectLiteral
+v6 <- Construct v3, [v5]
+v7 <- CreateNamedVariable 'memory', 'none'
+Reassign v7, v6
+v8 <- CreateNamedVariable 'memory', 'none'
+v9 <- GetProperty v8, 'buffer'
+v10 <- CreateNamedVariable 'buffer', 'none'
+Reassign v10, v9
+v11 <- CreateNamedVariable 'Uint8Array', 'none'
+v12 <- CreateNamedVariable 'buffer', 'none'
+v13 <- Construct v11, [v12]
+Reassign v12, v13
+v14 <- LoadInteger '0'
+v15 <- CallMethod v8, 'grow', [v14]
+v16 <- CallMethod v2, 'validate', [v12]
+
+
+PAGES = 10;
+const v3 = WebAssembly.Memory;
+const v6 = new v3({ initial: PAGES });
+memory = v6;
+buffer = memory.buffer;
+const v13 = new Uint8Array(buffer);
+buffer = v13;
+memory.grow(0);
+WebAssembly.validate(buffer);
+
+FuzzIL program written to corpus/regress-825087b.fzil

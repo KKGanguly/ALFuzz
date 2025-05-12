@@ -1,0 +1,330 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'a', 'var', v1
+    v3 <- LoadUndefined
+    v4 <- CreateNamedVariable 'b', 'var', v3
+    v5 <- LoadUndefined
+    v6 <- CreateNamedVariable 'c', 'var', v5
+    v7 <- LoadUndefined
+    v8 <- CreateNamedVariable 'd', 'var', v7
+    v9 <- LoadUndefined
+    v10 <- CreateNamedVariable 'e', 'var', v9
+    v11 <- CallFunction v0, []
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13
+    v14 <- LoadInteger '1'
+    v15 <- BinaryOperation v13, '+', v14
+    v16 <- CallFunction v12, [v15]
+EndPlainFunction
+v17 <- BeginPlainFunction -> v18
+    v19 <- LoadInteger '1'
+    v20 <- BinaryOperation v18, '+', v19
+    v21 <- CreateNamedVariable 'rec3', 'none'
+    v22 <- CallFunction v21, [v20]
+EndPlainFunction
+v23 <- BeginPlainFunction -> v24
+    v25 <- LoadInteger '1'
+    v26 <- BinaryOperation v24, '+', v25
+    v27 <- CallFunction v17, [v26]
+EndPlainFunction
+BeginTry
+    v28 <- CallFunction v0, []
+BeginCatch -> v29
+    v30 <- LoadString '\n'
+    v31 <- GetProperty v29, 'stack'
+    v32 <- CallMethod v31, 'split', [v30]
+    v33 <- GetElement v32, '1'
+    v34 <- CreateNamedVariable 'first_frame', 'var', v33
+    v35 <- LoadString 'stack-traces-overflow.js:30:18'
+    v36 <- CallMethod v34, 'indexOf', [v35]
+    v37 <- LoadInteger '0'
+    v38 <- Compare v36, '>', v37
+    v39 <- LoadString 'stack-traces-overflow.js:32:3'
+    v40 <- CallMethod v34, 'indexOf', [v39]
+    v41 <- LoadInteger '0'
+    v42 <- Compare v40, '>', v41
+    v43 <- BinaryOperation v38, '||', v42
+EndTryCatch
+BeginTry
+    v44 <- LoadInteger '0'
+    v45 <- CallFunction v12, [v44]
+BeginCatch -> v46
+    v47 <- LoadString 'rec1'
+    v48 <- GetProperty v46, 'stack'
+    v49 <- CallMethod v48, 'indexOf', [v47]
+    v50 <- LoadInteger '0'
+    v51 <- Compare v49, '>', v50
+    v52 <- LoadString '123'
+    SetProperty v46, 'stack', v52
+    v53 <- LoadString '123'
+    v54 <- GetProperty v46, 'stack'
+EndTryCatch
+BeginTry
+    v55 <- LoadInteger '0'
+    v56 <- CallFunction v17, [v55]
+BeginCatch -> v57
+    v58 <- LoadString 'rec2'
+    v59 <- GetProperty v57, 'stack'
+    v60 <- CallMethod v59, 'indexOf', [v58]
+    v61 <- LoadInteger '0'
+    v62 <- Compare v60, '>', v61
+    v63 <- LoadString 'rec3'
+    v64 <- GetProperty v57, 'stack'
+    v65 <- CallMethod v64, 'indexOf', [v63]
+    v66 <- LoadInteger '0'
+    v67 <- Compare v65, '>', v66
+    v68 <- LoadString '123'
+    SetProperty v57, 'stack', v68
+    v69 <- LoadString '123'
+    v70 <- GetProperty v57, 'stack'
+EndTryCatch
+BeginTry
+    v71 <- LoadInteger '0'
+    v72 <- CallFunction v12, [v71]
+BeginCatch -> v73
+    v74 <- LoadString 'rec1'
+    v75 <- GetProperty v73, 'stack'
+    v76 <- CallMethod v75, 'indexOf', [v74]
+    v77 <- LoadInteger '0'
+    v78 <- Compare v76, '>', v77
+    v79 <- CreateNamedVariable 'RangeError', 'none'
+EndTryCatch
+v80 <- BeginPlainFunction -> v81
+    BeginObjectLiteral
+    v82 <- EndObjectLiteral
+    v83 <- CreateNamedVariable 'object', 'var', v82
+    SetProperty v83, '__proto__', v81
+    v84 <- LoadString '123'
+    SetProperty v83, 'stack', v84
+    v85 <- GetProperty v81, 'stack'
+    v86 <- GetProperty v83, 'stack'
+    v87 <- Compare v85, '!=', v86
+    v88 <- LoadString '123'
+    v89 <- GetProperty v83, 'stack'
+EndPlainFunction
+BeginTry
+    v90 <- LoadInteger '0'
+    v91 <- CallFunction v12, [v90]
+BeginCatch -> v92
+    v93 <- GetProperty v92, 'stack'
+    v94 <- CallFunction v80, [v92]
+EndTryCatch
+BeginTry
+    v95 <- LoadInteger '0'
+    v96 <- CallFunction v12, [v95]
+BeginCatch -> v97
+    v98 <- CallFunction v80, [v97]
+EndTryCatch
+BeginTry
+    v99 <- CreateNamedVariable 'Error', 'none'
+    v100 <- Construct v99, []
+    ThrowException v100
+BeginCatch -> v101
+    v102 <- CallFunction v80, [v101]
+EndTryCatch
+v103 <- LoadInteger '3'
+v104 <- CreateNamedVariable 'Error', 'none'
+SetProperty v104, 'stackTraceLimit', v103
+BeginTry
+    v105 <- LoadInteger '0'
+    v106 <- CallFunction v12, [v105]
+BeginCatch -> v107
+    v108 <- LoadInteger '4'
+    v109 <- LoadString '\n'
+    v110 <- GetProperty v107, 'stack'
+    v111 <- CallMethod v110, 'split', [v109]
+    v112 <- GetProperty v111, 'length'
+EndTryCatch
+v113 <- LoadFloat '25.9'
+SetProperty v104, 'stackTraceLimit', v113
+BeginTry
+    v114 <- LoadInteger '0'
+    v115 <- CallFunction v12, [v114]
+BeginCatch -> v116
+    v117 <- LoadInteger '26'
+    v118 <- LoadString '\n'
+    v119 <- GetProperty v116, 'stack'
+    v120 <- CallMethod v119, 'split', [v118]
+    v121 <- GetProperty v120, 'length'
+EndTryCatch
+v122 <- CreateNamedVariable 'NaN', 'none'
+SetProperty v104, 'stackTraceLimit', v122
+BeginTry
+    v123 <- LoadInteger '0'
+    v124 <- CallFunction v12, [v123]
+BeginCatch -> v125
+    v126 <- LoadInteger '1'
+    v127 <- LoadString '\n'
+    v128 <- GetProperty v125, 'stack'
+    v129 <- CallMethod v128, 'split', [v127]
+    v130 <- GetProperty v129, 'length'
+EndTryCatch
+v131 <- LoadInteger '1000000000000'
+SetProperty v104, 'stackTraceLimit', v131
+BeginTry
+    v132 <- LoadInteger '0'
+    v133 <- CallFunction v12, [v132]
+BeginCatch -> v134
+    v135 <- LoadString '\n'
+    v136 <- GetProperty v134, 'stack'
+    v137 <- CallMethod v136, 'split', [v135]
+    v138 <- GetProperty v137, 'length'
+    v139 <- LoadInteger '100'
+    v140 <- Compare v138, '>', v139
+EndTryCatch
+v141 <- CreateNamedVariable 'Infinity', 'none'
+SetProperty v104, 'stackTraceLimit', v141
+BeginTry
+    v142 <- LoadInteger '0'
+    v143 <- CallFunction v12, [v142]
+BeginCatch -> v144
+    v145 <- LoadString '\n'
+    v146 <- GetProperty v144, 'stack'
+    v147 <- CallMethod v146, 'split', [v145]
+    v148 <- GetProperty v147, 'length'
+    v149 <- LoadInteger '100'
+    v150 <- Compare v148, '>', v149
+EndTryCatch
+v151 <- LoadString 'not a number'
+SetProperty v104, 'stackTraceLimit', v151
+BeginTry
+    v152 <- LoadInteger '0'
+    v153 <- CallFunction v12, [v152]
+BeginCatch -> v154
+    v155 <- LoadUndefined
+    v156 <- GetProperty v154, 'stack'
+    v157 <- LoadString 'abc'
+    SetProperty v154, 'stack', v157
+    v158 <- LoadString 'abc'
+    v159 <- GetProperty v154, 'stack'
+EndTryCatch
+v160 <- LoadInteger '3'
+SetProperty v104, 'stackTraceLimit', v160
+v161 <- LoadString ''
+Reassign v104, v161
+BeginTry
+    v162 <- LoadInteger '0'
+    v163 <- CallFunction v12, [v162]
+BeginCatch -> v164
+    v165 <- LoadInteger '4'
+    v166 <- LoadString '\n'
+    v167 <- GetProperty v164, 'stack'
+    v168 <- CallMethod v167, 'split', [v166]
+    v169 <- GetProperty v168, 'length'
+EndTryCatch
+
+
+function overflow() {
+    var a;
+    var b;
+    var c;
+    var d;
+    var e;
+    overflow();
+}
+function rec1(a13) {
+    rec1(a13 + 1);
+}
+function rec2(a18) {
+    rec3(a18 + 1);
+}
+function rec3(a24) {
+    rec2(a24 + 1);
+}
+try {
+    overflow();
+} catch(e29) {
+    var first_frame = e29.stack.split("\n")[1];
+    (first_frame.indexOf("stack-traces-overflow.js:30:18") > 0) || (first_frame.indexOf("stack-traces-overflow.js:32:3") > 0);
+}
+try {
+    rec1(0);
+} catch(e46) {
+    e46.stack.indexOf("rec1") > 0;
+    e46.stack = "123";
+    e46.stack;
+}
+try {
+    rec2(0);
+} catch(e57) {
+    e57.stack.indexOf("rec2") > 0;
+    e57.stack.indexOf("rec3") > 0;
+    e57.stack = "123";
+    e57.stack;
+}
+try {
+    rec1(0);
+} catch(e73) {
+    e73.stack.indexOf("rec1") > 0;
+}
+function testErrorPrototype(a81) {
+    var object = {};
+    object.__proto__ = a81;
+    object.stack = "123";
+    a81.stack != object.stack;
+    object.stack;
+}
+try {
+    rec1(0);
+} catch(e92) {
+    e92.stack;
+    testErrorPrototype(e92);
+}
+try {
+    rec1(0);
+} catch(e97) {
+    testErrorPrototype(e97);
+}
+try {
+    const v100 = new Error();
+    throw v100;
+} catch(e101) {
+    testErrorPrototype(e101);
+}
+Error.stackTraceLimit = 3;
+try {
+    rec1(0);
+} catch(e107) {
+    e107.stack.split("\n").length;
+}
+Error.stackTraceLimit = 25.9;
+try {
+    rec1(0);
+} catch(e116) {
+    e116.stack.split("\n").length;
+}
+Error.stackTraceLimit = NaN;
+try {
+    rec1(0);
+} catch(e125) {
+    e125.stack.split("\n").length;
+}
+Error.stackTraceLimit = 1000000000000;
+try {
+    rec1(0);
+} catch(e134) {
+    e134.stack.split("\n").length > 100;
+}
+Error.stackTraceLimit = Infinity;
+try {
+    rec1(0);
+} catch(e144) {
+    e144.stack.split("\n").length > 100;
+}
+Error.stackTraceLimit = "not a number";
+try {
+    rec1(0);
+} catch(e154) {
+    e154.stack;
+    e154.stack = "abc";
+    e154.stack;
+}
+Error.stackTraceLimit = 3;
+Error = "";
+try {
+    rec1(0);
+} catch(e164) {
+    e164.stack.split("\n").length;
+}
+
+FuzzIL program written to corpus/stack-traces-overflow.fzil

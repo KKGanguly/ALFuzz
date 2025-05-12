@@ -1,0 +1,33 @@
+v0 <- LoadThis
+v1 <- LoadString 'Object'
+v2 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'defineProperty', [v0, v1, v3]
+v6 <- LoadThis
+v7 <- LoadString 'Object'
+v8 <- CallMethod v4, 'getOwnPropertyDescriptor', [v6, v7]
+v9 <- CreateNamedVariable 'desc', 'var', v8
+v10 <- GetProperty v9, 'enumerable'
+v11 <- GetProperty v9, 'configurable'
+v12 <- LoadString 'get'
+v13 <- CallMethod v9, 'hasOwnProperty', [v12]
+v14 <- LoadString 'set'
+v15 <- CallMethod v9, 'hasOwnProperty', [v14]
+v16 <- LoadString 'value'
+v17 <- CallMethod v9, 'hasOwnProperty', [v16]
+v18 <- GetProperty v9, 'writable'
+
+
+Object.defineProperty(this, "Object", { enumerable: true });
+var desc = Object.getOwnPropertyDescriptor(this, "Object");
+desc.enumerable;
+desc.configurable;
+desc.hasOwnProperty("get");
+desc.hasOwnProperty("set");
+desc.hasOwnProperty("value");
+desc.writable;
+
+FuzzIL program written to corpus/regress-1083.fzil

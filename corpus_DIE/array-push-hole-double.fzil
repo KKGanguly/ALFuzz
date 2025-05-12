@@ -1,0 +1,56 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '1'
+v2 <- CreateArray [v1]
+v3 <- CallMethod v2, 'push', [v0]
+v4 <- BeginPlainFunction -> 
+    v5 <- BeginPlainFunction -> v6, v7, v8
+        v9 <- GetComputedProperty v6, v8
+        SetComputedProperty v7, v8, v9
+    EndPlainFunction
+    v10 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v11 <- LoadInteger '8'
+    v12 <- Construct v10, [v11]
+    v13 <- CreateNamedVariable 'b', 'var', v12
+    v14 <- CreateNamedVariable 'Int32Array', 'none'
+    v15 <- Construct v14, [v13]
+    v16 <- CreateNamedVariable 'i32', 'var', v15
+    v17 <- LoadInteger '4294443007'
+    SetElement v16, '0', v17
+    v18 <- LoadInteger '4294443007'
+    SetElement v16, '1', v18
+    v19 <- CreateNamedVariable 'Float64Array', 'none'
+    v20 <- Construct v19, [v13]
+    v21 <- CreateNamedVariable 'f64', 'var', v20
+    v22 <- LoadUndefined
+    v23 <- LoadFloat '2.5'
+    v24 <- CreateArray [v22, v23]
+    v25 <- CreateNamedVariable 'a', 'var', v24
+    v26 <- GetElement v21, '0'
+    v27 <- CallMethod v25, 'push', [v26]
+    v28 <- GetElement v25, '2'
+    v29 <- CreateNamedVariable 'Number', 'none'
+    v30 <- CallMethod v29, 'isNaN', [v28]
+EndPlainFunction
+v31 <- CallFunction v4, []
+
+
+([1]).push(1);
+function PushHoleBitPattern() {
+    function g(a6, a7, a8) {
+        a7[a8] = a6[a8];
+    }
+    const v12 = new ArrayBuffer(8);
+    var b = v12;
+    const v15 = new Int32Array(b);
+    var i32 = v15;
+    i32[0] = 4294443007;
+    i32[1] = 4294443007;
+    const v20 = new Float64Array(b);
+    var f64 = v20;
+    var a = [,2.5];
+    a.push(f64[0]);
+    Number.isNaN(a[2]);
+}
+PushHoleBitPattern();
+
+FuzzIL program written to corpus/array-push-hole-double.fzil

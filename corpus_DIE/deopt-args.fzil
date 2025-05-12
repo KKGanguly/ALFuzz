@@ -1,0 +1,55 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- LoadInteger '1'
+    v4 <- LoadInteger '2'
+    v5 <- CallMethod v1, 'f', [v2, v3, v4]
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7, v8, v9
+    v10 <- LoadInteger '42'
+    Return v10
+EndPlainFunction
+BeginObjectLiteral
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable 'object', 'var', v11
+SetProperty v12, 'f', v6
+BeginForLoopInitializer
+    v13 <- LoadInteger '0'
+BeginForLoopCondition -> v14
+    v15 <- LoadInteger '5'
+    v16 <- Compare v14, '<', v15
+BeginForLoopAfterthought v16 -> v17
+    v18 <- UnaryOperation v17, '++'
+BeginForLoopBody -> v19
+    v20 <- LoadInteger '42'
+    v21 <- CallFunction v0, [v12]
+EndForLoop
+v22 <- CallFunction v0, [v12]
+v23 <- BeginPlainFunction -> v24, v25, v26
+    v27 <- LoadInteger '87'
+    Return v27
+EndPlainFunction
+SetProperty v12, 'f', v23
+v28 <- LoadInteger '87'
+v29 <- CallFunction v0, [v12]
+
+
+function g(a1) {
+    return a1.f(0, 1, 2);
+}
+function f(a7, a8, a9) {
+    return 42;
+}
+var object = {};
+object.f = f;
+for (let i14 = 0; i14 < 5; i14++) {
+    g(object);
+}
+g(object);
+function f23(a24, a25, a26) {
+    return 87;
+}
+object.f = f23;
+g(object);
+
+FuzzIL program written to corpus/deopt-args.fzil

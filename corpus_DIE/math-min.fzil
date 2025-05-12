@@ -1,0 +1,139 @@
+v0 <- CreateNamedVariable 'Float64Array', 'none'
+v1 <- LoadInteger '4'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- LoadInteger '1'
+v5 <- UnaryOperation '-', v4
+UpdateElement v3, '2', '*', v5
+v6 <- LoadInteger '1'
+v7 <- UnaryOperation '-', v6
+UpdateElement v3, '3', '*', v7
+v8 <- LoadInteger '0'
+v9 <- GetElement v3, '0'
+v10 <- LoadInteger '0'
+v11 <- GetElement v3, '1'
+v12 <- LoadInteger '0'
+v13 <- UnaryOperation '-', v12
+v14 <- GetElement v3, '2'
+v15 <- LoadInteger '0'
+v16 <- UnaryOperation '-', v15
+v17 <- GetElement v3, '3'
+v18 <- BeginPlainFunction -> 
+    v19 <- GetElement v3, '0'
+    v20 <- CreateNamedVariable 'z', 'var', v19
+    v21 <- LoadInteger '0'
+    v22 <- CreateNamedVariable 'Math', 'none'
+    v23 <- CallMethod v22, 'min', [v20, v20]
+EndPlainFunction
+v24 <- BeginPlainFunction -> 
+    v25 <- LoadInteger '0'
+    v26 <- GetElement v3, '0'
+    v27 <- GetElement v3, '1'
+    v28 <- CreateNamedVariable 'Math', 'none'
+    v29 <- CallMethod v28, 'min', [v26, v27]
+EndPlainFunction
+v30 <- BeginPlainFunction -> 
+    v31 <- LoadInteger '0'
+    v32 <- UnaryOperation '-', v31
+    v33 <- GetElement v3, '1'
+    v34 <- GetElement v3, '2'
+    v35 <- CreateNamedVariable 'Math', 'none'
+    v36 <- CallMethod v35, 'min', [v33, v34]
+EndPlainFunction
+v37 <- BeginPlainFunction -> 
+    v38 <- LoadInteger '0'
+    v39 <- UnaryOperation '-', v38
+    v40 <- GetElement v3, '2'
+    v41 <- GetElement v3, '1'
+    v42 <- CreateNamedVariable 'Math', 'none'
+    v43 <- CallMethod v42, 'min', [v40, v41]
+EndPlainFunction
+v44 <- BeginPlainFunction -> 
+    v45 <- GetElement v3, '2'
+    v46 <- CreateNamedVariable 'm_z', 'var', v45
+    v47 <- LoadInteger '0'
+    v48 <- UnaryOperation '-', v47
+    v49 <- CreateNamedVariable 'Math', 'none'
+    v50 <- CallMethod v49, 'min', [v46, v46]
+EndPlainFunction
+v51 <- BeginPlainFunction -> 
+    v52 <- LoadInteger '0'
+    v53 <- UnaryOperation '-', v52
+    v54 <- GetElement v3, '2'
+    v55 <- GetElement v3, '3'
+    v56 <- CreateNamedVariable 'Math', 'none'
+    v57 <- CallMethod v56, 'min', [v54, v55]
+EndPlainFunction
+BeginForLoopInitializer
+    v58 <- LoadInteger '0'
+BeginForLoopCondition -> v59
+    v60 <- LoadInteger '3'
+    v61 <- Compare v59, '<', v60
+BeginForLoopAfterthought v61 -> v62
+    v63 <- UnaryOperation v62, '++'
+BeginForLoopBody -> v64
+    v65 <- CallFunction v18, []
+    v66 <- CallFunction v24, []
+    v67 <- CallFunction v30, []
+    v68 <- CallFunction v37, []
+    v69 <- CallFunction v44, []
+    v70 <- CallFunction v51, []
+EndForLoop
+v71 <- CallFunction v18, []
+v72 <- CallFunction v24, []
+v73 <- CallFunction v30, []
+v74 <- CallFunction v37, []
+v75 <- CallFunction v44, []
+v76 <- CallFunction v51, []
+
+
+const v2 = new Float64Array(4);
+var a = v2;
+a[2] *= -1;
+a[3] *= -1;
+a[0];
+a[1];
+-0;
+a[2];
+-0;
+a[3];
+function f1() {
+    var z = a[0];
+    Math.min(z, z);
+}
+function f2() {
+    Math.min(a[0], a[1]);
+}
+function f3() {
+    -0;
+    Math.min(a[1], a[2]);
+}
+function f4() {
+    -0;
+    Math.min(a[2], a[1]);
+}
+function f5() {
+    var m_z = a[2];
+    -0;
+    Math.min(m_z, m_z);
+}
+function f6() {
+    -0;
+    Math.min(a[2], a[3]);
+}
+for (let i59 = 0; i59 < 3; i59++) {
+    f1();
+    f2();
+    f3();
+    f4();
+    f5();
+    f6();
+}
+f1();
+f2();
+f3();
+f4();
+f5();
+f6();
+
+FuzzIL program written to corpus/math-min.fzil

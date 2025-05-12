@@ -1,0 +1,62 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'some_other_string_1'
+    v3 <- Compare v1, '===', v2
+    v4 <- LoadString 'some_string'
+    v5 <- Compare v1, '===', v4
+    v6 <- BinaryOperation v3, '||', v5
+    BeginIf v6
+        v7 <- CreateNamedVariable 'gc', 'none'
+        v8 <- CallFunction v7, []
+    EndIf
+    v9 <- LoadString 'some_other_string_2'
+    v10 <- Compare v1, '===', v9
+    v11 <- LoadString 'some_string'
+    v12 <- Compare v1, '===', v11
+    v13 <- BinaryOperation v10, '||', v12
+    BeginIf v13
+        v14 <- CreateNamedVariable 'gc', 'none'
+        v15 <- CallFunction v14, []
+    EndIf
+    v16 <- LoadFloat '1.7'
+    v17 <- Compare v1, '===', v16
+    v18 <- LoadFloat '1.4'
+    v19 <- Compare v1, '===', v18
+    v20 <- BinaryOperation v17, '||', v19
+    BeginIf v20
+        v21 <- CreateNamedVariable 'gc', 'none'
+        v22 <- CallFunction v21, []
+    EndIf
+    v23 <- LoadFloat '1.9'
+    v24 <- Compare v1, '===', v23
+    v25 <- LoadFloat '1.4'
+    v26 <- Compare v1, '===', v25
+    v27 <- BinaryOperation v24, '||', v26
+    BeginIf v27
+        v28 <- CreateNamedVariable 'gc', 'none'
+        v29 <- CallFunction v28, []
+    EndIf
+EndPlainFunction
+v30 <- LoadString 'some_other_string_1'
+v31 <- CallFunction v0, [v30]
+v32 <- LoadFloat '1.7'
+v33 <- CallFunction v0, [v32]
+
+
+function f(a1) {
+    if ((a1 === "some_other_string_1") || (a1 === "some_string")) {
+        gc();
+    }
+    if ((a1 === "some_other_string_2") || (a1 === "some_string")) {
+        gc();
+    }
+    if ((a1 === 1.7) || (a1 === 1.4)) {
+        gc();
+    }
+    if ((a1 === 1.9) || (a1 === 1.4)) {
+        gc();
+    }
+}
+f("some_other_string_1");
+f(1.7);
+
+FuzzIL program written to corpus/regress-3884.fzil

@@ -1,0 +1,148 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- CreateNamedVariable 'Int8Array', 'none'
+v2 <- CreateNamedVariable 'Uint8Array', 'none'
+v3 <- CreateNamedVariable 'Int16Array', 'none'
+v4 <- CreateNamedVariable 'Uint16Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Uint32Array', 'none'
+v7 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v8 <- CreateNamedVariable 'Float32Array', 'none'
+v9 <- CreateNamedVariable 'Float64Array', 'none'
+v10 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9]
+v11 <- CreateNamedVariable 'types', 'var', v10
+v12 <- LoadInteger '2'
+v13 <- UnaryOperation '-', v12
+v14 <- LoadInteger '2'
+v15 <- UnaryOperation '-', v14
+v16 <- LoadInteger '254'
+v17 <- LoadInteger '2'
+v18 <- UnaryOperation '-', v17
+v19 <- LoadInteger '65534'
+v20 <- LoadInteger '2'
+v21 <- UnaryOperation '-', v20
+v22 <- LoadInteger '4294967294'
+v23 <- LoadInteger '0'
+v24 <- LoadInteger '2'
+v25 <- UnaryOperation '-', v24
+v26 <- LoadInteger '2'
+v27 <- UnaryOperation '-', v26
+v28 <- CreateArray [v13, v15, v16, v18, v19, v21, v22, v23, v25, v27]
+v29 <- CreateNamedVariable 'results1', 'var', v28
+v30 <- LoadUndefined
+v31 <- LoadInteger '1'
+v32 <- UnaryOperation '-', v31
+v33 <- LoadInteger '255'
+v34 <- LoadInteger '1'
+v35 <- UnaryOperation '-', v34
+v36 <- LoadInteger '65535'
+v37 <- LoadInteger '1'
+v38 <- UnaryOperation '-', v37
+v39 <- LoadInteger '4294967295'
+v40 <- LoadInteger '0'
+v41 <- LoadInteger '1'
+v42 <- UnaryOperation '-', v41
+v43 <- LoadInteger '1'
+v44 <- UnaryOperation '-', v43
+v45 <- CreateArray [v30, v32, v33, v35, v36, v38, v39, v40, v42, v44]
+v46 <- CreateNamedVariable 'results2', 'var', v45
+v47 <- LoadInteger '0'
+v48 <- LoadInteger '0'
+v49 <- LoadInteger '0'
+v50 <- LoadInteger '0'
+v51 <- LoadInteger '0'
+v52 <- LoadInteger '0'
+v53 <- LoadInteger '0'
+v54 <- LoadInteger '0'
+v55 <- LoadInteger '0'
+v56 <- LoadInteger '0'
+v57 <- CreateArray [v47, v48, v49, v50, v51, v52, v53, v54, v55, v56]
+v58 <- CreateNamedVariable 'results3', 'var', v57
+v59 <- LoadInteger '1'
+v60 <- LoadInteger '1'
+v61 <- LoadInteger '1'
+v62 <- LoadInteger '1'
+v63 <- LoadInteger '1'
+v64 <- LoadInteger '1'
+v65 <- LoadInteger '1'
+v66 <- LoadInteger '1'
+v67 <- LoadInteger '1'
+v68 <- LoadInteger '1'
+v69 <- CreateArray [v59, v60, v61, v62, v63, v64, v65, v66, v67, v68]
+v70 <- CreateNamedVariable 'results4', 'var', v69
+v71 <- LoadInteger '40'
+v72 <- CreateNamedVariable 'kElementCount', 'const', v71
+v73 <- BeginPlainFunction -> v74
+    v75 <- LoadInteger '4'
+    v76 <- LoadInteger '8'
+    v77 <- GetProperty v0, 'prototype'
+    v78 <- GetProperty v77, 'slice'
+    v79 <- CallMethod v78, 'call', [v74, v75, v76]
+    Return v79
+EndPlainFunction
+BeginForLoopInitializer
+    v80 <- LoadInteger '0'
+BeginForLoopCondition -> v81
+    v82 <- GetProperty v11, 'length'
+    v83 <- Compare v81, '<', v82
+BeginForLoopAfterthought v83 -> v84
+    v85 <- UnaryOperation v84, '++'
+BeginForLoopBody -> v86
+    v87 <- GetComputedProperty v11, v86
+    v88 <- CreateNamedVariable 'type', 'var', v87
+    v89 <- Construct v88, [v72]
+    v90 <- CreateNamedVariable 'a', 'var', v89
+    BeginForLoopInitializer
+        v91 <- LoadInteger '0'
+    BeginForLoopCondition -> v92
+        v93 <- Compare v92, '<', v72
+    BeginForLoopAfterthought v93 -> v94
+        v95 <- UnaryOperation '++', v94
+    BeginForLoopBody -> v96
+        v97 <- LoadInteger '6'
+        v98 <- BinaryOperation v96, '-', v97
+        SetComputedProperty v90, v96, v98
+    EndForLoop
+    v99 <- LoadInteger '5'
+    v100 <- DeleteElement v90, '5'
+    v101 <- CallFunction v73, [v90]
+    v102 <- CreateNamedVariable 'sliced', 'var', v101
+    v103 <- GetComputedProperty v29, v86
+    v104 <- GetElement v102, '0'
+    v105 <- GetComputedProperty v46, v86
+    v106 <- GetElement v102, '1'
+    v107 <- GetComputedProperty v58, v86
+    v108 <- GetElement v102, '2'
+    v109 <- GetComputedProperty v70, v86
+    v110 <- GetElement v102, '3'
+EndForLoop
+
+
+var types = [Array,Int8Array,Uint8Array,Int16Array,Uint16Array,Int32Array,Uint32Array,Uint8ClampedArray,Float32Array,Float64Array];
+var results1 = [-2,-2,254,-2,65534,-2,4294967294,0,-2,-2];
+var results2 = [,-1,255,-1,65535,-1,4294967295,0,-1,-1];
+var results3 = [0,0,0,0,0,0,0,0,0,0];
+var results4 = [1,1,1,1,1,1,1,1,1,1];
+const kElementCount = 40;
+function do_slice(a74) {
+    return Array.prototype.slice.call(a74, 4, 8);
+}
+for (let i81 = 0; i81 < types.length; i81++) {
+    var type = types[i81];
+    const v89 = new type(kElementCount);
+    var a = v89;
+    for (let i92 = 0; i92 < kElementCount; ++i92) {
+        a[i92] = i92 - 6;
+    }
+    delete a[5];
+    var sliced = do_slice(a);
+    results1[i81];
+    sliced[0];
+    results2[i81];
+    sliced[1];
+    results3[i81];
+    sliced[2];
+    results4[i81];
+    sliced[3];
+}
+
+FuzzIL program written to corpus/typed-array-slice.fzil

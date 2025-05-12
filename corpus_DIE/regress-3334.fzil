@@ -1,0 +1,52 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- LoadString 'prototype'
+v2 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'defineProperty', [v0, v1, v3]
+v6 <- LoadInteger '2'
+v7 <- GetProperty v0, 'prototype'
+v8 <- BeginPlainFunction -> 
+EndPlainFunction
+v9 <- LoadString 'prototype'
+v10 <- LoadInteger '2'
+v11 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v10
+    ObjectLiteralAddProperty `writable`, v11
+v12 <- EndObjectLiteral
+v13 <- CallMethod v4, 'defineProperty', [v8, v9, v12]
+v14 <- LoadInteger '2'
+v15 <- GetProperty v8, 'prototype'
+v16 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v17 <- LoadInteger '10'
+    SetProperty v8, 'prototype', v17
+EndPlainFunction
+v18 <- CallFunction v16, []
+v19 <- CreateNamedVariable 'TypeError', 'none'
+v20 <- LoadBoolean 'false'
+v21 <- LoadString 'prototype'
+v22 <- CallMethod v4, 'getOwnPropertyDescriptor', [v8, v21]
+v23 <- GetProperty v22, 'writable'
+
+
+function foo() {
+}
+Object.defineProperty(foo, "prototype", { value: 2 });
+foo.prototype;
+function bar() {
+}
+Object.defineProperty(bar, "prototype", { value: 2, writable: false });
+bar.prototype;
+function f16() {
+    'use strict';
+    bar.prototype = 10;
+}
+f16();
+Object.getOwnPropertyDescriptor(bar, "prototype").writable;
+
+FuzzIL program written to corpus/regress-3334.fzil

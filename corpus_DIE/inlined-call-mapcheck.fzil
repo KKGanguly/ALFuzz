@@ -1,0 +1,50 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        BeginForLoopInitializer
+            v3 <- LoadInteger '0'
+            v4 <- CreateNamedVariable 'i', 'none'
+            Reassign v4, v3
+        BeginForLoopCondition
+            v5 <- CreateNamedVariable 'i', 'none'
+            v6 <- LoadInteger '1'
+            v7 <- Compare v5, '<', v6
+        BeginForLoopAfterthought v7
+            v8 <- CreateNamedVariable 'i', 'none'
+            v9 <- UnaryOperation v8, '++'
+        BeginForLoopBody
+            v10 <- LoadThis
+            v11 <- CallMethod v2, 'call', [v10]
+        EndForLoop
+    EndPlainFunction
+    v12 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v13 <- CallFunction v1, [v12]
+    v14 <- CallFunction v1, [v12]
+    v15 <- BeginPlainFunction -> 
+        v16 <- LoadString 'whatever'
+        v17 <- CallFunction v1, [v16]
+    EndPlainFunction
+    v18 <- CallFunction v15, []
+    v19 <- CreateNamedVariable 'TypeError', 'none'
+EndPlainFunction
+v20 <- CallFunction v0, []
+
+
+function f0() {
+    function f(a2) {
+        for (i = 0; i < 1; i++) {
+            a2.call(this);
+        }
+    }
+    function g() {
+    }
+    f(g);
+    f(g);
+    function f15() {
+        f("whatever");
+    }
+    f15();
+}
+f0();
+
+FuzzIL program written to corpus/inlined-call-mapcheck.fzil

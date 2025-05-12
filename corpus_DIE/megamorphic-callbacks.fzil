@@ -1,0 +1,119 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'x'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- LoadInteger '42'
+    SetProperty v4, 'y', v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- CallMethod v7, 'f', []
+    Return v8
+EndPlainFunction
+v9 <- LoadInteger '42'
+v10 <- BeginPlainFunction -> 
+EndPlainFunction
+v11 <- LoadInteger '100'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v9
+    ObjectLiteralAddProperty `f`, v10
+    ObjectLiteralAddProperty `z`, v11
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'o', 'var', v12
+v14 <- DeleteProperty v13, 'z'
+v15 <- CallFunction v0, [v13]
+v16 <- CallFunction v3, [v13]
+v17 <- CallFunction v6, [v13]
+v18 <- LoadInteger '100'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `z`, v18
+v19 <- EndObjectLiteral
+v20 <- CreateNamedVariable 'o', 'var', v19
+v21 <- DeleteProperty v20, 'z'
+v22 <- LoadString 'x'
+v23 <- BeginPlainFunction -> 
+    v24 <- LoadInteger '100'
+    Return v24
+EndPlainFunction
+v25 <- CallMethod v20, '__defineGetter__', [v22, v23]
+v26 <- LoadString 'y'
+v27 <- BeginPlainFunction -> v28
+    v29 <- LoadThis
+    SetProperty v29, 'y_mirror', v28
+EndPlainFunction
+v30 <- CallMethod v20, '__defineSetter__', [v26, v27]
+v31 <- LoadString 'f'
+v32 <- BeginPlainFunction -> 
+    v33 <- BeginPlainFunction -> 
+        v34 <- LoadInteger '300'
+        Return v34
+    EndPlainFunction
+    Return v33
+EndPlainFunction
+v35 <- CallMethod v20, '__defineGetter__', [v31, v32]
+v36 <- LoadInteger '100'
+v37 <- GetProperty v20, 'x'
+v38 <- LoadString 'normal load'
+v39 <- LoadInteger '100'
+v40 <- CallFunction v0, [v20]
+v41 <- LoadString 'ic load'
+v42 <- LoadInteger '200'
+SetProperty v20, 'y', v42
+v43 <- LoadInteger '200'
+v44 <- GetProperty v20, 'y_mirror'
+v45 <- LoadString 'normal store'
+v46 <- CallFunction v3, [v20]
+v47 <- LoadInteger '42'
+v48 <- GetProperty v20, 'y_mirror'
+v49 <- LoadString 'ic store'
+v50 <- LoadInteger '300'
+v51 <- CallMethod v20, 'f', []
+v52 <- LoadString 'normal call'
+v53 <- LoadInteger '300'
+v54 <- CallFunction v6, [v20]
+v55 <- LoadString 'ic call'
+
+
+function load(a1) {
+    return a1.x;
+}
+function store(a4) {
+    a4.y = 42;
+}
+function call(a7) {
+    return a7.f();
+}
+function f10() {
+}
+var o = { x: 42, f: f10, z: 100 };
+delete o.z;
+load(o);
+store(o);
+call(o);
+var o = { z: 100 };
+delete o.z;
+function f23() {
+    return 100;
+}
+o.__defineGetter__("x", f23);
+function f27(a28) {
+    this.y_mirror = a28;
+}
+o.__defineSetter__("y", f27);
+function f32() {
+    function f33() {
+        return 300;
+    }
+    return f33;
+}
+o.__defineGetter__("f", f32);
+o.x;
+load(o);
+o.y = 200;
+o.y_mirror;
+store(o);
+o.y_mirror;
+o.f();
+call(o);
+
+FuzzIL program written to corpus/megamorphic-callbacks.fzil

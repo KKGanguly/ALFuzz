@@ -1,0 +1,17 @@
+v0 <- CreateNamedVariable 'Promise', 'none'
+v1 <- CallMethod v0, 'resolve', []
+v2 <- CreateNamedVariable 'resolved', 'var', v1
+v3 <- BeginAsyncArrowFunction -> 
+    Return v2
+EndAsyncArrowFunction
+v4 <- CallFunction v3, []
+v5 <- Compare v4, '!==', v2
+
+
+var resolved = Promise.resolve();
+const v3 = async () => {
+    return resolved;
+};
+v3() !== resolved;
+
+FuzzIL program written to corpus/async-await-resolve-new.fzil

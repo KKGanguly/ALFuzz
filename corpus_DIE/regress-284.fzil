@@ -1,0 +1,50 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'result', 'var', v1
+    v3 <- LoadInteger '0'
+    v4 <- CreateArray [v3]
+    BeginForInLoop v4 -> v5
+        v6 <- LoadString 'hopla'
+        Reassign v2, v6
+        Continue
+    EndForInLoop
+    Return v2
+EndPlainFunction
+v7 <- LoadString 'hopla'
+v8 <- CallFunction v0, []
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadUndefined
+    v11 <- CreateNamedVariable 'result', 'var', v10
+    v12 <- LoadInteger '0'
+    v13 <- CreateArray [v12]
+    BeginForInLoop v13 -> v14
+        v15 <- LoadString 'hopla'
+        Reassign v11, v15
+        Break
+    EndForInLoop
+    Return v11
+EndPlainFunction
+v16 <- LoadString 'hopla'
+v17 <- CallFunction v0, []
+
+
+function continueWithinLoop() {
+    var result;
+    for (const v5 in [0]) {
+        result = "hopla";
+        continue;
+    }
+    return result;
+}
+continueWithinLoop();
+function breakWithinLoop() {
+    var result;
+    for (const v14 in [0]) {
+        result = "hopla";
+        break;
+    }
+    return result;
+}
+continueWithinLoop();
+
+FuzzIL program written to corpus/regress-284.fzil

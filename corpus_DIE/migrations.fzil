@@ -1,0 +1,1148 @@
+v0 <- LoadString 'return this'
+v1 <- CreateNamedVariable 'Function', 'none'
+v2 <- CallFunction v1, [v0]
+v3 <- CallFunction v2, []
+v4 <- CreateNamedVariable 'global', 'var', v3
+v5 <- LoadInteger '0'
+v6 <- CreateNamedVariable 'verbose', 'var', v5
+v7 <- BeginPlainFunction -> v8, v9, v10
+    v11 <- LoadInteger '5'
+    v12 <- CreateNamedVariable 'n', 'var', v11
+    v13 <- CreateArray []
+    v14 <- CreateNamedVariable 'objects', 'var', v13
+    v15 <- CreateArray []
+    v16 <- CreateNamedVariable 'results', 'var', v15
+    BeginIf v6
+        v17 <- CreateNamedVariable 'print', 'none'
+        v18 <- CallFunction v17, []
+        v19 <- LoadString '==========================================================='
+        v20 <- CallFunction v17, [v19]
+        v21 <- LoadString '=== '
+        v22 <- GetProperty v8, 'name'
+        v23 <- BinaryOperation v21, '+', v22
+        v24 <- LoadString ' | '
+        v25 <- BinaryOperation v23, '+', v24
+        v26 <- GetProperty v9, 'name'
+        v27 <- BinaryOperation v25, '+', v26
+        v28 <- LoadString ' |--> '
+        v29 <- BinaryOperation v27, '+', v28
+        v30 <- GetProperty v10, 'name'
+        v31 <- BinaryOperation v29, '+', v30
+        v32 <- CallFunction v17, [v31]
+        v33 <- LoadString '==========================================================='
+        v34 <- CallFunction v17, [v33]
+    EndIf
+    v35 <- CreateNamedVariable 'gc', 'none'
+    v36 <- CallFunction v35, []
+    v37 <- CallFunction v35, []
+    v38 <- CallFunction v35, []
+    BeginIf v6
+        v39 <- LoadString '-----------------------------'
+        v40 <- CreateNamedVariable 'print', 'none'
+        v41 <- CallFunction v40, [v39]
+        v42 <- LoadString '--- construct'
+        v43 <- CallFunction v40, [v42]
+        v44 <- CallFunction v40, []
+    EndIf
+    BeginForLoopInitializer
+        v45 <- LoadInteger '0'
+    BeginForLoopCondition -> v46
+        v47 <- Compare v46, '<', v12
+    BeginForLoopAfterthought v47 -> v48
+        v49 <- UnaryOperation v48, '++'
+    BeginForLoopBody -> v50
+        v51 <- CallMethod v8, 'args', [v50]
+        v52 <- GetProperty v8, 'ctor'
+        v53 <- CallMethod v52, 'apply', [v8, v51]
+        SetComputedProperty v14, v50, v53
+    EndForLoop
+    BeginTry
+        BeginIf v6
+            v54 <- LoadString '-----------------------------'
+            v55 <- CreateNamedVariable 'print', 'none'
+            v56 <- CallFunction v55, [v54]
+            v57 <- LoadString '--- use 1'
+            v58 <- CallFunction v55, [v57]
+            v59 <- CallFunction v55, []
+        EndIf
+        v60 <- GetProperty v9, 'use1'
+        v61 <- CreateNamedVariable 'use', 'var', v60
+        BeginForLoopInitializer
+            v62 <- LoadInteger '0'
+        BeginForLoopCondition -> v63
+            v64 <- Compare v63, '<', v12
+        BeginForLoopAfterthought v64 -> v65
+            v66 <- UnaryOperation v65, '++'
+        BeginForLoopBody -> v67
+            v68 <- GetComputedProperty v14, v67
+            v69 <- CallFunction v61, [v68, v67]
+            SetComputedProperty v16, v67, v69
+        EndForLoop
+        BeginIf v6
+            v70 <- LoadString '-----------------------------'
+            v71 <- CreateNamedVariable 'print', 'none'
+            v72 <- CallFunction v71, [v70]
+            v73 <- LoadString '--- trigger migration'
+            v74 <- CallFunction v71, [v73]
+            v75 <- CallFunction v71, []
+        EndIf
+        v76 <- GetProperty v10, 'migr'
+        v77 <- CreateNamedVariable 'migr', 'var', v76
+        BeginForLoopInitializer
+            v78 <- LoadInteger '0'
+        BeginForLoopCondition -> v79
+            v80 <- Compare v79, '<', v12
+        BeginForLoopAfterthought v80 -> v81
+            v82 <- UnaryOperation v81, '++'
+        BeginForLoopBody -> v83
+            v84 <- GetComputedProperty v14, v83
+            v85 <- CallFunction v77, [v84, v83]
+        EndForLoop
+        BeginIf v6
+            v86 <- LoadString '-----------------------------'
+            v87 <- CreateNamedVariable 'print', 'none'
+            v88 <- CallFunction v87, [v86]
+            v89 <- LoadString '--- use 2'
+            v90 <- CallFunction v87, [v89]
+            v91 <- CallFunction v87, []
+        EndIf
+        v92 <- GetProperty v9, 'use2'
+        v93 <- LoadUndefined
+        v94 <- Compare v92, '!==', v93
+        v95 <- GetProperty v9, 'use2'
+        v96 <- GetProperty v9, 'use1'
+        v97 <- TernaryOperation v94, v95, v96
+        v98 <- CreateNamedVariable 'use', 'var', v97
+        BeginForLoopInitializer
+            v99 <- LoadInteger '0'
+        BeginForLoopCondition -> v100
+            v101 <- Compare v100, '<', v12
+        BeginForLoopAfterthought v101 -> v102
+            v103 <- UnaryOperation v102, '++'
+        BeginForLoopBody -> v104
+            v105 <- GetComputedProperty v14, v104
+            v106 <- CallFunction v98, [v105, v104]
+            SetComputedProperty v16, v104, v106
+            v107 <- LoadInteger '2'
+            v108 <- Compare v6, '>=', v107
+            BeginIf v108
+                v109 <- GetComputedProperty v16, v104
+                v110 <- CreateNamedVariable 'print', 'none'
+                v111 <- CallFunction v110, [v109]
+            EndIf
+        EndForLoop
+    BeginCatch -> v112
+        BeginIf v6
+            v113 <- LoadString '--- incompatible use: '
+            v114 <- BinaryOperation v113, '+', v112
+            v115 <- CreateNamedVariable 'print', 'none'
+            v116 <- CallFunction v115, [v114]
+        EndIf
+    EndTryCatch
+    Return v16
+EndPlainFunction
+v117 <- LoadString 'none-to-double'
+v118 <- BeginPlainFunction -> v119
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v119
+    v120 <- EndObjectLiteral
+    Return v120
+EndPlainFunction
+v121 <- BeginPlainFunction -> v122
+    v123 <- LoadFloat '1.5'
+    v124 <- BinaryOperation v123, '+', v122
+    v125 <- CreateArray [v124]
+    Return v125
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v117
+    ObjectLiteralAddProperty `ctor`, v118
+    ObjectLiteralAddProperty `args`, v121
+v126 <- EndObjectLiteral
+v127 <- LoadString 'double'
+v128 <- BeginPlainFunction -> v129
+    BeginObjectLiteral
+    v130 <- EndObjectLiteral
+    v131 <- CreateNamedVariable 'o', 'var', v130
+    SetProperty v131, 'a', v129
+    Return v131
+EndPlainFunction
+v132 <- BeginPlainFunction -> v133
+    v134 <- LoadFloat '1.5'
+    v135 <- BinaryOperation v134, '+', v133
+    v136 <- CreateArray [v135]
+    Return v136
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v127
+    ObjectLiteralAddProperty `ctor`, v128
+    ObjectLiteralAddProperty `args`, v132
+v137 <- EndObjectLiteral
+v138 <- LoadString 'none-to-smi'
+v139 <- BeginPlainFunction -> v140
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v140
+    v141 <- EndObjectLiteral
+    Return v141
+EndPlainFunction
+v142 <- BeginPlainFunction -> v143
+    v144 <- CreateArray [v143]
+    Return v144
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v138
+    ObjectLiteralAddProperty `ctor`, v139
+    ObjectLiteralAddProperty `args`, v142
+v145 <- EndObjectLiteral
+v146 <- LoadString 'smi'
+v147 <- BeginPlainFunction -> v148
+    BeginObjectLiteral
+    v149 <- EndObjectLiteral
+    v150 <- CreateNamedVariable 'o', 'var', v149
+    SetProperty v150, 'a', v148
+    Return v150
+EndPlainFunction
+v151 <- BeginPlainFunction -> v152
+    v153 <- CreateArray [v152]
+    Return v153
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v146
+    ObjectLiteralAddProperty `ctor`, v147
+    ObjectLiteralAddProperty `args`, v151
+v154 <- EndObjectLiteral
+v155 <- LoadString 'none-to-object'
+v156 <- BeginPlainFunction -> v157
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v157
+    v158 <- EndObjectLiteral
+    Return v158
+EndPlainFunction
+v159 <- BeginPlainFunction -> v160
+    v161 <- LoadString 's'
+    v162 <- CreateArray [v161]
+    Return v162
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v155
+    ObjectLiteralAddProperty `ctor`, v156
+    ObjectLiteralAddProperty `args`, v159
+v163 <- EndObjectLiteral
+v164 <- LoadString 'object'
+v165 <- BeginPlainFunction -> v166
+    BeginObjectLiteral
+    v167 <- EndObjectLiteral
+    v168 <- CreateNamedVariable 'o', 'var', v167
+    SetProperty v168, 'a', v166
+    Return v168
+EndPlainFunction
+v169 <- BeginPlainFunction -> v170
+    v171 <- LoadString 's'
+    v172 <- CreateArray [v171]
+    Return v172
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v164
+    ObjectLiteralAddProperty `ctor`, v165
+    ObjectLiteralAddProperty `args`, v169
+v173 <- EndObjectLiteral
+v174 <- LoadString '{a:, b:, c:}'
+v175 <- BeginPlainFunction -> v176, v177, v178
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v176
+        ObjectLiteralAddProperty `b`, v177
+        ObjectLiteralAddProperty `c`, v178
+    v179 <- EndObjectLiteral
+    Return v179
+EndPlainFunction
+v180 <- BeginPlainFunction -> v181
+    v182 <- LoadFloat '1.5'
+    v183 <- BinaryOperation v182, '+', v181
+    v184 <- LoadFloat '1.6'
+    v185 <- LoadFloat '1.7'
+    v186 <- CreateArray [v183, v184, v185]
+    Return v186
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v174
+    ObjectLiteralAddProperty `ctor`, v175
+    ObjectLiteralAddProperty `args`, v180
+v187 <- EndObjectLiteral
+v188 <- LoadString '{a..h:}'
+v189 <- BeginPlainFunction -> v190
+    BeginObjectLiteral
+    v191 <- EndObjectLiteral
+    v192 <- CreateNamedVariable 'o', 'var', v191
+    SetProperty v192, 'a', v190
+    SetProperty v192, 'b', v190
+    SetProperty v192, 'c', v190
+    SetProperty v192, 'd', v190
+    SetProperty v192, 'e', v190
+    SetProperty v192, 'f', v190
+    SetProperty v192, 'g', v190
+    SetProperty v192, 'h', v190
+    Return v192
+EndPlainFunction
+v193 <- BeginPlainFunction -> v194
+    v195 <- LoadFloat '1.5'
+    v196 <- BinaryOperation v195, '+', v194
+    v197 <- CreateArray [v196]
+    Return v197
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v188
+    ObjectLiteralAddProperty `ctor`, v189
+    ObjectLiteralAddProperty `args`, v193
+v198 <- EndObjectLiteral
+v199 <- LoadString '1'
+v200 <- BeginPlainFunction -> v201
+    v202 <- LoadInteger '1'
+    v203 <- CreateNamedVariable 'o', 'var', v202
+    SetProperty v203, 'a', v201
+    Return v203
+EndPlainFunction
+v204 <- BeginPlainFunction -> v205
+    v206 <- LoadFloat '1.5'
+    v207 <- BinaryOperation v206, '+', v205
+    v208 <- CreateArray [v207]
+    Return v208
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v199
+    ObjectLiteralAddProperty `ctor`, v200
+    ObjectLiteralAddProperty `args`, v204
+v209 <- EndObjectLiteral
+v210 <- LoadString 'f()'
+v211 <- BeginPlainFunction -> v212
+    v213 <- BeginPlainFunction -> 
+        Return v212
+    EndPlainFunction
+    v214 <- CreateNamedVariable 'o', 'var', v213
+    SetProperty v214, 'a', v212
+    Return v214
+EndPlainFunction
+v215 <- BeginPlainFunction -> v216
+    v217 <- LoadFloat '1.5'
+    v218 <- BinaryOperation v217, '+', v216
+    v219 <- CreateArray [v218]
+    Return v219
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v210
+    ObjectLiteralAddProperty `ctor`, v211
+    ObjectLiteralAddProperty `args`, v215
+v220 <- EndObjectLiteral
+v221 <- LoadString 'f().bind'
+v222 <- BeginPlainFunction -> v223
+    v224 <- BeginPlainFunction -> v225, v226, v227
+        v228 <- BinaryOperation v225, '+', v226
+        v229 <- BinaryOperation v228, '+', v227
+        Return v229
+    EndPlainFunction
+    v230 <- CreateNamedVariable 'o', 'var', v224
+    v231 <- LoadInteger '1'
+    v232 <- BinaryOperation v223, '+', v231
+    v233 <- LoadFloat '2.2'
+    v234 <- BinaryOperation v223, '+', v233
+    v235 <- CallMethod v230, 'bind', [v230, v223, v232, v234]
+    Reassign v230, v235
+    Return v230
+EndPlainFunction
+v236 <- BeginPlainFunction -> v237
+    v238 <- LoadFloat '1.5'
+    v239 <- BinaryOperation v238, '+', v237
+    v240 <- CreateArray [v239]
+    Return v240
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v221
+    ObjectLiteralAddProperty `ctor`, v222
+    ObjectLiteralAddProperty `args`, v236
+v241 <- EndObjectLiteral
+v242 <- LoadString 'dictionary elements'
+v243 <- BeginPlainFunction -> v244
+    v245 <- CreateArray []
+    v246 <- CreateNamedVariable 'o', 'var', v245
+    SetElement v246, '1', v244
+    SetElement v246, '200000', v244
+    Return v246
+EndPlainFunction
+v247 <- BeginPlainFunction -> v248
+    v249 <- LoadFloat '1.5'
+    v250 <- BinaryOperation v249, '+', v248
+    v251 <- CreateArray [v250]
+    Return v251
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v242
+    ObjectLiteralAddProperty `ctor`, v243
+    ObjectLiteralAddProperty `args`, v247
+v252 <- EndObjectLiteral
+v253 <- LoadString 'json'
+v254 <- BeginPlainFunction -> v255
+    v256 <- LoadString '{"a":'
+    v257 <- BinaryOperation v256, '+', v255
+    v258 <- LoadString ',"b":'
+    v259 <- BinaryOperation v257, '+', v258
+    v260 <- BinaryOperation v259, '+', v255
+    v261 <- LoadString '}'
+    v262 <- BinaryOperation v260, '+', v261
+    v263 <- CreateNamedVariable 'json', 'var', v262
+    v264 <- CreateNamedVariable 'JSON', 'none'
+    v265 <- CallMethod v264, 'parse', [v263]
+    Return v265
+EndPlainFunction
+v266 <- BeginPlainFunction -> v267
+    v268 <- LoadFloat '1.5'
+    v269 <- BinaryOperation v268, '+', v267
+    v270 <- CreateArray [v269]
+    Return v270
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v253
+    ObjectLiteralAddProperty `ctor`, v254
+    ObjectLiteralAddProperty `args`, v266
+v271 <- EndObjectLiteral
+v272 <- LoadString 'fast accessors'
+v273 <- BeginPlainFunction -> 
+    v274 <- LoadThis
+    v275 <- GetProperty v274, 'a_'
+    Return v275
+EndPlainFunction
+v276 <- BeginPlainFunction -> v277
+    v278 <- LoadThis
+    SetProperty v278, 'a_', v277
+EndPlainFunction
+v279 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v273
+    ObjectLiteralAddProperty `set`, v276
+    ObjectLiteralAddProperty `configurable`, v279
+v280 <- EndObjectLiteral
+v281 <- BeginPlainFunction -> v282
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a_`, v282
+    v283 <- EndObjectLiteral
+    v284 <- CreateNamedVariable 'o', 'var', v283
+    v285 <- LoadString 'a'
+    v286 <- LoadThis
+    v287 <- GetProperty v286, 'accessor'
+    v288 <- CreateNamedVariable 'Object', 'none'
+    v289 <- CallMethod v288, 'defineProperty', [v284, v285, v287]
+    Return v284
+EndPlainFunction
+v290 <- BeginPlainFunction -> v291
+    v292 <- LoadFloat '1.5'
+    v293 <- BinaryOperation v292, '+', v291
+    v294 <- CreateArray [v293]
+    Return v294
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v272
+    ObjectLiteralAddProperty `accessor`, v280
+    ObjectLiteralAddProperty `ctor`, v281
+    ObjectLiteralAddProperty `args`, v290
+v295 <- EndObjectLiteral
+v296 <- LoadString 'slow accessor'
+v297 <- LoadThis
+v298 <- GetProperty v297, 'a_'
+v299 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v298
+    ObjectLiteralAddProperty `configurable`, v299
+v300 <- EndObjectLiteral
+v301 <- BeginPlainFunction -> 
+    v302 <- LoadThis
+    v303 <- GetProperty v302, 'a_'
+    Return v303
+EndPlainFunction
+v304 <- BeginPlainFunction -> v305
+    v306 <- LoadThis
+    SetProperty v306, 'a_', v305
+EndPlainFunction
+v307 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v301
+    ObjectLiteralAddProperty `set`, v304
+    ObjectLiteralAddProperty `configurable`, v307
+v308 <- EndObjectLiteral
+v309 <- BeginPlainFunction -> v310
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a_`, v310
+    v311 <- EndObjectLiteral
+    v312 <- CreateNamedVariable 'o', 'var', v311
+    v313 <- LoadString 'a'
+    v314 <- LoadThis
+    v315 <- GetProperty v314, 'accessor1'
+    v316 <- CreateNamedVariable 'Object', 'none'
+    v317 <- CallMethod v316, 'defineProperty', [v312, v313, v315]
+    v318 <- LoadString 'a'
+    v319 <- LoadThis
+    v320 <- GetProperty v319, 'accessor2'
+    v321 <- CallMethod v316, 'defineProperty', [v312, v318, v320]
+    Return v312
+EndPlainFunction
+v322 <- BeginPlainFunction -> v323
+    v324 <- LoadFloat '1.5'
+    v325 <- BinaryOperation v324, '+', v323
+    v326 <- CreateArray [v325]
+    Return v326
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v296
+    ObjectLiteralAddProperty `accessor1`, v300
+    ObjectLiteralAddProperty `accessor2`, v308
+    ObjectLiteralAddProperty `ctor`, v309
+    ObjectLiteralAddProperty `args`, v322
+v327 <- EndObjectLiteral
+v328 <- LoadString 'slow'
+BeginObjectLiteral
+v329 <- EndObjectLiteral
+v330 <- BeginPlainFunction -> v331
+    v332 <- LoadThis
+    v333 <- GetProperty v332, 'proto'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v333
+    v334 <- EndObjectLiteral
+    v335 <- CreateNamedVariable 'o', 'var', v334
+    SetProperty v335, 'a', v331
+    Return v335
+EndPlainFunction
+v336 <- BeginPlainFunction -> v337
+    v338 <- LoadFloat '1.5'
+    v339 <- BinaryOperation v338, '+', v337
+    v340 <- CreateArray [v339]
+    Return v340
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v328
+    ObjectLiteralAddProperty `proto`, v329
+    ObjectLiteralAddProperty `ctor`, v330
+    ObjectLiteralAddProperty `args`, v336
+v341 <- EndObjectLiteral
+v342 <- LoadString 'global'
+v343 <- BeginPlainFunction -> v344
+    Return v4
+EndPlainFunction
+v345 <- BeginPlainFunction -> v346
+    v347 <- CreateArray [v346]
+    Return v347
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v342
+    ObjectLiteralAddProperty `ctor`, v343
+    ObjectLiteralAddProperty `args`, v345
+v348 <- EndObjectLiteral
+v349 <- CreateArray [v126, v137, v145, v154, v163, v173, v187, v198, v209, v220, v241, v252, v271, v295, v327, v341, v348]
+v350 <- CreateNamedVariable 'ctors', 'var', v349
+v351 <- LoadString 'o.a+1.0'
+v352 <- BeginPlainFunction -> v353, v354
+    v355 <- GetProperty v353, 'a'
+    v356 <- LoadInteger '1'
+    v357 <- BinaryOperation v355, '+', v356
+    Return v357
+EndPlainFunction
+v358 <- BeginPlainFunction -> v359, v360
+    v361 <- GetProperty v359, 'a'
+    v362 <- LoadFloat '1.1'
+    v363 <- BinaryOperation v361, '+', v362
+    Return v363
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v351
+    ObjectLiteralAddProperty `use1`, v352
+    ObjectLiteralAddProperty `use2`, v358
+v364 <- EndObjectLiteral
+v365 <- LoadString 'o.b+1.0'
+v366 <- BeginPlainFunction -> v367, v368
+    v369 <- GetProperty v367, 'b'
+    v370 <- LoadInteger '1'
+    v371 <- BinaryOperation v369, '+', v370
+    Return v371
+EndPlainFunction
+v372 <- BeginPlainFunction -> v373, v374
+    v375 <- GetProperty v373, 'b'
+    v376 <- LoadFloat '1.1'
+    v377 <- BinaryOperation v375, '+', v376
+    Return v377
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v365
+    ObjectLiteralAddProperty `use1`, v366
+    ObjectLiteralAddProperty `use2`, v372
+v378 <- EndObjectLiteral
+v379 <- LoadString 'o[1]+1.0'
+v380 <- BeginPlainFunction -> v381, v382
+    v383 <- GetElement v381, '1'
+    v384 <- LoadInteger '1'
+    v385 <- BinaryOperation v383, '+', v384
+    Return v385
+EndPlainFunction
+v386 <- BeginPlainFunction -> v387, v388
+    v389 <- GetElement v387, '1'
+    v390 <- LoadFloat '1.1'
+    v391 <- BinaryOperation v389, '+', v390
+    Return v391
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v379
+    ObjectLiteralAddProperty `use1`, v380
+    ObjectLiteralAddProperty `use2`, v386
+v392 <- EndObjectLiteral
+v393 <- LoadString 'o[-1]+1.0'
+v394 <- BeginPlainFunction -> v395, v396
+    v397 <- LoadInteger '1'
+    v398 <- UnaryOperation '-', v397
+    v399 <- GetComputedProperty v395, v398
+    v400 <- LoadInteger '1'
+    v401 <- BinaryOperation v399, '+', v400
+    Return v401
+EndPlainFunction
+v402 <- BeginPlainFunction -> v403, v404
+    v405 <- LoadInteger '1'
+    v406 <- UnaryOperation '-', v405
+    v407 <- GetComputedProperty v403, v406
+    v408 <- LoadFloat '1.1'
+    v409 <- BinaryOperation v407, '+', v408
+    Return v409
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v393
+    ObjectLiteralAddProperty `use1`, v394
+    ObjectLiteralAddProperty `use2`, v402
+v410 <- EndObjectLiteral
+v411 <- LoadString '()'
+v412 <- BeginPlainFunction -> v413, v414
+    v415 <- CallFunction v413, []
+    v416 <- LoadInteger '1'
+    v417 <- BinaryOperation v415, '+', v416
+    Return v417
+EndPlainFunction
+v418 <- BeginPlainFunction -> v419, v420
+    v421 <- CallFunction v419, []
+    v422 <- LoadFloat '1.1'
+    v423 <- BinaryOperation v421, '+', v422
+    Return v423
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v411
+    ObjectLiteralAddProperty `use1`, v412
+    ObjectLiteralAddProperty `use2`, v418
+v424 <- EndObjectLiteral
+v425 <- CreateArray [v364, v378, v392, v410, v424]
+v426 <- CreateNamedVariable 'uses', 'var', v425
+v427 <- LoadString 'to smi'
+v428 <- BeginPlainFunction -> v429, v430
+    v431 <- LoadInteger '0'
+    v432 <- Compare v430, '==', v431
+    BeginIf v432
+        v433 <- LoadInteger '1'
+        SetProperty v429, 'a', v433
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v427
+    ObjectLiteralAddProperty `migr`, v428
+v434 <- EndObjectLiteral
+v435 <- LoadString 'to double'
+v436 <- BeginPlainFunction -> v437, v438
+    v439 <- LoadInteger '0'
+    v440 <- Compare v438, '==', v439
+    BeginIf v440
+        v441 <- LoadFloat '1.1'
+        SetProperty v437, 'a', v441
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v435
+    ObjectLiteralAddProperty `migr`, v436
+v442 <- EndObjectLiteral
+v443 <- LoadString 'to object'
+v444 <- BeginPlainFunction -> v445, v446
+    v447 <- LoadInteger '0'
+    v448 <- Compare v446, '==', v447
+    BeginIf v448
+        BeginObjectLiteral
+        v449 <- EndObjectLiteral
+        SetProperty v445, 'a', v449
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v443
+    ObjectLiteralAddProperty `migr`, v444
+v450 <- EndObjectLiteral
+v451 <- LoadString 'set prototype {}'
+v452 <- BeginPlainFunction -> v453, v454
+    BeginObjectLiteral
+    v455 <- EndObjectLiteral
+    SetProperty v453, '__proto__', v455
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v451
+    ObjectLiteralAddProperty `migr`, v452
+v456 <- EndObjectLiteral
+v457 <- LoadString 'modify prototype'
+v458 <- BeginPlainFunction -> v459, v460
+    v461 <- LoadInteger '0'
+    v462 <- Compare v460, '==', v461
+    BeginIf v462
+        v463 <- LoadUndefined
+        v464 <- LoadInteger '5'
+        v465 <- CreateArray [v463, v463, v463, v464, v463, v463]
+        v466 <- GetProperty v459, '__proto__'
+        SetProperty v466, '__proto1__', v465
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v457
+    ObjectLiteralAddProperty `migr`, v458
+v467 <- EndObjectLiteral
+v468 <- LoadString 'freeze prototype'
+v469 <- BeginPlainFunction -> v470, v471
+    v472 <- LoadInteger '0'
+    v473 <- Compare v471, '==', v472
+    BeginIf v473
+        v474 <- GetProperty v470, '__proto__'
+        v475 <- CreateNamedVariable 'Object', 'none'
+        v476 <- CallMethod v475, 'freeze', [v474]
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v468
+    ObjectLiteralAddProperty `migr`, v469
+v477 <- EndObjectLiteral
+v478 <- LoadString 'delete and re-add property'
+v479 <- BeginPlainFunction -> v480, v481
+    v482 <- GetProperty v480, 'a'
+    v483 <- CreateNamedVariable 'v', 'var', v482
+    v484 <- DeleteProperty v480, 'a'
+    SetProperty v480, 'a', v483
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v478
+    ObjectLiteralAddProperty `migr`, v479
+v485 <- EndObjectLiteral
+v486 <- LoadString 'modify prototype'
+v487 <- BeginPlainFunction -> v488, v489
+    v490 <- LoadInteger '0'
+    v491 <- Compare v489, '>=', v490
+    BeginIf v491
+        BeginObjectLiteral
+        v492 <- EndObjectLiteral
+        SetProperty v488, '__proto__', v492
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v486
+    ObjectLiteralAddProperty `migr`, v487
+v493 <- EndObjectLiteral
+v494 <- LoadString 'set property callback'
+v495 <- BeginPlainFunction -> v496, v497
+    v498 <- LoadString 'a'
+    v499 <- BeginPlainFunction -> 
+        v500 <- LoadFloat '1.5'
+        v501 <- BinaryOperation v500, '+', v497
+        Return v501
+    EndPlainFunction
+    v502 <- BeginPlainFunction -> v503
+    EndPlainFunction
+    v504 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v499
+        ObjectLiteralAddProperty `set`, v502
+        ObjectLiteralAddProperty `configurable`, v504
+    v505 <- EndObjectLiteral
+    v506 <- CreateNamedVariable 'Object', 'none'
+    v507 <- CallMethod v506, 'defineProperty', [v496, v498, v505]
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v494
+    ObjectLiteralAddProperty `migr`, v495
+v508 <- EndObjectLiteral
+v509 <- LoadString 'seal'
+v510 <- BeginPlainFunction -> v511, v512
+    v513 <- CreateNamedVariable 'Object', 'none'
+    v514 <- CallMethod v513, 'seal', [v511]
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v509
+    ObjectLiteralAddProperty `migr`, v510
+v515 <- EndObjectLiteral
+v516 <- LoadString 'freeze'
+v517 <- BeginPlainFunction -> v518, v519
+    v520 <- CreateNamedVariable 'Object', 'none'
+    v521 <- CallMethod v520, 'freeze', [v518]
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `name`, v516
+    ObjectLiteralAddProperty `migr`, v517
+v522 <- EndObjectLiteral
+v523 <- CreateArray [v434, v442, v450, v456, v467, v477, v485, v493, v508, v515, v522]
+v524 <- CreateNamedVariable 'migrations', 'var', v523
+v525 <- BeginPlainFunction -> v526
+    v527 <- BeginPlainFunction -> v528
+        v529 <- BeginPlainFunction -> v530
+            v531 <- CallFunction v7, [v530, v528, v526]
+        EndPlainFunction
+        v532 <- CallMethod v350, 'forEach', [v529]
+    EndPlainFunction
+    v533 <- CallMethod v426, 'forEach', [v527]
+EndPlainFunction
+v534 <- CallMethod v524, 'forEach', [v525]
+
+
+const t0 = Function("return this");
+var global = t0();
+var verbose = 0;
+function test(a8, a9, a10) {
+    var n = 5;
+    var objects = [];
+    var results = [];
+    if (verbose) {
+        print();
+        print("===========================================================");
+        print((((("=== " + a8.name) + " | ") + a9.name) + " |--> ") + a10.name);
+        print("===========================================================");
+    }
+    gc();
+    gc();
+    gc();
+    if (verbose) {
+        print("-----------------------------");
+        print("--- construct");
+        print();
+    }
+    for (let i46 = 0; i46 < n; i46++) {
+        const v51 = a8.args(i46);
+        objects[i46] = a8.ctor.apply(a8, v51);
+    }
+    try {
+        if (verbose) {
+            print("-----------------------------");
+            print("--- use 1");
+            print();
+        }
+        var use = a9.use1;
+        for (let i63 = 0; i63 < n; i63++) {
+            results[i63] = use(objects[i63], i63);
+        }
+        if (verbose) {
+            print("-----------------------------");
+            print("--- trigger migration");
+            print();
+        }
+        var migr = a10.migr;
+        for (let i79 = 0; i79 < n; i79++) {
+            migr(objects[i79], i79);
+        }
+        if (verbose) {
+            print("-----------------------------");
+            print("--- use 2");
+            print();
+        }
+        var use = a9.use2 !== undefined ? a9.use2 : a9.use1;
+        for (let i100 = 0; i100 < n; i100++) {
+            results[i100] = use(objects[i100], i100);
+            if (verbose >= 2) {
+                print(results[i100]);
+            }
+        }
+    } catch(e112) {
+        if (verbose) {
+            print("--- incompatible use: " + e112);
+        }
+    }
+    return results;
+}
+function f118(a119) {
+    return { a: a119 };
+}
+function f121(a122) {
+    return [1.5 + a122];
+}
+const v126 = { name: "none-to-double", ctor: f118, args: f121 };
+function f128(a129) {
+    var o = {};
+    o.a = a129;
+    return o;
+}
+function f132(a133) {
+    return [1.5 + a133];
+}
+const v137 = { name: "double", ctor: f128, args: f132 };
+function f139(a140) {
+    return { a: a140 };
+}
+function f142(a143) {
+    return [a143];
+}
+const v145 = { name: "none-to-smi", ctor: f139, args: f142 };
+function f147(a148) {
+    var o = {};
+    o.a = a148;
+    return o;
+}
+function f151(a152) {
+    return [a152];
+}
+const v154 = { name: "smi", ctor: f147, args: f151 };
+function f156(a157) {
+    return { a: a157 };
+}
+function f159(a160) {
+    return ["s"];
+}
+const v163 = { name: "none-to-object", ctor: f156, args: f159 };
+function f165(a166) {
+    var o = {};
+    o.a = a166;
+    return o;
+}
+function f169(a170) {
+    return ["s"];
+}
+const v173 = { name: "object", ctor: f165, args: f169 };
+function f175(a176, a177, a178) {
+    return { a: a176, b: a177, c: a178 };
+}
+function f180(a181) {
+    return [1.5 + a181,1.6,1.7];
+}
+const v187 = { name: "{a:, b:, c:}", ctor: f175, args: f180 };
+function f189(a190) {
+    var o = {};
+    o.a = a190;
+    o.b = a190;
+    o.c = a190;
+    o.d = a190;
+    o.e = a190;
+    o.f = a190;
+    o.g = a190;
+    o.h = a190;
+    return o;
+}
+function f193(a194) {
+    return [1.5 + a194];
+}
+const v198 = { name: "{a..h:}", ctor: f189, args: f193 };
+function f200(a201) {
+    var o = 1;
+    o.a = a201;
+    return o;
+}
+function f204(a205) {
+    return [1.5 + a205];
+}
+const v209 = { name: "1", ctor: f200, args: f204 };
+function f211(a212) {
+    function f213() {
+        return a212;
+    }
+    var o = f213;
+    o.a = a212;
+    return o;
+}
+function f215(a216) {
+    return [1.5 + a216];
+}
+const v220 = { name: "f()", ctor: f211, args: f215 };
+function f222(a223) {
+    function f224(a225, a226, a227) {
+        return (a225 + a226) + a227;
+    }
+    var o = f224;
+    return o = o.bind(o, a223, a223 + 1, a223 + 2.2);
+}
+function f236(a237) {
+    return [1.5 + a237];
+}
+const v241 = { name: "f().bind", ctor: f222, args: f236 };
+function f243(a244) {
+    var o = [];
+    o[1] = a244;
+    o[200000] = a244;
+    return o;
+}
+function f247(a248) {
+    return [1.5 + a248];
+}
+const v252 = { name: "dictionary elements", ctor: f243, args: f247 };
+function f254(a255) {
+    var json = ((("{"a":" + a255) + ","b":") + a255) + "}";
+    return JSON.parse(json);
+}
+function f266(a267) {
+    return [1.5 + a267];
+}
+const v271 = { name: "json", ctor: f254, args: f266 };
+function f273() {
+    return this.a_;
+}
+function f276(a277) {
+    this.a_ = a277;
+}
+const v280 = { get: f273, set: f276, configurable: true };
+function f281(a282) {
+    var o = { a_: a282 };
+    Object.defineProperty(o, "a", this.accessor);
+    return o;
+}
+function f290(a291) {
+    return [1.5 + a291];
+}
+const v295 = { name: "fast accessors", accessor: v280, ctor: f281, args: f290 };
+const v298 = this.a_;
+const v300 = { value: v298, configurable: true };
+function f301() {
+    return this.a_;
+}
+function f304(a305) {
+    this.a_ = a305;
+}
+const v308 = { get: f301, set: f304, configurable: true };
+function f309(a310) {
+    var o = { a_: a310 };
+    Object.defineProperty(o, "a", this.accessor1);
+    Object.defineProperty(o, "a", this.accessor2);
+    return o;
+}
+function f322(a323) {
+    return [1.5 + a323];
+}
+const v327 = {
+    name: "slow accessor",
+    accessor1: v300,
+    accessor2: v308,
+    ctor: f309,
+    args: f322,
+};
+const v329 = {};
+function f330(a331) {
+    const v333 = this.proto;
+    var o = { __proto__: v333 };
+    o.a = a331;
+    return o;
+}
+function f336(a337) {
+    return [1.5 + a337];
+}
+const v341 = { name: "slow", proto: v329, ctor: f330, args: f336 };
+function f343(a344) {
+    return global;
+}
+function f345(a346) {
+    return [a346];
+}
+var ctors = [v126,v137,v145,v154,v163,v173,v187,v198,v209,v220,v241,v252,v271,v295,v327,v341,{ name: "global", ctor: f343, args: f345 }];
+function f352(a353, a354) {
+    return a353.a + 1;
+}
+function f358(a359, a360) {
+    return a359.a + 1.1;
+}
+const v364 = { name: "o.a+1.0", use1: f352, use2: f358 };
+function f366(a367, a368) {
+    return a367.b + 1;
+}
+function f372(a373, a374) {
+    return a373.b + 1.1;
+}
+const v378 = { name: "o.b+1.0", use1: f366, use2: f372 };
+function f380(a381, a382) {
+    return a381[1] + 1;
+}
+function f386(a387, a388) {
+    return a387[1] + 1.1;
+}
+const v392 = { name: "o[1]+1.0", use1: f380, use2: f386 };
+function f394(a395, a396) {
+    return a395[-1] + 1;
+}
+function f402(a403, a404) {
+    return a403[-1] + 1.1;
+}
+const v410 = { name: "o[-1]+1.0", use1: f394, use2: f402 };
+function f412(a413, a414) {
+    return a413() + 1;
+}
+function f418(a419, a420) {
+    return a419() + 1.1;
+}
+var uses = [v364,v378,v392,v410,{ name: "()", use1: f412, use2: f418 }];
+function f428(a429, a430) {
+    if (a430 == 0) {
+        a429.a = 1;
+    }
+}
+const v434 = { name: "to smi", migr: f428 };
+function f436(a437, a438) {
+    if (a438 == 0) {
+        a437.a = 1.1;
+    }
+}
+const v442 = { name: "to double", migr: f436 };
+function f444(a445, a446) {
+    if (a446 == 0) {
+        a445.a = {};
+    }
+}
+const v450 = { name: "to object", migr: f444 };
+function f452(a453, a454) {
+    a453.__proto__ = {};
+}
+const v456 = { name: "set prototype {}", migr: f452 };
+function f458(a459, a460) {
+    if (a460 == 0) {
+        const v465 = [,,,5,,,];
+        const t303 = a459.__proto__;
+        t303.__proto1__ = v465;
+    }
+}
+const v467 = { name: "modify prototype", migr: f458 };
+function f469(a470, a471) {
+    if (a471 == 0) {
+        Object.freeze(a470.__proto__);
+    }
+}
+const v477 = { name: "freeze prototype", migr: f469 };
+function f479(a480, a481) {
+    var v = a480.a;
+    delete a480.a;
+    a480.a = v;
+}
+const v485 = { name: "delete and re-add property", migr: f479 };
+function f487(a488, a489) {
+    if (a489 >= 0) {
+        a488.__proto__ = {};
+    }
+}
+const v493 = { name: "modify prototype", migr: f487 };
+function f495(a496, a497) {
+    function f499() {
+        return 1.5 + a497;
+    }
+    function f502(a503) {
+    }
+    Object.defineProperty(a496, "a", { get: f499, set: f502, configurable: true });
+}
+const v508 = { name: "set property callback", migr: f495 };
+function f510(a511, a512) {
+    Object.seal(a511);
+}
+const v515 = { name: "seal", migr: f510 };
+function f517(a518, a519) {
+    Object.freeze(a518);
+}
+var migrations = [v434,v442,v450,v456,v467,v477,v485,v493,v508,v515,{ name: "freeze", migr: f517 }];
+function f525(a526) {
+    function f527(a528) {
+        function f529(a530) {
+            test(a530, a528, a526);
+        }
+        ctors.forEach(f529);
+    }
+    uses.forEach(f527);
+}
+migrations.forEach(f525);
+
+FuzzIL program written to corpus/migrations.fzil

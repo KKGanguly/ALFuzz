@@ -1,0 +1,81 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'stack'
+    v3 <- CreateNamedVariable 'Object', 'none'
+    v4 <- CallMethod v3, 'getOwnPropertyDescriptor', [v1, v2]
+    v5 <- CreateNamedVariable 'desc1', 'var', v4
+    v6 <- LoadString 'stack'
+    v7 <- GetProperty v5, 'get'
+    v8 <- GetProperty v5, 'set'
+    v9 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v7
+        ObjectLiteralAddProperty `set`, v8
+        ObjectLiteralAddProperty `configurable`, v9
+    v10 <- EndObjectLiteral
+    v11 <- CallMethod v3, 'defineProperty', [v1, v6, v10]
+    v12 <- LoadString 'stack'
+    v13 <- CallMethod v3, 'getOwnPropertyDescriptor', [v1, v12]
+    v14 <- CreateNamedVariable 'desc2', 'var', v13
+    v15 <- GetProperty v14, 'configurable'
+    v16 <- GetProperty v5, 'get'
+    v17 <- GetProperty v14, 'get'
+    v18 <- GetProperty v14, 'get'
+    v19 <- GetProperty v14, 'get'
+EndPlainFunction
+v20 <- BeginPlainFunction -> 
+    v21 <- BeginPlainFunction -> 
+        v22 <- CallFunction v21, []
+    EndPlainFunction
+    BeginTry
+        v23 <- CallFunction v21, []
+    BeginCatch -> v24
+        Return v24
+    EndTryCatch
+EndPlainFunction
+v25 <- BeginPlainFunction -> 
+    BeginTry
+        v26 <- CreateNamedVariable 'g', 'none'
+        v27 <- CallFunction v26, []
+    BeginCatch -> v28
+        Return v28
+    EndTryCatch
+EndPlainFunction
+v29 <- CallFunction v25, []
+v30 <- CallFunction v0, [v29]
+v31 <- CallFunction v20, []
+v32 <- CallFunction v0, [v31]
+
+
+function testError(a1) {
+    var desc1 = Object.getOwnPropertyDescriptor(a1, "stack");
+    const v7 = desc1.get;
+    const v8 = desc1.set;
+    Object.defineProperty(a1, "stack", { get: v7, set: v8, configurable: false });
+    var desc2 = Object.getOwnPropertyDescriptor(a1, "stack");
+    desc2.configurable;
+    desc1.get;
+    desc2.get;
+    desc2.get;
+    desc2.get;
+}
+function stackOverflow() {
+    function f() {
+        f();
+    }
+    try {
+        f();
+    } catch(e24) {
+        return e24;
+    }
+}
+function referenceError() {
+    try {
+        g();
+    } catch(e28) {
+        return e28;
+    }
+}
+testError(referenceError());
+testError(stackOverflow());
+
+FuzzIL program written to corpus/regress-3404.fzil

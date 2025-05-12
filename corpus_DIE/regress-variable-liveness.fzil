@@ -1,0 +1,56 @@
+v0 <- BeginPlainFunction -> v1
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'Array', 'none'
+    v4 <- LoadInteger '2'
+    v5 <- Construct v3, [v4]
+    v6 <- CreateNamedVariable 'line', 'var', v5
+    BeginForLoopInitializer
+        v7 <- LoadInteger '3'
+    BeginForLoopCondition -> v8
+        v9 <- LoadInteger '0'
+        v10 <- Compare v8, '>', v9
+    BeginForLoopAfterthought v10 -> v11
+        v12 <- LoadInteger '1'
+        v13 <- BinaryOperation v11, '-', v12
+        Reassign v11, v13
+    BeginForLoopBody -> v14
+        v15 <- GetProperty v6, 'length'
+        v16 <- CallFunction v0, [v15]
+        v17 <- Compare v14, '<', v16
+        BeginIf v17
+            v18 <- Construct v3, [v14]
+            Reassign v6, v18
+        EndIf
+        SetElement v6, '0', v14
+    EndForLoop
+EndPlainFunction
+v19 <- LoadInteger '0'
+v20 <- Void_ v19
+v21 <- CallFunction v2, []
+v22 <- LoadInteger '0'
+v23 <- Void_ v22
+v24 <- CallFunction v2, []
+
+
+function foo(a1) {
+    return a1;
+}
+function run() {
+    const v5 = new Array(2);
+    var line = v5;
+    for (let i8 = 3; i8 > 0; i8 = i8 - 1) {
+        if (i8 < foo(line.length)) {
+            const v18 = new Array(i8);
+            line = v18;
+        }
+        line[0] = i8;
+    }
+}
+void 0;
+run();
+void 0;
+run();
+
+FuzzIL program written to corpus/regress-variable-liveness.fzil

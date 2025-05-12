@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+v1 <- EndObjectLiteral
+v2 <- CallMethod v0, 'bind', [v1]
+v3 <- CreateNamedVariable 'fb', 'var', v2
+v4 <- LoadString 'bound f'
+v5 <- GetProperty v3, 'name'
+v6 <- LoadString 'name'
+v7 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'defineProperty', [v0, v6, v8]
+BeginObjectLiteral
+v11 <- EndObjectLiteral
+v12 <- CallMethod v0, 'bind', [v11]
+v13 <- CreateNamedVariable 'fb2', 'var', v12
+v14 <- LoadString 'bound '
+v15 <- GetProperty v13, 'name'
+v16 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+v17 <- EndObjectLiteral
+v18 <- CallMethod v16, 'bind', [v17]
+v19 <- CreateNamedVariable 'gb', 'var', v18
+v20 <- LoadString 'bound g'
+v21 <- GetProperty v19, 'name'
+v22 <- LoadString 'bound f'
+v23 <- GetProperty v3, 'name'
+
+
+function f() {
+}
+var fb = f.bind({});
+fb.name;
+Object.defineProperty(f, "name", { value: 42 });
+var fb2 = f.bind({});
+fb2.name;
+function g() {
+}
+var gb = g.bind({});
+gb.name;
+fb.name;
+
+FuzzIL program written to corpus/function-bind-name.fzil

@@ -1,0 +1,135 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'length'
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- GetProperty v4, 'length'
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7
+    v8 <- GetProperty v7, 'length'
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    v11 <- GetProperty v10, 'length'
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '0'
+v13 <- CreateArray []
+v14 <- CallFunction v0, [v13]
+v15 <- LoadInteger '1'
+v16 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v16
+v17 <- EndObjectLiteral
+v18 <- CallFunction v0, [v17]
+v19 <- LoadInteger '2'
+v20 <- LoadInteger '1'
+v21 <- LoadInteger '2'
+v22 <- CreateArray [v20, v21]
+v23 <- CallFunction v0, [v22]
+v24 <- LoadInteger '3'
+v25 <- LoadString '123'
+v26 <- CallFunction v0, [v25]
+v27 <- LoadInteger '0'
+v28 <- LoadString ''
+v29 <- CallFunction v3, [v28]
+v30 <- LoadInteger '1'
+v31 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v31
+v32 <- EndObjectLiteral
+v33 <- CallFunction v3, [v32]
+v34 <- LoadInteger '2'
+v35 <- LoadString '12'
+v36 <- CallFunction v3, [v35]
+v37 <- LoadInteger '3'
+v38 <- LoadInteger '1'
+v39 <- LoadInteger '2'
+v40 <- LoadInteger '3'
+v41 <- CreateArray [v38, v39, v40]
+v42 <- CallFunction v3, [v41]
+v43 <- LoadInteger '0'
+v44 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v44
+v45 <- EndObjectLiteral
+v46 <- CallFunction v6, [v45]
+v47 <- LoadInteger '1'
+v48 <- LoadInteger '1'
+v49 <- CreateArray [v48]
+v50 <- CallFunction v6, [v49]
+v51 <- LoadInteger '2'
+v52 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v52
+v53 <- EndObjectLiteral
+v54 <- CallFunction v6, [v53]
+v55 <- LoadInteger '3'
+v56 <- LoadInteger '1'
+v57 <- LoadInteger '2'
+v58 <- LoadInteger '3'
+v59 <- CreateArray [v56, v57, v58]
+v60 <- CallFunction v6, [v59]
+v61 <- LoadInteger '4'
+v62 <- LoadString '1234'
+v63 <- CallFunction v6, [v62]
+v64 <- LoadInteger '0'
+v65 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v65
+v66 <- EndObjectLiteral
+v67 <- CallFunction v9, [v66]
+v68 <- LoadInteger '1'
+v69 <- LoadString '1'
+v70 <- CallFunction v9, [v69]
+v71 <- LoadInteger '2'
+v72 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v72
+v73 <- EndObjectLiteral
+v74 <- CallFunction v9, [v73]
+v75 <- LoadInteger '3'
+v76 <- LoadString '123'
+v77 <- CallFunction v9, [v76]
+v78 <- LoadInteger '4'
+v79 <- LoadInteger '1'
+v80 <- LoadInteger '2'
+v81 <- LoadInteger '3'
+v82 <- LoadInteger '4'
+v83 <- CreateArray [v79, v80, v81, v82]
+v84 <- CallFunction v9, [v83]
+
+
+function len0(a1) {
+    return a1.length;
+}
+function len1(a4) {
+    return a4.length;
+}
+function len2(a7) {
+    return a7.length;
+}
+function len3(a10) {
+    return a10.length;
+}
+len0([]);
+len0({ length: 1 });
+len0([1,2]);
+len0("123");
+len1("");
+len1({ length: 1 });
+len1("12");
+len1([1,2,3]);
+len2({ length: 0 });
+len2([1]);
+len2({ length: 2 });
+len2([1,2,3]);
+len2("1234");
+len3({ length: 0 });
+len3("1");
+len3({ length: 2 });
+len3("123");
+len3([1,2,3,4]);
+
+FuzzIL program written to corpus/regress-666721.fzil

@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '2147483648'
+    v3 <- BinaryOperation v1, '|', v2
+    Reassign v1, v3
+    v4 <- LoadInteger '65535'
+    v5 <- BinaryOperation v1, '+', v4
+    v6 <- LoadInteger '8'
+    v7 <- CreateNamedVariable 'Number', 'none'
+    v8 <- CallMethod v7, 'parseInt', [v5, v6]
+    Return v8
+EndPlainFunction
+v9 <- LoadInteger '72161'
+v10 <- UnaryOperation '-', v9
+v11 <- CallFunction v0, []
+v12 <- LoadInteger '72161'
+v13 <- UnaryOperation '-', v12
+v14 <- CallFunction v0, []
+v15 <- LoadInteger '72161'
+v16 <- UnaryOperation '-', v15
+v17 <- CallFunction v0, []
+
+
+function foo(a1) {
+    return Number.parseInt((a1 = a1 | 2147483648) + 65535, 8);
+}
+-72161;
+foo();
+-72161;
+foo();
+-72161;
+foo();
+
+FuzzIL program written to corpus/regress-838766.fzil

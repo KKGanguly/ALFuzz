@@ -1,0 +1,232 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadString 'abc'
+        v4 <- CallMethod v3, 'concat', []
+        Return v4
+    EndPlainFunction
+    v5 <- LoadString 'abc'
+    v6 <- CallFunction v1, []
+    v7 <- LoadString 'abc'
+    v8 <- CallFunction v1, []
+    v9 <- LoadString 'abc'
+    v10 <- CallFunction v1, []
+EndArrowFunction
+v11 <- CallFunction v0, []
+v12 <- BeginArrowFunction -> 
+    v13 <- BeginPlainFunction -> v14
+        v15 <- LoadString 'abc'
+        v16 <- CallMethod v15, 'concat', [v14]
+        Return v16
+    EndPlainFunction
+    v17 <- LoadString 'abcde'
+    v18 <- LoadString 'de'
+    v19 <- CallFunction v13, [v18]
+    v20 <- LoadString 'abcde'
+    v21 <- LoadString 'de'
+    v22 <- CallFunction v13, [v21]
+    v23 <- LoadString 'abcde'
+    v24 <- LoadString 'de'
+    v25 <- CallFunction v13, [v24]
+EndArrowFunction
+v26 <- CallFunction v12, []
+v27 <- BeginArrowFunction -> 
+    v28 <- BeginPlainFunction -> v29
+        v30 <- LoadString 'abc'
+        v31 <- CallMethod v30, 'concat', [v29]
+        Return v31
+    EndPlainFunction
+    v32 <- LoadString 'abcde'
+    v33 <- LoadString 'de'
+    v34 <- CallFunction v28, [v33]
+    v35 <- LoadString 'abcde'
+    v36 <- LoadString 'de'
+    v37 <- CallFunction v28, [v36]
+    v38 <- LoadString 'abc1'
+    v39 <- LoadInteger '1'
+    v40 <- CallFunction v28, [v39]
+EndArrowFunction
+v41 <- CallFunction v27, []
+v42 <- BeginArrowFunction -> 
+    v43 <- BeginPlainFunction -> v44
+        v45 <- LoadString 'abc'
+        v46 <- CallMethod v45, 'concat', [v44]
+        Return v46
+    EndPlainFunction
+    v47 <- LoadString 'abcde'
+    v48 <- LoadString 'de'
+    v49 <- CallFunction v43, [v48]
+    v50 <- LoadString 'abcde'
+    v51 <- LoadString 'de'
+    v52 <- CallFunction v43, [v51]
+    v53 <- LoadInteger '4294967295'
+    v54 <- LoadString 'x'
+    v55 <- CallMethod v54, 'repeat', [v53]
+    v56 <- CreateNamedVariable 's', 'var', v55
+    v57 <- BeginArrowFunction -> 
+        v58 <- CallFunction v43, [v56]
+        Return v58
+    EndArrowFunction
+    v59 <- CallFunction v57, []
+    v60 <- CreateNamedVariable 'RangeError', 'none'
+EndArrowFunction
+v61 <- CallFunction v42, []
+v62 <- BeginArrowFunction -> 
+    v63 <- BeginPlainFunction -> v64
+        v65 <- LoadString 'c'
+        v66 <- LoadString 'ab'
+        v67 <- CallMethod v66, 'concat', [v65]
+        Return v67
+    EndPlainFunction
+    v68 <- LoadString 'abc'
+    v69 <- CallFunction v63, []
+    v70 <- LoadString 'abc'
+    v71 <- CallFunction v63, []
+    v72 <- LoadString 'abc'
+    v73 <- CallFunction v63, []
+EndArrowFunction
+v74 <- CallFunction v62, []
+v75 <- BeginArrowFunction -> 
+    v76 <- BeginPlainFunction -> v77
+        v78 <- LoadString 'c'
+        v79 <- LoadString 'ab'
+        v80 <- CallMethod v79, 'concat', [v78, v77]
+        Return v80
+    EndPlainFunction
+    v81 <- LoadString 'abcde'
+    v82 <- LoadString 'de'
+    v83 <- CallFunction v76, [v82]
+    v84 <- LoadString 'abcde'
+    v85 <- LoadString 'de'
+    v86 <- CallFunction v76, [v85]
+    v87 <- LoadString 'abcde'
+    v88 <- LoadString 'de'
+    v89 <- CallFunction v76, [v88]
+EndArrowFunction
+v90 <- CallFunction v75, []
+v91 <- BeginArrowFunction -> 
+    v92 <- BeginPlainFunction -> v93
+        v94 <- LoadString 'c'
+        v95 <- LoadString 'ab'
+        v96 <- CallMethod v95, 'concat', [v94, v93]
+        Return v96
+    EndPlainFunction
+    v97 <- LoadString 'abcde'
+    v98 <- LoadString 'de'
+    v99 <- CallFunction v92, [v98]
+    v100 <- LoadString 'abcde'
+    v101 <- LoadString 'de'
+    v102 <- CallFunction v92, [v101]
+    v103 <- LoadString 'abc1'
+    v104 <- LoadInteger '1'
+    v105 <- CallFunction v92, [v104]
+EndArrowFunction
+v106 <- CallFunction v91, []
+v107 <- BeginArrowFunction -> 
+    v108 <- BeginPlainFunction -> v109
+        v110 <- LoadString 'c'
+        v111 <- LoadString 'ab'
+        v112 <- CallMethod v111, 'concat', [v110, v109]
+        Return v112
+    EndPlainFunction
+    v113 <- LoadString 'abcde'
+    v114 <- LoadString 'de'
+    v115 <- CallFunction v108, [v114]
+    v116 <- LoadString 'abcde'
+    v117 <- LoadString 'de'
+    v118 <- CallFunction v108, [v117]
+    v119 <- LoadInteger '4294967295'
+    v120 <- LoadString 'x'
+    v121 <- CallMethod v120, 'repeat', [v119]
+    v122 <- CreateNamedVariable 's', 'var', v121
+    v123 <- BeginArrowFunction -> 
+        v124 <- CallFunction v108, [v122]
+        Return v124
+    EndArrowFunction
+    v125 <- CallFunction v123, []
+    v126 <- CreateNamedVariable 'RangeError', 'none'
+EndArrowFunction
+v127 <- CallFunction v107, []
+
+
+const v0 = () => {
+    function f(a2) {
+        return ("abc").concat();
+    }
+    f();
+    f();
+    f();
+};
+v0();
+const v12 = () => {
+    function f(a14) {
+        return ("abc").concat(a14);
+    }
+    f("de");
+    f("de");
+    f("de");
+};
+v12();
+const v27 = () => {
+    function f(a29) {
+        return ("abc").concat(a29);
+    }
+    f("de");
+    f("de");
+    f(1);
+};
+v27();
+const v42 = () => {
+    function f(a44) {
+        return ("abc").concat(a44);
+    }
+    f("de");
+    f("de");
+    var s = ("x").repeat(4294967295);
+    const v57 = () => {
+        return f(s);
+    };
+    v57();
+};
+v42();
+const v62 = () => {
+    function f(a64) {
+        return ("ab").concat("c");
+    }
+    f();
+    f();
+    f();
+};
+v62();
+const v75 = () => {
+    function f(a77) {
+        return ("ab").concat("c", a77);
+    }
+    f("de");
+    f("de");
+    f("de");
+};
+v75();
+const v91 = () => {
+    function f(a93) {
+        return ("ab").concat("c", a93);
+    }
+    f("de");
+    f("de");
+    f(1);
+};
+v91();
+const v107 = () => {
+    function f(a109) {
+        return ("ab").concat("c", a109);
+    }
+    f("de");
+    f("de");
+    var s = ("x").repeat(4294967295);
+    const v123 = () => {
+        return f(s);
+    };
+    v123();
+};
+v107();
+
+FuzzIL program written to corpus/string-concat-deopt.fzil

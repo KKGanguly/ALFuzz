@@ -1,0 +1,178 @@
+v0 <- LoadInteger '1024'
+v1 <- CreateNamedVariable 'size', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadString 'A'
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadString 'ሴ'
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadString ''
+    v8 <- CreateNamedVariable 'str', 'var', v7
+    BeginForLoopInitializer
+        v9 <- LoadInteger '0'
+    BeginForLoopCondition -> v10
+        v11 <- Compare v10, '<', v1
+    BeginForLoopAfterthought v11 -> v12
+        v13 <- UnaryOperation v12, '++'
+    BeginForLoopBody -> v14
+        v15 <- LoadInteger '127'
+        v16 <- BinaryOperation v14, '&', v15
+        v17 <- CreateNamedVariable 'String', 'none'
+        v18 <- CallMethod v17, 'fromCharCode', [v16]
+        Update v8, '+', v18
+    EndForLoop
+    v19 <- CreateNamedVariable 'isOneByteString', 'none'
+    v20 <- CallFunction v19, [v8]
+    v21 <- LoadString 'AA'
+    v22 <- CallFunction v2, []
+    v23 <- BinaryOperation v21, '+', v22
+    v24 <- CreateNamedVariable 'twoByteExternalWithOneByteData', 'var', v23
+    v25 <- CallFunction v19, [v24]
+    v26 <- LoadString 'ሴሴሴሴ'
+    v27 <- CallFunction v4, []
+    v28 <- BinaryOperation v26, '+', v27
+    v29 <- CreateNamedVariable 'realTwoByteExternalString', 'var', v28
+    v30 <- CallFunction v19, [v29]
+    v31 <- LoadString ''
+    v32 <- LoadString 'a'
+    v33 <- CreateArray [v32, v24]
+    v34 <- CallMethod v33, 'join', [v31]
+    v35 <- CallFunction v19, [v34]
+    v36 <- BinaryOperation v8, '+', v24
+    v37 <- CreateNamedVariable 'str1', 'var', v36
+    v38 <- CallFunction v19, [v37]
+    v39 <- GetProperty v37, 'length'
+    v40 <- GetProperty v24, 'length'
+    v41 <- BinaryOperation v39, '-', v40
+    v42 <- CreateNamedVariable 'old_length', 'var', v41
+    BeginForLoopInitializer
+        v43 <- LoadInteger '0'
+    BeginForLoopCondition -> v44
+        v45 <- Compare v44, '<', v42
+    BeginForLoopAfterthought v45 -> v46
+        v47 <- UnaryOperation v46, '++'
+    BeginForLoopBody -> v48
+        v49 <- LoadInteger '127'
+        v50 <- BinaryOperation v48, '&', v49
+        v51 <- CreateNamedVariable 'String', 'none'
+        v52 <- CallMethod v51, 'fromCharCode', [v50]
+        v53 <- GetComputedProperty v37, v48
+    EndForLoop
+    BeginForLoopInitializer
+    BeginForLoopCondition -> v54
+        v55 <- GetProperty v37, 'length'
+        v56 <- Compare v54, '<', v55
+    BeginForLoopAfterthought v56 -> v57
+        v58 <- UnaryOperation v57, '++'
+    BeginForLoopBody -> v59
+        v60 <- LoadString 'A'
+        v61 <- GetComputedProperty v37, v59
+    EndForLoop
+    v62 <- CallFunction v19, [v37]
+    v63 <- CallMethod v37, 'toLowerCase', []
+    v64 <- CallFunction v19, [v63]
+    v65 <- LoadString ''
+    v66 <- LoadString 'a'
+    v67 <- CreateArray [v66, v29]
+    v68 <- CallMethod v67, 'join', [v65]
+    v69 <- CallFunction v19, [v68]
+    v70 <- BinaryOperation v8, '+', v29
+    v71 <- CreateNamedVariable 'str2', 'var', v70
+    v72 <- CallFunction v19, [v71]
+    v73 <- GetProperty v71, 'length'
+    v74 <- GetProperty v29, 'length'
+    v75 <- BinaryOperation v73, '-', v74
+    Reassign v42, v75
+    BeginForLoopInitializer
+        v76 <- LoadInteger '0'
+    BeginForLoopCondition -> v77
+        v78 <- Compare v77, '<', v42
+    BeginForLoopAfterthought v78 -> v79
+        v80 <- UnaryOperation v79, '++'
+    BeginForLoopBody -> v81
+        v82 <- LoadInteger '127'
+        v83 <- BinaryOperation v81, '&', v82
+        v84 <- CreateNamedVariable 'String', 'none'
+        v85 <- CallMethod v84, 'fromCharCode', [v83]
+        v86 <- GetComputedProperty v71, v81
+    EndForLoop
+    BeginForLoopInitializer
+    BeginForLoopCondition -> v87
+        v88 <- GetProperty v8, 'length'
+        v89 <- Compare v87, '<', v88
+    BeginForLoopAfterthought v89 -> v90
+        v91 <- UnaryOperation v90, '++'
+    BeginForLoopBody -> v92
+        v93 <- LoadString 'ሴ'
+        v94 <- GetComputedProperty v71, v92
+    EndForLoop
+    v95 <- CallFunction v19, [v71]
+EndPlainFunction
+BeginForLoopInitializer
+    v96 <- LoadInteger '0'
+BeginForLoopCondition -> v97
+    v98 <- LoadInteger '10'
+    v99 <- Compare v97, '<', v98
+BeginForLoopAfterthought v99 -> v100
+    v101 <- UnaryOperation v100, '++'
+BeginForLoopBody -> v102
+    v103 <- CallFunction v6, []
+EndForLoop
+v104 <- CreateNamedVariable 'gc', 'none'
+v105 <- CallFunction v104, []
+v106 <- CallFunction v104, []
+
+
+var size = 1024;
+function dont_inline() {
+    return "A";
+}
+function dont_inline2() {
+    return "ሴ";
+}
+function test() {
+    var str = "";
+    for (let i10 = 0; i10 < size; i10++) {
+        str += String.fromCharCode(i10 & 127);
+    }
+    isOneByteString(str);
+    var twoByteExternalWithOneByteData = "AA" + dont_inline();
+    isOneByteString(twoByteExternalWithOneByteData);
+    var realTwoByteExternalString = "ሴሴሴሴ" + dont_inline2();
+    isOneByteString(realTwoByteExternalString);
+    isOneByteString((["a",twoByteExternalWithOneByteData]).join(""));
+    var str1 = str + twoByteExternalWithOneByteData;
+    isOneByteString(str1);
+    var old_length = str1.length - twoByteExternalWithOneByteData.length;
+    for (let i44 = 0; i44 < old_length; i44++) {
+        String.fromCharCode(i44 & 127);
+        str1[i44];
+    }
+    for (let i54 = old_length; i54 < str1.length; i54++) {
+        str1[i54];
+    }
+    isOneByteString(str1);
+    isOneByteString(str1.toLowerCase());
+    isOneByteString((["a",realTwoByteExternalString]).join(""));
+    var str2 = str + realTwoByteExternalString;
+    isOneByteString(str2);
+    old_length = str2.length - realTwoByteExternalString.length;
+    for (let i77 = 0; i77 < old_length; i77++) {
+        String.fromCharCode(i77 & 127);
+        str2[i77];
+    }
+    for (let i87 = old_length; i87 < str.length; i87++) {
+        str2[i87];
+    }
+    isOneByteString(str2);
+}
+for (let i97 = 0; i97 < 10; i97++) {
+    test();
+}
+gc();
+gc();
+
+FuzzIL program written to corpus/string-externalize.fzil

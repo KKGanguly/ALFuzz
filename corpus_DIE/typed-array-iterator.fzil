@@ -1,0 +1,95 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- CreateNamedVariable 'Int8Array', 'none'
+v2 <- CreateNamedVariable 'Uint16Array', 'none'
+v3 <- CreateNamedVariable 'Int16Array', 'none'
+v4 <- CreateNamedVariable 'Uint32Array', 'none'
+v5 <- CreateNamedVariable 'Int32Array', 'none'
+v6 <- CreateNamedVariable 'Float32Array', 'none'
+v7 <- CreateNamedVariable 'Float64Array', 'none'
+v8 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v9 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8]
+v10 <- CreateNamedVariable 'constructors', 'var', v9
+v11 <- GetProperty v0, 'prototype'
+v12 <- GetProperty v11, '__proto__'
+v13 <- CreateNamedVariable 'TypedArrayPrototype', 'var', v12
+v14 <- LoadString 'entries'
+v15 <- CallMethod v13, 'hasOwnProperty', [v14]
+v16 <- LoadString 'values'
+v17 <- CallMethod v13, 'hasOwnProperty', [v16]
+v18 <- LoadString 'keys'
+v19 <- CallMethod v13, 'hasOwnProperty', [v18]
+v20 <- CreateNamedVariable 'Symbol', 'none'
+v21 <- GetProperty v20, 'iterator'
+v22 <- CallMethod v13, 'hasOwnProperty', [v21]
+v23 <- LoadString 'entries'
+v24 <- CallMethod v13, 'propertyIsEnumerable', [v23]
+v25 <- LoadString 'values'
+v26 <- CallMethod v13, 'propertyIsEnumerable', [v25]
+v27 <- LoadString 'keys'
+v28 <- CallMethod v13, 'propertyIsEnumerable', [v27]
+v29 <- GetProperty v20, 'iterator'
+v30 <- CallMethod v13, 'propertyIsEnumerable', [v29]
+v31 <- CreateNamedVariable 'Array', 'none'
+v32 <- GetProperty v31, 'prototype'
+v33 <- GetProperty v32, 'entries'
+v34 <- GetProperty v13, 'entries'
+v35 <- Compare v33, '===', v34
+v36 <- GetProperty v31, 'prototype'
+v37 <- GetProperty v20, 'iterator'
+v38 <- GetComputedProperty v36, v37
+v39 <- GetProperty v13, 'values'
+v40 <- Compare v38, '===', v39
+v41 <- GetProperty v31, 'prototype'
+v42 <- GetProperty v41, 'keys'
+v43 <- GetProperty v13, 'keys'
+v44 <- Compare v42, '===', v43
+v45 <- GetProperty v31, 'prototype'
+v46 <- GetProperty v20, 'iterator'
+v47 <- GetComputedProperty v45, v46
+v48 <- GetProperty v20, 'iterator'
+v49 <- GetComputedProperty v13, v48
+v50 <- Compare v47, '===', v49
+v51 <- BeginPlainFunction -> v52
+    v53 <- LoadInteger '1'
+    v54 <- LoadInteger '2'
+    v55 <- LoadInteger '3'
+    v56 <- CreateArray [v53, v54, v55]
+    v57 <- CreateNamedVariable 'array', 'var', v56
+    v58 <- LoadInteger '0'
+    v59 <- CreateNamedVariable 'i', 'var', v58
+    v60 <- Construct v52, [v57]
+    BeginForOfLoop v60 -> v61
+        v62 <- UnaryOperation v59, '++'
+        v63 <- GetComputedProperty v57, v62
+    EndForOfLoop
+    v64 <- GetProperty v57, 'length'
+EndPlainFunction
+v65 <- CallMethod v10, 'forEach', [v51]
+
+
+var constructors = [Uint8Array,Int8Array,Uint16Array,Int16Array,Uint32Array,Int32Array,Float32Array,Float64Array,Uint8ClampedArray];
+var TypedArrayPrototype = Uint8Array.prototype.__proto__;
+TypedArrayPrototype.hasOwnProperty("entries");
+TypedArrayPrototype.hasOwnProperty("values");
+TypedArrayPrototype.hasOwnProperty("keys");
+TypedArrayPrototype.hasOwnProperty(Symbol.iterator);
+TypedArrayPrototype.propertyIsEnumerable("entries");
+TypedArrayPrototype.propertyIsEnumerable("values");
+TypedArrayPrototype.propertyIsEnumerable("keys");
+TypedArrayPrototype.propertyIsEnumerable(Symbol.iterator);
+Array.prototype.entries === TypedArrayPrototype.entries;
+Array.prototype[Symbol.iterator] === TypedArrayPrototype.values;
+Array.prototype.keys === TypedArrayPrototype.keys;
+Array.prototype[Symbol.iterator] === TypedArrayPrototype[Symbol.iterator];
+function TestTypedArrayValues(a52) {
+    var array = [1,2,3];
+    var i = 0;
+    const v60 = new a52(array);
+    for (const v61 of v60) {
+        array[i++];
+    }
+    array.length;
+}
+constructors.forEach(TestTypedArrayValues);
+
+FuzzIL program written to corpus/typed-array-iterator.fzil

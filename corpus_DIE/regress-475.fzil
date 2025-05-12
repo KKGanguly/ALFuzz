@@ -1,0 +1,19 @@
+v0 <- LoadInteger '1'
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadInteger '1'
+    v3 <- LoadInteger '1'
+    v4 <- UnaryOperation '-', v3
+    v5 <- LoadInteger '1'
+    v6 <- BinaryOperation v4, '%', v5
+    v7 <- BinaryOperation v2, '|', v6
+    Return v7
+EndPlainFunction
+v8 <- CallFunction v1, []
+
+
+function f1() {
+    return 1 | (-1 % 1);
+}
+f1();
+
+FuzzIL program written to corpus/regress-475.fzil

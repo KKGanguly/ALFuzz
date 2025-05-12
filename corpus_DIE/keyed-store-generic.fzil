@@ -1,0 +1,55 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    SetComputedProperty v1, v2, v3
+EndPlainFunction
+v4 <- LoadString 'make it generic'
+v5 <- LoadInteger '0'
+v6 <- LoadInteger '0'
+v7 <- CallFunction v0, [v4, v5, v6]
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '1'
+    v10 <- LoadInteger '99'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v9
+        ObjectLiteralAddProperty `0`, v10
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'o', 'var', v11
+    v13 <- CreateNamedVariable 'Symbol', 'none'
+    v14 <- GetProperty v13, 'isConcatSpreadable'
+    v15 <- LoadBoolean 'true'
+    v16 <- CallFunction v0, [v12, v14, v15]
+    v17 <- LoadInteger '99'
+    v18 <- CreateArray [v17]
+    v19 <- CreateArray []
+    v20 <- CallMethod v19, 'concat', [v12]
+EndPlainFunction
+v21 <- CallFunction v8, []
+v22 <- BeginPlainFunction -> 
+    v23 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v24 <- CreateNamedVariable 'Array', 'none'
+    v25 <- GetProperty v24, 'prototype'
+    v26 <- LoadString 'constructor'
+    v27 <- CallFunction v0, [v25, v26, v23]
+EndPlainFunction
+v28 <- CallFunction v22, []
+
+
+function f(a1, a2, a3) {
+    a1[a2] = a3;
+}
+f("make it generic", 0, 0);
+function TestIsConcatSpreadableProtector() {
+    var o = { length: 1, 0: 99 };
+    f(o, Symbol.isConcatSpreadable, true);
+    [99];
+    ([]).concat(o);
+}
+TestIsConcatSpreadableProtector();
+function TestSpeciesProtector() {
+    function MyArray() {
+    }
+    f(Array.prototype, "constructor", MyArray);
+}
+TestSpeciesProtector();
+
+FuzzIL program written to corpus/keyed-store-generic.fzil

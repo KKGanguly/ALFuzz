@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- LoadInteger '0'
+    v2 <- LoadInteger '0'
+    v3 <- LoadUndefined
+    v4 <- CallFunction v3, [v1, v2]
+    Return v4
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- CallFunction v0, []
+    Return v6
+EndPlainFunction
+v7 <- CallFunction v5, []
+v8 <- CreateNamedVariable 'TypeError', 'none'
+v9 <- CallFunction v5, []
+v10 <- CallFunction v5, []
+
+
+function f() {
+    'use strict';
+    return undefined(0, 0);
+}
+function g() {
+    return f();
+}
+g();
+g();
+g();
+
+FuzzIL program written to corpus/regress-crbug-648539.fzil

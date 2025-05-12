@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, '__proto__'
+    Return v2
+EndPlainFunction
+v3 <- CreateNamedVariable 'Symbol', 'none'
+v4 <- GetProperty v3, 'prototype'
+v5 <- CallFunction v3, []
+v6 <- CallFunction v0, [v5]
+v7 <- GetProperty v3, 'prototype'
+v8 <- CallFunction v3, []
+v9 <- CallFunction v0, [v8]
+v10 <- GetProperty v3, 'prototype'
+v11 <- CallFunction v3, []
+v12 <- CallFunction v0, [v11]
+
+
+function f(a1) {
+    return a1.__proto__;
+}
+Symbol.prototype;
+f(Symbol());
+Symbol.prototype;
+f(Symbol());
+Symbol.prototype;
+f(Symbol());
+
+FuzzIL program written to corpus/regress-crbug-694709.fzil

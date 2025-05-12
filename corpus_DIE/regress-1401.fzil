@@ -1,0 +1,69 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'bottom', 'var', v0
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- Construct v2, []
+v4 <- CreateNamedVariable 'sizes', 'var', v3
+BeginForLoopInitializer
+    v5 <- LoadInteger '0'
+    v6 <- CreateNamedVariable 'i', 'none'
+    Reassign v6, v5
+BeginForLoopCondition
+    v7 <- CreateNamedVariable 'i', 'none'
+    v8 <- LoadInteger '10'
+    v9 <- Compare v7, '<', v8
+BeginForLoopAfterthought v9
+    v10 <- CreateNamedVariable 'i', 'none'
+    v11 <- UnaryOperation v10, '++'
+BeginForLoopBody
+    v12 <- LoadInteger '0'
+    v13 <- CreateNamedVariable 'i', 'none'
+    SetComputedProperty v4, v13, v12
+EndForLoop
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadInteger '1'
+    v16 <- BinaryOperation v1, '+', v15
+    v17 <- LoadInteger '10'
+    v18 <- BinaryOperation v16, '+', v17
+    v19 <- CreateNamedVariable 'size', 'var', v18
+    v20 <- UnaryOperation '++', v1
+    SetComputedProperty v4, v20, v19
+    v21 <- CreateNamedVariable 't', 'var', v19
+    Return v21
+EndPlainFunction
+BeginForLoopInitializer
+    v22 <- LoadInteger '0'
+    v23 <- CreateNamedVariable 'i', 'none'
+    Reassign v23, v22
+BeginForLoopCondition
+    v24 <- CreateNamedVariable 'i', 'none'
+    v25 <- LoadInteger '5'
+    v26 <- Compare v24, '<', v25
+BeginForLoopAfterthought v26
+    v27 <- CreateNamedVariable 'i', 'none'
+    v28 <- UnaryOperation v27, '++'
+BeginForLoopBody
+    v29 <- CreateNamedVariable 'i', 'none'
+    v30 <- LoadInteger '11'
+    v31 <- BinaryOperation v29, '+', v30
+    v32 <- CallFunction v14, []
+EndForLoop
+
+
+var bottom = 0;
+const v3 = new Array();
+var sizes = v3;
+for (i = 0; i < 10; i++) {
+    sizes[i] = 0;
+}
+function foo() {
+    var size = (bottom + 1) + 10;
+    sizes[++bottom] = size;
+    var t = size;
+    return t;
+}
+for (i = 0; i < 5; i++) {
+    i + 11;
+    foo();
+}
+
+FuzzIL program written to corpus/regress-1401.fzil

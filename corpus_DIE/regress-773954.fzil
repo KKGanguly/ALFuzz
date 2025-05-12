@@ -1,0 +1,48 @@
+v0 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'a', 'var', v1
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'b', 'var', v3
+v5 <- LoadString 'x'
+v6 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'defineProperty', [v4, v5, v7]
+v10 <- BeginPlainFunction -> v11
+    v12 <- LoadInteger '5'
+    v13 <- GetProperty v11, 'x'
+    v14 <- UnaryOperation v13, '++'
+    v15 <- BinaryOperation v12, '+', v14
+    Return v15
+EndPlainFunction
+BeginTry
+    v16 <- CallFunction v10, [v2]
+    v17 <- CallFunction v10, [v4]
+BeginCatch -> v18
+EndTryCatch
+v19 <- CallFunction v10, [v2]
+
+
+var a = { x: 0 };
+var b = {};
+function f6() {
+}
+Object.defineProperty(b, "x", { get: f6 });
+function f(a11) {
+    let v13 = a11.x;
+    return 5 + v13++;
+}
+try {
+    f(a);
+    f(b);
+} catch(e18) {
+}
+f(a);
+
+FuzzIL program written to corpus/regress-773954.fzil

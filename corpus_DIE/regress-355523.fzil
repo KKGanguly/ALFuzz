@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> v1, v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- LoadArguments
+    v6 <- GetElement v5, '13'
+    v7 <- LoadArguments
+    v8 <- LoadInteger '10'
+    v9 <- UnaryOperation '-', v8
+    v10 <- GetComputedProperty v7, v9
+    v11 <- CallFunction v0, [v6, v10]
+    Return v11
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13
+    v14 <- LoadInteger '0'
+    v15 <- CallFunction v3, [v14, v13]
+    Return v15
+EndPlainFunction
+v16 <- LoadInteger '0'
+v17 <- CallFunction v3, [v16]
+v18 <- LoadInteger '0'
+v19 <- CallFunction v3, [v18]
+v20 <- LoadInteger '0'
+v21 <- CallFunction v3, [v20]
+
+
+function __f_4(a1, a2) {
+}
+function __f_8(a4) {
+    return __f_4(arguments[13], arguments[-10]);
+}
+function __f_6(a13) {
+    return __f_8(0, a13);
+}
+__f_8(0);
+__f_8(0);
+__f_8(0);
+
+FuzzIL program written to corpus/regress-355523.fzil

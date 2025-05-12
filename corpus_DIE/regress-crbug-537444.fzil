@@ -1,0 +1,42 @@
+v0 <- BeginPlainFunction -> v1
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadBoolean 'false'
+    v5 <- LoadInteger '0'
+    v6 <- LoadInteger '1'
+    v7 <- CallFunction v0, [v3, v6]
+    v8 <- TernaryOperation v4, v5, v7
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    v11 <- LoadInteger '1'
+    v12 <- CallFunction v2, [v10, v11]
+    v13 <- CreateNamedVariable 'z', 'var', v12
+    v14 <- LoadInteger '1'
+    v15 <- BinaryOperation v13, '+', v14
+    Return v15
+EndPlainFunction
+v16 <- LoadInteger '1'
+v17 <- CallFunction v9, [v16]
+v18 <- LoadInteger '1'
+v19 <- CallFunction v9, [v18]
+v20 <- LoadString 'a'
+v21 <- CallFunction v9, [v20]
+
+
+function f(a1) {
+    return a1;
+}
+function g(a3) {
+    return false ? 0 : f(a3, 1);
+}
+function h(a10) {
+    var z = g(a10, 1);
+    return z + 1;
+}
+h(1);
+h(1);
+h("a");
+
+FuzzIL program written to corpus/regress-crbug-537444.fzil

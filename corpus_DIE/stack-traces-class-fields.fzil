@@ -1,0 +1,336 @@
+v0 <- BeginPlainFunction -> v1, v2, v3, v4
+    v5 <- LoadBoolean 'false'
+    v6 <- CreateNamedVariable 'threw', 'var', v5
+    BeginTry
+        v7 <- CallFunction v2, []
+    BeginCatch -> v8
+        BeginForLoopInitializer
+            v9 <- LoadInteger '0'
+        BeginForLoopCondition -> v10
+            v11 <- GetProperty v3, 'length'
+            v12 <- Compare v10, '<', v11
+        BeginForLoopAfterthought v12 -> v13
+            v14 <- UnaryOperation v13, '++'
+        BeginForLoopBody -> v15
+            v16 <- GetComputedProperty v3, v15
+            v17 <- GetProperty v8, 'stack'
+            v18 <- CallMethod v17, 'indexOf', [v16]
+            v19 <- LoadInteger '1'
+            v20 <- UnaryOperation '-', v19
+            v21 <- Compare v18, '!=', v20
+            v22 <- LoadString ' doesn't contain expected['
+            v23 <- BinaryOperation v1, '+', v22
+            v24 <- BinaryOperation v23, '+', v15
+            v25 <- LoadString '] stack = '
+            v26 <- BinaryOperation v24, '+', v25
+            v27 <- GetProperty v8, 'stack'
+            v28 <- BinaryOperation v26, '+', v27
+        EndForLoop
+        BeginIf v4
+            BeginForLoopInitializer
+                v29 <- LoadInteger '0'
+            BeginForLoopCondition -> v30
+                v31 <- GetProperty v4, 'length'
+                v32 <- Compare v30, '<', v31
+            BeginForLoopAfterthought v32 -> v33
+                v34 <- UnaryOperation v33, '++'
+            BeginForLoopBody -> v35
+                v36 <- GetComputedProperty v4, v35
+                v37 <- GetProperty v8, 'stack'
+                v38 <- CallMethod v37, 'indexOf', [v36]
+                v39 <- LoadInteger '1'
+                v40 <- UnaryOperation '-', v39
+                v41 <- LoadString ' contains unexpected['
+                v42 <- BinaryOperation v1, '+', v41
+                v43 <- BinaryOperation v42, '+', v35
+                v44 <- LoadString ']'
+                v45 <- BinaryOperation v43, '+', v44
+            EndForLoop
+        EndIf
+        v46 <- LoadBoolean 'true'
+        Reassign v6, v46
+    EndTryCatch
+    v47 <- LoadString ' didn't throw'
+    v48 <- BinaryOperation v1, '+', v47
+EndPlainFunction
+v49 <- BeginPlainFunction -> 
+    v50 <- CreateNamedVariable 'FAIL', 'none'
+EndPlainFunction
+v51 <- BeginPlainFunction -> 
+    v52 <- CallFunction v49, []
+    v53 <- BeginClassDefinition
+        ClassAddStaticProperty 'x' v52
+    EndClassDefinition
+EndPlainFunction
+v54 <- LoadString 'during class construction'
+v55 <- LoadString 'thrower'
+v56 <- LoadString '<static_fields_initializer>'
+v57 <- CreateArray [v55, v56]
+v58 <- LoadString 'anonymous'
+v59 <- CreateArray [v58]
+v60 <- CallFunction v0, [v54, v51, v57, v59]
+v61 <- BeginPlainFunction -> 
+    v62 <- CallFunction v49, []
+    v63 <- BeginClassDefinition
+        ClassAddInstanceComputedProperty v62
+    EndClassDefinition
+EndPlainFunction
+v64 <- LoadString 'during class construction2'
+v65 <- LoadString 'thrower'
+v66 <- CreateArray [v65]
+v67 <- CallFunction v0, [v64, v61, v66]
+v68 <- BeginPlainFunction -> 
+    v69 <- CallFunction v49, []
+    v70 <- BeginClassDefinition
+        ClassAddInstanceProperty 'x' v69
+    EndClassDefinition
+    v71 <- Construct v70, []
+EndPlainFunction
+v72 <- LoadString 'during class instantiation'
+v73 <- LoadString 'thrower'
+v74 <- LoadString 'X.<instance_members_initializer>'
+v75 <- LoadString 'new X'
+v76 <- CreateArray [v73, v74, v75]
+v77 <- LoadString 'anonymous'
+v78 <- CreateArray [v77]
+v79 <- CallFunction v0, [v72, v68, v76, v78]
+v80 <- BeginPlainFunction -> 
+    v81 <- BeginClassDefinition
+    EndClassDefinition
+    v82 <- CallFunction v49, []
+    v83 <- BeginClassDefinition v81
+        ClassAddInstanceProperty 'x' v82
+    EndClassDefinition
+    v84 <- Construct v83, []
+EndPlainFunction
+v85 <- LoadString 'during class instantiation with super'
+v86 <- LoadString 'thrower'
+v87 <- LoadString 'X.<instance_members_initializer>'
+v88 <- LoadString 'new X'
+v89 <- CreateArray [v86, v87, v88]
+v90 <- LoadString 'Base'
+v91 <- LoadString 'anonymous'
+v92 <- CreateArray [v90, v91]
+v93 <- CallFunction v0, [v85, v80, v89, v92]
+v94 <- BeginPlainFunction -> 
+    v95 <- BeginClassDefinition
+    EndClassDefinition
+    v96 <- CallFunction v49, []
+    v97 <- BeginClassDefinition v95
+        BeginClassConstructor -> v98
+            CallSuperConstructor []
+        EndClassConstructor
+        ClassAddInstanceProperty 'x' v96
+    EndClassDefinition
+    v99 <- Construct v97, []
+EndPlainFunction
+v100 <- LoadString 'during class instantiation with super2'
+v101 <- LoadString 'thrower'
+v102 <- LoadString 'X.<instance_members_initializer>'
+v103 <- LoadString 'new X'
+v104 <- CreateArray [v101, v102, v103]
+v105 <- LoadString 'Base'
+v106 <- LoadString 'anonymous'
+v107 <- CreateArray [v105, v106]
+v108 <- CallFunction v0, [v100, v94, v104, v107]
+v109 <- BeginPlainFunction -> 
+    v110 <- CallFunction v49, []
+    v111 <- BeginClassDefinition
+        ClassAddInstanceProperty 'x' v110
+    EndClassDefinition
+    v112 <- BeginClassDefinition v111
+        BeginClassConstructor -> v113
+            CallSuperConstructor []
+        EndClassConstructor
+    EndClassDefinition
+    v114 <- Construct v112, []
+EndPlainFunction
+v115 <- LoadString 'during class instantiation with super3'
+v116 <- LoadString 'thrower'
+v117 <- LoadString 'X.<instance_members_initializer>'
+v118 <- LoadString 'new Base'
+v119 <- LoadString 'new X'
+v120 <- CreateArray [v116, v117, v118, v119]
+v121 <- LoadString 'anonymous'
+v122 <- CreateArray [v121]
+v123 <- CallFunction v0, [v115, v109, v120, v122]
+v124 <- BeginPlainFunction -> 
+    v125 <- BeginClassDefinition
+        ClassAddInstanceProperty 'x' v49
+    EndClassDefinition
+    v126 <- Construct v125, []
+    v127 <- CreateNamedVariable 'x', 'let', v126
+    v128 <- CallMethod v127, 'x', []
+EndPlainFunction
+v129 <- LoadString 'during class field call'
+v130 <- LoadString 'X.thrower'
+v131 <- CreateArray [v130]
+v132 <- LoadString 'anonymous'
+v133 <- CreateArray [v132]
+v134 <- CallFunction v0, [v129, v124, v131, v133]
+v135 <- BeginPlainFunction -> 
+    v136 <- BeginClassDefinition
+        ClassAddStaticProperty 'x' v49
+    EndClassDefinition
+    v137 <- CallMethod v136, 'x', []
+EndPlainFunction
+v138 <- LoadString 'during static class field call'
+v139 <- LoadString 'Function.thrower'
+v140 <- CreateArray [v139]
+v141 <- LoadString 'anonymous'
+v142 <- CreateArray [v141]
+v143 <- CallFunction v0, [v138, v135, v140, v142]
+v144 <- BeginPlainFunction -> 
+    v145 <- BeginPlainFunction -> 
+        v146 <- CreateNamedVariable 'FAIL', 'none'
+    EndPlainFunction
+    v147 <- BeginClassDefinition
+        ClassAddInstanceProperty 'x' v145
+    EndClassDefinition
+    v148 <- Construct v147, []
+    v149 <- CreateNamedVariable 'x', 'let', v148
+    v150 <- CallMethod v149, 'x', []
+EndPlainFunction
+v151 <- LoadString 'during class field call with FNI'
+v152 <- LoadString 'X.x'
+v153 <- CreateArray [v152]
+v154 <- LoadString 'anonymous'
+v155 <- CreateArray [v154]
+v156 <- CallFunction v0, [v151, v144, v153, v155]
+v157 <- BeginPlainFunction -> 
+    v158 <- BeginPlainFunction -> 
+        v159 <- CreateNamedVariable 'FAIL', 'none'
+    EndPlainFunction
+    v160 <- BeginClassDefinition
+        ClassAddStaticProperty 'x' v158
+    EndClassDefinition
+    v161 <- CallMethod v160, 'x', []
+EndPlainFunction
+v162 <- LoadString 'during static class field call with FNI'
+v163 <- LoadString 'Function.x'
+v164 <- CreateArray [v163]
+v165 <- LoadString 'anonymous'
+v166 <- CreateArray [v165]
+v167 <- CallFunction v0, [v162, v157, v164, v166]
+
+
+function testTrace(a1, a2, a3, a4) {
+    var threw = false;
+    try {
+        a2();
+    } catch(e8) {
+        for (let i10 = 0; i10 < a3.length; i10++) {
+            const v16 = a3[i10];
+            e8.stack.indexOf(v16) != -1;
+            (((a1 + " doesn't contain expected[") + i10) + "] stack = ") + e8.stack;
+        }
+        if (a4) {
+            for (let i30 = 0; i30 < a4.length; i30++) {
+                const v36 = a4[i30];
+                e8.stack.indexOf(v36);
+                -1;
+                ((a1 + " contains unexpected[") + i30) + "]";
+            }
+        }
+        threw = true;
+    }
+    a1 + " didn't throw";
+}
+function thrower() {
+}
+function testClassConstruction() {
+    const v52 = thrower();
+    class C53 {
+        static x = v52;
+    }
+}
+testTrace("during class construction", testClassConstruction, ["thrower","<static_fields_initializer>"], ["anonymous"]);
+function testClassConstruction2() {
+    const v62 = thrower();
+    class C63 {
+        [v62];
+    }
+}
+testTrace("during class construction2", testClassConstruction2, ["thrower"]);
+function testClassInstantiation() {
+    const v69 = thrower();
+    class C70 {
+        x = v69;
+    }
+    new C70();
+}
+testTrace("during class instantiation", testClassInstantiation, ["thrower","X.<instance_members_initializer>","new X"], ["anonymous"]);
+function testClassInstantiationWithSuper() {
+    class C81 {
+    }
+    const v82 = thrower();
+    class C83 extends C81 {
+        x = v82;
+    }
+    new C83();
+}
+testTrace("during class instantiation with super", testClassInstantiationWithSuper, ["thrower","X.<instance_members_initializer>","new X"], ["Base","anonymous"]);
+function testClassInstantiationWithSuper2() {
+    class C95 {
+    }
+    const v96 = thrower();
+    class C97 extends C95 {
+        constructor() {
+            super();
+        }
+        x = v96;
+    }
+    new C97();
+}
+testTrace("during class instantiation with super2", testClassInstantiationWithSuper2, ["thrower","X.<instance_members_initializer>","new X"], ["Base","anonymous"]);
+function testClassInstantiationWithSuper3() {
+    const v110 = thrower();
+    class C111 {
+        x = v110;
+    }
+    class C112 extends C111 {
+        constructor() {
+            super();
+        }
+    }
+    new C112();
+}
+testTrace("during class instantiation with super3", testClassInstantiationWithSuper3, ["thrower","X.<instance_members_initializer>","new Base","new X"], ["anonymous"]);
+function testClassFieldCall() {
+    class C125 {
+        x = thrower;
+    }
+    const v126 = new C125();
+    let x = v126;
+    x.x();
+}
+testTrace("during class field call", testClassFieldCall, ["X.thrower"], ["anonymous"]);
+function testStaticClassFieldCall() {
+    class C136 {
+        static x = thrower;
+    }
+    C136.x();
+}
+testTrace("during static class field call", testStaticClassFieldCall, ["Function.thrower"], ["anonymous"]);
+function testClassFieldCallWithFNI() {
+    function f145() {
+    }
+    class C147 {
+        x = f145;
+    }
+    const v148 = new C147();
+    let x = v148;
+    x.x();
+}
+testTrace("during class field call with FNI", testClassFieldCallWithFNI, ["X.x"], ["anonymous"]);
+function testStaticClassFieldCallWithFNI() {
+    function f158() {
+    }
+    class C160 {
+        static x = f158;
+    }
+    C160.x();
+}
+testTrace("during static class field call with FNI", testStaticClassFieldCallWithFNI, ["Function.x"], ["anonymous"]);
+
+FuzzIL program written to corpus/stack-traces-class-fields.fzil

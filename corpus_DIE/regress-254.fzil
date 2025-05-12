@@ -1,0 +1,92 @@
+v0 <- LoadRegExp 'x' 'g'
+v1 <- CreateNamedVariable 're', 'var', v0
+v2 <- LoadInteger '0'
+v3 <- GetProperty v1, 'lastIndex'
+v4 <- LoadString 'Global, initial lastIndex'
+v5 <- LoadString 'x'
+v6 <- CallMethod v1, 'test', [v5]
+v7 <- LoadString 'Global, test 1'
+v8 <- LoadInteger '1'
+v9 <- GetProperty v1, 'lastIndex'
+v10 <- LoadString 'Global, lastIndex after test 1'
+v11 <- LoadString 'x'
+v12 <- CallMethod v1, 'test', [v11]
+v13 <- LoadString 'Global, test 2'
+v14 <- LoadInteger '0'
+v15 <- GetProperty v1, 'lastIndex'
+v16 <- LoadString 'Global, lastIndex after test 2'
+v17 <- LoadString 'x'
+v18 <- CreateArray [v17]
+v19 <- LoadString 'x'
+v20 <- CallMethod v1, 'exec', [v19]
+v21 <- LoadString 'Global, exec 1'
+v22 <- LoadInteger '1'
+v23 <- GetProperty v1, 'lastIndex'
+v24 <- LoadString 'Global, lastIndex after exec 1'
+v25 <- LoadNull
+v26 <- LoadString 'x'
+v27 <- CallMethod v1, 'exec', [v26]
+v28 <- LoadString 'Global, exec 2'
+v29 <- LoadInteger '0'
+v30 <- GetProperty v1, 'lastIndex'
+v31 <- LoadString 'Global, lastIndex after exec 2'
+v32 <- LoadRegExp 'x' ''
+v33 <- CreateNamedVariable 're2', 'var', v32
+v34 <- LoadInteger '0'
+v35 <- GetProperty v33, 'lastIndex'
+v36 <- LoadString 'Non-global, initial lastIndex'
+v37 <- LoadString 'x'
+v38 <- CallMethod v33, 'test', [v37]
+v39 <- LoadString 'Non-global, test 1'
+v40 <- LoadInteger '0'
+v41 <- GetProperty v33, 'lastIndex'
+v42 <- LoadString 'Non-global, lastIndex after test 1'
+v43 <- LoadString 'x'
+v44 <- CallMethod v33, 'test', [v43]
+v45 <- LoadString 'Non-global, test 2'
+v46 <- LoadInteger '0'
+v47 <- GetProperty v33, 'lastIndex'
+v48 <- LoadString 'Non-global, lastIndex after test 2'
+v49 <- LoadString 'x'
+v50 <- CreateArray [v49]
+v51 <- LoadString 'x'
+v52 <- CallMethod v33, 'exec', [v51]
+v53 <- LoadString 'Non-global, exec 1'
+v54 <- LoadInteger '0'
+v55 <- GetProperty v33, 'lastIndex'
+v56 <- LoadString 'Non-global, lastIndex after exec 1'
+v57 <- LoadString 'x'
+v58 <- CreateArray [v57]
+v59 <- LoadString 'x'
+v60 <- CallMethod v33, 'exec', [v59]
+v61 <- LoadString 'Non-global, exec 2'
+v62 <- LoadInteger '0'
+v63 <- GetProperty v33, 'lastIndex'
+v64 <- LoadString 'Non-global, lastIndex after exec 2'
+
+
+var re = /x/g;
+re.lastIndex;
+re.test("x");
+re.lastIndex;
+re.test("x");
+re.lastIndex;
+["x"];
+re.exec("x");
+re.lastIndex;
+re.exec("x");
+re.lastIndex;
+var re2 = /x/;
+re2.lastIndex;
+re2.test("x");
+re2.lastIndex;
+re2.test("x");
+re2.lastIndex;
+["x"];
+re2.exec("x");
+re2.lastIndex;
+["x"];
+re2.exec("x");
+re2.lastIndex;
+
+FuzzIL program written to corpus/regress-254.fzil

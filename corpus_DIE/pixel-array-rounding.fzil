@@ -1,0 +1,65 @@
+v0 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v1 <- LoadInteger '11'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'pixels', 'var', v2
+v4 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- LoadInteger '8'
+        v8 <- Compare v6, '<', v7
+    BeginForLoopAfterthought v8 -> v9
+        v10 <- UnaryOperation v9, '++'
+    BeginForLoopBody -> v11
+        v12 <- LoadFloat '1.1'
+        v13 <- BinaryOperation v11, '*', v12
+        SetComputedProperty v3, v11, v13
+    EndForLoop
+    v14 <- LoadFloat '255.5'
+    SetElement v3, '8', v14
+    v15 <- CreateNamedVariable 'NaN', 'none'
+    SetElement v3, '9', v15
+    v16 <- LoadFloat '0.5'
+    v17 <- UnaryOperation '-', v16
+    SetElement v3, '10', v17
+    v18 <- GetElement v3, '1'
+    v19 <- GetElement v3, '6'
+    v20 <- BinaryOperation v18, '+', v19
+    Return v20
+EndPlainFunction
+v21 <- CallFunction v4, []
+v22 <- CallFunction v4, []
+v23 <- LoadInteger '6'
+v24 <- GetElement v3, '5'
+v25 <- CallFunction v4, []
+v26 <- LoadInteger '6'
+v27 <- GetElement v3, '5'
+v28 <- LoadInteger '255'
+v29 <- GetElement v3, '8'
+v30 <- LoadInteger '0'
+v31 <- GetElement v3, '9'
+v32 <- LoadInteger '0'
+v33 <- GetElement v3, '10'
+
+
+const v2 = new Uint8ClampedArray(11);
+var pixels = v2;
+function f() {
+    for (let i6 = 0; i6 < 8; i6++) {
+        pixels[i6] = i6 * 1.1;
+    }
+    pixels[8] = 255.5;
+    pixels[9] = NaN;
+    pixels[10] = -0.5;
+    return pixels[1] + pixels[6];
+}
+f();
+f();
+pixels[5];
+f();
+pixels[5];
+pixels[8];
+pixels[9];
+pixels[10];
+
+FuzzIL program written to corpus/pixel-array-rounding.fzil

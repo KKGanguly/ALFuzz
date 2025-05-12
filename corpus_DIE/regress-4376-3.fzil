@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'x', 'var', v1
+v3 <- BeginPlainFunction -> 
+    v4 <- TestInstanceOf v2, v0
+    Return v4
+EndPlainFunction
+v5 <- CallFunction v3, []
+v6 <- LoadInteger '1'
+SetProperty v0, 'prototype', v6
+v7 <- CallFunction v3, []
+v8 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function Foo() {
+}
+const v1 = new Foo();
+var x = v1;
+function foo() {
+    return x instanceof Foo;
+}
+foo();
+Foo.prototype = 1;
+foo();
+
+FuzzIL program written to corpus/regress-4376-3.fzil

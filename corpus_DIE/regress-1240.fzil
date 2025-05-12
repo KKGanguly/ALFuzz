@@ -1,0 +1,49 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadString 'b'
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '42'
+    Return v4
+EndPlainFunction
+v5 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v3
+    ObjectLiteralAddProperty `configurable`, v5
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'Object', 'none'
+v8 <- CallMethod v7, 'defineProperty', [v1, v2, v6]
+BeginTry
+    v9 <- LoadString 'b'
+    v10 <- BeginPlainFunction -> 
+        v11 <- LoadString 'foo'
+        Return v11
+    EndPlainFunction
+    v12 <- CallMethod v1, '__defineGetter__', [v9, v10]
+BeginCatch -> v13
+EndTryCatch
+v14 <- LoadInteger '42'
+v15 <- GetProperty v1, 'b'
+v16 <- LoadString 'b'
+v17 <- CallMethod v7, 'getOwnPropertyDescriptor', [v1, v16]
+v18 <- CreateNamedVariable 'desc', 'var', v17
+v19 <- GetProperty v18, 'configurable'
+
+
+var a = {};
+function f3() {
+    return 42;
+}
+Object.defineProperty(a, "b", { get: f3, configurable: false });
+try {
+    function _b() {
+        return "foo";
+    }
+    a.__defineGetter__("b", _b);
+} catch(e13) {
+}
+a.b;
+var desc = Object.getOwnPropertyDescriptor(a, "b");
+desc.configurable;
+
+FuzzIL program written to corpus/regress-1240.fzil

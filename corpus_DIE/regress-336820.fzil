@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '10000000'
+    v2 <- LoadString 'a'
+    v3 <- CallMethod v2, 'repeat', [v1]
+    v4 <- CreateNamedVariable 'str', 'let', v3
+    v5 <- CreateNamedVariable 'Array', 'none'
+    v6 <- LoadInteger '2000'
+    v7 <- Construct v5, [v6]
+    v8 <- CreateNamedVariable 'arr', 'let', v7
+    BeginForLoopInitializer
+        v9 <- LoadInteger '0'
+    BeginForLoopCondition -> v10
+        v11 <- LoadInteger '200'
+        v12 <- Compare v10, '<', v11
+    BeginForLoopAfterthought v12 -> v13
+        v14 <- UnaryOperation '++', v13
+    BeginForLoopBody -> v15
+        v16 <- LoadInteger '10'
+        v17 <- BinaryOperation v15, '*', v16
+        SetComputedProperty v8, v17, v4
+    EndForLoop
+    v18 <- LoadString ':'
+    v19 <- CallMethod v8, 'join', [v18]
+    v20 <- CreateNamedVariable 'res', 'let', v19
+EndPlainFunction
+v21 <- CallFunction v0, []
+v22 <- CreateNamedVariable 'RangeError', 'none'
+
+
+function f0() {
+    let str = ("a").repeat(10000000);
+    const v7 = new Array(2000);
+    let arr = v7;
+    for (let i10 = 0; i10 < 200; ++i10) {
+        arr[i10 * 10] = str;
+    }
+    let res = arr.join(":");
+}
+f0();
+
+FuzzIL program written to corpus/regress-336820.fzil

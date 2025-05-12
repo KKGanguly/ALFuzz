@@ -1,0 +1,20 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '7'
+    v2 <- LoadArguments
+    SetProperty v2, 'length', v1
+    v3 <- LoadArguments
+    v4 <- CreateNamedVariable 'Array', 'none'
+    v5 <- GetProperty v4, 'prototype'
+    v6 <- GetProperty v5, 'slice'
+    v7 <- CallMethod v6, 'call', [v3]
+EndPlainFunction
+v8 <- CallFunction v0, []
+
+
+function f0() {
+    arguments.length = 7;
+    Array.prototype.slice.call(arguments);
+}
+f0();
+
+FuzzIL program written to corpus/regress-778574.fzil

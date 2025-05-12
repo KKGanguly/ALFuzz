@@ -1,0 +1,72 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadThis
+    SetProperty v4, 'f', v3
+EndPlainFunction
+v5 <- Construct v2, [v0]
+v6 <- CreateNamedVariable 'o1', 'var', v5
+v7 <- Construct v2, [v0]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'o2', 'var', v8
+v10 <- BeginPlainFunction -> v11
+    v12 <- CallMethod v11, 'f', []
+    Return v12
+EndPlainFunction
+v13 <- CallFunction v10, [v6]
+v14 <- CallFunction v10, [v6]
+v15 <- CallFunction v10, [v9]
+v16 <- CallFunction v10, [v6]
+v17 <- BeginPlainFunction -> 
+    v18 <- LoadInteger '2'
+    Return v18
+EndPlainFunction
+v19 <- Construct v2, [v17]
+v20 <- CreateNamedVariable 'o3', 'var', v19
+v21 <- LoadInteger '1'
+v22 <- CallFunction v10, [v9]
+v23 <- BeginPlainFunction -> 
+    v24 <- LoadInteger '3'
+    Return v24
+EndPlainFunction
+v25 <- GetProperty v9, '__proto__'
+SetProperty v25, 'f', v23
+v26 <- LoadInteger '3'
+v27 <- CallFunction v10, [v9]
+
+
+function f() {
+    return 1;
+}
+function C1(a3) {
+    this.f = a3;
+}
+const v5 = new C1(f);
+var o1 = v5;
+const v7 = new C1(f);
+var o2 = { __proto__: v7 };
+function foo(a11) {
+    return a11.f();
+}
+foo(o1);
+foo(o1);
+foo(o2);
+foo(o1);
+function f17() {
+    return 2;
+}
+const v19 = new C1(f17);
+var o3 = v19;
+foo(o2);
+function f23() {
+    return 3;
+}
+const t26 = o2.__proto__;
+t26.f = f23;
+foo(o2);
+
+FuzzIL program written to corpus/regress-calls-with-migrating-prototypes.fzil

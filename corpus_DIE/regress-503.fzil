@@ -1,0 +1,172 @@
+v0 <- LoadUndefined
+v1 <- LoadUndefined
+v2 <- Compare v0, '==', v1
+v3 <- LoadInteger '1'
+v4 <- LoadUndefined
+v5 <- LoadUndefined
+v6 <- Compare v4, '<=', v5
+v7 <- LoadInteger '2'
+v8 <- LoadUndefined
+v9 <- LoadUndefined
+v10 <- Compare v8, '>=', v9
+v11 <- LoadInteger '3'
+v12 <- LoadUndefined
+v13 <- LoadUndefined
+v14 <- Compare v12, '<', v13
+v15 <- LoadInteger '4'
+v16 <- LoadUndefined
+v17 <- LoadUndefined
+v18 <- Compare v16, '>', v17
+v19 <- LoadInteger '5'
+v20 <- LoadNull
+v21 <- LoadNull
+v22 <- Compare v20, '==', v21
+v23 <- LoadInteger '6'
+v24 <- LoadNull
+v25 <- LoadNull
+v26 <- Compare v24, '<=', v25
+v27 <- LoadInteger '7'
+v28 <- LoadNull
+v29 <- LoadNull
+v30 <- Compare v28, '>=', v29
+v31 <- LoadInteger '8'
+v32 <- LoadNull
+v33 <- LoadNull
+v34 <- Compare v32, '<', v33
+v35 <- LoadInteger '9'
+v36 <- LoadNull
+v37 <- LoadNull
+v38 <- Compare v36, '>', v37
+v39 <- LoadInteger '10'
+v40 <- LoadInteger '0'
+v41 <- Void_ v40
+v42 <- LoadInteger '0'
+v43 <- Void_ v42
+v44 <- Compare v41, '==', v43
+v45 <- LoadInteger '11'
+v46 <- LoadInteger '0'
+v47 <- Void_ v46
+v48 <- LoadInteger '0'
+v49 <- Void_ v48
+v50 <- Compare v47, '<=', v49
+v51 <- LoadInteger '12'
+v52 <- LoadInteger '0'
+v53 <- Void_ v52
+v54 <- LoadInteger '0'
+v55 <- Void_ v54
+v56 <- Compare v53, '>=', v55
+v57 <- LoadInteger '13'
+v58 <- LoadInteger '0'
+v59 <- Void_ v58
+v60 <- LoadInteger '0'
+v61 <- Void_ v60
+v62 <- Compare v59, '<', v61
+v63 <- LoadInteger '14'
+v64 <- LoadInteger '0'
+v65 <- Void_ v64
+v66 <- LoadInteger '0'
+v67 <- Void_ v66
+v68 <- Compare v65, '>', v67
+v69 <- LoadInteger '15'
+v70 <- LoadInteger '0'
+v71 <- Void_ v70
+v72 <- CreateNamedVariable 'x', 'var', v71
+v73 <- Compare v72, '==', v72
+v74 <- LoadInteger '16'
+v75 <- Compare v72, '<=', v72
+v76 <- LoadInteger '17'
+v77 <- Compare v72, '>=', v72
+v78 <- LoadInteger '18'
+v79 <- Compare v72, '<', v72
+v80 <- LoadInteger '19'
+v81 <- Compare v72, '>', v72
+v82 <- LoadInteger '20'
+v83 <- LoadNull
+v84 <- LoadInteger '0'
+v85 <- LoadInteger '1'
+v86 <- LoadInteger '1'
+v87 <- LoadInteger '0'
+v88 <- BinaryOperation v86, '/', v87
+v89 <- LoadInteger '1'
+v90 <- UnaryOperation '-', v89
+v91 <- LoadInteger '0'
+v92 <- BinaryOperation v90, '/', v91
+v93 <- LoadString ''
+v94 <- LoadBoolean 'true'
+v95 <- LoadBoolean 'false'
+v96 <- CreateArray [v83, v84, v85, v88, v92, v93, v94, v95]
+v97 <- CreateNamedVariable 'not_undefined', 'var', v96
+BeginForLoopInitializer
+    v98 <- LoadInteger '0'
+BeginForLoopCondition -> v99
+    v100 <- GetProperty v97, 'length'
+    v101 <- Compare v99, '<', v100
+BeginForLoopAfterthought v101 -> v102
+    v103 <- UnaryOperation v102, '++'
+BeginForLoopBody -> v104
+    v105 <- GetComputedProperty v97, v104
+    Reassign v72, v105
+    v106 <- Compare v72, '==', v72
+    v107 <- LoadString ''
+    v108 <- LoadInteger '21'
+    v109 <- BinaryOperation v107, '+', v108
+    v110 <- BinaryOperation v109, '+', v72
+    v111 <- Compare v72, '<=', v72
+    v112 <- LoadString ''
+    v113 <- LoadInteger '22'
+    v114 <- BinaryOperation v112, '+', v113
+    v115 <- BinaryOperation v114, '+', v72
+    v116 <- Compare v72, '>=', v72
+    v117 <- LoadString ''
+    v118 <- LoadInteger '23'
+    v119 <- BinaryOperation v117, '+', v118
+    v120 <- BinaryOperation v119, '+', v72
+    v121 <- Compare v72, '<', v72
+    v122 <- LoadString ''
+    v123 <- LoadInteger '24'
+    v124 <- BinaryOperation v122, '+', v123
+    v125 <- BinaryOperation v124, '+', v72
+    v126 <- Compare v72, '>', v72
+    v127 <- LoadString ''
+    v128 <- LoadInteger '25'
+    v129 <- BinaryOperation v127, '+', v128
+    v130 <- BinaryOperation v129, '+', v72
+EndForLoop
+
+
+undefined == undefined;
+undefined <= undefined;
+undefined >= undefined;
+undefined < undefined;
+undefined > undefined;
+null == null;
+null <= null;
+null >= null;
+null < null;
+null > null;
+void 0 == void 0;
+void 0 <= void 0;
+void 0 >= void 0;
+void 0 < void 0;
+void 0 > void 0;
+var x = void 0;
+x == x;
+x <= x;
+x >= x;
+x < x;
+x > x;
+var not_undefined = [null,0,1,1 / 0,-1 / 0,"",true,false];
+for (let i99 = 0; i99 < not_undefined.length; i99++) {
+    (x = not_undefined[i99]) == x;
+    ("" + 21) + x;
+    x <= x;
+    ("" + 22) + x;
+    x >= x;
+    ("" + 23) + x;
+    x < x;
+    ("" + 24) + x;
+    x > x;
+    ("" + 25) + x;
+}
+
+FuzzIL program written to corpus/regress-503.fzil

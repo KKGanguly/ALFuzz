@@ -1,0 +1,81 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'foo'
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'one', 'var', v4
+v6 <- LoadInteger '0'
+v7 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v6
+    ObjectLiteralAddProperty `bar`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'two', 'var', v8
+v10 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `bar`, v10
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable 'three', 'var', v11
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+SetProperty v12, '__proto__', v13
+BeginObjectLiteral
+v14 <- EndObjectLiteral
+v15 <- GetProperty v12, '__proto__'
+SetProperty v15, '__proto__', v14
+BeginObjectLiteral
+v16 <- EndObjectLiteral
+v17 <- GetProperty v12, '__proto__'
+v18 <- GetProperty v17, '__proto__'
+SetProperty v18, '__proto__', v16
+BeginObjectLiteral
+v19 <- EndObjectLiteral
+v20 <- GetProperty v12, '__proto__'
+v21 <- GetProperty v20, '__proto__'
+v22 <- GetProperty v21, '__proto__'
+SetProperty v22, '__proto__', v19
+BeginObjectLiteral
+v23 <- EndObjectLiteral
+v24 <- GetProperty v12, '__proto__'
+v25 <- GetProperty v24, '__proto__'
+v26 <- GetProperty v25, '__proto__'
+v27 <- GetProperty v26, '__proto__'
+SetProperty v27, '__proto__', v23
+v28 <- CallFunction v0, [v5]
+v29 <- CallFunction v0, [v9]
+v30 <- CallFunction v0, [v12]
+v31 <- CallFunction v0, [v5]
+v32 <- CallFunction v0, [v9]
+v33 <- CallFunction v0, [v12]
+
+
+function poly(a1) {
+    return a1.foo;
+}
+var one = { foo: 0 };
+var two = { foo: 0, bar: 1 };
+var three = { bar: 0 };
+three.__proto__ = {};
+const v14 = {};
+const t8 = three.__proto__;
+t8.__proto__ = v14;
+const v16 = {};
+const t11 = three.__proto__.__proto__;
+t11.__proto__ = v16;
+const v19 = {};
+const t14 = three.__proto__.__proto__.__proto__;
+t14.__proto__ = v19;
+const v23 = {};
+const t17 = three.__proto__.__proto__.__proto__.__proto__;
+t17.__proto__ = v23;
+poly(one);
+poly(two);
+poly(three);
+poly(one);
+poly(two);
+poly(three);
+
+FuzzIL program written to corpus/regress-deep-proto.fzil

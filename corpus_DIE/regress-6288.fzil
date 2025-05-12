@@ -1,0 +1,21 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Intl'
+BeginIf v1
+    v2 <- LoadString 'pt'
+    v3 <- CreateNamedVariable 'Intl', 'none'
+    v4 <- CallMethod v3, 'Collator', []
+    v5 <- CallMethod v4, 'resolvedOptions', []
+    v6 <- GetProperty v5, 'locale'
+    v7 <- LoadString 'pt-BR'
+    v8 <- CallMethod v3, 'DateTimeFormat', []
+    v9 <- CallMethod v8, 'resolvedOptions', []
+    v10 <- GetProperty v9, 'locale'
+EndIf
+
+
+if (this.Intl) {
+    Intl.Collator().resolvedOptions().locale;
+    Intl.DateTimeFormat().resolvedOptions().locale;
+}
+
+FuzzIL program written to corpus/regress-6288.fzil

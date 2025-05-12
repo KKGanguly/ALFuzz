@@ -1,0 +1,66 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'lastIndexHasBeenSet', 'var', v0
+v2 <- LoadInteger '0'
+v3 <- CreateNamedVariable 'countOfExecGets', 'var', v2
+v4 <- CreateNamedVariable 'RegExp', 'none'
+v5 <- BeginClassDefinition v4
+    BeginClassConstructor -> v6, v7, v8
+        CallSuperConstructor [v7, v8]
+        v9 <- LoadInteger '42'
+        SetProperty v6, 'lastIndex', v9
+        v10 <- CreateNamedVariable 're', 'const', v6
+        v11 <- LoadString 'exec'
+        v12 <- BeginPlainFunction -> 
+            v13 <- GetProperty v10, 'lastIndex'
+            v14 <- LoadInteger '42'
+            v15 <- Compare v13, '!=', v14
+            v16 <- UnaryOperation v3, '++'
+            v17 <- GetProperty v4, 'prototype'
+            v18 <- GetProperty v17, 'exec'
+            Return v18
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `get`, v12
+        v19 <- EndObjectLiteral
+        v20 <- CreateNamedVariable 'Object', 'none'
+        v21 <- CallMethod v20, 'defineProperty', [v6, v11, v19]
+    EndClassConstructor
+EndClassDefinition
+v22 <- LoadRegExp 'x' ''
+v23 <- Construct v5, [v22]
+v24 <- CreateNamedVariable 're', 'var', v23
+v25 <- LoadInteger '42'
+v26 <- GetProperty v24, 'lastIndex'
+v27 <- LoadInteger '0'
+v28 <- LoadString 'axbxc'
+v29 <- CallMethod v28, 'split', [v24]
+v30 <- CreateNamedVariable 'result', 'var', v29
+v31 <- LoadInteger '5'
+v32 <- LoadString 'a'
+v33 <- LoadString 'b'
+v34 <- LoadString 'c'
+v35 <- CreateArray [v32, v33, v34]
+
+
+var lastIndexHasBeenSet = false;
+var countOfExecGets = 0;
+class C5 extends RegExp {
+    constructor(a7, a8) {
+        super(a7, a8);
+        this.lastIndex = 42;
+        const re = this;
+        function f12() {
+            re.lastIndex != 42;
+            countOfExecGets++;
+            return RegExp.prototype.exec;
+        }
+        Object.defineProperty(this, "exec", { get: f12 });
+    }
+}
+const v23 = new C5(/x/);
+var re = v23;
+re.lastIndex;
+var result = ("axbxc").split(re);
+["a","b","c"];
+
+FuzzIL program written to corpus/regress-5434.fzil

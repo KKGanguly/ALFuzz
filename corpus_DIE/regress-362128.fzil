@@ -1,0 +1,93 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- BeginPlainFunction -> 
+        v2 <- LoadThis
+        v3 <- GetProperty v2, 'field'
+        Return v3
+    EndPlainFunction
+    Return v1
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '10'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `field`, v5
+    v6 <- EndObjectLiteral
+    v7 <- CreateNamedVariable 'x', 'var', v6
+    Return v7
+EndPlainFunction
+BeginObjectLiteral
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'method', 'none'
+Reassign v9, v8
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'receiver', 'none'
+Reassign v11, v10
+v12 <- LoadString 'A'
+v13 <- CallFunction v0, [v12]
+v14 <- CreateNamedVariable 'method', 'none'
+Reassign v14, v13
+v15 <- LoadString 'A'
+v16 <- CallFunction v4, [v15]
+v17 <- CreateNamedVariable 'receiver', 'none'
+Reassign v17, v16
+v18 <- BeginPlainFunction -> 
+    v19 <- BeginPlainFunction -> v20
+        Directive 'use strict'
+        v21 <- CreateNamedVariable 'receiver', 'none'
+        v22 <- LoadArguments
+        v23 <- CreateNamedVariable 'method', 'none'
+        v24 <- CallMethod v23, 'apply', [v21, v22]
+        Return v24
+    EndPlainFunction
+    Return v19
+EndPlainFunction
+v25 <- CallFunction v18, []
+v26 <- CreateNamedVariable 'foo', 'var', v25
+v27 <- LoadString 'a'
+v28 <- LoadString 'b'
+v29 <- LoadString 'c'
+v30 <- CallFunction v26, [v27, v28, v29]
+v31 <- LoadString 'a'
+v32 <- LoadString 'b'
+v33 <- LoadString 'c'
+v34 <- CallFunction v26, [v31, v32, v33]
+v35 <- LoadString 'a'
+v36 <- LoadString 'b'
+v37 <- LoadString 'c'
+v38 <- CallFunction v26, [v35, v36, v37]
+v39 <- LoadString 'a'
+v40 <- LoadString 'b'
+v41 <- LoadString 'c'
+v42 <- CallFunction v26, [v39, v40, v41]
+
+
+function genM() {
+    'use strict';
+    function f1() {
+        return this.field;
+    }
+    return f1;
+}
+function genR() {
+    var x = { field: 10 };
+    return x;
+}
+method = {};
+receiver = {};
+method = genM("A");
+receiver = genR("A");
+function f18() {
+    function suspect(a20) {
+        'use strict';
+        return method.apply(receiver, arguments);
+    }
+    return suspect;
+}
+var foo = f18();
+foo("a", "b", "c");
+foo("a", "b", "c");
+foo("a", "b", "c");
+foo("a", "b", "c");
+
+FuzzIL program written to corpus/regress-362128.fzil

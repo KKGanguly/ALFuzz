@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '+', v2
+    v4 <- CreateNamedVariable 'r', 'var', v3
+    v5 <- BeginPlainFunction -> 
+        v6 <- LoadInteger '42'
+        Return v6
+    EndPlainFunction
+    v7 <- CallFunction v5, []
+    v8 <- BinaryOperation v4, '+', v7
+    Return v8
+EndPlainFunction
+BeginForLoopInitializer
+    v9 <- LoadInteger '0'
+BeginForLoopCondition -> v10
+    v11 <- LoadInteger '5'
+    v12 <- Compare v10, '<', v11
+BeginForLoopAfterthought v12 -> v13
+    v14 <- UnaryOperation v13, '++'
+BeginForLoopBody -> v15
+    v16 <- LoadInteger '1'
+    v17 <- LoadInteger '2'
+    v18 <- CallFunction v0, [v16, v17]
+EndForLoop
+v19 <- LoadInteger '45'
+v20 <- LoadInteger '1'
+v21 <- LoadInteger '2'
+v22 <- CallFunction v0, [v20, v21]
+v23 <- LoadString 'foo742'
+v24 <- LoadString 'foo'
+v25 <- LoadInteger '7'
+v26 <- CallFunction v0, [v24, v25]
+
+
+function h(a1, a2) {
+    var r = a1 + a2;
+    function X() {
+        return 42;
+    }
+    return r + X();
+}
+for (let i10 = 0; i10 < 5; i10++) {
+    h(1, 2);
+}
+h(1, 2);
+h("foo", 7);
+
+FuzzIL program written to corpus/regress-fundecl.fzil

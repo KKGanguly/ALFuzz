@@ -1,0 +1,80 @@
+v0 <- LoadInteger '267'
+v1 <- CreateNamedVariable 'height', 'var', v0
+v2 <- LoadInteger '0'
+v3 <- CreateNamedVariable 'count', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '0'
+    Reassign v1, v5
+    v6 <- UnaryOperation '++', v3
+EndPlainFunction
+v7 <- BeginPlainFunction -> 
+EndPlainFunction
+v8 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v9 <- LoadInteger '0'
+    BeginForLoopCondition -> v10
+        v11 <- Compare v10, '<', v1
+    BeginForLoopAfterthought v11 -> v12
+        v13 <- UnaryOperation '++', v12
+    BeginForLoopBody -> v14
+        BeginForLoopInitializer
+            v15 <- LoadInteger '6'
+            v16 <- UnaryOperation '-', v15
+        BeginForLoopCondition -> v17
+            v18 <- LoadInteger '7'
+            v19 <- Compare v17, '<', v18
+        BeginForLoopAfterthought v19 -> v20
+            v21 <- UnaryOperation '++', v20
+        BeginForLoopBody -> v22
+            v23 <- BinaryOperation v14, '+', v22
+            v24 <- LoadInteger '0'
+            v25 <- Compare v23, '<', v24
+            v26 <- BinaryOperation v14, '+', v22
+            v27 <- Compare v26, '>=', v1
+            v28 <- BinaryOperation v25, '||', v27
+            BeginIf v28
+                Continue
+            EndIf
+            BeginForLoopInitializer
+                v29 <- LoadInteger '6'
+                v30 <- UnaryOperation '-', v29
+            BeginForLoopCondition -> v31
+                v32 <- LoadInteger '7'
+                v33 <- Compare v31, '<', v32
+            BeginForLoopAfterthought v33 -> v34
+                v35 <- UnaryOperation '++', v34
+            BeginForLoopBody -> v36
+                v37 <- CallFunction v4, []
+            EndForLoop
+        EndForLoop
+        v38 <- CallFunction v7, []
+    EndForLoop
+EndPlainFunction
+v39 <- CallFunction v8, []
+v40 <- LoadInteger '13'
+
+
+var height = 267;
+var count = 0;
+function inner() {
+    height = 0;
+    ++count;
+}
+function outer() {
+}
+function test() {
+    for (let i10 = 0; i10 < height; ++i10) {
+        for (let i17 = -6; i17 < 7; ++i17) {
+            if (((i10 + i17) < 0) || ((i10 + i17) >= height)) {
+                continue;
+            }
+            for (let i31 = -6; i31 < 7; ++i31) {
+                inner();
+            }
+        }
+        outer();
+    }
+}
+test();
+
+FuzzIL program written to corpus/regress-3136962.fzil

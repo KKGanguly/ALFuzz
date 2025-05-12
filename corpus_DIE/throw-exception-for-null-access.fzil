@@ -1,0 +1,23 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'caught', 'var', v0
+BeginTry
+    v2 <- LoadNull
+    v3 <- GetElement v2, '0'
+    v4 <- LoadBoolean 'false'
+BeginCatch -> v5
+    v6 <- LoadBoolean 'true'
+    Reassign v1, v6
+    v7 <- CreateNamedVariable 'TypeError', 'none'
+    v8 <- TestInstanceOf v5, v7
+EndTryCatch
+
+
+var caught = false;
+try {
+    null[0];
+} catch(e5) {
+    caught = true;
+    e5 instanceof TypeError;
+}
+
+FuzzIL program written to corpus/throw-exception-for-null-access.fzil

@@ -1,0 +1,42 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '100'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    v7 <- LoadFloat '3.14'
+    v8 <- CreateNamedVariable 'Array', 'none'
+    v9 <- GetProperty v8, 'prototype'
+    v10 <- CallMethod v9, 'unshift', [v7]
+EndForLoop
+v11 <- LoadFloat '1.1'
+v12 <- CreateArray [v11]
+v13 <- CreateNamedVariable 'o31', 'const', v12
+v14 <- LoadFloat '2.2'
+SetElement v13, '37', v14
+v15 <- LoadBoolean 'false'
+v16 <- CallMethod v13, 'concat', [v15]
+v17 <- CreateNamedVariable 'o51', 'const', v16
+v18 <- LoadUndefined
+SetElement v17, '0', v18
+v19 <- GetProperty v17, 'length'
+v20 <- LoadInteger '39'
+v21 <- CallMethod v17, 'sort', []
+v22 <- GetProperty v17, 'length'
+v23 <- LoadInteger '39'
+
+
+for (let i1 = 0; i1 < 100; i1++) {
+    Array.prototype.unshift(3.14);
+}
+const o31 = [1.1];
+o31[37] = 2.2;
+const o51 = o31.concat(false);
+o51[0] = undefined;
+o51.length;
+o51.sort();
+o51.length;
+
+FuzzIL program written to corpus/regress-897512.fzil

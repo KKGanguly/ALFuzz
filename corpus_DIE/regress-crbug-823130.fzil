@@ -1,0 +1,108 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable '__v_1', 'var', v1
+v3 <- LoadInteger '48'
+v4 <- CreateNamedVariable '__v_2', 'var', v3
+v5 <- LoadString 'abc'
+v6 <- CreateNamedVariable '__v_4', 'var', v5
+v7 <- LoadString 'def'
+v8 <- CreateNamedVariable '__v_3', 'var', v7
+v9 <- BeginPlainFunction -> v10
+    v11 <- CreateArrayWithSpread [...v10]
+EndPlainFunction
+v12 <- LoadInteger '1'
+v13 <- CreateArray [v12]
+v14 <- CallFunction v9, [v13]
+v15 <- LoadFloat '3.3'
+v16 <- CreateArray [v15]
+v17 <- CallFunction v9, [v16]
+BeginObjectLiteral
+v18 <- EndObjectLiteral
+v19 <- CreateArray [v18]
+v20 <- CallFunction v9, [v19]
+v21 <- CreateArray [v2, v4, v8, v6]
+v22 <- CreateNamedVariable 'vars', 'var', v21
+BeginForLoopInitializer
+    v23 <- LoadInteger '0'
+BeginForLoopCondition -> v24
+    v25 <- GetProperty v22, 'length'
+    v26 <- Compare v24, '<', v25
+    v27 <- LoadInteger '7'
+    v28 <- Compare v24, '<', v27
+    v29 <- BinaryOperation v26, '&&', v28
+BeginForLoopAfterthought v29 -> v30
+    v31 <- UnaryOperation v30, '++'
+BeginForLoopBody -> v32
+    BeginForLoopInitializer
+    BeginForLoopCondition -> v33
+        v34 <- GetProperty v22, 'length'
+        v35 <- Compare v33, '<', v34
+        v36 <- LoadInteger '7'
+        v37 <- BinaryOperation v36, '+', v32
+        v38 <- Compare v33, '<', v37
+        v39 <- BinaryOperation v35, '&&', v38
+    BeginForLoopAfterthought v39 -> v40
+        v41 <- UnaryOperation v40, '++'
+    BeginForLoopBody -> v42
+        v43 <- GetComputedProperty v22, v32
+        v44 <- CreateNamedVariable 'v1', 'var', v43
+        v45 <- LoadUndefined
+        v46 <- CreateNamedVariable 'e1', 'var', v45
+        v47 <- LoadUndefined
+        v48 <- CreateNamedVariable 'e2', 'var', v47
+        BeginTry
+            v49 <- CallFunction v9, [v44]
+            v50 <- CallFunction v9, []
+        BeginCatch -> v51
+            v52 <- LoadString ''
+            v53 <- BinaryOperation v52, '+', v51
+            Reassign v46, v53
+        EndTryCatch
+        v54 <- CreateNamedVariable 'gc', 'none'
+        v55 <- CallFunction v54, []
+        BeginTry
+            v56 <- CallFunction v9, [v44]
+            v57 <- CallFunction v9, []
+        BeginCatch -> v58
+            v59 <- LoadString ''
+            v60 <- BinaryOperation v59, '+', v58
+            Reassign v48, v60
+        EndTryCatch
+    EndForLoop
+EndForLoop
+
+
+const v1 = new Array();
+var __v_1 = v1;
+var __v_2 = 48;
+var __v_4 = "abc";
+var __v_3 = "def";
+function __f_2(a10) {
+    [...a10];
+}
+__f_2([1]);
+__f_2([3.3]);
+__f_2([{}]);
+var vars = [__v_1,__v_2,__v_3,__v_4];
+for (let i24 = 0; (i24 < vars.length) && (i24 < 7); i24++) {
+    for (let i33 = i24; (i33 < vars.length) && (i33 < (7 + i24)); i33++) {
+        var v1 = vars[i24];
+        var e1;
+        var e2;
+        try {
+            __f_2(v1);
+            __f_2();
+        } catch(e51) {
+            e1 = "" + e51;
+        }
+        gc();
+        try {
+            __f_2(v1);
+            __f_2();
+        } catch(e58) {
+            e2 = "" + e58;
+        }
+    }
+}
+
+FuzzIL program written to corpus/regress-crbug-823130.fzil

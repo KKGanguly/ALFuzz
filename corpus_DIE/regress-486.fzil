@@ -1,0 +1,11 @@
+v0 <- LoadString 'Тест'
+v1 <- CreateNamedVariable 'st', 'var', v0
+v2 <- LoadRegExp '^[\u0430-\u044fa-z]+$' 'i'
+v3 <- CallMethod v2, 'test', [v1]
+v4 <- CreateNamedVariable 'cyrillicMatch', 'var', v3
+
+
+var st = "Тест";
+var cyrillicMatch = /^[\u0430-\u044fa-z]+$/i.test(st);
+
+FuzzIL program written to corpus/regress-486.fzil

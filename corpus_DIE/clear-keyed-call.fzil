@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- LoadInteger '0'
+    v4 <- CallComputedMethod v1, v3, [v2]
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6
+    Return v6
+EndPlainFunction
+v7 <- CreateArray [v5]
+v8 <- CallFunction v0, [v7]
+v9 <- BeginPlainFunction -> v10
+    Return v10
+EndPlainFunction
+v11 <- CreateArray [v9]
+v12 <- CallFunction v0, [v11]
+v13 <- BeginPlainFunction -> v14
+    Return v14
+EndPlainFunction
+v15 <- CreateArray [v13]
+v16 <- CallFunction v0, [v15]
+v17 <- CreateNamedVariable 'gc', 'none'
+v18 <- CallFunction v17, []
+v19 <- CallFunction v17, []
+v20 <- CallFunction v17, []
+
+
+function f(a1) {
+    a1[0](1);
+}
+function f5(a6) {
+    return a6;
+}
+f([f5]);
+function f9(a10) {
+    return a10;
+}
+f([f9]);
+function f13(a14) {
+    return a14;
+}
+f([f13]);
+gc();
+gc();
+gc();
+
+FuzzIL program written to corpus/clear-keyed-call.fzil

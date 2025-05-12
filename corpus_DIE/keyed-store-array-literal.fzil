@@ -1,0 +1,159 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'x', 'const', v2
+    v4 <- LoadInteger '42'
+    SetElement v3, '1', v4
+    v5 <- LoadUndefined
+    v6 <- LoadInteger '42'
+    v7 <- CreateArray [v5, v6]
+EndPlainFunction
+v8 <- CallFunction v0, []
+v9 <- CallFunction v0, []
+v10 <- CallFunction v0, []
+v11 <- CallFunction v0, []
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadInteger '0'
+    v14 <- CreateArray [v13]
+    v15 <- CreateNamedVariable 'x', 'const', v14
+    v16 <- LoadInteger '1'
+    v17 <- LoadInteger '2'
+    v18 <- LoadInteger '3'
+    v19 <- LoadInteger '4'
+    v20 <- CreateArray [v16, v17, v18, v19]
+    BeginForOfLoop v20 -> v21
+        v22 <- GetProperty v15, 'length'
+        SetComputedProperty v15, v22, v21
+    EndForOfLoop
+    v23 <- LoadInteger '0'
+    v24 <- LoadInteger '1'
+    v25 <- LoadInteger '2'
+    v26 <- LoadInteger '3'
+    v27 <- LoadInteger '4'
+    v28 <- CreateArray [v23, v24, v25, v26, v27]
+EndPlainFunction
+v29 <- CallFunction v12, []
+v30 <- CallFunction v12, []
+v31 <- CallFunction v12, []
+v32 <- CallFunction v12, []
+v33 <- BeginPlainFunction -> 
+    v34 <- LoadInteger '0'
+    v35 <- CreateArray [v34]
+    v36 <- CreateNamedVariable 'x', 'const', v35
+    v37 <- LoadFloat '1.1'
+    BeginObjectLiteral
+    v38 <- EndObjectLiteral
+    v39 <- CreateArray [v37, v38]
+    BeginForOfLoop v39 -> v40
+        v41 <- GetProperty v36, 'length'
+        SetComputedProperty v36, v41, v40
+    EndForOfLoop
+    v42 <- LoadInteger '0'
+    v43 <- LoadFloat '1.1'
+    BeginObjectLiteral
+    v44 <- EndObjectLiteral
+    v45 <- CreateArray [v42, v43, v44]
+EndPlainFunction
+v46 <- CallFunction v33, []
+v47 <- CallFunction v33, []
+v48 <- CallFunction v33, []
+v49 <- CallFunction v33, []
+v50 <- BeginPlainFunction -> v51
+    v52 <- GetProperty v51, 'length'
+    v53 <- GetProperty v51, 'length'
+    SetComputedProperty v51, v53, v52
+EndPlainFunction
+v54 <- CreateArray []
+v55 <- CreateNamedVariable 'x1', 'let', v54
+v56 <- CallFunction v50, [v55]
+v57 <- LoadInteger '0'
+v58 <- CreateArray [v57]
+v59 <- CallFunction v50, [v55]
+v60 <- LoadInteger '0'
+v61 <- LoadInteger '1'
+v62 <- CreateArray [v60, v61]
+v63 <- CallFunction v50, [v55]
+v64 <- LoadInteger '0'
+v65 <- LoadInteger '1'
+v66 <- LoadInteger '2'
+v67 <- CreateArray [v64, v65, v66]
+v68 <- CallFunction v50, [v55]
+v69 <- LoadInteger '0'
+v70 <- LoadInteger '1'
+v71 <- LoadInteger '2'
+v72 <- LoadInteger '3'
+v73 <- CreateArray [v69, v70, v71, v72]
+v74 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `length`, v74
+v75 <- EndObjectLiteral
+v76 <- CreateNamedVariable 'x2', 'let', v75
+v77 <- CallFunction v50, [v76]
+v78 <- LoadInteger '42'
+v79 <- GetElement v76, '42'
+v80 <- CallFunction v50, [v76]
+v81 <- LoadInteger '42'
+v82 <- GetElement v76, '42'
+v83 <- CallFunction v50, [v76]
+v84 <- LoadInteger '42'
+v85 <- GetElement v76, '42'
+v86 <- CallFunction v50, [v76]
+v87 <- LoadInteger '42'
+v88 <- GetElement v76, '42'
+
+
+function f1() {
+    const x = [,];
+    x[1] = 42;
+    [,42];
+}
+f1();
+f1();
+f1();
+f1();
+function f2() {
+    const x = [0];
+    for (const v21 of [1,2,3,4]) {
+        x[x.length] = v21;
+    }
+    [0,1,2,3,4];
+}
+f2();
+f2();
+f2();
+f2();
+function f3() {
+    const x = [0];
+    for (const v40 of [1.1,{}]) {
+        x[x.length] = v40;
+    }
+    [0,1.1,{}];
+}
+f3();
+f3();
+f3();
+f3();
+function f4(a51) {
+    const v52 = a51.length;
+    a51[a51.length] = v52;
+}
+let x1 = [];
+f4(x1);
+[0];
+f4(x1);
+[0,1];
+f4(x1);
+[0,1,2];
+f4(x1);
+[0,1,2,3];
+let x2 = { length: 42 };
+f4(x2);
+x2[42];
+f4(x2);
+x2[42];
+f4(x2);
+x2[42];
+f4(x2);
+x2[42];
+
+FuzzIL program written to corpus/keyed-store-array-literal.fzil

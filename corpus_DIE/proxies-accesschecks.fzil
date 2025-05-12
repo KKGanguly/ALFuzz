@@ -1,0 +1,25 @@
+v0 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v1 <- EndObjectLiteral
+BeginObjectLiteral
+    BeginObjectLiteralMethod `getPrototypeOf` -> v2
+    EndObjectLiteralMethod
+    BeginObjectLiteralMethod `get` -> v3
+    EndObjectLiteralMethod
+v4 <- EndObjectLiteral
+v5 <- Construct v0, [v1, v4]
+v6 <- LoadThis
+SetProperty v6, '__proto__', v5
+
+
+const v1 = {};
+const v4 = {
+    getPrototypeOf() {
+    },
+    get() {
+    },
+};
+const v5 = new Proxy(v1, v4);
+this.__proto__ = v5;
+
+FuzzIL program written to corpus/proxies-accesschecks.fzil

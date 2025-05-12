@@ -1,0 +1,75 @@
+v0 <- LoadString '2016-01-02'
+v1 <- CreateNamedVariable 'str', 'const', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadUndefined
+    v4 <- CreateNamedVariable 're', 'var', v3
+    v5 <- BeginPlainFunction -> 
+        v6 <- LoadInteger '42'
+        SetProperty v4, 'x', v6
+        v7 <- DeleteProperty v4, 'x'
+        v8 <- LoadString 'def'
+        Return v8
+    EndPlainFunction
+    v9 <- LoadRegExp '.' 'g'
+    Reassign v4, v9
+    v10 <- LoadString 'abc'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v5
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'Symbol', 'none'
+    v13 <- GetProperty v12, 'replace'
+    v14 <- CallComputedMethod v4, v13, [v10, v11]
+    Return v14
+EndPlainFunction
+v15 <- BeginPlainFunction -> 
+    v16 <- LoadUndefined
+    v17 <- CreateNamedVariable 're', 'var', v16
+    v18 <- BeginPlainFunction -> 
+        v19 <- LoadInteger '42'
+        SetProperty v17, 'x', v19
+        v20 <- DeleteProperty v17, 'x'
+        v21 <- LoadInteger '42'
+        Return v21
+    EndPlainFunction
+    v22 <- LoadRegExp '.' 'g'
+    Reassign v17, v22
+    v23 <- LoadString 'abc'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v18
+    v24 <- EndObjectLiteral
+    v25 <- CreateNamedVariable 'Symbol', 'none'
+    v26 <- GetProperty v25, 'split'
+    v27 <- CallComputedMethod v17, v26, [v23, v24]
+    Return v27
+EndPlainFunction
+v28 <- CallFunction v2, []
+v29 <- CallFunction v15, []
+
+
+const str = "2016-01-02";
+function testToUint32InSplit() {
+    var re;
+    function toDictMode() {
+        re.x = 42;
+        delete re.x;
+        return "def";
+    }
+    re = /./g;
+    const v11 = { valueOf: toDictMode };
+    return re[Symbol.replace]("abc", v11);
+}
+function testToStringInReplace() {
+    var re;
+    function toDictMode() {
+        re.x = 42;
+        delete re.x;
+        return 42;
+    }
+    re = /./g;
+    const v24 = { valueOf: toDictMode };
+    return re[Symbol.split]("abc", v24);
+}
+testToUint32InSplit();
+testToStringInReplace();
+
+FuzzIL program written to corpus/regress-6210.fzil

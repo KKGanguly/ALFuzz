@@ -1,0 +1,20 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadUndefined
+    v3 <- CreateArray [v1, v2]
+EndPlainFunction
+v4 <- LoadInteger '0'
+v5 <- CallFunction v0, [v4]
+v6 <- LoadInteger '0'
+v7 <- CallFunction v0, [v6]
+v8 <- LoadInteger '0'
+v9 <- CallFunction v0, [v8]
+
+
+function test(a1) {
+    [a1,,];
+}
+test(0);
+test(0);
+test(0);
+
+FuzzIL program written to corpus/regress-435073.fzil

@@ -1,0 +1,22 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateNamedVariable 'Boolean', 'none'
+    v3 <- GetProperty v2, 'constructor'
+    v4 <- LoadInteger '1'
+    v5 <- BinaryOperation v3, '+', v4
+    v6 <- BinaryOperation v1, '>>', v5
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '1'
+v8 <- CallFunction v0, []
+v9 <- LoadInteger '1'
+v10 <- CallFunction v0, []
+
+
+function f() {
+    return 1 >> (Boolean.constructor + 1);
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-3359.fzil

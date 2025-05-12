@@ -1,0 +1,25 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '1'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'array', 'let', v2
+v4 <- LoadInteger '1'
+v5 <- LoadInteger '0'
+v6 <- CallMethod v3, 'splice', [v4, v5, v3]
+v7 <- BeginArrowFunction -> 
+    v8 <- CreateNamedVariable 'Infinity', 'none'
+    v9 <- CallMethod v3, 'flat', [v8]
+    Return v9
+EndArrowFunction
+v10 <- CallFunction v7, []
+v11 <- CreateNamedVariable 'RangeError', 'none'
+
+
+const v2 = new Array(1);
+let array = v2;
+array.splice(1, 0, array);
+const v7 = () => {
+    return array.flat(Infinity);
+};
+v7();
+
+FuzzIL program written to corpus/regress-8708.fzil

@@ -1,0 +1,76 @@
+v0 <- LoadRegExp 'x' 'g'
+v1 <- CreateNamedVariable 're', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '15'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- LoadInteger '3'
+    v10 <- BinaryOperation v8, '%', v9
+    v11 <- GetProperty v1, 'lastIndex'
+    v12 <- LoadString 'preindex'
+    v13 <- BinaryOperation v12, '+', v8
+    v14 <- LoadString 'xx'
+    v15 <- CallMethod v1, 'exec', [v14]
+    v16 <- CreateNamedVariable 'res', 'var', v15
+    v17 <- LoadInteger '3'
+    v18 <- BinaryOperation v8, '%', v17
+    v19 <- LoadInteger '2'
+    v20 <- Compare v18, '==', v19
+    v21 <- LoadNull
+    v22 <- LoadString 'x'
+    v23 <- CreateArray [v22]
+    v24 <- TernaryOperation v20, v21, v23
+    v25 <- LoadString 'res'
+    v26 <- BinaryOperation v25, '+', v8
+EndForLoop
+v27 <- LoadRegExp 'x' 'g'
+Reassign v1, v27
+BeginForLoopInitializer
+    v28 <- LoadInteger '0'
+BeginForLoopCondition -> v29
+    v30 <- LoadInteger '15'
+    v31 <- Compare v29, '<', v30
+BeginForLoopAfterthought v31 -> v32
+    v33 <- UnaryOperation v32, '++'
+BeginForLoopBody -> v34
+    v35 <- LoadInteger '3'
+    v36 <- BinaryOperation v34, '%', v35
+    v37 <- GetProperty v1, 'lastIndex'
+    v38 <- LoadString 'testpreindex'
+    v39 <- BinaryOperation v38, '+', v34
+    v40 <- LoadString 'xx'
+    v41 <- CallMethod v1, 'test', [v40]
+    v42 <- CreateNamedVariable 'res', 'var', v41
+    v43 <- LoadInteger '3'
+    v44 <- BinaryOperation v34, '%', v43
+    v45 <- LoadInteger '2'
+    v46 <- Compare v44, '!=', v45
+    v47 <- LoadString 'testres'
+    v48 <- BinaryOperation v47, '+', v34
+EndForLoop
+
+
+var re = /x/g;
+for (let i3 = 0; i3 < 15; i3++) {
+    i3 % 3;
+    re.lastIndex;
+    "preindex" + i3;
+    var res = re.exec("xx");
+    (i3 % 3) == 2 ? null : ["x"];
+    "res" + i3;
+}
+re = /x/g;
+for (let i29 = 0; i29 < 15; i29++) {
+    i29 % 3;
+    re.lastIndex;
+    "testpreindex" + i29;
+    var res = re.test("xx");
+    (i29 % 3) != 2;
+    "testres" + i29;
+}
+
+FuzzIL program written to corpus/regress-45469.fzil

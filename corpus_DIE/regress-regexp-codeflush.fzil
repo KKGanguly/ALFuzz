@@ -1,0 +1,55 @@
+v0 <- CreateNamedVariable 'RegExp', 'none'
+v1 <- LoadString '(s)'
+v2 <- LoadString 'g'
+v3 <- Construct v0, [v1, v2]
+v4 <- CreateNamedVariable 're', 'var', v3
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadString '42'
+    Return v6
+EndPlainFunction
+BeginForLoopInitializer
+    v7 <- LoadInteger '0'
+BeginForLoopCondition -> v8
+    v9 <- LoadInteger '10'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10 -> v11
+    v12 <- UnaryOperation v11, '++'
+BeginForLoopBody -> v13
+    v14 <- LoadString 's foo s bar s foo s bar s'
+    v15 <- CreateNamedVariable 'x', 'var', v14
+    v16 <- BinaryOperation v15, '+', v15
+    Reassign v15, v16
+    v17 <- BinaryOperation v15, '+', v15
+    Reassign v15, v17
+    v18 <- BinaryOperation v15, '+', v15
+    Reassign v15, v18
+    v19 <- BinaryOperation v15, '+', v15
+    Reassign v15, v19
+    v20 <- BinaryOperation v15, '+', v15
+    Reassign v15, v20
+    v21 <- BinaryOperation v15, '+', v15
+    Reassign v15, v21
+    v22 <- BinaryOperation v15, '+', v15
+    Reassign v15, v22
+    v23 <- CallMethod v15, 'replace', [v4, v5]
+EndForLoop
+
+
+const v3 = new RegExp("(s)", "g");
+var re = v3;
+function foo() {
+    return "42";
+}
+for (let i8 = 0; i8 < 10; i8++) {
+    var x = "s foo s bar s foo s bar s";
+    x = x + x;
+    x = x + x;
+    x = x + x;
+    x = x + x;
+    x = x + x;
+    x = x + x;
+    x = x + x;
+    x.replace(re, foo);
+}
+
+FuzzIL program written to corpus/regress-regexp-codeflush.fzil

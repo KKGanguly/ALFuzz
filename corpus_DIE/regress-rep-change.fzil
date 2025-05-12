@@ -1,0 +1,52 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadBoolean 'true'
+    BeginIf v2
+        BeginForLoopInitializer
+        BeginForLoopCondition -> v3
+            v4 <- LoadInteger '10'
+            v5 <- Compare v3, '<', v4
+        BeginForLoopAfterthought v5 -> v6
+            v7 <- UnaryOperation v6, '++'
+        BeginForLoopBody -> v8
+        EndForLoop
+    EndIf
+    BeginForLoopInitializer
+    BeginForLoopCondition -> v9
+        v10 <- LoadInteger '10'
+        v11 <- Compare v9, '<', v10
+    BeginForLoopAfterthought v11 -> v12
+        v13 <- UnaryOperation v12, '++'
+    BeginForLoopBody -> v14
+    EndForLoop
+EndPlainFunction
+v15 <- LoadInteger '3'
+v16 <- CreateNamedVariable 'n', 'var', v15
+BeginForLoopInitializer
+    v17 <- LoadInteger '0'
+BeginForLoopCondition -> v18
+    v19 <- Compare v18, '<', v16
+BeginForLoopAfterthought v19 -> v20
+    v21 <- UnaryOperation '++', v20
+BeginForLoopBody -> v22
+    v23 <- LoadInteger '0'
+    v24 <- CallFunction v0, [v23]
+EndForLoop
+v25 <- LoadInteger '0'
+v26 <- CallFunction v0, [v25]
+
+
+function test(a1) {
+    if (true) {
+        for (let i3 = a1; i3 < 10; i3++) {
+        }
+    }
+    for (let i9 = a1; i9 < 10; i9++) {
+    }
+}
+var n = 3;
+for (let i18 = 0; i18 < n; ++i18) {
+    test(0);
+}
+test(0);
+
+FuzzIL program written to corpus/regress-rep-change.fzil

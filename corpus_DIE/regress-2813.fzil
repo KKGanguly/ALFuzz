@@ -1,0 +1,48 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- BinaryOperation v1, '+', v2
+    v4 <- CreateNamedVariable 'a', 'var', v3
+    v5 <- LoadInteger '2'
+    v6 <- BinaryOperation v1, '+', v5
+    v7 <- CreateNamedVariable 'b', 'var', v6
+    v8 <- LoadInteger '0'
+    v9 <- Compare v1, '!=', v8
+    BeginIf v9
+        v10 <- LoadInteger '0'
+        v11 <- Compare v1, '>', v10
+        v12 <- LoadInteger '100'
+        v13 <- Compare v1, '<', v12
+        v14 <- BinaryOperation v11, '&', v13
+        BeginIf v14
+            Return v4
+        EndIf
+    EndIf
+    v15 <- LoadInteger '0'
+    Return v15
+EndPlainFunction
+v16 <- LoadInteger '0'
+v17 <- LoadInteger '0'
+v18 <- CallFunction v0, [v17]
+v19 <- LoadInteger '0'
+v20 <- LoadInteger '0'
+v21 <- CallFunction v0, [v20]
+v22 <- LoadInteger '3'
+v23 <- LoadInteger '2'
+v24 <- CallFunction v0, [v23]
+
+
+function foo(a1) {
+    var a = a1 + 1;
+    var b = a1 + 2;
+    if (a1 != 0) {
+        if ((a1 > 0) & (a1 < 100)) {
+            return a;
+        }
+    }
+    return 0;
+}
+foo(0);
+foo(0);
+foo(2);
+
+FuzzIL program written to corpus/regress-2813.fzil

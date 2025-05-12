@@ -1,0 +1,69 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `v`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'o', 'var', v1
+v3 <- LoadBoolean 'false'
+v4 <- CreateNamedVariable 'deopt', 'var', v3
+v5 <- LoadString 'x'
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '1'
+    Return v7
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v6
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'defineProperty', [v2, v5, v8]
+v11 <- BeginPlainFunction -> v12, v13, v14
+    v15 <- BinaryOperation v12, '+', v14
+    Return v15
+EndPlainFunction
+v16 <- BeginPlainFunction -> v17, v18
+    v19 <- LoadInteger '1'
+    v20 <- GetComputedProperty v17, v18
+    v21 <- LoadInteger '2'
+    v22 <- LoadInteger '3'
+    v23 <- CallFunction v11, [v19, v21, v22]
+    Return v23
+EndPlainFunction
+v24 <- LoadInteger '4'
+v25 <- LoadString 'v'
+v26 <- CallFunction v16, [v2, v25]
+v27 <- LoadInteger '4'
+v28 <- LoadString 'v'
+v29 <- CallFunction v16, [v2, v28]
+v30 <- LoadInteger '4'
+v31 <- LoadString 'x'
+v32 <- CallFunction v16, [v2, v31]
+v33 <- LoadInteger '4'
+v34 <- LoadString 'x'
+v35 <- CallFunction v16, [v2, v34]
+v36 <- LoadBoolean 'true'
+Reassign v4, v36
+v37 <- LoadInteger '4'
+v38 <- LoadString 'x'
+v39 <- CallFunction v16, [v2, v38]
+
+
+var o = { v: 1 };
+var deopt = false;
+function f6() {
+    return 1;
+}
+Object.defineProperty(o, "x", { get: f6 });
+function bar(a12, a13, a14) {
+    return a12 + a14;
+}
+function foo(a17, a18) {
+    a17[a18];
+    return bar(1, 2, 3);
+}
+foo(o, "v");
+foo(o, "v");
+foo(o, "x");
+foo(o, "x");
+deopt = true;
+foo(o, "x");
+
+FuzzIL program written to corpus/deopt-accessors7.fzil

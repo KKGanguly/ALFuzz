@@ -1,0 +1,197 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- LoadString 'a'
+v3 <- BeginPlainFunction -> 
+    BeginTry
+        v4 <- LoadInteger '40'
+        v5 <- CreateNamedVariable 'y', 'none'
+        SetProperty v5, 'x', v4
+    BeginCatch -> v6
+        v7 <- LoadInteger '3'
+        v8 <- LoadString '\n'
+        v9 <- GetProperty v6, 'stack'
+        v10 <- CallMethod v9, 'split', [v8]
+        v11 <- GetProperty v10, 'length'
+    EndTryCatch
+    v12 <- LoadInteger '40'
+    Return v12
+EndPlainFunction
+v13 <- CallMethod v1, '__defineGetter__', [v2, v3]
+v14 <- LoadString 'a'
+v15 <- BeginPlainFunction -> v16
+    BeginTry
+        v17 <- LoadInteger '40'
+        v18 <- CreateNamedVariable 'y', 'none'
+        SetProperty v18, 'x', v17
+    BeginCatch -> v19
+        v20 <- LoadInteger '3'
+        v21 <- LoadString '\n'
+        v22 <- GetProperty v19, 'stack'
+        v23 <- CallMethod v22, 'split', [v21]
+        v24 <- GetProperty v23, 'length'
+    EndTryCatch
+EndPlainFunction
+v25 <- CallMethod v1, '__defineSetter__', [v14, v15]
+v26 <- BeginPlainFunction -> 
+    BeginTry
+        v27 <- LoadInteger '30'
+        v28 <- CreateNamedVariable 'y', 'none'
+        SetProperty v28, 'x', v27
+    BeginCatch -> v29
+        v30 <- LoadInteger '3'
+        v31 <- LoadString '\n'
+        v32 <- GetProperty v29, 'stack'
+        v33 <- CallMethod v32, 'split', [v31]
+        v34 <- GetProperty v33, 'length'
+    EndTryCatch
+    v35 <- LoadInteger '30'
+    Return v35
+EndPlainFunction
+v36 <- BeginPlainFunction -> v37
+    BeginTry
+        v38 <- LoadInteger '30'
+        v39 <- CreateNamedVariable 'y', 'none'
+        SetProperty v39, 'x', v38
+    BeginCatch -> v40
+        v41 <- LoadInteger '3'
+        v42 <- LoadString '\n'
+        v43 <- GetProperty v40, 'stack'
+        v44 <- CallMethod v43, 'split', [v42]
+        v45 <- GetProperty v44, 'length'
+    EndTryCatch
+EndPlainFunction
+v46 <- LoadString 'b'
+v47 <- CallMethod v1, '__defineGetter__', [v46, v26]
+v48 <- LoadString 'b'
+v49 <- CallMethod v1, '__defineSetter__', [v48, v36]
+v50 <- BeginPlainFunction -> 
+    BeginTry
+        v51 <- LoadInteger '40'
+        v52 <- CreateNamedVariable 'y', 'none'
+        SetProperty v52, 'x', v51
+    BeginCatch -> v53
+        v54 <- LoadInteger '3'
+        v55 <- LoadString '\n'
+        v56 <- GetProperty v53, 'stack'
+        v57 <- CallMethod v56, 'split', [v55]
+        v58 <- GetProperty v57, 'length'
+    EndTryCatch
+    v59 <- LoadInteger '40'
+    Return v59
+EndPlainFunction
+v60 <- BeginPlainFunction -> v61
+    BeginTry
+        v62 <- LoadInteger '40'
+        v63 <- CreateNamedVariable 'y', 'none'
+        SetProperty v63, 'x', v62
+    BeginCatch -> v64
+        v65 <- LoadInteger '3'
+        v66 <- LoadString '\n'
+        v67 <- GetProperty v64, 'stack'
+        v68 <- CallMethod v67, 'split', [v66]
+        v69 <- GetProperty v68, 'length'
+    EndTryCatch
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v50
+    ObjectLiteralAddProperty `set`, v60
+v70 <- EndObjectLiteral
+v71 <- CreateNamedVariable 'descriptor', 'var', v70
+v72 <- LoadString 'c'
+v73 <- CreateNamedVariable 'Object', 'none'
+v74 <- CallMethod v73, 'defineProperty', [v1, v72, v71]
+v75 <- GetProperty v1, 'a'
+v76 <- GetProperty v1, 'b'
+v77 <- GetProperty v1, 'c'
+v78 <- LoadInteger '1'
+SetProperty v1, 'a', v78
+v79 <- LoadInteger '1'
+SetProperty v1, 'b', v79
+v80 <- LoadInteger '1'
+SetProperty v1, 'c', v80
+BeginObjectLiteral
+v81 <- EndObjectLiteral
+v82 <- CreateNamedVariable 'xx', 'none'
+Reassign v82, v81
+v83 <- CreateNamedVariable 'xx', 'none'
+SetProperty v83, '__proto__', v1
+v84 <- GetProperty v83, 'a'
+v85 <- GetProperty v83, 'b'
+v86 <- GetProperty v83, 'c'
+v87 <- LoadInteger '1'
+SetProperty v83, 'a', v87
+v88 <- LoadInteger '1'
+SetProperty v83, 'b', v88
+v89 <- LoadInteger '1'
+SetProperty v83, 'c', v89
+
+
+var x = {};
+function f3() {
+    try {
+        y.x = 40;
+    } catch(e6) {
+        e6.stack.split("\n").length;
+    }
+    return 40;
+}
+x.__defineGetter__("a", f3);
+function f15(a16) {
+    try {
+        y.x = 40;
+    } catch(e19) {
+        e19.stack.split("\n").length;
+    }
+}
+x.__defineSetter__("a", f15);
+function getB() {
+    try {
+        y.x = 30;
+    } catch(e29) {
+        e29.stack.split("\n").length;
+    }
+    return 30;
+}
+function setB(a37) {
+    try {
+        y.x = 30;
+    } catch(e40) {
+        e40.stack.split("\n").length;
+    }
+}
+x.__defineGetter__("b", getB);
+x.__defineSetter__("b", setB);
+function f50() {
+    try {
+        y.x = 40;
+    } catch(e53) {
+        e53.stack.split("\n").length;
+    }
+    return 40;
+}
+function f60(a61) {
+    try {
+        y.x = 40;
+    } catch(e64) {
+        e64.stack.split("\n").length;
+    }
+}
+var descriptor = { get: f50, set: f60 };
+Object.defineProperty(x, "c", descriptor);
+x.a;
+x.b;
+x.c;
+x.a = 1;
+x.b = 1;
+x.c = 1;
+xx = {};
+xx.__proto__ = x;
+xx.a;
+xx.b;
+xx.c;
+xx.a = 1;
+xx.b = 1;
+xx.c = 1;
+
+FuzzIL program written to corpus/regress-798.fzil

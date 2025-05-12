@@ -1,0 +1,37 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallMethod v1, 'boom', []
+    Return v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- CallFunction v0, [v4]
+    v6 <- CreateNamedVariable 'r', 'var', v5
+    Return v6
+EndPlainFunction
+v7 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v8 <- EndObjectLiteral
+    v9 <- CreateNamedVariable 'o', 'var', v8
+    v10 <- LoadString 'prop1'
+    v11 <- CallMethod v9, '__defineGetter__', [v10, v3]
+    v12 <- GetProperty v9, 'prop1'
+EndPlainFunction
+v13 <- CallFunction v7, []
+
+
+function h(a1) {
+    return a1.boom();
+}
+function g() {
+    var r = h({});
+    return r;
+}
+function f() {
+    var o = {};
+    o.__defineGetter__("prop1", g);
+    o.prop1;
+}
+f();
+
+FuzzIL program written to corpus/regress-593299.fzil

@@ -1,0 +1,34 @@
+v0 <- LoadInteger '1073741824'
+v1 <- UnaryOperation '-', v0
+v2 <- CreateNamedVariable 'g', 'var', v1
+v3 <- BeginPlainFunction -> 
+    v4 <- BinaryOperation v2, '*', v2
+    v5 <- BinaryOperation v4, '*', v2
+    v6 <- BinaryOperation v5, '*', v2
+    v7 <- BinaryOperation v6, '*', v2
+    v8 <- BinaryOperation v7, '*', v2
+    v9 <- BinaryOperation v8, '*', v2
+    v10 <- CreateNamedVariable 'x', 'var', v9
+    BeginForLoopInitializer
+    BeginForLoopCondition -> v11
+        v12 <- LoadInteger '1'
+        v13 <- Compare v11, '<', v12
+    BeginForLoopAfterthought v13 -> v14
+    BeginForLoopBody -> v15
+        v16 <- BinaryOperation v15, '*', v10
+        Update v15, '+', v16
+    EndForLoop
+EndPlainFunction
+v17 <- CallFunction v3, []
+
+
+var g = -1073741824;
+function f() {
+    var x = (((((g * g) * g) * g) * g) * g) * g;
+    for (let i11 = g; i11 < 1;) {
+        i11 += i11 * x;
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-644633.fzil

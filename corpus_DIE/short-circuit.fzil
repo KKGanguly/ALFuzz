@@ -1,0 +1,30 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'arr', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '28000'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- CreateNamedVariable 'RegExp', 'none'
+    v10 <- LoadString 'prefix'
+    v11 <- CallMethod v8, 'toString', []
+    v12 <- BinaryOperation v10, '+', v11
+    v13 <- CallMethod v8, 'toString', []
+    v14 <- BinaryOperation v12, '+', v13
+    v15 <- CallMethod v8, 'toString', []
+    v16 <- BinaryOperation v14, '+', v15
+    v17 <- Construct v9, [v16]
+    v18 <- CallMethod v1, 'push', [v17]
+EndForLoop
+
+
+var arr = [];
+for (let i3 = 0; i3 < 28000; i3++) {
+    const v17 = new RegExp((("prefix" + i3.toString()) + i3.toString()) + i3.toString());
+    arr.push(v17);
+}
+
+FuzzIL program written to corpus/short-circuit.fzil

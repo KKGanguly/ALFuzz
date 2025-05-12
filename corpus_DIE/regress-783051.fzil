@@ -1,0 +1,18 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- GetElement v1, '0'
+    v3 <- CreateNamedVariable 'Math', 'none'
+    v4 <- CallMethod v3, 'abs', [v2]
+    Return v4
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- CallFunction v0, []
+
+
+function f() {
+    return Math.abs(([])[0]);
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-783051.fzil

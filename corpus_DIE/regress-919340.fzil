@@ -1,0 +1,40 @@
+v0 <- LoadString 'Σ'
+v1 <- CreateNamedVariable 'E', 'var', v0
+v2 <- LoadInteger '123'
+v3 <- CreateNamedVariable 'PI', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '2'
+    Reassign v1, v5
+    v6 <- LoadRegExp 'b' ''
+    v7 <- CallMethod v6, 'test', [v1]
+    v8 <- LoadInteger '2'
+    Reassign v1, v8
+    v9 <- LoadRegExp 'b' ''
+    v10 <- CallMethod v9, 'test', [v8]
+    v11 <- BinaryOperation v7, '||', v10
+    v12 <- CreateNamedVariable 'print', 'none'
+    v13 <- CallFunction v12, [v5, v11]
+    v14 <- LoadInteger '3'
+    Reassign v1, v14
+    v15 <- BinaryOperation v14, '*', v3
+EndPlainFunction
+v16 <- CallFunction v4, []
+v17 <- CallFunction v4, []
+v18 <- CallFunction v4, []
+
+
+var E = "Σ";
+var PI = 123;
+function f() {
+    E = 2;
+    const v7 = /b/.test(E);
+    E = 2;
+    print(2, v7 || /b/.test(2));
+    E = 3;
+    3 * PI;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-919340.fzil

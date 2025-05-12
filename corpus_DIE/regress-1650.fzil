@@ -1,0 +1,77 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'bind'
+    v3 <- LoadArguments
+    v4 <- GetProperty v1, 'call'
+    v5 <- CallMethod v4, 'apply', [v2, v3]
+    Return v5
+EndPlainFunction
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- Construct v6, []
+v8 <- CreateNamedVariable 'x', 'var', v7
+v9 <- BeginPlainFunction -> 
+EndPlainFunction
+v10 <- CallFunction v0, [v9, v8]
+v11 <- CallFunction v0, [v9, v8]
+v12 <- CallFunction v0, [v9, v8]
+v13 <- BeginPlainFunction -> 
+EndPlainFunction
+v14 <- LoadBoolean 'false'
+v15 <- CreateNamedVariable 'fakeCallInvoked', 'var', v14
+v16 <- BeginPlainFunction -> 
+    v17 <- GetProperty v13, 'prototype'
+    v18 <- CallMethod v17, 'bind', []
+    v19 <- LoadThis
+    v20 <- LoadInteger '2'
+    v21 <- LoadArguments
+    v22 <- GetProperty v21, 'length'
+    v23 <- CreateNamedVariable 'fake', 'none'
+    v24 <- LoadArguments
+    v25 <- GetElement v24, '0'
+    v26 <- LoadArguments
+    v27 <- GetElement v26, '1'
+    v28 <- LoadBoolean 'true'
+    Reassign v15, v28
+EndPlainFunction
+v29 <- GetProperty v13, 'prototype'
+SetProperty v29, 'call', v16
+v30 <- BeginPlainFunction -> 
+EndPlainFunction
+v31 <- GetProperty v13, 'prototype'
+SetProperty v31, 'bind', v30
+v32 <- Construct v13, []
+v33 <- CreateNamedVariable 'fake', 'var', v32
+v34 <- CallFunction v0, [v33, v8]
+
+
+function g(a1) {
+    const v2 = a1.bind;
+    return a1.call.apply(v2, arguments);
+}
+const v7 = new Object();
+var x = v7;
+function t() {
+}
+g(t, x);
+g(t, x);
+g(t, x);
+function Fake() {
+}
+var fakeCallInvoked = false;
+function f16() {
+    Fake.prototype.bind();
+    arguments.length;
+    arguments[0];
+    arguments[1];
+    fakeCallInvoked = true;
+}
+const t21 = Fake.prototype;
+t21.call = f16;
+function f30() {
+}
+const t25 = Fake.prototype;
+t25.bind = f30;
+const v32 = new Fake();
+var fake = v32;
+g(fake, x);
+
+FuzzIL program written to corpus/regress-1650.fzil

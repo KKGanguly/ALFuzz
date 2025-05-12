@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    SetProperty v1, 'x', v2
+    v3 <- LoadFloat '0.1'
+    SetElement v1, '1', v3
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    SetProperty v1, 'x', v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'Array', 'none'
+v6 <- LoadInteger '1'
+v7 <- Construct v5, [v6]
+v8 <- CallFunction v0, [v7]
+v9 <- Construct v5, []
+v10 <- CallFunction v0, [v9]
+v11 <- LoadInteger '1'
+v12 <- Construct v5, [v11]
+v13 <- CallFunction v0, [v12]
+
+
+function f(a1) {
+    a1.x = 0;
+    a1[1] = 0.1;
+    a1.x = {};
+}
+const v7 = new Array(1);
+f(v7);
+const v9 = new Array();
+f(v9);
+const v12 = new Array(1);
+f(v12);
+
+FuzzIL program written to corpus/regress-crbug-715862.fzil

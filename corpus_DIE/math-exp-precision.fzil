@@ -1,0 +1,108 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Math', 'none'
+    v3 <- CallMethod v2, 'exp', [v1]
+    Return v3
+EndPlainFunction
+v4 <- CreateNamedVariable 'Math', 'none'
+v5 <- GetProperty v4, 'PI'
+v6 <- CallFunction v0, [v5]
+v7 <- CreateNamedVariable 'first_call_result', 'var', v6
+v8 <- GetProperty v4, 'PI'
+v9 <- CallFunction v0, [v8]
+v10 <- CreateNamedVariable 'second_call_result', 'var', v9
+v11 <- BeginPlainFunction -> v12, v13, v14
+    v15 <- LoadInteger '0'
+    v16 <- Compare v12, '==', v15
+    v17 <- LoadInteger '0'
+    v18 <- Compare v13, '==', v17
+    v19 <- BinaryOperation v16, '&&', v18
+    BeginIf v19
+        Return
+    EndIf
+    v20 <- CreateNamedVariable 'Number', 'none'
+    v21 <- GetProperty v20, 'POSITIVE_INFINITY'
+    v22 <- Compare v12, '==', v21
+    v23 <- GetProperty v20, 'POSITIVE_INFINITY'
+    v24 <- Compare v13, '==', v23
+    v25 <- BinaryOperation v22, '&&', v24
+    BeginIf v25
+        Return
+    EndIf
+    v26 <- BinaryOperation v12, '/', v13
+    v27 <- LoadInteger '1'
+    v28 <- BinaryOperation v26, '-', v27
+    v29 <- CallMethod v4, 'abs', [v28]
+    v30 <- CreateNamedVariable 'relative_diff', 'none'
+    Reassign v30, v29
+    v31 <- CreateNamedVariable 'relative_diff', 'none'
+    v32 <- LoadFloat '1e-12'
+    v33 <- Compare v31, '<', v32
+    v34 <- LoadString 'relative difference of '
+    v35 <- BinaryOperation v34, '+', v31
+    v36 <- LoadString ' for input '
+    v37 <- BinaryOperation v35, '+', v36
+    v38 <- BinaryOperation v37, '+', v14
+EndPlainFunction
+v39 <- GetProperty v4, 'PI'
+v40 <- LoadInteger '35'
+v41 <- BinaryOperation v39, '/', v40
+v42 <- CreateNamedVariable 'increment', 'var', v41
+BeginForLoopInitializer
+    v43 <- LoadInteger '708'
+    v44 <- UnaryOperation '-', v43
+BeginForLoopCondition -> v45
+    v46 <- LoadInteger '710'
+    v47 <- Compare v45, '<', v46
+BeginForLoopAfterthought v47 -> v48
+    Update v48, '+', v42
+BeginForLoopBody -> v49
+    v50 <- CallFunction v0, [v49]
+    v51 <- CreateNamedVariable 'ex', 'var', v50
+    v52 <- GetProperty v4, 'E'
+    v53 <- CallMethod v4, 'pow', [v52, v49]
+    v54 <- CreateNamedVariable 'reference', 'var', v53
+    v55 <- LoadInteger '0'
+    v56 <- Compare v51, '>', v55
+    v57 <- CreateNamedVariable 'isFinite', 'none'
+    v58 <- CallFunction v57, [v51]
+    v59 <- BinaryOperation v56, '&&', v58
+    BeginIf v59
+        v60 <- CallMethod v4, 'log', [v51]
+        v61 <- CreateNamedVariable 'back', 'var', v60
+        v62 <- LoadString ' (backwards)'
+        v63 <- BinaryOperation v49, '+', v62
+    EndIf
+EndForLoop
+v64 <- GetProperty v4, 'PI'
+v65 <- CallFunction v0, [v64]
+v66 <- CreateNamedVariable 'last_call_result', 'var', v65
+
+
+function exp(a1) {
+    return Math.exp(a1);
+}
+var first_call_result = exp(Math.PI);
+var second_call_result = exp(Math.PI);
+function assertAlmostEquals(a12, a13, a14) {
+    if ((a12 == 0) && (a13 == 0)) {
+        return;
+    }
+    if ((a12 == Number.POSITIVE_INFINITY) && (a13 == Number.POSITIVE_INFINITY)) {
+        return;
+    }
+    relative_diff = Math.abs((a12 / a13) - 1);
+    relative_diff < 1e-12;
+    (("relative difference of " + relative_diff) + " for input ") + a14;
+}
+var increment = Math.PI / 35;
+for (let i45 = -708; i45 < 710; i45 += increment) {
+    var ex = exp(i45);
+    var reference = Math.pow(Math.E, i45);
+    if ((ex > 0) && isFinite(ex)) {
+        var back = Math.log(ex);
+        i45 + " (backwards)";
+    }
+}
+var last_call_result = exp(Math.PI);
+
+FuzzIL program written to corpus/math-exp-precision.fzil

@@ -1,0 +1,34 @@
+v0 <- LoadString '[1]'
+v1 <- CreateNamedVariable 'str', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '100000'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- LoadString '[1,'
+    v10 <- BinaryOperation v9, '+', v1
+    v11 <- LoadString ']'
+    v12 <- BinaryOperation v10, '+', v11
+    Reassign v1, v12
+EndForLoop
+v13 <- BeginPlainFunction -> 
+    v14 <- CreateNamedVariable 'JSON', 'none'
+    v15 <- CallMethod v14, 'parse', [v1]
+EndPlainFunction
+v16 <- CallFunction v13, []
+v17 <- CreateNamedVariable 'RangeError', 'none'
+
+
+var str = "[1]";
+for (let i3 = 0; i3 < 100000; i3++) {
+    str = ("[1," + str) + "]";
+}
+function f13() {
+    JSON.parse(str);
+}
+f13();
+
+FuzzIL program written to corpus/json-parser-recursive.fzil

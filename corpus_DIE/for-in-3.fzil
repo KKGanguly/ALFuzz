@@ -1,0 +1,41 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString ''
+    v3 <- CreateNamedVariable 's', 'var', v2
+    BeginForInLoop v1 -> v4
+        Update v3, '+', v4
+    EndForInLoop
+    Return v3
+EndPlainFunction
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'o', 'var', v5
+v7 <- LoadString ''
+v8 <- CallFunction v0, [v6]
+v9 <- LoadString ''
+v10 <- CallFunction v0, [v6]
+v11 <- LoadString ''
+v12 <- CallFunction v0, [v6]
+v13 <- LoadInteger '1'
+v14 <- CreateNamedVariable 'Object', 'none'
+v15 <- GetProperty v14, 'prototype'
+SetElement v15, '0', v13
+v16 <- LoadString '0'
+v17 <- CallFunction v0, [v6]
+
+
+function foo(a1) {
+    var s = "";
+    for (const v4 in a1) {
+        s += v4;
+    }
+    return s;
+}
+var o = {};
+foo(o);
+foo(o);
+foo(o);
+const t8 = Object.prototype;
+t8[0] = 1;
+foo(o);
+
+FuzzIL program written to corpus/for-in-3.fzil

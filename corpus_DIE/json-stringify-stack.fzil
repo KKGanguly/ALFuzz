@@ -1,0 +1,49 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString 'length'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `set` -> v3
+        v4 <- LoadString 'error'
+        ThrowException v4
+    EndObjectLiteralMethod
+v5 <- EndObjectLiteral
+v6 <- CallMethod v0, 'defineProperty', [v1, v2, v5]
+v7 <- GetProperty v0, 'prototype'
+v8 <- LoadString 'values'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `set` -> v9
+        v10 <- LoadString 'error'
+        ThrowException v10
+    EndObjectLiteralMethod
+v11 <- EndObjectLiteral
+v12 <- CallMethod v0, 'defineProperty', [v7, v8, v11]
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- BeginArrowFunction -> v15
+    Return v15
+EndArrowFunction
+v16 <- CreateNamedVariable 'JSON', 'none'
+v17 <- CallMethod v16, 'stringify', [v13, v14]
+
+
+const v1 = Object.prototype;
+const v5 = {
+    set() {
+        throw "error";
+    },
+};
+Object.defineProperty(v1, "length", v5);
+const v7 = Object.prototype;
+const v11 = {
+    set() {
+        throw "error";
+    },
+};
+Object.defineProperty(v7, "values", v11);
+const v13 = {};
+const v14 = (a15) => {
+    return a15;
+};
+JSON.stringify(v13, v14);
+
+FuzzIL program written to corpus/json-stringify-stack.fzil

@@ -1,0 +1,48 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'b', 'var', v0
+v2 <- BeginPlainFunction -> 
+    BeginIf v1
+        v3 <- LoadInteger '1'
+        v4 <- LoadInteger '0'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `y`, v3
+            ObjectLiteralAddProperty `x`, v4
+        v5 <- EndObjectLiteral
+        v6 <- CreateNamedVariable 'o', 'none'
+        Reassign v6, v5
+    EndIf
+EndPlainFunction
+v7 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v7
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'o', 'var', v8
+v10 <- BeginPlainFunction -> 
+    v11 <- CallFunction v2, []
+    v12 <- GetProperty v9, 'x'
+    Return v12
+EndPlainFunction
+v13 <- CallFunction v10, []
+v14 <- CallFunction v10, []
+v15 <- LoadBoolean 'true'
+Reassign v1, v15
+v16 <- CallFunction v10, []
+
+
+var b = false;
+function change_o() {
+    if (b) {
+        o = { y: 1, x: 0 };
+    }
+}
+var o = { x: 1 };
+function f() {
+    change_o();
+    return o.x;
+}
+f();
+f();
+b = true;
+f();
+
+FuzzIL program written to corpus/deopt-lazy-shape-mutation.fzil

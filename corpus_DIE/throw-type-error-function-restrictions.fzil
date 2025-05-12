@@ -1,0 +1,55 @@
+v0 <- CreateNamedVariable 'Function', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString 'arguments'
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- CallMethod v3, 'getOwnPropertyDescriptor', [v1, v2]
+v5 <- GetProperty v4, 'get'
+v6 <- CreateNamedVariable 'throwTypeErrorFunction', 'var', v5
+v7 <- LoadString 'name'
+v8 <- GetProperty v3, 'prototype'
+v9 <- GetProperty v8, 'hasOwnProperty'
+v10 <- CallMethod v9, 'call', [v6, v7]
+v11 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v12 <- LoadString 'foo'
+    SetProperty v6, 'name', v12
+EndPlainFunction
+v13 <- CallFunction v11, []
+v14 <- CreateNamedVariable 'TypeError', 'none'
+v15 <- LoadString 'length'
+v16 <- CallMethod v3, 'getOwnPropertyDescriptor', [v6, v15]
+v17 <- CreateNamedVariable 'lengthDesc', 'var', v16
+v18 <- GetProperty v17, 'configurable'
+v19 <- LoadString 'configurable'
+v20 <- GetProperty v17, 'enumerable'
+v21 <- LoadString 'enumerable'
+v22 <- GetProperty v17, 'writable'
+v23 <- LoadString 'writable'
+v24 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v25 <- LoadInteger '42'
+    SetProperty v6, 'length', v25
+EndPlainFunction
+v26 <- CallFunction v24, []
+v27 <- CallMethod v3, 'isFrozen', [v6]
+
+
+var throwTypeErrorFunction = Object.getOwnPropertyDescriptor(Function.prototype, "arguments").get;
+Object.prototype.hasOwnProperty.call(throwTypeErrorFunction, "name");
+function f11() {
+    'use strict';
+    throwTypeErrorFunction.name = "foo";
+}
+f11();
+var lengthDesc = Object.getOwnPropertyDescriptor(throwTypeErrorFunction, "length");
+lengthDesc.configurable;
+lengthDesc.enumerable;
+lengthDesc.writable;
+function f24() {
+    'use strict';
+    throwTypeErrorFunction.length = 42;
+}
+f24();
+Object.isFrozen(throwTypeErrorFunction);
+
+FuzzIL program written to corpus/throw-type-error-function-restrictions.fzil

@@ -1,0 +1,31 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- TypeOf v1
+    v3 <- LoadString 'boolean'
+    v4 <- Compare v2, '==', v3
+    BeginIf v4
+        v5 <- LoadString ''
+        v6 <- BinaryOperation v1, '+', v5
+        Reassign v1, v6
+    EndIf
+    v7 <- TypeOf v1
+    v8 <- LoadString 'number'
+    v9 <- Compare v7, '==', v8
+    BeginIf v9
+        v10 <- LoadString ''
+        v11 <- BinaryOperation v1, '+', v10
+        Reassign v1, v11
+    EndIf
+EndPlainFunction
+v12 <- LoadString 'test(0)'
+
+
+function test(a1) {
+    if (typeof a1 == "boolean") {
+        a1 = a1 + "";
+    }
+    if (typeof a1 == "number") {
+        a1 = a1 + "";
+    }
+}
+
+FuzzIL program written to corpus/regress-318.fzil

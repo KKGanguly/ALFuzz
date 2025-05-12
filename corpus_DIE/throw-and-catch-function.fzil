@@ -1,0 +1,81 @@
+v0 <- LoadThis
+v1 <- CreateNamedVariable 'g', 'var', v0
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- Construct v2, []
+v4 <- CreateNamedVariable 'x', 'var', v3
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadThis
+    Return v6
+EndPlainFunction
+SetProperty v4, 'e', v5
+BeginTry
+    v7 <- GetProperty v4, 'e'
+    ThrowException v7
+BeginCatch -> v8
+    v9 <- CallFunction v8, []
+    v10 <- Compare v9, '===', v1
+EndTryCatch
+BeginTry
+    v11 <- GetProperty v4, 'e'
+    ThrowException v11
+BeginCatch -> v12
+    BeginWith v4
+        v13 <- CallFunction v12, []
+        v14 <- Compare v13, '===', v4
+    EndWith
+EndTryCatch
+BeginWith v4
+    BeginTry
+        v15 <- CreateNamedVariable 'e', 'none'
+        ThrowException v15
+    BeginCatch -> v16
+        v17 <- CallFunction v16, []
+        v18 <- Compare v17, '===', v1
+    EndTryCatch
+EndWith
+v19 <- LoadInteger '0'
+v20 <- CreateNamedVariable 'e', 'var', v19
+BeginTry
+    v21 <- GetProperty v4, 'e'
+    ThrowException v21
+BeginCatch -> v22
+    v23 <- LoadInteger '7'
+    v24 <- CreateNamedVariable 'e', 'var', v23
+EndTryCatch
+v25 <- LoadInteger '0'
+
+
+var g = this;
+const v3 = new Object();
+var x = v3;
+function f5() {
+    return this;
+}
+x.e = f5;
+try {
+    throw x.e;
+} catch(e8) {
+    e8() === g;
+}
+try {
+    throw x.e;
+} catch(e12) {
+    with (x) {
+        e12() === x;
+    }
+}
+with (x) {
+    try {
+        throw e;
+    } catch(e16) {
+        e16() === g;
+    }
+}
+var e = 0;
+try {
+    throw x.e;
+} catch(e22) {
+    var e = 7;
+}
+
+FuzzIL program written to corpus/throw-and-catch-function.fzil

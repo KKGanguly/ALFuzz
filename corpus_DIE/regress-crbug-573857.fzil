@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CallMethod v0, 'bind', []
+Reassign v0, v1
+v2 <- GetProperty v0, 'name'
+SetProperty v0, 'x', v2
+v3 <- LoadString 'name'
+v4 <- BeginPlainFunction -> 
+    v5 <- GetProperty v0, 'x'
+    Return v5
+EndPlainFunction
+v6 <- CallMethod v0, '__defineGetter__', [v3, v4]
+v7 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v7, 'prototype', v0
+v8 <- CreateNamedVariable 'gc', 'none'
+v9 <- CallFunction v8, []
+
+
+function f() {
+}
+f.x = (f = f.bind()).name;
+function f4() {
+    return f.x;
+}
+f.__defineGetter__("name", f4);
+function g() {
+}
+g.prototype = f;
+gc();
+
+FuzzIL program written to corpus/regress-crbug-573857.fzil

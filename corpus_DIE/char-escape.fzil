@@ -1,0 +1,90 @@
+v0 <- LoadString ''
+v1 <- LoadString '	'
+v2 <- LoadString '\n'
+v3 <- LoadString ''
+v4 <- LoadString ''
+v5 <- LoadString ''
+v6 <- LoadString '"'
+v7 <- LoadString '''
+v8 <- LoadString '\'
+v9 <- LoadString 'J'
+v10 <- LoadString '_'
+v11 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10]
+v12 <- CreateNamedVariable 'escapes', 'var', v11
+BeginForLoopInitializer
+    v13 <- LoadInteger '0'
+BeginForLoopCondition -> v14
+    v15 <- GetProperty v12, 'length'
+    v16 <- Compare v14, '<', v15
+BeginForLoopAfterthought v16 -> v17
+    v18 <- UnaryOperation v17, '++'
+BeginForLoopBody -> v19
+    v20 <- GetComputedProperty v12, v19
+    v21 <- CreateNamedVariable 'str', 'var', v20
+    v22 <- LoadInteger '1'
+    v23 <- GetProperty v21, 'length'
+    v24 <- LoadInteger '0'
+    v25 <- CallMethod v21, 'charAt', [v24]
+EndForLoop
+v26 <- BeginPlainFunction -> v27
+    v28 <- LoadInteger '0'
+    v29 <- CallMethod v27, 'charCodeAt', [v28]
+    Return v29
+EndPlainFunction
+v30 <- LoadInteger '8'
+v31 <- LoadString ''
+v32 <- CallFunction v26, [v31]
+v33 <- LoadInteger '9'
+v34 <- LoadString '	'
+v35 <- CallFunction v26, [v34]
+v36 <- LoadInteger '10'
+v37 <- LoadString '\n'
+v38 <- CallFunction v26, [v37]
+v39 <- LoadInteger '11'
+v40 <- LoadString ''
+v41 <- CallFunction v26, [v40]
+v42 <- LoadInteger '12'
+v43 <- LoadString ''
+v44 <- CallFunction v26, [v43]
+v45 <- LoadInteger '13'
+v46 <- LoadString ''
+v47 <- CallFunction v26, [v46]
+v48 <- LoadInteger '34'
+v49 <- LoadString '"'
+v50 <- CallFunction v26, [v49]
+v51 <- LoadInteger '39'
+v52 <- LoadString '''
+v53 <- CallFunction v26, [v52]
+v54 <- LoadInteger '92'
+v55 <- LoadString '\'
+v56 <- CallFunction v26, [v55]
+v57 <- LoadInteger '74'
+v58 <- LoadString 'J'
+v59 <- CallFunction v26, [v58]
+v60 <- LoadInteger '95'
+v61 <- LoadString '_'
+v62 <- CallFunction v26, [v61]
+
+
+var escapes = ["","	","\n","","","",""","'","\","J","_"];
+for (let i14 = 0; i14 < escapes.length; i14++) {
+    var str = escapes[i14];
+    str.length;
+    str.charAt(0);
+}
+function code(a27) {
+    return a27.charCodeAt(0);
+}
+code("");
+code("	");
+code("\n");
+code("");
+code("");
+code("");
+code(""");
+code("'");
+code("\");
+code("J");
+code("_");
+
+FuzzIL program written to corpus/char-escape.fzil

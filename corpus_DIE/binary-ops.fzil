@@ -1,0 +1,115 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '|', v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> v5, v6
+    v7 <- BinaryOperation v5, '&', v6
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9, v10
+    v11 <- BinaryOperation v9, '+', v10
+    Return v11
+EndPlainFunction
+v12 <- LoadInteger '3'
+v13 <- LoadInteger '1'
+v14 <- LoadInteger '2'
+v15 <- CallFunction v0, [v13, v14]
+v16 <- LoadInteger '2'
+v17 <- LoadInteger '3'
+v18 <- LoadInteger '6'
+v19 <- CallFunction v4, [v17, v18]
+v20 <- LoadInteger '5'
+v21 <- LoadInteger '2'
+v22 <- LoadInteger '3'
+v23 <- CallFunction v8, [v21, v22]
+v24 <- BeginPlainFunction -> v25, v26
+    v27 <- BinaryOperation v25, '|', v25
+    Return v27
+EndPlainFunction
+v28 <- BeginPlainFunction -> v29, v30
+    v31 <- BinaryOperation v29, '&', v29
+    Return v31
+EndPlainFunction
+v32 <- BeginPlainFunction -> v33, v34
+    v35 <- BinaryOperation v33, '+', v33
+    Return v35
+EndPlainFunction
+v36 <- LoadInteger '1'
+v37 <- LoadInteger '1'
+v38 <- LoadInteger '2'
+v39 <- CallFunction v24, [v37, v38]
+v40 <- LoadInteger '3'
+v41 <- LoadInteger '3'
+v42 <- LoadInteger '6'
+v43 <- CallFunction v28, [v41, v42]
+v44 <- LoadInteger '4'
+v45 <- LoadInteger '2'
+v46 <- LoadInteger '3'
+v47 <- CallFunction v32, [v45, v46]
+v48 <- BeginPlainFunction -> v49, v50
+    Reassign v49, v50
+    v51 <- BinaryOperation v49, '|', v50
+    Return v51
+EndPlainFunction
+v52 <- BeginPlainFunction -> v53, v54
+    Reassign v53, v54
+    v55 <- BinaryOperation v53, '&', v54
+    Return v55
+EndPlainFunction
+v56 <- BeginPlainFunction -> v57, v58
+    Reassign v57, v58
+    v59 <- BinaryOperation v57, '+', v58
+    Return v59
+EndPlainFunction
+v60 <- LoadInteger '2'
+v61 <- LoadInteger '1'
+v62 <- LoadInteger '2'
+v63 <- CallFunction v48, [v61, v62]
+v64 <- LoadInteger '6'
+v65 <- LoadInteger '3'
+v66 <- LoadInteger '6'
+v67 <- CallFunction v52, [v65, v66]
+v68 <- LoadInteger '6'
+v69 <- LoadInteger '2'
+v70 <- LoadInteger '3'
+v71 <- CallFunction v56, [v69, v70]
+
+
+function or_test0(a1, a2) {
+    return a1 | a2;
+}
+function and_test0(a5, a6) {
+    return a5 & a6;
+}
+function add_test0(a9, a10) {
+    return a9 + a10;
+}
+or_test0(1, 2);
+and_test0(3, 6);
+add_test0(2, 3);
+function or_test1(a25, a26) {
+    return a25 | a25;
+}
+function and_test1(a29, a30) {
+    return a29 & a29;
+}
+function add_test1(a33, a34) {
+    return a33 + a33;
+}
+or_test1(1, 2);
+and_test1(3, 6);
+add_test1(2, 3);
+function or_test2(a49, a50) {
+    return (a49 = a50) | a50;
+}
+function and_test2(a53, a54) {
+    return (a53 = a54) & a54;
+}
+function add_test2(a57, a58) {
+    return (a57 = a58) + a58;
+}
+or_test2(1, 2);
+and_test2(3, 6);
+add_test2(2, 3);
+
+FuzzIL program written to corpus/binary-ops.fzil

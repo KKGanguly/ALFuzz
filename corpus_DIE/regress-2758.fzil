@@ -1,0 +1,99 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- GetProperty v1, 'concat'
+    v3 <- CreateNamedVariable 'f', 'var', v2
+    v4 <- CallFunction v3, []
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- CreateArray []
+    v7 <- GetProperty v6, 'push'
+    v8 <- CreateNamedVariable 'f', 'var', v7
+    v9 <- CallFunction v8, []
+EndPlainFunction
+v10 <- BeginPlainFunction -> 
+    v11 <- CreateArray []
+    v12 <- GetProperty v11, 'shift'
+    v13 <- CreateNamedVariable 'f', 'var', v12
+    v14 <- CallFunction v13, []
+EndPlainFunction
+v15 <- BeginPlainFunction -> 
+    v16 <- LoadInteger '0'
+    v17 <- CreateArray []
+    v18 <- GetProperty v17, 'concat'
+    v19 <- CallFunction v18, []
+EndPlainFunction
+v20 <- BeginPlainFunction -> 
+    v21 <- LoadInteger '0'
+    v22 <- CreateArray []
+    v23 <- GetProperty v22, 'push'
+    v24 <- CallFunction v23, []
+EndPlainFunction
+v25 <- BeginPlainFunction -> 
+    v26 <- LoadInteger '0'
+    v27 <- CreateArray []
+    v28 <- GetProperty v27, 'shift'
+    v29 <- CallFunction v28, []
+EndPlainFunction
+v30 <- CreateArray [v0, v5, v10, v15, v20, v25]
+v31 <- CreateNamedVariable 'functions', 'var', v30
+BeginForLoopInitializer
+    v32 <- LoadInteger '0'
+BeginForLoopCondition -> v33
+    v34 <- LoadInteger '5'
+    v35 <- Compare v33, '<', v34
+BeginForLoopAfterthought v35 -> v36
+    v37 <- UnaryOperation '++', v36
+BeginForLoopBody -> v38
+    BeginForInLoop v31 -> v39
+        v40 <- GetComputedProperty v31, v38
+        v41 <- CreateNamedVariable 'print', 'none'
+        v42 <- CallFunction v41, [v40]
+        v43 <- GetComputedProperty v31, v39
+        v44 <- CreateNamedVariable 'TypeError', 'none'
+    EndForInLoop
+    v45 <- LoadInteger '3'
+    v46 <- Compare v38, '===', v45
+    BeginIf v46
+        BeginForInLoop v31 -> v47
+        EndForInLoop
+    EndIf
+EndForLoop
+
+
+function f0() {
+    var f = ([]).concat;
+    f();
+}
+function f5() {
+    var f = ([]).push;
+    f();
+}
+function f10() {
+    var f = ([]).shift;
+    f();
+}
+function f15() {
+    const t13 = ([]).concat;
+    t13();
+}
+function f20() {
+    const t17 = ([]).push;
+    t17();
+}
+function f25() {
+    const t21 = ([]).shift;
+    t21();
+}
+var functions = [f0,f5,f10,f15,f20,f25];
+for (let i33 = 0; i33 < 5; ++i33) {
+    for (const v39 in functions) {
+        print(functions[i33]);
+        functions[v39];
+    }
+    if (i33 === 3) {
+        for (const v47 in functions) {
+        }
+    }
+}
+
+FuzzIL program written to corpus/regress-2758.fzil

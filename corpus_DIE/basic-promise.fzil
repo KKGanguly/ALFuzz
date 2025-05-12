@@ -1,0 +1,133 @@
+v0 <- BeginArrowFunction -> v1
+    v2 <- CreateNamedVariable 'print', 'none'
+    v3 <- CallFunction v2, [v1]
+    Return v3
+EndArrowFunction
+v4 <- CreateNamedVariable 'failWithMessage', 'none'
+Reassign v4, v0
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadUndefined
+    v7 <- CreateNamedVariable 'outerResolve', 'var', v6
+    v8 <- LoadUndefined
+    v9 <- CreateNamedVariable 'outerReject', 'var', v8
+    v10 <- CreateNamedVariable 'Promise', 'none'
+    v11 <- BeginArrowFunction -> v12, v13
+        Reassign v7, v12
+        Reassign v9, v13
+    EndArrowFunction
+    v14 <- Construct v10, [v11]
+    v15 <- CreateNamedVariable 'promise', 'let', v14
+    v16 <- CallMethod v10, 'resolve', [v15]
+    v17 <- BeginArrowFunction -> v18, v19
+        v20 <- CallMethod v15, 'then', [v18, v19]
+        Return v20
+    EndArrowFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `resolve`, v7
+        ObjectLiteralAddProperty `reject`, v9
+        ObjectLiteralAddProperty `then`, v17
+    v21 <- EndObjectLiteral
+    Return v21
+EndPlainFunction
+v22 <- BeginPlainFunction -> 
+    v23 <- CallFunction v5, []
+    v24 <- CreateNamedVariable 'promise', 'let', v23
+    v25 <- BeginArrowFunction -> v26
+        v27 <- LoadString 'resolved: '
+        v28 <- BinaryOperation v27, '+', v26
+        v29 <- CreateNamedVariable 'print', 'none'
+        v30 <- CallFunction v29, [v28]
+        v31 <- LoadString 'ok'
+    EndArrowFunction
+    v32 <- BeginArrowFunction -> v33
+        v34 <- LoadString 'rejected: '
+        v35 <- BinaryOperation v34, '+', v33
+        v36 <- CreateNamedVariable 'print', 'none'
+        v37 <- CallFunction v36, [v35]
+        v38 <- LoadString ''
+        v39 <- BinaryOperation v38, '+', v33
+        v40 <- CallFunction v36, [v39]
+    EndArrowFunction
+    v41 <- CallMethod v24, 'then', [v25, v32]
+    v42 <- LoadString 'ok'
+    v43 <- CallMethod v24, 'resolve', [v42]
+    v44 <- LoadInteger '11'
+    v45 <- CallMethod v24, 'reject', [v44]
+EndPlainFunction
+v46 <- CallFunction v22, []
+v47 <- BeginPlainFunction -> 
+    v48 <- CallFunction v5, []
+    v49 <- CreateNamedVariable 'promise', 'let', v48
+    v50 <- BeginArrowFunction -> v51
+        v52 <- LoadString 'resolved: '
+        v53 <- BinaryOperation v52, '+', v51
+        v54 <- CreateNamedVariable 'print', 'none'
+        v55 <- CallFunction v54, [v53]
+        v56 <- LoadString 'fail'
+        v57 <- CallFunction v54, [v56]
+    EndArrowFunction
+    v58 <- BeginArrowFunction -> v59
+        v60 <- LoadString 'rejected: '
+        v61 <- BinaryOperation v60, '+', v59
+        v62 <- CreateNamedVariable 'print', 'none'
+        v63 <- CallFunction v62, [v61]
+        v64 <- LoadInteger '42'
+    EndArrowFunction
+    v65 <- CallMethod v49, 'then', [v50, v58]
+    v66 <- LoadInteger '42'
+    v67 <- CallMethod v49, 'reject', [v66]
+    v68 <- LoadString 'fail'
+    v69 <- CallMethod v49, 'resolve', [v68]
+EndPlainFunction
+v70 <- CallFunction v47, []
+
+
+const v0 = (a1) => {
+    return print(a1);
+};
+failWithMessage = v0;
+function newPromise() {
+    var outerResolve;
+    var outerReject;
+    const v11 = (a12, a13) => {
+        outerResolve = a12;
+        outerReject = a13;
+    };
+    const v14 = new Promise(v11);
+    let promise = v14;
+    Promise.resolve(promise);
+    const v17 = (a18, a19) => {
+        return promise.then(a18, a19);
+    };
+    return { resolve: outerResolve, reject: outerReject, then: v17 };
+}
+function ResolveOK() {
+    let promise = newPromise();
+    const v25 = (a26) => {
+        print("resolved: " + a26);
+    };
+    const v32 = (a33) => {
+        print("rejected: " + a33);
+        print("" + a33);
+    };
+    promise.then(v25, v32);
+    promise.resolve("ok");
+    promise.reject(11);
+}
+ResolveOK();
+function RejectOK() {
+    let promise = newPromise();
+    const v50 = (a51) => {
+        print("resolved: " + a51);
+        print("fail");
+    };
+    const v58 = (a59) => {
+        print("rejected: " + a59);
+    };
+    promise.then(v50, v58);
+    promise.reject(42);
+    promise.resolve("fail");
+}
+RejectOK();
+
+FuzzIL program written to corpus/basic-promise.fzil

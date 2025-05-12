@@ -1,0 +1,29 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'obj', 'var', v0
+v2 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    BeginObjectLiteralMethod `mSloppy` -> v3
+        v4 <- LoadInteger '15'
+        SetComputedSuperProperty v1, v4
+    EndObjectLiteralMethod
+v5 <- EndObjectLiteral
+SetProperty v2, 'prototype', v5
+v6 <- Construct v2, []
+v7 <- CallMethod v6, 'mSloppy', []
+
+
+var obj = {};
+function f() {
+}
+const v5 = {
+    mSloppy() {
+        super[obj] = 15;
+    },
+};
+f.prototype = v5;
+const v6 = new f();
+v6.mSloppy();
+
+FuzzIL program written to corpus/regress-crbug-625590.fzil

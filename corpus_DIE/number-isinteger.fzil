@@ -1,0 +1,159 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CallFunction v1, [v2]
+    v4 <- CreateNamedVariable 'Number', 'none'
+    v5 <- GetProperty v4, 'MIN_VALUE'
+    v6 <- CallFunction v1, [v5]
+    v7 <- GetProperty v4, 'MAX_VALUE'
+    v8 <- CallFunction v1, [v7]
+    v9 <- GetProperty v4, 'MIN_SAFE_INTEGER'
+    v10 <- CallFunction v1, [v9]
+    v11 <- GetProperty v4, 'MIN_SAFE_INTEGER'
+    v12 <- LoadInteger '13'
+    v13 <- BinaryOperation v11, '-', v12
+    v14 <- CallFunction v1, [v13]
+    v15 <- GetProperty v4, 'MAX_SAFE_INTEGER'
+    v16 <- CallFunction v1, [v15]
+    v17 <- GetProperty v4, 'MAX_SAFE_INTEGER'
+    v18 <- LoadInteger '23'
+    v19 <- BinaryOperation v17, '+', v18
+    v20 <- CallFunction v1, [v19]
+    v21 <- LoadInteger '0'
+    v22 <- CallFunction v1, [v21]
+    v23 <- LoadInteger '1'
+    v24 <- UnaryOperation '-', v23
+    v25 <- CallFunction v1, [v24]
+    v26 <- LoadInteger '123456'
+    v27 <- CallFunction v1, [v26]
+    v28 <- GetProperty v4, 'NaN'
+    v29 <- CallFunction v1, [v28]
+    v30 <- GetProperty v4, 'POSITIVE_INFINITY'
+    v31 <- CallFunction v1, [v30]
+    v32 <- GetProperty v4, 'NEGATIVE_INFINITY'
+    v33 <- CallFunction v1, [v32]
+    v34 <- LoadInteger '1'
+    v35 <- LoadInteger '0'
+    v36 <- BinaryOperation v34, '/', v35
+    v37 <- CallFunction v1, [v36]
+    v38 <- LoadInteger '1'
+    v39 <- UnaryOperation '-', v38
+    v40 <- LoadInteger '0'
+    v41 <- BinaryOperation v39, '/', v40
+    v42 <- CallFunction v1, [v41]
+    v43 <- GetProperty v4, 'EPSILON'
+    v44 <- CallFunction v1, [v43]
+EndPlainFunction
+v45 <- BeginPlainFunction -> v46
+    v47 <- UnaryOperation '+', v46
+    v48 <- CreateNamedVariable 'Number', 'none'
+    v49 <- CallMethod v48, 'isInteger', [v47]
+    Return v49
+EndPlainFunction
+v50 <- CallFunction v0, [v45]
+v51 <- CallFunction v0, [v45]
+v52 <- CallFunction v0, [v45]
+v53 <- BeginPlainFunction -> v54
+    v55 <- LoadInteger '0'
+    v56 <- CallFunction v54, [v55]
+    v57 <- CreateNamedVariable 'Number', 'none'
+    v58 <- GetProperty v57, 'MIN_VALUE'
+    v59 <- CallFunction v54, [v58]
+    v60 <- GetProperty v57, 'MAX_VALUE'
+    v61 <- CallFunction v54, [v60]
+    v62 <- GetProperty v57, 'MIN_SAFE_INTEGER'
+    v63 <- CallFunction v54, [v62]
+    v64 <- GetProperty v57, 'MIN_SAFE_INTEGER'
+    v65 <- LoadInteger '13'
+    v66 <- BinaryOperation v64, '-', v65
+    v67 <- CallFunction v54, [v66]
+    v68 <- GetProperty v57, 'MAX_SAFE_INTEGER'
+    v69 <- CallFunction v54, [v68]
+    v70 <- GetProperty v57, 'MAX_SAFE_INTEGER'
+    v71 <- LoadInteger '23'
+    v72 <- BinaryOperation v70, '+', v71
+    v73 <- CallFunction v54, [v72]
+    v74 <- LoadInteger '0'
+    v75 <- CallFunction v54, [v74]
+    v76 <- LoadInteger '1'
+    v77 <- UnaryOperation '-', v76
+    v78 <- CallFunction v54, [v77]
+    v79 <- LoadInteger '123456'
+    v80 <- CallFunction v54, [v79]
+    v81 <- GetProperty v57, 'NaN'
+    v82 <- CallFunction v54, [v81]
+    v83 <- GetProperty v57, 'POSITIVE_INFINITY'
+    v84 <- CallFunction v54, [v83]
+    v85 <- GetProperty v57, 'NEGATIVE_INFINITY'
+    v86 <- CallFunction v54, [v85]
+    v87 <- LoadInteger '1'
+    v88 <- LoadInteger '0'
+    v89 <- BinaryOperation v87, '/', v88
+    v90 <- CallFunction v54, [v89]
+    v91 <- LoadInteger '1'
+    v92 <- UnaryOperation '-', v91
+    v93 <- LoadInteger '0'
+    v94 <- BinaryOperation v92, '/', v93
+    v95 <- CallFunction v54, [v94]
+    v96 <- GetProperty v57, 'EPSILON'
+    v97 <- CallFunction v54, [v96]
+EndPlainFunction
+v98 <- BeginPlainFunction -> v99
+    v100 <- CreateNamedVariable 'Number', 'none'
+    v101 <- CallMethod v100, 'isInteger', [v99]
+    Return v101
+EndPlainFunction
+v102 <- CallFunction v53, [v98]
+v103 <- CallFunction v53, [v98]
+v104 <- CallFunction v53, [v98]
+
+
+function test(a1) {
+    a1(0);
+    a1(Number.MIN_VALUE);
+    a1(Number.MAX_VALUE);
+    a1(Number.MIN_SAFE_INTEGER);
+    a1(Number.MIN_SAFE_INTEGER - 13);
+    a1(Number.MAX_SAFE_INTEGER);
+    a1(Number.MAX_SAFE_INTEGER + 23);
+    a1(0);
+    a1(-1);
+    a1(123456);
+    a1(Number.NaN);
+    a1(Number.POSITIVE_INFINITY);
+    a1(Number.NEGATIVE_INFINITY);
+    a1(1 / 0);
+    a1(-1 / 0);
+    a1(Number.EPSILON);
+}
+function f(a46) {
+    return Number.isInteger(+a46);
+}
+test(f);
+test(f);
+test(f);
+function test2(a54) {
+    a54(0);
+    a54(Number.MIN_VALUE);
+    a54(Number.MAX_VALUE);
+    a54(Number.MIN_SAFE_INTEGER);
+    a54(Number.MIN_SAFE_INTEGER - 13);
+    a54(Number.MAX_SAFE_INTEGER);
+    a54(Number.MAX_SAFE_INTEGER + 23);
+    a54(0);
+    a54(-1);
+    a54(123456);
+    a54(Number.NaN);
+    a54(Number.POSITIVE_INFINITY);
+    a54(Number.NEGATIVE_INFINITY);
+    a54(1 / 0);
+    a54(-1 / 0);
+    a54(Number.EPSILON);
+}
+function f2(a99) {
+    return Number.isInteger(a99);
+}
+test2(f2);
+test2(f2);
+test2(f2);
+
+FuzzIL program written to corpus/number-isinteger.fzil

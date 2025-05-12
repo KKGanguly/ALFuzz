@@ -1,0 +1,172 @@
+v0 <- LoadString 'prototype'
+v1 <- LoadString 'length'
+v2 <- LoadInteger '0'
+v3 <- LoadInteger '1'
+v4 <- LoadString '$1'
+v5 <- LoadString 'name'
+v6 <- LoadString 'message'
+v7 <- LoadString 'constructor'
+v8 <- CreateArray [v0, v1, v2, v3, v4, v5, v6, v7]
+v9 <- CreateNamedVariable 'builtInPropertyNames', 'var', v8
+v10 <- LoadString 'caller'
+v11 <- LoadString 'arguments'
+v12 <- CreateArray [v10, v11]
+v13 <- CreateNamedVariable 'builtInPropertyNamesMayThrow', 'var', v12
+v14 <- BeginPlainFunction -> 
+    BeginTry
+        v15 <- LoadString 'str'
+        v16 <- CallFunction v15, []
+    BeginCatch -> v17
+        Return v17
+    EndTryCatch
+EndPlainFunction
+v18 <- BeginPlainFunction -> 
+    v19 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v20 <- LoadInteger '1'
+    v21 <- LoadInteger '2'
+    v22 <- LoadInteger '3'
+    v23 <- CreateArray [v20, v21, v22]
+    v24 <- LoadRegExp 'xxx' ''
+    v25 <- CreateNamedVariable 'RegExp', 'none'
+    v26 <- LoadString 'blah'
+    v27 <- LoadInteger '9'
+    v28 <- CreateNamedVariable 'Date', 'none'
+    v29 <- Construct v28, []
+    v30 <- CallFunction v14, []
+    v31 <- CreateArray [v19, v23, v24, v25, v26, v27, v29, v30]
+    Return v31
+EndPlainFunction
+BeginObjectLiteral
+v32 <- EndObjectLiteral
+v33 <- CreateNamedVariable 'object', 'var', v32
+v34 <- BeginPlainFunction -> 
+EndPlainFunction
+v35 <- CreateNamedVariable 'fun', 'var', v34
+v36 <- CallFunction v14, []
+v37 <- CreateNamedVariable 'someException', 'var', v36
+v38 <- CreateNamedVariable 'Date', 'none'
+v39 <- Construct v38, []
+v40 <- CreateNamedVariable 'someDate', 'var', v39
+v41 <- LoadInteger '1'
+v42 <- CreateNamedVariable 'Number', 'none'
+v43 <- GetProperty v42, 'prototype'
+v44 <- CreateArray [v41, v43]
+v45 <- LoadString 'foo'
+v46 <- CreateNamedVariable 'String', 'none'
+v47 <- GetProperty v46, 'prototype'
+v48 <- CreateArray [v45, v47]
+v49 <- LoadBoolean 'true'
+v50 <- CreateNamedVariable 'Boolean', 'none'
+v51 <- GetProperty v50, 'prototype'
+v52 <- CreateArray [v49, v51]
+v53 <- CreateArray [v33, v33]
+v54 <- CreateArray [v35, v35]
+v55 <- CreateArray [v37, v37]
+v56 <- CreateArray [v40, v40]
+v57 <- CreateArray [v44, v48, v52, v53, v54, v55, v56]
+v58 <- CreateNamedVariable 'objects', 'var', v57
+v59 <- BeginPlainFunction -> v60
+    BeginForInLoop v58 -> v61
+        v62 <- GetComputedProperty v58, v61
+        v63 <- GetElement v62, '0'
+        v64 <- CreateNamedVariable 'obj', 'var', v63
+        v65 <- GetComputedProperty v58, v61
+        v66 <- GetElement v65, '1'
+        v67 <- CreateNamedVariable 'chain', 'var', v66
+        v68 <- CallFunction v18, []
+        v69 <- CreateNamedVariable 'specialObjects', 'var', v68
+        BeginForInLoop v69 -> v70
+            v71 <- GetComputedProperty v69, v70
+            v72 <- CreateNamedVariable 'special', 'var', v71
+            SetProperty v67, '__proto__', v72
+            BeginForInLoop v9 -> v73
+                v74 <- GetComputedProperty v9, v73
+                v75 <- CreateNamedVariable 'propertyName', 'var', v74
+                v76 <- CallFunction v60, [v64, v75]
+            EndForInLoop
+            BeginForInLoop v13 -> v77
+                v78 <- GetComputedProperty v13, v77
+                v79 <- CreateNamedVariable 'propertyName', 'var', v78
+                BeginTry
+                    v80 <- CallFunction v60, [v64, v79]
+                BeginCatch -> v81
+                EndTryCatch
+            EndForInLoop
+        EndForInLoop
+    EndForInLoop
+EndPlainFunction
+v82 <- BeginPlainFunction -> v83, v84
+    v85 <- GetComputedProperty v83, v84
+    Return v85
+EndPlainFunction
+v86 <- CallFunction v59, [v82]
+v87 <- BeginPlainFunction -> v88, v89
+    BeginObjectLiteral
+    v90 <- EndObjectLiteral
+    SetComputedProperty v88, v89, v90
+    Return v90
+EndPlainFunction
+v91 <- CallFunction v59, [v87]
+
+
+var builtInPropertyNames = ["prototype","length",0,1,"$1","name","message","constructor"];
+var builtInPropertyNamesMayThrow = ["caller","arguments"];
+function getAnException() {
+    try {
+        const t4 = "str";
+        t4();
+    } catch(e17) {
+        return e17;
+    }
+}
+function getSpecialObjects() {
+    function f19() {
+    }
+    const v23 = [1,2,3];
+    const v24 = /xxx/;
+    const v29 = new Date();
+    return [f19,v23,v24,RegExp,"blah",9,v29,getAnException()];
+}
+var object = {};
+function f34() {
+}
+var fun = f34;
+var someException = getAnException();
+const v39 = new Date();
+var someDate = v39;
+var objects = [[1,Number.prototype],["foo",String.prototype],[true,Boolean.prototype],[object,object],[fun,fun],[someException,someException],[someDate,someDate]];
+function runTest(a60) {
+    for (const v61 in objects) {
+        var obj = objects[v61][0];
+        var chain = objects[v61][1];
+        var specialObjects = getSpecialObjects();
+        for (const v70 in specialObjects) {
+            var special = specialObjects[v70];
+            chain.__proto__ = special;
+            for (const v73 in builtInPropertyNames) {
+                var propertyName = builtInPropertyNames[v73];
+                a60(obj, propertyName);
+            }
+            for (const v77 in builtInPropertyNamesMayThrow) {
+                var propertyName = builtInPropertyNamesMayThrow[v77];
+                try {
+                    a60(obj, propertyName);
+                } catch(e81) {
+                }
+            }
+        }
+    }
+}
+function f82(a83, a84) {
+    return a83[a84];
+}
+runTest(f82);
+function f87(a88, a89) {
+    const v90 = {};
+    a88[a89] = v90;
+    return v90;
+}
+runTest(f87);
+
+FuzzIL program written to corpus/fuzz-accessors.fzil

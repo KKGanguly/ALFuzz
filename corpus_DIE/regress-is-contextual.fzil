@@ -1,0 +1,36 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'text', 'none'
+    v3 <- CallMethod v2, 'charAt', [v1]
+    Return v3
+EndPlainFunction
+v4 <- LoadString 'hi there'
+v5 <- CreateNamedVariable 'text', 'var', v4
+v6 <- LoadInteger '0'
+v7 <- CallFunction v0, [v6]
+v8 <- LoadInteger '0'
+v9 <- CallFunction v0, [v8]
+v10 <- LoadInteger '100'
+v11 <- CallFunction v0, [v10]
+v12 <- LoadBoolean 'false'
+Reassign v5, v12
+v13 <- BeginPlainFunction -> 
+    v14 <- CallFunction v0, []
+EndPlainFunction
+v15 <- CallFunction v13, []
+v16 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function foo(a1) {
+    return text.charAt(a1);
+}
+var text = "hi there";
+foo(0);
+foo(0);
+foo(100);
+text = false;
+function f13() {
+    foo();
+}
+f13();
+
+FuzzIL program written to corpus/regress-is-contextual.fzil

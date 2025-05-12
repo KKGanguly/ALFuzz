@@ -1,0 +1,39 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- LoadInteger '1'
+v2 <- LoadInteger '2'
+v3 <- LoadInteger '3'
+v4 <- CreateArray [v1, v2, v3]
+v5 <- Construct v0, [v4]
+v6 <- CreateNamedVariable 'ta', 'let', v5
+v7 <- LoadInteger '1'
+v8 <- CreateNamedVariable 'Symbol', 'none'
+v9 <- GetProperty v8, 'iterator'
+SetComputedProperty v6, v9, v7
+v10 <- BeginPlainFunction -> 
+    v11 <- CallMethod v0, 'from', [v6]
+EndPlainFunction
+v12 <- CallFunction v10, []
+v13 <- CreateNamedVariable 'TypeError', 'none'
+v14 <- LoadString 'bad'
+v15 <- GetProperty v8, 'iterator'
+SetComputedProperty v6, v15, v14
+v16 <- BeginPlainFunction -> 
+    v17 <- CallMethod v0, 'from', [v6]
+EndPlainFunction
+v18 <- CallFunction v16, []
+
+
+const v5 = new Uint8Array([1,2,3]);
+let ta = v5;
+ta[Symbol.iterator] = 1;
+function f10() {
+    Uint8Array.from(ta);
+}
+f10();
+ta[Symbol.iterator] = "bad";
+function f16() {
+    Uint8Array.from(ta);
+}
+f16();
+
+FuzzIL program written to corpus/typedarray-from-nonfunction-iterator.fzil

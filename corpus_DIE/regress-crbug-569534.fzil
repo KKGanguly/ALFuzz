@@ -1,0 +1,16 @@
+v0 <- LoadUndefined
+v1 <- LoadFloat '0.5'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'array', 'var', v2
+v4 <- LoadInteger '0'
+SetProperty v3, 'length', v4
+BeginForInLoop v3 -> v5
+EndForInLoop
+
+
+var array = [,0.5];
+array.length = 0;
+for (const v5 in array) {
+}
+
+FuzzIL program written to corpus/regress-crbug-569534.fzil

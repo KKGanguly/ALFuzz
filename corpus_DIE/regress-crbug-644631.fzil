@@ -1,0 +1,17 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    v2 <- CreateNamedVariable 'Object', 'none'
+    v3 <- CallMethod v2, 'freeze', [v1]
+    v4 <- CreateNamedVariable 'obj', 'var', v3
+EndPlainFunction
+v5 <- CallFunction v0, []
+v6 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function f() {
+    var obj = Object.freeze({});
+}
+f();
+
+FuzzIL program written to corpus/regress-crbug-644631.fzil

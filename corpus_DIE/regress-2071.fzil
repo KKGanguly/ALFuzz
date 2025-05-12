@@ -1,0 +1,135 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'a', 'none'
+Reassign v1, v0
+v2 <- LoadInteger '42'
+v3 <- CreateNamedVariable 'a', 'none'
+SetProperty v3, 'b', v2
+BeginWith v3
+    v4 <- BeginPlainFunction -> 
+        v5 <- BeginPlainFunction -> 
+            v6 <- CreateNamedVariable 'b', 'none'
+            Return v6
+        EndPlainFunction
+        Return v5
+    EndPlainFunction
+    v7 <- CallFunction v4, []
+    SetProperty v3, 'f', v7
+EndWith
+BeginForLoopInitializer
+    v8 <- LoadInteger '0'
+BeginForLoopCondition -> v9
+    v10 <- LoadInteger '10000'
+    v11 <- Compare v9, '<', v10
+BeginForLoopAfterthought v11 -> v12
+    v13 <- UnaryOperation v12, '++'
+BeginForLoopBody -> v14
+    v15 <- LoadInteger '42'
+    v16 <- CallMethod v3, 'f', []
+EndForLoop
+BeginWith v3
+    v17 <- BeginPlainFunction -> 
+        v18 <- BeginPlainFunction -> 
+            v19 <- BeginPlainFunction -> 
+                v20 <- CreateNamedVariable 'b', 'none'
+                Return v20
+            EndPlainFunction
+            Return v19
+        EndPlainFunction
+        v21 <- CallFunction v18, []
+        Return v21
+    EndPlainFunction
+    v22 <- CallFunction v17, []
+    SetProperty v3, 'g', v22
+EndWith
+BeginForLoopInitializer
+    v23 <- LoadInteger '0'
+BeginForLoopCondition -> v24
+    v25 <- LoadInteger '10000'
+    v26 <- Compare v24, '<', v25
+BeginForLoopAfterthought v26 -> v27
+    v28 <- UnaryOperation v27, '++'
+BeginForLoopBody -> v29
+    v30 <- LoadInteger '42'
+    v31 <- CallMethod v3, 'g', []
+EndForLoop
+v32 <- BeginPlainFunction -> 
+    BeginWith v3
+        v33 <- BeginPlainFunction -> 
+            v34 <- BeginPlainFunction -> 
+                v35 <- BeginPlainFunction -> 
+                    v36 <- CreateNamedVariable 'b', 'none'
+                    Return v36
+                EndPlainFunction
+                Return v35
+            EndPlainFunction
+            v37 <- CallFunction v34, []
+            Return v37
+        EndPlainFunction
+        v38 <- CallFunction v33, []
+        SetProperty v3, 'h', v38
+    EndWith
+EndPlainFunction
+v39 <- CallFunction v32, []
+BeginForLoopInitializer
+    v40 <- LoadInteger '0'
+BeginForLoopCondition -> v41
+    v42 <- LoadInteger '10000'
+    v43 <- Compare v41, '<', v42
+BeginForLoopAfterthought v43 -> v44
+    v45 <- UnaryOperation v44, '++'
+BeginForLoopBody -> v46
+    v47 <- LoadInteger '42'
+    v48 <- CallMethod v3, 'h', []
+EndForLoop
+
+
+a = {};
+a.b = 42;
+with (a) {
+    function f1() {
+        function f2() {
+            return b;
+        }
+        return f2;
+    }
+    a.f = f1();
+}
+for (let i9 = 0; i9 < 10000; i9++) {
+    a.f();
+}
+with (a) {
+    function f1() {
+        function f2() {
+            function f3() {
+                return b;
+            }
+            return f3;
+        }
+        return f2();
+    }
+    a.g = f1();
+}
+for (let i24 = 0; i24 < 10000; i24++) {
+    a.g();
+}
+function outer() {
+    with (a) {
+        function f1() {
+            function f2() {
+                function f3() {
+                    return b;
+                }
+                return f3;
+            }
+            return f2();
+        }
+        a.h = f1();
+    }
+}
+outer();
+for (let i41 = 0; i41 < 10000; i41++) {
+    a.h();
+}
+
+FuzzIL program written to corpus/regress-2071.fzil

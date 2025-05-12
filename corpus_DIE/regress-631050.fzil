@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CreateArray []
+    v4 <- CreateNamedVariable '__v_3', 'var', v3
+    SetProperty v4, 'length', v1
+    v5 <- LoadBoolean 'true'
+    v6 <- LoadInteger '1'
+    v7 <- CallFunction v0, [v5, v6]
+EndPlainFunction
+BeginTry
+    v8 <- LoadInteger '2147483648'
+    v9 <- LoadInteger '2147483648'
+    v10 <- CallFunction v0, [v8, v9]
+BeginCatch -> v11
+EndTryCatch
+
+
+function __f_3(a1, a2) {
+    var __v_3 = [];
+    __v_3.length = a1;
+    __f_3(true, 1);
+}
+try {
+    __f_3(2147483648, 2147483648);
+} catch(e11) {
+}
+
+FuzzIL program written to corpus/regress-631050.fzil

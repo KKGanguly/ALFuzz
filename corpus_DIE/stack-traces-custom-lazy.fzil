@@ -1,0 +1,58 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadUndefined
+    v3 <- CreateNamedVariable 'error', 'var', v2
+    BeginTry
+        v4 <- CallFunction v1, []
+    BeginCatch -> v5
+        Reassign v3, v5
+    EndTryCatch
+    v6 <- BeginPlainFunction -> v7, v8
+        v9 <- LoadString 'bar'
+        Return v9
+    EndPlainFunction
+    v10 <- CreateNamedVariable 'Error', 'none'
+    SetProperty v10, 'prepareStackTrace', v6
+    v11 <- LoadString 'bar'
+    v12 <- GetProperty v3, 'stack'
+    v13 <- LoadUndefined
+    SetProperty v10, 'prepareStackTrace', v13
+EndPlainFunction
+v14 <- BeginPlainFunction -> 
+    v15 <- CreateNamedVariable 'Error', 'none'
+    v16 <- LoadString 'foo'
+    v17 <- Construct v15, [v16]
+    ThrowException v17
+EndPlainFunction
+v18 <- CallFunction v0, [v14]
+v19 <- BeginPlainFunction -> 
+    v20 <- CreateNamedVariable 'f', 'none'
+    v21 <- CallFunction v20, []
+EndPlainFunction
+v22 <- CallFunction v0, [v19]
+
+
+function testPrepareStackTrace(a1) {
+    var error;
+    try {
+        a1();
+    } catch(e5) {
+        error = e5;
+    }
+    function f6(a7, a8) {
+        return "bar";
+    }
+    Error.prepareStackTrace = f6;
+    error.stack;
+    Error.prepareStackTrace = undefined;
+}
+function f14() {
+    const v17 = new Error("foo");
+    throw v17;
+}
+testPrepareStackTrace(f14);
+function f() {
+    f();
+}
+testPrepareStackTrace(f);
+
+FuzzIL program written to corpus/stack-traces-custom-lazy.fzil

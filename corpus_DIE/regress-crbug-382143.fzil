@@ -1,0 +1,61 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadThis
+    v2 <- LoadString 'x'
+    v3 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v4 <- BeginPlainFunction -> 
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `set`, v3
+        ObjectLiteralAddProperty `get`, v4
+    v5 <- EndObjectLiteral
+    v6 <- CreateNamedVariable 'Object', 'none'
+    v7 <- CallMethod v6, 'defineProperty', [v1, v2, v5]
+    v8 <- BeginPlainFunction -> 
+        v9 <- LoadInteger '1'
+        Return v9
+    EndPlainFunction
+    v10 <- LoadThis
+    SetProperty v10, 'a', v8
+EndPlainFunction
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadThis
+    v13 <- CallMethod v0, 'apply', [v12]
+    v14 <- BeginPlainFunction -> 
+        v15 <- LoadInteger '2'
+        Return v15
+    EndPlainFunction
+    v16 <- LoadThis
+    SetProperty v16, 'a', v14
+EndPlainFunction
+v17 <- Construct v11, []
+v18 <- CreateNamedVariable 'b', 'var', v17
+v19 <- LoadString 'a'
+v20 <- CreateNamedVariable 'Object', 'none'
+v21 <- CallMethod v20, 'getOwnPropertyDescriptor', [v18, v19]
+v22 <- GetProperty v21, 'enumerable'
+
+
+function A() {
+    function f3() {
+    }
+    function f4() {
+    }
+    Object.defineProperty(this, "x", { set: f3, get: f4 });
+    function f8() {
+        return 1;
+    }
+    this.a = f8;
+}
+function B() {
+    A.apply(this);
+    function f14() {
+        return 2;
+    }
+    this.a = f14;
+}
+const v17 = new B();
+var b = v17;
+Object.getOwnPropertyDescriptor(b, "a").enumerable;
+
+FuzzIL program written to corpus/regress-crbug-382143.fzil

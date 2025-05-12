@@ -1,0 +1,91 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- LoadThis
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '0'
+    v4 <- Void_ v3
+    v5 <- LoadUndefined
+    v6 <- LoadArguments
+    v7 <- CallMethod v0, 'apply', [v5, v6]
+    v8 <- LoadInteger '42'
+    v9 <- LoadInteger '42'
+    v10 <- LoadArguments
+    v11 <- CallMethod v0, 'apply', [v9, v10]
+    v12 <- LoadString 'asdf'
+    v13 <- LoadString 'asdf'
+    v14 <- LoadArguments
+    v15 <- CallMethod v0, 'apply', [v13, v14]
+EndPlainFunction
+BeginForLoopInitializer
+    v16 <- LoadInteger '0'
+BeginForLoopCondition -> v17
+    v18 <- LoadInteger '10'
+    v19 <- Compare v17, '<', v18
+BeginForLoopAfterthought v19 -> v20
+    v21 <- UnaryOperation v20, '++'
+BeginForLoopBody -> v22
+    v23 <- CallFunction v2, []
+EndForLoop
+v24 <- CallFunction v2, []
+v25 <- BeginPlainFunction -> v26
+    v27 <- LoadArguments
+    v28 <- CreateNamedVariable 'Object', 'none'
+    v29 <- GetProperty v28, 'prototype'
+    v30 <- GetProperty v29, 'valueOf'
+    v31 <- CallMethod v30, 'apply', [v26, v27]
+EndPlainFunction
+BeginForLoopInitializer
+    v32 <- LoadInteger '0'
+BeginForLoopCondition -> v33
+    v34 <- LoadInteger '10'
+    v35 <- Compare v33, '<', v34
+BeginForLoopAfterthought v35 -> v36
+    v37 <- UnaryOperation v36, '++'
+BeginForLoopBody -> v38
+    v39 <- LoadThis
+    v40 <- CallFunction v25, [v39]
+EndForLoop
+v41 <- LoadThis
+v42 <- CallFunction v25, [v41]
+v43 <- LoadBoolean 'false'
+v44 <- CreateNamedVariable 'exception', 'var', v43
+BeginTry
+    v45 <- LoadUndefined
+    v46 <- CallFunction v25, [v45]
+BeginCatch -> v47
+    v48 <- LoadBoolean 'true'
+    Reassign v44, v48
+EndTryCatch
+
+
+function strict() {
+    'use strict';
+    return this;
+}
+function test_strict() {
+    void 0;
+    strict.apply(undefined, arguments);
+    strict.apply(42, arguments);
+    strict.apply("asdf", arguments);
+}
+for (let i17 = 0; i17 < 10; i17++) {
+    test_strict();
+}
+test_strict();
+function test_builtin(a26) {
+    Object.prototype.valueOf.apply(a26, arguments);
+}
+for (let i33 = 0; i33 < 10; i33++) {
+    test_builtin(this);
+}
+test_builtin(this);
+var exception = false;
+try {
+    test_builtin(undefined);
+} catch(e47) {
+    exception = true;
+}
+
+FuzzIL program written to corpus/regress-1412.fzil

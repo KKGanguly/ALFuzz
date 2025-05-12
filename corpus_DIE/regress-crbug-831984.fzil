@@ -1,0 +1,28 @@
+v0 <- LoadInteger '9000'
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- CallFunction v1, [v0]
+v3 <- CreateArrayWithSpread [...v2]
+v4 <- CreateNamedVariable 'arr', 'let', v3
+BeginForLoopInitializer
+    v5 <- LoadInteger '0'
+BeginForLoopCondition -> v6
+    v7 <- LoadInteger '40'
+    v8 <- Compare v6, '<', v7
+BeginForLoopAfterthought v8 -> v9
+    v10 <- UnaryOperation v9, '++'
+BeginForLoopBody -> v11
+    v12 <- CreateNamedVariable 'Reflect', 'none'
+    v13 <- CallMethod v12, 'ownKeys', [v4]
+    v14 <- CallMethod v13, 'shift', []
+    v15 <- LoadInteger '64386'
+    v16 <- CallFunction v1, [v15]
+EndForLoop
+
+
+let arr = [...Array(9000)];
+for (let i6 = 0; i6 < 40; i6++) {
+    Reflect.ownKeys(arr).shift();
+    Array(64386);
+}
+
+FuzzIL program written to corpus/regress-crbug-831984.fzil

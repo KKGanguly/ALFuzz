@@ -1,0 +1,60 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '65536'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'arr', 'let', v2
+v4 <- LoadInteger '65536'
+v5 <- Construct v0, [v4]
+v6 <- CreateNamedVariable 'resolve_element_closures', 'let', v5
+BeginForLoopInitializer
+    v7 <- LoadInteger '0'
+BeginForLoopCondition -> v8
+    v9 <- GetProperty v3, 'length'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10 -> v11
+    v12 <- UnaryOperation v11, '++'
+BeginForLoopBody -> v13
+    v14 <- CreateNamedVariable 'Promise', 'none'
+    v15 <- BeginArrowFunction -> 
+    EndArrowFunction
+    v16 <- Construct v14, [v15]
+    SetComputedProperty v3, v13, v16
+    v17 <- LoadNull
+    v18 <- BeginArrowFunction -> v19, v20
+        SetComputedProperty v6, v19, v20
+    EndArrowFunction
+    v21 <- CallMethod v18, 'bind', [v17, v13]
+    v22 <- GetComputedProperty v3, v13
+    SetProperty v22, 'then', v21
+EndForLoop
+v23 <- CreateNamedVariable 'Promise', 'none'
+v24 <- CallMethod v23, 'all', [v3]
+v25 <- LoadInteger '65535'
+v26 <- CallComputedMethod v6, v25, []
+v27 <- LoadInteger '100'
+v28 <- CallComputedMethod v6, v27, []
+v29 <- LoadInteger '65534'
+v30 <- CallComputedMethod v6, v29, []
+
+
+const v2 = new Array(65536);
+let arr = v2;
+const v5 = new Array(65536);
+let resolve_element_closures = v5;
+for (let i8 = 0; i8 < arr.length; i8++) {
+    const v15 = () => {
+    };
+    const v16 = new Promise(v15);
+    arr[i8] = v16;
+    const v18 = (a19, a20) => {
+        resolve_element_closures[a19] = a20;
+    };
+    const v21 = v18.bind(null, i8);
+    const t13 = arr[i8];
+    t13.then = v21;
+}
+Promise.all(arr);
+resolve_element_closures[65535]();
+resolve_element_closures[100]();
+resolve_element_closures[65534]();
+
+FuzzIL program written to corpus/regress-crbug-820312.fzil

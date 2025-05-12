@@ -1,0 +1,105 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'g1', 'var', v1
+v3 <- BeginPlainFunction -> 
+    v4 <- GetProperty v2, 'a'
+    Return v4
+EndPlainFunction
+v5 <- LoadInteger '1'
+v6 <- CallFunction v3, []
+v7 <- LoadInteger '1'
+v8 <- CallFunction v3, []
+v9 <- LoadInteger '1'
+v10 <- CallFunction v3, []
+v11 <- DeleteProperty v2, 'a'
+v12 <- LoadUndefined
+v13 <- CallFunction v3, []
+v14 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v14
+v15 <- EndObjectLiteral
+v16 <- CreateNamedVariable 'g2', 'var', v15
+v17 <- BeginPlainFunction -> 
+    v18 <- GetProperty v16, 'a'
+    Return v18
+EndPlainFunction
+v19 <- LoadInteger '2'
+v20 <- CallFunction v17, []
+v21 <- LoadInteger '2'
+v22 <- CallFunction v17, []
+v23 <- LoadInteger '2'
+v24 <- CallFunction v17, []
+v25 <- LoadInteger '10'
+SetProperty v16, 'b', v25
+v26 <- LoadInteger '5'
+SetProperty v16, 'a', v26
+v27 <- LoadInteger '5'
+v28 <- CallFunction v17, []
+v29 <- LoadInteger '2'
+v30 <- LoadInteger '9'
+v31 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v29
+    ObjectLiteralAddProperty `b`, v30
+    ObjectLiteralAddProperty `c`, v31
+v32 <- EndObjectLiteral
+v33 <- CreateNamedVariable 'g3', 'var', v32
+v34 <- BeginPlainFunction -> v35
+    SetProperty v33, 'a', v35
+    v36 <- GetProperty v33, 'a'
+    Return v36
+EndPlainFunction
+v37 <- LoadInteger '5'
+v38 <- LoadInteger '5'
+v39 <- CallFunction v34, [v38]
+v40 <- LoadInteger '8'
+v41 <- LoadInteger '8'
+v42 <- CallFunction v34, [v41]
+v43 <- LoadInteger '10'
+v44 <- LoadInteger '10'
+v45 <- CallFunction v34, [v44]
+v46 <- DeleteProperty v33, 'c'
+v47 <- LoadInteger '7'
+v48 <- CallFunction v34, [v47]
+v49 <- LoadInteger '7'
+v50 <- LoadInteger '9'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v49
+    ObjectLiteralAddProperty `b`, v50
+v51 <- EndObjectLiteral
+
+
+var g1 = { a: 1 };
+function load() {
+    return g1.a;
+}
+load();
+load();
+load();
+delete g1.a;
+load();
+var g2 = { a: 2 };
+function load2() {
+    return g2.a;
+}
+load2();
+load2();
+load2();
+g2.b = 10;
+g2.a = 5;
+load2();
+var g3 = { a: 2, b: 9, c: 1 };
+function store(a35) {
+    g3.a = a35;
+    return g3.a;
+}
+store(5);
+store(8);
+store(10);
+delete g3.c;
+store(7);
+const v51 = { a: 7, b: 9 };
+
+FuzzIL program written to corpus/omit-constant-mapcheck.fzil

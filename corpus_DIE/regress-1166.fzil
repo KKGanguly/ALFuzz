@@ -1,0 +1,44 @@
+v0 <- BeginPlainFunction -> v1, v2
+    Return v1
+EndPlainFunction
+v3 <- BeginPlainFunction -> v4
+    v5 <- LoadInteger '1'
+    v6 <- LoadBoolean 'false'
+    v7 <- LoadBoolean 'false'
+    v8 <- BinaryOperation v6, '||', v7
+    v9 <- LoadInteger '1'
+    v10 <- BinaryOperation v4, '+', v9
+    v11 <- CallFunction v0, [v5, v10]
+    Return v11
+EndPlainFunction
+BeginForLoopInitializer
+    v12 <- LoadInteger '0'
+BeginForLoopCondition -> v13
+    v14 <- LoadInteger '5'
+    v15 <- Compare v13, '<', v14
+BeginForLoopAfterthought v15 -> v16
+    v17 <- UnaryOperation '++', v16
+BeginForLoopBody -> v18
+    v19 <- LoadInteger '0'
+    v20 <- CallFunction v3, [v19]
+EndForLoop
+v21 <- LoadInteger '0'
+v22 <- CallFunction v3, [v21]
+v23 <- LoadString 'a'
+v24 <- CallFunction v3, [v23]
+
+
+function observe(a1, a2) {
+    return a1;
+}
+function test(a4) {
+    false || false;
+    return observe(1, a4 + 1);
+}
+for (let i13 = 0; i13 < 5; ++i13) {
+    test(0);
+}
+test(0);
+test("a");
+
+FuzzIL program written to corpus/regress-1166.fzil

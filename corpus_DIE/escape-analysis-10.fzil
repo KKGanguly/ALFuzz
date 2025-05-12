@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v1 <- BeginPlainFunction -> 
+        BeginForLoopInitializer
+            v2 <- LoadInteger '0'
+        BeginForLoopCondition -> v3
+            v4 <- LoadInteger '5'
+            v5 <- Compare v3, '<', v4
+        BeginForLoopAfterthought v5 -> v6
+            v7 <- UnaryOperation '++', v6
+        BeginForLoopBody -> v8
+            v9 <- BeginPlainFunction -> 
+                Return v8
+            EndPlainFunction
+        EndForLoop
+    EndPlainFunction
+    v10 <- CallFunction v1, []
+EndPlainFunction
+v11 <- CallFunction v0, []
+
+
+function f0() {
+    'use strict';
+    function f() {
+        for (let i3 = 0; i3 < 5; ++i3) {
+            function g() {
+                return i3;
+            }
+        }
+    }
+    f();
+}
+f0();
+
+FuzzIL program written to corpus/escape-analysis-10.fzil

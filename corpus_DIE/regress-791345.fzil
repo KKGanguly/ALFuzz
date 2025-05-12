@@ -1,0 +1,48 @@
+v0 <- LoadString 'a'
+v1 <- BeginPlainFunction -> v2
+    v3 <- LoadInteger '2147483648'
+    v4 <- CreateNamedVariable 'len', 'var', v3
+    v5 <- LoadArguments
+    SetProperty v5, 'length', v4
+    v6 <- LoadArguments
+    v7 <- LoadInteger '1'
+    v8 <- BinaryOperation v4, '-', v7
+    v9 <- CreateNamedVariable 'Array', 'none'
+    v10 <- GetProperty v9, 'prototype'
+    v11 <- GetProperty v10, 'slice'
+    v12 <- CallMethod v11, 'call', [v6, v8, v4]
+EndPlainFunction
+v13 <- CallFunction v1, [v0]
+v14 <- LoadString 'a'
+v15 <- BeginPlainFunction -> v16
+    v17 <- LoadInteger '1073741824'
+    v18 <- CreateNamedVariable 'len', 'var', v17
+    v19 <- LoadArguments
+    SetProperty v19, 'length', v18
+    v20 <- LoadArguments
+    v21 <- LoadInteger '1'
+    v22 <- BinaryOperation v18, '-', v21
+    v23 <- CreateNamedVariable 'Array', 'none'
+    v24 <- GetProperty v23, 'prototype'
+    v25 <- GetProperty v24, 'slice'
+    v26 <- CallMethod v25, 'call', [v20, v22, v18]
+EndPlainFunction
+v27 <- CallFunction v15, [v14]
+
+
+function f1(a2) {
+    var len = 2147483648;
+    arguments.length = len;
+    const v8 = len - 1;
+    Array.prototype.slice.call(arguments, v8, len);
+}
+f1("a");
+function f15(a16) {
+    var len = 1073741824;
+    arguments.length = len;
+    const v22 = len - 1;
+    Array.prototype.slice.call(arguments, v22, len);
+}
+f15("a");
+
+FuzzIL program written to corpus/regress-791345.fzil

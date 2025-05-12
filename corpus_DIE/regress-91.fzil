@@ -1,0 +1,40 @@
+v0 <- CreateNamedVariable 'Date', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'date', 'var', v1
+v3 <- CallMethod v2, 'getYear', []
+v4 <- CreateNamedVariable 'year', 'var', v3
+v5 <- CreateNamedVariable 'Number', 'none'
+v6 <- GetProperty v5, 'NaN'
+v7 <- CallMethod v2, 'setMilliseconds', [v6]
+v8 <- LoadInteger '1900'
+v9 <- BinaryOperation v8, '+', v4
+v10 <- CallMethod v2, 'setYear', [v9]
+v11 <- CallMethod v2, 'getYear', []
+v12 <- LoadInteger '0'
+v13 <- CallMethod v2, 'getMonth', []
+v14 <- LoadInteger '1'
+v15 <- CallMethod v2, 'getDate', []
+v16 <- LoadInteger '0'
+v17 <- CallMethod v2, 'getHours', []
+v18 <- LoadInteger '0'
+v19 <- CallMethod v2, 'getMinutes', []
+v20 <- LoadInteger '0'
+v21 <- CallMethod v2, 'getSeconds', []
+v22 <- LoadInteger '0'
+v23 <- CallMethod v2, 'getMilliseconds', []
+
+
+const v1 = new Date();
+var date = v1;
+var year = date.getYear();
+date.setMilliseconds(Number.NaN);
+date.setYear(1900 + year);
+date.getYear();
+date.getMonth();
+date.getDate();
+date.getHours();
+date.getMinutes();
+date.getSeconds();
+date.getMilliseconds();
+
+FuzzIL program written to corpus/regress-91.fzil

@@ -1,0 +1,31 @@
+v0 <- LoadString 'outer'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+v1 <- EndObjectLiteral
+BeginWith v1
+    v2 <- BeginPlainFunction -> 
+        v3 <- LoadString 'inner'
+        v4 <- CreateNamedVariable 'x', 'var', v3
+        BeginTry
+            v5 <- LoadString 'Exception'
+            ThrowException v5
+        BeginCatch -> v6
+            v7 <- LoadString 'inner'
+        EndTryCatch
+    EndPlainFunction
+    v8 <- CallFunction v2, []
+EndWith
+
+
+with ({ x: "outer" }) {
+    function f2() {
+        var x = "inner";
+        try {
+            throw "Exception";
+        } catch(e6) {
+        }
+    }
+    f2();
+}
+
+FuzzIL program written to corpus/regress-96523.fzil

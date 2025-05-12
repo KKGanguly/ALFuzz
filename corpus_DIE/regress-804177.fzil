@@ -1,0 +1,104 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateArray [v1]
+    v3 <- CreateNamedVariable 'a', 'none'
+    Reassign v3, v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- CreateNamedVariable 'a', 'none'
+        Return v5
+    EndPlainFunction
+    v6 <- CreateNamedVariable 'Array', 'none'
+    v7 <- GetProperty v6, 'of'
+    v8 <- CallMethod v7, 'call', [v4]
+    v9 <- CreateNamedVariable 'b', 'none'
+    Reassign v9, v8
+    v10 <- LoadInteger '2'
+    v11 <- CreateNamedVariable 'b', 'none'
+    v12 <- CallMethod v11, 'unshift', [v10]
+    v13 <- LoadInteger '2'
+    v14 <- CreateArray [v13]
+EndPlainFunction
+v15 <- CallFunction v0, []
+v16 <- BeginPlainFunction -> 
+    v17 <- LoadInteger '9'
+    v18 <- LoadInteger '9'
+    v19 <- LoadInteger '9'
+    v20 <- LoadInteger '9'
+    v21 <- CreateArray [v17, v18, v19, v20]
+    v22 <- CreateNamedVariable 'a', 'none'
+    Reassign v22, v21
+    v23 <- BeginPlainFunction -> 
+        v24 <- CreateNamedVariable 'a', 'none'
+        Return v24
+    EndPlainFunction
+    v25 <- LoadInteger '1'
+    v26 <- LoadInteger '2'
+    v27 <- CreateNamedVariable 'Array', 'none'
+    v28 <- GetProperty v27, 'of'
+    v29 <- CallMethod v28, 'call', [v23, v25, v26]
+    v30 <- CreateNamedVariable 'b', 'none'
+    Reassign v30, v29
+    v31 <- LoadInteger '1'
+    v32 <- CreateNamedVariable 'b', 'none'
+    SetElement v32, '4', v31
+    v33 <- LoadInteger '1'
+    v34 <- LoadInteger '2'
+    v35 <- LoadUndefined
+    v36 <- LoadUndefined
+    v37 <- LoadInteger '1'
+    v38 <- CreateArray [v33, v34, v35, v36, v37]
+EndPlainFunction
+v39 <- CallFunction v16, []
+v40 <- BeginPlainFunction -> 
+    v41 <- BeginPlainFunction -> 
+        v42 <- LoadInteger '1'
+        v43 <- LoadInteger '2'
+        v44 <- LoadInteger '3'
+        v45 <- CreateArray [v42, v43, v44]
+        v46 <- CreateNamedVariable 'Object', 'none'
+        v47 <- CallMethod v46, 'freeze', [v45]
+        Return v47
+    EndPlainFunction
+    v48 <- BeginPlainFunction -> 
+        v49 <- CreateNamedVariable 'Array', 'none'
+        v50 <- GetProperty v49, 'of'
+        v51 <- CallMethod v50, 'call', [v41]
+    EndPlainFunction
+    v52 <- CallFunction v48, []
+    v53 <- CreateNamedVariable 'TypeError', 'none'
+EndPlainFunction
+v54 <- CallFunction v40, []
+
+
+function testUnshift() {
+    a = [1];
+    function f() {
+        return a;
+    }
+    b = Array.of.call(f);
+    b.unshift(2);
+    [2];
+}
+testUnshift();
+function testInsertionPastEnd() {
+    a = [9,9,9,9];
+    function f() {
+        return a;
+    }
+    b = Array.of.call(f, 1, 2);
+    b[4] = 1;
+    [1,2,,,1];
+}
+testInsertionPastEnd();
+function testFrozenArrayThrows() {
+    function f() {
+        return Object.freeze([1,2,3]);
+    }
+    function f48() {
+        Array.of.call(f);
+    }
+    f48();
+}
+testFrozenArrayThrows();
+
+FuzzIL program written to corpus/regress-804177.fzil

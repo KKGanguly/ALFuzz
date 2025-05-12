@@ -1,0 +1,84 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'a'
+    v3 <- LoadString 'b'
+    v4 <- CreateArray [v2, v3]
+    Return v4
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6, v7
+    v8 <- LoadBoolean 'true'
+    v9 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v8
+        ObjectLiteralAddProperty `configurable`, v9
+    v10 <- EndObjectLiteral
+    Return v10
+EndPlainFunction
+v11 <- BeginPlainFunction -> v12, v13
+    v14 <- LoadInteger '1'
+    Return v14
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ownKeys`, v0
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v5
+    ObjectLiteralAddProperty `get`, v11
+v15 <- EndObjectLiteral
+v16 <- CreateNamedVariable 'handler', 'var', v15
+v17 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v18 <- EndObjectLiteral
+v19 <- Construct v17, [v18, v16]
+v20 <- CreateNamedVariable 'proxy', 'var', v19
+BeginObjectLiteral
+v21 <- EndObjectLiteral
+v22 <- CreateNamedVariable 'o', 'var', v21
+v23 <- CreateNamedVariable 'Object', 'none'
+v24 <- CallMethod v23, 'assign', [v22, v20]
+v25 <- LoadInteger '1'
+v26 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v25
+    ObjectLiteralAddProperty `b`, v26
+v27 <- EndObjectLiteral
+v28 <- BeginPlainFunction -> 
+    v29 <- LoadString 'abc'
+    v30 <- CreateNamedVariable 'source', 'var', v29
+    BeginObjectLiteral
+    v31 <- EndObjectLiteral
+    v32 <- CreateNamedVariable 'target', 'var', v31
+    v33 <- CallMethod v23, 'assign', [v32, v30]
+    v34 <- LoadString 'a'
+    v35 <- LoadString 'b'
+    v36 <- LoadString 'c'
+    BeginObjectLiteral
+        ObjectLiteralAddElement `0`, v34
+        ObjectLiteralAddElement `1`, v35
+        ObjectLiteralAddElement `2`, v36
+    v37 <- EndObjectLiteral
+EndPlainFunction
+v38 <- CallFunction v28, []
+
+
+function f0(a1) {
+    return ["a","b"];
+}
+function f5(a6, a7) {
+    return { enumerable: true, configurable: true };
+}
+function f11(a12, a13) {
+    return 1;
+}
+var handler = { ownKeys: f0, getOwnPropertyDescriptor: f5, get: f11 };
+const v19 = new Proxy({}, handler);
+var proxy = v19;
+var o = {};
+Object.assign(o, proxy);
+const v27 = { a: 1, b: 1 };
+function TestStringSources() {
+    var source = "abc";
+    var target = {};
+    Object.assign(target, source);
+    const v37 = { 0: "a", 1: "b", 2: "c" };
+}
+TestStringSources();
+
+FuzzIL program written to corpus/proxies-object-assign.fzil

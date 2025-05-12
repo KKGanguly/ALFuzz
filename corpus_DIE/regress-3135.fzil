@@ -1,0 +1,331 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+v1 <- EndObjectLiteral
+v2 <- LoadString 'x'
+v3 <- LoadInteger '1'
+v4 <- LoadString 'x'
+v5 <- LoadInteger '1'
+v6 <- CreateArray [v2, v3, v4, v5]
+v7 <- CreateNamedVariable 'JSON', 'none'
+v8 <- CallMethod v7, 'stringify', [v1, v6]
+v9 <- LoadString '{"1":1}'
+v10 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddElement `1`, v10
+v11 <- EndObjectLiteral
+v12 <- LoadString 'x'
+v13 <- LoadInteger '1'
+v14 <- LoadString 'x'
+v15 <- LoadInteger '1'
+v16 <- CreateArray [v12, v13, v14, v15]
+v17 <- CallMethod v7, 'stringify', [v11, v16]
+v18 <- LoadString '{"1":1}'
+v19 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddElement `1`, v19
+v20 <- EndObjectLiteral
+v21 <- LoadString '1'
+v22 <- LoadInteger '1'
+v23 <- LoadString '1'
+v24 <- LoadInteger '1'
+v25 <- CreateArray [v21, v22, v23, v24]
+v26 <- CallMethod v7, 'stringify', [v20, v25]
+v27 <- LoadString '{"1":1}'
+v28 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddElement `1`, v28
+v29 <- EndObjectLiteral
+v30 <- LoadInteger '1'
+v31 <- LoadString '1'
+v32 <- LoadInteger '1'
+v33 <- LoadString '1'
+v34 <- CreateArray [v30, v31, v32, v33]
+v35 <- CallMethod v7, 'stringify', [v29, v34]
+v36 <- LoadInteger '0'
+v37 <- CreateNamedVariable 'fired', 'var', v36
+BeginObjectLiteral
+    BeginObjectLiteralGetter `x` -> v38
+        v39 <- UnaryOperation v37, '++'
+        v40 <- LoadInteger '2'
+        Return v40
+    EndObjectLiteralGetter
+v41 <- EndObjectLiteral
+v42 <- CreateNamedVariable 'getter_obj', 'var', v41
+v43 <- LoadString '{"x":2}'
+v44 <- LoadString 'x'
+v45 <- LoadString 'y'
+v46 <- LoadString 'x'
+v47 <- CreateArray [v44, v45, v46]
+v48 <- CallMethod v7, 'stringify', [v42, v47]
+v49 <- LoadInteger '1'
+v50 <- LoadString '{"y":4,"x":3}'
+v51 <- LoadInteger '3'
+v52 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v51
+    ObjectLiteralAddProperty `y`, v52
+v53 <- EndObjectLiteral
+v54 <- LoadString 'y'
+v55 <- LoadString 'x'
+v56 <- CreateArray [v54, v55]
+v57 <- CallMethod v7, 'stringify', [v53, v56]
+v58 <- LoadString '{"y":4,"1":2,"x":3}'
+v59 <- LoadInteger '3'
+v60 <- LoadInteger '4'
+v61 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v59
+    ObjectLiteralAddProperty `y`, v60
+    ObjectLiteralAddElement `1`, v61
+v62 <- EndObjectLiteral
+v63 <- LoadString 'y'
+v64 <- LoadInteger '1'
+v65 <- LoadString 'x'
+v66 <- CreateArray [v63, v64, v65]
+v67 <- CallMethod v7, 'stringify', [v62, v66]
+v68 <- LoadInteger '8'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v68
+v69 <- EndObjectLiteral
+v70 <- CreateNamedVariable 'a', 'var', v69
+v71 <- LoadString '{"__proto__":{"__proto__":null},"x":8}'
+v72 <- LoadString '__proto__'
+v73 <- LoadString 'x'
+v74 <- LoadString '__proto__'
+v75 <- CreateArray [v72, v73, v74]
+v76 <- CallMethod v7, 'stringify', [v70, v75]
+v77 <- LoadInteger '7'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v77
+v78 <- EndObjectLiteral
+SetProperty v70, '__proto__', v78
+v79 <- LoadString '{"__proto__":{"__proto__":{"__proto__":null},"x":7},"x":8}'
+v80 <- LoadString '__proto__'
+v81 <- LoadString 'x'
+v82 <- CreateArray [v80, v81]
+v83 <- CallMethod v7, 'stringify', [v70, v82]
+v84 <- LoadInteger '9'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v84
+v85 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `__proto__`, v85
+v86 <- EndObjectLiteral
+v87 <- CreateNamedVariable 'b', 'var', v86
+v88 <- LoadString '{}'
+v89 <- CallMethod v7, 'stringify', [v87]
+v90 <- LoadString '{"x":9}'
+v91 <- LoadString 'x'
+v92 <- CreateArray [v91]
+v93 <- CallMethod v7, 'stringify', [v87, v92]
+v94 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v94
+v95 <- EndObjectLiteral
+v96 <- CreateNamedVariable 'c', 'var', v95
+v97 <- LoadString 'x'
+v98 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v98
+v99 <- EndObjectLiteral
+v100 <- CreateNamedVariable 'Object', 'none'
+v101 <- CallMethod v100, 'defineProperty', [v96, v97, v99]
+v102 <- LoadString '{}'
+v103 <- CallMethod v7, 'stringify', [v96]
+v104 <- LoadString '{"x":10}'
+v105 <- LoadString 'x'
+v106 <- CreateArray [v105]
+v107 <- CallMethod v7, 'stringify', [v96, v106]
+v108 <- LoadString '[9,8,7]'
+v109 <- LoadInteger '9'
+v110 <- LoadInteger '8'
+v111 <- LoadInteger '7'
+v112 <- CreateArray [v109, v110, v111]
+v113 <- LoadInteger '1'
+v114 <- LoadInteger '1'
+v115 <- CreateArray [v113, v114]
+v116 <- CallMethod v7, 'stringify', [v112, v115]
+v117 <- LoadInteger '11'
+v118 <- LoadInteger '12'
+v119 <- LoadInteger '13'
+v120 <- CreateArray [v117, v118, v119]
+v121 <- CreateNamedVariable 'mixed_arr', 'var', v120
+v122 <- LoadInteger '10'
+SetProperty v121, 'x', v122
+v123 <- LoadString '[11,12,13]'
+v124 <- LoadInteger '1'
+v125 <- LoadInteger '0'
+v126 <- LoadInteger '1'
+v127 <- CreateArray [v124, v125, v126]
+v128 <- CallMethod v7, 'stringify', [v121, v127]
+v129 <- LoadInteger '3'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v129
+v130 <- EndObjectLiteral
+v131 <- CreateNamedVariable 'mixed_obj', 'var', v130
+v132 <- LoadInteger '6'
+SetElement v131, '0', v132
+v133 <- LoadInteger '5'
+SetElement v131, '1', v133
+v134 <- LoadString '{"1":5,"0":6}'
+v135 <- LoadInteger '1'
+v136 <- LoadInteger '0'
+v137 <- LoadInteger '1'
+v138 <- CreateArray [v135, v136, v137]
+v139 <- CallMethod v7, 'stringify', [v131, v138]
+v140 <- LoadString '{"z":{"x":3},"x":1}'
+v141 <- LoadInteger '1'
+v142 <- LoadInteger '2'
+v143 <- LoadInteger '3'
+v144 <- LoadInteger '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v143
+    ObjectLiteralAddProperty `b`, v144
+v145 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v141
+    ObjectLiteralAddProperty `y`, v142
+    ObjectLiteralAddProperty `z`, v145
+v146 <- EndObjectLiteral
+v147 <- LoadString 'z'
+v148 <- LoadString 'x'
+v149 <- CreateArray [v147, v148]
+v150 <- CallMethod v7, 'stringify', [v146, v149]
+v151 <- LoadString '{}'
+v152 <- LoadInteger '1'
+v153 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v152
+    ObjectLiteralAddProperty `1`, v153
+v154 <- EndObjectLiteral
+BeginObjectLiteral
+v155 <- EndObjectLiteral
+v156 <- CreateArray [v155]
+v157 <- CallMethod v7, 'stringify', [v154, v156]
+v158 <- LoadString '{}'
+v159 <- LoadInteger '1'
+v160 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v159
+    ObjectLiteralAddProperty `1`, v160
+v161 <- EndObjectLiteral
+v162 <- LoadBoolean 'true'
+v163 <- LoadUndefined
+v164 <- LoadNull
+v165 <- CreateArray [v162, v163, v164]
+v166 <- CallMethod v7, 'stringify', [v161, v165]
+v167 <- LoadString '{}'
+v168 <- LoadInteger '1'
+v169 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v168
+    ObjectLiteralAddProperty `1`, v169
+v170 <- EndObjectLiteral
+v171 <- BeginPlainFunction -> 
+    v172 <- LoadString 'x'
+    Return v172
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v171
+v173 <- EndObjectLiteral
+v174 <- CreateArray [v173]
+v175 <- CallMethod v7, 'stringify', [v170, v174]
+v176 <- LoadString '{}'
+v177 <- LoadInteger '1'
+v178 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v177
+    ObjectLiteralAddProperty `1`, v178
+v179 <- EndObjectLiteral
+v180 <- BeginPlainFunction -> 
+    v181 <- LoadInteger '1'
+    Return v181
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v180
+v182 <- EndObjectLiteral
+v183 <- CreateArray [v182]
+v184 <- CallMethod v7, 'stringify', [v179, v183]
+v185 <- LoadString '{"toString":42}'
+v186 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v186
+v187 <- EndObjectLiteral
+v188 <- LoadString 'toString'
+v189 <- CreateArray [v188]
+v190 <- CallMethod v7, 'stringify', [v187, v189]
+v191 <- LoadString '{"1":1,"s":"s"}'
+v192 <- LoadInteger '1'
+v193 <- LoadString 's'
+BeginObjectLiteral
+    ObjectLiteralAddElement `1`, v192
+    ObjectLiteralAddProperty `s`, v193
+v194 <- EndObjectLiteral
+v195 <- CreateNamedVariable 'Number', 'none'
+v196 <- LoadInteger '1'
+v197 <- Construct v195, [v196]
+v198 <- CreateNamedVariable 'String', 'none'
+v199 <- LoadString 's'
+v200 <- Construct v198, [v199]
+v201 <- CreateArray [v197, v200]
+v202 <- CallMethod v7, 'stringify', [v194, v201]
+
+
+JSON.stringify({ x: 1 }, ["x",1,"x",1]);
+JSON.stringify({ 1: 1 }, ["x",1,"x",1]);
+JSON.stringify({ 1: 1 }, ["1",1,"1",1]);
+JSON.stringify({ 1: 1 }, [1,"1",1,"1"]);
+var fired = 0;
+const v41 = {
+    get x() {
+        fired++;
+        return 2;
+    },
+};
+var getter_obj = v41;
+JSON.stringify(getter_obj, ["x","y","x"]);
+JSON.stringify({ x: 3, y: 4 }, ["y","x"]);
+JSON.stringify({ x: 3, y: 4, 1: 2 }, ["y",1,"x"]);
+var a = { x: 8 };
+JSON.stringify(a, ["__proto__","x","__proto__"]);
+a.__proto__ = { x: 7 };
+JSON.stringify(a, ["__proto__","x"]);
+const v85 = { x: 9 };
+var b = { __proto__: v85 };
+JSON.stringify(b);
+JSON.stringify(b, ["x"]);
+var c = { x: 10 };
+Object.defineProperty(c, "x", { enumerable: false });
+JSON.stringify(c);
+JSON.stringify(c, ["x"]);
+JSON.stringify([9,8,7], [1,1]);
+var mixed_arr = [11,12,13];
+mixed_arr.x = 10;
+JSON.stringify(mixed_arr, [1,0,1]);
+var mixed_obj = { x: 3 };
+mixed_obj[0] = 6;
+mixed_obj[1] = 5;
+JSON.stringify(mixed_obj, [1,0,1]);
+const v145 = { x: 3, b: 4 };
+JSON.stringify({ x: 1, y: 2, z: v145 }, ["z","x"]);
+const v154 = { x: 1, 1: 1 };
+JSON.stringify(v154, [{}]);
+JSON.stringify({ x: 1, 1: 1 }, [true,,null]);
+const v170 = { x: 1, 1: 1 };
+function f171() {
+    return "x";
+}
+JSON.stringify(v170, [{ toString: f171 }]);
+const v179 = { x: 1, 1: 1 };
+function f180() {
+    return 1;
+}
+JSON.stringify(v179, [{ valueOf: f180 }]);
+JSON.stringify({ toString: 42 }, ["toString"]);
+const v194 = { 1: 1, s: "s" };
+const v197 = new Number(1);
+const v200 = new String("s");
+JSON.stringify(v194, [v197,v200]);
+
+FuzzIL program written to corpus/regress-3135.fzil

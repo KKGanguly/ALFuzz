@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginPlainFunction -> 
+        BeginTry
+            v3 <- CallFunction v2, []
+        BeginCatch -> v4
+            v5 <- CallFunction v1, []
+        EndTryCatch
+    EndPlainFunction
+    v6 <- CallFunction v2, []
+EndPlainFunction
+v7 <- BeginPlainFunction -> 
+EndPlainFunction
+v8 <- GetProperty v7, 'constructor'
+v9 <- CallFunction v0, [v8]
+v10 <- BeginGeneratorFunction -> 
+EndGeneratorFunction
+v11 <- GetProperty v10, 'constructor'
+v12 <- CallFunction v0, [v11]
+v13 <- BeginAsyncFunction -> 
+EndAsyncFunction
+v14 <- GetProperty v13, 'constructor'
+v15 <- CallFunction v0, [v14]
+
+
+function test(a1) {
+    function f() {
+        try {
+            f();
+        } catch(e4) {
+            a1();
+        }
+    }
+    f();
+}
+function f7() {
+}
+test(f7.constructor);
+function* f10() {
+}
+test(f10.constructor);
+async function f13() {
+}
+test(f13.constructor);
+
+FuzzIL program written to corpus/regress-707066.fzil

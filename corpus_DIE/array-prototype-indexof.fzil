@@ -1,0 +1,71 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- LoadInteger '3'
+    v3 <- CreateArray [v1, v2]
+    v4 <- CreateNamedVariable 'iarr', 'const', v3
+    v5 <- BeginPlainFunction -> v6, v7
+        v8 <- CallMethod v6, 'indexOf', [v7]
+        Return v8
+    EndPlainFunction
+    v9 <- LoadInteger '1'
+    v10 <- UnaryOperation '-', v9
+    v11 <- LoadInteger '2'
+    v12 <- CallFunction v5, [v4, v11]
+    v13 <- LoadInteger '1'
+    v14 <- LoadInteger '3'
+    v15 <- CallFunction v5, [v4, v14]
+    v16 <- LoadInteger '2'
+    v17 <- CreateArray [v16]
+    SetProperty v4, '__proto__', v17
+    v18 <- LoadInteger '0'
+    v19 <- LoadInteger '2'
+    v20 <- CallFunction v5, [v4, v19]
+EndPlainFunction
+v21 <- CallFunction v0, []
+v22 <- BeginPlainFunction -> 
+    v23 <- LoadUndefined
+    v24 <- CreateArray [v23]
+    v25 <- CreateNamedVariable 'array', 'var', v24
+    v26 <- BeginPlainFunction -> v27
+        v28 <- CallMethod v25, 'indexOf', [v27]
+        Return v28
+    EndPlainFunction
+    v29 <- LoadInteger '6'
+    v30 <- CallFunction v26, [v29]
+    v31 <- LoadInteger '1'
+    v32 <- UnaryOperation '-', v31
+    v33 <- LoadInteger '6'
+    v34 <- GetProperty v25, '__proto__'
+    v35 <- CallMethod v34, 'push', [v33]
+    v36 <- LoadInteger '6'
+    v37 <- CallFunction v26, [v36]
+    v38 <- LoadInteger '0'
+EndPlainFunction
+v39 <- CallFunction v22, []
+
+
+function f0() {
+    const iarr = [,3];
+    function indexOf(a6, a7) {
+        return a6.indexOf(a7);
+    }
+    -1;
+    indexOf(iarr, 2);
+    indexOf(iarr, 3);
+    iarr.__proto__ = [2];
+    indexOf(iarr, 2);
+}
+f0();
+function f22() {
+    var array = [,];
+    function indexOf(a27) {
+        return array.indexOf(a27);
+    }
+    indexOf(6);
+    -1;
+    array.__proto__.push(6);
+    indexOf(6);
+}
+f22();
+
+FuzzIL program written to corpus/array-prototype-indexof.fzil

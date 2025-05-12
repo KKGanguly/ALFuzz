@@ -1,0 +1,82 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- LoadUndefined
+    v5 <- CreateNamedVariable 'result', 'var', v4
+    BeginIf v3
+        v6 <- LoadInteger '2147483647'
+        v7 <- LoadInteger '2147483648'
+        v8 <- UnaryOperation '-', v7
+        v9 <- CreateNamedVariable 'f2', 'none'
+        v10 <- CallFunction v9, [v1, v6, v2, v2, v8]
+        Reassign v5, v10
+    BeginElse
+        v11 <- LoadInteger '3'
+        v12 <- UnaryOperation '-', v11
+        v13 <- LoadInteger '4'
+        v14 <- LoadInteger '0'
+        v15 <- CreateNamedVariable 'f2', 'none'
+        v16 <- CallFunction v15, [v1, v12, v13, v2, v14]
+        Reassign v5, v16
+    EndIf
+    Return v5
+EndPlainFunction
+v17 <- BeginPlainFunction -> v18, v19, v20, v21, v22
+    v23 <- BinaryOperation v20, '+', v19
+    v24 <- GetComputedProperty v18, v23
+    v25 <- LoadInteger '0'
+    v26 <- BinaryOperation v20, '-', v25
+    v27 <- GetComputedProperty v18, v26
+    v28 <- BinaryOperation v24, '+', v27
+    v29 <- BinaryOperation v21, '-', v22
+    v30 <- GetComputedProperty v18, v29
+    v31 <- BinaryOperation v28, '+', v30
+    Return v31
+EndPlainFunction
+v32 <- CreateArray []
+v33 <- CreateNamedVariable 'a', 'var', v32
+v34 <- LoadInteger '0'
+v35 <- CreateNamedVariable 'i', 'var', v34
+v36 <- UnaryOperation v35, '++'
+v37 <- CallMethod v33, 'push', [v36]
+v38 <- UnaryOperation v35, '++'
+v39 <- CallMethod v33, 'push', [v38]
+v40 <- UnaryOperation v35, '++'
+v41 <- CallMethod v33, 'push', [v40]
+v42 <- UnaryOperation v35, '++'
+v43 <- CallMethod v33, 'push', [v42]
+v44 <- UnaryOperation v35, '++'
+v45 <- CallMethod v33, 'push', [v44]
+v46 <- LoadInteger '0'
+v47 <- LoadBoolean 'false'
+v48 <- CallFunction v0, [v33, v46, v47]
+v49 <- LoadInteger '0'
+v50 <- LoadBoolean 'false'
+v51 <- CallFunction v0, [v33, v49, v50]
+v52 <- LoadInteger '0'
+v53 <- LoadBoolean 'false'
+v54 <- CallFunction v0, [v33, v52, v53]
+
+
+function f(a1, a2, a3) {
+    var result;
+    if (a3) {
+        result = f2(a1, 2147483647, a2, a2, -2147483648);
+    } else {
+        result = f2(a1, -3, 4, a2, 0);
+    }
+    return result;
+}
+function f2(a18, a19, a20, a21, a22) {
+    return (a18[a20 + a19] + a18[a20 - 0]) + a18[a21 - a22];
+}
+var a = [];
+var i = 0;
+a.push(i++);
+a.push(i++);
+a.push(i++);
+a.push(i++);
+a.push(i++);
+f(a, 0, false);
+f(a, 0, false);
+f(a, 0, false);
+
+FuzzIL program written to corpus/regress-bce-underflow.fzil

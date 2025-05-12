@@ -1,0 +1,92 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'evil_called', 'var', v0
+v2 <- LoadInteger '0'
+v3 <- CreateNamedVariable 'evil_locale_called', 'var', v2
+v4 <- LoadInteger '0'
+v5 <- CreateNamedVariable 'exception_thrown', 'var', v4
+v6 <- BeginPlainFunction -> 
+    v7 <- UnaryOperation v1, '++'
+    v8 <- LoadThis
+    Return v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- UnaryOperation v3, '++'
+    v11 <- LoadThis
+    Return v11
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v6
+    ObjectLiteralAddProperty `toLocaleString`, v9
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'o', 'var', v12
+BeginTry
+    v14 <- CreateArray [v13]
+    v15 <- CallMethod v14, 'toLocaleString', []
+BeginCatch -> v16
+    v17 <- UnaryOperation v5, '++'
+EndTryCatch
+v18 <- LoadInteger '1'
+v19 <- LoadString 'evil1'
+v20 <- LoadInteger '1'
+v21 <- LoadString 'local1'
+v22 <- LoadInteger '1'
+v23 <- LoadString 'exception1'
+BeginTry
+    v24 <- CreateArray [v13]
+    v25 <- CallMethod v24, 'toString', []
+BeginCatch -> v26
+    v27 <- UnaryOperation v5, '++'
+EndTryCatch
+v28 <- LoadInteger '2'
+v29 <- LoadString 'evil2'
+v30 <- LoadInteger '1'
+v31 <- LoadString 'local2'
+v32 <- LoadInteger '2'
+v33 <- LoadString 'exception2'
+BeginTry
+    v34 <- CreateArray [v13]
+    v35 <- CallMethod v34, 'join', [v13]
+BeginCatch -> v36
+    v37 <- UnaryOperation v5, '++'
+EndTryCatch
+v38 <- LoadInteger '3'
+v39 <- LoadString 'evil3'
+v40 <- LoadInteger '1'
+v41 <- LoadString 'local3'
+v42 <- LoadInteger '3'
+v43 <- LoadString 'exception3'
+v44 <- LoadString 'ok'
+v45 <- CreateNamedVariable 'print', 'none'
+v46 <- CallFunction v45, [v44]
+
+
+var evil_called = 0;
+var evil_locale_called = 0;
+var exception_thrown = 0;
+function evil_to_string() {
+    evil_called++;
+    return this;
+}
+function evil_to_locale_string() {
+    evil_locale_called++;
+    return this;
+}
+var o = { toString: evil_to_string, toLocaleString: evil_to_locale_string };
+try {
+    ([o]).toLocaleString();
+} catch(e16) {
+    exception_thrown++;
+}
+try {
+    ([o]).toString();
+} catch(e26) {
+    exception_thrown++;
+}
+try {
+    ([o]).join(o);
+} catch(e36) {
+    exception_thrown++;
+}
+print("ok");
+
+FuzzIL program written to corpus/regress-r3391.fzil

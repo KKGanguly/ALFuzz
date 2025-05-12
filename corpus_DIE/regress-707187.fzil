@@ -1,0 +1,38 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'i', 'let', v0
+v2 <- LoadRegExp '.' 'g'
+v3 <- CreateNamedVariable 're', 'let', v2
+v4 <- BeginArrowFunction -> 
+    v5 <- UnaryOperation v1, '++'
+    v6 <- LoadInteger '0'
+    v7 <- Compare v5, '==', v6
+    BeginIf v7
+        v8 <- LoadInteger '2'
+        v9 <- LoadInteger '16'
+        v10 <- BinaryOperation v8, '**', v9
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `length`, v10
+        v11 <- EndObjectLiteral
+        Return v11
+    EndIf
+    v12 <- LoadNull
+    Return v12
+EndArrowFunction
+SetProperty v3, 'exec', v4
+v13 <- LoadString ''
+v14 <- CallMethod v13, 'replace', [v3]
+
+
+let i = 0;
+let re = /./g;
+const v4 = () => {
+    if (i++ == 0) {
+        const v10 = 2 ** 16;
+        return { length: v10 };
+    }
+    return null;
+};
+re.exec = v4;
+("").replace(re);
+
+FuzzIL program written to corpus/regress-707187.fzil

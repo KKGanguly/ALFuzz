@@ -1,0 +1,64 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginPlainFunction -> 
+        v3 <- BeginPlainFunction -> 
+            BeginIf v1
+                v4 <- LoadBoolean 'true'
+                BeginObjectLiteral
+                    ObjectLiteralAddProperty `done`, v4
+                v5 <- EndObjectLiteral
+                Return v5
+            EndIf
+            v6 <- LoadBoolean 'true'
+            Reassign v1, v6
+            v7 <- LoadInteger '42'
+            v8 <- LoadBoolean 'false'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `value`, v7
+                ObjectLiteralAddProperty `done`, v8
+            v9 <- EndObjectLiteral
+            Return v9
+        EndPlainFunction
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `next`, v3
+        v10 <- EndObjectLiteral
+        Return v10
+    EndPlainFunction
+    v11 <- CreateNamedVariable 'Symbol', 'none'
+    v12 <- GetProperty v11, 'iterator'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v12, v2
+    v13 <- EndObjectLiteral
+    Return v13
+EndPlainFunction
+v14 <- LoadBoolean 'true'
+v15 <- CallFunction v0, [v14]
+v16 <- CreateNamedVariable '', 'var', v15
+v17 <- CreateArray []
+v18 <- CreateNamedVariable 'result', 'none'
+v19 <- LoadBoolean 'false'
+v20 <- CallFunction v0, [v19]
+v21 <- CreateNamedVariable '', 'var', v20
+v22 <- LoadInteger '42'
+v23 <- CreateArray [v22]
+
+
+function iterable(a1) {
+    function f2() {
+        function f3() {
+            if (a1) {
+                return { done: true };
+            }
+            a1 = true;
+            return { value: 42, done: false };
+        }
+        return { next: f3 };
+    }
+    const v12 = Symbol.iterator;
+    return { [v12]: f2 };
+}
+var  = iterable(true);
+[];
+var  = iterable(false);
+[42];
+
+FuzzIL program written to corpus/regress-4759.fzil

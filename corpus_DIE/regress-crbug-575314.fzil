@@ -1,0 +1,32 @@
+v0 <- CreateNamedVariable 'Promise', 'none'
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'test', 'var', v2
+v4 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v3, 'constructor', v4
+v5 <- BeginArrowFunction -> v6
+    v7 <- LoadString ' FAILED!'
+    v8 <- BinaryOperation v6, '+', v7
+    v9 <- CreateNamedVariable 'print', 'none'
+    v10 <- CallFunction v9, [v8]
+    Return v10
+EndArrowFunction
+v11 <- CallMethod v0, 'resolve', [v3]
+v12 <- CallMethod v11, 'catch', [v5]
+
+
+function f1() {
+}
+const v2 = new Promise(f1);
+var test = v2;
+function f4() {
+}
+test.constructor = f4;
+const v5 = (a6) => {
+    return print(a6 + " FAILED!");
+};
+Promise.resolve(test).catch(v5);
+
+FuzzIL program written to corpus/regress-crbug-575314.fzil

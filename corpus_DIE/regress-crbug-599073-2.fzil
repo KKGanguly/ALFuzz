@@ -1,0 +1,31 @@
+v0 <- CreateNamedVariable 'Boolean', 'none'
+v1 <- GetProperty v0, 'prototype'
+v2 <- LoadString 'v'
+v3 <- CreateNamedVariable 'constructor', 'none'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- CallMethod v5, 'defineProperty', [v1, v2, v4]
+v7 <- BeginPlainFunction -> v8
+    v9 <- LoadInteger '1'
+    SetProperty v8, 'v', v9
+EndPlainFunction
+v10 <- LoadBoolean 'true'
+v11 <- CallFunction v7, [v10]
+v12 <- LoadBoolean 'true'
+v13 <- CallFunction v7, [v12]
+v14 <- LoadBoolean 'true'
+v15 <- CallFunction v7, [v14]
+
+
+const v1 = Boolean.prototype;
+Object.defineProperty(v1, "v", { set: constructor });
+function foo(a8) {
+    a8.v = 1;
+}
+foo(true);
+foo(true);
+foo(true);
+
+FuzzIL program written to corpus/regress-crbug-599073-2.fzil

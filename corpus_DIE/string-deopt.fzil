@@ -1,0 +1,152 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3, v4
+        v5 <- CallMethod v2, 'indexOf', [v3, v4]
+        Return v5
+    EndPlainFunction
+    v6 <- LoadString 'abc'
+    v7 <- LoadString 'de'
+    v8 <- LoadInteger '1'
+    v9 <- CallFunction v1, [v6, v7, v8]
+    v10 <- LoadString 'abc'
+    v11 <- LoadString 'de'
+    v12 <- LoadInteger '1'
+    v13 <- CallFunction v1, [v10, v11, v12]
+    v14 <- LoadString 'abc'
+    v15 <- LoadString 'de'
+    BeginObjectLiteral
+    v16 <- EndObjectLiteral
+    v17 <- CallFunction v1, [v14, v15, v16]
+    v18 <- LoadString 'abc'
+    v19 <- LoadString 'de'
+    BeginObjectLiteral
+    v20 <- EndObjectLiteral
+    v21 <- CallFunction v1, [v18, v19, v20]
+    v22 <- CallFunction v1, []
+EndArrowFunction
+v23 <- CallFunction v0, []
+v24 <- BeginArrowFunction -> 
+    v25 <- BeginPlainFunction -> v26, v27, v28
+        v29 <- CallMethod v26, 'indexOf', [v27, v28]
+        Return v29
+    EndPlainFunction
+    v30 <- LoadString 'abc'
+    v31 <- LoadString 'de'
+    v32 <- LoadInteger '1'
+    v33 <- CallFunction v25, [v30, v31, v32]
+    v34 <- LoadString 'abc'
+    v35 <- LoadString 'de'
+    v36 <- LoadInteger '1'
+    v37 <- CallFunction v25, [v34, v35, v36]
+    v38 <- LoadString 'abc'
+    BeginObjectLiteral
+    v39 <- EndObjectLiteral
+    v40 <- LoadInteger '1'
+    v41 <- CallFunction v25, [v38, v39, v40]
+    v42 <- LoadString 'abc'
+    BeginObjectLiteral
+    v43 <- EndObjectLiteral
+    v44 <- LoadInteger '1'
+    v45 <- CallFunction v25, [v42, v43, v44]
+    v46 <- CallFunction v25, []
+EndArrowFunction
+v47 <- CallFunction v24, []
+v48 <- BeginArrowFunction -> 
+    v49 <- BeginPlainFunction -> v50, v51, v52
+        v53 <- CallMethod v50, 'substring', [v51, v52]
+        Return v53
+    EndPlainFunction
+    v54 <- LoadString 'abcde'
+    v55 <- LoadInteger '1'
+    v56 <- LoadInteger '4'
+    v57 <- CallFunction v49, [v54, v55, v56]
+    v58 <- LoadString 'abcde'
+    v59 <- LoadInteger '1'
+    v60 <- LoadInteger '4'
+    v61 <- CallFunction v49, [v58, v59, v60]
+    v62 <- LoadString 'abcde'
+    v63 <- LoadInteger '1'
+    BeginObjectLiteral
+    v64 <- EndObjectLiteral
+    v65 <- CallFunction v49, [v62, v63, v64]
+    v66 <- LoadString 'abcde'
+    v67 <- LoadInteger '1'
+    BeginObjectLiteral
+    v68 <- EndObjectLiteral
+    v69 <- CallFunction v49, [v66, v67, v68]
+    v70 <- CallFunction v49, []
+EndArrowFunction
+v71 <- CallFunction v48, []
+v72 <- BeginArrowFunction -> 
+    v73 <- BeginPlainFunction -> v74, v75, v76
+        v77 <- CallMethod v74, 'substring', [v75, v76]
+        Return v77
+    EndPlainFunction
+    v78 <- LoadString 'abcde'
+    v79 <- LoadInteger '1'
+    v80 <- LoadInteger '4'
+    v81 <- CallFunction v73, [v78, v79, v80]
+    v82 <- LoadString 'abcde'
+    v83 <- LoadInteger '1'
+    v84 <- LoadInteger '4'
+    v85 <- CallFunction v73, [v82, v83, v84]
+    v86 <- LoadString 'abcde'
+    BeginObjectLiteral
+    v87 <- EndObjectLiteral
+    v88 <- LoadInteger '4'
+    v89 <- CallFunction v73, [v86, v87, v88]
+    v90 <- LoadString 'abcde'
+    BeginObjectLiteral
+    v91 <- EndObjectLiteral
+    v92 <- LoadInteger '4'
+    v93 <- CallFunction v73, [v90, v91, v92]
+    v94 <- CallFunction v73, []
+EndArrowFunction
+v95 <- CallFunction v72, []
+
+
+const v0 = () => {
+    function f(a2, a3, a4) {
+        return a2.indexOf(a3, a4);
+    }
+    f("abc", "de", 1);
+    f("abc", "de", 1);
+    f("abc", "de", {});
+    f("abc", "de", {});
+    f();
+};
+v0();
+const v24 = () => {
+    function f(a26, a27, a28) {
+        return a26.indexOf(a27, a28);
+    }
+    f("abc", "de", 1);
+    f("abc", "de", 1);
+    f("abc", {}, 1);
+    f("abc", {}, 1);
+    f();
+};
+v24();
+const v48 = () => {
+    function f(a50, a51, a52) {
+        return a50.substring(a51, a52);
+    }
+    f("abcde", 1, 4);
+    f("abcde", 1, 4);
+    f("abcde", 1, {});
+    f("abcde", 1, {});
+    f();
+};
+v48();
+const v72 = () => {
+    function f(a74, a75, a76) {
+        return a74.substring(a75, a76);
+    }
+    f("abcde", 1, 4);
+    f("abcde", 1, 4);
+    f("abcde", {}, 4);
+    f("abcde", {}, 4);
+    f();
+};
+v72();
+
+FuzzIL program written to corpus/string-deopt.fzil

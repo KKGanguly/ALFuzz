@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'sum', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '1000'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- LoadArguments
+        v11 <- GetElement v10, '0'
+        v12 <- LoadArguments
+        v13 <- GetElement v12, '1'
+        v14 <- BinaryOperation v11, '+', v13
+        v15 <- LoadArguments
+        v16 <- GetElement v15, '2'
+        v17 <- BinaryOperation v14, '+', v16
+        v18 <- LoadArguments
+        v19 <- GetElement v18, '3'
+        v20 <- BinaryOperation v17, '+', v19
+        Update v2, '+', v20
+    EndForLoop
+    Return v2
+EndPlainFunction
+v21 <- LoadInteger '1'
+v22 <- LoadInteger '1'
+v23 <- LoadInteger '2'
+v24 <- LoadInteger '3'
+v25 <- CallFunction v0, [v21, v22, v23, v24]
+v26 <- CreateNamedVariable 'result', 'let', v25
+v27 <- LoadInteger '7000'
+
+
+function f1() {
+    var sum = 0;
+    for (let i4 = 0; i4 < 1000; i4++) {
+        sum += ((arguments[0] + arguments[1]) + arguments[2]) + arguments[3];
+    }
+    return sum;
+}
+let result = f1(1, 1, 2, 3);
+
+FuzzIL program written to corpus/osr-arguments.fzil

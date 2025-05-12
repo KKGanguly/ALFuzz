@@ -1,0 +1,128 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadString 'a'
+    v4 <- LoadString 'b'
+    v5 <- BinaryOperation v3, '+', v4
+    v6 <- CreateNamedVariable 'x', 'var', v5
+    Return v1
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8, v9
+    v10 <- LoadString '0'
+    v11 <- BinaryOperation v8, '+', v10
+    v12 <- CreateNamedVariable 'x', 'var', v11
+    v13 <- LoadString '0'
+    v14 <- BinaryOperation v9, '+', v13
+    v15 <- CreateNamedVariable 'y', 'var', v14
+    Return v8
+EndPlainFunction
+v16 <- BeginPlainFunction -> v17, v18
+    v19 <- LoadString '1'
+    v20 <- LoadString '0'
+    v21 <- TernaryOperation v17, v19, v20
+    Reassign v17, v21
+    v22 <- LoadString '1'
+    v23 <- LoadString '0'
+    v24 <- TernaryOperation v18, v22, v23
+    Reassign v18, v24
+    v25 <- LoadString '0'
+    v26 <- BinaryOperation v17, '+', v25
+    v27 <- CreateNamedVariable 'x', 'var', v26
+    v28 <- LoadString '0'
+    v29 <- BinaryOperation v18, '+', v28
+    v30 <- CreateNamedVariable 'y', 'var', v29
+    Return v17
+EndPlainFunction
+v31 <- LoadInteger '33'
+v32 <- LoadInteger '33'
+v33 <- LoadInteger '32'
+v34 <- CallFunction v0, [v32, v33]
+v35 <- LoadInteger '33'
+v36 <- LoadInteger '33'
+v37 <- LoadInteger '32'
+v38 <- CallFunction v7, [v36, v37]
+v39 <- LoadString '1'
+v40 <- LoadInteger '33'
+v41 <- LoadInteger '32'
+v42 <- CallFunction v16, [v40, v41]
+v43 <- LoadInteger '31'
+v44 <- LoadInteger '31'
+v45 <- LoadInteger '30'
+v46 <- CallFunction v0, [v44, v45]
+v47 <- LoadInteger '31'
+v48 <- LoadInteger '31'
+v49 <- LoadInteger '30'
+v50 <- CallFunction v7, [v48, v49]
+v51 <- LoadString '1'
+v52 <- LoadInteger '31'
+v53 <- LoadInteger '32'
+v54 <- CallFunction v16, [v52, v53]
+v55 <- LoadInteger '0'
+v56 <- LoadInteger '0'
+v57 <- LoadInteger '30'
+v58 <- CallFunction v0, [v56, v57]
+v59 <- LoadInteger '0'
+v60 <- LoadInteger '0'
+v61 <- LoadInteger '30'
+v62 <- CallFunction v7, [v60, v61]
+v63 <- LoadString '0'
+v64 <- LoadInteger '0'
+v65 <- LoadInteger '32'
+v66 <- CallFunction v16, [v64, v65]
+v67 <- LoadBoolean 'true'
+v68 <- LoadBoolean 'true'
+v69 <- LoadInteger '0'
+v70 <- CallFunction v0, [v68, v69]
+v71 <- LoadBoolean 'true'
+v72 <- LoadBoolean 'true'
+v73 <- LoadInteger '0'
+v74 <- CallFunction v7, [v72, v73]
+v75 <- LoadString '1'
+v76 <- LoadBoolean 'true'
+v77 <- LoadInteger '0'
+v78 <- CallFunction v16, [v76, v77]
+v79 <- LoadString 'true'
+v80 <- LoadString 'true'
+v81 <- LoadInteger '0'
+v82 <- CallFunction v0, [v80, v81]
+v83 <- LoadString 'true'
+v84 <- LoadString 'true'
+v85 <- LoadInteger '0'
+v86 <- CallFunction v7, [v84, v85]
+v87 <- LoadString '1'
+v88 <- LoadString 'true'
+v89 <- LoadInteger '0'
+v90 <- CallFunction v16, [v88, v89]
+
+
+function dead1(a1, a2) {
+    var x = "a" + "b";
+    return a1;
+}
+function dead2(a8, a9) {
+    var x = a8 + "0";
+    var y = a9 + "0";
+    return a8;
+}
+function dead3(a17, a18) {
+    a17 = a17 ? "1" : "0";
+    a18 = a18 ? "1" : "0";
+    var x = a17 + "0";
+    var y = a18 + "0";
+    return a17;
+}
+dead1(33, 32);
+dead2(33, 32);
+dead3(33, 32);
+dead1(31, 30);
+dead2(31, 30);
+dead3(31, 32);
+dead1(0, 30);
+dead2(0, 30);
+dead3(0, 32);
+dead1(true, 0);
+dead2(true, 0);
+dead3(true, 0);
+dead1("true", 0);
+dead2("true", 0);
+dead3("true", 0);
+
+FuzzIL program written to corpus/dead-string-add.fzil

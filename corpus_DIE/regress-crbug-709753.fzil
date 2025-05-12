@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    v4 <- GetProperty v3, 'x'
+EndPlainFunction
+v5 <- LoadUndefined
+v6 <- LoadFloat '0.1'
+v7 <- CreateArray [v5, v6]
+v8 <- CreateNamedVariable 'a', 'var', v7
+v9 <- LoadInteger '1'
+v10 <- CallFunction v0, [v8, v9]
+v11 <- LoadInteger '1'
+v12 <- CallFunction v0, [v8, v11]
+v13 <- BeginArrowFunction -> 
+    v14 <- LoadInteger '0'
+    v15 <- CallFunction v0, [v8, v14]
+    Return v15
+EndArrowFunction
+v16 <- CallFunction v13, []
+v17 <- CreateNamedVariable 'TypeError', 'none'
+
+
+function foo(a1, a2) {
+    a1[a2].x;
+}
+var a = [,0.1];
+foo(a, 1);
+foo(a, 1);
+const v13 = () => {
+    return foo(a, 0);
+};
+v13();
+
+FuzzIL program written to corpus/regress-crbug-709753.fzil

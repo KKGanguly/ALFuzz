@@ -1,0 +1,27 @@
+v0 <- LoadInteger '4294967295'
+v1 <- LoadInteger '3'
+v2 <- BinaryOperation v0, '-', v1
+v3 <- LoadString 'a'
+v4 <- CallMethod v3, 'repeat', [v2]
+v5 <- CreateNamedVariable 'a', 'none'
+Reassign v5, v4
+v6 <- BeginArrowFunction -> 
+    v7 <- CreateNamedVariable 'RegExp', 'none'
+    v8 <- LoadString 'a'
+    v9 <- CreateNamedVariable 'a', 'none'
+    v10 <- BinaryOperation v8, '+', v9
+    v11 <- Construct v7, [v10]
+    Return v11
+EndArrowFunction
+v12 <- CallFunction v6, []
+v13 <- CreateNamedVariable 'SyntaxError', 'none'
+
+
+a = ("a").repeat(4294967295 - 3);
+const v6 = () => {
+    const v11 = new RegExp("a" + a);
+    return v11;
+};
+v6();
+
+FuzzIL program written to corpus/regress-752764.fzil

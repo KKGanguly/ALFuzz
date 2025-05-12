@@ -1,0 +1,226 @@
+v0 <- CreateNamedVariable 'Function', 'none'
+v1 <- CallFunction v0, []
+v2 <- CreateNamedVariable 'f', 'var', v1
+v3 <- CallFunction v2, []
+v4 <- TypeOf v3
+v5 <- LoadString 'undefined'
+v6 <- Compare v4, '==', v5
+v7 <- Construct v0, []
+Reassign v2, v7
+v8 <- CallFunction v2, []
+v9 <- TypeOf v8
+v10 <- LoadString 'undefined'
+v11 <- Compare v9, '==', v10
+v12 <- LoadString 'return 1'
+v13 <- CallFunction v0, [v12]
+Reassign v2, v13
+v14 <- LoadInteger '1'
+v15 <- CallFunction v2, []
+v16 <- LoadString 'return 1'
+v17 <- Construct v0, [v16]
+Reassign v2, v17
+v18 <- LoadInteger '1'
+v19 <- CallFunction v2, []
+v20 <- LoadString 'return true'
+v21 <- CallFunction v0, [v20]
+Reassign v2, v21
+v22 <- CallFunction v2, []
+v23 <- LoadString 'return true'
+v24 <- Construct v0, [v23]
+Reassign v2, v24
+v25 <- CallFunction v2, []
+v26 <- LoadString 'x'
+v27 <- LoadString 'return x'
+v28 <- CallFunction v0, [v26, v27]
+Reassign v2, v28
+v29 <- LoadInteger '1'
+v30 <- LoadInteger '1'
+v31 <- CallFunction v2, [v30]
+v32 <- LoadString 'bar'
+v33 <- LoadString 'bar'
+v34 <- CallFunction v2, [v33]
+v35 <- CallFunction v2, []
+v36 <- TypeOf v35
+v37 <- LoadString 'undefined'
+v38 <- Compare v36, '==', v37
+BeginObjectLiteral
+v39 <- EndObjectLiteral
+v40 <- CreateNamedVariable 'x', 'var', v39
+v41 <- CallFunction v2, [v40]
+v42 <- Compare v40, '===', v41
+v43 <- LoadString 'x'
+v44 <- LoadString 'return x // comment'
+v45 <- CallFunction v0, [v43, v44]
+Reassign v2, v45
+v46 <- LoadInteger '1'
+v47 <- LoadInteger '1'
+v48 <- CallFunction v2, [v47]
+v49 <- LoadString 'return typeof anonymous'
+v50 <- CallFunction v0, [v49]
+Reassign v2, v50
+v51 <- LoadString 'undefined'
+v52 <- CallFunction v2, []
+v53 <- LoadInteger '42'
+v54 <- CreateNamedVariable 'anonymous', 'var', v53
+v55 <- LoadString 'return anonymous;'
+v56 <- CallFunction v0, [v55]
+Reassign v2, v56
+v57 <- LoadInteger '42'
+v58 <- CallFunction v2, []
+v59 <- LoadString 'x'
+v60 <- LoadString 'return x'
+v61 <- Construct v0, [v59, v60]
+Reassign v2, v61
+v62 <- LoadInteger '1'
+v63 <- LoadInteger '1'
+v64 <- CallFunction v2, [v63]
+v65 <- LoadString 'bar'
+v66 <- LoadString 'bar'
+v67 <- CallFunction v2, [v66]
+v68 <- CallFunction v2, []
+v69 <- TypeOf v68
+v70 <- LoadString 'undefined'
+v71 <- Compare v69, '==', v70
+BeginObjectLiteral
+v72 <- EndObjectLiteral
+v73 <- CreateNamedVariable 'x', 'var', v72
+v74 <- CallFunction v2, [v73]
+v75 <- Compare v73, '===', v74
+v76 <- LoadString 'x'
+v77 <- LoadString 'y'
+v78 <- LoadString 'return x+y'
+v79 <- CallFunction v0, [v76, v77, v78]
+Reassign v2, v79
+v80 <- LoadInteger '5'
+v81 <- LoadInteger '2'
+v82 <- LoadInteger '3'
+v83 <- CallFunction v2, [v81, v82]
+v84 <- LoadString 'foobar'
+v85 <- LoadString 'foo'
+v86 <- LoadString 'bar'
+v87 <- CallFunction v2, [v85, v86]
+v88 <- LoadString 'x'
+v89 <- LoadString 'y'
+v90 <- LoadString 'return x+y'
+v91 <- Construct v0, [v88, v89, v90]
+Reassign v2, v91
+v92 <- LoadInteger '5'
+v93 <- LoadInteger '2'
+v94 <- LoadInteger '3'
+v95 <- CallFunction v2, [v93, v94]
+v96 <- LoadString 'foobar'
+v97 <- LoadString 'foo'
+v98 <- LoadString 'bar'
+v99 <- CallFunction v2, [v97, v98]
+BeginObjectLiteral
+v100 <- EndObjectLiteral
+v101 <- CreateNamedVariable 'x', 'var', v100
+v102 <- BeginPlainFunction -> 
+    v103 <- LoadString 'x'
+    Return v103
+EndPlainFunction
+SetProperty v101, 'toString', v102
+BeginObjectLiteral
+v104 <- EndObjectLiteral
+v105 <- CreateNamedVariable 'y', 'var', v104
+v106 <- BeginPlainFunction -> 
+    v107 <- LoadString 'y'
+    Return v107
+EndPlainFunction
+SetProperty v105, 'toString', v106
+BeginObjectLiteral
+v108 <- EndObjectLiteral
+v109 <- CreateNamedVariable 'z', 'var', v108
+v110 <- BeginPlainFunction -> 
+    v111 <- LoadString 'return x*y'
+    Return v111
+EndPlainFunction
+SetProperty v109, 'toString', v110
+v112 <- CallFunction v0, [v101, v105, v109]
+v113 <- CreateNamedVariable 'f', 'var', v112
+v114 <- LoadInteger '25'
+v115 <- LoadInteger '5'
+v116 <- LoadInteger '5'
+v117 <- CallFunction v113, [v115, v116]
+v118 <- LoadInteger '42'
+v119 <- LoadInteger '2'
+v120 <- LoadInteger '21'
+v121 <- CallFunction v113, [v119, v120]
+v122 <- Construct v0, [v101, v105, v109]
+Reassign v113, v122
+v123 <- LoadInteger '25'
+v124 <- LoadInteger '5'
+v125 <- LoadInteger '5'
+v126 <- CallFunction v113, [v124, v125]
+v127 <- LoadInteger '42'
+v128 <- LoadInteger '2'
+v129 <- LoadInteger '21'
+v130 <- CallFunction v113, [v128, v129]
+
+
+var f = Function();
+typeof f() == "undefined";
+const v7 = new Function();
+f = v7;
+typeof f() == "undefined";
+f = Function("return 1");
+f();
+const v17 = new Function("return 1");
+f = v17;
+f();
+f = Function("return true");
+f();
+const v24 = new Function("return true");
+f = v24;
+f();
+f = Function("x", "return x");
+f(1);
+f("bar");
+typeof f() == "undefined";
+var x = {};
+x === f(x);
+f = Function("x", "return x // comment");
+f(1);
+f = Function("return typeof anonymous");
+f();
+var anonymous = 42;
+f = Function("return anonymous;");
+f();
+const v61 = new Function("x", "return x");
+f = v61;
+f(1);
+f("bar");
+typeof f() == "undefined";
+var x = {};
+x === f(x);
+f = Function("x", "y", "return x+y");
+f(2, 3);
+f("foo", "bar");
+const v91 = new Function("x", "y", "return x+y");
+f = v91;
+f(2, 3);
+f("foo", "bar");
+var x = {};
+function f102() {
+    return "x";
+}
+x.toString = f102;
+var y = {};
+function f106() {
+    return "y";
+}
+y.toString = f106;
+var z = {};
+function f110() {
+    return "return x*y";
+}
+z.toString = f110;
+var f = Function(x, y, z);
+f(5, 5);
+f(2, 21);
+const v122 = new Function(x, y, z);
+f = v122;
+f(5, 5);
+f(2, 21);
+
+FuzzIL program written to corpus/function.fzil

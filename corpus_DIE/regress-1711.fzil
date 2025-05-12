@@ -1,0 +1,28 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'side_effect', 'var', v0
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- Construct v2, []
+v4 <- CreateNamedVariable 'separator', 'var', v3
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadBoolean 'true'
+    Reassign v1, v6
+    v7 <- LoadUndefined
+    Return v7
+EndPlainFunction
+SetProperty v4, 'toString', v5
+v8 <- LoadInteger '0'
+v9 <- LoadString 'subject'
+v10 <- CallMethod v9, 'split', [v4, v8]
+
+
+var side_effect = false;
+const v3 = new Object();
+var separator = v3;
+function f5() {
+    side_effect = true;
+    return undefined;
+}
+separator.toString = f5;
+("subject").split(separator, 0);
+
+FuzzIL program written to corpus/regress-1711.fzil

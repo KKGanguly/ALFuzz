@@ -1,0 +1,60 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateArray []
+    v2 <- CreateNamedVariable 'args', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '125000'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation v7, '++'
+    BeginForLoopBody -> v9
+        v10 <- CallMethod v2, 'push', [v9]
+    EndForLoop
+    v11 <- CreateNamedVariable 'Array', 'none'
+    v12 <- CallMethod v11, 'apply', [v11, v2]
+    Return v12
+EndPlainFunction
+v13 <- CallFunction v0, []
+v14 <- CreateNamedVariable 'array', 'var', v13
+v15 <- BeginPlainFunction -> v16
+    v17 <- LoadInteger '0'
+    v18 <- CreateNamedVariable 'f0', 'var', v17
+    v19 <- LoadInteger '1'
+    v20 <- CreateNamedVariable 'f1', 'var', v19
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v21 <- LoadInteger '0'
+        v22 <- Compare v16, '>', v21
+    BeginForLoopAfterthought v22
+        v23 <- LoadInteger '1'
+        v24 <- BinaryOperation v16, '-', v23
+        Reassign v16, v24
+    BeginForLoopBody
+        v25 <- BinaryOperation v18, '+', v20
+        Reassign v18, v14
+    EndForLoop
+EndPlainFunction
+v26 <- LoadInteger '12'
+v27 <- CallFunction v15, [v26]
+
+
+function boom() {
+    var args = [];
+    for (let i4 = 0; i4 < 125000; i4++) {
+        args.push(i4);
+    }
+    return Array.apply(Array, args);
+}
+var array = boom();
+function fib(a16) {
+    var f0 = 0;
+    var f1 = 1;
+    for (; a16 > 0; a16 = a16 - 1) {
+        f0 + f1;
+        f0 = array;
+    }
+}
+fib(12);
+
+FuzzIL program written to corpus/regress-331444.fzil

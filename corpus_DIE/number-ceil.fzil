@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2
+        v3 <- LoadInteger '2'
+        v4 <- UnaryOperation '-', v3
+        v5 <- BinaryOperation v2, '*', v4
+        v6 <- CreateNamedVariable 'Math', 'none'
+        v7 <- CallMethod v6, 'ceil', [v5]
+        v8 <- CallMethod v6, 'abs', [v7]
+        Return v8
+    EndPlainFunction
+    v9 <- LoadInteger '2'
+    v10 <- LoadInteger '1'
+    v11 <- CallFunction v1, [v10]
+    v12 <- LoadInteger '4'
+    v13 <- LoadInteger '2'
+    v14 <- CallFunction v1, [v13]
+    v15 <- LoadInteger '2'
+    v16 <- LoadInteger '1'
+    v17 <- CallFunction v1, [v16]
+    v18 <- LoadInteger '4'
+    v19 <- LoadInteger '2'
+    v20 <- CallFunction v1, [v19]
+    v21 <- CallFunction v1, []
+    v22 <- LoadInteger '0'
+    v23 <- LoadInteger '0'
+    v24 <- CallFunction v1, [v23]
+    v25 <- CallFunction v1, []
+EndPlainFunction
+v26 <- CallFunction v0, []
+
+
+function f0() {
+    function foo(a2) {
+        return Math.abs(Math.ceil(a2 * -2));
+    }
+    foo(1);
+    foo(2);
+    foo(1);
+    foo(2);
+    foo();
+    foo(0);
+    foo();
+}
+f0();
+
+FuzzIL program written to corpus/number-ceil.fzil

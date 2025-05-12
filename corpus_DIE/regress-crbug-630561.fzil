@@ -1,0 +1,27 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'dict_elements', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '100'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- LoadInteger '2147483648'
+    v10 <- BinaryOperation v9, '+', v8
+    SetComputedProperty v1, v10, v8
+EndForLoop
+v11 <- CreateNamedVariable 'Object', 'none'
+v12 <- CallMethod v11, 'keys', [v1]
+v13 <- CreateNamedVariable 'keys', 'var', v12
+
+
+var dict_elements = {};
+for (let i3 = 0; i3 < 100; i3++) {
+    dict_elements[2147483648 + i3] = i3;
+}
+var keys = Object.keys(dict_elements);
+
+FuzzIL program written to corpus/regress-crbug-630561.fzil

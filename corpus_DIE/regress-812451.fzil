@@ -1,0 +1,27 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- BeginPlainFunction -> v3, v4
+    v5 <- LoadFloat '5.3'
+    SetComputedProperty v3, v4, v5
+EndPlainFunction
+v6 <- LoadInteger '1'
+v7 <- CallFunction v2, [v1, v6]
+v8 <- LoadInteger '2'
+v9 <- CallFunction v2, [v1, v8]
+v10 <- LoadInteger '1'
+v11 <- UnaryOperation '-', v10
+v12 <- CallFunction v2, [v1, v11]
+v13 <- CreateNamedVariable 'gc', 'none'
+v14 <- CallFunction v13, []
+
+
+var x = [];
+function foo(a3, a4) {
+    a3[a4] = 5.3;
+}
+foo(x, 1);
+foo(x, 2);
+foo(x, -1);
+gc();
+
+FuzzIL program written to corpus/regress-812451.fzil

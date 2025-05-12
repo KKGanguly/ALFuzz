@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'XXX'
+    v2 <- CreateNamedVariable 'left', 'var', v1
+    v3 <- LoadString 'YYY'
+    v4 <- CreateNamedVariable 'right', 'var', v3
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+    BeginForLoopCondition -> v6
+        v7 <- LoadInteger '3'
+        v8 <- Compare v6, '<', v7
+    BeginForLoopAfterthought v8 -> v9
+        v10 <- UnaryOperation v9, '++'
+    BeginForLoopBody -> v11
+        v12 <- BinaryOperation v2, '+', v4
+        v13 <- CreateNamedVariable 'cons', 'var', v12
+        v14 <- LoadInteger '2'
+        v15 <- LoadInteger '4'
+        v16 <- CallMethod v13, 'substring', [v14, v15]
+        v17 <- CreateNamedVariable 'substring', 'var', v16
+        BeginTry
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `Test`, v11
+            v18 <- EndObjectLiteral
+            BeginWith v18
+                Continue
+            EndWith
+        BeginFinally
+        EndTryCatch
+    EndForLoop
+    v19 <- CreateNamedVariable 'substring', 'none'
+    Return v19
+EndPlainFunction
+v20 <- LoadString 'XY'
+v21 <- CallFunction v0, []
+
+
+function Test() {
+    var left = "XXX";
+    var right = "YYY";
+    for (let i6 = 0; i6 < 3; i6++) {
+        var cons = left + right;
+        var substring = cons.substring(2, 4);
+        try {
+            with ({ Test: i6 }) {
+                continue;
+            }
+        } finally {
+        }
+    }
+    return substring;
+}
+Test();
+
+FuzzIL program written to corpus/regress-95485.fzil

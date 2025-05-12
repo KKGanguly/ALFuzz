@@ -1,0 +1,30 @@
+v0 <- LoadFloat '0.5'
+v1 <- CreateArray [v0]
+v2 <- CreateNamedVariable 'val', 'var', v1
+v3 <- LoadFloat '0.5'
+v4 <- CreateArray [v3]
+v5 <- CreateNamedVariable 'arr', 'var', v4
+BeginForLoopInitializer
+    v6 <- LoadInteger '1'
+    v7 <- UnaryOperation '-', v6
+BeginForLoopCondition -> v8
+    v9 <- LoadInteger '1'
+    v10 <- Compare v8, '<', v9
+BeginForLoopAfterthought v10 -> v11
+    v12 <- UnaryOperation v11, '++'
+BeginForLoopBody -> v13
+    SetComputedProperty v5, v13, v2
+EndForLoop
+v14 <- LoadInteger '1'
+v15 <- UnaryOperation '-', v14
+v16 <- GetComputedProperty v5, v15
+
+
+var val = [0.5];
+var arr = [0.5];
+for (let i8 = -1; i8 < 1; i8++) {
+    arr[i8] = val;
+}
+arr[-1];
+
+FuzzIL program written to corpus/regress-crbug-571370.fzil

@@ -1,0 +1,34 @@
+v0 <- LoadString 'n'
+v1 <- CreateNamedVariable 'global', 'none'
+Reassign v1, v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- CreateNamedVariable 'global', 'none'
+    v5 <- CreateNamedVariable 'Symbol', 'none'
+    v6 <- GetProperty v5, 'iterator'
+    v7 <- CallComputedMethod v4, v6, []
+    v8 <- CreateNamedVariable 'it', 'let', v7
+    BeginIf v3
+        v9 <- CallMethod v8, 'next', []
+        v10 <- GetProperty v9, 'value'
+        Return v10
+    EndIf
+EndPlainFunction
+v11 <- CallFunction v2, []
+v12 <- CallFunction v2, []
+v13 <- LoadString 'n'
+v14 <- LoadBoolean 'true'
+v15 <- CallFunction v2, [v14]
+
+
+global = "n";
+function f(a3) {
+    let it = global[Symbol.iterator]();
+    if (a3) {
+        return it.next().value;
+    }
+}
+f();
+f();
+f(true);
+
+FuzzIL program written to corpus/regress-683617.fzil

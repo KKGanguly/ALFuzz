@@ -1,0 +1,51 @@
+v0 <- BeginPlainFunction -> v1
+    Return
+EndPlainFunction
+v2 <- CreateNamedVariable 'setter', 'none'
+Reassign v2, v0
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'o', 'var', v3
+v5 <- LoadString 'foo'
+v6 <- CreateNamedVariable 'setter', 'none'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'defineProperty', [v4, v5, v7]
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'x', 'var', v10
+v12 <- LoadString 'foo'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v6
+v13 <- EndObjectLiteral
+v14 <- CallMethod v8, 'defineProperty', [v11, v12, v13]
+v15 <- LoadInteger '20'
+SetProperty v11, 'bar', v15
+BeginObjectLiteral
+v16 <- EndObjectLiteral
+Reassign v11, v16
+v17 <- CreateNamedVariable 'gc', 'none'
+v18 <- CallFunction v17, []
+v19 <- LoadInteger '20'
+SetProperty v4, 'foo', v19
+v20 <- LoadUndefined
+v21 <- GetProperty v4, 'foo'
+
+
+function f0(a1) {
+    return;
+}
+setter = f0;
+var o = {};
+Object.defineProperty(o, "foo", { set: setter });
+var x = {};
+Object.defineProperty(x, "foo", { set: setter });
+x.bar = 20;
+x = {};
+gc();
+o.foo = 20;
+o.foo;
+
+FuzzIL program written to corpus/regress-133211b.fzil

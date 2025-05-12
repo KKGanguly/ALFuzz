@@ -1,0 +1,119 @@
+v0 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v1 <- LoadInteger '10'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'clampedArray', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadFloat '0.499'
+    SetElement v3, '0', v5
+    v6 <- LoadInteger '0'
+    v7 <- GetElement v3, '0'
+    v8 <- LoadFloat '0.5'
+    SetElement v3, '0', v8
+    v9 <- LoadInteger '0'
+    v10 <- GetElement v3, '0'
+    v11 <- LoadFloat '0.501'
+    SetElement v3, '0', v11
+    v12 <- LoadInteger '1'
+    v13 <- GetElement v3, '0'
+    v14 <- LoadFloat '1.499'
+    SetElement v3, '0', v14
+    v15 <- LoadInteger '1'
+    v16 <- GetElement v3, '0'
+    v17 <- LoadFloat '1.5'
+    SetElement v3, '0', v17
+    v18 <- LoadInteger '2'
+    v19 <- GetElement v3, '0'
+    v20 <- LoadFloat '1.501'
+    SetElement v3, '0', v20
+    v21 <- LoadInteger '2'
+    v22 <- GetElement v3, '0'
+    v23 <- LoadFloat '2.5'
+    SetElement v3, '0', v23
+    v24 <- LoadInteger '2'
+    v25 <- GetElement v3, '0'
+    v26 <- LoadFloat '3.5'
+    SetElement v3, '0', v26
+    v27 <- LoadInteger '4'
+    v28 <- GetElement v3, '0'
+    v29 <- LoadFloat '252.5'
+    SetElement v3, '0', v29
+    v30 <- LoadInteger '252'
+    v31 <- GetElement v3, '0'
+    v32 <- LoadFloat '253.5'
+    SetElement v3, '0', v32
+    v33 <- LoadInteger '254'
+    v34 <- GetElement v3, '0'
+    v35 <- LoadFloat '254.5'
+    SetElement v3, '0', v35
+    v36 <- LoadInteger '254'
+    v37 <- GetElement v3, '0'
+    v38 <- LoadFloat '256.5'
+    SetElement v3, '0', v38
+    v39 <- LoadInteger '255'
+    v40 <- GetElement v3, '0'
+    v41 <- LoadFloat '0.5'
+    v42 <- UnaryOperation '-', v41
+    SetElement v3, '0', v42
+    v43 <- LoadInteger '0'
+    v44 <- GetElement v3, '0'
+    v45 <- LoadFloat '1.5'
+    v46 <- UnaryOperation '-', v45
+    SetElement v3, '0', v46
+    v47 <- LoadInteger '0'
+    v48 <- GetElement v3, '0'
+    v49 <- LoadInteger '1000000000000'
+    SetElement v3, '0', v49
+    v50 <- LoadInteger '255'
+    v51 <- GetElement v3, '0'
+    v52 <- LoadInteger '1000000000000'
+    v53 <- UnaryOperation '-', v52
+    SetElement v3, '0', v53
+    v54 <- LoadInteger '0'
+    v55 <- GetElement v3, '0'
+EndPlainFunction
+v56 <- CallFunction v4, []
+v57 <- CallFunction v4, []
+v58 <- CallFunction v4, []
+
+
+const v2 = new Uint8ClampedArray(10);
+var clampedArray = v2;
+function test() {
+    clampedArray[0] = 0.499;
+    clampedArray[0];
+    clampedArray[0] = 0.5;
+    clampedArray[0];
+    clampedArray[0] = 0.501;
+    clampedArray[0];
+    clampedArray[0] = 1.499;
+    clampedArray[0];
+    clampedArray[0] = 1.5;
+    clampedArray[0];
+    clampedArray[0] = 1.501;
+    clampedArray[0];
+    clampedArray[0] = 2.5;
+    clampedArray[0];
+    clampedArray[0] = 3.5;
+    clampedArray[0];
+    clampedArray[0] = 252.5;
+    clampedArray[0];
+    clampedArray[0] = 253.5;
+    clampedArray[0];
+    clampedArray[0] = 254.5;
+    clampedArray[0];
+    clampedArray[0] = 256.5;
+    clampedArray[0];
+    clampedArray[0] = -0.5;
+    clampedArray[0];
+    clampedArray[0] = -1.5;
+    clampedArray[0];
+    clampedArray[0] = 1000000000000;
+    clampedArray[0];
+    clampedArray[0] = -1000000000000;
+    clampedArray[0];
+}
+test();
+test();
+test();
+
+FuzzIL program written to corpus/regress-2294.fzil

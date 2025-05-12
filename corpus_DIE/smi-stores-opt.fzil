@@ -1,0 +1,59 @@
+v0 <- LoadFloat '1.5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'o', 'var', v1
+v3 <- LoadInteger '0'
+SetProperty v2, 'a', v3
+v4 <- GetProperty v2, 'a'
+v5 <- CreateNamedVariable 'a', 'var', v4
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '1'
+    Return v7
+EndPlainFunction
+BeginObjectLiteral
+v8 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v8
+v9 <- EndObjectLiteral
+v10 <- CreateNamedVariable 'o2', 'var', v9
+v11 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v5
+    v12 <- EndObjectLiteral
+    v13 <- CreateNamedVariable 'result', 'var', v12
+    v14 <- CallFunction v6, []
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v14
+    v15 <- EndObjectLiteral
+    v16 <- CreateNamedVariable 'literal', 'var', v15
+    v17 <- CreateArray [v13, v16]
+    Return v17
+EndPlainFunction
+v18 <- CallFunction v11, []
+v19 <- CallFunction v11, []
+v20 <- LoadInteger '1'
+v21 <- CallFunction v11, []
+v22 <- GetElement v21, '1'
+v23 <- GetProperty v22, 'x'
+
+
+var o = { a: 1.5 };
+o.a = 0;
+var a = o.a;
+function g() {
+    return 1;
+}
+const v8 = {};
+var o2 = { a: v8 };
+function f() {
+    var result = { a: a };
+    const v14 = g();
+    var literal = { x: v14 };
+    return [result,literal];
+}
+f();
+f();
+f()[1].x;
+
+FuzzIL program written to corpus/smi-stores-opt.fzil

@@ -1,0 +1,57 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'c', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '1'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation '++', v7
+    BeginForLoopBody -> v9
+        BeginForLoopInitializer
+            v10 <- LoadInteger '1'
+        BeginForLoopCondition -> v11
+            v12 <- LoadInteger '0'
+            v13 <- Compare v11, '>', v12
+        BeginForLoopAfterthought v13 -> v14
+            v15 <- UnaryOperation v14, '--'
+        BeginForLoopBody -> v16
+            v17 <- LoadInteger '1'
+            Update v2, '+', v17
+        EndForLoop
+        BeginForLoopInitializer
+            v18 <- LoadInteger '1'
+        BeginForLoopCondition -> v19
+            v20 <- LoadInteger '0'
+            v21 <- Compare v19, '>', v20
+        BeginForLoopAfterthought v21 -> v22
+            v23 <- UnaryOperation v22, '--'
+        BeginForLoopBody -> v24
+        EndForLoop
+    EndForLoop
+    Return v2
+EndPlainFunction
+BeginTry
+    v25 <- CallFunction v0, []
+BeginCatch -> v26
+EndTryCatch
+
+
+function foo() {
+    var c = 0;
+    for (let i4 = 0; i4 < 1; ++i4) {
+        for (let i11 = 1; i11 > 0; i11--) {
+            c += 1;
+        }
+        for (let i19 = 1; i19 > 0; i19--) {
+        }
+    }
+    return c;
+}
+try {
+    foo();
+} catch(e26) {
+}
+
+FuzzIL program written to corpus/regress-crbug-480807.fzil

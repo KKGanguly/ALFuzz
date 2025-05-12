@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '10'
+    BeginForLoopCondition -> v2
+        v3 <- LoadInteger '100'
+        v4 <- Compare v2, '<', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- UnaryOperation v5, '++'
+    BeginForLoopBody -> v7
+        v8 <- BinaryOperation v7, '|', v7
+        Return v8
+    EndForLoop
+EndPlainFunction
+v9 <- LoadInteger '10'
+v10 <- CallFunction v0, []
+
+
+function f() {
+    for (let i2 = 10; i2 < 100; i2++) {
+        return i2 | i2;
+    }
+}
+f();
+
+FuzzIL program written to corpus/bitops-register-alias.fzil

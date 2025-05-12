@@ -1,0 +1,43 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '20'
+    v3 <- UnaryOperation '-', v2
+BeginForLoopCondition -> v4
+    v5 <- LoadInteger '0'
+    v6 <- Compare v4, '<', v5
+BeginForLoopAfterthought v6 -> v7
+    v8 <- UnaryOperation '++', v7
+BeginForLoopBody -> v9
+    v10 <- LoadInteger '0'
+    SetComputedProperty v1, v9, v10
+EndForLoop
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadArguments
+    v13 <- CreateArray []
+    v14 <- GetProperty v13, 'push'
+    v15 <- CallMethod v14, 'apply', [v1, v12]
+EndPlainFunction
+v16 <- BeginPlainFunction -> 
+    v17 <- CallFunction v11, []
+EndPlainFunction
+v18 <- CallFunction v11, []
+v19 <- CallFunction v11, []
+v20 <- CallFunction v16, []
+
+
+var a = [];
+for (let i4 = -20; i4 < 0; ++i4) {
+    a[i4] = 0;
+}
+function g() {
+    ([]).push.apply(a, arguments);
+}
+function f() {
+    g();
+}
+g();
+g();
+f();
+
+FuzzIL program written to corpus/array-push12.fzil

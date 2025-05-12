@@ -1,0 +1,82 @@
+v0 <- LoadInteger '2'
+v1 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v0
+    ObjectLiteralAddProperty `y`, v1
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'c', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `foo`, v5
+    v6 <- EndObjectLiteral
+    v7 <- CreateNamedVariable 'outer', 'var', v6
+    v8 <- BeginPlainFunction -> v9, v10
+        v11 <- GetProperty v7, 'foo'
+        v12 <- CreateNamedVariable 'n', 'var', v11
+        BeginForLoopInitializer
+            v13 <- LoadInteger '0'
+        BeginForLoopCondition -> v14
+            v15 <- LoadInteger '10'
+            v16 <- Compare v14, '<', v15
+        BeginForLoopAfterthought v16 -> v17
+            v18 <- UnaryOperation v17, '++'
+        BeginForLoopBody -> v19
+            v20 <- GetProperty v10, 'x'
+            v21 <- GetProperty v7, 'foo'
+            v22 <- BinaryOperation v20, '+', v21
+            Update v12, '+', v22
+        EndForLoop
+        BeginIf v9
+            v23 <- LoadFloat '1.5'
+            v24 <- LoadInteger '1'
+            BeginObjectLiteral
+                ObjectLiteralAddProperty `x`, v23
+                ObjectLiteralAddProperty `y`, v24
+            v25 <- EndObjectLiteral
+            v26 <- CreateArray [v25]
+            Return v26
+        BeginElse
+            Return v10
+        EndIf
+    EndPlainFunction
+    Return v8
+EndPlainFunction
+v27 <- CallFunction v4, []
+v28 <- CreateNamedVariable 'fun', 'var', v27
+v29 <- LoadBoolean 'false'
+v30 <- CallFunction v28, [v29, v3]
+v31 <- LoadBoolean 'false'
+v32 <- CallFunction v28, [v31, v3]
+v33 <- LoadBoolean 'false'
+v34 <- CallFunction v28, [v33, v3]
+v35 <- LoadBoolean 'false'
+v36 <- CallFunction v28, [v35, v3]
+v37 <- LoadBoolean 'true'
+v38 <- CallFunction v28, [v37, v3]
+
+
+var c = { x: 2, y: 1 };
+function g() {
+    var outer = { foo: 1 };
+    function f(a9, a10) {
+        var n = outer.foo;
+        for (let i14 = 0; i14 < 10; i14++) {
+            n += a10.x + outer.foo;
+        }
+        if (a9) {
+            return [{ x: 1.5, y: 1 }];
+        } else {
+            return a10;
+        }
+    }
+    return f;
+}
+var fun = g();
+fun(false, c);
+fun(false, c);
+fun(false, c);
+fun(false, c);
+fun(true, c);
+
+FuzzIL program written to corpus/regress-map-invalidation-2.fzil

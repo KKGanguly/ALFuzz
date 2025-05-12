@@ -1,0 +1,40 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '2000'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation v4, '++'
+BeginForLoopBody -> v6
+    v7 <- LoadBoolean 'true'
+    v8 <- CreateNamedVariable 'Object', 'none'
+    v9 <- GetProperty v8, 'prototype'
+    v10 <- LoadString 'X'
+    v11 <- BinaryOperation v10, '+', v6
+    SetComputedProperty v9, v11, v7
+EndForLoop
+v12 <- CreateNamedVariable 'Map', 'none'
+v13 <- Construct v12, []
+v14 <- CreateNamedVariable 'm', 'var', v13
+v15 <- CreateNamedVariable 'Object', 'none'
+v16 <- GetProperty v15, 'prototype'
+v17 <- LoadInteger '23'
+v18 <- CallMethod v14, 'set', [v16, v17]
+BeginObjectLiteral
+v19 <- EndObjectLiteral
+v20 <- CreateNamedVariable 'o', 'var', v19
+v21 <- LoadInteger '42'
+v22 <- CallMethod v14, 'set', [v20, v21]
+
+
+for (let i1 = 0; i1 < 2000; i1++) {
+    const t1 = Object.prototype;
+    t1["X" + i1] = true;
+}
+const v13 = new Map();
+var m = v13;
+m.set(Object.prototype, 23);
+var o = {};
+m.set(o, 42);
+
+FuzzIL program written to corpus/regress-crbug-664974.fzil

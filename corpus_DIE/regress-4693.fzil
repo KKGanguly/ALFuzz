@@ -1,0 +1,105 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'f', 'none'
+    v3 <- CallFunction v2, []
+    v4 <- LoadBoolean 'true'
+    BeginIf v4
+        v5 <- LoadInteger '2'
+        v6 <- CallFunction v2, []
+        v7 <- BeginPlainFunction -> 
+            v8 <- LoadInteger '1'
+            Return v8
+        EndPlainFunction
+        v9 <- LoadInteger '2'
+        v10 <- CallFunction v7, []
+        v11 <- BeginPlainFunction -> 
+            v12 <- LoadInteger '2'
+            Return v12
+        EndPlainFunction
+        v13 <- LoadInteger '2'
+        v14 <- CallFunction v11, []
+    EndIf
+    v15 <- LoadInteger '2'
+    v16 <- CallFunction v2, []
+EndPlainFunction
+v17 <- CallFunction v0, []
+v18 <- CreateTemplateString ['\n  (function() {\n    "use strict";\n    if (true) {\n      function f() { return 1 }\n      function f() { return 2 }\n    }\n  })();\n'], []
+v19 <- CreateNamedVariable 'SyntaxError', 'none'
+v20 <- CreateTemplateString ['\n  (function() {\n    if (true) {\n      let f;\n      function f() { return 2 }\n    }\n  })();\n'], []
+v21 <- CreateTemplateString ['\n  (function() {\n    if (true) {\n      function f() { return 2 }\n      let f;\n    }\n  })();\n'], []
+v22 <- CreateTemplateString ['\n  (function() {\n    if (true) {\n      const f;\n      function f() { return 2 }\n    }\n  })();\n'], []
+v23 <- CreateTemplateString ['\n  (function() {\n    if (true) {\n      function f() { return 2 }\n      const f;\n    }\n  })();\n'], []
+v24 <- BeginPlainFunction -> 
+    v25 <- LoadUndefined
+    v26 <- CreateNamedVariable 'f', 'none'
+    v27 <- CallFunction v26, []
+    v28 <- LoadBoolean 'true'
+    BeginIf v28
+        v29 <- LoadUndefined
+        v30 <- CallFunction v26, []
+        BeginBlockStatement
+            v31 <- BeginPlainFunction -> 
+                v32 <- LoadInteger '1'
+                Return v32
+            EndPlainFunction
+        EndBlockStatement
+        v33 <- LoadInteger '1'
+        v34 <- CallFunction v26, []
+        BeginBlockStatement
+            v35 <- BeginPlainFunction -> 
+                v36 <- LoadInteger '2'
+                Return v36
+            EndPlainFunction
+        EndBlockStatement
+        v37 <- LoadInteger '2'
+        v38 <- CallFunction v26, []
+    EndIf
+    v39 <- LoadInteger '2'
+    v40 <- CallFunction v26, []
+EndPlainFunction
+v41 <- CallFunction v24, []
+
+
+function f0() {
+    f();
+    if (true) {
+        f();
+        function f() {
+            return 1;
+        }
+        f();
+        function f() {
+            return 2;
+        }
+        f();
+    }
+    f();
+}
+f0();
+`\n  (function() {\n    "use strict";\n    if (true) {\n      function f() { return 1 }\n      function f() { return 2 }\n    }\n  })();\n`;
+`\n  (function() {\n    if (true) {\n      let f;\n      function f() { return 2 }\n    }\n  })();\n`;
+`\n  (function() {\n    if (true) {\n      function f() { return 2 }\n      let f;\n    }\n  })();\n`;
+`\n  (function() {\n    if (true) {\n      const f;\n      function f() { return 2 }\n    }\n  })();\n`;
+`\n  (function() {\n    if (true) {\n      function f() { return 2 }\n      const f;\n    }\n  })();\n`;
+function f24() {
+    f();
+    if (true) {
+        f();
+        {
+            function f() {
+                return 1;
+            }
+        }
+        f();
+        {
+            function f() {
+                return 2;
+            }
+        }
+        f();
+    }
+    f();
+}
+f24();
+
+FuzzIL program written to corpus/regress-4693.fzil

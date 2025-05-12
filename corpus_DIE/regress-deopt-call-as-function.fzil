@@ -1,0 +1,158 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginTry
+        Return v1
+    BeginFinally
+    EndTryCatch
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- BeginPlainFunction -> v5
+        v6 <- LoadInteger '42'
+        Return v6
+    EndPlainFunction
+    v7 <- LoadUndefined
+    v8 <- CreateNamedVariable 's', 'var', v7
+    v9 <- LoadUndefined
+    v10 <- CreateNamedVariable 't', 'var', v9
+    BeginForLoopInitializer
+        v11 <- LoadInteger '2147418112'
+    BeginForLoopCondition -> v12
+        v13 <- LoadInteger '2147483648'
+        v14 <- Compare v12, '<', v13
+    BeginForLoopAfterthought v14 -> v15
+        v16 <- UnaryOperation v15, '++'
+    BeginForLoopBody -> v17
+        v18 <- CallFunction v4, [v17]
+        v19 <- LoadInteger '42'
+        v20 <- BinaryOperation v19, '+', v17
+        v21 <- BinaryOperation v20, '-', v17
+        v22 <- CallFunction v0, [v21]
+        v23 <- LoadInteger '0'
+        v24 <- CallFunction v0, [v23]
+        v25 <- TernaryOperation v18, v22, v24
+        Reassign v10, v25
+        v26 <- BinaryOperation v17, '+', v10
+        Reassign v8, v26
+        v27 <- CallFunction v0, [v25, v26]
+    EndForLoop
+    Return v8
+EndPlainFunction
+v28 <- LoadInteger '2147483647'
+v29 <- LoadInteger '42'
+v30 <- BinaryOperation v28, '+', v29
+v31 <- CallFunction v3, []
+v32 <- BeginPlainFunction -> 
+    v33 <- BeginPlainFunction -> v34
+        v35 <- LoadInteger '42'
+        Return v35
+    EndPlainFunction
+    v36 <- LoadUndefined
+    v37 <- CreateNamedVariable 's', 'var', v36
+    v38 <- LoadUndefined
+    v39 <- CreateNamedVariable 't', 'var', v38
+    BeginForLoopInitializer
+        v40 <- LoadInteger '2147418112'
+    BeginForLoopCondition -> v41
+        v42 <- LoadInteger '2147483648'
+        v43 <- Compare v41, '<', v42
+    BeginForLoopAfterthought v43 -> v44
+        v45 <- UnaryOperation v44, '++'
+    BeginForLoopBody -> v46
+        v47 <- CallFunction v33, [v46]
+        Reassign v39, v47
+        v48 <- BinaryOperation v46, '+', v39
+        Reassign v37, v48
+        v49 <- CallFunction v0, [v47, v48]
+    EndForLoop
+    Return v37
+EndPlainFunction
+v50 <- LoadInteger '2147483647'
+v51 <- LoadInteger '42'
+v52 <- BinaryOperation v50, '+', v51
+v53 <- CallFunction v32, []
+v54 <- BeginPlainFunction -> 
+    v55 <- BeginPlainFunction -> v56
+        v57 <- LoadInteger '42'
+        Return v57
+    EndPlainFunction
+    v58 <- LoadUndefined
+    v59 <- CreateNamedVariable 's', 'var', v58
+    v60 <- LoadUndefined
+    v61 <- CreateNamedVariable 't', 'var', v60
+    BeginForLoopInitializer
+        v62 <- LoadInteger '2147418112'
+    BeginForLoopCondition -> v63
+        v64 <- LoadInteger '2147483648'
+        v65 <- Compare v63, '<', v64
+    BeginForLoopAfterthought v65 -> v66
+        v67 <- UnaryOperation v66, '++'
+    BeginForLoopBody -> v68
+        v69 <- CallFunction v55, [v68]
+        v70 <- LoadInteger '42'
+        v71 <- BinaryOperation v68, '+', v70
+        Reassign v59, v71
+        v72 <- CallFunction v0, [v69, v71]
+    EndForLoop
+    Return v59
+EndPlainFunction
+v73 <- LoadInteger '2147483647'
+v74 <- LoadInteger '42'
+v75 <- BinaryOperation v73, '+', v74
+v76 <- CallFunction v54, []
+
+
+function bar(a1, a2) {
+    try {
+        return a1;
+    } finally {
+    }
+}
+function test_context() {
+    function foo(a5) {
+        return 42;
+    }
+    var s;
+    var t;
+    for (let i12 = 2147418112; i12 < 2147483648; i12++) {
+        const v25 = foo(i12) ? bar((42 + i12) - i12) : bar(0);
+        const v26 = i12 + (t = v25);
+        s = v26;
+        bar(v25, v26);
+    }
+    return s;
+}
+2147483647 + 42;
+test_context();
+function value_context() {
+    function foo(a34) {
+        return 42;
+    }
+    var s;
+    var t;
+    for (let i41 = 2147418112; i41 < 2147483648; i41++) {
+        const v47 = foo(i41);
+        const v48 = i41 + (t = v47);
+        s = v48;
+        bar(v47, v48);
+    }
+    return s;
+}
+2147483647 + 42;
+value_context();
+function effect_context() {
+    function foo(a56) {
+        return 42;
+    }
+    var s;
+    var t;
+    for (let i63 = 2147418112; i63 < 2147483648; i63++) {
+        const v69 = foo(i63);
+        const v71 = i63 + 42;
+        s = v71;
+        bar(v69, v71);
+    }
+    return s;
+}
+2147483647 + 42;
+effect_context();
+
+FuzzIL program written to corpus/regress-deopt-call-as-function.fzil

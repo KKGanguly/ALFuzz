@@ -1,0 +1,82 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '87'
+    Return v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> v3
+    v4 <- GetProperty v3, 'x'
+    Return v4
+EndPlainFunction
+v5 <- BeginPlainFunction -> v6, v7
+    SetProperty v6, 'x', v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9
+    v10 <- CallMethod v9, 'f', []
+    Return v10
+EndPlainFunction
+BeginForLoopInitializer
+    v11 <- LoadInteger '0'
+BeginForLoopCondition -> v12
+    v13 <- LoadInteger '3'
+    v14 <- Compare v12, '<', v13
+BeginForLoopAfterthought v14 -> v15
+    v16 <- UnaryOperation v15, '++'
+BeginForLoopBody -> v17
+    v18 <- LoadThis
+    v19 <- LoadInteger '42'
+    v20 <- BinaryOperation v19, '+', v17
+    v21 <- CallFunction v5, [v18, v20]
+    v22 <- LoadInteger '42'
+    v23 <- BinaryOperation v22, '+', v17
+    v24 <- LoadThis
+    v25 <- CallFunction v2, [v24]
+    v26 <- LoadInteger '87'
+    v27 <- LoadThis
+    v28 <- CallFunction v8, [v27]
+EndForLoop
+BeginForLoopInitializer
+    v29 <- LoadInteger '0'
+BeginForLoopCondition -> v30
+    v31 <- LoadInteger '3'
+    v32 <- Compare v30, '<', v31
+BeginForLoopAfterthought v32 -> v33
+    v34 <- UnaryOperation v33, '++'
+BeginForLoopBody -> v35
+    v36 <- LoadInteger '42'
+    v37 <- BinaryOperation v36, '+', v35
+    v38 <- CallFunction v5, [v35, v37]
+    v39 <- CallFunction v2, [v35]
+    v40 <- TypeOf v39
+    v41 <- LoadString 'undefined'
+    v42 <- Compare v40, '==', v41
+    v43 <- LoadString 'CallOnGlobal('
+    v44 <- BinaryOperation v43, '+', v35
+    v45 <- LoadString ')'
+    v46 <- BinaryOperation v44, '+', v45
+EndForLoop
+
+
+function f() {
+    return 87;
+}
+function LoadFromGlobal(a3) {
+    return a3.x;
+}
+function StoreToGlobal(a6, a7) {
+    a6.x = a7;
+}
+function CallOnGlobal(a9) {
+    return a9.f();
+}
+for (let i12 = 0; i12 < 3; i12++) {
+    StoreToGlobal(this, 42 + i12);
+    42 + i12;
+    LoadFromGlobal(this);
+    CallOnGlobal(this);
+}
+for (let i30 = 0; i30 < 3; i30++) {
+    StoreToGlobal(i30, 42 + i30);
+    typeof LoadFromGlobal(i30) == "undefined";
+    ("CallOnGlobal(" + i30) + ")";
+}
+
+FuzzIL program written to corpus/global-ic.fzil

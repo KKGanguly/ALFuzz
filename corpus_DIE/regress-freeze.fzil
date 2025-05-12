@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'x'
+    v3 <- UnaryOperation v2, '++'
+EndPlainFunction
+v4 <- LoadInteger '5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'o', 'var', v5
+v7 <- CreateNamedVariable 'Object', 'none'
+v8 <- CallMethod v7, 'freeze', [v6]
+v9 <- CallFunction v0, [v6]
+v10 <- CallFunction v0, [v6]
+v11 <- CallFunction v0, [v6]
+v12 <- LoadInteger '5'
+v13 <- GetProperty v6, 'x'
+v14 <- BeginPlainFunction -> v15
+    v16 <- LoadInteger '3'
+    UpdateProperty v15, '+', v16
+EndPlainFunction
+v17 <- CallFunction v14, [v6]
+v18 <- CallFunction v14, [v6]
+v19 <- CallFunction v14, [v6]
+v20 <- LoadInteger '5'
+v21 <- GetProperty v6, 'x'
+
+
+function f(a1) {
+    let v2 = a1.x;
+    v2++;
+}
+var o = { x: 5 };
+Object.freeze(o);
+f(o);
+f(o);
+f(o);
+o.x;
+function f2(a15) {
+    a15.x += 3;
+}
+f2(o);
+f2(o);
+f2(o);
+o.x;
+
+FuzzIL program written to corpus/regress-freeze.fzil

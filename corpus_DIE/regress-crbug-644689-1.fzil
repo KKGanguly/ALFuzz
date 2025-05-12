@@ -1,0 +1,36 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+BeginForLoopCondition -> v1
+    v2 <- LoadInteger '1024'
+    v3 <- Compare v1, '<', v2
+BeginForLoopAfterthought v3 -> v4
+    v5 <- UnaryOperation '++', v4
+BeginForLoopBody -> v6
+    v7 <- CreateNamedVariable 'Object', 'none'
+    v8 <- GetProperty v7, 'prototype'
+    v9 <- LoadString 'i'
+    v10 <- BinaryOperation v9, '+', v6
+    SetComputedProperty v8, v10, v6
+EndForLoop
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadInteger '1'
+    v13 <- CreateArray []
+    v14 <- CallMethod v13, 'push', [v12]
+EndPlainFunction
+v15 <- CallFunction v11, []
+v16 <- CallFunction v11, []
+v17 <- CallFunction v11, []
+
+
+for (let i1 = 0; i1 < 1024; ++i1) {
+    const t1 = Object.prototype;
+    t1["i" + i1] = i1;
+}
+function foo() {
+    ([]).push(1);
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-crbug-644689-1.fzil

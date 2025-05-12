@@ -1,0 +1,567 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'Hello World!'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `text`, v1
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable 'o', 'var', v2
+    v4 <- BeginPlainFunction -> 
+        v5 <- LoadString 'foo'
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `text`, v5
+        v6 <- EndObjectLiteral
+        v7 <- LoadThis
+        SetProperty v7, 'a', v6
+        v8 <- LoadThis
+        SetProperty v8, 'a', v3
+    EndPlainFunction
+    v9 <- BeginPlainFunction -> v10
+        v11 <- GetProperty v10, 'a'
+        Return v11
+    EndPlainFunction
+    v12 <- Construct v4, []
+    v13 <- CreateNamedVariable 'a', 'var', v12
+    v14 <- CallFunction v9, []
+    v15 <- CallFunction v9, [v13]
+    v16 <- CallFunction v9, [v13]
+    v17 <- CallFunction v9, [v13]
+    v18 <- CallFunction v9, [v13]
+    v19 <- CallFunction v9, []
+    v20 <- Construct v4, []
+    v21 <- CreateNamedVariable 'b', 'var', v20
+    SetProperty v21, 'b', v3
+    v22 <- CallFunction v9, [v21]
+    v23 <- CallFunction v9, []
+    v24 <- CallFunction v9, [v13]
+    v25 <- CallFunction v9, []
+    v26 <- CallFunction v9, [v13]
+    v27 <- CallFunction v9, [v21]
+    v28 <- CallFunction v9, []
+    v29 <- BeginPlainFunction -> v30
+        v31 <- GetProperty v30, 'a'
+        Return v31
+    EndPlainFunction
+    v32 <- CallFunction v29, []
+    v33 <- CallFunction v29, [v21]
+    v34 <- CallFunction v29, [v21]
+    v35 <- CallFunction v29, [v21]
+    v36 <- CallFunction v29, [v21]
+    v37 <- CallFunction v29, []
+    v38 <- Construct v4, []
+    v39 <- CreateNamedVariable 'c', 'var', v38
+    SetProperty v39, 'c', v3
+    v40 <- CallFunction v9, []
+    v41 <- CallFunction v29, []
+    v42 <- LoadInteger '1'
+    v43 <- CreateArray [v42]
+    SetProperty v39, 'a', v43
+    v44 <- CallFunction v9, []
+    v45 <- CallFunction v29, []
+    v46 <- CallFunction v9, [v13]
+    v47 <- CallFunction v9, [v21]
+    v48 <- CallFunction v9, [v39]
+    v49 <- LoadInteger '1'
+    v50 <- CreateArray [v49]
+    v51 <- CallFunction v29, [v21]
+    v52 <- CallFunction v9, [v13]
+    v53 <- CallFunction v29, [v21]
+    v54 <- CallFunction v9, []
+    v55 <- LoadInteger '1'
+    v56 <- CreateArray [v55]
+    SetProperty v13, 'a', v56
+    v57 <- CallFunction v9, [v13]
+    v58 <- LoadInteger '1'
+    v59 <- CreateArray [v58]
+    v60 <- CallFunction v9, [v21]
+    v61 <- CallFunction v9, [v39]
+    v62 <- LoadInteger '1'
+    v63 <- CreateArray [v62]
+    v64 <- CallFunction v9, []
+    v65 <- LoadInteger '1'
+    v66 <- CreateArray [v65]
+    SetProperty v21, 'a', v66
+    v67 <- CallFunction v9, [v13]
+    v68 <- LoadInteger '1'
+    v69 <- CreateArray [v68]
+    v70 <- CallFunction v9, [v21]
+    v71 <- LoadInteger '1'
+    v72 <- CreateArray [v71]
+    v73 <- CallFunction v9, [v39]
+    v74 <- LoadInteger '1'
+    v75 <- CreateArray [v74]
+    v76 <- CallFunction v9, []
+    v77 <- CallFunction v29, []
+EndPlainFunction
+v78 <- CallFunction v0, []
+v79 <- BeginPlainFunction -> 
+    v80 <- BeginPlainFunction -> 
+        v81 <- LoadInteger '0'
+        v82 <- LoadThis
+        SetProperty v82, 'x', v81
+    EndPlainFunction
+    v83 <- LoadInteger '20'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v83
+    v84 <- EndObjectLiteral
+    SetProperty v80, 'prototype', v84
+    v85 <- BeginPlainFunction -> v86
+        v87 <- GetProperty v86, 'a'
+        v88 <- GetProperty v87, 'y'
+        Return v88
+    EndPlainFunction
+    v89 <- BeginPlainFunction -> 
+        v90 <- Construct v80, []
+        v91 <- LoadThis
+        SetProperty v91, 'a', v90
+    EndPlainFunction
+    v92 <- Construct v89, []
+    v93 <- CallFunction v85, [v92]
+    v94 <- Construct v89, []
+    v95 <- CallFunction v85, [v94]
+    v96 <- Construct v89, []
+    v97 <- CreateNamedVariable 'c', 'var', v96
+    v98 <- LoadInteger '20'
+    v99 <- CallFunction v85, [v97]
+    v100 <- CallFunction v85, []
+    v101 <- LoadInteger '10'
+    v102 <- GetProperty v97, 'a'
+    SetProperty v102, 'y', v101
+    v103 <- LoadInteger '10'
+    v104 <- CallFunction v85, [v97]
+    v105 <- CallFunction v85, []
+    v106 <- Construct v89, []
+    v107 <- CreateNamedVariable 'c', 'var', v106
+    v108 <- LoadInteger '20'
+    v109 <- CallFunction v85, [v107]
+    v110 <- CallFunction v85, []
+    v111 <- LoadInteger '30'
+    v112 <- GetProperty v107, 'a'
+    SetProperty v112, 'y', v111
+    v113 <- LoadInteger '30'
+    v114 <- CallFunction v85, [v107]
+    v115 <- CallFunction v85, []
+EndPlainFunction
+v116 <- CallFunction v79, []
+v117 <- BeginPlainFunction -> 
+    v118 <- CreateNamedVariable 'Object', 'none'
+    v119 <- Construct v118, []
+    v120 <- CreateNamedVariable 'x', 'var', v119
+    v121 <- LoadInteger '1'
+    v122 <- LoadString 'Long string that results in a cons string'
+    v123 <- BinaryOperation v121, '+', v122
+    SetProperty v120, 'a', v123
+    v124 <- LoadString '{"a":"Short"}'
+    v125 <- CreateNamedVariable 'JSON', 'none'
+    v126 <- CallMethod v125, 'parse', [v124]
+    Reassign v120, v126
+EndPlainFunction
+v127 <- CallFunction v117, []
+v128 <- BeginPlainFunction -> 
+    v129 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `z`, v129
+    v130 <- EndObjectLiteral
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v130
+    v131 <- EndObjectLiteral
+    v132 <- CreateNamedVariable 'x', 'var', v131
+    v133 <- LoadFloat '1.1'
+    v134 <- GetProperty v132, 'y'
+    SetProperty v134, 'z', v133
+EndPlainFunction
+v135 <- CallFunction v128, []
+v136 <- BeginPlainFunction -> 
+    v137 <- BeginPlainFunction -> v138
+        v139 <- LoadThis
+        SetProperty v139, 'x', v138
+    EndPlainFunction
+    v140 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v140
+    v141 <- EndObjectLiteral
+    v142 <- Construct v137, [v141]
+    v143 <- CreateNamedVariable 'f0', 'var', v142
+    v144 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v144
+    v145 <- EndObjectLiteral
+    SetProperty v143, 'x', v145
+    v146 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v146
+    v147 <- EndObjectLiteral
+    v148 <- Construct v137, [v147]
+    v149 <- CreateNamedVariable 'f1', 'var', v148
+    v150 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v150
+    v151 <- EndObjectLiteral
+    v152 <- Construct v137, [v151]
+    v153 <- CreateNamedVariable 'f2', 'var', v152
+    v154 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v154
+    v155 <- EndObjectLiteral
+    v156 <- Construct v137, [v155]
+    v157 <- CreateNamedVariable 'f3', 'var', v156
+    v158 <- BeginPlainFunction -> v159
+        v160 <- GetProperty v159, 'x'
+        v161 <- GetProperty v160, 'x'
+        Return v161
+    EndPlainFunction
+    v162 <- CallFunction v158, [v149]
+    v163 <- LoadInteger '1'
+    v164 <- CallFunction v158, [v153]
+    v165 <- LoadInteger '2'
+    v166 <- CallFunction v158, []
+    v167 <- CallFunction v158, [v157]
+    v168 <- LoadInteger '3'
+    v169 <- CallFunction v158, []
+    v170 <- BeginPlainFunction -> v171, v172
+        SetProperty v171, 'x', v172
+    EndPlainFunction
+    v173 <- LoadInteger '11'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v173
+    v174 <- EndObjectLiteral
+    v175 <- CallFunction v170, [v149, v174]
+    v176 <- LoadInteger '22'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v176
+    v177 <- EndObjectLiteral
+    v178 <- CallFunction v170, [v153, v177]
+    v179 <- CallFunction v170, []
+    v180 <- CallFunction v158, [v149]
+    v181 <- LoadInteger '11'
+    v182 <- CallFunction v158, [v153]
+    v183 <- LoadInteger '22'
+    v184 <- CallFunction v158, []
+    v185 <- LoadInteger '33'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v185
+    v186 <- EndObjectLiteral
+    v187 <- CallFunction v170, [v157, v186]
+    v188 <- CallFunction v158, [v157]
+    v189 <- LoadInteger '33'
+    v190 <- CallFunction v158, []
+    v191 <- CallFunction v170, []
+    v192 <- BeginPlainFunction -> v193, v194
+        SetProperty v193, 'y', v194
+    EndPlainFunction
+    v195 <- LoadString 'a'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v195
+    v196 <- EndObjectLiteral
+    v197 <- CallFunction v170, [v149, v196]
+    v198 <- CallFunction v158, []
+    v199 <- CallFunction v170, []
+EndPlainFunction
+v200 <- CallFunction v136, []
+v201 <- BeginPlainFunction -> 
+    v202 <- BeginPlainFunction -> v203
+        v204 <- LoadThis
+        SetProperty v204, 'x', v203
+    EndPlainFunction
+    v205 <- LoadInteger '1'
+    v206 <- Construct v202, [v205]
+    v207 <- CreateNamedVariable 'f1', 'var', v206
+    v208 <- LoadInteger '2'
+    v209 <- Construct v202, [v208]
+    v210 <- CreateNamedVariable 'f2', 'var', v209
+    v211 <- LoadInteger '3'
+    v212 <- Construct v202, [v211]
+    v213 <- CreateNamedVariable 'f3', 'var', v212
+    v214 <- BeginPlainFunction -> v215, v216
+        SetProperty v215, 'y', v216
+    EndPlainFunction
+    v217 <- LoadInteger '9'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v217
+    v218 <- EndObjectLiteral
+    v219 <- CallFunction v214, [v207, v218]
+    v220 <- LoadInteger '9'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v220
+    v221 <- EndObjectLiteral
+    v222 <- CallFunction v214, [v210, v221]
+    v223 <- LoadInteger '9'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v223
+    v224 <- EndObjectLiteral
+    v225 <- CallFunction v214, [v210, v224]
+    v226 <- LoadInteger '9'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v226
+    v227 <- EndObjectLiteral
+    v228 <- CallFunction v214, [v210, v227]
+    v229 <- LoadInteger '1'
+    v230 <- UnaryOperation '-', v229
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v230
+    v231 <- EndObjectLiteral
+    v232 <- CallFunction v214, [v213, v231]
+    v233 <- CallFunction v214, []
+EndPlainFunction
+v234 <- CallFunction v201, []
+v235 <- BeginPlainFunction -> 
+    v236 <- BeginPlainFunction -> v237
+        v238 <- LoadThis
+        SetProperty v238, 'x', v237
+        v239 <- LoadThis
+        SetProperty v239, 'a', v237
+    EndPlainFunction
+    v240 <- BeginPlainFunction -> v241
+        v242 <- LoadThis
+        SetProperty v242, 'x', v241
+        v243 <- LoadThis
+        SetProperty v243, 'b', v241
+    EndPlainFunction
+    v244 <- BeginPlainFunction -> v245
+        v246 <- GetProperty v245, 'x'
+        v247 <- GetProperty v246, 'a'
+        Return v247
+    EndPlainFunction
+    v248 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v248
+    v249 <- EndObjectLiteral
+    v250 <- Construct v236, [v249]
+    v251 <- CreateNamedVariable 'f', 'var', v250
+    v252 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v252
+    v253 <- EndObjectLiteral
+    v254 <- Construct v240, [v253]
+    v255 <- CreateNamedVariable 'b', 'var', v254
+    v256 <- CallFunction v244, [v251]
+    v257 <- LoadInteger '1'
+    v258 <- CallFunction v244, [v255]
+    v259 <- LoadInteger '2'
+    v260 <- CallFunction v244, [v251]
+    v261 <- LoadInteger '1'
+    v262 <- CallFunction v244, [v255]
+    v263 <- LoadInteger '2'
+    v264 <- CallFunction v244, [v251]
+    v265 <- LoadInteger '1'
+    v266 <- CallFunction v244, [v255]
+    v267 <- LoadInteger '2'
+    v268 <- CallFunction v244, []
+    v269 <- LoadInteger '0'
+    v270 <- GetProperty v251, 'a'
+    SetProperty v270, 'y', v269
+    v271 <- CallFunction v244, []
+EndPlainFunction
+v272 <- CallFunction v235, []
+
+
+function f0() {
+    var o = { text: "Hello World!" };
+    function A() {
+        this.a = { text: "foo" };
+        this.a = o;
+    }
+    function readA(a10) {
+        return a10.a;
+    }
+    const v12 = new A();
+    var a = v12;
+    readA();
+    readA(a);
+    readA(a);
+    readA(a);
+    readA(a);
+    readA();
+    const v20 = new A();
+    var b = v20;
+    b.b = o;
+    readA(b);
+    readA();
+    readA(a);
+    readA();
+    readA(a);
+    readA(b);
+    readA();
+    function readAFromB(a30) {
+        return a30.a;
+    }
+    readAFromB();
+    readAFromB(b);
+    readAFromB(b);
+    readAFromB(b);
+    readAFromB(b);
+    readAFromB();
+    const v38 = new A();
+    var c = v38;
+    c.c = o;
+    readA();
+    readAFromB();
+    c.a = [1];
+    readA();
+    readAFromB();
+    readA(a);
+    readA(b);
+    readA(c);
+    [1];
+    readAFromB(b);
+    readA(a);
+    readAFromB(b);
+    readA();
+    a.a = [1];
+    readA(a);
+    [1];
+    readA(b);
+    readA(c);
+    [1];
+    readA();
+    b.a = [1];
+    readA(a);
+    [1];
+    readA(b);
+    [1];
+    readA(c);
+    [1];
+    readA();
+    readAFromB();
+}
+f0();
+function f79() {
+    function A() {
+        this.x = 0;
+    }
+    A.prototype = { y: 20 };
+    function B(a86) {
+        return a86.a.y;
+    }
+    function C() {
+        const v90 = new A();
+        this.a = v90;
+    }
+    const v92 = new C();
+    B(v92);
+    const v94 = new C();
+    B(v94);
+    const v96 = new C();
+    var c = v96;
+    B(c);
+    B();
+    const t88 = c.a;
+    t88.y = 10;
+    B(c);
+    B();
+    const v106 = new C();
+    var c = v106;
+    B(c);
+    B();
+    const t96 = c.a;
+    t96.y = 30;
+    B(c);
+    B();
+}
+f79();
+function f117() {
+    const v119 = new Object();
+    var x = v119;
+    x.a = 1 + "Long string that results in a cons string";
+    x = JSON.parse("{"a":"Short"}");
+}
+f117();
+function f128() {
+    const v130 = { z: 1 };
+    var x = { y: v130 };
+    const t114 = x.y;
+    t114.z = 1.1;
+}
+f128();
+function f136() {
+    function Foo(a138) {
+        this.x = a138;
+    }
+    const v142 = new Foo({ x: 0 });
+    var f0 = v142;
+    f0.x = { x: 0 };
+    const v148 = new Foo({ x: 1 });
+    var f1 = v148;
+    const v152 = new Foo({ x: 2 });
+    var f2 = v152;
+    const v156 = new Foo({ x: 3 });
+    var f3 = v156;
+    function readX(a159) {
+        return a159.x.x;
+    }
+    readX(f1);
+    readX(f2);
+    readX();
+    readX(f3);
+    readX();
+    function writeX(a171, a172) {
+        a171.x = a172;
+    }
+    writeX(f1, { x: 11 });
+    writeX(f2, { x: 22 });
+    writeX();
+    readX(f1);
+    readX(f2);
+    readX();
+    writeX(f3, { x: 33 });
+    readX(f3);
+    readX();
+    writeX();
+    function addY(a193, a194) {
+        a193.y = a194;
+    }
+    writeX(f1, { a: "a" });
+    readX();
+    writeX();
+}
+f136();
+function f201() {
+    function Narf(a203) {
+        this.x = a203;
+    }
+    const v206 = new Narf(1);
+    var f1 = v206;
+    const v209 = new Narf(2);
+    var f2 = v209;
+    const v212 = new Narf(3);
+    var f3 = v212;
+    function baz(a215, a216) {
+        a215.y = a216;
+    }
+    baz(f1, { y: 9 });
+    baz(f2, { y: 9 });
+    baz(f2, { y: 9 });
+    baz(f2, { y: 9 });
+    const v230 = -1;
+    baz(f3, { a: v230 });
+    baz();
+}
+f201();
+function f235() {
+    function Foo(a237) {
+        this.x = a237;
+        this.a = a237;
+    }
+    function Bar(a241) {
+        this.x = a241;
+        this.b = a241;
+    }
+    function readA(a245) {
+        return a245.x.a;
+    }
+    const v250 = new Foo({ a: 1 });
+    var f = v250;
+    const v254 = new Bar({ a: 2 });
+    var b = v254;
+    readA(f);
+    readA(b);
+    readA(f);
+    readA(b);
+    readA(f);
+    readA(b);
+    readA();
+    const t198 = f.a;
+    t198.y = 0;
+    readA();
+}
+f235();
+
+FuzzIL program written to corpus/field-type-tracking.fzil

@@ -1,0 +1,95 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadThis
+    SetElement v2, '0', v1
+    v3 <- LoadInteger '2'
+    v4 <- LoadThis
+    SetElement v4, '1', v3
+    v5 <- LoadInteger '3'
+    v6 <- LoadThis
+    SetElement v6, '2', v5
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8, v9
+    v10 <- LoadInteger '0'
+    v11 <- CreateNamedVariable 's', 'var', v10
+    BeginForLoopInitializer
+        v12 <- LoadInteger '0'
+    BeginForLoopCondition -> v13
+        v14 <- LoadInteger '1'
+        v15 <- Compare v13, '<', v14
+    BeginForLoopAfterthought v15 -> v16
+        v17 <- UnaryOperation '++', v16
+    BeginForLoopBody -> v18
+        v19 <- LoadUndefined
+        SetProperty v8, 'newFileToChangeMap', v19
+        v20 <- GetElement v9, '0'
+        v21 <- CreateNamedVariable 'x', 'var', v20
+        Update v11, '+', v21
+    EndForLoop
+    Return v11
+EndPlainFunction
+v22 <- CreateNamedVariable 'Object', 'none'
+v23 <- Construct v22, []
+v24 <- CreateNamedVariable 'o', 'none'
+Reassign v24, v23
+v25 <- Construct v0, []
+v26 <- CreateNamedVariable 'a', 'none'
+Reassign v26, v25
+v27 <- CreateNamedVariable 'o', 'none'
+v28 <- CreateNamedVariable 'a', 'none'
+v29 <- CallFunction v7, [v27, v28]
+v30 <- Construct v22, []
+Reassign v27, v30
+v31 <- Construct v0, []
+Reassign v28, v31
+v32 <- CallFunction v7, [v27, v28]
+v33 <- Construct v22, []
+Reassign v27, v33
+v34 <- Construct v0, []
+Reassign v28, v34
+v35 <- CallFunction v7, [v27, v28]
+v36 <- Construct v22, []
+Reassign v27, v36
+v37 <- LoadFloat '2.122e-314'
+v38 <- LoadFloat '2.122e-314'
+v39 <- LoadFloat '2.122e-314'
+v40 <- CreateArray [v37, v38, v39]
+Reassign v28, v40
+v41 <- CallFunction v7, [v27, v28]
+
+
+function TestConstructor() {
+    this[0] = 1;
+    this[1] = 2;
+    this[2] = 3;
+}
+function bad_func(a8, a9) {
+    var s = 0;
+    for (let i13 = 0; i13 < 1; ++i13) {
+        a8.newFileToChangeMap = undefined;
+        var x = a9[0];
+        s += x;
+    }
+    return s;
+}
+const v23 = new Object();
+o = v23;
+const v25 = new TestConstructor();
+a = v25;
+bad_func(o, a);
+const v30 = new Object();
+o = v30;
+const v31 = new TestConstructor();
+a = v31;
+bad_func(o, a);
+const v33 = new Object();
+o = v33;
+const v34 = new TestConstructor();
+a = v34;
+bad_func(o, a);
+const v36 = new Object();
+o = v36;
+a = [2.122e-314,2.122e-314,2.122e-314];
+bad_func(o, a);
+
+FuzzIL program written to corpus/regress-137768.fzil

@@ -1,0 +1,157 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'sum', 'var', v1
+    BeginForLoopInitializer
+        v3 <- LoadInteger '0'
+    BeginForLoopCondition -> v4
+        v5 <- LoadInteger '500'
+        v6 <- Compare v4, '<', v5
+    BeginForLoopAfterthought v6 -> v7
+        v8 <- UnaryOperation '++', v7
+    BeginForLoopBody -> v9
+        v10 <- BinaryOperation v9, '+', v2
+        v11 <- LoadInteger '0'
+        v12 <- BinaryOperation v10, '|', v11
+        Reassign v2, v12
+    EndForLoop
+    Return v2
+EndPlainFunction
+v13 <- BeginPlainFunction -> 
+    v14 <- LoadInteger '0'
+    v15 <- CreateNamedVariable 'sum', 'var', v14
+    BeginForLoopInitializer
+        v16 <- LoadInteger '500'
+        v17 <- UnaryOperation '-', v16
+    BeginForLoopCondition -> v18
+        v19 <- LoadInteger '0'
+        v20 <- Compare v18, '<', v19
+    BeginForLoopAfterthought v20 -> v21
+        v22 <- UnaryOperation '++', v21
+    BeginForLoopBody -> v23
+        v24 <- BinaryOperation v23, '+', v15
+        v25 <- LoadInteger '0'
+        v26 <- BinaryOperation v24, '|', v25
+        Reassign v15, v26
+    EndForLoop
+    Return v15
+EndPlainFunction
+v27 <- BeginPlainFunction -> 
+    v28 <- LoadInteger '0'
+    v29 <- CreateNamedVariable 'sum', 'var', v28
+    BeginForLoopInitializer
+        v30 <- LoadInteger '0'
+    BeginForLoopCondition -> v31
+        v32 <- LoadInteger '500'
+        v33 <- Compare v31, '<', v32
+    BeginForLoopAfterthought v33 -> v34
+        v35 <- UnaryOperation '++', v34
+    BeginForLoopBody -> v36
+        v37 <- LoadInteger '2147483647'
+        v38 <- UnaryOperation '-', v37
+        v39 <- BinaryOperation v36, '+', v38
+        v40 <- LoadInteger '0'
+        v41 <- BinaryOperation v39, '|', v40
+        Update v29, '+', v41
+    EndForLoop
+    Return v29
+EndPlainFunction
+v42 <- BeginPlainFunction -> 
+    v43 <- LoadInteger '0'
+    v44 <- CreateNamedVariable 'sum', 'var', v43
+    BeginForLoopInitializer
+        v45 <- LoadInteger '501'
+        v46 <- UnaryOperation '-', v45
+    BeginForLoopCondition -> v47
+        v48 <- LoadInteger '0'
+        v49 <- Compare v47, '<', v48
+    BeginForLoopAfterthought v49 -> v50
+        v51 <- UnaryOperation '++', v50
+    BeginForLoopBody -> v52
+        v53 <- LoadInteger '501'
+        v54 <- BinaryOperation v52, '+', v53
+        v55 <- LoadInteger '0'
+        v56 <- BinaryOperation v54, '|', v55
+        Update v44, '+', v56
+    EndForLoop
+    Return v44
+EndPlainFunction
+v57 <- CallFunction v0, []
+v58 <- CallFunction v0, []
+v59 <- LoadInteger '124750'
+v60 <- CallFunction v0, []
+v61 <- LoadInteger '124750'
+v62 <- CallFunction v0, []
+v63 <- CallFunction v13, []
+v64 <- CallFunction v13, []
+v65 <- LoadInteger '125250'
+v66 <- UnaryOperation '-', v65
+v67 <- CallFunction v13, []
+v68 <- LoadInteger '125250'
+v69 <- UnaryOperation '-', v68
+v70 <- CallFunction v13, []
+v71 <- CallFunction v27, []
+v72 <- CallFunction v27, []
+v73 <- LoadInteger '1073741698750'
+v74 <- UnaryOperation '-', v73
+v75 <- CallFunction v27, []
+v76 <- LoadInteger '1073741698750'
+v77 <- UnaryOperation '-', v76
+v78 <- CallFunction v27, []
+v79 <- CallFunction v42, []
+v80 <- CallFunction v42, []
+v81 <- LoadInteger '125250'
+v82 <- CallFunction v42, []
+v83 <- LoadInteger '125250'
+v84 <- CallFunction v42, []
+
+
+function a() {
+    var sum = 0;
+    for (let i4 = 0; i4 < 500; ++i4) {
+        sum = (i4 + sum) | 0;
+    }
+    return sum;
+}
+function b() {
+    var sum = 0;
+    for (let i18 = -500; i18 < 0; ++i18) {
+        sum = (i18 + sum) | 0;
+    }
+    return sum;
+}
+function c() {
+    var sum = 0;
+    for (let i31 = 0; i31 < 500; ++i31) {
+        sum += (i31 + -2147483647) | 0;
+    }
+    return sum;
+}
+function d() {
+    var sum = 0;
+    for (let i47 = -501; i47 < 0; ++i47) {
+        sum += (i47 + 501) | 0;
+    }
+    return sum;
+}
+a();
+a();
+a();
+a();
+b();
+b();
+-125250;
+b();
+-125250;
+b();
+c();
+c();
+-1073741698750;
+c();
+-1073741698750;
+c();
+d();
+d();
+d();
+d();
+
+FuzzIL program written to corpus/lea-add.fzil

@@ -1,0 +1,44 @@
+BeginForLoopInitializer
+    v0 <- LoadInteger '0'
+    v1 <- CreateNamedVariable 'x', 'none'
+    Reassign v1, v0
+BeginForLoopCondition
+    v2 <- CreateNamedVariable 'x', 'none'
+    v3 <- LoadInteger '10000'
+    v4 <- Compare v2, '<', v3
+BeginForLoopAfterthought v4
+    v5 <- CreateNamedVariable 'x', 'none'
+    v6 <- UnaryOperation '++', v5
+BeginForLoopBody
+    v7 <- LoadString 'x'
+    v8 <- LoadInteger '0'
+    v9 <- UnaryOperation '-', v8
+    v10 <- BeginArrowFunction -> v11
+        Return v11
+    EndArrowFunction
+    v12 <- BeginArrowFunction -> v13
+        Return v13
+    EndArrowFunction
+    v14 <- LoadUndefined
+    v15 <- LoadInteger '4294967295'
+    v16 <- CreateArray [v14, v15]
+    v17 <- CallMethod v16, 'find', [v12]
+    v18 <- LoadUndefined
+    v19 <- LoadInteger '2'
+    v20 <- CreateArray [v10, v17, v18, v19]
+    v21 <- CallMethod v20, 'includes', [v7, v9]
+EndForLoop
+
+
+for (x = 0; x < 10000; ++x) {
+    const v9 = -0;
+    const v10 = (a11) => {
+        return a11;
+    };
+    const v12 = (a13) => {
+        return a13;
+    };
+    ([v10,([,4294967295]).find(v12),,2]).includes("x", v9);
+}
+
+FuzzIL program written to corpus/regress-906406.fzil

@@ -1,0 +1,49 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- GetProperty v1, 'caller'
+        v3 <- CreateNamedVariable 'caller', 'var', v2
+        v4 <- LoadInteger '23'
+        SetProperty v3, 'foo', v4
+        v5 <- LoadInteger '23'
+        v6 <- GetProperty v3, 'foo'
+        v7 <- LoadInteger '23'
+        v8 <- GetProperty v1, 'caller'
+        v9 <- GetProperty v8, 'foo'
+        v10 <- CallFunction v3, []
+        v11 <- CallMethod v1, 'caller', []
+    EndPlainFunction
+    v12 <- BeginPlainFunction -> 
+        v13 <- BeginPlainFunction -> 
+            v14 <- CallFunction v1, []
+        EndPlainFunction
+        v15 <- CallFunction v13, []
+    EndPlainFunction
+    v16 <- CallFunction v12, []
+    v17 <- CallFunction v12, []
+    v18 <- CallFunction v12, []
+EndPlainFunction
+v19 <- CallFunction v0, []
+
+
+function TestInlineAllocatedCaller() {
+    function g() {
+        var caller = g.caller;
+        caller.foo = 23;
+        caller.foo;
+        g.caller.foo;
+        caller();
+        g.caller();
+    }
+    function f() {
+        function caller() {
+            g();
+        }
+        caller();
+    }
+    f();
+    f();
+    f();
+}
+TestInlineAllocatedCaller();
+
+FuzzIL program written to corpus/function-caller.fzil

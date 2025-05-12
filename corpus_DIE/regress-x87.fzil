@@ -1,0 +1,91 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- CreateNamedVariable 'Float32Array', 'none'
+v3 <- LoadInteger '1'
+v4 <- LoadInteger '2'
+v5 <- LoadInteger '4'
+v6 <- LoadInteger '6'
+v7 <- LoadInteger '8'
+v8 <- LoadInteger '11'
+v9 <- CreateNamedVariable 'NaN', 'none'
+v10 <- LoadInteger '1'
+v11 <- LoadInteger '0'
+v12 <- BinaryOperation v10, '/', v11
+v13 <- LoadInteger '3'
+v14 <- UnaryOperation '-', v13
+v15 <- CreateArray [v3, v4, v5, v6, v7, v8, v9, v12, v14]
+v16 <- Construct v2, [v15]
+v17 <- CreateNamedVariable 'a', 'var', v16
+v18 <- LoadFloat '2.1'
+v19 <- GetElement v17, '1'
+v20 <- BinaryOperation v18, '*', v19
+v21 <- GetElement v17, '0'
+v22 <- BinaryOperation v20, '*', v21
+v23 <- LoadInteger '1'
+v24 <- LoadInteger '2'
+v25 <- BinaryOperation v23, '*', v24
+v26 <- LoadInteger '3'
+v27 <- BinaryOperation v25, '*', v26
+v28 <- LoadInteger '0'
+v29 <- BinaryOperation v27, '*', v28
+v30 <- GetComputedProperty v17, v29
+v31 <- BinaryOperation v22, '*', v30
+v32 <- LoadInteger '1'
+v33 <- LoadInteger '1'
+v34 <- BinaryOperation v32, '*', v33
+v35 <- GetComputedProperty v17, v34
+v36 <- BinaryOperation v31, '*', v35
+v37 <- LoadInteger '1'
+v38 <- BinaryOperation v36, '*', v37
+v39 <- CreateNamedVariable 'val', 'var', v38
+v40 <- LoadFloat '8.4'
+v41 <- LoadUndefined
+v42 <- CreateNamedVariable 'a', 'var', v41
+v43 <- LoadBoolean 'true'
+v44 <- CreateNamedVariable 't', 'var', v43
+v45 <- LoadFloat '2.5'
+v46 <- LoadInteger '2'
+v47 <- CreateArray [v45, v46]
+v48 <- CreateNamedVariable 'res', 'var', v47
+BeginForLoopInitializer
+    v49 <- LoadInteger '0'
+BeginForLoopCondition -> v50
+    v51 <- LoadInteger '2'
+    v52 <- Compare v50, '<', v51
+BeginForLoopAfterthought v52 -> v53
+    v54 <- UnaryOperation v53, '++'
+BeginForLoopBody -> v55
+    BeginIf v44
+        v56 <- LoadFloat '1.5'
+        Reassign v42, v56
+    BeginElse
+        v57 <- LoadBoolean 'true'
+        Reassign v42, v57
+    EndIf
+    v58 <- GetComputedProperty v48, v55
+    v59 <- LoadInteger '1'
+    v60 <- BinaryOperation v42, '+', v59
+    v61 <- LoadBoolean 'false'
+    Reassign v44, v61
+EndForLoop
+
+
+var x;
+const v16 = new Float32Array([1,2,4,6,8,11,NaN,1 / 0,-3]);
+var a = v16;
+var val = ((((2.1 * a[1]) * a[0]) * a[((1 * 2) * 3) * 0]) * a[1 * 1]) * 1;
+var a;
+var t = true;
+var res = [2.5,2];
+for (let i50 = 0; i50 < 2; i50++) {
+    if (t) {
+        a = 1.5;
+    } else {
+        a = true;
+    }
+    res[i50];
+    a + 1;
+    t = false;
+}
+
+FuzzIL program written to corpus/regress-x87.fzil

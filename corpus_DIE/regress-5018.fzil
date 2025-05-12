@@ -1,0 +1,71 @@
+v0 <- CreateNamedVariable 'DataView', 'none'
+v1 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v2 <- LoadInteger '4'
+v3 <- Construct v1, [v2]
+v4 <- LoadInteger '2'
+v5 <- Construct v0, [v3, v4]
+v6 <- CreateNamedVariable 'dv', 'var', v5
+v7 <- BeginPlainFunction -> v8
+    v9 <- GetProperty v8, 'byteLength'
+    Return v9
+EndPlainFunction
+v10 <- LoadInteger '2'
+v11 <- CallFunction v7, [v6]
+v12 <- LoadInteger '2'
+v13 <- CallFunction v7, [v6]
+v14 <- GetProperty v6, '__proto__'
+v15 <- LoadString 'byteLength'
+v16 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v16
+v17 <- EndObjectLiteral
+v18 <- CreateNamedVariable 'Object', 'none'
+v19 <- CallMethod v18, 'defineProperty', [v14, v15, v17]
+v20 <- LoadInteger '42'
+v21 <- GetProperty v6, 'byteLength'
+v22 <- LoadInteger '42'
+v23 <- CallFunction v7, [v6]
+v24 <- BeginPlainFunction -> v25
+    v26 <- GetProperty v25, 'byteOffset'
+    Return v26
+EndPlainFunction
+v27 <- LoadInteger '2'
+v28 <- CallFunction v24, [v6]
+v29 <- LoadInteger '2'
+v30 <- CallFunction v24, [v6]
+v31 <- GetProperty v6, '__proto__'
+v32 <- LoadString 'byteOffset'
+v33 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v33
+v34 <- EndObjectLiteral
+v35 <- CallMethod v18, 'defineProperty', [v31, v32, v34]
+v36 <- LoadInteger '42'
+v37 <- GetProperty v6, 'byteOffset'
+v38 <- LoadInteger '42'
+v39 <- CallFunction v24, [v6]
+
+
+const v3 = new ArrayBuffer(4);
+const v5 = new DataView(v3, 2);
+var dv = v5;
+function getByteLength(a8) {
+    return a8.byteLength;
+}
+getByteLength(dv);
+getByteLength(dv);
+const v14 = dv.__proto__;
+Object.defineProperty(v14, "byteLength", { value: 42 });
+dv.byteLength;
+getByteLength(dv);
+function getByteOffset(a25) {
+    return a25.byteOffset;
+}
+getByteOffset(dv);
+getByteOffset(dv);
+const v31 = dv.__proto__;
+Object.defineProperty(v31, "byteOffset", { value: 42 });
+dv.byteOffset;
+getByteOffset(dv);
+
+FuzzIL program written to corpus/regress-5018.fzil

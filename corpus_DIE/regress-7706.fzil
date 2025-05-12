@@ -1,0 +1,142 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, '__proto__'
+    v3 <- CreateNamedVariable 'f', 'none'
+    v4 <- CallFunction v3, [v2]
+    v5 <- CreateNamedVariable 'Object', 'none'
+    v6 <- GetProperty v5, 'prototype'
+    v7 <- GetProperty v6, 'toString'
+    v8 <- CallMethod v7, 'call', [v1]
+    Return v8
+EndPlainFunction
+v9 <- CreateNamedVariable 'Number', 'none'
+v10 <- BeginClassDefinition v9
+EndClassDefinition
+v11 <- LoadString 'TestNumber'
+v12 <- GetProperty v10, 'prototype'
+v13 <- CreateNamedVariable 'Symbol', 'none'
+v14 <- GetProperty v13, 'toStringTag'
+SetComputedProperty v12, v14, v11
+v15 <- LoadString '[object TestNumber]'
+v16 <- Construct v10, []
+v17 <- CallFunction v0, [v16]
+v18 <- LoadString 'Try #1'
+v19 <- LoadString '[object TestNumber]'
+v20 <- Construct v10, []
+v21 <- CallFunction v0, [v20]
+v22 <- LoadString 'Try #2'
+v23 <- CreateNamedVariable 'Boolean', 'none'
+v24 <- BeginClassDefinition v23
+EndClassDefinition
+v25 <- LoadString 'TestBoolean'
+v26 <- GetProperty v24, 'prototype'
+v27 <- GetProperty v13, 'toStringTag'
+SetComputedProperty v26, v27, v25
+v28 <- LoadString '[object TestBoolean]'
+v29 <- Construct v24, []
+v30 <- CallFunction v0, [v29]
+v31 <- LoadString 'Try #1'
+v32 <- LoadString '[object TestBoolean]'
+v33 <- Construct v24, []
+v34 <- CallFunction v0, [v33]
+v35 <- LoadString 'Try #2'
+v36 <- CreateNamedVariable 'String', 'none'
+v37 <- BeginClassDefinition v36
+EndClassDefinition
+v38 <- LoadString 'TestString'
+v39 <- GetProperty v37, 'prototype'
+v40 <- GetProperty v13, 'toStringTag'
+SetComputedProperty v39, v40, v38
+v41 <- LoadString '[object TestString]'
+v42 <- Construct v37, []
+v43 <- CallFunction v0, [v42]
+v44 <- LoadString 'Try #1'
+v45 <- LoadString '[object TestString]'
+v46 <- Construct v37, []
+v47 <- CallFunction v0, [v46]
+v48 <- LoadString 'Try #2'
+v49 <- BeginClassDefinition
+EndClassDefinition
+v50 <- BeginClassDefinition v49
+EndClassDefinition
+v51 <- LoadString 'TestBigInt'
+v52 <- GetProperty v50, 'prototype'
+v53 <- GetProperty v13, 'toStringTag'
+SetComputedProperty v52, v53, v51
+v54 <- Construct v50, []
+v55 <- CreateNamedVariable 'b', 'var', v54
+v56 <- LoadString '[object TestBigInt]'
+v57 <- CallFunction v0, [v55]
+v58 <- LoadString 'Try #1'
+v59 <- LoadString '[object TestBigInt]'
+v60 <- CallFunction v0, [v55]
+v61 <- LoadString 'Try #2'
+v62 <- BeginClassDefinition v49
+EndClassDefinition
+v63 <- LoadString 'TestSymbol'
+v64 <- GetProperty v62, 'prototype'
+v65 <- GetProperty v13, 'toStringTag'
+SetComputedProperty v64, v65, v63
+v66 <- Construct v62, []
+v67 <- CreateNamedVariable 'sym', 'var', v66
+v68 <- GetProperty v13, 'prototype'
+v69 <- GetProperty v67, '__proto__'
+SetProperty v69, '__proto__', v68
+v70 <- LoadString '[object TestSymbol]'
+v71 <- CallFunction v0, [v67]
+v72 <- LoadString 'Try #1'
+v73 <- LoadString '[object TestSymbol]'
+v74 <- CallFunction v0, [v67]
+v75 <- LoadString 'Try #2'
+
+
+function toString(a1) {
+    f(a1.__proto__);
+    return Object.prototype.toString.call(a1);
+}
+class C10 extends Number {
+}
+const t6 = C10.prototype;
+t6[Symbol.toStringTag] = "TestNumber";
+const v16 = new C10();
+toString(v16);
+const v20 = new C10();
+toString(v20);
+class C24 extends Boolean {
+}
+const t14 = C24.prototype;
+t14[Symbol.toStringTag] = "TestBoolean";
+const v29 = new C24();
+toString(v29);
+const v33 = new C24();
+toString(v33);
+class C37 extends String {
+}
+const t22 = C37.prototype;
+t22[Symbol.toStringTag] = "TestString";
+const v42 = new C37();
+toString(v42);
+const v46 = new C37();
+toString(v46);
+class C49 {
+}
+class C50 extends C49 {
+}
+const t32 = C50.prototype;
+t32[Symbol.toStringTag] = "TestBigInt";
+const v54 = new C50();
+var b = v54;
+toString(b);
+toString(b);
+class C62 extends C49 {
+}
+const t40 = C62.prototype;
+t40[Symbol.toStringTag] = "TestSymbol";
+const v66 = new C62();
+var sym = v66;
+const v68 = Symbol.prototype;
+const t45 = sym.__proto__;
+t45.__proto__ = v68;
+toString(sym);
+toString(sym);
+
+FuzzIL program written to corpus/regress-7706.fzil

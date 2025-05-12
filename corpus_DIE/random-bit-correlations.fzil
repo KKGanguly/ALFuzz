@@ -1,0 +1,246 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '2'
+    v2 <- CreateNamedVariable 'kHistory', 'var', v1
+    v3 <- LoadInteger '100'
+    v4 <- CreateNamedVariable 'kRepeats', 'var', v3
+    v5 <- CreateNamedVariable 'Uint32Array', 'none'
+    v6 <- Construct v5, [v2]
+    v7 <- CreateNamedVariable 'history', 'var', v6
+    v8 <- BeginPlainFunction -> 
+        v9 <- CreateNamedVariable 'Math', 'none'
+        v10 <- CallMethod v9, 'random', []
+        v11 <- LoadInteger '2'
+        v12 <- LoadInteger '32'
+        v13 <- CallMethod v9, 'pow', [v11, v12]
+        v14 <- BinaryOperation v10, '*', v13
+        v15 <- LoadInteger '0'
+        v16 <- BinaryOperation v14, '>>>', v15
+        Return v16
+    EndPlainFunction
+    v17 <- BeginPlainFunction -> v18, v19
+        v20 <- LoadInteger '2'
+        v21 <- BinaryOperation v19, '/', v20
+        v22 <- BinaryOperation v18, '-', v21
+        v23 <- CreateNamedVariable 'ys_minus_np1', 'var', v22
+        v24 <- BinaryOperation v23, '*', v23
+        v25 <- LoadInteger '2'
+        v26 <- BinaryOperation v24, '*', v25
+        v27 <- BinaryOperation v26, '/', v19
+        v28 <- CreateNamedVariable 'chi_squared_1', 'var', v27
+        v29 <- BinaryOperation v19, '-', v18
+        v30 <- LoadInteger '2'
+        v31 <- BinaryOperation v19, '/', v30
+        v32 <- BinaryOperation v29, '-', v31
+        v33 <- CreateNamedVariable 'ys_minus_np2', 'var', v32
+        v34 <- BinaryOperation v33, '*', v33
+        v35 <- LoadInteger '2'
+        v36 <- BinaryOperation v34, '*', v35
+        v37 <- BinaryOperation v36, '/', v19
+        v38 <- CreateNamedVariable 'chi_squared_2', 'var', v37
+        v39 <- BinaryOperation v28, '+', v38
+        Return v39
+    EndPlainFunction
+    BeginForLoopInitializer
+        v40 <- LoadInteger '2'
+        v41 <- UnaryOperation '-', v40
+    BeginForLoopCondition -> v42
+        v43 <- LoadInteger '32'
+        v44 <- Compare v42, '<', v43
+    BeginForLoopAfterthought v44 -> v45
+        v46 <- UnaryOperation v45, '++'
+    BeginForLoopBody -> v47
+        BeginForLoopInitializer
+            v48 <- LoadInteger '0'
+        BeginForLoopCondition -> v49
+            v50 <- LoadInteger '32'
+            v51 <- Compare v49, '<', v50
+        BeginForLoopAfterthought v51 -> v52
+            v53 <- UnaryOperation v52, '++'
+        BeginForLoopBody -> v54
+            BeginForLoopInitializer
+                v55 <- LoadInteger '0'
+            BeginForLoopCondition -> v56
+                v57 <- Compare v56, '<', v2
+            BeginForLoopAfterthought v57 -> v58
+                v59 <- UnaryOperation v58, '++'
+            BeginForLoopBody -> v60
+                v61 <- LoadInteger '0'
+                v62 <- Compare v60, '==', v61
+                v63 <- Compare v47, '==', v54
+                v64 <- BinaryOperation v62, '&&', v63
+                BeginIf v64
+                    Continue
+                EndIf
+                BeginForLoopInitializer
+                BeginForLoopCondition -> v65
+                    v66 <- LoadInteger '0'
+                    v67 <- Compare v65, '>=', v66
+                BeginForLoopAfterthought v67 -> v68
+                    v69 <- UnaryOperation v68, '--'
+                BeginForLoopBody -> v70
+                    v71 <- CallFunction v8, []
+                    SetComputedProperty v7, v70, v71
+                EndForLoop
+                v72 <- LoadInteger '0'
+                v73 <- CreateNamedVariable 'm', 'var', v72
+                BeginForLoopInitializer
+                    v74 <- LoadInteger '0'
+                BeginForLoopCondition -> v75
+                    v76 <- Compare v75, '<', v4
+                BeginForLoopAfterthought v76 -> v77
+                    v78 <- UnaryOperation v77, '++'
+                BeginForLoopBody -> v79
+                    BeginForLoopInitializer
+                        v80 <- LoadInteger '1'
+                        v81 <- BinaryOperation v60, '-', v80
+                    BeginForLoopCondition -> v82
+                        v83 <- LoadInteger '0'
+                        v84 <- Compare v82, '>=', v83
+                    BeginForLoopAfterthought v84 -> v85
+                        v86 <- UnaryOperation v85, '--'
+                    BeginForLoopBody -> v87
+                        v88 <- GetComputedProperty v7, v87
+                        v89 <- LoadInteger '1'
+                        v90 <- BinaryOperation v87, '+', v89
+                        SetComputedProperty v7, v90, v88
+                    EndForLoop
+                    v91 <- CallFunction v8, []
+                    SetElement v7, '0', v91
+                    v92 <- LoadUndefined
+                    v93 <- CreateNamedVariable 'predicted', 'var', v92
+                    v94 <- LoadInteger '0'
+                    v95 <- Compare v47, '>=', v94
+                    BeginIf v95
+                        v96 <- GetComputedProperty v7, v60
+                        v97 <- BinaryOperation v96, '>>', v47
+                        v98 <- LoadInteger '1'
+                        v99 <- BinaryOperation v97, '&', v98
+                        Reassign v93, v99
+                    BeginElse
+                        v100 <- LoadInteger '2'
+                        v101 <- UnaryOperation '-', v100
+                        v102 <- Compare v47, '==', v101
+                        v103 <- LoadInteger '0'
+                        v104 <- LoadInteger '1'
+                        v105 <- TernaryOperation v102, v103, v104
+                        Reassign v93, v105
+                    EndIf
+                    v106 <- GetElement v7, '0'
+                    v107 <- BinaryOperation v106, '>>', v54
+                    v108 <- LoadInteger '1'
+                    v109 <- BinaryOperation v107, '&', v108
+                    v110 <- CreateNamedVariable 'bit', 'var', v109
+                    v111 <- Compare v110, '==', v93
+                    BeginIf v111
+                        v112 <- UnaryOperation v73, '++'
+                    EndIf
+                EndForLoop
+                v113 <- CallFunction v17, [v73, v4]
+                v114 <- CreateNamedVariable 'chi_squared', 'var', v113
+                v115 <- LoadInteger '24'
+                v116 <- Compare v114, '>', v115
+                BeginIf v116
+                    v117 <- LoadInteger '100'
+                    v118 <- BinaryOperation v73, '*', v117
+                    v119 <- BinaryOperation v118, '/', v4
+                    v120 <- CreateNamedVariable 'Math', 'none'
+                    v121 <- CallMethod v120, 'floor', [v119]
+                    v122 <- CreateNamedVariable 'percent', 'var', v121
+                    v123 <- LoadInteger '0'
+                    v124 <- Compare v47, '<', v123
+                    BeginIf v124
+                        v125 <- LoadInteger '2'
+                        v126 <- UnaryOperation '-', v125
+                        v127 <- Compare v47, '==', v126
+                        v128 <- LoadInteger '0'
+                        v129 <- LoadInteger '1'
+                        v130 <- TernaryOperation v127, v128, v129
+                        v131 <- CreateNamedVariable 'bit_value', 'var', v130
+                        v132 <- CreateTemplateString ['Bit ', ' is ', ' ', '% of the time'], [v54, v131, v122]
+                        v133 <- CreateNamedVariable 'print', 'none'
+                        v134 <- CallFunction v133, [v132]
+                    BeginElse
+                        v135 <- CreateTemplateString ['Bit ', ' is the same as bit ', ' '], [v54, v47]
+                        v136 <- CreateTemplateString ['', ' ago ', '% of the time'], [v60, v122]
+                        v137 <- BinaryOperation v135, '+', v136
+                        v138 <- CreateNamedVariable 'print', 'none'
+                        v139 <- CallFunction v138, [v137]
+                    EndIf
+                EndIf
+                v140 <- LoadInteger '24'
+                v141 <- Compare v114, '<=', v140
+                v142 <- LoadInteger '0'
+                v143 <- Compare v47, '<', v142
+                BeginIf v143
+                    Break
+                EndIf
+            EndForLoop
+        EndForLoop
+    EndForLoop
+EndPlainFunction
+v144 <- CallFunction v0, []
+
+
+function f0() {
+    var kHistory = 2;
+    var kRepeats = 100;
+    const v6 = new Uint32Array(kHistory);
+    var history = v6;
+    function random() {
+        return (Math.random() * Math.pow(2, 32)) >>> 0;
+    }
+    function ChiSquared(a18, a19) {
+        var ys_minus_np1 = a18 - (a19 / 2);
+        var chi_squared_1 = ((ys_minus_np1 * ys_minus_np1) * 2) / a19;
+        var ys_minus_np2 = (a19 - a18) - (a19 / 2);
+        var chi_squared_2 = ((ys_minus_np2 * ys_minus_np2) * 2) / a19;
+        return chi_squared_1 + chi_squared_2;
+    }
+    for (let i42 = -2; i42 < 32; i42++) {
+        for (let i49 = 0; i49 < 32; i49++) {
+            for (let i56 = 0; i56 < kHistory; i56++) {
+                if ((i56 == 0) && (i42 == i49)) {
+                    continue;
+                }
+                for (let i65 = i56; i65 >= 0; i65--) {
+                    history[i65] = random();
+                }
+                var m = 0;
+                for (let i75 = 0; i75 < kRepeats; i75++) {
+                    for (let i82 = i56 - 1; i82 >= 0; i82--) {
+                        const v88 = history[i82];
+                        history[i82 + 1] = v88;
+                    }
+                    history[0] = random();
+                    var predicted;
+                    if (i42 >= 0) {
+                        predicted = (history[i56] >> i42) & 1;
+                    } else {
+                        predicted = i42 == -2 ? 0 : 1;
+                    }
+                    var bit = (history[0] >> i49) & 1;
+                    if (bit == predicted) {
+                        m++;
+                    }
+                }
+                var chi_squared = ChiSquared(m, kRepeats);
+                if (chi_squared > 24) {
+                    var percent = Math.floor((m * 100) / kRepeats);
+                    if (i42 < 0) {
+                        var bit_value = i42 == -2 ? 0 : 1;
+                        print(`Bit ${i49} is ${bit_value} ${percent}% of the time`);
+                    } else {
+                        print(`Bit ${i49} is the same as bit ${i42} ` + `${i56} ago ${percent}% of the time`);
+                    }
+                }
+                chi_squared <= 24;
+                if (i42 < 0) {
+                    break;
+                }
+            }
+        }
+    }
+}
+f0();
+
+FuzzIL program written to corpus/random-bit-correlations.fzil

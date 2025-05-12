@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    ThrowException v1
+EndPlainFunction
+v2 <- BeginPlainFunction -> 
+    BeginTry
+        v3 <- CallFunction v0, []
+    BeginCatch -> v4
+    EndTryCatch
+EndPlainFunction
+v5 <- CallFunction v2, []
+
+
+function f() {
+    throw 1;
+}
+function g() {
+    try {
+        f();
+    } catch(e4) {
+    }
+}
+g();
+
+FuzzIL program written to corpus/regress-crbug-662830.fzil

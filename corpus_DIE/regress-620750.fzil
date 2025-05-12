@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> v1
+    BeginForLoopInitializer
+        v2 <- LoadInteger '0'
+    BeginForLoopCondition -> v3
+        v4 <- LoadInteger '20000'
+        v5 <- Compare v3, '<', v4
+    BeginForLoopAfterthought v5 -> v6
+        v7 <- UnaryOperation v6, '++'
+    BeginForLoopBody -> v8
+        v9 <- CallMethod v1, 'push', [v8]
+    EndForLoop
+    Return v1
+EndPlainFunction
+v10 <- CreateArray []
+v11 <- CallFunction v0, [v10]
+v12 <- CreateNamedVariable '__v_13', 'none'
+Reassign v12, v11
+
+
+function push_a_lot(a1) {
+    for (let i3 = 0; i3 < 20000; i3++) {
+        a1.push(i3);
+    }
+    return a1;
+}
+__v_13 = push_a_lot([]);
+
+FuzzIL program written to corpus/regress-620750.fzil

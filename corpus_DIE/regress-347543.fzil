@@ -1,0 +1,35 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '256'
+    SetElement v1, '5000000', v2
+    v3 <- LoadInteger '256'
+    v4 <- GetElement v1, '5000000'
+EndPlainFunction
+v5 <- CreateNamedVariable 'Array', 'none'
+v6 <- LoadInteger '5000001'
+v7 <- Construct v5, [v6]
+v8 <- CreateNamedVariable 'v1', 'var', v7
+v9 <- LoadInteger '10'
+v10 <- Construct v5, [v9]
+v11 <- CreateNamedVariable 'v2', 'var', v10
+v12 <- CallFunction v0, [v8]
+v13 <- CallFunction v0, [v11]
+v14 <- CallFunction v0, [v11]
+v15 <- CallFunction v0, [v11]
+v16 <- CallFunction v0, [v8]
+
+
+function f(a1) {
+    a1[5000000] = 256;
+    a1[5000000];
+}
+const v7 = new Array(5000001);
+var v1 = v7;
+const v10 = new Array(10);
+var v2 = v10;
+f(v1);
+f(v2);
+f(v2);
+f(v2);
+f(v1);
+
+FuzzIL program written to corpus/regress-347543.fzil

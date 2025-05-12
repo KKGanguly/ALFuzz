@@ -1,0 +1,176 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- GetProperty v0, 'create'
+v2 <- CreateNamedVariable 'c', 'var', v1
+v3 <- LoadNull
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadInteger '4'
+    Return v5
+EndPlainFunction
+v6 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v4
+    ObjectLiteralAddProperty `writable`, v6
+v7 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f4`, v7
+v8 <- EndObjectLiteral
+v9 <- CallFunction v2, [v3, v8]
+v10 <- CreateNamedVariable 'obj4', 'var', v9
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadInteger '3'
+    Return v12
+EndPlainFunction
+v13 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v11
+    ObjectLiteralAddProperty `writable`, v13
+v14 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f3`, v14
+v15 <- EndObjectLiteral
+v16 <- CallFunction v2, [v10, v15]
+v17 <- CreateNamedVariable 'obj3', 'var', v16
+v18 <- BeginPlainFunction -> 
+    v19 <- LoadInteger '2'
+    Return v19
+EndPlainFunction
+v20 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v18
+    ObjectLiteralAddProperty `writable`, v20
+v21 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f2`, v21
+v22 <- EndObjectLiteral
+v23 <- CallFunction v2, [v17, v22]
+v24 <- CreateNamedVariable 'obj2', 'var', v23
+v25 <- BeginPlainFunction -> 
+    v26 <- LoadInteger '1'
+    Return v26
+EndPlainFunction
+v27 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v25
+    ObjectLiteralAddProperty `writable`, v27
+v28 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f1`, v28
+v29 <- EndObjectLiteral
+v30 <- CallFunction v2, [v24, v29]
+v31 <- CreateNamedVariable 'obj1', 'var', v30
+v32 <- BeginPlainFunction -> 
+    v33 <- LoadInteger '0'
+    Return v33
+EndPlainFunction
+v34 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v32
+    ObjectLiteralAddProperty `writable`, v34
+v35 <- EndObjectLiteral
+BeginObjectLiteral
+    ObjectLiteralAddProperty `f0`, v35
+v36 <- EndObjectLiteral
+v37 <- CallFunction v2, [v31, v36]
+v38 <- CreateNamedVariable 'obj0', 'var', v37
+v39 <- BeginPlainFunction -> v40
+    v41 <- GetProperty v40, 'f4'
+    Return v41
+EndPlainFunction
+v42 <- LoadInteger '4'
+v43 <- CallFunction v39, [v38]
+v44 <- CallFunction v43, []
+v45 <- LoadInteger '4'
+v46 <- CallFunction v39, [v38]
+v47 <- CallFunction v46, []
+v48 <- LoadInteger '4'
+v49 <- CallFunction v39, [v38]
+v50 <- CallFunction v49, []
+v51 <- BeginPlainFunction -> 
+    v52 <- LoadInteger '5'
+    Return v52
+EndPlainFunction
+SetProperty v10, 'f4', v51
+v53 <- LoadInteger '5'
+v54 <- CallFunction v39, [v38]
+v55 <- CallFunction v54, []
+v56 <- BeginPlainFunction -> v57
+    v58 <- GetProperty v57, 'f3'
+    Return v58
+EndPlainFunction
+v59 <- LoadInteger '3'
+v60 <- CallFunction v56, [v38]
+v61 <- CallFunction v60, []
+v62 <- LoadInteger '3'
+v63 <- CallFunction v56, [v38]
+v64 <- CallFunction v63, []
+v65 <- LoadInteger '3'
+v66 <- CallFunction v56, [v38]
+v67 <- CallFunction v66, []
+v68 <- BeginPlainFunction -> 
+    v69 <- LoadInteger '6'
+    Return v69
+EndPlainFunction
+SetProperty v24, 'f3', v68
+v70 <- LoadInteger '6'
+v71 <- CallFunction v56, [v38]
+v72 <- CallFunction v71, []
+
+
+var c = Object.create;
+function f4() {
+    return 4;
+}
+const v7 = { value: f4, writable: true };
+var obj4 = c(null, { f4: v7 });
+function f11() {
+    return 3;
+}
+const v14 = { value: f11, writable: true };
+var obj3 = c(obj4, { f3: v14 });
+function f18() {
+    return 2;
+}
+const v21 = { value: f18, writable: true };
+var obj2 = c(obj3, { f2: v21 });
+function f25() {
+    return 1;
+}
+const v28 = { value: f25, writable: true };
+var obj1 = c(obj2, { f1: v28 });
+function f32() {
+    return 0;
+}
+const v35 = { value: f32, writable: true };
+var obj0 = c(obj1, { f0: v35 });
+function get4(a40) {
+    return a40.f4;
+}
+const t29 = get4(obj0);
+t29();
+const t30 = get4(obj0);
+t30();
+const t32 = get4(obj0);
+t32();
+function f51() {
+    return 5;
+}
+obj4.f4 = f51;
+const t39 = get4(obj0);
+t39();
+function get3(a57) {
+    return a57.f3;
+}
+const t44 = get3(obj0);
+t44();
+const t45 = get3(obj0);
+t45();
+const t47 = get3(obj0);
+t47();
+function f68() {
+    return 6;
+}
+obj2.f3 = f68;
+const t54 = get3(obj0);
+t54();
+
+FuzzIL program written to corpus/proto-chain-constant.fzil

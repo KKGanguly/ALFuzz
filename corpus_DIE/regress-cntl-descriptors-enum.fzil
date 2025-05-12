@@ -1,0 +1,63 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- LoadString 'a'
+v3 <- LoadInteger '0'
+v4 <- LoadBoolean 'true'
+v5 <- LoadBoolean 'true'
+v6 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v3
+    ObjectLiteralAddProperty `configurable`, v4
+    ObjectLiteralAddProperty `writable`, v5
+    ObjectLiteralAddProperty `enumerable`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'Object', 'none'
+v9 <- CallMethod v8, 'defineProperty', [v1, v2, v7]
+BeginObjectLiteral
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'o2', 'var', v10
+v12 <- LoadString 'a'
+v13 <- LoadInteger '0'
+v14 <- LoadBoolean 'true'
+v15 <- LoadBoolean 'true'
+v16 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v13
+    ObjectLiteralAddProperty `configurable`, v14
+    ObjectLiteralAddProperty `writable`, v15
+    ObjectLiteralAddProperty `enumerable`, v16
+v17 <- EndObjectLiteral
+v18 <- CallMethod v8, 'defineProperty', [v11, v12, v17]
+v19 <- LoadInteger '2'
+SetProperty v1, 'y', v19
+BeginForInLoop v1 -> v20
+    v21 <- CreateNamedVariable 'print', 'none'
+    v22 <- CallFunction v21, [v20]
+EndForInLoop
+BeginObjectLiteral
+v23 <- EndObjectLiteral
+Reassign v1, v23
+v24 <- CreateNamedVariable 'gc', 'none'
+v25 <- CallFunction v24, []
+BeginForInLoop v11 -> v26
+    v27 <- CreateNamedVariable 'print', 'none'
+    v28 <- CallFunction v27, [v26]
+EndForInLoop
+
+
+var o = {};
+Object.defineProperty(o, "a", { value: 0, configurable: true, writable: true, enumerable: false });
+var o2 = {};
+Object.defineProperty(o2, "a", { value: 0, configurable: true, writable: true, enumerable: false });
+o.y = 2;
+for (const v20 in o) {
+    print(v20);
+}
+o = {};
+gc();
+for (const v26 in o2) {
+    print(v26);
+}
+
+FuzzIL program written to corpus/regress-cntl-descriptors-enum.fzil

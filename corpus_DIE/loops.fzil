@@ -1,0 +1,92 @@
+v0 <- LoadInteger '1'
+v1 <- CreateNamedVariable 'n', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '1'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '6'
+    v5 <- BinaryOperation v4, '-', v3
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    v9 <- BinaryOperation v1, '*', v8
+    Reassign v1, v9
+EndForLoop
+v10 <- LoadInteger '120'
+v11 <- BeginPlainFunction -> v12, v13
+    BeginWhileLoopHeader
+        v14 <- LoadInteger '1'
+        v15 <- BinaryOperation v13, '-', v14
+        Reassign v13, v15
+        v16 <- LoadInteger '0'
+        v17 <- Compare v15, '>=', v16
+    BeginWhileLoopBody v17
+        v18 <- LoadInteger '1'
+        v19 <- BinaryOperation v13, '+', v18
+        Reassign v12, v19
+    EndWhileLoop
+    Return v12
+EndPlainFunction
+v20 <- LoadInteger '1'
+v21 <- LoadInteger '0'
+v22 <- LoadInteger '42'
+v23 <- CallFunction v11, [v21, v22]
+v24 <- BeginPlainFunction -> v25
+    v26 <- LoadInteger '0'
+    v27 <- CreateNamedVariable 'x', 'var', v26
+    v28 <- LoadInteger '0'
+    v29 <- CreateNamedVariable 'c', 'var', v28
+    BeginDoWhileLoopBody
+        v30 <- LoadInteger '1'
+        v31 <- BinaryOperation v27, '+', v30
+        Reassign v27, v31
+        v32 <- LoadInteger '5'
+        v33 <- Compare v27, '<', v32
+        BeginIf v33
+            Continue
+        EndIf
+        v34 <- LoadInteger '1'
+        v35 <- BinaryOperation v29, '+', v34
+        Reassign v29, v35
+    BeginDoWhileLoopHeader
+        v36 <- Compare v27, '<', v25
+    EndDoWhileLoop v36
+    Return v29
+EndPlainFunction
+v37 <- LoadInteger '6'
+v38 <- LoadInteger '10'
+v39 <- CallFunction v24, [v38]
+v40 <- LoadInteger '0'
+v41 <- LoadString 'foo'
+v42 <- CallFunction v24, [v41]
+
+
+var n = 1;
+for (let i3 = 1; 6 - i3; i3++) {
+    n = n * i3;
+}
+function f(a12, a13) {
+    while ((() => {
+            const v15 = a13 - 1;
+            a13 = v15;
+            return v15 >= 0;
+        })()) {
+        a12 = a13 + 1;
+    }
+    return a12;
+}
+f(0, 42);
+function g(a25) {
+    var x = 0;
+    var c = 0;
+    do {
+        if ((x = x + 1) < 5) {
+            continue;
+        }
+        c = c + 1;
+    } while (x < a25)
+    return c;
+}
+g(10);
+g("foo");
+
+FuzzIL program written to corpus/loops.fzil

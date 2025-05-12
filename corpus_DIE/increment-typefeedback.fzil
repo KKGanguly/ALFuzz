@@ -1,0 +1,23 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- UnaryOperation v1, '++'
+    Return v1
+EndPlainFunction
+v3 <- LoadFloat '0.5'
+v4 <- CallFunction v0, [v3]
+v5 <- LoadFloat '0.5'
+v6 <- CallFunction v0, [v5]
+v7 <- LoadFloat '0.5'
+v8 <- CallFunction v0, [v7]
+v9 <- CallFunction v0, []
+
+
+function f(a1) {
+    a1++;
+    return a1;
+}
+f(0.5);
+f(0.5);
+f(0.5);
+f();
+
+FuzzIL program written to corpus/increment-typefeedback.fzil

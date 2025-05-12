@@ -1,0 +1,79 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    v4 <- CallFunction v2, [v3]
+    v5 <- CallFunction v2, [v3]
+    v6 <- CallFunction v2, [v3]
+EndPlainFunction
+v7 <- BeginPlainFunction -> v8
+    BeginForInLoop v8 -> v9
+        BeginForLoopInitializer
+            v10 <- LoadInteger '0'
+        BeginForLoopCondition -> v11
+            v12 <- LoadInteger '2'
+            v13 <- Compare v11, '<', v12
+        BeginForLoopAfterthought v13 -> v14
+            v15 <- UnaryOperation v14, '++'
+        BeginForLoopBody -> v16
+        EndForLoop
+    EndForInLoop
+    v17 <- LoadInteger '5'
+    Return v17
+EndPlainFunction
+v18 <- LoadInteger '5'
+v19 <- LoadInteger '20'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v19
+v20 <- EndObjectLiteral
+v21 <- CallFunction v0, [v18, v7, v20]
+v22 <- BeginPlainFunction -> v23
+    v24 <- LoadInteger '0'
+    v25 <- CreateNamedVariable 'sum', 'var', v24
+    BeginForInLoop v23 -> v26
+        BeginForLoopInitializer
+            v27 <- LoadInteger '0'
+        BeginForLoopCondition -> v28
+            v29 <- LoadInteger '2'
+            v30 <- Compare v28, '<', v29
+        BeginForLoopAfterthought v30 -> v31
+            v32 <- UnaryOperation v31, '++'
+        BeginForLoopBody -> v33
+            v34 <- GetComputedProperty v23, v26
+            Update v25, '+', v34
+        EndForLoop
+    EndForInLoop
+    Return v25
+EndPlainFunction
+v35 <- LoadInteger '62'
+v36 <- LoadInteger '20'
+v37 <- LoadInteger '11'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v36
+    ObjectLiteralAddProperty `y`, v37
+v38 <- EndObjectLiteral
+v39 <- CallFunction v0, [v35, v22, v38]
+
+
+function test(a1, a2, a3) {
+    a2(a3);
+    a2(a3);
+    a2(a3);
+}
+function foo(a8) {
+    for (const v9 in a8) {
+        for (let i11 = 0; i11 < 2; i11++) {
+        }
+    }
+    return 5;
+}
+test(5, foo, { x: 20 });
+function bar(a23) {
+    var sum = 0;
+    for (const v26 in a23) {
+        for (let i28 = 0; i28 < 2; i28++) {
+            sum += a23[v26];
+        }
+    }
+    return sum;
+}
+test(62, bar, { x: 20, y: 11 });
+
+FuzzIL program written to corpus/osr-forin-nested.fzil

@@ -1,0 +1,80 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginPlainFunction -> v3, v4, v5
+        SetComputedProperty v3, v4, v5
+        v6 <- GetComputedProperty v3, v4
+        v7 <- GetComputedProperty v3, v4
+    EndPlainFunction
+    Return v2
+EndPlainFunction
+v8 <- LoadInteger '5'
+v9 <- CallFunction v0, [v8]
+v10 <- CreateNamedVariable 'f', 'none'
+Reassign v10, v9
+v11 <- LoadInteger '0'
+v12 <- LoadInteger '0'
+v13 <- LoadInteger '0'
+v14 <- CreateArray [v11, v12, v13]
+v15 <- CreateNamedVariable 'a', 'none'
+Reassign v15, v14
+v16 <- CreateNamedVariable 'a', 'none'
+v17 <- LoadInteger '0'
+v18 <- LoadInteger '5'
+v19 <- CreateNamedVariable 'f', 'none'
+v20 <- CallFunction v19, [v16, v17, v18]
+v21 <- LoadInteger '0'
+v22 <- LoadInteger '0'
+v23 <- LoadInteger '0'
+v24 <- CreateArray [v21, v22, v23]
+Reassign v16, v24
+v25 <- LoadInteger '1'
+v26 <- LoadInteger '5'
+v27 <- CallFunction v19, [v16, v25, v26]
+v28 <- LoadInteger '0'
+v29 <- LoadInteger '0'
+v30 <- LoadInteger '0'
+v31 <- CreateArray [v28, v29, v30]
+Reassign v16, v31
+v32 <- LoadInteger '2'
+v33 <- LoadInteger '5'
+v34 <- CallFunction v19, [v16, v32, v33]
+v35 <- LoadFloat '5.5'
+v36 <- CallFunction v0, [v35]
+Reassign v19, v36
+v37 <- CreateNamedVariable 'Float32Array', 'none'
+v38 <- LoadInteger '5'
+v39 <- Construct v37, [v38]
+Reassign v16, v39
+v40 <- LoadInteger '0'
+v41 <- LoadFloat '5.5'
+v42 <- CallFunction v19, [v16, v40, v41]
+v43 <- LoadInteger '1'
+v44 <- LoadFloat '5.5'
+v45 <- CallFunction v19, [v16, v43, v44]
+v46 <- LoadInteger '2'
+v47 <- LoadFloat '5.5'
+v48 <- CallFunction v19, [v16, v46, v47]
+
+
+function store_generator(a1) {
+    function f2(a3, a4, a5) {
+        a3[a4] = a5;
+        a3[a4];
+        a3[a4];
+    }
+    return f2;
+}
+f = store_generator(5);
+a = [0,0,0];
+f(a, 0, 5);
+a = [0,0,0];
+f(a, 1, 5);
+a = [0,0,0];
+f(a, 2, 5);
+f = store_generator(5.5);
+const v39 = new Float32Array(5);
+a = v39;
+f(a, 0, 5.5);
+f(a, 1, 5.5);
+f(a, 2, 5.5);
+
+FuzzIL program written to corpus/external-and-normal-array-polymorphism.fzil

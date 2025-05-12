@@ -1,0 +1,62 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '1'
+    v3 <- LoadInteger '2'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v2
+        ObjectLiteralAddProperty `b`, v3
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'o1', 'var', v4
+    v6 <- LoadInteger '1'
+    v7 <- LoadInteger '3'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v6
+        ObjectLiteralAddProperty `b`, v7
+    v8 <- EndObjectLiteral
+    v9 <- CreateNamedVariable 'o2', 'var', v8
+    v10 <- GetProperty v9, 'b'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v10
+    v11 <- EndObjectLiteral
+    v12 <- CreateNamedVariable 'o3', 'var', v11
+    v13 <- LoadString ''
+    SetProperty v12, 'a', v13
+    SetProperty v9, 'a', v5
+    v14 <- LoadInteger '4'
+    v15 <- Compare v1, '==', v14
+    BeginIf v15
+        Return v12
+    EndIf
+EndPlainFunction
+BeginForLoopInitializer
+    v16 <- LoadInteger '0'
+BeginForLoopCondition -> v17
+    v18 <- LoadInteger '100'
+    v19 <- Compare v17, '<', v18
+BeginForLoopAfterthought v19 -> v20
+    v21 <- UnaryOperation '++', v20
+BeginForLoopBody -> v22
+    v23 <- LoadInteger '5'
+    v24 <- BinaryOperation v22, '%', v23
+    v25 <- CallFunction v0, [v24]
+EndForLoop
+v26 <- LoadBoolean 'false'
+v27 <- CallFunction v0, [v26]
+
+
+function f(a1) {
+    var o1 = { a: 1, b: 2 };
+    var o2 = { a: 1, b: 3 };
+    const v10 = o2.b;
+    var o3 = { a: v10 };
+    o3.a = "";
+    o2.a = o1;
+    if (a1 == 4) {
+        return o3;
+    }
+}
+for (let i17 = 0; i17 < 100; ++i17) {
+    f(i17 % 5);
+}
+f(false);
+
+FuzzIL program written to corpus/escape-analysis-15.fzil

@@ -1,0 +1,30 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadString ''
+SetElement v1, '8192', v2
+v3 <- LoadString ''
+v4 <- CreateNamedVariable 'uc16', 'var', v3
+v5 <- CreateNamedVariable 'test', 'var', v4
+BeginForLoopInitializer
+    v6 <- LoadInteger '0'
+BeginForLoopCondition -> v7
+    v8 <- LoadInteger '13'
+    v9 <- Compare v7, '<', v8
+BeginForLoopAfterthought v9 -> v10
+    v11 <- UnaryOperation v10, '++'
+BeginForLoopBody -> v12
+    Update v5, '+', v5
+EndForLoop
+v13 <- CallMethod v1, 'join', [v4]
+
+
+var a = [];
+a[8192] = "";
+var uc16 = "";
+var test = uc16;
+for (let i7 = 0; i7 < 13; i7++) {
+    test += test;
+}
+a.join(uc16);
+
+FuzzIL program written to corpus/regress-103259.fzil

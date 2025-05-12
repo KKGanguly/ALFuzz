@@ -1,0 +1,18 @@
+v0 <- LoadString '囧'
+v1 <- LoadString 'æ'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'o', 'var', v2
+v4 <- LoadString '["囧","æ"]'
+v5 <- CreateNamedVariable 'JSON', 'none'
+v6 <- CallMethod v5, 'stringify', [v3]
+v7 <- LoadString '["囧","æ"]'
+v8 <- LoadNull
+v9 <- LoadInteger '0'
+v10 <- CallMethod v5, 'stringify', [v3, v8, v9]
+
+
+var o = ["囧","æ"];
+JSON.stringify(o);
+JSON.stringify(o, null, 0);
+
+FuzzIL program written to corpus/regress-2570.fzil

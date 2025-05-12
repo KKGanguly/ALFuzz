@@ -1,0 +1,70 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadThis
+    SetProperty v2, 'value', v1
+EndPlainFunction
+v3 <- GetProperty v0, 'prototype'
+v4 <- LoadString 'count'
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadThis
+    v7 <- GetProperty v6, 'value'
+    Return v7
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9
+    v10 <- LoadThis
+    SetProperty v10, 'value', v9
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v5
+    ObjectLiteralAddProperty `set`, v8
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable 'Object', 'none'
+v13 <- CallMethod v12, 'defineProperty', [v3, v4, v11]
+v14 <- Construct v0, []
+v15 <- CreateNamedVariable 'obj', 'var', v14
+v16 <- BeginPlainFunction -> 
+    v17 <- GetProperty v15, 'count'
+    v18 <- UnaryOperation v17, '++'
+    v19 <- GetProperty v15, 'count'
+    Return v19
+EndPlainFunction
+v20 <- LoadInteger '1'
+v21 <- CallFunction v16, []
+v22 <- LoadInteger '2'
+v23 <- CallFunction v16, []
+v24 <- LoadInteger '3'
+v25 <- CallFunction v16, []
+v26 <- LoadInteger '4'
+v27 <- CallFunction v16, []
+v28 <- LoadInteger '5'
+v29 <- CallFunction v16, []
+v30 <- LoadInteger '6'
+v31 <- CallFunction v16, []
+
+
+function Counter() {
+    this.value = 0;
+}
+const v3 = Counter.prototype;
+function f5() {
+    return this.value;
+}
+function f8(a9) {
+    this.value = a9;
+}
+Object.defineProperty(v3, "count", { get: f5, set: f8 });
+const v14 = new Counter();
+var obj = v14;
+function bummer() {
+    let v17 = obj.count;
+    v17++;
+    return obj.count;
+}
+bummer();
+bummer();
+bummer();
+bummer();
+bummer();
+bummer();
+
+FuzzIL program written to corpus/regress-crbug-306851.fzil

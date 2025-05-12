@@ -1,0 +1,40 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetComputedProperty v1, v2
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v6 <- EndObjectLiteral
+    BeginObjectLiteral
+    v7 <- EndObjectLiteral
+    v8 <- Construct v5, [v6, v7]
+    v9 <- LoadUndefined
+    v10 <- CallFunction v0, [v8, v9]
+    Return v10
+EndPlainFunction
+v11 <- CallFunction v4, []
+v12 <- CallFunction v4, []
+v13 <- LoadInteger '11'
+v14 <- LoadInteger '22'
+v15 <- LoadInteger '33'
+v16 <- CreateArray [v13, v14, v15]
+v17 <- LoadInteger '0'
+v18 <- CallFunction v0, [v16, v17]
+v19 <- CallFunction v4, []
+
+
+function load(a1, a2) {
+    return a1[a2];
+}
+function f() {
+    const v6 = {};
+    const v8 = new Proxy(v6, {});
+    return load(v8, undefined);
+}
+f();
+f();
+load([11,22,33], 0);
+f();
+
+FuzzIL program written to corpus/regress-crbug-603463.fzil

@@ -1,0 +1,26 @@
+v0 <- LoadNull
+BeginObjectLiteral
+    ObjectLiteralAddElement `770000`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- GetProperty v2, 'prototype'
+SetProperty v3, '__proto__', v1
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadFloat '1.2'
+    v6 <- CreateArray [v5]
+    BeginForInLoop v6 -> v7
+    EndForInLoop
+EndPlainFunction
+v8 <- CallFunction v4, []
+
+
+const v1 = { 770000: null };
+const t1 = Array.prototype;
+t1.__proto__ = v1;
+function continueWithinLoop() {
+    for (const v7 in [1.2]) {
+    }
+}
+continueWithinLoop();
+
+FuzzIL program written to corpus/regress-119925.fzil

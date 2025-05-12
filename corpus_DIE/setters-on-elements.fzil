@@ -1,0 +1,417 @@
+v0 <- LoadBoolean 'false'
+v1 <- CreateNamedVariable 'standalone', 'var', v0
+BeginIf v1
+    v2 <- BeginPlainFunction -> v3
+        v4 <- LoadBoolean 'true'
+        v5 <- Compare v3, '!=', v4
+        BeginIf v5
+            v6 <- LoadString 'FAILURE'
+            v7 <- CreateNamedVariable 'print', 'none'
+            v8 <- CallFunction v7, [v6]
+        EndIf
+    EndPlainFunction
+    v9 <- CreateNamedVariable 'assertTrue', 'none'
+    Reassign v9, v2
+    v10 <- BeginPlainFunction -> v11
+        v12 <- LoadBoolean 'false'
+        v13 <- Compare v11, '!=', v12
+        BeginIf v13
+            v14 <- LoadString 'FAILURE'
+            v15 <- CreateNamedVariable 'print', 'none'
+            v16 <- CallFunction v15, [v14]
+        EndIf
+    EndPlainFunction
+    v17 <- CreateNamedVariable 'assertFalse', 'none'
+    Reassign v17, v10
+    v18 <- BeginPlainFunction -> v19, v20
+        v21 <- Compare v19, '!==', v20
+        BeginIf v21
+            v22 <- LoadString 'FAILURE'
+            v23 <- CreateNamedVariable 'print', 'none'
+            v24 <- CallFunction v23, [v22]
+        EndIf
+    EndPlainFunction
+    v25 <- CreateNamedVariable 'assertEquals', 'none'
+    Reassign v25, v18
+    v26 <- BeginPlainFunction -> v27
+    EndPlainFunction
+    v28 <- CreateNamedVariable 'empty_func', 'none'
+    Reassign v28, v26
+    v29 <- CreateNamedVariable 'empty_func', 'none'
+    v30 <- CreateNamedVariable 'assertUnoptimized', 'none'
+    Reassign v30, v29
+    v31 <- CreateNamedVariable 'assertOptimized', 'none'
+    Reassign v31, v29
+    v32 <- CreateNamedVariable 'optimize', 'none'
+    Reassign v32, v29
+    v33 <- CreateNamedVariable 'clearFunctionTypeFeedback', 'none'
+    Reassign v33, v29
+    v34 <- CreateNamedVariable 'deoptimizeFunction', 'none'
+    Reassign v34, v29
+BeginElse
+    v35 <- BeginPlainFunction -> v36
+    EndPlainFunction
+    v37 <- CreateNamedVariable 'optimize', 'none'
+    Reassign v37, v35
+    v38 <- BeginPlainFunction -> v39
+    EndPlainFunction
+    v40 <- CreateNamedVariable 'clearFunctionTypeFeedback', 'none'
+    Reassign v40, v38
+    v41 <- BeginPlainFunction -> v42
+    EndPlainFunction
+    v43 <- CreateNamedVariable 'deoptimizeFunction', 'none'
+    Reassign v43, v41
+EndIf
+v44 <- BeginPlainFunction -> v45, v46, v47
+    v48 <- LoadInteger '0'
+    v49 <- CreateNamedVariable 'calls', 'var', v48
+    v50 <- BeginPlainFunction -> v51
+        SetComputedProperty v51, v46, v47
+    EndPlainFunction
+    v52 <- CreateNamedVariable 'foo', 'none'
+    Reassign v52, v50
+    v53 <- CallFunction v45, []
+    v54 <- CreateNamedVariable 'a', 'var', v53
+    v55 <- CreateArray []
+    v56 <- CreateNamedVariable 'ap', 'var', v55
+    v57 <- BeginPlainFunction -> 
+        v58 <- UnaryOperation v49, '++'
+    EndPlainFunction
+    v59 <- CallMethod v56, '__defineSetter__', [v46, v57]
+    v60 <- CreateNamedVariable 'foo', 'none'
+    v61 <- CallFunction v60, [v54]
+    v62 <- CallFunction v60, [v54]
+    v63 <- CallFunction v60, [v54]
+    v64 <- DeleteComputedProperty v54, v46
+    v65 <- LoadInteger '0'
+    SetProperty v54, '__proto__', v56
+    v66 <- CallFunction v60, [v54]
+    v67 <- LoadInteger '1'
+    v68 <- CreateNamedVariable 'optimize', 'none'
+    v69 <- CallFunction v68, [v60]
+    v70 <- CallFunction v60, [v54]
+    v71 <- LoadInteger '2'
+    v72 <- CreateNamedVariable 'clearFunctionTypeFeedback', 'none'
+    v73 <- CallFunction v72, [v60]
+    v74 <- CreateNamedVariable 'deoptimizeFunction', 'none'
+    v75 <- CallFunction v74, [v60]
+    v76 <- CallFunction v72, [v60]
+    v77 <- LoadInteger '0'
+    Reassign v49, v77
+    v78 <- CallFunction v45, []
+    Reassign v54, v78
+    v79 <- CreateArray []
+    v80 <- CreateNamedVariable 'apap', 'var', v79
+    SetProperty v54, '__proto__', v80
+    v81 <- CallFunction v60, [v54]
+    v82 <- CallFunction v60, [v54]
+    v83 <- CallFunction v60, [v54]
+    v84 <- DeleteComputedProperty v54, v46
+    v85 <- BeginPlainFunction -> 
+        v86 <- UnaryOperation v49, '++'
+    EndPlainFunction
+    v87 <- CallMethod v80, '__defineSetter__', [v46, v85]
+    v88 <- CallFunction v60, [v54]
+    v89 <- CallFunction v60, [v54]
+    v90 <- CallFunction v60, [v54]
+    v91 <- LoadInteger '3'
+    v92 <- CallFunction v72, [v60]
+    v93 <- CallFunction v74, [v60]
+    v94 <- CallFunction v72, [v60]
+    v95 <- LoadInteger '0'
+    Reassign v49, v95
+    v96 <- CallFunction v45, []
+    Reassign v54, v96
+    v97 <- CreateArray []
+    v98 <- CreateNamedVariable 'ap2', 'var', v97
+    SetProperty v54, '__proto__', v98
+    v99 <- CallFunction v60, [v54]
+    v100 <- CallFunction v60, [v54]
+    v101 <- CallFunction v60, [v54]
+    v102 <- DeleteComputedProperty v54, v46
+    v103 <- LoadInteger '0'
+    SetProperty v98, '__proto__', v56
+    v104 <- CallFunction v60, [v54]
+    v105 <- CallFunction v60, [v54]
+    v106 <- CallFunction v60, [v54]
+    v107 <- LoadInteger '3'
+    v108 <- CallFunction v72, [v60]
+    v109 <- CallFunction v74, [v60]
+    v110 <- CallFunction v72, [v60]
+    v111 <- LoadInteger '0'
+    Reassign v49, v111
+    v112 <- CallFunction v45, []
+    Reassign v54, v112
+    v113 <- CreateArray []
+    Reassign v98, v113
+    SetProperty v54, '__proto__', v98
+    v114 <- CallFunction v60, [v54]
+    v115 <- CallFunction v60, [v54]
+    v116 <- CallFunction v60, [v54]
+    v117 <- CallFunction v68, [v60]
+    v118 <- CallFunction v60, [v54]
+    v119 <- DeleteComputedProperty v54, v46
+    SetProperty v98, '__proto__', v56
+    v120 <- CallFunction v60, [v54]
+    v121 <- LoadInteger '1'
+    v122 <- CallFunction v72, [v60]
+    v123 <- LoadInteger '0'
+    Reassign v49, v123
+    v124 <- CallFunction v45, []
+    Reassign v54, v124
+    SetProperty v54, '__proto__', v98
+    v125 <- BeginPlainFunction -> v126
+        v127 <- LoadInteger '1'
+        v128 <- BinaryOperation v46, '+', v127
+        SetComputedProperty v126, v128, v47
+    EndPlainFunction
+    v129 <- CreateNamedVariable 'bar', 'none'
+    Reassign v129, v125
+    v130 <- CreateNamedVariable 'bar', 'none'
+    v131 <- CallFunction v130, [v54]
+    v132 <- CallFunction v130, [v54]
+    v133 <- CallFunction v130, [v54]
+    v134 <- CallFunction v68, [v130]
+    v135 <- CallFunction v130, [v54]
+    v136 <- LoadInteger '0'
+    v137 <- LoadInteger '1'
+    v138 <- BinaryOperation v46, '+', v137
+    v139 <- DeleteComputedProperty v54, v138
+    v140 <- LoadInteger '1'
+    v141 <- BinaryOperation v46, '+', v140
+    v142 <- BeginPlainFunction -> 
+        v143 <- UnaryOperation v49, '++'
+    EndPlainFunction
+    v144 <- CallMethod v98, '__defineSetter__', [v141, v142]
+    v145 <- CallFunction v130, [v54]
+    v146 <- LoadInteger '1'
+EndPlainFunction
+v147 <- BeginPlainFunction -> 
+    v148 <- LoadUndefined
+    v149 <- LoadInteger '5'
+    v150 <- CreateArray [v148, v148, v148, v148, v148, v148, v149]
+    Return v150
+EndPlainFunction
+v151 <- CreateNamedVariable 'create_func_smi', 'none'
+Reassign v151, v147
+v152 <- BeginPlainFunction -> 
+    v153 <- LoadInteger '0'
+    v154 <- LoadUndefined
+    v155 <- LoadFloat '3.2'
+    v156 <- LoadFloat '5.5'
+    v157 <- CreateArray [v153, v154, v155, v154, v154, v154, v156]
+    Return v157
+EndPlainFunction
+v158 <- CreateNamedVariable 'create_func_double', 'none'
+Reassign v158, v152
+v159 <- BeginPlainFunction -> 
+    v160 <- LoadUndefined
+    v161 <- LoadBoolean 'true'
+    v162 <- CreateArray [v160, v160, v160, v160, v160, v160, v161]
+    Return v162
+EndPlainFunction
+v163 <- CreateNamedVariable 'create_func_fast', 'none'
+Reassign v163, v159
+v164 <- BeginPlainFunction -> 
+    v165 <- CreateArray []
+    v166 <- CreateNamedVariable 'a', 'var', v165
+    v167 <- LoadInteger '100000'
+    SetProperty v166, 'length', v167
+    Return v166
+EndPlainFunction
+v168 <- CreateNamedVariable 'create_func_dictionary', 'none'
+Reassign v168, v164
+v169 <- CreateNamedVariable 'create_func_smi', 'none'
+v170 <- CreateNamedVariable 'create_func_double', 'none'
+v171 <- CreateNamedVariable 'create_func_fast', 'none'
+v172 <- CreateNamedVariable 'create_func_dictionary', 'none'
+v173 <- CreateArray [v169, v170, v171, v172]
+v174 <- CreateNamedVariable 'cf', 'var', v173
+v175 <- LoadInteger '3'
+v176 <- LoadFloat '3.5'
+v177 <- LoadBoolean 'true'
+v178 <- CreateArray [v175, v176, v177]
+v179 <- CreateNamedVariable 'values', 'var', v178
+BeginForLoopInitializer
+    v180 <- LoadInteger '0'
+BeginForLoopCondition -> v181
+    v182 <- GetProperty v174, 'length'
+    v183 <- Compare v181, '<', v182
+BeginForLoopAfterthought v183 -> v184
+    v185 <- UnaryOperation v184, '++'
+BeginForLoopBody -> v186
+    BeginForLoopInitializer
+        v187 <- LoadInteger '0'
+    BeginForLoopCondition -> v188
+        v189 <- GetProperty v179, 'length'
+        v190 <- Compare v188, '<', v189
+    BeginForLoopAfterthought v190 -> v191
+        v192 <- UnaryOperation v191, '++'
+    BeginForLoopBody -> v193
+        v194 <- GetComputedProperty v174, v186
+        v195 <- LoadInteger '0'
+        v196 <- GetComputedProperty v179, v193
+        v197 <- CallFunction v44, [v194, v195, v196]
+        v198 <- GetComputedProperty v174, v186
+        v199 <- LoadInteger '1'
+        v200 <- GetComputedProperty v179, v193
+        v201 <- CallFunction v44, [v198, v199, v200]
+    EndForLoop
+EndForLoop
+
+
+var standalone = false;
+if (standalone) {
+    function f2(a3) {
+        if (a3 != true) {
+            print("FAILURE");
+        }
+    }
+    assertTrue = f2;
+    function f10(a11) {
+        if (a11 != false) {
+            print("FAILURE");
+        }
+    }
+    assertFalse = f10;
+    function f18(a19, a20) {
+        if (a19 !== a20) {
+            print("FAILURE");
+        }
+    }
+    assertEquals = f18;
+    function f26(a27) {
+    }
+    empty_func = f26;
+    assertUnoptimized = empty_func;
+    assertOptimized = empty_func;
+    optimize = empty_func;
+    clearFunctionTypeFeedback = empty_func;
+    deoptimizeFunction = empty_func;
+} else {
+    function f35(a36) {
+    }
+    optimize = f35;
+    function f38(a39) {
+    }
+    clearFunctionTypeFeedback = f38;
+    function f41(a42) {
+    }
+    deoptimizeFunction = f41;
+}
+function base_setter_test(a45, a46, a47) {
+    var calls = 0;
+    function f50(a51) {
+        a51[a46] = a47;
+    }
+    foo = f50;
+    var a = a45();
+    var ap = [];
+    function f57() {
+        calls++;
+    }
+    ap.__defineSetter__(a46, f57);
+    foo(a);
+    foo(a);
+    foo(a);
+    delete a[a46];
+    a.__proto__ = ap;
+    foo(a);
+    optimize(foo);
+    foo(a);
+    clearFunctionTypeFeedback(foo);
+    deoptimizeFunction(foo);
+    clearFunctionTypeFeedback(foo);
+    calls = 0;
+    a = a45();
+    var apap = [];
+    a.__proto__ = apap;
+    foo(a);
+    foo(a);
+    foo(a);
+    delete a[a46];
+    function f85() {
+        calls++;
+    }
+    apap.__defineSetter__(a46, f85);
+    foo(a);
+    foo(a);
+    foo(a);
+    clearFunctionTypeFeedback(foo);
+    deoptimizeFunction(foo);
+    clearFunctionTypeFeedback(foo);
+    calls = 0;
+    a = a45();
+    var ap2 = [];
+    a.__proto__ = ap2;
+    foo(a);
+    foo(a);
+    foo(a);
+    delete a[a46];
+    ap2.__proto__ = ap;
+    foo(a);
+    foo(a);
+    foo(a);
+    clearFunctionTypeFeedback(foo);
+    deoptimizeFunction(foo);
+    clearFunctionTypeFeedback(foo);
+    calls = 0;
+    a = a45();
+    a.__proto__ = ap2 = [];
+    foo(a);
+    foo(a);
+    foo(a);
+    optimize(foo);
+    foo(a);
+    delete a[a46];
+    ap2.__proto__ = ap;
+    foo(a);
+    clearFunctionTypeFeedback(foo);
+    calls = 0;
+    a = a45();
+    a.__proto__ = ap2;
+    function f125(a126) {
+        a126[a46 + 1] = a47;
+    }
+    bar = f125;
+    bar(a);
+    bar(a);
+    bar(a);
+    optimize(bar);
+    bar(a);
+    delete a[a46 + 1];
+    const v141 = a46 + 1;
+    function f142() {
+        calls++;
+    }
+    ap2.__defineSetter__(v141, f142);
+    bar(a);
+}
+function f147() {
+    return [,,,,,,5];
+}
+create_func_smi = f147;
+function f152() {
+    return [0,,3.2,,,,5.5];
+}
+create_func_double = f152;
+function f159() {
+    return [,,,,,,true];
+}
+create_func_fast = f159;
+function f164() {
+    var a = [];
+    a.length = 100000;
+    return a;
+}
+create_func_dictionary = f164;
+var cf = [create_func_smi,create_func_double,create_func_fast,create_func_dictionary];
+var values = [3,3.5,true];
+for (let i181 = 0; i181 < cf.length; i181++) {
+    for (let i188 = 0; i188 < values.length; i188++) {
+        base_setter_test(cf[i181], 0, values[i188]);
+        base_setter_test(cf[i181], 1, values[i188]);
+    }
+}
+
+FuzzIL program written to corpus/setters-on-elements.fzil

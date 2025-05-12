@@ -1,0 +1,53 @@
+BeginObjectLiteral
+    BeginObjectLiteralGetter `p` -> v0
+        v1 <- LoadInteger '42'
+        Return v1
+    EndObjectLiteralGetter
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'obj', 'var', v2
+v4 <- LoadString 'p'
+v5 <- CreateNamedVariable 'Object', 'none'
+v6 <- CallMethod v5, 'getOwnPropertyDescriptor', [v3, v4]
+v7 <- CreateNamedVariable 'desc', 'var', v6
+v8 <- GetProperty v7, 'get'
+v9 <- CreateNamedVariable 'getter', 'var', v8
+v10 <- LoadString 'p'
+v11 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `enumerable`, v11
+v12 <- EndObjectLiteral
+v13 <- CallMethod v5, 'defineProperty', [v3, v10, v12]
+v14 <- GetProperty v3, 'p'
+v15 <- LoadInteger '42'
+v16 <- LoadString 'p'
+v17 <- CallMethod v5, 'getOwnPropertyDescriptor', [v3, v16]
+Reassign v7, v17
+v18 <- GetProperty v7, 'enumerable'
+v19 <- GetProperty v7, 'configurable'
+v20 <- GetProperty v7, 'get'
+v21 <- GetProperty v7, 'set'
+v22 <- LoadUndefined
+v23 <- LoadString 'value'
+v24 <- CallMethod v7, 'hasOwnProperty', [v23]
+v25 <- LoadString 'writable'
+v26 <- CallMethod v7, 'hasOwnProperty', [v25]
+
+
+const v2 = {
+    get p() {
+        return 42;
+    },
+};
+var obj = v2;
+var desc = Object.getOwnPropertyDescriptor(obj, "p");
+var getter = desc.get;
+Object.defineProperty(obj, "p", { enumerable: false });
+obj.p;
+(desc = Object.getOwnPropertyDescriptor(obj, "p")).enumerable;
+desc.configurable;
+desc.get;
+desc.set;
+desc.hasOwnProperty("value");
+desc.hasOwnProperty("writable");
+
+FuzzIL program written to corpus/regress-992.fzil

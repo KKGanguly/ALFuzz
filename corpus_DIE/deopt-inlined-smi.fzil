@@ -1,0 +1,94 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- UnaryOperation '~', v1
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '42'
+v4 <- CallFunction v0, [v3]
+v5 <- LoadInteger '12'
+v6 <- UnaryOperation '~', v5
+v7 <- LoadFloat '12.45'
+v8 <- CallFunction v0, [v7]
+v9 <- LoadInteger '42'
+v10 <- UnaryOperation '~', v9
+v11 <- LoadFloat '42.87'
+v12 <- CallFunction v0, [v11]
+v13 <- LoadInteger '1'
+v14 <- CreateNamedVariable 'a', 'var', v13
+v15 <- LoadInteger '2'
+v16 <- CreateNamedVariable 'b', 'var', v15
+v17 <- LoadInteger '4'
+v18 <- CreateNamedVariable 'c', 'var', v17
+v19 <- LoadInteger '8'
+v20 <- CreateNamedVariable 'd', 'var', v19
+v21 <- BeginPlainFunction -> 
+    v22 <- BinaryOperation v18, '|', v20
+    v23 <- BinaryOperation v16, '|', v22
+    v24 <- BinaryOperation v14, '|', v23
+    Return v24
+EndPlainFunction
+v25 <- CallFunction v21, []
+v26 <- LoadString '16'
+Reassign v18, v26
+v27 <- LoadInteger '1'
+v28 <- LoadInteger '2'
+v29 <- BinaryOperation v27, '|', v28
+v30 <- LoadInteger '16'
+v31 <- BinaryOperation v29, '|', v30
+v32 <- LoadInteger '8'
+v33 <- BinaryOperation v31, '|', v32
+v34 <- CallFunction v21, []
+v35 <- BeginPlainFunction -> 
+    v36 <- LoadInteger '1'
+    v37 <- BinaryOperation v36, '|', v14
+    Return v37
+EndPlainFunction
+v38 <- LoadString '2'
+Reassign v14, v38
+v39 <- CallFunction v35, []
+v40 <- LoadInteger '3'
+v41 <- CallFunction v35, []
+v42 <- BeginPlainFunction -> 
+    v43 <- LoadInteger '1'
+    v44 <- BinaryOperation v14, '|', v43
+    Return v44
+EndPlainFunction
+v45 <- LoadString '4'
+Reassign v14, v45
+v46 <- CallFunction v42, []
+v47 <- LoadInteger '5'
+v48 <- CallFunction v42, []
+
+
+function f(a1) {
+    return ~a1;
+}
+f(42);
+~12;
+f(12.45);
+~42;
+f(42.87);
+var a = 1;
+var b = 2;
+var c = 4;
+var d = 8;
+function g() {
+    return a | (b | (c | d));
+}
+g();
+c = "16";
+((1 | 2) | 16) | 8;
+g();
+function h() {
+    return 1 | a;
+}
+a = "2";
+h();
+h();
+function k() {
+    return a | 1;
+}
+a = "4";
+k();
+k();
+
+FuzzIL program written to corpus/deopt-inlined-smi.fzil

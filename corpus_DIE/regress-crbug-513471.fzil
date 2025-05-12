@@ -1,0 +1,15 @@
+v0 <- BeginGeneratorFunction -> 
+EndGeneratorFunction
+v1 <- CreateNamedVariable 'g', 'var', v0
+v2 <- CallFunction v1, []
+v3 <- CreateNamedVariable 'f', 'var', v2
+v4 <- CallMethod v3, 'next', []
+
+
+function* f0() {
+}
+var g = f0;
+var f = g();
+f.next();
+
+FuzzIL program written to corpus/regress-crbug-513471.fzil

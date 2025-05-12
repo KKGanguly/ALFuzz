@@ -1,0 +1,26 @@
+v0 <- LoadUndefined
+v1 <- LoadFloat '0.1'
+v2 <- CreateArray [v0, v1]
+v3 <- CreateNamedVariable 'arr', 'let', v2
+v4 <- LoadInteger '100'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `valueOf` -> v5
+        v6 <- LoadInteger '0'
+        SetProperty v3, 'length', v6
+    EndObjectLiteralMethod
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'Array', 'none'
+v9 <- GetProperty v8, 'prototype'
+v10 <- GetProperty v9, 'lastIndexOf'
+v11 <- CallMethod v10, 'call', [v3, v4, v7]
+
+
+let arr = [,0.1];
+const v7 = {
+    valueOf() {
+        arr.length = 0;
+    },
+};
+Array.prototype.lastIndexOf.call(arr, 100, v7);
+
+FuzzIL program written to corpus/regress-crbug-878845.fzil

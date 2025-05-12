@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadUndefined
+    v4 <- CreateNamedVariable 'f', 'var', v3
+    v5 <- LoadUndefined
+    v6 <- CreateNamedVariable 'g', 'var', v5
+    BeginForLoopInitializer
+        v7 <- GetProperty v1, 'length'
+        Reassign v4, v7
+    BeginForLoopCondition
+        v8 <- UnaryOperation v4, '--'
+    BeginForLoopAfterthought v8
+    BeginForLoopBody
+        v9 <- CallMethod v1, 'charCodeAt', [v4]
+        Reassign v6, v9
+    EndForLoop
+    Return v6
+EndPlainFunction
+v10 <- LoadString 'long string to make cons string 1'
+v11 <- CreateNamedVariable 's1', 'var', v10
+v12 <- LoadString 'long string to make cons string 2'
+v13 <- CreateNamedVariable 's2', 'var', v12
+v14 <- BinaryOperation v11, '+', v13
+v15 <- CallFunction v0, [v14]
+v16 <- CallFunction v0, [v11]
+v17 <- LoadString 'string for triggering osr in Cb'
+v18 <- CreateNamedVariable 's3', 'var', v17
+v19 <- BinaryOperation v18, '+', v18
+v20 <- CallFunction v0, [v19]
+v21 <- BinaryOperation v11, '+', v13
+v22 <- CallFunction v0, [v21]
+
+
+function Cb(a1, a2) {
+    var f;
+    var g;
+    for ((() => {
+            f = a1.length;
+        })();
+        f--;
+        ) {
+        g = a1.charCodeAt(f);
+    }
+    return g;
+}
+var s1 = "long string to make cons string 1";
+var s2 = "long string to make cons string 2";
+Cb(s1 + s2);
+Cb(s1);
+var s3 = "string for triggering osr in Cb";
+Cb(s3 + s3);
+Cb(s1 + s2);
+
+FuzzIL program written to corpus/regress-298269.fzil

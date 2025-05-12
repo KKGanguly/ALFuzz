@@ -1,0 +1,221 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- CreateNamedVariable 'undetectable', 'const', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- CreateNamedVariable 'a', 'const', v1
+    BeginObjectLiteral
+    v4 <- EndObjectLiteral
+    v5 <- CreateNamedVariable 'b', 'const', v4
+    v6 <- BeginPlainFunction -> 
+        v7 <- Compare v3, '==', v5
+        Return v7
+    EndPlainFunction
+    v8 <- CallFunction v6, []
+    v9 <- CallFunction v6, []
+    v10 <- CallFunction v6, []
+EndPlainFunction
+v11 <- CallFunction v2, []
+v12 <- BeginPlainFunction -> 
+    v13 <- CreateNamedVariable 'a', 'const', v1
+    v14 <- LoadNull
+    v15 <- CreateNamedVariable 'b', 'const', v14
+    v16 <- BeginPlainFunction -> 
+        v17 <- Compare v13, '==', v15
+        Return v17
+    EndPlainFunction
+    v18 <- CallFunction v16, []
+    v19 <- CallFunction v16, []
+    v20 <- CallFunction v16, []
+EndPlainFunction
+v21 <- CallFunction v12, []
+v22 <- BeginPlainFunction -> 
+    v23 <- LoadNull
+    v24 <- CreateNamedVariable 'a', 'const', v23
+    v25 <- CreateNamedVariable 'b', 'const', v1
+    v26 <- BeginPlainFunction -> 
+        v27 <- Compare v24, '==', v25
+        Return v27
+    EndPlainFunction
+    v28 <- CallFunction v26, []
+    v29 <- CallFunction v26, []
+    v30 <- CallFunction v26, []
+EndPlainFunction
+v31 <- CallFunction v22, []
+v32 <- BeginPlainFunction -> 
+    v33 <- CreateNamedVariable 'a', 'const', v1
+    v34 <- LoadUndefined
+    v35 <- CreateNamedVariable 'b', 'const', v34
+    v36 <- BeginPlainFunction -> 
+        v37 <- Compare v33, '==', v35
+        Return v37
+    EndPlainFunction
+    v38 <- CallFunction v36, []
+    v39 <- CallFunction v36, []
+    v40 <- CallFunction v36, []
+EndPlainFunction
+v41 <- CallFunction v32, []
+v42 <- BeginPlainFunction -> 
+    v43 <- LoadUndefined
+    v44 <- CreateNamedVariable 'a', 'const', v43
+    v45 <- CreateNamedVariable 'b', 'const', v1
+    v46 <- BeginPlainFunction -> 
+        v47 <- Compare v44, '==', v45
+        Return v47
+    EndPlainFunction
+    v48 <- CallFunction v46, []
+    v49 <- CallFunction v46, []
+    v50 <- CallFunction v46, []
+EndPlainFunction
+v51 <- CallFunction v42, []
+v52 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v53 <- EndObjectLiteral
+    v54 <- CreateNamedVariable 'a', 'const', v53
+    v55 <- CreateNamedVariable 'b', 'const', v1
+    v56 <- BeginPlainFunction -> v57
+        v58 <- Compare v57, '==', v55
+        Return v58
+    EndPlainFunction
+    v59 <- CallFunction v56, [v55]
+    v60 <- CallFunction v56, [v54]
+    v61 <- CallFunction v56, [v55]
+    v62 <- CallFunction v56, [v54]
+    v63 <- CallFunction v56, [v55]
+    v64 <- CallFunction v56, [v54]
+    v65 <- LoadInteger '1'
+    v66 <- CallFunction v56, [v65]
+    v67 <- CallFunction v56, []
+EndPlainFunction
+v68 <- CallFunction v52, []
+v69 <- BeginPlainFunction -> 
+    v70 <- CreateNamedVariable 'a', 'const', v1
+    BeginObjectLiteral
+    v71 <- EndObjectLiteral
+    v72 <- CreateNamedVariable 'b', 'const', v71
+    v73 <- BeginPlainFunction -> v74, v75
+        v76 <- Compare v74, '==', v75
+        Return v76
+    EndPlainFunction
+    v77 <- CallFunction v73, [v72, v72]
+    v78 <- CallFunction v73, [v70, v72]
+    v79 <- CallFunction v73, [v70, v70]
+    v80 <- CallFunction v73, [v72, v70]
+    v81 <- LoadNull
+    v82 <- CallFunction v73, [v70, v81]
+    v83 <- LoadNull
+    v84 <- CallFunction v73, [v72, v83]
+    v85 <- CallFunction v73, [v72, v72]
+    v86 <- CallFunction v73, [v70, v72]
+    v87 <- CallFunction v73, [v70, v70]
+    v88 <- CallFunction v73, [v72, v70]
+    v89 <- LoadNull
+    v90 <- CallFunction v73, [v70, v89]
+    v91 <- LoadNull
+    v92 <- CallFunction v73, [v72, v91]
+    v93 <- CallFunction v73, []
+    v94 <- LoadInteger '1'
+    v95 <- CallFunction v73, [v94]
+    v96 <- CallFunction v73, []
+EndPlainFunction
+v97 <- CallFunction v69, []
+
+
+function f0() {
+}
+const undetectable = f0;
+function f2() {
+    const a = undetectable;
+    const b = {};
+    function foo() {
+        return a == b;
+    }
+    foo();
+    foo();
+    foo();
+}
+f2();
+function f12() {
+    const a = undetectable;
+    const b = null;
+    function foo() {
+        return a == b;
+    }
+    foo();
+    foo();
+    foo();
+}
+f12();
+function f22() {
+    const a = null;
+    const b = undetectable;
+    function foo() {
+        return a == b;
+    }
+    foo();
+    foo();
+    foo();
+}
+f22();
+function f32() {
+    const a = undetectable;
+    const b = undefined;
+    function foo() {
+        return a == b;
+    }
+    foo();
+    foo();
+    foo();
+}
+f32();
+function f42() {
+    const a = undefined;
+    const b = undetectable;
+    function foo() {
+        return a == b;
+    }
+    foo();
+    foo();
+    foo();
+}
+f42();
+function f52() {
+    const a = {};
+    const b = undetectable;
+    function foo(a57) {
+        return a57 == b;
+    }
+    foo(b);
+    foo(a);
+    foo(b);
+    foo(a);
+    foo(b);
+    foo(a);
+    foo(1);
+    foo();
+}
+f52();
+function f69() {
+    const a = undetectable;
+    const b = {};
+    function foo(a74, a75) {
+        return a74 == a75;
+    }
+    foo(b, b);
+    foo(a, b);
+    foo(a, a);
+    foo(b, a);
+    foo(a, null);
+    foo(b, null);
+    foo(b, b);
+    foo(a, b);
+    foo(a, a);
+    foo(b, a);
+    foo(a, null);
+    foo(b, null);
+    foo();
+    foo(1);
+    foo();
+}
+f69();
+
+FuzzIL program written to corpus/abstract-equal-undetectable.fzil

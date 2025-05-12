@@ -1,0 +1,87 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '65535'
+    v2 <- LoadInteger '1'
+    v3 <- BinaryOperation v1, '+', v2
+    v4 <- CreateNamedVariable 'non_smi_byte_length', 'var', v3
+    v5 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v6 <- Construct v5, [v4]
+    v7 <- CreateNamedVariable 'buffer', 'var', v6
+    v8 <- CreateNamedVariable 'Uint16Array', 'none'
+    v9 <- Construct v8, [v7]
+    v10 <- CreateNamedVariable 'arr', 'var', v9
+    v11 <- GetProperty v10, 'byteLength'
+    v12 <- LoadInteger '2'
+    v13 <- BinaryOperation v4, '/', v12
+    v14 <- GetProperty v10, 'length'
+    v15 <- CreateNamedVariable 'Uint32Array', 'none'
+    v16 <- Construct v15, [v7]
+    Reassign v10, v16
+    v17 <- GetProperty v10, 'byteLength'
+    v18 <- LoadInteger '4'
+    v19 <- BinaryOperation v4, '/', v18
+    v20 <- GetProperty v10, 'length'
+EndPlainFunction
+v21 <- CallFunction v0, []
+v22 <- BeginPlainFunction -> 
+    v23 <- LoadInteger '65535'
+    v24 <- LoadInteger '11'
+    v25 <- BinaryOperation v23, '+', v24
+    v26 <- CreateNamedVariable 'non_smi_byte_length', 'var', v25
+    v27 <- CreateNamedVariable 'ArrayBuffer', 'none'
+    v28 <- Construct v27, [v26]
+    v29 <- CreateNamedVariable 'buffer', 'var', v28
+    v30 <- CreateNamedVariable 'Uint16Array', 'none'
+    v31 <- Construct v30, [v29]
+    v32 <- CreateNamedVariable 'whole', 'var', v31
+    v33 <- GetProperty v32, 'byteLength'
+    v34 <- LoadInteger '2'
+    v35 <- BinaryOperation v26, '/', v34
+    v36 <- GetProperty v32, 'length'
+    v37 <- LoadInteger '10'
+    v38 <- BinaryOperation v26, '-', v37
+    v39 <- LoadInteger '5'
+    v40 <- Construct v30, [v29, v38, v39]
+    v41 <- CreateNamedVariable 'arr', 'var', v40
+    v42 <- GetProperty v41, 'buffer'
+    v43 <- GetProperty v42, 'byteLength'
+    v44 <- LoadInteger '10'
+    v45 <- GetProperty v41, 'byteLength'
+    v46 <- LoadInteger '5'
+    v47 <- GetProperty v41, 'length'
+EndPlainFunction
+v48 <- CallFunction v22, []
+
+
+function TestBufferByteLengthNonSmi() {
+    var non_smi_byte_length = 65535 + 1;
+    const v6 = new ArrayBuffer(non_smi_byte_length);
+    var buffer = v6;
+    const v9 = new Uint16Array(buffer);
+    var arr = v9;
+    arr.byteLength;
+    non_smi_byte_length / 2;
+    arr.length;
+    const v16 = new Uint32Array(buffer);
+    (arr = v16).byteLength;
+    non_smi_byte_length / 4;
+    arr.length;
+}
+TestBufferByteLengthNonSmi();
+function TestByteOffsetNonSmi() {
+    var non_smi_byte_length = 65535 + 11;
+    const v28 = new ArrayBuffer(non_smi_byte_length);
+    var buffer = v28;
+    const v31 = new Uint16Array(buffer);
+    var whole = v31;
+    whole.byteLength;
+    non_smi_byte_length / 2;
+    whole.length;
+    const v40 = new Uint16Array(buffer, non_smi_byte_length - 10, 5);
+    var arr = v40;
+    arr.buffer.byteLength;
+    arr.byteLength;
+    arr.length;
+}
+TestByteOffsetNonSmi();
+
+FuzzIL program written to corpus/typedarray-construct-offset-not-smi.fzil

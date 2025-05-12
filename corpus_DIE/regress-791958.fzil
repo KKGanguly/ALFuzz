@@ -1,0 +1,42 @@
+v0 <- CreateNamedVariable 'print', 'none'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `m`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'obj', 'none'
+Reassign v2, v1
+v3 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v4 <- LoadInteger '536870912'
+        v5 <- UnaryOperation '-', v4
+    BeginForLoopCondition -> v6
+        v7 <- LoadInteger '536870903'
+        v8 <- UnaryOperation '-', v7
+        v9 <- Compare v6, '!=', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation '++', v10
+    BeginForLoopBody -> v12
+        v13 <- UnaryOperation '-', v12
+        v14 <- LoadInteger '1000000'
+        v15 <- Compare v13, '>=', v14
+        v16 <- LoadInteger '1000000'
+        v17 <- BinaryOperation v12, '%', v16
+        v18 <- CreateNamedVariable 'y', 'none'
+        v19 <- TernaryOperation v15, v17, v18
+        v20 <- CreateNamedVariable 'obj', 'none'
+        v21 <- CallMethod v20, 'm', [v19]
+    EndForLoop
+EndPlainFunction
+v22 <- CallFunction v3, []
+v23 <- CallFunction v3, []
+
+
+obj = { m: print };
+function foo() {
+    for (let i6 = -536870912; i6 != -536870903; ++i6) {
+        obj.m(-i6 >= 1000000 ? i6 % 1000000 : y);
+    }
+}
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-791958.fzil

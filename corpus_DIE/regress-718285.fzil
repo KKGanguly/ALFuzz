@@ -1,0 +1,156 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Int32Array', 'none'
+    v3 <- LoadInteger '1'
+    v4 <- BinaryOperation v1, '+', v3
+    v5 <- Construct v2, [v4]
+    v6 <- CreateNamedVariable 'array', 'var', v5
+    BeginForLoopInitializer
+        v7 <- LoadInteger '0'
+    BeginForLoopCondition -> v8
+        v9 <- Compare v8, '<', v1
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation '++', v10
+    BeginForLoopBody -> v12
+        SetComputedProperty v6, v12, v12
+    EndForLoop
+    v13 <- Construct v2, [v6]
+    v14 <- CreateNamedVariable 'array2', 'var', v13
+    v15 <- CreateNamedVariable 'Uint8Array', 'none'
+    v16 <- GetProperty v6, 'buffer'
+    v17 <- LoadInteger '0'
+    v18 <- Construct v15, [v16, v17, v1]
+    v19 <- LoadInteger '1'
+    v20 <- CallMethod v14, 'set', [v18, v19]
+    Return v14
+EndPlainFunction
+v21 <- BeginPlainFunction -> v22
+    v23 <- CreateNamedVariable 'Int32Array', 'none'
+    v24 <- LoadInteger '1'
+    v25 <- BinaryOperation v22, '+', v24
+    v26 <- Construct v23, [v25]
+    v27 <- CreateNamedVariable 'array', 'var', v26
+    BeginForLoopInitializer
+        v28 <- LoadInteger '0'
+    BeginForLoopCondition -> v29
+        v30 <- Compare v29, '<', v22
+    BeginForLoopAfterthought v30 -> v31
+        v32 <- UnaryOperation '++', v31
+    BeginForLoopBody -> v33
+        SetComputedProperty v27, v33, v33
+    EndForLoop
+    v34 <- CreateNamedVariable 'Uint8Array', 'none'
+    v35 <- GetProperty v27, 'buffer'
+    v36 <- LoadInteger '0'
+    v37 <- Construct v34, [v35, v36, v22]
+    v38 <- LoadInteger '1'
+    v39 <- CallMethod v27, 'set', [v37, v38]
+    Return v27
+EndPlainFunction
+v40 <- BeginPlainFunction -> v41
+    v42 <- CreateNamedVariable 'Int32Array', 'none'
+    v43 <- LoadInteger '1'
+    v44 <- BinaryOperation v41, '+', v43
+    v45 <- Construct v42, [v44]
+    v46 <- CreateNamedVariable 'array', 'var', v45
+    BeginForLoopInitializer
+        v47 <- LoadInteger '0'
+    BeginForLoopCondition -> v48
+        v49 <- Compare v48, '<', v41
+    BeginForLoopAfterthought v49 -> v50
+        v51 <- UnaryOperation '++', v50
+    BeginForLoopBody -> v52
+        SetComputedProperty v46, v52, v52
+    EndForLoop
+    v53 <- Construct v42, [v46]
+    v54 <- CreateNamedVariable 'array2', 'var', v53
+    v55 <- CreateNamedVariable 'Uint8Array', 'none'
+    v56 <- GetProperty v46, 'buffer'
+    v57 <- LoadInteger '34'
+    v58 <- Construct v55, [v56, v57]
+    v59 <- LoadInteger '0'
+    v60 <- CallMethod v54, 'set', [v58, v59]
+    Return v54
+EndPlainFunction
+v61 <- BeginPlainFunction -> v62
+    v63 <- CreateNamedVariable 'Int32Array', 'none'
+    v64 <- LoadInteger '1'
+    v65 <- BinaryOperation v62, '+', v64
+    v66 <- Construct v63, [v65]
+    v67 <- CreateNamedVariable 'array', 'var', v66
+    BeginForLoopInitializer
+        v68 <- LoadInteger '0'
+    BeginForLoopCondition -> v69
+        v70 <- Compare v69, '<', v62
+    BeginForLoopAfterthought v70 -> v71
+        v72 <- UnaryOperation '++', v71
+    BeginForLoopBody -> v73
+        SetComputedProperty v67, v73, v73
+    EndForLoop
+    v74 <- CreateNamedVariable 'Uint8Array', 'none'
+    v75 <- GetProperty v67, 'buffer'
+    v76 <- LoadInteger '34'
+    v77 <- Construct v74, [v75, v76]
+    v78 <- LoadInteger '0'
+    v79 <- CallMethod v67, 'set', [v77, v78]
+    Return v67
+EndPlainFunction
+v80 <- LoadInteger '10'
+v81 <- CallFunction v21, [v80]
+v82 <- LoadInteger '10'
+v83 <- CallFunction v0, [v82]
+v84 <- LoadInteger '10'
+v85 <- CallFunction v61, [v84]
+v86 <- LoadInteger '10'
+v87 <- CallFunction v40, [v86]
+
+
+function foo_reference(a1) {
+    const v5 = new Int32Array(a1 + 1);
+    var array = v5;
+    for (let i8 = 0; i8 < a1; ++i8) {
+        array[i8] = i8;
+    }
+    const v13 = new Int32Array(array);
+    var array2 = v13;
+    const v18 = new Uint8Array(array.buffer, 0, a1);
+    array2.set(v18, 1);
+    return array2;
+}
+function foo(a22) {
+    const v26 = new Int32Array(a22 + 1);
+    var array = v26;
+    for (let i29 = 0; i29 < a22; ++i29) {
+        array[i29] = i29;
+    }
+    const v37 = new Uint8Array(array.buffer, 0, a22);
+    array.set(v37, 1);
+    return array;
+}
+function bar_reference(a41) {
+    const v45 = new Int32Array(a41 + 1);
+    var array = v45;
+    for (let i48 = 0; i48 < a41; ++i48) {
+        array[i48] = i48;
+    }
+    const v53 = new Int32Array(array);
+    var array2 = v53;
+    const v58 = new Uint8Array(array.buffer, 34);
+    array2.set(v58, 0);
+    return array2;
+}
+function bar(a62) {
+    const v66 = new Int32Array(a62 + 1);
+    var array = v66;
+    for (let i69 = 0; i69 < a62; ++i69) {
+        array[i69] = i69;
+    }
+    const v77 = new Uint8Array(array.buffer, 34);
+    array.set(v77, 0);
+    return array;
+}
+foo(10);
+foo_reference(10);
+bar(10);
+bar_reference(10);
+
+FuzzIL program written to corpus/regress-718285.fzil

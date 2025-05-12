@@ -1,0 +1,67 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'result', 'var', v1
+    v3 <- BeginPlainFunction -> v4, v5
+        BeginIf v5
+            v6 <- LoadInteger '1'
+            SetElement v4, '0', v6
+        EndIf
+    EndPlainFunction
+    v7 <- CreateNamedVariable 'proto_set_func', 'var', v3
+    v8 <- BeginPlainFunction -> v9
+        v10 <- LoadUndefined
+        v11 <- CreateArray [v10, v10]
+        v12 <- CreateNamedVariable 'b', 'var', v11
+        v13 <- GetProperty v12, '__proto__'
+        v14 <- CallFunction v7, [v13, v9]
+        v15 <- LoadInteger '0'
+        SetElement v12, '1', v15
+        v16 <- LoadInteger '2'
+        SetElement v12, '2', v16
+        v17 <- BeginPlainFunction -> v18, v19, v20
+            Update v2, '+', v18
+        EndPlainFunction
+        v21 <- CreateNamedVariable 'sum', 'var', v17
+        v22 <- CallMethod v12, 'forEach', [v21]
+    EndPlainFunction
+    v23 <- CreateNamedVariable 'f', 'var', v8
+    v24 <- CallFunction v23, []
+    v25 <- CallFunction v23, []
+    v26 <- CallFunction v23, []
+    v27 <- LoadBoolean 'true'
+    v28 <- CallFunction v23, [v27]
+    v29 <- CallFunction v23, []
+    v30 <- LoadInteger '12'
+EndPlainFunction
+v31 <- CallFunction v0, []
+
+
+function f0() {
+    var result = 0;
+    function f3(a4, a5) {
+        if (a5) {
+            a4[0] = 1;
+        }
+    }
+    var proto_set_func = f3;
+    function f8(a9) {
+        var b = [,,];
+        proto_set_func(b.__proto__, a9);
+        b[1] = 0;
+        b[2] = 2;
+        function f17(a18, a19, a20) {
+            result += a18;
+        }
+        var sum = f17;
+        b.forEach(sum);
+    }
+    var f = f8;
+    f();
+    f();
+    f();
+    f(true);
+    f();
+}
+f0();
+
+FuzzIL program written to corpus/optimized-foreach-holey-2.fzil

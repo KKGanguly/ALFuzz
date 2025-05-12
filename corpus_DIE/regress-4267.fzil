@@ -1,0 +1,29 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadString '0'
+v3 <- LoadBoolean 'false'
+v4 <- LoadInteger '10'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `configurable`, v3
+    ObjectLiteralAddProperty `value`, v4
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'defineProperty', [v1, v2, v5]
+v8 <- LoadInteger '1'
+v9 <- GetProperty v1, 'length'
+v10 <- BeginArrowFunction -> 
+    v11 <- LoadInteger '0'
+    SetProperty v1, 'length', v11
+EndArrowFunction
+v12 <- CreateNamedVariable 'setter', 'var', v10
+
+
+var a = [];
+Object.defineProperty(a, "0", { configurable: false, value: 10 });
+a.length;
+const v10 = () => {
+    a.length = 0;
+};
+var setter = v10;
+
+FuzzIL program written to corpus/regress-4267.fzil

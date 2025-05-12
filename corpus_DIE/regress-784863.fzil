@@ -1,0 +1,28 @@
+v0 <- LoadFloat '4.2'
+v1 <- LoadBoolean 'true'
+v2 <- LoadBoolean 'false'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable '__v_18522', 'var', v3
+v5 <- LoadInteger '2'
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadBoolean 'false'
+    Return v7
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v6
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'Object', 'none'
+v10 <- CallMethod v9, 'defineProperty', [v4, v5, v8]
+v11 <- CallMethod v4, 'shift', []
+v12 <- CallMethod v4, 'slice', []
+
+
+var __v_18522 = [4.2,true,false];
+function f6() {
+    return false;
+}
+Object.defineProperty(__v_18522, 2, { get: f6 });
+__v_18522.shift();
+__v_18522.slice();
+
+FuzzIL program written to corpus/regress-784863.fzil

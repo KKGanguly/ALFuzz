@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadInteger '33554427'
+    v4 <- BinaryOperation v2, '+', v3
+    v5 <- GetComputedProperty v1, v4
+    Return v5
+EndPlainFunction
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'obj', 'var', v6
+v8 <- LoadInteger '0'
+v9 <- CallFunction v0, [v7, v8]
+v10 <- LoadInteger '5'
+v11 <- CallFunction v0, [v7, v10]
+v12 <- BeginPlainFunction -> v13, v14
+    v15 <- LoadInteger '1033554433'
+    v16 <- BinaryOperation v14, '+', v15
+    v17 <- GetComputedProperty v13, v16
+    Return v17
+EndPlainFunction
+v18 <- LoadInteger '0'
+v19 <- CallFunction v12, [v7, v18]
+v20 <- LoadInteger '5'
+v21 <- CallFunction v12, [v7, v20]
+
+
+function many_hoist(a1, a2) {
+    return a1[a2 + 33554427];
+}
+var obj = {};
+many_hoist(obj, 0);
+many_hoist(obj, 5);
+function constant_too_large(a13, a14) {
+    return a13[a14 + 1033554433];
+}
+constant_too_large(obj, 0);
+constant_too_large(obj, 5);
+
+FuzzIL program written to corpus/regress-380092.fzil

@@ -1,0 +1,62 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BeginPlainFunction -> 
+        Return v1
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `valueOf`, v2
+    v3 <- EndObjectLiteral
+    Return v3
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadString 'a'
+    v6 <- LoadString 'x'
+    v7 <- Compare v5, '<', v6
+    v8 <- LoadString 'a'
+    v9 <- CreateNamedVariable 'String', 'none'
+    v10 <- LoadString 'y'
+    v11 <- Construct v9, [v10]
+    v12 <- Compare v8, '<', v11
+    v13 <- LoadString 'a'
+    v14 <- LoadString 'z'
+    v15 <- Construct v0, [v14]
+    v16 <- Compare v13, '<', v15
+    v17 <- LoadString 'a'
+    v18 <- LoadString 'x'
+    v19 <- Compare v17, '>', v18
+    v20 <- LoadString 'a'
+    v21 <- LoadString 'y'
+    v22 <- Construct v9, [v21]
+    v23 <- Compare v20, '>', v22
+    v24 <- LoadString 'a'
+    v25 <- LoadString 'z'
+    v26 <- Construct v0, [v25]
+    v27 <- Compare v24, '>', v26
+EndPlainFunction
+v28 <- CallFunction v4, []
+v29 <- CallFunction v4, []
+v30 <- CallFunction v4, []
+
+
+function MyWrapper(a1) {
+    function f2() {
+        return a1;
+    }
+    return { valueOf: f2 };
+}
+function f() {
+    "a" < "x";
+    const v11 = new String("y");
+    "a" < v11;
+    const v15 = new MyWrapper("z");
+    "a" < v15;
+    "a" > "x";
+    const v22 = new String("y");
+    "a" > v22;
+    const v26 = new MyWrapper("z");
+    "a" > v26;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-3564.fzil

@@ -1,0 +1,245 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'counter', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '1'
+    Update v1, '+', v3
+    Return v1
+EndPlainFunction
+v4 <- BeginPlainFunction -> 
+    v5 <- CallFunction v2, []
+    v6 <- LoadThis
+    SetProperty v6, 'id', v5
+    v7 <- LoadNull
+    v8 <- LoadThis
+    SetProperty v8, 'parent', v7
+    v9 <- LoadNull
+    v10 <- LoadThis
+    SetProperty v10, 'left', v9
+    v11 <- LoadNull
+    v12 <- LoadThis
+    SetProperty v12, 'right', v11
+    v13 <- LoadNull
+    v14 <- LoadThis
+    SetProperty v14, 'head', v13
+    v15 <- LoadNull
+    v16 <- LoadThis
+    SetProperty v16, 'tail', v15
+    v17 <- LoadInteger '0'
+    v18 <- LoadThis
+    SetProperty v18, 'counter', v17
+EndPlainFunction
+v19 <- BeginPlainFunction -> 
+    v20 <- LoadUndefined
+    v21 <- CreateNamedVariable 'Child', 'var', v20
+    v22 <- LoadUndefined
+    v23 <- CreateNamedVariable 'child', 'var', v22
+    v24 <- BeginPlainFunction -> 
+    EndPlainFunction
+    Reassign v21, v24
+    v25 <- LoadThis
+    SetProperty v21, 'prototype', v25
+    v26 <- Construct v21, []
+    Reassign v23, v26
+    v27 <- CallFunction v2, []
+    SetProperty v23, 'id', v27
+    v28 <- LoadThis
+    SetProperty v23, 'parent', v28
+    v29 <- LoadThis
+    v30 <- GetProperty v29, 'last'
+    SetProperty v23, 'left', v30
+    v31 <- LoadNull
+    SetProperty v23, 'right', v31
+    v32 <- LoadNull
+    SetProperty v23, 'head', v32
+    v33 <- LoadNull
+    SetProperty v23, 'tail', v33
+    v34 <- LoadInteger '0'
+    SetProperty v23, 'counter', v34
+    v35 <- LoadThis
+    v36 <- GetProperty v35, 'head'
+    BeginIf v36
+        v37 <- LoadThis
+        v38 <- GetProperty v37, 'tail'
+        SetProperty v38, 'right', v23
+        v39 <- LoadThis
+        SetProperty v39, 'tail', v23
+    BeginElse
+        v40 <- LoadThis
+        SetProperty v40, 'tail', v23
+        v41 <- LoadThis
+        SetProperty v41, 'head', v23
+    EndIf
+    Return v23
+EndPlainFunction
+v42 <- BeginPlainFunction -> 
+    v43 <- CreateNamedVariable '$root', 'none'
+    v44 <- LoadThis
+    v45 <- Compare v43, '==', v44
+    BeginIf v45
+        Return
+    EndIf
+    v46 <- LoadThis
+    v47 <- GetProperty v46, 'parent'
+    v48 <- CreateNamedVariable 'parent', 'var', v47
+    v49 <- GetProperty v48, 'head'
+    v50 <- LoadThis
+    v51 <- Compare v49, '==', v50
+    BeginIf v51
+        v52 <- LoadThis
+        v53 <- GetProperty v52, 'right'
+        SetProperty v48, 'head', v53
+    EndIf
+    v54 <- GetProperty v48, 'tail'
+    v55 <- LoadThis
+    v56 <- Compare v54, '==', v55
+    BeginIf v56
+        v57 <- LoadThis
+        v58 <- GetProperty v57, 'left'
+        SetProperty v48, 'tail', v58
+    EndIf
+    v59 <- LoadThis
+    v60 <- GetProperty v59, 'left'
+    BeginIf v60
+        v61 <- LoadThis
+        v62 <- GetProperty v61, 'right'
+        v63 <- LoadThis
+        v64 <- GetProperty v63, 'left'
+        SetProperty v64, 'right', v62
+    EndIf
+    v65 <- LoadThis
+    v66 <- GetProperty v65, 'right'
+    BeginIf v66
+        v67 <- LoadThis
+        v68 <- GetProperty v67, 'left'
+        v69 <- LoadThis
+        v70 <- GetProperty v69, 'right'
+        SetProperty v70, 'left', v68
+    EndIf
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `new`, v19
+    ObjectLiteralAddProperty `destroy`, v42
+v71 <- EndObjectLiteral
+SetProperty v4, 'prototype', v71
+v72 <- BeginPlainFunction -> v73
+    v74 <- GetProperty v73, 'counter'
+    v75 <- LoadInteger '1'
+    v76 <- BinaryOperation v74, '+', v75
+    SetProperty v73, 'counter', v76
+EndPlainFunction
+v77 <- Construct v4, []
+v78 <- CreateNamedVariable '$root', 'var', v77
+v79 <- LoadInteger '100000'
+v80 <- CreateNamedVariable 'n', 'none'
+Reassign v80, v79
+v81 <- LoadInteger '10'
+v82 <- CreateNamedVariable 'm', 'none'
+Reassign v82, v81
+v83 <- BeginPlainFunction -> 
+    v84 <- CallMethod v78, 'new', []
+    v85 <- CreateNamedVariable 'a', 'var', v84
+    v86 <- CallMethod v85, 'new', []
+    v87 <- CreateNamedVariable 'b', 'var', v86
+    v88 <- CallFunction v72, [v87]
+    v89 <- CreateNamedVariable 'i', 'none'
+    v90 <- CreateNamedVariable 'm', 'none'
+    v91 <- Compare v89, '>', v90
+    BeginIf v91
+        v92 <- GetProperty v78, 'head'
+        v93 <- CallMethod v92, 'destroy', []
+    EndIf
+EndPlainFunction
+BeginForLoopInitializer
+    v94 <- LoadInteger '0'
+BeginForLoopCondition -> v95
+    v96 <- CreateNamedVariable 'n', 'none'
+    v97 <- Compare v95, '<', v96
+BeginForLoopAfterthought v97 -> v98
+    v99 <- UnaryOperation v98, '++'
+BeginForLoopBody -> v100
+    v101 <- CallFunction v83, []
+EndForLoop
+
+
+var counter = 0;
+function nextid() {
+    return counter += 1;
+}
+function Scope() {
+    this.id = nextid();
+    this.parent = null;
+    this.left = null;
+    this.right = null;
+    this.head = null;
+    this.tail = null;
+    this.counter = 0;
+}
+function f19() {
+    var Child;
+    var child;
+    function f24() {
+    }
+    Child = f24;
+    Child.prototype = this;
+    const v26 = new Child();
+    child = v26;
+    child.id = nextid();
+    child.parent = this;
+    child.left = this.last;
+    child.right = null;
+    child.head = null;
+    child.tail = null;
+    child.counter = 0;
+    if (this.head) {
+        const t30 = this.tail;
+        t30.right = child;
+        this.tail = child;
+    } else {
+        this.tail = child;
+        this.head = child;
+    }
+    return child;
+}
+function f42() {
+    if ($root == this) {
+        return;
+    }
+    var parent = this.parent;
+    if (parent.head == this) {
+        parent.head = this.right;
+    }
+    if (parent.tail == this) {
+        parent.tail = this.left;
+    }
+    if (this.left) {
+        const v62 = this.right;
+        const t52 = this.left;
+        t52.right = v62;
+    }
+    if (this.right) {
+        const v68 = this.left;
+        const t57 = this.right;
+        t57.left = v68;
+    }
+}
+Scope.prototype = { new: f19, destroy: f42 };
+function inc(a73) {
+    a73.counter = a73.counter + 1;
+}
+const v77 = new Scope();
+var $root = v77;
+n = 100000;
+m = 10;
+function doit() {
+    var a = $root.new();
+    var b = a.new();
+    inc(b);
+    if (i > m) {
+        $root.head.destroy();
+    }
+}
+for (let i95 = 0; i95 < n; i95++) {
+    doit();
+}
+
+FuzzIL program written to corpus/regress-2073.fzil

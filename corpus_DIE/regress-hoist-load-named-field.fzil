@@ -1,0 +1,101 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadUndefined
+    v4 <- CreateNamedVariable 'v', 'var', v3
+    v5 <- LoadInteger '1'
+    v6 <- CreateNamedVariable 'i', 'var', v5
+    BeginWhileLoopHeader
+        v7 <- LoadInteger '2'
+        v8 <- Compare v6, '<', v7
+    BeginWhileLoopBody v8
+        v9 <- GetProperty v1, 'y'
+        Reassign v4, v9
+        v10 <- LoadFloat '1.5'
+        SetElement v2, '0', v10
+        v11 <- UnaryOperation v6, '++'
+    EndWhileLoop
+    Return v4
+EndPlainFunction
+v12 <- LoadFloat '1.4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v12
+v13 <- EndObjectLiteral
+v14 <- LoadInteger '1'
+v15 <- CreateArray [v14]
+v16 <- CallFunction v0, [v13, v15]
+v17 <- LoadFloat '1.6'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v17
+v18 <- EndObjectLiteral
+v19 <- LoadInteger '1'
+v20 <- CreateArray [v19]
+v21 <- CallFunction v0, [v18, v20]
+v22 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v22
+v23 <- EndObjectLiteral
+v24 <- LoadInteger '1'
+v25 <- CreateArray [v24]
+v26 <- CallFunction v0, [v23, v25]
+v27 <- BeginPlainFunction -> v28
+    v29 <- LoadInteger '0'
+    v30 <- CreateNamedVariable 'i', 'var', v29
+    v31 <- LoadUndefined
+    v32 <- CreateNamedVariable 'v', 'var', v31
+    BeginWhileLoopHeader
+        v33 <- LoadInteger '1'
+        v34 <- Compare v30, '<', v33
+    BeginWhileLoopBody v34
+        v35 <- GetProperty v28, 'x'
+        Reassign v32, v35
+        v36 <- UnaryOperation v30, '++'
+    EndWhileLoop
+    Return v32
+EndPlainFunction
+v37 <- LoadFloat '1.5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v37
+v38 <- EndObjectLiteral
+v39 <- CreateNamedVariable 'o1', 'var', v38
+v40 <- LoadInteger '1'
+v41 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `y`, v40
+    ObjectLiteralAddProperty `x`, v41
+v42 <- EndObjectLiteral
+v43 <- CreateNamedVariable 'o2', 'var', v42
+v44 <- CallFunction v27, [v39]
+v45 <- CallFunction v27, [v39]
+v46 <- CallFunction v27, [v43]
+v47 <- CallFunction v27, [v43]
+
+
+function f(a1, a2) {
+    var v;
+    var i = 1;
+    while (i < 2) {
+        v = a1.y;
+        a2[0] = 1.5;
+        i++;
+    }
+    return v;
+}
+f({ y: 1.4 }, [1]);
+f({ y: 1.6 }, [1]);
+f({ x: 1 }, [1]);
+function f2(a28) {
+    var i = 0;
+    var v;
+    while (i < 1) {
+        v = a28.x;
+        i++;
+    }
+    return v;
+}
+var o1 = { x: 1.5 };
+var o2 = { y: 1, x: 1 };
+f2(o1);
+f2(o1);
+f2(o2);
+f2(o2);
+
+FuzzIL program written to corpus/regress-hoist-load-named-field.fzil

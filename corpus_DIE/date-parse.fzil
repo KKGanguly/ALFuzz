@@ -1,0 +1,456 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CreateNamedVariable 'Date', 'none'
+    v3 <- CallMethod v2, 'parse', [v1]
+    v4 <- CreateNamedVariable 'd', 'var', v3
+    v5 <- LoadInteger '946713600000'
+    v6 <- LoadString 'parse: '
+    v7 <- BinaryOperation v6, '+', v1
+EndPlainFunction
+v8 <- BeginPlainFunction -> v9
+    v10 <- LoadString 'parse-local-time:'
+    v11 <- BinaryOperation v10, '+', v9
+    v12 <- CreateNamedVariable 'Date', 'none'
+    v13 <- CallMethod v12, 'parse', [v11]
+    v14 <- CreateNamedVariable 'd', 'var', v13
+    v15 <- CreateNamedVariable 'isNaN', 'none'
+    v16 <- CallFunction v15, [v14]
+    v17 <- UnaryOperation '!', v16
+    v18 <- LoadString 'parse-local-time: '
+    v19 <- BinaryOperation v18, '+', v9
+    v20 <- LoadString ' is NaN.'
+    v21 <- BinaryOperation v19, '+', v20
+    v22 <- LoadInteger '0'
+    v23 <- Compare v14, '>', v22
+    v24 <- LoadString 'parse-local-time: '
+    v25 <- BinaryOperation v24, '+', v9
+    v26 <- LoadString ' <= 0.'
+    v27 <- BinaryOperation v25, '+', v26
+EndPlainFunction
+v28 <- BeginPlainFunction -> v29
+    v30 <- LoadInteger '2'
+    v31 <- GetProperty v29, 'length'
+    v32 <- LoadString 'array ['
+    v33 <- BinaryOperation v32, '+', v29
+    v34 <- LoadString '] length != 2.'
+    v35 <- BinaryOperation v33, '+', v34
+    v36 <- GetElement v29, '0'
+    v37 <- CreateNamedVariable 'string', 'var', v36
+    v38 <- GetElement v29, '1'
+    v39 <- CreateNamedVariable 'expected', 'var', v38
+    v40 <- CreateNamedVariable 'Date', 'none'
+    v41 <- CallMethod v40, 'parse', [v37]
+    v42 <- CreateNamedVariable 'd', 'var', v41
+    v43 <- LoadString 'parse-misc: '
+    v44 <- BinaryOperation v43, '+', v37
+EndPlainFunction
+v45 <- LoadString 'Sat, 01-Jan-2000 08:00:00 UT'
+v46 <- LoadString 'Sat, 01 Jan 2000 08:00:00 UT'
+v47 <- LoadString 'Jan 01 2000 08:00:00 UT'
+v48 <- LoadString 'Jan 01 08:00:00 UT 2000'
+v49 <- LoadString 'Saturday, 01-Jan-00 08:00:00 UT'
+v50 <- LoadString '01 Jan 00 08:00 +0000'
+v51 <- LoadString 'Mon, 01 Jan 2000 08:00:00 UT'
+v52 <- LoadString 'Tue, 01 Jan 2000 08:00:00 UT'
+v53 <- LoadString '[Saturday] Jan 01 08:00:00 UT 2000'
+v54 <- LoadString 'Ignore all of this stuff because it is annoying 01 Jan 2000 08:00:00 UT'
+v55 <- LoadString '[Saturday] Jan 01 2000 08:00:00 UT'
+v56 <- LoadString 'All of this stuff is really annnoying, so it will be ignored Jan 01 2000 08:00:00 UT'
+v57 <- LoadString 'Sat, 01-Janisamonth-2000 08:00:00 UT'
+v58 <- LoadString 'Sat, 01 Janisamonth 2000 08:00:00 UT'
+v59 <- LoadString 'Janisamonth 01 2000 08:00:00 UT'
+v60 <- LoadString 'Janisamonth 01 08:00:00 UT 2000'
+v61 <- LoadString 'Saturday, 01-Janisamonth-00 08:00:00 UT'
+v62 <- LoadString '01 Janisamonth 00 08:00 +0000'
+v63 <- LoadString 'Janisamonthandtherestisignored01 2000 08:00:00 UT'
+v64 <- LoadString 'Jan01 2000 08:00:00 UT'
+v65 <- LoadString 'Sat, 2000/01/01 08:00:00 UT'
+v66 <- LoadString 'Sat, 01/01/2000 08:00:00 UT'
+v67 <- LoadString 'Sat, 01/01 2000 08:00:00 UT'
+v68 <- LoadString 'Sat, 01,Jan,2000,08:00:00 UT'
+v69 <- LoadString 'Sat, 01-Jan-2000 08:00 UT'
+v70 <- LoadString 'Sat, 01 Jan 2000 08:00 UT'
+v71 <- LoadString 'Jan 01 2000 08:00 UT'
+v72 <- LoadString 'Jan 01 08:00 UT 2000'
+v73 <- LoadString 'Saturday, 01-Jan-00 08:00 UT'
+v74 <- LoadString '01 Jan 00 08:00 +0000'
+v75 <- LoadString 'Sat, 01-Jan-2000 08:00 AM UT'
+v76 <- LoadString 'Sat, 01 Jan 2000 08:00 AM UT'
+v77 <- LoadString 'Jan 01 2000 08:00 AM UT'
+v78 <- LoadString 'Jan 01 08:00 AM UT 2000'
+v79 <- LoadString 'Saturday, 01-Jan-00 08:00 AM UT'
+v80 <- LoadString '01 Jan 00 08:00 AM +0000'
+v81 <- LoadString '   Sat,   01-Jan-2000   08:00:00   UT  '
+v82 <- LoadString '  Sat,   01   Jan   2000   08:00:00   UT  '
+v83 <- LoadString '  Saturday,   01-Jan-00   08:00:00   UT  '
+v84 <- LoadString '  01    Jan   00    08:00   +0000   '
+v85 <- LoadString ' ()(Sat, 01-Jan-2000)  Sat,   01-Jan-2000   08:00:00   UT  '
+v86 <- LoadString '  Sat()(Sat, 01-Jan-2000)01   Jan   2000   08:00:00   UT  '
+v87 <- LoadString '  Sat,(02)01   Jan   2000   08:00:00   UT  '
+v88 <- LoadString '  Sat,  01(02)Jan   2000   08:00:00   UT  '
+v89 <- LoadString '  Sat,  01  Jan  2000 (2001)08:00:00   UT  '
+v90 <- LoadString '  Sat,  01  Jan  2000 (01)08:00:00   UT  '
+v91 <- LoadString '  Sat,  01  Jan  2000 (01:00:00)08:00:00   UT  '
+v92 <- LoadString '  Sat,  01  Jan  2000  08:00:00 (CDT)UT  '
+v93 <- LoadString '  Sat,  01  Jan  2000  08:00:00  UT((((CDT))))'
+v94 <- LoadString '  Saturday,   01-Jan-00 ()(((asfd)))(Sat, 01-Jan-2000)08:00:00   UT  '
+v95 <- LoadString '  01    Jan   00    08:00 ()(((asdf)))(Sat, 01-Jan-2000)+0000   '
+v96 <- LoadString '  01    Jan   00    08:00   +0000()((asfd)(Sat, 01-Jan-2000)) '
+v97 <- CreateArray [v45, v46, v47, v48, v49, v50, v51, v52, v53, v54, v55, v56, v57, v58, v59, v60, v61, v62, v63, v64, v65, v66, v67, v68, v69, v70, v71, v72, v73, v74, v75, v76, v77, v78, v79, v80, v81, v82, v83, v84, v85, v86, v87, v88, v89, v90, v91, v92, v93, v94, v95, v96]
+v98 <- CreateNamedVariable 'testCasesUT', 'var', v97
+v99 <- LoadString 'Sat, 01-Jan-2000 08:00:00 GMT'
+v100 <- LoadString 'Sat, 01-Jan-2000 08:00:00 GMT+0'
+v101 <- LoadString 'Sat, 01-Jan-2000 08:00:00 GMT+00'
+v102 <- LoadString 'Sat, 01-Jan-2000 08:00:00 GMT+000'
+v103 <- LoadString 'Sat, 01-Jan-2000 08:00:00 GMT+0000'
+v104 <- LoadString 'Sat, 01-Jan-2000 08:00:00 GMT+00:00'
+v105 <- LoadString 'Sat, 01 Jan 2000 08:00:00 GMT'
+v106 <- LoadString 'Saturday, 01-Jan-00 08:00:00 GMT'
+v107 <- LoadString '01 Jan 00 08:00 -0000'
+v108 <- LoadString '01 Jan 00 08:00 +0000'
+v109 <- CreateArray [v99, v100, v101, v102, v103, v104, v105, v106, v107, v108]
+v110 <- CreateNamedVariable 'testCasesGMT', 'var', v109
+v111 <- LoadString 'Sat, 01-Jan-2000 03:00:00 UTC-0500'
+v112 <- LoadString 'Sat, 01-Jan-2000 03:00:00 UTC-05:00'
+v113 <- LoadString 'Sat, 01-Jan-2000 03:00:00 EST'
+v114 <- LoadString 'Sat, 01 Jan 2000 03:00:00 EST'
+v115 <- LoadString 'Saturday, 01-Jan-00 03:00:00 EST'
+v116 <- LoadString '01 Jan 00 03:00 -0500'
+v117 <- CreateArray [v111, v112, v113, v114, v115, v116]
+v118 <- CreateNamedVariable 'testCasesEST', 'var', v117
+v119 <- LoadString 'Sat, 01-Jan-2000 04:00:00 EDT'
+v120 <- LoadString 'Sat, 01 Jan 2000 04:00:00 EDT'
+v121 <- LoadString 'Saturday, 01-Jan-00 04:00:00 EDT'
+v122 <- LoadString '01 Jan 00 04:00 -0400'
+v123 <- CreateArray [v119, v120, v121, v122]
+v124 <- CreateNamedVariable 'testCasesEDT', 'var', v123
+v125 <- LoadString 'Sat, 01-Jan-2000 02:00:00 CST'
+v126 <- LoadString 'Sat, 01 Jan 2000 02:00:00 CST'
+v127 <- LoadString 'Saturday, 01-Jan-00 02:00:00 CST'
+v128 <- LoadString '01 Jan 00 02:00 -0600'
+v129 <- CreateArray [v125, v126, v127, v128]
+v130 <- CreateNamedVariable 'testCasesCST', 'var', v129
+v131 <- LoadString 'Sat, 01-Jan-2000 03:00:00 CDT'
+v132 <- LoadString 'Sat, 01 Jan 2000 03:00:00 CDT'
+v133 <- LoadString 'Saturday, 01-Jan-00 03:00:00 CDT'
+v134 <- LoadString '01 Jan 00 03:00 -0500'
+v135 <- CreateArray [v131, v132, v133, v134]
+v136 <- CreateNamedVariable 'testCasesCDT', 'var', v135
+v137 <- LoadString 'Sat, 01-Jan-2000 01:00:00 MST'
+v138 <- LoadString 'Sat, 01 Jan 2000 01:00:00 MST'
+v139 <- LoadString 'Saturday, 01-Jan-00 01:00:00 MST'
+v140 <- LoadString '01 Jan 00 01:00 -0700'
+v141 <- CreateArray [v137, v138, v139, v140]
+v142 <- CreateNamedVariable 'testCasesMST', 'var', v141
+v143 <- LoadString 'Sat, 01-Jan-2000 02:00:00 MDT'
+v144 <- LoadString 'Sat, 01 Jan 2000 02:00:00 MDT'
+v145 <- LoadString 'Saturday, 01-Jan-00 02:00:00 MDT'
+v146 <- LoadString '01 Jan 00 02:00 -0600'
+v147 <- CreateArray [v143, v144, v145, v146]
+v148 <- CreateNamedVariable 'testCasesMDT', 'var', v147
+v149 <- LoadString 'Sat, 01-Jan-2000 00:00:00 PST'
+v150 <- LoadString 'Sat, 01 Jan 2000 00:00:00 PST'
+v151 <- LoadString 'Saturday, 01-Jan-00 00:00:00 PST'
+v152 <- LoadString '01 Jan 00 00:00 -0800'
+v153 <- LoadString 'Sat, 01-Jan-2000 PST'
+v154 <- CreateArray [v149, v150, v151, v152, v153]
+v155 <- CreateNamedVariable 'testCasesPST', 'var', v154
+v156 <- LoadString 'Sat, 01-Jan-2000 01:00:00 PDT'
+v157 <- LoadString 'Sat, 01 Jan 2000 01:00:00 PDT'
+v158 <- LoadString 'Saturday, 01-Jan-00 01:00:00 PDT'
+v159 <- LoadString '01 Jan 00 01:00 -0700'
+v160 <- CreateArray [v156, v157, v158, v159]
+v161 <- CreateNamedVariable 'testCasesPDT', 'var', v160
+v162 <- LoadString 'Sat, 01-Jan-2000 08:00:00'
+v163 <- LoadString 'Sat, 01 Jan 2000 08:00:00'
+v164 <- LoadString 'Jan 01 2000 08:00:00'
+v165 <- LoadString 'Jan 01 08:00:00 2000'
+v166 <- LoadString 'Saturday, 01-Jan-00 08:00:00'
+v167 <- LoadString '01 Jan 00 08:00'
+v168 <- CreateArray [v162, v163, v164, v165, v166, v167]
+v169 <- CreateNamedVariable 'testCasesLocalTime', 'var', v168
+v170 <- LoadString 'Sat, 01 Jan 0 08:00:00 UT'
+v171 <- LoadInteger '946713600000'
+v172 <- CreateArray [v170, v171]
+v173 <- LoadString 'Sat, 01 Jan 49 08:00:00 UT'
+v174 <- LoadInteger '2493100800000'
+v175 <- CreateArray [v173, v174]
+v176 <- LoadString 'Sat, 01 Jan 50 08:00:00 UT'
+v177 <- LoadInteger '631123200000'
+v178 <- UnaryOperation '-', v177
+v179 <- CreateArray [v176, v178]
+v180 <- LoadString 'Sat, 01 Jan 99 08:00:00 UT'
+v181 <- LoadInteger '915177600000'
+v182 <- CreateArray [v180, v181]
+v183 <- LoadString 'Sat, 01 Jan 100 08:00:00 UT'
+v184 <- LoadInteger '59011430400000'
+v185 <- UnaryOperation '-', v184
+v186 <- CreateArray [v183, v185]
+v187 <- LoadString 'Sat, 01-Jan-2000 08:00 PM UT'
+v188 <- LoadInteger '946756800000'
+v189 <- CreateArray [v187, v188]
+v190 <- LoadString 'Sat, 01 Jan 2000 08:00 PM UT'
+v191 <- LoadInteger '946756800000'
+v192 <- CreateArray [v190, v191]
+v193 <- LoadString 'Jan 01 2000 08:00 PM UT'
+v194 <- LoadInteger '946756800000'
+v195 <- CreateArray [v193, v194]
+v196 <- LoadString 'Jan 01 08:00 PM UT 2000'
+v197 <- LoadInteger '946756800000'
+v198 <- CreateArray [v196, v197]
+v199 <- LoadString 'Saturday, 01-Jan-00 08:00 PM UT'
+v200 <- LoadInteger '946756800000'
+v201 <- CreateArray [v199, v200]
+v202 <- LoadString '01 Jan 00 08:00 PM +0000'
+v203 <- LoadInteger '946756800000'
+v204 <- CreateArray [v202, v203]
+v205 <- CreateArray [v172, v175, v179, v182, v186, v189, v192, v195, v198, v201, v204]
+v206 <- CreateNamedVariable 'testCasesMisc', 'var', v205
+v207 <- LoadString '2000-01-01T08:00:00.000Z'
+v208 <- LoadInteger '946713600000'
+v209 <- CreateArray [v207, v208]
+v210 <- LoadString '2000-01-01T08:00:00Z'
+v211 <- LoadInteger '946713600000'
+v212 <- CreateArray [v210, v211]
+v213 <- LoadString '2000-01-01T08:00Z'
+v214 <- LoadInteger '946713600000'
+v215 <- CreateArray [v213, v214]
+v216 <- LoadString '2000-01T08:00:00.000Z'
+v217 <- LoadInteger '946713600000'
+v218 <- CreateArray [v216, v217]
+v219 <- LoadString '2000T08:00:00.000Z'
+v220 <- LoadInteger '946713600000'
+v221 <- CreateArray [v219, v220]
+v222 <- LoadString '2000T08:00Z'
+v223 <- LoadInteger '946713600000'
+v224 <- CreateArray [v222, v223]
+v225 <- LoadString '2000-01T00:00:00.000-08:00'
+v226 <- LoadInteger '946713600000'
+v227 <- CreateArray [v225, v226]
+v228 <- LoadString '2000-01T08:00:00.001Z'
+v229 <- LoadInteger '946713600001'
+v230 <- CreateArray [v228, v229]
+v231 <- LoadString '2000-01T08:00:00.099Z'
+v232 <- LoadInteger '946713600099'
+v233 <- CreateArray [v231, v232]
+v234 <- LoadString '2000-01T08:00:00.999Z'
+v235 <- LoadInteger '946713600999'
+v236 <- CreateArray [v234, v235]
+v237 <- LoadString '2000-01T00:00:00.001-08:00'
+v238 <- LoadInteger '946713600001'
+v239 <- CreateArray [v237, v238]
+v240 <- LoadString '2000-01-01T24:00Z'
+v241 <- LoadInteger '946771200000'
+v242 <- CreateArray [v240, v241]
+v243 <- LoadString '2000-01-01T24:00:00Z'
+v244 <- LoadInteger '946771200000'
+v245 <- CreateArray [v243, v244]
+v246 <- LoadString '2000-01-01T24:00:00.000Z'
+v247 <- LoadInteger '946771200000'
+v248 <- CreateArray [v246, v247]
+v249 <- LoadString '2000-01-01T24:00:00.000Z'
+v250 <- LoadInteger '946771200000'
+v251 <- CreateArray [v249, v250]
+v252 <- CreateArray [v209, v212, v215, v218, v221, v224, v227, v230, v233, v236, v239, v242, v245, v248, v251]
+v253 <- CreateNamedVariable 'testCasesES5Misc', 'var', v252
+v254 <- LoadString '2000-01-01TZ'
+v255 <- LoadString '2000-01-01T60Z'
+v256 <- LoadString '2000-01-01T60:60Z'
+v257 <- LoadString '2000-01-0108:00Z'
+v258 <- LoadString '2000-01-01T08Z'
+v259 <- LoadString '2000-01-01T24:01'
+v260 <- LoadString '2000-01-01T24:00:01'
+v261 <- LoadString '2000-01-01T24:00:00.001'
+v262 <- LoadString '2000-01-01T24:00:00.999Z'
+v263 <- CreateArray [v254, v255, v256, v257, v258, v259, v260, v261, v262]
+v264 <- CreateNamedVariable 'testCasesES5MiscNegative', 'var', v263
+v265 <- CreateNamedVariable 'Date', 'none'
+v266 <- LoadString '2000-01-01'
+v267 <- Construct v265, [v266]
+v268 <- CallMethod v267, 'getTimezoneOffset', []
+v269 <- LoadInteger '1000'
+v270 <- BinaryOperation v268, '*', v269
+v271 <- LoadInteger '60'
+v272 <- BinaryOperation v270, '*', v271
+v273 <- CreateNamedVariable 'localOffset', 'var', v272
+v274 <- LoadThis
+v275 <- GetProperty v274, 'Intl'
+v276 <- CreateNamedVariable 'Intl', 'none'
+v277 <- CallMethod v276, 'DateTimeFormat', []
+v278 <- CallMethod v277, 'resolvedOptions', []
+v279 <- GetProperty v278, 'timeZone'
+v280 <- LoadString 'America/Los_Angeles'
+v281 <- LoadString 'Europe/Berlin'
+v282 <- LoadString 'Europe/Madrid'
+v283 <- CreateArray [v280, v281, v282]
+v284 <- CallMethod v283, 'indexOf', [v279]
+v285 <- LoadInteger '1'
+v286 <- UnaryOperation '-', v285
+v287 <- Compare v284, '!=', v286
+v288 <- BinaryOperation v275, '&&', v287
+BeginIf v288
+    v289 <- LoadInteger '0'
+    v290 <- Compare v273, '!=', v289
+EndIf
+v291 <- LoadString '2000-01-02T00:00'
+v292 <- LoadInteger '946771200000'
+v293 <- BinaryOperation v292, '+', v273
+v294 <- CreateArray [v291, v293]
+v295 <- LoadString '2000-01-02T00:00:00'
+v296 <- LoadInteger '946771200000'
+v297 <- BinaryOperation v296, '+', v273
+v298 <- CreateArray [v295, v297]
+v299 <- LoadString '2000-01-02T00:00:00.000'
+v300 <- LoadInteger '946771200000'
+v301 <- BinaryOperation v300, '+', v273
+v302 <- CreateArray [v299, v301]
+v303 <- LoadString '2000-01-02'
+v304 <- LoadInteger '946771200000'
+v305 <- CreateArray [v303, v304]
+v306 <- LoadString '2000-01-02'
+v307 <- LoadInteger '946771200000'
+v308 <- CreateArray [v306, v307]
+v309 <- LoadString '2000-01-02'
+v310 <- LoadInteger '946771200000'
+v311 <- CreateArray [v309, v310]
+v312 <- CreateArray [v294, v298, v302, v305, v308, v311]
+v313 <- CreateNamedVariable 'testCasesES2016TZ', 'var', v312
+v314 <- CallMethod v98, 'forEach', [v0]
+v315 <- CallMethod v110, 'forEach', [v0]
+v316 <- CallMethod v118, 'forEach', [v0]
+v317 <- CallMethod v124, 'forEach', [v0]
+v318 <- CallMethod v130, 'forEach', [v0]
+v319 <- CallMethod v136, 'forEach', [v0]
+v320 <- CallMethod v142, 'forEach', [v0]
+v321 <- CallMethod v148, 'forEach', [v0]
+v322 <- CallMethod v155, 'forEach', [v0]
+v323 <- CallMethod v161, 'forEach', [v0]
+v324 <- CallMethod v169, 'forEach', [v8]
+v325 <- CallMethod v206, 'forEach', [v28]
+v326 <- CallMethod v253, 'forEach', [v28]
+v327 <- BeginPlainFunction -> v328
+    v329 <- CallMethod v265, 'parse', [v328]
+    v330 <- CreateNamedVariable 'isNaN', 'none'
+    v331 <- CallFunction v330, [v329]
+    v332 <- LoadString ' is not NaN.'
+    v333 <- BinaryOperation v328, '+', v332
+EndPlainFunction
+v334 <- CallMethod v264, 'forEach', [v327]
+v335 <- CallMethod v313, 'forEach', [v28]
+BeginForLoopInitializer
+    v336 <- LoadInteger '0'
+BeginForLoopCondition -> v337
+    v338 <- LoadInteger '24'
+    v339 <- LoadInteger '365'
+    v340 <- BinaryOperation v338, '*', v339
+    v341 <- LoadInteger '100'
+    v342 <- BinaryOperation v340, '*', v341
+    v343 <- Compare v337, '<', v342
+BeginForLoopAfterthought v343 -> v344
+    v345 <- LoadInteger '150'
+    Update v344, '+', v345
+BeginForLoopBody -> v346
+    v347 <- LoadInteger '3600'
+    v348 <- LoadInteger '1000'
+    v349 <- BinaryOperation v347, '*', v348
+    v350 <- BinaryOperation v346, '*', v349
+    v351 <- CreateNamedVariable 'ms', 'var', v350
+    v352 <- Construct v265, [v351]
+    v353 <- CallMethod v352, 'toString', []
+    v354 <- CreateNamedVariable 's', 'var', v353
+    v355 <- CallMethod v265, 'parse', [v354]
+    v356 <- LoadString 'parse own: '
+    v357 <- BinaryOperation v356, '+', v354
+EndForLoop
+v358 <- LoadString 'May 25 2008 1:30 (PM)) UTC'
+v359 <- LoadString 'May 25 2008 1:30( )AM (PM)'
+v360 <- LoadString 'a1'
+v361 <- LoadString 'nasfdjklsfjoaifg1'
+v362 <- LoadString 'x_2'
+v363 <- LoadString 'May 25 2008 AAA (GMT)'
+v364 <- CreateArray [v358, v359, v360, v361, v362, v363]
+v365 <- CreateNamedVariable 'testCasesNegative', 'var', v364
+v366 <- BeginPlainFunction -> v367
+    v368 <- CallMethod v265, 'parse', [v367]
+    v369 <- CreateNamedVariable 'isNaN', 'none'
+    v370 <- CallFunction v369, [v368]
+    v371 <- LoadString ' is not NaN.'
+    v372 <- BinaryOperation v367, '+', v371
+EndPlainFunction
+v373 <- CallMethod v365, 'forEach', [v366]
+
+
+function testDateParse(a1) {
+    var d = Date.parse(a1);
+    "parse: " + a1;
+}
+function testDateParseLocalTime(a9) {
+    var d = Date.parse("parse-local-time:" + a9);
+    !isNaN(d);
+    ("parse-local-time: " + a9) + " is NaN.";
+    d > 0;
+    ("parse-local-time: " + a9) + " <= 0.";
+}
+function testDateParseMisc(a29) {
+    a29.length;
+    ("array [" + a29) + "] length != 2.";
+    var string = a29[0];
+    var expected = a29[1];
+    var d = Date.parse(string);
+    "parse-misc: " + string;
+}
+var testCasesUT = ["Sat, 01-Jan-2000 08:00:00 UT","Sat, 01 Jan 2000 08:00:00 UT","Jan 01 2000 08:00:00 UT","Jan 01 08:00:00 UT 2000","Saturday, 01-Jan-00 08:00:00 UT","01 Jan 00 08:00 +0000","Mon, 01 Jan 2000 08:00:00 UT","Tue, 01 Jan 2000 08:00:00 UT","[Saturday] Jan 01 08:00:00 UT 2000","Ignore all of this stuff because it is annoying 01 Jan 2000 08:00:00 UT","[Saturday] Jan 01 2000 08:00:00 UT","All of this stuff is really annnoying, so it will be ignored Jan 01 2000 08:00:00 UT","Sat, 01-Janisamonth-2000 08:00:00 UT","Sat, 01 Janisamonth 2000 08:00:00 UT","Janisamonth 01 2000 08:00:00 UT","Janisamonth 01 08:00:00 UT 2000","Saturday, 01-Janisamonth-00 08:00:00 UT","01 Janisamonth 00 08:00 +0000","Janisamonthandtherestisignored01 2000 08:00:00 UT","Jan01 2000 08:00:00 UT","Sat, 2000/01/01 08:00:00 UT","Sat, 01/01/2000 08:00:00 UT","Sat, 01/01 2000 08:00:00 UT","Sat, 01,Jan,2000,08:00:00 UT","Sat, 01-Jan-2000 08:00 UT","Sat, 01 Jan 2000 08:00 UT","Jan 01 2000 08:00 UT","Jan 01 08:00 UT 2000","Saturday, 01-Jan-00 08:00 UT","01 Jan 00 08:00 +0000","Sat, 01-Jan-2000 08:00 AM UT","Sat, 01 Jan 2000 08:00 AM UT","Jan 01 2000 08:00 AM UT","Jan 01 08:00 AM UT 2000","Saturday, 01-Jan-00 08:00 AM UT","01 Jan 00 08:00 AM +0000","   Sat,   01-Jan-2000   08:00:00   UT  ","  Sat,   01   Jan   2000   08:00:00   UT  ","  Saturday,   01-Jan-00   08:00:00   UT  ","  01    Jan   00    08:00   +0000   "," ()(Sat, 01-Jan-2000)  Sat,   01-Jan-2000   08:00:00   UT  ","  Sat()(Sat, 01-Jan-2000)01   Jan   2000   08:00:00   UT  ","  Sat,(02)01   Jan   2000   08:00:00   UT  ","  Sat,  01(02)Jan   2000   08:00:00   UT  ","  Sat,  01  Jan  2000 (2001)08:00:00   UT  ","  Sat,  01  Jan  2000 (01)08:00:00   UT  ","  Sat,  01  Jan  2000 (01:00:00)08:00:00   UT  ","  Sat,  01  Jan  2000  08:00:00 (CDT)UT  ","  Sat,  01  Jan  2000  08:00:00  UT((((CDT))))","  Saturday,   01-Jan-00 ()(((asfd)))(Sat, 01-Jan-2000)08:00:00   UT  ","  01    Jan   00    08:00 ()(((asdf)))(Sat, 01-Jan-2000)+0000   ","  01    Jan   00    08:00   +0000()((asfd)(Sat, 01-Jan-2000)) "];
+var testCasesGMT = ["Sat, 01-Jan-2000 08:00:00 GMT","Sat, 01-Jan-2000 08:00:00 GMT+0","Sat, 01-Jan-2000 08:00:00 GMT+00","Sat, 01-Jan-2000 08:00:00 GMT+000","Sat, 01-Jan-2000 08:00:00 GMT+0000","Sat, 01-Jan-2000 08:00:00 GMT+00:00","Sat, 01 Jan 2000 08:00:00 GMT","Saturday, 01-Jan-00 08:00:00 GMT","01 Jan 00 08:00 -0000","01 Jan 00 08:00 +0000"];
+var testCasesEST = ["Sat, 01-Jan-2000 03:00:00 UTC-0500","Sat, 01-Jan-2000 03:00:00 UTC-05:00","Sat, 01-Jan-2000 03:00:00 EST","Sat, 01 Jan 2000 03:00:00 EST","Saturday, 01-Jan-00 03:00:00 EST","01 Jan 00 03:00 -0500"];
+var testCasesEDT = ["Sat, 01-Jan-2000 04:00:00 EDT","Sat, 01 Jan 2000 04:00:00 EDT","Saturday, 01-Jan-00 04:00:00 EDT","01 Jan 00 04:00 -0400"];
+var testCasesCST = ["Sat, 01-Jan-2000 02:00:00 CST","Sat, 01 Jan 2000 02:00:00 CST","Saturday, 01-Jan-00 02:00:00 CST","01 Jan 00 02:00 -0600"];
+var testCasesCDT = ["Sat, 01-Jan-2000 03:00:00 CDT","Sat, 01 Jan 2000 03:00:00 CDT","Saturday, 01-Jan-00 03:00:00 CDT","01 Jan 00 03:00 -0500"];
+var testCasesMST = ["Sat, 01-Jan-2000 01:00:00 MST","Sat, 01 Jan 2000 01:00:00 MST","Saturday, 01-Jan-00 01:00:00 MST","01 Jan 00 01:00 -0700"];
+var testCasesMDT = ["Sat, 01-Jan-2000 02:00:00 MDT","Sat, 01 Jan 2000 02:00:00 MDT","Saturday, 01-Jan-00 02:00:00 MDT","01 Jan 00 02:00 -0600"];
+var testCasesPST = ["Sat, 01-Jan-2000 00:00:00 PST","Sat, 01 Jan 2000 00:00:00 PST","Saturday, 01-Jan-00 00:00:00 PST","01 Jan 00 00:00 -0800","Sat, 01-Jan-2000 PST"];
+var testCasesPDT = ["Sat, 01-Jan-2000 01:00:00 PDT","Sat, 01 Jan 2000 01:00:00 PDT","Saturday, 01-Jan-00 01:00:00 PDT","01 Jan 00 01:00 -0700"];
+var testCasesLocalTime = ["Sat, 01-Jan-2000 08:00:00","Sat, 01 Jan 2000 08:00:00","Jan 01 2000 08:00:00","Jan 01 08:00:00 2000","Saturday, 01-Jan-00 08:00:00","01 Jan 00 08:00"];
+var testCasesMisc = [["Sat, 01 Jan 0 08:00:00 UT",946713600000],["Sat, 01 Jan 49 08:00:00 UT",2493100800000],["Sat, 01 Jan 50 08:00:00 UT",-631123200000],["Sat, 01 Jan 99 08:00:00 UT",915177600000],["Sat, 01 Jan 100 08:00:00 UT",-59011430400000],["Sat, 01-Jan-2000 08:00 PM UT",946756800000],["Sat, 01 Jan 2000 08:00 PM UT",946756800000],["Jan 01 2000 08:00 PM UT",946756800000],["Jan 01 08:00 PM UT 2000",946756800000],["Saturday, 01-Jan-00 08:00 PM UT",946756800000],["01 Jan 00 08:00 PM +0000",946756800000]];
+var testCasesES5Misc = [["2000-01-01T08:00:00.000Z",946713600000],["2000-01-01T08:00:00Z",946713600000],["2000-01-01T08:00Z",946713600000],["2000-01T08:00:00.000Z",946713600000],["2000T08:00:00.000Z",946713600000],["2000T08:00Z",946713600000],["2000-01T00:00:00.000-08:00",946713600000],["2000-01T08:00:00.001Z",946713600001],["2000-01T08:00:00.099Z",946713600099],["2000-01T08:00:00.999Z",946713600999],["2000-01T00:00:00.001-08:00",946713600001],["2000-01-01T24:00Z",946771200000],["2000-01-01T24:00:00Z",946771200000],["2000-01-01T24:00:00.000Z",946771200000],["2000-01-01T24:00:00.000Z",946771200000]];
+var testCasesES5MiscNegative = ["2000-01-01TZ","2000-01-01T60Z","2000-01-01T60:60Z","2000-01-0108:00Z","2000-01-01T08Z","2000-01-01T24:01","2000-01-01T24:00:01","2000-01-01T24:00:00.001","2000-01-01T24:00:00.999Z"];
+const v267 = new Date("2000-01-01");
+var localOffset = (v267.getTimezoneOffset() * 1000) * 60;
+const v275 = this.Intl;
+const v279 = Intl.DateTimeFormat().resolvedOptions().timeZone;
+if (v275 && ((["America/Los_Angeles","Europe/Berlin","Europe/Madrid"]).indexOf(v279) != -1)) {
+    localOffset != 0;
+}
+var testCasesES2016TZ = [["2000-01-02T00:00",946771200000 + localOffset],["2000-01-02T00:00:00",946771200000 + localOffset],["2000-01-02T00:00:00.000",946771200000 + localOffset],["2000-01-02",946771200000],["2000-01-02",946771200000],["2000-01-02",946771200000]];
+testCasesUT.forEach(testDateParse);
+testCasesGMT.forEach(testDateParse);
+testCasesEST.forEach(testDateParse);
+testCasesEDT.forEach(testDateParse);
+testCasesCST.forEach(testDateParse);
+testCasesCDT.forEach(testDateParse);
+testCasesMST.forEach(testDateParse);
+testCasesMDT.forEach(testDateParse);
+testCasesPST.forEach(testDateParse);
+testCasesPDT.forEach(testDateParse);
+testCasesLocalTime.forEach(testDateParseLocalTime);
+testCasesMisc.forEach(testDateParseMisc);
+testCasesES5Misc.forEach(testDateParseMisc);
+function f327(a328) {
+    isNaN(Date.parse(a328));
+    a328 + " is not NaN.";
+}
+testCasesES5MiscNegative.forEach(f327);
+testCasesES2016TZ.forEach(testDateParseMisc);
+for (let i337 = 0; i337 < ((24 * 365) * 100); i337 += 150) {
+    var ms = i337 * (3600 * 1000);
+    const v352 = new Date(ms);
+    var s = v352.toString();
+    Date.parse(s);
+    "parse own: " + s;
+}
+var testCasesNegative = ["May 25 2008 1:30 (PM)) UTC","May 25 2008 1:30( )AM (PM)","a1","nasfdjklsfjoaifg1","x_2","May 25 2008 AAA (GMT)"];
+function f366(a367) {
+    isNaN(Date.parse(a367));
+    a367 + " is not NaN.";
+}
+testCasesNegative.forEach(f366);
+
+FuzzIL program written to corpus/date-parse.fzil

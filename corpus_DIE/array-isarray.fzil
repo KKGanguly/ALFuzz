@@ -1,0 +1,113 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- CallMethod v1, 'isArray', [v0]
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- CallMethod v1, 'isArray', [v3]
+v5 <- LoadNull
+v6 <- CallMethod v1, 'isArray', [v5]
+v7 <- LoadInteger '0'
+v8 <- CallMethod v1, 'isArray', [v7]
+v9 <- LoadFloat '0.1'
+v10 <- CallMethod v1, 'isArray', [v9]
+v11 <- LoadString ''
+v12 <- CallMethod v1, 'isArray', [v11]
+v13 <- LoadUndefined
+v14 <- CallMethod v1, 'isArray', [v13]
+v15 <- CreateNamedVariable 'Proxy', 'none'
+v16 <- CreateArray []
+BeginObjectLiteral
+v17 <- EndObjectLiteral
+v18 <- Construct v15, [v16, v17]
+v19 <- CallMethod v1, 'isArray', [v18]
+BeginObjectLiteral
+v20 <- EndObjectLiteral
+BeginObjectLiteral
+v21 <- EndObjectLiteral
+v22 <- Construct v15, [v20, v21]
+v23 <- CallMethod v1, 'isArray', [v22]
+v24 <- CreateArray []
+BeginObjectLiteral
+v25 <- EndObjectLiteral
+v26 <- Construct v15, [v24, v25]
+BeginObjectLiteral
+v27 <- EndObjectLiteral
+v28 <- Construct v15, [v26, v27]
+v29 <- CallMethod v1, 'isArray', [v28]
+BeginObjectLiteral
+v30 <- EndObjectLiteral
+BeginObjectLiteral
+v31 <- EndObjectLiteral
+v32 <- Construct v15, [v30, v31]
+BeginObjectLiteral
+v33 <- EndObjectLiteral
+v34 <- Construct v15, [v32, v33]
+v35 <- CallMethod v1, 'isArray', [v34]
+v36 <- BeginPlainFunction -> 
+    v37 <- CreateArray []
+    BeginObjectLiteral
+    v38 <- EndObjectLiteral
+    v39 <- Construct v15, [v37, v38]
+    v40 <- CreateNamedVariable 'proxy', 'var', v39
+    BeginForLoopInitializer
+        v41 <- LoadInteger '0'
+    BeginForLoopCondition -> v42
+        v43 <- LoadInteger '200'
+        v44 <- LoadInteger '1024'
+        v45 <- BinaryOperation v43, '*', v44
+        v46 <- Compare v42, '<', v45
+    BeginForLoopAfterthought v46 -> v47
+        v48 <- UnaryOperation v47, '++'
+    BeginForLoopBody -> v49
+        BeginObjectLiteral
+        v50 <- EndObjectLiteral
+        v51 <- Construct v15, [v40, v50]
+        Reassign v40, v51
+    EndForLoop
+    v52 <- BeginArrowFunction -> 
+        v53 <- CallMethod v1, 'isArray', [v40]
+        Return v53
+    EndArrowFunction
+    v54 <- CallFunction v52, []
+    v55 <- CreateNamedVariable 'RangeError', 'none'
+EndPlainFunction
+v56 <- CallFunction v36, []
+
+
+Array.isArray([]);
+Array.isArray({});
+Array.isArray(null);
+Array.isArray(0);
+Array.isArray(0.1);
+Array.isArray("");
+Array.isArray(undefined);
+const v16 = [];
+const v18 = new Proxy(v16, {});
+Array.isArray(v18);
+const v20 = {};
+const v22 = new Proxy(v20, {});
+Array.isArray(v22);
+const v24 = [];
+const v26 = new Proxy(v24, {});
+const v28 = new Proxy(v26, {});
+Array.isArray(v28);
+const v30 = {};
+const v32 = new Proxy(v30, {});
+const v34 = new Proxy(v32, {});
+Array.isArray(v34);
+function TestIsArrayStackOverflow() {
+    const v37 = [];
+    const v39 = new Proxy(v37, {});
+    var proxy = v39;
+    for (let i42 = 0; i42 < (200 * 1024); i42++) {
+        const v51 = new Proxy(proxy, {});
+        proxy = v51;
+    }
+    const v52 = () => {
+        return Array.isArray(proxy);
+    };
+    v52();
+}
+TestIsArrayStackOverflow();
+
+FuzzIL program written to corpus/array-isarray.fzil

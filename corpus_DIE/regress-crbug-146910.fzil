@@ -1,0 +1,38 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- LoadInteger '0'
+v3 <- GetProperty v1, 'length'
+v4 <- LoadUndefined
+v5 <- GetElement v1, '0'
+v6 <- LoadString '0'
+v7 <- LoadInteger '7'
+v8 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v7
+    ObjectLiteralAddProperty `configurable`, v8
+v9 <- EndObjectLiteral
+v10 <- CreateNamedVariable 'Object', 'none'
+v11 <- CallMethod v10, 'defineProperty', [v1, v6, v9]
+v12 <- LoadInteger '1'
+v13 <- GetProperty v1, 'length'
+v14 <- LoadInteger '7'
+v15 <- GetElement v1, '0'
+v16 <- LoadInteger '0'
+SetProperty v1, 'length', v16
+v17 <- LoadInteger '1'
+v18 <- GetProperty v1, 'length'
+v19 <- LoadInteger '7'
+v20 <- GetElement v1, '0'
+
+
+var x = [];
+x.length;
+x[0];
+Object.defineProperty(x, "0", { value: 7, configurable: false });
+x.length;
+x[0];
+x.length = 0;
+x.length;
+x[0];
+
+FuzzIL program written to corpus/regress-crbug-146910.fzil

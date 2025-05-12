@@ -1,0 +1,31 @@
+v0 <- LoadString ''
+v1 <- LoadInteger '999'
+v2 <- LoadString 'x'
+v3 <- CallMethod v2, 'repeat', [v1]
+v4 <- CallMethod v3, 'split', [v0]
+v5 <- CreateNamedVariable 'largeArray', 'var', v4
+v6 <- CreateNamedVariable 'a', 'var', v5
+v7 <- BeginArrowFunction -> 
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v8 <- LoadBoolean 'true'
+    BeginForLoopAfterthought v8
+    BeginForLoopBody
+        v9 <- CallMethod v6, 'concat', [v6, v6, v6, v6, v6]
+        Reassign v6, v9
+    EndForLoop
+EndArrowFunction
+v10 <- CallFunction v7, []
+v11 <- CreateNamedVariable 'RangeError', 'none'
+
+
+var largeArray = ("x").repeat(999).split("");
+var a = largeArray;
+const v7 = () => {
+    for (;;) {
+        a = a.concat(a, a, a, a, a);
+    }
+};
+v7();
+
+FuzzIL program written to corpus/regress-599414-array-concat-fast-path.fzil

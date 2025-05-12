@@ -1,0 +1,90 @@
+v0 <- CreateNamedVariable 'eval', 'none'
+v1 <- CreateNamedVariable 'g_eval', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadString 'function f(x) {'
+    v5 <- LoadString '  if (x < 0) return x;'
+    v6 <- BinaryOperation v4, '+', v5
+    v7 <- LoadString '  var a = [1];'
+    v8 <- BinaryOperation v6, '+', v7
+    v9 <- LoadString '  if (x > 0) return ['
+    v10 <- BinaryOperation v8, '+', v9
+    v11 <- CreateNamedVariable 'body', 'var', v10
+    BeginForLoopInitializer
+        v12 <- LoadInteger '0'
+    BeginForLoopCondition -> v13
+        v14 <- Compare v13, '<', v3
+    BeginForLoopAfterthought v14 -> v15
+        v16 <- UnaryOperation v15, '++'
+    BeginForLoopBody -> v17
+        v18 <- LoadString '0.1, '
+        Update v11, '+', v18
+    EndForLoop
+    v19 <- LoadString '  ];'
+    v20 <- LoadString '  return a;'
+    v21 <- BinaryOperation v19, '+', v20
+    v22 <- LoadString '}'
+    v23 <- BinaryOperation v21, '+', v22
+    Update v11, '+', v23
+    v24 <- CallFunction v1, [v11]
+EndPlainFunction
+v25 <- LoadInteger '701'
+v26 <- CreateNamedVariable 'kLength', 'var', v25
+v27 <- CallFunction v2, [v26]
+v28 <- LoadInteger '1'
+v29 <- CreateNamedVariable 'f', 'none'
+v30 <- CallFunction v29, [v28]
+v31 <- LoadInteger '1'
+v32 <- CallFunction v29, [v31]
+v33 <- LoadInteger '1'
+v34 <- CallFunction v29, [v33]
+v35 <- CreateNamedVariable 'a', 'var', v34
+v36 <- CreateNamedVariable 'Object', 'none'
+v37 <- Construct v36, []
+v38 <- CreateNamedVariable 'b', 'var', v37
+BeginForLoopInitializer
+    v39 <- LoadInteger '0'
+BeginForLoopCondition -> v40
+    v41 <- Compare v40, '<', v26
+BeginForLoopAfterthought v41 -> v42
+    v43 <- UnaryOperation v42, '++'
+BeginForLoopBody -> v44
+    v45 <- LoadFloat '0.1'
+    v46 <- GetComputedProperty v35, v44
+EndForLoop
+BeginForLoopInitializer
+    v47 <- LoadInteger '0'
+BeginForLoopCondition -> v48
+    v49 <- LoadInteger '300'
+    v50 <- Compare v48, '<', v49
+BeginForLoopAfterthought v50 -> v51
+    v52 <- UnaryOperation v51, '++'
+BeginForLoopBody -> v53
+    v54 <- LoadInteger '1'
+    v55 <- CallFunction v29, [v54]
+EndForLoop
+
+
+var g_eval = eval;
+function emit_f(a3) {
+    var body = (("function f(x) {" + "  if (x < 0) return x;") + "  var a = [1];") + "  if (x > 0) return [";
+    for (let i13 = 0; i13 < a3; i13++) {
+        body += "0.1, ";
+    }
+    body += ("  ];" + "  return a;") + "}";
+    g_eval(body);
+}
+var kLength = 701;
+emit_f(kLength);
+f(1);
+f(1);
+var a = f(1);
+const v37 = new Object();
+var b = v37;
+for (let i40 = 0; i40 < kLength; i40++) {
+    a[i40];
+}
+for (let i48 = 0; i48 < 300; i48++) {
+    f(1);
+}
+
+FuzzIL program written to corpus/regress-crbug-663402.fzil

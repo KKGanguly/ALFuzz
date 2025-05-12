@@ -1,0 +1,26 @@
+v0 <- LoadFloat '1.1'
+v1 <- LoadFloat '2.2'
+v2 <- LoadFloat '3.3'
+v3 <- CreateArray [v0, v1, v2]
+v4 <- CreateNamedVariable 'arr', 'const', v3
+v5 <- CallMethod v4, 'pop', []
+v6 <- BeginPlainFunction -> 
+    v7 <- CallMethod v4, 'pop', []
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `toString`, v6
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'start', 'const', v8
+v10 <- LoadInteger '0'
+v11 <- CallMethod v4, 'includes', [v10, v9]
+
+
+const arr = [1.1,2.2,3.3];
+arr.pop();
+function f6() {
+    arr.pop();
+}
+const start = { toString: f6 };
+arr.includes(0, start);
+
+FuzzIL program written to corpus/regress-crbug-897098.fzil

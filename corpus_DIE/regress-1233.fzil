@@ -1,0 +1,54 @@
+v0 <- CreateNamedVariable 'Object', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'delicate', 'var', v1
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadString 'toString'
+    v5 <- CreateNamedVariable 'Error', 'none'
+    v6 <- CallFunction v5, [v4]
+    ThrowException v6
+EndPlainFunction
+SetProperty v2, 'toString', v3
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadString 'valueOf'
+    v9 <- CreateNamedVariable 'Error', 'none'
+    v10 <- CallFunction v9, [v8]
+    ThrowException v10
+EndPlainFunction
+SetProperty v2, 'valueOf', v7
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v2
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable 'x', 'var', v11
+v13 <- LoadString 'fail'
+v14 <- CreateNamedVariable 'status', 'var', v13
+BeginTry
+    v15 <- LoadString 'foo'
+    v16 <- CallMethod v0, 'getOwnPropertyDescriptor', [v12, v15]
+    v17 <- CallMethod v0, 'freeze', [v12]
+    v18 <- LoadString 'succeed'
+    Reassign v14, v18
+BeginCatch -> v19
+EndTryCatch
+v20 <- LoadString 'succeed'
+
+
+const v1 = new Object();
+var delicate = v1;
+function f3() {
+    throw Error("toString");
+}
+delicate.toString = f3;
+function f7() {
+    throw Error("valueOf");
+}
+delicate.valueOf = f7;
+var x = { foo: delicate };
+var status = "fail";
+try {
+    Object.getOwnPropertyDescriptor(x, "foo");
+    Object.freeze(x);
+    status = "succeed";
+} catch(e19) {
+}
+
+FuzzIL program written to corpus/regress-1233.fzil

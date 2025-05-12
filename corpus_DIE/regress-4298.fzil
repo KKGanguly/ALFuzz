@@ -1,0 +1,16 @@
+v0 <- LoadInteger '1'
+v1 <- LoadInteger '2'
+v2 <- LoadInteger '3'
+v3 <- CreateArray [v2]
+v4 <- CreateArrayWithSpread [v0, v1, ...v3]
+v5 <- CreateNamedVariable 'arr', 'var', v4
+v6 <- LoadInteger '1'
+v7 <- LoadInteger '2'
+v8 <- LoadInteger '3'
+v9 <- CreateArray [v6, v7, v8]
+
+
+var arr = [1,2,...[3]];
+[1,2,3];
+
+FuzzIL program written to corpus/regress-4298.fzil

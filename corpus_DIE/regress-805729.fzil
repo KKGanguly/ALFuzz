@@ -1,0 +1,25 @@
+v0 <- BeginAsyncGeneratorFunction -> 
+EndAsyncGeneratorFunction
+v1 <- CallFunction v0, []
+v2 <- CreateNamedVariable 'gen1', 'let', v1
+BeginObjectLiteral
+    BeginObjectLiteralGetter `then` -> v3
+        v4 <- DeleteProperty v3, 'then'
+        v5 <- CallMethod v2, 'next', []
+    EndObjectLiteralGetter
+v6 <- EndObjectLiteral
+v7 <- CallMethod v2, 'return', [v6]
+
+
+async function* asyncGenerator() {
+}
+let gen1 = asyncGenerator();
+const v6 = {
+    get then() {
+        delete this.then;
+        gen1.next();
+    },
+};
+gen1.return(v6);
+
+FuzzIL program written to corpus/regress-805729.fzil

@@ -1,0 +1,67 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'xxx'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `className`, v2
+    v3 <- EndObjectLiteral
+    Return v3
+EndPlainFunction
+v4 <- LoadInteger '1'
+v5 <- CreateNamedVariable 'x', 'var', v4
+v6 <- BeginPlainFunction -> v7
+    BeginForLoopInitializer
+        v8 <- LoadInteger '1'
+        v9 <- CreateNamedVariable 'i', 'none'
+        Reassign v9, v8
+    BeginForLoopCondition
+        v10 <- CreateNamedVariable 'i', 'none'
+        v11 <- LoadInteger '20000'
+        v12 <- Compare v10, '<=', v11
+    BeginForLoopAfterthought v12
+        v13 <- CreateNamedVariable 'i', 'none'
+        v14 <- UnaryOperation v13, '++'
+    BeginForLoopBody
+        v15 <- CreateNamedVariable 'i', 'none'
+        v16 <- Compare v15, '==', v7
+        BeginIf v16
+            Reassign v5, v15
+            v17 <- LoadString ''
+            v18 <- BinaryOperation v17, '+', v15
+            v19 <- CallFunction v0, [v18]
+            v20 <- LoadNull
+            v21 <- Compare v19, '!=', v20
+            BeginIf v21
+            EndIf
+        BeginElse
+            v22 <- LoadString ''
+            v23 <- BinaryOperation v22, '+', v15
+            v24 <- CallFunction v0, [v23]
+            v25 <- LoadNull
+            v26 <- Compare v24, '!=', v25
+            BeginIf v26
+            EndIf
+        EndIf
+    EndForLoop
+EndPlainFunction
+v27 <- LoadInteger '0'
+v28 <- CallFunction v6, [v27]
+
+
+function f(a1) {
+    return { className: "xxx" };
+}
+var x = 1;
+function g(a7) {
+    for (i = 1; i <= 20000; i++) {
+        if (i == a7) {
+            x = i;
+            if (f("" + i) != null) {
+            }
+        } else {
+            if (f("" + i) != null) {
+            }
+        }
+    }
+}
+g(0);
+
+FuzzIL program written to corpus/regress-982.fzil

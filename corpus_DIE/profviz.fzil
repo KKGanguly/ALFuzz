@@ -1,0 +1,135 @@
+v0 <- CreateNamedVariable 'TEST_FILE_NAME', 'none'
+v1 <- TypeOf v0
+v2 <- LoadString '/'
+v3 <- CallMethod v0, 'lastIndexOf', [v2]
+v4 <- CreateNamedVariable 'path_length', 'var', v3
+v5 <- LoadInteger '1'
+v6 <- UnaryOperation '-', v5
+v7 <- Compare v4, '==', v6
+BeginIf v7
+    v8 <- LoadString '\'
+    v9 <- CallMethod v0, 'lastIndexOf', [v8]
+    Reassign v4, v9
+EndIf
+v10 <- LoadInteger '1'
+v11 <- UnaryOperation '-', v10
+v12 <- Compare v4, '!=', v11
+v13 <- LoadInteger '0'
+v14 <- LoadInteger '1'
+v15 <- BinaryOperation v4, '+', v14
+v16 <- CallMethod v0, 'substr', [v13, v15]
+v17 <- CreateNamedVariable 'path', 'var', v16
+v18 <- LoadString 'profviz-test.log'
+v19 <- BinaryOperation v17, '+', v18
+v20 <- CreateNamedVariable 'input_file', 'var', v19
+v21 <- LoadString 'profviz-test.default'
+v22 <- BinaryOperation v17, '+', v21
+v23 <- CreateNamedVariable 'reference_file', 'var', v22
+v24 <- LoadString '\n'
+v25 <- CreateNamedVariable 'read', 'none'
+v26 <- CallFunction v25, [v20]
+v27 <- CallMethod v26, 'split', [v24]
+v28 <- CreateNamedVariable 'content_lines', 'var', v27
+v29 <- LoadInteger '0'
+v30 <- CreateNamedVariable 'line_cursor', 'var', v29
+v31 <- CreateArray []
+v32 <- CreateNamedVariable 'output_lines', 'var', v31
+v33 <- BeginPlainFunction -> 
+    v34 <- UnaryOperation v30, '++'
+    v35 <- GetComputedProperty v28, v34
+    Return v35
+EndPlainFunction
+v36 <- BeginPlainFunction -> v37
+    v38 <- CallMethod v32, 'push', [v37]
+EndPlainFunction
+v39 <- BeginPlainFunction -> v40, v41
+    v42 <- CreateNamedVariable 'range_start', 'none'
+    Reassign v42, v40
+    v43 <- CreateNamedVariable 'range_end', 'none'
+    Reassign v43, v41
+EndPlainFunction
+v44 <- LoadInteger '4500'
+v45 <- LoadInteger '1000000'
+v46 <- BinaryOperation v44, '/', v45
+v47 <- CreateNamedVariable 'distortion', 'var', v46
+v48 <- LoadInteger '1600'
+v49 <- CreateNamedVariable 'resx', 'var', v48
+v50 <- LoadInteger '600'
+v51 <- CreateNamedVariable 'resy', 'var', v50
+v52 <- CreateNamedVariable 'PlotScriptComposer', 'none'
+v53 <- Construct v52, [v49, v51]
+v54 <- CreateNamedVariable 'psc', 'var', v53
+v55 <- CallMethod v54, 'collectData', [v33, v47]
+v56 <- LoadUndefined
+v57 <- LoadUndefined
+v58 <- CallMethod v54, 'findPlotRange', [v56, v57, v39]
+v59 <- CallMethod v54, 'assembleOutput', [v36]
+v60 <- CreateNamedVariable 'objects', 'var', v59
+v61 <- LoadString '# start: '
+v62 <- CreateNamedVariable 'range_start', 'none'
+v63 <- BinaryOperation v61, '+', v62
+v64 <- CallFunction v36, [v63]
+v65 <- LoadString '# end: '
+v66 <- CreateNamedVariable 'range_end', 'none'
+v67 <- BinaryOperation v65, '+', v66
+v68 <- CallFunction v36, [v67]
+v69 <- LoadString '# objects: '
+v70 <- BinaryOperation v69, '+', v60
+v71 <- CallFunction v36, [v70]
+v72 <- LoadBoolean 'false'
+v73 <- CreateNamedVariable 'create_baseline', 'var', v72
+BeginIf v73
+    v74 <- LoadNull
+    v75 <- LoadInteger '2'
+    v76 <- CreateNamedVariable 'JSON', 'none'
+    v77 <- CallMethod v76, 'stringify', [v32, v74, v75]
+    v78 <- CreateNamedVariable 'print', 'none'
+    v79 <- CallFunction v78, [v77]
+BeginElse
+    v80 <- CallFunction v25, [v23]
+    v81 <- CreateNamedVariable 'JSON', 'none'
+    v82 <- CallMethod v81, 'parse', [v80]
+EndIf
+
+
+typeof TEST_FILE_NAME;
+var path_length = TEST_FILE_NAME.lastIndexOf("/");
+if (path_length == -1) {
+    path_length = TEST_FILE_NAME.lastIndexOf("\");
+}
+path_length != -1;
+var path = TEST_FILE_NAME.substr(0, path_length + 1);
+var input_file = path + "profviz-test.log";
+var reference_file = path + "profviz-test.default";
+var content_lines = read(input_file).split("\n");
+var line_cursor = 0;
+var output_lines = [];
+function input() {
+    return content_lines[line_cursor++];
+}
+function output(a37) {
+    output_lines.push(a37);
+}
+function set_range(a40, a41) {
+    range_start = a40;
+    range_end = a41;
+}
+var distortion = 4500 / 1000000;
+var resx = 1600;
+var resy = 600;
+const v53 = new PlotScriptComposer(resx, resy);
+var psc = v53;
+psc.collectData(input, distortion);
+psc.findPlotRange(undefined, undefined, set_range);
+var objects = psc.assembleOutput(output);
+output("# start: " + range_start);
+output("# end: " + range_end);
+output("# objects: " + objects);
+var create_baseline = false;
+if (create_baseline) {
+    print(JSON.stringify(output_lines, null, 2));
+} else {
+    JSON.parse(read(reference_file));
+}
+
+FuzzIL program written to corpus/profviz.fzil

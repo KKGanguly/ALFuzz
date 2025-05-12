@@ -1,0 +1,108 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- BinaryOperation v1, '*', v2
+    v4 <- CreateNamedVariable 'result', 'var', v3
+    v5 <- LoadInteger '35'
+    v6 <- BinaryOperation v1, '*', v5
+    Update v4, '+', v6
+    v7 <- LoadInteger '1'
+    v8 <- UnaryOperation '-', v7
+    v9 <- BinaryOperation v1, '*', v8
+    Update v4, '+', v9
+    v10 <- LoadInteger '1'
+    v11 <- BinaryOperation v1, '*', v10
+    Update v4, '+', v11
+    v12 <- LoadInteger '0'
+    v13 <- BinaryOperation v1, '*', v12
+    Update v4, '+', v13
+    v14 <- BinaryOperation v4, '*', v1
+    Return v14
+EndPlainFunction
+v15 <- BeginPlainFunction -> v16, v17
+    v18 <- BinaryOperation v16, '*', v17
+    v19 <- CreateNamedVariable 'result', 'var', v18
+    v20 <- LoadInteger '35'
+    v21 <- BinaryOperation v16, '*', v20
+    Update v19, '+', v21
+    v22 <- LoadInteger '1'
+    v23 <- UnaryOperation '-', v22
+    v24 <- BinaryOperation v16, '*', v23
+    Update v19, '+', v24
+    v25 <- LoadInteger '1'
+    v26 <- BinaryOperation v16, '*', v25
+    Update v19, '+', v26
+    v27 <- LoadInteger '0'
+    v28 <- BinaryOperation v16, '*', v27
+    Update v19, '+', v28
+    v29 <- BinaryOperation v19, '*', v16
+    Return v29
+EndPlainFunction
+v30 <- LoadInteger '10'
+v31 <- LoadInteger '5'
+v32 <- CallFunction v0, [v30, v31]
+v33 <- LoadInteger '10'
+v34 <- LoadInteger '5'
+v35 <- CallFunction v0, [v33, v34]
+v36 <- CreateNamedVariable 'r1', 'var', v35
+v37 <- LoadInteger '10'
+v38 <- LoadInteger '5'
+v39 <- CallFunction v0, [v37, v38]
+v40 <- CreateNamedVariable 'r2', 'var', v39
+v41 <- LoadInteger '10'
+v42 <- LoadInteger '21474800'
+v43 <- CallFunction v15, [v41, v42]
+v44 <- LoadInteger '10'
+v45 <- LoadInteger '21474800'
+v46 <- CallFunction v15, [v44, v45]
+v47 <- CreateNamedVariable 'r3', 'var', v46
+v48 <- LoadInteger '10'
+v49 <- LoadInteger '21474800'
+v50 <- CallFunction v15, [v48, v49]
+v51 <- CreateNamedVariable 'r4', 'var', v50
+v52 <- BeginPlainFunction -> v53
+    v54 <- LoadInteger '1'
+    v55 <- UnaryOperation '-', v54
+    v56 <- BinaryOperation v53, '*', v55
+    Return v56
+EndPlainFunction
+v57 <- LoadInteger '2147483600'
+v58 <- UnaryOperation '-', v57
+v59 <- CallFunction v52, [v58]
+v60 <- LoadInteger '2147483600'
+v61 <- UnaryOperation '-', v60
+v62 <- CallFunction v52, [v61]
+v63 <- LoadInteger '2147483648'
+v64 <- LoadInteger '2147483648'
+v65 <- UnaryOperation '-', v64
+v66 <- CallFunction v52, [v65]
+
+
+function foo_smi(a1, a2) {
+    var result = a1 * a2;
+    result += a1 * 35;
+    result += a1 * -1;
+    result += a1 * 1;
+    result += a1 * 0;
+    return result * a1;
+}
+function foo_int(a16, a17) {
+    var result = a16 * a17;
+    result += a16 * 35;
+    result += a16 * -1;
+    result += a16 * 1;
+    result += a16 * 0;
+    return result * a16;
+}
+foo_smi(10, 5);
+var r1 = foo_smi(10, 5);
+var r2 = foo_smi(10, 5);
+foo_int(10, 21474800);
+var r3 = foo_int(10, 21474800);
+var r4 = foo_int(10, 21474800);
+function foo2(a53) {
+    return a53 * -1;
+}
+foo2(-2147483600);
+foo2(-2147483600);
+foo2(-2147483648);
+
+FuzzIL program written to corpus/MulI.fzil

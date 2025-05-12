@@ -1,0 +1,25 @@
+v0 <- CreateNamedVariable 'Int8Array', 'none'
+v1 <- LoadInteger '2'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- LoadInteger '2'
+v5 <- LoadInteger '4'
+v6 <- CallMethod v3, 'subarray', [v4, v5]
+v7 <- CreateNamedVariable 'b', 'var', v6
+v8 <- BeginPlainFunction -> 
+    v9 <- LoadInteger '10000000000'
+    v10 <- CallMethod v3, 'set', [v7, v9]
+EndPlainFunction
+v11 <- CallFunction v8, []
+v12 <- CreateNamedVariable 'RangeError', 'none'
+
+
+const v2 = new Int8Array(2);
+var a = v2;
+var b = a.subarray(2, 4);
+function f8() {
+    a.set(b, 10000000000);
+}
+f8();
+
+FuzzIL program written to corpus/regress-340125.fzil

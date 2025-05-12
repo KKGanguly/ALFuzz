@@ -1,0 +1,739 @@
+v0 <- LoadInteger '42'
+v1 <- CreateNamedVariable 'Array', 'none'
+v2 <- GetProperty v1, 'prototype'
+SetElement v2, '0', v0
+v3 <- GetProperty v1, 'prototype'
+v4 <- LoadInteger '0'
+v5 <- DeleteElement v3, '0'
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '1'
+    v8 <- LoadInteger '2'
+    v9 <- CreateArray [v7, v8]
+    v10 <- CreateNamedVariable 'a', 'var', v9
+    v11 <- CreateArrayWithSpread [...v10]
+    v12 <- CreateNamedVariable 'b', 'var', v11
+    v13 <- LoadInteger '1'
+    v14 <- LoadInteger '2'
+    v15 <- CreateArray [v13, v14]
+    v16 <- LoadString 'a'
+    v17 <- LoadString 'b'
+    v18 <- LoadString 'c'
+    v19 <- LoadString 'd'
+    v20 <- LoadString 'e'
+    v21 <- LoadString 'f'
+    v22 <- CreateArray [v16, v17, v18, v19, v20, v21]
+    v23 <- LoadString 'a'
+    v24 <- LoadString 'bc'
+    v25 <- LoadString 'd'
+    v26 <- LoadString 'ef'
+    v27 <- CreateArrayWithSpread [v23, ...v24, v25, ...v26]
+EndPlainFunction
+v28 <- CallFunction v6, []
+v29 <- CreateArray []
+v30 <- CreateNamedVariable 'log', 'var', v29
+v31 <- BeginGeneratorFunction -> v32
+    v33 <- LoadInteger '1'
+    v34 <- CallMethod v30, 'push', [v32, v33]
+    v35 <- LoadInteger '1'
+    v36 <- Yield v35
+    v37 <- LoadInteger '2'
+    v38 <- CallMethod v30, 'push', [v32, v37]
+    v39 <- LoadInteger '2'
+    v40 <- Yield v39
+    v41 <- LoadInteger '3'
+    v42 <- CallMethod v30, 'push', [v32, v41]
+    v43 <- LoadInteger '3'
+    v44 <- Yield v43
+    v45 <- LoadString 'done'
+    v46 <- CallMethod v30, 'push', [v32, v45]
+EndGeneratorFunction
+v47 <- BeginPlainFunction -> v48
+    v49 <- CallMethod v30, 'push', [v48]
+    Return v48
+EndPlainFunction
+v50 <- BeginPlainFunction -> 
+    v51 <- LoadInteger '1'
+    v52 <- LoadInteger '2'
+    v53 <- LoadInteger '3'
+    v54 <- CreateArray [v51, v52, v53]
+    v55 <- LoadString 'a'
+    v56 <- CreateNamedVariable 'gen', 'none'
+    v57 <- CallFunction v56, [v55]
+    v58 <- CreateArrayWithSpread [...v57]
+    v59 <- LoadString 'x'
+    v60 <- LoadInteger '1'
+    v61 <- LoadInteger '2'
+    v62 <- LoadInteger '3'
+    v63 <- LoadString 'y'
+    v64 <- LoadInteger '1'
+    v65 <- LoadInteger '2'
+    v66 <- LoadInteger '3'
+    v67 <- LoadString 'z'
+    v68 <- CreateArray [v59, v60, v61, v62, v63, v64, v65, v66, v67]
+    v69 <- LoadString 'x'
+    v70 <- LoadString 'a'
+    v71 <- CallFunction v56, [v70]
+    v72 <- LoadString 'y'
+    v73 <- LoadString 'b'
+    v74 <- CallFunction v56, [v73]
+    v75 <- LoadString 'z'
+    v76 <- CreateArrayWithSpread [v69, ...v71, v72, ...v74, v75]
+EndPlainFunction
+v77 <- CallFunction v50, []
+v78 <- BeginPlainFunction -> 
+    v79 <- CreateArray []
+    Reassign v30, v79
+    v80 <- LoadString 'x'
+    v81 <- LoadInteger '1'
+    v82 <- LoadInteger '2'
+    v83 <- LoadInteger '3'
+    v84 <- LoadString 'y'
+    v85 <- LoadInteger '1'
+    v86 <- LoadInteger '2'
+    v87 <- LoadInteger '3'
+    v88 <- LoadString 'z'
+    v89 <- CreateArray [v80, v81, v82, v83, v84, v85, v86, v87, v88]
+    v90 <- LoadString 'x'
+    v91 <- CallFunction v47, [v90]
+    v92 <- LoadString 'a'
+    v93 <- CreateNamedVariable 'gen', 'none'
+    v94 <- CallFunction v93, [v92]
+    v95 <- LoadString 'y'
+    v96 <- CallFunction v47, [v95]
+    v97 <- LoadString 'b'
+    v98 <- CallFunction v93, [v97]
+    v99 <- LoadString 'z'
+    v100 <- CallFunction v47, [v99]
+    v101 <- CreateArrayWithSpread [v91, ...v94, v96, ...v98, v100]
+    v102 <- LoadString 'x'
+    v103 <- LoadString 'a'
+    v104 <- LoadInteger '1'
+    v105 <- LoadString 'a'
+    v106 <- LoadInteger '2'
+    v107 <- LoadString 'a'
+    v108 <- LoadInteger '3'
+    v109 <- LoadString 'a'
+    v110 <- LoadString 'done'
+    v111 <- LoadString 'y'
+    v112 <- LoadString 'b'
+    v113 <- LoadInteger '1'
+    v114 <- LoadString 'b'
+    v115 <- LoadInteger '2'
+    v116 <- LoadString 'b'
+    v117 <- LoadInteger '3'
+    v118 <- LoadString 'b'
+    v119 <- LoadString 'done'
+    v120 <- LoadString 'z'
+    v121 <- CreateArray [v102, v103, v104, v105, v106, v107, v108, v109, v110, v111, v112, v113, v114, v115, v116, v117, v118, v119, v120]
+EndPlainFunction
+v122 <- CallFunction v78, []
+v123 <- BeginPlainFunction -> 
+    v124 <- LoadUndefined
+    v125 <- CreateNamedVariable 'a', 'var', v124
+    v126 <- BeginPlainFunction -> 
+        v127 <- LoadInteger '42'
+        v128 <- CreateArrayWithSpread [...v127]
+        Reassign v125, v128
+    EndPlainFunction
+    v129 <- CallFunction v126, []
+    v130 <- CreateNamedVariable 'TypeError', 'none'
+    v131 <- LoadUndefined
+EndPlainFunction
+v132 <- CallFunction v123, []
+v133 <- BeginPlainFunction -> 
+    v134 <- LoadInteger '42'
+    v135 <- CreateNamedVariable 'Symbol', 'none'
+    v136 <- GetProperty v135, 'iterator'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v136, v134
+    v137 <- EndObjectLiteral
+    v138 <- CreateNamedVariable 'iter', 'var', v137
+    v139 <- LoadUndefined
+    v140 <- CreateNamedVariable 'a', 'var', v139
+    v141 <- BeginPlainFunction -> 
+        v142 <- CreateArrayWithSpread [...v138]
+        Reassign v140, v142
+    EndPlainFunction
+    v143 <- CallFunction v141, []
+    v144 <- CreateNamedVariable 'TypeError', 'none'
+    v145 <- LoadUndefined
+EndPlainFunction
+v146 <- CallFunction v133, []
+v147 <- BeginPlainFunction -> 
+    v148 <- CreateNamedVariable 'Symbol', 'none'
+    v149 <- GetProperty v148, 'iterator'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v149 -> v150
+            v151 <- LoadInteger '42'
+            Return v151
+        EndObjectLiteralComputedMethod
+    v152 <- EndObjectLiteral
+    v153 <- CreateNamedVariable 'iter', 'var', v152
+    v154 <- LoadUndefined
+    v155 <- CreateNamedVariable 'a', 'var', v154
+    v156 <- BeginPlainFunction -> 
+        v157 <- CreateArrayWithSpread [...v153]
+        Reassign v155, v157
+    EndPlainFunction
+    v158 <- CallFunction v156, []
+    v159 <- CreateNamedVariable 'TypeError', 'none'
+    v160 <- LoadUndefined
+EndPlainFunction
+v161 <- CallFunction v147, []
+v162 <- BeginPlainFunction -> 
+    v163 <- CreateNamedVariable 'Symbol', 'none'
+    v164 <- GetProperty v163, 'iterator'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v164 -> v165
+            BeginObjectLiteral
+            v166 <- EndObjectLiteral
+            Return v166
+        EndObjectLiteralComputedMethod
+    v167 <- EndObjectLiteral
+    v168 <- CreateNamedVariable 'iter', 'var', v167
+    v169 <- LoadUndefined
+    v170 <- CreateNamedVariable 'a', 'var', v169
+    v171 <- BeginPlainFunction -> 
+        v172 <- CreateArrayWithSpread [...v168]
+        Reassign v170, v172
+    EndPlainFunction
+    v173 <- CallFunction v171, []
+    v174 <- CreateNamedVariable 'TypeError', 'none'
+    v175 <- LoadUndefined
+EndPlainFunction
+v176 <- CallFunction v162, []
+v177 <- BeginPlainFunction -> 
+    v178 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v179 <- CreateNamedVariable 'Symbol', 'none'
+    v180 <- GetProperty v179, 'iterator'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v180 -> v181
+            BeginObjectLiteral
+                BeginObjectLiteralMethod `next` -> v182
+                    BeginObjectLiteral
+                        BeginObjectLiteralGetter `done` -> v183
+                            v184 <- Construct v178, []
+                            ThrowException v184
+                        EndObjectLiteralGetter
+                    v185 <- EndObjectLiteral
+                    Return v185
+                EndObjectLiteralMethod
+            v186 <- EndObjectLiteral
+            Return v186
+        EndObjectLiteralComputedMethod
+    v187 <- EndObjectLiteral
+    v188 <- CreateNamedVariable 'iter', 'var', v187
+    v189 <- LoadUndefined
+    v190 <- CreateNamedVariable 'a', 'var', v189
+    v191 <- BeginPlainFunction -> 
+        v192 <- CreateArrayWithSpread [...v188]
+        Reassign v190, v192
+    EndPlainFunction
+    v193 <- CallFunction v191, []
+    v194 <- CallFunction v178, []
+    v195 <- LoadUndefined
+EndPlainFunction
+v196 <- CallFunction v177, []
+v197 <- BeginPlainFunction -> 
+    v198 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v199 <- CreateNamedVariable 'Symbol', 'none'
+    v200 <- GetProperty v199, 'iterator'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v200 -> v201
+            BeginObjectLiteral
+                BeginObjectLiteralMethod `next` -> v202
+                    v203 <- LoadBoolean 'false'
+                    BeginObjectLiteral
+                        ObjectLiteralAddProperty `done`, v203
+                        BeginObjectLiteralGetter `value` -> v204
+                            v205 <- Construct v198, []
+                            ThrowException v205
+                        EndObjectLiteralGetter
+                    v206 <- EndObjectLiteral
+                    Return v206
+                EndObjectLiteralMethod
+            v207 <- EndObjectLiteral
+            Return v207
+        EndObjectLiteralComputedMethod
+    v208 <- EndObjectLiteral
+    v209 <- CreateNamedVariable 'iter', 'var', v208
+    v210 <- LoadUndefined
+    v211 <- CreateNamedVariable 'a', 'var', v210
+    v212 <- BeginPlainFunction -> 
+        v213 <- CreateArrayWithSpread [...v209]
+        Reassign v211, v213
+    EndPlainFunction
+    v214 <- CallFunction v212, []
+    v215 <- CallFunction v198, []
+    v216 <- LoadUndefined
+EndPlainFunction
+v217 <- CallFunction v197, []
+v218 <- BeginPlainFunction -> 
+    v219 <- BeginPlainFunction -> 
+        v220 <- LoadString 'abc'
+        v221 <- CreateArrayWithSpread [...v220]
+        Return v221
+    EndPlainFunction
+    v222 <- LoadString 'a'
+    v223 <- LoadString 'b'
+    v224 <- LoadString 'c'
+    v225 <- CreateArray [v222, v223, v224]
+    v226 <- CallFunction v219, []
+    v227 <- LoadString 'a'
+    v228 <- LoadString 'b'
+    v229 <- LoadString 'c'
+    v230 <- CreateArray [v227, v228, v229]
+    v231 <- CallFunction v219, []
+EndPlainFunction
+v232 <- CallFunction v218, []
+v233 <- BeginPlainFunction -> 
+    v234 <- CreateNamedVariable 'Symbol', 'none'
+    v235 <- GetProperty v234, 'iterator'
+    BeginObjectLiteral
+        BeginObjectLiteralComputedMethod v235 -> v236
+            v237 <- LoadInteger '0'
+            v238 <- CreateNamedVariable 'i', 'var', v237
+            BeginObjectLiteral
+                BeginObjectLiteralMethod `next` -> v239
+                    v240 <- UnaryOperation '++', v238
+                    v241 <- LoadInteger '3'
+                    v242 <- Compare v238, '===', v241
+                    BeginObjectLiteral
+                        ObjectLiteralAddProperty `value`, v240
+                        ObjectLiteralAddProperty `done`, v242
+                    v243 <- EndObjectLiteral
+                    Return v243
+                EndObjectLiteralMethod
+            v244 <- EndObjectLiteral
+            Return v244
+        EndObjectLiteralComputedMethod
+    v245 <- EndObjectLiteral
+    v246 <- CreateNamedVariable 'iter', 'var', v245
+    v247 <- BeginPlainFunction -> 
+        v248 <- LoadInteger '0'
+        v249 <- CreateArrayWithSpread [v248, ...v246]
+        Return v249
+    EndPlainFunction
+    v250 <- LoadInteger '0'
+    v251 <- LoadInteger '1'
+    v252 <- LoadInteger '2'
+    v253 <- CreateArray [v250, v251, v252]
+    v254 <- CallFunction v247, []
+EndPlainFunction
+v255 <- CallFunction v233, []
+v256 <- BeginPlainFunction -> 
+    v257 <- GetProperty v1, 'prototype'
+    v258 <- LoadInteger '3'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `set` -> v259
+            v260 <- LoadInteger '666'
+            ThrowException v260
+        EndObjectLiteralMethod
+    v261 <- EndObjectLiteral
+    v262 <- CreateNamedVariable 'Object', 'none'
+    v263 <- CallMethod v262, 'defineProperty', [v257, v258, v261]
+    v264 <- GetProperty v1, 'prototype'
+    v265 <- LoadInteger '4'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `set` -> v266
+            v267 <- LoadInteger '666'
+            ThrowException v267
+        EndObjectLiteralMethod
+    v268 <- EndObjectLiteral
+    v269 <- CallMethod v262, 'defineProperty', [v264, v265, v268]
+    v270 <- BeginPlainFunction -> 
+        v271 <- LoadString 'a'
+        v272 <- LoadString 'b'
+        v273 <- LoadString 'c'
+        v274 <- LoadString 'd'
+        v275 <- CreateArray [v272, v273, v274]
+        v276 <- LoadString 'e'
+        v277 <- CreateArrayWithSpread [v271, ...v275, v276]
+        Return v277
+    EndPlainFunction
+    v278 <- LoadString 'a'
+    v279 <- LoadString 'b'
+    v280 <- LoadString 'c'
+    v281 <- LoadString 'd'
+    v282 <- LoadString 'e'
+    v283 <- CreateArray [v278, v279, v280, v281, v282]
+    v284 <- CallFunction v270, []
+    v285 <- LoadString 'a'
+    v286 <- LoadString 'b'
+    v287 <- LoadString 'c'
+    v288 <- LoadString 'd'
+    v289 <- LoadString 'e'
+    v290 <- CreateArray [v285, v286, v287, v288, v289]
+    v291 <- CallFunction v270, []
+    v292 <- GetProperty v1, 'prototype'
+    v293 <- LoadInteger '3'
+    v294 <- DeleteElement v292, '3'
+    v295 <- GetProperty v1, 'prototype'
+    v296 <- LoadInteger '4'
+    v297 <- DeleteElement v295, '4'
+EndPlainFunction
+v298 <- CallFunction v256, []
+v299 <- BeginPlainFunction -> 
+    v300 <- GetProperty v1, 'prototype'
+    v301 <- GetProperty v300, '__proto__'
+    v302 <- LoadInteger '3'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `set` -> v303
+            v304 <- LoadInteger '666'
+            ThrowException v304
+        EndObjectLiteralMethod
+    v305 <- EndObjectLiteral
+    v306 <- CreateNamedVariable 'Object', 'none'
+    v307 <- CallMethod v306, 'defineProperty', [v301, v302, v305]
+    v308 <- GetProperty v1, 'prototype'
+    v309 <- GetProperty v308, '__proto__'
+    v310 <- LoadInteger '4'
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `set` -> v311
+            v312 <- LoadInteger '666'
+            ThrowException v312
+        EndObjectLiteralMethod
+    v313 <- EndObjectLiteral
+    v314 <- CallMethod v306, 'defineProperty', [v309, v310, v313]
+    v315 <- BeginPlainFunction -> 
+        v316 <- LoadString 'a'
+        v317 <- LoadString 'b'
+        v318 <- LoadString 'c'
+        v319 <- LoadString 'd'
+        v320 <- CreateArray [v317, v318, v319]
+        v321 <- LoadString 'e'
+        v322 <- CreateArrayWithSpread [v316, ...v320, v321]
+        Return v322
+    EndPlainFunction
+    v323 <- LoadString 'a'
+    v324 <- LoadString 'b'
+    v325 <- LoadString 'c'
+    v326 <- LoadString 'd'
+    v327 <- LoadString 'e'
+    v328 <- CreateArray [v323, v324, v325, v326, v327]
+    v329 <- CallFunction v315, []
+    v330 <- LoadString 'a'
+    v331 <- LoadString 'b'
+    v332 <- LoadString 'c'
+    v333 <- LoadString 'd'
+    v334 <- LoadString 'e'
+    v335 <- CreateArray [v330, v331, v332, v333, v334]
+    v336 <- CallFunction v315, []
+    v337 <- GetProperty v1, 'prototype'
+    v338 <- GetProperty v337, '__proto__'
+    v339 <- LoadInteger '3'
+    v340 <- DeleteElement v338, '3'
+    v341 <- GetProperty v1, 'prototype'
+    v342 <- GetProperty v341, '__proto__'
+    v343 <- LoadInteger '4'
+    v344 <- DeleteElement v342, '4'
+EndPlainFunction
+v345 <- CallFunction v299, []
+v346 <- BeginPlainFunction -> 
+    v347 <- GetProperty v1, 'prototype'
+    v348 <- GetProperty v347, '__proto__'
+    v349 <- CreateNamedVariable 'backup', 'const', v348
+    v350 <- CreateNamedVariable 'Proxy', 'none'
+    BeginObjectLiteral
+    v351 <- EndObjectLiteral
+    BeginObjectLiteral
+        BeginObjectLiteralMethod `set` -> v352
+            v353 <- LoadInteger '666'
+            ThrowException v353
+        EndObjectLiteralMethod
+    v354 <- EndObjectLiteral
+    v355 <- Construct v350, [v351, v354]
+    v356 <- GetProperty v1, 'prototype'
+    SetProperty v356, '__proto__', v355
+    v357 <- BeginPlainFunction -> 
+        v358 <- LoadString 'a'
+        v359 <- LoadString 'b'
+        v360 <- LoadString 'c'
+        v361 <- LoadString 'd'
+        v362 <- CreateArray [v359, v360, v361]
+        v363 <- LoadString 'e'
+        v364 <- CreateArrayWithSpread [v358, ...v362, v363]
+        Return v364
+    EndPlainFunction
+    v365 <- LoadString 'a'
+    v366 <- LoadString 'b'
+    v367 <- LoadString 'c'
+    v368 <- LoadString 'd'
+    v369 <- LoadString 'e'
+    v370 <- CreateArray [v365, v366, v367, v368, v369]
+    v371 <- CallFunction v357, []
+    v372 <- LoadString 'a'
+    v373 <- LoadString 'b'
+    v374 <- LoadString 'c'
+    v375 <- LoadString 'd'
+    v376 <- LoadString 'e'
+    v377 <- CreateArray [v372, v373, v374, v375, v376]
+    v378 <- CallFunction v357, []
+    v379 <- GetProperty v1, 'prototype'
+    v380 <- CreateNamedVariable 'Object', 'none'
+    v381 <- CallMethod v380, 'setPrototypeOf', [v379, v349]
+EndPlainFunction
+v382 <- CallFunction v346, []
+
+
+const t0 = Array.prototype;
+t0[0] = 42;
+const t2 = Array.prototype;
+delete t2[0];
+function TestBasics() {
+    var a = [1,2];
+    var b = [...a];
+    [1,2];
+    ["a","b","c","d","e","f"];
+    ["a",..."bc","d",..."ef"];
+}
+TestBasics();
+var log = [];
+function* gen1(a32) {
+    log.push(a32, 1);
+    yield 1;
+    log.push(a32, 2);
+    yield 2;
+    log.push(a32, 3);
+    yield 3;
+    log.push(a32, "done");
+}
+function id(a48) {
+    log.push(a48);
+    return a48;
+}
+function TestGenerator() {
+    [1,2,3];
+    [...gen("a")];
+    ["x",1,2,3,"y",1,2,3,"z"];
+    ["x",...gen("a"),"y",...gen("b"),"z"];
+}
+TestGenerator();
+function TestOrderOfExecution() {
+    log = [];
+    ["x",1,2,3,"y",1,2,3,"z"];
+    [id("x"),...gen("a"),id("y"),...gen("b"),id("z")];
+    ["x","a",1,"a",2,"a",3,"a","done","y","b",1,"b",2,"b",3,"b","done","z"];
+}
+TestOrderOfExecution();
+function TestNotIterable() {
+    var a;
+    function f126() {
+        a = [...42];
+    }
+    f126();
+}
+TestNotIterable();
+function TestInvalidIterator() {
+    const v136 = Symbol.iterator;
+    var iter = { [v136]: 42 };
+    var a;
+    function f141() {
+        a = [...iter];
+    }
+    f141();
+}
+TestInvalidIterator();
+function TestIteratorNotAnObject() {
+    const v149 = Symbol.iterator;
+    const v152 = {
+        [v149]() {
+            return 42;
+        },
+    };
+    var iter = v152;
+    var a;
+    function f156() {
+        a = [...iter];
+    }
+    f156();
+}
+TestIteratorNotAnObject();
+function TestIteratorNoNext() {
+    const v164 = Symbol.iterator;
+    const v167 = {
+        [v164]() {
+            return {};
+        },
+    };
+    var iter = v167;
+    var a;
+    function f171() {
+        a = [...iter];
+    }
+    f171();
+}
+TestIteratorNoNext();
+function TestIteratorResultDoneThrows() {
+    function MyError() {
+    }
+    const v180 = Symbol.iterator;
+    const v187 = {
+        [v180]() {
+            const v186 = {
+                next() {
+                    const v185 = {
+                        get done() {
+                            const v184 = new MyError();
+                            throw v184;
+                        },
+                    };
+                    return v185;
+                },
+            };
+            return v186;
+        },
+    };
+    var iter = v187;
+    var a;
+    function f191() {
+        a = [...iter];
+    }
+    f191();
+    MyError();
+}
+TestIteratorResultDoneThrows();
+function TestIteratorResultValueThrows() {
+    function MyError() {
+    }
+    const v200 = Symbol.iterator;
+    const v208 = {
+        [v200]() {
+            const v207 = {
+                next() {
+                    const v206 = {
+                        done: false,
+                        get value() {
+                            const v205 = new MyError();
+                            throw v205;
+                        },
+                    };
+                    return v206;
+                },
+            };
+            return v207;
+        },
+    };
+    var iter = v208;
+    var a;
+    function f212() {
+        a = [...iter];
+    }
+    f212();
+    MyError();
+}
+TestIteratorResultValueThrows();
+function TestOptimize() {
+    function f() {
+        return [..."abc"];
+    }
+    ["a","b","c"];
+    f();
+    ["a","b","c"];
+    f();
+}
+TestOptimize();
+function TestDeoptimize() {
+    const v235 = Symbol.iterator;
+    const v245 = {
+        [v235]() {
+            var i = 0;
+            const v244 = {
+                next() {
+                    const v240 = ++i;
+                    const v242 = i === 3;
+                    return { value: v240, done: v242 };
+                },
+            };
+            return v244;
+        },
+    };
+    var iter = v245;
+    function f() {
+        return [0,...iter];
+    }
+    [0,1,2];
+    f();
+}
+TestDeoptimize();
+function TestPrototypeSetter1() {
+    const v257 = Array.prototype;
+    const v261 = {
+        set() {
+            throw 666;
+        },
+    };
+    Object.defineProperty(v257, 3, v261);
+    const v264 = Array.prototype;
+    const v268 = {
+        set() {
+            throw 666;
+        },
+    };
+    Object.defineProperty(v264, 4, v268);
+    function f() {
+        return ["a",...["b","c","d"],"e"];
+    }
+    ["a","b","c","d","e"];
+    f();
+    ["a","b","c","d","e"];
+    f();
+    const t198 = Array.prototype;
+    delete t198[3];
+    const t203 = Array.prototype;
+    delete t203[4];
+}
+TestPrototypeSetter1();
+function TestPrototypeSetter2() {
+    const v301 = Array.prototype.__proto__;
+    const v305 = {
+        set() {
+            throw 666;
+        },
+    };
+    Object.defineProperty(v301, 3, v305);
+    const v309 = Array.prototype.__proto__;
+    const v313 = {
+        set() {
+            throw 666;
+        },
+    };
+    Object.defineProperty(v309, 4, v313);
+    function f() {
+        return ["a",...["b","c","d"],"e"];
+    }
+    ["a","b","c","d","e"];
+    f();
+    ["a","b","c","d","e"];
+    f();
+    const t226 = Array.prototype.__proto__;
+    delete t226[3];
+    const t231 = Array.prototype.__proto__;
+    delete t231[4];
+}
+TestPrototypeSetter2();
+function TestPrototypeProxy() {
+    const backup = Array.prototype.__proto__;
+    const v351 = {};
+    const v354 = {
+        set() {
+            throw 666;
+        },
+    };
+    const v355 = new Proxy(v351, v354);
+    const t245 = Array.prototype;
+    t245.__proto__ = v355;
+    function f() {
+        return ["a",...["b","c","d"],"e"];
+    }
+    ["a","b","c","d","e"];
+    f();
+    ["a","b","c","d","e"];
+    f();
+    Object.setPrototypeOf(Array.prototype, backup);
+}
+TestPrototypeProxy();
+
+FuzzIL program written to corpus/spread-array-mutated-prototype.fzil

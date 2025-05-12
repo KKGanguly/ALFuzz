@@ -1,0 +1,98 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'i', 'var', v1
+    v3 <- LoadUndefined
+    v4 <- CreateNamedVariable 'eps', 'var', v3
+    BeginForLoopInitializer
+        v5 <- LoadInteger '0'
+        Reassign v2, v5
+        v6 <- LoadInteger '1'
+        Reassign v4, v6
+    BeginForLoopCondition
+        v7 <- LoadInteger '1100'
+        v8 <- Compare v2, '<', v7
+    BeginForLoopAfterthought v8
+        v9 <- UnaryOperation v2, '++'
+        v10 <- LoadInteger '2'
+        Update v4, '/', v10
+    BeginForLoopBody
+        v11 <- CreateNamedVariable 'Number', 'none'
+        v12 <- GetProperty v11, 'MAX_VALUE'
+        v13 <- LoadInteger '1'
+        v14 <- BinaryOperation v13, '+', v4
+        v15 <- BinaryOperation v12, '*', v14
+        v16 <- CreateNamedVariable 'mulAboveMax', 'var', v15
+        v17 <- GetProperty v11, 'MAX_VALUE'
+        v18 <- LoadInteger '1'
+        v19 <- BinaryOperation v18, '/', v4
+        v20 <- BinaryOperation v17, '+', v19
+        v21 <- CreateNamedVariable 'addAboveMax', 'var', v20
+        v22 <- GetProperty v11, 'MIN_VALUE'
+        v23 <- LoadInteger '1'
+        v24 <- BinaryOperation v23, '-', v4
+        v25 <- BinaryOperation v22, '*', v24
+        v26 <- CreateNamedVariable 'mulBelowMin', 'var', v25
+        v27 <- GetProperty v11, 'MIN_VALUE'
+        v28 <- BinaryOperation v27, '-', v4
+        v29 <- CreateNamedVariable 'addBelowMin', 'var', v28
+        v30 <- GetProperty v11, 'MAX_VALUE'
+        v31 <- Compare v16, '==', v30
+        v32 <- CreateNamedVariable 'Infinity', 'none'
+        v33 <- Compare v16, '==', v32
+        v34 <- BinaryOperation v31, '||', v33
+        v35 <- LoadString 'mul'
+        v36 <- BinaryOperation v35, '+', v2
+        v37 <- GetProperty v11, 'MAX_VALUE'
+        v38 <- Compare v21, '==', v37
+        v39 <- Compare v21, '==', v32
+        v40 <- BinaryOperation v38, '||', v39
+        v41 <- LoadString 'add'
+        v42 <- BinaryOperation v41, '+', v2
+        v43 <- GetProperty v11, 'MIN_VALUE'
+        v44 <- Compare v26, '==', v43
+        v45 <- LoadInteger '0'
+        v46 <- Compare v26, '<=', v45
+        v47 <- BinaryOperation v44, '||', v46
+        v48 <- LoadString 'mul2'
+        v49 <- BinaryOperation v48, '+', v2
+        v50 <- GetProperty v11, 'MIN_VALUE'
+        v51 <- Compare v29, '==', v50
+        v52 <- LoadInteger '0'
+        v53 <- Compare v29, '<=', v52
+        v54 <- BinaryOperation v51, '||', v53
+        v55 <- LoadString 'add2'
+        v56 <- BinaryOperation v55, '+', v2
+    EndForLoop
+EndPlainFunction
+v57 <- CallFunction v0, []
+
+
+function testLimits() {
+    var i;
+    var eps;
+    for ((() => {
+            i = 0;
+            eps = 1;
+        })();
+        i < 1100;
+        (() => {
+            i++;
+            eps /= 2;
+        })()) {
+        var mulAboveMax = Number.MAX_VALUE * (1 + eps);
+        var addAboveMax = Number.MAX_VALUE + (1 / eps);
+        var mulBelowMin = Number.MIN_VALUE * (1 - eps);
+        var addBelowMin = Number.MIN_VALUE - eps;
+        (mulAboveMax == Number.MAX_VALUE) || (mulAboveMax == Infinity);
+        "mul" + i;
+        (addAboveMax == Number.MAX_VALUE) || (addAboveMax == Infinity);
+        "add" + i;
+        (mulBelowMin == Number.MIN_VALUE) || (mulBelowMin <= 0);
+        "mul2" + i;
+        (addBelowMin == Number.MIN_VALUE) || (addBelowMin <= 0);
+        "add2" + i;
+    }
+}
+testLimits();
+
+FuzzIL program written to corpus/number-limits.fzil

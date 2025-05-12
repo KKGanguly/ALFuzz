@@ -1,0 +1,52 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '65792'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'constructorArgs', 'var', v2
+v4 <- BeginPlainFunction -> 
+EndPlainFunction
+v5 <- CreateNamedVariable 'constructor', 'var', v4
+v6 <- CreateNamedVariable 'Proxy', 'none'
+v7 <- BeginPlainFunction -> 
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `construct`, v7
+v8 <- EndObjectLiteral
+v9 <- Construct v6, [v5, v8]
+v10 <- CreateNamedVariable 'target', 'var', v9
+v11 <- BeginPlainFunction -> v12, v13
+    v14 <- CreateArray []
+    v15 <- CreateNamedVariable 'Reflect', 'none'
+    v16 <- CallMethod v15, 'construct', [v5, v14]
+    Return v16
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `construct`, v11
+v17 <- EndObjectLiteral
+v18 <- Construct v6, [v10, v17]
+v19 <- CreateNamedVariable 'proxy', 'var', v18
+v20 <- Construct v19, []
+v21 <- CreateNamedVariable 'instance', 'var', v20
+v22 <- CreateNamedVariable 'Reflect', 'none'
+v23 <- CallMethod v22, 'construct', [v19, v3]
+v24 <- CreateNamedVariable 'instance2', 'var', v23
+
+
+const v2 = new Array(65792);
+var constructorArgs = v2;
+function f4() {
+}
+var constructor = f4;
+function f7() {
+}
+const v9 = new Proxy(constructor, { construct: f7 });
+var target = v9;
+function f11(a12, a13) {
+    return Reflect.construct(constructor, []);
+}
+const v18 = new Proxy(target, { construct: f11 });
+var proxy = v18;
+const v20 = new proxy();
+var instance = v20;
+var instance2 = Reflect.construct(proxy, constructorArgs);
+
+FuzzIL program written to corpus/regress-crbug-813450.fzil

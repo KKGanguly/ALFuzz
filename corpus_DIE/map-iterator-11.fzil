@@ -1,0 +1,123 @@
+v0 <- CreateNamedVariable 'Map', 'none'
+v1 <- LoadInteger '1'
+v2 <- LoadInteger '2'
+v3 <- CreateArray [v1, v2]
+v4 <- LoadInteger '2'
+v5 <- LoadInteger '3'
+v6 <- CreateArray [v4, v5]
+v7 <- LoadInteger '3'
+v8 <- LoadInteger '4'
+v9 <- CreateArray [v7, v8]
+v10 <- CreateArray [v3, v6, v9]
+v11 <- Construct v0, [v10]
+v12 <- CreateNamedVariable 'map', 'var', v11
+v13 <- CallMethod v12, 'keys', []
+v14 <- CreateNamedVariable 'iterator', 'var', v13
+v15 <- LoadInteger '1'
+v16 <- LoadInteger '2'
+v17 <- LoadInteger '3'
+v18 <- CreateArray [v15, v16, v17]
+v19 <- CallMethod v12, 'keys', []
+v20 <- CreateArrayWithSpread [...v19]
+v21 <- LoadInteger '1'
+v22 <- LoadInteger '2'
+v23 <- LoadInteger '3'
+v24 <- CreateArray [v21, v22, v23]
+v25 <- CreateArrayWithSpread [...v14]
+v26 <- CreateArray []
+v27 <- CreateArrayWithSpread [...v14]
+v28 <- CallMethod v12, 'values', []
+Reassign v14, v28
+v29 <- LoadInteger '2'
+v30 <- LoadInteger '3'
+v31 <- LoadInteger '4'
+v32 <- CreateArray [v29, v30, v31]
+v33 <- CreateArrayWithSpread [...v14]
+v34 <- CreateArray []
+v35 <- CreateArrayWithSpread [...v14]
+v36 <- CallMethod v12, 'keys', []
+Reassign v14, v36
+v37 <- CallMethod v14, 'next', []
+v38 <- LoadInteger '2'
+v39 <- LoadInteger '3'
+v40 <- CreateArray [v38, v39]
+v41 <- CreateArrayWithSpread [...v14]
+v42 <- CreateArray []
+v43 <- CreateArrayWithSpread [...v14]
+v44 <- CallMethod v12, 'values', []
+Reassign v14, v44
+v45 <- CallMethod v12, 'values', []
+v46 <- CreateNamedVariable 'iterator2', 'var', v45
+v47 <- LoadInteger '1'
+v48 <- CallMethod v12, 'delete', [v47]
+v49 <- LoadInteger '3'
+v50 <- LoadInteger '4'
+v51 <- CreateArray [v49, v50]
+v52 <- CreateArrayWithSpread [...v14]
+v53 <- CreateArray []
+v54 <- CreateArrayWithSpread [...v14]
+v55 <- LoadInteger '1'
+v56 <- LoadInteger '5'
+v57 <- CallMethod v12, 'set', [v55, v56]
+v58 <- LoadInteger '3'
+v59 <- LoadInteger '4'
+v60 <- LoadInteger '5'
+v61 <- CreateArray [v58, v59, v60]
+v62 <- CreateArrayWithSpread [...v46]
+v63 <- CreateArray []
+v64 <- CreateArrayWithSpread [...v46]
+v65 <- CallMethod v12, 'keys', []
+Reassign v14, v65
+v66 <- LoadInteger '4'
+v67 <- LoadInteger '6'
+v68 <- CallMethod v12, 'set', [v66, v67]
+v69 <- LoadInteger '2'
+v70 <- LoadInteger '3'
+v71 <- LoadInteger '1'
+v72 <- LoadInteger '4'
+v73 <- CreateArray [v69, v70, v71, v72]
+v74 <- CreateArrayWithSpread [...v14]
+v75 <- CreateArray []
+v76 <- CreateArrayWithSpread [...v14]
+
+
+const v11 = new Map([[1,2],[2,3],[3,4]]);
+var map = v11;
+var iterator = map.keys();
+[1,2,3];
+[...map.keys()];
+[1,2,3];
+[...iterator];
+[];
+[...iterator];
+iterator = map.values();
+[2,3,4];
+[...iterator];
+[];
+[...iterator];
+iterator = map.keys();
+iterator.next();
+[2,3];
+[...iterator];
+[];
+[...iterator];
+iterator = map.values();
+var iterator2 = map.values();
+map.delete(1);
+[3,4];
+[...iterator];
+[];
+[...iterator];
+map.set(1, 5);
+[3,4,5];
+[...iterator2];
+[];
+[...iterator2];
+iterator = map.keys();
+map.set(4, 6);
+[2,3,1,4];
+[...iterator];
+[];
+[...iterator];
+
+FuzzIL program written to corpus/map-iterator-11.fzil

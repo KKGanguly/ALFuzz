@@ -1,0 +1,48 @@
+BeginObjectLiteral
+    BeginObjectLiteralGetter `x` -> v0
+    EndObjectLiteralGetter
+v1 <- EndObjectLiteral
+v2 <- LoadString 'x'
+v3 <- CreateNamedVariable 'Object', 'none'
+v4 <- CallMethod v3, 'getOwnPropertyDescriptor', [v1, v2]
+v5 <- GetProperty v4, 'get'
+v6 <- CreateNamedVariable 'x', 'var', v5
+v7 <- BeginPlainFunction -> v8, v9
+    BeginIf v9
+        v10 <- TestInstanceOf v8, v6
+        Return v10
+    EndIf
+EndPlainFunction
+v11 <- CallFunction v7, []
+v12 <- BeginPlainFunction -> 
+    v13 <- Construct v6, []
+    Return v13
+EndPlainFunction
+v14 <- BeginArrowFunction -> 
+    v15 <- CallFunction v12, []
+    Return v15
+EndArrowFunction
+v16 <- CallFunction v14, []
+
+
+const v1 = {
+    get x() {
+    },
+};
+var x = Object.getOwnPropertyDescriptor(v1, "x").get;
+function f(a8, a9) {
+    if (a9) {
+        return a8 instanceof x;
+    }
+}
+f();
+function g() {
+    const v13 = new x();
+    return v13;
+}
+const v14 = () => {
+    return g();
+};
+v14();
+
+FuzzIL program written to corpus/regress-ensure-initial-map.fzil

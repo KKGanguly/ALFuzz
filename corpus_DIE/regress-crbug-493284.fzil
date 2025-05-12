@@ -1,0 +1,24 @@
+v0 <- LoadThis
+v1 <- GetProperty v0, 'Intl'
+BeginIf v1
+    v2 <- CreateNamedVariable 'Intl', 'none'
+    v3 <- GetProperty v2, 'Collator'
+    v4 <- Construct v3, []
+    v5 <- CreateNamedVariable 'coll', 'var', v4
+    v6 <- LoadInteger '1'
+    v7 <- UnaryOperation '-', v6
+    v8 <- LoadString 'a'
+    v9 <- LoadString 'c'
+    v10 <- CallMethod v5, 'compare', [v8, v9]
+EndIf
+
+
+if (this.Intl) {
+    const t1 = Intl.Collator;
+    const v4 = new t1();
+    var coll = v4;
+    -1;
+    coll.compare("a", "c");
+}
+
+FuzzIL program written to corpus/regress-crbug-493284.fzil

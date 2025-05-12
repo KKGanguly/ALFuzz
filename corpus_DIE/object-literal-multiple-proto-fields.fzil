@@ -1,0 +1,43 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'p1', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable 'p2', 'var', v2
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'p3', 'var', v4
+v6 <- LoadInteger '0'
+v7 <- CreateNamedVariable 'x', 'var', v6
+v8 <- LoadInteger '1'
+v9 <- CreateNamedVariable 'y', 'var', v8
+v10 <- LoadInteger '2'
+v11 <- CreateNamedVariable 'z', 'var', v10
+v12 <- LoadInteger '3'
+v13 <- CreateNamedVariable 'o', 'var', v12
+v14 <- LoadString 'o = {'
+v15 <- LoadString '  __proto__: (x++, p1),'
+v16 <- BinaryOperation v14, '+', v15
+v17 <- LoadString '  __proto__: (y++, p2),'
+v18 <- BinaryOperation v16, '+', v17
+v19 <- LoadString '  __proto__: (z++, p3)'
+v20 <- BinaryOperation v18, '+', v19
+v21 <- LoadString '};'
+v22 <- BinaryOperation v20, '+', v21
+v23 <- CreateNamedVariable 'SyntaxError', 'none'
+v24 <- LoadInteger '0'
+v25 <- LoadInteger '1'
+v26 <- LoadInteger '2'
+v27 <- LoadInteger '3'
+
+
+var p1 = {};
+var p2 = {};
+var p3 = {};
+var x = 0;
+var y = 1;
+var z = 2;
+var o = 3;
+((("o = {" + "  __proto__: (x++, p1),") + "  __proto__: (y++, p2),") + "  __proto__: (z++, p3)") + "};";
+
+FuzzIL program written to corpus/object-literal-multiple-proto-fields.fzil

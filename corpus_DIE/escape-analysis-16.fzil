@@ -1,0 +1,37 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '5'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `a`, v1
+    v2 <- EndObjectLiteral
+    v3 <- CreateNamedVariable 'o', 'var', v2
+    BeginForLoopInitializer
+        v4 <- LoadInteger '0'
+    BeginForLoopCondition -> v5
+        v6 <- LoadInteger '100'
+        v7 <- Compare v5, '<', v6
+    BeginForLoopAfterthought v7 -> v8
+        v9 <- UnaryOperation '++', v8
+    BeginForLoopBody -> v10
+        v11 <- LoadInteger '5'
+        SetProperty v3, 'a', v11
+        v12 <- LoadInteger '7'
+        SetProperty v3, 'a', v12
+    EndForLoop
+EndPlainFunction
+v13 <- CallFunction v0, []
+v14 <- CallFunction v0, []
+v15 <- CallFunction v0, []
+
+
+function foo() {
+    var o = { a: 5 };
+    for (let i5 = 0; i5 < 100; ++i5) {
+        o.a = 5;
+        o.a = 7;
+    }
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/escape-analysis-16.fzil

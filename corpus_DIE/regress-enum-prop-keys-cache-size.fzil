@@ -1,0 +1,29 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- LoadInteger '1'
+SetProperty v1, 'a', v2
+v3 <- LoadInteger '2'
+SetProperty v1, 'b', v3
+BeginObjectLiteral
+v4 <- EndObjectLiteral
+Reassign v1, v4
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'y', 'var', v5
+v7 <- LoadInteger '1'
+SetProperty v6, 'a', v7
+BeginForInLoop v6 -> v8
+EndForInLoop
+
+
+var x = {};
+x.a = 1;
+x.b = 2;
+x = {};
+var y = {};
+y.a = 1;
+for (const v8 in y) {
+}
+
+FuzzIL program written to corpus/regress-enum-prop-keys-cache-size.fzil

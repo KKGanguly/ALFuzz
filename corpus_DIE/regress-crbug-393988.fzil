@@ -1,0 +1,22 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- CreateNamedVariable 'Error', 'none'
+v3 <- CallMethod v2, 'captureStackTrace', [v1]
+v4 <- LoadString 'stack'
+v5 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v5
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'Object', 'none'
+v8 <- CallMethod v7, 'defineProperty', [v1, v4, v6]
+v9 <- LoadInteger '1'
+v10 <- GetProperty v1, 'stack'
+
+
+var o = {};
+Error.captureStackTrace(o);
+Object.defineProperty(o, "stack", { value: 1 });
+o.stack;
+
+FuzzIL program written to corpus/regress-crbug-393988.fzil

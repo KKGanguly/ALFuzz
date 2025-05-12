@@ -1,0 +1,89 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadArguments
+    v2 <- CreateNamedVariable 'sloppy', 'var', v1
+    v3 <- CreateNamedVariable 'Symbol', 'none'
+    v4 <- CallFunction v3, []
+    v5 <- CreateNamedVariable 'sym', 'var', v4
+    v6 <- LoadInteger '123'
+    SetComputedProperty v2, v5, v6
+    v7 <- CreateNamedVariable 'Object', 'none'
+    v8 <- CallMethod v7, 'seal', [v2]
+    v9 <- CallMethod v7, 'isSealed', [v2]
+    v10 <- CallMethod v7, 'getOwnPropertyDescriptor', [v2, v5]
+    v11 <- CreateNamedVariable 'desc', 'var', v10
+    v12 <- LoadInteger '123'
+    v13 <- GetProperty v11, 'value'
+    v14 <- GetProperty v11, 'configurable'
+    v15 <- GetProperty v11, 'writable'
+EndPlainFunction
+v16 <- CallFunction v0, []
+v17 <- BeginPlainFunction -> 
+    v18 <- LoadArguments
+    v19 <- CreateNamedVariable 'sloppy', 'var', v18
+    v20 <- CreateNamedVariable 'Symbol', 'none'
+    v21 <- CallFunction v20, []
+    v22 <- CreateNamedVariable 'sym', 'var', v21
+    v23 <- LoadInteger '123'
+    SetComputedProperty v19, v22, v23
+    v24 <- CreateNamedVariable 'Object', 'none'
+    v25 <- CallMethod v24, 'freeze', [v19]
+    v26 <- CallMethod v24, 'isFrozen', [v19]
+    v27 <- CallMethod v24, 'getOwnPropertyDescriptor', [v19, v22]
+    v28 <- CreateNamedVariable 'desc', 'var', v27
+    v29 <- LoadInteger '123'
+    v30 <- GetProperty v28, 'value'
+    v31 <- GetProperty v28, 'configurable'
+    v32 <- GetProperty v28, 'writable'
+EndPlainFunction
+v33 <- CallFunction v17, []
+v34 <- BeginPlainFunction -> 
+    v35 <- CreateNamedVariable 'Symbol', 'none'
+    v36 <- CallFunction v35, []
+    v37 <- CreateNamedVariable 'sym', 'var', v36
+    v38 <- LoadInteger '123'
+    BeginObjectLiteral
+        ObjectLiteralAddComputedProperty v37, v38
+    v39 <- EndObjectLiteral
+    v40 <- CreateNamedVariable 'obj', 'var', v39
+    v41 <- CreateNamedVariable 'Object', 'none'
+    v42 <- CallMethod v41, 'preventExtensions', [v40]
+    v43 <- CallMethod v41, 'isFrozen', [v40]
+    v44 <- CallMethod v41, 'isSealed', [v40]
+EndPlainFunction
+v45 <- CallFunction v34, []
+
+
+function testSeal() {
+    var sloppy = arguments;
+    var sym = Symbol();
+    sloppy[sym] = 123;
+    Object.seal(sloppy);
+    Object.isSealed(sloppy);
+    var desc = Object.getOwnPropertyDescriptor(sloppy, sym);
+    desc.value;
+    desc.configurable;
+    desc.writable;
+}
+testSeal();
+function testFreeze() {
+    var sloppy = arguments;
+    var sym = Symbol();
+    sloppy[sym] = 123;
+    Object.freeze(sloppy);
+    Object.isFrozen(sloppy);
+    var desc = Object.getOwnPropertyDescriptor(sloppy, sym);
+    desc.value;
+    desc.configurable;
+    desc.writable;
+}
+testFreeze();
+function testIsFrozenAndIsSealed() {
+    var sym = Symbol();
+    var obj = { [sym]: 123 };
+    Object.preventExtensions(obj);
+    Object.isFrozen(obj);
+    Object.isSealed(obj);
+}
+testIsFrozenAndIsSealed();
+
+FuzzIL program written to corpus/regress-539875.fzil

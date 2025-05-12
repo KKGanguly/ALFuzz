@@ -1,0 +1,283 @@
+v0 <- LoadString 'test test test'
+v1 <- CreateNamedVariable 's', 'var', v0
+v2 <- LoadFloat '1.7976931348623157e+308'
+v3 <- CreateNamedVariable 'MAX_DOUBLE', 'var', v2
+v4 <- UnaryOperation '-', v3
+v5 <- CreateNamedVariable 'MIN_DOUBLE', 'var', v4
+v6 <- LoadInteger '2'
+v7 <- LoadInteger '30'
+v8 <- CreateNamedVariable 'Math', 'none'
+v9 <- CallMethod v8, 'pow', [v6, v7]
+v10 <- LoadInteger '1'
+v11 <- BinaryOperation v9, '-', v10
+v12 <- CreateNamedVariable 'MAX_SMI', 'var', v11
+v13 <- LoadInteger '2'
+v14 <- LoadInteger '30'
+v15 <- CallMethod v8, 'pow', [v13, v14]
+v16 <- UnaryOperation '-', v15
+v17 <- CreateNamedVariable 'MIN_SMI', 'var', v16
+v18 <- LoadInteger '10'
+v19 <- LoadString 'test'
+v20 <- CreateNamedVariable 'Infinity', 'none'
+v21 <- CallMethod v1, 'lastIndexOf', [v19, v20]
+v22 <- LoadString 'tinf'
+v23 <- LoadInteger '10'
+v24 <- LoadString 'test'
+v25 <- CallMethod v1, 'lastIndexOf', [v24, v3]
+v26 <- LoadString 'tmaxdouble'
+v27 <- LoadInteger '10'
+v28 <- LoadString 'test'
+v29 <- CallMethod v1, 'lastIndexOf', [v28, v12]
+v30 <- LoadString 'tmaxsmi'
+v31 <- LoadInteger '10'
+v32 <- LoadString 'test'
+v33 <- GetProperty v1, 'length'
+v34 <- LoadInteger '2'
+v35 <- BinaryOperation v33, '*', v34
+v36 <- CallMethod v1, 'lastIndexOf', [v32, v35]
+v37 <- LoadString 't2length'
+v38 <- LoadInteger '10'
+v39 <- LoadString 'test'
+v40 <- LoadInteger '15'
+v41 <- CallMethod v1, 'lastIndexOf', [v39, v40]
+v42 <- LoadString 't15'
+v43 <- LoadInteger '10'
+v44 <- LoadString 'test'
+v45 <- LoadInteger '14'
+v46 <- CallMethod v1, 'lastIndexOf', [v44, v45]
+v47 <- LoadString 't14'
+v48 <- LoadInteger '10'
+v49 <- LoadString 'test'
+v50 <- LoadInteger '10'
+v51 <- CallMethod v1, 'lastIndexOf', [v49, v50]
+v52 <- LoadString 't10'
+v53 <- LoadInteger '5'
+v54 <- LoadString 'test'
+v55 <- LoadInteger '9'
+v56 <- CallMethod v1, 'lastIndexOf', [v54, v55]
+v57 <- LoadString 't9'
+v58 <- LoadInteger '5'
+v59 <- LoadString 'test'
+v60 <- LoadInteger '6'
+v61 <- CallMethod v1, 'lastIndexOf', [v59, v60]
+v62 <- LoadString 't6'
+v63 <- LoadInteger '5'
+v64 <- LoadString 'test'
+v65 <- LoadInteger '5'
+v66 <- CallMethod v1, 'lastIndexOf', [v64, v65]
+v67 <- LoadString 't5'
+v68 <- LoadInteger '0'
+v69 <- LoadString 'test'
+v70 <- LoadInteger '4'
+v71 <- CallMethod v1, 'lastIndexOf', [v69, v70]
+v72 <- LoadString 't4'
+v73 <- LoadInteger '0'
+v74 <- LoadString 'test'
+v75 <- LoadInteger '0'
+v76 <- CallMethod v1, 'lastIndexOf', [v74, v75]
+v77 <- LoadString 't0'
+v78 <- LoadInteger '0'
+v79 <- LoadString 'test'
+v80 <- LoadInteger '1'
+v81 <- UnaryOperation '-', v80
+v82 <- CallMethod v1, 'lastIndexOf', [v79, v81]
+v83 <- LoadString 't-1'
+v84 <- LoadInteger '0'
+v85 <- LoadString 'test'
+v86 <- GetProperty v1, 'length'
+v87 <- UnaryOperation '-', v86
+v88 <- CallMethod v1, 'lastIndexOf', [v85, v87]
+v89 <- LoadString 't-len'
+v90 <- LoadInteger '0'
+v91 <- LoadString 'test'
+v92 <- CallMethod v1, 'lastIndexOf', [v91, v17]
+v93 <- LoadString 'tminsmi'
+v94 <- LoadInteger '0'
+v95 <- LoadString 'test'
+v96 <- CallMethod v1, 'lastIndexOf', [v95, v5]
+v97 <- LoadString 'tmindouble'
+v98 <- LoadInteger '0'
+v99 <- LoadString 'test'
+v100 <- UnaryOperation '-', v20
+v101 <- CallMethod v1, 'lastIndexOf', [v99, v100]
+v102 <- LoadString 'tneginf'
+v103 <- LoadInteger '10'
+v104 <- LoadString 'test'
+v105 <- CallMethod v1, 'lastIndexOf', [v104]
+v106 <- LoadString 't'
+v107 <- LoadInteger '1'
+v108 <- UnaryOperation '-', v107
+v109 <- LoadString 'notpresent'
+v110 <- CallMethod v1, 'lastIndexOf', [v109]
+v111 <- LoadString 'n'
+v112 <- LoadInteger '1'
+v113 <- UnaryOperation '-', v112
+v114 <- CallMethod v1, 'lastIndexOf', []
+v115 <- LoadString 'none'
+v116 <- LoadInteger '10'
+v117 <- LoadString 'test'
+v118 <- LoadString 'not a number'
+v119 <- CallMethod v1, 'lastIndexOf', [v117, v118]
+v120 <- LoadString 'nan'
+v121 <- LoadString 'overlong string that doesn't match'
+v122 <- CreateNamedVariable 'longNonMatch', 'var', v121
+v123 <- LoadString 'test test test!'
+v124 <- CreateNamedVariable 'longAlmostMatch', 'var', v123
+v125 <- LoadString '!test test test'
+v126 <- CreateNamedVariable 'longAlmostMatch2', 'var', v125
+v127 <- LoadInteger '1'
+v128 <- UnaryOperation '-', v127
+v129 <- CallMethod v1, 'lastIndexOf', [v122]
+v130 <- LoadString 'long'
+v131 <- LoadInteger '1'
+v132 <- UnaryOperation '-', v131
+v133 <- LoadInteger '10'
+v134 <- CallMethod v1, 'lastIndexOf', [v122, v133]
+v135 <- LoadString 'longpos'
+v136 <- LoadInteger '1'
+v137 <- UnaryOperation '-', v136
+v138 <- CreateNamedVariable 'NaN', 'none'
+v139 <- CallMethod v1, 'lastIndexOf', [v122, v138]
+v140 <- LoadString 'longnan'
+v141 <- LoadInteger '1'
+v142 <- UnaryOperation '-', v141
+v143 <- CallMethod v1, 'lastIndexOf', [v124]
+v144 <- LoadString 'tlong'
+v145 <- LoadInteger '1'
+v146 <- UnaryOperation '-', v145
+v147 <- LoadInteger '10'
+v148 <- CallMethod v1, 'lastIndexOf', [v124, v147]
+v149 <- LoadString 'tlongpos'
+v150 <- LoadInteger '1'
+v151 <- UnaryOperation '-', v150
+v152 <- CallMethod v1, 'lastIndexOf', [v124]
+v153 <- LoadString 'tlongnan'
+v154 <- LoadString 'est'
+v155 <- CreateNamedVariable 'nonInitialMatch', 'var', v154
+v156 <- LoadInteger '1'
+v157 <- UnaryOperation '-', v156
+v158 <- LoadInteger '0'
+v159 <- CallMethod v1, 'lastIndexOf', [v155, v158]
+v160 <- LoadString 'noninit'
+v161 <- LoadInteger '1'
+v162 <- UnaryOperation '-', v161
+v163 <- LoadInteger '1'
+v164 <- UnaryOperation '-', v163
+v165 <- CallMethod v1, 'lastIndexOf', [v155, v164]
+v166 <- LoadString 'noninitneg'
+v167 <- LoadInteger '1'
+v168 <- UnaryOperation '-', v167
+v169 <- CallMethod v1, 'lastIndexOf', [v155, v17]
+v170 <- LoadString 'noninitminsmi'
+v171 <- LoadInteger '1'
+v172 <- UnaryOperation '-', v171
+v173 <- CallMethod v1, 'lastIndexOf', [v155, v5]
+v174 <- LoadString 'noninitmindbl'
+v175 <- LoadInteger '1'
+v176 <- UnaryOperation '-', v175
+v177 <- UnaryOperation '-', v20
+v178 <- CallMethod v1, 'lastIndexOf', [v155, v177]
+v179 <- LoadString 'noninitneginf'
+BeginForLoopInitializer
+    v180 <- GetProperty v1, 'length'
+    v181 <- LoadInteger '10'
+    v182 <- BinaryOperation v180, '+', v181
+BeginForLoopCondition -> v183
+    v184 <- LoadInteger '0'
+    v185 <- Compare v183, '>=', v184
+BeginForLoopAfterthought v185 -> v186
+    v187 <- UnaryOperation v186, '--'
+BeginForLoopBody -> v188
+    v189 <- GetProperty v1, 'length'
+    v190 <- Compare v188, '<', v189
+    v191 <- GetProperty v1, 'length'
+    v192 <- TernaryOperation v190, v188, v191
+    v193 <- CreateNamedVariable 'expected', 'var', v192
+    v194 <- LoadString ''
+    v195 <- CallMethod v1, 'lastIndexOf', [v194, v188]
+    v196 <- LoadString 'empty'
+    v197 <- BinaryOperation v196, '+', v188
+EndForLoop
+v198 <- LoadString 'asdf[a-z]+(asdf)?'
+v199 <- CreateNamedVariable 'reString', 'var', v198
+v200 <- LoadInteger '4'
+v201 <- LoadString '[a-z]+'
+v202 <- CallMethod v199, 'lastIndexOf', [v201]
+v203 <- LoadString 'r4'
+v204 <- LoadInteger '10'
+v205 <- LoadString '(asdf)?'
+v206 <- CallMethod v199, 'lastIndexOf', [v205]
+v207 <- LoadString 'r10'
+v208 <- LoadInteger '1'
+v209 <- CreateNamedVariable 'String', 'none'
+v210 <- GetProperty v209, 'prototype'
+v211 <- GetProperty v210, 'lastIndexOf'
+v212 <- GetProperty v211, 'length'
+v213 <- LoadString 'length'
+
+
+var s = "test test test";
+var MAX_DOUBLE = 1.7976931348623157e+308;
+var MIN_DOUBLE = -MAX_DOUBLE;
+var MAX_SMI = Math.pow(2, 30) - 1;
+var MIN_SMI = -Math.pow(2, 30);
+s.lastIndexOf("test", Infinity);
+s.lastIndexOf("test", MAX_DOUBLE);
+s.lastIndexOf("test", MAX_SMI);
+s.lastIndexOf("test", s.length * 2);
+s.lastIndexOf("test", 15);
+s.lastIndexOf("test", 14);
+s.lastIndexOf("test", 10);
+s.lastIndexOf("test", 9);
+s.lastIndexOf("test", 6);
+s.lastIndexOf("test", 5);
+s.lastIndexOf("test", 4);
+s.lastIndexOf("test", 0);
+s.lastIndexOf("test", -1);
+s.lastIndexOf("test", -s.length);
+s.lastIndexOf("test", MIN_SMI);
+s.lastIndexOf("test", MIN_DOUBLE);
+s.lastIndexOf("test", -Infinity);
+s.lastIndexOf("test");
+-1;
+s.lastIndexOf("notpresent");
+-1;
+s.lastIndexOf();
+s.lastIndexOf("test", "not a number");
+var longNonMatch = "overlong string that doesn't match";
+var longAlmostMatch = "test test test!";
+var longAlmostMatch2 = "!test test test";
+-1;
+s.lastIndexOf(longNonMatch);
+-1;
+s.lastIndexOf(longNonMatch, 10);
+-1;
+s.lastIndexOf(longNonMatch, NaN);
+-1;
+s.lastIndexOf(longAlmostMatch);
+-1;
+s.lastIndexOf(longAlmostMatch, 10);
+-1;
+s.lastIndexOf(longAlmostMatch);
+var nonInitialMatch = "est";
+-1;
+s.lastIndexOf(nonInitialMatch, 0);
+-1;
+s.lastIndexOf(nonInitialMatch, -1);
+-1;
+s.lastIndexOf(nonInitialMatch, MIN_SMI);
+-1;
+s.lastIndexOf(nonInitialMatch, MIN_DOUBLE);
+-1;
+s.lastIndexOf(nonInitialMatch, -Infinity);
+for (let i183 = s.length + 10; i183 >= 0; i183--) {
+    var expected = i183 < s.length ? i183 : s.length;
+    s.lastIndexOf("", i183);
+    "empty" + i183;
+}
+var reString = "asdf[a-z]+(asdf)?";
+reString.lastIndexOf("[a-z]+");
+reString.lastIndexOf("(asdf)?");
+String.prototype.lastIndexOf.length;
+
+FuzzIL program written to corpus/string-lastindexof.fzil

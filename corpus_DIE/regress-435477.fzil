@@ -1,0 +1,30 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '128'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- BeginPlainFunction -> v5, v6
+    v7 <- LoadInteger '2'
+    SetComputedProperty v5, v6, v7
+EndPlainFunction
+v8 <- LoadUndefined
+v9 <- CallFunction v4, [v3, v8]
+v10 <- LoadString 'r12'
+v11 <- LoadUndefined
+v12 <- CallFunction v4, [v10, v11]
+v13 <- LoadInteger '0'
+v14 <- CallFunction v4, [v3, v13]
+v15 <- LoadInteger '0'
+v16 <- CallFunction v4, [v3, v15]
+
+
+const v2 = new Array(128);
+var a = v2;
+function f(a5, a6) {
+    a5[a6] = 2;
+}
+f(a, undefined);
+f("r12", undefined);
+f(a, 0);
+f(a, 0);
+
+FuzzIL program written to corpus/regress-435477.fzil

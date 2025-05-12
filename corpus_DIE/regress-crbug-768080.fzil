@@ -1,0 +1,136 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginClassDefinition
+    EndClassDefinition
+    v2 <- BeginPlainFunction -> 
+        v3 <- LoadArguments
+        v4 <- LoadInteger '23'
+        v5 <- CreateNamedVariable 'Reflect', 'none'
+        v6 <- CallMethod v5, 'construct', [v1, v3, v4]
+    EndPlainFunction
+    v7 <- BeginPlainFunction -> 
+        v8 <- Construct v2, []
+        Return v8
+    EndPlainFunction
+    v9 <- Construct v1, []
+    v10 <- CallFunction v7, []
+    v11 <- CreateNamedVariable 'TypeError', 'none'
+    v12 <- CallFunction v7, []
+    v13 <- CallFunction v7, []
+EndPlainFunction
+v14 <- CallFunction v0, []
+v15 <- BeginPlainFunction -> 
+    v16 <- BeginClassDefinition
+    EndClassDefinition
+    v17 <- BeginPlainFunction -> 
+        v18 <- LoadArguments
+        v19 <- CreateNamedVariable 'unescape', 'none'
+        v20 <- CreateNamedVariable 'Reflect', 'none'
+        v21 <- CallMethod v20, 'construct', [v16, v18, v19]
+    EndPlainFunction
+    v22 <- BeginPlainFunction -> 
+        v23 <- Construct v17, []
+        Return v23
+    EndPlainFunction
+    v24 <- Construct v16, []
+    v25 <- CallFunction v22, []
+    v26 <- CreateNamedVariable 'TypeError', 'none'
+    v27 <- CallFunction v22, []
+    v28 <- CallFunction v22, []
+EndPlainFunction
+v29 <- CallFunction v15, []
+v30 <- BeginPlainFunction -> 
+    v31 <- BeginPlainFunction -> 
+        v32 <- LoadInteger '23'
+        v33 <- LoadArguments
+        v34 <- CreateNamedVariable 'Reflect', 'none'
+        v35 <- CallMethod v34, 'construct', [v32, v33]
+    EndPlainFunction
+    v36 <- BeginPlainFunction -> 
+        v37 <- Construct v31, []
+        Return v37
+    EndPlainFunction
+    v38 <- CallFunction v36, []
+    v39 <- CreateNamedVariable 'TypeError', 'none'
+    v40 <- CallFunction v36, []
+    v41 <- CallFunction v36, []
+EndPlainFunction
+v42 <- CallFunction v30, []
+v43 <- BeginPlainFunction -> 
+    v44 <- BeginPlainFunction -> 
+        v45 <- LoadInteger '23'
+        v46 <- LoadThis
+        v47 <- LoadArguments
+        v48 <- CreateNamedVariable 'Reflect', 'none'
+        v49 <- CallMethod v48, 'apply', [v45, v46, v47]
+    EndPlainFunction
+    v50 <- BeginPlainFunction -> 
+        v51 <- CallFunction v44, []
+        Return v51
+    EndPlainFunction
+    v52 <- CallFunction v50, []
+    v53 <- CreateNamedVariable 'TypeError', 'none'
+    v54 <- CallFunction v50, []
+    v55 <- CallFunction v50, []
+EndPlainFunction
+v56 <- CallFunction v43, []
+
+
+function TestReflectConstructBogusNewTarget1() {
+    class C1 {
+    }
+    function g() {
+        Reflect.construct(C1, arguments, 23);
+    }
+    function f() {
+        const v8 = new g();
+        return v8;
+    }
+    new C1();
+    f();
+    f();
+    f();
+}
+TestReflectConstructBogusNewTarget1();
+function TestReflectConstructBogusNewTarget2() {
+    class C16 {
+    }
+    function g() {
+        Reflect.construct(C16, arguments, unescape);
+    }
+    function f() {
+        const v23 = new g();
+        return v23;
+    }
+    new C16();
+    f();
+    f();
+    f();
+}
+TestReflectConstructBogusNewTarget2();
+function TestReflectConstructBogusTarget() {
+    function g() {
+        Reflect.construct(23, arguments);
+    }
+    function f() {
+        const v37 = new g();
+        return v37;
+    }
+    f();
+    f();
+    f();
+}
+TestReflectConstructBogusTarget();
+function TestReflectApplyBogusTarget() {
+    function g() {
+        Reflect.apply(23, this, arguments);
+    }
+    function f() {
+        return g();
+    }
+    f();
+    f();
+    f();
+}
+TestReflectApplyBogusTarget();
+
+FuzzIL program written to corpus/regress-crbug-768080.fzil

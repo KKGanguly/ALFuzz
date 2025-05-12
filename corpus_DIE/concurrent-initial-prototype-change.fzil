@@ -1,0 +1,61 @@
+v0 <- CreateNamedVariable 'f0', 'none'
+v1 <- CallFunction v0, []
+v2 <- UnaryOperation '!', v1
+BeginIf v2
+    v3 <- LoadString 'Concurrent recompilation is disabled. Skipping this test.'
+    v4 <- CreateNamedVariable 'print', 'none'
+    v5 <- CallFunction v4, [v3]
+    v6 <- CreateNamedVariable 'quit', 'none'
+    v7 <- CallFunction v6, []
+EndIf
+v8 <- BeginPlainFunction -> v9, v10
+    v11 <- GetComputedProperty v9, v10
+    v12 <- LoadFloat '0.5'
+    v13 <- BinaryOperation v11, '+', v12
+    Return v13
+EndPlainFunction
+v14 <- LoadInteger '0'
+v15 <- LoadUndefined
+v16 <- LoadFloat '2.5'
+v17 <- CreateArray [v14, v15, v16]
+v18 <- CreateNamedVariable 'arr', 'var', v17
+v19 <- LoadFloat '0.5'
+v20 <- LoadInteger '0'
+v21 <- CallFunction v8, [v18, v20]
+v22 <- LoadFloat '0.5'
+v23 <- LoadInteger '0'
+v24 <- CallFunction v8, [v18, v23]
+v25 <- LoadFloat '0.5'
+v26 <- LoadInteger '0'
+v27 <- CallFunction v8, [v18, v26]
+v28 <- LoadFloat '1.5'
+v29 <- CreateNamedVariable 'Object', 'none'
+v30 <- GetProperty v29, 'prototype'
+SetElement v30, '1', v28
+v31 <- LoadInteger '2'
+v32 <- LoadInteger '1'
+v33 <- CallFunction v8, [v18, v32]
+v34 <- CallFunction v8, []
+v35 <- LoadString 'no sync'
+v36 <- CallFunction v8, []
+v37 <- LoadString 'sync'
+
+
+if (!f0()) {
+    print("Concurrent recompilation is disabled. Skipping this test.");
+    quit();
+}
+function f1(a9, a10) {
+    return a9[a10] + 0.5;
+}
+var arr = [0,,2.5];
+f1(arr, 0);
+f1(arr, 0);
+f1(arr, 0);
+const t8 = Object.prototype;
+t8[1] = 1.5;
+f1(arr, 1);
+f1();
+f1();
+
+FuzzIL program written to corpus/concurrent-initial-prototype-change.fzil

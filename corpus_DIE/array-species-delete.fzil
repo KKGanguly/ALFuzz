@@ -1,0 +1,84 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'x', 'let', v0
+v2 <- CreateNamedVariable 'Array', 'none'
+v3 <- BeginArrowFunction -> 
+EndArrowFunction
+v4 <- CallMethod v1, 'map', [v3]
+v5 <- GetProperty v4, 'constructor'
+v6 <- BeginArrowFunction -> 
+EndArrowFunction
+v7 <- CallMethod v1, 'filter', [v6]
+v8 <- GetProperty v7, 'constructor'
+v9 <- CallMethod v1, 'slice', []
+v10 <- GetProperty v9, 'constructor'
+v11 <- CallMethod v1, 'splice', []
+v12 <- GetProperty v11, 'constructor'
+v13 <- LoadInteger '1'
+v14 <- CreateArray [v13]
+v15 <- CallMethod v1, 'concat', [v14]
+v16 <- GetProperty v15, 'constructor'
+v17 <- LoadInteger '1'
+v18 <- LoadInteger '1'
+v19 <- CreateArray [v18]
+v20 <- CallMethod v1, 'concat', [v19]
+v21 <- GetElement v20, '0'
+v22 <- BeginClassDefinition v2
+EndClassDefinition
+v23 <- CreateNamedVariable 'Object', 'none'
+v24 <- GetProperty v23, 'prototype'
+v25 <- CreateNamedVariable 'Symbol', 'none'
+v26 <- GetProperty v25, 'species'
+SetComputedProperty v24, v26, v22
+v27 <- GetProperty v25, 'species'
+v28 <- DeleteComputedProperty v2, v27
+v29 <- BeginArrowFunction -> 
+EndArrowFunction
+v30 <- CallMethod v1, 'map', [v29]
+v31 <- GetProperty v30, 'constructor'
+v32 <- BeginArrowFunction -> 
+EndArrowFunction
+v33 <- CallMethod v1, 'filter', [v32]
+v34 <- GetProperty v33, 'constructor'
+v35 <- CallMethod v1, 'slice', []
+v36 <- GetProperty v35, 'constructor'
+v37 <- CallMethod v1, 'splice', []
+v38 <- GetProperty v37, 'constructor'
+v39 <- LoadInteger '1'
+v40 <- CreateArray [v39]
+v41 <- CallMethod v1, 'concat', [v40]
+v42 <- GetProperty v41, 'constructor'
+v43 <- LoadInteger '1'
+v44 <- LoadInteger '1'
+v45 <- CreateArray [v44]
+v46 <- CallMethod v1, 'concat', [v45]
+v47 <- GetElement v46, '0'
+
+
+let x = [];
+const v3 = () => {
+};
+x.map(v3).constructor;
+const v6 = () => {
+};
+x.filter(v6).constructor;
+x.slice().constructor;
+x.splice().constructor;
+x.concat([1]).constructor;
+x.concat([1])[0];
+class C22 extends Array {
+}
+const t13 = Object.prototype;
+t13[Symbol.species] = C22;
+delete Array[Symbol.species];
+const v29 = () => {
+};
+x.map(v29).constructor;
+const v32 = () => {
+};
+x.filter(v32).constructor;
+x.slice().constructor;
+x.splice().constructor;
+x.concat([1]).constructor;
+x.concat([1])[0];
+
+FuzzIL program written to corpus/array-species-delete.fzil

@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadThis
+    SetProperty v2, 'x', v1
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '1'
+    v5 <- Construct v0, [v4]
+    v6 <- CreateNamedVariable 'a', 'var', v5
+    v7 <- LoadInteger '2'
+    v8 <- Construct v0, [v7]
+    v9 <- CreateNamedVariable 'b', 'var', v8
+    BeginForLoopInitializer
+        v10 <- LoadInteger '0'
+    BeginForLoopCondition -> v11
+        v12 <- LoadInteger '1'
+        v13 <- Compare v11, '<', v12
+    BeginForLoopAfterthought v13 -> v14
+        v15 <- UnaryOperation v14, '++'
+    BeginForLoopBody -> v16
+        v17 <- GetProperty v9, 'x'
+        UpdateProperty v6, '+', v17
+    EndForLoop
+    v18 <- GetProperty v6, 'x'
+    Return v18
+EndPlainFunction
+v19 <- LoadFloat '0.1'
+v20 <- Construct v0, [v19]
+v21 <- LoadInteger '3'
+v22 <- CallFunction v3, []
+v23 <- LoadInteger '3'
+v24 <- CallFunction v3, []
+v25 <- LoadInteger '3'
+v26 <- CallFunction v3, []
+
+
+function p(a1) {
+    this.x = a1;
+}
+function f() {
+    const v5 = new p(1);
+    var a = v5;
+    const v8 = new p(2);
+    var b = v8;
+    for (let i11 = 0; i11 < 1; i11++) {
+        a.x += b.x;
+    }
+    return a.x;
+}
+new p(0.1);
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-3307.fzil

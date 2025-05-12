@@ -1,0 +1,36 @@
+v0 <- CreateNamedVariable 'RegExp', 'none'
+v1 <- BeginClassDefinition v0
+    BeginClassConstructor -> v2, v3
+        v4 <- LoadString 'error'
+        ThrowException v4
+    EndClassConstructor
+EndClassDefinition
+v5 <- CreateArray []
+v6 <- CreateNamedVariable 'Reflect', 'none'
+v7 <- CallMethod v6, 'construct', [v0, v5, v1]
+v8 <- CreateNamedVariable 'o', 'let', v7
+v9 <- GetProperty v8, 'lastIndex'
+v10 <- LoadInteger '0'
+v11 <- LoadInteger '1'
+SetProperty v8, 'lastIndex', v11
+v12 <- GetProperty v8, 'lastIndex'
+v13 <- LoadInteger '1'
+v14 <- LoadInteger '0'
+SetProperty v8, 'lastIndex', v14
+v15 <- CreateNamedVariable 'gc', 'none'
+v16 <- CallFunction v15, []
+
+
+class C1 extends RegExp {
+    constructor(a3) {
+        throw "error";
+    }
+}
+let o = Reflect.construct(RegExp, [], C1);
+o.lastIndex;
+o.lastIndex = 1;
+o.lastIndex;
+o.lastIndex = 0;
+gc();
+
+FuzzIL program written to corpus/regress-crbug-800032.fzil

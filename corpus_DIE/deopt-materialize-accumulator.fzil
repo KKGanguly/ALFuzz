@@ -1,0 +1,19 @@
+v0 <- LoadInteger '3'
+v1 <- CreateNamedVariable 'global', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- CreateNamedVariable 'Math', 'none'
+    v5 <- CallMethod v4, 'sqrt', [v3]
+    Reassign v1, v5
+EndPlainFunction
+v6 <- LoadFloat '0.25'
+v7 <- CallFunction v2, [v6]
+v8 <- LoadFloat '0.5'
+
+
+var global = 3;
+function f(a3) {
+    global = Math.sqrt(a3);
+}
+f(0.25);
+
+FuzzIL program written to corpus/deopt-materialize-accumulator.fzil

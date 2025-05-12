@@ -1,0 +1,15 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'array', 'var', v0
+v2 <- LoadInteger '6000000'
+SetProperty v1, 'length', v2
+v3 <- CallMethod v1, 'push', []
+v4 <- GetProperty v1, 'length'
+v5 <- LoadInteger '6000000'
+
+
+var array = [];
+array.length = 6000000;
+array.push();
+array.length;
+
+FuzzIL program written to corpus/regress-670981-array-push.fzil

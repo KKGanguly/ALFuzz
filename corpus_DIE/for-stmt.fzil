@@ -1,0 +1,110 @@
+v0 <- BeginPlainFunction -> v1, v2
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v3 <- LoadInteger '10'
+        v4 <- Compare v1, '<', v3
+    BeginForLoopAfterthought v4
+    BeginForLoopBody
+        v5 <- GetProperty v2, 'x'
+        v6 <- LoadInteger '1'
+        v7 <- BinaryOperation v5, '+', v6
+        SetProperty v2, 'x', v7
+        v8 <- LoadInteger '1'
+        v9 <- BinaryOperation v1, '+', v8
+        Reassign v1, v9
+    EndForLoop
+EndPlainFunction
+v10 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v10
+v11 <- EndObjectLiteral
+v12 <- CreateNamedVariable 'o', 'var', v11
+v13 <- LoadInteger '1'
+v14 <- CallFunction v0, [v13, v12]
+v15 <- LoadInteger '51'
+v16 <- GetProperty v12, 'x'
+v17 <- BeginPlainFunction -> v18, v19
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v20 <- LoadBoolean 'true'
+    BeginForLoopAfterthought v20
+    BeginForLoopBody
+        v21 <- LoadInteger '10'
+        v22 <- Compare v18, '==', v21
+        BeginIf v22
+            Return
+        EndIf
+        v23 <- GetProperty v19, 'x'
+        v24 <- LoadInteger '1'
+        v25 <- BinaryOperation v23, '+', v24
+        SetProperty v19, 'x', v25
+        v26 <- LoadInteger '1'
+        v27 <- BinaryOperation v18, '+', v26
+        Reassign v18, v27
+    EndForLoop
+EndPlainFunction
+v28 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v28
+v29 <- EndObjectLiteral
+Reassign v12, v29
+v30 <- LoadInteger '1'
+v31 <- CallFunction v17, [v30, v12]
+v32 <- LoadInteger '51'
+v33 <- GetProperty v12, 'x'
+v34 <- BeginPlainFunction -> v35
+    BeginForLoopInitializer
+    BeginForLoopCondition
+        v36 <- GetProperty v35, 'x'
+        v37 <- LoadInteger '10'
+        v38 <- Compare v36, '<', v37
+    BeginForLoopAfterthought v38
+        v39 <- GetProperty v35, 'x'
+        v40 <- UnaryOperation v39, '++'
+    BeginForLoopBody
+    EndForLoop
+EndPlainFunction
+v41 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v41
+v42 <- EndObjectLiteral
+v43 <- CreateNamedVariable 'o', 'var', v42
+v44 <- CallFunction v34, [v43]
+v45 <- LoadInteger '10'
+v46 <- GetProperty v43, 'x'
+
+
+function f(a1, a2) {
+    for (; a1 < 10;) {
+        a2.x = a2.x + 1;
+        a1 = a1 + 1;
+    }
+}
+var o = { x: 42 };
+f(1, o);
+o.x;
+function g(a18, a19) {
+    for (;;) {
+        if (a18 == 10) {
+            return;
+        }
+        a19.x = a19.x + 1;
+        a18 = a18 + 1;
+    }
+}
+g(1, o = { x: 42 });
+o.x;
+function h(a35) {
+    for (;
+        a35.x < 10;
+        (() => {
+            let v39 = a35.x;
+            v39++;
+        })()) {
+    }
+}
+var o = { x: 0 };
+h(o);
+o.x;
+
+FuzzIL program written to corpus/for-stmt.fzil

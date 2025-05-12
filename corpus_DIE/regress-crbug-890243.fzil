@@ -1,0 +1,58 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- BinaryOperation v1, '+', v1
+    Return v2
+EndPlainFunction
+v3 <- LoadFloat '0.1'
+v4 <- CallFunction v0, [v3]
+v5 <- BeginPlainFunction -> v6
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `y`, v6
+    v7 <- EndObjectLiteral
+    Return v7
+EndPlainFunction
+v8 <- LoadNull
+v9 <- CallFunction v5, [v8]
+v10 <- LoadInteger '0'
+v11 <- CallFunction v5, [v10]
+v12 <- BeginPlainFunction -> v13
+    v14 <- GetProperty v13, 'x'
+    v15 <- CallFunction v0, [v14]
+    v16 <- CallFunction v5, [v15]
+    v17 <- GetProperty v16, 'y'
+    v18 <- UnaryOperation '!', v17
+    Return v18
+EndPlainFunction
+v19 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v19
+v20 <- EndObjectLiteral
+v21 <- CallFunction v12, [v20]
+v22 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v22
+v23 <- EndObjectLiteral
+v24 <- CallFunction v12, [v23]
+v25 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v25
+v26 <- EndObjectLiteral
+v27 <- CallFunction v12, [v26]
+
+
+function bar(a1) {
+    return a1 + a1;
+}
+bar(0.1);
+function baz(a6) {
+    return { y: a6 };
+}
+baz(null);
+baz(0);
+function foo(a13) {
+    return !baz(bar(a13.x)).y;
+}
+foo({ x: 1 });
+foo({ x: 1 });
+foo({ x: 1 });
+
+FuzzIL program written to corpus/regress-crbug-890243.fzil

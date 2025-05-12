@@ -1,0 +1,78 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'Object', 'none'
+v2 <- CallMethod v1, 'getPrototypeOf', [v0]
+v3 <- CreateNamedVariable 'mp', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadUndefined
+    v7 <- CreateNamedVariable 'properties', 'var', v6
+    BeginIf v3
+        v8 <- CallMethod v1, 'getOwnPropertyNames', [v3]
+        Reassign v7, v8
+    EndIf
+    v9 <- LoadString 'constructor'
+    v10 <- CallMethod v7, 'includes', [v9]
+    v11 <- GetProperty v5, 'constructor'
+    v12 <- CallMethod v11, 'hasOwnProperty', []
+    v13 <- BinaryOperation v10, '&&', v12
+    BeginIf v13
+    EndIf
+    v14 <- GetProperty v7, 'length'
+    v15 <- LoadInteger '0'
+    v16 <- Compare v14, '==', v15
+    BeginIf v16
+        v17 <- LoadString '0'
+        Return v17
+    EndIf
+    v18 <- CreateNamedVariable 'NaN', 'none'
+    v19 <- GetComputedProperty v7, v18
+    Return v19
+EndPlainFunction
+v20 <- LoadInteger '0'
+v21 <- CreateNamedVariable 'c', 'var', v20
+v22 <- BeginPlainFunction -> 
+    v23 <- UnaryOperation v21, '++'
+    v24 <- LoadInteger '4'
+    v25 <- Compare v21, '>', v24
+    BeginIf v25
+        v26 <- LoadInteger '42'
+        ThrowException v26
+    EndIf
+    v27 <- LoadString 'x'
+    v28 <- CreateArray [v27]
+    BeginForOfLoop v28 -> v29
+        v30 <- LoadInteger '0'
+        v31 <- CallFunction v4, [v30]
+        v32 <- CallFunction v22, []
+    EndForOfLoop
+EndPlainFunction
+v33 <- CallFunction v22, []
+v34 <- LoadInteger '42'
+
+
+var mp = Object.getPrototypeOf(0);
+function getRandomProperty(a5) {
+    var properties;
+    if (mp) {
+        properties = Object.getOwnPropertyNames(mp);
+    }
+    if (properties.includes("constructor") && a5.constructor.hasOwnProperty()) {
+    }
+    if (properties.length == 0) {
+        return "0";
+    }
+    return properties[NaN];
+}
+var c = 0;
+function f() {
+    c++;
+    if (c > 4) {
+        throw 42;
+    }
+    for (const v29 of ["x"]) {
+        getRandomProperty(0);
+        f();
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-713367.fzil

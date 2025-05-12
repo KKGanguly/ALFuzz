@@ -1,0 +1,52 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadThis
+    SetProperty v2, 'x', v1
+    v3 <- LoadInteger '1'
+    v4 <- LoadThis
+    SetProperty v4, 'y', v3
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v6 <- LoadInteger '2'
+    v7 <- Construct v0, [v6]
+    v8 <- CreateNamedVariable 'o', 'var', v7
+    BeginWhileLoopHeader
+        v9 <- GetProperty v8, 'y'
+        v10 <- LoadInteger '4'
+        v11 <- Compare v9, '<', v10
+    BeginWhileLoopBody v11
+        v12 <- LoadInteger '5'
+        SetProperty v8, 'x', v12
+        v13 <- LoadInteger '5'
+        SetProperty v8, 'y', v13
+    EndWhileLoop
+    v14 <- GetProperty v8, 'x'
+    Return v14
+EndPlainFunction
+v15 <- LoadInteger '5'
+v16 <- CallFunction v5, []
+v17 <- LoadInteger '5'
+v18 <- CallFunction v5, []
+v19 <- LoadInteger '5'
+v20 <- CallFunction v5, []
+
+
+function f(a1) {
+    this.x = a1;
+    this.y = 1;
+}
+function g() {
+    'use strict';
+    const v7 = new f(2);
+    var o = v7;
+    while (o.y < 4) {
+        o.x = 5;
+        o.y = 5;
+    }
+    return o.x;
+}
+g();
+g();
+g();
+
+FuzzIL program written to corpus/escape-analysis-8.fzil

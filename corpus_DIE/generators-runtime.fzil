@@ -1,0 +1,298 @@
+v0 <- BeginPlainFunction -> 
+    Directive 'use strict'
+EndPlainFunction
+v1 <- BeginGeneratorFunction -> 
+    v2 <- LoadInteger '1'
+    v3 <- Yield v2
+EndGeneratorFunction
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'getPrototypeOf', [v1]
+v6 <- CreateNamedVariable 'GeneratorFunctionPrototype', 'var', v5
+v7 <- GetProperty v6, 'constructor'
+v8 <- CreateNamedVariable 'GeneratorFunction', 'var', v7
+v9 <- GetProperty v6, 'prototype'
+v10 <- CreateNamedVariable 'GeneratorObjectPrototype', 'var', v9
+v11 <- CallMethod v4, 'getPrototypeOf', [v10]
+v12 <- CreateNamedVariable 'IteratorPrototype', 'var', v11
+v13 <- BeginPlainFunction -> 
+    v14 <- CallMethod v4, 'getOwnPropertyNames', [v0]
+    v15 <- CreateNamedVariable 'f_own_property_names', 'var', v14
+    v16 <- CallMethod v4, 'getOwnPropertyNames', [v1]
+    v17 <- CreateNamedVariable 'g_own_property_names', 'var', v16
+    v18 <- CallMethod v15, 'sort', []
+    v19 <- CallMethod v17, 'sort', []
+    v20 <- LoadUndefined
+    v21 <- CreateNamedVariable 'i', 'var', v20
+    BeginForLoopInitializer
+        v22 <- LoadInteger '0'
+        Reassign v21, v22
+    BeginForLoopCondition
+        v23 <- GetProperty v15, 'length'
+        v24 <- Compare v21, '<', v23
+    BeginForLoopAfterthought v24
+        v25 <- UnaryOperation v21, '++'
+    BeginForLoopBody
+        v26 <- GetComputedProperty v15, v21
+        v27 <- CreateNamedVariable 'prop', 'var', v26
+        v28 <- CallMethod v4, 'getOwnPropertyDescriptor', [v0, v27]
+        v29 <- CreateNamedVariable 'f_desc', 'var', v28
+        v30 <- CallMethod v4, 'getOwnPropertyDescriptor', [v1, v27]
+        v31 <- CreateNamedVariable 'g_desc', 'var', v30
+        v32 <- GetProperty v29, 'configurable'
+        v33 <- GetProperty v31, 'configurable'
+        v34 <- GetProperty v29, 'writable'
+        v35 <- GetProperty v31, 'writable'
+        v36 <- GetProperty v29, 'enumerable'
+        v37 <- GetProperty v31, 'enumerable'
+    EndForLoop
+EndPlainFunction
+v38 <- CallFunction v13, []
+v39 <- BeginPlainFunction -> 
+    v40 <- CallMethod v4, 'getPrototypeOf', [v0]
+    v41 <- CreateNamedVariable 'Function', 'none'
+    v42 <- GetProperty v41, 'prototype'
+    v43 <- GetProperty v41, 'prototype'
+    v44 <- Compare v6, '===', v43
+    v45 <- GetProperty v41, 'prototype'
+    v46 <- CallMethod v4, 'getPrototypeOf', [v6]
+    v47 <- BeginGeneratorFunction -> 
+    EndGeneratorFunction
+    v48 <- CallMethod v4, 'getPrototypeOf', [v47]
+    v49 <- LoadString 'object'
+    v50 <- TypeOf v6
+    v51 <- LoadString 'constructor'
+    v52 <- CallMethod v4, 'getOwnPropertyDescriptor', [v6, v51]
+    v53 <- CreateNamedVariable 'constructor_desc', 'var', v52
+    v54 <- LoadUndefined
+    v55 <- Compare v53, '!==', v54
+    v56 <- GetProperty v53, 'value'
+    v57 <- GetProperty v53, 'writable'
+    v58 <- GetProperty v53, 'enumerable'
+    v59 <- GetProperty v53, 'configurable'
+    v60 <- LoadString 'prototype'
+    v61 <- CallMethod v4, 'getOwnPropertyDescriptor', [v6, v60]
+    v62 <- CreateNamedVariable 'prototype_desc', 'var', v61
+    v63 <- LoadUndefined
+    v64 <- Compare v62, '!==', v63
+    v65 <- GetProperty v62, 'value'
+    v66 <- GetProperty v62, 'writable'
+    v67 <- GetProperty v62, 'enumerable'
+    v68 <- GetProperty v62, 'configurable'
+EndPlainFunction
+v69 <- CallFunction v39, []
+v70 <- BeginPlainFunction -> 
+    v71 <- CallMethod v4, 'getPrototypeOf', [v10]
+    v72 <- BeginGeneratorFunction -> 
+        v73 <- LoadInteger '1'
+        v74 <- Yield v73
+    EndGeneratorFunction
+    v75 <- GetProperty v72, 'prototype'
+    v76 <- CallMethod v4, 'getPrototypeOf', [v75]
+    v77 <- LoadString 'next'
+    v78 <- LoadString 'return'
+    v79 <- LoadString 'throw'
+    v80 <- LoadString 'constructor'
+    v81 <- CreateArray [v77, v78, v79, v80]
+    v82 <- CreateNamedVariable 'expected_property_names', 'var', v81
+    v83 <- CallMethod v4, 'getOwnPropertyNames', [v10]
+    v84 <- CreateNamedVariable 'found_property_names', 'var', v83
+    v85 <- CallMethod v82, 'sort', []
+    v86 <- CallMethod v84, 'sort', []
+    v87 <- LoadString 'constructor'
+    v88 <- CallMethod v4, 'getOwnPropertyDescriptor', [v10, v87]
+    v89 <- CreateNamedVariable 'constructor_desc', 'var', v88
+    v90 <- LoadUndefined
+    v91 <- Compare v89, '!==', v90
+    v92 <- GetProperty v89, 'writable'
+    v93 <- GetProperty v89, 'enumerable'
+    v94 <- GetProperty v89, 'configurable'
+    v95 <- LoadString 'next'
+    v96 <- CallMethod v4, 'getOwnPropertyDescriptor', [v10, v95]
+    v97 <- CreateNamedVariable 'next_desc', 'var', v96
+    v98 <- LoadUndefined
+    v99 <- Compare v97, '!==', v98
+    v100 <- GetProperty v97, 'writable'
+    v101 <- GetProperty v97, 'enumerable'
+    v102 <- GetProperty v97, 'configurable'
+    v103 <- LoadString 'throw'
+    v104 <- CallMethod v4, 'getOwnPropertyDescriptor', [v10, v103]
+    v105 <- CreateNamedVariable 'throw_desc', 'var', v104
+    v106 <- LoadUndefined
+    v107 <- Compare v105, '!==', v106
+    v108 <- GetProperty v105, 'writable'
+    v109 <- GetProperty v105, 'enumerable'
+    v110 <- GetProperty v105, 'configurable'
+EndPlainFunction
+v111 <- CallFunction v70, []
+v112 <- BeginPlainFunction -> 
+    v113 <- GetProperty v8, 'prototype'
+    v114 <- TestInstanceOf v1, v8
+    v115 <- CreateNamedVariable 'Function', 'none'
+    v116 <- CallMethod v4, 'getPrototypeOf', [v8]
+    v117 <- TestInstanceOf v1, v115
+    v118 <- LoadString 'function* g() { yield 1; }'
+    v119 <- CallMethod v1, 'toString', []
+    v120 <- TestInstanceOf v0, v115
+    v121 <- TestInstanceOf v0, v8
+    v122 <- UnaryOperation '!', v121
+    v123 <- Construct v8, []
+    v124 <- TestInstanceOf v123, v8
+    v125 <- CallFunction v8, []
+    v126 <- TestInstanceOf v125, v8
+    v127 <- LoadString 'prototype'
+    v128 <- CallMethod v4, 'getOwnPropertyDescriptor', [v8, v127]
+    v129 <- CreateNamedVariable 'prototype_desc', 'var', v128
+    v130 <- GetProperty v129, 'writable'
+    v131 <- GetProperty v129, 'enumerable'
+    v132 <- GetProperty v129, 'configurable'
+EndPlainFunction
+v133 <- CallFunction v112, []
+v134 <- BeginPlainFunction -> 
+    v135 <- BeginGeneratorFunction -> 
+    EndGeneratorFunction
+    v136 <- GetProperty v135, 'prototype'
+    v137 <- BeginGeneratorFunction -> 
+    EndGeneratorFunction
+    v138 <- GetProperty v137, 'prototype'
+    v139 <- Compare v136, '!==', v138
+    v140 <- BeginGeneratorFunction -> 
+    EndGeneratorFunction
+    v141 <- GetProperty v140, 'prototype'
+    v142 <- GetProperty v1, 'prototype'
+    v143 <- Compare v141, '!==', v142
+    v144 <- GetProperty v1, 'prototype'
+    v145 <- CallMethod v4, 'getPrototypeOf', [v144]
+    v146 <- GetProperty v1, 'prototype'
+    v147 <- CreateNamedVariable 'Function', 'none'
+    v148 <- TestInstanceOf v146, v147
+    v149 <- UnaryOperation '!', v148
+    v150 <- GetProperty v1, 'prototype'
+    v151 <- TypeOf v150
+    v152 <- LoadString 'object'
+    v153 <- CreateArray []
+    v154 <- GetProperty v1, 'prototype'
+    v155 <- CallMethod v4, 'getOwnPropertyNames', [v154]
+EndPlainFunction
+v156 <- CallFunction v134, []
+
+
+function f() {
+    'use strict';
+}
+function* g() {
+    yield 1;
+}
+var GeneratorFunctionPrototype = Object.getPrototypeOf(g);
+var GeneratorFunction = GeneratorFunctionPrototype.constructor;
+var GeneratorObjectPrototype = GeneratorFunctionPrototype.prototype;
+var IteratorPrototype = Object.getPrototypeOf(GeneratorObjectPrototype);
+function TestGeneratorFunctionInstance() {
+    var f_own_property_names = Object.getOwnPropertyNames(f);
+    var g_own_property_names = Object.getOwnPropertyNames(g);
+    f_own_property_names.sort();
+    g_own_property_names.sort();
+    var i;
+    for ((() => {
+            i = 0;
+        })();
+        i < f_own_property_names.length;
+        i++) {
+        var prop = f_own_property_names[i];
+        var f_desc = Object.getOwnPropertyDescriptor(f, prop);
+        var g_desc = Object.getOwnPropertyDescriptor(g, prop);
+        f_desc.configurable;
+        g_desc.configurable;
+        f_desc.writable;
+        g_desc.writable;
+        f_desc.enumerable;
+        g_desc.enumerable;
+    }
+}
+TestGeneratorFunctionInstance();
+function TestGeneratorFunctionPrototype() {
+    Object.getPrototypeOf(f);
+    Function.prototype;
+    GeneratorFunctionPrototype === Function.prototype;
+    Function.prototype;
+    Object.getPrototypeOf(GeneratorFunctionPrototype);
+    function* f47() {
+    }
+    Object.getPrototypeOf(f47);
+    typeof GeneratorFunctionPrototype;
+    var constructor_desc = Object.getOwnPropertyDescriptor(GeneratorFunctionPrototype, "constructor");
+    constructor_desc !== undefined;
+    constructor_desc.value;
+    constructor_desc.writable;
+    constructor_desc.enumerable;
+    constructor_desc.configurable;
+    var prototype_desc = Object.getOwnPropertyDescriptor(GeneratorFunctionPrototype, "prototype");
+    prototype_desc !== undefined;
+    prototype_desc.value;
+    prototype_desc.writable;
+    prototype_desc.enumerable;
+    prototype_desc.configurable;
+}
+TestGeneratorFunctionPrototype();
+function TestGeneratorObjectPrototype() {
+    Object.getPrototypeOf(GeneratorObjectPrototype);
+    function* f72() {
+        yield 1;
+    }
+    Object.getPrototypeOf(f72.prototype);
+    var expected_property_names = ["next","return","throw","constructor"];
+    var found_property_names = Object.getOwnPropertyNames(GeneratorObjectPrototype);
+    expected_property_names.sort();
+    found_property_names.sort();
+    var constructor_desc = Object.getOwnPropertyDescriptor(GeneratorObjectPrototype, "constructor");
+    constructor_desc !== undefined;
+    constructor_desc.writable;
+    constructor_desc.enumerable;
+    constructor_desc.configurable;
+    var next_desc = Object.getOwnPropertyDescriptor(GeneratorObjectPrototype, "next");
+    next_desc !== undefined;
+    next_desc.writable;
+    next_desc.enumerable;
+    next_desc.configurable;
+    var throw_desc = Object.getOwnPropertyDescriptor(GeneratorObjectPrototype, "throw");
+    throw_desc !== undefined;
+    throw_desc.writable;
+    throw_desc.enumerable;
+    throw_desc.configurable;
+}
+TestGeneratorObjectPrototype();
+function TestGeneratorFunction() {
+    GeneratorFunction.prototype;
+    g instanceof GeneratorFunction;
+    Object.getPrototypeOf(GeneratorFunction);
+    g instanceof Function;
+    g.toString();
+    f instanceof Function;
+    !(f instanceof GeneratorFunction);
+    const v123 = new GeneratorFunction();
+    v123 instanceof GeneratorFunction;
+    GeneratorFunction() instanceof GeneratorFunction;
+    var prototype_desc = Object.getOwnPropertyDescriptor(GeneratorFunction, "prototype");
+    prototype_desc.writable;
+    prototype_desc.enumerable;
+    prototype_desc.configurable;
+}
+TestGeneratorFunction();
+function TestPerGeneratorPrototype() {
+    function* f135() {
+    }
+    const v136 = f135.prototype;
+    function* f137() {
+    }
+    v136 !== f137.prototype;
+    function* f140() {
+    }
+    f140.prototype !== g.prototype;
+    Object.getPrototypeOf(g.prototype);
+    !(g.prototype instanceof Function);
+    typeof g.prototype;
+    [];
+    Object.getOwnPropertyNames(g.prototype);
+}
+TestPerGeneratorPrototype();
+
+FuzzIL program written to corpus/generators-runtime.fzil

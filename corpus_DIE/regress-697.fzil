@@ -1,0 +1,18 @@
+BeginTry
+    v0 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v1 <- CreateNamedVariable 'Object', 'none'
+    v2 <- CallMethod v1, 'create', [v0]
+BeginCatch -> v3
+    v4 <- LoadBoolean 'false'
+EndTryCatch
+
+
+try {
+    function f0() {
+    }
+    Object.create(f0);
+} catch(e3) {
+}
+
+FuzzIL program written to corpus/regress-697.fzil

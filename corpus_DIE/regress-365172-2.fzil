@@ -1,0 +1,39 @@
+v0 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `d`, v0
+v1 <- EndObjectLiteral
+v2 <- CreateNamedVariable 'b1', 'var', v1
+v3 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `d`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'b2', 'var', v4
+v6 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v6
+v7 <- EndObjectLiteral
+v8 <- CreateNamedVariable 'f1', 'var', v7
+v9 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v9
+v10 <- EndObjectLiteral
+v11 <- CreateNamedVariable 'f2', 'var', v10
+SetProperty v8, 'b', v2
+BeginObjectLiteral
+v12 <- EndObjectLiteral
+SetProperty v11, 'x', v12
+v13 <- LoadFloat '4.2'
+SetProperty v5, 'd', v13
+SetProperty v11, 'b', v5
+
+
+var b1 = { d: 1 };
+var b2 = { d: 2 };
+var f1 = { x: 1 };
+var f2 = { x: 2 };
+f1.b = b1;
+f2.x = {};
+b2.d = 4.2;
+f2.b = b2;
+
+FuzzIL program written to corpus/regress-365172-2.fzil

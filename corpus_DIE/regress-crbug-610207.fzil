@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- GetElement v2, '0'
+    v4 <- CallMethod v3, 'getEvalOrigin', []
+    Return v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'Error', 'none'
+SetProperty v5, 'prepareStackTrace', v0
+BeginTry
+BeginCatch -> v6
+    v7 <- GetProperty v6, 'stack'
+    v8 <- CreateNamedVariable 'print', 'none'
+    v9 <- CallFunction v8, [v7]
+EndTryCatch
+
+
+function f0(a1, a2) {
+    return a2[0].getEvalOrigin();
+}
+Error.prepareStackTrace = f0;
+try {
+} catch(e6) {
+    print(e6.stack);
+}
+
+FuzzIL program written to corpus/regress-crbug-610207.fzil

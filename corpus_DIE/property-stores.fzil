@@ -1,0 +1,112 @@
+v0 <- LoadInteger '42'
+v1 <- CreateNamedVariable 'a', 'var', v0
+v2 <- LoadInteger '0'
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadInteger '7'
+    v5 <- LoadThis
+    SetProperty v5, 'x', v4
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '1'
+    v8 <- BinaryOperation v1, '|', v7
+    v9 <- LoadThis
+    SetProperty v9, 'x', v8
+EndPlainFunction
+v10 <- BeginPlainFunction -> 
+    v11 <- LoadThis
+    SetProperty v11, 'x', v1
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v2
+    ObjectLiteralAddProperty `f`, v3
+    ObjectLiteralAddProperty `g`, v6
+    ObjectLiteralAddProperty `h`, v10
+v12 <- EndObjectLiteral
+v13 <- CreateNamedVariable 'obj', 'var', v12
+v14 <- LoadUndefined
+v15 <- CreateNamedVariable 'i', 'var', v14
+BeginForLoopInitializer
+    v16 <- LoadInteger '0'
+    Reassign v15, v16
+BeginForLoopCondition
+    v17 <- LoadInteger '5'
+    v18 <- Compare v15, '<', v17
+BeginForLoopAfterthought v18
+    v19 <- UnaryOperation v15, '++'
+BeginForLoopBody
+    v20 <- CallMethod v13, 'f', []
+EndForLoop
+v21 <- CallMethod v13, 'f', []
+v22 <- LoadInteger '7'
+v23 <- GetProperty v13, 'x'
+BeginForLoopInitializer
+    v24 <- LoadInteger '0'
+    Reassign v15, v24
+BeginForLoopCondition
+    v25 <- LoadInteger '5'
+    v26 <- Compare v15, '<', v25
+BeginForLoopAfterthought v26
+    v27 <- UnaryOperation v15, '++'
+BeginForLoopBody
+    v28 <- CallMethod v13, 'g', []
+EndForLoop
+v29 <- CallMethod v13, 'g', []
+v30 <- LoadInteger '43'
+v31 <- GetProperty v13, 'x'
+BeginForLoopInitializer
+    v32 <- LoadInteger '0'
+    Reassign v15, v32
+BeginForLoopCondition
+    v33 <- LoadInteger '5'
+    v34 <- Compare v15, '<', v33
+BeginForLoopAfterthought v34
+    v35 <- UnaryOperation v15, '++'
+BeginForLoopBody
+    v36 <- CallMethod v13, 'h', []
+EndForLoop
+v37 <- CallMethod v13, 'h', []
+v38 <- LoadInteger '42'
+v39 <- GetProperty v13, 'x'
+
+
+var a = 42;
+function f3() {
+    this.x = 7;
+}
+function f6() {
+    this.x = a | 1;
+}
+function f10() {
+    this.x = a;
+}
+var obj = { x: 0, f: f3, g: f6, h: f10 };
+var i;
+for ((() => {
+        i = 0;
+    })();
+    i < 5;
+    i++) {
+    obj.f();
+}
+obj.f();
+obj.x;
+for ((() => {
+        i = 0;
+    })();
+    i < 5;
+    i++) {
+    obj.g();
+}
+obj.g();
+obj.x;
+for ((() => {
+        i = 0;
+    })();
+    i < 5;
+    i++) {
+    obj.h();
+}
+obj.h();
+obj.x;
+
+FuzzIL program written to corpus/property-stores.fzil

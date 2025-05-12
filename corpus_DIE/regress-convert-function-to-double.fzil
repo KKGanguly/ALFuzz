@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadThis
+    SetProperty v2, 'func', v1
+EndPlainFunction
+v3 <- Construct v0, [v0]
+v4 <- CreateNamedVariable 'o1', 'var', v3
+v5 <- LoadFloat '1.4'
+v6 <- CreateNamedVariable 'd', 'var', v5
+v7 <- Construct v0, [v6]
+v8 <- CreateNamedVariable 'o2', 'var', v7
+v9 <- LoadFloat '1.8'
+SetProperty v8, 'func', v9
+v10 <- LoadFloat '1.4'
+
+
+function f(a1) {
+    this.func = a1;
+}
+const v3 = new f(f);
+var o1 = v3;
+var d = 1.4;
+const v7 = new f(d);
+var o2 = v7;
+o2.func = 1.8;
+
+FuzzIL program written to corpus/regress-convert-function-to-double.fzil

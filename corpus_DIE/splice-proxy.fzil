@@ -1,0 +1,44 @@
+v0 <- CreateArray []
+v1 <- CreateNamedVariable 'array', 'var', v0
+v2 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v3 <- EndObjectLiteral
+v4 <- Construct v2, [v1, v3]
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- Construct v2, [v4, v5]
+v7 <- CreateNamedVariable 'proxy', 'var', v6
+v8 <- BeginPlainFunction -> 
+EndPlainFunction
+v9 <- CreateNamedVariable 'Ctor', 'var', v8
+v10 <- LoadUndefined
+v11 <- CreateNamedVariable 'result', 'var', v10
+v12 <- BeginPlainFunction -> 
+EndPlainFunction
+SetProperty v1, 'constructor', v12
+v13 <- GetProperty v1, 'constructor'
+v14 <- CreateNamedVariable 'Symbol', 'none'
+v15 <- GetProperty v14, 'species'
+SetComputedProperty v13, v15, v9
+v16 <- CreateNamedVariable 'Array', 'none'
+v17 <- GetProperty v16, 'prototype'
+v18 <- GetProperty v17, 'slice'
+v19 <- CallMethod v18, 'call', [v7]
+
+
+var array = [];
+const v4 = new Proxy(array, {});
+const v6 = new Proxy(v4, {});
+var proxy = v6;
+function f8() {
+}
+var Ctor = f8;
+var result;
+function f12() {
+}
+array.constructor = f12;
+const t11 = array.constructor;
+t11[Symbol.species] = Ctor;
+Array.prototype.slice.call(proxy);
+
+FuzzIL program written to corpus/splice-proxy.fzil

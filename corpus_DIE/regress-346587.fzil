@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetProperty v1, 'x'
+    v3 <- LoadString 'baz'
+    v4 <- Compare v2, '===', v3
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadString 'baz'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v6
+    v7 <- EndObjectLiteral
+    v8 <- CallFunction v0, [v7]
+EndPlainFunction
+v9 <- CallFunction v5, []
+v10 <- CallFunction v5, []
+v11 <- CallFunction v5, []
+
+
+function bar(a1) {
+    a1.x === "baz";
+}
+function foo() {
+    bar({ x: "baz" });
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/regress-346587.fzil

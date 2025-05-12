@@ -1,0 +1,222 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'return ((dividend | 0) / (('
+    v3 <- BinaryOperation v2, '+', v1
+    v4 <- LoadString ') | 0)) | 0'
+    v5 <- BinaryOperation v3, '+', v4
+    Return v5
+EndPlainFunction
+v6 <- CreateNamedVariable 'Function', 'none'
+v7 <- LoadString 'dividend'
+v8 <- LoadString 'divisor'
+v9 <- LoadString 'divisor'
+v10 <- CallFunction v0, [v9]
+v11 <- Construct v6, [v7, v8, v10]
+v12 <- CreateNamedVariable 'RefDivByConstI', 'var', v11
+v13 <- BeginPlainFunction -> v14
+    v15 <- LoadString 'return ((dividend | 0) % (('
+    v16 <- BinaryOperation v15, '+', v14
+    v17 <- LoadString ') | 0)) | 0'
+    v18 <- BinaryOperation v16, '+', v17
+    Return v18
+EndPlainFunction
+v19 <- LoadString 'dividend'
+v20 <- LoadString 'divisor'
+v21 <- LoadString 'divisor'
+v22 <- CallFunction v13, [v21]
+v23 <- Construct v6, [v19, v20, v22]
+v24 <- CreateNamedVariable 'RefModByConstI', 'var', v23
+v25 <- BeginPlainFunction -> v26
+    v27 <- LoadString 'return Math.floor(dividend / ('
+    v28 <- BinaryOperation v27, '+', v26
+    v29 <- LoadString ')) | 0'
+    v30 <- BinaryOperation v28, '+', v29
+    Return v30
+EndPlainFunction
+v31 <- LoadString 'dividend'
+v32 <- LoadString 'divisor'
+v33 <- LoadString 'divisor'
+v34 <- CallFunction v25, [v33]
+v35 <- Construct v6, [v31, v32, v34]
+v36 <- CreateNamedVariable 'RefFlooringDivByConstI', 'var', v35
+v37 <- BeginPlainFunction -> v38, v39
+    v40 <- UnaryOperation '-', v39
+    v41 <- CallMethod v38, 'push', [v39, v40]
+EndPlainFunction
+v42 <- BeginPlainFunction -> v43, v44, v45
+    BeginForLoopInitializer
+    BeginForLoopCondition -> v46
+        v47 <- Compare v46, '<=', v45
+    BeginForLoopAfterthought v47 -> v48
+        v49 <- UnaryOperation v48, '++'
+    BeginForLoopBody -> v50
+        v51 <- CallFunction v37, [v43, v50]
+    EndForLoop
+EndPlainFunction
+v52 <- BeginPlainFunction -> 
+    v53 <- LoadInteger '2147483648'
+    v54 <- UnaryOperation '-', v53
+    v55 <- LoadInteger '715827883'
+    v56 <- LoadInteger '1431655766'
+    v57 <- LoadInteger '1431655765'
+    v58 <- UnaryOperation '-', v57
+    v59 <- LoadInteger '1431655764'
+    v60 <- UnaryOperation '-', v59
+    v61 <- LoadInteger '123'
+    v62 <- LoadInteger '1234'
+    v63 <- UnaryOperation '-', v62
+    v64 <- LoadInteger '12345'
+    v65 <- LoadInteger '123456'
+    v66 <- UnaryOperation '-', v65
+    v67 <- LoadInteger '1234567'
+    v68 <- LoadInteger '12345678'
+    v69 <- UnaryOperation '-', v68
+    v70 <- LoadInteger '123456789'
+    v71 <- CreateArray [v54, v55, v56, v58, v60, v61, v63, v64, v66, v67, v69, v70]
+    v72 <- CreateNamedVariable 'values', 'var', v71
+    BeginForLoopInitializer
+        v73 <- LoadInteger '6'
+    BeginForLoopCondition -> v74
+        v75 <- LoadInteger '31'
+        v76 <- Compare v74, '<', v75
+    BeginForLoopAfterthought v76 -> v77
+        v78 <- UnaryOperation v77, '++'
+    BeginForLoopBody -> v79
+        v80 <- LoadInteger '1'
+        v81 <- BinaryOperation v80, '<<', v79
+        v82 <- CallFunction v37, [v72, v81]
+    EndForLoop
+    v83 <- LoadInteger '1'
+    v84 <- LoadInteger '32'
+    v85 <- CallFunction v42, [v72, v83, v84]
+    v86 <- LoadInteger '100'
+    v87 <- LoadInteger '109'
+    v88 <- CallFunction v42, [v72, v86, v87]
+    v89 <- LoadInteger '1000'
+    v90 <- LoadInteger '1009'
+    v91 <- CallFunction v42, [v72, v89, v90]
+    v92 <- LoadInteger '10000'
+    v93 <- LoadInteger '10009'
+    v94 <- CallFunction v42, [v72, v92, v93]
+    v95 <- LoadInteger '100000'
+    v96 <- LoadInteger '100009'
+    v97 <- CallFunction v42, [v72, v95, v96]
+    v98 <- LoadInteger '1000000'
+    v99 <- LoadInteger '1000009'
+    v100 <- CallFunction v42, [v72, v98, v99]
+    v101 <- LoadInteger '10000000'
+    v102 <- LoadInteger '10000009'
+    v103 <- CallFunction v42, [v72, v101, v102]
+    v104 <- LoadInteger '100000000'
+    v105 <- LoadInteger '100000009'
+    v106 <- CallFunction v42, [v72, v104, v105]
+    v107 <- LoadInteger '1000000000'
+    v108 <- LoadInteger '1000000009'
+    v109 <- CallFunction v42, [v72, v107, v108]
+    Return v72
+EndPlainFunction
+v110 <- BeginPlainFunction -> v111, v112, v113, v114
+    v115 <- LoadString 'dividend'
+    v116 <- CallFunction v112, [v114]
+    v117 <- Construct v6, [v115, v116]
+    v118 <- CreateNamedVariable 'OptFun', 'var', v117
+    v119 <- LoadInteger '7'
+    v120 <- CallFunction v118, [v119]
+    v121 <- LoadInteger '11'
+    v122 <- CallFunction v118, [v121]
+    v123 <- LoadInteger '13'
+    v124 <- CallFunction v118, [v123]
+    v125 <- BeginPlainFunction -> v126
+        v127 <- LoadInteger '2147483648'
+        v128 <- UnaryOperation '-', v127
+        v129 <- Compare v126, '===', v128
+        v130 <- LoadInteger '1'
+        v131 <- UnaryOperation '-', v130
+        v132 <- Compare v114, '===', v131
+        v133 <- BinaryOperation v129, '&&', v132
+        BeginIf v133
+            Return
+        EndIf
+        v134 <- CallFunction v111, [v126, v114]
+        v135 <- CallFunction v118, [v126]
+    EndPlainFunction
+    v136 <- CallMethod v113, 'forEach', [v125]
+EndPlainFunction
+v137 <- BeginPlainFunction -> v138, v139
+    v140 <- CallFunction v52, []
+    v141 <- CreateNamedVariable 'values', 'var', v140
+    v142 <- BeginPlainFunction -> v143
+        v144 <- CallFunction v110, [v138, v139, v141, v143]
+    EndPlainFunction
+    v145 <- CallMethod v141, 'forEach', [v142]
+EndPlainFunction
+v146 <- CallFunction v137, [v12, v0]
+v147 <- CallFunction v137, [v24, v13]
+v148 <- CallFunction v137, [v36, v25]
+
+
+function ConstructDiv(a1) {
+    return ("return ((dividend | 0) / ((" + a1) + ") | 0)) | 0";
+}
+const v11 = new Function("dividend", "divisor", ConstructDiv("divisor"));
+var RefDivByConstI = v11;
+function ConstructMod(a14) {
+    return ("return ((dividend | 0) % ((" + a14) + ") | 0)) | 0";
+}
+const v23 = new Function("dividend", "divisor", ConstructMod("divisor"));
+var RefModByConstI = v23;
+function ConstructFlooringDiv(a26) {
+    return ("return Math.floor(dividend / (" + a26) + ")) | 0";
+}
+const v35 = new Function("dividend", "divisor", ConstructFlooringDiv("divisor"));
+var RefFlooringDivByConstI = v35;
+function PushSymmetric(a38, a39) {
+    a38.push(a39, -a39);
+}
+function PushRangeSymmetric(a43, a44, a45) {
+    for (let i46 = a44; i46 <= a45; i46++) {
+        PushSymmetric(a43, i46);
+    }
+}
+function CreateTestValues() {
+    var values = [-2147483648,715827883,1431655766,-1431655765,-1431655764,123,-1234,12345,-123456,1234567,-12345678,123456789];
+    for (let i74 = 6; i74 < 31; i74++) {
+        PushSymmetric(values, 1 << i74);
+    }
+    PushRangeSymmetric(values, 1, 32);
+    PushRangeSymmetric(values, 100, 109);
+    PushRangeSymmetric(values, 1000, 1009);
+    PushRangeSymmetric(values, 10000, 10009);
+    PushRangeSymmetric(values, 100000, 100009);
+    PushRangeSymmetric(values, 1000000, 1000009);
+    PushRangeSymmetric(values, 10000000, 10000009);
+    PushRangeSymmetric(values, 100000000, 100000009);
+    PushRangeSymmetric(values, 1000000000, 1000000009);
+    return values;
+}
+function TestDivisionLike(a111, a112, a113, a114) {
+    const v117 = new Function("dividend", a112(a114));
+    var OptFun = v117;
+    OptFun(7);
+    OptFun(11);
+    OptFun(13);
+    function dude(a126) {
+        if ((a126 === -2147483648) && (a114 === -1)) {
+            return;
+        }
+        a111(a126, a114);
+        OptFun(a126);
+    }
+    a113.forEach(dude);
+}
+function Test(a138, a139) {
+    var values = CreateTestValues();
+    function f142(a143) {
+        TestDivisionLike(a138, a139, values, a143);
+    }
+    values.forEach(f142);
+}
+Test(RefDivByConstI, ConstructDiv);
+Test(RefModByConstI, ConstructMod);
+Test(RefFlooringDivByConstI, ConstructFlooringDiv);
+
+FuzzIL program written to corpus/division-by-constant.fzil

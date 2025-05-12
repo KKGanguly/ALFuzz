@@ -1,0 +1,87 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '10'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'a', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- LoadInteger '1'
+    SetElement v5, '0', v6
+    SetElement v5, '0', v6
+    Return v6
+EndPlainFunction
+v7 <- CallFunction v4, [v3]
+v8 <- CallFunction v4, [v3]
+v9 <- LoadInteger '123'
+v10 <- CallFunction v4, [v9]
+v11 <- BeginPlainFunction -> v12
+    v13 <- LoadInteger '1'
+    SetElement v12, '0', v13
+    SetElement v12, '0', v13
+    Return v13
+EndPlainFunction
+v14 <- CallFunction v11, [v3]
+v15 <- CallFunction v11, [v3]
+v16 <- LoadInteger '0'
+v17 <- CallFunction v11, [v16]
+v18 <- CreateNamedVariable 'Object', 'none'
+v19 <- Construct v18, []
+v20 <- CreateNamedVariable 'b', 'var', v19
+v21 <- BeginPlainFunction -> v22
+    v23 <- LoadInteger '1'
+    SetElement v22, '0', v23
+    SetElement v22, '0', v23
+    Return v23
+EndPlainFunction
+v24 <- CallFunction v21, [v20]
+v25 <- CallFunction v21, [v20]
+v26 <- LoadInteger '123'
+v27 <- CallFunction v21, [v26]
+v28 <- BeginPlainFunction -> v29
+    v30 <- LoadInteger '1'
+    SetElement v29, '0', v30
+    SetElement v29, '0', v30
+    Return v30
+EndPlainFunction
+v31 <- CallFunction v28, [v20]
+v32 <- CallFunction v28, [v20]
+v33 <- LoadInteger '0'
+v34 <- CallFunction v28, [v33]
+
+
+const v2 = new Array(10);
+var a = v2;
+function test_load_set_smi(a5) {
+    a5[0] = 1;
+    a5[0] = 1;
+    return 1;
+}
+test_load_set_smi(a);
+test_load_set_smi(a);
+test_load_set_smi(123);
+function test_load_set_smi_2(a12) {
+    a12[0] = 1;
+    a12[0] = 1;
+    return 1;
+}
+test_load_set_smi_2(a);
+test_load_set_smi_2(a);
+test_load_set_smi_2(0);
+const v19 = new Object();
+var b = v19;
+function test_load_set_smi_3(a22) {
+    a22[0] = 1;
+    a22[0] = 1;
+    return 1;
+}
+test_load_set_smi_3(b);
+test_load_set_smi_3(b);
+test_load_set_smi_3(123);
+function test_load_set_smi_4(a29) {
+    a29[0] = 1;
+    a29[0] = 1;
+    return 1;
+}
+test_load_set_smi_4(b);
+test_load_set_smi_4(b);
+test_load_set_smi_4(0);
+
+FuzzIL program written to corpus/fast-element-smi-check.fzil

@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+EndPlainFunction
+v2 <- CreateArray []
+v3 <- CreateNamedVariable 'o1', 'var', v2
+v4 <- LoadInteger '0'
+SetProperty v3, 'a', v4
+SetProperty v3, 'f', v0
+v5 <- CreateArray []
+v6 <- CreateNamedVariable 'o2', 'var', v5
+v7 <- LoadFloat '4.2'
+SetProperty v6, 'a', v7
+SetProperty v6, 'f', v1
+v8 <- GetProperty v3, 'a'
+
+
+function f1() {
+}
+function f2() {
+}
+var o1 = [];
+o1.a = 0;
+o1.f = f1;
+var o2 = [];
+o2.a = 4.2;
+o2.f = f2;
+o1.a;
+
+FuzzIL program written to corpus/regress-crbug-748539.fzil

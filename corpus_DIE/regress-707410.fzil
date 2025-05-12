@@ -1,0 +1,22 @@
+v0 <- CreateNamedVariable 'Uint8Array', 'none'
+v1 <- LoadInteger '1024'
+v2 <- LoadInteger '1024'
+v3 <- BinaryOperation v1, '*', v2
+v4 <- Construct v0, [v3]
+v5 <- CreateNamedVariable 'a', 'var', v4
+v6 <- BeginArrowFunction -> 
+    v7 <- Construct v0, [v5]
+    Return v7
+EndArrowFunction
+v8 <- CallFunction v6, []
+
+
+const v4 = new Uint8Array(1024 * 1024);
+var a = v4;
+const v6 = () => {
+    const v7 = new Uint8Array(a);
+    return v7;
+};
+v6();
+
+FuzzIL program written to corpus/regress-707410.fzil

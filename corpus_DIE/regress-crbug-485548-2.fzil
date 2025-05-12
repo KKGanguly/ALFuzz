@@ -1,0 +1,72 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- Construct v0, []
+v2 <- CreateNamedVariable 'inner', 'var', v1
+v3 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v3
+v4 <- EndObjectLiteral
+SetProperty v2, 'a', v4
+v5 <- LoadFloat '1.5'
+SetElement v2, '0', v5
+v6 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v6
+v7 <- EndObjectLiteral
+SetProperty v2, 'b', v7
+v8 <- BeginPlainFunction -> v9
+    v10 <- GetProperty v9, 'field'
+    v11 <- GetProperty v10, 'b'
+    v12 <- GetProperty v11, 'x'
+    Return v12
+EndPlainFunction
+BeginObjectLiteral
+v13 <- EndObjectLiteral
+v14 <- CreateNamedVariable 'outer', 'var', v13
+SetProperty v14, 'field', v2
+v15 <- CallFunction v8, [v14]
+v16 <- CallFunction v8, [v14]
+v17 <- CallFunction v8, [v14]
+v18 <- CallFunction v8, [v14]
+BeginObjectLiteral
+    BeginObjectLiteralGetter `x` -> v19
+        v20 <- LoadInteger '2147483647'
+        Return v20
+    EndObjectLiteralGetter
+v21 <- EndObjectLiteral
+v22 <- CreateNamedVariable 'v', 'var', v21
+SetProperty v2, 'b', v22
+v23 <- CreateNamedVariable 'gc', 'none'
+v24 <- CallFunction v23, []
+v25 <- CallFunction v8, [v14]
+v26 <- CreateNamedVariable 'boom', 'var', v25
+v27 <- CreateNamedVariable 'print', 'none'
+v28 <- CallFunction v27, [v26]
+v29 <- LoadInteger '2147483647'
+
+
+const v1 = new Array();
+var inner = v1;
+inner.a = { x: 1 };
+inner[0] = 1.5;
+inner.b = { x: 2 };
+function foo(a9) {
+    return a9.field.b.x;
+}
+var outer = {};
+outer.field = inner;
+foo(outer);
+foo(outer);
+foo(outer);
+foo(outer);
+const v21 = {
+    get x() {
+        return 2147483647;
+    },
+};
+var v = v21;
+inner.b = v;
+gc();
+var boom = foo(outer);
+print(boom);
+
+FuzzIL program written to corpus/regress-crbug-485548-2.fzil

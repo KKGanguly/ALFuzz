@@ -1,0 +1,245 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1073741823'
+    v2 <- CreateNamedVariable 'x', 'var', v1
+    v3 <- UnaryOperation v2, '++'
+    Return v2
+EndPlainFunction
+v4 <- LoadInteger '1073741824'
+v5 <- CallFunction v0, []
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '1073741824'
+    v8 <- UnaryOperation '-', v7
+    v9 <- CreateNamedVariable 'x', 'var', v8
+    v10 <- UnaryOperation v9, '--'
+    Return v9
+EndPlainFunction
+v11 <- LoadInteger '1073741825'
+v12 <- UnaryOperation '-', v11
+v13 <- CallFunction v6, []
+v14 <- BeginPlainFunction -> v15
+    v16 <- LoadInteger '1073741823'
+    v17 <- BinaryOperation v15, '&', v16
+    Reassign v15, v17
+    v18 <- UnaryOperation v15, '++'
+    Return v15
+EndPlainFunction
+v19 <- LoadInteger '1073741824'
+v20 <- LoadInteger '1073741823'
+v21 <- CallFunction v14, [v20]
+v22 <- BeginPlainFunction -> 
+    v23 <- LoadUndefined
+    v24 <- CreateNamedVariable 'i', 'var', v23
+    BeginForLoopInitializer
+        v25 <- LoadInteger '1073741822'
+        Reassign v24, v25
+    BeginForLoopCondition
+        v26 <- LoadInteger '1073741823'
+        v27 <- Compare v24, '<=', v26
+    BeginForLoopAfterthought v27
+        v28 <- UnaryOperation v24, '++'
+    BeginForLoopBody
+    EndForLoop
+    Return v24
+EndPlainFunction
+v29 <- LoadInteger '1073741824'
+v30 <- CallFunction v22, []
+v31 <- BeginPlainFunction -> 
+    v32 <- LoadUndefined
+    v33 <- CreateNamedVariable 'i', 'var', v32
+    BeginForLoopInitializer
+        v34 <- LoadInteger '1073741823'
+        v35 <- UnaryOperation '-', v34
+        Reassign v33, v35
+    BeginForLoopCondition
+        v36 <- LoadInteger '1073741824'
+        v37 <- UnaryOperation '-', v36
+        v38 <- Compare v33, '>=', v37
+    BeginForLoopAfterthought v38
+        v39 <- UnaryOperation v33, '--'
+    BeginForLoopBody
+    EndForLoop
+    Return v33
+EndPlainFunction
+v40 <- LoadInteger '1073741825'
+v41 <- UnaryOperation '-', v40
+v42 <- CallFunction v31, []
+v43 <- BeginPlainFunction -> 
+    v44 <- LoadInteger '1073741823'
+    v45 <- CreateNamedVariable 'x', 'var', v44
+    v46 <- UnaryOperation v45, '++'
+    v47 <- LoadInteger '1'
+    v48 <- BinaryOperation v45, '+', v47
+    Return v48
+EndPlainFunction
+v49 <- LoadInteger '1073741825'
+v50 <- CallFunction v43, []
+v51 <- BeginPlainFunction -> 
+    v52 <- LoadUndefined
+    v53 <- CreateNamedVariable 'i', 'var', v52
+    BeginForLoopInitializer
+        v54 <- LoadInteger '1073741821'
+        Reassign v53, v54
+    BeginForLoopCondition
+        v55 <- LoadInteger '1073741822'
+        v56 <- Compare v53, '<=', v55
+    BeginForLoopAfterthought v56
+        v57 <- UnaryOperation v53, '++'
+    BeginForLoopBody
+    EndForLoop
+    v58 <- UnaryOperation v53, '++'
+    v59 <- LoadInteger '1'
+    v60 <- BinaryOperation v53, '+', v59
+    Reassign v53, v60
+    Return v53
+EndPlainFunction
+v61 <- LoadInteger '1073741825'
+v62 <- CallFunction v51, []
+v63 <- BeginPlainFunction -> 
+    v64 <- LoadUndefined
+    v65 <- CreateNamedVariable 'i', 'var', v64
+    BeginForLoopInitializer
+        v66 <- LoadInteger '1073741821'
+        Reassign v65, v66
+    BeginForLoopCondition
+        v67 <- LoadInteger '1073741823'
+        v68 <- Compare v65, '<=', v67
+    BeginForLoopAfterthought v68
+        v69 <- UnaryOperation v65, '++'
+    BeginForLoopBody
+    EndForLoop
+    v70 <- UnaryOperation v65, '++'
+    v71 <- UnaryOperation v65, '++'
+    Return v65
+EndPlainFunction
+v72 <- LoadInteger '1073741826'
+v73 <- CallFunction v63, []
+v74 <- BeginPlainFunction -> 
+    v75 <- LoadUndefined
+    v76 <- CreateNamedVariable 'i', 'var', v75
+    BeginForLoopInitializer
+        v77 <- LoadInteger '0'
+        Reassign v76, v77
+    BeginForLoopCondition
+        v78 <- LoadInteger '42'
+        v79 <- Compare v76, '<', v78
+    BeginForLoopAfterthought v79
+        v80 <- UnaryOperation v76, '++'
+    BeginForLoopBody
+        v81 <- LoadInteger '42'
+        Return v81
+    EndForLoop
+EndPlainFunction
+v82 <- LoadInteger '42'
+v83 <- CallFunction v74, []
+v84 <- BeginPlainFunction -> v85
+    BeginForLoopInitializer
+        v86 <- LoadInteger '0'
+        Reassign v85, v86
+    BeginForLoopCondition
+        v87 <- LoadInteger '4'
+        v88 <- Compare v85, '<', v87
+    BeginForLoopAfterthought v88
+        v89 <- UnaryOperation v85, '++'
+    BeginForLoopBody
+    EndForLoop
+EndPlainFunction
+v90 <- LoadInteger '42'
+v91 <- CallFunction v84, [v90]
+
+
+function f1() {
+    var x = 1073741823;
+    x++;
+    return x;
+}
+f1();
+function f2() {
+    var x = -1073741824;
+    x--;
+    return x;
+}
+-1073741825;
+f2();
+function f3(a15) {
+    a15 = a15 & 1073741823;
+    a15++;
+    return a15;
+}
+f3(1073741823);
+function f4() {
+    var i;
+    for ((() => {
+            i = 1073741822;
+        })();
+        i <= 1073741823;
+        i++) {
+    }
+    return i;
+}
+f4();
+function f5() {
+    var i;
+    for ((() => {
+            i = -1073741823;
+        })();
+        i >= -1073741824;
+        i--) {
+    }
+    return i;
+}
+-1073741825;
+f5();
+function f6() {
+    var x = 1073741823;
+    x++;
+    return x + 1;
+}
+f6();
+function f7() {
+    var i;
+    for ((() => {
+            i = 1073741821;
+        })();
+        i <= 1073741822;
+        i++) {
+    }
+    i++;
+    i = i + 1;
+    return i;
+}
+f7();
+function f8() {
+    var i;
+    for ((() => {
+            i = 1073741821;
+        })();
+        i <= 1073741823;
+        i++) {
+    }
+    i++;
+    i++;
+    return i;
+}
+f8();
+function f9() {
+    var i;
+    for ((() => {
+            i = 0;
+        })();
+        i < 42;
+        i++) {
+        return 42;
+    }
+}
+f9();
+function f10(a85) {
+    for ((() => {
+            a85 = 0;
+        })();
+        a85 < 4;
+        a85++) {
+    }
+}
+f10(42);
+
+FuzzIL program written to corpus/loopcount.fzil

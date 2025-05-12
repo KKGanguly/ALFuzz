@@ -1,0 +1,13 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '5000001'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'large_object', 'var', v2
+v4 <- LoadInteger '23'
+SetProperty v3, 'length', v4
+
+
+const v2 = new Array(5000001);
+var large_object = v2;
+large_object.length = 23;
+
+FuzzIL program written to corpus/regress-404981.fzil

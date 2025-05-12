@@ -1,0 +1,46 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- Compare v1, '==', v2
+    BeginIf v3
+        v4 <- CreateNamedVariable 'Error', 'none'
+        v5 <- Construct v4, []
+        v6 <- GetProperty v5, 'stack'
+        Return v6
+    EndIf
+    v7 <- LoadInteger '1'
+    v8 <- BinaryOperation v1, '-', v7
+    v9 <- CallFunction v0, [v8]
+    Return v9
+EndPlainFunction
+v10 <- LoadString '\n'
+v11 <- LoadInteger '2'
+v12 <- CallFunction v0, [v11]
+v13 <- CallMethod v12, 'split', [v10]
+v14 <- CreateNamedVariable 'stack_lines', 'var', v13
+v15 <- GetElement v14, '1'
+v16 <- LoadRegExp 'at f \(.*?:11:12\)' ''
+v17 <- CallMethod v16, 'test', [v15]
+v18 <- GetElement v14, '2'
+v19 <- LoadRegExp 'at f \(.*?:13:10\)' ''
+v20 <- CallMethod v19, 'test', [v18]
+v21 <- GetElement v14, '3'
+v22 <- LoadRegExp 'at f \(.*?:13:10\)' ''
+v23 <- CallMethod v22, 'test', [v21]
+
+
+function f(a1) {
+    if (a1 == 0) {
+        const v5 = new Error();
+        return v5.stack;
+    }
+    return f(a1 - 1);
+}
+var stack_lines = f(2).split("\n");
+const v15 = stack_lines[1];
+/at f \(.*?:11:12\)/.test(v15);
+const v18 = stack_lines[2];
+/at f \(.*?:13:10\)/.test(v18);
+const v21 = stack_lines[3];
+/at f \(.*?:13:10\)/.test(v21);
+
+FuzzIL program written to corpus/stack-trace-source-position.fzil

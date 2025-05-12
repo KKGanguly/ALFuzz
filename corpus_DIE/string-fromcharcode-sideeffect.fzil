@@ -1,0 +1,27 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'counter', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- UnaryOperation v1, '++'
+    v4 <- LoadInteger '256'
+    Return v4
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v2
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'a', 'var', v5
+v7 <- LoadString 'AĀĀĀ'
+v8 <- LoadInteger '65'
+v9 <- CreateNamedVariable 'String', 'none'
+v10 <- CallMethod v9, 'fromCharCode', [v8, v6, v6, v6]
+v11 <- LoadInteger '3'
+
+
+var counter = 0;
+function f2() {
+    counter++;
+    return 256;
+}
+var a = { valueOf: f2 };
+String.fromCharCode(65, a, a, a);
+
+FuzzIL program written to corpus/string-fromcharcode-sideeffect.fzil

@@ -1,0 +1,23 @@
+v0 <- LoadRegExp '.' 'g'
+v1 <- CreateNamedVariable 're', 'const', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadBoolean 'true'
+    SetProperty v1, 'slow', v3
+EndPlainFunction
+v4 <- LoadString 'abc'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `valueOf`, v2
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'Symbol', 'none'
+v7 <- GetProperty v6, 'split'
+v8 <- CallComputedMethod v1, v7, [v4, v5]
+
+
+const re = /./g;
+function toSlowMode() {
+    re.slow = true;
+}
+const v5 = { valueOf: toSlowMode };
+re[Symbol.split]("abc", v5);
+
+FuzzIL program written to corpus/regress-758763.fzil

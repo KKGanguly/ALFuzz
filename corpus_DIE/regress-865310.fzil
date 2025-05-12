@@ -1,0 +1,33 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadNull
+    v2 <- CreateNamedVariable 'check', 'none'
+    v3 <- GetProperty v2, 'caller'
+EndPlainFunction
+v4 <- CreateNamedVariable 'check', 'none'
+Reassign v4, v0
+BeginObjectLiteral
+v5 <- EndObjectLiteral
+v6 <- CreateNamedVariable 'obj', 'var', v5
+v7 <- CreateNamedVariable 'check', 'none'
+SetProperty v6, 'valueOf', v7
+v8 <- BeginPlainFunction -> 
+    v9 <- CreateNamedVariable 'Number', 'none'
+    v10 <- CallFunction v9, [v6]
+EndPlainFunction
+v11 <- CallFunction v8, []
+v12 <- CallFunction v8, []
+
+
+function f0() {
+    check.caller;
+}
+check = f0;
+var obj = {};
+obj.valueOf = check;
+function f() {
+    Number(obj);
+}
+f();
+f();
+
+FuzzIL program written to corpus/regress-865310.fzil

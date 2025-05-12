@@ -1,0 +1,25 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadInteger '1'
+    v3 <- TestInstanceOf v2, v0
+    Return v3
+EndPlainFunction
+v4 <- LoadBoolean 'false'
+v5 <- CallFunction v1, []
+v6 <- LoadBoolean 'false'
+v7 <- CallFunction v1, []
+v8 <- LoadBoolean 'false'
+v9 <- CallFunction v1, []
+
+
+function Foo() {
+}
+function foo() {
+    return 1 instanceof Foo;
+}
+foo();
+foo();
+foo();
+
+FuzzIL program written to corpus/instanceof-opt2.fzil

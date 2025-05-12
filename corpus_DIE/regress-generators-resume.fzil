@@ -1,0 +1,34 @@
+v0 <- BeginGeneratorFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '0'
+    BeginForLoopCondition -> v2
+        v3 <- LoadInteger '10'
+        v4 <- Compare v2, '<', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- UnaryOperation v5, '++'
+    BeginForLoopBody -> v7
+        v8 <- LoadInteger '1'
+        v9 <- Yield v8
+    EndForLoop
+    v10 <- LoadInteger '0'
+    Return v10
+EndGeneratorFunction
+v11 <- CallFunction v0, []
+v12 <- CreateNamedVariable 'g', 'none'
+Reassign v12, v11
+v13 <- CreateNamedVariable 'g', 'none'
+v14 <- CallMethod v13, 'next', []
+v15 <- CallMethod v13, 'next', []
+
+
+function* foo() {
+    for (let i2 = 0; i2 < 10; i2++) {
+        yield 1;
+    }
+    return 0;
+}
+g = foo();
+g.next();
+g.next();
+
+FuzzIL program written to corpus/regress-generators-resume.fzil

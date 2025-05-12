@@ -1,0 +1,71 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- Compare v1, '>', v2
+    BeginIf v3
+        v4 <- LoadInteger '1'
+        v5 <- BinaryOperation v1, '-', v4
+        v6 <- CallFunction v0, [v5]
+        v7 <- BinaryOperation v6, '*', v1
+        Return v7
+    BeginElse
+        v8 <- LoadInteger '1'
+        Return v8
+    EndIf
+EndPlainFunction
+v9 <- BeginPlainFunction -> 
+    v10 <- LoadInteger '6'
+    v11 <- CallFunction v0, [v10]
+    v12 <- LoadInteger '720'
+    v13 <- Compare v11, '!=', v12
+    BeginIf v13
+        v14 <- LoadString 'Error'
+        ThrowException v14
+    EndIf
+EndPlainFunction
+v15 <- BeginPlainFunction -> 
+    v16 <- LoadString '123456789'
+    v17 <- CreateNamedVariable 'input', 'var', v16
+    v18 <- LoadRegExp '[4-6]+' 'g'
+    v19 <- LoadString 'xxx'
+    v20 <- CallMethod v17, 'replace', [v18, v19]
+    v21 <- CreateNamedVariable 'result', 'var', v20
+    v22 <- LoadString '123xxx789'
+    v23 <- Compare v21, '!=', v22
+    BeginIf v23
+        v24 <- LoadString 'Error'
+        ThrowException v24
+    EndIf
+EndPlainFunction
+v25 <- BeginPlainFunction -> 
+    v26 <- CallFunction v9, []
+    v27 <- CallFunction v15, []
+EndPlainFunction
+v28 <- CallFunction v25, []
+
+
+function fac(a1) {
+    if (a1 > 0) {
+        return fac(a1 - 1) * a1;
+    } else {
+        return 1;
+    }
+}
+function testFac() {
+    if (fac(6) != 720) {
+        throw "Error";
+    }
+}
+function testRegExp() {
+    var input = "123456789";
+    var result = input.replace(/[4-6]+/g, "xxx");
+    if (result != "123xxx789") {
+        throw "Error";
+    }
+}
+function main() {
+    testFac();
+    testRegExp();
+}
+main();
+
+FuzzIL program written to corpus/leakcheck.fzil

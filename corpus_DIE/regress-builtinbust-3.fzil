@@ -1,0 +1,54 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- CreateNamedVariable 'real_length', 'var', v1
+    v3 <- BeginPlainFunction -> 
+        v4 <- LoadString 'boom'
+        Reassign v2, v4
+    EndPlainFunction
+    v5 <- BeginPlainFunction -> 
+        Return v2
+    EndPlainFunction
+    v6 <- CreateNamedVariable 'Array', 'none'
+    v7 <- GetProperty v6, 'prototype'
+    v8 <- LoadString 'x'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v7
+        ObjectLiteralAddElement `0`, v8
+    v9 <- EndObjectLiteral
+    v10 <- CreateNamedVariable 'o', 'var', v9
+    v11 <- LoadString 'length'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `set`, v3
+        ObjectLiteralAddProperty `get`, v5
+    v12 <- EndObjectLiteral
+    v13 <- CreateNamedVariable 'Object', 'none'
+    v14 <- CallMethod v13, 'defineProperty', [v10, v11, v12]
+    Return v10
+EndPlainFunction
+v15 <- LoadInteger '2'
+v16 <- LoadString 'y'
+v17 <- CallFunction v0, []
+v18 <- CallMethod v17, 'push', [v16]
+v19 <- LoadInteger '2'
+v20 <- LoadString 'y'
+v21 <- CallFunction v0, []
+v22 <- CallMethod v21, 'unshift', [v20]
+
+
+function produce_object() {
+    var real_length = 1;
+    function set_length() {
+        real_length = "boom";
+    }
+    function get_length() {
+        return real_length;
+    }
+    const v7 = Array.prototype;
+    var o = { __proto__: v7, 0: "x" };
+    Object.defineProperty(o, "length", { set: set_length, get: get_length });
+    return o;
+}
+produce_object().push("y");
+produce_object().unshift("y");
+
+FuzzIL program written to corpus/regress-builtinbust-3.fzil

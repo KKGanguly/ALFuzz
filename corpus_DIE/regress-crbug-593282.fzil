@@ -1,0 +1,92 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable '__v_11', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    BeginTry
+        v4 <- CreateNamedVariable '__f_5', 'none'
+        v5 <- CallFunction v4, [v3, v1]
+        v6 <- LoadBoolean 'true'
+        Return v6
+    BeginCatch -> v7
+        v8 <- CreateNamedVariable 'gc', 'none'
+        v9 <- CallFunction v8, []
+    EndTryCatch
+EndPlainFunction
+v10 <- BeginPlainFunction -> v11, v12
+    v13 <- UnaryOperation '--', v11
+    v14 <- LoadInteger '0'
+    v15 <- Compare v13, '==', v14
+    BeginIf v15
+        v16 <- CreateNamedVariable '__f_1', 'none'
+        v17 <- CallFunction v16, [v12]
+        Return
+    EndIf
+    v18 <- CallFunction v10, [v11, v12]
+EndPlainFunction
+v19 <- BeginPlainFunction -> v20
+    v21 <- CreateNamedVariable 'RegExp', 'none'
+    v22 <- Construct v21, [v20]
+    v23 <- CreateNamedVariable '__v_5', 'var', v22
+EndPlainFunction
+v24 <- BeginPlainFunction -> 
+    v25 <- LoadInteger '100'
+    v26 <- CreateNamedVariable '__v_1', 'var', v25
+    v27 <- LoadInteger '100000'
+    v28 <- CreateNamedVariable '__v_8', 'var', v27
+    BeginWhileLoopHeader
+        v29 <- LoadInteger '1'
+        v30 <- BinaryOperation v28, '-', v29
+        v31 <- Compare v26, '<', v30
+    BeginWhileLoopBody v31
+        v32 <- BinaryOperation v26, '+', v28
+        v33 <- LoadInteger '2'
+        v34 <- BinaryOperation v32, '/', v33
+        v35 <- CreateNamedVariable 'Math', 'none'
+        v36 <- CallMethod v35, 'floor', [v34]
+        v37 <- CreateNamedVariable '__v_3', 'var', v36
+        v38 <- CallFunction v2, [v37]
+        BeginIf v38
+            Reassign v26, v37
+        BeginElse
+            Reassign v28, v37
+        EndIf
+    EndWhileLoop
+EndPlainFunction
+v39 <- CallFunction v24, []
+
+
+var __v_11 = {};
+function __f_2(a3) {
+    try {
+        __f_5(a3, __v_11);
+        return true;
+    } catch(e7) {
+        gc();
+    }
+}
+function __f_5(a11, a12) {
+    if (--a11 == 0) {
+        __f_1(a12);
+        return;
+    }
+    __f_5(a11, a12);
+}
+function __f_1(a20) {
+    const v22 = new RegExp(a20);
+    var __v_5 = v22;
+}
+function __f_4() {
+    var __v_1 = 100;
+    var __v_8 = 100000;
+    while (__v_1 < (__v_8 - 1)) {
+        var __v_3 = Math.floor((__v_1 + __v_8) / 2);
+        if (__f_2(__v_3)) {
+            __v_1 = __v_3;
+        } else {
+            __v_8 = __v_3;
+        }
+    }
+}
+__f_4();
+
+FuzzIL program written to corpus/regress-crbug-593282.fzil

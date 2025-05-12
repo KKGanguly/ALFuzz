@@ -1,0 +1,120 @@
+v0 <- LoadString 'a'
+v1 <- LoadRegExp '[@-A]' 'i'
+v2 <- CallMethod v1, 'test', [v0]
+v3 <- LoadString 'A'
+v4 <- LoadRegExp '[@-A]' 'i'
+v5 <- CallMethod v4, 'test', [v3]
+v6 <- LoadString '@'
+v7 <- LoadRegExp '[@-A]' 'i'
+v8 <- CallMethod v7, 'test', [v6]
+v9 <- LoadString 'a'
+v10 <- LoadRegExp '[@-A]' ''
+v11 <- CallMethod v10, 'test', [v9]
+v12 <- LoadString 'A'
+v13 <- LoadRegExp '[@-A]' ''
+v14 <- CallMethod v13, 'test', [v12]
+v15 <- LoadString '@'
+v16 <- LoadRegExp '[@-A]' ''
+v17 <- CallMethod v16, 'test', [v15]
+v18 <- LoadString '¾'
+v19 <- LoadRegExp '[¿-À]' 'i'
+v20 <- CallMethod v19, 'test', [v18]
+v21 <- LoadString '¿'
+v22 <- LoadRegExp '[¿-À]' 'i'
+v23 <- CallMethod v22, 'test', [v21]
+v24 <- LoadString 'À'
+v25 <- LoadRegExp '[¿-À]' 'i'
+v26 <- CallMethod v25, 'test', [v24]
+v27 <- LoadString 'à'
+v28 <- LoadRegExp '[¿-À]' 'i'
+v29 <- CallMethod v28, 'test', [v27]
+v30 <- LoadString 'á'
+v31 <- LoadRegExp '[¿-À]' 'i'
+v32 <- CallMethod v31, 'test', [v30]
+v33 <- LoadString 'Á'
+v34 <- LoadRegExp '[¿-À]' 'i'
+v35 <- CallMethod v34, 'test', [v33]
+v36 <- LoadString '¾'
+v37 <- LoadRegExp '[¿-À]' ''
+v38 <- CallMethod v37, 'test', [v36]
+v39 <- LoadString '¿'
+v40 <- LoadRegExp '[¿-À]' ''
+v41 <- CallMethod v40, 'test', [v39]
+v42 <- LoadString 'À'
+v43 <- LoadRegExp '[¿-À]' ''
+v44 <- CallMethod v43, 'test', [v42]
+v45 <- LoadString 'à'
+v46 <- LoadRegExp '[¿-À]' ''
+v47 <- CallMethod v46, 'test', [v45]
+v48 <- LoadString 'á'
+v49 <- LoadRegExp '[¿-À]' ''
+v50 <- CallMethod v49, 'test', [v48]
+v51 <- LoadString 'á'
+v52 <- LoadRegExp '[¿-À]' ''
+v53 <- CallMethod v52, 'test', [v51]
+v54 <- LoadString 'Á'
+v55 <- LoadRegExp '[¿-À]' 'i'
+v56 <- CallMethod v55, 'test', [v54]
+v57 <- LoadString 'Õ'
+v58 <- LoadRegExp '[Ö-×]' 'i'
+v59 <- CallMethod v58, 'test', [v57]
+v60 <- LoadString 'Ö'
+v61 <- LoadRegExp '[Ö-×]' 'i'
+v62 <- CallMethod v61, 'test', [v60]
+v63 <- LoadString 'ö'
+v64 <- LoadRegExp '[Ö-×]' 'i'
+v65 <- CallMethod v64, 'test', [v63]
+v66 <- LoadString '×'
+v67 <- LoadRegExp '[Ö-×]' 'i'
+v68 <- CallMethod v67, 'test', [v66]
+v69 <- LoadString 'Ø'
+v70 <- LoadRegExp '[Ö-×]' 'i'
+v71 <- CallMethod v70, 'test', [v69]
+v72 <- LoadString 'Õ'
+v73 <- LoadRegExp '[Ö-×]' ''
+v74 <- CallMethod v73, 'test', [v72]
+v75 <- LoadString 'Ö'
+v76 <- LoadRegExp '[Ö-×]' ''
+v77 <- CallMethod v76, 'test', [v75]
+v78 <- LoadString 'ö'
+v79 <- LoadRegExp '[Ö-×]' ''
+v80 <- CallMethod v79, 'test', [v78]
+v81 <- LoadString '×'
+v82 <- LoadRegExp '[Ö-×]' ''
+v83 <- CallMethod v82, 'test', [v81]
+v84 <- LoadString 'Ø'
+v85 <- LoadRegExp '[Ö-×]' ''
+v86 <- CallMethod v85, 'test', [v84]
+
+
+/[@-A]/i.test("a");
+/[@-A]/i.test("A");
+/[@-A]/i.test("@");
+/[@-A]/.test("a");
+/[@-A]/.test("A");
+/[@-A]/.test("@");
+/[¿-À]/i.test("¾");
+/[¿-À]/i.test("¿");
+/[¿-À]/i.test("À");
+/[¿-À]/i.test("à");
+/[¿-À]/i.test("á");
+/[¿-À]/i.test("Á");
+/[¿-À]/.test("¾");
+/[¿-À]/.test("¿");
+/[¿-À]/.test("À");
+/[¿-À]/.test("à");
+/[¿-À]/.test("á");
+/[¿-À]/.test("á");
+/[¿-À]/i.test("Á");
+/[Ö-×]/i.test("Õ");
+/[Ö-×]/i.test("Ö");
+/[Ö-×]/i.test("ö");
+/[Ö-×]/i.test("×");
+/[Ö-×]/i.test("Ø");
+/[Ö-×]/.test("Õ");
+/[Ö-×]/.test("Ö");
+/[Ö-×]/.test("ö");
+/[Ö-×]/.test("×");
+/[Ö-×]/.test("Ø");
+
+FuzzIL program written to corpus/regress-2032.fzil

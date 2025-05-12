@@ -1,0 +1,106 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+        v2 <- CreateNamedVariable 'Array', 'none'
+        v3 <- Construct v2, []
+        v4 <- CreateNamedVariable 'a', 'var', v3
+        v5 <- LoadInteger '10'
+        SetElement v4, '0', v5
+        Return v4
+    EndPlainFunction
+    v6 <- LoadInteger '1'
+    v7 <- CallFunction v1, []
+    v8 <- GetProperty v7, 'length'
+    v9 <- CreateNamedVariable 'gc', 'none'
+    v10 <- CallFunction v9, []
+    v11 <- CallFunction v9, []
+    v12 <- CallFunction v9, []
+    v13 <- CallFunction v9, []
+    v14 <- LoadString '0'
+    v15 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v16 <- CreateNamedVariable 'Array', 'none'
+    v17 <- GetProperty v16, 'prototype'
+    v18 <- CallMethod v17, '__defineSetter__', [v14, v15]
+    v19 <- LoadInteger '0'
+    v20 <- CallFunction v1, []
+    v21 <- GetProperty v20, 'length'
+EndPlainFunction
+v22 <- CallFunction v0, []
+v23 <- BeginPlainFunction -> 
+    v24 <- BeginPlainFunction -> 
+        v25 <- CreateNamedVariable 'Array', 'none'
+        v26 <- Construct v25, []
+        v27 <- CreateNamedVariable 'a', 'var', v26
+        v28 <- LoadInteger '10'
+        SetElement v27, '0', v28
+        Return v27
+    EndPlainFunction
+    v29 <- LoadInteger '42'
+    v30 <- CreateNamedVariable 'Array', 'none'
+    v31 <- GetProperty v30, 'prototype'
+    SetElement v31, '123456789', v29
+    v32 <- LoadInteger '0'
+    v33 <- GetProperty v30, 'prototype'
+    SetProperty v33, 'length', v32
+    v34 <- LoadInteger '1'
+    v35 <- CallFunction v24, []
+    v36 <- GetProperty v35, 'length'
+    v37 <- CreateNamedVariable 'gc', 'none'
+    v38 <- CallFunction v37, []
+    v39 <- CallFunction v37, []
+    v40 <- CallFunction v37, []
+    v41 <- CallFunction v37, []
+    v42 <- LoadString '0'
+    v43 <- BeginPlainFunction -> 
+    EndPlainFunction
+    v44 <- GetProperty v30, 'prototype'
+    v45 <- CallMethod v44, '__defineSetter__', [v42, v43]
+    v46 <- LoadInteger '0'
+    v47 <- CallFunction v24, []
+    v48 <- GetProperty v47, 'length'
+EndPlainFunction
+v49 <- CallFunction v23, []
+
+
+function f0() {
+    function foo() {
+        const v3 = new Array();
+        var a = v3;
+        a[0] = 10;
+        return a;
+    }
+    foo().length;
+    gc();
+    gc();
+    gc();
+    gc();
+    function f15() {
+    }
+    Array.prototype.__defineSetter__("0", f15);
+    foo().length;
+}
+f0();
+function f23() {
+    function foo() {
+        const v26 = new Array();
+        var a = v26;
+        a[0] = 10;
+        return a;
+    }
+    const t25 = Array.prototype;
+    t25[123456789] = 42;
+    const t27 = Array.prototype;
+    t27.length = 0;
+    foo().length;
+    gc();
+    gc();
+    gc();
+    gc();
+    function f43() {
+    }
+    Array.prototype.__defineSetter__("0", f43);
+    foo().length;
+}
+f23();
+
+FuzzIL program written to corpus/regress-crbug-662907.fzil

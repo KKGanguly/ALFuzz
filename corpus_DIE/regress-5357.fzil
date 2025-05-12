@@ -1,0 +1,29 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- UnaryOperation v1, '++'
+    v3 <- LoadInteger '0'
+    v4 <- CreateNamedVariable 'Math', 'none'
+    v5 <- CallMethod v4, 'max', [v3, v1]
+    Reassign v1, v5
+    v6 <- UnaryOperation v1, '++'
+    Return v1
+EndPlainFunction
+v7 <- LoadInteger '0'
+v8 <- CallFunction v0, [v7]
+v9 <- LoadInteger '0'
+v10 <- CallFunction v0, [v9]
+v11 <- LoadInteger '2147483648'
+v12 <- LoadInteger '2147483646'
+v13 <- CallFunction v0, [v12]
+
+
+function foo(a1) {
+    a1++;
+    a1 = Math.max(0, a1);
+    a1++;
+    return a1;
+}
+foo(0);
+foo(0);
+foo(2147483646);
+
+FuzzIL program written to corpus/regress-5357.fzil

@@ -1,0 +1,71 @@
+v0 <- CreateNamedVariable 'Array', 'none'
+v1 <- LoadInteger '10'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'array', 'none'
+Reassign v3, v2
+v4 <- LoadFloat '0.1'
+v5 <- CreateNamedVariable 'array', 'none'
+SetElement v5, '0', v4
+v6 <- LoadFloat '2.1'
+SetElement v5, '2', v6
+v7 <- LoadFloat '3.1'
+SetElement v5, '3', v7
+v8 <- LoadInteger '0'
+v9 <- GetProperty v5, 'length'
+v10 <- CallMethod v5, 'slice', [v8, v9]
+v11 <- CreateNamedVariable 'copy', 'var', v10
+v12 <- GetProperty v5, '__proto__'
+v13 <- CreateNamedVariable 'proto', 'var', v12
+v14 <- LoadInteger '1'
+BeginObjectLiteral
+    BeginObjectLiteralMethod `get` -> v15
+        v16 <- LoadInteger '1'
+        SetProperty v5, 'length', v16
+        v17 <- CreateNamedVariable 'gc', 'none'
+        v18 <- CallFunction v17, []
+        v19 <- LoadString 'value from proto'
+        Return v19
+    EndObjectLiteralMethod
+    BeginObjectLiteralMethod `set` -> v20, v21
+    EndObjectLiteralMethod
+v22 <- EndObjectLiteral
+v23 <- CreateNamedVariable 'Object', 'none'
+v24 <- CallMethod v23, 'defineProperty', [v13, v14, v22]
+v25 <- GetProperty v0, 'prototype'
+v26 <- GetProperty v25, 'concat'
+v27 <- CallMethod v26, 'call', [v5]
+v28 <- CreateNamedVariable 'concatted_array', 'var', v27
+v29 <- GetElement v28, '0'
+v30 <- LoadFloat '0.1'
+v31 <- GetElement v28, '1'
+v32 <- LoadString 'value from proto'
+v33 <- GetElement v28, '2'
+v34 <- LoadUndefined
+v35 <- GetElement v28, '3'
+v36 <- LoadUndefined
+
+
+const v2 = new Array(10);
+array = v2;
+array[0] = 0.1;
+array[2] = 2.1;
+array[3] = 3.1;
+var copy = array.slice(0, array.length);
+var proto = array.__proto__;
+const v22 = {
+    get() {
+        array.length = 1;
+        gc();
+        return "value from proto";
+    },
+    set(a21) {
+    },
+};
+Object.defineProperty(proto, 1, v22);
+var concatted_array = Array.prototype.concat.call(array);
+concatted_array[0];
+concatted_array[1];
+concatted_array[2];
+concatted_array[3];
+
+FuzzIL program written to corpus/regress-crbug-594574-concat-leak-2.fzil

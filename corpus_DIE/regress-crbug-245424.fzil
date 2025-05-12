@@ -1,0 +1,30 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadString 'bar'
+    v2 <- LoadString 'baz'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `foo`, v1
+        ObjectLiteralAddProperty `foo`, v2
+    v3 <- EndObjectLiteral
+    v4 <- CreateNamedVariable 'a', 'var', v3
+    Return v4
+EndPlainFunction
+v5 <- LoadString 'baz'
+v6 <- CallFunction v0, []
+v7 <- GetProperty v6, 'foo'
+v8 <- LoadString 'baz'
+v9 <- CallFunction v0, []
+v10 <- GetProperty v9, 'foo'
+v11 <- LoadString 'baz'
+v12 <- CallFunction v0, []
+v13 <- GetProperty v12, 'foo'
+
+
+function boom() {
+    var a = { foo: "bar", foo: "baz" };
+    return a;
+}
+boom().foo;
+boom().foo;
+boom().foo;
+
+FuzzIL program written to corpus/regress-crbug-245424.fzil

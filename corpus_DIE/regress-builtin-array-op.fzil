@@ -1,0 +1,43 @@
+v0 <- LoadString 'hest'
+v1 <- CreateNamedVariable 'foo', 'var', v0
+v2 <- BeginPlainFunction -> v3
+    v4 <- LoadString 'fisk'
+    Reassign v1, v4
+EndPlainFunction
+v5 <- CreateNamedVariable 'Array', 'none'
+v6 <- GetProperty v5, 'prototype'
+SetProperty v6, 'sort', v2
+v7 <- BeginPlainFunction -> 
+    v8 <- LoadString 'caramel'
+    Reassign v1, v8
+EndPlainFunction
+v9 <- CreateNamedVariable 'Function', 'none'
+v10 <- GetProperty v9, 'prototype'
+SetProperty v10, 'call', v7
+v11 <- LoadInteger '2'
+v12 <- LoadInteger '3'
+v13 <- LoadInteger '1'
+v14 <- CreateArray [v11, v12, v13]
+v15 <- CreateNamedVariable 'a', 'var', v14
+v16 <- LoadInteger '0'
+SetElement v15, '100000', v16
+v17 <- CallMethod v15, 'join', []
+v18 <- LoadString 'hest'
+
+
+var foo = "hest";
+function f2(a3) {
+    foo = "fisk";
+}
+const t4 = Array.prototype;
+t4.sort = f2;
+function f7() {
+    foo = "caramel";
+}
+const t9 = Function.prototype;
+t9.call = f7;
+var a = [2,3,1];
+a[100000] = 0;
+a.join();
+
+FuzzIL program written to corpus/regress-builtin-array-op.fzil

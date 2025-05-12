@@ -1,0 +1,121 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- LoadThis
+    SetProperty v3, 'x', v1
+    v4 <- LoadThis
+    SetProperty v4, 'y', v2
+    v5 <- LoadThis
+    Return v5
+EndPlainFunction
+v6 <- BeginPlainFunction -> v7, v8
+    v9 <- GetProperty v7, 'x'
+    v10 <- CreateNamedVariable 'i', 'var', v9
+    v11 <- GetProperty v7, 'x'
+    v12 <- CreateNamedVariable 'j', 'var', v11
+    v13 <- GetProperty v8, 'x'
+    v14 <- CreateNamedVariable 'k', 'var', v13
+    v15 <- GetProperty v8, 'x'
+    v16 <- CreateNamedVariable 'l', 'var', v15
+    v17 <- BinaryOperation v10, '+', v12
+    v18 <- BinaryOperation v17, '+', v14
+    v19 <- BinaryOperation v18, '+', v16
+    Return v19
+EndPlainFunction
+v20 <- LoadInteger '14'
+v21 <- LoadInteger '3'
+v22 <- LoadInteger '4'
+v23 <- Construct v0, [v21, v22]
+v24 <- LoadInteger '4'
+v25 <- LoadInteger '5'
+v26 <- Construct v0, [v24, v25]
+v27 <- CallFunction v6, [v23, v26]
+v28 <- LoadInteger '110'
+v29 <- LoadInteger '11'
+v30 <- LoadInteger '7'
+v31 <- Construct v0, [v29, v30]
+v32 <- LoadInteger '44'
+v33 <- LoadInteger '8'
+v34 <- Construct v0, [v32, v33]
+v35 <- CallFunction v6, [v31, v34]
+v36 <- LoadInteger '6'
+v37 <- LoadInteger '1'
+v38 <- LoadInteger '7'
+v39 <- Construct v0, [v37, v38]
+v40 <- LoadInteger '2'
+v41 <- LoadInteger '8'
+v42 <- Construct v0, [v40, v41]
+v43 <- CallFunction v6, [v39, v42]
+v44 <- BeginPlainFunction -> v45, v46
+    v47 <- LoadInteger '1'
+    v48 <- BinaryOperation v45, '+', v47
+    v49 <- Construct v0, [v48, v46]
+    v50 <- CreateNamedVariable 'o', 'var', v49
+    SetProperty v50, 'x', v45
+    v51 <- GetProperty v50, 'x'
+    v52 <- CreateNamedVariable 'i', 'var', v51
+    SetProperty v50, 'x', v45
+    v53 <- GetProperty v50, 'x'
+    v54 <- CreateNamedVariable 'j', 'var', v53
+    SetProperty v50, 'x', v46
+    v55 <- GetProperty v50, 'x'
+    v56 <- CreateNamedVariable 'k', 'var', v55
+    SetProperty v50, 'x', v46
+    v57 <- GetProperty v50, 'x'
+    v58 <- CreateNamedVariable 'l', 'var', v57
+    v59 <- BinaryOperation v52, '+', v54
+    v60 <- BinaryOperation v59, '+', v56
+    v61 <- BinaryOperation v60, '+', v58
+    Return v61
+EndPlainFunction
+v62 <- LoadInteger '14'
+v63 <- LoadInteger '3'
+v64 <- LoadInteger '4'
+v65 <- CallFunction v44, [v63, v64]
+v66 <- LoadInteger '110'
+v67 <- LoadInteger '11'
+v68 <- LoadInteger '44'
+v69 <- CallFunction v44, [v67, v68]
+v70 <- LoadInteger '6'
+v71 <- LoadInteger '1'
+v72 <- LoadInteger '2'
+v73 <- CallFunction v44, [v71, v72]
+
+
+function B(a1, a2) {
+    this.x = a1;
+    this.y = a2;
+    return this;
+}
+function test_params1(a7, a8) {
+    var i = a7.x;
+    var j = a7.x;
+    var k = a8.x;
+    var l = a8.x;
+    return ((i + j) + k) + l;
+}
+const v23 = new B(3, 4);
+const v26 = new B(4, 5);
+test_params1(v23, v26);
+const v31 = new B(11, 7);
+const v34 = new B(44, 8);
+test_params1(v31, v34);
+const v39 = new B(1, 7);
+const v42 = new B(2, 8);
+test_params1(v39, v42);
+function test_params2(a45, a46) {
+    const v49 = new B(a45 + 1, a46);
+    var o = v49;
+    o.x = a45;
+    var i = o.x;
+    o.x = a45;
+    var j = o.x;
+    o.x = a46;
+    var k = o.x;
+    o.x = a46;
+    var l = o.x;
+    return ((i + j) + k) + l;
+}
+test_params2(3, 4);
+test_params2(11, 44);
+test_params2(1, 2);
+
+FuzzIL program written to corpus/load-elimination-params.fzil

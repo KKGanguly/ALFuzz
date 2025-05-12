@@ -1,0 +1,143 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- CreateNamedVariable 'Number', 'none'
+    v4 <- CallMethod v3, 'isFinite', [v2]
+    v5 <- GetProperty v3, 'MIN_VALUE'
+    v6 <- CallMethod v3, 'isFinite', [v5]
+    v7 <- GetProperty v3, 'MAX_VALUE'
+    v8 <- CallMethod v3, 'isFinite', [v7]
+    v9 <- GetProperty v3, 'MIN_SAFE_INTEGER'
+    v10 <- CallMethod v3, 'isFinite', [v9]
+    v11 <- GetProperty v3, 'MIN_SAFE_INTEGER'
+    v12 <- LoadInteger '13'
+    v13 <- BinaryOperation v11, '-', v12
+    v14 <- CallMethod v3, 'isFinite', [v13]
+    v15 <- GetProperty v3, 'MAX_SAFE_INTEGER'
+    v16 <- CallMethod v3, 'isFinite', [v15]
+    v17 <- GetProperty v3, 'MAX_SAFE_INTEGER'
+    v18 <- LoadInteger '23'
+    v19 <- BinaryOperation v17, '+', v18
+    v20 <- CallMethod v3, 'isFinite', [v19]
+    v21 <- LoadInteger '0'
+    v22 <- CallMethod v3, 'isFinite', [v21]
+    v23 <- LoadInteger '1'
+    v24 <- UnaryOperation '-', v23
+    v25 <- CallMethod v3, 'isFinite', [v24]
+    v26 <- LoadInteger '123456'
+    v27 <- CallMethod v3, 'isFinite', [v26]
+    v28 <- GetProperty v3, 'NaN'
+    v29 <- CallMethod v3, 'isFinite', [v28]
+    v30 <- GetProperty v3, 'POSITIVE_INFINITY'
+    v31 <- CallMethod v3, 'isFinite', [v30]
+    v32 <- GetProperty v3, 'NEGATIVE_INFINITY'
+    v33 <- CallMethod v3, 'isFinite', [v32]
+    v34 <- LoadInteger '1'
+    v35 <- LoadInteger '0'
+    v36 <- BinaryOperation v34, '/', v35
+    v37 <- CallMethod v3, 'isFinite', [v36]
+    v38 <- LoadInteger '1'
+    v39 <- UnaryOperation '-', v38
+    v40 <- LoadInteger '0'
+    v41 <- BinaryOperation v39, '/', v40
+    v42 <- CallMethod v3, 'isFinite', [v41]
+EndPlainFunction
+v43 <- CallFunction v0, []
+v44 <- CallFunction v0, []
+v45 <- CallFunction v0, []
+v46 <- BeginPlainFunction -> v47
+    BeginObjectLiteral
+    v48 <- EndObjectLiteral
+    v49 <- CreateNamedVariable 'Number', 'none'
+    v50 <- CallMethod v49, 'isFinite', [v48]
+    v51 <- LoadString 'abc'
+    v52 <- CallMethod v49, 'isFinite', [v51]
+    v53 <- LoadInteger '0'
+    v54 <- CallMethod v49, 'isFinite', [v53]
+    v55 <- GetProperty v49, 'MIN_VALUE'
+    v56 <- CallMethod v49, 'isFinite', [v55]
+    v57 <- GetProperty v49, 'MAX_VALUE'
+    v58 <- CallMethod v49, 'isFinite', [v57]
+    v59 <- GetProperty v49, 'MIN_SAFE_INTEGER'
+    v60 <- CallMethod v49, 'isFinite', [v59]
+    v61 <- GetProperty v49, 'MIN_SAFE_INTEGER'
+    v62 <- LoadInteger '13'
+    v63 <- BinaryOperation v61, '-', v62
+    v64 <- CallMethod v49, 'isFinite', [v63]
+    v65 <- GetProperty v49, 'MAX_SAFE_INTEGER'
+    v66 <- CallMethod v49, 'isFinite', [v65]
+    v67 <- GetProperty v49, 'MAX_SAFE_INTEGER'
+    v68 <- LoadInteger '23'
+    v69 <- BinaryOperation v67, '+', v68
+    v70 <- CallMethod v49, 'isFinite', [v69]
+    v71 <- LoadInteger '0'
+    v72 <- CallMethod v49, 'isFinite', [v71]
+    v73 <- LoadInteger '1'
+    v74 <- UnaryOperation '-', v73
+    v75 <- CallMethod v49, 'isFinite', [v74]
+    v76 <- LoadInteger '123456'
+    v77 <- CallMethod v49, 'isFinite', [v76]
+    v78 <- GetProperty v49, 'NaN'
+    v79 <- CallMethod v49, 'isFinite', [v78]
+    v80 <- GetProperty v49, 'POSITIVE_INFINITY'
+    v81 <- CallMethod v49, 'isFinite', [v80]
+    v82 <- GetProperty v49, 'NEGATIVE_INFINITY'
+    v83 <- CallMethod v49, 'isFinite', [v82]
+    v84 <- LoadInteger '1'
+    v85 <- LoadInteger '0'
+    v86 <- BinaryOperation v84, '/', v85
+    v87 <- CallMethod v49, 'isFinite', [v86]
+    v88 <- LoadInteger '1'
+    v89 <- UnaryOperation '-', v88
+    v90 <- LoadInteger '0'
+    v91 <- BinaryOperation v89, '/', v90
+    v92 <- CallMethod v49, 'isFinite', [v91]
+EndPlainFunction
+v93 <- CallFunction v46, []
+v94 <- CallFunction v46, []
+v95 <- CallFunction v46, []
+
+
+function test(a1) {
+    Number.isFinite(0);
+    Number.isFinite(Number.MIN_VALUE);
+    Number.isFinite(Number.MAX_VALUE);
+    Number.isFinite(Number.MIN_SAFE_INTEGER);
+    Number.isFinite(Number.MIN_SAFE_INTEGER - 13);
+    Number.isFinite(Number.MAX_SAFE_INTEGER);
+    Number.isFinite(Number.MAX_SAFE_INTEGER + 23);
+    Number.isFinite(0);
+    Number.isFinite(-1);
+    Number.isFinite(123456);
+    Number.isFinite(Number.NaN);
+    Number.isFinite(Number.POSITIVE_INFINITY);
+    Number.isFinite(Number.NEGATIVE_INFINITY);
+    Number.isFinite(1 / 0);
+    Number.isFinite(-1 / 0);
+}
+test();
+test();
+test();
+function test2(a47) {
+    Number.isFinite({});
+    Number.isFinite("abc");
+    Number.isFinite(0);
+    Number.isFinite(Number.MIN_VALUE);
+    Number.isFinite(Number.MAX_VALUE);
+    Number.isFinite(Number.MIN_SAFE_INTEGER);
+    Number.isFinite(Number.MIN_SAFE_INTEGER - 13);
+    Number.isFinite(Number.MAX_SAFE_INTEGER);
+    Number.isFinite(Number.MAX_SAFE_INTEGER + 23);
+    Number.isFinite(0);
+    Number.isFinite(-1);
+    Number.isFinite(123456);
+    Number.isFinite(Number.NaN);
+    Number.isFinite(Number.POSITIVE_INFINITY);
+    Number.isFinite(Number.NEGATIVE_INFINITY);
+    Number.isFinite(1 / 0);
+    Number.isFinite(-1 / 0);
+}
+test2();
+test2();
+test2();
+
+FuzzIL program written to corpus/number-isfinite-inl.fzil

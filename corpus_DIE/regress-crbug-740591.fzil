@@ -1,0 +1,209 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadUndefined
+    v2 <- CreateNamedVariable 'c', 'var', v1
+    v3 <- LoadInteger '0'
+    v4 <- CreateArray [v3]
+    v5 <- CreateArray [v4]
+    BeginForOfLoop v5 -> v6
+        v7 <- BeginPlainFunction -> 
+            v8 <- CreateNamedVariable 'a', 'none'
+            Return v8
+        EndPlainFunction
+    EndForOfLoop
+    v9 <- CallFunction v2, []
+EndPlainFunction
+v10 <- CallFunction v0, []
+v11 <- BeginPlainFunction -> 
+    v12 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `foo`, v12
+    v13 <- EndObjectLiteral
+    BeginForInLoop v13 -> v14
+        v15 <- CreateNamedVariable 'b', 'none'
+        v16 <- BeginPlainFunction -> 
+            v17 <- CallFunction v15, []
+            Return v17
+        EndPlainFunction
+        v18 <- CallFunction v16, []
+    EndForInLoop
+EndPlainFunction
+v19 <- CallFunction v11, []
+v20 <- BeginPlainFunction -> 
+    v21 <- LoadInteger '42'
+    v22 <- CreateArray [v21]
+    v23 <- CreateArray [v22]
+    BeginForOfLoop v23 -> v24
+        v25 <- CreateNamedVariable 'b', 'none'
+        v26 <- BeginPlainFunction -> 
+            v27 <- CallFunction v25, []
+            Return v27
+        EndPlainFunction
+        v28 <- CallFunction v26, []
+    EndForOfLoop
+EndPlainFunction
+v29 <- CallFunction v20, []
+v30 <- BeginPlainFunction -> 
+    v31 <- LoadInteger '42'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `foo`, v31
+    v32 <- EndObjectLiteral
+    BeginForInLoop v32 -> v33
+        v34 <- LoadInteger '3'
+        v35 <- CreateNamedVariable 'a', 'none'
+        v36 <- CreateNamedVariable 'b', 'none'
+    EndForInLoop
+EndPlainFunction
+v37 <- CallFunction v30, []
+v38 <- BeginPlainFunction -> 
+    v39 <- LoadInteger '42'
+    v40 <- CreateArray [v39]
+    v41 <- CreateArray [v40]
+    BeginForOfLoop v41 -> v42
+        v43 <- LoadInteger '42'
+        v44 <- CreateNamedVariable 'a', 'none'
+        v45 <- CreateNamedVariable 'b', 'none'
+    EndForOfLoop
+EndPlainFunction
+v46 <- CallFunction v38, []
+v47 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v48 <- EndObjectLiteral
+    v49 <- CreateArray [v48]
+    BeginForOfLoop v49 -> v50
+        v51 <- CreateNamedVariable 'b', 'none'
+        v52 <- BeginPlainFunction -> 
+            v53 <- CallMethod v51, 'f', []
+            Return v53
+        EndPlainFunction
+        v54 <- CallFunction v52, []
+    EndForOfLoop
+EndPlainFunction
+v55 <- CallFunction v47, []
+v56 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v57 <- EndObjectLiteral
+    v58 <- CreateArray [v57]
+    BeginForOfLoop v58 -> v59
+        v60 <- CreateNamedVariable 'b', 'none'
+        v61 <- BeginPlainFunction -> 
+            v62 <- Construct v60, []
+            v63 <- CallMethod v62, 'm', []
+            Return v63
+        EndPlainFunction
+        v64 <- CallFunction v61, []
+    EndForOfLoop
+EndPlainFunction
+v65 <- CallFunction v56, []
+v66 <- BeginPlainFunction -> 
+    v67 <- LoadUndefined
+    v68 <- CreateNamedVariable 'd', 'let', v67
+    BeginObjectLiteral
+    v69 <- EndObjectLiteral
+    v70 <- CreateArray [v69]
+    BeginForOfLoop v70 -> v71
+        v72 <- CreateNamedVariable 'b', 'none'
+        v73 <- BeginPlainFunction -> 
+            v74 <- CallFunction v68, []
+            Return v74
+        EndPlainFunction
+        v75 <- CallFunction v73, []
+    EndForOfLoop
+EndPlainFunction
+v76 <- CallFunction v66, []
+v77 <- BeginPlainFunction -> 
+    v78 <- LoadUndefined
+    v79 <- CreateNamedVariable 'd', 'let', v78
+    BeginObjectLiteral
+    v80 <- EndObjectLiteral
+    v81 <- CreateArray [v80]
+    BeginForOfLoop v81 -> v82
+        v83 <- CreateNamedVariable 'b', 'none'
+        v84 <- BeginPlainFunction -> 
+            v85 <- CallFunction v79, []
+            Return v85
+        EndPlainFunction
+        v86 <- CallFunction v84, []
+    EndForOfLoop
+EndPlainFunction
+v87 <- CallFunction v77, []
+
+
+function regressionCaseOne() {
+    var c;
+    for (const v6 of [[0]]) {
+        function f() {
+            return a;
+        }
+    }
+    c();
+}
+regressionCaseOne();
+function testForInFunction() {
+    for (const v14 in { foo: 42 }) {
+        function f16() {
+            return b();
+        }
+        f16();
+    }
+}
+testForInFunction();
+function testForOfFunction() {
+    for (const v24 of [[42]]) {
+        function f26() {
+            return b();
+        }
+        f26();
+    }
+}
+testForOfFunction();
+function testForInVariableProxy() {
+    for (const v33 in { foo: 42 }) {
+    }
+}
+testForInVariableProxy();
+function testForOfVariableProxy() {
+    for (const v42 of [[42]]) {
+    }
+}
+testForOfVariableProxy();
+function testClassLiteral() {
+    for (const v50 of [{}]) {
+        function f52() {
+            return b.f();
+        }
+        f52();
+    }
+}
+testClassLiteral();
+function testClassLiteralMethod() {
+    for (const v59 of [{}]) {
+        function f61() {
+            const v62 = new b();
+            return v62.m();
+        }
+        f61();
+    }
+}
+testClassLiteralMethod();
+function testClassLiteralComputedName() {
+    let d;
+    for (const v71 of [{}]) {
+        function f73() {
+            return d();
+        }
+        f73();
+    }
+}
+testClassLiteralComputedName();
+function testClassLiteralComputedName() {
+    let d;
+    for (const v82 of [{}]) {
+        function f84() {
+            return d();
+        }
+        f84();
+    }
+}
+testClassLiteralComputedName();
+
+FuzzIL program written to corpus/regress-crbug-740591.fzil

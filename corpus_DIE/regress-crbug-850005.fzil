@@ -1,0 +1,24 @@
+v0 <- LoadFloat '3.34'
+v1 <- CreateArray [v0]
+v2 <- CreateNamedVariable 'args', 'let', v1
+v3 <- BeginPlainFunction -> v4, v5, v6
+EndPlainFunction
+v7 <- CallFunctionWithSpread v3, [...v2]
+v8 <- CallMethod v2, 'splice', []
+Reassign v2, v8
+v9 <- CallFunctionWithSpread v3, [...v2]
+v10 <- CreateArray []
+Reassign v2, v10
+v11 <- CallFunctionWithSpread v3, [...v2]
+
+
+let args = [3.34];
+function f(a4, a5, a6) {
+}
+f(...args);
+args = args.splice();
+f(...args);
+args = [];
+f(...args);
+
+FuzzIL program written to corpus/regress-crbug-850005.fzil

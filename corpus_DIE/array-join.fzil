@@ -1,0 +1,317 @@
+v0 <- LoadNull
+v1 <- LoadUndefined
+v2 <- CreateArray [v0, v1]
+v3 <- CallMethod v2, 'join', []
+v4 <- LoadString '1.5,2.5'
+v5 <- LoadFloat '1.5'
+v6 <- LoadFloat '2.5'
+v7 <- CreateArray [v5, v6]
+v8 <- CallMethod v7, 'join', []
+v9 <- LoadString ',1.5,'
+v10 <- LoadUndefined
+v11 <- LoadFloat '1.5'
+v12 <- CreateArray [v10, v11, v10]
+v13 <- CallMethod v12, 'join', []
+BeginObjectLiteral
+    BeginObjectLiteralMethod `toString` -> v14
+        v15 <- LoadString 'a'
+        Return v15
+    EndObjectLiteralMethod
+v16 <- EndObjectLiteral
+v17 <- CreateNamedVariable 'obj', 'var', v16
+v18 <- LoadString '1,1.5,a,'
+v19 <- LoadInteger '1'
+v20 <- LoadFloat '1.5'
+v21 <- LoadUndefined
+v22 <- CreateArray [v19, v20, v17, v21]
+v23 <- CallMethod v22, 'join', []
+v24 <- LoadInteger '1'
+v25 <- LoadInteger '2'
+v26 <- CreateArray [v24, v25]
+v27 <- LoadInteger '3'
+v28 <- LoadInteger '4'
+v29 <- LoadInteger '5'
+v30 <- LoadInteger '6'
+v31 <- CreateArray [v29, v30]
+v32 <- CreateArray [v26, v27, v28, v31]
+v33 <- CreateNamedVariable 'a', 'var', v32
+v34 <- LoadString '1,2345,6'
+v35 <- LoadString ''
+v36 <- CallMethod v33, 'join', [v35]
+v37 <- LoadString '1,2*3*4*5,6'
+v38 <- LoadString '*'
+v39 <- CallMethod v33, 'join', [v38]
+v40 <- LoadString '1,2**3**4**5,6'
+v41 <- LoadString '**'
+v42 <- CallMethod v33, 'join', [v41]
+v43 <- LoadString '1,2****3****4****5,6'
+v44 <- LoadString '****'
+v45 <- CallMethod v33, 'join', [v44]
+v46 <- LoadString '1,2********3********4********5,6'
+v47 <- LoadString '********'
+v48 <- CallMethod v33, 'join', [v47]
+v49 <- LoadString '1,2**********3**********4**********5,6'
+v50 <- LoadString '**********'
+v51 <- CallMethod v33, 'join', [v50]
+v52 <- CallMethod v33, 'push', [v33]
+v53 <- LoadString '1,2345,6'
+v54 <- LoadString ''
+v55 <- CallMethod v33, 'join', [v54]
+v56 <- LoadString '1,2*3*4*5,6*'
+v57 <- LoadString '*'
+v58 <- CallMethod v33, 'join', [v57]
+v59 <- LoadString '1,2**3**4**5,6**'
+v60 <- LoadString '**'
+v61 <- CallMethod v33, 'join', [v60]
+v62 <- LoadString '1,2****3****4****5,6****'
+v63 <- LoadString '****'
+v64 <- CallMethod v33, 'join', [v63]
+v65 <- LoadString '1,2********3********4********5,6********'
+v66 <- LoadString '********'
+v67 <- CallMethod v33, 'join', [v66]
+v68 <- LoadString '1,2**********3**********4**********5,6**********'
+v69 <- LoadString '**********'
+v70 <- CallMethod v33, 'join', [v69]
+v71 <- CreateNamedVariable 'Array', 'none'
+v72 <- GetProperty v71, 'prototype'
+v73 <- GetProperty v72, 'toString'
+v74 <- CreateNamedVariable 'oldToString', 'var', v73
+v75 <- BeginPlainFunction -> 
+    v76 <- LoadString 'array'
+    Return v76
+EndPlainFunction
+v77 <- GetProperty v71, 'prototype'
+SetProperty v77, 'toString', v75
+v78 <- LoadString 'array34arrayarray'
+v79 <- LoadString ''
+v80 <- CallMethod v33, 'join', [v79]
+v81 <- LoadString 'array*3*4*array*array'
+v82 <- LoadString '*'
+v83 <- CallMethod v33, 'join', [v82]
+v84 <- LoadString 'array**3**4**array**array'
+v85 <- LoadString '**'
+v86 <- CallMethod v33, 'join', [v85]
+v87 <- LoadString 'array****3****4****array****array'
+v88 <- LoadString '****'
+v89 <- CallMethod v33, 'join', [v88]
+v90 <- LoadString 'array********3********4********array********array'
+v91 <- LoadString '********'
+v92 <- CallMethod v33, 'join', [v91]
+v93 <- LoadString 'array**********3**********4**********array**********array'
+v94 <- LoadString '**********'
+v95 <- CallMethod v33, 'join', [v94]
+v96 <- BeginPlainFunction -> 
+    v97 <- LoadInteger '42'
+    ThrowException v97
+EndPlainFunction
+v98 <- GetProperty v71, 'prototype'
+SetProperty v98, 'toString', v96
+v99 <- LoadString 'a.join('')'
+v100 <- LoadString 'a.join('*')'
+v101 <- LoadString 'a.join('**')'
+v102 <- LoadString 'a.join('****')'
+v103 <- LoadString 'a.join('********')'
+v104 <- LoadString 'a.join('**********')'
+v105 <- BeginPlainFunction -> 
+    v106 <- LoadString 'array'
+    Return v106
+EndPlainFunction
+v107 <- GetProperty v71, 'prototype'
+SetProperty v107, 'toString', v105
+v108 <- LoadString 'array34arrayarray'
+v109 <- LoadString ''
+v110 <- CallMethod v33, 'join', [v109]
+v111 <- LoadString 'array*3*4*array*array'
+v112 <- LoadString '*'
+v113 <- CallMethod v33, 'join', [v112]
+v114 <- LoadString 'array**3**4**array**array'
+v115 <- LoadString '**'
+v116 <- CallMethod v33, 'join', [v115]
+v117 <- LoadString 'array****3****4****array****array'
+v118 <- LoadString '****'
+v119 <- CallMethod v33, 'join', [v118]
+v120 <- LoadString 'array********3********4********array********array'
+v121 <- LoadString '********'
+v122 <- CallMethod v33, 'join', [v121]
+v123 <- LoadString 'array**********3**********4**********array**********array'
+v124 <- LoadString '**********'
+v125 <- CallMethod v33, 'join', [v124]
+v126 <- GetProperty v71, 'prototype'
+v127 <- DeleteProperty v126, 'toString'
+v128 <- GetProperty v71, 'prototype'
+v129 <- GetProperty v128, 'toString'
+v130 <- Compare v129, '!=', v74
+BeginIf v130
+    v131 <- GetProperty v71, 'prototype'
+    SetProperty v131, 'toString', v74
+EndIf
+v132 <- LoadInteger '123123'
+v133 <- Construct v71, [v132]
+v134 <- CreateNamedVariable 'a', 'var', v133
+v135 <- LoadInteger '123122'
+v136 <- CreateNamedVariable 'String', 'none'
+v137 <- CallFunction v136, [v134]
+v138 <- GetProperty v137, 'length'
+v139 <- LoadInteger '123122'
+v140 <- LoadString ','
+v141 <- CallMethod v134, 'join', [v140]
+v142 <- GetProperty v141, 'length'
+v143 <- LoadInteger '246244'
+v144 <- LoadString 'oo'
+v145 <- CallMethod v134, 'join', [v144]
+v146 <- GetProperty v145, 'length'
+v147 <- LoadInteger '2'
+v148 <- LoadInteger '32'
+v149 <- CreateNamedVariable 'Math', 'none'
+v150 <- CallMethod v149, 'pow', [v147, v148]
+v151 <- LoadInteger '1'
+v152 <- BinaryOperation v150, '-', v151
+v153 <- Construct v71, [v152]
+Reassign v134, v153
+v154 <- LoadString ''
+v155 <- LoadString ''
+v156 <- CallMethod v134, 'join', [v155]
+v157 <- LoadInteger '100001'
+v158 <- Construct v71, [v157]
+Reassign v134, v158
+BeginForLoopInitializer
+    v159 <- LoadInteger '0'
+BeginForLoopCondition -> v160
+    v161 <- GetProperty v134, 'length'
+    v162 <- Compare v160, '<', v161
+BeginForLoopAfterthought v162 -> v163
+    v164 <- UnaryOperation v163, '++'
+BeginForLoopBody -> v165
+    v166 <- LoadUndefined
+    SetComputedProperty v134, v165, v166
+EndForLoop
+v167 <- LoadString 'ab'
+SetElement v134, '5', v167
+v168 <- LoadString 'cd'
+SetElement v134, '90000', v168
+v169 <- LoadString 'abcd'
+v170 <- LoadString ''
+v171 <- CallMethod v134, 'join', [v170]
+BeginBlockStatement
+    v172 <- CreateArray []
+    v173 <- CreateNamedVariable 'log', 'var', v172
+    v174 <- CreateNamedVariable 'Proxy', 'none'
+    v175 <- LoadInteger '3'
+    v176 <- LoadString 'a'
+    v177 <- LoadString 'b'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `length`, v175
+        ObjectLiteralAddElement `0`, v176
+        ObjectLiteralAddElement `1`, v177
+    v178 <- EndObjectLiteral
+    v179 <- BeginPlainFunction -> v180, v181, v182
+        v183 <- CallMethod v173, 'push', [v181]
+        v184 <- CreateNamedVariable 'Reflect', 'none'
+        v185 <- CallMethod v184, 'get', [v180, v181, v182]
+        Return v185
+    EndPlainFunction
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `get`, v179
+    v186 <- EndObjectLiteral
+    v187 <- Construct v174, [v178, v186]
+    v188 <- CreateNamedVariable 'p', 'var', v187
+    v189 <- LoadString 'a,b,'
+    v190 <- GetProperty v71, 'prototype'
+    v191 <- GetProperty v190, 'join'
+    v192 <- CallMethod v191, 'call', [v188]
+    v193 <- LoadString 'length'
+    v194 <- LoadString '0'
+    v195 <- LoadString '1'
+    v196 <- LoadString '2'
+    v197 <- CreateArray [v193, v194, v195, v196]
+EndBlockStatement
+
+
+([null,,]).join();
+([1.5,2.5]).join();
+([,1.5,,]).join();
+const v16 = {
+    toString() {
+        return "a";
+    },
+};
+var obj = v16;
+([1,1.5,obj,,]).join();
+var a = [[1,2],3,4,[5,6]];
+a.join("");
+a.join("*");
+a.join("**");
+a.join("****");
+a.join("********");
+a.join("**********");
+a.push(a);
+a.join("");
+a.join("*");
+a.join("**");
+a.join("****");
+a.join("********");
+a.join("**********");
+var oldToString = Array.prototype.toString;
+function f75() {
+    return "array";
+}
+const t28 = Array.prototype;
+t28.toString = f75;
+a.join("");
+a.join("*");
+a.join("**");
+a.join("****");
+a.join("********");
+a.join("**********");
+function f96() {
+    throw 42;
+}
+const t39 = Array.prototype;
+t39.toString = f96;
+function f105() {
+    return "array";
+}
+const t44 = Array.prototype;
+t44.toString = f105;
+a.join("");
+a.join("*");
+a.join("**");
+a.join("****");
+a.join("********");
+a.join("**********");
+const t46 = Array.prototype;
+delete t46.toString;
+if (Array.prototype.toString != oldToString) {
+    const t55 = Array.prototype;
+    t55.toString = oldToString;
+}
+const v133 = new Array(123123);
+var a = v133;
+String(a).length;
+a.join(",").length;
+a.join("oo").length;
+const v153 = new Array(Math.pow(2, 32) - 1);
+a = v153;
+a.join("");
+const v158 = new Array(100001);
+a = v158;
+for (let i160 = 0; i160 < a.length; i160++) {
+    a[i160] = undefined;
+}
+a[5] = "ab";
+a[90000] = "cd";
+a.join("");
+{
+    var log = [];
+    const v178 = { length: 3, 0: "a", 1: "b" };
+    function f179(a180, a181, a182) {
+        log.push(a181);
+        return Reflect.get(a180, a181, a182);
+    }
+    const v187 = new Proxy(v178, { get: f179 });
+    var p = v187;
+    Array.prototype.join.call(p);
+    ["length","0","1","2"];
+}
+
+FuzzIL program written to corpus/array-join.fzil

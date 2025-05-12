@@ -1,0 +1,86 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable '__v_0', 'var', v0
+BeginObjectLiteral
+v2 <- EndObjectLiteral
+v3 <- CreateNamedVariable '__v_5', 'var', v2
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadString 'str'
+    v6 <- BeginPlainFunction -> 
+        v7 <- LoadThis
+        v8 <- CallFunction v4, [v7]
+        Return v8
+    EndPlainFunction
+    v9 <- LoadThis
+    v10 <- CallMethod v9, '__defineGetter__', [v5, v6]
+    v11 <- LoadString '1'
+    v12 <- LoadThis
+    SetProperty v12, 'str', v11
+    v13 <- BeginPlainFunction -> 
+        v14 <- LoadThis
+        v15 <- GetProperty v14, 'str'
+        Return v15
+    EndPlainFunction
+    v16 <- LoadThis
+    SetProperty v16, 'toString', v13
+EndPlainFunction
+v17 <- Construct v4, []
+Reassign v3, v17
+v18 <- Construct v4, []
+Reassign v1, v18
+v19 <- BeginPlainFunction -> v20, v21, v22
+    SetProperty v3, 'str', v21
+    SetProperty v1, 'str', v22
+    v23 <- CallFunction v20, [v3, v1]
+EndPlainFunction
+v24 <- BeginPlainFunction -> v25, v26
+    v27 <- BinaryOperation v25, '%', v26
+    Return v27
+EndPlainFunction
+v28 <- LoadInteger '1'
+v29 <- LoadInteger '30'
+v30 <- BinaryOperation v28, '<<', v29
+v31 <- LoadInteger '1'
+v32 <- CallFunction v19, [v24, v30, v31]
+v33 <- LoadInteger '1'
+v34 <- LoadInteger '1'
+v35 <- LoadInteger '30'
+v36 <- BinaryOperation v34, '<<', v35
+v37 <- CallFunction v19, [v24, v33, v36]
+v38 <- LoadInteger '1'
+v39 <- LoadInteger '1'
+v40 <- LoadInteger '30'
+v41 <- BinaryOperation v39, '<<', v40
+v42 <- CallFunction v19, [v24, v38, v41]
+
+
+var __v_0 = {};
+var __v_5 = {};
+function __f_2() {
+    function f6() {
+        return __f_2(this);
+    }
+    this.__defineGetter__("str", f6);
+    this.str = "1";
+    function f13() {
+        return this.str;
+    }
+    this.toString = f13;
+}
+const v17 = new __f_2();
+__v_5 = v17;
+const v18 = new __f_2();
+__v_0 = v18;
+function __f_5(a20, a21, a22) {
+    __v_5.str = a21;
+    __v_0.str = a22;
+    a20(__v_5, __v_0);
+}
+function __f_8(a25, a26) {
+    return a25 % a26;
+}
+__f_5(__f_8, 1 << 30, 1);
+__f_5(__f_8, 1, 1 << 30);
+__f_5(__f_8, 1, 1 << 30);
+
+FuzzIL program written to corpus/regress-354433.fzil

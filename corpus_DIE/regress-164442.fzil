@@ -1,0 +1,27 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadInteger '0'
+    v3 <- LoadInteger '0'
+    v4 <- BinaryOperation v1, '|', v3
+    v5 <- CreateNamedVariable 'Math', 'none'
+    v6 <- CallMethod v5, 'max', [v2, v4]
+    Return v6
+EndPlainFunction
+v7 <- LoadInteger '1'
+v8 <- CallFunction v0, [v7]
+v9 <- LoadInteger '2'
+v10 <- CallFunction v0, [v9]
+v11 <- LoadInteger '1'
+v12 <- UnaryOperation '-', v11
+v13 <- CallFunction v0, [v12]
+v14 <- CreateNamedVariable 'r', 'var', v13
+v15 <- LoadInteger '0'
+
+
+function ensureNotNegative(a1) {
+    return Math.max(0, a1 | 0);
+}
+ensureNotNegative(1);
+ensureNotNegative(2);
+var r = ensureNotNegative(-1);
+
+FuzzIL program written to corpus/regress-164442.fzil

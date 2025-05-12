@@ -1,0 +1,175 @@
+v0 <- BeginPlainFunction -> v1, v2
+EndPlainFunction
+v3 <- LoadString 'return_this'
+v4 <- BeginPlainFunction -> 
+    v5 <- LoadThis
+    Return v5
+EndPlainFunction
+v6 <- CallFunction v0, [v3, v4]
+v7 <- LoadString 'return_this_strict'
+v8 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v9 <- LoadThis
+    Return v9
+EndPlainFunction
+v10 <- CallFunction v0, [v7, v8]
+v11 <- LoadString 'irrelevant'
+BeginWith v11
+EndWith
+v12 <- LoadThis
+BeginWith v12
+EndWith
+v13 <- LoadString 'f'
+v14 <- BeginPlainFunction -> 
+    v15 <- LoadThis
+    v16 <- GetProperty v15, 'name'
+    Return v16
+EndPlainFunction
+v17 <- CallFunction v0, [v13, v14]
+v18 <- LoadString 'g'
+v19 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v20 <- LoadThis
+    v21 <- LoadThis
+    v22 <- GetProperty v21, 'name'
+    v23 <- LoadString 'u'
+    v24 <- TernaryOperation v20, v22, v23
+    Return v24
+EndPlainFunction
+v25 <- CallFunction v0, [v18, v19]
+v26 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v27 <- LoadInteger '1'
+    v28 <- CreateNamedVariable 'g', 'none'
+    v29 <- CallFunction v28, []
+    Return v29
+EndPlainFunction
+v30 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v31 <- CreateNamedVariable 'g', 'none'
+    v32 <- CallFunction v31, []
+    Return v32
+EndPlainFunction
+v33 <- BeginPlainFunction -> 
+    v34 <- LoadInteger '1'
+    v35 <- CreateNamedVariable 'g', 'none'
+    v36 <- CallFunction v35, []
+    Return v36
+EndPlainFunction
+v37 <- BeginPlainFunction -> 
+    v38 <- CreateNamedVariable 'g', 'none'
+    v39 <- CallFunction v38, []
+    Return v39
+EndPlainFunction
+v40 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v41 <- LoadInteger '1'
+    v42 <- CreateNamedVariable 'f', 'none'
+    v43 <- CallFunction v42, []
+    Return v43
+EndPlainFunction
+v44 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v45 <- CreateNamedVariable 'f', 'none'
+    v46 <- CallFunction v45, []
+    Return v46
+EndPlainFunction
+v47 <- BeginPlainFunction -> 
+    v48 <- LoadInteger '1'
+    v49 <- CreateNamedVariable 'f', 'none'
+    v50 <- CallFunction v49, []
+    Return v50
+EndPlainFunction
+v51 <- BeginPlainFunction -> 
+    v52 <- CreateNamedVariable 'f', 'none'
+    v53 <- CallFunction v52, []
+    Return v53
+EndPlainFunction
+v54 <- CallFunction v51, []
+v55 <- CallFunction v54, [v47]
+v56 <- CallFunction v55, []
+v57 <- CallFunction v56, [v44]
+v58 <- CallFunction v57, []
+v59 <- CallFunction v58, [v40]
+v60 <- CallFunction v59, []
+v61 <- CallFunction v60, [v37]
+v62 <- CallFunction v61, []
+v63 <- CallFunction v62, [v33]
+v64 <- CallFunction v63, []
+v65 <- CallFunction v64, [v30]
+v66 <- CallFunction v65, []
+v67 <- CallFunction v66, [v26]
+v68 <- CallFunction v67, []
+v69 <- LoadString 'oooouuuu'
+v70 <- CreateNamedVariable 'result', 'none'
+
+
+function install(a1, a2) {
+}
+function f4() {
+    return this;
+}
+install("return_this", f4);
+function f8() {
+    'use strict';
+    return this;
+}
+install("return_this_strict", f8);
+with ("irrelevant") {
+}
+with (this) {
+}
+function f14() {
+    return this.name;
+}
+install("f", f14);
+function f19() {
+    'use strict';
+    return this ? this.name : "u";
+}
+install("g", f19);
+function f26() {
+    'use strict';
+    return g();
+}
+function f30() {
+    'use strict';
+    return g();
+}
+function f33() {
+    return g();
+}
+function f37() {
+    return g();
+}
+function f40() {
+    'use strict';
+    return f();
+}
+function f44() {
+    'use strict';
+    return f();
+}
+function f47() {
+    return f();
+}
+function f51() {
+    return f();
+}
+const t52 = f51();
+const t53 = t52(f47);
+const t54 = t53();
+const t55 = t54(f44);
+const t56 = t55();
+const t57 = t56(f40);
+const t58 = t57();
+const t59 = t58(f37);
+const t60 = t59();
+const t61 = t60(f33);
+const t62 = t61();
+const t63 = t62(f30);
+const t64 = t63();
+const t65 = t64(f26);
+t65();
+
+FuzzIL program written to corpus/contextual-calls.fzil

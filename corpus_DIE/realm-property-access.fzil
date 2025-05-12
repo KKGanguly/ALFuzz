@@ -1,0 +1,37 @@
+v0 <- BeginArrowFunction -> 
+    v1 <- CreateNamedVariable 'f', 'none'
+    v2 <- GetProperty v1, 'a'
+    Return v2
+EndArrowFunction
+v3 <- CallFunction v0, []
+v4 <- CreateNamedVariable 'TypeError', 'none'
+v5 <- BeginArrowFunction -> 
+    Directive 'use strict'
+    v6 <- LoadInteger '1'
+    v7 <- CreateNamedVariable 'f', 'none'
+    SetProperty v7, 'a', v6
+EndArrowFunction
+v8 <- CallFunction v5, []
+v9 <- LoadUndefined
+v10 <- CreateNamedVariable 'f2', 'none'
+v11 <- GetProperty v10, 'a'
+v12 <- LoadInteger '1'
+SetProperty v10, 'a', v12
+v13 <- LoadInteger '1'
+v14 <- GetProperty v10, 'a'
+
+
+const v0 = () => {
+    return f.a;
+};
+v0();
+const v5 = () => {
+    'use strict';
+    f.a = 1;
+};
+v5();
+f2.a;
+f2.a = 1;
+f2.a;
+
+FuzzIL program written to corpus/realm-property-access.fzil

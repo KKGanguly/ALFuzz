@@ -1,0 +1,42 @@
+v0 <- LoadInteger '5'
+v1 <- LoadInteger '4'
+v2 <- LoadInteger '3'
+v3 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v0
+    ObjectLiteralAddElement `1`, v1
+    ObjectLiteralAddElement `2`, v2
+    ObjectLiteralAddProperty `length`, v3
+v4 <- EndObjectLiteral
+v5 <- CreateNamedVariable 'a', 'let', v4
+v6 <- CreateNamedVariable 'Object', 'none'
+v7 <- CallMethod v6, 'freeze', [v5]
+v8 <- BeginArrowFunction -> 
+    v9 <- CreateNamedVariable 'Array', 'none'
+    v10 <- GetProperty v9, 'prototype'
+    v11 <- GetProperty v10, 'sort'
+    v12 <- CallMethod v11, 'call', [v5]
+    Return v12
+EndArrowFunction
+v13 <- CallFunction v8, []
+v14 <- LoadInteger '5'
+v15 <- LoadInteger '4'
+v16 <- LoadInteger '3'
+v17 <- LoadInteger '2'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v14
+    ObjectLiteralAddElement `1`, v15
+    ObjectLiteralAddElement `2`, v16
+    ObjectLiteralAddProperty `length`, v17
+v18 <- EndObjectLiteral
+
+
+let a = { 0: 5, 1: 4, 2: 3, length: 2 };
+Object.freeze(a);
+const v8 = () => {
+    return Array.prototype.sort.call(a);
+};
+v8();
+const v18 = { 0: 5, 1: 4, 2: 3, length: 2 };
+
+FuzzIL program written to corpus/regress-crbug-923265.fzil

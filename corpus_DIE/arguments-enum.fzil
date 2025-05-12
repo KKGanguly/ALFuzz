@@ -1,0 +1,84 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- CreateNamedVariable 'count', 'var', v1
+    v3 <- LoadArguments
+    BeginForInLoop v3 -> v4
+        v5 <- UnaryOperation v2, '++'
+    EndForInLoop
+    Return v2
+EndPlainFunction
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '5'
+    v8 <- LoadArguments
+    SetElement v8, '10', v7
+    v9 <- LoadInteger '4'
+    v10 <- LoadArguments
+    SetProperty v10, 'x', v9
+    v11 <- LoadInteger '0'
+    v12 <- CreateNamedVariable 'count', 'var', v11
+    v13 <- LoadArguments
+    BeginForInLoop v13 -> v14
+        v15 <- UnaryOperation v12, '++'
+    EndForInLoop
+    Return v12
+EndPlainFunction
+v16 <- LoadInteger '0'
+v17 <- CallFunction v0, []
+v18 <- LoadInteger '1'
+v19 <- LoadInteger '1'
+v20 <- CallFunction v0, [v19]
+v21 <- LoadInteger '2'
+v22 <- LoadInteger '1'
+v23 <- LoadInteger '2'
+v24 <- CallFunction v0, [v22, v23]
+v25 <- LoadInteger '5'
+v26 <- LoadInteger '1'
+v27 <- LoadInteger '2'
+v28 <- LoadInteger '3'
+v29 <- LoadInteger '4'
+v30 <- LoadInteger '5'
+v31 <- CallFunction v0, [v26, v27, v28, v29, v30]
+v32 <- LoadInteger '2'
+v33 <- CallFunction v6, []
+v34 <- LoadInteger '3'
+v35 <- LoadInteger '1'
+v36 <- CallFunction v6, [v35]
+v37 <- LoadInteger '4'
+v38 <- LoadInteger '1'
+v39 <- LoadInteger '2'
+v40 <- CallFunction v6, [v38, v39]
+v41 <- LoadInteger '7'
+v42 <- LoadInteger '1'
+v43 <- LoadInteger '2'
+v44 <- LoadInteger '3'
+v45 <- LoadInteger '4'
+v46 <- LoadInteger '5'
+v47 <- CallFunction v6, [v42, v43, v44, v45, v46]
+
+
+function countArguments() {
+    var count = 0;
+    for (const v4 in arguments) {
+        count++;
+    }
+    return count;
+}
+function setArgumentCount() {
+    arguments[10] = 5;
+    arguments.x = 4;
+    var count = 0;
+    for (const v14 in arguments) {
+        count++;
+    }
+    return count;
+}
+countArguments();
+countArguments(1);
+countArguments(1, 2);
+countArguments(1, 2, 3, 4, 5);
+setArgumentCount();
+setArgumentCount(1);
+setArgumentCount(1, 2);
+setArgumentCount(1, 2, 3, 4, 5);
+
+FuzzIL program written to corpus/arguments-enum.fzil

@@ -1,0 +1,122 @@
+v0 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v1 <- LoadInteger '0'
+    BeginForLoopCondition -> v2
+        v3 <- LoadInteger '2'
+        v4 <- Compare v2, '<', v3
+    BeginForLoopAfterthought v4 -> v5
+        v6 <- UnaryOperation v5, '++'
+    BeginForLoopBody -> v7
+        BeginTry
+            v8 <- LoadString 'The exception should have been caught.'
+            ThrowException v8
+        BeginCatch -> v9
+        EndTryCatch
+        BeginForLoopInitializer
+            v10 <- LoadInteger '0'
+        BeginForLoopCondition -> v11
+            v12 <- LoadInteger '1'
+            v13 <- Compare v11, '<', v12
+        BeginForLoopAfterthought v13 -> v14
+            v15 <- UnaryOperation v14, '++'
+        BeginForLoopBody -> v16
+        EndForLoop
+    EndForLoop
+EndPlainFunction
+v17 <- BeginPlainFunction -> 
+    BeginTry
+    BeginCatch -> v18
+    EndTryCatch
+    v19 <- LoadInteger '0'
+    v20 <- CreateNamedVariable 'a', 'var', v19
+    BeginWhileLoopHeader
+        v21 <- LoadInteger '1'
+    BeginWhileLoopBody v21
+        v22 <- LoadString 'foo'
+        v23 <- CreateNamedVariable 'print', 'none'
+        v24 <- CallFunction v23, [v22]
+        v25 <- LoadInteger '1'
+        v26 <- Compare v20, '==', v25
+        BeginIf v26
+            Break
+        EndIf
+        v27 <- UnaryOperation v20, '++'
+    EndWhileLoop
+EndPlainFunction
+v28 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v29 <- LoadInteger '0'
+    BeginForLoopCondition -> v30
+        v31 <- LoadInteger '2'
+        v32 <- Compare v30, '<', v31
+    BeginForLoopAfterthought v32 -> v33
+        v34 <- UnaryOperation v33, '++'
+    BeginForLoopBody -> v35
+        BeginTry
+        BeginCatch -> v36
+        EndTryCatch
+        v37 <- LoadInteger '0'
+        v38 <- CreateNamedVariable 'b', 'var', v37
+        BeginWhileLoopHeader
+            v39 <- LoadInteger '1'
+        BeginWhileLoopBody v39
+            v40 <- LoadString 'bar'
+            v41 <- CreateNamedVariable 'print', 'none'
+            v42 <- CallFunction v41, [v40]
+            v43 <- LoadInteger '1'
+            v44 <- Compare v38, '==', v43
+            BeginIf v44
+                Break
+            EndIf
+            v45 <- UnaryOperation v38, '++'
+        EndWhileLoop
+    EndForLoop
+EndPlainFunction
+v46 <- CallFunction v0, []
+v47 <- CallFunction v17, []
+v48 <- CallFunction v28, []
+
+
+function SingleLoop() {
+    for (let i2 = 0; i2 < 2; i2++) {
+        try {
+            throw "The exception should have been caught.";
+        } catch(e9) {
+        }
+        for (let i11 = 0; i11 < 1; i11++) {
+        }
+    }
+}
+function EmptyBody() {
+    try {
+    } catch(e18) {
+    }
+    var a = 0;
+    while (1) {
+        print("foo");
+        if (a == 1) {
+            break;
+        }
+        a++;
+    }
+}
+function NestedLoops() {
+    for (let i30 = 0; i30 < 2; i30++) {
+        try {
+        } catch(e36) {
+        }
+        var b = 0;
+        while (1) {
+            print("bar");
+            if (b == 1) {
+                break;
+            }
+            b++;
+        }
+    }
+}
+SingleLoop();
+EmptyBody();
+NestedLoops();
+
+FuzzIL program written to corpus/osr-try-catch.fzil

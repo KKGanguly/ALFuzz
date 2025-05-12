@@ -1,0 +1,691 @@
+v0 <- LoadUndefined
+v1 <- CreateNamedVariable 'accessorCallCount', 'var', v0
+v2 <- LoadUndefined
+v3 <- CreateNamedVariable 'setterArgument', 'var', v2
+v4 <- LoadUndefined
+v5 <- CreateNamedVariable 'setterValue', 'var', v4
+v6 <- LoadUndefined
+v7 <- CreateNamedVariable 'obj', 'var', v6
+v8 <- LoadUndefined
+v9 <- CreateNamedVariable 'forceDeopt', 'var', v8
+v10 <- BeginPlainFunction -> v11, v12, v13
+    v14 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `deopt`, v14
+    v15 <- EndObjectLiteral
+    Reassign v9, v15
+    v16 <- LoadInteger '0'
+    Reassign v1, v16
+    v17 <- CallFunction v11, [v12]
+    v18 <- LoadInteger '1'
+    v19 <- CallFunction v11, [v12]
+    v20 <- LoadInteger '2'
+    v21 <- CallFunction v11, [v12]
+    v22 <- LoadInteger '3'
+    BeginObjectLiteral
+    v23 <- EndObjectLiteral
+    Reassign v9, v23
+    v24 <- CallFunction v11, [v12]
+    v25 <- LoadInteger '4'
+EndPlainFunction
+v26 <- BeginPlainFunction -> v27
+    v28 <- GetProperty v27, 'getterProperty'
+    Return v28
+EndPlainFunction
+v29 <- BeginPlainFunction -> v30
+    v31 <- GetProperty v30, 'getterProperty'
+    BeginIf v31
+        v32 <- LoadInteger '111'
+        Return v32
+    BeginElse
+        v33 <- LoadInteger '222'
+        Return v33
+    EndIf
+EndPlainFunction
+v34 <- BeginPlainFunction -> v35
+    v36 <- GetProperty v35, 'getterProperty'
+    v37 <- LoadInteger '5678'
+    Return v37
+EndPlainFunction
+v38 <- BeginPlainFunction -> v39, v40, v41, v42, v43
+    BeginTry
+        v44 <- CallFunction v10, [v39, v41, v42]
+    BeginCatch -> v45
+        v46 <- LoadInteger '7'
+        v47 <- LoadString '\n'
+        v48 <- GetProperty v45, 'stack'
+        v49 <- CallMethod v48, 'split', [v47]
+        v50 <- GetProperty v49, 'length'
+    EndTryCatch
+EndPlainFunction
+v51 <- BeginPlainFunction -> v52, v53, v54, v55
+    v56 <- CallFunction v38, [v26, v52, v53, v54, v55]
+    v57 <- LoadInteger '111'
+    v58 <- LoadInteger '222'
+    v59 <- TernaryOperation v54, v57, v58
+    v60 <- CallFunction v38, [v29, v52, v53, v59, v55]
+    v61 <- LoadInteger '5678'
+    v62 <- CallFunction v38, [v34, v52, v53, v61, v55]
+EndPlainFunction
+v63 <- BeginPlainFunction -> 
+    v64 <- LoadThis
+    v65 <- UnaryOperation v1, '++'
+    v66 <- GetProperty v9, 'deopt'
+    v67 <- LoadInteger '1234'
+    Return v67
+EndPlainFunction
+v68 <- BeginPlainFunction -> 
+EndPlainFunction
+v69 <- Construct v68, []
+v70 <- LoadString 'getterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v63
+v71 <- EndObjectLiteral
+v72 <- CreateNamedVariable 'Object', 'none'
+v73 <- CallMethod v72, 'defineProperty', [v69, v70, v71]
+Reassign v7, v73
+v74 <- LoadInteger '1234'
+v75 <- LoadBoolean 'false'
+v76 <- CallFunction v51, [v63, v7, v74, v75]
+v77 <- CallMethod v72, 'create', [v7]
+Reassign v7, v77
+v78 <- LoadInteger '1234'
+v79 <- LoadBoolean 'false'
+v80 <- CallFunction v51, [v63, v7, v78, v79]
+v81 <- BeginPlainFunction -> 
+    v82 <- LoadThis
+    v83 <- UnaryOperation v1, '++'
+    v84 <- GetProperty v9, 'deopt'
+    v85 <- LoadBoolean 'false'
+    Return v85
+EndPlainFunction
+v86 <- BeginPlainFunction -> 
+EndPlainFunction
+v87 <- Construct v86, []
+v88 <- LoadString 'getterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v81
+v89 <- EndObjectLiteral
+v90 <- CallMethod v72, 'defineProperty', [v87, v88, v89]
+Reassign v7, v90
+v91 <- LoadBoolean 'false'
+v92 <- LoadBoolean 'false'
+v93 <- CallFunction v51, [v81, v7, v91, v92]
+v94 <- CallMethod v72, 'create', [v7]
+Reassign v7, v94
+v95 <- LoadBoolean 'false'
+v96 <- LoadBoolean 'false'
+v97 <- CallFunction v51, [v81, v7, v95, v96]
+v98 <- BeginPlainFunction -> 
+    v99 <- LoadThis
+    v100 <- UnaryOperation v1, '++'
+    v101 <- GetProperty v9, 'deopt'
+EndPlainFunction
+v102 <- BeginPlainFunction -> 
+EndPlainFunction
+v103 <- Construct v102, []
+v104 <- LoadString 'getterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v98
+v105 <- EndObjectLiteral
+v106 <- CallMethod v72, 'defineProperty', [v103, v104, v105]
+Reassign v7, v106
+v107 <- LoadUndefined
+v108 <- LoadBoolean 'false'
+v109 <- CallFunction v51, [v98, v7, v107, v108]
+v110 <- CallMethod v72, 'create', [v7]
+Reassign v7, v110
+v111 <- LoadUndefined
+v112 <- LoadBoolean 'false'
+v113 <- CallFunction v51, [v98, v7, v111, v112]
+v114 <- BeginPlainFunction -> v115
+    v116 <- LoadThis
+    v117 <- LoadUndefined
+    v118 <- UnaryOperation v1, '++'
+    v119 <- GetProperty v9, 'deopt'
+EndPlainFunction
+v120 <- BeginPlainFunction -> 
+EndPlainFunction
+v121 <- Construct v120, []
+v122 <- LoadString 'getterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v114
+v123 <- EndObjectLiteral
+v124 <- CallMethod v72, 'defineProperty', [v121, v122, v123]
+Reassign v7, v124
+v125 <- LoadUndefined
+v126 <- LoadBoolean 'false'
+v127 <- CallFunction v51, [v114, v7, v125, v126]
+v128 <- CallMethod v72, 'create', [v7]
+Reassign v7, v128
+v129 <- LoadUndefined
+v130 <- LoadBoolean 'false'
+v131 <- CallFunction v51, [v114, v7, v129, v130]
+v132 <- BeginPlainFunction -> v133
+    v134 <- LoadThis
+    v135 <- LoadUndefined
+    v136 <- UnaryOperation v1, '++'
+    v137 <- GetProperty v9, 'deopt'
+    v138 <- LoadInteger '9876'
+    Return v138
+EndPlainFunction
+v139 <- BeginPlainFunction -> 
+EndPlainFunction
+v140 <- Construct v139, []
+v141 <- LoadString 'getterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v132
+v142 <- EndObjectLiteral
+v143 <- CallMethod v72, 'defineProperty', [v140, v141, v142]
+Reassign v7, v143
+v144 <- LoadInteger '9876'
+v145 <- LoadBoolean 'false'
+v146 <- CallFunction v51, [v132, v7, v144, v145]
+v147 <- CallMethod v72, 'create', [v7]
+Reassign v7, v147
+v148 <- LoadInteger '9876'
+v149 <- LoadBoolean 'false'
+v150 <- CallFunction v51, [v132, v7, v148, v149]
+v151 <- BeginPlainFunction -> 
+    v152 <- LoadThis
+    v153 <- UnaryOperation v1, '++'
+    v154 <- GetProperty v9, 'deopt'
+    v155 <- LoadInteger '4'
+    v156 <- Compare v1, '==', v155
+    BeginIf v156
+        v157 <- LoadInteger '123'
+        v158 <- LoadNull
+        v159 <- TestIn v157, v158
+    EndIf
+    v160 <- LoadInteger '13579'
+    Return v160
+EndPlainFunction
+v161 <- BeginPlainFunction -> 
+EndPlainFunction
+v162 <- Construct v161, []
+v163 <- LoadString 'getterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v151
+v164 <- EndObjectLiteral
+v165 <- CallMethod v72, 'defineProperty', [v162, v163, v164]
+Reassign v7, v165
+v166 <- LoadInteger '13579'
+v167 <- LoadBoolean 'true'
+v168 <- CallFunction v51, [v151, v7, v166, v167]
+v169 <- CallMethod v72, 'create', [v7]
+Reassign v7, v169
+v170 <- LoadInteger '13579'
+v171 <- LoadBoolean 'true'
+v172 <- CallFunction v51, [v151, v7, v170, v171]
+v173 <- BeginPlainFunction -> v174, v175, v176, v177
+    v178 <- LoadInteger '0'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `deopt`, v178
+    v179 <- EndObjectLiteral
+    Reassign v9, v179
+    v180 <- LoadInteger '0'
+    Reassign v1, v180
+    Reassign v3, v176
+    v181 <- CallFunction v174, [v175, v176]
+    v182 <- LoadInteger '1'
+    v183 <- CallFunction v174, [v175, v176]
+    v184 <- LoadInteger '2'
+    v185 <- CallFunction v174, [v175, v176]
+    v186 <- LoadInteger '3'
+    BeginObjectLiteral
+    v187 <- EndObjectLiteral
+    Reassign v9, v187
+    v188 <- CallFunction v174, [v175, v176]
+    v189 <- LoadInteger '4'
+EndPlainFunction
+v190 <- BeginPlainFunction -> v191, v192
+    SetProperty v191, 'setterProperty', v192
+    Return v192
+EndPlainFunction
+v193 <- BeginPlainFunction -> v194, v195
+    SetProperty v194, 'setterProperty', v195
+    BeginIf v195
+        v196 <- LoadInteger '333'
+        Return v196
+    BeginElse
+        v197 <- LoadInteger '444'
+        Return v197
+    EndIf
+EndPlainFunction
+v198 <- BeginPlainFunction -> v199, v200
+    SetProperty v199, 'setterProperty', v200
+    v201 <- LoadInteger '666'
+    Return v201
+EndPlainFunction
+v202 <- BeginPlainFunction -> v203, v204, v205, v206, v207, v208
+    BeginTry
+        v209 <- CallFunction v173, [v203, v205, v207, v208]
+    BeginCatch -> v210
+        v211 <- LoadInteger '7'
+        v212 <- LoadString '\n'
+        v213 <- GetProperty v210, 'stack'
+        v214 <- CallMethod v213, 'split', [v212]
+        v215 <- GetProperty v214, 'length'
+    EndTryCatch
+EndPlainFunction
+v216 <- BeginPlainFunction -> v217, v218, v219
+    v220 <- LoadInteger '111'
+    v221 <- LoadInteger '111'
+    v222 <- CallFunction v202, [v190, v217, v218, v219, v220, v221]
+    v223 <- LoadBoolean 'true'
+    v224 <- LoadInteger '333'
+    v225 <- CallFunction v202, [v193, v217, v218, v219, v223, v224]
+    v226 <- LoadBoolean 'false'
+    v227 <- LoadInteger '444'
+    v228 <- CallFunction v202, [v193, v217, v218, v219, v226, v227]
+    v229 <- LoadInteger '555'
+    v230 <- LoadInteger '666'
+    v231 <- CallFunction v202, [v198, v217, v218, v219, v229, v230]
+EndPlainFunction
+v232 <- BeginPlainFunction -> v233
+    v234 <- LoadThis
+    v235 <- UnaryOperation v1, '++'
+    v236 <- GetProperty v9, 'deopt'
+    Reassign v5, v233
+EndPlainFunction
+v237 <- BeginPlainFunction -> 
+EndPlainFunction
+v238 <- Construct v237, []
+v239 <- LoadString 'setterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v232
+v240 <- EndObjectLiteral
+v241 <- CallMethod v72, 'defineProperty', [v238, v239, v240]
+Reassign v7, v241
+v242 <- LoadBoolean 'false'
+v243 <- CallFunction v216, [v232, v7, v242]
+v244 <- CallMethod v72, 'create', [v7]
+Reassign v7, v244
+v245 <- LoadBoolean 'false'
+v246 <- CallFunction v216, [v232, v7, v245]
+v247 <- BeginPlainFunction -> v248
+    v249 <- LoadThis
+    v250 <- UnaryOperation v1, '++'
+    v251 <- GetProperty v9, 'deopt'
+    Reassign v5, v248
+    v252 <- LoadInteger '1000000'
+    Return v252
+EndPlainFunction
+v253 <- BeginPlainFunction -> 
+EndPlainFunction
+v254 <- Construct v253, []
+v255 <- LoadString 'setterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v247
+v256 <- EndObjectLiteral
+v257 <- CallMethod v72, 'defineProperty', [v254, v255, v256]
+Reassign v7, v257
+v258 <- LoadBoolean 'false'
+v259 <- CallFunction v216, [v247, v7, v258]
+v260 <- CallMethod v72, 'create', [v7]
+Reassign v7, v260
+v261 <- LoadBoolean 'false'
+v262 <- CallFunction v216, [v247, v7, v261]
+v263 <- BeginPlainFunction -> 
+    v264 <- LoadThis
+    v265 <- UnaryOperation v1, '++'
+    v266 <- GetProperty v9, 'deopt'
+    Reassign v5, v3
+EndPlainFunction
+v267 <- BeginPlainFunction -> 
+EndPlainFunction
+v268 <- Construct v267, []
+v269 <- LoadString 'setterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v263
+v270 <- EndObjectLiteral
+v271 <- CallMethod v72, 'defineProperty', [v268, v269, v270]
+Reassign v7, v271
+v272 <- LoadBoolean 'false'
+v273 <- CallFunction v216, [v263, v7, v272]
+v274 <- CallMethod v72, 'create', [v7]
+Reassign v7, v274
+v275 <- LoadBoolean 'false'
+v276 <- CallFunction v216, [v263, v7, v275]
+v277 <- BeginPlainFunction -> 
+    v278 <- LoadThis
+    v279 <- UnaryOperation v1, '++'
+    v280 <- GetProperty v9, 'deopt'
+    Reassign v5, v3
+    v281 <- LoadInteger '2000000'
+    Return v281
+EndPlainFunction
+v282 <- BeginPlainFunction -> 
+EndPlainFunction
+v283 <- Construct v282, []
+v284 <- LoadString 'setterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v277
+v285 <- EndObjectLiteral
+v286 <- CallMethod v72, 'defineProperty', [v283, v284, v285]
+Reassign v7, v286
+v287 <- LoadBoolean 'false'
+v288 <- CallFunction v216, [v277, v7, v287]
+v289 <- CallMethod v72, 'create', [v7]
+Reassign v7, v289
+v290 <- LoadBoolean 'false'
+v291 <- CallFunction v216, [v277, v7, v290]
+v292 <- BeginPlainFunction -> v293, v294
+    v295 <- LoadThis
+    v296 <- LoadUndefined
+    v297 <- UnaryOperation v1, '++'
+    v298 <- GetProperty v9, 'deopt'
+    Reassign v5, v293
+EndPlainFunction
+v299 <- BeginPlainFunction -> 
+EndPlainFunction
+v300 <- Construct v299, []
+v301 <- LoadString 'setterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v292
+v302 <- EndObjectLiteral
+v303 <- CallMethod v72, 'defineProperty', [v300, v301, v302]
+Reassign v7, v303
+v304 <- LoadBoolean 'false'
+v305 <- CallFunction v216, [v292, v7, v304]
+v306 <- CallMethod v72, 'create', [v7]
+Reassign v7, v306
+v307 <- LoadBoolean 'false'
+v308 <- CallFunction v216, [v292, v7, v307]
+v309 <- BeginPlainFunction -> v310, v311
+    v312 <- LoadThis
+    v313 <- LoadUndefined
+    v314 <- UnaryOperation v1, '++'
+    v315 <- GetProperty v9, 'deopt'
+    Reassign v5, v310
+    v316 <- LoadInteger '3000000'
+    Return v316
+EndPlainFunction
+v317 <- BeginPlainFunction -> 
+EndPlainFunction
+v318 <- Construct v317, []
+v319 <- LoadString 'setterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v309
+v320 <- EndObjectLiteral
+v321 <- CallMethod v72, 'defineProperty', [v318, v319, v320]
+Reassign v7, v321
+v322 <- LoadBoolean 'false'
+v323 <- CallFunction v216, [v309, v7, v322]
+v324 <- CallMethod v72, 'create', [v7]
+Reassign v7, v324
+v325 <- LoadBoolean 'false'
+v326 <- CallFunction v216, [v309, v7, v325]
+v327 <- BeginPlainFunction -> v328
+    v329 <- UnaryOperation v1, '++'
+    v330 <- GetProperty v9, 'deopt'
+    v331 <- LoadInteger '4'
+    v332 <- Compare v1, '==', v331
+    BeginIf v332
+        v333 <- LoadInteger '123'
+        v334 <- LoadNull
+        v335 <- TestIn v333, v334
+    EndIf
+    Reassign v5, v328
+EndPlainFunction
+v336 <- BeginPlainFunction -> 
+EndPlainFunction
+v337 <- Construct v336, []
+v338 <- LoadString 'setterProperty'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `set`, v327
+v339 <- EndObjectLiteral
+v340 <- CallMethod v72, 'defineProperty', [v337, v338, v339]
+Reassign v7, v340
+v341 <- LoadBoolean 'true'
+v342 <- CallFunction v216, [v327, v7, v341]
+v343 <- CallMethod v72, 'create', [v7]
+Reassign v7, v343
+v344 <- LoadBoolean 'true'
+v345 <- CallFunction v216, [v327, v7, v344]
+
+
+var accessorCallCount;
+var setterArgument;
+var setterValue;
+var obj;
+var forceDeopt;
+function TestInlinedGetter(a11, a12, a13) {
+    forceDeopt = { deopt: 0 };
+    accessorCallCount = 0;
+    a11(a12);
+    a11(a12);
+    a11(a12);
+    forceDeopt = {};
+    a11(a12);
+}
+function value_context_for_getter(a27) {
+    return a27.getterProperty;
+}
+function test_context_for_getter(a30) {
+    if (a30.getterProperty) {
+        return 111;
+    } else {
+        return 222;
+    }
+}
+function effect_context_for_getter(a35) {
+    a35.getterProperty;
+    return 5678;
+}
+function TryGetter(a39, a40, a41, a42, a43) {
+    try {
+        TestInlinedGetter(a39, a41, a42);
+    } catch(e45) {
+        e45.stack.split("\n").length;
+    }
+}
+function TestGetterInAllContexts(a52, a53, a54, a55) {
+    TryGetter(value_context_for_getter, a52, a53, a54, a55);
+    TryGetter(test_context_for_getter, a52, a53, a54 ? 111 : 222, a55);
+    TryGetter(effect_context_for_getter, a52, a53, 5678, a55);
+}
+function getter1() {
+    accessorCallCount++;
+    forceDeopt.deopt;
+    return 1234;
+}
+function ConstrG1() {
+}
+const v69 = new ConstrG1();
+obj = Object.defineProperty(v69, "getterProperty", { get: getter1 });
+TestGetterInAllContexts(getter1, obj, 1234, false);
+obj = Object.create(obj);
+TestGetterInAllContexts(getter1, obj, 1234, false);
+function getter2() {
+    accessorCallCount++;
+    forceDeopt.deopt;
+    return false;
+}
+function ConstrG2() {
+}
+const v87 = new ConstrG2();
+obj = Object.defineProperty(v87, "getterProperty", { get: getter2 });
+TestGetterInAllContexts(getter2, obj, false, false);
+obj = Object.create(obj);
+TestGetterInAllContexts(getter2, obj, false, false);
+function getter3() {
+    accessorCallCount++;
+    forceDeopt.deopt;
+}
+function ConstrG3() {
+}
+const v103 = new ConstrG3();
+obj = Object.defineProperty(v103, "getterProperty", { get: getter3 });
+TestGetterInAllContexts(getter3, obj, undefined, false);
+obj = Object.create(obj);
+TestGetterInAllContexts(getter3, obj, undefined, false);
+function getter4(a115) {
+    accessorCallCount++;
+    forceDeopt.deopt;
+}
+function ConstrG4() {
+}
+const v121 = new ConstrG4();
+obj = Object.defineProperty(v121, "getterProperty", { get: getter4 });
+TestGetterInAllContexts(getter4, obj, undefined, false);
+obj = Object.create(obj);
+TestGetterInAllContexts(getter4, obj, undefined, false);
+function getter5(a133) {
+    accessorCallCount++;
+    forceDeopt.deopt;
+    return 9876;
+}
+function ConstrG5() {
+}
+const v140 = new ConstrG5();
+obj = Object.defineProperty(v140, "getterProperty", { get: getter5 });
+TestGetterInAllContexts(getter5, obj, 9876, false);
+obj = Object.create(obj);
+TestGetterInAllContexts(getter5, obj, 9876, false);
+function getter6() {
+    accessorCallCount++;
+    forceDeopt.deopt;
+    if (accessorCallCount == 4) {
+        123 in null;
+    }
+    return 13579;
+}
+function ConstrG6() {
+}
+const v162 = new ConstrG6();
+obj = Object.defineProperty(v162, "getterProperty", { get: getter6 });
+TestGetterInAllContexts(getter6, obj, 13579, true);
+obj = Object.create(obj);
+TestGetterInAllContexts(getter6, obj, 13579, true);
+function TestInlinedSetter(a174, a175, a176, a177) {
+    forceDeopt = { deopt: 0 };
+    accessorCallCount = 0;
+    setterArgument = a176;
+    a174(a175, a176);
+    a174(a175, a176);
+    a174(a175, a176);
+    forceDeopt = {};
+    a174(a175, a176);
+}
+function value_context_for_setter(a191, a192) {
+    a191.setterProperty = a192;
+    return a192;
+}
+function test_context_for_setter(a194, a195) {
+    a194.setterProperty = a195;
+    if (a195) {
+        return 333;
+    } else {
+        return 444;
+    }
+}
+function effect_context_for_setter(a199, a200) {
+    a199.setterProperty = a200;
+    return 666;
+}
+function TrySetter(a203, a204, a205, a206, a207, a208) {
+    try {
+        TestInlinedSetter(a203, a205, a207, a208);
+    } catch(e210) {
+        e210.stack.split("\n").length;
+    }
+}
+function TestSetterInAllContexts(a217, a218, a219) {
+    TrySetter(value_context_for_setter, a217, a218, a219, 111, 111);
+    TrySetter(test_context_for_setter, a217, a218, a219, true, 333);
+    TrySetter(test_context_for_setter, a217, a218, a219, false, 444);
+    TrySetter(effect_context_for_setter, a217, a218, a219, 555, 666);
+}
+function setter1(a233) {
+    accessorCallCount++;
+    forceDeopt.deopt;
+    setterValue = a233;
+}
+function ConstrS1() {
+}
+const v238 = new ConstrS1();
+obj = Object.defineProperty(v238, "setterProperty", { set: setter1 });
+TestSetterInAllContexts(setter1, obj, false);
+obj = Object.create(obj);
+TestSetterInAllContexts(setter1, obj, false);
+function setter2(a248) {
+    accessorCallCount++;
+    forceDeopt.deopt;
+    setterValue = a248;
+    return 1000000;
+}
+function ConstrS2() {
+}
+const v254 = new ConstrS2();
+obj = Object.defineProperty(v254, "setterProperty", { set: setter2 });
+TestSetterInAllContexts(setter2, obj, false);
+obj = Object.create(obj);
+TestSetterInAllContexts(setter2, obj, false);
+function setter3() {
+    accessorCallCount++;
+    forceDeopt.deopt;
+    setterValue = setterArgument;
+}
+function ConstrS3() {
+}
+const v268 = new ConstrS3();
+obj = Object.defineProperty(v268, "setterProperty", { set: setter3 });
+TestSetterInAllContexts(setter3, obj, false);
+obj = Object.create(obj);
+TestSetterInAllContexts(setter3, obj, false);
+function setter4() {
+    accessorCallCount++;
+    forceDeopt.deopt;
+    setterValue = setterArgument;
+    return 2000000;
+}
+function ConstrS4() {
+}
+const v283 = new ConstrS4();
+obj = Object.defineProperty(v283, "setterProperty", { set: setter4 });
+TestSetterInAllContexts(setter4, obj, false);
+obj = Object.create(obj);
+TestSetterInAllContexts(setter4, obj, false);
+function setter5(a293, a294) {
+    accessorCallCount++;
+    forceDeopt.deopt;
+    setterValue = a293;
+}
+function ConstrS5() {
+}
+const v300 = new ConstrS5();
+obj = Object.defineProperty(v300, "setterProperty", { set: setter5 });
+TestSetterInAllContexts(setter5, obj, false);
+obj = Object.create(obj);
+TestSetterInAllContexts(setter5, obj, false);
+function setter6(a310, a311) {
+    accessorCallCount++;
+    forceDeopt.deopt;
+    setterValue = a310;
+    return 3000000;
+}
+function ConstrS6() {
+}
+const v318 = new ConstrS6();
+obj = Object.defineProperty(v318, "setterProperty", { set: setter6 });
+TestSetterInAllContexts(setter6, obj, false);
+obj = Object.create(obj);
+TestSetterInAllContexts(setter6, obj, false);
+function setter7(a328) {
+    accessorCallCount++;
+    forceDeopt.deopt;
+    if (accessorCallCount == 4) {
+        123 in null;
+    }
+    setterValue = a328;
+}
+function ConstrS7() {
+}
+const v337 = new ConstrS7();
+obj = Object.defineProperty(v337, "setterProperty", { set: setter7 });
+TestSetterInAllContexts(setter7, obj, true);
+obj = Object.create(obj);
+TestSetterInAllContexts(setter7, obj, true);
+
+FuzzIL program written to corpus/inline-accessors2.fzil

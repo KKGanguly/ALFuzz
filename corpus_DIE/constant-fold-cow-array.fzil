@@ -1,0 +1,76 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadInteger '2'
+    v3 <- LoadInteger '3'
+    v4 <- CreateArray [v1, v2, v3]
+    v5 <- CreateNamedVariable 'a', 'const', v4
+    v6 <- BeginArrowFunction -> 
+        v7 <- GetElement v5, '0'
+        Return v7
+    EndArrowFunction
+    v8 <- CreateNamedVariable 'foo', 'const', v6
+    v9 <- LoadInteger '1'
+    v10 <- CallFunction v8, []
+    v11 <- LoadInteger '1'
+    v12 <- CallFunction v8, []
+    v13 <- LoadInteger '1'
+    v14 <- CallFunction v8, []
+    v15 <- LoadInteger '1'
+    SetProperty v5, 'length', v15
+    v16 <- LoadInteger '1'
+    v17 <- CallFunction v8, []
+EndPlainFunction
+v18 <- CallFunction v0, []
+v19 <- BeginPlainFunction -> 
+    v20 <- LoadInteger '1'
+    v21 <- LoadInteger '2'
+    v22 <- LoadInteger '3'
+    v23 <- CreateArray [v20, v21, v22]
+    v24 <- CreateNamedVariable 'a', 'const', v23
+    v25 <- BeginArrowFunction -> 
+        v26 <- GetElement v24, '0'
+        Return v26
+    EndArrowFunction
+    v27 <- CreateNamedVariable 'foo', 'const', v25
+    v28 <- LoadInteger '1'
+    v29 <- CallFunction v27, []
+    v30 <- LoadInteger '1'
+    v31 <- CallFunction v27, []
+    v32 <- LoadInteger '1'
+    v33 <- CallFunction v27, []
+    v34 <- LoadInteger '42'
+    SetElement v24, '0', v34
+    v35 <- LoadInteger '42'
+    v36 <- CallFunction v27, []
+EndPlainFunction
+v37 <- CallFunction v19, []
+
+
+function f0() {
+    const a = [1,2,3];
+    const v6 = () => {
+        return a[0];
+    };
+    const foo = v6;
+    foo();
+    foo();
+    foo();
+    a.length = 1;
+    foo();
+}
+f0();
+function f19() {
+    const a = [1,2,3];
+    const v25 = () => {
+        return a[0];
+    };
+    const foo = v25;
+    foo();
+    foo();
+    foo();
+    a[0] = 42;
+    foo();
+}
+f19();
+
+FuzzIL program written to corpus/constant-fold-cow-array.fzil

@@ -1,0 +1,53 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- LoadString 'x'
+    v3 <- Compare v1, '!=', v2
+    BeginIf v3
+        v4 <- LoadInteger '1'
+        v5 <- BinaryOperation v1, '+', v4
+        v6 <- LoadFloat '1.5'
+        v7 <- BinaryOperation v5, '*', v6
+        BeginObjectLiteral
+            ObjectLiteralAddProperty `a`, v7
+        v8 <- EndObjectLiteral
+        v9 <- CreateNamedVariable 'o', 'var', v8
+        v10 <- GetProperty v9, 'a'
+        Return v10
+    EndIf
+EndPlainFunction
+v11 <- LoadFloat '1.5'
+v12 <- CallFunction v0, [v11]
+v13 <- LoadFloat '2.5'
+v14 <- CallFunction v0, [v13]
+v15 <- CreateNamedVariable 'NaN', 'none'
+v16 <- CallFunction v0, [v15]
+v17 <- BeginPlainFunction -> v18
+    v19 <- LoadString ''
+    v20 <- BinaryOperation v19, '+', v18
+    v21 <- CallFunction v0, [v20]
+EndPlainFunction
+v22 <- LoadString 'x'
+v23 <- CallFunction v17, [v22]
+v24 <- LoadString 'x'
+v25 <- CallFunction v17, [v24]
+v26 <- LoadString 'x'
+v27 <- CallFunction v17, [v26]
+
+
+function f(a1) {
+    if (a1 != "x") {
+        const v7 = (a1 + 1) * 1.5;
+        var o = { a: v7 };
+        return o.a;
+    }
+}
+f(1.5);
+f(2.5);
+f(NaN);
+function g(a18) {
+    f("" + a18);
+}
+g("x");
+g("x");
+g("x");
+
+FuzzIL program written to corpus/escape-analysis-type-none-in-object-state.fzil

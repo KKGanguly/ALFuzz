@@ -1,0 +1,57 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o1', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- LoadInteger '10'
+    Return v3
+EndPlainFunction
+SetProperty v1, 'f1', v2
+v4 <- LoadInteger '5'
+SetProperty v1, 'x', v4
+v5 <- LoadInteger '2'
+SetProperty v1, 'y', v5
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'o2', 'var', v6
+v8 <- LoadInteger '5'
+SetProperty v7, 'x', v8
+v9 <- LoadInteger '5'
+SetProperty v7, 'y', v9
+v10 <- BeginPlainFunction -> v11, v12
+    SetProperty v11, 'y', v12
+EndPlainFunction
+v13 <- LoadInteger '0'
+v14 <- CallFunction v10, [v7, v13]
+v15 <- LoadInteger '0'
+v16 <- CallFunction v10, [v1, v15]
+v17 <- LoadInteger '0'
+v18 <- CallFunction v10, [v7, v17]
+v19 <- LoadInteger '10'
+v20 <- CallFunction v10, [v1, v19]
+v21 <- LoadInteger '5'
+v22 <- GetProperty v1, 'x'
+v23 <- LoadInteger '10'
+v24 <- GetProperty v1, 'y'
+
+
+var o1 = {};
+function f2() {
+    return 10;
+}
+o1.f1 = f2;
+o1.x = 5;
+o1.y = 2;
+var o2 = {};
+o2.x = 5;
+o2.y = 5;
+function store(a11, a12) {
+    a11.y = a12;
+}
+store(o2, 0);
+store(o1, 0);
+store(o2, 0);
+store(o1, 10);
+o1.x;
+o1.y;
+
+FuzzIL program written to corpus/regress-polymorphic-store.fzil

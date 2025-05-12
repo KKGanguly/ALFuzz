@@ -1,0 +1,83 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'x', 'var', v0
+v2 <- LoadInteger '0'
+v3 <- CreateNamedVariable 'y', 'var', v2
+v4 <- BeginPlainFunction -> v5
+    v6 <- UnaryOperation v1, '++'
+    v7 <- CallFunction v5, []
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `then`, v4
+v8 <- EndObjectLiteral
+v9 <- CreateNamedVariable 'thenable', 'var', v8
+BeginForLoopInitializer
+    v10 <- LoadInteger '0'
+BeginForLoopCondition -> v11
+    v12 <- LoadInteger '3'
+    v13 <- Compare v11, '<', v12
+BeginForLoopAfterthought v13 -> v14
+    v15 <- UnaryOperation '++', v14
+BeginForLoopBody -> v16
+    v17 <- BeginPlainFunction -> 
+        v18 <- UnaryOperation v1, '++'
+        v19 <- UnaryOperation v3, '++'
+    EndPlainFunction
+    v20 <- CreateNamedVariable 'Promise', 'none'
+    v21 <- CallMethod v20, 'resolve', [v9]
+    v22 <- CallMethod v21, 'then', [v17]
+EndForLoop
+v23 <- LoadInteger '0'
+v24 <- BeginPlainFunction -> 
+    v25 <- BeginPlainFunction -> v26
+        v27 <- LoadString 'FAILURE: '
+        v28 <- BinaryOperation v27, '+', v26
+        v29 <- CreateNamedVariable 'print', 'none'
+        v30 <- CallFunction v29, [v28]
+    EndPlainFunction
+    v31 <- BeginPlainFunction -> 
+        v32 <- LoadInteger '3'
+        v33 <- Compare v3, '<', v32
+        BeginIf v33
+            v34 <- CreateNamedVariable 'check', 'none'
+            v35 <- CallFunction v34, []
+        BeginElse
+            v36 <- LoadInteger '6'
+        EndIf
+    EndPlainFunction
+    v37 <- CreateNamedVariable 'Promise', 'none'
+    v38 <- CallMethod v37, 'resolve', []
+    v39 <- CallMethod v38, 'then', [v31]
+    v40 <- CallMethod v39, 'catch', [v25]
+EndPlainFunction
+v41 <- CallFunction v24, []
+
+
+var x = 0;
+var y = 0;
+function f4(a5) {
+    x++;
+    a5();
+}
+var thenable = { then: f4 };
+for (let i11 = 0; i11 < 3; ++i11) {
+    function f17() {
+        x++;
+        y++;
+    }
+    Promise.resolve(thenable).then(f17);
+}
+function check() {
+    function f25(a26) {
+        print("FAILURE: " + a26);
+    }
+    function f31() {
+        if (y < 3) {
+            check();
+        } else {
+        }
+    }
+    Promise.resolve().then(f31).catch(f25);
+}
+check();
+
+FuzzIL program written to corpus/regress-cr372788.fzil

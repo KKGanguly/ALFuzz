@@ -1,0 +1,78 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '170'
+    v2 <- CreateNamedVariable 'strNum', 'var', v1
+    v3 <- LoadInteger '16'
+    v4 <- BinaryOperation v2, '/', v3
+    v5 <- CreateNamedVariable 'base', 'var', v4
+    v6 <- LoadInteger '16'
+    v7 <- BinaryOperation v2, '%', v6
+    v8 <- CreateNamedVariable 'rem', 'var', v7
+    v9 <- LoadInteger '16'
+    v10 <- BinaryOperation v8, '/', v9
+    v11 <- BinaryOperation v5, '-', v10
+    v12 <- CreateNamedVariable 'base', 'var', v11
+    v13 <- LoadInteger '10'
+    v14 <- LoadInteger '11'
+    v15 <- LoadInteger '12'
+    v16 <- LoadInteger '13'
+    v17 <- LoadInteger '14'
+    v18 <- LoadInteger '15'
+    BeginSwitch v12
+        BeginSwitchCase v13
+            v19 <- LoadString 'A'
+            Return v19
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v14
+            v20 <- LoadString 'B'
+            Return v20
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v15
+            v21 <- LoadString 'C'
+            Return v21
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v16
+            v22 <- LoadString 'D'
+            Return v22
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v17
+            v23 <- LoadString 'E'
+            Return v23
+        EndSwitchCase fallsThrough
+        BeginSwitchCase v18
+            v24 <- LoadString 'F'
+            Return v24
+        EndSwitchCase fallsThrough
+    EndSwitch
+    v25 <- LoadString 'case 10'
+    v26 <- LoadString 'Default case'
+    v27 <- LoadString 'Heap number not recognized as Smi value'
+    v28 <- CreateNamedVariable 'fail', 'none'
+    v29 <- CallFunction v28, [v25, v26, v27]
+EndPlainFunction
+v30 <- CallFunction v0, []
+
+
+function f0() {
+    var strNum = 170;
+    var base = strNum / 16;
+    var rem = strNum % 16;
+    var base = base - (rem / 16);
+    switch (base) {
+        case 10:
+            return "A";
+        case 11:
+            return "B";
+        case 12:
+            return "C";
+        case 13:
+            return "D";
+        case 14:
+            return "E";
+        case 15:
+            return "F";
+    }
+    fail("case 10", "Default case", "Heap number not recognized as Smi value");
+}
+f0();
+
+FuzzIL program written to corpus/regress-137.fzil

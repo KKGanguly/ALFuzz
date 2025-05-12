@@ -1,0 +1,26 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Set', 'none'
+    v2 <- Construct v1, []
+    v3 <- CallMethod v2, 'values', []
+    v4 <- CreateNamedVariable 'a', 'var', v3
+    v5 <- LoadUndefined
+    SetProperty v4, 'outOfObjectProperty', v5
+    v6 <- UnaryOperation '!', v4
+    Return v6
+EndPlainFunction
+v7 <- CallFunction v0, []
+v8 <- CallFunction v0, []
+v9 <- CallFunction v0, []
+
+
+function f() {
+    const v2 = new Set();
+    var a = v2.values();
+    a.outOfObjectProperty = undefined;
+    return !a;
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-774824.fzil

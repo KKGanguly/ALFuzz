@@ -1,0 +1,29 @@
+v0 <- LoadString 'a'
+v1 <- CreateNamedVariable 'foo', 'var', v0
+BeginForLoopInitializer
+    v2 <- LoadInteger '0'
+BeginForLoopCondition -> v3
+    v4 <- LoadInteger '12'
+    v5 <- Compare v3, '<', v4
+BeginForLoopAfterthought v5 -> v6
+    v7 <- UnaryOperation v6, '++'
+BeginForLoopBody -> v8
+    Update v1, '+', v1
+EndForLoop
+v9 <- LoadString 'b'
+v10 <- BinaryOperation v1, '+', v9
+v11 <- BinaryOperation v10, '+', v1
+Reassign v1, v11
+v12 <- LoadRegExp 'b' ''
+v13 <- LoadString 'a'
+v14 <- CallMethod v1, 'replace', [v12, v13]
+
+
+var foo = "a";
+for (let i3 = 0; i3 < 12; i3++) {
+    foo += foo;
+}
+foo = (foo + "b") + foo;
+foo.replace(/b/, "a");
+
+FuzzIL program written to corpus/regress-2289.fzil

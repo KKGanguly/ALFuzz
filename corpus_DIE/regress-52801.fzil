@@ -1,0 +1,54 @@
+v0 <- LoadRegExp 'a' 'g'
+v1 <- CreateNamedVariable 're', 'var', v0
+v2 <- LoadString 'bbbbabbbbabbbb'
+v3 <- CreateNamedVariable 'str', 'var', v2
+v4 <- CallMethod v1, 'test', [v3]
+v5 <- LoadInteger '5'
+v6 <- GetProperty v1, 'lastIndex'
+v7 <- LoadInteger '0'
+SetProperty v1, 'lastIndex', v7
+v8 <- CallMethod v1, 'test', [v3]
+v9 <- LoadInteger '5'
+v10 <- GetProperty v1, 'lastIndex'
+v11 <- LoadInteger '0'
+SetProperty v1, 'lastIndex', v11
+v12 <- CallMethod v1, 'test', [v3]
+v13 <- LoadInteger '5'
+v14 <- GetProperty v1, 'lastIndex'
+v15 <- LoadRegExp 'a' 'g'
+Reassign v1, v15
+v16 <- CallMethod v1, 'exec', [v3]
+v17 <- LoadInteger '5'
+v18 <- GetProperty v1, 'lastIndex'
+v19 <- LoadInteger '0'
+SetProperty v1, 'lastIndex', v19
+v20 <- CallMethod v1, 'exec', [v3]
+v21 <- LoadInteger '5'
+v22 <- GetProperty v1, 'lastIndex'
+v23 <- LoadInteger '0'
+SetProperty v1, 'lastIndex', v23
+v24 <- CallMethod v1, 'exec', [v3]
+v25 <- LoadInteger '5'
+v26 <- GetProperty v1, 'lastIndex'
+
+
+var re = /a/g;
+var str = "bbbbabbbbabbbb";
+re.test(str);
+re.lastIndex;
+re.lastIndex = 0;
+re.test(str);
+re.lastIndex;
+re.lastIndex = 0;
+re.test(str);
+re.lastIndex;
+(re = /a/g).exec(str);
+re.lastIndex;
+re.lastIndex = 0;
+re.exec(str);
+re.lastIndex;
+re.lastIndex = 0;
+re.exec(str);
+re.lastIndex;
+
+FuzzIL program written to corpus/regress-52801.fzil

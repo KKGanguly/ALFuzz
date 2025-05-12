@@ -1,0 +1,36 @@
+v0 <- CreateNamedVariable 'RegExp', 'none'
+v1 <- LoadString 'prototype'
+v2 <- CreateNamedVariable 'Object', 'none'
+v3 <- CallMethod v2, 'getOwnPropertyDescriptor', [v0, v1]
+v4 <- CreateNamedVariable 'proto_desc', 'var', v3
+v5 <- GetProperty v4, 'writable'
+v6 <- GetProperty v4, 'enumerable'
+v7 <- GetProperty v4, 'configurable'
+v8 <- GetProperty v4, 'value'
+v9 <- CreateNamedVariable 'proto', 'var', v8
+v10 <- TestInstanceOf v9, v0
+v11 <- LoadUndefined
+v12 <- LoadString 'valueOf'
+v13 <- CallMethod v2, 'getOwnPropertyDescriptor', [v9, v12]
+v14 <- GetProperty v9, 'valueOf'
+v15 <- GetProperty v2, 'prototype'
+v16 <- CallMethod v15, 'valueOf', []
+v17 <- LoadString 'constructor'
+v18 <- CallMethod v2, 'getOwnPropertyDescriptor', [v9, v17]
+v19 <- CreateNamedVariable 'proto_constr', 'var', v18
+v20 <- GetProperty v19, 'value'
+
+
+var proto_desc = Object.getOwnPropertyDescriptor(RegExp, "prototype");
+proto_desc.writable;
+proto_desc.enumerable;
+proto_desc.configurable;
+var proto = proto_desc.value;
+proto instanceof RegExp;
+Object.getOwnPropertyDescriptor(proto, "valueOf");
+proto.valueOf;
+Object.prototype.valueOf();
+var proto_constr = Object.getOwnPropertyDescriptor(proto, "constructor");
+proto_constr.value;
+
+FuzzIL program written to corpus/regexp-prototype.fzil

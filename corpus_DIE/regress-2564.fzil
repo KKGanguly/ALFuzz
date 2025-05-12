@@ -1,0 +1,339 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- CreateNamedVariable 'Error', 'none'
+    v2 <- Construct v1, []
+    ThrowException v2
+EndPlainFunction
+v3 <- BeginPlainFunction -> 
+    v4 <- CreateNamedVariable 'o', 'none'
+    v5 <- LoadInteger '0'
+    v6 <- CallComputedMethod v4, v5, []
+EndPlainFunction
+v7 <- BeginPlainFunction -> 
+    v8 <- CreateNamedVariable 'o', 'none'
+    v9 <- LoadInteger '1'
+    v10 <- CallComputedMethod v8, v9, []
+EndPlainFunction
+v11 <- BeginPlainFunction -> 
+    v12 <- CreateNamedVariable 'o', 'none'
+    v13 <- LoadInteger '2'
+    v14 <- CallComputedMethod v12, v13, []
+EndPlainFunction
+v15 <- CreateArray [v0, v3, v7, v11]
+v16 <- CreateNamedVariable 'o', 'var', v15
+v17 <- BeginPlainFunction -> v18, v19
+    v20 <- LoadUndefined
+    v21 <- CreateNamedVariable 'Error', 'none'
+    SetProperty v21, 'prepareStackTrace', v20
+    BeginTry
+        v22 <- LoadInteger '5'
+        v23 <- GetProperty v19, 'length'
+        BeginForLoopInitializer
+            v24 <- LoadInteger '0'
+        BeginForLoopCondition -> v25
+            v26 <- GetProperty v19, 'length'
+            v27 <- LoadInteger '1'
+            v28 <- BinaryOperation v26, '-', v27
+            v29 <- Compare v25, '<', v28
+        BeginForLoopAfterthought v29 -> v30
+            v31 <- UnaryOperation v30, '++'
+        BeginForLoopBody -> v32
+            v33 <- GetComputedProperty v16, v32
+            v34 <- GetComputedProperty v19, v32
+            v35 <- CallMethod v34, 'getFunction', []
+            v36 <- GetComputedProperty v19, v32
+            v37 <- CallMethod v36, 'getThis', []
+            v38 <- LoadUndefined
+            v39 <- GetComputedProperty v19, v32
+            v40 <- GetProperty v39, 'receiver'
+            v41 <- LoadUndefined
+            v42 <- GetComputedProperty v19, v32
+            v43 <- GetProperty v42, 'fun'
+            v44 <- LoadUndefined
+            v45 <- GetComputedProperty v19, v32
+            v46 <- GetProperty v45, 'pos'
+        EndForLoop
+        v47 <- LoadString 'success'
+        Return v47
+    BeginCatch -> v48
+        v49 <- LoadString 'fail'
+        Return v49
+    EndTryCatch
+EndPlainFunction
+v50 <- CreateNamedVariable 'Error', 'none'
+SetProperty v50, 'prepareStackTrace', v17
+BeginTry
+    v51 <- LoadInteger '3'
+    v52 <- CallComputedMethod v16, v51, []
+BeginCatch -> v53
+    v54 <- LoadString 'success'
+    v55 <- GetProperty v53, 'stack'
+EndTryCatch
+v56 <- BeginPlainFunction -> 
+    v57 <- Construct v50, []
+    ThrowException v57
+EndPlainFunction
+v58 <- BeginPlainFunction -> 
+    v59 <- LoadInteger '0'
+    v60 <- CallComputedMethod v16, v59, []
+EndPlainFunction
+v61 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v62 <- LoadInteger '1'
+    v63 <- CallComputedMethod v16, v62, []
+EndPlainFunction
+v64 <- BeginPlainFunction -> 
+    v65 <- LoadInteger '2'
+    v66 <- CallComputedMethod v16, v65, []
+EndPlainFunction
+v67 <- CreateArray [v56, v58, v61, v64]
+v68 <- CreateNamedVariable 'o', 'var', v67
+v69 <- BeginPlainFunction -> v70, v71
+    v72 <- LoadUndefined
+    SetProperty v50, 'prepareStackTrace', v72
+    BeginTry
+        v73 <- LoadInteger '5'
+        v74 <- GetProperty v71, 'length'
+        BeginForLoopInitializer
+            v75 <- LoadInteger '0'
+        BeginForLoopCondition -> v76
+            v77 <- LoadInteger '2'
+            v78 <- Compare v76, '<', v77
+        BeginForLoopAfterthought v78 -> v79
+            v80 <- UnaryOperation v79, '++'
+        BeginForLoopBody -> v81
+            v82 <- GetComputedProperty v68, v81
+            v83 <- GetComputedProperty v71, v81
+            v84 <- CallMethod v83, 'getFunction', []
+            v85 <- GetComputedProperty v71, v81
+            v86 <- CallMethod v85, 'getThis', []
+        EndForLoop
+        BeginForLoopInitializer
+            v87 <- LoadInteger '2'
+        BeginForLoopCondition -> v88
+            v89 <- GetProperty v71, 'length'
+            v90 <- Compare v88, '<', v89
+        BeginForLoopAfterthought v90 -> v91
+            v92 <- UnaryOperation v91, '++'
+        BeginForLoopBody -> v93
+            v94 <- LoadUndefined
+            v95 <- GetComputedProperty v71, v93
+            v96 <- CallMethod v95, 'getFunction', []
+            v97 <- LoadUndefined
+            v98 <- GetComputedProperty v71, v93
+            v99 <- CallMethod v98, 'getThis', []
+        EndForLoop
+        BeginForLoopInitializer
+            v100 <- LoadInteger '0'
+        BeginForLoopCondition -> v101
+            v102 <- GetProperty v71, 'length'
+            v103 <- LoadInteger '1'
+            v104 <- BinaryOperation v102, '-', v103
+            v105 <- Compare v101, '<', v104
+        BeginForLoopAfterthought v105 -> v106
+            v107 <- UnaryOperation v106, '++'
+        BeginForLoopBody -> v108
+            v109 <- LoadString 'f'
+            v110 <- BinaryOperation v109, '+', v108
+            v111 <- GetComputedProperty v71, v108
+            v112 <- CallMethod v111, 'getFunctionName', []
+        EndForLoop
+        v113 <- LoadString 'success'
+        Return v113
+    BeginCatch -> v114
+        Return v114
+    EndTryCatch
+EndPlainFunction
+SetProperty v50, 'prepareStackTrace', v69
+BeginTry
+    v115 <- LoadInteger '3'
+    v116 <- CallComputedMethod v68, v115, []
+BeginCatch -> v117
+    v118 <- LoadString 'success'
+    v119 <- GetProperty v117, 'stack'
+EndTryCatch
+v120 <- BeginPlainFunction -> 
+    Directive 'use strict'
+    v121 <- Construct v50, []
+    ThrowException v121
+EndPlainFunction
+v122 <- BeginPlainFunction -> 
+    v123 <- LoadInteger '0'
+    v124 <- CallComputedMethod v68, v123, []
+EndPlainFunction
+v125 <- BeginPlainFunction -> 
+    v126 <- LoadInteger '1'
+    v127 <- CallComputedMethod v68, v126, []
+EndPlainFunction
+v128 <- BeginPlainFunction -> 
+    v129 <- LoadInteger '2'
+    v130 <- CallComputedMethod v68, v129, []
+EndPlainFunction
+v131 <- CreateArray [v120, v122, v125, v128]
+v132 <- CreateNamedVariable 'o', 'var', v131
+v133 <- BeginPlainFunction -> v134, v135
+    v136 <- LoadUndefined
+    SetProperty v50, 'prepareStackTrace', v136
+    BeginTry
+        v137 <- LoadInteger '5'
+        v138 <- GetProperty v135, 'length'
+        BeginForLoopInitializer
+            v139 <- LoadInteger '0'
+        BeginForLoopCondition -> v140
+            v141 <- GetProperty v135, 'length'
+            v142 <- Compare v140, '<', v141
+        BeginForLoopAfterthought v142 -> v143
+            v144 <- UnaryOperation v143, '++'
+        BeginForLoopBody -> v145
+            v146 <- LoadUndefined
+            v147 <- GetComputedProperty v135, v145
+            v148 <- CallMethod v147, 'getFunction', []
+            v149 <- LoadUndefined
+            v150 <- GetComputedProperty v135, v145
+            v151 <- CallMethod v150, 'getThis', []
+            v152 <- GetProperty v135, 'length'
+            v153 <- LoadInteger '1'
+            v154 <- BinaryOperation v152, '-', v153
+            v155 <- Compare v145, '<', v154
+            BeginIf v155
+                v156 <- LoadString 'f'
+                v157 <- BinaryOperation v156, '+', v145
+                v158 <- GetComputedProperty v135, v145
+                v159 <- CallMethod v158, 'getFunctionName', []
+            EndIf
+        EndForLoop
+        v160 <- LoadString 'success'
+        Return v160
+    BeginCatch -> v161
+        Return v161
+    EndTryCatch
+EndPlainFunction
+SetProperty v50, 'prepareStackTrace', v133
+BeginTry
+    v162 <- LoadInteger '3'
+    v163 <- CallComputedMethod v132, v162, []
+BeginCatch -> v164
+    v165 <- LoadString 'success'
+    v166 <- GetProperty v164, 'stack'
+EndTryCatch
+
+
+function f0() {
+    const v2 = new Error();
+    throw v2;
+}
+function f1() {
+    o[0]();
+}
+function f2() {
+    o[1]();
+}
+function f3() {
+    o[2]();
+}
+var o = [f0,f1,f2,f3];
+function f17(a18, a19) {
+    Error.prepareStackTrace = undefined;
+    try {
+        a19.length;
+        for (let i25 = 0; i25 < (a19.length - 1); i25++) {
+            o[i25];
+            a19[i25].getFunction();
+            a19[i25].getThis();
+            a19[i25].receiver;
+            a19[i25].fun;
+            a19[i25].pos;
+        }
+        return "success";
+    } catch(e48) {
+        return "fail";
+    }
+}
+Error.prepareStackTrace = f17;
+try {
+    o[3]();
+} catch(e53) {
+    e53.stack;
+}
+function f0() {
+    const v57 = new Error();
+    throw v57;
+}
+function f1() {
+    o[0]();
+}
+function f2() {
+    'use strict';
+    o[1]();
+}
+function f3() {
+    o[2]();
+}
+var o = [f0,f1,f2,f3];
+function f69(a70, a71) {
+    Error.prepareStackTrace = undefined;
+    try {
+        a71.length;
+        for (let i76 = 0; i76 < 2; i76++) {
+            o[i76];
+            a71[i76].getFunction();
+            a71[i76].getThis();
+        }
+        for (let i88 = 2; i88 < a71.length; i88++) {
+            a71[i88].getFunction();
+            a71[i88].getThis();
+        }
+        for (let i101 = 0; i101 < (a71.length - 1); i101++) {
+            "f" + i101;
+            a71[i101].getFunctionName();
+        }
+        return "success";
+    } catch(e114) {
+        return e114;
+    }
+}
+Error.prepareStackTrace = f69;
+try {
+    o[3]();
+} catch(e117) {
+    e117.stack;
+}
+function f0() {
+    'use strict';
+    const v121 = new Error();
+    throw v121;
+}
+function f1() {
+    o[0]();
+}
+function f2() {
+    o[1]();
+}
+function f3() {
+    o[2]();
+}
+var o = [f0,f1,f2,f3];
+function f133(a134, a135) {
+    Error.prepareStackTrace = undefined;
+    try {
+        a135.length;
+        for (let i140 = 0; i140 < a135.length; i140++) {
+            a135[i140].getFunction();
+            a135[i140].getThis();
+            if (i140 < (a135.length - 1)) {
+                "f" + i140;
+                a135[i140].getFunctionName();
+            }
+        }
+        return "success";
+    } catch(e161) {
+        return e161;
+    }
+}
+Error.prepareStackTrace = f133;
+try {
+    o[3]();
+} catch(e164) {
+    e164.stack;
+}
+
+FuzzIL program written to corpus/regress-2564.fzil

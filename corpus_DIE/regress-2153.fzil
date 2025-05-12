@@ -1,0 +1,28 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'o', 'var', v0
+v2 <- LoadString 'foo'
+v3 <- BeginPlainFunction -> 
+    v4 <- LoadNull
+    Return v4
+EndPlainFunction
+v5 <- CallMethod v1, '__defineGetter__', [v2, v3]
+BeginObjectLiteral
+v6 <- EndObjectLiteral
+v7 <- CreateNamedVariable 'o', 'var', v6
+v8 <- LoadInteger '42'
+SetProperty v7, 'foo', v8
+v9 <- LoadInteger '42'
+v10 <- GetProperty v7, 'foo'
+
+
+var o = {};
+function f3() {
+    return null;
+}
+o.__defineGetter__("foo", f3);
+var o = {};
+o.foo = 42;
+o.foo;
+
+FuzzIL program written to corpus/regress-2153.fzil

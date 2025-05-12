@@ -1,0 +1,55 @@
+v0 <- BeginPlainFunction -> v1
+    BeginWhileLoopHeader
+        v2 <- LoadInteger '0'
+        v3 <- Compare v1, '>', v2
+    BeginWhileLoopBody v3
+        v4 <- UnaryOperation v1, '--'
+    EndWhileLoop
+    Return v1
+EndPlainFunction
+v5 <- LoadInteger '0'
+v6 <- LoadInteger '1'
+v7 <- CallFunction v0, [v6]
+v8 <- LoadInteger '0'
+v9 <- LoadInteger '200000'
+v10 <- CallFunction v0, [v9]
+v11 <- BeginPlainFunction -> v12
+    v13 <- LoadInteger '1'
+    v14 <- CreateNamedVariable 'sum', 'var', v13
+    BeginWhileLoopHeader
+        v15 <- LoadInteger '0'
+        v16 <- Compare v12, '>', v15
+    BeginWhileLoopBody v16
+        v17 <- UnaryOperation v12, '--'
+        v18 <- UnaryOperation v14, '++'
+    EndWhileLoop
+    Return v14
+EndPlainFunction
+v19 <- LoadInteger '2'
+v20 <- LoadInteger '1'
+v21 <- CallFunction v11, [v20]
+v22 <- LoadInteger '200001'
+v23 <- LoadInteger '200000'
+v24 <- CallFunction v11, [v23]
+
+
+function f1(a1) {
+    while (a1 > 0) {
+        a1--;
+    }
+    return a1;
+}
+f1(1);
+f1(200000);
+function f2(a12) {
+    var sum = 1;
+    while (a12 > 0) {
+        a12--;
+        sum++;
+    }
+    return sum;
+}
+f2(1);
+f2(200000);
+
+FuzzIL program written to corpus/osr-warm.fzil

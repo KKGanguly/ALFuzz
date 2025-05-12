@@ -1,0 +1,28 @@
+v0 <- BeginPlainFunction -> v1, v2
+EndPlainFunction
+v3 <- CallFunction v0, []
+v4 <- GetProperty v0, 'arguments'
+v5 <- CreateNamedVariable 'oldArgs', 'var', v4
+v6 <- CallFunction v0, []
+v7 <- GetProperty v0, 'arguments'
+v8 <- CreateNamedVariable 'newArgs', 'var', v7
+v9 <- Compare v5, '!==', v8
+SetProperty v0, 'arguments', v5
+v10 <- GetProperty v0, 'arguments'
+v11 <- DeleteProperty v0, 'arguments'
+v12 <- GetProperty v0, 'arguments'
+
+
+function Foo(a1, a2) {
+}
+Foo();
+var oldArgs = Foo.arguments;
+Foo();
+var newArgs = Foo.arguments;
+oldArgs !== newArgs;
+Foo.arguments = oldArgs;
+Foo.arguments;
+delete Foo.arguments;
+Foo.arguments;
+
+FuzzIL program written to corpus/bug-222.fzil

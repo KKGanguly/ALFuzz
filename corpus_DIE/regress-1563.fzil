@@ -1,0 +1,33 @@
+v0 <- CreateNamedVariable 'Uint8ClampedArray', 'none'
+v1 <- LoadInteger '10'
+v2 <- Construct v0, [v1]
+v3 <- CreateNamedVariable 'obj', 'none'
+Reassign v3, v2
+v4 <- BeginPlainFunction -> v5, v6
+    SetElement v5, '0', v6
+EndPlainFunction
+v7 <- CreateNamedVariable 'obj', 'none'
+v8 <- LoadFloat '1.5'
+v9 <- CallFunction v4, [v7, v8]
+v10 <- CreateNamedVariable 'NaN', 'none'
+v11 <- CallFunction v4, [v7, v10]
+v12 <- LoadUndefined
+v13 <- CallFunction v4, [v7, v12]
+v14 <- LoadUndefined
+v15 <- CallFunction v4, [v7, v14]
+v16 <- LoadInteger '0'
+v17 <- GetElement v7, '0'
+
+
+const v2 = new Uint8ClampedArray(10);
+obj = v2;
+function set_pixel(a5, a6) {
+    a5[0] = a6;
+}
+set_pixel(obj, 1.5);
+set_pixel(obj, NaN);
+set_pixel(obj, undefined);
+set_pixel(obj, undefined);
+obj[0];
+
+FuzzIL program written to corpus/regress-1563.fzil

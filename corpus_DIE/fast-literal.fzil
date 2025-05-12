@@ -1,0 +1,42 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadInteger '2'
+    v3 <- LoadInteger '3'
+    v4 <- CreateArray [v1, v2, v3]
+    v5 <- LoadFloat '1.1'
+    v6 <- LoadFloat '1.2'
+    v7 <- LoadFloat '1.3'
+    v8 <- CreateArray [v5, v6, v7]
+    v9 <- CreateArray []
+    v10 <- CreateArray []
+    v11 <- CreateArray []
+    v12 <- CreateArray [v9, v10, v11]
+    v13 <- CreateArray [v4, v8, v12]
+    Return v13
+EndPlainFunction
+v14 <- CallFunction v0, []
+v15 <- CallFunction v0, []
+v16 <- CallFunction v0, []
+BeginForLoopInitializer
+    v17 <- LoadInteger '0'
+BeginForLoopCondition -> v18
+    v19 <- LoadInteger '50'
+    v20 <- Compare v18, '<', v19
+BeginForLoopAfterthought v20 -> v21
+    v22 <- UnaryOperation v21, '++'
+BeginForLoopBody -> v23
+    v24 <- CallFunction v0, []
+EndForLoop
+
+
+function f() {
+    return [[1,2,3],[1.1,1.2,1.3],[[],[],[]]];
+}
+f();
+f();
+f();
+for (let i18 = 0; i18 < 50; i18++) {
+    f();
+}
+
+FuzzIL program written to corpus/fast-literal.fzil

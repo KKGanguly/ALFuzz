@@ -1,0 +1,87 @@
+BeginObjectLiteral
+v0 <- EndObjectLiteral
+v1 <- CreateNamedVariable 'handler', 'var', v0
+v2 <- LoadInteger '1'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'target', 'var', v3
+v5 <- CreateNamedVariable 'Proxy', 'none'
+v6 <- Construct v5, [v4, v1]
+v7 <- CreateNamedVariable 'proxy', 'var', v6
+v8 <- LoadString 'a'
+v9 <- CallMethod v4, 'propertyIsEnumerable', [v8]
+v10 <- LoadString 'a'
+v11 <- CallMethod v7, 'propertyIsEnumerable', [v10]
+v12 <- LoadString 'b'
+v13 <- CallMethod v4, 'propertyIsEnumerable', [v12]
+v14 <- LoadString 'b'
+v15 <- CallMethod v7, 'propertyIsEnumerable', [v14]
+v16 <- BeginPlainFunction -> v17, v18
+    v19 <- LoadBoolean 'true'
+    v20 <- LoadBoolean 'true'
+    v21 <- LoadInteger '10'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `configurable`, v19
+        ObjectLiteralAddProperty `enumerable`, v20
+        ObjectLiteralAddProperty `value`, v21
+    v22 <- EndObjectLiteral
+    Return v22
+EndPlainFunction
+SetProperty v1, 'getOwnPropertyDescriptor', v16
+v23 <- LoadString 'a'
+v24 <- CallMethod v4, 'propertyIsEnumerable', [v23]
+v25 <- LoadString 'a'
+v26 <- CallMethod v7, 'propertyIsEnumerable', [v25]
+v27 <- LoadString 'b'
+v28 <- CallMethod v4, 'propertyIsEnumerable', [v27]
+v29 <- LoadString 'b'
+v30 <- CallMethod v7, 'propertyIsEnumerable', [v29]
+v31 <- BeginPlainFunction -> v32, v33
+    v34 <- LoadBoolean 'true'
+    v35 <- LoadBoolean 'false'
+    v36 <- LoadInteger '10'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `configurable`, v34
+        ObjectLiteralAddProperty `enumerable`, v35
+        ObjectLiteralAddProperty `value`, v36
+    v37 <- EndObjectLiteral
+    Return v37
+EndPlainFunction
+SetProperty v1, 'getOwnPropertyDescriptor', v31
+v38 <- LoadString 'a'
+v39 <- CallMethod v4, 'propertyIsEnumerable', [v38]
+v40 <- LoadString 'a'
+v41 <- CallMethod v7, 'propertyIsEnumerable', [v40]
+v42 <- LoadString 'b'
+v43 <- CallMethod v4, 'propertyIsEnumerable', [v42]
+v44 <- LoadString 'b'
+v45 <- CallMethod v7, 'propertyIsEnumerable', [v44]
+
+
+var handler = {};
+var target = { a: 1 };
+const v6 = new Proxy(target, handler);
+var proxy = v6;
+target.propertyIsEnumerable("a");
+proxy.propertyIsEnumerable("a");
+target.propertyIsEnumerable("b");
+proxy.propertyIsEnumerable("b");
+function f16(a17, a18) {
+    return { configurable: true, enumerable: true, value: 10 };
+}
+handler.getOwnPropertyDescriptor = f16;
+target.propertyIsEnumerable("a");
+proxy.propertyIsEnumerable("a");
+target.propertyIsEnumerable("b");
+proxy.propertyIsEnumerable("b");
+function f31(a32, a33) {
+    return { configurable: true, enumerable: false, value: 10 };
+}
+handler.getOwnPropertyDescriptor = f31;
+target.propertyIsEnumerable("a");
+proxy.propertyIsEnumerable("a");
+target.propertyIsEnumerable("b");
+proxy.propertyIsEnumerable("b");
+
+FuzzIL program written to corpus/proxies-property-is-enumerable.fzil

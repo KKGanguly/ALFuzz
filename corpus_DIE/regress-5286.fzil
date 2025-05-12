@@ -1,0 +1,130 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> v2, v3
+        v4 <- BinaryOperation v2, '%', v3
+        Return v4
+    EndPlainFunction
+    v5 <- LoadInteger '0'
+    v6 <- LoadInteger '2'
+    v7 <- LoadInteger '2'
+    v8 <- CallFunction v1, [v6, v7]
+    v9 <- LoadInteger '0'
+    v10 <- LoadInteger '4'
+    v11 <- LoadInteger '4'
+    v12 <- CallFunction v1, [v10, v11]
+    v13 <- LoadInteger '0'
+    v14 <- UnaryOperation '-', v13
+    v15 <- LoadInteger '8'
+    v16 <- UnaryOperation '-', v15
+    v17 <- LoadInteger '8'
+    v18 <- CallFunction v1, [v16, v17]
+EndPlainFunction
+v19 <- CallFunction v0, []
+v20 <- BeginPlainFunction -> 
+    v21 <- BeginPlainFunction -> v22, v23
+        v24 <- BinaryOperation v22, '%', v23
+        Return v24
+    EndPlainFunction
+    v25 <- LoadInteger '0'
+    v26 <- LoadInteger '1'
+    v27 <- LoadInteger '1'
+    v28 <- CallFunction v21, [v26, v27]
+    v29 <- LoadInteger '0'
+    v30 <- LoadInteger '2'
+    v31 <- LoadInteger '2'
+    v32 <- CallFunction v21, [v30, v31]
+    v33 <- LoadInteger '0'
+    v34 <- UnaryOperation '-', v33
+    v35 <- LoadInteger '3'
+    v36 <- UnaryOperation '-', v35
+    v37 <- LoadInteger '3'
+    v38 <- CallFunction v21, [v36, v37]
+EndPlainFunction
+v39 <- CallFunction v20, []
+v40 <- BeginPlainFunction -> 
+    v41 <- BeginPlainFunction -> v42, v43
+        v44 <- BinaryOperation v42, '%', v43
+        Return v44
+    EndPlainFunction
+    v45 <- LoadInteger '0'
+    v46 <- LoadInteger '1'
+    v47 <- LoadInteger '1'
+    v48 <- CallFunction v41, [v46, v47]
+    v49 <- LoadInteger '0'
+    v50 <- LoadInteger '2'
+    v51 <- LoadInteger '2'
+    v52 <- CallFunction v41, [v50, v51]
+    v53 <- LoadInteger '0'
+    v54 <- UnaryOperation '-', v53
+    v55 <- LoadInteger '2147483648'
+    v56 <- UnaryOperation '-', v55
+    v57 <- LoadInteger '1'
+    v58 <- UnaryOperation '-', v57
+    v59 <- CallFunction v41, [v56, v58]
+EndPlainFunction
+v60 <- CallFunction v40, []
+v61 <- BeginPlainFunction -> 
+    v62 <- BeginPlainFunction -> v63, v64
+        v65 <- BinaryOperation v63, '%', v64
+        Return v65
+    EndPlainFunction
+    v66 <- LoadInteger '0'
+    v67 <- LoadInteger '1'
+    v68 <- LoadInteger '1'
+    v69 <- CallFunction v62, [v67, v68]
+    v70 <- LoadInteger '0'
+    v71 <- LoadInteger '2'
+    v72 <- LoadInteger '2'
+    v73 <- CallFunction v62, [v71, v72]
+    v74 <- LoadInteger '0'
+    v75 <- UnaryOperation '-', v74
+    v76 <- LoadInteger '2147483648'
+    v77 <- UnaryOperation '-', v76
+    v78 <- LoadInteger '2147483648'
+    v79 <- UnaryOperation '-', v78
+    v80 <- CallFunction v62, [v77, v79]
+EndPlainFunction
+v81 <- CallFunction v61, []
+
+
+function f0() {
+    function foo(a2, a3) {
+        return a2 % a3;
+    }
+    foo(2, 2);
+    foo(4, 4);
+    -0;
+    foo(-8, 8);
+}
+f0();
+function f20() {
+    function foo(a22, a23) {
+        return a22 % a23;
+    }
+    foo(1, 1);
+    foo(2, 2);
+    -0;
+    foo(-3, 3);
+}
+f20();
+function f40() {
+    function foo(a42, a43) {
+        return a42 % a43;
+    }
+    foo(1, 1);
+    foo(2, 2);
+    -0;
+    foo(-2147483648, -1);
+}
+f40();
+function f61() {
+    function foo(a63, a64) {
+        return a63 % a64;
+    }
+    foo(1, 1);
+    foo(2, 2);
+    -0;
+    foo(-2147483648, -2147483648);
+}
+f61();
+
+FuzzIL program written to corpus/regress-5286.fzil

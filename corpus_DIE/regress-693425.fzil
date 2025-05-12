@@ -1,0 +1,25 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'g', 'var', v0
+v2 <- UnaryOperation v1, '++'
+v3 <- CreateNamedVariable 'Float32Array', 'none'
+v4 <- Construct v3, []
+v5 <- CreateNamedVariable 'f32', 'var', v4
+v6 <- BeginPlainFunction -> 
+    v7 <- LoadInteger '0'
+    v8 <- LoadInteger '2'
+    v9 <- BinaryOperation v7, '>>', v8
+    SetComputedProperty v5, v9, v1
+EndPlainFunction
+v10 <- CallFunction v6, []
+
+
+var g = 0;
+g++;
+const v4 = new Float32Array();
+var f32 = v4;
+function foo() {
+    f32[0 >> 2] = g;
+}
+foo();
+
+FuzzIL program written to corpus/regress-693425.fzil

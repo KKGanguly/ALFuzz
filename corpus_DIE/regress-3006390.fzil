@@ -1,0 +1,32 @@
+v0 <- BeginPlainFunction -> 
+EndPlainFunction
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadInteger '7'
+    Return v2
+EndPlainFunction
+v3 <- GetProperty v0, 'prototype'
+SetProperty v3, 'valueOf', v1
+v4 <- BeginPlainFunction -> v5, v6
+    v7 <- BinaryOperation v5, '%', v6
+    Return v7
+EndPlainFunction
+v8 <- LoadInteger '1'
+v9 <- LoadInteger '8'
+v10 <- Construct v0, []
+v11 <- CallFunction v4, [v9, v10]
+
+
+function X() {
+}
+function f1() {
+    return 7;
+}
+const t5 = X.prototype;
+t5.valueOf = f1;
+function f(a5, a6) {
+    return a5 % a6;
+}
+const v10 = new X();
+f(8, v10);
+
+FuzzIL program written to corpus/regress-3006390.fzil

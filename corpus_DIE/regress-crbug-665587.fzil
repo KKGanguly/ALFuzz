@@ -1,0 +1,45 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadThis
+    SetElement v2, '0', v1
+EndPlainFunction
+v3 <- Construct v0, []
+v4 <- CreateNamedVariable 'a', 'var', v3
+v5 <- BeginPlainFunction -> 
+    BeginForLoopInitializer
+        v6 <- LoadInteger '0'
+    BeginForLoopCondition -> v7
+        v8 <- LoadInteger '4'
+        v9 <- Compare v7, '<', v8
+    BeginForLoopAfterthought v9 -> v10
+        v11 <- UnaryOperation '++', v10
+    BeginForLoopBody -> v12
+        v13 <- GetElement v4, '0'
+        v14 <- CreateNamedVariable 'x', 'var', v13
+        v15 <- BeginPlainFunction -> 
+            Return v14
+        EndPlainFunction
+        v16 <- CreateNamedVariable 'gc', 'none'
+        v17 <- CallFunction v16, []
+    EndForLoop
+EndPlainFunction
+v18 <- CallFunction v5, []
+
+
+function f0() {
+    this[0] = 1;
+}
+const v3 = new f0();
+var a = v3;
+function f() {
+    for (let i7 = 0; i7 < 4; ++i7) {
+        var x = a[0];
+        function f15() {
+            return x;
+        }
+        gc();
+    }
+}
+f();
+
+FuzzIL program written to corpus/regress-crbug-665587.fzil

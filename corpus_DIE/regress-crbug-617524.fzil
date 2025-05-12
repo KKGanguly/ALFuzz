@@ -1,0 +1,51 @@
+v0 <- BeginPlainFunction -> v1, v2, v3
+    SetProperty v1, 'a', v2
+    SetElement v1, '1', v3
+    Return v1
+EndPlainFunction
+v4 <- CreateNamedVariable 'Array', 'none'
+v5 <- LoadInteger '5'
+v6 <- Construct v4, [v5]
+v7 <- LoadFloat '0.5'
+v8 <- LoadInteger '0'
+v9 <- CallFunction v0, [v6, v7, v8]
+v10 <- LoadInteger '5'
+v11 <- Construct v4, [v10]
+v12 <- LoadInteger '0'
+v13 <- LoadFloat '0.5'
+v14 <- CallFunction v0, [v11, v12, v13]
+v15 <- CreateNamedVariable 'o1', 'var', v14
+v16 <- CreateNamedVariable 'gc', 'none'
+v17 <- CallFunction v16, []
+v18 <- LoadInteger '5'
+v19 <- Construct v4, [v18]
+v20 <- LoadInteger '0'
+v21 <- LoadInteger '0'
+v22 <- CallFunction v0, [v19, v20, v21]
+v23 <- CreateNamedVariable 'o2', 'var', v22
+v24 <- LoadInteger '5'
+v25 <- Construct v4, [v24]
+v26 <- LoadInteger '0'
+v27 <- CallFunction v0, [v25, v26]
+v28 <- CreateNamedVariable 'o3', 'var', v27
+v29 <- LoadInteger '0'
+v30 <- GetProperty v28, 'a'
+
+
+function f(a1, a2, a3) {
+    a1.a = a2;
+    a1[1] = a3;
+    return a1;
+}
+const v6 = new Array(5);
+f(v6, 0.5, 0);
+const v11 = new Array(5);
+var o1 = f(v11, 0, 0.5);
+gc();
+const v19 = new Array(5);
+var o2 = f(v19, 0, 0);
+const v25 = new Array(5);
+var o3 = f(v25, 0);
+o3.a;
+
+FuzzIL program written to corpus/regress-crbug-617524.fzil

@@ -1,0 +1,1754 @@
+v0 <- BeginPlainFunction -> v1, v2
+    v3 <- CreateNamedVariable 'JSON', 'none'
+    v4 <- CallMethod v3, 'stringify', [v2]
+    v5 <- BeginArrowFunction -> v6, v7
+        Return v7
+    EndArrowFunction
+    v8 <- CallMethod v3, 'stringify', [v2, v5]
+    v9 <- LoadNull
+    v10 <- LoadString '='
+    v11 <- CallMethod v3, 'stringify', [v2, v9, v10]
+    v12 <- BeginArrowFunction -> v13, v14
+        Return v14
+    EndArrowFunction
+    v15 <- LoadString '='
+    v16 <- CallMethod v3, 'stringify', [v2, v12, v15]
+EndPlainFunction
+v17 <- BeginPlainFunction -> v18, v19
+    v20 <- CallMethod v19, 'toUpperCase', []
+    Return v20
+EndPlainFunction
+v21 <- BeginPlainFunction -> 
+    v22 <- LoadString 'a'
+    v23 <- LoadString 'b'
+    v24 <- LoadString 'c'
+    v25 <- CreateArray [v22, v23, v24]
+    Return v25
+EndPlainFunction
+v26 <- BeginPlainFunction -> 
+    v27 <- LoadBoolean 'true'
+    v28 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v27
+        ObjectLiteralAddProperty `configurable`, v28
+    v29 <- EndObjectLiteral
+    Return v29
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v17
+    ObjectLiteralAddProperty `ownKeys`, v21
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v26
+v30 <- EndObjectLiteral
+v31 <- CreateNamedVariable 'handler1', 'var', v30
+v32 <- CreateNamedVariable 'Proxy', 'none'
+BeginObjectLiteral
+v33 <- EndObjectLiteral
+v34 <- Construct v32, [v33, v31]
+v35 <- CreateNamedVariable 'proxy1', 'var', v34
+v36 <- LoadString '{"a":"A","b":"B","c":"C"}'
+v37 <- CallFunction v0, [v36, v35]
+v38 <- BeginArrowFunction -> 
+EndArrowFunction
+v39 <- Construct v32, [v38, v31]
+v40 <- CreateNamedVariable 'proxy_fun', 'var', v39
+v41 <- TypeOf v40
+v42 <- LoadString 'function'
+v43 <- Compare v41, '===', v42
+v44 <- LoadUndefined
+v45 <- CallFunction v0, [v44, v40]
+v46 <- LoadString '[1,null]'
+v47 <- LoadInteger '1'
+v48 <- CreateArray [v47, v40]
+v49 <- CallFunction v0, [v46, v48]
+v50 <- BeginPlainFunction -> 
+    v51 <- LoadInteger '666'
+    Return v51
+EndPlainFunction
+SetProperty v31, 'apply', v50
+v52 <- LoadUndefined
+v53 <- CallFunction v0, [v52, v40]
+v54 <- LoadString '[1,null]'
+v55 <- LoadInteger '1'
+v56 <- CreateArray [v55, v40]
+v57 <- CallFunction v0, [v54, v56]
+BeginObjectLiteral
+    ObjectLiteralAddProperty `b`, v35
+v58 <- EndObjectLiteral
+v59 <- CreateNamedVariable 'parent1a', 'var', v58
+v60 <- LoadString '{"b":{"a":"A","b":"B","c":"C"}}'
+v61 <- CallFunction v0, [v60, v59]
+v62 <- LoadString '{"b":{"a":"A","b":"B","c":"C"}}'
+v63 <- CallFunction v0, [v62, v59]
+v64 <- LoadInteger '123'
+v65 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v64
+    ObjectLiteralAddProperty `b`, v35
+    ObjectLiteralAddProperty `c`, v65
+v66 <- EndObjectLiteral
+v67 <- CreateNamedVariable 'parent1b', 'var', v66
+v68 <- LoadString '{"a":123,"b":{"a":"A","b":"B","c":"C"},"c":true}'
+v69 <- CallFunction v0, [v68, v67]
+v70 <- LoadInteger '123'
+v71 <- LoadBoolean 'true'
+v72 <- CreateArray [v70, v35, v71]
+v73 <- CreateNamedVariable 'parent1c', 'var', v72
+v74 <- LoadString '[123,{"a":"A","b":"B","c":"C"},true]'
+v75 <- CallFunction v0, [v74, v73]
+v76 <- BeginPlainFunction -> v77, v78
+    v79 <- CreateNamedVariable 'parent2', 'none'
+    v80 <- DeleteProperty v79, 'c'
+    v81 <- CallMethod v78, 'toUpperCase', []
+    Return v81
+EndPlainFunction
+v82 <- BeginPlainFunction -> 
+    v83 <- LoadString 'a'
+    v84 <- LoadString 'b'
+    v85 <- LoadString 'c'
+    v86 <- CreateArray [v83, v84, v85]
+    Return v86
+EndPlainFunction
+v87 <- BeginPlainFunction -> 
+    v88 <- LoadBoolean 'true'
+    v89 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v88
+        ObjectLiteralAddProperty `configurable`, v89
+    v90 <- EndObjectLiteral
+    Return v90
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v76
+    ObjectLiteralAddProperty `ownKeys`, v82
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v87
+v91 <- EndObjectLiteral
+v92 <- CreateNamedVariable 'handler2', 'var', v91
+BeginObjectLiteral
+v93 <- EndObjectLiteral
+v94 <- Construct v32, [v93, v92]
+v95 <- CreateNamedVariable 'proxy2', 'var', v94
+v96 <- LoadString 'delete'
+v97 <- LoadString 'remove'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v96
+    ObjectLiteralAddProperty `b`, v95
+    ObjectLiteralAddProperty `c`, v97
+v98 <- EndObjectLiteral
+v99 <- CreateNamedVariable 'parent2', 'var', v98
+v100 <- LoadString '{"a":"delete","b":{"a":"A","b":"B","c":"C"}}'
+v101 <- CreateNamedVariable 'expected2', 'var', v100
+v102 <- CreateNamedVariable 'JSON', 'none'
+v103 <- CallMethod v102, 'stringify', [v99]
+v104 <- LoadString 'remove'
+SetProperty v99, 'c', v104
+v105 <- LoadUndefined
+v106 <- LoadInteger '0'
+v107 <- CallMethod v102, 'stringify', [v99, v105, v106]
+v108 <- BeginPlainFunction -> v109, v110, v111
+    v112 <- LoadString 'valueOf'
+    v113 <- Compare v110, '==', v112
+    v114 <- CreateNamedVariable 'Symbol', 'none'
+    v115 <- GetProperty v114, 'toPrimitive'
+    v116 <- Compare v110, '===', v115
+    v117 <- BinaryOperation v113, '||', v116
+    BeginIf v117
+        v118 <- BeginPlainFunction -> 
+            v119 <- LoadString 'proxy'
+            Return v119
+        EndPlainFunction
+        Return v118
+    EndIf
+    v120 <- TypeOf v110
+    v121 <- LoadString 'symbol'
+    v122 <- Compare v120, '!==', v121
+    BeginIf v122
+        v123 <- LoadString '('
+        v124 <- BinaryOperation v110, '+', v123
+        v125 <- BinaryOperation v124, '+', v111
+        v126 <- LoadString ')'
+        v127 <- BinaryOperation v125, '+', v126
+        Return v127
+    EndIf
+EndPlainFunction
+v128 <- BeginPlainFunction -> 
+    v129 <- LoadString 'a'
+    v130 <- LoadString 'b'
+    v131 <- LoadString 'c'
+    v132 <- CreateArray [v129, v130, v131]
+    Return v132
+EndPlainFunction
+v133 <- BeginPlainFunction -> 
+    v134 <- LoadBoolean 'true'
+    v135 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v134
+        ObjectLiteralAddProperty `configurable`, v135
+    v136 <- EndObjectLiteral
+    Return v136
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v108
+    ObjectLiteralAddProperty `ownKeys`, v128
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v133
+v137 <- EndObjectLiteral
+v138 <- CreateNamedVariable 'handler3', 'var', v137
+BeginObjectLiteral
+v139 <- EndObjectLiteral
+v140 <- Construct v32, [v139, v138]
+v141 <- CreateNamedVariable 'proxy3', 'var', v140
+v142 <- LoadInteger '123'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `x`, v142
+    ObjectLiteralAddProperty `y`, v141
+v143 <- EndObjectLiteral
+v144 <- CreateNamedVariable 'parent3', 'var', v143
+v145 <- LoadString '{"x":123,"y":{"a":"a(proxy)","b":"b(proxy)","c":"c(proxy)"}}'
+v146 <- CallFunction v0, [v145, v144]
+v147 <- BeginPlainFunction -> v148, v149
+    v150 <- LoadInteger '0'
+    Return v150
+EndPlainFunction
+v151 <- BeginPlainFunction -> 
+    v152 <- LoadBoolean 'true'
+    Return v152
+EndPlainFunction
+v153 <- BeginPlainFunction -> v154, v155
+    v156 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v156
+    v157 <- EndObjectLiteral
+    Return v157
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v147
+    ObjectLiteralAddProperty `has`, v151
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v153
+v158 <- EndObjectLiteral
+v159 <- CreateNamedVariable 'handler4', 'var', v158
+BeginObjectLiteral
+v160 <- EndObjectLiteral
+v161 <- Construct v32, [v160, v159]
+v162 <- CreateNamedVariable 'proxy4', 'var', v161
+v163 <- LoadString '{}'
+v164 <- CallFunction v0, [v163, v162]
+v165 <- LoadString '{"a":{}}'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v162
+v166 <- EndObjectLiteral
+v167 <- CallFunction v0, [v165, v166]
+v168 <- BeginPlainFunction -> v169, v170
+    v171 <- LoadString 'z'
+    v172 <- Compare v170, '==', v171
+    BeginIf v172
+        v173 <- LoadInteger '97000'
+        Return v173
+    EndIf
+    v174 <- BeginPlainFunction -> v175
+        v176 <- LoadInteger '0'
+        v177 <- CallMethod v175, 'charCodeAt', [v176]
+        v178 <- LoadThis
+        v179 <- GetProperty v178, 'z'
+        v180 <- BinaryOperation v177, '+', v179
+        Return v180
+    EndPlainFunction
+    Return v174
+EndPlainFunction
+v181 <- BeginPlainFunction -> v182
+    v183 <- LoadString 'toJSON'
+    v184 <- LoadString 'z'
+    v185 <- CreateArray [v183, v184]
+    Return v185
+EndPlainFunction
+v186 <- BeginPlainFunction -> 
+    v187 <- LoadBoolean 'true'
+    Return v187
+EndPlainFunction
+v188 <- BeginPlainFunction -> v189, v190
+    v191 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v191
+    v192 <- EndObjectLiteral
+    Return v192
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v168
+    ObjectLiteralAddProperty `ownKeys`, v181
+    ObjectLiteralAddProperty `has`, v186
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v188
+v193 <- EndObjectLiteral
+v194 <- CreateNamedVariable 'handler5', 'var', v193
+BeginObjectLiteral
+v195 <- EndObjectLiteral
+v196 <- Construct v32, [v195, v194]
+v197 <- CreateNamedVariable 'proxy5', 'var', v196
+v198 <- LoadString '{"a":97097}'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v197
+v199 <- EndObjectLiteral
+v200 <- CallFunction v0, [v198, v199]
+v201 <- BeginPlainFunction -> v202, v203
+    v204 <- BeginPlainFunction -> v205
+        v206 <- LoadUndefined
+        Return v206
+    EndPlainFunction
+    Return v204
+EndPlainFunction
+v207 <- BeginPlainFunction -> v208
+    v209 <- LoadString 'toJSON'
+    v210 <- CreateArray [v209]
+    Return v210
+EndPlainFunction
+v211 <- BeginPlainFunction -> 
+    v212 <- LoadBoolean 'true'
+    Return v212
+EndPlainFunction
+v213 <- BeginPlainFunction -> v214, v215
+    v216 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v216
+    v217 <- EndObjectLiteral
+    Return v217
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v201
+    ObjectLiteralAddProperty `ownKeys`, v207
+    ObjectLiteralAddProperty `has`, v211
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v213
+v218 <- EndObjectLiteral
+v219 <- CreateNamedVariable 'handler6', 'var', v218
+BeginObjectLiteral
+v220 <- EndObjectLiteral
+v221 <- Construct v32, [v220, v219]
+v222 <- CreateNamedVariable 'proxy6', 'var', v221
+v223 <- LoadString '[1,null,true]'
+v224 <- LoadInteger '1'
+v225 <- LoadBoolean 'true'
+v226 <- CreateArray [v224, v222, v225]
+v227 <- CallFunction v0, [v223, v226]
+v228 <- LoadString '{"a":1,"c":true}'
+v229 <- LoadInteger '1'
+v230 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v229
+    ObjectLiteralAddProperty `b`, v222
+    ObjectLiteralAddProperty `c`, v230
+v231 <- EndObjectLiteral
+v232 <- CallFunction v0, [v228, v231]
+v233 <- BeginPlainFunction -> v234, v235
+    v236 <- CreateNamedVariable 'parent7', 'none'
+    v237 <- DeleteProperty v236, 'a'
+    v238 <- DeleteProperty v236, 'c'
+    v239 <- LoadString '5'
+    SetProperty v236, 'e', v239
+    v240 <- CallMethod v235, 'toUpperCase', []
+    Return v240
+EndPlainFunction
+v241 <- BeginPlainFunction -> 
+    v242 <- LoadString 'a'
+    v243 <- LoadString 'b'
+    v244 <- LoadString 'c'
+    v245 <- CreateArray [v242, v243, v244]
+    Return v245
+EndPlainFunction
+v246 <- BeginPlainFunction -> 
+    v247 <- LoadBoolean 'true'
+    v248 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v247
+        ObjectLiteralAddProperty `configurable`, v248
+    v249 <- EndObjectLiteral
+    Return v249
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v233
+    ObjectLiteralAddProperty `ownKeys`, v241
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v246
+v250 <- EndObjectLiteral
+v251 <- CreateNamedVariable 'handler7', 'var', v250
+BeginObjectLiteral
+v252 <- EndObjectLiteral
+v253 <- Construct v32, [v252, v251]
+v254 <- CreateNamedVariable 'proxy7', 'var', v253
+v255 <- LoadString '1'
+v256 <- LoadString '3'
+v257 <- LoadString '4'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v255
+    ObjectLiteralAddProperty `b`, v254
+    ObjectLiteralAddProperty `c`, v256
+    ObjectLiteralAddProperty `d`, v257
+v258 <- EndObjectLiteral
+v259 <- CreateNamedVariable 'parent7', 'var', v258
+v260 <- LoadString '{"a":"1","b":{"a":"A","b":"B","c":"C"},"d":"4"}'
+v261 <- CallMethod v102, 'stringify', [v259]
+v262 <- LoadString '{"b":{"a":"A","b":"B","c":"C"},"d":"4","e":"5"}'
+v263 <- CallMethod v102, 'stringify', [v259]
+v264 <- CreateArray []
+v265 <- CreateNamedVariable 'log', 'var', v264
+BeginObjectLiteral
+v266 <- EndObjectLiteral
+v267 <- CreateNamedVariable 'logger', 'var', v266
+BeginObjectLiteral
+v268 <- EndObjectLiteral
+v269 <- Construct v32, [v268, v267]
+v270 <- CreateNamedVariable 'handler', 'var', v269
+v271 <- BeginPlainFunction -> v272, v273, v274
+    v275 <- BeginPlainFunction -> 
+        v276 <- LoadArguments
+        v277 <- CreateArrayWithSpread [v273, ...v276]
+        v278 <- CallMethod v265, 'push', [v277]
+        v279 <- LoadArguments
+        v280 <- CreateNamedVariable 'Reflect', 'none'
+        v281 <- CallComputedMethodWithSpread v280, v273, [...v279]
+        Return v281
+    EndPlainFunction
+    Return v275
+EndPlainFunction
+SetProperty v267, 'get', v271
+v282 <- LoadInteger '0'
+SetProperty v265, 'length', v282
+v283 <- BeginArrowFunction -> 
+    v284 <- LoadInteger '42'
+    Return v284
+EndArrowFunction
+v285 <- CreateNamedVariable 'target', 'var', v283
+v286 <- Construct v32, [v285, v270]
+v287 <- CreateNamedVariable 'proxy', 'var', v286
+v288 <- TypeOf v287
+v289 <- LoadString 'function'
+v290 <- Compare v288, '===', v289
+v291 <- LoadUndefined
+v292 <- CallMethod v102, 'stringify', [v287]
+v293 <- LoadInteger '1'
+v294 <- GetProperty v265, 'length'
+BeginForInLoop v265 -> v295
+    v296 <- GetComputedProperty v265, v295
+    v297 <- GetElement v296, '1'
+EndForInLoop
+v298 <- LoadString 'get'
+v299 <- LoadString 'toJSON'
+v300 <- CreateArray [v298, v285, v299, v287]
+v301 <- GetElement v265, '0'
+v302 <- LoadInteger '0'
+SetProperty v265, 'length', v302
+v303 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v303
+v304 <- EndObjectLiteral
+v305 <- CreateNamedVariable 'target', 'var', v304
+v306 <- Construct v32, [v305, v270]
+v307 <- CreateNamedVariable 'proxy', 'var', v306
+v308 <- CreateNamedVariable 'Array', 'none'
+v309 <- CallMethod v308, 'isArray', [v307]
+v310 <- LoadString '{"foo":42}'
+v311 <- CallMethod v102, 'stringify', [v307]
+v312 <- LoadInteger '4'
+v313 <- GetProperty v265, 'length'
+BeginForInLoop v265 -> v314
+    v315 <- GetComputedProperty v265, v314
+    v316 <- GetElement v315, '1'
+EndForInLoop
+v317 <- LoadString 'get'
+v318 <- LoadString 'toJSON'
+v319 <- CreateArray [v317, v305, v318, v307]
+v320 <- GetElement v265, '0'
+v321 <- LoadString 'ownKeys'
+v322 <- CreateArray [v321, v305]
+v323 <- GetElement v265, '1'
+v324 <- LoadString 'getOwnPropertyDescriptor'
+v325 <- LoadString 'foo'
+v326 <- CreateArray [v324, v305, v325]
+v327 <- GetElement v265, '2'
+v328 <- LoadString 'get'
+v329 <- LoadString 'foo'
+v330 <- CreateArray [v328, v305, v329, v307]
+v331 <- GetElement v265, '3'
+v332 <- LoadInteger '0'
+SetProperty v265, 'length', v332
+v333 <- LoadInteger '42'
+v334 <- CreateArray [v333]
+v335 <- CreateNamedVariable 'target', 'var', v334
+v336 <- Construct v32, [v335, v270]
+v337 <- CreateNamedVariable 'proxy', 'var', v336
+v338 <- CallMethod v308, 'isArray', [v337]
+v339 <- LoadString '[42]'
+v340 <- CallMethod v102, 'stringify', [v337]
+v341 <- LoadInteger '3'
+v342 <- GetProperty v265, 'length'
+BeginForInLoop v265 -> v343
+    v344 <- GetComputedProperty v265, v343
+    v345 <- GetElement v344, '1'
+EndForInLoop
+v346 <- LoadString 'get'
+v347 <- LoadString 'toJSON'
+v348 <- CreateArray [v346, v335, v347, v337]
+v349 <- GetElement v265, '0'
+v350 <- LoadString 'get'
+v351 <- LoadString 'length'
+v352 <- CreateArray [v350, v335, v351, v337]
+v353 <- GetElement v265, '1'
+v354 <- LoadString 'get'
+v355 <- LoadString '0'
+v356 <- CreateArray [v354, v335, v355, v337]
+v357 <- GetElement v265, '2'
+v358 <- LoadInteger '0'
+SetProperty v265, 'length', v358
+v359 <- LoadString 'foo'
+v360 <- LoadInteger '666'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v359
+    ObjectLiteralAddElement `1`, v360
+v361 <- EndObjectLiteral
+v362 <- CreateNamedVariable 'object', 'var', v361
+v363 <- BeginArrowFunction -> v364, v365
+    v366 <- LoadString '1'
+    v367 <- Compare v364, '==', v366
+    v368 <- LoadInteger '42'
+    v369 <- BinaryOperation v365, '+', v368
+    v370 <- TernaryOperation v367, v369, v365
+    Return v370
+EndArrowFunction
+v371 <- CreateNamedVariable 'target', 'var', v363
+v372 <- Construct v32, [v371, v270]
+v373 <- CreateNamedVariable 'proxy', 'var', v372
+v374 <- TypeOf v373
+v375 <- LoadString 'function'
+v376 <- Compare v374, '===', v375
+v377 <- LoadString '{"0":"foo","1":708}'
+v378 <- CallMethod v102, 'stringify', [v362, v373]
+v379 <- LoadInteger '3'
+v380 <- GetProperty v265, 'length'
+BeginForInLoop v265 -> v381
+    v382 <- GetComputedProperty v265, v381
+    v383 <- GetElement v382, '1'
+EndForInLoop
+v384 <- LoadInteger '4'
+v385 <- GetElement v265, '0'
+v386 <- GetProperty v385, 'length'
+v387 <- LoadString 'apply'
+v388 <- GetElement v265, '0'
+v389 <- GetElement v388, '0'
+v390 <- LoadString ''
+v391 <- GetElement v265, '0'
+v392 <- GetElement v391, '3'
+v393 <- GetElement v392, '0'
+v394 <- LoadString 'foo'
+v395 <- LoadInteger '666'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v394
+    ObjectLiteralAddElement `1`, v395
+v396 <- EndObjectLiteral
+v397 <- GetElement v265, '0'
+v398 <- GetElement v397, '3'
+v399 <- GetElement v398, '1'
+v400 <- LoadInteger '4'
+v401 <- GetElement v265, '1'
+v402 <- GetProperty v401, 'length'
+v403 <- LoadString 'apply'
+v404 <- GetElement v265, '1'
+v405 <- GetElement v404, '0'
+v406 <- LoadString '0'
+v407 <- LoadString 'foo'
+v408 <- CreateArray [v406, v407]
+v409 <- GetElement v265, '1'
+v410 <- GetElement v409, '3'
+v411 <- LoadInteger '4'
+v412 <- GetElement v265, '2'
+v413 <- GetProperty v412, 'length'
+v414 <- LoadString 'apply'
+v415 <- GetElement v265, '2'
+v416 <- GetElement v415, '0'
+v417 <- LoadString '1'
+v418 <- LoadInteger '666'
+v419 <- CreateArray [v417, v418]
+v420 <- GetElement v265, '2'
+v421 <- GetElement v420, '3'
+v422 <- LoadInteger '0'
+SetProperty v265, 'length', v422
+v423 <- LoadString 'foo'
+v424 <- LoadInteger '666'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v423
+    ObjectLiteralAddElement `1`, v424
+v425 <- EndObjectLiteral
+v426 <- CreateNamedVariable 'object', 'var', v425
+v427 <- LoadInteger '0'
+v428 <- CreateArray [v427]
+v429 <- CreateNamedVariable 'target', 'var', v428
+v430 <- Construct v32, [v429, v270]
+v431 <- CreateNamedVariable 'proxy', 'var', v430
+v432 <- CallMethod v308, 'isArray', [v431]
+v433 <- LoadString '{"0":"foo"}'
+v434 <- CallMethod v102, 'stringify', [v426, v431]
+v435 <- LoadInteger '2'
+v436 <- GetProperty v265, 'length'
+BeginForInLoop v265 -> v437
+    v438 <- GetComputedProperty v265, v437
+    v439 <- GetElement v438, '1'
+EndForInLoop
+v440 <- LoadString 'get'
+v441 <- LoadString 'length'
+v442 <- CreateArray [v440, v429, v441, v431]
+v443 <- GetElement v265, '0'
+v444 <- LoadString 'get'
+v445 <- LoadString '0'
+v446 <- CreateArray [v444, v429, v445, v431]
+v447 <- GetElement v265, '1'
+v448 <- LoadInteger '0'
+SetProperty v265, 'length', v448
+v449 <- LoadString 'foo'
+v450 <- LoadInteger '42'
+v451 <- CreateArray [v449, v450]
+v452 <- CreateNamedVariable 'object', 'var', v451
+v453 <- LoadInteger '0'
+v454 <- CreateArray [v453]
+v455 <- CreateNamedVariable 'target', 'var', v454
+v456 <- Construct v32, [v455, v270]
+v457 <- CreateNamedVariable 'proxy', 'var', v456
+v458 <- CallMethod v308, 'isArray', [v457]
+v459 <- LoadString '["foo",42]'
+v460 <- CallMethod v102, 'stringify', [v452, v457]
+v461 <- LoadInteger '2'
+v462 <- GetProperty v265, 'length'
+BeginForInLoop v265 -> v463
+    v464 <- GetComputedProperty v265, v463
+    v465 <- GetElement v464, '1'
+EndForInLoop
+v466 <- LoadString 'get'
+v467 <- LoadString 'length'
+v468 <- CreateArray [v466, v455, v467, v457]
+v469 <- GetElement v265, '0'
+v470 <- LoadString 'get'
+v471 <- LoadString '0'
+v472 <- CreateArray [v470, v455, v471, v457]
+v473 <- GetElement v265, '1'
+v474 <- BeginPlainFunction -> v475, v476
+    v477 <- LoadString 'length'
+    v478 <- Compare v476, '===', v477
+    BeginIf v478
+        v479 <- CreateNamedVariable 'Symbol', 'none'
+        v480 <- GetProperty v479, 'toPrimitive'
+        BeginObjectLiteral
+            BeginObjectLiteralComputedMethod v480 -> v481
+                v482 <- LoadInteger '42'
+                Return v482
+            EndObjectLiteralComputedMethod
+        v483 <- EndObjectLiteral
+        Return v483
+    EndIf
+    v484 <- LoadString '41'
+    v485 <- Compare v476, '===', v484
+    BeginIf v485
+        v486 <- LoadString 'foo'
+        Return v486
+    EndIf
+    v487 <- LoadString '42'
+    v488 <- Compare v476, '===', v487
+    BeginIf v488
+        v489 <- LoadString 'bar'
+        Return v489
+    EndIf
+EndPlainFunction
+v490 <- CreateNamedVariable 'getTrap', 'var', v474
+v491 <- CreateArray []
+v492 <- CreateNamedVariable 'target', 'var', v491
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v490
+v493 <- EndObjectLiteral
+v494 <- Construct v32, [v492, v493]
+v495 <- CreateNamedVariable 'proxy', 'var', v494
+v496 <- CallMethod v308, 'isArray', [v495]
+v497 <- LoadBoolean 'true'
+v498 <- LoadInteger '666'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v497
+    ObjectLiteralAddProperty `bar`, v498
+v499 <- EndObjectLiteral
+v500 <- CreateNamedVariable 'object', 'var', v499
+v501 <- LoadString '{"foo":true}'
+v502 <- CallMethod v102, 'stringify', [v500, v495]
+v503 <- BeginPlainFunction -> v504, v505
+    v506 <- LoadString 'length'
+    v507 <- Compare v505, '===', v506
+    BeginIf v507
+        v508 <- CreateNamedVariable 'Symbol', 'none'
+        v509 <- CallFunction v508, []
+        Return v509
+    EndIf
+    v510 <- LoadString '41'
+    v511 <- Compare v505, '===', v510
+    BeginIf v511
+        v512 <- LoadString 'foo'
+        Return v512
+    EndIf
+    v513 <- LoadString '42'
+    v514 <- Compare v505, '===', v513
+    BeginIf v514
+        v515 <- LoadString 'bar'
+        Return v515
+    EndIf
+EndPlainFunction
+v516 <- CreateNamedVariable 'getTrap', 'var', v503
+v517 <- CreateArray []
+v518 <- CreateNamedVariable 'target', 'var', v517
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v516
+v519 <- EndObjectLiteral
+v520 <- Construct v32, [v518, v519]
+v521 <- CreateNamedVariable 'proxy', 'var', v520
+v522 <- CallMethod v308, 'isArray', [v521]
+v523 <- LoadBoolean 'true'
+v524 <- LoadInteger '666'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v523
+    ObjectLiteralAddProperty `bar`, v524
+v525 <- EndObjectLiteral
+v526 <- CreateNamedVariable 'object', 'var', v525
+v527 <- BeginArrowFunction -> 
+    v528 <- CallMethod v102, 'stringify', [v526, v521]
+    Return v528
+EndArrowFunction
+v529 <- CallFunction v527, []
+v530 <- CreateNamedVariable 'TypeError', 'none'
+v531 <- LoadInteger '0'
+SetProperty v265, 'length', v531
+v532 <- LoadString 'foo'
+v533 <- LoadInteger '42'
+v534 <- CreateArray [v532, v533]
+v535 <- CreateNamedVariable 'object', 'var', v534
+v536 <- LoadInteger '5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `baz`, v536
+v537 <- EndObjectLiteral
+v538 <- CreateNamedVariable 'target', 'var', v537
+v539 <- Construct v32, [v538, v270]
+v540 <- CreateNamedVariable 'proxy', 'var', v539
+v541 <- BeginArrowFunction -> v542, v543
+    v544 <- LoadString '1'
+    v545 <- Compare v542, '===', v544
+    v546 <- TernaryOperation v545, v540, v543
+    Return v546
+EndArrowFunction
+v547 <- CreateNamedVariable 'replacer', 'var', v541
+v548 <- LoadString '["foo",{"baz":5}]'
+v549 <- CallMethod v102, 'stringify', [v535, v547]
+v550 <- LoadInteger '3'
+v551 <- GetProperty v265, 'length'
+BeginForInLoop v265 -> v552
+    v553 <- GetComputedProperty v265, v552
+    v554 <- GetElement v553, '1'
+EndForInLoop
+v555 <- LoadString 'ownKeys'
+v556 <- CreateArray [v555, v538]
+v557 <- GetElement v265, '0'
+v558 <- LoadString 'getOwnPropertyDescriptor'
+v559 <- LoadString 'baz'
+v560 <- CreateArray [v558, v538, v559]
+v561 <- GetElement v265, '1'
+v562 <- LoadInteger '0'
+SetProperty v265, 'length', v562
+v563 <- LoadString 'foo'
+v564 <- LoadInteger '42'
+v565 <- CreateArray [v563, v564]
+v566 <- CreateNamedVariable 'object', 'var', v565
+v567 <- LoadString 'bar'
+v568 <- CreateArray [v567]
+v569 <- CreateNamedVariable 'target', 'var', v568
+v570 <- Construct v32, [v569, v270]
+v571 <- CreateNamedVariable 'proxy', 'var', v570
+v572 <- BeginArrowFunction -> v573, v574
+    v575 <- LoadString '1'
+    v576 <- Compare v573, '===', v575
+    v577 <- TernaryOperation v576, v571, v574
+    Return v577
+EndArrowFunction
+v578 <- CreateNamedVariable 'replacer', 'var', v572
+v579 <- LoadString '["foo",["bar"]]'
+v580 <- CallMethod v102, 'stringify', [v566, v578]
+v581 <- LoadInteger '2'
+v582 <- GetProperty v265, 'length'
+BeginForInLoop v265 -> v583
+    v584 <- GetComputedProperty v265, v583
+    v585 <- GetElement v584, '1'
+EndForInLoop
+v586 <- LoadString 'get'
+v587 <- LoadString 'length'
+v588 <- CreateArray [v586, v569, v587, v571]
+v589 <- GetElement v265, '0'
+v590 <- LoadString 'get'
+v591 <- LoadString '0'
+v592 <- CreateArray [v590, v569, v591, v571]
+v593 <- GetElement v265, '1'
+v594 <- BeginPlainFunction -> v595, v596
+    v597 <- LoadString 'length'
+    v598 <- Compare v596, '===', v597
+    BeginIf v598
+        v599 <- CreateNamedVariable 'Symbol', 'none'
+        v600 <- GetProperty v599, 'toPrimitive'
+        BeginObjectLiteral
+            BeginObjectLiteralComputedMethod v600 -> v601
+                v602 <- LoadInteger '3'
+                Return v602
+            EndObjectLiteralComputedMethod
+        v603 <- EndObjectLiteral
+        Return v603
+    EndIf
+    v604 <- LoadString '2'
+    v605 <- Compare v596, '===', v604
+    BeginIf v605
+        v606 <- LoadString 'baz'
+        Return v606
+    EndIf
+    v607 <- LoadString '3'
+    v608 <- Compare v596, '===', v607
+    BeginIf v608
+        v609 <- LoadString 'bar'
+        Return v609
+    EndIf
+EndPlainFunction
+v610 <- CreateNamedVariable 'getTrap', 'var', v594
+v611 <- CreateArray []
+v612 <- CreateNamedVariable 'target', 'var', v611
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v610
+v613 <- EndObjectLiteral
+v614 <- Construct v32, [v612, v613]
+v615 <- CreateNamedVariable 'proxy', 'var', v614
+v616 <- BeginArrowFunction -> v617, v618
+    v619 <- LoadString 'goo'
+    v620 <- Compare v617, '===', v619
+    v621 <- TernaryOperation v620, v615, v618
+    Return v621
+EndArrowFunction
+v622 <- CreateNamedVariable 'replacer', 'var', v616
+v623 <- LoadBoolean 'true'
+v624 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v623
+    ObjectLiteralAddProperty `goo`, v624
+v625 <- EndObjectLiteral
+v626 <- CreateNamedVariable 'object', 'var', v625
+v627 <- LoadString '{"foo":true,"goo":[null,null,"baz"]}'
+v628 <- CallMethod v102, 'stringify', [v626, v622]
+v629 <- BeginPlainFunction -> v630, v631
+    v632 <- LoadString 'length'
+    v633 <- Compare v631, '===', v632
+    BeginIf v633
+        v634 <- CreateNamedVariable 'Symbol', 'none'
+        v635 <- CallFunction v634, []
+        Return v635
+    EndIf
+    v636 <- LoadString '2'
+    v637 <- Compare v631, '===', v636
+    BeginIf v637
+        v638 <- LoadString 'baz'
+        Return v638
+    EndIf
+    v639 <- LoadString '3'
+    v640 <- Compare v631, '===', v639
+    BeginIf v640
+        v641 <- LoadString 'bar'
+        Return v641
+    EndIf
+EndPlainFunction
+v642 <- CreateNamedVariable 'getTrap', 'var', v629
+v643 <- CreateArray []
+v644 <- CreateNamedVariable 'target', 'var', v643
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v642
+v645 <- EndObjectLiteral
+v646 <- Construct v32, [v644, v645]
+v647 <- CreateNamedVariable 'proxy', 'var', v646
+v648 <- BeginArrowFunction -> v649, v650
+    v651 <- LoadString 'goo'
+    v652 <- Compare v649, '===', v651
+    v653 <- TernaryOperation v652, v647, v650
+    Return v653
+EndArrowFunction
+v654 <- CreateNamedVariable 'replacer', 'var', v648
+v655 <- LoadBoolean 'true'
+v656 <- LoadBoolean 'false'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v655
+    ObjectLiteralAddProperty `goo`, v656
+v657 <- EndObjectLiteral
+v658 <- CreateNamedVariable 'object', 'var', v657
+v659 <- BeginArrowFunction -> 
+    v660 <- CallMethod v102, 'stringify', [v658, v654]
+    Return v660
+EndArrowFunction
+v661 <- CallFunction v659, []
+v662 <- LoadInteger '0'
+SetProperty v265, 'length', v662
+v663 <- BeginArrowFunction -> 
+    v664 <- LoadInteger '666'
+    Return v664
+EndArrowFunction
+v665 <- CreateNamedVariable 'target', 'var', v663
+v666 <- Construct v32, [v665, v270]
+v667 <- CreateNamedVariable 'proxy', 'var', v666
+v668 <- BeginArrowFunction -> v669, v670
+    v671 <- LoadString '1'
+    v672 <- Compare v669, '===', v671
+    v673 <- TernaryOperation v672, v667, v670
+    Return v673
+EndArrowFunction
+v674 <- CreateNamedVariable 'replacer', 'var', v668
+v675 <- LoadString '["foo",null]'
+v676 <- LoadString 'foo'
+v677 <- LoadInteger '42'
+v678 <- CreateArray [v676, v677]
+v679 <- CallMethod v102, 'stringify', [v678, v674]
+v680 <- LoadInteger '0'
+v681 <- GetProperty v265, 'length'
+v682 <- LoadString '{"0":"foo"}'
+v683 <- LoadString 'foo'
+v684 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddElement `0`, v683
+    ObjectLiteralAddElement `1`, v684
+v685 <- EndObjectLiteral
+v686 <- CallMethod v102, 'stringify', [v685, v674]
+v687 <- LoadInteger '0'
+v688 <- GetProperty v265, 'length'
+v689 <- LoadInteger '0'
+SetProperty v265, 'length', v689
+v690 <- BeginArrowFunction -> 
+    v691 <- LoadInteger '42'
+    Return v691
+EndArrowFunction
+v692 <- CreateNamedVariable 'target', 'var', v690
+v693 <- Construct v32, [v692, v270]
+v694 <- CreateNamedVariable 'proxy', 'var', v693
+v695 <- TypeOf v694
+v696 <- LoadString 'function'
+v697 <- Compare v695, '===', v696
+v698 <- LoadInteger '42'
+v699 <- LoadString '[true, false]'
+v700 <- CallMethod v102, 'parse', [v699, v694]
+v701 <- LoadInteger '3'
+v702 <- GetProperty v265, 'length'
+BeginForInLoop v265 -> v703
+    v704 <- GetComputedProperty v265, v703
+    v705 <- GetElement v704, '1'
+EndForInLoop
+v706 <- LoadInteger '4'
+v707 <- GetElement v265, '0'
+v708 <- GetProperty v707, 'length'
+v709 <- LoadString 'apply'
+v710 <- GetElement v265, '0'
+v711 <- GetElement v710, '0'
+v712 <- LoadString '0'
+v713 <- LoadBoolean 'true'
+v714 <- CreateArray [v712, v713]
+v715 <- GetElement v265, '0'
+v716 <- GetElement v715, '3'
+v717 <- LoadInteger '4'
+v718 <- GetElement v265, '1'
+v719 <- GetProperty v718, 'length'
+v720 <- LoadString 'apply'
+v721 <- GetElement v265, '1'
+v722 <- GetElement v721, '0'
+v723 <- LoadString '1'
+v724 <- LoadBoolean 'false'
+v725 <- CreateArray [v723, v724]
+v726 <- GetElement v265, '1'
+v727 <- GetElement v726, '3'
+v728 <- LoadInteger '4'
+v729 <- GetElement v265, '2'
+v730 <- GetProperty v729, 'length'
+v731 <- LoadString 'apply'
+v732 <- GetElement v265, '2'
+v733 <- GetElement v732, '0'
+v734 <- LoadString ''
+v735 <- LoadInteger '42'
+v736 <- LoadInteger '42'
+v737 <- CreateArray [v735, v736]
+v738 <- CreateArray [v734, v737]
+v739 <- GetElement v265, '2'
+v740 <- GetElement v739, '3'
+v741 <- LoadInteger '0'
+SetProperty v265, 'length', v741
+v742 <- LoadInteger '42'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `baz`, v742
+v743 <- EndObjectLiteral
+v744 <- CreateNamedVariable 'target', 'var', v743
+v745 <- Construct v32, [v744, v270]
+v746 <- CreateNamedVariable 'proxy', 'var', v745
+v747 <- BeginPlainFunction -> v748, v749
+    v750 <- LoadString 'baz'
+    v751 <- Compare v748, '===', v750
+    BeginIf v751
+        v752 <- LoadInteger '5'
+        Return v752
+    EndIf
+    v753 <- LoadString 'foo'
+    v754 <- Compare v748, '===', v753
+    BeginIf v754
+        v755 <- LoadThis
+        SetProperty v755, 'bar', v746
+    EndIf
+    Return v749
+EndPlainFunction
+v756 <- CreateNamedVariable 'reviver', 'var', v747
+v757 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v757
+    ObjectLiteralAddProperty `bar`, v746
+v758 <- EndObjectLiteral
+v759 <- LoadString '{"foo":0,"bar":1}'
+v760 <- CallMethod v102, 'parse', [v759, v756]
+v761 <- LoadInteger '4'
+v762 <- GetProperty v265, 'length'
+BeginForInLoop v265 -> v763
+    v764 <- GetComputedProperty v265, v763
+    v765 <- GetElement v764, '1'
+EndForInLoop
+v766 <- LoadString 'ownKeys'
+v767 <- CreateArray [v766, v744]
+v768 <- GetElement v265, '0'
+v769 <- LoadString 'getOwnPropertyDescriptor'
+v770 <- LoadString 'baz'
+v771 <- CreateArray [v769, v744, v770]
+v772 <- GetElement v265, '1'
+v773 <- LoadString 'get'
+v774 <- LoadString 'baz'
+v775 <- CreateArray [v773, v744, v774, v746]
+v776 <- GetElement v265, '2'
+v777 <- LoadString 'defineProperty'
+v778 <- LoadString 'baz'
+v779 <- LoadInteger '5'
+v780 <- LoadBoolean 'true'
+v781 <- LoadBoolean 'true'
+v782 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `value`, v779
+    ObjectLiteralAddProperty `configurable`, v780
+    ObjectLiteralAddProperty `writable`, v781
+    ObjectLiteralAddProperty `enumerable`, v782
+v783 <- EndObjectLiteral
+v784 <- CreateArray [v777, v744, v778, v783]
+v785 <- GetElement v265, '3'
+v786 <- LoadInteger '0'
+SetProperty v265, 'length', v786
+v787 <- LoadInteger '42'
+v788 <- CreateArray [v787]
+v789 <- CreateNamedVariable 'target', 'var', v788
+v790 <- Construct v32, [v789, v270]
+v791 <- CreateNamedVariable 'proxy', 'var', v790
+v792 <- CallMethod v308, 'isArray', [v791]
+v793 <- BeginPlainFunction -> v794, v795
+    v796 <- LoadString '0'
+    v797 <- Compare v794, '===', v796
+    BeginIf v797
+        v798 <- LoadUndefined
+        Return v798
+    EndIf
+    v799 <- LoadString 'foo'
+    v800 <- Compare v794, '===', v799
+    BeginIf v800
+        v801 <- LoadThis
+        SetProperty v801, 'bar', v791
+    EndIf
+    Return v795
+EndPlainFunction
+v802 <- CreateNamedVariable 'reviver', 'var', v793
+v803 <- LoadString '{"foo":0,"bar":1}'
+v804 <- CallMethod v102, 'parse', [v803, v802]
+v805 <- CreateNamedVariable 'result', 'var', v804
+v806 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `foo`, v806
+    ObjectLiteralAddProperty `bar`, v791
+v807 <- EndObjectLiteral
+v808 <- GetProperty v805, 'bar'
+v809 <- LoadInteger '3'
+v810 <- GetProperty v265, 'length'
+BeginForInLoop v265 -> v811
+    v812 <- GetComputedProperty v265, v811
+    v813 <- GetElement v812, '1'
+EndForInLoop
+v814 <- LoadString 'get'
+v815 <- LoadString 'length'
+v816 <- CreateArray [v814, v789, v815, v791]
+v817 <- GetElement v265, '0'
+v818 <- LoadString 'get'
+v819 <- LoadString '0'
+v820 <- CreateArray [v818, v789, v819, v791]
+v821 <- GetElement v265, '1'
+v822 <- LoadString 'deleteProperty'
+v823 <- LoadString '0'
+v824 <- CreateArray [v822, v789, v823]
+v825 <- GetElement v265, '2'
+v826 <- CreateArray []
+v827 <- BeginPlainFunction -> v828, v829
+    v830 <- LoadString 'length'
+    v831 <- Compare v829, '==', v830
+    BeginIf v831
+        v832 <- LoadInteger '7'
+        Return v832
+    EndIf
+    v833 <- LoadInteger '0'
+    Return v833
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v827
+v834 <- EndObjectLiteral
+v835 <- Construct v32, [v826, v834]
+Reassign v791, v835
+v836 <- LoadString '[[0,0,0,0,0,0,0]]'
+v837 <- CreateArray [v791]
+v838 <- CallMethod v102, 'stringify', [v837]
+v839 <- CreateArray []
+v840 <- BeginPlainFunction -> v841, v842
+    v843 <- LoadString 'length'
+    v844 <- Compare v842, '==', v843
+    BeginIf v844
+        v845 <- LoadFloat '1e+40'
+        Return v845
+    EndIf
+    v846 <- LoadInteger '0'
+    Return v846
+EndPlainFunction
+BeginObjectLiteral
+    ObjectLiteralAddProperty `get`, v840
+v847 <- EndObjectLiteral
+v848 <- Construct v32, [v839, v847]
+Reassign v791, v848
+v849 <- BeginArrowFunction -> 
+    v850 <- CreateArray [v791]
+    v851 <- CallMethod v102, 'stringify', [v850]
+    Return v851
+EndArrowFunction
+v852 <- CallFunction v849, []
+v853 <- CreateNamedVariable 'RangeError', 'none'
+v854 <- CreateArray []
+Reassign v265, v854
+BeginObjectLiteral
+v855 <- EndObjectLiteral
+v856 <- BeginPlainFunction -> 
+    v857 <- LoadString 'ownKeys'
+    v858 <- CallMethod v265, 'push', [v857]
+    v859 <- LoadString '0'
+    v860 <- LoadString 'a'
+    v861 <- LoadString 'b'
+    v862 <- CreateArray [v859, v860, v861]
+    Return v862
+EndPlainFunction
+v863 <- BeginPlainFunction -> v864, v865
+    v866 <- LoadString 'get '
+    v867 <- BinaryOperation v866, '+', v865
+    v868 <- CallMethod v265, 'push', [v867]
+    v869 <- CallMethod v865, 'toUpperCase', []
+    Return v869
+EndPlainFunction
+v870 <- BeginPlainFunction -> v871, v872
+    v873 <- LoadString 'descriptor '
+    v874 <- BinaryOperation v873, '+', v872
+    v875 <- CallMethod v265, 'push', [v874]
+    v876 <- LoadBoolean 'true'
+    v877 <- LoadBoolean 'true'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `enumerable`, v876
+        ObjectLiteralAddProperty `configurable`, v877
+    v878 <- EndObjectLiteral
+    Return v878
+EndPlainFunction
+v879 <- CreateNamedVariable 'assertUnreachable', 'none'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `ownKeys`, v856
+    ObjectLiteralAddProperty `get`, v863
+    ObjectLiteralAddProperty `getOwnPropertyDescriptor`, v870
+    ObjectLiteralAddProperty `isExtensible`, v879
+    ObjectLiteralAddProperty `has`, v879
+    ObjectLiteralAddProperty `getPrototypeOf`, v879
+    ObjectLiteralAddProperty `setPrototypeOf`, v879
+    ObjectLiteralAddProperty `preventExtensions`, v879
+    ObjectLiteralAddProperty `setPrototypeOf`, v879
+    ObjectLiteralAddProperty `defineProperty`, v879
+    ObjectLiteralAddProperty `set`, v879
+    ObjectLiteralAddProperty `deleteProperty`, v879
+    ObjectLiteralAddProperty `apply`, v879
+    ObjectLiteralAddProperty `construct`, v879
+v880 <- EndObjectLiteral
+v881 <- Construct v32, [v855, v880]
+Reassign v791, v881
+v882 <- LoadString '[{"0":"0","a":"A","b":"B"}]'
+v883 <- CreateArray [v791]
+v884 <- CallMethod v102, 'stringify', [v883]
+v885 <- LoadString 'get toJSON'
+v886 <- LoadString 'ownKeys'
+v887 <- LoadString 'descriptor 0'
+v888 <- LoadString 'descriptor a'
+v889 <- LoadString 'descriptor b'
+v890 <- LoadString 'get 0'
+v891 <- LoadString 'get a'
+v892 <- LoadString 'get b'
+v893 <- CreateArray [v885, v886, v887, v888, v889, v890, v891, v892]
+
+
+function testStringify(a1, a2) {
+    JSON.stringify(a2);
+    const v5 = (a6, a7) => {
+        return a7;
+    };
+    JSON.stringify(a2, v5);
+    JSON.stringify(a2, null, "=");
+    const v12 = (a13, a14) => {
+        return a14;
+    };
+    JSON.stringify(a2, v12, "=");
+}
+function f17(a18, a19) {
+    return a19.toUpperCase();
+}
+function f21() {
+    return ["a","b","c"];
+}
+function f26() {
+    return { enumerable: true, configurable: true };
+}
+var handler1 = { get: f17, ownKeys: f21, getOwnPropertyDescriptor: f26 };
+const v34 = new Proxy({}, handler1);
+var proxy1 = v34;
+testStringify("{"a":"A","b":"B","c":"C"}", proxy1);
+const v38 = () => {
+};
+const v39 = new Proxy(v38, handler1);
+var proxy_fun = v39;
+typeof proxy_fun === "function";
+testStringify(undefined, proxy_fun);
+testStringify("[1,null]", [1,proxy_fun]);
+function f50() {
+    return 666;
+}
+handler1.apply = f50;
+testStringify(undefined, proxy_fun);
+testStringify("[1,null]", [1,proxy_fun]);
+var parent1a = { b: proxy1 };
+testStringify("{"b":{"a":"A","b":"B","c":"C"}}", parent1a);
+testStringify("{"b":{"a":"A","b":"B","c":"C"}}", parent1a);
+var parent1b = { a: 123, b: proxy1, c: true };
+testStringify("{"a":123,"b":{"a":"A","b":"B","c":"C"},"c":true}", parent1b);
+var parent1c = [123,proxy1,true];
+testStringify("[123,{"a":"A","b":"B","c":"C"},true]", parent1c);
+function f76(a77, a78) {
+    delete parent2.c;
+    return a78.toUpperCase();
+}
+function f82() {
+    return ["a","b","c"];
+}
+function f87() {
+    return { enumerable: true, configurable: true };
+}
+var handler2 = { get: f76, ownKeys: f82, getOwnPropertyDescriptor: f87 };
+const v94 = new Proxy({}, handler2);
+var proxy2 = v94;
+var parent2 = { a: "delete", b: proxy2, c: "remove" };
+var expected2 = "{"a":"delete","b":{"a":"A","b":"B","c":"C"}}";
+JSON.stringify(parent2);
+parent2.c = "remove";
+JSON.stringify(parent2, undefined, 0);
+function f108(a109, a110, a111) {
+    if ((a110 == "valueOf") || (a110 === Symbol.toPrimitive)) {
+        function f118() {
+            return "proxy";
+        }
+        return f118;
+    }
+    if (typeof a110 !== "symbol") {
+        return ((a110 + "(") + a111) + ")";
+    }
+}
+function f128() {
+    return ["a","b","c"];
+}
+function f133() {
+    return { enumerable: true, configurable: true };
+}
+var handler3 = { get: f108, ownKeys: f128, getOwnPropertyDescriptor: f133 };
+const v140 = new Proxy({}, handler3);
+var proxy3 = v140;
+var parent3 = { x: 123, y: proxy3 };
+testStringify("{"x":123,"y":{"a":"a(proxy)","b":"b(proxy)","c":"c(proxy)"}}", parent3);
+function f147(a148, a149) {
+    return 0;
+}
+function f151() {
+    return true;
+}
+function f153(a154, a155) {
+    return { enumerable: false };
+}
+var handler4 = { get: f147, has: f151, getOwnPropertyDescriptor: f153 };
+const v161 = new Proxy({}, handler4);
+var proxy4 = v161;
+testStringify("{}", proxy4);
+testStringify("{"a":{}}", { a: proxy4 });
+function f168(a169, a170) {
+    if (a170 == "z") {
+        return 97000;
+    }
+    function f174(a175) {
+        return a175.charCodeAt(0) + this.z;
+    }
+    return f174;
+}
+function f181(a182) {
+    return ["toJSON","z"];
+}
+function f186() {
+    return true;
+}
+function f188(a189, a190) {
+    return { enumerable: true };
+}
+var handler5 = { get: f168, ownKeys: f181, has: f186, getOwnPropertyDescriptor: f188 };
+const v196 = new Proxy({}, handler5);
+var proxy5 = v196;
+testStringify("{"a":97097}", { a: proxy5 });
+function f201(a202, a203) {
+    function f204(a205) {
+        return undefined;
+    }
+    return f204;
+}
+function f207(a208) {
+    return ["toJSON"];
+}
+function f211() {
+    return true;
+}
+function f213(a214, a215) {
+    return { enumerable: true };
+}
+var handler6 = { get: f201, ownKeys: f207, has: f211, getOwnPropertyDescriptor: f213 };
+const v221 = new Proxy({}, handler6);
+var proxy6 = v221;
+testStringify("[1,null,true]", [1,proxy6,true]);
+testStringify("{"a":1,"c":true}", { a: 1, b: proxy6, c: true });
+function f233(a234, a235) {
+    delete parent7.a;
+    delete parent7.c;
+    parent7.e = "5";
+    return a235.toUpperCase();
+}
+function f241() {
+    return ["a","b","c"];
+}
+function f246() {
+    return { enumerable: true, configurable: true };
+}
+var handler7 = { get: f233, ownKeys: f241, getOwnPropertyDescriptor: f246 };
+const v253 = new Proxy({}, handler7);
+var proxy7 = v253;
+var parent7 = { a: "1", b: proxy7, c: "3", d: "4" };
+JSON.stringify(parent7);
+JSON.stringify(parent7);
+var log = [];
+var logger = {};
+const v269 = new Proxy({}, logger);
+var handler = v269;
+function f271(a272, a273, a274) {
+    function f275() {
+        log.push([a273,...arguments]);
+        return Reflect[a273](...arguments);
+    }
+    return f275;
+}
+logger.get = f271;
+log.length = 0;
+const v283 = () => {
+    return 42;
+};
+var target = v283;
+const v286 = new Proxy(target, handler);
+var proxy = v286;
+typeof proxy === "function";
+JSON.stringify(proxy);
+log.length;
+for (const v295 in log) {
+    log[v295][1];
+}
+["get",target,"toJSON",proxy];
+log[0];
+log.length = 0;
+var target = { foo: 42 };
+const v306 = new Proxy(target, handler);
+var proxy = v306;
+Array.isArray(proxy);
+JSON.stringify(proxy);
+log.length;
+for (const v314 in log) {
+    log[v314][1];
+}
+["get",target,"toJSON",proxy];
+log[0];
+["ownKeys",target];
+log[1];
+["getOwnPropertyDescriptor",target,"foo"];
+log[2];
+["get",target,"foo",proxy];
+log[3];
+log.length = 0;
+var target = [42];
+const v336 = new Proxy(target, handler);
+var proxy = v336;
+Array.isArray(proxy);
+JSON.stringify(proxy);
+log.length;
+for (const v343 in log) {
+    log[v343][1];
+}
+["get",target,"toJSON",proxy];
+log[0];
+["get",target,"length",proxy];
+log[1];
+["get",target,"0",proxy];
+log[2];
+log.length = 0;
+var object = { 0: "foo", 1: 666 };
+const v363 = (a364, a365) => {
+    return a364 == "1" ? a365 + 42 : a365;
+};
+var target = v363;
+const v372 = new Proxy(target, handler);
+var proxy = v372;
+typeof proxy === "function";
+JSON.stringify(object, proxy);
+log.length;
+for (const v381 in log) {
+    log[v381][1];
+}
+log[0].length;
+log[0][0];
+log[0][3][0];
+const v396 = { 0: "foo", 1: 666 };
+log[0][3][1];
+log[1].length;
+log[1][0];
+["0","foo"];
+log[1][3];
+log[2].length;
+log[2][0];
+["1",666];
+log[2][3];
+log.length = 0;
+var object = { 0: "foo", 1: 666 };
+var target = [0];
+const v430 = new Proxy(target, handler);
+var proxy = v430;
+Array.isArray(proxy);
+JSON.stringify(object, proxy);
+log.length;
+for (const v437 in log) {
+    log[v437][1];
+}
+["get",target,"length",proxy];
+log[0];
+["get",target,"0",proxy];
+log[1];
+log.length = 0;
+var object = ["foo",42];
+var target = [0];
+const v456 = new Proxy(target, handler);
+var proxy = v456;
+Array.isArray(proxy);
+JSON.stringify(object, proxy);
+log.length;
+for (const v463 in log) {
+    log[v463][1];
+}
+["get",target,"length",proxy];
+log[0];
+["get",target,"0",proxy];
+log[1];
+function f474(a475, a476) {
+    if (a476 === "length") {
+        const v480 = Symbol.toPrimitive;
+        const v483 = {
+            [v480]() {
+                return 42;
+            },
+        };
+        return v483;
+    }
+    if (a476 === "41") {
+        return "foo";
+    }
+    if (a476 === "42") {
+        return "bar";
+    }
+}
+var getTrap = f474;
+var target = [];
+const v494 = new Proxy(target, { get: getTrap });
+var proxy = v494;
+Array.isArray(proxy);
+var object = { foo: true, bar: 666 };
+JSON.stringify(object, proxy);
+function f503(a504, a505) {
+    if (a505 === "length") {
+        return Symbol();
+    }
+    if (a505 === "41") {
+        return "foo";
+    }
+    if (a505 === "42") {
+        return "bar";
+    }
+}
+var getTrap = f503;
+var target = [];
+const v520 = new Proxy(target, { get: getTrap });
+var proxy = v520;
+Array.isArray(proxy);
+var object = { foo: true, bar: 666 };
+const v527 = () => {
+    return JSON.stringify(object, proxy);
+};
+v527();
+log.length = 0;
+var object = ["foo",42];
+var target = { baz: 5 };
+const v539 = new Proxy(target, handler);
+var proxy = v539;
+const v541 = (a542, a543) => {
+    return a542 === "1" ? proxy : a543;
+};
+var replacer = v541;
+JSON.stringify(object, replacer);
+log.length;
+for (const v552 in log) {
+    log[v552][1];
+}
+["ownKeys",target];
+log[0];
+["getOwnPropertyDescriptor",target,"baz"];
+log[1];
+log.length = 0;
+var object = ["foo",42];
+var target = ["bar"];
+const v570 = new Proxy(target, handler);
+var proxy = v570;
+const v572 = (a573, a574) => {
+    return a573 === "1" ? proxy : a574;
+};
+var replacer = v572;
+JSON.stringify(object, replacer);
+log.length;
+for (const v583 in log) {
+    log[v583][1];
+}
+["get",target,"length",proxy];
+log[0];
+["get",target,"0",proxy];
+log[1];
+function f594(a595, a596) {
+    if (a596 === "length") {
+        const v600 = Symbol.toPrimitive;
+        const v603 = {
+            [v600]() {
+                return 3;
+            },
+        };
+        return v603;
+    }
+    if (a596 === "2") {
+        return "baz";
+    }
+    if (a596 === "3") {
+        return "bar";
+    }
+}
+var getTrap = f594;
+var target = [];
+const v614 = new Proxy(target, { get: getTrap });
+var proxy = v614;
+const v616 = (a617, a618) => {
+    return a617 === "goo" ? proxy : a618;
+};
+var replacer = v616;
+var object = { foo: true, goo: false };
+JSON.stringify(object, replacer);
+function f629(a630, a631) {
+    if (a631 === "length") {
+        return Symbol();
+    }
+    if (a631 === "2") {
+        return "baz";
+    }
+    if (a631 === "3") {
+        return "bar";
+    }
+}
+var getTrap = f629;
+var target = [];
+const v646 = new Proxy(target, { get: getTrap });
+var proxy = v646;
+const v648 = (a649, a650) => {
+    return a649 === "goo" ? proxy : a650;
+};
+var replacer = v648;
+var object = { foo: true, goo: false };
+const v659 = () => {
+    return JSON.stringify(object, replacer);
+};
+v659();
+log.length = 0;
+const v663 = () => {
+    return 666;
+};
+var target = v663;
+const v666 = new Proxy(target, handler);
+var proxy = v666;
+const v668 = (a669, a670) => {
+    return a669 === "1" ? proxy : a670;
+};
+var replacer = v668;
+JSON.stringify(["foo",42], replacer);
+log.length;
+JSON.stringify({ 0: "foo", 1: 42 }, replacer);
+log.length;
+log.length = 0;
+const v690 = () => {
+    return 42;
+};
+var target = v690;
+const v693 = new Proxy(target, handler);
+var proxy = v693;
+typeof proxy === "function";
+JSON.parse("[true, false]", proxy);
+log.length;
+for (const v703 in log) {
+    log[v703][1];
+}
+log[0].length;
+log[0][0];
+["0",true];
+log[0][3];
+log[1].length;
+log[1][0];
+["1",false];
+log[1][3];
+log[2].length;
+log[2][0];
+["",[42,42]];
+log[2][3];
+log.length = 0;
+var target = { baz: 42 };
+const v745 = new Proxy(target, handler);
+var proxy = v745;
+function f747(a748, a749) {
+    if (a748 === "baz") {
+        return 5;
+    }
+    if (a748 === "foo") {
+        this.bar = proxy;
+    }
+    return a749;
+}
+var reviver = f747;
+const v758 = { foo: 0, bar: proxy };
+JSON.parse("{"foo":0,"bar":1}", reviver);
+log.length;
+for (const v763 in log) {
+    log[v763][1];
+}
+["ownKeys",target];
+log[0];
+["getOwnPropertyDescriptor",target,"baz"];
+log[1];
+["get",target,"baz",proxy];
+log[2];
+["defineProperty",target,"baz",{ value: 5, configurable: true, writable: true, enumerable: true }];
+log[3];
+log.length = 0;
+var target = [42];
+const v790 = new Proxy(target, handler);
+var proxy = v790;
+Array.isArray(proxy);
+function f793(a794, a795) {
+    if (a794 === "0") {
+        return undefined;
+    }
+    if (a794 === "foo") {
+        this.bar = proxy;
+    }
+    return a795;
+}
+var reviver = f793;
+var result = JSON.parse("{"foo":0,"bar":1}", reviver);
+const v807 = { foo: 0, bar: proxy };
+result.bar;
+log.length;
+for (const v811 in log) {
+    log[v811][1];
+}
+["get",target,"length",proxy];
+log[0];
+["get",target,"0",proxy];
+log[1];
+["deleteProperty",target,"0"];
+log[2];
+const v826 = [];
+function f827(a828, a829) {
+    if (a829 == "length") {
+        return 7;
+    }
+    return 0;
+}
+const v835 = new Proxy(v826, { get: f827 });
+proxy = v835;
+JSON.stringify([proxy]);
+const v839 = [];
+function f840(a841, a842) {
+    if (a842 == "length") {
+        return 1e+40;
+    }
+    return 0;
+}
+const v848 = new Proxy(v839, { get: f840 });
+proxy = v848;
+const v849 = () => {
+    return JSON.stringify([proxy]);
+};
+v849();
+log = [];
+const v855 = {};
+function f856() {
+    log.push("ownKeys");
+    return ["0","a","b"];
+}
+function f863(a864, a865) {
+    log.push("get " + a865);
+    return a865.toUpperCase();
+}
+function f870(a871, a872) {
+    log.push("descriptor " + a872);
+    return { enumerable: true, configurable: true };
+}
+const v880 = {
+    ownKeys: f856,
+    get: f863,
+    getOwnPropertyDescriptor: f870,
+    isExtensible: assertUnreachable,
+    has: assertUnreachable,
+    getPrototypeOf: assertUnreachable,
+    setPrototypeOf: assertUnreachable,
+    preventExtensions: assertUnreachable,
+    setPrototypeOf: assertUnreachable,
+    defineProperty: assertUnreachable,
+    set: assertUnreachable,
+    deleteProperty: assertUnreachable,
+    apply: assertUnreachable,
+    construct: assertUnreachable,
+};
+const v881 = new Proxy(v855, v880);
+proxy = v881;
+JSON.stringify([proxy]);
+["get toJSON","ownKeys","descriptor 0","descriptor a","descriptor b","get 0","get a","get b"];
+
+FuzzIL program written to corpus/proxies-json.fzil

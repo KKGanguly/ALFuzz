@@ -1,0 +1,38 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- BeginPlainFunction -> 
+    EndPlainFunction
+    Return v1
+EndPlainFunction
+v2 <- CallFunction v0, []
+v3 <- CreateNamedVariable 'bar', 'var', v2
+v4 <- LoadNull
+Reassign v3, v4
+BeginForLoopInitializer
+    v5 <- LoadInteger '0'
+BeginForLoopCondition -> v6
+    v7 <- LoadInteger '6'
+    v8 <- Compare v6, '<', v7
+BeginForLoopAfterthought v8 -> v9
+    v10 <- UnaryOperation v9, '++'
+BeginForLoopBody -> v11
+    v12 <- CreateNamedVariable 'gc', 'none'
+    v13 <- CallFunction v12, []
+EndForLoop
+v14 <- CallFunction v0, []
+v15 <- CallFunction v14, []
+
+
+function foo() {
+    function bar() {
+    }
+    return bar;
+}
+var bar = foo();
+bar = null;
+for (let i6 = 0; i6 < 6; i6++) {
+    gc();
+}
+const t10 = foo();
+t10();
+
+FuzzIL program written to corpus/regress-673242.fzil

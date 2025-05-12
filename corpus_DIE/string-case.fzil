@@ -1,0 +1,188 @@
+v0 <- LoadString 'ΚΟΣΜΟΣ ΚΟΣΜΟΣ'
+v1 <- CallMethod v0, 'toLowerCase', []
+v2 <- LoadString 'κοσμος κοσμος'
+v3 <- LoadInteger '0'
+v4 <- LoadString 'A'
+v5 <- CallMethod v4, 'charCodeAt', [v3]
+v6 <- CreateNamedVariable 'A_CODE', 'var', v5
+v7 <- LoadInteger '0'
+v8 <- LoadString 'Z'
+v9 <- CallMethod v8, 'charCodeAt', [v7]
+v10 <- CreateNamedVariable 'Z_CODE', 'var', v9
+v11 <- LoadInteger '0'
+v12 <- LoadString 'a'
+v13 <- CallMethod v12, 'charCodeAt', [v11]
+v14 <- CreateNamedVariable 'a_CODE', 'var', v13
+v15 <- LoadInteger '0'
+v16 <- LoadString 'z'
+v17 <- CallMethod v16, 'charCodeAt', [v15]
+v18 <- CreateNamedVariable 'z_CODE', 'var', v17
+v19 <- BeginPlainFunction -> v20
+    v21 <- Compare v6, '<=', v20
+    v22 <- Compare v20, '<=', v10
+    v23 <- BinaryOperation v21, '&&', v22
+    BeginIf v23
+        v24 <- BinaryOperation v20, '+', v14
+        v25 <- BinaryOperation v24, '-', v6
+        Return v25
+    EndIf
+    Return v20
+EndPlainFunction
+v26 <- BeginPlainFunction -> v27
+    v28 <- Compare v14, '<=', v27
+    v29 <- Compare v27, '<=', v18
+    v30 <- BinaryOperation v28, '&&', v29
+    BeginIf v30
+        v31 <- BinaryOperation v14, '-', v6
+        v32 <- BinaryOperation v27, '-', v31
+        Return v32
+    EndIf
+    Return v27
+EndPlainFunction
+v33 <- BeginPlainFunction -> v34
+    v35 <- LoadString ''
+    v36 <- CreateNamedVariable 'str', 'var', v35
+    v37 <- LoadString ''
+    v38 <- CreateNamedVariable 'strLower', 'var', v37
+    v39 <- LoadString ''
+    v40 <- CreateNamedVariable 'strUpper', 'var', v39
+    BeginForLoopInitializer
+        v41 <- LoadInteger '0'
+    BeginForLoopCondition -> v42
+        v43 <- Compare v42, '<', v34
+    BeginForLoopAfterthought v43 -> v44
+        v45 <- UnaryOperation v44, '++'
+    BeginForLoopBody -> v46
+        v47 <- LoadInteger '127'
+        v48 <- CreateNamedVariable 'Math', 'none'
+        v49 <- CallMethod v48, 'random', []
+        v50 <- BinaryOperation v47, '*', v49
+        v51 <- CallMethod v48, 'round', [v50]
+        v52 <- CreateNamedVariable 'c', 'var', v51
+        v53 <- CreateNamedVariable 'String', 'none'
+        v54 <- CallMethod v53, 'fromCharCode', [v52]
+        Update v36, '+', v54
+        v55 <- CallFunction v19, [v52]
+        v56 <- CallMethod v53, 'fromCharCode', [v55]
+        Update v38, '+', v56
+        v57 <- CallFunction v26, [v52]
+        v58 <- CallMethod v53, 'fromCharCode', [v57]
+        Update v40, '+', v58
+    EndForLoop
+    v59 <- CreateNamedVariable 'f2', 'none'
+    v60 <- CallFunction v59, [v36]
+    Reassign v36, v60
+    v61 <- CallFunction v59, [v38]
+    Reassign v38, v61
+    v62 <- CallFunction v59, [v40]
+    Reassign v40, v62
+    v63 <- CallMethod v36, 'toLowerCase', []
+    v64 <- CallMethod v36, 'toUpperCase', []
+    v65 <- BinaryOperation v38, '+', v38
+    v66 <- BinaryOperation v36, '+', v36
+    v67 <- CallMethod v66, 'toLowerCase', []
+    v68 <- BinaryOperation v40, '+', v40
+    v69 <- BinaryOperation v36, '+', v36
+    v70 <- CallMethod v69, 'toUpperCase', []
+    v71 <- LoadInteger '1'
+    v72 <- CallMethod v38, 'substring', [v71]
+    v73 <- LoadInteger '1'
+    v74 <- CallMethod v36, 'substring', [v73]
+    v75 <- CallMethod v74, 'toLowerCase', []
+    v76 <- LoadInteger '1'
+    v77 <- CallMethod v40, 'substring', [v76]
+    v78 <- LoadInteger '1'
+    v79 <- CallMethod v36, 'substring', [v78]
+    v80 <- CallMethod v79, 'toUpperCase', []
+    v81 <- CallMethod v36, 'toLowerCase', []
+    v82 <- CallMethod v36, 'toUpperCase', []
+EndPlainFunction
+BeginForLoopInitializer
+    v83 <- LoadInteger '1'
+BeginForLoopCondition -> v84
+    v85 <- LoadInteger '128'
+    v86 <- Compare v84, '<=', v85
+BeginForLoopAfterthought v86 -> v87
+    v88 <- LoadInteger '1'
+    Update v87, '<<', v88
+BeginForLoopBody -> v89
+EndForLoop
+BeginBlockStatement
+    BeginForLoopInitializer
+        v90 <- LoadInteger '0'
+    BeginForLoopCondition -> v91
+        v92 <- LoadInteger '8'
+        v93 <- Compare v91, '<', v92
+    BeginForLoopAfterthought v93 -> v94
+        v95 <- UnaryOperation v94, '++'
+    BeginForLoopBody -> v96
+        BeginForLoopInitializer
+            v97 <- LoadInteger '0'
+        BeginForLoopCondition -> v98
+            v99 <- LoadInteger '3'
+            v100 <- Compare v98, '<', v99
+        BeginForLoopAfterthought v100 -> v101
+            v102 <- UnaryOperation v101, '++'
+        BeginForLoopBody -> v103
+            v104 <- CreateNamedVariable 'i', 'none'
+            v105 <- BinaryOperation v104, '+', v96
+            v106 <- CallFunction v33, [v105]
+        EndForLoop
+    EndForLoop
+EndBlockStatement
+
+
+("ΚΟΣΜΟΣ ΚΟΣΜΟΣ").toLowerCase();
+var A_CODE = ("A").charCodeAt(0);
+var Z_CODE = ("Z").charCodeAt(0);
+var a_CODE = ("a").charCodeAt(0);
+var z_CODE = ("z").charCodeAt(0);
+function charCodeToLower(a20) {
+    if ((A_CODE <= a20) && (a20 <= Z_CODE)) {
+        return (a20 + a_CODE) - A_CODE;
+    }
+    return a20;
+}
+function charCodeToUpper(a27) {
+    if ((a_CODE <= a27) && (a27 <= z_CODE)) {
+        return a27 - (a_CODE - A_CODE);
+    }
+    return a27;
+}
+function test(a34) {
+    var str = "";
+    var strLower = "";
+    var strUpper = "";
+    for (let i42 = 0; i42 < a34; i42++) {
+        var c = Math.round(127 * Math.random());
+        str += String.fromCharCode(c);
+        strLower += String.fromCharCode(charCodeToLower(c));
+        strUpper += String.fromCharCode(charCodeToUpper(c));
+    }
+    str = f2(str);
+    strLower = f2(strLower);
+    strUpper = f2(strUpper);
+    str.toLowerCase();
+    str.toUpperCase();
+    strLower + strLower;
+    (str + str).toLowerCase();
+    strUpper + strUpper;
+    (str + str).toUpperCase();
+    strLower.substring(1);
+    str.substring(1).toLowerCase();
+    strUpper.substring(1);
+    str.substring(1).toUpperCase();
+    str.toLowerCase();
+    str.toUpperCase();
+}
+for (let i84 = 1; i84 <= 128; i84 <<= 1) {
+}
+{
+    for (let i91 = 0; i91 < 8; i91++) {
+        for (let i98 = 0; i98 < 3; i98++) {
+            test(i + i91);
+        }
+    }
+}
+
+FuzzIL program written to corpus/string-case.fzil

@@ -1,0 +1,61 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '1'
+    v2 <- LoadThis
+    SetProperty v2, 'foo', v1
+EndPlainFunction
+v3 <- Construct v0, []
+v4 <- CreateNamedVariable 'o', 'var', v3
+v5 <- Construct v0, []
+v6 <- CreateNamedVariable 'p', 'var', v5
+v7 <- BeginPlainFunction -> v8, v9
+    v10 <- LoadString '4000111222'
+    v11 <- CreateNamedVariable 's', 'var', v10
+    v12 <- LoadInteger '0'
+    v13 <- BinaryOperation v11, '>>>', v12
+    v14 <- CreateNamedVariable 'end', 'var', v13
+    v15 <- LoadInteger '0'
+    v16 <- CallMethod v11, 'substring', [v15, v14]
+    Reassign v11, v16
+    v17 <- LoadInteger '2'
+    SetProperty v8, 'bar', v17
+EndPlainFunction
+v18 <- LoadInteger '100000'
+v19 <- CallFunction v7, [v4, v18]
+v20 <- LoadInteger '100000'
+v21 <- CallFunction v7, [v4, v20]
+v22 <- LoadInteger '100000'
+v23 <- CallFunction v7, [v6, v22]
+v24 <- LoadInteger '100000'
+v25 <- CallFunction v7, [v4, v24]
+v26 <- LoadNull
+Reassign v4, v26
+v27 <- LoadNull
+Reassign v6, v27
+BeginObjectLiteral
+v28 <- EndObjectLiteral
+v29 <- LoadInteger '0'
+v30 <- CallFunction v7, [v28, v29]
+
+
+function Ctor() {
+    this.foo = 1;
+}
+const v3 = new Ctor();
+var o = v3;
+const v5 = new Ctor();
+var p = v5;
+function crash(a8, a9) {
+    var s = "4000111222";
+    var end = s >>> 0;
+    s = s.substring(0, end);
+    a8.bar = 2;
+}
+crash(o, 100000);
+crash(o, 100000);
+crash(p, 100000);
+crash(o, 100000);
+o = null;
+p = null;
+crash({}, 0);
+
+FuzzIL program written to corpus/regress-crbug-350434.fzil

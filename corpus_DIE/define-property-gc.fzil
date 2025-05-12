@@ -1,0 +1,49 @@
+v0 <- BeginPlainFunction -> 
+    v1 <- LoadInteger '0'
+    v2 <- LoadThis
+    SetElement v2, '0', v1
+    v3 <- LoadInteger '1'
+    v4 <- LoadThis
+    SetElement v4, '1', v3
+EndPlainFunction
+v5 <- BeginPlainFunction -> 
+    v6 <- LoadString 'foofoo'
+    v7 <- LoadBoolean 'false'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `value`, v6
+        ObjectLiteralAddProperty `writable`, v7
+    v8 <- EndObjectLiteral
+    v9 <- CreateNamedVariable 'descElementNonWritable', 'var', v8
+    BeginForLoopInitializer
+        v10 <- LoadInteger '0'
+    BeginForLoopCondition -> v11
+        v12 <- LoadInteger '1000'
+        v13 <- Compare v11, '<', v12
+    BeginForLoopAfterthought v13 -> v14
+        v15 <- UnaryOperation v14, '++'
+    BeginForLoopBody -> v16
+        v17 <- Construct v0, []
+        v18 <- CreateNamedVariable 'regular', 'var', v17
+        v19 <- LoadString '1'
+        v20 <- CreateNamedVariable 'Object', 'none'
+        v21 <- CallMethod v20, 'defineProperty', [v18, v19, v9]
+    EndForLoop
+EndPlainFunction
+v22 <- CallFunction v5, []
+
+
+function Regular() {
+    this[0] = 0;
+    this[1] = 1;
+}
+function foo() {
+    var descElementNonWritable = { value: "foofoo", writable: false };
+    for (let i11 = 0; i11 < 1000; i11++) {
+        const v17 = new Regular();
+        var regular = v17;
+        Object.defineProperty(regular, "1", descElementNonWritable);
+    }
+}
+foo();
+
+FuzzIL program written to corpus/define-property-gc.fzil

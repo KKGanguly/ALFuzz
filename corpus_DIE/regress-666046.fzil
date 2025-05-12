@@ -1,0 +1,103 @@
+v0 <- BeginPlainFunction -> 
+    BeginObjectLiteral
+    v1 <- EndObjectLiteral
+    v2 <- LoadThis
+    SetProperty v2, 'a0', v1
+    BeginObjectLiteral
+    v3 <- EndObjectLiteral
+    v4 <- LoadThis
+    SetProperty v4, 'a1', v3
+    BeginObjectLiteral
+    v5 <- EndObjectLiteral
+    v6 <- LoadThis
+    SetProperty v6, 'a2', v5
+    BeginObjectLiteral
+    v7 <- EndObjectLiteral
+    v8 <- LoadThis
+    SetProperty v8, 'a3', v7
+    BeginObjectLiteral
+    v9 <- EndObjectLiteral
+    v10 <- LoadThis
+    SetProperty v10, 'a4', v9
+EndPlainFunction
+v11 <- BeginPlainFunction -> 
+EndPlainFunction
+v12 <- Construct v0, []
+v13 <- CreateNamedVariable 'proto', 'var', v12
+SetProperty v11, 'prototype', v13
+v14 <- BeginPlainFunction -> v15
+    v16 <- GetProperty v15, 'a0'
+    Return v16
+EndPlainFunction
+v17 <- CreateNamedVariable 'gc', 'none'
+v18 <- CallFunction v17, []
+v19 <- CallFunction v17, []
+v20 <- CallFunction v17, []
+v21 <- Construct v11, []
+v22 <- CreateNamedVariable 'o', 'var', v21
+v23 <- CallFunction v14, [v22]
+v24 <- CallFunction v14, [v22]
+v25 <- CallFunction v14, [v22]
+v26 <- CreateNamedVariable 'ArrayBuffer', 'none'
+v27 <- LoadInteger '8'
+v28 <- Construct v26, [v27]
+v29 <- CreateNamedVariable 'buffer', 'var', v28
+v30 <- CreateNamedVariable 'Int32Array', 'none'
+v31 <- Construct v30, [v29]
+v32 <- CreateNamedVariable 'int32view', 'var', v31
+v33 <- CreateNamedVariable 'Float64Array', 'none'
+v34 <- Construct v33, [v29]
+v35 <- CreateNamedVariable 'float64view', 'var', v34
+v36 <- LoadInteger '1073741825'
+SetElement v32, '1', v36
+SetElement v32, '0', v36
+v37 <- GetElement v35, '0'
+v38 <- CreateNamedVariable 'boom', 'var', v37
+v39 <- LoadInteger '0'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `a`, v39
+v40 <- EndObjectLiteral
+SetProperty v13, 'a4', v40
+v41 <- DeleteProperty v13, 'a4'
+SetProperty v13, 'boom', v38
+v42 <- CallFunction v17, []
+
+
+function P() {
+    this.a0 = {};
+    this.a1 = {};
+    this.a2 = {};
+    this.a3 = {};
+    this.a4 = {};
+}
+function A() {
+}
+const v12 = new P();
+var proto = v12;
+A.prototype = proto;
+function foo(a15) {
+    return a15.a0;
+}
+gc();
+gc();
+gc();
+const v21 = new A();
+var o = v21;
+foo(o);
+foo(o);
+foo(o);
+const v28 = new ArrayBuffer(8);
+var buffer = v28;
+const v31 = new Int32Array(buffer);
+var int32view = v31;
+const v34 = new Float64Array(buffer);
+var float64view = v34;
+int32view[1] = 1073741825;
+int32view[0] = 1073741825;
+var boom = float64view[0];
+proto.a4 = { a: 0 };
+delete proto.a4;
+proto.boom = boom;
+gc();
+
+FuzzIL program written to corpus/regress-666046.fzil

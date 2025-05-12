@@ -1,0 +1,23 @@
+v0 <- LoadString 'x'
+v1 <- BeginPlainFunction -> 
+    v2 <- LoadThis
+    Return v2
+EndPlainFunction
+v3 <- CreateNamedVariable 'String', 'none'
+v4 <- GetProperty v3, 'prototype'
+v5 <- CallMethod v4, '__defineGetter__', [v0, v1]
+v6 <- LoadString 'asdf'
+v7 <- CreateNamedVariable 'Object', 'none'
+v8 <- CallFunction v7, [v6]
+v9 <- LoadString 'asdf'
+v10 <- GetProperty v9, 'x'
+
+
+function f1() {
+    return this;
+}
+String.prototype.__defineGetter__("x", f1);
+Object("asdf");
+("asdf").x;
+
+FuzzIL program written to corpus/getter-in-value-prototype.fzil

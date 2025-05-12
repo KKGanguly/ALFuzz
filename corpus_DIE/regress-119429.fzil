@@ -1,0 +1,28 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'd', 'var', v0
+v2 <- BeginPlainFunction -> 
+    v3 <- UnaryOperation '++', v1
+    v4 <- LoadInteger '25135'
+    v5 <- Compare v3, '==', v4
+    BeginIf v5
+    EndIf
+    v6 <- CallFunction v2, []
+EndPlainFunction
+v7 <- BeginPlainFunction -> 
+    v8 <- CallFunction v2, []
+EndPlainFunction
+v9 <- CallFunction v7, []
+
+
+var d = 0;
+function recurse() {
+    if (++d == 25135) {
+    }
+    recurse();
+}
+function f7() {
+    recurse();
+}
+f7();
+
+FuzzIL program written to corpus/regress-119429.fzil

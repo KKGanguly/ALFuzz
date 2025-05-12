@@ -1,0 +1,47 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- CallMethod v1, 'x', []
+    Return v2
+EndPlainFunction
+BeginTry
+    v3 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v3
+    v4 <- EndObjectLiteral
+    v5 <- CallFunction v0, [v4]
+BeginCatch -> v6
+EndTryCatch
+BeginTry
+    v7 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v7
+    v8 <- EndObjectLiteral
+    v9 <- CallFunction v0, [v8]
+BeginCatch -> v10
+EndTryCatch
+BeginTry
+    v11 <- LoadInteger '1'
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `x`, v11
+    v12 <- EndObjectLiteral
+    v13 <- CallFunction v0, [v12]
+BeginCatch -> v14
+EndTryCatch
+
+
+function f(a1) {
+    return a1.x();
+}
+try {
+    f({ x: 1 });
+} catch(e6) {
+}
+try {
+    f({ x: 1 });
+} catch(e10) {
+}
+try {
+    f({ x: 1 });
+} catch(e14) {
+}
+
+FuzzIL program written to corpus/regress-crbug-595615.fzil

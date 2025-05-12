@@ -1,0 +1,61 @@
+v0 <- LoadInteger '0'
+v1 <- CreateNamedVariable 'zero', 'var', v0
+v2 <- LoadInteger '1'
+v3 <- CreateNamedVariable 'one', 'var', v2
+v4 <- LoadInteger '1'
+v5 <- UnaryOperation '-', v4
+v6 <- CreateNamedVariable 'minus_one', 'var', v5
+v7 <- CreateNamedVariable 'Infinity', 'none'
+v8 <- UnaryOperation '-', v7
+v9 <- LoadInteger '1'
+v10 <- LoadInteger '0'
+v11 <- LoadInteger '1'
+v12 <- UnaryOperation '-', v11
+v13 <- BinaryOperation v10, '/', v12
+v14 <- BinaryOperation v9, '/', v13
+v15 <- UnaryOperation '-', v7
+v16 <- BinaryOperation v1, '/', v6
+v17 <- BinaryOperation v3, '/', v16
+v18 <- LoadInteger '1'
+v19 <- LoadInteger '0'
+v20 <- LoadInteger '1'
+v21 <- BinaryOperation v19, '/', v20
+v22 <- BinaryOperation v18, '/', v21
+v23 <- BinaryOperation v1, '/', v3
+v24 <- BinaryOperation v3, '/', v23
+v25 <- UnaryOperation '-', v7
+v26 <- LoadInteger '1'
+v27 <- LoadInteger '1'
+v28 <- UnaryOperation '-', v27
+v29 <- LoadInteger '1'
+v30 <- BinaryOperation v28, '%', v29
+v31 <- BinaryOperation v26, '/', v30
+v32 <- UnaryOperation '-', v7
+v33 <- BinaryOperation v6, '%', v3
+v34 <- BinaryOperation v3, '/', v33
+v35 <- LoadInteger '1'
+v36 <- LoadInteger '1'
+v37 <- LoadInteger '1'
+v38 <- BinaryOperation v36, '%', v37
+v39 <- BinaryOperation v35, '/', v38
+v40 <- BinaryOperation v3, '%', v3
+v41 <- BinaryOperation v3, '/', v40
+
+
+var zero = 0;
+var one = 1;
+var minus_one = -1;
+-Infinity;
+1 / (0 / -1);
+-Infinity;
+one / (zero / minus_one);
+1 / (0 / 1);
+one / (zero / one);
+-Infinity;
+1 / (-1 % 1);
+-Infinity;
+one / (minus_one % one);
+1 / (1 % 1);
+one / (one % one);
+
+FuzzIL program written to corpus/regress-996542.fzil

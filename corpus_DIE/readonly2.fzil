@@ -1,0 +1,85 @@
+v0 <- LoadThis
+v1 <- LoadString 'x'
+v2 <- LoadBoolean 'true'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v2
+v3 <- EndObjectLiteral
+v4 <- CreateNamedVariable 'Object', 'none'
+v5 <- CallMethod v4, 'defineProperty', [v0, v1, v3]
+v6 <- BeginPlainFunction -> v7
+    v8 <- LoadInteger '1'
+    SetProperty v7, 'x', v8
+EndPlainFunction
+v9 <- BeginPlainFunction -> v10
+    Directive 'use strict'
+    v11 <- LoadInteger '1'
+    SetProperty v10, 'x', v11
+EndPlainFunction
+v12 <- BeginPlainFunction -> v13
+    BeginObjectLiteral
+        ObjectLiteralAddProperty `__proto__`, v13
+    v14 <- EndObjectLiteral
+    Return v14
+EndPlainFunction
+v15 <- LoadThis
+v16 <- CallFunction v12, [v15]
+v17 <- CreateNamedVariable 'o1', 'var', v16
+v18 <- LoadThis
+v19 <- CallFunction v12, [v18]
+v20 <- CreateNamedVariable 'o2', 'var', v19
+v21 <- LoadThis
+v22 <- CallFunction v12, [v21]
+v23 <- CallFunction v6, [v22]
+v24 <- LoadThis
+v25 <- CallFunction v12, [v24]
+v26 <- CallFunction v6, [v25]
+v27 <- LoadThis
+v28 <- CallFunction v12, [v27]
+v29 <- CallFunction v9, [v28]
+v30 <- LoadThis
+v31 <- CallFunction v12, [v30]
+v32 <- CallFunction v9, [v31]
+v33 <- LoadThis
+v34 <- LoadString 'x'
+v35 <- LoadBoolean 'false'
+v36 <- LoadInteger '5'
+BeginObjectLiteral
+    ObjectLiteralAddProperty `writable`, v35
+    ObjectLiteralAddProperty `value`, v36
+v37 <- EndObjectLiteral
+v38 <- CallMethod v4, 'defineProperty', [v33, v34, v37]
+v39 <- LoadInteger '20'
+SetProperty v17, 'x', v39
+v40 <- LoadInteger '5'
+v41 <- GetProperty v17, 'x'
+v42 <- CallFunction v6, [v20]
+v43 <- LoadInteger '5'
+v44 <- GetProperty v20, 'x'
+v45 <- LoadString 's_strict(o2);'
+v46 <- CreateNamedVariable 'TypeError', 'none'
+
+
+Object.defineProperty(this, "x", { writable: true });
+function s(a7) {
+    a7.x = 1;
+}
+function s_strict(a10) {
+    'use strict';
+    a10.x = 1;
+}
+function c(a13) {
+    return { __proto__: a13 };
+}
+var o1 = c(this);
+var o2 = c(this);
+s(c(this));
+s(c(this));
+s_strict(c(this));
+s_strict(c(this));
+Object.defineProperty(this, "x", { writable: false, value: 5 });
+o1.x = 20;
+o1.x;
+s(o2);
+o2.x;
+
+FuzzIL program written to corpus/readonly2.fzil

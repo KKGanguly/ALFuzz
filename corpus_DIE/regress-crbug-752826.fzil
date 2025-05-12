@@ -1,0 +1,50 @@
+v0 <- BeginPlainFunction -> v1
+    v2 <- GetElement v1, '1'
+    Return v2
+EndPlainFunction
+v3 <- LoadInteger '0'
+v4 <- CreateNamedVariable 'Int8Array', 'none'
+v5 <- LoadInteger '10'
+v6 <- Construct v4, [v5]
+v7 <- CallFunction v0, [v6]
+v8 <- LoadInteger '0'
+v9 <- LoadInteger '10'
+v10 <- Construct v4, [v9]
+v11 <- CallFunction v0, [v10]
+v12 <- BeginPlainFunction -> 
+    v13 <- LoadArguments
+    v14 <- CallFunction v0, [v13]
+    Return v14
+EndPlainFunction
+v15 <- BeginPlainFunction -> 
+    v16 <- LoadInteger '23'
+    v17 <- LoadInteger '42'
+    v18 <- CallFunction v12, [v16, v17]
+    Return v18
+EndPlainFunction
+v19 <- LoadInteger '42'
+v20 <- CallFunction v15, []
+v21 <- LoadInteger '42'
+v22 <- CallFunction v15, []
+v23 <- LoadInteger '42'
+v24 <- CallFunction v15, []
+
+
+function h(a1) {
+    return a1[1];
+}
+const v6 = new Int8Array(10);
+h(v6);
+const v10 = new Int8Array(10);
+h(v10);
+function g() {
+    return h(arguments);
+}
+function f() {
+    return g(23, 42);
+}
+f();
+f();
+f();
+
+FuzzIL program written to corpus/regress-crbug-752826.fzil

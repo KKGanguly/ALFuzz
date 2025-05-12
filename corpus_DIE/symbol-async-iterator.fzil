@@ -1,0 +1,26 @@
+v0 <- LoadString 'asyncIterator'
+v1 <- CreateNamedVariable 'Symbol', 'none'
+v2 <- CallMethod v1, 'hasOwnProperty', [v0]
+v3 <- LoadString 'symbol'
+v4 <- GetProperty v1, 'asyncIterator'
+v5 <- TypeOf v4
+v6 <- GetProperty v1, 'asyncIterator'
+v7 <- CreateNamedVariable 'Object', 'none'
+v8 <- CallFunction v7, [v6]
+v9 <- LoadString 'asyncIterator'
+v10 <- CallMethod v7, 'getOwnPropertyDescriptor', [v1, v9]
+v11 <- CreateNamedVariable 'desc', 'let', v10
+v12 <- GetProperty v11, 'writable'
+v13 <- GetProperty v11, 'enumerable'
+v14 <- GetProperty v11, 'configurable'
+
+
+Symbol.hasOwnProperty("asyncIterator");
+typeof Symbol.asyncIterator;
+Object(Symbol.asyncIterator);
+let desc = Object.getOwnPropertyDescriptor(Symbol, "asyncIterator");
+desc.writable;
+desc.enumerable;
+desc.configurable;
+
+FuzzIL program written to corpus/symbol-async-iterator.fzil
