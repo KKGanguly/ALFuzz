@@ -1,0 +1,51 @@
+function f1() {
+    return 849.9223151012143;
+}
+function f2(a3, a4, a5) {
+    undefined & 65535;
+    new Uint8Array();
+    return undefined;
+}
+const v11 = f2(f2, f1, f2);
+f2(f2, f2, f2);
+const v13 = f2();
+const v14 = f2();
+const v15 = f2(f2, f2, v14);
+f2(f1, v15, v15);
+const v17 = f2();
+const v18 = f2(v15, f2, v13);
+const v19 = f2(v17, v14, v18);
+const v20 = f2();
+const v21 = f2();
+const v22 = f2();
+const v23 = f2();
+const v24 = f2(849.9223151012143, v15, v21);
+const v25 = f2();
+const v26 = f2(v17, v22, f1);
+const v27 = f2();
+f2();
+f2();
+const v30 = f2();
+const v31 = f2();
+f2();
+const v33 = f2(v19, v30, v14);
+f2(849.9223151012143, f2(), v23);
+f2(v19, v33, v11);
+f2(f1, v15, v23);
+const v38 = f2();
+const v39 = {};
+const v40 = f2(v25, v21, v13);
+f2(v40, v40, f2);
+f2(v26, v15, v38);
+const v43 = f2();
+f2(v43, v24, v43);
+f2(v14, v20, f2());
+f2();
+f2(f2(), v26, v18);
+f2();
+f2(v18, v31, f1);
+f2();
+f2(v17, v27, v26);
+%PrepareFunctionForOptimization(f1);
+%OptimizeMaglevOnNextCall(f1);
+f1();

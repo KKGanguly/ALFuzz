@@ -1,0 +1,57 @@
+function f1(a2, a3) {
+    const v6 = a2 & 65535;
+    const v8 = a2 & 65535;
+    const v12 = (a3 >>> 16) & 65535;
+    a3 & 65535;
+    var bl = 16;
+    v8 * bl;
+    const v22 = (((v6 * bl) + (v8 * v12)) << 16) >>> 0;
+    (65535 + v22) | v22;
+    return Math;
+}
+function f25(a26, a27, a28) {
+    f1(a27, a28);
+    Math.imul(a27);
+    return a27;
+}
+const v31 = f25(f25, f25, f1);
+const v32 = f25(v31, f1, Math);
+const v35 = -2;
+const v37 = -2;
+const v38 = f25(4, v35, v37);
+const v39 = f25();
+const v40 = f25(v31, 2, 2);
+const v41 = f25();
+const v42 = f25(v31, 4, f25);
+const v43 = f25();
+const v44 = f25(v32, Math, f25);
+const v45 = f25();
+f25(v41, v32, 4);
+f25(v38, v43, v44);
+f25(v35, v43, Math);
+const v49 = f25();
+const v50 = f25(4, f1, v39);
+const v51 = f25();
+const v52 = f25();
+f25(Math, v43, v40);
+const v54 = f25();
+f25(v43, v54, v51);
+f25();
+const v57 = f25();
+f25();
+f25();
+f25(v57, v54, v41);
+f25();
+f25();
+f25(v49, v49, v45);
+f25();
+const v67 = f25(0, [f25,f25]);
+f25(f25(f1, v37, v52), v35, 2);
+f25(v42, v35, v50);
+f25(v31, v50, f25(v37, 2, 2));
+const v73 = f25(4, v51, v67);
+f25(v35, v49, f25(v73, v73, v38));
+f25(v39, v57, v42);
+f25();
+f25();
+f25();

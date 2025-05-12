@@ -1,0 +1,2 @@
+Error.stackTraceLimit = Error;
+Error();

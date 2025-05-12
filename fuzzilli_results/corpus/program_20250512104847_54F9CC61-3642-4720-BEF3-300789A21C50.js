@@ -1,0 +1,10 @@
+const v2 = 320255973501901 / 562949953421312;
+var y = 302663787453389 / 562949953421312;
+Math.sin(v2) != y;
+Math.cos(v2);
+Math.tan(y);
+Math.log(v2) != Math.log();
+Math.asin(v2);
+Math.acos(y);
+Math != Math.atan(y);
+Math.exp(v2);

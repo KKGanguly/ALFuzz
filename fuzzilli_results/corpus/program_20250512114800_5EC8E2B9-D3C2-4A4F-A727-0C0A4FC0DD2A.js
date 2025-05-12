@@ -1,0 +1,2 @@
+new Int8Array([58189,-268435456,-2530191,-536870912,-9007199254740992,1000,-5057,42230,28280,46942]);
+Reflect.getOwnPropertyDescriptor(this, Int8Array);

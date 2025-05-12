@@ -1,0 +1,11 @@
+global = 1;
+gc({ execution: "async" });
+const v10 = [];
+const v13 = new Proxy(Array, {});
+Object.setPrototypeOf(v10, v13);
+Array.lastIndexOf;
+const v20 = (10000).__proto__;
+Object.defineProperty(v20, 9998, {});
+[];
+let v26 = undefined;
+v26 = global;

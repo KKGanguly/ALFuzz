@@ -1,0 +1,1 @@
+this.__proto__;

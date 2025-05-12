@@ -1,0 +1,1 @@
+gc({ type: "async" });
